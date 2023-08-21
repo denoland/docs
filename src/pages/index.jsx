@@ -48,7 +48,7 @@ export default function Home() {
       title={`Deno: the easiest, most secure JavaScript runtime`}
       description="Reference documentation for the Deno runtime and Deno Deploy"
     >
-      <div className="container flex flex-col items-center justify-center md:flex-row gap-8">
+      <div className="container flex flex-col-reverse md:items-center md:justify-center md:flex-row gap-0 md:gap-8">
         <div className="flex-1 py-4">
           <h1>Deno Documentation</h1>
           <p className="my-4">
@@ -72,7 +72,7 @@ export default function Home() {
         </div>
         <div className="flex-1 text-center">
           <img
-            className="h-48 md:h-96"
+            className="w-48 h-48 md:h-96 md:w-96 lg:h-[520px] lg:w-[520px]"
             alt="Deno logo"
             src="/deno-looking-up.svg"
           />
