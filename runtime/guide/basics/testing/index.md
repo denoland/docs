@@ -266,7 +266,7 @@ deno test --parallel
 ```
 
 Note that starting in Deno v1.24, some test options can be configured via
-[a configuration file](../getting_started/configuration_file.md).
+[a configuration file](../../getting_started/configuration_file.md).
 
 > ⚠️ If you want to pass additional CLI arguments to the test files use `--` to
 > inform Deno that remaining arguments are scripts arguments.

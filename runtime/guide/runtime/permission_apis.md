@@ -35,8 +35,9 @@ const desc4 = { name: "net", host: "127.0.0.1:8000" } as const;
 const desc5 = { name: "hrtime" } as const;
 ```
 
-> ⚠️ See [`PermissionDescriptor`](/api?s=Deno.PermissionDescriptor) in API
-> reference for more details.
+> ⚠️ See
+> [`PermissionDescriptor`](https://www.deno.land/api?s=Deno.PermissionDescriptor)
+> in API reference for more details.
 
 > ⚠️ In 1.30 and onwards, synchronous API counterparts (ex.
 > `Deno.permissions.querySync`) exist for all the APIs described below.

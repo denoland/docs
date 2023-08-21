@@ -33,8 +33,7 @@ Here is a list of web platform APIs Deno implements:
 - [Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Worker)
 - [`WebSocket`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
 
-You can find the Deno reference for these APIs
-[here](https://deno.land/api@$CLI_VERSION).
+You can find the Deno reference for these APIs [here](https://deno.land/api).
 
 ## `fetch` API
 

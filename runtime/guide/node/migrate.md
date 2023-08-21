@@ -21,11 +21,12 @@ begin to migrate your Node.js project to work on Deno.
 
 ## Module imports and exports
 
-Deno supports [ECMAScript modules](../basics/modules.md) exclusively, rather
-than a combination of ESM and [CommonJS](https://nodejs.org/api/modules.html),
-as found in Node. If your Node.js code uses `require`, you should update it to
-use `import` statements instead. If your internal code uses CommonJS-style
-exports, those will need to be changed as well.
+Deno supports [ECMAScript modules](../basics/modules/index.md) exclusively,
+rather than a combination of ESM and
+[CommonJS](https://nodejs.org/api/modules.html), as found in Node. If your
+Node.js code uses `require`, you should update it to use `import` statements
+instead. If your internal code uses CommonJS-style exports, those will need to
+be changed as well.
 
 Consider the following two files in a Node.js program, located in the same
 directory:
@@ -77,7 +78,7 @@ export default function addNumbers(num1, num2) {
 
 After making those two changes, this code would run successfully with
 `deno run index.js`. Learn more about
-[ES modules in Deno here](../basics/modules.md).
+[ES modules in Deno here](../basics/modules/index.md).
 
 ## Node.js built-ins
 

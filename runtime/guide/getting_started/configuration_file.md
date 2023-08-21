@@ -27,7 +27,7 @@ Since version 1.30, the `deno.json` configuration file acts as an
 ```jsonc
 {
   "imports": {
-    "std/": "https://deno.land/std@$STD_VERSION/"
+    "std/": "https://deno.land/std/"
   },
   "tasks": {
     "dev": "deno run --watch main.ts"
