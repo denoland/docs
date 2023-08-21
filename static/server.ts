@@ -5,7 +5,7 @@ const app = new Application();
 app.use(async (ctx, next) => {
   try {
     await ctx.send({
-      root: `${Deno.cwd()}/build`,
+      root: Deno.cwd(),
       index: "index.html",
     });
   } catch {
