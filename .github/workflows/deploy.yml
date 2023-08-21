@@ -29,5 +29,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "deno-docs"
-          entrypoint: "server.ts" # 📝 Update the entrypoint
-          root: "./" # 📝 Update the root
+          entrypoint: "server.ts"
+          root: "build"
