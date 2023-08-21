@@ -39,7 +39,7 @@ import {
   assertSpyCalls,
   spy,
 } from "https://deno.land/std/testing/mock.ts";
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/assert/mod.ts";
 import {
   multiply,
   square,
@@ -92,7 +92,7 @@ import {
   assertSpyCalls,
   spy,
 } from "https://deno.land/std/testing/mock.ts";
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/assert/mod.ts";
 import {
   _internals,
   square,
@@ -176,7 +176,7 @@ import {
   returnsNext,
   stub,
 } from "https://deno.land/std/testing/mock.ts";
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/assert/mod.ts";
 import {
   _internals,
   randomMultiple,
@@ -232,10 +232,7 @@ until real time is restored. You can control how time ticks forward with the
 
 ```ts
 // https://deno.land/std/testing/mock_examples/interval_test.ts
-import {
-  assertSpyCalls,
-  spy,
-} from "https://deno.land/std/testing/mock.ts";
+import { assertSpyCalls, spy } from "https://deno.land/std/testing/mock.ts";
 import { FakeTime } from "https://deno.land/std/testing/time.ts";
 import { secondInterval } from "https://deno.land/std/testing/mock_examples/interval.ts";
 

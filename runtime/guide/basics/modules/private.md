@@ -13,7 +13,7 @@ Cloudsmith, etc.).
 The Deno CLI will look for an environment variable named `DENO_AUTH_TOKENS` to
 determine what authentication tokens it should consider using when requesting
 remote modules. The value of the environment variable is in the format of _n_
-number of tokens deliminated by a semi-colon (`;`) where each token is either:
+number of tokens delimited by a semi-colon (`;`) where each token is either:
 
 - a bearer token in the format of `{token}@{hostname[:port]}` or
 

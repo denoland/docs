@@ -34,7 +34,7 @@ Here is a list of web platform APIs Deno implements:
 - [`WebSocket`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
 
 You can find the Deno reference for these APIs
-[here](https://deno.land/api).
+[here](https://deno.land/api@$CLI_VERSION).
 
 ## `fetch` API
 
@@ -130,6 +130,7 @@ You can find documentation about this API on
 
 - Events do not bubble, because Deno does not have a DOM hierarchy, so there is
   no tree for Events to bubble/capture through.
+- `timeStamp` property is always set to `0`.
 
 ---
 

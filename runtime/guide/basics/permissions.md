@@ -53,6 +53,41 @@ The following permissions are available:
 - **-A, --allow-all** Allow all permissions. This enables all security sensitive
   functions. Use with caution.
 
+Starting with Deno 1.36 following flags are available:
+
+- **--deny-env=\<VARIABLE_NAME\>** Deny environment access for things like
+  getting and setting of environment variables. You can specify an optional,
+  comma-separated list of environment variables to provide an allow-list of
+  allowed environment variables. Any environment variables specified here will
+  be denied access, even if they are specified in --allow-env.
+- **--deny-sys=\<API_NAME\>** Deny access to APIs that provide information about
+  user's operating system.
+- **--deny-hrtime** Disable high-resolution time measurement. High-resolution
+  time can be used in timing attacks and fingerprinting.
+- **--deny-net=\<IP/HOSTNAME\>** Disable network access. You can specify an
+  optional, comma-separated list of IP addresses or hostnames (optionally with
+  ports) to provide a deny-list of network addresses. Any addresses specified
+  here will be denied access, even if they are specified in --allow-net.
+- **--deny-ffi=\<PATH\>** Deny loading of dynamic libraries. You can specify an
+  optional, comma-separated list of directories or files to provide a deny-list
+  of allowed dynamic libraries to load. Any libraries specified here will be
+  denied access, even if they are specified in --allow-ffi. Please note that
+  --deny-ffi is an unstable feature.
+- **--deny-read=\<PATH\>** Deny file system read access. You can specify an
+  optional, comma-separated list of directories or files to provide a deny-list
+  of allowed file system access. Any paths specified here will be denied access,
+  even if they are specified in --allow-read.
+- **--deny-run=\<PROGRAM_NAME\>** Deny running subprocesses. You can specify an
+  optional, comma-separated list of subprocesses to provide a deny-list of
+  allowed subprocesses. Be aware that subprocesses are not run in a sandbox and
+  therefore do not have the same security restrictions as the Deno process.
+  Therefore, use with caution. Any programs specified here will be denied
+  access, even if they are specified in --allow-run.
+- **--deny-write=\<PATH\>** Deny file system write access. You can specify an
+  optional, comma-separated list of directories or files to provide a deny-list
+  of allowed file system access. Any paths specified here will be denied access,
+  even if they are specified in --allow-write.
+
 ## Configurable permissions
 
 Some permissions allow you to grant access to a specific list of entities
@@ -77,6 +112,15 @@ instead:
 
 ```shell
 deno run --allow-read=/etc https://deno.land/std/examples/cat.ts /etc/passwd
+```
+
+You can further restrict some sub-paths to not be accessible, using
+`--deny-read` flag:
+
+```shell
+deno run --allow-read=/etc --deny-read=/etc/hosts https://deno.land/std/examples/cat.ts /etc/passwd
+deno run --allow-read=/etc --deny-read=/etc/hosts https://deno.land/std/examples/cat.ts /etc/hosts
+error: Uncaught PermissionDenied: read access to "/etc/hosts"...
 ```
 
 `--allow-write` works the same as `--allow-read`.
@@ -110,6 +154,14 @@ deno run --allow-net=1.1.1.1:443 fetch.js
 deno run --allow-net=[2606:4700:4700::1111] fetch.js
 ```
 
+You can restrict certain domains to never be accessible by using the
+`--deny-net` flag:
+
+```shell
+# Allow to make network connections to all addresses except myserver.com.
+deno run --allow-net --deny-net=myserver.com fetch.js
+```
+
 If `fetch.js` tries to establish network connections to any hostname or IP not
 explicitly allowed, the relevant call will throw an exception.
 
@@ -138,6 +190,14 @@ deno run --allow-env=HOME env.js
 
 > Note for Windows users: environment variables are case insensitive on Windows,
 > so Deno also matches them case insensitively (on Windows only).
+
+You can restrict certain env vars to never be accessible by using the
+`--deny-env` flag:
+
+```shell
+# Allow all environment variables except AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
+deno run --allow-env --deny-env=AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY env.js
+```
 
 ### Subprocess permissions
 
@@ -170,3 +230,11 @@ deno run --allow-run run.js
 You can only limit the executables that are allowed; if permission is granted to
 execute it then any parameters can be passed. For example if you pass
 `--allow-run=cat` then the user can use `cat` to read any file.
+
+You can restrict certain executables to never be accessible by using the
+`--deny-run` flag:
+
+```shell
+# Disallow spawning `git`.
+deno run --allow-run --deny-run=git run.js
+```

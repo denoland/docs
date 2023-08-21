@@ -66,7 +66,7 @@ first heading it encounters and print out the text content of that heading:
 
 ```ts, ignore
 import { JSDOM } from "jsdom";
-import { assert } from "https://deno.land/std/testing/asserts.ts";
+import { assert } from "https://deno.land/std/assert/mod.ts";
 
 const { window: { document } } = new JSDOM(
   `<!DOCTYPE html>

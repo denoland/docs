@@ -1,9 +1,8 @@
 # Behavior-Driven Development
 
-With the [bdd.ts](https://deno.land/std/testing/bdd.ts) module you
-can write your tests in a familiar format for grouping tests and adding
-setup/teardown hooks used by other JavaScript testing frameworks like Jasmine,
-Jest, and Mocha.
+With the [bdd.ts](https://deno.land/std/testing/bdd.ts) module you can write
+your tests in a familiar format for grouping tests and adding setup/teardown
+hooks used by other JavaScript testing frameworks like Jasmine, Jest, and Mocha.
 
 The `describe` function creates a block that groups together several related
 tests. The `it` function registers an individual test case.
@@ -59,7 +58,7 @@ sanitization options. They work in the same way.
 
 ## Permissions option
 
-Like `Deno.TestDefinition`, the `DescribeDefintion` and `ItDefinition` have a
+Like `Deno.TestDefinition`, the `DescribeDefinition` and `ItDefinition` have a
 `permissions` option. They specify the permissions that should be used to run an
 individual test case or test suite. Set this to `"inherit"` to keep the calling
 thread's permissions. Set this to `"none"` to revoke all permissions.
@@ -90,7 +89,7 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
+} from "https://deno.land/std/assert/mod.ts";
 import { User } from "https://deno.land/std/testing/bdd_examples/user.ts";
 
 Deno.test("User.users initially empty", () => {
@@ -135,7 +134,7 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
+} from "https://deno.land/std/assert/mod.ts";
 import {
   afterEach,
   beforeEach,
@@ -197,11 +196,8 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
-import {
-  describe,
-  it,
-} from "https://deno.land/std/testing/bdd.ts";
+} from "https://deno.land/std/assert/mod.ts";
+import { describe, it } from "https://deno.land/std/testing/bdd.ts";
 import { User } from "https://deno.land/std/testing/bdd_examples/user.ts";
 
 const userTests = describe("User");
@@ -257,11 +253,8 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
-import {
-  describe,
-  it,
-} from "https://deno.land/std/testing/bdd.ts";
+} from "https://deno.land/std/assert/mod.ts";
+import { describe, it } from "https://deno.land/std/testing/bdd.ts";
 import { User } from "https://deno.land/std/testing/bdd_examples/user.ts";
 
 describe("User", () => {

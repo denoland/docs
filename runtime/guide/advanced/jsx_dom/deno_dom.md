@@ -20,7 +20,7 @@ first heading it encounters and print out the text content of that heading:
 
 ```ts
 import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
-import { assert } from "https://deno.land/std/testing/asserts.ts";
+import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 
 const document = new DOMParser().parseFromString(
   `<!DOCTYPE html>

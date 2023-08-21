@@ -35,9 +35,8 @@ const desc4 = { name: "net", host: "127.0.0.1:8000" } as const;
 const desc5 = { name: "hrtime" } as const;
 ```
 
-> ⚠️ See
-> [`PermissionDescriptor`](https://deno.land/api?s=Deno.PermissionDescriptor) in
-> API reference for more details.
+> ⚠️ See [`PermissionDescriptor`](/api?s=Deno.PermissionDescriptor) in API
+> reference for more details.
 
 > ⚠️ In 1.30 and onwards, synchronous API counterparts (ex.
 > `Deno.permissions.querySync`) exist for all the APIs described below.
@@ -51,15 +50,35 @@ Check, by descriptor, if a permission is granted or not.
 
 const desc1 = { name: "read", path: "/foo" } as const;
 console.log(await Deno.permissions.query(desc1));
-// PermissionStatus { state: "granted" }
+// PermissionStatus { state: "granted", partial: false }
 
 const desc2 = { name: "read", path: "/foo/bar" } as const;
 console.log(await Deno.permissions.query(desc2));
-// PermissionStatus { state: "granted" }
+// PermissionStatus { state: "granted", partial: false }
 
 const desc3 = { name: "read", path: "/bar" } as const;
 console.log(await Deno.permissions.query(desc3));
-// PermissionStatus { state: "prompt" }
+// PermissionStatus { state: "prompt", partial: false }
+```
+
+If `--deny-read` flag was used to restrict some of the filepaths, the result
+will contain `partial: true` describing that not all subpaths have permissions
+granted:
+
+```ts
+// deno run --allow-read=/foo --deny-read=/foo/bar main.ts
+
+const desc1 = { name: "read", path: "/foo" } as const;
+console.log(await Deno.permissions.query(desc1));
+// PermissionStatus { state: "granted", partial: true }
+
+const desc2 = { name: "read", path: "/foo/bar" } as const;
+console.log(await Deno.permissions.query(desc2));
+// PermissionStatus { state: "denied", partial: false }
+
+const desc3 = { name: "read", path: "/bar" } as const;
+console.log(await Deno.permissions.query(desc3));
+// PermissionStatus { state: "prompt", partial: false }
 ```
 
 ## Permission states
@@ -74,14 +93,18 @@ This will come up in [Request permissions](#request-permissions).
 
 The intuitive understanding behind the result of the second query in
 [Query permissions](#query-permissions) is that read access was granted to
-`/foo` and `/foo/bar` is within `/foo` so `/foo/bar` is allowed to be read.
+`/foo` and `/foo/bar` is within `/foo` so `/foo/bar` is allowed to be read. This
+hold true, unless the CLI-granted permission is _partial_ to the queried
+permissions (as an effect of using a `--deny-*` flag).
 
 We can also say that `desc1` is
 _[stronger than](https://www.w3.org/TR/permissions/#ref-for-permissiondescriptor-stronger-than)_
 `desc2`. This means that for any set of CLI-granted permissions:
 
-1. If `desc1` queries to `{ state: "granted" }` then so must `desc2`.
-2. If `desc2` queries to `{ state: "denied" }` then so must `desc1`.
+1. If `desc1` queries to `{ state: "granted", partial: false }` then so must
+   `desc2`.
+2. If `desc2` queries to `{ state: "denied", partial: false }` then so must
+   `desc1`.
 
 More examples:
 
@@ -106,13 +129,13 @@ const desc1 = { name: "read", path: "/foo" } as const;
 const status1 = await Deno.permissions.request(desc1);
 // ⚠️ Deno requests read access to "/foo". Grant? [y/n (y = yes allow, n = no deny)] y
 console.log(status1);
-// PermissionStatus { state: "granted" }
+// PermissionStatus { state: "granted", partial: false }
 
 const desc2 = { name: "read", path: "/bar" } as const;
 const status2 = await Deno.permissions.request(desc2);
 // ⚠️ Deno requests read access to "/bar". Grant? [y/n (y = yes allow, n = no deny)] n
 console.log(status2);
-// PermissionStatus { state: "denied" }
+// PermissionStatus { state: "denied", partial: false }
 ```
 
 If the current permission state is "prompt", a prompt will appear on the user's
@@ -135,7 +158,7 @@ Downgrade a permission from "granted" to "prompt".
 
 const desc = { name: "read", path: "/foo" } as const;
 console.log(await Deno.permissions.revoke(desc));
-// PermissionStatus { state: "prompt" }
+// PermissionStatus { state: "prompt", partial: false }
 ```
 
 What happens when you try to revoke a permission which is _partial_ to one
@@ -146,10 +169,10 @@ granted on the CLI?
 
 const desc = { name: "read", path: "/foo/bar" } as const;
 console.log(await Deno.permissions.revoke(desc));
-// PermissionStatus { state: "prompt" }
+// PermissionStatus { state: "prompt", partial: false }
 const cliDesc = { name: "read", path: "/foo" } as const;
 console.log(await Deno.permissions.revoke(cliDesc));
-// PermissionStatus { state: "prompt" }
+// PermissionStatus { state: "prompt", partial: false }
 ```
 
 The CLI-granted permission, which implies the revoked permission, was also

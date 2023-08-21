@@ -13,7 +13,7 @@ you with a side panel of tests that have been discovered in your project.
 
 Also, next to tests identified in the code, there will be decorations which
 allow you to run and see the status of each test, as well as there will be
-entries in the command pallette for tests.
+entries in the command palette for tests.
 
 ## Discovering tests
 
@@ -27,7 +27,7 @@ In the future, tests will be discovered in a similar fashion to the way the
 ## Running tests
 
 You can run tests from the Test Explorer view, from the decorations next to the
-tests when viewing the test code, or via the command pallette. You can also use
+tests when viewing the test code, or via the command palette. You can also use
 the filter function in the Text Explorer view to exclude certain tests from a
 test run.
 

@@ -139,9 +139,8 @@ being run: `https://unpkg.com/liltest@0.0.5/dist/liltest.js`.
 The solution is to import and re-export your external libraries in a central
 `deps.ts` file (which serves the same purpose as Node's `package.json` file).
 For example, let's say you were using the above assertion library across a large
-project. Rather than importing
-`"https://deno.land/std/testing/asserts.ts"` everywhere, you could
-create a `deps.ts` file that exports the third-party code:
+project. Rather than importing `"https://deno.land/std/assert/mod.ts"`
+everywhere, you could create a `deps.ts` file that exports the third-party code:
 
 **deps.ts**
 
@@ -150,7 +149,7 @@ export {
   assert,
   assertEquals,
   assertStringIncludes,
-} from "https://deno.land/std/testing/asserts.ts";
+} from "https://deno.land/std/assert/mod.ts";
 ```
 
 And throughout the same project, you can import from the `deps.ts` and avoid

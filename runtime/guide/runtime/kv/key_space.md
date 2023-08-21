@@ -6,7 +6,7 @@
 > storing data in a secondary store for the time being.
 
 > 🌐 Deno KV is available in closed beta for Deno Deploy.
-> [Read the Deno Deploy KV docs](/deploy/guide/kv).
+> [Read the Deno Deploy KV docs](https://deno.com/deploy/docs/kv).
 
 Deno KV is a key value store. The key space is a flat namespace of
 key+value+versionstamp pairs. Keys are sequences of key parts, which allow
@@ -79,6 +79,70 @@ of values within a type.
 ["events", "2023-03-31", "location", "san_francisco"]; // Events in San Francisco on 2023-03-31
 ["invoices", 2023, "Q1", "summary"]; // Summary of Q1 invoices for 2023
 ["teams", "engineering", "members", 1n]; // Member with ID 1n in the engineering team
+```
+
+### Universally Unique Lexicographically Sortable Identifiers (ULIDs)
+
+Key part ordering allows keys consisting of timestamps and ID parts to be listed
+chronologically. Typically, you can generate a key using the following:
+[`Date.now()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now)
+and
+[`crypto.randomUUID()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID):
+
+```js
+async function setUser(user) {
+  await kv.set(["users", Date.now(), crypto.randomUUID()], user);
+}
+```
+
+Run multiple times sequentially, this produces the following keys:
+
+```js
+["users", 1691377037923, "8c72fa25-40ad-42ce-80b0-44f79bc7a09e"]; // First user
+["users", 1691377037924, "8063f20c-8c2e-425e-a5ab-d61e7a717765"]; // Second user
+["users", 1691377037925, "35310cea-58ba-4101-b09a-86232bf230b2"]; // Third user
+```
+
+However, having the timestamp and ID represented within a single key part may be
+more straightforward in some cases. You can use a
+[Universally Unique Lexicographically Sortable Identifier (ULID)](https://github.com/ulid/spec)
+to do this. This type of identifier encodes a UTC timestamp, is
+lexicographically sortable and is cryptographically random by default:
+
+```js
+import { ulid } from "https://deno.land/x/ulid/mod.ts";
+
+const kv = await Deno.openKv();
+
+async function setUser(user) {
+  await kv.set(["users", ulid()], user);
+}
+```
+
+```js
+["users", "01H76YTWK3YBV020S6MP69TBEQ"]; // First user
+["users", "01H76YTWK4V82VFET9YTYDQ0NY"]; // Second user
+["users", "01H76YTWK5DM1G9TFR0Y5SCZQV"]; // Third user
+```
+
+Furthermore, you can generate ULIDs monotonically increasingly using a factory
+function:
+
+```js
+import { monotonicFactory } from "https://deno.land/x/ulid/mod.ts";
+
+const ulid = monotonicFactory();
+
+async function setUser(user) {
+  await kv.set(["users", ulid()], user);
+}
+```
+
+```js
+// Strict ordering for the same timestamp by incrementing the least-significant random bit by 1
+["users", "01H76YTWK3YBV020S6MP69TBEQ"]; // First user
+["users", "01H76YTWK3YBV020S6MP69TBER"]; // Second user
+["users", "01H76YTWK3YBV020S6MP69TBES"]; // Third user
 ```
 
 ## Values
@@ -160,8 +224,8 @@ value was modified. Versionstamps do not represent real time, but rather the
 order in which the values were modified.
 
 Because versionstamps are monotonically increasing, they can be used to
-determine wether a given value is newer or older than another value. This can be
-done by comparing the versionstamps of the two values. If versionstamp A is
+determine whether a given value is newer or older than another value. This can
+be done by comparing the versionstamps of the two values. If versionstamp A is
 greater than versionstamp B, then value A was modified more recently than value
 B.
 

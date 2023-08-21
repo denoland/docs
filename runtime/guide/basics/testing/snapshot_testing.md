@@ -1,10 +1,10 @@
 # Snapshot Testing
 
 The Deno standard library comes with a
-[snapshot module](https://deno.land/std/testing/snapshot.ts), which
-enables developers to write tests which assert a value against a reference
-snapshot. This reference snapshot, is a serialized representation of the
-original value and is stored alongside the test file.
+[snapshot module](https://deno.land/std/testing/snapshot.ts), which enables
+developers to write tests which assert a value against a reference snapshot.
+This reference snapshot, is a serialized representation of the original value
+and is stored alongside the test file.
 
 Snapshot testing can be useful in many cases, as it enables catching a wide
 array of bugs with very little code. It is particularly helpful in situations
@@ -75,7 +75,7 @@ can be limited to only include existing snapshot files, if so desired.
 
 ## Version Control
 
-Snapshot testing works best when changes to snapshot files are comitted
+Snapshot testing works best when changes to snapshot files are committed
 alongside other code changes. This allows for changes to reference snapshots to
 be reviewed along side the code changes that caused them, and ensures that when
 others pull your changes, their tests will pass without needing to update
@@ -253,7 +253,7 @@ const assertSnapshot = createAssertSnapshot({
 When configuring default options like this, the resulting `assertSnapshot`
 function will function the same as the default function exported from the
 snapshot module. If passed an optional options object, this will take precedence
-over the default options, where the value provded for an option differs.
+over the default options, where the value provided for an option differs.
 
 It is possible to "extend" an `assertSnapshot` function which has been
 configured with default options.

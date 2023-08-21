@@ -50,14 +50,14 @@ into the REPL. This is useful for importing some code you commonly use in the
 REPL, or modifying the runtime in some way:
 
 ```
-$ deno repl --allow-net --eval 'import { assert } from "https://deno.land/std/testing/asserts.ts"'
-Deno 1.31.0
-exit using ctrl+d or close()
+$ deno repl --allow-net --eval 'import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts"'
+Deno 1.36.0
+exit using ctrl+d, ctrl+c, or close()
 > assert(true)
 undefined
 > assert(false)
 Uncaught AssertionError
-    at assert (https://deno.land/std@0.178.0/testing/asserts.ts:141:11)
+    at assert (https://deno.land/std@0.197.0/assert/assert.ts:7:11)
     at <anonymous>:2:1
 ```
 
@@ -74,10 +74,10 @@ If `--eval` is also specified, then `--eval-file` files are run before the
 `--eval` code.
 
 ```
-$ deno repl --eval-file=https://examples.deno.land/hello-world.ts,https://deno.land/std/encoding/ascii85.ts
+$ deno repl --eval-file=https://examples.deno.land/hello-world.ts,https://deno.land/std@$STD_VERSION/encoding/ascii85.ts
 Download https://examples.deno.land/hello-world.ts
 Hello, World!
-Download https://deno.land/std/encoding/ascii85.ts
+Download https://deno.land/std@$STD_VERSION/encoding/ascii85.ts
 Deno 1.20.5
 exit using ctrl+d or close()
 > rfc1924 // local (not exported) variable defined in ascii85.ts
@@ -93,14 +93,14 @@ This can cause "Module not found" errors when `--eval-file` is used with module
 files:
 
 ```
-$ deno repl --eval-file=https://deno.land/std/hash/md5.ts
-error in --eval-file file https://deno.land/std/hash/md5.ts. Uncaught TypeError: Module not found "file:///home/encoding/hex.ts".
+$ deno repl --eval-file=https://deno.land/std@$STD_VERSION/hash/md5.ts
+error in --eval-file file https://deno.land/std@$STD_VERSION/hash/md5.ts. Uncaught TypeError: Module not found "file:///home/encoding/hex.ts".
     at async <anonymous>:2:13
 Deno 1.20.5
 exit using ctrl+d or close()
 > close()
-$ deno repl --eval-file=https://deno.land/std/encoding/hex.ts
-Download https://deno.land/std/encoding/hex.ts
+$ deno repl --eval-file=https://deno.land/std@$STD_VERSION/encoding/hex.ts
+Download https://deno.land/std@$STD_VERSION/encoding/hex.ts
 Deno 1.20.5
 exit using ctrl+d or close()
 >

@@ -1,46 +1,7 @@
 import React from "react";
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import HomepageFeatures from "@site/src/components/HomepageFeatures";
-
-import styles from "./index.module.css";
-
-function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
-  return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
-      <div className={clsx("container", styles.overlayContainer)}>
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className={clsx(
-              "button button--secondary button--lg",
-              styles.linkButton,
-            )}
-            to="/runtime"
-          >
-            Build an app 🛠️
-          </Link>
-          <Link
-            className={clsx(
-              "button button--secondary button--lg",
-              styles.linkButton,
-            )}
-            to="/deploy"
-          >
-            Deploy globally 🚀
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 export default function Home() {
-  // const { siteConfig } = useDocusaurusContext();
   const ctaLinks =
     `border-2 border-solid rounded-xl px-4 py-2 hover:no-underline font-bold inline-block hover:opacity-80`;
   return (
@@ -48,8 +9,8 @@ export default function Home() {
       title={`Deno: the easiest, most secure JavaScript runtime`}
       description="Reference documentation for the Deno runtime and Deno Deploy"
     >
-      <div className="container flex flex-col-reverse md:items-center md:justify-center md:flex-row gap-0 md:gap-8">
-        <div className="flex-1 py-4">
+      <div className="container flex flex-col-reverse md:items-center md:justify-center md:flex-row gap-0 md:gap-4">
+        <div className="pb-8 md:pb-0">
           <h1>Deno Documentation</h1>
           <p className="my-4">
             Reference documentation for the Deno JavaScript runtime and Deno
@@ -70,7 +31,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="flex-1 text-center">
+        <div className="text-center">
           <img
             className="w-48 h-48 md:h-96 md:w-96 lg:h-[520px] lg:w-[520px]"
             alt="Deno logo"

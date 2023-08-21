@@ -44,6 +44,26 @@ brew install llvm
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
 
+> Building Deno requires the
+> [Protocol Buffers compiler](https://grpc.io/docs/protoc-installation/).
+
+Linux, using apt or apt-get, for example:
+
+```sh
+apt install -y protobuf-compiler
+protoc --version  # Ensure compiler version is 3+
+```
+
+MacOS, using Homebrew:
+
+```sh
+brew install protobuf
+protoc --version  # Ensure compiler version is 3+
+```
+
+For Windows users, please download the latest release from
+[GitHub](https://github.com/protocolbuffers/protobuf/releases/latest)
+
 ## Building Deno
 
 The easiest way to build Deno is by using a precompiled version of V8:

@@ -82,15 +82,15 @@ the configuration.
 The same engine that provides the diagnostics when using `deno lint` can also be
 used via the extension. By enabling the _Deno: Lint_ setting in the settings
 panel (or `deno.lint` if editing settings in JSON) the editor should start to
-display lint "warnings" in your code. See the [Linter](../../tools/linter.md)
+display lint "warnings" in your code. See the [Linter](../tools/linter.md)
 section for more information on how to use the Deno linter.
 
 ### Using import maps
 
-It is possible to use [import maps](../../basics/import_maps.md) in the editor.
-The option _Deno: Import Map_ (or `deno.importMap` if manually editing) should
-be set to the value of the import map file. If the path is a relative path, it
-will be resolved relative to the root of the workspace.
+It is possible to use [import maps](../basics/import_maps.md) in the editor. The
+option _Deno: Import Map_ (or `deno.importMap` if manually editing) should be
+set to the value of the import map file. If the path is a relative path, it will
+be resolved relative to the root of the workspace.
 
 ### Using a configuration file
 
@@ -112,8 +112,8 @@ the drop down list for the _Editor: Default formatter_ setting (or if you are
 editing settings manually, it would be
 `"editor.defaultFormatter": "denoland.vscode-deno"`).
 
-See the [Code formatter](../../tools/formatter.md) for more information on how
-to use the formatter.
+See the [Code formatter](../tools/formatter.md) for more information on how to
+use the formatter.
 
 ### Setting a path to the Deno CLI
 
@@ -182,15 +182,14 @@ insight into the code. Most are disabled by default, but can easily be enabled:
 
 ## Testing code lens
 
-The Deno CLI includes a [built-in testing API](../../basics/testing/index.md)
-available under `Deno.test`. The extension and language server have a code lens
-enabled by default which provides the ability to run a test from within the
-editor.
+The Deno CLI includes a [built-in testing API](../basics/testing.md) available
+under `Deno.test`. The extension and language server have a code lens enabled by
+default which provides the ability to run a test from within the editor.
 
 When you have a block of code that provides a test, like:
 
 ```ts
-import { assert } from "https://deno.land/std/testing/asserts.ts";
+import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 
 Deno.test({
   name: "a test case",

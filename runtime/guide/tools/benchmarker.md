@@ -84,6 +84,42 @@ Deno.bench("async hello world", async () => {
 });
 ```
 
+### Critical sections
+
+Sometimes the benchmark case needs to include setup and teardown code that would
+taint the benchmark results. For example, if you want to measure how long it
+takes to read a small file, you need to open the file, read it, and then close
+it. If the file is small enough the time it takes to open and close the file
+might outweigh the time it takes to read the file itself.
+
+To help with such situations you can `Deno.BenchContext.start` and
+`Deno.BenchContext.end` to tell the benchmarking tool about the critical section
+you want to measure. Everything outside of the section between these two calls
+will be excluded from the measurement.
+
+```ts, ignore
+import { readAll } from "https://deno.land/std/streams/mod.ts";
+
+Deno.bench("foo", async (b) => {
+  // Open a file that we will act upon.
+  const file = await Deno.open("a_big_data_file.txt");
+
+  // Tell the benchmarking tool that this is the only section you want
+  // to measure.
+  b.start();
+
+  // Now let's measure how long it takes to read all of the data from the file.
+  await readAll(file);
+
+  // End measurement here.
+  b.end();
+
+  // Now we can perform some potentially time-consuming teardown that will not
+  // taint out benchmark results.
+  file.close();
+});
+```
+
 ## Grouping and baselines
 
 When registering a bench case, it can be assigned to a group, using

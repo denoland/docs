@@ -27,7 +27,7 @@ Since version 1.30, the `deno.json` configuration file acts as an
 ```jsonc
 {
   "imports": {
-    "std/": "https://deno.land/std/"
+    "std/": "https://deno.land/std@$STD_VERSION/"
   },
   "tasks": {
     "dev": "deno run --watch main.ts"
@@ -41,7 +41,7 @@ import maps.
 Then your script can use the bare specifier `std`:
 
 ```js, ignore
-import { assertEquals } from "std/testing/assert.ts";
+import { assertEquals } from "std/assert/mod.ts";
 
 assertEquals(1, 2);
 ```

@@ -14,7 +14,7 @@ Firstly, let's create a file `url_test.ts` and register a test case using
 
 ```ts
 // url_test.ts
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/assert/mod.ts";
 
 Deno.test("url test", () => {
   const url = new URL("./foo.js", "https://deno.land/");
@@ -40,7 +40,7 @@ switching between the forms (eg. when you need to quickly focus a single test
 for debugging, using `only: true` option):
 
 ```ts
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/assert/mod.ts";
 
 // Compact form: name and function
 Deno.test("hello world #1", () => {
@@ -111,7 +111,7 @@ The test steps API provides a way to report distinct steps within a test and do
 setup and teardown code within that test.
 
 ```ts
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/assert/mod.ts";
 import { Client } from "https://deno.land/x/postgres@v0.15.0/mod.ts";
 
 interface User {
@@ -266,7 +266,7 @@ deno test --parallel
 ```
 
 Note that starting in Deno v1.24, some test options can be configured via
-[a configuration file](../../getting_started/configuration_file.md).
+[a configuration file](../getting_started/configuration_file.md).
 
 > ⚠️ If you want to pass additional CLI arguments to the test files use `--` to
 > inform Deno that remaining arguments are scripts arguments.
@@ -404,6 +404,35 @@ failure, you can specify the `--fail-fast` flag when running the suite.
 deno test --fail-fast
 ```
 
+## Reporters
+
+Deno ships with three built-in reporters:
+
+- `pretty` (default)
+- `dot`
+- `junit`
+
+You can specify the reporter to use with the `--reporter` flag.
+
+```shell
+# use default pretty reporter
+$ deno test
+
+# use dot reporter with concise output
+$ deno test --reporter=dot
+
+# use JUnit reporter
+$ deno test --reporter=junit
+```
+
+You can also write the output of machine-readable JUnit report to a file, while
+still enjoying human-readable output in the terminal. In such situations specify
+`--junit-path` flag:
+
+```shell
+$ deno test --junit-path=./report.xml
+```
+
 ## Integration with testing libraries
 
 Deno's test runner works with popular testing libraries like
@@ -445,7 +474,7 @@ around `bar` and call `foo(spy)` in the testing code:
 
 ```js, ignore
 import sinon from "https://cdn.skypack.dev/sinon";
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/assert/mod.ts";
 import { bar, foo } from "./my_file.js";
 
 Deno.test("calls bar during execution of foo", () => {
@@ -485,7 +514,7 @@ And then `import` in a test file:
 
 ```js, ignore
 import sinon from "https://cdn.skypack.dev/sinon";
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std/assert/mod.ts";
 import { foo, funcs } from "./my_file.js";
 
 Deno.test("calls bar during execution of foo", () => {
