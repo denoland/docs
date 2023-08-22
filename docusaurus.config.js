@@ -44,6 +44,7 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/denoland/deno-docs/",
         },
+        /*
         blog: {
           blogTitle: "Deno Blog",
           blogDescription: "Latest news and tutorials from Deno Land",
@@ -63,6 +64,7 @@ const config = {
             },
           },
         },
+        */
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -98,7 +100,7 @@ const config = {
         sidebarPath: require.resolve("./sidebars/deploy.js"),
       },
     ],
-    async function myPlugin(context, options) {
+    async function tailwindPlugin(context, options) {
       return {
         name: "docusaurus-tailwindcss",
         configurePostCss(postcssOptions) {
@@ -266,31 +268,41 @@ const config = {
       },
       algolia: {
         // The application ID provided by Algolia
-        appId: "YOUR_APP_ID",
+        appId: "KAQ4QIALEB",
 
         // Public API key: it is safe to commit it
-        apiKey: "YOUR_SEARCH_API_KEY",
+        apiKey: "0795dfc12048ff344a54bb4c04c9000b",
 
-        indexName: "YOUR_INDEX_NAME",
+        indexName: "deno",
+
+        insights: true,
 
         // Optional: see doc section below
         contextualSearch: true,
 
-        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-        externalUrlRegex: "external\\.com|domain\\.com",
+        // Optional: Specify domains where the navigation should occur through
+        // window.location instead on history.push. Useful when our Algolia
+        // config crawls multiple documentation sites and we want to navigate
+        // with window.location.href to them.
+        // externalUrlRegex: "external\\.com|domain\\.com",
 
-        // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+        // Optional: Replace parts of the item URLs from Algolia. Useful when
+        // using the same search index for multiple deployments using a
+        // different baseUrl. You can use regexp or string in the `from` param.
+        // For example: localhost:3000 vs myCompany.com/docs
+        /*
         replaceSearchResultPathname: {
           from: "/docs/", // or as RegExp: /\/docs\//
           to: "/",
         },
+        */
 
         // Optional: Algolia search parameters
         searchParameters: {},
 
-        // Optional: path for search page that enabled by default (`false` to disable it)
+        // Optional: path for search page that enabled by default (`false`
+        // to disable it)
         searchPagePath: "search",
-        //... other Algolia params
       },
     }),
 };

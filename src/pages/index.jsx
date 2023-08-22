@@ -13,8 +13,7 @@ export default function Home() {
         <div className="pb-8 md:pb-0">
           <h1>Deno Documentation</h1>
           <p className="my-4">
-            Reference documentation for the Deno JavaScript runtime and Deno
-            Deploy.
+            Reference docs for the Deno JavaScript runtime and Deno Deploy.
           </p>
           <div className="flex flex-col items-start gap-4 md:flex-row">
             <a
