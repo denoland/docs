@@ -112,8 +112,9 @@ Before we create the components, let's add some state management.
 ## Maintain state with `store`
 
 In order to maintain state across our `<Dinosaur>` and `<Dinosaurs>` components,
-we'll use [Vue store](https://vuejs.org/guide/scaling-up/state-management.html).
-Note for more complex state management, check out the Vue-endorsed
+we'll use
+[Vue store](https://vuejs.org/manual/scaling-up/state-management.html). Note for
+more complex state management, check out the Vue-endorsed
 [Pinia](https://pinia.vuejs.org/) library.
 
 Create a `src/store.js` file:
@@ -225,7 +226,7 @@ export default {
 
 Next, we'll update `HomePage.vue`. Since the `Dinosaurs` component needs to
 fetch the data from the API, we'll use
-[`<Suspense>`](https://vuejs.org/guide/built-ins/suspense.html), which manages
+[`<Suspense>`](https://vuejs.org/manual/built-ins/suspense.html), which manages
 async dependencies in a component tree.
 
 ```tsx, ignore
@@ -251,7 +252,7 @@ export default {
 
   <p>
     Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
+    <a href="https://vuejs.org/manual/quick-start.html#local" target="_blank"
       >create-vue</a
     >, the official Vue + Vite starter
   </p>

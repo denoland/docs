@@ -7,7 +7,7 @@
   Functionality is then exported out of `deps.ts` for use by local modules.
 - Continuing this convention, dev only dependencies can be kept in a
   `dev_deps.ts` file.
-- See also [Modules](../guide/basics/modules/index.md)
+- See also [Modules](../manual/basics/modules/index.md)
 
 ## Overview
 
@@ -44,9 +44,9 @@ export {
 ```
 
 In this example the same functionality is created as is the case in the
-[local and remote import examples](../guide/basics/modules/index.md). But in this case
-instead of the Ramda module being referenced directly it is referenced by proxy
-using a local `deps.ts` module.
+[local and remote import examples](../manual/basics/modules/index.md). But in
+this case instead of the Ramda module being referenced directly it is referenced
+by proxy using a local `deps.ts` module.
 
 **Command:** `deno run example.ts`
 

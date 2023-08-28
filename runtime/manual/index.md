@@ -2,7 +2,7 @@
 displayed_sidebar: runtimeGuideHome
 sidebar_position: 1
 sidebar_label: Overview
-pagination_next: guide/getting_started/index
+pagination_next: manual/getting_started/index
 ---
 
 # Deno Runtime User Guide
@@ -39,4 +39,7 @@ built directly into the runtime.
 
 ### Explore Deno's built-in tooling
 
-[Run benchmarks](./tools/benchmarker.md), [format](./tools/formatter.md) and [lint](./tools/linter.md) your code, or [package your app as a single binary](./tools/compiler.md) using Deno's built-in dev tools.
+[Run benchmarks](./tools/benchmarker.md), [format](./tools/formatter.md) and
+[lint](./tools/linter.md) your code, or
+[package your app as a single binary](./tools/compiler.md) using Deno's built-in
+dev tools.

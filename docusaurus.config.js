@@ -39,10 +39,10 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/denoland/deno-docs/",
+          id: "runtime",
+          path: "runtime",
+          routeBasePath: "runtime",
+          sidebarPath: require.resolve("./sidebars/runtime.js"),
         },
         /*
         blog: {
@@ -73,24 +73,17 @@ const config = {
   ],
 
   plugins: [
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "runtime",
-        path: "runtime",
-        routeBasePath: "runtime",
-        sidebarPath: require.resolve("./sidebars/runtime.js"),
-      },
-    ],
+    /*
     [
       "@docusaurus/plugin-content-docs",
       {
         id: "stdlib",
         path: "stdlib",
         routeBasePath: "stdlib",
-        sidebarPath: require.resolve("./sidebars.js"),
+        sidebarPath: require.resolve("./sidebars/runtime.js"),
       },
     ],
+    */
     [
       "@docusaurus/plugin-content-docs",
       {
@@ -255,7 +248,7 @@ const config = {
               },
               {
                 label: "Privacy Policy",
-                href: "/deploy/guide/privacy-policy",
+                href: "/deploy/manual/privacy-policy",
               },
             ],
           },

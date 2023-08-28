@@ -45,7 +45,7 @@ the vast majority of cases it does not.
 ## Inclusive code
 
 Please follow the guidelines for inclusive code outlined at
-https://chromium.googlesource.com/chromium/src/+/master/styleguide/inclusive_code.md.
+https://chromium.googlesource.com/chromium/src/+/master/stylemanual/inclusive_code.md.
 
 ## Rust
 

@@ -27,7 +27,7 @@ modes are available to enable different performance tradeoffs.
 > storing data in a secondary store for the time being.
 
 > 🌐 Deno KV is available in closed beta for Deno Deploy.
-> [Read the Deno Deploy KV docs](/deploy/guide/kv).
+> [Read the Deno Deploy KV docs](/deploy/manual/kv).
 
 ## Getting started
 

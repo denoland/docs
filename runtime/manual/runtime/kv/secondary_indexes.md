@@ -6,7 +6,7 @@
 > storing data in a secondary store for the time being.
 
 > 🌐 Deno KV is available in closed beta for Deno Deploy.
-> [Read the Deno Deploy KV docs](/deploy/guide/kv).
+> [Read the Deno Deploy KV docs](/deploy/manual/kv).
 
 Key-value stores like Deno KV organize data as collections of key-value pairs,
 where each unique key is associated with a single value. This structure enables

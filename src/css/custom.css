@@ -3,102 +3,112 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;1,700&display=swap');
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities;
+ @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;1,700&display=swap');
+ 
+ /* You can override the default Infima variables here. */
+ :root {
+   --ifm-color-primary: #2e8555;
+   --ifm-color-primary-dark: #29784c;
+   --ifm-color-primary-darker: #277148;
+   --ifm-color-primary-darkest: #205d3b;
+   --ifm-color-primary-light: #33925d;
+   --ifm-color-primary-lighter: #359962;
+   --ifm-color-primary-lightest: #3cad6e;
+   --ifm-code-font-size: 95%;
+   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+   --ifm-heading-font-family: 'Public Sans', Helvetica, sans-serif;
+ }
+ 
+ /* For readability concerns, you should choose a lighter palette in dark mode. */
+ [data-theme='dark'] {
+   --ifm-color-primary: #25c2a0;
+   --ifm-color-primary-dark: #21af90;
+   --ifm-color-primary-darker: #1fa588;
+   --ifm-color-primary-darkest: #1a8870;
+   --ifm-color-primary-light: #29d5b0;
+   --ifm-color-primary-lighter: #32d8b4;
+   --ifm-color-primary-lightest: #4fddbf;
+   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+ }
+ 
+ html, body {
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ }
+ 
+ h1, h2, h3, h4 {
+   font-family: Archivo, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ }
 
-/* You can override the default Infima variables here. */
-:root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --ifm-heading-font-family: 'Public Sans', Helvetica, sans-serif;
-}
-
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-}
-
-html, body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-h1, h2, h3, h4 {
-  font-family: Archivo, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.section-header {
-  padding: 5px 0;
-  margin: 10px var(--ifm-menu-link-padding-horizontal);
-  border-bottom: 1px solid;
-  color: #aaa;
-  font-size: 0.8rem;
-}
-
-.menu__list-item {
-  margin: 0 var(--ifm-menu-link-padding-horizontal);
-}
-
-.menu__link {
-  font-size: 0.8rem;
-}
-
-.navbar__link--active {
-  font-weight: bold;
-}
-
-.__no-external a svg {
-  display: none;
-}
-
-.icon-menu-option .menu__link {
-  position: relative;
-}
-
-.icon-menu-option .menu__link::before {
-  content: '';
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  margin-right: 5px;
-  background-color: currentColor;
-  --svg: url('https://api.iconify.design/ic/baseline-electric-bolt.svg');
-  -webkit-mask-image: var(--svg);
-  mask-image: var(--svg);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-}
-
-.icon-menu-quick-start .menu__link::before {
-  --svg: url('https://api.iconify.design/ic/baseline-electric-bolt.svg');
-}
-
-.icon-menu-user-guide .menu__link::before {
-  --svg: url('https://api.iconify.design/ic/baseline-map.svg');
-}
-
-.icon-menu-tutorials .menu__link::before {
-  --svg: url('https://api.iconify.design/ic/baseline-integration-instructions.svg');
-}
-
-.icon-menu-api .menu__link::before {
-  --svg: url('https://api.iconify.design/ic/sharp-menu-book.svg');
-}
+ .container {
+  max-width: 1140px !important;
+ }
+ 
+ /* Hide breadcrumbs */
+ .theme-doc-breadcrumbs {
+   display: none;
+ }
+ 
+ .section-header {
+   padding: 5px 0;
+   margin: 10px var(--ifm-menu-link-padding-horizontal);
+   border-bottom: 1px solid;
+   color: #aaa;
+   font-size: 0.8rem;
+ }
+ 
+ .menu__list-item {
+   margin: 0 var(--ifm-menu-link-padding-horizontal);
+ }
+ 
+ .menu__link {
+   font-size: 0.8rem;
+ }
+ 
+ .navbar__link--active {
+   font-weight: bold;
+ }
+ 
+ .__no-external a svg {
+   display: none;
+ }
+ 
+ .icon-menu-option .menu__link {
+   position: relative;
+ }
+ 
+ .icon-menu-option .menu__link::before {
+   content: '';
+   display: inline-block;
+   width: 24px;
+   height: 24px;
+   margin-right: 5px;
+   background-color: currentColor;
+   --svg: url('https://api.iconify.design/ic/baseline-electric-bolt.svg');
+   -webkit-mask-image: var(--svg);
+   mask-image: var(--svg);
+   -webkit-mask-repeat: no-repeat;
+   mask-repeat: no-repeat;
+   -webkit-mask-size: 100% 100%;
+   mask-size: 100% 100%;
+ }
+ 
+ .icon-menu-quick-start .menu__link::before {
+   --svg: url('https://api.iconify.design/ic/baseline-electric-bolt.svg');
+ }
+ 
+ .icon-menu-user-guide .menu__link::before {
+   --svg: url('https://api.iconify.design/ic/sharp-menu-book.svg');
+ }
+ 
+ .icon-menu-tutorials .menu__link::before {
+   --svg: url('https://api.iconify.design/ic/baseline-integration-instructions.svg');
+ }
+ 
+ .icon-menu-api .menu__link::before {
+   --svg: url('https://api.iconify.design/ic/baseline-data-object.svg');
+ }
+ 

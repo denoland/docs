@@ -148,7 +148,7 @@ Pre-requisites for this GitHub Action workflow to work:
 
 - an AWS Lightsail Container Instance is created (see section above)
 - IAM user and relevant permissions set.
-  ([See here to learn more about managing access to Amazon Lightsail for an IAM user.](https://github.com/awsdocs/amazon-lightsail-developer-guide/blob/master/doc_source/amazon-lightsail-managing-access-for-an-iam-user.md))
+  ([See here to learn more about managing access to Amazon Lightsail for an IAM user.](https://github.com/awsdocs/amazon-lightsail-developer-manual/blob/master/doc_source/amazon-lightsail-managing-access-for-an-iam-user.md))
 - `AWS_ACCESS_KEY_ID` and `AWS_SUCCESS_ACCESS_KEY` for your permissioned user.
   (Follow
   [this AWS guide](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli)

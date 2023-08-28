@@ -6,7 +6,7 @@
 > storing data in a secondary store for the time being.
 
 > 🌐 Deno KV is available in closed beta for Deno Deploy.
-> [Read the Deno Deploy KV docs](/deploy/guide/kv).
+> [Read the Deno Deploy KV docs](/deploy/manual/kv).
 
 The Deno KV API provides a set of operations that can be performed on the key
 space.
