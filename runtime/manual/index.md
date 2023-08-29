@@ -381,9 +381,11 @@ exist in the Deno ecosystem. Here are a few of the most popular choices.
   Deno. Pages are server-rendered by default, with the option to include
   interactive islands that run JavaScript on the client. If you're new to Deno
   and looking for a place to start, we recommend trying Fresh first!
+- [Hono](https://hono.dev/) - Hono is a light-weight web framework in the
+  tradition of [Express](https://expressjs.com). Great for API servers and
+  simple web applications.
 - [Oak](https://deno.land/x/oak) - Oak is a middleware framework modeled after
-  [Koa](https://koajs.com/). It's a good choice for API servers with minimal
-  frontend needs.
+  [Koa](https://koajs.com/).
 
 ### Deno-compatible frameworks
 
