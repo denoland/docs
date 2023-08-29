@@ -111,6 +111,9 @@ const config = {
     ({
       // Replace with your project's social card
       image: "img/social.png",
+      colorMode: {
+        defaultMode: "light",
+      },
       navbar: {
         title: "Deno Docs",
         logo: {
@@ -120,10 +123,20 @@ const config = {
         },
         items: [
           {
-            to: "/runtime",
+            to: "/runtime/manual",
             position: "left",
             label: "Runtime",
             activeBaseRegex: `^/runtime`,
+          },
+          {
+            to: "/deploy/manual",
+            position: "left",
+            label: "Deploy",
+            activeBaseRegex: `^/deploy`,
+          },
+          {
+            href: "https://www.deno.land/std",
+            label: "Standard Library",
           },
           /*
           {
@@ -133,12 +146,6 @@ const config = {
             activeBaseRegex: `^/stdlib`,
           },
           */
-          {
-            to: "/deploy",
-            position: "left",
-            label: "Deploy",
-            activeBaseRegex: `^/deploy`,
-          },
           /*
           {
             to: 'blog',

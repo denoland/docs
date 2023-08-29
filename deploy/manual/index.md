@@ -1,7 +1,6 @@
 ---
 displayed_sidebar: deployGuideHome
 sidebar_position: 1
-sidebar_label: Overview
 pagination_next: manual/how-to-deploy
 ---
 

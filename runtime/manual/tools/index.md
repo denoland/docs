@@ -5,7 +5,6 @@ and TypeScript:
 
 - [start new project (`deno init`)](./init.md)
 - [benchmarker (`deno bench`)](./benchmarker.md)
-- [bundler (`deno bundle`)](./bundler.md)
 - [compiling executables (`deno compile`)](./compiler.md)
 - [installer (`deno install`)](./script_installer.md)
 - [dependency inspector (`deno info`)](./dependency_inspector.md)

@@ -1,4 +1,4 @@
-# Deploying Deno
+# Run Deno in the Cloud
 
 Often times, we don't want to maintain hardware for our Deno scripts or apps to
 run. This section describes various ways to deploy Deno into the cloud.

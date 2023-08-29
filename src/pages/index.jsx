@@ -18,13 +18,13 @@ export default function Home() {
           <div className="flex flex-col items-start gap-4 md:flex-row">
             <a
               className={ctaLinks}
-              href="/runtime"
+              href="/runtime/manual"
             >
               Build with Deno
             </a>
             <a
               className={ctaLinks}
-              href="/deploy"
+              href="/deploy/manual"
             >
               Deploy to the edge
             </a>

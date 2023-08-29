@@ -96,19 +96,19 @@
    mask-size: 100% 100%;
  }
  
- .icon-menu-quick-start .menu__link::before {
-   --svg: url('https://api.iconify.design/ic/baseline-electric-bolt.svg');
- }
- 
- .icon-menu-user-guide .menu__link::before {
-   --svg: url('https://api.iconify.design/ic/sharp-menu-book.svg');
- }
- 
- .icon-menu-tutorials .menu__link::before {
-   --svg: url('https://api.iconify.design/ic/baseline-integration-instructions.svg');
- }
- 
- .icon-menu-api .menu__link::before {
-   --svg: url('https://api.iconify.design/ic/baseline-data-object.svg');
- }
+.icon-menu-quick-start .menu__link::before {
+  --svg: url('https://api.iconify.design/ic/baseline-electric-bolt.svg');
+}
+
+.icon-menu-user-guide .menu__link::before {
+  --svg: url('https://api.iconify.design/ic/sharp-menu-book.svg');
+}
+
+.icon-menu-tutorials .menu__link::before {
+  --svg: url('https://api.iconify.design/ic/baseline-integration-instructions.svg');
+}
+
+.icon-menu-api .menu__link::before {
+  --svg: url('https://api.iconify.design/ic/baseline-data-object.svg');
+}
  

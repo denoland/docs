@@ -1,4 +1,4 @@
-# Deno KV
+# About Deno KV
 
 Since version 1.32, Deno has a built in key-value store that durably persists
 data on disk, allowing for data storage and access across service and system

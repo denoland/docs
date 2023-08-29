@@ -1,4 +1,4 @@
-# dnt - Publishing Deno modules for Node.js
+# Cross-runtime modules with dnt
 
 Library authors may want to make their Deno modules available to Node.js users.
 This is possible by using the [dnt](https://github.com/denoland/dnt) build tool.

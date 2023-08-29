@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+pagination_next: manual/basics/permissions
 ---
 
 # Web Frameworks
