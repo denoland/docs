@@ -1,20 +1,10 @@
-import { Application, Router } from "https://deno.land/x/oak@v10.2.0/mod.ts";
+import { Hono } from "https://deno.land/x/hono@v3.5.5/mod.ts";
+import { serveStatic } from "https://deno.land/x/hono@v3.5.5/middleware.ts";
 
-const app = new Application();
+const app = new Hono();
+app.use("*", serveStatic({ root: "./" }));
+app.use("*", serveStatic({ root: "./", path: "./404.html" }));
 
-app.use(async (ctx, next) => {
-  try {
-    await ctx.send({
-      root: Deno.cwd(),
-      index: "index.html",
-    });
-  } catch {
-    next();
-  }
-});
+app.get("/", (c) => c.text("Hello Deno!"));
 
-const router = new Router();
-app.use(router.routes());
-app.use(router.allowedMethods());
-
-await app.listen({ port: 8000 });
+Deno.serve(app.fetch);
