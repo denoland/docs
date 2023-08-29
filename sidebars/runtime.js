@@ -96,7 +96,7 @@ const sidebars = {
     "manual/getting_started/web_frameworks",
     {
       type: "html",
-      value: `<div>Core Concepts & Common Tasks</div>`,
+      value: `<div>Core Concepts</div>`,
       className: "section-header",
     },
     "manual/basics/permissions",
