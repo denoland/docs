@@ -27,8 +27,8 @@ warning will be logged to the deployment's logs.
 | BroadcastChannel          | 64KB/sec send rate per isolate, no limit on receive     | The same as Free                                                             |
 
 > Isolate: an instance of your deployment running in any one of the
-> [available regions](regions). Isolates are created and destroyed on
-> demand based on traffic to your deployment.
+> [available regions](regions). Isolates are created and destroyed on demand
+> based on traffic to your deployment.
 
 If you have a use case that exceeds any of these limits,
 [please reach out](mailto:deploy@deno.com).
