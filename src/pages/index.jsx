@@ -10,9 +10,9 @@ export default function Home() {
       description="Reference documentation for the Deno runtime and Deno Deploy"
     >
       <div className="flex flex-col-reverse px-8 md:mt-12 md:items-center md:justify-center md:flex-row gap-0 md:gap-16">
-        <div className="pb-8 align-middle md:pb-0">
-          <div className="mb-12">
-            <h1 className="text-5xl">Deno Documentation</h1>
+        <div className="pb-16 align-middle md:pb-0">
+          <div className="mb-8 md:mb-12">
+            <h1 className="text-4xl md:text-5xl">Deno Documentation</h1>
             <p className="my-2">
               Reference docs for the Deno JavaScript runtime and Deno Deploy.
             </p>
@@ -34,7 +34,7 @@ export default function Home() {
         </div>
         <div className="text-center align-middle">
           <img
-            className="w-48 h-48 md:h-96 md:w-96 lg:h-[520px] lg:w-[520px]"
+            className="w-64 h-64 md:h-96 md:w-96 lg:h-[520px] lg:w-[520px]"
             alt="Deno logo"
             src="/deno-looking-up.svg"
           />
