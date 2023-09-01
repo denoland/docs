@@ -6,8 +6,7 @@
  @tailwind base;
  @tailwind components;
  @tailwind utilities;
- @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap');
- @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;1,700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap');
  
  /* You can override the default Infima variables here. */
  :root {
@@ -21,8 +20,10 @@
    --ifm-code-font-size: 95%;
    --ifm-code-padding-horizontal: 0.5em;
    --ifm-code-padding-vertical: 0.25em;
+   --ifm-navbar-search-input-background-color: #fff;
    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-   --ifm-heading-font-family: 'Public Sans', Helvetica, sans-serif;
+   --ifm-font-family-base: Inter, ui-sans-serif, system-ui, -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+   --ifm-font-family-monospace: Menlo, Monaco, "Lucida Console", Consolas, "Liberation Mono", "Courier New", monospace, Menlo, Monaco, "Lucida Console", Consolas, "Liberation Mono", "Courier New", monospace;
  }
  
  /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -37,13 +38,13 @@
    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
  }
  
- html, body {
-   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+html, body {
+   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
  }
- 
- h1, h2, h3, h4 {
-   font-family: Archivo, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
- }
+
+article {
+  max-width: 75ch;
+}
 
 h1 {
   font-size: 2rem;
@@ -60,14 +61,10 @@ h3 {
   line-height: 1.2;
 }
 
- .container {
+.container {
   max-width: 1140px !important;
   margin-top: 1.5rem; 
   margin-left: 3rem;
-}
-
-article {
-  max-width: 75ch;
 }
 
  /* Hide breadcrumbs */
@@ -95,6 +92,19 @@ article {
    font-weight: bold;
  }
  
+ .navbar__logo {
+  height: 1.7rem;
+  margin-right: .7rem;
+ }
+
+ .navbar__title {
+  font-size: 1.2rem;
+ }
+
+ .navbar__brand {
+  margin-right: 1.5rem;
+ }
+
  .__no-external a svg {
    display: none;
  }
