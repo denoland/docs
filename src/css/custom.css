@@ -69,14 +69,15 @@ h3 {
 
 .container {
   max-width: 1140px !important;
-  @media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 768px) {
+  .container {
     margin-top: 1.5rem;
     margin-left: 3rem;
   }
-}
 
-footer > .container {
-  @media screen and (min-width: 768px) {
+  footer>.container {
     margin-top: 2rem;
     margin-left: auto;
   }
@@ -130,9 +131,9 @@ footer > .container {
   margin-left: 0;
 }
 
-.icon-menu-user-guide > a,
-.icon-menu-tutorials > a,
-.icon-menu-api > a {
+.icon-menu-user-guide>a,
+.icon-menu-tutorials>a,
+.icon-menu-api>a {
   font-size: 0.9rem;
 }
 
