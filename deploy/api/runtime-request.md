@@ -50,7 +50,7 @@ The return type is a `Request` instance.
 | [`body`][body]                     | [`ReadableStream`][readablestream]         | The getter exposes a `ReadableStream` of the body contents.                                                                  |
 | [`bodyUsed`][bodyused]             | `boolean`                                  | Indicates whether the body content is read.                                                                                  |
 | [`url`][url]                       | `USVString`                                | The URL of the request.                                                                                                      |
-| [`headers`][headers]               | [`Headers`](runtime-headers)               | The headers associated with the request.                                                                                     |
+| [`headers`][headers]               | [`Headers`](runtime-headers)       | The headers associated with the request.                                                                                     |
 | [`integrity`][integrity]           | `string`                                   | The crypotographic hash of the request's body.                                                                               |
 | [`method`][method]                 | `string`                                   | The request's method (`POST`, `GET`, etc).                                                                                   |
 | [`mode`][mode]                     | `string`                                   | Indicates the mode of the request (e.g. `cors` ).                                                                            |

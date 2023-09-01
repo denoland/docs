@@ -36,8 +36,8 @@ deno run first_steps.ts
 ```
 
 Deno also has the ability to execute scripts from URLs. Deno
-[hosts a library](https://deno.land/std/examples) of example code, one of which
-is a `Hello World` program. To run that hosted code, do:
+[hosts a library](https://deno.land/std/examples) of example code,
+one of which is a `Hello World` program. To run that hosted code, do:
 
 ```shell
 deno run https://deno.land/std/examples/welcome.ts
@@ -72,7 +72,8 @@ Try it out:
 deno run first_steps.ts
 ```
 
-Or, try this script hosted at `https://deno.land/std/examples/curl.ts`:
+Or, try this script hosted at
+`https://deno.land/std/examples/curl.ts`:
 
 ```shell
 deno run https://deno.land/std/examples/curl.ts https://deno.com

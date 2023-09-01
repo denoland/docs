@@ -45,5 +45,5 @@ console.log(password);
 ## `std/flags`
 
 The Deno standard library has a
-[`std/flags` module](https://deno.land/std/flags/mod.ts) for parsing command
-line arguments.
+[`std/flags` module](https://deno.land/std/flags/mod.ts) for
+parsing command line arguments.
