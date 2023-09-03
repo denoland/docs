@@ -4,10 +4,35 @@ import { serveStatic } from "https://deno.land/x/hono@v3.5.5/middleware.ts";
 const app = new Hono();
 
 // Configure redirects
+app.get("/", (c) => c.redirect("/runtime/manual"));
 app.get("/manual", (c) => c.redirect("/runtime/manual"));
 app.get("/runtime", (c) => c.redirect("/runtime/manual"));
 app.get("/deploy", (c) => c.redirect("/deploy/manual"));
 app.get("/deploy/docs", (c) => c.redirect("/deploy/manual"));
+
+// KV redirects
+app.get("/kv", (c) => c.redirect("/kv/manual"));
+app.get("/runtime/manual/runtime/kv", (c) => c.redirect("/kv/manual"));
+app.get(
+  "/runtime/manual/runtime/kv/key_space",
+  (c) => c.redirect("/kv/manual/key_space"),
+);
+app.get(
+  "/runtime/manual/runtime/kv/operations",
+  (c) => c.redirect("/kv/manual/operations"),
+);
+app.get(
+  "/runtime/manual/runtime/kv/secondary_indexes",
+  (c) => c.redirect("/kv/manual/secondary_indexes"),
+);
+app.get(
+  "/runtime/manual/runtime/kv/transactions",
+  (c) => c.redirect("/kv/manual/transactions"),
+);
+app.get(
+  "/deploy/manual/kv",
+  (c) => c.redirect("/kv/manual/on_deploy"),
+);
 
 // Redirect all manual paths - most should work
 app.all("/manual.*", (c) => {
@@ -62,7 +87,10 @@ app.all("/deploy/docs.*", (c) => {
 app.use("*", serveStatic({ root: "./" }));
 
 // 404s
-app.use("*", serveStatic({ root: "./", path: "./404.html" }));
+app.notFound((c) => {
+  console.error("404 error returned for path: ", c.req.path);
+  return c.redirect("/404.html", 404);
+});
 
 // Serve on port 8000
 Deno.serve(app.fetch);

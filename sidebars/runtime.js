@@ -85,7 +85,7 @@ const sidebars = {
   runtimeBasicsHome: mainMenu.concat([
     {
       type: "html",
-      value: `<div><a href="/runtime/manual">Manual</a> > Deno Basics</div>`,
+      value: `<div><a href="/runtime/manual">Home</a> > Deno Basics</div>`,
       className: "section-header",
     },
     "manual/getting_started/installation",
@@ -141,7 +141,7 @@ const sidebars = {
   runtimeRuntimeHome: mainMenu.concat([
     {
       type: "html",
-      value: `<div><a href="/runtime/manual">Manual</a> > Runtime APIs</div>`,
+      value: `<div><a href="/runtime/manual">Home</a> > Runtime APIs</div>`,
       className: "section-header",
     },
     "manual/runtime/builtin_apis",
@@ -151,16 +151,6 @@ const sidebars = {
     "manual/runtime/ffi_api",
     "manual/runtime/program_lifecycle",
     "manual/runtime/stability",
-    {
-      type: "html",
-      value: "<div>Deno KV</div>",
-      className: "section-header",
-    },
-    "manual/runtime/kv/index",
-    "manual/runtime/kv/key_space",
-    "manual/runtime/kv/operations",
-    "manual/runtime/kv/secondary_indexes",
-    "manual/runtime/kv/transactions",
     {
       type: "html",
       value: `<div>Web Platform APIs</div>`,
@@ -192,7 +182,7 @@ const sidebars = {
     {
       type: "html",
       value:
-        `<div><a href="/runtime/manual">Manual</a> > Work with Node.js & npm</div>`,
+        `<div><a href="/runtime/manual">Home</a> > Work with Node.js & npm</div>`,
       className: "section-header",
     },
     "manual/node/index",
@@ -228,8 +218,7 @@ const sidebars = {
   runtimeToolsHome: mainMenu.concat([
     {
       type: "html",
-      value:
-        `<div><a href="/runtime/manual">Manual</a> > Developer Tools</div>`,
+      value: `<div><a href="/runtime/manual">Home</a> > Developer Tools</div>`,
       className: "section-header",
     },
     "manual/tools/index",
@@ -300,8 +289,7 @@ const sidebars = {
   runtimeAdvancedHome: mainMenu.concat([
     {
       type: "html",
-      value:
-        `<div><a href="/runtime/manual">Manual</a> > Advanced Topics</div>`,
+      value: `<div><a href="/runtime/manual">Home</a> > Advanced Topics</div>`,
       className: "section-header",
     },
     "manual/advanced/continuous_integration",
@@ -361,7 +349,7 @@ const sidebars = {
   runtimeReferencesHome: mainMenu.concat([
     {
       type: "html",
-      value: `<div><a href="/runtime/manual">Manual</a> > References</div>`,
+      value: `<div><a href="/runtime/manual">Home</a> > References</div>`,
       className: "section-header",
     },
     "manual/references/index",
