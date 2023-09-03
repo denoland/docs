@@ -9,7 +9,7 @@ export default function Home() {
       title={`Deno: the easiest, most secure JavaScript runtime`}
       description="Reference documentation for the Deno runtime and Deno Deploy"
     >
-      <div className="flex flex-col-reverse px-8 md:mt-12 md:items-center md:justify-center md:flex-row gap-0 md:gap-16">
+      <div className="flex flex-col-reverse px-8 pt-6 md:mt-12 md:items-center md:justify-center md:flex-row gap-0 md:gap-16">
         <div className="pb-16 align-middle md:pb-0">
           <div className="mb-8 md:mb-12">
             <h1 className="text-4xl md:text-5xl">Deno Documentation</h1>

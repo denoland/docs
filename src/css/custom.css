@@ -9,6 +9,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap");
 
 /* You can override the default Infima variables here. */
+/*
 :root {
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
@@ -29,7 +30,7 @@
     "Liberation Mono", "Courier New", monospace, Menlo, Monaco, "Lucida Console",
     Consolas, "Liberation Mono", "Courier New", monospace;
 }
-
+*/
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
   --ifm-color-primary: #25c2a0;
@@ -44,10 +45,12 @@
 
 html,
 body {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overscroll-behavior: none;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -71,13 +74,45 @@ h3 {
   line-height: 1.2;
 }
 
+.navbar {
+  position: fixed;
+  width: 100%;
+}
+
+#__docusaurus, .main-wrapper {
+  overscroll-behavior-y: none;
+}
+
 .container {
   max-width: 1140px !important;
+  min-height: 75%;
+}
+
+.container article {
+  padding: 60px 0;
+}
+
+@media only screen and (max-width: 996px) {
+  .container {
+    min-height: auto;
+  }
 }
 
 /* Hide breadcrumbs */
 .theme-doc-breadcrumbs {
   display: none;
+}
+
+.theme-doc-sidebar-container {
+  position: relative;
+}
+
+.theme-doc-sidebar-container div:first-child {
+  position: fixed;
+}
+
+.theme-doc-sidebar-container div:first-child div:first-child {
+  position: relative;
 }
 
 .section-header {
@@ -96,13 +131,29 @@ h3 {
   font-size: 0.8rem;
 }
 
+.navbar__item {
+  padding: 0 2px;
+}
+
+.navbar__link {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .navbar__link--active {
   font-weight: bold;
+  margin-top: 3px;
+  border-bottom: 3px solid var(--ifm-color-primary);
 }
 
 .navbar__logo {
   height: 1.7rem;
   margin-right: 0.7rem;
+}
+
+.navbar__logo img {
+  height: 24px;
+  width: 24px;
 }
 
 .navbar__title {

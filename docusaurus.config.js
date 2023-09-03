@@ -12,7 +12,7 @@ const config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://docs.deno.land",
+  url: "https://docs.deno.com",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
@@ -93,6 +93,15 @@ const config = {
         sidebarPath: require.resolve("./sidebars/deploy.js"),
       },
     ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "kv",
+        path: "kv",
+        routeBasePath: "/kv",
+        sidebarPath: require.resolve("./sidebars/kv.js"),
+      },
+    ],
     async function tailwindPlugin(context, options) {
       return {
         name: "docusaurus-tailwindcss",
@@ -135,8 +144,14 @@ const config = {
             activeBaseRegex: `^/deploy`,
           },
           {
+            to: "/kv/manual",
+            position: "left",
+            label: "KV",
+            activeBaseRegex: `^/kv`,
+          },
+          {
             href: "https://www.deno.land/std",
-            label: "Standard Library",
+            label: "Std. Library",
           },
           /*
           {
