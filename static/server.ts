@@ -87,9 +87,11 @@ app.all("/deploy/docs.*", (c) => {
 app.use("*", serveStatic({ root: "./" }));
 
 // 404s
-app.notFound((c) => {
+app.notFound(async (c) => {
   console.error("404 error returned for path: ", c.req.path);
-  return c.redirect("/404.html", 404);
+  const f = await Deno.readTextFile("./404.html");
+  console.log(f);
+  return c.html(f);
 });
 
 // Serve on port 8000

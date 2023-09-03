@@ -57,7 +57,11 @@ const sidebars = {
       value: "<div>Connect to databases</div>",
       className: "section-header",
     },
-    "manual/kv",
+    {
+      type: "link",
+      href: "/kv/manual/on_deploy",
+      label: "Deno KV",
+    },
     "manual/dynamodb",
     "manual/faunadb",
     "manual/firebase",
