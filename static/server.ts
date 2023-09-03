@@ -90,7 +90,7 @@ app.use("*", serveStatic({ root: "./" }));
 app.notFound(async (c) => {
   console.error("404 error returned for path: ", c.req.path);
   const f = await Deno.readTextFile("./404.html");
-  console.log(f);
+  c.status(404);
   return c.html(f);
 });
 
