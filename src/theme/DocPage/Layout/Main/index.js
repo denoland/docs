@@ -12,7 +12,12 @@ export default function DocPageLayoutMain({hiddenSidebarContainer, children}) {
         styles.docMainContainer,
         (hiddenSidebarContainer || !sidebar) && styles.docMainContainerEnhanced,
       )}>
-      <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      <div style={{ 
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        height: "100%",
+      }}>
         <div
           className={clsx(
             'container padding-top--md padding-bottom--lg',
