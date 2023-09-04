@@ -1,9 +1,19 @@
 # Operations
 
-> ⚠️ Deno KV is currently **experimental** and **subject to change**. While we do
-> our best to ensure data durability, data loss is possible, especially around
-> Deno updates. We recommend that you backup your data regularly and consider
-> storing data in a secondary store for the time being.
+:::caution Deno KV is currently in beta
+
+Deno KV is currently **experimental** and **subject to change**. While we do our
+best to ensure data durability, data loss is possible, especially around Deno
+updates.
+
+Excuting Deno programs that use KV currently requires the `--unstable` flag, as
+below:
+
+```sh
+deno run -A --unstable my_kv_code.ts
+```
+
+:::
 
 The Deno KV API provides a set of operations that can be performed on the key
 space.

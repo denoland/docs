@@ -1,5 +1,20 @@
 # KV on Deno Deploy
 
+:::caution Deno KV is currently in beta
+
+Deno KV is currently **experimental** and **subject to change**. While we do our
+best to ensure data durability, data loss is possible, especially around Deno
+updates.
+
+Excuting Deno programs that use KV currently requires the `--unstable` flag, as
+below:
+
+```sh
+deno run -A --unstable my_kv_code.ts
+```
+
+:::
+
 Deno Deploy now offers a built-in serverless key-value database called Deno KV,
 which is currently in closed beta testing. To join the waitlist for this
 exclusive beta, please [sign up here.](https://dash.deno.com/kv). While in
