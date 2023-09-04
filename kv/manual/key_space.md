@@ -1,9 +1,19 @@
 # Key Space
 
-> ⚠️ Deno KV is currently **experimental** and **subject to change**. While we do
-> our best to ensure data durability, data loss is possible, especially around
-> Deno updates. We recommend that you backup your data regularly and consider
-> storing data in a secondary store for the time being.
+:::caution Deno KV is currently in beta
+
+Deno KV is currently **experimental** and **subject to change**. While we do our
+best to ensure data durability, data loss is possible, especially around Deno
+updates.
+
+Excuting Deno programs that use KV currently requires the `--unstable` flag, as
+below:
+
+```sh
+deno run -A --unstable my_kv_code.ts
+```
+
+:::
 
 Deno KV is a key value store. The key space is a flat namespace of
 key+value+versionstamp pairs. Keys are sequences of key parts, which allow

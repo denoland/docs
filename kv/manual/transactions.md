@@ -1,21 +1,19 @@
 # Transactions
 
-> ⚠️ Deno KV is currently **experimental** and **subject to change**. While we do
-> our best to ensure data durability, data loss is possible, especially around
-> Deno updates. We recommend that you backup your data regularly and consider
-> storing data in a secondary store for the time being.
+:::caution Deno KV is currently in beta
 
-> A database transaction, in the context of a key-value store like Deno KV,
-> refers to a sequence of data manipulation operations executed as a single,
-> atomic unit of work to ensure data consistency, integrity, and durability.
-> These operations, typically comprising read, write, update, and delete actions
-> on key-value pairs, adhere to the ACID (Atomicity, Consistency, Isolation, and
-> Durability) properties, which guarantee that either all operations within the
-> transaction are successfully completed, or the transaction is rolled back to
-> its initial state in the event of a failure, leaving the database unchanged.
-> This approach allows multiple users or applications to interact with the KV
-> store concurrently, while maintaining the database's consistency, reliability
-> and stability.
+Deno KV is currently **experimental** and **subject to change**. While we do our
+best to ensure data durability, data loss is possible, especially around Deno
+updates.
+
+Excuting Deno programs that use KV currently requires the `--unstable` flag, as
+below:
+
+```sh
+deno run -A --unstable my_kv_code.ts
+```
+
+:::
 
 The Deno KV store utilizes _optimistic concurrency control transactions_ rather
 than _interactive transactions_ like many SQL systems like PostgreSQL or MySQL.
