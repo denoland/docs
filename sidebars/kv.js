@@ -39,6 +39,7 @@ const sidebars = {
     "manual/operations",
     "manual/secondary_indexes",
     "manual/transactions",
+    "manual/data_modeling_typescript",
     "manual/on_deploy",
   ]),
 
