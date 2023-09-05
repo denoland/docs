@@ -61,6 +61,11 @@ app.all("/manual.*", (c) => {
   );
 });
 
+app.get(
+  "/deploy/docs/runtime-api",
+  (c) => c.redirect("/deploy/api"),
+);
+
 [
   "compression",
   "runtime-broadcast-channel",

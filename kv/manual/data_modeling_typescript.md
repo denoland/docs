@@ -1,5 +1,20 @@
 # Data Modeling in TypeScript
 
+:::caution Deno KV is currently in beta
+
+Deno KV is currently **experimental** and **subject to change**. While we do our
+best to ensure data durability, data loss is possible, especially around Deno
+updates.
+
+Excuting Deno programs that use KV currently requires the `--unstable` flag, as
+below:
+
+```sh
+deno run -A --unstable my_kv_code.ts
+```
+
+:::
+
 In TypeScript applications, it is usually desirable to create strongly-typed,
 well-documented objects to contain the data that your application operates on.
 Using [interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html)
