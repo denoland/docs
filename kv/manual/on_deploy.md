@@ -25,7 +25,7 @@ Additionally, Deno KV is available within Deno itself, utilizing SQLite as its
 backend. This feature has been accessible since Deno v1.32 with the `--unstable`
 flag.
 
-[Discover how to effectively use the Deno KV database by referring to the Deno Runtime user guide.](/runtime/manual/runtime/kv)
+[Discover how to effectively use the Deno KV database by referring to the Deno Runtime user guide.](/kv/manual)
 
 ## Getting started
 
