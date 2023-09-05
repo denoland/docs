@@ -6,6 +6,7 @@ const app = new Hono();
 // Configure redirects
 app.get("/", (c) => c.redirect("/runtime/manual"));
 app.get("/manual", (c) => c.redirect("/runtime/manual"));
+app.get("/runtime/manual/introduction", (c) => c.redirect("/runtime/manual"));
 app.get("/runtime", (c) => c.redirect("/runtime/manual"));
 app.get("/deploy", (c) => c.redirect("/deploy/manual"));
 app.get("/deploy/docs", (c) => c.redirect("/deploy/manual"));
