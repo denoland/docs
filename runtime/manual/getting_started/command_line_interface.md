@@ -31,7 +31,7 @@ deno compile -h
 deno compile --help
 ```
 
-Detailed guides for each subcommand can be found [here](..//index.md).
+Detailed guides for each subcommand can be found [here](../index.mdx).
 
 ## Script source
 
