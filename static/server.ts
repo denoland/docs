@@ -35,6 +35,35 @@ app.get(
   (c) => c.redirect("/kv/manual/on_deploy"),
 );
 
+app.get(
+  "/runtime/manual/examples",
+  (c) => c.redirect("/runtime/tutorials"),
+);
+
+[
+  "chat_app",
+  "fetch_data",
+  "file_server",
+  "file_system_events",
+  "hashbang",
+  "hello_world",
+  "http_server",
+  "manage_dependencies",
+  "module_metadata",
+  "os_signals",
+  "read_write_files",
+  "subprocess",
+  "tcp_echo",
+  "tcp_server",
+  "unix_cat",
+  "word_finder",
+].forEach((slug) => {
+  app.get(
+    `/runtime/manual/examples/${slug}`,
+    (c) => c.redirect(`/runtime/tutorials/${slug}`),
+  );
+});
+
 // Redirect all manual paths - most should work
 app.all("/manual.*", (c) => {
   const unversionedPath = c.req.path.split("/").slice(2);
