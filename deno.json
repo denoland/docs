@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "types": [
-      "./node_modules/@types/react/index.d.ts",
-      "./node_modules/@types/react/global.d.ts",
-      "./node_modules/@types/react-dom/index.d.ts"
-    ]
-  }
-}
