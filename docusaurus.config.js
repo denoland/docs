@@ -1,6 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-
+const findReplace = require("./src/remark/find_replace");
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
@@ -43,6 +43,9 @@ const config = {
           path: "runtime",
           routeBasePath: "runtime",
           sidebarPath: require.resolve("./sidebars/runtime.js"),
+          remarkPlugins: [
+            findReplace,
+          ],
         },
         /*
         blog: {
