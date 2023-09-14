@@ -15,29 +15,11 @@ deno run -A --unstable my_kv_code.ts
 
 :::
 
-Deno Deploy now offers a built-in serverless key-value database called Deno KV,
-which is currently in closed beta testing. To join the waitlist for this
-exclusive beta, please [sign up here.](https://dash.deno.com/kv). While in
-closed beta, Deno KV will not charge for storage and includes up to 1GB of
-storage per user.
+Deno Deploy now offers a built-in serverless key-value database called Deno KV.
 
 Additionally, Deno KV is available within Deno itself, utilizing SQLite as its
 backend. This feature has been accessible since Deno v1.32 with the `--unstable`
-flag.
-
-[Discover how to effectively use the Deno KV database by referring to the Deno Runtime user guide.](/kv/manual)
-
-## Getting started
-
-Upon receiving an invitation from the waitlist, a new “KV” tab will appear in
-all your projects. This tab displays basic usage statistics and a data browser.
-
-For GitHub projects, two separate databases are generated: one for the
-production branch (usually `main`) and another for all other branches. For
-playground projects, a single database is created.
-
-No additional configuration is required. If a Deno project utilizing KV works on
-a local setup, it will seamlessly function on Deploy without any modifications.
+flag. Learn more about [Deno KV](/kv/manual).
 
 ## Consistency
 
@@ -71,6 +53,23 @@ Below are the latency figures observed in our top regions:
 | Netherlands (europe-west4) | 13ms                           | 95ms                         |
 | California (us-west2)      | 72ms                           | 72ms                         |
 | Hong Kong (asia-east2)     | 42ms                           | 194ms                        |
+
+## Connect to managed databases from outside of Deno Deploy
+
+You can connect to your Deno Deploy KV database from your Deno application
+outside of Deno Deploy. To open a managed database, set the
+`DENO_KV_ACCESS_TOKEN` environment variable to a Deno Deploy personal access
+token and provide the URL of the database to `Deno.openKv`:
+
+```ts
+const kv = await Deno.openKv(
+  "https://api.deno.com/databases/<database-id>/connect",
+);
+```
+
+Please check the
+[docs](https://github.com/denoland/deno/tree/main/ext/kv#kv-connect) for the
+specification of the protocol for connecting to a remote KV database
 
 ## Data distribution
 

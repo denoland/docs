@@ -37,6 +37,7 @@ const sidebars = {
     },
     "manual/key_space",
     "manual/operations",
+    "manual/key_expiration",
     "manual/secondary_indexes",
     "manual/transactions",
     "manual/data_modeling_typescript",

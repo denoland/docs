@@ -36,8 +36,8 @@ deno run first_steps.ts
 ```
 
 Deno also has the ability to execute scripts from URLs. Deno
-[hosts a library](https://deno.land/std/examples) of example code,
-one of which is a `Hello World` program. To run that hosted code, do:
+[hosts a library](https://deno.land/std/examples) of example code, one of which
+is a `Hello World` program. To run that hosted code, do:
 
 ```shell
 deno run https://deno.land/std/examples/welcome.ts
@@ -72,8 +72,7 @@ Try it out:
 deno run first_steps.ts
 ```
 
-Or, try this script hosted at
-`https://deno.land/std/examples/curl.ts`:
+Or, try this script hosted at `https://deno.land/std/examples/curl.ts`:
 
 ```shell
 deno run https://deno.land/std/examples/curl.ts https://deno.com
@@ -153,7 +152,7 @@ import { serve } from "https://deno.land/std/http/server.ts";
 
 const handler = async (_request: Request): Promise<Response> => {
   const resp = await fetch("https://api.github.com/users/denoland", {
-    // The init object here has an headers object containing a
+    // The init object here has a headers object containing a
     // header that indicates what type of response we accept.
     // We're not specifying the method field since by default
     // fetch makes a GET request.

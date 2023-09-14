@@ -7,13 +7,16 @@ chapter).
 
 ## Cloning the Repository
 
-Clone on Linux or Mac:
+> Deno uses submodules, so you must remember to clone using
+> `--recurse-submodules`.
+
+**Linux**/**Mac**:
 
 ```shell
 git clone --recurse-submodules https://github.com/denoland/deno.git
 ```
 
-Extra steps for Windows users:
+**Windows**:
 
 1. [Enable "Developer Mode"](https://www.google.com/search?q=windows+enable+developer+mode)
    (otherwise symlinks would require administrator privileges).
@@ -26,8 +29,11 @@ Extra steps for Windows users:
 
 ## Prerequisites
 
-> Deno requires the progressively latest stable release of Rust. Deno does not
-> support the Rust Nightly Releases.
+### Rust
+
+> Deno requires a specific release of Rust. Deno may not support building on
+> other versions, or on the Rust Nightly Releases. The version of Rust required
+> for a particular release is specified in the `rust-toolchain.toml` file.
 
 [Update or Install Rust](https://www.rust-lang.org/tools/install). Check that
 Rust installed/updated correctly:
@@ -37,6 +43,32 @@ rustc -V
 cargo -V
 ```
 
+### Native Compilers and Linkers
+
+> Many components of Deno require a native compiler to build optimized native
+> functions.
+
+**Linux**:
+
+```sh
+apt install --install-recommends -y clang-16 lld-16 cmake libglib2.0-dev
+```
+
+**Mac**:
+
+Mac users must have the _XCode Command Line Tools_ installed.
+([XCode](https://developer.apple.com/xcode/) already includes the _XCode Command
+Line Tools_. Run `xcode-select --install` to install it without XCode.)
+
+[CMake](https://cmake.org/) is also required, but does not ship with the
+_Command Line Tools_.
+
+```
+brew install cmake
+```
+
+**Mac M1/M2**:
+
 For Apple aarch64 users `lld` must be installed.
 
 ```
@@ -44,56 +76,9 @@ brew install llvm
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
 
-> Building Deno requires the
-> [Protocol Buffers compiler](https://grpc.io/docs/protoc-installation/).
+**Windows**:
 
-Linux, using apt or apt-get, for example:
-
-```sh
-apt install -y protobuf-compiler
-protoc --version  # Ensure compiler version is 3+
-```
-
-MacOS, using Homebrew:
-
-```sh
-brew install protobuf
-protoc --version  # Ensure compiler version is 3+
-```
-
-For Windows users, please download the latest release from
-[GitHub](https://github.com/protocolbuffers/protobuf/releases/latest)
-
-## Building Deno
-
-The easiest way to build Deno is by using a precompiled version of V8:
-
-```
-cargo build -vv
-```
-
-However if you want to build Deno and V8 from source code:
-
-```
-V8_FROM_SOURCE=1 cargo build -vv
-```
-
-When building V8 from source, there are more dependencies:
-
-[Python 3](https://www.python.org/downloads) for running WPT tests. Ensure that
-a suffix-less `python`/`python.exe` exists in your `PATH` and it refers to
-Python 3.
-
-For Linux users glib-2.0 development files must also be installed. (On Ubuntu,
-run `apt install libglib2.0-dev`.)
-
-Mac users must have Command Line Tools installed.
-([XCode](https://developer.apple.com/xcode/) already includes CLT. Run
-`xcode-select --install` to install it without XCode.)
-
-For Windows users:
-
-1. Get [VS Community 2019](https://www.visualstudio.com/downloads/) with
+1. Get [VS Community 2019](https://www.visualstudio.com/downloads/) with the
    "Desktop development with C++" toolkit and make sure to select the following
    required tools listed below along with all C++ tools.
 
@@ -105,16 +90,65 @@ For Windows users:
    - C++/CLI support
    - VC++ 2015.3 v14.00 (v140) toolset for desktop
 
-2. Enable "Debugging Tools for Windows". Go to "Control Panel" → "Programs" →
-   "Programs and Features" → Select "Windows Software Development Kit - Windows
-   10" → "Change" → "Change" → Check "Debugging Tools For Windows" → "Change" →
-   "Finish". Or use:
-   [Debugging Tools for Windows](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/)
-   (Notice: it will download the files, you should install
-   `X64 Debuggers And Tools-x64_en-us.msi` file manually.)
+2. Enable "Debugging Tools for Windows".
+   - Go to "Control Panel" → "Programs" → "Programs and Features"
+   - Select "Windows Software Development Kit - Windows 10"
+   - → "Change" → "Change" → Check "Debugging Tools For Windows" → "Change"
+     →"Finish".
+   - Or use:
+     [Debugging Tools for Windows](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/)
+     (Notice: it will download the files, you should install
+     `X64 Debuggers And Tools-x64_en-us.msi` file manually.)
 
-See [rusty_v8's README](https://github.com/denoland/rusty_v8) for more details
-about the V8 build.
+### Protobuf Compiler
+
+> Building Deno requires the
+> [Protocol Buffers compiler](https://grpc.io/docs/protoc-installation/).
+
+**Linux**:
+
+```sh
+apt install -y protobuf-compiler
+protoc --version  # Ensure compiler version is 3+
+```
+
+**Mac**:
+
+```sh
+brew install protobuf
+protoc --version  # Ensure compiler version is 3+
+```
+
+**Windows**
+
+Windows users can download the latest binary release from
+[GitHub](https://github.com/protocolbuffers/protobuf/releases/latest).
+
+## Python 3
+
+> Deno requires [Python 3](https://www.python.org/downloads) for running WPT
+> tests. Ensure that a suffix-less `python`/`python.exe` exists in your `PATH`
+> and it refers to Python 3.
+
+## Building Deno
+
+The easiest way to build Deno is by using a precompiled version of V8:
+
+```
+cargo build -vv
+```
+
+However, you may also want to build Deno and V8 from source code if you are
+doing lower-level V8 development, or using a platform that does not have
+precompiled versions of V8:
+
+```
+V8_FROM_SOURCE=1 cargo build -vv
+```
+
+When building V8 from source, there may be more dependencies. See
+[rusty_v8's README](https://github.com/denoland/rusty_v8) for more details about
+the V8 build.
 
 ## Building
 
