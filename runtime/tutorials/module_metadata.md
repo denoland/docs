@@ -21,10 +21,7 @@ The example below uses two modules to show the difference between
 `import.meta.url`, `import.meta.main` and `Deno.mainModule`. In this example,
 `module_a.ts` is the main module entry point:
 
-```ts
-/**
- * module_b.ts
- */
+```ts title="module_b.ts"
 export function outputB() {
   console.log("Module B's import.meta.url", import.meta.url);
   console.log("Module B's mainModule url", Deno.mainModule);
@@ -35,10 +32,7 @@ export function outputB() {
 }
 ```
 
-```ts, ignore
-/**
- * module_a.ts
- */
+```ts title="module_a.ts"
 import { outputB } from "./module_b.ts";
 
 function outputA() {
@@ -48,7 +42,10 @@ function outputA() {
     "Is module A the main module via import.meta.main?",
     import.meta.main,
   );
-  console.log("Resolved specifier for ./module_b.ts", import.meta.resolve("./module_b.ts"));
+  console.log(
+    "Resolved specifier for ./module_b.ts",
+    import.meta.resolve("./module_b.ts"),
+  );
 }
 
 outputA();

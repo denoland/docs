@@ -223,3 +223,7 @@ h3 {
 .icon-menu-api .menu__link::before {
   --svg: url("https://api.iconify.design/ic/baseline-data-object.svg");
 }
+
+.markdown table tr {
+  width: 100px;
+}

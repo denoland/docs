@@ -115,6 +115,7 @@ const sidebars = {
         "manual/node/faqs",
         "manual/node/migrate",
         "manual/references/cheatsheet",
+        "manual/node/compatibility",
       ],
     },
     {

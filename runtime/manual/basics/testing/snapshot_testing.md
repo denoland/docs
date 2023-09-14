@@ -1,10 +1,10 @@
 # Snapshot Testing
 
 The Deno standard library comes with a
-[snapshot module](https://deno.land/std/testing/snapshot.ts), which enables
-developers to write tests which assert a value against a reference snapshot.
-This reference snapshot, is a serialized representation of the original value
-and is stored alongside the test file.
+[snapshot module](https://deno.land/std@$STD_VERSION/testing/snapshot.ts), which
+enables developers to write tests which assert a value against a reference
+snapshot. This reference snapshot, is a serialized representation of the
+original value and is stored alongside the test file.
 
 Snapshot testing can be useful in many cases, as it enables catching a wide
 array of bugs with very little code. It is particularly helpful in situations
@@ -19,9 +19,10 @@ The `assertSnapshot` function will create a snapshot of a value and compare it
 to a reference snapshot, which is stored alongside the test file in the
 `__snapshots__` directory.
 
-```ts
-// example_test.ts
-import { assertSnapshot } from "https://deno.land/std/testing/snapshot.ts";
+```ts title="example_test.ts"
+import {
+  assertSnapshot,
+} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
 
 Deno.test("isSnapshotMatch", async function (t): Promise<void> {
   const a = {
@@ -32,8 +33,7 @@ Deno.test("isSnapshotMatch", async function (t): Promise<void> {
 });
 ```
 
-```js
-// __snapshots__/example_test.ts.snap
+```js title="__snapshots__/example_test.ts.snap"
 export const snapshot = {};
 
 snapshot[`isSnapshotMatch 1`] = `
@@ -88,8 +88,10 @@ snapshots locally.
 The `assertSnapshot` function can also be called with an options object which
 offers greater flexibility and enables some non standard use cases.
 
-```ts, ignore
-import { assertSnapshot } from "https://deno.land/std/testing/snapshot.ts";
+```ts
+import {
+  assertSnapshot,
+} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
 
 Deno.test("isSnapshotMatch", async function (t): Promise<void> {
   const a = {
@@ -114,10 +116,12 @@ The result of the serializer function will be written to the snapshot file in
 update mode, and in assert mode will be compared to the snapshot stored in the
 snapshot file.
 
-```ts, ignore
-// example_test.ts
-import { assertSnapshot, serialize } from "https://deno.land/std/testing/snapshot.ts";
-import { stripColor } from "https://deno.land/std/fmt/colors.ts";
+```ts title="example_test.ts"
+import {
+  assertSnapshot,
+  serialize,
+} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
+import { stripColor } from "https://deno.land/std@$STD_VERSION/fmt/colors.ts";
 
 /**
  * Serializes `actual` and removes ANSI escape codes.
@@ -134,8 +138,7 @@ Deno.test("Custom Serializer", async function (t): Promise<void> {
 });
 ```
 
-```js
-// __snapshots__/example_test.ts.snap
+```js title="__snapshots__/example_test.ts.snap"
 export const snapshot = {};
 
 snapshot[`Custom Serializer 1`] = `"Hello World!"`;
@@ -201,9 +204,10 @@ The `name` option specifies the name of the snapshot. By default, the name of
 the test step will be used. However, if specified, the `name` option will be
 used instead.
 
-```ts, ignore
-// example_test.ts
-import { assertSnapshot } from "https://deno.land/std/testing/snapshot.ts";
+```ts title="example_test.ts"
+import {
+  assertSnapshot,
+} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
 
 Deno.test("isSnapshotMatch", async function (t): Promise<void> {
   const a = {
@@ -211,13 +215,12 @@ Deno.test("isSnapshotMatch", async function (t): Promise<void> {
     example: 123,
   };
   await assertSnapshot(t, a, {
-    name: "Test Name"
+    name: "Test Name",
   });
 });
 ```
 
-```js
-// __snapshots__/example_test.ts.snap
+```js title="__snapshots__/example_test.ts.snap"
 export const snapshot = {};
 
 snapshot[`Test Name 1`] = `
@@ -241,9 +244,10 @@ error message, which includes the diff for failed snapshots.
 
 You can configure default options for `assertSnapshot`.
 
-```ts, ignore
-// example_test.ts
-import { createAssertSnapshot } from "https://deno.land/std/testing/snapshot.ts";
+```ts title="example_test.ts"
+import {
+  createAssertSnapshot,
+} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
 
 const assertSnapshot = createAssertSnapshot({
   // options
@@ -258,10 +262,11 @@ over the default options, where the value provided for an option differs.
 It is possible to "extend" an `assertSnapshot` function which has been
 configured with default options.
 
-```ts, ignore
-// example_test.ts
-import { createAssertSnapshot } from "https://deno.land/std/testing/snapshot.ts";
-import { stripColor } from "https://deno.land/std/fmt/colors.ts";
+```ts title="example_test.ts"
+import {
+  createAssertSnapshot,
+} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
+import { stripColor } from "https://deno.land/std@$STD_VERSION/fmt/colors.ts";
 
 const assertSnapshot = createAssertSnapshot({
   dir: ".snaps",
@@ -278,8 +283,7 @@ Deno.test("isSnapshotMatch", async function (t): Promise<void> {
 });
 ```
 
-```js
-// .snaps/example_test.ts.snap
+```js title=".snaps/example_test.ts.snap"
 export const snapshot = {};
 
 snapshot[`isSnapshotMatch 1`] = `This green text has had it's colours stripped`;
@@ -301,9 +305,10 @@ Doing so will ensure that the custom serialization will, by default, be used
 whenever the object is passed to `assertSnapshot`. This can be useful in many
 cases. One example is shown in the code snippet below.
 
-```ts, ignore
-// example_test.ts
-import { assertSnapshot } from "https://deno.land/std/testing/snapshot.ts";
+```ts title="example_test.ts"
+import {
+  assertSnapshot,
+} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
 
 class HTMLTag {
   constructor(
@@ -342,7 +347,7 @@ Deno.test("Page HTML Tree", async (t) => {
         "Simple SSR Example",
       ]),
       new HTMLTag("p", [
-        "This is an example of how Deno.customInspect could be used to snapshot an intermediate SSR representation",
+        "Ex of customInspect for a snapshot of an SSR representation",
       ]),
     ]),
   ]);
@@ -353,8 +358,7 @@ Deno.test("Page HTML Tree", async (t) => {
 
 This test will produce the following snapshot.
 
-```js
-// __snapshots__/example_test.ts.snap
+```js title="__snapshots__/example_test.ts.snap"
 export const snapshot = {};
 
 snapshot[`Page HTML Tree 1`] = `
@@ -369,7 +373,7 @@ snapshot[`Page HTML Tree 1`] = `
       Simple SSR Example
     </h1>
     <p>
-      This is an example of how Deno.customInspect could be used to snapshot an intermediate SSR representation
+      Ex of customInspect for a snapshot of an SSR representation
     </p>
   </body>
 </html>
@@ -379,8 +383,7 @@ snapshot[`Page HTML Tree 1`] = `
 In contrast, when we remove the `Deno.customInspect` method, the test will
 produce the following snapshot.
 
-```js
-// __snapshots__/example_test.ts.snap
+```js title="__snapshots__/example_test.ts.snap"
 export const snapshot = {};
 
 snapshot[`Page HTML Tree 1`] = `
@@ -407,7 +410,7 @@ HTMLTag {
         },
         HTMLTag {
           children: [
-            "This is an example of how Deno.customInspect could be used to snapshot an intermediate SSR representation",
+            "Ex of customInspect for a snapshot of an SSR representation",
           ],
           name: "p",
         },

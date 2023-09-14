@@ -146,8 +146,8 @@ These are contents of the certificate and key files, respectively.
 ```js
 Deno.serve({
   port: 443,
-  cert: Deno.readTextFile("./cert.pem"),
-  key: Deno.readTextFile("./key.pem"),
+  cert: Deno.readTextFileSync("./cert.pem"),
+  key: Deno.readTextFileSync("./key.pem"),
 }, handler);
 ```
 
