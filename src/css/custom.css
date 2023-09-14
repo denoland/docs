@@ -119,6 +119,13 @@ h3 {
   font-size: 1rem;
 }
 
+.subsection-header {
+  padding: 2px 0;
+  margin: 5px var(--ifm-menu-link-padding-horizontal);
+  border-bottom: 1px solid #aaa;
+  font-size: 0.8rem;
+}
+
 .menu__list-item {
   margin: 0 var(--ifm-menu-link-padding-horizontal);
 }

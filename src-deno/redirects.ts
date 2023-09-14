@@ -61,6 +61,28 @@ export default function configureRedirects(app: Hono) {
     );
   });
 
+  [
+    "apollo",
+    "express",
+    "mongoose",
+    "mysql2",
+    "planetscale",
+    "prisma",
+    "react",
+    "redis",
+    "vue",
+  ].forEach((slug) => {
+    app.get(
+      `/runtime/manual/node/how_to_with_npm/${slug}`,
+      (c) => c.redirect(`/runtime/tutorials/how_to_with_npm/${slug}`),
+    );
+  });
+
+  app.get(
+    "/runtime/manual/node/how_to_with_npm",
+    (c) => c.redirect("/runtime/tutorials"),
+  );
+
   // Redirect all manual paths - most should work
   app.all("/manual.*", (c) => {
     const unversionedPath = c.req.path.split("/").slice(2);

@@ -29,5 +29,17 @@ runtime.
 - [File System Events](./file_system_events.md)
 - [Module Metadata](./module_metadata.md)
 
+## npm module examples
+
+- [Apollo](./how_to_with_npm/apollo.md)
+- [Express](./how_to_with_npm/express.md)
+- [Mongoose](./how_to_with_npm/mongoose.md)
+- [MySQL](./how_to_with_npm/mysql2.md)
+- [PlanetScale](./how_to_with_npm/planetscale.md)
+- [Prisma](./how_to_with_npm/prisma.md)
+- [React](./how_to_with_npm/react.md)
+- [Redis](./how_to_with_npm/redis.md)
+- [Vue](./how_to_with_npm/vue.md)
+
 Additional examples can by found at
 [Deno by Example](https://examples.deno.land/).
