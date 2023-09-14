@@ -1,3 +1,8 @@
+---
+displayed_sidebar: runtimeBasicsHome
+pagination_next: manual/getting_started/installation
+---
+
 # Getting Started
 
 In this chapter we'll discuss:

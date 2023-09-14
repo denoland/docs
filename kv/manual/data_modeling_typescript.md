@@ -48,8 +48,7 @@ export interface Post {
 }
 ```
 
-This object model describes a blog post, authors, and an enumerated list of tags
-that could be applied to blog posts.
+This object model describes a blog post and an associated author.
 
 With Deno KV, you can use these TypeScript interfaces like
 [data transfer objects (DTOs)](https://martinfowler.com/bliki/LocalDTO.html) - a
@@ -89,10 +88,24 @@ const ac = r.value as Author;
 console.log(ac.fullName);
 ```
 
+You can also specify an optional
+[type parameter](https://deno.land/api?s=Deno.Kv&p=prototype.get&unstable) for
+`get`:
+
+```ts
+import { Author } from "./model.ts";
+
+const kv = await Deno.openKv();
+
+const r = await kv.get<Author>(["authors", "acdoyle"]);
+
+console.log(r.value.fullName);
+```
+
 For simpler data structures, this technique may be sufficient. But often, you
-will want or need to apply some business logic when creating your domain
-objects. When this need arises, you can develop a set of pure functions that can
-operate on your DTOs.
+will want or need to apply some business logic when creating or accessing your
+domain objects. When this need arises, you can develop a set of pure functions
+that can operate on your DTOs.
 
 ## Encapsulating business logic with a service layer
 
@@ -144,6 +157,8 @@ export async function getPost(slug: string): Promise<Post> {
 
 This thin layer uses a `RawPost` interface, which extends the actual `Post`
 interface, to include some additional data that is used to reference data at
-another index (the associated `Author` object). By putting the `get` and `set`
-operations on `Post` objects, we can apply additional business logic to getting
-and setting these values.
+another index (the associated `Author` object).
+
+The `savePost` and `getPost` functions take the place of a direct Deno KV `get`
+or `set` operation, so that they can properly serialize and "hydrate" model
+objects for us with appropriate types and associations.
