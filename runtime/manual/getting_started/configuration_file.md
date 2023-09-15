@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Configuration File
 
 Deno supports a configuration file that allows you to customize the built-in
@@ -13,11 +9,14 @@ Deno will automatically detect a `deno.json` or `deno.jsonc` configuration file
 if it's in your current working directory or parent directories. The `--config`
 flag can be used to specify a different configuration file.
 
-> ⚠️ Before Deno v1.23 you needed to supply an explicit `--config` flag.
+:::info Version notes
 
-> ⚠️ Starting with Deno v1.34 globs are supported in `include` and `exclude`
-> fields. You can use `*` to match any number of characters, `?` to match a
-> single character, and `**` to match any number of directories.
+- Before Deno v1.23, you needed to supply an explicit `--config` flag.
+- Starting with Deno v1.34, globs are supported in `include` and `exclude`
+  fields. You can use `*` to match any number of characters, `?` to match a
+  single character, and `**` to match any number of directories.
+
+:::
 
 ## `imports` and `scopes`
 
