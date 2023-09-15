@@ -267,7 +267,7 @@ console.log(`Started on http://localhost:3000`);
 To make GraphQL client calls in Deno, import the
 [graphql npm module](https://www.npmjs.com/package/graphql) with the
 [esm CDN](https://esm.sh/). To learn more about using npm modules in Deno via
-CDN read [here](../node/cdns.md)
+CDN read [here](../node/cdns.md).
 
 #### Make GraphQL client calls with the graphql npm module
 

@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Installation
 
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It

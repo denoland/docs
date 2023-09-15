@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Set Up Your Environment
 
 The Deno CLI contains a lot of the tools that are commonly needed for developing
@@ -80,7 +76,6 @@ of such a configuration:
 
 ```lua
 local nvim_lsp = require('lspconfig')
-
 nvim_lsp.denols.setup {
   on_attach = on_attach,
   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),

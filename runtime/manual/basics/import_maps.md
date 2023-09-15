@@ -40,9 +40,7 @@ written something similar in our `deno.json` configuration file:
 
 ## Example - Using deno_std's fmt module via `fmt/`
 
-**deno.json**
-
-```json
+```json title="deno.json"
 {
   "imports": {
     "fmt/": "https://deno.land/std@$STD_VERSION/fmt/"
@@ -50,9 +48,7 @@ written something similar in our `deno.json` configuration file:
 }
 ```
 
-**color.ts**
-
-```ts, ignore
+```ts title="color.ts"
 import { red } from "fmt/colors.ts";
 
 console.log(red("hello world"));
@@ -62,9 +58,7 @@ console.log(red("hello world"));
 
 To use your project root for absolute imports:
 
-**deno.json**
-
-```jsonc
+```json title="deno.json"
 {
   "imports": {
     "/": "./",
@@ -73,9 +67,7 @@ To use your project root for absolute imports:
 }
 ```
 
-**main.ts**
-
-```ts, ignore
+```ts title="main.ts"
 import { MyUtil } from "/util.ts";
 ```
 
@@ -95,7 +87,7 @@ scope in the import map that looks something like this:
 ```json
 {
   "imports": {
-    "https://deno.land/std@0.177.0/": "https://deno.land/std/"
+    "https://deno.land/std@0.177.0/": "https://deno.land/std@$STD_VERSION/"
   },
   "scopes": {
     "https://deno.land/x/example/": {
