@@ -1,3 +1,5 @@
+import { replacements } from "@site/src/components/Replacement";
+
 # Reloading Modules
 
 By default, a module in the cache will be reused without fetching or
@@ -17,7 +19,9 @@ deno cache --reload my_module.ts
 Sometimes we want to upgrade only some modules. You can control it by passing an
 argument to a `--reload` flag.
 
-To reload all \$STD_VERSION standard modules:
+<p>
+  To reload all <code>{ replacements.STD_VERSION }</code> standard modules:
+</p>
 
 ```bash
 deno cache --reload=https://deno.land/std@$STD_VERSION my_module.ts
