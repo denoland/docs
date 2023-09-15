@@ -1,8 +1,4 @@
----
-sidebar_position: 1
----
-
-# ECMAScript Modules in Deno
+# Modules
 
 ## Concepts
 

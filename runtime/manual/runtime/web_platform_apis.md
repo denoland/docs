@@ -1,12 +1,13 @@
 # Using Web Platform APIs
 
-Deno aims to use web platform APIs (like `fetch`) instead of inventing a new
-proprietary API where it makes sense. These APIs generally follow the
-specifications and should match the implementation in Chrome and Firefox. In
-some cases it makes sense to deviate from the spec slightly, because of the
-different security model Deno has.
+One way Deno simplifies web and cloud development is by using Web Platform APIs
+(like `fetch`) over proprietary APIs. This means if you've ever built for the
+browser, you're likely already familiar with Deno, and if you're learning Deno,
+you're also investing in your knowledge of the web.
 
-Here is a list of web platform APIs Deno implements:
+## Supported APIs
+
+Here's a partial list of supported web platform APIs in Deno:
 
 - [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob)
 - [BroadcastChannel](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
@@ -33,7 +34,12 @@ Here is a list of web platform APIs Deno implements:
 - [Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Worker)
 - [`WebSocket`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
 
-You can find the Deno reference for these APIs [here](https://deno.land/api).
+You can find the Deno reference for these APIs [here](https://deno.land/api). To
+check if a Web Platform API is available in Deno, click on
+[the interface on MDN](https://developer.mozilla.org/en-US/docs/Web/API#interfaces)
+and refer to
+[its Browser Compatibility table](https://developer.mozilla.org/en-US/docs/Web/API/AbortController#browser_compatibility)
+(link as an example).
 
 ## `fetch` API
 

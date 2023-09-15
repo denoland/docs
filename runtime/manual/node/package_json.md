@@ -5,9 +5,7 @@ current or ancestor directories. This is similar to how Node.js resolves
 dependencies. We recommend using import maps with `deno.json` which is explained
 [here](../basics/import_maps.md).
 
-**package.json**
-
-```json
+```json title="package.json"
 {
   "name": "@deno/my-example-project",
   "description": "An example app created with Deno",
@@ -21,9 +19,7 @@ dependencies. We recommend using import maps with `deno.json` which is explained
 }
 ```
 
-**main.ts**
-
-```ts, ignore
+```ts title="main.ts"
 import chalk from "chalk";
 
 console.log(chalk.green("Hello from Deno!"));
@@ -31,14 +27,14 @@ console.log(chalk.green("Hello from Deno!"));
 
 Then we can run this script:
 
-```shell, ignore
+```shell
 > deno run --allow-env --allow-sys main.ts
 Hello from Deno!
 ```
 
 Or also execute package.json scripts via `deno task`:
 
-```shell, ignore
+```shell
 > deno task dev
 Hello from Deno!
 ```
