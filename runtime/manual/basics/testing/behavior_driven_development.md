@@ -89,8 +89,10 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std/assert/mod.ts";
-import { User } from "https://deno.land/std/testing/bdd_examples/user.ts";
+} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import {
+  User,
+} from "https://deno.land/std@$STD_VERSION/testing/bdd_examples/user.ts";
 
 Deno.test("User.users initially empty", () => {
   assertEquals(User.users.size, 0);
@@ -134,14 +136,16 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std/assert/mod.ts";
+} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 import {
   afterEach,
   beforeEach,
   describe,
   it,
-} from "https://deno.land/std/testing/bdd.ts";
-import { User } from "https://deno.land/std/testing/bdd_examples/user.ts";
+} from "https://deno.land/std@$STD_VERSION/testing/bdd.ts";
+import {
+  User,
+} from "https://deno.land/std@$STD_VERSION/testing/bdd_examples/user.ts";
 
 describe("User", () => {
   it("users initially empty", () => {
@@ -196,9 +200,14 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std/assert/mod.ts";
-import { describe, it } from "https://deno.land/std/testing/bdd.ts";
-import { User } from "https://deno.land/std/testing/bdd_examples/user.ts";
+} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import {
+  describe,
+  it,
+} from "https://deno.land/std@$STD_VERSION/testing/bdd.ts";
+import {
+  User,
+} from "https://deno.land/std@$STD_VERSION/testing/bdd_examples/user.ts";
 
 const userTests = describe("User");
 
@@ -253,9 +262,14 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std/assert/mod.ts";
-import { describe, it } from "https://deno.land/std/testing/bdd.ts";
-import { User } from "https://deno.land/std/testing/bdd_examples/user.ts";
+} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import {
+  describe,
+  it,
+} from "https://deno.land/std@$STD_VERSION/testing/bdd.ts";
+import {
+  User,
+} from "https://deno.land/std@$STD_VERSION/testing/bdd_examples/user.ts";
 
 describe("User", () => {
   it("users initially empty", () => {

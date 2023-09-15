@@ -7,7 +7,7 @@ This tutorial will cover how to deploy a simple API on Deno Deploy.
 ```js
 // simple_api.js
 
-import { serve } from "https://deno.land/std@0.155.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 
 serve((req: Request) => new Response("Hello World"));
 ```

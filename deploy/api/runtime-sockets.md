@@ -19,7 +19,7 @@ function Deno.connect(options: ConnectOptions): Promise<Conn>
 ### Example
 
 ```js
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 
 async function handler(_req) {
   // Make a TCP connection to example.com
@@ -65,7 +65,7 @@ function Deno.connectTls(options: ConnectTlsOptions): Promise<Conn>
 ### Example
 
 ```js
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 
 async function handler(_req) {
   // Make a TLS connection to example.com

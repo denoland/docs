@@ -56,7 +56,7 @@ running instances in different regions and another to fetch all messages from an
 instance.
 
 ```ts
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 
 const messages = [];
 // Create a new broadcast channel named earth.

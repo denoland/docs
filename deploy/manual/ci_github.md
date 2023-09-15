@@ -98,7 +98,7 @@ process by leveraging the `deployctl` [Github action][deploy-action]:
    uses: denoland/deployctl@v1
    with:
        project: my-project
-       entrypoint: https://deno.land/std/http/file_server.ts
+       entrypoint: https://deno.land/std@$STD_VERSION/http/file_server.ts
        root: dist
    ```
 

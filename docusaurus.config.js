@@ -55,6 +55,9 @@ const config = {
         path: "deploy",
         routeBasePath: "/deploy",
         sidebarPath: require.resolve("./sidebars/deploy.js"),
+        remarkPlugins: [
+          findReplace,
+        ],
       },
     ],
     [
@@ -64,6 +67,9 @@ const config = {
         path: "kv",
         routeBasePath: "/kv",
         sidebarPath: require.resolve("./sidebars/kv.js"),
+        remarkPlugins: [
+          findReplace,
+        ],
       },
     ],
     // Enables our custom pages in "src" to use Tailwind classes

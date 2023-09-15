@@ -1,10 +1,10 @@
 # Snapshot Testing
 
 The Deno standard library comes with a
-[snapshot module](https://deno.land/std@$STD_VERSION/testing/snapshot.ts), which
-enables developers to write tests which assert a value against a reference
-snapshot. This reference snapshot, is a serialized representation of the
-original value and is stored alongside the test file.
+[snapshot module](https://deno.land/std/testing/snapshot.ts), which enables
+developers to write tests which assert a value against a reference snapshot.
+This reference snapshot, is a serialized representation of the original value
+and is stored alongside the test file.
 
 Snapshot testing can be useful in many cases, as it enables catching a wide
 array of bugs with very little code. It is particularly helpful in situations

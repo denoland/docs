@@ -12,11 +12,11 @@ Deploy lets you listen for incoming HTTP requests using the same
 level though, so instead of using this API directly we'll use the high level
 HTTP API exposed by [`std/http`][std-http].
 
-This API revolves around the
-[`serve`](https://deno.land/std@0.140.0/http/server.ts) function.
+This API revolves around the [`serve`](https://deno.land/std/http/server.ts)
+function.
 
 ```js
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 
 serve((_req) => {/* .. */});
 ```
@@ -34,7 +34,7 @@ underlying connection, such as the origin IP address. You must return a
 Let's use this information to finish our hello world script:
 
 ```js
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 
 serve((_req) => {
   return new Response("Hello World!", {
