@@ -5,19 +5,14 @@ differences to take into account between the Node and Deno runtimes. This guide
 will attempt to call out several of those differences, and describe how you can
 begin to migrate your Node.js project to work on Deno.
 
-> Node.js compatibility is an ongoing project in Deno - you may encounter some
-> modules or packages on npm that do not work as you expect. If you do run into
-> a problem with Node.js compatibility, please let us know by
-> [opening an issue on GitHub](https://github.com/denoland/deno/issues).
+:::info About Node.js Compatibility
 
-**On this page:**
+Node.js compatibility is an ongoing project in Deno - you may encounter some
+modules or packages on npm that do not work as you expect. If you do run into a
+problem with Node.js compatibility, please let us know by
+[opening an issue on GitHub](https://github.com/denoland/deno/issues).
 
-- [Module imports and exports](#module-imports-and-exports)
-- [Node.js built-ins](#nodejs-built-ins)
-- [Runtime permission system](#runtime-permissions-in-deno)
-- [npm scripts](#running-npm-scripts-in-deno)
-- [Using and managing npm dependencies](#using-and-managing-npm-dependencies)
-- [Node.js global objects](#nodejs-global-objects)
+:::
 
 ## Module imports and exports
 
@@ -31,16 +26,12 @@ be changed as well.
 Consider the following two files in a Node.js program, located in the same
 directory:
 
-**`index.js`**
-
-```js
+```js title="index.js"
 const addNumbers = require("./add_numbers");
 console.log(addNumbers(2, 2));
 ```
 
-**`add_numbers.js`**
-
-```js
+```js title="add_numbers.js"
 module.exports = function addNumbers(num1, num2) {
   return num1 + num2;
 };
@@ -56,7 +47,7 @@ module.
 
 Replace `require` statements with an `import`, like so:
 
-```
+```js
 import addNumbers from "./add_numbers.js";
 ```
 
@@ -70,7 +61,7 @@ of files named `index.js`.
 In the `add_numbers.js` file that exports the function, we would use a default
 export from ES6 modules rather than the `module.exports` provided by CommonJS.
 
-```js
+```js title="add_numbers.js"
 export default function addNumbers(num1, num2) {
   return num1 + num2;
 }
@@ -86,9 +77,7 @@ In Node.js 20 and earlier, built-in modules in the Node.js standard library
 could be imported with "bare specifiers". Consider the Node program below with a
 `.mjs` extension:
 
-**`index.mjs`**
-
-```
+```js title="index.mjs"
 import * as os from "os";
 console.log(os.cpus());
 ```
@@ -96,9 +85,13 @@ console.log(os.cpus());
 The [`os` module](https://nodejs.org/api/os.html#oscpus) is built in to the
 Node.js runtime, and can be imported using a bare specifier as above.
 
-> **NOTE:** The `.mjs` file extension is supported but not required in Deno.
-> Because Node doesn't support ESM by default, it requires you to name any files
-> that use ESM with a `.mjs` file extension.
+:::info .mjs extensions not required in Deno
+
+The `.mjs` file extension is supported but not required in Deno. Because Node
+doesn't support ESM by default, it requires you to name any files that use ESM
+with a `.mjs` file extension.
+
+:::
 
 Deno provides a compatibility layer that allows the use of Node.js built-in APIs
 within Deno programs. However, in order to use them, you will need to add the
@@ -133,7 +126,7 @@ will likely prompt you for access to the permissions it needs to execute your
 code. Consider the following simple [express](https://expressjs.com/) server:
 
 ```js
-import express from "npm:express";
+import express from "npm:express@4";
 
 const app = express();
 
@@ -152,7 +145,7 @@ show you what runtime permission flags need to be passed in to grant the access
 you need. Running the code above with the necessary permissions provided would
 look like this:
 
-```plain
+```shell
 deno run --allow-net --allow-read --allow-env server.js
 ```
 
@@ -180,7 +173,7 @@ run your programs with all runtime permissions enabled. This would be the
 default behavior of Node, which lacks a permission system. To run a program with
 all permissions enabled, you can do so with:
 
-```plain
+```shell
 deno run -A server.js
 ```
 
@@ -197,19 +190,15 @@ One of the ways [Deno supports existing `package.json` files](./package_json.md)
 is by executing any scripts configured there with `deno task`. Consider the
 following Node.js project with a package.json and a script configured within it.
 
-**`bin/my_task.mjs`**
-
-```js
+```js title="bin/my_task.mjs"
 console.log("running my task...");
 ```
 
-**`package.json`**
-
-```json
+```json title="package.json"
 {
   "name": "test",
   "scripts": {
-    "start": "node index.mjs"
+    "start": "node bin/my_task.mjs"
   }
 }
 ```
@@ -232,7 +221,7 @@ When importing npm packages, you would use the `npm:` specifier, much like you
 would the `node:` specifier for any built-in Node modules.
 
 ```js
-import express from "npm:express";
+import express from "npm:express@4";
 
 const app = express();
 

@@ -1,13 +1,12 @@
 # HTTP Server APIs
 
-Deno currently has three HTTP Server APIs:
+Deno currently has two HTTP Server APIs:
 
 - [`Deno.serve`](https://deno.land/api?s=Deno.serve): native, _higher-level_,
   supports HTTP/1.1 and HTTP2, this is the preferred API to write HTTP servers
   in Deno.
 - [`Deno.serveHttp`](https://deno.land/api?s=Deno.serveHttp): native,
   _low-level_, supports HTTP/1.1 and HTTP2.
-
 - [A "Hello World" server](#a-hello-world-server)
 - [Inspecting the incoming request](#inspecting-the-incoming-request)
 - [Responding with a response](#responding-with-a-response)

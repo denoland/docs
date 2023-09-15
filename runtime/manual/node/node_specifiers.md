@@ -6,7 +6,7 @@ Deno supports using Node.js built-in modules such as
 [process](https://nodejs.org/api/process.html#process), and many more via
 `node:` specifiers.
 
-```ts, ignore
+```ts
 import { readFileSync } from "node:fs";
 
 console.log(readFileSync("deno.json", { encoding: "utf8" }));
