@@ -1,5 +1,10 @@
 // Include main doc categories on most pages
 const mainMenu = [
+  {
+    type: "html",
+    value: "<div>Deno Deploy</div>",
+    className: "product-header",
+  },
   // https://docusaurus.io/docs/sidebar/items
   {
     type: "link",
@@ -27,7 +32,7 @@ const sidebars = {
   deployGuideHome: mainMenu.concat([
     {
       type: "html",
-      value: "<div>Deno Deploy Manual</div>",
+      value: "<div>Manual</div>",
       className: "section-header",
     },
     {
@@ -35,45 +40,54 @@ const sidebars = {
       label: "Quick Start",
       id: "manual/index",
     },
-    "manual/use-cases",
-    "manual/playgrounds",
-    "manual/how-to-deploy",
-    "manual/ci_github",
-    "manual/deployctl",
-    "manual/regions",
-    "manual/pricing-and-limits",
     {
-      type: "html",
-      value: "<div>Projects and organizations</div>",
-      className: "section-header",
-    },
-    "manual/deployments",
-    "manual/custom-domains",
-    "manual/environment-variables",
-    "manual/organizations",
-    "manual/logs",
-    {
-      type: "html",
-      value: "<div>Connect to databases</div>",
-      className: "section-header",
+      type: "category",
+      label: "Deploy Basics",
+      items: [
+        "manual/use-cases",
+        "manual/playgrounds",
+        "manual/how-to-deploy",
+        "manual/ci_github",
+        "manual/deployctl",
+        "manual/regions",
+        "manual/pricing-and-limits",
+      ],
     },
     {
-      type: "link",
-      href: "/kv/manual/on_deploy",
-      label: "Deno KV",
+      type: "category",
+      label: "Projects & Organizations",
+      items: [
+        "manual/deployments",
+        "manual/custom-domains",
+        "manual/environment-variables",
+        "manual/organizations",
+        "manual/logs",
+      ],
     },
-    "manual/dynamodb",
-    "manual/faunadb",
-    "manual/firebase",
-    "manual/postgres",
     {
-      type: "html",
-      value: "<div>Policies and Fair Use</div>",
-      className: "section-header",
+      type: "category",
+      label: "Connect to Databases",
+      items: [
+        {
+          type: "link",
+          href: "/kv/manual/on_deploy",
+          label: "Deno KV",
+        },
+        "manual/dynamodb",
+        "manual/faunadb",
+        "manual/firebase",
+        "manual/postgres",
+      ],
     },
-    "manual/fair-use-policy",
-    "manual/privacy-policy",
-    "manual/security",
+    {
+      type: "category",
+      label: "Policies & Fair Use",
+      items: [
+        "manual/fair-use-policy",
+        "manual/privacy-policy",
+        "manual/security",
+      ],
+    },
     {
       type: "html",
       value: '<div style="height: 30px;"></div>',
