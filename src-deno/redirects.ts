@@ -83,6 +83,8 @@ export default function configureRedirects(app: Hono) {
     );
   });
 
+  r("/runtime/manual/testing", "/runtime/manual/basics/testing");
+
   r(
     "/runtime/manual/advanced/typescript",
     "/runtime/manual/advanced/typescript/overview",
@@ -172,6 +174,8 @@ export default function configureRedirects(app: Hono) {
     "/runtime/manual/basics/debugging_your_code",
   );
 
+  r("/runtime/manual/npm_nodejs/cdns", "/runtime/manual/node/cdns");
+
   r(
     "/runtime/manual/using_deno_with_other_technologies/node/cdns",
     "/runtime/manual/node/cdns",
@@ -180,6 +184,21 @@ export default function configureRedirects(app: Hono) {
   r(
     "/runtime/manual/testing/documentation",
     "/runtime/manual/basics/testing/documentation",
+  );
+
+  r(
+    "/runtime/manual/typescript/types",
+    "/runtime/manual/advanced/typescript/types",
+  );
+
+  r(
+    "/runtime/manual/basics/modules/import_maps",
+    "/runtime/manual/basics/import_maps",
+  );
+
+  r(
+    "/runtime/manual/npm_nodejs/std_node",
+    "/runtime/manual/node",
   );
 
   app.get(
