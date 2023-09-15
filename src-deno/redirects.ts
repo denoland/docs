@@ -172,6 +172,16 @@ export default function configureRedirects(app: Hono) {
     "/runtime/manual/basics/debugging_your_code",
   );
 
+  r(
+    "/runtime/manual/using_deno_with_other_technologies/node/cdns",
+    "/runtime/manual/node/cdns",
+  );
+
+  r(
+    "/runtime/manual/testing/documentation",
+    "/runtime/manual/basics/testing/documentation",
+  );
+
   app.get(
     "/runtime/manual/node/how_to_with_npm",
     (c) => c.redirect("/runtime/tutorials"),
