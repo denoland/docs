@@ -149,7 +149,7 @@ export {
   assert,
   assertEquals,
   assertStringIncludes,
-} from "https://deno.land/std/assert/mod.ts";
+} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 ```
 
 And throughout the same project, you can import from the `deps.ts` and avoid

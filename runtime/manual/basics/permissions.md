@@ -100,7 +100,7 @@ This example restricts file system access by allowing read-only access to the
 attempting to read a file in the `/etc` directory:
 
 ```shell
-$ deno run --allow-read=/usr https://deno.land/std/examples/cat.ts /etc/passwd
+$ deno run --allow-read=/usr https://deno.land/std@$STD_VERSION/examples/cat.ts /etc/passwd
 error: Uncaught PermissionDenied: read access to "/etc/passwd", run again with the --allow-read flag
 ► $deno$/dispatch_json.ts:40:11
     at DenoError ($deno$/errors.ts:20:5)
@@ -111,15 +111,15 @@ Try it out again with the correct permissions by allowing access to `/etc`
 instead:
 
 ```shell
-deno run --allow-read=/etc https://deno.land/std/examples/cat.ts /etc/passwd
+deno run --allow-read=/etc https://deno.land/std@$STD_VERSION/examples/cat.ts /etc/passwd
 ```
 
 You can further restrict some sub-paths to not be accessible, using
 `--deny-read` flag:
 
 ```shell
-deno run --allow-read=/etc --deny-read=/etc/hosts https://deno.land/std/examples/cat.ts /etc/passwd
-deno run --allow-read=/etc --deny-read=/etc/hosts https://deno.land/std/examples/cat.ts /etc/hosts
+deno run --allow-read=/etc --deny-read=/etc/hosts https://deno.land/std@$STD_VERSION/examples/cat.ts /etc/passwd
+deno run --allow-read=/etc --deny-read=/etc/hosts https://deno.land/std@$STD_VERSION/examples/cat.ts /etc/hosts
 error: Uncaught PermissionDenied: read access to "/etc/hosts"...
 ```
 

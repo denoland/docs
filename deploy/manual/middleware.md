@@ -16,7 +16,7 @@ On the next page, copy and paste the code below into the editor. It is an HTTP
 server that proxies all requests to https://example.com.
 
 ```ts
-import { serve } from "https://deno.land/std/http/mod.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/mod.ts";
 async function reqHandler(req: Request) {
   const reqPath = new URL(req.url).pathname;
   return await fetch("https://example.com" + reqPath, { headers: req.headers });

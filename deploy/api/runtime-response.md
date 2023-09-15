@@ -65,7 +65,7 @@ The return type is a `Response` instance.
 ## Example
 
 ```ts
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 
 function handler(_req) {
   // Create a response with html as its body.

@@ -134,6 +134,17 @@ import Replacement from "@site/src/components/Replacement";
 The current CLI version is **<Replacement for="CLI_VERSION"/>**.
 ```
 
+If you are writing inline JSX, you can also use the replacements object directly
+like so:
+
+```mdx
+import { replacements } from "@site/src/components/Replacement";
+
+<p>
+  The current CLI version is <code>{ replacements.CLI_VERSION }</code>.
+</p>
+```
+
 ## Server-side code and redirects
 
 The Deno code that serves the site in production is in the `src-deno` folder.

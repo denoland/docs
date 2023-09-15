@@ -75,7 +75,7 @@ deno run first_steps.ts
 Or, try this script hosted at `https://deno.land/std/examples/curl.ts`:
 
 ```shell
-deno run https://deno.land/std/examples/curl.ts https://deno.com
+deno run https://deno.land/std@$STD_VERSION/examples/curl.ts https://deno.com
 ```
 
 The program will display a prompt like this:
@@ -148,7 +148,7 @@ One of the most common use cases for Deno is building an HTTP Server.
 Create a new file called `http_server.ts` and copy and paste the code below:
 
 ```ts
-import { serve } from "https://deno.land/std/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 
 const handler = async (_request: Request): Promise<Response> => {
   const resp = await fetch("https://api.github.com/users/denoland", {

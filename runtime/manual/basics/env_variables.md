@@ -33,7 +33,7 @@ To access the environment variables in the `.env` file, import the `load`
 function from the standard library. Then, import the configuration using it.
 
 ```ts
-import { load } from "https://deno.land/std/dotenv/mod.ts";
+import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
 
 const env = await load();
 const password = env["PASSWORD"];
@@ -45,5 +45,5 @@ console.log(password);
 ## `std/flags`
 
 The Deno standard library has a
-[`std/flags` module](https://deno.land/std/flags/mod.ts) for
-parsing command line arguments.
+[`std/flags` module](https://deno.land/std/flags/mod.ts) for parsing command
+line arguments.

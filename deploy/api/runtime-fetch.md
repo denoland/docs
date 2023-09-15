@@ -5,10 +5,8 @@ allows you to make outbound HTTP requests in Deno Deploy. It is a web standard
 and has the following interfaces:
 
 - `fetch()` - The method that allows you to make outbound HTTP requests
-- [`Request`](./runtime-request) - represents a request resource of
-  fetch()
-- [`Response`](./runtime-response) - represents a response resource of
-  fetch()
+- [`Request`](./runtime-request) - represents a request resource of fetch()
+- [`Response`](./runtime-response) - represents a response resource of fetch()
 - [`Headers`](./runtime-headers) - represents HTTP Headers of requests and
   responses.
 
@@ -16,8 +14,7 @@ This page shows usage for the fetch() method. You can click above on the other
 interfaces to learn more about them.
 
 Fetch also supports fetching from file URLs to retrieve static files. For more
-info on static files, see the
-[filesystem API documentation](./runtime-fs).
+info on static files, see the [filesystem API documentation](./runtime-fs).
 
 ## `fetch()`
 
@@ -33,8 +30,8 @@ function fetch(
 
 #### Parameters
 
-| name     | type                                                                | optional | description                                                        |
-| -------- | ------------------------------------------------------------------- | -------- | ------------------------------------------------------------------ |
+| name     | type                                                          | optional | description                                                        |
+| -------- | ------------------------------------------------------------- | -------- | ------------------------------------------------------------------ |
 | resource | [`Request`](./runtime-request) <br/> [`USVString`][usvstring] | `false`  | The resource can either be a request object or a URL string.       |
 | init     | [`RequestInit`](./runtime-request#requestinit)                | `true`   | The init object lets you apply optional parameters to the request. |
 
@@ -47,7 +44,7 @@ The Deno Deploy script below makes a `fetch()` request to the GitHub API for
 each incoming request, and then returns that response from the handler function.
 
 ```js
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 
 async function handler(req: Request): Promise<Response> {
   const resp = await fetch("https://api.github.com/users/denoland", {

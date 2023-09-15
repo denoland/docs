@@ -79,6 +79,8 @@ resolve this, make sure to set some unique `root_dir` for both `tsserver` and
 of such a configuration:
 
 ```lua
+local nvim_lsp = require('lspconfig')
+
 nvim_lsp.denols.setup {
   on_attach = on_attach,
   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),

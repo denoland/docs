@@ -90,7 +90,7 @@ left navigation menu, and press "Open Playground". Let's start by the `std/http`
 module so we can start serving HTTP requests:
 
 ```ts
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 
 serve(async (req) => {
   return new Response("Not Found", { status: 404 });
@@ -105,7 +105,7 @@ Next, let's import the Postgres module, read the connection string from the
 environment variables, and create a connection pool.
 
 ```ts
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 import * as postgres from "https://deno.land/x/postgres@v0.14.0/mod.ts";
 
 // Get the connection string from the environment variable "DATABASE_URL"

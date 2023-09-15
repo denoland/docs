@@ -4,6 +4,8 @@ sidebar_position: 1
 pagination_next: manual/getting_started/installation
 ---
 
+import { replacements } from "@site/src/components/Replacement";
+
 # Deno Runtime Quick Start
 
 [Deno](https://www.deno.com)
@@ -259,7 +261,7 @@ above. Deno provides a [built-in test runner](./basics/testing/index.md), which
 uses an assertion module distributed via HTTPS URL.
 
 ```ts title="person_test.ts"
-import { assertEquals } from "https://deno.land/std/assert/mod.ts";
+import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 import Person, { sayHello } from "./person.ts";
 
 Deno.test("sayHello function", () => {
@@ -302,8 +304,12 @@ file acts a bit like a `package.json` file in Node.js.
 
 One of the things you can use `deno.json` for is configuring an
 [import map](./basics/import_maps.md), which will let you set up aliases for
-frequently used modules. To demonstrate, let's pin the version of the standard
-library we want to use in our project to version `0.200.0`.
+frequently used modules. 
+
+<p>
+  To demonstrate, let's pin the version of the standard library we want to 
+  use in our project to version <code>{ replacements.STD_VERSION }</code>.
+</p>
 
 Create a `deno.jsonc` file with the following contents.
 
@@ -312,7 +318,7 @@ Create a `deno.jsonc` file with the following contents.
   "imports": {
     // The dollar sign in front of "std" isn't special - it's an optional
     // convention to show that $std is an alias set up in an import map
-    "$std/": "https://deno.land/std@0.200.0/"
+    "$std/": "https://deno.land/std@$STD_VERSION/"
   }
 }
 ```

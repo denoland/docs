@@ -45,7 +45,7 @@ written something similar in our `deno.json` configuration file:
 ```json
 {
   "imports": {
-    "fmt/": "https://deno.land/std/fmt/"
+    "fmt/": "https://deno.land/std@$STD_VERSION/fmt/"
   }
 }
 ```
