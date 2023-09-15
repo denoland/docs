@@ -1,6 +1,11 @@
 import { Hono } from "./deps.ts";
 
 export default function configureRedirects(app: Hono) {
+  // helper to establish redirects
+  function r(from: string, to: string, status = 301) {
+    app.get(from, (c) => c.redirect(to, status));
+  }
+
   app.get("/", (c) => c.redirect("/runtime/manual"));
   app.get("/manual", (c) => c.redirect("/runtime/manual"));
   app.get("/runtime/manual/introduction", (c) => c.redirect("/runtime/manual"));
@@ -78,10 +83,74 @@ export default function configureRedirects(app: Hono) {
     );
   });
 
-  //https://docs.deno.com/runtime/manual/advanced/typescript/
-  app.get(
+  r(
     "/runtime/manual/advanced/typescript",
-    (c) => c.redirect("/runtime/manual/advanced/typescript/overview"),
+    "/runtime/manual/advanced/typescript/overview",
+  );
+
+  r(
+    "/runtime/manual/node/dnt",
+    "/runtime/manual/advanced/publishing/dnt",
+  );
+
+  r(
+    "/runtime/manual/typescript",
+    "/runtime/manual/advanced/typescript/overview",
+  );
+
+  r(
+    "/runtime/manual/typescript/overview",
+    "/runtime/manual/advanced/typescript/overview",
+  );
+
+  r(
+    "/runtime/manual/getting_started/typescript",
+    "/runtime/manual/advanced/typescript/overview",
+  );
+
+  r(
+    "/runtime/manual/typescript/typescript/faqs",
+    "/runtime/manual/advanced/typescript/faqs",
+  );
+
+  r(
+    "/runtime/manual/vscode_deno",
+    "/runtime/manual/references/vscode_deno",
+  );
+
+  r(
+    "/runtime/manual/advanced/publishing/0",
+    "/runtime/manual/advanced/publishing",
+  );
+
+  r(
+    "/runtime/manual/getting_started/webassembly",
+    "/runtime/manual/runtime/webassembly",
+  );
+
+  r(
+    "/runtime/manual/basics/permissionsDeno",
+    "/runtime/manual/basics/permissions",
+  );
+
+  r(
+    "/runtime/manual/contributing/style_guide",
+    "/runtime/manual/references/contributing/style_guide",
+  );
+
+  r(
+    "/runtime/manual/jsx_dom/linkedom",
+    "/runtime/manual/advanced/jsx_dom/linkedom",
+  );
+
+  r(
+    "/runtime/manual/npm_nodejs/compatibility_mode",
+    "/runtime/manual/node/compatibility",
+  );
+
+  r(
+    "/runtime/manual/runtime/navigator_api",
+    "/runtime/manual/runtime/web_platform_apis",
   );
 
   app.get(
@@ -100,6 +169,7 @@ export default function configureRedirects(app: Hono) {
     "discord-slash",
     "fresh",
     "simple-api",
+    "static-site",
     "tutorial-blog-fresh",
     "tutorial-dynamodb",
     "tutorial-faunadb",
