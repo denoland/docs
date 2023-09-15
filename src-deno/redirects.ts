@@ -153,6 +153,22 @@ export default function configureRedirects(app: Hono) {
     "/runtime/manual/runtime/web_platform_apis",
   );
 
+  r("/runtime/manual/jsx_dom/twind", "/runtime/manual/advanced/jsx_dom/twind");
+
+  r(
+    "/runtime/manual/using_deno_with_other_technologies/jsx_dom",
+    "/runtime/manual/advanced/jsx_dom/overview",
+  );
+
+  r(
+    "/runtime/manual/linking_to_external_code/reloading_modules",
+    "/runtime/manual/basics/modules/reloading_modules",
+  );
+
+  r("/runtime/manual/linkingtoexternal_code", "/runtime/manual/basics/modules");
+
+  r("");
+
   app.get(
     "/runtime/manual/node/how_to_with_npm",
     (c) => c.redirect("/runtime/tutorials"),
