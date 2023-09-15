@@ -78,6 +78,12 @@ export default function configureRedirects(app: Hono) {
     );
   });
 
+  //https://docs.deno.com/runtime/manual/advanced/typescript/
+  app.get(
+    "/runtime/manual/advanced/typescript",
+    (c) => c.redirect("/runtime/manual/advanced/typescript/overview"),
+  );
+
   app.get(
     "/runtime/manual/node/how_to_with_npm",
     (c) => c.redirect("/runtime/tutorials"),
