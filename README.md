@@ -181,6 +181,24 @@ If we decide we'd like to have "canary" docs for upcoming versions, we can
 discuss how to make that possible with
 [Docusaurus versions](https://docusaurus.io/docs/versioning).
 
+## Contribution
+
+We are very grateful for any help you can offer to improve Deno's documentation!
+For any small copy changes or fixes, please feel free to
+[submit a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+directly to the `main` branch of this repository.
+
+For larger changes, please
+[create a GitHub issue first](https://github.com/denoland/deno-docs/issues) to
+describe your proposed updates. It will be better to get feedback on your
+concept first before going to the trouble of writing a large number of docs!
+
+Over time, we will add more in the way of linting and formatting to the pull
+request process. But for now, you should merely ensure that `npm run build`
+succeeds without error before submitting a pull request. This will ensure that
+there are no broken links or invalid MDX syntax in the content you have
+authored.
+
 ## Deployment
 
 The `docs.deno.com` site is updated with every push to the `main` branch, which

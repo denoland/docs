@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # First Steps
 
 This page contains some examples to teach you about the fundamentals of Deno.
@@ -36,11 +32,11 @@ deno run first_steps.ts
 ```
 
 Deno also has the ability to execute scripts from URLs. Deno
-[hosts a library](https://deno.land/std/examples) of example code, one of which
-is a `Hello World` program. To run that hosted code, do:
+[hosts a library](https://examples.deno.land/) of example code, one of which is
+a `Hello World` program. To run that hosted code, do:
 
 ```shell
-deno run https://deno.land/std/examples/welcome.ts
+deno run https://examples.deno.land/hello-world.ts
 ```
 
 ## Making an HTTP request
@@ -72,10 +68,10 @@ Try it out:
 deno run first_steps.ts
 ```
 
-Or, try this script hosted at `https://deno.land/std/examples/curl.ts`:
+Or, try this script hosted at `https://deno.land/std@0.198.0/examples/curl.ts`:
 
 ```shell
-deno run https://deno.land/std@$STD_VERSION/examples/curl.ts https://deno.com
+deno run https://deno.land/std@0.198.0/examples/curl.ts https://deno.com
 ```
 
 The program will display a prompt like this:
@@ -101,14 +97,14 @@ deno run --allow-net=deno.com first_steps.ts
 Or, using the curl script:
 
 ```shell
-deno run --allow-net=deno.com https://deno.land/std/examples/curl.ts https://deno.com
+deno run --allow-net=deno.com https://deno.land/std@0.198.0/examples/curl.ts https://deno.com
 ```
 
 ## Reading a file
 
 Deno also provides APIs that do not come from the web. These are all contained
 in the `Deno` global. You can find documentation for these built-in APIs here at
-[`/api`](https://deno.land/api).
+[`/api`](/api).
 
 Filesystem APIs for example do not have a web standard form, so Deno provides
 its own API.
@@ -135,10 +131,10 @@ Try the program:
 
 ```shell
 # macOS / Linux
-deno run --allow-read https://deno.land/std/examples/cat.ts /etc/hosts
+deno run --allow-read https://deno.land/std@0.198.0/examples/cat.ts /etc/hosts
 
 # Windows
-deno run --allow-read https://deno.land/std/examples/cat.ts "C:\Windows\System32\Drivers\etc\hosts"
+deno run --allow-read https://deno.land/std@0.198.0/examples/cat.ts "C:\Windows\System32\Drivers\etc\hosts"
 ```
 
 ## Putting it all together in an HTTP server
@@ -199,5 +195,5 @@ You will see a JSON response from the Deno GitHub page.
 
 ## More examples
 
-You can find more examples in the [Examples](../../tutorials) chapter and at
+You can find more examples in the [Examples](../examples) chapter and at
 [Deno by Example](https://examples.deno.land/).
