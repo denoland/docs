@@ -111,12 +111,17 @@ h3 {
   position: relative;
 }
 
-.section-header {
-  padding: 5px 0;
-  margin: 10px var(--ifm-menu-link-padding-horizontal);
-  border-bottom: 1px solid #aaa;
+.section-header, .product-header {
   color: var(--ifm-navbar-link-color);
-  font-size: 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid #aaa;
+  margin: 10px var(--ifm-menu-link-padding-horizontal);
+}
+
+.product-header {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .subsection-header {
@@ -190,6 +195,14 @@ h3 {
 
 .icon-menu-option .menu__link {
   position: relative;
+}
+
+.icon-menu-option .menu__link--active {
+  background-color: transparent;
+}
+
+.icon-menu-option .menu__link--active:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .icon-menu-option .menu__link::before {

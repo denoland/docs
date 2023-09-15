@@ -6,6 +6,11 @@ const spacer = {
 // Include main doc categories on most pages
 const mainMenu = [
   // https://docusaurus.io/docs/sidebar/items
+  {
+    type: "html",
+    value: "<div>Deno Runtime</div>",
+    className: "product-header",
+  },
   /*
   {
     type: "doc",
@@ -40,7 +45,7 @@ const sidebars = {
   runtimeGuideHome: mainMenu.concat([
     {
       type: "html",
-      value: "<div>Deno Runtime Manual</div>",
+      value: "<div>Manual</div>",
       className: "section-header",
     },
     {
@@ -282,6 +287,7 @@ const sidebars = {
       value: "<div>Tutorials &amp; Examples</div>",
       className: "section-header",
     },
+    "tutorials/index",
     {
       type: "category",
       label: "Basic Examples",

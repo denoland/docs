@@ -2,6 +2,11 @@
 const mainMenu = [
   // https://docusaurus.io/docs/sidebar/items
   {
+    type: "html",
+    value: "<div>Deno KV</div>",
+    className: "product-header",
+  },
+  {
     type: "link",
     href: "/kv/manual",
     label: "Manual",
@@ -27,7 +32,7 @@ const sidebars = {
   kvGuideHome: mainMenu.concat([
     {
       type: "html",
-      value: "<div>Deno KV Manual</div>",
+      value: "<div>Manual</div>",
       className: "section-header",
     },
     {
