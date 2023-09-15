@@ -167,6 +167,11 @@ export default function configureRedirects(app: Hono) {
 
   r("/runtime/manual/linkingtoexternal_code", "/runtime/manual/basics/modules");
 
+  r(
+    "/runtime/manual/getting_started/debugging_your_code",
+    "/runtime/manual/basics/debugging_your_code",
+  );
+
   app.get(
     "/runtime/manual/node/how_to_with_npm",
     (c) => c.redirect("/runtime/tutorials"),
