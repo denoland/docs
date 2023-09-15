@@ -19,7 +19,7 @@ compilation errors or unexpected behavior:
 
 ```typescript
 // import the latest release, this should be avoided
-import { copy } from "https://deno.land/std@$STD_VERSION/fs/copy.ts";
+import { copy } from "https://deno.land/std/fs/copy.ts";
 ```
 
 instead, use a version of the std library which is immutable and will not
