@@ -158,7 +158,7 @@ console.log(await site.text());
 
 Run this program **without** the `-A` flag - what happens then?
 
-```ts
+```bash
 deno run hello.ts
 ```
 
@@ -172,6 +172,12 @@ kevin@kevin-deno scratchpad % deno run index.ts
 ├ Requested by `fetch()` API.
 ├ Run again with --allow-net to bypass this prompt.
 └ Allow? [y/n/A] (y = yes, allow; n = no, deny; A = allow all net permissions) >
+```
+
+In the prompt, you might have noticed that it mentions the CLI flag you'd need to run your code with permission to access the network - the `--allow-net` flag. If you run the script again using this flag, you won't be prompted to interactively grant network access to your script:
+
+```bash
+deno run --allow-net hello.ts
 ```
 
 For simplicity, we will sometimes show examples that use `deno run -A ...`, but
@@ -360,7 +366,7 @@ following - a simple HTTP server using the popular
 [Express](https://expressjs.com) framework.
 
 ```js
-import express from "npm:express";
+import express from "npm:express@4";
 
 const app = express();
 
@@ -405,11 +411,9 @@ exist in the Deno ecosystem. Here are a few of the most popular choices.
   Deno. Pages are server-rendered by default, with the option to include
   interactive islands that run JavaScript on the client. If you're new to Deno
   and looking for a place to start, we recommend trying Fresh first!
-- [Hono](https://hono.dev/) - Hono is a light-weight web framework in the
-  tradition of [Express](https://expressjs.com). Great for API servers and
-  simple web applications.
-- [Oak](https://deno.land/x/oak) - Oak is a middleware framework modeled after
-  [Koa](https://koajs.com/).
+- [Hono](https://hono.dev/getting-started/deno) - Hono is a light-weight web 
+  framework in the tradition of [Express](https://expressjs.com). Great for 
+  API servers and simple web applications.
 
 ### Deno-compatible frameworks
 
@@ -418,13 +422,11 @@ exist in the Deno ecosystem. Here are a few of the most popular choices.
   starting with
   [this template](https://github.com/denoland/deno-astro-template).
 - [SvelteKit](https://kit.svelte.dev/) - SvelteKit is another more
-  runtime-agnostic web framework that can be used with Deno. We recommend using
-  [this adapter](https://github.com/dbushell/sveltekit-adapter-deno) in your
-  SvelteKit application to use SvelteKit with Deno.
+  runtime-agnostic web framework that can be used with Deno. We recommend 
+  starting with [this template](https://github.com/denoland/deno-sveltekit-template).
 - [Nuxt (Vue)](https://nuxt.com/) - Nuxt is a hybrid SSR and client-side
-  framework that works with Deno.
-  [Follow these instructions](https://nitro.unjs.io/deploy/providers/deno) to
-  build this Nitro-based framework for Deno.
+  framework that works with Deno. We recommend 
+  starting with [this template](https://github.com/denoland/deno-nuxt-template).
 
 Many more frameworks support Deno than are listed here, but we'd recommend these
 as a great starting point.

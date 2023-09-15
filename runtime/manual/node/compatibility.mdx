@@ -5,30 +5,24 @@ Node compatibility is an ongoing project - help us identify gaps and let us know
 which modules you need by
 [opening an issue on GitHub](https://github.com/denoland/deno).
 
-### Fully supported built-in modules
+## Built-in module support
 
-- [`node:assert`](https://nodejs.org/api/assert.html)
-- [`node:assert/strict`](https://nodejs.org/api/assert.html)
-- [`node:buffer`](https://nodejs.org/api/buffer.html)
-- [`node:console`](https://nodejs.org/api/console.html)
-- [`node:dgram`](https://nodejs.org/api/dgram.html)
-- [`node:diagnostics_channel`](https://nodejs.org/api/diagnostics_channel.html)
-- [`node:events`](https://nodejs.org/api/events.html)
-- [`node:module`](https://nodejs.org/api/module.html)
-- [`node:os`](https://nodejs.org/api/os.html)
-- [`node:path`, `node:path/posix`, `node:path/win32`](https://nodejs.org/api/path.html)
-- [`node:punycode`](https://nodejs.org/api/punycode.html)
-- [`node:querystring`](https://nodejs.org/api/querystring.html)
-- [`node:readline`](https://nodejs.org/api/readline.html)
-- [`node:stream`, `node:stream/consumers`, `node:stream/promises`, `node:stream/web`](https://nodejs.org/api/stream.html)
-- [`node:sys`](https://nodejs.org/api/util.html)
-- [`node:timers`, `node:timers/promises`](https://nodejs.org/api/timers.html)
-- [`node:url`](https://nodejs.org/api/url.html)
-- [`node:util`, `node:util/types`](https://nodejs.org/api/util.html)
+✅ = Full support &nbsp; ℹ️ = Partial support &nbsp; ❌ = Stubs only
 
-### Partially supported built-in modules
-
-ℹ️ = Partial support &nbsp; ❌ = Stubs only
+<details>
+  <summary>
+    <code>node:assert</code>, <code>node:assert/strict</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/assert.html">Node.js docs</a>
+  </p>
+</details>
 
 <details>
   <summary>
@@ -44,6 +38,21 @@ which modules you need by
   </p>
   <p>
     <a href="https://nodejs.org/api/async_hooks.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:buffer</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/buffer.html">Node.js docs</a>
   </p>
 </details>
 
@@ -78,6 +87,21 @@ which modules you need by
 
 <details>
   <summary>
+    <code>node:console</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/console.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
     <code>node:crypto</code>
     <div style={{ float: "right" }}>
       <span>ℹ️</span>
@@ -99,6 +123,36 @@ which modules you need by
   </p>
   <p>
     <a href="https://nodejs.org/api/crypto.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:dgram</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/dgram.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:diagnostics_channel</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/diagnostics_channel.html">Node.js docs</a>
   </p>
 </details>
 
@@ -127,6 +181,21 @@ which modules you need by
   <p>All exports are non-functional stubs.</p>
   <p>
     <a href="https://nodejs.org/api/domain.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:events</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/events.html">Node.js docs</a>
   </p>
 </details>
 
@@ -224,6 +293,21 @@ which modules you need by
 
 <details>
   <summary>
+    <code>node:module</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/module.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
     <code>node:net</code>
     <div style={{ float: "right" }}>
       <span>ℹ️</span>
@@ -235,6 +319,36 @@ which modules you need by
   </p>
   <p>
     <a href="https://nodejs.org/api/net.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:os</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/os.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:path</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/path.html">Node.js docs</a>
   </p>
 </details>
 
@@ -257,6 +371,21 @@ which modules you need by
 
 <details>
   <summary>
+    <code>node:punycode</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/punycode.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
     <code>node:process</code>
     <div style={{ float: "right" }}>
       <span>ℹ️</span>
@@ -269,6 +398,36 @@ which modules you need by
   </p>
   <p>
     <a href="https://nodejs.org/api/process.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:querystring</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/querystring.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:readline</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/readline.html">Node.js docs</a>
   </p>
 </details>
 
@@ -291,6 +450,22 @@ which modules you need by
 
 <details>
   <summary>
+    <code>node:stream</code>, <code>node:stream/consumers</code>,&nbsp;
+    <code>node:stream/promises</code>, <code>node:stream/web</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/stream.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
     <code>node:string_decoder</code>
     <div style={{ float: "right" }}>
       <span>ℹ️</span>
@@ -307,6 +482,21 @@ which modules you need by
 
 <details>
   <summary>
+    <code>node:sys</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/util.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
     <code>node:test</code>
     <div style={{ float: "right" }}>
       <span>ℹ️</span>
@@ -317,6 +507,21 @@ which modules you need by
   </p>
   <p>
     <a href="https://nodejs.org/api/test.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:timers</code>, <code>node:timers/promises</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/timers.html">Node.js docs</a>
   </p>
 </details>
 
@@ -360,6 +565,36 @@ which modules you need by
   </p>
   <p>
     <a href="https://nodejs.org/api/tty.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:util</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/util.html">Node.js docs</a>
+  </p>
+</details>
+
+<details>
+  <summary>
+    <code>node:url</code>
+    <div style={{ float: "right" }}>
+      <span>✅</span>
+    </div>
+  </summary>
+  <p>
+    Fully supported.
+  </p>
+  <p>
+    <a href="https://nodejs.org/api/url.html">Node.js docs</a>
   </p>
 </details>
 
@@ -449,8 +684,6 @@ which modules you need by
 </details>
 
 ## Globals
-
-These global objects are fully supported in Deno:
 
 This is the list of Node globals that Deno supports. These globals are only
 available in the `npm` package scope. In your own code you can use them by
