@@ -104,7 +104,7 @@ deno run --allow-net=deno.com https://deno.land/std@0.198.0/examples/curl.ts htt
 
 Deno also provides APIs that do not come from the web. These are all contained
 in the `Deno` global. You can find documentation for these built-in APIs here at
-[`/api`](/api).
+[`/api`](https://deno.land/api).
 
 Filesystem APIs for example do not have a web standard form, so Deno provides
 its own API.
