@@ -93,7 +93,7 @@ Create a file called `server.ts` in your terminal, and include the following
 "Hello World" web server:
 
 ```ts title="server.ts"
-Deno.serve(() => return new Response("Hello, world!"));
+Deno.serve(() => new Response("Hello, world!"));
 ```
 
 You can test that it works by running it with the command below:
