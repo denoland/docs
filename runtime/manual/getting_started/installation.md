@@ -23,6 +23,12 @@ Using PowerShell (Windows):
 irm https://deno.land/install.ps1 | iex
 ```
 
+Using [Winget](https://github.com/microsoft/winget-cli) (Windows):
+
+```shell
+winget install deno
+```
+
 Using [Scoop](https://scoop.sh/) (Windows):
 
 ```shell
@@ -96,6 +102,12 @@ To update a previously installed version of Deno, you can run:
 
 ```shell
 deno upgrade
+```
+
+Or using [Winget](https://github.com/microsoft/winget-cli) (Windows):
+
+```shell
+winget upgrade deno
 ```
 
 This will fetch the latest release from
