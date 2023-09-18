@@ -110,6 +110,10 @@ Used to specify a different file name for the lockfile. By default deno will use
 
 Used to enable or disable the `node_modules` directory when using npm packages.
 
+## `npmRegistry`
+
+Used to specify a custom npm registry for npm specifiers.
+
 ## `compilerOptions`
 
 `deno.json` can also act as a TypeScript configuration file and supports
@@ -151,6 +155,7 @@ See also
   },
   "lock": false,
   "nodeModulesDir": true,
+  "npmRegistry": "https://mycompany.net/artifactory/api/npm/virtual-npm",
   "test": {
     "include": ["src/"],
     "exclude": ["src/testdata/", "data/fixtures/**/*.ts"]
