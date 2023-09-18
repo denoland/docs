@@ -1,59 +1,44 @@
 # Installation
 
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
-has no external dependencies.
-
-On macOS, both M1 (arm64) and Intel (x64) executables are provided. On Linux and
-Windows, only x64 is supported.
+has no external dependencies. On macOS, both M1 (arm64) and Intel (x64)
+executables are provided. On Linux and Windows, only x64 is supported.
 
 ## Download and install
 
 [deno_install](https://github.com/denoland/deno_install) provides convenience
 scripts to download and install the binary.
 
-Using Shell (macOS and Linux):
+import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
+
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="macOS" default>
+
+Using Shell:
 
 ```shell
 curl -fsSL https://deno.land/x/install/install.sh | sh
 ```
 
-Using PowerShell (Windows):
-
-```shell
-irm https://deno.land/install.ps1 | iex
-```
-
-Using [Scoop](https://scoop.sh/) (Windows):
-
-```shell
-scoop install deno
-```
-
-Using [Chocolatey](https://chocolatey.org/packages/deno) (Windows):
-
-```shell
-choco install deno
-```
-
-Using [Homebrew](https://formulae.brew.sh/formula/deno) (macOS):
+Using [Homebrew](https://formulae.brew.sh/formula/deno):
 
 ```shell
 brew install deno
 ```
 
-Using [MacPorts](https://ports.macports.org/port/deno/) (macOS):
+Using [MacPorts](https://ports.macports.org/port/deno/):
 
 ```shell
 sudo port install deno
 ```
 
-Using [Nix](https://nixos.org/download.html) (macOS and Linux):
+Using [Nix](https://nixos.org/download.html):
 
 ```shell
 nix-shell -p deno
 ```
 
-Using [asdf](https://asdf-vm.com/) (macOS and Linux):
+Using [asdf](https://asdf-vm.com/):
 
 ```shell
 asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
@@ -66,7 +51,60 @@ asdf global deno latest
 asdf local deno latest
 ```
 
-Build and install from source using [Cargo](https://crates.io/crates/deno):
+</TabItem>
+  <TabItem  value="windows" label="Windows">
+
+Using PowerShell (Windows):
+
+```powershell
+irm https://deno.land/install.ps1 | iex
+```
+
+Using [Scoop](https://scoop.sh/):
+
+```shell
+scoop install deno
+```
+
+Using [Chocolatey](https://chocolatey.org/packages/deno):
+
+```shell
+choco install deno
+```
+
+</TabItem>
+  <TabItem value="linux" label="Linux">
+
+Using Shell:
+
+```shell
+curl -fsSL https://deno.land/x/install/install.sh | sh
+```
+
+Using [Nix](https://nixos.org/download.html):
+
+```shell
+nix-shell -p deno
+```
+
+Using [asdf](https://asdf-vm.com/):
+
+```shell
+asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
+asdf install deno latest
+
+# To install globally
+asdf global deno latest
+
+# To install locally (current project only)
+asdf local deno latest
+```
+
+</TabItem>
+</Tabs>
+
+You can also build and install from source using
+[Cargo](https://crates.io/crates/deno):
 
 ```shell
 cargo install deno --locked
