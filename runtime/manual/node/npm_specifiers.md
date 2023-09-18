@@ -27,7 +27,7 @@ npm:<package-name>[@<version-requirement>][/<sub-path>]
 ```
 
 For examples with popular libraries, please refer to our
-[tutorial section](/runtime/tutorials).
+[how-to guides](/runtime/tutorials).
 
 ## TypeScript types
 
@@ -47,36 +47,6 @@ package:
 // @deno-types="npm:@types/express@^4.17"
 import express from "npm:express@^4.17";
 ```
-
-### Module resolution
-
-The official TypeScript compiler `tsc` supports different
-[moduleResolution](https://www.typescriptlang.org/tsconfig#moduleResolution)
-settings. Deno only supports the modern `node16` resolution. Unfortunately many
-NPM packages fail to correctly provide types under node16 module resolution,
-which can result in `deno check` reporting type errors, that `tsc` does not
-report.
-
-If a default export from an `npm:` import appears to have a wrong type (with the
-right type seemingly being available under the `.default` property), it's most
-likely that the package provides wrong types under node16 module resolution for
-imports from ESM. You can verify this by checking if the error also occurs with
-`tsc --module node16` and `"type": "module"` in `package.json` or by consulting
-the [Are the types wrong?](https://arethetypeswrong.github.io/) website
-(particularly the "node16 from ESM" row).
-
-If you want to use a package that doesn't support TypeScript's node16 module
-resolution, you can:
-
-1. Open an issue at the issue tracker of the package about the problem. (And
-   perhaps contribute a fix :) (Although there unfortunately currently is a lack
-   of tooling for packages to support both ESM and CJS, since default exports
-   require different syntaxes, see also
-   [microsoft/TypeScript#54593](https://github.com/microsoft/TypeScript/issues/54593))
-2. Use a [CDN](./cdns.md), that rebuilds the packages for Deno support, instead
-   of an `npm:` identifier.
-3. Ignore the type errors you get in your code base with `// @ts-expect-error`
-   or `// @ts-ignore`.
 
 ### Including Node types
 
