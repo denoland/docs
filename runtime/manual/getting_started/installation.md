@@ -72,6 +72,12 @@ Using [Chocolatey](https://chocolatey.org/packages/deno):
 choco install deno
 ```
 
+Using [Winget](https://github.com/microsoft/winget-cli):
+
+```shell
+winget install deno
+```
+
 </TabItem>
   <TabItem value="linux" label="Linux">
 
@@ -134,6 +140,12 @@ To update a previously installed version of Deno, you can run:
 
 ```shell
 deno upgrade
+```
+
+Or using [Winget](https://github.com/microsoft/winget-cli) (Windows):
+
+```shell
+winget upgrade deno
 ```
 
 This will fetch the latest release from
