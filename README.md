@@ -199,18 +199,6 @@ succeeds without error before submitting a pull request. This will ensure that
 there are no broken links or invalid MDX syntax in the content you have
 authored.
 
-## Special thanks for historical contributions
-
-This repository was created using content from the
-[Deno Manual](https://github.com/denoland/manual), a project contributed to by
-hundreds of developers since 2018. You can view a list of historical
-contributors to the Deno documentation in this repository and the manual with
-this command:
-
-```
-git shortlog -s -n
-```
-
 ## Deployment
 
 The `docs.deno.com` site is updated with every push to the `main` branch, which
