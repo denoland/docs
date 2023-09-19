@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    name: update versions.json
+    name: update replacements.json
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
