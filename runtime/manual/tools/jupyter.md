@@ -50,3 +50,10 @@ mapping a MIME type to a value that should be displayed.
 Since it's _just_ a function, you can use any library you want to format the
 output. This is not tied to Deno itself in any way, because we're using a
 regular JavaScript symbol index.
+
+## `jupyter console` integration
+
+You can also use Deno Jupyter kernel in the `jupyter console` REPL. To do that,
+you should launch your console with `jupyter console --kernel deno`.
+
+![Using the Deno kernel in a CLI](../images/jupyter-cli.gif)
