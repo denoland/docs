@@ -12,16 +12,16 @@ interface ReplacementsData {
 }
 
 const replacementsFile = $.path("replacements.json");
-const latestCliTag = await getLatestTagForRepo("deno");
-const latestStdTag = await getLatestTagForRepo("deno_std");
+const latestCliVersion = (await getLatestTagForRepo("deno")).replace("v", "");
+const latestStdVersion = await getLatestTagForRepo("deno_std");
 
-$.log(`cli tag: ${latestCliTag}`);
-$.log(`std tag: ${latestStdTag}`);
+$.log(`cli version: ${latestCliVersion}`);
+$.log(`std version: ${latestStdVersion}`);
 
 const replacements = replacementsFile.readJsonSync<ReplacementsData>();
 
-replacements.CLI_VERSION = latestCliTag;
-replacements.STD_VERSION = latestStdTag;
+replacements.CLI_VERSION = latestCliVersion;
+replacements.STD_VERSION = latestStdVersion;
 
 replacementsFile.writeJsonPrettySync(replacements);
 
@@ -49,12 +49,15 @@ async function tryCreatePr() {
   }
 
   // commit and push
-  const branchName = `bump_version${latestCliTag}`;
-  const commitMessage = `Updated files for ${latestCliTag}`;
+  const branchName = `bump_version${latestCliVersion}`;
+  const commitMessage = `Updated files for ${latestCliVersion}`;
   await $`git checkout -b ${branchName}`;
   await $`git commit -m ${commitMessage}`;
+  await $`git remote add denobot https://github.com/denobot/deno-docs`;
   $.logStep("Pushing branch...");
-  await $`git push -u origin HEAD`;
+  // note: if this push fails because of not having a "workflow" PAT permission,
+  // just ensure that denobot's main branch is synced with this repo
+  await $`git push -u denobot HEAD`;
 
   // open a PR
   $.logStep("Opening PR...");
@@ -62,18 +65,18 @@ async function tryCreatePr() {
   const openedPr = await octoKit.request("POST /repos/{owner}/{repo}/pulls", {
     ...getGitHubRepository(),
     base: "main",
-    head: branchName,
+    head: `denobot:${branchName}`,
     draft: false,
-    title: `chore: update for ${latestCliTag}`,
+    title: `chore: update for ${latestCliVersion}`,
     body: getPrBody(),
   });
   $.log(`Opened PR at ${openedPr.data.url}`);
 
   function getPrBody() {
-    let text = `Bumped versions for ${latestCliTag}\n\n` +
+    let text = `Bumped versions for ${latestCliVersion}\n\n` +
       `To make edits to this PR:\n` +
       "```shell\n" +
-      `git fetch upstream ${branchName} && git checkout -b ${branchName} upstream/${branchName}\n` +
+      `gh pr checkout <THIS PR NUMBER>\n` +
       "```\n";
 
     const actor = Deno.env.get("GH_WORKFLOW_ACTOR");
