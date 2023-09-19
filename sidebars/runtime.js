@@ -160,6 +160,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno jupyter",
+          id: "manual/tools/jupyter",
+        },
+        {
+          type: "doc",
           label: "deno lint",
           id: "manual/tools/linter",
         },

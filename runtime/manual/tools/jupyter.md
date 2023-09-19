@@ -1,11 +1,21 @@
-# Jupyter kernel
+# Jupyter Kernel for Deno
+
+<p>
+<span class="theme-doc-version-badge badge badge--secondary">
+Available since <b>1.37.0</b>
+</span>
+</p>
 
 Deno ships with a built-in Jupyter kernel that allows you to write JavaScript
 and TypeScript; use Web and Deno APIs and import `npm` packages straight in your
 interactive notebooks.
 
-> ℹ️ `deno jupyter` is currently an unstable feature and thus requires the
-> `--unstable` flag. We intend to stabilize this feature in an upcoming release.
+:::caution `deno jupyter` is currently unstable
+
+`deno jupyter` is currently an unstable feature and thus requires the
+`--unstable` flag. We intend to stabilize this feature in an upcoming release.
+
+:::
 
 ## Quickstart
 
@@ -17,7 +27,7 @@ kernel. Deno assumes that `jupyter` command is available in your `PATH`.
 After completing the installation process, the Deno kernel will be available in
 notebook creation dialog.
 
-![Jupyter notebook kernel selection](../../images/jupyter-notebook.png)
+![Jupyter notebook kernel selection](../images/jupyter_notebook.png)
 
 You can use Deno Jupyter kernel in any editor that supports Jupyter notebooks,
 eg. in VSCode, you can use
