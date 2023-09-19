@@ -55,6 +55,8 @@ async function tryCreatePr() {
   await $`git commit -m ${commitMessage}`;
   await $`git remote add denobot https://github.com/denobot/deno-docs`;
   $.logStep("Pushing branch...");
+  // note: if this push fails because of not having a "workflow" PAT permission,
+  // just ensure that denobot's main branch is synced with this repo
   await $`git push -u denobot HEAD`;
 
   // open a PR
