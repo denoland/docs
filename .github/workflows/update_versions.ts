@@ -74,7 +74,7 @@ async function tryCreatePr() {
     let text = `Bumped versions for ${latestCliVersion}\n\n` +
       `To make edits to this PR:\n` +
       "```shell\n" +
-      `git fetch upstream ${branchName} && git checkout -b ${branchName} upstream/${branchName}\n` +
+      `gh pr checkout <THIS PR NUMBER>\n` +
       "```\n";
 
     const actor = Deno.env.get("GH_WORKFLOW_ACTOR");
