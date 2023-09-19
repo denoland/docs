@@ -7,6 +7,7 @@ and TypeScript:
 - [benchmarker (`deno bench`)](./benchmarker.md)
 - [compiling executables (`deno compile`)](./compiler.md)
 - [installer (`deno install`)](./script_installer.md)
+- [Jupyter kernel (`deno jupyter`)](./jupyter.md)
 - [dependency inspector (`deno info`)](./dependency_inspector.md)
 - [documentation generator (`deno doc`)](./documentation_generator.md)
 - [formatter (`deno fmt`)](./formatter.md)
