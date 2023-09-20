@@ -1,19 +1,8 @@
+import Admonition from "./_admonition.mdx";
+
 # Data Modeling in TypeScript
 
-:::caution Deno KV is currently in beta
-
-Deno KV is currently **experimental** and **subject to change**. While we do our
-best to ensure data durability, data loss is possible, especially around Deno
-updates.
-
-Excuting Deno programs that use KV currently requires the `--unstable` flag, as
-below:
-
-```sh
-deno run -A --unstable my_kv_code.ts
-```
-
-:::
+<Admonition />
 
 In TypeScript applications, it is usually desirable to create strongly-typed,
 well-documented objects to contain the data that your application operates on.
@@ -110,7 +99,7 @@ that can operate on your DTOs.
 ## Encapsulating business logic with a service layer
 
 When your application's persistence needs become more complex - such as when you
-need to create [secondary indexes](./secondary_indexes.md) to query your data by
+need to create [secondary indexes](./secondary_indexes.mdx) to query your data by
 different keys, or maintain relationships between objects - you will want to
 create a set of functions to sit on top of your DTOs to ensure that the data
 being passed around is valid (and not merely typed correctly).

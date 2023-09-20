@@ -1,3 +1,5 @@
+import Admonition from "./_admonition.mdx";
+
 # Deno KV Quick Start
 
 **Deno KV** is a
@@ -6,22 +8,9 @@ built directly into the Deno runtime, available in the
 [`Deno.Kv` namespace](https://deno.land/api?unstable&s=Deno.Kv). It can be used
 for many kinds of data storage use cases, but excels at storing simple data
 structures that benefit from very fast reads and writes. Deno KV is available in
-the Deno CLI and on [Deno Deploy](./on_deploy.md).
+the Deno CLI and on [Deno Deploy](./on_deploy.mdx).
 
-:::caution Deno KV is currently in beta
-
-Deno KV is currently **experimental** and **subject to change**. While we do our
-best to ensure data durability, data loss is possible, especially around Deno
-updates.
-
-Excuting Deno programs that use KV currently requires the `--unstable` flag, as
-below:
-
-```sh
-deno run -A --unstable my_kv_code.ts
-```
-
-:::
+<Admonition />
 
 Let's walk through the key features of Deno KV.
 
@@ -42,7 +31,7 @@ const kv = await Deno.openKv();
 Data in Deno KV is stored as key-value pairs, much like properties of a
 JavaScript object literal or a
 [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map).
-[Keys](./key_space.md) are represented as an array of JavaScript types, like
+[Keys](./key_space.mdx) are represented as an array of JavaScript types, like
 `string`, `number`, `bigint`, or `boolean`. Values can be arbitrary JavaScript
 objects. In this example, we create a key-value pair representing a user's UI
 preferences, and save it with
@@ -70,7 +59,7 @@ console.log(savedPrefs.value);
 console.log(savedPrefs.versionstamp);
 ```
 
-Both `get` and `list` [operations](./operations.md) return a
+Both `get` and `list` [operations](./operations.mdx) return a
 [KvEntry](https://deno.land/api?s=Deno.KvEntry&unstable=) object with the
 following properties:
 
@@ -131,7 +120,7 @@ key after the prefix. So KV pairs with these keys:
 Will be returned in that order by `kv.list()`.
 
 Read operations can either be performed in
-[**strong or eventual consistency mode**](./operations.md). Strong consistency
+[**strong or eventual consistency mode**](./operations.mdx). Strong consistency
 mode guarantees that the read operation will return the most recently written
 value. Eventual consistency mode may return a stale value, but is faster. By
 contrast, writes are always performed in strong consistency mode.
@@ -149,7 +138,7 @@ await db.delete(["preferences", "alan"]);
 
 ## Atomic transactions
 
-Deno KV is capable of executing [atomic transactions](./transactions.md), which
+Deno KV is capable of executing [atomic transactions](./transactions.mdx), which
 enables you to conditionally execute one or many data manipulation operations at
 once. In the following example, we create a new preferences object only if it
 hasn't been created already.
@@ -175,11 +164,11 @@ if (res.ok) {
 }
 ```
 
-Learn more about transactions in Deno KV [here](./transactions.md).
+Learn more about transactions in Deno KV [here](./transactions.mdx).
 
 ## Improve querying with secondary indexes
 
-[Secondary indexes](./secondary_indexes.md) store the same data by multiple
+[Secondary indexes](./secondary_indexes.mdx) store the same data by multiple
 keys, allowing for simpler quries of the data you need. Let's say that we need
 to be able to access user preferences by both username AND email. To enable
 this, you could provide a function that wraps the logic to save the preferences
@@ -214,21 +203,21 @@ async function getByEmail(email) {
 }
 ```
 
-Learn more about [secondary indexes in the manual here](./secondary_indexes.md).
+Learn more about [secondary indexes in the manual here](./secondary_indexes.mdx).
 
 ## Production usage
 
 Deno KV is available for use in live applications on
-[Deno Deploy](./on_deploy.md). In production, Deno KV is backed by
+[Deno Deploy](./on_deploy.mdx). In production, Deno KV is backed by
 [FoundationDB](https://www.foundationdb.org/), the open source key-value store
 created by Apple.
 
 **No additional configuration is necessary** to run your Deno programs that use
 KV on Deploy - a new Deploy database will be provisioned for you when required
-by your code. Learn more about Deno KV on Deno Deploy [here](./on_deploy.md).
+by your code. Learn more about Deno KV on Deno Deploy [here](./on_deploy.mdx).
 
 ## Next steps
 
 At this point, you're just beginning to scratch the surface with Deno KV. Be
-sure to check out our guide on the [Deno KV key space](./key_space.md), and a
+sure to check out our guide on the [Deno KV key space](./key_space.mdx), and a
 collection of [tutorials and example applications](../tutorials/index.md) here.

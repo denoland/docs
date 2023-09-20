@@ -1,19 +1,8 @@
+import Admonition from "./_admonition.mdx";
+
 # Transactions
 
-:::caution Deno KV is currently in beta
-
-Deno KV is currently **experimental** and **subject to change**. While we do our
-best to ensure data durability, data loss is possible, especially around Deno
-updates.
-
-Excuting Deno programs that use KV currently requires the `--unstable` flag, as
-below:
-
-```sh
-deno run -A --unstable my_kv_code.ts
-```
-
-:::
+<Admonition />
 
 The Deno KV store utilizes _optimistic concurrency control transactions_ rather
 than _interactive transactions_ like many SQL systems like PostgreSQL or MySQL.
