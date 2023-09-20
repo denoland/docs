@@ -82,7 +82,7 @@ exists for the given key(s).
 
 ```ts
 const kv = await Deno.openKv();
-const result = await db.getMany([
+const result = await kv.getMany([
   ["preferences", "ada"],
   ["preferences", "grace"],
 ]);
@@ -102,7 +102,7 @@ prefix.
 
 ```ts
 const kv = await Deno.openKv();
-const entries = db.list({ prefix: ["preferences"] });
+const entries = kv.list({ prefix: ["preferences"] });
 for await (const entry of entries) {
   console.log(entry.key); // ["preferences", "ada"]
   console.log(entry.value); // { ... }
@@ -133,7 +133,7 @@ No action is taken if no value is found for the given key.
 
 ```ts
 const kv = await Deno.openKv();
-await db.delete(["preferences", "alan"]);
+await kv.delete(["preferences", "alan"]);
 ```
 
 ## Atomic transactions
