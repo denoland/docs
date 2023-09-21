@@ -6,95 +6,38 @@ export default function configureRedirects(app: Hono) {
     app.get(from, (c) => c.redirect(to, status));
   }
 
-  app.get("/", (c) => c.redirect("/runtime/manual"));
-  app.get("/manual", (c) => c.redirect("/runtime/manual"));
-  app.get("/runtime/manual/introduction", (c) => c.redirect("/runtime/manual"));
-  app.get("/runtime", (c) => c.redirect("/runtime/manual"));
-  app.get("/deploy", (c) => c.redirect("/deploy/manual"));
-  app.get("/deploy/docs", (c) => c.redirect("/deploy/manual"));
+  // Landing page redirects
+  r("/", "/runtime/manual");
+  r("/manual", "/runtime/manual");
+  r("/runtime/manual/introduction", "/runtime/manual");
+  r("/runtime", "/runtime/manual");
+  r("/deploy", "/deploy/manual");
+  r("/deploy/docs", "/deploy/manual");
 
   // KV redirects
-  app.get("/kv", (c) => c.redirect("/kv/manual"));
-  app.get("/runtime/manual/runtime/kv", (c) => c.redirect("/kv/manual"));
-  app.get(
-    "/runtime/manual/runtime/kv/key_space",
-    (c) => c.redirect("/kv/manual/key_space"),
-  );
-  app.get(
-    "/runtime/manual/runtime/kv/operations",
-    (c) => c.redirect("/kv/manual/operations"),
-  );
-  app.get(
+  r("/kv", "/kv/manual");
+  r("/runtime/manual/runtime/kv", "/kv/manual");
+  r("/runtime/manual/runtime/kv/key_space", "/kv/manual/key_space");
+  r("/runtime/manual/runtime/kv/operations", "/kv/manual/operations");
+  r(
     "/runtime/manual/runtime/kv/secondary_indexes",
-    (c) => c.redirect("/kv/manual/secondary_indexes"),
+    "/kv/manual/secondary_indexes",
   );
-  app.get(
-    "/runtime/manual/runtime/kv/transactions",
-    (c) => c.redirect("/kv/manual/transactions"),
-  );
-  app.get(
-    "/deploy/manual/kv",
-    (c) => c.redirect("/kv/manual/on_deploy"),
-  );
+  r("/runtime/manual/runtime/kv/transactions", "/kv/manual/transactions");
+  r("/deploy/manual/kv", "/kv/manual/on_deploy");
 
-  app.get(
-    "/runtime/manual/examples",
-    (c) => c.redirect("/runtime/tutorials"),
-  );
-
-  [
-    "chat_app",
-    "fetch_data",
-    "file_server",
-    "file_system_events",
-    "hashbang",
-    "hello_world",
-    "http_server",
-    "manage_dependencies",
-    "module_metadata",
-    "os_signals",
-    "read_write_files",
-    "subprocess",
-    "tcp_echo",
-    "tcp_server",
-    "unix_cat",
-    "word_finder",
-  ].forEach((slug) => {
-    app.get(
-      `/runtime/manual/examples/${slug}`,
-      (c) => c.redirect(`/runtime/tutorials/${slug}`),
-    );
-  });
-
-  [
-    "apollo",
-    "express",
-    "mongoose",
-    "mysql2",
-    "planetscale",
-    "prisma",
-    "react",
-    "redis",
-    "vue",
-  ].forEach((slug) => {
-    app.get(
-      `/runtime/manual/node/how_to_with_npm/${slug}`,
-      (c) => c.redirect(`/runtime/tutorials/how_to_with_npm/${slug}`),
-    );
-  });
-
+  // Manual redirects
+  r("/runtime/manual/examples", "/runtime/tutorials");
+  r("/runtime/manual/runtime/", "/runtime/manual/runtime/builtin_apis");
   r("/runtime/manual/testing", "/runtime/manual/basics/testing");
-
   r(
     "/runtime/manual/advanced/typescript",
     "/runtime/manual/advanced/typescript/overview",
   );
-
   r(
     "/runtime/manual/node/dnt",
     "/runtime/manual/advanced/publishing/dnt",
   );
-
   r(
     "/runtime/manual/typescript",
     "/runtime/manual/advanced/typescript/overview",
@@ -200,6 +143,46 @@ export default function configureRedirects(app: Hono) {
     "/runtime/manual/npm_nodejs/std_node",
     "/runtime/manual/node",
   );
+
+  // Redirect manual examples
+  [
+    "chat_app",
+    "fetch_data",
+    "file_server",
+    "file_system_events",
+    "hashbang",
+    "hello_world",
+    "http_server",
+    "manage_dependencies",
+    "module_metadata",
+    "os_signals",
+    "read_write_files",
+    "subprocess",
+    "tcp_echo",
+    "tcp_server",
+    "unix_cat",
+    "word_finder",
+  ].forEach((slug) => {
+    r(`/runtime/manual/examples/${slug}`, `/runtime/tutorials/${slug}`);
+  });
+
+  // Redirect npm how-tos
+  [
+    "apollo",
+    "express",
+    "mongoose",
+    "mysql2",
+    "planetscale",
+    "prisma",
+    "react",
+    "redis",
+    "vue",
+  ].forEach((slug) => {
+    r(
+      `/runtime/manual/node/how_to_with_npm/${slug}`,
+      `/runtime/tutorials/how_to_with_npm/${slug}`,
+    );
+  });
 
   app.get(
     "/runtime/manual/node/how_to_with_npm",
