@@ -24,15 +24,23 @@ Run `deno jupyter --unstable` and follow the instructions.
 You can run `deno jupyter --unstable --install` to force installation of the
 kernel. Deno assumes that `jupyter` command is available in your `PATH`.
 
-After completing the installation process, the Deno kernel will be available in
-notebook creation dialog.
+After completing the installation process, the Deno kernel will be available in the
+notebook creation dialog in JupyterLab and the classic notebook:
 
 ![Jupyter notebook kernel selection](../images/jupyter_notebook.png)
 
-You can use Deno Jupyter kernel in any editor that supports Jupyter notebooks,
-eg. in VSCode, you can use
-[VSCode Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter),
-while in JetBrains IDEs Jupyter notebooks should be available out of the box.
+You can use the Deno Jupyter kernel in any editor that supports Jupyter notebooks.
+
+### VS Code
+
+* Install the [VSCode Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
+* When on a new or existing Notebook, click  creating a new Jupyter Notebook select "Jupyter kernels" and then select Deno
+
+![Selecting Deno in VS Code](https://github.com/denoland/deno-docs/assets/836375/32f0ccc3-35f7-47e5-84f4-17c20a5b5732)
+
+### JetBrains IDEs
+
+Jupyter Notebooks are available right out of the box.
 
 ## Rich content output
 
