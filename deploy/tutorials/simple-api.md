@@ -1,57 +1,136 @@
 # Simple API server
 
-This tutorial will cover how to deploy a simple API on Deno Deploy.
+Deno is great for creating simple, light-weight API servers. Learn how to create
+and deploy one using Deno Deploy in this tutorial.
 
-## **Step 1:** Write the API in a local file
+## Create a local API server
 
-```js
-// simple_api.js
+In your terminal, create a file named `server.ts`. We'll implement a simple link
+shortener service using a [Deno KV database](/kv/manual).
 
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
+```ts title="server.ts"
+const kv = await Deno.openKv();
 
-serve((req: Request) => new Response("Hello World"));
+Deno.serve(async (request: Request) => {
+  // Create short links
+  if (request.method == "POST") {
+    const body = await request.text();
+    const { slug, url } = JSON.parse(body);
+    const result = await kv.set(["links", slug], url);
+    return new Response(JSON.stringify(result));
+  }
+
+  // Redirect short links
+  const slug = request.url.split("/").pop() || "";
+  const url = (await kv.get(["links", slug])).value as string;
+  if (url) {
+    return Response.redirect(url, 301);
+  } else {
+    const m = !slug ? "Please provide a slug." : `Slug "${slug}" not found`;
+    return new Response(m, { status: 404 });
+  }
+});
 ```
 
-This is a basic web server, and you can run it locally with:
+You can run this server on your machine with this command:
 
-```sh
-deno run -A simple_api.js
+```shell
+deno run -A --unstable server.ts
 ```
 
-This brings the server up on `localhost:5000`.
+This server will respond to HTTP `GET` and `POST` requests. The `POST` handler
+expects to receive a JSON document in request the body with `slug` and `url`
+properties. The `slug` is the short URL component, and the `url` is the full URL
+you want to redirect to.
 
-To deploy this server on Deno Deploy, you can use the Github integration.
+Here's an example of using this API endpoint with cURL:
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"url":"https://docs.deno.com/runtime/manual","slug":"denodocs"}' \
+  http://localhost:8000/
+```
+
+In response, the server should send you JSON with the KV data representing the
+result of the `set` operation:
+
+```json
+{ "ok": true, "versionstamp": "00000000000000060000" }
+```
+
+A `GET` request to our server will take a URL slug as a path parameter, and
+redirect to the provided URL. You can visit this URL in the browser, or make
+another cURL request to see this in action!
+
+```shell
+curl -v http://localhost:8000/denodocs
+```
+
+Now that we have an API server, let's push it to a GitHub repository that we'll
+later link to Deno Deploy.
+
+## Create a GitHub repository for your app
+
+Sign in to [GitHub](https://github.com) and
+[create a new repository](https://docs.github.com/en/get-started/quickstart/create-a-repo).
+You can skip adding a README or any other files for now - a blank repo will do
+fine for our purposes.
+
+In the folder where you created your API server, initialize a local git repo
+with these commands in sequence. Be sure to swap out `your_username` and
+`your_repo_name` with the appropriate values.
 
 ```sh
+echo "# My Deno Link Shortener" >> README.md
 git init
 git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/your_username/your_repo_name.git
+git push -u origin main
 ```
 
-## **Step 2:** Create a new Github repo and push the local file to the Github repo
+You should now have a GitHub repository with your `server.ts` file in it, as in
+[this example repository](https://github.com/kwhinnery/simple_api_server). Now
+you're ready to import and run this application on Deno Deploy.
 
-1. Create a new Github repo and record the git repo remote URL
-2. From the local repo where `simple_api.js` resides, initialize git and push to
-   the new remote repo:
+## Import and deploy your appliction project
 
-   ```sh
-   git init
-   git add simple_api.js
-   git commit -m "First commit"
-   git remote add <remote-url>
-   git push origin main
-   ```
+Next, sign up for an account on [Deno Deploy](https://dash.deno.com) and
+[create a new project](https://dash.deno.com/new). Choose to import an existing
+GitHub repository - the one we created a moment ago. The configuration should
+look something like this:
 
-You now have a new Github repo with exactly one file in it.
+![Deno Deploy config](./images/simple_api_deploy.png)
 
-## **Step 3:** Deploy to Deno Deploy
+Click on the "Create and Deploy" button - in a few moments, your link shortener
+service will be live on Deno Deploy!
 
-1. Navigate to https://dash.deno.com/ and click the **New Project** button.
-2. On the next page, choose the **Deploy from Github repository** card.
-3. To fill in the values on the form, choose:
-   - the new Github repo that you just created
-     - automatic (fastest)
-   - `main` branch
-   - `simple_api.js` as the entrypoint file
+![Deno Deploy dashboard](./images/simple_api_dashboard.png)
 
-This downloads all dependencies of `simple_api.js`, caches them, and gives you
-an API at `localhost:8000` that responds with "Hello World".
+## Test out your new link shortener
+
+Without any additional configuration (Deno KV just works on Deploy), your app
+should run the same as it did on your local machine.
+
+You can add new links using the `POST` handler as you did before. Just replace
+the `localhost` URL with your live production URL on Deno Deploy:
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"url":"https://docs.deno.com/runtime/manual","slug":"denodocs"}' \
+  https://expensive-rook-95.deno.dev/
+```
+
+Similarly, you can visit your shortened URLs in the browser, or view the
+redirect coming back with a cURL command:
+
+```shell
+curl -v https://expensive-rook-95.deno.dev/denodocs
+```
+
+This was a very simple example - from here, we suggest you check out a
+higher-level web framework like [Fresh](https://fresh.deno.dev), or learn more
+about [Deno KV here](/kv/manual). Great work deploying your simple API server!
