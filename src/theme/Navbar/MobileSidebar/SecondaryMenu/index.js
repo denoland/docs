@@ -1,15 +1,16 @@
 import React from 'react';
 import {useThemeConfig} from '@docusaurus/theme-common';
 import {useNavbarSecondaryMenu} from '@docusaurus/theme-common/internal';
-import Translate from '@docusaurus/Translate';
+import { useLocation } from "@docusaurus/router";
+
 function SecondaryMenuBackButton(props) {
   return (
-    <button {...props} type="button" className="clean-btn navbar-sidebar__back">
-      <Translate
-        id="theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel"
-        description="The label of the back button to return to main menu, inside the mobile navbar sidebar secondary menu (notably used to display the docs sidebar)">
-        ← Back to main menu
-      </Translate>
+    <button
+      type="button"
+      {...props}
+      className="rounded px-3 py-1 border-none font-semibold text-gray-600"
+    >
+      Switch product
     </button>
   );
 }
@@ -18,12 +19,45 @@ function SecondaryMenuBackButton(props) {
 export default function NavbarMobileSidebarSecondaryMenu() {
   const isPrimaryMenuEmpty = useThemeConfig().navbar.items.length === 0;
   const secondaryMenu = useNavbarSecondaryMenu();
+  const location = useLocation();
+
+  const products = [
+    {
+      name: "Deno Runtime",
+      slug: "runtime",
+    },
+    {
+      name: "Deno Deploy",
+      slug: "deploy",
+    },
+    {
+      name: "Deno KV",
+      slug: "kv",
+    },
+  ];
+
+  const currentProduct = products.find((product) =>
+    location.pathname.includes(product.slug)
+  );
+
   return (
     <>
+      <div>
+        {currentProduct && (
+          <div className="flex justify-between items-center pr-4">
+            <div className="text-xl px-3 py-2">
+              {currentProduct.name}
+            </div>
+            <SecondaryMenuBackButton onClick={() => secondaryMenu.hide()} />
+          </div>
+        )}
+      </div>
       {/* edge-case: prevent returning to the primaryMenu when it's empty */}
-      {!isPrimaryMenuEmpty && (
+      {
+        /* {!isPrimaryMenuEmpty && (
         <SecondaryMenuBackButton onClick={() => secondaryMenu.hide()} />
-      )}
+      )} */
+      }
       {secondaryMenu.content}
     </>
   );
