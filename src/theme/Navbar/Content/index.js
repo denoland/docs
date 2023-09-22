@@ -54,12 +54,13 @@ function NavbarProduct(){
   );
   return (
     <div className="navbar__product">
-    <div className="navbar__product__split">/</div>
-
     {currentProduct && (
-      <div>
-        {currentProduct.shortName}
-      </div>
+      <>
+        <div className="navbar__product__split">/</div>
+        <a className="navbar__product_link" href={`/${currentProduct.slug}/manual`}>
+          {currentProduct.shortName}
+        </a>
+      </>
     )}
   </div>
   )

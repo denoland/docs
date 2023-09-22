@@ -11,7 +11,7 @@ function SecondaryMenuBackButton(props) {
       {...props}
       className="secondary-menu__product__button"
     >
-      Switch product
+      All docs
     </button>
   );
 }

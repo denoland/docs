@@ -82,6 +82,10 @@ h3 {
   width: 100%;
 }
 
+.navbar__product_link {
+  color: var(--ifm-navbar-link-color);
+}
+
 #__docusaurus,
 .main-wrapper {
   overscroll-behavior-y: none;

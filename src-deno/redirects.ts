@@ -7,7 +7,6 @@ export default function configureRedirects(app: Hono) {
   }
 
   // Landing page redirects
-  r("/", "/runtime/manual");
   r("/manual", "/runtime/manual");
   r("/runtime/manual/introduction", "/runtime/manual");
   r("/runtime", "/runtime/manual");
