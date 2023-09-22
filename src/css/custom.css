@@ -198,6 +198,29 @@ h3 {
   }
 }
 
+.secondary-menu__product {
+  display: flex;
+  padding: 0.5rem 1rem 0.5rem 0rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.secondary-menu__product__name {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.secondary-menu__product__button {
+  border: none;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
 .footer {
   border-top: 1px solid var(--ifm-toc-border-color);
   background-color: transparent;

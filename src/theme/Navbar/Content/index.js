@@ -12,6 +12,7 @@ import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
 import styles from './styles.module.css';
 import { useLocation } from "@docusaurus/router";
+import { products } from "../../../../sidebars/products";
 
 function useNavbarItems() {
   // TODO temporary casting until ThemeConfig type is improved
@@ -45,34 +46,30 @@ function NavbarContentLayout({left, right}) {
     </div>
   );
 }
+
+function NavbarProduct(){
+  const location = useLocation();
+  const currentProduct = products.find((product) =>
+    location.pathname.includes(product.slug)
+  );
+  return (
+    <div className="navbar__product">
+    <div className="navbar__product__split">/</div>
+
+    {currentProduct && (
+      <div>
+        {currentProduct.shortName}
+      </div>
+    )}
+  </div>
+  )
+}
+
 export default function NavbarContent() {
   const mobileSidebar = useNavbarMobileSidebar();
   const items = useNavbarItems();
   const [leftItems, rightItems] = splitNavbarItems(items);
   const searchBarItem = items.find((item) => item.type === 'search');
-  const location = useLocation();
-
-  const products = [
-    {
-      name: "Deno Runtime",
-      shortName: "Runtime",
-      slug: "runtime",
-    },
-    {
-      name: "Deno Deploy",
-      shortName: "Deploy",
-      slug: "deploy",
-    },
-    {
-      name: "Deno KV",
-      shortName: "KV",
-      slug: "kv",
-    },
-  ];
-
-  const currentProduct = products.find((product) =>
-    location.pathname.includes(product.slug)
-  );
 
   return (
     <NavbarContentLayout
@@ -81,15 +78,7 @@ export default function NavbarContent() {
           <>
             {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
             <NavbarLogo />
-            <div className="navbar__product">
-              <div className="navbar__product__split">/</div>
-
-              {currentProduct && (
-                <div>
-                  {currentProduct.shortName}
-                </div>
-              )}
-            </div>
+            <NavbarProduct />
             <NavbarItems items={leftItems} />
           </>
       }
@@ -105,7 +94,6 @@ export default function NavbarContent() {
               </NavbarSearch>
             )}
           </>
-
       }
     />
   );
