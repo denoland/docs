@@ -183,7 +183,7 @@ h3 {
   align-items: center;
 }
 .navbar__product__split {
-  color: #9ca3af;
+  color: var(--ifm-color-emphasis-500);
 }
 
 @media (min-width: 997px) {
@@ -205,20 +205,17 @@ h3 {
   align-items: center;
 }
 .secondary-menu__product__name {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding: 0.25rem 0.75rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
 .secondary-menu__product__button {
   border: none;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 0.25rem;
   font-weight: 600;
-  color: #4b5563;
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-800);
 }
 
 .footer {
