@@ -45,6 +45,7 @@ const sidebars = {
     "manual/key_expiration",
     "manual/secondary_indexes",
     "manual/transactions",
+    "manual/queue_overview",
     "manual/data_modeling_typescript",
     "manual/on_deploy",
   ]),
@@ -59,6 +60,16 @@ const sidebars = {
       type: "doc",
       label: "Overview",
       id: "tutorials/index",
+    },
+    {
+      type: "doc",
+      id: "tutorials/schedule_notification",
+      label: "Schedule future notifications",
+    },
+    {
+      type: "doc",
+      id: "tutorials/webhook_processor",
+      label: "Offloading webhooks to a queue",
     },
     {
       type: "link",
