@@ -7,7 +7,6 @@ export default function configureRedirects(app: Hono) {
   }
 
   // Landing page redirects
-  r("/", "/runtime/manual");
   r("/manual", "/runtime/manual");
   r("/runtime/manual/introduction", "/runtime/manual");
   r("/runtime", "/runtime/manual");
@@ -28,6 +27,10 @@ export default function configureRedirects(app: Hono) {
 
   // Manual redirects
   r("/runtime/manual/examples", "/runtime/tutorials");
+  r(
+    "/runtime/manual/language_server/overview",
+    "/runtime/manual/advanced/language_server/overview",
+  );
   r("/runtime/manual/runtime/", "/runtime/manual/runtime/builtin_apis");
   r("/runtime/manual/testing", "/runtime/manual/basics/testing");
   r(

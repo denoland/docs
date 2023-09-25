@@ -101,7 +101,7 @@ const config = {
         alt: "Deno",
         src: "img/logo.svg",
         srcDark: "img/logo-dark.svg",
-        href: "/runtime/manual",
+        href: "/",
       },
       items: [
         {
