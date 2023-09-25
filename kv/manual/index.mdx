@@ -54,9 +54,9 @@ Once a key-value pair is set, you can read it from the database with
 
 ```ts
 const entry = await kv.get(["preferences", "ada"]);
-console.log(savedPrefs.key);
-console.log(savedPrefs.value);
-console.log(savedPrefs.versionstamp);
+console.log(entry.key);
+console.log(entry.value);
+console.log(entry.versionstamp);
 ```
 
 Both `get` and `list` [operations](./operations.mdx) return a
