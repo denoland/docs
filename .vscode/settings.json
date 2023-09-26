@@ -1,4 +1,6 @@
 {
+  "deno.cacheOnSave": true,
+  "deno.disablePaths": ["./src"],
   "deno.enable": true,
   "deno.lint": true,
   "deno.unstable": true,

@@ -137,8 +137,8 @@ case in action, check out our
 
 Another helpful application of queues (and queue APIs like this one), is to
 schedule work to happen at an appropriate time in the future. Maybe you'd like
-to send a notification to a new customer 24 hours after they have placed an
-order to send them a satisfaction survey. You can schedule a queue message to be
+to send a notification to a new customer a day after they have placed an order
+to send them a satisfaction survey. You can schedule a queue message to be
 delivered 24 hours into the future, and set up a listener to send out the
 notification at that time.
 
