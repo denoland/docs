@@ -299,8 +299,14 @@ h3 {
 }
 
 @media (max-width: 36rem) {
-  .markdown > div[class*="codeBlockContainer"] {
+  .markdown > div[class*="codeBlockContainer"],
+  .markdown > .tabs-container div[class*="codeBlockContainer"] {
     margin-inline: calc(var(--ifm-global-spacing) * -1);
     border-radius: 0;
+  }
+
+  .markdown > .tabs-container {
+    margin-inline: calc(var(--ifm-global-spacing) * -1);
+    padding-inline: var(--ifm-global-spacing);
   }
 }
