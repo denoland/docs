@@ -299,8 +299,8 @@ h3 {
 }
 
 @media (max-width: 36rem) {
-	.markdown > div[class*="codeBlockContainer"] {
-		margin-inline: -1rem;
-		border-radius: 0;
-	}
+  .markdown > div[class*="codeBlockContainer"] {
+    margin-inline: calc(var(--ifm-global-spacing) * -1);
+    border-radius: 0;
+  }
 }
