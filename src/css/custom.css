@@ -297,3 +297,10 @@ h3 {
   word-break: break-all;
   word-wrap: break-word;
 }
+
+@media (max-width: 36rem) {
+	.markdown > div[class*="codeBlockContainer"] {
+		margin-inline: -1rem;
+		border-radius: 0;
+	}
+}
