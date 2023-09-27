@@ -31,7 +31,7 @@ Get operations are performed as a "snapshot read" in all consistency modes. This
 means that when retrieving multiple keys at once, the values returned will be
 consistent with each other.
 
-```ts,ignore
+```ts
 const res = await kv.get<string>(["config"]);
 console.log(res); // { key: ["config"], value: "value", versionstamp: "000002fa526aaccb0000" }
 
@@ -76,7 +76,7 @@ List operations can be performed using the
 returns a `Deno.KvListIterator` that can be used to iterate over the keys
 returned. This is an async iterator, and can be used with `for await` loops.
 
-```ts,ignore
+```ts
 // Return all users
 const iter = kv.list<string>({ prefix: ["users"] });
 const users = [];
@@ -124,7 +124,7 @@ option to `true`. This will return the keys in lexicographically descending
 order. The `start` and `end` keys are still inclusive and exclusive
 respectively, and are still interpreted as lexicographically ascending.
 
-```ts,ignore
+```ts
 // Return all users in reverse order, ending with "sam"
 const iter = kv.list<string>({ prefix: ["users"], start: ["users", "sam"] }, {
   reverse: true,
@@ -153,7 +153,7 @@ The `set` operation can be performed using the
 
 Set operations are always performed in strong consistency mode.
 
-```ts,ignore
+```ts
 const res = await kv.set(["users", "alex"], "alex");
 console.log(res.versionstamp); // "00a44a3c3e53b9750000"
 ```
@@ -168,7 +168,7 @@ The `delete` operation can be performed using the
 
 Delete operations are always performed in strong consistency mode.
 
-```ts,ignore
+```ts
 await kv.delete(["users", "alex"]);
 ```
 
@@ -191,7 +191,7 @@ the operand is `1`, the new value will be `0`.
 
 Sum operations are always performed in strong consistency mode.
 
-```ts,ignore
+```ts
 await kv.atomic()
   .mutate({
     type: "sum",
@@ -217,7 +217,7 @@ operand and the value in the store must be of type `Deno.KvU64`.
 
 Min operations are always performed in strong consistency mode.
 
-```ts,ignore
+```ts
 await kv.atomic()
   .mutate({
     type: "min",
@@ -243,7 +243,7 @@ operand and the value in the store must be of type `Deno.KvU64`.
 
 Max operations are always performed in strong consistency mode.
 
-```ts,ignore
+```ts
 await kv.atomic()
   .mutate({
     type: "max",
