@@ -13,7 +13,6 @@ efficiently.
 
 In this tutorial, we'll show you how to execute this technique when
 [handling webhook requests for a GitHub repo](https://docs.github.com/en/webhooks/about-webhooks-for-repositories).
-Y
 
 ## Try in a playground
 
