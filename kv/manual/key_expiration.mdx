@@ -8,7 +8,7 @@ Since version 1.36.2, Deno KV supports key expiration. This allows an expiration
 timestamp to be associated with a key, after which the key will be automatically
 deleted from the database:
 
-```ts,ignore
+```ts
 const kv = await Deno.openKv();
 
 // `expireIn` is the number of milliseconds after which the key will expire.
@@ -24,7 +24,7 @@ Key expiration is supported on both Deno CLI and Deno Deploy.
 If multiple keys are set in the same atomic operation and have the same
 `expireIn` value, the expiration of those keys will be atomic. For example:
 
-```ts,ignore
+```ts
 const kv = await Deno.openKv();
 
 function addUnverifiedUser(
