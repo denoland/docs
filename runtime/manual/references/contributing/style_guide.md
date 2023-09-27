@@ -177,6 +177,12 @@ export interface PWrite {
 export function pwrite(options: PWrite) {}
 ```
 
+Note: When one of the arguments is a function, you can adjust the order
+flexibly. See examples like [Deno.serve](https://deno.land/api?s=Deno.serve),
+[Deno.test](https://deno.land/api?s=Deno.test),
+[Deno.addSignalListener](https://deno.land/api?s=Deno.addSignalListener). See
+also [this post](https://twitter.com/jaffathecake/status/1646798390355697664).
+
 ### Export all interfaces that are used as parameters to an exported member
 
 Whenever you are using interfaces that are included in the parameters or return
