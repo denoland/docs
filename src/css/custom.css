@@ -99,11 +99,6 @@ h3 {
   padding: 60px 0;
 }
 
-/* Hide breadcrumbs */
-.theme-doc-breadcrumbs {
-  display: none;
-}
-
 .theme-doc-sidebar-container {
   position: relative;
 }
@@ -309,4 +304,21 @@ h3 {
     margin-inline: calc(var(--ifm-global-spacing) * -1);
     padding-inline: var(--ifm-global-spacing);
   }
+}
+
+.breadcrumbs__item:first-child > a {
+	padding-left: 0;
+}
+
+.breadcrumbs__item a {
+	text-decoration: underline;
+}
+
+.breadcrumbs__item:not(:last-child):after {
+	margin-inline: 0;
+}
+
+.breadcrumbs__item--active .breadcrumbs__link {
+	background: transparent;
+	color: inherit;
 }
