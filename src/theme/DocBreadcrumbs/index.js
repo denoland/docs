@@ -1,8 +1,6 @@
 import React from "react";
 import clsx from "clsx";
 import {ThemeClassNames} from "@docusaurus/theme-common";
-
-
 import {
   useSidebarBreadcrumbs,
   useHomePageRoute,

@@ -1,31 +1,34 @@
 import React from "react";
 import Link from "@docusaurus/Link";
-import useBaseUrl from "@docusaurus/useBaseUrl";
 import {translate} from "@docusaurus/Translate";
 import {useLocation} from "@docusaurus/router";
 
 export default function HomeBreadcrumbItem() {
-  const homeHref = useBaseUrl("/");
-
+  const currentPath = useLocation().pathname
   const getDocsLocation = () => {
-    if (useLocation().pathname.startsWith("/deploy")) {
+    if (currentPath.startsWith("/deploy")) {
       return {
         href: "/deploy",
         name: "Deploy",
       }
-    } else if (useLocation().pathname.startsWith("/kv")) {
+    } else if (currentPath.startsWith("/kv")) {
       return {
         href: "/kv",
         name: "KV",
       }
+    } else if (currentPath.startsWith("/runtime")) {
+      return {
+        href: "/runtime",
+        name: "Runtime",
+      }
     }
     return {
-      href: "/runtime",
-      name: "Runtime",
+      href: "/",
+      name: "All docs"
     }
   }
 
-	const {href, name} = getDocsLocation()
+  const {href, name} = getDocsLocation()
   return (
     <li className="breadcrumbs__item">
       <Link
