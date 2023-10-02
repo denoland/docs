@@ -140,11 +140,24 @@ which modules you need by
   <summary>
     <code>node:dgram</code>
     <div style={{ float: "right" }}>
-      <span>✅</span>
+      <span>ℹ️</span>
     </div>
   </summary>
   <p>
-    Fully supported.
+    Some <code>dgram.Socket</code> instance methods are non-functional stubs:
+    <ul>
+        <li><code>addMembership</code></li>
+        <li><code>addSourceSpecificMembership</code></li>
+        <li><code>dropMembership</code></li>
+        <li><code>dropSourceSpecificMembership</code></li>
+        <li><code>setBroadcast</code></li>
+        <li><code>setMulticastInterface</code></li>
+        <li><code>setMulticastLoopback</code></li>
+        <li><code>setMulticastTtl</code></li>
+        <li><code>setTtl</code></li>
+        <li><code>ref</code></li>
+        <li><code>unref</code></li>
+    </ul>
   </p>
   <p>
     <a href="https://nodejs.org/api/dgram.html">Node.js docs</a>
