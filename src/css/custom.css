@@ -314,6 +314,10 @@ h3 {
 	text-decoration: underline;
 }
 
+.breadcrumbs__link {
+	background-color: transparent !important;
+}
+
 .breadcrumbs__item:not(:last-child):after {
 	margin-inline: 0;
 }

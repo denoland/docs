@@ -8,17 +8,17 @@ export default function HomeBreadcrumbItem() {
   const getDocsLocation = () => {
     if (currentPath.startsWith("/deploy")) {
       return {
-        href: "/deploy",
+        href: "/deploy/manual",
         name: "Deploy",
       }
     } else if (currentPath.startsWith("/kv")) {
       return {
-        href: "/kv",
+        href: "/kv/manual",
         name: "KV",
       }
     } else if (currentPath.startsWith("/runtime")) {
       return {
-        href: "/runtime",
+        href: "/runtime/manual",
         name: "Runtime",
       }
     }
@@ -26,7 +26,7 @@ export default function HomeBreadcrumbItem() {
       href: "/",
       name: "All docs"
     }
-  }
+  };
 
   const {href, name} = getDocsLocation()
   return (
