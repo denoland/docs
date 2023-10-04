@@ -258,12 +258,12 @@ As for `__filename` and `__dirname` globals, which are also
 ```js
 // https://github.com/nodejs/help/issues/2907#issuecomment-757446568
 
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 ```
 
-Which works in both Node.js and Deno when the current executing module is on
-the file system.
+Which works in both Node.js and Deno when the current executing module is on the
+file system.
