@@ -718,8 +718,8 @@ importing them from the relevant `node:` module.
 | [`Blob`](https://nodejs.org/api/globals.html#class-blob)                                                         | ✅     |
 | [`Buffer`](https://nodejs.org/api/globals.html#class-buffer)                                                     | ✅     |
 | [`ByteLengthQueuingStrategy`](https://nodejs.org/api/globals.html#class-bytelengthqueuingstrategy)               | ✅     |
-| [`__dirname`](https://nodejs.org/api/globals.html#__dirname)                                                     | ✅     |
-| [`__filename`](https://nodejs.org/api/globals.html#__filename)                                                   | ✅     |
+| [`__dirname`](https://nodejs.org/api/globals.html#__dirname)                                                     | ✅[^1] |
+| [`__filename`](https://nodejs.org/api/globals.html#__filename)                                                   | ✅[^1] |
 | [`atob`](https://nodejs.org/api/globals.html#atobdata)                                                           | ✅     |
 | [`BroadcastChannel`](https://nodejs.org/api/globals.html#broadcastchannel)                                       | ✅     |
 | [`btoa`](https://nodejs.org/api/globals.html#btoadata)                                                           | ✅     |
@@ -786,3 +786,5 @@ importing them from the relevant `node:` module.
 | [`WritableStream`](https://nodejs.org/api/globals.html#class-writablestream)                                     | ✅     |
 | [`WritableStreamDefaultController`](https://nodejs.org/api/globals.html#class-writablestreamdefaultcontroller)   | ✅     |
 | [`WritableStreamDefaultWriter`](https://nodejs.org/api/globals.html#class-writablestreamdefaultwriter)           | ✅     |
+
+[^1]: These globals cannot be imported directly in your own code.
