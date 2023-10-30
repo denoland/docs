@@ -10,32 +10,38 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: "Better out of the box",
+    // title: "Better out of the box",
+    title: "すぐに使えるほうが良い",
     Svg: require("@site/static/img/deno-box.svg").default,
     description: (
       <>
-        The Deno runtime has support for TypeScript and JSX out of the box,
+        {
+          /* The Deno runtime has support for TypeScript and JSX out of the box,
         along with a built-in key/value store, linter, formatter, and testing
-        library.
+        library. */
+        }
+        Deno ランタイムは、すぐに TypeScript と JSX をサポートします。
+        組み込みのキー/値ストア、リンター、フォーマッタ、およびテスト
+        ライブラリとともに。
       </>
     ),
   },
   {
-    title: "Secure by default",
+    title: "デフォルトで安全",
     Svg: require("@site/static/img/deno-shield.svg").default,
     description: (
       <>
-        Fine-grained permissions let you control what APIs are accessible to
-        your programs and their dependencies.
+        きめ細かい権限により、どの API
+        にアクセスできるかをプログラムとその依存関係を制御できます
       </>
     ),
   },
   {
-    title: "Deploy globally in seconds",
+    title: "数秒でグローバルに展開",
     Svg: require("@site/static/img/deno-balloon.svg").default,
     description: (
       <>
-        Easily create globally distributed app servers with&nbsp;
+        グローバルに分散されたアプリサーバーを簡単に作成できます。&nbsp;
         <a href="https://www.deno.com/deploy" target="_blank">Deno Deploy</a>.
       </>
     ),

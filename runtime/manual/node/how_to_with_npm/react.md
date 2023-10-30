@@ -61,10 +61,12 @@ router
   })
   .get("/api/:dinosaur", (context) => {
     if (context?.params?.dinosaur) {
-      const found = data.find(item => item.name.toLowerCase() === context.params.dinosaur.toLowerCase());
+      const found = data.find((item) =>
+        item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
+      );
       if (found) {
         context.response.body = found;
-        } else {
+      } else {
         context.response.body = "No dinosaurs found.";
       }
     }

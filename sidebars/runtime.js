@@ -55,7 +55,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Deno Basics",
+      label: "Denoの基本",
       items: [
         "manual/getting_started/installation",
         "manual/getting_started/first_steps",
@@ -74,7 +74,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Using & Publishing Modules",
+      label: "Modulesの使用と公開",
       items: [
         "manual/basics/modules/index",
         "manual/basics/modules/reloading_modules",
@@ -110,7 +110,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Interop with Node.js & npm",
+      label: "Node.jsとnpmとの相互運用",
       items: [
         "manual/node/index",
         "manual/node/npm_specifiers",
@@ -125,7 +125,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "CLI Commands",
+      label: "CLI コマンド",
       items: [
         "manual/tools/index",
         {
@@ -192,7 +192,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Testing",
+      label: "テスト",
       items: [
         "manual/basics/testing/index",
         "manual/basics/testing/assertions",
@@ -214,7 +214,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Deploying & Embedding Deno",
+      label: "Denoのdeployとembedding",
       items: [
         "manual/advanced/deploying_deno/index",
         "manual/advanced/deploying_deno/aws_lightsail",
@@ -249,7 +249,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "JSX and DOM APIs",
+      label: "JSX と DOM APIs",
       items: [
         "manual/advanced/jsx_dom/overview",
         "manual/advanced/jsx_dom/jsx",
@@ -271,7 +271,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Contributing to Deno",
+      label: "Denoにコントリビュートする",
       items: [
         "manual/references/contributing/index",
         "manual/references/contributing/architecture",
@@ -295,7 +295,7 @@ const sidebars = {
     "tutorials/index",
     {
       type: "category",
-      label: "Basic Examples",
+      label: "普通のExamples",
       items: [
         "tutorials/hello_world",
         "tutorials/manage_dependencies",
@@ -306,7 +306,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Advanced Examples",
+      label: "高度なExamples",
       items: [
         "tutorials/unix_cat",
         "tutorials/http_server",
@@ -320,7 +320,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "npm Module Examples",
+      label: "npmModuleのExamples",
       items: [
         "tutorials/how_to_with_npm/apollo",
         "tutorials/how_to_with_npm/express",
@@ -335,7 +335,7 @@ const sidebars = {
     },
     {
       type: "link",
-      label: "More on Deno by Example",
+      label: "もっとDenoの例を見る",
       href: "https://examples.deno.land",
     },
     spacer,
