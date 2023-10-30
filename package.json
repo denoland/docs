@@ -21,6 +21,7 @@
     "@docusaurus/preset-classic": "^2.4.3",
     "@docusaurus/theme-search-algolia": "^2.4.3",
     "@mdx-js/react": "^1.6.22",
+    "markdown-it": "^13.0.2",
     "clsx": "^1.2.1",
     "escape-string-regexp": "^2.0.0",
     "prism-react-renderer": "^1.3.5",
