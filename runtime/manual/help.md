@@ -1,18 +1,18 @@
-# Where To Get Help
+# ここでヘルプを取得
 
-Stuck? Lost? Get Help from the Community.
+行き詰まった？道に迷った？コミュニティの助けを借りましょう。
 
-## [Community Discord](https://discord.gg/deno)
+## [Discord](https://discord.gg/deno)
 
-Ask questions and chat with community members in real-time.
+リアルタイムでコミュニティメンバーと質問やチャットができます。
 
 ## [Stack Overflow](https://stackoverflow.com/questions/tagged/deno)
 
-Stack Overflow is a popular forum to ask code-level questions or if you're stuck
-with a specific error.
+Stack Overflowは、コードレベルの質問をしたり、特定のエラーに行き詰まったときによく使われるフォーラムです。
+特定のエラーに行き詰まったときに利用できます。
 [ask your own!](https://stackoverflow.com/questions/ask?tags=deno)
 
 ## [DEV's Deno Community](https://dev.to/t/deno)
 
-A great place to find interesting articles about best practices, application
-architecture and new learnings. Post your articles with the tag `deno`.
+ベスト・プラクティス、アプリケーション・アーキテクチャ、そして新しい学習に関する興味深い記事を見つけるには絶好の場所です。
+に関する興味深い記事を見つける絶好の場所である。タグ `deno` を付けて記事を投稿してください。
