@@ -32,8 +32,7 @@ being generated. `deno doc` will point out missing JSDoc comments, missing types
 for public APIs, and usages of non-exported types from root modules (the files
 specified on the command line).
 
-```ts
-// mod.ts
+```ts title="/mod.ts"
 export function multiply(a: number, b: number) {
   return a * b;
 }
@@ -57,8 +56,7 @@ with non-zero exit code and the output is reported to the standard error.
 The `--lint` flag will error when you use a non-exported type in an exported
 type.
 
-```ts
-// mod.ts
+```ts title="/mod.ts"
 type PersonName = string;
 
 /** A person. */
