@@ -28,13 +28,41 @@ function add(x: number, y: number): number
 ## Linting
 
 You can use `--lint` flag to check for problems in your documentation while it's
-being generated. `deno doc` will point out missing JSDoc comments, missing types
-for public APIs, and usages of non-exported types from root modules (the files
-specified on the command line).
+being generated. `deno doc` will point out three kinds of problems:
+
+1. Error for an exported type from the root module referencing a non-exported
+   type.
+   - Ensures API consumers have access to all the types the API uses. This can
+     be suppressed by exporting the type from a root module (one of the files
+     specified to `deno doc` on the command line) or by marking the type with an
+     `@internal` jsdoc tag.
+1. Error for missing return type or property type on a **public** type.
+   - Ensures `deno doc` displays the return/property type and helps improve type
+     checking performance.
+1. Error for missing JS doc comment on a **public** type.
+   - Ensures the code is documented. Can be suppressed by adding a jsdoc
+     comment, or via an `@ignore` jsdoc tag to exclude it from the
+     documentation, or alternatively an `@internal` tag to keep it in the docs,
+     but signify it's internal.
+
+For example:
 
 ```ts title="/mod.ts"
 export function multiply(a: number, b: number) {
   return a * b;
+}
+
+interface PersonName {
+  firstName: string;
+  lastName: string;
+}
+
+/** A person. */
+export interface Person {
+  /** Name of the person. */
+  name: PersonName;
+  /** Age of the person. */
+  age: number;
 }
 ```
 
@@ -44,48 +72,15 @@ Missing JS documentation comment.
 Missing return type.
     at file:///mod.ts:1:1
 
-error: Found 2 documentation diagnostics.
+Type 'Person' references type 'PersonName' which is not exported from a root module.
+    at file:///mod.ts:11:1
+
+error: Found 3 documentation diagnostics.
 ```
 
 These lints are meant to help you write better documentation and speed up
 type-checking in your projects. If any problems are found, the program exits
 with non-zero exit code and the output is reported to the standard error.
-
-Note: If you have an internal type, method, property, or constructor that is
-internal to the project, marking these with the jsdoc tag `@internal` will
-suppress linting errors on that type.
-
-### Non-exported type referenced in exported type lint
-
-The `--lint` flag will error when you use a non-exported type in an exported
-type.
-
-```ts title="/mod.ts"
-type PersonName = string;
-
-/** A person. */
-export interface Person {
-  /** Name of a person. */
-  name: PersonName;
-}
-```
-
-```shell
-$ deno doc --lint mod.ts
-Type 'Person' references type 'PersonName' which is not exported from a root module.
-    at file:///mod.ts:3:1
-
-error: Found 1 documentation diagnostic.
-```
-
-The recommended fix is to export the `PersonName` type from the module so API
-consumers also have access to it. If you really don't want to do that, mark the
-non-exported type as `@internal` and the error will be suppressed:
-
-```ts
-/** @internal */
-type PersonName = string;
-```
 
 ## HTML output
 
