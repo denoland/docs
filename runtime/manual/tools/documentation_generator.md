@@ -48,39 +48,27 @@ being generated. `deno doc` will point out three kinds of problems:
 For example:
 
 ```ts title="/mod.ts"
-export function multiply(a: number, b: number) {
-  return a * b;
+interface Person {
+  name: string;
+  // ...
 }
 
-interface PersonName {
-  firstName: string;
-  lastName: string;
-}
-
-/** A person. */
-export interface Person {
-  /** Name of the person. */
-  name: PersonName;
-  /** Age of the person. */
-  age: number;
+export function getName(person: Person) {
+  return person.name;
 }
 ```
 
 ```shell
 $ deno doc --lint mod.ts
+Type 'getName' references type 'Person' which is not exported from a root module.
 Missing JS documentation comment.
 Missing return type.
-    at file:///mod.ts:1:1
-
-Type 'Person' references type 'PersonName' which is not exported from a root module.
-    at file:///mod.ts:11:1
-
-error: Found 3 documentation diagnostics.
+    at file:///mod.ts:6:1
 ```
 
 These lints are meant to help you write better documentation and speed up
 type-checking in your projects. If any problems are found, the program exits
-with non-zero exit code and the output is reported to the standard error.
+with non-zero exit code and the output is reported to standard error.
 
 ## HTML output
 
