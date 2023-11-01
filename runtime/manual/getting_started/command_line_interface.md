@@ -110,6 +110,29 @@ deno test --watch
 deno fmt --watch
 ```
 
+## Hot Module Replacement mode
+
+You can use `--unstable-hmr` flag with `deno run` to enable the hot module
+replacement mode. Instead of restarting the program, the runtime will try to
+update the program in-place. If updating in-place fails, the program will still
+be restarted.
+
+```shell
+deno run --unstable-hmr main.ts
+```
+
+When a hot module replacement is triggered, the runtime will dispatch a
+`CustomEvent` of type `hmr` that will include `path` property in its `detail`
+object. You can listen for this event and perform any additional logic that you
+need to do when a module is updated (eg. notify a browser over a WebSocket
+connection).
+
+```ts
+addEventListener("hmr", (e) => {
+  console.log("HMR triggered", e.detail.path);
+});
+```
+
 ## Integrity flags (lock files)
 
 Affect commands which can download resources to the cache: `deno cache`,
