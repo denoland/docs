@@ -42,8 +42,8 @@ being generated. `deno doc` will point out three kinds of problems:
 1. Error for missing JS doc comment on a **public** type.
    - Ensures the code is documented. Can be suppressed by adding a jsdoc
      comment, or via an `@ignore` jsdoc tag to exclude it from the
-     documentation. Alternatively add an `@internal` tag to keep it in the docs,
-     but signify it's internal.
+     documentation. Alternatively, add an `@internal` tag to keep it in the
+     docs, but signify it's internal.
 
 For example:
 
