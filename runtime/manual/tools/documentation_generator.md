@@ -51,6 +51,10 @@ These lints are meant to help you write better documentation and speed up
 type-checking in your projects. If any problems are found, the program exits
 with non-zero exit code and the output is reported to the standard error.
 
+Note: If you have an internal type, method, property, or constructor that is
+internal to the project, marking these with the jsdoc tag `@internal` will
+suppress linting errors on that type.
+
 ### Non-exported type referenced in exported type lint
 
 The `--lint` flag will error when you use a non-exported type in an exported
