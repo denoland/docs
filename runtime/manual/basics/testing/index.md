@@ -453,7 +453,7 @@ that provides test spies and can be used in Deno by importing it from a CDN,
 such as Skypack:
 
 ```js
-import sinon from "https://cdn.skypack.dev/sinon";
+import sinon from "npm:sinon";
 ```
 
 Say we have two functions, `foo` and `bar` and want to assert that `bar` is
@@ -473,7 +473,7 @@ This way, we can call `foo(bar)` in the application code or wrap a spy function
 around `bar` and call `foo(spy)` in the testing code:
 
 ```js, ignore
-import sinon from "https://cdn.skypack.dev/sinon";
+import sinon from "npm:sinon";
 import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 import { bar, foo } from "./my_file.js";
 
@@ -513,7 +513,7 @@ export function foo() {
 And then `import` in a test file:
 
 ```js, ignore
-import sinon from "https://cdn.skypack.dev/sinon";
+import sinon from "npm:sinon";
 import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 import { foo, funcs } from "./my_file.js";
 
