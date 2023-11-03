@@ -61,10 +61,12 @@ router
   })
   .get("/api/:dinosaur", (context) => {
     if (context?.params?.dinosaur) {
-      const found = data.find(item => item.name.toLowerCase() === context.params.dinosaur.toLowerCase());
+      const found = data.find((item) =>
+        item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
+      );
       if (found) {
         context.response.body = found;
-        } else {
+      } else {
         context.response.body = "No dinosaurs found.";
       }
     }
@@ -85,7 +87,7 @@ will return dinosaur information based on the route. Let's start the API server:
 deno run --allow-env --allow-net api/main.ts
 ```
 
-If we go to `localhost:8000/api`, we see:
+If we go to `localhost:8000`, we see:
 
 ![json response of dinosaurs](../../images/how-to/react/dinosaur-api.png)
 
