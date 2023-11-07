@@ -220,6 +220,8 @@ export default function configureRedirects(app: Hono) {
     );
   });
 
+  r("/deploy/manual/using-jsx", "/runtime/manual/advanced/jsx_dom/jsx");
+
   app.get(
     "/deploy/docs/runtime-api",
     (c) => c.redirect("/deploy/api"),
