@@ -2,13 +2,16 @@ import OpenApiEndpoint from "@site/src/components/OpenApiEndpoint";
 
 # Organizations
 
-Organizations are a container for projects, domains, and KV databases. API 
-access tokens are scoped to access resources within an organization.
+Organizations are a container for projects, domains, and KV databases. New
+organizations can be created in the
+[Deno Deploy dashboard](https://dash.deno.com). The access tokens created for
+your account may make changes to any of the organizations to which you have
+access.
 
 ## Get organization details
 
 <OpenApiEndpoint path="/organizations/{organizationId}" method="get">
-  Get meta information about your organization, passing in your 
+  Get meta information about your organization, passing in your
   unique ID as a path parameter.
 </OpenApiEndpoint>
 
@@ -58,7 +61,7 @@ access tokens are scoped to access resources within an organization.
 ## Add a domain to an organization
 
 <OpenApiEndpoint path="/organizations/{organizationId}/domains" method="post">
-  Add a new domain to the specified organization. Before use, added domain 
-  needs to be verified, and TLS certificates for the domain need to be 
+  Add a new domain to the specified organization. Before use, added domain
+  needs to be verified, and TLS certificates for the domain need to be
   provisioned.
 </OpenApiEndpoint>

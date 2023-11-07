@@ -19,22 +19,22 @@ and other data related to a deployed serverless application.
   information to check on the current status of a build, or to figure out
   what went wrong in the case of a failure.
   <br/><br/>
-  The response format can be controlled by the <code>Accept</code> header. If&nbsp; 
-  <code>application/x-ndjson</code> is specified, the response will be a stream 
-  of newline-delimited JSON objects. Otherwise it will be a JSON array of 
+  The response format can be controlled by the <code>Accept</code> header. If&nbsp;
+  <code>application/x-ndjson</code> is specified, the response will be a stream
+  of newline-delimited JSON objects. Otherwise it will be a JSON array of
   objects.
 </OpenApiEndpoint>
 
 ## Get deployment app logs
 
 <OpenApiEndpoint path="/deployments/{deploymentId}/app_logs" method="get">
-  Get execution logs of a deployment. This API can return either past logs or 
+  Get execution logs of a deployment. This API can return either past logs or
   real-time logs depending on the presence of the <code>since</code> and&nbsp;
-  <code>until</code> query parameters. If at least one of them is provided, 
+  <code>until</code> query parameters. If at least one of them is provided,
   past logs are returned. Otherwise real-time logs are returned.
   <br/><br/>
   Also, the response format can be controlled by the <code>Accept</code>&nbsp;
-  header. If <code>application/x-ndjson</code> is specified, the response will 
-  be a stream of newline-delimited JSON objects. Otherwise, it will be a JSON 
+  header. If <code>application/x-ndjson</code> is specified, the response will
+  be a stream of newline-delimited JSON objects. Otherwise, it will be a JSON
   array of objects.
 </OpenApiEndpoint>

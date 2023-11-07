@@ -81,6 +81,16 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "Subhosting",
+      items: [
+        "manual/subhosting/index",
+        "manual/subhosting/getting_started",
+        "manual/subhosting/projects_and_deployments",
+        "manual/subhosting/domains",
+      ],
+    },
+    {
+      type: "category",
       label: "Policies & Fair Use",
       items: [
         "manual/fair-use-policy",

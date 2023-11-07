@@ -15,8 +15,8 @@ Custom domains can be used to give your deployments a unique URL.
 ## Add a domain to an organization
 
 <OpenApiEndpoint path="/organizations/{organizationId}/domains" method="post">
-  Add a new domain to the specified organization. Before use, added domain 
-  needs to be verified, and TLS certificates for the domain need to be 
+  Add a new domain to the specified organization. Before use, added domain
+  needs to be verified, and TLS certificates for the domain need to be
   provisioned.
 </OpenApiEndpoint>
 
@@ -29,8 +29,8 @@ Custom domains can be used to give your deployments a unique URL.
 ## Associate a domain with a deployment
 
 <OpenApiEndpoint path="/domains/{domainId}" method="patch">
-  With this API endpoint, you can associate or disassociate a domain with a 
-  deployment. Domain association is required in order to serve the deployment 
+  With this API endpoint, you can associate or disassociate a domain with a
+  deployment. Domain association is required in order to serve the deployment
   on the domain.
 </OpenApiEndpoint>
 
@@ -43,7 +43,7 @@ Custom domains can be used to give your deployments a unique URL.
 ## Verify a domain
 
 <OpenApiEndpoint path="/domains/{domainId}/verify" method="post">
-  This API endpoint triggers the ownership verification of a domain. It should 
+  This API endpoint triggers the ownership verification of a domain. It should
   be called after necessary DNS records are properly set up.
 </OpenApiEndpoint>
 
@@ -58,5 +58,3 @@ Custom domains can be used to give your deployments a unique URL.
 <OpenApiEndpoint path="/domains/{domainId}/certificates/provision" method="post">
   Provision TLS certificates for your domain.
 </OpenApiEndpoint>
-
-

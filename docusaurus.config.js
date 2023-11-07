@@ -1,3 +1,4 @@
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const findReplace = require("./src/remark/find_replace");
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
@@ -76,7 +77,7 @@ const config = {
       },
     ],
     // Enables our custom pages in "src" to use Tailwind classes
-    async function tailwindPlugin(context, options) {
+    async function tailwindPlugin(_context, _options) {
       return {
         name: "docusaurus-tailwindcss",
         configurePostCss(postcssOptions) {
@@ -84,6 +85,19 @@ const config = {
           postcssOptions.plugins.push(require("tailwindcss"));
           postcssOptions.plugins.push(require("autoprefixer"));
           return postcssOptions;
+        },
+      };
+    },
+    // Set up a node.js polyfill for webpack builds
+    function nodePolyfill(_context, _options) {
+      return {
+        name: "node-polyfill",
+        configureWebpack(_config, _isServer) {
+          return {
+            plugins: [
+              new NodePolyfillPlugin(),
+            ],
+          };
         },
       };
     },
