@@ -48,6 +48,7 @@ const sidebars = {
     "manual/queue_overview",
     "manual/data_modeling_typescript",
     "manual/on_deploy",
+    "manual/backup",
   ]),
 
   kvTutorialsHome: mainMenu.concat([
