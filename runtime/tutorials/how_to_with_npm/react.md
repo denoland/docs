@@ -87,7 +87,7 @@ will return dinosaur information based on the route. Let's start the API server:
 deno run --allow-env --allow-net api/main.ts
 ```
 
-If we go to `localhost:8000/api`, we see:
+If we go to `localhost:8000`, we see:
 
 ![json response of dinosaurs](../../manual/images/how-to/react/dinosaur-api.png)
 

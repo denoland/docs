@@ -40,7 +40,7 @@ passing in a port number in options bag as the first or second argument:
 // To listen on port 4242.
 Deno.serve({ port: 4242 }, handler);
 
-// To listen on port 4500 and bind to 0.0.0.0.
+// To listen on port 4242 and bind to 0.0.0.0.
 Deno.serve({ port: 4242, hostname: "0.0.0.0", handler });
 ```
 
