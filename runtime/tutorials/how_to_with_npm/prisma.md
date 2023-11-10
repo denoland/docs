@@ -142,7 +142,7 @@ deno run -A prisma/seed.ts
 After doing so, you should be able to see your data on Prisma Studio by running the following command:
 
 ```bash, ignore
-npx dotenv-cli -- deno run -A npm:prisma studio
+deno run -A npm:prisma studio
 ```
 
 You should see something similar to the following screenshot:
