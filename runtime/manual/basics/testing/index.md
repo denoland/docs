@@ -449,8 +449,7 @@ For example integration see:
 
 Test spies are function stand-ins that are used to assert if a function's
 internal behavior matches expectations. Sinon is a widely used testing library
-that provides test spies and can be used in Deno by importing it from a CDN,
-such as Skypack:
+that provides test spies and can be used in Deno by importing it from NPM:
 
 ```js
 import sinon from "npm:sinon";
