@@ -269,7 +269,7 @@ Promises. You can also optionally check for the error type and error message.
 This can be used similar to `assertThrows()` but with async functions.
 
 ```js
-Deno.test("Test Assert Throws Async", () => {
+Deno.test("Test Assert Throws Async", async () => {
   await assertRejects(
     () => {
       return new Promise(() => {
