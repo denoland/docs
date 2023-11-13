@@ -53,7 +53,7 @@ model Dinosaur {
 }
 ```
 
-Prisma also have generates a `.env` file with `DATABASE_URL`. Let's
+Prisma also generates a `.env` file with a `DATABASE_URL` environment variable. Let's
 assign `DATABASE_URL` to a PostgreSQL connection string. In this example, we'll
 use a free [PostgreSQL database from Supabase](https://supabase.com/database).
 
@@ -73,10 +73,10 @@ deno run -A --unstable npm:prisma@latest generate --no-engine
 
 To get started with the Prisma Data Platform:
 
-1. Sign up for a free [Prisma Data Platform account](https://console.prisma.io)
-2. Create a project
-3. Navigate to the project you created
-4. Enable Accelerate
+1. Sign up for a free [Prisma Data Platform account](https://console.prisma.io).
+2. Create a project.
+3. Navigate to the project you created.
+4. Enable Accelerate by providing your database's connection string.
 5. Generate an Accelerate connection string and copy it to your clipboard.
 
 Assign the Accelerate connection string, that begins with `prisma://`, to `DATABASE_URL` in your `.env` file replacing your existing connection string.
