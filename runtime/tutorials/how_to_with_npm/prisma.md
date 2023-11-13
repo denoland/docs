@@ -27,7 +27,7 @@ cd rest-api-with-prisma-oak
 Then, let's run `prisma init` with Deno:
 
 ```shell, ignore
-deno run --allow-read --allow-env --allow-write npm:prisma@^4.5 init
+deno run --allow-read --allow-env --allow-write npm:prisma@latest init
 ```
 
 This will generate
@@ -53,39 +53,33 @@ model Dinosaur {
 }
 ```
 
-Prisma should also have generated a `.env` file with `DATABASE_URL`. Let's
-assign `DATABASE_URL` to a PostreSQL connection string. In this example, we'll
+Prisma also generates a `.env` file with a `DATABASE_URL` environment variable. Let's
+assign `DATABASE_URL` to a PostgreSQL connection string. In this example, we'll
 use a free [PostgreSQL database from Supabase](https://supabase.com/database).
 
 Next, let's create the database schema:
 
 ```shell, ignore
-deno run -A npm:prisma@^4.5 db push
+deno run -A npm:prisma@latest db push
 ```
 
-After that's complete, we'll need to generate a Prisma client for Data Proxy:
+After that's complete, we'll need to generate a Prisma Client:
 
 ```shell, ignore
-deno run -A --unstable npm:prisma@^4.5 generate --data-proxy
+deno run -A --unstable npm:prisma@latest generate --no-engine
 ```
 
-## Setup Prisma Data Platform
+## Setup Accelerate in the Prisma Data Platform
 
-In order to use Prisma Data Platform, we'll have to create and connect a GitHub
-repo. So let's initialize the repository, create a new GitHub repo, add the
-remote origin, and push the repo.
+To get started with the Prisma Data Platform:
 
-Next, sign up for a free
-[Prisma Data Platform account](https://cloud.prisma.io/).
+1. Sign up for a free [Prisma Data Platform account](https://console.prisma.io).
+2. Create a project.
+3. Navigate to the project you created.
+4. Enable Accelerate by providing your database's connection string.
+5. Generate an Accelerate connection string and copy it to your clipboard.
 
-Click **New Project** and select **Import a Prisma Repository**.
-
-It'll ask for your PostgreSQL connection string, which you have in your `.env`.
-Paste it here. Then click **Create Project**.
-
-You'll receive a new connection string that begins with `prisma://`. Let's grab
-that and assign it to `DATABASE_URL` in your `.env` file, replacing your
-PostgreSQL string from Supabase.
+Assign the Accelerate connection string, that begins with `prisma://`, to `DATABASE_URL` in your `.env` file replacing your existing connection string.
 
 Next, let's create a seed script to seed the database.
 
@@ -106,11 +100,7 @@ import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
 const envVars = await load();
 
 const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: envVars.DATABASE_URL,
-    },
-  },
+  datasourceUrl: envVars.DATABASE_URL,
 });
 
 const dinosaurData: Prisma.DinosaurCreateInput[] = [
@@ -149,7 +139,13 @@ We can now run `seed.ts` with:
 deno run -A prisma/seed.ts
 ```
 
-After doing so, your Prisma dashboard should show the new dinosaurs:
+After doing so, you should be able to see your data on Prisma Studio by running the following command:
+
+```bash, ignore
+deno run -A npm:prisma studio
+```
+
+You should see something similar to the following screenshot:
 
 ![New dinosaurs are in Prisma dashboard](../../manual/images/how-to/prisma/1-dinosaurs-in-prisma.png)
 
@@ -262,7 +258,7 @@ Next, let's `POST` a new user with this `curl` command:
 curl -X POST http://localhost:8000/dinosaur -H "Content-Type: application/json" -d '{"name": "Deno", "description":"The fastest, most secure, easiest to use Dinosaur ever to walk the Earth."}'
 ```
 
-And in your Prisma dashboard, you should see a new row:
+You should now see a new row on Prisma Studio:
 
 ![New dinosaur Deno in Prisma](../../manual/images/how-to/prisma/3-new-dinosaur-in-prisma.png)
 
