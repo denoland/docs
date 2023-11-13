@@ -77,6 +77,10 @@ h3 {
   line-height: 1.2;
 }
 
+td p:last-child {
+  margin: 0;
+}
+
 .navbar {
   position: fixed;
   width: 100%;

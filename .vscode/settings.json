@@ -5,5 +5,10 @@
   "deno.lint": true,
   "deno.unstable": true,
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "denoland.vscode-deno"
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "[markdown]": {
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "on",
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  }
 }

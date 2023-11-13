@@ -21,12 +21,16 @@
     "@docusaurus/preset-classic": "^2.4.3",
     "@docusaurus/theme-search-algolia": "^2.4.3",
     "@mdx-js/react": "^1.6.22",
+    "@readme/openapi-parser": "^2.5.0",
     "clsx": "^1.2.1",
     "escape-string-regexp": "^2.0.0",
+    "markdown-it": "^13.0.2",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "prism-react-renderer": "^1.3.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "unist-util-visit": "^2.0.1"
+    "unist-util-visit": "^2.0.1",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.4.3",
