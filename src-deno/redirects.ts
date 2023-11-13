@@ -248,4 +248,8 @@ export default function configureRedirects(app: Hono) {
     const unversionedPath = c.req.path.split("/").slice(3);
     return c.redirect("/deploy/manual/" + unversionedPath.join("/"));
   });
+
+  // Subhosting
+  r("/subhosting", "/deploy/manual/subhosting");
+  r("/deploy/manual/subhosting", "/deploy/api/rest/domains");
 }

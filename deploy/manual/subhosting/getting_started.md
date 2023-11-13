@@ -83,8 +83,8 @@ const API = "https://api.deno.com/v1";
 const res = await fetch(`${API}/organizations/${orgId}/projects`, {
   method: "POST",
   headers: {
-    authorization: `Bearer ${accessToken}`,
-    "content-type": "application/json",
+    Authorization: `Bearer ${accessToken}`,
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
     name: null, // randomly generates project name

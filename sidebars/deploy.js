@@ -86,7 +86,6 @@ const sidebars = {
         "manual/subhosting/index",
         "manual/subhosting/getting_started",
         "manual/subhosting/projects_and_deployments",
-        "manual/subhosting/domains",
       ],
     },
     {

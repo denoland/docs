@@ -19,6 +19,51 @@ scenario where you use Deno Deploy to run your users' untrusted code in a secure
 and scalable environment designed for
 [multitenancy](https://www.ibm.com/topics/multi-tenant).
 
+## Quick start example
+
+Looking for the smallest possible example that shows how to deploy code to
+Deno's isolate cloud? We've got you covered below. Once you've skimmed over it,
+you can read on for more details about subhosting.
+
+```ts
+// 1.) Get API access info ready
+const accessToken = Deno.env.get("DEPLOY_ACCESS_TOKEN");
+const orgId = Deno.env.get("DEPLOY_ORG_ID");
+const API = "https://api.deno.com/v1";
+const headers = {
+  Authorization: `Bearer ${accessToken}`,
+  "Content-Type": "application/json",
+};
+
+// 2.) Create a new project
+const pr = await fetch(`${API}/organizations/${orgId}/projects`, {
+  method: "POST",
+  headers,
+  body: JSON.stringify({
+    name: null, // randomly generates project name
+  }),
+});
+const project = await pr.json();
+
+// 3.) Deploy a "hello world" server to the new project
+const dr = await fetch(`${API}/projects/${project.id}/deployments`, {
+  method: "POST",
+  headers,
+  body: JSON.stringify({
+    entryPointUrl: "main.ts",
+    assets: {
+      "main.ts": {
+        "kind": "file",
+        "content": `Deno.serve(() => new Response("Hello, World!"));`,
+        "encoding": "utf-8",
+      },
+    },
+    envVars: {},
+  }),
+});
+console.log(dr.status);
+```
+
 ## How subhosting works
 
 To build subhosting with Deno Deploy, it helps to understand some key resources
@@ -51,7 +96,8 @@ The steps to implement subhosting are roughly as follows:
    REST API
 1. [Create a project](./projects_and_deployments), and then create your first
    deployment for that project
-1. [Provision a domain](./domains) and associate that domain with a deployment
+1. [Provision a domain](../../api/rest/domains.md) and associate that domain
+   with a deployment
 
 Using these techniques, you can package up user code as "deployments", and
 execute that code on a Deno-provisioned URL or a custom URL you can configure
