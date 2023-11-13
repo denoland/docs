@@ -251,5 +251,5 @@ export default function configureRedirects(app: Hono) {
 
   // Subhosting
   r("/subhosting", "/deploy/manual/subhosting");
-  r("/deploy/manual/subhosting", "/deploy/api/rest/domains");
+  r("/deploy/manual/subhosting/domains", "/deploy/api/rest/domains");
 }
