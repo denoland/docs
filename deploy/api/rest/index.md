@@ -18,11 +18,9 @@ https://api.deno.com/v1/
 The v1 API uses
 [HTTP bearer token](https://swagger.io/docs/specification/authentication/bearer-authentication/)
 authentication. You can create an access token to use the API in the dashboard
-[here](https://dash.deno.com/account#access-tokens).
-
-Most API requests will also require your organization ID. You can retrieve yours
-by looking in the address bar of your browser in the Deno Dashboard while
-viewing the project list for your organization.
+[here](https://dash.deno.com/account#access-tokens). Most API requests will also
+require your organization ID. You can retrieve yours from the Deno Deploy
+dashboard for your organization.
 
 ![Find your org ID here](./images/org-id.png)
 
