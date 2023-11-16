@@ -10,6 +10,11 @@ Deploy. Access to the service will be controlled by
 deem to be in violation of this policy, runs the risk of having their account
 terminated.
 
+## Maximum size for deployments
+
+When uploading assets to a deployment, the total size of all files within the
+deployment (source files and static files) __should not exceed 1 gigabyte__.
+
 ## TLS proxying
 
 On the Free plan, TLS termination is required for outgoing connections to port
