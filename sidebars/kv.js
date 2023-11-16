@@ -9,12 +9,12 @@ const mainMenu = [
   {
     type: "link",
     href: "/kv/manual",
-    label: "Manual",
+    label: "マニュアル",
     className: "icon-menu-option icon-menu-user-guide",
   },
   {
     type: "link",
-    label: "Tutorials & Examples",
+    label: "チュートリアル & Examples",
     href: "/kv/tutorials",
     className: "icon-menu-option icon-menu-tutorials",
   },
@@ -59,18 +59,18 @@ const sidebars = {
     },
     {
       type: "doc",
-      label: "Overview",
+      label: "概要",
       id: "tutorials/index",
     },
     {
       type: "doc",
       id: "tutorials/schedule_notification",
-      label: "Schedule future notifications",
+      label: "将来の通知をスケジュールする",
     },
     {
       type: "doc",
       id: "tutorials/webhook_processor",
-      label: "Offloading webhooks to a queue",
+      label: "ウェブフックをキューにオフロードする",
     },
     {
       type: "link",

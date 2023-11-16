@@ -14,13 +14,13 @@ const mainMenu = [
   },
   {
     type: "link",
-    label: "Tutorials & Examples",
+    label: "チュートリアル & Examples",
     href: "/deploy/tutorials",
     className: "icon-menu-option icon-menu-tutorials",
   },
   {
     type: "link",
-    label: "API Reference",
+    label: "API リファレンス",
     href: "/deploy/api",
     className: "icon-menu-option icon-menu-api",
   },
@@ -32,7 +32,7 @@ const sidebars = {
   deployGuideHome: mainMenu.concat([
     {
       type: "html",
-      value: "<div>Manual</div>",
+      value: "<div>マニュアル</div>",
       className: "section-header",
     },
     {
@@ -55,7 +55,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Projects & Organizations",
+      label: "プロジェクト & 組織",
       items: [
         "manual/deployments",
         "manual/custom-domains",
@@ -66,7 +66,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Connect to Databases",
+      label: "データベースと接続",
       items: [
         {
           type: "link",
@@ -90,7 +90,16 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Policies & Fair Use",
+      label: "Subhosting",
+      items: [
+        "manual/subhosting/index",
+        "manual/subhosting/getting_started",
+        "manual/subhosting/projects_and_deployments",
+      ],
+    },
+    {
+      type: "category",
+      label: "ポリシー & フェアユース",
       items: [
         "manual/fair-use-policy",
         "manual/privacy-policy",
@@ -106,7 +115,7 @@ const sidebars = {
   deployTutorialsHome: mainMenu.concat([
     {
       type: "html",
-      value: "<div>Tutorials &amp; Examples</div>",
+      value: "<div>チュートリアル &amp; Examples</div>",
       className: "section-header",
     },
     {
@@ -115,7 +124,7 @@ const sidebars = {
     },
     {
       type: "link",
-      label: "More on Deno by Example",
+      label: "例によってDenoの詳細",
       href: "https://examples.deno.land",
     },
     {

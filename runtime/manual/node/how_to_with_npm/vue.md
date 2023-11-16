@@ -63,10 +63,12 @@ router
   })
   .get("/api/:dinosaur", (context) => {
     if (context?.params?.dinosaur) {
-      const found = data.find(item => item.name.toLowerCase() === context.params.dinosaur.toLowerCase());
+      const found = data.find((item) =>
+        item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
+      );
       if (found) {
         context.response.body = found;
-        } else {
+      } else {
         context.response.body = "No dinosaurs found.";
       }
     }
@@ -270,8 +272,8 @@ Tying it all together, let's update `src/App.vue`:
 
 ```tsx, ignore
 <template>
-  <router-view/>
-</template>
+  <router-view />
+</template>;
 ```
 
 ## Add routing

@@ -60,8 +60,8 @@ async function handleHttp(conn: Deno.Conn) {
 ## Using the `std/http` file server
 
 The Deno standard library provides you with a
-[file server](https://deno.land/std/http/file_server.ts) so that
-you don't have to write your own.
+[file server](https://deno.land/std/http/file_server.ts) so that you don't have
+to write your own.
 
 To use it, first install the remote script to your local file system. This will
 install the script to the Deno installation root's bin directory, e.g.

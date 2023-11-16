@@ -8,14 +8,20 @@ on:
 jobs:
   deploy:
     name: Deploy
-    runs-on: ubuntu-22.04-xl
+    runs-on: ubuntu-latest
+
     permissions:
       id-token: write # Needed for auth with Deno Deploy
       contents: read # Needed to clone the repository
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -23,11 +29,11 @@ jobs:
           node-version: lts/*
 
       - name: Build step
-        run: npm install && npm run build
+        run: "npm install && npm run build" # 📝 Update the build command(s) if necessary
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "deno-docs"
-          entrypoint: "server.ts"
-          root: "build"
+          project: "deno-docs-ja"
+          entrypoint: "server.ts" # 📝 Update the entrypoint if necessary
+          root: "build" # 📝 Update the root if necessary
