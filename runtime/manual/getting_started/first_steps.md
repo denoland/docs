@@ -144,8 +144,6 @@ One of the most common use cases for Deno is building an HTTP Server.
 Create a new file called `http_server.ts` and copy and paste the code below:
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
 const handler = async (_request: Request): Promise<Response> => {
   const resp = await fetch("https://api.github.com/users/denoland", {
     // The init object here has a headers object containing a
@@ -165,7 +163,7 @@ const handler = async (_request: Request): Promise<Response> => {
   });
 };
 
-serve(handler);
+Deno.serve(handler);
 ```
 
 Let's walk through what this program does.
