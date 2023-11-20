@@ -24,19 +24,20 @@ help you generate cron schedule strings.
 
 ## Static vs Dynamic Tasks
 
-`Deno.cron` interface is designed to support static definition of cron tasks
-based on pre-defined schedules. All `Deno.cron` tasks must be defined at the
-top-level. Any nested `Deno.cron` invocations (e.g. inside
+[`Deno.cron`](https://deno.land/api?s=Deno.cron&unstable=) interface is designed
+to support static definition of cron tasks based on pre-defined schedules. All
+`Deno.cron` tasks must be defined at the top-level. Any nested `Deno.cron`
+definitions (e.g. inside
 [`Deno.serve`](https://deno.land/api?s=Deno.serve&unstable=) handler) will
 result in an error or will be ignored.
 
 If you need to schedule tasks dynamically during your Deno program execution,
-you can the [Deno Queues](./queue_overview) APIs.
+you can use the [Deno Queues](./queue_overview) APIs.
 
 ## Time zone
 
 `Deno.cron` schedules are specified using UTC time zone. This helps avoid issues
-with time zones, which observe daylight saving time.
+with time zones which observe daylight saving time.
 
 ## Overlapping executions
 
@@ -77,14 +78,14 @@ will have its own independent set of cron tasks.
 Deno Deploy offers serverless implementation of `Deno.cron` that is designed for
 high availability and scale. Deno Deploy automatically extracts your `Deno.cron`
 definitions at deployment time, and schedules them for execution using on-demand
-isolates. Your latest production deployment holds the set of cron tasks that are
-scheduled for execution. To add, remove, or modify cron tasks, simply modify
-your `Deno.cron` code and create a new production deployment.
+isolates. Your latest production deployment defines the set of active cron tasks
+that are scheduled for execution. To add, remove, or modify cron tasks, simply
+modify your code and create a new production deployment.
 
 Deno Deploy guarantees that your cron tasks are executed at least once per each
 scheduled time interval. This generally means that your cron handler will be
-invoked once. In some failure scenarios, the handler may be invoked multiple
-times for the same scheduled time interval.
+invoked once per scheduled time. In some failure scenarios, the handler may be
+invoked multiple times for the same scheduled time.
 
 #### Cron Dashboard
 
