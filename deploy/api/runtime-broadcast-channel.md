@@ -2,16 +2,12 @@
 
 In Deno Deploy, code is run in different data centers around the world in order
 to reduce latency by servicing requests at the data center nearest to the
-client. In the browser, the BroadcastChannel API allows different tabs with the
-same origin to exchange messages. In Deno Deploy, the BroadcastChannel API
-provides a communication mechanism between the various instances; a simple
-message bus that connects the various Deploy instances world wide.
-
-- [Constructor](#constructor)
-  - [Parameters](#parameters)
-- [Properties](#properties)
-- [Methods](#methods)
-- [Example](#example)
+client. In the browser, the
+[`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API)
+API allows different tabs with the same origin to exchange messages. In Deno
+Deploy, the BroadcastChannel API provides a communication mechanism between the
+various instances; a simple message bus that connects the various Deploy
+instances worldwide.
 
 ## Constructor
 
@@ -49,64 +45,53 @@ The return type of the constructor is a `BroadcastChannel` instance.
 methods of `EventTarget` like `addEventListener` and `removeEventListener` on an
 instance of `BroadcastChannel`.
 
-## Example
+## Example: Update an in-memory cache across instances
 
-A small example that has an endpoint to send a new message to all other actively
-running instances in different regions and another to fetch all messages from an
-instance.
+One use case for a message bus like the one enabled by `BroadcastChannel` is
+updating an in-memory cache of data between isolates running in different data
+centers across the network. In the example below, we show how you can configure
+a simple server that uses `BroadcastChannel` to synchornize state across all
+running instances of the server.
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
+import { Hono } from "https://deno.land/x/hono/mod.ts";
 
+// in-memory cache of messages
 const messages = [];
-// Create a new broadcast channel named earth.
-const channel = new BroadcastChannel("earth");
-// Set onmessage event handler.
+
+// A BroadcastChannel used by all isolates
+const channel = new BroadcastChannel("all_messages");
+
+// When a new message comes in from other instances, add it
 channel.onmessage = (event: MessageEvent) => {
-  // Update the local state when other instances
-  // send us a new message.
   messages.push(event.data);
 };
 
-function handler(req: Request): Response {
-  const { pathname, searchParams } = new URL(req.url);
+// Create a server to add and retrieve messages
+const app = new Hono();
 
-  // Handle /send?message=<message> endpoint.
-  if (pathname.startsWith("/send")) {
-    const message = searchParams.get("message");
-    if (!message) {
-      return new Response("?message not provided", { status: 400 });
-    }
-
-    // Update local state.
+// Add a message to the list
+app.get("/send", (c) => {
+  // New messages can be added by including a "message" query param
+  const message = c.req.query("message");
+  if (message) {
     messages.push(message);
-    // Inform all other active instances of the deployment
-    // about the new message.
     channel.postMessage(message);
-    return new Response("message sent");
   }
+  return c.redirect("/");
+});
 
-  // Handle /messages request.
-  if (pathname.startsWith("/messages")) {
-    return new Response(JSON.stringify(messages), {
-      "content-type": "application/json",
-    });
-  }
+// Get a list of messages
+app.get("/", (c) => {
+  // Return the current list of messages
+  return c.json(messages);
+});
 
-  return new Response("not found", { status: 404 });
-}
-
-serve(handler);
+Deno.serve(app.fetch);
 ```
 
-You can test this example by making an HTTP request to
-`https://broadcast.deno.dev/send?message=Hello_from_<region>` and then making
-another request to `https://broadcast.deno.dev/messages` from a different region
-(by using a VPN or some other way) to check if the first request's message is
-present in the second region.
-
-We built [a small chat application](https://github.com/lucacasonato/deploy_chat)
-that you can play with at https://denochat.deno.dev/
+You can test this example yourself on Deno Deploy using
+[this playground](https://dash.deno.com/playground/broadcast-channel-example).
 
 [eventtarget]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 [messageevent]: https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent
