@@ -213,8 +213,7 @@ method will fail with an error if the queue is full.
 - Messages delivered through
   [`listenQueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.listenQueue)
   consume requests and KV write units.
-- See [Pricing details](https://deno.com/deploy/docs/pricing) for more
-  information.
+- See [Pricing details](https://deno.com/deploy/pricing) for more information.
 
 ## Use cases
 
