@@ -1,11 +1,11 @@
 :::caution Deno KV is currently in beta
 
-Deno KV is currently **experimental** and **subject to change**. While we do our
-best to ensure data durability, data loss is possible, especially around Deno
-updates.
+Deno KV and related cloud primitive APIs like queues and cron are currently 
+**experimental** and **subject to change**. While we do our best to ensure data 
+durability, data loss is possible, especially around Deno updates.
 
-Executing Deno programs that use KV currently requires the `--unstable` flag, as
-below:
+Deno programs that use KV require the `--unstable` flag when launching the 
+program, as shown below:
 
 ```sh
 deno run -A --unstable my_kv_code.ts

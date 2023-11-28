@@ -15,35 +15,19 @@ Deno.cron("Log a message", "* * * * *", () => {
 });
 ```
 
+`Deno.cron` takes three arguments:
+
+- A human-readable name for the cron task
+- A [cron schedule string](https://cronitor.io/guides/cron-jobs) that defines a
+  schedule on which the cron job will run
+- a function to be executed on the given schedule
+
 If you are new to cron syntax, it might be useful to check out
 [crontab.guru](https://crontab.guru/), a browser-based tool that provides an
 interactive interface to experiment with different cron syntaxes. There are also
 a number of third party modules
 [like this one](https://www.npmjs.com/package/cron-time-generator) that will
 help you generate cron schedule strings.
-
-## Static vs Dynamic Tasks
-
-[`Deno.cron`](https://deno.land/api?s=Deno.cron&unstable=) interface is designed
-to support static definition of cron tasks based on pre-defined schedules. All
-`Deno.cron` tasks must be defined at the top-level. Any nested `Deno.cron`
-definitions (e.g. inside
-[`Deno.serve`](https://deno.land/api?s=Deno.serve&unstable=) handler) will
-result in an error or will be ignored.
-
-If you need to schedule tasks dynamically during your Deno program execution,
-you can use the [Deno Queues](./queue_overview) APIs.
-
-## Time zone
-
-`Deno.cron` schedules are specified using UTC time zone. This helps avoid issues
-with time zones which observe daylight saving time.
-
-## Overlapping executions
-
-It's possible for the next scheduled invocation of your cron task to overlap
-with the previous invocation. If this occurs, `Deno.cron` will skip the next
-scheduled invocation in order to avoid overlapping executions.
 
 ## Retrying failed runs
 
@@ -62,32 +46,66 @@ Deno.cron("Retry example", "* * * * *", () => {
 });
 ```
 
-## Deno CLI and Deno Deploy
+## Design and limitations
 
-Like other Deno platform built-ins (like queues and Deno KV), the `Deno.cron`
-implementation works slightly differently when run using the CLI or Deno Deploy.
+Below are some design details and limitations to be aware of when using
+`Deno.cron`.
 
-### Local behavior
+### Tasks must be defined at the top level module scope
 
-The local implementation of `Deno.cron` keeps all of the execution state
+The [`Deno.cron`](https://deno.land/api?s=Deno.cron&unstable=) interface is
+designed to support static definition of cron tasks based on pre-defined
+schedules. All `Deno.cron` tasks must be defined at the top-level of a module.
+Any nested `Deno.cron` definitions (e.g. inside
+[`Deno.serve`](https://deno.land/api?s=Deno.serve&unstable=) handler) will
+result in an error or will be ignored.
+
+If you need to schedule tasks dynamically during your Deno program execution,
+you can use the [Deno Queues](./queue_overview) APIs.
+
+### Time zone
+
+`Deno.cron` schedules are specified using UTC time zone. This helps avoid issues
+with time zones which observe daylight saving time.
+
+### Overlapping executions
+
+It's possible for the next scheduled invocation of your cron task to overlap
+with the previous invocation. If this occurs, `Deno.cron` will skip the next
+scheduled invocation in order to avoid overlapping executions.
+
+## Usage on Deno Deploy
+
+With [Deno Deploy](https://www.deno.com/deploy), you can run your background
+tasks on V8 isolates in the cloud. When doing so, there are a few considerations
+to keep in mind.
+
+### Differences with Deno CLI
+
+Like other Deno runtime built-ins (like queues and Deno KV), the `Deno.cron`
+implementation works slightly differently on Deno Deploy.
+
+#### How cron works by default
+
+The implementation of `Deno.cron` in the Deno runtime keeps execution state
 in-memory. If you run multiple Deno programs that use `Deno.cron`, each program
 will have its own independent set of cron tasks.
 
-### Deno Deploy behavior
+#### How cron works on Deno Deploy
 
-Deno Deploy offers serverless implementation of `Deno.cron` that is designed for
-high availability and scale. Deno Deploy automatically extracts your `Deno.cron`
-definitions at deployment time, and schedules them for execution using on-demand
-isolates. Your latest production deployment defines the set of active cron tasks
-that are scheduled for execution. To add, remove, or modify cron tasks, simply
-modify your code and create a new production deployment.
+Deno Deploy provides a serverless implementation of `Deno.cron` that is designed
+for high availability and scale. Deno Deploy automatically extracts your
+`Deno.cron` definitions at deployment time, and schedules them for execution
+using on-demand isolates. Your latest production deployment defines the set of
+active cron tasks that are scheduled for execution. To add, remove, or modify
+cron tasks, simply modify your code and create a new production deployment.
 
 Deno Deploy guarantees that your cron tasks are executed at least once per each
 scheduled time interval. This generally means that your cron handler will be
 invoked once per scheduled time. In some failure scenarios, the handler may be
 invoked multiple times for the same scheduled time.
 
-#### Cron Dashboard
+### Cron dashboard
 
 When you make a production deployment that includes a cron task, you can view a
 list of all your cron tasks in the
@@ -96,17 +114,18 @@ project.
 
 ![a listing of cron tasks in the Deno dashboard](./images/cron-tasks.png)
 
-#### Limitations
+### Pricing
+
+`Deno.cron` invocations are charged at the same rate as inbound HTTP requests to
+your deployments. Learn more about pricing
+[here](https://deno.com/deploy/pricing).
+
+### Deploy-specific limitations
 
 - `Deno.cron` is only available for production deployments (not preview
   deployments)
 - The exact invocation time of your `Deno.cron` handler may vary by up to a
   minute from the scheduled time
-
-#### Pricing
-
-`Deno.cron` invocations are charged at the same rate as inbound HTTP requests to
-your deployments.
 
 ## Cron configuration examples
 
