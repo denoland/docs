@@ -28,7 +28,20 @@ export default function Layout(props) {
   return (
     <LayoutProvider>
       <Head>
+        <link
+          rel="preload"
+          href="/fonts/inter/Inter-Regular.woff2"
+          as="font"
+          crossOrigin="true"
+        />
+        <link
+          rel="preload"
+          href="/fonts/inter/Inter-SemiBold.woff2"
+          as="font"
+          crossOrigin="true"
+        />
         <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+        <link rel="stylesheet" href="/fonts/inter.css" />
       </Head>
       <PageMetadata title={title} description={description} />
 
