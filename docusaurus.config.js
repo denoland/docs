@@ -15,6 +15,11 @@ const config = {
     defaultLocale: "en",
     locales: ["en"],
   },
+
+  clientModules: [
+    "./src/client_plugins/trackjs.js",
+  ],
+
   presets: [
     [
       "classic",

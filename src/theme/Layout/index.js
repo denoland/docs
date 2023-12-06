@@ -11,7 +11,6 @@ import {useKeyboardNavigation} from '@docusaurus/theme-common/internal';
 import SkipToContent from '@theme/SkipToContent';
 import AnnouncementBar from '@theme/AnnouncementBar';
 import Navbar from '@theme/Navbar';
-import Footer from '@theme/Footer';
 import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
@@ -25,6 +24,11 @@ export default function Layout(props) {
     description,
   } = props;
   useKeyboardNavigation();
+
+  window.TrackJS && TrackJS.install({ 
+    token: "abb73baafbd94b74878a59fc03e5ac1b"
+  });
+
   return (
     <LayoutProvider>
       <Head>
@@ -44,6 +48,7 @@ export default function Layout(props) {
         />
         <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
         <link rel="stylesheet" href="/fonts/inter.css" />
+        <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
       </Head>
       <PageMetadata title={title} description={description} />
 
