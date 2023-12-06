@@ -6,11 +6,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap");
 
 /* You can override the default Infima variables here. */
-/*
+
 :root {
+  --ifm-heading-font-weight: 600;
+  --ifm-font-weight-bold: 600;
+  /*
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
@@ -29,8 +31,8 @@
   --ifm-font-family-monospace: Menlo, Monaco, "Lucida Console", Consolas,
     "Liberation Mono", "Courier New", monospace, Menlo, Monaco, "Lucida Console",
     Consolas, "Liberation Mono", "Courier New", monospace;
+		*/
 }
-*/
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
   --ifm-color-primary: #25c2a0;
@@ -311,22 +313,22 @@ td p:last-child {
 }
 
 .breadcrumbs__item:first-child > a {
-	padding-left: 0;
+  padding-left: 0;
 }
 
 .breadcrumbs__item a {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .breadcrumbs__link {
-	background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .breadcrumbs__item:not(:last-child):after {
-	margin-inline: 0;
+  margin-inline: 0;
 }
 
 .breadcrumbs__item--active .breadcrumbs__link {
-	background: transparent;
-	color: inherit;
+  background: transparent;
+  color: inherit;
 }
