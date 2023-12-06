@@ -239,7 +239,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Web Assembly",
+      label: "WebAssembly",
       items: [
         "manual/runtime/webassembly/index",
         "manual/runtime/webassembly/using_wasm",
