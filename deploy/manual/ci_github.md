@@ -73,8 +73,8 @@ process by leveraging the `deployctl` [Github action][deploy-action]:
            entrypoint: main.ts # the entrypoint to deploy
    ```
 
-   By default the entire contents of the repository will be deployed. This can
-   be changed by specifying the `root` option.
+   By default the deployment is performed from the root directory of the
+   repository. This can be changed by specifying the `root` option:
 
    ```yml
    - name: Deploy to Deno Deploy
@@ -83,6 +83,30 @@ process by leveraging the `deployctl` [Github action][deploy-action]:
        project: my-project
        entrypoint: index.js
        root: dist
+   ```
+
+   Unless specified, the entire content of the root directory will be deployed,
+   recursively. This can be changed by specifying the `include` or `exclude`
+   options:
+
+   ```yml
+   - name: Deploy to Deno Deploy
+   uses: denoland/deployctl@v1
+   with:
+       project: my-project
+       entrypoint: src/index.js
+       include: |
+         src
+         static
+   ```
+
+   ```yml
+   - name: Deploy to Deno Deploy
+   uses: denoland/deployctl@v1
+   with:
+       project: my-project
+       entrypoint: index.js
+       exclude: node_modules
    ```
 
    The `entrypoint` can either be a relative path, file name, or an absolute
