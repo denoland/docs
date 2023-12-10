@@ -24,7 +24,6 @@ export default function Layout(props) {
     description,
   } = props;
   useKeyboardNavigation();
-
   return (
     <LayoutProvider>
       <Head>
@@ -43,9 +42,11 @@ export default function Layout(props) {
           crossOrigin="true"
         />
         <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+        <script src="/trackjs.js"></script>
+        <script src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
         <link rel="stylesheet" href="/fonts/inter.css" />
-        <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
       </Head>
+
       <PageMetadata title={title} description={description} />
 
       <SkipToContent />
