@@ -27,7 +27,7 @@ For more details, see [Adding a Module](https://deno.land/add_module).
 
 ## Auto-generating documentation for modules
 
-When a module is published, the contents of the module is analyzed. An automated
+When a module is published, the contents of the module are analyzed. An automated
 process identifies modules that contain code that Deno understands and generates
 documentation based on the code. For each path, including the root path, it
 attempts to identify the default module. In order of preference it looks for
