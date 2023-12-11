@@ -43,6 +43,31 @@ supported. To provide module level documentation (which also becomes the path
 level documentation when it is included in a default module), use the @module
 tag at the end of the first JSDoc block in the module.
 
+## Including version numbers in code and content
+
+import { replacements } from "@site/src/components/Replacement";
+
+Current module version, Deno CLI version, and standard library version can be
+dynamically included in content or code samples using following replacement
+variables.
+
+- `$MODULE_VERSION`
+- `$STD_VERSION`
+- `$CLI_VERSION`
+
+For example, to include the current module version in README.md:
+
+```ts
+import "https://deno.land/x/<module_name>@$MODULE_VERSION/mod.ts";
+```
+
+If the current version of the module is 1.0.0, the above import statement will
+be replaced with:
+
+```ts
+import "https://deno.land/x/<module_name>@1.0.0/mod.ts";
+```
+
 ## Publishing Deno modules for Node.js/npm
 
 We have built a tool that assists in the process of taking Deno specific code

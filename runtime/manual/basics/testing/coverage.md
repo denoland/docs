@@ -23,6 +23,9 @@ deno test --coverage=cov_profile
 # From this you can get a pretty printed diff of uncovered lines
 deno coverage cov_profile
 
+# Or generate an HTML report
+deno coverage cov_profile --html
+
 # Or generate an lcov report
 deno coverage cov_profile --lcov --output=cov_profile.lcov
 

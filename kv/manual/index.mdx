@@ -205,6 +205,27 @@ async function getByEmail(email) {
 
 Learn more about [secondary indexes in the manual here](./secondary_indexes.mdx).
 
+## Watching for updates in Deno KV
+
+You can also listen for updates from Deno KV with `kv.watch()`, which will
+emit a new value or values of the key or keys you provide. In the below chat example,
+we watch for updates on the key `["last_message_id", roomId]`. We retrieve `messageId`,
+which we then use with `kv.list()` to grab all the new messages from `seen` and `messageId`.
+
+```ts
+let seen = "";
+for await (const [messageId] of kv.watch([["last_message_id", roomId]])) {
+	const newMessages = await Array.fromAsync(kv.list({
+    start: ["messages", roomId, seen, ""],
+    end: ["messages", roomId, messageId, ""],
+  }));
+	await websocket.write(JSON.stringify(newMessages));
+  seen = messageId;
+}
+```
+
+Learn more about [using Deno KV watch here](./operations.mdx#watch).
+
 ## Production usage
 
 Deno KV is available for use in live applications on

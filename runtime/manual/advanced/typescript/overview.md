@@ -1,7 +1,7 @@
 # Overview of TypeScript in Deno
 
 One of the benefits of Deno is that it treats TypeScript as a first class
-language, just like JavaScript or Web Assembly, when running code in Deno. What
+language, just like JavaScript or WebAssembly, when running code in Deno. What
 that means is you can run or import TypeScript without installing anything more
 than the Deno CLI.
 
@@ -10,12 +10,12 @@ yourself. Well, depends on what you mean by run. One could argue that in a
 browser you don't actually _run_ JavaScript either. The JavaScript engine in the
 browser translates the JavaScript to a series of operation codes, which it then
 executes in a sandbox. So it translates JavaScript to something close to
-assembly. Even Web Assembly goes through a similar translation, in that Web
-Assembly is architecture agnostic while it needs to be translated into the
+assembly. Even WebAssembly goes through a similar translation, in that
+WebAssembly is architecture agnostic while it needs to be translated into the
 machine specific operation codes needed for the particular platform architecture
 it is running on. So when we say TypeScript is a first class language in Deno,
 we mean that we try to make the user experience in authoring and running
-TypeScript as easy and straightforward as JavaScript and Web Assembly.
+TypeScript as easy and straightforward as JavaScript and WebAssembly.
 
 Behind the scenes, we use a combination of technologies, in Rust and JavaScript,
 to provide that experience.

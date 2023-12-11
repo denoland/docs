@@ -7,29 +7,62 @@ platform.
 
 You can install the `deployctl` command with the below command:
 
-    deno install --allow-all --no-check -r -f https://deno.land/x/deploy/deployctl.ts
-
-You also need to set the `DENO_DEPLOY_TOKEN` environment variable to your
-personal access token. You can generate your Personal Access Token in
-https://dash.deno.com/account#access-tokens.
+    deno install -Arf https://deno.land/x/deploy/deployctl.ts
 
 ## Usage
 
-To deploy a local script:
+The most basic usage of `deployctl` is to get in the root of the project you
+want to deploy, and execute:
 
-    deployctl deploy --project=helloworld main.ts
+```shell
+deployctl deploy
+```
 
-To deploy a remote script:
+By default, deployctl will guess the project name based on the Git repo or
+directory it is in. Similarly, it will guess the entrypoint by looking for files
+with common entrypoint names (main.ts, src/main.ts, etc). After the first
+deployment, the settings used will be stored in a config file (by default
+deno.json).
 
-    deployctl deploy --project=helloworld https://deno.com/examples/hello.js
+You can specify the project name and/or the entrypoint using the `--project` and
+`--entrypoint` arguments respectively:
 
-To deploy a remote script without static files:
+```shell
+deployctl deploy --project=helloworld --entrypoint=src/entrypoint.ts
+```
 
-    deployctl deploy --project=helloworld --no-static https://deno.com/examples/hello.js
+By default, deployctl deploys all the files in the current directory
+(recursively). You can customize this behaviour using the `--include` and
+`--exclude` arguments (also supported in the config file). Here are some
+examples:
 
-To ignore the node_modules directory while deploying:
+- Include only source and static files:
 
-    deployctl deploy --project=helloworld --exclude=node_modules main.tsx
+  ```shell
+  deployctl deploy --include=./src --include=./static
+  ```
+
+- Ignore the node_modules directory:
+
+  ```shell
+  deployctl deploy --exclude=./node_modules
+  ```
+
+A common pitfall is to not include the source code modules that need to be run
+(entrypoint and dependencies). The following example will fail because main.ts
+is not included:
+
+```shell
+deployctl deploy --include=./static --entrypoint=./main.ts
+```
+
+The entrypoint can also be a remote script. A common use case for this is to
+deploy an static site using `std/http/file_server.ts` (more details in
+[Static Site Tutorial](https://docs.deno.com/deploy/tutorials/static-site)):
+
+```shell
+deployctl deploy --include=dist --entrypoint=https://deno.land/std@0.208.0/http/file_server.ts
+```
 
 See the help message (`deployctl -h`) for more details.
 
@@ -42,14 +75,14 @@ instructions in the
 After installation, you can run your scripts locally:
 
 ```shell
-$ deno run --allow-net=:8000 https://deno.com/examples/hello.js
+$ deno run --allow-net=:8000 ./main.ts
 Listening on http://localhost:8000
 ```
 
 To watch for file changes add the `--watch` flag:
 
 ```shell
-$ deno run --allow-net=:8000 --watch ./main.js
+$ deno run --allow-net=:8000 --watch ./main.ts
 Listening on http://localhost:8000
 ```
 

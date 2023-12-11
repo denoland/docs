@@ -313,7 +313,7 @@ For a better understanding of the tests, function should be correctly named as
 it's prompted throughout the test command. Like:
 
 ```
-test myTestFunction ... ok
+foo() returns bar object ... ok
 ```
 
 Example of test:
@@ -322,10 +322,13 @@ Example of test:
 import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 import { foo } from "./mod.ts";
 
-Deno.test("myTestFunction", function () {
+Deno.test("foo() returns bar object", function () {
   assertEquals(foo(), { bar: "bar" });
 });
 ```
+
+Note: See [tracking issue](https://github.com/denoland/deno_std/issues/3754) for
+more information.
 
 ### Top-level functions should not use arrow syntax.
 

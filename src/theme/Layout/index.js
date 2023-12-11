@@ -1,7 +1,7 @@
-import React from 'react';
-import clsx from 'clsx';
-import Head from '@docusaurus/Head';
-import ErrorBoundary from '@docusaurus/ErrorBoundary';
+import React from "react";
+import clsx from "clsx";
+import Head from "@docusaurus/Head";
+import ErrorBoundary from "@docusaurus/ErrorBoundary";
 import {
   PageMetadata,
   SkipToContentFallbackId,
@@ -14,6 +14,7 @@ import Navbar from '@theme/Navbar';
 import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import styles from './styles.module.css';
+
 export default function Layout(props) {
   const {
     children,
@@ -61,7 +62,8 @@ export default function Layout(props) {
           ThemeClassNames.wrapper.main,
           styles.mainWrapper,
           wrapperClassName,
-        )}>
+        )}
+      >
         <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
           {children}
         </ErrorBoundary>
