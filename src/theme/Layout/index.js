@@ -6,15 +6,15 @@ import {
   PageMetadata,
   SkipToContentFallbackId,
   ThemeClassNames,
-} from "@docusaurus/theme-common";
-import { useKeyboardNavigation } from "@docusaurus/theme-common/internal";
-import SkipToContent from "@theme/SkipToContent";
-import AnnouncementBar from "@theme/AnnouncementBar";
-import Navbar from "@theme/Navbar";
-import Footer from "@theme/Footer";
-import LayoutProvider from "@theme/Layout/Provider";
-import ErrorPageContent from "@theme/ErrorPageContent";
-import styles from "./styles.module.css";
+} from '@docusaurus/theme-common';
+import {useKeyboardNavigation} from '@docusaurus/theme-common/internal';
+import SkipToContent from '@theme/SkipToContent';
+import AnnouncementBar from '@theme/AnnouncementBar';
+import Navbar from '@theme/Navbar';
+import LayoutProvider from '@theme/Layout/Provider';
+import ErrorPageContent from '@theme/ErrorPageContent';
+import styles from './styles.module.css';
+
 export default function Layout(props) {
   const {
     children,
@@ -42,13 +42,12 @@ export default function Layout(props) {
           type="font/woff2"
           crossOrigin="true"
         />
-        <script
-          type="module"
-          src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"
-        >
-        </script>
+        <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+        <script src="/trackjs.js"></script>
+        <script src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
         <link rel="stylesheet" href="/fonts/inter.css" />
       </Head>
+
       <PageMetadata title={title} description={description} />
 
       <SkipToContent />
