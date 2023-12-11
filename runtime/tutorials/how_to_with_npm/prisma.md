@@ -53,9 +53,10 @@ model Dinosaur {
 }
 ```
 
-Prisma also generates a `.env` file with a `DATABASE_URL` environment variable. Let's
-assign `DATABASE_URL` to a PostgreSQL connection string. In this example, we'll
-use a free [PostgreSQL database from Supabase](https://supabase.com/database).
+Prisma also generates a `.env` file with a `DATABASE_URL` environment variable.
+Let's assign `DATABASE_URL` to a PostgreSQL connection string. In this example,
+we'll use a free
+[PostgreSQL database from Supabase](https://supabase.com/database).
 
 Next, let's create the database schema:
 
@@ -79,7 +80,8 @@ To get started with the Prisma Data Platform:
 4. Enable Accelerate by providing your database's connection string.
 5. Generate an Accelerate connection string and copy it to your clipboard.
 
-Assign the Accelerate connection string, that begins with `prisma://`, to `DATABASE_URL` in your `.env` file replacing your existing connection string.
+Assign the Accelerate connection string, that begins with `prisma://`, to
+`DATABASE_URL` in your `.env` file replacing your existing connection string.
 
 Next, let's create a seed script to seed the database.
 
@@ -139,7 +141,8 @@ We can now run `seed.ts` with:
 deno run -A prisma/seed.ts
 ```
 
-After doing so, you should be able to see your data on Prisma Studio by running the following command:
+After doing so, you should be able to see your data on Prisma Studio by running
+the following command:
 
 ```bash, ignore
 deno run -A npm:prisma studio
