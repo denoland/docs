@@ -33,7 +33,7 @@ documentation based on the code. For each path, including the root path, it
 attempts to identify the default module. In order of preference it looks for
 `mod`, `lib`, `main`, or `index` files with an extension that Deno understands
 (ts,tsx,js,jsx,mjs, or mts). When viewing the documentation for the module for a
-path, the default module will shown.
+path, the default module will be shown.
 
 If a default module cannot be identified, a list of modules that can be
 documented will be provided instead. When generating the documentation, not only
