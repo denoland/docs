@@ -1,6 +1,6 @@
-import React from 'react';
-import {useThemeConfig} from '@docusaurus/theme-common';
-import {useNavbarSecondaryMenu} from '@docusaurus/theme-common/internal';
+import React from "react";
+import { useThemeConfig } from "@docusaurus/theme-common";
+import { useNavbarSecondaryMenu } from "@docusaurus/theme-common/internal";
 import { useLocation } from "@docusaurus/router";
 import { products } from "../../../../../sidebars/products";
 
@@ -26,15 +26,15 @@ function ProductNameWithSwitcher() {
 
   return (
     <div>
-    {currentProduct && (
-      <div className="secondary-menu__product">
-        <div className="secondary-menu__product__name">
-          {currentProduct.name}
+      {currentProduct && (
+        <div className="secondary-menu__product">
+          <div className="secondary-menu__product__name">
+            {currentProduct.name}
+          </div>
+          <SecondaryMenuBackButton onClick={() => secondaryMenu.hide()} />
         </div>
-        <SecondaryMenuBackButton onClick={() => secondaryMenu.hide()} />
-      </div>
-    )}
-  </div>
+      )}
+    </div>
   );
 }
 
