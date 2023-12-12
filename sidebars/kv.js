@@ -45,6 +45,7 @@ const sidebars = {
     "manual/key_expiration",
     "manual/secondary_indexes",
     "manual/transactions",
+    "manual/node",
     "manual/queue_overview",
     "manual/cron",
     "manual/data_modeling_typescript",
