@@ -42,7 +42,6 @@ Using [asdf](https://asdf-vm.com/):
 
 ```shell
 asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
-asdf install deno latest
 
 # To install globally
 asdf global deno latest
