@@ -269,6 +269,30 @@ enable = true
 lint = true
 ```
 
+### Helix
+
+[Helix](https://helix-editor.com) comes with built-in language server support. Enabling connection to the Deno language server requires changes in the `languages.toml` configuration file.
+
+```toml
+[[language]]
+name = "typescript"
+language-id = "typescript"
+scope = "source.ts"
+injection-regex = "^(ts|typescript)$"
+file-types = ["ts"]
+shebangs = ["deno"]
+roots = ["deno.json", "deno.jsonc", "package.json"]
+auto-format = true
+language-servers = ["deno-lsp"]
+
+[language-server.deno-lsp]
+command = "deno"
+args = ["lsp"]
+
+[language-server.deno-lsp.config.deno]
+enable = true
+```
+
 ## Shell completions
 
 Built into the Deno CLI is support to generate shell completion information for
