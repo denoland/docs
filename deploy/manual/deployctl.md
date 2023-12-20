@@ -5,9 +5,12 @@ platform.
 
 ## Install `deployctl`
 
-You can install the `deployctl` command with the below command:
+With the Deno runtime installed, you can install the `deployctl` utility with
+the following command:
 
-    deno install -Arf https://deno.land/x/deploy/deployctl.ts
+```sh
+deno install -Arf https://deno.land/x/deploy/deployctl.ts
+```
 
 ## Usage
 

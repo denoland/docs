@@ -57,7 +57,6 @@ const sidebars = {
       type: "category",
       label: "Deno Basics",
       items: [
-        "manual/getting_started/installation",
         "manual/getting_started/first_steps",
         "manual/getting_started/setup_your_environment",
         "manual/getting_started/command_line_interface",
@@ -70,6 +69,7 @@ const sidebars = {
         "manual/basics/debugging_your_code",
         "manual/basics/connecting_to_databases",
         "manual/basics/react",
+        "manual/getting_started/installation",
       ],
     },
     {
