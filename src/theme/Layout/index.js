@@ -42,7 +42,6 @@ export default function Layout(props) {
           type="font/woff2"
           crossOrigin="true"
         />
-        <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
         <script src="/trackjs.js"></script>
         <script src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
         <link rel="stylesheet" href="/fonts/inter.css" />

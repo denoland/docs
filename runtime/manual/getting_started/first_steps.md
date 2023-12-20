@@ -1,197 +1,406 @@
+import { replacements } from "@site/src/components/Replacement";
+
 # First Steps
 
-This page contains some examples to teach you about the fundamentals of Deno.
+Welcome to Deno! If you're just getting started, here's a quick primer on some
+key features and functionality of the runtime. If you haven't already, make sure
+to [install the Deno runtime](./installation.md).
 
-This document assumes that you have some prior knowledge of JavaScript,
-especially about `async`/`await`. If you have no prior knowledge of JavaScript,
-you might want to follow a guide
-[on the basics of JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
-before attempting to start with Deno.
+## Create and run a TypeScript program
 
-## Hello World
+While you are welcome to use pure JavaScript, Deno has built-in support for
+[TypeScript](https://www.typescriptlang.org/) as well. In your terminal, create
+a new file called `hello.ts`, and include the following code.
 
-Deno is a runtime for JavaScript/TypeScript which tries to be web compatible and
-use modern features wherever possible.
+```ts title="hello.ts"
+interface Person {
+  firstName: string;
+  lastName: string;
+}
 
-Browser compatibility means a `Hello World` program in Deno is the same as the
-one you can run in the browser.
+function sayHello(p: Person): string {
+  return `Hello, ${p.firstName}!`;
+}
 
-Create a file locally called `first_steps.ts` and copy and paste the code line
-below:
+const ada: Person = {
+  firstName: "Ada",
+  lastName: "Lovelace",
+};
+
+console.log(sayHello(ada));
+```
+
+This program declares an
+[interface](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces)
+for a Person, and defines a function that prints a message to the console using
+this data type. You can execute the code in this example using the `deno run`
+command.
+
+```
+deno run -A hello.ts
+```
+
+You can
+[learn more about using TypeScript in Deno here](../advanced/typescript/overview.md).
+
+## Built-in web APIs and the Deno namespace
+
+Deno aims to provide a browser-like programming environment,
+[implementing web standard APIs](../runtime/web_platform_apis.md) that exist in
+front-end JavaScript. For example, the
+[`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API is
+available in the global scope, just as in the browser. To see this in action,
+replace the contents of `hello.ts` with the following code.
 
 ```ts
-console.log("Welcome to Deno!");
+const site = await fetch("https://www.deno.com");
+console.log(await site.text());
 ```
 
-## Running Deno programs
+And then run it with:
 
-Now to run the program from the terminal:
-
-```shell
-deno run first_steps.ts
+```
+deno run -A hello.ts
 ```
 
-Deno also has the ability to execute scripts from URLs. Deno
-[hosts a library](https://examples.deno.land/) of example code, one of which is
-a `Hello World` program. To run that hosted code, do:
-
-```shell
-deno run https://examples.deno.land/hello-world.ts
-```
-
-## Making an HTTP request
-
-Many programs use HTTP requests to fetch data from a web server. Let's write a
-small program that fetches a file and prints its contents out to the terminal.
-Just like in the browser you can use the web standard
-[`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API to
-make HTTP calls.
-
-In the `first_steps.ts` file you created above, paste the code below:
+For APIs that don't exist as a web standard (like accessing variables from the
+system environment, or manipulating the file system), those APIs are exposed in
+the [`Deno` namespace](../runtime/builtin_apis.md). Replace the contents of
+`hello.ts` with the following code, which will start
+[an HTTP server](https://deno.land/api?s=Deno.serve) on
+[localhost:8000](http://localhost:8000).
 
 ```ts
-const res = await fetch("https://deno.com");
-const body = await res.text();
-console.log(body);
+Deno.serve((_request: Request) => {
+  return new Response("Hello, world!");
+});
 ```
 
-Let's walk through what this application does:
+Run the script above with:
 
-1. We make a request to the `https://deno.com`, await the response, and store it
-   in the `res` constant.
-1. We parse the response body as a text and store in the `body` constant.
-1. We write the contents of the `body` constant to the console.
-
-Try it out:
-
-```shell
-deno run first_steps.ts
+```
+deno run -A hello.ts
 ```
 
-Or, try this script hosted at `https://deno.land/std@0.198.0/examples/curl.ts`:
+Learn more about the [web-standard APIs](../runtime/web_platform_apis.md) built
+in to Deno and the [`Deno` namespace APIs](../runtime/builtin_apis.md).
 
-```shell
-deno run https://deno.land/std@0.198.0/examples/curl.ts https://deno.com
+## Runtime security
+
+A major feature of Deno is
+[runtime security by default](../basics/permissions.md), meaning that you as the
+developer must explicitly allow your code to access potentially sensitive APIs
+like file system access, network connectivity, and access to environment
+variables.
+
+So far, we've been running all of our scripts with the `-A` flag, which grants
+all runtime feature access to our scripts. This is the most permissive mode to
+run a Deno program, but usually you'll want to grant your code only the
+permissions it needs to run.
+
+To see this in action, let's replace the contents of `hello.ts` again with the
+`fetch` example from earlier.
+
+```ts
+const site = await fetch("https://www.deno.com");
+console.log(await site.text());
 ```
 
-The program will display a prompt like this:
+Run this program **without** the `-A` flag - what happens then?
 
-```shell
+```bash
+deno run hello.ts
+```
+
+Without any permission flags passed in, you'll see security prompts that look
+something like this:
+
+```
+kevin@kevin-deno scratchpad % deno run index.ts
+✅ Granted net access to "www.deno.com".
 ┌ ⚠️  Deno requests net access to "deno.com".
 ├ Requested by `fetch()` API.
 ├ Run again with --allow-net to bypass this prompt.
 └ Allow? [y/n/A] (y = yes, allow; n = no, deny; A = allow all net permissions) >
 ```
 
-You might remember from the introduction that Deno is a runtime that is secure
-by default. This means you need to explicitly give programs permission to do
-certain 'privileged' actions, such as access the network.
+In the prompt, you might have noticed that it mentions the CLI flag you'd need
+to run your code with permission to access the network - the `--allow-net` flag.
+If you run the script again using this flag, you won't be prompted to
+interactively grant network access to your script:
 
-You can answer 'y' to the prompt, or try it out again with the correct
-permission flag:
-
-```shell
-deno run --allow-net=deno.com first_steps.ts
+```bash
+deno run --allow-net hello.ts
 ```
 
-Or, using the curl script:
+For simplicity, we will sometimes show examples that use `deno run -A ...`, but
+whenever possible (and in your production or CI environments), we'd encourage
+you to take advantage of Deno's full suite of
+[configurable runtime security options](../basics/permissions.md).
 
-```shell
-deno run --allow-net=deno.com https://deno.land/std@0.198.0/examples/curl.ts https://deno.com
+## Importing JavaScript modules
+
+Most of the time, you will want to break up your program into multiple files.
+Again favoring web standards and a browser-like programming model, Deno supports
+this through
+[ECMAScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+Consider the earlier TypeScript example we showed you:
+
+```ts title="hello.ts"
+interface Person {
+  firstName: string;
+  lastName: string;
+}
+
+function sayHello(p: Person): string {
+  return `Hello, ${p.firstName}!`;
+}
+
+const ada: Person = {
+  firstName: "Ada",
+  lastName: "Lovelace",
+};
+
+console.log(sayHello(ada));
 ```
 
-## Reading a file
+You might want to break this program up such that the `Person` interface and the
+`sayHello` function are in a separate module. To do this, create a new file in
+the same directory called `person.ts` and include the following code:
 
-Deno also provides APIs that do not come from the web. These are all contained
-in the `Deno` global. You can find documentation for these built-in APIs here at
-[`/api`](https://deno.land/api).
+```ts title="person.ts"
+export default interface Person {
+  firstName: string;
+  lastName: string;
+}
 
-Filesystem APIs for example do not have a web standard form, so Deno provides
-its own API.
-
-In this program, each command-line argument is assumed to be a filename, the
-file is opened, and printed to stdout.
-
-```ts
-const filenames = Deno.args;
-for (const filename of filenames) {
-  const file = await Deno.open(filename);
-  await file.readable.pipeTo(Deno.stdout.writable, { preventClose: true });
+export function sayHello(p: Person): string {
+  return `Hello, ${p.firstName}!`;
 }
 ```
 
-The `ReadableStream.pipeTo(writable)` method here actually makes no more than
-the necessary kernel→userspace→kernel copies. That is, the same memory from
-which data is read from the file is written to stdout. This illustrates a
-general design goal for I/O streams in Deno.
+This module creates a
+[named export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#exporting_module_features)
+for the `sayHello` function, and a
+[default export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#default_exports_versus_named_exports)
+for the `Person` interface.
 
-Again, here, we need to give --allow-read access to the program.
+Back in `hello.ts`, you would consume this module using the `import` keyword.
 
-Try the program:
+```ts title="hello.ts"
+import Person, { sayHello } from "./person.ts";
 
-```shell
-# macOS / Linux
-deno run --allow-read https://deno.land/std@0.198.0/examples/cat.ts /etc/hosts
-
-# Windows
-deno run --allow-read https://deno.land/std@0.198.0/examples/cat.ts "C:\Windows\System32\Drivers\etc\hosts"
-```
-
-## Putting it all together in an HTTP server
-
-One of the most common use cases for Deno is building an HTTP Server.
-
-Create a new file called `http_server.ts` and copy and paste the code below:
-
-```ts
-const handler = async (_request: Request): Promise<Response> => {
-  const resp = await fetch("https://api.github.com/users/denoland", {
-    // The init object here has a headers object containing a
-    // header that indicates what type of response we accept.
-    // We're not specifying the method field since by default
-    // fetch makes a GET request.
-    headers: {
-      accept: "application/json",
-    },
-  });
-
-  return new Response(resp.body, {
-    status: resp.status,
-    headers: {
-      "content-type": "application/json",
-    },
-  });
+const ada: Person = {
+  lastName: "Lovelace",
+  firstName: "Ada",
 };
 
-Deno.serve(handler);
+console.log(sayHello(ada));
 ```
 
-Let's walk through what this program does.
+:::info File extensions required in imports
 
-1. Import the http server from `std/http` (standard library)
-2. HTTP servers need a handler function. This function is called for every
-   request that comes in. It must return a `Response`. The handler function can
-   be asynchronous (it may return a `Promise`).
-3. Use `fetch` to fetch the url.
-4. Return the GitHub response as a response to the handler.
-5. Finally, to start the server on the default port, call `serve` with the
-   handler.
+Note that **file extensions are required** when importing modules - import logic
+in Deno works as it does in the browser, where you would include the full file
+name of your imports.
 
-Now run the server. Note that you need to give network permissions.
+:::
 
-```shell
-deno run --allow-net http_server.ts
+[You can learn more about the module system in Deno here](../basics/modules/index.md).
+
+## Remote modules and the Deno standard library
+
+Deno supports loading and executing code from URLs, much as you would using a
+`<script>` tag in the browser. In Deno 1.x, the
+[standard library](https://deno.land/std) and most
+[third-party modules](https://deno.land/x) are distributed on HTTPS URLs.
+
+To see this in action, let's create a test for the `person.ts` module we created
+above. Deno provides a [built-in test runner](../basics/testing/index.md), which
+uses an assertion module distributed via HTTPS URL.
+
+```ts title="person_test.ts"
+import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import Person, { sayHello } from "./person.ts";
+
+Deno.test("sayHello function", () => {
+  const grace: Person = {
+    lastName: "Hopper",
+    firstName: "Grace",
+  };
+
+  assertEquals("Hello, Grace!", sayHello(grace));
+});
 ```
 
-With the server listening on port `8000`, make a GET request to that endpoint.
+Run this test with:
 
-```shell
-curl http://localhost:8000
+```
+deno test person_test.ts
 ```
 
-You will see a JSON response from the Deno GitHub page.
+The output should look something like this:
 
-## More examples
+```
+kevin@kevin-deno scratchpad % deno test person_test.ts
+Check file:///Users/kevin/dev/denoland/scratchpad/person_test.ts
+running 1 test from ./person_test.ts
+sayHello function ... ok (4ms)
 
-You can find more examples in the [Tutorials](/runtime/tutorials) section and at
-[Deno by Example](https://examples.deno.land/).
+ok | 1 passed | 0 failed (66ms)
+```
+
+There's much more to explore with [the standard library](https://deno.land/std)
+and [third-party modules](https://deno.land/x) - be sure to check them out!
+
+## Configure your project with deno.json
+
+Deno projects don't require a configuration file by default, but sometimes it's
+convenient to store settings, admin scripts, and dependency configuration in a
+well-known location. In Deno, that file is
+[`deno.json` or `deno.jsonc`](../getting_started/configuration_file.md). This
+file acts a bit like a `package.json` file in Node.js.
+
+One of the things you can use `deno.json` for is configuring an
+[import map](../basics/import_maps.md), which will let you set up aliases for
+frequently used modules.
+
+<p>
+  To demonstrate, let's pin the version of the standard library we want to
+  use in our project to version <code>{ replacements.STD_VERSION }</code>.
+</p>
+
+Create a `deno.jsonc` file with the following contents.
+
+```js title="deno.jsonc"
+{
+  "imports": {
+    // The dollar sign in front of "std" isn't special - it's an optional
+    // convention to show that $std is an alias set up in an import map
+    "$std/": "https://deno.land/std@$STD_VERSION/"
+  }
+}
+```
+
+Now, open up your test file from before, and change it to use this import alias.
+
+```ts title="person_test.ts"
+import { assertEquals } from "$std/assert/mod.ts";
+import Person, { sayHello } from "./person.ts";
+
+Deno.test("sayHello function", () => {
+  const grace: Person = {
+    lastName: "Hopper",
+    firstName: "Grace",
+  };
+
+  assertEquals("Hello, Grace!", sayHello(grace));
+});
+```
+
+Running the test with `deno test person_test.ts` should work just as before, but
+you might notice that Deno downloads a few extra files and generates a
+`deno.lock` file, specifying a set of files depended on by your code. Both
+`deno.jsonc` and `deno.lock` can be checked in to source control.
+
+Learn more about
+[configuring your project here](../getting_started/configuration_file.md).
+
+## Node.js APIs and npm packages
+
+Deno provides a compatibility layer that enables your code to use
+[Node.js built-in modules and third-party modules from npm](../node/index.md).
+Using Node and npm modules in your code looks a lot like using standard Deno
+modules, except you'll use either a `node:` or `npm:` specifier when importing
+Node built-ins or npm modules, respectively.
+
+To see how it works, create a file called `server.js` and include the
+following - a simple HTTP server using the popular
+[Express](https://expressjs.com) framework.
+
+```js
+import express from "npm:express@4";
+
+const app = express();
+
+app.get("/", (request, response) => {
+  response.send("Hello from Express!");
+});
+
+app.listen(3000);
+```
+
+With `node:` and `npm:` specifiers, you can bring the best of the Node.js
+ecosystem with you to Deno.
+[Learn more about Node and npm support](../node/index.md).
+
+## Configure your IDE
+
+Deno development is supported in a number of
+[major IDEs](../getting_started/setup_your_environment.md). A popular option is
+**Visual Studio Code**, with an
+[official extension](../references/vscode_deno/index.md) maintained by the Deno
+team.
+[Install the extension](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
+and enable it in your VS Code workspace by choosing the
+`Deno: Initialize Workspace Configuration` option in the
+[command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).
+
+![command palette setup](../images/command_palette.png)
+
+Not a VS Code user? Find an integration for your favorite editor
+[here](../getting_started/setup_your_environment.md).
+
+## Web application frameworks
+
+A common use case for Deno is building data-driven web applications. Doing that
+usually requires use of a higher-level web framework, for which many options
+exist in the Deno ecosystem. Here are a few of the most popular choices.
+
+### Deno-native frameworks
+
+- [Deno Fresh](https://fresh.deno.dev) - Fresh is a web framework designed for
+  Deno. Pages are server-rendered by default, with the option to include
+  interactive islands that run JavaScript on the client. If you're new to Deno
+  and looking for a place to start, we recommend trying Fresh first!
+- [Hono](https://hono.dev/getting-started/deno) - Hono is a light-weight web
+  framework in the tradition of [Express](https://expressjs.com). Great for API
+  servers and simple web applications.
+
+### Deno-compatible frameworks
+
+- [SvelteKit](https://kit.svelte.dev/) - SvelteKit is another more
+  runtime-agnostic web framework that can be used with Deno. We recommend
+  starting with
+  [this template](https://github.com/denoland/deno-sveltekit-template).
+- [Nuxt (Vue)](https://nuxt.com/) - Nuxt is a hybrid SSR and client-side
+  framework that works with Deno. We recommend starting with
+  [this template](https://github.com/denoland/deno-nuxt-template).
+- [Astro](https://astro.build/) - Astro is a modern web framework that was
+  originally designed for Node.js, but runs great on Deno as well. We recommend
+  starting with
+  [this template](https://github.com/denoland/deno-astro-template).
+
+Many more frameworks support Deno than are listed here, but we'd recommend these
+as a great starting point.
+
+## Deploying to production
+
+When you're ready to move into production, your easiest option will be
+[Deno Deploy](/deploy/manual). Deno Deploy makes it easy to create fast,
+globally distributed serverless applications with Deno.
+
+You can also host Deno
+[in almost any cloud environment](../advanced/deploying_deno/index.md).
+
+## Next Steps
+
+We've only just scratched the surface of what's possible with Deno. Here are a
+few resources you might want to check out next.
+
+- [Set up your dev environment](./setup_your_environment.md) - learn about
+  options for configuring your local dev environment
+- [Tutorials and Examples](../../tutorials/index.md) - Sample code and use cases
+  for Deno
+- [Deno by Example](https://examples.deno.land) - Code snippets to learn Deno by
+  example
