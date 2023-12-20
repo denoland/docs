@@ -88,7 +88,7 @@ in to Deno and the [`Deno` namespace APIs](../runtime/builtin_apis.md).
 ## Runtime security
 
 A major feature of Deno is
-[runtime security by default](./basics/permissions.md), meaning that you as the
+[runtime security by default](../basics/permissions.md), meaning that you as the
 developer must explicitly allow your code to access potentially sensitive APIs
 like file system access, network connectivity, and access to environment
 variables.
@@ -400,7 +400,7 @@ few resources you might want to check out next.
 
 - [Set up your dev environment](./setup_your_environment.md) - learn about
   options for configuring your local dev environment
-- [Tutorials and Examples](../tutorials/index.md) - Sample code and use cases
+- [Tutorials and Examples](../../tutorials/index.md) - Sample code and use cases
   for Deno
 - [Deno by Example](https://examples.deno.land) - Code snippets to learn Deno by
   example
