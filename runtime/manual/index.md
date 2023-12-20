@@ -80,7 +80,7 @@ server. Visit [localhost:8000](http://localhost:8000) to see your local server
 running.
 
 <details>
-<summary>🚀 <b>Deploy your server (optional)</b></summary>
+<summary>🚀 <b>Host your server on Deno Deploy (optional)</b></summary>
 
 The Deno runtime is
 [open source](https://github.com/denoland/deno/blob/main/LICENSE.md) and runs
