@@ -166,6 +166,16 @@ Sloppy imports will allow (but print warnings for) the following:
 - Import a directory path, and automatically use `index.js` or `index.ts` as the
   import for that directory
 
+## `--unstable-unsafe-proto`
+
+Deno made a conscious decision to not support `Object.prototype.__proto__` for
+security reasons. However there are still many npm packages that rely on this
+property to work correctly.
+
+This flag enables this property. Note that it is not recommended to use this,
+but if you really need to use a package that relies on it, the escape hatch is
+now available to you.
+
 ## `--unstable-workspaces`
 
 :::info Enable via environment variable
