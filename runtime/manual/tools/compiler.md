@@ -4,7 +4,7 @@
 self-contained executable.
 
 ```
-> deno compile https://deno.land/std/examples/welcome.ts
+> deno compile https://docs.deno.com/examples/welcome.ts
 ```
 
 If you omit the `OUT` parameter, the name of the executable file will be
