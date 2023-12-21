@@ -1,7 +1,9 @@
-# Built-In Tooling
+# CLI Command Reference
 
-Deno provides some built-in tooling that is useful when working with JavaScript
-and TypeScript:
+The Deno CLI provides a number of helpful utilities in addition to running Deno
+programs. These tools are listed below. You may also want to check out our list
+of [unstable feature flags](./unstable_flags.md), which give early access to new
+Deno features before they are finalized.
 
 - [start new project (`deno init`)](./init.md)
 - [benchmarker (`deno bench`)](./benchmarker.md)
