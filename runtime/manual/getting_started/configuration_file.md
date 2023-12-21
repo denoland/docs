@@ -125,6 +125,12 @@ sharing code.
 See also
 [Configuring TypeScript in Deno](../advanced/typescript/configuration.md).
 
+## `unstable`
+
+The `unstable` property is an array of strings used to configure which unstable
+feature flags should be enabled for your program.
+[Learn more](../tools/unstable_flags.md).
+
 ## Full example
 
 ```json
@@ -155,6 +161,7 @@ See also
   },
   "lock": false,
   "nodeModulesDir": true,
+  "unstable": ["webgpu"],
   "npmRegistry": "https://mycompany.net/artifactory/api/npm/virtual-npm",
   "test": {
     "include": ["src/"],

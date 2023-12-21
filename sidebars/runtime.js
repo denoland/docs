@@ -125,9 +125,10 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "CLI Commands",
+      label: "CLI Command Reference",
       items: [
         "manual/tools/index",
+        "manual/tools/unstable_flags",
         {
           type: "doc",
           label: "deno bench",
