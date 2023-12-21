@@ -176,6 +176,7 @@ This flag enables this property. Note that it is not recommended to use this,
 but if you really need to use a package that relies on it, the escape hatch is
 now available to you.
 
+<!--
 ## `--unstable-workspaces`
 
 :::info Enable via environment variable
@@ -189,7 +190,6 @@ export DENO_UNSTABLE_WORKSPACES=true
 
 ::: Enable unstable 'workspaces' feature
 
-<!--
           [env: DENO_UNSTABLE_WORKSPACES=]
 
       --unstable-broadcast-channel
