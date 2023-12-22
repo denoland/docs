@@ -24,7 +24,27 @@ using a
 The possible values in the `unstable` array are the flag names with the
 `--unstable-` prefix removed.
 
+## Configuration via environment variables
+
+Some flags can be enabled by setting a value (any value) for an environment
+variable of a given name, rather than being passed as a flag or `deno.json`
+configuration option. Flags that are settable via environment variables will be
+noted below.
+
 ## `--unstable`
+
+:::warning --unstable is deprecated - use granular flags instead
+
+The `--unstable` flag is no longer being used for new features, and will be
+removed in a future release. All unstable features that were available using
+this flag are now available as granular unstable flags, notably:
+
+- `--unstable-kv`
+- `--unstable-cron`
+
+Please use these feature flags instead moving forward.
+
+:::
 
 Before more recent Deno versions (1.38+), unstable APIs were made available all
 at once using the `--unstable` flag. Notably, [Deno KV](/kv/manual) and other
@@ -35,22 +55,12 @@ access to these unstable features, you would run your script with:
 deno run --unstable your_script.ts
 ```
 
-In the future, we will use more granular feature flags to enable specific APIs,
-as described below. Most features behind the older `--unstable` flag now also
-have their own granular feature flag.
+No new features will be exposed using this method, and it will be removed in a
+future release.
 
 ## `--unstable-bare-node-builtins`
 
-:::info Enable via environment variable
-
-This feature flag can also be enabled by setting any value for the following
-environment variable:
-
-```sh
-export DENO_UNSTABLE_BARE_NODE_BUILTINS=true
-```
-
-:::
+**Environment variable:** `DENO_UNSTABLE_BARE_NODE_BUILTINS`
 
 This flag enables you to
 [import Node.js built-in modules](../node/node_specifiers.md) without a `node:`
@@ -72,16 +82,7 @@ deno run -A --unstable-bare-node-builtins ./example.ts
 
 ## `--unstable-byonm`
 
-:::info Enable via environment variable
-
-This feature flag can also be enabled by setting any value for the following
-environment variable:
-
-```sh
-export DENO_UNSTABLE_BYONM=true
-```
-
-:::
+**Environment variable:** `DENO_UNSTABLE_BYONM`
 
 This feature flag enables support for resolving modules from a local
 `node_modules` folder that you manage outside of Deno with
@@ -128,16 +129,7 @@ deno run -A --unstable-byonm ./example.ts
 
 ## `--unstable-sloppy-imports`
 
-:::info Enable via environment variable
-
-This feature flag can also be enabled by setting any value for the following
-environment variable:
-
-```sh
-export DENO_UNSTABLE_SLOPPY_IMPORTS=true
-```
-
-:::
+**Environment variable:** `DENO_UNSTABLE_SLOPPY_IMPORTS`
 
 This flag enables behavior which will infer file extensions from imports that do
 not include them. Normally, the import statement below would produce an error:
@@ -176,45 +168,81 @@ This flag enables this property. Note that it is not recommended to use this,
 but if you really need to use a package that relies on it, the escape hatch is
 now available to you.
 
-<!--
-## `--unstable-workspaces`
+## `--unstable-webgpu`
 
-:::info Enable via environment variable
+Enable the
+[`WebGPU` API](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API) in
+the global scope, as in the browser. Below is a simple example to get basic
+information about the GPU using this API:
 
-This feature flag can also be enabled by setting any value for the following
-environment variable:
+```ts
+// Try to get an adapter from the user agent.
+const adapter = await navigator.gpu.requestAdapter();
+if (adapter) {
+  // Print out some basic details about the adapter.
+  const adapterInfo = await adapter.requestAdapterInfo();
 
-```sh
-export DENO_UNSTABLE_WORKSPACES=true
+  // On some systems this will be blank...
+  console.log(`Found adapter: ${adapterInfo.device}`);
+
+  // Print GPU feature list
+  const features = [...adapter.features.values()];
+  console.log(`Supported features: ${features.join(", ")}`);
+} else {
+  console.error("No adapter found");
+}
 ```
 
-::: Enable unstable 'workspaces' feature
+Check out [this repository](https://github.com/denoland/webgpu-examples) for
+more examples using WebGPU.
 
-          [env: DENO_UNSTABLE_WORKSPACES=]
+## `--unstable-broadcast-channel`
 
-      --unstable-broadcast-channel
-          Enable unstable `BroadcastChannel` API
+Enabling this flag makes the
+[`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
+web API available for use in the global scope, as in the browser.
 
-      --unstable-cron
-          Enable unstable Deno.cron API
+## `--unstable-worker-options`
 
-      --unstable-ffi
-          Enable unstable FFI APIs
+Enable unstable
+[Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)
+API options. More context and examples coming soon.
 
-      --unstable-fs
-          Enable unstable file system APIs
+## `--unstable-cron`
 
-      --unstable-http
-          Enable unstable HTTP APIs
+Enabling this flag makes the [`Deno.cron`](/kv/manual/cron) API available on the
+`Deno` namespace.
 
-      --unstable-kv
-          Enable unstable Key-Value store APIs
+## `--unstable-kv`
 
-      --unstable-net
-          Enable unstable net APIs
+Enabling this flag makes [Deno KV](/kv/manual/cron) APIs available in the `Deno`
+namespace.
 
-      --unstable-unsafe-proto
-          Enable unsafe __proto__ support. This is a security risk.
+## `--unstable-workspaces`
+
+**Environment variable:** `DENO_UNSTABLE_WORKSPACES`
+
+Enable the unstable "workspaces" feature. Examples and further context coming
+soon.
+
+## `--unstable-ffi`
+
+Enable unstable FFI APIs -
+[learn more about FFI](/runtime/manual/runtime/ffi_api).
+
+## `--unstable-fs`
+
+Enable unstable file system APIs. More context and examples coming soon.
+
+## `--unstable-http`
+
+Enable unstable HTTP APIs. More context and examples coming soon.
+
+## `--unstable-net`
+
+Enable unstable net APIs. More context and examples coming soon.
+
+<!--
 
       --unstable-webgpu
           Enable unstable `WebGPU` API
