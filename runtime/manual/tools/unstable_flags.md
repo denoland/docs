@@ -241,12 +241,3 @@ Enable unstable HTTP APIs. More context and examples coming soon.
 ## `--unstable-net`
 
 Enable unstable net APIs. More context and examples coming soon.
-
-<!--
-
-      --unstable-webgpu
-          Enable unstable `WebGPU` API
-
-      --unstable-worker-options
-          Enable unstable Web Worker APIs
--->
