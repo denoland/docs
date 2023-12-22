@@ -235,8 +235,6 @@ Notes:
    });
    ```
 
-#### Nested test steps
-
 ## Running tests
 
 To run the test, call `deno test` with the file that contains your test
