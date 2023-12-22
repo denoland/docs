@@ -9,7 +9,17 @@ help text by running:
 deno --help
 ```
 
-## Configuration in `deno.json`
+## Using flags at the command line
+
+You can enable a feature flag when you run a Deno program from the command line
+by passing in the flag as an option to the CLI. Here's an example of running a
+program with the `--unstable-workspaces` flag enabled:
+
+```sh
+deno run --unstable-workspaces main.ts
+```
+
+## Configuring flags in `deno.json`
 
 You can specify which unstable features you'd like to enable for your project
 using a
@@ -31,32 +41,12 @@ variable of a given name, rather than being passed as a flag or `deno.json`
 configuration option. Flags that are settable via environment variables will be
 noted below.
 
-## `--unstable`
-
-:::warning --unstable is deprecated - use granular flags instead
-
-The `--unstable` flag is no longer being used for new features, and will be
-removed in a future release. All unstable features that were available using
-this flag are now available as granular unstable flags, notably:
-
-- `--unstable-kv`
-- `--unstable-cron`
-
-Please use these feature flags instead moving forward.
-
-:::
-
-Before more recent Deno versions (1.38+), unstable APIs were made available all
-at once using the `--unstable` flag. Notably, [Deno KV](/kv/manual) and other
-cloud primitive APIs are available behind this flag. To run a program with
-access to these unstable features, you would run your script with:
+Here's an example of setting the `--unstable-bare-node-builtins` flag via
+environment variable:
 
 ```sh
-deno run --unstable your_script.ts
+export DENO_UNSTABLE_BARE_NODE_BUILTINS=true
 ```
-
-No new features will be exposed using this method, and it will be removed in a
-future release.
 
 ## `--unstable-bare-node-builtins`
 
@@ -72,12 +62,6 @@ dependencies ([see `byonm` flag](#--unstable-byonm)).
 import { readFileSync } from "fs";
 
 console.log(readFileSync("deno.json", { encoding: "utf8" }));
-```
-
-Use the feature flag when executing a script to enable this behavior.
-
-```sh
-deno run -A --unstable-bare-node-builtins ./example.ts
 ```
 
 ## `--unstable-byonm`
@@ -121,12 +105,6 @@ console.log(cowsay.say({
 }));
 ```
 
-Use the feature flag when executing a script to enable this behavior.
-
-```sh
-deno run -A --unstable-byonm ./example.ts
-```
-
 ## `--unstable-sloppy-imports`
 
 **Environment variable:** `DENO_UNSTABLE_SLOPPY_IMPORTS`
@@ -145,10 +123,6 @@ export const Example = "Example";
 
 Executing the script with sloppy imports enabled will remove the error, but
 provide guidance that a more performant syntax should be used.
-
-```sh
-deno run --unstable-sloppy-imports foo.ts
-```
 
 Sloppy imports will allow (but print warnings for) the following:
 
@@ -206,7 +180,21 @@ web API available for use in the global scope, as in the browser.
 
 Enable unstable
 [Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)
-API options. More context and examples coming soon.
+API options. Specifically, it enables you to specify permissions available to
+workers:
+
+```ts
+new Worker(`data:application/javascript;base64,${btoa(`postMessage("ok");`)}`, {
+  type: "module",
+  deno: {
+    permissions: {
+      read: true,
+    },
+  },
+}).onmessage = ({ data }) => {
+  console.log(data);
+};
+```
 
 ## `--unstable-cron`
 
@@ -222,8 +210,45 @@ namespace.
 
 **Environment variable:** `DENO_UNSTABLE_WORKSPACES`
 
-Enable the unstable "workspaces" feature. Examples and further context coming
-soon.
+Enabling this flag allows `deno.json` to specify a `workspaces` key, that
+accepts a list of subdirectories. Each workspace can have its own import map.
+It's required to specify `"name"` and `"version"` properties in the
+configuration file for the workspace:
+
+```json
+// deno.json
+{
+  "workspaces": [
+     "a",
+     "b"
+  },
+  "imports": {
+    "express": "npm:express@5"
+   }
+}
+```
+
+```json
+// a/deno.json
+{
+  "name": "a",
+  "version": "1.0.2",
+  "imports": {
+    "kleur": "npm:kleur"
+  }
+}
+```
+
+```json
+// b/deno.json
+{
+  "name": "b",
+  "version": "0.51.0",
+  "imports": {
+    "chalk": "npm:chalk"
+  }
+}
+```
 
 ## `--unstable-ffi`
 
@@ -232,12 +257,52 @@ Enable unstable FFI APIs -
 
 ## `--unstable-fs`
 
-Enable unstable file system APIs. More context and examples coming soon.
+Enable unstable file system APIs in the `Deno` namespace. These APIs include:
+
+- [`Deno.flock`](https://deno.land/api?unstable=&s=Deno.flock)
+- [`Deno.flockSync`](https://deno.land/api?unstable=&s=Deno.flockSync)
+- [`Deno.funlock`](https://deno.land/api?unstable=&s=Deno.funlock)
+- [`Deno.funlockSync`](https://deno.land/api?unstable=&s=Deno.funlockSync)
+- [`Deno.umask`](https://deno.land/api?unstable=&s=Deno.umask)
 
 ## `--unstable-http`
 
-Enable unstable HTTP APIs. More context and examples coming soon.
+Enable unstable HTTP APIs in the `Deno` namespace. These APIs include:
+
+- [`Deno.upgradeHttp`](https://deno.land/api?unstable=&s=Deno.upgradeHttp)
 
 ## `--unstable-net`
 
-Enable unstable net APIs. More context and examples coming soon.
+Enable unstable net APIs in the `Deno` namespace. These APIs include:
+
+- [`Deno.ConnectTlsOptions`](https://deno.land/api?unstable=&s=Deno.ConnectTlsOptions)
+- [`Deno.DatagramConn`](https://deno.land/api?unstable=&s=Deno.DatagramConn)
+- Many more - for the latest list, check the "Show Unstable API" checkbox in the
+  [API reference](https://deno.land/api?unstable=)
+
+## `--unstable`
+
+:::warning --unstable is deprecated - use granular flags instead
+
+The `--unstable` flag is no longer being used for new features, and will be
+removed in a future release. All unstable features that were available using
+this flag are now available as granular unstable flags, notably:
+
+- `--unstable-kv`
+- `--unstable-cron`
+
+Please use these feature flags instead moving forward.
+
+:::
+
+Before more recent Deno versions (1.38+), unstable APIs were made available all
+at once using the `--unstable` flag. Notably, [Deno KV](/kv/manual) and other
+cloud primitive APIs are available behind this flag. To run a program with
+access to these unstable features, you would run your script with:
+
+```sh
+deno run --unstable your_script.ts
+```
+
+No new features will be exposed using this method, and it will be removed in a
+future release.
