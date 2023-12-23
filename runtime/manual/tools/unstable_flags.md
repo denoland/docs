@@ -98,7 +98,7 @@ npm install
 Afterward, you could write code in a Deno program that looks like this:
 
 ```ts title="example.ts"
-import cowsay from "npm:cowsay";
+import cowsay from "cowsay";
 
 console.log(cowsay.say({
   text: "Hello from Deno using BYONM!",
