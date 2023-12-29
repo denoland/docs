@@ -17,7 +17,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
 Using Shell:
 
 ```shell
-curl -fsSL https://deno.land/x/install/install.sh | sh
+curl -fsSL https://deno.land/install.sh | sh
 ```
 
 Using [Homebrew](https://formulae.brew.sh/formula/deno):
@@ -83,7 +83,7 @@ winget install deno
 Using Shell:
 
 ```shell
-curl -fsSL https://deno.land/x/install/install.sh | sh
+curl -fsSL https://deno.land/install.sh | sh
 ```
 
 Using [Nix](https://nixos.org/download.html):
