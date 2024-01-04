@@ -27,7 +27,7 @@ You can edit `routes/index.js` to modify the application.
    git init
    git add .
    git commit -m "First commit"
-   git remote add <remote-url>
+   git remote add origin <remote-url>
    git push origin main
    ```
 
