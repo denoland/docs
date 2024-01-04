@@ -32,6 +32,9 @@ While iterating on such modules it is recommended to include
 development mode where the JS/TS sources are not included in the binary but read
 at runtime, meaning the binary will not have to be rebuilt if they are changed.
 
+> To use the commands below, you need to first install the necessary tools on
+> your system as described [here](building_from_source).
+
 ```sh
 # cargo build
 cargo build --features __runtime_js_sources
@@ -149,6 +152,9 @@ Examples of bad PR title:
 ## Submitting a PR to [`deno`](https://github.com/denoland/deno)
 
 In addition to the above make sure that:
+
+> To use the commands below, you need to first install the necessary tools on
+> your system as described [here](building_from_source).
 
 1. `cargo test` passes - this will run full test suite for `deno` including unit
    tests, integration tests and Web Platform Tests
