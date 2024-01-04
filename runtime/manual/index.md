@@ -27,7 +27,7 @@ below.
   <TabItem value="mac" label="macOS" default>
 
 ```sh
-curl -fsSL https://deno.land/x/install/install.sh | sh
+curl -fsSL https://deno.land/install.sh | sh
 ```
 
 </TabItem>
@@ -41,7 +41,7 @@ irm https://deno.land/install.ps1 | iex
   <TabItem value="linux" label="Linux">
 
 ```sh
-curl -fsSL https://deno.land/x/install/install.sh | sh
+curl -fsSL https://deno.land/install.sh | sh
 ```
 
 </TabItem>
