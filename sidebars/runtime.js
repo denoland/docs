@@ -120,7 +120,11 @@ const sidebars = {
         "manual/node/faqs",
         "manual/node/migrate",
         "manual/references/cheatsheet",
-        "manual/node/compatibility",
+        {
+          type: "doc",
+          label: "Supported Node APIs and globals",
+          id: "manual/node/compatibility",
+        },
       ],
     },
     {
