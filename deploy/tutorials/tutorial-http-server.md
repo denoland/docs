@@ -1,45 +1,36 @@
 # Simple HTTP server
 
 In this tutorial, let's build a HTTP server that responds to all incoming HTTP
-requests with `Hello World` and a `200 OK` HTTP status. We will be using the
+requests with `Hello, world!` and a `200 OK` HTTP status. We will be using the
 Deno Deploy playground to deploy and edit this script.
 
 ## **Step 1:** Write the HTTP server script
 
-Before we start writing the actual script, let's go over some basics: Deno
-Deploy lets you listen for incoming HTTP requests using the same
-[server side HTTP API][native-http] as the Deno CLI. This API is rather low
-level though, so instead of using this API directly we'll use the high level
-HTTP API exposed by [`std/http`][std-http].
+A simple HTTP server can be written with a single line of code in Deno using
+[`Deno.serve`](https://deno.land/api?s=Deno.serve):
 
-This API revolves around the [`serve`](https://deno.land/std/http/server.ts)
-function.
-
-```js
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
-serve((_req) => {/* .. */});
+```js title="One-line HTTP server"
+Deno.serve(() => new Response("Hello, world!"));
 ```
 
-> Note: the port number we listen on is not important, as Deno Deploy will
-> automatically route requests from the outside world to whatever port we listen
-> on.
+While this type of server is useful for getting started, `Deno.serve` is capable
+of supporting more advanced usage as well
+([API reference docs](https://deno.land/api?s=Deno.serve)). Below is an example
+of a more complex server that takes advantage of other API features.
 
-The handler function is called with two arguments: a [`Request`][request]
-object, and a [`ConnInfo`][conninfo] object. The `Request` object contains the
-request data, and the `ConnInfo` object contains information about the
-underlying connection, such as the origin IP address. You must return a
-[`Response`][response] object from the handler function.
+```ts title="More complex Hello World server"
+Deno.serve({
+  onListen: ({ port }) => {
+    console.log("Deno server listening on *:", port);
+  },
+}, (req: Request, conn: Deno.ServeHandlerInfo) => {
+  // Get information about the incoming request
+  const method = req.method;
+  const ip = conn.remoteAddr.hostname;
+  console.log(`${ip} just made an HTTP ${method} request.`);
 
-Let's use this information to finish our hello world script:
-
-```js
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
-serve((_req) => {
-  return new Response("Hello World!", {
-    headers: { "content-type": "text/plain" },
-  });
+  // Return a web standard Response object
+  return new Response("Hello, world!");
 });
 ```
 
@@ -47,8 +38,8 @@ serve((_req) => {
 
 1. Create a new playground project by visiting https://dash.deno.com/new, and
    clicking the **Play** button under the **Playground** card.
-2. On the next screen, copy the code above into the editor on the left side of
-   the screen.
+2. On the next screen, copy the code above (either the short or the longer
+   example) into the editor on the left side of the screen.
 3. Press the **Save & Deploy** button on the right side of the top toolbar (or
    press <kbd>Ctrl</kbd>+<kbd>S</kbd>).
 
