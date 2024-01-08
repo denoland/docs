@@ -149,8 +149,8 @@ readTextFileSync  readFileSync      readDir           readLink          readAllS
 | Ctrl-Z                | Suspend (Unix only)                                                                              |
 | Ctrl-_                | Undo                                                                                             |
 | Meta-0, 1, ..., -     | Specify the digit to the argument. `–` starts a negative argument.                               |
-| Meta-&lt;             | Move to first entry in history                                                                   |
-| Meta->                | Move to last entry in history                                                                    |
+| Meta &lt;             | Move to first entry in history                                                                   |
+| Meta &gt;             | Move to last entry in history                                                                    |
 | Meta-B, Alt-Left      | Move cursor to previous word                                                                     |
 | Meta-Backspace        | Kill from the start of the current word, or, if between words, to the start of the previous word |
 | Meta-C                | Capitalize the current word                                                                      |
