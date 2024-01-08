@@ -271,7 +271,9 @@ lint = true
 
 ### Helix
 
-[Helix](https://helix-editor.com) comes with built-in language server support. Enabling connection to the Deno language server requires changes in the `languages.toml` configuration file.
+[Helix](https://helix-editor.com) comes with built-in language server support.
+Enabling connection to the Deno language server requires changes in the
+`languages.toml` configuration file.
 
 ```toml
 [[language]]
@@ -428,9 +430,10 @@ There are several environment variables which can impact the behavior of Deno:
   [Proxies](../basics/modules/proxies.md) section for more information.
 - `NO_COLOR` - If set, this will prevent the Deno CLI from sending ANSI color
   codes when writing to stdout and stderr. See the website
-  <https://no-color.org/> for more information on this _de facto_ standard. The
-  value of this flag can be accessed at runtime without permission to read the
-  environment variables by checking the value of `Deno.noColor`.
+  [https://no-color.org](https://no-color.org/) for more information on this _de
+  facto_ standard. The value of this flag can be accessed at runtime without
+  permission to read the environment variables by checking the value of
+  `Deno.noColor`.
 - `NO_PROXY` - Indicates hosts which should bypass the proxy set in the other
   environment variables. See the [Proxies](../basics/modules/proxies.md) section
   for more information.

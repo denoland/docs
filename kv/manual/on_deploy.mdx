@@ -81,8 +81,8 @@ failure modes. RPO represents the maximum acceptable amount of data loss
 measured in time, whereas RTO signifies the maximum acceptable time required to
 restore the system to normal operations after a failure.
 
-- Loss of one data center in the primary region: RPO=0 (no data loss), RTO<5s
+- Loss of one data center in the primary region: RPO=0 (no data loss), RTO&lt;5s
   (system restoration in under 5 seconds)
-- Loss of any number of data centers in a replica region: RPO=0, RTO<5s
-- Loss of two or more data centers in the primary region: RPO<60s (under 60
+- Loss of any number of data centers in a replica region: RPO=0, RTO&lt;5s
+- Loss of two or more data centers in the primary region: RPO&lt;60s (under 60
   seconds of data loss)
