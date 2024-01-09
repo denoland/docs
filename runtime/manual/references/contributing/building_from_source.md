@@ -76,12 +76,12 @@ brew install llvm
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
 
-**WSL **
+**WSL**
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
-sudo ./llvm.sh 16
+./llvm.sh 16
 
-sudo apt install --install-recommends -y cmake libglib2.0-dev
+apt install --install-recommends -y cmake libglib2.0-dev
 
 **Windows**:
 
