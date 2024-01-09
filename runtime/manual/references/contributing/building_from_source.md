@@ -10,7 +10,7 @@ chapter).
 > Deno uses submodules, so you must remember to clone using
 > `--recurse-submodules`.
 
-**Linux**/**Mac**:
+**Linux**/**Mac**/**WSL**:
 
 ```shell
 git clone --recurse-submodules https://github.com/denoland/deno.git
@@ -76,6 +76,13 @@ brew install llvm
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
 
+**WSL **
+wget https://apt.llvm.org/llvm.sh
+chmod +x llvm.sh
+sudo ./llvm.sh 16
+
+sudo apt install --install-recommends -y cmake libglib2.0-dev
+
 **Windows**:
 
 1. Get [VS Community 2019](https://www.visualstudio.com/downloads/) with the
@@ -105,7 +112,7 @@ brew install llvm
 > Building Deno requires the
 > [Protocol Buffers compiler](https://grpc.io/docs/protoc-installation/).
 
-**Linux**:
+**Linux**/**WSL**:
 
 ```sh
 apt install -y protobuf-compiler
@@ -133,6 +140,7 @@ Windows users can download the latest binary release from
 ## Building Deno
 
 The easiest way to build Deno is by using a precompiled version of V8:
+> for WSL make sure you have sufficient memory allocated in .wslconfig
 
 ```
 cargo build -vv
