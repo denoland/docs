@@ -81,9 +81,8 @@ brew install llvm
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
 ./llvm.sh 16
-```
-
 apt install --install-recommends -y cmake libglib2.0-dev
+```
 
 **Windows**:
 
