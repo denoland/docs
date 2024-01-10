@@ -5,6 +5,21 @@ import OpenApiEndpoint from "@site/src/components/OpenApiEndpoint";
 Projects are a container for deployments, and can be associated with domains and
 KV databases in an organization.
 
+## List projects for an organization
+
+<OpenApiEndpoint path="/organizations/{organizationId}/projects" method="get">
+  Get a paginated list of Projects for an organization. Links to the first,
+  last, next, and previous pages of results are found in the <code>Link</code>
+  &nbsp;header of the response.
+</OpenApiEndpoint>
+
+## Create a new project for an organization
+
+<OpenApiEndpoint path="/organizations/{organizationId}/projects" method="post">
+  Create a new project within the given organization. A project is a container
+  for deployments, and can be associated with domains and KV databases.
+</OpenApiEndpoint>
+
 ## Get project details
 
 <OpenApiEndpoint path="/projects/{projectId}" method="get">
@@ -29,12 +44,4 @@ KV databases in an organization.
   Get analytics data for the specified project. The analytics are returned as
   time series data in 15 minute intervals, with the <code>time</code> field
   representing the start of the interval.
-</OpenApiEndpoint>
-
-## Get project deployments
-
-<OpenApiEndpoint path="/projects/{projectId}/deployments" method="get">
-  Get a paginated list of deployments belonging to the specified project. The
-  URLs for the next, previous, first, and last page are returned in the
-  <code>Link</code> header of the response if needed.
 </OpenApiEndpoint>
