@@ -70,7 +70,7 @@ previously uploaded for the specified asset.
 
 Below is an example of `assets` that could be used to set up a deployment.
 
-```json
+```js
 {
   "assets": {
     "main.ts": {
