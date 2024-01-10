@@ -95,11 +95,32 @@ Below is an example of `assets` that could be used to set up a deployment.
 }
 ```
 
+## List deployments for a project
+
+<OpenApiEndpoint path="/projects/{projectId}/deployments" method="get">
+  Get a paginated list of deployments belonging to the specified project. The
+  URLs for the next, previous, first, and last page are returned in the
+  <code>Link</code> header of the response if needed.
+</OpenApiEndpoint>
+
 ## Get deployment details
 
 <OpenApiEndpoint path="/deployments/{deploymentId}" method="get">
   Get details for a deployment with the given ID. This endpoint can be polled
   to track the results of a serverless app deployment.
+</OpenApiEndpoint>
+
+## Redeploy a deployment with new configuration
+
+<OpenApiEndpoint path="/deployments/{deploymentId}/redeploy" method="post">
+  Redeploy a deployment with different configuration. Useful for updating
+  environment variables and assigned KV databases.
+</OpenApiEndpoint>
+
+## Delete a deployment
+
+<OpenApiEndpoint path="/deployments/{deploymentId}" method="delete">
+  Delete a deployment.
 </OpenApiEndpoint>
 
 ## Get deployment build logs

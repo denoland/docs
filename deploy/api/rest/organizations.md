@@ -21,21 +21,6 @@ access.
   Get analytics information for an organization.
 </OpenApiEndpoint>
 
-## List projects for an organization
-
-<OpenApiEndpoint path="/organizations/{organizationId}/projects" method="get">
-  Get a paginated list of Projects for an organization. Links to the first,
-  last, next, and previous pages of results are found in the <code>Link</code>
-  &nbsp;header of the response.
-</OpenApiEndpoint>
-
-## Create a new project for an organization
-
-<OpenApiEndpoint path="/organizations/{organizationId}/projects" method="post">
-  Create a new project within the given organization. A project is a container
-  for deployments, and can be associated with domains and KV databases.
-</OpenApiEndpoint>
-
 ## List an organization's KV databases
 
 <OpenApiEndpoint path="/organizations/{organizationId}/databases" method="get">

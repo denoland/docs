@@ -150,10 +150,11 @@ const sidebars = {
       label: "Overview",
       id: "api/rest/index",
     },
-    "api/rest/organizations",
     "api/rest/projects",
     "api/rest/deployments",
     "api/rest/domains",
+    "api/rest/databases",
+    "api/rest/organizations",
     {
       type: "html",
       value: '<div style="height: 30px;"></div>',
