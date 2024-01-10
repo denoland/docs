@@ -109,6 +109,7 @@ const config = {
     image: "img/social.png",
     colorMode: {
       defaultMode: "light",
+      respectPrefersColorScheme: true,
     },
     navbar: {
       title: "Deno Docs",
