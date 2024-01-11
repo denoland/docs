@@ -1,32 +1,6 @@
 import React from "react";
 import Layout from "@theme/Layout";
 
-function Card({ title, href, children, brand }) {
-  const getBrandBackground = () => {
-    if (brand === "runtime") {
-      return "bg-[var(--runtime)]";
-    } else if (brand === "deploy") {
-      return "bg-[var(--deploy)]";
-    }
-    return "bg-green-400";
-  };
-
-  return (
-    <div className="w-full md:w-auto flex flex-col sm:pl-6 py-4 sm:border-l sm:border-solid border-y-0 border-r-0 border-gray-400 dark:border-gray-700">
-      <h2>
-        {title}
-      </h2>
-      <p className="grow">{children}</p>
-      <a
-        className={`font-bold inline-block p-3 px-4 rounded-md w-max text-black ${getBrandBackground()}`}
-        href={href}
-      >
-        {title} Docs <span aria-hidden="true">→</span>
-      </a>
-    </div>
-  );
-}
-
 export default function Home() {
   return (
     <Layout
@@ -43,20 +17,119 @@ export default function Home() {
             />
             <h1 className="text-4xl md:text-6xl mb-0">Deno Docs</h1>
           </div>
-          <div className="flex flex-col items-start gap-8 md:gap-4 lg:gap-8 md:grid md:grid-cols-3 md:grid-flow-col md:items-stretch">
-            <Card title="Deno Runtime" href="/runtime/manual" brand="runtime">
-              Deno, the open-source runtime for TypeScript and JavaScript.
-              Features built-in dev tools, powerful platform APIs, and native
-              support for TypeScript and JSX.
-            </Card>
-            <Card title="Deno Deploy" href="/deploy/manual" brand="deploy">
-              Serverless platform for deploying JavaScript code to a fast,
-              global edge network. Supports Deno APIs and Node.js / npm modules
-            </Card>
-            <Card title="Deno KV" href="/kv/manual">
-              Key/value database built in to the Deno runtime. Simple API, works
-              with zero configuration on Deno Deploy.
-            </Card>
+          <div className="flex flex-col items-start gap-8 md:gap-4 lg:gap-8 md:grid md:grid-cols-2">
+            <div className="w-full md:w-auto flex flex-col sm:pl-6 py-4 sm:border-l sm:border-solid border-y-0 border-r-0 border-gray-400 dark:border-[var(--runtime)]">
+              <h2>Deno Runtime</h2>
+              <p className="min-h-20">
+                Deno, the open-source runtime for TypeScript and JavaScript.
+                Features built-in dev tools, powerful platform APIs, and native
+                support for TypeScript and JSX.
+              </p>
+              <a
+                className="font-bold inline-block p-3 px-4 rounded-md w-max text-black bg-[var(--runtime)]"
+                href="/runtime/manual"
+              >
+                Deno docs <span aria-hidden="true">-&gt;</span>
+              </a>
+              <h3 className="mt-16">More about Deno:</h3>
+              <div className="grid grid-cols-1 gap-4 md:gap- mt-4">
+                <div>
+                  <h4 className="mb-1">Deno basics</h4>
+                  <p>
+                    New to Deno? This is the place to start.{" "}
+                    <a
+                      className="font-bold inline-block underline"
+                      href="/runtime/manual/getting_started/first_steps"
+                    >
+                      Get started <span aria-hidden="true">-&gt;</span>
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <h4 className="mb-1">Configuration</h4>
+                  <p>
+                    Customizations for Deno's built-in TypeScript compiler,
+                    formatter, and linter.{" "}
+                    <a
+                      className="font-bold inline-block underline"
+                      href="/runtime/manual/getting_started/configuration_file"
+                    >
+                      Deno config <span aria-hidden="true">-&gt;</span>
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <h4 className="mb-1">Testing in Deno</h4>
+                  <p>
+                    All about Deno's built-in test runner for JavaScript or
+                    TypeScript code.{" "}
+                    <a
+                      className="font-bold inline-block underline"
+                      href="/runtime/manual/basics/testing/"
+                    >
+                      More about Testing <span aria-hidden="true">-&gt;</span>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full md:w-auto flex flex-col sm:pl-6 py-4 sm:border-l sm:border-solid border-y-0 border-r-0 border-gray-400 dark:border-[var(--deploy)]">
+              <h2>Deno Deploy</h2>
+              <p className="min-h-20">
+                Serverless platform for deploying JavaScript code to a fast,
+                global edge network. Supports Deno APIs and Node.js / npm
+                modules
+              </p>
+              <a
+                className="font-bold inline-block p-3 px-4 rounded-md w-max text-black bg-[var(--deploy)]"
+                href="/deploy/manual"
+              >
+                Deploy docs <span aria-hidden="true">-&gt;</span>
+              </a>
+              <h3 className="mt-16">Deno Deploy APIs:</h3>
+              <div className="grid grid-cols-1 gap-4 md:gap- mt-4">
+                <div>
+                  <h4 className="mb-1">Deno KV</h4>
+                  <p>
+                    Key/value database built in to the Deno runtime. Simple API,
+                    works with zero configuration on Deno Deploy.{" "}
+                    <a
+                      className="font-bold inline-block underline"
+                      href="/kv/manual"
+                    >
+                      KV docs <span aria-hidden="true">-&gt;</span>
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <h4 className="mb-1">Deno Cron</h4>
+                  <p>
+                    Execute code on a configurable schedule at the edge in any
+                    time zone.{" "}
+                    <a
+                      className="font-bold inline-block underline"
+                      href="/kv/manual/cron"
+                    >
+                      Cron docs <span aria-hidden="true">-&gt;</span>
+                    </a>
+                  </p>
+                </div>
+                <div>
+                  <h4 className="mb-1">Deno Queues</h4>
+                  <p>
+                    Deno's queueing API for offloading larger workloads or
+                    scheduling tasks with guaranteed delivery.{" "}
+                    <a
+                      className="font-bold inline-block underline"
+                      href="/kv/manual/queue_overview"
+                    >
+                      Cron docs <span aria-hidden="true">-&gt;</span>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
