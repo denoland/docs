@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import OpenAPIParser from "@readme/openapi-parser";
 import Details from "@theme/Details";
 import Tabs from "@theme/Tabs";
@@ -323,7 +323,7 @@ export default function OpenApiEndpoint(
   const [apiDef, setApiDef] = useState(API);
 
   // Execute once - will load API definition if needed
-  useEffect(async () => {
+  (async () => {
     if (apiDef) return;
 
     try {
@@ -333,7 +333,7 @@ export default function OpenApiEndpoint(
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  })();
 
   // If first load, will be null
   if (!apiDef) return <></>;
