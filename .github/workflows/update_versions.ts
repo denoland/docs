@@ -1,4 +1,4 @@
-// Copyright 2022-2023 the Deno authors. All rights reserved. MIT license.
+// Copyright 2022-2024 the Deno authors. All rights reserved. MIT license.
 
 import { $ } from "https://raw.githubusercontent.com/denoland/automation/0.19.2/mod.ts";
 import {
@@ -32,7 +32,7 @@ if (Deno.args.includes("--create-pr")) {
 async function getLatestTagForRepo(name: string) {
   $.logStep(`Fetching latest release for ${name}...`);
   const latestRelease = await $.request(
-    `https://api.github.com/repos/denoland/${name}/releases/latest`,
+    `https://api.github.com/repos/denoland/${name}/releases/latest`
   )
     .header("accept", "application/vnd.github.v3+json")
     .json<{ tag_name: string }>();
@@ -73,7 +73,8 @@ async function tryCreatePr() {
   $.log(`Opened PR at ${openedPr.data.url}`);
 
   function getPrBody() {
-    let text = `Bumped versions for ${latestCliVersion}\n\n` +
+    let text =
+      `Bumped versions for ${latestCliVersion}\n\n` +
       `To make edits to this PR:\n` +
       "```shell\n" +
       `gh pr checkout <THIS PR NUMBER>\n` +
