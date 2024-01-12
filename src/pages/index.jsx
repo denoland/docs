@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "@theme/Layout";
-import Footer from "@theme/Footer"
+import Footer from "@theme/Footer";
 
 export default function Home() {
   return (
@@ -27,7 +27,7 @@ export default function Home() {
                 support for TypeScript and JSX.
               </p>
               <a
-                className="font-bold inline-block p-3 px-4 rounded-md w-max text-black bg-[var(--runtime)]"
+                className="border-solid border-[var(--runtime)] font-bold inline-block p-3 px-4 rounded-md w-max text-black bg-[var(--runtime)] hover:text-inherit dark:hover:text-[var(--runtime)] dark:hover:bg-[var(--runtime-dark)] hover:no-underline"
                 href="/runtime/manual"
               >
                 Deno docs <span aria-hidden="true">-&gt;</span>
@@ -83,7 +83,7 @@ export default function Home() {
                 modules
               </p>
               <a
-                className="font-bold inline-block p-3 px-4 rounded-md w-max text-black bg-[var(--deploy)]"
+                className="border-solid border-[var(--deploy)] font-bold inline-block p-3 px-4 rounded-md w-max text-black bg-[var(--deploy)] hover:text-inherit dark:hover:text-[var(--deploy)] dark:hover:bg-[var(--deploy-dark)] hover:no-underline"
                 href="/deploy/manual"
               >
                 Deploy docs <span aria-hidden="true">-&gt;</span>
@@ -135,7 +135,7 @@ export default function Home() {
         </div>
       </div>
 
-			<Footer />
+      <Footer />
     </Layout>
   );
 }
