@@ -51,7 +51,6 @@
   --ifm-heading-font-weight: 600;
   --ifm-font-weight-bold: 600;
   --ifm-heading-line-height: 1.1;
-  --ifm-line-height-base: 1.7;
   --ifm-leading: 1.5rem;
   --ifm-h1-font-size: 4rem;
   --ifm-color-primary: var(--deploy-medium-light);
@@ -70,6 +69,7 @@
   --ifm-menu-color: var(--gray-2);
   --ifm-navbar-search-input-background-color: #fff;
   --ifm-tabs-padding-vertical: 0.5rem;
+  --ifm-list-item-margin: 0.5em;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-font-family-base: Inter, ui-sans-serif, system-ui, -apple-system,
     "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
@@ -102,7 +102,7 @@ html[data-theme="dark"][data-theme="dark"] {
 
   --ifm-background-color: var(--black);
   --ifm-background-surface-color: var(--gray-4);
-  --ifm-link-color: var(--white);
+  --ifm-link-color: var(--runtime);
   --ifm-link-hover-color: var(--runtime);
   --ifm-color-info-dark: var(--deploy-medium);
   --ifm-color-info-contrast-background: var(--deploy-dark);
@@ -133,6 +133,7 @@ article {
 h1,
 .markdown h1:first-child {
   font-size: clamp(2rem, 5vw, 2.75rem);
+  margin-bottom: 1.25rem;
 }
 
 .markdown h1:first-child {
@@ -140,21 +141,26 @@ h1,
 }
 
 h2 {
-  --ifm-h2-vertical-rhythm-top: 3;
+  --ifm-h2-vertical-rhythm-top: 2.5;
+
   font-size: clamp(1.5rem, 4vw, 2rem);
 }
 
 h3 {
   --ifm-h3-vertical-rhythm-top: 2;
+
   font-size: clamp(1.25rem, 3vw, 1.5rem);
 }
 
 h4 {
   --ifm-h4-vertical-rhythm-top: 1.5;
+
   font-size: clamp(1.1rem, 2vw, 1.25rem);
 }
 
 :where(h1, h2, h3) {
+  --ifm-heading-vertical-rhythm-bottom: 0.75;
+
   text-wrap: balance;
   letter-spacing: -0.025em;
 }
@@ -444,6 +450,10 @@ svg.iconExternalLink_node_modules-\@docusaurus-theme-classic-lib-theme-Icon-Exte
   padding: 0;
   margin-bottom: -0.09em;
   margin-left: 0.4em;
+}
+
+nav.menu.thin-scrollbar.menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-Content-styles-module {
+  padding-top: 1.5rem;
 }
 
 .footer__copyright {
