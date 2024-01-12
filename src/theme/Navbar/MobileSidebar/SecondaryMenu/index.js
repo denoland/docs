@@ -9,8 +9,9 @@ function SecondaryMenuBackButton(props) {
     <button
       type="button"
       {...props}
-      className="secondary-menu__product__button"
+      className="secondary-menu__product__button [font:inherit]"
     >
+			<span aria-hidden="true" className="inline-block transform rotate-180 [font-family:inherit]">&ensp;-&gt; </span>
       All docs
     </button>
   );
