@@ -117,14 +117,13 @@ const sidebars = {
       ],
     },
     {
-      type: "category",
-      label: "Policies & Limits",
-      items: [
-        "manual/fair-use-policy",
-        "manual/privacy-policy",
-        "manual/security",
-      ],
+      type: "html",
+      value: "<div>Policies and Limts</div>",
+      className: "section-header",
     },
+    "manual/fair-use-policy",
+    "manual/privacy-policy",
+    "manual/security",
     {
       type: "html",
       value: "<div>Reference</div>",
