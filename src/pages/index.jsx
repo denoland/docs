@@ -96,7 +96,7 @@ export default function Home() {
                     Key/value database built in to the Deno runtime. Simple API,
                     works with zero configuration on Deno Deploy.{" "}
                     <a
-                      className="font-bold inline-block underline"
+                      className="font-bold inline-block underline dark:[color:var(--deploy)]"
                       href="/kv/manual"
                     >
                       KV docs <span aria-hidden="true">-&gt;</span>
@@ -109,7 +109,7 @@ export default function Home() {
                     Execute code on a configurable schedule at the edge in any
                     time zone.{" "}
                     <a
-                      className="font-bold inline-block underline"
+                      className="font-bold inline-block underline dark:text-[color:var(--deploy)]"
                       href="/kv/manual/cron"
                     >
                       Cron docs <span aria-hidden="true">-&gt;</span>
@@ -122,7 +122,7 @@ export default function Home() {
                     Deno’s queueing API for offloading larger workloads or
                     scheduling tasks with guaranteed delivery.{" "}
                     <a
-                      className="font-bold inline-block underline"
+                      className="font-bold inline-block underline dark:[color:var(--deploy)]"
                       href="/kv/manual/queue_overview"
                     >
                       Cron docs <span aria-hidden="true">-&gt;</span>
