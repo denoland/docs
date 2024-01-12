@@ -1,5 +1,5 @@
 ---
-displayed_sidebar: deployTutorialsHome
+displayed_sidebar: deployGuideHome
 sidebar_position: 1
 sidebar_label: Overview
 pagination_next: tutorials/tutorial-http-server
