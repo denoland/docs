@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "@theme/Layout";
+import Footer from "@theme/Footer"
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
       title={"Deno: the easiest, most secure JavaScript runtime"}
       description="Reference documentation for the Deno runtime and Deno Deploy"
     >
-      <div className="flex flex-col px-8 pt-6 mt-20 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-[1200px] mx-auto">
+      <div className="flex flex-col px-8 pt-6 mt-20 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-[1200px] mx-auto mb-24">
         <div className="pb-16 align-middle md:pb-0">
           <div className="mb-16 md:mb-24 text-center">
             <img
@@ -133,6 +134,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+			<Footer />
     </Layout>
   );
 }

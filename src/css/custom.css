@@ -69,6 +69,7 @@
   --ifm-code-color: #393a34;
   --ifm-menu-color: var(--gray-2);
   --ifm-navbar-search-input-background-color: #fff;
+  --ifm-tabs-padding-vertical: 0.5rem;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-font-family-base: Inter, ui-sans-serif, system-ui, -apple-system,
     "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
@@ -105,6 +106,7 @@ html[data-theme="dark"][data-theme="dark"] {
   --ifm-link-hover-color: var(--runtime);
   --ifm-color-info-dark: var(--deploy-medium);
   --ifm-color-info-contrast-background: var(--deploy-dark);
+  --ifm-menu-color-background-active: var(--runtime-dark);
   --ifm-code-background: #282a36;
   --ifm-menu-color: var(--gray-0);
 }
@@ -175,6 +177,10 @@ td p:last-child {
   width: 100%;
 }
 
+.table-of-contents a {
+  line-height: 1.5;
+}
+
 .navbar__product_link {
   color: var(--ifm-navbar-link-color);
 }
@@ -185,7 +191,8 @@ td p:last-child {
 }
 
 .container {
-  max-width: 1140px !important;
+  max-width: 71.25rem !important;
+  padding-bottom: 2rem !important;
 }
 
 .container article {
@@ -317,6 +324,13 @@ td p:last-child {
 .footer {
   border-top: 1px solid var(--ifm-toc-border-color);
   background-color: transparent;
+  padding-top: 3rem;
+}
+
+@media (min-width: 997px) {
+  .footer {
+    padding-inline: 0;
+  }
 }
 
 .__no-external a svg {
@@ -422,4 +436,17 @@ td p:last-child {
 .breadcrumbs__item--active .breadcrumbs__link {
   background: transparent;
   color: inherit;
+}
+
+svg.iconExternalLink_node_modules-\@docusaurus-theme-classic-lib-theme-Icon-ExternalLink-styles-module {
+  width: 0.7em;
+  vertical-align: baseline;
+  padding: 0;
+  margin-bottom: -0.09em;
+  margin-left: 0.4em;
+}
+
+.footer__copyright {
+  font-size: 0.75rem;
+  margin-top: 2rem;
 }
