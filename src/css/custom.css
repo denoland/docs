@@ -7,23 +7,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* You can override the default Infima variables here. */
-
 :root {
+  /* These variables mainly pulled from dotcom */
+  --white: #ffffff;
+  --black: #0b0d11;
+  --offblack: #121417;
+  --white-veil: #ffffff03;
+  --black-veil: #00000003;
+
+  --runtime: #70ffaf;
+  --runtime-medium: #00662c;
+  --runtime-dark: #172723;
+  --runtime-secondary: #ebff01;
+  --runtime-secondary-dark: #232711;
+
+  --deploy: #01c2ff;
+  --deploy-light: #7fe0ff;
+  --deploy-lighter: #fddcf2;
+  --deploy-lightest: #fde8f8;
+  --deploy-medium-light: #5673b8;
+  --deploy-medium: #3d588f;
+  --deploy-dark: #0c212a;
+
+  --subhosting: #ff8a01;
+  --subhosting-dark: #251c11;
+
+  --gray-0: #9ea0a5;
+  --gray-1: #868789;
+  --gray-2: #56575a;
+  --gray-3: #25272b;
+  --gray-4: #191b1f;
+  --gray-5: #14161a;
+
+  --code-1: #01c2ff;
+  --code-2: #00a341;
+  --code-3: #ae01ff;
+  --code-4: #ea8e04;
+  --code-5: #ffd601;
+  --code-6: #01ff67;
+  --code-7: #db01ff;
+
+  /* Docusaurus theme overrides */
   --ifm-heading-font-weight: 600;
   --ifm-font-weight-bold: 600;
-  /*
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --ifm-code-padding-horizontal: 0.5em;
-  --ifm-code-padding-vertical: 0.25em;
+  --ifm-heading-line-height: 1.1;
+  --ifm-leading: 1.5rem;
+  --ifm-h1-font-size: 4rem;
+  --ifm-color-primary: var(--deploy-medium-light);
+  --ifm-link-color: var(--deploy-medium-light);
+  --ifm-pre-padding: 1rem;
+  --ifm-alert-padding-vertical: 2rem;
+  --ifm-alert-padding-horizontal: 2rem;
+  --ifm-color-info-dark: var(--deploy-medium-light);
+  --ifm-color-info-contrast-background: var(--deploy-lightest);
+  --ifm-menu-color-background-hover: var(--deploy-lightest);
+  --ifm-code-font-size: 0.875em;
+  --ifm-code-padding-horizontal: 0.375em;
+  --ifm-code-padding-vertical: 0.1875em;
+  --ifm-code-background: #f6f8fa; /* Matches Prism highlighting */
+  --ifm-code-color: #393a34;
+  --ifm-menu-color: var(--gray-2);
   --ifm-navbar-search-input-background-color: #fff;
+  --ifm-tabs-padding-vertical: 0.5rem;
+  --ifm-list-item-margin: 0.5em;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-font-family-base: Inter, ui-sans-serif, system-ui, -apple-system,
     "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
@@ -31,18 +77,38 @@
   --ifm-font-family-monospace: Menlo, Monaco, "Lucida Console", Consolas,
     "Liberation Mono", "Courier New", monospace, Menlo, Monaco, "Lucida Console",
     Consolas, "Liberation Mono", "Courier New", monospace;
-		*/
 }
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme="dark"] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+
+@media (min-width: 24rem) {
+  :root {
+    --ifm-spacing-horizontal: 2rem;
+  }
+}
+
+@media (min-width: 36rem) {
+  :root {
+    --ifm-pre-padding: 2rem;
+  }
+}
+
+/* Multiple selectors to override defaults in dark mode */
+html[data-theme="dark"][data-theme="dark"] {
+  --ifm-color-primary: var(--runtime);
+  --docsearch-highlight-color: var(--runtime);
+  --ifm-menu-color-background-hover: var(--runtime-dark);
+  --docsearch-hit-active-color: var(--black);
+  --docsearch-modal-background: var(--gray-4);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --ifm-background-color: var(--black);
+  --ifm-background-surface-color: var(--gray-4);
+  --ifm-link-color: var(--runtime);
+  --ifm-link-hover-color: var(--runtime);
+  --ifm-color-info-dark: var(--deploy-medium);
+  --ifm-color-info-contrast-background: var(--deploy-dark);
+  --ifm-menu-color-background-active: var(--runtime-dark);
+  --ifm-code-background: #282a36;
+  --ifm-menu-color: var(--gray-0);
 }
 
 html,
@@ -64,19 +130,48 @@ article {
   max-width: 75ch;
 }
 
-h1 {
-  font-size: 2rem;
-  line-height: 1.2;
+h1,
+.markdown h1:first-child {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  margin-bottom: 1.25rem;
+}
+
+.markdown h1:first-child {
+  margin-top: 1rem;
 }
 
 h2 {
-  font-size: 1.5rem;
-  line-height: 1.2;
+  --ifm-h2-vertical-rhythm-top: 2.5;
+
+  font-size: clamp(1.5rem, 4vw, 2rem);
 }
 
 h3 {
-  font-size: 1.125rem;
-  line-height: 1.2;
+  --ifm-h3-vertical-rhythm-top: 2;
+
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+}
+
+h4 {
+  --ifm-h4-vertical-rhythm-top: 1.5;
+
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+}
+
+:where(h1, h2, h3) {
+  --ifm-heading-vertical-rhythm-bottom: 0.75;
+
+  text-wrap: balance;
+  letter-spacing: -0.025em;
+}
+
+code {
+  letter-spacing: 0;
+  vertical-align: baseline;
+}
+
+.markdown a {
+  text-decoration: underline;
 }
 
 td p:last-child {
@@ -86,6 +181,10 @@ td p:last-child {
 .navbar {
   position: fixed;
   width: 100%;
+}
+
+.table-of-contents a {
+  line-height: 1.5;
 }
 
 .navbar__product_link {
@@ -98,7 +197,8 @@ td p:last-child {
 }
 
 .container {
-  max-width: 1140px !important;
+  max-width: 71.25rem !important;
+  padding-bottom: 2rem !important;
 }
 
 .container article {
@@ -143,7 +243,11 @@ td p:last-child {
 }
 
 .menu__link {
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
+}
+
+.menu__link--sublist-caret:after {
+  background-size: 1.5em;
 }
 
 .navbar__item {
@@ -226,6 +330,13 @@ td p:last-child {
 .footer {
   border-top: 1px solid var(--ifm-toc-border-color);
   background-color: transparent;
+  padding-top: 3rem;
+}
+
+@media (min-width: 997px) {
+  .footer {
+    padding-inline: 0;
+  }
 }
 
 .__no-external a svg {
@@ -331,4 +442,21 @@ td p:last-child {
 .breadcrumbs__item--active .breadcrumbs__link {
   background: transparent;
   color: inherit;
+}
+
+svg.iconExternalLink_node_modules-\@docusaurus-theme-classic-lib-theme-Icon-ExternalLink-styles-module {
+  width: 0.7em;
+  vertical-align: baseline;
+  padding: 0;
+  margin-bottom: -0.09em;
+  margin-left: 0.4em;
+}
+
+nav.menu.thin-scrollbar.menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-Content-styles-module {
+  padding-top: 1.5rem;
+}
+
+.footer__copyright {
+  font-size: 0.75rem;
+  margin-top: 2rem;
 }
