@@ -1,10 +1,7 @@
-// Include main doc categories on most pages
-const mainMenu = [];
-
 const sidebars = {
-  runtime: mainMenu,
+  runtime: [],
 
-  runtimeGuideHome: mainMenu.concat([
+  runtimeGuideHome: [
     {
       type: "html",
       value: "<div>Getting Started</div>",
@@ -335,7 +332,7 @@ const sidebars = {
       label: "Std. Library",
       href: "https://www.deno.land/std",
     },
-  ]),
+  ],
 };
 
 module.exports = sidebars;
