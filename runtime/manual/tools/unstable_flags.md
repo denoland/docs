@@ -132,6 +132,8 @@ Sloppy imports will allow (but print warnings for) the following:
 - Import a directory path, and automatically use `index.js` or `index.ts` as the
   import for that directory
 
+[`deno compile`](./compiler.md) does not support sloppy imports.
+
 ## `--unstable-unsafe-proto`
 
 Deno made a conscious decision to not support `Object.prototype.__proto__` for
