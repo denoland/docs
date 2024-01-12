@@ -25,6 +25,7 @@
   --deploy-light: #7fe0ff;
   --deploy-lighter: #fddcf2;
   --deploy-lightest: #fde8f8;
+  --deploy-medium-light: #5673b8;
   --deploy-medium: #3d588f;
   --deploy-dark: #0c212a;
 
@@ -50,14 +51,31 @@
   --ifm-heading-font-weight: 600;
   --ifm-font-weight-bold: 600;
   --ifm-heading-line-height: 1.1;
+  --ifm-line-height-base: 1.7;
+  --ifm-leading: 1.5rem;
   --ifm-h1-font-size: 4rem;
-  --ifm-color-primary: var(--deploy-medium);
-  --ifm-link-color: var(--deploy-medium);
-  --ifm-pre-padding: 1.5rem;
-  --ifm-alert-padding-vertical: 1.5rem;
-  --ifm-alert-padding-horizontal: 1.5rem;
-  --ifm-color-info-dark: var(--deploy-medium);
+  --ifm-color-primary: var(--deploy-medium-light);
+  --ifm-link-color: var(--deploy-medium-light);
+  --ifm-pre-padding: 1rem;
+  --ifm-alert-padding-vertical: 2rem;
+  --ifm-alert-padding-horizontal: 2rem;
+  --ifm-color-info-dark: var(--deploy-medium-light);
   --ifm-color-info-contrast-background: var(--deploy-lightest);
+  --ifm-menu-color-background-hover: var(--deploy-lightest);
+  --ifm-code-font-size: 0.875em;
+  --ifm-code-padding-horizontal: 0.375em;
+  --ifm-code-padding-vertical: 0.1875em;
+  --ifm-code-background: #f6f8fa; /* Matches Prism highlighting */
+  --ifm-code-color: #393a34;
+  --ifm-menu-color: var(--gray-2);
+  --ifm-navbar-search-input-background-color: #fff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base: Inter, ui-sans-serif, system-ui, -apple-system,
+    "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif;
+  --ifm-font-family-monospace: Menlo, Monaco, "Lucida Console", Consolas,
+    "Liberation Mono", "Courier New", monospace, Menlo, Monaco, "Lucida Console",
+    Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @media (min-width: 24rem) {
@@ -66,10 +84,17 @@
   }
 }
 
+@media (min-width: 36rem) {
+  :root {
+    --ifm-pre-padding: 2rem;
+  }
+}
+
 /* Multiple selectors to override defaults in dark mode */
 html[data-theme="dark"][data-theme="dark"] {
   --ifm-color-primary: var(--runtime);
   --docsearch-highlight-color: var(--runtime);
+  --ifm-menu-color-background-hover: var(--runtime-dark);
   --docsearch-hit-active-color: var(--black);
   --docsearch-modal-background: var(--gray-4);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
@@ -80,6 +105,8 @@ html[data-theme="dark"][data-theme="dark"] {
   --ifm-link-hover-color: var(--runtime);
   --ifm-color-info-dark: var(--deploy-medium);
   --ifm-color-info-contrast-background: var(--deploy-dark);
+  --ifm-code-background: #282a36;
+  --ifm-menu-color: var(--gray-0);
 }
 
 html,
@@ -127,7 +154,12 @@ h4 {
 
 :where(h1, h2, h3) {
   text-wrap: balance;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+}
+
+code {
+  letter-spacing: 0;
+  vertical-align: baseline;
 }
 
 .markdown a {
@@ -198,7 +230,11 @@ td p:last-child {
 }
 
 .menu__link {
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
+}
+
+.menu__link--sublist-caret:after {
+  background-size: 1.5em;
 }
 
 .navbar__item {

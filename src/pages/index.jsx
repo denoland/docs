@@ -17,7 +17,7 @@ export default function Home() {
             />
             <h1 className="text-4xl md:text-6xl mb-0">Deno Docs</h1>
           </div>
-          <div className="flex flex-col items-start gap-8 md:gap-4 lg:gap-8 md:grid md:grid-cols-2">
+          <div className="flex flex-col items-stretch gap-8 md:gap-4 lg:gap-8 md:grid md:grid-cols-2">
             <div className="w-full md:w-auto flex flex-col sm:pl-6 py-4 sm:border-l sm:border-solid border-y-0 border-r-0 border-gray-400 dark:border-[var(--runtime)]">
               <h2>Deno Runtime</h2>
               <p className="min-h-20">
@@ -48,7 +48,7 @@ export default function Home() {
                 <div>
                   <h4 className="mb-1">Configuration</h4>
                   <p>
-                    Customizations for Deno's built-in TypeScript compiler,
+                    Customizations for Deno’s built-in TypeScript compiler,
                     formatter, and linter.{" "}
                     <a
                       className="font-bold inline-block underline"
@@ -61,7 +61,7 @@ export default function Home() {
                 <div>
                   <h4 className="mb-1">Testing in Deno</h4>
                   <p>
-                    All about Deno's built-in test runner for JavaScript or
+                    All about Deno’s built-in test runner for JavaScript or
                     TypeScript code.{" "}
                     <a
                       className="font-bold inline-block underline"
@@ -90,7 +90,7 @@ export default function Home() {
               <h3 className="mt-16">Deno Deploy APIs:</h3>
               <div className="grid grid-cols-1 gap-4 md:gap- mt-4">
                 <div>
-                  <h4 className="mb-1">Deno KV</h4>
+                  <h4 className="mb-1">KV</h4>
                   <p>
                     Key/value database built in to the Deno runtime. Simple API,
                     works with zero configuration on Deno Deploy.{" "}
@@ -103,7 +103,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div>
-                  <h4 className="mb-1">Deno Cron</h4>
+                  <h4 className="mb-1">Cron</h4>
                   <p>
                     Execute code on a configurable schedule at the edge in any
                     time zone.{" "}
@@ -116,9 +116,9 @@ export default function Home() {
                   </p>
                 </div>
                 <div>
-                  <h4 className="mb-1">Deno Queues</h4>
+                  <h4 className="mb-1">Queues</h4>
                   <p>
-                    Deno's queueing API for offloading larger workloads or
+                    Deno’s queueing API for offloading larger workloads or
                     scheduling tasks with guaranteed delivery.{" "}
                     <a
                       className="font-bold inline-block underline"
