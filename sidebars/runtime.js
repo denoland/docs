@@ -1,43 +1,5 @@
-const spacer = {
-  type: "html",
-  value: '<div style="height: 30px;"></div>',
-};
-
 // Include main doc categories on most pages
-const mainMenu = [
-  // https://docusaurus.io/docs/sidebar/items
-  {
-    type: "html",
-    value: "<div>Deno Runtime</div>",
-    className: "product-header",
-  },
-  /*
-  {
-    type: "doc",
-    id: "index",
-    label: "Quick Start",
-    className: "icon-menu-option icon-menu-quick-start",
-  },
-  */
-  {
-    type: "link",
-    href: "/runtime/manual",
-    label: "Manual",
-    className: "icon-menu-option icon-menu-user-guide",
-  },
-  {
-    type: "link",
-    label: "Tutorials & Examples",
-    href: "/runtime/tutorials",
-    className: "icon-menu-option icon-menu-tutorials",
-  },
-  {
-    type: "link",
-    label: "API Reference",
-    href: "https://deno.land/api?unstable=true",
-    className: "icon-menu-option icon-menu-api __no-external",
-  },
-];
+const mainMenu = [];
 
 const sidebars = {
   runtime: mainMenu,
@@ -45,7 +7,7 @@ const sidebars = {
   runtimeGuideHome: mainMenu.concat([
     {
       type: "html",
-      value: "<div>Manual</div>",
+      value: "<div>Getting Started</div>",
       className: "section-header",
     },
     {
@@ -71,6 +33,61 @@ const sidebars = {
         "manual/basics/react",
         "manual/getting_started/installation",
       ],
+    },
+    {
+      type: "html",
+      value: "<div>Tutorials and Examples</div>",
+      className: "section-header",
+    },
+    {
+      type: "category",
+      label: "Basic Examples",
+      items: [
+        "tutorials/hello_world",
+        "tutorials/manage_dependencies",
+        "tutorials/fetch_data",
+        "tutorials/read_write_files",
+        "tutorials/hashbang",
+      ],
+    },
+    {
+      type: "category",
+      label: "Advanced Examples",
+      items: [
+        "tutorials/unix_cat",
+        "tutorials/http_server",
+        "tutorials/file_server",
+        "tutorials/tcp_echo",
+        "tutorials/subprocess",
+        "tutorials/os_signals",
+        "tutorials/file_system_events",
+        "tutorials/module_metadata",
+      ],
+    },
+    {
+      type: "category",
+      label: "npm Module Examples",
+      items: [
+        "tutorials/how_to_with_npm/apollo",
+        "tutorials/how_to_with_npm/express",
+        "tutorials/how_to_with_npm/mongoose",
+        "tutorials/how_to_with_npm/mysql2",
+        "tutorials/how_to_with_npm/planetscale",
+        "tutorials/how_to_with_npm/prisma",
+        "tutorials/how_to_with_npm/react",
+        "tutorials/how_to_with_npm/redis",
+        "tutorials/how_to_with_npm/vue",
+      ],
+    },
+    {
+      type: "link",
+      label: "More on Deno by Example",
+      href: "https://examples.deno.land",
+    },
+    {
+      type: "html",
+      value: "<div>Modules and APIs</div>",
+      className: "section-header",
     },
     {
       type: "category",
@@ -126,6 +143,24 @@ const sidebars = {
           id: "manual/node/compatibility",
         },
       ],
+    },
+    {
+      type: "category",
+      label: "JSX and DOM APIs",
+      items: [
+        "manual/advanced/jsx_dom/overview",
+        "manual/advanced/jsx_dom/jsx",
+        "manual/advanced/jsx_dom/css",
+        "manual/advanced/jsx_dom/twind",
+        "manual/advanced/jsx_dom/jsdom",
+        "manual/advanced/jsx_dom/deno_dom",
+        "manual/advanced/jsx_dom/linkedom",
+      ],
+    },
+    {
+      type: "html",
+      value: "<div>Development Tools</div>",
+      className: "section-header",
     },
     {
       type: "category",
@@ -219,6 +254,20 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "Language Server",
+      items: [
+        "manual/advanced/language_server/overview",
+        "manual/advanced/language_server/imports",
+        "manual/advanced/language_server/testing_api",
+      ],
+    },
+    {
+      type: "html",
+      value: "<div>Advanced Topics</div>",
+      className: "section-header",
+    },
+    {
+      type: "category",
       label: "Deploying & Embedding Deno",
       items: [
         "manual/advanced/deploying_deno/index",
@@ -253,26 +302,9 @@ const sidebars = {
       ],
     },
     {
-      type: "category",
-      label: "JSX and DOM APIs",
-      items: [
-        "manual/advanced/jsx_dom/overview",
-        "manual/advanced/jsx_dom/jsx",
-        "manual/advanced/jsx_dom/css",
-        "manual/advanced/jsx_dom/twind",
-        "manual/advanced/jsx_dom/jsdom",
-        "manual/advanced/jsx_dom/deno_dom",
-        "manual/advanced/jsx_dom/linkedom",
-      ],
-    },
-    {
-      type: "category",
-      label: "Language Server",
-      items: [
-        "manual/advanced/language_server/overview",
-        "manual/advanced/language_server/imports",
-        "manual/advanced/language_server/testing_api",
-      ],
+      type: "html",
+      value: "<div>Contributing and Support</div>",
+      className: "section-header",
     },
     {
       type: "category",
@@ -288,62 +320,21 @@ const sidebars = {
       ],
     },
     "manual/help",
-    spacer,
-  ]),
-
-  runtimeTutorialsHome: mainMenu.concat([
     {
       type: "html",
-      value: "<div>Tutorials &amp; Examples</div>",
+      value: "<div>Reference</div>",
       className: "section-header",
-    },
-    "tutorials/index",
-    {
-      type: "category",
-      label: "Basic Examples",
-      items: [
-        "tutorials/hello_world",
-        "tutorials/manage_dependencies",
-        "tutorials/fetch_data",
-        "tutorials/read_write_files",
-        "tutorials/hashbang",
-      ],
-    },
-    {
-      type: "category",
-      label: "Advanced Examples",
-      items: [
-        "tutorials/unix_cat",
-        "tutorials/http_server",
-        "tutorials/file_server",
-        "tutorials/tcp_echo",
-        "tutorials/subprocess",
-        "tutorials/os_signals",
-        "tutorials/file_system_events",
-        "tutorials/module_metadata",
-      ],
-    },
-    {
-      type: "category",
-      label: "npm Module Examples",
-      items: [
-        "tutorials/how_to_with_npm/apollo",
-        "tutorials/how_to_with_npm/express",
-        "tutorials/how_to_with_npm/mongoose",
-        "tutorials/how_to_with_npm/mysql2",
-        "tutorials/how_to_with_npm/planetscale",
-        "tutorials/how_to_with_npm/prisma",
-        "tutorials/how_to_with_npm/react",
-        "tutorials/how_to_with_npm/redis",
-        "tutorials/how_to_with_npm/vue",
-      ],
     },
     {
       type: "link",
-      label: "More on Deno by Example",
-      href: "https://examples.deno.land",
+      label: "Full API Reference",
+      href: "https://deno.land/api?unstable=true",
     },
-    spacer,
+    {
+      type: "link",
+      label: "Std. Library",
+      href: "https://www.deno.land/std",
+    },
   ]),
 };
 

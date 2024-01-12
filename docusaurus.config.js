@@ -137,10 +137,6 @@ const config = {
           label: "KV",
           activeBaseRegex: `^/kv`,
         },
-        {
-          href: "https://www.deno.land/std",
-          label: "Std. Library",
-        },
         /*
           {
             to: '/stdlib',
