@@ -7,7 +7,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+html:root {
   /* These variables mainly pulled from dotcom */
   --white: #ffffff;
   --black: #0b0d11;
@@ -71,6 +71,7 @@
   --ifm-tabs-padding-vertical: 0.5rem;
   --ifm-list-item-margin: 0.5em;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docsearch-muted-color: var(--gray-1);
   --ifm-font-family-base: Inter, ui-sans-serif, system-ui, -apple-system,
     "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
     sans-serif;
@@ -109,6 +110,14 @@ html[data-theme="dark"][data-theme="dark"] {
   --ifm-menu-color-background-active: var(--runtime-dark);
   --ifm-code-background: #282a36;
   --ifm-menu-color: var(--gray-0);
+  --docsearch-footer-background: var(--runtime-dark);
+  --docsearch-muted-color: var(--gray-0);
+}
+
+html[data-theme="dark"] kbd.DocSearch-Button-Key,
+html[data-theme="dark"] kbd.DocSearch-Commands-Key {
+  box-shadow: none;
+  color: var(--gray-0);
 }
 
 html,
@@ -163,6 +172,11 @@ h4 {
 
   text-wrap: balance;
   letter-spacing: -0.025em;
+}
+
+button,
+kbd {
+  font: inherit;
 }
 
 code {
@@ -459,4 +473,20 @@ nav.menu.thin-scrollbar.menu_node_modules-\@docusaurus-theme-classic-lib-theme-D
 .footer__copyright {
   font-size: 0.75rem;
   margin-top: 2rem;
+}
+
+.DocSearch-Button .DocSearch-Search-Icon {
+  width: 1rem;
+}
+
+kbd.DocSearch-Button-Key,
+kbd.DocSearch-Commands-Key {
+  box-shadow: none;
+  padding: 0;
+  border: 1px solid;
+  top: 0;
+  font-size: 0.8rem;
+  line-height: 1;
+  margin-right: 0.375em;
+  background: transparent;
 }
