@@ -13,10 +13,10 @@ deno --help
 
 You can enable a feature flag when you run a Deno program from the command line
 by passing in the flag as an option to the CLI. Here's an example of running a
-program with the `--unstable-workspaces` flag enabled:
+program with the `--unstable-byonm` flag enabled:
 
 ```sh
-deno run --unstable-workspaces main.ts
+deno run --unstable-byonm main.ts
 ```
 
 ## Configuring flags in `deno.json`
@@ -205,50 +205,6 @@ Enabling this flag makes the [`Deno.cron`](/kv/manual/cron) API available on the
 
 Enabling this flag makes [Deno KV](/kv/manual/cron) APIs available in the `Deno`
 namespace.
-
-## `--unstable-workspaces`
-
-**Environment variable:** `DENO_UNSTABLE_WORKSPACES`
-
-Enabling this flag allows `deno.json` to specify a `workspaces` key, that
-accepts a list of subdirectories. Each workspace can have its own import map.
-It's required to specify `"name"` and `"version"` properties in the
-configuration file for the workspace:
-
-```json
-// deno.json
-{
-  "workspaces": [
-     "a",
-     "b"
-  },
-  "imports": {
-    "express": "npm:express@5"
-   }
-}
-```
-
-```json
-// a/deno.json
-{
-  "name": "a",
-  "version": "1.0.2",
-  "imports": {
-    "kleur": "npm:kleur"
-  }
-}
-```
-
-```json
-// b/deno.json
-{
-  "name": "b",
-  "version": "0.51.0",
-  "imports": {
-    "chalk": "npm:chalk"
-  }
-}
-```
 
 ## `--unstable-ffi`
 
