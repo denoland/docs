@@ -12,7 +12,7 @@ export default function Home() {
         <div className="pb-16 align-middle md:pb-0">
           <div className="mb-16 md:mb-24 text-center">
             <img
-              className="w-64 h-64 mb-[-40px] md:mt-[-40px]"
+              className="h-64 rounded-[100%] aspect-[7/5] bg-black w-auto"
               alt="Deno logo"
               src="/deno-looking-up.svg"
             />
