@@ -32,13 +32,11 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Tutorials",
+      label: "Deploy Tutorials",
       items: [
-        "tutorials/discord-slash",
-        "tutorials/fresh",
-        "tutorials/discord-slash",
-        "tutorials/fresh",
         "tutorials/index",
+        "tutorials/discord-slash",
+        "tutorials/fresh",
         "tutorials/simple-api",
         "tutorials/static-site",
         "tutorials/tutorial-blog-fresh",
@@ -50,7 +48,14 @@ const sidebars = {
         "tutorials/tutorial-postgres",
         "tutorials/tutorial-wordpress-frontend",
         "tutorials/vite",
+        "kv/tutorials/schedule_notification",
+        "kv/tutorials/webhook_processor",
       ],
+    },
+    {
+      type: "doc",
+      label: "KV Tutorials",
+      id: "kv/tutorials/index",
     },
     {
       type: "link",
@@ -89,6 +94,35 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "KV",
+      items: [
+        "kv/manual/index",
+        "kv/manual/key_space",
+        "kv/manual/operations",
+        "kv/manual/key_expiration",
+        "kv/manual/secondary_indexes",
+        "kv/manual/transactions",
+        "kv/manual/node",
+        "kv/manual/data_modeling_typescript",
+        "kv/manual/backup",
+      ],
+    },
+    {
+      type: "category",
+      label: "Queues",
+      items: [
+        "kv/manual/queue_overview",
+      ],
+    },
+    {
+      type: "category",
+      label: "Cron",
+      items: [
+        "kv/manual/cron",
+      ],
+    },
+    {
+      type: "category",
       label: "Subhosting",
       items: [
         "manual/subhosting/index",
@@ -102,8 +136,8 @@ const sidebars = {
       className: "section-header",
     },
     {
-      type: "link",
-      href: "/kv/manual/on_deploy",
+      type: "doc",
+      id: "kv/manual/on_deploy",
       label: "Deno KV",
     },
     {

@@ -65,18 +65,6 @@ const config = {
         ],
       },
     ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "kv",
-        path: "kv",
-        routeBasePath: "/kv",
-        sidebarPath: require.resolve("./sidebars/kv.js"),
-        remarkPlugins: [
-          findReplace,
-        ],
-      },
-    ],
     // Enables our custom pages in "src" to use Tailwind classes
     async function tailwindPlugin(_context, _options) {
       return {
@@ -133,20 +121,6 @@ const config = {
           activeBaseRegex: `^/deploy`,
         },
         {
-          to: "/kv/manual",
-          position: "left",
-          label: "KV",
-          activeBaseRegex: `^/kv`,
-        },
-        /*
-          {
-            to: '/stdlib',
-            position: 'left',
-            label: 'Standard Library',
-            activeBaseRegex: `^/stdlib`,
-          },
-          */
-        {
           href: "https://www.deno.com",
           label: "deno.com",
           position: "right",
@@ -172,19 +146,9 @@ const config = {
               label: "Deno Runtime",
               to: "/runtime/manual",
             },
-            /*
-              {
-                label: 'Standard Library',
-                to: '/stdlib',
-              },
-              */
             {
               label: "Deno Deploy",
               to: "/deploy/manual",
-            },
-            {
-              label: "Deno KV",
-              to: "/kv/manual",
             },
             {
               label: "Standard Library",
