@@ -136,6 +136,7 @@ html[data-theme="light"] .DocSearch-Button{
   border: 1px solid var(--gray-4);
   background-color: var(--white);
   padding: 0 1rem;
+
 }
 
 html,
@@ -169,19 +170,16 @@ h1,
 
 h2 {
   --ifm-h2-vertical-rhythm-top: 2;
-
   font-size: clamp(1.5rem, 4vw, 2rem);
 }
 
 h3 {
   --ifm-h3-vertical-rhythm-top: 1.75;
-
   font-size: clamp(1.25rem, 3vw, 1.5rem);
 }
 
 h4 {
   --ifm-h4-vertical-rhythm-top: 1.5;
-
   font-size: clamp(1.1rem, 2vw, 1.25rem);
 }
 
@@ -500,6 +498,7 @@ nav.menu.thin-scrollbar.menu_node_modules-\@docusaurus-theme-classic-lib-theme-D
   font-size: 0.75rem;
   margin-top: 2rem;
 }
+
 
 .DocSearch-Button-Placeholder {
   color: var(--docsearch-muted-color);

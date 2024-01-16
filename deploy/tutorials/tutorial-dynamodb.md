@@ -94,7 +94,7 @@ import {
   DynamoDBClient,
   GetItemCommand,
   PutItemCommand,
-} from "https://cdn.skypack.dev/@aws-sdk/client-dynamodb?dts";
+} from "https://esm.sh/@aws-sdk/client-dynamodb";
 
 // Create a client instance by providing your region information.
 // The credentials are obtained from environment variables which
