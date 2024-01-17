@@ -252,9 +252,9 @@ td p:last-child {
   color: var(--ifm-navbar-link-color);
   font-size: 0.75rem;
   text-transform: uppercase;
-  border-bottom: 1px solid #aaa;
-  margin: 10px var(--ifm-menu-link-padding-horizontal);
-  padding-top: 0.5rem;
+  border-bottom: 1px solid var(--gray-1);
+  margin: 1rem var(--ifm-menu-link-padding-horizontal);
+  padding: 0.5rem 0 0.1rem 0;
 }
 
 .product-header {
@@ -293,7 +293,7 @@ td p:last-child {
 .navbar__link--active {
   font-weight: bold;
   margin-top: 3px;
-  border-bottom: 3px solid var(--ifm-color-primary);
+  border-bottom: 2px solid var(--ifm-color-primary);
 }
 
 .navbar__logo {
@@ -467,6 +467,7 @@ html .breadcrumbsContainer_src-theme-DocBreadcrumbs-styles-module {
 
 .breadcrumbs__item a {
   text-decoration: underline;
+  text-underline-offset: 0.25rem;
 }
 
 .breadcrumbs__link {
