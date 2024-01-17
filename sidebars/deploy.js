@@ -155,7 +155,7 @@ const sidebars = {
       value: "<div>Policies and Limts</div>",
       className: "section-header",
     },
-    "manual/fair-use-policy",
+    "manual/acceptable-use-policy",
     "manual/privacy-policy",
     "manual/security",
     {

@@ -6,9 +6,9 @@ exceeds any of these limits, [please reach out](mailto:deploy@deno.com).
 
 No uptime guarantees are provided during the initial public beta for Deno
 Deploy. Access to the service will be controlled by
-[our fair use policy](https://docs.deno.com/deploy/manual/fair-use-policy). Any
-user we deem to be in violation of this policy, runs the risk of having their
-account terminated.
+[our acceptable use policy](https://docs.deno.com/deploy/manual/acceptable-use-policy).
+Any user we deem to be in violation of this policy, runs the risk of having
+their account terminated.
 
 ## Maximum size for deployments
 
@@ -26,7 +26,7 @@ not impacted by this restriction.
 
 This restriction is in place because connecting to port 443 without terminating
 TLS is frequently used in TLS-over-TLS proxies, which are prohibited on the Deno
-Deploy Free plan as per our Fair Use Policy.
+Deploy Free plan as per our Acceptable Use Policy.
 
 This restriction impacts Free tier customers only. Pro tier customers are able
 to connect to port 443 with both `Deno.connect` and `Deno.connectTls`.

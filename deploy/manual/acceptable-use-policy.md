@@ -1,10 +1,11 @@
-# Fair use policy
+# Acceptable use policy
 
 The public beta for the Deno Deploy service includes resources (CPU time,
-request counts) that are subject to this Fair Use policy. This document can give
-a rough estimate to what we consider as "Fair Use", and what we do not.
+request counts) that are subject to this Acceptable Use policy. This document
+can give a rough estimate to what we consider as "Acceptable Use", and what we
+do not.
 
-### Examples of Fair Use
+### Examples of Acceptable Use
 
 - ✅ Server-side rendered websites
 - ✅ Jamstack sites and apps
@@ -14,7 +15,7 @@ a rough estimate to what we consider as "Fair Use", and what we do not.
 - ✅ A company website
 - ✅ An e-commerce site
 
-### Not Fair Use
+### Not Acceptable Use
 
 - ❌ Crypto mining
 - ❌ Highly CPU-intensive load (e.g. machine learning)

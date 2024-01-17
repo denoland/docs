@@ -257,6 +257,11 @@ td p:last-child {
   padding: 0.5rem 0 0.1rem 0;
 }
 
+.section-header:first-child,
+.product-header:first-child {
+  margin: 0.5rem var(--ifm-menu-link-padding-horizontal) 1rem;
+}
+
 .product-header {
   margin-top: 0;
   margin-bottom: 0;
