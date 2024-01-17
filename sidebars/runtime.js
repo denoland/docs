@@ -27,6 +27,7 @@ const sidebars = {
         "manual/basics/env_variables",
         "manual/basics/debugging_your_code",
         "manual/basics/connecting_to_databases",
+        "manual/node/index",
         "manual/basics/react",
         "manual/getting_started/installation",
       ],
@@ -126,7 +127,6 @@ const sidebars = {
       type: "category",
       label: "Interop with Node.js & npm",
       items: [
-        "manual/node/index",
         "manual/node/npm_specifiers",
         "manual/node/node_specifiers",
         "manual/node/package_json",
