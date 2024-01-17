@@ -2,10 +2,10 @@ import OpenApiEndpoint from "@site/src/components/OpenApiEndpoint";
 
 # Databases
 
-Database resources are [Deno KV databases](/kv/manual) that can be associated
-with [deployments](./deployments.md). You can specify which databases are
-available to which deployments, so you can isolate data or share data between
-deployments.
+Database resources are [Deno KV databases](/deploy/kv/manual) that can be
+associated with [deployments](./deployments.md). You can specify which databases
+are available to which deployments, so you can isolate data or share data
+between deployments.
 
 ## List an organization's KV databases
 

@@ -85,8 +85,8 @@ within the system. These resources are also represented in the
 - [**Deployments**](/deploy/api/rest/deployments): a deployment is a set of
   configuration, runnable code, and supporting static files that can run on an
   isolate in Deno Deploy. Deployments have an entry file that can launch a
-  server, can have a [Deno KV](/kv/manual) database associated with them, and
-  can be set up to run on custom domains.
+  server, can have a [Deno KV](/deploy/kv/manual) database associated with them,
+  and can be set up to run on custom domains.
 - [**Domains**](/deploy/api/rest/domains): custom domains that can be associated
   with deployments, giving them a unique URL.
 

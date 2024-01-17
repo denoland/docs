@@ -159,7 +159,7 @@ It's important to design your applications such that duplicate messages are
 handled correctly.
 
 You may use queues in combination with
-[KV atomic transactions](https://docs.deno.com/kv/manual/transactions)
+[KV atomic transactions](https://docs.deno.com/deploy/kv/manual/transactions)
 primitives to ensure that your queue handler KV updates are performed exactly
 once per message. See
 [Queue API with KV atomic transactions](#queue-api-with-kv-atomic-transactions).

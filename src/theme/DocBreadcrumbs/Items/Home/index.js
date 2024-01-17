@@ -11,11 +11,6 @@ export default function HomeBreadcrumbItem() {
         href: "/deploy/manual",
         name: "Deploy",
       };
-    } else if (currentPath.startsWith("/kv")) {
-      return {
-        href: "/kv/manual",
-        name: "KV",
-      };
     } else if (currentPath.startsWith("/runtime")) {
       return {
         href: "/runtime/manual",
