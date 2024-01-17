@@ -59,16 +59,16 @@ html:root {
   --ifm-pre-padding: 1rem;
   --ifm-alert-padding-vertical: 2rem;
   --ifm-alert-padding-horizontal: 2rem;
-  --ifm-color-info-dark: var(--deploy-medium-light);
-  --ifm-color-info-contrast-background: var(--deploy-lightest);
-  --ifm-menu-color-background-hover: var(--deploy-lightest);
+  --ifm-color-info-dark: var(--deploy-medium);
+  --ifm-color-info-contrast-background: var(--gray-00);
+  --ifm-menu-color-background-hover: var(--gray-00);
   --ifm-code-font-size: 0.875em;
   --ifm-code-padding-horizontal: 0.375em;
   --ifm-code-padding-vertical: 0.1875em;
   --ifm-code-background: #f6f8fa; /* Matches Prism highlighting */
   --ifm-code-color: #393a34;
-  --ifm-menu-color: var(--gray-2);
-  --ifm-navbar-search-input-background-color: #fff;
+  --ifm-menu-color: var(--gray-3);
+  --ifm-navbar-search-input-background-color: var(--white);
   --ifm-tabs-padding-vertical: 0.5rem;
   --ifm-list-item-margin: 0.5em;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
@@ -457,7 +457,7 @@ td p:last-child {
 
 
 html .breadcrumbsContainer_src-theme-DocBreadcrumbs-styles-module {
-  --ifm-breadcrumb-size-multiplier: 0.8;
+  --ifm-breadcrumb-size-multiplier: 0.9;
   margin-bottom: 0.5rem;
 }
 
@@ -488,10 +488,6 @@ svg.iconExternalLink_node_modules-\@docusaurus-theme-classic-lib-theme-Icon-Exte
   padding: 0;
   margin-bottom: -0.09em;
   margin-left: 0.4em;
-}
-
-nav.menu.thin-scrollbar.menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-Content-styles-module {
-  padding-top: 1rem;
 }
 
 .footer__copyright {
