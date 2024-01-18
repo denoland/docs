@@ -65,18 +65,6 @@ const config = {
         ],
       },
     ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "kv",
-        path: "kv",
-        routeBasePath: "/kv",
-        sidebarPath: require.resolve("./sidebars/kv.js"),
-        remarkPlugins: [
-          findReplace,
-        ],
-      },
-    ],
     // Enables our custom pages in "src" to use Tailwind classes
     async function tailwindPlugin(_context, _options) {
       return {
@@ -112,9 +100,9 @@ const config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: "Deno Docs",
+      title: "Docs",
       logo: {
-        alt: "Deno",
+        alt: "Deno Docs",
         src: "img/logo.svg",
         srcDark: "img/logo-dark.svg",
         href: "/",
@@ -123,33 +111,15 @@ const config = {
         {
           to: "/runtime/manual",
           position: "left",
-          label: "Runtime",
+          label: "Deno Runtime",
           activeBaseRegex: `^/runtime`,
         },
         {
           to: "/deploy/manual",
           position: "left",
-          label: "Deploy",
+          label: "Deno Deploy",
           activeBaseRegex: `^/deploy`,
         },
-        {
-          to: "/kv/manual",
-          position: "left",
-          label: "KV",
-          activeBaseRegex: `^/kv`,
-        },
-        {
-          href: "https://www.deno.land/std",
-          label: "Std. Library",
-        },
-        /*
-          {
-            to: '/stdlib',
-            position: 'left',
-            label: 'Standard Library',
-            activeBaseRegex: `^/stdlib`,
-          },
-          */
         {
           href: "https://www.deno.com",
           label: "deno.com",
@@ -176,19 +146,9 @@ const config = {
               label: "Deno Runtime",
               to: "/runtime/manual",
             },
-            /*
-              {
-                label: 'Standard Library',
-                to: '/stdlib',
-              },
-              */
             {
               label: "Deno Deploy",
               to: "/deploy/manual",
-            },
-            {
-              label: "Deno KV",
-              to: "/kv/manual",
             },
             {
               label: "Standard Library",

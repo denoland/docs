@@ -1,51 +1,10 @@
-const spacer = {
-  type: "html",
-  value: '<div style="height: 30px;"></div>',
-};
-
-// Include main doc categories on most pages
-const mainMenu = [
-  // https://docusaurus.io/docs/sidebar/items
-  {
-    type: "html",
-    value: "<div>Deno Runtime</div>",
-    className: "product-header",
-  },
-  /*
-  {
-    type: "doc",
-    id: "index",
-    label: "Quick Start",
-    className: "icon-menu-option icon-menu-quick-start",
-  },
-  */
-  {
-    type: "link",
-    href: "/runtime/manual",
-    label: "Manual",
-    className: "icon-menu-option icon-menu-user-guide",
-  },
-  {
-    type: "link",
-    label: "Tutorials & Examples",
-    href: "/runtime/tutorials",
-    className: "icon-menu-option icon-menu-tutorials",
-  },
-  {
-    type: "link",
-    label: "API Reference",
-    href: "https://deno.land/api?unstable=true",
-    className: "icon-menu-option icon-menu-api __no-external",
-  },
-];
-
 const sidebars = {
-  runtime: mainMenu,
+  runtime: [],
 
-  runtimeGuideHome: mainMenu.concat([
+  runtimeGuideHome: [
     {
       type: "html",
-      value: "<div>Manual</div>",
+      value: "<div>Getting Started</div>",
       className: "section-header",
     },
     {
@@ -68,9 +27,15 @@ const sidebars = {
         "manual/basics/env_variables",
         "manual/basics/debugging_your_code",
         "manual/basics/connecting_to_databases",
+        "manual/node/index",
         "manual/basics/react",
         "manual/getting_started/installation",
       ],
+    },
+    {
+      type: "html",
+      value: "<div>Modules and APIs</div>",
+      className: "section-header",
     },
     {
       type: "category",
@@ -110,9 +75,8 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Interop with Node.js & npm",
+      label: "Interop with Node & npm",
       items: [
-        "manual/node/index",
         "manual/node/npm_specifiers",
         "manual/node/node_specifiers",
         "manual/node/package_json",
@@ -126,6 +90,24 @@ const sidebars = {
           id: "manual/node/compatibility",
         },
       ],
+    },
+    {
+      type: "category",
+      label: "JSX and DOM APIs",
+      items: [
+        "manual/advanced/jsx_dom/overview",
+        "manual/advanced/jsx_dom/jsx",
+        "manual/advanced/jsx_dom/css",
+        "manual/advanced/jsx_dom/twind",
+        "manual/advanced/jsx_dom/jsdom",
+        "manual/advanced/jsx_dom/deno_dom",
+        "manual/advanced/jsx_dom/linkedom",
+      ],
+    },
+    {
+      type: "html",
+      value: "<div>Development Tools</div>",
+      className: "section-header",
     },
     {
       type: "category",
@@ -219,6 +201,20 @@ const sidebars = {
     },
     {
       type: "category",
+      label: "Language Server",
+      items: [
+        "manual/advanced/language_server/overview",
+        "manual/advanced/language_server/imports",
+        "manual/advanced/language_server/testing_api",
+      ],
+    },
+    {
+      type: "html",
+      value: "<div>Advanced Topics</div>",
+      className: "section-header",
+    },
+    {
+      type: "category",
       label: "Deploying & Embedding Deno",
       items: [
         "manual/advanced/deploying_deno/index",
@@ -253,26 +249,9 @@ const sidebars = {
       ],
     },
     {
-      type: "category",
-      label: "JSX and DOM APIs",
-      items: [
-        "manual/advanced/jsx_dom/overview",
-        "manual/advanced/jsx_dom/jsx",
-        "manual/advanced/jsx_dom/css",
-        "manual/advanced/jsx_dom/twind",
-        "manual/advanced/jsx_dom/jsdom",
-        "manual/advanced/jsx_dom/deno_dom",
-        "manual/advanced/jsx_dom/linkedom",
-      ],
-    },
-    {
-      type: "category",
-      label: "Language Server",
-      items: [
-        "manual/advanced/language_server/overview",
-        "manual/advanced/language_server/imports",
-        "manual/advanced/language_server/testing_api",
-      ],
+      type: "html",
+      value: "<div>Contributing and Support</div>",
+      className: "section-header",
     },
     {
       type: "category",
@@ -288,16 +267,11 @@ const sidebars = {
       ],
     },
     "manual/help",
-    spacer,
-  ]),
-
-  runtimeTutorialsHome: mainMenu.concat([
     {
       type: "html",
-      value: "<div>Tutorials &amp; Examples</div>",
+      value: "<div>Tutorials and Examples</div>",
       className: "section-header",
     },
-    "tutorials/index",
     {
       type: "category",
       label: "Basic Examples",
@@ -343,8 +317,26 @@ const sidebars = {
       label: "More on Deno by Example",
       href: "https://examples.deno.land",
     },
-    spacer,
-  ]),
+    {
+      type: "html",
+      value: "<div>Reference</div>",
+      className: "section-header",
+    },
+    {
+      type: "link",
+      label: "Full API Reference",
+      href: "https://deno.land/api?unstable=true",
+    },
+    {
+      type: "link",
+      label: "Std. Library",
+      href: "https://www.deno.land/std",
+    },
+    {
+      type: "html",
+      value: "<div style='height:30px;'></div>",
+    },
+  ],
 };
 
 module.exports = sidebars;

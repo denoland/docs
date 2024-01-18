@@ -97,7 +97,7 @@ export default function Home() {
                     works with zero configuration on Deno Deploy.{" "}
                     <a
                       className="font-bold inline-block underline dark:[color:var(--deploy)]"
-                      href="/kv/manual"
+                      href="/deploy/kv/manual"
                     >
                       KV docs <span aria-hidden="true">-&gt;</span>
                     </a>
@@ -110,7 +110,7 @@ export default function Home() {
                     time zone.{" "}
                     <a
                       className="font-bold inline-block underline dark:text-[color:var(--deploy)]"
-                      href="/kv/manual/cron"
+                      href="/deploy/kv/manual/cron"
                     >
                       Cron docs <span aria-hidden="true">-&gt;</span>
                     </a>
@@ -123,7 +123,7 @@ export default function Home() {
                     scheduling tasks with guaranteed delivery.{" "}
                     <a
                       className="font-bold inline-block underline dark:[color:var(--deploy)]"
-                      href="/kv/manual/queue_overview"
+                      href="/deploy/kv/manual/queue_overview"
                     >
                       Cron docs <span aria-hidden="true">-&gt;</span>
                     </a>

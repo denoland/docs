@@ -32,6 +32,7 @@ html:root {
   --subhosting: #ff8a01;
   --subhosting-dark: #251c11;
 
+  --gray-00: #cfd1d6;
   --gray-0: #9ea0a5;
   --gray-1: #868789;
   --gray-2: #56575a;
@@ -58,20 +59,20 @@ html:root {
   --ifm-pre-padding: 1rem;
   --ifm-alert-padding-vertical: 2rem;
   --ifm-alert-padding-horizontal: 2rem;
-  --ifm-color-info-dark: var(--deploy-medium-light);
-  --ifm-color-info-contrast-background: var(--deploy-lightest);
-  --ifm-menu-color-background-hover: var(--deploy-lightest);
+  --ifm-color-info-dark: var(--deploy-medium);
+  --ifm-color-info-contrast-background: var(--gray-00);
+  --ifm-menu-color-background-hover: var(--gray-00);
   --ifm-code-font-size: 0.875em;
   --ifm-code-padding-horizontal: 0.375em;
   --ifm-code-padding-vertical: 0.1875em;
   --ifm-code-background: #f6f8fa; /* Matches Prism highlighting */
   --ifm-code-color: #393a34;
-  --ifm-menu-color: var(--gray-2);
-  --ifm-navbar-search-input-background-color: #fff;
+  --ifm-menu-color: var(--gray-3);
+  --ifm-navbar-search-input-background-color: var(--white);
   --ifm-tabs-padding-vertical: 0.5rem;
   --ifm-list-item-margin: 0.5em;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --docsearch-muted-color: var(--gray-1);
+  --docsearch-muted-color: var(--gray-2);
   --ifm-font-family-base: Inter, ui-sans-serif, system-ui, -apple-system,
     "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
     sans-serif;
@@ -109,7 +110,7 @@ html[data-theme="dark"][data-theme="dark"] {
   --ifm-color-info-contrast-background: var(--deploy-dark);
   --ifm-menu-color-background-active: var(--runtime-dark);
   --ifm-code-background: #282a36;
-  --ifm-menu-color: var(--gray-0);
+  --ifm-menu-color: var(--gray-00);
   --docsearch-footer-background: var(--runtime-dark);
   --docsearch-muted-color: var(--gray-0);
 }
@@ -118,6 +119,24 @@ html[data-theme="dark"] kbd.DocSearch-Button-Key,
 html[data-theme="dark"] kbd.DocSearch-Commands-Key {
   box-shadow: none;
   color: var(--gray-0);
+}
+
+html[data-theme="dark"] .DocSearch-Button{
+  border: 1px solid var(--gray-1);
+  padding: 0 1rem;
+}
+
+html[data-theme="light"] kbd.DocSearch-Button-Key,
+html[data-theme="light"] kbd.DocSearch-Commands-Key {
+  box-shadow: none;
+  color: var(--gray-3);
+}
+
+html[data-theme="light"] .DocSearch-Button{
+  border: 1px solid var(--gray-4);
+  background-color: var(--white);
+  padding: 0 1rem;
+
 }
 
 html,
@@ -150,20 +169,17 @@ h1,
 }
 
 h2 {
-  --ifm-h2-vertical-rhythm-top: 2.5;
-
+  --ifm-h2-vertical-rhythm-top: 2;
   font-size: clamp(1.5rem, 4vw, 2rem);
 }
 
 h3 {
-  --ifm-h3-vertical-rhythm-top: 2;
-
+  --ifm-h3-vertical-rhythm-top: 1.75;
   font-size: clamp(1.25rem, 3vw, 1.5rem);
 }
 
 h4 {
   --ifm-h4-vertical-rhythm-top: 1.5;
-
   font-size: clamp(1.1rem, 2vw, 1.25rem);
 }
 
@@ -236,8 +252,14 @@ td p:last-child {
   color: var(--ifm-navbar-link-color);
   font-size: 0.75rem;
   text-transform: uppercase;
-  border-bottom: 1px solid #aaa;
-  margin: 10px var(--ifm-menu-link-padding-horizontal);
+  border-bottom: 1px solid var(--gray-1);
+  margin: 1rem var(--ifm-menu-link-padding-horizontal);
+  padding: 0.5rem 0 0.1rem 0;
+}
+
+.section-header:first-child,
+.product-header:first-child {
+  margin: 0.5rem var(--ifm-menu-link-padding-horizontal) 1rem;
 }
 
 .product-header {
@@ -276,7 +298,7 @@ td p:last-child {
 .navbar__link--active {
   font-weight: bold;
   margin-top: 3px;
-  border-bottom: 3px solid var(--ifm-color-primary);
+  border-bottom: 2px solid var(--ifm-color-primary);
 }
 
 .navbar__logo {
@@ -437,12 +459,20 @@ td p:last-child {
   }
 }
 
+
+
+html .breadcrumbsContainer_src-theme-DocBreadcrumbs-styles-module {
+  --ifm-breadcrumb-size-multiplier: 0.9;
+  margin-bottom: 0.5rem;
+}
+
 .breadcrumbs__item:first-child > a {
   padding-left: 0;
 }
 
 .breadcrumbs__item a {
   text-decoration: underline;
+  text-underline-offset: 0.25rem;
 }
 
 .breadcrumbs__link {
@@ -466,17 +496,26 @@ svg.iconExternalLink_node_modules-\@docusaurus-theme-classic-lib-theme-Icon-Exte
   margin-left: 0.4em;
 }
 
-nav.menu.thin-scrollbar.menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-Content-styles-module {
-  padding-top: 1.5rem;
-}
-
 .footer__copyright {
   font-size: 0.75rem;
   margin-top: 2rem;
 }
 
+
+.DocSearch-Button-Placeholder {
+  color: var(--docsearch-muted-color);
+}
+
+.DocSearch-Help .DocSearch-Label {
+  color: var(--white);
+}
+
 .DocSearch-Button .DocSearch-Search-Icon {
   width: 1rem;
+}
+
+.DocSearch-Button-Container {
+  padding-right: 2rem;
 }
 
 kbd.DocSearch-Button-Key,
@@ -489,4 +528,5 @@ kbd.DocSearch-Commands-Key {
   line-height: 1;
   margin-right: 0.375em;
   background: transparent;
+  color: var(--docsearch-muted-color);
 }

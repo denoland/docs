@@ -200,13 +200,13 @@ new Worker(`data:application/javascript;base64,${btoa(`postMessage("ok");`)}`, {
 
 ## `--unstable-cron`
 
-Enabling this flag makes the [`Deno.cron`](/kv/manual/cron) API available on the
-`Deno` namespace.
+Enabling this flag makes the [`Deno.cron`](/deploy/kv/manual/cron) API available
+on the `Deno` namespace.
 
 ## `--unstable-kv`
 
-Enabling this flag makes [Deno KV](/kv/manual/cron) APIs available in the `Deno`
-namespace.
+Enabling this flag makes [Deno KV](/deploy/kv/manual/cron) APIs available in the
+`Deno` namespace.
 
 ## `--unstable-ffi`
 
@@ -254,8 +254,8 @@ Please use these feature flags instead moving forward.
 :::
 
 Before more recent Deno versions (1.38+), unstable APIs were made available all
-at once using the `--unstable` flag. Notably, [Deno KV](/kv/manual) and other
-cloud primitive APIs are available behind this flag. To run a program with
+at once using the `--unstable` flag. Notably, [Deno KV](/deploy/kv/manual) and
+other cloud primitive APIs are available behind this flag. To run a program with
 access to these unstable features, you would run your script with:
 
 ```sh

@@ -1,5 +1,4 @@
 ---
-displayed_sidebar: runtimeTutorialsHome
 sidebar_position: 1
 sidebar_label: Overview
 pagination_next: tutorials/hello_world

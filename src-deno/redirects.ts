@@ -14,16 +14,45 @@ export default function configureRedirects(app: Hono) {
   r("/deploy/docs", "/deploy/manual");
 
   // KV redirects
-  r("/kv", "/kv/manual");
-  r("/runtime/manual/runtime/kv", "/kv/manual");
-  r("/runtime/manual/runtime/kv/key_space", "/kv/manual/key_space");
-  r("/runtime/manual/runtime/kv/operations", "/kv/manual/operations");
+  r("/kv", "/deploy/kv/manual");
+  r("/kv/manual", "/deploy/kv/manual");
+  r("/runtime/manual/runtime/kv", "/deploy/kv/manual");
+  r("/runtime/manual/runtime/kv/key_space", "/deploy/kv/manual/key_space");
+  r("/runtime/manual/runtime/kv/operations", "/deploy/kv/manual/operations");
   r(
     "/runtime/manual/runtime/kv/secondary_indexes",
-    "/kv/manual/secondary_indexes",
+    "/deploy/kv/manual/secondary_indexes",
   );
-  r("/runtime/manual/runtime/kv/transactions", "/kv/manual/transactions");
-  r("/deploy/manual/kv", "/kv/manual/on_deploy");
+  r(
+    "/runtime/manual/runtime/kv/transactions",
+    "/deploy/kv/manual/transactions",
+  );
+  r("/deploy/manual/kv", "/deploy/kv/manual/on_deploy");
+
+  // Redirects from previous top level KV category
+  r("/kv/manual/key_space", "/deploy/kv/manual/key_space");
+  r("/kv/manual/operations", "/deploy/kv/manual/operations");
+  r("/kv/manual/key_expiration", "/deploy/kv/manual/key_expiration");
+  r("/kv/manual/secondary_indexes", "/deploy/kv/manual/secondary_indexes");
+  r("/kv/manual/transactions", "/deploy/kv/manual/transactions");
+  r("/kv/manual/node", "/deploy/kv/manual/node");
+  r("/kv/manual/queue_overview", "/deploy/kv/manual/queue_overview");
+  r("/kv/manual/cron", "/deploy/kv/manual/cron");
+  r(
+    "/kv/manual/data_modeling_typescript",
+    "/deploy/kv/manual/data_modeling_typescript",
+  );
+  r("/kv/manual/on_deploy", "/deploy/kv/manual/on_deploy");
+  r("/kv/manual/backup", "/deploy/kv/manual/backup");
+  r("/kv/tutorials", "/deploy/kv/tutorials");
+  r(
+    "/kv/tutorials/schedule_notification",
+    "/deploy/kv/tutorials/schedule_notification",
+  );
+  r(
+    "/kv/tutorials/webhook_processor",
+    "/deploy/kv/tutorials/webhook_processor",
+  );
 
   // Manual redirects
   r("/runtime/manual/examples", "/runtime/tutorials");

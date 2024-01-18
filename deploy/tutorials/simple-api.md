@@ -6,7 +6,7 @@ and deploy one using Deno Deploy in this tutorial.
 ## Create a local API server
 
 In your terminal, create a file named `server.ts`. We'll implement a simple link
-shortener service using a [Deno KV database](/kv/manual).
+shortener service using a [Deno KV database](/deploy/kv/manual).
 
 ```ts title="server.ts"
 const kv = await Deno.openKv();
@@ -133,4 +133,5 @@ curl -v https://expensive-rook-95.deno.dev/denodocs
 
 This was a very simple example - from here, we suggest you check out a
 higher-level web framework like [Fresh](https://fresh.deno.dev), or learn more
-about [Deno KV here](/kv/manual). Great work deploying your simple API server!
+about [Deno KV here](/deploy/kv/manual). Great work deploying your simple API
+server!
