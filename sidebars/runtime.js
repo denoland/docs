@@ -125,7 +125,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Interop with Node.js & npm",
+      label: "Interop with Node & npm",
       items: [
         "manual/node/npm_specifiers",
         "manual/node/node_specifiers",
