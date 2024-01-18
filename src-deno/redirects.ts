@@ -29,6 +29,31 @@ export default function configureRedirects(app: Hono) {
   );
   r("/deploy/manual/kv", "/deploy/kv/manual/on_deploy");
 
+  // Redirects from previous top level KV category
+  r("/kv/manual/key_space", "/deploy/kv/manual/key_space");
+  r("/kv/manual/operations", "/deploy/kv/manual/operations");
+  r("/kv/manual/key_expiration", "/deploy/kv/manual/key_expiration");
+  r("/kv/manual/secondary_indexes", "/deploy/kv/manual/secondary_indexes");
+  r("/kv/manual/transactions", "/deploy/kv/manual/transactions");
+  r("/kv/manual/node", "/deploy/kv/manual/node");
+  r("/kv/manual/queue_overview", "/deploy/kv/manual/queue_overview");
+  r("/kv/manual/cron", "/deploy/kv/manual/cron");
+  r(
+    "/kv/manual/data_modeling_typescript",
+    "/deploy/kv/manual/data_modeling_typescript",
+  );
+  r("/kv/manual/on_deploy", "/deploy/kv/manual/on_deploy");
+  r("/kv/manual/backup", "/deploy/kv/manual/backup");
+  r("/kv/tutorials", "/deploy/kv/tutorials");
+  r(
+    "/kv/tutorials/schedule_notification",
+    "/deploy/kv/tutorials/schedule_notification",
+  );
+  r(
+    "/kv/tutorials/webhook_processor",
+    "/deploy/kv/tutorials/webhook_processor",
+  );
+
   // Manual redirects
   r("/runtime/manual/examples", "/runtime/tutorials");
   r(
