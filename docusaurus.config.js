@@ -100,9 +100,9 @@ const config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: "Deno Docs",
+      title: "Docs",
       logo: {
-        alt: "Deno",
+        alt: "Deno Docs",
         src: "img/logo.svg",
         srcDark: "img/logo-dark.svg",
         href: "/",
@@ -111,13 +111,13 @@ const config = {
         {
           to: "/runtime/manual",
           position: "left",
-          label: "Runtime",
+          label: "Deno Runtime",
           activeBaseRegex: `^/runtime`,
         },
         {
           to: "/deploy/manual",
           position: "left",
-          label: "Deploy",
+          label: "Deno Deploy",
           activeBaseRegex: `^/deploy`,
         },
         {
