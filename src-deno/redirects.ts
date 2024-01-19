@@ -16,6 +16,7 @@ export default function configureRedirects(app: Hono) {
   // KV redirects
   r("/kv", "/deploy/kv/manual");
   r("/kv/manual", "/deploy/kv/manual");
+  r("/kv/manual/", "/deploy/kv/manual");
   r("/runtime/manual/runtime/kv", "/deploy/kv/manual");
   r("/runtime/manual/runtime/kv/key_space", "/deploy/kv/manual/key_space");
   r("/runtime/manual/runtime/kv/operations", "/deploy/kv/manual/operations");
