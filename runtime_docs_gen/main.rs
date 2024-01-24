@@ -248,9 +248,9 @@ fn generate(
           .unwrap();
 
         [
-          (format!("/{name}/breadcrumbs.html"), breadcrumbs),
-          (format!("/{name}/sidepanel.html"), sidepanel),
-          (format!("/{name}/main.html"), main),
+          (format!("{name}/breadcrumbs.html"), breadcrumbs),
+          (format!("{name}/sidepanel.html"), sidepanel),
+          (format!("{name}/main.html"), main),
         ]
       },
     ))
