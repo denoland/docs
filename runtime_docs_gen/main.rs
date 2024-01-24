@@ -147,6 +147,10 @@ fn generate(
   module_specifier: ModuleSpecifier,
 ) -> Result<HashMap<String, String>, anyhow::Error> {
   let mut files = HashMap::new();
+  files.insert(
+    "styles.css".to_string(),
+    deno_doc::html::STYLESHEET.to_string(),
+  );
 
   let ctx = deno_doc::html::GenerateCtx {
     package_name: None,
