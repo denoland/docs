@@ -9,7 +9,7 @@ use futures::future;
 use std::collections::HashMap;
 use std::rc::Rc;
 
-const SPECIFIER: &str = "asset://deno_types";
+const SPECIFIER: &str = "asset://deno_types.ts";
 const DOCUSAURUS_ROOT: &str = "/api";
 
 struct TypesLoader(String);
@@ -211,12 +211,9 @@ fn generate(
 
   {
     // Symbols
-
     let short_path = ctx.url_to_short_path(&module_specifier);
     let partitions_for_nodes =
       deno_doc::html::get_partitions_for_file(&ctx, &doc_nodes, &short_path);
-
-    dbg!(partitions_for_nodes.len());
 
     let symbol_pages = deno_doc::html::generate_symbol_pages_for_module(
       &ctx,
