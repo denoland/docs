@@ -48,7 +48,7 @@ cargo -V
 > Many components of Deno require a native compiler to build optimized native
 > functions.
 
-**Linus/WSL**
+**Linux/WSL**
 ```shell
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
