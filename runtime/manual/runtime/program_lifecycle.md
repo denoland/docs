@@ -14,6 +14,11 @@ Deno supports browser compatible lifecycle events:
 - [`unhandledrejection`](https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event):
   fired when a promise that has no rejection handler is rejected, ie. a promise
   that has no `.catch()` handler or a second argument to `.then()`.
+- [`rejectionhandled`](https://developer.mozilla.org/en-US/docs/Web/API/Window/rejectionhandled_event):
+  fired when a `.catch()` handler is added to a a promise that has already
+  rejected. This event is fired only if there's `unhandledrejection` listener
+  installed that prevents propagation of the event (which would result in the
+  program terminating with an error).
 
 You can use these events to provide setup and cleanup code in your program.
 

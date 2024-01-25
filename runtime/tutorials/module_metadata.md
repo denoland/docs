@@ -8,6 +8,14 @@
   will let you know if the current module is the program entry point.
 - The string [import.meta.url](https://deno.land/api?s=ImportMeta#prop_url) will
   give you the URL of the current module.
+- The string
+  [import.meta.filename](https://deno.land/api?s=ImportMeta#prop_filename) will
+  give you the fully resolved path to the current module. _For local modules
+  only_.
+- The string
+  [import.meta.dirname](https://deno.land/api?s=ImportMeta#prop_dirname) will
+  give you the fully resolved path to the directory containing the current
+  module. _For local modules only_.
 - The [import.meta.resolve](https://deno.land/api?s=ImportMeta#prop_resolve)
   allows you to resolve specifier relative to the current module. This function
   takes into account an import map (if one was provided on startup).

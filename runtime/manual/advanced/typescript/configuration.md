@@ -89,7 +89,7 @@ this:
   "compilerOptions": {
     "allowJs": true,
     "esModuleInterop": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": false,
     "inlineSourceMap": true,
     "isolatedModules": true,
     "jsx": "react",
