@@ -17,11 +17,11 @@ and this capability by default.
 
 ```ts
 // Good
-new Worker(new URL("./worker.js", import.meta.url).href, { type: "module" });
+new Worker(import.meta.resolve("./worker.js"), { type: "module" });
 
 // Bad
-new Worker(new URL("./worker.js", import.meta.url).href);
-new Worker(new URL("./worker.js", import.meta.url).href, { type: "classic" });
+new Worker(import.meta.resolve("./worker.js"));
+new Worker(import.meta.resolve("./worker.js"), { type: "classic" });
 new Worker("./worker.js", { type: "module" });
 ```
 
@@ -55,7 +55,7 @@ For workers using local modules; `--allow-read` permission is required:
 **main.ts**
 
 ```ts
-new Worker(new URL("./worker.ts", import.meta.url).href, { type: "module" });
+new Worker(import.meta.resolve("./worker.ts"), { type: "module" });
 ```
 
 **worker.ts**
@@ -105,7 +105,7 @@ hello world
 **main.js**
 
 ```js
-const worker = new Worker(new URL("./worker.js", import.meta.url).href, {
+const worker = new Worker(import.meta.resolve("./worker.js"), {
   type: "module",
 });
 
@@ -158,7 +158,7 @@ the `deno.permissions` option in the worker API.
   the on/off option you can pass true/false respectively.
 
   ```ts
-  const worker = new Worker(new URL("./worker.js", import.meta.url).href, {
+  const worker = new Worker(import.meta.resolve("./worker.js"), {
     type: "module",
     deno: {
       permissions: {
@@ -202,7 +202,7 @@ the `deno.permissions` option in the worker API.
 
   ```ts
   // This worker will inherit its parent permissions
-  const worker = new Worker(new URL("./worker.js", import.meta.url).href, {
+  const worker = new Worker(import.meta.resolve("./worker.js"), {
     type: "module",
     deno: {
       permissions: "inherit",
@@ -212,7 +212,7 @@ the `deno.permissions` option in the worker API.
 
   ```ts
   // This worker will inherit only the net permissions of its parent
-  const worker = new Worker(new URL("./worker.js", import.meta.url).href, {
+  const worker = new Worker(import.meta.resolve("./worker.js"), {
     type: "module",
     deno: {
       permissions: {
@@ -233,14 +233,14 @@ the `deno.permissions` option in the worker API.
 
   ```ts
   // This worker will inherit its parent permissions
-  const worker = new Worker(new URL("./worker.js", import.meta.url).href, {
+  const worker = new Worker(import.meta.resolve("./worker.js"), {
     type: "module",
   });
   ```
 
   ```ts
   // This worker will inherit all the permissions of its parent BUT net
-  const worker = new Worker(new URL("./worker.js", import.meta.url).href, {
+  const worker = new Worker(import.meta.resolve("./worker.js"), {
     type: "module",
     deno: {
       permissions: {
@@ -255,7 +255,7 @@ the `deno.permissions` option in the worker API.
 
   ```ts
   // This worker will not have any permissions enabled
-  const worker = new Worker(new URL("./worker.js", import.meta.url).href, {
+  const worker = new Worker(import.meta.resolve("./worker.js"), {
     type: "module",
     deno: {
       permissions: "none",
