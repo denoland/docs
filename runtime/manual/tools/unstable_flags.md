@@ -223,17 +223,10 @@ Enable unstable file system APIs in the `Deno` namespace. These APIs include:
 - [`Deno.funlockSync`](https://deno.land/api?unstable=&s=Deno.funlockSync)
 - [`Deno.umask`](https://deno.land/api?unstable=&s=Deno.umask)
 
-## `--unstable-http`
-
-Enable unstable HTTP APIs in the `Deno` namespace. These APIs include:
-
-- [`Deno.upgradeHttp`](https://deno.land/api?unstable=&s=Deno.upgradeHttp)
-
 ## `--unstable-net`
 
 Enable unstable net APIs in the `Deno` namespace. These APIs include:
 
-- [`Deno.ConnectTlsOptions`](https://deno.land/api?unstable=&s=Deno.ConnectTlsOptions)
 - [`Deno.DatagramConn`](https://deno.land/api?unstable=&s=Deno.DatagramConn)
 - Many more - for the latest list, check the "Show Unstable API" checkbox in the
   [API reference](https://deno.land/api?unstable=)
@@ -262,5 +255,5 @@ access to these unstable features, you would run your script with:
 deno run --unstable your_script.ts
 ```
 
-No new features will be exposed using this method, and it will be removed in a
-future release.
+It is recommended that you use the granular unstable flags instead of this, the
+`--unstable` flag is now depreacted and will be removed in Deno 2.
