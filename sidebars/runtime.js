@@ -312,11 +312,13 @@ const sidebars = {
         "tutorials/how_to_with_npm/vue",
       ],
     },
+    {},
     {
       type: "link",
       label: "More on Deno by Example",
       href: "https://examples.deno.land",
     },
+    "tutorials/migrate_deprecations",
     {
       type: "html",
       value: "<div>Reference</div>",
