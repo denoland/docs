@@ -205,7 +205,7 @@ on the `Deno` namespace.
 
 ## `--unstable-kv`
 
-Enabling this flag makes [Deno KV](/deploy/kv/manual/cron) APIs available in the
+Enabling this flag makes [Deno KV](/deploy/kv/manual) APIs available in the
 `Deno` namespace.
 
 ## `--unstable-ffi`
