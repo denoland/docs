@@ -81,6 +81,29 @@ class Foo {
 `Deno.customInspect` will be removed in Deno 2.0. See
 [deno#9294](https://github.com/denoland/deno/issues/9294) for details.
 
+## `Deno.isatty()`
+
+Use `Deno.stdin.isTerminal()`, `Deno.stdout.isTerminal()` or
+`Deno.stderr.isTerminal()` instead.
+
+```diff
+- Deno.isatty(Deno.stdin.rid);
++ Deno.stdin.isTerminal();
+```
+
+```diff
+- Deno.isatty(Deno.stdout.rid);
++ Deno.stdout.isTerminal();
+```
+
+```diff
+- Deno.isatty(Deno.stderr.rid);
++ Deno.stderr.isTerminal();
+```
+
+`Deno.isatty()` will be removed in Deno 2.0. See the
+[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
 ## `Deno.Reader`
 
 Use [`Reader`](https://deno.land/std/io/types.ts?s=Reader) from the Standard
@@ -106,8 +129,8 @@ Standard Library instead.
 ```diff
 + import type { ReaderSync } from "https://deno.land/std/io/types.ts";
 
-- function foo(closer: Deno.ReaderSync) {
-+ function foo(closer: ReaderSync) {
+- function foo(reader: Deno.ReaderSync) {
++ function foo(reader: ReaderSync) {
   ...  
 }
 ```
@@ -181,6 +204,57 @@ the Standard Library instead.
 ```
 
 `Deno.readAllSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
+
+## `Deno.Writer`
+
+Use [Writer](https://deno.land/std/io/types.ts?s=Writer) from the Standard
+Library instead.
+
+```diff
++ import type { Writer } from "https://deno.land/std/io/types.ts";
+
+- function foo(writer: Deno.Writer) {
++ function foo(writer: Writer) {
+  ...  
+}
+```
+
+`Deno.Writer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
+
+## `Deno.write()`
+
+Use the `.write()` method on the resource itself.
+
+```diff
+- await Deno.write(conn.rid, buffer);
++ await conn.write(buffer);
+```
+
+```diff
+- await Deno.write(file.rid, buffer);
++ await file.write(buffer);
+```
+
+`Deno.write()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
+
+## `Deno.writeSync()`
+
+Use the `.writeSync()` method on the resource itself.
+
+```diff
+- Deno.writeSync(conn.rid, buffer);
++ conn.writeSync(buffer);
+```
+
+```diff
+- Deno.writeSync(file.rid, buffer);
++ file.writeSync(buffer);
+```
+
+`Deno.writeSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
 ## `Deno.writeAll()`
