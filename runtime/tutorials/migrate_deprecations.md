@@ -155,23 +155,6 @@ Use the `.read()` method on the resource itself.
 `Deno.read()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.readSync()`
-
-Use the `.readSync()` method on the resource itself.
-
-```diff
-- Deno.readSync(conn.rid, buffer);
-+ conn.readSync(buffer);
-```
-
-```diff
-- Deno.readSync(file.rid, buffer);
-+ file.readSync(buffer);
-```
-
-`Deno.readSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
-
 ## `Deno.readAll()`
 
 Use [`readAll()`](https://deno.land/std/io/read_all.ts?s=readAll) from the
@@ -206,6 +189,23 @@ the Standard Library instead.
 `Deno.readAllSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
+## `Deno.readSync()`
+
+Use the `.readSync()` method on the resource itself.
+
+```diff
+- Deno.readSync(conn.rid, buffer);
++ conn.readSync(buffer);
+```
+
+```diff
+- Deno.readSync(file.rid, buffer);
++ file.readSync(buffer);
+```
+
+`Deno.readSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
+
 ## `Deno.Writer`
 
 Use [Writer](https://deno.land/std/io/types.ts?s=Writer) from the Standard
@@ -223,6 +223,23 @@ Library instead.
 `Deno.Writer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
+## `Deno.WriterSync`
+
+Use [WriterSync](https://deno.land/std/io/types.ts?s=WriterSync) from the
+Standard Library instead.
+
+```diff
++ import type { WriterSync } from "https://deno.land/std/io/types.ts";
+
+- function foo(writer: Deno.WriterSync) {
++ function foo(writer: WriterSync) {
+  ...  
+}
+```
+
+`Deno.WriterSync` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
+
 ## `Deno.write()`
 
 Use the `.write()` method on the resource itself.
@@ -238,23 +255,6 @@ Use the `.write()` method on the resource itself.
 ```
 
 `Deno.write()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
-
-## `Deno.writeSync()`
-
-Use the `.writeSync()` method on the resource itself.
-
-```diff
-- Deno.writeSync(conn.rid, buffer);
-+ conn.writeSync(buffer);
-```
-
-```diff
-- Deno.writeSync(file.rid, buffer);
-+ file.writeSync(buffer);
-```
-
-`Deno.writeSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
 ## `Deno.writeAll()`
@@ -293,3 +293,20 @@ for details.
 
 [deno#9795]: https://github.com/denoland/deno/issues/9795
 [Deno 1.40 blog post]: https://deno.com/blog/v1.40#deprecations-stabilizations-and-removals
+
+## `Deno.writeSync()`
+
+Use the `.writeSync()` method on the resource itself.
+
+```diff
+- Deno.writeSync(conn.rid, buffer);
++ conn.writeSync(buffer);
+```
+
+```diff
+- Deno.writeSync(file.rid, buffer);
++ file.writeSync(buffer);
+```
+
+`Deno.writeSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
