@@ -10,7 +10,7 @@ chapter).
 > Deno uses submodules, so you must remember to clone using
 > `--recurse-submodules`.
 
-**Linux**/**Mac**/**WSL**:
+**Linux(Debian)**/**Mac**/**WSL**:
 
 ```shell
 git clone --recurse-submodules https://github.com/denoland/deno.git
@@ -48,7 +48,7 @@ cargo -V
 > Many components of Deno require a native compiler to build optimized native
 > functions.
 
-**Linux/WSL**
+**Linux(Debian)/WSL**
 ```shell
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
@@ -108,7 +108,7 @@ brew install llvm
 > Building Deno requires the
 > [Protocol Buffers compiler](https://grpc.io/docs/protoc-installation/).
 
-**Linux**/**WSL**:
+**Linux(Debian)**/**WSL**:
 
 ```sh
 apt install -y protobuf-compiler
