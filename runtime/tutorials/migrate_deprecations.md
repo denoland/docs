@@ -13,7 +13,41 @@ Library instead.
 ```
 
 `Deno.Buffer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details about the deprecation.
+details.
+
+## `Deno.Closer`
+
+Use [Closer](https://deno.land/std/io/types.ts?s=Closer) from the Standard
+Library instead.
+
+```diff
++ import type { Closer } from "https://deno.land/std/io/types.ts";
+
+- function foo(closer: Deno.Closer) {
++ function foo(closer: Closer) {
+  ...  
+}
+```
+
+`Deno.Closer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
+
+## `Deno.close()`
+
+Use the `.close()` method on the resource instead.
+
+```diff
+- Deno.close(file.rid);
++ file.close();
+```
+
+```diff
+- Deno.close(conn.rid);
++ conn.close();
+```
+
+`Deno.close()` will be removed in Deno 2.0. See the
+[Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ## `Deno.copy()`
 
@@ -30,7 +64,90 @@ Library instead.
 ```
 
 `Deno.copy()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details about the deprecation.
+details.
+
+## `Deno.customInspect`
+
+Use `Symbol.for("Deno.customInspect")` instead.
+
+```diff
+class Foo {
+- [Deno.customInspect]() {
++ [Symbol.for("Deno.customInspect")] {
+  }
+}
+```
+
+`Deno.customInspect` will be removed in Deno 2.0. See
+[deno#9294](https://github.com/denoland/deno/issues/9294) for details.
+
+## `Deno.Reader`
+
+Use [`Reader`](https://deno.land/std/io/types.ts?s=Reader) from the Standard
+Library instead.
+
+```diff
++ import type { Reader } from "https://deno.land/std/io/types.ts";
+
+- function foo(closer: Deno.Reader) {
++ function foo(closer: Reader) {
+  ...  
+}
+```
+
+`Deno.Reader` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
+
+## `Deno.ReaderSync`
+
+Use [`ReaderSync`](https://deno.land/std/io/types.ts?s=ReaderSync) from the
+Standard Library instead.
+
+```diff
++ import type { ReaderSync } from "https://deno.land/std/io/types.ts";
+
+- function foo(closer: Deno.ReaderSync) {
++ function foo(closer: ReaderSync) {
+  ...  
+}
+```
+
+`Deno.ReaderSync` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
+
+## `Deno.read()`
+
+Use the `.read()` method on the resource itself.
+
+```diff
+- await Deno.read(conn.rid, buffer);
++ await conn.read(buffer);
+```
+
+```diff
+- await Deno.read(file.rid, buffer);
++ await file.read(buffer);
+```
+
+`Deno.read()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
+
+## `Deno.readSync()`
+
+Use the `.readSync()` method on the resource itself.
+
+```diff
+- Deno.readSync(conn.rid, buffer);
++ conn.readSync(buffer);
+```
+
+```diff
+- Deno.readSync(file.rid, buffer);
++ file.readSync(buffer);
+```
+
+`Deno.readSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
+details.
 
 ## `Deno.readAll()`
 
@@ -47,7 +164,7 @@ Standard Library instead.
 ```
 
 `Deno.readAll()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details about the deprecation.
+details.
 
 ## `Deno.readAllSync()`
 
@@ -64,9 +181,7 @@ the Standard Library instead.
 ```
 
 `Deno.readAllSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details about the deprecation.
-
-[deno#9795]: https://github.com/denoland/deno/issues/9795
+details.
 
 ## `Deno.writeAll()`
 
@@ -83,7 +198,7 @@ Standard Library instead.
 ```
 
 `Deno.writeAll()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details about the deprecation.
+details.
 
 ## `Deno.writeAllSync()`
 
@@ -95,9 +210,12 @@ from the Standard Library instead.
 
 ...
 
-- const bytesWritten = Deno.writeAllSync(writer, data);
-+ const bytesWritten = writeAllSync(writer, data);
+- Deno.writeAllSync(writer, data);
++ writeAllSync(writer, data);
 ```
 
 `Deno.writeAllSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795]
-for details about the deprecation.
+for details.
+
+[deno#9795]: https://github.com/denoland/deno/issues/9795
+[Deno 1.40 blog post]: https://deno.com/blog/v1.40#deprecations-stabilizations-and-removals
