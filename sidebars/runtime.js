@@ -312,7 +312,6 @@ const sidebars = {
         "tutorials/how_to_with_npm/vue",
       ],
     },
-    {},
     {
       type: "link",
       label: "More on Deno by Example",

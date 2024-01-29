@@ -104,6 +104,103 @@ Use `Deno.stdin.isTerminal()`, `Deno.stdout.isTerminal()` or
 `Deno.isatty()` will be removed in Deno 2.0. See the
 [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
+## `Deno.File`
+
+Use [`Deno.FsFile`](https://deno.land/api?s=Deno.FsFile) instead.
+
+```diff
+- function foo(file: Deno.File) {
++ function foo(file: Deno.FsFile) {
+  ...
+}
+```
+
+`Deno.File` will be removed in Deno 2.0. See
+[deno#13661](https://github.com/denoland/deno/issues/13661) for details.
+
+## `Deno.fstat()`
+
+Use [`Deno.FsFile.stat()`](https://deno.land/api?s=Deno.FsFile&p=prototype.stat)
+instead.
+
+```diff
+- const fileInfo = await Deno.fstat(file.rid);
++ const fileInfo = await file.stat();
+```
+
+`Deno.fstat()` will be removed in Deno 2.0. See the
+[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+## `Deno.fstatSync()`
+
+Use
+[`Deno.FsFile.statSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.statSync)
+instead.
+
+```diff
+- const fileInfo = Deno.fstatSync(file.rid);
++ const fileInfo = file.statSync();
+```
+
+`Deno.fstatSync()` will be removed in Deno 2.0. See the
+[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+## `Deno.ftruncate()`
+
+Use
+[`Deno.FsFile.truncate()`](https://deno.land/api?s=Deno.FsFile&p=prototype.truncate)
+instead.
+
+```diff
+- await Deno.ftruncate(file.rid, 7);
++ await file.truncate(7);
+```
+
+`Deno.ftruncate()` will be removed in Deno 2.0. See the
+[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+## `Deno.ftruncateSync()`
+
+Use
+[`Deno.FsFile.truncateSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.truncateSync)
+instead.
+
+```diff
+- Deno.ftruncateSync(file.rid, 7);
++ file.truncateSync(7);
+```
+
+`Deno.ftruncateSync()` will be removed in Deno 2.0. See the
+[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+## `Deno.futime()`
+
+Use
+[`Deno.FsFile.utime()`](https://deno.land/api?s=Deno.FsFile&p=prototype.utime)
+instead.
+
+```diff
+- await Deno.futime(file.rid, 1556495550, new Date());
++ await file.utime(1556495550, new Date());
+```
+
+`Deno.futime()` will be removed in Deno 2.0. See the
+[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+## `Deno.futimeSync()`
+
+Use
+[`Deno.FsFile.utimeSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.utimeSync)
+instead.
+
+```diff
+- Deno.futimeSync(file.rid, 1556495550, new Date());
++ file.utimeSync(1556495550, new Date());
+```
+
+`Deno.futimeSync()` will be removed in Deno 2.0. See the
+[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
 ## `Deno.Reader`
 
 Use [`Reader`](https://deno.land/std/io/types.ts?s=Reader) from the Standard
@@ -206,6 +303,33 @@ Use the `.readSync()` method on the resource itself.
 `Deno.readSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
+## `Deno.seek()`
+
+Use [`Deno.FsFile.seek()`](https://deno.land/api?s=Deno.FsFile&p=prototype.seek)
+instead.
+
+```diff
+- await Deno.seek(file.rid, 6, Deno.SeekMode.Start);
++ await file.seek(6, Deno.SeekMode.Start);
+```
+
+`Deno.seek()` will be removed in Deno 2.0. See
+[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+## `Deno.seekSync()`
+
+Use
+[`Deno.FsFile.seekSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.seekSync)
+instead.
+
+```diff
+- Deno.seekSync(file.rid, 6, Deno.SeekMode.Start);
++ file.seek(6, Deno.SeekMode.Start);
+```
+
+`Deno.seekSync()` will be removed in Deno 2.0. See
+[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
 ## `Deno.Writer`
 
 Use [Writer](https://deno.land/std/io/types.ts?s=Writer) from the Standard
@@ -291,9 +415,6 @@ from the Standard Library instead.
 `Deno.writeAllSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795]
 for details.
 
-[deno#9795]: https://github.com/denoland/deno/issues/9795
-[Deno 1.40 blog post]: https://deno.com/blog/v1.40#deprecations-stabilizations-and-removals
-
 ## `Deno.writeSync()`
 
 Use the `.writeSync()` method on the resource itself.
@@ -310,3 +431,6 @@ Use the `.writeSync()` method on the resource itself.
 
 `Deno.writeSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
+
+[deno#9795]: https://github.com/denoland/deno/issues/9795
+[Deno 1.40 blog post]: https://deno.com/blog/v1.40#deprecations-stabilizations-and-removals
