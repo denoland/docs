@@ -1,12 +1,12 @@
-# Use Wordpress as a headless CMS
+# Use WordPress as a headless CMS
 
-Wordpress is the most popular CMS in the world, but is difficult to use in a
+WordPress is the most popular CMS in the world, but is difficult to use in a
 "headless" form, i.e. with a custom frontend.
 
 In this tutorial, we show how to use Fresh, a modern web framework built on
-Deno, to create a frontend for headless Wordpress.
+Deno, to create a frontend for headless WordPress.
 
-## **Step 1:** Clone the Fresh Wordpress theme
+## **Step 1:** Clone the Fresh WordPress theme
 
 Fresh offers two ready-to-go themes, one for a blog and one for shopfront.
 
