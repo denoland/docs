@@ -1,6 +1,22 @@
-# How to Migrate Away from Deprecated APIs
+# Deno 1.x to 2.x Migration Guide
 
-## `Deno.Buffer`
+This document contains guidance for migrating from Deno version 1.x to the
+upcoming Deno 2.0.
+
+:::caution Work in progress
+
+Deno 2.0 is under active development - these API changes and recommendations
+will continue to be updated until the launch of 2.0.
+
+:::
+
+## API changes and deprecations
+
+The following APIs have changed or deprecated between Deno 1.x and 2.x -
+guidance for migrating to a newer set of APIs is provided for each impacted API
+below.
+
+### `Deno.Buffer`
 
 Use [`Buffer`](https://deno.land/std/io/buffer.ts?s=Buffer) from the Standard
 Library instead.
@@ -15,7 +31,7 @@ Library instead.
 `Deno.Buffer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.Closer`
+### `Deno.Closer`
 
 Use [Closer](https://deno.land/std/io/types.ts?s=Closer) from the Standard
 Library instead.
@@ -32,7 +48,7 @@ Library instead.
 `Deno.Closer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.close()`
+### `Deno.close()`
 
 Use the `.close()` method on the resource instead.
 
@@ -49,7 +65,7 @@ Use the `.close()` method on the resource instead.
 `Deno.close()` will be removed in Deno 2.0. See the
 [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-## `Deno.copy()`
+### `Deno.copy()`
 
 Use [`copy()`](https://deno.land/std/io/copy.ts?s=copy) from the Standard
 Library instead.
@@ -66,7 +82,7 @@ Library instead.
 `Deno.copy()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.customInspect`
+### `Deno.customInspect`
 
 Use `Symbol.for("Deno.customInspect")` instead.
 
@@ -81,7 +97,7 @@ class Foo {
 `Deno.customInspect` will be removed in Deno 2.0. See
 [deno#9294](https://github.com/denoland/deno/issues/9294) for details.
 
-## `Deno.isatty()`
+### `Deno.isatty()`
 
 Use `Deno.stdin.isTerminal()`, `Deno.stdout.isTerminal()` or
 `Deno.stderr.isTerminal()` instead.
@@ -104,7 +120,7 @@ Use `Deno.stdin.isTerminal()`, `Deno.stdout.isTerminal()` or
 `Deno.isatty()` will be removed in Deno 2.0. See the
 [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-## `Deno.Reader`
+### `Deno.Reader`
 
 Use [`Reader`](https://deno.land/std/io/types.ts?s=Reader) from the Standard
 Library instead.
@@ -121,7 +137,7 @@ Library instead.
 `Deno.Reader` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.ReaderSync`
+### `Deno.ReaderSync`
 
 Use [`ReaderSync`](https://deno.land/std/io/types.ts?s=ReaderSync) from the
 Standard Library instead.
@@ -138,7 +154,7 @@ Standard Library instead.
 `Deno.ReaderSync` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.read()`
+### `Deno.read()`
 
 Use the `.read()` method on the resource itself.
 
@@ -155,7 +171,7 @@ Use the `.read()` method on the resource itself.
 `Deno.read()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.readAll()`
+### `Deno.readAll()`
 
 Use [`readAll()`](https://deno.land/std/io/read_all.ts?s=readAll) from the
 Standard Library instead.
@@ -172,7 +188,7 @@ Standard Library instead.
 `Deno.readAll()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.readAllSync()`
+### `Deno.readAllSync()`
 
 Use [`readAllSync()`](https://deno.land/std/io/read_all.ts?s=readAllSync) from
 the Standard Library instead.
@@ -189,7 +205,7 @@ the Standard Library instead.
 `Deno.readAllSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.readSync()`
+### `Deno.readSync()`
 
 Use the `.readSync()` method on the resource itself.
 
@@ -206,7 +222,7 @@ Use the `.readSync()` method on the resource itself.
 `Deno.readSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.Writer`
+### `Deno.Writer`
 
 Use [Writer](https://deno.land/std/io/types.ts?s=Writer) from the Standard
 Library instead.
@@ -223,7 +239,7 @@ Library instead.
 `Deno.Writer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.WriterSync`
+### `Deno.WriterSync`
 
 Use [WriterSync](https://deno.land/std/io/types.ts?s=WriterSync) from the
 Standard Library instead.
@@ -240,7 +256,7 @@ Standard Library instead.
 `Deno.WriterSync` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.write()`
+### `Deno.write()`
 
 Use the `.write()` method on the resource itself.
 
@@ -257,7 +273,7 @@ Use the `.write()` method on the resource itself.
 `Deno.write()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.writeAll()`
+### `Deno.writeAll()`
 
 Use [`writeAll()`](https://deno.land/std/io/write_all.ts?s=writeAll) from the
 Standard Library instead.
@@ -274,7 +290,7 @@ Standard Library instead.
 `Deno.writeAll()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
-## `Deno.writeAllSync()`
+### `Deno.writeAllSync()`
 
 Use [`writeAllSync()`](https://deno.land/std/io/write_all.ts?s=writeAllSync)
 from the Standard Library instead.
@@ -294,7 +310,7 @@ for details.
 [deno#9795]: https://github.com/denoland/deno/issues/9795
 [Deno 1.40 blog post]: https://deno.com/blog/v1.40#deprecations-stabilizations-and-removals
 
-## `Deno.writeSync()`
+### `Deno.writeSync()`
 
 Use the `.writeSync()` method on the resource itself.
 

@@ -248,6 +248,7 @@ const sidebars = {
         "manual/runtime/webassembly/wasm_resources",
       ],
     },
+    "manual/advanced/migrate_deprecations",
     {
       type: "html",
       value: "<div>Contributing and Support</div>",
@@ -312,13 +313,11 @@ const sidebars = {
         "tutorials/how_to_with_npm/vue",
       ],
     },
-    {},
     {
       type: "link",
       label: "More on Deno by Example",
       href: "https://examples.deno.land",
     },
-    "tutorials/migrate_deprecations",
     {
       type: "html",
       value: "<div>Reference</div>",
