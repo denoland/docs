@@ -248,6 +248,7 @@ const sidebars = {
         "manual/runtime/webassembly/wasm_resources",
       ],
     },
+    "manual/advanced/migrate_deprecations",
     {
       type: "html",
       value: "<div>Contributing and Support</div>",
