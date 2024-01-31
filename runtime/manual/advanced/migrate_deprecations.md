@@ -12,9 +12,9 @@ will continue to be updated until the launch of 2.0.
 
 ## API changes and deprecations
 
-The following APIs have changed or deprecated between Deno 1.x and 2.x -
-guidance for migrating to a newer set of APIs is provided for each impacted API
-below.
+The following APIs have changed or deprecated between Deno 1.x and 2.x, and will
+be removed in 2.x - guidance for migrating to a newer set of APIs is provided
+for each impacted API below.
 
 ### `Deno.Buffer`
 
@@ -28,8 +28,7 @@ Library instead.
 + const buffer = new Buffer();
 ```
 
-`Deno.Buffer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.Closer`
 
@@ -45,8 +44,7 @@ Library instead.
 }
 ```
 
-`Deno.Closer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.close()`
 
@@ -62,8 +60,7 @@ Use the `.close()` method on the resource instead.
 + conn.close();
 ```
 
-`Deno.close()` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.Conn.rid`
 
@@ -89,8 +86,7 @@ Use [`Deno.Conn`](https://deno.land/api?s=Deno.Conn) instance methods instead.
 + await conn.closeWrite();
 ```
 
-`Deno.Conn.rid` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.copy()`
 
@@ -106,8 +102,7 @@ Library instead.
 + await copy(reader, writer);
 ```
 
-`Deno.copy()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.customInspect`
 
@@ -121,8 +116,7 @@ class Foo {
 }
 ```
 
-`Deno.customInspect` will be removed in Deno 2.0. See
-[deno#9294](https://github.com/denoland/deno/issues/9294) for details.
+See [deno#9294](https://github.com/denoland/deno/issues/9294) for details.
 
 ### `Deno.File`
 
@@ -135,8 +129,7 @@ Use [`Deno.FsFile`](https://deno.land/api?s=Deno.FsFile) instead.
 }
 ```
 
-`Deno.File` will be removed in Deno 2.0. See
-[deno#13661](https://github.com/denoland/deno/issues/13661) for details.
+See [deno#13661](https://github.com/denoland/deno/issues/13661) for details.
 
 ### `Deno.fstatSync()`
 
@@ -149,8 +142,7 @@ instead.
 + const fileInfo = file.statSync();
 ```
 
-`Deno.fstatSync()` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.fstat()`
 
@@ -162,8 +154,7 @@ instead.
 + const fileInfo = await file.stat();
 ```
 
-`Deno.fstat()` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.FsWatcher.rid`
 
@@ -175,8 +166,7 @@ instead.
 + watcher.close();
 ```
 
-`Deno.FsWatcher.rid` will be removed in Deno 2.0. See
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.ftruncateSync()`
 
@@ -189,8 +179,7 @@ instead.
 + file.truncateSync(7);
 ```
 
-`Deno.ftruncateSync()` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.ftruncate()`
 
@@ -203,8 +192,7 @@ instead.
 + await file.truncate(7);
 ```
 
-`Deno.ftruncate()` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.futimeSync()`
 
@@ -217,8 +205,7 @@ instead.
 + file.utimeSync(1556495550, new Date());
 ```
 
-`Deno.futimeSync()` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.futime()`
 
@@ -231,8 +218,7 @@ instead.
 + await file.utime(1556495550, new Date());
 ```
 
-`Deno.futime()` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.isatty()`
 
@@ -254,8 +240,7 @@ Use `Deno.stdin.isTerminal()`, `Deno.stdout.isTerminal()` or
 + Deno.stderr.isTerminal();
 ```
 
-`Deno.isatty()` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.Listener.rid`
 
@@ -267,8 +252,7 @@ instead.
 + listener.close();
 ```
 
-`Deno.Listener.rid` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.ListenTlsOptions.certFile`
 
@@ -285,8 +269,7 @@ using listener = Deno.listenTls({
 });
 ```
 
-`Deno.ListenTlsOptions.certFile` will be removed in Deno 2.0. See
-[deno#12639](https://github.com/denoland/deno/issues/12639) for details.
+See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 
 ### `Deno.ListenTlsOptions.keyFile`
 
@@ -303,8 +286,7 @@ using listener = Deno.listenTls({
 });
 ```
 
-`Deno.ListenTlsOptions.keyFile` will be removed in Deno 2.0. See
-[deno#12639](https://github.com/denoland/deno/issues/12639) for details.
+See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 
 ### `Deno.readAllSync()`
 
@@ -320,8 +302,7 @@ the Standard Library instead.
 + const data = readAllSync(reader);
 ```
 
-`Deno.readAllSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.readAll()`
 
@@ -337,8 +318,7 @@ Standard Library instead.
 + const data = await readAll(reader);
 ```
 
-`Deno.readAll()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.Reader`
 
@@ -354,8 +334,7 @@ Library instead.
 }
 ```
 
-`Deno.Reader` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.ReaderSync`
 
@@ -371,8 +350,7 @@ Standard Library instead.
 }
 ```
 
-`Deno.ReaderSync` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.readSync()`
 
@@ -388,8 +366,7 @@ Use the `.readSync()` method on the resource itself.
 + file.readSync(buffer);
 ```
 
-`Deno.readSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.read()`
 
@@ -405,8 +382,7 @@ Use the `.read()` method on the resource itself.
 + await file.read(buffer);
 ```
 
-`Deno.read()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.run()`
 
@@ -427,8 +403,7 @@ Use [`new Deno.Command()`](https://deno.land/api?s=Deno.Command) instead.
   console.log(new TextDecoder().decode(stdout));
 ```
 
-`Deno.run()` will be removed in Deno 2.0. See
-[deno#16516](https://github.com/denoland/deno/pull/16516) for details.
+See [deno#16516](https://github.com/denoland/deno/pull/16516) for details.
 
 ### `Deno.seekSync()`
 
@@ -441,8 +416,7 @@ instead.
 + file.seek(6, Deno.SeekMode.Start);
 ```
 
-`Deno.seekSync()` will be removed in Deno 2.0. See
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.seek()`
 
@@ -454,8 +428,7 @@ instead.
 + await file.seek(6, Deno.SeekMode.Start);
 ```
 
-`Deno.seek()` will be removed in Deno 2.0. See
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.serveHttp()`
 
@@ -471,7 +444,7 @@ Use [`Deno.serve()`](https://deno.land/api?s=Deno.serve) instead.
 + Deno.serve({ port: 80 }, () => new Response("Hello World"));
 ```
 
-`Deno.serveHttp()` will be removed in Deno 2.0. See the
+See the
 [Deno 1.35 blog post](https://deno.com/blog/v1.35#denoserve-is-now-stable) for
 details.
 
@@ -486,8 +459,7 @@ Use [`Deno.HttpServer`](https://deno.land/api?s=Deno.HttpServer) instead.
 }
 ```
 
-`Deno.Server` will be removed in Deno 2.0. See
-[deno#20840](https://github.com/denoland/deno/issues/20840) for details.
+See [deno#20840](https://github.com/denoland/deno/issues/20840) for details.
 
 ### `Deno.shutdown`
 
@@ -500,8 +472,7 @@ instead.
 + await conn.closeWrite();
 ```
 
-`Deno.shutdown()` will be removed in Deno 2.0. See
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.stderr.rid`
 
@@ -523,8 +494,7 @@ instead.
 + Deno.stderr.isTerminal();
 ```
 
-`Deno.stderr.rid` will be removed in Deno 2.0. See
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.stdin.rid`
 
@@ -545,8 +515,7 @@ Use [`Deno.stdin`](https://deno.land/api?s=Deno.stdin) instance methods instead.
 + Deno.stdin.isTerminal();
 ```
 
-`Deno.stdin.rid` will be removed in Deno 2.0. See
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.stdout.rid`
 
@@ -568,8 +537,7 @@ instead.
 + Deno.stdout.isTerminal();
 ```
 
-`Deno.stdout.rid` will be removed in Deno 2.0. See
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.TlsConn.rid`
 
@@ -596,8 +564,7 @@ instead.
 + await tlsConn.closeWrite();
 ```
 
-`Deno.TlsConn.rid` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.UnixConn.rid`
 
@@ -624,8 +591,7 @@ instead.
 + await unixConn.closeWrite();
 ```
 
-`Deno.UnixConn.rid` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.writeAllSync()`
 
@@ -641,8 +607,7 @@ from the Standard Library instead.
 + writeAllSync(writer, data);
 ```
 
-`Deno.writeAllSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795]
-for details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.writeAll()`
 
@@ -658,8 +623,7 @@ Standard Library instead.
 + await writeAll(writer, data);
 ```
 
-`Deno.writeAll()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.Writer`
 
@@ -675,8 +639,7 @@ Library instead.
 }
 ```
 
-`Deno.Writer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.WriterSync`
 
@@ -692,8 +655,7 @@ Standard Library instead.
 }
 ```
 
-`Deno.WriterSync` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.writeSync()`
 
@@ -709,8 +671,7 @@ Use the `.writeSync()` method on the resource itself.
 + file.writeSync(buffer);
 ```
 
-`Deno.writeSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.write()`
 
@@ -726,8 +687,7 @@ Use the `.write()` method on the resource itself.
 + await file.write(buffer);
 ```
 
-`Deno.write()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `new Deno.FsFile()`
 
