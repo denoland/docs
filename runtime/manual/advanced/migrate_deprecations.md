@@ -408,6 +408,28 @@ Use the `.read()` method on the resource itself.
 `Deno.read()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
 details.
 
+### `Deno.run()`
+
+Use [`new Deno.Command()`](https://deno.land/api?s=Deno.Command) instead.
+
+```diff
+- const process = Deno.run({ cmd: [ "echo", "hello world" ], stdout: "piped" });
+- const [{ success }, stdout] = await Promise.all([
+-   process.status(),
+-   process.output(),
+- ]);
+- process.close();
++ const command = new Deno.Command("echo", {
++   args: ["hello world]
++ });
++ const { success, stdout } = await command.output();
+  console.log(success);
+  console.log(new TextDecoder().decode(stdout));
+```
+
+`Deno.run()` will be removed in Deno 2.0. See
+[deno#16516](https://github.com/denoland/deno/pull/16516) for details.
+
 ### `Deno.seekSync()`
 
 Use
