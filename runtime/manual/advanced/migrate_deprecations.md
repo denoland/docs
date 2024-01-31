@@ -12,9 +12,9 @@ will continue to be updated until the launch of 2.0.
 
 ## API changes and deprecations
 
-The following APIs have changed or deprecated between Deno 1.x and 2.x -
-guidance for migrating to a newer set of APIs is provided for each impacted API
-below.
+The following APIs have changed or deprecated between Deno 1.x and 2.x, and will
+be removed in 2.x - guidance for migrating to a newer set of APIs is provided
+for each impacted API below.
 
 ### `Deno.Buffer`
 
@@ -28,8 +28,7 @@ Library instead.
 + const buffer = new Buffer();
 ```
 
-`Deno.Buffer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.Closer`
 
@@ -45,8 +44,7 @@ Library instead.
 }
 ```
 
-`Deno.Closer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.close()`
 
@@ -62,8 +60,33 @@ Use the `.close()` method on the resource instead.
 + conn.close();
 ```
 
-`Deno.close()` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.Conn.rid`
+
+Use [`Deno.Conn`](https://deno.land/api?s=Deno.Conn) instance methods instead.
+
+```diff
+- await Deno.read(conn.rid, buffer);
++ await conn.read(buffer);
+```
+
+```diff
+- await Deno.write(conn.rid, data);
++ await conn.write(data);
+```
+
+```diff
+- Deno.close(conn.rid);
++ conn.close();
+```
+
+```diff
+- await Deno.shutdown(conn.rid);
++ await conn.closeWrite();
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.copy()`
 
@@ -79,8 +102,7 @@ Library instead.
 + await copy(reader, writer);
 ```
 
-`Deno.copy()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.customInspect`
 
@@ -94,8 +116,109 @@ class Foo {
 }
 ```
 
-`Deno.customInspect` will be removed in Deno 2.0. See
-[deno#9294](https://github.com/denoland/deno/issues/9294) for details.
+See [deno#9294](https://github.com/denoland/deno/issues/9294) for details.
+
+### `Deno.File`
+
+Use [`Deno.FsFile`](https://deno.land/api?s=Deno.FsFile) instead.
+
+```diff
+- function foo(file: Deno.File) {
++ function foo(file: Deno.FsFile) {
+  ...
+}
+```
+
+See [deno#13661](https://github.com/denoland/deno/issues/13661) for details.
+
+### `Deno.fstatSync()`
+
+Use
+[`Deno.FsFile.statSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.statSync)
+instead.
+
+```diff
+- const fileInfo = Deno.fstatSync(file.rid);
++ const fileInfo = file.statSync();
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.fstat()`
+
+Use [`Deno.FsFile.stat()`](https://deno.land/api?s=Deno.FsFile&p=prototype.stat)
+instead.
+
+```diff
+- const fileInfo = await Deno.fstat(file.rid);
++ const fileInfo = await file.stat();
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.FsWatcher.rid`
+
+Use [`Deno.FsWatcher`](https://deno.land/api?s=Deno.FsWatcher) instance methods
+instead.
+
+```diff
+- Deno.close(watcher.rid);
++ watcher.close();
+```
+
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.ftruncateSync()`
+
+Use
+[`Deno.FsFile.truncateSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.truncateSync)
+instead.
+
+```diff
+- Deno.ftruncateSync(file.rid, 7);
++ file.truncateSync(7);
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.ftruncate()`
+
+Use
+[`Deno.FsFile.truncate()`](https://deno.land/api?s=Deno.FsFile&p=prototype.truncate)
+instead.
+
+```diff
+- await Deno.ftruncate(file.rid, 7);
++ await file.truncate(7);
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.futimeSync()`
+
+Use
+[`Deno.FsFile.utimeSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.utimeSync)
+instead.
+
+```diff
+- Deno.futimeSync(file.rid, 1556495550, new Date());
++ file.utimeSync(1556495550, new Date());
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.futime()`
+
+Use
+[`Deno.FsFile.utime()`](https://deno.land/api?s=Deno.FsFile&p=prototype.utime)
+instead.
+
+```diff
+- await Deno.futime(file.rid, 1556495550, new Date());
++ await file.utime(1556495550, new Date());
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.isatty()`
 
@@ -117,76 +240,53 @@ Use `Deno.stdin.isTerminal()`, `Deno.stdout.isTerminal()` or
 + Deno.stderr.isTerminal();
 ```
 
-`Deno.isatty()` will be removed in Deno 2.0. See the
-[Deno 1.40 blog post][Deno 1.40 blog post] for details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### `Deno.Reader`
+### `Deno.Listener.rid`
 
-Use [`Reader`](https://deno.land/std/io/types.ts?s=Reader) from the Standard
-Library instead.
-
-```diff
-+ import type { Reader } from "https://deno.land/std/io/types.ts";
-
-- function foo(closer: Deno.Reader) {
-+ function foo(closer: Reader) {
-  ...  
-}
-```
-
-`Deno.Reader` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
-
-### `Deno.ReaderSync`
-
-Use [`ReaderSync`](https://deno.land/std/io/types.ts?s=ReaderSync) from the
-Standard Library instead.
+Use [`Deno.Listener`](https://deno.land/api?s=Deno.Listener) instance methods
+instead.
 
 ```diff
-+ import type { ReaderSync } from "https://deno.land/std/io/types.ts";
-
-- function foo(reader: Deno.ReaderSync) {
-+ function foo(reader: ReaderSync) {
-  ...  
-}
+- Deno.close(listener.rid);
++ listener.close();
 ```
 
-`Deno.ReaderSync` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### `Deno.read()`
+### `Deno.ListenTlsOptions.certFile`
 
-Use the `.read()` method on the resource itself.
+Pass the certificate file contents to
+[`Deno.ListenTlsOptions.cert`](https://deno.land/api?s=Deno.ListenTlsOptions#prop_cert)
+instead.
 
 ```diff
-- await Deno.read(conn.rid, buffer);
-+ await conn.read(buffer);
+using listener = Deno.listenTls({
+  port: 443,
+- certFile: "./server.crt",
++ cert: Deno.readTextFile("./server.crt"),
+  key: Deno.readTextFileSync("./server.key"),
+});
 ```
+
+See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
+
+### `Deno.ListenTlsOptions.keyFile`
+
+Pass the key file contents to
+[`Deno.ListenTlsOptions.key`](https://deno.land/api?s=Deno.ListenTlsOptions#prop_key)
+instead.
 
 ```diff
-- await Deno.read(file.rid, buffer);
-+ await file.read(buffer);
+using listener = Deno.listenTls({
+  port: 443,
+  cert: Deno.readTextFile("./server.crt"),
+- keyFile: "./server.key",
++ key: Deno.readTextFileSync("./server.key"),
+});
 ```
 
-`Deno.read()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
-
-### `Deno.readAll()`
-
-Use [`readAll()`](https://deno.land/std/io/read_all.ts?s=readAll) from the
-Standard Library instead.
-
-```diff
-+ import { readAll } from "https://deno.land/std/io/read_all.ts";
-
-...
-
-- const data = await Deno.readAll(reader);
-+ const data = await readAll(reader);
-```
-
-`Deno.readAll()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 
 ### `Deno.readAllSync()`
 
@@ -202,8 +302,55 @@ the Standard Library instead.
 + const data = readAllSync(reader);
 ```
 
-`Deno.readAllSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
+
+### `Deno.readAll()`
+
+Use [`readAll()`](https://deno.land/std/io/read_all.ts?s=readAll) from the
+Standard Library instead.
+
+```diff
++ import { readAll } from "https://deno.land/std/io/read_all.ts";
+
+...
+
+- const data = await Deno.readAll(reader);
++ const data = await readAll(reader);
+```
+
+See [deno#9795][deno#9795] for details.
+
+### `Deno.Reader`
+
+Use [`Reader`](https://deno.land/std/io/types.ts?s=Reader) from the Standard
+Library instead.
+
+```diff
++ import type { Reader } from "https://deno.land/std/io/types.ts";
+
+- function foo(closer: Deno.Reader) {
++ function foo(closer: Reader) {
+  ...  
+}
+```
+
+See [deno#9795][deno#9795] for details.
+
+### `Deno.ReaderSync`
+
+Use [`ReaderSync`](https://deno.land/std/io/types.ts?s=ReaderSync) from the
+Standard Library instead.
+
+```diff
++ import type { ReaderSync } from "https://deno.land/std/io/types.ts";
+
+- function foo(reader: Deno.ReaderSync) {
++ function foo(reader: ReaderSync) {
+  ...  
+}
+```
+
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.readSync()`
 
@@ -219,76 +366,232 @@ Use the `.readSync()` method on the resource itself.
 + file.readSync(buffer);
 ```
 
-`Deno.readSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
 
-### `Deno.Writer`
+### `Deno.read()`
 
-Use [Writer](https://deno.land/std/io/types.ts?s=Writer) from the Standard
-Library instead.
+Use the `.read()` method on the resource itself.
 
 ```diff
-+ import type { Writer } from "https://deno.land/std/io/types.ts";
+- await Deno.read(conn.rid, buffer);
++ await conn.read(buffer);
+```
 
-- function foo(writer: Deno.Writer) {
-+ function foo(writer: Writer) {
+```diff
+- await Deno.read(file.rid, buffer);
++ await file.read(buffer);
+```
+
+See [deno#9795][deno#9795] for details.
+
+### `Deno.run()`
+
+Use [`new Deno.Command()`](https://deno.land/api?s=Deno.Command) instead.
+
+```diff
+- const process = Deno.run({ cmd: [ "echo", "hello world" ], stdout: "piped" });
+- const [{ success }, stdout] = await Promise.all([
+-   process.status(),
+-   process.output(),
+- ]);
+- process.close();
++ const command = new Deno.Command("echo", {
++   args: ["hello world]
++ });
++ const { success, stdout } = await command.output();
+  console.log(success);
+  console.log(new TextDecoder().decode(stdout));
+```
+
+See [deno#16516](https://github.com/denoland/deno/pull/16516) for details.
+
+### `Deno.seekSync()`
+
+Use
+[`Deno.FsFile.seekSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.seekSync)
+instead.
+
+```diff
+- Deno.seekSync(file.rid, 6, Deno.SeekMode.Start);
++ file.seek(6, Deno.SeekMode.Start);
+```
+
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.seek()`
+
+Use [`Deno.FsFile.seek()`](https://deno.land/api?s=Deno.FsFile&p=prototype.seek)
+instead.
+
+```diff
+- await Deno.seek(file.rid, 6, Deno.SeekMode.Start);
++ await file.seek(6, Deno.SeekMode.Start);
+```
+
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.serveHttp()`
+
+Use [`Deno.serve()`](https://deno.land/api?s=Deno.serve) instead.
+
+```diff
+- const conn = Deno.listen({ port: 80 });
+- const httpConn = Deno.serveHttp(await conn.accept());
+- const e = await httpConn.nextRequest();
+- if (e) {
+-  e.respondWith(new Response("Hello World"));
+- }
++ Deno.serve({ port: 80 }, () => new Response("Hello World"));
+```
+
+See the
+[Deno 1.35 blog post](https://deno.com/blog/v1.35#denoserve-is-now-stable) for
+details.
+
+### `Deno.Server`
+
+Use [`Deno.HttpServer`](https://deno.land/api?s=Deno.HttpServer) instead.
+
+```diff
+- function foo(server: Deno.Server) {
++ function foo(server: Deno.HttpServer) {
   ...  
 }
 ```
 
-`Deno.Writer` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#20840](https://github.com/denoland/deno/issues/20840) for details.
 
-### `Deno.WriterSync`
+### `Deno.shutdown`
 
-Use [WriterSync](https://deno.land/std/io/types.ts?s=WriterSync) from the
-Standard Library instead.
+Use
+[`Deno.Conn.closeWrite()`](https://deno.land/api?s=Deno.Conn#method_closeWrite_0)
+instead.
 
 ```diff
-+ import type { WriterSync } from "https://deno.land/std/io/types.ts";
-
-- function foo(writer: Deno.WriterSync) {
-+ function foo(writer: WriterSync) {
-  ...  
-}
+- await Deno.shutdown(conn.rid);
++ await conn.closeWrite();
 ```
 
-`Deno.WriterSync` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### `Deno.write()`
+### `Deno.stderr.rid`
 
-Use the `.write()` method on the resource itself.
+Use [`Deno.stderr`](https://deno.land/api?s=Deno.stderr) instance methods
+instead.
 
 ```diff
-- await Deno.write(conn.rid, buffer);
-+ await conn.write(buffer);
+- await Deno.write(Deno.stderr.rid, data);
++ await Deno.stderr.rid(data);
 ```
 
 ```diff
-- await Deno.write(file.rid, buffer);
-+ await file.write(buffer);
+- Deno.close(Deno.stderr.rid);
++ Deno.stderr.close();
 ```
-
-`Deno.write()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
-
-### `Deno.writeAll()`
-
-Use [`writeAll()`](https://deno.land/std/io/write_all.ts?s=writeAll) from the
-Standard Library instead.
 
 ```diff
-+ import { writeAll } from "https://deno.land/std/io/write_all.ts";
-
-...
-
-- await Deno.writeAll(writer, data);
-+ await writeAll(writer, data);
+- Deno.isatty(Deno.stderr.rid);
++ Deno.stderr.isTerminal();
 ```
 
-`Deno.writeAll()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.stdin.rid`
+
+Use [`Deno.stdin`](https://deno.land/api?s=Deno.stdin) instance methods instead.
+
+```diff
+- await Deno.read(Deno.stdin.rid, buffer);
++ await Deno.stdin.read(buffer);
+```
+
+```diff
+- Deno.close(Deno.stdin.rid);
++ Deno.stdin.close();
+```
+
+```diff
+- Deno.isatty(Deno.stdin.rid);
++ Deno.stdin.isTerminal();
+```
+
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.stdout.rid`
+
+Use [`Deno.stdout`](https://deno.land/api?s=Deno.stdout) instance methods
+instead.
+
+```diff
+- await Deno.read(Deno.stdout.rid, buffer);
++ await Deno.stdout.read(buffer);
+```
+
+```diff
+- Deno.close(Deno.stdout.rid);
++ Deno.stdout.close();
+```
+
+```diff
+- Deno.isatty(Deno.stdout.rid);
++ Deno.stdout.isTerminal();
+```
+
+See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.TlsConn.rid`
+
+Use [`Deno.TlsConn`](https://deno.land/api?s=Deno.TlsConn) instance methods
+instead.
+
+```diff
+- await Deno.read(tlsConn.rid, buffer);
++ await tlsConn.read(buffer);
+```
+
+```diff
+- await Deno.write(tlsConn.rid, data);
++ await tlsConn.write(data);
+```
+
+```diff
+- Deno.close(tlsConn.rid);
++ tlsConn.close();
+```
+
+```diff
+- await Deno.shutdown(tlsConn.rid);
++ await tlsConn.closeWrite();
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.UnixConn.rid`
+
+Use [`Deno.UnixConn`](https://deno.land/api?s=Deno.UnixConn) instance methods
+instead.
+
+```diff
+- await Deno.read(unixConn.rid, buffer);
++ await unixConn.read(buffer);
+```
+
+```diff
+- await Deno.write(unixConn.rid, data);
++ await unixConn.write(data);
+```
+
+```diff
+- Deno.close(unixConn.rid);
++ unixConn.close();
+```
+
+```diff
+- await Deno.shutdown(unixConn.rid);
++ await unixConn.closeWrite();
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.writeAllSync()`
 
@@ -304,11 +607,55 @@ from the Standard Library instead.
 + writeAllSync(writer, data);
 ```
 
-`Deno.writeAllSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795]
-for details.
+See [deno#9795][deno#9795] for details.
 
-[deno#9795]: https://github.com/denoland/deno/issues/9795
-[Deno 1.40 blog post]: https://deno.com/blog/v1.40#deprecations-stabilizations-and-removals
+### `Deno.writeAll()`
+
+Use [`writeAll()`](https://deno.land/std/io/write_all.ts?s=writeAll) from the
+Standard Library instead.
+
+```diff
++ import { writeAll } from "https://deno.land/std/io/write_all.ts";
+
+...
+
+- await Deno.writeAll(writer, data);
++ await writeAll(writer, data);
+```
+
+See [deno#9795][deno#9795] for details.
+
+### `Deno.Writer`
+
+Use [Writer](https://deno.land/std/io/types.ts?s=Writer) from the Standard
+Library instead.
+
+```diff
++ import type { Writer } from "https://deno.land/std/io/types.ts";
+
+- function foo(writer: Deno.Writer) {
++ function foo(writer: Writer) {
+  ...  
+}
+```
+
+See [deno#9795][deno#9795] for details.
+
+### `Deno.WriterSync`
+
+Use [WriterSync](https://deno.land/std/io/types.ts?s=WriterSync) from the
+Standard Library instead.
+
+```diff
++ import type { WriterSync } from "https://deno.land/std/io/types.ts";
+
+- function foo(writer: Deno.WriterSync) {
++ function foo(writer: WriterSync) {
+  ...  
+}
+```
+
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.writeSync()`
 
@@ -324,5 +671,33 @@ Use the `.writeSync()` method on the resource itself.
 + file.writeSync(buffer);
 ```
 
-`Deno.writeSync()` will be removed in Deno 2.0. See [deno#9795][deno#9795] for
-details.
+See [deno#9795][deno#9795] for details.
+
+### `Deno.write()`
+
+Use the `.write()` method on the resource itself.
+
+```diff
+- await Deno.write(conn.rid, buffer);
++ await conn.write(buffer);
+```
+
+```diff
+- await Deno.write(file.rid, buffer);
++ await file.write(buffer);
+```
+
+See [deno#9795][deno#9795] for details.
+
+### `new Deno.FsFile()`
+
+Use [`Deno.openSync()`](https://deno.land/api?s=Deno.openSync) or
+[`Deno.open()`](https://deno.land/api?s=Deno.open) instead.
+
+```diff
+- const file = new Deno.FsFile(3);
++ const file = await Deno.open("/foo/bar.txt");
+```
+
+[deno#9795]: https://github.com/denoland/deno/issues/9795
+[Deno 1.40 blog post]: https://deno.com/blog/v1.40#deprecations-stabilizations-and-removals
