@@ -31,7 +31,7 @@ first `await`, since messages can be lost otherwise. This is not a bug in Deno,
 it's just an unfortunate interaction of features, and it also happens in all
 browsers that support module workers.
 
-```ts, ignore
+```ts
 import { delay } from "https://deno.land/std@$STD_VERSION/async/delay.ts";
 
 // First await: waits for a second, then continues running the module.
@@ -114,7 +114,7 @@ worker.postMessage({ filename: "./log.txt" });
 
 **worker.js**
 
-```js, ignore
+```js
 self.onmessage = async (e) => {
   const { filename } = e.data;
   const text = await Deno.readTextFile(filename);
