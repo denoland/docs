@@ -99,8 +99,13 @@ class Foo {
 
 ### `Deno.isatty()`
 
-Use `Deno.stdin.isTerminal()`, `Deno.stdout.isTerminal()` or
-`Deno.stderr.isTerminal()` instead.
+Use `Deno.FsFile.isTerminal()`, `Deno.stdin.isTerminal()`,
+`Deno.stdout.isTerminal()` or `Deno.stderr.isTerminal()` instead.
+
+```diff
+- Deno.isatty(file.rid);
++ file.isTerminal();
+```
 
 ```diff
 - Deno.isatty(Deno.stdin.rid);
