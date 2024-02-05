@@ -111,6 +111,7 @@ const sidebars = {
         "manual/faunadb",
         "manual/firebase",
         "manual/postgres",
+        "manual/neon-postgres",
       ],
     },
     {
