@@ -590,6 +590,33 @@ instead.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
+### `Deno.TcpConn.rid`
+
+Use [`Deno.TcpConn`](https://deno.land/api?s=Deno.TcpConn) instance methods
+instead.
+
+```diff
+- await Deno.read(tcpConn.rid, buffer);
++ await tcpConn.read(buffer);
+```
+
+```diff
+- await Deno.write(tcpConn.rid, data);
++ await tcpConn.write(data);
+```
+
+```diff
+- Deno.close(tcpConn.rid);
++ tcpConn.close();
+```
+
+```diff
+- await Deno.shutdown(tcpConn.rid);
++ await tcpConn.closeWrite();
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
 ### `Deno.TlsConn.rid`
 
 Use [`Deno.TlsConn`](https://deno.land/api?s=Deno.TlsConn) instance methods
