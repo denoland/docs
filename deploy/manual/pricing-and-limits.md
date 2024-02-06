@@ -17,13 +17,14 @@ deployment (source files and static files) **should not exceed 1 gigabyte**.
 
 ## TLS proxying
 
-TLS termination is required for outgoing connections to port
-443 (the port used for HTTPS). Using
-[Deno.connect](https://deno.land/api?s=Deno.connect) to connect to these ports
-is prohibited. If you need to establish a TLS connection to port 443, please use
+TLS termination is required for outgoing connections to port 443 (the port used
+for HTTPS). Using [Deno.connect](https://deno.land/api?s=Deno.connect) to
+connect to these ports is prohibited. If you need to establish a TLS connection
+to port 443, please use
 [Deno.connectTls](https://deno.land/api?s=Deno.connectTls) instead. `fetch` is
 not impacted by this restriction.
 
 This restriction is in place because connecting to port 443 without terminating
 TLS is frequently used in TLS-over-TLS proxies, which are prohibited on Deno
-Deploy as per [our acceptable use policy](https://docs.deno.com/deploy/manual/acceptable-use-policy).
+Deploy as per
+[our acceptable use policy](https://docs.deno.com/deploy/manual/acceptable-use-policy).

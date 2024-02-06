@@ -1,9 +1,17 @@
 # Deployments
 
-A deployment is a snapshot of all code and environment variables required to run
-an application. Deployments are immutable after they have been created. To
-deploy a new version of the code for an application, a new deployment must be
-created.
+A deployment is a snapshot of the code and environment variables required to run
+an application. A new deployment can be created via `deployctl` or automatically
+via Deploy's Github integration if configured.
+
+Deployments are immutable after they have been created. To deploy a new version
+of the code for an application, a new deployment must be created. Once created,
+deployments remain accessible.
+
+All available deployments are listed on the
+https://dash.deno.com/projects/<project-name>/deployments page. Old deployments
+can be
+[deleted via the API](https://docs.deno.com/deploy/api/rest/deployments#delete-a-deployment).
 
 ## Custom domains
 
