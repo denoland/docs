@@ -9,7 +9,7 @@ of the code for an application, a new deployment must be created. Once created,
 deployments remain accessible.
 
 All available deployments are listed on the
-https://dash.deno.com/projects/<project-name>/deployments page. Old deployments
+https://dash.deno.com/projects/project-name/deployments page. Old deployments
 can be
 [deleted via the API](https://docs.deno.com/deploy/api/rest/deployments#delete-a-deployment).
 
