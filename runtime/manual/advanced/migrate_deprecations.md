@@ -88,6 +88,46 @@ Use [`Deno.Conn`](https://deno.land/api?s=Deno.Conn) instance methods instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
+### `Deno.ConnectTlsOptions.certFile`
+
+Use
+[`Deno.ConnectTlsOptions.cert`](https://deno.land/api?s=Deno.ConnectTlsOptions#prop_cert)
+instead.
+
+```diff
+const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
+using conn = await Deno.connectTls({
+  hostname: "192.0.2.1",
+  port: 80,
+  caCerts: [caCert],
+- certFile: "./server.crt",
++ cert: Deno.readTextFileSync("./server.crt"),
+  key: Deno.readTextFileSync("./server.key"),
+});
+```
+
+See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
+
+### `Deno.ConnectTlsOptions.privateKey`
+
+Use
+[`Deno.ConnectTlsOptions.key`](https://deno.land/api?s=Deno.ConnectTlsOptions#prop_key)
+instead.
+
+```diff
+const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
+using conn = await Deno.connectTls({
+  hostname: "192.0.2.1",
+  port: 80,
+  caCerts: [caCert],
+  cert: Deno.readTextFileSync("./server.crt"),
+- keyFile: "./server.key",
++ key: Deno.readTextFileSync("./server.key"),
+});
+```
+
+See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
+
 ### `Deno.copy()`
 
 Use [`copy()`](https://deno.land/std/io/copy.ts?s=copy) from the Standard
