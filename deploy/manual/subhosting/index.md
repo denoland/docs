@@ -92,9 +92,9 @@ within the system. These resources are also represented in the
 
 The steps to implement subhosting are roughly as follows:
 
-1. [Create an organization](./getting_started) and get an access token for the
-   REST API
-1. [Create a project](./projects_and_deployments), and then create your first
+1. [Create an organization](./getting_started.md) and get an access token for
+   the REST API
+1. [Create a project](./projects_and_deployments.md), and then create your first
    deployment for that project
 1. [Provision a domain](../../api/rest/domains.md) and associate that domain
    with a deployment
