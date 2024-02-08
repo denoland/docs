@@ -1,4 +1,4 @@
-# Vendoring Dependencies
+# `deno vendor`, vendoring dependencies
 
 `deno vendor <specifiers>...` will download all remote dependencies of the
 specified modules into a local `vendor` folder. For example:
