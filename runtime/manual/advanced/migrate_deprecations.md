@@ -131,6 +131,31 @@ Use [`Deno.FsFile`](https://deno.land/api?s=Deno.FsFile) instead.
 
 See [deno#13661](https://github.com/denoland/deno/issues/13661) for details.
 
+### `Deno.flock()`
+
+Use [`Deno.FsFile.lock()`](https://deno.land/api?s=Deno.FsFile&p=prototype.lock)
+instead.
+
+```diff
+- await Deno.flock(file.rid);
++ await file.lock();
+```
+
+See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
+
+### `Deno.flockSync()`
+
+Use
+[`Deno.FsFile.lockSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.lockSync)
+instead.
+
+```diff
+- Deno.flockSync(file.rid);
++ file.lockSync();
+```
+
+See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
+
 ### `Deno.fstatSync()`
 
 Use
@@ -193,6 +218,32 @@ instead.
 ```
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.funlock()`
+
+Use
+[`Deno.FsFile.unlock()`](https://deno.land/api?s=Deno.FsFile&p=prototype.unlock)
+instead.
+
+```diff
+- await Deno.funlock(file.rid);
++ await file.unlock();
+```
+
+See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
+
+### `Deno.funlockSync()`
+
+Use
+[`Deno.FsFile.unlockSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.unlockSync)
+instead.
+
+```diff
+- Deno.funlockSync(file.rid);
++ file.unlockSync();
+```
+
+See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 
 ### `Deno.futimeSync()`
 
@@ -538,6 +589,33 @@ instead.
 ```
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.TcpConn.rid`
+
+Use [`Deno.TcpConn`](https://deno.land/api?s=Deno.TcpConn) instance methods
+instead.
+
+```diff
+- await Deno.read(tcpConn.rid, buffer);
++ await tcpConn.read(buffer);
+```
+
+```diff
+- await Deno.write(tcpConn.rid, data);
++ await tcpConn.write(data);
+```
+
+```diff
+- Deno.close(tcpConn.rid);
++ tcpConn.close();
+```
+
+```diff
+- await Deno.shutdown(tcpConn.rid);
++ await tcpConn.closeWrite();
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.TlsConn.rid`
 
