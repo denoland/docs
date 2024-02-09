@@ -1,15 +1,11 @@
-# Deno Deploy REST API
+# Subhosting REST API
 
 Developers can provision projects, domains, KV databases, and other resources
-using the Deno Deploy REST API. This API is most often used to implement
-[Subhosting](/deploy/manual/subhosting), a use case of Deno Deploy where you can
-run untrusted code on behalf of your users in the cloud.
-
-[Refer to the manual](/deploy/manual/subhosting) to learn more about Subhosting.
+using the Subhosting REST API.
 
 ## Endpoint and authentication
 
-The base URL for the Deno Deploy REST API v1 is below.
+The base URL for the Subhosting REST API v1 is below.
 
 ```
 https://api.deno.com/v1/

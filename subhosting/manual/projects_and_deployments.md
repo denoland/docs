@@ -43,9 +43,9 @@ f084712a-b23b-4aba-accc-3c2de0bfa26a
 ```
 
 You can use a project identifier to
-[create a deployment](../../api/rest/deployments.md) for that project. Create a
-new file called `create_deployment.ts` and include the following code to create
-a new "hello world" deployment for your project.
+[create a deployment](https://apidocs.deno.com/#get-/projects/-projectId-/deployments)
+for that project. Create a new file called `create_deployment.ts` and include
+the following code to create a new "hello world" deployment for your project.
 
 ```ts title="create_deployment.ts"
 const accessToken = Deno.env.get("DEPLOY_ACCESS_TOKEN");
@@ -90,7 +90,7 @@ visible from your Deno Deploy dashboard.
 
 The example above showed a very simple example of a deployment. A more complex
 deployment might include some or all of these components, fully described
-[here in the API docs](../../api/rest/deployments.md).
+[here in the API docs](https://apidocs.deno.com/#get-/projects/-projectId-/deployments).
 
 - **Assets:** TypeScript or JavaScript source files, images, JSON documents -
   code and static files that make your deployment run. These files can be
@@ -112,4 +112,4 @@ deployment might include some or all of these components, fully described
 After a deployment is created, it is assigned a generated URL. That may be fine
 for some scenarios, but often you'll want to associate a custom domain with your
 deployments as well.
-[Check out the API reference for domains](../../api/rest/domains.md).
+[Check out the API reference for domains](https://apidocs.deno.com/#get-/organizations/-organizationId-/domains).
