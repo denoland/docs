@@ -1,4 +1,4 @@
-# Benchmarking Tool
+# `deno bench`, benchmarking tool
 
 Deno has a built-in benchmark runner that you can use for checking performance
 of JavaScript or TypeScript code.
