@@ -5,7 +5,7 @@ To get started with subhosting, you will need to create an organization in the
 instructions to create a new organization for subhosting.
 
 Going through the onboarding flow, you will likely also generate an **access
-token**, which you will use to access the [REST API](/deploy/api/rest). If you
+token**, which you will use to access the [REST API](../api/index.md). If you
 didn't do this (or lost the token you generated), you can
 [generate a new one here](https://dash.deno.com/account#access-tokens).
 
@@ -70,9 +70,10 @@ REST API.
 ## Creating our first project
 
 In order to do anything interesting with subhosting or the REST API, we'll need
-to [create a project](/deploy/api/rest/projects). Copy the code below into a
-file named `create_project.ts` in the same file as your `.env` and `.gitignore`
-file.
+to
+[create a project](https://apidocs.deno.com/#get-/projects/-projectId-/deployments).
+Copy the code below into a file named `create_project.ts` in the same file as
+your `.env` and `.gitignore` file.
 
 ```ts title="create_project.ts"
 const accessToken = Deno.env.get("DEPLOY_ACCESS_TOKEN");

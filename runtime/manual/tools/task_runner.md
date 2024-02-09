@@ -1,4 +1,4 @@
-# Task Runner
+# `deno task`
 
 `deno task` provides a cross platform way to define and execute custom commands
 specific to a codebase.
