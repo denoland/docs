@@ -7,6 +7,7 @@ Deno features before they are finalized.
 
 - [start new project (`deno init`)](./init.md)
 - [benchmarker (`deno bench`)](./benchmarker.md)
+- [`deno cache`](./cache.md)
 - [compiling executables (`deno compile`)](./compiler.md)
 - [installer (`deno install`)](./script_installer.md)
 - [Jupyter kernel (`deno jupyter`)](./jupyter.md)
