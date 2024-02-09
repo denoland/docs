@@ -1,4 +1,4 @@
-# Configuration File
+# `deno.json` configuration file
 
 Deno supports a configuration file that allows you to customize the built-in
 TypeScript compiler, formatter, and linter.
