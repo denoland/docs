@@ -8,10 +8,11 @@ Deployments are immutable after they have been created. To deploy a new version
 of the code for an application, a new deployment must be created. Once created,
 deployments remain accessible.
 
-All available deployments are listed on the
-https://dash.deno.com/projects/project-name/deployments page. Old deployments
-can be
-[deleted via the API](https://docs.deno.com/deploy/api/rest/deployments#delete-a-deployment).
+All available deployments are listed on your project page under the
+`Deployments` tab, pictured below. Old deployments can be
+[deleted via API](https://apidocs.deno.com/#delete-/deployments/-deploymentId-).
+
+![showing the deployments tab in the project dashboard](./images/project_deployments.png)
 
 ## Custom domains
 
