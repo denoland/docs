@@ -60,8 +60,8 @@ html:root {
   --ifm-alert-padding-vertical: 2rem;
   --ifm-alert-padding-horizontal: 2rem;
   --ifm-color-info-dark: var(--deploy-medium);
-  --ifm-color-info-contrast-background: var(--gray-00);
-  --ifm-menu-color-background-hover: var(--gray-00);
+  --ifm-color-info-contrast-background: var(--deploy-lightest);
+  --ifm-menu-color-background-hover: var(--deploy-lightest);
   --ifm-code-font-size: 0.875em;
   --ifm-code-padding-horizontal: 0.375em;
   --ifm-code-padding-vertical: 0.1875em;
@@ -82,14 +82,18 @@ html:root {
 }
 
 @media (min-width: 24rem) {
-  :root {
+  html:root {
     --ifm-spacing-horizontal: 2rem;
   }
 }
 
 @media (min-width: 36rem) {
-  :root {
+  html:root {
     --ifm-pre-padding: 2rem;
+  }
+
+  .pagination-nav__link {
+    padding: 2rem 1rem;
   }
 }
 
@@ -121,7 +125,7 @@ html[data-theme="dark"] kbd.DocSearch-Commands-Key {
   color: var(--gray-0);
 }
 
-html[data-theme="dark"] .DocSearch-Button{
+html[data-theme="dark"] .DocSearch-Button {
   border: 1px solid var(--gray-1);
   padding: 0 1rem;
 }
@@ -132,11 +136,10 @@ html[data-theme="light"] kbd.DocSearch-Commands-Key {
   color: var(--gray-3);
 }
 
-html[data-theme="light"] .DocSearch-Button{
+html[data-theme="light"] .DocSearch-Button {
   border: 1px solid var(--gray-4);
   background-color: var(--white);
   padding: 0 1rem;
-
 }
 
 html,
@@ -459,8 +462,6 @@ td p:last-child {
   }
 }
 
-
-
 html .breadcrumbsContainer_src-theme-DocBreadcrumbs-styles-module {
   --ifm-breadcrumb-size-multiplier: 0.9;
   margin-bottom: 0.5rem;
@@ -500,7 +501,6 @@ svg.iconExternalLink_node_modules-\@docusaurus-theme-classic-lib-theme-Icon-Exte
   font-size: 0.75rem;
   margin-top: 2rem;
 }
-
 
 .DocSearch-Button-Placeholder {
   color: var(--docsearch-muted-color);
