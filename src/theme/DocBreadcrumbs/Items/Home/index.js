@@ -16,6 +16,11 @@ export default function HomeBreadcrumbItem() {
         href: "/runtime/manual",
         name: "Runtime",
       };
+    } else if (currentPath.startsWith("/subhosting")) {
+      return {
+        href: "/subhosting/manual",
+        name: "Subhosting",
+      };
     }
     return {
       href: "/",
