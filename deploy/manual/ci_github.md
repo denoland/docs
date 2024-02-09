@@ -33,29 +33,19 @@ file that Deno will run.
 **GitHub Action** mode enables you to add a build step to your deployment
 process by leveraging the `deployctl` [Github action][deploy-action]:
 
-1. Navigate to `<project-name>` project page and select your Github repo under
-   the **Git integration** card.
-
-   ![vite-project](../docs-images/vite-project.png)
+1. Navigate to the `<project-name>` settings page and select your Github repo
+   under the **Git integration** card.
 
 2. Select your branch for the production branch, and in the popup that appears,
    select **Github Action**
 
-   ![vite-branch](../docs-images/vite-branch.png)
-
 3. Click **Ok**
-
-   ![vite-ok](../docs-images/vite-ok.png)
 
 4. Click **Link**
 
-   ![vite-link](../docs-images/vite-link.png)
-
-5. This should take you to a next page, where you see a preview of a
-   `deploy.yml` file that you can download. Download the file and add it to your
-   Github project under `.github/workflows/deploy.yml`
-
-   ![vite-deploy-yaml](../docs-images/vite-deploy-yaml.png)
+5. This should take you to a next page, where you see a button to open the
+   `deploy.yml` file in a Github Editor. From the Github editor you can edit and
+   commit the suggested workflow file to `.github/workflows/deploy.yml`
 
 6. Modify the `deploy.yml` file as appropriate with your build step, Deno
    project name, and entrypoint file:
