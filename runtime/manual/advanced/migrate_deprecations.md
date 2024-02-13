@@ -447,7 +447,7 @@ Use [`new Deno.Command()`](https://deno.land/api?s=Deno.Command) instead.
 - ]);
 - process.close();
 + const command = new Deno.Command("echo", {
-+   args: ["hello world]
++   args: ["hello world"]
 + });
 + const { success, stdout } = await command.output();
   console.log(success);
