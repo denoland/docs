@@ -42,11 +42,11 @@ console.log(password);
 // "Geheimnis"
 ```
 
-## `std/flags`
+## `std/cli`
 
 The Deno standard library has a
-[`std/flags` module](https://deno.land/std/flags/mod.ts) for parsing command
-line arguments.
+[`std/cli` module](https://deno.land/std/cli/mod.ts) for parsing command line
+arguments.
 
 ## Special environment variables
 

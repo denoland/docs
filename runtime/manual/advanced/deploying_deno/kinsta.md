@@ -28,10 +28,10 @@ To do so, your `package.json` should look like this:
 
 ```js
 import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-import { parse } from "https://deno.land/std@$STD_VERSION/flags/mod.ts";
+import { parseArgs } from "https://deno.land/std@$STD_VERSION/cli/mod.ts";
 
 const { args } = Deno;
-const argPort = parse(args).port ? Number(parse(args).port) : 8000;
+const argPort = parseArgs(args).port ? Number(parseArgs(args).port) : 8000;
 
 serve((_req) => new Response("Hello, world"), { port: argPort });
 ```
