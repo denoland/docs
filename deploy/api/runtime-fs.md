@@ -47,8 +47,6 @@ This example lists the contents of a directory and returns this list as a JSON
 object in the response body.
 
 ```js
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
 async function handler(_req) {
   // List the posts in the `blog` directory located at the root
   // of the repository.
@@ -65,7 +63,7 @@ async function handler(_req) {
   });
 }
 
-serve(handler);
+Deno.serve(handler);
 ```
 
 ## `Deno.readFile`
@@ -90,8 +88,6 @@ This example reads the contents of a file into memory as a byte array, then
 returns it as the response body.
 
 ```js
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
 async function handler(_req) {
   // Let's read the README.md file available at the root
   // of the repository to explore the available methods.
@@ -111,7 +107,7 @@ async function handler(_req) {
   return new Response(readme);
 }
 
-serve(handler);
+Deno.serve(handler);
 ```
 
 > Note: to use this feature, you must link a GitHub repository to your project.
@@ -130,8 +126,6 @@ Imagine the following file structure on a GitHub repository:
 The contents of `mod.ts`:
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
 async function handleRequest(request: Request): Promise<Response> {
   const { pathname } = new URL(request.url);
 
@@ -169,7 +163,7 @@ async function handleRequest(request: Request): Promise<Response> {
   );
 }
 
-serve(handleRequest);
+Deno.serve(handleRequest);
 ```
 
 The path provided to the
@@ -192,14 +186,12 @@ This example reads a text file into memory and returns the contents as the
 response body.
 
 ```js
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
 async function handler(_req) {
   const readme = await Deno.readTextFile("./README.md");
-  event.respondWith(new Response(readme));
+  return new Response(readme);
 }
 
-serve(handler);
+Deno.serve(handler);
 ```
 
 ## `Deno.open`
@@ -225,21 +217,16 @@ The path can be a relative or absolute. It can also be a `file:` URL.
 This example opens a file, and then streams the content as the response body.
 
 ```js
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-import { readableStreamFromReader } from "https://deno.land/std@$STD_VERSION/streams/conversion.ts";
-
 async function handler(_req) {
   // Open the README.md file available at the root of the repository.
   const file = await Deno.open("./README.md");
 
-  // Turn the `Deno.File` into a `ReadableStream`. This will automatically close
-  // the file handle when the response is done sending.
-  const body = readableStreamFromReader(file);
-
-  return new Response(body);
+  // Use the `readable` property, which is a `ReadableStream`. This will
+  // automatically close the file handle when the response is done sending.
+  return new Response(file.readable);
 }
 
-serve(handler);
+Deno.serve(handler);
 ```
 
 ## `Deno.File`
@@ -304,8 +291,6 @@ This example gets the size of a file, and returns the result as the response
 body.
 
 ```js
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
 async function handler(_req) {
   // Get file info of the README.md at the root of the repository.
   const info = await Deno.stat("./README.md");
@@ -316,7 +301,7 @@ async function handler(_req) {
   return new Response(`README.md is ${size} bytes large`);
 }
 
-serve(handler);
+Deno.serve(handler);
 ```
 
 ## `Deno.lstat`
@@ -372,15 +357,13 @@ This example calls `Deno.realPath()` to get the absolute path of a file in the
 root of the repository. The result is returned as the response body.
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
 async function handler(_req) {
   const path = await Deno.realPath("./README.md");
 
   return new Response(`The fully resolved path for ./README.md is ${path}`);
 }
 
-serve(handler);
+Deno.serve(handler);
 ```
 
 ## `Deno.readLink`
@@ -402,13 +385,11 @@ This example calls `Deno.readLink()` to get the absolute path of a file in the
 root of the repository. The result is returned as the response body.
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
 async function handler(_req) {
   const path = await Deno.readLink("./my_symlink");
 
   return new Response(`The target path for ./my_symlink is ${path}`);
 }
 
-serve(handler);
+Deno.serve(handler);
 ```

@@ -65,8 +65,6 @@ The return type is a `Response` instance.
 ## Example
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
 function handler(_req) {
   // Create a response with html as its body.
   const response = new Response("<html> Hello </html>", {
@@ -82,7 +80,7 @@ function handler(_req) {
   return response;
 }
 
-serve(handler);
+Deno.serve(handler);
 ```
 
 [clone]: https://developer.mozilla.org/en-US/docs/Web/API/Response/clone

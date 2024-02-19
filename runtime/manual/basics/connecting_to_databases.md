@@ -219,7 +219,6 @@ for Deno, to run a GraphQL API server in Deno.
 #### Run a GraphQL API server with gql
 
 ```ts, ignore
-import { Server } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 import { GraphQLHTTP } from "https://deno.land/x/gql/mod.ts";
 import { makeExecutableSchema } from "https://deno.land/x/graphql_tools@0.0.2/mod.ts";
 import { gql } from "https://deno.land/x/graphql_tag@0.0.1/mod.ts";
@@ -238,23 +237,16 @@ const resolvers = {
 
 const schema = makeExecutableSchema({ resolvers, typeDefs });
 
-const s = new Server({
-  handler: async (req) => {
-    const { pathname } = new URL(req.url);
+Deno.serve({ port: 3000 }, async () => {
+  const { pathname } = new URL(req.url);
 
-    return pathname === "/graphql"
-      ? await GraphQLHTTP<Request>({
-        schema,
-        graphiql: true,
-      })(req)
-      : new Response("Not Found", { status: 404 });
-  },
-  port: 3000,
+  return pathname === "/graphql"
+    ? await GraphQLHTTP<Request>({
+      schema,
+      graphiql: true,
+    })(req)
+    : new Response("Not Found", { status: 404 });
 });
-
-s.listenAndServe();
-
-console.log(`Started on http://localhost:3000`);
 ```
 
 ### Client

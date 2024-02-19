@@ -86,13 +86,11 @@ your connection string into the "Value" field. Now, press "Add". Your
 environment variables is now set.
 
 Let's return back to the editor: to do this, go to the "Overview" tab via the
-left navigation menu, and press "Open Playground". Let's start by the `std/http`
-module so we can start serving HTTP requests:
+left navigation menu, and press "Open Playground". Let's start by serving HTTP
+requests using `Deno.serve()`:
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
-serve(async (req) => {
+Deno.serve(async (req) => {
   return new Response("Not Found", { status: 404 });
 });
 ```
@@ -105,7 +103,6 @@ Next, let's import the Postgres module, read the connection string from the
 environment variables, and create a connection pool.
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 import * as postgres from "https://deno.land/x/postgres@v0.14.0/mod.ts";
 
 // Get the connection string from the environment variable "DATABASE_URL"
@@ -146,7 +143,7 @@ Now that we have a table, we can add the HTTP handlers for the GET and POST
 endpoints.
 
 ```ts
-serve(async (req) => {
+Deno.serve(async (req) => {
   // Parse the URL and check that the requested endpoint is /todos. If it is
   // not, return a 404 response.
   const url = new URL(req.url);

@@ -43,9 +43,7 @@ The return type of `fetch()` is a promise that resolves to a
 The Deno Deploy script below makes a `fetch()` request to the GitHub API for
 each incoming request, and then returns that response from the handler function.
 
-```js
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
+```ts
 async function handler(req: Request): Promise<Response> {
   const resp = await fetch("https://api.github.com/users/denoland", {
     // The init object here has an headers object containing a
@@ -64,7 +62,7 @@ async function handler(req: Request): Promise<Response> {
   });
 }
 
-serve(handler);
+Deno.serve(handler);
 ```
 
 [usvstring]: https://developer.mozilla.org/en-US/docs/Web/API/USVString
