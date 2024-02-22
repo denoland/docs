@@ -22,7 +22,6 @@ information from the user to query our API. The second is Redis. We can grab the
 node package for Redis using the `npm:` modifier:
 
 ```tsx, ignore
-import { Server } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 import { createClient } from "npm:redis@^4.5";
 ```
 
@@ -54,25 +53,18 @@ variable we can pass to the Github API as a username. We'll then pass the
 response back to the user.
 
 ```tsx, ignore
-const server = new Server({
-  handler: async (req) => {
-    const { pathname } = new URL(req.url);
-    // strip the leading slash
-    const username = pathname.substring(1);
-    const resp = await fetch(`https://api.github.com/users/${username}`);
-    const user = await resp.json();
-    return new Response(JSON.stringify(user), {
-        headers: {
-          "content-type": "application/json",
-        },
-      });
-    }
-  },
-
-  port: 3000,
+Deno.serve({ port: 3000 }, async (req) => {
+  const { pathname } = new URL(req.url);
+  // strip the leading slash
+  const username = pathname.substring(1);
+  const resp = await fetch(`https://api.github.com/users/${username}`);
+  const user = await resp.json();
+  return new Response(JSON.stringify(user), {
+    headers: {
+      "content-type": "application/json",
+    },
+  });
 });
-
-server.listenAndServe();
 ```
 
 We'll run this with:
