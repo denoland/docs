@@ -65,3 +65,22 @@ Run these commands to get started
   // Run the benchmarks
   deno bench
 ```
+
+You can add a flag `--lib` to add extra parameters like add name, version and exports fields to deno.json.
+
+```sh
+$ deno init my_deno_project --lib
+✅ Project initialized
+
+```
+
+```
+{
+  "name" : "{{name}}",
+  "version": "1.0.0",
+  "exports": {},
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  }
+}
+```
