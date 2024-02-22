@@ -76,7 +76,7 @@ $ deno init my_deno_project --lib
 
 ```
 {
-  "name" : "{{name}}",
+  "name" : "my_deno_project",
   "version": "1.0.0",
   "exports": {},
   "tasks": {
