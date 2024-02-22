@@ -66,7 +66,7 @@ Run these commands to get started
   deno bench
 ```
 
-You can add a flag `--lib` to add extra parameters like add name, version and exports fields to deno.json.
+You can append a flag `--lib` to add extra parameters like add name, version and exports fields to deno.json.
 
 ```sh
 $ deno init my_deno_project --lib
