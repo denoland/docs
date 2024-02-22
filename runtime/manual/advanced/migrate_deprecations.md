@@ -298,6 +298,40 @@ Use `Deno.FsFile.isTerminal()`, `Deno.stdin.isTerminal()`,
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
+### `Deno.iter()`
+
+Use
+[`iterateReader()`](https://deno.land/std/io/iterate_reader.ts?s=iterateReader)
+from the Standard Library instead.
+
+```diff
++ import { iterateReader } from "https://deno.land/std/io/iterate_reader.ts";
+
+- for await (const chunk of Deno.iter(reader)) {
++ for await (const chunk of iterateReader(reader)) {
+  ...
+}
+```
+
+See [deno#9795][deno#9795] for details.
+
+### `Deno.iterSync()`
+
+Use
+[`iterateReaderSync()`](https://deno.land/std/io/iterate_reader.ts?s=iterateReaderSync)
+from the Standard Library instead.
+
+```diff
++ import { iterateReaderSync } from "https://deno.land/std/io/iterate_reader.ts";
+
+- for (const chunk of Deno.iterSync(reader)) {
++ for (const chunk of iterateReaderSync(reader)) {
+  ...
+}
+```
+
+See [deno#9795][deno#9795] for details.
+
 ### `Deno.Listener.rid`
 
 Use [`Deno.Listener`](https://deno.land/api?s=Deno.Listener) instance methods
