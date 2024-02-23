@@ -72,9 +72,9 @@ You can append a flag `--lib` to add extra parameters like add name, version and
 $ deno init my_deno_project --lib
 ✅ Project initialized
 
-```
+...
 
-```
+$ cat deno.json
 {
   "name" : "my_deno_project",
   "version": "1.0.0",
