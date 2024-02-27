@@ -543,7 +543,7 @@ instead.
 
 ```diff
 - Deno.seekSync(file.rid, 6, Deno.SeekMode.Start);
-+ file.seek(6, Deno.SeekMode.Start);
++ file.seekSync(6, Deno.SeekMode.Start);
 ```
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
