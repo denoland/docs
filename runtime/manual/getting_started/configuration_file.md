@@ -72,7 +72,7 @@ Configuration for [`deno lint`](../tools/linter.md).
 {
   "lint": {
     "include": ["src/"],
-    "exclude": ["src/testdata/", "data/fixtures/**/*.ts"],
+    "exclude": ["src/testdata/", "src/fixtures/**/*.ts"],
     "rules": {
       "tags": ["recommended"],
       "include": ["ban-untagged-todo"],
@@ -96,7 +96,7 @@ Configuration for [`deno fmt`](../tools/formatter.md)
     "singleQuote": true,
     "proseWrap": "preserve",
     "include": ["src/"],
-    "exclude": ["src/testdata/", "data/fixtures/**/*.ts"]
+    "exclude": ["src/testdata/", "src/fixtures/**/*.ts"]
   }
 }
 ```
@@ -131,6 +131,123 @@ The `unstable` property is an array of strings used to configure which unstable
 feature flags should be enabled for your program.
 [Learn more](../tools/unstable_flags.md).
 
+## `include` and `exclude`
+
+Many configurations (ex. `lint`, `fmt`) have an `include` and `exclude` property
+for specifying the files to include.
+
+### `include`
+
+Only the paths or patterns specified here will be included.
+
+```json
+{
+  "lint": {
+    // only format the src/ directory
+    "include": ["src/"]
+  }
+}
+```
+
+### `exclude`
+
+The paths or patterns specified here will be excluded.
+
+```json
+{
+  "lint": {
+    // don't lint the dist/ folder
+    "exclude": ["dist/"]
+  }
+}
+```
+
+This has HIGHER precedence than `include` and will win over `include` if a path
+is matched in both `include` and `exclude`.
+
+```json
+{
+  "lint": {
+    // only lint .js files in the src directory
+    "include": ["src/**/*.js"],
+    // js files in the src/fixtures folder will not be linted
+    "exclude": ["src/fixtures"]
+  }
+}
+```
+
+You may wish to exclude a directory, but include a sub directory. In Deno
+1.41.2+, you may un-exclude a more specific path by specifying a negated glob
+below the more general exclude:
+
+```json
+{
+  "fmt": {
+    // don't format the "fixtures" directory,
+    // but do format "fixtures/scripts"
+    "exclude": [
+      "fixtures",
+      "!fixtures/scripts"
+    ]
+  }
+}
+```
+
+### Top level `exclude`
+
+If there's a directory you never want Deno to fmt, lint, type check, analyze in
+the LSP, etc., then specify it in the top level exclude array:
+
+```json
+{
+  "exclude": [
+    // exclude the dist folder from all sub-commands and the LSP
+    "dist/"
+  ]
+}
+```
+
+Sometimes you may find that you want to un-exclude a path or pattern that's
+excluded in the top level-exclude. In Deno 1.41.2+, you may un-exclude a path by
+specifying a negated glob in a more specific config:
+
+```json
+{
+  "fmt": {
+    "exclude": [
+      // format the dist folder even though it's
+      // excluded at the top level
+      "!dist"
+    ]
+  },
+  "exclude": [
+    "dist/"
+  ]
+}
+```
+
+### Publish - Override .gitignore
+
+The _.gitignore_ is taken into account for the unstable `deno publish` command.
+In Deno 1.41.2+, you can opt-out of excluded files ignored in the _.gitignore_
+by using a negated exclude glob:
+
+```title=".gitignore"
+dist/
+.env
+```
+
+```json title="deno.json"
+{
+  "publish": {
+    "exclude": [
+      // include the .gitignored dist folder
+      "!dist/"
+    ]
+  }
+}
+```
+
 ## Full example
 
 ```json
@@ -142,7 +259,7 @@ feature flags should be enabled for your program.
   },
   "lint": {
     "include": ["src/"],
-    "exclude": ["src/testdata/", "data/fixtures/**/*.ts"],
+    "exclude": ["src/testdata/", "src/fixtures/**/*.ts"],
     "rules": {
       "tags": ["recommended"],
       "include": ["ban-untagged-todo"],
@@ -157,7 +274,7 @@ feature flags should be enabled for your program.
     "singleQuote": true,
     "proseWrap": "preserve",
     "include": ["src/"],
-    "exclude": ["src/testdata/", "data/fixtures/**/*.ts"]
+    "exclude": ["src/testdata/", "src/fixtures/**/*.ts"]
   },
   "lock": false,
   "nodeModulesDir": true,
@@ -165,14 +282,17 @@ feature flags should be enabled for your program.
   "npmRegistry": "https://mycompany.net/artifactory/api/npm/virtual-npm",
   "test": {
     "include": ["src/"],
-    "exclude": ["src/testdata/", "data/fixtures/**/*.ts"]
+    "exclude": ["src/testdata/", "src/fixtures/**/*.ts"]
   },
   "tasks": {
     "start": "deno run --allow-read main.ts"
   },
   "imports": {
     "oak": "https://deno.land/x/oak@v12.4.0/mod.ts"
-  }
+  },
+  "exclude": [
+    "dist/"
+  ]
 }
 ```
 
