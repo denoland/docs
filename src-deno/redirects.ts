@@ -307,4 +307,9 @@ export default function configureRedirects(app: Hono) {
     "/deploy/api/rest/*",
     "https://apidocs.deno.com",
   );
+
+  r(
+    "/deploy/",
+    "/deploy/manual",
+  );
 }
