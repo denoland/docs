@@ -7,7 +7,7 @@
   Functionality is then exported out of `deps.ts` for use by local modules.
 - Continuing this convention, dev only dependencies can be kept in a
   `dev_deps.ts` file.
-- See also [Modules](../manual/basics/modules/index.md)
+- See also [Modules](../manual/basics/modules/index.md).
 
 ## Overview
 
@@ -15,19 +15,17 @@ In Deno there is no concept of a package manager as external modules are
 imported directly into local modules. This raises the question of how to manage
 remote dependencies without a package manager. In big projects with many
 dependencies it will become cumbersome and time consuming to update modules if
-they are all imported individually into individual modules.
+they are all imported individually into separate modules.
 
 The standard practice for solving this problem in Deno is to create a `deps.ts`
 file. All required remote dependencies are referenced in this file and the
 required methods and classes are re-exported. The dependent local modules then
-reference the `deps.ts` rather than the remote dependencies. If now for example
-one remote dependency is used in several files, upgrading to a new version of
-this remote dependency is much simpler as this can be done just within
-`deps.ts`.
+reference the `deps.ts` rather than the remote dependencies. Now if one remote
+dependency is used in several files, upgrading it is much simpler as this can
+all be managed within `deps.ts`.
 
-With all dependencies centralized in `deps.ts`, managing these becomes easier.
 Dev dependencies can also be managed in a separate `dev_deps.ts` file, allowing
-clean separation between dev only and production dependencies.
+clean separation between dev and production dependencies.
 
 ## Example
 
@@ -35,7 +33,8 @@ clean separation between dev only and production dependencies.
 /**
  * deps.ts
  *
- * This module re-exports the required methods from the dependant remote Ramda module.
+ * This module re-exports the required methods 
+ * from the dependant remote Ramda module.
  */
 export {
   add,
@@ -43,14 +42,14 @@ export {
 } from "https://x.nest.land/ramda@0.27.0/source/index.js";
 ```
 
-In this example the same functionality is created as is the case in the
-[local and remote import examples](../manual/basics/modules/index.md). But in
-this case instead of the Ramda module being referenced directly it is referenced
+This example has the same functionality as the
+[local and remote import example](../manual/basics/modules/index.md). However in
+this case, instead of the Ramda module being referenced directly, it is referenced
 by proxy using a local `deps.ts` module.
 
 **Command:** `deno run example.ts`
 
-```ts, ignore
+```ts
 /**
  * example.ts
  */
