@@ -248,6 +248,21 @@ dist/
 }
 ```
 
+Alternatively, explicitly specifying the gitignored paths in an `"include"`
+works as well:
+
+```json
+{
+  "publish": {
+    "include": [
+      "dist/",
+      "README.md",
+      "deno.json"
+    ]
+  }
+}
+```
+
 ## Full example
 
 ```json
