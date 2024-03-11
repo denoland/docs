@@ -211,7 +211,7 @@ Sometimes you may find that you want to un-exclude a path or pattern that's
 excluded in the top level-exclude. In Deno 1.41.2+, you may un-exclude a path by
 specifying a negated glob in a more specific config:
 
-```json
+```jsonc
 {
   "fmt": {
     "exclude": [
