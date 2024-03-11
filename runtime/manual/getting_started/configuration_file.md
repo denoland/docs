@@ -140,7 +140,7 @@ for specifying the files to include.
 
 Only the paths or patterns specified here will be included.
 
-```json
+```jsonc
 {
   "lint": {
     // only format the src/ directory
@@ -153,7 +153,7 @@ Only the paths or patterns specified here will be included.
 
 The paths or patterns specified here will be excluded.
 
-```json
+```jsonc
 {
   "lint": {
     // don't lint the dist/ folder
@@ -165,7 +165,7 @@ The paths or patterns specified here will be excluded.
 This has HIGHER precedence than `include` and will win over `include` if a path
 is matched in both `include` and `exclude`.
 
-```json
+```jsonc
 {
   "lint": {
     // only lint .js files in the src directory
@@ -180,7 +180,7 @@ You may wish to exclude a directory, but include a sub directory. In Deno
 1.41.2+, you may un-exclude a more specific path by specifying a negated glob
 below the more general exclude:
 
-```json
+```jsonc
 {
   "fmt": {
     // don't format the "fixtures" directory,
@@ -198,7 +198,7 @@ below the more general exclude:
 If there's a directory you never want Deno to fmt, lint, type check, analyze in
 the LSP, etc., then specify it in the top level exclude array:
 
-```json
+```jsonc
 {
   "exclude": [
     // exclude the dist folder from all sub-commands and the LSP
@@ -237,7 +237,7 @@ dist/
 .env
 ```
 
-```json title="deno.json"
+```jsonc title="deno.json"
 {
   "publish": {
     "exclude": [
