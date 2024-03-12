@@ -137,7 +137,7 @@ deployments.
 You can list your deployments with:
 
 ```shell
-$ deployctl deployments list
+deployctl deployments list
 ```
 
 Output:
@@ -203,8 +203,8 @@ or want to list deployments from a different project.
 
 Get all the details of a particular deployment using:
 
-```bash
-$ deployctl deployments show
+```shell
+deployctl deployments show
 ```
 
 Output:
@@ -223,11 +223,49 @@ For example, to see the details of the second to last deployment, you can do:
 deployctl deployments show --last --prev
 ```
 
-And to see the details of the one after a specific deployment:
+And to see the details of 2 deployments after a specific deployment:
 
 ```shell
-deployctl deployments show --next 64tbrn8jre9n
+deployctl deployments show 64tbrn8jre9n --next=2
 ```
+
+### Redeploy
+
+The redeploy command creates a new deployment reusing the build of an existing
+deployment, for the purpose of changing the resources associated with it. This
+includes production domains, environment variables and KV databases.
+
+:::info
+
+The semantics of selecting the deployment to redeploy are the same as those of
+the [show subcommand](#show), including `--last`, `--id`, `--next` and `--prev`.
+
+:::
+
+#### Production Domains
+
+If you want to change the routing of the production domains of the project to a
+particular deployment, you can redeploy it with:
+
+```shell
+deployctl deployments redeploy --prod 64tbrn8jre9n
+```
+
+This will create a new deployment with the same code and environment variables
+as the specified deployment, but with the production domains of the project
+pointing to it. For those projects with preview/prod databases (ie projects
+linked to GitHub), this will also set the production database for the new
+deployment.
+
+:::note
+
+This feature is similar to the "promote to production" button found in the web
+UI with the exception that the "promote to production" button does not create a
+new deployment. Instead, the "promote to production" button changes the domain
+routing in-place, however it's restricted to deployments already using the
+production database.
+
+:::
 
 ## Local Development
 
