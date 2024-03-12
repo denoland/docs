@@ -333,6 +333,22 @@ new deployment becomes the new production deployment.
 
 :::
 
+### Delete
+
+You can delete a deployment using the `delete` subcommand:
+
+```shell
+deployctl deployments delete 64tbrn8jre9n
+```
+
+Like `show` and `redeploy`, `delete` can also use `--last`, `--next` and
+`--prev` to select the deployment to delete. Here's an example command that
+deletes all the deployments of a project except the last (use with caution!):
+
+```shell
+while deployctl deployments delete --project=my-project --last --prev --force; do :; done
+```
+
 ## Local Development
 
 For local development you can use the `deno` CLI. To install `deno`, follow the
