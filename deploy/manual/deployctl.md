@@ -245,7 +245,7 @@ the [show subcommand](#show), including `--last`, `--id`, `--next` and `--prev`.
 #### Production Domains
 
 If you want to change the routing of the production domains of the project to a
-particular deployment, you can redeploy it with:
+particular deployment, you can redeploy it with the `--prod` option:
 
 ```shell
 deployctl deployments redeploy --prod 64tbrn8jre9n
@@ -264,6 +264,72 @@ UI with the exception that the "promote to production" button does not create a
 new deployment. Instead, the "promote to production" button changes the domain
 routing in-place, however it's restricted to deployments already using the
 production database.
+
+:::
+
+#### KV Database
+
+If this is a GitHub deployment, it will have 2 databases, one for prod
+deployments and one for preview deployments. You can change the database of a
+deployment by redeploying it with the `--db` option:
+
+```shell
+deployctl deployments redeploy --db=prod --id=64tbrn8jre9n
+```
+
+:::note
+
+When redeploying a deployment to prod, by default it will automatically
+configure it to use the prod database. You can combine both `--prod` and `--db`
+options to opt out of this behavior. For example, the following command will
+redeploy the current production deployment (given the lack of positional
+argument, `--id` or `--last`). The new deployment will become the new production
+deployment, but it will use the preview database instead of the production
+database:
+
+```shell
+deployctl deployments redeploy --prod --db=preview
+```
+
+:::
+
+If your organization has custom databases, you can also set them by UUID:
+
+```shell
+deployctl deployments redeploy --last --db=0b1c3e1b-a527-4055-b864-8bc7884390c9
+```
+
+#### Env Variables
+
+When a deployment is created, it inherits the environment variables of the
+project. Given that the deployments are immutable, their environment variables
+can never be changed. To set new environment variables in a deployment, you need
+to redeploy it using `--env` (to set individual variables) and `--env-file` (to
+load one or more environment files). The following command redeploys the current
+production deployment with the env variables defined in the `.env` and
+`.other-env` files, plus the `DEPLOYMENT_TS` variable set to the current
+timestamp. The resulting deployment will be a preview deployment (ie the
+production domains won't route traffic to it, given the lack of `--prod`).
+
+```shell
+deployctl deployments redeploy --env-file --env-file=.other-env --env=DEPLOYMENT_TS=$(date +%s)
+```
+
+:::note
+
+Be aware that when changing env variables, only the env variables set in the
+redeploy command will be used by the new deployment. The project env variables
+and the env variables of the deployment being redeployed are ignored. If this
+does not suit your needs, please report your feedback at
+https://github.com/denoland/deploy_feedback/issues/
+
+:::
+
+:::note
+
+When you change the project environment variables in the web UI, the current
+production deployment is redeployed with the new environment variables, and the
+new deployment becomes the new production deployment.
 
 :::
 
