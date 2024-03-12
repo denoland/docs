@@ -140,6 +140,8 @@ You can list your deployments with:
 $ deployctl deployments list
 ```
 
+Output:
+
 ```
 ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │ Deployment │ Date │ Status │ Database │ Domain │ Entrypoint │ Branch │ Commit
@@ -205,26 +207,8 @@ Get all the details of a particular deployment using:
 $ deployctl deployments show
 ```
 
-<br/><b>64tbrn8jre9n<span style="font-weight:normal;text-decoration:none;font-style:normal"><br/>------------<br/>Status:<span style="color:#0A0"><b>Production<span style="font-weight:normal;text-decoration:none;font-style:normal"><span style="color:#FFF"><br/>Date:<span style="color:#A50">6
-days<span style="color:#FFF">, 4 hours, 9 minutes, 10 seconds ago (6/3/2024
-8:21:33
-CET)<br/>Project:<span style="color:#A0A">my-project<span style="color:#FFF">
-(e54f23b5-828d-4b7f-af12-706d4591062b)<br/>Organization:<span style="color:#0AA">Arnau
-Orriols<span style="color:#FFF"> [personal]
-(d97822ac-ee20-4ce9-b942-5389330b57ee)<br/>Domain(s):	https://my-project.deno.dev<br/>https://my-project-64tbrn8jre9n.deno.dev<br/>Database:<span style="color:#0A0">Production<span style="color:#FFF">
-(0efa985f-3793-48bc-8c05-f740ffab4ca0)<br/>Entrypoint:	main.ts<br/>Env
-Vars:	HOME<br/>Git<br/>
-Ref:<span style="color:#0AA">main<span style="color:#FFF"> [4b6c506]<br/>
-Message:	change name<br/> Author:	Arnau Orriols
-@<span style="color:#A0A">arnauorriols<span style="color:#FFF">
-[mailto:<span style="color:#0AA">4871949+arnauorriols@users.noreply.github.com<span style="color:#FFF">]<br/>
-Url:		https://github.com/arnauorriols/my-project/commit/4b6c50629ceeeb86601347732d01dc7ed63bf34f<br/>Crons:		another
-cron [*/10 * * * _] <span style="color:#0A0">succeeded<span style="color:#FFF">
-at 12/3/2024 12:30:00 CET after 2 seconds (next at 12/3/2024 12:40:00
-CET)<br/>newest cron [_/10 * * * _] n/a<br/>yet another cron [_/10 * * * *]
-<span style="color:#A00">failed<span style="color:#FFF"> at 12/3/2024 12:20:00
-CET after 2 seconds (next at 12/3/2024 12:30:52
-CET)<br/></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></b></span></span></b>
+Output:
+
 ![deployctl deployments show output](images/deployctl-deployments-show.png)
 
 If no deployment is specified, the command shows the details of the current
