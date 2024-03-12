@@ -182,7 +182,7 @@ or want to list deployments from a different project.
 
 Get all the details of a particular deployment using:
 
-```shell
+```bash
 deployctl deployments show
 
 [1m64tbrn8jre9n[22m
@@ -205,6 +205,8 @@ Crons:		another cron [*/10 * * * *] [32msucceeded[39m at 12/3/2024 11:50:00 CE
 		newest cron [*/10 * * * *] n/a
 		yet another cron [*/10 * * * *] [31mfailed[39m at 12/3/2024 11:40:00 CET after 2 seconds (next at 12/3/2024 11:51:54 CET)
 ```
+
+![deployctl deployments show output](images/deployctl-deployments-show.png.png)
 
 ## Local Development
 
