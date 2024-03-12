@@ -138,30 +138,51 @@ You can list your deployments with:
 
 ```shell
 $ deployctl deployments list
+```
 
+```
 ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│  Deployment  │              Date              │   Status   │  Database  │                  Domain                  │ Entrypoint │  Branch  │  Commit  │
+│ Deployment │ Date │ Status │ Database │ Domain │ Entrypoint │ Branch │ Commit
+│
 ├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ dxseq0jc8402 │ 6/3/2024 23:16:51 CET (5 days) │ Preview    │ Production │ https://my-project-dxseq0jc8402.deno.dev │ main.ts    │ main     │ 099359b  │
-│ 7xr5thz8yjbz │ 6/3/2024 22:58:32 CET (5 days) │ Preview    │ Preview    │ https://my-project-7xr5thz8yjbz.deno.dev │ main.ts    │ another  │ a4d2953  │
-│ 4qr4h5ac3rfn │ 6/3/2024 22:57:05 CET (5 days) │ Failed     │ Preview    │ n/a                                      │ main.ts    │ another  │ 56d2c88  │
-│ 25wryhcqmb9q │ 6/3/2024 22:56:41 CET (5 days) │ Preview    │ Preview    │ https://my-project-25wryhcqmb9q.deno.dev │ main.ts    │ another  │ 4b6c506  │
-│ 64tbrn8jre9n │ 6/3/2024 8:21:33 CET (6 days)  │ Production │ Production │ https://my-project-64tbrn8jre9n.deno.dev │ main.ts    │ main     │ 4b6c506  │
-│ hgqgccnmzg04 │ 6/3/2024 8:17:40 CET (6 days)  │ Failed     │ Production │ n/a                                      │ main.ts    │ main     │ 8071902  │
-│ rxkh1w3g74e8 │ 6/3/2024 8:17:28 CET (6 days)  │ Failed     │ Production │ n/a                                      │ main.ts    │ main     │ b142a59  │
-│ wx6cw9aya64c │ 6/3/2024 8:02:29 CET (6 days)  │ Preview    │ Production │ https://my-project-wx6cw9aya64c.deno.dev │ main.ts    │ main     │ b803784  │
-│ a1qh5fmew2yf │ 5/3/2024 16:25:29 CET (6 days) │ Preview    │ Production │ https://my-project-a1qh5fmew2yf.deno.dev │ main.ts    │ main     │ 4bb1f0f  │
-│ w6pf4r0rrdkb │ 5/3/2024 16:07:35 CET (6 days) │ Preview    │ Production │ https://my-project-w6pf4r0rrdkb.deno.dev │ main.ts    │ main     │ 6e487fc  │
-│ nn700gexgdzq │ 5/3/2024 13:37:11 CET (6 days) │ Preview    │ Production │ https://my-project-nn700gexgdzq.deno.dev │ main.ts    │ main     │ c5b1d1f  │
-│ 98crfqxa6vvf │ 5/3/2024 13:33:52 CET (6 days) │ Preview    │ Production │ https://my-project-98crfqxa6vvf.deno.dev │ main.ts    │ main     │ 090146e  │
-│ xcdcs014yc5p │ 5/3/2024 13:30:58 CET (6 days) │ Preview    │ Production │ https://my-project-xcdcs014yc5p.deno.dev │ main.ts    │ main     │ 5b78c0f  │
-│ btw43kx89ws1 │ 5/3/2024 13:27:31 CET (6 days) │ Preview    │ Production │ https://my-project-btw43kx89ws1.deno.dev │ main.ts    │ main     │ 663452a  │
-│ 62tg1ketkjx7 │ 5/3/2024 13:27:03 CET (6 days) │ Preview    │ Production │ https://my-project-62tg1ketkjx7.deno.dev │ main.ts    │ main     │ 24d1618  │
-│ 07ag6pt6kjex │ 5/3/2024 13:19:11 CET (6 days) │ Preview    │ Production │ https://my-project-07ag6pt6kjex.deno.dev │ main.ts    │ main     │ 4944545  │
-│ 4msyne1rvwj1 │ 5/3/2024 13:17:16 CET (6 days) │ Preview    │ Production │ https://my-project-4msyne1rvwj1.deno.dev │ main.ts    │ main     │ dda85e1  │
-│ 1p8nrfe53bqy │ 5/3/2024 12:53:47 CET (6 days) │ Preview    │ Production │ https://my-project-1p8nrfe53bqy.deno.dev │ main.ts    │ test     │ d93368f  │
-│ n9jk4xkh9vdv │ 5/3/2024 12:52:31 CET (6 days) │ Preview    │ Preview    │ https://my-project-n9jk4xkh9vdv.deno.dev │ main.ts    │ test     │ d93368f  │
-│ gr3z1ysvd2an │ 5/3/2024 12:51:21 CET (6 days) │ Preview    │ Preview    │ https://my-project-gr3z1ysvd2an.deno.dev │ main.ts    │ test     │ bd4bc04  │
+│ dxseq0jc8402 │ 6/3/2024 23:16:51 CET (5 days) │ Preview │ Production │
+https://my-project-dxseq0jc8402.deno.dev │ main.ts │ main │ 099359b │ │
+7xr5thz8yjbz │ 6/3/2024 22:58:32 CET (5 days) │ Preview │ Preview │
+https://my-project-7xr5thz8yjbz.deno.dev │ main.ts │ another │ a4d2953 │ │
+4qr4h5ac3rfn │ 6/3/2024 22:57:05 CET (5 days) │ Failed │ Preview │ n/a │ main.ts
+│ another │ 56d2c88 │ │ 25wryhcqmb9q │ 6/3/2024 22:56:41 CET (5 days) │ Preview
+│ Preview │ https://my-project-25wryhcqmb9q.deno.dev │ main.ts │ another │
+4b6c506 │ │ 64tbrn8jre9n │ 6/3/2024 8:21:33 CET (6 days) │ Production │
+Production │ https://my-project-64tbrn8jre9n.deno.dev │ main.ts │ main │ 4b6c506
+│ │ hgqgccnmzg04 │ 6/3/2024 8:17:40 CET (6 days) │ Failed │ Production │ n/a │
+main.ts │ main │ 8071902 │ │ rxkh1w3g74e8 │ 6/3/2024 8:17:28 CET (6 days) │
+Failed │ Production │ n/a │ main.ts │ main │ b142a59 │ │ wx6cw9aya64c │ 6/3/2024
+8:02:29 CET (6 days) │ Preview │ Production │
+https://my-project-wx6cw9aya64c.deno.dev │ main.ts │ main │ b803784 │ │
+a1qh5fmew2yf │ 5/3/2024 16:25:29 CET (6 days) │ Preview │ Production │
+https://my-project-a1qh5fmew2yf.deno.dev │ main.ts │ main │ 4bb1f0f │ │
+w6pf4r0rrdkb │ 5/3/2024 16:07:35 CET (6 days) │ Preview │ Production │
+https://my-project-w6pf4r0rrdkb.deno.dev │ main.ts │ main │ 6e487fc │ │
+nn700gexgdzq │ 5/3/2024 13:37:11 CET (6 days) │ Preview │ Production │
+https://my-project-nn700gexgdzq.deno.dev │ main.ts │ main │ c5b1d1f │ │
+98crfqxa6vvf │ 5/3/2024 13:33:52 CET (6 days) │ Preview │ Production │
+https://my-project-98crfqxa6vvf.deno.dev │ main.ts │ main │ 090146e │ │
+xcdcs014yc5p │ 5/3/2024 13:30:58 CET (6 days) │ Preview │ Production │
+https://my-project-xcdcs014yc5p.deno.dev │ main.ts │ main │ 5b78c0f │ │
+btw43kx89ws1 │ 5/3/2024 13:27:31 CET (6 days) │ Preview │ Production │
+https://my-project-btw43kx89ws1.deno.dev │ main.ts │ main │ 663452a │ │
+62tg1ketkjx7 │ 5/3/2024 13:27:03 CET (6 days) │ Preview │ Production │
+https://my-project-62tg1ketkjx7.deno.dev │ main.ts │ main │ 24d1618 │ │
+07ag6pt6kjex │ 5/3/2024 13:19:11 CET (6 days) │ Preview │ Production │
+https://my-project-07ag6pt6kjex.deno.dev │ main.ts │ main │ 4944545 │ │
+4msyne1rvwj1 │ 5/3/2024 13:17:16 CET (6 days) │ Preview │ Production │
+https://my-project-4msyne1rvwj1.deno.dev │ main.ts │ main │ dda85e1 │ │
+1p8nrfe53bqy │ 5/3/2024 12:53:47 CET (6 days) │ Preview │ Production │
+https://my-project-1p8nrfe53bqy.deno.dev │ main.ts │ test │ d93368f │ │
+n9jk4xkh9vdv │ 5/3/2024 12:52:31 CET (6 days) │ Preview │ Preview │
+https://my-project-n9jk4xkh9vdv.deno.dev │ main.ts │ test │ d93368f │ │
+gr3z1ysvd2an │ 5/3/2024 12:51:21 CET (6 days) │ Preview │ Preview │
+https://my-project-gr3z1ysvd2an.deno.dev │ main.ts │ test │ bd4bc04 │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 Press enter to fetch the next page [Enter]
 ```
@@ -181,40 +202,47 @@ or want to list deployments from a different project.
 Get all the details of a particular deployment using:
 
 ```bash
-deployctl deployments show
-
-[1m64tbrn8jre9n[22m
-------------
-Status:		[32m[1mProduction[22m[39m
-Date:		[33m6 days[39m, 3 hours, 29 minutes, 55 seconds ago (6/3/2024 8:21:33 CET)
-Project:	[35msoft-newt-53[39m (e54f23b5-828d-4b7f-af12-706d4591062b)
-Organization:	[36mArnau Orriols[39m [personal] (d97822ac-ee20-4ce9-b942-5389330b57ee)
-Domain(s):	https://soft-newt-53.deno-staging.dev
-		https://soft-newt-53-64tbrn8jre9n.deno-staging.dev
-Database:	[32mProduction[39m (0efa985f-3793-48bc-8c05-f740ffab4ca0)
-Entrypoint:	main.ts
-Env Vars:	HOME
-Git
-  Ref:		[36mmain[39m [4b6c506]
-  Message:	change name
-  Author:	Arnau Orriols @[35marnauorriols[39m [mailto:[36m4871949+arnauorriols@users.noreply.github.com[39m]
-  Url:		https://github.com/arnauorriols/soft-newt-53/commit/4b6c50629ceeeb86601347732d01dc7ed63bf34f
-Crons:		another cron [*/10 * * * *] [32msucceeded[39m at 12/3/2024 11:50:00 CET after 2 seconds (next at 12/3/2024 12:00:00 CET)
-		newest cron [*/10 * * * *] n/a
-		yet another cron [*/10 * * * *] [31mfailed[39m at 12/3/2024 11:40:00 CET after 2 seconds (next at 12/3/2024 11:51:54 CET)
+$ deployctl deployments show
 ```
 
+<br/><b>64tbrn8jre9n<span style="font-weight:normal;text-decoration:none;font-style:normal"><br/>------------<br/>Status:<span style="color:#0A0"><b>Production<span style="font-weight:normal;text-decoration:none;font-style:normal"><span style="color:#FFF"><br/>Date:<span style="color:#A50">6
+days<span style="color:#FFF">, 4 hours, 9 minutes, 10 seconds ago (6/3/2024
+8:21:33
+CET)<br/>Project:<span style="color:#A0A">my-project<span style="color:#FFF">
+(e54f23b5-828d-4b7f-af12-706d4591062b)<br/>Organization:<span style="color:#0AA">Arnau
+Orriols<span style="color:#FFF"> [personal]
+(d97822ac-ee20-4ce9-b942-5389330b57ee)<br/>Domain(s):	https://my-project.deno.dev<br/>https://my-project-64tbrn8jre9n.deno.dev<br/>Database:<span style="color:#0A0">Production<span style="color:#FFF">
+(0efa985f-3793-48bc-8c05-f740ffab4ca0)<br/>Entrypoint:	main.ts<br/>Env
+Vars:	HOME<br/>Git<br/>
+Ref:<span style="color:#0AA">main<span style="color:#FFF"> [4b6c506]<br/>
+Message:	change name<br/> Author:	Arnau Orriols
+@<span style="color:#A0A">arnauorriols<span style="color:#FFF">
+[mailto:<span style="color:#0AA">4871949+arnauorriols@users.noreply.github.com<span style="color:#FFF">]<br/>
+Url:		https://github.com/arnauorriols/my-project/commit/4b6c50629ceeeb86601347732d01dc7ed63bf34f<br/>Crons:		another
+cron [*/10 * * * _] <span style="color:#0A0">succeeded<span style="color:#FFF">
+at 12/3/2024 12:30:00 CET after 2 seconds (next at 12/3/2024 12:40:00
+CET)<br/>newest cron [_/10 * * * _] n/a<br/>yet another cron [_/10 * * * *]
+<span style="color:#A00">failed<span style="color:#FFF"> at 12/3/2024 12:20:00
+CET after 2 seconds (next at 12/3/2024 12:30:52
+CET)<br/></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></b></span></span></b>
 ![deployctl deployments show output](images/deployctl-deployments-show.png)
 
 If no deployment is specified, the command shows the details of the current
 production deployment of the project. To see the details of the last deployment,
 use `--last`, and to see the details of a particular deployment, use `--id` (or
 positional argument). You can also use `--next` or `--prev` to navigate the
-deployments chronologically. For example, to see the details of the second to
-last deployment, you can do:
+deployments chronologically.
+
+For example, to see the details of the second to last deployment, you can do:
 
 ```shell
 deployctl deployments show --last --prev
+```
+
+And to see the details of the one after a specific deployment:
+
+```shell
+deployctl deployments show --next 64tbrn8jre9n
 ```
 
 ## Local Development
@@ -246,3 +274,6 @@ section.
 # TODO: json piping
 
 # TODO: decide if text snippet or screenshot
+
+```
+```
