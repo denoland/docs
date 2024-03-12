@@ -30,9 +30,7 @@ The `-A` option in the deno install command grants all permissions to the
 installed script. You can opt not to use it, in which case you will be prompted
 to grant the necessary permissions when needed during the execution of the tool.
 
-## Subcommands
-
-### Deploy
+## Deploy
 
 To perform a new deployment of your code, navigate to the root directory of your
 project and execute:
@@ -41,7 +39,7 @@ project and execute:
 deployctl deploy
 ```
 
-#### Project and Entrypoint
+### Project and Entrypoint
 
 If this is the first deployment of the project, `deployctl` will guess the
 project name based on the Git repo or directory it is in. Similarly, it will
@@ -60,7 +58,7 @@ created automatically.
 deployctl deploy --project=helloworld --entrypoint=src/entrypoint.ts --org=my-team
 ```
 
-#### Include and Exclude Files
+### Include and Exclude Files
 
 By default, deployctl deploys all the files in the current directory
 (recursively, except node_modules directories). You can customize this behavior
@@ -115,7 +113,7 @@ aware that the env variables set with `--env` and `--env-file` are specific for
 the deployment being created and are not added to the list of
 [env variables configured for the project](./environment-variables.md).
 
-#### Production Deployments
+### Production Deployments
 
 Each deployment you create have a unique URL. In addition, a project has a
 "production URL" and custom domains routing trafffic to its "production"
@@ -129,12 +127,12 @@ deployctl deploy --prod
 Learn more about production deployments in the [Deployments](./deployments)
 docs.
 
-### Deployments
+## Deployments
 
 The deployments subcommand groups all the operations around specific
 deployments.
 
-#### List
+### List
 
 You can list your deployments with:
 
@@ -178,7 +176,7 @@ Like with the rest of commands, you can use the `--project` option to specify
 the project of which to list deployments, if you are not in a project directory
 or want to list deployments from a different project.
 
-#### Show
+### Show
 
 Get all the details of a particular deployment using:
 
@@ -206,7 +204,18 @@ Crons:		another cron [*/10 * * * *] [32msucceeded[39m at 12/3/2024 11:50:00 CE
 		yet another cron [*/10 * * * *] [31mfailed[39m at 12/3/2024 11:40:00 CET after 2 seconds (next at 12/3/2024 11:51:54 CET)
 ```
 
-![deployctl deployments show output](images/deployctl-deployments-show.png.png)
+![deployctl deployments show output](images/deployctl-deployments-show.png)
+
+If no deployment is specified, the command shows the details of the current
+production deployment of the project. To see the details of the last deployment,
+use `--last`, and to see the details of a particular deployment, use `--id` (or
+positional argument). You can also use `--next` or `--prev` to navigate the
+deployments chronologically. For example, to see the details of the second to
+last deployment, you can do:
+
+```shell
+deployctl deployments show --last --prev
+```
 
 ## Local Development
 
