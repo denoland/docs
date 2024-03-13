@@ -129,12 +129,11 @@ docs.
 
 ## Deployments
 
-The deployments subcommand groups all the operations around specific
-deployments.
+The deployments subcommand groups all the operations around deployments.
 
 ### List
 
-You can list your deployments with:
+You can list the deployments of a project with:
 
 ```shell
 deployctl deployments list
@@ -259,11 +258,11 @@ deployment.
 
 :::note
 
-This feature is similar to the "promote to production" button found in the web
-UI with the exception that the "promote to production" button does not create a
-new deployment. Instead, the "promote to production" button changes the domain
-routing in-place, however it's restricted to deployments already using the
-production database.
+This feature is similar to the "promote to production" button found in the Deno
+Deploy web application with the exception that the "promote to production"
+button does not create a new deployment. Instead, the "promote to production"
+button changes the domain routing in-place, however it's restricted to
+deployments already using the production database.
 
 :::
 
@@ -296,7 +295,7 @@ deployctl deployments redeploy --prod --db=preview
 If your organization has custom databases, you can also set them by UUID:
 
 ```shell
-deployctl deployments redeploy --last --db=0b1c3e1b-a527-4055-b864-8bc7884390c9
+deployctl deployments redeploy --last --db=5261e096-f9aa-4b72-8440-1c2b5b553def
 ```
 
 #### Env Variables
@@ -305,11 +304,13 @@ When a deployment is created, it inherits the environment variables of the
 project. Given that the deployments are immutable, their environment variables
 can never be changed. To set new environment variables in a deployment, you need
 to redeploy it using `--env` (to set individual variables) and `--env-file` (to
-load one or more environment files). The following command redeploys the current
-production deployment with the env variables defined in the `.env` and
-`.other-env` files, plus the `DEPLOYMENT_TS` variable set to the current
-timestamp. The resulting deployment will be a preview deployment (ie the
-production domains won't route traffic to it, given the lack of `--prod`).
+load one or more environment files).
+
+The following command redeploys the current production deployment with the env
+variables defined in the `.env` and `.other-env` files, plus the `DEPLOYMENT_TS`
+variable set to the current timestamp. The resulting deployment will be a
+preview deployment (ie the production domains won't route traffic to it, given
+the lack of `--prod`).
 
 ```shell
 deployctl deployments redeploy --env-file --env-file=.other-env --env=DEPLOYMENT_TS=$(date +%s)
@@ -327,9 +328,10 @@ https://github.com/denoland/deploy_feedback/issues/
 
 :::note
 
-When you change the project environment variables in the web UI, the current
-production deployment is redeployed with the new environment variables, and the
-new deployment becomes the new production deployment.
+When you change the project environment variables in the Deno Deploy web
+application, the current production deployment is redeployed with the new
+environment variables, and the new deployment becomes the new production
+deployment.
 
 :::
 
@@ -346,8 +348,225 @@ Like `show` and `redeploy`, `delete` can also use `--last`, `--next` and
 deletes all the deployments of a project except the last (use with caution!):
 
 ```shell
-while deployctl deployments delete --project=my-project --last --prev --force; do :; done
+while deployctl deployments delete --project=my-project --last --prev; do :; done
 ```
+
+## Projects
+
+The `projects` subcommand groups all the operations against projects as a whole.
+this includes `list`, `show`, `rename`, `create` and `delete`.
+
+### List
+
+`deployctl projects list` outputs all the projects your user has access to,
+grouped by organization:
+
+```
+Personal org:
+    blog
+    url-shortener
+
+'my-team' org:
+    admin-site
+    main-site
+    analytics
+```
+
+You can filter by organization using `--org`:
+
+```shell
+deployctl projects list --org=my-team
+```
+
+### Show
+
+To see the details of a particular project, use `projects show`. If you are
+inside a project, it will pick up the project id from the config file. You can
+also specify the project using `--project` or the positional argument:
+
+```shell
+deployctl projects show main-site
+```
+
+Output:
+
+```
+main-site
+---------
+Organization:	my-team (5261e096-f9aa-4b72-8440-1c2b5b553def)
+Domain(s):  	https://my-team.com
+		          https://main-site.deno.dev
+Dash URL:	    https://dash.deno.com/projects/8422c515-f68f-49b2-89f3-157f4b144611
+Repository:	  https://github.com/my-team/main-site
+Databases:  	[main] dd28e63e-f495-416b-909a-183380e3a232
+		          [*] e061c76e-4445-409a-bc36-a1a9040c83b3
+Crons:		    another cron [*/10 * * * *] succeeded at 12/3/2024 14:40:00 CET after 2 seconds (next at 12/3/2024 14:50:00 CET)
+		          newest cron [*/10 * * * *] n/a
+		          yet another cron [*/10 * * * *] failed at 12/3/2024 14:40:00 CET after 2 seconds (next at 12/3/2024 14:50:00 CET)
+Deployments:	kcbxc4xwe4mc	c0ph5xa9exb3*	kwkbev9er4h2	dxseq0jc8402	7xr5thz8yjbz
+		          4qr4h5ac3rfn	25wryhcqmb9q	64tbrn8jre9n	hgqgccnmzg04	rxkh1w3g74e8
+		          wx6cw9aya64c	a1qh5fmew2yf	w6pf4r0rrdkb	nn700gexgdzq	98crfqxa6vvf
+		          xcdcs014yc5p	btw43kx89ws1	62tg1ketkjx7	07ag6pt6kjex	4msyne1rvwj1
+```
+
+### Rename
+
+Projects can be renamed easily with the `rename` subcommand. Similarly to the
+other commands, if you run the command from within a project's directory, you
+don't need to specify the current name of the project:
+
+```shell
+deployctl projects rename my-personal-blog
+```
+
+Output:
+
+```
+ℹ Using config file '/private/tmp/blog/deno.json'
+✔ Project 'blog' (8422c515-f68f-49b2-89f3-157f4b144611) found
+✔ Project 'blog' renamed to 'my-personal-blog'
+```
+
+:::note
+
+Keep in mind that the name of the project is part of the preview domains
+(https://my-personal-blog-kcbxc4xwe4mc.deno.dev) and the default production
+domain (https://my-personal-blog.deno.dev). Therefore, when changing the project
+name, the URLs with the previous name will no longer route to the project's
+corresponding deployments.
+
+:::
+
+### Create
+
+You can create an empty project with:
+
+```shell
+deployctl projects create my-new-project
+```
+
+### Delete
+
+You can delete a project with:
+
+```shell
+deployctl projects delete my-new-project
+```
+
+## Top
+
+The `top` subcommand is used to monitor the resource usage of a project in
+real-time:
+
+```shell
+deployctl top
+```
+
+Output:
+
+```
+┌────────┬──────────────────────┬─────────┬───────┬─────────┬──────────┬─────────────┬────────────┬─────────┬─────────┬───────────┬───────────┐
+│ (idx)  │ region               │ Req/min │ CPU%  │ CPU/req │ RSS/5min │ Ingress/min │ Egress/min │ KVr/min │ KVw/min │ QSenq/min │ QSdeq/min │
+├────────┼──────────────────────┼─────────┼───────┼─────────┼──────────┼─────────────┼────────────┼─────────┼─────────┼───────────┼───────────┤
+│ 192069 │ "me-west1"           │       3 │ 0.24  │ 52.5    │ 171.758  │ 2.173       │ 11.825     │       0 │       0 │         0 │         0 │
+│ e8cf9a │ "asia-northeast1"    │      12 │ 0.11  │ 5.86    │ 171.602  │ 4.617       │ 526.807    │       0 │       0 │         0 │         0 │
+│ 8e454d │ "asia-south1"        │      29 │ 0.54  │ 11.36   │ 173.924  │ 7.625       │ 3531.609   │       0 │       0 │         0 │         0 │
+│ 6f5bfc │ "asia-south1"        │       2 │ 0.02  │ 10      │ 109.277  │ 1.844       │ 20.972     │       0 │       0 │         0 │         0 │
+│ b752eb │ "asia-southeast1"    │     199 │ 3.56  │ 10.76   │ 172.351  │ 31.907      │ 18922.383  │       0 │       0 │         0 │         0 │
+│ 9d0f5a │ "europe-west2"       │      35 │ 0.28  │ 4.88    │ 165.159  │ 6.514       │ 414.161    │       0 │       0 │         0 │         0 │
+│ 2f6d35 │ "europe-west2"       │     266 │ 5.88  │ 13.27   │ 167.58   │ 59.008      │ 12984.032  │       0 │       0 │         0 │         0 │
+│ 6d192d │ "europe-west4"       │     108 │ 2.24  │ 12.57   │ 195.256  │ 16.362      │ 9913.759   │       0 │       0 │         0 │         0 │
+│ ef8cb5 │ "europe-west4"       │       0 │ 0.01  │ 0       │ 121.496  │ 0.014       │ 0          │       0 │       0 │         0 │         0 │
+│ 382f55 │ "europe-west4"       │      11 │ 1.27  │ 74.21   │ 109.072  │ 5.366       │ 80.014     │       0 │       0 │         0 │         0 │
+│ 200f5a │ "southamerica-east1" │       5 │ 0.08  │ 10      │ 125.977  │ 1.605       │ 247.71     │       0 │       0 │         0 │         0 │
+│ 059d4e │ "southamerica-east1" │      79 │ 5.11  │ 39.12   │ 192.852  │ 22.86       │ 82451.51   │       0 │       0 │         0 │         0 │
+│ 78d09b │ "us-east4"           │    1003 │ 7.17  │ 4.29    │ 201.97   │ 154.459     │ 15679.388  │       0 │       0 │         0 │         0 │
+│ 57e0da │ "us-east4"           │      12 │ 0.1   │ 5.23    │ 138.924  │ 3.292       │ 33.882     │       0 │       0 │         0 │         0 │
+│ e933ae │ "us-east4"           │     155 │ 1.43  │ 5.55    │ 177.975  │ 32.093      │ 1713.675   │       0 │       0 │         0 │         0 │
+│ 1b534a │ "us-east4"           │    2304 │ 19.62 │ 5.11    │ 194.482  │ 261.459     │ 57665.728  │       0 │       0 │         0 │         0 │
+│ a6f37d │ "us-south1"          │       0 │ 0     │ 0       │ 126.992  │ 0           │ 0          │       0 │       0 │         0 │         0 │
+│ cd0a49 │ "us-south1"          │      27 │ 1.39  │ 31.67   │ 181.944  │ 7.461       │ 16322.601  │       0 │       0 │         0 │         0 │
+│ 0a5661 │ "us-west2"           │      59 │ 0.55  │ 5.67    │ 192.348  │ 9.934       │ 585.351    │       0 │       0 │         0 │         0 │
+│ 2e6dc2 │ "us-west2"           │       4 │ 0.03  │ 4.67    │ 123.879  │ 1.01        │ 6.26       │       0 │       0 │         0 │         0 │
+│ 678a44 │ "us-west2"           │    4072 │ 26.91 │ 3.97    │ 220.545  │ 509.169     │ 72558.061  │       0 │       0 │         0 │         0 │
+│ a0aac9 │ "us-west2"           │    1553 │ 9.28  │ 3.59    │ 170.598  │ 199.28      │ 12704.27   │       0 │       0 │         0 │         0 │
+└────────┴──────────────────────┴─────────┴───────┴─────────┴──────────┴─────────────┴────────────┴─────────┴─────────┴───────────┴───────────┘
+```
+
+The columns are defined as follows:
+
+| Column      | Description                                                                                        |
+| ----------- | -------------------------------------------------------------------------------------------------- |
+| idx         | Instance discriminator. Opaque id to discriminate different executions running in the same region. |
+| Req/min     | Requests per minute received by the project.                                                       |
+| CPU%        | Percentage of CPU used by the project.                                                             |
+| CPU/req     | CPU time per request, in milliseconds.                                                             |
+| RSS/5min    | Max RSS used by the project during the last 5 minutes, in MB.                                      |
+| Ingress/min | Data received by the project per minute, in KB.                                                    |
+| Egress/min  | Data outputed by the project per minute, in KB.                                                    |
+| KVr/min     | KV reads performed by the project per minute.                                                      |
+| KVw/min     | KV writes performed by the project per minute.                                                     |
+| QSenq/min   | Queues enqueues performed by the project per minute.                                               |
+| QSdeq/min   | Queues dequeues performed by the project per minute.                                               |
+
+You can filter by region using `--region`, which accepts substrings and can be
+used multiple times:
+
+```shell
+deployctl top --region=asia --region=southamerica
+```
+
+## Logs
+
+You can fetch the logs of your deployments with `deployctl logs`. It supports
+both live logs where the logs are streamed to the console as they are generated,
+and query persisted logs where the logs generated in the past are fetched.
+
+To show the live logs of the current production deployment of a project:
+
+```shell
+deployctl logs
+```
+
+:::note
+
+Unlike in the Deno Deploy web application, at the moment the logs subcommand
+does not automatically switch to the new production deployment when it changes.
+
+:::
+
+To show the live logs of a particular deployment:
+
+````shell
+deployctl logs --deployment=1234567890ab
+```
+
+Logs can be filtered by level, region and text using `--levels` `--regions` and `--grep` options:
+
+```shell
+deployctl logs --levels=error,info --regions=region1,region2 --grep='unexpected'
+```
+
+To show the persisted logs, use the `--since` and/or `--until` options:
+
+
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="macOS" default>
+
+```sh
+deployctl logs --since=$(date -Iseconds -v-2H) --until=$(date -Iseconds -v-30M)
+```
+
+</TabItem>
+  <TabItem value="linux" label="Linux">
+
+```sh
+curl -fsSL https://deno.land/install.sh | sh
+deployctl logs --since=$(date -Iseconds --date='2 hours ago') --until=$(date -Iseconds --date='30 minutes ago')
+```
+</TabItem>
+</Tabs>
+
 
 ## Local Development
 
@@ -360,7 +579,7 @@ After installation, you can run your scripts locally:
 ```shell
 $ deno run --allow-net=:8000 ./main.ts
 Listening on http://localhost:8000
-```
+````
 
 To watch for file changes add the `--watch` flag:
 
