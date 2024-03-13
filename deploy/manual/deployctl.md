@@ -569,7 +569,18 @@ deployctl logs --since=$(date -Iseconds --date='2 hours ago') --until=$(date -Is
 
 ## API
 
-If you use the [subhosting API](../../subhosting/manual/index.md), you can
+If you use the [subhosting API](../../subhosting/manual/index.md), `deployctl api` will help
+you interact with the API by handling the authentication and headers for you:
+
+```shell
+deployctl api /projects/my-personal-blog/deployments
+```
+
+Use `--method` and `--body` to specify the HTTP method and the request body:
+
+```shell
+deployctl api --method=POST --body='{"name": "main-site"}' organizations/5261e096-f9aa-4b72-8440-1c2b5b553def/projects
+```
 
 ## Local Development
 
@@ -600,6 +611,11 @@ section.
 # TODO: json piping
 
 # TODO: decide if text snippet or screenshot
+
+# TODO: Update rest of docs with new deployctl
+
+- remove need for token management
+- mention deployctl in subhosting getting started
 
 ```
 ```
