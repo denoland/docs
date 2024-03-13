@@ -13,17 +13,9 @@ machines, powered by the [Deno runtime](/runtime/manual).
 
 Let's deploy your first application - it should only take a few minutes.
 
-## Option 1: Start with a template
+## Option 1: Start with an existing app
 
-If you'd like to start out by deploying a pre-built template application, simply
-[log in to the Deno Deploy dashboard](https://dash.deno.com) and click the "New
-Project" button. You can choose to deploy a starter web application using
-[Fresh](https://fresh.deno.dev) or any of our supported web frameworks.
-
-## Option 2: Start with an existing app
-
-If you already have a Deno project hosted on GitHub, you can immediately import
-it in Deno Deploy. 
+Import your existing project and deploy it it with Deno Deploy. 
 
 1. [From the Deno Deploy dashboard](https://dash.deno.com) click the "New Project" button.
 
@@ -38,18 +30,12 @@ Follow the on-screen instructions to deploy your existing application.
 
 Once your deployment is successful you can visit your newly deployed project at the url provided on the success page or manage it in your dashboard.
 
-## Option 3: Start with a playground
-
-A [playground](./playgrounds.md) is a browser-based editor that enables you to
-write and run JavaScript code right away. This is a great choice for just
-kicking the tires on Deno and Deno Deploy!
-[From the Deno Deploy dashboard](https://dash.deno.com), click the "New Project"
-button and choose any of the options with a "Try with a playground" button.
-
-## Option 4: Start from scratch
+## Option 2: Start from scratch
 
 If you'd like to develop and deploy a simple application locally, follow these
-instructions to get started. We'll use the [`deployctl`](./deployctl.md) command
+instructions to get started. (Or use one of our ready to use templates[linktogithubrepostiory]). 
+
+We'll use the [`deployctl`](./deployctl.md) command
 line utility to deploy a local Deno script from your computer.
 
 ### Install Deno and `deployctl`
@@ -177,6 +163,14 @@ deployctl deploy --project=deep-zebra-47 --prod server.ts
 
 In a few moments, your Hello World server will be deployed across ~30 data 
 centers around the world, ready to handle large volumes of traffic.
+
+## Option 3: Start with a playground
+
+A [playground](./playgrounds.md) is a browser-based editor that enables you to
+write and run JavaScript code right away. This is a great choice for just
+kicking the tires on Deno and Deno Deploy!
+[From the Deno Deploy dashboard](https://dash.deno.com), click the "New Project"
+button and choose any of the options with a "Try with a playground" button.
 
 ## Next Steps
 
