@@ -567,6 +567,9 @@ deployctl logs --since=$(date -Iseconds --date='2 hours ago') --until=$(date -Is
 </TabItem>
 </Tabs>
 
+## API
+
+If you use the [subhosting API](../../subhosting/manual/index.md), you can
 
 ## Local Development
 
