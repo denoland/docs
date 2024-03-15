@@ -61,10 +61,10 @@ deployctl deploy --project=helloworld --entrypoint=src/entrypoint.ts --org=my-te
 ### Include and Exclude Files
 
 By default, deployctl deploys all the files in the current directory
-(recursively, except node_modules directories). You can customize this behavior
-using the `--include` and `--exclude` arguments (also supported in the config
-file). These arguments accept specific files, whole directories and globs. Here
-are some examples:
+(recursively, except `node_modules` directories). You can customize this
+behavior using the `--include` and `--exclude` arguments (also supported in the
+config file). These arguments accept specific files, whole directories and
+globs. Here are some examples:
 
 - Include only source and static files:
 
@@ -142,53 +142,33 @@ deployctl deployments list
 Output:
 
 ```
-┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ Deployment │ Date │ Status │ Database │ Domain │ Entrypoint │ Branch │ Commit
-│
-├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ dxseq0jc8402 │ 6/3/2024 23:16:51 CET (5 days) │ Preview │ Production │
-https://my-project-dxseq0jc8402.deno.dev │ main.ts │ main │ 099359b │ │
-7xr5thz8yjbz │ 6/3/2024 22:58:32 CET (5 days) │ Preview │ Preview │
-https://my-project-7xr5thz8yjbz.deno.dev │ main.ts │ another │ a4d2953 │ │
-4qr4h5ac3rfn │ 6/3/2024 22:57:05 CET (5 days) │ Failed │ Preview │ n/a │ main.ts
-│ another │ 56d2c88 │ │ 25wryhcqmb9q │ 6/3/2024 22:56:41 CET (5 days) │ Preview
-│ Preview │ https://my-project-25wryhcqmb9q.deno.dev │ main.ts │ another │
-4b6c506 │ │ 64tbrn8jre9n │ 6/3/2024 8:21:33 CET (6 days) │ Production │
-Production │ https://my-project-64tbrn8jre9n.deno.dev │ main.ts │ main │ 4b6c506
-│ │ hgqgccnmzg04 │ 6/3/2024 8:17:40 CET (6 days) │ Failed │ Production │ n/a │
-main.ts │ main │ 8071902 │ │ rxkh1w3g74e8 │ 6/3/2024 8:17:28 CET (6 days) │
-Failed │ Production │ n/a │ main.ts │ main │ b142a59 │ │ wx6cw9aya64c │ 6/3/2024
-8:02:29 CET (6 days) │ Preview │ Production │
-https://my-project-wx6cw9aya64c.deno.dev │ main.ts │ main │ b803784 │ │
-a1qh5fmew2yf │ 5/3/2024 16:25:29 CET (6 days) │ Preview │ Production │
-https://my-project-a1qh5fmew2yf.deno.dev │ main.ts │ main │ 4bb1f0f │ │
-w6pf4r0rrdkb │ 5/3/2024 16:07:35 CET (6 days) │ Preview │ Production │
-https://my-project-w6pf4r0rrdkb.deno.dev │ main.ts │ main │ 6e487fc │ │
-nn700gexgdzq │ 5/3/2024 13:37:11 CET (6 days) │ Preview │ Production │
-https://my-project-nn700gexgdzq.deno.dev │ main.ts │ main │ c5b1d1f │ │
-98crfqxa6vvf │ 5/3/2024 13:33:52 CET (6 days) │ Preview │ Production │
-https://my-project-98crfqxa6vvf.deno.dev │ main.ts │ main │ 090146e │ │
-xcdcs014yc5p │ 5/3/2024 13:30:58 CET (6 days) │ Preview │ Production │
-https://my-project-xcdcs014yc5p.deno.dev │ main.ts │ main │ 5b78c0f │ │
-btw43kx89ws1 │ 5/3/2024 13:27:31 CET (6 days) │ Preview │ Production │
-https://my-project-btw43kx89ws1.deno.dev │ main.ts │ main │ 663452a │ │
-62tg1ketkjx7 │ 5/3/2024 13:27:03 CET (6 days) │ Preview │ Production │
-https://my-project-62tg1ketkjx7.deno.dev │ main.ts │ main │ 24d1618 │ │
-07ag6pt6kjex │ 5/3/2024 13:19:11 CET (6 days) │ Preview │ Production │
-https://my-project-07ag6pt6kjex.deno.dev │ main.ts │ main │ 4944545 │ │
-4msyne1rvwj1 │ 5/3/2024 13:17:16 CET (6 days) │ Preview │ Production │
-https://my-project-4msyne1rvwj1.deno.dev │ main.ts │ main │ dda85e1 │ │
-1p8nrfe53bqy │ 5/3/2024 12:53:47 CET (6 days) │ Preview │ Production │
-https://my-project-1p8nrfe53bqy.deno.dev │ main.ts │ test │ d93368f │ │
-n9jk4xkh9vdv │ 5/3/2024 12:52:31 CET (6 days) │ Preview │ Preview │
-https://my-project-n9jk4xkh9vdv.deno.dev │ main.ts │ test │ d93368f │ │
-gr3z1ysvd2an │ 5/3/2024 12:51:21 CET (6 days) │ Preview │ Preview │
-https://my-project-gr3z1ysvd2an.deno.dev │ main.ts │ test │ bd4bc04 │
-└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+✔ Page 1 of the list of deployments of the project 'my-project' is ready
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│  Deployment  │               Date               │   Status   │  Database  │                       Domain                       │ Entrypoint │  Branch  │  Commit  │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ kcbxc4xwe4mc │ 12/3/2024 13:21:40 CET (2 days)  │ Preview    │ Preview    │ https://my-project-kcbxc4xwe4mc.deno.dev │ main.ts    │ main     │ 4b6c506  │
+│ c0ph5xa9exb3 │ 12/3/2024 13:21:25 CET (2 days)  │ Production │ Production │ https://my-project-c0ph5xa9exb3.deno.dev │ main.ts    │ main     │ 4b6c506  │
+│ kwkbev9er4h2 │ 12/3/2024 13:21:12 CET (2 days)  │ Preview    │ Preview    │ https://my-project-kwkbev9er4h2.deno.dev │ main.ts    │ main     │ 4b6c506  │
+│ dxseq0jc8402 │ 6/3/2024 23:16:51 CET (8 days)   │ Preview    │ Production │ https://my-project-dxseq0jc8402.deno.dev │ main.ts    │ main     │ 099359b  │
+│ 7xr5thz8yjbz │ 6/3/2024 22:58:32 CET (8 days)   │ Preview    │ Preview    │ https://my-project-7xr5thz8yjbz.deno.dev │ main.ts    │ another  │ a4d2953  │
+│ 4qr4h5ac3rfn │ 6/3/2024 22:57:05 CET (8 days)   │ Failed     │ Preview    │ n/a                                                │ main.ts    │ another  │ 56d2c88  │
+│ 25wryhcqmb9q │ 6/3/2024 22:56:41 CET (8 days)   │ Preview    │ Preview    │ https://my-project-25wryhcqmb9q.deno.dev │ main.ts    │ another  │ 4b6c506  │
+│ 64tbrn8jre9n │ 6/3/2024 8:21:33 CET (8 days)    │ Preview    │ Production │ https://my-project-64tbrn8jre9n.deno.dev │ main.ts    │ main     │ 4b6c506  │
+│ hgqgccnmzg04 │ 6/3/2024 8:17:40 CET (8 days)    │ Failed     │ Production │ n/a                                                │ main.ts    │ main     │ 8071902  │
+│ rxkh1w3g74e8 │ 6/3/2024 8:17:28 CET (8 days)    │ Failed     │ Production │ n/a                                                │ main.ts    │ main     │ b142a59  │
+│ wx6cw9aya64c │ 6/3/2024 8:02:29 CET (8 days)    │ Preview    │ Production │ https://my-project-wx6cw9aya64c.deno.dev │ main.ts    │ main     │ b803784  │
+│ a1qh5fmew2yf │ 5/3/2024 16:25:29 CET (9 days)   │ Preview    │ Production │ https://my-project-a1qh5fmew2yf.deno.dev │ main.ts    │ main     │ 4bb1f0f  │
+│ w6pf4r0rrdkb │ 5/3/2024 16:07:35 CET (9 days)   │ Preview    │ Production │ https://my-project-w6pf4r0rrdkb.deno.dev │ main.ts    │ main     │ 6e487fc  │
+│ nn700gexgdzq │ 5/3/2024 13:37:11 CET (9 days)   │ Preview    │ Production │ https://my-project-nn700gexgdzq.deno.dev │ main.ts    │ main     │ c5b1d1f  │
+│ 98crfqxa6vvf │ 5/3/2024 13:33:52 CET (9 days)   │ Preview    │ Production │ https://my-project-98crfqxa6vvf.deno.dev │ main.ts    │ main     │ 090146e  │
+│ xcdcs014yc5p │ 5/3/2024 13:30:58 CET (9 days)   │ Preview    │ Production │ https://my-project-xcdcs014yc5p.deno.dev │ main.ts    │ main     │ 5b78c0f  │
+│ btw43kx89ws1 │ 5/3/2024 13:27:31 CET (9 days)   │ Preview    │ Production │ https://my-project-btw43kx89ws1.deno.dev │ main.ts    │ main     │ 663452a  │
+│ 62tg1ketkjx7 │ 5/3/2024 13:27:03 CET (9 days)   │ Preview    │ Production │ https://my-project-62tg1ketkjx7.deno.dev │ main.ts    │ main     │ 24d1618  │
+│ 07ag6pt6kjex │ 5/3/2024 13:19:11 CET (9 days)   │ Preview    │ Production │ https://my-project-07ag6pt6kjex.deno.dev │ main.ts    │ main     │ 4944545  │
+│ 4msyne1rvwj1 │ 5/3/2024 13:17:16 CET (9 days)   │ Preview    │ Production │ https://my-project-4msyne1rvwj1.deno.dev │ main.ts    │ main     │ dda85e1  │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 Press enter to fetch the next page [Enter]
 ```
-
-![deployctl deployments list output](images/deployctl-deployments-list.png)
 
 This command outputs pages of 20 deployments by default. You can iterate over
 the pages with the enter key, and use the `--page` and `--limit` options to
@@ -208,7 +188,30 @@ deployctl deployments show
 
 Output:
 
-![deployctl deployments show output](images/deployctl-deployments-show.png)
+```
+✔ The production deployment of the project 'my-project' is 'c0ph5xa9exb3'
+✔ The details of the deployment 'c0ph5xa9exb3' are ready:
+
+c0ph5xa9exb3
+------------
+Status:       Production
+Date:         2 days, 12 hours, 29 minutes, 46 seconds ago (12/3/2024 13:21:25 CET)
+Project:      my-project (e54f23b5-828d-4b7f-af12-706d4591062b)
+Organization:	my-team (d97822ac-ee20-4ce9-b942-5389330b57ee)
+Domain(s):    https://my-project.deno.dev
+              https://my-project-c0ph5xa9exb3.deno.dev
+Database:     Production (0efa985f-3793-48bc-8c05-f740ffab4ca0)
+Entrypoint:   main.ts
+Env Vars:     HOME
+Git
+  Ref:        main [4b6c506]
+  Message:    change name
+  Author:     John Doe @johndoe [mailto:johndoe@deno.com]
+  Url:        https://github.com/arnauorriols/my-project/commit/4b6c50629ceeeb86601347732d01dc7ed63bf34f
+Crons:        another cron [*/10 * * * *] succeeded at 15/3/2024 1:50:00 CET after 2 seconds (next at 15/3/2024 2:00:00 CET)
+              newest cron [*/10 * * * *] n/a
+              yet another cron [*/10 * * * *] failed at 15/3/2024 1:40:00 CET after 2 seconds (next at 15/3/2024 1:51:54 CET)
+```
 
 If no deployment is specified, the command shows the details of the current
 production deployment of the project. To see the details of the last deployment,
@@ -465,32 +468,36 @@ deployctl top
 Output:
 
 ```
-┌────────┬──────────────────────┬─────────┬───────┬─────────┬──────────┬─────────────┬────────────┬─────────┬─────────┬───────────┬───────────┐
-│ (idx)  │ region               │ Req/min │ CPU%  │ CPU/req │ RSS/5min │ Ingress/min │ Egress/min │ KVr/min │ KVw/min │ QSenq/min │ QSdeq/min │
-├────────┼──────────────────────┼─────────┼───────┼─────────┼──────────┼─────────────┼────────────┼─────────┼─────────┼───────────┼───────────┤
-│ 192069 │ "me-west1"           │       3 │ 0.24  │ 52.5    │ 171.758  │ 2.173       │ 11.825     │       0 │       0 │         0 │         0 │
-│ e8cf9a │ "asia-northeast1"    │      12 │ 0.11  │ 5.86    │ 171.602  │ 4.617       │ 526.807    │       0 │       0 │         0 │         0 │
-│ 8e454d │ "asia-south1"        │      29 │ 0.54  │ 11.36   │ 173.924  │ 7.625       │ 3531.609   │       0 │       0 │         0 │         0 │
-│ 6f5bfc │ "asia-south1"        │       2 │ 0.02  │ 10      │ 109.277  │ 1.844       │ 20.972     │       0 │       0 │         0 │         0 │
-│ b752eb │ "asia-southeast1"    │     199 │ 3.56  │ 10.76   │ 172.351  │ 31.907      │ 18922.383  │       0 │       0 │         0 │         0 │
-│ 9d0f5a │ "europe-west2"       │      35 │ 0.28  │ 4.88    │ 165.159  │ 6.514       │ 414.161    │       0 │       0 │         0 │         0 │
-│ 2f6d35 │ "europe-west2"       │     266 │ 5.88  │ 13.27   │ 167.58   │ 59.008      │ 12984.032  │       0 │       0 │         0 │         0 │
-│ 6d192d │ "europe-west4"       │     108 │ 2.24  │ 12.57   │ 195.256  │ 16.362      │ 9913.759   │       0 │       0 │         0 │         0 │
-│ ef8cb5 │ "europe-west4"       │       0 │ 0.01  │ 0       │ 121.496  │ 0.014       │ 0          │       0 │       0 │         0 │         0 │
-│ 382f55 │ "europe-west4"       │      11 │ 1.27  │ 74.21   │ 109.072  │ 5.366       │ 80.014     │       0 │       0 │         0 │         0 │
-│ 200f5a │ "southamerica-east1" │       5 │ 0.08  │ 10      │ 125.977  │ 1.605       │ 247.71     │       0 │       0 │         0 │         0 │
-│ 059d4e │ "southamerica-east1" │      79 │ 5.11  │ 39.12   │ 192.852  │ 22.86       │ 82451.51   │       0 │       0 │         0 │         0 │
-│ 78d09b │ "us-east4"           │    1003 │ 7.17  │ 4.29    │ 201.97   │ 154.459     │ 15679.388  │       0 │       0 │         0 │         0 │
-│ 57e0da │ "us-east4"           │      12 │ 0.1   │ 5.23    │ 138.924  │ 3.292       │ 33.882     │       0 │       0 │         0 │         0 │
-│ e933ae │ "us-east4"           │     155 │ 1.43  │ 5.55    │ 177.975  │ 32.093      │ 1713.675   │       0 │       0 │         0 │         0 │
-│ 1b534a │ "us-east4"           │    2304 │ 19.62 │ 5.11    │ 194.482  │ 261.459     │ 57665.728  │       0 │       0 │         0 │         0 │
-│ a6f37d │ "us-south1"          │       0 │ 0     │ 0       │ 126.992  │ 0           │ 0          │       0 │       0 │         0 │         0 │
-│ cd0a49 │ "us-south1"          │      27 │ 1.39  │ 31.67   │ 181.944  │ 7.461       │ 16322.601  │       0 │       0 │         0 │         0 │
-│ 0a5661 │ "us-west2"           │      59 │ 0.55  │ 5.67    │ 192.348  │ 9.934       │ 585.351    │       0 │       0 │         0 │         0 │
-│ 2e6dc2 │ "us-west2"           │       4 │ 0.03  │ 4.67    │ 123.879  │ 1.01        │ 6.26       │       0 │       0 │         0 │         0 │
-│ 678a44 │ "us-west2"           │    4072 │ 26.91 │ 3.97    │ 220.545  │ 509.169     │ 72558.061  │       0 │       0 │         0 │         0 │
-│ a0aac9 │ "us-west2"           │    1553 │ 9.28  │ 3.59    │ 170.598  │ 199.28      │ 12704.27   │       0 │       0 │         0 │         0 │
-└────────┴──────────────────────┴─────────┴───────┴─────────┴──────────┴─────────────┴────────────┴─────────┴─────────┴───────────┴───────────┘
+┌────────┬────────────────┬────────────────────────┬─────────┬───────┬─────────┬──────────┬─────────────┬────────────┬─────────┬─────────┬───────────┬───────────┐
+│ (idx)  │ deployment     │ region                 │ Req/min │ CPU%  │ CPU/req │ RSS/5min │ Ingress/min │ Egress/min │ KVr/min │ KVw/min │ QSenq/min │ QSdeq/min │
+├────────┼────────────────┼────────────────────────┼─────────┼───────┼─────────┼──────────┼─────────────┼────────────┼─────────┼─────────┼───────────┼───────────┤
+│ 6b80e8 │ "kcbxc4xwe4mc" │ "asia-northeast1"      │      80 │ 0.61  │ 4.56    │ 165.908  │ 11.657      │ 490.847    │       0 │       0 │         0 │         0 │
+│ 08312f │ "kcbxc4xwe4mc" │ "asia-northeast1"      │      76 │ 3.49  │ 27.58   │ 186.278  │ 19.041      │ 3195.288   │       0 │       0 │         0 │         0 │
+│ 77c10b │ "kcbxc4xwe4mc" │ "asia-south1"          │      28 │ 0.13  │ 2.86    │ 166.806  │ 7.354       │ 111.478    │       0 │       0 │         0 │         0 │
+│ 15e356 │ "kcbxc4xwe4mc" │ "asia-south1"          │      66 │ 0.97  │ 8.93    │ 162.288  │ 17.56       │ 4538.371   │       0 │       0 │         0 │         0 │
+│ a06817 │ "kcbxc4xwe4mc" │ "asia-southeast1"      │     126 │ 0.44  │ 2.11    │ 140.087  │ 16.504      │ 968.794    │       0 │       0 │         0 │         0 │
+│ d012b6 │ "kcbxc4xwe4mc" │ "asia-southeast1"      │     119 │ 2.32  │ 11.72   │ 193.704  │ 23.44       │ 8359.829   │       0 │       0 │         0 │         0 │
+│ 7d9a3d │ "kcbxc4xwe4mc" │ "australia-southeast1" │       8 │ 0.97  │ 75      │ 158.872  │ 10.538      │ 3.027      │       0 │       0 │         0 │         0 │
+│ 3c21be │ "kcbxc4xwe4mc" │ "australia-southeast1" │       1 │ 0.04  │ 90      │ 105.292  │ 0.08        │ 1.642      │       0 │       0 │         0 │         0 │
+│ b75dc7 │ "kcbxc4xwe4mc" │ "europe-west2"         │     461 │ 5.43  │ 7.08    │ 200.573  │ 63.842      │ 9832.936   │       0 │       0 │         0 │         0 │
+│ 33607e │ "kcbxc4xwe4mc" │ "europe-west2"         │      35 │ 0.21  │ 3.69    │ 141.98   │ 9.438       │ 275.788    │       0 │       0 │         0 │         0 │
+│ 9be3d2 │ "kcbxc4xwe4mc" │ "europe-west2"         │     132 │ 0.92  │ 4.19    │ 180.654  │ 15.959      │ 820.513    │       0 │       0 │         0 │         0 │
+│ 33a859 │ "kcbxc4xwe4mc" │ "europe-west3"         │    1335 │ 7.57  │ 3.4     │ 172.032  │ 178.064     │ 10967.918  │       0 │       0 │         0 │         0 │
+│ 3f54ce │ "kcbxc4xwe4mc" │ "europe-west4"         │     683 │ 4.76  │ 4.19    │ 187.802  │ 74.696      │ 7565.017   │       0 │       0 │         0 │         0 │
+│ cf881c │ "kcbxc4xwe4mc" │ "europe-west4"         │     743 │ 3.95  │ 3.19    │ 177.213  │ 86.974      │ 6087.454   │       0 │       0 │         0 │         0 │
+│ b4565b │ "kcbxc4xwe4mc" │ "me-west1"             │       3 │ 0.21  │ 55      │ 155.46   │ 2.181       │ 0.622      │       0 │       0 │         0 │         0 │
+│ b97970 │ "kcbxc4xwe4mc" │ "southamerica-east1"   │       3 │ 0.08  │ 25      │ 186.049  │ 1.938       │ 0.555      │       0 │       0 │         0 │         0 │
+│ fd7a08 │ "kcbxc4xwe4mc" │ "us-east4"             │       3 │ 0.32  │ 80      │ 201.101  │ 0.975       │ 58.495     │       0 │       0 │         0 │         0 │
+│ 95d68a │ "kcbxc4xwe4mc" │ "us-east4"             │     133 │ 1.05  │ 4.77    │ 166.052  │ 28.107      │ 651.737    │       0 │       0 │         0 │         0 │
+│ c473e7 │ "kcbxc4xwe4mc" │ "us-east4"             │       0 │ 0     │ 0       │ 174.154  │ 0.021       │ 0          │       0 │       0 │         0 │         0 │
+│ ebabfb │ "kcbxc4xwe4mc" │ "us-east4"             │      19 │ 0.15  │ 4.78    │ 115.732  │ 7.764       │ 67.054     │       0 │       0 │         0 │         0 │
+│ eac700 │ "kcbxc4xwe4mc" │ "us-south1"            │     114 │ 2.37  │ 12.54   │ 183.001  │ 18.401      │ 22417.397  │       0 │       0 │         0 │         0 │
+│ cd2194 │ "kcbxc4xwe4mc" │ "us-south1"            │      35 │ 0.33  │ 5.68    │ 145.871  │ 8.142       │ 91.236     │       0 │       0 │         0 │         0 │
+│ 140fec │ "kcbxc4xwe4mc" │ "us-west2"             │     110 │ 1.43  │ 7.84    │ 115.298  │ 18.093      │ 977.993    │       0 │       0 │         0 │         0 │
+│ 51689f │ "kcbxc4xwe4mc" │ "us-west2"             │    1105 │ 7.66  │ 4.16    │ 187.277  │ 154.876     │ 14648.383  │       0 │       0 │         0 │         0 │
+│ c5806e │ "kcbxc4xwe4mc" │ "us-west2"             │     620 │ 4.38  │ 4.24    │ 192.291  │ 109.086     │ 9685.688   │       0 │       0 │         0 │         0 │
+└────────┴────────────────┴────────────────────────┴─────────┴───────┴─────────┴──────────┴─────────────┴────────────┴─────────┴─────────┴───────────┴───────────┘
+⠼ Streaming...
 ```
 
 The columns are defined as follows:
@@ -498,12 +505,13 @@ The columns are defined as follows:
 | Column      | Description                                                                                        |
 | ----------- | -------------------------------------------------------------------------------------------------- |
 | idx         | Instance discriminator. Opaque id to discriminate different executions running in the same region. |
+| deployment  | The id of the deployment running in the executing instance.                                        |
 | Req/min     | Requests per minute received by the project.                                                       |
 | CPU%        | Percentage of CPU used by the project.                                                             |
 | CPU/req     | CPU time per request, in milliseconds.                                                             |
 | RSS/5min    | Max RSS used by the project during the last 5 minutes, in MB.                                      |
 | Ingress/min | Data received by the project per minute, in KB.                                                    |
-| Egress/min  | Data outputed by the project per minute, in KB.                                                    |
+| Egress/min  | Data output by the project per minute, in KB.                                                      |
 | KVr/min     | KV reads performed by the project per minute.                                                      |
 | KVw/min     | KV writes performed by the project per minute.                                                     |
 | QSenq/min   | Queues enqueues performed by the project per minute.                                               |
@@ -610,12 +618,11 @@ section.
 
 # TODO: json piping
 
-# TODO: decide if text snippet or screenshot
-
 # TODO: Update rest of docs with new deployctl
 
 - remove need for token management
 - mention deployctl in subhosting getting started
+- mention redeploy to prod in promote to production docs
 
 ```
 ```
