@@ -20,28 +20,28 @@ Import a project and run it on the edge it with Deno Deploy.
 1. [From the Deno Deploy dashboard](https://dash.deno.com) click the "New Project" button.
 
 2. Connect to your GitHub account and select the repository you would like to deploy.
-Follow the on-screen instructions to deploy your existing application.
 
-3. Complete the Project Configuration form. This will create a GitHub action to deploy your project. Give your project a name and select from the optional framework presets. If you are not using a framework, you can set up your build settings using the form.
+3. Follow the on-screen instructions to deploy your existing application. 
+
+    If your project requires a build step, use the Project Configuration form to create a GitHub action to deploy your project. Give your project a name and select from the optional framework presets. If you are not using a framework, you can set up your build settings using the form.
 
 4. Confirm that your build options are correct and click the "Deploy Project" button to kick off your new Github action and deploy your project.
 
-In a few moments, your project will be deployed across ~30 data 
-centers around the world, ready to handle large volumes of traffic. Once your deployment is successful you can visit your newly deployed project at the url provided on the success page or manage it in your dashboard.
+In a few moments, your project will be deployed across ~12 data 
+centers around the world, ready to handle large volumes of traffic. 
+
+Once your deployment is successful you can visit your newly deployed project at the url provided on the success page or manage it in your dashboard.
 
 ## Option 2: Start from scratch
 
 If you'd like to develop and deploy a simple application, follow these
 instructions to get started. 
 
-We'll use the [`deployctl`](./deployctl.md) command
-line utility to deploy a local Deno script from your computer.
+We'll use the [`deployctl`](./deployctl.md) command line utility to deploy a local Deno script from your computer.
 
 ### Install Deno and `deployctl`
 
-If you haven't already, you can 
-[install the Deno runtime](/runtime/manual/getting_started/installation) 
-using one of the commands below:
+If you haven't already, you can [install the Deno runtime](/runtime/manual/getting_started/installation) using one of the commands below:
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
 
@@ -72,7 +72,7 @@ curl -fsSL https://deno.land/install.sh | sh
 After Deno is installed, install the [`deployctl`](./deployctl.md) utility:
 
 ```
-deno install -A --no-check -r -f https://deno.land/x/deploy/deployctl.ts
+deno install -Arf jsr:@deno/deployctl
 ```
 
 You can confirm `deployctl` has been installed correctly by running:
@@ -105,10 +105,14 @@ Your server should be viewable at [localhost:8000](http://localhost:8000).
 ## Option 3: Start with a playground
 
 A [playground](./playgrounds.md) is a browser-based editor that enables you to
-write and run JavaScript code right away. This is a great choice for just
-kicking the tires on Deno and Deno Deploy!
-[From the Deno Deploy dashboard](https://dash.deno.com), click the "New Project"
-button and choose any of the options with a "Try with a playground" button.
+write and run JavaScript or TypeScript code right away This is a great choice for just kicking the tires on Deno and Deno Deploy!
+
+From the [Deno Deploy dashboard](https://dash.deno.com), click the "New Playground" button to create a playground. We also have a variety of ready built tutorials for you to try out Deno Deploy try them out by clicking on "Learning Playground" or visiting:\
+[Simple HTTP server playground](https://dash.deno.com/tutorial/tutorial-http)\
+[Using the Deno KV database playground](https://dash.deno.com/tutorial/tutorial-http-kv)\
+[RESTful API server playground](https://dash.deno.com/tutorial/tutorial-restful)\
+[Realtime app with WebSockets playground](https://dash.deno.com/tutorial/tutorial-websocket)\
+[Recurring tasks with Deno.cron playground](https://dash.deno.com/tutorial/tutorial-cron)
 
 ## Next Steps
 
