@@ -127,11 +127,6 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "deno info",
-          id: "manual/tools/dependency_inspector",
-        },
-        {
-          type: "doc",
           label: "deno doc",
           id: "manual/tools/documentation_generator",
         },
@@ -142,8 +137,18 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno info",
+          id: "manual/tools/dependency_inspector",
+        },
+        {
+          type: "doc",
           label: "deno init",
           id: "manual/tools/init",
+        },
+        {
+          type: "doc",
+          label: "deno install",
+          id: "manual/tools/script_installer",
         },
         {
           type: "doc",
@@ -159,11 +164,6 @@ const sidebars = {
           type: "doc",
           label: "deno repl",
           id: "manual/tools/repl",
-        },
-        {
-          type: "doc",
-          label: "deno install",
-          id: "manual/tools/script_installer",
         },
         {
           type: "doc",
