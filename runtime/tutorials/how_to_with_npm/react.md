@@ -228,7 +228,7 @@ export default Dinosaur;
 
 Let's start the React app:
 
-```
+```console
 deno task start
 ```
 

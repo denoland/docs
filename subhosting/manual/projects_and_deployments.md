@@ -38,7 +38,7 @@ Let's look at an example of the API endpoint required to make this happen.
 In the [previous chapter](./getting_started.md), you created a new project and
 noted its `id` property. In the example in the previous chapter, the ID was:
 
-```
+```console
 f084712a-b23b-4aba-accc-3c2de0bfa26a
 ```
 

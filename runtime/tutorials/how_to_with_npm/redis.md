@@ -21,14 +21,14 @@ We need two modules. The first is the Deno server. We'll use this to get the
 information from the user to query our API. The second is Redis. We can grab the
 node package for Redis using the `npm:` modifier:
 
-```tsx, ignore
+```tsx
 import { createClient } from "npm:redis@^4.5";
 ```
 
 We create a Redis client using `createClient` and connect to our local Redis
 server:
 
-```tsx, ignore
+```tsx
 // make a connection to the local instance of redis
 const client = createClient({
   url: "redis://localhost:6379",
@@ -52,7 +52,7 @@ handler function in our server. We strip the leading slash so we are left with a
 variable we can pass to the Github API as a username. We'll then pass the
 response back to the user.
 
-```tsx, ignore
+```tsx
 Deno.serve({ port: 3000 }, async (req) => {
   const { pathname } = new URL(req.url);
   // strip the leading slash
@@ -69,7 +69,7 @@ Deno.serve({ port: 3000 }, async (req) => {
 
 We'll run this with:
 
-```tsx, ignore
+```tsx
 deno run --allow-net main.ts
 ```
 
@@ -86,14 +86,14 @@ Once we have our response from the Github API, we can cache this within Redis
 using `client.set`, with our username as the key and the user object as the
 value:
 
-```tsx, ignore
+```tsx
 await client.set(username, JSON.stringify(user));
 ```
 
 Next time we request the same username, we can use `client.get` to get the
 cached user:
 
-```tsx, ignore
+```tsx
 const cached_user = await client.get(username);
 ```
 
@@ -103,7 +103,7 @@ that user in the cache. If we do we'll serve the cached result. If not, we'll
 call the Github API to get the user, cache it, the serve the API result. In both
 cases, we'll add a custom header to show which version we're serving:
 
-```tsx, ignore
+```tsx
 const server = new Server({
   handler: async (req) => {
     const { pathname } = new URL(req.url);

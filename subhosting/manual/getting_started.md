@@ -105,7 +105,7 @@ deno run -A --env create_project.ts
 If everything goes according to plan, you should see output that looks something
 like this:
 
-```
+```console
 {
   id: "f084712a-b23b-4aba-accc-3c2de0bfa26a",
   name: "strong-fox-44",

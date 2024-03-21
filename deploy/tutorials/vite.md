@@ -63,7 +63,7 @@ Since there is a build step here, you will need to use the Github Actions mode.
 
 6. Modify the `deploy.yml` file so that it looks like this:
 
-   ```
+   ```console
    name: Deploy
    on: [push]
 
@@ -116,7 +116,7 @@ Since there is a build step here, you will need to use the Github Actions mode.
 Alternatively, you can use `deployctl` directly to deploy `vite-project` to Deno
 Deploy.
 
-```
+```console
 cd /dist
 deployctl deploy --project=<project-name> https://deno.land/std@$STD_VERSION/http/file_server.ts
 ```

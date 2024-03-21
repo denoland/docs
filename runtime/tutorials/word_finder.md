@@ -137,7 +137,7 @@ HTML template with data and then return the customized HTML back to the viewer.
 We can conveniently rely on the `/usr/share/dict/words` file as our dictionary
 which is a standard file present on most Unix-like operating systems.
 
-```jsx, ignore
+```jsx
 // server.js
 
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";

@@ -64,7 +64,7 @@ outputB();
 If `module_a.ts` is located in `/home/alice/deno` then the output of
 `deno run --allow-read module_a.ts` is:
 
-```
+```console
 Module A's import.meta.url file:///home/alice/deno/module_a.ts
 Module A's mainModule url file:///home/alice/deno/module_a.ts
 Is module A the main module via import.meta.main? true

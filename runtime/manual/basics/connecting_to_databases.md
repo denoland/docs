@@ -13,7 +13,7 @@ for Deno.
 
 ### Connect to MySQL with deno_mysql
 
-```ts, ignore
+```ts
 import { Client } from "https://deno.land/x/mysql/mod.ts";
 
 const client = await new Client().connect({
@@ -26,11 +26,12 @@ const client = await new Client().connect({
 
 ## Postgres
 
-[deno-postgres](https://deno.land/x/postgres) is a lightweight PostgreSQL driver for Deno focused on developer experience.
+[deno-postgres](https://deno.land/x/postgres) is a lightweight PostgreSQL driver
+for Deno focused on developer experience.
 
 ### Connect to Postgres with deno-postgres
 
-```ts, ignore
+```ts
 import { Client } from "https://deno.land/x/postgres/mod.ts";
 
 const client = new Client({
@@ -48,7 +49,7 @@ for Node.js and Deno.
 
 ### Connect to Postgres with postgresjs
 
-```js, ignore
+```js
 import postgres from "https://deno.land/x/postgresjs/mod.js";
 
 const sql = postgres("postgres://username:password@host:port/database");
@@ -97,7 +98,7 @@ There are two primary solutions to connect to SQLite in Deno:
 [sqlite3](https://deno.land/x/sqlite3) provides JavaScript bindings to the
 SQLite3 C API, using [Deno FFI](../runtime/ffi_api.md).
 
-```ts, ignore
+```ts
 import { Database } from "https://deno.land/x/sqlite3@LATEST_VERSION/mod.ts";
 
 const db = new Database("test.db");
@@ -111,7 +112,7 @@ db.close();
 TypeScript. The wrapper made specifically for Deno and uses a version of SQLite3
 compiled to WebAssembly (WASM).
 
-```ts, ignore
+```ts
 import { DB } from "https://deno.land/x/sqlite/mod.ts";
 
 const db = new DB("test.db");
@@ -128,7 +129,7 @@ modules in Deno with a CDN, see [Using npm packages with CDNs](../node/cdns.md).
 
 ### Connect to Firebase with the firestore npm module
 
-```js, ignore
+```js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
 
 import {
@@ -171,7 +172,7 @@ with a CDN, see [Using npm packages with CDNs](../node/cdns.md).
 
 ### Connect to Supabase with the supabase-js npm module
 
-```js, ignore
+```js
 import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
 const options = {
@@ -203,7 +204,7 @@ Deno supports multiple ORMs, including Prisma and DenoDB.
 
 #### Connect to DenoDB
 
-```ts, ignore
+```ts
 import {
   Database,
   DataTypes,
@@ -235,7 +236,7 @@ for Deno, to run a GraphQL API server in Deno.
 
 #### Run a GraphQL API server with gql
 
-```ts, ignore
+```ts
 import { GraphQLHTTP } from "https://deno.land/x/gql/mod.ts";
 import { makeExecutableSchema } from "https://deno.land/x/graphql_tools@0.0.2/mod.ts";
 import { gql } from "https://deno.land/x/graphql_tag@0.0.1/mod.ts";
@@ -275,7 +276,7 @@ CDN read [here](../node/cdns.md).
 
 #### Make GraphQL client calls with the graphql npm module
 
-```js, ignore
+```js
 import { buildSchema, graphql } from "https://esm.sh/graphql";
 
 const schema = buildSchema(`

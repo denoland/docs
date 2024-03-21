@@ -16,7 +16,7 @@ _Note: Hashbangs do not work on Windows._
 In this program, we give the context permission to access the environment
 variables and print the Deno installation path.
 
-```ts, ignore
+```ts
 #!/usr/bin/env -S deno run --allow-env
 
 /**
@@ -59,7 +59,7 @@ Start the script by calling it like any other command.
 You may not wish to use an extension for your script's filename. In this case
 supply one using the `--ext` flag.
 
-```shell, ignore
+```shell
 $ cat my_script
 #!/usr/bin/env -S deno run --allow-env --ext=js
 console.log("Hello!");

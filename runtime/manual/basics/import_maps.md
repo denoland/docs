@@ -4,7 +4,7 @@ In order for Deno to resolve a _bare specifier_ like `"react"` or `"lodash"`, it
 needs to be told where to look for it. Does `"lodash"` refer to an npm module or
 does it map to an https URL?
 
-```ts, ignore
+```ts
 import lodash from "lodash";
 ```
 
