@@ -40,7 +40,7 @@ You have now a html page that says "Hello" and has a logo.
 
 To deploy this repo on Deno Deploy, from the `static-site` repository, run:
 
-```
+```console
 deployctl deploy --project=careful-goat-90 https://deno.land/std@$STD_VERSION/http/file_server.ts
 ```
 

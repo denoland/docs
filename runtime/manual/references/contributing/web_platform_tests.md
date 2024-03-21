@@ -63,7 +63,7 @@ Python 3.
 
 You can specify the following flags to customize behaviour:
 
-```
+```console
 --rebuild
     Rebuild the manifest instead of downloading. This can take up to 3 minutes.
 
@@ -77,7 +77,7 @@ Run all tests like specified in `expectation.json`.
 
 You can specify the following flags to customize behaviour:
 
-```
+```console
 --release
     Use the ./target/release/deno binary instead of ./target/debug/deno
 
@@ -91,7 +91,7 @@ You can specify the following flags to customize behaviour:
 You can also specify exactly which tests to run by specifying one of more
 filters after a `--`:
 
-```
+```console
 ./tools/wpt.ts run -- hr-time streams/piping/general
 ```
 
@@ -101,7 +101,7 @@ Update the `expectation.json` to match the current reality.
 
 You can specify the following flags to customize behaviour:
 
-```
+```console
 --release
     Use the ./target/release/deno binary instead of ./target/debug/deno
 
@@ -115,7 +115,7 @@ You can specify the following flags to customize behaviour:
 You can also specify exactly which tests to run by specifying one of more
 filters after a `--`:
 
-```
+```console
 ./tools/wpt.ts update -- hr-time streams/piping/general
 ```
 

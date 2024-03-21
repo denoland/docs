@@ -39,7 +39,7 @@ import maps.
 
 Then your script can use the bare specifier `std`:
 
-```js, ignore
+```js
 import { assertEquals } from "std/assert/mod.ts";
 
 assertEquals(1, 2);

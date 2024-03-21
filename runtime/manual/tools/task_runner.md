@@ -58,7 +58,7 @@ task to be in the same directory the user ran the task from and then output the
 current working directory which is now that directory (remember, this works on
 Windows too because deno task is cross platform).
 
-```
+```json
 {
   "tasks": {
     "my_task": "cd $INIT_CWD && pwd"
@@ -162,7 +162,7 @@ export VAR=hello && echo $VAR && deno eval "console.log('Deno: ' + Deno.env.get(
 
 Would output:
 
-```
+```console
 hello
 Deno: hello
 ```
@@ -171,7 +171,7 @@ Deno: hello
 
 To specify environment variable(s) before a command, list them like so:
 
-```
+```console
 VAR=hello VAR2=bye deno run main.ts
 ```
 
@@ -196,7 +196,7 @@ VAR=hello && echo $VAR && deno eval "console.log('Deno: ' + Deno.env.get('VAR'))
 
 We will get the following output:
 
-```
+```console
 hello
 Deno: undefined
 ```
@@ -298,7 +298,7 @@ Note that redirecting input and multiple redirects are currently not supported.
 Glob expansion is supported in Deno 1.34 and above. This allows for specifying
 globs to match files in a cross platform way.
 
-```
+```console
 # match .ts files in the current and descendant directories
 echo **/*.ts
 # match .ts files in the current directory

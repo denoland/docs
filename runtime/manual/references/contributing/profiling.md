@@ -1089,6 +1089,6 @@ Options:
 
 Particularly useful ones:
 
-```
+```console
 --async-stack-traces
 ```

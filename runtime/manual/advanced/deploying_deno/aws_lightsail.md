@@ -19,7 +19,7 @@ Before continuing, make sure you have:
 To focus on the deployment, our app will simply be a `main.ts` file that returns
 a string as an HTTP response:
 
-```ts, ignore
+```ts
 import { Application } from "https://deno.land/x/oak/mod.ts";
 
 const app = new Application();
@@ -36,7 +36,7 @@ build the Docker image.
 
 In our `Dockerfile`, let's add:
 
-```Dockerfile, ignore
+```Dockerfile
 FROM denoland/deno
 
 EXPOSE 8000
@@ -52,7 +52,7 @@ CMD ["run", "--allow-net", "main.ts"]
 
 Then, in our `docker-compose.yml`:
 
-```yml, ignore
+```yml
 version: '3'
 
 services:
@@ -81,20 +81,20 @@ Then, let's tag and push our new image, replacing `username` with yours:
 Then, let's build the image locally. Note our `docker-compose.yml` file will
 name the build `deno-image`.
 
-```shell, ignore
+```shell
 docker compose -f docker-compose.yml build
 ```
 
 Let's [tag](https://docs.docker.com/engine/reference/commandline/tag/) the local
 image with `{{ username }}/deno-on-aws-lightsail`:
 
-```shell, ignore
+```shell
 docker tag deno-image {{ username }}/deno-on-aws-lightsail
 ```
 
 We can now push the image to Docker Hub:
 
-```shell, ignore
+```shell
 docker push {{ username }}/deno-on-aws-lightsail
 ```
 
@@ -158,7 +158,7 @@ Let's create a new file `container.template.json`, which contains configuration
 for how to make the service container deployment. Note the similarities these
 option values have with the inputs we entered manually in the previous section.
 
-```json, ignore
+```json
 {
   "containers": {
     "app": {
@@ -188,7 +188,7 @@ option values have with the inputs we entered manually in the previous section.
 
 Let's add the below to your `.github/workflows/deploy.yml` file:
 
-```yml, ignore
+```yml
 name: Build and Deploy to AWS Lightsail
 
 on:
@@ -244,20 +244,20 @@ jobs:
 Whoa there is a lot going on here! The last two steps are most important:
 `Build Docker Image` and `Push and Deploy`.
 
-```shell, ignore
+```shell
 docker build -t ${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}:release .
 ```
 
 This command builds our Docker image with the name `container-service-2` and
 tags it `release`.
 
-```shell, ignore
+```shell
 aws lightsail push-container-image ...
 ```
 
 This command pushes the local image to our Lightsail container.
 
-```shell, ignore
+```shell
 aws lightsail get-container-images --service-name ${service_name} | jq --raw-output ".containerImages[0].image" > image.txt
 ```
 
@@ -265,7 +265,7 @@ This command retrieves the image information and, using
 [`jq`](https://stedolan.github.io/jq/), parses it and saves the image name in a
 local file `image.txt`.
 
-```shell, ignore
+```shell
 jq --arg image $(cat image.txt) '.containers.app.image = $image' container.template.json > container.json
 ```
 
@@ -274,7 +274,7 @@ This command uses the image name saved in `image.txt` and
 `container.json`. This options file will be passed to `aws lightsail` for the
 final deployment in the next step.
 
-```shell, ignore
+```shell
 aws lightsail create-container-service-deployment --service-name ${service_name} --cli-input-json file://$(pwd)/container.json
 ```
 

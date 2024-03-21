@@ -116,13 +116,9 @@ registries, which are objects which contain two required properties:
 - `"schema"` - a string, which is an Express-like path matching expression,
   which defines how URLs are built on the registry. The syntax is directly based
   on [path-to-regexp](https://github.com/pillarjs/path-to-regexp). For example,
-  if the following was the specifier for a URL on the registry:
-
-  ```
-  https://example.com/a_package@v1.0.0/mod.ts
-  ```
-
-  The schema value might be something like this:
+  if the specifier for a URL on the registry was
+  `https://example.com/a_package@v1.0.0/mod.ts`, the schema value might be
+  something like this:
 
   ```json
   {
@@ -297,7 +293,7 @@ When an item is returned that ends in `/`, the language server will present it
 to the client as a "folder" which will be represented in the client. So a
 registry wishing to provide sub-navigation to a folder structure like this:
 
-```
+```console
 examples/
 └─┬─ first.ts
   └─ second.ts

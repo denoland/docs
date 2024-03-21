@@ -38,7 +38,7 @@ git clone --recurse-submodules https://github.com/denoland/deno.git
 [Update or Install Rust](https://www.rust-lang.org/tools/install). Check that
 Rust installed/updated correctly:
 
-```
+```console
 rustc -V
 cargo -V
 ```
@@ -65,7 +65,7 @@ Line Tools_. Run `xcode-select --install` to install it without XCode.)
 [CMake](https://cmake.org/) is also required, but does not ship with the
 _Command Line Tools_.
 
-```
+```console
 brew install cmake
 ```
 
@@ -73,7 +73,7 @@ brew install cmake
 
 For Apple aarch64 users `lld` must be installed.
 
-```
+```console
 brew install llvm
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
@@ -138,7 +138,7 @@ Windows users can download the latest binary release from
 The easiest way to build Deno is by using a precompiled version of V8:
 > for WSL make sure you have sufficient memory allocated in .wslconfig
 
-```
+```console
 cargo build -vv
 ```
 
@@ -146,7 +146,7 @@ However, you may also want to build Deno and V8 from source code if you are
 doing lower-level V8 development, or using a platform that does not have
 precompiled versions of V8:
 
-```
+```console
 V8_FROM_SOURCE=1 cargo build -vv
 ```
 

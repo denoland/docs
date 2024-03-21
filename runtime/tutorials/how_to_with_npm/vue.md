@@ -298,7 +298,7 @@ export default defineConfig({
 
 Next, let's create a folder named `router`. In it, let's create `index.ts`:
 
-```
+```console
 mkdir router && touch router/index.ts
 ```
 

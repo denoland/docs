@@ -71,13 +71,13 @@ curl -fsSL https://deno.land/install.sh | sh
 
 After Deno is installed, install the [`deployctl`](./deployctl.md) utility:
 
-```
+```console
 deno install -Arf jsr:@deno/deployctl
 ```
 
 You can confirm `deployctl` has been installed correctly by running:
 
-```
+```console
 deployctl --help
 ```
 
@@ -94,7 +94,7 @@ Deno.serve(() => new Response("Hello, world!"));
 
 You can test that it works by running it with the command below:
 
-```
+```console
 deno run --allow-net server.ts
 ```
 

@@ -18,7 +18,7 @@ The pre-requisite for this is:
 To focus on the deployment, our app will simply be a `main.ts` file that returns
 a string as an HTTP response:
 
-```ts, ignore
+```ts
 import { Application } from "https://deno.land/x/oak/mod.ts";
 
 const app = new Application();
@@ -35,7 +35,7 @@ build the Docker image.
 
 In our `Dockerfile`, let's add:
 
-```Dockerfile, ignore
+```Dockerfile
 FROM denoland/deno
 
 EXPOSE 8000
@@ -51,7 +51,7 @@ CMD ["run", "--allow-net", "main.ts"]
 
 Then, in our `docker-compose.yml`:
 
-```yml, ignore
+```yml
 version: '3'
 
 services:
@@ -78,7 +78,7 @@ pull Docker images. In order to use this registry, let's
 
 After that, we'll create a new private registry named `deno-on-digital-ocean`:
 
-```shell, ignore
+```shell
 doctl registry create deno-on-digital-ocean
 ```
 
@@ -86,20 +86,20 @@ Using our Dockerfile and docker-compose.yml, we'll build a new image, tag it,
 and push it to the registry. Note that `docker-compose.yml` will name the build
 locally as `deno-image`.
 
-```shell, ignore
+```shell
 docker compose -f docker-compose.yml build
 ```
 
 Let's [tag](https://docs.docker.com/engine/reference/commandline/tag/) it with
 `new`:
 
-```shell, ignore
+```shell
 docker tag deno-image registry.digitalocean.com/deno-on-digital-ocean/deno-image:new
 ```
 
 Now we can push it to the registry.
 
-```shell, ignore
+```shell
 docker push registry.digitalocean.com/deno-on-digital-ocean/deno-image:new
 ```
 
@@ -123,7 +123,7 @@ your Droplet and then `console` to SSH into the virtual machine. (Or you can
 
 To pull down the `deno-image` image and run it, let's run:
 
-```shell, ignore
+```shell
 docker run -d --restart always -it -p 8000:8000 --name deno-image registry.digitalocean.com/deno-on-digital-ocean/deno-image:new
 ```
 
@@ -152,7 +152,7 @@ on the virtual machine in its `~/.ssh/authorized_keys` file.
 
 To do this, first let's run `ssh-keygen` on your local machine:
 
-```shell, ignore
+```shell
 ssh-keygen
 ```
 
@@ -160,7 +160,7 @@ When prompted for an email, **be sure to use your GitHub email** for the GitHub
 Action to authenticate properly. Your final output should look something like
 this:
 
-```
+```console
 Output
 Your identification has been saved in /your_home/.ssh/id_rsa
 Your public key has been saved in /your_home/.ssh/id_rsa.pub
@@ -187,7 +187,7 @@ manually copy it, ssh into your Droplet, and pasting it to
 
 Using `ssh-copy-id`:
 
-```shell, ignore
+```shell
 ssh-copy-id {{ username }}@{{ host }}
 ```
 
@@ -196,13 +196,13 @@ copy `id_rsa.pub` key from your local machine and paste it to your Droplet's
 `~/.ssh/authorized_keys` file. If you've named your key something other than
 `id_rsa`, you can pass it with the `-i` flag to the command:
 
-```shell, ignore
+```shell
 ssh-copy-id -i ~/.ssh/mykey {{ username }}@{{ host }}
 ```
 
 To test whether this is done successfully:
 
-```shell, ignore
+```shell
 ssh -i ~/.ssh/mykey {{ username }}@{{ host }}
 ```
 
@@ -214,7 +214,7 @@ The final step is to put this all together. We're basically taking each step
 during the manual deployment and adding them to a GitHub Actions workflow yml
 file:
 
-```yml, ignore
+```yml
 name: Deploy to Digital Ocean
 
 on:

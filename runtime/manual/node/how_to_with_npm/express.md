@@ -12,13 +12,13 @@ Deno.
 
 Let's create `main.ts`:
 
-```
+```console
 touch main.ts
 ```
 
 In `main.ts`, let's create a simple server:
 
-```ts, ignore
+```ts
 // @deno-types="npm:@types/express@4.17.15"
 import express from "npm:express@4.18.2";
 
@@ -33,15 +33,13 @@ app.listen(8000);
 
 Let's run this server:
 
-```
+```console
 deno run -A main.ts
 ```
 
 And point our browser to `localhost:8000`. You should see:
 
-```
-Welcome to the Dinosaur API!
-```
+**Welcome to the Dinosaur API!**
 
 ## Add data and routes
 
@@ -52,7 +50,7 @@ Feel free to
 
 Let's create `data.json`:
 
-```
+```console
 touch data.json
 ```
 
@@ -61,7 +59,7 @@ And paste in the dinosaur data.
 Next, let's import that data into `main.ts`. Let's add this line at the top of
 the file:
 
-```ts, ignore
+```ts
 import data from "./data.json" assert { type: "json" };
 ```
 
@@ -69,7 +67,7 @@ Then, we can create the routes to access that data. To keep it simple, let's
 just define `GET` handlers for `/api/` and `/api/:dinosaur`. Add the below after
 the `const app = express();` line:
 
-```ts, ignore
+```ts
 app.get("/", (req, res) => {
   res.send("Welcome to the Dinosaur API!");
 });
@@ -97,7 +95,7 @@ app.listen(8000);
 Let's run the server with `deno run -A main.ts` and check out
 `localhost:8000/api`. You should see a list of dinosaurs:
 
-```json, ignore
+```json
 [
   {
     "name": "Aardonyx",
@@ -116,7 +114,7 @@ Let's run the server with `deno run -A main.ts` and check out
 
 And when we go to `localhost:8000/api/aardonyx`:
 
-```json, ignore
+```json
 {
   "name": "Aardonyx",
   "description": "An early stage in the evolution of sauropods."

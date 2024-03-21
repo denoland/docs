@@ -15,7 +15,7 @@ query some local data. We're only going to need three files for this:
 
 We'll start by creating them:
 
-```shell, ignore
+```shell
 touch schema.ts resolvers.ts main.ts
 ```
 
@@ -40,7 +40,7 @@ special **Query** type in GraphQL. We have two queries:
 
 We're going to export all this within our `typeDefs` type definitions, variable:
 
-```tsx, ignore
+```tsx
 export const typeDefs = `
   type Dinosaur {
     name: String
@@ -65,7 +65,7 @@ our list of dinosaurs and all the resolver is going to do is either a) pass that
 entire list to the client if the user requests the `dinosaurs` query, or pass
 just one if the user requests the `dinosaur` query.
 
-```tsx, ignore
+```tsx
 const dinosaurs = [
   {
     name: "Aardonyx",
@@ -95,7 +95,7 @@ the name to a name in our dataset.
 In our `main.ts` we're going to import the `ApolloServer` as well as `graphql`
 and our `typeDefs` from the schema and our resolvers:
 
-```tsx, ignore
+```tsx
 import { ApolloServer } from "npm:@apollo/server@^4.1";
 import { startStandaloneServer } from "npm:@apollo/server@4.1/standalone";
 import { graphql } from "npm:graphql@16.6";
@@ -122,7 +122,7 @@ up and running quickly.
 
 All that is left to do now is run the server:
 
-```shell, ignore
+```shell
 deno run --allow-net --allow-read --allow-env main.ts
 ```
 
@@ -130,7 +130,7 @@ You should see `Server running on: 127.0.0.1:8000` in your terminal. If you go
 to that address you will see the Apollo sandbox where we can enter our
 `dinosaurs` query:
 
-```graphql, ignore
+```graphql
 query {
   dinosaurs {
     name
@@ -160,7 +160,7 @@ This will return our dataset:
 
 Or if we want just one `dinosaur`:
 
-```graphql, ignore
+```graphql
 query {
   dinosaur(name:"Aardonyx") {
     name
@@ -171,7 +171,7 @@ query {
 
 Which returns:
 
-```graphql, ignore
+```graphql
 {
   "data": {
     "dinosaur": {

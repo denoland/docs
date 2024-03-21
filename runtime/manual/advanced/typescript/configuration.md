@@ -9,7 +9,7 @@ That being said, Deno does support using a TypeScript configuration file. To use
 a TypeScript configuration file with Deno, you may provide a path on the command
 line, or use the default. For example:
 
-```
+```console
 > deno run --config ./deno.json main.ts
 ```
 

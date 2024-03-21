@@ -201,7 +201,7 @@ Deno.test("database", async (t) => {
 
 Outputs:
 
-```
+```console
 test database ...
   test insert user ... ok (2ms)
   test insert book ... ok (14ms)
@@ -298,7 +298,7 @@ The filter flags accept a string or a pattern as value.
 
 Assuming the following tests:
 
-```ts, ignore
+```ts
 Deno.test({ name: "my-test", fn: myTest });
 Deno.test({ name: "test-1", fn: test1 });
 Deno.test({ name: "test-2", fn: test2 });
@@ -469,7 +469,7 @@ export function foo(fn) {
 This way, we can call `foo(bar)` in the application code or wrap a spy function
 around `bar` and call `foo(spy)` in the testing code:
 
-```js, ignore
+```js
 import sinon from "npm:sinon";
 import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 import { bar, foo } from "./my_file.js";
@@ -509,7 +509,7 @@ export function foo() {
 
 And then `import` in a test file:
 
-```js, ignore
+```js
 import sinon from "npm:sinon";
 import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 import { foo, funcs } from "./my_file.js";

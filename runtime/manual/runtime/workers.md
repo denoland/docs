@@ -125,7 +125,7 @@ self.onmessage = async (e) => {
 
 **log.txt**
 
-```
+```console
 hello world
 ```
 

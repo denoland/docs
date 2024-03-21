@@ -10,7 +10,7 @@ We'll use the Planetscale serverless driver, `@planetscale/database`, to work
 with Deno. First we want to create `main.ts` and import the connect method from
 this package:
 
-```tsx, ignore
+```tsx
 import { connect } from "npm:@planetscale/database@^1.4";
 ```
 
@@ -37,7 +37,7 @@ export PASSWORD=<password>
 
 Then call them using `Deno.env`:
 
-```tsx, ignore
+```tsx
 const config = {
   host: Deno.env.get("HOST"),
   username: Deno.env.get("USERNAME"),
@@ -50,7 +50,7 @@ const conn = connect(config);
 This will also work on Deno Deploy if you set the environment variables in the
 dashboard. Run with:
 
-```shell, ignore
+```shell
 deno run --allow-net --allow-env main.ts
 ```
 
@@ -61,7 +61,7 @@ The `conn` object is now an open connection to our Planetscale database.
 Now that you have the connection running, you can `conn.execute()` with SQL
 commands to create tables and insert the initial data:
 
-```tsx, ignore
+```tsx
 await conn.execute(
   "CREATE TABLE dinosaurs (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(255) NOT NULL, description varchar(255) NOT NULL);",
 );
@@ -75,14 +75,14 @@ await conn.execute(
 We can use same `conn.execute()` to also write our queries. Let's get a list of
 all our dinosaurs:
 
-```tsx, ignore
+```tsx
 const results = await conn.execute("SELECT * FROM `dinosaurs`");
 console.log(results.rows);
 ```
 
 The result:
 
-```tsx, ignore
+```tsx
 [
   {
     id: 1,
@@ -101,7 +101,7 @@ The result:
 We can also get just a single row from the database by specifying a dinosaur
 name:
 
-```tsx, ignore
+```tsx
 const result = await conn.execute(
   "SELECT * FROM `dinosaurs` WHERE `name` = 'Deno'",
 );
@@ -110,7 +110,7 @@ console.log(result.rows);
 
 Which gives us a single row result:
 
-```tsx, ignore
+```tsx
 [{ id: 3, name: "Deno", description: "The fastest dinosaur that ever lived." }];
 ```
 

@@ -156,7 +156,7 @@ curl --dump-header - --request POST --data '{"quote": "A program that has not be
 
 The output might look like something below.
 
-```
+```console
 HTTP/1.1 201 Created
 transfer-encoding: chunked
 content-type: application/json; charset=utf-8
