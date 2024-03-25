@@ -7,119 +7,93 @@ preview deployment.
 
 There are two modes of operation for the Git integration:
 
-1. Select your organization name, and repository. _If your repository or
-   organization does not show up, make sure the [Deno Deploy GitHub App][ghapp]
-   is installed on your repository._
-2. Select a production branch. Code deployed from this branch will be deployed
-   as a production deployment instead of a preview deployment.
-3. Choose either **Automatic** or **GitHub Actions** deployment mode.
-   - **Automatic**: Deno Deploy will automatically pull code and assets from
-     your repository source every time you push, and deploy it. This mode is
-     very fast, but does not allow for a build step. _This is the recommended
-     mode for most users._
-   - **GitHub Actions**: In this mode, you push your code and assets to Deno
-     Deploy from a GitHub Actions workflow. This allows you to perform a build
-     step before deploying. Below, we go into more detail about the different
-     configurations for **Automatic** and **Github Actions** mode.
+- **Automatic**: Deno Deploy will automatically pull code and assets from your
+  repository source every time you push, and deploy it. This mode is very fast,
+  but does not allow for a build step. _This is the recommended mode for most
+  users._
+- **GitHub Actions**: In this mode, you push your code and assets to Deno Deploy
+  from a GitHub Actions workflow. This allows you to perform a build step before
+  deploying.
+
+Deno Deploy will select an appropriate mode based on your custom deployment
+configuration. Below, we go into more detail about the different configurations
+for **Automatic** and **GitHub Actions** mode.
 
 ## Automatic
 
-If you select **Automatic** mode above, you'll subsequently have to select a
-file in your Github repo as the "entrypoint" file. The entry file is simply the
-file that Deno will run.
+If your project doesn't require any additional build steps, then the system
+choose **Automatic** mode. The entrypoint file is simply the file that Deno
+Deploy will run.
 
-## GitHub Action
+## GitHub Actions
 
-**GitHub Action** mode enables you to add a build step to your deployment
-process by leveraging the `deployctl` [Github action][deploy-action]:
+If you enter a command in **Install Step** and/or **Build Step** in the
+**Project Configuration**, Deno Deploy will create a necessary GitHub Actions
+workflow file and push it into your repository. In this workflow file, we
+leverage the `deployctl` [Github action][deploy-action] to deploy your project.
+You can do whatever you need to do, such as running a build command, before
+deploying it to Deno Deploy.
 
-1. Navigate to the `<project-name>` settings page and select your Github repo
-   under the **Git integration** card.
+To configure preprocessing commands you want to run, click **Show advanced
+options** button that appears after choosing your git repository. Then enter
+values as needed to input boxes.
 
-2. Select your branch for the production branch, and in the popup that appears,
-   select **Github Action**
+:::tip
 
-3. Click **Ok**
+For example, if you want to enable [ahead-of-time builds] for a Fresh project,
+you will enter `deno task build` in the **Build Step** box.
 
-4. Click **Link**
+See also [the Fresh doc][Deploy to production] for deploying a Fresh project to
+Deno Deploy.
 
-5. This should take you to a next page, where you see a button to open the
-   `deploy.yml` file in a Github Editor. From the Github editor you can edit and
-   commit the suggested workflow file to `.github/workflows/deploy.yml`
+:::
 
-6. Modify the `deploy.yml` file as appropriate with your build step, Deno
-   project name, and entrypoint file:
+The GitHub Actions workflow file that Deno Deploy generates and pushes to your
+repository looks like as follows.
 
-   ```yml
-   job:
-   permissions:
-       id-token: write # This is required to allow the GitHub Action to authenticate with Deno Deploy.
-       contents: read
-   steps:
-       - name: Deploy to Deno Deploy
-       uses: denoland/deployctl@v1
-       with:
-           project: my-project # the name of the project on Deno Deploy
-           entrypoint: main.ts # the entrypoint to deploy
-   ```
+```yml title=".github/workflows/deploy.yml"
+name: Deploy
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
 
-   By default the deployment is performed from the root directory of the
-   repository. This can be changed by specifying the `root` option:
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
 
-   ```yml
-   - name: Deploy to Deno Deploy
-   uses: denoland/deployctl@v1
-   with:
-       project: my-project
-       entrypoint: index.js
-       root: dist
-   ```
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
 
-   Unless specified, the entire content of the root directory will be deployed,
-   recursively. This can be changed by specifying the `include` or `exclude`
-   options:
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
 
-   ```yml
-   - name: Deploy to Deno Deploy
-   uses: denoland/deployctl@v1
-   with:
-       project: my-project
-       entrypoint: src/index.js
-       include: |
-         src
-         static
-   ```
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
 
-   ```yml
-   - name: Deploy to Deno Deploy
-   uses: denoland/deployctl@v1
-   with:
-       project: my-project
-       entrypoint: index.js
-       exclude: node_modules
-   ```
+      - name: Build step
+        run: "deno task build"
 
-   The `entrypoint` can either be a relative path, file name, or an absolute
-   URL. If it is a relative path, it will be resolved relative to the `root`.
-   Both absolute `file:///` and `https://` URLs are supported.
+      - name: Upload to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: "<your-project-name>"
+          entrypoint: "main.ts"
+          root: "."
+```
 
-   To deploy the `./dist` directory using the
-   [std/http/file_server.ts][fileserver] module, you can use the following
-   configuration:
-
-   ```yml
-   - name: Deploy to Deno Deploy
-   uses: denoland/deployctl@v1
-   with:
-       project: my-project
-       entrypoint: https://deno.land/std@$STD_VERSION/http/file_server.ts
-       root: dist
-   ```
-
-   See
-   [deployctl README](https://github.com/denoland/deployctl/blob/main/action/README.md)
-   for more details.
+See
+[deployctl README](https://github.com/denoland/deployctl/blob/main/action/README.md)
+for more details.
 
 [fileserver]: https://deno.land/std/http/file_server.ts
 [ghapp]: https://github.com/apps/deno-deploy
 [deploy-action]: https://github.com/denoland/deployctl/blob/main/action/README.md
+[ahead-of-time builds]: https://fresh.deno.dev/docs/concepts/ahead-of-time-builds
+[Deploy to production]: https://fresh.deno.dev/docs/getting-started/deploy-to-production
