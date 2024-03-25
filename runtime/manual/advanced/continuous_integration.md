@@ -183,7 +183,7 @@ used in subsequent pipeline runs thereafter.
 To demonstrate, let's say you have a project that uses the logger from `@std`:
 
 ```ts
-import * as log from "jsr:std/log@^0/mod.ts";
+import * as log from "jsr:std/log@^0";
 ```
 
 In order to increment this version, you can update the `import` statement and

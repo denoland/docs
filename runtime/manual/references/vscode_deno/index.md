@@ -190,7 +190,7 @@ editor.
 When you have a block of code that provides a test, like:
 
 ```ts
-import { assert } from "jsr:std/assert@^0/mod.ts";
+import { assert } from "jsr:std/assert@^0";
 
 Deno.test({
   name: "a test case",

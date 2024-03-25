@@ -5,7 +5,7 @@ To help developers write tests the Deno standard library comes with a built-in
 `jsr:@std/assert@^0`.
 
 ```js
-import { assert } from "jsr:std/assert@^0/mod.ts";
+import { assert } from "jsr:std/assert@^0";
 
 Deno.test("Hello Test", () => {
   assert("Hello");
@@ -125,7 +125,7 @@ That's especially true when working with decimal numbers, where
 `assertStrictEquals()` may work in some cases but not in others:
 
 ```ts
-import { assertStrictEquals, assertThrows } from "jsr:std/assert@^0/mod.ts";
+import { assertStrictEquals, assertThrows } from "jsr:std/assert@^0";
 
 Deno.test("Test Assert Strict Equals with float numbers", () => {
   assertStrictEquals(0.25 + 0.25, 0.25);
@@ -139,7 +139,7 @@ close enough to be considered equals. Default tolerance is set to `1e-7` though
 it is possible to change it by passing a third optional parameter.
 
 ```ts
-import { assertAlmostEquals, assertThrows } from "jsr:std/assert@^0/mod.ts";
+import { assertAlmostEquals, assertThrows } from "jsr:std/assert@^0";
 
 Deno.test("Test Assert Almost Equals", () => {
   assertAlmostEquals(0.1 + 0.2, 0.3);
@@ -155,7 +155,7 @@ To check if an object is an instance of a specific constructor, you can use
 the passed in variable has a specific type:
 
 ```ts
-import { assertInstanceOf } from "jsr:std/assert@^0/mod.ts";
+import { assertInstanceOf } from "jsr:std/assert@^0";
 
 Deno.test("Test Assert Instance Type", () => {
   const variable = new Date() as unknown;
@@ -304,7 +304,7 @@ but there is always something specific to the project you can add. Creating
 code.
 
 ```ts
-import { AssertionError } from "jsr:std/assert@^0/mod.ts";
+import { AssertionError } from "jsr:std/assert@^0";
 
 function assertPowerOf(actual: number, expected: number, msg?: string): void {
   let received = actual;

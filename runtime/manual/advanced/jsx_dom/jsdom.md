@@ -66,7 +66,7 @@ first heading it encounters and print out the text content of that heading:
 
 ```ts
 import { JSDOM } from "jsdom";
-import { assert } from "jsr:std/assert@^0/mod.ts";
+import { assert } from "jsr:std/assert@^0";
 
 const { window: { document } } = new JSDOM(
   `<!DOCTYPE html>

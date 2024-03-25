@@ -89,7 +89,7 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "jsr:std/assert@^0/mod.ts";
+} from "jsr:std/assert@^0";
 import { User } from "jsr:std/testing@^0/bdd_examples/user.ts";
 
 Deno.test("User.users initially empty", () => {
@@ -134,7 +134,7 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "jsr:std/assert@^0/mod.ts";
+} from "jsr:std/assert@^0";
 import { afterEach, beforeEach, describe, it } from "jsr:std/testing@^0/bdd.ts";
 import { User } from "jsr:std/testing@^0/bdd_examples/user.ts";
 
@@ -191,7 +191,7 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "jsr:std/assert@^0/mod.ts";
+} from "jsr:std/assert@^0";
 import { describe, it } from "jsr:std/testing@^0/bdd.ts";
 import { User } from "jsr:std/testing@^0/bdd_examples/user.ts";
 
@@ -248,7 +248,7 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "jsr:std/assert@^0/mod.ts";
+} from "jsr:std/assert@^0";
 import { describe, it } from "jsr:std/testing@^0/bdd.ts";
 import { User } from "jsr:std/testing@^0/bdd_examples/user.ts";
 

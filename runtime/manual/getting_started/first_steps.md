@@ -221,7 +221,7 @@ above. Deno provides a [built-in test runner](../basics/testing/index.md), which
 uses an assertion module distributed via HTTPS URL.
 
 ```ts title="person_test.ts"
-import { assertEquals } from "jsr:std/assert@^0/mod.ts";
+import { assertEquals } from "jsr:std/assert@^0";
 import Person, { sayHello } from "./person.ts";
 
 Deno.test("sayHello function", () => {

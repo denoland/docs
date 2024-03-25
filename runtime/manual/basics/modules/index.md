@@ -141,11 +141,7 @@ create a `deps.ts` file that exports the third-party code:
 **deps.ts**
 
 ```ts
-export {
-  assert,
-  assertEquals,
-  assertStringIncludes,
-} from "jsr:std/assert@^0/mod.ts";
+export { assert, assertEquals, assertStringIncludes } from "jsr:std/assert@^0";
 ```
 
 And throughout the same project, you can import from the `deps.ts` and avoid

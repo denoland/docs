@@ -33,7 +33,7 @@ To access the environment variables in the `.env` file, import the `load`
 function from the standard library. Then, import the configuration using it.
 
 ```ts
-import { load } from "jsr:std/dotenv@^0/mod.ts";
+import { load } from "jsr:std/dotenv@^0";
 
 const env = await load();
 const password = env["PASSWORD"];

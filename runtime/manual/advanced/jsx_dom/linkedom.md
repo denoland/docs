@@ -29,7 +29,7 @@ first heading it encounters and print out the text content of that heading:
 
 ```ts
 import { DOMParser } from "https://esm.sh/linkedom";
-import { assert } from "jsr:std/assert@^0/mod.ts";
+import { assert } from "jsr:std/assert@^0";
 
 const document = new DOMParser().parseFromString(
   `<!DOCTYPE html>

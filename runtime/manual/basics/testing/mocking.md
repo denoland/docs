@@ -35,7 +35,7 @@ a spy function around the `multiply` function and call
 ```ts
 // https://deno.land/std/testing/mock_examples/parameter_injection_test.ts
 import { assertSpyCall, assertSpyCalls, spy } from "jsr:std/testing@^0/mock.ts";
-import { assertEquals } from "jsr:std/assert@^0/mod.ts";
+import { assertEquals } from "jsr:std/assert@^0";
 import {
   multiply,
   square,
@@ -84,7 +84,7 @@ function.
 ```ts
 // https://deno.land/std/testing/mock_examples/internals_injection_test.ts
 import { assertSpyCall, assertSpyCalls, spy } from "jsr:std/testing@^0/mock.ts";
-import { assertEquals } from "jsr:std/assert@^0/mod.ts";
+import { assertEquals } from "jsr:std/assert@^0";
 import {
   _internals,
   square,
@@ -168,7 +168,7 @@ import {
   returnsNext,
   stub,
 } from "jsr:std/testing@^0/mock.ts";
-import { assertEquals } from "jsr:std/assert@^0/mod.ts";
+import { assertEquals } from "jsr:std/assert@^0";
 import {
   _internals,
   randomMultiple,
