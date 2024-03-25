@@ -5,8 +5,14 @@ and deploy one using Deno Deploy in this tutorial.
 
 ## Create a local API server
 
-In your terminal, create a file named `server.ts`. We'll implement a simple link
-shortener service using a [Deno KV database](/deploy/kv/manual).
+In your terminal, create a file named `server.ts`.
+
+```shell
+touch server.js
+```
+
+We'll implement a simple link shortener service using a
+[Deno KV database](/deploy/kv/manual).
 
 ```ts title="server.ts"
 const kv = await Deno.openKv();
@@ -35,7 +41,7 @@ Deno.serve(async (request: Request) => {
 You can run this server on your machine with this command:
 
 ```shell
-deno run -A --unstable server.ts
+deno run -A --unstable-kv server.ts
 ```
 
 This server will respond to HTTP `GET` and `POST` requests. The `POST` handler
@@ -95,17 +101,20 @@ You should now have a GitHub repository with your `server.ts` file in it, as in
 [this example repository](https://github.com/kwhinnery/simple_api_server). Now
 you're ready to import and run this application on Deno Deploy.
 
-## Import and deploy your appliction project
+## Import and deploy your project
 
 Next, sign up for an account on [Deno Deploy](https://dash.deno.com) and
-[create a new project](https://dash.deno.com/new). Choose to import an existing
-GitHub repository - the one we created a moment ago. The configuration should
-look something like this:
+[create a new project](https://dash.deno.com/new_project). Connect your GitHub
+account and select the repository we created a moment ago.
 
-![Deno Deploy config](./images/simple_api_deploy.png)
+![Deno Deploy project selection](./images/simple_api_deploy.png)
 
-Click on the "Create and Deploy" button - in a few moments, your link shortener
-service will be live on Deno Deploy!
+The configuration should look something like this:
+
+![Deno Deploy config](./images/simple_api_deploy_settings.png)
+
+Click on the "Deploy Project" button. Once deployed, your link shortener service
+will be live on Deno Deploy!
 
 ![Deno Deploy dashboard](./images/simple_api_dashboard.png)
 
@@ -121,17 +130,16 @@ the `localhost` URL with your live production URL on Deno Deploy:
 curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"url":"https://docs.deno.com/runtime/manual","slug":"denodocs"}' \
-  https://expensive-rook-95.deno.dev/
+  https://your-deno-project-url-here.deno.dev/
 ```
 
 Similarly, you can visit your shortened URLs in the browser, or view the
 redirect coming back with a cURL command:
 
 ```shell
-curl -v https://expensive-rook-95.deno.dev/denodocs
+curl -v https://your-deno-project-url-here.deno.dev/denodocs
 ```
 
-This was a very simple example - from here, we suggest you check out a
-higher-level web framework like [Fresh](https://fresh.deno.dev), or learn more
-about [Deno KV here](/deploy/kv/manual). Great work deploying your simple API
-server!
+If you enjoyed this project, next you could check out a higher-level web
+framework like [Fresh](https://fresh.deno.dev), or learn more about
+[Deno KV here](/deploy/kv/manual). Great work deploying your simple API server!
