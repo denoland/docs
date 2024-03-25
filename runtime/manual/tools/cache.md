@@ -7,7 +7,7 @@ static imports, storing them in the local cache.
 
 - Cache a specific module and its dependencies without executing any code:
   ```
-  deno cache jsr:@std/http^0/file_server
+  deno cache jsr:@std/http@^0/file_server
   deno cache npm:express
   ```
 

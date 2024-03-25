@@ -365,7 +365,7 @@ Use
 from the Standard Library instead.
 
 ```diff
-+ import { iterateReader } from "jsr:@std/io^0/iterate_reader";
++ import { iterateReader } from "jsr:@std/io@^0/iterate_reader";
 
 - for await (const chunk of Deno.iter(reader)) {
 + for await (const chunk of iterateReader(reader)) {
@@ -382,7 +382,7 @@ Use
 from the Standard Library instead.
 
 ```diff
-+ import { iterateReaderSync } from "jsr:@std/io^0/iterate_reader";
++ import { iterateReaderSync } from "jsr:@std/io@^0/iterate_reader";
 
 - for (const chunk of Deno.iterSync(reader)) {
 + for (const chunk of iterateReaderSync(reader)) {
