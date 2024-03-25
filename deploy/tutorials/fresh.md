@@ -33,13 +33,13 @@ You can edit `routes/index.js` to modify the application.
 
 ## **Step 3:** Deploy to Deno Deploy
 
-1. Navigate to https://dash.deno.com/new_project and click the **+New Project**
-   button.
-2. On the next page, connect to your GitHub account and select your repository.
+1. Navigate to [https://dash.deno.com/new_project](https://dash.deno.com/new_project).
+2. Connect to your GitHub account and select your repository.
 3. Fill in the values on the form:
    - Give your project a name
    - Select `Fresh` from the "Framework Preset" options
    - Set production branch to `main`
    - Select `main.ts` as the entrypoint file
 4. Click "Deploy Project" to kick off Deno Deploy.
-5. Once deployed, you can view your new project at url provided in your project dashboard.
+5. Once deployed, you can view your new project at url provided in your project
+   dashboard.
