@@ -28,7 +28,6 @@ export default function Layout(props) {
   return (
     <LayoutProvider>
       <Head>
-
         <link
           rel="preload"
           href="/fonts/inter/Inter-Regular.woff2"
@@ -44,7 +43,8 @@ export default function Layout(props) {
           crossOrigin="true"
         />
         <script src="/trackjs.js"></script>
-        <script src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+        <script src="https://cdn.trackjs.com/releases/current/tracker.js">
+        </script>
         <link rel="stylesheet" href="/fonts/inter.css" />
       </Head>
 
@@ -61,7 +61,7 @@ export default function Layout(props) {
         className={clsx(
           ThemeClassNames.wrapper.main,
           styles.mainWrapper,
-          wrapperClassName
+          wrapperClassName,
         )}
       >
         <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>

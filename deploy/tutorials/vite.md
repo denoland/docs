@@ -89,7 +89,7 @@ Since there is a build step here, you will need to use the Github Actions mode.
            uses: denoland/deployctl@v1
            with:
            project: "<project-name>"
-           entrypoint: https://deno.land/std@$STD_VERSION/http/file_server.ts
+           entrypoint: jsr:@std/http@^0/file_server
            root: dist
    ```
 
@@ -99,8 +99,7 @@ Since there is a build step here, you will need to use the Github Actions mode.
    - running `deno task build`
 
    You will also have to set the entrypoint file to
-   `https://deno.land/std@$STD_VERSION/http/file_server.ts`, and the root to
-   `/dist`.
+   `jsr:@std/http@^0/file_server`, and the root to `/dist`.
 
    Note that this is not a file that exists in the Vite repo itself. Instead, it
    is an external program. When run, this program uploads all the static asset
@@ -118,5 +117,5 @@ Deploy.
 
 ```console
 cd /dist
-deployctl deploy --project=<project-name> https://deno.land/std@$STD_VERSION/http/file_server.ts
+deployctl deploy --project=<project-name> jsr:@std/http@^0/file_server
 ```

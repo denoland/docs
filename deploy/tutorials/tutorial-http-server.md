@@ -56,7 +56,7 @@ global network. This guarantees fast and reliable performance, no matter the
 location of your users.
 
 [native-http]: https://deno.land/manual@v1.15.1/runtime/http_server_apis
-[std-http]: https://deno.land/std/http
+[std-http]: https://jsr.io/@std/http
 [request]: ../api/runtime-request
 [conninfo]: https://doc.deno.land/https/deno.land%2Fstd%2Fhttp%2Fserver.ts#ConnInfo
 [response]: ../api/runtime-response

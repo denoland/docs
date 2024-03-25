@@ -20,18 +20,18 @@ Sometimes we want to upgrade only some modules. You can control it by passing an
 argument to a `--reload` flag.
 
 <p>
-  To reload all <code>{ replacements.STD_VERSION }</code> standard modules:
+  To reload all deno_std's fs module:
 </p>
 
 ```bash
-deno cache --reload=https://deno.land/std@$STD_VERSION my_module.ts
+deno cache --reload=jsr:std/fs@^0 my_module.ts
 ```
 
 To reload specific modules (in this example - colors and file system copy) use a
 comma to separate URLs.
 
 ```bash
-deno cache --reload=https://deno.land/std@$STD_VERSION/fs/copy.ts,https://deno.land/std@$STD_VERSION/fmt/colors.ts my_module.ts
+deno cache --reload=jsr:std/fs@^0/copy.ts,jsr:std/fmt@^0/colors.ts my_module.ts
 ```
 
 <!-- Should this be part of examples? -->

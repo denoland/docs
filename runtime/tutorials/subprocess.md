@@ -66,7 +66,7 @@ This example is the equivalent of running `yes &> ./process_output` in bash.
 
 import {
   mergeReadableStreams,
-} from "https://deno.land/std@$STD_VERSION/streams/merge_readable_streams.ts";
+} from "jsr:std/streams@^0/merge_readable_streams.ts";
 
 // create the file to attach the process to
 const file = await Deno.open("./process_output.txt", {

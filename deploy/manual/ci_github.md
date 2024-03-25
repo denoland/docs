@@ -92,7 +92,7 @@ See
 [deployctl README](https://github.com/denoland/deployctl/blob/main/action/README.md)
 for more details.
 
-[fileserver]: https://deno.land/std/http/file_server.ts
+[fileserver]: https://jsr.io/@std/http/doc/file_server/~
 [ghapp]: https://github.com/apps/deno-deploy
 [deploy-action]: https://github.com/denoland/deployctl/blob/main/action/README.md
 [ahead-of-time builds]: https://fresh.deno.dev/docs/concepts/ahead-of-time-builds

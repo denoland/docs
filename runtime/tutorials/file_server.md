@@ -60,7 +60,7 @@ async function handleHttp(conn: Deno.Conn) {
 ## Using the `std/http` file server
 
 The Deno standard library provides you with a
-[file server](https://deno.land/std/http/file_server.ts) so that you don't have
+[file server](https://jsr.io/@std/http/doc/file_server/~) so that you don't have
 to write your own.
 
 To use it, first install the remote script to your local file system. This will
@@ -68,16 +68,14 @@ install the script to the Deno installation root's bin directory, e.g.
 `/home/alice/.deno/bin/file_server`.
 
 ```shell
-deno install --allow-net --allow-read https://deno.land/std/http/file_server.ts
+deno install --allow-net --allow-read jsr:@std/http@^0/file_server
 ```
 
 You can now run the script with the simplified script name. Run it:
 
 ```shell
 $ file_server .
-Downloading https://deno.land/std/http/file_server.ts...
-[...]
-HTTP server listening on http://0.0.0.0:4507/
+Listening on http://0.0.0.0:4507/
 ```
 
 Now go to [http://0.0.0.0:4507/](http://0.0.0.0:4507/) in your web browser to
@@ -95,7 +93,7 @@ Example output:
 Deno File Server
     Serves a local directory in HTTP.
   INSTALL:
-    deno install --allow-net --allow-read https://deno.land/std/http/file_server.ts
+    deno install --allow-net --allow-read jsr:@std/http/file_server
   USAGE:
     file_server [path] [options]
   OPTIONS:

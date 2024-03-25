@@ -16,7 +16,7 @@
 
 Interacting with the filesystem to read and write files is a common requirement.
 Deno provides a number of ways to do this via the
-[standard library](https://deno.land/std) and the
+[standard library](https://jsr.io/@std) and the
 [Deno runtime API](https://deno.land/api).
 
 As highlighted in the [Fetch Data example](./fetch_data.md), Deno restricts

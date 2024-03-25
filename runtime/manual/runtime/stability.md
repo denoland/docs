@@ -25,7 +25,7 @@ review**, are likely to have **breaking API changes** in the future, and are
 
 ## Standard modules
 
-Deno's standard modules (https://deno.land/std) are not yet stable. We currently
+Deno's standard modules (https://jsr.io/@std) are not yet stable. We currently
 version the standard modules differently from the CLI to reflect this. Note that
 unlike the `Deno` namespace, the use of the standard modules do not require the
 `--unstable` flag (unless the standard module itself makes use of an unstable

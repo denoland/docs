@@ -97,7 +97,7 @@ And in `./prisma/seed.ts`:
 
 ```ts
 import { Prisma, PrismaClient } from "../generated/client/deno/edge.ts";
-import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
+import { load } from "jsr:std/dotenv@^0/mod.ts";
 
 const envVars = await load();
 
@@ -168,7 +168,7 @@ Then, in your `main.ts` file:
 ```ts
 import { PrismaClient } from "./generated/client/deno/edge.ts";
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
-import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
+import { load } from "jsr:std/dotenv@^0/mod.ts";
 
 const envVars = await load();
 

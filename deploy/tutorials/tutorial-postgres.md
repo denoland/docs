@@ -41,8 +41,8 @@ POST /todos
 
 In this tutorial, we will be:
 
-- Creating and setting up a [Postgres](https://www.postgresql.org/) instance 
-  on [Neon Postgres](https://neon.tech/) or [Supabase](https://supabase.com).
+- Creating and setting up a [Postgres](https://www.postgresql.org/) instance on
+  [Neon Postgres](https://neon.tech/) or [Supabase](https://supabase.com).
 - Using a [Deno Deploy](/deploy) Playground to develop and deploy the
   application.
 - Testing our application using [cURL](https://curl.se/).
@@ -54,19 +54,26 @@ In this tutorial, we will be:
 > documentation [here](https://deno-postgres.com/#/?id=ssltls-connection).
 
 To get started we need to create a new Postgres instance for us to connect to.
-For this tutorial, you can use either [Neon Postgres](https://neon.tech/) or [Supabase](https://supabase.com), as they
-both provide free, managed Postgres instances. If you like to host your database
-somewhere else, you can do that too.
+For this tutorial, you can use either [Neon Postgres](https://neon.tech/) or
+[Supabase](https://supabase.com), as they both provide free, managed Postgres
+instances. If you like to host your database somewhere else, you can do that
+too.
 
 ### Neon Postgres
 
-1. Visit https://neon.tech/ and click **Sign up** to sign up with an email, Github, Google, or partner account. After signing up, you are directed to the Neon Console to create your first project.
-2.  Enter a name for your project, select a Postgres version, provide a database name, and select a region. Generally, you'll want to select the region closest to your application. When you're finished, click **Create project**.
-3. You are presented with the connection string for your new project, which you can use to connect to your database. Save the connection string, which looks something like this: 
+1. Visit https://neon.tech/ and click **Sign up** to sign up with an email,
+   Github, Google, or partner account. After signing up, you are directed to the
+   Neon Console to create your first project.
+2. Enter a name for your project, select a Postgres version, provide a database
+   name, and select a region. Generally, you'll want to select the region
+   closest to your application. When you're finished, click **Create project**.
+3. You are presented with the connection string for your new project, which you
+   can use to connect to your database. Save the connection string, which looks
+   something like this:
 
-    ```sh
-    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
-    ```
+   ```sh
+   postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   ```
 
 ### Supabase
 

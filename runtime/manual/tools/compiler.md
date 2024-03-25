@@ -17,14 +17,14 @@ execute the script must be specified at compilation time. This includes
 permission flags.
 
 ```console
-> deno compile --allow-read --allow-net https://deno.land/std/http/file_server.ts
+> deno compile --allow-read --allow-net jsr:@std/http@^0/file_server
 ```
 
 [Script arguments](../getting_started/command_line_interface.md#script-arguments)
 can be partially embedded.
 
 ```console
-> deno compile --allow-read --allow-net https://deno.land/std/http/file_server.ts -p 8080
+> deno compile --allow-read --allow-net jsr:@std/http@^0/file_server -p 8080
 > ./file_server --help
 ```
 

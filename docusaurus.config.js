@@ -170,7 +170,7 @@ const config = {
             },
             {
               label: "Standard Library",
-              href: "https://deno.land/std",
+              href: "https://jsr.io/@std",
             },
             {
               label: "Deno by Example",

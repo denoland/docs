@@ -122,7 +122,7 @@ the markdown is transformed, the current version number will be replaced within
 it.
 
 ```ts
-import { copy } from "https://deno.land/std@$STD_VERSION/fs/copy.ts";
+import { copy } from "jsr:@std/fs@^0/copy";
 ```
 
 To include version number in markdown / MDX content, we recommend using the

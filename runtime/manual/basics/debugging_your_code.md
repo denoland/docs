@@ -21,16 +21,14 @@ execution on the first line of code.
 ## Chrome Devtools
 
 Let's try debugging a program using Chrome Devtools. For this, we'll use
-[file_server.ts](https://deno.land/std/http/file_server.ts) from `std`, a static
+[file_server](https://jsr.io/@std/http/doc/file_server/~) from `std`, a static
 file server.
 
 Use the `--inspect-brk` flag to break execution on the first line:
 
 ```shell
-$ deno run --inspect-brk --allow-read --allow-net https://deno.land/std@$STD_VERSION/http/file_server.ts
+$ deno run --inspect-brk --allow-read --allow-net jsr:@std/http@^0/file_server
 Debugger listening on ws://127.0.0.1:9229/ws/1e82c406-85a9-44ab-86b6-7341583480b1
-Download https://deno.land/std@$STD_VERSION/http/file_server.ts
-Compile https://deno.land/std@$STD_VERSION/http/file_server.ts
 ...
 ```
 

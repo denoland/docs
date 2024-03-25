@@ -8,7 +8,7 @@
 |                        Syscalls | Ops                              |
 |           File descriptors (fd) | [Resource ids (rid)](#resources) |
 |                       Scheduler | Tokio                            |
-| Userland: libc++ / glib / boost | https://deno.land/std/           |
+| Userland: libc++ / glib / boost | https://jsr.io/@std              |
 |                 /proc/\$\$/stat | [Deno.metrics()](#metrics)       |
 |                       man pages | deno types                       |
 

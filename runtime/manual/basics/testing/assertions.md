@@ -1,11 +1,11 @@
 # Assertions
 
 To help developers write tests the Deno standard library comes with a built-in
-[assertions module](https://deno.land/std/assert/mod.ts) which can be imported
-from `https://deno.land/std/assert/mod.ts`.
+[assertions module](https://jsr.io/@std/assert) which can be imported from
+`jsr:@std/assert@^0`.
 
 ```js
-import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assert } from "jsr:std/assert@^0/mod.ts";
 
 Deno.test("Hello Test", () => {
   assert("Hello");
@@ -34,7 +34,7 @@ The assertions module provides 14 assertions:
 - `assertRejects(fn: () => Promise<unknown>, ErrorClass?: Constructor, msgIncludes?: string | undefined, msg?: string | undefined): Promise<void>`
 
 In addition to the above assertions, the
-[snapshot module](https://deno.land/std/testing/snapshot.ts) also exposes an
+[snapshot module](https://jsr.io/@std/testing/doc/snapshot/~) also exposes an
 `assertSnapshot` function. The documentation for this module can be found
 [here](./snapshot_testing.md).
 
@@ -125,10 +125,7 @@ That's especially true when working with decimal numbers, where
 `assertStrictEquals()` may work in some cases but not in others:
 
 ```ts
-import {
-  assertStrictEquals,
-  assertThrows,
-} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assertStrictEquals, assertThrows } from "jsr:std/assert@^0/mod.ts";
 
 Deno.test("Test Assert Strict Equals with float numbers", () => {
   assertStrictEquals(0.25 + 0.25, 0.25);
@@ -142,10 +139,7 @@ close enough to be considered equals. Default tolerance is set to `1e-7` though
 it is possible to change it by passing a third optional parameter.
 
 ```ts
-import {
-  assertAlmostEquals,
-  assertThrows,
-} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assertAlmostEquals, assertThrows } from "jsr:std/assert@^0/mod.ts";
 
 Deno.test("Test Assert Almost Equals", () => {
   assertAlmostEquals(0.1 + 0.2, 0.3);
@@ -161,7 +155,7 @@ To check if an object is an instance of a specific constructor, you can use
 the passed in variable has a specific type:
 
 ```ts
-import { assertInstanceOf } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assertInstanceOf } from "jsr:std/assert@^0/mod.ts";
 
 Deno.test("Test Assert Instance Type", () => {
   const variable = new Date() as unknown;
@@ -304,14 +298,13 @@ Deno.test("Test Assert Equal Fail Custom Message", () => {
 
 ## Custom Tests
 
-While Deno comes with powerful
-[assertions modules](https://deno.land/std/assert/mod.ts) but there is always
-something specific to the project you can add. Creating
+While Deno comes with powerful [assertions modules](https://jsr.io/@std/assert)
+but there is always something specific to the project you can add. Creating
 `custom assertion function` can improve readability and reduce the amount of
 code.
 
 ```ts
-import { AssertionError } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { AssertionError } from "jsr:std/assert@^0/mod.ts";
 
 function assertPowerOf(actual: number, expected: number, msg?: string): void {
   let received = actual;

@@ -1,6 +1,6 @@
 # Behavior-Driven Development
 
-With the [bdd.ts](https://deno.land/std/testing/bdd.ts) module you can write
+With the [bdd.ts](https://jsr.io/@std/testing/doc/bdd/~) module you can write
 your tests in a familiar format for grouping tests and adding setup/teardown
 hooks used by other JavaScript testing frameworks like Jasmine, Jest, and Mocha.
 
@@ -89,10 +89,8 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
-import {
-  User,
-} from "https://deno.land/std@$STD_VERSION/testing/bdd_examples/user.ts";
+} from "jsr:std/assert@^0/mod.ts";
+import { User } from "jsr:std/testing@^0/bdd_examples/user.ts";
 
 Deno.test("User.users initially empty", () => {
   assertEquals(User.users.size, 0);
@@ -136,16 +134,9 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  it,
-} from "https://deno.land/std@$STD_VERSION/testing/bdd.ts";
-import {
-  User,
-} from "https://deno.land/std@$STD_VERSION/testing/bdd_examples/user.ts";
+} from "jsr:std/assert@^0/mod.ts";
+import { afterEach, beforeEach, describe, it } from "jsr:std/testing@^0/bdd.ts";
+import { User } from "jsr:std/testing@^0/bdd_examples/user.ts";
 
 describe("User", () => {
   it("users initially empty", () => {
@@ -200,14 +191,9 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
-import {
-  describe,
-  it,
-} from "https://deno.land/std@$STD_VERSION/testing/bdd.ts";
-import {
-  User,
-} from "https://deno.land/std@$STD_VERSION/testing/bdd_examples/user.ts";
+} from "jsr:std/assert@^0/mod.ts";
+import { describe, it } from "jsr:std/testing@^0/bdd.ts";
+import { User } from "jsr:std/testing@^0/bdd_examples/user.ts";
 
 const userTests = describe("User");
 
@@ -262,14 +248,9 @@ import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
-import {
-  describe,
-  it,
-} from "https://deno.land/std@$STD_VERSION/testing/bdd.ts";
-import {
-  User,
-} from "https://deno.land/std@$STD_VERSION/testing/bdd_examples/user.ts";
+} from "jsr:std/assert@^0/mod.ts";
+import { describe, it } from "jsr:std/testing@^0/bdd.ts";
+import { User } from "jsr:std/testing@^0/bdd_examples/user.ts";
 
 describe("User", () => {
   it("users initially empty", () => {

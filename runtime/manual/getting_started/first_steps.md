@@ -213,7 +213,7 @@ name of your imports.
 
 Deno supports loading and executing code from URLs, much as you would using a
 `<script>` tag in the browser. In Deno 1.x, the
-[standard library](https://deno.land/std) and most
+[standard library](https://jsr.io/@std) and most
 [third-party modules](https://deno.land/x) are distributed on HTTPS URLs.
 
 To see this in action, let's create a test for the `person.ts` module we created
@@ -221,7 +221,7 @@ above. Deno provides a [built-in test runner](../basics/testing/index.md), which
 uses an assertion module distributed via HTTPS URL.
 
 ```ts title="person_test.ts"
-import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assertEquals } from "jsr:std/assert@^0/mod.ts";
 import Person, { sayHello } from "./person.ts";
 
 Deno.test("sayHello function", () => {
@@ -251,7 +251,7 @@ sayHello function ... ok (4ms)
 ok | 1 passed | 0 failed (66ms)
 ```
 
-There's much more to explore with [the standard library](https://deno.land/std)
+There's much more to explore with [the standard library](https://jsr.io/@std)
 and [third-party modules](https://deno.land/x) - be sure to check them out!
 
 ## Configure your project with deno.json
@@ -267,8 +267,8 @@ One of the things you can use `deno.json` for is configuring an
 frequently used modules.
 
 <p>
-  To demonstrate, let's pin the version of the standard library we want to
-  use in our project to version <code>{ replacements.STD_VERSION }</code>.
+  To demonstrate, let's pin the version of the assert package of the standard library we want to
+  use in our project to version <code>^0</code>.
 </p>
 
 Create a `deno.jsonc` file with the following contents.
@@ -276,9 +276,7 @@ Create a `deno.jsonc` file with the following contents.
 ```js title="deno.jsonc"
 {
   "imports": {
-    // The dollar sign in front of "std" isn't special - it's an optional
-    // convention to show that $std is an alias set up in an import map
-    "$std/": "https://deno.land/std@$STD_VERSION/"
+    "@std/assert": "jsr:std/assert@^0"
   }
 }
 ```
@@ -286,7 +284,7 @@ Create a `deno.jsonc` file with the following contents.
 Now, open up your test file from before, and change it to use this import alias.
 
 ```ts title="person_test.ts"
-import { assertEquals } from "$std/assert/mod.ts";
+import { assertEquals } from "@std/assert/mod.ts";
 import Person, { sayHello } from "./person.ts";
 
 Deno.test("sayHello function", () => {

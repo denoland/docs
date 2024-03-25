@@ -8,20 +8,16 @@ import {
 
 interface ReplacementsData {
   CLI_VERSION: string;
-  STD_VERSION: string;
 }
 
 const replacementsFile = $.path("replacements.json");
 const latestCliVersion = (await getLatestTagForRepo("deno")).replace("v", "");
-const latestStdVersion = await getLatestTagForRepo("deno_std");
 
 $.log(`cli version: ${latestCliVersion}`);
-$.log(`std version: ${latestStdVersion}`);
 
 const replacements = replacementsFile.readJsonSync<ReplacementsData>();
 
 replacements.CLI_VERSION = latestCliVersion;
-replacements.STD_VERSION = latestStdVersion;
 
 replacementsFile.writeJsonPrettySync(replacements);
 
@@ -32,7 +28,7 @@ if (Deno.args.includes("--create-pr")) {
 async function getLatestTagForRepo(name: string) {
   $.logStep(`Fetching latest release for ${name}...`);
   const latestRelease = await $.request(
-    `https://api.github.com/repos/denoland/${name}/releases/latest`
+    `https://api.github.com/repos/denoland/${name}/releases/latest`,
   )
     .header("accept", "application/vnd.github.v3+json")
     .json<{ tag_name: string }>();
@@ -73,8 +69,7 @@ async function tryCreatePr() {
   $.log(`Opened PR at ${openedPr.data.url}`);
 
   function getPrBody() {
-    let text =
-      `Bumped versions for ${latestCliVersion}\n\n` +
+    let text = `Bumped versions for ${latestCliVersion}\n\n` +
       `To make edits to this PR:\n` +
       "```shell\n" +
       `gh pr checkout <THIS PR NUMBER>\n` +

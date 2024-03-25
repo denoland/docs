@@ -180,11 +180,10 @@ which is discussed in detail [here](../basics/modules/integrity_checking.md).
 Now, if the contents of `deno.lock` are changed, a new cache will be made and
 used in subsequent pipeline runs thereafter.
 
-To demonstrate, let's say you have a project that uses the logger from
-`deno.land/std`:
+To demonstrate, let's say you have a project that uses the logger from `@std`:
 
 ```ts
-import * as log from "https://deno.land/std@$STD_VERSION/log/mod.ts";
+import * as log from "jsr:std/log@^0/mod.ts";
 ```
 
 In order to increment this version, you can update the `import` statement and

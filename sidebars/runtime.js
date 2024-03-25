@@ -336,7 +336,7 @@ const sidebars = {
     {
       type: "link",
       label: "Std. Library",
-      href: "https://www.deno.land/std",
+      href: "https://jsr.io/@std",
     },
     {
       type: "html",

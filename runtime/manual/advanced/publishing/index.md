@@ -27,13 +27,13 @@ For more details, see [Adding a Module](https://deno.land/add_module).
 
 ## Auto-generating documentation for modules
 
-When a module is published, the contents of the module are analyzed. An automated
-process identifies modules that contain code that Deno understands and generates
-documentation based on the code. For each path, including the root path, it
-attempts to identify the default module. In order of preference it looks for
-`mod`, `lib`, `main`, or `index` files with an extension that Deno understands
-(ts,tsx,js,jsx,mjs, or mts). When viewing the documentation for the module for a
-path, the default module will be shown.
+When a module is published, the contents of the module are analyzed. An
+automated process identifies modules that contain code that Deno understands and
+generates documentation based on the code. For each path, including the root
+path, it attempts to identify the default module. In order of preference it
+looks for `mod`, `lib`, `main`, or `index` files with an extension that Deno
+understands (ts,tsx,js,jsx,mjs, or mts). When viewing the documentation for the
+module for a path, the default module will be shown.
 
 If a default module cannot be identified, a list of modules that can be
 documented will be provided instead. When generating the documentation, not only
@@ -52,7 +52,6 @@ dynamically included in content or code samples using following replacement
 variables.
 
 - `$MODULE_VERSION`
-- `$STD_VERSION`
 - `$CLI_VERSION`
 
 For example, to include the current module version in README.md:

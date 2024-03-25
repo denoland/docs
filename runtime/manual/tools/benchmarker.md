@@ -98,7 +98,7 @@ you want to measure. Everything outside of the section between these two calls
 will be excluded from the measurement.
 
 ```ts
-import { readAll } from "https://deno.land/std@$STD_VERSION/io/read_all.ts";
+import { readAll } from "jsr:std/io@^0/read_all.ts";
 
 Deno.bench("foo", async (b) => {
   // Open a file that we will act upon.
