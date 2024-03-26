@@ -30,12 +30,6 @@ Make sure that there a `image.png` inside `static-site`.
 
 You have now a html page that says "Hello" and has a logo.
 
-## **Step 2:** Create a new Deno project
-
-1. Navigate to https://dash.deno.com/new and click the **+Empty Project** button
-   under **Deploy from command line**.
-2. On the next page, grab the project name, in this case `careful-goat-90`.
-
 ## Step 2: Deploy the static site using `deployctl`
 
 To deploy this repo on Deno Deploy, from the `static-site` repository, run:
@@ -53,6 +47,8 @@ Deploy. These static assets are then served up.
 
 ## Step 3: Voila!
 
-If you go under the **Deployments** tab in the `careful-goat-90` project page,
-you will see the link to this dev deployment. If you click on the url, you
-should now see your html page with the "Hello" and the image.
+Your static site should now be live! Its url will be output in the terminal, or
+you can manage your new static site project in your
+[Deno dashboard](https://dash.deno.com/projects/). If you click through to your
+new project you will be able to view the site, configure its name, environment
+variables, custom domains and more.
