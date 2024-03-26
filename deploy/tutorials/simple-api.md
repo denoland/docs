@@ -8,7 +8,7 @@ and deploy one using Deno Deploy in this tutorial.
 In your terminal, create a file named `server.ts`.
 
 ```shell
-touch server.js
+touch server.ts
 ```
 
 We'll implement a simple link shortener service using a
