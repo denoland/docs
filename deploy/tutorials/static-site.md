@@ -3,7 +3,7 @@
 This tutorial will cover how to deploy a static site (no JavaScript) on Deno
 Deploy.
 
-## **Step 1:** Create the static site
+## Step 1: Create the static site
 
 ```sh
 mkdir static-site
@@ -36,12 +36,12 @@ You have now a html page that says "Hello" and has a logo.
    under **Deploy from command line**.
 2. On the next page, grab the project name, in this case `careful-goat-90`.
 
-## **Step 3:** Deploy the static site using `deployctl`
+## Step 2: Deploy the static site using `deployctl`
 
 To deploy this repo on Deno Deploy, from the `static-site` repository, run:
 
 ```console
-deployctl deploy --project=careful-goat-90 https://deno.land/std@$STD_VERSION/http/file_server.ts
+deployctl deploy --project=<your-preferred-project-name> https://deno.land/std@0.220.0/http/file_server.ts
 ```
 
 To give a little more explanation of these commands: Because this is a static
@@ -51,7 +51,7 @@ it this external `file_server.ts` program, which simply uploads all the static
 files in the `static-site` repo, including the image and the html page, to Deno
 Deploy. These static assets are then served up.
 
-## **Step 4:** Voila!
+## Step 3: Voila!
 
 If you go under the **Deployments** tab in the `careful-goat-90` project page,
 you will see the link to this dev deployment. If you click on the url, you
