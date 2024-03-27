@@ -1,6 +1,6 @@
 # `deno task`
 
-`deno task` provides a cross platform way to define and execute custom commands
+`deno task` provides a cross-platform way to define and execute custom commands
 specific to a codebase.
 
 To get started, define your commands in your codebase's
@@ -56,7 +56,7 @@ if not already set. This aligns with the same behavior as `npm run`.
 For example, the following task will change the current working directory of the
 task to be in the same directory the user ran the task from and then output the
 current working directory which is now that directory (remember, this works on
-Windows too because deno task is cross platform).
+Windows too because `deno task` is cross-platform).
 
 ```json
 {
@@ -72,7 +72,7 @@ Since tasks are run using the directory of the Deno configuration file as the
 current working directory, it may be useful to know the directory the
 `deno task` was executed from instead. This is possible by using the `INIT_CWD`
 environment variable in a task or script launched from `deno task` (works the
-same way as in `npm run`, but in a cross platform way).
+same way as in `npm run`, but in a cross-platform way).
 
 For example, to provide this directory to a script in a task, do the following
 (note the directory is surrounded in double quotes to keep it as a single
@@ -88,7 +88,7 @@ argument in case it contains spaces):
 
 ## Syntax
 
-`deno task` uses a cross platform shell that's a subset of sh/bash to execute
+`deno task` uses a cross-platform shell that's a subset of sh/bash to execute
 defined tasks.
 
 ### Boolean lists
@@ -204,6 +204,15 @@ Deno: undefined
 Shell variables can be useful when we want to re-use a value, but don't want it
 available in any spawned processes.
 
+### Exit status variable
+
+The exit code of the previously run command is available in the `$?` variable.
+
+```sh
+# outputs 10
+deno eval 'Deno.exit(10)' || echo $?
+```
+
 ### Pipelines
 
 Pipelines provide a way to pipe the output of one command to another.
@@ -279,7 +288,7 @@ deno run main.ts >> file.txt
 ```
 
 Suppressing either stdout, stderr, or both of a command is possible by
-redirecting to `/dev/null`. This works in a cross platform way including on
+redirecting to `/dev/null`. This works in a cross-platform way including on
 Windows.
 
 ```sh
@@ -291,12 +300,57 @@ deno run main.ts 2> /dev/null
 deno run main.ts &> /dev/null
 ```
 
-Note that redirecting input and multiple redirects are currently not supported.
+Or redirecting stdout to stderr and vice-versa:
+
+```sh
+# redirect stdout to stderr
+deno run main.ts >&2
+# redirect stderr to stdout
+deno run main.ts 2>&1
+```
+
+Input redirects are also supported:
+
+```sh
+# redirect file.txt to the stdin of gzip
+gzip < file.txt
+```
+
+Note that redirecting multiple redirects is currently not supported.
+
+### Cross-platform shebang
+
+Starting in Deno 1.42, `deno task` will execute scripts that start with
+`#!/usr/bin/env -S` the same way on all platforms.
+
+For example:
+
+```ts title="script.ts"
+#!/usr/bin/env -S deno run
+console.log("Hello there!");
+```
+
+```json title="deno.json"
+{
+  "tasks": {
+    "hi": "./script.ts"
+  }
+}
+```
+
+Then on a Windows machine:
+
+```sh
+> pwd
+C:\Users\david\dev\my_project
+> deno task hi
+Hello there!
+```
 
 ### Glob expansion
 
 Glob expansion is supported in Deno 1.34 and above. This allows for specifying
-globs to match files in a cross platform way.
+globs to match files in a cross-platform way.
 
 ```console
 # match .ts files in the current and descendant directories
@@ -349,7 +403,7 @@ additional commands that should be supported out of the box, then please
 [open an issue](https://github.com/denoland/deno_task_shell/issues) on the
 [deno_task_shell](https://github.com/denoland/deno_task_shell/) repo.
 
-Note that if you wish to execute any of these commands in a non-cross platform
+Note that if you wish to execute any of these commands in a non-cross-platform
 way on Mac or Linux, then you may do so by running it through `sh`:
 `sh -c <command>` (ex. `sh -c cp source destination`).
 
