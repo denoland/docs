@@ -56,7 +56,7 @@ if not already set. This aligns with the same behavior as `npm run`.
 For example, the following task will change the current working directory of the
 task to be in the same directory the user ran the task from and then output the
 current working directory which is now that directory (remember, this works on
-Windows too because deno task is cross-platform).
+Windows too because `deno task` is cross-platform).
 
 ```json
 {
