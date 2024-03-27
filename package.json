@@ -16,9 +16,9 @@
     "fmt": "deno fmt runtime/ deploy/ src/"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.1.0",
-    "@docusaurus/plugin-google-tag-manager": "^3.1.0",
-    "@docusaurus/preset-classic": "^3.1.0",
+    "@docusaurus/core": "^3.1.1",
+    "@docusaurus/plugin-google-tag-manager": "^3.1.1",
+    "@docusaurus/preset-classic": "^3.1.1",
     "@mdx-js/react": "^3.0.0",
     "@orama/plugin-docusaurus-v3": "^2.0.12",
     "@readme/openapi-parser": "^2.5.0",
