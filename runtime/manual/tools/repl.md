@@ -1,4 +1,4 @@
-# Read-Eval-Print-Loop
+# `deno repl`, interactive scripting prompt
 
 `deno repl` starts a read-eval-print-loop, which lets you interactively build up
 program state in the global context, it is especially useful for quick
@@ -21,7 +21,7 @@ The REPL provides a couple of special variables, that are always available:
 | _          | Yields the last evaluated expression |
 | _error     | Yields the last thrown error         |
 
-```
+```console
 Deno 1.14.3
 exit using ctrl+d or close()
 > "hello world!"
@@ -49,7 +49,7 @@ The REPL provides several functions in the global scope:
 into the REPL. This is useful for importing some code you commonly use in the
 REPL, or modifying the runtime in some way:
 
-```
+```console
 $ deno repl --allow-net --eval 'import { assert } from "https://deno.land/std/assert/mod.ts"'
 Deno 1.36.0
 exit using ctrl+d, ctrl+c, or close()
@@ -73,7 +73,7 @@ reloaded via the `--reload` flag.
 If `--eval` is also specified, then `--eval-file` files are run before the
 `--eval` code.
 
-```
+```console
 $ deno repl --eval-file=https://examples.deno.land/hello-world.ts,https://deno.land/std/encoding/ascii85.ts
 Download https://examples.deno.land/hello-world.ts
 Hello, World!
@@ -92,7 +92,7 @@ directory. It will not try to resolve them relative to the code file's location.
 This can cause "Module not found" errors when `--eval-file` is used with module
 files:
 
-```
+```console
 $ deno repl --eval-file=https://deno.land/std/hash/md5.ts
 error in --eval-file file https://deno.land/std/hash/md5.ts. Uncaught TypeError: Module not found "file:///home/encoding/hex.ts".
     at async <anonymous>:2:13
@@ -111,7 +111,7 @@ exit using ctrl+d or close()
 Tab completions are crucial feature for quick navigation in REPL. After hitting
 `tab` key, Deno will now show a list of all possible completions.
 
-```
+```console
 $ deno repl
 Deno 1.14.3
 exit using ctrl+d or close()

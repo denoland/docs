@@ -65,6 +65,18 @@ const config = {
         ],
       },
     ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "subhosting",
+        path: "subhosting",
+        routeBasePath: "/subhosting",
+        sidebarPath: require.resolve("./sidebars/subhosting.js"),
+        remarkPlugins: [
+          findReplace,
+        ],
+      },
+    ],
     // Enables our custom pages in "src" to use Tailwind classes
     async function tailwindPlugin(_context, _options) {
       return {
@@ -119,6 +131,12 @@ const config = {
           position: "left",
           label: "Deno Deploy",
           activeBaseRegex: `^/deploy`,
+        },
+        {
+          to: "/subhosting/manual",
+          position: "left",
+          label: "Subhosting",
+          activeBaseRegex: `^/subhosting`,
         },
         {
           href: "https://www.deno.com",
@@ -233,6 +251,7 @@ const config = {
     prism: {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
+      additionalLanguages: ["powershell", "diff"],
     },
     algolia: {
       // The application ID provided by Algolia

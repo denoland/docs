@@ -125,7 +125,7 @@ export default function Home() {
                       className="font-bold inline-block underline dark:[color:var(--deploy)]"
                       href="/deploy/kv/manual/queue_overview"
                     >
-                      Cron docs <span aria-hidden="true">-&gt;</span>
+                      Queues docs <span aria-hidden="true">-&gt;</span>
                     </a>
                   </p>
                 </div>

@@ -20,7 +20,7 @@ click on one, it'll take you to a dinosaur page with more details.
 This tutorial will use [Vite](https://vitejs.dev/) to quickly scaffold a Deno
 and React app. Let's run:
 
-```shell, ignore
+```shell
 deno run --allow-env --allow-read --allow-write npm:create-vite-extra
 ```
 
@@ -36,7 +36,7 @@ In the directory, let's create an `api` folder. In that folder, we'll create a
 `main.ts` file, which will run the server, and a `data.json`, which is the hard
 coded data.
 
-```shell, ignore
+```shell
 mkdir api && touch api/data.json && touch api/main.ts
 ```
 
@@ -46,7 +46,7 @@ into your `api/data.json`.
 
 Then, let's update `api/main.ts`:
 
-```ts, ignore
+```ts
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
 import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 import data from "./data.json" assert { type: "json" };
@@ -83,7 +83,7 @@ await app.listen({ port: 8000 });
 This is a very simple API server using [`oak`](https://deno.land/x/oak) that
 will return dinosaur information based on the route. Let's start the API server:
 
-```shell, ignore
+```shell
 deno run --allow-env --allow-net api/main.ts
 ```
 
@@ -100,7 +100,7 @@ Our app will have two routes: `/` and `/:dinosaur`.
 We'll use [`react-router-dom`](https://reactrouter.com/en/main) for our routing
 logic. Let's add that to our dependencies in `vite.config.mjs`:
 
-```mjs, ignore
+```mjs
 import { defineConfig } from "npm:vite@^3.1.3";
 import react from "npm:@vitejs/plugin-react@^2.1";
 
@@ -119,7 +119,7 @@ throughout our React app.
 
 Next, let's go to `src/App.jsx` and add our routing logic:
 
-```jsx, ignore
+```jsx
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -155,14 +155,14 @@ There will be two pages in this app:
 
 We'll create a `src/pages` folder and create the `.jsx` files:
 
-```shell, ignore
+```shell
 mkdir src/pages && touch src/pages/Index.jsx src/pages/Dinosaur.jsx
 ```
 
 Let's start with `<Index>`. This page will `fetch` at `localhost:8000/api` and
 render that through JSX.
 
-```jsx, ignore
+```jsx
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -199,7 +199,7 @@ export default Index;
 Next, in `<Dinosaur>`, we'll do the same except for
 `localhost:8000/api/${dinosaur}`:
 
-```jsx, ignore
+```jsx
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -228,7 +228,7 @@ export default Dinosaur;
 
 Let's start the React app:
 
-```
+```console
 deno task start
 ```
 

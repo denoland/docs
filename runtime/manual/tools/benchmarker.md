@@ -1,4 +1,4 @@
-# Benchmarking Tool
+# `deno bench`, benchmarking tool
 
 Deno has a built-in benchmark runner that you can use for checking performance
 of JavaScript or TypeScript code.
@@ -97,8 +97,8 @@ To help with such situations you can `Deno.BenchContext.start` and
 you want to measure. Everything outside of the section between these two calls
 will be excluded from the measurement.
 
-```ts, ignore
-import { readAll } from "https://deno.land/std@$STD_VERSION/streams/mod.ts";
+```ts
+import { readAll } from "https://deno.land/std@$STD_VERSION/io/read_all.ts";
 
 Deno.bench("foo", async (b) => {
   // Open a file that we will act upon.
@@ -125,7 +125,7 @@ Deno.bench("foo", async (b) => {
 When registering a bench case, it can be assigned to a group, using
 `Deno.BenchDefinition.group` option:
 
-```ts, ignore
+```ts
 // url_bench.ts
 Deno.bench("url parse", { group: "url" }, () => {
   new URL("https://deno.land");
@@ -139,7 +139,7 @@ In this example we'll check how performant is `Date.now()` compared to
 `performance.now()`, to do that we'll mark the first case as a "baseline" using
 `Deno.BenchDefinition.baseline` option:
 
-```ts, ignore
+```ts
 // time_bench.ts
 Deno.bench("Date.now()", { group: "timing", baseline: true }, () => {
   Date.now();

@@ -17,14 +17,14 @@ and adds and updates a dinosaur to the database.
 
 First, we'll create the necessary files and directories:
 
-```
+```console
 $ touch main.ts && mkdir model && touch model/Dinosaur.ts
 ```
 
 In `/model/Dinosaur.ts`, we'll import `npm:mongoose`, define the [schema], and
 export it:
 
-```ts, ignore
+```ts
 import { model, Schema } from "npm:mongoose@^6.7";
 
 // Define schema.
@@ -51,7 +51,7 @@ export default model("Dinosaur", dinosaurSchema);
 Now, in our `main.ts` file, we'll import mongoose and the `Dinosaur` schema, and
 connect to MongoDB:
 
-```ts, ignore
+```ts
 import mongoose from "npm:mongoose@^6.7";
 import Dinosaur from "./model/Dinosaur.ts";
 
@@ -66,7 +66,7 @@ Because Deno supports top-level `await`, we're able to simply
 
 Running this, we should expect a log of `1`:
 
-```shell, ignore
+```shell
 $ deno run --allow-read --allow-sys --allow-env --allow-net main.ts
 1
 ```
@@ -78,7 +78,7 @@ It worked!
 Let's add an instance [method](https://mongoosejs.com/docs/guide.html#methods)
 to our `Dinosaur` schema in `/model/Dinosaur.ts`:
 
-```ts, ignore
+```ts
 // ./model/Dinosaur.ts
 
 // Methods.
@@ -98,7 +98,7 @@ description.
 
 Back in `main.ts`, let's start adding and manipulating data in MongoDB.
 
-```ts, ignore
+```ts
 // main.ts
 
 // Create a new Dinosaur.
@@ -130,7 +130,7 @@ console.log(
 
 Running the code, we get:
 
-```
+```console
 Finding Deno in MongoDB --
   Deno: The fastest dinosaur ever lived.
 Finding Deno (again) --

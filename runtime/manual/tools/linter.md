@@ -1,4 +1,4 @@
-# Linter
+# `deno lint`, linter
 
 Deno ships with a built-in code linter for JavaScript and TypeScript.
 
@@ -37,9 +37,19 @@ function foo(): any {
 }
 ```
 
+or
+
+```ts
+// deno-lint-ignore-file -- reason for ignoring
+
+function foo(): any {
+  // ...
+}
+```
+
 Ignore directive must be placed before first statement or declaration:
 
-```ts, ignore
+```ts
 // Copyright 2020 the Deno authors. All rights reserved. MIT license.
 
 /**
@@ -78,6 +88,15 @@ function foo(): any {
 
 // deno-lint-ignore no-explicit-any explicit-function-return-type
 function bar(a: any) {
+  // ...
+}
+```
+
+You can also specify the reason for ignoring the diagnostic:
+
+```ts
+// deno-lint-ignore no-explicit-any -- reason for ignoring
+function foo(): any {
   // ...
 }
 ```

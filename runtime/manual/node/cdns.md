@@ -54,7 +54,7 @@ import { renderToString } from "https://esm.sh/react-dom/server";
 
 Or to import regular files:
 
-```tsx, ignore
+```tsx
 import "https://esm.sh/tailwindcss/dist/tailwind.min.css";
 ```
 

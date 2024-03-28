@@ -19,14 +19,14 @@ Let's get started.
 
 Let's create the folder `rest-api-with-prisma-oak` and navigate there:
 
-```shell, ignore
+```shell
 mkdir rest-api-with-prisma-oak
 cd rest-api-with-prisma-oak
 ```
 
 Then, let's run `prisma init` with Deno:
 
-```shell, ignore
+```shell
 deno run --allow-read --allow-env --allow-write npm:prisma@^4.5 init
 ```
 
@@ -34,7 +34,7 @@ This will generate
 [`prisma/schema.prisma`](https://www.prisma.io/docs/concepts/components/prisma-schema).
 Let's update it with the following:
 
-```ts, ignore
+```ts
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["deno"]
@@ -59,13 +59,13 @@ use a free [PostgreSQL database from Supabase](https://supabase.com/database).
 
 Next, let's create the database schema:
 
-```shell, ignore
+```shell
 deno run -A npm:prisma@^4.5 db push
 ```
 
 After that's complete, we'll need to generate a Prisma client for Data Proxy:
 
-```shell, ignore
+```shell
 deno run -A --unstable npm:prisma@^4.5 generate --data-proxy
 ```
 
@@ -93,13 +93,13 @@ Next, let's create a seed script to seed the database.
 
 Create `./prisma/seed.ts`:
 
-```shell, ignore
+```shell
 touch prisma/seed.ts
 ```
 
 And in `./prisma/seed.ts`:
 
-```ts, ignore
+```ts
 import { Prisma, PrismaClient } from "../generated/client/deno/edge.ts";
 import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
 
@@ -145,7 +145,7 @@ await prisma.$disconnect();
 
 We can now run `seed.ts` with:
 
-```shell, ignore
+```shell
 deno run -A prisma/seed.ts
 ```
 
@@ -160,13 +160,13 @@ them simple for now.
 
 Let's create a `main.ts` file:
 
-```shell, ignore
+```shell
 touch main.ts
 ```
 
 Then, in your `main.ts` file:
 
-```ts, ignore
+```ts
 import { PrismaClient } from "./generated/client/deno/edge.ts";
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
 import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
@@ -248,7 +248,7 @@ await app.listen({ port: 8000 });
 
 Now, let's run it:
 
-```shell, ignore
+```shell
 deno run -A main.ts
 ```
 
@@ -258,7 +258,7 @@ Let's visit `localhost:8000/dinosaurs`:
 
 Next, let's `POST` a new user with this `curl` command:
 
-```shell, ignore
+```shell
 curl -X POST http://localhost:8000/dinosaur -H "Content-Type: application/json" -d '{"name": "Deno", "description":"The fastest, most secure, easiest to use Dinosaur ever to walk the Earth."}'
 ```
 

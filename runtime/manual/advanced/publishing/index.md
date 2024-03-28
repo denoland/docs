@@ -14,7 +14,7 @@ To use it, modules must be developed and hosted in public repositories on
 GitHub. Their source is then published to deno.land/x on tag creation. They can
 then be accessed by using a url in the following format:
 
-```
+```console
 https://deno.land/x/<module_name>@<tag_name>/<file_path>
 ```
 

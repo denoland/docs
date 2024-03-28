@@ -41,8 +41,8 @@ POST /todos
 
 In this tutorial, we will be:
 
-- Creating and setting up a [Postgres](https://www.postgresql.org/) instance on
-  [Supabase](https://supabase.com).
+- Creating and setting up a [Postgres](https://www.postgresql.org/) instance 
+  on [Neon Postgres](https://neon.tech/) or [Supabase](https://supabase.com).
 - Using a [Deno Deploy](/deploy) Playground to develop and deploy the
   application.
 - Testing our application using [cURL](https://curl.se/).
@@ -54,9 +54,21 @@ In this tutorial, we will be:
 > documentation [here](https://deno-postgres.com/#/?id=ssltls-connection).
 
 To get started we need to create a new Postgres instance for us to connect to.
-For this tutorial we will be using [Supabase](https://supabase.com) as they
-provide free, managed Postgres instances. If you like to host your database
+For this tutorial, you can use either [Neon Postgres](https://neon.tech/) or [Supabase](https://supabase.com), as they
+both provide free, managed Postgres instances. If you like to host your database
 somewhere else, you can do that too.
+
+### Neon Postgres
+
+1. Visit https://neon.tech/ and click **Sign up** to sign up with an email, Github, Google, or partner account. After signing up, you are directed to the Neon Console to create your first project.
+2.  Enter a name for your project, select a Postgres version, provide a database name, and select a region. Generally, you'll want to select the region closest to your application. When you're finished, click **Create project**.
+3. You are presented with the connection string for your new project, which you can use to connect to your database. Save the connection string, which looks something like this: 
+
+    ```sh
+    postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+    ```
+
+### Supabase
 
 1. Visit https://app.supabase.io/ and click "New project".
 2. Select a name, password, and region for your database. Make sure to save the
@@ -86,13 +98,11 @@ your connection string into the "Value" field. Now, press "Add". Your
 environment variables is now set.
 
 Let's return back to the editor: to do this, go to the "Overview" tab via the
-left navigation menu, and press "Open Playground". Let's start by the `std/http`
-module so we can start serving HTTP requests:
+left navigation menu, and press "Open Playground". Let's start by serving HTTP
+requests using `Deno.serve()`:
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
-serve(async (req) => {
+Deno.serve(async (req) => {
   return new Response("Not Found", { status: 404 });
 });
 ```
@@ -105,7 +115,6 @@ Next, let's import the Postgres module, read the connection string from the
 environment variables, and create a connection pool.
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
 import * as postgres from "https://deno.land/x/postgres@v0.14.0/mod.ts";
 
 // Get the connection string from the environment variable "DATABASE_URL"
@@ -146,7 +155,7 @@ Now that we have a table, we can add the HTTP handlers for the GET and POST
 endpoints.
 
 ```ts
-serve(async (req) => {
+Deno.serve(async (req) => {
   // Parse the URL and check that the requested endpoint is /todos. If it is
   // not, return a 404 response.
   const url = new URL(req.url);

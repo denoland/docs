@@ -1,4 +1,4 @@
-# Starting a new project
+# `deno init`, start a new project
 
 Starting a new project with Deno has always been incredibly simple: you just
 need a single file to get going. No need for any configuration files, dependency

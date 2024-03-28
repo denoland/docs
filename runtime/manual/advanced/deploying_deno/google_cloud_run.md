@@ -23,7 +23,7 @@ Pre-requisites:
 To focus on the deployment, our app will simply be a `main.ts` file that returns
 a string as an HTTP response:
 
-```ts, ignore
+```ts
 import { Application } from "https://deno.land/x/oak/mod.ts";
 
 const app = new Application();
@@ -40,7 +40,7 @@ build the Docker image.
 
 In our `Dockerfile`, let's add:
 
-```Dockerfile, ignore
+```Dockerfile
 FROM denoland/deno
 
 EXPOSE 8000
@@ -56,7 +56,7 @@ CMD ["run", "--allow-net", "main.ts"]
 
 Then, in our `docker-compose.yml`:
 
-```yml, ignore
+```yml
 version: '3'
 
 services:
@@ -92,14 +92,14 @@ Once we've created a repository, we can start pushing images to it.
 
 First, let's add the registry's address to `gcloud`:
 
-```shell, ignore
+```shell
 gcloud auth configure-docker us-central1-docker.pkg.dev
 ```
 
 Then, let's build your Docker image. (Note that the image name is defined in our
 `docker-compose.yml` file.)
 
-```shell, ignore
+```shell
 docker compose -f docker-compose.yml build
 ```
 
@@ -108,7 +108,7 @@ the new Google Artifact Registry address, repository, and name. The image name
 should follow this structure:
 `{{ location }}-docker.pkg.dev/{{ google_cloudrun_project_name }}/{{ repository }}/{{ image }}`.
 
-```shell, ignore
+```shell
 docker tag deno-image us-central1-docker.pkg.dev/deno-app-368305/deno-repository/deno-cloudrun-image
 ```
 
@@ -116,7 +116,7 @@ If you don't specify a tag, it'll use `:latest` by default.
 
 Next, push the image:
 
-```shell, ignore
+```shell
 docker push us-central1-docker.pkg.dev/deno-app-368305/deno-repository/deno-cloudrun-image
 ```
 
@@ -155,7 +155,7 @@ Note that the `image` name follows the structure from above.
 
 For this example, the command is:
 
-```shell, ignore
+```shell
 gcloud run deploy hello-from-deno --image=us-central1-docker.pkg.dev/deno-app-368305/deno-repository/deno-cloudrun-image --region=us-central1 --allow-unauthenticated
 ```
 
@@ -176,7 +176,7 @@ been created:
 Now that we have done that, we can automate it with a GitHub workflow. Here's
 the yaml file:
 
-```yml, ignore
+```yml
 name: Build and Deploy to Cloud Run
 
 on:

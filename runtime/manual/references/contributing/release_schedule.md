@@ -19,13 +19,13 @@ In addition to the stable channel described above, canaries are released
 multiple times daily (for each commit on main). You can upgrade to the latest
 canary release by running:
 
-```
+```console
 deno upgrade --canary
 ```
 
 To update to a specific canary, pass the commit hash in the `--version` option:
 
-```
+```console
 deno upgrade --canary --version=973af61d8bb03c1709f61e456581d58386ed4952
 ```
 

@@ -1,9 +1,9 @@
-# Compiling Executables
+# `deno compile`, standalone executables
 
 `deno compile [--output <OUT>] <SRC>` will compile the script into a
 self-contained executable.
 
-```
+```console
 > deno compile https://docs.deno.com/examples/welcome.ts
 ```
 
@@ -16,14 +16,14 @@ As with [`deno install`](./script_installer.md), the runtime flags used to
 execute the script must be specified at compilation time. This includes
 permission flags.
 
-```
+```console
 > deno compile --allow-read --allow-net https://deno.land/std/http/file_server.ts
 ```
 
 [Script arguments](../getting_started/command_line_interface.md#script-arguments)
 can be partially embedded.
 
-```
+```console
 > deno compile --allow-read --allow-net https://deno.land/std/http/file_server.ts -p 8080
 > ./file_server --help
 ```
@@ -34,14 +34,14 @@ By default, statically analyzable dynamic imports (imports that have the string
 literal within the `import("...")` call expression) will be included in the
 output.
 
-```ts, ignore
+```ts
 // calculator.ts and its dependencies will be included in the binary
 const calculator = await import("./calculator.ts");
 ```
 
 But non-statically analyzable dynamic imports won't:
 
-```ts, ignore
+```ts
 const specifier = condition ? "./calc.ts" : "./better_calc.ts";
 const calculator = await import(specifier);
 ```

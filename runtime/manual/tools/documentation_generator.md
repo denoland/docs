@@ -1,4 +1,4 @@
-# Documentation Generator
+# `deno doc`, documentation generator
 
 `deno doc` followed by a list of one or more source files will print the JSDoc
 documentation for each of the module's **exported** members.
@@ -74,7 +74,7 @@ with non-zero exit code and the output is reported to standard error.
 
 Use the `--html` flag to generate a static site with documentation.
 
-```
+```console
 $ deno doc --html --name="My library" ./mod.ts
 
 $ deno doc --html --name="My library" --output=./documentation/ ./mod.ts

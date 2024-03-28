@@ -279,7 +279,37 @@ export default function configureRedirects(app: Hono) {
     return c.redirect("/deploy/manual/" + unversionedPath.join("/"));
   });
 
+  r(
+    "/runtime/manual/contributing",
+    "/runtime/manual/references/contributing",
+  );
+
   // Subhosting
-  r("/subhosting", "/deploy/manual/subhosting");
   r("/deploy/manual/subhosting/domains", "/deploy/api/rest/domains");
+
+  // Redirect Subhosting docs from nested location under Deploy to a top-level
+  r("/subhosting", "/subhosting/manual");
+  r("/deploy/manual/subhosting", "/subhosting/manual");
+  r("/deploy/manual/subhosting/domains", "/subhosting/manual/domains");
+  r(
+    "/deploy/manual/subhosting/getting_started",
+    "/subhosting/manual/getting_started",
+  );
+  r(
+    "/deploy/manual/subhosting/projects_and_deployments",
+    "/subhosting/manual/projects_and_deployments",
+  );
+  r(
+    "/deploy/api/rest",
+    "/subhosting/api",
+  );
+  r(
+    "/deploy/api/rest/*",
+    "https://apidocs.deno.com",
+  );
+
+  r(
+    "/deploy/",
+    "/deploy/manual",
+  );
 }

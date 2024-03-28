@@ -98,7 +98,10 @@ Using [asdf](https://asdf-vm.com/):
 asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
 asdf install deno latest
 
-# To install globally
+# Download and install the latest version of Deno
+asdf install deno latest
+
+# To set as the default version of Deno globally
 asdf global deno latest
 
 # To install locally (current project only)

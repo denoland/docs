@@ -13,7 +13,7 @@ Vue.
 
 We'll use Vite to scaffold our Vue app. First, run:
 
-```shell, ignore
+```shell
 deno run --allow-read --allow-write --allow-env npm:create-vite-extra@latest
 ```
 
@@ -21,7 +21,7 @@ Name your project, then select "deno-vue".
 
 Then, `cd` into your new project and run:
 
-```shell, ignore
+```shell
 deno task dev
 ```
 
@@ -38,7 +38,7 @@ In the directory, let's create an `api` folder. In that folder, we'll create a
 `main.ts` file, which will run the server, and a `data.json`, which is the hard
 coded data.
 
-```shell, ignore
+```shell
 mkdir api && touch api/data.json && touch api/main.ts
 ```
 
@@ -48,7 +48,7 @@ into your `api/data.json`.
 
 Then, let's update `api/main.ts`:
 
-```ts, ignore
+```ts
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
 import data from "./data.json" assert { type: "json" };
@@ -85,7 +85,7 @@ await app.listen({ port: 8000 });
 This is a very simple API server using [`oak`](https://deno.land/x/oak) that
 will return dinosaur information based on the route. Let's start the API server:
 
-```shell, ignore
+```shell
 deno run --allow-env --allow-net api/main.ts
 ```
 
@@ -105,7 +105,7 @@ Let's update `src/components`. We'll add the files:
 - `Dinosaur.vue`, the component that shows an individual dinosaur's name and
   description
 
-```shell, ignore
+```shell
 touch src/components/HomePage.vue src/components/Dinosaurs.vue src/components/Dinosaur.vue
 ```
 
@@ -121,13 +121,13 @@ more complex state management, check out the Vue-endorsed
 
 Create a `src/store.js` file:
 
-```shell, ignore
+```shell
 touch src/store.js
 ```
 
 And in it, let's add:
 
-```js, ignore
+```js
 import { reactive } from "vue";
 
 export const store = reactive({
@@ -154,7 +154,7 @@ In `Dinosaurs.vue`, we'll do three things:
 
 Here is the complete code below:
 
-```tsx, ignore
+```tsx
 <script>
 import { ref } from 'vue'
 import { store } from '../store.js'
@@ -207,7 +207,7 @@ In `Dinosaur.vue`, we'll add:
 - importing `store`
 - rendering `store.dinosaur` in the HTML
 
-```tsx, ignore
+```tsx
 <script>
 import { store } from '../store.js';
 export default {
@@ -231,7 +231,7 @@ fetch the data from the API, we'll use
 [`<Suspense>`](https://vuejs.org/manual/built-ins/suspense.html), which manages
 async dependencies in a component tree.
 
-```tsx, ignore
+```tsx
 <script>
 import { ref } from 'vue'
 import Dinosaurs from './Dinosaurs.vue'
@@ -270,7 +270,7 @@ export default {
 
 Tying it all together, let's update `src/App.vue`:
 
-```tsx, ignore
+```tsx
 <template>
   <router-view />
 </template>;
@@ -284,7 +284,7 @@ which we'll have to setup and configure in another file.
 
 First, let's import `vue-router` in our `vite.config.mjs` file:
 
-```ts, ignore
+```ts
 import { defineConfig } from "npm:vite@^3.1.3";
 import vue from "npm:@vitejs/plugin-vue@^3.2.39";
 
@@ -299,7 +299,7 @@ export default defineConfig({
 
 Next, let's create a folder named `router`. In it, let's create `index.ts`:
 
-```
+```console
 mkdir router && touch router/index.ts
 ```
 
@@ -307,7 +307,7 @@ In `router/index.ts`, we'll create `router`, which contains information about
 each route and their component, and export it. For more information on using
 `vue-router`, check out their [guide](https://router.vuejs.org/guide).
 
-```ts, ignore
+```ts
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "../components/HomePage.vue";
 import Dinosaur from "../components/Dinosaur.vue";
@@ -337,7 +337,7 @@ export default router;
 Next, in our `src/main.ts` file, which contains all of the logic for the
 frontend app, we'll have to import and use `router`:
 
-```ts, ignore
+```ts
 import { createApp } from "vue";
 import "./style.css";
 import App from "./App.vue";

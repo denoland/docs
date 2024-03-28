@@ -91,7 +91,7 @@ file_server --help
 
 Example output:
 
-```
+```console
 Deno File Server
     Serves a local directory in HTTP.
   INSTALL:

@@ -127,11 +127,6 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "deno info",
-          id: "manual/tools/dependency_inspector",
-        },
-        {
-          type: "doc",
           label: "deno doc",
           id: "manual/tools/documentation_generator",
         },
@@ -142,8 +137,18 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno info",
+          id: "manual/tools/dependency_inspector",
+        },
+        {
+          type: "doc",
           label: "deno init",
           id: "manual/tools/init",
+        },
+        {
+          type: "doc",
+          label: "deno install",
+          id: "manual/tools/script_installer",
         },
         {
           type: "doc",
@@ -162,8 +167,8 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "deno install",
-          id: "manual/tools/script_installer",
+          label: "deno run",
+          id: "manual/tools/run",
         },
         {
           type: "doc",
@@ -248,6 +253,7 @@ const sidebars = {
         "manual/runtime/webassembly/wasm_resources",
       ],
     },
+    "manual/advanced/migrate_deprecations",
     {
       type: "html",
       value: "<div>Contributing and Support</div>",

@@ -205,7 +205,7 @@ on the `Deno` namespace.
 
 ## `--unstable-kv`
 
-Enabling this flag makes [Deno KV](/deploy/kv/manual/cron) APIs available in the
+Enabling this flag makes [Deno KV](/deploy/kv/manual) APIs available in the
 `Deno` namespace.
 
 ## `--unstable-ffi`
@@ -256,4 +256,4 @@ deno run --unstable your_script.ts
 ```
 
 It is recommended that you use the granular unstable flags instead of this, the
-`--unstable` flag is now depreacted and will be removed in Deno 2.
+`--unstable` flag is now deprecated and will be removed in Deno 2.
