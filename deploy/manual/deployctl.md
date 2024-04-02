@@ -100,6 +100,8 @@ deploy an static site using `std/http/file_server.ts` (more details in
 deployctl deploy --include=dist --entrypoint=jsr:@std/http/file_server
 ```
 
+### Environment variables
+
 You can set env variables using `--env` (to set individual environment
 variables) or `--env-file` (to load one or more environment files). These
 options can be combined and used multiple times:
@@ -301,7 +303,7 @@ If your organization has custom databases, you can also set them by UUID:
 deployctl deployments redeploy --last --db=5261e096-f9aa-4b72-8440-1c2b5b553def
 ```
 
-#### Env Variables
+#### Environment Variables
 
 When a deployment is created, it inherits the environment variables of the
 project. Given that the deployments are immutable, their environment variables
@@ -634,8 +636,6 @@ Get a csv stream of the CPU time per request on each isolate of each region:
 ```shell
 deployctl top | jq -r '[.id,.region,.cpuTimePerRequest] | @csv'
 ```
-
-# TODO: json piping
 
 # TODO: Update rest of docs with new deployctl
 
