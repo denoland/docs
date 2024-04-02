@@ -625,8 +625,14 @@ the programmatic use of all the data provided by `deployctl`:
 
 Get the id of the current production deployment:
 
-```
+```shell
 deployctl deployments show | jq .build.deploymentId
+```
+
+Get a csv stream of the CPU time per request on each isolate of each region:
+
+```shell
+deployctl top | jq -r '[.id,.region,.cpuTimePerRequest] | @csv'
 ```
 
 # TODO: json piping
