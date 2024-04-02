@@ -616,6 +616,19 @@ section.
 
 [manual-gs]: https://deno.land/manual/getting_started
 
+## JSON output
+
+All the commands that output data have a `--format=json` option that outputs the
+data in JSON objects. This output mode is the default when stdout is not a TTY,
+notably when piping to another command. Together with `jq`, this mode enables
+the programmatic use of all the data provided by `deployctl`:
+
+Get the id of the current production deployment:
+
+```
+deployctl deployments show | jq .build.deploymentId
+```
+
 # TODO: json piping
 
 # TODO: Update rest of docs with new deployctl
