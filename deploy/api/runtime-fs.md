@@ -118,7 +118,7 @@ and JavaScript files. This guide demonstrates how to use this feature.
 
 Imagine the following file structure on a GitHub repository:
 
-```
+```console
 ├── mod.ts
 └── style.css
 ```

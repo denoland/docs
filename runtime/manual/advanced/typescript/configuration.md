@@ -9,7 +9,7 @@ That being said, Deno does support using a TypeScript configuration file. To use
 a TypeScript configuration file with Deno, you may provide a path on the command
 line, or use the default. For example:
 
-```
+```console
 > deno run --config ./deno.json main.ts
 ```
 
@@ -39,36 +39,36 @@ ignored.
 Here is a table of compiler options that can be changed, their default in Deno
 and any other notes about that option:
 
-| Option                           | Default                 | Notes                                                                                                                                     |
-| -------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `allowJs`                        | `true`                  | This almost never needs to be changed                                                                                                     |
-| `allowUnreachableCode`           | `false`                 |                                                                                                                                           |
-| `allowUnusedLabels`              | `false`                 |                                                                                                                                           |
-| `checkJs`                        | `false`                 | If `true` causes TypeScript to type check JavaScript                                                                                      |
-| `jsx`                            | `"react"`               |                                                                                                                                           |
-| `jsxFactory`                     | `"React.createElement"` |                                                                                                                                           |
-| `jsxFragmentFactory`             | `"React.Fragment"`      |                                                                                                                                           |
-| `keyofStringsOnly`               | `false`                 |                                                                                                                                           |
-| `lib`                            | `[ "deno.window" ]`     | The default for this varies based on other settings in Deno. If it is supplied, it overrides the default. See below for more information. |
-| `noErrorTruncation`              | `false`                 |                                                                                                                                           |
-| `noFallthroughCasesInSwitch`     | `false`                 |                                                                                                                                           |
-| `noImplicitAny`                  | `true`                  |                                                                                                                                           |
-| `noImplicitReturns`              | `false`                 |                                                                                                                                           |
-| `noImplicitThis`                 | `true`                  |                                                                                                                                           |
-| `noImplicitUseStrict`            | `true`                  |                                                                                                                                           |
-| `noStrictGenericChecks`          | `false`                 |                                                                                                                                           |
-| `noUnusedLocals`                 | `false`                 |                                                                                                                                           |
-| `noUnusedParameters`             | `false`                 |                                                                                                                                           |
-| `noUncheckedIndexedAccess`       | `false`                 |                                                                                                                                           |
-| `reactNamespace`                 | `React`                 |                                                                                                                                           |
-| `strict`                         | `true`                  |                                                                                                                                           |
-| `strictBindCallApply`            | `true`                  |                                                                                                                                           |
-| `strictFunctionTypes`            | `true`                  |                                                                                                                                           |
-| `strictPropertyInitialization`   | `true`                  |                                                                                                                                           |
-| `strictNullChecks`               | `true`                  |                                                                                                                                           |
-| `suppressExcessPropertyErrors`   | `false`                 |                                                                                                                                           |
-| `suppressImplicitAnyIndexErrors` | `false`                 |                                                                                                                                           |
-| `useUnknownInCatchVariables`     | `false`                 |                                                                                                                                           |
+| <div style={{width: '220px'}}>Option</div> | <div style={{width: '180px'}}>Default</div> | Notes                                                                                                                                     |
+| ------------------------------------------ | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `allowJs`                                  | `true`                                      | This almost never needs to be changed                                                                                                     |
+| `allowUnreachableCode`                     | `false`                                     |                                                                                                                                           |
+| `allowUnusedLabels`                        | `false`                                     |                                                                                                                                           |
+| `checkJs`                                  | `false`                                     | If `true` causes TypeScript to type check JavaScript                                                                                      |
+| `jsx`                                      | `"react"`                                   |                                                                                                                                           |
+| `jsxFactory`                               | `"React.createElement"`                     |                                                                                                                                           |
+| `jsxFragmentFactory`                       | `"React.Fragment"`                          |                                                                                                                                           |
+| `keyofStringsOnly`                         | `false`                                     |                                                                                                                                           |
+| `lib`                                      | `[ "deno.window" ]`                         | The default for this varies based on other settings in Deno. If it is supplied, it overrides the default. See below for more information. |
+| `noErrorTruncation`                        | `false`                                     |                                                                                                                                           |
+| `noFallthroughCasesInSwitch`               | `false`                                     |                                                                                                                                           |
+| `noImplicitAny`                            | `true`                                      |                                                                                                                                           |
+| `noImplicitReturns`                        | `false`                                     |                                                                                                                                           |
+| `noImplicitThis`                           | `true`                                      |                                                                                                                                           |
+| `noImplicitUseStrict`                      | `true`                                      |                                                                                                                                           |
+| `noStrictGenericChecks`                    | `false`                                     |                                                                                                                                           |
+| `noUnusedLocals`                           | `false`                                     |                                                                                                                                           |
+| `noUnusedParameters`                       | `false`                                     |                                                                                                                                           |
+| `noUncheckedIndexedAccess`                 | `false`                                     |                                                                                                                                           |
+| `reactNamespace`                           | `React`                                     |                                                                                                                                           |
+| `strict`                                   | `true`                                      |                                                                                                                                           |
+| `strictBindCallApply`                      | `true`                                      |                                                                                                                                           |
+| `strictFunctionTypes`                      | `true`                                      |                                                                                                                                           |
+| `strictPropertyInitialization`             | `true`                                      |                                                                                                                                           |
+| `strictNullChecks`                         | `true`                                      |                                                                                                                                           |
+| `suppressExcessPropertyErrors`             | `false`                                     |                                                                                                                                           |
+| `suppressImplicitAnyIndexErrors`           | `false`                                     |                                                                                                                                           |
+| `useUnknownInCatchVariables`               | `false`                                     |                                                                                                                                           |
 
 For a full list of compiler options and how they affect TypeScript, please refer
 to the

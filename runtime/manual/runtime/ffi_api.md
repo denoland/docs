@@ -280,7 +280,7 @@ fn mul(input: Input) -> i32 {
 Run `deno_bindgen` to generate bindings. You can now directly import them into
 Deno:
 
-```ts, ignore
+```ts
 // mul.ts
 import { mul } from "./bindings/bindings.ts";
 mul({ a: 10, b: 2 }); // 20

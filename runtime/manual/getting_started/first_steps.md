@@ -2,13 +2,13 @@ import { replacements } from "@site/src/components/Replacement";
 
 # First Steps
 
-Welcome to Deno! If you're just getting started, here's a quick primer on some
-key features and functionality of the runtime. If you haven't already, make sure
-to [install the Deno runtime](./installation.md).
+Welcome to Deno! If you're just getting started, here's a primer on some key
+features and functionality of the runtime. If you haven't already, make sure to
+[install the Deno runtime](./installation.md).
 
 ## Create and run a TypeScript program
 
-While you are welcome to use pure JavaScript, Deno has built-in support for
+While you are welcome to use JavaScript, Deno has built-in support for
 [TypeScript](https://www.typescriptlang.org/) as well. In your terminal, create
 a new file called `hello.ts`, and include the following code.
 
@@ -36,7 +36,7 @@ for a Person, and defines a function that prints a message to the console using
 this data type. You can execute the code in this example using the `deno run`
 command.
 
-```
+```console
 deno run -A hello.ts
 ```
 
@@ -54,18 +54,19 @@ replace the contents of `hello.ts` with the following code.
 
 ```ts
 const site = await fetch("https://www.deno.com");
+
 console.log(await site.text());
 ```
 
-And then run it with:
+And then run it.
 
-```
+```console
 deno run -A hello.ts
 ```
 
 For APIs that don't exist as a web standard (like accessing variables from the
 system environment, or manipulating the file system), those APIs are exposed in
-the [`Deno` namespace](../runtime/builtin_apis.md). Replace the contents of
+the [Deno namespace](../runtime/builtin_apis.md). Replace the contents of
 `hello.ts` with the following code, which will start
 [an HTTP server](https://deno.land/api?s=Deno.serve) on
 [localhost:8000](http://localhost:8000).
@@ -76,46 +77,46 @@ Deno.serve((_request: Request) => {
 });
 ```
 
-Run the script above with:
+Save your changes and run the script.
 
-```
+```console
 deno run -A hello.ts
 ```
 
 Learn more about the [web-standard APIs](../runtime/web_platform_apis.md) built
-in to Deno and the [`Deno` namespace APIs](../runtime/builtin_apis.md).
+in to Deno and the [Deno namespace APIs](../runtime/builtin_apis.md).
 
 ## Runtime security
 
 A major feature of Deno is
-[runtime security by default](../basics/permissions.md), meaning that you as the
-developer must explicitly allow your code to access potentially sensitive APIs
-like file system access, network connectivity, and access to environment
-variables.
+[runtime security by default](../basics/permissions.md), meaning that you must
+explicitly allow your code to access potentially sensitive APIs like file system
+access, network connectivity, and access to environment variables.
 
 So far, we've been running all of our scripts with the `-A` flag, which grants
 all runtime feature access to our scripts. This is the most permissive mode to
 run a Deno program, but usually you'll want to grant your code only the
 permissions it needs to run.
 
-To see this in action, let's replace the contents of `hello.ts` again with the
-`fetch` example from earlier.
+To see this in action, let's replace the contents of `hello.ts` with the `fetch`
+example from earlier.
 
 ```ts
 const site = await fetch("https://www.deno.com");
+
 console.log(await site.text());
 ```
 
 Run this program **without** the `-A` flag - what happens then?
 
-```bash
+```console
 deno run hello.ts
 ```
 
 Without any permission flags passed in, you'll see security prompts that look
 something like this:
 
-```
+```console
 kevin@kevin-deno scratchpad % deno run index.ts
 ✅ Granted net access to "www.deno.com".
 ┌ ⚠️  Deno requests net access to "deno.com".
@@ -129,13 +130,13 @@ to run your code with permission to access the network - the `--allow-net` flag.
 If you run the script again using this flag, you won't be prompted to
 interactively grant network access to your script:
 
-```bash
+```console
 deno run --allow-net hello.ts
 ```
 
 For simplicity, we will sometimes show examples that use `deno run -A ...`, but
-whenever possible (and in your production or CI environments), we'd encourage
-you to take advantage of Deno's full suite of
+whenever possible (and in your production or CI environments), we encourage you
+to take advantage of Deno's full suite of
 [configurable runtime security options](../basics/permissions.md).
 
 ## Importing JavaScript modules
@@ -185,7 +186,7 @@ for the `sayHello` function, and a
 [default export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#default_exports_versus_named_exports)
 for the `Person` interface.
 
-Back in `hello.ts`, you would consume this module using the `import` keyword.
+Back in `hello.ts`, you can consume this module using the `import` keyword.
 
 ```ts title="hello.ts"
 import Person, { sayHello } from "./person.ts";
@@ -235,13 +236,13 @@ Deno.test("sayHello function", () => {
 
 Run this test with:
 
-```
+```bash
 deno test person_test.ts
 ```
 
 The output should look something like this:
 
-```
+```bash
 kevin@kevin-deno scratchpad % deno test person_test.ts
 Check file:///Users/kevin/dev/denoland/scratchpad/person_test.ts
 running 1 test from ./person_test.ts
@@ -396,9 +397,9 @@ You can also host Deno
 ## Next Steps
 
 We've only just scratched the surface of what's possible with Deno. Here are a
-few resources you might want to check out next.
+few resources to check out next.
 
-- [Set up your dev environment](./setup_your_environment.md) - learn about
+- [Set up your dev environment](./setup_your_environment.md) - Learn about
   options for configuring your local dev environment
 - [Tutorials and Examples](../../tutorials/index.md) - Sample code and use cases
   for Deno

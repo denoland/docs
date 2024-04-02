@@ -18,13 +18,13 @@ have [Node.js and npm](https://nodejs.org/en/download) installed for local
 development. Once Node and npm are installed, install Docusaurus' dependencies
 with:
 
-```
+```console
 npm install
 ```
 
 You can then start the local development server with:
 
-```
+```console
 npm start
 ```
 
@@ -34,14 +34,14 @@ changes you make update live.
 
 To test the generated static site in a production configuration, run:
 
-```
+```console
 npm run build
 ```
 
 This will generate a static site to the `build` folder locally. To test the
 production server (through the actual Deno / Hono server), run this command:
 
-```
+```console
 npm run serve
 ```
 
@@ -51,7 +51,7 @@ you can preview the site as it will run on Deno Deploy.
 Sometimes, after making a Docusaurus config change, you will run into an error
 and need to clean Docusaurus' generated assets. You can do this by running:
 
-```
+```console
 npm run clear
 ```
 

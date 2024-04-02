@@ -12,7 +12,7 @@ Deno.
 
 Let's create `main.ts`:
 
-```
+```console
 touch main.ts
 ```
 
@@ -33,15 +33,13 @@ app.listen(8000);
 
 Let's run this server:
 
-```
+```console
 deno run -A main.ts
 ```
 
 And point our browser to `localhost:8000`. You should see:
 
-```
-Welcome to the Dinosaur API!
-```
+**Welcome to the Dinosaur API!**
 
 ## Add data and routes
 
@@ -52,7 +50,7 @@ Feel free to
 
 Let's create `data.json`:
 
-```
+```console
 touch data.json
 ```
 

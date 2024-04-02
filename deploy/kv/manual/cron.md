@@ -15,17 +15,24 @@ Deno.cron("Log a message", "* * * * *", () => {
 });
 ```
 
+It's also possible to use JavaScript objects to define the cron schedule. In the
+example below, we configure a block of JavaScript code that will execute once an
+hour.
+
+```ts
+Deno.cron("Log a message", { hour: { every: 1 } }, () => {
+  console.log("This will print once an hour.");
+});
+```
+
 `Deno.cron` takes three arguments:
 
 - A human-readable name for the cron task
-- A [cron schedule string](https://cronitor.io/guides/cron-jobs) that defines a
-  schedule on which the cron job will run
+- A cron schedule string or JavaScript object that defines a schedule on which
+  the cron job will run
 - a function to be executed on the given schedule
 
-If you are new to cron syntax, it might be useful to check out
-[crontab.guru](https://crontab.guru/), a browser-based tool that provides an
-interactive interface to experiment with different cron syntaxes. There are also
-a number of third party modules
+If you are new to cron syntax, there are a number of third party modules
 [like this one](https://www.npmjs.com/package/cron-time-generator) that will
 help you generate cron schedule strings.
 
@@ -73,6 +80,12 @@ with time zones which observe daylight saving time.
 It's possible for the next scheduled invocation of your cron task to overlap
 with the previous invocation. If this occurs, `Deno.cron` will skip the next
 scheduled invocation in order to avoid overlapping executions.
+
+### Day-of-week numeric representation
+
+`Deno.cron` does not use 0-based day-of-week numeric representation. Instead, it
+uses 1-7 (or SUN-SAT) to represent Sunday through Saturday. This may be
+different compared to other cron engines which use 0-6 representation.
 
 ## Usage on Deno Deploy
 

@@ -110,6 +110,16 @@ deno test --watch
 deno fmt --watch
 ```
 
+You can exclude paths from watching by providing the `--watch-exclude` flag.
+This flag works only with `deno run`. The syntax is
+`--watch-exclude=path1,path2`. For example:
+
+```shell
+deno run --watch --watch-exclude=file1.ts,file2.ts main.ts
+```
+
+This will exclude file1.ts and file2.ts from being watched.
+
 ## Hot Module Replacement mode
 
 You can use `--unstable-hmr` flag with `deno run` to enable the hot module

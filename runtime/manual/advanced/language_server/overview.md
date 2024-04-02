@@ -109,7 +109,7 @@ with Deno:
 
   It expects parameters of:
 
-  ```ts, ignore
+  ```ts
   interface CacheParams {
     referrer: TextDocumentIdentifier;
     uris: TextDocumentIdentifier[];
@@ -137,7 +137,7 @@ with Deno:
 
   It expects parameters of:
 
-  ```ts, ignore
+  ```ts
   interface VirtualTextDocumentParams {
     textDocument: TextDocumentIdentifier;
   }

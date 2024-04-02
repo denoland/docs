@@ -74,7 +74,7 @@ with non-zero exit code and the output is reported to standard error.
 
 Use the `--html` flag to generate a static site with documentation.
 
-```
+```console
 $ deno doc --html --name="My library" ./mod.ts
 
 $ deno doc --html --name="My library" --output=./documentation/ ./mod.ts
