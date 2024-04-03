@@ -635,12 +635,3 @@ Get a csv stream of the CPU time per request on each isolate of each region:
 ```shell
 deployctl top | jq -r '[.id,.region,.cpuTimePerRequest] | @csv'
 ```
-
-# TODO: Update rest of docs with new deployctl
-
-- remove need for token management
-- mention deployctl in subhosting getting started
-- mention redeploy to prod in promote to production docs
-
-```
-```
