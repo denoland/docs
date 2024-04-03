@@ -603,7 +603,6 @@ After installation, you can run your scripts locally:
 ```shell
 $ deno run --allow-net=:8000 ./main.ts
 Listening on http://localhost:8000
-````
 
 To watch for file changes add the `--watch` flag:
 
