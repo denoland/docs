@@ -122,6 +122,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno check",
+          id: "manual/tools/check",
+        },
+        {
+          type: "doc",
           label: "deno compile",
           id: "manual/tools/compiler",
         },
