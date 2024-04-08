@@ -132,6 +132,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno eval",
+          id: "manual/tools/eval",
+        },
+        {
+          type: "doc",
           label: "deno fmt",
           id: "manual/tools/formatter",
         },
