@@ -177,6 +177,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno upgrade",
+          id: "manual/tools/upgrade",
+        },
+        {
+          type: "doc",
           label: "deno vendor",
           id: "manual/tools/vendor",
         },
