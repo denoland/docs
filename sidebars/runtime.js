@@ -122,12 +122,17 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno cache",
+          id: "manual/tools/cache",
+        },
+        {
+          type: "doc",
           label: "deno compile",
           id: "manual/tools/compiler",
         },
         {
           type: "doc",
-          label: "deno doc",
+          label: "deno generator",
           id: "manual/tools/documentation_generator",
         },
         {
