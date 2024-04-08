@@ -8,6 +8,7 @@ const sidebars = {
     "manual/index",
     "manual/getting_started",
     "manual/projects_and_deployments",
+    "manual/events"
     {
       type: "html",
       value: "<div>REST API</div>",
