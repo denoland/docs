@@ -177,7 +177,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "deno vendor",
+          label: "deno upgrade",
           id: "manual/tools/upgrade",
         },
         {
