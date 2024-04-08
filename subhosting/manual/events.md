@@ -6,8 +6,6 @@ its execution logs. Using the
 these event logs can be used to understand and monitor the behavior of your
 deployments.
 
-The following events are emitted during the execution of a deployment:
-
 ## Boot
 
 ```
