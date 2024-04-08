@@ -431,18 +431,6 @@ still enjoying human-readable output in the terminal. In such situations specify
 $ deno test --junit-path=./report.xml
 ```
 
-## Integration with testing libraries
-
-Deno's test runner works with popular testing libraries like
-[Chai](https://www.chaijs.com/), [Sinon.JS](https://sinonjs.org/) or
-[fast-check](https://fast-check.dev/).
-
-For example integration see:
-
-- https://deno.land/std/testing/chai_example.ts
-- https://deno.land/std/testing/sinon_example.ts
-- https://deno.land/std/testing/fast_check_example.ts
-
 ### Example: spying on a function with Sinon
 
 Test spies are function stand-ins that are used to assert if a function's
