@@ -132,7 +132,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "deno generator",
+          label: "deno doc",
           id: "manual/tools/documentation_generator",
         },
         {
