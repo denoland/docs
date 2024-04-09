@@ -18,7 +18,7 @@ deno coverage -h|--help
 
 Print coverage reports from coverage profiles.
 
-By default, when you run `deno test --coverage` a coverage profile will be generated in the `/coverage` directory of your workspace.
+By default, when you run `deno test --coverage` a coverage profile will be generated in the `/coverage` directory in the current working directory.
 Subsequently you can run `deno coverage` to print a coverage report to stdout.
 
 ```bash
