@@ -1,6 +1,6 @@
 # deno check
 
-Download and type-check without execution.
+Download and type-check a program without execution.
 
 ## Command
 
