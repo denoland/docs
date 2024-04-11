@@ -20,7 +20,7 @@ deno publish -h|--help
 
 ## Description
 
-The `deno publish` command is used to publish a package or workspace to [JSR](https://jsr.io/).
+The `deno publish` command is used to [publish a package or workspace](https://jsr.io/docs/publishing-packages) to [JSR](https://jsr.io/).
 
 The command will upload the package to the registry and make it available for others to use.
 
