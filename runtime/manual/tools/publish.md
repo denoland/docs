@@ -26,7 +26,7 @@ The command will upload the package to the registry and make it available for ot
 
 ## Package Requirements
 
-Your package must have a `name` and `version` and an `exports` field in its `deno.json` file.
+Your package must have a `name` and `version` and an `exports` field in its `deno.json` or `jsr.json` file.
 
 - The `name` field must be unique and follow the `@<scope_name>/<package_name>` convention.
 - The `version` field must be a valid semver version.
