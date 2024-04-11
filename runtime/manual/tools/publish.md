@@ -1,6 +1,6 @@
 # deno publish
 
-*This applies to `deno` v.1.17.0. and above.* **Unstable preview feature**.
+*This applies to `deno` v1.42.0. and above.* **Unstable preview feature**.
 
 Publish a package or workspace to [JSR](https://jsr.io/).
 
