@@ -32,7 +32,7 @@ have direct control over, the ability to do the former is also required.
 ## Providing types when importing
 
 If you are consuming a JavaScript module and you have either created types (a
-`.d.ts` file) or have otherwise obtained the types, you want to use, you can
+`.d.ts` file) or have otherwise obtained the types you want to use, you can
 instruct Deno to use that file when type checking instead of the JavaScript file
 using the `@deno-types` compiler hint. `@deno-types` needs to be a single line
 double slash comment, where when used impacts the next import or re-export
@@ -50,8 +50,8 @@ When type checking `coolLib` and your usage of it in the file, the
 `coolLib.d.ts` types will be used instead of looking at the JavaScript file.
 
 The pattern matching for the compiler hint is somewhat forgiving and will accept
-quoted and non-question values for the specifier as well as it accepts
-whitespace before and after the equals sign.
+quoted and non-question values for the specifier as well as accepting whitespace 
+before and after the equals sign.
 
 ## Providing types when hosting
 
