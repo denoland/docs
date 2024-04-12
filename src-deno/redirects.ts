@@ -1,9 +1,14 @@
 import { Hono } from "./deps.ts";
+import REFERENCE_REDIRECTS from "./reference_redirects.json" with { type: "json" };
 
 export default function configureRedirects(app: Hono) {
   // helper to establish redirects
   function r(from: string, to: string, status = 301) {
     app.get(from, (c) => c.redirect(to, status));
+  }
+
+  for (const [key, value] of Object.entries(REFERENCE_REDIRECTS)) {
+    r(key, value);
   }
 
   // Landing page redirects
