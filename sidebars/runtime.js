@@ -122,6 +122,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno cache",
+          id: "manual/tools/cache",
+        },
+        {
+          type: "doc",
           label: "deno check",
           id: "manual/tools/check",
         },
