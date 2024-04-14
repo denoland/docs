@@ -28,7 +28,7 @@ To do so, your `package.json` should look like this:
 
 ```js
 import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-import { parseArgs } from "https://deno.land/std@$STD_VERSION/cli/mod.ts";
+import { parseArgs } from "jsr:@std/cli@^$STD_VERSION";
 
 const { args } = Deno;
 const argPort = parseArgs(args).port ? Number(parseArgs(args).port) : 8000;
