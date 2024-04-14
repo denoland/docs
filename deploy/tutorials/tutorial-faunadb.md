@@ -5,7 +5,7 @@ with a GraphQL interface that enables you to use GraphQL to interact with it.
 Since we communicate with it using HTTP requests, we don't need to manage
 connections which suits very well for serverless applications.
 
-The tutorial assumes that you've [FaunaDB](https://fauna.com) and Deno Deploy
+The tutorial assumes that you have [FaunaDB](https://fauna.com) and Deno Deploy
 accounts, Deno Deploy CLI installed, and some basic knowledge of GraphQL.
 
 - [Overview](#overview)
@@ -156,7 +156,7 @@ curl --dump-header - --request POST --data '{"quote": "A program that has not be
 
 The output might look like something below.
 
-```
+```console
 HTTP/1.1 201 Created
 transfer-encoding: chunked
 content-type: application/json; charset=utf-8
@@ -411,40 +411,24 @@ of the API is available at https://deno.com/examples/fauna.ts.
 
 ## Deploy the API
 
-The process of deploying the API involves creating a new Deno Deploy project and
-a secret to hold our FaunaDB secret.
+Now that we have everything in place, let's deploy your new API!
 
-Create a project and a secret:
+1. In your browser, visit [Deno Deploy](https://dash.deno.com/new_project) and
+   link your GitHub account.
+2. Select the repository which contains your new API.
+3. You can give your project a name or allow Deno to generate one for you
+4. Select `index.ts` in the Entrypoint dropdown
+5. Click **Deploy Project**
 
-1. Go to [https://dash.deno.com/new](https://dash.deno.com/new) (Sign in with
-   GitHub if you didn't already) and click on **+ Empty Project** under **Deploy
-   from the command line**.
-2. Now click on **Settings** button available on the project page.
-3. Navigate to **Environment Variables** Section and add the following secrets.
+In order for your Application to work, we will need to configure its environment
+variables.
 
-- `FAUNA_SECRET` - The value should be the secret we created in the previous
-  step or a new one.
+On your project's success page, or in your project dashboard, click on **Add
+environmental variables**. Under Environment Variables, click **+ Add
+Variable**. Create a new variable called `FAUNA_SECRET` - The value should be
+the secret we created earlier.
 
-Don't close this tab yet.
+Click to save the variables.
 
-Deploy the code:
-
-1. Create a gist (make sure the extension of the file is `.ts`) at
-   https://gist.github.com/new with your code and grab the raw link of it.
-   > For convenience, the code is also hosted at
-   > https://deno.com/examples/fauna.ts so you can skip creating a gist if you
-   > just want to try out the above example without making changes to it.
-2. Go back to Deno Deploy **Settings** screen where we created our secrets.
-3. Click on your project name on the **Settings** page to go back to the
-   dashboard of your project.
-4. Click on **Deploy URL**, paste the raw link and click on **Deploy**.
-5. Click on Visit to see your project live on Deno Deploy (remember to append
-   `/quotes` to the deployment URL to see the content of your FaunaDB)
-
-That's it.
-
-Congrats on building and deploying the Quotes API!
-
----
-
-[![Deploy this example](/deno-deploy-button.svg)](https://dash.deno.com/new?url=https://deno.com/examples/fauna.ts&env=FAUNA_SECRET)
+On your project overview, click **View** to view the project in your browser,
+add `/quotes` to the end of the url to see the content of your FaunaDB.

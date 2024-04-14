@@ -73,7 +73,7 @@ button to do so. You might even need to hit it twice!
 
 Once our script is running, try send a request and inspect it in Devtools:
 
-```
+```console
 $ curl http://0.0.0.0:4507/
 ```
 

@@ -18,11 +18,11 @@ for each impacted API below.
 
 ### `Deno.Buffer`
 
-Use [`Buffer`](https://deno.land/std/io/buffer.ts?s=Buffer) from the Standard
+Use [`Buffer`](https://jsr.io/@std/io/doc/buffer/~/Buffer) from the Standard
 Library instead.
 
 ```diff
-+ import { Buffer } from "https://deno.land/std/io/buffer.ts";
++ import { Buffer } from "jsr:@std/io/buffer";
 
 - const buffer = new Deno.Buffer();
 + const buffer = new Buffer();
@@ -32,11 +32,11 @@ See [deno#9795][deno#9795] for details.
 
 ### `Deno.Closer`
 
-Use [Closer](https://deno.land/std/io/types.ts?s=Closer) from the Standard
+Use [Closer](https://jsr.io/@std/io/doc/types/~/Closer) from the Standard
 Library instead.
 
 ```diff
-+ import type { Closer } from "https://deno.land/std/io/types.ts";
++ import type { Closer } from "jsr:@std/io/types";
 
 - function foo(closer: Deno.Closer) {
 + function foo(closer: Closer) {
@@ -88,13 +88,73 @@ Use [`Deno.Conn`](https://deno.land/api?s=Deno.Conn) instance methods instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### `Deno.copy()`
+### `Deno.ListenTlsOptions.certChain`
 
-Use [`copy()`](https://deno.land/std/io/copy.ts?s=copy) from the Standard
-Library instead.
+Use
+[`Deno.ConnectTlsOptions.cert`](https://deno.land/api?s=Deno.ConnectTlsOptions#prop_cert)
+instead.
 
 ```diff
-+ import { copy } from "https://deno.land/std/io/copy.ts";
+const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
+using conn = await Deno.connectTls({
+  hostname: "192.0.2.1",
+  port: 80,
+  caCerts: [caCert],
+- certChain: Deno.readTextFileSync("./server.crt"),
++ cert: Deno.readTextFileSync("./server.crt"),
+  key: Deno.readTextFileSync("./server.key"),
+});
+```
+
+See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
+
+### `Deno.ConnectTlsOptions.certFile`
+
+Use
+[`Deno.ConnectTlsOptions.cert`](https://deno.land/api?s=Deno.ConnectTlsOptions#prop_cert)
+instead.
+
+```diff
+const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
+using conn = await Deno.connectTls({
+  hostname: "192.0.2.1",
+  port: 80,
+  caCerts: [caCert],
+- certFile: "./server.crt",
++ cert: Deno.readTextFileSync("./server.crt"),
+  key: Deno.readTextFileSync("./server.key"),
+});
+```
+
+See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
+
+### `Deno.ConnectTlsOptions.privateKey`
+
+Use
+[`Deno.ConnectTlsOptions.key`](https://deno.land/api?s=Deno.ConnectTlsOptions#prop_key)
+instead.
+
+```diff
+const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
+using conn = await Deno.connectTls({
+  hostname: "192.0.2.1",
+  port: 80,
+  caCerts: [caCert],
+  cert: Deno.readTextFileSync("./server.crt"),
+- keyFile: "./server.key",
++ key: Deno.readTextFileSync("./server.key"),
+});
+```
+
+See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
+
+### `Deno.copy()`
+
+Use [`copy()`](https://jsr.io/@std/io/doc/copy/~/copy) from the Standard Library
+instead.
+
+```diff
++ import { copy } from "jsr:@std/io/copy";
 
 ...
 
@@ -273,8 +333,13 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.isatty()`
 
-Use `Deno.stdin.isTerminal()`, `Deno.stdout.isTerminal()` or
-`Deno.stderr.isTerminal()` instead.
+Use `Deno.FsFile.isTerminal()`, `Deno.stdin.isTerminal()`,
+`Deno.stdout.isTerminal()` or `Deno.stderr.isTerminal()` instead.
+
+```diff
+- Deno.isatty(file.rid);
++ file.isTerminal();
+```
 
 ```diff
 - Deno.isatty(Deno.stdin.rid);
@@ -292,6 +357,40 @@ Use `Deno.stdin.isTerminal()`, `Deno.stdout.isTerminal()` or
 ```
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### `Deno.iter()`
+
+Use
+[`iterateReader()`](https://jsr.io/@std/io/doc/iterate-reader/~/iterateReader)
+from the Standard Library instead.
+
+```diff
++ import { iterateReader } from "jsr:@std/io/iterate-reader";
+
+- for await (const chunk of Deno.iter(reader)) {
++ for await (const chunk of iterateReader(reader)) {
+  ...
+}
+```
+
+See [deno#9795][deno#9795] for details.
+
+### `Deno.iterSync()`
+
+Use
+[`iterateReaderSync()`](https://jsr.io/@std/io/doc/iterate-reader/~/iterateReaderSync)
+from the Standard Library instead.
+
+```diff
++ import { iterateReaderSync } from "jsr:@std/io/iterate-reader";
+
+- for (const chunk of Deno.iterSync(reader)) {
++ for (const chunk of iterateReaderSync(reader)) {
+  ...
+}
+```
+
+See [deno#9795][deno#9795] for details.
 
 ### `Deno.Listener.rid`
 
@@ -341,11 +440,11 @@ See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 
 ### `Deno.readAllSync()`
 
-Use [`readAllSync()`](https://deno.land/std/io/read_all.ts?s=readAllSync) from
+Use [`readAllSync()`](https://jsr.io/@std/io/doc/read-all/~/readAllSync) from
 the Standard Library instead.
 
 ```diff
-+ import { readAllSync } from "https://deno.land/std/io/read_all.ts";
++ import { readAllSync } from "jsr:@std/io/read-all";
 
 ...
 
@@ -357,11 +456,11 @@ See [deno#9795][deno#9795] for details.
 
 ### `Deno.readAll()`
 
-Use [`readAll()`](https://deno.land/std/io/read_all.ts?s=readAll) from the
+Use [`readAll()`](https://jsr.io/@std/io/doc/read-all/~/readAll) from the
 Standard Library instead.
 
 ```diff
-+ import { readAll } from "https://deno.land/std/io/read_all.ts";
++ import { readAll } from "jsr:@std/io/read-all";
 
 ...
 
@@ -373,11 +472,11 @@ See [deno#9795][deno#9795] for details.
 
 ### `Deno.Reader`
 
-Use [`Reader`](https://deno.land/std/io/types.ts?s=Reader) from the Standard
-Library instead.
+Use [`Reader`](https://jsr.io/@std/io/doc/~/Reader) from the Standard Library
+instead.
 
 ```diff
-+ import type { Reader } from "https://deno.land/std/io/types.ts";
++ import type { Reader } from "jsr:@std/io/types";
 
 - function foo(closer: Deno.Reader) {
 + function foo(closer: Reader) {
@@ -389,11 +488,11 @@ See [deno#9795][deno#9795] for details.
 
 ### `Deno.ReaderSync`
 
-Use [`ReaderSync`](https://deno.land/std/io/types.ts?s=ReaderSync) from the
-Standard Library instead.
+Use [`ReaderSync`](https://jsr.io/@std/io/doc/~/ReaderSync) from the Standard
+Library instead.
 
 ```diff
-+ import type { ReaderSync } from "https://deno.land/std/io/types.ts";
++ import type { ReaderSync } from "jsr:@std/io/types";
 
 - function foo(reader: Deno.ReaderSync) {
 + function foo(reader: ReaderSync) {
@@ -464,7 +563,7 @@ instead.
 
 ```diff
 - Deno.seekSync(file.rid, 6, Deno.SeekMode.Start);
-+ file.seek(6, Deno.SeekMode.Start);
++ file.seekSync(6, Deno.SeekMode.Start);
 ```
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
@@ -673,11 +772,11 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.writeAllSync()`
 
-Use [`writeAllSync()`](https://deno.land/std/io/write_all.ts?s=writeAllSync)
-from the Standard Library instead.
+Use [`writeAllSync()`](https://jsr.io/@std/io/doc/~/writeAllSync) from the
+Standard Library instead.
 
 ```diff
-+ import { writeAllSync } from "https://deno.land/std/io/write_all.ts";
++ import { writeAllSync } from "jsr:@std/io/write-all";
 
 ...
 
@@ -689,11 +788,11 @@ See [deno#9795][deno#9795] for details.
 
 ### `Deno.writeAll()`
 
-Use [`writeAll()`](https://deno.land/std/io/write_all.ts?s=writeAll) from the
-Standard Library instead.
+Use [`writeAll()`](https://jsr.io/@std/io/doc/~/writeAll) from the Standard
+Library instead.
 
 ```diff
-+ import { writeAll } from "https://deno.land/std/io/write_all.ts";
++ import { writeAll } from "jsr:@std/io/write-all";
 
 ...
 
@@ -705,11 +804,11 @@ See [deno#9795][deno#9795] for details.
 
 ### `Deno.Writer`
 
-Use [Writer](https://deno.land/std/io/types.ts?s=Writer) from the Standard
-Library instead.
+Use [Writer](https://jsr.io/@std/io/doc/~/Writer) from the Standard Library
+instead.
 
 ```diff
-+ import type { Writer } from "https://deno.land/std/io/types.ts";
++ import type { Writer } from "jsr:@std/io/types";
 
 - function foo(writer: Deno.Writer) {
 + function foo(writer: Writer) {
@@ -721,11 +820,11 @@ See [deno#9795][deno#9795] for details.
 
 ### `Deno.WriterSync`
 
-Use [WriterSync](https://deno.land/std/io/types.ts?s=WriterSync) from the
-Standard Library instead.
+Use [WriterSync](https://jsr.io/@std/io/doc/~/WriterSync) from the Standard
+Library instead.
 
 ```diff
-+ import type { WriterSync } from "https://deno.land/std/io/types.ts";
++ import type { WriterSync } from "jsr:@std/io/types";
 
 - function foo(writer: Deno.WriterSync) {
 + function foo(writer: WriterSync) {

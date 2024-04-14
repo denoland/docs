@@ -12,7 +12,7 @@ Fresh offers two ready-to-go themes, one for a blog and one for shopfront.
 
 **Blog**
 
-```
+```console
 git clone https://github.com/denoland/fresh-wordpress-themes.git
 cd fresh-wordpress-themes/blog
 deno task docker

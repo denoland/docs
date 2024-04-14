@@ -48,37 +48,33 @@ access DynamoDB.
 Generate Credentials:
 
 1. Go to https://console.aws.amazon.com/iam/ and go to "Users" section.
-2. Click on **Add user** button, fill the **User name** field (maybe use
+2. Click on **Create user** button, fill the **User name** field (maybe use
    `denamo`) and select **Programmatic access** type.
-3. Click on **Next: Permissions**, then on **Attach existing policies
-   directly**, search for `AmazonDynamoDBFullAccess` and select it.
-4. Click on **Next: Tags**, then on **Next: Review** and finally **Create
-   user**.
-5. Click on **Download .csv** button to download the credentials.
+3. Click **Next**
+4. Select **Attach policies directly** and search for
+   `AmazonDynamoDBFullAccess`. Check the box next to this policy in the results.
+5. Click **Next** and **Create user**
+6. On the resulting **Users** page, click through to the user you just created
+7. Click on **Create access key**
+8. Select **Application running outside AWS**
+9. Click ***Create**
+10. Click **Download .csv file** to download the credentials you just created.
 
 Create database table:
 
 1. Go to https://console.aws.amazon.com/dynamodb and click on **Create table**
    button.
-2. Fill the **Table name** field with `Songs` and **Primary key** with `title`.
-3. Scroll down and click on **Create**. That's it.
-
-## Create a Project in Deno Deploy
-
-1. Go to [https://dash.deno.com/new](https://dash.deno.com/new) (Sign in with
-   GitHub if you didn't already) and click on **Create**.
-2. Now click on **Settings** button available on the project page.
-3. Navigate to **Environment Variables** Section and add the following secrets.
-
-- `AWS_ACCESS_KEY_ID` - Use the value that's available under **Access key ID**
-  column in the downloaded CSV.
-- `AWS_SECRET_ACCESS_KEY` - Use the value that's available under **Secret access
-  key** column in the downloaded CSV.
-
-Now click on the project name to go back to the project dashboard. Keep this tab
-open as we will come back here later in the deploy step.
+2. Fill the **Table name** field with `songs` and **Partition key** with
+   `title`.
+3. Scroll down and click on **Create table**.
+4. Once the table is created, click on the table name and find its **General
+   information**
+5. Under **Amazon Resource Name (ARN)** take note of the region of your new
+   table (for example us-east-1).
 
 ## Write the Application
+
+Create a file called `index.js` and insert the following:
 
 ```js
 import {
@@ -100,7 +96,7 @@ import {
 // The credentials are obtained from environment variables which
 // we set during our project creation step on Deno Deploy.
 const client = new DynamoDBClient({
-  region: "ap-south-1",
+  region: Deno.env.get("AWS_TABLE_REGION"),
   credentials: {
     accessKeyId: Deno.env.get("AWS_ACCESS_KEY_ID"),
     secretAccessKey: Deno.env.get("AWS_SECRET_ACCESS_KEY"),
@@ -138,7 +134,7 @@ async function handleRequest(request) {
         $metadata: { httpStatusCode },
       } = await client.send(
         new PutItemCommand({
-          TableName: "Songs",
+          TableName: "songs",
           Item: {
             // Here 'S' implies that the value is of type string
             // and 'N' implies a number.
@@ -174,7 +170,7 @@ async function handleRequest(request) {
     const { searchParams } = new URL(request.url);
     const { Item } = await client.send(
       new GetItemCommand({
-        TableName: "Songs",
+        TableName: "songs",
         Key: {
           title: { S: searchParams.get("title") },
         },
@@ -208,21 +204,32 @@ async function handleRequest(request) {
 }
 ```
 
+Initialize git in your new project and
+[push it to GitHub](https://docs.github.com/en/get-started/start-your-journey/hello-world#step-1-create-a-repository).
+
 ## Deploy the Application
 
-Now that we've everything in place, let's get to deploying the application.
+Now that we have everything in place, let's deploy your new application!
 
-The steps:
+1. In your browser, visit [Deno Deploy](https://dash.deno.com/new_project) and
+   link your GitHub account.
+2. Select the repository which contains your new application.
+3. You can give your project a name or allow Deno to generate one for you
+4. Select `index.js` in the Entrypoint dropdown
+5. Click **Deploy Project**
 
-1. Go to https://gist.github.com/new and create a new gist with the above code
-   (make sure the file ends with `.js`).
-   > For convenience, the code is also hosted at
-   > https://deno.com/examples/dynamo.js so you can skip creating a gist if you
-   > just want to try out the above example without making changes to it.
-2. Go to the project (that we previously created) dashboard in Deno Deploy.
-3. Click on **Deploy URL** and paste the raw link of the gist.
-4. Click on **Deploy** and copy the URL that's displayed under **Domains**
-   section.
+In order for your Application to work, we will need to configure its environment
+variables.
+
+On your project's success page, or in your project dashboard, click on **Add
+environmental variables**. Under Environment Variables, click **+ Add
+Variable**. Create the following variables:
+
+1. `AWS_ACCESS_KEY_ID` - with the value from the CSV you downloaded
+2. `AWS_SECRET_ACCESS_KEY` - with the value from the CSV you downloaded.
+3. `AWS_TABLE_REGION` - with your table's region
+
+Click to save the variables.
 
 Let's test the API.
 
@@ -241,7 +248,3 @@ curl https://<project_name>.deno.dev/songs?title=Old%20Town%20Road
 ```
 
 Congratulations on learning how to use DynamoDB with Deno Deploy!
-
----
-
-[![Deploy this example](/deno-deploy-button.svg)](https://dash.deno.com/new?url=https://deno.com/examples/dynamo.js&env=AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY)

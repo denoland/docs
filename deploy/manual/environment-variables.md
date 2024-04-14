@@ -1,25 +1,43 @@
 # Environment variables
 
 Environment variables are useful to store values like access tokens of web
-services. You can create them in the project dashboard and access them in your
-code via the `Deno.env` API. They are made available to both production and
-preview deployments.
+services. Each deployment has a set of environment variables defined at the
+moment of creation and accessible from the code via the `Deno.env` API. There
+are 2 ways to define the environment variables of a deployment:
 
-## Add an environment variable
+## Project environment variables
+
+You can define environment variables at the project level. When you create a
+deployment, it will get the set of environment variables the the project has
+defined _at that particular moment_.
+
+For convenience, When you change the environment variables of a project, the
+current production deployment is _redeployed_, creating a new production
+deployment with the new set of environment variables.
+
+:::note
+
+Deployments are immutable, including their environment variables. Changing the
+environment variables of a project does not change the environment variables of
+existing deployments.
+
+:::
 
 To add an environment variable to your project, click on the **Settings** button
 on the project page and then on **Environment Variables** from the sidebar. Fill
 in the key/value fields and click on "Add" to add an environment variable to
-your project. A new production deployment will be created automatically with the
-new environment variables.
+your project.
 
 ![environment_variable](../docs-images/fauna2.png)
 
-Note that currently, this is the only way to add an environment variable. Even
-if you deployed with `deployctl` or the Github integration, to add environment
-variables, you must do so from the project page UI.
+## Deployment environment variables
 
-### Preset Variables
+When deploying using `deployctl`, you can specify environment variables
+[using the `--env` or `--env-file` flags](./deployctl.md#environment-variables),
+complementing the environment variables already defined for the project. These
+env variables will be specific for the deployment being created.
+
+### Default environment variables
 
 Every deployment has the following environment variables preset, which you can
 access from your code.

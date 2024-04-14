@@ -4,7 +4,7 @@ In this tutorial, let's build a HTTP server that responds to all incoming HTTP
 requests with `Hello, world!` and a `200 OK` HTTP status. We will be using the
 Deno Deploy playground to deploy and edit this script.
 
-## **Step 1:** Write the HTTP server script
+## Step 1: Write the HTTP server script
 
 A simple HTTP server can be written with a single line of code in Deno using
 [`Deno.serve`](https://deno.land/api?s=Deno.serve):
@@ -34,10 +34,11 @@ Deno.serve({
 });
 ```
 
-## **Step 2:** Deploy script to Deno Deploy
+## Step 2: Deploy script to Deno Deploy
 
-1. Create a new playground project by visiting https://dash.deno.com/new, and
-   clicking the **Play** button under the **Playground** card.
+1. Create a new playground project by visiting
+   [your Deno dashboard](https://dash.deno.com/account/overview), and clicking
+   the **New Playground** button.
 2. On the next screen, copy the code above (either the short or the longer
    example) into the editor on the left side of the screen.
 3. Press the **Save & Deploy** button on the right side of the top toolbar (or
@@ -54,9 +55,3 @@ from anywhere.
 Even in the playground editor, scripts are deployed worldwide across our entire
 global network. This guarantees fast and reliable performance, no matter the
 location of your users.
-
-[native-http]: https://deno.land/manual@v1.15.1/runtime/http_server_apis
-[std-http]: https://deno.land/std/http
-[request]: ../api/runtime-request
-[conninfo]: https://doc.deno.land/https/deno.land%2Fstd%2Fhttp%2Fserver.ts#ConnInfo
-[response]: ../api/runtime-response

@@ -32,7 +32,7 @@ have direct control over, the ability to do the former is also required.
 ## Providing types when importing
 
 If you are consuming a JavaScript module and you have either created types (a
-`.d.ts` file) or have otherwise obtained the types, you want to use, you can
+`.d.ts` file) or have otherwise obtained the types you want to use, you can
 instruct Deno to use that file when type checking instead of the JavaScript file
 using the `@deno-types` compiler hint. `@deno-types` needs to be a single line
 double slash comment, where when used impacts the next import or re-export
@@ -41,7 +41,7 @@ statement.
 For example if I have a JavaScript modules `coolLib.js` and I had a separate
 `coolLib.d.ts` file that I wanted to use, I would import it like this:
 
-```ts, ignore
+```ts
 // @deno-types="./coolLib.d.ts"
 import * as coolLib from "./coolLib.js";
 ```
@@ -50,8 +50,8 @@ When type checking `coolLib` and your usage of it in the file, the
 `coolLib.d.ts` types will be used instead of looking at the JavaScript file.
 
 The pattern matching for the compiler hint is somewhat forgiving and will accept
-quoted and non-question values for the specifier as well as it accepts
-whitespace before and after the equals sign.
+quoted and non-question values for the specifier as well as accepting whitespace 
+before and after the equals sign.
 
 ## Providing types when hosting
 
@@ -69,7 +69,7 @@ For example, if I had created `coolLib.js` and along side of it I had created my
 type definitions for my library in `coolLib.d.ts` I could do the following in
 the `coolLib.js` file:
 
-```js, ignore
+```js
 /// <reference types="./coolLib.d.ts" />
 
 // ... the rest of the JavaScript ...
@@ -90,7 +90,7 @@ Similar to the triple-slash directive, Deno supports a header for remote modules
 that instructs Deno where to locate the types for a given module. For example, a
 response for `https://example.com/coolLib.js` might look something like this:
 
-```
+```console
 HTTP/1.1 200 OK
 Content-Type: application/javascript; charset=UTF-8
 Content-Length: 648
@@ -128,7 +128,7 @@ This option couples the type definitions to the code itself. By adding a
 triple-slash `types` directive near the type of a module, type checking the file
 will include the type definition. For example:
 
-```ts, ignore
+```ts
 /// <reference types="./types.d.ts" />
 ```
 
@@ -136,7 +136,7 @@ The specifier provided is resolved just like any other specifier in Deno, which
 means it requires an extension, and is relative to the module referencing it. It
 can be a fully qualified URL as well:
 
-```ts, ignore
+```ts
 /// <reference types="https://deno.land/x/pkg@1.0.0/types.d.ts" />
 ```
 
@@ -178,7 +178,7 @@ following triple-slash directives near the top of the entry point file for the
 worker script, Deno will now type check it as a Deno worker script, irrespective
 of how the module is analyzed:
 
-```ts, ignore
+```ts
 /// <reference no-default-lib="true" />
 /// <reference lib="deno.worker" />
 ```

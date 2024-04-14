@@ -73,30 +73,3 @@ Run with:
 ```shell
 deno run signal_listeners.ts
 ```
-
-## Async iterator example
-
-If you prefer to handle signals using an async iterator, you can use
-[`signal()`](https://deno.land/std/signal/mod.ts) API available in `deno_std`:
-
-```ts
-/**
- * async_iterator_signal.ts
- */
-import { signal } from "https://deno.land/std/signal/mod.ts";
-
-const sig = signal("SIGUSR1", "SIGINT");
-
-// Add a timeout to prevent process exiting immediately.
-setTimeout(() => {}, 5000);
-
-for await (const _ of sig) {
-  console.log("interrupt or usr1 signal received");
-}
-```
-
-Run with:
-
-```shell
-deno run async_iterator_signal.ts
-```

@@ -91,7 +91,7 @@ When designing function interfaces, stick to the following rules.
    This allows the API to evolve in a backwards compatible way, even when the
    position of the options object changes.
 
-```ts, ignore
+```ts
 // BAD: optional parameters not part of options object. (#2)
 export function resolve(
   hostname: string,
@@ -100,7 +100,7 @@ export function resolve(
 ): IPAddress[] {}
 ```
 
-```ts, ignore
+```ts
 // GOOD.
 export interface ResolveOptions {
   family?: "ipv4" | "ipv6";
@@ -112,7 +112,7 @@ export function resolve(
 ): IPAddress[] {}
 ```
 
-```ts, ignore
+```ts
 export interface Environment {
   [key: string]: string;
 }
@@ -189,7 +189,7 @@ Whenever you are using interfaces that are included in the parameters or return
 type of an exported member, you should export the interface that is used. Here
 is an example:
 
-```ts, ignore
+```ts
 // my_file.ts
 export interface Person {
   name: string;
@@ -312,13 +312,13 @@ different contexts; otherwise, it should just be a sibling to the tested module.
 For a better understanding of the tests, function should be correctly named as
 it's prompted throughout the test command. Like:
 
-```
+```console
 foo() returns bar object ... ok
 ```
 
 Example of test:
 
-```ts, ignore
+```ts
 import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 import { foo } from "./mod.ts";
 

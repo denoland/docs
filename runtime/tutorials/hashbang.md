@@ -2,21 +2,21 @@
 
 ## Concepts
 
-- [Deno.env] provides the environment variables.
+- [Deno.env] provides environment variables.
 - [env] runs a program in a modified environment.
 
 ## Overview
 
 Making Deno scripts executable can come in handy when creating small tools.
 
-Note: Hashbangs do not work on Windows.
+_Note: Hashbangs do not work on Windows._
 
 ## Example
 
-In this program we give the context permission to access the environment
+In this program, we give the context permission to access the environment
 variables and print the Deno installation path.
 
-```ts, ignore
+```ts
 #!/usr/bin/env -S deno run --allow-env
 
 /**
@@ -30,7 +30,7 @@ console.log("Deno Install Path:", path);
 
 ### Permissions
 
-You may require to give the script execution permissions.
+You may need to give the script execution permissions.
 
 #### Unix
 
@@ -40,7 +40,7 @@ chmod +x hashbang.ts
 
 ### Execute
 
-Start the script by calling it like any other command:
+Start the script by calling it like any other command.
 
 ```shell
 ./hashbang.ts
@@ -56,10 +56,10 @@ Start the script by calling it like any other command:
 
 ## Using hashbang in files with no extension
 
-You may wish to not use an extension for your script's filename. In this case,
-you can supply one by using the `--ext` flag:
+You may not wish to use an extension for your script's filename. In this case
+supply one using the `--ext` flag.
 
-```shell, ignore
+```shell
 $ cat my_script
 #!/usr/bin/env -S deno run --allow-env --ext=js
 console.log("Hello!");

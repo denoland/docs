@@ -31,7 +31,7 @@ be synchronous and cannot be cancelled.
 
 **main.ts**
 
-```ts, ignore
+```ts
 import "./imported.ts";
 
 const handler = (e: Event): void => {
@@ -61,7 +61,7 @@ console.log("log from main script");
 
 **imported.ts**
 
-```ts, ignore
+```ts
 const handler = (e: Event): void => {
   console.log(`got ${e.type} event in event handler (imported)`);
 };

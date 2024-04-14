@@ -15,7 +15,7 @@ In order to deploy Deno to Cloudflare, we'll use this community created CLI
 
 [Install it](https://denoflare.dev/cli/#installation):
 
-```shell, ignore
+```shell
 deno install --unstable --allow-read --allow-net --allow-env --allow-run --name denoflare --force \
 https://raw.githubusercontent.com/skymethod/denoflare/v0.5.11/cli/cli.ts
 ```
@@ -25,7 +25,7 @@ https://raw.githubusercontent.com/skymethod/denoflare/v0.5.11/cli/cli.ts
 In a new directory, let's create a `main.ts` file, which will contain our Module
 Worker function:
 
-```ts, ignore
+```ts
 export default {
   fetch(request: Request): Response {
     return new Response("Hello, world!");
@@ -38,13 +38,13 @@ that exposes a `fetch` function, which returns a `Response` object.
 
 You can test this locally by running:
 
-```shell, ignore
+```shell
 denoflare serve main.ts
 ```
 
 If you go to `localhost:8080` in your browser, you'll see the response will say:
 
-```
+```console
 Hello, world!
 ```
 
@@ -82,7 +82,7 @@ Workers".
 After you add both to your `.denoflare` config, let's try pushing it to
 Cloudflare:
 
-```
+```console
 denoflare push main
 ```
 

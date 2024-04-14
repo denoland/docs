@@ -30,7 +30,7 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
@@ -72,7 +72,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-22.04, macos-12, windows-2022 ]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
     steps:
       - run: deno test --allow-all --coverage cov/
 ```
@@ -100,12 +100,12 @@ jobs:
     continue-on-error: ${{ matrix.canary }} # Continue in case the canary run does not succeed
     strategy:
       matrix:
-        os: [ ubuntu-22.04, macos-12, windows-2022 ]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
         deno-version: [ v1.x ]
         canary: [ false ]
         include: 
           - deno-version: canary
-            os: ubuntu-22.04
+            os: ubuntu-latest
             canary: true
 ```
 
@@ -121,11 +121,11 @@ coverage generation and upload steps only on the `ubuntu` (Linux) runner:
 
 ```yaml
 - name: Generate coverage report
-  if: matrix.os == 'ubuntu-22.04'
+  if: matrix.os == 'ubuntu-latest'
   run: deno coverage --lcov cov > cov.lcov
 
 - name: Upload coverage to Coveralls.io
-  if: matrix.os == 'ubuntu-22.04'
+  if: matrix.os == 'ubuntu-latest'
   # Any code coverage service can be used, Coveralls.io is used here as an example.
   uses: coverallsapp/github-action@master
   with:
@@ -190,7 +190,7 @@ import * as log from "https://deno.land/std@$STD_VERSION/log/mod.ts";
 In order to increment this version, you can update the `import` statement and
 then reload the cache and update the lockfile locally:
 
-```
+```console
 deno cache --reload --lock=deno.lock --lock-write deps.ts
 ```
 

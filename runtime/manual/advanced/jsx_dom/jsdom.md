@@ -64,7 +64,7 @@ This example will take a test string and parse it as HTML and generate a DOM
 structure based on it. It will then query that DOM structure, picking out the
 first heading it encounters and print out the text content of that heading:
 
-```ts, ignore
+```ts
 import { JSDOM } from "jsdom";
 import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 

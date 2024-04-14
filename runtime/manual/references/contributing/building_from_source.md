@@ -10,7 +10,7 @@ chapter).
 > Deno uses submodules, so you must remember to clone using
 > `--recurse-submodules`.
 
-**Linux**/**Mac**/**WSL**:
+**Linux(Debian)**/**Mac**/**WSL**:
 
 ```shell
 git clone --recurse-submodules https://github.com/denoland/deno.git
@@ -38,7 +38,7 @@ git clone --recurse-submodules https://github.com/denoland/deno.git
 [Update or Install Rust](https://www.rust-lang.org/tools/install). Check that
 Rust installed/updated correctly:
 
-```
+```console
 rustc -V
 cargo -V
 ```
@@ -48,10 +48,12 @@ cargo -V
 > Many components of Deno require a native compiler to build optimized native
 > functions.
 
-**Linux**:
-
-```sh
-apt install --install-recommends -y clang-16 lld-16 cmake libglib2.0-dev
+**Linux(Debian)/WSL**
+```shell
+wget https://apt.llvm.org/llvm.sh
+chmod +x llvm.sh
+./llvm.sh 16
+apt install --install-recommends -y cmake libglib2.0-dev
 ```
 
 **Mac**:
@@ -63,7 +65,7 @@ Line Tools_. Run `xcode-select --install` to install it without XCode.)
 [CMake](https://cmake.org/) is also required, but does not ship with the
 _Command Line Tools_.
 
-```
+```console
 brew install cmake
 ```
 
@@ -71,18 +73,11 @@ brew install cmake
 
 For Apple aarch64 users `lld` must be installed.
 
-```
+```console
 brew install llvm
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
 
-**WSL**
-```shell
-wget https://apt.llvm.org/llvm.sh
-chmod +x llvm.sh
-./llvm.sh 16
-apt install --install-recommends -y cmake libglib2.0-dev
-```
 
 **Windows**:
 
@@ -113,7 +108,7 @@ apt install --install-recommends -y cmake libglib2.0-dev
 > Building Deno requires the
 > [Protocol Buffers compiler](https://grpc.io/docs/protoc-installation/).
 
-**Linux**/**WSL**:
+**Linux(Debian)**/**WSL**:
 
 ```sh
 apt install -y protobuf-compiler
@@ -143,7 +138,7 @@ Windows users can download the latest binary release from
 The easiest way to build Deno is by using a precompiled version of V8:
 > for WSL make sure you have sufficient memory allocated in .wslconfig
 
-```
+```console
 cargo build -vv
 ```
 
@@ -151,7 +146,7 @@ However, you may also want to build Deno and V8 from source code if you are
 doing lower-level V8 development, or using a platform that does not have
 precompiled versions of V8:
 
-```
+```console
 V8_FROM_SOURCE=1 cargo build -vv
 ```
 

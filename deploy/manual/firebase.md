@@ -158,7 +158,7 @@ To do this, go back to your project page at
 You should see a couple of options to deploy:
 
 - [Github integration](ci_github)
-- [`deployctl`](deployctl)
+- [`deployctl`](./deployctl.md)
   ```sh
   deployctl deploy --project=<project-name> <application-file-name>
   ```

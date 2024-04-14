@@ -110,6 +110,23 @@ deno test --watch
 deno fmt --watch
 ```
 
+You can exclude paths or patterns from watching by providing the
+`--watch-exclude` flag. The syntax is `--watch-exclude=path1,path2`. For
+example:
+
+```shell
+deno run --watch --watch-exclude=file1.ts,file2.ts main.ts
+```
+
+This will exclude file1.ts and file2.ts from being watched.
+
+To exclude a pattern, remember to surround it in quotes to prevent your shell
+from expanding the glob:
+
+```shell
+deno run --watch --watch-exclude='*.js' main.ts
+```
+
 ## Hot Module Replacement mode
 
 You can use `--unstable-hmr` flag with `deno run` to enable the hot module

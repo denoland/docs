@@ -201,7 +201,7 @@ Deno.test("database", async (t) => {
 
 Outputs:
 
-```
+```console
 test database ...
   test insert user ... ok (2ms)
   test insert book ... ok (14ms)
@@ -298,7 +298,7 @@ The filter flags accept a string or a pattern as value.
 
 Assuming the following tests:
 
-```ts, ignore
+```ts
 Deno.test({ name: "my-test", fn: myTest });
 Deno.test({ name: "test-1", fn: test1 });
 Deno.test({ name: "test-2", fn: test2 });
@@ -431,18 +431,6 @@ still enjoying human-readable output in the terminal. In such situations specify
 $ deno test --junit-path=./report.xml
 ```
 
-## Integration with testing libraries
-
-Deno's test runner works with popular testing libraries like
-[Chai](https://www.chaijs.com/), [Sinon.JS](https://sinonjs.org/) or
-[fast-check](https://fast-check.dev/).
-
-For example integration see:
-
-- https://deno.land/std/testing/chai_example.ts
-- https://deno.land/std/testing/sinon_example.ts
-- https://deno.land/std/testing/fast_check_example.ts
-
 ### Example: spying on a function with Sinon
 
 Test spies are function stand-ins that are used to assert if a function's
@@ -469,7 +457,7 @@ export function foo(fn) {
 This way, we can call `foo(bar)` in the application code or wrap a spy function
 around `bar` and call `foo(spy)` in the testing code:
 
-```js, ignore
+```js
 import sinon from "npm:sinon";
 import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 import { bar, foo } from "./my_file.js";
@@ -509,7 +497,7 @@ export function foo() {
 
 And then `import` in a test file:
 
-```js, ignore
+```js
 import sinon from "npm:sinon";
 import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 import { foo, funcs } from "./my_file.js";

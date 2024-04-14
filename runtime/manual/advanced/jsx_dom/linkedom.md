@@ -64,7 +64,7 @@ similar to jsdom's `JSDOM()` function, in the sense it gives you a "sandbox" of
 a `window` scope you can use to access API's outside of the scope of the
 `document`. For example:
 
-```ts, ignore
+```ts
 import { parseHTML } from "https://esm.sh/linkedom";
 
 const { document, customElements, HTMLElement } = parseHTML(`<!DOCTYPE html>

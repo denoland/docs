@@ -19,7 +19,7 @@ Deno provides a number of ways to do this via the
 [standard library](https://deno.land/std) and the
 [Deno runtime API](https://deno.land/api).
 
-As highlighted in the [Fetch Data example](./fetch_data.md) Deno restricts
+As highlighted in the [Fetch Data example](./fetch_data.md), Deno restricts
 access to Input / Output by default for security reasons. Therefore when
 interacting with the filesystem the `--allow-read` and `--allow-write` flags
 must be used with the `deno run` command.
@@ -27,7 +27,7 @@ must be used with the `deno run` command.
 ## Reading a text file
 
 The Deno runtime API makes it possible to read text files via the
-`Deno.readTextFile()` method, it just requires a path string or URL object. The
+`Deno.readTextFile()` method, which requires a path string or URL object. The
 method returns a promise which provides access to the file's text data.
 
 **Command:** `deno run --allow-read read.ts`
@@ -37,6 +37,7 @@ method returns a promise which provides access to the file's text data.
  * read.ts
  */
 const text = await Deno.readTextFile("./people.json");
+
 console.log(text);
 
 /**
@@ -53,7 +54,7 @@ console.log(text);
 ## Writing a text file
 
 The Deno runtime API allows developers to write text to files via the
-`Deno.writeTextFile()` method. It just requires a file path and text string. The
+`Deno.writeTextFile()` method, which requires a file path and text string. The
 method returns a promise which resolves when the file was successfully written.
 
 To run the command the `--allow-write` flag must be supplied to the `deno run`
@@ -66,6 +67,7 @@ command.
  * write.ts
  */
 await Deno.writeTextFile("./hello.txt", "Hello World!");
+
 console.log("File written to ./hello.txt");
 
 /**
@@ -81,12 +83,11 @@ await Deno.writeTextFile("./hello.txt", "This text will be appended.", {
 });
 ```
 
-By combining `Deno.writeTextFile` and `JSON.stringify` you can easily write
-serialized JSON objects to a file. This example uses synchronous
-`Deno.writeTextFileSync`, but this can also be done asynchronously using
-`await Deno.writeTextFile`.
+By combining `Deno.writeTextFile` and `JSON.stringify` you can write serialized
+JSON objects to a file. This example uses synchronous `Deno.writeTextFileSync`,
+but this can also be done asynchronously using `await Deno.writeTextFile`.
 
-To execute the code the `deno run` command needs the write flag.
+To execute the code, the `deno run` command needs the write flag.
 
 **Command:** `deno run --allow-write write.ts`
 

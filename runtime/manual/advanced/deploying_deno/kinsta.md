@@ -27,13 +27,12 @@ To do so, your `package.json` should look like this:
 ## Example application
 
 ```js
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-import { parseArgs } from "jsr:@std/cli@^$STD_VERSION";
+import { parseArgs } from "jsr:@std/cli@^0.222.1";
 
 const { args } = Deno;
-const argPort = parseArgs(args).port ? Number(parseArgs(args).port) : 8000;
+const port = parseArgs(args).port ? Number(parseArgs(args).port) : 8000;
 
-serve((_req) => new Response("Hello, world"), { port: argPort });
+Deno.serve({ port }, (_req) => new Response("Hello, world"));
 ```
 
 The application itself is self-explanatory. It's crucial not to hardcode the

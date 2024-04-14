@@ -133,7 +133,7 @@ will cover what it needed for this tutorial.
    provided in the setup wizard. It should look something like the below. We
    will use this later:
 
-   ```js
+   ```js title="firebase.js"
    var firebaseConfig = {
      apiKey: "APIKEY",
      authDomain: "example-12345.firebaseapp.com",
@@ -165,7 +165,7 @@ The first thing we will do is import the `XMLHttpRequest` polyfill that Firebase
 needs to work under Deploy as well as a polyfill for `localStorage` to allow the
 Firebase auth to persist logged in users:
 
-```js
+```js title="firebase.js"
 import "https://deno.land/x/xhr@0.1.1/mod.ts";
 import { installGlobals } from "https://deno.land/x/virtualstorage@0.1.0/mod.ts";
 installGlobals();
@@ -179,7 +179,7 @@ Because Deploy has a lot of the web standard APIs, it is best to use the web
 libraries for Firebase under deploy. Currently v9 is in still in beta for
 Firebase, so we will use v8 in this tutorial:
 
-```js
+```js title="firebase.js"
 import firebase from "https://cdn.skypack.dev/firebase@8.7.0/app";
 import "https://cdn.skypack.dev/firebase@8.7.0/auth";
 import "https://cdn.skypack.dev/firebase@8.7.0/firestore";
@@ -189,7 +189,7 @@ We are also going to use [oak](https://deno.land/x/oak) as the middleware
 framework for creating the APIs, including middleware that will take the
 `localStorage` values and set them as client cookies:
 
-```js
+```js title="firebase.js"
 import {
   Application,
   Router,
@@ -203,7 +203,7 @@ configuration from environment variables we will setup later under the key
 `FIREBASE_CONFIG` and get references to the parts of Firebase we are going to
 use:
 
-```js
+```js title="firebase.js"
 const firebaseConfig = JSON.parse(Deno.env.get("FIREBASE_CONFIG"));
 const firebaseApp = firebase.initializeApp(firebaseConfig, "example");
 const auth = firebase.auth(firebaseApp);
@@ -215,7 +215,7 @@ request. So we will create a map of users that we have previously signed in in
 this deployment. While in this tutorial we will only ever have one signed in
 user, the code can easily be adapted to allow clients to sign-in individually:
 
-```js
+```js title="firebase.js"
 const users = new Map();
 ```
 
@@ -223,7 +223,7 @@ Let's create our middleware router and create three different middleware
 handlers to support `GET` and `POST` of `/songs` and a `GET` of a specific song
 on `/songs/{title}`:
 
-```js
+```js title="firebase.js"
 const router = new Router();
 
 // Returns any songs in the collection
@@ -277,7 +277,7 @@ router.post("/songs", async (ctx) => {
 Ok, we are almost done. We just need to create our middleware application, and
 add the `localStorage` middleware we imported:
 
-```js
+```js title="firebase.js"
 const app = new Application();
 app.use(virtualStorage());
 ```
@@ -287,7 +287,7 @@ are simply grabbing the username and password from the environment variables we
 will be setting up, but this could easily be adapted to redirect a user to a
 sign-in page if they are not logged in:
 
-```js
+```js title="firebase.js"
 app.use(async (ctx, next) => {
   const signedInUid = ctx.cookies.get("LOGGED_IN_UID");
   const signedInUser = signedInUid != null ? users.get(signedInUid) : undefined;
@@ -311,7 +311,7 @@ app.use(async (ctx, next) => {
 Now let's add our router to the middleware application and set the application
 to listen on port 8000:
 
-```js
+```js title="firebase.js"
 app.use(router.routes());
 app.use(router.allowedMethods());
 await app.listen({ port: 8000 });
@@ -319,22 +319,28 @@ await app.listen({ port: 8000 });
 
 Now we have an application that should serve up our APIs.
 
-## Create a Project in Deno Deploy
+## Deploy the Application
 
-1. Go to [https://dash.deno.com/new](https://dash.deno.com/new) (Sign in with
-   GitHub if you didn't already) and click on **+ Empty Project** under **Deploy
-   from the command line**.
-2. Now click on **Settings** button available on the project page.
-3. Navigate to **Environment Variables** Section and add the following:
+Now that we have everything in place, let's deploy your new application!
 
-   <dl>
-    <dt><code>FIREBASE_USERNAME</code></dt>
-    <dd>The Firebase user (email address) that was added above.</dd>
-    <dt><code>FIREBASE_PASSWORD</code></dt>
-    <dd>The Firebase user password that was added above.</dd>
-    <dt><code>FIREBASE_CONFIG</code></dt>
-    <dd>The configuration of the Firebase application as a JSON string.</dd>
-   </dl>
+1. In your browser, visit [Deno Deploy](https://dash.deno.com/new_project) and
+   link your GitHub account.
+2. Select the repository which contains your new application.
+3. You can give your project a name or allow Deno to generate one for you
+4. Select `firebase.js` in the Entrypoint dropdown
+5. Click **Deploy Project**
+
+In order for your Application to work, we will need to configure its environment
+variables.
+
+On your project's success page, or in your project dashboard, click on **Add
+environmental variables**. Under Environment Variables, click **+ Add
+Variable**. Create the following variables:
+
+1. `FIREBASE_USERNAME` - The Firebase user (email address) that was added above
+2. `FIREBASE_PASSWORD` - The Firebase user password that was added above
+3. `FIREBASE_CONFIG` - The configuration of the Firebase application as a string
+   of JSON
 
 The configuration needs to be a valid JSON string to be readable by the
 application. If the code snippet given when setting up looked like this:
@@ -364,23 +370,7 @@ new lines are not required):
 }
 ```
 
-## Deploy the application
-
-Now let's deploy the application:
-
-1. Go to https://gist.github.com/new and create a new gist, ensuring the
-   filename of the gist ends with `.js`.
-
-   > For convenience the whole application is hosted at
-   > https://deno.com/examples/firebase.js. You can skip creating a gist if you
-   > want to try the example without any modification, or click the link at the
-   > bottom of the tutorial.
-
-2. Copy the _Raw_ link of the saved gist.
-3. In your project on `dash.deno.com`, click the **Deploy URL** button and enter
-   the link to the raw gist in the URL field.
-4. Click the **Deploy** button and copy one of the URLs displayed in the
-   **Domains** section of the project panel.
+Click to save the variables.
 
 Now let's take our API for a spin.
 
@@ -405,7 +395,3 @@ And we get specific information about a title we created:
 ```sh
 curl https://<project_name>.deno.dev/songs/Old%20Town%20Road
 ```
-
----
-
-[![Deploy this example](/deno-deploy-button.svg)](https://dash.deno.com/new?url=https://deno.com/examples/firebase.js&env=FIREBASE_USERNAME,FIREBASE_PASSWORD,FIREBASE_CONFIG)

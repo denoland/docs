@@ -85,6 +85,11 @@ const sidebars = {
       ],
     },
     {
+      type: "doc",
+      id: "manual/edge-cache",
+      label: "Edge Cache",
+    },
+    {
       type: "html",
       value: "<div>Connecting to Databases</div>",
       className: "section-header",
@@ -102,6 +107,7 @@ const sidebars = {
         "manual/faunadb",
         "manual/firebase",
         "manual/postgres",
+        "manual/neon-postgres",
       ],
     },
     {

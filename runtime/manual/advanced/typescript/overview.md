@@ -98,8 +98,10 @@ You can learn more about type-checking arguments
 
 Since Deno supports JavaScript, TypeScript, JSX, TSX modules, Deno has to make a
 decision about how to treat each of these kinds of files. For local modules,
-Deno makes this determination based fully on the extension. When the extension
-is absent in a local file, it is assumed to be JavaScript.
+Deno makes this determination based on the extension. When the extension
+is absent in a local file, it is assumed to be JavaScript. The module type can
+be overridden using the `--ext` argument. This is useful if the module does not
+have a file extension, e.g. because it is embedded in another file.
 
 For remote modules, the media type (mime-type) is used to determine the type of
 the module, where the path of the module is used to help influence the file

@@ -434,7 +434,7 @@ You can see that this snapshot is much less readable. This is because:
 Note that in this example it would be entirely possible to achieve the same
 result by calling:
 
-```ts, ignore
+```ts
 await assertSnapshot(t, page.render(0));
 ```
 

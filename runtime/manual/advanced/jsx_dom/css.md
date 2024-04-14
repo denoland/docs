@@ -25,7 +25,7 @@ In this example, we will parse some CSS into an AST and make a modification to
 the `background` declaration of the `body` rule, to change the color to `white`.
 Then we will stringify the modified CSS AST and output it to the console:
 
-```ts, ignore
+```ts
 import * as css from "https://esm.sh/css@3.0.0";
 import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
 

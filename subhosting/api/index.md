@@ -7,7 +7,7 @@ using the Subhosting REST API.
 
 The base URL for the Subhosting REST API v1 is below.
 
-```
+```console
 https://api.deno.com/v1/
 ```
 
@@ -48,7 +48,7 @@ console.log(response);
 The [OpenAPI specification](https://www.openapis.org/) for the Deploy API can be
 found here:
 
-```
+```console
 https://api.deno.com/v1/openapi.json
 ```
 

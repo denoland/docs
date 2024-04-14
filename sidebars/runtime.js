@@ -122,13 +122,18 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "deno compile",
-          id: "manual/tools/compiler",
+          label: "deno cache",
+          id: "manual/tools/cache",
         },
         {
           type: "doc",
-          label: "deno info",
-          id: "manual/tools/dependency_inspector",
+          label: "deno check",
+          id: "manual/tools/check",
+        },
+        {
+          type: "doc",
+          label: "deno compile",
+          id: "manual/tools/compiler",
         },
         {
           type: "doc",
@@ -142,8 +147,18 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno info",
+          id: "manual/tools/dependency_inspector",
+        },
+        {
+          type: "doc",
           label: "deno init",
           id: "manual/tools/init",
+        },
+        {
+          type: "doc",
+          label: "deno install",
+          id: "manual/tools/script_installer",
         },
         {
           type: "doc",
@@ -162,13 +177,18 @@ const sidebars = {
         },
         {
           type: "doc",
-          label: "deno install",
-          id: "manual/tools/script_installer",
+          label: "deno run",
+          id: "manual/tools/run",
         },
         {
           type: "doc",
           label: "deno task",
           id: "manual/tools/task_runner",
+        },
+        {
+          type: "doc",
+          label: "deno upgrade",
+          id: "manual/tools/upgrade",
         },
         {
           type: "doc",

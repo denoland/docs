@@ -22,7 +22,7 @@ created. These packages are also subject to the same
 
 npm specifiers have the following format:
 
-```
+```console
 npm:<package-name>[@<version-requirement>][/<sub-path>]
 ```
 
@@ -97,7 +97,7 @@ override the version used if necessary.
 npm packages with `bin` entries can be executed from the command line without an
 `npm install` using a specifier in the following format:
 
-```
+```console
 npm:<package-name>[@<version-requirement>][/<binary-name>]
 ```
 

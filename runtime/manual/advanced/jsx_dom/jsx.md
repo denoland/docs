@@ -41,7 +41,7 @@ module that is expected to conform to the _new_ JSX API and is located at either
 `jsx-runtime` or `jsx-dev-runtime`. For example if a JSX import source is
 configured to `react`, then the emitted code will add this to the emitted file:
 
-```jsx, ignore
+```jsx
 import { jsx as _jsx } from "react/jsx-runtime";
 ```
 
@@ -66,7 +66,7 @@ pragma to a `.jsx` or `.tsx` module, and Deno will respect it.
 The `@jsxImportSource` pragma needs to be in the leading comments of the module.
 For example to use Preact from esm.sh, you would do something like this:
 
-```jsx, ignore
+```jsx
 /** @jsxImportSource https://esm.sh/preact */
 
 export function App() {
@@ -115,7 +115,7 @@ like this:
 
 And then you could use the following pragma:
 
-```jsx, ignore
+```jsx
 /** @jsxImportSource preact */
 ```
 

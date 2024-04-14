@@ -81,7 +81,7 @@ representation (as it the string URL to the unique module). `TestData` items
 contain a unique `id` string. This `id` string is a SHA-256 hash of identifying
 information that the server tracks for a test.
 
-```ts, ignore
+```ts
 interface TestData {
   /** The unique ID for this test/step. */
   id: string;
@@ -120,7 +120,7 @@ issue a `deno/testModuleDelete` notification. When receiving the notification
 the client should remove the representation of the test module and all of its
 children tests and test steps.
 
-```ts, ignore
+```ts
 interface TestModuleDeleteParams {
   /** The text document identifier that has been removed. */
   textDocument: TextDocumentIdentifier;
@@ -150,7 +150,7 @@ The state change is represented in the `.message.kind` property of the
   the error will be in the `.message.messages` property.
 - `"end"` - The test run has ended.
 
-```ts, ignore
+```ts
 interface TestIdentifier {
   /** The test module the message is related to. */
   textDocument: TextDocumentIdentifier;
@@ -282,7 +282,7 @@ are removed and the resolved set of tests are returned in the response as
 It is not possible to include or exclude test steps via this API, because of the
 dynamic nature of how test steps are declared and run.
 
-```ts, ignore
+```ts
 interface TestRunRequestParams {
   /** The id of the test run to be used for future messages. */
   id: number;

@@ -74,8 +74,6 @@ All the above properties are read only.
 ## Example
 
 ```ts
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-
 function handler(_req) {
   // Create a post request
   const request = new Request("https://post.deno.dev", {
@@ -94,7 +92,7 @@ function handler(_req) {
   return fetch(request);
 }
 
-serve(handler);
+Deno.serve(handler);
 ```
 
 [cache]: https://developer.mozilla.org/en-US/docs/Web/API/Request/cache

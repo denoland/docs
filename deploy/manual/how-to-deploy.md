@@ -9,13 +9,13 @@ step in your deployment process.
 
 See [the Github integration page](ci_github) for more details.
 
-### Deploy from command line with [`deployctl`](deployctl)
+### Deploy from command line with [`deployctl`](./deployctl.md)
 
 `deployctl` is a command line tool for deploying your code to Deno Deploy. You
 can control more details of your deployment than the above automatic GitHub
 integration by using `deployctl`.
 
-See [the `deployctl` page](deployctl) for more details.
+See [the `deployctl` page](./deployctl.md) for more details.
 
 ### Deploy with playground
 

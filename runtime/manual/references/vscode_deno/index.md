@@ -67,7 +67,7 @@ JavaScript/TypeScript language server will be used.
 
 For example if you have a project like this:
 
-```
+```console
 project
 ├── worker
 └── front_end
@@ -203,7 +203,7 @@ Deno.test({
 
 You will see a code lens like the following just above the test:
 
-```
+```console
 ▶ Run Test
 ```
 
