@@ -13,10 +13,7 @@ redirects and other dynamic content requests as they become necessary.
 
 ## Local development
 
-Since Docusaurus is built and maintained using Node.js, it is recommended to
-have [Node.js and npm](https://nodejs.org/en/download) installed for local
-development. Once Node and npm are installed, install Docusaurus' dependencies
-with:
+Install [Deno](https://deno.com) and your favorite package manager (eg: `npm`)
 
 ```console
 npm install
@@ -25,7 +22,7 @@ npm install
 You can then start the local development server with:
 
 ```console
-npm start
+DENO_FUTURE=1 deno task start
 ```
 
 This will launch a browser window open to
@@ -35,14 +32,14 @@ changes you make update live.
 To test the generated static site in a production configuration, run:
 
 ```console
-npm run build
+DENO_FUTURE=1 deno task build
 ```
 
 This will generate a static site to the `build` folder locally. To test the
 production server (through the actual Deno / Hono server), run this command:
 
 ```console
-npm run serve
+DENO_FUTURE=1 deno task serve
 ```
 
 This will start a Deno server on [localhost:8000](http://localhost:8000), where
@@ -52,12 +49,12 @@ Sometimes, after making a Docusaurus config change, you will run into an error
 and need to clean Docusaurus' generated assets. You can do this by running:
 
 ```console
-npm run clear
+DENO_FUTURE=1 deno task clear
 ```
 
 This will solve most errors you encounter while refactoring the site. Static
-assets will be rebuilt from scratch the next time you run `npm run build` or
-`npm start`.
+assets will be rebuilt from scratch the next time you run `build` or `start`
+scripts.
 
 ## Editing content
 
