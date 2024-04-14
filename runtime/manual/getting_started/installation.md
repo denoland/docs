@@ -43,10 +43,13 @@ Using [asdf](https://asdf-vm.com/):
 ```shell
 asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
 
-# To install globally
+# Download and install the latest version of Deno
+asdf install deno latest
+
+# To set as the default version of Deno globally
 asdf global deno latest
 
-# To install locally (current project only)
+# To set as the default version of Deno locally (current project only)
 asdf local deno latest
 ```
 
@@ -96,7 +99,6 @@ Using [asdf](https://asdf-vm.com/):
 
 ```shell
 asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
-asdf install deno latest
 
 # Download and install the latest version of Deno
 asdf install deno latest
@@ -104,7 +106,7 @@ asdf install deno latest
 # To set as the default version of Deno globally
 asdf global deno latest
 
-# To install locally (current project only)
+# To set as the default version of Deno locally (current project only)
 asdf local deno latest
 ```
 
