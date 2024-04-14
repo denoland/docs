@@ -27,7 +27,7 @@ To do so, your `package.json` should look like this:
 ## Example application
 
 ```js
-import { parseArgs } from "jsr:@std/cli@^0.222.1";
+import { parseArgs } from "jsr:@std/cli";
 
 const { args } = Deno;
 const port = parseArgs(args).port ? Number(parseArgs(args).port) : 8000;
