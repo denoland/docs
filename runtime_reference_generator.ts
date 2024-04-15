@@ -2,7 +2,7 @@ import { join } from "jsr:@std/path@0.222.1/join";
 import { pooledMap } from "jsr:@std/async@0.222.1";
 
 const genPath = "./gendocs";
-const outPath = "runtime/reference";
+const outPath = "api";
 await Deno.remove(outPath, { recursive: true });
 await Deno.mkdir(outPath);
 await Deno.mkdir(join(outPath, "~"));

@@ -24,15 +24,10 @@ const config = {
           id: "runtime",
           path: "runtime",
           routeBasePath: "runtime",
-          exclude: ["reference/**"],
           sidebarPath: require.resolve("./sidebars/runtime.js"),
           remarkPlugins: [
             findReplace,
           ],
-        },
-        pages: {
-          path: "runtime/reference",
-          routeBasePath: "runtime/reference",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -58,6 +53,14 @@ const config = {
       },
     ],
     */
+    [
+      "@docusaurus/plugin-content-pages",
+      {
+        id: "runtime_reference",
+        path: "api",
+        routeBasePath: "/api",
+      },
+    ],
     [
       "@docusaurus/plugin-content-docs",
       {
@@ -129,7 +132,7 @@ const config = {
           to: "/runtime/manual",
           position: "left",
           label: "Deno Runtime",
-          activeBaseRegex: `^/runtime(?!/reference)`,
+          activeBaseRegex: `^/runtime`,
         },
         {
           to: "/deploy/manual",
@@ -144,10 +147,10 @@ const config = {
           activeBaseRegex: `^/subhosting`,
         },
         {
-          to: "/runtime/reference",
+          to: "/api",
           position: "left",
           label: "Deno Runtime Reference",
-          activeBaseRegex: `^/runtime/reference`,
+          activeBaseRegex: `^/api`,
         },
         {
           href: "https://www.deno.com",
