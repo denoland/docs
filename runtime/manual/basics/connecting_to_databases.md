@@ -124,7 +124,7 @@ db.close();
 
 To connect to Firebase with Deno, import the
 [firestore npm module](https://firebase.google.com/docs/firestore/quickstart)
-with the [skypak CDN](https://www.skypack.dev/). To learn more about using npm
+with the [ESM CDN](https://esm.sh/). To learn more about using npm
 modules in Deno with a CDN, see [Using npm packages with CDNs](../node/cdns.md).
 
 ### Connect to Firebase with the firestore npm module

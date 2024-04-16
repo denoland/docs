@@ -233,28 +233,12 @@ file, its resolution follow the normal import rules of Deno. For a lot of the
 `.d.ts` files that are generated and available on the web, they may not be
 compatible with Deno.
 
-To overcome this problem, some solution providers, like the
-[Skypack CDN](https://www.skypack.dev/), will automatically bundle type
-declarations just like they provide bundles of JavaScript as ESM.
-
-### Deno Friendly CDNs
-
-There are CDNs which host JavaScript modules that integrate well with Deno.
-
-- [esm.sh](https://esm.sh) is a CDN which provides type declarations by default
+[esm.sh](https://esm.sh) is a CDN which provides type declarations by default
   (via the `X-TypeScript-Types` header). It can be disabled by appending
   `?no-dts` to the import URL:
 
   ```ts
   import React from "https://esm.sh/react?no-dts";
-  ```
-- [Skypack.dev](https://docs.skypack.dev/skypack-cdn/code/deno) is another CDN
-  which also provides type declarations (via the `X-TypeScript-Types` header)
-  when you append `?dts` as a query string to your remote module import
-  statements. Here's an example:
-
-  ```ts
-  import React from "https://cdn.skypack.dev/react?dts";
   ```
 
 ## Behavior of JavaScript when type checking
