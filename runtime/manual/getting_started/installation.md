@@ -53,6 +53,24 @@ asdf global deno latest
 asdf local deno latest
 ```
 
+Using [vfox](https://vfox.lhan.me/):
+
+```shell
+vfox add deno
+
+# Download and install the latest version of Deno
+vfox install deno@latest
+
+# To set the version of Deno globally
+vfox use --global deno
+
+# Different versions for different projects
+vfox use --project deno
+
+# Different versions for different shells
+vfox use --session deno
+```
+
 </TabItem>
   <TabItem  value="windows" label="Windows">
 
@@ -78,6 +96,24 @@ Using [Winget](https://github.com/microsoft/winget-cli):
 
 ```shell
 winget install deno
+```
+
+Using [vfox](https://vfox.lhan.me/):
+
+```shell
+vfox add deno
+
+# Download and install the latest version of Deno
+vfox install deno@latest
+
+# To set the version of Deno globally
+vfox use --global deno
+
+# Different versions for different projects
+vfox use --project deno
+
+# Different versions for different shells
+vfox use --session deno
 ```
 
 </TabItem>
@@ -108,6 +144,24 @@ asdf global deno latest
 
 # To set as the default version of Deno locally (current project only)
 asdf local deno latest
+```
+
+Using [vfox](https://vfox.lhan.me/):
+
+```shell
+vfox add deno
+
+# Download and install the latest version of Deno
+vfox install deno@latest
+
+# To set the version of Deno globally
+vfox use --global deno
+
+# Different versions for different projects
+vfox use --project deno
+
+# Different versions for different shells
+vfox use --session deno
 ```
 
 </TabItem>
