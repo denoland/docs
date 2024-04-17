@@ -2,7 +2,7 @@
 
 This tutorial covers how to deploy a Vite Deno and React app on Deno Deploy.
 
-## Step 1: Create Vite app
+## Step 1: Create a Vite app
 
 Let's use [Vite](https://vitejs.dev/) to quickly scaffold a Deno and React app:
 
