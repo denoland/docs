@@ -37,7 +37,7 @@ this data type. You can execute the code in this example using the `deno run`
 command.
 
 ```console
-deno run -A hello.ts
+deno run hello.ts
 ```
 
 You can
