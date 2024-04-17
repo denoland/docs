@@ -243,7 +243,7 @@ deno test person_test.ts
 The output should look something like this:
 
 ```bash
-kevin@kevin-deno scratchpad % deno test person_test.ts
+$ deno test person_test.ts
 Check file:///Users/kevin/dev/denoland/scratchpad/person_test.ts
 running 1 test from ./person_test.ts
 sayHello function ... ok (4ms)
