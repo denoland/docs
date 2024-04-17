@@ -25,7 +25,7 @@ deno task run
 
 ## Step 3: Deploy your project with Deno Deploy
 
-Now that we have everything in place, let's deploy your new API!
+Now that we have everything in place, let's deploy your new project!
 
 1. In your browser, visit [Deno Deploy](https://dash.deno.com/new_project) and
    link your GitHub account.
