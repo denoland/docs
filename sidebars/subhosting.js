@@ -1,12 +1,52 @@
 const sidebars = {
-  subhosting: [
+  subhosting: [],
+
+  subhostGuideHome: [
     {
       type: "html",
       value: "<div>Getting Started</div>",
       className: "section-header",
     },
-    "manual/index",
-    "manual/getting_started",
+    {
+      type: "doc",
+      label: "Quick Start",
+      id: "manual/quick_start",
+    },
+    {
+      type: "doc",
+      label: "About Subhosting",
+      id: "manual/index",
+    },
+    {
+      type: "doc",
+      label: "Subhosting Usecases",
+      id: "manual/usecases",
+    },
+    {
+      type: "html",
+      value: "<div>Subhosting Platform</div>",
+      className: "section-header",
+    },
+    {
+      type: "doc",
+      label: "Organizations",
+      id: "manual/organizations",
+    },
+    {
+      type: "doc",
+      label: "Projects",
+      id: "manual/projects",
+    },
+    {
+      type: "doc",
+      label: "Deployments",
+      id: "manual/deployments",
+    },
+    {
+      type: "doc",
+      label: "Custom Domains",
+      id: "manual/domains",
+    },
     "manual/projects_and_deployments",
     "manual/events",
     {

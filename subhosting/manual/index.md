@@ -1,68 +1,55 @@
 # About Subhosting
 
-A powerful use case for Deno Deploy is using our isolate cloud to run untrusted
-code on behalf of your end users. There are a number of scenarios where you
-might be interested in doing this:
+Deno Subhosting is a robust platform designed to allow Software as a Service
+(SaaS) providers to securely run code written by their customers. The Subhosting
+API allows you to deploy untrusted code programmatically and at scale.
 
-- You are a SaaS provider that wants to empower your customers to extend your
-  platform with custom code
-- You are an infrastructure provider that would like to enable your customers to
-  run Deno-powered edge functions
-- You are building a browser-based editor for user code (possibly for
-  education), and you'd like a place to execute that code in a controlled and
-  secure way
+## Key Features
 
-In cases like these, you might consider using Deno Deploy's full-featured
-[REST API](../api/index.md) to implement
-[**subhosting**](https://deno.com/subhosting). "Subhosting" is what we call the
-scenario where you use Deno Deploy to run your users' untrusted code in a secure
-and scalable environment designed for
-[multitenancy](https://www.ibm.com/topics/multi-tenant).
+- **Ease of Use:** Developers can write code in generic JavaScript or TypeScript
+  without needing specific knowledge of Deno.
+- **Standards Compliance:** Deno supports standard JavaScript and TypeScript and
+  integrates widely-used web APIs like `fetch` and `web cache`.
+- **Deno-Specific Advanced Features:** Offers advanced features like `KV`
+  (Key-Value stores) which extend beyond typical browser capabilities.
+- **Rapid Deployment:** Deno’s cloud products are designed to support extremely
+  short deployment times that range from less than a second for simple
+  applications, to around ten seconds for complex websites with numerous
+  dependencies.
+- **Improved developer experience**: Subhosting will manage the extensive effort
+  of setting up secure infrastructure to run untrusted code in a public cloud
+  for you.
 
-## Quick start example
+## **Overview of Deno Cloud Offerings: Deno Deploy and Deno Subhosting**
 
-Looking for the smallest possible example that shows how to deploy code to
-Deno's isolate cloud? We've got you covered below. Once you've skimmed over it,
-you can read on for more details about subhosting.
+Deno provides two distinct cloud offerings, Deno Deploy and Deno Subhosting,
+each designed to support specific use cases while leveraging the same underlying
+infrastructure.
 
-```ts
-// 1.) Get API access info ready
-const accessToken = Deno.env.get("DEPLOY_ACCESS_TOKEN");
-const orgId = Deno.env.get("DEPLOY_ORG_ID");
-const API = "https://api.deno.com/v1";
-const headers = {
-  Authorization: `Bearer ${accessToken}`,
-  "Content-Type": "application/json",
-};
+### **Deno Deploy**
 
-// 2.) Create a new project
-const pr = await fetch(`${API}/organizations/${orgId}/projects`, {
-  method: "POST",
-  headers,
-  body: JSON.stringify({
-    name: null, // randomly generates project name
-  }),
-});
-const project = await pr.json();
+Deno Deploy is optimized for individual developers and small teams focused on
+developing and iterating on a limited set of first-party projects. This solution
+is ideal for hosting websites or applications, with deployment processes
+typically managed through GitHub integrations.
 
-// 3.) Deploy a "hello world" server to the new project
-const dr = await fetch(`${API}/projects/${project.id}/deployments`, {
-  method: "POST",
-  headers,
-  body: JSON.stringify({
-    entryPointUrl: "main.ts",
-    assets: {
-      "main.ts": {
-        "kind": "file",
-        "content": `Deno.serve(() => new Response("Hello, World!"));`,
-        "encoding": "utf-8",
-      },
-    },
-    envVars: {},
-  }),
-});
-console.log(dr.status);
-```
+- Target Audience: Individual developers and small development teams.
+- Deployment Integration: Primarily through GitHub for continuous integration
+  and delivery.
+- Use Cases: Hosting websites and applications.
+
+### **Deno Subhosting**
+
+In contrast, Deno Subhosting is engineered to securely manage a larger volume of
+projects and deployments. It supports the deployment of untrusted code or
+functions through an API, making it suitable for scenarios involving multiple
+end-users contributing code.
+
+- Target Audience: SaaS platforms requiring the capability to host
+  customer-generated, untrusted code securely.
+- Deployment Mechanism: Through a robust API designed for scalability and
+  security.
+- Use Cases: Large scale project hosting where end-users contribute the code.
 
 ## How subhosting works
 
