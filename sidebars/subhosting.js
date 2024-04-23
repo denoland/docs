@@ -28,9 +28,9 @@ const sidebars = {
       className: "section-header",
     },
     {
-      type: "link",
+      type: "doc",
       label: "Organizations",
-      href: "/subhosting/manual/subhosting#organizations",
+      id: "manual/subhosting",
     },
     {
       type: "link",
@@ -50,7 +50,7 @@ const sidebars = {
     {
       type: "link",
       label: "Connecting a Database",
-      href: "./manual/subhosting#database",
+      href: "./subhosting/manual/subhosting#database",
     },
     "manual/projects_and_deployments",
     "manual/events",

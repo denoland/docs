@@ -6,7 +6,7 @@ within the system. These resources are also represented in the
 
 ![overview of subhosting resources](./subhosting-org-structure.svg)
 
-<a style={{marginTop: '2rem'}} id="organizations"></a>
+<a style={{marginTop: '4rem'}} id="organizations"></a>
 
 ## Organizations
 
@@ -22,7 +22,7 @@ with organization access the ability to modify resources within the org via API.
 New organizations can be created in the
 [Deploy dashboard](https://dash.deno.com/orgs/new).
 
-<a style={{marginTop: '2rem'}}  id="deployments"></a>
+<a style={{marginTop: '4rem'}} id="deployments"></a>
 
 ## Deployments
 
@@ -47,11 +47,19 @@ If you need to block or unblock a deployment you can do so by deleting the
 deployment that you need to block or by unassigning its domains. This will make
 the deployment unreachable.
 
+The Subhosting system is built so that the behavior or load on one deployment
+does not affect other deployments. This also applies to different deployments
+within one organization. Capacity is auto-scaled on demand. If you want to limit
+resources to a particular deployment or application you can use the analytics
+API to provide you with detailed metrics (request count, bandwidth, etc) at
+project level granularity. You can use this to decide whether to shut off
+deployments and make them unreachable.
+
 > NB. **Deployments are immutable**, however, you can create a new deployment
 > and then remap its domain to the new deployment. The redeploy endpoint can
 > create a new deployment from an existing one with different settings.
 
-<a style={{marginTop: '2rem'}}  id="projects"></a>
+<a style={{marginTop: '4rem'}} id="projects"></a>
 
 ## Projects
 
@@ -59,8 +67,11 @@ the deployment unreachable.
 act as organizational containers for deployments. A project contains its
 deployments and the analytics and usage information for those deployments.
 
-- Projects are free and can be set up as required.
-- Analytics are reported on a per-project basis.
+Projects are free and can be set up as required.
+
+To track usage by individual users for billing there is an API endpoint that
+reports analytics (bandwidth usage, request count, etc), per project, with 15
+minute granularity.
 
 > All deployments (whether within a same project or between different projects)
 > share nothing by default. Projects are a way to organize your deployments and
@@ -68,7 +79,7 @@ deployments and the analytics and usage information for those deployments.
 > if you have multiple tenants we recommend setting up a project for each.
 > Particularly if you expect to bill your users for their usage.
 
-<a style={{marginTop: '2rem'}}  id="domains"></a>
+<a style={{marginTop: '4rem'}} id="domains"></a>
 
 ## Custom domains
 
@@ -88,7 +99,15 @@ use it in two ways:
 - (Coming soon) Assign different subdomains (e.g. `foo.mycompany.com` and
   `bar.mycompany.com`) to separate deployments.
 
-<a style={{marginTop: '2rem'}}  id="database"></a>
+### Staging vs Production Environments
+
+The Deno Deploy end-user platform automatically creates preview deployments when
+a developer opens a github pull request, and commits to the “main” branch are
+automatically turned into production deployments. Although subhosting does not
+provide github integration out of the box, it has all the primitives you need to
+define your own semantics for creating preview and production deployments.
+
+<a style={{marginTop: '4rem'}} id="database"></a>
 
 ## Connecting a Database
 
