@@ -53,10 +53,10 @@ end-users contributing code.
 
 The steps to implement subhosting are roughly as follows:
 
-1. [Create an organization](./getting_started.md) and get an access token for
-   the REST API
-1. [Create a project](./projects_and_deployments.md), and then create your first
-   deployment for that project
+1. [Create an organization](./quick_start.md) and get an access token for the
+   REST API
+1. [Create a project](./planning_your_implementation.md), and then create your
+   first deployment for that project
 
 Using these techniques, you can package up user code as "deployments", and
 execute that code on a Deno-provisioned URL or a custom URL you can configure

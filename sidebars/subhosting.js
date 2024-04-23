@@ -9,19 +9,25 @@ const sidebars = {
     },
     {
       type: "doc",
+      label: "About Subhosting",
+      id: "manual/index",
+    },
+    {
+      type: "doc",
       label: "Quick Start",
       id: "manual/quick_start",
     },
     {
       type: "doc",
-      label: "About Subhosting",
-      id: "manual/index",
+      label: "Planning your implementation",
+      id: "manual/planning_your_implementation",
     },
     {
       type: "doc",
       label: "Subhosting Usecases",
       id: "manual/usecases",
     },
+  
     {
       type: "html",
       value: "<div>Subhosting Platform</div>",
@@ -52,7 +58,6 @@ const sidebars = {
       label: "Connecting a Database",
       href: "./subhosting/manual/subhosting#database",
     },
-    "manual/projects_and_deployments",
     "manual/events",
     {
       type: "html",

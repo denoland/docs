@@ -1,13 +1,4 @@
-# Projects and deployments
-
-In the [domain model for subhosting](./index.md), a **project** is a container
-for **deployments**. You can track aggregate analytics for a project (like how
-many requests are being processed, KV database usage, etc). But actual code that
-runs and serves requests is contained in a **deployment**. Depending on the data
-model for your application, you might choose to map projects and deployments in
-different ways.
-
-## Planning your implementation
+# Planning your implementation
 
 For example - let's say that you were building a SaaS CRM platform like
 Salesforce, and you wanted to empower your customers to write JavaScript code
