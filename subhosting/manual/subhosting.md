@@ -1,8 +1,12 @@
 # Subhosting Concepts
 
+To build Subhosting with Deno Deploy, it helps to understand some key resources
+within the system. These resources are also represented in the
+[REST API](../api/index.md).
 
+![overview of subhosting resources](./subhosting-org-structure.svg)
 
-<a style={{marginRight: '2rem'}} id="organizations"></a>
+<a style={{marginTop: '2rem'}} id="organizations"></a>
 
 ## Organizations
 
@@ -18,7 +22,7 @@ with organization access the ability to modify resources within the org via API.
 New organizations can be created in the
 [Deploy dashboard](https://dash.deno.com/orgs/new).
 
-<a style={{marginRight: '2rem'}}  id="deployments"></a>
+<a style={{marginTop: '2rem'}}  id="deployments"></a>
 
 ## Deployments
 
@@ -47,7 +51,7 @@ the deployment unreachable.
 > and then remap its domain to the new deployment. The redeploy endpoint can
 > create a new deployment from an existing one with different settings.
 
-<a style={{marginRight: '2rem'}}  id="projects"></a>
+<a style={{marginTop: '2rem'}}  id="projects"></a>
 
 ## Projects
 
@@ -64,7 +68,7 @@ deployments and the analytics and usage information for those deployments.
 > if you have multiple tenants we recommend setting up a project for each.
 > Particularly if you expect to bill your users for their usage.
 
-<a style={{marginRight: '2rem'}}  id="domains"></a>
+<a style={{marginTop: '2rem'}}  id="domains"></a>
 
 ## Custom domains
 
@@ -84,7 +88,7 @@ use it in two ways:
 - (Coming soon) Assign different subdomains (e.g. `foo.mycompany.com` and
   `bar.mycompany.com`) to separate deployments.
 
-<a style={{marginRight: '2rem'}}  id="database"></a>
+<a style={{marginTop: '2rem'}}  id="database"></a>
 
 ## Connecting a Database
 

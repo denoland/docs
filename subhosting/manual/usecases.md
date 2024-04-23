@@ -16,3 +16,5 @@
 - This doc covers how a SaaS application can programmatically deploy their end
   user code to our platform.
 - Documentation for end users is here -> link
+How do I integrate an open source editor?
+See our blog post about monaco

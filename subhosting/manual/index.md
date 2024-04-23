@@ -20,13 +20,13 @@ API allows you to deploy untrusted code programmatically and at scale.
   of setting up secure infrastructure to run untrusted code in a public cloud
   for you.
 
-## **Overview of Deno Cloud Offerings: Deno Deploy and Deno Subhosting**
+## Overview of Deno Cloud Offerings - Deno Deploy and Deno Subhosting
 
 Deno provides two distinct cloud offerings, Deno Deploy and Deno Subhosting,
 each designed to support specific use cases while leveraging the same underlying
 infrastructure.
 
-### **Deno Deploy**
+### Deno Deploy
 
 Deno Deploy is optimized for individual developers and small teams focused on
 developing and iterating on a limited set of first-party projects. This solution
@@ -38,7 +38,7 @@ typically managed through GitHub integrations.
   and delivery.
 - Use Cases: Hosting websites and applications.
 
-### **Deno Subhosting**
+### Deno Subhosting
 
 In contrast, Deno Subhosting is engineered to securely manage a larger volume of
 projects and deployments. It supports the deployment of untrusted code or
@@ -50,33 +50,6 @@ end-users contributing code.
 - Deployment Mechanism: Through a robust API designed for scalability and
   security.
 - Use Cases: Large scale project hosting where end-users contribute the code.
-
-## How subhosting works
-
-To build subhosting with Deno Deploy, it helps to understand some key resources
-within the system. These resources are also represented in the
-[REST API](../api/index.md).
-
-![overview of subhosting resources](./subhosting-org-structure.svg)
-
-- [**Organizations**](https://apidocs.deno.com/#get-/organizations/-organizationId-):
-  Organizations are a container for all data related to a subhosting
-  implementation. Other Deploy users can be invited to collaborate on an
-  organization, and [access tokens](https://dash.deno.com/account#access-tokens)
-  can give developers with organization access the ability to modify resources
-  within the org via API. New organizations can be created in the
-  [Deploy dashboard](https://dash.deno.com/orgs/new).
-- [**Projects**](https://apidocs.deno.com/#get-/organizations/-organizationId-/projects):
-  a project is a container for **deployments**, and the analytics and usage
-  information for all deployments within a project.
-- [**Deployments**](https://apidocs.deno.com/#get-/projects/-projectId-/deployments):
-  a deployment is a set of configuration, runnable code, and supporting static
-  files that can run on an isolate in Deno Deploy. Deployments have an entry
-  file that can launch a server, can have a [Deno KV](/deploy/kv/manual)
-  database associated with them, and can be set up to run on custom domains.
-- [**Domains**](https://apidocs.deno.com/#get-/organizations/-organizationId-/domains):
-  custom domains that can be associated with deployments, giving them a unique
-  URL.
 
 The steps to implement subhosting are roughly as follows:
 

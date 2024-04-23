@@ -30,27 +30,27 @@ const sidebars = {
     {
       type: "link",
       label: "Organizations",
-      href: "manual/subhosting#organizations",
+      href: "/subhosting/manual/subhosting#organizations",
     },
     {
       type: "link",
       label: "Projects",
-      href: "manual/subhosting#projects",
+      href: "/subhosting/manual/subhosting#projects",
     },
     {
       type: "link",
       label: "Deployments",
-      href: "manual/subhosting#deployments",
+      href: "/subhosting/manual/subhosting#deployments",
     },
     {
       type: "link",
       label: "Custom Domains",
-      href: "manual/subhosting#domains",
+      href: "/subhosting/manual/subhosting#domains",
     },
     {
       type: "link",
-      label: "Custom Domains",
-      href: "manual/subhosting#database",
+      label: "Connecting a Database",
+      href: "./manual/subhosting#database",
     },
     "manual/projects_and_deployments",
     "manual/events",
