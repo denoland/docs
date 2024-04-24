@@ -182,6 +182,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno serve",
+          id: "manual/tools/serve",
+        },
+        {
+          type: "doc",
           label: "deno task",
           id: "manual/tools/task_runner",
         },
