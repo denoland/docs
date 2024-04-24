@@ -232,28 +232,6 @@ More flags which affect the execution environment.
 --v8-flags=<v8-flags>        Set V8 command line options. For help: ...
 ```
 
-## Serving
-
-In addition to `deno run`, Deno offers a `deno serve` command-line option that
-automatically configures servers based on the exports of your main module.
-
-Here's a basic example of how you can create a simple HTTP server using the
-`serve` subcommand:
-
-```typescript
-export default {
-  async fetch(request) {
-    // Your server logic goes here
-    return new Response("Hello world!");
-  },
-};
-```
-
-In this example, the fetch function is used to handle incoming HTTP requests.
-You can customize the logic inside the fetch function to handle different types
-of requests and serve content accordingly. This is just a starting point, and
-you can build more complex server applications using Deno's powerful runtime.
-
 ## Autocomplete
 
 You can get IDE-style autocompletions for Deno with [Fig](https://fig.io/)
