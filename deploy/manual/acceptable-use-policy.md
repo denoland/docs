@@ -1,6 +1,6 @@
 # Acceptable use policy
 
-The public beta for the Deno Deploy service includes resources (CPU time,
+The Deno Deploy service includes resources (CPU time,
 request counts) that are subject to this Acceptable Use policy. This document
 can give a rough estimate to what we consider as "Acceptable Use", and what we
 do not.
