@@ -26,7 +26,7 @@ Let's look at an example of the API endpoint required to make this happen.
 
 ## Creating a deployment for a project
 
-In the [previous chapter](./getting_started.md), you created a new project and
+In the [previous chapter](./quick_start.md), you created a new project and
 noted its `id` property. In the example in the previous chapter, the ID was:
 
 ```console
