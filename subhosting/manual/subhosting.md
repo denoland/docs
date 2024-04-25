@@ -6,7 +6,7 @@ within the system. These resources are also represented in the
 
 ![overview of subhosting resources](./subhosting-org-structure.svg)
 
-<a style={{marginTop: '4rem'}} id="organizations"></a>
+<a style={{height: '3rem', display: 'block'}} id="organizations"></a>
 
 ## Organizations
 
@@ -22,7 +22,27 @@ with organization access the ability to modify resources within the org via API.
 New organizations can be created in the
 [Deploy dashboard](https://dash.deno.com/orgs/new).
 
-<a style={{marginTop: '4rem'}} id="deployments"></a>
+<a style={{height: '3rem', display: 'block'}} id="projects"></a>
+
+## Projects
+
+[**Projects**](https://apidocs.deno.com/#get-/organizations/-organizationId-/projects)
+act as organizational containers for deployments. A project contains its
+deployments and the analytics and usage information for those deployments.
+
+Projects are free and can be set up as required.
+
+To track usage by individual users for billing there is an API endpoint that
+reports analytics (bandwidth usage, request count, etc), per project, with 15
+minute granularity.
+
+> All deployments (whether within a same project or between different projects)
+> share nothing by default. Projects are a way to organize your deployments and
+> do not cost anything. However analytics are reported on a per-project basis,
+> if you have multiple tenants we recommend setting up a project for each.
+> Particularly if you expect to bill your users for their usage.
+
+<a style={{height: '3rem', display: 'block'}} id="deployments"></a>
 
 ## Deployments
 
@@ -59,27 +79,7 @@ deployments and make them unreachable.
 > and then remap its domain to the new deployment. The redeploy endpoint can
 > create a new deployment from an existing one with different settings.
 
-<a style={{marginTop: '4rem'}} id="projects"></a>
-
-## Projects
-
-[**Projects**](https://apidocs.deno.com/#get-/organizations/-organizationId-/projects)
-act as organizational containers for deployments. A project contains its
-deployments and the analytics and usage information for those deployments.
-
-Projects are free and can be set up as required.
-
-To track usage by individual users for billing there is an API endpoint that
-reports analytics (bandwidth usage, request count, etc), per project, with 15
-minute granularity.
-
-> All deployments (whether within a same project or between different projects)
-> share nothing by default. Projects are a way to organize your deployments and
-> do not cost anything. However analytics are reported on a per-project basis,
-> if you have multiple tenants we recommend setting up a project for each.
-> Particularly if you expect to bill your users for their usage.
-
-<a style={{marginTop: '4rem'}} id="domains"></a>
+<a style={{height: '3rem', display: 'block'}} id="domains"></a>
 
 ## Custom domains
 
@@ -107,7 +107,7 @@ automatically turned into production deployments. Although subhosting does not
 provide github integration out of the box, it has all the primitives you need to
 define your own semantics for creating preview and production deployments.
 
-<a style={{marginTop: '4rem'}} id="database"></a>
+<a style={{height: '3rem', display: 'block'}} id="database"></a>
 
 ## Connecting a Database
 

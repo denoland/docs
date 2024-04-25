@@ -56,7 +56,7 @@ const sidebars = {
     {
       type: "link",
       label: "Connecting a Database",
-      href: "./subhosting/manual/subhosting#database",
+      href: "/subhosting/manual/subhosting#database",
     },
     "manual/events",
     {
