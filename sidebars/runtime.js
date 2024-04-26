@@ -127,6 +127,16 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno cache",
+          id: "manual/tools/cache",
+        },
+        {
+          type: "doc",
+          label: "deno check",
+          id: "manual/tools/check",
+        },
+        {
+          type: "doc",
           label: "deno compile",
           id: "manual/tools/compiler",
         },
@@ -177,8 +187,18 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno serve",
+          id: "manual/tools/serve",
+        },
+        {
+          type: "doc",
           label: "deno task",
           id: "manual/tools/task_runner",
+        },
+        {
+          type: "doc",
+          label: "deno upgrade",
+          id: "manual/tools/upgrade",
         },
         {
           type: "doc",

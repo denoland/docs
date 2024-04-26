@@ -16,6 +16,7 @@ Deno features before they are finalized.
 - [formatter (`deno fmt`)](./formatter.md)
 - [linter (`deno lint`)](./linter.md)
 - [repl (`deno repl`)](./repl.md)
+- [server (`deno serve`)](./serve.md)
 - [task runner (`deno task`)](./task_runner.md)
 - [test runner (`deno test`)](../basics/testing/index.md)
 - [vendoring dependencies (`deno vendor`)](./vendor.md)
