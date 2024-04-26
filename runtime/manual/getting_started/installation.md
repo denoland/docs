@@ -63,12 +63,6 @@ vfox install deno@latest
 
 # To set the version of Deno globally
 vfox use --global deno
-
-# Different versions for different projects
-vfox use --project deno
-
-# Different versions for different shells
-vfox use --session deno
 ```
 
 </TabItem>
@@ -108,12 +102,6 @@ vfox install deno@latest
 
 # To set the version of Deno globally
 vfox use --global deno
-
-# Different versions for different projects
-vfox use --project deno
-
-# Different versions for different shells
-vfox use --session deno
 ```
 
 </TabItem>
@@ -156,12 +144,6 @@ vfox install deno@latest
 
 # To set the version of Deno globally
 vfox use --global deno
-
-# Different versions for different projects
-vfox use --project deno
-
-# Different versions for different shells
-vfox use --session deno
 ```
 
 </TabItem>
