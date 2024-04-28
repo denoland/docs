@@ -49,7 +49,7 @@ List of file names to run
 
 `SCRIPT_ARG`
 
-Script arg
+Arguments passed to script files
 
 ## Options
 
@@ -162,100 +162,128 @@ Script arg
     Deny [running subprocesses](https://deno.land/manual/basics/permissions). Optionally specify denied runnable program names.
     Examples: `--deny-run`, `--deny-run="whoami,ps"`
 
-- `--allow-ffi[=<PATH>...]` 
+- `--allow-ffi[=<PATH>...]`
     (Unstable) Allow loading dynamic libraries. Optionally specify [allowed directories or files](https://deno.land/manual/basics/permissions).
     Examples: `--allow-ffi`, `--allow-ffi="./libfoo.so"`
 
 - `--deny-ffi[=<PATH>...]`
-    (Unstable) Deny [loading dynamic libraries](https://deno.land/manual/basics/permissions). Optionally specify denied directories or files. 
+    (Unstable) Deny [loading dynamic libraries](https://deno.land/manual/basics/permissions). Optionally specify denied directories or files.
     Examples: `--deny-ffi`, `--deny-ffi="./libfoo.so"`
 
-- `--allow-hrtime` Allow high-resolution time measurement. Note: this can enable
-  timing attacks and fingerprinting. Docs:
-  https://deno.land/manual/basics/permissions
+- `--allow-hrtime`
+    Allow [high-resolution time measurement](https://deno.land/manual/basics/permissions). Note: this can enable timing attacks and fingerprinting.
 
-- `--deny-hrtime` Deny high-resolution time measurement. Note: this can prevent
-  timing attacks and fingerprinting. Docs:
-  https://deno.land/manual/basics/permissions
+- `--deny-hrtime` 
+    Deny [high-resolution time measurement](https://deno.land/manual/basics/permissions). Note: this can prevent
+  timing attacks and fingerprinting.
 
-  -A, --allow-all Allow all permissions. Learn more about permissions in Deno:
-  https://deno.land/manual/basics/permissions
+- `-A, --allow-all` 
+    Allow [all permissions](https://deno.land/manual/basics/permissions). 
 
-- `--no-prompt` Always throw if required permission wasn't passed
+- `--no-prompt`
+    Always throw if required permission wasn't passed
 
-- `--inspect[=<HOST_AND_PORT>]` Activate inspector on host:port (default:
-  127.0.0.1:9229)
+- `--inspect[=<HOST_AND_PORT>]`
+    Activate inspector on host:port (default: 127.0.0.1:9229)
 
-- `--inspect-brk[=<HOST_AND_PORT>]` Activate inspector on host:port, wait for
-  debugger to connect and break at the start of user script
+- `--inspect-brk[=<HOST_AND_PORT>]`
+    Activate inspector on host:port, wait for debugger to connect and break at the start of user script
 
-- `--inspect-wait[=<HOST_AND_PORT>]` Activate inspector on host:port and wait
-  for debugger to connect before running user code
+- `--inspect-wait[=<HOST_AND_PORT>]`
+    Activate inspector on host:port and wait for debugger to connect before running user code
 
-- `--cached-only` Require that remote dependencies are already cached
+- `--cached-only`
+    Require that remote dependencies are already cached
 
-- `--location <HREF>` Value of 'globalThis.location' used by some web APIs
+- `--location <HREF>`
+    Value of 'globalThis.location' used by some web APIs
 
-- `--v8-flags[=<v8-flags>...]` To see a list of all available flags use
-  --v8-flags=--help. Any flags set with this flag are appended after the
-  DENO_V8_FLAGS environmental variable
+- `--v8-flags[=<v8-flags>...]`
+    To see a list of all available flags use `--v8-flags=--help`. Any flags set with this flag are appended after the `DENO_V8_FLAGS` environmental variable
 
-- `--seed <NUMBER>` Set the random number generator seed
+- `--seed <NUMBER>`
+    Set the random number generator seed
 
-- `--check[=<CHECK_TYPE>]` Set type-checking behavior. This subcommand
-  type-checks local modules by default, so adding --check is redundant. If the
-  value of '--check=all' is supplied, diagnostic errors from remote modules will
-  be included.
+- `--check[=<CHECK_TYPE>]`
+    Set type-checking behavior. This subcommand type-checks local modules by default, so adding `--check` is redundant. If the value of '--check=all' is supplied, diagnostic errors from remote modules will be included. Alternatively, the 'deno check' subcommand can be used.
 
-      Alternatively, the 'deno check' subcommand can be used.
+- `--ignore=<ignore>...`
+    Ignore files
 
-- `--ignore=<ignore>...` Ignore files
+- `--no-run` 
+    Cache test modules, but don't run tests
 
-- `--no-run` Cache test modules, but don't run tests
+- `--trace-leaks` 
+    Enable tracing of leaks. Useful when debugging leaking ops in test, but impacts test execution time.
 
-- `--trace-leaks` Enable tracing of leaks. Useful when debugging leaking ops in
-  test, but impacts test execution time.
+- `--doc` 
+    Type-check code blocks in JSDoc and Markdown
 
-- `--doc` Type-check code blocks in JSDoc and Markdown
+- `--fail-fast[=<N>]` 
+    Stop after N errors. Defaults to stopping after first failure.
 
-- `--fail-fast[=<N>]` Stop after N errors. Defaults to stopping after first
-  failure.
+- `--allow-none`
+    Don't return error code if no test files are found
 
-- `--allow-none` Don't return error code if no test files are found
+- `--filter <filter>`
+    Run tests with this string or pattern in the test name
 
-- `--filter <filter>` Run tests with this string or pattern in the test name
+- `--shuffle[=<NUMBER>]`
+    Shuffle the order in which the tests are run
 
-- `--shuffle[=<NUMBER>]` Shuffle the order in which the tests are run
+- `--coverage[=<DIR>]`
+    Collect coverage profile data into DIR. If DIR is not specified, it uses `coverage/`.
 
-- `--coverage[=<DIR>]` Collect coverage profile data into DIR. If DIR is not
-  specified, it uses 'coverage/'.
+- `--parallel`
+    Run test modules in parallel. Parallelism defaults to the number of available CPUs or the value in the DENO_JOBS environment variable.
 
-- `--parallel` Run test modules in parallel. Parallelism defaults to the number
-  of available CPUs or the value in the DENO_JOBS environment variable.
+- `--watch`
+    Watch for file changes and restart process automatically. Only local files from entry point module graph are watched.
 
-- `--watch` Watch for file changes and restart process automatically. Only local
-  files from entry point module graph are watched.
+- `--watch-exclude[=<FILES>...]`
+    Exclude provided files/patterns from watch mode
 
-- `--watch-exclude[=<FILES>...]` Exclude provided files/patterns from watch mode
+- `--no-clear-screen`
+    Do not clear terminal screen when under watch mode
 
-- `--no-clear-screen` Do not clear terminal screen when under watch mode
+- `--junit-path <PATH>`
+    Write a JUnit XML test report to PATH. Use `-` to write to stdout which is the default when PATH is not provided.
 
-- `--junit-path <PATH>` Write a JUnit XML test report to PATH. Use '-' to write
-  to stdout which is the default when PATH is not provided.
+- `--reporter <reporter>`
+    Select reporter to use. Default to 'pretty'.
+    [possible values: pretty, dot, junit, tap]
 
-- `--reporter <reporter>` Select reporter to use. Default to 'pretty'.
-
-      [possible values: pretty, dot, junit, tap]
-
-- `--env[=<FILE>]` UNSTABLE: Load environment variables from local file. Only
-  the first environment variable with a given key is used. Existing process
-  environment variables are not overwritten.
+- `--env[=<FILE>]`
+    UNSTABLE: Load environment variables from local file. Only the first environment variable with a given key is used. Existing process environment variables are not overwritten.
 
 - `-h, --help`
-
-  Prints help information
+    Prints help information
 
 ## Examples
+
+- Run tests
+
+```bash
+deno test
+```
+
+- Run tests in specific files
+
+```bash
+deno test src/fetch_test.ts src/signal_test.ts
+```
+
+- Run tests where glob matches
+
+```bash
+deno test src/*.test.ts
+```
+
+- Run tests (skip type-checking)
+
+```bash
+deno test --no-check
+```
 
 - Reload everything
 
