@@ -202,6 +202,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno test",
+          id: "manual/tools/test",
+        },
+        {
+          type: "doc",
           label: "deno upgrade",
           id: "manual/tools/upgrade",
         },

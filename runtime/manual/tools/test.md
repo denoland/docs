@@ -35,11 +35,15 @@ Evaluate the given modules, run all tests declared with 'Deno.test()' and report
 results to standard output:
 
 ```bash
-deno test src/fetch_test.ts src/signal_test.ts
+deno test
 ```
 
 Directory arguments are expanded to all contained files matching the glob
 `{__,_.,}test.{js,mjs,ts,mts,jsx,tsx}`
+
+The test runner is rich in functionality and supports a number of options.
+
+It can be executed in watch mode (`--watch`), supports parallel execution (`--parallel`), and can be configured to run tests in a random order with (`--shuffle`). Additionally, there is built in support for code coverage (`--coverage`) and leak detection (`--trace-leaks`).
 
 ## Arguments
 
@@ -84,7 +88,7 @@ Arguments passed to script files
 
 - `-r, --reload[=<CACHE_BLOCKLIST>...]`
     Reload source code cache (recompile TypeScript)
-    
+
     `--reload`
     Reload everything
     `--reload=jsr:@std/http/file-server`
@@ -109,7 +113,7 @@ Arguments passed to script files
     Load certificate authority from PEM encoded file
 
 - `--allow-read[=<PATH>...]`
-    Allow [file system read access](https://deno.land/manual/basics/permissions). Optionally specify  allowed paths.
+    Allow [file system read access](https://deno.land/manual/basics/permissions). Optionally specify allowed paths.
     Examples: `--allow-read`, `--allow-read="/etc,/var/log.txt"`
 
 - `--deny-read[=<PATH>...]`
@@ -121,7 +125,7 @@ Arguments passed to script files
     Examples: `--allow-write`, `--allow-write="/etc,/var/log.txt"`
 
 - `--deny-write[=<PATH>...]`
-    Deny [file system write access](https://deno.land/manual/basics/permissions). Optionally specify  denied paths.
+    Deny [file system write access](https://deno.land/manual/basics/permissions). Optionally specify denied paths.
     Examples: `--deny-write`, `--deny-write="/etc,/var/log.txt"`
 
 - `--allow-net[=<IP_OR_HOSTNAME>...]` 
@@ -132,11 +136,11 @@ Arguments passed to script files
     Deny [network access](https://deno.land/manual/basics/permissions). Optionally specify denied IP addresses and host names, with ports as necessary.
     Examples: `--deny-net`, `--deny-net="localhost:8080,deno.land"`
 
-- `--unsafely-ignore-certificate-errors[=<HOSTNAMES>...]` 
+- `--unsafely-ignore-certificate-errors[=<HOSTNAMES>...]`
     DANGER: Disables verification of TLS certificates
 
-- `--allow-env[=<VARIABLE_NAME>...]` 
-    Allow [access to system environment information](https://deno.land/manual/basics/permissions). Optionally specify accessible environment variables. 
+- `--allow-env[=<VARIABLE_NAME>...]`
+    Allow [access to system environment information](https://deno.land/manual/basics/permissions). Optionally specify accessible environment variables.
     Examples: `--allow-env`, `--allow-env="PORT,HOME,PATH"`
 
 - `--deny-env[=<VARIABLE_NAME>...]`
@@ -173,12 +177,12 @@ Arguments passed to script files
 - `--allow-hrtime`
     Allow [high-resolution time measurement](https://deno.land/manual/basics/permissions). Note: this can enable timing attacks and fingerprinting.
 
-- `--deny-hrtime` 
+- `--deny-hrtime`
     Deny [high-resolution time measurement](https://deno.land/manual/basics/permissions). Note: this can prevent
   timing attacks and fingerprinting.
 
-- `-A, --allow-all` 
-    Allow [all permissions](https://deno.land/manual/basics/permissions). 
+- `-A, --allow-all`
+    Allow [all permissions](https://deno.land/manual/basics/permissions).
 
 - `--no-prompt`
     Always throw if required permission wasn't passed
@@ -196,7 +200,7 @@ Arguments passed to script files
     Require that remote dependencies are already cached
 
 - `--location <HREF>`
-    Value of 'globalThis.location' used by some web APIs
+    Value of `globalThis.location` used by some web APIs
 
 - `--v8-flags[=<v8-flags>...]`
     To see a list of all available flags use `--v8-flags=--help`. Any flags set with this flag are appended after the `DENO_V8_FLAGS` environmental variable
@@ -210,16 +214,16 @@ Arguments passed to script files
 - `--ignore=<ignore>...`
     Ignore files
 
-- `--no-run` 
+- `--no-run`
     Cache test modules, but don't run tests
 
-- `--trace-leaks` 
+- `--trace-leaks`
     Enable tracing of leaks. Useful when debugging leaking ops in test, but impacts test execution time.
 
-- `--doc` 
+- `--doc`
     Type-check code blocks in JSDoc and Markdown
 
-- `--fail-fast[=<N>]` 
+- `--fail-fast[=<N>]`
     Stop after N errors. Defaults to stopping after first failure.
 
 - `--allow-none`
@@ -279,10 +283,16 @@ deno test src/fetch_test.ts src/signal_test.ts
 deno test src/*.test.ts
 ```
 
-- Run tests (skip type-checking)
+- Run tests and skip type-checking
 
 ```bash
 deno test --no-check
+```
+
+- Run tests, re-running on file change
+
+```bash
+deno test --watch
 ```
 
 - Reload everything
