@@ -53,7 +53,7 @@ For a URL to match it must match the include pattern and not match the exclude p
 
 ## Output Formats
 
-By default we support Deno's own coverage format - but you can also output coverage reports in the lcov format.
+By default we support Deno's own coverage format - but you can also output coverage reports in the lcov format, or in html.
 
 ```bash
 deno coverage --lcov --output=cov.lcov
