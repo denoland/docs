@@ -202,6 +202,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno uninstall",
+          id: "manual/tools/uninstall",
+        },
+        {
+          type: "doc",
           label: "deno upgrade",
           id: "manual/tools/upgrade",
         },
