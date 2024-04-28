@@ -63,6 +63,9 @@ This lcov file can be used with other tools that support the lcov format.
 
 ```bash
 deno coverage --html
+```
+
+This will output a coverage report as a html file
 
 ## Arguments
 
