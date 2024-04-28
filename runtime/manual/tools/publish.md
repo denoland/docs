@@ -124,6 +124,12 @@ deno publish --token c00921b1-0d4f-4d18-b8c8-ac98227f9275
 deno publish --check=all
 ```
 
+- Perform a dry run to simulate publishing.
+
+```bash
+deno publish --dry-run
+```
+
 - Publish using settings from a specific configuration file
 
 ```bash
