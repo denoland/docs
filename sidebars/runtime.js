@@ -182,6 +182,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno lsp",
+          id: "manual/tools/lsp",
+        },
+        {
+          type: "doc",
           label: "deno repl",
           id: "manual/tools/repl",
         },
