@@ -61,6 +61,8 @@ deno coverage --lcov --output=cov.lcov
 
 This lcov file can be used with other tools that support the lcov format.
 
+```bash
+deno coverage --html
 ## Arguments
 
 `COVERAGE`
