@@ -102,6 +102,7 @@ const config = {
         },
       };
     },
+    "./src/plugins/deno-by-example/plugin.ts",
   ],
 
   themeConfig: ({
