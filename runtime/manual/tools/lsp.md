@@ -1,6 +1,6 @@
 # deno lsp
 
-Starts the deno language server. The language server is used by editors to provide features like intellisense, code formatting, and more.
+Starts the Deno language server. The language server is used by editors to provide features like intellisense, code formatting, and more.
 
 ## Command
 
