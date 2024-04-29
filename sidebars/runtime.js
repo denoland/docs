@@ -142,6 +142,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno coverage",
+          id: "manual/tools/coverage",
+        },
+        {
+          type: "doc",
           label: "deno doc",
           id: "manual/tools/documentation_generator",
         },
