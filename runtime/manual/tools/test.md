@@ -57,33 +57,33 @@ Arguments passed to script files
 
 ## Options
 
-- `--no-check[=<NO_CHECK_TYPE>]`
+- `--no-check[=<NO_CHECK_TYPE>]`\
     Skip type-checking. If the value of '--no-check=remote' is supplied, diagnostic errors from remote modules will be ignored.
 
-- `--import-map <FILE>`
+- `--import-map <FILE>`\
     Load [import map](https://docs.deno.com/runtime/manual/basics/import_maps) file from local file or remote URL.
 
 - `-q, --quiet`
     Suppress diagnostic output
 
-- `--no-remote`
+- `--no-remote`\
     Do not resolve remote modules
 
-- `--no-npm`
+- `--no-npm`\
     Do not resolve npm modules
 
-- `--node-modules-dir[=<node-modules-dir>]`
+- `--node-modules-dir[=<node-modules-dir>]`\
     Enables or disables the use of a local node_modules folder for npm packages.
     [possible values: true, false]
 
-- `--vendor[=<vendor>]`
+- `--vendor[=<vendor>]`\
     UNSTABLE: Enables or disables the use of a local vendor folder for remote modules and node_modules folder for npm packages.
     [possible values: true, false]
 
 - `-c, --config <FILE>`
     The [configuration file](https://deno.land/manual/getting_started/configuration_file) can be used to configure different aspects of deno including TypeScript, linting, and code formatting. Typically the configuration file will be called `deno.json` or `deno.jsonc` and automatically detected; in that case this flag is not necessary.
 
-- `--no-config`
+- `--no-config`\
     Disable automatic loading of the configuration file.
 
 - `-r, --reload[=<CACHE_BLOCKLIST>...]`
@@ -100,168 +100,171 @@ Arguments passed to script files
     `--reload=npm:chalk`
     Reload specific npm module
 
-- `--lock [<FILE>]`
+- `--lock [<FILE>]`\
     Check the specified lock file. If value is not provided, defaults to "deno.lock" in the current working directory.
 
-- `--lock-write`
+- `--lock-write`\
     Force overwriting the lock file.
 
-- `--no-lock`
+- `--no-lock`\
     Disable auto discovery of the lock file.
 
-- `--cert <FILE>`
+- `--cert <FILE>`\
     Load certificate authority from PEM encoded file
 
-- `--allow-read[=<PATH>...]`
-    Allow [file system read access](https://deno.land/manual/basics/permissions). Optionally specify allowed paths.
-    Examples: `--allow-read`, `--allow-read="/etc,/var/log.txt"`
-
-- `--deny-read[=<PATH>...]`
-    Deny [file system read access](https://deno.land/manual/basics/permissions). Optionally specify denied paths.
-    Examples: `--deny-read`, `--deny-read="/etc,/var/log.txt"`
-
-- `--allow-write[=<PATH>...]`
-    Allow [file system write access](https://deno.land/manual/basics/permissions). Optionally specify allowed paths.
-    Examples: `--allow-write`, `--allow-write="/etc,/var/log.txt"`
-
-- `--deny-write[=<PATH>...]`
-    Deny [file system write access](https://deno.land/manual/basics/permissions). Optionally specify denied paths.
-    Examples: `--deny-write`, `--deny-write="/etc,/var/log.txt"`
-
-- `--allow-net[=<IP_OR_HOSTNAME>...]` 
-    Allow [network access](https://deno.land/manual/basics/permissions). Optionally specify allowed IP addresses and host names, with ports as necessary.
-    Examples: `--allow-net`, `--allow-net="localhost:8080,deno.land"`
-
-- `--deny-net[=<IP_OR_HOSTNAME>...]`
-    Deny [network access](https://deno.land/manual/basics/permissions). Optionally specify denied IP addresses and host names, with ports as necessary.
-    Examples: `--deny-net`, `--deny-net="localhost:8080,deno.land"`
-
-- `--unsafely-ignore-certificate-errors[=<HOSTNAMES>...]`
-    DANGER: Disables verification of TLS certificates
-
-- `--allow-env[=<VARIABLE_NAME>...]`
-    Allow [access to system environment information](https://deno.land/manual/basics/permissions). Optionally specify accessible environment variables.
-    Examples: `--allow-env`, `--allow-env="PORT,HOME,PATH"`
-
-- `--deny-env[=<VARIABLE_NAME>...]`
-    Deny [access to system environment information](https://deno.land/manual/basics/permissions). Optionally specify accessible environment variables.
-    Examples: `--deny-env`, `--deny-env="PORT,HOME,PATH"`
-
-- `--allow-sys[=<API_NAME>...]`
-    Allow [access to OS information](https://deno.land/manual/basics/permissions). Optionally allow
-    specific APIs by function name.
-    Examples: `--allow-sys`, `--allow-sys="systemMemoryInfo,osRelease"`
-
-- `--deny-sys[=<API_NAME>...]`
-    Deny [access to OS information](https://deno.land/manual/basics/permissions). Optionally deny
-    specific APIs by function name.
-    Examples: `--deny-sys`, `--deny-sys="systemMemoryInfo,osRelease"`
-
-- `--allow-run[=<PROGRAM_NAME>...]`
-    Allow [running subprocesses](https://deno.land/manual/basics/permissions). Optionally
-    specify allowed runnable program names.
-    Examples: `--allow-run`, `--allow-run="whoami,ps"`
-
-- `--deny-run[=<PROGRAM_NAME>...]`
-    Deny [running subprocesses](https://deno.land/manual/basics/permissions). Optionally specify denied runnable program names.
-    Examples: `--deny-run`, `--deny-run="whoami,ps"`
-
-- `--allow-ffi[=<PATH>...]`
-    (Unstable) Allow loading dynamic libraries. Optionally specify [allowed directories or files](https://deno.land/manual/basics/permissions).
-    Examples: `--allow-ffi`, `--allow-ffi="./libfoo.so"`
-
-- `--deny-ffi[=<PATH>...]`
-    (Unstable) Deny [loading dynamic libraries](https://deno.land/manual/basics/permissions). Optionally specify denied directories or files.
-    Examples: `--deny-ffi`, `--deny-ffi="./libfoo.so"`
-
-- `--allow-hrtime`
-    Allow [high-resolution time measurement](https://deno.land/manual/basics/permissions). Note: this can enable timing attacks and fingerprinting.
-
-- `--deny-hrtime`
-    Deny [high-resolution time measurement](https://deno.land/manual/basics/permissions). Note: this can prevent
-  timing attacks and fingerprinting.
-
-- `-A, --allow-all`
-    Allow [all permissions](https://deno.land/manual/basics/permissions).
-
-- `--no-prompt`
+- `--no-prompt`\
     Always throw if required permission wasn't passed
 
-- `--inspect[=<HOST_AND_PORT>]`
+- `--inspect[=<HOST_AND_PORT>]`\
     Activate inspector on host:port (default: 127.0.0.1:9229)
 
-- `--inspect-brk[=<HOST_AND_PORT>]`
+- `--inspect-brk[=<HOST_AND_PORT>]`\
     Activate inspector on host:port, wait for debugger to connect and break at the start of user script
 
-- `--inspect-wait[=<HOST_AND_PORT>]`
+- `--inspect-wait[=<HOST_AND_PORT>]`\
     Activate inspector on host:port and wait for debugger to connect before running user code
 
-- `--cached-only`
+- `--cached-only`\
     Require that remote dependencies are already cached
 
-- `--location <HREF>`
+- `--location <HREF>`\
     Value of `globalThis.location` used by some web APIs
 
-- `--v8-flags[=<v8-flags>...]`
+- `--v8-flags[=<v8-flags>...]`\
     To see a list of all available flags use `--v8-flags=--help`. Any flags set with this flag are appended after the `DENO_V8_FLAGS` environmental variable
 
-- `--seed <NUMBER>`
+- `--seed <NUMBER>`\
     Set the random number generator seed
 
-- `--check[=<CHECK_TYPE>]`
+- `--check[=<CHECK_TYPE>]`\
     Set type-checking behavior. This subcommand type-checks local modules by default, so adding `--check` is redundant. If the value of '--check=all' is supplied, diagnostic errors from remote modules will be included. Alternatively, the 'deno check' subcommand can be used.
 
-- `--ignore=<ignore>...`
+- `--ignore=<ignore>...`\
     Ignore files
 
-- `--no-run`
+- `--no-run`\
     Cache test modules, but don't run tests
 
-- `--trace-leaks`
+- `--trace-leaks`\
     Enable tracing of leaks. Useful when debugging leaking ops in test, but impacts test execution time.
 
-- `--doc`
+- `--doc`\
     Type-check code blocks in JSDoc and Markdown
 
-- `--fail-fast[=<N>]`
+- `--fail-fast[=<N>]`\
     Stop after N errors. Defaults to stopping after first failure.
 
-- `--allow-none`
+- `--allow-none`\
     Don't return error code if no test files are found
 
-- `--filter <filter>`
+- `--filter <filter>`\
     Run tests with this string or pattern in the test name
 
-- `--shuffle[=<NUMBER>]`
+- `--shuffle[=<NUMBER>]`\
     Shuffle the order in which the tests are run
 
-- `--coverage[=<DIR>]`
+- `--coverage[=<DIR>]`\
     Collect coverage profile data into DIR. If DIR is not specified, it uses `coverage/`.
 
-- `--parallel`
+- `--parallel`\
     Run test modules in parallel. Parallelism defaults to the number of available CPUs or the value in the DENO_JOBS environment variable.
 
-- `--watch`
+- `--watch`\
     Watch for file changes and restart process automatically. Only local files from entry point module graph are watched.
 
-- `--watch-exclude[=<FILES>...]`
+- `--watch-exclude[=<FILES>...]`\
     Exclude provided files/patterns from watch mode
 
-- `--no-clear-screen`
+- `--no-clear-screen`\
     Do not clear terminal screen when under watch mode
 
-- `--junit-path <PATH>`
+- `--junit-path <PATH>`\
     Write a JUnit XML test report to PATH. Use `-` to write to stdout which is the default when PATH is not provided.
 
-- `--reporter <reporter>`
+- `--reporter <reporter>`\
     Select reporter to use. Default to 'pretty'.
     [possible values: pretty, dot, junit, tap]
 
-- `--env[=<FILE>]`
+- `--env[=<FILE>]`\
     UNSTABLE: Load environment variables from local file. Only the first environment variable with a given key is used. Existing process environment variables are not overwritten.
 
-- `-h, --help`
+- `-h, --help`\
     Prints help information
+
+<details>
+    <summary>Permissions Options</summary>
+    - `--allow-read[=<PATH>...]`\
+    Allow [file system read access](https://deno.land/manual/basics/permissions). Optionally specify allowed paths.
+    Examples: `--allow-read`, `--allow-read="/etc,/var/log.txt"`
+
+    - `--deny-read[=<PATH>...]`\
+        Deny [file system read access](https://deno.land/manual/basics/permissions). Optionally specify denied paths.
+        Examples: `--deny-read`, `--deny-read="/etc,/var/log.txt"`
+
+    - `--allow-write[=<PATH>...]`\
+        Allow [file system write access](https://deno.land/manual/basics/permissions). Optionally specify allowed paths.
+        Examples: `--allow-write`, `--allow-write="/etc,/var/log.txt"`
+
+    - `--deny-write[=<PATH>...]`\
+        Deny [file system write access](https://deno.land/manual/basics/permissions). Optionally specify denied paths.
+        Examples: `--deny-write`, `--deny-write="/etc,/var/log.txt"`
+
+    - `--allow-net[=<IP_OR_HOSTNAME>...]` \
+        Allow [network access](https://deno.land/manual/basics/permissions). Optionally specify allowed IP addresses and host names, with ports as necessary.
+        Examples: `--allow-net`, `--allow-net="localhost:8080,deno.land"`
+
+    - `--deny-net[=<IP_OR_HOSTNAME>...]`\
+        Deny [network access](https://deno.land/manual/basics/permissions). Optionally specify denied IP addresses and host names, with ports as necessary.
+        Examples: `--deny-net`, `--deny-net="localhost:8080,deno.land"`
+
+    - `--unsafely-ignore-certificate-errors[=<HOSTNAMES>...]`\
+        DANGER: Disables verification of TLS certificates
+
+    - `--allow-env[=<VARIABLE_NAME>...]`\
+        Allow [access to system environment information](https://deno.land/manual/basics/permissions). Optionally specify accessible environment variables.
+        Examples: `--allow-env`, `--allow-env="PORT,HOME,PATH"`
+
+    - `--deny-env[=<VARIABLE_NAME>...]`\
+        Deny [access to system environment information](https://deno.land/manual/basics/permissions). Optionally specify accessible environment variables.
+        Examples: `--deny-env`, `--deny-env="PORT,HOME,PATH"`
+
+    - `--allow-sys[=<API_NAME>...]`\
+        Allow [access to OS information](https://deno.land/manual/basics/permissions). Optionally allow
+        specific APIs by function name.
+        Examples: `--allow-sys`, `--allow-sys="systemMemoryInfo,osRelease"`
+
+    - `--deny-sys[=<API_NAME>...]`\
+        Deny [access to OS information](https://deno.land/manual/basics/permissions). Optionally deny
+        specific APIs by function name.
+        Examples: `--deny-sys`, `--deny-sys="systemMemoryInfo,osRelease"`
+
+    - `--allow-run[=<PROGRAM_NAME>...]`\
+        Allow [running subprocesses](https://deno.land/manual/basics/permissions). Optionally
+        specify allowed runnable program names.
+        Examples: `--allow-run`, `--allow-run="whoami,ps"`
+
+    - `--deny-run[=<PROGRAM_NAME>...]`\
+        Deny [running subprocesses](https://deno.land/manual/basics/permissions). Optionally specify denied runnable program names.
+        Examples: `--deny-run`, `--deny-run="whoami,ps"`
+
+    - `--allow-ffi[=<PATH>...]`\
+        (Unstable) Allow loading dynamic libraries. Optionally specify [allowed directories or files](https://deno.land/manual/basics/permissions).
+        Examples: `--allow-ffi`, `--allow-ffi="./libfoo.so"`
+
+    - `--deny-ffi[=<PATH>...]`\
+        (Unstable) Deny [loading dynamic libraries](https://deno.land/manual/basics/permissions). Optionally specify denied directories or files.
+        Examples: `--deny-ffi`, `--deny-ffi="./libfoo.so"`
+
+    - `--allow-hrtime`\
+        Allow [high-resolution time measurement](https://deno.land/manual/basics/permissions). Note: this can enable timing attacks and fingerprinting.
+
+    - `--deny-hrtime`\
+        Deny [high-resolution time measurement](https://deno.land/manual/basics/permissions). Note: this can prevent
+    timing attacks and fingerprinting.
+
+    - `-A, --allow-all`\
+        Allow [all permissions](https://deno.land/manual/basics/permissions).
+</details>
 
 ## Examples
 
