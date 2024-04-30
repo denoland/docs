@@ -217,6 +217,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno test",
+          id: "manual/tools/test",
+        },
+        {
+          type: "doc",
           label: "deno types",
           id: "manual/tools/types",
         },
