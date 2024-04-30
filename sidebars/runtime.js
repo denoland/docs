@@ -142,6 +142,11 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno coverage",
+          id: "manual/tools/coverage",
+        },
+        {
+          type: "doc",
           label: "deno doc",
           id: "manual/tools/documentation_generator",
         },
@@ -179,6 +184,16 @@ const sidebars = {
           type: "doc",
           label: "deno lint",
           id: "manual/tools/linter",
+        }, 
+        {
+          type: "doc",
+          label: "deno publish",
+          id: "manual/tools/publish",
+        },
+        {
+          type: "doc",
+          label: "deno lsp",
+          id: "manual/tools/lsp",
         },
         {
           type: "doc",
@@ -204,6 +219,11 @@ const sidebars = {
           type: "doc",
           label: "deno test",
           id: "manual/tools/test",
+        },
+        {
+          type: "doc",
+          label: "deno types",
+          id: "manual/tools/types",
         },
         {
           type: "doc",
