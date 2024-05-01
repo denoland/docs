@@ -134,6 +134,32 @@ You would then need to pass the `--import-map` option on the command line (along
 with the `--config` option is using a config file) or set the `deno.importMap`
 option (and `deno.config` option) in your IDE.
 
+### `jsxImportSourceTypes`
+
+In certain cases, a library may not provide types. To specify the types, you can
+use the `@jsxImportSourceTypes` pragma:
+
+```jsx
+/** @jsxImportSource npm:react@^18.3 */
+/** @jsxImportSourceTypes npm:@types/react@^18.3 */
+
+export function Hello() {
+  return <div>Hello!</div>;
+}
+```
+
+Or specify via the `jsxImportSourceTypes` compiler option in a _deno.json_:
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "npm:react@^18.3",
+    "jsxImportSourceTypes": "npm:@types/react@^18.3"
+  }
+}
+```
+
 ### Current limitations
 
 There are two current limitations of the support of the JSX import source:
