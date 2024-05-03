@@ -1,4 +1,4 @@
-# Subhosting REST API
+# Authentication
 
 Developers can provision projects, domains, KV databases, and other resources
 using the Subhosting REST API.
@@ -42,18 +42,3 @@ const res = await fetch(
 const response = await res.json();
 console.log(response);
 ```
-
-## OpenAPI specification and tooling
-
-The [OpenAPI specification](https://www.openapis.org/) for the Deploy API can be
-found here:
-
-```console
-https://api.deno.com/v1/openapi.json
-```
-
-This spec document can be used with a
-[large number of OpenAPI-compatible tools](https://openapi.tools/). In addition
-to the documentation for the REST API maintained here, you can find
-auto-generated API documentation (including a browser-based testing tool)
-[here](https://apidocs.deno.com/).

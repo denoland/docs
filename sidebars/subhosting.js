@@ -23,47 +23,16 @@ const sidebars = {
       id: "manual/planning_your_implementation",
     },
     {
-      type: "doc",
-      label: "Subhosting Usecases",
-      id: "manual/usecases",
-    },
-  
-    {
-      type: "html",
-      value: "<div>Subhosting Platform</div>",
-      className: "section-header",
-    },
-    {
-      type: "doc",
-      label: "Organizations",
-      id: "manual/subhosting",
-    },
-    {
-      type: "link",
-      label: "Projects",
-      href: "/subhosting/manual/subhosting#projects",
-    },
-    {
-      type: "link",
-      label: "Deployments",
-      href: "/subhosting/manual/subhosting#deployments",
-    },
-    {
-      type: "link",
-      label: "Custom Domains",
-      href: "/subhosting/manual/subhosting#domains",
-    },
-    {
-      type: "link",
-      label: "Connecting a Database",
-      href: "/subhosting/manual/subhosting#database",
-    },
-    "manual/events",
-    {
       type: "html",
       value: "<div>REST API</div>",
       className: "section-header",
     },
+    {
+      type: "doc",
+      label: "Resources",
+      id: "manual/subhosting",
+    },
+    "manual/events",
     "api/index",
     {
       type: "link",

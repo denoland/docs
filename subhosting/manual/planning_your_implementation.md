@@ -1,8 +1,8 @@
 # Planning your implementation
 
-For example - let's say that you were building a SaaS CRM platform like
-Salesforce, and you wanted to empower your customers to write JavaScript code
-that would be executed every time a new lead was captured.
+Let's say, for example, that you are building a SaaS CRM platform like
+Salesforce. You want to empower your customers to write JavaScript code that
+would be executed every time a new lead was captured.
 
 If you were going to implement this feature using Deno Deploy, here's how you
 might think about building it:
@@ -26,8 +26,8 @@ Let's look at an example of the API endpoint required to make this happen.
 
 ## Creating a deployment for a project
 
-In the [previous chapter](./quick_start.md), you created a new project and
-noted its `id` property. In the example in the previous chapter, the ID was:
+In the [previous chapter](./quick_start.md), you created a new project and noted
+its `id` property. In the example in the previous chapter, the ID was:
 
 ```console
 f084712a-b23b-4aba-accc-3c2de0bfa26a

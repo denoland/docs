@@ -43,7 +43,6 @@ const dr = await fetch(`${API}/projects/${project.id}/deployments`, {
 console.log(dr.status);
 ```
 
-<br/>
 <a name="getting_started"></a>
 
 ## Getting started with subhosting
@@ -54,7 +53,7 @@ instructions to create a new organization for subhosting.
 
 Going through the onboarding flow, you will likely also generate an **access
 token**, which you will use to access the [REST API](../api/index.md). If you
-didn't do this (or lost the token you generated), you can
+didn't do this (or your token has expired), you can
 [generate a new one here](https://dash.deno.com/account#access-tokens).
 
 :::caution Save your token in a safe place

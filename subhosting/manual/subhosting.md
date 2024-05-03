@@ -1,4 +1,4 @@
-# Subhosting Concepts
+# Subhosting Resources
 
 To build Subhosting with Deno Deploy, it helps to understand some key resources
 within the system. These resources are also represented in the
@@ -6,7 +6,7 @@ within the system. These resources are also represented in the
 
 ![overview of subhosting resources](./subhosting-org-structure.svg)
 
-<a style={{height: '3rem', display: 'block'}} id="organizations"></a>
+<a id="organizations"></a>
 
 ## Organizations
 
@@ -22,7 +22,7 @@ with organization access the ability to modify resources within the org via API.
 New organizations can be created in the
 [Deploy dashboard](https://dash.deno.com/orgs/new).
 
-<a style={{height: '3rem', display: 'block'}} id="projects"></a>
+<a id="projects"></a>
 
 ## Projects
 
@@ -42,7 +42,7 @@ minute granularity.
 > if you have multiple tenants we recommend setting up a project for each.
 > Particularly if you expect to bill your users for their usage.
 
-<a style={{height: '3rem', display: 'block'}} id="deployments"></a>
+<a id="deployments"></a>
 
 ## Deployments
 
@@ -79,7 +79,7 @@ deployments and make them unreachable.
 > and then remap its domain to the new deployment. The redeploy endpoint can
 > create a new deployment from an existing one with different settings.
 
-<a style={{height: '3rem', display: 'block'}} id="domains"></a>
+<a id="domains"></a>
 
 ## Custom domains
 
@@ -107,9 +107,9 @@ automatically turned into production deployments. Although subhosting does not
 provide github integration out of the box, it has all the primitives you need to
 define your own semantics for creating preview and production deployments.
 
-<a style={{height: '3rem', display: 'block'}} id="database"></a>
+<a id="database"></a>
 
-## Connecting a Database
+## Connecting a KV Database
 
 A (KV) database stores key-value pairs You can make a database accessible to a
 deployment when you make the deployment. KV databases can be used by multiple
@@ -122,3 +122,19 @@ To use KV with Subhosting:
   you created.
 
 > NB. Deno Cron and Queues do not currently work for Subhosting.
+
+
+## OpenAPI specification and tooling
+
+The [OpenAPI specification](https://www.openapis.org/) for the Deploy API can be
+found here:
+
+```console
+https://api.deno.com/v1/openapi.json
+```
+
+This spec document can be used with a
+[large number of OpenAPI-compatible tools](https://openapi.tools/). In addition
+to the documentation for the REST API maintained here, you can find
+auto-generated API documentation (including a browser-based testing tool)
+[here](https://apidocs.deno.com/).
