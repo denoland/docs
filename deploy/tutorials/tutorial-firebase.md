@@ -180,9 +180,9 @@ libraries for Firebase under deploy. Currently v9 is in still in beta for
 Firebase, so we will use v8 in this tutorial:
 
 ```js title="firebase.js"
-import firebase from "https://cdn.skypack.dev/firebase@8.7.0/app";
-import "https://cdn.skypack.dev/firebase@8.7.0/auth";
-import "https://cdn.skypack.dev/firebase@8.7.0/firestore";
+import firebase from "https://esm.sh/firebase@8.7.0/app";
+import "https://esm.sh/firebase@8.7.0/auth";
+import "https://esm.sh/firebase@8.7.0/firestore";
 ```
 
 We are also going to use [oak](https://deno.land/x/oak) as the middleware
