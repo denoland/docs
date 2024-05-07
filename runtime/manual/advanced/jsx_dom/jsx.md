@@ -100,15 +100,15 @@ would configure the following, in the configuration file:
 In situations where the import source plus `/jsx-runtime` or `/jsx-dev-runtime`
 is not resolvable to the correct module, an import map can be used to instruct
 Deno where to find the module. An import map can also be used to make the import
-source "cleaner". For example, if you wanted to use Preact from skypack.dev and
-have skypack.dev include all the type information, you could setup an import map
-like this:
+source "cleaner". For example, if you wanted to use Preact from
+(esm.sh)[https://esm.sh/] and include all the type information, you could setup
+an import map like this:
 
 ```json
 {
   "imports": {
-    "preact/jsx-runtime": "https://cdn.skypack.dev/preact/jsx-runtime?dts",
-    "preact/jsx-dev-runtime": "https://cdn.skypack.dev/preact/jsx-dev-runtime?dts"
+    "preact/jsx-runtime": "https://esm.sh/preact/jsx-runtime?dts",
+    "preact/jsx-dev-runtime": "https://esm.sh/preact/jsx-dev-runtime?dts"
   }
 }
 ```
