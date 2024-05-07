@@ -5,6 +5,7 @@
  * @run deno test --allow-read --allow-write <url>
  * @resource {https://deno.land/api?s=Deno.test} Doc: Deno.test
  * @resource {$std/testing/asserts.ts} Doc: std/testing/asserts
+ * @group CLI
  *
  * One of the most common tasks in developing software is writing tests for
  * existing code. Deno has a built-in test runner which makes this very easy.

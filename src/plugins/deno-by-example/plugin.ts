@@ -1,22 +1,50 @@
-import fs from "node:fs/promises";
+import fs from "node:fs";
+import { Example, parseExample } from "./example";
 
-type ReturnedContent = { name: string; content: string; };
+type LoadContext = {
+    siteDir: string;
+    generatedFilesDir: string;
+    siteConfig: any;
+    outDir: string;
+    baseUrl: string;
+};
 
-export default async function denoByExamplePlugin(context, options) {
+type ReturnedContent = { name: string; content: string; label: string; parsed: Example };
+
+export default async function denoByExamplePlugin(context: LoadContext, options) {
+    const denoExamplePath = `${context.siteDir}/by-example`;
+    const files = fs.readdirSync(denoExamplePath);
+
+    const examples = files.map((file) => {
+        const fileContent = fs.readFileSync(`${denoExamplePath}/${file}`, "utf-8");
+        const example = {
+            name: file,
+            content: fileContent,
+            label: file.replace(".ts", ""),
+            parsed: parseExample(file, fileContent)
+        } as ReturnedContent;
+
+        return example;
+    });
+
+    const examplesList = examples.map((example) => {
+        return {
+            id: `examples/${example.label}`,
+            title: example.parsed.title,
+            tags: example.parsed.tags,
+            difficulty: example.parsed.difficulty,
+            group: example.parsed.group
+        };
+    });
+
+    console.log(`Read ${examples.length} examples from ${denoExamplePath}`);
+
     return {
         name: "deno-by-example",
+        examples: examples,
+        examplesList: examplesList,
 
         async loadContent() {
-            const denoExamplePath = `${context.siteDir}/by-example`;
-            const files = await fs.readdir(denoExamplePath);
-
-            const examples = await files.map(async (file) => {
-                const content = await fs.readFile(`${denoExamplePath}/${file}`, "utf-8");
-                return { name: file, content: content } as ReturnedContent;
-            });
-
-            console.log(`Read ${examples.length} examples from ${denoExamplePath}`);
-
             return examples;
         },
 
@@ -24,9 +52,21 @@ export default async function denoByExamplePlugin(context, options) {
             const { addRoute, createData } = actions;
             const callbackContent = content as Promise<ReturnedContent>[];
 
+            const examplesListModule = `export default ${JSON.stringify(examplesList)}`;
+            const examplesListPath = await createData(`exampleList.js`, examplesListModule);
+
+            addRoute({
+                path: "/examples",
+                component: '@site/src/components/DenoByExample/index.tsx',
+                exact: true,
+                modules: {
+                    examplesList: examplesListPath
+                }
+            });
+
             for (const example of callbackContent) {
-                const { name, content } = await example;
-                const url = `/examples/${name.replace(".ts", "")}`;
+                const { name, content, label } = await example;
+                const url = `/examples/${label}`;
 
                 const fileContent = "export default " + JSON.stringify({ name, content });
                 const path = await createData(`example-${name}.js`, fileContent);
@@ -39,7 +79,8 @@ export default async function denoByExamplePlugin(context, options) {
                     exact: true,
                     modules: {
                         example: path,
-                    },
+                        examplesList: examplesListPath
+                    }
                 });
 
                 console.log(`Adding route for ${name} at ${url}`);

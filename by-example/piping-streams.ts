@@ -5,6 +5,7 @@
  * @run --allow-net --allow-read --allow-write <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream} MDN: ReadableStream
  * @resource {/tcp-listener.ts} Example: TCP Listener
+ * @group Network
  *
  * Deno implements web-standard streams which comes with many advantages. One of the most useful
  * features of streams is how they can be piped to and from different sources.

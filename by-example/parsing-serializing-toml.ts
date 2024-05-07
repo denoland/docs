@@ -5,6 +5,7 @@
  * @run <url>
  * @resource {/import-export} Example: Importing & Exporting
  * @resource {https://toml.io} Spec: TOML
+ * @group Encoding
  *
  * TOML is a widely used configuration language designed to be feature-rich and intuitive to write.
  */

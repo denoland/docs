@@ -4,6 +4,7 @@
  * @tags cli
  * @run --allow-run <url>
  * @resource {https://deno.land/api?s=Deno.Command} Doc: Deno.Command
+ * @group System
  *
  * For more complex usecases, we don't simply want the output of some
  * command. In this case, we can spawn a subprocess and interact with

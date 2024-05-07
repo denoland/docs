@@ -5,6 +5,7 @@
  * @run --allow-net --allow-env <url>
  * @resource {https://deno-postgres.com/} Deno Postgres docs
  * @resource {https://deno.land/x/postgres} Deno Postgres on deno.land/x
+ * @group Databases
  *
  * Using the Deno Postgres client, you can connect to a Postgres database
  * running anywhere.

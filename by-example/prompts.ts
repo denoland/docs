@@ -6,6 +6,7 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt} MDN: prompt
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Window/alert} MDN: alert
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm} MDN: confirm
+ * @group CLI
  *
  * Prompts are used to ask the user for input or feedback on actions.
  */

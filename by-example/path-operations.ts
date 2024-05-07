@@ -5,6 +5,7 @@
  * @run --allow-read <url>
  * @resource {$std/path} Deno: std/path
  * @resource {https://deno.land/api?s=Deno.cwd} Deno: Deno.cwd
+ * @group File System
  *
  * Many applications need to manipulate file paths in one way or another.
  * The Deno standard library provides simple utilities for this.

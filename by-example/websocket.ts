@@ -5,6 +5,7 @@
  * @run --allow-net <url>
  * @resource {/http-server-websocket} HTTP Server: WebSockets
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/WebSocket} MDN: WebSocket
+ * @group Network
  *
  * Opening a WebSocket connection for real-time, bi-directional communication with Deno is very simple.
  */

@@ -6,6 +6,7 @@
  * @resource {https://deno.land/api?s=Deno.serve} Doc: Deno.serve
  * @resource {$std/http/file_server.ts} Doc: std/http/file_server
  * @resource {/http-server} Example: HTTP Server: Hello World
+ * @group Network
  *
  * An example of a HTTP server that serves files.
  */

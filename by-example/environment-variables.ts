@@ -5,6 +5,7 @@
  * @run --allow-env <url>
  * @resource {https://deno.land/api?s=Deno.env} Doc: Deno.env
  * @resource {https://docs.deno.com/deploy/manual/environment-variables} Deploy Docs: Environment Variables
+ * @group System
  *
  * Environment variables can be used to configure the behavior of a program,
  * or pass data from one program to another.

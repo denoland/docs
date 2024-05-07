@@ -5,6 +5,7 @@
  * @run --allow-read --allow-write <url>
  * @resource {https://deno.land/api?s=Deno.makeTempFile} Doc: Deno.makeTempFile
  * @resource {https://deno.land/api?s=Deno.makeTempDir} Doc: Deno.makeTempDir
+ * @group File System
  *
  * Temporary files and directories are used to store data that is not intended
  * to be permanent. For example, as a local cache of downloaded data.

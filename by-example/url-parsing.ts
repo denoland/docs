@@ -4,6 +4,7 @@
  * @tags cli, deploy, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/URL} MDN: URL
+ * @group Basics
  *
  * URL is the web standard interface to parse and manipulate URLs.
  */

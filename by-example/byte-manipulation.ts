@@ -4,6 +4,7 @@
  * @tags cli
  * @run <url>
  * @resource {$std/bytes} Doc: std/bytes
+ * @group Encoding
  *
  * When working with lower-level data we often deal
  * with byte arrays in the form of Uint8Arrays. There

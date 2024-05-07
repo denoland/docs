@@ -5,6 +5,7 @@
  * @run --unstable <url>
  * @resource {https://docs.deno.com/deploy/kv/manual} Deno KV user guide
  * @resource {https://deno.land/api?unstable=&s=Deno.Kv} Deno KV Runtime API docs
+ * @group Databases
  *
  * Deno KV watch allows you to detect changes to your KV database, making
  * it easier to build real-time applications, newsfeeds, chat, and more.

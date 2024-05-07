@@ -5,6 +5,7 @@
  * @run --allow-read <url>
  * @resource {https://deno.land/api?s=SubtleCrypto} Doc: crypto.subtle
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest} MDN: Cryptographic Digests
+ * @group Cryptography
  *
  * Hashing data is a common operation that is facilitated
  * through Deno's support for the Web Crypto API. In addition,

@@ -4,6 +4,7 @@
  * @tags cli, deploy
  * @run <url>
  * @resource {https://github.com/ulid/spec} ULID: Specification
+ * @group Cryptography
  *
  * One common need for distributed systems are identifiers. ULIDs are a universally
  * unique lexicographically sortable identifier with some nice properties. They are

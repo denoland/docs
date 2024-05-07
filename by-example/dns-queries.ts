@@ -5,6 +5,7 @@
  * @run --allow-net <url>
  * @resource {https://deno.land/api?s=Deno.resolveDns} Doc: Deno.resolveDns
  * @resource {https://developer.mozilla.org/en-US/docs/Glossary/DNS} MDN: DNS
+ * @group Network
  *
  * There are some cases when running DNS queries is useful. This is
  * usually the case when one would like to use a DNS server not configured

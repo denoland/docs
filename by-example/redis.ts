@@ -5,7 +5,8 @@
  * @run --allow-net --allow-env <url>
  * @resource {https://deno.land/x/r2d2} r2d2 on deno.land/x
  * @resource {https://redis.io/docs/getting-started/} Getting started with Redis
- *
+ * @group Databases
+ * 
  * Using the r2d2 module, you can connect to a Redis database running anywhere.
  */
 

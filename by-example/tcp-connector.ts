@@ -5,6 +5,7 @@
  * @run --allow-net <url>
  * @resource {https://deno.land/api?s=Deno.connect} Doc: Deno.connect
  * @resource {/tcp-listener.ts} Example: TCP Listener
+ * @group Network
  *
  * An example of connecting to a TCP server on localhost and writing a 'ping' message to the server.
  */

@@ -5,6 +5,7 @@
  * @run --allow-net <url>
  * @resource {/http-server} Example: HTTP Server: Hello World
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/WebSocket} MDN: WebSocket
+ * @group Network
  *
  * An example of a HTTP server that handles websocket requests.
  */

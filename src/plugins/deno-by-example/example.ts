@@ -40,6 +40,7 @@ export interface Example {
     run?: string;
     playground?: string;
     files: ExampleFile[];
+    group: string;
 }
 
 export interface ExampleFile {
@@ -209,5 +210,6 @@ export function parseExample(id: string, file: string): Example {
         run: kvs.run,
         playground: kvs.playground,
         files,
+        group: kvs.group || "Misc",
     };
 }

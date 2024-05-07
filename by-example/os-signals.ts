@@ -4,6 +4,7 @@
  * @tags cli
  * @run <url>
  * @resource {https://deno.land/api?s=Deno.addSignalListener} Doc: Deno.addSignalListener
+ * @group System
  *
  * You can listen for OS signals using the `Deno.addSignalListener` function.
  * This allows you to do things like gracefully shutdown a server when a

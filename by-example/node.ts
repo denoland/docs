@@ -5,6 +5,7 @@
  * @run --allow-env <url>
  * @resource {https://docs.deno.com/runtime/manual/node} Node.js / npm support in Deno
  * @resource {https://docs.deno.com/runtime/manual/node/node_specifiers} node: specifiers
+ * @group Basics
  *
  * Deno supports most built-in Node.js modules natively - you can include them
  * in your code using "node:" specifiers in your imports.

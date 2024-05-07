@@ -4,6 +4,7 @@
  * @tags cli
  * @run --allow-read=./ --allow-write=./ <url>
  * @resource {https://deno.land/api?s=Deno.rename} Doc: Deno.rename
+ * @group File System
  *
  * An example of how to move and rename files and directories in Deno.
  */

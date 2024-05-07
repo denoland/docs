@@ -3,6 +3,7 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
+ * @group Encoding
  *
  * JSON files can be imported in JS and TS files using the `import` keyword.
  * This makes including static data in a library much easier.

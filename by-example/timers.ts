@@ -5,6 +5,7 @@
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout} MDN: setTimeout
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval} MDN: setInterval
+ * @group Basics
  *
  * Timers are used to schedule functions to happen at a later time.
  */

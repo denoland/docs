@@ -4,6 +4,7 @@
  * @tags cli, web
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers} MDN: Web Workers
  * @resource {https://deno.land/manual@v1.30.0/runtime/workers} Manual: Workers
+ * @group Advanced
  *
  * Workers are the only way of running javascript off of the main thread.
  * This can be useful for a wide variety of programs, especially those where

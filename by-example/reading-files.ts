@@ -6,6 +6,7 @@
  * @resource {https://deno.land/api?s=Deno.readFile} Doc: Deno.readFile
  * @resource {https://deno.land/api?s=Deno.open} Doc: Deno.open
  * @resource {https://deno.land/api?s=Deno.FsFile} Doc: Deno.FsFile
+ * @group File System
  *
  * Many applications need to read files from disk. Deno provides a simple
  * interface for reading files.

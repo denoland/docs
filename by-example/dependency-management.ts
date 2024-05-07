@@ -4,6 +4,7 @@
  * @tags cli, deploy
  * @resource {/import-export} Example: Importing & Exporting
  * @run <url>
+ * @group Basics
  *
  * It is unwieldy to have to import the same remote module over and over again.
  * Deno provides some conventions to make managing dependencies easier.

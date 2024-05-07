@@ -7,6 +7,7 @@
  * @resource {https://webassembly.github.io/spec/core/syntax/instructions.html} WebAssembly Spec: Instructions
  * @resource {https://webassembly.github.io/spec/core/syntax/values.html} WebAssembly Spec: Values
  * @resource {https://webassembly.github.io/spec/core/syntax/types.html} WebAssembly Spec: Types
+ * @group Advanced
  *
  * WebAssembly is a binary format for describing a program's data and instructions.
  * It is a new and more efficient binary format.

@@ -3,6 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
+ * @group System
  */
 
 // The current process's process ID is available in the `Deno.pid` variable.

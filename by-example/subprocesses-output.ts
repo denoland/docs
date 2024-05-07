@@ -4,6 +4,7 @@
  * @tags cli
  * @run --allow-run <url>
  * @resource {https://deno.land/api?s=Deno.Command} Doc: Deno.Command
+ * @group System
  *
  * We don't often write programs in isolation. In a lot of cases we want
  * to interact with the outside system and spawning a subprocess is a

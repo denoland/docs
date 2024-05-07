@@ -4,6 +4,7 @@
  * @tags cli
  * @run <url>
  * @resource {https://deno.land/api?s=Deno.Permissions} Doc: Deno.Permissions
+ * @group CLI
  *
  * There are times where depending on the state of permissions
  * granted to a process, we want to do different things. This is

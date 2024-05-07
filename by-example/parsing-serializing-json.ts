@@ -4,6 +4,7 @@
  * @tags cli, deploy, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON} MDN: JSON
+ * @group Encoding
  *
  * JSON is a widely used data interchange format. It is a human-readable, but
  * also easily machine-readable.

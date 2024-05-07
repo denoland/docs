@@ -5,6 +5,7 @@
  * @run <url>
  * @resource {/import-export} Example: Importing & Exporting
  * @resource {https://yaml.org} Spec: YAML
+ * @group Encoding
  *
  * YAML is a widely used data serialization language designed to be easily human readable and writeable.
  */

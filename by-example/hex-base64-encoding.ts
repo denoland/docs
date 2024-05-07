@@ -3,6 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
+ * @group Encoding
  *
  * There are a few cases where it would be practical to encode
  * and decode between different string and array buffer formats.

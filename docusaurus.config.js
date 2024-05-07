@@ -140,6 +140,12 @@ const config = {
           activeBaseRegex: `^/subhosting`,
         },
         {
+          to: "/examples",
+          position: "left",
+          label: "Examples",
+          activeBaseRegex: `^/examples`,
+        },
+        {
           href: "https://www.deno.com",
           label: "deno.com",
           position: "right",
@@ -174,7 +180,7 @@ const config = {
               href: "https://deno.land/std",
             },
             {
-              label: "Deno by Example",
+              label: "Examples",
               href: "https://examples.deno.land",
             },
           ],

@@ -4,6 +4,7 @@
  * @tags cli, deploy, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/console#styling_console_output} MDN: Styling console output
+ * @group Basics
  *
  * Most modern terminals can display program logs in colors and with text
  * decorations. This example shows how to display colors when using

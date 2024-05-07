@@ -4,6 +4,7 @@
  * @tags cli
  * @run <url>
  * @resource {https://deno.land/api?s=Deno.version} Doc: Deno.version
+ * @group CLI
  *
  * How to examine the version of Deno being used.
  */

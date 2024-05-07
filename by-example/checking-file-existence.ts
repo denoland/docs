@@ -3,7 +3,8 @@
  * @difficulty beginner
  * @tags cli, deploy
  * @run --allow-read --allow-write <url>
- *
+ * @group File System
+ * 
  * Sometimes we as developers think that we need to check
  * if a file exists or not. More often than not, we are
  * entirely wrong.
