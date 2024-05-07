@@ -41,17 +41,17 @@ export default function Index({ examplesList }) {
         const group = groups[category.toLowerCase()];
 
         if (!group) {
-            return <></>;
+            return null;
         }
 
         return (
-            <section key={category}>
-                <h2>{category}</h2>
-                <ul>
+            <section key={category} className="mb-12 [-webkit-column-break-inside:avoid;]">
+                <h2 className="text-xl mb-2 block border-solid border-t-0 border-x-0 border-b border-b-gray-300 dark:border-b-gray-600 pb-1">{category}</h2>
+                <ul className="list-none pl-0">
                     {group.map((example) => {
                         return (
-                            <li key={example.id}>
-                                <a href={"/" + example.id}>{example.title}</a>
+                            <li key={example.id} className="leading-loose">
+                                <a href={"/" + example.id} className="text-inherit underline decoration-gray-300 dark:decoration-gray-600">{example.title}</a>
                             </li>
                         );
                     })}
@@ -66,20 +66,20 @@ export default function Index({ examplesList }) {
             title={"Deno: the easiest, most secure JavaScript runtime"}
             description="Reference documentation for the Deno runtime and Deno Deploy"
         >
-            <div className="flex flex-col px-8 pt-6 mt-20 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-[1200px] mx-auto mb-24">
-                <div className="pb-16 align-middle md:pb-0">
+            <div className="w-full flex flex-col px-8 pt-6 mt-20 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-screen-xl mx-auto mb-24">
+                <div className="pb-16 align-middle md:pb-0 w-full">
                     <div className="mb-16 md:mb-24 text-center">
                         <img
-                            className="h-64 w-auto"
+                            className="w-full max-w-32 h-auto mb-4"
                             alt="Deno Examples"
                             src="/examples.png"
                         />
                         <h1 className="text-4xl md:text-6xl">Deno by Example</h1>
-                        <p>
-                            A collection of annotated examples for how to use Deno, and the various features it provides. These examples are a reference for how to build with Deno and can also be used as a guide to learn about many of the features Deno provides.
+                        <p className="max-w-prose mx-auto">
+                            A collection of annotated Deno examples, to be used as a reference for how to build with Deno, or as a guide to learn about many of Deno's features.
                         </p>
                     </div>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4" style={{ columnGap: '3rem'}}>
                         {elements}
                     </div>
                 </div>
