@@ -1,20 +1,48 @@
 const sidebars = {
-  subhosting: [
+  subhosting: [],
+
+  subhostGuideHome: [
     {
       type: "html",
       value: "<div>Getting Started</div>",
       className: "section-header",
     },
-    "manual/index",
-    "manual/getting_started",
-    "manual/projects_and_deployments",
-    "manual/events",
+    {
+      type: "doc",
+      label: "About Subhosting",
+      id: "manual/index",
+    },
+    {
+      type: "doc",
+      label: "Quick Start",
+      id: "manual/quick_start",
+    },
+    {
+      type: "doc",
+      label: "Planning your implementation",
+      id: "manual/planning_your_implementation",
+    },
+    {
+      type: "doc",
+      label: "Pricing and Limits",
+      id: "manual/pricing_and_limits",
+    },
     {
       type: "html",
       value: "<div>REST API</div>",
       className: "section-header",
     },
-    "api/index",
+    {
+      type: "doc",
+      label: "Resources",
+      id: "api/index",
+    },
+    {
+      type: "doc",
+      label: "Authentication",
+      id: "api/authentication",
+    },
+    "manual/events",
     {
       type: "link",
       label: "API Reference Docs",

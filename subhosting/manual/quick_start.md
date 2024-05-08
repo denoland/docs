@@ -1,4 +1,51 @@
-# Getting started with subhosting
+# Subhosting Quick Start
+
+Looking for the smallest possible example that shows how to deploy code to
+Deno's isolate cloud? We've got you covered below, or you can skip to the
+[more detailed getting started guide](#getting_started).
+
+```ts
+// 1.) Get API access info ready
+const accessToken = Deno.env.get("DEPLOY_ACCESS_TOKEN");
+const orgId = Deno.env.get("DEPLOY_ORG_ID");
+const API = "https://api.deno.com/v1";
+const headers = {
+  Authorization: `Bearer ${accessToken}`,
+  "Content-Type": "application/json",
+};
+
+// 2.) Create a new project
+const pr = await fetch(`${API}/organizations/${orgId}/projects`, {
+  method: "POST",
+  headers,
+  body: JSON.stringify({
+    name: null, // randomly generates project name
+  }),
+});
+const project = await pr.json();
+
+// 3.) Deploy a "hello world" server to the new project
+const dr = await fetch(`${API}/projects/${project.id}/deployments`, {
+  method: "POST",
+  headers,
+  body: JSON.stringify({
+    entryPointUrl: "main.ts",
+    assets: {
+      "main.ts": {
+        "kind": "file",
+        "content": `Deno.serve(() => new Response("Hello, World!"));`,
+        "encoding": "utf-8",
+      },
+    },
+    envVars: {},
+  }),
+});
+console.log(dr.status);
+```
+
+<a name="getting_started"></a>
+
+## Getting started with subhosting
 
 To get started with subhosting, you will need to create an organization in the
 [Deno Deploy dashboard](https://dash.deno.com/orgs/new). Follow the on-screen
@@ -6,7 +53,7 @@ instructions to create a new organization for subhosting.
 
 Going through the onboarding flow, you will likely also generate an **access
 token**, which you will use to access the [REST API](../api/index.md). If you
-didn't do this (or lost the token you generated), you can
+didn't do this (or your token has expired), you can
 [generate a new one here](https://dash.deno.com/account#access-tokens).
 
 :::caution Save your token in a safe place
@@ -118,4 +165,4 @@ Note the `id` of the project that was returned with this repsonse - this is the
 project ID we'll use in the next step.
 
 Now that we have REST API access configured and a project set up, we can move on
-to [creating our first deployment](./projects_and_deployments).
+to [creating our first deployment](./planning_your_implementation).
