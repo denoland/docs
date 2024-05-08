@@ -83,7 +83,7 @@ deployments and make them unreachable.
 
 ## Custom domains
 
-[** Custom domains**](https://apidocs.deno.com/#get-/organizations/-organizationId-/domains)
+[**Custom domains**](https://apidocs.deno.com/#get-/organizations/-organizationId-/domains)
 can be dynamically mapped to deployments, giving them a unique URL (eg
 `mycompany.com`).
 
