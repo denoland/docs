@@ -23,6 +23,11 @@ const sidebars = {
       id: "manual/planning_your_implementation",
     },
     {
+      type: "doc",
+      label: "Pricing and Limits",
+      id: "manual/pricing_and_limits",
+    },
+    {
       type: "html",
       value: "<div>REST API</div>",
       className: "section-header",
@@ -30,10 +35,14 @@ const sidebars = {
     {
       type: "doc",
       label: "Resources",
-      id: "manual/subhosting",
+      id: "api/index",
+    },
+    {
+      type: "doc",
+      label: "Authentication",
+      id: "api/authentication",
     },
     "manual/events",
-    "api/index",
     {
       type: "link",
       label: "API Reference Docs",
