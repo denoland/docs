@@ -179,14 +179,18 @@ const config = {
             {
               label: "Deno Deploy",
               to: "/deploy/manual",
+            },            
+            {
+              label: "Deno Subhosting",
+              to: "/subhosting/manual",
+            },
+            {
+              label: "Examples",
+              href: "/examples",
             },
             {
               label: "Standard Library",
               href: "https://deno.land/std",
-            },
-            {
-              label: "Examples",
-              href: "https://examples.deno.land",
             },
           ],
         },

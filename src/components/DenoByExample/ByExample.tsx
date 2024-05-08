@@ -23,8 +23,8 @@ export default function ByExample({ example, examplesList }) {
 
   const freshProps = {
     url: {
-      origin: "https://deno.land", // Make this the real path to the location in the docs repo
-      pathname: "/v1",
+      origin: "https://github.com/denoland/deno-docs/by-example/", // Make this the real path to the location in the docs repo
+      pathname: id,
     },
     data: [
       parsed
@@ -86,7 +86,7 @@ function ExamplePage(props: PageProps<Data>) {
         <div className="flex justify-between items-center">
           <h1 className="mt-2 mb-0 text-3xl font-bold">{example.title}</h1>
           <a
-            href={`https://github.com/denoland/denobyexample/blob/main/data${props.url.pathname}.ts`}
+            href={`https://github.com/denoland/deno-docs/blob/by-example/${props.url.pathname}`}
             className="px-4 py-2 rounded bg-gray-100 hover:bg-gray-300 text-slate-900"
           >
             Edit
@@ -115,7 +115,7 @@ function ExamplePage(props: PageProps<Data>) {
             ))}
           </div>
         ))}
-        <div className="grid grid-cols-1 sm:grid-cols-10 gap-x-8" style={{ borderTop: '1px solid'}}>
+        <div className="grid grid-cols-1 sm:grid-cols-10 gap-x-8" style={{ borderTop: '1px solid' }}>
           <div className="col-span-3 mt-8" />
           <div className="col-span-7 mt-8">
             {example.run && (
@@ -146,7 +146,7 @@ function ExamplePage(props: PageProps<Data>) {
                     target="_blank"
                     rel="noreferrer"
                   >
-										Deploy
+                    Deploy
                   </a>
                 </p>
               </div>
@@ -207,7 +207,7 @@ function SnippetComponent(props: {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-10 gap-x-8 transition duration-150 ease-in mb-16">
-      <div className={`mb-4 sm:m-0 text-gray-700 select-none text-sm ${props.snippet.code ? 'col-span-3': 'col-span-full'}`}>
+      <div className={`mb-4 sm:m-0 text-gray-700 select-none text-sm ${props.snippet.code ? 'col-span-3' : 'col-span-full'}`}>
         {props.snippet.text}
       </div>
       <div
