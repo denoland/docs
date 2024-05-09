@@ -71,8 +71,6 @@ export default async function denoByExamplePlugin(context: LoadContext, options)
                 const fileContent = "export default " + JSON.stringify({ name, content });
                 const path = await createData(`example-${name}.js`, fileContent);
 
-                console.log(`Data created for ${name} at ${path}`);
-
                 addRoute({
                     path: url,
                     component: '@site/src/components/DenoByExample/ByExample.tsx',
@@ -82,8 +80,6 @@ export default async function denoByExamplePlugin(context: LoadContext, options)
                         examplesList: examplesListPath
                     }
                 });
-
-                console.log(`Adding route for ${name} at ${url}`);
             }
         },
     };
