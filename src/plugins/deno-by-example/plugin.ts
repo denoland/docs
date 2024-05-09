@@ -37,8 +37,6 @@ export default async function denoByExamplePlugin(context: LoadContext, options)
         };
     });
 
-    console.log(`Read ${examples.length} examples from ${denoExamplePath}`);
-
     return {
         name: "deno-by-example",
         examples: examples,
