@@ -23,7 +23,7 @@ export default function ByExample({ example, examplesList }) {
 
   const freshProps = {
     url: {
-      origin: "https://github.com/denoland/deno-docs/by-example/", // Make this the real path to the location in the docs repo
+      origin: "https://github.com/denoland/deno-docs/blob/by-example/",
       pathname: id,
     },
     data: [
@@ -52,7 +52,7 @@ function ExamplePage(props: PageProps<Data>) {
 
   const [example, prev, next] = props.data;
   const url = `${props.url.origin}${props.url.pathname}${example.files.length > 1 ? "/main" : ""
-    }.ts`;
+    }`;
 
   const description = (example.description || example.title) +
     " -- Deno by example is a collection of annotated examples for how to use Deno, and the various features it provides.";
@@ -66,7 +66,7 @@ function ExamplePage(props: PageProps<Data>) {
       <main className="max-w-screen-lg mx-auto p-4">
         <div className="flex gap-2 items-center">
           <p
-            className="text-gray-500 italic m-0 mr-2"
+            className="italic m-0 mr-2"
             title={DIFFICULTIES[example.difficulty].description}
           >
             {DIFFICULTIES[example.difficulty].title}
@@ -74,7 +74,7 @@ function ExamplePage(props: PageProps<Data>) {
           <div className="flex gap-2 items-center">
             {example.tags.map((tag) => (
               <span
-                className="text-xs bg-gray-200 py-0.5 px-2 rounded-md"
+                className="text-xs italic py-0.5 px-2 rounded-md"
                 title={TAGS[tag].description}
                 key={TAGS[tag].title}
               >
@@ -84,26 +84,19 @@ function ExamplePage(props: PageProps<Data>) {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <h1 className="mt-2 mb-0 text-3xl font-bold">{example.title}</h1>
+          <h1 className="mt-10 mb-0 text-3xl font-bold">{example.title}</h1>
           <a
-            href={`https://github.com/denoland/deno-docs/blob/by-example/${props.url.pathname}`}
+            href={url}
             className="px-4 py-2 rounded bg-gray-100 hover:bg-gray-300 text-slate-900"
           >
             Edit
           </a>
         </div>
         {example.description && (
-          <div className="mt-2 mb-16">
-            <p className="text-gray-500">{example.description}</p>
-          </div>
+          <p className="mt-10">{example.description}</p>
         )}
         {example.files.map((file) => (
           <div className="mt-10" key={file.name}>
-            <div className="relative hidden sm:block">
-              {/* <CopyButton
-                text={file.snippets.map((snippet) => snippet.code).join("\n\n")}
-              /> */}
-            </div>
             {file.snippets.map((snippet, i) => (
               <SnippetComponent
                 key={i}
@@ -115,23 +108,21 @@ function ExamplePage(props: PageProps<Data>) {
             ))}
           </div>
         ))}
-        <div className="grid grid-cols-1 sm:grid-cols-10 gap-x-8" style={{ borderTop: '1px solid' }}>
-          <div className="col-span-3 mt-8" />
-          <div className="col-span-7 mt-8">
+        <div>
             {example.run && (
               <>
-                <p className="text-gray-700">
+                <p>
                   Run{" "}
                   <a href={url} className="hover:underline focus:underline">
                     this example
                   </a>{" "}
                   locally using the Deno CLI:
                 </p>
-                <pre className="mt-2 bg-gray-100 p-4 overflow-x-auto text-sm select-all rounded-md">
+                <CodeBlock language="ts">
                   {example.run.startsWith("deno")
                     ? example.run.replace("<url>", url)
                     : "deno run " + example.run.replace("<url>", url)}
-                </pre>
+                </CodeBlock>
               </>
             )}
             {example.playground && (
@@ -153,7 +144,7 @@ function ExamplePage(props: PageProps<Data>) {
             )}
             {example.additionalResources.length > 0 && (
               <div className="col-span-3 mt-12 pt-6 border-t-1 border-gray-200">
-                <p className="text-gray-500">Additional resources:</p>
+                <p>Additional resources:</p>
                 <ul className="list-disc list-inside mt-1">
                   {example.additionalResources.map(([link, title]) => (
                     <li
@@ -169,30 +160,6 @@ function ExamplePage(props: PageProps<Data>) {
               </div>
             )}
           </div>
-        </div>
-        {/*
-        <div className="col-span-2 mt-12 flex justify-between h-14">
-          {prev
-            ? (
-              <a
-                href={`/${prev.id}`}
-                className="w-6/12 text-gray-600 flex items-center gap-3 lg:gap-2 :hover:text-gray-900"
-              >
-                <CircleArrow />
-                {prev.title}
-              </a>
-            )
-            : <div className="w-6/12" />}
-          {next && (
-            <a
-              href={`/${next.id}`}
-              className="w-6/12 text-gray-600 text-right flex items-center justify-end gap-3 lg:gap-2 :hover:text-gray-900"
-            >
-              {next.title}
-              <CircleArrow right />
-            </a>
-          )}
-        </div> */}
       </main>
     </div>
   );
@@ -207,7 +174,7 @@ function SnippetComponent(props: {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-10 gap-x-8 transition duration-150 ease-in mb-16">
-      <div className={`mb-4 sm:m-0 text-gray-700 select-none text-sm ${props.snippet.code ? 'col-span-3' : 'col-span-full'}`}>
+      <div className={`italic mb-4 sm:m-0 select-none text-sm ${props.snippet.code ? 'col-span-3' : 'col-span-full'}`}>
         {props.snippet.text}
       </div>
       <div
