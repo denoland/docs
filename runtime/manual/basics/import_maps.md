@@ -40,6 +40,14 @@ written something similar in our `deno.json` configuration file:
 
 ## Example - Using the Deno Standard Library
 
+Running the following:
+
+```bash
+deno add @std/foo
+```
+
+Produces the following:
+
 ```json title="deno.json"
 {
   "imports": {
@@ -48,7 +56,9 @@ written something similar in our `deno.json` configuration file:
 }
 ```
 
-```ts title="color.ts"
+The import can then be used in your script:
+
+```ts title="bar.ts"
 import { bar } from "@std/foo";
 
 bar(1, 2);
