@@ -38,20 +38,20 @@ written something similar in our `deno.json` configuration file:
 }
 ```
 
-## Example - Using deno_std's fmt module via `fmt/`
+## Example - Using the Deno Standard Library
 
 ```json title="deno.json"
 {
   "imports": {
-    "fmt/": "https://deno.land/std@$STD_VERSION/fmt/"
+    "@std/foo": "jsr:@std/foo@^1.2.3"
   }
 }
 ```
 
 ```ts title="color.ts"
-import { red } from "fmt/colors.ts";
+import { bar } from "@std/foo";
 
-console.log(red("hello world"));
+bar(1, 2);
 ```
 
 ## Example - Using project root for absolute imports
@@ -79,19 +79,20 @@ import map's URL or file path.
 The other situation where import maps can be very useful is to override imports
 in specific modules.
 
-Let's say you want to override the deno_std import from 0.177.0 to the latest in
-all of your imported modules, but for the `https://deno.land/x/example/` module
-you want to use files in a local `patched` directory. You can do this by using a
-scope in the import map that looks something like this:
+Let's say you want to override a Deno Standard Library package import from
+^1.2.3 to the latest in all of your imported modules, but for the
+`https://deno.land/x/example/` module you want to use files in a local `patched`
+directory. You can do this by using a scope in the import map that looks
+something like this:
 
 ```json
 {
   "imports": {
-    "https://deno.land/std@0.177.0/": "https://deno.land/std@$STD_VERSION/"
+    "@std/foo": "jsr:@std/foo@^1.2.3"
   },
   "scopes": {
     "https://deno.land/x/example/": {
-      "https://deno.land/std@0.177.0/": "./patched/"
+      "@std/foo": "./patched/mod.ts"
     }
   }
 }
