@@ -253,40 +253,14 @@ function SnippetComponent(props: {
 
 export function CopyButton(props: { text: string }) {
   return (
-    <div className="buttonGroup">
       <button
         onClick={() => navigator?.clipboard?.writeText(props.text)}
         type="button"
         aria-label="Copy code to clipboard"
         title="Copy"
-        className="clean-btn copy-all"
+      className="clean-btn copy-all absolute right-2 top-2 bg-gray-100 hover:bg-gray-200 text-gray-900 px-2 py-1 rounded-md "
       >
-        <span
-          className="copyButtonIcons"
-          aria-hidden="true"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            className="copyButtonIcon"
-          >
-            <path
-              fill="currentColor"
-              d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
-            >
-            </path>
-          </svg>
-          <svg
-            viewBox="0 0 24 24"
-            className="copyButtonSuccessIcon"
-          >
-            <path
-              fill="currentColor"
-              d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
-            >
-            </path>
-          </svg>
-        </span>
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7L2.75566 2.7V8.7H8.75566Z" fill="#232323"></path></svg>
       </button>
-    </div>
   );
 }
