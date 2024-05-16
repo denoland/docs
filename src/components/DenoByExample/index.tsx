@@ -24,8 +24,8 @@ export default function Index({ examplesList }) {
     const lowerGroup = example.group.toLowerCase();
 
     if (!acc[lowerGroup]) {
-      acc[lowerGroup] = [];
-    }
+      acc[lowerGroup] = [];  
+    }    
 
     if (!groupMap.find(([category]) => category.toLowerCase() === lowerGroup)) {
       groupMap.push([example.group.toLowerCase(), "IconFlag3"]);
