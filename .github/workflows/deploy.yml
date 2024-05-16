@@ -22,8 +22,15 @@ jobs:
         with:
           node-version: lts/*
 
+      - name: Set up Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: canary
+
       - name: Build step
-        run: npm install && npm run build
+        env:
+          DENO_FUTURE: 1
+        run: npm install && deno task build
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1

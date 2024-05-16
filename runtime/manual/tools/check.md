@@ -1,32 +1,35 @@
-# deno cache
+# deno check
 
-Cache and compile remote dependencies recursively.
+Type-check a program without execution.
 
 ## Command
 
-`deno cache [OPTIONS] <FILE>` - Caches dependencies of `FILE`.
+`deno check [OPTIONS] <FILE>` - Download and type-check `FILE`
 
 ## Synopsis
 
 ```bash
-deno cache [--no-check[=<NO_CHECK_TYPE>]] [--import-map <FILE>] [-q|--quiet] 
-[--no-remote] [--no-npm] [--node-modules-dir[=<node-modules-dir>]] [--vendor[=<vendor>]]
+deno check [--import-map <FILE>] [--no-remote] [-q|--quiet] [--no-npm] 
+[--node-modules-dir[=<node-modules-dir>]] [--vendor[=<vendor>]]
 [-c|--config <FILE>] [--no-config] [-r|--reload[=<CACHE_BLOCKLIST>...]]
-[--lock [<FILE>]] [--lock-write] [--no-lock] [--cert <FILE>] [--check[=<CHECK_TYPE>]] <FILE>
+[--lock [<FILE>]] [--lock-write] [--no-lock] [--cert <FILE>] [--all] <FILE>
 
-deno cache -h|--help
+deno check -h|--help
 ```
 
 ## Description
 
-Pre-download and compile remote dependencies along with their static imports, storing them in the local cache.
+Type-check without execution.
 
-All of the static dependencies are saved in the local cache, without running any code.
-This ensures faster execution times for scripts that have already been cached by avoiding unnecessary network requests and recompilation.
+```bash
+deno check https://deno.land/std/http/file_server.ts
+```
+
+Unless `--reload` is specified, this command will not re-download already cached dependencies.
 
 ## Cache Location
 
-Modules cached using `deno cache` are stored in `$DENO_DIR`, a centralized directory.
+Modules cached are stored in `$DENO_DIR`, a centralized directory.
 Its location varies by OS. For instance, on macOS, it's typically `/Users/user/Library/Caches/deno`.
 
 You can see the cache location by running `deno info` with no arguments.
@@ -43,11 +46,6 @@ The module entrypoint can be a local file or a remote URL. Dependencies are dete
 
 ## Options
 
-- `--no-check[=<NO_CHECK_TYPE>]`
-
-  Skip type-checking. If the value of '--no-check=remote' is supplied,
-  diagnostic errors from remote modules will be ignored.
-
 - `--import-map <FILE>`
 
   Load import map file from local file or remote URL.
@@ -55,13 +53,13 @@ The module entrypoint can be a local file or a remote URL. Dependencies are dete
   Specification: [https://wicg.github.io/import-maps/](https://wicg.github.io/import-maps/)
   Examples: [https://github.com/WICG/import-maps#the-import-map](https://github.com/WICG/import-maps#the-import-map)
 
-- `-q, --quiet`
-
-  Suppress diagnostic output
-
 - `--no-remote`
 
   Do not resolve remote modules
+
+- `-q, --quiet`
+
+  Suppress diagnostic output
 
 - `--no-npm`
 
@@ -91,9 +89,7 @@ The module entrypoint can be a local file or a remote URL. Dependencies are dete
 
   Reload source code cache (recompile TypeScript).
 
-  The `CACHE_BLOCKLIST` is a comma separated list of arguments passed to the --reload option.
-
-  E.g. `--reload=https://deno.land/std/fs/utils.ts,https://deno.land/std/fmt/colors.ts`
+  The `CACHE_BLOCKLIST` is a comma separated list of arguments passed to the --reload option. E.g. `--reload=https://deno.land/std/fs/utils.ts,https://deno.land/std/fmt/colors.ts`
 
 - `--lock [<FILE>]`
 
@@ -111,11 +107,10 @@ The module entrypoint can be a local file or a remote URL. Dependencies are dete
   
   Load the certificate from a [PEM encoded file](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)
 
-- `--check[=<CHECK_TYPE>]`
+- `--all`
+  Type-check all code, including remote modules and npm packages
 
-  Enable type-checking. This subcommand does not type-check by default. If the value of '--check=all' is supplied, diagnostic errors from remote modules will be included.
-
-  Alternatively, the 'deno check' subcommand can be used.
+  If the value of '--check=all' is supplied, diagnostic errors from remote modules will be included.
 
 - `-h, --help`
 
@@ -126,47 +121,47 @@ The module entrypoint can be a local file or a remote URL. Dependencies are dete
 - Cache the dependencies of a module
 
 ```bash
-deno cache https://deno.land/std/http/file_server.ts
+deno check https://deno.land/std/http/file_server.ts
 ```
 
 - Force a cache update
 
 ```bash
-deno cache --reload https://deno.land/std/http/file_server.ts
+deno check --reload https://deno.land/std/http/file_server.ts
 ```
 
 - Cache a known npm module
 
 ```bash
-deno cache npm:express
+deno check npm:express
 ```
 
 - Reload everything
 
 ```bash
-deno cache --reload
+deno check --reload
 ```
 
 - Reload only standard modules
 
 ```bash
-deno cache --reload=https://deno.land/std
+deno check --reload=https://deno.land/std
 ```
 
 - Reloads specific modules
 
 ```bash
-deno cache --reload=https://deno.land/std/fs/utils.ts,https://deno.land/std/fmt/colors.ts
+deno check --reload=https://deno.land/std/fs/utils.ts,https://deno.land/std/fmt/colors.ts
 ```
 
 - Reload all npm modules
 
 ```bash
-deno cache --reload=npm:
+deno check --reload=npm:
 ```
 
 - Reload specific npm module
 
 ```bash
-deno cache --reload=npm:chalk
+deno check --reload=npm:chalk
 ```

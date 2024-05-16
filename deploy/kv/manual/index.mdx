@@ -237,6 +237,45 @@ created by Apple.
 KV on Deploy - a new Deploy database will be provisioned for you when required
 by your code. Learn more about Deno KV on Deno Deploy [here](./on_deploy.mdx).
 
+## Testing
+
+By default, [`Deno.openKv()`](https://deno.land/api?unstable=&s=Deno.openKv) creates or
+opens a persistent store based on the path from which the script that invoked it
+was run. This isn't usually desireable for tests, which need to produce the same
+behavior when run many times in a row.
+
+To test code that uses Deno KV, you can use the special argument `":memory:"` to
+create an ephemeral Deno KV datastore.
+
+```ts
+async function setDisplayName(kv: Deno.Kv, username: string, displayname: string) {
+  await kv.set(["preferences", username, "displayname"], displayname);
+}
+
+async function getDisplayName(kv: Deno.Kv, username: string): Promise<string | null> {
+  return (await kv.get(["preferences", username, "displayname"])).value as string;
+}
+
+Deno.test("Preferences", async (t) => {
+  const kv = await Deno.openKv(":memory:");
+
+  await t.step("can set displayname", async () => {
+    const displayName = await getDisplayName(kv, "example");
+    assertEquals(displayName, null);
+
+    await setDisplayName(kv, "example", "Exemplary User");
+
+    const displayName = await getDisplayName(kv, "example");
+    assertEquals(displayName, "Exemplary User");
+  });
+});
+```
+
+This works becaus Deno KV is backed by SQLite when run for local development. Just like
+in-memory SQLite databases, multiple ephemeral Deno KV stores can exist at once without
+interfering with one another. For more information about special database addressing modes,
+see [the SQLite docs on the topic](https://www.sqlite.org/inmemorydb.html).
+
 ## Next steps
 
 At this point, you're just beginning to scratch the surface with Deno KV. Be

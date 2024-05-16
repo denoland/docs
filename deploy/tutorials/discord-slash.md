@@ -72,7 +72,7 @@ request with someone's slash command.
    } from "https://deno.land/x/sift@0.6.0/mod.ts";
    // TweetNaCl is a cryptography library that we use to verify requests
    // from Discord.
-   import nacl from "https://cdn.skypack.dev/tweetnacl@v1.0.3?dts";
+   import nacl from "https://esm.sh/tweetnacl@v1.0.3?dts";
 
    // For all requests to "/" endpoint, we want to invoke home() handler.
    serve({

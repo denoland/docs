@@ -258,12 +258,9 @@ Two very common Node.js global variables in CommonJS modules are
 [`__dirname`](https://nodejs.org/api/globals.html#__dirname). These globals are
 [not supported](https://nodejs.org/api/esm.html#no-__filename-or-__dirname) in
 ECMAScript modules in Deno or Node.js, but there is still a way to get the same
-information in a Deno program using Node built-in APIs:
+information in Deno Runtime APIs:
 
 ```js
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = import.meta.filename;
+const __dirname = import.meta.dirname;
 ```

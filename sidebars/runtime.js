@@ -122,13 +122,38 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno completions",
+          id: "manual/tools/completions",
+        },
+        {
+          type: "doc",
+          label: "deno cache",
+          id: "manual/tools/cache",
+        },
+        {
+          type: "doc",
+          label: "deno check",
+          id: "manual/tools/check",
+        },
+        {
+          type: "doc",
           label: "deno compile",
           id: "manual/tools/compiler",
         },
         {
           type: "doc",
+          label: "deno coverage",
+          id: "manual/tools/coverage",
+        },
+        {
+          type: "doc",
           label: "deno doc",
           id: "manual/tools/documentation_generator",
+        },
+        {
+          type: "doc",
+          label: "deno eval",
+          id: "manual/tools/eval",
         },
         {
           type: "doc",
@@ -159,6 +184,16 @@ const sidebars = {
           type: "doc",
           label: "deno lint",
           id: "manual/tools/linter",
+        }, 
+        {
+          type: "doc",
+          label: "deno publish",
+          id: "manual/tools/publish",
+        },
+        {
+          type: "doc",
+          label: "deno lsp",
+          id: "manual/tools/lsp",
         },
         {
           type: "doc",
@@ -172,8 +207,33 @@ const sidebars = {
         },
         {
           type: "doc",
+          label: "deno serve",
+          id: "manual/tools/serve",
+        },
+        {
+          type: "doc",
           label: "deno task",
           id: "manual/tools/task_runner",
+        },
+        {
+          type: "doc",
+          label: "deno test",
+          id: "manual/tools/test",
+        },
+        {
+          type: "doc",
+          label: "deno types",
+          id: "manual/tools/types",
+        },
+        {
+          type: "doc",
+          label: "deno uninstall",
+          id: "manual/tools/uninstall",
+        },
+        {
+          type: "doc",
+          label: "deno upgrade",
+          id: "manual/tools/upgrade",
         },
         {
           type: "doc",

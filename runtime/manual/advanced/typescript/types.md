@@ -32,7 +32,7 @@ have direct control over, the ability to do the former is also required.
 ## Providing types when importing
 
 If you are consuming a JavaScript module and you have either created types (a
-`.d.ts` file) or have otherwise obtained the types, you want to use, you can
+`.d.ts` file) or have otherwise obtained the types you want to use, you can
 instruct Deno to use that file when type checking instead of the JavaScript file
 using the `@deno-types` compiler hint. `@deno-types` needs to be a single line
 double slash comment, where when used impacts the next import or re-export
@@ -50,8 +50,8 @@ When type checking `coolLib` and your usage of it in the file, the
 `coolLib.d.ts` types will be used instead of looking at the JavaScript file.
 
 The pattern matching for the compiler hint is somewhat forgiving and will accept
-quoted and non-question values for the specifier as well as it accepts
-whitespace before and after the equals sign.
+quoted and non-question values for the specifier as well as accepting whitespace 
+before and after the equals sign.
 
 ## Providing types when hosting
 
@@ -233,28 +233,12 @@ file, its resolution follow the normal import rules of Deno. For a lot of the
 `.d.ts` files that are generated and available on the web, they may not be
 compatible with Deno.
 
-To overcome this problem, some solution providers, like the
-[Skypack CDN](https://www.skypack.dev/), will automatically bundle type
-declarations just like they provide bundles of JavaScript as ESM.
-
-### Deno Friendly CDNs
-
-There are CDNs which host JavaScript modules that integrate well with Deno.
-
-- [esm.sh](https://esm.sh) is a CDN which provides type declarations by default
+[esm.sh](https://esm.sh) is a CDN which provides type declarations by default
   (via the `X-TypeScript-Types` header). It can be disabled by appending
   `?no-dts` to the import URL:
 
   ```ts
   import React from "https://esm.sh/react?no-dts";
-  ```
-- [Skypack.dev](https://docs.skypack.dev/skypack-cdn/code/deno) is another CDN
-  which also provides type declarations (via the `X-TypeScript-Types` header)
-  when you append `?dts` as a query string to your remote module import
-  statements. Here's an example:
-
-  ```ts
-  import React from "https://cdn.skypack.dev/react?dts";
   ```
 
 ## Behavior of JavaScript when type checking

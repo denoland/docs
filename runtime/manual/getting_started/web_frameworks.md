@@ -71,10 +71,19 @@ configure, while being super flexible. Highlights include:
   for CSS.
 - No need to install thousand of packages in `node_modules` or complex bundlers.
 
+### Hono
+
+[Hono](https://hono.dev) is a light-weight web app framework in the tradition of
+Express and Sinatra. In just a few lines of code, you can set up an API server
+or a server for dynamic web pages. Hono provides a Deno-native installation path,
+and works great with Deno’s built-in TypeScript tooling.
+
+- This website is served by Hono running on [Deno Deploy](https://deno.com/deploy).
+
 ### Oak
 
-[Oak](https://deno.land/x/oak) is a web application framework for Deno, similar
-to Express in Node.js.
+[Oak](https://deno.land/x/oak) is a web application framework for Deno, inspired
+by Koa and @koa/router.
 
 As a middleware framework, Oak is the glue between your frontend application and
 a potential database or other data sources (e.g. REST APIs, GraphQL APIs). Just

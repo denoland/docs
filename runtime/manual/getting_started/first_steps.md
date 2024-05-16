@@ -37,7 +37,7 @@ this data type. You can execute the code in this example using the `deno run`
 command.
 
 ```console
-deno run -A hello.ts
+deno run hello.ts
 ```
 
 You can
@@ -58,7 +58,7 @@ const site = await fetch("https://www.deno.com");
 console.log(await site.text());
 ```
 
-And then run it.
+Because this example is fetching data from across the internet, you will need to allow network permissions. You can give network permissions with the `--allow-net` flag or by using `-A` to allow all permissions. We'll look at permissions and security in more depth later on. Run the example with:
 
 ```console
 deno run -A hello.ts
@@ -117,7 +117,7 @@ Without any permission flags passed in, you'll see security prompts that look
 something like this:
 
 ```console
-kevin@kevin-deno scratchpad % deno run index.ts
+$ deno run index.ts
 ✅ Granted net access to "www.deno.com".
 ┌ ⚠️  Deno requests net access to "deno.com".
 ├ Requested by `fetch()` API.
@@ -243,7 +243,7 @@ deno test person_test.ts
 The output should look something like this:
 
 ```bash
-kevin@kevin-deno scratchpad % deno test person_test.ts
+$ deno test person_test.ts
 Check file:///Users/kevin/dev/denoland/scratchpad/person_test.ts
 running 1 test from ./person_test.ts
 sayHello function ... ok (4ms)

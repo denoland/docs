@@ -2,7 +2,7 @@
 displayed_sidebar: deployGuideHome
 ---
 
-# Deno Deploy Quick Start
+# Deploy Quick Start
 
 Deno Deploy is a globally distributed platform for serverless JavaScript
 applications. Your JavaScript, TypeScript, and WebAssembly code runs on managed
@@ -13,37 +13,14 @@ machines, powered by the [Deno runtime](/runtime/manual).
 
 Let's deploy your first application - it should only take a few minutes.
 
-## <a name="existingproject"></a>Deploy your existing project 
+## Install Deno and `deployctl`
 
-Import a project and run it on the edge it with Deno Deploy. 
+If you haven't already, you can
+[install the Deno runtime](/runtime/manual/getting_started/installation)
+using one of the commands below:
 
-1. [From the Deno Deploy dashboard](https://dash.deno.com) click the "New Project" button.
-
-2. Connect to your GitHub account and select the repository you would like to deploy.
-
-3. Follow the on-screen instructions to deploy your existing application. 
-
-    If your project requires a build step, use the Project Configuration form to create a GitHub action to deploy your project. Give your project a name and select from the optional framework presets. If you are not using a framework, you can set up your build settings using the form.
-
-4. Confirm that your build options are correct and click the "Deploy Project" button to kick off your new Github action and deploy your project.
-
-In a few moments, your project will be deployed across ~12 data 
-centers around the world, ready to handle large volumes of traffic. 
-
-Once your deployment is successful you can visit your newly deployed project at the url provided on the success page or manage it in your dashboard.
-
-## Option 2: Start from scratch
-
-If you'd like to develop and deploy a simple application, follow these
-instructions to get started. 
-
-We'll use the [`deployctl`](./deployctl.md) command line utility to deploy a local Deno script from your computer.
-
-### Install Deno and `deployctl`
-
-If you haven't already, you can [install the Deno runtime](/runtime/manual/getting_started/installation) using one of the commands below:
-
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 <Tabs groupId="operating-systems">
   <TabItem value="mac" label="macOS" default>
@@ -71,8 +48,8 @@ curl -fsSL https://deno.land/install.sh | sh
 
 After Deno is installed, install the [`deployctl`](./deployctl.md) utility:
 
-```console
-deno install -Arf jsr:@deno/deployctl
+```
+deno install -A jsr:@deno/deployctl
 ```
 
 You can confirm `deployctl` has been installed correctly by running:
@@ -83,26 +60,63 @@ deployctl --help
 
 Now, you're ready to deploy a Deno script from the command line!
 
-### Write and test a Deno program
+## Write and test a Deno program
 
-Create a file called `server.ts` in your terminal, and include the following
-"Hello World" web server:
+First, create a directory for the project and create a file called `main.ts` in it, with the
+following "Hello World" web server:
 
-```ts title="server.ts"
+```ts title="main.ts"
 Deno.serve(() => new Response("Hello, world!"));
 ```
 
 You can test that it works by running it with the command below:
 
-```console
-deno run --allow-net server.ts
+```
+deno run --allow-net main.ts
 ```
 
-Your server should be viewable at [localhost:8000](http://localhost:8000). 
+Your server should be viewable at [localhost:8000](http://localhost:8000).
+Now let's run this code on the edge with Deno Deploy!
 
-[Add this new project to GitHub](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github) and follow the [guide to deploy your project with Deno Deploy](#existingproject).
+## Deploy your project
 
-## Option 3: Start with a playground
+From the directory of the `main.ts` file you just created, run this command:
+
+```sh
+deployctl deploy
+```
+
+You will be asked to authorize Deno Deploy in GitHub to sign up to Deno Deploy and/or to provision
+an access token for `deployctl`. A few moments after that, your Hello World server will be
+deployed in Deno Deploy infrastructure all around the world, ready to handle all the traffic you expect.
+
+## Next Steps
+
+Now that you've created your first deployment, you can [learn what kinds of apps](./use-cases.md)
+you can run on Deno Deploy, check out [what else you can do with deployctl](./deployctl.md), or keep
+reading to find out what other options you have to deploy your code to Deno Deploy. We're so
+excited to see what you'll ship with Deno Deploy!
+
+### <a name="existingproject"></a>Deploy your existing project 
+
+Import a project and run it on the edge it with Deno Deploy. 
+
+1. [From the Deno Deploy dashboard](https://dash.deno.com) click the "New Project" button.
+
+2. Connect to your GitHub account and select the repository you would like to deploy.
+
+3. Follow the on-screen instructions to deploy your existing application. 
+
+    If your project requires a build step, use the Project Configuration form to create a GitHub action to deploy your project. Give your project a name and select from the optional framework presets. If you are not using a framework, you can set up your build settings using the form.
+
+4. Confirm that your build options are correct and click the "Deploy Project" button to kick off your new Github action and deploy your project.
+
+In a few moments, your project will be deployed across ~12 data 
+centers around the world, ready to handle large volumes of traffic. 
+
+Once your deployment is successful you can visit your newly deployed project at the url provided on the success page or manage it in your dashboard.
+
+### Start with a playground
 
 A [playground](./playgrounds.md) is a browser-based editor that enables you to
 write and run JavaScript or TypeScript code right away This is a great choice for just kicking the tires on Deno and Deno Deploy!
@@ -113,10 +127,3 @@ From the [Deno Deploy dashboard](https://dash.deno.com), click the "New Playgrou
 [RESTful API server playground](https://dash.deno.com/tutorial/tutorial-restful)\
 [Realtime app with WebSockets playground](https://dash.deno.com/tutorial/tutorial-websocket)\
 [Recurring tasks with Deno.cron playground](https://dash.deno.com/tutorial/tutorial-cron)
-
-## Next Steps
-
-Now that you've deployed your first project, you can 
-[check out the kinds of apps](./use-cases.md) you can run on Deploy. You could 
-also skip right to [setting up your own custom domain](./custom-domains.md).
-We're so excited to see what you'll ship with Deploy!
