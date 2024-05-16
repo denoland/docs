@@ -1,6 +1,6 @@
 # deno check
 
-Download and type-check a program without execution.
+Type-check a program without execution.
 
 ## Command
 
@@ -19,7 +19,7 @@ deno check -h|--help
 
 ## Description
 
-Download and type-check without execution.
+Type-check without execution.
 
 ```bash
 deno check https://deno.land/std/http/file_server.ts
