@@ -23,7 +23,7 @@ export default function ByExample({ example, examplesList }) {
 
   const freshProps = {
     url: {
-      origin: "https://github.com/denoland/deno-docs/blob/by-example/",
+      origin: "https://github.com/denoland/deno-docs/blob/main/by-example/",
       pathname: id,
     },
     data: [
