@@ -21,14 +21,14 @@ The APIs that are available are:
 - [Deno.realPath](#denorealpath)
 - [Deno.readLink](#denoreadlink)
 
-## `Deno.cwd`
+## Deno.cwd
 
 `Deno.cwd()` returns the current working directory of your deployment. It is
 located at the root of your deployment's root directory. For example, if you
 deployed via the GitHub integration, the current working directory is the root
 of your GitHub repository.
 
-## `Deno.readDir`
+## Deno.readDir
 
 `Deno.readDir()` allows you to list the contents of a directory.
 
@@ -66,7 +66,7 @@ async function handler(_req) {
 Deno.serve(handler);
 ```
 
-## `Deno.readFile`
+## Deno.readFile
 
 `Deno.readFile()` allows you to read a file fully into memory.
 
@@ -171,7 +171,7 @@ The path provided to the
 to the root of the repository. You can also specify absolute paths, if they are
 inside `Deno.cwd`.
 
-## `Deno.readTextFile`
+## Deno.readTextFile
 
 This function is similar to [Deno.readFile](#Deno.readFile) except it decodes
 the file contents as a UTF-8 string.
@@ -194,7 +194,7 @@ async function handler(_req) {
 Deno.serve(handler);
 ```
 
-## `Deno.open`
+## Deno.open
 
 `Deno.open()` allows you to open a file, returning a file handle. This file
 handle can then be used to read the contents of the file. See
@@ -229,7 +229,7 @@ async function handler(_req) {
 Deno.serve(handler);
 ```
 
-## `Deno.File`
+## Deno.File
 
 `Deno.File` is a file handle returned from [`Deno.open()`](#denoopen). It can be
 used to read chunks of the file using the `read()` method. The file handle can
@@ -251,7 +251,7 @@ class File {
 
 The path can be a relative or absolute. It can also be a `file:` URL.
 
-### `Deno.File#read()`
+## Deno.File#read()
 
 The read method is used to read a chunk of the file. It should be passed a
 buffer to read the data into. It returns the number of bytes read or `null` if
@@ -261,7 +261,7 @@ the end of the file has been reached.
 function read(p: Uint8Array): Promise<number | null>;
 ```
 
-### `Deno.File#close()`
+### Deno.File#close()
 
 The close method is used to close the file handle. Closing the handle will
 interrupt all ongoing reads.
@@ -270,7 +270,7 @@ interrupt all ongoing reads.
 function close(): void;
 ```
 
-## `Deno.stat`
+## Deno.stat
 
 `Deno.stat()` reads a file system entry's metadata. It returns a
 [`Deno.FileInfo`](#fileinfo) object. Symlinks are followed.
@@ -304,7 +304,7 @@ async function handler(_req) {
 Deno.serve(handler);
 ```
 
-## `Deno.lstat`
+## Deno.lstat
 
 `Deno.lstat()` is similar to `Deno.stat()`, but it does not follow symlinks.
 
@@ -318,7 +318,7 @@ function Deno.lstat(path: string | URL): Promise<Deno.FileInfo>
 
 The path can be a relative or absolute. It can also be a `file:` URL.
 
-## `Deno.FileInfo`
+## Deno.FileInfo
 
 The `Deno.FileInfo` interface is used to represent a file system entry's
 metadata. It is returned by the [`Deno.stat()`](#denostat) and
@@ -337,7 +337,7 @@ interface FileInfo {
 }
 ```
 
-## `Deno.realPath`
+## Deno.realPath
 
 `Deno.realPath()` returns the resolved absolute path to a file after following
 symlinks.
@@ -366,7 +366,7 @@ async function handler(_req) {
 Deno.serve(handler);
 ```
 
-## `Deno.readLink`
+## Deno.readLink
 
 `Deno.readLink()` returns the target path for a symlink.
 
