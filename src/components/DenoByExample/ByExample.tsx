@@ -253,21 +253,21 @@ function SnippetComponent(props: {
 
 export function CopyButton(props: { text: string }) {
   return (
-    <div className="buttonGroup_node_modules-@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module">
+    <div className="buttonGroup">
       <button
         onClick={() => navigator?.clipboard?.writeText(props.text)}
         type="button"
         aria-label="Copy code to clipboard"
         title="Copy"
-        class="clean-btn copy-all"
+        className="clean-btn copy-all"
       >
         <span
-          class="copyButtonIcons_node_modules-@docusaurus-theme-classic-lib-theme-CodeBlock-CopyButton-styles-module"
+          className="copyButtonIcons"
           aria-hidden="true"
         >
           <svg
             viewBox="0 0 24 24"
-            class="copyButtonIcon_node_modules-@docusaurus-theme-classic-lib-theme-CodeBlock-CopyButton-styles-module"
+            className="copyButtonIcon"
           >
             <path
               fill="currentColor"
@@ -277,7 +277,7 @@ export function CopyButton(props: { text: string }) {
           </svg>
           <svg
             viewBox="0 0 24 24"
-            class="copyButtonSuccessIcon_node_modules-@docusaurus-theme-classic-lib-theme-CodeBlock-CopyButton-styles-module"
+            className="copyButtonSuccessIcon"
           >
             <path
               fill="currentColor"
