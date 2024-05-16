@@ -1,3 +1,4 @@
+import process from "node:process";
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const findReplace = require("./src/remark/find_replace");
 const lightCodeTheme = require("prism-react-renderer/themes/github");
