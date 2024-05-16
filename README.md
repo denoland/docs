@@ -198,7 +198,7 @@ authored.
 
 ## Examples
 
-(https://docs.deno.com/examples)[Deno by Example] is a collection of small snippets showcasing various functions of the APIs implemented in Deno.
+[Deno by Example](https://docs.deno.com/examples) is a collection of small snippets showcasing various functions of the APIs implemented in Deno.
 
 
 - Examples are written in TypeScript
