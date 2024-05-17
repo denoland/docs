@@ -4,7 +4,8 @@ Output shell completion script to standard output.
 
 ## Command
 
-`deno completions [OPTIONS] <SHELL>` - Generate completion script for the specified shell.
+`deno completions [OPTIONS] <SHELL>` - Generate completion script for the
+specified shell.
 
 ## Synopsis
 
@@ -16,8 +17,9 @@ deno completions -h|--help
 
 ## Description
 
-The completions command generates a script to configure shell completion for Deno.
-Executing the script will configure the shell to provide completion for Deno commands and subcommands.
+The completions command generates a script to configure shell completion for
+Deno. Executing the script will configure the shell to provide completion for
+Deno commands and subcommands.
 
 ## Arguments
 
@@ -32,7 +34,7 @@ Possible values: bash, fish, powershell, zsh, fig
   Suppress diagnostic output
 
 - `-h, --help`
-  
+
   Print help (see a summary with '-h')
 
 ## Examples

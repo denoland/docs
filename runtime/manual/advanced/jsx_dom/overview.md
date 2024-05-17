@@ -18,8 +18,8 @@ A web application is generally made up of three key technologies:
 - HTML
 - CSS
 
-As well as increasingly, [WebAssembly](../../runtime/webassembly/index.md)
-might play a part in a web application.
+As well as increasingly, [WebAssembly](../../runtime/webassembly/index.md) might
+play a part in a web application.
 
 These technologies combine to allow a developer to build an application in a
 browser using the web platform. While Deno supports a lot of web platform APIs,

@@ -4,7 +4,8 @@ Evaluate JavaScript from the command line.
 
 ## Command
 
-`deno eval [OPTIONS] <CODE_ARG>...` - Executes code provided as a string argument.
+`deno eval [OPTIONS] <CODE_ARG>...` - Executes code provided as a string
+argument.
 
 ## Synopsis
 
@@ -37,7 +38,8 @@ This command has implicit access to all permissions (--allow-all).
 
 ## Arguments
 
-`CODE_ARG` - A string-literal containing the JavaScript or TypeScript code to evaluate.
+`CODE_ARG` - A string-literal containing the JavaScript or TypeScript code to
+evaluate.
 
 ## Options
 
@@ -48,10 +50,12 @@ This command has implicit access to all permissions (--allow-all).
 
 - `--import-map <FILE>`
 
-  Load import map file from local file or remote URL.
-  Docs: [https://docs.deno.com/runtime/manual/basics/import_maps](https://docs.deno.com/runtime/manual/basics/import_maps)
-  Specification: [https://wicg.github.io/import-maps/](https://wicg.github.io/import-maps/)
-  Examples: [https://github.com/WICG/import-maps#the-import-map](https://github.com/WICG/import-maps#the-import-map)
+  Load import map file from local file or remote URL. Docs:
+  [https://docs.deno.com/runtime/manual/basics/import_maps](https://docs.deno.com/runtime/manual/basics/import_maps)
+  Specification:
+  [https://wicg.github.io/import-maps/](https://wicg.github.io/import-maps/)
+  Examples:
+  [https://github.com/WICG/import-maps#the-import-map](https://github.com/WICG/import-maps#the-import-map)
 
 - `-q, --quiet`
 
@@ -73,13 +77,18 @@ This command has implicit access to all permissions (--allow-all).
 
 - `--vendor[=<vendor>]`
 
-  UNSTABLE: Enables or disables the use of a local vendor folder for remote modules and node_modules folder for npm packages
+  UNSTABLE: Enables or disables the use of a local vendor folder for remote
+  modules and node_modules folder for npm packages
 
   [possible values: true, false]
 
 - `-c, --config <FILE>`
 
-  The configuration file can be used to configure different aspects of deno including TypeScript, linting, and code formatting. Typically the configuration file will be called `deno.json` or `deno.jsonc` and automatically detected; in that case this flag is not necessary. See [https://deno.land/manual@v1.41.3/getting_started/configuration_file](https://deno.land/manual@v1.41.3/getting_started/configuration_file)
+  The configuration file can be used to configure different aspects of deno
+  including TypeScript, linting, and code formatting. Typically the
+  configuration file will be called `deno.json` or `deno.jsonc` and
+  automatically detected; in that case this flag is not necessary. See
+  [https://deno.land/manual@v1.41.3/getting_started/configuration_file](https://deno.land/manual@v1.41.3/getting_started/configuration_file)
 
 - `--no-config`
 
@@ -89,13 +98,16 @@ This command has implicit access to all permissions (--allow-all).
 
   Reload source code cache (recompile TypeScript).
 
-  The `CACHE_BLOCKLIST` is a comma separated list of arguments passed to the --reload option.
+  The `CACHE_BLOCKLIST` is a comma separated list of arguments passed to the
+  --reload option.
 
-  E.g. `--reload=https://deno.land/std/fs/utils.ts,https://deno.land/std/fmt/colors.ts`
+  E.g.
+  `--reload=https://deno.land/std/fs/utils.ts,https://deno.land/std/fmt/colors.ts`
 
 - `--lock [<FILE>]`
 
-  Check the specified lock file. If value is not provided, defaults to "deno.lock" in the current working directory.
+  Check the specified lock file. If value is not provided, defaults to
+  "deno.lock" in the current working directory.
 
 - `--lock-write`
 
@@ -106,8 +118,9 @@ This command has implicit access to all permissions (--allow-all).
   Disable auto discovery of the lock file
 
 - `--cert <FILE>`
-  
-  Load the certificate from a [PEM encoded file](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)
+
+  Load the certificate from a
+  [PEM encoded file](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)
 
 - `--inspect[=<HOST_AND_PORT>]`
 
@@ -115,11 +128,13 @@ This command has implicit access to all permissions (--allow-all).
 
 - `--inspect-brk[=<HOST_AND_PORT>]`
 
-  Activate inspector on host:port, wait for debugger to connect and break at the start of user script
+  Activate inspector on host:port, wait for debugger to connect and break at the
+  start of user script
 
 - `--inspect-wait[=<HOST_AND_PORT>]`
 
-  Activate inspector on host:port and wait for debugger to connect before running user code
+  Activate inspector on host:port and wait for debugger to connect before
+  running user code
 
 - `--cached-only`
 
@@ -131,8 +146,8 @@ This command has implicit access to all permissions (--allow-all).
 
 - `--v8-flags[=<v8-flags>...]`
 
-  To see a list of all available flags use --v8-flags=--help.
-  Any flags set with this flag are appended after the DENO_V8_FLAGS environmental variable
+  To see a list of all available flags use --v8-flags=--help. Any flags set with
+  this flag are appended after the DENO_V8_FLAGS environmental variable
 
 - `--seed <NUMBER>`
 
@@ -140,7 +155,9 @@ This command has implicit access to all permissions (--allow-all).
 
 - `--check[=<CHECK_TYPE>]`
 
-  Enable type-checking. This subcommand does not type-check by default. If the value of '--check=all' is supplied, diagnostic errors from remote modules will be included.
+  Enable type-checking. This subcommand does not type-check by default. If the
+  value of '--check=all' is supplied, diagnostic errors from remote modules will
+  be included.
 
   Alternatively, the 'deno check' subcommand can be used.
 
@@ -156,7 +173,9 @@ This command has implicit access to all permissions (--allow-all).
 
 - `--env[=<FILE>]`
 
-  UNSTABLE: Load environment variables from local file. Only the first environment variable with a given key is used. Existing process environment variables are not overwritten.
+  UNSTABLE: Load environment variables from local file. Only the first
+  environment variable with a given key is used. Existing process environment
+  variables are not overwritten.
 
 - `-h, --help`
 

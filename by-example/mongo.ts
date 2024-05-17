@@ -5,7 +5,7 @@
  * @run --allow-net --allow-sys --allow-read <url>
  * @resource {https://deno.land/x/mongo} Deno MongoDB on deno.land/x
  * @group Databases
- * 
+ *
  * Using the Deno MongoDB client, you can connect to a Mongo database
  * running anywhere.
  */

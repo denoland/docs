@@ -184,7 +184,7 @@ const sidebars = {
           type: "doc",
           label: "deno lint",
           id: "manual/tools/linter",
-        }, 
+        },
         {
           type: "doc",
           label: "deno publish",

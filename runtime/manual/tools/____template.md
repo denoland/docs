@@ -1,6 +1,6 @@
 # deno foo
 
-*This applies to `deno` v.1.17.0. and above.* **Unstable preview feature**
+_This applies to `deno` v.1.17.0. and above._ **Unstable preview feature**
 
 Do a fooer on a bar.
 
@@ -38,11 +38,11 @@ This is a description of the required arguments
 
 - `-h, --help`
 
-    Prints help information
+  Prints help information
 
 - `-s, --something`
 
-    Does a something
+  Does a something
 
 ## Examples
 

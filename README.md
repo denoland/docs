@@ -198,8 +198,8 @@ authored.
 
 ## Examples
 
-[Deno by Example](https://docs.deno.com/examples) is a collection of small snippets showcasing various functions of the APIs implemented in Deno.
-
+[Deno by Example](https://docs.deno.com/examples) is a collection of small
+snippets showcasing various functions of the APIs implemented in Deno.
 
 - Examples are written in TypeScript
 - Each example should be a single file, no more than 50 lines
@@ -217,10 +217,11 @@ authored.
 
 ### Adding an example
 
-To add an example, create a file in the `by-example` directory. The file name should
-be a short description of the example (in kebab case) and the contents should be the code for the example.
-The file should be in the `.ts` format. The file should start with a JSDoc style
-multi line comment that describes the example:
+To add an example, create a file in the `by-example` directory. The file name
+should be a short description of the example (in kebab case) and the contents
+should be the code for the example. The file should be in the `.ts` format. The
+file should start with a JSDoc style multi line comment that describes the
+example:
 
 ```ts
 /**

@@ -46,7 +46,8 @@ testing_:
 deno run -A server.ts
 ```
 
-If your project requires multiple security flags you should consider using a [`deno task`](./task_runner) to execute them.
+If your project requires multiple security flags you should consider using a
+[`deno task`](./task_runner) to execute them.
 
 ## Watch
 
