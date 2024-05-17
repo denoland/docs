@@ -41,6 +41,8 @@ export default function Index({ examplesList }) {
     if (!group) {
       return null;
     }
+    
+    group.sort((a, b) => a.sortOrder - b.sortOrder);
 
     return (
       <section

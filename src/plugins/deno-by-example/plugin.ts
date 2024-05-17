@@ -33,7 +33,8 @@ export default async function denoByExamplePlugin(context: LoadContext, options)
             title: example.parsed.title,
             tags: example.parsed.tags,
             difficulty: example.parsed.difficulty,
-            group: example.parsed.group
+            group: example.parsed.group,
+            sortOrder: example.parsed.sortOrder
         };
     });
 

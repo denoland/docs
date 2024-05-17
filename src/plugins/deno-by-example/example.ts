@@ -211,5 +211,6 @@ export function parseExample(id: string, file: string): Example {
         playground: kvs.playground,
         files,
         group: kvs.group || "Misc",
+        sortOrder: kvs.sortOrder || 999999
     };
 }
