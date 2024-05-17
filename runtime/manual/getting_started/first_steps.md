@@ -58,7 +58,10 @@ const site = await fetch("https://www.deno.com");
 console.log(await site.text());
 ```
 
-Because this example is fetching data from across the internet, you will need to allow network permissions. You can give network permissions with the `--allow-net` flag or by using `-A` to allow all permissions. We'll look at permissions and security in more depth later on. Run the example with:
+Because this example is fetching data from across the internet, you will need to
+allow network permissions. You can give network permissions with the
+`--allow-net` flag or by using `-A` to allow all permissions. We'll look at
+permissions and security in more depth later on. Run the example with:
 
 ```console
 deno run -A hello.ts

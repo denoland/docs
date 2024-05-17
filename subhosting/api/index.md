@@ -123,7 +123,6 @@ To use KV with Subhosting:
 
 > NB. Deno Cron and Queues do not currently work for Subhosting.
 
-
 ## OpenAPI specification and tooling
 
 The [OpenAPI specification](https://www.openapis.org/) for the Deploy API can be

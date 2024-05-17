@@ -179,7 +179,7 @@ const config = {
             {
               label: "Deno Deploy",
               to: "/deploy/manual",
-            },            
+            },
             {
               label: "Deno Subhosting",
               to: "/subhosting/manual",

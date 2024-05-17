@@ -50,7 +50,7 @@ When type checking `coolLib` and your usage of it in the file, the
 `coolLib.d.ts` types will be used instead of looking at the JavaScript file.
 
 The pattern matching for the compiler hint is somewhat forgiving and will accept
-quoted and non-question values for the specifier as well as accepting whitespace 
+quoted and non-question values for the specifier as well as accepting whitespace
 before and after the equals sign.
 
 ## Providing types when hosting
@@ -234,12 +234,12 @@ file, its resolution follow the normal import rules of Deno. For a lot of the
 compatible with Deno.
 
 [esm.sh](https://esm.sh) is a CDN which provides type declarations by default
-  (via the `X-TypeScript-Types` header). It can be disabled by appending
-  `?no-dts` to the import URL:
+(via the `X-TypeScript-Types` header). It can be disabled by appending `?no-dts`
+to the import URL:
 
-  ```ts
-  import React from "https://esm.sh/react?no-dts";
-  ```
+```ts
+import React from "https://esm.sh/react?no-dts";
+```
 
 ## Behavior of JavaScript when type checking
 

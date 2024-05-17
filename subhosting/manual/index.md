@@ -59,8 +59,8 @@ The steps to implement subhosting are roughly as follows:
    first deployment for that project
 
 Using these techniques, you can package up user code as "deployments", and
-execute that code on a Deno-provisioned URL or a [custom URL](../api/#custom-domains) you can configure
-yourself.
+execute that code on a Deno-provisioned URL or a
+[custom URL](../api/#custom-domains) you can configure yourself.
 
 ## REST API reference and OpenAPI spec
 

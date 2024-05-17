@@ -25,33 +25,39 @@ Type-check without execution.
 deno check https://deno.land/std/http/file_server.ts
 ```
 
-Unless `--reload` is specified, this command will not re-download already cached dependencies.
+Unless `--reload` is specified, this command will not re-download already cached
+dependencies.
 
 ## Cache Location
 
-Modules cached are stored in `$DENO_DIR`, a centralized directory.
-Its location varies by OS. For instance, on macOS, it's typically `/Users/user/Library/Caches/deno`.
+Modules cached are stored in `$DENO_DIR`, a centralized directory. Its location
+varies by OS. For instance, on macOS, it's typically
+`/Users/user/Library/Caches/deno`.
 
 You can see the cache location by running `deno info` with no arguments.
 
 ## Cache Invalidation
 
-Future runs of this module will trigger no downloads or compilation unless the `--reload` option is specified.
+Future runs of this module will trigger no downloads or compilation unless the
+`--reload` option is specified.
 
 ## Arguments
 
 `FILE` - The module entrypoint.
 
-The module entrypoint can be a local file or a remote URL. Dependencies are detected from it's imports.
+The module entrypoint can be a local file or a remote URL. Dependencies are
+detected from it's imports.
 
 ## Options
 
 - `--import-map <FILE>`
 
-  Load import map file from local file or remote URL.
-  Docs: [https://docs.deno.com/runtime/manual/basics/import_maps](https://docs.deno.com/runtime/manual/basics/import_maps)
-  Specification: [https://wicg.github.io/import-maps/](https://wicg.github.io/import-maps/)
-  Examples: [https://github.com/WICG/import-maps#the-import-map](https://github.com/WICG/import-maps#the-import-map)
+  Load import map file from local file or remote URL. Docs:
+  [https://docs.deno.com/runtime/manual/basics/import_maps](https://docs.deno.com/runtime/manual/basics/import_maps)
+  Specification:
+  [https://wicg.github.io/import-maps/](https://wicg.github.io/import-maps/)
+  Examples:
+  [https://github.com/WICG/import-maps#the-import-map](https://github.com/WICG/import-maps#the-import-map)
 
 - `--no-remote`
 
@@ -73,13 +79,18 @@ The module entrypoint can be a local file or a remote URL. Dependencies are dete
 
 - `--vendor[=<vendor>]`
 
-  UNSTABLE: Enables or disables the use of a local vendor folder for remote modules and node_modules folder for npm packages
+  UNSTABLE: Enables or disables the use of a local vendor folder for remote
+  modules and node_modules folder for npm packages
 
   [possible values: true, false]
 
 - `-c, --config <FILE>`
 
-  The configuration file can be used to configure different aspects of deno including TypeScript, linting, and code formatting. Typically the configuration file will be called `deno.json` or `deno.jsonc` and automatically detected; in that case this flag is not necessary. See [https://deno.land/manual@v1.41.3/getting_started/configuration_file](https://deno.land/manual@v1.41.3/getting_started/configuration_file)
+  The configuration file can be used to configure different aspects of deno
+  including TypeScript, linting, and code formatting. Typically the
+  configuration file will be called `deno.json` or `deno.jsonc` and
+  automatically detected; in that case this flag is not necessary. See
+  [https://deno.land/manual@v1.41.3/getting_started/configuration_file](https://deno.land/manual@v1.41.3/getting_started/configuration_file)
 
 - `--no-config`
 
@@ -89,11 +100,14 @@ The module entrypoint can be a local file or a remote URL. Dependencies are dete
 
   Reload source code cache (recompile TypeScript).
 
-  The `CACHE_BLOCKLIST` is a comma separated list of arguments passed to the --reload option. E.g. `--reload=https://deno.land/std/fs/utils.ts,https://deno.land/std/fmt/colors.ts`
+  The `CACHE_BLOCKLIST` is a comma separated list of arguments passed to the
+  --reload option. E.g.
+  `--reload=https://deno.land/std/fs/utils.ts,https://deno.land/std/fmt/colors.ts`
 
 - `--lock [<FILE>]`
 
-  Check the specified lock file. If value is not provided, defaults to "deno.lock" in the current working directory.
+  Check the specified lock file. If value is not provided, defaults to
+  "deno.lock" in the current working directory.
 
 - `--lock-write`
 
@@ -104,13 +118,14 @@ The module entrypoint can be a local file or a remote URL. Dependencies are dete
   Disable auto discovery of the lock file
 
 - `--cert <FILE>`
-  
-  Load the certificate from a [PEM encoded file](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)
 
-- `--all`
-  Type-check all code, including remote modules and npm packages
+  Load the certificate from a
+  [PEM encoded file](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)
 
-  If the value of '--check=all' is supplied, diagnostic errors from remote modules will be included.
+- `--all` Type-check all code, including remote modules and npm packages
+
+  If the value of '--check=all' is supplied, diagnostic errors from remote
+  modules will be included.
 
 - `-h, --help`
 

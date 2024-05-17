@@ -6,7 +6,7 @@
  * @resource {/import-export} Example: Importing & Exporting
  * @resource {https://datatracker.ietf.org/doc/html/rfc4180} Spec: CSV
  * @group Encoding
- * 
+ *
  * CSV is a data serialization format that is designed to be portable for table-like applications.
  */
 import { parse, stringify } from "jsr:@std/csv";
