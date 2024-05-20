@@ -4,7 +4,7 @@
  * @tags cli
  * @run deno bench <url>
  * @resource {https://docs.deno.com/runtime/manual/tools/benchmarker} Manual: Benchmarker tool
- * @resource {/http-requests} Example: HTTP Requests
+ * @resource {/examples/http-requests} Example: HTTP Requests
  * @group System
  *
  * When writing libraries, a very common task that needs to be done is
