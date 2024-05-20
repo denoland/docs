@@ -4,7 +4,7 @@
  * @tags cli
  * @run --allow-net --unstable <url>
  * @resource {https://deno.land/api?s=Deno.listenDatagram} Doc: Deno.listenDatagram
- * @resource {/udp-connector.ts} Example: UDP Connector
+ * @resource {/examples/udp-connector.ts} Example: UDP Connector
  * @group Network
  *
  * An example of a UDP listener on localhost that will log the message

@@ -2,7 +2,7 @@
  * @title Dependency Management
  * @difficulty beginner
  * @tags cli, deploy
- * @resource {/import-export} Example: Importing & Exporting
+ * @resource {/examples/import-export} Example: Importing & Exporting
  * @run <url>
  * @group Basics
  *
