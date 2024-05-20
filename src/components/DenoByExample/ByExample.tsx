@@ -31,6 +31,11 @@ export default function ByExample({ example, examplesList }) {
       origin: "https://github.com/denoland/deno-docs/blob/main/by-example/",
       pathname: id,
     },
+    rawUrl: {
+      origin:
+        "https://raw.githubusercontent.com/denoland/deno-docs/main/by-example/",
+      pathname: id,
+    },
     data: [
       parsed,
       content,
@@ -89,6 +94,9 @@ function ExamplePage(props: PageProps<Data>) {
   }
   const [example, content] = props.data;
   const url = `${props.url.origin}${props.url.pathname}${
+    example.files.length > 1 ? "/main" : ""
+  }`;
+  const rawUrl = `${props.rawUrl.origin}${props.rawUrl.pathname}${
     example.files.length > 1 ? "/main" : ""
   }`;
 
@@ -166,7 +174,7 @@ function ExamplePage(props: PageProps<Data>) {
               <CodeBlock language="ts">
                 {example.run.startsWith("deno")
                   ? example.run.replace("<url>", url)
-                  : "deno run " + example.run.replace("<url>", url)}
+                  : "deno run " + example.run.replace("<url>", rawUrl)}
               </CodeBlock>
             </>
           )}
