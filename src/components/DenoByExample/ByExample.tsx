@@ -32,7 +32,8 @@ export default function ByExample({ example, examplesList }) {
       pathname: id,
     },
     rawUrl: {
-      origin: "https://raw.githubusercontent.com/denoland/deno-docs/main/by-example/",
+      origin:
+        "https://raw.githubusercontent.com/denoland/deno-docs/main/by-example/",
       pathname: id,
     },
     data: [
