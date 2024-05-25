@@ -3,7 +3,8 @@
 Deno supports a configuration file that allows you to customize the built-in
 TypeScript compiler, formatter, and linter.
 
-The configuration file supports `.json` and `.jsonc` extensions.
+The configuration file supports `.json` and
+[`.jsonc`](https://code.visualstudio.com/docs/languages/json#_json-with-comments) extensions.
 [Since v1.18](https://deno.com/blog/v1.18#auto-discovery-of-the-config-file),
 Deno will automatically detect a `deno.json` or `deno.jsonc` configuration file
 if it's in your current working directory or parent directories. The `--config`
