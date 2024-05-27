@@ -26,8 +26,8 @@ For a complete list of supported rules, visit
 
 ### Files
 
-To ignore the whole file, a `// deno-lint-ignore-file` directive should placed at the
-top of the file:
+To ignore the whole file, a `// deno-lint-ignore-file` directive should placed
+at the top of the file:
 
 ```ts
 // deno-lint-ignore-file
@@ -77,8 +77,9 @@ function foo(): any {
 
 ### Diagnostics
 
-To ignore certain diagnostics, the `// deno-lint-ignore <rules...>` directive should
-be placed before the targeted line. Specifying the ignored rule name is required:
+To ignore certain diagnostics, the `// deno-lint-ignore <rules...>` directive
+should be placed before the targeted line. Specifying the ignored rule name is
+required:
 
 ```ts
 // deno-lint-ignore no-explicit-any
@@ -104,15 +105,15 @@ function foo(): any {
 ## Configuration
 
 Starting with Deno v1.14, the linter can be customized using either
-[a configuration file](../getting_started/configuration_file.md) or the following
-CLI flags:
+[a configuration file](../getting_started/configuration_file.md) or the
+following CLI flags:
 
 - `--rules-tags` - List of rule names that will be run. Empty list disables all
   rules and will only use rules from `rules-include`. Defaults to "recommended".
 
 - `--rules-exclude` - List of rule names that will be excluded from configured
-  rule sets. Even if the same rule is in `include`, it will be excluded; in other
-  words, `--rules-exclude` has higher precedence over `--rules-include`.
+  rule sets. Even if the same rule is in `include`, it will be excluded; in
+  other words, `--rules-exclude` has higher precedence over `--rules-include`.
 
 - `--rules-include` - List of rule names that will be run. If the same rule is
   in `rules-exclude`, it will be excluded.
