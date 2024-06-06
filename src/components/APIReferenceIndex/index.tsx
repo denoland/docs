@@ -24,7 +24,7 @@ const APIReferenceIndex: React.FC<APIReferenceIndexProps> = ({ apiLinks }) => {
           <ul>
             {apiLinks.map((link) => {
               return (
-                <li key={link.id}>
+                <li className="list-none" key={link.id}>
                   <a
                     href={link.url}
                     className="text-inherit underline decoration-gray-300 dark:decoration-gray-600"
@@ -32,7 +32,7 @@ const APIReferenceIndex: React.FC<APIReferenceIndexProps> = ({ apiLinks }) => {
                   >
                     {link.title}
                   </a>
-                  <p className="text-gray-500 dark:text-gray-400">
+                  <p className="text-gray-500 dark:text-gray-0">
                     {link.description}
                   </p>
                 </li>
