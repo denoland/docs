@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import { useLocation } from "@docusaurus/router";
+import React from "react";
 import clsx from "clsx";
 import Head from "@docusaurus/Head";
 import ErrorBoundary from "@docusaurus/ErrorBoundary";
@@ -19,7 +18,6 @@ import styles from "./styles.module.css";
 export default function Layout(props) {
   const {
     children,
-    noFooter,
     wrapperClassName,
     // Not really layout-related, but kept for convenience/retro-compatibility
     title,

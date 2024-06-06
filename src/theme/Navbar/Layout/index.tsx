@@ -56,7 +56,7 @@ export default function NavbarLayout({ children }: Props): JSX.Element {
       <div className="navbar__primary">
         {children}
       </div>
-      {location.pathname === "/api" && (
+      {location.pathname.includes("/api") && (
         <div className="navbar__secondary">
           <SecondaryNavbar />
         </div>
