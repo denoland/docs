@@ -336,6 +336,14 @@ td p:last-child {
   padding: 0 2px;
 }
 
+.navbar__secondary a {
+  display: inline-block;
+}
+
+.navbar__secondary a:first-child {
+  margin-left: 0;
+}
+
 .navbar__link {
   margin-left: 10px;
   margin-right: 10px;
