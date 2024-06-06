@@ -146,9 +146,10 @@ const config = {
           activeBaseRegex: `^/examples`,
         },
         {
-          href: "https://deno.land/api?unstable=true",
+          to: "/api",
           label: "API Reference",
-          position: "right",
+          position: "left",
+          id: "toggleSecondaryNav",
         },
         {
           href: "https://www.deno.com",
