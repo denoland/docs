@@ -229,6 +229,14 @@ async function handler(_req) {
 Deno.serve(handler);
 ```
 
+> Note: when you iterate over a file stream as shown below, the file descriptor will be automatically closed at the end of iteration. So, there is no need to manually close the file descriptor.
+>
+> See: <https://github.com/denoland/deno/issues/23481>
+
+```ts
+const iterator = fd.readable[Symbol.asyncIterator]();
+```
+
 ## Deno.File
 
 `Deno.File` is a file handle returned from [`Deno.open()`](#denoopen). It can be
