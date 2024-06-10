@@ -36,7 +36,7 @@ const APIReferenceIndex: React.FC<APIReferenceIndexProps> = ({ apiLinks }) => {
                 <li className="list-none flex flex-col gap-1" key={link.id}>
                   <a
                     href={link.url}
-                    className="text-inherit text-lg underline underline-offset-4 decoration-gray-300 dark:decoration-gray-600"
+                    className="text-lg link underline underline-offset-4 text-[--ifm-color-primary] decoration-[--deploy-medium] dark:decoration-[--runtime-dark]"
                     title={link.description}
                   >
                     {link.title}

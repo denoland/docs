@@ -32,6 +32,7 @@ html:root {
   --subhosting: #ff8a01;
   --subhosting-dark: #251c11;
 
+  --gray-000: #e3e5e9;
   --gray-00: #cfd1d6;
   --gray-0: #9ea0a5;
   --gray-1: #868789;
@@ -156,7 +157,7 @@ html[data-theme="dark"] .secondary-navbar {
 /* Multiple selectors to override defaults in light mode */
 
 html[data-theme="light"] .secondary-navbar {
-  border-top: 1px solid var(--gray-00);
+  border-top: 1px solid var(--gray-000);
 }
 
 html[data-theme="light"] kbd.DocSearch-Button-Key,
@@ -234,6 +235,9 @@ code {
 
 .markdown a {
   text-decoration: underline;
+  text-decoration-color: var(--ifm-color-primary);
+  text-underline-offset: 0.25rem;
+  text-decoration-thickness: 0.05rem;
 }
 
 td p:last-child {
