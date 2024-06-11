@@ -89,7 +89,7 @@ choco install deno
 Using [Winget](https://github.com/microsoft/winget-cli):
 
 ```shell
-winget install deno
+winget install DenoLand.Deno
 ```
 
 Using [vfox](https://vfox.lhan.me/):
@@ -185,7 +185,7 @@ deno upgrade
 Or using [Winget](https://github.com/microsoft/winget-cli) (Windows):
 
 ```shell
-winget upgrade deno
+winget upgrade DenoLand.Deno
 ```
 
 This will fetch the latest release from
