@@ -19,7 +19,7 @@ const APIReferenceIndex: React.FC<APIReferenceIndexProps> = ({ apiLinks }) => {
       title={"Deno: the easiest, most secure JavaScript runtime"}
       description="Reference documentation for the Deno runtime and Deno Deploy"
     >
-      <div className="w-full mt-8 h-screen max-w-screen-xl mx-auto">
+      <div className="w-full my-8 h-screen max-w-screen-xl px-8">
         <div className="max-w-prose flex flex-col gap-8 mt-32">
           <header>
             <h1 className="text-3xl mb-2">Deno API Reference</h1>
