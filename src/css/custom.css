@@ -351,8 +351,11 @@ td p:last-child {
 .navbar__link {
   margin-left: 10px;
   margin-right: 10px;
-  margin-top: 4px;
   border-bottom: 2px solid transparent;
+}
+
+.navbar__item {
+  margin-top: 4px;
 }
 
 .navbar__link--active {
@@ -376,6 +379,12 @@ td p:last-child {
 
 .secondary-navbar {
   background-color: var(--white);
+}
+
+.dropdown > .navbar__link:after {
+  border-width: 0.3em 0.3em 0;
+  margin-left: 0.5em;
+  top: 0;
 }
 
 /* Mobile Nav Customize */
