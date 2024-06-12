@@ -1,33 +1,31 @@
 import React from "react";
 import NavbarNavLink from "@theme/NavbarItem/NavbarNavLink";
 
+const NavLink = ({ to, label }) => (
+  <li className="list-none">
+    <NavbarNavLink
+      activeClassName="navbar__link--active"
+      className="navbar__item navbar__link"
+      to={to}
+      position="left"
+      label={label}
+    />
+  </li>
+);
+
 function SecondaryNavbar() {
+  const links = [
+    { to: "/api/deno", label: "Deno" },
+    { to: "/api/web", label: "Web" },
+    { to: "/api/node", label: "Node" },
+  ];
+
   return (
-    <div className="secondary-navbar w-full">
-      <div className="secondary-navbar-content">
-        <NavbarNavLink
-          activeClassName="navbar__link--active"
-          className="navbar__item navbar__link"
-          to="/api/deno"
-          position="left"
-          label="Deno"
-        />
-        <NavbarNavLink
-          activeClassName="navbar__link--active"
-          className="navbar__item navbar__link"
-          to="/api/web"
-          position="left"
-          label="Web"
-        />
-        <NavbarNavLink
-          activeClassName="navbar__link--active"
-          className="navbar__item navbar__link"
-          to="/api/node"
-          position="left"
-          label="Node"
-        />
-      </div>
-    </div>
+    <nav className="secondary-navbar w-full">
+      <ul className="secondary-navbar-content flex">
+        {links.map((link) => <NavLink key={link.to} {...link} />)}
+      </ul>
+    </nav>
   );
 }
 

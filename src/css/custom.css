@@ -261,6 +261,7 @@ td p:last-child {
 .secondary-navbar-content {
   padding: var(--ifm-navbar-padding-vertical)
     var(--ifm-navbar-padding-horizontal);
+  margin: 0;
 }
 
 .table-of-contents a {
@@ -340,12 +341,15 @@ td p:last-child {
   padding: 0 2px;
 }
 
-.navbar__secondary a {
-  display: inline-block;
+@media (max-width: 996px) {
+  .secondary-navbar .navbar__item {
+    display: block;
+  }
 }
 
-.navbar__secondary a:first-child {
+.secondary-navbar-content a:first-child {
   margin-left: 0;
+  margin-right: 1rem;
 }
 
 .navbar__link {
