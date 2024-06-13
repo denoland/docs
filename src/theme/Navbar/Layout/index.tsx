@@ -9,7 +9,6 @@ import { translate } from "@docusaurus/Translate";
 import NavbarMobileSidebar from "@theme/Navbar/MobileSidebar";
 import type { Props } from "@theme/Navbar/Layout";
 import { useLocation } from "@docusaurus/router"; // Import useLocation
-import SecondaryNavbar from "../../../components/SecondaryNavbar"; // Import SecondaryNavbar
 
 import styles from "./styles.module.css";
 
@@ -56,7 +55,6 @@ export default function NavbarLayout({ children }: Props): JSX.Element {
       <div className="navbar__primary">
         {children}
       </div>
-      {location.pathname.includes("/api") && <SecondaryNavbar />}
       <NavbarBackdrop onClick={mobileSidebar.toggle} />
       <NavbarMobileSidebar />
     </nav>
