@@ -62,7 +62,7 @@ html:root {
   --ifm-alert-padding-horizontal: 2rem;
   --ifm-color-info-dark: var(--deploy-medium);
   --ifm-color-info-contrast-background: var(--deploy-lightest);
-  --ifm-color-emphasis-300: var(--gray-00);
+  --ifm-color-emphasis-300: var(--gray-000);
   --ifm-menu-color-background-hover: var(--deploy-lightest);
   --ifm-code-font-size: 0.875em;
   --ifm-code-padding-horizontal: 0.375em;
@@ -70,7 +70,7 @@ html:root {
   --ifm-code-background: #f6f8fa; /* Matches Prism highlighting */
   --ifm-code-color: #393a34;
   --ifm-toc-padding-vertical: 0.5rem;
-  --ifm-toc-border-color: var(--gray-00);
+  --ifm-toc-border-color: var(--gray-000);
   --ifm-color-content-secondary: var(--gray-2);
   --ifm-menu-color: var(--gray-2);
   --ifm-navbar-search-input-background-color: var(--white);
@@ -122,7 +122,7 @@ html[data-theme="dark"][data-theme="dark"] {
   --ifm-color-info-contrast-background: var(--deploy-dark);
   --ifm-color-content-secondary: var(--gray-0);
   --ifm-menu-color-background-active: var(--runtime-dark);
-  --ifm-code-background: #282a36;
+  --ifm-code-background: var(--gray-4);
   --ifm-menu-color: var(--gray-00);
   --ifm-navbar-shadow-dark: 0 1px 2px 0 rgba(255, 255, 255, 0.1);
   --docsearch-footer-background: var(--runtime-dark);
@@ -150,24 +150,30 @@ html[data-theme="dark"] .navbar {
   box-shadow: var(--ifm-navbar-shadow-dark);
 }
 
-html[data-theme="dark"] .secondary-navbar {
+html[data-theme="dark"]
+  .codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  border-bottom: 1px solid var(--offblack);
+  font-weight: var(--ifm-font-weight-bold);
+  font-size: 1rem;
   background-color: var(--gray-4);
+}
+html[data-theme="dark"]
+  .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  background-color: var(--gray-4);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 /* Multiple selectors to override defaults in light mode */
 
-html[data-theme="light"] .secondary-navbar {
-  border-top: 1px solid var(--gray-000);
-}
-
 html[data-theme="light"] kbd.DocSearch-Button-Key,
 html[data-theme="light"] kbd.DocSearch-Commands-Key {
   box-shadow: none;
-  color: var(--gray-3);
+  color: var(--gray-0);
 }
 
 html[data-theme="light"] .DocSearch-Button {
-  border: 1px solid var(--gray-4);
+  border: 1px solid var(--gray-00);
   background-color: var(--white);
   padding: 0 1rem;
 }
@@ -258,12 +264,6 @@ td p:last-child {
     var(--ifm-navbar-padding-horizontal);
 }
 
-.secondary-navbar-content {
-  padding: var(--ifm-navbar-padding-vertical)
-    var(--ifm-navbar-padding-horizontal);
-  margin: 0;
-}
-
 .table-of-contents a {
   line-height: 1.5;
 }
@@ -303,7 +303,7 @@ td p:last-child {
   color: var(--ifm-navbar-link-color);
   font-size: 0.75rem;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--gray-00);
+  border-bottom: 1px solid var(--gray-000);
   margin: 1rem var(--ifm-menu-link-padding-horizontal);
   padding: 0.5rem 0 0.1rem 0;
 }
@@ -321,7 +321,7 @@ td p:last-child {
 .subsection-header {
   padding: 2px 0;
   margin: 5px var(--ifm-menu-link-padding-horizontal);
-  border-bottom: 1px solid var(--gray-00);
+  border-bottom: 1px solid var(--gray-000);
   font-size: 0.8rem;
 }
 
@@ -339,17 +339,6 @@ td p:last-child {
 
 .navbar__item {
   padding: 0 2px;
-}
-
-@media (max-width: 996px) {
-  .secondary-navbar .navbar__item {
-    display: block;
-  }
-}
-
-.secondary-navbar-content a:first-child {
-  margin-left: 0;
-  margin-right: 1rem;
 }
 
 .navbar__link {
@@ -379,10 +368,6 @@ td p:last-child {
 
 .navbar__title {
   font-size: 1.3rem;
-}
-
-.secondary-navbar {
-  background-color: var(--white);
 }
 
 .dropdown > .navbar__link:after {
@@ -611,4 +596,8 @@ kbd.DocSearch-Commands-Key {
 .tabs__item--active {
   border-bottom-color: var(--ifm-tabs-color-active-border);
   color: var(--ifm-tabs-color-active);
+}
+
+.codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  background-color: var(--ifm-code-background);
 }
