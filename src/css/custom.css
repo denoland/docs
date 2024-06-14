@@ -150,15 +150,12 @@ html[data-theme="dark"] .navbar {
   box-shadow: var(--ifm-navbar-shadow-dark);
 }
 
-html[data-theme="dark"]
-  .codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+html[data-theme="dark"] [class^="codeBlockTitle"] {
+  --ifm-code-background: var(--gray-4);
   border-bottom: 1px solid var(--offblack);
   font-weight: var(--ifm-font-weight-bold);
-  font-size: 1rem;
-  background-color: var(--gray-4);
 }
-html[data-theme="dark"]
-  .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+html[data-theme="dark"] [class^="codeBlockContent"] code {
   background-color: var(--gray-4);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
