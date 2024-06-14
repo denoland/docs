@@ -32,6 +32,7 @@ html:root {
   --subhosting: #ff8a01;
   --subhosting-dark: #251c11;
 
+  --gray-000: #e3e5e9;
   --gray-00: #cfd1d6;
   --gray-0: #9ea0a5;
   --gray-1: #868789;
@@ -61,15 +62,19 @@ html:root {
   --ifm-alert-padding-horizontal: 2rem;
   --ifm-color-info-dark: var(--deploy-medium);
   --ifm-color-info-contrast-background: var(--deploy-lightest);
+  --ifm-color-emphasis-300: var(--gray-000);
   --ifm-menu-color-background-hover: var(--deploy-lightest);
   --ifm-code-font-size: 0.875em;
   --ifm-code-padding-horizontal: 0.375em;
   --ifm-code-padding-vertical: 0.1875em;
   --ifm-code-background: #f6f8fa; /* Matches Prism highlighting */
   --ifm-code-color: #393a34;
-  --ifm-menu-color: var(--gray-3);
+  --ifm-toc-padding-vertical: 0.5rem;
+  --ifm-toc-border-color: var(--gray-000);
+  --ifm-color-content-secondary: var(--gray-2);
+  --ifm-menu-color: var(--gray-2);
   --ifm-navbar-search-input-background-color: var(--white);
-  --ifm-tabs-padding-vertical: 0.5rem;
+  --ifm-tabs-padding-vertical: 0.25rem;
   --ifm-list-item-margin: 0.5em;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --docsearch-muted-color: var(--gray-2);
@@ -93,7 +98,7 @@ html:root {
   }
 
   .pagination-nav__link {
-    padding: 2rem 1rem;
+    padding: 1rem 1.5rem;
   }
 }
 
@@ -107,14 +112,19 @@ html[data-theme="dark"][data-theme="dark"] {
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 
   --ifm-background-color: var(--black);
-  --ifm-background-surface-color: var(--gray-4);
+  --ifm-background-surface-color: var(--black);
+  --ifm-toc-border-color: var(--gray-3);
+  --ifm-color-emphasis-300: var(--gray-3);
+  --ifm-menu-color: var(--gray-3);
   --ifm-link-color: var(--runtime);
   --ifm-link-hover-color: var(--runtime);
   --ifm-color-info-dark: var(--deploy-medium);
   --ifm-color-info-contrast-background: var(--deploy-dark);
+  --ifm-color-content-secondary: var(--gray-0);
   --ifm-menu-color-background-active: var(--runtime-dark);
-  --ifm-code-background: #282a36;
+  --ifm-code-background: var(--gray-4);
   --ifm-menu-color: var(--gray-00);
+  --ifm-navbar-shadow-dark: 0 1px 2px 0 rgba(255, 255, 255, 0.1);
   --docsearch-footer-background: var(--runtime-dark);
   --docsearch-muted-color: var(--gray-0);
 }
@@ -122,22 +132,48 @@ html[data-theme="dark"][data-theme="dark"] {
 html[data-theme="dark"] kbd.DocSearch-Button-Key,
 html[data-theme="dark"] kbd.DocSearch-Commands-Key {
   box-shadow: none;
-  color: var(--gray-0);
+  color: var(--gray-2);
 }
 
 html[data-theme="dark"] .DocSearch-Button {
-  border: 1px solid var(--gray-1);
+  border: 1px solid var(--gray-3);
   padding: 0 1rem;
 }
+
+html[data-theme="dark"] .section-header,
+.subsection-header,
+.product-header {
+  border-bottom: 1px solid var(--gray-3);
+}
+
+html[data-theme="dark"] .navbar {
+  box-shadow: var(--ifm-navbar-shadow-dark);
+}
+
+html[data-theme="dark"]
+  .codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  border-bottom: 1px solid var(--offblack);
+  font-weight: var(--ifm-font-weight-bold);
+  font-size: 1rem;
+  background-color: var(--gray-4);
+}
+html[data-theme="dark"]
+  .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  background-color: var(--gray-4);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Multiple selectors to override defaults in light mode */
 
 html[data-theme="light"] kbd.DocSearch-Button-Key,
 html[data-theme="light"] kbd.DocSearch-Commands-Key {
   box-shadow: none;
-  color: var(--gray-3);
+  color: var(--gray-0);
 }
 
 html[data-theme="light"] .DocSearch-Button {
-  border: 1px solid var(--gray-4);
+  border: 1px solid var(--gray-00);
   background-color: var(--white);
   padding: 0 1rem;
 }
@@ -163,7 +199,7 @@ article {
 
 h1,
 .markdown h1:first-child {
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-size: clamp(1.75rem, 4.5vw, 2.25rem);
   margin-bottom: 1.25rem;
 }
 
@@ -173,17 +209,17 @@ h1,
 
 h2 {
   --ifm-h2-vertical-rhythm-top: 2;
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(1.25rem, 3.5vw, 1.75rem);
 }
 
 h3 {
   --ifm-h3-vertical-rhythm-top: 1.75;
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-size: clamp(1rem, 3vw, 1.25rem);
 }
 
 h4 {
   --ifm-h4-vertical-rhythm-top: 1.5;
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
 }
 
 :where(h1, h2, h3) {
@@ -205,6 +241,9 @@ code {
 
 .markdown a {
   text-decoration: underline;
+  text-decoration-color: var(--ifm-color-primary);
+  text-underline-offset: 0.25rem;
+  text-decoration-thickness: 0.05rem;
 }
 
 td p:last-child {
@@ -214,6 +253,15 @@ td p:last-child {
 .navbar {
   position: fixed;
   width: 100%;
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  padding: 0;
+}
+
+.navbar__inner {
+  padding: var(--ifm-navbar-padding-vertical)
+    var(--ifm-navbar-padding-horizontal);
 }
 
 .table-of-contents a {
@@ -255,7 +303,7 @@ td p:last-child {
   color: var(--ifm-navbar-link-color);
   font-size: 0.75rem;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--gray-1);
+  border-bottom: 1px solid var(--gray-000);
   margin: 1rem var(--ifm-menu-link-padding-horizontal);
   padding: 0.5rem 0 0.1rem 0;
 }
@@ -273,7 +321,7 @@ td p:last-child {
 .subsection-header {
   padding: 2px 0;
   margin: 5px var(--ifm-menu-link-padding-horizontal);
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid var(--gray-000);
   font-size: 0.8rem;
 }
 
@@ -296,11 +344,15 @@ td p:last-child {
 .navbar__link {
   margin-left: 10px;
   margin-right: 10px;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar__item {
+  margin-top: 4px;
 }
 
 .navbar__link--active {
-  font-weight: bold;
-  margin-top: 3px;
+  font-weight: 500;
   border-bottom: 2px solid var(--ifm-color-primary);
 }
 
@@ -315,7 +367,13 @@ td p:last-child {
 }
 
 .navbar__title {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+}
+
+.dropdown > .navbar__link:after {
+  border-width: 0.3em 0.3em 0;
+  margin-left: 0.5em;
+  top: 0;
 }
 
 /* Mobile Nav Customize */
@@ -463,7 +521,7 @@ td p:last-child {
 }
 
 html .breadcrumbsContainer_src-theme-DocBreadcrumbs-styles-module {
-  --ifm-breadcrumb-size-multiplier: 0.9;
+  --ifm-breadcrumb-size-multiplier: 1;
   margin-bottom: 0.5rem;
 }
 
@@ -529,4 +587,17 @@ kbd.DocSearch-Commands-Key {
   margin-right: 0.375em;
   background: transparent;
   color: var(--docsearch-muted-color);
+}
+
+.tabs__item {
+  border-bottom: 2px solid transparent;
+}
+
+.tabs__item--active {
+  border-bottom-color: var(--ifm-tabs-color-active-border);
+  color: var(--ifm-tabs-color-active);
+}
+
+.codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+  background-color: var(--ifm-code-background);
 }

@@ -148,7 +148,7 @@ const config = {
         {
           href: "https://deno.land/api?unstable=true",
           label: "API Reference",
-          position: "right",
+          position: "left",
         },
         {
           href: "https://www.deno.com",
