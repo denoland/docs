@@ -108,6 +108,18 @@ something like this:
 }
 ```
 
+Additional example if you use project root for absolute imports but want to get rid of the incorrect recommendation from LSP.
+You can move the following into scope:
+
+```json
+  "scopes": {
+    "./": {
+      "/": "./",
+      "./": "./"
+    }
+  }
+```
+
 ## Import Maps are for Applications
 
 It is important to note that import map configuration files are
