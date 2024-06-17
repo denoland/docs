@@ -59,18 +59,18 @@ If you are in control of the source code of the module, or you are in control of
 how the file is hosted on a web server, there are two ways to inform Deno of the
 types for a given module, without requiring the importer to do anything special.
 
-### Using the triple-slash reference directive
+### Using `@deno-self-types` pragma
 
-Deno supports using the triple-slash reference `types` directive, which adopts
-the reference comment used by TypeScript in TypeScript files to _include_ other
-files and applies it only to JavaScript files.
+If you are providing a JavaScript file, and want to provide a declaration file
+that contains the types for this file, you can specify a `@deno-self-types`
+directive in the JS file, pointing to the declaration file.
 
 For example, if I had created `coolLib.js` and along side of it I had created my
 type definitions for my library in `coolLib.d.ts` I could do the following in
 the `coolLib.js` file:
 
 ```js
-/// <reference types="./coolLib.d.ts" />
+// @deno-self-types="./coolLib.d.ts"
 
 // ... the rest of the JavaScript ...
 ```
@@ -79,10 +79,12 @@ When Deno encounters this directive, it would resolve the `./coolLib.d.ts` file
 and use that instead of the JavaScript file when TypeScript was type checking
 the file, but still load the JavaScript file when running the program.
 
-> ℹ️ _Note_ this is a repurposed directive for TypeScript that only applies to
-> JavaScript files. Using the triple-slash reference directive of `types` in a
-> TypeScript file works under Deno as well, but has essentially the same
-> behavior as the `path` directive.
+> ℹ️ _Note_: Instead of `@deno-self-types`, a triple slash directive in the form
+> of `/// <reference types="./coolLib.d.ts" />` can be used. This is not
+> recommended anymore. This is a repurposed directive for TypeScript that only
+> applies to JavaScript files. Using the triple-slash reference directive of
+> `types` in a TypeScript file works under Deno as well, but has essentially the
+> same behavior as the `path` directive.
 
 ### Using X-TypeScript-Types header
 
@@ -125,8 +127,8 @@ include arbitrary type definitions when type checking programmes.
 ### Using a triple-slash directive
 
 This option couples the type definitions to the code itself. By adding a
-triple-slash `types` directive near the type of a module, type checking the file
-will include the type definition. For example:
+triple-slash `types` directive in a TS file (not a JS file!), near the type of a
+module, type checking the file will include the type definition. For example:
 
 ```ts
 /// <reference types="./types.d.ts" />
