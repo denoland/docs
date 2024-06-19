@@ -112,10 +112,11 @@ const sidebars = {
     },
     {
       type: "html",
-      value: "<div>Policies and Limts</div>",
+      value: "<div>Policies and Limits</div>",
       className: "section-header",
     },
     "manual/acceptable-use-policy",
+    "manual/fulfillment-policy",
     "manual/privacy-policy",
     "manual/security",
     {
