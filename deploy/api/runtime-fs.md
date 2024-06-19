@@ -229,7 +229,9 @@ async function handler(_req) {
 Deno.serve(handler);
 ```
 
-> Note: when you iterate over a file stream as shown below, the file descriptor will be automatically closed at the end of iteration. So, there is no need to manually close the file descriptor.
+> Note: when you iterate over a file stream as shown below, the file descriptor
+> will be automatically closed at the end of iteration. So, there is no need to
+> manually close the file descriptor.
 >
 > See: <https://github.com/denoland/deno/issues/23481>
 
