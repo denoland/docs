@@ -85,8 +85,8 @@ const config = {
           indexId: process.env.ORAMA_CLOUD_INDEX_ID,
           oramaCloudAPIKey: process.env.ORAMA_CLOUD_API_KEY,
           deploy: process.env.NODE_ENV === "production",
-        }
-      }
+        },
+      },
     ],
     // Enables our custom pages in "src" to use Tailwind classes
     async function tailwindPlugin(_context, _options) {
@@ -279,7 +279,7 @@ const config = {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
       additionalLanguages: ["powershell", "diff"],
-    }
+    },
   }),
 };
 
