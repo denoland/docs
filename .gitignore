@@ -4,6 +4,11 @@
 # Production
 /build
 
+# Reference docs
+/reference/api
+/reference/gen
+/reference/types
+
 # Generated files
 .docusaurus
 .cache-loader
