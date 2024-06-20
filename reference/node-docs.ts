@@ -1,5 +1,7 @@
 import { Node, Project, ts } from "ts-morph";
 
+await Deno.mkdir("types/node", { recursive: true });
+
 const cleanProject = new Project();
 const files = cleanProject.addSourceFilesAtPaths(
   "./node_modules/@types/node/**/*.d.ts",

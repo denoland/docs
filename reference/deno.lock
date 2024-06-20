@@ -41,7 +41,8 @@
       "npm:@types/node@20.12.7": "npm:@types/node@20.12.7",
       "npm:browserslist@4.23.0": "npm:browserslist@4.23.0",
       "npm:keychain@1.5.0": "npm:keychain@1.5.0",
-      "npm:lightningcss": "npm:lightningcss@1.24.1",
+      "npm:lightningcss": "npm:lightningcss@1.15.1",
+      "npm:lightningcss@1.15": "npm:lightningcss@1.15.1",
       "npm:ts-morph@22.0.0": "npm:ts-morph@22.0.0"
     },
     "jsr": {
@@ -342,55 +343,50 @@
         "integrity": "sha512-liyp4r+93RI7EB2jhwaRd4MWfdgHH6shuldkaPMkELCJjMFvOOVXuTvw1pGqFfhsrgA6OqfykWWPQgBjQakVag==",
         "dependencies": {}
       },
-      "lightningcss-darwin-arm64@1.24.1": {
-        "integrity": "sha512-1jQ12jBy+AE/73uGQWGSafK5GoWgmSiIQOGhSEXiFJSZxzV+OXIx+a9h2EYHxdJfX864M+2TAxWPWb0Vv+8y4w==",
+      "lightningcss-darwin-arm64@1.15.1": {
+        "integrity": "sha512-4bqe9OCWzj8gPgwzpDK7TPopIoKx9CQMPVN83/+T5LVLkh9sSS0ltZLjAFI399GIkC6idl6rguUQ5qPeq4yxsQ==",
         "dependencies": {}
       },
-      "lightningcss-darwin-x64@1.24.1": {
-        "integrity": "sha512-R4R1d7VVdq2mG4igMU+Di8GPf0b64ZLnYVkubYnGG0Qxq1KaXQtAzcLI43EkpnoWvB/kUg8JKCWH4S13NfiLcQ==",
+      "lightningcss-darwin-x64@1.15.1": {
+        "integrity": "sha512-1W7kt2Nd0lPFkZ5VzieJfs/ePVADysM3FS33HcUUzktE52vWL2B6S4ntWibHj6Ccg/lDH5o6GiLcCYwpOPLHug==",
         "dependencies": {}
       },
-      "lightningcss-freebsd-x64@1.24.1": {
-        "integrity": "sha512-z6NberUUw5ALES6Ixn2shmjRRrM1cmEn1ZQPiM5IrZ6xHHL5a1lPin9pRv+w6eWfcrEo+qGG6R9XfJrpuY3e4g==",
+      "lightningcss-linux-arm-gnueabihf@1.15.1": {
+        "integrity": "sha512-8FijfM4HGJPCQPB9nAaTjdOE2PGQYE66t1wvV+SR915dEePn4yyRdCBJitlas5B6aTAE2AMwEuEl1i/pVDmkGw==",
         "dependencies": {}
       },
-      "lightningcss-linux-arm-gnueabihf@1.24.1": {
-        "integrity": "sha512-NLQLnBQW/0sSg74qLNI8F8QKQXkNg4/ukSTa+XhtkO7v3BnK19TS1MfCbDHt+TTdSgNEBv0tubRuapcKho2EWw==",
+      "lightningcss-linux-arm64-gnu@1.15.1": {
+        "integrity": "sha512-ZhCv3MlApRTIwszlNQ2t7FST7qK+M1iP6apTvOetPwDlzOMZ5dcH0a1453JPm4CwOSzHZ8079gnb5EqtU4+pjg==",
         "dependencies": {}
       },
-      "lightningcss-linux-arm64-gnu@1.24.1": {
-        "integrity": "sha512-AQxWU8c9E9JAjAi4Qw9CvX2tDIPjgzCTrZCSXKELfs4mCwzxRkHh2RCxX8sFK19RyJoJAjA/Kw8+LMNRHS5qEg==",
+      "lightningcss-linux-arm64-musl@1.15.1": {
+        "integrity": "sha512-cGhslFivvMLSIsesZbEaUurXRJMGUftHukiY5DjWtXkA2iIqqV7TyK3j6ZJPy76hlRKsjU/WO8CrabAvr6kmsw==",
         "dependencies": {}
       },
-      "lightningcss-linux-arm64-musl@1.24.1": {
-        "integrity": "sha512-JCgH/SrNrhqsguUA0uJUM1PvN5+dVuzPIlXcoWDHSv2OU/BWlj2dUYr3XNzEw748SmNZPfl2NjQrAdzaPOn1lA==",
+      "lightningcss-linux-x64-gnu@1.15.1": {
+        "integrity": "sha512-uVfUgRUjq7laAR9A027oqGPcq72Y/hPVEEqb9agWzNqYvZyT0VAqNxp9g2ncL//gOD1vTwQntcwDhrI5VE2PCw==",
         "dependencies": {}
       },
-      "lightningcss-linux-x64-gnu@1.24.1": {
-        "integrity": "sha512-TYdEsC63bHV0h47aNRGN3RiK7aIeco3/keN4NkoSQ5T8xk09KHuBdySltWAvKLgT8JvR+ayzq8ZHnL1wKWY0rw==",
+      "lightningcss-linux-x64-musl@1.15.1": {
+        "integrity": "sha512-n2cRPHxL57N+YMsBodF9HogieOicmlQVUCFM+RF0FOzayA8LdypacNWI3EDzbERWfkBAWtx2eLvV50DOJrkQdg==",
         "dependencies": {}
       },
-      "lightningcss-linux-x64-musl@1.24.1": {
-        "integrity": "sha512-HLfzVik3RToot6pQ2Rgc3JhfZkGi01hFetHt40HrUMoeKitLoqUUT5owM6yTZPTytTUW9ukLBJ1pc3XNMSvlLw==",
+      "lightningcss-win32-x64-msvc@1.15.1": {
+        "integrity": "sha512-wHGJZnCmHU14cL3mmVNZm1yDz55m8EKxwPhACZTq+/QOvLMeIXQ4qLvNzdvtVL5KESPwz4hjYsYsSNCtpcTfOA==",
         "dependencies": {}
       },
-      "lightningcss-win32-x64-msvc@1.24.1": {
-        "integrity": "sha512-joEupPjYJ7PjZtDsS5lzALtlAudAbgIBMGJPNeFe5HfdmJXFd13ECmEM+5rXNxYVMRHua2w8132R6ab5Z6K9Ow==",
-        "dependencies": {}
-      },
-      "lightningcss@1.24.1": {
-        "integrity": "sha512-kUpHOLiH5GB0ERSv4pxqlL0RYKnOXtgGtVe7shDGfhS0AZ4D1ouKFYAcLcZhql8aMspDNzaUCumGHZ78tb2fTg==",
+      "lightningcss@1.15.1": {
+        "integrity": "sha512-d4fqKl8sqpdM27OsseAbKKxhD2otiu6stS7yWlm/DA7wOQAIDKMu/dke54cEN8ED19v9H2pEzMPGTsRfnq3Rdg==",
         "dependencies": {
           "detect-libc": "detect-libc@1.0.3",
-          "lightningcss-darwin-arm64": "lightningcss-darwin-arm64@1.24.1",
-          "lightningcss-darwin-x64": "lightningcss-darwin-x64@1.24.1",
-          "lightningcss-freebsd-x64": "lightningcss-freebsd-x64@1.24.1",
-          "lightningcss-linux-arm-gnueabihf": "lightningcss-linux-arm-gnueabihf@1.24.1",
-          "lightningcss-linux-arm64-gnu": "lightningcss-linux-arm64-gnu@1.24.1",
-          "lightningcss-linux-arm64-musl": "lightningcss-linux-arm64-musl@1.24.1",
-          "lightningcss-linux-x64-gnu": "lightningcss-linux-x64-gnu@1.24.1",
-          "lightningcss-linux-x64-musl": "lightningcss-linux-x64-musl@1.24.1",
-          "lightningcss-win32-x64-msvc": "lightningcss-win32-x64-msvc@1.24.1"
+          "lightningcss-darwin-arm64": "lightningcss-darwin-arm64@1.15.1",
+          "lightningcss-darwin-x64": "lightningcss-darwin-x64@1.15.1",
+          "lightningcss-linux-arm-gnueabihf": "lightningcss-linux-arm-gnueabihf@1.15.1",
+          "lightningcss-linux-arm64-gnu": "lightningcss-linux-arm64-gnu@1.15.1",
+          "lightningcss-linux-arm64-musl": "lightningcss-linux-arm64-musl@1.15.1",
+          "lightningcss-linux-x64-gnu": "lightningcss-linux-x64-gnu@1.15.1",
+          "lightningcss-linux-x64-musl": "lightningcss-linux-x64-musl@1.15.1",
+          "lightningcss-win32-x64-msvc": "lightningcss-win32-x64-msvc@1.15.1"
         }
       },
       "merge2@1.4.1": {
@@ -482,7 +478,7 @@
       "jsr:@std/path@^0.225.1",
       "npm:@types/node@20.12.7",
       "npm:browserslist@4.23.0",
-      "npm:lightningcss",
+      "npm:lightningcss@1.15",
       "npm:ts-morph@22.0.0"
     ]
   }

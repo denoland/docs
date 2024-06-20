@@ -1,6 +1,8 @@
 import { Project, ts } from "ts-morph";
 import $ from "dax";
 
+await Deno.mkdir("types", { recursive: true });
+
 const tempFile = await Deno.makeTempFile();
 
 await $`deno types`.stdout($.path(tempFile));

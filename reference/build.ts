@@ -4,6 +4,9 @@ import { pooledMap } from "@std/async/pool";
 import { DOMParser } from "@b-fuze/deno-dom";
 
 const nav = await Deno.readTextFile("nav.html");
+const navDeno = await Deno.readTextFile("nav_deno.html");
+const navWeb = await Deno.readTextFile("nav_web.html");
+const navNode = await Deno.readTextFile("nav_node.html");
 
 const navHead = `
 <link rel="stylesheet" href="/docusaurus.css">
@@ -25,8 +28,18 @@ const res = pooledMap(
     if (extname(entry.path) === ".html") {
       const file = await Deno.readTextFile(entry.path);
       const document = new DOMParser().parseFromString(file, "text/html");
+
+      let subNav = "";
+      if (entry.path.startsWith("gen/deno")) {
+        subNav = navDeno;
+      } else if (entry.path.startsWith("gen/web")) {
+        subNav = navWeb;
+      } else if (entry.path.startsWith("gen/node")) {
+        subNav = navNode;
+      }
+
       document.head.innerHTML = document.head.innerHTML + navHead;
-      document.body.innerHTML = nav + document.body.innerHTML;
+      document.body.innerHTML = nav + subNav + document.body.innerHTML;
 
       await Deno.writeTextFile(outPath, "<!DOCTYPE html>" + document.documentElement!.outerHTML, {
         create: true,

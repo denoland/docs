@@ -153,7 +153,7 @@ const config = {
         {
           href: "https://www.deno.com",
           label: "deno.com",
-          position: "left",
+          position: "right",
           activeBaseRegex: `^/api`,
         },
       ],
