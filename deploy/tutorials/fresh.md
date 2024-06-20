@@ -33,7 +33,8 @@ You can edit `routes/index.js` to modify the application.
 
 ## **Step 3:** Deploy to Deno Deploy
 
-1. Navigate to [https://dash.deno.com/new_project](https://dash.deno.com/new_project).
+1. Navigate to
+   [https://dash.deno.com/new_project](https://dash.deno.com/new_project).
 2. Connect to your GitHub account and select your repository.
 3. Fill in the values on the form:
    - Give your project a name

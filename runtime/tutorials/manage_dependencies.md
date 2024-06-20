@@ -33,7 +33,7 @@ clean separation between dev and production dependencies.
 /**
  * deps.ts
  *
- * This module re-exports the required methods 
+ * This module re-exports the required methods
  * from the dependant remote Ramda module.
  */
 export {
@@ -44,8 +44,8 @@ export {
 
 This example has the same functionality as the
 [local and remote import example](../manual/basics/modules/index.md). However in
-this case, instead of the Ramda module being referenced directly, it is referenced
-by proxy using a local `deps.ts` module.
+this case, instead of the Ramda module being referenced directly, it is
+referenced by proxy using a local `deps.ts` module.
 
 **Command:** `deno run example.ts`
 

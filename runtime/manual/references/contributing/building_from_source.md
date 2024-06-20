@@ -49,6 +49,7 @@ cargo -V
 > functions.
 
 **Linux(Debian)/WSL**
+
 ```shell
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
@@ -77,7 +78,6 @@ For Apple aarch64 users `lld` must be installed.
 brew install llvm
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
-
 
 **Windows**:
 
@@ -136,6 +136,7 @@ Windows users can download the latest binary release from
 ## Building Deno
 
 The easiest way to build Deno is by using a precompiled version of V8:
+
 > for WSL make sure you have sufficient memory allocated in .wslconfig
 
 ```console

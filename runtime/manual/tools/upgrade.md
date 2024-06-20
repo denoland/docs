@@ -17,45 +17,49 @@ deno upgrade -h|--help
 
 ## Description
 
-Defaults to the latest version of Deno. The version is downloaded from [https://github.com/denoland/deno/releases](https://github.com/denoland/deno/releases) and is used to replace the current executable.
+Defaults to the latest version of Deno. The version is downloaded from
+[https://github.com/denoland/deno/releases](https://github.com/denoland/deno/releases)
+and is used to replace the current executable.
 
 ## Arguments
 
-There are no required arguments for this command - it should be run from within your package or workspace directory.
+There are no required arguments for this command - it should be run from within
+your package or workspace directory.
 
 ## Options
 
 - `--version <version>`
 
-    The version to upgrade to
+  The version to upgrade to
 
 - `--output <output>`
 
-    The path to output the updated version to
+  The path to output the updated version to
 
 - `-q, --quiet`
 
-    Suppress diagnostic output
+  Suppress diagnostic output
 
 - `--dry-run`
 
-    Perform all checks without replacing the old executable
+  Perform all checks without replacing the old executable
 
 - `-f, --force`
 
-    Replace current executable even if it is not out of date
+  Replace current executable even if it is not out of date
 
 - `--canary`
 
-    Upgrade to canary builds
+  Upgrade to canary builds
 
 - `--cert <FILE>`
 
-    Load the certificate from a [PEM encoded file](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)
+  Load the certificate from a
+  [PEM encoded file](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)
 
 - `-h, --help`
 
-    Print help (see a summary with '-h')
+  Print help (see a summary with '-h')
 
 ## Examples
 

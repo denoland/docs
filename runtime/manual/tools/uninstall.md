@@ -30,18 +30,15 @@ The name of the script to uninstall.
 
 ## Options
 
-- `--root <root>`
-    Installation root
+- `--root <root>` Installation root
 
-- `-g, --global`
-    Remove globally installed package or module
+- `-g, --global` Remove globally installed package or module
 
-- `-q, --quiet`
-    Suppress diagnostic output
+- `-q, --quiet` Suppress diagnostic output
 
 - `-h, --help`
 
-    Prints help information
+  Prints help information
 
 ## Examples
 

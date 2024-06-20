@@ -231,15 +231,3 @@ More flags which affect the execution environment.
 --seed <NUMBER>              Seed Math.random()
 --v8-flags=<v8-flags>        Set V8 command line options. For help: ...
 ```
-
-## Autocomplete
-
-You can get IDE-style autocompletions for Deno with [Fig](https://fig.io/)
-<a href="https://fig.io/" target="_blank"><img src="https://fig.io/badges/Logo.svg" width="15" height="15"/></a>.
-It works in bash, zsh, and fish.
-
-To install, run:
-
-```shell
-brew install fig
-```

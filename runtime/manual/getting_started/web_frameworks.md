@@ -75,10 +75,11 @@ configure, while being super flexible. Highlights include:
 
 [Hono](https://hono.dev) is a light-weight web app framework in the tradition of
 Express and Sinatra. In just a few lines of code, you can set up an API server
-or a server for dynamic web pages. Hono provides a Deno-native installation path,
-and works great with Deno’s built-in TypeScript tooling.
+or a server for dynamic web pages. Hono provides a Deno-native installation
+path, and works great with Deno’s built-in TypeScript tooling.
 
-- This website is served by Hono running on [Deno Deploy](https://deno.com/deploy).
+- This website is served by Hono running on
+  [Deno Deploy](https://deno.com/deploy).
 
 ### Oak
 

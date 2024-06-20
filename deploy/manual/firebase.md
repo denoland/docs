@@ -2,7 +2,7 @@
 
 Firebase is a platform developed by Google for creating mobile and web
 applications. Its features include authentication primitives for log in and a
-NoSQL datasore, Firestore, that you can persist data to.
+NoSQL datastore, Firestore, that you can persist data to.
 
 This tutorial covers how to connect to Firebase from an application deployed on
 Deno Deploy.

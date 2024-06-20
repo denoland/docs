@@ -113,6 +113,7 @@ const config = {
         },
       };
     },
+    "./src/plugins/deno-by-example/plugin.ts",
   ],
 
   themeConfig: ({
@@ -150,9 +151,15 @@ const config = {
           activeBaseRegex: `^/subhosting`,
         },
         {
+          to: "/examples",
+          position: "left",
+          label: "Examples",
+          activeBaseRegex: `^/examples`,
+        },
+        {
           href: "https://deno.land/api?unstable=true",
           label: "API Reference",
-          position: "right",
+          position: "left",
         },
         {
           href: "https://www.deno.com",
@@ -185,12 +192,16 @@ const config = {
               to: "/deploy/manual",
             },
             {
-              label: "Standard Library",
-              href: "https://deno.land/std",
+              label: "Deno Subhosting",
+              to: "/subhosting/manual",
             },
             {
-              label: "Deno by Example",
-              href: "https://examples.deno.land",
+              label: "Examples",
+              href: "/examples",
+            },
+            {
+              label: "Standard Library",
+              href: "https://deno.land/std",
             },
           ],
         },

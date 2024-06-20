@@ -16,8 +16,8 @@ deno types -h|--help
 
 ## Description
 
-Generates types suitable for use with Deno runtime.
-The types are printed to stdout and can be redirected to a file or used in a pipeline.
+Generates types suitable for use with Deno runtime. The types are printed to
+stdout and can be redirected to a file or used in a pipeline.
 
 ```bash
 deno types > lib.deno.d.ts
@@ -34,7 +34,7 @@ There are no arguments for this command.
   Suppress diagnostic output
 
 - `-h, --help`
-  
+
   Print help (see a summary with '-h')
 
 ## Examples
