@@ -9,7 +9,7 @@ const config = {
   favicon: "img/favicon.ico",
   url: "https://docs.deno.com",
   baseUrl: "/",
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   i18n: {
     defaultLocale: "en",
@@ -146,14 +146,15 @@ const config = {
           activeBaseRegex: `^/examples`,
         },
         {
-          href: "https://deno.land/api?unstable=true",
+          href: "pathname:///api",
           label: "API Reference",
           position: "left",
         },
         {
           href: "https://www.deno.com",
           label: "deno.com",
-          position: "right",
+          position: "left",
+          activeBaseRegex: `^/api`,
         },
       ],
     },

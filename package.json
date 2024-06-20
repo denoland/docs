@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build && cp -r src-deno/* build",
+    "build": "docusaurus build && cp -r src-deno/* build && cp -r reference/api reference/docusaurus.css build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
