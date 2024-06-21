@@ -279,7 +279,7 @@ const config = {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
       additionalLanguages: ["powershell", "diff"],
-    }
+    },
   }),
 };
 
