@@ -137,7 +137,6 @@ html[data-theme="dark"] kbd.DocSearch-Commands-Key {
 
 html[data-theme="dark"] .DocSearch-Button {
   border: 1px solid var(--gray-3);
-  padding: 0 1rem;
 }
 
 html[data-theme="dark"] .section-header,
@@ -175,7 +174,6 @@ html[data-theme="light"] kbd.DocSearch-Commands-Key {
 html[data-theme="light"] .DocSearch-Button {
   border: 1px solid var(--gray-00);
   background-color: var(--white);
-  padding: 0 1rem;
 }
 
 html,
