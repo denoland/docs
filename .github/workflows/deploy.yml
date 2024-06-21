@@ -30,8 +30,6 @@ jobs:
       - name: Build step
         env:
           DENO_FUTURE: 1
-          ORAMA_CLOUD_INDEX_ID: ${{ env.ORAMA_CLOUD_INDEX_ID }}
-          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
         run: npm install && deno task build
 
       - name: Upload to Deno Deploy
