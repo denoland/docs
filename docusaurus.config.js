@@ -1,3 +1,4 @@
+import process from "node:process";
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const findReplace = require("./src/remark/find_replace");
 const lightCodeTheme = require("prism-react-renderer/themes/github");
@@ -75,6 +76,16 @@ const config = {
         remarkPlugins: [
           findReplace,
         ],
+      },
+    ],
+    [
+      "@orama/plugin-docusaurus-v3",
+      {
+        cloud: {
+          indexId: process.env.ORAMA_CLOUD_INDEX_ID,
+          oramaCloudAPIKey: process.env.ORAMA_CLOUD_API_KEY,
+          deploy: process.env.NODE_ENV === "production",
+        },
       },
     ],
     // Enables our custom pages in "src" to use Tailwind classes
@@ -268,44 +279,6 @@ const config = {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
       additionalLanguages: ["powershell", "diff"],
-    },
-    algolia: {
-      // The application ID provided by Algolia
-      appId: "KAQ4QIALEB",
-
-      // Public API key: it is safe to commit it
-      apiKey: "0795dfc12048ff344a54bb4c04c9000b",
-
-      indexName: "deno",
-
-      insights: true,
-
-      // Optional: see doc section below
-      contextualSearch: true,
-
-      // Optional: Specify domains where the navigation should occur through
-      // window.location instead on history.push. Useful when our Algolia
-      // config crawls multiple documentation sites and we want to navigate
-      // with window.location.href to them.
-      // externalUrlRegex: "external\\.com|domain\\.com",
-
-      // Optional: Replace parts of the item URLs from Algolia. Useful when
-      // using the same search index for multiple deployments using a
-      // different baseUrl. You can use regexp or string in the `from` param.
-      // For example: localhost:3000 vs myCompany.com/docs
-      /*
-        replaceSearchResultPathname: {
-          from: "/docs/", // or as RegExp: /\/docs\//
-          to: "/",
-        },
-        */
-
-      // Optional: Algolia search parameters
-      searchParameters: {},
-
-      // Optional: path for search page that enabled by default (`false`
-      // to disable it)
-      searchPagePath: "search",
     },
   }),
 };
