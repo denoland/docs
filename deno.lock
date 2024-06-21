@@ -82,12 +82,12 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:@docusaurus/core@^3.1.1",
-        "npm:@docusaurus/module-type-aliases@^3.1.0",
-        "npm:@docusaurus/plugin-google-tag-manager@^3.1.1",
-        "npm:@docusaurus/preset-classic@^3.1.1",
-        "npm:@docusaurus/theme-search-algolia@^3.1.0",
-        "npm:@docusaurus/tsconfig@^3.0.0",
+        "npm:@docusaurus/core@^3.4.0",
+        "npm:@docusaurus/module-type-aliases@^3.4.0",
+        "npm:@docusaurus/plugin-google-tag-manager@^3.4.0",
+        "npm:@docusaurus/preset-classic@^3.4.0",
+        "npm:@docusaurus/theme-search-algolia@^3.4.0",
+        "npm:@docusaurus/tsconfig@^3.4.0",
         "npm:@mdx-js/react@^3.0.0",
         "npm:@readme/openapi-parser@^2.5.0",
         "npm:@types/react-dom@^18.2.7",
@@ -97,7 +97,7 @@
         "npm:escape-string-regexp@^2.0.0",
         "npm:lodash.template@^4.5.0",
         "npm:markdown-it@^13.0.2",
-        "npm:node-polyfill-webpack-plugin@^2.0.1",
+        "npm:node-polyfill-webpack-plugin@^4.0.0",
         "npm:postcss@^8.4.28",
         "npm:prism-react-renderer@^1.3.5",
         "npm:prismjs@^1.29.0",

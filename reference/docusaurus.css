@@ -313,132 +313,6 @@
 	--docsearch-footer-background: #fff;
 	--docsearch-footer-shadow: 0 -1px 0 0 #e0e3e8, 0 -3px 6px 0 #45629b1f;
 }
-:root {
-	--ifm-avatar-intro-alignment: inherit;
-	--ifm-avatar-photo-size: 3rem;
-	--ifm-badge-background-color: inherit;
-	--ifm-badge-border-color: inherit;
-	--ifm-badge-border-radius: var(--ifm-global-radius);
-	--ifm-badge-border-width: var(--ifm-global-border-width);
-	--ifm-badge-color: var(--ifm-color-white);
-	--ifm-badge-padding-horizontal: calc(var(--ifm-spacing-horizontal) * .5);
-	--ifm-badge-padding-vertical: calc(var(--ifm-spacing-vertical) * .25);
-	--ifm-breadcrumb-border-radius: 1.5rem;
-	--ifm-breadcrumb-spacing: .5rem;
-	--ifm-breadcrumb-color-active: var(--ifm-color-primary);
-	--ifm-breadcrumb-item-background-active: var(--ifm-hover-overlay);
-	--ifm-breadcrumb-padding-horizontal: .8rem;
-	--ifm-breadcrumb-padding-vertical: .4rem;
-	--ifm-breadcrumb-size-multiplier: 1;
-	--ifm-breadcrumb-separator: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" x=\"0px\" y=\"0px\" viewBox=\"0 0 256 256\"><g><g><polygon points=\"79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128\"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>");
-	--ifm-breadcrumb-separator-filter: none;
-	--ifm-breadcrumb-separator-size: .5rem;
-	--ifm-breadcrumb-separator-size-multiplier: 1.25;
-	--ifm-button-background-color: inherit;
-	--ifm-button-border-color: var(--ifm-button-background-color);
-	--ifm-button-border-width: var(--ifm-global-border-width);
-	--ifm-button-font-weight: var(--ifm-font-weight-bold);
-	--ifm-button-padding-horizontal: 1.5rem;
-	--ifm-button-padding-vertical: .375rem;
-	--ifm-button-size-multiplier: 1;
-	--ifm-button-transition-duration: var(--ifm-transition-fast);
-	--ifm-button-border-radius: calc(var(--ifm-global-radius) * var(--ifm-button-size-multiplier));
-	--ifm-button-group-spacing: 2px;
-	--ifm-card-background-color: var(--ifm-background-surface-color);
-	--ifm-card-border-radius: calc(var(--ifm-global-radius) * 2);
-	--ifm-card-horizontal-spacing: var(--ifm-global-spacing);
-	--ifm-card-vertical-spacing: var(--ifm-global-spacing);
-	--ifm-toc-border-color: var(--ifm-color-emphasis-300);
-	--ifm-toc-link-color: var(--ifm-color-content-secondary);
-	--ifm-toc-padding-horizontal: .5rem;
-	--ifm-dropdown-background-color: var(--ifm-background-surface-color);
-	--ifm-dropdown-font-weight: var(--ifm-font-weight-semibold);
-	--ifm-dropdown-link-color: var(--ifm-font-color-base);
-	--ifm-dropdown-hover-background-color: var(--ifm-hover-overlay);
-	--ifm-footer-background-color: var(--ifm-color-emphasis-100);
-	--ifm-footer-color: inherit;
-	--ifm-footer-link-color: var(--ifm-color-emphasis-700);
-	--ifm-footer-link-hover-color: var(--ifm-color-primary);
-	--ifm-footer-link-horizontal-spacing: .5rem;
-	--ifm-footer-padding-horizontal: calc(var(--ifm-spacing-horizontal) * 2);
-	--ifm-footer-padding-vertical: calc(var(--ifm-spacing-vertical) * 2);
-	--ifm-footer-title-color: inherit;
-	--ifm-footer-logo-max-width: min(30rem, 90vw);
-	--ifm-hero-background-color: var(--ifm-background-surface-color);
-	--ifm-hero-text-color: var(--ifm-color-emphasis-800);
-	--ifm-menu-color: var(--ifm-color-emphasis-700);
-	--ifm-menu-color-active: var(--ifm-color-primary);
-	--ifm-menu-color-background-active: var(--ifm-hover-overlay);
-	--ifm-menu-color-background-hover: var(--ifm-hover-overlay);
-	--ifm-menu-link-padding-horizontal: .75rem;
-	--ifm-menu-link-padding-vertical: .375rem;
-	--ifm-menu-link-sublist-icon: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16px\" height=\"16px\" viewBox=\"0 0 24 24\"><path fill=\"rgba(0,0,0,0.5)\" d=\"M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z\"></path></svg>");
-	--ifm-menu-link-sublist-icon-filter: none;
-	--ifm-navbar-background-color: var(--ifm-background-surface-color);
-	--ifm-navbar-height: 3.75rem;
-	--ifm-navbar-item-padding-horizontal: .75rem;
-	--ifm-navbar-item-padding-vertical: .25rem;
-	--ifm-navbar-link-color: var(--ifm-font-color-base);
-	--ifm-navbar-link-active-color: var(--ifm-link-color);
-	--ifm-navbar-padding-horizontal: var(--ifm-spacing-horizontal);
-	--ifm-navbar-padding-vertical: calc(var(--ifm-spacing-vertical) * .5);
-	--ifm-navbar-shadow: var(--ifm-global-shadow-lw);
-	--ifm-navbar-search-input-background-color: var(--ifm-color-emphasis-200);
-	--ifm-navbar-search-input-color: var(--ifm-color-emphasis-800);
-	--ifm-navbar-search-input-placeholder-color: var(--ifm-color-emphasis-500);
-	--ifm-navbar-search-input-icon: url("data:image/svg+xml;utf8,<svg fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 16\" height=\"16px\" width=\"16px\"><path d=\"M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z\" /></svg>");
-	--ifm-navbar-sidebar-width: 83vw;
-	--ifm-pagination-border-radius: var(--ifm-global-radius);
-	--ifm-pagination-color-active: var(--ifm-color-primary);
-	--ifm-pagination-font-size: 1rem;
-	--ifm-pagination-item-active-background: var(--ifm-hover-overlay);
-	--ifm-pagination-page-spacing: .2em;
-	--ifm-pagination-padding-horizontal: calc(var(--ifm-spacing-horizontal) * 1);
-	--ifm-pagination-padding-vertical: calc(var(--ifm-spacing-vertical) * .25);
-	--ifm-pagination-nav-border-radius: var(--ifm-global-radius);
-	--ifm-pagination-nav-color-hover: var(--ifm-color-primary);
-	--ifm-pills-color-active: var(--ifm-color-primary);
-	--ifm-pills-color-background-active: var(--ifm-hover-overlay);
-	--ifm-pills-spacing: .125rem;
-	--ifm-tabs-color: var(--ifm-font-color-secondary);
-	--ifm-tabs-color-active: var(--ifm-color-primary);
-	--ifm-tabs-color-active-border: var(--ifm-tabs-color-active);
-	--ifm-tabs-padding-horizontal: 1rem;
-	--ifm-tabs-padding-vertical: 1rem;
-	--docusaurus-progress-bar-color: var(--ifm-color-primary);
-	--docusaurus-announcement-bar-height: auto;
-	--docusaurus-tag-list-border: var(--ifm-color-emphasis-300);
-	--docusaurus-collapse-button-bg: #0000;
-	--docusaurus-collapse-button-bg-hover: #0000001a;
-	--doc-sidebar-width: 300px;
-	--doc-sidebar-hidden-width: 30px;
-	--docsearch-primary-color: var(--ifm-color-primary);
-	--docsearch-text-color: var(--ifm-font-color-base);
-	--docsearch-spacing: 12px;
-	--docsearch-icon-stroke-width: 1.4;
-	--docsearch-highlight-color: var(--docsearch-primary-color);
-	--docsearch-muted-color: #969faf;
-	--docsearch-container-background: #656c85cc;
-	--docsearch-logo-color: #5468ff;
-	--docsearch-modal-width: 560px;
-	--docsearch-modal-height: 600px;
-	--docsearch-modal-background: #f5f6f7;
-	--docsearch-modal-shadow: inset 1px 1px 0 0 #ffffff80, 0 3px 8px 0 #555a64;
-	--docsearch-searchbox-height: 56px;
-	--docsearch-searchbox-background: #ebedf0;
-	--docsearch-searchbox-focus-background: #fff;
-	--docsearch-searchbox-shadow: inset 0 0 0 2px var(--docsearch-primary-color);
-	--docsearch-hit-height: 56px;
-	--docsearch-hit-color: #444950;
-	--docsearch-hit-active-color: #fff;
-	--docsearch-hit-background: #fff;
-	--docsearch-hit-shadow: 0 1px 3px 0 #d4d9e1;
-	--docsearch-key-gradient: linear-gradient(-225deg, #d5dbe4, #f8f8f8);
-	--docsearch-key-shadow: inset 0 -2px 0 0 #cdcde6, inset 0 0 1px 1px #fff, 0 1px 2px 1px #1e235a66;
-	--docsearch-footer-height: 44px;
-	--docsearch-footer-background: #fff;
-	--docsearch-footer-shadow: 0 -1px 0 0 #e0e3e8, 0 -3px 6px 0 #45629b1f;
-}
 
 .docusaurus .badge--danger, .docusaurus .badge--info, .docusaurus .badge--primary, .docusaurus .badge--secondary, .docusaurus .badge--success, .docusaurus .badge--warning {
 	--ifm-badge-border-color: var(--ifm-badge-background-color);
@@ -2055,6 +1929,9 @@
 	--ifm-navbar-search-input-color: var(--ifm-color-white);
 }
 
+:root {
+	--ifm-navbar-link-hover-color:var(--ifm-color-primary)
+}
 .navbar--primary {
 	--ifm-navbar-background-color: var(--ifm-color-primary);
 	--ifm-navbar-link-hover-color: var(--ifm-color-white);
@@ -3507,7 +3384,7 @@ html[data-theme="dark"] .secondary-navbar {
 	background: var(--ifm-color-gray-800);
 }
 
-.docusaurus [data-theme="dark"] .themedComponent--dark_xIcU, .docusaurus [data-theme="light"] .themedComponent--light_NVdE, .docusaurus html:not([data-theme]) .themedComponent--light_NVdE {
+[data-theme="dark"] .themedComponent--dark_xIcU, [data-theme="light"] .themedComponent--light_NVdE, html:not([data-theme]) .themedComponent--light_NVdE {
 	display: initial;
 }
 

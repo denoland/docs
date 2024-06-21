@@ -8,7 +8,7 @@ const navDeno = await Deno.readTextFile("nav_deno.html");
 const navWeb = await Deno.readTextFile("nav_web.html");
 const navNode = await Deno.readTextFile("nav_node.html");
 
-const navHead = `
+let navHead = `
 <link rel="stylesheet" href="/docusaurus.css">
 <link data-rh="true" rel="preload" href="/fonts/inter/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin="true">
 <link data-rh="true" rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin="true">
@@ -16,8 +16,19 @@ const navHead = `
 <link data-rh="true" rel="preload" href="/fonts/inter/Inter-SemiBoldItalic.woff2" as="font" type="font/woff2" crossorigin="true">
 <link data-rh="true" rel="stylesheet" href="/fonts/inter.css">`;
 
+for await (const entry of walk("../build/assets/js", {
+  includeDirs: false,
+  exts: ["js"],
+})) {
+  if (entry.name.includes("main")) {
+    navHead = `<script href="/assets/js/${entry.name}" defer="defer"></script>` + navHead;
+  } else {
+    navHead += `<link rel="prefetch" href="/assets/js/${entry.name}">`;
+  }
+}
+
 const res = pooledMap(
-  10,
+  100,
   walk("gen", {
     includeDirs: false,
   }),
