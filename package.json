@@ -16,12 +16,12 @@
     "fmt": "deno fmt runtime/ deploy/ src/"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.2.0",
-    "@docusaurus/plugin-google-tag-manager": "^3.2.0",
-    "@docusaurus/preset-classic": "^3.2.0",
-    "@docusaurus/theme-search-algolia": "^3.2.0",
+    "@docusaurus/core": "^3.4.0",
+    "@docusaurus/plugin-google-tag-manager": "^3.4.0",
+    "@docusaurus/preset-classic": "^3.4.0",
+    "@docusaurus/theme-search-algolia": "^3.4.0",
     "@mdx-js/react": "^3.0.0",
-    "@orama/plugin-docusaurus-v3": "^2.0.15",
+    "@orama/plugin-docusaurus-v3": "^2.0.20",
     "@readme/openapi-parser": "^2.5.0",
     "clsx": "^1.2.1",
     "escape-string-regexp": "^2.0.0",
@@ -35,8 +35,8 @@
     "util": "^0.12.5"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.2.0",
-    "@docusaurus/tsconfig": "^3.2.0",
+    "@docusaurus/module-type-aliases": "^3.4.0",
+    "@docusaurus/tsconfig": "^3.4.0",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "^10.4.15",
