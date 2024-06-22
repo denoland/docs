@@ -23,9 +23,6 @@ Run these commands to get started
   // Run the tests
   deno test
 
-  // Run the benchmarks
-  deno bench
-
 $ deno run main.ts
 Add 2 + 3 = 5
 
@@ -61,7 +58,4 @@ Run these commands to get started
 
   // Run the tests
   deno test
-
-  // Run the benchmarks
-  deno bench
 ```
