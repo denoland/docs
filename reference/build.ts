@@ -23,11 +23,8 @@ for await (
   })
 ) {
   if (entry.name.includes("main")) {
-    navHead =
-      `<script href="/assets/js/${entry.name}" defer="defer"></script>` +
+    navHead = `<script src="/assets/js/${entry.name}" defer="defer"></script>` +
       navHead;
-  } else {
-    navHead += `<link rel="prefetch" href="/assets/js/${entry.name}">`;
   }
 }
 
@@ -78,7 +75,13 @@ for (const kind of ["deno", "web", "node"]) {
   await import(`./gen/${kind}/search_index.js`);
   const index = (globalThis as any as {
     DENO_DOC_SEARCH_INDEX: {
-      nodes: { name: string; url: string; doc: string; category: string }[];
+      nodes: {
+        name: string;
+        url: string;
+        doc: string;
+        category: string;
+        file: string;
+      }[];
     };
   }).DENO_DOC_SEARCH_INDEX;
   delete (globalThis as any).window;
@@ -88,7 +91,9 @@ for (const kind of ["deno", "web", "node"]) {
       .replace(/\.html$/, ""),
     title: node.name,
     content: node.doc,
-    section: `API > ${kind}${node.category ? ` > ${node.category}` : ""}`,
+    section: `API > ${kind}${node.file !== "." ? ` > ${node.file}` : ""}${
+      node.category ? ` > ${node.category}` : ""
+    }`,
     version: "current",
     category: "reference",
   }));
