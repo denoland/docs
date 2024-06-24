@@ -57,11 +57,14 @@ const config = {
     [
       "@orama/plugin-docusaurus-v3",
       {
-        cloud: {
-          indexId: process.env.ORAMA_CLOUD_INDEX_ID,
-          oramaCloudAPIKey: process.env.ORAMA_CLOUD_API_KEY,
-          deploy: process.env.NODE_ENV === "production",
-        },
+        ...(process.env.ORAMA_CLOUD_API_KEY !== undefined
+          ? {
+            cloud: {
+              indexId: process.env.ORAMA_CLOUD_INDEX_ID,
+              oramaCloudAPIKey: process.env.ORAMA_CLOUD_API_KEY,
+            },
+          }
+          : {}),
       },
     ],
     [
