@@ -22,7 +22,7 @@
     "doc": "deno task doc:deno && deno task doc:web && deno task doc:node",
     
     "serve": "deno run --allow-read=. --allow-net --watch serve.ts",
-    "build": "deno run --allow-read=.,../build --allow-write=. --allow-env build.ts"
+    "build": "deno run --allow-read=.,../build --allow-write=. --allow-env --allow-net=api.oramasearch.com build.ts"
   },
   "exports": {
     "./assert": "./types/node/node__assert.d.ts",

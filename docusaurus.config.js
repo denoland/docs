@@ -1,3 +1,5 @@
+import { deploy } from "./sidebars/deploy.js";
+
 const process = require("node:process");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const findReplace = require("./src/remark/find_replace");
@@ -62,6 +64,7 @@ const config = {
             cloud: {
               indexId: process.env.ORAMA_CLOUD_INDEX_ID,
               oramaCloudAPIKey: process.env.ORAMA_CLOUD_API_KEY,
+              deploy: true,
             },
           }
           : {}),
