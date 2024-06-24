@@ -4270,7 +4270,7 @@ html[data-theme="dark"] .secondary-navbar {
 
 /* Multiple selectors to override defaults in light mode */
 
-html[data-theme="light"] .secondary-navbar {
+.secondary-navbar {
 	border-top: 1px solid var(--gray-000);
 }
 
@@ -4335,3 +4335,6 @@ html[data-theme="light"] .secondary-navbar {
 	}
 }
 
+#__docusaurus_skipToContent_fallback {
+	display: none;
+}
