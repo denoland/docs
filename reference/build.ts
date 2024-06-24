@@ -32,7 +32,7 @@ for await (
 }
 
 const res = pooledMap(
-  100,
+  1000,
   walk("gen", {
     includeDirs: false,
   }),
