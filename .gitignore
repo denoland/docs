@@ -8,6 +8,7 @@
 /reference/api
 /reference/gen
 /reference/types
+/reference/node_modules
 
 # Generated files
 .docusaurus
