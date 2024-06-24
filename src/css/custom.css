@@ -137,7 +137,6 @@ html[data-theme="dark"] kbd.DocSearch-Commands-Key {
 
 html[data-theme="dark"] .DocSearch-Button {
   border: 1px solid var(--gray-3);
-  padding: 0 1rem;
 }
 
 html[data-theme="dark"] .section-header,
@@ -175,7 +174,6 @@ html[data-theme="light"] kbd.DocSearch-Commands-Key {
 html[data-theme="light"] .DocSearch-Button {
   border: 1px solid var(--gray-00);
   background-color: var(--white);
-  padding: 0 1rem;
 }
 
 html,
@@ -560,35 +558,6 @@ svg.iconExternalLink_node_modules-\@docusaurus-theme-classic-lib-theme-Icon-Exte
   margin-top: 2rem;
 }
 
-.DocSearch-Button-Placeholder {
-  color: var(--docsearch-muted-color);
-}
-
-.DocSearch-Help .DocSearch-Label {
-  color: var(--white);
-}
-
-.DocSearch-Button .DocSearch-Search-Icon {
-  width: 1rem;
-}
-
-.DocSearch-Button-Container {
-  padding-right: 2rem;
-}
-
-kbd.DocSearch-Button-Key,
-kbd.DocSearch-Commands-Key {
-  box-shadow: none;
-  padding: 0;
-  border: 1px solid;
-  top: 0;
-  font-size: 0.8rem;
-  line-height: 1;
-  margin-right: 0.375em;
-  background: transparent;
-  color: var(--docsearch-muted-color);
-}
-
 .tabs__item {
   border-bottom: 2px solid transparent;
 }
@@ -600,4 +569,18 @@ kbd.DocSearch-Commands-Key {
 
 .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
   background-color: var(--ifm-code-background);
+}
+
+.searchbox-module_searchbox__TygrP {
+  border: var(--ifm-toc-border-color) 1px solid;
+}
+
+.searchbox-module_searchbox_container__kkcyK {
+  backdrop-filter: blur(6px) brightness(60%);
+}
+
+@media (max-width: 996px) {
+  .searchbutton-module_searchbutton__keys__qckL6 {
+    display: none !important;
+  }
 }
