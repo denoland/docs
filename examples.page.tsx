@@ -2,7 +2,7 @@ import { walkSync } from "@std/fs/walk";
 
 export const layout = "reference.tsx";
 
-export default function* () {
+export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
   const files = [...walkSync("./by-example/", {
     exts: [".ts"],
   })];
@@ -19,124 +19,133 @@ export default function* () {
 
   for (const example of examples) {
     const contentNoCommentary = example.parsed.files.map((file) =>
-      file.snippets.map((snippet) => snippet.code).join("\n"),
+      file.snippets.map((snippet) => snippet.code).join("\n")
     ).join("\n");
 
-    const url = `https://github.com/denoland/deno-docs/blob/main/by-example/${example.name}${example.parsed.files.length > 1
-      ? "/main"
-      : ""}`;
-    const rawUrl = `https://raw.githubusercontent.com/denoland/deno-docs/main/by-example/${example.name}${example.parsed.files.length > 1
-      ? "/main"
-      : ""}`;
+    const url =
+      `https://github.com/denoland/deno-docs/blob/main/by-example/${example.name}${
+        example.parsed.files.length > 1 ? "/main" : ""
+      }`;
+    const rawUrl =
+      `https://raw.githubusercontent.com/denoland/deno-docs/main/by-example/${example.name}${
+        example.parsed.files.length > 1 ? "/main" : ""
+      }`;
 
     yield {
-      url: `/examples/${example.label}`,
+      url: `/examples/${example.label}.html`,
       title: `${example.parsed.title} - Deno by Example`,
-      content: <div>
-        <main class="max-w-screen-lg mx-auto p-4">
-          <div class="flex gap-2 items-center">
-            <p
-              class="italic m-0 mr-2"
-              title={DIFFICULTIES[example.parsed.difficulty].description}
-            >
-              {DIFFICULTIES[example.parsed.difficulty].title}
-            </p>
+      content: (
+        <div>
+          <main class="max-w-screen-lg mx-auto p-4">
             <div class="flex gap-2 items-center">
-              {example.parsed.tags.map((tag) => (
-                <span
-                  class="text-xs italic py-0.5 px-2 rounded-md"
-                  title={TAGS[tag].description}
-                  key={TAGS[tag].title}
-                >
-                {TAGS[tag].title}
-              </span>
-              ))}
+              <p
+                class="italic m-0 mr-2"
+                title={DIFFICULTIES[example.parsed.difficulty].description}
+              >
+                {DIFFICULTIES[example.parsed.difficulty].title}
+              </p>
+              <div class="flex gap-2 items-center">
+                {example.parsed.tags.map((tag) => (
+                  <span
+                    class="text-xs italic py-0.5 px-2 rounded-md"
+                    title={TAGS[tag].description}
+                    key={TAGS[tag].title}
+                  >
+                    {TAGS[tag].title}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-          <div class="flex justify-between items-center">
-            <h1 class="mt-10 mb-0 text-3xl font-bold">{example.parsed.title}</h1>
-            <a
-              href={url}
-              class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-300 text-slate-900"
-            >
-              Edit
-            </a>
-          </div>
-          {example.parsed.description &&
-				    <p class="mt-10">{example.parsed.description}</p>}
-          <div class="relative block">
-            <CopyButton text={contentNoCommentary} />
-          </div>
-          {example.parsed.files.map((file) => (
-            <div class="mt-10" key={file.name}>
-              {file.snippets.map((snippet, i) => (
-                <SnippetComponent
-                  key={i}
-                  firstOfFile={i === 0}
-                  lastOfFile={i === file.snippets.length - 1}
-                  filename={file.name}
-                  snippet={snippet}
-                />
-              ))}
+            <div class="flex justify-between items-center">
+              <h1 class="mt-10 mb-0 text-3xl font-bold">
+                {example.parsed.title}
+              </h1>
+              <a
+                href={url}
+                class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-300 text-slate-900"
+              >
+                Edit
+              </a>
             </div>
-          ))}
-          <div>
-            {example.parsed.run && (
-              <>
-                <p class="mt-16">
-                  Run{" "}
-                  <a href={url} class="text-primary hover:underline focus:underline">
-                    this example
-                  </a>{" "}
-                  locally using the Deno CLI:
-                </p>
-                <pre><code>{example.parsed.run.startsWith("deno")
+            {example.parsed.description &&
+              <p class="mt-10">{example.parsed.description}</p>}
+            <div class="relative block">
+              <CopyButton text={contentNoCommentary} />
+            </div>
+            {example.parsed.files.map((file) => (
+              <div class="mt-10" key={file.name}>
+                {file.snippets.map((snippet, i) => (
+                  <SnippetComponent
+                    key={i}
+                    firstOfFile={i === 0}
+                    lastOfFile={i === file.snippets.length - 1}
+                    filename={file.name}
+                    snippet={snippet}
+                  />
+                ))}
+              </div>
+            ))}
+            <div>
+              {example.parsed.run && (
+                <>
+                  <p class="mt-16">
+                    Run{" "}
+                    <a
+                      href={url}
+                      class="text-primary hover:underline focus:underline"
+                    >
+                      this example
+                    </a>{" "}
+                    locally using the Deno CLI:
+                  </p>
+                  <pre><code>{example.parsed.run.startsWith("deno")
                   ? example.parsed.run.replace("<url>", url)
                   : "deno run " + example.parsed.run.replace("<url>", rawUrl)}</code></pre>
-              </>
-            )}
-            {example.parsed.playground && (
-              <div class="col-span-3 mt-8">
-                <p class="text-gray-700">
-                  Try this example in a Deno Deploy playground:
-                </p>
-                <p class="mt-3">
-                  <a
-                    class="py-2 px-4 bg-black inline-block text-white text-base rounded-md opacity-90 hover:opacity-100"
-                    href={example.parsed.playground}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Deploy
-                  </a>
-                </p>
-              </div>
-            )}
-            {example.parsed.additionalResources.length > 0 && (
-              <div class="col-span-3 mt-12 pt-6 border-t-1 border-gray-200">
-                <p>Additional resources:</p>
-                <ul class="list-disc list-inside mt-1">
-                  {example.parsed.additionalResources.map(([link, title]) => (
-                    <li
-                      class="text-gray-700 hover:text-gray-900"
-                      key={link + title}
+                </>
+              )}
+              {example.parsed.playground && (
+                <div class="col-span-3 mt-8">
+                  <p class="text-gray-700">
+                    Try this example in a Deno Deploy playground:
+                  </p>
+                  <p class="mt-3">
+                    <a
+                      class="py-2 px-4 bg-black inline-block text-white text-base rounded-md opacity-90 hover:opacity-100"
+                      href={example.parsed.playground}
+                      target="_blank"
+                      rel="noreferrer"
                     >
-                      <a class="text-primary hover:underline focus:underline"
-                        href={link}>
-                        {title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </main>
-      </div>,
+                      Deploy
+                    </a>
+                  </p>
+                </div>
+              )}
+              {example.parsed.additionalResources.length > 0 && (
+                <div class="col-span-3 mt-12 pt-6 border-t-1 border-gray-200">
+                  <p>Additional resources:</p>
+                  <ul class="list-disc list-inside mt-1">
+                    {example.parsed.additionalResources.map(([link, title]) => (
+                      <li
+                        class="text-gray-700 hover:text-gray-900"
+                        key={link + title}
+                      >
+                        <a
+                          class="text-primary hover:underline focus:underline"
+                          href={link}
+                        >
+                          {title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </main>
+        </div>
+      ),
     };
   }
-
-
 
   const groupMap: [string, string][] = [
     ["Basics", "IconFlag3"],
@@ -205,7 +214,7 @@ export default function* () {
   yield {
     url: `/examples/`,
     title: `Deno by Example`,
-    content:
+    content: (
       <div className="w-full flex flex-col px-8 pt-6 mt-16 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-screen-xl mx-auto mb-20">
         <div className="pb-16 align-middle md:pb-0 w-full">
           <div className="mb-16 md:mb-24 text-center">
@@ -214,7 +223,9 @@ export default function* () {
               alt="Deno Examples"
               src="/examples.png"
             />
-            <h1 className="text-4xl md:text-6xl font-semibold mb-4">Deno by Example</h1>
+            <h1 className="text-4xl md:text-6xl font-semibold mb-4">
+              Deno by Example
+            </h1>
             <p className="max-w-prose mx-auto">
               A collection of annotated Deno examples, to be used as a reference
               for how to build with Deno, or as a guide to learn about many of
@@ -223,7 +234,7 @@ export default function* () {
           </div>
           <div
             className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4"
-            style={{columnGap: "3rem"}}
+            style={{ columnGap: "3rem" }}
           >
             {elements}
           </div>
@@ -232,15 +243,18 @@ export default function* () {
               Need an example that isn't here? Or want to add one of your
               own?<br /> We welcome contributions!{" "}
               <br />You can request more examples, or add your own at our{" "}
-              <a href="https://github.com/denoland/deno-docs?tab=readme-ov-file#examples" class="text-primary hover:underline focus:underline">
+              <a
+                href="https://github.com/denoland/deno-docs?tab=readme-ov-file#examples"
+                class="text-primary hover:underline focus:underline"
+              >
                 GitHub repository
               </a>
             </p>
           </div>
         </div>
       </div>
+    ),
   };
-
 }
 
 function SnippetComponent(props: {
@@ -275,7 +289,7 @@ function SnippetComponent(props: {
         <div class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight">
           {props.snippet.code && (
             <div class="nocopy h-full">
-              <pre><code>{props.snippet.code}</code></pre>
+              <pre class="highlight language-ts"><code dangerouslySetInnerHTML={{__html: props.snippet.code}}></code></pre>
             </div>
           )}
         </div>
