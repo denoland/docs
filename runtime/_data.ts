@@ -103,31 +103,107 @@ const sidebar = [
         items: [
           "/runtime/manual/tools/",
           "/runtime/manual/tools/unstable_flags/",
-          "/runtime/manual/tools/benchmarker/",
-          "/runtime/manual/tools/completions/",
-          "/runtime/manual/tools/cache/",
-          "/runtime/manual/tools/check/",
-          "/runtime/manual/tools/compiler/",
-          "/runtime/manual/tools/coverage/",
-          "/runtime/manual/tools/documentation_generator/",
-          "/runtime/manual/tools/eval/",
-          "/runtime/manual/tools/formatter/",
-          "/runtime/manual/tools/dependency_inspector/",
-          "/runtime/manual/tools/init/",
-          "/runtime/manual/tools/script_installer/",
-          "/runtime/manual/tools/jupyter/",
-          "/runtime/manual/tools/linter/",
-          "/runtime/manual/tools/publish/",
-          "/runtime/manual/tools/lsp/",
-          "/runtime/manual/tools/repl/",
-          "/runtime/manual/tools/run/",
-          "/runtime/manual/tools/serve/",
-          "/runtime/manual/tools/task_runner/",
-          "/runtime/manual/tools/test/",
-          "/runtime/manual/tools/types/",
-          "/runtime/manual/tools/uninstall/",
-          "/runtime/manual/tools/upgrade/",
-          "/runtime/manual/tools/vendor/",
+          {
+            label: "deno bench",
+            id: "/runtime/manual/tools/benchmarker/",
+          },
+          {
+            label: "deno completions",
+            id: "/runtime/manual/tools/completions/",
+          },
+          {
+            label: "deno cache",
+            id: "/runtime/manual/tools/cache/",
+          },
+          {
+            label: "deno check",
+            id: "/runtime/manual/tools/check/",
+          },
+          {
+            label: "deno compile",
+            id: "/runtime/manual/tools/compiler/",
+          },
+          {
+            label: "deno coverage",
+            id: "/runtime/manual/tools/coverage/",
+          },
+          {
+            label: "deno doc",
+            id: "/runtime/manual/tools/documentation_generator/",
+          },
+          {
+            label: "deno eval",
+            id: "/runtime/manual/tools/eval/",
+          },
+          {
+            label: "deno fmt",
+            id: "/runtime/manual/tools/formatter/",
+          },
+          {
+            label: "deno info",
+            type: "doc",
+            id: "/runtime/manual/tools/dependency_inspector/",
+          },
+          {
+            label: "deno init",
+            id: "/runtime/manual/tools/init/",
+          },
+          {
+            label: "deno install",
+            id: "/runtime/manual/tools/script_installer/",
+          },
+          {
+            label: "deno jupyter",
+            id: "/runtime/manual/tools/jupyter/",
+          },
+          {
+            label: "deno lint",
+            id: "/runtime/manual/tools/linter/",
+          },
+          {
+            label: "deno publish",
+            id: "/runtime/manual/tools/publish/",
+          },
+          {
+            label: "deno lsp",
+            id: "/runtime/manual/tools/lsp/",
+          },
+          {
+            label: "deno repl",
+            id: "/runtime/manual/tools/repl/",
+          },
+          {
+            label: "deno run",
+            id: "/runtime/manual/tools/run/",
+          },
+          {
+            label: "deno serve",
+            id: "/runtime/manual/tools/serve/",
+          },
+          {
+            label: "deno task",
+            id: "/runtime/manual/tools/task_runner/",
+          },
+          {
+            label: "deno test",
+            id: "/runtime/manual/tools/test/",
+          },
+          {
+            label: "deno types",
+            id: "/runtime/manual/tools/types/",
+          },
+          {
+            label: "deno uninstall",
+            id: "/runtime/manual/tools/uninstall/",
+          },
+          {
+            label: "deno upgrade",
+            id: "/runtime/manual/tools/upgrade/",
+          },
+          {
+            label: "deno vendor",
+            id: "/runtime/manual/tools/vendor/",
+          },
         ],
       },
       {

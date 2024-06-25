@@ -6,6 +6,7 @@ import postcss from "lume/plugins/postcss.ts";
 
 import tailwindConfig from "./tailwind.config.js";
 import search from "lume/plugins/search.ts";
+import esbuild from "lume/plugins/esbuild.ts";
 
 const site = lume();
 
@@ -19,5 +20,8 @@ site.use(
   tailwindcss({ options: tailwindConfig, extensions: [".tsx", ".mdx"] }),
 );
 site.use(postcss());
+site.use(esbuild({
+  extensions: [".client.ts"],
+}));
 
 export default site;

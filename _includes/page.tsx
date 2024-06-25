@@ -3,14 +3,13 @@ import {
   Sidebar as Sidebar_,
   SidebarCategory as SidebarCategory_,
   SidebarDoc as SidebarDoc_,
-  SidebarItem as SidebarItem_,
   SidebarLink as SidebarLink_,
   SidebarSection as SidebarSection_,
 } from "../types.ts";
 
 export const layout = "layout.tsx";
 
-export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
+export default function Page(props: Lume.Data) {
   const sidebar = props.sidebar as Sidebar_;
   return (
     <>
@@ -32,7 +31,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
 function Sidebar(props: { sidebar: Sidebar_; search: Searcher; url: string }) {
   return (
     <nav
-      class="pt-2 p-2 overflow-y-auto h-full"
+      class="pt-2 p-2 pr-0 overflow-y-auto h-full"
       style={{ scrollbarGutter: "stable", scrollbarWidth: "thin" }}
     >
       <ul>
@@ -82,7 +81,7 @@ function SidebarSection(
 }
 
 const LINK_CLASS =
-  "block px-3 py-1.5 text-[.8125rem] h-8 font-semibold text-gray-500 rounded-md hover:bg-pink-100 current:bg-gray-100 current:text-indigo-600/70 transition-colors duration-200 ease-in-out";
+  "block px-3 py-1.5 text-[.8125rem] leading-4 font-semibold text-gray-500 rounded-md hover:bg-pink-100 current:bg-gray-100 current:text-indigo-600/70 transition-colors duration-200 ease-in-out select-none";
 
 function SidebarItem(props: {
   item: string | SidebarDoc_ | SidebarLink_;
@@ -123,14 +122,40 @@ function SidebarCategory(props: {
   search: Searcher;
   url: string;
 }) {
+  const containsCurrent = props.item.items.some((item) => {
+    if (typeof item === "string") {
+      return item === props.url;
+    }
+    return item.id === props.url;
+  });
+
   return (
     <>
       <div
-        class={LINK_CLASS}
+        class={LINK_CLASS + " flex justify-between items-center" +
+          (containsCurrent ? " text-indigo-600/70" : "")}
+        data-accordion-trigger
       >
         {props.item.label}
+        <svg
+          class="transition duration-300 size-5"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          style={{
+            transform: containsCurrent ? "rotate(180deg)" : "rotate(90deg)",
+          }}
+        >
+          <path
+            fill="rgba(0,0,0,0.5)"
+            d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+          >
+          </path>
+        </svg>
       </div>
-      <ul class="ml-3">
+      <ul
+        class={`ml-3 ${containsCurrent ? "" : "hidden"}`}
+        data-accordion-content
+      >
         {props.item.items.map((item) => (
           <SidebarItem item={item} search={props.search} url={props.url} />
         ))}
