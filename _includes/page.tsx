@@ -11,6 +11,7 @@ export const layout = "layout.tsx";
 
 export default function Page(props: Lume.Data) {
   const sidebar = props.sidebar as Sidebar_;
+  if (sidebar === undefined) return;
   return (
     <>
       <aside class="fixed top-12 bottom-0 left-0 h-(calc(100vh-3rem)) w-74 border-r border-gray-200">
@@ -19,12 +20,87 @@ export default function Page(props: Lume.Data) {
         )}
       </aside>
       <div class="ml-74 relative">
-        <main class="mx-auto max-w-screen-xl">
-          {props.children}
+        <main class="mx-auto max-w-screen-md px-8 pt-4 pb-8">
+          <article class="px-8">
+            <Breadcrumbs
+              title={props.title!}
+              sidebar={sidebar}
+              url={props.url}
+            />
+            <h1>{props.title}</h1>
+            {props.children}
+          </article>
         </main>
         <props.comp.Footer />
       </div>
     </>
+  );
+}
+
+function Breadcrumbs(props: { title: string; sidebar: Sidebar_; url: string }) {
+  const crumbs = [];
+  outer: for (const section of props.sidebar) {
+    for (const item of section.items) {
+      if (typeof item === "string") {
+        if (item === props.url) break outer;
+      } else if ("items" in item) {
+        crumbs.push(item.label);
+        for (const subitem of item.items) {
+          if (typeof subitem === "string") {
+            if (subitem === props.url) break outer;
+          } else if (subitem.id === props.url) {
+            crumbs.push(item.label);
+            break outer;
+          }
+        }
+        crumbs.pop();
+      } else if ("id" in item && item.id === props.url) {
+        break outer;
+      }
+    }
+  }
+
+  crumbs.push(props.title);
+
+  return (
+    <nav class="mb-3">
+      <ul class="flex items-center">
+        <li class="pr-3 py-1.5 underline underline-offset-4 hover:no-underline hover:text-blue-600 transition duration-100">
+          <a href="/runtime/manual">Runtime</a>
+        </li>
+        <svg
+          class="size-6 rotate-90"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="rgba(0,0,0,0.5)"
+            d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+          >
+          </path>
+        </svg>
+        {crumbs.map((crumb, i) => (
+          <>
+            <li class="px-3 py-1.5">
+              {crumb}
+            </li>
+            {i < crumbs.length - 1 && (
+              <svg
+                class="size-6 rotate-90"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="rgba(0,0,0,0.5)"
+                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                >
+                </path>
+              </svg>
+            )}
+          </>
+        ))}
+      </ul>
+    </nav>
   );
 }
 
