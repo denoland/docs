@@ -14,15 +14,18 @@ const modules: Record<string, string> = {
   "deno": "",
 };
 
-/*
+
 const UNSTABLE_PREFIX = "**UNSTABLE**: New API, yet to be vetted.";
 
 for (const jsdoc of file.getDescendantsOfKind(ts.SyntaxKind.JSDoc)) {
-  console.log(JSON.stringify(jsdoc.getDescription(), null, 2));
-  let jsdocBody = jsdoc.getDescription().trim().slice(UNSTABLE_PREFIX.length).trim();
-  jsdoc.setDescription(jsdocBody);
+  if (jsdoc.compilerNode.comment?.startsWith?.(UNSTABLE_PREFIX)) {
+    let jsdocBody = jsdoc.compilerNode.comment.trim()
+      .slice(UNSTABLE_PREFIX.length)
+      .trim();
+    jsdoc.setDescription(jsdocBody);
+  }
 }
-*/
+
 
 for (
   const denoNs of file.getDescendantsOfKind(ts.SyntaxKind.ModuleDeclaration)
