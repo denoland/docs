@@ -1,7 +1,6 @@
 ---
 displayed_sidebar: subhosting
+title: Deno Subhosting
 ---
-
-# Deno Subhosting
 
 This URL redirected in production.

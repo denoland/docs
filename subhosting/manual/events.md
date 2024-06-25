@@ -1,4 +1,6 @@
-# Deployment events
+---
+title: Deployment events
+---
 
 During the lifetime of a deployment execution, several events are recorded into
 its execution logs. Using the

@@ -1,4 +1,6 @@
-# Subhosting Resources
+---
+title: Subhosting Resources
+---
 
 To build Subhosting with Deno Deploy, it helps to understand some key resources
 within the system. These resources are also represented in the

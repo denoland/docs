@@ -156,4 +156,4 @@ export const sidebar = [
 ] satisfies Sidebar;
 
 export const sectionTitle = "Deploy";
-export const sectionRoot = "/deploy/manual/";
+export const sectionHref = "/deploy/manual/";

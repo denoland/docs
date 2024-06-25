@@ -10,9 +10,10 @@ import tailwindConfig from "./tailwind.config.js";
 
 import "npm:prismjs@1.29.0/components/prism-typescript.js";
 import { full as emoji } from "npm:markdown-it-emoji@3";
+import anchor from "npm:markdown-it-anchor@9";
+import relativeLinksPlugin from "./markdown-it-relative-path.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
-import anchor from "npm:markdown-it-anchor@9";
 
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 
@@ -20,15 +21,20 @@ const site = lume({}, {
   markdown: {
     plugins: [
       emoji,
-      [anchor, {
-        permalink: anchor.permalink.linkInsideHeader({
-          symbol:
-            `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
-          placement: "after",
-        }),
-      }],
+      [
+        anchor,
+        {
+          permalink: anchor.permalink.linkInsideHeader({
+            symbol:
+              `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
+            placement: "after",
+          }),
+        },
+      ],
+      relativeLinksPlugin,
     ],
     options: {
+      linkify: true,
       langPrefix: "highlight notranslate language-",
     },
   },
@@ -36,6 +42,9 @@ const site = lume({}, {
 
 site.ignore("./old");
 site.copy("static", ".");
+site.copy("subhosting/api/images");
+site.copy("deploy/docs-images");
+site.copy("runtime/manual/images");
 
 site.use(search());
 site.use(jsx());

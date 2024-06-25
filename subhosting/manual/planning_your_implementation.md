@@ -1,4 +1,6 @@
-# Planning your implementation
+---
+title: Planning your implementation
+---
 
 Let's say, for example, that you are building a SaaS CRM platform like
 Salesforce. You want to empower your customers to write JavaScript code that

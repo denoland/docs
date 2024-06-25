@@ -1,4 +1,6 @@
-# About Subhosting
+---
+title: About Subhosting
+---
 
 Deno Subhosting is a robust platform designed to allow Software as a Service
 (SaaS) providers to securely run code written by their customers. The Subhosting
