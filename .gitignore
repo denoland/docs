@@ -1,6 +1,10 @@
 _site
 _cache
 
+.idea
+
+node_modules
+
 reference_gen/gen
 reference_gen/node_modules
 reference_gen/types

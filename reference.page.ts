@@ -1,6 +1,6 @@
 import { walkSync } from "@std/fs/walk";
 
-export const layout = "reference.tsx";
+export const layout = "raw.tsx";
 
 export default function* () {
   try {
