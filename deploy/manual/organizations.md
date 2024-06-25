@@ -1,4 +1,6 @@
-# Organizations
+---
+title: "Organizations"
+---
 
 **Organizations** allow you to collaborate with other users. A project created
 in an organization is accessible to all members of the organization. Users

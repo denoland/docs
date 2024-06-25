@@ -1,4 +1,6 @@
-# Publishing Modules
+---
+title: "Publishing Modules"
+---
 
 Deno is not prescriptive about how developers make their modules
 available—modules may be imported from any source. To help publish and

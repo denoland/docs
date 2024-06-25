@@ -1,4 +1,6 @@
-# deno cache
+---
+title: "deno cache"
+---
 
 Cache and compile remote dependencies recursively.
 

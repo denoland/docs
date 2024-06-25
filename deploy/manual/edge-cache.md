@@ -1,4 +1,6 @@
-# Edge Cache
+---
+title: "Edge Cache"
+---
 
 :::caution Beta feature
 

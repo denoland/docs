@@ -1,4 +1,6 @@
-# Using LinkeDOM with Deno
+---
+title: "Using LinkeDOM with Deno"
+---
 
 [LinkeDOM](https://github.com/WebReflection/linkedom) is a DOM-like namespace to
 be used in environments, like Deno, which don't implement the DOM.

@@ -1,4 +1,6 @@
-# npm via CDNs
+---
+title: "npm via CDNs"
+---
 
 Most developers currently use npm modules in Deno by importing them using one of
 many CDNs. You can reference the CDN URL in your Deno code or directly in your

@@ -1,4 +1,6 @@
-# Mocking
+---
+title: "Mocking"
+---
 
 Test spies are function stand-ins that are used to assert if a function's
 internal behavior matches expectations. Test spies on methods keep the original

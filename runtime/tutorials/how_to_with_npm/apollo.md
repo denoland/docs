@@ -1,4 +1,6 @@
-# How to use Apollo with Deno
+---
+title: "How to use Apollo with Deno"
+---
 
 [Apollo Server](https://www.apollographql.com/) is a GraphQL server that you can
 set up in minutes and use with your existing data source (or REST API). You can

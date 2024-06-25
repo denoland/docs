@@ -1,4 +1,6 @@
-# Release Schedule
+---
+title: "Release Schedule"
+---
 
 A new minor release for the `deno` cli is released every month, on the third
 Thursday of the month.

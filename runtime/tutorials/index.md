@@ -4,7 +4,9 @@ sidebar_label: Overview
 pagination_next: tutorials/hello_world
 ---
 
-# Examples
+---
+title: "Examples"
+---
 
 Here you can find some example programs that you can use to learn more about the
 runtime.

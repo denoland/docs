@@ -1,4 +1,6 @@
-# Pricing and limitations
+---
+title: "Pricing and limitations"
+---
 
 Please see [our pricing page](https://www.deno.com/deploy/pricing) for the
 overview of the available features in all plans. If you have a use case that

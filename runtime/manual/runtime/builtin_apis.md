@@ -1,4 +1,6 @@
-# Deno namespace APIs
+---
+title: "Deno namespace APIs"
+---
 
 The global Deno namespace contains APIs that are not web standard, including
 APIs for reading from files, opening TCP sockets, serving HTTP, and executing

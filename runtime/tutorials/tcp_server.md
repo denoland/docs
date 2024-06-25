@@ -1,4 +1,6 @@
-# TCP server
+---
+title: "TCP server"
+---
 
 This is an example of a server which accepts connections on port 8080, and
 returns to the client anything it sends.

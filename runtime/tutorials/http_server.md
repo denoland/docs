@@ -1,4 +1,6 @@
-# Simple HTTP Web Server
+---
+title: "Simple HTTP Web Server"
+---
 
 ## Concepts
 

@@ -1,4 +1,6 @@
-# Managing Dependencies
+---
+title: "Managing Dependencies"
+---
 
 ## Concepts
 

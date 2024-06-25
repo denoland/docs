@@ -1,4 +1,6 @@
-# Contributing
+---
+title: "Contributing"
+---
 
 We welcome and appreciate all contributions to Deno.
 

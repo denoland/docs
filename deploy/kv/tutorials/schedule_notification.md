@@ -1,4 +1,6 @@
-# Schedule a notification for a future date
+---
+title: "Schedule a notification for a future date"
+---
 
 A common use case for [queues](../manual/queue_overview.md) is scheduling work
 to be completed at some point in the future. To help demonstrate how this works,

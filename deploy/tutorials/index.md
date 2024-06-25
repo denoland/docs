@@ -3,9 +3,8 @@ displayed_sidebar: deployGuideHome
 sidebar_position: 1
 sidebar_label: Overview
 pagination_next: tutorials/tutorial-http-server
+title: "Tutorials"
 ---
-
-# Tutorials
 
 Here, you'll find a collection of tutorials and example applications for Deno
 Deploy. Check our ever expanding list of tutorials in the nav, and explore

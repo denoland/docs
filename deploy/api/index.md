@@ -1,11 +1,10 @@
 ---
+title: "API Reference"
 displayed_sidebar: deployGuideHome
 sidebar_position: 1
 sidebar_label: Overview
 pagination_next: api/runtime-broadcast-channel
 ---
-
-# API Reference
 
 This is a reference for runtime APIs available on Deno Deploy. This API is very
 similar to the standard [runtime API](/runtime/manual/runtime), but some APIs

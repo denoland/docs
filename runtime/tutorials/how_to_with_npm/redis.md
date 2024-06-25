@@ -1,4 +1,6 @@
-# How to Use Redis with Deno
+---
+title: "How to Use Redis with Deno"
+---
 
 [Redis](https://redis.io/) is an in-memory data store you can use for caching,
 as a message broker, or for streaming data.

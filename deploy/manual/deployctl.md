@@ -1,4 +1,6 @@
-# Using deployctl on the command line
+---
+title: "Using deployctl on the command line"
+---
 
 `deployctl` is a command line tool (CLI) that lets you operate the Deno Deploy
 platform without leaving your terminal. With it you can deploy your code, create

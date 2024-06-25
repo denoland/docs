@@ -1,8 +1,7 @@
 ---
 sidebar_position: 2
+title: "Testing in Deno"
 ---
-
-# Testing in Deno
 
 Deno has a built-in test runner that you can use for testing JavaScript or
 TypeScript code.

@@ -1,4 +1,6 @@
-# Custom domains
+---
+title: "Custom domains"
+---
 
 By default a project can be reached at its preview URL, which is
 `$PROJECT_ID.deno.dev`, e.g. `dead-clam-55.deno.dev`. You can also add a custom

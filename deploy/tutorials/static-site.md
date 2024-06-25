@@ -1,4 +1,6 @@
-# Deploy a static site
+---
+title: "Deploy a static site"
+---
 
 This tutorial will cover how to deploy a static site (no JavaScript) on Deno
 Deploy.

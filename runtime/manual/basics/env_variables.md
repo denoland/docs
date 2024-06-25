@@ -1,4 +1,6 @@
-# Environment variables
+---
+title: "Environment variables"
+---
 
 There are a few ways to use environment variables in Deno:
 

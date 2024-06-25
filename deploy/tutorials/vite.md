@@ -1,4 +1,6 @@
-# Deploy a React app with Vite
+---
+title: "Deploy a React app with Vite"
+---
 
 This tutorial covers how to deploy a Vite Deno and React app on Deno Deploy.
 

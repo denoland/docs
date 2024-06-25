@@ -1,4 +1,6 @@
-# Building a Word Finder App with Deno
+---
+title: "Building a Word Finder App with Deno"
+---
 
 ## Getting Started
 

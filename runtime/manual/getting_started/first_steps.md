@@ -1,6 +1,8 @@
-import { replacements } from "@site/src/components/Replacement";
+---
+title: First Steps
+---
 
-# First Steps
+import { replacements } from "@site/src/components/Replacement";
 
 Welcome to Deno! If you're just getting started, here's a primer on some key
 features and functionality of the runtime. If you haven't already, make sure to

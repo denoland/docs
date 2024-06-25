@@ -1,4 +1,6 @@
-# BroadcastChannel
+---
+title: "BroadcastChannel"
+---
 
 In Deno Deploy, code is run in different data centers around the world in order
 to reduce latency by servicing requests at the data center nearest to the

@@ -1,4 +1,6 @@
-# Simple HTTP server
+---
+title: "Simple HTTP server"
+---
 
 In this tutorial, let's build a HTTP server that responds to all incoming HTTP
 requests with `Hello, world!` and a `200 OK` HTTP status. We will be using the

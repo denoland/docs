@@ -1,4 +1,6 @@
-# HTTP Request
+---
+title: "HTTP Request"
+---
 
 The [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request)
 interface is part of the Fetch API and represents the request of fetch().

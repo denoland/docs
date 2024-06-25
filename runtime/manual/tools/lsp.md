@@ -1,4 +1,6 @@
-# deno lsp
+---
+title: "deno lsp"
+---
 
 Starts the Deno language server. The language server is used by editors to
 provide features like intellisense, code formatting, and more.

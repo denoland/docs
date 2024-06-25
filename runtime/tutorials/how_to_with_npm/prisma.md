@@ -1,4 +1,6 @@
-# How to create a RESTful API with Prisma and Oak
+---
+title: "How to create a RESTful API with Prisma and Oak"
+---
 
 [Prisma](https://prisma.io) has been one of our top requested modules to work
 with in Deno. The demand is understandable, given that Prisma's developer

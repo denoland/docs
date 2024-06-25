@@ -1,4 +1,6 @@
-# Workers
+---
+title: "Workers"
+---
 
 Deno supports
 [`Web Worker API`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker).

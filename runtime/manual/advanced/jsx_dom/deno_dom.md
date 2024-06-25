@@ -1,4 +1,6 @@
-# Using deno-dom with Deno
+---
+title: "Using deno-dom with Deno"
+---
 
 [deno-dom](https://deno.land/x/deno_dom) is an implementation of DOM and HTML
 parser in Deno. It is implemented in Rust (via Wasm) and TypeScript. There is

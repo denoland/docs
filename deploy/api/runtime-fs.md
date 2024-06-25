@@ -1,4 +1,6 @@
-# File system APIs
+---
+title: "File system APIs"
+---
 
 Deno Deploy supports a limited set of the file system APIs available in Deno.
 These file system APIs can access static files from your deployments. Static

@@ -1,4 +1,6 @@
-# Using jsdom with Deno
+---
+title: "Using jsdom with Deno"
+---
 
 [jsdom](https://github.com/jsdom/jsdom) is a pure JavaScript implementation of
 many web standards, notably the WHATWG DOM and HTML Standards. It's main goal is

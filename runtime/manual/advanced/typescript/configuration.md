@@ -1,4 +1,6 @@
-# Configuring TypeScript in Deno
+---
+title: "Configuring TypeScript in Deno"
+---
 
 TypeScript comes with a lot of different options that can be configured, but
 Deno strives to make it easy to use TypeScript with Deno. Lots of different

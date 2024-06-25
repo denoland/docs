@@ -1,4 +1,6 @@
-# Overview of JSX and DOM in Deno
+---
+title: "Overview of JSX and DOM in Deno"
+---
 
 One of the common use cases for Deno is to handle workloads as part of web
 applications. Because Deno includes many of the browser APIs built-in, there is

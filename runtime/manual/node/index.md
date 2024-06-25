@@ -1,4 +1,6 @@
-# Node and npm modules
+---
+title: "Node and npm modules"
+---
 
 Many people will want to leverage code and libraries that are built for
 [Node](https://nodejs.org/), in particular the large set of packages available

@@ -1,4 +1,6 @@
-# Deploy with GitHub integration
+---
+title: "Deploy with GitHub integration"
+---
 
 The simplest way to deploy more complex projects is via our Github integration.
 This allows you to link a Deno Deploy project to a GitHub repository. Every time

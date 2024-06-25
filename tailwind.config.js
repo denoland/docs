@@ -1,19 +1,15 @@
 // tailwind.config.js
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+/** @type {import('npm:tailwindcss').Config} */
+export default {
   corePlugins: {
-    preflight: false, // disable Tailwind's reset
+    preflight: true,
   },
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "../docs/**/*.mdx"], // my markdown stuff is in ../docs, not /src
-  darkMode: ["class", '[data-theme="dark"]'], // hooks into docusaurus' dark mode settigns
+  darkMode: ["class", '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
         transparent: "transparent",
         current: "currentColor",
-
-        // tailwind v3
-        "neutral-800": "#262626",
 
         // New design system
         white: "#ffffff",
@@ -58,7 +54,20 @@ module.exports = {
           7: "#db01ff",
         },
       },
+
+      width: {
+        74: "18.5rem",
+      },
+      margin: {
+        74: "18.5rem",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    {
+      handler(api) {
+        api.addVariant("current", "[aria-current]&");
+      },
+    },
+  ],
 };

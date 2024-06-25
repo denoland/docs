@@ -1,4 +1,6 @@
-# HTTP requests (fetch)
+---
+title: "HTTP requests (fetch)"
+---
 
 The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 allows you to make outbound HTTP requests in Deno Deploy. It is a web standard

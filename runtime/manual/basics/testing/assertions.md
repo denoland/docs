@@ -1,4 +1,6 @@
-# Assertions
+---
+title: "Assertions"
+---
 
 To help developers write tests the Deno standard library comes with a built-in
 [assertions module](https://deno.land/std/assert/mod.ts) which can be imported

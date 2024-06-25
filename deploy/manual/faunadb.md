@@ -1,4 +1,6 @@
-# Connect to FaunaDB
+---
+title: "Connect to FaunaDB"
+---
 
 FaunaDB calls itself "the data API for modern applications." It's a database
 with a GraphQL interface that enables you to use GraphQL to interact with it.

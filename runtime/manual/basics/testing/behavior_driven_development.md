@@ -1,4 +1,6 @@
-# Behavior-Driven Development
+---
+title: "Behavior-Driven Development"
+---
 
 With the [bdd.ts](https://deno.land/std/testing/bdd.ts) module you can write
 your tests in a familiar format for grouping tests and adding setup/teardown

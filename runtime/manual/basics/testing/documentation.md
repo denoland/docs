@@ -1,4 +1,6 @@
-# Documentation Tests
+---
+title: "Documentation Tests"
+---
 
 Deno supports type-checking your documentation examples.
 

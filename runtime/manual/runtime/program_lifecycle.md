@@ -1,4 +1,6 @@
-# Program Lifecycle
+---
+title: "Program Lifecycle"
+---
 
 Deno supports browser compatible lifecycle events:
 

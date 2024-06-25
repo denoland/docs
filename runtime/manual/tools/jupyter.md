@@ -1,4 +1,6 @@
-# Jupyter Kernel for Deno
+---
+title: "Jupyter Kernel for Deno"
+---
 
 <p>
 <span class="theme-doc-version-badge badge badge--secondary">

@@ -1,4 +1,6 @@
-# FAQs about TypeScript in Deno
+---
+title: "FAQs about TypeScript in Deno"
+---
 
 ## Can I use TypeScript not written for Deno?
 

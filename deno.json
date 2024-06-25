@@ -1,6 +1,19 @@
 {
-  "lock": false,
-  "unstable": [
-    "kv"
-  ]
+  "imports": {
+    "lume/": "https://deno.land/x/lume@v2.2.2/",
+    "@theme/Tabs": "./_components/Tabs.tsx",
+    "@theme/TabItem": "./_components/TabItem.tsx"
+  },
+  "tasks": {
+    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
+    "build": "deno task lume",
+    "serve": "deno task lume -s"
+  },
+  "compilerOptions": {
+    "types": [
+      "lume/types.ts"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "npm:preact"
+  }
 }

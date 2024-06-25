@@ -1,4 +1,6 @@
-# Test Sanitizers
+---
+title: "Test Sanitizers"
+---
 
 The test runner offers several sanitizers to ensure that the test behaves in a
 reasonable and expected way.

@@ -1,4 +1,6 @@
-# Using WebAssembly
+---
+title: "Using WebAssembly"
+---
 
 Designed to be used alongside JavaScript to speed up key application components,
 [WebAssembly](https://webassembly.org/) can have much higher, and more

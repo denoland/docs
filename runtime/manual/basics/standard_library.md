@@ -1,4 +1,6 @@
-# Standard Library
+---
+title: "Standard Library"
+---
 
 Deno provides a set of standard modules that are audited by the core team and
 are guaranteed to work with Deno.

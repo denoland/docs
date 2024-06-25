@@ -1,4 +1,6 @@
-# Import Maps
+---
+title: "Import Maps"
+---
 
 In order for Deno to resolve a _bare specifier_ like `"react"` or `"lodash"`, it
 needs to be told where to look for it. Does `"lodash"` refer to an npm module or

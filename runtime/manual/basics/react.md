@@ -1,4 +1,6 @@
-# Using React with Deno
+---
+title: "Using React with Deno"
+---
 
 To use React with Deno, we recommend using one of the third-party frameworks
 below.

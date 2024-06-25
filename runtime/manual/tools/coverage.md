@@ -1,4 +1,6 @@
-# deno coverage
+---
+title: "deno coverage"
+---
 
 Print coverage reports from coverage profiles.
 

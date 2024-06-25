@@ -1,4 +1,6 @@
-# File Server
+---
+title: "File Server"
+---
 
 ## Concepts
 

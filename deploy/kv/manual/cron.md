@@ -1,6 +1,8 @@
-import Admonition from "./_admonition.mdx";
+---
+title: "Scheduling cron tasks"
+---
 
-# Scheduling cron tasks
+import Admonition from "./_admonition.tsx";
 
 <Admonition />
 

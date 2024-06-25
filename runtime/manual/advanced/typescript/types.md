@@ -1,4 +1,6 @@
-# Types and Type Declarations
+---
+title: "Types and Type Declarations"
+---
 
 One of the design principles of Deno is no non-standard module resolution. When
 TypeScript is type checking a file, it only cares about the types for the file,

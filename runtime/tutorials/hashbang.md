@@ -1,4 +1,6 @@
-# Making Scripts Executable With a Hashbang (Shebang)
+---
+title: "Making Scripts Executable With a Hashbang (Shebang)"
+---
 
 ## Concepts
 

@@ -1,4 +1,6 @@
-# Location API
+---
+title: "Location API"
+---
 
 Deno supports the
 [`location`](https://developer.mozilla.org/en-US/docs/Web/API/Window/location)

@@ -1,4 +1,6 @@
-# deno types
+---
+title: "deno types"
+---
 
 Prints runtime TypeScript declarations.
 

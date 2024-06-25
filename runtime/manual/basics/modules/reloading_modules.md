@@ -1,6 +1,8 @@
-import { replacements } from "@site/src/components/Replacement";
+---
+title: "Reloading Modules"
+---
 
-# Reloading Modules
+import { replacements } from "@site/src/components/Replacement";
 
 By default, a module in the cache will be reused without fetching or
 re-compiling it. Sometimes this is not desirable and you can force deno to

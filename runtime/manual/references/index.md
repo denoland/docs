@@ -1,4 +1,6 @@
-# References
+---
+title: "References"
+---
 
 This chapter contains links to reference manuals and sheets, including:
 

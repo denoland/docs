@@ -1,4 +1,6 @@
-# Snapshot Testing
+---
+title: "Snapshot Testing"
+---
 
 The Deno standard library comes with a
 [snapshot module](https://deno.land/std/testing/snapshot.ts), which enables

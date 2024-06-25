@@ -1,4 +1,6 @@
-# Application logging
+---
+title: "Application logging"
+---
 
 Applications can generate logs at runtime using the console API, with methods
 such as `console.log`, `console.error`, etc. These logs can be viewed in real

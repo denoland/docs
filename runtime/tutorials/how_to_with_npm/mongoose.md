@@ -1,4 +1,6 @@
-# How to use Mongoose with Deno
+---
+title: "How to use Mongoose with Deno"
+---
 
 [Mongoose](https://mongoosejs.com/) is a popular, schema-based library that
 models data for [MongoDB](https://www.mongodb.com/). It simplifies writing

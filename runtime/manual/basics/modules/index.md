@@ -1,4 +1,6 @@
-# ECMAScript Modules in Deno
+---
+title: "ECMAScript Modules in Deno"
+---
 
 ## Concepts
 

@@ -1,4 +1,6 @@
-# Using Visual Studio Code
+---
+title: "Using Visual Studio Code"
+---
 
 In this section we are going to go into depth about developing Deno applications
 using [Visual Studio Code](https://code.visualstudio.com/) and the official

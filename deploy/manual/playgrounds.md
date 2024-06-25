@@ -1,4 +1,6 @@
-# Playgrounds
+---
+title: "Playgrounds"
+---
 
 **Playgrounds** are an easy way to play around with Deno Deploy, and to create
 small projects. Using playgrounds you can write code, run it, and see the output

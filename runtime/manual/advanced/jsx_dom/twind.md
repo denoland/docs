@@ -1,4 +1,6 @@
-# Using Twind with Deno
+---
+title: "Using Twind with Deno"
+---
 
 [Twind](https://twind.style/) is a _tailwind-in-js_ solution for using
 [Tailwind](https://tailwindcss.com/). Twind is particularly useful in Deno's

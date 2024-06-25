@@ -1,4 +1,6 @@
-# `deno fmt`, code formatting
+---
+title: "`deno fmt`, code formatting"
+---
 
 Deno ships with a built-in code formatter that will auto-format the following
 files:

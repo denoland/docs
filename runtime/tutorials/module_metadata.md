@@ -1,4 +1,6 @@
-# Module Metadata
+---
+title: "Module Metadata"
+---
 
 ## Concepts
 

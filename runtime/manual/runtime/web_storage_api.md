@@ -1,4 +1,6 @@
-# Web Storage API
+---
+title: "Web Storage API"
+---
 
 Deno 1.10 introduced the
 [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)

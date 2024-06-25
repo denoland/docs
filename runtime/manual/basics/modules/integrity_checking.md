@@ -1,4 +1,6 @@
-# Integrity Checking & Lock Files
+---
+title: "Integrity Checking & Lock Files"
+---
 
 ## Introduction
 

@@ -1,4 +1,6 @@
-# Use WordPress as a headless CMS
+---
+title: "Use WordPress as a headless CMS"
+---
 
 WordPress is the most popular CMS in the world, but is difficult to use in a
 "headless" form, i.e. with a custom frontend.

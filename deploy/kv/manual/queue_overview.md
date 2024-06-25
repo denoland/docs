@@ -1,6 +1,8 @@
-import Admonition from "./_admonition.mdx";
+---
+title: "Using Queues"
+---
 
-# Using Queues
+import Admonition from "./_admonition.tsx";
 
 <Admonition />
 

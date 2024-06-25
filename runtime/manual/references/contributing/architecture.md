@@ -1,4 +1,6 @@
-# Internal Details
+---
+title: "Internal Details"
+---
 
 ## Deno and Linux analogy
 

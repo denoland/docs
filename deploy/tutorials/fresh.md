@@ -1,4 +1,6 @@
-# Basic Fresh site
+---
+title: "Basic Fresh site"
+---
 
 This tutorial will cover how to deploy a Fresh application on Deno Deploy.
 

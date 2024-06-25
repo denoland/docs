@@ -1,4 +1,6 @@
-# Deno Deploy Use Cases
+---
+title: "Deno Deploy Use Cases"
+---
 
 Some popular use-cases for Deno currently are:
 

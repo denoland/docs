@@ -1,4 +1,6 @@
-# Advanced Topics
+---
+title: "Advanced Topics"
+---
 
 In this chapter, you will find advanced Deno concepts, including:
 

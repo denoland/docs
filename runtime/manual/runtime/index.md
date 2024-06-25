@@ -1,4 +1,6 @@
-# Runtime
+---
+title: "Runtime"
+---
 
 Documentation for all runtime functions (Web APIs + `Deno` global) can be found
 at [`/api`](https://deno.land/api) or with adding the _unstable_ APIs which are

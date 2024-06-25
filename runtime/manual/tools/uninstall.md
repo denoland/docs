@@ -1,4 +1,6 @@
-# deno uninstall
+---
+title: "deno uninstall"
+---
 
 Uninstalls an executable script in the installation root's bin directory.
 

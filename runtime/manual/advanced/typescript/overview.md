@@ -1,4 +1,6 @@
-# Overview of TypeScript in Deno
+---
+title: "Overview of TypeScript in Deno"
+---
 
 One of the benefits of Deno is that it treats TypeScript as a first class
 language, just like JavaScript or WebAssembly, when running code in Deno. What

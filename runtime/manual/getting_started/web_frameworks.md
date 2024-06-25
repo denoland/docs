@@ -1,8 +1,7 @@
 ---
 pagination_next: manual/basics/permissions
+title: "Web Frameworks"
 ---
-
-# Web Frameworks
 
 Most likely, if you're building a more complex application, you'll be
 interacting with Deno through a web framework. There are two kinds of web

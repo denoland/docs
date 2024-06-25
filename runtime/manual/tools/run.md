@@ -1,4 +1,6 @@
-# `deno run`, run a file
+---
+title: "`deno run`, run a file"
+---
 
 `deno run [OPTIONS] [SCRIPT_ARG]` run a JavaScript or TypeScript file.
 

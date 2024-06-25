@@ -1,4 +1,6 @@
-# Deno 1.x to 2.x Migration Guide
+---
+title: "Deno 1.x to 2.x Migration Guide"
+---
 
 This document contains guidance for migrating from Deno version 1.x to the
 upcoming Deno 2.0.

@@ -1,0 +1,6 @@
+{
+  "lock": false,
+  "unstable": [
+    "kv"
+  ]
+}

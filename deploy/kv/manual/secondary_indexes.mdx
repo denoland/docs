@@ -1,6 +1,8 @@
-import Admonition from "./_admonition.mdx";
+---
+title: "Secondary Indexes"
+---
 
-# Secondary Indexes
+import Admonition from "./_admonition.tsx";
 
 <Admonition />
 
@@ -103,7 +105,6 @@ To implement a unique secondary index for this example, follow these steps:
    }
    ```
 
-   <!-- deno-fmt-ignore -->
    > This function first retrieves the user by their ID to get the users email
    > address. This is needed to retrieve the email that is needed to construct
    > the key for the secondary index for this user address. It then performs an
@@ -141,7 +142,6 @@ To implement a non-unique secondary index for this example, follow these steps:
 
 2. Define the `insertUser` function:
 
-   <!-- deno-fmt-ignore -->
    ```ts
    async function insertUser(user: User) {
      const primaryKey = ["users", user.id];

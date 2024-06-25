@@ -1,4 +1,6 @@
-# deno completions
+---
+title: "deno completions"
+---
 
 Output shell completion script to standard output.
 

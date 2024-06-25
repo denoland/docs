@@ -1,4 +1,6 @@
-# Unstable Feature Flags
+---
+title: "Unstable Feature Flags"
+---
 
 New features of the Deno runtime are often released behind feature flags, so
 users can try out new APIs and features before they are finalized. Current

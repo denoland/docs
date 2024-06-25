@@ -1,4 +1,6 @@
-# Compressing response bodies
+---
+title: "Compressing response bodies"
+---
 
 Compressing the response body to save bandwidth is a common practice. To take
 some work off your shoulder, we built the capabilities directly into Deploy.
