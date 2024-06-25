@@ -1,0 +1,22 @@
+{
+  "Cache": "Tools for caching and managing data. Store and retrieve data from the cache, manage cache storage limits, and handle cache-related events.",
+  "Canvas": "Create, transform, and display images and graphics within the HTML element.",
+  "Crypto": "Cryptographic functionality for secure communication, data protection, and key management. Generate secure random numbers, encrypt and decrypt data, and manage cryptographic keys.",
+  "Encoding": "Handle character encoding, decoding, and binary data conversion.",
+  "Events": "Handle events and interactions. Listen for and respond to various events, including custom events, errors, progress, and promise rejections.",
+  "Fetch": "HTTP client for fetching data across a network. Retrieve resources from servers, handle responses, and manage network requests.",
+  "File": "File and data manipulation tools. Handle files, read data and work with binary content.",
+  "GPU": "GPU programming and rendering. Efficiently use a device’s graphics processing unit (GPU) for high-performance computations and complex image rendering.",
+  "I/O": "",
+  "Intl": "Tools for internationalization and localization. Create language-aware applications, handle date and time formatting, and adapt content for different locales.",
+  "Messaging": "Facilitate communication between different parts of an application, allowing data exchange and coordination.",
+  "Performance": "Measure, analyze, and optimize application performance.",
+  "Platform": "",
+  "Storage": "Store data locally within the browser. Manage session storage and local storage.",
+  "Streams": "Manage data streams, queuing strategies, and transformations. Handle data in chunks, process large datasets, and optimize memory usage.",
+  "Temporal": "Date and time handling. Includes long-lived Workflows, calendar systems, time zones, and precise duration calculations.",
+  "URL": "Manipulate URLs, extract data from URLs and manage query parameters.",
+  "WASM": "Efficiently execute computationally intensive tasks. WASM module compilation, instantiation, memory management, and interaction with imports and exports.",
+  "WebSockets": "Enable real-time communication between clients and servers using WebSockets. Tools to create interactive and dynamic applications.",
+  "Workers": "Run script operations in background threads. Manage worker threads, communicate with workers, and handle data transfer between workers and the main thread."
+}

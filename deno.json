@@ -1,8 +1,9 @@
 {
   "imports": {
-    "lume/": "https://deno.land/x/lume@v2.2.2/",
+    "@std/fs": "jsr:@std/fs@^0.229.3",
+    "@theme/TabItem": "./_components/TabItem.tsx",
     "@theme/Tabs": "./_components/Tabs.tsx",
-    "@theme/TabItem": "./_components/TabItem.tsx"
+    "lume/": "https://deno.land/x/lume@v2.2.2/"
   },
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",

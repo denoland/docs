@@ -24,4 +24,16 @@ site.use(esbuild({
   extensions: [".client.ts"],
 }));
 
+site.copy("reference_gen/gen/deno/page.css", "/api/deno/page.css");
+site.copy("reference_gen/gen/deno/styles.css", "/api/deno/styles.css");
+site.copy("reference_gen/gen/deno/script.js", "/api/deno/script.js");
+
+site.copy("reference_gen/gen/web/page.css", "/api/web/page.css");
+site.copy("reference_gen/gen/web/styles.css", "/api/web/styles.css");
+site.copy("reference_gen/gen/web/script.js", "/api/web/script.js");
+
+site.copy("reference_gen/gen/node/page.css", "/api/node/page.css");
+site.copy("reference_gen/gen/node/styles.css", "/api/node/styles.css");
+site.copy("reference_gen/gen/node/script.js", "/api/node/script.js");
+
 export default site;

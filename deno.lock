@@ -15,6 +15,7 @@
       "jsr:@std/fmt@^0.225.4": "jsr:@std/fmt@0.225.4",
       "jsr:@std/front-matter@0.224.2": "jsr:@std/front-matter@0.224.2",
       "jsr:@std/fs@0.229.3": "jsr:@std/fs@0.229.3",
+      "jsr:@std/fs@^0.229.3": "jsr:@std/fs@0.229.3",
       "jsr:@std/fs@^1.0.0-rc.1": "jsr:@std/fs@1.0.0-rc.1",
       "jsr:@std/html@0.224.2": "jsr:@std/html@0.224.2",
       "jsr:@std/http@0.224.5": "jsr:@std/http@0.224.5",
@@ -2290,5 +2291,10 @@
     "https://deno.land/x/vento@v0.12.7/src/loader.ts": "eb01b0dca7ea8bcdcdfd30b1f90f2fad28fb7f2cfd943900322a85bfaa86130c",
     "https://deno.land/x/vento@v0.12.7/src/tokenizer.ts": "acafb05ca528a27cb99bb1c34765362fc0a4dc2982848dd4b7983e27dcb17d69",
     "https://deno.land/x/vento@v0.12.7/src/transformer.ts": "587a0b107a2bd1437a3093c4c44c07e4fdf3abfaaf8e845767b69bd34a039154"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/fs@^0.229.3"
+    ]
   }
 }

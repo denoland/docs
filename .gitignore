@@ -1,2 +1,6 @@
 _site
 _cache
+
+reference_gen/gen
+reference_gen/node_modules
+reference_gen/types
