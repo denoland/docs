@@ -57,6 +57,10 @@ export default function Header({
             name="deno.com"
             external
           />
+          <div class="w-[100px] lg:w-[150px]">
+            <orama-search-button />
+            <orama-searchbox />
+          </div>
         </div>
       </nav>
 
@@ -136,4 +140,13 @@ function HeaderItem({
         )}
     </a>
   );
+}
+
+declare module "npm:preact" {
+  namespace JSX {
+    interface IntrinsicElements {
+      "orama-searchbox": unknown;
+      "orama-search-button": unknown;
+    }
+  }
 }

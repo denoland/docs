@@ -1,5 +1,3 @@
-import { walkSync } from "@std/fs/walk";
-
 export const layout = "raw.tsx";
 export const url = "/";
 export const title =

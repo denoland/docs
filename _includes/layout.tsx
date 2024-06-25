@@ -1,6 +1,6 @@
 export default function Layout(props: Lume.Data) {
   return (
-    <html lang="en">
+    <html lang="en" class="h-dvh overflow-hidden">
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,9 +23,11 @@ export default function Layout(props: Lume.Data) {
         />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/gfm.css" />
-        <script type="module" src="/sidebar.client.js" defer inline></script>
+        <script src="/orama-searchbox-1.0.0-rc45.js" defer></script>
+        <script type="module" src="/sidebar.client.js"></script>
+        <script type="module" src="/search.client.js"></script>
       </head>
-      <body>
+      <body class="h-dvh overflow-hidden">
         <props.comp.Header url={props.url} />
         {props.children}
       </body>

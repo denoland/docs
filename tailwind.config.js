@@ -57,10 +57,7 @@ export default {
         },
       },
 
-      width: {
-        74: "18.5rem",
-      },
-      margin: {
+      spacing: {
         74: "18.5rem",
       },
 

@@ -60,6 +60,9 @@ site.use(tailwindcss({
 site.use(postcss());
 site.use(esbuild({
   extensions: [".client.ts"],
+  options: {
+    minify: false,
+  },
 }));
 site.use(prism());
 site.use(toc({ anchor: false }));
@@ -81,5 +84,11 @@ site.copy("reference_gen/gen/web/script.js", "/api/web/script.js");
 site.copy("reference_gen/gen/node/page.css", "/api/node/page.css");
 site.copy("reference_gen/gen/node/styles.css", "/api/node/styles.css");
 site.copy("reference_gen/gen/node/script.js", "/api/node/script.js");
+site.copy("orama-searchbox-1.0.0-rc45.js");
+
+site.remoteFile(
+  "orama-searchbox-1.0.0-rc45.js",
+  "https://unpkg.com/@orama/searchbox@1.0.0-rc45/dist/bundle.js",
+);
 
 export default site;

@@ -17,10 +17,13 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   }
   return (
     <>
-      <aside class="hidden lg:block fixed top-12 bottom-0 left-0 h-(calc(100vh-3rem)) w-74 border-r border-gray-200">
+      <aside class="hidden lg:block absolute top-12 bottom-0 left-0 w-74 border-r border-gray-200">
         <Sidebar sidebar={sidebar} search={props.search} url={props.url} />
       </aside>
-      <div class="lg:ml-74 relative">
+      <div
+        class="absolute top-12 bottom-0 left-0 right-0 lg:left-74 overflow-y-auto"
+        style={{ scrollbarGutter: "stable" }}
+      >
         <main class="mx-auto max-w-screen-xl w-full overflow-x-hidden pt-4 pb-8 flex flex-grow">
           <div class="flex-grow px-4 sm:px-8 max-w-full lg:max-w-[75%]">
             <article class="max-w-[66ch]">

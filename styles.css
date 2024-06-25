@@ -73,3 +73,24 @@ pre:has(code.highlight), pre.highlight:has(code) {
 :root {
   font-feature-settings: "cv05" on, "cv08" on, "cv09" on, "ss01" on, "ss08" on;
 }
+
+.searchbox-module_searchbox__TygrP {
+  border: var(--ifm-toc-border-color) 1px solid;
+}
+
+.searchbox-module_searchbox_container__kkcyK {
+  backdrop-filter: blur(6px) brightness(60%);
+}
+
+@media (max-width: 1023px) {
+  .searchbutton-module_searchbutton__keys__qckL6 {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .searchbutton-module_searchbutton__gg7JJ    {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;  
+  } 
+}
