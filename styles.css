@@ -5,3 +5,15 @@
 [id] {
   scroll-margin-top: 4rem;
 }
+
+.markdown-body h2 .anchor-end {
+  opacity: 0;
+  transition: opacity 0.2s;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: normal;
+}
+
+.markdown-body h2:hover .anchor-end {
+  opacity: 1;
+}

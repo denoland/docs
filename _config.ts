@@ -12,6 +12,7 @@ import "npm:prismjs@1.29.0/components/prism-typescript.js";
 import { full as emoji } from "npm:markdown-it-emoji@3";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
+import anchor from "npm:markdown-it-anchor@9";
 
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 
@@ -19,6 +20,13 @@ const site = lume({}, {
   markdown: {
     plugins: [
       emoji,
+      [anchor, {
+        permalink: anchor.permalink.linkInsideHeader({
+          symbol:
+            `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
+          placement: "after",
+        }),
+      }],
     ],
     options: {
       langPrefix: "highlight notranslate language-",
@@ -31,15 +39,16 @@ site.copy("static", ".");
 
 site.use(search());
 site.use(jsx());
-site.use(
-  tailwindcss({ options: tailwindConfig, extensions: [".tsx", ".md"] }),
-);
+site.use(tailwindcss({
+  options: tailwindConfig,
+  extensions: [".tsx", ".md", ".ts"],
+}));
 site.use(postcss());
 site.use(esbuild({
   extensions: [".client.ts"],
 }));
 site.use(prism());
-site.use(toc());
+site.use(toc({ anchor: false }));
 site.use(title());
 
 site.addEventListener("afterBuild", () => {

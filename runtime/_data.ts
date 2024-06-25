@@ -1,6 +1,6 @@
 import { Sidebar } from "../types.ts";
 
-const sidebar = [
+export const sidebar = [
   {
     title: "Getting Started",
     items: [
@@ -353,4 +353,5 @@ const sidebar = [
   },
 ] satisfies Sidebar;
 
-export default { sidebar };
+export const sectionTitle = "Deploy";
+export const sectionRoot = "/deploy/manual/";

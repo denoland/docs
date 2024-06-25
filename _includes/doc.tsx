@@ -26,6 +26,8 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 title={props.title!}
                 sidebar={sidebar}
                 url={props.url}
+                sectionTitle={props.sectionTitle!}
+                sectionHref={props.sectionHref!}
               />
               <div class="markdown-body mt-8">
                 <h1
@@ -55,7 +57,15 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   );
 }
 
-function Breadcrumbs(props: { title: string; sidebar: Sidebar_; url: string }) {
+function Breadcrumbs(
+  props: {
+    title: string;
+    sidebar: Sidebar_;
+    url: string;
+    sectionTitle: string;
+    sectionHref: string;
+  },
+) {
   const crumbs = [];
   outer: for (const section of props.sidebar) {
     for (const item of section.items) {
@@ -83,7 +93,7 @@ function Breadcrumbs(props: { title: string; sidebar: Sidebar_; url: string }) {
     <nav class="mb-3">
       <ul class="flex items-center">
         <li class="pr-3 py-1.5 underline underline-offset-4 hover:no-underline hover:text-blue-600 transition duration-100">
-          <a href="/runtime/manual">Runtime</a>
+          <a href={props.sectionHref}>{props.sectionTitle}</a>
         </li>
         <svg
           class="size-6 rotate-90"
