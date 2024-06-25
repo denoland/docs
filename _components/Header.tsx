@@ -3,52 +3,84 @@ export default function Header({
 }: {
   url: string;
 }) {
-  return (
-    <nav class="px-8 py-2 sticky h-12 top-0 left-0 right-0 bg-white shadow flex items-center justify-between z-50">
-      <div class="flex items-center">
-        <a className="flex items-center gap-3 mr-6" href="/">
-          <div className="block size-6">
-            <img src="/img/logo.svg" alt="Deno Docs" />
-          </div>
-          <b className="text-xl">Docs</b>
-        </a>
-        <HeaderItem
-          url={url}
-          activeOn="/runtime"
-          href="/runtime/manual"
-          name="Deno Runtime"
-        />
-        <HeaderItem
-          url={url}
-          activeOn="/deploy"
-          href="/deploy/manual"
-          name="Deno Deploy"
-        />
-        <HeaderItem
-          url={url}
-          activeOn="/subhosting"
-          href="/subhosting/manual"
-          name="Subhosting"
-        />
-        <HeaderItem
-          url={url}
-          activeOn="/examples"
-          href="/examples"
-          name="Examples"
-        />
-        <HeaderItem url={url} activeOn="/api" href="/api" name="Reference" />
-      </div>
-      <div class="flex items-center">
-        <HeaderItem
-          url={url}
-          href="https://deno.com"
-          name="deno.com"
-          external
-        />
+  const reference = url.startsWith("/api");
 
-        <orama-searchbox />
-      </div>
-    </nav>
+  return (
+    <div class="shadow">
+      <nav class={`px-8 py-2 ${reference ? "" : "sticky"} h-12 top-0 left-0 right-0 bg-white flex items-center justify-between z-50`}>
+        <div class="flex items-center">
+          <a class="flex items-center gap-3 mr-6" href="/">
+            <div class="block size-6">
+              <img src="/img/logo.svg" alt="Deno Docs" />
+            </div>
+            <b class="text-xl">Docs</b>
+          </a>
+          <HeaderItem
+            url={url}
+            activeOn="/runtime"
+            href="/runtime/manual"
+            name="Deno Runtime"
+          />
+          <HeaderItem
+            url={url}
+            activeOn="/deploy"
+            href="/deploy/manual"
+            name="Deno Deploy"
+          />
+          <HeaderItem
+            url={url}
+            activeOn="/subhosting"
+            href="/subhosting/manual"
+            name="Subhosting"
+          />
+          <HeaderItem
+            url={url}
+            activeOn="/examples"
+            href="/examples"
+            name="Examples"
+          />
+          <HeaderItem url={url} activeOn="/api" href="/api" name="Reference" />
+        </div>
+        <div class="flex items-center">
+          <HeaderItem
+            url={url}
+            href="https://deno.com"
+            name="deno.com"
+            external
+          />
+        </div>
+      </nav>
+
+      {reference &&
+		    <nav className="px-8 py-2 h-12 bg-white flex items-center justify-between border-box border-t border-gray-200 z-[1000]">
+			    <ul className="flex">
+				    <li>
+					    <HeaderItem
+						    url={url}
+						    activeOn="/api/deno"
+						    href="/api/deno"
+						    name="Deno"
+					    />
+				    </li>
+				    <li>
+					    <HeaderItem
+						    url={url}
+						    activeOn="/api/web"
+						    href="/api/web"
+						    name="Web"
+					    />
+				    </li>
+				    <li>
+					    <HeaderItem
+						    url={url}
+						    activeOn="/api/node"
+						    href="/api/node"
+						    name="Node"
+					    />
+				    </li>
+			    </ul>
+		    </nav>}
+    </div>
   );
 }
 
@@ -82,7 +114,7 @@ function HeaderItem({
             height="13.5"
             aria-hidden="true"
             viewBox="0 0 24 24"
-            className="inline  ml-2"
+            class="inline  ml-2"
           >
             <path
               fill="currentColor"
