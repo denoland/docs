@@ -9,8 +9,6 @@ files are for example:
 - The files in your GitHub repository, if you deploy via the GitHub integration.
 - The entrypoint file in a playground deployment.
 
-<!-- - The files in your local repository, if you deploy with a push deployment. -->
-
 The APIs that are available are:
 
 - [Deno.cwd](#denocwd)

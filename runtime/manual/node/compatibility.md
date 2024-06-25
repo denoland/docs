@@ -9,13 +9,7 @@ which modules you need by
 
 ## Built-in module support
 
-<div style={{
-  display: "flex",
-  flexDirection: "row",
-  gap: "10px",
-  flexWrap: "wrap",
-  marginBottom: "10px"
-}}>
+<div style="display: flex; flex-direction: row; gap: 10px; flex-wrap: wrap; margin-bottom: 10px">
   <div>✅ = Full support</div>
   <div>ℹ️ = Partial support</div>
   <div>❌ = Stubs only</div>
@@ -24,7 +18,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:assert</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -39,7 +33,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:async_hooks</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -56,7 +50,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:buffer</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -71,7 +65,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:child_process</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -87,7 +81,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:cluster</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>❌</span>
     </div>
   </summary>
@@ -100,7 +94,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:console</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -115,7 +109,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:crypto</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -141,7 +135,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:dgram</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -169,7 +163,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:diagnostics_channel</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -184,7 +178,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:dns</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -199,7 +193,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:domain</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>❌</span>
     </div>
   </summary>
@@ -212,7 +206,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:events</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -227,7 +221,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:fs</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -256,7 +250,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:http</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -271,7 +265,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:http2</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -286,7 +280,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:https</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -302,7 +296,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:inspector</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -319,7 +313,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:module</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -334,7 +328,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:net</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -350,7 +344,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:os</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -365,7 +359,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:path</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -380,7 +374,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:perf_hooks</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -397,7 +391,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:punycode</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -412,7 +406,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:process</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -427,7 +421,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:querystring</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -442,7 +436,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:readline</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -457,7 +451,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:repl</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -474,7 +468,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:stream</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -489,7 +483,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:string_decoder</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -505,7 +499,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:sys</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -520,7 +514,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:test</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -535,7 +529,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:timers</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -550,7 +544,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:tls</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -565,7 +559,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:trace_events</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>❌</span>
     </div>
   </summary>
@@ -578,7 +572,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:tty</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -593,7 +587,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:util</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -608,7 +602,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:url</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>✅</span>
     </div>
   </summary>
@@ -623,7 +617,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:v8</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -642,7 +636,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:vm</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -658,7 +652,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:wasi</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>❌</span>
     </div>
   </summary>
@@ -671,7 +665,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:worker_threads</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -690,7 +684,7 @@ which modules you need by
 <details>
   <summary>
     <code>node:zlib</code>
-    <div style={{ float: "right" }}>
+    <div style="float: right">
       <span>ℹ️</span>
     </div>
   </summary>
@@ -711,78 +705,78 @@ This is the list of Node globals that Deno supports. These globals are only
 available in the `npm` package scope. In your own code you can use them by
 importing them from the relevant `node:` module.
 
-| Global name                                                                                                      | Status |
-| ---------------------------------------------------------------------------------------------------------------- | ------ |
-| [`AbortController`](https://nodejs.org/api/globals.html#class-abortcontroller)                                   | ✅     |
-| [`AbortSignal`](https://nodejs.org/api/globals.html#class-abortsignal)                                           | ✅     |
-| [`Blob`](https://nodejs.org/api/globals.html#class-blob)                                                         | ✅     |
-| [`Buffer`](https://nodejs.org/api/globals.html#class-buffer)                                                     | ✅     |
-| [`ByteLengthQueuingStrategy`](https://nodejs.org/api/globals.html#class-bytelengthqueuingstrategy)               | ✅     |
+| Global name                                                                                                      | Status                                         |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [`AbortController`](https://nodejs.org/api/globals.html#class-abortcontroller)                                   | ✅                                             |
+| [`AbortSignal`](https://nodejs.org/api/globals.html#class-abortsignal)                                           | ✅                                             |
+| [`Blob`](https://nodejs.org/api/globals.html#class-blob)                                                         | ✅                                             |
+| [`Buffer`](https://nodejs.org/api/globals.html#class-buffer)                                                     | ✅                                             |
+| [`ByteLengthQueuingStrategy`](https://nodejs.org/api/globals.html#class-bytelengthqueuingstrategy)               | ✅                                             |
 | [`__dirname`](https://nodejs.org/api/globals.html#__dirname)                                                     | ⚠️ [Docs &gt;](./migrate#nodejs-global-objects) |
 | [`__filename`](https://nodejs.org/api/globals.html#__filename)                                                   | ⚠️ [Docs &gt;](./migrate#nodejs-global-objects) |
-| [`atob`](https://nodejs.org/api/globals.html#atobdata)                                                           | ✅     |
-| [`BroadcastChannel`](https://nodejs.org/api/globals.html#broadcastchannel)                                       | ✅     |
-| [`btoa`](https://nodejs.org/api/globals.html#btoadata)                                                           | ✅     |
-| [`clearImmediate`](https://nodejs.org/api/globals.html#clearimmediateimmediateobject)                            | ✅     |
-| [`clearInterval`](https://nodejs.org/api/globals.html#clearintervalintervalobject)                               | ✅     |
-| [`clearTimeout`](https://nodejs.org/api/globals.html#cleartimeouttimeoutobject)                                  | ✅     |
-| [`CompressionStream`](https://nodejs.org/api/globals.html#class-compressionstream)                               | ✅     |
-| [`console`](https://nodejs.org/api/globals.html#console)                                                         | ✅     |
-| [`CountQueuingStrategy`](https://nodejs.org/api/globals.html#class-countqueuingstrategy)                         | ✅     |
-| [`Crypto`](https://nodejs.org/api/globals.html#crypto)                                                           | ✅     |
-| [`CryptoKey`](https://nodejs.org/api/globals.html#cryptokey)                                                     | ✅     |
-| [`CustomEvent`](https://nodejs.org/api/globals.html#customevent)                                                 | ✅     |
-| [`CustomEvent`](https://nodejs.org/api/globals.html#customevent)                                                 | ✅     |
-| [`DecompressionStream`](https://nodejs.org/api/globals.html#class-decompressionstream)                           | ✅     |
-| [`Event`](https://nodejs.org/api/globals.html#event)                                                             | ✅     |
-| [`EventTarget`](https://nodejs.org/api/globals.html#eventtarget)                                                 | ✅     |
-| [`exports`](https://nodejs.org/api/globals.html#exports)                                                         | ✅     |
-| [`fetch`](https://nodejs.org/api/globals.html#fetch)                                                             | ✅     |
-| [`fetch`](https://nodejs.org/api/globals.html#fetch)                                                             | ✅     |
-| [`File`](https://nodejs.org/api/globals.html#class-file)                                                         | ✅     |
-| [`File`](https://nodejs.org/api/globals.html#class-file)                                                         | ✅     |
-| [`FormData`](https://nodejs.org/api/globals.html#class-formdata)                                                 | ✅     |
-| [`global`](https://nodejs.org/api/globals.html#global)                                                           | ✅     |
-| [`Headers`](https://nodejs.org/api/globals.html#class-headers)                                                   | ✅     |
-| [`MessageChannel`](https://nodejs.org/api/globals.html#messagechannel)                                           | ✅     |
-| [`MessageEvent`](https://nodejs.org/api/globals.html#messageevent)                                               | ✅     |
-| [`MessagePort`](https://nodejs.org/api/globals.html#messageport)                                                 | ✅     |
-| [`module`](https://nodejs.org/api/globals.html#module)                                                           | ✅     |
-| [`PerformanceEntry`](https://nodejs.org/api/globals.html#performanceentry)                                       | ✅     |
-| [`PerformanceMark`](https://nodejs.org/api/globals.html#performancemark)                                         | ✅     |
-| [`PerformanceMeasure`](https://nodejs.org/api/globals.html#performancemeasure)                                   | ✅     |
-| [`PerformanceObserver`](https://nodejs.org/api/globals.html#performanceobserver)                                 | ✅     |
-| [`PerformanceObserverEntryList`](https://nodejs.org/api/globals.html#performanceobserverentrylist)               | ❌     |
-| [`PerformanceResourceTiming`](https://nodejs.org/api/globals.html#performanceresourcetiming)                     | ❌     |
-| [`performance`](https://nodejs.org/api/globals.html#performance)                                                 | ✅     |
-| [`process`](https://nodejs.org/api/globals.html#process)                                                         | ✅     |
-| [`queueMicrotask`](https://nodejs.org/api/globals.html#queuemicrotaskcallback)                                   | ✅     |
-| [`ReadableByteStreamController`](https://nodejs.org/api/globals.html#class-readablebytestreamcontroller)         | ✅     |
-| [`ReadableStream`](https://nodejs.org/api/globals.html#class-readablestream)                                     | ✅     |
-| [`ReadableStreamBYOBReader`](https://nodejs.org/api/globals.html#class-readablestreambyobreader)                 | ✅     |
-| [`ReadableStreamBYOBRequest`](https://nodejs.org/api/globals.html#class-readablestreambyobrequest)               | ✅     |
-| [`ReadableStreamDefaultController`](https://nodejs.org/api/globals.html#class-readablestreamdefaultcontroller)   | ✅     |
-| [`ReadableStreamDefaultReader`](https://nodejs.org/api/globals.html#class-readablestreamdefaultreader)           | ✅     |
-| [`require`](https://nodejs.org/api/globals.html#require)                                                         | ✅     |
-| [`Response`](https://nodejs.org/api/globals.html#response)                                                       | ✅     |
-| [`Request`](https://nodejs.org/api/globals.html#request)                                                         | ✅     |
-| [`setImmediate`](https://nodejs.org/api/globals.html#setimmediatecallback-args)                                  | ✅     |
-| [`setInterval`](https://nodejs.org/api/globals.html#setintervalcallback-delay-args)                              | ✅     |
-| [`setTimeout`](https://nodejs.org/api/globals.html#settimeoutcallback-delay-args)                                | ✅     |
-| [`structuredClone`](https://nodejs.org/api/globals.html#structuredclonevalue-options)                            | ✅     |
-| [`structuredClone`](https://nodejs.org/api/globals.html#structuredclonevalue-options)                            | ✅     |
-| [`SubtleCrypto`](https://nodejs.org/api/globals.html#subtlecrypto)                                               | ✅     |
-| [`DOMException`](https://nodejs.org/api/globals.html#domexception)                                               | ✅     |
-| [`TextDecoder`](https://nodejs.org/api/globals.html#textdecoder)                                                 | ✅     |
-| [`TextDecoderStream`](https://nodejs.org/api/globals.html#class-textdecoderstream)                               | ✅     |
-| [`TextEncoder`](https://nodejs.org/api/globals.html#textencoder)                                                 | ✅     |
-| [`TextEncoderStream`](https://nodejs.org/api/globals.html#class-textencoderstream)                               | ✅     |
-| [`TransformStream`](https://nodejs.org/api/globals.html#class-transformstream)                                   | ✅     |
-| [`TransformStreamDefaultController`](https://nodejs.org/api/globals.html#class-transformstreamdefaultcontroller) | ✅     |
-| [`URL`](https://nodejs.org/api/globals.html#url)                                                                 | ✅     |
-| [`URLSearchParams`](https://nodejs.org/api/globals.html#urlsearchparams)                                         | ✅     |
-| [`URLSearchParams`](https://nodejs.org/api/globals.html#urlsearchparams)                                         | ✅     |
-| [`WebAssembly`](https://nodejs.org/api/globals.html#webassembly)                                                 | ✅     |
-| [`WritableStream`](https://nodejs.org/api/globals.html#class-writablestream)                                     | ✅     |
-| [`WritableStreamDefaultController`](https://nodejs.org/api/globals.html#class-writablestreamdefaultcontroller)   | ✅     |
-| [`WritableStreamDefaultWriter`](https://nodejs.org/api/globals.html#class-writablestreamdefaultwriter)           | ✅     |
+| [`atob`](https://nodejs.org/api/globals.html#atobdata)                                                           | ✅                                             |
+| [`BroadcastChannel`](https://nodejs.org/api/globals.html#broadcastchannel)                                       | ✅                                             |
+| [`btoa`](https://nodejs.org/api/globals.html#btoadata)                                                           | ✅                                             |
+| [`clearImmediate`](https://nodejs.org/api/globals.html#clearimmediateimmediateobject)                            | ✅                                             |
+| [`clearInterval`](https://nodejs.org/api/globals.html#clearintervalintervalobject)                               | ✅                                             |
+| [`clearTimeout`](https://nodejs.org/api/globals.html#cleartimeouttimeoutobject)                                  | ✅                                             |
+| [`CompressionStream`](https://nodejs.org/api/globals.html#class-compressionstream)                               | ✅                                             |
+| [`console`](https://nodejs.org/api/globals.html#console)                                                         | ✅                                             |
+| [`CountQueuingStrategy`](https://nodejs.org/api/globals.html#class-countqueuingstrategy)                         | ✅                                             |
+| [`Crypto`](https://nodejs.org/api/globals.html#crypto)                                                           | ✅                                             |
+| [`CryptoKey`](https://nodejs.org/api/globals.html#cryptokey)                                                     | ✅                                             |
+| [`CustomEvent`](https://nodejs.org/api/globals.html#customevent)                                                 | ✅                                             |
+| [`CustomEvent`](https://nodejs.org/api/globals.html#customevent)                                                 | ✅                                             |
+| [`DecompressionStream`](https://nodejs.org/api/globals.html#class-decompressionstream)                           | ✅                                             |
+| [`Event`](https://nodejs.org/api/globals.html#event)                                                             | ✅                                             |
+| [`EventTarget`](https://nodejs.org/api/globals.html#eventtarget)                                                 | ✅                                             |
+| [`exports`](https://nodejs.org/api/globals.html#exports)                                                         | ✅                                             |
+| [`fetch`](https://nodejs.org/api/globals.html#fetch)                                                             | ✅                                             |
+| [`fetch`](https://nodejs.org/api/globals.html#fetch)                                                             | ✅                                             |
+| [`File`](https://nodejs.org/api/globals.html#class-file)                                                         | ✅                                             |
+| [`File`](https://nodejs.org/api/globals.html#class-file)                                                         | ✅                                             |
+| [`FormData`](https://nodejs.org/api/globals.html#class-formdata)                                                 | ✅                                             |
+| [`global`](https://nodejs.org/api/globals.html#global)                                                           | ✅                                             |
+| [`Headers`](https://nodejs.org/api/globals.html#class-headers)                                                   | ✅                                             |
+| [`MessageChannel`](https://nodejs.org/api/globals.html#messagechannel)                                           | ✅                                             |
+| [`MessageEvent`](https://nodejs.org/api/globals.html#messageevent)                                               | ✅                                             |
+| [`MessagePort`](https://nodejs.org/api/globals.html#messageport)                                                 | ✅                                             |
+| [`module`](https://nodejs.org/api/globals.html#module)                                                           | ✅                                             |
+| [`PerformanceEntry`](https://nodejs.org/api/globals.html#performanceentry)                                       | ✅                                             |
+| [`PerformanceMark`](https://nodejs.org/api/globals.html#performancemark)                                         | ✅                                             |
+| [`PerformanceMeasure`](https://nodejs.org/api/globals.html#performancemeasure)                                   | ✅                                             |
+| [`PerformanceObserver`](https://nodejs.org/api/globals.html#performanceobserver)                                 | ✅                                             |
+| [`PerformanceObserverEntryList`](https://nodejs.org/api/globals.html#performanceobserverentrylist)               | ❌                                             |
+| [`PerformanceResourceTiming`](https://nodejs.org/api/globals.html#performanceresourcetiming)                     | ❌                                             |
+| [`performance`](https://nodejs.org/api/globals.html#performance)                                                 | ✅                                             |
+| [`process`](https://nodejs.org/api/globals.html#process)                                                         | ✅                                             |
+| [`queueMicrotask`](https://nodejs.org/api/globals.html#queuemicrotaskcallback)                                   | ✅                                             |
+| [`ReadableByteStreamController`](https://nodejs.org/api/globals.html#class-readablebytestreamcontroller)         | ✅                                             |
+| [`ReadableStream`](https://nodejs.org/api/globals.html#class-readablestream)                                     | ✅                                             |
+| [`ReadableStreamBYOBReader`](https://nodejs.org/api/globals.html#class-readablestreambyobreader)                 | ✅                                             |
+| [`ReadableStreamBYOBRequest`](https://nodejs.org/api/globals.html#class-readablestreambyobrequest)               | ✅                                             |
+| [`ReadableStreamDefaultController`](https://nodejs.org/api/globals.html#class-readablestreamdefaultcontroller)   | ✅                                             |
+| [`ReadableStreamDefaultReader`](https://nodejs.org/api/globals.html#class-readablestreamdefaultreader)           | ✅                                             |
+| [`require`](https://nodejs.org/api/globals.html#require)                                                         | ✅                                             |
+| [`Response`](https://nodejs.org/api/globals.html#response)                                                       | ✅                                             |
+| [`Request`](https://nodejs.org/api/globals.html#request)                                                         | ✅                                             |
+| [`setImmediate`](https://nodejs.org/api/globals.html#setimmediatecallback-args)                                  | ✅                                             |
+| [`setInterval`](https://nodejs.org/api/globals.html#setintervalcallback-delay-args)                              | ✅                                             |
+| [`setTimeout`](https://nodejs.org/api/globals.html#settimeoutcallback-delay-args)                                | ✅                                             |
+| [`structuredClone`](https://nodejs.org/api/globals.html#structuredclonevalue-options)                            | ✅                                             |
+| [`structuredClone`](https://nodejs.org/api/globals.html#structuredclonevalue-options)                            | ✅                                             |
+| [`SubtleCrypto`](https://nodejs.org/api/globals.html#subtlecrypto)                                               | ✅                                             |
+| [`DOMException`](https://nodejs.org/api/globals.html#domexception)                                               | ✅                                             |
+| [`TextDecoder`](https://nodejs.org/api/globals.html#textdecoder)                                                 | ✅                                             |
+| [`TextDecoderStream`](https://nodejs.org/api/globals.html#class-textdecoderstream)                               | ✅                                             |
+| [`TextEncoder`](https://nodejs.org/api/globals.html#textencoder)                                                 | ✅                                             |
+| [`TextEncoderStream`](https://nodejs.org/api/globals.html#class-textencoderstream)                               | ✅                                             |
+| [`TransformStream`](https://nodejs.org/api/globals.html#class-transformstream)                                   | ✅                                             |
+| [`TransformStreamDefaultController`](https://nodejs.org/api/globals.html#class-transformstreamdefaultcontroller) | ✅                                             |
+| [`URL`](https://nodejs.org/api/globals.html#url)                                                                 | ✅                                             |
+| [`URLSearchParams`](https://nodejs.org/api/globals.html#urlsearchparams)                                         | ✅                                             |
+| [`URLSearchParams`](https://nodejs.org/api/globals.html#urlsearchparams)                                         | ✅                                             |
+| [`WebAssembly`](https://nodejs.org/api/globals.html#webassembly)                                                 | ✅                                             |
+| [`WritableStream`](https://nodejs.org/api/globals.html#class-writablestream)                                     | ✅                                             |
+| [`WritableStreamDefaultController`](https://nodejs.org/api/globals.html#class-writablestreamdefaultcontroller)   | ✅                                             |
+| [`WritableStreamDefaultWriter`](https://nodejs.org/api/globals.html#class-writablestreamdefaultwriter)           | ✅                                             |

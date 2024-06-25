@@ -14,29 +14,29 @@ can find usage instructions for this option below.
 Use your preferred npm client to install the client library for Node.js using
 one of the commands below.
 
-<Tabs groupId="npm-client">
-  <TabItem value="npm" label="npm">
+<deno-tabs group-id="npm-client">
+  <deno-tab value="npm" label="npm">
 
 ```sh
 npm install @deno/kv
 ```
 
-  </TabItem>
-  <TabItem value="pnpm" label="pnpm">
+  </deno-tab>
+  <deno-tab value="pnpm" label="pnpm">
 
 ```sh
 pnpm add @deno/kv
 ```
 
-  </TabItem>
-  <TabItem value="yarn" label="yarn">
+  </deno-tab>
+  <deno-tab value="yarn" label="yarn">
 
 ```sh
 yarn add @deno/kv
 ```
 
-  </TabItem>
-</Tabs>
+  </deno-tab>
+</deno-tabs>
 
 Once you've added the package to your Node project, you can import the `openKv`
 function (supports both ESM `import` and CJS `require`-based usage):

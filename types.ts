@@ -21,3 +21,11 @@ export interface SidebarCategory {
   label: string;
   items: (string | SidebarDoc)[];
 }
+
+export type TableOfContents = TableOfContentsItem[];
+
+export interface TableOfContentsItem {
+  text: string;
+  slug: string;
+  children: TableOfContentsItem[];
+}

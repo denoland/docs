@@ -192,7 +192,7 @@ editor.
 When you have a block of code that provides a test, like:
 
 ```ts
-import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assert } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
 Deno.test({
   name: "a test case",

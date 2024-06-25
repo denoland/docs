@@ -2,9 +2,7 @@
 title: "Scheduling cron tasks"
 ---
 
-import Admonition from "./_admonition.tsx";
-
-<Admonition />
+<deno-admonition></deno-admonition>
 
 The [`Deno.cron`](https://deno.land/api?s=Deno.cron&unstable=) interface enables
 you to configure JavaScript or TypeScript code that executes on a configurable

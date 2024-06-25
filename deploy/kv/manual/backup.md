@@ -2,50 +2,53 @@
 title: "Backups"
 ---
 
-import Admonition from "./_admonition.tsx";
+<deno-admonition></deno-admonition>
 
-<Admonition />
+KV databases hosted on Deno Deploy can be continuously backed up to your own
+S3-compatible storage buckets. This is in addition to the replication and
+backups that we internally perform for all data stored in hosted Deno KV
+databases to ensure high availability and data durability.
 
-KV databases hosted on Deno Deploy can be continuously backed up to your own S3-compatible storage buckets. This is in
-addition to the replication and backups that we internally perform for all data stored in hosted Deno KV databases to ensure
-high availability and data durability.
-
-This backup happens continuously with very little lag, enabling _[point-in-time-recovery](https://en.wikipedia.org/wiki/Point-in-time_recovery)_
-and live replication. Enabling backup for KV databases unlocks various interesting use-cases:
+This backup happens continuously with very little lag, enabling
+_[point-in-time-recovery](https://en.wikipedia.org/wiki/Point-in-time_recovery)_
+and live replication. Enabling backup for KV databases unlocks various
+interesting use-cases:
 
 - Retrieving a consistent snapshot of your data at any point in time in the past
 - Running a read-only data replica independent of Deno Deploy
-- Pushing data into your favorite data pipeline by piping mutations into streaming platforms and analytical databases like Kafka, BigQuery and ClickHouse
+- Pushing data into your favorite data pipeline by piping mutations into
+  streaming platforms and analytical databases like Kafka, BigQuery and
+  ClickHouse
 
 ## Configuring backup to Amazon S3
 
 First you must create a bucket on AWS:
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
-
-<Tabs groupId="aws-tool">
-<TabItem value="console" label="AWS Console" default>
+<deno-tabs group-id="aws-tool">
+<deno-tab value="console" label="AWS Console" default>
 
 1. Go to the [AWS S3 console](https://s3.console.aws.amazon.com/s3/home)
 2. Click "Create bucket"
-3. Enter a bucket name and choose a AWS region, then scroll down and click "Next"
+3. Enter a bucket name and choose a AWS region, then scroll down and click
+   "Next"
 
+</deno-tab>
+<deno-tab value="cli" label="AWS CLI">
 
-</TabItem>
-<TabItem value="cli" label="AWS CLI">
+1. Install the
+   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+2. Run
+   `aws s3api create-bucket --bucket <bucket-name> --region <region> --create-bucket-configuration LocationConstraint=<region>`
+   (replace `<bucket-name>` and `<region>` with your own values)
 
-1. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-2. Run `aws s3api create-bucket --bucket <bucket-name> --region <region> --create-bucket-configuration LocationConstraint=<region>` (replace `<bucket-name>` and `<region>` with your own values)
-
-
-</TabItem>
-</Tabs>
+</deno-tab>
+</deno-tabs>
 
 Then, create an IAM policy with `PutObject` access to the bucket, attach it to
 an IAM user, and create access keys for that user:
 
-<Tabs groupId="aws-tool">
-<TabItem value="console" label="AWS Console" default>
+<deno-tabs group-id="aws-tool">
+<deno-tab value="console" label="AWS Console" default>
 
 1. Go to the [AWS IAM console](https://console.aws.amazon.com/iam/home)
 2. Click "Policies" in the left sidebar
@@ -53,15 +56,15 @@ an IAM user, and create access keys for that user:
 4. Select the "JSON" the policy editor and paste the following policy:
    ```json
    {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Sid": "KVBackup",
-         "Effect": "Allow",
-         "Action": "s3:PutObject",
-         "Resource": "arn:aws:s3:::<bucket-name>/*"
-       }
-     ]
+      "Version": "2012-10-17",
+      "Statement": [
+         {
+            "Sid": "KVBackup",
+            "Effect": "Allow",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::<bucket-name>/*"
+         }
+      ]
    }
    ```
    Replace `<bucket-name>` with the name of the bucket you created earlier.
@@ -81,22 +84,22 @@ an IAM user, and create access keys for that user:
 18. Copy the access key ID and secret access key and save them somewhere safe.
     You will need them later, and you will not be able to retrieve them again.
 
-</TabItem>
-<TabItem value="cli" label="AWS CLI">
+</deno-tab>
+<deno-tab value="cli" label="AWS CLI">
 
 1. Copy the following command to your terminal, and replace `<bucket-name>` with
    the name of the bucket you created earlier, then run it:
    ```
    aws iam create-policy --policy-name <policy-name> --policy-document '{"Version":"2012-10-17","Statement":[{"Sid":"KVBackup","Effect":"Allow","Action":"s3:PutObject","Resource":"arn:aws:s3:::<bucket-name>/*"}]}'
    ```
-2. Copy the following command to your terminal, and replace `<user-name>` with
-   a name for the user you are creating, then run it:
+2. Copy the following command to your terminal, and replace `<user-name>` with a
+   name for the user you are creating, then run it:
    ```
    aws iam create-user --user-name <user-name>
    ```
 3. Copy the following command to your terminal, and replace `<policy-arn>` with
-   the ARN of the policy you created in step 1, and `<user-name>` with
-   the name of the user you created in the previous step, then run it:
+   the ARN of the policy you created in step 1, and `<user-name>` with the name
+   of the user you created in the previous step, then run it:
    ```
    aws iam attach-user-policy --policy-arn <policy-arn> --user-name <user-name>
    ```
@@ -107,10 +110,9 @@ an IAM user, and create access keys for that user:
    ```
 5. Copy the access key ID and secret access key and save them somewhere safe.
    You will need them later, and you will not be able to retrieve them again.
-   
 
-</TabItem>
-</Tabs>
+</deno-tab>
+</deno-tabs>
 
 Now visit the [Deno Deploy dashboard](https://dash.deno.com), and click on the
 "KV" tab in your project. Scroll to the "Backup" section, and click on "AWS S3".
@@ -120,9 +122,7 @@ and the region the bucket is in. Then click "Save".
 <img
   src="./images/backup-add-bucket-to-dash.png"
   alt="add backup to dashboard"
-  style={{
-    height: "500px",
-  }}
+  style="height: 500px;"
 />
 
 The backup will start immediately. Once the data has been backed up, and
@@ -135,27 +135,29 @@ used as a backup target.
 
 First you must create a bucket on GCP:
 
-<Tabs groupId="gcp-tool">
-<TabItem value="console" label="GCP Console" default>
+<deno-tabs group-id="gcp-tool">
+<deno-tab value="console" label="GCP Console" default>
 
-1. Go to the [GCP Cloud Storage console](https://console.cloud.google.com/storage/browser)
+1. Go to the
+   [GCP Cloud Storage console](https://console.cloud.google.com/storage/browser)
 2. Click on "Create" in the top bar
 3. Enter a bucket name, choose a location, and click "Create"
 
-</TabItem>
-<TabItem value="cli" label="gcloud CLI">
+</deno-tab>
+<deno-tab value="cli" label="gcloud CLI">
 
 1. Install the [gcloud CLI](https://cloud.google.com/sdk/docs/install)
-2. Run `gcloud storage buckets create <bucket-name> --location <location>` (replace `<bucket-name>` and `<location>` with your own values)
+2. Run `gcloud storage buckets create <bucket-name> --location <location>`
+   (replace `<bucket-name>` and `<location>` with your own values)
 
-</TabItem>
-</Tabs>
+</deno-tab>
+</deno-tabs>
 
 Then, create a service account with `Storage Object Admin` access to the bucket,
 and create an HMAC access key for the service account:
 
-<Tabs groupId="gcp-tool">
-<TabItem value="console" label="GCP Console" default>
+<deno-tabs group-id="gcp-tool">
+<deno-tab value="console" label="GCP Console" default>
 
 1. Go to the [GCP IAM console](https://console.cloud.google.com/iam-admin/iam)
 2. Click on "Service accounts" in the left sidebar
@@ -163,7 +165,8 @@ and create an HMAC access key for the service account:
 4. Enter a name for the service account and click "Done"
 5. Copy the email for the service account you just created. You will need it
    later.
-6. Go to the [GCP Cloud Storage console](https://console.cloud.google.com/storage/browser)
+6. Go to the
+   [GCP Cloud Storage console](https://console.cloud.google.com/storage/browser)
 7. Click on the bucket you created earlier
 8. Click on "Permissions" in the toolbar
 9. Click "Grant access"
@@ -176,12 +179,11 @@ and create an HMAC access key for the service account:
 15. Click on "Create a key for a service account"
 16. Select the service account you created earlier
 17. Click "Create key"
-18. Copy the access key and secret access key and save them somewhere safe.
-    You will need them later, and you will not be able to retrieve them again.
+18. Copy the access key and secret access key and save them somewhere safe. You
+    will need them later, and you will not be able to retrieve them again.
 
-
-</TabItem>
-<TabItem value="cli" label="gcloud CLI">
+</deno-tab>
+<deno-tab value="cli" label="gcloud CLI">
 
 1. Run the following command, replacing `<service-account-name>` with a name for
    the service account you are creating:
@@ -202,9 +204,8 @@ and create an HMAC access key for the service account:
 4. Copy the `accessId` and `secret` and save them somewhere safe. You will need
    them later, and you will not be able to retrieve them again.
 
-
-</TabItem>
-</Tabs>
+</deno-tab>
+</deno-tabs>
 
 Now visit the [Deno Deploy dashboard](https://dash.deno.com), and click on the
 "KV" tab in your project. Scroll to the "Backup" section, and click on "Google

@@ -31,7 +31,7 @@ first heading it encounters and print out the text content of that heading:
 
 ```ts
 import { DOMParser } from "https://esm.sh/linkedom";
-import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assert } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
 const document = new DOMParser().parseFromString(
   `<!DOCTYPE html>

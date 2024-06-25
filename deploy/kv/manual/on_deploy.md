@@ -2,9 +2,8 @@
 title: "KV on Deno Deploy"
 ---
 
-import Admonition from "./_admonition.tsx";
 
-<Admonition />
+<deno-admonition></deno-admonition>
 
 Deno Deploy now offers a built-in serverless key-value database called Deno KV.
 

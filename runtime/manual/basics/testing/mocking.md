@@ -40,12 +40,12 @@ import {
   assertSpyCall,
   assertSpyCalls,
   spy,
-} from "https://deno.land/std@$STD_VERSION/testing/mock.ts";
-import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+} from "https://deno.land/std@0.224.0/testing/mock.ts";
+import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import {
   multiply,
   square,
-} from "https://deno.land/std@$STD_VERSION/testing/mock_examples/parameter_injection.ts";
+} from "https://deno.land/std@0.224.0/testing/mock_examples/parameter_injection.ts";
 
 Deno.test("square calls multiply and returns results", () => {
   const multiplySpy = spy(multiply);
@@ -93,12 +93,12 @@ import {
   assertSpyCall,
   assertSpyCalls,
   spy,
-} from "https://deno.land/std@$STD_VERSION/testing/mock.ts";
-import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+} from "https://deno.land/std@0.224.0/testing/mock.ts";
+import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import {
   _internals,
   square,
-} from "https://deno.land/std@$STD_VERSION/testing/mock_examples/internals_injection.ts";
+} from "https://deno.land/std@0.224.0/testing/mock_examples/internals_injection.ts";
 
 Deno.test("square calls multiply and returns results", () => {
   const multiplySpy = spy(_internals, "multiply");
@@ -177,12 +177,12 @@ import {
   assertSpyCalls,
   returnsNext,
   stub,
-} from "https://deno.land/std@$STD_VERSION/testing/mock.ts";
-import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+} from "https://deno.land/std@0.224.0/testing/mock.ts";
+import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import {
   _internals,
   randomMultiple,
-} from "https://deno.land/std@$STD_VERSION/testing/mock_examples/random.ts";
+} from "https://deno.land/std@0.224.0/testing/mock_examples/random.ts";
 
 Deno.test("randomMultiple uses randomInt to generate random multiples between -10 and 10 times the value", () => {
   const randomIntStub = stub(_internals, "randomInt", returnsNext([-3, 3]));
@@ -237,9 +237,9 @@ until real time is restored. You can control how time ticks forward with the
 import {
   assertSpyCalls,
   spy,
-} from "https://deno.land/std@$STD_VERSION/testing/mock.ts";
-import { FakeTime } from "https://deno.land/std@$STD_VERSION/testing/time.ts";
-import { secondInterval } from "https://deno.land/std@$STD_VERSION/testing/mock_examples/interval.ts";
+} from "https://deno.land/std@0.224.0/testing/mock.ts";
+import { FakeTime } from "https://deno.land/std@0.224.0/testing/time.ts";
+import { secondInterval } from "https://deno.land/std@0.224.0/testing/mock_examples/interval.ts";
 
 Deno.test("secondInterval calls callback every second and stops after being cleared", () => {
   const time = new FakeTime();

@@ -2,9 +2,7 @@
 title: "Operations"
 ---
 
-import Admonition from "./_admonition.tsx";
-
-<Admonition />
+<deno-admonition></deno-admonition>
 
 The Deno KV API provides a set of operations that can be performed on the key
 space.

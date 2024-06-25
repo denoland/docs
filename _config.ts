@@ -1,28 +1,50 @@
 import lume from "lume/mod.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
-import mdx from "lume/plugins/mdx.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
 import postcss from "lume/plugins/postcss.ts";
-
-import tailwindConfig from "./tailwind.config.js";
+import prism from "lume/plugins/prism.ts";
 import search from "lume/plugins/search.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 
-const site = lume();
+import tailwindConfig from "./tailwind.config.js";
+
+import "npm:prismjs@1.29.0/components/prism-typescript.js";
+import { full as emoji } from "npm:markdown-it-emoji@3";
+import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
+import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
+
+import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
+
+const site = lume({}, {
+  markdown: {
+    plugins: [
+      emoji,
+    ],
+    options: {
+      langPrefix: "highlight notranslate language-",
+    },
+  },
+});
 
 site.ignore("./old");
 site.copy("static", ".");
 
 site.use(search());
 site.use(jsx());
-site.use(mdx({}));
 site.use(
-  tailwindcss({ options: tailwindConfig, extensions: [".tsx", ".mdx"] }),
+  tailwindcss({ options: tailwindConfig, extensions: [".tsx", ".md"] }),
 );
 site.use(postcss());
 site.use(esbuild({
   extensions: [".client.ts"],
 }));
+site.use(prism());
+site.use(toc());
+site.use(title());
+
+site.addEventListener("afterBuild", () => {
+  Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
+});
 
 site.copy("reference_gen/gen/deno/page.css", "/api/deno/page.css");
 site.copy("reference_gen/gen/deno/styles.css", "/api/deno/styles.css");

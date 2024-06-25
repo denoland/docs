@@ -2,9 +2,7 @@
 title: "Key Space"
 ---
 
-import Admonition from "./_admonition.tsx";
-
-<Admonition />
+<deno-admonition></deno-admonition>
 
 Deno KV is a key value store. The key space is a flat namespace of
 key+value+versionstamp pairs. Keys are sequences of key parts, which allow

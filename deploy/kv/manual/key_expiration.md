@@ -2,9 +2,7 @@
 title: "Key Expiration (TTL for keys)"
 ---
 
-import Admonition from "./_admonition.tsx";
-
-<Admonition />
+<deno-admonition></deno-admonition>
 
 Since version 1.36.2, Deno KV supports key expiration, allowing developers to 
 control time to live (TTL) for keys in a KV database. This allows an expiration

@@ -321,7 +321,7 @@ foo() returns bar object ... ok
 Example of test:
 
 ```ts
-import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import { foo } from "./mod.ts";
 
 Deno.test("foo() returns bar object", function () {

@@ -2,9 +2,7 @@
 title: "Secondary Indexes"
 ---
 
-import Admonition from "./_admonition.tsx";
-
-<Admonition />
+<deno-admonition></deno-admonition>
 
 Key-value stores like Deno KV organize data as collections of key-value pairs,
 where each unique key is associated with a single value. This structure enables

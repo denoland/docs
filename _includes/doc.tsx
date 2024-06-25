@@ -5,31 +5,49 @@ import {
   SidebarDoc as SidebarDoc_,
   SidebarLink as SidebarLink_,
   SidebarSection as SidebarSection_,
+  TableOfContentsItem as TableOfContentsItem_,
 } from "../types.ts";
 
 export const layout = "layout.tsx";
 
-export default function Page(props: Lume.Data) {
+export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   const sidebar = props.sidebar as Sidebar_;
   if (sidebar === undefined) return;
   return (
     <>
       <aside class="fixed top-12 bottom-0 left-0 h-(calc(100vh-3rem)) w-74 border-r border-gray-200">
-        {sidebar && (
-          <Sidebar sidebar={sidebar} search={props.search} url={props.url} />
-        )}
+        <Sidebar sidebar={sidebar} search={props.search} url={props.url} />
       </aside>
       <div class="ml-74 relative">
-        <main class="mx-auto max-w-screen-md px-8 pt-4 pb-8">
-          <article class="px-8">
-            <Breadcrumbs
-              title={props.title!}
-              sidebar={sidebar}
-              url={props.url}
-            />
-            <h1>{props.title}</h1>
-            {props.children}
-          </article>
+        <main class="mx-auto max-w-screen-xl w-full px-8 pt-4 pb-8 flex">
+          <div class="flex-grow px-8">
+            <article class="max-w-screen-md">
+              <Breadcrumbs
+                title={props.title!}
+                sidebar={sidebar}
+                url={props.url}
+              />
+              <div class="markdown-body mt-8">
+                <h1
+                  dangerouslySetInnerHTML={{
+                    __html: helpers.md(props.title!, true),
+                  }}
+                >
+                </h1>
+                {props.children}
+              </div>
+            </article>
+          </div>
+          <div
+            style={{ "flexBasis": "25%" }}
+            class="flex-shrink-0 flex-grow-0 px-8 pt-4 pb-8"
+          >
+            <ul class="border-l border-gray-200 py-2 pl-2 sticky top-20">
+              {(props.toc as TableOfContentsItem_[]).map((item) => (
+                <TableOfContentsItem item={item} />
+              ))}
+            </ul>
+          </div>
         </main>
         <props.comp.Footer />
       </div>
@@ -49,7 +67,6 @@ function Breadcrumbs(props: { title: string; sidebar: Sidebar_; url: string }) {
           if (typeof subitem === "string") {
             if (subitem === props.url) break outer;
           } else if (subitem.id === props.url) {
-            crumbs.push(item.label);
             break outer;
           }
         }
@@ -101,6 +118,26 @@ function Breadcrumbs(props: { title: string; sidebar: Sidebar_; url: string }) {
         ))}
       </ul>
     </nav>
+  );
+}
+
+function TableOfContentsItem(props: { item: TableOfContentsItem_ }) {
+  return (
+    <li class="m-2 leading-4">
+      <a
+        href={`#${props.item.slug}`}
+        class="text-[13px] text-gray-600 hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
+      >
+        {props.item.text}
+      </a>
+      {props.item.children.length > 0 && (
+        <ul class="ml-2">
+          {props.item.children.map((item) => (
+            <TableOfContentsItem item={item} />
+          ))}
+        </ul>
+      )}
+    </li>
   );
 }
 

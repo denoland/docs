@@ -47,8 +47,6 @@ tag at the end of the first JSDoc block in the module.
 
 ## Including version numbers in code and content
 
-import { replacements } from "@site/src/components/Replacement";
-
 Current module version, Deno CLI version, and standard library version can be
 dynamically included in content or code samples using following replacement
 variables.

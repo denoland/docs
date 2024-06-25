@@ -2,7 +2,6 @@
 title: "Deno KV Quick Start"
 ---
 
-import Admonition from "./_admonition.tsx";
 
 **Deno KV** is a
 [key-value database](https://en.wikipedia.org/wiki/Key%E2%80%93value_database)
@@ -12,7 +11,7 @@ for many kinds of data storage use cases, but excels at storing simple data
 structures that benefit from very fast reads and writes. Deno KV is available in
 the Deno CLI and on [Deno Deploy](./on_deploy.mdx).
 
-<Admonition />
+<deno-admonition></deno-admonition>
 
 Let's walk through the key features of Deno KV.
 

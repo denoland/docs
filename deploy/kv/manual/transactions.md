@@ -2,9 +2,7 @@
 title: "Transactions"
 ---
 
-import Admonition from "./_admonition.tsx";
-
-<Admonition />
+<deno-admonition></deno-admonition>
 
 The Deno KV store utilizes _optimistic concurrency control transactions_ rather
 than _interactive transactions_ like many SQL systems like PostgreSQL or MySQL.
