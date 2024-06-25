@@ -118,7 +118,7 @@ export default function Footer() {
                 {category.items.map((item) => (
                   <li>
                     <a
-                      class="block items-center py-1 text-gray-600 hover:text-gray-800"
+                      class="block items-center py-1 text-gray-600 hover:text-primary hover:underline"
                       href={item.to ?? item.href}
                     >
                       {item.label}

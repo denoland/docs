@@ -10,7 +10,7 @@ export default function Layout(props: Lume.Data) {
         <script type="module" src="/sidebar.client.js" defer inline></script>
       </head>
       <body>
-        <props.comp.Header />
+        <props.comp.Header url={props.url} />
         {props.children}
       </body>
     </html>
