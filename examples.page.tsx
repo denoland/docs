@@ -68,7 +68,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
               </a>
             </div>
             {example.parsed.description &&
-              <p class="mt-10">{example.parsed.description}</p>}
+              <p class="mt-10 mb-6">{example.parsed.description}</p>}
             <div class="relative block">
               <CopyButton text={contentNoCommentary} />
             </div>
@@ -88,7 +88,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
             <div>
               {example.parsed.run && (
                 <>
-                  <p class="mt-16">
+                  <p class="mt-16 mb-6">
                     Run{" "}
                     <a
                       href={url}
@@ -98,9 +98,11 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
                     </a>{" "}
                     locally using the Deno CLI:
                   </p>
-                  <pre><code>{example.parsed.run.startsWith("deno")
-                  ? example.parsed.run.replace("<url>", url)
-                  : "deno run " + example.parsed.run.replace("<url>", rawUrl)}</code></pre>
+                  <div class="markdown-body">
+                    <pre className="highlight"><code>{example.parsed.run.startsWith("deno")
+                      ? example.parsed.run.replace("<url>", url)
+                      : "deno run " + example.parsed.run.replace("<url>", rawUrl)}</code></pre>
+                  </div>
                 </>
               )}
               {example.parsed.playground && (
@@ -266,7 +268,7 @@ function SnippetComponent(props: {
   return (
     <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-8">
       <div
-        class={`italic select-none text-xs ${
+        class={`italic select-none text-sm ${
           props.snippet.text ? "pt-[2.2rem] md:pt-9 pb-4 md:pb-0 " : " "
         } ${props.snippet.code ? "col-span-3" : "col-span-full"}`}
       >
@@ -279,16 +281,16 @@ function SnippetComponent(props: {
       >
         {props.filename && (
           <span
-            class={`font-mono text-xs absolute -top-3 left-4 bg-[var(--ifm-code-background)] z-10 p-1 rounded-sm ${
+            class={`font-mono text-xs absolute -top-3 left-4 bg-[var(--color-canvas-subtle)] z-10 p-1 rounded-sm ${
               props.firstOfFile ? "block" : "block sm:hidden"
             }`}
           >
             {props.filename}
           </span>
         )}
-        <div class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight">
+        <div class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight rounded-md">
           {props.snippet.code && (
-            <div class="nocopy h-full">
+            <div class="nocopy h-full markdown-body !bg-[var(--color-canvas-subtle)]">
               <pre class="highlight language-ts"><code dangerouslySetInnerHTML={{__html: props.snippet.code}}></code></pre>
             </div>
           )}
@@ -305,7 +307,7 @@ export function CopyButton(props: { text: string }) {
       type="button"
       aria-label="Copy code to clipboard"
       title="Copy"
-      class="clean-btn copy-all absolute right-2 top-2 bg-gray-100 hover:bg-gray-200 text-gray-900 px-2 py-1 rounded-md "
+      class="clean-btn copy-all absolute right-2 top-6 hover:bg-gray-200 text-gray-900 p-2 rounded-md z-10"
     >
       <svg viewBox="0 0 24 24" width="15" height="15">
         <path

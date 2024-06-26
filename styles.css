@@ -6,14 +6,30 @@
   scroll-margin-top: 4rem;
 }
 
-.markdown-body h2 .anchor-end {
-  opacity: 0;
-  transition: opacity 0.2s;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  font-weight: normal;
+.markdown-body {
+  h2, h3, h4, h5, h6 {
+    .anchor-end {
+      opacity: 0;
+      transition: opacity 0.2s;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      font-weight: normal;
+    }
+    
+    &:hover .anchor-end {
+      opacity: 1;
+    }
+  }
+  
+  details {
+    @apply rounded border border-offblack p-8 bg-pink-100;
+    
+    &[open] summary {
+      @apply pb-4 mb-4 border-b border-offblack;
+    }
+  }
 }
 
-.markdown-body h2:hover .anchor-end {
-  opacity: 1;
+pre:has(code.highlight), pre.highlight:has(code) {
+  @apply p-8;
 }

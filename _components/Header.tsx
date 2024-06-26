@@ -6,8 +6,8 @@ export default function Header({
   const reference = url.startsWith("/api");
 
   return (
-    <div class="shadow">
-      <nav class={`px-8 py-2 ${reference ? "" : "sticky"} h-12 top-0 left-0 right-0 bg-white flex items-center justify-between z-50`}>
+    <div class={`bg-white shadow z-50 ${reference ? "" : "sticky top-0 left-0 right-0"}`}>
+      <nav class="px-8 py-2 h-12 flex items-center justify-between">
         <div class="flex items-center">
           <a class="flex items-center gap-3 mr-6" href="/">
             <div class="block size-6">
@@ -39,7 +39,7 @@ export default function Header({
             href="/examples"
             name="Examples"
           />
-          <HeaderItem url={url} activeOn="/api" href="/api" name="Reference" />
+          <HeaderItem url={url} activeOn="/api" href="/api/deno" name="Reference" />
         </div>
         <div class="flex items-center">
           <HeaderItem

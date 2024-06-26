@@ -1,12 +1,7 @@
 ---
 title: "Jupyter Kernel for Deno"
+available_since: 1.37.0
 ---
-
-<p>
-<span class="theme-doc-version-badge badge badge--secondary">
-Available since <b>1.37.0</b>
-</span>
-</p>
 
 Deno ships with a built-in Jupyter kernel that allows you to write JavaScript
 and TypeScript; use Web and Deno APIs and import `npm` packages straight in your

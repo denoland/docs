@@ -36,19 +36,22 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                   }}
                 >
                 </h1>
+                {props.available_since && <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">Available since {props.available_since}</div>}
                 {props.children}
               </div>
             </article>
           </div>
           <div
             style={{ "flexBasis": "25%" }}
-            class="flex-shrink-0 flex-grow-0 px-8 pt-4 pb-8"
+            class="flex-shrink-0 flex-grow-0 px-8 pb-8"
           >
-            <ul class="border-l border-gray-200 py-2 pl-2 sticky top-20">
-              {(props.toc as TableOfContentsItem_[]).map((item) => (
-                <TableOfContentsItem item={item} />
-              ))}
-            </ul>
+            <div class="sticky top-0 pt-16 -mt-16">
+              <ul class="border-l border-gray-200 pl-2">
+                {(props.toc as TableOfContentsItem_[]).map((item) => (
+                  <TableOfContentsItem item={item} />
+                ))}
+              </ul>
+            </div>
           </div>
         </main>
         <props.comp.Footer />
@@ -108,7 +111,7 @@ function Breadcrumbs(
         </svg>
         {crumbs.map((crumb, i) => (
           <>
-            <li class="px-3 py-1.5">
+            <li class="px-2.5 py-1.5">
               {crumb}
             </li>
             {i < crumbs.length - 1 && (
