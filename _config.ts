@@ -91,6 +91,7 @@ site.copy("orama-searchbox-1.0.0-rc45.js");
 site.ignore(
   "old",
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
+  (path) => path.includes("/reference_gen/node_modules"),
   "by-example",
 );
 
