@@ -467,7 +467,10 @@
       }
     }
   },
-  "remote": {},
+  "remote": {
+    "https://deno.land/x/hono@v3.5.5/middleware/logger/index.ts": "c139f372f482baeffbad68b14bef990e011fe8df578dcee71fb612ffad7fe748",
+    "https://deno.land/x/hono@v3.5.5/utils/url.ts": "5fc3307ef3cb2e6f34ec2a03e3d7f2126c6a9f5f0eab677222df3f0e40bd7567"
+  },
   "workspace": {
     "dependencies": [
       "jsr:@b-fuze/deno-dom@^0.1.47",

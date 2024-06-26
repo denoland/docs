@@ -1,4 +1,5 @@
 import { Node, Project, ts } from "ts-morph";
+import EXCLUDE_MAP from "./node-exclude-map.json" with { type: "json" };
 
 await Deno.mkdir("types/node", { recursive: true });
 
@@ -14,6 +15,7 @@ function rewriteModuleName(name: string): string {
 }
 
 for (const file of files) {
+  const fileName = file.getBaseName();
   for (
     const importOrExportDecl of file.getDescendants().filter((descendant) =>
       descendant.getKind() === ts.SyntaxKind.ImportDeclaration ||
@@ -44,7 +46,9 @@ for (const file of files) {
         !(exportable.getKind() === ts.SyntaxKind.ModuleDeclaration &&
           exportable.getName() === "global")
       ) {
-        exportable.setIsExported(true);
+        exportable.setIsExported(
+          !EXCLUDE_MAP[fileName]?.includes(exportable.getName?.()),
+        );
       }
     }
 

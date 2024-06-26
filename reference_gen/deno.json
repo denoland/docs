@@ -18,7 +18,7 @@
     "types": "deno task types:deno && deno task types:node",
     "doc:deno": "mkdir -p gen/deno && DENO_INTERNAL_HTML_DOCS=deno deno doc --html --name=Deno --category-docs=deno-categories.json --output=gen/deno --strip-trailing-html types/deno.d.ts",
     "doc:web": "mkdir -p gen/web && DENO_INTERNAL_HTML_DOCS=deno deno doc --html --name=Web --category-docs=web-categories.json --output=gen/web --strip-trailing-html types/web.d.ts",
-    "doc:node": "mkdir -p gen/node && DENO_INTERNAL_HTML_DOCS=node deno doc --html --name=Node --output=gen/node --symbol-redirect-map=node-symbol-map.json --strip-trailing-html types/node/[!_]*",
+    "doc:node": "mkdir -p gen/node && DENO_INTERNAL_HTML_DOCS=node deno doc --html --name=Node --output=gen/node --symbol-redirect-map=node-symbol-map.json --default-symbol-map=node-default-map.json --strip-trailing-html types/node/[!_]*",
     "doc": "deno task doc:deno && deno task doc:web && deno task doc:node",
 
     "serve": "deno run --allow-read=. --allow-net --watch serve.ts",
