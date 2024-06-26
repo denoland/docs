@@ -94,3 +94,49 @@ pre:has(code.highlight), pre.highlight:has(code) {
     padding-bottom: 0.25rem !important;  
   } 
 }
+
+.markdown-body .admonition {
+  @apply p-6 pb-2 shadow-sm rounded-xl border-l-4
+}
+
+.markdown-body .admonition .title {
+  @apply font-bold uppercase flex items-center
+}
+
+.markdown-body .admonition .title::before {
+  content: '';
+  @apply inline-block size-5 mr-2
+}
+
+.markdown-body .admonition.info {
+  @apply bg-blue-50 border-blue-500 text-blue-700;
+}
+
+.markdown-body .admonition.caution {
+  @apply bg-yellow-50 border-yellow-500 text-yellow-900 fill-yellow-900;
+}
+
+.markdown-body .admonition.tip {
+  @apply bg-green-50 border-green-600 text-green-800;
+}
+
+.markdown-body .admonition.info .title::before {
+  /* circle exclamation mark */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(29 78 216)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></svg>');
+}
+
+.markdown-body .admonition.note .title::before {
+  /* circle exclamation mark */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(29 78 216)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></svg>');
+}
+
+.markdown-body .admonition.caution .title::before {
+  /* exclamation mark in a filled warning triangle */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(113 63 18)"><path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg>');
+}
+
+.markdown-body .admonition.tip .title::before {
+  /* lightbulb svg */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(22 163 74)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>');
+}
+

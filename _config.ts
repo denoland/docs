@@ -11,9 +11,11 @@ import sitemap from "lume/plugins/sitemap.ts";
 import tailwindConfig from "./tailwind.config.js";
 
 import "npm:prismjs@1.29.0/components/prism-typescript.js";
+
 import { full as emoji } from "npm:markdown-it-emoji@3";
 import anchor from "npm:markdown-it-anchor@9";
 import relativeLinksPlugin from "./markdown-it-relative-path.ts";
+import admonitionPlugin from "./markdown-it-admonition.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 
@@ -23,6 +25,7 @@ const site = lume({ location: new URL("https://docs.deno.com") }, {
   markdown: {
     plugins: [
       emoji,
+      [admonitionPlugin],
       [
         anchor,
         {

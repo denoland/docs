@@ -235,7 +235,7 @@ Enable unstable net APIs in the `Deno` namespace. These APIs include:
 
 ## `--unstable`
 
-:::warning --unstable is deprecated - use granular flags instead
+:::caution --unstable is deprecated - use granular flags instead
 
 The `--unstable` flag is no longer being used for new features, and will be
 removed in a future release. All unstable features that were available using
