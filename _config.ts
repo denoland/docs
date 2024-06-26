@@ -45,12 +45,6 @@ const site = lume({ location: new URL("https://docs.deno.com") }, {
   },
 });
 
-site.ignore((path) => path.includes("old"));
-site.ignore((path) =>
-  path.includes("reference_gen") && !path.includes(".css") &&
-  !path.includes(".js")
-);
-site.ignore((path) => path.includes("by-example"));
 site.copy("static", ".");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
@@ -93,6 +87,12 @@ site.copy("reference_gen/gen/node/page.css", "/api/node/page.css");
 site.copy("reference_gen/gen/node/styles.css", "/api/node/styles.css");
 site.copy("reference_gen/gen/node/script.js", "/api/node/script.js");
 site.copy("orama-searchbox-1.0.0-rc45.js");
+
+site.ignore(
+  "old",
+  (path) => path.match(/\/reference_gen.*.ts/) !== null,
+  "by-example",
+);
 
 site.remoteFile(
   "orama-searchbox-1.0.0-rc45.js",
