@@ -32,7 +32,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
       }`;
 
     yield {
-      url: `/examples/${example.label}.html`,
+      url: `/examples/${example.label}/index.html`,
       title: `${example.parsed.title} - Deno by Example`,
       content: (
         <div>

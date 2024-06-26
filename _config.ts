@@ -6,6 +6,7 @@ import prism from "lume/plugins/prism.ts";
 import search from "lume/plugins/search.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import redirects from "lume/plugins/redirects.ts";
+import sitemap from "lume/plugins/sitemap.ts";
 
 import tailwindConfig from "./tailwind.config.js";
 
@@ -18,7 +19,7 @@ import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 
-const site = lume({}, {
+const site = lume({ location: new URL("https://docs.deno.com") }, {
   markdown: {
     plugins: [
       emoji,
@@ -211,6 +212,7 @@ site.use(esbuild({
 site.use(prism());
 site.use(toc({ anchor: false }));
 site.use(title());
+site.use(sitemap());
 
 site.addEventListener("afterBuild", () => {
   Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
