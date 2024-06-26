@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
   oramaSearchbox.RegisterSearchBox({
     oramaInstance: client,
     colorScheme: "light",
+    resultsMap: {
+      description: "content",
+    },
   });
   oramaSearchbox.RegisterSearchButton({
     colorScheme: "light",
@@ -26,6 +29,7 @@ declare global {
     RegisterSearchBox: (options: {
       oramaInstance: OramaClient;
       colorScheme: "light" | "dark";
+      resultsMap: Record<string, string>;
     }) => void;
     RegisterSearchButton: (
       options: {

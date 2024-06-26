@@ -66,12 +66,14 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
             style={{ "flexBasis": "25%" }}
             class="hidden lg:block flex-shrink-0 flex-grow-0 px-8 pb-8"
           >
-            <div class="sticky top-0 pt-16 -mt-16">
-              <ul class="border-l border-gray-200 pl-2">
-                {(props.toc as TableOfContentsItem_[]).map((item) => (
-                  <TableOfContentsItem item={item} />
-                ))}
-              </ul>
+            <div>
+              <div class="sticky top-0 ">
+                <ul class="border-l border-gray-200 pl-2">
+                  {(props.toc as TableOfContentsItem_[]).map((item) => (
+                    <TableOfContentsItem item={item} />
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </main>
