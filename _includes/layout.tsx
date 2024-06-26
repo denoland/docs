@@ -1,6 +1,8 @@
 export default function Layout(props: Lume.Data) {
+  const reference = props.url.startsWith("/api");
+
   return (
-    <html lang="en" class="h-dvh overflow-hidden">
+    <html lang="en" class={reference ? "" : "h-dvh overflow-hidden"}>
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,7 +29,7 @@ export default function Layout(props: Lume.Data) {
         <script type="module" src="/sidebar.client.js"></script>
         <script type="module" src="/search.client.js"></script>
       </head>
-      <body class="h-dvh overflow-hidden">
+      <body class={reference ? "" : "h-dvh overflow-hidden"}>
         <props.comp.Header url={props.url} />
         {props.children}
       </body>
