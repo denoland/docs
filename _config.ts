@@ -100,4 +100,6 @@ site.remoteFile(
   "https://unpkg.com/@orama/searchbox@1.0.0-rc45/dist/bundle.js",
 );
 
+site.scopedUpdates((path) => path == "/overrides.css");
+
 export default site;
