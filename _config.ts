@@ -46,7 +46,10 @@ const site = lume({ location: new URL("https://docs.deno.com") }, {
 });
 
 site.ignore((path) => path.includes("old"));
-site.ignore((path) => path.includes("reference_gen"));
+site.ignore((path) =>
+  path.includes("reference_gen") && !path.includes(".css") &&
+  !path.includes(".js")
+);
 site.ignore((path) => path.includes("by-example"));
 site.copy("static", ".");
 site.copy("subhosting/api/images");
