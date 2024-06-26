@@ -1,5 +1,7 @@
 ---
 title: "Offload webhook processing to a queue"
+oldUrl:
+  - /kv/tutorials/webhook_processor/
 ---
 
 In a web application, it is often desirable to offload processing of async tasks

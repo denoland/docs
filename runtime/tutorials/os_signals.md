@@ -1,5 +1,7 @@
 ---
 title: "Handle OS Signals"
+oldUrl:
+  - /runtime/manual/examples/os_signals/
 ---
 
 > ⚠️ Windows only supports listening for SIGINT and SIGBREAK as of Deno v1.23.

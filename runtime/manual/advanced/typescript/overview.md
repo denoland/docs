@@ -1,5 +1,10 @@
 ---
 title: "Overview of TypeScript in Deno"
+oldUrl:
+  - /runtime/manual/advanced/typescript/
+  - /runtime/manual/typescript/
+  - /runtime/manual/typescript/overview/
+  - /runtime/manual/getting_started/typescript/
 ---
 
 One of the benefits of Deno is that it treats TypeScript as a first class

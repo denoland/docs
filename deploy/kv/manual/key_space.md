@@ -1,5 +1,8 @@
 ---
 title: "Key Space"
+oldUrl:
+  - /runtime/manual/runtime/kv/key_space/
+  - /kv/manual/key_space/
 ---
 
 <deno-admonition></deno-admonition>
@@ -52,8 +55,7 @@ Within a given type, the ordering is:
 
 - `Uint8Array`: byte ordering of the array
 - `string`: byte ordering of the UTF-8 encoding of the string
-- `number`: -Infinity < -1.0 < -0.5 < -0.0 < 0.0 < 0.5 < 1.0 < Infinity <
-  NaN
+- `number`: -Infinity < -1.0 < -0.5 < -0.0 < 0.0 < 0.5 < 1.0 < Infinity < NaN
 - `bigint`: mathematical ordering, largest negative number first, largest
   positive number last
 - `boolean`: false < true

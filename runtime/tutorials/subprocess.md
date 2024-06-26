@@ -1,5 +1,7 @@
 ---
 title: "Creating a Subprocess"
+oldUrl:
+  - /runtime/manual/examples/subprocess/
 ---
 
 ## Concepts

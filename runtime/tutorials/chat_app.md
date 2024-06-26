@@ -1,5 +1,7 @@
 ---
 title: "Chat application with WebSocket"
+oldUrl:
+  - /runtime/manual/examples/chat_app/
 ---
 
 In this tutorial we'll create a simple chat app using Deno. Our chat app will

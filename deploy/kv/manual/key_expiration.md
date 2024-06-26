@@ -1,10 +1,12 @@
 ---
 title: "Key Expiration (TTL for keys)"
+oldUrl:
+  - /kv/manual/key_expiration/
 ---
 
 <deno-admonition></deno-admonition>
 
-Since version 1.36.2, Deno KV supports key expiration, allowing developers to 
+Since version 1.36.2, Deno KV supports key expiration, allowing developers to
 control time to live (TTL) for keys in a KV database. This allows an expiration
 timestamp to be associated with a key, after which the key will be automatically
 deleted from the database:

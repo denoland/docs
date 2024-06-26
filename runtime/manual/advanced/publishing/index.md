@@ -1,5 +1,6 @@
 ---
 title: "Publishing Modules"
+oldUrl: /runtime/manual/advanced/publishing/0/
 ---
 
 Deno is not prescriptive about how developers make their modules

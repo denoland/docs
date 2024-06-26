@@ -1,5 +1,7 @@
 ---
 title: "Building a Word Finder App with Deno"
+oldUrl:
+  - /runtime/manual/examples/word_finder/
 ---
 
 ## Getting Started

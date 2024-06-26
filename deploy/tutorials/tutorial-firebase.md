@@ -1,5 +1,7 @@
 ---
 title: "API server with Firestore (Firebase)"
+oldUrl:
+  - /deploy/docs/tutorial-firebase/
 ---
 
 Firebase is a platform developed by Google for creating mobile and web

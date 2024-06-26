@@ -1,5 +1,7 @@
 ---
 title: "Backups"
+oldUrl:
+  - /kv/manual/backup/
 ---
 
 <deno-admonition></deno-admonition>
@@ -56,15 +58,15 @@ an IAM user, and create access keys for that user:
 4. Select the "JSON" the policy editor and paste the following policy:
    ```json
    {
-      "Version": "2012-10-17",
-      "Statement": [
-         {
-            "Sid": "KVBackup",
-            "Effect": "Allow",
-            "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::<bucket-name>/*"
-         }
-      ]
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Sid": "KVBackup",
+         "Effect": "Allow",
+         "Action": "s3:PutObject",
+         "Resource": "arn:aws:s3:::<bucket-name>/*"
+       }
+     ]
    }
    ```
    Replace `<bucket-name>` with the name of the bucket you created earlier.

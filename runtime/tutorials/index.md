@@ -1,11 +1,10 @@
 ---
-sidebar_position: 1
-sidebar_label: Overview
-pagination_next: tutorials/hello_world
----
-
----
 title: "Examples"
+sidebar_title: "Overview"
+pagination_next: /runtime/tutorials/hello_world
+oldUrl:
+  - /runtime/manual/examples/
+  - /runtime/manual/examples/how_to_with_npm/
 ---
 
 Here you can find some example programs that you can use to learn more about the

@@ -1,5 +1,8 @@
 ---
 title: "Secondary Indexes"
+oldUrl:
+  - /runtime/manual/runtime/kv/secondary_indexes
+  - /kv/manual/secondary_indexes
 ---
 
 <deno-admonition></deno-admonition>
@@ -110,9 +113,7 @@ To implement a unique secondary index for this example, follow these steps:
    > and then deletes both the primary and secondary key pointing to the user
    > value. If this fails (the user has been modified between query and delete),
    > the atomic operation aborts. The entire procedure is retried until the
-   > delete succeeds.
-   > 
-   > The check is required to prevent race conditions where
+   > delete succeeds. The check is required to prevent race conditions where
    > value may have been modified between the retrieve and delete. This race can
    > occur if an update changes the user's email, because the secondary index
    > moves in this case. The delete of the secondary index then fails, because
@@ -143,7 +144,11 @@ To implement a non-unique secondary index for this example, follow these steps:
    ```ts
    async function insertUser(user: User) {
      const primaryKey = ["users", user.id];
-     const byColorKey = ["users_by_favorite_color", user.favoriteColor, user.id];
+     const byColorKey = [
+       "users_by_favorite_color",
+       user.favoriteColor,
+       user.id,
+     ];
      await kv.atomic()
        .check({ key: primaryKey, versionstamp: null })
        .set(primaryKey, user)

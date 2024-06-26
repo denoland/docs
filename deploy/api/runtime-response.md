@@ -1,5 +1,7 @@
 ---
 title: "HTTP Response"
+oldUrl:
+  - /deploy/docs/response/
 ---
 
 The [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)

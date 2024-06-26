@@ -1,5 +1,7 @@
 ---
 title: "Scheduling cron tasks"
+oldUrl:
+  - /kv/manual/cron/
 ---
 
 <deno-admonition></deno-admonition>

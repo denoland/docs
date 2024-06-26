@@ -12,7 +12,13 @@ export default function* () {
       const content = Deno.readTextFileSync(file.path);
 
       yield {
-        url: "/api" + file.path.slice("reference_gen/gen".length,  file.path.endsWith("index.html") ? -"index.html".length : -".html".length),
+        url: "/api" +
+          file.path.slice(
+            "reference_gen/gen".length,
+            file.path.endsWith("index.html")
+              ? -"index.html".length
+              : -".html".length,
+          ),
         title: file.name.slice(0, -".html".length),
         content,
       };

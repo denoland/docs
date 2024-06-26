@@ -1,5 +1,7 @@
 ---
 title: "Using WebAssembly"
+oldUrl:
+  - /runtime/manual/getting_started/webassembly/
 ---
 
 Designed to be used alongside JavaScript to speed up key application components,

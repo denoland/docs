@@ -1,5 +1,7 @@
 ---
 title: "Using Queues"
+oldUrl:
+  - /kv/manual/queue_overview/
 ---
 
 <deno-admonition></deno-admonition>

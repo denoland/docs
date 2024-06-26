@@ -2,9 +2,10 @@ import { walkSync } from "@std/fs/walk";
 
 export const layout = "raw.tsx";
 export const url = "/";
-export const title = "Deno: the easiest, most secure JavaScript runtime | Deno Docs";
+export const title =
+  "Deno: the easiest, most secure JavaScript runtime | Deno Docs";
 
-export default function() {
+export default function () {
   return (
     <div class="flex flex-col px-8 pt-6 mt-4 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-[1200px] mx-auto mb-24">
       <div class="pb-16 align-middle md:pb-0">
@@ -77,8 +78,7 @@ export default function() {
             <h2 class="text-3xl font-semibold mb-4">Deno Deploy</h2>
             <p class="min-h-20 mb-4">
               Serverless platform for deploying JavaScript code to a fast,
-              global edge network. Supports Deno APIs and Node.js / npm
-              modules
+              global edge network. Supports Deno APIs and Node.js / npm modules
             </p>
             <a
               class="border-solid border-deploy font-bold inline-block py-5 px-4 rounded-md w-max text-black bg-deploy hover:text-inherit dark:hover:text-deploy dark:hover:bg-deploy-dark hover:no-underline"

@@ -1,5 +1,8 @@
 ---
 title: "Operations"
+oldUrl:
+  - /runtime/manual/runtime/kv/operations/
+  - /kv/manual/operations/
 ---
 
 <deno-admonition></deno-admonition>
@@ -255,16 +258,17 @@ await kv.atomic()
 
 ## `watch`
 
-The `watch` operation accepts an array of keys, and returns 
-a [`ReadableStream`](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream), 
-which emits a new value  whenever any of the  watched keys change 
-their `versionstamp`. The emitted value is an  array of 
-[Deno.KvEntryMaybe](https://deno.land/api?s=Deno.KvEntryMaybe&unstable=) objects.
+The `watch` operation accepts an array of keys, and returns a
+[`ReadableStream`](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream),
+which emits a new value whenever any of the watched keys change their
+`versionstamp`. The emitted value is an array of
+[Deno.KvEntryMaybe](https://deno.land/api?s=Deno.KvEntryMaybe&unstable=)
+objects.
 
-Note that the returned stream does not return every single intermediate state
-of the watched keys, but keeps you up to date with the latest state of keys.
-This means if a key is modified multiple times quickly, you may not receive
-a notification for every change, but the latest state of the key.
+Note that the returned stream does not return every single intermediate state of
+the watched keys, but keeps you up to date with the latest state of keys. This
+means if a key is modified multiple times quickly, you may not receive a
+notification for every change, but the latest state of the key.
 
 ```ts
 const db = await Deno.openKv();

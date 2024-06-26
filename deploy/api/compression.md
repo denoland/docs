@@ -1,5 +1,7 @@
 ---
 title: "Compressing response bodies"
+oldUrl:
+  - /deploy/docs/compression/
 ---
 
 Compressing the response body to save bandwidth is a common practice. To take

@@ -1,5 +1,5 @@
 ---
-pagination_next: manual/basics/permissions
+pagination_next: /runtime/manual/basics/permissions
 title: "Web Frameworks"
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Command Line Interface
-sidebar_position: 4
 ---
 
 Deno is a command line program. You should be familiar with some simple commands

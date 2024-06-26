@@ -1,5 +1,7 @@
 ---
 title: "BroadcastChannel"
+oldUrl:
+  - /deploy/docs/runtime-broadcast-channel/
 ---
 
 In Deno Deploy, code is run in different data centers around the world in order

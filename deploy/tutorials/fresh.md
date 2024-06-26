@@ -1,5 +1,7 @@
 ---
 title: "Basic Fresh site"
+oldUrl:
+  - /deploy/docs/fresh/
 ---
 
 This tutorial will cover how to deploy a Fresh application on Deno Deploy.

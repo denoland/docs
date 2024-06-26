@@ -11,7 +11,6 @@ executables are provided. On Linux and Windows, only x64 is supported.
 [deno_install](https://github.com/denoland/deno_install) provides convenience
 scripts to download and install the binary.
 
-
 <deno-tabs group-id="operating-systems">
 <deno-tab value="mac" label="macOS" default>
 

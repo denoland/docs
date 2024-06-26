@@ -1,5 +1,7 @@
 ---
 title: "Simple HTTP server"
+oldUrl:
+  - /deploy/docs/tutorial-http-server/
 ---
 
 In this tutorial, let's build a HTTP server that responds to all incoming HTTP

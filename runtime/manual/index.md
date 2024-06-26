@@ -1,8 +1,10 @@
 ---
-displayed_sidebar: runtimeGuideHome
-sidebar_position: 1
-pagination_next: manual/getting_started/first_steps
 title: "Deno Runtime Quick Start"
+pagination_next: /runtime/manual/getting_started/first_steps/
+oldUrl:
+  - /manual/
+  - /runtime/manual/introduction/
+  - /runtime/
 ---
 
 [Deno](https://www.deno.com)
@@ -22,7 +24,6 @@ below.
 
 <deno-tabs group-id="operating-systems">
 <deno-tab value="mac" label="macOS" default>
-
 
 ```sh
 curl -fsSL https://deno.land/install.sh | sh

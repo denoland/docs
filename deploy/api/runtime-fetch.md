@@ -1,5 +1,7 @@
 ---
 title: "HTTP requests (fetch)"
+oldUrl:
+  - /deploy/docs/runtime-fetch/
 ---
 
 The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)

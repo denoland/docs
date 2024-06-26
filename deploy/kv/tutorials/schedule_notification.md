@@ -1,5 +1,7 @@
 ---
 title: "Schedule a notification for a future date"
+oldUrl:
+  - /kv/tutorials/schedule_notification/
 ---
 
 A common use case for [queues](../manual/queue_overview.md) is scheduling work

@@ -1,9 +1,7 @@
 ---
-displayed_sidebar: deployGuideHome
-sidebar_position: 1
-sidebar_label: Overview
-pagination_next: tutorials/tutorial-http-server
 title: "Tutorials"
+sidebar_title: "Overview"
+pagination_next: /deploy/tutorials/tutorial-http-server
 ---
 
 Here, you'll find a collection of tutorials and example applications for Deno

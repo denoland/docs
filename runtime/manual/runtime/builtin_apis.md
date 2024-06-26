@@ -1,5 +1,6 @@
 ---
 title: "Deno namespace APIs"
+oldUrl: /runtime/manual/runtime/
 ---
 
 The global Deno namespace contains APIs that are not web standard, including

@@ -1,6 +1,8 @@
 ---
-displayed_sidebar: deployGuideHome
 title: "Deploy Quick Start"
+oldUrl:
+  - /deploy/
+  - /deploy/docs/
 ---
 
 Deno Deploy is a globally distributed platform for serverless JavaScript

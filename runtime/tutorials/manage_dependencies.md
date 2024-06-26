@@ -1,5 +1,7 @@
 ---
 title: "Managing Dependencies"
+oldUrl:
+  - /runtime/manual/examples/manage_dependencies/
 ---
 
 ## Concepts

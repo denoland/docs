@@ -1,7 +1,9 @@
 ---
 title: "KV on Deno Deploy"
+oldUrl:
+  - /deploy/manual/kv/
+  - /kv/manual/on_deploy/
 ---
-
 
 <deno-admonition></deno-admonition>
 
@@ -47,8 +49,8 @@ Below are the latency figures observed in our top regions:
 ## Distributed queues
 
 Serverless distributed queues are available on Deno Deploy. See
-[Queues on Deno Deploy](/deploy/kv/manual/queue_overview#queues-on-deno-deploy) for
-more details.
+[Queues on Deno Deploy](/deploy/kv/manual/queue_overview#queues-on-deno-deploy)
+for more details.
 
 ## Connect to managed databases from outside of Deno Deploy
 

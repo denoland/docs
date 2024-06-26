@@ -1,5 +1,7 @@
 ---
 title: "Data Modeling in TypeScript"
+oldUrl:
+  - /kv/manual/data_modeling_typescript/
 ---
 
 <deno-admonition></deno-admonition>
@@ -99,8 +101,8 @@ that can operate on your DTOs.
 ## Encapsulating business logic with a service layer
 
 When your application's persistence needs become more complex - such as when you
-need to create [secondary indexes](./secondary_indexes.mdx) to query your data by
-different keys, or maintain relationships between objects - you will want to
+need to create [secondary indexes](./secondary_indexes.mdx) to query your data
+by different keys, or maintain relationships between objects - you will want to
 create a set of functions to sit on top of your DTOs to ensure that the data
 being passed around is valid (and not merely typed correctly).
 

@@ -1,5 +1,8 @@
 ---
 title: "Reloading Modules"
+oldUrl:
+  - /runtime/manual/linking_to_external_code/reloading_modules
+  - /runtime/manual/linkingtoexternal_code
 ---
 
 By default, a module in the cache will be reused without fetching or

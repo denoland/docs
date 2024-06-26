@@ -1,9 +1,10 @@
 ---
 title: "Using KV in Node.js"
+oldUrl:
+  - /kv/manual/node/
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs"; import TabItem from "@theme/TabItem";
 
 Connecting to a Deno KV database in Node.js is supported via our
 [official client library on npm](https://www.npmjs.com/package/@deno/kv). You
@@ -21,21 +22,21 @@ one of the commands below.
 npm install @deno/kv
 ```
 
-  </deno-tab>
+</deno-tab>
   <deno-tab value="pnpm" label="pnpm">
 
 ```sh
 pnpm add @deno/kv
 ```
 
-  </deno-tab>
+</deno-tab>
   <deno-tab value="yarn" label="yarn">
 
 ```sh
 yarn add @deno/kv
 ```
 
-  </deno-tab>
+</deno-tab>
 </deno-tabs>
 
 Once you've added the package to your Node project, you can import the `openKv`
@@ -48,10 +49,10 @@ import { openKv } from "@deno/kv";
 const kv = await openKv("<KV Connect URL>");
 
 // Write some data
-await kv.set([ "users", "alice" ], { name: "Alice" });
+await kv.set(["users", "alice"], { name: "Alice" });
 
 // Read it back
-const result = await kv.get([ "users", "alice" ]);
+const result = await kv.get(["users", "alice"]);
 console.log(result.value); // { name: "Alice" }
 ```
 
@@ -64,18 +65,18 @@ import { openKv } from "@deno/kv";
 const kv = await openKv("<KV Connect URL>", { accessToken: myToken });
 ```
 
-Once your Deno KV client is initialized, the same API available in Deno may
-be used in Node as well.
+Once your Deno KV client is initialized, the same API available in Deno may be
+used in Node as well.
 
 ## KV Connect URLs
 
-Connecting to a KV database outside of Deno requires a 
+Connecting to a KV database outside of Deno requires a
 [KV Connect](https://github.com/denoland/denokv/blob/main/proto/kv-connect.md)
 URL. A KV Connect URL for a database hosted on Deno Deploy will be in this
 format: `https://api.deno.com/databases/<database-id>/connect`.
 
 The `database-id` for your project can be found in the
-[Deno Deploy dashboard](https://dash.deno.com/projects), under the project's 
+[Deno Deploy dashboard](https://dash.deno.com/projects), under the project's
 "KV" tab.
 
 ![Connection string locations in Deploy](./images/kv-connect.png)

@@ -1,5 +1,4 @@
 ---
-displayed_sidebar: subhosting
 title: Deno Subhosting
 ---
 

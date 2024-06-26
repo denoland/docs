@@ -1,5 +1,8 @@
 ---
 title: "Transactions"
+oldUrl:
+  - /runtime/manual/runtime/kv/transactions/
+  - /kv/manual/transactions/
 ---
 
 <deno-admonition></deno-admonition>
@@ -47,8 +50,12 @@ async function transferFunds(sender: string, receiver: string, amount: number) {
   while (!res.ok) {
     // Read the current balance of both accounts.
     const [senderRes, receiverRes] = await kv.getMany([senderKey, receiverKey]);
-    if (senderRes.value === null) throw new Error(`Account ${sender} not found`);
-    if (receiverRes.value === null) throw new Error(`Account ${receiver} not found`);
+    if (senderRes.value === null) {
+      throw new Error(`Account ${sender} not found`);
+    }
+    if (receiverRes.value === null) {
+      throw new Error(`Account ${receiver} not found`);
+    }
 
     const senderBalance = senderRes.value;
     const receiverBalance = receiverRes.value;

@@ -1,5 +1,6 @@
 ---
 title: "Debugging Your Code"
+oldUrl: /runtime/manual/getting_started/debugging_your_code/
 ---
 
 Deno supports the [V8 Inspector Protocol](https://v8.dev/docs/inspector) used by

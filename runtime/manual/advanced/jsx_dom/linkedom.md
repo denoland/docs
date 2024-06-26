@@ -1,5 +1,6 @@
 ---
 title: "Using LinkeDOM with Deno"
+oldUrl: /runtime/manual/jsx_dom/linkedom/
 ---
 
 [LinkeDOM](https://github.com/WebReflection/linkedom) is a DOM-like namespace to

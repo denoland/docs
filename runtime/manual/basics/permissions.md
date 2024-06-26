@@ -1,5 +1,6 @@
 ---
 title: "Permissions"
+oldUrl: /runtime/manual/basics/permissionsDeno/
 ---
 
 Deno is secure by default. Therefore, unless you specifically enable it, a

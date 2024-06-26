@@ -6,7 +6,11 @@ export default function Header({
   const reference = url.startsWith("/api");
 
   return (
-    <div class={`bg-white shadow z-50 ${reference ? "" : "sticky top-0 left-0 right-0"}`}>
+    <div
+      class={`bg-white shadow z-50 ${
+        reference ? "" : "sticky top-0 left-0 right-0"
+      }`}
+    >
       <nav class="px-8 py-2 h-12 flex items-center justify-between">
         <div class="flex items-center">
           <a class="flex items-center gap-3 mr-6" href="/">
@@ -39,7 +43,12 @@ export default function Header({
             href="/examples"
             name="Examples"
           />
-          <HeaderItem url={url} activeOn="/api" href="/api/deno" name="Reference" />
+          <HeaderItem
+            url={url}
+            activeOn="/api"
+            href="/api/deno"
+            name="Reference"
+          />
         </div>
         <div class="flex items-center">
           <HeaderItem
@@ -52,34 +61,36 @@ export default function Header({
       </nav>
 
       {reference &&
-		    <nav className="px-8 py-2 h-12 bg-white flex items-center justify-between border-box border-t border-gray-200 z-[1000]">
-			    <ul className="flex">
-				    <li>
-					    <HeaderItem
-						    url={url}
-						    activeOn="/api/deno"
-						    href="/api/deno"
-						    name="Deno"
-					    />
-				    </li>
-				    <li>
-					    <HeaderItem
-						    url={url}
-						    activeOn="/api/web"
-						    href="/api/web"
-						    name="Web"
-					    />
-				    </li>
-				    <li>
-					    <HeaderItem
-						    url={url}
-						    activeOn="/api/node"
-						    href="/api/node"
-						    name="Node"
-					    />
-				    </li>
-			    </ul>
-		    </nav>}
+        (
+          <nav className="px-8 py-2 h-12 bg-white flex items-center justify-between border-box border-t border-gray-200 z-[1000]">
+            <ul className="flex">
+              <li>
+                <HeaderItem
+                  url={url}
+                  activeOn="/api/deno"
+                  href="/api/deno"
+                  name="Deno"
+                />
+              </li>
+              <li>
+                <HeaderItem
+                  url={url}
+                  activeOn="/api/web"
+                  href="/api/web"
+                  name="Web"
+                />
+              </li>
+              <li>
+                <HeaderItem
+                  url={url}
+                  activeOn="/api/node"
+                  href="/api/node"
+                  name="Node"
+                />
+              </li>
+            </ul>
+          </nav>
+        )}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 ---
 title: "Import Maps"
+oldUrl: /runtime/manual/basics/modules/import_maps/
 ---
 
 In order for Deno to resolve a _bare specifier_ like `"react"` or `"lodash"`, it

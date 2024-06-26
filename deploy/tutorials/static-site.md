@@ -1,5 +1,7 @@
 ---
 title: "Deploy a static site"
+oldUrl:
+  - /deploy/docs/static-site/
 ---
 
 This tutorial will cover how to deploy a static site (no JavaScript) on Deno

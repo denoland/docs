@@ -1,5 +1,6 @@
 ---
 title: "Node and npm modules"
+oldUrl: /runtime/manual/npm_nodejs/std_node/
 ---
 
 Many people will want to leverage code and libraries that are built for

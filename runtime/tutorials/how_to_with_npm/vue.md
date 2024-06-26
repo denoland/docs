@@ -1,5 +1,7 @@
 ---
 title: "How to use Vue with Deno"
+oldUrl:
+  - /runtime/manual/examples/how_to_with_npm/vue/
 ---
 
 [Vue](https://vuejs.org/) is a progressive front-end JavaScript framework, built

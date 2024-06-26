@@ -1,5 +1,7 @@
 ---
 title: "Making Scripts Executable With a Hashbang (Shebang)"
+oldUrl:
+  - /runtime/manual/examples/hashbang/
 ---
 
 ## Concepts

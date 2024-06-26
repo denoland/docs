@@ -1,5 +1,6 @@
 ---
 title: "Overview of JSX and DOM in Deno"
+oldUrl: /runtime/manual/using_deno_with_other_technologies/jsx_dom/
 ---
 
 One of the common use cases for Deno is to handle workloads as part of web

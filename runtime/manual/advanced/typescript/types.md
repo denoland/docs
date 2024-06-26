@@ -1,5 +1,6 @@
 ---
 title: "Types and Type Declarations"
+oldUrl: /runtime/manual/typescript/types/
 ---
 
 One of the design principles of Deno is no non-standard module resolution. When

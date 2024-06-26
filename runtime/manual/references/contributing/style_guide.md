@@ -1,5 +1,6 @@
 ---
 title: "Deno Style Guide"
+oldUrl: /runtime/manual/contributing/style_guide/
 ---
 
 > ⚠️ Note that this is the style guide for **internal runtime code** in the Deno

@@ -1,5 +1,6 @@
 ---
 title: "Node API Compatibility List"
+oldUrl: /runtime/manual/npm_nodejs/compatibility_mode/
 ---
 
 Deno provides polyfills for a number of built-in Node.js modules and globals.

@@ -1,5 +1,7 @@
 ---
 title: Subhosting Resources
+oldUrl:
+  - /deploy/api/rest/
 ---
 
 To build Subhosting with Deno Deploy, it helps to understand some key resources

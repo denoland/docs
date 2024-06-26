@@ -1,5 +1,8 @@
 ---
 title: About Subhosting
+oldUrl:
+  - /subhosting/
+  - /deploy/manual/subhosting/
 ---
 
 Deno Subhosting is a robust platform designed to allow Software as a Service

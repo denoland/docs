@@ -1,5 +1,7 @@
 ---
 title: "HTTP Headers"
+oldUrl:
+  - /deploy/docs/runtime-headers/
 ---
 
 The [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers)

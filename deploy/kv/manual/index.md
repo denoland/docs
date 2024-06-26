@@ -1,7 +1,10 @@
 ---
 title: "Deno KV Quick Start"
+oldUrl:
+  - /kv/
+  - /kv/manual/
+  - /runtime/manual/runtime/kv/
 ---
-
 
 **Deno KV** is a
 [key-value database](https://en.wikipedia.org/wiki/Key%E2%80%93value_database)
@@ -204,23 +207,25 @@ async function getByEmail(email) {
 }
 ```
 
-Learn more about [secondary indexes in the manual here](./secondary_indexes.mdx).
+Learn more about
+[secondary indexes in the manual here](./secondary_indexes.mdx).
 
 ## Watching for updates in Deno KV
 
-You can also listen for updates from Deno KV with `kv.watch()`, which will
-emit a new value or values of the key or keys you provide. In the below chat example,
-we watch for updates on the key `["last_message_id", roomId]`. We retrieve `messageId`,
-which we then use with `kv.list()` to grab all the new messages from `seen` and `messageId`.
+You can also listen for updates from Deno KV with `kv.watch()`, which will emit
+a new value or values of the key or keys you provide. In the below chat example,
+we watch for updates on the key `["last_message_id", roomId]`. We retrieve
+`messageId`, which we then use with `kv.list()` to grab all the new messages
+from `seen` and `messageId`.
 
 ```ts
 let seen = "";
 for await (const [messageId] of kv.watch([["last_message_id", roomId]])) {
-	const newMessages = await Array.fromAsync(kv.list({
+  const newMessages = await Array.fromAsync(kv.list({
     start: ["messages", roomId, seen, ""],
     end: ["messages", roomId, messageId, ""],
   }));
-	await websocket.write(JSON.stringify(newMessages));
+  await websocket.write(JSON.stringify(newMessages));
   seen = messageId;
 }
 ```
@@ -240,21 +245,29 @@ by your code. Learn more about Deno KV on Deno Deploy [here](./on_deploy.mdx).
 
 ## Testing
 
-By default, [`Deno.openKv()`](https://deno.land/api?unstable=&s=Deno.openKv) creates or
-opens a persistent store based on the path from which the script that invoked it
-was run. This isn't usually desireable for tests, which need to produce the same
-behavior when run many times in a row.
+By default, [`Deno.openKv()`](https://deno.land/api?unstable=&s=Deno.openKv)
+creates or opens a persistent store based on the path from which the script that
+invoked it was run. This isn't usually desireable for tests, which need to
+produce the same behavior when run many times in a row.
 
 To test code that uses Deno KV, you can use the special argument `":memory:"` to
 create an ephemeral Deno KV datastore.
 
 ```ts
-async function setDisplayName(kv: Deno.Kv, username: string, displayname: string) {
+async function setDisplayName(
+  kv: Deno.Kv,
+  username: string,
+  displayname: string,
+) {
   await kv.set(["preferences", username, "displayname"], displayname);
 }
 
-async function getDisplayName(kv: Deno.Kv, username: string): Promise<string | null> {
-  return (await kv.get(["preferences", username, "displayname"])).value as string;
+async function getDisplayName(
+  kv: Deno.Kv,
+  username: string,
+): Promise<string | null> {
+  return (await kv.get(["preferences", username, "displayname"]))
+    .value as string;
 }
 
 Deno.test("Preferences", async (t) => {
@@ -272,10 +285,11 @@ Deno.test("Preferences", async (t) => {
 });
 ```
 
-This works because Deno KV is backed by SQLite when run for local development. Just like
-in-memory SQLite databases, multiple ephemeral Deno KV stores can exist at once without
-interfering with one another. For more information about special database addressing modes,
-see [the SQLite docs on the topic](https://www.sqlite.org/inmemorydb.html).
+This works because Deno KV is backed by SQLite when run for local development.
+Just like in-memory SQLite databases, multiple ephemeral Deno KV stores can
+exist at once without interfering with one another. For more information about
+special database addressing modes, see
+[the SQLite docs on the topic](https://www.sqlite.org/inmemorydb.html).
 
 ## Next steps
 

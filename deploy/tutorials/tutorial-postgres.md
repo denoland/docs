@@ -1,5 +1,7 @@
 ---
 title: "API server with Postgres"
+oldUrl:
+  - /deploy/docs/tutorial-postgres/
 ---
 
 Postgres is a popular database for web applications because of its flexibility

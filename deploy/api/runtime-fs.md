@@ -1,5 +1,7 @@
 ---
 title: "File system APIs"
+oldUrl:
+  - /deploy/docs/runtime-fs/
 ---
 
 Deno Deploy supports a limited set of the file system APIs available in Deno.

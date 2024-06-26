@@ -12,7 +12,9 @@ export const layout = "layout.tsx";
 
 export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   const sidebar = props.sidebar as Sidebar_;
-  if (sidebar === undefined) return;
+  if (sidebar === undefined) {
+    throw new Error("Missing sidebar for " + props.url);
+  }
   return (
     <>
       <aside class="fixed top-12 bottom-0 left-0 h-(calc(100vh-3rem)) w-74 border-r border-gray-200">
@@ -36,7 +38,11 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                   }}
                 >
                 </h1>
-                {props.available_since && <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">Available since {props.available_since}</div>}
+                {props.available_since && (
+                  <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">
+                    Available since {props.available_since}
+                  </div>
+                )}
                 {props.children}
               </div>
             </article>
@@ -221,7 +227,7 @@ function SidebarItem(props: {
       throw new Error(`No data found for ${props.item}`);
     }
     item = {
-      label: data.title!,
+      label: data.sidebar_title ?? data.title!,
       id: data.url!,
     };
   } else {

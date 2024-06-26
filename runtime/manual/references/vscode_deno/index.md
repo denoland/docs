@@ -1,5 +1,6 @@
 ---
 title: "Using Visual Studio Code"
+oldUrl: /runtime/manual/vscode_deno/
 ---
 
 In this section we are going to go into depth about developing Deno applications

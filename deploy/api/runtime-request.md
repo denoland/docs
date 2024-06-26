@@ -1,5 +1,7 @@
 ---
 title: "HTTP Request"
+oldUrl:
+  - /deploy/docs/runtime-request/
 ---
 
 The [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request)

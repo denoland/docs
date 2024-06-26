@@ -1,5 +1,6 @@
 ---
 title: "Language Server Overview"
+oldUrl: /runtime/manual/language_server/overview/
 ---
 
 The Deno Language Server provides a server implementation of the

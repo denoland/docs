@@ -1,5 +1,7 @@
 ---
 title: "Configuring JSX in Deno"
+oldUrl:
+  - /deploy/manual/using-jsx/
 ---
 
 Deno has built-in support for JSX in both `.jsx` files and `.tsx` files. JSX in
