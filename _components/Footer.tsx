@@ -109,10 +109,10 @@ const data = [
 export default function Footer() {
   return (
     <footer class="w-full border-t border-gray-200 pt-12">
-      <div class="max-w-screen-xl mx-auto pb-16 px-16">
-        <div class="grid grid-cols-4 -mx-8">
+      <div class="max-w-screen-xl mx-auto pb-16 px-4 sm:px-8 md:px-16">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 md:-mx-8">
           {data.map((category) => (
-            <div class="mx-8">
+            <div class="md:mx-4 mb-12">
               <h3 class="font-bold mb-4">{category.title}</h3>
               <ul>
                 {category.items.map((item) => (

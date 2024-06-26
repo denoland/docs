@@ -17,13 +17,13 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   }
   return (
     <>
-      <aside class="fixed top-12 bottom-0 left-0 h-(calc(100vh-3rem)) w-74 border-r border-gray-200">
+      <aside class="hidden lg:block fixed top-12 bottom-0 left-0 h-(calc(100vh-3rem)) w-74 border-r border-gray-200">
         <Sidebar sidebar={sidebar} search={props.search} url={props.url} />
       </aside>
-      <div class="ml-74 relative">
-        <main class="mx-auto max-w-screen-xl w-full px-8 pt-4 pb-8 flex">
-          <div class="flex-grow px-8">
-            <article class="max-w-screen-md">
+      <div class="lg:ml-74 relative">
+        <main class="mx-auto max-w-screen-xl w-full overflow-x-hidden pt-4 pb-8 flex flex-grow">
+          <div class="flex-grow px-4 sm:px-8 max-w-full lg:max-w-[75%]">
+            <article class="max-w-[66ch]">
               <Breadcrumbs
                 title={props.title!}
                 sidebar={sidebar}
@@ -31,6 +31,18 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 sectionTitle={props.sectionTitle!}
                 sectionHref={props.sectionHref!}
               />
+              <details class="block md:hidden my-4 bg-gray-100 rounded-md group">
+                <summary class="px-3 py-1.5 group-open:border-b border-gray-300">
+                  On this page
+                </summary>
+
+                <ul class="pl-1 py-1.5">
+                  {(props.toc as TableOfContentsItem_[]).map((item) => (
+                    <TableOfContentsItemMobile item={item} />
+                  ))}
+                </ul>
+              </details>
+
               <div class="markdown-body mt-8">
                 <h1
                   dangerouslySetInnerHTML={{
@@ -49,7 +61,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
           </div>
           <div
             style={{ "flexBasis": "25%" }}
-            class="flex-shrink-0 flex-grow-0 px-8 pb-8"
+            class="hidden lg:block flex-shrink-0 flex-grow-0 px-8 pb-8"
           >
             <div class="sticky top-0 pt-16 -mt-16">
               <ul class="border-l border-gray-200 pl-2">
@@ -100,20 +112,19 @@ function Breadcrumbs(
 
   return (
     <nav class="mb-3">
-      <ul class="flex items-center">
+      <ul class="flex flex-wrap items-center">
         <li class="pr-3 py-1.5 underline underline-offset-4 hover:no-underline hover:text-blue-600 transition duration-100">
           <a href={props.sectionHref}>{props.sectionTitle}</a>
         </li>
         <svg
-          class="size-6 rotate-90"
+          class="size-6 rotate-90 -m-2"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
           <path
             fill="rgba(0,0,0,0.5)"
             d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-          >
-          </path>
+          />
         </svg>
         {crumbs.map((crumb, i) => (
           <>
@@ -153,6 +164,26 @@ function TableOfContentsItem(props: { item: TableOfContentsItem_ }) {
         <ul class="ml-2">
           {props.item.children.map((item) => (
             <TableOfContentsItem item={item} />
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+}
+
+function TableOfContentsItemMobile(props: { item: TableOfContentsItem_ }) {
+  return (
+    <li class="my-1.5 mx-3 leading-4">
+      <a
+        href={`#${props.item.slug}`}
+        class="text-base text-gray-600 hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
+      >
+        {props.item.text}
+      </a>
+      {props.item.children.length > 0 && (
+        <ul class="ml-2">
+          {props.item.children.map((item) => (
+            <TableOfContentsItemMobile item={item} />
           ))}
         </ul>
       )}

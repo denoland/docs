@@ -11,7 +11,7 @@ export default function Header({
         reference ? "" : "sticky top-0 left-0 right-0"
       }`}
     >
-      <nav class="px-8 py-2 h-12 flex items-center justify-between">
+      <nav class="px-4 md:px-8 py-2 h-12 flex items-center justify-between">
         <div class="flex items-center">
           <a class="flex items-center gap-3 mr-6" href="/">
             <div class="block size-6">
@@ -110,7 +110,7 @@ function HeaderItem({
 }) {
   return (
     <a
-      class={`mt-1 mx-2.5 px-0.5 hover:text-primary flex items-center ${
+      class={`hidden mt-1 mx-2.5 px-0.5 hover:text-primary lg:flex items-center ${
         activeOn && url.startsWith(activeOn)
           ? "text-primary border-b-2 border-primary"
           : "border-b-2 border-transparent"
