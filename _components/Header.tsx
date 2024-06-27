@@ -12,7 +12,7 @@ export default function Header({
         reference ? "" : "sticky top-0 left-0 right-0"
       }`}
     >
-      <nav class="px-4 md:px-8 py-2 h-12 flex items-center justify-between">
+      <nav class="px-4 md:px-8 py-3 h-15 flex items-center justify-between">
         <div class="flex items-center">
           {hassidebar && (
             <button class="mr-2 lg:hidden" id="sidebar-open">
@@ -86,7 +86,7 @@ export default function Header({
 
       {reference &&
         (
-          <nav className="px-8 py-2 h-12 bg-white flex items-center justify-between border-box border-t border-gray-200 z-[1000]">
+          <nav className="px-8 pt-2 pb-3 bg-white flex items-center justify-between border-box border-t border-gray-200 z-[1000]">
             <ul className="flex">
               <li>
                 <HeaderItem

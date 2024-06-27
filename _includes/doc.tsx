@@ -18,7 +18,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   return (
     <>
       <aside
-        class="lg:block absolute top-0 lg:top-12 bottom-0 -left-74 lg:left-0 sidebar-open:left-0 w-74 border-r border-gray-200 bg-white z-50 lg:z-0 transition-all"
+        class="lg:block absolute top-0 lg:top-16 bottom-0 -left-74 lg:left-0 sidebar-open:left-0 w-74 border-r border-gray-200 bg-white z-50 lg:z-0 transition-all"
         id="sidebar"
         data-open="false"
       >
@@ -55,7 +55,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
       >
       </div>
       <div
-        class="absolute top-12 bottom-0 left-0 right-0 lg:left-74 overflow-y-auto"
+        class="absolute top-16 bottom-0 left-0 right-0 lg:left-74 overflow-y-auto"
         style={{ scrollbarGutter: "stable" }}
       >
         <main class="mx-auto max-w-screen-xl w-full overflow-x-hidden pt-4 pb-8 flex flex-grow">
@@ -151,7 +151,7 @@ function Breadcrumbs(
 
   return (
     <nav class="mb-3">
-      <ul class="flex flex-wrap items-center">
+      <ul class="flex flex-wrap text-gray-700 items-center">
         <li class="pr-3 py-1.5 underline underline-offset-4 hover:no-underline hover:text-blue-600 transition duration-100">
           <a href={props.sectionHref}>{props.sectionTitle}</a>
         </li>
@@ -283,7 +283,7 @@ function SidebarSection(
 }
 
 const LINK_CLASS =
-  "block px-3 py-1.5 text-[.8125rem] leading-4 font-semibold text-gray-500 rounded-md hover:bg-pink-100 current:bg-gray-100 current:text-indigo-600/70 transition-colors duration-200 ease-in-out select-none";
+  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-gray-500 rounded-md hover:bg-pink-100 current:bg-gray-100 current:text-indigo-600/70 transition-colors duration-200 ease-in-out select-none";
 
 function SidebarItem(props: {
   item: string | SidebarDoc_ | SidebarLink_;
