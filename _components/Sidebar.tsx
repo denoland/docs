@@ -35,13 +35,13 @@ function SidebarSection(
     <li class="mb-4">
       {props.section.title &&
         (
-          <h3 class="border-b border-gray-200 uppercase pt-2 pb-0.5 mx-3 my-4 text-xs font-semibold text-gray-3">
+          <h3 class="border-b border-gray-200 uppercase pt-2 pb-0.5 mx-3 mt-4 mb-3 text-xs font-semibold text-gray-3">
             {props.section.title}
           </h3>
         )}
       <ul>
         {props.section.items.map((item) => (
-          <li class="mx-3 mt-1">
+          <li class="mx-2 mt-1">
             {typeof item === "object" && "items" in item
               ? (
                 <SidebarCategory
