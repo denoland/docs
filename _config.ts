@@ -102,7 +102,7 @@ site.copy("reference_gen/gen/web/script.js", "/api/web/script.js");
 site.copy("reference_gen/gen/node/page.css", "/api/node/page.css");
 site.copy("reference_gen/gen/node/styles.css", "/api/node/styles.css");
 site.copy("reference_gen/gen/node/script.js", "/api/node/script.js");
-site.copy("orama-searchbox-1.0.0-rc45.js");
+site.copy("orama-searchbox-1.0.0-rc47.js");
 
 site.ignore(
   "old",
@@ -116,8 +116,8 @@ site.ignore(
 );
 
 site.remoteFile(
-  "orama-searchbox-1.0.0-rc45.js",
-  "https://unpkg.com/@orama/searchbox@1.0.0-rc45/dist/bundle.js",
+  "orama-searchbox-1.0.0-rc47.js",
+  "https://unpkg.com/@orama/searchbox@1.0.0-rc47/dist/bundle.js",
 );
 
 site.scopedUpdates((path) => path == "/overrides.css");
