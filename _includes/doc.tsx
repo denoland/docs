@@ -160,7 +160,7 @@ function Breadcrumbs(
           <a href={props.sectionHref}>{props.sectionTitle}</a>
         </li>
         <svg
-          class="size-6 rotate-90 -m-2"
+          class="size-6 rotate-90"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
