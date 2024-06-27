@@ -84,7 +84,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 </ul>
               </details>
             )}
-              <div class="markdown-body mt-8">
+              <div class="markdown-body mt-4 lg:mt-8">
                 <h1
                   dangerouslySetInnerHTML={{
                     __html: helpers.md(props.title!, true),
