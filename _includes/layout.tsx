@@ -29,6 +29,13 @@ export default function Layout(props: Lume.Data) {
         <script src="/orama-searchbox-1.0.0-rc45.js" defer></script>
         <script type="module" src="/sidebar.client.js"></script>
         <script type="module" src="/search.client.js"></script>
+
+        <script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"
+        >
+        </script>
+        <link rel="preconnect" href="https://www.googletagmanager.com"></link>
       </head>
       <body class={reference ? "" : "h-dvh overflow-hidden"}>
         <props.comp.Header url={props.url} hasSidebar={!!props.sidebar} />
