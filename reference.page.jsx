@@ -9,7 +9,10 @@ export default function* () {
     });
 
     for (const file of files) {
-      const content = Deno.readTextFileSync(file.path);
+      const content = Deno.readTextFileSync(file.path).replace(
+        /<link id="ddocResetStylesheet" rel="stylesheet" href=".+?reset.css">\s+/,
+        "",
+      );
 
       yield {
         url: "/api" +
