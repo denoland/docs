@@ -8,23 +8,23 @@ export const sidebar = [
     items: [
       {
         label: "Deno Runtime",
-        id: "/runtime",
+        id: "/runtime/manual/",
       },
       {
         label: "Deno Deploy",
-        id: "/deploy",
+        id: "/deploy/manual/",
       },
       {
         label: "Subhosting",
-        id: "/subhosting",
+        id: "/subhosting/manual/",
       },
       {
         label: "Examples",
-        id: "/examples",
+        id: "/examples/",
       },
       {
         label: "Reference",
-        id: "/api",
+        id: "/api/deno",
       },
       {
         label: "deno.com",

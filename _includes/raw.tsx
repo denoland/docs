@@ -16,11 +16,11 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
       {props.sidebar && (
         <>
           <aside
-            class="absolute top-0 lg:top-12 bottom-0 -left-74 sidebar-open:left-0 w-74 border-r border-gray-200 bg-white z-50 lg:hidden transition-all"
+            class="absolute top-0 bottom-0 -left-74 sidebar-open:left-0 w-74 border-r border-gray-200 bg-white z-50 lg:hidden transition-all"
             id="sidebar"
             data-open="false"
           >
-            <div class="lg:hidden p-4 shadow-sm flex justify-between h-16">
+            <div class="p-4 shadow-sm flex justify-between h-16">
               <a class="flex items-center gap-3 mr-6" href="/">
                 <div class="block size-6">
                   <img src="/img/logo.svg" alt="Deno Docs" />
@@ -59,7 +59,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
         </>
       )}
       <div
-        class="absolute top-12 bottom-0 left-0 right-0 overflow-y-auto"
+        class="absolute top-16 bottom-0 left-0 right-0 overflow-y-auto"
         style={{ scrollbarGutter: "stable" }}
       >
         {props.children}
