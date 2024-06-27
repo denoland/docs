@@ -87,7 +87,7 @@ function SidebarItem(props: {
   }
 
   return (
-    <li class="mx-3 mt-1">
+    <li class="mx-2 mt-1">
       <a
         class={LINK_CLASS}
         href={"id" in item ? item.id : "href" in item ? item.href : undefined}
@@ -137,7 +137,7 @@ function SidebarCategory(props: {
         </svg>
       </div>
       <ul
-        class={`ml-3 ${containsCurrent ? "" : "hidden"}`}
+        class={`ml-2 ${containsCurrent ? "" : "hidden"}`}
         data-accordion-content
       >
         {props.item.items.map((item) => (
