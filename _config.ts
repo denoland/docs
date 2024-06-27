@@ -93,6 +93,10 @@ site.ignore(
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   "by-example",
+  // "deploy",
+  // "examples.page.tsx",
+  // "runtime",
+  // "subhosting",
 );
 
 site.remoteFile(

@@ -17,3 +17,21 @@ for (const el of document.querySelectorAll("[data-accordion-trigger]")) {
     }
   });
 }
+
+const sidebar = document.getElementById("sidebar")!;
+const sidebarOpen = document.getElementById("sidebar-open");
+const sidebarClose = document.getElementById("sidebar-close");
+const sidebarCover = document.getElementById("sidebar-cover")!;
+
+sidebarOpen?.addEventListener("click", () => {
+  sidebar.dataset.open = "true";
+  sidebarCover.dataset.open = "true";
+});
+sidebarClose?.addEventListener("click", () => {
+  sidebar.dataset.open = "false";
+  sidebarCover.dataset.open = "false";
+});
+sidebarCover?.addEventListener("click", () => {
+  sidebar.dataset.open = "false";
+  sidebarCover.dataset.open = "false";
+});

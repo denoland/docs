@@ -82,6 +82,7 @@ export default {
     {
       handler(api) {
         api.addVariant("current", "[aria-current]&");
+        api.addVariant("sidebar-open", "[data-open=true]&");
       },
     },
   ],

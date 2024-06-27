@@ -1,18 +1,38 @@
 export default function Header({
   url,
+  hassidebar,
 }: {
   url: string;
+  hassidebar?: boolean;
 }) {
   const reference = url.startsWith("/api");
-
   return (
     <div
-      class={`bg-white shadow z-50 ${
+      class={`bg-white shadow z-30 ${
         reference ? "" : "sticky top-0 left-0 right-0"
       }`}
     >
       <nav class="px-4 md:px-8 py-2 h-12 flex items-center justify-between">
         <div class="flex items-center">
+          {hassidebar && (
+            <button class="mr-2 lg:hidden" id="sidebar-open">
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                aria-hidden="true"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-miterlimit="10"
+                  stroke-width="2"
+                  d="M4 7h22M4 15h22M4 23h22"
+                >
+                </path>
+              </svg>
+            </button>
+          )}
           <a class="flex items-center gap-3 mr-6" href="/">
             <div class="block size-6">
               <img src="/img/logo.svg" alt="Deno Docs" />

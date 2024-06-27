@@ -31,7 +31,7 @@ export default function Layout(props: Lume.Data) {
         <script type="module" src="/search.client.js"></script>
       </head>
       <body class={reference ? "" : "h-dvh overflow-hidden"}>
-        <props.comp.Header url={props.url} />
+        <props.comp.Header url={props.url} hasSidebar={!!props.sidebar} />
         {props.children}
       </body>
     </html>
