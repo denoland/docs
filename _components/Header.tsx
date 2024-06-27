@@ -44,30 +44,35 @@ export default function Header({
             activeOn="/runtime"
             href="/runtime/manual"
             name="Deno Runtime"
+            hideOnMobile
           />
           <HeaderItem
             url={url}
             activeOn="/deploy"
             href="/deploy/manual"
             name="Deno Deploy"
+            hideOnMobile
           />
           <HeaderItem
             url={url}
             activeOn="/subhosting"
             href="/subhosting/manual"
             name="Subhosting"
+            hideOnMobile
           />
           <HeaderItem
             url={url}
             activeOn="/examples"
             href="/examples"
             name="Examples"
+            hideOnMobile
           />
           <HeaderItem
             url={url}
             activeOn="/api"
             href="/api/deno"
             name="Reference"
+            hideOnMobile
           />
         </div>
         <div class="flex items-center">
@@ -76,6 +81,7 @@ export default function Header({
             href="https://deno.com"
             name="deno.com"
             external
+            hideOnMobile
           />
           <div class="w-[100px] lg:w-[150px]">
             <orama-search-button />
@@ -125,20 +131,22 @@ function HeaderItem({
   href,
   name,
   external,
+  hideOnMobile,
 }: {
   url: string;
   activeOn?: string;
   href: string;
   name: string;
   external?: boolean;
+  hideOnMobile?: boolean;
 }) {
   return (
     <a
-      class={`hidden mt-1 mx-2.5 px-0.5 hover:text-primary lg:flex items-center ${
+      class={`mt-1 mx-2.5 px-0.5 hover:text-primary flex items-center ${
         activeOn && url.startsWith(activeOn)
           ? "text-primary border-b-2 border-primary"
           : "border-b-2 border-transparent"
-      }`}
+      } ${hideOnMobile ? "max-lg:!hidden" : ""}`}
       href={href}
     >
       {name}
