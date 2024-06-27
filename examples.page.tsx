@@ -2,6 +2,37 @@ import { walkSync } from "@std/fs/walk";
 
 export const layout = "raw.tsx";
 
+export const sidebar = [
+  {
+    items: [
+      {
+        label: "Deno Runtime",
+        id: "/runtime",
+      },
+      {
+        label: "Deno Deploy",
+        id: "/deploy",
+      },
+      {
+        label: "Subhosting",
+        id: "/subhosting",
+      },
+      {
+        label: "Examples",
+        id: "/examples",
+      },
+      {
+        label: "Reference",
+        id: "/api",
+      },
+      {
+        label: "deno.com",
+        id: "https://deno.com",
+      },
+    ],
+  },
+];
+
 export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
   const files = [...walkSync("./by-example/", {
     exts: [".ts"],

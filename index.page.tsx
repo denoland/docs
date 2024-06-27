@@ -3,6 +3,37 @@ export const url = "/";
 export const title =
   "Deno: the easiest, most secure JavaScript runtime | Deno Docs";
 
+export const sidebar = [
+  {
+    items: [
+      {
+        label: "Deno Runtime",
+        id: "/runtime",
+      },
+      {
+        label: "Deno Deploy",
+        id: "/deploy",
+      },
+      {
+        label: "Subhosting",
+        id: "/subhosting",
+      },
+      {
+        label: "Examples",
+        id: "/examples",
+      },
+      {
+        label: "Reference",
+        id: "/api",
+      },
+      {
+        label: "deno.com",
+        id: "https://deno.com",
+      },
+    ],
+  },
+];
+
 export default function () {
   return (
     <div class="flex flex-col px-8 pt-6 mt-4 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-[1200px] mx-auto mb-24">
