@@ -73,7 +73,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 sectionHref={props.sectionHref!}
               />
               <details class="block lg:hidden my-4 bg-gray-100 rounded-md group">
-                <summary class="px-3 py-1.5 group-open:border-b border-gray-300">
+                <summary class="px-4 py-2 group-open:border-b border-gray-300">
                   On this page
                 </summary>
 
@@ -105,8 +105,8 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
             class="hidden lg:block flex-shrink-0 flex-grow-0 px-8 pb-8"
           >
             <div>
-              <div class="sticky top-0 ">
-                <ul class="border-l border-gray-200 pl-2">
+              <div class="sticky py-2 top-0 ">
+                <ul class="border-l border-gray-200 py-2 pl-2">
                   {(props.toc as TableOfContentsItem_[]).map((item) => (
                     <TableOfContentsItem item={item} />
                   ))}
@@ -216,10 +216,10 @@ function TableOfContentsItem(props: { item: TableOfContentsItem_ }) {
 
 function TableOfContentsItemMobile(props: { item: TableOfContentsItem_ }) {
   return (
-    <li class="my-1.5 mx-3 leading-4">
+    <li class="my-1.5 mx-3">
       <a
         href={`#${props.item.slug}`}
-        class="text-base text-gray-600 hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
+        class="text-sm text-gray-600 hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
       >
         {props.item.text}
       </a>
