@@ -36,7 +36,17 @@
 
 body:not(:has(.ddoc)) pre:has(code.highlight),
 body:not(:has(.ddoc)) pre.highlight:has(code) {
-  @apply p-8;
+  @apply p-8 max-sm:-mx-4;
+  @apply max-sm:rounded-none !important;
+}
+
+.markdownBlockTitle + pre:has(code.highlight) {
+  @apply rounded-t-none;
+}
+
+.markdownBlockTitle {
+  background-color: var(--bgColor-muted,var(--color-canvas-subtle));
+  @apply px-8 py-4 max-sm:-mx-4 sm:rounded-t-md border-b border-gray-300 text-sm font-semibold;
 }
 
 .markdown-body h2:hover .anchor-end {
