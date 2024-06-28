@@ -10,7 +10,7 @@ export default function* () {
 
     for (const file of files) {
       const content = Deno.readTextFileSync(file.path).replace(
-        /<link id="ddocResetStylesheet" rel="stylesheet" href=".+?reset.css">\s+/,
+        /<link id="ddocResetStylesheet" rel="stylesheet" href=".*?reset\.css">\s+/,
         "",
       );
 
