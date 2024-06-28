@@ -14,16 +14,17 @@ import "npm:prismjs@1.29.0/components/prism-typescript.js";
 
 import { full as emoji } from "npm:markdown-it-emoji@3";
 import anchor from "npm:markdown-it-anchor@9";
-import relativeLinksPlugin from "./markdown-it-relative-path.ts";
-import replacerPlugin from "./markdown-it-replacer.ts";
-import admonitionPlugin from "./markdown-it-admonition.ts";
-import codeblockCopyPlugin from "./markdown-it-codeblock-copy.ts";
-import codeblockTitlePlugin from "./markdown-it-codeblock-title.ts";
+import relativeLinksPlugin from "./markdown-it/relative-path.ts";
+import replacerPlugin from "./markdown-it/replacer.ts";
+import admonitionPlugin from "./markdown-it/admonition.ts";
+import codeblockCopyPlugin from "./markdown-it/codeblock-copy.ts";
+import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 import {
   deploy as oramaDeploy,
+  generateDocumentsForExamples,
   generateDocumentsForPage,
   generateDocumentsForSymbols,
   OramaDocument,
@@ -175,6 +176,8 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
       }
     }
 
+    searchEntries = searchEntries.concat(await generateDocumentsForExamples());
+
     try {
       searchEntries = searchEntries.concat(await generateDocumentsForSymbols());
     } catch (e) {
@@ -192,6 +195,7 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
 
 site.ignore(
   "old",
+  "README.md",
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   "by-example",

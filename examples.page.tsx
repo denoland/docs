@@ -377,26 +377,12 @@ export const DIFFICULTIES = {
   },
 };
 
-type LoadContext = {
-  siteDir: string;
-  generatedFilesDir: string;
-  siteConfig: any;
-  outDir: string;
-  baseUrl: string;
-};
-
 type ReturnedContent = {
   name: string;
   content: string;
   label: string;
   parsed: Example;
 };
-
-export interface ExampleGroup {
-  title: string;
-  icon?: any;
-  items: Example[];
-}
 
 export interface Example {
   id: string;
