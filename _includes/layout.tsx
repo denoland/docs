@@ -28,6 +28,7 @@ export default function Layout(props: Lume.Data) {
         <link rel="stylesheet" href="/overrides.css" />
         <script src="/orama-searchbox-1.0.0-rc47.js" defer></script>
         <script type="module" src="/sidebar.client.js"></script>
+        <script type="module" src="/copy.client.js"></script>
         <script type="module" src="/search.client.js"></script>
 
         <script

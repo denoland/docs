@@ -16,6 +16,7 @@ import { full as emoji } from "npm:markdown-it-emoji@3";
 import anchor from "npm:markdown-it-anchor@9";
 import resolveUrls from "lume/plugins/resolve_urls.ts";
 import admonitionPlugin from "./markdown-it-admonition.ts";
+import codeblockCopyPlugin from "./markdown-it-codeblock-copy.ts";
 import codeblockTitlePlugin from "./markdown-it-codeblock-title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
@@ -30,6 +31,7 @@ const site = lume({
     plugins: [
       emoji,
       admonitionPlugin,
+      codeblockCopyPlugin,
       codeblockTitlePlugin,
       [
         anchor,

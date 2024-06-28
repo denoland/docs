@@ -34,13 +34,28 @@
   }
 }
 
-body:not(:has(.ddoc)) pre:has(code.highlight),
-body:not(:has(.ddoc)) pre.highlight:has(code) {
-  @apply p-8 max-sm:-mx-4;
-  @apply max-sm:rounded-none !important;
+body:not(:has(.ddoc)) {
+  pre:has(code.highlight),
+  pre.highlight:has(code) {
+    @apply p-8 max-sm:-mx-4;
+    @apply max-sm:rounded-none !important;
+  }
+  
+  pre:has(code.highlight):hover + .copyButton,
+  pre.highlight:has(code):hover + .copyButton {
+    @apply block;
+  }
+  
+  .copyButton {
+    @apply hidden absolute top-2 right-2 p-1 rounded;
+    
+    &:hover {
+      @apply block bg-gray-300;
+    }
+  }
 }
 
-.markdownBlockTitle + pre:has(code.highlight) {
+.markdownBlockTitle + div > pre:has(code.highlight) {
   @apply rounded-t-none;
 }
 
