@@ -14,7 +14,7 @@ import "npm:prismjs@1.29.0/components/prism-typescript.js";
 
 import { full as emoji } from "npm:markdown-it-emoji@3";
 import anchor from "npm:markdown-it-anchor@9";
-import resolveUrls from "lume/plugins/resolve_urls.ts";
+import relativeLinksPlugin from "./markdown-it-relative-path.ts";
 import replacerPlugin from "./markdown-it-replacer.ts";
 import admonitionPlugin from "./markdown-it-admonition.ts";
 import codeblockCopyPlugin from "./markdown-it-codeblock-copy.ts";
@@ -45,6 +45,7 @@ const site = lume({
           }),
         },
       ],
+      relativeLinksPlugin,
     ],
     options: {
       linkify: true,
@@ -96,7 +97,6 @@ site.use(prism({
 site.use(toc({ anchor: false }));
 site.use(title());
 site.use(sitemap());
-site.use(resolveUrls());
 
 site.addEventListener("afterBuild", () => {
   Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
