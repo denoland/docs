@@ -21,8 +21,13 @@ import codeblockCopyPlugin from "./markdown-it-codeblock-copy.ts";
 import codeblockTitlePlugin from "./markdown-it-codeblock-title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
-
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
+import {
+  deploy as oramaDeploy,
+  generateDocumentsForPage,
+  generateDocumentsForSymbols,
+  OramaDocument,
+} from "./orama.ts";
 
 const site = lume({
   location: new URL("https://docs.deno.com"),
@@ -152,6 +157,38 @@ site.process([".html"], (pages) => {
     }
   }
 });
+
+const ORAMA_API_KEY = Deno.env.get("ORAMA_CLOUD_API_KEY");
+const ORAMA_INDEX_ID = Deno.env.get("ORAMA_CLOUD_INDEX_ID");
+if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
+  site.process([".html"], async (pages) => {
+    let searchEntries: OramaDocument[] = [];
+
+    for (const page of pages) {
+      if (
+        page.document &&
+        (page.data.url.startsWith("/runtime/") ||
+          page.data.url.startsWith("/deploy/") ||
+          page.data.url.startsWith("/subhosting/"))
+      ) {
+        searchEntries = searchEntries.concat(generateDocumentsForPage(page));
+      }
+    }
+
+    try {
+      searchEntries = searchEntries.concat(await generateDocumentsForSymbols());
+    } catch (e) {
+      console.warn(
+        "⚠️ Orama documents for reference docs were not generated.",
+        e,
+      );
+    }
+
+    await oramaDeploy(ORAMA_API_KEY, ORAMA_INDEX_ID, searchEntries);
+  });
+} else {
+  console.warn("⚠️ Orama documents were not generated.");
+}
 
 site.ignore(
   "old",

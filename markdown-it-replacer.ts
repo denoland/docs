@@ -5,7 +5,10 @@ export default function replacerPlugin(md: any) {
   md.core.ruler.before("inline", "replacer", (state) => {
     state.tokens.forEach((token) => {
       Object.entries(REPLACEMENTS).forEach(([key, value]) => {
-        token.content = token.content.replace(new RegExp(`\\$${key}`, "g"), value)
+        token.content = token.content.replace(
+          new RegExp(`\\$${key}`, "g"),
+          value,
+        );
       });
     });
   });

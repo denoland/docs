@@ -1,6 +1,5 @@
 import { Sidebar } from "../types.ts";
 
-
 export const sidebar = [
   {
     title: "Getting Started",

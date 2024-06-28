@@ -11,7 +11,9 @@ export default function codeblockCopyPlugin(md: any) {
     self,
   ) {
     const render = defaultRender(tokens, idx, options, env, self);
-    return `<div class="relative">${render}<button class="copyButton" data-copy="${tokens[idx].content.replaceAll('"', '&quot;').replaceAll("'", "&apos;")}" title="Copy">
+    return `<div class="relative">${render}<button class="copyButton" data-copy="${
+      tokens[idx].content.replaceAll('"', "&quot;").replaceAll("'", "&apos;")
+    }" title="Copy">
 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="2" y="2" width="7" height="7" fill="none"/>
 <rect x="6" y="6" width="7" height="7" fill="none"/>

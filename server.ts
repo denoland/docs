@@ -11,7 +11,7 @@ server.use(redirects({
   redirects: {
     ...REDIRECTS,
     "/api/": "/api/deno/",
-  }
+  },
 }));
 
 server.start();

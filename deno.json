@@ -14,5 +14,9 @@
     ],
     "jsx": "precompile",
     "jsxImportSource": "npm:preact"
-  }
+  },
+  "exclude": [
+    "_site",
+    "reference_gen"
+  ]
 }

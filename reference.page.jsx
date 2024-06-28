@@ -4,6 +4,9 @@ export const layout = "raw.tsx";
 
 export default function* () {
   try {
+    if (Deno.env.has("SKIP_REFERENCE")) {
+      throw new Error();
+    }
     const files = walkSync("reference_gen/gen", {
       exts: [".html"],
     });

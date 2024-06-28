@@ -72,18 +72,18 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 sectionTitle={props.sectionTitle!}
                 sectionHref={props.sectionHref!}
               />
-            {props.toc && props.toc.length > 0 && (
-              <details class="block lg:hidden my-4 bg-gray-100 rounded-md group">
-                <summary class="px-4 py-2 group-open:border-b border-gray-300">
-                  On this page
-                </summary>
-                <ul class="pl-1 py-1.5">
-                  {props.toc.map((item: TableOfContentsItem_) => (
-                    <TableOfContentsItemMobile item={item} />
-                  ))}
-                </ul>
-              </details>
-            )}
+              {props.toc && props.toc.length > 0 && (
+                <details class="block lg:hidden my-4 bg-gray-100 rounded-md group">
+                  <summary class="px-4 py-2 group-open:border-b border-gray-300">
+                    On this page
+                  </summary>
+                  <ul class="pl-1 py-1.5">
+                    {props.toc.map((item: TableOfContentsItem_) => (
+                      <TableOfContentsItemMobile item={item} />
+                    ))}
+                  </ul>
+                </details>
+              )}
               <div class="markdown-body mt-4 lg:mt-8">
                 <h1
                   dangerouslySetInnerHTML={{
