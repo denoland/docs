@@ -22,7 +22,10 @@ import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 
-const site = lume({ location: new URL("https://docs.deno.com") }, {
+const site = lume({
+  location: new URL("https://docs.deno.com"),
+  caseSensitiveUrls: true,
+}, {
   markdown: {
     plugins: [
       emoji,

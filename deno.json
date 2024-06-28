@@ -1,7 +1,7 @@
 {
   "imports": {
     "@std/fs": "jsr:@std/fs@^0.229.3",
-    "lume/": "https://deno.land/x/lume@v2.2.2/"
+    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@f705c16c43913a0861b3fc88c723024d2d9e3069/"
   },
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
