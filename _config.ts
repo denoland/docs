@@ -15,6 +15,7 @@ import "npm:prismjs@1.29.0/components/prism-typescript.js";
 import { full as emoji } from "npm:markdown-it-emoji@3";
 import anchor from "npm:markdown-it-anchor@9";
 import resolveUrls from "lume/plugins/resolve_urls.ts";
+import replacerPlugin from "./markdown-it-replacer.ts";
 import admonitionPlugin from "./markdown-it-admonition.ts";
 import codeblockCopyPlugin from "./markdown-it-codeblock-copy.ts";
 import codeblockTitlePlugin from "./markdown-it-codeblock-title.ts";
@@ -29,6 +30,7 @@ const site = lume({
 }, {
   markdown: {
     plugins: [
+      replacerPlugin,
       emoji,
       admonitionPlugin,
       codeblockCopyPlugin,
@@ -55,6 +57,8 @@ site.copy("static", ".");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
 site.copy("runtime/manual/images");
+site.copy("deno.json");
+site.copy("server.ts");
 
 site.use(redirects({
   output: "json",
