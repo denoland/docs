@@ -101,7 +101,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
             </article>
           </div>
           <div
-            style={{ "flexBasis": "25%" }}
+            style={{ "flexBasis": "30%" }}
             class="hidden lg:block flex-shrink-0 flex-grow-0 px-8 pb-8"
           >
             <div>
