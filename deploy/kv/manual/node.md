@@ -16,21 +16,21 @@ Use your preferred npm client to install the client library for Node.js using
 one of the commands below.
 
 <deno-tabs group-id="npm-client">
-  <deno-tab value="npm" label="npm">
+<deno-tab value="npm" label="npm" default>
 
 ```sh
 npm install @deno/kv
 ```
 
 </deno-tab>
-  <deno-tab value="pnpm" label="pnpm">
+<deno-tab value="pnpm" label="npm">
 
 ```sh
 pnpm add @deno/kv
 ```
 
 </deno-tab>
-  <deno-tab value="yarn" label="yarn">
+<deno-tab value="yarn" label="npm">
 
 ```sh
 yarn add @deno/kv
