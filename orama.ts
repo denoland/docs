@@ -100,7 +100,7 @@ export async function generateDocumentsForExamples(): Promise<OramaDocument[]> {
       title: parsed.title,
       content: parsed.description,
       section: parsed.group,
-      category: "Example",
+      category: "Examples",
     } as OramaDocument;
   }));
 }
