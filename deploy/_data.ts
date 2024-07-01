@@ -131,7 +131,7 @@ export const sidebar = [
       },
       {
         label: "More on Deno by Example",
-        href: "https://examples.deno.land",
+        href: "/examples",
       },
     ],
   },

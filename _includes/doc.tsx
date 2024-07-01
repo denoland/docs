@@ -1,10 +1,8 @@
 import Searcher from "lume/core/searcher.ts";
 import {
   Sidebar as Sidebar_,
-  SidebarCategory as SidebarCategory_,
-  SidebarDoc as SidebarDoc_,
+  SidebarDoc as SidebarDoc_, SidebarItem,
   SidebarLink as SidebarLink_,
-  SidebarSection as SidebarSection_,
   TableOfContentsItem as TableOfContentsItem_,
 } from "../types.ts";
 
@@ -15,6 +13,41 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   if (sidebar === undefined) {
     throw new Error("Missing sidebar for " + props.url);
   }
+
+  function walk(sidebarItems: SidebarItem[]): [SidebarItem[], number] | undefined {
+    for (let i = 0; i < sidebarItems.length; i++) {
+      const sidebarItem = sidebarItems[i];
+      if (typeof sidebarItem === "string") {
+        const data = props.search.data(sidebarItem)!;
+        if (!data) {
+          throw new Error(`No data found for ${sidebarItem}`);
+        }
+
+       if (data.url == props.url) {
+         return [sidebarItems, i];
+       }
+      } else if ("id" in sidebarItem && sidebarItem.id === props.url) {
+        return [sidebarItems, i];
+      } else if ("items" in sidebarItem) {
+        const results = walk(sidebarItem.items);
+        if (results) {
+          return results;
+        }
+      }
+    }
+  }
+
+  let parentNavigation: SidebarItem[] | undefined = undefined;
+  let index: number | undefined = undefined;
+  for (const sidebarElement of sidebar) {
+    const items = walk(sidebarElement.items);
+
+    if (items) {
+      [parentNavigation, index] = items;
+      break;
+    }
+  }
+
   return (
     <>
       <aside
@@ -99,6 +132,10 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 {props.children}
               </div>
             </article>
+            {parentNavigation && <nav class="grid gap-8 grid-cols-2 items-center justify-between mt-6">
+              <div>{parentNavigation[index! - 1] && <div>prev: <NavigationButton item={parentNavigation[index! - 1]} search={props.search} /></div>}</div>
+              <div>{parentNavigation[index! + 1] && <div>next: <NavigationButton item={parentNavigation[index! + 1]} search={props.search} /></div>}</div>
+            </nav>}
           </div>
           <div
             style={{ "flexBasis": "30%" }}
@@ -119,6 +156,28 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
       </div>
     </>
   );
+}
+
+function NavigationButton(props: { item: SidebarItem; search: Searcher }) {
+  let item: SidebarDoc_ | SidebarLink_;
+  if (typeof props.item === "string") {
+    const data = props.search.data(props.item)!;
+    if (!data) {
+      throw new Error(`No data found for ${props.item}`);
+    }
+    item = {
+      label: data.sidebar_title ?? data.title!,
+      id: data.url!,
+    };
+  } else if ("items" in props.item) {
+    return <NavigationButton item={props.item.items[0]} search={props.search} />;
+  } else {
+    item = props.item;
+  }
+
+  return (
+    <a class="py-4 px-6 border border-gray-300 rounded block" href={"id" in item ? item.id : "href" in item ? item.href : undefined}>{item.label}</a>
+  )
 }
 
 function Breadcrumbs(

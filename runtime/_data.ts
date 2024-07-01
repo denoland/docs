@@ -334,7 +334,7 @@ export const sidebar = [
       },
       {
         label: "More on Deno by Example",
-        href: "https://examples.deno.land",
+        href: "/examples",
       },
     ],
   },
@@ -343,7 +343,7 @@ export const sidebar = [
     items: [
       {
         label: "Full API Reference",
-        href: "https://deno.land/api?unstable=true",
+        href: "/api/deno",
       },
       {
         label: "Std. Library",
