@@ -40,15 +40,15 @@ body:not(:has(.ddoc)) {
     @apply p-8 max-sm:-mx-4;
     @apply max-sm:rounded-none !important;
   }
-  
+
   pre:has(code.highlight):hover + .copyButton,
   pre.highlight:has(code):hover + .copyButton {
     @apply block;
   }
-  
+
   .copyButton {
     @apply hidden absolute top-2 right-2 p-1 rounded;
-    
+
     &:hover {
       @apply block bg-gray-300;
     }
@@ -60,8 +60,8 @@ body:not(:has(.ddoc)) {
 }
 
 .markdownBlockTitle {
-  background-color: var(--bgColor-muted,var(--color-canvas-subtle));
-  @apply px-8 py-4 max-sm:-mx-4 sm:rounded-t-md border-b border-gray-300 text-sm font-semibold;
+  background-color: var(--bgColor-muted, var(--color-canvas-subtle));
+  @apply px-8 py-4 max-sm:-mx-4 sm:rounded-t-md border-b border-gray-000 text-sm font-semibold;
 }
 
 .markdown-body h2:hover .anchor-end {
@@ -174,26 +174,33 @@ body:not(:has(.ddoc)) {
   @apply mb-4;
 }
 
-.deno-tabs>ul.deno-tabs-buttons {
+.deno-tabs > ul.deno-tabs-buttons {
   @apply flex flex-wrap list-none p-0 m-0 mb-2;
 }
 
-.deno-tabs>ul.deno-tabs-buttons>li {
+.deno-tabs > ul.deno-tabs-buttons > li {
   @apply m-0 m-0;
 }
 
-.deno-tabs>ul.deno-tabs-buttons>li>button {
+.deno-tabs > ul.deno-tabs-buttons > li > button {
   @apply inline-block px-4 py-2 text-sm font-semibold text-gray-700 rounded-t-md hover:bg-gray-100 border-b-2 border-transparent;
 }
 
-.deno-tabs>ul.deno-tabs-buttons>li>button[data-active="true"] {
+.deno-tabs > ul.deno-tabs-buttons > li > button[data-active="true"] {
   @apply border-blue-700 text-blue-700;
 }
 
-.deno-tabs>div.deno-tabs-content>div {
+.deno-tabs > div.deno-tabs-content > div {
   @apply hidden;
 }
 
-.deno-tabs>div.deno-tabs-content>div[data-active="true"] {
+.deno-tabs > div.deno-tabs-content > div[data-active="true"] {
   @apply block;
+}
+.doc-pagination-label-next::after {
+  content: " »";
+}
+
+.doc-pagination-label-prev::before {
+  content: "« ";
 }

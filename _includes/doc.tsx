@@ -133,16 +133,16 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
               </div>
             </article>
             {parentNavigation && <nav class="grid gap-8 grid-cols-2 items-center justify-between mt-6">
-              <div>{parentNavigation[index! - 1] && <div>prev: <NavigationButton item={parentNavigation[index! - 1]} search={props.search} /></div>}</div>
-              <div>{parentNavigation[index! + 1] && <div>next: <NavigationButton item={parentNavigation[index! + 1]} search={props.search} /></div>}</div>
-            </nav>}
+            <div>{parentNavigation[index! - 1] && <div><NavigationButton item={parentNavigation[index! - 1]} search={props.search} direction="prev" /></div>}</div>
+            <div>{parentNavigation[index! + 1] && <div><NavigationButton item={parentNavigation[index! + 1]} search={props.search} direction="next" /></div>}</div>
+          </nav>}
           </div>
           <div
             style={{ "flexBasis": "30%" }}
-            class="hidden lg:block flex-shrink-0 flex-grow-0 px-8 pb-8"
+            class="hidden lg:block sticky flex-shrink-0 flex-grow-0 px-8 pb-8"
           >
             <div>
-              <div class="sticky py-2 top-0 ">
+              <div class="py-2 top-0 ">
                 <ul class="border-l border-gray-200 py-2 pl-2">
                   {(props.toc as TableOfContentsItem_[]).map((item) => (
                     <TableOfContentsItem item={item} />
@@ -158,7 +158,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   );
 }
 
-function NavigationButton(props: { item: SidebarItem; search: Searcher }) {
+function NavigationButton(props: { item: SidebarItem; search: Searcher; direction: 'prev' | 'next' }) {
   let item: SidebarDoc_ | SidebarLink_;
   if (typeof props.item === "string") {
     const data = props.search.data(props.item)!;
@@ -170,13 +170,18 @@ function NavigationButton(props: { item: SidebarItem; search: Searcher }) {
       id: data.url!,
     };
   } else if ("items" in props.item) {
-    return <NavigationButton item={props.item.items[0]} search={props.search} />;
+    return <NavigationButton item={props.item.items[0]} search={props.search} direction={props.direction} />;
   } else {
     item = props.item;
   }
+  const directionText = props.direction === 'prev' ? 'Prev' : 'Next';
+  const alignmentClass = props.direction === 'prev' ? 'items-start' : 'items-end';
 
   return (
-    <a class="py-4 px-6 border border-gray-300 rounded block" href={"id" in item ? item.id : "href" in item ? item.href : undefined}>{item.label}</a>
+    <a className={`flex flex-col py-3 px-6 ${alignmentClass} border border-gray-000 hover:border-blue-700 hover:bg-blue-50/10 transition-colors duration-300 transition-timing-function cubic-bezier(0.4, 0, 0.2, 1) rounded`} href={"id" in item ? item.id : "href" in item ? item.href : undefined}>
+      <span className="text-sm text-gray-2 text-nowrap">{directionText}</span>
+      <span className={`font-semibold text-blue-500 ${props.direction === 'prev' ? 'doc-pagination-label-prev' : 'doc-pagination-label-next'} leading-2`}>{item.label}</span>
+    </a>
   )
 }
 
