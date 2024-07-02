@@ -1,4 +1,6 @@
-# Testing API
+---
+title: "Testing API"
+---
 
 The Deno language server supports a custom set of APIs to enable testing. These
 are built around providing information to enable the

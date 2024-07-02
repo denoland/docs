@@ -1,4 +1,6 @@
-# Workers
+---
+title: "Workers"
+---
 
 Deno supports
 [`Web Worker API`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker).
@@ -32,7 +34,7 @@ it's just an unfortunate interaction of features, and it also happens in all
 browsers that support module workers.
 
 ```ts
-import { delay } from "https://deno.land/std@$STD_VERSION/async/delay.ts";
+import { delay } from "https://deno.land/std@0.224.0/async/delay.ts";
 
 // First await: waits for a second, then continues running the module.
 await delay(1000);

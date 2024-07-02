@@ -1,4 +1,6 @@
-# The Language Server
+---
+title: "The Language Server"
+---
 
 The Deno CLI comes with a built in language server that can provide an
 intelligent editing experience as well as a way to easily access the other tools

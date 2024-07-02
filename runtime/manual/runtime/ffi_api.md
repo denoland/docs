@@ -1,4 +1,6 @@
-# Foreign Function Interface
+---
+title: "Foreign Function Interface"
+---
 
 As of Deno 1.13 and later, the FFI (foreign function interface) API allows users
 to call libraries written in native languages that support the C ABIs (C/C++,

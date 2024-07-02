@@ -1,4 +1,6 @@
-# Security and responsible disclosure
+---
+title: "Security and responsible disclosure"
+---
 
 We consider the security of our systems, and all data controlled by those
 systems a top priority. No matter how much effort we put into system security,

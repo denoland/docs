@@ -1,4 +1,8 @@
-# TCP echo Server
+---
+title: "TCP echo Server"
+oldUrl:
+  - /runtime/manual/examples/tcp_echo/
+---
 
 ## Concepts
 

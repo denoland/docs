@@ -1,4 +1,6 @@
-# Connect to DynamoDB
+---
+title: "Connect to DynamoDB"
+---
 
 Amazon DynamoDB is a fully managed NoSQL database. To persist data to DynamoDB,
 follow the steps below:

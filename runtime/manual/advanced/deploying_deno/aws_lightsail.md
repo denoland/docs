@@ -1,4 +1,6 @@
-# Deploy Deno to Amazon Lightsail
+---
+title: Deploy Deno to Amazon Lightsail
+---
 
 [Amazon Lightsail](https://aws.amazon.com/lightsail/) is the easiest and
 cheapest way to get started with Amazon Web Services. It allows you to host

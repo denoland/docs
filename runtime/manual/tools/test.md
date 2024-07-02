@@ -1,4 +1,6 @@
-# deno test
+---
+title: "deno test"
+---
 
 Run tests using Deno's built-in test runner.
 

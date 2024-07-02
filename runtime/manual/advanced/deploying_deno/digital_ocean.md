@@ -1,4 +1,6 @@
-# How to Deploy Deno to Digital Ocean
+---
+title: "How to Deploy Deno to Digital Ocean"
+---
 
 Digital Ocean is a popular cloud infrastructure provider offering a variety of
 hosting services ranging from networking, to compute, to storage.

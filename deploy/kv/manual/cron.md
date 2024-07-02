@@ -1,8 +1,10 @@
-import Admonition from "./_admonition.mdx";
+---
+title: "Scheduling cron tasks"
+oldUrl:
+  - /kv/manual/cron/
+---
 
-# Scheduling cron tasks
-
-<Admonition />
+<deno-admonition></deno-admonition>
 
 The [`Deno.cron`](https://deno.land/api?s=Deno.cron&unstable=) interface enables
 you to configure JavaScript or TypeScript code that executes on a configurable

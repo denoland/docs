@@ -1,4 +1,6 @@
-# deno eval
+---
+title: "deno eval"
+---
 
 Evaluate JavaScript from the command line.
 

@@ -1,4 +1,8 @@
-# API server with FaunaDB
+---
+title: "API server with FaunaDB"
+oldUrl:
+  - /deploy/docs/tutorial-faunadb/
+---
 
 FaunaDB calls itself "The data API for modern applications". It's a database
 with a GraphQL interface that enables you to use GraphQL to interact with it.

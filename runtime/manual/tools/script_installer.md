@@ -1,4 +1,6 @@
-# `deno install`, script installer
+---
+title: "`deno install`, script installer"
+---
 
 Deno provides `deno install` to easily install and distribute executable code.
 
@@ -67,8 +69,6 @@ For good practice, use the
 entry point in an executable script.
 
 Example:
-
-<!-- deno-fmt-ignore -->
 
 ```ts
 // https://example.com/awesome/cli.ts

@@ -1,4 +1,6 @@
-# Pricing and Limits
+---
+title: Pricing and Limits
+---
 
 ## Deployment size
 

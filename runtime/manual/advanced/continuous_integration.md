@@ -1,4 +1,6 @@
-# Continuous Integration
+---
+title: "Continuous Integration"
+---
 
 Deno's built-in tools make it easy to set up Continuous Integration (CI)
 pipelines for your projects. Testing, linting and formatting of code can all be
@@ -184,7 +186,7 @@ To demonstrate, let's say you have a project that uses the logger from
 `deno.land/std`:
 
 ```ts
-import * as log from "https://deno.land/std@$STD_VERSION/log/mod.ts";
+import * as log from "https://deno.land/std@0.224.0/log/mod.ts";
 ```
 
 In order to increment this version, you can update the `import` statement and

@@ -1,4 +1,6 @@
-# Snapshot Testing
+---
+title: "Snapshot Testing"
+---
 
 The Deno standard library comes with a
 [snapshot module](https://deno.land/std/testing/snapshot.ts), which enables
@@ -22,7 +24,7 @@ to a reference snapshot, which is stored alongside the test file in the
 ```ts title="example_test.ts"
 import {
   assertSnapshot,
-} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
+} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
 
 Deno.test("isSnapshotMatch", async function (t): Promise<void> {
   const a = {
@@ -91,7 +93,7 @@ offers greater flexibility and enables some non standard use cases.
 ```ts
 import {
   assertSnapshot,
-} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
+} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
 
 Deno.test("isSnapshotMatch", async function (t): Promise<void> {
   const a = {
@@ -120,8 +122,8 @@ snapshot file.
 import {
   assertSnapshot,
   serialize,
-} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
-import { stripColor } from "https://deno.land/std@$STD_VERSION/fmt/colors.ts";
+} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
+import { stripColor } from "https://deno.land/std@0.224.0/fmt/colors.ts";
 
 /**
  * Serializes `actual` and removes ANSI escape codes.
@@ -207,7 +209,7 @@ used instead.
 ```ts title="example_test.ts"
 import {
   assertSnapshot,
-} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
+} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
 
 Deno.test("isSnapshotMatch", async function (t): Promise<void> {
   const a = {
@@ -247,7 +249,7 @@ You can configure default options for `assertSnapshot`.
 ```ts title="example_test.ts"
 import {
   createAssertSnapshot,
-} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
+} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
 
 const assertSnapshot = createAssertSnapshot({
   // options
@@ -265,8 +267,8 @@ configured with default options.
 ```ts title="example_test.ts"
 import {
   createAssertSnapshot,
-} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
-import { stripColor } from "https://deno.land/std@$STD_VERSION/fmt/colors.ts";
+} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
+import { stripColor } from "https://deno.land/std@0.224.0/fmt/colors.ts";
 
 const assertSnapshot = createAssertSnapshot({
   dir: ".snaps",
@@ -308,7 +310,7 @@ cases. One example is shown in the code snippet below.
 ```ts title="example_test.ts"
 import {
   assertSnapshot,
-} from "https://deno.land/std@$STD_VERSION/testing/snapshot.ts";
+} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
 
 class HTMLTag {
   constructor(

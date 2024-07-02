@@ -1,4 +1,8 @@
-# File System Events
+---
+title: "File System Events"
+oldUrl:
+  - /runtime/manual/examples/file_system_events/
+---
 
 ## Concepts
 

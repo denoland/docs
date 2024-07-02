@@ -1,4 +1,6 @@
-# Unstable Feature Flags
+---
+title: "Unstable Feature Flags"
+---
 
 New features of the Deno runtime are often released behind feature flags, so
 users can try out new APIs and features before they are finalized. Current
@@ -233,7 +235,7 @@ Enable unstable net APIs in the `Deno` namespace. These APIs include:
 
 ## `--unstable`
 
-:::warning --unstable is deprecated - use granular flags instead
+:::caution --unstable is deprecated - use granular flags instead
 
 The `--unstable` flag is no longer being used for new features, and will be
 removed in a future release. All unstable features that were available using

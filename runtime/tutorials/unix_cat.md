@@ -1,4 +1,8 @@
-# An Implementation of the Unix "cat" Program
+---
+title: 'An Implementation of the Unix "cat" Program'
+oldUrl:
+  - /runtime/manual/examples/unix_cat/
+---
 
 ## Concepts
 

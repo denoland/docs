@@ -1,4 +1,8 @@
-# FAQs about TypeScript in Deno
+---
+title: "FAQs about TypeScript in Deno"
+oldUrl:
+  - /runtime/manual/typescript/typescript/faqs/
+---
 
 ## Can I use TypeScript not written for Deno?
 

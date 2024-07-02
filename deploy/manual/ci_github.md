@@ -1,4 +1,6 @@
-# CI and GitHub Actions
+---
+title: "CI and GitHub Actions"
+---
 
 Deno Deploy's Git integration enables deployment of code changes that are pushed
 to a GitHub repository. Commits on the production branch will be deployed as a

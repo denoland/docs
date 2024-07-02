@@ -1,4 +1,6 @@
-# Migrating to and from JavaScript
+---
+title: "Migrating to and from JavaScript"
+---
 
 One of the advantages of Deno is that it treats TypeScript and JavaScript pretty
 equally. This might mean that transitioning from JavaScript to TypeScript or

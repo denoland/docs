@@ -1,8 +1,10 @@
-import Admonition from "./_admonition.mdx";
+---
+title: "Using Queues"
+oldUrl:
+  - /kv/manual/queue_overview/
+---
 
-# Using Queues
-
-<Admonition />
+<deno-admonition></deno-admonition>
 
 The Deno runtime includes a queueing API that supports offloading larger
 workloads for async processing, with guaranteed at-least-once delivery of queued

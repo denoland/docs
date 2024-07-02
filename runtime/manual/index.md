@@ -1,12 +1,11 @@
 ---
-displayed_sidebar: runtimeGuideHome
-sidebar_position: 1
-pagination_next: manual/getting_started/first_steps
+title: "Deno Runtime Quick Start"
+pagination_next: /runtime/manual/getting_started/first_steps/
+oldUrl:
+  - /manual/
+  - /runtime/manual/introduction/
+  - /runtime/
 ---
-
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
-
-# Deno Runtime Quick Start
 
 [Deno](https://www.deno.com)
 ([/ˈdiːnoʊ/](http://ipa-reader.xyz/?text=%CB%88di%CB%90no%CA%8A), pronounced
@@ -23,29 +22,29 @@ Let's create and run your first Deno program in under five minutes.
 Install the Deno runtime on your system using one of the terminal commands
 below.
 
-<Tabs groupId="operating-systems">
-  <TabItem value="mac" label="macOS" default>
+<deno-tabs group-id="operating-systems">
+<deno-tab value="mac" label="macOS" default>
 
 ```sh
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
-</TabItem>
-  <TabItem  value="windows" label="Windows">
+</deno-tab>
+<deno-tab value="windows" label="Windows">
 
 ```powershell
 irm https://deno.land/install.ps1 | iex
 ```
 
-</TabItem>
-  <TabItem value="linux" label="Linux">
+</deno-tab>
+<deno-tab value="linux" label="Linux">
 
 ```sh
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
-</TabItem>
-</Tabs>
+</deno-tab>
+</deno-tabs>
 
 [Additional installation options can be found here](./getting_started/installation.md).
 After installation, you should have the `deno` executable available on your

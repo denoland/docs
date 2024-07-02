@@ -1,4 +1,6 @@
-# Testing API
+---
+title: "Testing API"
+---
 
 The `vscode_deno` extension implements a client for the vscode
 [Testing API](https://code.visualstudio.com/api/extension-guides/testing) and

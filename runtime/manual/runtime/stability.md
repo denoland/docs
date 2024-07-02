@@ -1,4 +1,6 @@
-# Stability
+---
+title: "Stability"
+---
 
 As of Deno 1.0.0, the `Deno` namespace APIs are stable. That means we will
 strive to make code working under 1.0.0 continue to work in future versions.

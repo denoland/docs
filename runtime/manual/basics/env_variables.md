@@ -1,4 +1,6 @@
-# Environment variables
+---
+title: "Environment variables"
+---
 
 There are a few ways to use environment variables in Deno:
 
@@ -33,7 +35,7 @@ To access the environment variables in the `.env` file, import the `load`
 function from the standard library. Then, import the configuration using it.
 
 ```ts
-import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
+import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
 
 const env = await load();
 const password = env["PASSWORD"];

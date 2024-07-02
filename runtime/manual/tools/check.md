@@ -1,4 +1,6 @@
-# deno check
+---
+title: "deno check"
+---
 
 Type-check a program without execution.
 

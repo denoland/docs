@@ -1,4 +1,8 @@
-# How to create a RESTful API with Prisma and Oak
+---
+title: "How to create a RESTful API with Prisma and Oak"
+oldUrl:
+  - /runtime/manual/examples/how_to_with_npm/prisma/
+---
 
 [Prisma](https://prisma.io) has been one of our top requested modules to work
 with in Deno. The demand is understandable, given that Prisma's developer
@@ -97,7 +101,7 @@ And in `./prisma/seed.ts`:
 
 ```ts
 import { Prisma, PrismaClient } from "../generated/client/deno/edge.ts";
-import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
+import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
 
 const envVars = await load();
 
@@ -168,7 +172,7 @@ Then, in your `main.ts` file:
 ```ts
 import { PrismaClient } from "./generated/client/deno/edge.ts";
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
-import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
+import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
 
 const envVars = await load();
 

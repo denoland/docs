@@ -1,4 +1,7 @@
-# Deno Style Guide
+---
+title: "Deno Style Guide"
+oldUrl: /runtime/manual/contributing/style_guide/
+---
 
 > ⚠️ Note that this is the style guide for **internal runtime code** in the Deno
 > runtime, and in the Deno standard library. This is not meant as a general
@@ -319,7 +322,7 @@ foo() returns bar object ... ok
 Example of test:
 
 ```ts
-import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import { foo } from "./mod.ts";
 
 Deno.test("foo() returns bar object", function () {

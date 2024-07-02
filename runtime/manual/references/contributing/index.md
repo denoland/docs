@@ -1,4 +1,8 @@
-# Contributing
+---
+title: "Contributing"
+oldUrl:
+  - /runtime/manual/contributing/
+---
 
 We welcome and appreciate all contributions to Deno.
 

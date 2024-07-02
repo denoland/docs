@@ -1,4 +1,6 @@
-# Subhosting Quick Start
+---
+title: Subhosting Quick Start
+---
 
 Looking for the smallest possible example that shows how to deploy code to
 Deno's isolate cloud? We've got you covered below, or you can skip to the

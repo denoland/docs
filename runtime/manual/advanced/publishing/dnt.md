@@ -1,4 +1,7 @@
-# Cross-runtime modules with dnt
+---
+title: "Cross-runtime modules with dnt"
+oldUrl: /runtime/manual/node/dnt/
+---
 
 Library authors may want to make their Deno modules available to Node.js users.
 This is possible by using the [dnt](https://github.com/denoland/dnt) build tool.

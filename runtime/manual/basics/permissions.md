@@ -1,4 +1,7 @@
-# Permissions
+---
+title: "Permissions"
+oldUrl: /runtime/manual/basics/permissionsDeno/
+---
 
 Deno is secure by default. Therefore, unless you specifically enable it, a
 program run with Deno has no file, network, or environment access. Access to

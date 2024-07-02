@@ -1,4 +1,8 @@
-# API server with Postgres
+---
+title: "API server with Postgres"
+oldUrl:
+  - /deploy/docs/tutorial-postgres/
+---
 
 Postgres is a popular database for web applications because of its flexibility
 and ease of use. This guide will show you how to use Deno Deploy with Postgres.
@@ -20,7 +24,9 @@ new todo.
 
 ```
 GET /todos
-# returns a list of all todos
+---
+title: "returns a list of all todos"
+---
 [
   {
     "id": 1,
@@ -37,9 +43,13 @@ GET /todos
 ]
 
 POST /todos
-# creates a new todo
+---
+title: "creates a new todo"
+---
 "Buy milk"
-# returns a 201 status code
+---
+title: "returns a 201 status code"
+---
 ```
 
 In this tutorial, we will be:

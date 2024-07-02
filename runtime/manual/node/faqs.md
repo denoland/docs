@@ -1,4 +1,6 @@
-# Frequently Asked Questions
+---
+title: "Frequently Asked Questions"
+---
 
 ## Getting type errors like cannot find `document` or `HTMLElement`
 

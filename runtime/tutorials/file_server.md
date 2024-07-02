@@ -1,4 +1,8 @@
-# File Server
+---
+title: "File Server"
+oldUrl:
+  - /runtime/manual/examples/file_server/
+---
 
 ## Concepts
 

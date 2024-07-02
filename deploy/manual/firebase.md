@@ -1,4 +1,6 @@
-# Connect to Firebase
+---
+title: "Connect to Firebase"
+---
 
 Firebase is a platform developed by Google for creating mobile and web
 applications. Its features include authentication primitives for log in and a

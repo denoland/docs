@@ -1,4 +1,6 @@
-# Connect to Postgres
+---
+title: "Connect to Postgres"
+---
 
 This tutorial covers how to connect to a Postgres database from an application
 deployed on Deno Deploy.

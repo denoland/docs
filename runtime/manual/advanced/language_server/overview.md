@@ -1,4 +1,7 @@
-# Language Server Overview
+---
+title: "Language Server Overview"
+oldUrl: /runtime/manual/language_server/overview/
+---
 
 The Deno Language Server provides a server implementation of the
 [Language Server Protocol](https://microsoft.github.io/language-server-protocol/)

@@ -1,4 +1,6 @@
-# Where To Get Help
+---
+title: "Where To Get Help"
+---
 
 Stuck? Lost? Get Help from the Community.
 

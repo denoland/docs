@@ -1,4 +1,7 @@
-# Debugging Your Code
+---
+title: "Debugging Your Code"
+oldUrl: /runtime/manual/getting_started/debugging_your_code/
+---
 
 Deno supports the [V8 Inspector Protocol](https://v8.dev/docs/inspector) used by
 Chrome, Edge and Node.js. This makes it possible to debug Deno programs using
@@ -27,10 +30,10 @@ file server.
 Use the `--inspect-brk` flag to break execution on the first line:
 
 ```shell
-$ deno run --inspect-brk --allow-read --allow-net https://deno.land/std@$STD_VERSION/http/file_server.ts
+$ deno run --inspect-brk --allow-read --allow-net https://deno.land/std@0.224.0/http/file_server.ts
 Debugger listening on ws://127.0.0.1:9229/ws/1e82c406-85a9-44ab-86b6-7341583480b1
-Download https://deno.land/std@$STD_VERSION/http/file_server.ts
-Compile https://deno.land/std@$STD_VERSION/http/file_server.ts
+Download https://deno.land/std@0.224.0/http/file_server.ts
+Compile https://deno.land/std@0.224.0/http/file_server.ts
 ...
 ```
 

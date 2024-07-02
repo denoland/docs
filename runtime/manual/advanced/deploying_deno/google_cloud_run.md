@@ -1,4 +1,6 @@
-# How to Deploy to Google Cloud Run
+---
+title: "How to Deploy to Google Cloud Run"
+---
 
 [Google Cloud Run](https://cloud.google.com/run) is a managed compute platform
 that lets you run containers on Google's scalable infrastructure.

@@ -1,4 +1,8 @@
-# Simple HTTP Web Server
+---
+title: "Simple HTTP Web Server"
+oldUrl:
+  - /runtime/manual/examples/http_server/
+---
 
 ## Concepts
 

@@ -1,4 +1,6 @@
-# Using jsdom with Deno
+---
+title: "Using jsdom with Deno"
+---
 
 [jsdom](https://github.com/jsdom/jsdom) is a pure JavaScript implementation of
 many web standards, notably the WHATWG DOM and HTML Standards. It's main goal is
@@ -66,7 +68,7 @@ first heading it encounters and print out the text content of that heading:
 
 ```ts
 import { JSDOM } from "jsdom";
-import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assert } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
 const { window: { document } } = new JSDOM(
   `<!DOCTYPE html>

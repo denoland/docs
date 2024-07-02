@@ -1,4 +1,6 @@
-# Regions
+---
+title: "Regions"
+---
 
 Deno Deploy deploys your code throughout the world. Each new request is served
 from the closest region to your user. Deploy is presently located in the

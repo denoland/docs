@@ -1,4 +1,6 @@
-# Migrating from Node.js to Deno
+---
+title: "Migrating from Node.js to Deno"
+---
 
 To migrate an existing Node.js program to Deno, there are a number of
 differences to take into account between the Node and Deno runtimes. This guide

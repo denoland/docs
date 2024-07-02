@@ -1,4 +1,8 @@
-# API server with Firestore (Firebase)
+---
+title: "API server with Firestore (Firebase)"
+oldUrl:
+  - /deploy/docs/tutorial-firebase/
+---
 
 Firebase is a platform developed by Google for creating mobile and web
 applications. You can persist data on the platform using Firestore. In this

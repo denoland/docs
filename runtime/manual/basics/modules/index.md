@@ -1,4 +1,6 @@
-# ECMAScript Modules in Deno
+---
+title: "ECMAScript Modules in Deno"
+---
 
 ## Concepts
 
@@ -145,7 +147,7 @@ export {
   assert,
   assertEquals,
   assertStringIncludes,
-} from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+} from "https://deno.land/std@0.224.0/assert/mod.ts";
 ```
 
 And throughout the same project, you can import from the `deps.ts` and avoid

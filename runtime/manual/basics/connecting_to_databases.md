@@ -1,4 +1,6 @@
-# Connecting to databases
+---
+title: "Connecting to databases"
+---
 
 The Deno community has published a number of third-party modules that make it
 easy to connect to popular databases like MySQL, Postgres, and MongoDB.

@@ -1,4 +1,6 @@
-# `deno lint`, linter
+---
+title: "`deno lint`, linter"
+---
 
 Deno ships with a built-in code linter for JavaScript and TypeScript.
 

@@ -1,6 +1,6 @@
-import { replacements } from "@site/src/components/Replacement";
-
-# First Steps
+---
+title: First Steps
+---
 
 Welcome to Deno! If you're just getting started, here's a primer on some key
 features and functionality of the runtime. If you haven't already, make sure to
@@ -224,7 +224,7 @@ above. Deno provides a [built-in test runner](../basics/testing/index.md), which
 uses an assertion module distributed via HTTPS URL.
 
 ```ts title="person_test.ts"
-import { assertEquals } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import Person, { sayHello } from "./person.ts";
 
 Deno.test("sayHello function", () => {
@@ -271,7 +271,7 @@ frequently used modules.
 
 <p>
   To demonstrate, let's pin the version of the standard library we want to
-  use in our project to version <code>{ replacements.STD_VERSION }</code>.
+  use in our project to version <code>0.224.0</code>.
 </p>
 
 Create a `deno.jsonc` file with the following contents.
@@ -281,7 +281,7 @@ Create a `deno.jsonc` file with the following contents.
   "imports": {
     // The dollar sign in front of "std" isn't special - it's an optional
     // convention to show that $std is an alias set up in an import map
-    "$std/": "https://deno.land/std@$STD_VERSION/"
+    "$std/": "https://deno.land/std@0.224.0/"
   }
 }
 ```

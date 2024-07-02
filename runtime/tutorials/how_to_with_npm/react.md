@@ -1,4 +1,8 @@
-# How to use React with Deno
+---
+title: "How to use React with Deno"
+oldUrl:
+  - /runtime/manual/examples/how_to_with_npm/react/
+---
 
 [React](https://reactjs.org) is the most widely used JavaScript frontend
 framework. It popularized a declarative approach towards designing user

@@ -1,4 +1,6 @@
-# Getting Started
+---
+title: Getting Started
+---
 
 In this chapter we'll discuss:
 

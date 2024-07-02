@@ -1,4 +1,6 @@
-# Bundling static assets (deprecated)
+---
+title: "Bundler (deprecated)"
+---
 
 :::caution
 
@@ -7,8 +9,6 @@ Use [deno_emit](https://github.com/denoland/deno_emit),
 [esbuild](https://esbuild.github.io/) or [rollup](https://rollupjs.org) instead.
 
 :::
-
-# Bundling
 
 `deno bundle [URL]` will output a single JavaScript file for consumption in
 Deno, which includes all dependencies of the specified input. For example:

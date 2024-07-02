@@ -1,4 +1,8 @@
-# Read and Write Files
+---
+title: "Read and Write Files"
+oldUrl:
+  - /runtime/manual/examples/read_write_files/
+---
 
 ## Concepts
 

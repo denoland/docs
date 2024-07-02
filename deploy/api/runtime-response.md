@@ -1,4 +1,8 @@
-# HTTP Response
+---
+title: "HTTP Response"
+oldUrl:
+  - /deploy/docs/response/
+---
 
 The [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)
 interface is part of the Fetch API and represents a response resource of

@@ -1,4 +1,6 @@
-# Using deployctl on the command line
+---
+title: "Using deployctl on the command line"
+---
 
 `deployctl` is a command line tool (CLI) that lets you operate the Deno Deploy
 platform without leaving your terminal. With it you can deploy your code, create
@@ -547,11 +549,12 @@ does not automatically switch to the new production deployment when it changes.
 
 To show the live logs of a particular deployment:
 
-````shell
+```shell
 deployctl logs --deployment=1234567890ab
 ```
 
-Logs can be filtered by level, region and text using `--levels` `--regions` and `--grep` options:
+Logs can be filtered by level, region and text using `--levels` `--regions` and
+`--grep` options:
 
 ```shell
 deployctl logs --levels=error,info --regions=region1,region2 --grep='unexpected'
@@ -559,28 +562,28 @@ deployctl logs --levels=error,info --regions=region1,region2 --grep='unexpected'
 
 To show the persisted logs, use the `--since` and/or `--until` options:
 
-
-<Tabs groupId="operating-systems">
-  <TabItem value="mac" label="macOS" default>
+<deno-tabs groupId="operating-systems">
+  <deno-tab value="mac" label="macOS" default>
 
 ```sh
 deployctl logs --since=$(date -Iseconds -v-2H) --until=$(date -Iseconds -v-30M)
 ```
 
-</TabItem>
-  <TabItem value="linux" label="Linux">
+</deno-tab>
+<deno-tab value="linux" label="Linux">
 
 ```sh
-curl -fsSL https://deno.land/install.sh | sh
 deployctl logs --since=$(date -Iseconds --date='2 hours ago') --until=$(date -Iseconds --date='30 minutes ago')
 ```
-</TabItem>
-</Tabs>
+
+</deno-tab>
+</deno-tabs>
 
 ## API
 
-If you use the [subhosting API](../../subhosting/manual/index.md), `deployctl api` will help
-you interact with the API by handling the authentication and headers for you:
+If you use the [subhosting API](../../subhosting/manual/index.md),
+`deployctl api` will help you interact with the API by handling the
+authentication and headers for you:
 
 ```shell
 deployctl api /projects/my-personal-blog/deployments
@@ -603,6 +606,7 @@ After installation, you can run your scripts locally:
 ```shell
 $ deno run --allow-net=:8000 ./main.ts
 Listening on http://localhost:8000
+```
 
 To watch for file changes add the `--watch` flag:
 
@@ -635,4 +639,3 @@ Get a csv stream of the CPU time per request on each isolate of each region:
 ```shell
 deployctl top | jq -r '[.id,.region,.cpuTimePerRequest] | @csv'
 ```
-````

@@ -1,4 +1,6 @@
-# `deno serve`, declarative way to write servers
+---
+title: "`deno serve`, declarative way to write servers"
+---
 
 In addition to `deno run`, Deno offers a `deno serve` command-line option that
 automatically configures servers based on the exports of your main module.

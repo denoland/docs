@@ -1,4 +1,6 @@
-# Pricing and limitations
+---
+title: "Pricing and limitations"
+---
 
 Please see [our pricing page](https://www.deno.com/deploy/pricing) for the
 overview of the available features in all plans. If you have a use case that
@@ -6,9 +8,9 @@ exceeds any of these limits, [please reach out](mailto:deploy@deno.com).
 
 No uptime guarantees are provided during the initial public beta for Deno
 Deploy. Access to the service will be controlled by
-[our acceptable use policy](https://docs.deno.com/deploy/manual/acceptable-use-policy).
-Any user we deem to be in violation of this policy, runs the risk of having
-their account terminated.
+[our acceptable use policy](/deploy/manual/acceptable-use-policy). Any user we
+deem to be in violation of this policy, runs the risk of having their account
+terminated.
 
 ## Maximum size for deployments
 
@@ -26,5 +28,4 @@ not impacted by this restriction.
 
 This restriction is in place because connecting to port 443 without terminating
 TLS is frequently used in TLS-over-TLS proxies, which are prohibited on Deno
-Deploy as per
-[our acceptable use policy](https://docs.deno.com/deploy/manual/acceptable-use-policy).
+Deploy as per [our acceptable use policy](/deploy/manual/acceptable-use-policy).

@@ -1,4 +1,6 @@
-# deno upgrade
+---
+title: "deno upgrade"
+---
 
 Upgrade deno executable to the given version.
 

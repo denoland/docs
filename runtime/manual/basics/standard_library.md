@@ -1,4 +1,6 @@
-# Standard Library
+---
+title: "Standard Library"
+---
 
 Deno provides a set of standard modules that are audited by the core team and
 are guaranteed to work with Deno.
@@ -26,6 +28,6 @@ instead, use a version of the std library which is immutable and will not
 change:
 
 ```typescript
-// imports from v$STD_VERSION of std, never changes
-import { copy } from "https://deno.land/std@$STD_VERSION/fs/copy.ts";
+// imports from v0.224.0 of std, never changes
+import { copy } from "https://deno.land/std@0.224.0/fs/copy.ts";
 ```

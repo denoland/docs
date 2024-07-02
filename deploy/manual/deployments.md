@@ -1,4 +1,6 @@
-# Deployments
+---
+title: "Deployments"
+---
 
 A deployment is a snapshot of the code and environment variables required to run
 an application. A new deployment can be created

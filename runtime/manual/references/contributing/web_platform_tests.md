@@ -1,4 +1,6 @@
-# Web Platform Test
+---
+title: "Web Platform Test"
+---
 
 Deno uses a custom test runner for Web Platform Tests. It can be found at
 `./tools/wpt.ts`.

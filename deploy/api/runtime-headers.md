@@ -1,4 +1,8 @@
-# HTTP Headers
+---
+title: "HTTP Headers"
+oldUrl:
+  - /deploy/docs/runtime-headers/
+---
 
 The [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers)
 interface is part of the Fetch API. It allows you create and manipulate the HTTP

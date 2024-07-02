@@ -1,4 +1,6 @@
-# `import.meta` API
+---
+title: "`import.meta` API"
+---
 
 Deno supports a number of properties and methods on the
 [`import.meta`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta)

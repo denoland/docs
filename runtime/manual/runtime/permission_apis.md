@@ -1,4 +1,6 @@
-# Permission APIs
+---
+title: "Permission APIs"
+---
 
 Permissions are granted from the CLI when running the `deno` command. User code
 will often assume its own set of required permissions, but there is no guarantee

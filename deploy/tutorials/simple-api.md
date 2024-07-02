@@ -1,4 +1,8 @@
-# Simple API server
+---
+title: "Simple API server"
+oldUrl:
+  - /deploy/docs/simple-api/
+---
 
 Deno is great for creating simple, light-weight API servers. Learn how to create
 and deploy one using Deno Deploy in this tutorial.

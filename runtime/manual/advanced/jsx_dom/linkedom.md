@@ -1,4 +1,7 @@
-# Using LinkeDOM with Deno
+---
+title: "Using LinkeDOM with Deno"
+oldUrl: /runtime/manual/jsx_dom/linkedom/
+---
 
 [LinkeDOM](https://github.com/WebReflection/linkedom) is a DOM-like namespace to
 be used in environments, like Deno, which don't implement the DOM.
@@ -29,7 +32,7 @@ first heading it encounters and print out the text content of that heading:
 
 ```ts
 import { DOMParser } from "https://esm.sh/linkedom";
-import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assert } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
 const document = new DOMParser().parseFromString(
   `<!DOCTYPE html>

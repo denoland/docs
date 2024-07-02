@@ -1,4 +1,6 @@
-# `deno repl`, interactive scripting prompt
+---
+title: "`deno repl`, interactive scripting prompt"
+---
 
 `deno repl` starts a read-eval-print-loop, which lets you interactively build up
 program state in the global context, it is especially useful for quick

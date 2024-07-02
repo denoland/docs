@@ -1,4 +1,6 @@
-# package.json compatibility
+---
+title: "package.json compatibility"
+---
 
 Deno supports resolving dependencies based on a `package.json` file in the
 current or ancestor directories. This is similar to how Node.js resolves

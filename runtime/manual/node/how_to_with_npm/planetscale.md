@@ -1,4 +1,6 @@
-# How to use Planetscale with Deno
+---
+title: "How to use Planetscale with Deno"
+---
 
 Planetscale is a MySQL-compatible serverless database that is designed with a
 developer workflow where developers can create, branch, and deploy databases

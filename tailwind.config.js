@@ -1,19 +1,15 @@
 // tailwind.config.js
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+/** @type {import('npm:tailwindcss').Config} */
+export default {
   corePlugins: {
-    preflight: false, // disable Tailwind's reset
+    preflight: true,
   },
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "../docs/**/*.mdx"], // my markdown stuff is in ../docs, not /src
-  darkMode: ["class", '[data-theme="dark"]'], // hooks into docusaurus' dark mode settigns
+  darkMode: ["class", '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
         transparent: "transparent",
         current: "currentColor",
-
-        // tailwind v3
-        "neutral-800": "#262626",
 
         // New design system
         white: "#ffffff",
@@ -22,6 +18,8 @@ module.exports = {
         offblack: "#121417",
         "white-veil": "#ffffff03",
         "black-veil": "#00000003",
+
+        "primary": "rgb(9, 105, 218)",
 
         runtime: "rgba(112, 255, 175, 1)",
         "runtime-dark": "#172723",
@@ -58,7 +56,34 @@ module.exports = {
           7: "#db01ff",
         },
       },
+
+      spacing: {
+        74: "18.5rem",
+      },
+
+      fontFamily: {
+        sans: [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "'Segoe UI'",
+          "Roboto",
+          "'Helvetica Neue'",
+          "Arial",
+          "'Noto Sans'",
+          "sans-serif",
+        ],
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    {
+      handler(api) {
+        api.addVariant("current", "[aria-current]&");
+        api.addVariant("sidebar-open", "[data-open=true]&");
+      },
+    },
+  ],
 };

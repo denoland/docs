@@ -1,4 +1,6 @@
-# Basics
+---
+title: "Basics"
+---
 
 In this chapter, you will find Deno basics, including:
 

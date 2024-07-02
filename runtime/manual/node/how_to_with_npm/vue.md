@@ -1,4 +1,6 @@
-# How to use Vue with Deno
+---
+title: "How to use Vue with Deno"
+---
 
 [Vue](https://vuejs.org/) is a progressive front-end JavaScript framework, built
 for performance and versatility.

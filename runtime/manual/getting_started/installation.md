@@ -1,4 +1,6 @@
-# Installation
+---
+title: Installation
+---
 
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
 has no external dependencies. On macOS, both M1 (arm64) and Intel (x64)
@@ -9,10 +11,8 @@ executables are provided. On Linux and Windows, only x64 is supported.
 [deno_install](https://github.com/denoland/deno_install) provides convenience
 scripts to download and install the binary.
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
-
-<Tabs groupId="operating-systems">
-  <TabItem value="mac" label="macOS" default>
+<deno-tabs group-id="operating-systems">
+<deno-tab value="mac" label="macOS" default>
 
 Using Shell:
 
@@ -65,8 +65,8 @@ vfox install deno@latest
 vfox use --global deno
 ```
 
-</TabItem>
-  <TabItem  value="windows" label="Windows">
+</deno-tab>
+<deno-tab value="windows" label="Windows">
 
 Using PowerShell (Windows):
 
@@ -104,8 +104,8 @@ vfox install deno@latest
 vfox use --global deno
 ```
 
-</TabItem>
-  <TabItem value="linux" label="Linux">
+</deno-tab>
+<deno-tab value="linux" label="Linux">
 
 Using Shell:
 
@@ -146,8 +146,8 @@ vfox install deno@latest
 vfox use --global deno
 ```
 
-</TabItem>
-</Tabs>
+</deno-tab>
+</deno-tabs>
 
 You can also build and install from source using
 [Cargo](https://crates.io/crates/deno):

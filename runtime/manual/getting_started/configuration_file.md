@@ -1,4 +1,6 @@
-# `deno.json` configuration file
+---
+title: "`deno.json` configuration file"
+---
 
 Deno supports a configuration file that allows you to customize the built-in
 TypeScript compiler, formatter, and linter.
@@ -28,7 +30,7 @@ Since version 1.30, the `deno.json` configuration file acts as an
 ```jsonc
 {
   "imports": {
-    "std/": "https://deno.land/std@$STD_VERSION/"
+    "std/": "https://deno.land/std@0.224.0/"
   },
   "tasks": {
     "dev": "deno run --watch main.ts"

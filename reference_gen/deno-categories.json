@@ -1,0 +1,17 @@
+{
+  "Cloud": "Tools for managing state, scheduling tasks, and interacting with key-value stores. \n\nEg {@linkcode Deno.openKv }, {@linkcode Deno.cron}",
+  "Errors": "Error types and utilities for handling exceptions and custom error scenarios. Helps improve error handling and debugging. \n\nEg  {@linkcode Deno.errorsNotFound}",
+  "FFI": "Foreign Function Interface. Call functions from shared libraries (e.g., C/C++) directly from Deno.\n\nUseful for integrating with existing native code or accessing low-level system functionality. \n\nEg {@linkcode Deno.dlopen}",
+  "Fetch": "HTTP client for fetching data across a network. Retrieve resources from servers, handle responses, and manage network requests. \n\nEg {@linkcode Deno.fetch}, {@linkcode Deno.Response}, {@linkcode Deno.Request}, {@linkcode Deno.Headers}",
+  "File System": "File System APIs for working with files, directories, and file metadata. Includes functions for reading, writing, and manipulating file paths. \n\nEg {@linkcode Deno.readDir}, {@linkcode Deno.readTextFile}",
+  "GPU": "GPU programming and rendering. Efficiently use a device’s graphics processing unit (GPU) for high-performance computations and complex image rendering. \n\nEg {@linkcode GPUDevice}",
+  "HTTP Server": "Handling HTTP requests, serving responses, and managing server behavior. \n\nEg {@linkcode Deno.serveHttp}, {@linkcode Deno.serve}",
+  "I/O": "Interfaces for reading, writing, seeking, and managing resources. For handling of data streams, file I/O, and console interactions. \n\nEg {@linkcode Deno.stdin}, {@linkcode Deno.inspect}",
+  "Jupyter": "Create interactive notebooks and execute code cells. Useful for data analysis, visualization, and educational purposes. \n\nEg {@linkcode Deno.Deno.jupyter.$display}",
+  "Network": "A wide range of networking tasks, from low-level connections to high-level server creation. Handle HTTP requests, WebSocket communication, and DNS resolution. Useful for building web servers, clients, and networking tools. \n\nEg {@linkcode Deno.connect}, {@linkcode Deno.listen}, {@linkcode Deno.resolveDns}",
+  "Permissions": "Permission system controls access to resources (e.g., file system, network, environment variables).\n\nRequest permissions explicitly, enhancing security and user trust. \n\nEg {@linkcode Deno.permissions}",
+  "Runtime": "System-related functionality, process management, and observability. \n\nEg {@linkcode Deno.mainModule}, {@linkcode Deno.exit}, {@linkcode Deno.cwd}",
+  "Sub Process": "Spawn and manage child processes, execute commands, and collect output. Useful for executing external programs from Deno.\n\nEg {@linkcode Deno.Command}",
+  "Testing": "Robust testing and benchmarking capabilities to ensure code quality and performance.\n\nEg {@linkcode Deno.test}, {@linkcode Deno.bench}",
+  "Web Sockets": "Enable real-time communication between clients and servers using WebSockets. Tools to create interactive and dynamic applications.\n\nEg {@linkcode WebSocket}"
+}

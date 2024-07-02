@@ -1,4 +1,7 @@
-# Using Visual Studio Code
+---
+title: "Using Visual Studio Code"
+oldUrl: /runtime/manual/vscode_deno/
+---
 
 In this section we are going to go into depth about developing Deno applications
 using [Visual Studio Code](https://code.visualstudio.com/) and the official
@@ -190,7 +193,7 @@ editor.
 When you have a block of code that provides a test, like:
 
 ```ts
-import { assert } from "https://deno.land/std@$STD_VERSION/assert/mod.ts";
+import { assert } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
 Deno.test({
   name: "a test case",

@@ -1,4 +1,7 @@
-# Publishing Modules
+---
+title: "Publishing Modules"
+oldUrl: /runtime/manual/advanced/publishing/0/
+---
 
 Deno is not prescriptive about how developers make their modules
 available—modules may be imported from any source. To help publish and
@@ -44,8 +47,6 @@ level documentation when it is included in a default module), use the @module
 tag at the end of the first JSDoc block in the module.
 
 ## Including version numbers in code and content
-
-import { replacements } from "@site/src/components/Replacement";
 
 Current module version, Deno CLI version, and standard library version can be
 dynamically included in content or code samples using following replacement

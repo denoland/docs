@@ -1,4 +1,8 @@
-# Deno KV Tutorials & Examples
+---
+title: "Deno KV Tutorials & Examples"
+oldUrl:
+  - /kv/tutorials/
+---
 
 Check out these examples showing real-world usage of Deno KV.
 

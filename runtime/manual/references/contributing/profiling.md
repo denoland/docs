@@ -1,4 +1,6 @@
-# Profiling
+---
+title: "Profiling"
+---
 
 ## Perf profiling:
 

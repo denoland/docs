@@ -1,4 +1,6 @@
-# CLI Command Reference
+---
+title: "CLI Command Reference"
+---
 
 The Deno CLI provides a number of helpful utilities in addition to running Deno
 programs. These tools are listed below. You may also want to check out our list

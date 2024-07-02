@@ -1,4 +1,6 @@
-# `deno compile`, standalone executables
+---
+title: "`deno compile`, standalone executables"
+---
 
 `deno compile [--output <OUT>] <SRC>` will compile the script into a
 self-contained executable.

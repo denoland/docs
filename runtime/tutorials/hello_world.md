@@ -1,4 +1,8 @@
-# Hello World
+---
+title: "Hello World"
+oldUrl:
+  - /runtime/manual/examples/hello_world/
+---
 
 ## Concepts
 

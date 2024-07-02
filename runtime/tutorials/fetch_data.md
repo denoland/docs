@@ -1,4 +1,8 @@
-# Fetch Data
+---
+title: "Fetch Data"
+oldUrl:
+  - /runtime/manual/examples/fetch_data/
+---
 
 ## Concepts
 

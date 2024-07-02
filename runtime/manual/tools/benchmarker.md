@@ -1,4 +1,6 @@
-# `deno bench`, benchmarking tool
+---
+title: "`deno bench`, benchmarking tool"
+---
 
 Deno has a built-in benchmark runner that you can use for checking performance
 of JavaScript or TypeScript code.
@@ -98,7 +100,7 @@ you want to measure. Everything outside of the section between these two calls
 will be excluded from the measurement.
 
 ```ts
-import { readAll } from "https://deno.land/std@$STD_VERSION/io/read_all.ts";
+import { readAll } from "https://deno.land/std@0.224.0/io/read_all.ts";
 
 Deno.bench("foo", async (b) => {
   // Open a file that we will act upon.

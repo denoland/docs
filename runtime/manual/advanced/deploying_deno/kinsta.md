@@ -1,4 +1,6 @@
-# How to Deploy Deno on Kinsta
+---
+title: "How to Deploy Deno on Kinsta"
+---
 
 [Kinsta Application Hosting](https://kinsta.com/application-hosting) is a
 service that lets you build and deploy your web apps directly from your Git

@@ -1,4 +1,6 @@
-# Acceptable use policy
+---
+title: "Acceptable use policy"
+---
 
 The Deno Deploy service includes resources (CPU time, request counts) that are
 subject to this Acceptable Use policy. This document can give a rough estimate

@@ -1,4 +1,6 @@
-# deno foo
+---
+title: "deno foo"
+---
 
 _This applies to `deno` v.1.17.0. and above._ **Unstable preview feature**
 
