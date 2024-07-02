@@ -1,7 +1,8 @@
 import Searcher from "lume/core/searcher.ts";
 import {
   Sidebar as Sidebar_,
-  SidebarDoc as SidebarDoc_, SidebarItem,
+  SidebarDoc as SidebarDoc_,
+  SidebarItem,
   SidebarLink as SidebarLink_,
   TableOfContentsItem as TableOfContentsItem_,
 } from "../types.ts";
@@ -14,7 +15,9 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
     throw new Error("Missing sidebar for " + props.url);
   }
 
-  function walk(sidebarItems: SidebarItem[]): [SidebarItem[], number] | undefined {
+  function walk(
+    sidebarItems: SidebarItem[],
+  ): [SidebarItem[], number] | undefined {
     for (let i = 0; i < sidebarItems.length; i++) {
       const sidebarItem = sidebarItems[i];
       if (typeof sidebarItem === "string") {
@@ -23,9 +26,9 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
           throw new Error(`No data found for ${sidebarItem}`);
         }
 
-       if (data.url == props.url) {
-         return [sidebarItems, i];
-       }
+        if (data.url == props.url) {
+          return [sidebarItems, i];
+        }
       } else if ("id" in sidebarItem && sidebarItem.id === props.url) {
         return [sidebarItems, i];
       } else if ("items" in sidebarItem) {
@@ -132,10 +135,32 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 {props.children}
               </div>
             </article>
-            {parentNavigation && <nav class="grid gap-8 grid-cols-2 items-center justify-between mt-6">
-            <div>{parentNavigation[index! - 1] && <div><NavigationButton item={parentNavigation[index! - 1]} search={props.search} direction="prev" /></div>}</div>
-            <div>{parentNavigation[index! + 1] && <div><NavigationButton item={parentNavigation[index! + 1]} search={props.search} direction="next" /></div>}</div>
-          </nav>}
+            {parentNavigation && (
+              <nav class="grid gap-8 grid-cols-2 items-center justify-between mt-6">
+                <div>
+                  {parentNavigation[index! - 1] && (
+                    <div>
+                      <NavigationButton
+                        item={parentNavigation[index! - 1]}
+                        search={props.search}
+                        direction="prev"
+                      />
+                    </div>
+                  )}
+                </div>
+                <div>
+                  {parentNavigation[index! + 1] && (
+                    <div>
+                      <NavigationButton
+                        item={parentNavigation[index! + 1]}
+                        search={props.search}
+                        direction="next"
+                      />
+                    </div>
+                  )}
+                </div>
+              </nav>
+            )}
           </div>
           <div
             style={{ "flexBasis": "30%" }}
@@ -158,7 +183,9 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   );
 }
 
-function NavigationButton(props: { item: SidebarItem; search: Searcher; direction: 'prev' | 'next' }) {
+function NavigationButton(
+  props: { item: SidebarItem; search: Searcher; direction: "prev" | "next" },
+) {
   let item: SidebarDoc_ | SidebarLink_;
   if (typeof props.item === "string") {
     const data = props.search.data(props.item)!;
@@ -170,19 +197,38 @@ function NavigationButton(props: { item: SidebarItem; search: Searcher; directio
       id: data.url!,
     };
   } else if ("items" in props.item) {
-    return <NavigationButton item={props.item.items[0]} search={props.search} direction={props.direction} />;
+    return (
+      <NavigationButton
+        item={props.item.items[0]}
+        search={props.search}
+        direction={props.direction}
+      />
+    );
   } else {
     item = props.item;
   }
-  const directionText = props.direction === 'prev' ? 'Prev' : 'Next';
-  const alignmentClass = props.direction === 'prev' ? 'items-start' : 'items-end';
+  const directionText = props.direction === "prev" ? "Prev" : "Next";
+  const alignmentClass = props.direction === "prev"
+    ? "items-start"
+    : "items-end";
 
   return (
-    <a className={`flex flex-col py-3 px-6 ${alignmentClass} border border-gray-000 hover:border-blue-700 hover:bg-blue-50/10 transition-colors duration-300 transition-timing-function cubic-bezier(0.4, 0, 0.2, 1) rounded`} href={"id" in item ? item.id : "href" in item ? item.href : undefined}>
+    <a
+      className={`flex flex-col py-3 px-6 ${alignmentClass} border border-gray-000 hover:border-blue-700 hover:bg-blue-50/10 transition-colors duration-300 transition-timing-function cubic-bezier(0.4, 0, 0.2, 1) rounded`}
+      href={"id" in item ? item.id : "href" in item ? item.href : undefined}
+    >
       <span className="text-sm text-gray-2 text-nowrap">{directionText}</span>
-      <span className={`font-semibold text-blue-500 ${props.direction === 'prev' ? 'doc-pagination-label-prev' : 'doc-pagination-label-next'} leading-2`}>{item.label}</span>
+      <span
+        className={`font-semibold text-blue-500 ${
+          props.direction === "prev"
+            ? "doc-pagination-label-prev"
+            : "doc-pagination-label-next"
+        } leading-2`}
+      >
+        {item.label}
+      </span>
     </a>
-  )
+  );
 }
 
 function Breadcrumbs(
