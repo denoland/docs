@@ -197,6 +197,7 @@ body:not(:has(.ddoc)) {
 .deno-tabs > div.deno-tabs-content > div[data-active="true"] {
   @apply block;
 }
+
 .doc-pagination-label-next::after {
   content: " »";
 }

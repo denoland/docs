@@ -19,7 +19,7 @@ export default {
         "white-veil": "#ffffff03",
         "black-veil": "#00000003",
 
-        "primary": "#5673B8",
+        "primary": "rgb(9, 105, 218)",
 
         runtime: "rgba(112, 255, 175, 1)",
         "runtime-dark": "#172723",
