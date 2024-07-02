@@ -71,7 +71,7 @@ export default function Header({
             url={url}
             activeOn="/api"
             href="/api/deno"
-            name="Reference"
+            name="Reference APIs"
             hideOnMobile
           />
         </div>
@@ -99,7 +99,7 @@ export default function Header({
                   url={url}
                   activeOn="/api/deno"
                   href="/api/deno"
-                  name="Deno"
+                  name="Deno APIs"
                 />
               </li>
               <li>
@@ -107,7 +107,7 @@ export default function Header({
                   url={url}
                   activeOn="/api/web"
                   href="/api/web"
-                  name="Web"
+                  name="Web APIs"
                 />
               </li>
               <li>
@@ -115,7 +115,7 @@ export default function Header({
                   url={url}
                   activeOn="/api/node"
                   href="/api/node"
-                  name="Node"
+                  name="Node APIs"
                 />
               </li>
             </ul>
