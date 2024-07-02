@@ -54,6 +54,7 @@ export async function generateDocumentsForSymbols(): Promise<OramaDocument[]> {
 
   for (const kind of ["deno", "web", "node"]) {
     (globalThis as any).window = globalThis;
+    delete (globalThis as any).DENO_DOC_SEARCH_INDEX;
     await import(`./reference_gen/gen/${kind}/search_index.js`);
     const index = (globalThis as any as {
       DENO_DOC_SEARCH_INDEX: {
@@ -66,7 +67,14 @@ export async function generateDocumentsForSymbols(): Promise<OramaDocument[]> {
         }[];
       };
     }).DENO_DOC_SEARCH_INDEX;
+    delete (globalThis as any).DENO_DOC_SEARCH_INDEX;
     delete (globalThis as any).window;
+
+    console.log(
+      "[orama] Inserting %d symbols for %s",
+      index.nodes.length,
+      kind,
+    );
 
     for (const node of index.nodes) {
       documents.push({
