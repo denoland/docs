@@ -56,6 +56,19 @@ div.ddoc {
   @apply max-w-[75ch] !important;
 }
 
+.ddoc .markdown {
+  @apply max-w-[75ch] !important;
+}
+
+/* This comes from gfm css, should be replaced with something in our color palette once we establish it. */
+.ddoc .markdown :not(pre) > code {
+  background-color: var(--color-neutral-muted) !important;
+}
+
+.ddoc .max-w-prose {
+  @apply max-w-[75ch] !important;
+}
+
 .ddoc > div > div#content > div.toc > div > nav.documentNavigation > h3 {
   @apply hidden !important;
 }
