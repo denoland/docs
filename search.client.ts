@@ -1,8 +1,8 @@
 import { OramaClient } from "npm:@oramacloud/client@1";
 
 const client = new OramaClient({
-  endpoint: "https://cloud.orama.run/v1/indexes/docs-g5yhsx",
-  api_key: "Pq00jdTl6aPhxkGoctBHDRlxHdobJHUF",
+  endpoint: "https://cloud.orama.run/v1/indexes/deno-docs-pp7js4",
+  api_key: "BhHQBNY6gwBukMREm9FOproywA50UDQs",
 });
 
 document.addEventListener("DOMContentLoaded", () => {
