@@ -90,6 +90,12 @@ export async function generateDocumentsForSymbols(): Promise<OramaDocument[]> {
     }
   }
 
+  console.log("[orama] Total %d symbols", documents.length);
+  console.log(
+    "[orama] Symbols with title `readFileSync`",
+    documents.filter((d) => d.title === "readFileSync"),
+  );
+
   return documents;
 }
 
