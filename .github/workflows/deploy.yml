@@ -40,5 +40,4 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "deno-docs"
-          entrypoint: "_site/server.ts"
-          root: "_site"
+          entrypoint: "server.ts"
