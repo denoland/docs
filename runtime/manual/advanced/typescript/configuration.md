@@ -41,7 +41,7 @@ ignored.
 Here is a table of compiler options that can be changed, their default in Deno
 and any other notes about that option:
 
-| <div style={{width: '220px'}}>Option</div> | <div style={{width: '180px'}}>Default</div> | Notes                                                                                                                                     |
+| Option | Default | Notes                                                                                                                                     |
 | ------------------------------------------ | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `allowJs`                                  | `true`                                      | This almost never needs to be changed                                                                                                     |
 | `allowUnreachableCode`                     | `false`                                     |                                                                                                                                           |
