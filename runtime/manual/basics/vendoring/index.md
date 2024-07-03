@@ -1,4 +1,6 @@
-# Caching dependencies locally (Vendoring)
+---
+title: "Caching dependencies locally (Vendoring)"
+---
 
 If your project has external dependencies, you may want to store them locally to
 avoid downloading them from the internet every time you build your project. This
