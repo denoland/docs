@@ -216,7 +216,7 @@ export const sidebar = [
       },
       {
         label: "Vendoring",
-        id: "/manual/basics/vendoring/",
+        id: "/runtime/manual/basics/vendoring/",
       },
       {
         label: "Visual Studio Code",
