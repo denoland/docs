@@ -2,26 +2,33 @@
 title: "Private Registries"
 ---
 
-Deno supports private registries, which allow you to host and share your own 
+Deno supports private registries, which allow you to host and share your own
 modules. This is useful for organizations that want to keep their code private
 or for individuals who want to share their code with a select group of people.
 
 ## What are private registries?
 
-Large organizations often host their own private npm registries to manage internal packages securely. These private registries serve as repositories where organizations can publish and store their proprietary or custom packages. Unlike public npm registries, private registries are accessible only to authorized users within the organization.
+Large organizations often host their own private npm registries to manage
+internal packages securely. These private registries serve as repositories where
+organizations can publish and store their proprietary or custom packages. Unlike
+public npm registries, private registries are accessible only to authorized
+users within the organization.
 
 ## How to use private registries with Deno
 
-First, configure your `.npmrc` file to point to your private registry. You can do this by adding the following line to your `.npmrc` file:
+First, configure your `.npmrc` file to point to your private registry. You can
+do this by adding the following line to your `.npmrc` file:
 
 ```sh
 @mycompany:registry=http://mycompany.com:8111/
 //mycompany.com:8111/:_auth=secretToken
 ```
 
-Replace `http://mycompany.com:8111/` with the actual URL of your private registry and `secretToken` with your authentication token.
+Replace `http://mycompany.com:8111/` with the actual URL of your private
+registry and `secretToken` with your authentication token.
 
-Then update Your `deno.json` or `package.json` to specify the import path for your private package. For example:
+Then update Your `deno.json` or `package.json` to specify the import path for
+your private package. For example:
 
 ```json title="deno.json"
 {
