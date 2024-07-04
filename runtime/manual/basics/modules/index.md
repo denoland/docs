@@ -38,24 +38,14 @@ In this example the `add` and `multiply` functions are imported from a local
 **Command:** `deno run local.ts`
 
 ```ts
-/**
- * local.ts
- */
 import { add, multiply } from "./arithmetic.ts";
 
 function totalCost(outbound: number, inbound: number, tax: number): number {
   return multiply(add(outbound, inbound), tax);
 }
 
-console.log(totalCost(19, 31, 1.2));
-console.log(totalCost(45, 27, 1.15));
-
-/**
- * Output
- *
- * 60
- * 82.8
- */
+console.log(totalCost(19, 31, 1.2)); // 60
+console.log(totalCost(45, 27, 1.15)); // 82.8
 ```
 
 ## Remote Import
@@ -71,27 +61,14 @@ no problem handling this.
 **Command:** `deno run ./remote.ts`
 
 ```ts
-/**
- * remote.ts
- */
-import {
-  add,
-  multiply,
-} from "https://x.nest.land/ramda@0.27.0/source/index.js";
+import { add, multiply } from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 
 function totalCost(outbound: number, inbound: number, tax: number): number {
   return multiply(add(outbound, inbound), tax);
 }
 
-console.log(totalCost(19, 31, 1.2));
-console.log(totalCost(45, 27, 1.15));
-
-/**
- * Output
- *
- * 60
- * 82.8
- */
+console.log(totalCost(19, 31, 1.2)); // 60
+console.log(totalCost(45, 27, 1.15)); // 82.8
 ```
 
 ## Export
@@ -104,9 +81,6 @@ To do this just add the keyword `export` to the beginning of the function
 signature as is shown below.
 
 ```ts
-/**
- * arithmetic.ts
- */
 export function add(a: number, b: number): number {
   return a + b;
 }
@@ -131,7 +105,6 @@ being run: `https://unpkg.com/liltest@0.0.5/dist/liltest.js`.
 ### It seems unwieldy to import URLs everywhere.
 
 > What if one of the URLs links to a subtly different version of a library?
-
 > Isn't it error prone to maintain URLs everywhere in a large project?
 
 The solution is to import and re-export your external libraries in a central
