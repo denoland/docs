@@ -43,7 +43,7 @@ clean separation between dev and production dependencies.
 export {
   add,
   multiply,
-} from "https://x.nest.land/ramda@0.27.0/source/index.js";
+} from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 ```
 
 This example has the same functionality as the
