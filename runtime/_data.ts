@@ -141,7 +141,6 @@ export const sidebar = [
           },
           {
             label: "deno info",
-            type: "doc",
             id: "/runtime/manual/tools/dependency_inspector/",
           },
           {
@@ -200,10 +199,6 @@ export const sidebar = [
             label: "deno upgrade",
             id: "/runtime/manual/tools/upgrade/",
           },
-          {
-            label: "deno vendor",
-            id: "/runtime/manual/tools/vendor/",
-          },
         ],
       },
       {
@@ -218,6 +213,10 @@ export const sidebar = [
           "/runtime/manual/basics/testing/behavior_driven_development/",
           "/runtime/manual/basics/testing/snapshot_testing/",
         ],
+      },
+      {
+        label: "Vendoring",
+        id: "/runtime/manual/basics/vendoring/",
       },
       {
         label: "Visual Studio Code",

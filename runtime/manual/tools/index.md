@@ -30,4 +30,3 @@ Deno features before they are finalized.
 - [`deno types`](./types.md)
 - [`deno uninstall`](./uninstall.md)
 - [`deno upgrade`](./upgrade.md)
-- [`deno vendor` -- vendoring dependencies](./vendor.md)

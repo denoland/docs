@@ -172,4 +172,12 @@ This, like the above, is a problem faced by _any_ remote dependency system.
 Relying on external servers is convenient for development but brittle in
 production. Production software should always vendor its dependencies. In Node
 this is done by checking `node_modules` into source control. In Deno this is
-done by using the [`deno vendor`](../../tools/vendor.md) subcommand.
+done by adding a [vendor field](/vendoring) to your `deno.json` file:
+
+```bash
+{
+  "vendor": true
+}
+```
+
+before running your project.
