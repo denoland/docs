@@ -61,10 +61,7 @@ no problem handling this.
 **Command:** `deno run ./remote.ts`
 
 ```ts
-import {
-  add,
-  multiply,
-} from "https://deno.land/x/ramda@v0.27.2/mod.ts";
+import { add, multiply } from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 
 function totalCost(outbound: number, inbound: number, tax: number): number {
   return multiply(add(outbound, inbound), tax);

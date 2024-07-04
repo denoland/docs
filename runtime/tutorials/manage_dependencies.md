@@ -40,10 +40,7 @@ clean separation between dev and production dependencies.
  * This module re-exports the required methods
  * from the dependant remote Ramda module.
  */
-export {
-  add,
-  multiply,
-} from "https://deno.land/x/ramda@v0.27.2/mod.ts";
+export { add, multiply } from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 ```
 
 This example has the same functionality as the
