@@ -1,9 +1,9 @@
 ---
 title: "Deno KV Quick Start"
 oldUrl:
-  - /kv
-  - /kv/manual
-  - /runtime/manual/runtime/kv
+  - /kv/
+  - /kv/manual/
+  - /runtime/manual/runtime/kv/
 ---
 
 **Deno KV** is a
