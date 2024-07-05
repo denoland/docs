@@ -2,7 +2,8 @@
 title: "Private Modules and Repositories"
 ---
 
-> [!NOTE] Not to be confused with
+> [!NOTE]
+> Not to be confused with
 > [private npm registries](/runtime/manual/node/private_registries/).
 
 There may be instances where you want to load a remote module that is located in
