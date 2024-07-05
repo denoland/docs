@@ -41,7 +41,7 @@ export const sidebar = [
           "/runtime/manual/basics/modules/integrity_checking/",
           "/runtime/manual/advanced/publishing/",
           "/runtime/manual/advanced/publishing/dnt/",
-          "/runtime/manual/advanced/modules/private_repositories/",
+          "/runtime/manual/advanced/private_repositories/",
         ],
       },
       {
