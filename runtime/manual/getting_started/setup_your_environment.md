@@ -396,8 +396,8 @@ There are several environment variables which can impact the behavior of Deno:
 
 - `DENO_AUTH_TOKENS` - a list of authorization tokens which can be used to allow
   Deno to access remote private code. See the
-  [Private modules and repositories](../basics/modules/private.md) section for
-  more details.
+  [Private modules and repositories](../basics/modules/private_repositories.md)
+  section for more details.
 - `DENO_TLS_CA_STORE` - a list of certificate stores which will be used when
   establishing TLS connections. The available stores are `mozilla` and `system`.
   You can specify one, both or none. Certificate chains attempt to resolve in
