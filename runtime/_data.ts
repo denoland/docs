@@ -37,11 +37,11 @@ export const sidebar = [
         items: [
           "/runtime/manual/basics/modules/",
           "/runtime/manual/basics/modules/reloading_modules/",
-          "/runtime/manual/basics/modules/private_repositories/",
           "/runtime/manual/basics/modules/proxies/",
           "/runtime/manual/basics/modules/integrity_checking/",
           "/runtime/manual/advanced/publishing/",
           "/runtime/manual/advanced/publishing/dnt/",
+          "/runtime/manual/advanced/private_repositories/",
         ],
       },
       {
