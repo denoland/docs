@@ -2,8 +2,8 @@
 title: "Private NPM Registries"
 ---
 
-> [!NOTE] Not to be confused with
-> [private repositories and modules](/runtime/manual/advanced/private_repositories/).
+:::note Not to be confused with
+[private repositories and modules](/runtime/manual/advanced/private_repositories/).:::
 
 Deno supports private registries, which allow you to host and share your own
 modules. This is useful for organizations that want to keep their code private
