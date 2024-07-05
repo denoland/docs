@@ -2,8 +2,11 @@
 title: "Private NPM Registries"
 ---
 
-:::note Not to be confused with
+:::note
+
+Not to be confused with
 [private repositories and modules](/runtime/manual/advanced/private_repositories/).
+
 :::
 
 Deno supports private registries, which allow you to host and share your own
