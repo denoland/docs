@@ -142,7 +142,7 @@ function HeaderItem({
 }) {
   return (
     <a
-      class={`mt-1 mx-2.5 px-0.5 text-sm hover:text-primary flex items-center first:ml-1 ${
+      class={`mt-1 mx-2.5 px-0.5 text-sm hover:text-primary flex items-center ${
         activeOn && url.startsWith(activeOn)
           ? "text-primary border-b-2 border-primary"
           : "border-b-2 border-transparent"
