@@ -1,5 +1,5 @@
 ---
-title: "Private Registries"
+title: "Private NPM Registries"
 ---
 
 Deno supports private registries, which allow you to host and share your own
@@ -16,8 +16,9 @@ users within the organization.
 
 ## How to use private registries with Deno
 
-First, configure your `.npmrc` file to point to your private registry. You can
-do this by adding the following line to your `.npmrc` file:
+First, configure your `.npmrc` file to point to your private registry. Your
+`.npmrc` file must be in the project root or `$HOME` directory. You can do this
+by adding the following line to your `.npmrc` file:
 
 ```sh
 @mycompany:registry=http://mycompany.com:8111/
