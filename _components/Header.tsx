@@ -100,6 +100,7 @@ export default function Header({
                   activeOn="/api/deno"
                   href="/api/deno"
                   name="Deno APIs"
+                  firstItem={true}
                 />
               </li>
               <li>
@@ -132,6 +133,7 @@ function HeaderItem({
   name,
   external,
   hideOnMobile,
+  firstItem
 }: {
   url: string;
   activeOn?: string;
@@ -139,10 +141,11 @@ function HeaderItem({
   name: string;
   external?: boolean;
   hideOnMobile?: boolean;
+  firstItem?: boolean;
 }) {
   return (
     <a
-      class={`mt-1 mx-2.5 px-0.5 text-sm hover:text-primary flex items-center ${
+      class={`mt-1 ${firstItem ? 'ml-0' : ''} mx-2.5 px-0.5 text-sm hover:text-primary flex items-center ${
         activeOn && url.startsWith(activeOn)
           ? "text-primary border-b-2 border-primary"
           : "border-b-2 border-transparent"

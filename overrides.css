@@ -4,9 +4,9 @@ div.ddoc {
   @apply flex h-screen p-4 pt-2 lg:p-2 lg:pt-0;
 }
 
-/* First column: fixed width of 300px */
+/* First column: fixed width of 290px */
 .ddoc > :first-child {
-  @apply md:w-[290px] flex-shrink-0;
+  @apply w-[290px] flex-shrink-0;
 }
 
 /* Second column: takes up the remaining space */
