@@ -133,7 +133,7 @@ function HeaderItem({
   name,
   external,
   hideOnMobile,
-  firstItem
+  firstItem,
 }: {
   url: string;
   activeOn?: string;
@@ -145,7 +145,9 @@ function HeaderItem({
 }) {
   return (
     <a
-      class={`mt-1 ${firstItem ? 'ml-0' : ''} mx-2.5 px-0.5 text-sm hover:text-primary flex items-center ${
+      class={`mt-1 ${
+        firstItem ? "ml-0" : ""
+      } mx-2.5 px-0.5 text-sm hover:text-primary flex items-center ${
         activeOn && url.startsWith(activeOn)
           ? "text-primary border-b-2 border-primary"
           : "border-b-2 border-transparent"
