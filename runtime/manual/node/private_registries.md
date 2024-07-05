@@ -16,9 +16,10 @@ users within the organization.
 
 ## How to use private registries with Deno
 
-First, configure your `.npmrc` file to point to your private registry. Your
-`.npmrc` file must be in the project root or `$HOME` directory. You can do this
-by adding the following line to your `.npmrc` file:
+First, configure your
+[`.npmrc`](https://docs.npmjs.com/cli/v10/configuring-npm/npmrc) file to point
+to your private registry. The `.npmrc` file must be in the project root or
+`$HOME` directory. Add the following to your `.npmrc` file:
 
 ```sh
 @mycompany:registry=http://mycompany.com:8111/
