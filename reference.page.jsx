@@ -18,8 +18,8 @@ export default function* () {
       );
 
       const trailingLength = file.path.endsWith("index.html")
-              ? -"index.html".length
-              : -".html".length;
+        ? -"index.html".length
+        : -".html".length;
 
       let path = file.path.slice("reference_gen/gen".length, trailingLength);
 
