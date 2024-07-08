@@ -53,10 +53,12 @@ cargo test --features hmr integration::node_unit_tests::os_test
 Also remember to reference this feature flag in your editor settings. For VSCode
 users, combine the following into your workspace file:
 
-```json
+```jsonc
 {
   "settings": {
-    "rust-analyzer.cargo.features": ["hmr"]
+    "rust-analyzer.cargo.features": ["hmr"],
+    // Adds support for resolving internal `ext:*` modules
+    "deno.importMap": "tools/core_import_map.json"
   }
 }
 ```
