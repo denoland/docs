@@ -205,3 +205,11 @@ body:not(:has(.ddoc)) {
 .doc-pagination-label-prev::before {
   content: "« ";
 }
+
+/* Custom DDOC styles for the Deno documentation */
+
+.ddoc .contextLink {
+  @apply text-primary !important;
+  /* 40% opacity of for decoration color primary */
+  text-decoration-color: rgba(9, 107, 218, 0.4) !important;
+}
