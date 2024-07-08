@@ -17,19 +17,22 @@ export default function* () {
         "",
       );
 
+      const trailingLength = file.path.endsWith("index.html")
+        ? -"index.html".length
+        : -".html".length;
+
+      let path = file.path.slice("reference_gen/gen".length, trailingLength);
+
+      // replace slashes for windows
+      path = path.replace(/\\/g, "/");
+
       yield {
-        url: "/api" +
-          file.path.slice(
-            "reference_gen/gen".length,
-            file.path.endsWith("index.html")
-              ? -"index.html".length
-              : -".html".length,
-          ),
+        url: "/api" + path,
         title: file.name.slice(0, -".html".length),
         content,
       };
     }
-  } catch {
-    console.warn("⚠️ Reference docs were not generated.");
+  } catch (ex) {
+    console.warn("⚠️ Reference docs were not generated." + ex);
   }
 }
