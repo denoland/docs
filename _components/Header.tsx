@@ -92,7 +92,7 @@ export default function Header({
 
       {reference &&
         (
-          <nav className="px-6 sm:px-4 pt-2 pb-3 text-sm bg-white flex items-center justify-between border-box border-t border-gray-200 z-[1000]">
+          <nav className="px-4 md:px-6 pt-2 pb-3 text-sm bg-white flex items-center justify-between border-box border-t border-gray-200 z-[1000]">
             <ul className="flex">
               <li>
                 <HeaderItem
