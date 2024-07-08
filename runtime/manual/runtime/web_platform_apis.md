@@ -1,6 +1,8 @@
 ---
 title: "Using Web Platform APIs"
-oldUrl: /runtime/manual/runtime/navigator_api/
+oldUrl:
+  - /runtime/manual/runtime/navigator_api/
+  - /manual/runtime/web_platform_apis/
 ---
 
 One way Deno simplifies web and cloud development is by using Web Platform APIs
