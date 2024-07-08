@@ -4,8 +4,6 @@ oldUrl:
   - /kv/manual/node/
 ---
 
-import Tabs from "@theme/Tabs"; import TabItem from "@theme/TabItem";
-
 Connecting to a Deno KV database in Node.js is supported via our
 [official client library on npm](https://www.npmjs.com/package/@deno/kv). You
 can find usage instructions for this option below.
@@ -23,14 +21,14 @@ npm install @deno/kv
 ```
 
 </deno-tab>
-<deno-tab value="pnpm" label="npm">
+<deno-tab value="pnpm" label="pnpm">
 
 ```sh
 pnpm add @deno/kv
 ```
 
 </deno-tab>
-<deno-tab value="yarn" label="npm">
+<deno-tab value="yarn" label="yarn">
 
 ```sh
 yarn add @deno/kv
