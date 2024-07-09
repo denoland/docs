@@ -36,7 +36,8 @@ const dr = await fetch(`${API}/projects/${project.id}/deployments`, {
     assets: {
       "main.ts": {
         "kind": "file",
-        "content": `export default { async fetch(req) { return new Response("Hello, World!"); } }`,
+        "content":
+          `export default { async fetch(req) { return new Response("Hello, World!"); } }`,
         "encoding": "utf-8",
       },
     },
@@ -47,7 +48,10 @@ const dr = await fetch(`${API}/projects/${project.id}/deployments`, {
 const deployment = await dr.json();
 
 console.log(dr.status);
-console.log("Visit your site here:", `https://${project.name}-${deployment.id}.deno.dev`);
+console.log(
+  "Visit your site here:",
+  `https://${project.name}-${deployment.id}.deno.dev`,
+);
 ```
 
 <a name="getting_started"></a>

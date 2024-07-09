@@ -59,7 +59,8 @@ const res = await fetch(`${API}/projects/${projectId}/deployments`, {
     assets: {
       "main.ts": {
         "kind": "file",
-        "content": `export default { async fetch(req) { return new Response("Hello, World!"); } }`,
+        "content":
+          `export default { async fetch(req) { return new Response("Hello, World!"); } }`,
         "encoding": "utf-8",
       },
     },
@@ -70,7 +71,10 @@ const res = await fetch(`${API}/projects/${projectId}/deployments`, {
 const deployment = await res.json();
 
 console.log(res.status);
-console.log("Visit your site here:", `https://${project.name}-${deployment.id}.deno.dev`);
+console.log(
+  "Visit your site here:",
+  `https://${project.name}-${deployment.id}.deno.dev`,
+);
 ```
 
 If you run this script with the following command:
