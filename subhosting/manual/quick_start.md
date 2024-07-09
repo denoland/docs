@@ -24,6 +24,7 @@ const pr = await fetch(`${API}/organizations/${orgId}/projects`, {
     name: null, // randomly generates project name
   }),
 });
+
 const project = await pr.json();
 
 // 3.) Deploy a "hello world" server to the new project
@@ -35,14 +36,18 @@ const dr = await fetch(`${API}/projects/${project.id}/deployments`, {
     assets: {
       "main.ts": {
         "kind": "file",
-        "content": `Deno.serve(() => new Response("Hello, World!"));`,
+        "content": `export default { async fetch(req) { return new Response("Hello, World!"); } }`,
         "encoding": "utf-8",
       },
     },
     envVars: {},
   }),
 });
+
+const deployment = await dr.json();
+
 console.log(dr.status);
+console.log("Visit your site here:", `https://${project.name}-${deployment.id}.deno.dev`);
 ```
 
 <a name="getting_started"></a>
