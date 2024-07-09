@@ -67,12 +67,11 @@ which modules you need by
   <summary>
     <code>node:child_process</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
-    The <code>ipc</code> and <code>overlapped</code> stdio options are missing.
-    Passing file descriptors by an integer value is missing.
+    Fully supported.
   </p>
   <p>
     <a href="https://nodejs.org/api/child_process.html">Node.js docs</a>
@@ -232,16 +231,12 @@ which modules you need by
   <p>
     Missing <code>utf16le</code>, <code>latin1</code> and <code>ucs2</code>{" "}
     encoding for <code>fs.writeFile</code> and <code>fs.writeFileSync</code>.
-    Missing <code>Dirent.isBlockDevice</code>,{" "}
-    <code>Dirent.isCharacterDevice</code>, <code>Dirent.isFIFO</code>,{" "}
-    <code>Dirent.isSocket</code>, <code>FSWatcher.ref</code>,{" "}
-    <code>FSWatcher.unref</code>.
   </p>
   <h5>
     <code>node:fs/promises</code>
   </h5>
   <p>
-    Missing <code>lchmod</code>, <code>lchown</code>, <code>lutimes</code>.
+    Missing <code>lchmod</code>.
   </p>
   <p>
     <a href="https://nodejs.org/api/fs.html">Node.js docs</a>
@@ -574,11 +569,11 @@ which modules you need by
   <summary>
     <code>node:tty</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
-    Missing <code>ReadStream</code> and <code>WriteStream</code> implementation.
+    Fully supported.
   </p>
   <p>
     <a href="https://nodejs.org/api/tty.html">Node.js docs</a>
@@ -625,9 +620,7 @@ which modules you need by
   <p>
     <code>cachedDataVersionTag</code> and <code>getHeapStatistics</code> are
     supported. <code>setFlagsFromStrings</code> is a noop. Other APIs are not
-    supported and will throw and error. The other APIs <em>could</em> be
-    polyfilled, but due inherent lack of format stability between the V8
-    versions, the Deno team is considering requiring a special flag to use them.
+    supported and will throw and error.
   </p>
   <p>
     <a href="https://nodejs.org/api/v8.html">Node.js docs</a>
@@ -638,12 +631,11 @@ which modules you need by
   <summary>
     <code>node:vm</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
-    <code>runInThisContext</code> is supported. Other APIs are not polyfilled
-    and will throw and error.
+    Fully supported.
   </p>
   <p>
     <a href="https://nodejs.org/api/vm.html">Node.js docs</a>
@@ -686,14 +678,11 @@ which modules you need by
   <summary>
     <code>node:zlib</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
-    Missing <code>Options.prototype.constructor</code>,{" "}
-    <code>BrotliOptions.prototype.constructor</code>,{" "}
-    <code>BrotliDecompress.prototype.constructor</code>,{" "}
-    <code>ZlibBase.prototype.constructor</code>.
+    Fully supported.
   </p>
   <p>
     <a href="https://nodejs.org/api/zlib.html">Node.js docs</a>
