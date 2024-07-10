@@ -4,6 +4,9 @@ oldUrl: /runtime/manual/npm_nodejs/compatibility_mode/
 ---
 
 Deno provides polyfills for a number of built-in Node.js modules and globals.
+For a full list of Node built-in modules, see the
+[reference](https://docs.deno.com/api/node/).
+
 Node compatibility is an ongoing project - help us identify gaps and let us know
 which modules you need by
 [opening an issue on GitHub](https://github.com/denoland/deno).
