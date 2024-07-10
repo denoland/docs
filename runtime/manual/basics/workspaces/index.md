@@ -263,13 +263,3 @@ root and its members:
 | version            | ❌        | ✅      |                                                                                                                                                                                                                                                                                        |
 | exports            | ❌        | ✅      |                                                                                                                                                                                                                                                                                        |
 | workspace          | ✅        | ❌      | Nested workspaces are not supported.                                                                                                                                                                                                                                                   |
-
-### Specyfing workspace configuration
-
-```
-{
-    "workspace": {
-        "members": ["foo", "bar"]
-    }
-}
-```
