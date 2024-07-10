@@ -67,8 +67,7 @@ To use a development version of the LSP in VSCode:
 
 1. Install and enable the
    [Deno VSCode extension](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
-2. Update your VSCode settings and set point `deno.path` to your development
-   binary:
+2. Update your VSCode settings and point `deno.path` to your development binary:
 
 ```jsonc
 // .vscode/settings.json
