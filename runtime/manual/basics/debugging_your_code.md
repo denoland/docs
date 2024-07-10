@@ -42,8 +42,8 @@ deno run --inspect-wait your_script.ts
 The `--inspect-brk` flag will pause execution on the first line of the program.
 This will freeze your program as soon as you connect, allowing you to add
 additional breakpoints or evaluate expressions before resuming execution. **This
-is the most commonly used inspect flag**. JetBrains and VSCode IDEs use this flag
-by default.
+is the most commonly used inspect flag**. JetBrains and VSCode IDEs use this
+flag by default.
 
 ```shell
 deno run --inspect-brk your_script.ts
