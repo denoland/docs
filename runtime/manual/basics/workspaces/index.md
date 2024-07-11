@@ -119,8 +119,7 @@ library called `buzz` that we developed a couple years back.
 
 We'll need to include a `deno.json` configuration file in the root:
 
-```js
-// deno.json
+```js, title="deno.json"
 {
   "nodeModulesDir": true,
   "workspace": ["fizz", "buzz"]
@@ -132,15 +131,15 @@ using `node_modules/`.
 
 In `fizz`, our Deno-first package:
 
-```js
-// fizz/deno.json
+```js, title="fizz/deno.json"
 {
   "name": "@deno-workspace/fizz",
   "version": "0.2.0",
   "exports": "./mod.ts"
 }
+```
 
-// fizz/mod.ts
+```js, title="fizz/mod.ts"
 export function logProject(project) {
   console.log(project);
 }
@@ -148,8 +147,7 @@ export function logProject(project) {
 
 And in `buzz`, our legacy Node.js package:
 
-```js
-// buzz/package.json
+```js, title="buzz/package.json"
 {
   "name": "@deno-workspace/buzz",
   "version": "0.5.0",
@@ -159,8 +157,9 @@ And in `buzz`, our legacy Node.js package:
     "ts-morph": "*"
   }
 }
+```
 
-// buzz/index.js
+```js, title="buzz/index.json"
 import { Project } from "ts-morph";
 import { createProject } from "@deno-workspace/fizz";
 
