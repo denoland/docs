@@ -1,9 +1,9 @@
 export default function Header({
   url,
-  hassidebar,
+  hasSidebar,
 }: {
   url: string;
-  hassidebar?: boolean;
+  hasSidebar?: boolean;
 }) {
   const reference = url.startsWith("/api");
   return (
@@ -14,7 +14,7 @@ export default function Header({
     >
       <nav class="px-4 md:px-6 py-3 h-16 flex items-center justify-between">
         <div class="flex items-center">
-          {hassidebar && (
+          {hasSidebar && (
             <button class="mr-2 lg:hidden" id="sidebar-open">
               <svg
                 width="30"
@@ -92,7 +92,7 @@ export default function Header({
 
       {reference &&
         (
-          <nav className="px-4 pt-2 pb-3 bg-white flex items-center justify-between border-box border-t border-gray-200 z-[1000]">
+          <nav className="px-4 md:px-6 pt-2 pb-3 text-sm bg-white flex items-center justify-between border-box border-t border-gray-200 z-[1000]">
             <ul className="flex">
               <li>
                 <HeaderItem
@@ -147,7 +147,7 @@ function HeaderItem({
     <a
       class={`mt-1 ${
         firstItem ? "ml-0" : ""
-      } mx-2.5 px-0.5 text-sm hover:text-primary flex items-center ${
+      } mx-2.5 px-0.5 text-md hover:text-primary flex items-center ${
         activeOn && url.startsWith(activeOn)
           ? "text-primary border-b-2 border-primary"
           : "border-b-2 border-transparent"

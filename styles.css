@@ -125,8 +125,12 @@ body:not(:has(.ddoc)) {
   }
 }
 
+.markdown-body .admonition a {
+  @apply text-primary underline underline-offset-2;
+}
+
 .markdown-body .admonition {
-  @apply p-6 pb-2 shadow-sm rounded-xl border-l-4;
+  @apply py-4 px-6 pb-2 rounded-lg border-2 bg-gray-1/5 border-gray-3;
 }
 
 .markdown-body .admonition .title {
@@ -138,16 +142,24 @@ body:not(:has(.ddoc)) {
   @apply inline-block size-5 mr-2;
 }
 
+.markdown-body .admonition > p {
+  @apply mb-2;
+}
+
 .markdown-body .admonition.info {
-  @apply bg-blue-50 border-blue-500 text-blue-700;
+  @apply bg-primary/5 border-blue-900/50 text-blue-900;
+}
+
+.markdown-body .admonition.note {
+  @apply bg-primary/5 border-blue-900/50 text-blue-900;
 }
 
 .markdown-body .admonition.caution {
-  @apply bg-yellow-50 border-yellow-500 text-yellow-900 fill-yellow-900;
+  @apply bg-yellow-50/5 border-yellow-500/50 text-yellow-900 fill-yellow-900;
 }
 
 .markdown-body .admonition.tip {
-  @apply bg-green-50 border-green-600 text-green-800;
+  @apply bg-green-50/5 border-green-600/50 text-green-900;
 }
 
 .markdown-body .admonition.info .title::before {
@@ -207,9 +219,61 @@ body:not(:has(.ddoc)) {
 }
 
 /* Custom DDOC styles for the Deno documentation */
+.ddoc {
+  /* Categories panel */
+  > .toc {
+    @apply border-r border-gray-000;
+    
+    .documentNavigation {
+      > h3 {
+        margin: 0.75rem 0.75rem 0.5rem !important;
+        padding-bottom: 0.1rem;
+        @apply text-gray-4 font-normal text-xs border-b border-gray-000 leading-normal uppercase !important;
+      }
+    }
+  }
+  
+  .documentNavigation > ul > li > a {
+    @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline  py-1.5 px-3.5 !important
+  }
+  
+  .contextLink {
+    @apply text-primary !important;
+    /* 40% opacity of for decoration color primary */
+    text-decoration-color: rgba(9, 107, 218, 0.4) !important;
+  }
+  
+  #content .toc .documentNavigation {
+    > h3 {
+      @apply hidden !important;
+    }
+    
+    > ul {
+      @apply border-l border-gray-000 !important;
+      
+      > ul > li a {
+        @apply hover:bg-blue-50 rounded-lg hover:no-underline !important;
+      }
+    }
+  }
+  
+  .markdown {
+    pre {
+      @apply border-gray-000 !important;
+    }
+    
+    /* This comes from gfm css, should be replaced with something in our color palette once we establish it. */
+    :not(pre) > code {
+      background-color: var(--color-neutral-muted) !important;
+    }
+  }
+}
 
-.ddoc .contextLink {
-  @apply text-primary !important;
-  /* 40% opacity of for decoration color primary */
-  text-decoration-color: rgba(9, 107, 218, 0.4) !important;
+@media (min-width: 1024px) {
+  /* no category panel, category panel but no document navigation */
+  .ddoc:not(:has(> div.toc)),
+  .ddoc:has(> div.toc) > div:not(.toc) {
+    padding-top: 0.25rem !important;
+    padding-left: 0.5rem !important;
+  }
 }

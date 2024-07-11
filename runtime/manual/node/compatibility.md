@@ -4,6 +4,9 @@ oldUrl: /runtime/manual/npm_nodejs/compatibility_mode/
 ---
 
 Deno provides polyfills for a number of built-in Node.js modules and globals.
+For a full list of Node built-in modules, see the
+[reference](https://docs.deno.com/api/node/).
+
 Node compatibility is an ongoing project - help us identify gaps and let us know
 which modules you need by
 [opening an issue on GitHub](https://github.com/denoland/deno).
@@ -39,7 +42,7 @@ which modules you need by
     </div>
   </summary>
   <p>
-    <code>AsyncLocalStorage</code> is supported. <code>AsyncResource</code>,{" "}
+    <code>AsyncLocalStorage</code> is supported. <code>AsyncResource</code>,
     <code>executionAsyncId</code>, and <code>createHook</code> are
     non-functional stubs.
   </p>
@@ -67,12 +70,11 @@ which modules you need by
   <summary>
     <code>node:child_process</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
-    The <code>ipc</code> and <code>overlapped</code> stdio options are missing.
-    Passing file descriptors by an integer value is missing.
+    Fully supported.
   </p>
   <p>
     <a href="https://nodejs.org/api/child_process.html">Node.js docs</a>
@@ -115,16 +117,16 @@ which modules you need by
     </div>
   </summary>
   <p>
-    Missing <code>Certificate</code> class,{" "}
-    <code>crypto.Cipheriv.prototype.setAutoPadding</code>,{" "}
-    <code>crypto.Decipheriv.prototype.setAutoPadding</code>,{" "}
-    <code>crypto.getCipherInfo</code>, <code>crypto.publicDecrypt</code>,{" "}
-    <code>crypto.ECDH.prototype.convertKey</code>,{" "}
-    <code>crypto.diffieHellman</code>, <code>x448</code> option for{" "}
-    <code>generateKeyPair</code>, <code>crypto.KeyObject</code>,{" "}
-    <code>safe</code>, <code>add</code> and <code>rem</code> options for{" "}
-    <code>generatePrime</code>, <code>crypto.Sign.prototype.sign</code> and{" "}
-    <code>crypto.Verify.prototype.verify</code> with non <code>BinaryLike</code>{" "}
+    Missing <code>Certificate</code> class,
+    <code>crypto.Cipheriv.prototype.setAutoPadding</code>,
+    <code>crypto.Decipheriv.prototype.setAutoPadding</code>,
+    <code>crypto.getCipherInfo</code>, <code>crypto.publicDecrypt</code>,
+    <code>crypto.ECDH.prototype.convertKey</code>,
+    <code>crypto.diffieHellman</code>, <code>x448</code> option for
+    <code>generateKeyPair</code>, <code>crypto.KeyObject</code>,
+    <code>safe</code>, <code>add</code> and <code>rem</code> options for
+    <code>generatePrime</code>, <code>crypto.Sign.prototype.sign</code> and
+    <code>crypto.Verify.prototype.verify</code> with non <code>BinaryLike</code>
     input, <code>crypto.secureHeapUsed</code>, <code>crypto.setEngine</code>,
     legacy methods of <code>crypto.X509Certificate</code>.
   </p>
@@ -230,18 +232,14 @@ which modules you need by
     <code>node:fs</code>
   </h5>
   <p>
-    Missing <code>utf16le</code>, <code>latin1</code> and <code>ucs2</code>{" "}
+    Missing <code>utf16le</code>, <code>latin1</code> and <code>ucs2</code>
     encoding for <code>fs.writeFile</code> and <code>fs.writeFileSync</code>.
-    Missing <code>Dirent.isBlockDevice</code>,{" "}
-    <code>Dirent.isCharacterDevice</code>, <code>Dirent.isFIFO</code>,{" "}
-    <code>Dirent.isSocket</code>, <code>FSWatcher.ref</code>,{" "}
-    <code>FSWatcher.unref</code>.
   </p>
   <h5>
     <code>node:fs/promises</code>
   </h5>
   <p>
-    Missing <code>lchmod</code>, <code>lchown</code>, <code>lutimes</code>.
+    Missing <code>lchmod</code>.
   </p>
   <p>
     <a href="https://nodejs.org/api/fs.html">Node.js docs</a>
@@ -286,7 +284,7 @@ which modules you need by
     </div>
   </summary>
   <p>
-    Missing <code>https.Server.opts.cert</code> and{" "}
+    Missing <code>https.Server.opts.cert</code> and
     <code>https.Server.opts.key</code> array type.
   </p>
   <p>
@@ -334,7 +332,7 @@ which modules you need by
     </div>
   </summary>
   <p>
-    Missing <code>net.Socket.prototype.constructor</code> with <code>fd</code>{" "}
+    Missing <code>net.Socket.prototype.constructor</code> with <code>fd</code>
     option.
   </p>
   <p>
@@ -380,8 +378,8 @@ which modules you need by
     </div>
   </summary>
   <p>
-    Missing <code>perf_hooks.eventLoopUtilization</code>,{" "}
-    <code>perf_hooks.timerify</code>,{" "}
+    Missing <code>perf_hooks.eventLoopUtilization</code>,
+    <code>perf_hooks.timerify</code>,
     <code>perf_hooks.monitorEventLoopDelay</code>.
   </p>
   <p>
@@ -458,7 +456,7 @@ which modules you need by
   </summary>
   <p>
     <code>builtinModules</code> and <code>_builtinLibs</code> are supported.
-    Missing <code>REPLServer.prototype.constructor</code> and{" "}
+    Missing <code>REPLServer.prototype.constructor</code> and
     <code>start()</code>.
   </p>
   <p>
@@ -489,7 +487,7 @@ which modules you need by
     </div>
   </summary>
   <p>
-    Missing decoding of <code>ascii</code>, <code>latin1</code> and{" "}
+    Missing decoding of <code>ascii</code>, <code>latin1</code> and
     <code>utf16le</code> decoding options.
   </p>
   <p>
@@ -574,11 +572,11 @@ which modules you need by
   <summary>
     <code>node:tty</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
-    Missing <code>ReadStream</code> and <code>WriteStream</code> implementation.
+    Fully supported.
   </p>
   <p>
     <a href="https://nodejs.org/api/tty.html">Node.js docs</a>
@@ -625,9 +623,7 @@ which modules you need by
   <p>
     <code>cachedDataVersionTag</code> and <code>getHeapStatistics</code> are
     supported. <code>setFlagsFromStrings</code> is a noop. Other APIs are not
-    supported and will throw and error. The other APIs <em>could</em> be
-    polyfilled, but due inherent lack of format stability between the V8
-    versions, the Deno team is considering requiring a special flag to use them.
+    supported and will throw and error.
   </p>
   <p>
     <a href="https://nodejs.org/api/v8.html">Node.js docs</a>
@@ -638,12 +634,11 @@ which modules you need by
   <summary>
     <code>node:vm</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
-    <code>runInThisContext</code> is supported. Other APIs are not polyfilled
-    and will throw and error.
+    Fully supported.
   </p>
   <p>
     <a href="https://nodejs.org/api/vm.html">Node.js docs</a>
@@ -671,10 +666,10 @@ which modules you need by
     </div>
   </summary>
   <p>
-    Missing <code>parentPort.emit</code>,{" "}
-    <code>parentPort.removeAllListeners</code>,{" "}
-    <code>markAsUntransferable</code>, <code>moveMessagePortToContext</code>,{" "}
-    <code>receiveMessageOnPort</code>,{" "}
+    Missing <code>parentPort.emit</code>,
+    <code>parentPort.removeAllListeners</code>,
+    <code>markAsUntransferable</code>, <code>moveMessagePortToContext</code>,
+    <code>receiveMessageOnPort</code>,
     <code>Worker.prototype.getHeapSnapshot</code>.
   </p>
   <p>
@@ -686,14 +681,11 @@ which modules you need by
   <summary>
     <code>node:zlib</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
-    Missing <code>Options.prototype.constructor</code>,{" "}
-    <code>BrotliOptions.prototype.constructor</code>,{" "}
-    <code>BrotliDecompress.prototype.constructor</code>,{" "}
-    <code>ZlibBase.prototype.constructor</code>.
+    Fully supported.
   </p>
   <p>
     <a href="https://nodejs.org/api/zlib.html">Node.js docs</a>
