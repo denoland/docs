@@ -5,26 +5,21 @@ title: "Workspaces"
 Deno supports workspaces, which is a very powerful tool for managing monorepos,
 migrating from Node.js or scoping configuration to particular directories.
 
-A "workspace" is a collection of "members". Members are subdirectories specified
-in the configuration file:
+A "workspace" is a collection of folders that contain configuration files. These
+config files may contain directory specific config or define a package.
 
-```js
-// deno.json
+```jsonc, title="deno.json"
 {
-    "workspace": {
-        "members": ["foo", "./bar"]
-    }
-}
-
-// or...
-{
-    "workspace": ["foo", "bar"]
+  // or shorthand: "workspace": ["./add", "./subtract"]
+  "workspace": {
+    "members": ["./add", "./subtract"]
+  }
 }
 ```
 
-The above `deno.json` file configures a workspace with `foo` and `bar` members,
-these are names of the directories that are expected to have `deno.json(c)` (or
-`package.json`) files.
+The above `deno.json` file configures a workspace with `add` and `subtract`
+members, these are names of the directories that are expected to have a
+`deno.json(c)` and/or `package.json` file.
 
 Note that Deno workspaces uses the keyword `workspace` rather than npm's
 `workspaces`, since it represents a singular workspace with multiple workspace
@@ -35,61 +30,55 @@ members.
 Let's see the above workspace in action, in a small and simple 2-package
 monorepo:
 
-```js
-// foo/deno.json
+```json, title="add/deno.json"
 {
-  "name": "@scope/foo",
+  "name": "@scope/add",
   "version": "0.1.0",
   "exports": "./mod.ts",
   "fmt": {
     "semiColons": false
   }
 }
+```
 
-// foo/mod.ts
-import chalk from "chalk"
-import { helloHelper } from "@scope/bar"
-
-export function foo() {
-  return chalk.red(helloHelper() + "foo")
+```ts, title="add/mod.ts"
+export function add(a: number, b: number): number {
+  return a + b;
 }
 ```
 
-```js
-// bar/deno.json
+```json, title="subtract/deno.json"
 {
-  "name": "@scope/bar",
+  "name": "@scope/subtract",
   "version": "0.3.0",
-  "exports": "./lib.ts"
-}
-
-// bar/lib.ts
-import chalk from "chalk";
-
-export function bar() {
-  return chalk.green(helloHelper() + "bar");
-}
-
-export function helloHelper() {
-  return "Hello, from ";
+  "exports": "./mod.ts"
 }
 ```
 
-```js
-// deno.json
+```js, title="subtract/mod.ts"
+import { add } from "@scope/add";
+
+export function subtract(a: number, b: number): number {
+  return add(a, b * -1);
+}
+```
+
+```json, title="deno.json"
 {
-  "workspace": ["./foo", "./bar"],
+  "workspace": ["./add", "./subtract"],
   "imports": {
-    "chalk": "npm:chalk"
+    "chalk": "npm:chalk@5"
   }
 }
+```
 
-// main.ts
-import { foo } from "@scope/foo";
-import { bar } from "@scope/bar";
+```js, title="main.ts"
+import chalk from "chalk";
+import { add } from "@scope/add";
+import { subtract } from "@scope/subtract";
 
-console.log(foo());
-console.log(bar());
+console.log("1 + 2 =", chalk.green(add(1, 2)));
+console.log("2 - 4 =", chalk.red(subtract(2, 4)));
 ```
 
 Let's run it:
@@ -98,20 +87,20 @@ Let's run it:
 
 There's a lot to unpack here, showcasing some of the Deno workspace features:
 
-1. This monorepo consists of two packages, placed in `./foo` and `./bar`
+1. This monorepo consists of two packages, placed in `./add` and `./subtract`
    directories.
 
 1. By using `name` and `version` options in members' `deno.json` files, it's
    possible to refer to them using "bare specifiers" across the whole workspace.
-   In this case, the packages are named `@scope/foo` and `@scope/bar`, where
-   `scope` is the "scope" name you can choose. With these two options, it's not
-   necessary to use long and relative file paths in import statements.
+   In this case, the packages are named `@scope/add` and `@scope/subtract`,
+   where `scope` is the "scope" name you can choose. With these two options,
+   it's not necessary to use long and relative file paths in import statements.
 
-1. `npm:chalk` package is a shared dependency between `foo` and `bar` packages.
+1. `npm:chalk@5` package is a shared dependency in the entire workspace.
    Workspace members "inherit" `imports` of the workspace root, allowing to
    easily manage a single version of a dependency across the codebase.
 
-1. `foo` subdirectory specifies in its `deno.json` that `deno fmt` should not
+1. `add` subdirectory specifies in its `deno.json` that `deno fmt` should not
    apply semicolons when formatting the code. This makes for a much smoother
    transition for existing projects, without a need to change tens or hundreds
    of files in one go.
