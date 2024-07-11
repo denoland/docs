@@ -125,8 +125,12 @@ body:not(:has(.ddoc)) {
   }
 }
 
+.markdown-body .admonition a {
+  @apply text-primary underline underline-offset-2;
+}
+
 .markdown-body .admonition {
-  @apply p-6 pb-2 shadow-sm rounded-xl border-l-4;
+  @apply py-4 px-6 pb-2 rounded-lg border-2 bg-gray-1/5 border-gray-3;
 }
 
 .markdown-body .admonition .title {
@@ -138,16 +142,24 @@ body:not(:has(.ddoc)) {
   @apply inline-block size-5 mr-2;
 }
 
+.markdown-body .admonition > p {
+  @apply mb-2;
+}
+
 .markdown-body .admonition.info {
-  @apply bg-blue-50 border-blue-500 text-blue-700;
+  @apply bg-primary/5 border-blue-900/50 text-blue-900;
+}
+
+.markdown-body .admonition.note {
+  @apply bg-primary/5 border-blue-900/50 text-blue-900;
 }
 
 .markdown-body .admonition.caution {
-  @apply bg-yellow-50 border-yellow-500 text-yellow-900 fill-yellow-900;
+  @apply bg-yellow-50/5 border-yellow-500/50 text-yellow-900 fill-yellow-900;
 }
 
 .markdown-body .admonition.tip {
-  @apply bg-green-50 border-green-600 text-green-800;
+  @apply bg-green-50/5 border-green-600/50 text-green-900;
 }
 
 .markdown-body .admonition.info .title::before {
