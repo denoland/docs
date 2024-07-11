@@ -1,5 +1,6 @@
 ---
 title: "CLI Command Reference"
+oldUrl: /manual/tools
 ---
 
 The Deno CLI provides a number of helpful utilities in addition to running Deno

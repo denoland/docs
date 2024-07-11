@@ -45,7 +45,7 @@ const accessToken = Deno.env.get("DEPLOY_ACCESS_TOKEN");
 const API = "https://api.deno.com/v1";
 
 // Replace with your desired project ID
-const projectId = "f084712a-b23b-4aba-accc-3c2de0bfa26a";
+const projectId = "your-project-id-here";
 
 // Create a new deployment
 const res = await fetch(`${API}/projects/${projectId}/deployments`, {
@@ -59,7 +59,8 @@ const res = await fetch(`${API}/projects/${projectId}/deployments`, {
     assets: {
       "main.ts": {
         "kind": "file",
-        "content": `Deno.serve(() => new Response("Hello, World!"));`,
+        "content":
+          `export default { async fetch(req) { return new Response("Hello, World!"); } }`,
         "encoding": "utf-8",
       },
     },
@@ -67,7 +68,13 @@ const res = await fetch(`${API}/projects/${projectId}/deployments`, {
   }),
 });
 
+const deployment = await res.json();
+
 console.log(res.status);
+console.log(
+  "Visit your site here:",
+  `https://${project.name}-${deployment.id}.deno.dev`,
+);
 ```
 
 If you run this script with the following command:

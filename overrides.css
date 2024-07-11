@@ -143,3 +143,19 @@ div.ddoc {
     padding-left: 0.5rem !important;
   }
 }
+
+.ddoc .usageContent {
+  @apply bg-primary/5 border-primary/25 pt-3.5 pb-4 !important;
+}
+
+.ddoc .usageContent > h3 {
+  @apply font-semibold ml-1.5 mb-1.5 !important;
+}
+
+.ddoc .usageContent > .markdown {
+  @apply max-w-full !important;
+}
+
+.ddoc .context_button:hover {
+  @apply bg-gray-000/25 !important;
+}

@@ -53,11 +53,26 @@ cargo test --features hmr integration::node_unit_tests::os_test
 Also remember to reference this feature flag in your editor settings. For VSCode
 users, combine the following into your workspace file:
 
-```json
+```jsonc
 {
   "settings": {
-    "rust-analyzer.cargo.features": ["hmr"]
+    "rust-analyzer.cargo.features": ["hmr"],
+    // Adds support for resolving internal `ext:*` modules
+    "deno.importMap": "tools/core_import_map.json"
   }
+}
+```
+
+To use a development version of the LSP in VSCode:
+
+1. Install and enable the
+   [Deno VSCode extension](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
+2. Update your VSCode settings and point `deno.path` to your development binary:
+
+```jsonc
+// .vscode/settings.json
+{
+  "deno.path": "/path/to/your/deno/target/debug/deno"
 }
 ```
 

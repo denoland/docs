@@ -5,6 +5,7 @@ oldUrl:
   - /runtime/manual/typescript/
   - /runtime/manual/typescript/overview/
   - /runtime/manual/getting_started/typescript/
+  - /manual/advanced/typescript
 ---
 
 One of the benefits of Deno is that it treats TypeScript as a first class

@@ -37,7 +37,7 @@ have direct control over, the ability to do the former is also required.
 If you are consuming a JavaScript module and you have either created types (a
 `.d.ts` file) or have otherwise obtained the types you want to use, you can
 instruct Deno to use that file when type checking instead of the JavaScript file
-using the `@deno-types` compiler hint. `@deno-types` needs to be a single line
+using the `@ts-types` compiler hint. `@ts-types` needs to be a single line
 double slash comment, where when used impacts the next import or re-export
 statement.
 
@@ -45,7 +45,7 @@ For example if I have a JavaScript modules `coolLib.js` and I had a separate
 `coolLib.d.ts` file that I wanted to use, I would import it like this:
 
 ```ts
-// @deno-types="./coolLib.d.ts"
+// @ts-types="./coolLib.d.ts"
 import * as coolLib from "./coolLib.js";
 ```
 
@@ -56,24 +56,27 @@ The pattern matching for the compiler hint is somewhat forgiving and will accept
 quoted and non-question values for the specifier as well as accepting whitespace
 before and after the equals sign.
 
+> ℹ️ _Note_: The directive `@deno-types` can be used as an alias for `@ts-types`.
+> This is not recommended anymore.
+
 ## Providing types when hosting
 
 If you are in control of the source code of the module, or you are in control of
 how the file is hosted on a web server, there are two ways to inform Deno of the
 types for a given module, without requiring the importer to do anything special.
 
-### Using the triple-slash reference directive
+### Using `@ts-self-types` pragma
 
-Deno supports using the triple-slash reference `types` directive, which adopts
-the reference comment used by TypeScript in TypeScript files to _include_ other
-files and applies it only to JavaScript files.
+If you are providing a JavaScript file, and want to provide a declaration file
+that contains the types for this file, you can specify a `@ts-self-types`
+directive in the JS file, pointing to the declaration file.
 
 For example, if I had created `coolLib.js` and along side of it I had created my
 type definitions for my library in `coolLib.d.ts` I could do the following in
 the `coolLib.js` file:
 
 ```js
-/// <reference types="./coolLib.d.ts" />
+// @ts-self-types="./coolLib.d.ts"
 
 // ... the rest of the JavaScript ...
 ```
@@ -82,10 +85,12 @@ When Deno encounters this directive, it would resolve the `./coolLib.d.ts` file
 and use that instead of the JavaScript file when TypeScript was type checking
 the file, but still load the JavaScript file when running the program.
 
-> ℹ️ _Note_ this is a repurposed directive for TypeScript that only applies to
-> JavaScript files. Using the triple-slash reference directive of `types` in a
-> TypeScript file works under Deno as well, but has essentially the same
-> behavior as the `path` directive.
+> ℹ️ _Note_: Instead of `@ts-self-types`, a triple slash directive in the form of
+> `/// <reference types="./coolLib.d.ts" />` can be used. This is not
+> recommended anymore. This is a repurposed directive for TypeScript that only
+> applies to JavaScript files. Using the triple-slash reference directive of
+> `types` in a TypeScript file works under Deno as well, but has essentially the
+> same behavior as the `path` directive.
 
 ### Using X-TypeScript-Types header
 
@@ -128,8 +133,8 @@ include arbitrary type definitions when type checking programmes.
 ### Using a triple-slash directive
 
 This option couples the type definitions to the code itself. By adding a
-triple-slash `types` directive near the type of a module, type checking the file
-will include the type definition. For example:
+triple-slash `types` directive in a TS file (not a JS file!), near the type of a
+module, type checking the file will include the type definition. For example:
 
 ```ts
 /// <reference types="./types.d.ts" />

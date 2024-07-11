@@ -10,18 +10,46 @@ Chrome DevTools or other clients that support the protocol (for example VSCode).
 To activate debugging capabilities run Deno with the `--inspect`,
 `--inspect-wait` or `--inspect-brk` flags.
 
-The `--inspect` flag allows attaching the debugger at any point in time,
-`--inspect-wait` will wait for debugger to attach and start executing code,
-while `--inspect-brk` will wait for the debugger to attach and will pause
-execution on the first line of code.
+## --inspect
 
-> ⚠️ If you use `--inspect` flag, the code will start executing immediately. If
-> your program is short, you might not have enough time to connect the debugger
-> before the program finishes execution. In such cases, try running with
-> `--inspect-wait` or `--inspect-brk` flag instead, or add a timeout at the end
-> of your code.
+Using the `--inspect` flag will start your program with an inspector server
+which can be connected to with a client that supports the V8 Inspector Protocol,
+for example Chrome DevTools. Visit `chrome://inspect` in a Chromium derived
+browser to connect Deno to the inspector server. This allows you to inspect your
+code, add breakpoints, and step through your code.
 
-## Chrome Devtools
+```shell
+deno run --inspect your_script.ts
+```
+
+> ⚠️ If you use the `--inspect` flag, the code will start executing immediately.
+> If your program is short, you might not have enough time to connect the
+> debugger before the program finishes execution. In such cases, try running
+> with `--inspect-wait` or `--inspect-brk` flag instead, or add a timeout at the
+> end of your code.
+
+## --inspect-wait
+
+Before running the code, the `--inspect-wait` flag will pause execution until a
+debugger is attached.
+
+```shell
+deno run --inspect-wait your_script.ts
+```
+
+## --inspect-brk
+
+The `--inspect-brk` flag will pause execution on the first line of the program.
+This will freeze your program as soon as you connect, allowing you to add
+additional breakpoints or evaluate expressions before resuming execution. **This
+is the most commonly used inspect flag**. JetBrains and VSCode IDEs use this
+flag by default.
+
+```shell
+deno run --inspect-brk your_script.ts
+```
+
+## Example with Chrome DevTools
 
 Let's try debugging a program using Chrome Devtools. For this, we'll use
 [file_server.ts](https://deno.land/std/http/file_server.ts) from `std`, a static
@@ -77,7 +105,7 @@ button to do so. You might even need to hit it twice!
 Once our script is running, try send a request and inspect it in Devtools:
 
 ```console
-$ curl http://0.0.0.0:4507/
+curl http://0.0.0.0:4507/
 ```
 
 ![Break in request handling](../images/debugger5.jpg)
@@ -107,7 +135,30 @@ This will create a run/debug configuration with no permission flags set. If you
 want to configure them, open your run/debug configuration and add the required
 flags to the `Command` field.
 
-## Other
+## --log-level=debug
 
-Any client that implements the DevTools protocol should be able to connect to a
-Deno process.
+If you're having trouble connecting to the inspector, you can use the
+`--log-level=debug` flag to get more information about what's happening. This
+will show you information like module resolution, network requests, and other
+permission checks.
+
+```shell
+deno run --inspect-brk --log-level=debug your_script.ts
+```
+
+## --strace-ops
+
+Deno ops are an [RPC](https://en.wikipedia.org/wiki/Remote_procedure_call)
+mechanism between JavaScript and Rust. They provide functionality like file I/O,
+networking, and timers to JavaScript. The `--strace-ops` flag will print out all
+ops that are being executed by Deno when a program is run along with their
+timings.
+
+```shell
+deno run --strace-ops your_script.ts
+```
+
+Each op should have a `Dispatch` and a `Complete` event. The time between these
+two events is the time taken to execute the op. This flag can be useful for
+performance profiling, debugging hanging programs, or understanding how Deno
+works under the hood.
