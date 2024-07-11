@@ -151,7 +151,7 @@ body:not(:has(.ddoc)) {
 }
 
 .markdown-body .admonition.note {
-  @apply bg-primary/5 border-blue-700/50 text-blue-800;
+  @apply bg-primary/5 border-blue-900/50 text-blue-900;
 }
 
 .markdown-body .admonition.caution {
@@ -164,7 +164,7 @@ body:not(:has(.ddoc)) {
 
 .markdown-body .admonition.info .title::before {
   /* circle exclamation mark */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(30 58 138)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(29 78 216)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></svg>');
 }
 
 .markdown-body .admonition.note .title::before {
