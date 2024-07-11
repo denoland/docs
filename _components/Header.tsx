@@ -1,9 +1,9 @@
 export default function Header({
   url,
-  hassidebar,
+  hasSidebar,
 }: {
   url: string;
-  hassidebar?: boolean;
+  hasSidebar?: boolean;
 }) {
   const reference = url.startsWith("/api");
   return (
@@ -14,7 +14,7 @@ export default function Header({
     >
       <nav class="px-4 md:px-6 py-3 h-16 flex items-center justify-between">
         <div class="flex items-center">
-          {hassidebar && (
+          {hasSidebar && (
             <button class="mr-2 lg:hidden" id="sidebar-open">
               <svg
                 width="30"
