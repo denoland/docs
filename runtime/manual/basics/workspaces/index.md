@@ -114,83 +114,87 @@ packages in a single workspace.
 ### Migrating from `npm` workspaces
 
 Deno workspaces support using a Deno-first package from an existing npm package.
-In this example, we mix and match a Deno library called `fizz`, with a Node.js
-library called `buzz` that we developed a couple years back.
+In this example, we mix and match a Deno library called `@deno/hi`, with a
+Node.js library called `@deno/log` that we developed a couple years back.
 
 We'll need to include a `deno.json` configuration file in the root:
 
-```js, title="deno.json"
+```json, title="deno.json"
 {
-  "nodeModulesDir": true,
-  "workspace": ["fizz", "buzz"]
+  "workspace": {
+    "members": ["hi"]
+  }
 }
 ```
 
-Note that with `nodeModulesDir` being set to `true`, we specified want to keep
-using `node_modules/`.
+Alongside our existing package.json workspace:
 
-In `fizz`, our Deno-first package:
-
-```js, title="fizz/deno.json"
+```json, title="package.json"
 {
-  "name": "@deno-workspace/fizz",
-  "version": "0.2.0",
-  "exports": "./mod.ts"
+  "workspaces": ["log"]
 }
 ```
 
-```js, title="fizz/mod.ts"
-export function logProject(project) {
-  console.log(project);
-}
-```
+The workspace currently has a log npm package:
 
-And in `buzz`, our legacy Node.js package:
-
-```js, title="buzz/package.json"
+```json, title="log/package.json"
 {
-  "name": "@deno-workspace/buzz",
+  "name": "@deno/log",
   "version": "0.5.0",
   "type": "module",
-  "main": "index.js",
-  "dependencies": {
-    "ts-morph": "*"
+  "main": "index.js"
+}
+```
+
+```js, title="log/index.js"
+export function log(output) {
+  console.log(output);
+}
+```
+
+Let's create an `@deno/hi` Deno-first package that imports `@deno/log`:
+
+```json, title="hi/deno.json"
+{
+  "name": "@deno/hi",
+  "version": "0.2.0",
+  "exports": "./mod.ts",
+  "imports": {
+    "log": "npm:@deno/log@^0.5"
   }
 }
 ```
 
-```js, title="buzz/index.json"
-import { Project } from "ts-morph";
-import { createProject } from "@deno-workspace/fizz";
+```ts, title="hi/mod.ts"
+import { log } from "log";
 
-function createProject() {
-  return new Project();
+export function sayHiTo(name: string) {
+  log(`Hi, ${name}!`);
 }
-
-const project = createProject();
-logProject(project);
 ```
 
-Now, when we run `buzz/main.ts`, we should see the output:
+Now, we can write a `main.ts` file that imports and calls `hi`:
+
+```ts, title="main.ts"
+import { sayHiTo } from "@deno/hi";
+
+sayHiTo("friend");
+```
 
 ```
-$ deno run -A buzz/main.ts
-Project {
-  _context: ProjectContext {
-    logger: ConsoleLogger {},
-    ...
-  }
-}
+$ deno run main.ts
+Hi, friend!
 ```
 
 You can even have both `deno.json` and `package.json` in your existing Node.js
-package. That allows you to gradually migrate to Deno, without putting a lot of
-upfront work.
+package. Additionally, you could remove the package.json in the root and specify
+the npm package in the deno.json workspace members. That allows you to gradually
+migrate to Deno, without putting a lot of upfront work.
 
-For example, you can add `buzz/deno.json` like to to configure Deno's linter and
+For example, you can add `log/deno.json` like to to configure Deno's linter and
 formatter:
 
-```json
+```jsonc
 {
   "fmt": {
     "semiColons": false
@@ -203,9 +207,9 @@ formatter:
 }
 ```
 
-Running `deno fmt` in the workspace, will format `buzz` package to not have any
-semicolons, and `deno lint` won't complain if you leave an unused var in one of
-the source files.
+Running `deno fmt` in the workspace, will format the `log` package to not have
+any semicolons, and `deno lint` won't complain if you leave an unused var in one
+of the source files.
 
 ## Configuring built-in Deno tools
 
@@ -256,13 +260,3 @@ root and its members:
 | version            | ❌        | ✅      |                                                                                                                                                                                                                                                                                        |
 | exports            | ❌        | ✅      |                                                                                                                                                                                                                                                                                        |
 | workspace          | ✅        | ❌      | Nested workspaces are not supported.                                                                                                                                                                                                                                                   |
-
-### Specyfing workspace configuration
-
-```
-{
-    "workspace": {
-        "members": ["foo", "bar"]
-    }
-}
-```
