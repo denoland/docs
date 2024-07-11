@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/tutorial-dynamodb",
+  "id": "tutorials/tutorial-dynamodb",
+  "title": "API server with DynamoDB",
+  "description": "In this tutorial let's take a look at how we can use it to build a small API",
+  "source": "@site/deploy/tutorials/tutorial-dynamodb.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/tutorial-dynamodb",
+  "permalink": "/deploy/tutorials/tutorial-dynamodb",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployTutorialsHome",
+  "previous": {
+    "title": "Build a blog with Fresh",
+    "permalink": "/deploy/tutorials/tutorial-blog-fresh"
+  },
+  "next": {
+    "title": "API server with FaunaDB",
+    "permalink": "/deploy/tutorials/tutorial-faunadb"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/playgrounds",
+  "id": "manual/playgrounds",
+  "title": "Playgrounds",
+  "description": "Playgrounds are an easy way to play around with Deno Deploy, and to create",
+  "source": "@site/deploy/manual/playgrounds.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/playgrounds",
+  "permalink": "/deploy/manual/playgrounds",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployGuideHome",
+  "previous": {
+    "title": "Deno Deploy Use Cases",
+    "permalink": "/deploy/manual/use-cases"
+  },
+  "next": {
+    "title": "Deploy with GitHub integration",
+    "permalink": "/deploy/manual/how-to-deploy"
+  }
+}

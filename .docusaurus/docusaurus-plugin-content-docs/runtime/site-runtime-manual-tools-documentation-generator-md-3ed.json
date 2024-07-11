@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/tools/documentation_generator",
+  "id": "manual/tools/documentation_generator",
+  "title": "Documentation Generator",
+  "description": "deno doc followed by a list of one or more source files will print the JSDoc",
+  "source": "@site/runtime/manual/tools/documentation_generator.md",
+  "sourceDirName": "manual/tools",
+  "slug": "/manual/tools/documentation_generator",
+  "permalink": "/runtime/manual/tools/documentation_generator",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Dependency Inspector",
+    "permalink": "/runtime/manual/tools/dependency_inspector"
+  },
+  "next": {
+    "title": "Code Formatter",
+    "permalink": "/runtime/manual/tools/formatter"
+  }
+}

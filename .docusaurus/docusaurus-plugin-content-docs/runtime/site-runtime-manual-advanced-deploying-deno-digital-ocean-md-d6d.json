@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/deploying_deno/digital_ocean",
+  "id": "manual/advanced/deploying_deno/digital_ocean",
+  "title": "How to Deploy Deno to Digital Ocean",
+  "description": "Digital Ocean is a popular cloud infrastructure provider offering a variety of",
+  "source": "@site/runtime/manual/advanced/deploying_deno/digital_ocean.md",
+  "sourceDirName": "manual/advanced/deploying_deno",
+  "slug": "/manual/advanced/deploying_deno/digital_ocean",
+  "permalink": "/runtime/manual/advanced/deploying_deno/digital_ocean",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Deploying Deno to Cloudflare Workers",
+    "permalink": "/runtime/manual/advanced/deploying_deno/cloudflare_workers"
+  },
+  "next": {
+    "title": "How to Deploy to Google Cloud Run",
+    "permalink": "/runtime/manual/advanced/deploying_deno/google_cloud_run"
+  }
+}

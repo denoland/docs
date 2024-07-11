@@ -1,0 +1,23 @@
+{
+  "unversionedId": "api/rest/deployments",
+  "id": "api/rest/deployments",
+  "title": "Deployments",
+  "description": "A deployment is a container for assets, environment variables, compiler options,",
+  "source": "@site/deploy/api/rest/deployments.md",
+  "sourceDirName": "api/rest",
+  "slug": "/api/rest/deployments",
+  "permalink": "/deploy/api/rest/deployments",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployAPIHome",
+  "previous": {
+    "title": "Projects",
+    "permalink": "/deploy/api/rest/projects"
+  },
+  "next": {
+    "title": "Domains",
+    "permalink": "/deploy/api/rest/domains"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/embedding_deno",
+  "id": "manual/advanced/embedding_deno",
+  "title": "Embedding Deno",
+  "description": "Deno consists of multiple parts, one of which is deno_core. This is a Rust",
+  "source": "@site/runtime/manual/advanced/embedding_deno.md",
+  "sourceDirName": "manual/advanced",
+  "slug": "/manual/advanced/embedding_deno",
+  "permalink": "/runtime/manual/advanced/embedding_deno",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Continuous Integration",
+    "permalink": "/runtime/manual/advanced/continuous_integration"
+  },
+  "next": {
+    "title": "Overview of TypeScript in Deno",
+    "permalink": "/runtime/manual/advanced/typescript/overview"
+  }
+}

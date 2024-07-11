@@ -1,0 +1,14 @@
+{
+  "unversionedId": "manual/references/index",
+  "id": "manual/references/index",
+  "title": "References",
+  "description": "This chapter contains links to reference manuals and sheets, including:",
+  "source": "@site/runtime/manual/references/index.md",
+  "sourceDirName": "manual/references",
+  "slug": "/manual/references/",
+  "permalink": "/runtime/manual/references/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

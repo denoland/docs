@@ -1,0 +1,19 @@
+{
+  "unversionedId": "tutorials/vite",
+  "id": "tutorials/vite",
+  "title": "Deploy a React app with Vite",
+  "description": "This tutorial covers how to deploy a Vite Deno and React app on Deno Deploy.",
+  "source": "@site/deploy/tutorials/vite.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/vite",
+  "permalink": "/deploy/tutorials/vite",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployTutorialsHome",
+  "previous": {
+    "title": "Use Wordpress as a headless CMS",
+    "permalink": "/deploy/tutorials/tutorial-wordpress-frontend"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "unversionedId": "manual/node/how_to_with_npm/redis",
+  "id": "manual/node/how_to_with_npm/redis",
+  "title": "How to Use Redis with Deno",
+  "description": "Redis is an in-memory data store you can use for caching,",
+  "source": "@site/runtime/manual/node/how_to_with_npm/redis.md",
+  "sourceDirName": "manual/node/how_to_with_npm",
+  "slug": "/manual/node/how_to_with_npm/redis",
+  "permalink": "/runtime/manual/node/how_to_with_npm/redis",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

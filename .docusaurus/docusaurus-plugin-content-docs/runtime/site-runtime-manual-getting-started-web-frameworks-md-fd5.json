@@ -1,0 +1,25 @@
+{
+  "unversionedId": "manual/getting_started/web_frameworks",
+  "id": "manual/getting_started/web_frameworks",
+  "title": "Web Frameworks",
+  "description": "Most likely, if you're building a more complex application, you'll be",
+  "source": "@site/runtime/manual/getting_started/web_frameworks.md",
+  "sourceDirName": "manual/getting_started",
+  "slug": "/manual/getting_started/web_frameworks",
+  "permalink": "/runtime/manual/getting_started/web_frameworks",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "pagination_next": "manual/basics/permissions"
+  },
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Configuration File",
+    "permalink": "/runtime/manual/getting_started/configuration_file"
+  },
+  "next": {
+    "title": "Permissions",
+    "permalink": "/runtime/manual/basics/permissions"
+  }
+}

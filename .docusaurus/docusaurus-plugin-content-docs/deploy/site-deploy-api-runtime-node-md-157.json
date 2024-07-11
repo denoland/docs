@@ -1,0 +1,23 @@
+{
+  "unversionedId": "api/runtime-node",
+  "id": "api/runtime-node",
+  "title": "Node.js built-in APIs",
+  "description": "Deno Deploy natively supports importing built-in Node.js modules like fs,",
+  "source": "@site/deploy/api/runtime-node.md",
+  "sourceDirName": "api",
+  "slug": "/api/runtime-node",
+  "permalink": "/deploy/api/runtime-node",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployAPIHome",
+  "previous": {
+    "title": "File system APIs",
+    "permalink": "/deploy/api/runtime-fs"
+  },
+  "next": {
+    "title": "Compressing response bodies",
+    "permalink": "/deploy/api/compression"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/unix_cat",
+  "id": "tutorials/unix_cat",
+  "title": "An Implementation of the Unix \"cat\" Program",
+  "description": "Concepts",
+  "source": "@site/runtime/tutorials/unix_cat.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/unix_cat",
+  "permalink": "/runtime/tutorials/unix_cat",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeTutorialsHome",
+  "previous": {
+    "title": "Making Scripts Executable With a Hashbang (Shebang)",
+    "permalink": "/runtime/tutorials/hashbang"
+  },
+  "next": {
+    "title": "Simple HTTP Web Server",
+    "permalink": "/runtime/tutorials/http_server"
+  }
+}

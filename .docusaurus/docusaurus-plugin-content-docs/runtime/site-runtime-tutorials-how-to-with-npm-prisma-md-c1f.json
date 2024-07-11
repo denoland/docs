@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/how_to_with_npm/prisma",
+  "id": "tutorials/how_to_with_npm/prisma",
+  "title": "How to create a RESTful API with Prisma and Oak",
+  "description": "Prisma has been one of our top requested modules to work",
+  "source": "@site/runtime/tutorials/how_to_with_npm/prisma.md",
+  "sourceDirName": "tutorials/how_to_with_npm",
+  "slug": "/tutorials/how_to_with_npm/prisma",
+  "permalink": "/runtime/tutorials/how_to_with_npm/prisma",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeTutorialsHome",
+  "previous": {
+    "title": "How to use Planetscale with Deno",
+    "permalink": "/runtime/tutorials/how_to_with_npm/planetscale"
+  },
+  "next": {
+    "title": "How to use React with Deno",
+    "permalink": "/runtime/tutorials/how_to_with_npm/react"
+  }
+}

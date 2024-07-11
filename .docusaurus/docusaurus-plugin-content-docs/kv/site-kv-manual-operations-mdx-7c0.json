@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/operations",
+  "id": "manual/operations",
+  "title": "Operations",
+  "description": "The Deno KV API provides a set of operations that can be performed on the key",
+  "source": "@site/kv/manual/operations.mdx",
+  "sourceDirName": "manual",
+  "slug": "/manual/operations",
+  "permalink": "/kv/manual/operations",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "kvGuideHome",
+  "previous": {
+    "title": "Key Space",
+    "permalink": "/kv/manual/key_space"
+  },
+  "next": {
+    "title": "Key Expiration",
+    "permalink": "/kv/manual/key_expiration"
+  }
+}

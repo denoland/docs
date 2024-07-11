@@ -1,0 +1,20 @@
+{
+  "unversionedId": "index",
+  "id": "index",
+  "title": "Quick Start",
+  "description": "This guide will take you from setting up a Deno Deploy account to deploying your",
+  "source": "@site/deploy/index.md",
+  "sourceDirName": ".",
+  "slug": "/",
+  "permalink": "/deploy/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "sidebar_label": "Quick Start",
+    "displayed_sidebar": "deploy"
+  },
+  "sidebar": "deploy"
+}

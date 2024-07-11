@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/tools/repl",
+  "id": "manual/tools/repl",
+  "title": "Read-Eval-Print-Loop",
+  "description": "deno repl starts a read-eval-print-loop, which lets you interactively build up",
+  "source": "@site/runtime/manual/tools/repl.md",
+  "sourceDirName": "manual/tools",
+  "slug": "/manual/tools/repl",
+  "permalink": "/runtime/manual/tools/repl",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Linter",
+    "permalink": "/runtime/manual/tools/linter"
+  },
+  "next": {
+    "title": "Script Installer",
+    "permalink": "/runtime/manual/tools/script_installer"
+  }
+}

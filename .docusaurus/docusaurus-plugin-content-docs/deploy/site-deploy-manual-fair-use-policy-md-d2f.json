@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/fair-use-policy",
+  "id": "manual/fair-use-policy",
+  "title": "Fair use policy",
+  "description": "The public beta for the Deno Deploy service includes resources (CPU time,",
+  "source": "@site/deploy/manual/fair-use-policy.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/fair-use-policy",
+  "permalink": "/deploy/manual/fair-use-policy",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployGuideHome",
+  "previous": {
+    "title": "Projects and deployments",
+    "permalink": "/deploy/manual/subhosting/projects_and_deployments"
+  },
+  "next": {
+    "title": "Deno Privacy Policy",
+    "permalink": "/deploy/manual/privacy-policy"
+  }
+}

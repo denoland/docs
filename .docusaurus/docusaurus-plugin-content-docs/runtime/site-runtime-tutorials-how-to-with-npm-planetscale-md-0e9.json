@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/how_to_with_npm/planetscale",
+  "id": "tutorials/how_to_with_npm/planetscale",
+  "title": "How to use Planetscale with Deno",
+  "description": "Planetscale is a MySQL-compatible serverless database that is designed with a",
+  "source": "@site/runtime/tutorials/how_to_with_npm/planetscale.md",
+  "sourceDirName": "tutorials/how_to_with_npm",
+  "slug": "/tutorials/how_to_with_npm/planetscale",
+  "permalink": "/runtime/tutorials/how_to_with_npm/planetscale",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeTutorialsHome",
+  "previous": {
+    "title": "How to use MySQL2 with Deno",
+    "permalink": "/runtime/tutorials/how_to_with_npm/mysql2"
+  },
+  "next": {
+    "title": "How to create a RESTful API with Prisma and Oak",
+    "permalink": "/runtime/tutorials/how_to_with_npm/prisma"
+  }
+}

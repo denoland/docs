@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/references/contributing/release_schedule",
+  "id": "manual/references/contributing/release_schedule",
+  "title": "Release Schedule",
+  "description": "A new minor release for the deno cli is released every month, on the third",
+  "source": "@site/runtime/manual/references/contributing/release_schedule.md",
+  "sourceDirName": "manual/references/contributing",
+  "slug": "/manual/references/contributing/release_schedule",
+  "permalink": "/runtime/manual/references/contributing/release_schedule",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Profiling",
+    "permalink": "/runtime/manual/references/contributing/profiling"
+  },
+  "next": {
+    "title": "Deno Style Guide",
+    "permalink": "/runtime/manual/references/contributing/style_guide"
+  }
+}

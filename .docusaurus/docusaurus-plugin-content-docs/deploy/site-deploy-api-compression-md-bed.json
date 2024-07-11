@@ -1,0 +1,23 @@
+{
+  "unversionedId": "api/compression",
+  "id": "api/compression",
+  "title": "Compressing response bodies",
+  "description": "Compressing the response body to save bandwidth is a common practice. To take",
+  "source": "@site/deploy/api/compression.md",
+  "sourceDirName": "api",
+  "slug": "/api/compression",
+  "permalink": "/deploy/api/compression",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployAPIHome",
+  "previous": {
+    "title": "Node.js built-in APIs",
+    "permalink": "/deploy/api/runtime-node"
+  },
+  "next": {
+    "title": "TCP sockets and TLS",
+    "permalink": "/deploy/api/runtime-sockets"
+  }
+}

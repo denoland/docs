@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/jsx_dom/overview",
+  "id": "manual/advanced/jsx_dom/overview",
+  "title": "Overview of JSX and DOM in Deno",
+  "description": "One of the common use cases for Deno is to handle workloads as part of web",
+  "source": "@site/runtime/manual/advanced/jsx_dom/overview.md",
+  "sourceDirName": "manual/advanced/jsx_dom",
+  "slug": "/manual/advanced/jsx_dom/overview",
+  "permalink": "/runtime/manual/advanced/jsx_dom/overview",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Helpful Resources",
+    "permalink": "/runtime/manual/runtime/webassembly/wasm_resources"
+  },
+  "next": {
+    "title": "Configuring JSX in Deno",
+    "permalink": "/runtime/manual/advanced/jsx_dom/jsx"
+  }
+}

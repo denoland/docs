@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/queue_overview",
+  "id": "manual/queue_overview",
+  "title": "Using Queues",
+  "description": "The Deno runtime includes a queueing API that supports offloading larger",
+  "source": "@site/kv/manual/queue_overview.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/queue_overview",
+  "permalink": "/kv/manual/queue_overview",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "kvGuideHome",
+  "previous": {
+    "title": "Transactions",
+    "permalink": "/kv/manual/transactions"
+  },
+  "next": {
+    "title": "Scheduling cron tasks",
+    "permalink": "/kv/manual/cron"
+  }
+}

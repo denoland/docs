@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/env_variables",
+  "id": "manual/basics/env_variables",
+  "title": "Environment variables",
+  "description": "There are a few ways to use environment variables in Deno:",
+  "source": "@site/runtime/manual/basics/env_variables.md",
+  "sourceDirName": "manual/basics",
+  "slug": "/manual/basics/env_variables",
+  "permalink": "/runtime/manual/basics/env_variables",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Import Maps",
+    "permalink": "/runtime/manual/basics/import_maps"
+  },
+  "next": {
+    "title": "Debugging Your Code",
+    "permalink": "/runtime/manual/basics/debugging_your_code"
+  }
+}

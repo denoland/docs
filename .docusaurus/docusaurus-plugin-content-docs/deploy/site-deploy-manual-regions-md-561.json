@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/regions",
+  "id": "manual/regions",
+  "title": "Regions",
+  "description": "Deno Deploy deploys your code throughout the world. Each new request is served",
+  "source": "@site/deploy/manual/regions.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/regions",
+  "permalink": "/deploy/manual/regions",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployGuideHome",
+  "previous": {
+    "title": "Using deployctl on the command line",
+    "permalink": "/deploy/manual/deployctl"
+  },
+  "next": {
+    "title": "Pricing and limitations",
+    "permalink": "/deploy/manual/pricing-and-limits"
+  }
+}

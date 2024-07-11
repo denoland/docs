@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/debugging_your_code",
+  "id": "manual/basics/debugging_your_code",
+  "title": "Debugging Your Code",
+  "description": "Deno supports the V8 Inspector Protocol used by",
+  "source": "@site/runtime/manual/basics/debugging_your_code.md",
+  "sourceDirName": "manual/basics",
+  "slug": "/manual/basics/debugging_your_code",
+  "permalink": "/runtime/manual/basics/debugging_your_code",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Environment variables",
+    "permalink": "/runtime/manual/basics/env_variables"
+  },
+  "next": {
+    "title": "Connecting to databases",
+    "permalink": "/runtime/manual/basics/connecting_to_databases"
+  }
+}

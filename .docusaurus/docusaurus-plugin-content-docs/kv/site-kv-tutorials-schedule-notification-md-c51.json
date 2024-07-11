@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/schedule_notification",
+  "id": "tutorials/schedule_notification",
+  "title": "Schedule a notification for a future date",
+  "description": "A common use case for queues is scheduling work",
+  "source": "@site/kv/tutorials/schedule_notification.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/schedule_notification",
+  "permalink": "/kv/tutorials/schedule_notification",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "kvTutorialsHome",
+  "previous": {
+    "title": "Deno KV Tutorials & Examples",
+    "permalink": "/kv/tutorials/"
+  },
+  "next": {
+    "title": "Offload webhook processing to a queue",
+    "permalink": "/kv/tutorials/webhook_processor"
+  }
+}

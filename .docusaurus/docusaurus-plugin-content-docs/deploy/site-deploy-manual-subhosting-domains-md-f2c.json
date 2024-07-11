@@ -1,0 +1,14 @@
+{
+  "unversionedId": "manual/subhosting/domains",
+  "id": "manual/subhosting/domains",
+  "title": "Working with custom domains",
+  "description": "TODO - talk about provisioning domains and associating them with deployments.",
+  "source": "@site/deploy/manual/subhosting/domains.md",
+  "sourceDirName": "manual/subhosting",
+  "slug": "/manual/subhosting/domains",
+  "permalink": "/deploy/manual/subhosting/domains",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

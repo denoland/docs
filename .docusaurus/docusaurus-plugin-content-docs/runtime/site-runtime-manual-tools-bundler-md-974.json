@@ -1,0 +1,14 @@
+{
+  "unversionedId": "manual/tools/bundler",
+  "id": "manual/tools/bundler",
+  "title": "Bundling static assets (deprecated)",
+  "description": "deno bundle has been deprecated and will be removed in some future release.",
+  "source": "@site/runtime/manual/tools/bundler.md",
+  "sourceDirName": "manual/tools",
+  "slug": "/manual/tools/bundler",
+  "permalink": "/runtime/manual/tools/bundler",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

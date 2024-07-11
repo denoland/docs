@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/key_space",
+  "id": "manual/key_space",
+  "title": "Key Space",
+  "description": "Deno KV is a key value store. The key space is a flat namespace of",
+  "source": "@site/kv/manual/key_space.mdx",
+  "sourceDirName": "manual",
+  "slug": "/manual/key_space",
+  "permalink": "/kv/manual/key_space",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "kvGuideHome",
+  "previous": {
+    "title": "Deno KV Quick Start",
+    "permalink": "/kv/manual/"
+  },
+  "next": {
+    "title": "Operations",
+    "permalink": "/kv/manual/operations"
+  }
+}

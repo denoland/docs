@@ -1,0 +1,23 @@
+{
+  "unversionedId": "api/rest/index",
+  "id": "api/rest/index",
+  "title": "Deno Deploy REST API",
+  "description": "Developers can provision projects, domains, KV databases, and other resources",
+  "source": "@site/deploy/api/rest/index.md",
+  "sourceDirName": "api/rest",
+  "slug": "/api/rest/",
+  "permalink": "/deploy/api/rest/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployAPIHome",
+  "previous": {
+    "title": "HTTP Headers",
+    "permalink": "/deploy/api/runtime-headers"
+  },
+  "next": {
+    "title": "Organizations",
+    "permalink": "/deploy/api/rest/organizations"
+  }
+}

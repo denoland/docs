@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/static-site",
+  "id": "tutorials/static-site",
+  "title": "Deploy a static site",
+  "description": "This tutorial will cover how to deploy a static site (no JavaScript) on Deno",
+  "source": "@site/deploy/tutorials/static-site.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/static-site",
+  "permalink": "/deploy/tutorials/static-site",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployTutorialsHome",
+  "previous": {
+    "title": "Simple API server",
+    "permalink": "/deploy/tutorials/simple-api"
+  },
+  "next": {
+    "title": "Build a blog with Fresh",
+    "permalink": "/deploy/tutorials/tutorial-blog-fresh"
+  }
+}

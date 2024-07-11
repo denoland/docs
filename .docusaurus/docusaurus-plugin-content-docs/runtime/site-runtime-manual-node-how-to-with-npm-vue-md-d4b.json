@@ -1,0 +1,14 @@
+{
+  "unversionedId": "manual/node/how_to_with_npm/vue",
+  "id": "manual/node/how_to_with_npm/vue",
+  "title": "How to use Vue with Deno",
+  "description": "Vue is a progressive front-end JavaScript framework, built",
+  "source": "@site/runtime/manual/node/how_to_with_npm/vue.md",
+  "sourceDirName": "manual/node/how_to_with_npm",
+  "slug": "/manual/node/how_to_with_npm/vue",
+  "permalink": "/runtime/manual/node/how_to_with_npm/vue",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

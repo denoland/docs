@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/node/package_json",
+  "id": "manual/node/package_json",
+  "title": "package.json compatibility",
+  "description": "Deno supports resolving dependencies based on a package.json file in the",
+  "source": "@site/runtime/manual/node/package_json.md",
+  "sourceDirName": "manual/node",
+  "slug": "/manual/node/package_json",
+  "permalink": "/runtime/manual/node/package_json",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "node: specifiers",
+    "permalink": "/runtime/manual/node/node_specifiers"
+  },
+  "next": {
+    "title": "npm via CDNs",
+    "permalink": "/runtime/manual/node/cdns"
+  }
+}

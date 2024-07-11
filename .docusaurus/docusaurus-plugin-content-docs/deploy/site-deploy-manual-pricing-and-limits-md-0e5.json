@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/pricing-and-limits",
+  "id": "manual/pricing-and-limits",
+  "title": "Pricing and limitations",
+  "description": "Please see our pricing page for the",
+  "source": "@site/deploy/manual/pricing-and-limits.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/pricing-and-limits",
+  "permalink": "/deploy/manual/pricing-and-limits",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployGuideHome",
+  "previous": {
+    "title": "Regions",
+    "permalink": "/deploy/manual/regions"
+  },
+  "next": {
+    "title": "Deployments",
+    "permalink": "/deploy/manual/deployments"
+  }
+}

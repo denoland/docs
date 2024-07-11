@@ -1,0 +1,14 @@
+{
+  "unversionedId": "manual/getting_started/index",
+  "id": "manual/getting_started/index",
+  "title": "Getting Started",
+  "description": "In this chapter we'll discuss:",
+  "source": "@site/runtime/manual/getting_started/index.md",
+  "sourceDirName": "manual/getting_started",
+  "slug": "/manual/getting_started/",
+  "permalink": "/runtime/manual/getting_started/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

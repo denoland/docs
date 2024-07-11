@@ -1,0 +1,14 @@
+{
+  "unversionedId": "manual/middleware",
+  "id": "manual/middleware",
+  "title": "Reverse proxy middleware",
+  "description": "This quickstart will cover how to deploy a small piece of middleware that",
+  "source": "@site/deploy/manual/middleware.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/middleware",
+  "permalink": "/deploy/manual/middleware",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

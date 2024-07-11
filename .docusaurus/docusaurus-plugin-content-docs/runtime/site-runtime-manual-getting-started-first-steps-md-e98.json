@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/getting_started/first_steps",
+  "id": "manual/getting_started/first_steps",
+  "title": "First Steps",
+  "description": "This page contains some examples to teach you about the fundamentals of Deno.",
+  "source": "@site/runtime/manual/getting_started/first_steps.md",
+  "sourceDirName": "manual/getting_started",
+  "slug": "/manual/getting_started/first_steps",
+  "permalink": "/runtime/manual/getting_started/first_steps",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Installation",
+    "permalink": "/runtime/manual/getting_started/installation"
+  },
+  "next": {
+    "title": "Set Up Your Environment",
+    "permalink": "/runtime/manual/getting_started/setup_your_environment"
+  }
+}

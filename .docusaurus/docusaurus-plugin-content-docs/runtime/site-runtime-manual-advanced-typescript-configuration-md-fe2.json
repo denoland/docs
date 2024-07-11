@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/typescript/configuration",
+  "id": "manual/advanced/typescript/configuration",
+  "title": "Configuring TypeScript in Deno",
+  "description": "TypeScript comes with a lot of different options that can be configured, but",
+  "source": "@site/runtime/manual/advanced/typescript/configuration.md",
+  "sourceDirName": "manual/advanced/typescript",
+  "slug": "/manual/advanced/typescript/configuration",
+  "permalink": "/runtime/manual/advanced/typescript/configuration",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Types and Type Declarations",
+    "permalink": "/runtime/manual/advanced/typescript/types"
+  },
+  "next": {
+    "title": "Migrating to and from JavaScript",
+    "permalink": "/runtime/manual/advanced/typescript/migration"
+  }
+}

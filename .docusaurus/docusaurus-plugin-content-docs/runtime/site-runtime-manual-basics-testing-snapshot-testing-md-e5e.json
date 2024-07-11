@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/testing/snapshot_testing",
+  "id": "manual/basics/testing/snapshot_testing",
+  "title": "Snapshot Testing",
+  "description": "The Deno standard library comes with a",
+  "source": "@site/runtime/manual/basics/testing/snapshot_testing.md",
+  "sourceDirName": "manual/basics/testing",
+  "slug": "/manual/basics/testing/snapshot_testing",
+  "permalink": "/runtime/manual/basics/testing/snapshot_testing",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Behavior-Driven Development",
+    "permalink": "/runtime/manual/basics/testing/behavior_driven_development"
+  },
+  "next": {
+    "title": "Using Visual Studio Code",
+    "permalink": "/runtime/manual/references/vscode_deno/"
+  }
+}

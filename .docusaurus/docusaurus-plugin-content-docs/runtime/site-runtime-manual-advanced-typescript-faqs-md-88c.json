@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/typescript/faqs",
+  "id": "manual/advanced/typescript/faqs",
+  "title": "FAQs about TypeScript in Deno",
+  "description": "Can I use TypeScript not written for Deno?",
+  "source": "@site/runtime/manual/advanced/typescript/faqs.md",
+  "sourceDirName": "manual/advanced/typescript",
+  "slug": "/manual/advanced/typescript/faqs",
+  "permalink": "/runtime/manual/advanced/typescript/faqs",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Migrating to and from JavaScript",
+    "permalink": "/runtime/manual/advanced/typescript/migration"
+  },
+  "next": {
+    "title": "Using WebAssembly",
+    "permalink": "/runtime/manual/runtime/webassembly/"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/modules/reloading_modules",
+  "id": "manual/basics/modules/reloading_modules",
+  "title": "Reloading Modules",
+  "description": "By default, a module in the cache will be reused without fetching or",
+  "source": "@site/runtime/manual/basics/modules/reloading_modules.md",
+  "sourceDirName": "manual/basics/modules",
+  "slug": "/manual/basics/modules/reloading_modules",
+  "permalink": "/runtime/manual/basics/modules/reloading_modules",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "ECMAScript Modules in Deno",
+    "permalink": "/runtime/manual/basics/modules/"
+  },
+  "next": {
+    "title": "Private Modules and Repositories",
+    "permalink": "/runtime/manual/basics/modules/private"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/read_write_files",
+  "id": "tutorials/read_write_files",
+  "title": "Read and Write Files",
+  "description": "Concepts",
+  "source": "@site/runtime/tutorials/read_write_files.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/read_write_files",
+  "permalink": "/runtime/tutorials/read_write_files",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeTutorialsHome",
+  "previous": {
+    "title": "Fetch Data",
+    "permalink": "/runtime/tutorials/fetch_data"
+  },
+  "next": {
+    "title": "Making Scripts Executable With a Hashbang (Shebang)",
+    "permalink": "/runtime/tutorials/hashbang"
+  }
+}

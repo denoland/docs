@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/tools/jupyter",
+  "id": "manual/tools/jupyter",
+  "title": "Jupyter Kernel for Deno",
+  "description": "Available since 1.37.0",
+  "source": "@site/runtime/manual/tools/jupyter.md",
+  "sourceDirName": "manual/tools",
+  "slug": "/manual/tools/jupyter",
+  "permalink": "/runtime/manual/tools/jupyter",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Starting a new project",
+    "permalink": "/runtime/manual/tools/init"
+  },
+  "next": {
+    "title": "Linter",
+    "permalink": "/runtime/manual/tools/linter"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/references/cheatsheet",
+  "id": "manual/references/cheatsheet",
+  "title": "Node.js -> Deno cheatsheet",
+  "description": "| Node.js                                | Deno                                           |",
+  "source": "@site/runtime/manual/references/cheatsheet.md",
+  "sourceDirName": "manual/references",
+  "slug": "/manual/references/cheatsheet",
+  "permalink": "/runtime/manual/references/cheatsheet",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Migrating from Node.js to Deno",
+    "permalink": "/runtime/manual/node/migrate"
+  },
+  "next": {
+    "title": "Node API Compatibility List",
+    "permalink": "/runtime/manual/node/compatibility"
+  }
+}

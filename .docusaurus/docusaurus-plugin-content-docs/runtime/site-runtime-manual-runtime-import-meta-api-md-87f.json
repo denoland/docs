@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/runtime/import_meta_api",
+  "id": "manual/runtime/import_meta_api",
+  "title": "import.meta API",
+  "description": "Deno supports a number of methods on the",
+  "source": "@site/runtime/manual/runtime/import_meta_api.md",
+  "sourceDirName": "manual/runtime",
+  "slug": "/manual/runtime/import_meta_api",
+  "permalink": "/runtime/manual/runtime/import_meta_api",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Permission APIs",
+    "permalink": "/runtime/manual/runtime/permission_apis"
+  },
+  "next": {
+    "title": "Foreign Function Interface",
+    "permalink": "/runtime/manual/runtime/ffi_api"
+  }
+}

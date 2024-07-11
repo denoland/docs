@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/modules/private",
+  "id": "manual/basics/modules/private",
+  "title": "Private Modules and Repositories",
+  "description": "There may be instances where you want to load a remote module that is located in",
+  "source": "@site/runtime/manual/basics/modules/private.md",
+  "sourceDirName": "manual/basics/modules",
+  "slug": "/manual/basics/modules/private",
+  "permalink": "/runtime/manual/basics/modules/private",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Reloading Modules",
+    "permalink": "/runtime/manual/basics/modules/reloading_modules"
+  },
+  "next": {
+    "title": "Proxies",
+    "permalink": "/runtime/manual/basics/modules/proxies"
+  }
+}

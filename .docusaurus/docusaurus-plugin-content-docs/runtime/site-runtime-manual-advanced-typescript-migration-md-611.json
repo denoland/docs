@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/typescript/migration",
+  "id": "manual/advanced/typescript/migration",
+  "title": "Migrating to and from JavaScript",
+  "description": "One of the advantages of Deno is that it treats TypeScript and JavaScript pretty",
+  "source": "@site/runtime/manual/advanced/typescript/migration.md",
+  "sourceDirName": "manual/advanced/typescript",
+  "slug": "/manual/advanced/typescript/migration",
+  "permalink": "/runtime/manual/advanced/typescript/migration",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Configuring TypeScript in Deno",
+    "permalink": "/runtime/manual/advanced/typescript/configuration"
+  },
+  "next": {
+    "title": "FAQs about TypeScript in Deno",
+    "permalink": "/runtime/manual/advanced/typescript/faqs"
+  }
+}

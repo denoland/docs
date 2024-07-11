@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/permissions",
+  "id": "manual/basics/permissions",
+  "title": "Permissions",
+  "description": "Deno is secure by default. Therefore, unless you specifically enable it, a",
+  "source": "@site/runtime/manual/basics/permissions.md",
+  "sourceDirName": "manual/basics",
+  "slug": "/manual/basics/permissions",
+  "permalink": "/runtime/manual/basics/permissions",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Web Frameworks",
+    "permalink": "/runtime/manual/getting_started/web_frameworks"
+  },
+  "next": {
+    "title": "Standard Library",
+    "permalink": "/runtime/manual/basics/standard_library"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/how-to-deploy",
+  "id": "manual/how-to-deploy",
+  "title": "Deploy with GitHub integration",
+  "description": "The simplest way to deploy more complex projects is via our Github integration.",
+  "source": "@site/deploy/manual/how-to-deploy.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/how-to-deploy",
+  "permalink": "/deploy/manual/how-to-deploy",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployGuideHome",
+  "previous": {
+    "title": "Playgrounds",
+    "permalink": "/deploy/manual/playgrounds"
+  },
+  "next": {
+    "title": "CI and GitHub Actions",
+    "permalink": "/deploy/manual/ci_github"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/deployctl",
+  "id": "manual/deployctl",
+  "title": "Using deployctl on the command line",
+  "description": "deployctl is a command line tool (CLI) that lets you work with the Deno Deploy",
+  "source": "@site/deploy/manual/deployctl.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/deployctl",
+  "permalink": "/deploy/manual/deployctl",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployGuideHome",
+  "previous": {
+    "title": "CI and GitHub Actions",
+    "permalink": "/deploy/manual/ci_github"
+  },
+  "next": {
+    "title": "Regions",
+    "permalink": "/deploy/manual/regions"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/manage_dependencies",
+  "id": "tutorials/manage_dependencies",
+  "title": "Managing Dependencies",
+  "description": "Concepts",
+  "source": "@site/runtime/tutorials/manage_dependencies.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/manage_dependencies",
+  "permalink": "/runtime/tutorials/manage_dependencies",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeTutorialsHome",
+  "previous": {
+    "title": "Hello World",
+    "permalink": "/runtime/tutorials/hello_world"
+  },
+  "next": {
+    "title": "Fetch Data",
+    "permalink": "/runtime/tutorials/fetch_data"
+  }
+}

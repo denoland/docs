@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/modules/integrity_checking",
+  "id": "manual/basics/modules/integrity_checking",
+  "title": "Integrity Checking & Lock Files",
+  "description": "Introduction",
+  "source": "@site/runtime/manual/basics/modules/integrity_checking.md",
+  "sourceDirName": "manual/basics/modules",
+  "slug": "/manual/basics/modules/integrity_checking",
+  "permalink": "/runtime/manual/basics/modules/integrity_checking",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Proxies",
+    "permalink": "/runtime/manual/basics/modules/proxies"
+  },
+  "next": {
+    "title": "Publishing Modules",
+    "permalink": "/runtime/manual/advanced/publishing/"
+  }
+}

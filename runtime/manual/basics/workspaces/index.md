@@ -26,6 +26,10 @@ The above `deno.json` file configures a workspace with `foo` and `bar` members,
 these are names of the directories that are expected to have `deno.json(c)` (or
 `package.json`) files.
 
+Note that Deno workspaces uses the keyword `workspace` rather than npm's
+`workspaces`, since it represents a singular workspace with multiple workspace
+members.
+
 ## Monorepo example
 
 Let's see the above workspace in action, in a small and simple 2-package
@@ -90,13 +94,7 @@ console.log(bar());
 
 Let's run it:
 
-```
-$ deno run -A main.ts
-Hello, from foo
-Hello, from bar
-```
-
-**TODO: add screenshot to show that colors actually work?**
+![Workspace example](/img/workspace-example.png)
 
 There's a lot to unpack here, showcasing some of the Deno workspace features:
 
@@ -120,14 +118,30 @@ There's a lot to unpack here, showcasing some of the Deno workspace features:
 
 ---
 
-Deno workspaces are a lot more powerful. To make migration for existing Node.js
-projects easier you can have both Deno-first and Node-first packages in a single
-workspace.
+Deno workspaces are flexible and can work with Node packages. To make migration
+for existing Node.js projects easier you can have both Deno-first and Node-first
+packages in a single workspace.
 
 ### Migrating from `npm` workspaces
 
-Using another example with `fizz` and `buzz` workspace members, where `buzz` is
-an already existing `npm` package:
+Deno workspaces support using a Deno-first package from an existing npm package.
+In this example, we mix and match a Deno library called `fizz`, with a Node.js
+library called `buzz` that we developed a couple years back.
+
+We'll need to include a `deno.json` configuration file in the root:
+
+```js
+// deno.json
+{
+  "nodeModulesDir": true,
+  "workspace": ["fizz", "buzz"]
+}
+```
+
+Note that with `nodeModulesDir` being set to `true`, we specified want to keep
+using `node_modules/`.
+
+In `fizz`, our Deno-first package:
 
 ```js
 // fizz/deno.json
@@ -139,9 +153,11 @@ an already existing `npm` package:
 
 // fizz/mod.ts
 export function logProject(project) {
-    console.log(project);
+  console.log(project);
 }
 ```
+
+And in `buzz`, our legacy Node.js package:
 
 ```js
 // buzz/package.json
@@ -160,25 +176,14 @@ import { Project } from "ts-morph";
 import { createProject } from "@deno-workspace/fizz";
 
 function createProject() {
-    return new Project();
+  return new Project();
 }
 
 const project = createProject();
 logProject(project);
 ```
 
-```js
-// deno.json
-{
-  "nodeModulesDir": true,
-  "workspace": ["fizz", "buzz"]
-}
-```
-
-In this example, we mix and match a Deno library called `fizz`, with a Node.js
-library called `buzz` that we developed a couple years back. It's possible to
-use Deno-first package from existing npm package. Additionally we specified that
-we want to keep using `node_modules/` directory.
+Now, when we run `buzz/main.ts`, we should see the output:
 
 ```
 $ deno run -A buzz/main.ts
@@ -194,8 +199,8 @@ You can even have both `deno.json` and `package.json` in your existing Node.js
 package. That allows you to gradually migrate to Deno, without putting a lot of
 upfront work.
 
-As an example, you can add `buzz/deno.json` like to to configure Deno's linter
-and formatter:
+For example, you can add `buzz/deno.json` like to to configure Deno's linter and
+formatter:
 
 ```json
 {

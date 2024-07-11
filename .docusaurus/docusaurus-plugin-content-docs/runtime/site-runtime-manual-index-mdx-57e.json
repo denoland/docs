@@ -1,0 +1,24 @@
+{
+  "unversionedId": "manual/index",
+  "id": "manual/index",
+  "title": "Deno Runtime Quick Start",
+  "description": "Deno",
+  "source": "@site/runtime/manual/index.mdx",
+  "sourceDirName": "manual",
+  "slug": "/manual/",
+  "permalink": "/runtime/manual/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "displayed_sidebar": "runtimeGuideHome",
+    "sidebar_position": 1,
+    "pagination_next": "manual/getting_started/installation"
+  },
+  "sidebar": "runtimeGuideHome",
+  "next": {
+    "title": "Installation",
+    "permalink": "/runtime/manual/getting_started/installation"
+  }
+}

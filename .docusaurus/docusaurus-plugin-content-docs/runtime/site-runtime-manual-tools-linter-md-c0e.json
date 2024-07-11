@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/tools/linter",
+  "id": "manual/tools/linter",
+  "title": "Linter",
+  "description": "Deno ships with a built-in code linter for JavaScript and TypeScript.",
+  "source": "@site/runtime/manual/tools/linter.md",
+  "sourceDirName": "manual/tools",
+  "slug": "/manual/tools/linter",
+  "permalink": "/runtime/manual/tools/linter",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Jupyter Kernel for Deno",
+    "permalink": "/runtime/manual/tools/jupyter"
+  },
+  "next": {
+    "title": "Read-Eval-Print-Loop",
+    "permalink": "/runtime/manual/tools/repl"
+  }
+}

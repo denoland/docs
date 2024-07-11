@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/jsx_dom/jsdom",
+  "id": "manual/advanced/jsx_dom/jsdom",
+  "title": "Using jsdom with Deno",
+  "description": "jsdom is a pure JavaScript implementation of",
+  "source": "@site/runtime/manual/advanced/jsx_dom/jsdom.md",
+  "sourceDirName": "manual/advanced/jsx_dom",
+  "slug": "/manual/advanced/jsx_dom/jsdom",
+  "permalink": "/runtime/manual/advanced/jsx_dom/jsdom",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Using Twind with Deno",
+    "permalink": "/runtime/manual/advanced/jsx_dom/twind"
+  },
+  "next": {
+    "title": "Using deno-dom with Deno",
+    "permalink": "/runtime/manual/advanced/jsx_dom/deno_dom"
+  }
+}

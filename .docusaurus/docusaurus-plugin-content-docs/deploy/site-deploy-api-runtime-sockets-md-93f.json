@@ -1,0 +1,23 @@
+{
+  "unversionedId": "api/runtime-sockets",
+  "id": "api/runtime-sockets",
+  "title": "TCP sockets and TLS",
+  "description": "Deno Deploy supports outbound TCP and TLS connections. These APIs allow you to",
+  "source": "@site/deploy/api/runtime-sockets.md",
+  "sourceDirName": "api",
+  "slug": "/api/runtime-sockets",
+  "permalink": "/deploy/api/runtime-sockets",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployAPIHome",
+  "previous": {
+    "title": "Compressing response bodies",
+    "permalink": "/deploy/api/compression"
+  },
+  "next": {
+    "title": "BroadcastChannel",
+    "permalink": "/deploy/api/runtime-broadcast-channel"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/references/vscode_deno/index",
+  "id": "manual/references/vscode_deno/index",
+  "title": "Using Visual Studio Code",
+  "description": "In this section we are going to go into depth about developing Deno applications",
+  "source": "@site/runtime/manual/references/vscode_deno/index.md",
+  "sourceDirName": "manual/references/vscode_deno",
+  "slug": "/manual/references/vscode_deno/",
+  "permalink": "/runtime/manual/references/vscode_deno/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Snapshot Testing",
+    "permalink": "/runtime/manual/basics/testing/snapshot_testing"
+  },
+  "next": {
+    "title": "Testing API",
+    "permalink": "/runtime/manual/references/vscode_deno/testing_api"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/tutorial-http-server",
+  "id": "tutorials/tutorial-http-server",
+  "title": "Simple HTTP server",
+  "description": "In this tutorial, let's build a HTTP server that responds to all incoming HTTP",
+  "source": "@site/deploy/tutorials/tutorial-http-server.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/tutorial-http-server",
+  "permalink": "/deploy/tutorials/tutorial-http-server",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployTutorialsHome",
+  "previous": {
+    "title": "API server with Firestore (Firebase)",
+    "permalink": "/deploy/tutorials/tutorial-firebase"
+  },
+  "next": {
+    "title": "Build a blog with Hugo",
+    "permalink": "/deploy/tutorials/tutorial-hugo-blog"
+  }
+}

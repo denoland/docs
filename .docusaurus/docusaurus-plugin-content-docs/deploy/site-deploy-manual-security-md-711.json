@@ -1,0 +1,19 @@
+{
+  "unversionedId": "manual/security",
+  "id": "manual/security",
+  "title": "Security and responsible disclosure",
+  "description": "We consider the security of our systems, and all data controlled by those",
+  "source": "@site/deploy/manual/security.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/security",
+  "permalink": "/deploy/manual/security",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployGuideHome",
+  "previous": {
+    "title": "Deno Privacy Policy",
+    "permalink": "/deploy/manual/privacy-policy"
+  }
+}

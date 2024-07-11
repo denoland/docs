@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/runtime/stability",
+  "id": "manual/runtime/stability",
+  "title": "Stability",
+  "description": "As of Deno 1.0.0, the Deno namespace APIs are stable. That means we will",
+  "source": "@site/runtime/manual/runtime/stability.md",
+  "sourceDirName": "manual/runtime",
+  "slug": "/manual/runtime/stability",
+  "permalink": "/runtime/manual/runtime/stability",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Program Lifecycle",
+    "permalink": "/runtime/manual/runtime/program_lifecycle"
+  },
+  "next": {
+    "title": "Using Web Platform APIs",
+    "permalink": "/runtime/manual/runtime/web_platform_apis"
+  }
+}

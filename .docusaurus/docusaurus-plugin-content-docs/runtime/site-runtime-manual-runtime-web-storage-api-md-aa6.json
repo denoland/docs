@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/runtime/web_storage_api",
+  "id": "manual/runtime/web_storage_api",
+  "title": "Web Storage API",
+  "description": "Deno 1.10 introduced the",
+  "source": "@site/runtime/manual/runtime/web_storage_api.md",
+  "sourceDirName": "manual/runtime",
+  "slug": "/manual/runtime/web_storage_api",
+  "permalink": "/runtime/manual/runtime/web_storage_api",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Location API",
+    "permalink": "/runtime/manual/runtime/location_api"
+  },
+  "next": {
+    "title": "Workers",
+    "permalink": "/runtime/manual/runtime/workers"
+  }
+}

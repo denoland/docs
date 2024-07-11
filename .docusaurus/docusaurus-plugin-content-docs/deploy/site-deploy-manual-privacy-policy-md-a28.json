@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/privacy-policy",
+  "id": "manual/privacy-policy",
+  "title": "Deno Privacy Policy",
+  "description": "Deno Land Inc is a corporation registered in Delaware, USA doing business as",
+  "source": "@site/deploy/manual/privacy-policy.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/privacy-policy",
+  "permalink": "/deploy/manual/privacy-policy",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployGuideHome",
+  "previous": {
+    "title": "Fair use policy",
+    "permalink": "/deploy/manual/fair-use-policy"
+  },
+  "next": {
+    "title": "Security and responsible disclosure",
+    "permalink": "/deploy/manual/security"
+  }
+}

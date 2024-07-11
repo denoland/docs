@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/tutorial-postgres",
+  "id": "tutorials/tutorial-postgres",
+  "title": "API server with Postgres",
+  "description": "Postgres is a popular database for web applications because of its flexibility",
+  "source": "@site/deploy/tutorials/tutorial-postgres.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/tutorial-postgres",
+  "permalink": "/deploy/tutorials/tutorial-postgres",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployTutorialsHome",
+  "previous": {
+    "title": "Build a blog with Hugo",
+    "permalink": "/deploy/tutorials/tutorial-hugo-blog"
+  },
+  "next": {
+    "title": "Use Wordpress as a headless CMS",
+    "permalink": "/deploy/tutorials/tutorial-wordpress-frontend"
+  }
+}

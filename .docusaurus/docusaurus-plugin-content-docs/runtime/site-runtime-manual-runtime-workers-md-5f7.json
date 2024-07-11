@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/runtime/workers",
+  "id": "manual/runtime/workers",
+  "title": "Workers",
+  "description": "Deno supports",
+  "source": "@site/runtime/manual/runtime/workers.md",
+  "sourceDirName": "manual/runtime",
+  "slug": "/manual/runtime/workers",
+  "permalink": "/runtime/manual/runtime/workers",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Web Storage API",
+    "permalink": "/runtime/manual/runtime/web_storage_api"
+  },
+  "next": {
+    "title": "Node and npm modules",
+    "permalink": "/runtime/manual/node/"
+  }
+}

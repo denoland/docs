@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/publishing/index",
+  "id": "manual/advanced/publishing/index",
+  "title": "Publishing Modules",
+  "description": "Deno is not prescriptive about how developers make their modules",
+  "source": "@site/runtime/manual/advanced/publishing/index.md",
+  "sourceDirName": "manual/advanced/publishing",
+  "slug": "/manual/advanced/publishing/",
+  "permalink": "/runtime/manual/advanced/publishing/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Integrity Checking & Lock Files",
+    "permalink": "/runtime/manual/basics/modules/integrity_checking"
+  },
+  "next": {
+    "title": "Cross-runtime modules with dnt",
+    "permalink": "/runtime/manual/advanced/publishing/dnt"
+  }
+}

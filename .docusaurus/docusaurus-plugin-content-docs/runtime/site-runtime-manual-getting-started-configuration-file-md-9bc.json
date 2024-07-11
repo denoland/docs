@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/getting_started/configuration_file",
+  "id": "manual/getting_started/configuration_file",
+  "title": "Configuration File",
+  "description": "Deno supports a configuration file that allows you to customize the built-in",
+  "source": "@site/runtime/manual/getting_started/configuration_file.md",
+  "sourceDirName": "manual/getting_started",
+  "slug": "/manual/getting_started/configuration_file",
+  "permalink": "/runtime/manual/getting_started/configuration_file",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Command Line Interface",
+    "permalink": "/runtime/manual/getting_started/command_line_interface"
+  },
+  "next": {
+    "title": "Web Frameworks",
+    "permalink": "/runtime/manual/getting_started/web_frameworks"
+  }
+}

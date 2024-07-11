@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/node/faqs",
+  "id": "manual/node/faqs",
+  "title": "Frequently Asked Questions",
+  "description": "Getting type errors like cannot find document or HTMLElement",
+  "source": "@site/runtime/manual/node/faqs.md",
+  "sourceDirName": "manual/node",
+  "slug": "/manual/node/faqs",
+  "permalink": "/runtime/manual/node/faqs",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "npm via CDNs",
+    "permalink": "/runtime/manual/node/cdns"
+  },
+  "next": {
+    "title": "Migrating from Node.js to Deno",
+    "permalink": "/runtime/manual/node/migrate"
+  }
+}

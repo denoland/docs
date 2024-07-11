@@ -1,0 +1,23 @@
+{
+  "unversionedId": "api/rest/organizations",
+  "id": "api/rest/organizations",
+  "title": "Organizations",
+  "description": "Organizations are a container for projects, domains, and KV databases. New",
+  "source": "@site/deploy/api/rest/organizations.md",
+  "sourceDirName": "api/rest",
+  "slug": "/api/rest/organizations",
+  "permalink": "/deploy/api/rest/organizations",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployAPIHome",
+  "previous": {
+    "title": "Deno Deploy REST API",
+    "permalink": "/deploy/api/rest/"
+  },
+  "next": {
+    "title": "Projects",
+    "permalink": "/deploy/api/rest/projects"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/tutorial-wordpress-frontend",
+  "id": "tutorials/tutorial-wordpress-frontend",
+  "title": "Use Wordpress as a headless CMS",
+  "description": "Wordpress is the most popular CMS in the world, but is difficult to use in a",
+  "source": "@site/deploy/tutorials/tutorial-wordpress-frontend.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/tutorial-wordpress-frontend",
+  "permalink": "/deploy/tutorials/tutorial-wordpress-frontend",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployTutorialsHome",
+  "previous": {
+    "title": "API server with Postgres",
+    "permalink": "/deploy/tutorials/tutorial-postgres"
+  },
+  "next": {
+    "title": "Deploy a React app with Vite",
+    "permalink": "/deploy/tutorials/vite"
+  }
+}

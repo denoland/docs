@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/runtime/builtin_apis",
+  "id": "manual/runtime/builtin_apis",
+  "title": "Deno namespace APIs",
+  "description": "The global Deno namespace contains APIs that are not web standard, including",
+  "source": "@site/runtime/manual/runtime/builtin_apis.md",
+  "sourceDirName": "manual/runtime",
+  "slug": "/manual/runtime/builtin_apis",
+  "permalink": "/runtime/manual/runtime/builtin_apis",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Cross-runtime modules with dnt",
+    "permalink": "/runtime/manual/advanced/publishing/dnt"
+  },
+  "next": {
+    "title": "HTTP Server APIs",
+    "permalink": "/runtime/manual/runtime/http_server_apis"
+  }
+}

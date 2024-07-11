@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/module_metadata",
+  "id": "tutorials/module_metadata",
+  "title": "Module Metadata",
+  "description": "Concepts",
+  "source": "@site/runtime/tutorials/module_metadata.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/module_metadata",
+  "permalink": "/runtime/tutorials/module_metadata",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeTutorialsHome",
+  "previous": {
+    "title": "File System Events",
+    "permalink": "/runtime/tutorials/file_system_events"
+  },
+  "next": {
+    "title": "How to use Apollo with Deno",
+    "permalink": "/runtime/tutorials/how_to_with_npm/apollo"
+  }
+}

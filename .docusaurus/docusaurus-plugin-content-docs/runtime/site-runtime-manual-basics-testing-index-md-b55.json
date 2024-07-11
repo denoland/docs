@@ -1,0 +1,26 @@
+{
+  "unversionedId": "manual/basics/testing/index",
+  "id": "manual/basics/testing/index",
+  "title": "Testing in Deno",
+  "description": "Deno has a built-in test runner that you can use for testing JavaScript or",
+  "source": "@site/runtime/manual/basics/testing/index.md",
+  "sourceDirName": "manual/basics/testing",
+  "slug": "/manual/basics/testing/",
+  "permalink": "/runtime/manual/basics/testing/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Vendoring Dependencies",
+    "permalink": "/runtime/manual/tools/vendor"
+  },
+  "next": {
+    "title": "Assertions",
+    "permalink": "/runtime/manual/basics/testing/assertions"
+  }
+}

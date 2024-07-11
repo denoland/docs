@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/environment-variables",
+  "id": "manual/environment-variables",
+  "title": "Environment variables",
+  "description": "Environment variables are useful to store values like access tokens of web",
+  "source": "@site/deploy/manual/environment-variables.md",
+  "sourceDirName": "manual",
+  "slug": "/manual/environment-variables",
+  "permalink": "/deploy/manual/environment-variables",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployGuideHome",
+  "previous": {
+    "title": "Custom domains",
+    "permalink": "/deploy/manual/custom-domains"
+  },
+  "next": {
+    "title": "Organizations",
+    "permalink": "/deploy/manual/organizations"
+  }
+}

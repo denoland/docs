@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/tools/dependency_inspector",
+  "id": "manual/tools/dependency_inspector",
+  "title": "Dependency Inspector",
+  "description": "deno info [URL] will inspect an ES module and all of its dependencies.",
+  "source": "@site/runtime/manual/tools/dependency_inspector.md",
+  "sourceDirName": "manual/tools",
+  "slug": "/manual/tools/dependency_inspector",
+  "permalink": "/runtime/manual/tools/dependency_inspector",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Compiling Executables",
+    "permalink": "/runtime/manual/tools/compiler"
+  },
+  "next": {
+    "title": "Documentation Generator",
+    "permalink": "/runtime/manual/tools/documentation_generator"
+  }
+}

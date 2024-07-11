@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/testing/coverage",
+  "id": "manual/basics/testing/coverage",
+  "title": "Test Coverage",
+  "description": "Deno will collect test coverage into a directory for your code if you specify",
+  "source": "@site/runtime/manual/basics/testing/coverage.md",
+  "sourceDirName": "manual/basics/testing",
+  "slug": "/manual/basics/testing/coverage",
+  "permalink": "/runtime/manual/basics/testing/coverage",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Assertions",
+    "permalink": "/runtime/manual/basics/testing/assertions"
+  },
+  "next": {
+    "title": "Mocking",
+    "permalink": "/runtime/manual/basics/testing/mocking"
+  }
+}

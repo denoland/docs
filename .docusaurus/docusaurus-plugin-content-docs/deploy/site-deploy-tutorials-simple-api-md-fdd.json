@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/simple-api",
+  "id": "tutorials/simple-api",
+  "title": "Simple API server",
+  "description": "Deno is great for creating simple, light-weight API servers. Learn how to create",
+  "source": "@site/deploy/tutorials/simple-api.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/simple-api",
+  "permalink": "/deploy/tutorials/simple-api",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployTutorialsHome",
+  "previous": {
+    "title": "Basic Fresh site",
+    "permalink": "/deploy/tutorials/fresh"
+  },
+  "next": {
+    "title": "Deploy a static site",
+    "permalink": "/deploy/tutorials/static-site"
+  }
+}

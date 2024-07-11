@@ -1,0 +1,14 @@
+{
+  "unversionedId": "manual/basics/index",
+  "id": "manual/basics/index",
+  "title": "Basics",
+  "description": "In this chapter, you will find Deno basics, including:",
+  "source": "@site/runtime/manual/basics/index.md",
+  "sourceDirName": "manual/basics",
+  "slug": "/manual/basics/",
+  "permalink": "/runtime/manual/basics/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

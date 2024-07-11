@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/subprocess",
+  "id": "tutorials/subprocess",
+  "title": "Creating a Subprocess",
+  "description": "Concepts",
+  "source": "@site/runtime/tutorials/subprocess.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/subprocess",
+  "permalink": "/runtime/tutorials/subprocess",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeTutorialsHome",
+  "previous": {
+    "title": "TCP echo Server",
+    "permalink": "/runtime/tutorials/tcp_echo"
+  },
+  "next": {
+    "title": "Handle OS Signals",
+    "permalink": "/runtime/tutorials/os_signals"
+  }
+}

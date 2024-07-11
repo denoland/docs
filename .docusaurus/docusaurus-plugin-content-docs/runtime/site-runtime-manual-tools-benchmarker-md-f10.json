@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/tools/benchmarker",
+  "id": "manual/tools/benchmarker",
+  "title": "Benchmarking Tool",
+  "description": "Deno has a built-in benchmark runner that you can use for checking performance",
+  "source": "@site/runtime/manual/tools/benchmarker.md",
+  "sourceDirName": "manual/tools",
+  "slug": "/manual/tools/benchmarker",
+  "permalink": "/runtime/manual/tools/benchmarker",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Built-In Tooling",
+    "permalink": "/runtime/manual/tools/"
+  },
+  "next": {
+    "title": "Compiling Executables",
+    "permalink": "/runtime/manual/tools/compiler"
+  }
+}

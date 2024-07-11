@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/node/cdns",
+  "id": "manual/node/cdns",
+  "title": "npm via CDNs",
+  "description": "Most developers currently use npm modules in Deno by importing them using one of",
+  "source": "@site/runtime/manual/node/cdns.md",
+  "sourceDirName": "manual/node",
+  "slug": "/manual/node/cdns",
+  "permalink": "/runtime/manual/node/cdns",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "package.json compatibility",
+    "permalink": "/runtime/manual/node/package_json"
+  },
+  "next": {
+    "title": "Frequently Asked Questions",
+    "permalink": "/runtime/manual/node/faqs"
+  }
+}

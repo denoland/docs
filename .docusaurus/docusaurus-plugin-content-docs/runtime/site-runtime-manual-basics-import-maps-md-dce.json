@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/import_maps",
+  "id": "manual/basics/import_maps",
+  "title": "Import Maps",
+  "description": "In order for Deno to resolve a bare specifier like \"react\" or \"lodash\", it",
+  "source": "@site/runtime/manual/basics/import_maps.md",
+  "sourceDirName": "manual/basics",
+  "slug": "/manual/basics/import_maps",
+  "permalink": "/runtime/manual/basics/import_maps",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Standard Library",
+    "permalink": "/runtime/manual/basics/standard_library"
+  },
+  "next": {
+    "title": "Environment variables",
+    "permalink": "/runtime/manual/basics/env_variables"
+  }
+}

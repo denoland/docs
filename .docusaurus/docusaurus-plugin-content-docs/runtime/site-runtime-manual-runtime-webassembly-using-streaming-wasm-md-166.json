@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/runtime/webassembly/using_streaming_wasm",
+  "id": "manual/runtime/webassembly/using_streaming_wasm",
+  "title": "Using the Streaming WebAssembly APIs",
+  "description": "The",
+  "source": "@site/runtime/manual/runtime/webassembly/using_streaming_wasm.md",
+  "sourceDirName": "manual/runtime/webassembly",
+  "slug": "/manual/runtime/webassembly/using_streaming_wasm",
+  "permalink": "/runtime/manual/runtime/webassembly/using_streaming_wasm",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Using WebAssembly in Deno",
+    "permalink": "/runtime/manual/runtime/webassembly/using_wasm"
+  },
+  "next": {
+    "title": "Helpful Resources",
+    "permalink": "/runtime/manual/runtime/webassembly/wasm_resources"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/jsx_dom/linkedom",
+  "id": "manual/advanced/jsx_dom/linkedom",
+  "title": "Using LinkeDOM with Deno",
+  "description": "LinkeDOM is a DOM-like namespace to",
+  "source": "@site/runtime/manual/advanced/jsx_dom/linkedom.md",
+  "sourceDirName": "manual/advanced/jsx_dom",
+  "slug": "/manual/advanced/jsx_dom/linkedom",
+  "permalink": "/runtime/manual/advanced/jsx_dom/linkedom",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Using deno-dom with Deno",
+    "permalink": "/runtime/manual/advanced/jsx_dom/deno_dom"
+  },
+  "next": {
+    "title": "Language Server Overview",
+    "permalink": "/runtime/manual/advanced/language_server/overview"
+  }
+}

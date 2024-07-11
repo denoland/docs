@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/testing/sanitizers",
+  "id": "manual/basics/testing/sanitizers",
+  "title": "Test Sanitizers",
+  "description": "The test runner offers several sanitizers to ensure that the test behaves in a",
+  "source": "@site/runtime/manual/basics/testing/sanitizers.md",
+  "sourceDirName": "manual/basics/testing",
+  "slug": "/manual/basics/testing/sanitizers",
+  "permalink": "/runtime/manual/basics/testing/sanitizers",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Mocking",
+    "permalink": "/runtime/manual/basics/testing/mocking"
+  },
+  "next": {
+    "title": "Documentation Tests",
+    "permalink": "/runtime/manual/basics/testing/documentation"
+  }
+}

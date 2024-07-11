@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/getting_started/installation",
+  "id": "manual/getting_started/installation",
+  "title": "Installation",
+  "description": "Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It",
+  "source": "@site/runtime/manual/getting_started/installation.md",
+  "sourceDirName": "manual/getting_started",
+  "slug": "/manual/getting_started/installation",
+  "permalink": "/runtime/manual/getting_started/installation",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Deno Runtime Quick Start",
+    "permalink": "/runtime/manual/"
+  },
+  "next": {
+    "title": "First Steps",
+    "permalink": "/runtime/manual/getting_started/first_steps"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "unversionedId": "manual/node/how_to_with_npm/mongoose",
+  "id": "manual/node/how_to_with_npm/mongoose",
+  "title": "How to use Mongoose with Deno",
+  "description": "Mongoose is a popular, schema-based library that",
+  "source": "@site/runtime/manual/node/how_to_with_npm/mongoose.md",
+  "sourceDirName": "manual/node/how_to_with_npm",
+  "slug": "/manual/node/how_to_with_npm/mongoose",
+  "permalink": "/runtime/manual/node/how_to_with_npm/mongoose",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {}
+}

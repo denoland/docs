@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/runtime/ffi_api",
+  "id": "manual/runtime/ffi_api",
+  "title": "Foreign Function Interface",
+  "description": "As of Deno 1.13 and later, the FFI (foreign function interface) API allows users",
+  "source": "@site/runtime/manual/runtime/ffi_api.md",
+  "sourceDirName": "manual/runtime",
+  "slug": "/manual/runtime/ffi_api",
+  "permalink": "/runtime/manual/runtime/ffi_api",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "import.meta API",
+    "permalink": "/runtime/manual/runtime/import_meta_api"
+  },
+  "next": {
+    "title": "Program Lifecycle",
+    "permalink": "/runtime/manual/runtime/program_lifecycle"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/runtime/http_server_apis",
+  "id": "manual/runtime/http_server_apis",
+  "title": "HTTP Server APIs",
+  "description": "Deno currently has two HTTP Server APIs:",
+  "source": "@site/runtime/manual/runtime/http_server_apis.md",
+  "sourceDirName": "manual/runtime",
+  "slug": "/manual/runtime/http_server_apis",
+  "permalink": "/runtime/manual/runtime/http_server_apis",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Deno namespace APIs",
+    "permalink": "/runtime/manual/runtime/builtin_apis"
+  },
+  "next": {
+    "title": "Permission APIs",
+    "permalink": "/runtime/manual/runtime/permission_apis"
+  }
+}

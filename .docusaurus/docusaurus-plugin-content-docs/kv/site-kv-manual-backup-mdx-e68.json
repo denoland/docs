@@ -1,0 +1,19 @@
+{
+  "unversionedId": "manual/backup",
+  "id": "manual/backup",
+  "title": "Backups",
+  "description": "KV databases hosted on Deno Deploy can be continuously backed up to your own S3-compatible storage buckets. This is in",
+  "source": "@site/kv/manual/backup.mdx",
+  "sourceDirName": "manual",
+  "slug": "/manual/backup",
+  "permalink": "/kv/manual/backup",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "kvGuideHome",
+  "previous": {
+    "title": "KV on Deno Deploy",
+    "permalink": "/kv/manual/on_deploy"
+  }
+}

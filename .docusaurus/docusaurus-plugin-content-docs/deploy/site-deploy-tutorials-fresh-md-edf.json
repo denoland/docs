@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/fresh",
+  "id": "tutorials/fresh",
+  "title": "Basic Fresh site",
+  "description": "This tutorial will cover how to deploy a Fresh application on Deno Deploy.",
+  "source": "@site/deploy/tutorials/fresh.md",
+  "sourceDirName": "tutorials",
+  "slug": "/tutorials/fresh",
+  "permalink": "/deploy/tutorials/fresh",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployTutorialsHome",
+  "previous": {
+    "title": "Discord Slash Command",
+    "permalink": "/deploy/tutorials/discord-slash"
+  },
+  "next": {
+    "title": "Simple API server",
+    "permalink": "/deploy/tutorials/simple-api"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/secondary_indexes",
+  "id": "manual/secondary_indexes",
+  "title": "Secondary Indexes",
+  "description": "Key-value stores like Deno KV organize data as collections of key-value pairs,",
+  "source": "@site/kv/manual/secondary_indexes.mdx",
+  "sourceDirName": "manual",
+  "slug": "/manual/secondary_indexes",
+  "permalink": "/kv/manual/secondary_indexes",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "kvGuideHome",
+  "previous": {
+    "title": "Key Expiration",
+    "permalink": "/kv/manual/key_expiration"
+  },
+  "next": {
+    "title": "Transactions",
+    "permalink": "/kv/manual/transactions"
+  }
+}

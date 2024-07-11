@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/continuous_integration",
+  "id": "manual/advanced/continuous_integration",
+  "title": "Continuous Integration",
+  "description": "Deno's built-in tools make it easy to set up Continuous Integration (CI)",
+  "source": "@site/runtime/manual/advanced/continuous_integration.md",
+  "sourceDirName": "manual/advanced",
+  "slug": "/manual/advanced/continuous_integration",
+  "permalink": "/runtime/manual/advanced/continuous_integration",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "How to Deploy Deno on Kinsta",
+    "permalink": "/runtime/manual/advanced/deploying_deno/kinsta"
+  },
+  "next": {
+    "title": "Embedding Deno",
+    "permalink": "/runtime/manual/advanced/embedding_deno"
+  }
+}

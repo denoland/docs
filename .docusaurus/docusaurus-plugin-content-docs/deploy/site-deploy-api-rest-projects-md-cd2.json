@@ -1,0 +1,23 @@
+{
+  "unversionedId": "api/rest/projects",
+  "id": "api/rest/projects",
+  "title": "Projects",
+  "description": "Projects are a container for deployments, and can be associated with domains and",
+  "source": "@site/deploy/api/rest/projects.md",
+  "sourceDirName": "api/rest",
+  "slug": "/api/rest/projects",
+  "permalink": "/deploy/api/rest/projects",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "deployAPIHome",
+  "previous": {
+    "title": "Organizations",
+    "permalink": "/deploy/api/rest/organizations"
+  },
+  "next": {
+    "title": "Deployments",
+    "permalink": "/deploy/api/rest/deployments"
+  }
+}

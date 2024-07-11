@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/runtime/webassembly/index",
+  "id": "manual/runtime/webassembly/index",
+  "title": "Using WebAssembly",
+  "description": "Designed to be used alongside JavaScript to speed up key application components,",
+  "source": "@site/runtime/manual/runtime/webassembly/index.md",
+  "sourceDirName": "manual/runtime/webassembly",
+  "slug": "/manual/runtime/webassembly/",
+  "permalink": "/runtime/manual/runtime/webassembly/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "FAQs about TypeScript in Deno",
+    "permalink": "/runtime/manual/advanced/typescript/faqs"
+  },
+  "next": {
+    "title": "Using WebAssembly in Deno",
+    "permalink": "/runtime/manual/runtime/webassembly/using_wasm"
+  }
+}

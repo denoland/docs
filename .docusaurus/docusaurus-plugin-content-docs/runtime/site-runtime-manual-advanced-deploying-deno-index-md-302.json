@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/advanced/deploying_deno/index",
+  "id": "manual/advanced/deploying_deno/index",
+  "title": "Run Deno in the Cloud",
+  "description": "Often times, we don't want to maintain hardware for our Deno scripts or apps to",
+  "source": "@site/runtime/manual/advanced/deploying_deno/index.md",
+  "sourceDirName": "manual/advanced/deploying_deno",
+  "slug": "/manual/advanced/deploying_deno/",
+  "permalink": "/runtime/manual/advanced/deploying_deno/",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Testing API",
+    "permalink": "/runtime/manual/references/vscode_deno/testing_api"
+  },
+  "next": {
+    "title": "Deploy Deno to Amazon Lightsail",
+    "permalink": "/runtime/manual/advanced/deploying_deno/aws_lightsail"
+  }
+}

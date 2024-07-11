@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/runtime/location_api",
+  "id": "manual/runtime/location_api",
+  "title": "Location API",
+  "description": "Deno supports the",
+  "source": "@site/runtime/manual/runtime/location_api.md",
+  "sourceDirName": "manual/runtime",
+  "slug": "/manual/runtime/location_api",
+  "permalink": "/runtime/manual/runtime/location_api",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Using Web Platform APIs",
+    "permalink": "/runtime/manual/runtime/web_platform_apis"
+  },
+  "next": {
+    "title": "Web Storage API",
+    "permalink": "/runtime/manual/runtime/web_storage_api"
+  }
+}

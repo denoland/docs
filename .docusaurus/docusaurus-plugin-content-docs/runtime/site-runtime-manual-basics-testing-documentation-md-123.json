@@ -1,0 +1,23 @@
+{
+  "unversionedId": "manual/basics/testing/documentation",
+  "id": "manual/basics/testing/documentation",
+  "title": "Documentation Tests",
+  "description": "Deno supports type-checking your documentation examples.",
+  "source": "@site/runtime/manual/basics/testing/documentation.md",
+  "sourceDirName": "manual/basics/testing",
+  "slug": "/manual/basics/testing/documentation",
+  "permalink": "/runtime/manual/basics/testing/documentation",
+  "draft": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "runtimeGuideHome",
+  "previous": {
+    "title": "Test Sanitizers",
+    "permalink": "/runtime/manual/basics/testing/sanitizers"
+  },
+  "next": {
+    "title": "Behavior-Driven Development",
+    "permalink": "/runtime/manual/basics/testing/behavior_driven_development"
+  }
+}
