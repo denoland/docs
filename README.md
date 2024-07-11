@@ -177,7 +177,16 @@ in the example page.
 
 ## Reference docs
 
-The reference docs are generated via the `deno doc` sub
+The reference docs are generated via the `deno doc` subcommand. To generate the
+reference docs locally, in the `reference_gen` directory, run:
+
+```console
+deno task types
+deno task doc
+```
+
+This will generate the reference docs, and you can use the `serve` or `build`
+tasks.
 
 ## Special thanks for historical contributions
 
