@@ -214,6 +214,10 @@ export const sidebar = [
         ],
       },
       {
+        label: "Workspaces",
+        id: "/runtime/manual/basics/workspaces/",
+      },
+      {
         label: "Vendoring",
         id: "/runtime/manual/basics/vendoring/",
       },
