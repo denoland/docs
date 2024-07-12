@@ -214,15 +214,13 @@ function NavigationButton(
       href={"id" in item ? item.id : "href" in item ? item.href : undefined}
     >
       <span className="text-sm text-gray-2">{directionText}</span>
-      <span
-        className={`font-semibold text-blue-500 ${
-          props.direction === "prev"
-            ? "doc-pagination-label-prev"
-            : "doc-pagination-label-next"
-        } leading-2 max-w-full flex-shrink truncate`}
-      >
-        {item.label}
-      </span>
+      <div className="flex flex-row max-w-full items-center text-blue-500 gap-2">
+        {props.direction === "prev" && <>&laquo;</>}
+        <span className="font-semibold flex-shrink truncate">
+          {item.label}
+        </span>
+        {props.direction === "next" && <>&raquo;</>}
+      </div>
     </a>
   );
 }
