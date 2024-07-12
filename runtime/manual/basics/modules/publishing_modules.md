@@ -1,5 +1,8 @@
 ---
 Title: Publishing Modules
+oldUrl:
+  - /runtime/manual/advanced/publishing/dnt/
+  - /runtime/manual/advanced/publishing/
 ---
 
 Any Deno program that defines an export can be published as a module. This

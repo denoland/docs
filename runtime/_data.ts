@@ -36,7 +36,6 @@ export const sidebar = [
         label: "Using & Publishing Modules",
         items: [
           "/runtime/manual/basics/modules/",
-          "/runtime/manual/basics/modules/remote_modules/",
           "/runtime/manual/basics/modules/publishing_modules/",
           "/runtime/manual/basics/modules/reloading_modules/",
           "/runtime/manual/basics/modules/integrity_checking/",
