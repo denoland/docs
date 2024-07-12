@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {$std/bytes} Doc: std/bytes
+ * @resource {$std/bytes} Doc: @std/bytes
  * @group Encoding
  *
  * When working with lower-level data we often deal

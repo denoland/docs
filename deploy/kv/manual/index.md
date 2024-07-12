@@ -39,7 +39,7 @@ JavaScript object literal or a
 `string`, `number`, `bigint`, or `boolean`. Values can be arbitrary JavaScript
 objects. In this example, we create a key-value pair representing a user's UI
 preferences, and save it with
-[`kv.set()`](https://deno.land/api?s=Deno.Kv&unstable=&p=prototype.set).
+[`kv.set()`](https://docs.deno.com/api/deno/~/Deno.Kv&unstable=&p=prototype.set).
 
 ```ts
 const kv = await Deno.openKv();
@@ -54,7 +54,7 @@ const result = await kv.set(["preferences", "ada"], prefs);
 ```
 
 Once a key-value pair is set, you can read it from the database with
-[`kv.get()`](https://deno.land/api?s=Deno.Kv&unstable=&p=prototype.get):
+[`kv.get()`](https://docs.deno.com/api/deno/~/Deno.Kv&unstable=&p=prototype.get):
 
 ```ts
 const entry = await kv.get(["preferences", "ada"]);
@@ -64,7 +64,7 @@ console.log(entry.versionstamp);
 ```
 
 Both `get` and `list` [operations](./operations) return a
-[KvEntry](https://deno.land/api?s=Deno.KvEntry&unstable=) object with the
+[KvEntry](https://docs.deno.com/api/deno/~/Deno.KvEntry) object with the
 following properties:
 
 - `key` - the array key you used to set the value
@@ -79,7 +79,7 @@ new generated value.
 ## Listing several key-value pairs
 
 To get values for a finite number of keys, you may use
-[`kv.getMany()`](https://deno.land/api?s=Deno.Kv&unstable=&p=prototype.getMany).
+[`kv.getMany()`](https://docs.deno.com/api/deno/~/Deno.Kv&unstable=&p=prototype.getMany).
 Pass in several keys as arguments, and you'll receive an array of values for
 each key. Note that **values and versionstamps can be `null`** if no value
 exists for the given key(s).
@@ -100,8 +100,8 @@ result[1].versionstamp; // null
 
 Often, it is useful to retrieve a list of key-value pairs from all keys that
 share a given prefix. This type of operation is possible using
-[`kv.list()`](https://deno.land/api?s=Deno.Kv&unstable=&p=prototype.list). In
-this example, we get a list of key-value pairs that share the `"preferences"`
+[`kv.list()`](https://docs.deno.com/api/deno/~/Deno.Kv&unstable=&p=prototype.list).
+In this example, we get a list of key-value pairs that share the `"preferences"`
 prefix.
 
 ```ts
@@ -132,7 +132,7 @@ writes are always performed in strong consistency mode.
 ## Deleting key-value pairs
 
 You can delete a key from the database using
-[`kv.delete()`](https://deno.land/api?s=Deno.Kv&unstable=&p=prototype.delete).
+[`kv.delete()`](https://docs.deno.com/api/deno/~/Deno.Kv&unstable=&p=prototype.delete).
 No action is taken if no value is found for the given key.
 
 ```ts

@@ -80,8 +80,8 @@ console.log(ac.fullName);
 ```
 
 You can also specify an optional
-[type parameter](https://deno.land/api?s=Deno.Kv&p=prototype.get&unstable) for
-`get`:
+[type parameter](https://docs.deno.com/api/deno/~/Deno.Kv&p=prototype.get&unstable)
+for `get`:
 
 ```ts
 import { Author } from "./model.ts";

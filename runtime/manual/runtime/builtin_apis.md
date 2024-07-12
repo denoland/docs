@@ -8,8 +8,8 @@ APIs for reading from files, opening TCP sockets, serving HTTP, and executing
 subprocesses, etc.
 
 For a full list of Deno Built-in APIs, see the
-[reference](https://deno.land/api?s=Deno). Below we highlight some of the most
-important.
+[reference](https://docs.deno.com/api/deno/~/Deno). Below we highlight some of
+the most important.
 
 ## Errors
 

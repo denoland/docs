@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {https://deno.land/api?s=Deno.Permissions} Doc: Deno.Permissions
+ * @resource {https://docs.deno.com/api/deno/~/Deno.Permissions} Doc: Deno.Permissions
  * @group CLI
  *
  * There are times where depending on the state of permissions
@@ -42,7 +42,7 @@ console.log(readStatus.state);
 // In the case that we no longer need a permission, it is also possible
 // to revoke a process's access to that permission. This is useful when
 // a process starts running untrusted code.
-import { assert } from "$std/assert/assert.ts";
+import { assert } from "jsr:@std/assert/assert.ts";
 
 const runStatus = await Deno.permissions.revoke({ name: "run" });
 assert(runStatus.state !== "granted");

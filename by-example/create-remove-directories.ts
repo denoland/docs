@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli
  * @run --allow-write <url>
- * @resource {https://deno.land/api?s=Deno.mkdir} Doc: Deno.mkdir
- * @resource {https://deno.land/api?s=Deno.remove} Doc: Deno.remove
+ * @resource {https://docs.deno.com/api/deno/~/Deno.mkdir} Doc: Deno.mkdir
+ * @resource {https://docs.deno.com/api/deno/~/Deno.remove} Doc: Deno.remove
  * @group File System
  *
  * Creating and removing directories is a common task. Deno has a number of

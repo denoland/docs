@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --allow-net <url>
- * @resource {https://deno.land/api?s=Deno.serve} Doc: Deno.serve
+ * @resource {https://docs.deno.com/api/deno/~/Deno.serve} Doc: Deno.serve
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Response} MDN: Response
  * @playground https://dash.deno.com/playground/example-helloworld
  * @group Network

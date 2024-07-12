@@ -3,9 +3,9 @@
  * @difficulty beginner
  * @tags cli, deploy
  * @run --allow-read <url>
- * @resource {https://deno.land/api?s=Deno.readFile} Doc: Deno.readFile
- * @resource {https://deno.land/api?s=Deno.open} Doc: Deno.open
- * @resource {https://deno.land/api?s=Deno.FsFile} Doc: Deno.FsFile
+ * @resource {https://docs.deno.com/api/deno/~/Deno.readFile} Doc: Deno.readFile
+ * @resource {https://docs.deno.com/api/deno/~/Deno.open} Doc: Deno.open
+ * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile} Doc: Deno.FsFile
  * @group File System
  *
  * Many applications need to read files from disk. Deno provides a simple

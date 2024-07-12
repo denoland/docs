@@ -33,7 +33,7 @@ const data = [
       },
       {
         label: "Standard Library",
-        href: "https://deno.land/std",
+        href: "https://jsr.io/@std",
       },
     ],
   },

@@ -409,8 +409,18 @@ export interface ExampleSnippet {
 }
 
 export function parseExample(id: string, file: string): Example {
-  // Substitute $std/ with the full import url
-  file = file.replaceAll("$std/", "https://deno.land/std@0.207.0/");
+  // Substitute $std/[...] with the JSR URL
+  file = file.replaceAll(/\$std\/[^\s\}]+/g, (s) => {
+    // $std/cli/parse-args#parseArgs -> https://jsr.io/@std/cli/doc/parse-args/~/parseArgs
+    const [, pkg, path, hash] =
+      s.match(/\$std\/([A-Za-z0-9\-\_\.]+)\/?([A-Za-z0-9\-\_\.]+)?(\#.+)?/) ||
+      [];
+    const url = `https://jsr.io/@std/${pkg}/doc${path ? `/${path}/~/` : ""}${
+      hash || ""
+    }`;
+    console.log("substituting", s, "with", url, id);
+    return url;
+  });
 
   // Extract the multi line JS doc comment at the top of the file
   const [, jsdoc, rest] = file.match(/^\s*\/\*\*(.*?)\*\/\s*(.*)/s) || [];
@@ -549,7 +559,7 @@ export function parseExample(id: string, file: string): Example {
 
   const additionalResources: [string, string][] = [];
   for (const resource of resources) {
-    // @resource {https://deno.land/std/http/server.ts} std/http/server.ts
+    // @resource {https://jsr.io/@std/http/server/~/} std/http/server
     const [_, url, title] = resource.match(/^\{(.*?)\}\s(.*)/) || [];
     if (!url || !title) {
       throw new Error(`Invalid resource: ${resource}`);

@@ -7,10 +7,12 @@ oldUrl:
 ## Concepts
 
 - Listening for TCP port connections with
-  [Deno.listen](https://deno.land/api?s=Deno.listen).
-- Use [Deno.Conn.readable](https://deno.land/api?s=Deno.Conn#prop_readable) and
-  [Deno.Conn.writable](https://deno.land/api?s=Deno.Conn#prop_writable) to take
-  inbound data and redirect it to be outbound data.
+  [Deno.listen](https://docs.deno.com/api/deno/~/Deno.listen).
+- Use
+  [Deno.Conn.readable](https://docs.deno.com/api/deno/~/Deno.Conn#property_readable)
+  and
+  [Deno.Conn.writable](https://docs.deno.com/api/deno/~/Deno.Conn#property_writable)
+  to take inbound data and redirect it to be outbound data.
 
 ## Example
 

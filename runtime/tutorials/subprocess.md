@@ -7,13 +7,13 @@ oldUrl:
 ## Concepts
 
 - Deno is capable of spawning a subprocess via
-  [Deno.Command](https://deno.land/api?s=Deno.Command).
+  [Deno.Command](https://docs.deno.com/api/deno/~/Deno.Command).
 - `--allow-run` permission is required to spawn a subprocess.
 - Spawned subprocesses do not run in a security sandbox.
 - Communicate with the subprocess via the
-  [stdin](https://deno.land/api?s=Deno.stdin),
-  [stdout](https://deno.land/api?s=Deno.stdout) and
-  [stderr](https://deno.land/api?s=Deno.stderr) streams.
+  [stdin](https://docs.deno.com/api/deno/~/Deno.stdin),
+  [stdout](https://docs.deno.com/api/deno/~/Deno.stdout) and
+  [stderr](https://docs.deno.com/api/deno/~/Deno.stderr) streams.
 
 ## Simple example
 

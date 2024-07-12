@@ -3,8 +3,8 @@
  * @difficulty intermediate
  * @tags cli
  * @run --allow-read --allow-write <url>
- * @resource {https://deno.land/api?s=Deno.open} Doc: Deno.open
- * @resource {https://deno.land/api?s=Deno.FsFile} Doc: Deno.FsFile
+ * @resource {https://docs.deno.com/api/deno/~/Deno.open} Doc: Deno.open
+ * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile} Doc: Deno.FsFile
  * @group File System
  *
  * Sometimes we need more granular control over file operations.

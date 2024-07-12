@@ -181,10 +181,12 @@ export function pwrite(options: PWrite) {}
 ```
 
 Note: When one of the arguments is a function, you can adjust the order
-flexibly. See examples like [Deno.serve](https://deno.land/api?s=Deno.serve),
-[Deno.test](https://deno.land/api?s=Deno.test),
-[Deno.addSignalListener](https://deno.land/api?s=Deno.addSignalListener). See
-also [this post](https://twitter.com/jaffathecake/status/1646798390355697664).
+flexibly. See examples like
+[Deno.serve](https://docs.deno.com/api/deno/~/Deno.serve),
+[Deno.test](https://docs.deno.com/api/deno/~/Deno.test),
+[Deno.addSignalListener](https://docs.deno.com/api/deno/~/Deno.addSignalListener).
+See also
+[this post](https://twitter.com/jaffathecake/status/1646798390355697664).
 
 ### Export all interfaces that are used as parameters to an exported member
 

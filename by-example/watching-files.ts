@@ -3,9 +3,9 @@
  * @difficulty beginner
  * @tags cli
  * @run --allow-read <url>
- * @resource {https://deno.land/api?s=Deno.watchFs} Doc: Deno.watchFs
+ * @resource {https://docs.deno.com/api/deno/~/Deno.watchFs} Doc: Deno.watchFs
  * @resource {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} MDN: for await of
- * @resource {$std/async/debounce.ts} Doc: std/debounce
+ * @resource {$std/async/debounce} Doc: @std/debounce
  * @group File System
  *
  * When creating frameworks or CLI tools, it is often necessary to watch the filesystem for changes.

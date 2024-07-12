@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run --allow-net --allow-read <url>
- * @resource {https://deno.land/api?s=Deno.listenTls} Doc: Deno.listenTls
+ * @resource {https://docs.deno.com/api/deno/~/Deno.listenTls} Doc: Deno.listenTls
  * @group Network
  *
  * An example of a TCP listener using TLS on localhost that will log the message if written to and close the connection if connected to.
