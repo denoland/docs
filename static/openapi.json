@@ -1984,7 +1984,7 @@
           "assets": {
             "main.ts": {
               "kind": "file",
-              "content": "Deno.serve((req: Request) => new Response(\"Hello World\"));\n",
+              "content": "export default { async fetch(req) { return new Response(\"Hello, World!\");}}\n",
               "encoding": "utf-8"
             },
             "images/cat1.png": {
