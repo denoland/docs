@@ -64,6 +64,7 @@ site.copy("static", ".");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
 site.copy("deploy/kv/manual/images");
+site.copy("deploy/kv/tutorials/images");
 site.copy("runtime/manual/images");
 site.copy("deno.json");
 site.copy("server.ts");
