@@ -139,24 +139,20 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
               <nav class="grid gap-8 grid-cols-2 max-w-[66ch] items-center justify-between mt-6">
                 <div>
                   {parentNavigation[index! - 1] && (
-                    <div>
-                      <NavigationButton
-                        item={parentNavigation[index! - 1]}
-                        search={props.search}
-                        direction="prev"
-                      />
-                    </div>
+                    <NavigationButton
+                      item={parentNavigation[index! - 1]}
+                      search={props.search}
+                      direction="prev"
+                    />
                   )}
                 </div>
                 <div>
                   {parentNavigation[index! + 1] && (
-                    <div>
-                      <NavigationButton
-                        item={parentNavigation[index! + 1]}
-                        search={props.search}
-                        direction="next"
-                      />
-                    </div>
+                    <NavigationButton
+                      item={parentNavigation[index! + 1]}
+                      search={props.search}
+                      direction="next"
+                    />
                   )}
                 </div>
               </nav>
@@ -217,13 +213,13 @@ function NavigationButton(
       className={`flex flex-col py-3 px-6 ${alignmentClass} border border-gray-000 hover:border-blue-700 hover:bg-blue-50/10 transition-colors duration-300 transition-timing-function cubic-bezier(0.4, 0, 0.2, 1) rounded`}
       href={"id" in item ? item.id : "href" in item ? item.href : undefined}
     >
-      <span className="text-sm text-gray-2 text-nowrap">{directionText}</span>
+      <span className="text-sm text-gray-2">{directionText}</span>
       <span
         className={`font-semibold text-blue-500 ${
           props.direction === "prev"
             ? "doc-pagination-label-prev"
             : "doc-pagination-label-next"
-        } leading-2`}
+        } leading-2 max-w-full flex-shrink truncate`}
       >
         {item.label}
       </span>
