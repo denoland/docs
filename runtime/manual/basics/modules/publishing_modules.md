@@ -51,10 +51,19 @@ your module is set up correctly:
 deno publish --dry-run
 ```
 
-By default, interactive authentication is used to publish - this means that a
-browser window will open to authenticate you with JSR. If you want to publish
-without the interactive browser window, you can use the `--token` flag to
-provide a JSR auth token:
+## Authentication
+
+You can publish your modules from the browser at
+[jsr.io/new](https://jsr.io/new).
+
+You can also publish your package with a GitHub Action. Link your repository by
+following the instructions at
+[jsr.io/docs/publishing-packages#publishing-from-github-actions](https://jsr.io/docs/publishing-packages#publishing-from-github-actions).
+This will allow you to publish packages without needing to provide an auth token
+and instead uses OIDC authentication from GitHub itself.
+
+If you want to publish without the interactive browser window (this is not
+recommended), you can use the `--token` flag to provide a JSR auth token:
 
 ```bash
 deno publish --token <your-auth-token>
@@ -66,17 +75,6 @@ You can create a new auth token at
 If you're configuring a CI pipeline to publish your module, you can use the
 `--token` flag to authenticate with JSR but it's important to ensure that your
 token is kept secure.
-
-If you're publishing a package from GitHub Actions it is recommended to link
-your repository by following the instructions at
-[jsr.io/docs/publishing-packages#publishing-from-github-actions](https://jsr.io/docs/publishing-packages#publishing-from-github-actions).
-This will allow you to publish packages without needing to provide an auth token
-and instead uses OIDC authentication from GitHub itself.
-
-## Other publishing methods
-
-You can publish your modules from the browser at
-[jsr.io/new](https://jsr.io/new).
 
 ## Publishing for Node
 

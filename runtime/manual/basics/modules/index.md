@@ -212,7 +212,7 @@ Supporting URL imports enables us to support the following JavaScript CDNs, as
 they provide URL access to JavaScript modules:
 
 - [deno.land/x](https://deno.land/x)
-- [esm.h](https://esm.sh)
+- [esm.sh](https://esm.sh)
 - [unpkg.com](https://unpkg.com)
 
 URL imports are useful if you have a small, often single file, Deno project that
