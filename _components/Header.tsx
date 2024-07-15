@@ -12,13 +12,13 @@ export default function Header({
         reference ? "" : "sticky top-0 left-0 right-0"
       }`}
     >
-      <nav class="px-4 md:px-6 py-3 h-16 flex items-center justify-between">
+      <nav class="px-4 md:px-6 pt-2.5 pb-2 h-16 flex items-center justify-between">
         <div class="flex items-center">
           {hasSidebar && (
             <button class="mr-2 lg:hidden" id="sidebar-open">
               <svg
-                width="30"
-                height="30"
+                width="24"
+                height="24"
                 viewBox="0 0 30 30"
                 aria-hidden="true"
               >
@@ -33,31 +33,20 @@ export default function Header({
               </svg>
             </button>
           )}
-          <a class="flex items-center gap-3 mr-6" href="/">
+          <a class="flex items-center gap-2.5 mr-5" href="/">
             <div class="block size-6">
               <img src="/img/logo.svg" alt="Deno Docs" />
             </div>
-            <b class="text-xl">Docs</b>
+            {/* custom font size for logo */}
+            <span style={{ fontSize: "1.375rem" }} class="font-semibold">
+              Docs
+            </span>
           </a>
           <HeaderItem
             url={url}
             activeOn="/runtime"
             href="/runtime/manual"
-            name="Deno Runtime"
-            hideOnMobile
-          />
-          <HeaderItem
-            url={url}
-            activeOn="/deploy"
-            href="/deploy/manual"
-            name="Deno Deploy"
-            hideOnMobile
-          />
-          <HeaderItem
-            url={url}
-            activeOn="/subhosting"
-            href="/subhosting/manual"
-            name="Subhosting"
+            name="Runtime"
             hideOnMobile
           />
           <HeaderItem
@@ -71,11 +60,27 @@ export default function Header({
             url={url}
             activeOn="/api"
             href="/api/deno"
-            name="Reference APIs"
+            name="Reference"
+            hideOnMobile
+          />
+          <span class="hidden lg:inline-block mx-2">//</span>
+          <HeaderItem
+            url={url}
+            activeOn="/deploy"
+            href="/deploy/manual"
+            name="Deploy"
+            hideOnMobile
+          />
+          <HeaderItem
+            url={url}
+            activeOn="/subhosting"
+            href="/subhosting/manual"
+            name="Subhosting"
             hideOnMobile
           />
         </div>
-        <div class="flex items-center">
+
+        <div class="flex items-center gap-2">
           <HeaderItem
             url={url}
             href="https://deno.com"
@@ -83,7 +88,7 @@ export default function Header({
             external
             hideOnMobile
           />
-          <div class="w-[100px] lg:w-[150px]">
+          <div class="w-[150px] lg:w-64">
             <orama-search-button />
             <orama-searchbox />
           </div>
@@ -149,7 +154,7 @@ function HeaderItem({
         firstItem ? "ml-0" : ""
       } mx-2.5 px-0.5 text-md hover:text-primary flex items-center ${
         activeOn && url.startsWith(activeOn)
-          ? "text-primary border-b-2 border-primary"
+          ? "text-primary border-b-[1.5px] font-semibold border-blue-200"
           : "border-b-2 border-transparent"
       } ${hideOnMobile ? "max-lg:!hidden" : ""}`}
       href={href}

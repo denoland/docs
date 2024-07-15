@@ -4,6 +4,42 @@
   @apply max-w-[75ch] !important;
 }
 
+/* Align content with the top of the TOC now that it has no header */
+
+#content {
+  @apply mt-2 !important;
+}
+
+#topnav {
+  @apply md:mt-1 !important;
+}
+
+/* Remove the header from the TOC */
+
+.ddoc > .toc > div > nav.documentNavigation > h3 {
+  @apply hidden !important;
+}
+
+/* Adjust spacing to account for removed header */
+
+.ddoc .toc .documentNavigation {
+  @apply md:mt-4 !important;
+}
+
+.ddoc .toc .documentNavigation > ul li {
+  @apply ml-1 !important;
+}
+
+.doc .toc :not(.documentNavigation) > a {
+  @apply text-xl !important;
+}
+
+/* Shrink the ToC a bit as items were rarely long enough to fill it */
+
+.ddoc > .toc {
+  width: 250px !important;
+}
+
 .ddoc .usageContent {
   @apply bg-primary/5 border-primary/25 pt-3.5 pb-4 !important;
 }
