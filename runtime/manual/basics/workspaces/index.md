@@ -2,33 +2,76 @@
 title: "Workspaces"
 ---
 
-Deno supports workspaces, which is a very powerful tool for managing monorepos,
-migrating from Node.js or scoping configuration to particular directories.
+Deno supports workspaces, also known as "monorepos", which allow you to manage
+multiple related and interdependent packages simultaneously.
 
-A "workspace" is a collection of folders that contain configuration files. These
-config files may contain directory specific config or define a package.
+A "workspace" is a collection of folders containing `deno.json` or
+`package.json` configuration files. The root `deno.json` file defines the
+workspace:
 
 ```jsonc, title="deno.json"
 {
-  // or shorthand: "workspace": ["./add", "./subtract"]
-  "workspace": {
-    "members": ["./add", "./subtract"]
+  "workspace": ["./add", "./subtract"]
+}
+```
+
+This configures a workspace with `add` and `subtract` members, which are
+directories expected to have `deno.json(c)` and/or `package.json` files.
+
+:::info Naming
+
+Deno uses `workspace` rather than npm's `workspaces` to represent a singular
+workspace with multiple members.
+
+:::
+
+## Example
+
+Let's expand on the `deno.json` workspace example and see its functionality. The
+file hierarchy looks like this:
+
+```
+/deno.json
+/main.ts
+/add/deno.json
+/add/mod.ts
+/subtract/deno.json
+/subtract/mod.ts
+```
+
+There are two workspace members (add and subtract), each with `mod.ts` files.
+There is also a root `deno.json` and a `main.ts`.
+
+The top-level `deno.json` configuration file defines the workspace and a
+top-level import map applied to all members:
+
+```json, title="deno.json"
+{
+  "workspace": ["./add", "./subtract"],
+  "imports": {
+    "chalk": "npm:chalk@5"
   }
 }
 ```
 
-The above `deno.json` file configures a workspace with `add` and `subtract`
-members, these are names of the directories that are expected to have a
-`deno.json(c)` and/or `package.json` file.
+The root `main.ts` file uses the `chalk` bare specifier from the import map and
+imports the `add` and `subtract` functions from the workspace members. Note that
+it imports them using `@scope/add` and `@scope/subtract`, even though these are
+not proper URLs and aren't in the import map. How are they resolved?
 
-Note that Deno workspaces uses the keyword `workspace` rather than npm's
-`workspaces`, since it represents a singular workspace with multiple workspace
-members.
+```js, title="main.ts"
+import chalk from "chalk";
+import { add } from "@scope/add";
+import { subtract from "@scope/subtract";
 
-## Monorepo example
+console.log("1 + 2 =", chalk.green(add(1, 2)));
+console.log("2 - 4 =", chalk.red(subtract(2, 4)));
+```
 
-Let's see the above workspace in action, in a small and simple 2-package
-monorepo:
+In the `add/` subdirectory, we define a `deno.json` with a `"name"` field, which
+is important for referencing the workspace member. The `deno.json` file also
+contains example configurations, like turning off semicolons when using
+`deno fmt`.
 
 ```json, title="add/deno.json"
 {
@@ -47,6 +90,9 @@ export function add(a: number, b: number): number {
 }
 ```
 
+The `subtract/` subdirectory is similar but does not have the same `deno fmt`
+configuration.
+
 ```json, title="subtract/deno.json"
 {
   "name": "@scope/subtract",
@@ -55,7 +101,7 @@ export function add(a: number, b: number): number {
 }
 ```
 
-```js, title="subtract/mod.ts"
+```ts, title="subtract/mod.ts"
 import { add } from "@scope/add";
 
 export function subtract(a: number, b: number): number {
@@ -63,27 +109,13 @@ export function subtract(a: number, b: number): number {
 }
 ```
 
-```json, title="deno.json"
-{
-  "workspace": ["./add", "./subtract"],
-  "imports": {
-    "chalk": "npm:chalk@5"
-  }
-}
-```
-
-```js, title="main.ts"
-import chalk from "chalk";
-import { add } from "@scope/add";
-import { subtract } from "@scope/subtract";
-
-console.log("1 + 2 =", chalk.green(add(1, 2)));
-console.log("2 - 4 =", chalk.red(subtract(2, 4)));
-```
-
 Let's run it:
 
-![Workspace example](/img/workspace-example.png)
+```
+> deno run main.ts
+1 + 2 = 3
+2 - 4 = -2
+```
 
 There's a lot to unpack here, showcasing some of the Deno workspace features:
 
