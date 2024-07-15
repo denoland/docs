@@ -1,5 +1,5 @@
 ---
-Title: Publishing Modules
+title: Publishing Modules
 oldUrl:
   - /runtime/manual/advanced/publishing/dnt/
   - /runtime/manual/advanced/publishing/
