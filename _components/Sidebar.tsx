@@ -12,7 +12,7 @@ export default function Sidebar(
 ) {
   return (
     <nav
-      class="pt-2 p-2 pr-0 overflow-y-auto h-[calc(100%-4rem)]"
+      class="pt-2 pb-8 p-2 pr-0 overflow-y-auto h-[calc(100%-2rem)]"
       style={{ scrollbarGutter: "stable", scrollbarWidth: "thin" }}
     >
       <ul>

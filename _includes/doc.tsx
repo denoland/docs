@@ -72,8 +72,8 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
           >
             <svg
               viewBox="0 0 15 15"
-              width="21"
-              height="21"
+              width="16"
+              height="16"
               class="text-gray-600"
             >
               <g stroke="currentColor" stroke-width="1.2">
@@ -99,7 +99,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         style={{ scrollbarGutter: "stable" }}
       >
         <main class="mx-auto max-w-screen-xl w-full overflow-x-hidden pt-4 pb-8 flex flex-grow">
-          <div class="flex-grow px-4 sm:px-8 max-w-full lg:max-w-[75%]">
+          <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full lg:max-w-[75%]">
             <article class="max-w-[66ch]">
               <Breadcrumbs
                 title={props.title!}

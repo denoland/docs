@@ -104,6 +104,15 @@ body:not(:has(.ddoc)) {
   font-feature-settings: "cv05" on, "cv08" on, "cv09" on, "ss01" on, "ss08" on;
 }
 
+/* Orama search style overrides */
+.searchbutton-module_searchbutton__gg7JJ {
+  @apply w-64 border-gray-00 !important;
+}
+
+.searchbutton-module_searchbutton__keys__qckL6 {
+  @apply border-gray-00 text-gray-1 !important;
+}
+
 .searchbox-module_searchbox__TygrP {
   border: var(--ifm-toc-border-color) 1px solid;
 }
