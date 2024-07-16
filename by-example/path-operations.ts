@@ -13,14 +13,16 @@
 
 // First we will import the module from the Deno standard library
 import * as path from "jsr:@std/path";
+import * as posix from "jsr:@std/path/posix";
+import * as windows from "jsr:@std/path/windows";
 
 // Converting from a file url to a directory can be done simply by the `fromFileUrl`
 // method from the appropriate implementation.
-const p1 = path.posix.fromFileUrl("file:///home/foo");
-const p2 = path.win32.fromFileUrl("file:///home/foo");
+const p1 = posix.fromFileUrl("file:///home/foo");
+const p2 = windows.fromFileUrl("file:///home/foo");
 console.log(`Path 1: ${p1} Path 2: ${p2}`);
 
-// We can also choose to not specify and automatically use whatever Deno is running on
+// We can also choose to not specify the platform and automatically use whatever Deno is running on
 const p3 = path.fromFileUrl("file:///home/foo");
 console.log(`Path on current OS: ${p3}`);
 
