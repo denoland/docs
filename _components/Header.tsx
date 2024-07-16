@@ -152,7 +152,7 @@ function HeaderItem({
     <a
       class={`mt-1 ${
         firstItem ? "ml-0" : ""
-      } mx-2.5 px-0.5 text-md hover:text-primary flex items-center ${
+      } mx-2.5 px-0.5 text-md hover:text-primary text-nowrap flex items-center ${
         activeOn && url.startsWith(activeOn)
           ? "text-primary border-b-[1.5px] font-semibold border-blue-200"
           : "border-b-2 border-transparent"
