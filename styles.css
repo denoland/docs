@@ -210,20 +210,12 @@ body:not(:has(.ddoc)) {
   @apply block;
 }
 
-.doc-pagination-label-next::after {
-  content: " »";
-}
-
-.doc-pagination-label-prev::before {
-  content: "« ";
-}
-
 /* Custom DDOC styles for the Deno documentation */
 .ddoc {
   /* Categories panel */
   > .toc {
     @apply border-r border-gray-000;
-    
+
     .documentNavigation {
       > h3 {
         margin: 0.75rem 0.75rem 0.5rem !important;
@@ -232,36 +224,36 @@ body:not(:has(.ddoc)) {
       }
     }
   }
-  
+
   .documentNavigation > ul > li > a {
-    @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline  py-1.5 px-3.5 !important
+    @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline  py-1.5 px-3.5 !important;
   }
-  
+
   .contextLink {
     @apply text-primary !important;
     /* 40% opacity of for decoration color primary */
     text-decoration-color: rgba(9, 107, 218, 0.4) !important;
   }
-  
+
   #content .toc .documentNavigation {
     > h3 {
       @apply hidden !important;
     }
-    
+
     > ul {
       @apply border-l border-gray-000 !important;
-      
+
       > ul > li a {
         @apply hover:bg-blue-50 rounded-lg hover:no-underline !important;
       }
     }
   }
-  
+
   .markdown {
     pre {
       @apply border-gray-000 !important;
     }
-    
+
     /* This comes from gfm css, should be replaced with something in our color palette once we establish it. */
     :not(pre) > code {
       background-color: var(--color-neutral-muted) !important;
