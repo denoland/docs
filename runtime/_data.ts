@@ -36,11 +36,9 @@ export const sidebar = [
         label: "Using & Publishing Modules",
         items: [
           "/runtime/manual/basics/modules/",
+          "/runtime/manual/basics/modules/publishing_modules/",
           "/runtime/manual/basics/modules/reloading_modules/",
-          "/runtime/manual/basics/modules/proxies/",
           "/runtime/manual/basics/modules/integrity_checking/",
-          "/runtime/manual/advanced/publishing/",
-          "/runtime/manual/advanced/publishing/dnt/",
           "/runtime/manual/advanced/private_repositories/",
         ],
       },
@@ -303,7 +301,6 @@ export const sidebar = [
         label: "Basic Examples",
         items: [
           "/runtime/tutorials/hello_world/",
-          "/runtime/tutorials/manage_dependencies/",
           "/runtime/tutorials/fetch_data/",
           "/runtime/tutorials/read_write_files/",
           "/runtime/tutorials/hashbang/",
