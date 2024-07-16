@@ -5,6 +5,7 @@ oldUrl:
   - /manual/
   - /runtime/manual/introduction/
   - /runtime/
+  - /manual/introduction/
 ---
 
 [Deno](https://www.deno.com)
