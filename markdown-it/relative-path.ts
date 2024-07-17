@@ -5,7 +5,8 @@ export default function relativeLinksPlugin(md: any) {
   function makeRelative(link: string, baseURL: string) {
     if (
       link.startsWith("http://") || link.startsWith("https://") ||
-      link.startsWith("/") || link.startsWith("#") || link.startsWith("mailto:")
+      link.startsWith("/") || link.startsWith("#") ||
+      link.startsWith("mailto:") || link.startsWith("vscode:")
     ) {
       return link;
     }
