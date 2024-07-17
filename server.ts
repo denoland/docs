@@ -137,4 +137,6 @@ server.use(async (req, next, info) => {
   }
 });
 
+server.start();
+
 console.log("Listening on http://localhost:8000");
