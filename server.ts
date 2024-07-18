@@ -8,6 +8,7 @@ import {
   isRedirect,
   isServerError,
 } from "ga4";
+import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 
 const server = new Server({
   port: 8000,
@@ -104,38 +105,7 @@ function ga4(
   });
 }
 
-server.use(async (req, next, info) => {
-  let err;
-  let res: Response;
-  try {
-    const url = new URL(req.url, "http://localhost:8000");
-    const redirect = REDIRECTS[url.pathname] || REDIRECTS[url.pathname + "/"];
-    if (redirect) {
-      res = new Response(null, {
-        status: 301,
-        headers: {
-          "Location": redirect,
-        },
-      });
-    } else {
-      res = await next(req);
-    }
-    return res;
-  } catch (e) {
-    res = new Response("Internal Server Error", {
-      status: 500,
-    });
-    err = e;
-    throw e;
-  } finally {
-    ga4(
-      req,
-      info.remoteAddr,
-      res!,
-      err,
-    );
-  }
-});
+server.use(apiDocumentContentTypeMiddleware);
 
 server.start();
 
