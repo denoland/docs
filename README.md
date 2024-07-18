@@ -38,25 +38,33 @@ The actual content of the docs site is found mostly in these folders:
 - `runtime` - docs for the Deno CLI / runtime
 - `deploy` - docs for the Deno Deploy cloud service
 - `subhosting` - docs for Deno Subhosting
+- `by-example` - docs for the [Examples](#Examples) section
 
-Most files are [markdown](https://docusaurus.io/docs/markdown-features), but
-even markdown files are processed with [MDX](https://mdxjs.com/), which enables
-you to use JSX syntax within your markdown files.
+Most files are [markdown](https://lume.land/plugins/markdown/), but even
+markdown files are processed with [MDX](https://mdxjs.com/), which enables you
+to use JSX syntax within your markdown files.
 
-Left navigation for the different doc sections are configured in one of these
-files:
+Left navigation for the different doc sections are configured in the `_data.ts`
+files in their respective content directories.
 
-- `sidebars/runtime.js` - sidebar config for the Runtime section
-- `sidebars/deploy.js` - sidebar config for the Deno Deploy section
-- `sidebars/kv.js` - sidebar config for the KV section
+- `runtime/_data.ts` - sidebar config for the Runtime section
+- `deploy/_data.ts` - sidebar config for the Deno Deploy section
 
 Static files (like screenshots) can be included directly in the `runtime`,
 `deploy`, or `kv` folders, and referenced by relative URLs in your markdown.
 
-Docusaurus provides a number of nice extensions to markdown you might want to
-use, like tabs, admonitions, and code blocks.
-[Refer to the Docusaurus docs](https://docusaurus.io/docs/markdown-features) for
-more details.
+## Reference docs
+
+The reference docs served at `/api` are generated via the `deno doc` subcommand.
+To generate the reference docs locally, in the `reference_gen` directory, run:
+
+```console
+deno task types
+deno task doc
+```
+
+This will generate the reference docs, and you can use the `serve` or `build`
+tasks.
 
 ## Versioning docs content
 
@@ -75,9 +83,6 @@ For additive changes, it should usually be sufficient to indicate which version
 a feature or API was released in. For example - in the Node 20 docs, the
 [register function](https://nodejs.org/dist/latest-v20.x/docs/api/module.html#moduleregister)
 is marked as being added in version `20.6.0`.
-
-When we do want to maintain versioned docs for major releases, we currently plan
-to use [Docusaurus versions](https://docusaurus.io/docs/versioning).
 
 ## Including version numbers in code and content
 
@@ -174,19 +179,6 @@ and in search results.
 After the JS Doc comment, you can write the code. Code can be prefixed with a
 comment that describes the code. The comment will be rendered next to the code
 in the example page.
-
-## Reference docs
-
-The reference docs are generated via the `deno doc` subcommand. To generate the
-reference docs locally, in the `reference_gen` directory, run:
-
-```console
-deno task types
-deno task doc
-```
-
-This will generate the reference docs, and you can use the `serve` or `build`
-tasks.
 
 ## Special thanks for historical contributions
 
