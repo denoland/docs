@@ -8,6 +8,7 @@ import {
   isRedirect,
   isServerError,
 } from "ga4";
+import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 
 const server = new Server({
   port: 8000,
@@ -136,6 +137,7 @@ server.use(async (req, next, info) => {
     );
   }
 });
+server.use(apiDocumentContentTypeMiddleware);
 
 server.start();
 

@@ -30,10 +30,16 @@ import {
   generateDocumentsForSymbols,
   OramaDocument,
 } from "./orama.ts";
+import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 
 const site = lume({
   location: new URL("https://docs.deno.com"),
   caseSensitiveUrls: true,
+  server: {
+    middlewares: [
+      apiDocumentContentTypeMiddleware,
+    ],
+  },
 }, {
   markdown: {
     plugins: [
@@ -69,6 +75,7 @@ site.copy("deploy/kv/tutorials/images");
 site.copy("runtime/manual/images");
 site.copy("deno.json");
 site.copy("server.ts");
+site.copy("middleware.ts");
 
 site.use(redirects({
   output: "json",
