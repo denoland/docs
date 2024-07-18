@@ -7,6 +7,7 @@ import search from "lume/plugins/search.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import redirects from "lume/plugins/redirects.ts";
 import sitemap from "lume/plugins/sitemap.ts";
+import type { Middleware } from "lume/core/server.ts";
 
 import tailwindConfig from "./tailwind.config.js";
 
@@ -31,9 +32,30 @@ import {
   OramaDocument,
 } from "./orama.ts";
 
+const apiDocumentContentTypeMiddleware: Middleware = async (request, next) => {
+  const response = await next(request);
+
+  const requestToApiDoc = new URL(request.url).pathname.startsWith("/api");
+  if (requestToApiDoc) {
+    // Requests to API docs located under `/api` should all be served as HTML.
+    // We need to explicitly set the content type here because some file names
+    // confuse the MIME type detection - for example, the file name
+    // `Deno.Kv.prototype.list` is inferred as `text/plain` but it should be
+    // `text/html` for browsers to render it correctly.
+    response.headers.set("content-type", "text/html");
+  }
+
+  return response;
+};
+
 const site = lume({
   location: new URL("https://docs.deno.com"),
   caseSensitiveUrls: true,
+  server: {
+    middlewares: [
+      apiDocumentContentTypeMiddleware,
+    ],
+  },
 }, {
   markdown: {
     plugins: [
