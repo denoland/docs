@@ -18,7 +18,7 @@ export const apiDocumentContentTypeMiddleware: Middleware = async (
     response.headers.get("content-type"),
   );
   if (requestToApiDoc && !contentTypeSetToCssOrJs) {
-    response.headers.set("content-type", "text/html");
+    response.headers.set("content-type", "text/html; charset=utf-8");
   }
 
   return response;
