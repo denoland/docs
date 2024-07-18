@@ -41,7 +41,7 @@ using the `@ts-types` compiler hint. `@ts-types` needs to be a single line
 double slash comment, where when used impacts the next import or re-export
 statement.
 
-For example if I have a JavaScript modules `coolLib.js` and I had a separate
+For example if I have a JavaScript module `coolLib.js` and I had a separate
 `coolLib.d.ts` file that I wanted to use, I would import it like this:
 
 ```ts
@@ -53,7 +53,7 @@ When type checking `coolLib` and your usage of it in the file, the
 `coolLib.d.ts` types will be used instead of looking at the JavaScript file.
 
 The pattern matching for the compiler hint is somewhat forgiving and will accept
-quoted and non-question values for the specifier as well as accepting whitespace
+quoted and non-quoted values for the specifier as well as accepting whitespace
 before and after the equals sign.
 
 > ℹ️ _Note_: The directive `@deno-types` can be used as an alias for `@ts-types`.
