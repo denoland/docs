@@ -2,16 +2,26 @@
 title: "Test Coverage"
 ---
 
-Deno will collect test coverage into a directory for your code if you specify the `--coverage` flag when starting `deno test`. 
-This coverage information is acquired directly from the JavaScript engine (V8), ensuring high accuracy.
+Deno will collect test coverage into a directory for your code if you specify
+the `--coverage` flag when starting `deno test`. This coverage information is
+acquired directly from the JavaScript engine (V8), ensuring high accuracy.
 
-This can then be further processed from the internal format into well known formats by the `deno coverage` tool.
+This can then be further processed from the internal format into well known
+formats by the `deno coverage` tool.
 
 > ⚠️ To ensure consistent coverage results, make sure to process coverage data
 > immediately after running tests. Otherwise source code and collected coverage
 > data might get out of sync and unexpectedly show uncovered lines.
 
-The `--clean` flag has been introduced to the test runner [with Deno v1.44](https://deno.com/blog/v1.44#clean-coverage-directory-on-test-runs). This flag empties the coverage directory before running the test suite, preventing outdated coverage data from long-deleted files from lingering. However, be aware that this flag will cause conflicts when running multiple `deno test` commands in parallel or in series, and then viewing the aggregated coverage report. If you are running tests in parallel, you should not use this flag. If running in series, only pass this flag to the first `deno test` invocation.
+The `--clean` flag has been introduced to the test runner
+[with Deno v1.44](https://deno.com/blog/v1.44#clean-coverage-directory-on-test-runs).
+This flag empties the coverage directory before running the test suite,
+preventing outdated coverage data from long-deleted files from lingering.
+However, be aware that this flag will cause conflicts when running multiple
+`deno test` commands in parallel or in series, and then viewing the aggregated
+coverage report. If you are running tests in parallel, you should not use this
+flag. If running in series, only pass this flag to the first `deno test`
+invocation.
 
 ```bash
 # Go into your project's working directory
