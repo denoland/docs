@@ -171,3 +171,42 @@ cargo clean && cargo build -vv
 # Run:
 ./target/debug/deno run tests/testdata/run/002_hello.ts
 ```
+
+## Working with Multiple Crates
+
+If a change-set spans multiple Deno crates, you may want to build multiple
+crates together. It's suggested that you checkout all the required crates next
+to one another. For example:
+
+```shell
+- denoland/
+  - deno/
+  - deno_core/
+  - deno_ast/
+  - ...
+```
+
+Then you can use
+[Cargo's patch feature](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html)
+to override the default dependency paths:
+
+```shell
+cargo build --config 'patch.crates-io.deno_ast.path="../deno_ast"'
+```
+
+If you are working on a change-set for few days, you may prefer to add the patch
+to your `Cargo.toml` file (just make sure you remove this before staging your
+changes):
+
+```
+[patch.crates-io]
+deno_ast = { path = "../deno_ast" }
+```
+
+This will build the `deno_ast` crate from the local path and link against that
+version instead of fetching it from `crates.io`.
+
+**Note**: It's important that the version of the dependencies in the
+`Cargo.toml` match the version of the dependencies you have on disk.
+
+Use `cargo search <dependency_name>` to inspect the versions.
