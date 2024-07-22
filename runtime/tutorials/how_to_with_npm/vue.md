@@ -161,7 +161,7 @@ Here is the complete code below:
 <script>
 import { ref } from 'vue'
 import { store } from '../store.js'
-export default ({
+export default {
   async setup() {
     const res = await fetch("http://localhost:8000/api")
     const dinosaurs = await res.json();
@@ -174,7 +174,7 @@ export default ({
       store
     }
   }
-})
+}
 </script>
 
 <template>
@@ -275,13 +275,13 @@ Tying it all together, let's update `src/App.vue`:
 
 ```tsx
 <template>
-  <router-view />
+  <RouterView />
 </template>;
 ```
 
 ## Add routing
 
-You'll notice that we have used `<router-link>` and `<router-view>`. These
+You'll notice that we have used `<RouterLink>` and `<RouterView>`. These
 components are part of the [`vue-router` library](https://router.vuejs.org/),
 which we'll have to setup and configure in another file.
 
@@ -300,13 +300,13 @@ export default defineConfig({
 });
 ```
 
-Next, let's create a folder named `router`. In it, let's create `index.ts`:
+Next, let's create a folder named `router`. In it, let's create `index.js`:
 
 ```console
-mkdir router && touch router/index.ts
+mkdir router && touch router/index.js
 ```
 
-In `router/index.ts`, we'll create `router`, which contains information about
+In `router/index.js`, we'll create `router`, which contains information about
 each route and their component, and export it. For more information on using
 `vue-router`, check out their [guide](https://router.vuejs.org/guide).
 
@@ -337,7 +337,7 @@ const router = createRouter({
 export default router;
 ```
 
-Next, in our `src/main.ts` file, which contains all of the logic for the
+Next, in our `src/main.js` file, which contains all of the logic for the
 frontend app, we'll have to import and use `router`:
 
 ```ts
