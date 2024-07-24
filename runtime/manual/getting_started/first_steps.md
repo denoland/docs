@@ -219,7 +219,8 @@ JSR as well as directly from URLs.
 
 To see this in action, let's create a test for the `person.ts` module we created
 above. Deno provides a [built-in test runner](../basics/testing/index.md), which
-uses an assertion module distributed via [JSR](https://jsr.io/docs/introduction).
+uses an assertion module distributed via
+[JSR](https://jsr.io/docs/introduction).
 
 ```ts title="person_test.ts"
 import { assertEquals } from "jsr:@std/assert";

@@ -40,14 +40,14 @@ import "jsr:@std/dotenv/load";
 console.log(Deno.env.get("GREETING")); // "Hello, world."
 ```
 
-Further documentation for `.env` handling can be found in the 
+Further documentation for `.env` handling can be found in the
 [@std/dotenv](https://jsr.io/@std/dotenv/doc) documentation.
 
 ## `std/cli`
 
-The Deno standard library has a
-[`std/cli` module](https://jsr.io/@std/cli) for parsing command line
-arguments. Please refer to the module for documentation and examples.
+The Deno standard library has a [`std/cli` module](https://jsr.io/@std/cli) for
+parsing command line arguments. Please refer to the module for documentation and
+examples.
 
 ## Special environment variables
 

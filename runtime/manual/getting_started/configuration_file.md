@@ -31,7 +31,7 @@ Since version 1.30, the `deno.json` configuration file acts as an
 {
   "imports": {
     "std/assert": "jsr:@std/assert@^1.0.0"
-  }
+  },
   "tasks": {
     "dev": "deno run --watch main.ts"
   }
