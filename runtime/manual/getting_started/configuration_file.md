@@ -30,8 +30,8 @@ Since version 1.30, the `deno.json` configuration file acts as an
 ```jsonc
 {
   "imports": {
-    "std/": "https://deno.land/std@0.224.0/"
-  },
+    "std/assert": "jsr:@std/assert@^1.0.0"
+  }
   "tasks": {
     "dev": "deno run --watch main.ts"
   }
@@ -44,7 +44,7 @@ import maps.
 Then your script can use the bare specifier `std`:
 
 ```js
-import { assertEquals } from "std/assert/mod.ts";
+import { assertEquals } from "std/assert";
 
 assertEquals(1, 2);
 ```
@@ -307,7 +307,7 @@ works as well:
     "start": "deno run --allow-read main.ts"
   },
   "imports": {
-    "oak": "https://deno.land/x/oak@v12.4.0/mod.ts"
+    "oak": "jsr:@oak/oak"
   },
   "exclude": [
     "dist/"
