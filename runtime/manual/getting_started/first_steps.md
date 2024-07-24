@@ -214,17 +214,15 @@ name of your imports.
 
 ## Remote modules and the Deno standard library
 
-Deno supports loading and executing code from URLs, much as you would using a
-`<script>` tag in the browser. In Deno 1.x, the
-[standard library](https://deno.land/std) and most
-[third-party modules](https://deno.land/x) are distributed on HTTPS URLs.
+Deno supports loading and executing code from package registries like NPM and
+JSR as well as directly from URLs.
 
 To see this in action, let's create a test for the `person.ts` module we created
 above. Deno provides a [built-in test runner](../basics/testing/index.md), which
-uses an assertion module distributed via HTTPS URL.
+uses an assertion module distributed via [JSR](https://jsr.io/docs/introduction).
 
 ```ts title="person_test.ts"
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { assertEquals } from "jsr:@std/assert";
 import Person, { sayHello } from "./person.ts";
 
 Deno.test("sayHello function", () => {
@@ -254,8 +252,8 @@ sayHello function ... ok (4ms)
 ok | 1 passed | 0 failed (66ms)
 ```
 
-There's much more to explore with [the standard library](https://deno.land/std)
-and [third-party modules](https://deno.land/x) - be sure to check them out!
+There's much more to explore with [the standard library](https://jsr.io/@std)
+and [third-party modules](https://jsr.io/packages) - be sure to check them out!
 
 ## Configure your project with deno.json
 
@@ -274,14 +272,14 @@ frequently used modules.
   use in our project to version <code>0.224.0</code>.
 </p>
 
-Create a `deno.jsonc` file with the following contents.
+Create a `deno.json` file with the following contents.
 
-```js title="deno.jsonc"
+```js title="deno.json"
 {
   "imports": {
     // The dollar sign in front of "std" isn't special - it's an optional
     // convention to show that $std is an alias set up in an import map
-    "$std/": "https://deno.land/std@0.224.0/"
+    "$assert": "jsr:@std/assert@^1.0.0"
   }
 }
 ```
@@ -289,7 +287,7 @@ Create a `deno.jsonc` file with the following contents.
 Now, open up your test file from before, and change it to use this import alias.
 
 ```ts title="person_test.ts"
-import { assertEquals } from "$std/assert/mod.ts";
+import { assertEquals } from "$assert";
 import Person, { sayHello } from "./person.ts";
 
 Deno.test("sayHello function", () => {
@@ -305,7 +303,7 @@ Deno.test("sayHello function", () => {
 Running the test with `deno test person_test.ts` should work just as before, but
 you might notice that Deno downloads a few extra files and generates a
 `deno.lock` file, specifying a set of files depended on by your code. Both
-`deno.jsonc` and `deno.lock` can be checked in to source control.
+`deno.json` and `deno.lock` can be checked in to source control.
 
 Learn more about
 [configuring your project here](../getting_started/configuration_file.md).
