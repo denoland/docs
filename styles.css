@@ -222,9 +222,20 @@ body:not(:has(.ddoc)) {
 /* Custom DDOC styles for the Deno documentation */
 .ddoc {
   @apply pt-0 !important;
-  
+
   #categoryPanel {
     @apply border-r border-gray-000;
+    @apply pt-4 !important;
+
+    li:hover {
+      @apply bg-blue-50 rounded-md !important;
+      > a {
+        @apply no-underline !important;
+      }
+    }
+    .active {
+      @apply bg-blue-50 rounded-md !important;
+    }
   }
 
   .contextLink {
@@ -240,7 +251,7 @@ body:not(:has(.ddoc)) {
 
     > ul {
       @apply border-l border-gray-000 !important;
-      
+
       > li > a {
         @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline  py-1.5 px-3.5 !important;
       }
