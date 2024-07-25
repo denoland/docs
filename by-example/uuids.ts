@@ -4,7 +4,7 @@
  * @tags cli, deploy, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID} MDN: crypto.randomUUID
- * @resource {$std/uuid} Doc: @std/uuid
+ * @resource {https://jsr.io/@std/uuid/doc} Doc: @std/uuid
  * @group Cryptography
  *
  * UUIDs (universally unique identifier) can be used to uniquely identify some

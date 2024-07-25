@@ -4,7 +4,7 @@
  * @tags cli
  * @run --allow-read <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.readDir} Doc: Deno.readDir
- * @resource {$std/fs/walk} Doc: @std/walk
+ * @resource {https://jsr.io/@std/fs/doc/walk/~} Doc: @std/fs/walk
  * @group File System
  *
  * When doing something like filesystem routing, it is

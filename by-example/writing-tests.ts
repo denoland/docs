@@ -4,7 +4,7 @@
  * @tags cli
  * @run deno test --allow-read --allow-write <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.test} Doc: Deno.test
- * @resource {$std/assert} Doc: @std/asserts
+ * @resource {https://jsr.io/@std/assert/doc} Doc: @std/assert
  * @group CLI
  *
  * One of the most common tasks in developing software is writing tests for
