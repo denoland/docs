@@ -84,24 +84,6 @@ a feature or API was released in. For example - in the Node 20 docs, the
 [register function](https://nodejs.org/dist/latest-v20.x/docs/api/module.html#moduleregister)
 is marked as being added in version `20.6.0`.
 
-## Including version numbers in code and content
-
-It may occasionally be desirable to dynamically include the current Deno CLI or
-standard library version in content or code samples. We can accomplish this
-using the `replacements.json` file at the root of this repository.
-
-Any values you would like to change once, and then have appear dynamically in a
-number of generated files, should be included in `replacements.json`.
-
-In code samples (fenced with backticks), you can include a `$` character,
-followed by the replacement variable name, directly within the code sample. When
-the markdown is transformed, the current version number will be replaced within
-it.
-
-```ts
-import { copy } from "jsr:@std/fs/copy";
-```
-
 ## Contribution
 
 We are very grateful for any help you can offer to improve Deno's documentation!
