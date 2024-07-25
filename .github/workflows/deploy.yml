@@ -20,7 +20,7 @@ jobs:
       - name: Set up Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: canary
+          deno-version: b305ba3e1c155a33139ec0d764f547ffde4d4de4
 
       - name: "Reference: generate types"
         working-directory: "reference_gen"
