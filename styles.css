@@ -272,4 +272,7 @@ body:not(:has(.ddoc)) {
       background-color: var(--color-neutral-muted) !important;
     }
   }
+  .markdown_summary :not(pre) > code {
+    background-color: var(--color-neutral-muted) !important;
+  }
 }
