@@ -221,17 +221,8 @@ body:not(:has(.ddoc)) {
 
 /* Custom DDOC styles for the Deno documentation */
 .ddoc {
-  /* Categories panel */
-  > .toc {
+  > #categoryPanel {
     @apply border-r border-gray-000;
-
-    .documentNavigation {
-      > h3 {
-        margin: 0.75rem 0.75rem 0.5rem !important;
-        padding-bottom: 0.1rem;
-        @apply text-gray-4 font-normal text-xs border-b border-gray-000 leading-normal uppercase !important;
-      }
-    }
   }
 
   .documentNavigation > ul > li > a {
@@ -255,6 +246,18 @@ body:not(:has(.ddoc)) {
       > ul > li a {
         @apply hover:bg-blue-50 rounded-lg hover:no-underline !important;
       }
+    }
+  }
+
+  #categoryPanel {
+    li:hover {
+      @apply bg-blue-50 rounded-md !important;
+      > a {
+        @apply no-underline !important;
+      }
+    }
+    .active {
+      @apply bg-blue-50 rounded-md !important;
     }
   }
 
