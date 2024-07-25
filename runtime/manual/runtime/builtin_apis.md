@@ -11,7 +11,6 @@ For a full list of Deno Built-in APIs, see the
 [reference](https://docs.deno.com/api/deno/~/Deno). Below we highlight some of
 the most important.
 
-
 ## File System
 
 The Deno runtime comes with
@@ -48,8 +47,9 @@ Refer to the links below for code samples of how to create a subprocess.
 
 ## Errors
 
-The Deno runtime comes with [20 error classes](https://docs.deno.com/api/deno/errors)
-that can be raised in response to a number of conditions.
+The Deno runtime comes with
+[20 error classes](https://docs.deno.com/api/deno/errors) that can be raised in
+response to a number of conditions.
 
 Some examples are:
 

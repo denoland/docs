@@ -103,7 +103,6 @@ documentation on https://docs.deno.com/api, and https://jsr.io.
 
 Languages: **Rust**
 
-
 ### [`rusty_v8`](https://github.com/denoland/rusty_v8)
 
 Rust bindings for the V8 JavaScript engine. Very technical and low-level.

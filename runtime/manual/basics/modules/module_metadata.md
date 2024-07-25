@@ -26,9 +26,9 @@ oldUrl:
   [import.meta.resolve](https://docs.deno.com/api/web/~/ImportMeta#property_resolve)
   allows you to resolve specifier relative to the current module. This function
   takes into account an import map (if one was provided on startup).
-- The string [Deno.mainModule](https://docs.deno.com/api/deno/~/Deno.mainModule) will
-  give you the URL of the main module entry point, i.e. the module invoked by
-  the deno runtime.
+- The string [Deno.mainModule](https://docs.deno.com/api/deno/~/Deno.mainModule)
+  will give you the URL of the main module entry point, i.e. the module invoked
+  by the deno runtime.
 
 ## Example
 

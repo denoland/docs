@@ -73,10 +73,9 @@ Deno.serve(handler);
 `Deno.readFile()` allows you to read a file fully into memory.
 
 The function definition is similar to
-[Deno](https://docs.deno.com/api/deno/~/Deno.readFile), but it doesn't
-support
-[`ReadFileOptions`](https://docs.deno.com/api/deno/~/Deno.ReadFileOptions)
-for the time being. Support will be added in the future.
+[Deno](https://docs.deno.com/api/deno/~/Deno.readFile), but it doesn't support
+[`ReadFileOptions`](https://docs.deno.com/api/deno/~/Deno.ReadFileOptions) for
+the time being. Support will be added in the future.
 
 ```ts
 function Deno.readFile(path: string | URL): Promise<Uint8Array>
@@ -205,8 +204,8 @@ handle.
 
 The function definition is similar to
 [Deno](https://docs.deno.com/api/deno/~/Deno.open), but it doesn't support
-[`OpenOptions`](https://docs.deno.com/api/deno/~/Deno.OpenOptions) for the
-time being. Support will be added in the future.
+[`OpenOptions`](https://docs.deno.com/api/deno/~/Deno.OpenOptions) for the time
+being. Support will be added in the future.
 
 ```ts
 function Deno.open(path: string | URL): Promise<Deno.File>
@@ -237,10 +236,9 @@ Deno.serve(handler);
 used to read chunks of the file using the `read()` method. The file handle can
 be closed using the `close()` method.
 
-The interface is similar to
-[Deno](https://docs.deno.com/api/deno/~/Deno.File), but it doesn't support
-writing to the file, or seeking. Support for the latter will be added in the
-future.
+The interface is similar to [Deno](https://docs.deno.com/api/deno/~/Deno.File),
+but it doesn't support writing to the file, or seeking. Support for the latter
+will be added in the future.
 
 ```ts
 class File {
