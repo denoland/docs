@@ -22,17 +22,6 @@ deno cache --reload my_module.ts
 Sometimes we want to upgrade only some modules. You can control it by passing an
 argument to a `--reload` flag.
 
-<p>
-  To reload all <code>0.224.0</code> standard modules:
-</p>
-
 ```bash
-deno cache --reload=https://deno.land/std@0.224.0 my_module.ts
-```
-
-To reload specific modules (in this example - colors and file system copy) use a
-comma to separate URLs.
-
-```bash
-deno cache --reload=https://deno.land/std@0.224.0/fs/copy.ts,https://deno.land/std@0.224.0/fmt/colors.ts my_module.ts
+deno cache --reload=jsr:@std/fs my_module.ts
 ```

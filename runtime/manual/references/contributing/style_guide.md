@@ -324,7 +324,7 @@ foo() returns bar object ... ok
 Example of test:
 
 ```ts
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { assertEquals } from "@std/assert";
 import { foo } from "./mod.ts";
 
 Deno.test("foo() returns bar object", function () {
@@ -360,7 +360,7 @@ export function foo(): string {
 
 #### Do not depend on external code.
 
-`https://deno.land/std/` is intended to be baseline functionality that all Deno
+`https://jsr.io/@std` is intended to be baseline functionality that all Deno
 programs can rely on. We want to guarantee to users that this code does not
 include potentially unreviewed third-party code.
 

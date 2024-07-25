@@ -35,7 +35,7 @@ of your GitHub repository.
 `Deno.readDir()` allows you to list the contents of a directory.
 
 The function is fully compatible with
-[Deno](https://doc.deno.land/deno/stable/~/Deno.readDir).
+[Deno](https://docs.deno.com/api/deno/~/Deno.readDir).
 
 ```ts
 function Deno.readDir(path: string | URL): AsyncIterable<DirEntry>
@@ -73,9 +73,9 @@ Deno.serve(handler);
 `Deno.readFile()` allows you to read a file fully into memory.
 
 The function definition is similar to
-[Deno](https://doc.deno.land/deno/stable/~/Deno.readFile), but it doesn't
+[Deno](https://docs.deno.com/api/deno/~/Deno.readFile), but it doesn't
 support
-[`ReadFileOptions`](https://doc.deno.land/deno/stable/~/Deno.ReadFileOptions)
+[`ReadFileOptions`](https://docs.deno.com/api/deno/~/Deno.ReadFileOptions)
 for the time being. Support will be added in the future.
 
 ```ts
@@ -204,8 +204,8 @@ handle can then be used to read the contents of the file. See
 handle.
 
 The function definition is similar to
-[Deno](https://doc.deno.land/deno/stable/~/Deno.open), but it doesn't support
-[`OpenOptions`](https://doc.deno.land/deno/stable/~/Deno.OpenOptions) for the
+[Deno](https://docs.deno.com/api/deno/~/Deno.open), but it doesn't support
+[`OpenOptions`](https://docs.deno.com/api/deno/~/Deno.OpenOptions) for the
 time being. Support will be added in the future.
 
 ```ts
@@ -238,7 +238,7 @@ used to read chunks of the file using the `read()` method. The file handle can
 be closed using the `close()` method.
 
 The interface is similar to
-[Deno](https://doc.deno.land/deno/stable/~/Deno.File), but it doesn't support
+[Deno](https://docs.deno.com/api/deno/~/Deno.File), but it doesn't support
 writing to the file, or seeking. Support for the latter will be added in the
 future.
 
@@ -278,7 +278,7 @@ function close(): void;
 [`Deno.FileInfo`](#fileinfo) object. Symlinks are followed.
 
 The function definition is the same as
-[Deno](https://doc.deno.land/deno/stable/~/Deno.stat). It does not return
+[Deno](https://docs.deno.com/api/deno/~/Deno.stat). It does not return
 modification time, access time, or creation time values.
 
 ```ts
@@ -311,7 +311,7 @@ Deno.serve(handler);
 `Deno.lstat()` is similar to `Deno.stat()`, but it does not follow symlinks.
 
 The function definition is the same as
-[Deno](https://doc.deno.land/deno/stable/~/Deno.lstat). It does not return
+[Deno](https://docs.deno.com/api/deno/~/Deno.lstat). It does not return
 modification time, access time, or creation time values.
 
 ```ts
@@ -345,7 +345,7 @@ interface FileInfo {
 symlinks.
 
 The function definition is the same as
-[Deno](https://doc.deno.land/deno/stable/~/Deno.realPath).
+[Deno](https://docs.deno.com/api/deno/~/Deno.realPath).
 
 ```ts
 function Deno.realPath(path: string | URL): Promise<string>
@@ -373,7 +373,7 @@ Deno.serve(handler);
 `Deno.readLink()` returns the target path for a symlink.
 
 The function definition is the same as
-[Deno](https://doc.deno.land/deno/stable/~/Deno.readLink).
+[Deno](https://docs.deno.com/api/deno/~/Deno.readLink).
 
 ```ts
 function Deno.readLink(path: string | URL): Promise<string>

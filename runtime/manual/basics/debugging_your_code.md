@@ -52,16 +52,14 @@ deno run --inspect-brk your_script.ts
 ## Example with Chrome DevTools
 
 Let's try debugging a program using Chrome Devtools. For this, we'll use
-[file_server.ts](https://deno.land/std/http/file_server.ts) from `std`, a static
-file server.
+[@std/http/file-server](https://jsr.io/@std/http#file-server), a static file
+server.
 
 Use the `--inspect-brk` flag to break execution on the first line:
 
 ```shell
-$ deno run --inspect-brk --allow-read --allow-net https://deno.land/std@0.224.0/http/file_server.ts
+$ deno run --inspect-brk --allow-read --allow-net jsr:@std/http@1.0.0-rc.5/file-server
 Debugger listening on ws://127.0.0.1:9229/ws/1e82c406-85a9-44ab-86b6-7341583480b1
-Download https://deno.land/std@0.224.0/http/file_server.ts
-Compile https://deno.land/std@0.224.0/http/file_server.ts
 ...
 ```
 

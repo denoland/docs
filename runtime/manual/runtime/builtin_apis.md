@@ -34,8 +34,8 @@ The Deno runtime comes with
 
 Refer to the links below for code examples for common functions.
 
-- [Connect to the hostname and port (`Deno.connect`)](https://doc.deno.land/deno/stable/~/Deno.connect)
-- [Announcing on the local transport address (`Deno.listen`)](https://doc.deno.land/deno/stable/~/Deno.listen)
+- [Connect to the hostname and port (`Deno.connect`)](https://docs.deno.com/api/deno/~/Deno.connect)
+- [Announcing on the local transport address (`Deno.listen`)](https://docs.deno.com/api/deno/~/Deno.listen)
 
 ## Subprocesses
 

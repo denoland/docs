@@ -16,8 +16,7 @@ need a way to spy on the `multiply` function. There are a few ways to achieve
 this with Spies, one is to have the `square` function take the `multiply` as a
 parameter.
 
-```ts
-// https://deno.land/std/testing/mock_examples/parameter_injection.ts
+```ts title="math.ts"
 export function multiply(a: number, b: number): number {
   return a * b;
 }
@@ -34,18 +33,14 @@ This way, we can call `square(multiply, value)` in the application code or wrap
 a spy function around the `multiply` function and call
 `square(multiplySpy, value)` in the testing code.
 
-```ts
-// https://deno.land/std/testing/mock_examples/parameter_injection_test.ts
+```ts title="math_test.ts"
 import {
   assertSpyCall,
   assertSpyCalls,
   spy,
-} from "https://deno.land/std@0.224.0/testing/mock.ts";
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
-import {
-  multiply,
-  square,
-} from "https://deno.land/std@0.224.0/testing/mock_examples/parameter_injection.ts";
+} from "jsr:@std/testing@0.225.3/mock";
+import { assertEquals } from "jsr:@std/assert@1";
+import { multiply, square } from "./math.ts";
 
 Deno.test("square calls multiply and returns results", () => {
   const multiplySpy = spy(multiply);
@@ -69,8 +64,7 @@ exported `_internals` object has the `multiply` function we want to call as a
 method and the `square` function calls `_internals.multiply` instead of
 `multiply`.
 
-```ts
-// https://deno.land/std/testing/mock_examples/internals_injection.ts
+```ts title="math_with_internals.ts"
 export function multiply(a: number, b: number): number {
   return a * b;
 }
@@ -87,18 +81,14 @@ code. Then spy on the `multiply` method on the `_internals` object in the
 testing code to be able to spy on how the `square` function calls the `multiply`
 function.
 
-```ts
-// https://deno.land/std/testing/mock_examples/internals_injection_test.ts
+```ts title="math_with_internals_test.ts"
 import {
   assertSpyCall,
   assertSpyCalls,
   spy,
-} from "https://deno.land/std@0.224.0/testing/mock.ts";
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
-import {
-  _internals,
-  square,
-} from "https://deno.land/std@0.224.0/testing/mock_examples/internals_injection.ts";
+} from "jsr:@std/testing@0.225.3/mock";
+import { assertEquals } from "jsr:@std/assert@1";
+import { _internals, square } from "./math_with_internals.ts";
 
 Deno.test("square calls multiply and returns results", () => {
   const multiplySpy = spy(_internals, "multiply");
@@ -153,8 +143,7 @@ similar to the second spying technique example but instead of passing the call
 through to the original `randomInt` function, we are going to replace
 `randomInt` with a function that returns pre-defined values.
 
-```ts
-// https://deno.land/std/testing/mock_examples/random.ts
+```ts title="random.ts"
 export function randomInt(lowerBound: number, upperBound: number): number {
   return lowerBound + Math.floor(Math.random() * (upperBound - lowerBound));
 }
@@ -170,19 +159,15 @@ The mock module includes some helper functions to make creating common stubs
 easy. The `returnsNext` function takes an array of values we want it to return
 on consecutive calls.
 
-```ts
-// https://deno.land/std/testing/mock_examples/random_test.ts
+```ts title="random_test.ts"
 import {
   assertSpyCall,
   assertSpyCalls,
   returnsNext,
   stub,
-} from "https://deno.land/std@0.224.0/testing/mock.ts";
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
-import {
-  _internals,
-  randomMultiple,
-} from "https://deno.land/std@0.224.0/testing/mock_examples/random.ts";
+} from "jsr:@std/testing@0.225.3/mock";
+import { assertEquals } from "jsr:@std/assert@1";
+import { _internals, randomMultiple } from "./random.ts";
 
 Deno.test("randomMultiple uses randomInt to generate random multiples between -10 and 10 times the value", () => {
   const randomIntStub = stub(_internals, "randomInt", returnsNext([-3, 3]));
@@ -219,8 +204,7 @@ you fake time, you could simulate how your function would behave over time
 starting from any point in time. Below is an example where we want to test that
 the callback is called every second.
 
-```ts
-// https://deno.land/std/testing/mock_examples/interval.ts
+```ts title="interval.ts"
 export function secondInterval(cb: () => void): number {
   return setInterval(cb, 1000);
 }
@@ -232,34 +216,26 @@ and `clearInterval` globals are replaced with versions that use the fake time
 until real time is restored. You can control how time ticks forward with the
 `tick` method on the `FakeTime` instance.
 
-```ts
-// https://deno.land/std/testing/mock_examples/interval_test.ts
-import {
-  assertSpyCalls,
-  spy,
-} from "https://deno.land/std@0.224.0/testing/mock.ts";
-import { FakeTime } from "https://deno.land/std@0.224.0/testing/time.ts";
-import { secondInterval } from "https://deno.land/std@0.224.0/testing/mock_examples/interval.ts";
+```ts title="interval_test.ts"
+import { assertSpyCalls, spy } from "jsr:@std/testing@0.225.3/mock";
+import { FakeTime } from "jsr:@std/testing@0.225.3/time.ts";
+import { secondInterval } from "./interval.ts";
 
 Deno.test("secondInterval calls callback every second and stops after being cleared", () => {
-  const time = new FakeTime();
+  using time = new FakeTime();
 
-  try {
-    const cb = spy();
-    const intervalId = secondInterval(cb);
-    assertSpyCalls(cb, 0);
-    time.tick(500);
-    assertSpyCalls(cb, 0);
-    time.tick(500);
-    assertSpyCalls(cb, 1);
-    time.tick(3500);
-    assertSpyCalls(cb, 4);
+  const cb = spy();
+  const intervalId = secondInterval(cb);
+  assertSpyCalls(cb, 0);
+  time.tick(500);
+  assertSpyCalls(cb, 0);
+  time.tick(500);
+  assertSpyCalls(cb, 1);
+  time.tick(3500);
+  assertSpyCalls(cb, 4);
 
-    clearInterval(intervalId);
-    time.tick(1000);
-    assertSpyCalls(cb, 4);
-  } finally {
-    time.restore();
-  }
+  clearInterval(intervalId);
+  time.tick(1000);
+  assertSpyCalls(cb, 4);
 });
 ```

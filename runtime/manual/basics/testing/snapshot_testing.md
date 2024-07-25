@@ -3,7 +3,7 @@ title: "Snapshot Testing"
 ---
 
 The Deno standard library comes with a
-[snapshot module](https://deno.land/std/testing/snapshot.ts), which enables
+[snapshot module](https://jsr.io/@std/testing/doc/snapshot/~), which enables
 developers to write tests which assert a value against a reference snapshot.
 This reference snapshot, is a serialized representation of the original value
 and is stored alongside the test file.
@@ -22,9 +22,7 @@ to a reference snapshot, which is stored alongside the test file in the
 `__snapshots__` directory.
 
 ```ts title="example_test.ts"
-import {
-  assertSnapshot,
-} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
+import { assertSnapshot } from "jsr:@std/testing@0.225.3/snapshot";
 
 Deno.test("isSnapshotMatch", async function (t): Promise<void> {
   const a = {
@@ -91,9 +89,7 @@ The `assertSnapshot` function can also be called with an options object which
 offers greater flexibility and enables some non standard use cases.
 
 ```ts
-import {
-  assertSnapshot,
-} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
+import { assertSnapshot } from "jsr:@std/testing@0.225.3/snapshot";
 
 Deno.test("isSnapshotMatch", async function (t): Promise<void> {
   const a = {
@@ -119,11 +115,8 @@ update mode, and in assert mode will be compared to the snapshot stored in the
 snapshot file.
 
 ```ts title="example_test.ts"
-import {
-  assertSnapshot,
-  serialize,
-} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
-import { stripColor } from "https://deno.land/std@0.224.0/fmt/colors.ts";
+import { assertSnapshot, serialize } from "jsr:@std/testing@0.225.3/snapshot";
+import { stripColor } from "jsr:@std/fmt@0.225.6/colors";
 
 /**
  * Serializes `actual` and removes ANSI escape codes.
@@ -207,9 +200,7 @@ the test step will be used. However, if specified, the `name` option will be
 used instead.
 
 ```ts title="example_test.ts"
-import {
-  assertSnapshot,
-} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
+import { assertSnapshot } from "jsr:@std/testing@0.225.3/snapshot";
 
 Deno.test("isSnapshotMatch", async function (t): Promise<void> {
   const a = {
@@ -247,9 +238,7 @@ error message, which includes the diff for failed snapshots.
 You can configure default options for `assertSnapshot`.
 
 ```ts title="example_test.ts"
-import {
-  createAssertSnapshot,
-} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
+import { createAssertSnapshot } from "jsr:@std/testing@0.225.3/snapshot";
 
 const assertSnapshot = createAssertSnapshot({
   // options
@@ -265,10 +254,8 @@ It is possible to "extend" an `assertSnapshot` function which has been
 configured with default options.
 
 ```ts title="example_test.ts"
-import {
-  createAssertSnapshot,
-} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
-import { stripColor } from "https://deno.land/std@0.224.0/fmt/colors.ts";
+import { createAssertSnapshot } from "jsr:@std/testing@0.225.3/snapshot";
+import { stripColor } from "jsr:@std/fmt@0.225.6/colors";
 
 const assertSnapshot = createAssertSnapshot({
   dir: ".snaps",
@@ -308,9 +295,7 @@ whenever the object is passed to `assertSnapshot`. This can be useful in many
 cases. One example is shown in the code snippet below.
 
 ```ts title="example_test.ts"
-import {
-  assertSnapshot,
-} from "https://deno.land/std@0.224.0/testing/snapshot.ts";
+import { assertSnapshot } from "jsr:@std/testing@0.225.3/snapshot";
 
 class HTMLTag {
   constructor(

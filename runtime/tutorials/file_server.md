@@ -72,7 +72,7 @@ install the script to the Deno installation root's bin directory, e.g.
 `/home/alice/.deno/bin/file-server`.
 
 ```shell
-deno install --allow-net --allow-read jsr:@std/http@1/file-server
+deno install --allow-net --allow-read jsr:@std/http@1.0.0-rc.5/file-server
 ```
 
 You can now run the script with the simplified script name. Run it:
@@ -99,7 +99,7 @@ Example output:
 Deno File Server
     Serves a local directory in HTTP.
   INSTALL:
-    deno install --allow-net --allow-read jsr:@std/http@1/file_server
+    deno install --allow-net --allow-read jsr:@std/http@1.0.0-rc.5/file_server
   USAGE:
     file_server [path] [options]
   OPTIONS:

@@ -13,7 +13,7 @@ Firstly, let's create a file `url_test.ts` and register a test case using
 
 ```ts
 // url_test.ts
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { assertEquals } from "jsr:@std/assert@1";
 
 Deno.test("url test", () => {
   const url = new URL("./foo.js", "https://deno.land/");
@@ -39,7 +39,7 @@ switching between the forms (eg. when you need to quickly focus a single test
 for debugging, using `only: true` option):
 
 ```ts
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { assertEquals } from "jsr:@std/assert@1";
 
 // Compact form: name and function
 Deno.test("hello world #1", () => {
@@ -90,7 +90,7 @@ You can also test asynchronous code by passing a test function that returns a
 promise. For this you can use the `async` keyword when defining a function:
 
 ```ts
-import { delay } from "https://deno.land/std@0.224.0/async/delay.ts";
+import { delay } from "jsr:@std/async@1/delay";
 
 Deno.test("async hello world", async () => {
   const x = 1 + 2;
@@ -110,7 +110,7 @@ The test steps API provides a way to report distinct steps within a test and do
 setup and teardown code within that test.
 
 ```ts
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { assertEquals } from "jsr:@std/assert@1";
 import { Client } from "https://deno.land/x/postgres@v0.15.0/mod.ts";
 
 interface User {
@@ -458,7 +458,7 @@ around `bar` and call `foo(spy)` in the testing code:
 
 ```js
 import sinon from "npm:sinon";
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { assertEquals } from "jsr:@std/assert@1";
 import { bar, foo } from "./my_file.js";
 
 Deno.test("calls bar during execution of foo", () => {
@@ -498,7 +498,7 @@ And then `import` in a test file:
 
 ```js
 import sinon from "npm:sinon";
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { assertEquals } from "jsr:@std/assert@1";
 import { foo, funcs } from "./my_file.js";
 
 Deno.test("calls bar during execution of foo", () => {

@@ -98,16 +98,11 @@ Languages: **Rust**
 
 ### [`deno_doc`](https://github.com/denoland/deno_doc)
 
-Documentation generator that powers `deno doc` subcommand and
-https://doc.deno.land
+Documentation generator that powers `deno doc` subcommand, and reference
+documentation on https://docs.deno.com/api, and https://jsr.io.
 
 Languages: **Rust**
 
-### [`docland`](https://github.com/denoland/docland)
-
-Frontend for documentation generator: https://doc.deno.land
-
-Languages: **TypeScript**, TSX, CSS
 
 ### [`rusty_v8`](https://github.com/denoland/rusty_v8)
 
