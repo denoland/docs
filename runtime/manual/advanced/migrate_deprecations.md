@@ -197,7 +197,7 @@ See [deno#13661](https://github.com/denoland/deno/issues/13661) for details.
 ### `Deno.flock()`
 
 Use
-[`Deno.FsFile.lock()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.lock)
+[`Deno.FsFile.lock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lock)
 instead.
 
 ```diff
@@ -210,7 +210,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### `Deno.flockSync()`
 
 Use
-[`Deno.FsFile.lockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.lockSync)
+[`Deno.FsFile.lockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lockSync)
 instead.
 
 ```diff
@@ -223,7 +223,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### `Deno.fstatSync()`
 
 Use
-[`Deno.FsFile.statSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.statSync)
+[`Deno.FsFile.statSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.statSync)
 instead.
 
 ```diff
@@ -236,7 +236,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.fstat()`
 
 Use
-[`Deno.FsFile.stat()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.stat)
+[`Deno.FsFile.stat()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.stat)
 instead.
 
 ```diff
@@ -261,7 +261,7 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.ftruncateSync()`
 
 Use
-[`Deno.FsFile.truncateSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.truncateSync)
+[`Deno.FsFile.truncateSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncateSync)
 instead.
 
 ```diff
@@ -274,7 +274,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.ftruncate()`
 
 Use
-[`Deno.FsFile.truncate()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.truncate)
+[`Deno.FsFile.truncate()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncate)
 instead.
 
 ```diff
@@ -287,7 +287,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.funlock()`
 
 Use
-[`Deno.FsFile.unlock()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.unlock)
+[`Deno.FsFile.unlock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlock)
 instead.
 
 ```diff
@@ -300,7 +300,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### `Deno.funlockSync()`
 
 Use
-[`Deno.FsFile.unlockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.unlockSync)
+[`Deno.FsFile.unlockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlockSync)
 instead.
 
 ```diff
@@ -313,7 +313,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### `Deno.futimeSync()`
 
 Use
-[`Deno.FsFile.utimeSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.utimeSync)
+[`Deno.FsFile.utimeSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utimeSync)
 instead.
 
 ```diff
@@ -326,7 +326,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.futime()`
 
 Use
-[`Deno.FsFile.utime()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.utime)
+[`Deno.FsFile.utime()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utime)
 instead.
 
 ```diff
@@ -564,7 +564,7 @@ See [deno#16516](https://github.com/denoland/deno/pull/16516) for details.
 ### `Deno.seekSync()`
 
 Use
-[`Deno.FsFile.seekSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.seekSync)
+[`Deno.FsFile.seekSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seekSync)
 instead.
 
 ```diff
@@ -577,7 +577,7 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.seek()`
 
 Use
-[`Deno.FsFile.seek()`](https://docs.deno.com/api/deno/~/Deno.FsFile&p=prototype.seek)
+[`Deno.FsFile.seek()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seek)
 instead.
 
 ```diff

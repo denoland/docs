@@ -7,7 +7,7 @@ There are a few ways to use environment variables in Deno:
 ## Built-in `Deno.env`
 
 The Deno runtime offers built-in support for environment variables with
-[`Deno.env`](https://deno.land/api@v1.25.3?s=Deno.env).
+[`Deno.env`](https://docs.deno.com/api/deno/~/Deno.env).
 
 `Deno.env` has getter and setter methods. Here is example usage:
 

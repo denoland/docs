@@ -1,5 +1,5 @@
 ---
-title: "Deno namespace APIs"
+title: "Deno Namespace APIs"
 oldUrl: /runtime/manual/runtime/
 ---
 
@@ -11,9 +11,44 @@ For a full list of Deno Built-in APIs, see the
 [reference](https://docs.deno.com/api/deno/~/Deno). Below we highlight some of
 the most important.
 
+
+## File System
+
+The Deno runtime comes with
+[various functions for working with files and directories](https://docs.deno.com/api/deno/file-system).
+You will need to use --allow-read and --allow-write permissions to gain access
+to the file system.
+
+Refer to the links below for code examples of how to use the file system
+functions.
+
+- [Reading files in several different ways](https://examples.deno.land/reading-files)
+- [Reading files in streams](../../tutorials/file_server.md)
+- [Reading a text file (`Deno.readTextFile`)](../../tutorials/read_write_files.md#reading-a-text-file)
+- [Writing a text file (`Deno.writeTextFile`)](../../tutorials/read_write_files.md#writing-a-text-file)
+
+## Network
+
+The Deno runtime comes with
+[built-in functions for dealing with connections to network ports](https://docs.deno.com/api/deno/network).
+
+Refer to the links below for code examples for common functions.
+
+- [Connect to the hostname and port (`Deno.connect`)](https://doc.deno.land/deno/stable/~/Deno.connect)
+- [Announcing on the local transport address (`Deno.listen`)](https://doc.deno.land/deno/stable/~/Deno.listen)
+
+## Subprocesses
+
+The Deno runtime comes with
+[built-in functions for spinning up subprocesses](https://docs.deno.com/api/deno/sub-process).
+
+Refer to the links below for code samples of how to create a subprocess.
+
+- [Creating a subprocess (`Deno.Command`)](../../tutorials/subprocess.md)
+
 ## Errors
 
-The Deno runtime comes with [20 error classes](https://deno.land/api#Errors)
+The Deno runtime comes with [20 error classes](https://docs.deno.com/api/deno/errors)
 that can be raised in response to a number of conditions.
 
 Some examples are:
@@ -37,47 +72,3 @@ try {
   }
 }
 ```
-
-## File System
-
-The Deno runtime comes with
-[various functions for working with files and directories](https://deno.land/api#File_System).
-You will need to use --allow-read and --allow-write permissions to gain access
-to the file system.
-
-Refer to the links below for code examples of how to use the file system
-functions.
-
-- [Reading files in several different ways](https://examples.deno.land/reading-files)
-- [Reading files in streams](../../tutorials/file_server.md)
-- [Reading a text file (`Deno.readTextFile`)](../../tutorials/read_write_files.md#reading-a-text-file)
-- [Writing a text file (`Deno.writeTextFile`)](../../tutorials/read_write_files.md#writing-a-text-file)
-
-## I/O
-
-The Deno runtime comes with
-[built-in functions for working with resources and I/O](https://deno.land/api#I/O).
-
-Refer to the links below for code examples for common functions.
-
-- [Closing resources (`Deno.close`)](https://doc.deno.land/deno/stable/~/Deno.close)
-- [Seeking a certain position within the resource (`Deno.seek`)](https://doc.deno.land/deno/stable/~/Deno.seek)
-
-## Network
-
-The Deno runtime comes with
-[built-in functions for dealing with connections to network ports](https://deno.land/api#Network).
-
-Refer to the links below for code examples for common functions.
-
-- [Connect to the hostname and port (`Deno.connect`)](https://doc.deno.land/deno/stable/~/Deno.connect)
-- [Announcing on the local transport address (`Deno.listen`)](https://doc.deno.land/deno/stable/~/Deno.listen)
-
-## Sub Process
-
-The Deno runtime comes with
-[built-in functions for spinning up subprocesses](https://deno.land/api#Sub_Process).
-
-Refer to the links below for code samples of how to create a subprocess.
-
-- [Creating a subprocess (`Deno.Command`)](../../tutorials/subprocess.md)

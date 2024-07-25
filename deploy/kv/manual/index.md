@@ -9,7 +9,7 @@ oldUrl:
 **Deno KV** is a
 [key-value database](https://en.wikipedia.org/wiki/Key%E2%80%93value_database)
 built directly into the Deno runtime, available in the
-[`Deno.Kv` namespace](https://deno.land/api?unstable&s=Deno.Kv). It can be used
+[`Deno.Kv` namespace](https://docs.deno.com/api/deno/~/Deno.Kv). It can be used
 for many kinds of data storage use cases, but excels at storing simple data
 structures that benefit from very fast reads and writes. Deno KV is available in
 the Deno CLI and on [Deno Deploy](./on_deploy).
@@ -21,8 +21,8 @@ Let's walk through the key features of Deno KV.
 ## Opening a database
 
 In your Deno program, you can get a reference to a KV database using
-[`Deno.openKv()`](https://deno.land/api?unstable=&s=Deno.openKv). You may pass
-in an optional file system path to where you'd like to store your database,
+[`Deno.openKv()`](https://docs.deno.com/api/deno/~/Deno.openKv). You may pass in
+an optional file system path to where you'd like to store your database,
 otherwise one will be created for you based on the current working directory of
 your script.
 
@@ -39,7 +39,7 @@ JavaScript object literal or a
 `string`, `number`, `bigint`, or `boolean`. Values can be arbitrary JavaScript
 objects. In this example, we create a key-value pair representing a user's UI
 preferences, and save it with
-[`kv.set()`](https://docs.deno.com/api/deno/~/Deno.Kv&unstable=&p=prototype.set).
+[`kv.set()`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.set).
 
 ```ts
 const kv = await Deno.openKv();
@@ -54,7 +54,7 @@ const result = await kv.set(["preferences", "ada"], prefs);
 ```
 
 Once a key-value pair is set, you can read it from the database with
-[`kv.get()`](https://docs.deno.com/api/deno/~/Deno.Kv&unstable=&p=prototype.get):
+[`kv.get()`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.get):
 
 ```ts
 const entry = await kv.get(["preferences", "ada"]);
@@ -79,7 +79,7 @@ new generated value.
 ## Listing several key-value pairs
 
 To get values for a finite number of keys, you may use
-[`kv.getMany()`](https://docs.deno.com/api/deno/~/Deno.Kv&unstable=&p=prototype.getMany).
+[`kv.getMany()`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.getMany).
 Pass in several keys as arguments, and you'll receive an array of values for
 each key. Note that **values and versionstamps can be `null`** if no value
 exists for the given key(s).
@@ -100,9 +100,8 @@ result[1].versionstamp; // null
 
 Often, it is useful to retrieve a list of key-value pairs from all keys that
 share a given prefix. This type of operation is possible using
-[`kv.list()`](https://docs.deno.com/api/deno/~/Deno.Kv&unstable=&p=prototype.list).
-In this example, we get a list of key-value pairs that share the `"preferences"`
-prefix.
+[`kv.list()`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.list). In this
+example, we get a list of key-value pairs that share the `"preferences"` prefix.
 
 ```ts
 const kv = await Deno.openKv();
@@ -132,8 +131,8 @@ writes are always performed in strong consistency mode.
 ## Deleting key-value pairs
 
 You can delete a key from the database using
-[`kv.delete()`](https://docs.deno.com/api/deno/~/Deno.Kv&unstable=&p=prototype.delete).
-No action is taken if no value is found for the given key.
+[`kv.delete()`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.delete). No
+action is taken if no value is found for the given key.
 
 ```ts
 const kv = await Deno.openKv();
@@ -244,7 +243,7 @@ by your code. Learn more about Deno KV on Deno Deploy [here](./on_deploy).
 
 ## Testing
 
-By default, [`Deno.openKv()`](https://deno.land/api?unstable=&s=Deno.openKv)
+By default, [`Deno.openKv()`](https://docs.deno.com/api/deno/~/Deno.openKv)
 creates or opens a persistent store based on the path from which the script that
 invoked it was run. This isn't usually desireable for tests, which need to
 produce the same behavior when run many times in a row.

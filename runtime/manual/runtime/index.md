@@ -2,10 +2,8 @@
 title: "Runtime"
 ---
 
-Documentation for all runtime functions (Web APIs + `Deno` global) can be found
-at [`/api`](https://deno.land/api) or with adding the _unstable_ APIs which are
-enabled via the `--unstable` flag at
-[`/api?unstable`](https://deno.land/api?unstable=true).
+Documentation for all runtime functions (Web APIs + `Deno` global + Node APIs)
+can be found at [`/api`](https://docs.deno.com/api/deno/).
 
 ## Web Platform APIs
 
@@ -26,3 +24,11 @@ For more details, view the chapter on [Built-in APIs](./builtin_apis.md).
 The TypeScript definitions for the Deno namespaces can be found in the
 [`lib.deno.ns.d.ts`](https://github.com/denoland/deno/blob/$CLI_VERSION/cli/tsc/dts/lib.deno.ns.d.ts)
 file.
+
+## Node APIs
+
+Deno also provides compatibility with Node.js APIs. For example, the `node:fs`
+module can be imported and used in Deno, like it would be in Node.js.
+
+For more details, view the chapter on
+[Node Compatibility](../node/node_specifiers.md).

@@ -169,9 +169,9 @@ Deno.serve(handleRequest);
 ```
 
 The path provided to the
-[`Deno.readFile`](https://deno.land/api@v1.31.1?s=Deno.readFile) API is relative
-to the root of the repository. You can also specify absolute paths, if they are
-inside `Deno.cwd`.
+[`Deno.readFile`](https://docs.deno.com/api/deno/~/Deno.readFile) API is
+relative to the root of the repository. You can also specify absolute paths, if
+they are inside `Deno.cwd`.
 
 ## Deno.readTextFile
 

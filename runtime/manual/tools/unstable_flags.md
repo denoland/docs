@@ -219,19 +219,17 @@ Enable unstable FFI APIs -
 
 Enable unstable file system APIs in the `Deno` namespace. These APIs include:
 
-- [`Deno.flock`](https://deno.land/api?unstable=&s=Deno.flock)
-- [`Deno.flockSync`](https://deno.land/api?unstable=&s=Deno.flockSync)
-- [`Deno.funlock`](https://deno.land/api?unstable=&s=Deno.funlock)
-- [`Deno.funlockSync`](https://deno.land/api?unstable=&s=Deno.funlockSync)
-- [`Deno.umask`](https://deno.land/api?unstable=&s=Deno.umask)
+- [`Deno.flock`](https://docs.deno.com/api/deno/~/Deno.flock)
+- [`Deno.flockSync`](https://docs.deno.com/api/deno/~/Deno.flockSync)
+- [`Deno.funlock`](https://docs.deno.com/api/deno/~/Deno.funlock)
+- [`Deno.funlockSync`](https://docs.deno.com/api/deno/~/Deno.funlockSync)
+- [`Deno.umask`](https://docs.deno.com/api/deno/~/Deno.umask)
 
 ## `--unstable-net`
 
 Enable unstable net APIs in the `Deno` namespace. These APIs include:
 
-- [`Deno.DatagramConn`](https://deno.land/api?unstable=&s=Deno.DatagramConn)
-- Many more - for the latest list, check the "Show Unstable API" checkbox in the
-  [API reference](https://deno.land/api?unstable=)
+- [`Deno.DatagramConn`](https://docs.deno.com/api/deno/~/Deno.DatagramConn)
 
 ## `--unstable`
 
