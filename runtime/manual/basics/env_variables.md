@@ -28,27 +28,26 @@ You can also put environment variables in a `.env` file and retrieve them using
 Let's say you have an `.env` file that looks like this:
 
 ```sh
-PASSWORD=Geheimnis
+GREETING="Hello, world."
 ```
 
-To access the environment variables in the `.env` file, import the `load`
-function from the standard library. Then, import the configuration using it.
+Import the `load` module to auto-import from the `.env` file and into the
+process environment.
 
 ```ts
-import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
+import "jsr:@std/dotenv/load";
 
-const env = await load();
-const password = env["PASSWORD"];
-
-console.log(password);
-// "Geheimnis"
+console.log(Deno.env.get("GREETING")); // "Hello, world."
 ```
+
+Further documentation for `.env` handling can be found in the
+[@std/dotenv](https://jsr.io/@std/dotenv/doc) documentation.
 
 ## `std/cli`
 
-The Deno standard library has a
-[`std/cli` module](https://deno.land/std/cli/mod.ts) for parsing command line
-arguments.
+The Deno standard library has a [`std/cli` module](https://jsr.io/@std/cli) for
+parsing command line arguments. Please refer to the module for documentation and
+examples.
 
 ## Special environment variables
 

@@ -5,29 +5,19 @@ title: "Standard Library"
 Deno provides a set of standard modules that are audited by the core team and
 are guaranteed to work with Deno.
 
-Standard library is available at: https://deno.land/std
+The standard library is hosted on JSR and is available at: https://jsr.io/@std.
+Packages are documented, tested, and include usage examples.
 
 ## Versioning and stability
 
-Standard library is not yet stable and therefore it is versioned differently
-than Deno. For latest release consult https://deno.land/std or
-https://deno.land/std/version.ts. The standard library is released each time
-Deno is released.
-
-We strongly suggest to always use imports with pinned version of standard
-library to avoid unintended changes. For example, rather than linking to the
-default branch of code, which may change at any time, potentially causing
-compilation errors or unexpected behavior:
+Each package of the standard library is independently versioned. Packages follow
+semantic versioning rules. You can use version pinning or version ranges to
+prevent breaking changes.
 
 ```typescript
-// import the latest release, this should be avoided
-import { copy } from "https://deno.land/std/fs/copy.ts";
+// imports the latest 1.x version of `copy` from the `fs` package
+import { copy } from "jsr:@std/fs@^1.0.0";
 ```
 
-instead, use a version of the std library which is immutable and will not
-change:
-
-```typescript
-// imports from v0.224.0 of std, never changes
-import { copy } from "https://deno.land/std@0.224.0/fs/copy.ts";
-```
+More examples of semver version selection syntax can be found in the
+[@std/semver](https://jsr.io/@std/semver) package documentation.
