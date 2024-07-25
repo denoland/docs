@@ -221,21 +221,21 @@ body:not(:has(.ddoc)) {
 
 /* Custom DDOC styles for the Deno documentation */
 .ddoc {
-  /* Categories panel */
-  > .toc {
-    @apply border-r border-gray-000;
+  @apply pt-0 !important;
 
-    .documentNavigation {
-      > h3 {
-        margin: 0.75rem 0.75rem 0.5rem !important;
-        padding-bottom: 0.1rem;
-        @apply text-gray-4 font-normal text-xs border-b border-gray-000 leading-normal uppercase !important;
+  #categoryPanel {
+    @apply border-r border-gray-000;
+    @apply pt-4 !important;
+
+    li:hover {
+      @apply bg-blue-50 rounded-md !important;
+      > a {
+        @apply no-underline !important;
       }
     }
-  }
-
-  .documentNavigation > ul > li > a {
-    @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline  py-1.5 px-3.5 !important;
+    .active {
+      @apply bg-blue-50 rounded-md !important;
+    }
   }
 
   .contextLink {
@@ -244,13 +244,17 @@ body:not(:has(.ddoc)) {
     text-decoration-color: rgba(9, 107, 218, 0.4) !important;
   }
 
-  #content .toc .documentNavigation {
+  .documentNavigation {
     > h3 {
       @apply hidden !important;
     }
 
     > ul {
       @apply border-l border-gray-000 !important;
+
+      > li > a {
+        @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline  py-1.5 px-3.5 !important;
+      }
 
       > ul > li a {
         @apply hover:bg-blue-50 rounded-lg hover:no-underline !important;
@@ -267,14 +271,5 @@ body:not(:has(.ddoc)) {
     :not(pre) > code {
       background-color: var(--color-neutral-muted) !important;
     }
-  }
-}
-
-@media (min-width: 1024px) {
-  /* no category panel, category panel but no document navigation */
-  .ddoc:not(:has(> div.toc)),
-  .ddoc:has(> div.toc) > div:not(.toc) {
-    padding-top: 0.25rem !important;
-    padding-left: 0.5rem !important;
   }
 }
