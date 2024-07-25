@@ -409,19 +409,6 @@ export interface ExampleSnippet {
 }
 
 export function parseExample(id: string, file: string): Example {
-  // Substitute $std/[...] with the JSR URL
-  file = file.replaceAll(/\$std\/[^\s\}]+/g, (s) => {
-    // $std/cli/parse-args#parseArgs -> https://jsr.io/@std/cli/doc/parse-args/~/parseArgs
-    const [, pkg, path, hash] =
-      s.match(/\$std\/([A-Za-z0-9\-\_\.]+)\/?([A-Za-z0-9\-\_\.]+)?(\#.+)?/) ||
-      [];
-    const url = `https://jsr.io/@std/${pkg}/doc${path ? `/${path}/~/` : ""}${
-      hash || ""
-    }`;
-    console.log("substituting", s, "with", url, id);
-    return url;
-  });
-
   // Extract the multi line JS doc comment at the top of the file
   const [, jsdoc, rest] = file.match(/^\s*\/\*\*(.*?)\*\/\s*(.*)/s) || [];
 

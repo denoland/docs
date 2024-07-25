@@ -278,8 +278,8 @@ Create a `deno.json` file with the following contents.
 ```js title="deno.json"
 {
   "imports": {
-    // The dollar sign in front of "std" isn't special - it's an optional
-    // convention to show that $std is an alias set up in an import map
+    // The dollar sign in front of "assert" isn't special - it's an optional
+    // convention to show that $assert is an alias set up in an import map
     "$assert": "jsr:@std/assert@^1.0.0"
   }
 }
