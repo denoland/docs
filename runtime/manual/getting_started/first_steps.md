@@ -71,7 +71,7 @@ For APIs that don't exist as a web standard (like accessing variables from the
 system environment, or manipulating the file system), those APIs are exposed in
 the [Deno namespace](../runtime/builtin_apis.md). Replace the contents of
 `hello.ts` with the following code, which will start
-[an HTTP server](https://deno.land/api?s=Deno.serve) on
+[an HTTP server](https://docs.deno.com/api/deno/~/Deno.serve) on
 [localhost:8000](http://localhost:8000).
 
 ```ts
@@ -278,8 +278,8 @@ Create a `deno.json` file with the following contents.
 ```js title="deno.json"
 {
   "imports": {
-    // The dollar sign in front of "std" isn't special - it's an optional
-    // convention to show that $std is an alias set up in an import map
+    // The dollar sign in front of "assert" isn't special - it's an optional
+    // convention to show that $assert is an alias set up in an import map
     "$assert": "jsr:@std/assert@^1.0.0"
   }
 }

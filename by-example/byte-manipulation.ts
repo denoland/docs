@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {$std/bytes} Doc: std/bytes
+ * @resource {https://jsr.io/@std/bytes/doc} Doc: @std/bytes
  * @group Encoding
  *
  * When working with lower-level data we often deal

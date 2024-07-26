@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run --allow-net <url>
- * @resource {https://deno.land/api?s=Deno.listen} Doc: Deno.listen
+ * @resource {https://docs.deno.com/api/deno/~/Deno.listen} Doc: Deno.listen
  * @group Network
  *
  * An example of a TCP listener on localhost that will log the message if written to and close the connection if connected to.

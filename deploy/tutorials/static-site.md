@@ -39,7 +39,7 @@ You have now a html page that says "Hello" and has a logo.
 To deploy this repo on Deno Deploy, from the `static-site` repository, run:
 
 ```console
-deployctl deploy --project=<your-preferred-project-name> https://deno.land/std@0.220.0/http/file_server.ts
+deployctl deploy --project=<your-preferred-project-name> jsr:@std/http@1.0.0-rc.5/file-server
 ```
 
 To give a little more explanation of these commands: Because this is a static

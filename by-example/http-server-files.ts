@@ -3,8 +3,8 @@
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --allow-net --allow-read <url>
- * @resource {https://deno.land/api?s=Deno.serve} Doc: Deno.serve
- * @resource {$std/http/file_server.ts} Doc: std/http/file_server
+ * @resource {https://docs.deno.com/api/deno/~/Deno.serve} Doc: Deno.serve
+ * @resource {https://jsr.io/@std/http#file-server} Doc: @std/http/file-server
  * @resource {/examples/http-server} Example: HTTP Server: Hello World
  * @group Network
  *

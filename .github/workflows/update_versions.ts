@@ -13,15 +13,12 @@ interface ReplacementsData {
 
 const replacementsFile = $.path("replacements.json");
 const latestCliVersion = (await getLatestTagForRepo("deno")).replace("v", "");
-const latestStdVersion = await getLatestStdVersion();
 
 $.log(`cli version: ${latestCliVersion}`);
-$.log(`std version: ${latestStdVersion}`);
 
 const replacements = replacementsFile.readJsonSync<ReplacementsData>();
 
 replacements.CLI_VERSION = latestCliVersion;
-replacements.STD_VERSION = latestStdVersion;
 
 replacementsFile.writeJsonPrettySync(replacements);
 
@@ -37,14 +34,6 @@ async function getLatestTagForRepo(name: string) {
     .header("accept", "application/vnd.github.v3+json")
     .json<{ tag_name: string }>();
   return latestRelease.tag_name;
-}
-
-async function getLatestStdVersion() {
-  $.logStep(`Fetching latest version number of std`);
-  const latestRelease = await $.request(`https://deno.com/versions.json`).json<
-    { std: string[] }
-  >();
-  return latestRelease.std[0];
 }
 
 async function tryCreatePr() {

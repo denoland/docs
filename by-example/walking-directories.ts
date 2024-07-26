@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli
  * @run --allow-read <url>
- * @resource {https://deno.land/api?s=Deno.readDir} Doc: Deno.readDir
- * @resource {$std/fs/walk.ts} Doc: std/walk
+ * @resource {https://docs.deno.com/api/deno/~/Deno.readDir} Doc: Deno.readDir
+ * @resource {https://jsr.io/@std/fs/doc/walk/~} Doc: @std/fs/walk
  * @group File System
  *
  * When doing something like filesystem routing, it is

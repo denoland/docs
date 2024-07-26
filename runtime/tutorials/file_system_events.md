@@ -6,8 +6,8 @@ oldUrl:
 
 ## Concepts
 
-- Use [Deno.watchFs](https://deno.land/api?s=Deno.watchFs) to watch for file
-  system events.
+- Use [Deno.watchFs](https://docs.deno.com/api/deno/~/Deno.watchFs) to watch for
+  file system events.
 - Results may vary between operating systems.
 
 ## Example

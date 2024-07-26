@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run --allow-run <url>
- * @resource {https://deno.land/api?s=Deno.Command} Doc: Deno.Command
+ * @resource {https://docs.deno.com/api/deno/~/Deno.Command} Doc: Deno.Command
  * @group System
  *
  * We don't often write programs in isolation. In a lot of cases we want

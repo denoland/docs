@@ -23,32 +23,19 @@ deno check -h|--help
 
 Type-check without execution.
 
-```bash
-deno check https://deno.land/std/http/file_server.ts
+```ts name="example.ts"
+const x: string = 1 + 1n;
 ```
 
-Unless `--reload` is specified, this command will not re-download already cached
-dependencies.
-
-## Cache Location
-
-Modules cached are stored in `$DENO_DIR`, a centralized directory. Its location
-varies by OS. For instance, on macOS, it's typically
-`/Users/user/Library/Caches/deno`.
-
-You can see the cache location by running `deno info` with no arguments.
-
-## Cache Invalidation
-
-Future runs of this module will trigger no downloads or compilation unless the
-`--reload` option is specified.
+```bash
+deno check example.ts
+```
 
 ## Arguments
 
 `FILE` - The module entrypoint.
 
-The module entrypoint can be a local file or a remote URL. Dependencies are
-detected from it's imports.
+The module entrypoint can be a local file or a remote URL.
 
 ## Options
 
@@ -135,50 +122,8 @@ detected from it's imports.
 
 ## Examples
 
-- Cache the dependencies of a module
+- Type check a local file
 
-```bash
-deno check https://deno.land/std/http/file_server.ts
-```
-
-- Force a cache update
-
-```bash
-deno check --reload https://deno.land/std/http/file_server.ts
-```
-
-- Cache a known npm module
-
-```bash
-deno check npm:express
-```
-
-- Reload everything
-
-```bash
-deno check --reload
-```
-
-- Reload only standard modules
-
-```bash
-deno check --reload=https://deno.land/std
-```
-
-- Reloads specific modules
-
-```bash
-deno check --reload=https://deno.land/std/fs/utils.ts,https://deno.land/std/fmt/colors.ts
-```
-
-- Reload all npm modules
-
-```bash
-deno check --reload=npm:
-```
-
-- Reload specific npm module
-
-```bash
-deno check --reload=npm:chalk
-```
+  ```bash
+  deno check example.ts
+  ```

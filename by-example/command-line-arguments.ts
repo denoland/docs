@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli
  * @run <url> Deno Sushi --help --version=1.0.0 --no-color
- * @resource {https://deno.land/api?s=Deno.args} Doc: Deno.args
- * @resource {$std/cli/parse_args.ts} Doc: std/cli
+ * @resource {https://docs.deno.com/api/deno/~/Deno.args} Doc: Deno.args
+ * @resource {https://jsr.io/@std/cli/doc/parse-args/~} Doc: @std/cli
  * @group CLI
  *
  * Command line arguments are often used to pass configuration options to a

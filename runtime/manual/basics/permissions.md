@@ -44,7 +44,7 @@ The following permissions are available:
   interfaces from the following list: `hostname`, `osRelease`, `osUptime`,
   `loadavg`, `networkInterfaces`, `systemMemoryInfo`, `uid`, and `gid`. These
   strings map to functions in the `Deno` namespace that provide OS info, like
-  [Deno.systemMemoryInfo](https://deno.land/api?s=Deno.SystemMemoryInfo).
+  [Deno.systemMemoryInfo](https://docs.deno.com/api/deno/~/Deno.SystemMemoryInfo).
 - **--allow-hrtime** Allow high-resolution time measurement. High-resolution
   time can be used in timing attacks and fingerprinting.
 - **--allow-net=\<IP/HOSTNAME\>** Allow network access. You can specify an

@@ -2,7 +2,7 @@
  * @title Deleting Files
  * @difficulty beginner
  * @tags cli
- * @resource {https://deno.land/api?s=Deno.remove} Doc: Deno.remove
+ * @resource {https://docs.deno.com/api/deno/~/Deno.remove} Doc: Deno.remove
  * @group File System
  *
  * Removing files and directories is a common task. Deno has a number of

@@ -38,8 +38,8 @@ const desc5 = { name: "hrtime" } as const;
 ```
 
 > ⚠️ See
-> [`PermissionDescriptor`](https://deno.land/api?s=Deno.PermissionDescriptor) in
-> API reference for more details.
+> [`PermissionDescriptor`](https://docs.deno.com/api/deno/~/Deno.PermissionDescriptor)
+> in API reference for more details.
 
 > ⚠️ In 1.30 and onwards, synchronous API counterparts (ex.
 > `Deno.permissions.querySync`) exist for all the APIs described below.

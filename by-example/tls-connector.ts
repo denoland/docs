@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run --allow-net --allow-read <url>
- * @resource {https://deno.land/api?s=Deno.connectTls} Doc: Deno.connectTls
+ * @resource {https://docs.deno.com/api/deno/~/Deno.connectTls} Doc: Deno.connectTls
  * @resource {/examples/tls-listener.ts} Example: TCP/TLS Listener
  * @group Network
  *

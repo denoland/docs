@@ -181,10 +181,12 @@ export function pwrite(options: PWrite) {}
 ```
 
 Note: When one of the arguments is a function, you can adjust the order
-flexibly. See examples like [Deno.serve](https://deno.land/api?s=Deno.serve),
-[Deno.test](https://deno.land/api?s=Deno.test),
-[Deno.addSignalListener](https://deno.land/api?s=Deno.addSignalListener). See
-also [this post](https://twitter.com/jaffathecake/status/1646798390355697664).
+flexibly. See examples like
+[Deno.serve](https://docs.deno.com/api/deno/~/Deno.serve),
+[Deno.test](https://docs.deno.com/api/deno/~/Deno.test),
+[Deno.addSignalListener](https://docs.deno.com/api/deno/~/Deno.addSignalListener).
+See also
+[this post](https://twitter.com/jaffathecake/status/1646798390355697664).
 
 ### Export all interfaces that are used as parameters to an exported member
 
@@ -322,7 +324,7 @@ foo() returns bar object ... ok
 Example of test:
 
 ```ts
-import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { assertEquals } from "@std/assert";
 import { foo } from "./mod.ts";
 
 Deno.test("foo() returns bar object", function () {
@@ -358,7 +360,7 @@ export function foo(): string {
 
 #### Do not depend on external code.
 
-`https://deno.land/std/` is intended to be baseline functionality that all Deno
+`https://jsr.io/@std` is intended to be baseline functionality that all Deno
 programs can rely on. We want to guarantee to users that this code does not
 include potentially unreviewed third-party code.
 

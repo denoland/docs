@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run --allow-net --unstable <url>
- * @resource {https://deno.land/api?s=Deno.connect} Doc: Deno.connect
+ * @resource {https://docs.deno.com/api/deno/~/Deno.connect} Doc: Deno.connect
  * @resource {/examples/udp-listener.ts} Example: UDP Listener
  * @group Network
  *

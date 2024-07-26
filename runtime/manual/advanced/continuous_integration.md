@@ -183,10 +183,10 @@ Now, if the contents of `deno.lock` are changed, a new cache will be made and
 used in subsequent pipeline runs thereafter.
 
 To demonstrate, let's say you have a project that uses the logger from
-`deno.land/std`:
+[`@std/log`](https://jsr.io/@std/log):
 
 ```ts
-import * as log from "https://deno.land/std@0.224.0/log/mod.ts";
+import * as log from "jsr:@std/log@0.224.5";
 ```
 
 In order to increment this version, you can update the `import` statement and

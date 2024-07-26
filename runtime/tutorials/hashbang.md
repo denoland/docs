@@ -71,5 +71,5 @@ $ ./my_script
 Hello!
 ```
 
-[Deno.env]: https://deno.land/api?s=Deno.env
+[Deno.env]: https://docs.deno.com/api/deno/~/Deno.env
 [env]: https://www.man7.org/linux/man-pages/man1/env.1.html

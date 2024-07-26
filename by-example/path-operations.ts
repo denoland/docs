@@ -3,8 +3,8 @@
  * @difficulty beginner
  * @tags cli
  * @run --allow-read <url>
- * @resource {$std/path} Deno: std/path
- * @resource {https://deno.land/api?s=Deno.cwd} Deno: Deno.cwd
+ * @resource {https://jsr.io/@std/path/doc} Doc: @std/path
+ * @resource {https://docs.deno.com/api/deno/~/Deno.cwd} Deno: Deno.cwd
  * @group File System
  *
  * Many applications need to manipulate file paths in one way or another.

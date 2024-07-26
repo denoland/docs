@@ -6,8 +6,8 @@ oldUrl:
 
 ## Concepts
 
-- Use [Deno.open](https://deno.land/api?s=Deno.open) to read a file's content in
-  chunks.
+- Use [Deno.open](https://docs.deno.com/api/deno/~/Deno.open) to read a file's
+  content in chunks.
 - Transform a Deno file into a
   [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream).
 - Use Deno's integrated HTTP server to run your own file server.
@@ -64,24 +64,24 @@ async function handleHttp(conn: Deno.Conn) {
 ## Using the `std/http` file server
 
 The Deno standard library provides you with a
-[file server](https://deno.land/std/http/file_server.ts) so that you don't have
+[file server](https://jsr.io/@std/http/doc/file-server/~) so that you don't have
 to write your own.
 
 To use it, first install the remote script to your local file system. This will
 install the script to the Deno installation root's bin directory, e.g.
-`/home/alice/.deno/bin/file_server`.
+`/home/alice/.deno/bin/file-server`.
 
 ```shell
-deno install --allow-net --allow-read https://deno.land/std/http/file_server.ts
+deno install --allow-net --allow-read jsr:@std/http@1.0.0-rc.5/file-server
 ```
 
 You can now run the script with the simplified script name. Run it:
 
 ```shell
-$ file_server .
-Downloading https://deno.land/std/http/file_server.ts...
+$ file-server .
 [...]
-HTTP server listening on http://0.0.0.0:4507/
+Listening on:
+- Local: http://0.0.0.0:4507
 ```
 
 Now go to [http://0.0.0.0:4507/](http://0.0.0.0:4507/) in your web browser to
@@ -90,7 +90,7 @@ see your local directory contents.
 The complete list of options are available via:
 
 ```shell
-file_server --help
+file-server --help
 ```
 
 Example output:
@@ -99,7 +99,7 @@ Example output:
 Deno File Server
     Serves a local directory in HTTP.
   INSTALL:
-    deno install --allow-net --allow-read https://deno.land/std/http/file_server.ts
+    deno install --allow-net --allow-read jsr:@std/http@1.0.0-rc.5/file_server
   USAGE:
     file_server [path] [options]
   OPTIONS:

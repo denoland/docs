@@ -103,9 +103,6 @@ And in `./prisma/seed.ts`:
 
 ```ts
 import { Prisma, PrismaClient } from "../generated/client/deno/edge.ts";
-import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
-
-const envVars = await load();
 
 const prisma = new PrismaClient({
   datasources: {
@@ -148,8 +145,13 @@ await prisma.$disconnect();
 We can now run `seed.ts` with:
 
 ```shell
-deno run -A prisma/seed.ts
+deno run -A --env prisma/seed.ts
 ```
+
+> [!TIP]
+>
+> The `--env` flag is used to tell Deno to load environment variables from the
+> `.env` file.
 
 After doing so, your Prisma dashboard should show the new dinosaurs:
 
@@ -171,9 +173,6 @@ Then, in your `main.ts` file:
 ```ts
 import { PrismaClient } from "./generated/client/deno/edge.ts";
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
-import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
-
-const envVars = await load();
 
 /**
  * Initialize.
@@ -251,7 +250,7 @@ await app.listen({ port: 8000 });
 Now, let's run it:
 
 ```shell
-deno run -A main.ts
+deno run -A --env main.ts
 ```
 
 Let's visit `localhost:8000/dinosaurs`:

@@ -80,7 +80,7 @@ console.log(ac.fullName);
 ```
 
 You can also specify an optional
-[type parameter](https://deno.land/api?s=Deno.Kv&p=prototype.get&unstable) for
+[type parameter](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.get) for
 `get`:
 
 ```ts

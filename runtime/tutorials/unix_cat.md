@@ -7,15 +7,15 @@ oldUrl:
 ## Concepts
 
 - Use the Deno runtime API to output the contents of a file to the console.
-- [Deno.args](https://deno.land/api?s=Deno.args) accesses the command line
-  arguments.
-- [Deno.open](https://deno.land/api?s=Deno.open) is used to get a handle to a
-  file.
-- [Deno.stdout.writable](https://deno.land/api?s=Deno.stdout.writable) is used
-  to get a writable stream to the console standard output.
-- [Deno.FsFile.readable](https://deno.land/api?s=Deno.FsFile#prop_readable) is
-  used to get a readable stream from the file. (This readable stream closes the
-  file when it is finished reading, so it is not necessary to close the file
+- [Deno.args](https://docs.deno.com/api/deno/~/Deno.args) accesses the command
+  line arguments.
+- [Deno.open](https://docs.deno.com/api/deno/~/Deno.open) is used to get a
+  handle to a file.
+- [Deno.stdout.writable](https://docs.deno.com/api/deno/~/Deno.stdout.writable)
+  is used to get a writable stream to the console standard output.
+- [Deno.FsFile.readable](https://docs.deno.com/api/deno/~/Deno.FsFile#property_readable)
+  is used to get a readable stream from the file. (This readable stream closes
+  the file when it is finished reading, so it is not necessary to close the file
   explicitly.)
 - Modules can be run directly from remote URLs.
 
@@ -37,5 +37,5 @@ for (const filename of Deno.args) {
 To run the program:
 
 ```shell
-deno run --allow-read https://deno.land/std/examples/cat.ts /etc/passwd
+deno run --allow-read https://deno.land/std@0.190.0/examples/cat.ts /etc/passwd
 ```

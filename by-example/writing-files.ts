@@ -3,9 +3,9 @@
  * @difficulty beginner
  * @tags cli
  * @run --allow-read --allow-write <url>
- * @resource {https://deno.land/api?s=Deno.writeFile} Doc: Deno.writeFile
- * @resource {https://deno.land/api?s=Deno.create} Doc: Deno.create
- * @resource {https://deno.land/api?s=Deno.FsFile} Doc: Deno.FsFile
+ * @resource {https://docs.deno.com/api/deno/~/Deno.writeFile} Doc: Deno.writeFile
+ * @resource {https://docs.deno.com/api/deno/~/Deno.create} Doc: Deno.create
+ * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile} Doc: Deno.FsFile
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder} MDN: TextEncoder
  * @group File System
  *

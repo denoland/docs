@@ -21,8 +21,8 @@ structure based on it. It will then query that DOM structure, picking out the
 first heading it encounters and print out the text content of that heading:
 
 ```ts
-import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
-import { assert } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.47";
+import { assert } from "jsr:@std/assert@1";
 
 const document = new DOMParser().parseFromString(
   `<!DOCTYPE html>

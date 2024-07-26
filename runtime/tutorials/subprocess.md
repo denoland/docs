@@ -7,13 +7,13 @@ oldUrl:
 ## Concepts
 
 - Deno is capable of spawning a subprocess via
-  [Deno.Command](https://deno.land/api?s=Deno.Command).
+  [Deno.Command](https://docs.deno.com/api/deno/~/Deno.Command).
 - `--allow-run` permission is required to spawn a subprocess.
 - Spawned subprocesses do not run in a security sandbox.
 - Communicate with the subprocess via the
-  [stdin](https://deno.land/api?s=Deno.stdin),
-  [stdout](https://deno.land/api?s=Deno.stdout) and
-  [stderr](https://deno.land/api?s=Deno.stderr) streams.
+  [stdin](https://docs.deno.com/api/deno/~/Deno.stdin),
+  [stdout](https://docs.deno.com/api/deno/~/Deno.stdout) and
+  [stderr](https://docs.deno.com/api/deno/~/Deno.stderr) streams.
 
 ## Simple example
 
@@ -70,7 +70,7 @@ This example is the equivalent of running `yes &> ./process_output` in bash.
 
 import {
   mergeReadableStreams,
-} from "https://deno.land/std@0.224.0/streams/merge_readable_streams.ts";
+} from "jsr:@std/streams@1.0.0-rc.4/merge-readable-streams";
 
 // create the file to attach the process to
 const file = await Deno.open("./process_output.txt", {
