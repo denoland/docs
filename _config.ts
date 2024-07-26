@@ -75,6 +75,7 @@ site.copy("deploy/kv/tutorials/images");
 site.copy("runtime/manual/images");
 site.copy("deploy/manual/images");
 site.copy("deno.json");
+site.copy("go.json");
 site.copy("server.ts");
 site.copy("middleware.ts");
 
