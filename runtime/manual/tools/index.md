@@ -21,12 +21,12 @@ Deno features before they are finalized.
 - [`deno doc`](./documentation_generator.md) - show documentation for a module
 - [`deno eval`](./eval.md) - eval script
 - [`deno fmt`](./formatter.md) - format source files
-- [`deno help`](./help.md) - show command help text
+- [`deno help`](./index.md) - show command help text
 - [`deno info`](./dependency_inspector.md) - show info about cache or related
   source file
 - [`deno init`](./init.md) - initialize a new project.
 - [`deno install`](./script_installer.md) - install script as an executable
-- [`deno jupyter`](./jupyter.md)- Deno kernel fo Jupyter notebooks
+- [`deno jupyter`](./jupyter.md)- Deno kernel for Jupyter notebooks
 - [`deno lint`](./linter.md) - lint source files
 - [`deno lsp`](./lsp.md) - start the language server
 - [`deno publish`](../basics/modules/publishing_modules.md) - publish a module
@@ -34,9 +34,9 @@ Deno features before they are finalized.
 - [`deno repl`](./repl.md) - read eval print loop
 - [`deno run`](./run.md) - run a JavaScript or TypeScript program
 - [`deno serve`](./serve.md) - run a server
-- [`deno task`](./task_runner.md)
-- [`deno test`](../basics/testing.md) - run tests
+- [`deno task`](./task_runner.md) - run a task defined in the configuration file
+- [`deno test`](../basics/testing/index.md) - run tests
 - [`deno types`](./types.md) - print runtime TypeScript declarations
-- [`deno uninstall`](./uninstall.md) - uinstall a script previously installed
+- [`deno uninstall`](./uninstall.md) - uninstall a script previously installed
   with deno install
 - [`deno upgrade`](./upgrade.md) - upgrade deno executable to given version
