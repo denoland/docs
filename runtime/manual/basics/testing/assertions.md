@@ -7,7 +7,7 @@ To help developers write tests the Deno standard library comes with a built-in
 `jsr:@std/assert@1`.
 
 ```js
-import { assert } from "htjsr:@std/assert@1";
+import { assert } from "jsr:@std/assert@1";
 
 Deno.test("Hello Test", () => {
   assert("Hello");
