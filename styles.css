@@ -104,6 +104,20 @@ body:not(:has(.ddoc)) {
   font-feature-settings: "cv05" on, "cv08" on, "cv09" on, "ss01" on, "ss08" on;
 }
 
+/* Global docs CTA button style */
+
+.docs-cta {
+  @apply border border-gray-800 text-black bg-gray-500 font-bold inline-block py-4 px-4 rounded-md w-max hover:text-inherit hover:no-underline transition-colors duration-200;
+}
+
+.runtime-cta {
+  @apply bg-runtime-300 border-runtime-300 hover:bg-runtime-200;
+}
+
+.deploy-cta {
+  @apply bg-deploy-500 border-deploy-500 hover:bg-deploy-400;
+}
+
 /* Orama search style overrides */
 .searchbutton-module_searchbutton__gg7JJ {
   @apply w-64 border-gray-00 !important;

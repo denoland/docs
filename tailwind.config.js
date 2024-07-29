@@ -21,12 +21,10 @@ export default {
 
         "primary": "rgb(9, 105, 218)",
 
-        runtime: "rgba(112, 255, 175, 1)",
         "runtime-dark": "#172723",
         "runtime-secondary": "#EBFF01",
         "runtime-secondary-dark": "#232711",
 
-        deploy: "#01C2FF",
         "deploy-dark": "#0C212A",
 
         subhosting: "#FF8A01",
@@ -35,6 +33,36 @@ export default {
         fresh: "#FFDB1E",
         "fresh-dark": "#401C00",
 
+        runtime: {
+          '50': '#f0fff1',
+          '100': '#d6ffe1',
+          '200': '#b3ffcd',
+          '300': '#70ffae',
+          DEFAULT: '70ffae',
+          '400': '#32f59a',
+          '500': '#09dc8b',
+          '600': '#01b780',
+          '700': '#058f71',
+          '800': '#0a7163',
+          '900': '#0a5c5b',
+          '950': '#003033',
+        },
+
+        deploy: {
+          '50': '#effaff',
+          '100': '#def4ff',
+          '200': '#b6ecff',
+          '300': '#75e0ff',
+          '400': '#2cd1ff',
+          '500': '#01c2ff',
+          DEFAULT: '#01c2ff',
+          '600': '#0097d4',
+          '700': '#0078ab',
+          '800': '#00658d',
+          '900': '#065474',
+          '950': '#04354d',
+        },
+    
         gray: {
           "000": "#e3e5e9",
           "00": "#cfd1d6",
