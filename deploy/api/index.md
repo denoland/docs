@@ -68,7 +68,7 @@ Deploy.
 - [`Deno.resolveDns`](https://docs.deno.com/api/deno/~/Deno.resolveDns) - Make
   DNS queries
 - File system API
-  - [`Deno.cwd`](hhttps://docs.deno.com/api/deno/~/Deno.cwd) - Get the current
+  - [`Deno.cwd`](https://docs.deno.com/api/deno/~/Deno.cwd) - Get the current
     working directory
   - [`Deno.readDir`](https://docs.deno.com/api/deno/~/Deno.readDir) - Get
     directory listings

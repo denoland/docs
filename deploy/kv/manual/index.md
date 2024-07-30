@@ -245,7 +245,7 @@ by your code. Learn more about Deno KV on Deno Deploy [here](./on_deploy).
 
 By default, [`Deno.openKv()`](https://docs.deno.com/api/deno/~/Deno.openKv)
 creates or opens a persistent store based on the path from which the script that
-invoked it was run. This isn't usually desireable for tests, which need to
+invoked it was run. This isn't usually desirable for tests, which need to
 produce the same behavior when run many times in a row.
 
 To test code that uses Deno KV, you can use the special argument `":memory:"` to

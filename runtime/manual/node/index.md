@@ -17,7 +17,7 @@ more about these methods.
 
 ## Unstable compatibility features
 
-Node and npm compatiblity is an ongoing project for the Deno team. As such,
+Node and npm compatibility is an ongoing project for the Deno team. As such,
 there are a number of unstable features aimed at improving compatibility that
 you may want to reference. Please check out the
 [unstable feature flags](/runtime/manual/tools/unstable_flags) documentation for

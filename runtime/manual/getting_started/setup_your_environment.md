@@ -254,7 +254,7 @@ support Deno.
 
 ### Kakoune
 
-[Kakoune](http://kakoune.org/) supports connecting to the Deno language server
+[Kakoune](https://kakoune.org/) supports connecting to the Deno language server
 via the [kak-lsp](https://github.com/kak-lsp/kak-lsp) client. Once
 [kak-lsp is installed](https://github.com/kak-lsp/kak-lsp#installation) an
 example of configuring it up to connect to the Deno language server is by adding
