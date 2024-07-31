@@ -7,12 +7,12 @@ oldUrl:
   - /runtime/manual/examples/how_to_with_npm/
 ---
 
-Here you can find some example programs that you can use to learn more about the
-runtime.
+Whether you’re a seasoned developer or just starting out, these tutorials are packed with practical examples and walk-throughs to help you learn to use Deno with a variety of technologies. Dive in and discover how Deno’s secure, efficient, and developer-friendly runtime can elevate your projects. Happy coding!
 
 ## Basic
 
 - [Hello World](./hello_world.md)
+- [Set up your Environment](./set_up_environment.md)
 - [Manage Dependencies](./manage_dependencies.md)
 - [Fetch Data](./fetch_data.md)
 - [Read and Write Files](./read_write_files.md)

@@ -4,47 +4,24 @@ oldUrl:
   - /runtime/manual/examples/hello_world/
 ---
 
-## Concepts
+In this tutorial we'll walk through how to create an run a simple hello world program with Deno. Since Deno can run JavaScript or TypeScript out of the box with no additional tools or config required we'll take a look at both a JS and a TS example.
 
-- Deno can run JavaScript or TypeScript out of the box with no additional tools
-  or config required.
+## Hello World, running JavaScript
 
-## Overview
-
-Deno is a secure runtime for both JavaScript and TypeScript. As the hello world
-examples below highlight the same functionality can be created in JavaScript or
-TypeScript, and Deno will execute both.
-
-## JavaScript
-
-In this JavaScript example the message `Hello [name]` is printed to the console
-and the code ensures the name provided is capitalized.
-
-**Command:** `deno run hello-world.js`
+In this JavaScript example the message `Hello from JavaScript` is printed to the console.
+Create a new file called `hello-world.js` and add the following code:
 
 ```js
-/**
- * hello-world.js
- */
-function capitalize(word) {
-  return word.charAt(0).toUpperCase() + word.slice(1);
-}
+  const greeting = "Hello from JavaScript";
 
-function hello(name) {
-  return "Hello " + capitalize(name);
-}
+  console.log(greeting);
+```
 
-console.log(hello("john"));
-console.log(hello("Sarah"));
-console.log(hello("kai"));
+In your terminal, navigate to the directory where your `hello-world.js` file is located and run the file using the `deno run` command:
 
-/**
- * Output:
- *
- * Hello John
- * Hello Sarah
- * Hello Kai
- */
+```bash
+$ deno run hello-world.js
+Hello from JavaScript
 ```
 
 ## TypeScript
@@ -55,29 +32,19 @@ code just has the additional type information which TypeScript supports.
 The `deno run` command is exactly the same, it just references a `*.ts` file
 rather than a `*.js` file.
 
-**Command:** `deno run hello-world.ts`
-
 ```ts
-/**
- * hello-world.ts
- */
-function capitalize(word: string): string {
-  return word.charAt(0).toUpperCase() + word.slice(1);
-}
+const greeting: string = "Hello from TypeScript";
 
-function hello(name: string): string {
-  return "Hello " + capitalize(name);
-}
-
-console.log(hello("john"));
-console.log(hello("Sarah"));
-console.log(hello("kai"));
-
-/**
- * Output:
- *
- * Hello John
- * Hello Sarah
- * Hello Kai
- */
+console.log(greeting);
 ```
+
+As before, run this file using the `deno run` command in your terminal:
+
+```bash
+$ deno run hello-world.ts
+Hello from TypeScript
+```
+
+## Conclusion
+
+In this tutorial we've seen how to create and run a simple hello world program with Deno. We've seen how to run both JavaScript and TypeScript files and how to use the `deno run` command to execute them.
