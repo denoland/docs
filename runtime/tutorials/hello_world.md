@@ -4,20 +4,24 @@ oldUrl:
   - /runtime/manual/examples/hello_world/
 ---
 
-In this tutorial we'll walk through how to create an run a simple hello world program with Deno. Since Deno can run JavaScript or TypeScript out of the box with no additional tools or config required we'll take a look at both a JS and a TS example.
+In this tutorial we'll walk through how to create an run a simple hello world
+program with Deno. Since Deno can run JavaScript or TypeScript out of the box
+with no additional tools or config required we'll take a look at both a JS and a
+TS example.
 
 ## Hello World, running JavaScript
 
-In this JavaScript example the message `Hello from JavaScript` is printed to the console.
-Create a new file called `hello-world.js` and add the following code:
+In this JavaScript example the message `Hello from JavaScript` is printed to the
+console. Create a new file called `hello-world.js` and add the following code:
 
 ```js
-  const greeting = "Hello from JavaScript";
+const greeting = "Hello from JavaScript";
 
-  console.log(greeting);
+console.log(greeting);
 ```
 
-In your terminal, navigate to the directory where your `hello-world.js` file is located and run the file using the `deno run` command:
+In your terminal, navigate to the directory where your `hello-world.js` file is
+located and run the file using the `deno run` command:
 
 ```bash
 $ deno run hello-world.js
@@ -47,4 +51,6 @@ Hello from TypeScript
 
 ## Conclusion
 
-In this tutorial we've seen how to create and run a simple hello world program with Deno. We've seen how to run both JavaScript and TypeScript files and how to use the `deno run` command to execute them.
+In this tutorial we've seen how to create and run a simple hello world program
+with Deno. We've seen how to run both JavaScript and TypeScript files and how to
+use the `deno run` command to execute them.

@@ -4,10 +4,11 @@ oldUrl:
   - /runtime/manual/examples/http_server/
 ---
 
-Deno's has an integrated HTTP server allow you to create and run your own web server.
+Deno's has an integrated HTTP server allow you to create and run your own web
+server.
 
-With just a few lines of code we'll write an HTTP web server with control
-over the response status, request headers and more.
+With just a few lines of code we'll write an HTTP web server with control over
+the response status, request headers and more.
 
 Create a new file called `server.ts` and add the following code:
 
@@ -34,7 +35,7 @@ Then run this with:
 deno run --allow-net server.ts
 ```
 
-You can read more about the `--allow-net` flag and other permissions in the [permissions tutorial](/tutorials/permissions).
+You can read more about the `--allow-net` flag and other permissions in the
+[permissions tutorial](/tutorials/permissions).
 
 You can now access your server at `http://localhost:8080/`.
-
