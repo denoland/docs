@@ -36,6 +36,8 @@ Next, open the Command Palette by pressing `Ctrl+Shift+P` and type
 `Deno: Initialize Workspace Configuration`. Select this option to configure Deno
 for your workspace.
 
+![The VSCode command palette with the Deno: Initialize Workspace Configuration option selected.](./images/vscode-setup.png)
+
 A file called `.vscode/settings.json` will be created in your workspace with the
 following configuration:
 
@@ -53,77 +55,16 @@ code formatting, linting, and more.
 
 ## JetBrains IDEs (WebStorm, IntelliJ IDEA, PhpStorm, PyCharm)
 
-To install the Deno Plugin, open your IDE and go to **Preferences / Settings**.
-Navigate to Plugins and search for `Deno`. Install the official Deno plugin.
+To install the Deno Plugin, open your IDE and go to **File** > **Settings**.
+Navigate to **Plugins** and search for `Deno`. Install the official Deno plugin.
 
-To configure the Plugin, go to **Preferences / Settings** again. Navigate to
-**Languages & Frameworks** > **Deno**. Enable Deno for your project and specify
-the path to the Deno executable.
+![The WebStorm plugins settings](./images/webstorm_setup.png)
 
-## Vim/Neovim
+To configure the Plugin, go to **File** > **Settings** again. Navigate to
+**Languages & Frameworks** > **Deno**. Check **Enable Deno for your project**
+and specify the path to the Deno executable (if it has not been auto-detected).
 
-### Using [coc.nvim](https://www.vim.org/scripts/script.php?script_id=5779)
+## Other Editors
 
-Install coc.nvim and follow the installation instructions for coc.nvim. To
-configure coc.nvim for Deno, add the following configuration to your
-coc-settings.json:
-
-```json
-{
-  "languageserver": {
-    "deno": {
-      "command": "deno",
-      "args": ["lsp"],
-      "filetypes": ["typescript", "javascript"],
-      "initializationOptions": {
-        "enable": true,
-        "lint": true,
-        "unstable": true
-      }
-    }
-  }
-}
-```
-
-### Using built-in LSP in Neovim
-
-Install [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) and follow
-the installation instructions for nvim-lspconfig. To configure the Deno LSP add
-the following configuration to your init.vim or init.lua:
-
-```bash
-local nvim_lsp = require('lspconfig')
-nvim_lsp.denols.setup {
-  on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
-}
-```
-
-## Emacs
-
-Install [eglot](https://www.gnu.org/software/emacs/manual/html_mono/eglot.html)
-and follow the installation instructions for eglot. To configure eglot for Deno,
-add the following configuration to your Emacs configuration file:
-
-```bash
-(add-to-list 'eglot-server-programs '((js-mode typescript-mode) . ("deno" "lsp")))
-```
-
-## Sublime Text
-
-Open the Command Palette with `Ctrl+Shift+P` and install
-[LSP](https://lsp.sublimetext.io/) and
-[LSP-Deno](https://github.com/sublimelsp/LSP-Deno) via Package Control. To
-configure LSP-Deno, go to _Preferences_ > _Package Settings_ > _LSP_ >
-_Settings_ and add the following configuration:
-
-```json
-{
-  "clients": {
-    "deno": {
-      "command": ["deno", "lsp"],
-      "selector": "source.ts, source.tsx, source.js, source.jsx"
-    }
-  }
-}
-```
+See the
+[guide to set up your development environment](/runtime/manual/getting_started/setup_your_environment/).
