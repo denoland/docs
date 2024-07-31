@@ -25,8 +25,7 @@ line, or use the default. For example:
 > ⚠️ Deno v1.14 started supporting a more general configuration file that is no
 > longer confined to specifying TypeScript compiler settings. Using
 > `tsconfig.json` as a file name will still work, but we recommend to use
-> `deno.json` or `deno.jsonc`, as an automatic lookup of this file is planned
-> for an upcoming release.
+> `deno.json` or `deno.jsonc`, as they will be automatically found by Deno.
 
 ## How Deno uses a configuration file
 
