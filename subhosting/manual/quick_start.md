@@ -172,7 +172,7 @@ like this:
 }
 ```
 
-Note the `id` of the project that was returned with this repsonse - this is the
+Note the `id` of the project that was returned with this response - this is the
 project ID we'll use in the next step.
 
 Now that we have REST API access configured and a project set up, we can move on

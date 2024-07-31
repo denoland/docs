@@ -171,10 +171,10 @@ once per message. See
 handler is invoked to process your queued messages when they're ready for
 delivery. If your handler throws an exception the runtime will automatically
 retry to call the handler again until it succeeds or until maximum retry
-attempts are reached. The message is considered to be succesfully processed once
-the
+attempts are reached. The message is considered to be successfully processed
+once the
 [`listenQueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.listenQueue)
-handler invocation completes succesfully. The message will be dropped if the
+handler invocation completes successfully. The message will be dropped if the
 handler consistently fails on retries.
 
 ### Message delivery order
