@@ -144,7 +144,7 @@ export default function () {
                     },
                     {
                       text: "Hello World",
-                      href: "/examples/hello_world",
+                      href: "/examples/hello-world",
                     },
                     {
                       text: "Using Node.js built-in modules",
