@@ -4,7 +4,7 @@ title: "Setting up your Environment"
 
 Deno is a secure runtime for JavaScript and TypeScript that comes with a set of
 built-in tools and utilities. In this tutorial, we’ll walk you through setting
-up your development environment for Deno using Visual Studio Code (VSCode).
+up your development environment for Deno using Visual Studio Code (VS Code).
 We’ll also show you how to configure Deno’s Language Server Protocol (LSP) in
 other popular editors like JetBrains IDEs, Vim/Neovim, Emacs, Sublime Text, and
 Atom.
