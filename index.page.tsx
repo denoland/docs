@@ -233,7 +233,15 @@ export default function () {
                 </h3>
                 <p class="max-w-[75ch]">
                   Deno, Web, and Node API reference documentation, built for the
-                  Deno experience
+                  Deno experience. Explore the APIs available in Deno in the
+                  {" "}
+                  <a
+                    href="/api/deno"
+                    class="runtime-link underline underline-offset-4"
+                  >
+                    Reference
+                  </a>{" "}
+                  section.
                 </p>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-16">
