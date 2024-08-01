@@ -118,6 +118,22 @@ body:not(:has(.ddoc)) {
   @apply bg-deploy-500 border-deploy-500 hover:bg-deploy-400;
 }
 
+.homepage-link {
+  @apply block font-semibold underline underline-offset-4;
+}
+
+.deploy-link {
+  @apply text-deploy-600 decoration-deploy-600/20 hover:decoration-deploy-600;
+}
+
+.runtime-link {
+  @apply text-runtime-600 decoration-runtime-600/20 hover:decoration-runtime-600;
+}
+
+.help-link {
+  @apply text-purple-600 decoration-purple-600/20 hover:decoration-purple-600;
+}
+
 /* Orama search style overrides */
 .searchbutton-module_searchbutton__gg7JJ {
   @apply w-64 border-gray-00 !important;
