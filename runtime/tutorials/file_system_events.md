@@ -39,6 +39,6 @@ This feature uses different syscalls depending on the platform:
 
 - Linux: [inotify](https://man7.org/linux/man-pages/man7/inotify.7.html)
 - macOS:
-  [FSEvents](https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_Progmanual/Introduction/Introduction.html)
+  [FSEvents](https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/Introduction/Introduction.html)
 - Windows:
   [ReadDirectoryChangesW](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-readdirectorychangesw)
