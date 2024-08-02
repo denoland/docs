@@ -1,8 +1,8 @@
 {
   "Cloud": "Tools for managing state, scheduling tasks, and interacting with key-value stores. \n\nEg {@linkcode Deno.openKv }, {@linkcode Deno.cron}",
-  "Errors": "Error types and utilities for handling exceptions and custom error scenarios. Helps improve error handling and debugging. \n\nEg  {@linkcode Deno.errorsNotFound}",
+  "Errors": "Error types and utilities for handling exceptions and custom error scenarios. Helps improve error handling and debugging. \n\nEg  {@linkcode Deno.errors.NotFound}",
   "FFI": "Foreign Function Interface. Call functions from shared libraries (e.g., C/C++) directly from Deno.\n\nUseful for integrating with existing native code or accessing low-level system functionality. \n\nEg {@linkcode Deno.dlopen}",
-  "Fetch": "HTTP client for fetching data across a network. Retrieve resources from servers, handle responses, and manage network requests. \n\nEg {@linkcode Deno.fetch}, {@linkcode Deno.Response}, {@linkcode Deno.Request}, {@linkcode Deno.Headers}",
+  "Fetch": "HTTP client for fetching data across a network. Retrieve resources from servers, handle responses, and manage network requests. \n\nEg {@linkcode fetch}, {@linkcode Response}, {@linkcode Request}, {@linkcode Headers}",
   "File System": "File System APIs for working with files, directories, and file metadata. Includes functions for reading, writing, and manipulating file paths. \n\nEg {@linkcode Deno.readDir}, {@linkcode Deno.readTextFile}",
   "GPU": "GPU programming and rendering. Efficiently use a device’s graphics processing unit (GPU) for high-performance computations and complex image rendering. \n\nEg {@linkcode GPUDevice}",
   "HTTP Server": "Handling HTTP requests, serving responses, and managing server behavior. \n\nEg {@linkcode Deno.serveHttp}, {@linkcode Deno.serve}",
