@@ -11,7 +11,7 @@ oldUrl:
   line arguments.
 - [Deno.open](https://docs.deno.com/api/deno/~/Deno.open) is used to get a
   handle to a file.
-- [Deno.stdout.writable](https://docs.deno.com/api/deno/~/Deno.stdout.writable)
+- [Deno.stdout.writable](https://docs.deno.com/api/deno/~/Deno.stdout)
   is used to get a writable stream to the console standard output.
 - [Deno.FsFile.readable](https://docs.deno.com/api/deno/~/Deno.FsFile#property_readable)
   is used to get a readable stream from the file. (This readable stream closes
