@@ -4,7 +4,7 @@ oldUrl:
   - /runtime/manual/examples/hello_world/
 ---
 
-In this tutorial we'll walk through how to create an run a simple hello world
+In this tutorial we'll walk through how to create and run a simple hello world
 program with Deno. Since Deno can run JavaScript or TypeScript out of the box
 with no additional tools or config required we'll take a look at both a JS and a
 TS example.
