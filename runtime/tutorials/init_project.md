@@ -59,7 +59,7 @@ if (import.meta.main) {
 }
 ```
 
-This files is a simple example of a module in Deno. You can learn more about
+This file is a simple example of a module in Deno. You can learn more about
 modules in the [module metadata tutorial](/tutorials/module_metadata).
 
 The `add` function takes two arguments `a` and `b`, both of which are numbers,
