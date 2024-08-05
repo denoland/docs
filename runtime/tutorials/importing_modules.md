@@ -57,7 +57,7 @@ You should see the sum and difference of the numbers printed to the console.
 ## Using Third-Party Modules
 
 In this tutorial we're going to use the
-[@luca/cases](https://jsr.io/@luca/cases) package convert text strings to
+[@luca/cases](https://jsr.io/@luca/cases) package to convert text strings to
 different case formats (camel case, kebab case etc).
 
 ```bash
