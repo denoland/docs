@@ -56,8 +56,8 @@ The pattern matching for the compiler hint is somewhat forgiving and will accept
 quoted and non-quoted values for the specifier as well as accepting whitespace
 before and after the equals sign.
 
-> ℹ️ _Note_: The directive `@deno-types` can be used as an alias for
-> `@ts-types`. This is not recommended anymore.
+> ℹ️ _Note_: The directive `@deno-types` can be used as an alias for `@ts-types`.
+> This is not recommended anymore.
 
 ## Providing types when hosting
 
@@ -85,8 +85,8 @@ When Deno encounters this directive, it would resolve the `./coolLib.d.ts` file
 and use that instead of the JavaScript file when TypeScript was type checking
 the file, but still load the JavaScript file when running the program.
 
-> ℹ️ _Note_: Instead of `@ts-self-types`, a triple slash directive in the form
-> of `/// <reference types="./coolLib.d.ts" />` can be used. This is not
+> ℹ️ _Note_: Instead of `@ts-self-types`, a triple slash directive in the form of
+> `/// <reference types="./coolLib.d.ts" />` can be used. This is not
 > recommended anymore. This is a repurposed directive for TypeScript that only
 > applies to JavaScript files. Using the triple-slash reference directive of
 > `types` in a TypeScript file works under Deno as well, but has essentially the
