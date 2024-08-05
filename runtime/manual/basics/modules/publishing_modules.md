@@ -70,7 +70,8 @@ deno publish --token <your-auth-token>
 ```
 
 You can create a new auth token at
-[jsr.io/account/tokens](https://jsr.io/account/tokens) (You will need to be logged in to JSR to view this page).
+[jsr.io/account/tokens](https://jsr.io/account/tokens) (You will need to be
+logged in to JSR to view this page).
 
 If you're configuring a CI pipeline to publish your module, you can use the
 `--token` flag to authenticate with JSR but it's important to ensure that your
