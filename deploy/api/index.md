@@ -43,7 +43,7 @@ Deploy.
   - `WritableStream`
   - `TransformStream`
 - [URLPattern API](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern)
-- [Import Maps](https://deno.land/manual/linking_to_external_code/import_maps)
+- [Import Maps](https://docs.deno.com/runtime/manual/basics/import_maps/)
   - Note: `import maps` are currently only available via
     [deployctl](https://github.com/denoland/deployctl) or
     [deployctl GitHub Action](https://github.com/denoland/deployctl/blob/main/action/README.md)

@@ -4,7 +4,7 @@
  * @tags cli
  * @run --allow-net --unstable <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.connect} Doc: Deno.connect
- * @resource {/examples/udp-listener.ts} Example: UDP Listener
+ * @resource {/examples/udp-listener} Example: UDP Listener
  * @group Network
  *
  * An example of writing a 'ping' message to a UDP server on localhost.
