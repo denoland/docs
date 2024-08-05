@@ -74,7 +74,7 @@ and use them to change the format of the string `hello world`:
 import { camelCase, splitPieces } from "@luca/cases";
 
 console.log(camelCase("hello world")); // helloWorld
-console.log(splitPieces("hello world")); // helloWorld
+console.log(splitPieces("hello world")); // ["hello", "World"]
 ```
 
 You can now run the `main.ts` script using the following command:
