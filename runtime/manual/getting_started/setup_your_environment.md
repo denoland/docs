@@ -3,7 +3,9 @@ title: "Set Up Your Environment"
 ---
 
 Deno comes with many of the tools that are commonly needed for developing
-applications, including a full language server to help power your editor or IDE of choice. This page will help you set up your environment to get the most out of Deno while you are developing.
+applications, including a full language server to help power your editor or IDE
+of choice. This page will help you set up your environment to get the most out
+of Deno while you are developing.
 
 ## Setting up your editor/IDE
 
