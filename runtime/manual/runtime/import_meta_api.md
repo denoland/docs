@@ -4,7 +4,7 @@ title: "`import.meta` API"
 
 Deno supports a number of properties and methods on the
 [`import.meta`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta)
-API:
+API. It can be used to get information about the module like the module's URL.
 
 ## `import.meta.url`
 
