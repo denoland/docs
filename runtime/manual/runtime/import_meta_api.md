@@ -4,14 +4,13 @@ title: "`import.meta` API"
 
 Deno supports a number of properties and methods on the
 [`import.meta`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta)
-API:
+API. It can be used to get information about the module like the module's URL.
 
 ## `import.meta.url`
 
 Returns the URL of the current module.
 
-```ts
-// main.ts
+```ts title="main.ts"
 console.log(import.meta.url);
 ```
 
@@ -27,13 +26,13 @@ https://example.com/main.ts
 
 Returns whether the current module is the entry point to your program.
 
-```ts
-// main.ts
+```ts title="main.ts"
 import "./other.ts";
 
 console.log(`Is ${import.meta.url} the main module?`, import.meta.main);
+```
 
-// other.ts
+```ts title="other.ts"
 console.log(`Is ${import.meta.url} the main module?`, import.meta.main);
 ```
 
@@ -51,8 +50,7 @@ _This property is only available for local modules (module that have
 Returns the fully resolved path to the current module. The value contains OS
 specific path separators.
 
-```ts
-// main.ts
+```ts title="main.ts"
 console.log(import.meta.filename);
 ```
 
@@ -84,8 +82,7 @@ _This property is only available for local modules (module that have
 Returns the fully resolved path to the directory containing the current module.
 The value contains OS specific path separators.
 
-```ts
-// main.ts
+```ts title="main.ts"
 console.log(import.meta.dirname);
 ```
 
@@ -132,8 +129,7 @@ With such import map loaded...
 
 ...you can now resolve:
 
-```js
-// resolve.js
+```js title="resolve.js"
 console.log(import.meta.resolve("fresh"));
 ```
 
