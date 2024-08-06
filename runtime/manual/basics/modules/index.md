@@ -199,6 +199,33 @@ not generally recommend this approach for third-party components.
 URL imports remain supported, **but we recommend using a package registry for
 the best experience.**
 
+### Overriding URL imports
+
+The other situation where import maps can be very useful is to override URL
+imports in specific modules.
+
+Let's say you want to override a `https://deno.land/x/my-library@1.0.0/mod.ts`
+specifier that is used inside files coming from `https://deno.land/x/example/`
+to a local patched version. You can do this by using a scope in the import map
+that looks something like this:
+
+```json
+{
+  "imports": {
+    "example/": "https://deno.land/x/example/"
+  },
+  "scopes": {
+    "https://deno.land/x/example/": {
+      "https://deno.land/x/my-library@1.0.0/mod.ts": "./patched/mod.ts"
+    }
+  }
+}
+```
+
+_It is important to note that URL imports have no notion of packages. Only the
+import map at the root of your project is used. Import maps used inside URL
+dependencies are ignored._
+
 ## Proxies
 
 Deno supports proxies for module downloads and the Web standard `fetch` API.
@@ -208,29 +235,3 @@ Proxy configuration is read from environmental variables: `HTTP_PROXY`,
 
 In case of Windows, if environment variables are not found Deno falls back to
 reading proxies from registry.
-
-## Import paths
-
-Inside `deno.json` you can specify an import map, which allows you to map a full
-import path or a partial one to a different location.
-
-```jsonc title="deno.jsonc"
-{
-  "imports": {
-    // Map to an exact file
-    "foo": "./some/long/path/foo.ts",
-    // Map to a directory, usage: "bar/file.ts"
-    "bar/": "./some/folder/bar/"
-  }
-}
-```
-
-Usage:
-
-```ts
-import * as foo from "foo";
-import * as bar from "bar/file.ts";
-```
-
-Path mapping of import specifies is commonly used in larger code bases for
-brevity.
