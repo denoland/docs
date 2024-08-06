@@ -2,76 +2,37 @@
 title: "ECMAScript Modules in Deno"
 ---
 
-## Concepts
-
-- [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
-  allows you to include and use modules held elsewhere, on your local file
-  system or remotely.
-- [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
-  allows you to specify which parts of your module are accessible to users who
-  import your module.
-
-## Overview
-
 Deno by default standardizes the way modules are imported in both JavaScript and
-TypeScript using the ECMAScript 6 `import/export` standard.
-
-It adopts browser-like module resolution, meaning that file names must be
-specified in full. You may not omit the file extension and there is no special
-handling of `index.js`.
-
-```js
-import { add, multiply } from "./arithmetic.ts";
-```
-
-Dependencies are also imported directly, there is no package management
-overhead. Local modules are imported in exactly the same way as remote modules.
-As the examples show below, the same functionality can be produced in the same
-way with local or remote modules.
-
-## Local Import
-
-In this example the `add` and `multiply` functions are imported from a local
-`arithmetic.ts` module.
-
-**Command:** `deno run local.ts`
+TypeScript using the
+[ECMAScript module standard](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+In line with this standard, **file names must be specified in full**. You should
+not omit the file extension and there is no special handling of `index.js`.
 
 ```ts
-import { add, multiply } from "./arithmetic.ts";
-
-function totalCost(outbound: number, inbound: number, tax: number): number {
-  return multiply(add(outbound, inbound), tax);
-}
-
-console.log(totalCost(19, 31, 1.2)); // 60
-console.log(totalCost(45, 27, 1.15)); // 82.8
+// Always include the file extension
+import { add } from "./calc.ts";
 ```
 
-## Export
+## Importing modules
 
-In the local import example above the `add` and `multiply` functions are
-imported from a locally stored arithmetic module. To make this possible the
-functions stored in the arithmetic module must be exported.
+In this example the `add` function is imported from a local `calc.ts` module.
 
-To do this just add the keyword `export` to the beginning of the function
-signature as is shown below.
-
-```ts
+```ts title="calc.ts"
 export function add(a: number, b: number): number {
   return a + b;
 }
-
-export function multiply(a: number, b: number): number {
-  return a * b;
-}
 ```
 
-All functions, classes, constants and variables which need to be accessible
-inside external modules must be exported. Either by prepending them with the
-`export` keyword or including them in an export statement at the bottom of the
-file.
+```ts title="main.ts"
+import { add } from "./calc.ts";
 
-## Using third party modules and libraries with Deno
+console.log(add(1, 2)); // 3
+```
+
+You can run this example by calling `deno run main.ts` in the directory that
+contains `main.ts` and `calc.ts`.
+
+## Adding third party modules and libraries to deno.json
 
 Using remote modules (downloaded from a registry) in Deno uses the same `import`
 syntax as your local code.
@@ -79,37 +40,48 @@ syntax as your local code.
 The modules that you add to your project are tracked as `imports` in
 `deno.json` - we call this the import map.
 
-```json
+```json title="deno.json"
 {
-  "tasks": {
-    "dev": "deno run --watch main.ts"
-  },
   "imports": {
     "@scopename/mypackage": "jsr:@scopename/mypackage@^16.1.0"
   }
 }
 ```
 
-You can add modules using the `Deno CLI` subcommand `deno add`
+You can add modules using the `deno add` subcommand:
 
-```bash
-$ deno add @scopename/mypackage
-Add @scopename/mypackage - jsr:@scopename/mypackage@^16.1.0
+```sh
+# Add the latest version of the module to deno.json
+$ deno add @luca/cases
+Add @luca/cases - jsr:@luca/cases@^1.0.0
 ```
 
-Deno add will automatically add the latest version of the module you requested
-to your project imports. If you're coming from the `node` ecosystem, this is
-equivalent to `npm install PACKAGE --save`.
+```json title="deno.json"
+{
+  "imports": {
+    "@luca/cases": "jsr:@luca/cases@^1.0.0"
+  }
+}
+```
 
-## Using Imported Packages
+The `deno add` command will automatically add the latest version of the module
+you requested to your project imports, unless you specify an exact version:
+
+```sh
+# Passing an exact version
+$ deno add @luca/cases@1.0.0
+Add @luca/cases - jsr:@luca/cases@^1.0.0
+```
+
+## Using installed modules
 
 Once a package is added to the import map in `deno.json`, you can import the
-module by its name, and Deno will automatically resolve the module.
+module by its name, and Deno will automatically resolve the module. For example:
 
-```ts title="mod.ts"
-import { someFunction } from "@scopename/mypackage";
+```ts title="main.ts"
+import { camelCase } from "@luca/cases";
 
-someFunction();
+camelCase("hello world"); // "helloWorld"
 ```
 
 ## Package Registries
@@ -236,3 +208,29 @@ Proxy configuration is read from environmental variables: `HTTP_PROXY`,
 
 In case of Windows, if environment variables are not found Deno falls back to
 reading proxies from registry.
+
+## Import paths
+
+Inside `deno.json` you can specify an import map, which allows you to map a full
+import path or a partial one to a different location.
+
+```jsonc title="deno.jsonc"
+{
+  "imports": {
+    // Map to an exact file
+    "foo": "./some/long/path/foo.ts",
+    // Map to a directory, usage: "bar/file.ts"
+    "bar/": "./some/folder/bar/"
+  }
+}
+```
+
+Usage:
+
+```ts
+import * as foo from "foo";
+import * as bar from "bar/file.ts";
+```
+
+Path mapping of import specifies is commonly used in larger code bases for
+brevity.
