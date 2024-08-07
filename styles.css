@@ -26,10 +26,14 @@
   }
 
   details {
-    @apply rounded border border-offblack p-8 bg-pink-100;
+    @apply rounded border border-gray-1 py-4 px-4;
 
     &[open] summary {
-      @apply pb-4 mb-4 border-b border-offblack;
+      @apply pb-4 mb-4 border-b border-gray-00;
+    }
+
+    summary::marker {
+      @apply text-gray-2;
     }
   }
 }

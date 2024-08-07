@@ -65,7 +65,7 @@ function SidebarSection(
 }
 
 const LINK_CLASS =
-  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-gray-500 rounded-md hover:bg-pink-100 current:bg-gray-100 current:text-indigo-600/70 transition-colors duration-200 ease-in-out select-none";
+  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-gray-500 rounded-md hover:bg-blue-50 current:bg-blue-50 current:text-blue-500 transition-colors duration-200 ease-in-out select-none";
 
 function SidebarItem(props: {
   item: string | SidebarDoc_ | SidebarLink_;
@@ -117,7 +117,7 @@ function SidebarCategory(props: {
     <>
       <div
         class={LINK_CLASS + " flex justify-between items-center" +
-          (containsCurrent ? " text-indigo-600/70" : "")}
+          (containsCurrent ? " !text-blue-500" : "")}
         data-accordion-trigger
       >
         {props.item.label}

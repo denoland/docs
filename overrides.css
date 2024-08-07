@@ -14,6 +14,10 @@
   @apply md:mt-1 !important;
 }
 
+.ddoc {
+  @apply gap-8 !important;
+}
+
 /* Adjust spacing to account for removed header */
 
 .ddoc .toc .documentNavigation {
