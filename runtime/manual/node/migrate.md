@@ -73,10 +73,10 @@ and select `Quick Fix` and then `Convert to ES module`.
 ### CommonJS vs ECMAScript resolution
 
 An important distinction between the two module systems is that ECMAScript
-resolution requires the full specifier **including the file extension** to be
-present. Omitting the file extension or having special handling of `index.js` is
-a feature unique to CommonJS. The benefit of the ECMAScript resolution is that
-it works the same across the browser, Deno and other runtimes.
+resolution requires the full specifier **including the file extension**. Omitting 
+the file extension, and special handling of `index.js`, are features unique to 
+CommonJS. The benefit of the ECMAScript resolution is that it works the same 
+across the browser, Deno, and other runtimes.
 
 | CommonJS             | ECMAScript modules            |
 | -------------------- | ----------------------------- |
@@ -132,7 +132,7 @@ as it did in Node.js.
 
 ## Runtime permissions in Deno
 
-Consider the following simple [express](https://expressjs.com/) server:
+Consider the following simple [Express](https://expressjs.com/) server:
 
 ```js
 import express from "npm:express@4";
@@ -232,10 +232,9 @@ mappings, and other runtime configurations.
 
 ### Migrating npm scripts to `deno.json`
 
-If preferred, you can move your npm scripts over to `deno.json` to manage your
-project's runtime configuration. This allows you to run all of the necessary
-permission flags and other runtime config in one place, which can then be run
-with `deno task`.
+If preferred, you can move your npm scripts over to `deno.json`, where they can
+be run using `deno task`. This allows you to manage all necessary permission flags 
+and other runtime configuration in one place.
 
 ```json
 {
@@ -251,11 +250,10 @@ deno task dev
 
 ### Migrating npm dependencies to `deno.json`
 
-You can also migrate your dependencies over to `deno.json` to manage your
-project's dependencies. Deno supports importing dependencies from external
-package repositories, local files and urls. To import your npm dependencies, you
-can add them to the `imports` field in `deno.json`, and add the `npm:` specifier
-to the import path:
+You can also migrate your dependencies over to `deno.json`. Deno supports 
+importing dependencies from external package repositories, local files, and/or
+URLs. To import your npm dependencies, you can add them to the `imports` field
+in `deno.json`, and add the `npm:` specifier to the import path:
 
 ```json
 {
@@ -280,8 +278,8 @@ from npm, [JSR](https://jsr.io) and HTTP URLs.
 
 ## Optional improvements - Linting
 
-Deno ships with a built-in linter that is written with performance in mind. It
-can lint large projects in a few milliseconds. You can try it out on your
+Deno ships with a built-in linter that is written with performance in mind. Deno
+can lint large projects in just a few milliseconds. You can try it out on your
 project by running:
 
 ```sh
@@ -289,7 +287,7 @@ deno lint
 ```
 
 This will lint all files in your project. When the linter detects a problem, it
-will show it in your editor and in the terminal output. An example of what that
+will show the line in your editor and in the terminal output. An example of what that
 might look like:
 
 ```sh
@@ -307,8 +305,7 @@ Found 1 problem
 Checked 4 files
 ```
 
-Many linting rules come with the ability to fix the detected issues
-automatically when passing the `--fix` flag.
+Many linting issues can be fixed automatically by passing the `--fix` flag:
 
 ```sh
 deno lint --fix
@@ -320,17 +317,16 @@ configure the linter, check out the [`deno lint` subcommand](../tools/linter/).
 
 ## Optional improvements - Formatting
 
-Another optional improvement you can make is to format your code with Deno. Deno
-ships with a [built-in formatter](../tools/formatter/) that can format your code
-according to the Deno style guide. You can run the formatter on your project by
-running:
+Deno ships with a [built-in formatter](../tools/formatter/) that can optionally format 
+your code according to the Deno style guide. You can run the formatter on your 
+project by running:
 
 ```sh
 deno fmt
 ```
 
-On your CI you can run the formatter with the `--check` argument, to make it
-exit with an error code when the code is not formatted properly.
+If using `deno fmt` in CI, you can pass the `--check` argument to make the formatter
+exit with an error when it detects improperly formatted code.
 
 ```sh
 deno fmt --check
@@ -360,5 +356,5 @@ deno test
 When passing the `--watch` flag, the test runner will automatically reload when
 any of the imported modules change.
 
-To learn more about the test runner and how to configure it check out the
+To learn more about the test runner and how to configure it, check out the
 [`deno test` subcommand](../tools/test/) documentation.
