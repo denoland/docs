@@ -148,8 +148,8 @@ app.listen(3000, () => {
 });
 ```
 
-If you run it with `deno run server.js`, it would prompt you for permissions
-required to execute the code and its dependencies.
+If you run the above with `deno run server.js`, you would be prompted for
+permissions required to execute the code and its dependencies.
 
 ```sh
 $ deno run server.js
