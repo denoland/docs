@@ -34,8 +34,8 @@ const addNumbers = require("./add_numbers");
 console.log(addNumbers(2, 2));
 ```
 
-To convert these to [ECMAScript modules](../basics/modules/index.md), we'll make a
-few minor changes:
+To convert these to [ECMAScript modules](../basics/modules/index.md), we'll make
+a few minor changes:
 
 ```js title="add_numbers.js"
 export function addNumbers(num1, num2) {
@@ -64,9 +64,9 @@ Imports:
 
 ### Quick fix with VS Code
 
-If you are using VS Code, you can use its built-in feature to convert CommonJS to
-ES6 modules. Right-click on the `require` statement, or the lightbulb icon and
-select `Quick Fix` and then `Convert to ES module`.
+If you are using VS Code, you can use its built-in feature to convert CommonJS
+to ES6 modules. Right-click on the `require` statement, or the lightbulb icon
+and select `Quick Fix` and then `Convert to ES module`.
 
 ![Quick Fix](../images/quick-fix.png)
 
@@ -148,9 +148,8 @@ app.listen(3000, () => {
 });
 ```
 
-If you run it with `deno run server.js`, it would prompt you for a number of
-permissions required to execute the code and its dependencies. DENO SECURE BY
-DEFAULT.
+If you run it with `deno run server.js`, it would prompt you for permissions
+required to execute the code and its dependencies.
 
 ```sh
 $ deno run server.js
@@ -174,8 +173,8 @@ all permissions.
 deno run -A server.js
 ```
 
-For more granular control, you can enable access to specific features by
-opting in to [individual permissions](../basics/permissions.md).
+For more granular control, you can enable access to specific features by opting
+in to [individual permissions](../basics/permissions.md).
 
 ## Running scripts from `package.json`
 
@@ -201,14 +200,14 @@ deno task start
 ## Node.js global objects
 
 In Node.js, there are a number of
-[global objects](https://nodejs.org/api/globals.html) available in the
-scope of all programs, like the `process` object, `Buffer`, or `__dirname` and
+[global objects](https://nodejs.org/api/globals.html) available in the scope of
+all programs, like the `process` object, `Buffer`, or `__dirname` and
 `__filename`.
 
 Deno does not add additional objects and variables to the global scope, other
 than the [`Deno` global](../runtime/builtin_apis.md). Any API that doesn't exist
-as a web-standard browser API will be found in `Deno`. Alternatively, you can import Node.js
-built-in modules using the `node:` specifier.
+as a web-standard browser API will be found in `Deno`. Alternatively, you can
+import Node.js built-in modules using the `node:` specifier.
 
 ```js
 import process from "node:process";
