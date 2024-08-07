@@ -10,7 +10,7 @@ container, or patching or otherwise modifying the remote dependencies.
 Deno offers this functionality through a setting in your `deno.json` file.
 Simply add
 
-```bash
+```json
 {
   "vendor": true
 }
