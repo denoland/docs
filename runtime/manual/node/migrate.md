@@ -34,7 +34,7 @@ const addNumbers = require("./add_numbers");
 console.log(addNumbers(2, 2));
 ```
 
-To convert it to [ECMAScript modules](../basics/modules/index.md), we'll make a
+To convert these to [ECMAScript modules](../basics/modules/index.md), we'll make a
 few minor changes:
 
 ```js title="add_numbers.js"
@@ -62,9 +62,9 @@ Imports:
 | `const add = require("./add_numbers");`    | `import add from "./add_numbers.js";`    |
 | `const { add } = require("./add_numbers")` | `import { add } from "./add_numbers.js"` |
 
-### Quick fix with VSCode
+### Quick fix with VS Code
 
-If you are using VSCode you can use the built-in feature to convert CommonJS to
+If you are using VS Code, you can use its built-in feature to convert CommonJS to
 ES6 modules. Right-click on the `require` statement, or the lightbulb icon and
 select `Quick Fix` and then `Convert to ES module`.
 
@@ -174,8 +174,8 @@ all permissions.
 deno run -A server.js
 ```
 
-For more granular permissions you can enable access to specific features by
-opting into [permission individually](../basics/permissions.md).
+For more granular control, you can enable access to specific features by
+opting in to [individual permissions](../basics/permissions.md).
 
 ## Running scripts from `package.json`
 
@@ -201,13 +201,13 @@ deno task start
 ## Node.js global objects
 
 In Node.js, there are a number of
-[global objects](https://nodejs.org/api/globals.html) that are available in the
-scope of all programs, like the `process` object, `Buffer` or `__dirname` and
+[global objects](https://nodejs.org/api/globals.html) available in the
+scope of all programs, like the `process` object, `Buffer`, or `__dirname` and
 `__filename`.
 
 Deno does not add additional objects and variables to the global scope, other
 than the [`Deno` global](../runtime/builtin_apis.md). Any API that doesn't exist
-as a web standard browser API will be found on `Deno`, or you can import Node.js
+as a web-standard browser API will be found in `Deno`. Alternatively, you can import Node.js
 built-in modules using the `node:` specifier.
 
 ```js
@@ -225,7 +225,7 @@ If you do run into a problem with Node.js compatibility, please let us know by
 
 :::
 
-## Optional improvements - Deno.json
+## Optional improvements - deno.json
 
 Deno has its own config file, `deno.json` or `deno.jsonc`, which can be used to
 configure your project. You can use it to define tasks, dependencies, path
