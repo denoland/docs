@@ -7,8 +7,9 @@ oldUrl:
   - /runtime/manual/node/package_json
 ---
 
-Deno supports modern Node.js projects out of the box, with no changes to your code. Running your Node.js project with Deno is a straightforward process, the main
-points to be aware of are:
+Deno supports modern Node.js projects out of the box, with no changes to your
+code. Running your Node.js project with Deno is a straightforward process, the
+main points to be aware of are:
 
 1. Usage of Node.js globals (like `process`, `Buffer`, etc)
 2. Imported Node.js built-in modules need the `node:` specifier (`fs` ->
@@ -19,8 +20,8 @@ offer some optional suggestions of ways to optimize your codebase.
 
 :::tip
 
-If your project is written with CommonJS (i.e. `require`), you will need to update it to use
-ECMAScript modules, check out our helpful
+If your project is written with CommonJS (i.e. `require`), you will need to
+update it to use ECMAScript modules, check out our helpful
 [CommonJS to ESM guide](./cjs_to_esm.md) to get you up and running with Deno.
 
 :::
@@ -112,7 +113,8 @@ in to [individual permissions](../basics/permissions.md).
 
 ## Running scripts from `package.json`
 
-Deno supports running npm scripts natively with the [`deno task`](../tools/task_runner.md) subcommand. Consider the following
+Deno supports running npm scripts natively with the
+[`deno task`](../tools/task_runner.md) subcommand. Consider the following
 Node.js project with a script called `start` inside its `package.json`:
 
 ```json title="package.json"

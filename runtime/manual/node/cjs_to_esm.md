@@ -2,8 +2,8 @@
 title: "Updating from CommonJS to ESM"
 ---
 
-If your Node.js project uses CommonJS modules (ie it uses `require`), you'll need to update your code
-to use
+If your Node.js project uses CommonJS modules (e.g. it uses `require`), you'll
+need to update your code to use
 [ECMAScript modules (ESM)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
 to run it in Deno. This guide will help you update your code to use ESM syntax.
 
