@@ -2,6 +2,11 @@
 title: "Migrating from Node.js to Deno"
 ---
 
+Modern Node.js projects will run in Deno with little to no reworking required.
+However, there are some key differences between the two runtimes that you can
+take advantage of to make your code simpler and smaller when migrating your
+Node.js projects to Deno.
+
 One of Deno's core strengths is a unified toolchain that comes with support for
 TypeScript out of the box, and tools like a linter, formatter and a test runner.
 Switching to Deno allows you to simplify your toolchain and reduces the number
@@ -9,9 +14,8 @@ of moving components in your project. Deno also has a more secure runtime, with
 [runtime permissions](../basics/permissions.md) that allow you to control what
 your code can access.
 
-To migrate an existing Node.js project to Deno, there are a number of
-differences to take into account between the Node and Deno runtimes. This guide
-will walk you through migrating your Node.js project to Deno.
+This guide will walk you through migrating your Node.js project to Deno and
+offer some optional suggestions of ways to optimize your codebase.
 
 ## Module imports and exports
 
