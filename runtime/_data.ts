@@ -70,6 +70,7 @@ export const sidebar = [
           "/runtime/manual/node/migrate/",
           "/runtime/manual/node/npm_specifiers/",
           "/runtime/manual/node/private_registries/",
+          "/runtime/manual/node/cjs_to_esm/",
           "/runtime/manual/node/cheatsheet/",
           {
             label: "Supported Node APIs and globals",
