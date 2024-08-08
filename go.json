@@ -10,5 +10,6 @@
   "--allow-run": "/runtime/manual/basics/permissions/#running-subprocesses",
   "--allow-sys": "/runtime/manual/basics/permissions/#system-information",
   "--allow-write": "/runtime/manual/basics/permissions/#file-system-write-access",
+  "--allow-all": "/runtime/manual/basics/permissions/#all-permissions",
   "--unsafely-ignore-certificate-errors": "/runtime/manual/basics/permissions/#certification-errors"
 }
