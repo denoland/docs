@@ -72,8 +72,6 @@ deno run --allow-env --deny-env=AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY script.t
 
 ### FFI (Foreign Function Interface)
 
-<a name="ffi"></a>
-
 🚧 This is an unstable feature
 
 Allow or deny loading of dynamic libraries. You can specify an optional,
