@@ -19,7 +19,7 @@ map:
 ```json
 {
   "imports": {
-    "oak": "https://esm.sh/preact"
+    "preact": "https://esm.sh/preact"
   }
 }
 ```
@@ -29,7 +29,6 @@ they provide URL access to JavaScript modules:
 
 - [esm.sh](https://esm.sh/) (recommended)
 - [jspm.io](https://jspm.io/)
-- [pika.dev](https://pika.dev/)
 
 URL imports should be used with caution, as they can introduce security risks.
 When importing modules from a URL, you are trusting the server to serve the
