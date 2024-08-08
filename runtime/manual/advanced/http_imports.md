@@ -1,6 +1,7 @@
 ---
-Title: Importing modules from HTTP URLs
-oldUrl: runtime/manual/node/cdns.md
+Title: "Importing modules from HTTP URLs"
+oldUrl: 
+- runtime/manual/node/cdns.md
 ---
 
 Deno supports importing modules from HTTP URLs. This is useful for importing
