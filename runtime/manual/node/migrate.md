@@ -73,10 +73,10 @@ and select `Quick Fix` and then `Convert to ES module`.
 ### CommonJS vs ECMAScript resolution
 
 An important distinction between the two module systems is that ECMAScript
-resolution requires the full specifier **including the file extension**. Omitting 
-the file extension, and special handling of `index.js`, are features unique to 
-CommonJS. The benefit of the ECMAScript resolution is that it works the same 
-across the browser, Deno, and other runtimes.
+resolution requires the full specifier **including the file extension**.
+Omitting the file extension, and special handling of `index.js`, are features
+unique to CommonJS. The benefit of the ECMAScript resolution is that it works
+the same across the browser, Deno, and other runtimes.
 
 | CommonJS             | ECMAScript modules            |
 | -------------------- | ----------------------------- |
@@ -233,8 +233,8 @@ mappings, and other runtime configurations.
 ### Migrating npm scripts to `deno.json`
 
 If preferred, you can move your npm scripts over to `deno.json`, where they can
-be run using `deno task`. This allows you to manage all necessary permission flags 
-and other runtime configuration in one place.
+be run using `deno task`. This allows you to manage all necessary permission
+flags and other runtime configuration in one place.
 
 ```json
 {
@@ -250,7 +250,7 @@ deno task dev
 
 ### Migrating npm dependencies to `deno.json`
 
-You can also migrate your dependencies over to `deno.json`. Deno supports 
+You can also migrate your dependencies over to `deno.json`. Deno supports
 importing dependencies from external package repositories, local files, and/or
 URLs. To import your npm dependencies, you can add them to the `imports` field
 in `deno.json`, and add the `npm:` specifier to the import path:
@@ -287,8 +287,8 @@ deno lint
 ```
 
 This will lint all files in your project. When the linter detects a problem, it
-will show the line in your editor and in the terminal output. An example of what that
-might look like:
+will show the line in your editor and in the terminal output. An example of what
+that might look like:
 
 ```sh
 error[no-constant-condition]: Use of a constant expressions as conditions is not allowed.
@@ -317,16 +317,16 @@ configure the linter, check out the [`deno lint` subcommand](../tools/linter/).
 
 ## Optional improvements - Formatting
 
-Deno ships with a [built-in formatter](../tools/formatter/) that can optionally format 
-your code according to the Deno style guide. You can run the formatter on your 
-project by running:
+Deno ships with a [built-in formatter](../tools/formatter/) that can optionally
+format your code according to the Deno style guide. You can run the formatter on
+your project by running:
 
 ```sh
 deno fmt
 ```
 
-If using `deno fmt` in CI, you can pass the `--check` argument to make the formatter
-exit with an error when it detects improperly formatted code.
+If using `deno fmt` in CI, you can pass the `--check` argument to make the
+formatter exit with an error when it detects improperly formatted code.
 
 ```sh
 deno fmt --check
