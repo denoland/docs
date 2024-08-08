@@ -22,7 +22,6 @@ export const sidebar = [
           "/runtime/manual/basics/env_variables/",
           "/runtime/manual/basics/debugging_your_code/",
           "/runtime/manual/basics/connecting_to_databases/",
-          "/runtime/manual/node/",
           "/runtime/manual/basics/react/",
           "/runtime/manual/getting_started/installation/",
         ],
