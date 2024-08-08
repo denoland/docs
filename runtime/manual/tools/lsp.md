@@ -4,8 +4,8 @@ title: "deno lsp"
 
 :::info
 
-Usually humans do not use this subcommand directly. The 'deno lsp' can
-provide IDEs with go-to-definition support and automatic code formatting.
+Usually humans do not use this subcommand directly. The 'deno lsp' can provide
+IDEs with go-to-definition support and automatic code formatting.
 
 :::
 
