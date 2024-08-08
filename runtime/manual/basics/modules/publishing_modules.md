@@ -62,21 +62,6 @@ following the instructions at
 This will allow you to publish packages without needing to provide an auth token
 and instead uses OIDC authentication from GitHub itself.
 
-If you want to publish without the interactive browser window (this is not
-recommended), you can use the `--token` flag to provide a JSR auth token:
-
-```bash
-deno publish --token <your-auth-token>
-```
-
-You can create a new auth token at
-[jsr.io/account/tokens](https://jsr.io/account/tokens) (You will need to be
-logged in to JSR to view this page).
-
-If you're configuring a CI pipeline to publish your module, you can use the
-`--token` flag to authenticate with JSR but it's important to ensure that your
-token is kept secure.
-
 ## Publishing for Node
 
 Library authors may want to make their Deno modules available to Node.js users.
