@@ -70,7 +70,9 @@ be denied access, even if they are specified in `--allow-env`._
 deno run --allow-env --deny-env=AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY script.ts
 ```
 
-### FFIs (Foreign Function Interface)
+### FFI (Foreign Function Interface)
+
+<a name="ffi"></a>
 
 🚧 This is an unstable feature
 
