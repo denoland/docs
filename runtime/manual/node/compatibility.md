@@ -121,8 +121,7 @@ which modules you need by
     <code>crypto.Cipheriv.prototype.setAutoPadding</code>,
     <code>crypto.Decipheriv.prototype.setAutoPadding</code>,
     <code>crypto.publicDecrypt</code>,
-    <code>crypto.ECDH.prototype.convertKey</code>,
-    <code>crypto.diffieHellman</code>, <code>x448</code> option for
+    <code>crypto.ECDH.prototype.convertKey</code>, <code>x448</code> option for
     <code>generateKeyPair</code>, <code>crypto.KeyObject</code>,
     <code>safe</code>, <code>add</code> and <code>rem</code> options for
     <code>generatePrime</code>, <code>crypto.Sign.prototype.sign</code> and
