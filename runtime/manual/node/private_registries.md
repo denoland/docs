@@ -34,39 +34,6 @@ to your private registry. The `.npmrc` file must be in the project root or
 ```
 
 Replace `http://mycompany.com:8111/` with the actual URL of your private
-registry and `secretToken` with your authentication token.
+registry and `secretToken` with your authentication token. This will pull all `npm:@mycompany/*` packages from your private registry instead of the official public one.
 
-Then update Your `deno.json` or `package.json` to specify the import path for
-your private package. For example:
-
-```json title="deno.json"
-{
-  "imports": {
-    "@mycompany/package": "npm:@mycompany/package@1.0.0"
-  }
-}
-```
-
-or if you're using a `package.json`:
-
-```json title="package.json"
-{
-  "dependencies": {
-    "@mycompany/package": "1.0.0"
-  }
-}
-```
-
-Now you can import your private package in your Deno code:
-
-```typescript title="main.ts"
-import { hello } from "@mycompany/package";
-
-console.log(hello());
-```
-
-and run it using the `deno run` command:
-
-```sh
-deno run main.ts
-```
+When you run `deno install`, `deno install npm:@mycompany/package` or refer to any npm packages on your company scope (`npm:@mycompany/package`), Deno will download them from the private registry.
