@@ -34,6 +34,10 @@ to your private registry. The `.npmrc` file must be in the project root or
 ```
 
 Replace `http://mycompany.com:8111/` with the actual URL of your private
-registry and `secretToken` with your authentication token. This will pull all `npm:@mycompany/*` packages from your private registry instead of the official public one.
+registry and `secretToken` with your authentication token. This will pull all
+`npm:@mycompany/*` packages from your private registry instead of the official
+public one.
 
-When you run `deno install`, `deno install npm:@mycompany/package` or refer to any npm packages on your company scope (`npm:@mycompany/package`), Deno will download them from the private registry.
+When you run `deno install`, `deno install npm:@mycompany/package` or refer to
+any npm packages on your company scope (`npm:@mycompany/package`), Deno will
+download them from the private registry.
