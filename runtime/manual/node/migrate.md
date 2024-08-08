@@ -1,11 +1,11 @@
 ---
 title: "Migrating from Node.js to Deno"
+oldUrl:
+  - /runtime/manual/npm_nodejs/cdns/
+  - /runtime/manual/using_deno_with_other_technologies/node/cdns/
+  - /runtime/manual/node/node_specifiers
+  - /runtime/manual/node/package_json
 ---
-
-Modern Node.js projects will run in Deno with little to no reworking required.
-However, there are some key differences between the two runtimes that you can
-take advantage of to make your code simpler and smaller when migrating your
-Node.js projects to Deno.
 
 One of Deno's core strengths is a unified toolchain that comes with support for
 TypeScript out of the box, and tools like a linter, formatter and a test runner.

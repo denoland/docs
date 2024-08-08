@@ -1,5 +1,7 @@
 ---
 title: "Node → Deno cheatsheet"
+oldUrl: 
+- /runtime/manual/references/cheatsheet/
 ---
 
 | Node.js                                | Deno                          |

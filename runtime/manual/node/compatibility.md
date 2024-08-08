@@ -30,7 +30,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/assert.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/assert/">Reference docs</a>
   </p>
 </details>
 
@@ -47,7 +47,7 @@ which modules you need by
     non-functional stubs.
   </p>
   <p>
-    <a href="https://nodejs.org/api/async_hooks.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/async_hooks/">Reference docs</a>
   </p>
 </details>
 
@@ -62,7 +62,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/buffer.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/buffer/">Reference docs</a>
   </p>
 </details>
 
@@ -77,7 +77,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/child_process.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/child_process/">Reference docs</a>
   </p>
 </details>
 
@@ -90,7 +90,7 @@ which modules you need by
   </summary>
   <p>All exports are non-functional stubs.</p>
   <p>
-    <a href="https://nodejs.org/api/cluster.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/cluster/">Reference docs</a>
   </p>
 </details>
 
@@ -105,7 +105,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/console.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/console/">Reference docs</a>
   </p>
 </details>
 
@@ -113,14 +113,14 @@ which modules you need by
   <summary>
     <code>node:crypto</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
     Missing <code>Certificate</code> class,
     <code>crypto.Cipheriv.prototype.setAutoPadding</code>,
     <code>crypto.Decipheriv.prototype.setAutoPadding</code>,
-    <code>crypto.getCipherInfo</code>, <code>crypto.publicDecrypt</code>,
+    <code>crypto.publicDecrypt</code>,
     <code>crypto.ECDH.prototype.convertKey</code>,
     <code>crypto.diffieHellman</code>, <code>x448</code> option for
     <code>generateKeyPair</code>, <code>crypto.KeyObject</code>,
@@ -131,7 +131,7 @@ which modules you need by
     legacy methods of <code>crypto.X509Certificate</code>.
   </p>
   <p>
-    <a href="https://nodejs.org/api/crypto.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/crypto/">Reference docs</a>
   </p>
 </details>
 
@@ -154,12 +154,10 @@ which modules you need by
         <li><code>setMulticastLoopback</code></li>
         <li><code>setMulticastTtl</code></li>
         <li><code>setTtl</code></li>
-        <li><code>ref</code></li>
-        <li><code>unref</code></li>
     </ul>
   </p>
   <p>
-    <a href="https://nodejs.org/api/dgram.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/dgram/">Reference docs</a>
   </p>
 </details>
 
@@ -174,7 +172,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/diagnostics_channel.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/diagnostics_channel/">Reference docs</a>
   </p>
 </details>
 
@@ -189,7 +187,7 @@ which modules you need by
     Missing <code>dns.resolve*</code> with <code>ttl</code> option.
   </p>
   <p>
-    <a href="https://nodejs.org/api/dns.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/dns/">Reference docs</a>
   </p>
 </details>
 
@@ -200,9 +198,9 @@ which modules you need by
       <span>❌</span>
     </div>
   </summary>
-  <p>All exports are non-functional stubs.</p>
+  <p>All exports are non-functional stubs. This is a deprecated Node module.</p>
   <p>
-    <a href="https://nodejs.org/api/domain.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/domain/">Reference docs</a>
   </p>
 </details>
 
@@ -217,7 +215,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/events.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/events/">Reference docs</a>
   </p>
 </details>
 
@@ -225,7 +223,7 @@ which modules you need by
   <summary>
     <code>node:fs</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <h5>
@@ -242,7 +240,7 @@ which modules you need by
     Missing <code>lchmod</code>.
   </p>
   <p>
-    <a href="https://nodejs.org/api/fs.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/fs/">Reference docs</a>
   </p>
 </details>
 
@@ -250,14 +248,14 @@ which modules you need by
   <summary>
     <code>node:http</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
     <code>createConnection</code> option is currently not supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/http.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/http/">Reference docs</a>
   </p>
 </details>
 
@@ -272,7 +270,7 @@ which modules you need by
     Partially supported, major work in progress to enable <code>grpc-js</code>.
   </p>
   <p>
-    <a href="https://nodejs.org/api/http2.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/http2/">Reference docs</a>
   </p>
 </details>
 
@@ -288,7 +286,7 @@ which modules you need by
     <code>https.Server.opts.key</code> array type.
   </p>
   <p>
-    <a href="https://nodejs.org/api/https.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/https/">Reference docs</a>
   </p>
 </details>
 
@@ -305,7 +303,7 @@ which modules you need by
     these APIs.
   </p>
   <p>
-    <a href="https://nodejs.org/api/inspector.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/inspector/">Reference docs</a>
   </p>
 </details>
 
@@ -317,10 +315,10 @@ which modules you need by
     </div>
   </summary>
   <p>
-    Fully supported.
+    The `register()` function is not supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/module.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/module/">Reference docs</a>
   </p>
 </details>
 
@@ -336,7 +334,7 @@ which modules you need by
     option.
   </p>
   <p>
-    <a href="https://nodejs.org/api/net.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/net/">Reference docs</a>
   </p>
 </details>
 
@@ -351,7 +349,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/os.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/os/">Reference docs</a>
   </p>
 </details>
 
@@ -366,7 +364,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/path.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/path/">Reference docs</a>
   </p>
 </details>
 
@@ -383,7 +381,7 @@ which modules you need by
     <code>perf_hooks.monitorEventLoopDelay</code>.
   </p>
   <p>
-    <a href="https://nodejs.org/api/perf_hooks.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/perf_hooks/">Reference docs</a>
   </p>
 </details>
 
@@ -398,7 +396,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/punycode.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/punycode/">Reference docs</a>
   </p>
 </details>
 
@@ -413,7 +411,7 @@ which modules you need by
     Missing <code>multipleResolves</code>, <code>worker</code> events.
   </p>
   <p>
-    <a href="https://nodejs.org/api/process.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/process/">Reference docs</a>
   </p>
 </details>
 
@@ -428,7 +426,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/querystring.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/querystring/">Reference docs</a>
   </p>
 </details>
 
@@ -443,7 +441,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/readline.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/readline/">Reference docs</a>
   </p>
 </details>
 
@@ -460,7 +458,7 @@ which modules you need by
     <code>start()</code>.
   </p>
   <p>
-    <a href="https://nodejs.org/api/repl.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/repl/">Reference docs</a>
   </p>
 </details>
 
@@ -475,7 +473,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/stream.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/stream/">Reference docs</a>
   </p>
 </details>
 
@@ -483,15 +481,14 @@ which modules you need by
   <summary>
     <code>node:string_decoder</code>
     <div style="float: right">
-      <span>ℹ️</span>
+      <span>✅</span>
     </div>
   </summary>
   <p>
-    Missing decoding of <code>ascii</code>, <code>latin1</code> and
-    <code>utf16le</code> decoding options.
+    Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/string_decoder.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/string_decoder/">Reference docs</a>
   </p>
 </details>
 
@@ -506,7 +503,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/util.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/util/">Reference docs</a>
   </p>
 </details>
 
@@ -521,7 +518,7 @@ which modules you need by
     Currently only <code>test</code> API is supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/test.html">Node.js docs</a>
+    <a href="https://nodejs.org/api/test.html">Reference docs</a>
   </p>
 </details>
 
@@ -536,7 +533,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/timers.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/timers/promises/">Reference docs</a>
   </p>
 </details>
 
@@ -551,7 +548,7 @@ which modules you need by
     Missing <code>createSecurePair</code>.
   </p>
   <p>
-    <a href="https://nodejs.org/api/tls.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/tls/">Reference docs</a>
   </p>
 </details>
 
@@ -564,7 +561,7 @@ which modules you need by
   </summary>
   <p>All exports are non-functional stubs.</p>
   <p>
-    <a href="https://nodejs.org/api/tracing.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/trace_events/">Reference docs</a>
   </p>
 </details>
 
@@ -579,7 +576,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/tty.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/tty/">Reference docs</a>
   </p>
 </details>
 
@@ -591,10 +588,10 @@ which modules you need by
     </div>
   </summary>
   <p>
-    Missing <code>aborted</code>, <code>transferableAbortSignal</code>, <code>transferableAbortController</code>, <code>MIMEParams</code>, <code>MIMEType</code>, <code>getSystemErrorMap</code>, and <code>debug</code>.
+    Missing <code>aborted</code>, <code>transferableAbortSignal</code>, <code>transferableAbortController</code>, <code>MIMEParams</code>, <code>MIMEType</code>and <code>getSystemErrorMap</code>.
   </p>
   <p>
-    <a href="https://nodejs.org/api/util.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/util/">Reference docs</a>
   </p>
 </details>
 
@@ -609,7 +606,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/url.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/url/">Reference docs</a>
   </p>
 </details>
 
@@ -626,7 +623,7 @@ which modules you need by
     supported and will throw and error.
   </p>
   <p>
-    <a href="https://nodejs.org/api/v8.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/v8/">Reference docs</a>
   </p>
 </details>
 
@@ -634,14 +631,14 @@ which modules you need by
   <summary>
     <code>node:vm</code>
     <div style="float: right">
-      <span>✅</span>
+      <span>ℹ️</span>
     </div>
   </summary>
   <p>
-    Fully supported.
+    Partial support.
   </p>
   <p>
-    <a href="https://nodejs.org/api/vm.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/vm/">Reference docs</a>
   </p>
 </details>
 
@@ -654,7 +651,7 @@ which modules you need by
   </summary>
   <p>All exports are non-functional stubs.</p>
   <p>
-    <a href="https://nodejs.org/api/wasi.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/wasi/">Reference docs</a>
   </p>
 </details>
 
@@ -673,7 +670,7 @@ which modules you need by
     <code>Worker.prototype.getHeapSnapshot</code>.
   </p>
   <p>
-    <a href="https://nodejs.org/api/worker_threads.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/worker_threads/">Reference docs</a>
   </p>
 </details>
 
@@ -688,7 +685,7 @@ which modules you need by
     Fully supported.
   </p>
   <p>
-    <a href="https://nodejs.org/api/zlib.html">Node.js docs</a>
+    <a href="https://docs.deno.com/api/node/zlib/~/Zlib">Reference docs</a>
   </p>
 </details>
 
