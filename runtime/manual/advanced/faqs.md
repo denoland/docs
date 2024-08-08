@@ -1,5 +1,7 @@
 ---
 title: "Frequently Asked Questions"
+oldUrl: 
+- /runtime/manual/node/faqs
 ---
 
 ## Getting type errors like cannot find `document` or `HTMLElement`
