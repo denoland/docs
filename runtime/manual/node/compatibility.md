@@ -702,8 +702,8 @@ importing them from the relevant `node:` module.
 | [`Blob`](https://nodejs.org/api/globals.html#class-blob)                                                         | ✅                                             |
 | [`Buffer`](https://nodejs.org/api/globals.html#class-buffer)                                                     | ✅                                             |
 | [`ByteLengthQueuingStrategy`](https://nodejs.org/api/globals.html#class-bytelengthqueuingstrategy)               | ✅                                             |
-| [`__dirname`](https://nodejs.org/api/globals.html#__dirname)                                                     | ⚠️ [Docs &gt;](./migrate#nodejs-global-objects) |
-| [`__filename`](https://nodejs.org/api/globals.html#__filename)                                                   | ⚠️ [Docs &gt;](./migrate#nodejs-global-objects) |
+| [`__dirname`](https://nodejs.org/api/globals.html#__dirname)                                                     | ⚠️ [Info](./migrate/#node.js-global-objects)   |
+| [`__filename`](https://nodejs.org/api/globals.html#__filename)                                                   | ⚠️ [Info](./migrate/#nodejs-global-objects)    |
 | [`atob`](https://nodejs.org/api/globals.html#atobdata)                                                           | ✅                                             |
 | [`BroadcastChannel`](https://nodejs.org/api/globals.html#broadcastchannel)                                       | ✅                                             |
 | [`btoa`](https://nodejs.org/api/globals.html#btoadata)                                                           | ✅                                             |
