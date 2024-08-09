@@ -111,7 +111,7 @@ body:not(:has(.ddoc)) {
 /* Global docs CTA button style */
 
 .docs-cta {
-  @apply border border-gray-800 text-black bg-gray-500 font-bold inline-block py-3.5 px-4 rounded-md w-max hover:text-inherit hover:no-underline transition-colors duration-200;
+  @apply border text-balance border-gray-800 text-black bg-gray-500 font-bold inline-block py-3.5 px-4 rounded-md w-max hover:text-inherit hover:no-underline transition-colors duration-200;
 }
 
 .runtime-cta {
@@ -166,6 +166,14 @@ body:not(:has(.ddoc)) {
     padding-top: 0.25rem !important;
     padding-bottom: 0.25rem !important;
   }
+}
+
+.sidebar__current-item {
+  @apply text-blue-500;
+}
+
+.sidebar__current-item::before {
+  @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em] [clip-path:polygon(0%_10%,100%_50%,0%_90%)] bg-gray-200;
 }
 
 .markdown-body .admonition a {
