@@ -16,7 +16,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   }
 
   function walk(
-    sidebarItems: SidebarItem[],
+    sidebarItems: SidebarItem[]
   ): [SidebarItem[], number] | undefined {
     for (let i = 0; i < sidebarItems.length; i++) {
       const sidebarItem = sidebarItems[i];
@@ -92,15 +92,14 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         class="absolute inset-0 backdrop-brightness-50 z-40 hidden sidebar-open:block sidebar-open:lg:hidden"
         id="sidebar-cover"
         data-open="false"
-      >
-      </div>
+      ></div>
       <div
-        class="absolute top-16 bottom-0 left-0 right-0 lg:left-74 overflow-y-auto"
+        class="absolute top-16 bottom-0 left-0 right-0 lg:left-74 overflow-y-auto lg:grid lg:grid-cols-7 lg:gap-8 max-w-screen-2xl mx-auto"
         style={{ scrollbarGutter: "stable" }}
       >
-        <main class="mx-auto max-w-screen-xl w-full overflow-x-hidden pt-4 pb-8 flex flex-grow">
-          <div class="flex-grow px-4 sm:px-5 md:px-8 max-w-full lg:max-w-[75%]">
-            <article class="max-w-[66ch]">
+        <main class="mx-auto max-w-screen-xl w-full pt-4 pb-8 flex flex-grow lg:col-span-5">
+          <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full">
+            <article class="max-w-[66ch] mx-auto">
               <Breadcrumbs
                 title={props.title!}
                 sidebar={sidebar}
@@ -125,8 +124,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                   dangerouslySetInnerHTML={{
                     __html: helpers.md(props.title!, true),
                   }}
-                >
-                </h1>
+                ></h1>
                 {props.available_since && (
                   <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">
                     Available since {props.available_since}
@@ -158,30 +156,29 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
               </nav>
             )}
           </div>
-          <div
-            style={{ "flexBasis": "30%" }}
-            class="hidden lg:block sticky flex-shrink-0 flex-grow-0 px-8 pb-8"
-          >
-            <div>
-              <div class="py-2 top-0 ">
-                <ul class="border-l border-gray-200 py-2 pl-2">
-                  {(props.toc as TableOfContentsItem_[]).map((item) => (
-                    <TableOfContentsItem item={item} />
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
         </main>
-        <props.comp.Footer />
+        <aside class="hidden lg:block pb-8 pr-8 col-span-2">
+          <div class="py-2 sticky top-4">
+            <ul class="border-l border-gray-200 py-2 pl-2">
+              {(props.toc as TableOfContentsItem_[]).map((item) => (
+                <TableOfContentsItem item={item} />
+              ))}
+            </ul>
+          </div>
+        </aside>
+        <div class="lg:col-span-full">
+          <props.comp.Footer />
+        </div>
       </div>
     </>
   );
 }
 
-function NavigationButton(
-  props: { item: SidebarItem; search: Searcher; direction: "prev" | "next" },
-) {
+function NavigationButton(props: {
+  item: SidebarItem;
+  search: Searcher;
+  direction: "prev" | "next";
+}) {
   let item: SidebarDoc_ | SidebarLink_;
   if (typeof props.item === "string") {
     const data = props.search.data(props.item)!;
@@ -204,9 +201,8 @@ function NavigationButton(
     item = props.item;
   }
   const directionText = props.direction === "prev" ? "Prev" : "Next";
-  const alignmentClass = props.direction === "prev"
-    ? "items-start"
-    : "items-end";
+  const alignmentClass =
+    props.direction === "prev" ? "items-start" : "items-end";
 
   return (
     <a
@@ -216,24 +212,20 @@ function NavigationButton(
       <span className="text-sm text-gray-2">{directionText}</span>
       <div className="flex flex-row max-w-full items-center text-blue-500 gap-2">
         {props.direction === "prev" && <>&laquo;</>}
-        <span className="font-semibold flex-shrink truncate">
-          {item.label}
-        </span>
+        <span className="font-semibold flex-shrink truncate">{item.label}</span>
         {props.direction === "next" && <>&raquo;</>}
       </div>
     </a>
   );
 }
 
-function Breadcrumbs(
-  props: {
-    title: string;
-    sidebar: Sidebar_;
-    url: string;
-    sectionTitle: string;
-    sectionHref: string;
-  },
-) {
+function Breadcrumbs(props: {
+  title: string;
+  sidebar: Sidebar_;
+  url: string;
+  sectionTitle: string;
+  sectionHref: string;
+}) {
   const crumbs = [];
   outer: for (const section of props.sidebar) {
     for (const item of section.items) {
@@ -275,9 +267,7 @@ function Breadcrumbs(
         </svg>
         {crumbs.map((crumb, i) => (
           <>
-            <li class="px-2.5 py-1.5">
-              {crumb}
-            </li>
+            <li class="px-2.5 py-1.5">{crumb}</li>
             {i < crumbs.length - 1 && (
               <svg
                 class="size-6 rotate-90"
@@ -287,8 +277,7 @@ function Breadcrumbs(
                 <path
                   fill="rgba(0,0,0,0.5)"
                   d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-                >
-                </path>
+                ></path>
               </svg>
             )}
           </>
