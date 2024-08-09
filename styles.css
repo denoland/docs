@@ -173,7 +173,7 @@ body:not(:has(.ddoc)) {
 }
 
 .sidebar__current-item::before {
-  @apply content-["•"] absolute -left-[1.45ch] w-[1ch] text-center h-[1em];
+  @apply content-[""] absolute -left-[0.85em] w-[0.5em] text-center h-[0.7em] top-[0.25em] [clip-path:polygon(0%_0%,100%_50%,0%_100%)] bg-indigo-600;
 }
 
 .markdown-body .admonition a {
