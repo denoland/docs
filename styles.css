@@ -169,11 +169,11 @@ body:not(:has(.ddoc)) {
 }
 
 .sidebar__current-item {
-  @apply text-blue-500 relative;
+  @apply text-blue-500;
 }
 
 .sidebar__current-item::before {
-  @apply content-[""] absolute -left-[0.85em] w-[0.5em] text-center h-[0.7em] top-[0.25em] [clip-path:polygon(0%_0%,100%_50%,0%_100%)] bg-blue-500;
+  @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em] [clip-path:polygon(0%_10%,100%_50%,0%_90%)] bg-gray-200;
 }
 
 .markdown-body .admonition a {
