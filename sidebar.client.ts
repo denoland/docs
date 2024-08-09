@@ -35,3 +35,29 @@ sidebarCover?.addEventListener("click", () => {
   sidebar.dataset.open = "false";
   sidebarCover.dataset.open = "false";
 });
+
+const toc = document.getElementById("toc");
+if (toc !== null) {
+  const headings = document.querySelectorAll(
+    ".markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6",
+  );
+
+  const ACTIVE_CSS = "text-indigo-600";
+  let activeId = "";
+  const observer = new IntersectionObserver((entries) => {
+    for (let i = 0; i < entries.length; i++) {
+      const entry = entries[i];
+
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        toc.querySelector(`a[href="#${activeId}"]`)?.classList.remove(
+          ACTIVE_CSS,
+        );
+        toc.querySelector(`a[href="#${id}"]`)?.classList.add(ACTIVE_CSS);
+        activeId = id;
+      }
+    }
+  }, { rootMargin: "25% 0%" });
+
+  headings.forEach((el) => observer.observe(el));
+}

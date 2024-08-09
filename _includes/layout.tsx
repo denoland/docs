@@ -2,7 +2,7 @@ export default function Layout(props: Lume.Data) {
   const reference = props.url.startsWith("/api");
 
   return (
-    <html lang="en" class={reference ? "" : "h-dvh overflow-hidden"}>
+    <html lang="en" class={reference ? "" : "h-dvh"}>
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -38,7 +38,7 @@ export default function Layout(props: Lume.Data) {
         </script>
         <link rel="preconnect" href="https://www.googletagmanager.com"></link>
       </head>
-      <body class={reference ? "" : "h-dvh overflow-hidden"}>
+      <body class={reference ? "" : "h-dvh"}>
         <props.comp.Header url={props.url} hasSidebar={!!props.sidebar} />
         {props.children}
       </body>

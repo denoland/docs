@@ -98,7 +98,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         class="absolute top-16 bottom-0 left-0 right-0 lg:left-74 overflow-y-auto"
         style={{ scrollbarGutter: "stable" }}
       >
-        <main class="mx-auto max-w-screen-xl w-full overflow-x-hidden pt-4 pb-8 flex flex-grow">
+        <main class="mx-auto max-w-screen-xl w-full pt-4 pb-8 flex flex-grow">
           <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full lg:max-w-[75%]">
             <article class="max-w-[66ch]">
               <Breadcrumbs
@@ -158,18 +158,13 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
               </nav>
             )}
           </div>
-          <div
-            style={{ "flexBasis": "30%" }}
-            class="hidden lg:block sticky flex-shrink-0 flex-grow-0 px-8 pb-8"
-          >
-            <div>
-              <div class="py-2 top-0 ">
-                <ul class="border-l border-gray-200 py-2 pl-2">
-                  {(props.toc as TableOfContentsItem_[]).map((item) => (
-                    <TableOfContentsItem item={item} />
-                  ))}
-                </ul>
-              </div>
+          <div class="hidden lg:block flex-shrink-0 basis-[30%] flex-grow-0 px-8 pb-8">
+            <div id="toc" class="py-2 top-8 sticky">
+              <ul class="mt-8 border-l border-gray-200 py-2 pl-2">
+                {(props.toc as TableOfContentsItem_[]).map((item) => (
+                  <TableOfContentsItem item={item} />
+                ))}
+              </ul>
             </div>
           </div>
         </main>
