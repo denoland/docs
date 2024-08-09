@@ -99,7 +99,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         style={{ scrollbarGutter: "stable" }}
       >
         <main class="mx-auto max-w-screen-xl w-full overflow-x-hidden pt-4 pb-8 flex flex-grow">
-          <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full lg:max-w-[75%]">
+          <div class="flex-grow px-4 sm:px-5 md:px-8 max-w-full lg:max-w-[75%]">
             <article class="max-w-[66ch]">
               <Breadcrumbs
                 title={props.title!}
@@ -120,7 +120,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                   </ul>
                 </details>
               )}
-              <div class="markdown-body mt-4 lg:mt-8">
+              <div class="markdown-body mt-4">
                 <h1
                   dangerouslySetInnerHTML={{
                     __html: helpers.md(props.title!, true),
