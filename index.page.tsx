@@ -233,7 +233,8 @@ export default function () {
                 </h3>
                 <p class="max-w-[75ch]">
                   Deno, Web, and Node API reference documentation, built for the
-                  Deno experience. Explore the APIs available in Deno in the{" "}
+                  Deno experience. Explore the APIs available in Deno in the
+                  {" "}
                   <a
                     href="/api/deno"
                     class="runtime-link underline underline-offset-4"
@@ -457,8 +458,9 @@ function DocsCTA(props: {
   href: string;
   product: "deploy" | "runtime";
 }) {
-  const productClass =
-    props.product === "deploy" ? "deploy-cta" : "runtime-cta";
+  const productClass = props.product === "deploy"
+    ? "deploy-cta"
+    : "runtime-cta";
   return (
     <a href={props.href} className={`docs-cta ${productClass}`}>
       {props.text}{" "}
@@ -476,17 +478,16 @@ function ContentItem(props: {
   link: string;
   product: string;
 }) {
-  const productClass =
-    props.product === "deploy"
-      ? "deploy-link"
-      : props.product === "runtime"
-      ? "runtime-link"
-      : "help-link"; // Default to "help-link" if product is "help"
+  const productClass = props.product === "deploy"
+    ? "deploy-link"
+    : props.product === "runtime"
+    ? "runtime-link"
+    : "help-link"; // Default to "help-link" if product is "help"
 
   return (
     <div>
       <h4 className="text-lg font-semibold mb-1">{props.title}</h4>
-      <p className="mb-3">{props.description} </p>
+      <p className="mb-3">{props.description}</p>
       <a className={`homepage-link ${productClass}`} href={props.link}>
         {props.linktext}{" "}
         <span aria-hidden="true" class="whitespace-pre">
@@ -502,12 +503,11 @@ function LinkList(props: {
   product: string;
   links: { text: string; href: string }[];
 }) {
-  const productClass =
-    props.product === "deploy"
-      ? "deploy-link"
-      : props.product === "runtime"
-      ? "runtime-link"
-      : "help-link";
+  const productClass = props.product === "deploy"
+    ? "deploy-link"
+    : props.product === "runtime"
+    ? "runtime-link"
+    : "help-link";
   return (
     <div>
       <h4 className="text-lg font-semibold mb-1">{props.title}</h4>

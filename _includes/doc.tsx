@@ -16,7 +16,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   }
 
   function walk(
-    sidebarItems: SidebarItem[]
+    sidebarItems: SidebarItem[],
   ): [SidebarItem[], number] | undefined {
     for (let i = 0; i < sidebarItems.length; i++) {
       const sidebarItem = sidebarItems[i];
@@ -92,7 +92,8 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         class="absolute inset-0 backdrop-brightness-50 z-40 hidden sidebar-open:block sidebar-open:lg:hidden"
         id="sidebar-cover"
         data-open="false"
-      ></div>
+      >
+      </div>
       <div
         class="absolute top-16 bottom-0 left-0 right-0 lg:left-74 overflow-y-auto lg:grid lg:grid-cols-7 lg:gap-8 max-w-screen-2xl mx-auto"
         style={{ scrollbarGutter: "stable" }}
@@ -124,7 +125,8 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                   dangerouslySetInnerHTML={{
                     __html: helpers.md(props.title!, true),
                   }}
-                ></h1>
+                >
+                </h1>
                 {props.available_since && (
                   <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">
                     Available since {props.available_since}
@@ -201,8 +203,9 @@ function NavigationButton(props: {
     item = props.item;
   }
   const directionText = props.direction === "prev" ? "Prev" : "Next";
-  const alignmentClass =
-    props.direction === "prev" ? "items-start" : "items-end";
+  const alignmentClass = props.direction === "prev"
+    ? "items-start"
+    : "items-end";
 
   return (
     <a
@@ -277,7 +280,8 @@ function Breadcrumbs(props: {
                 <path
                   fill="rgba(0,0,0,0.5)"
                   d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-                ></path>
+                >
+                </path>
               </svg>
             )}
           </>
