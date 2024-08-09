@@ -136,7 +136,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
               </div>
             </article>
             {parentNavigation && (
-              <nav class="grid gap-8 grid-cols-2 max-w-[66ch] items-center justify-between mt-6">
+              <nav class="grid gap-8 grid-cols-2 max-w-[66ch] items-center justify-between mt-12 mx-auto">
                 <div>
                   {parentNavigation[index! - 1] && (
                     <NavigationButton
