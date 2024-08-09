@@ -168,6 +168,14 @@ body:not(:has(.ddoc)) {
   }
 }
 
+.sidebar__current-item {
+  @apply text-indigo-600 relative;
+}
+
+.sidebar__current-item::before {
+  @apply content-["•"] absolute -left-[1.45ch] w-[1ch] text-center h-[1em];
+}
+
 .markdown-body .admonition a {
   @apply text-primary underline underline-offset-2;
 }

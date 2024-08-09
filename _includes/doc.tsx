@@ -160,7 +160,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
           </div>
         </main>
         <aside class="hidden lg:block pb-8 pr-8 col-span-2">
-          <div class="py-2 sticky top-4">
+          <div class="py-2 sticky top-4" id="toc">
             <ul class="border-l border-gray-200 py-2 pl-2">
               {(props.toc as TableOfContentsItem_[]).map((item) => (
                 <TableOfContentsItem item={item} />
