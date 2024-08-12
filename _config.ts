@@ -36,6 +36,9 @@ import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 const site = lume({
   location: new URL("https://docs.deno.com"),
   caseSensitiveUrls: true,
+  watcher: {
+    debounce: 1000,
+  },
   server: {
     middlewares: [
       apiDocumentContentTypeMiddleware,
