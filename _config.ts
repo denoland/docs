@@ -1,7 +1,6 @@
 import lume from "lume/mod.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
-import tailwindcss from "lume/plugins/tailwindcss.ts";
-import postcss from "lume/plugins/postcss.ts";
+import tailwindcss from "./plugins/tailwind.ts";
 import prism from "lume/plugins/prism.ts";
 import search from "lume/plugins/search.ts";
 import esbuild from "lume/plugins/esbuild.ts";
@@ -87,11 +86,11 @@ site.use(redirects({
 }));
 site.use(search());
 site.use(jsx());
+
+// Custom plugin that for tailwind + postcss combined
 site.use(tailwindcss({
   options: tailwindConfig,
-  extensions: [".tsx", ".md", ".ts"],
 }));
-site.use(postcss());
 site.use(esbuild({
   extensions: [".client.ts"],
   options: {

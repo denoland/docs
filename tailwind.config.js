@@ -1,6 +1,10 @@
 // tailwind.config.js
 /** @type {import('npm:tailwindcss').Config} */
 export default {
+  content: [
+    "{by-example,deploy,_components,_includes,runtime,static,subhosting}/**/*.{md,ts,tsx}",
+    "*.{ts,tsx}",
+  ],
   corePlugins: {
     preflight: true,
   },
