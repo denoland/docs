@@ -453,31 +453,31 @@ export default function () {
   );
 }
 
-function DocsCTA(
-  props: { text: string; href: string; product: "deploy" | "runtime" },
-) {
+function DocsCTA(props: {
+  text: string;
+  href: string;
+  product: "deploy" | "runtime";
+}) {
   const productClass = props.product === "deploy"
     ? "deploy-cta"
     : "runtime-cta";
   return (
-    <a
-      href={props.href}
-      className={`docs-cta ${productClass}`}
-    >
-      {props.text} <span aria-hidden="true">-&gt;</span>
+    <a href={props.href} className={`docs-cta ${productClass}`}>
+      {props.text}{" "}
+      <span aria-hidden="true" class="whitespace-pre">
+        -&gt;
+      </span>
     </a>
   );
 }
 
-function ContentItem(
-  props: {
-    title: string;
-    description: string;
-    linktext: string;
-    link: string;
-    product: string;
-  },
-) {
+function ContentItem(props: {
+  title: string;
+  description: string;
+  linktext: string;
+  link: string;
+  product: string;
+}) {
   const productClass = props.product === "deploy"
     ? "deploy-link"
     : props.product === "runtime"
@@ -487,27 +487,22 @@ function ContentItem(
   return (
     <div>
       <h4 className="text-lg font-semibold mb-1">{props.title}</h4>
-      <p className="mb-3">
-        {props.description}
-        {" "}
-      </p>
-      <a
-        className={`homepage-link ${productClass}`}
-        href={props.link}
-      >
-        {props.linktext} <span aria-hidden="true">-&gt;</span>
+      <p className="mb-3">{props.description}</p>
+      <a className={`homepage-link ${productClass}`} href={props.link}>
+        {props.linktext}{" "}
+        <span aria-hidden="true" class="whitespace-pre">
+          -&gt;
+        </span>
       </a>
     </div>
   );
 }
 
-function LinkList(
-  props: {
-    title: string;
-    product: string;
-    links: { text: string; href: string }[];
-  },
-) {
+function LinkList(props: {
+  title: string;
+  product: string;
+  links: { text: string; href: string }[];
+}) {
   const productClass = props.product === "deploy"
     ? "deploy-link"
     : props.product === "runtime"
