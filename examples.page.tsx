@@ -57,10 +57,9 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
       `https://github.com/denoland/deno-docs/blob/main/by-example/${example.name}${
         example.parsed.files.length > 1 ? "/main" : ""
       }`;
-    const rawUrl =
-      `https://raw.githubusercontent.com/denoland/deno-docs/main/by-example/${example.name}${
-        example.parsed.files.length > 1 ? "/main" : ""
-      }`;
+    const rawUrl = `https://docs.deno.com/by-example/${example.name}${
+      example.parsed.files.length > 1 ? "/main" : ""
+    }`;
 
     yield {
       url: `/examples/${example.label}/index.html`,
@@ -322,7 +321,7 @@ function SnippetComponent(props: {
         <div class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight rounded-md">
           {props.snippet.code && (
             <div class="nocopy h-full markdown-body !bg-[var(--color-canvas-subtle)]">
-              <pre class="highlight language-ts"><code dangerouslySetInnerHTML={{__html: props.snippet.code}}></code></pre>
+              <pre class="highlight language-ts"><code dangerouslySetInnerHTML={{ __html: props.snippet.code }}></code></pre>
             </div>
           )}
         </div>

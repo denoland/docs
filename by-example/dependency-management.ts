@@ -3,7 +3,6 @@
  * @difficulty beginner
  * @tags cli, deploy
  * @resource {/examples/import-export} Example: Importing & Exporting
- * @run <url>
  * @group Basics
  *
  * It is unwieldy to have to import the same remote module over and over again.
