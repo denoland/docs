@@ -34,7 +34,7 @@ export const sidebar = [
 ];
 
 export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
-  const files = [...walkSync("./by-example/", {
+  const files = [...walkSync("./examples/", {
     exts: [".ts"],
   })];
   const examples = files.map((file) => {
@@ -54,12 +54,10 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
     ).join("\n");
 
     const url =
-      `https://github.com/denoland/deno-docs/blob/main/by-example/${example.name}${
-        example.parsed.files.length > 1 ? "/main" : ""
+      `https://github.com/denoland/deno-docs/blob/main/examples/${example.name}${example.parsed.files.length > 1 ? "/main" : ""
       }`;
-    const rawUrl = `https://docs.deno.com/by-example/${example.name}${
-      example.parsed.files.length > 1 ? "/main" : ""
-    }`;
+    const rawUrl = `https://docs.deno.com/examples/${example.name}${example.parsed.files.length > 1 ? "/main" : ""
+      }`;
 
     yield {
       url: `/examples/${example.label}/index.html`,
@@ -298,22 +296,19 @@ function SnippetComponent(props: {
   return (
     <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-8">
       <div
-        class={`italic select-none text-sm ${
-          props.snippet.text ? "pt-[2.2rem] md:pt-9 pb-4 md:pb-0 " : " "
-        } ${props.snippet.code ? "col-span-3" : "col-span-full"}`}
+        class={`italic select-none text-sm ${props.snippet.text ? "pt-[2.2rem] md:pt-9 pb-4 md:pb-0 " : " "
+          } ${props.snippet.code ? "col-span-3" : "col-span-full"}`}
       >
         {props.snippet.text}
       </div>
       <div
-        class={`col-span-7 relative ${
-          props.snippet.code.length === 0 ? "hidden sm:block" : ""
-        }`}
+        class={`col-span-7 relative ${props.snippet.code.length === 0 ? "hidden sm:block" : ""
+          }`}
       >
         {props.filename && (
           <span
-            class={`font-mono text-xs absolute -top-3 left-4 bg-[var(--color-canvas-subtle)] z-10 p-1 rounded-sm ${
-              props.firstOfFile ? "block" : "block sm:hidden"
-            }`}
+            class={`font-mono text-xs absolute -top-3 left-4 bg-[var(--color-canvas-subtle)] z-10 p-1 rounded-sm ${props.firstOfFile ? "block" : "block sm:hidden"
+              }`}
           >
             {props.filename}
           </span>

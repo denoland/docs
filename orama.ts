@@ -84,9 +84,8 @@ export async function generateDocumentsForSymbols(): Promise<OramaDocument[]> {
           .replace(/\.html$/, ""),
         title: node.name,
         content: node.doc,
-        section: `API > ${kind}${node.file !== "." ? ` > ${node.file}` : ""}${
-          node.category ? ` > ${node.category}` : ""
-        }`,
+        section: `API > ${kind}${node.file !== "." ? ` > ${node.file}` : ""}${node.category ? ` > ${node.category}` : ""
+          }`,
         category: "Reference",
       });
     }
@@ -102,7 +101,7 @@ export async function generateDocumentsForSymbols(): Promise<OramaDocument[]> {
 }
 
 export async function generateDocumentsForExamples(): Promise<OramaDocument[]> {
-  const files = [...walkSync("./by-example/", {
+  const files = [...walkSync("./examples/", {
     exts: [".ts"],
   })];
   return await Promise.all(files.map(async (file) => {

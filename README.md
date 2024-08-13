@@ -38,7 +38,7 @@ The actual content of the docs site is found mostly in these folders:
 - `runtime` - docs for the Deno CLI / runtime
 - `deploy` - docs for the Deno Deploy cloud service
 - `subhosting` - docs for Deno Subhosting
-- `by-example` - docs for the [Examples](#Examples) section
+- `examples` - docs for the [Examples](#Examples) section
 
 Most files are [markdown](https://lume.land/plugins/markdown/), but even
 markdown files are processed with [MDX](https://mdxjs.com/), which enables you
@@ -123,7 +123,7 @@ snippets showcasing various functions of the APIs implemented in Deno.
 
 ### Adding an example
 
-To add an example, create a file in the `by-example` directory. The file name
+To add an example, create a file in the `examples` directory. The file name
 should be a short description of the example (in kebab case) and the contents
 should be the code for the example. The file should be in the `.ts` format. The
 file should start with a JSDoc style multi line comment that describes the

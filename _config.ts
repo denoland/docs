@@ -81,7 +81,7 @@ site.copy("deno.json");
 site.copy("go.json");
 site.copy("server.ts");
 site.copy("middleware.ts");
-site.copy("by-example");
+site.copy("examples");
 
 site.use(redirects({
   output: "json",
@@ -214,7 +214,7 @@ site.ignore(
   "README.md",
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
-  "by-example",
+  "examples",
   // "deploy",
   // "examples.page.tsx",
   // "runtime",

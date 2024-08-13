@@ -7,11 +7,11 @@ title: "`deno run`, run a file"
 ## Usage
 
 To run the file at
-[https://examples.deno.land/hello-world.ts](https://examples.deno.land/hello-world.ts)
+[https://docs.deno.com/examples/hello-world.ts](https://docs.deno.com/examples/hello-world.ts)
 use:
 
 ```console
-deno run https://examples.deno.land/hello-world.ts
+deno run https://docs.deno.com/examples/hello-world.ts
 ```
 
 You can also run files locally. Ensure that you are in the correct directory and
@@ -76,7 +76,7 @@ command.
 You can pipe code from stdin and run it immediately with:
 
 ```console
-curl https://examples.deno.land/hello-world.ts | deno run -
+curl https://docs.deno.com/examples/hello-world.ts | deno run -
 ```
 
 ## Terminate run
