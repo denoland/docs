@@ -84,8 +84,9 @@ export async function generateDocumentsForSymbols(): Promise<OramaDocument[]> {
           .replace(/\.html$/, ""),
         title: node.name,
         content: node.doc,
-        section: `API > ${kind}${node.file !== "." ? ` > ${node.file}` : ""}${node.category ? ` > ${node.category}` : ""
-          }`,
+        section: `API > ${kind}${node.file !== "." ? ` > ${node.file}` : ""}${
+          node.category ? ` > ${node.category}` : ""
+        }`,
         category: "Reference",
       });
     }
