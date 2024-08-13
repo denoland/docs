@@ -34,7 +34,7 @@ export const sidebar = [
 ];
 
 export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
-  const files = [...walkSync("./by-example/", {
+  const files = [...walkSync("./examples/", {
     exts: [".ts"],
   })];
   const examples = files.map((file) => {
@@ -54,10 +54,10 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
     ).join("\n");
 
     const url =
-      `https://github.com/denoland/deno-docs/blob/main/by-example/${example.name}${
+      `https://github.com/denoland/deno-docs/blob/main/examples/${example.name}${
         example.parsed.files.length > 1 ? "/main" : ""
       }`;
-    const rawUrl = `https://docs.deno.com/by-example/${example.name}${
+    const rawUrl = `https://docs.deno.com/examples/${example.name}${
       example.parsed.files.length > 1 ? "/main" : ""
     }`;
 

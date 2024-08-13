@@ -42,4 +42,4 @@ runtime.
 - [Vue](./how_to_with_npm/vue.md)
 
 Additional examples can by found at
-[Deno by Example](https://examples.deno.land/).
+[Deno by Example](https://docs.deno.com/examples/).

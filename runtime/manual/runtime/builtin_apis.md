@@ -21,7 +21,7 @@ to the file system.
 Refer to the links below for code examples of how to use the file system
 functions.
 
-- [Reading files in several different ways](https://examples.deno.land/reading-files)
+- [Reading files in several different ways](https://docs.deno.com/examples/reading-files)
 - [Reading files in streams](../../tutorials/file_server.md)
 - [Reading a text file (`Deno.readTextFile`)](../../tutorials/read_write_files.md#reading-a-text-file)
 - [Writing a text file (`Deno.writeTextFile`)](../../tutorials/read_write_files.md#writing-a-text-file)
