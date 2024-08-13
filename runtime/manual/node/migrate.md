@@ -7,91 +7,22 @@ oldUrl:
   - /runtime/manual/node/package_json
 ---
 
-One of Deno's core strengths is a unified toolchain that comes with support for
-TypeScript out of the box, and tools like a linter, formatter and a test runner.
-Switching to Deno allows you to simplify your toolchain and reduces the number
-of moving components in your project. Deno also has a more secure runtime, with
-[runtime permissions](../basics/permissions.md) that allow you to control what
-your code can access.
+Deno supports modern Node.js projects out of the box, with no changes to your
+code. Running your Node.js project with Deno is a straightforward process, the
+main points to be aware of are:
+
+1. Usage of Node.js globals (like `process`, `Buffer`, etc)
+2. Imported Node.js built-in modules need the `node:` specifier (`fs` ->
+   `node:fs`)
 
 This guide will walk you through migrating your Node.js project to Deno and
 offer some optional suggestions of ways to optimize your codebase.
 
-## Module imports and exports
-
-Deno supports [ECMAScript modules](../basics/modules/index.md) exclusively. If
-your Node.js code uses
-[`require`](https://nodejs.org/api/modules.html#modules-commonjs-modules), you
-should update it to use `import` statements instead. If your internal code uses
-CommonJS-style exports, those will also need to be updated.
-
-A typical CommonJS-style project might look similar to this:
-
-```js title="add_numbers.js"
-module.exports = function addNumbers(num1, num2) {
-  return num1 + num2;
-};
-```
-
-```js title="index.js"
-const addNumbers = require("./add_numbers");
-console.log(addNumbers(2, 2));
-```
-
-To convert these to [ECMAScript modules](../basics/modules/index.md), we'll make
-a few minor changes:
-
-```js title="add_numbers.js"
-export function addNumbers(num1, num2) {
-  return num1 + num2;
-}
-```
-
-```js title="index.js"
-import { addNumbers } from "./add_numbers.js";
-console.log(addNumbers(2, 2));
-```
-
-Exports:
-
-| CommonJS                             | ECMAScript modules                 |
-| ------------------------------------ | ---------------------------------- |
-| `module.exports = function add() {}` | `export default function add() {}` |
-| `exports.add = function add() {}`    | `export function add() {}`         |
-
-Imports:
-
-| CommonJS                                   | ECMAScript modules                       |
-| ------------------------------------------ | ---------------------------------------- |
-| `const add = require("./add_numbers");`    | `import add from "./add_numbers.js";`    |
-| `const { add } = require("./add_numbers")` | `import { add } from "./add_numbers.js"` |
-
-### Quick fix with VS Code
-
-If you are using VS Code, you can use its built-in feature to convert CommonJS
-to ES6 modules. Right-click on the `require` statement, or the lightbulb icon
-and select `Quick Fix` and then `Convert to ES module`.
-
-![Quick Fix](../images/quick-fix.png)
-
-### CommonJS vs ECMAScript resolution
-
-An important distinction between the two module systems is that ECMAScript
-resolution requires the full specifier **including the file extension**.
-Omitting the file extension, and special handling of `index.js`, are features
-unique to CommonJS. The benefit of the ECMAScript resolution is that it works
-the same across the browser, Deno, and other runtimes.
-
-| CommonJS             | ECMAScript modules            |
-| -------------------- | ----------------------------- |
-| `"./add_numbers"`    | `"./add_numbers.js"`          |
-| `"./some/directory"` | `"./some/directory/index.js"` |
-
 :::tip
 
-Deno can add all the missing file extensions for you by running
-`deno lint --fix`. Deno's linter comes with a `no-sloppy-imports` rule that will
-show a linting error when an import path doesn't contain the file extension.
+If your project is written with CommonJS (i.e. `require`), you will need to
+update it to use ECMAScript modules, check out our helpful
+[CommonJS to ESM guide](./cjs_to_esm.md) to get you up and running with Deno.
 
 :::
 
@@ -182,9 +113,9 @@ in to [individual permissions](../basics/permissions.md).
 
 ## Running scripts from `package.json`
 
-You can continue to use your existing npm scripts with Deno, by using the
+Deno supports running npm scripts natively with the
 [`deno task`](../tools/task_runner.md) subcommand. Consider the following
-Node.js project with a script called `start` inside its `package.json`.
+Node.js project with a script called `start` inside its `package.json`:
 
 ```json title="package.json"
 {
@@ -228,13 +159,22 @@ If you do run into a problem with Node.js compatibility, please let us know by
 
 :::
 
-## Optional improvements - deno.json
+## Optional improvements with Deno's built-in tools
+
+One of Deno's core strengths is a unified toolchain that comes with support for
+TypeScript out of the box, and tools like a linter, formatter and a test runner.
+Switching to Deno allows you to simplify your toolchain and reduces the number
+of moving components in your project. Deno also has a more secure runtime, with
+[runtime permissions](../basics/permissions.md) that allow you to control what
+your code can access.
+
+### deno.json (optional)
 
 Deno has its own config file, `deno.json` or `deno.jsonc`, which can be used to
 configure your project. You can use it to define tasks, dependencies, path
 mappings, and other runtime configurations.
 
-### Migrating npm scripts to `deno.json`
+#### Migrating npm scripts to `deno.json` (optional)
 
 If preferred, you can move your npm scripts over to `deno.json`, where they can
 be run using `deno task`. This allows you to manage all necessary permission
@@ -252,7 +192,7 @@ flags and other runtime configuration in one place.
 deno task dev
 ```
 
-### Migrating npm dependencies to `deno.json`
+#### Migrating npm dependencies to `deno.json` (optional)
 
 You can also migrate your dependencies over to `deno.json`. Deno supports
 importing dependencies from external package repositories, local files, and/or
@@ -280,7 +220,7 @@ from npm, [JSR](https://jsr.io) and HTTP URLs.
 }
 ```
 
-## Optional improvements - Linting
+### Linting (optional)
 
 Deno ships with a built-in linter that is written with performance in mind. Deno
 can lint large projects in just a few milliseconds. You can try it out on your
@@ -319,7 +259,7 @@ A full list of all supported linting rules can be found on
 [https://lint.deno.land/](https://lint.deno.land/). To learn more about how to
 configure the linter, check out the [`deno lint` subcommand](../tools/linter/).
 
-## Optional improvements - Formatting
+### Formatting (optional)
 
 Deno ships with a [built-in formatter](../tools/formatter/) that can optionally
 format your code according to the Deno style guide. You can run the formatter on
@@ -340,7 +280,7 @@ The formatting rules can be configured in your `deno.json` file. To learn more
 about how to configure the formatter, check out the
 [`deno fmt` subcommand](../tools/formatter/).
 
-## Optional improvements - Testing
+### Testing (optional)
 
 Deno encourages writing tests for your code, and provides a built-in test runner
 to make it easy to write and run tests. The test runner is tightly integrated
