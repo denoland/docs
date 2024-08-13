@@ -81,6 +81,7 @@ site.copy("deno.json");
 site.copy("go.json");
 site.copy("server.ts");
 site.copy("middleware.ts");
+site.copy("by-example");
 
 site.use(redirects({
   output: "json",

@@ -61,3 +61,41 @@ Run these commands to get started
   // Run the tests
   deno test
 ```
+
+## Init a JSR package
+
+By running `deno init --lib` Deno will bootstrap a project that is ready to be
+published on [JSR](https://jsr.io/).
+
+```sh
+$ deno init --lib
+✅ Project initialized
+
+Run these commands to get started
+
+  # Run the tests
+  deno test
+
+  # Run the tests and watch for file changes
+  deno task dev
+
+  # Publish to JSR (dry run)
+  deno publish --dry-run
+```
+
+Inside `deno.json` you'll see that the entries for `name`, `exports` and
+`version` are prefilled.
+
+```json
+{
+  "name": "my-lib",
+  "version": "0.1.0",
+  "exports": "./mod.ts",
+  "tasks": {
+    "dev": "deno test --watch mod.ts"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1"
+  }
+}
+```
