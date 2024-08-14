@@ -1,57 +1,64 @@
 ---
 title: "Set Up Your Environment"
+oldUrl: /runtime/manual/getting_started/setup_your_environment/
 ---
 
-The Deno CLI contains a lot of the tools that are commonly needed for developing
-applications, including a full language server to help power your IDE of choice.
-[Installing](./installation.md) is all you need to do to make these
-[tools](./command_line_interface.md) available to you.
+Deno comes with many of the tools that are commonly needed for developing
+applications, including a full [language server (LSP)](TODO:lsp-link) to help
+power your IDE of choice. This page will help you set up your environment to get
+the most out of Deno while you are developing.
 
-Outside using Deno with your favorite IDE, this section also documents
-[shell completions](#shell-completions) and
-[environment variables](#environment-variables).
+We'll cover:
 
-## Using an editor/IDE
+- How to use Deno with your favorite editor/IDE
+- How to generate shell completions
+- How to use environment variables to configure Deno.
 
-There is broad support for Deno in editors/IDEs. The following sections provide
-information about how to use Deno with editors. Most editors integrate directly
-into Deno using the Language Server Protocol and the language server that is
-integrated into the Deno CLI.
-
-If you are trying to write or support a community integration to the Deno
-language server, there is some
-[documentation](https://github.com/denoland/deno/tree/main/cli/lsp#deno-language-server)
-located in the Deno CLI code repository, but also feel free to join the
-[Discord community](https://discord.gg/deno) in the `#dev-lsp` channel.
+## Setting up your editor/IDE
 
 ### Visual Studio Code
 
-There is an official extension for
-[Visual Studio Code](https://code.visualstudio.com/) called
-[vscode_deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno).
-When installed, it will connect to the language server built into the Deno CLI.
+If you haven’t already, download and install Visual Studio Code from the
+[official website](https://code.visualstudio.com/).
 
-Because most people work in mixed environments, the extension does not enable a
-workspace as _Deno enabled_ by default, and it requires that the `"deno.enable"`
-flag to be set. You can change the settings yourself, or you can choose
-`Deno: Initialize Workspace Configuration` from the command palette to enable
-your project.
+In the Extensions tab, search for "Deno" and install the
+[extension by Denoland](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno).
 
-More information can be found in the
-[Using Visual Studio Code](../references/vscode_deno/index.md) section of the
-manual.
+Next, open the Command Palette by pressing `Ctrl+Shift+P` and type
+`Deno: Initialize Workspace Configuration`. Select this option to configure Deno
+for your workspace.
+
+![The VSCode command palette with the Deno: Initialize Workspace Configuration option selected.](./images/vscode-setup.png)
+
+A file called `.vscode/settings.json` will be created in your workspace with the
+following configuration:
+
+```json
+{
+  "deno.enable": true,
+  "deno.lint": true,
+  "deno.unstable": true
+}
+```
+
+That’s it! You’ve successfully set up your developer environment for Deno using
+VSCode. You will now get all the benefits of Deno’s LSP, including IntelliSense,
+code formatting, linting, and more.
 
 ### JetBrains IDEs
 
-You can get support for Deno in WebStorm and other
-[JetBrains IDEs](https://www.jetbrains.com/products/#type=ide), including
-PhpStorm, IntelliJ IDEA Ultimate, and PyCharm Professional. For this, install
-the [official Deno plugin](https://plugins.jetbrains.com/plugin/14382-deno) from
-_Preferences / Settings | Plugins - Marketplace_.
+To install the Deno Plugin, open your IDE and go to **File** > **Settings**.
+Navigate to **Plugins** and search for `Deno`. Install the official Deno plugin.
+
+![The WebStorm plugins settings](./images/webstorm_setup.png)
+
+To configure the Plugin, go to **File** > **Settings** again. Navigate to
+**Languages & Frameworks** > **Deno**. Check **Enable Deno for your project**
+and specify the path to the Deno executable (if it has not been auto-detected).
 
 Check out
 [this blog post](https://blog.jetbrains.com/webstorm/2020/06/deno-support-in-jetbrains-ides/)
-to learn more about how to get started with Deno.
+to learn more about how to get started with Deno in Jetbrains IDEs.
 
 ### Vim/Neovim via plugins
 
@@ -390,54 +397,102 @@ the fish config folder:
 > deno completions fish > ~/.config/fish/completions/deno.fish
 ```
 
-## Environment variables
+## Other tools
+
+If you are writing or supporting a community integration using the Deno language
+server, you will find
+[documentation](https://github.com/denoland/deno/tree/main/cli/lsp#deno-language-server)
+located in the Deno CLI code repository, but also feel free to join our
+[Discord community](https://discord.gg/deno) in the `#dev-lsp` channel.
+
+## Environment variables to configure Deno behavior
 
 There are several environment variables which can impact the behavior of Deno:
 
-- `DENO_AUTH_TOKENS` - a list of authorization tokens which can be used to allow
-  Deno to access remote private code. See the
-  [Private modules and repositories](../advanced/private_repositories.md)
-  section for more details.
-- `DENO_TLS_CA_STORE` - a list of certificate stores which will be used when
-  establishing TLS connections. The available stores are `mozilla` and `system`.
-  You can specify one, both or none. Certificate chains attempt to resolve in
-  the same order in which you specify them. The default value is `mozilla`. The
-  `mozilla` store will use the bundled Mozilla certs provided by
-  [`webpki-roots`](https://crates.io/crates/webpki-roots). The `system` store
-  will use your platform's
-  [native certificate store](https://crates.io/crates/rustls-native-certs). The
-  exact set of Mozilla certs will depend on the version of Deno you are using.
-  If you specify no certificate stores, then no trust will be given to any TLS
-  connection without also specifying `DENO_CERT` or `--cert` or specifying a
-  specific certificate per TLS connection.
-- `DENO_CERT` - load a certificate authority from a PEM encoded file. This
-  "overrides" the `--cert` option. See the
-  [Proxies](../basics/modules/proxies.md) section for more information.
-- `DENO_DIR` - this will set the directory where cached information from the CLI
-  is stored. This includes items like cached remote modules, cached transpiled
-  modules, language server cache information and persisted data from local
-  storage. This defaults to the operating system's default cache location and
-  then under the `deno` path.
-- `DENO_INSTALL_ROOT` - When using `deno install` where the installed scripts
-  are stored. This defaults to `$HOME/.deno/bin`.
-- `DENO_NO_PACKAGE_JSON` - Set to disable auto-resolution of package.json files.
-- `DENO_NO_PROMPT` - Set to disable permission prompts on access (alternative to
-  passing `--no-prompt` on invocation).
-- `DENO_NO_UPDATE_CHECK` - Set to disable checking if a newer Deno version is
-  available.
-- `DENO_WEBGPU_TRACE` - The directory to use for WebGPU traces.
-- `HTTP_PROXY` - The proxy address to use for HTTP requests. See the
-  [Proxies](../basics/modules/proxies.md) section for more information.
-- `HTTPS_PROXY` - The proxy address to use for HTTPS requests. See the
-  [Proxies](../basics/modules/proxies.md) section for more information.
-- `NO_COLOR` - If set, this will prevent the Deno CLI from sending ANSI color
-  codes when writing to stdout and stderr. See the website
-  [https://no-color.org](https://no-color.org/) for more information on this _de
-  facto_ standard. The value of this flag can be accessed at runtime without
-  permission to read the environment variables by checking the value of
-  `Deno.noColor`.
-- `NO_PROXY` - Indicates hosts which should bypass the proxy set in the other
-  environment variables. See the [Proxies](../basics/modules/proxies.md) section
-  for more information.
-- `NPM_CONFIG_REGISTRY` - The npm registry to use when loading modules via
-  [npm specifiers](../node/npm_specifiers.md)
+### DENO_AUTH_TOKENS
+
+A list of authorization tokens which can be used to allow Deno to access remote
+private code. See the
+[Private modules and repositories](../advanced/private_repositories.md) section
+for more details.
+
+### DENO_TLS_CA_STORE
+
+A list of certificate stores which will be used when establishing TLS
+connections. The available stores are `mozilla` and `system`. You can specify
+one, both or none. Certificate chains attempt to resolve in the same order in
+which you specify them. The default value is `mozilla`. The `mozilla` store will
+use the bundled Mozilla certs provided by
+[`webpki-roots`](https://crates.io/crates/webpki-roots). The `system` store will
+use your platform's
+[native certificate store](https://crates.io/crates/rustls-native-certs). The
+exact set of Mozilla certs will depend on the version of Deno you are using. If
+you specify no certificate stores, then no trust will be given to any TLS
+connection without also specifying `DENO_CERT` or `--cert` or specifying a
+specific certificate per TLS connection.
+
+### DENO_CERT
+
+Load a certificate authority from a PEM encoded file. This "overrides" the
+`--cert` option. See the [Proxies](../basics/modules/proxies.md) section for
+more information.
+
+### DENO_DIR
+
+this will set the directory where cached information from the CLI is stored.
+This includes items like cached remote modules, cached transpiled modules,
+language server cache information and persisted data from local storage. This
+defaults to the operating system's default cache location and then under the
+`deno` path.
+
+### DENO_INSTALL_ROOT
+
+When using `deno install` where the installed scripts are stored. This defaults
+to `$HOME/.deno/bin`.
+
+### DENO_NO_PACKAGE_JSON
+
+Set to disable auto-resolution of package.json files.
+
+### DENO_NO_PROMPT
+
+Set to disable permission prompts on access (alternative to passing
+`--no-prompt` on invocation).
+
+### DENO_NO_UPDATE_CHECK
+
+Set to disable checking if a newer Deno version is available.
+
+### DENO_WEBGPU_TRACE
+
+The directory to use for WebGPU traces.
+
+### HTTP_PROXY
+
+The proxy address to use for HTTP requests. See the
+[Proxies](../basics/modules/proxies.md) section for more information.
+
+### HTTPS_PROXY
+
+The proxy address to use for HTTPS requests. See the
+[Proxies](../basics/modules/proxies.md) section for more information.
+
+### NO_COLOR
+
+If set, this will prevent the Deno CLI from sending ANSI color codes when
+writing to stdout and stderr. See the website
+[https://no-color.org](https://no-color.org/) for more information on this _de
+facto_ standard. The value of this flag can be accessed at runtime without
+permission to read the environment variables by checking the value of
+`Deno.noColor`.
+
+### NO_PROXY
+
+Indicates hosts which should bypass the proxy set in the other environment
+variables. See the [Proxies](../basics/modules/proxies.md) section for more
+information.
+
+### NPM_CONFIG_REGISTRY
+
+The npm registry to use when loading modules via
+[npm specifiers](../node/npm_specifiers.md)

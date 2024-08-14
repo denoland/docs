@@ -8,7 +8,7 @@ export const sidebar = [
     items: [
       {
         label: "Runtime Manual",
-        id: "/runtime/manual/",
+        id: "/runtime/",
       },
       {
         label: "Examples",

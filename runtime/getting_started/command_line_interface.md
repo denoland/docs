@@ -2,26 +2,35 @@
 title: Command Line Interface
 ---
 
-Deno is a command line program. You should be familiar with some simple commands
-having followed the examples thus far and already understand the basics of shell
-usage.
+Deno is a command line program. The Deno command line interface (CLI) can be
+used to run scripts, manage dependencies, and even compile your code into
+standalone executables. You may be familiar with some simple commands having
+followed the examples thus far. This page will provide a more detailed overview
+of the Deno CLI.
 
-There are multiple ways of viewing the main help text:
+The Deno CLI has a number of subcommands (like `run`, `init` and `test`, etc.).
+They are used to perform different tasks within the Deno runtime environment.
+Each subcommand has its own set of flags and options (eg --version) that can be
+used to customize its behavior.
+
+## Using the CLI
+
+You can view all of the available commands and flags by running the `deno help`
+subcommand in your terminal:
 
 ```shell
-# Using the subcommand.
 deno help
+```
 
-# Using the short flag -- outputs the same as above.
+or by using the `-h` or `--help` flags:
+
+```shell
 deno -h
-
-# Using the long flag -- outputs more detailed help text where available.
+# or
 deno --help
 ```
 
-Deno's CLI is subcommand-based. The above commands should show you a list of
-subcommands supported, such as `deno compile`. To see subcommand-specific help,
-for example for `compile`, you can similarly run one of:
+To see subcommand-specific help, for example for `init`, you can run one of:
 
 ```shell
 deno help compile
@@ -29,36 +38,58 @@ deno compile -h
 deno compile --help
 ```
 
-Detailed guides for each subcommand can be found [here](../tools/index.md).
+Check out the [CLI reference](TODO:cli-link) for a further documentation on all
+the subcommands and flags available. We'll take a look at a few commands in a
+bit more detail below to see how they can be used and configured.
 
-## Script source
+## An example subcommand - `deno run`
 
-Deno can grab the scripts from multiple sources, a filename, a url, and '-' to
-read the file from stdin. The latter is useful for integration with other
-applications.
+You can run a local TypeScript or JavaScript file by specifying its path
+relative to the current working directory:
 
 ```shell
 deno run main.ts
-deno run https://mydomain.com/main.ts
+```
+
+Deno supports running scripts directly from URLs. This is particularly useful
+for quickly testing or running code without downloading it first:
+
+```shell
+deno run https://docs.deno.com/examples/hello-world.ts
+```
+
+You can also run a script by piping it through standard input. This is useful
+for integrating with other command-line tools or dynamically generating scripts:
+
+```shell
 cat main.ts | deno run -
 ```
 
-## Script arguments
+## Passing script arguments
 
-Separately from the Deno runtime flags, you can pass user-space arguments to the
-script you are running by specifying them **after** the script name:
+Script arguments are additional parameters you can pass to your script when
+running it from the command line. These arguments can be used to customize the
+behavior of your program based on the input provided at runtime. Arguments
+should be passed **after** the script name.
+
+To test this out we can make a script that will log the arguments passed to it:
+
+```ts title="main.ts"
+console.log(Deno.args);
+```
+
+When we run that script and pass it some arguments it will log them to the
+console:
 
 ```shell
-deno run main.ts a b -c --quiet
+$ deno run main.ts arg1 arg2 arg3
+[ "arg1", "arg2", "arg3" ]
 ```
 
-```ts
-// main.ts
-console.log(Deno.args); // [ "a", "b", "-c", "--quiet" ]
-```
+## Argument and flag ordering
 
-**Note that anything passed after the script name will be passed as a script
-argument and not consumed as a Deno runtime flag.** This leads to the following
+_Note that anything passed after the script name will be passed as a script
+argument and not consumed as a Deno runtime flag._ This leads to the following
 pitfall:
 
 ```shell
@@ -69,9 +100,8 @@ deno run --allow-net net_client.ts
 deno run net_client.ts --allow-net
 ```
 
-Some see it as unconventional that:
-
-> a non-positional flag is parsed differently depending on its position.
+Some see it as unconventional that a non-positional flag is parsed differently
+depending on its position.
 
 However:
 
@@ -82,25 +112,27 @@ However:
      syntax check on `index.js` as per Node's `-c` flag. The second will
      _execute_ `index.js` with `-c` passed to `require("process").argv`.
 
----
+## Shared flags
 
-There exist logical groups of flags that are shared between related subcommands.
-We discuss these below.
+Some flags can be used with multiple related subcommands. We discuss these
+below.
 
-## Watch mode
+### Watch mode
 
 You can supply the `--watch` flag to `deno run`, `deno test`, `deno compile`,
-and `deno fmt` to enable the built-in file watcher. The files that are watched
-depend on the subcommand used:
+and `deno fmt` to enable the built-in file watcher. The watcher enables
+automatic reloading of your application whenever changes are detected in the
+source files. This is particularly useful during development, as it allows you
+to see the effects of your changes immediately without manually restarting the
+application.
+
+The files that are watched will depend on the subcommand used:
 
 - for `deno run`, `deno test`, and `deno compile` the entrypoint, and all local
-  files the entrypoint(s) statically import(s) will be watched.
+  files that the entrypoint statically imports will be watched.
 - for `deno fmt` all local files and directories specified as command line
   arguments (or the working directory if no specific files/directories is
   passed) are watched.
-
-Whenever one of the watched files is changed on disk, the program will
-automatically be restarted / formatted / tested / bundled.
 
 ```shell
 deno run --watch main.ts
@@ -125,7 +157,7 @@ from expanding the glob:
 deno run --watch --watch-exclude='*.js' main.ts
 ```
 
-## Hot Module Replacement mode
+### Hot Module Replacement mode
 
 You can use `--unstable-hmr` flag with `deno run` to enable the hot module
 replacement mode. Instead of restarting the program, the runtime will try to
@@ -148,7 +180,7 @@ addEventListener("hmr", (e) => {
 });
 ```
 
-## Integrity flags (lock files)
+### Integrity flags (lock files)
 
 Affect commands which can download resources to the cache: `deno cache`,
 `deno run`, `deno test`, `deno doc`, and `deno compile`.
@@ -160,7 +192,7 @@ Affect commands which can download resources to the cache: `deno cache`,
 
 Find out more about these [here](../basics/modules/integrity_checking.md).
 
-## Cache and compilation flags
+### Cache and compilation flags
 
 Affect commands which can populate the cache: `deno cache`, `deno run`,
 `deno test`, `deno doc`, and `deno compile`. As well as the flags above, this
@@ -174,7 +206,7 @@ includes those which affect module resolution, compilation configuration etc.
 --unstable                    Enable unstable APIs
 ```
 
-## Runtime flags
+### Runtime flags
 
 Affect commands which execute user code: `deno run` and `deno test`. These
 include all of the above as well as the following.
