@@ -1,8 +1,11 @@
 {
   "imports": {
     "@std/fs": "jsr:@std/fs@^0.229.3",
+    "autoprefixer": "npm:autoprefixer@^10.4.20",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
-    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@1ec41559522534fb463888710764f2aadb640adf/"
+    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@1ec41559522534fb463888710764f2aadb640adf/",
+    "postcss": "npm:postcss@^8.4.41",
+    "tailwindcss": "npm:tailwindcss@^3.4.9"
   },
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
