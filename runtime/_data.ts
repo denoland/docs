@@ -14,8 +14,9 @@ export const sidebar = [
     ],
   },
   {
-    title: "Deno Basics",
+    title: "Fundamentals",
     items: [
+      "/runtime/fundamentals/ts_support/",
       "/runtime/getting_started/configuration_file/",
       "/runtime/getting_started/web_frameworks/",
       "/runtime/manual/basics/permissions/",
