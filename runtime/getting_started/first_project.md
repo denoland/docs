@@ -3,7 +3,7 @@ title: Making a Deno project
 oldUrl: /runtime/manual/getting_started/first_steps/
 ---
 
-Deno has mny [built in tools](TODO:-cli-link) to make your development
+Deno has many [built in tools](TODO:-cli-link) to make your development
 experience as smooth as possible. One of these tools is the
 [project initializer](TODO:init-link), which creates a new Deno project with a
 basic file structure and configuration.
