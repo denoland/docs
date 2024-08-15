@@ -298,8 +298,7 @@ which modules you need by
   </summary>
   <p>
     <code>console</code> is supported. Other APIs are stubs and will throw an
-    error. Due to security implications the Deno team does not plan to polyfill
-    these APIs.
+    error.
   </p>
   <p>
     <a href="https://docs.deno.com/api/node/inspector/">Reference docs</a>
