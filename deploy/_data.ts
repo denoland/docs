@@ -151,6 +151,7 @@ export const sidebar = [
       "/deploy/api/runtime-request/",
       "/deploy/api/runtime-response/",
       "/deploy/api/runtime-headers/",
+      "/deploy/api/dynamic-import/",
     ],
   },
 ] satisfies Sidebar;
