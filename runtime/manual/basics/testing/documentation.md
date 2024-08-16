@@ -45,6 +45,19 @@ following:
 If no language identifier is specified then the language is inferred from media
 type of the source document that the code block is extracted from.
 
+Another attribute supported is `ignore`, which tells the test runner to skip
+type-checking the code block.
+
+````ts
+/**
+ * # Does not pass type check
+ *
+ * ```typescript ignore
+ * const x: string = 42;
+ * ```
+ */
+````
+
 If this example was in a file named foo.ts, running `deno test --doc foo.ts`
 will extract this example, and then type-check it as a standalone module living
 in the same directory as the module being documented.
