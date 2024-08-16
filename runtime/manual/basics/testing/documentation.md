@@ -7,7 +7,8 @@ Deno supports _type-checking_ your documentation examples.
 
 :::info
 
-No runtime behavior is tested as of now. Tracking issue:
+No runtime behavior is tested for code snippets in documentation as of now.
+Tracking issue:
 [denoland/deno#4716](https://github.com/denoland/deno/issues/4716)
 
 :::
