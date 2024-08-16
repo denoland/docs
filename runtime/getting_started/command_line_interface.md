@@ -14,30 +14,8 @@ They are used to perform different tasks within the Deno runtime environment.
 Each subcommand has its own set of flags and options (eg --version) that can be
 used to customize its behavior.
 
-## Using the CLI
-
 You can view all of the available commands and flags by running the `deno help`
-subcommand in your terminal:
-
-```shell
-deno help
-```
-
-or by using the `-h` or `--help` flags:
-
-```shell
-deno -h
-# or
-deno --help
-```
-
-To see subcommand-specific help, for example for `init`, you can run one of:
-
-```shell
-deno help init
-deno init -h
-deno init --help
-```
+subcommand in your terminal, or using the `-h` or `--help` flags.
 
 Check out the [CLI reference](TODO:cli-link) for a further documentation on all
 the subcommands and flags available. We'll take a look at a few commands in a
@@ -101,19 +79,7 @@ deno run --allow-net net_client.ts
 deno run net_client.ts --allow-net
 ```
 
-Some see it as unconventional that a non-positional flag is parsed differently
-depending on its position.
-
-However:
-
-1. This is the most logical and ergonomic way of distinguishing between runtime
-   flags and script arguments.
-2. This is, in fact, the same behaviour as that of any other popular runtime.
-   - Try `node -c index.js` and `node index.js -c`. The first will only do a
-     syntax check on `index.js` as per Node's `-c` flag. The second will
-     _execute_ `index.js` with `-c` passed to `require("process").argv`.
-
-## Shared flags
+## Common flags
 
 Some flags can be used with multiple related subcommands. We discuss these
 below.
@@ -160,13 +126,13 @@ deno run --watch --watch-exclude='*.js' main.ts
 
 ### Hot Module Replacement mode
 
-You can use `--unstable-hmr` flag with `deno run` to enable the hot module
+You can use `--watch-hmr` flag with `deno run` to enable the hot module
 replacement mode. Instead of restarting the program, the runtime will try to
 update the program in-place. If updating in-place fails, the program will still
 be restarted.
 
 ```shell
-deno run --unstable-hmr main.ts
+deno run --watch-hmr main.ts
 ```
 
 When a hot module replacement is triggered, the runtime will dispatch a
