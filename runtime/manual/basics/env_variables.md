@@ -7,7 +7,7 @@ There are a few ways to use environment variables in Deno:
 ## Built-in `Deno.env`
 
 The Deno runtime offers built-in support for environment variables with
-[`Deno.env`](https://deno.land/api@v1.25.3?s=Deno.env).
+[`Deno.env`](https://docs.deno.com/api/deno/~/Deno.env).
 
 `Deno.env` has getter and setter methods. Here is example usage:
 
@@ -22,33 +22,37 @@ console.log(Deno.env.has("FIREBASE_AUTH_DOMAIN")); // true
 
 ## `.env` file
 
-You can also put environment variables in a `.env` file and retrieve them using
-`dotenv` in the standard library.
+Deno supports `.env` files. You can cause Deno to read environment variables
+from `.env` using the `--env` flag: `deno run --env <script>`. This will read
+`.env` by default; if you want need to load environment variables from a
+different file, you can specify that file as a parameter to the flag.
+
+Alternately, the `dotenv` package in the standard library will load environment
+variables from `.env` as well.
 
 Let's say you have an `.env` file that looks like this:
 
 ```sh
-PASSWORD=Geheimnis
+GREETING="Hello, world."
 ```
 
-To access the environment variables in the `.env` file, import the `load`
-function from the standard library. Then, import the configuration using it.
+Import the `load` module to auto-import from the `.env` file and into the
+process environment.
 
 ```ts
-import { load } from "https://deno.land/std@0.224.0/dotenv/mod.ts";
+import "jsr:@std/dotenv/load";
 
-const env = await load();
-const password = env["PASSWORD"];
-
-console.log(password);
-// "Geheimnis"
+console.log(Deno.env.get("GREETING")); // "Hello, world."
 ```
+
+Further documentation for `.env` handling can be found in the
+[@std/dotenv](https://jsr.io/@std/dotenv/doc) documentation.
 
 ## `std/cli`
 
-The Deno standard library has a
-[`std/cli` module](https://deno.land/std/cli/mod.ts) for parsing command line
-arguments.
+The Deno standard library has a [`std/cli` module](https://jsr.io/@std/cli) for
+parsing command line arguments. Please refer to the module for documentation and
+examples.
 
 ## Special environment variables
 

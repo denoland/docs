@@ -262,8 +262,7 @@ The `watch` operation accepts an array of keys, and returns a
 [`ReadableStream`](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream),
 which emits a new value whenever any of the watched keys change their
 `versionstamp`. The emitted value is an array of
-[Deno.KvEntryMaybe](https://deno.land/api?s=Deno.KvEntryMaybe&unstable=)
-objects.
+[Deno.KvEntryMaybe](https://docs.deno.com/api/deno/~/Deno.KvEntryMaybe) objects.
 
 Note that the returned stream does not return every single intermediate state of
 the watched keys, but keeps you up to date with the latest state of keys. This
@@ -284,9 +283,9 @@ for await (const entries of stream) {
 }
 ```
 
-[get]: https://deno.land/api?s=Deno.Kv&p=prototype.get&unstable
-[getMany]: https://deno.land/api?s=Deno.Kv&p=prototype.getMany&unstable
-[list]: https://deno.land/api?s=Deno.Kv&p=prototype.list&unstable
-[set]: https://deno.land/api?s=Deno.Kv&p=prototype.set&unstable
-[delete]: https://deno.land/api?s=Deno.Kv&p=prototype.delete&unstable
-[mutate]: https://deno.land/api?s=Deno.AtomicOperation&p=prototype.mutate&unstable
+[get]: https://docs.deno.com/api/deno/~/Deno.Kv.prototype.get
+[getMany]: https://docs.deno.com/api/deno/~/Deno.Kv.prototype.getMany
+[list]: https://docs.deno.com/api/deno/~/Deno.Kv.prototype.list
+[set]: https://docs.deno.com/api/deno/~/Deno.Kv.prototype.set
+[delete]: https://docs.deno.com/api/deno/~/Deno.Kv.prototype.delete
+[mutate]: https://docs.deno.com/api/deno/~/Deno.AtomicOperation.prototype.mutate

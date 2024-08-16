@@ -13,7 +13,9 @@ export interface OramaDocument {
 export function generateDocumentsForPage(page: Page<Data>): OramaDocument[] {
   const documents: OramaDocument[] = [];
 
-  const headers = page.document!.querySelectorAll("h1, h2, h3, h4, h5, h6");
+  const headers = page.document!.querySelectorAll(
+    "main h1, main h2, main h3, main h4, main h5, main h6",
+  );
   for (const header of headers) {
     let headerContent = "";
     for (const childNode of header.childNodes) {
@@ -100,7 +102,7 @@ export async function generateDocumentsForSymbols(): Promise<OramaDocument[]> {
 }
 
 export async function generateDocumentsForExamples(): Promise<OramaDocument[]> {
-  const files = [...walkSync("./by-example/", {
+  const files = [...walkSync("./examples/", {
     exts: [".ts"],
   })];
   return await Promise.all(files.map(async (file) => {

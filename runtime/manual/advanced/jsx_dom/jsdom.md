@@ -25,23 +25,11 @@ This means if you want strong typing and intelligent auto-completion in your
 editor while using the Deno language server, you have to perform some extra
 steps.
 
-### Defining an `import_map.json`
-
-You need to map the bare specifier `"jsdom"` to the imported version of jsdom.
-This allows Deno to correctly apply the types to the import in the way they were
-specified.
-
-```json
-{
-  "jsdom": "https://esm.sh/jsdom"
-}
-```
-
 ### Setting up a configuration file
 
 You will want to set up a `deno.jsonc` configuration file in the root of your
 workspace with both TypeScript library information as well as specifying the
-import map defined above:
+dependencies we'll be using:
 
 ```jsonc
 {
@@ -53,7 +41,10 @@ import map defined above:
       "dom.asynciterable"
     ]
   },
-  "importMap": "./import_map.json"
+  "imports": {
+    "jsdom": "npm:jsdom",
+    "@std/assert": "jsr:@std/assert@1"
+  }
 }
 ```
 
@@ -68,7 +59,7 @@ first heading it encounters and print out the text content of that heading:
 
 ```ts
 import { JSDOM } from "jsdom";
-import { assert } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { assert } from "@std/assert";
 
 const { window: { document } } = new JSDOM(
   `<!DOCTYPE html>

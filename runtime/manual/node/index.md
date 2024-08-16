@@ -1,23 +1,22 @@
 ---
 title: "Node and npm modules"
-oldUrl: /runtime/manual/npm_nodejs/std_node/
+oldUrl: 
+- /runtime/manual/npm_nodejs/std_node/
 ---
 
-Many people will want to leverage code and libraries that are built for
-[Node](https://nodejs.org/), in particular the large set of packages available
-on the [npm](https://npmjs.com/) registry.
+Modern Node.js projects will run in Deno with little to no reworking required.
+However, there are some key differences between the two runtimes that you can
+take advantage of to make your code simpler and smaller when migrating your
+Node.js projects to Deno.
 
-There are currently several ways to do this - check out the links below to learn
-more about these methods.
-
-- Using [`npm:` specifiers](./npm_specifiers.md) and
-  [`node:` specifiers](./node_specifiers.md)
-- [package.json compatibility](./package_json.md)
-- Using [CDNs](./cdns.md)
+- [Migrating from Node.js to Deno](/runtime/manual/node/migrate)
+- [Importing npm packages](/runtime/manual/node/npm_specifiers)
+- [Full Node API compatibility list](/runtime/manual/node/compatibility)
+- [The Node to Deno cheatsheet](/runtime/manual/references/cheatsheet)
 
 ## Unstable compatibility features
 
-Node and npm compatiblity is an ongoing project for the Deno team. As such,
+Node and npm compatibility is an ongoing project for the Deno team. As such,
 there are a number of unstable features aimed at improving compatibility that
 you may want to reference. Please check out the
 [unstable feature flags](/runtime/manual/tools/unstable_flags) documentation for

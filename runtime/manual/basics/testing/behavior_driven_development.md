@@ -2,9 +2,10 @@
 title: "Behavior-Driven Development"
 ---
 
-With the [bdd.ts](https://deno.land/std/testing/bdd.ts) module you can write
-your tests in a familiar format for grouping tests and adding setup/teardown
-hooks used by other JavaScript testing frameworks like Jasmine, Jest, and Mocha.
+With the [@std/testing/bdd](https://jsr.io/@std/testing/doc/bdd/~) module you
+can write your tests in a familiar format for grouping tests and adding
+setup/teardown hooks used by other JavaScript testing frameworks like Jasmine,
+Jest, and Mocha.
 
 The `describe` function creates a block that groups together several related
 tests. The `it` function registers an individual test case.
@@ -86,15 +87,38 @@ following sections there are examples of how the same test could be written with
 both styles.
 
 ```ts
-// https://deno.land/std/testing/bdd_examples/user_test.ts
+// user.ts
+export class User {
+  static users: Map<string, User> = new Map();
+  age?: number;
+
+  constructor(public name: string) {
+    if (User.users.has(name)) {
+      throw new Deno.errors.AlreadyExists(`User ${name} already exists`);
+    }
+    User.users.set(name, this);
+  }
+
+  getAge(): number {
+    if (!this.age) {
+      throw new Error("Age unknown");
+    }
+    return this.age;
+  }
+
+  setAge(age: number) {
+    this.age = age;
+  }
+}
+```
+
+```ts
 import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std@0.224.0/assert/mod.ts";
-import {
-  User,
-} from "https://deno.land/std@0.224.0/testing/bdd_examples/user.ts";
+} from "jsr:@std/assert@1";
+import { User } from "./user.ts";
 
 Deno.test("User.users initially empty", () => {
   assertEquals(User.users.size, 0);
@@ -133,21 +157,13 @@ the new test suite it creates. The hooks can be created within it or be added to
 the options argument for describe.
 
 ```ts
-// https://deno.land/std/testing/bdd_examples/user_nested_test.ts
 import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std@0.224.0/assert/mod.ts";
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  it,
-} from "https://deno.land/std@0.224.0/testing/bdd.ts";
-import {
-  User,
-} from "https://deno.land/std@0.224.0/testing/bdd_examples/user.ts";
+} from "jsr:@std/assert@1";
+import { afterEach, beforeEach, describe, it } from "@std/testing@0.225.3/bdd";
+import { User } from "./user.ts";
 
 describe("User", () => {
   it("users initially empty", () => {
@@ -197,16 +213,13 @@ callback. The gives you the ability to have test grouping without any extra
 indentation in front of the grouped tests.
 
 ```ts
-// https://deno.land/std/testing/bdd_examples/user_flat_test.ts
 import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std@0.224.0/assert/mod.ts";
-import { describe, it } from "https://deno.land/std@0.224.0/testing/bdd.ts";
-import {
-  User,
-} from "https://deno.land/std@0.224.0/testing/bdd_examples/user.ts";
+} from "jsr:@std/assert@1";
+import { describe, it } from "@std/testing@0.225.3/bdd";
+import { User } from "./user.ts";
 
 const userTests = describe("User");
 
@@ -256,16 +269,13 @@ be useful if you'd like to create deep groupings without all the extra
 indentation in front of each line.
 
 ```ts
-// https://deno.land/std/testing/bdd_examples/user_mixed_test.ts
 import {
   assertEquals,
   assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std@0.224.0/assert/mod.ts";
-import { describe, it } from "https://deno.land/std@0.224.0/testing/bdd.ts";
-import {
-  User,
-} from "https://deno.land/std@0.224.0/testing/bdd_examples/user.ts";
+} from "jsr:@std/assert@1";
+import { describe, it } from "jsr:@std/testing@0.225.3/bdd";
+import { User } from "./user.ts";
 
 describe("User", () => {
   it("users initially empty", () => {

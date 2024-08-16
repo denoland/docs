@@ -22,7 +22,6 @@ export const sidebar = [
           "/runtime/manual/basics/env_variables/",
           "/runtime/manual/basics/debugging_your_code/",
           "/runtime/manual/basics/connecting_to_databases/",
-          "/runtime/manual/node/",
           "/runtime/manual/basics/react/",
           "/runtime/manual/getting_started/installation/",
         ],
@@ -40,6 +39,7 @@ export const sidebar = [
           "/runtime/manual/basics/modules/reloading_modules/",
           "/runtime/manual/basics/modules/integrity_checking/",
           "/runtime/manual/advanced/private_repositories/",
+          "/runtime/manual/advanced/http_imports/",
         ],
       },
       {
@@ -66,14 +66,12 @@ export const sidebar = [
       {
         label: "Interop with Node & npm",
         items: [
-          "/runtime/manual/node/npm_specifiers/",
-          "/runtime/manual/node/node_specifiers/",
-          "/runtime/manual/node/package_json/",
-          "/runtime/manual/node/cdns/",
-          "/runtime/manual/node/faqs/",
+          "/runtime/manual/node/",
           "/runtime/manual/node/migrate/",
+          "/runtime/manual/node/npm_specifiers/",
           "/runtime/manual/node/private_registries/",
-          "/runtime/manual/references/cheatsheet/",
+          "/runtime/manual/node/cjs_to_esm/",
+          "/runtime/manual/node/cheatsheet/",
           {
             label: "Supported Node APIs and globals",
             id: "/runtime/manual/node/compatibility/",
@@ -90,6 +88,7 @@ export const sidebar = [
           "/runtime/manual/advanced/jsx_dom/jsdom/",
           "/runtime/manual/advanced/jsx_dom/deno_dom/",
           "/runtime/manual/advanced/jsx_dom/linkedom/",
+          "/runtime/manual/advanced/faqs/",
         ],
       },
     ],

@@ -10,7 +10,7 @@ self-contained executable.
 ```
 
 If you omit the `OUT` parameter, the name of the executable file will be
-inferred.
+inferred from the script name.
 
 ## Flags
 
@@ -19,14 +19,14 @@ execute the script must be specified at compilation time. This includes
 permission flags.
 
 ```console
-> deno compile --allow-read --allow-net https://deno.land/std/http/file_server.ts
+> deno compile --allow-read --allow-net jsr:@std/http@1.0.0-rc.5/file-server
 ```
 
 [Script arguments](../getting_started/command_line_interface.md#script-arguments)
 can be partially embedded.
 
 ```console
-> deno compile --allow-read --allow-net https://deno.land/std/http/file_server.ts -p 8080
+> deno compile --allow-read --allow-net jsr:@std/http@1.0.0-rc.5/file-server -p 8080
 > ./file_server --help
 ```
 

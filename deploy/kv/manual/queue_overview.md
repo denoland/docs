@@ -12,15 +12,14 @@ messages. Queues can be used to offload tasks in a web application, or to
 schedule units of work for a time in the future.
 
 The primary APIs you'll use with queues are in the `Deno.Kv` namespace as
-[`enqueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.enqueue)
-and
-[`listenQueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.listenQueue).
+[`enqueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.enqueue) and
+[`listenQueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.listenQueue).
 
 ## Enqueue a message
 
 To enqueue a message for processing, use the `enqueue` method on an instance of
-[`Deno.Kv`](https://deno.land/api?unstable=true&s=Deno.Kv). In the example
-below, we show what it might look like to enqueue a notification for delivery.
+[`Deno.Kv`](https://docs.deno.com/api/deno/~/Deno.Kv). In the example below, we
+show what it might look like to enqueue a notification for delivery.
 
 ```ts title="queue_example.ts"
 // Describe the shape of your message object (optional)
@@ -71,7 +70,7 @@ console.log("Found failed notification for:", r.value?.forUser);
 
 You can configure a JavaScript function that will process items added to your
 queue with the `listenQueue` method on an instance of
-[`Deno.Kv`](https://deno.land/api?unstable=true&s=Deno.Kv).
+[`Deno.Kv`](https://docs.deno.com/api/deno/~/Deno.Kv).
 
 ```ts title="listen_example.ts"
 // Define the shape of the object we expect as a message in the queue
@@ -109,8 +108,8 @@ kv.listenQueue((msg: unknown) => {
 
 ## Queue API with KV atomic transactions
 
-You can combine the queue API with [KV atomic transactions](./transactions.mdx)
-to atomically enqueue messages and modify keys in the same transaction.
+You can combine the queue API with [KV atomic transactions](./transactions) to
+atomically enqueue messages and modify keys in the same transaction.
 
 ```ts title="kv_transaction_example.ts"
 const kv = await Deno.openKv();
@@ -154,7 +153,7 @@ await kv
 
 The runtime guarantees at-least-once delivery. This means that for majority of
 enqueued messages, the
-[`listenQueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.listenQueue)
+[`listenQueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.listenQueue)
 handler will be invoked once for each message. In some failure scenarios, the
 handler may be invoked multiple times for the same message to ensure delivery.
 It's important to design your applications such that duplicate messages are
@@ -168,14 +167,14 @@ once per message. See
 
 ### Automatic retries
 
-[`listenQueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.listenQueue)
+[`listenQueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.listenQueue)
 handler is invoked to process your queued messages when they're ready for
 delivery. If your handler throws an exception the runtime will automatically
 retry to call the handler again until it succeeds or until maximum retry
-attempts are reached. The message is considered to be succesfully processed once
-the
-[`listenQueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.listenQueue)
-handler invocation completes succesfully. The message will be dropped if the
+attempts are reached. The message is considered to be successfully processed
+once the
+[`listenQueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.listenQueue)
+handler invocation completes successfully. The message will be dropped if the
 handler consistently fails on retries.
 
 ### Message delivery order
@@ -194,26 +193,25 @@ build applications that scale to handle large workloads.
 
 When using queues with Deno Deploy, isolates are automatically spun up on demand
 to invoke your
-[`listenQueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.listenQueue)
+[`listenQueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.listenQueue)
 handler when a message becomes available for processing. Defining
-[`listenQueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.listenQueue)
+[`listenQueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.listenQueue)
 handler is the only requirement to enable queue processing in your Deno Deploy
 application, no additional configuration is needed.
 
 ### Queue size limit
 
 The maximum number of undelivered queue messages is limited to 100,000.
-[`enqueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.enqueue)
-method will fail with an error if the queue is full.
+[`enqueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.enqueue) method
+will fail with an error if the queue is full.
 
 ### Pricing details and limits
 
-- [`enqueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.enqueue)
-  is treated just like other
-  [`Deno.Kv`](https://deno.land/api?unstable=true&s=Deno.Kv) write operations.
-  Enqueued messages consume KV storage and write units.
+- [`enqueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.enqueue) is
+  treated just like other [`Deno.Kv`](https://docs.deno.com/api/deno/~/Deno.Kv)
+  write operations. Enqueued messages consume KV storage and write units.
 - Messages delivered through
-  [`listenQueue`](https://deno.land/api?unstable=true&s=Deno.Kv&p=prototype.listenQueue)
+  [`listenQueue`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.listenQueue)
   consume requests and KV write units.
 - See [Pricing details](https://deno.com/deploy/pricing) for more information.
 

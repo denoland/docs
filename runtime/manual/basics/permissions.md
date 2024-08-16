@@ -34,196 +34,168 @@ deno run --allow-read mod.ts
 
 The following permissions are available:
 
-- **--allow-env=\<VARIABLE_NAME\>** Allow environment access for things like
-  getting and setting of environment variables. Since Deno 1.9, you can specify
-  an optional, comma-separated list of environment variables to provide an
-  allow-list of allowed environment variables.
-- **--allow-sys=\<API_NAME\>** Allow access to APIs that provide information
-  about user's operating system, eg. `Deno.osRelease()` and
-  `Deno.systemMemoryInfo()`. You can specify a comma-separated list of allowed
-  interfaces from the following list: `hostname`, `osRelease`, `osUptime`,
-  `loadavg`, `networkInterfaces`, `systemMemoryInfo`, `uid`, and `gid`. These
-  strings map to functions in the `Deno` namespace that provide OS info, like
-  [Deno.systemMemoryInfo](https://deno.land/api?s=Deno.SystemMemoryInfo).
-- **--allow-hrtime** Allow high-resolution time measurement. High-resolution
-  time can be used in timing attacks and fingerprinting.
-- **--allow-net=\<IP/HOSTNAME\>** Allow network access. You can specify an
-  optional, comma-separated list of IP addresses or hostnames (optionally with
-  ports) to provide an allow-list of allowed network addresses.
-- **--allow-ffi=\<PATH\>** Allow loading of dynamic libraries. You can specify
-  an optional, comma-separated list of directories or files to provide an
-  allow-list of allowed dynamic libraries to load. Be aware that dynamic
-  libraries are not run in a sandbox and therefore do not have the same security
-  restrictions as the Deno process. Therefore, use with caution. Please note
-  that --allow-ffi is an unstable feature.
-- **--allow-read=\<PATH\>** Allow file system read access. You can specify an
-  optional, comma-separated list of directories or files to provide an
-  allow-list of allowed file system access.
-- **--allow-run=\<PROGRAM_NAME\>** Allow running subprocesses. Since Deno 1.9,
-  You can specify an optional, comma-separated list of subprocesses to provide
-  an allow-list of allowed subprocesses. Be aware that subprocesses are not run
-  in a sandbox and therefore do not have the same security restrictions as the
-  Deno process. Therefore, use with caution.
-- **--allow-write=\<PATH\>** Allow file system write access. You can specify an
-  optional, comma-separated list of directories or files to provide an
-  allow-list of allowed file system access.
-- **-A, --allow-all** Allow all permissions. This enables all security sensitive
-  functions. Use with caution.
+### Environment access
 
-Starting with Deno 1.36 following flags are available:
-
-- **--deny-env=\<VARIABLE_NAME\>** Deny environment access for things like
-  getting and setting of environment variables. You can specify an optional,
-  comma-separated list of environment variables to provide an allow-list of
-  allowed environment variables. Any environment variables specified here will
-  be denied access, even if they are specified in --allow-env.
-- **--deny-sys=\<API_NAME\>** Deny access to APIs that provide information about
-  user's operating system.
-- **--deny-hrtime** Disable high-resolution time measurement. High-resolution
-  time can be used in timing attacks and fingerprinting.
-- **--deny-net=\<IP/HOSTNAME\>** Disable network access. You can specify an
-  optional, comma-separated list of IP addresses or hostnames (optionally with
-  ports) to provide a deny-list of network addresses. Any addresses specified
-  here will be denied access, even if they are specified in --allow-net.
-- **--deny-ffi=\<PATH\>** Deny loading of dynamic libraries. You can specify an
-  optional, comma-separated list of directories or files to provide a deny-list
-  of allowed dynamic libraries to load. Any libraries specified here will be
-  denied access, even if they are specified in --allow-ffi. Please note that
-  --deny-ffi is an unstable feature.
-- **--deny-read=\<PATH\>** Deny file system read access. You can specify an
-  optional, comma-separated list of directories or files to provide a deny-list
-  of allowed file system access. Any paths specified here will be denied access,
-  even if they are specified in --allow-read.
-- **--deny-run=\<PROGRAM_NAME\>** Deny running subprocesses. You can specify an
-  optional, comma-separated list of subprocesses to provide a deny-list of
-  allowed subprocesses. Be aware that subprocesses are not run in a sandbox and
-  therefore do not have the same security restrictions as the Deno process.
-  Therefore, use with caution. Any programs specified here will be denied
-  access, even if they are specified in --allow-run.
-- **--deny-write=\<PATH\>** Deny file system write access. You can specify an
-  optional, comma-separated list of directories or files to provide a deny-list
-  of allowed file system access. Any paths specified here will be denied access,
-  even if they are specified in --allow-write.
-
-## Configurable permissions
-
-Some permissions allow you to grant access to a specific list of entities
-(files, servers, etc) rather than to everything.
-
-### File system access
-
-This example restricts file system access by allowing read-only access to the
-`/usr` directory. In consequence the execution fails as the process was
-attempting to read a file in the `/etc` directory:
-
-```shell
-$ deno run --allow-read=/usr https://deno.land/std@0.198.0/examples/cat.ts /etc/passwd
-error: Uncaught PermissionDenied: read access to "/etc/passwd", run again with the --allow-read flag
-► $deno$/dispatch_json.ts:40:11
-    at DenoError ($deno$/errors.ts:20:5)
-    ...
-```
-
-Try it out again with the correct permissions by allowing access to `/etc`
-instead:
-
-```shell
-deno run --allow-read=/etc https://deno.land/std@0.198.0/examples/cat.ts /etc/passwd
-```
-
-You can further restrict some sub-paths to not be accessible, using
-`--deny-read` flag:
-
-```shell
-deno run --allow-read=/etc --deny-read=/etc/hosts https://deno.land/std@0.198.0/examples/cat.ts /etc/passwd
-deno run --allow-read=/etc --deny-read=/etc/hosts https://deno.land/std@0.198.0/examples/cat.ts /etc/hosts
-error: Uncaught PermissionDenied: read access to "/etc/hosts"...
-```
-
-`--allow-write` works the same as `--allow-read`.
-
-> Note for Windows users: the `/etc` and `/usr` directories and the
-> `/etc/passwd` file do not exist on Windows. If you want to run this example
-> yourself, replace `/etc/passwd` with `C:\Windows\System32\Drivers\etc\hosts`,
-> and `/usr` with `C:\Users`.
-
-### Network access
-
-```js
-// fetch.js
-const result = await fetch("https://deno.land/");
-```
-
-This is an example of how to allow network access to specific hostnames or IP
-addresses, optionally locked to a specified port:
-
-```shell
-# Multiple hostnames, all ports allowed
-deno run --allow-net=github.com,deno.land fetch.js
-
-# A hostname at port 80:
-deno run --allow-net=deno.land:80 fetch.js
-
-# An IPv4 address on port 443
-deno run --allow-net=1.1.1.1:443 fetch.js
-
-# An IPv6 address, all ports allowed
-deno run --allow-net=[2606:4700:4700::1111] fetch.js
-```
-
-You can restrict certain domains to never be accessible by using the
-`--deny-net` flag:
-
-```shell
-# Allow to make network connections to all addresses except myserver.com.
-deno run --allow-net --deny-net=myserver.com fetch.js
-```
-
-If `fetch.js` tries to establish network connections to any hostname or IP not
-explicitly allowed, the relevant call will throw an exception.
-
-Allow net calls to any hostname/IP:
-
-```shell
-deno run --allow-net fetch.js
-```
-
-### Environment variables
-
-```js
-// env.js
-Deno.env.get("HOME");
-```
-
-This is an example of how to allow access to environment variables:
-
-```shell
-# Allow all environment variables
-deno run --allow-env env.js
-
-# Allow access to only the HOME env var
-deno run --allow-env=HOME env.js
-```
+Allow or deny environment access for things like getting and setting of
+environment variables. You can specify an optional, comma-separated list of
+environment variables to provide an allow-list of allowed environment variables
+or a deny-list of environment variables.
 
 > Note for Windows users: environment variables are case insensitive on Windows,
 > so Deno also matches them case insensitively (on Windows only).
 
-You can restrict certain env vars to never be accessible by using the
-`--deny-env` flag:
+Definition: `--allow-env[=<VARIABLE_NAME>...]`
 
-```shell
-# Allow all environment variables except AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
-deno run --allow-env --deny-env=AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY env.js
+```sh
+# Allow access to all environment variables
+deno run --allow-env script.ts
+# Allow HOME and FOO environment variable
+deno run --allow-env=HOME,FOO script.ts
 ```
 
-### Subprocess permissions
+Definition: `--deny-env[=<VARIABLE_NAME>...]`
 
-Subprocesses are very powerful, and can be a little scary: they access system
-resources regardless of the permissions you granted to the Deno process that
-spawns them. The `cat` program on unix systems can be used to read files from
-disk. If you start this program through the `Deno.run` API it will be able to
-read files from disk even if the parent Deno process can not read the files
-directly. This is often referred to as privilege escalation.
+```sh
+# Deny access to all environment variables
+deno run --deny-env script.ts
+# Deny access to HOME and FOO environment variable
+deno run --deny-env=HOME,FOO script.ts
+```
+
+_Any environment variables specified in `--deny-env[=<VARIABLE_NAME>...]` will
+be denied access, even if they are specified in `--allow-env`._
+
+```sh
+# Allow all environment variables except AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
+deno run --allow-env --deny-env=AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY script.ts
+```
+
+### FFI (Foreign Function Interface)
+
+🚧 This is an unstable feature
+
+Allow or deny loading of dynamic libraries. You can specify an optional,
+comma-separated list of directories or files to provide an allow-list of allowed
+dynamic libraries to load or a deny-list of libraries to deny loading.
+
+_Dynamic libraries are not run in a sandbox and therefore do not have the same
+security restrictions as the Deno process. Therefore, use with caution._
+
+Definition: `--allow-ffi[=<PATH>...]`
+
+```sh
+# Allow loading dynamic libraries
+deno run --allow-ffi script.ts
+# Allow loading dynamic libraries from a specific path
+deno run --allow-ffi=./libfoo.so script.ts
+```
+
+Definition: `--deny-ffi[=<PATH>...]`
+
+```sh
+# Deny loading dynamic libraries
+deno run --deny-ffi script.ts
+# Deny loading dynamic libraries from a specific path
+deno run --deny-ffi=./libfoo.so script.ts
+```
+
+_Any libraries specified with `--deny-ffi[=<PATH>...]` will be denied access,
+even if they are specified in `--allow-ffi`._
+
+### High Resolution Time
+
+Allow orr deny high resolution time (nanosecond precision time measurement). Can
+be used in timing attacks and fingerprinting.
+
+Definition: `--allow-hrtime`
+
+```sh
+# Allow high resolution time measurement
+deno run --allow-hrtime script.ts
+```
+
+Definition: `--deny-hrtime`
+
+```sh
+# Deny high resolution time measurement
+deno run --deny-hrtime script.ts
+```
+
+### Network access
+
+Allow or deny network access. You can specify an optional, comma-separated list
+of IP addresses or hostnames (optionally with ports) to provide an allow-list of
+allowed network addresses or a deny-list of denied network addresses.
+
+Definition: `--allow-net[=<IP_OR_HOSTNAME>...]`
+
+```sh
+# Allow network access
+deno run --allow-net script.ts
+# Allow network access to github.com and jsr.io
+deno run --allow-net=github.com,jsr.io script.ts
+# A hostname at port 80:
+deno run --allow-net=example.com:80 script.ts
+# An IPv4 address on port 443
+deno run --allow-net=1.1.1.1:443 script.ts
+# An IPv6 address, all ports allowed
+deno run --allow-net=[2606:4700:4700::1111] script.ts
+```
+
+Definition: `--deny-net[=<IP_OR_HOSTNAME>...]`
+
+```sh
+# Deny network access
+deno run --deny-net script.ts
+# Deny network access to github.com and jsr.io
+deno run --deny-net=github.com,jsr.io script.ts
+```
+
+_Any addresses specified in the deny-list will be denied access, even if they
+are specified in `--allow-net`._
+
+### File System Read Access
+
+Allow or deny file system read access. You can specify an optional,
+comma-separated list of directories or files to provide an allow-list of allowed
+file system access or a deny-list of denied file system access respectively.
+
+Definition: `--allow-read[=<PATH>...]`
+
+```sh
+# Allow all reads from file system
+deno run --allow-read script.ts
+# Allow reads from file foo.txt and bar.txt only
+deno run --allow-read=foo.txt,bar.txt script.ts
+```
+
+Definition: `--deny-read[=<PATH>...]`
+
+```sh
+# Deny reads from file system
+deno run --deny-read script.ts
+# Deny reads from file foo.txt and bar.txt only
+deno run --deny-read=foo.txt,bar.txt script.ts
+```
+
+_Any paths specified in the deny-list will be denied access, even if they are
+specified in `--allow-read`._
+
+```sh
+# Allow reading files in /etc but disallow reading /etc/hosts
+deno run --allow-read=/etc --deny-read=/etc/hosts script.ts
+```
+
+### Running Subprocesses
+
+Allow or deny running subprocesses. You can specify an optional, comma-separated
+list of subprocesses to provide an allow-list of allowed subprocesses or a
+deny-list of denied subprocesses.
+
+Any subprocesses you spawn in you program runs independently of the permission
+you granted to the parent process. This means the child processes can access
+system resources regardless of the permissions you granted to the Deno process
+that spawned it. This is often referred to as privilege escalation.
 
 Because of this, make sure you carefully consider if you want to grant a program
 `--allow-run` access: it essentially invalidates the Deno security sandbox. If
@@ -231,27 +203,100 @@ you really need to spawn a specific executable, you can reduce the risk by
 limiting which programs a Deno process can start by passing specific executable
 names to the `--allow-run` flag.
 
-```js
-// run.js
-const proc = Deno.run({ cmd: ["whoami"] });
+Definition: `--allow-run[=<PROGRAM_NAME>...]`
+
+```sh
+# Allow running subprocesses
+deno run --allow-run script.ts
+# Allow running "whoami" and "ps" subprocesses
+deno run --allow-run="whoami,ps" script.ts
 ```
 
-```shell
-# Allow only spawning a `whoami` subprocess:
-deno run --allow-run=whoami run.js
+Definition: `--deny-run[=<PROGRAM_NAME>...]`
 
-# Allow running any subprocess:
-deno run --allow-run run.js
+```sh
+# Deny running subprocesses
+deno run --deny-run script.ts
+# Deny running "whoami" and "ps" subprocesses
+deno run --deny-run="whoami,ps" script.ts
 ```
 
-You can only limit the executables that are allowed; if permission is granted to
-execute it then any parameters can be passed. For example if you pass
-`--allow-run=cat` then the user can use `cat` to read any file.
+_Any programs specified with `--deny-run[=<PROGRAM_NAME>...]` will be denied
+access, even if they are specified in `--allow-run`._
 
-You can restrict certain executables to never be accessible by using the
-`--deny-run` flag:
+### System Information
 
-```shell
-# Disallow spawning `git`.
-deno run --allow-run --deny-run=git run.js
+Allow or deny access to APIs that provide information about user's operating
+system, eg. `Deno.osRelease()` and `Deno.systemMemoryInfo()`. You can specify a
+comma-separated list of allowed interfaces from the following list: `hostname`,
+`osRelease`, `osUptime`, `loadavg`, `networkInterfaces`, `systemMemoryInfo`,
+`uid`, and `gid`. These strings map to functions in the `Deno` namespace that
+provide OS info, like
+[Deno.systemMemoryInfo](https://docs.deno.com/api/deno/~/Deno.SystemMemoryInfo).
+
+Definition: `--allow-sys[=<API_NAME>...]`
+
+```sh
+# Allow all system information APIs
+deno run --allow-sys script.ts
+# Allow systemMemoryInfo and osRelease APIs
+deno run --allow-sys="systemMemoryInfo,osRelease" script.ts
+```
+
+Definition: `--deny-sys[=<API_NAME>...]`
+
+```sh
+# Deny all system information APIs
+deno run --deny-sys script.ts
+# Deny systemMemoryInfo and osRelease APIs
+deno run --deny-sys="systemMemoryInfo,osRelease" script.ts
+```
+
+### File System Write Access
+
+Allow or deny file system write access. You can specify an optional,
+comma-separated list of directories or files to provide an allow-list of allowed
+file system access or a deny-list of denied file system access respectively.
+
+Definition: `--allow-write[=<PATH>...]`
+
+```sh
+# Allow all writes to file system
+deno run --allow-write script.ts
+# Allow writes to file foo.txt and bar.txt only
+deno run --allow-write=foo.txt,bar.txt script.ts
+```
+
+Definition: `--deny-write[=<PATH>...]`
+
+```sh
+deno run --deny-write script.ts
+# Deny writes to file foo.txt and bar.txt only
+deno run --deny-write=foo.txt,bar.txt script.ts
+```
+
+_Any paths specified with `--deny-write[=<PATH>...]` will be denied access, even
+if they are specified in `--allow-write`.
+
+### Certification errors
+
+Disables verification of TLS certificates. This is a dangerous flag, use it with
+caution.
+
+Definition: `--unsafely-ignore-certificate-errors[=<HOSTNAMES>...]`
+
+```sh
+deno run --unsafely-ignore-certificate-errors script.ts
+```
+
+### All Permissions
+
+Allow all permissions. This enables all security sensitive functions. Use with
+caution.
+
+Definition: `-A, --allow-all`
+
+```sh
+deno run -A script.s
+deno run --allow-all scrip
 ```

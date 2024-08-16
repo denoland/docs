@@ -52,15 +52,15 @@ into the REPL. This is useful for importing some code you commonly use in the
 REPL, or modifying the runtime in some way:
 
 ```console
-$ deno repl --allow-net --eval 'import { assert } from "https://deno.land/std/assert/mod.ts"'
-Deno 1.36.0
+$ deno repl --allow-net --eval 'import { assert } from "jsr:@std/assert@1"'
+Deno 1.45.3
 exit using ctrl+d, ctrl+c, or close()
 > assert(true)
 undefined
 > assert(false)
 Uncaught AssertionError
-    at assert (https://deno.land/std@0.197.0/assert/assert.ts:7:11)
-    at <anonymous>:2:1
+    at assert (https://jsr.io/@std/assert/1.0.0/assert.ts:21:11)
+    at <anonymous>:1:22
 ```
 
 ## `--eval-file` flag
@@ -76,14 +76,14 @@ If `--eval` is also specified, then `--eval-file` files are run before the
 `--eval` code.
 
 ```console
-$ deno repl --eval-file=https://examples.deno.land/hello-world.ts,https://deno.land/std/encoding/ascii85.ts
-Download https://examples.deno.land/hello-world.ts
-Hello, World!
-Download https://deno.land/std/encoding/ascii85.ts
-Deno 1.20.5
+$ deno repl --eval-file=https://docs.deno.com/examples/welcome.ts,https://docs.deno.com/examples/local.ts
+Download https://docs.deno.com/examples/welcome.ts
+Welcome to Deno!
+Download https://docs.deno.com/examples/local.ts
+Deno 1.45.3
 exit using ctrl+d or close()
-> rfc1924 // local (not exported) variable defined in ascii85.ts
-"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~"
+> local // this variable is defined locally in local.ts, but not exported
+"This is a local variable inside of local.ts"
 ```
 
 ### Relative Import Path Resolution
@@ -95,15 +95,10 @@ This can cause "Module not found" errors when `--eval-file` is used with module
 files:
 
 ```console
-$ deno repl --eval-file=https://deno.land/std/hash/md5.ts
-error in --eval-file file https://deno.land/std/hash/md5.ts. Uncaught TypeError: Module not found "file:///home/encoding/hex.ts".
+$ deno repl --eval-file=https://jsr.io/@std/encoding/1.0.0/ascii85.ts
+error in --eval-file file https://jsr.io/@std/encoding/1.0.0/ascii85.ts. Uncaught TypeError: Module not found "file:///home/_validate_binary_like.ts".
     at async <anonymous>:2:13
-Deno 1.20.5
-exit using ctrl+d or close()
-> close()
-$ deno repl --eval-file=https://deno.land/std/encoding/hex.ts
-Download https://deno.land/std/encoding/hex.ts
-Deno 1.20.5
+Deno 1.45.3
 exit using ctrl+d or close()
 >
 ```
@@ -115,7 +110,7 @@ Tab completions are crucial feature for quick navigation in REPL. After hitting
 
 ```console
 $ deno repl
-Deno 1.14.3
+Deno 1.45.3
 exit using ctrl+d or close()
 > Deno.read
 readTextFile      readFile          readDirSync       readLinkSync      readAll           read

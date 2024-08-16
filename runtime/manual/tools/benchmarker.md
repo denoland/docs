@@ -100,8 +100,6 @@ you want to measure. Everything outside of the section between these two calls
 will be excluded from the measurement.
 
 ```ts
-import { readAll } from "https://deno.land/std@0.224.0/io/read_all.ts";
-
 Deno.bench("foo", async (b) => {
   // Open a file that we will act upon.
   const file = await Deno.open("a_big_data_file.txt");
@@ -111,7 +109,7 @@ Deno.bench("foo", async (b) => {
   b.start();
 
   // Now let's measure how long it takes to read all of the data from the file.
-  await readAll(file);
+  await new Response(file.readable).arrayBuffer();
 
   // End measurement here.
   b.end();

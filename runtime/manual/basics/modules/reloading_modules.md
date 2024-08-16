@@ -5,34 +5,20 @@ oldUrl:
   - /runtime/manual/linkingtoexternal_code
 ---
 
-By default, a module in the cache will be reused without fetching or
-re-compiling it. Sometimes this is not desirable and you can force deno to
-refetch and recompile modules into the cache. You can invalidate your local
-`DENO_DIR` cache using the `--reload` flag of the `deno cache` subcommand. It's
-usage is described below:
+By default, Deno uses a global cache directory (`DENO_DIR`) for downloaded
+dependencies. This cache is shared across all projects.
 
-## To reload everything
+You can force deno to refetch and recompile modules into the cache using the
+`--reload` flag of the `deno cache` or `deno run` subcommand.
 
 ```bash
+# Reload everything
 deno cache --reload my_module.ts
+# Reload a specific module
+deno cache --reload=jsr:@std/fs my_module.ts
 ```
 
-## To reload specific modules
+## Vendoring
 
-Sometimes we want to upgrade only some modules. You can control it by passing an
-argument to a `--reload` flag.
-
-<p>
-  To reload all <code>0.224.0</code> standard modules:
-</p>
-
-```bash
-deno cache --reload=https://deno.land/std@0.224.0 my_module.ts
-```
-
-To reload specific modules (in this example - colors and file system copy) use a
-comma to separate URLs.
-
-```bash
-deno cache --reload=https://deno.land/std@0.224.0/fs/copy.ts,https://deno.land/std@0.224.0/fmt/colors.ts my_module.ts
-```
+To create a cache directory per project, set `"vendor": true` in your
+`deno.json`. [Read more about vendoring](../vendoring/).

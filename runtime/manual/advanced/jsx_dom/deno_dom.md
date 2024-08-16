@@ -2,7 +2,7 @@
 title: "Using deno-dom with Deno"
 ---
 
-[deno-dom](https://deno.land/x/deno_dom) is an implementation of DOM and HTML
+[deno-dom](https://jsr.io/@b-fuze/deno-dom) is an implementation of DOM and HTML
 parser in Deno. It is implemented in Rust (via Wasm) and TypeScript. There is
 also a "native" implementation, leveraging the FFI interface.
 
@@ -21,8 +21,8 @@ structure based on it. It will then query that DOM structure, picking out the
 first heading it encounters and print out the text content of that heading:
 
 ```ts
-import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
-import { assert } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.47";
+import { assert } from "jsr:@std/assert@1";
 
 const document = new DOMParser().parseFromString(
   `<!DOCTYPE html>
@@ -53,7 +53,7 @@ console.log(h1.textContent);
 > Note: the example uses an unpinned version from `deno_land/x`, which you
 > likely don't want to do, because the version can change and cause unexpected
 > outcomes. You should use the latest version of available of
-> [deno-dom](https://deno.land/x/deno_dom).
+> [deno-dom](https://jsr.io/@b-fuze/deno-dom).
 
 ## Faster startup
 
@@ -67,10 +67,7 @@ library that does not automatically init the Wasm, and requires you to do it in
 the code:
 
 ```ts
-import {
-  DOMParser,
-  initParser,
-} from "https://deno.land/x/deno_dom/deno-dom-wasm-noinit.ts";
+import { DOMParser, initParser } from "jsr:@b-fuze/deno-dom/wasm-noinit";
 
 (async () => {
   // initialize when you need it, but not at the top level
@@ -83,6 +80,7 @@ import {
 })();
 ```
 
-In addition, using the `deno-dom-native.ts` (which requires the `--allow-ffi`
-flag) will bypass the Wasm startup penalty as well as will not require the
-`init()` startup time. This would only work with the Deno CLI and not Deploy.
+In addition, using the `wasm-noinit` package entry (which requires the
+`--allow-ffi` flag) will bypass the Wasm startup penalty as well as will not
+require the `init()` startup time. This would only work with the Deno CLI and
+not Deploy.

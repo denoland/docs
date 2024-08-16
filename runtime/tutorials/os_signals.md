@@ -8,9 +8,9 @@ oldUrl:
 
 ## Concepts
 
-- [Deno.addSignalListener()](https://deno.land/api?s=Deno.addSignalListener) can
-  be used to capture and monitor OS signals.
-- [Deno.removeSignalListener()](https://deno.land/api?s=Deno.removeSignalListener)
+- [Deno.addSignalListener()](https://docs.deno.com/api/deno/~/Deno.addSignalListener)
+  can be used to capture and monitor OS signals.
+- [Deno.removeSignalListener()](https://docs.deno.com/api/deno/~/Deno.removeSignalListener)
   can be used to stop watching the signal.
 
 ## Set up an OS signal listener

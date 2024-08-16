@@ -128,7 +128,7 @@ and the region the bucket is in. Then click "Save".
 />
 
 The backup will start immediately. Once the data has been backed up, and
-continous backup is active, you will see the status change to "Active".
+continuous backup is active, you will see the status change to "Active".
 
 ## Configuring backup to Google Cloud Storage
 
@@ -215,7 +215,7 @@ Cloud Storage". Enter the bucket name, access key ID, and secret access key you
 created earlier, and the region the bucket is in. Then click "Save".
 
 The backup will start immediately. Once the data has been backed up, and
-continous backup is active, you will see the status change to "Active".
+continuous backup is active, you will see the status change to "Active".
 
 ## Using backups
 

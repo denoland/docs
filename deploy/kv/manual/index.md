@@ -9,10 +9,10 @@ oldUrl:
 **Deno KV** is a
 [key-value database](https://en.wikipedia.org/wiki/Key%E2%80%93value_database)
 built directly into the Deno runtime, available in the
-[`Deno.Kv` namespace](https://deno.land/api?unstable&s=Deno.Kv). It can be used
+[`Deno.Kv` namespace](https://docs.deno.com/api/deno/~/Deno.Kv). It can be used
 for many kinds of data storage use cases, but excels at storing simple data
 structures that benefit from very fast reads and writes. Deno KV is available in
-the Deno CLI and on [Deno Deploy](./on_deploy.mdx).
+the Deno CLI and on [Deno Deploy](./on_deploy).
 
 <deno-admonition></deno-admonition>
 
@@ -21,8 +21,8 @@ Let's walk through the key features of Deno KV.
 ## Opening a database
 
 In your Deno program, you can get a reference to a KV database using
-[`Deno.openKv()`](https://deno.land/api?unstable=&s=Deno.openKv). You may pass
-in an optional file system path to where you'd like to store your database,
+[`Deno.openKv()`](https://docs.deno.com/api/deno/~/Deno.openKv). You may pass in
+an optional file system path to where you'd like to store your database,
 otherwise one will be created for you based on the current working directory of
 your script.
 
@@ -35,11 +35,11 @@ const kv = await Deno.openKv();
 Data in Deno KV is stored as key-value pairs, much like properties of a
 JavaScript object literal or a
 [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map).
-[Keys](./key_space.mdx) are represented as an array of JavaScript types, like
+[Keys](./key_space) are represented as an array of JavaScript types, like
 `string`, `number`, `bigint`, or `boolean`. Values can be arbitrary JavaScript
 objects. In this example, we create a key-value pair representing a user's UI
 preferences, and save it with
-[`kv.set()`](https://deno.land/api?s=Deno.Kv&unstable=&p=prototype.set).
+[`kv.set()`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.set).
 
 ```ts
 const kv = await Deno.openKv();
@@ -54,7 +54,7 @@ const result = await kv.set(["preferences", "ada"], prefs);
 ```
 
 Once a key-value pair is set, you can read it from the database with
-[`kv.get()`](https://deno.land/api?s=Deno.Kv&unstable=&p=prototype.get):
+[`kv.get()`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.get):
 
 ```ts
 const entry = await kv.get(["preferences", "ada"]);
@@ -63,8 +63,8 @@ console.log(entry.value);
 console.log(entry.versionstamp);
 ```
 
-Both `get` and `list` [operations](./operations.mdx) return a
-[KvEntry](https://deno.land/api?s=Deno.KvEntry&unstable=) object with the
+Both `get` and `list` [operations](./operations) return a
+[KvEntry](https://docs.deno.com/api/deno/~/Deno.KvEntry) object with the
 following properties:
 
 - `key` - the array key you used to set the value
@@ -79,7 +79,7 @@ new generated value.
 ## Listing several key-value pairs
 
 To get values for a finite number of keys, you may use
-[`kv.getMany()`](https://deno.land/api?s=Deno.Kv&unstable=&p=prototype.getMany).
+[`kv.getMany()`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.getMany).
 Pass in several keys as arguments, and you'll receive an array of values for
 each key. Note that **values and versionstamps can be `null`** if no value
 exists for the given key(s).
@@ -100,9 +100,8 @@ result[1].versionstamp; // null
 
 Often, it is useful to retrieve a list of key-value pairs from all keys that
 share a given prefix. This type of operation is possible using
-[`kv.list()`](https://deno.land/api?s=Deno.Kv&unstable=&p=prototype.list). In
-this example, we get a list of key-value pairs that share the `"preferences"`
-prefix.
+[`kv.list()`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.list). In this
+example, we get a list of key-value pairs that share the `"preferences"` prefix.
 
 ```ts
 const kv = await Deno.openKv();
@@ -124,16 +123,16 @@ key after the prefix. So KV pairs with these keys:
 Will be returned in that order by `kv.list()`.
 
 Read operations can either be performed in
-[**strong or eventual consistency mode**](./operations.mdx). Strong consistency
-mode guarantees that the read operation will return the most recently written
-value. Eventual consistency mode may return a stale value, but is faster. By
-contrast, writes are always performed in strong consistency mode.
+[**strong or eventual consistency mode**](./operations). Strong consistency mode
+guarantees that the read operation will return the most recently written value.
+Eventual consistency mode may return a stale value, but is faster. By contrast,
+writes are always performed in strong consistency mode.
 
 ## Deleting key-value pairs
 
 You can delete a key from the database using
-[`kv.delete()`](https://deno.land/api?s=Deno.Kv&unstable=&p=prototype.delete).
-No action is taken if no value is found for the given key.
+[`kv.delete()`](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.delete). No
+action is taken if no value is found for the given key.
 
 ```ts
 const kv = await Deno.openKv();
@@ -142,7 +141,7 @@ await kv.delete(["preferences", "alan"]);
 
 ## Atomic transactions
 
-Deno KV is capable of executing [atomic transactions](./transactions.mdx), which
+Deno KV is capable of executing [atomic transactions](./transactions), which
 enables you to conditionally execute one or many data manipulation operations at
 once. In the following example, we create a new preferences object only if it
 hasn't been created already.
@@ -168,15 +167,15 @@ if (res.ok) {
 }
 ```
 
-Learn more about transactions in Deno KV [here](./transactions.mdx).
+Learn more about transactions in Deno KV [here](./transactions).
 
 ## Improve querying with secondary indexes
 
-[Secondary indexes](./secondary_indexes.mdx) store the same data by multiple
-keys, allowing for simpler queries of the data you need. Let's say that we need
-to be able to access user preferences by both username AND email. To enable
-this, you could provide a function that wraps the logic to save the preferences
-to create two indexes.
+[Secondary indexes](./secondary_indexes) store the same data by multiple keys,
+allowing for simpler queries of the data you need. Let's say that we need to be
+able to access user preferences by both username AND email. To enable this, you
+could provide a function that wraps the logic to save the preferences to create
+two indexes.
 
 ```ts
 const kv = await Deno.openKv();
@@ -207,8 +206,7 @@ async function getByEmail(email) {
 }
 ```
 
-Learn more about
-[secondary indexes in the manual here](./secondary_indexes.mdx).
+Learn more about [secondary indexes in the manual here](./secondary_indexes).
 
 ## Watching for updates in Deno KV
 
@@ -230,24 +228,24 @@ for await (const [messageId] of kv.watch([["last_message_id", roomId]])) {
 }
 ```
 
-Learn more about [using Deno KV watch here](./operations.mdx#watch).
+Learn more about [using Deno KV watch here](./operations#watch).
 
 ## Production usage
 
-Deno KV is available for use in live applications on
-[Deno Deploy](./on_deploy.mdx). In production, Deno KV is backed by
+Deno KV is available for use in live applications on [Deno Deploy](./on_deploy).
+In production, Deno KV is backed by
 [FoundationDB](https://www.foundationdb.org/), the open source key-value store
 created by Apple.
 
 **No additional configuration is necessary** to run your Deno programs that use
 KV on Deploy - a new Deploy database will be provisioned for you when required
-by your code. Learn more about Deno KV on Deno Deploy [here](./on_deploy.mdx).
+by your code. Learn more about Deno KV on Deno Deploy [here](./on_deploy).
 
 ## Testing
 
-By default, [`Deno.openKv()`](https://deno.land/api?unstable=&s=Deno.openKv)
+By default, [`Deno.openKv()`](https://docs.deno.com/api/deno/~/Deno.openKv)
 creates or opens a persistent store based on the path from which the script that
-invoked it was run. This isn't usually desireable for tests, which need to
+invoked it was run. This isn't usually desirable for tests, which need to
 produce the same behavior when run many times in a row.
 
 To test code that uses Deno KV, you can use the special argument `":memory:"` to
@@ -294,5 +292,5 @@ special database addressing modes, see
 ## Next steps
 
 At this point, you're just beginning to scratch the surface with Deno KV. Be
-sure to check out our guide on the [Deno KV key space](./key_space.mdx), and a
+sure to check out our guide on the [Deno KV key space](./key_space), and a
 collection of [tutorials and example applications](../tutorials/index.md) here.

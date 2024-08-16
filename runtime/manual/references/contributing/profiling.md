@@ -547,7 +547,7 @@ Options:
         type: size_t  default: 0
   --initial-heap-size (initial size of the heap (in Mbytes))
         type: size_t  default: 0
-  --huge-max-old-generation-size (Increase max size of the old space to 4 GB for x64 systems withthe physical memory bigger than 16 GB)
+  --huge-max-old-generation-size (Increase max size of the old space to 4 GB for x64 systems with the physical memory bigger than 16 GB)
         type: bool  default: true
   --initial-old-space-size (initial old space size (in Mbytes))
         type: size_t  default: 0

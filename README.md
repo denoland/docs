@@ -38,7 +38,7 @@ The actual content of the docs site is found mostly in these folders:
 - `runtime` - docs for the Deno CLI / runtime
 - `deploy` - docs for the Deno Deploy cloud service
 - `subhosting` - docs for Deno Subhosting
-- `by-example` - docs for the [Examples](#Examples) section
+- `examples` - docs for the [Examples](#Examples) section
 
 Most files are [markdown](https://lume.land/plugins/markdown/), but even
 markdown files are processed with [MDX](https://mdxjs.com/), which enables you
@@ -84,24 +84,6 @@ a feature or API was released in. For example - in the Node 20 docs, the
 [register function](https://nodejs.org/dist/latest-v20.x/docs/api/module.html#moduleregister)
 is marked as being added in version `20.6.0`.
 
-## Including version numbers in code and content
-
-It may occasionally be desirable to dynamically include the current Deno CLI or
-standard library version in content or code samples. We can accomplish this
-using the `replacements.json` file at the root of this repository.
-
-Any values you would like to change once, and then have appear dynamically in a
-number of generated files, should be included in `replacements.json`.
-
-In code samples (fenced with backticks), you can include a `$` character,
-followed by the replacement variable name, directly within the code sample. When
-the markdown is transformed, the current version number will be replaced within
-it.
-
-```ts
-import { copy } from "https://deno.land/std@$STD_VERSION/fs/copy.ts";
-```
-
 ## Contribution
 
 We are very grateful for any help you can offer to improve Deno's documentation!
@@ -141,7 +123,7 @@ snippets showcasing various functions of the APIs implemented in Deno.
 
 ### Adding an example
 
-To add an example, create a file in the `by-example` directory. The file name
+To add an example, create a file in the `examples` directory. The file name
 should be a short description of the example (in kebab case) and the contents
 should be the code for the example. The file should be in the `.ts` format. The
 file should start with a JSDoc style multi line comment that describes the

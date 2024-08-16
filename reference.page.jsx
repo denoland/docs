@@ -26,9 +26,15 @@ export default function* () {
       // replace slashes for windows
       path = path.replace(/\\/g, "/");
 
+      const name = file.name.slice(0, -".html".length);
+      const [_, group, subgroup] = path.split("/");
+      const groupDisplay = group.charAt(0).toUpperCase() + group.slice(1);
+
       yield {
         url: "/api" + path,
-        title: file.name.slice(0, -".html".length),
+        title: `${groupDisplay} Reference for ${
+          name === "index" ? (subgroup || "") : name
+        }`,
         content,
       };
     }

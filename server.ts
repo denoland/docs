@@ -1,5 +1,6 @@
 import Server from "lume/core/server.ts";
 import REDIRECTS from "./_redirects.json" with { type: "json" };
+import GO_LINKS from "./go.json" with { type: "json" };
 import {
   type Event,
   formatStatus,
@@ -8,6 +9,7 @@ import {
   isRedirect,
   isServerError,
 } from "ga4";
+import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 
 const server = new Server({
   port: 8000,
@@ -15,6 +17,10 @@ const server = new Server({
 });
 
 REDIRECTS["/api/"] = "/api/deno/";
+
+for (const [name, url] of Object.entries(GO_LINKS)) {
+  REDIRECTS[`/go/${name}/`] = url;
+}
 
 const GA4_MEASUREMENT_ID = Deno.env.get("GA4_MEASUREMENT_ID");
 function ga4(
@@ -136,6 +142,7 @@ server.use(async (req, next, info) => {
     );
   }
 });
+server.use(apiDocumentContentTypeMiddleware);
 
 server.start();
 

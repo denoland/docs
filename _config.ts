@@ -1,7 +1,6 @@
 import lume from "lume/mod.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
-import tailwindcss from "lume/plugins/tailwindcss.ts";
-import postcss from "lume/plugins/postcss.ts";
+import tailwindcss from "./plugins/tailwind.ts";
 import prism from "lume/plugins/prism.ts";
 import search from "lume/plugins/search.ts";
 import esbuild from "lume/plugins/esbuild.ts";
@@ -12,6 +11,8 @@ import tailwindConfig from "./tailwind.config.js";
 
 import "npm:prismjs@1.29.0/components/prism-typescript.js";
 import "npm:prismjs@1.29.0/components/prism-diff.js";
+import "npm:prismjs@1.29.0/components/prism-json.js";
+import "npm:prismjs@1.29.0/components/prism-bash.js";
 
 import { full as emoji } from "npm:markdown-it-emoji@3";
 import anchor from "npm:markdown-it-anchor@9";
@@ -30,10 +31,16 @@ import {
   generateDocumentsForSymbols,
   OramaDocument,
 } from "./orama.ts";
+import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 
 const site = lume({
   location: new URL("https://docs.deno.com"),
   caseSensitiveUrls: true,
+  server: {
+    middlewares: [
+      apiDocumentContentTypeMiddleware,
+    ],
+  },
 }, {
   markdown: {
     plugins: [
@@ -65,21 +72,26 @@ site.copy("static", ".");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
 site.copy("deploy/kv/manual/images");
+site.copy("deploy/tutorials/images");
 site.copy("deploy/kv/tutorials/images");
 site.copy("runtime/manual/images");
+site.copy("deploy/manual/images");
 site.copy("deno.json");
+site.copy("go.json");
 site.copy("server.ts");
+site.copy("middleware.ts");
+site.copy("examples");
 
 site.use(redirects({
   output: "json",
 }));
 site.use(search());
 site.use(jsx());
+
+// Custom plugin that for tailwind + postcss combined
 site.use(tailwindcss({
   options: tailwindConfig,
-  extensions: [".tsx", ".md", ".ts"],
 }));
-site.use(postcss());
 site.use(esbuild({
   extensions: [".client.ts"],
   options: {
@@ -201,7 +213,7 @@ site.ignore(
   "README.md",
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
-  "by-example",
+  "examples",
   // "deploy",
   // "examples.page.tsx",
   // "runtime",

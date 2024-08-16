@@ -4,34 +4,16 @@ oldUrl: /runtime/manual/basics/modules/import_maps/
 ---
 
 In order for Deno to resolve a _bare specifier_ like `"react"` or `"lodash"`, it
-needs to be told where to look for it. Does `"lodash"` refer to an npm module or
-does it map to an https URL?
+needs to be told where to look for it. Does `"lodash"` refer to an module in our
+project or does it refer to a third party dependency? Deno needs to know where
+to resolve the import specifier `lodash` to.
 
 ```ts
 import lodash from "lodash";
 ```
 
-Node and npm use `package.json` and the `node_modules` folder to do this
-resolution. Deno, on the other hand, uses the
-[import map](https://github.com/WICG/import-maps) standard.
-
-To make the above `import lodash from "lodash"` work, add the following to the
-[`deno.json` configuration file](../getting_started/configuration_file.md).
-
-```json
-{
-  "imports": {
-    "lodash": "https://esm.sh/lodash@4.17.21"
-  }
-}
-```
-
-The `deno.json` file is auto-discovered and acts (among other things) as an
-import map.
-[Read more about `deno.json` here](../getting_started/configuration_file.md).
-
-This also works with npm specifiers. Instead of the above, we could have also
-written something similar in our `deno.json` configuration file:
+We can point Deno to the `lodash` package on npm, for example, by adding it to
+the `"imports"` section in `deno.json`.
 
 ```json
 {
@@ -41,33 +23,46 @@ written something similar in our `deno.json` configuration file:
 }
 ```
 
-## Example - Using the Deno Standard Library
+The `"imports"` section in `deno.json` is often referred to as an `import map`
+that is based on the
+[Import Maps Standard](https://github.com/WICG/import-maps).
 
-Running the following:
+You may have seen Node and npm use `package.json` and the `node_modules` folder
+to do similar package resolution.
 
-```bash
-deno add @std/foo
-```
+The `deno.json` file is auto-discovered and acts (among other things) as an
+import map.
+[Read more about `deno.json` here](../getting_started/configuration_file.md).
 
-Produces the following:
+Using third party modules is explained further in
+[ECMAScript Modules](./modules/).
 
-```json title="deno.json"
+## Custom path mappings
+
+The import map in `deno.json` can be used for more general path mapping of
+specifiers. You can map an exact specifiers to a third party module or a file
+directly, or you can map a part of an import specifier to a directory.
+
+```jsonc title="deno.jsonc"
 {
   "imports": {
-    "@std/foo": "jsr:@std/foo@^1.2.3"
+    // Map to an exact file
+    "foo": "./some/long/path/foo.ts",
+    // Map to a directory, usage: "bar/file.ts"
+    "bar/": "./some/folder/bar/"
   }
 }
 ```
 
-The import can then be used in your script:
+Usage:
 
-```ts title="bar.ts"
-import { bar } from "@std/foo";
-
-bar(1, 2);
+```ts
+import * as foo from "foo";
+import * as bar from "bar/file.ts";
 ```
 
-## Example - Using project root for absolute imports
+Path mapping of import specifies is commonly used in larger code bases for
+brevity.
 
 To use your project root for absolute imports:
 
@@ -86,40 +81,3 @@ import { MyUtil } from "/util.ts";
 
 This causes import specifiers starting with `/` to be resolved relative to the
 import map's URL or file path.
-
-## Overriding imports
-
-The other situation where import maps can be very useful is to override imports
-in specific modules.
-
-Let's say you want to override a Deno Standard Library package import from
-^1.2.3 to the latest in all of your imported modules, but for the
-`https://deno.land/x/example/` module you want to use files in a local `patched`
-directory. You can do this by using a scope in the import map that looks
-something like this:
-
-```json
-{
-  "imports": {
-    "@std/foo": "jsr:@std/foo@^1.2.3"
-  },
-  "scopes": {
-    "https://deno.land/x/example/": {
-      "@std/foo": "./patched/mod.ts"
-    }
-  }
-}
-```
-
-## Import Maps are for Applications
-
-It is important to note that import map configuration files are
-[only applied for Deno applications][scope], not in the various libraries that
-your application code may import. This lets you, the application author, have
-final say about what versions of libraries get included in your project.
-
-If you are developing a library, you should instead prefer to use the `deps.ts`
-pattern discussed in [Managing Dependencies].
-
-[scope]: https://github.com/WICG/import-maps#scope
-[Managing Dependencies]: ../../tutorials/manage_dependencies.md

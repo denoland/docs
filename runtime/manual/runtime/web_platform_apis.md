@@ -20,8 +20,7 @@ Here's a partial list of supported web platform APIs in Deno:
 - [Channel Messaging API](https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API)
 - [Compression Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Compression_Streams_API)
 - [Console](https://developer.mozilla.org/en-US/docs/Web/API/Console)
-- [DOM APIs](https://deno.land/api@v1.26.0#DOM_APIs)
-- [DOM `CustomEvent`, `EventTarget` and `EventListener`](#customevent-eventtarget-and-eventlistener)
+- [Event API](https://docs.deno.com/api/web/events)
 - [Encoding API](https://developer.mozilla.org/en-US/docs/Web/API/Encoding_API)
 - [Fetch API](#fetch-api)
 - [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
@@ -39,8 +38,9 @@ Here's a partial list of supported web platform APIs in Deno:
 - [Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Worker)
 - [`WebSocket`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
 
-You can find the Deno reference for these APIs [here](https://deno.land/api). To
-check if a Web Platform API is available in Deno, click on
+You can find the Deno reference for these APIs
+[here](https://docs.deno.com/api/web/). To check if a Web Platform API is
+available in Deno, click on
 [the interface on MDN](https://developer.mozilla.org/en-US/docs/Web/API#interfaces)
 and refer to
 [its Browser Compatibility table](https://developer.mozilla.org/en-US/docs/Web/API/AbortController#browser_compatibility)
@@ -125,7 +125,7 @@ Notes on fetching local files:
 - Response bodies are streamed from the Rust side, so large files are available
   in chunks, and can be cancelled.
 
-## `CustomEvent`, `EventTarget` and `EventListener`
+## `CustomEvent` and `EventTarget`
 
 ## Overview
 
@@ -147,13 +147,13 @@ You can find documentation about this API on
 ## Typings
 
 The TypeScript definitions for the implemented web APIs can be found in the
-[`lib.deno.shared_globals.d.ts`](https://github.com/denoland/deno/blob/$CLI_VERSION/cli/dts/lib.deno.shared_globals.d.ts)
+[`lib.deno.shared_globals.d.ts`](https://github.com/denoland/deno/blob/$CLI_VERSION/cli/tsc/dts/lib.deno.shared_globals.d.ts)
 and
-[`lib.deno.window.d.ts`](https://github.com/denoland/deno/blob/$CLI_VERSION/cli/dts/lib.deno.window.d.ts)
+[`lib.deno.window.d.ts`](https://github.com/denoland/deno/blob/$CLI_VERSION/cli/tsc/dts/lib.deno.window.d.ts)
 files.
 
 Definitions that are specific to workers can be found in the
-[`lib.deno.worker.d.ts`](https://github.com/denoland/deno/blob/$CLI_VERSION/cli/dts/lib.deno.worker.d.ts)
+[`lib.deno.worker.d.ts`](https://github.com/denoland/deno/blob/$CLI_VERSION/cli/tsc/dts/lib.deno.worker.d.ts)
 file.
 
 ## Deviations of other APIs from spec

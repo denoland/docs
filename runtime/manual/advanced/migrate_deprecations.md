@@ -66,7 +66,8 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.Conn.rid`
 
-Use [`Deno.Conn`](https://deno.land/api?s=Deno.Conn) instance methods instead.
+Use [`Deno.Conn`](https://docs.deno.com/api/deno/~/Deno.Conn) instance methods
+instead.
 
 ```diff
 - await Deno.read(conn.rid, buffer);
@@ -93,7 +94,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.ListenTlsOptions.certChain`
 
 Use
-[`Deno.ConnectTlsOptions.cert`](https://deno.land/api?s=Deno.ConnectTlsOptions#prop_cert)
+[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
 instead.
 
 ```diff
@@ -113,7 +114,7 @@ See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 ### `Deno.ConnectTlsOptions.certFile`
 
 Use
-[`Deno.ConnectTlsOptions.cert`](https://deno.land/api?s=Deno.ConnectTlsOptions#prop_cert)
+[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
 instead.
 
 ```diff
@@ -133,7 +134,7 @@ See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 ### `Deno.ConnectTlsOptions.privateKey`
 
 Use
-[`Deno.ConnectTlsOptions.key`](https://deno.land/api?s=Deno.ConnectTlsOptions#prop_key)
+[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_key)
 instead.
 
 ```diff
@@ -182,7 +183,7 @@ See [deno#9294](https://github.com/denoland/deno/issues/9294) for details.
 
 ### `Deno.File`
 
-Use [`Deno.FsFile`](https://deno.land/api?s=Deno.FsFile) instead.
+Use [`Deno.FsFile`](https://docs.deno.com/api/deno/~/Deno.FsFile) instead.
 
 ```diff
 - function foo(file: Deno.File) {
@@ -195,7 +196,8 @@ See [deno#13661](https://github.com/denoland/deno/issues/13661) for details.
 
 ### `Deno.flock()`
 
-Use [`Deno.FsFile.lock()`](https://deno.land/api?s=Deno.FsFile&p=prototype.lock)
+Use
+[`Deno.FsFile.lock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lock)
 instead.
 
 ```diff
@@ -208,7 +210,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### `Deno.flockSync()`
 
 Use
-[`Deno.FsFile.lockSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.lockSync)
+[`Deno.FsFile.lockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lockSync)
 instead.
 
 ```diff
@@ -221,7 +223,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### `Deno.fstatSync()`
 
 Use
-[`Deno.FsFile.statSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.statSync)
+[`Deno.FsFile.statSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.statSync)
 instead.
 
 ```diff
@@ -233,7 +235,8 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.fstat()`
 
-Use [`Deno.FsFile.stat()`](https://deno.land/api?s=Deno.FsFile&p=prototype.stat)
+Use
+[`Deno.FsFile.stat()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.stat)
 instead.
 
 ```diff
@@ -245,8 +248,8 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.FsWatcher.rid`
 
-Use [`Deno.FsWatcher`](https://deno.land/api?s=Deno.FsWatcher) instance methods
-instead.
+Use [`Deno.FsWatcher`](https://docs.deno.com/api/deno/~/Deno.FsWatcher) instance
+methods instead.
 
 ```diff
 - Deno.close(watcher.rid);
@@ -258,7 +261,7 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.ftruncateSync()`
 
 Use
-[`Deno.FsFile.truncateSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.truncateSync)
+[`Deno.FsFile.truncateSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncateSync)
 instead.
 
 ```diff
@@ -271,7 +274,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.ftruncate()`
 
 Use
-[`Deno.FsFile.truncate()`](https://deno.land/api?s=Deno.FsFile&p=prototype.truncate)
+[`Deno.FsFile.truncate()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncate)
 instead.
 
 ```diff
@@ -284,7 +287,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.funlock()`
 
 Use
-[`Deno.FsFile.unlock()`](https://deno.land/api?s=Deno.FsFile&p=prototype.unlock)
+[`Deno.FsFile.unlock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlock)
 instead.
 
 ```diff
@@ -297,7 +300,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### `Deno.funlockSync()`
 
 Use
-[`Deno.FsFile.unlockSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.unlockSync)
+[`Deno.FsFile.unlockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlockSync)
 instead.
 
 ```diff
@@ -310,7 +313,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### `Deno.futimeSync()`
 
 Use
-[`Deno.FsFile.utimeSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.utimeSync)
+[`Deno.FsFile.utimeSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utimeSync)
 instead.
 
 ```diff
@@ -323,7 +326,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.futime()`
 
 Use
-[`Deno.FsFile.utime()`](https://deno.land/api?s=Deno.FsFile&p=prototype.utime)
+[`Deno.FsFile.utime()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utime)
 instead.
 
 ```diff
@@ -396,8 +399,8 @@ See [deno#9795][deno#9795] for details.
 
 ### `Deno.Listener.rid`
 
-Use [`Deno.Listener`](https://deno.land/api?s=Deno.Listener) instance methods
-instead.
+Use [`Deno.Listener`](https://docs.deno.com/api/deno/~/Deno.Listener) instance
+methods instead.
 
 ```diff
 - Deno.close(listener.rid);
@@ -409,7 +412,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### `Deno.ListenTlsOptions.certFile`
 
 Pass the certificate file contents to
-[`Deno.ListenTlsOptions.cert`](https://deno.land/api?s=Deno.ListenTlsOptions#prop_cert)
+[`Deno.ListenTlsOptions.cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
 instead.
 
 ```diff
@@ -426,7 +429,7 @@ See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 ### `Deno.ListenTlsOptions.keyFile`
 
 Pass the key file contents to
-[`Deno.ListenTlsOptions.key`](https://deno.land/api?s=Deno.ListenTlsOptions#prop_key)
+[`Deno.ListenTlsOptions.key`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_key)
 instead.
 
 ```diff
@@ -538,7 +541,8 @@ See [deno#9795][deno#9795] for details.
 
 ### `Deno.run()`
 
-Use [`new Deno.Command()`](https://deno.land/api?s=Deno.Command) instead.
+Use [`new Deno.Command()`](https://docs.deno.com/api/deno/~/Deno.Command)
+instead.
 
 ```diff
 - const process = Deno.run({ cmd: [ "echo", "hello world" ], stdout: "piped" });
@@ -560,7 +564,7 @@ See [deno#16516](https://github.com/denoland/deno/pull/16516) for details.
 ### `Deno.seekSync()`
 
 Use
-[`Deno.FsFile.seekSync()`](https://deno.land/api?s=Deno.FsFile&p=prototype.seekSync)
+[`Deno.FsFile.seekSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seekSync)
 instead.
 
 ```diff
@@ -572,7 +576,8 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.seek()`
 
-Use [`Deno.FsFile.seek()`](https://deno.land/api?s=Deno.FsFile&p=prototype.seek)
+Use
+[`Deno.FsFile.seek()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seek)
 instead.
 
 ```diff
@@ -584,7 +589,7 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.serveHttp()`
 
-Use [`Deno.serve()`](https://deno.land/api?s=Deno.serve) instead.
+Use [`Deno.serve()`](https://docs.deno.com/api/deno/~/Deno.serve) instead.
 
 ```diff
 - const conn = Deno.listen({ port: 80 });
@@ -602,7 +607,8 @@ details.
 
 ### `Deno.Server`
 
-Use [`Deno.HttpServer`](https://deno.land/api?s=Deno.HttpServer) instead.
+Use [`Deno.HttpServer`](https://docs.deno.com/api/deno/~/Deno.HttpServer)
+instead.
 
 ```diff
 - function foo(server: Deno.Server) {
@@ -616,7 +622,7 @@ See [deno#20840](https://github.com/denoland/deno/issues/20840) for details.
 ### `Deno.shutdown`
 
 Use
-[`Deno.Conn.closeWrite()`](https://deno.land/api?s=Deno.Conn#method_closeWrite_0)
+[`Deno.Conn.closeWrite()`](https://docs.deno.com/api/deno/~/Deno.Conn#method_closeWrite_0)
 instead.
 
 ```diff
@@ -628,8 +634,8 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.stderr.rid`
 
-Use [`Deno.stderr`](https://deno.land/api?s=Deno.stderr) instance methods
-instead.
+Use [`Deno.stderr`](https://docs.deno.com/api/deno/~/Deno.stderr) instance
+methods instead.
 
 ```diff
 - await Deno.write(Deno.stderr.rid, data);
@@ -650,7 +656,8 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.stdin.rid`
 
-Use [`Deno.stdin`](https://deno.land/api?s=Deno.stdin) instance methods instead.
+Use [`Deno.stdin`](https://docs.deno.com/api/deno/~/Deno.stdin) instance methods
+instead.
 
 ```diff
 - await Deno.read(Deno.stdin.rid, buffer);
@@ -671,8 +678,8 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.stdout.rid`
 
-Use [`Deno.stdout`](https://deno.land/api?s=Deno.stdout) instance methods
-instead.
+Use [`Deno.stdout`](https://docs.deno.com/api/deno/~/Deno.stdout) instance
+methods instead.
 
 ```diff
 - await Deno.read(Deno.stdout.rid, buffer);
@@ -693,8 +700,8 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.TcpConn.rid`
 
-Use [`Deno.TcpConn`](https://deno.land/api?s=Deno.TcpConn) instance methods
-instead.
+Use [`Deno.TcpConn`](https://docs.deno.com/api/deno/~/Deno.TcpConn) instance
+methods instead.
 
 ```diff
 - await Deno.read(tcpConn.rid, buffer);
@@ -720,8 +727,8 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.TlsConn.rid`
 
-Use [`Deno.TlsConn`](https://deno.land/api?s=Deno.TlsConn) instance methods
-instead.
+Use [`Deno.TlsConn`](https://docs.deno.com/api/deno/~/Deno.TlsConn) instance
+methods instead.
 
 ```diff
 - await Deno.read(tlsConn.rid, buffer);
@@ -747,8 +754,8 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### `Deno.UnixConn.rid`
 
-Use [`Deno.UnixConn`](https://deno.land/api?s=Deno.UnixConn) instance methods
-instead.
+Use [`Deno.UnixConn`](https://docs.deno.com/api/deno/~/Deno.UnixConn) instance
+methods instead.
 
 ```diff
 - await Deno.read(unixConn.rid, buffer);
@@ -870,8 +877,8 @@ See [deno#9795][deno#9795] for details.
 
 ### `new Deno.FsFile()`
 
-Use [`Deno.openSync()`](https://deno.land/api?s=Deno.openSync) or
-[`Deno.open()`](https://deno.land/api?s=Deno.open) instead.
+Use [`Deno.openSync()`](https://docs.deno.com/api/deno/~/Deno.openSync) or
+[`Deno.open()`](https://docs.deno.com/api/deno/~/Deno.open) instead.
 
 ```diff
 - const file = new Deno.FsFile(3);

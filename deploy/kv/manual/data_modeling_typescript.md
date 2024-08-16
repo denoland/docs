@@ -80,7 +80,7 @@ console.log(ac.fullName);
 ```
 
 You can also specify an optional
-[type parameter](https://deno.land/api?s=Deno.Kv&p=prototype.get&unstable) for
+[type parameter](https://docs.deno.com/api/deno/~/Deno.Kv.prototype.get) for
 `get`:
 
 ```ts
@@ -101,8 +101,8 @@ that can operate on your DTOs.
 ## Encapsulating business logic with a service layer
 
 When your application's persistence needs become more complex - such as when you
-need to create [secondary indexes](./secondary_indexes.mdx) to query your data
-by different keys, or maintain relationships between objects - you will want to
+need to create [secondary indexes](./secondary_indexes) to query your data by
+different keys, or maintain relationships between objects - you will want to
 create a set of functions to sit on top of your DTOs to ensure that the data
 being passed around is valid (and not merely typed correctly).
 

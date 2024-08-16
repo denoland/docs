@@ -143,9 +143,9 @@ times a day, this can become a time-consuming process. A common solution to
 speed things up is to cache dependencies so that they do not need to be
 downloaded anew.
 
-[Deno stores dependencies locally in a cache directory](https://deno.land/manual/linking_to_external_code).
-In a pipeline the cache can be preserved between workflows by setting the
-`DENO_DIR` environment variable and adding a caching step to the workflow:
+Deno stores dependencies locally in a cache directory. In a pipeline the cache
+can be preserved between workflows by setting the `DENO_DIR` environment
+variable and adding a caching step to the workflow:
 
 ```yaml
 # Set DENO_DIR to an absolute or relative path on the runner.
@@ -183,10 +183,10 @@ Now, if the contents of `deno.lock` are changed, a new cache will be made and
 used in subsequent pipeline runs thereafter.
 
 To demonstrate, let's say you have a project that uses the logger from
-`deno.land/std`:
+[`@std/log`](https://jsr.io/@std/log):
 
 ```ts
-import * as log from "https://deno.land/std@0.224.0/log/mod.ts";
+import * as log from "jsr:@std/log@0.224.5";
 ```
 
 In order to increment this version, you can update the `import` statement and

@@ -1,77 +1,30 @@
 ---
 title: "Migrating from Node.js to Deno"
+oldUrl:
+  - /runtime/manual/npm_nodejs/cdns/
+  - /runtime/manual/using_deno_with_other_technologies/node/cdns/
+  - /runtime/manual/node/node_specifiers
+  - /runtime/manual/node/package_json
 ---
 
-To migrate an existing Node.js program to Deno, there are a number of
-differences to take into account between the Node and Deno runtimes. This guide
-will attempt to call out several of those differences, and describe how you can
-begin to migrate your Node.js project to work on Deno.
+Deno supports modern Node.js projects out of the box, with no changes to your
+code. Running your Node.js project with Deno is a straightforward process, the
+main points to be aware of are:
 
-:::info About Node.js Compatibility
+1. Usage of Node.js globals (like `process`, `Buffer`, etc)
+2. Imported Node.js built-in modules need the `node:` specifier (`fs` ->
+   `node:fs`)
 
-Node.js compatibility is an ongoing project in Deno - you may encounter some
-modules or packages on npm that do not work as you expect. If you do run into a
-problem with Node.js compatibility, please let us know by
-[opening an issue on GitHub](https://github.com/denoland/deno/issues).
+This guide will walk you through migrating your Node.js project to Deno and
+offer some optional suggestions of ways to optimize your codebase.
+
+:::tip
+
+If your project is written with CommonJS (i.e. `require`), you will need to
+update it to use ECMAScript modules, check out our helpful
+[CommonJS to ESM guide](./cjs_to_esm.md) to get you up and running with Deno.
 
 :::
-
-## Module imports and exports
-
-Deno supports [ECMAScript modules](../basics/modules/index.md) exclusively,
-rather than a combination of ESM and
-[CommonJS](https://nodejs.org/api/modules.html), as found in Node. If your
-Node.js code uses `require`, you should update it to use `import` statements
-instead. If your internal code uses CommonJS-style exports, those will need to
-be changed as well.
-
-Consider the following two files in a Node.js program, located in the same
-directory:
-
-```js title="index.js"
-const addNumbers = require("./add_numbers");
-console.log(addNumbers(2, 2));
-```
-
-```js title="add_numbers.js"
-module.exports = function addNumbers(num1, num2) {
-  return num1 + num2;
-};
-```
-
-Running `node index.js` with the files above works fine in Node.js 20 and
-earlier. However, this code will not run unchanged if you attempt to use
-`deno run index.js` instead. You will need to change both the code that is
-consuming the module, and how you export functionality from the `add_numbers`
-module.
-
-### Replace `require` with `import`
-
-Replace `require` statements with an `import`, like so:
-
-```js
-import addNumbers from "./add_numbers.js";
-```
-
-This statement uses the ES6 module standard, but does pretty much the same
-thing. Also, note that we **include the full file extension when importing
-modules**, much as you would in the browser. There is also no special handling
-of files named `index.js`.
-
-### Replace `module.exports` with `export default`
-
-In the `add_numbers.js` file that exports the function, we would use a default
-export from ES6 modules rather than the `module.exports` provided by CommonJS.
-
-```js title="add_numbers.js"
-export default function addNumbers(num1, num2) {
-  return num1 + num2;
-}
-```
-
-After making those two changes, this code would run successfully with
-`deno run index.js`. Learn more about
-[ES modules in Deno here](../basics/modules/index.md).
 
 ## Node.js built-ins
 
@@ -114,18 +67,7 @@ as it did in Node.js.
 
 ## Runtime permissions in Deno
 
-Deno features [runtime security by default](../basics/permissions.md), meaning
-that you as the developer must opt in to giving your code access to the
-filesystem, network, system environment, and more. Doing this prevents supply
-chain attacks and other potential vulnerabilities in your code. By comparison,
-Node.js has no concept of runtime security, with all code executed with the same
-level of permission as the user running the code.
-
-### Running your code with only the necessary flags
-
-When you run a Node.js project ported to Deno for the first time, the runtime
-will likely prompt you for access to the permissions it needs to execute your
-code. Consider the following simple [express](https://expressjs.com/) server:
+Consider the following simple [Express](https://expressjs.com/) server:
 
 ```js
 import express from "npm:express@4";
@@ -141,22 +83,102 @@ app.listen(3000, () => {
 });
 ```
 
-If you run it with `deno run server.js`, it would prompt you for a number of
-permissions required to execute the code and its dependencies. These prompts can
-show you what runtime permission flags need to be passed in to grant the access
-you need. Running the code above with the necessary permissions provided would
-look like this:
+If you run the above with `deno run server.js`, you would be prompted for
+permissions required to execute the code and its dependencies.
 
-```shell
-deno run --allow-net --allow-read --allow-env server.js
+```sh
+$ deno run server.js
+┌ ⚠️  Deno requests net access to "0.0.0.0:8000".
+├ Requested by `Deno.listen()` API.
+├ Run again with --allow-net to bypass this prompt.
+└ Allow? [y/n/A] (y = yes, allow; n = no, deny; A = allow all net permissions) >
 ```
 
-### Reusing runtime flag configuration with `deno task`
+Deno features [runtime security by default](../basics/permissions.md), meaning
+that you as the developer must opt in to giving your code access to the
+filesystem, network, system environment, and more. Doing this prevents supply
+chain attacks and other potential vulnerabilities in your code. By comparison,
+Node.js has no concept of runtime security, with all code executed with the same
+level of permission as the user running the code.
 
-A common pattern for configuring a set of runtime flags is to set up scripts to
-be run with [`deno task`](../tools/task_runner.md). The following `deno.json`
-file has a task called `dev` which will run the express server from above with
-all the necessary flags.
+To run your code like it would in Node.js, you can pass the `-A` flag to enable
+all permissions.
+
+```sh
+deno run -A server.js
+```
+
+For more granular control, you can enable access to specific features by opting
+in to [individual permissions](../basics/permissions.md).
+
+## Running scripts from `package.json`
+
+Deno supports running npm scripts natively with the
+[`deno task`](../tools/task_runner.md) subcommand. Consider the following
+Node.js project with a script called `start` inside its `package.json`:
+
+```json title="package.json"
+{
+  "name": "my-project",
+  "scripts": {
+    "start": "eslint"
+  }
+}
+```
+
+You can execute this script with Deno by running:
+
+```sh
+deno task start
+```
+
+## Node.js global objects
+
+In Node.js, there are a number of
+[global objects](https://nodejs.org/api/globals.html) available in the scope of
+all programs, like the `process` object, `Buffer`, or `__dirname` and
+`__filename`.
+
+Deno does not add additional objects and variables to the global scope, other
+than the [`Deno` global](../runtime/builtin_apis.md). Any API that doesn't exist
+as a web-standard browser API will be found in `Deno`. Alternatively, you can
+import Node.js built-in modules using the `node:` specifier.
+
+```js
+import process from "node:process";
+import { Buffer } from "node:buffer";
+
+const __filename = import.meta.filename;
+const __dirname = import.meta.dirname;
+```
+
+:::note
+
+If you do run into a problem with Node.js compatibility, please let us know by
+[opening an issue on GitHub](https://github.com/denoland/deno/issues).
+
+:::
+
+## Optional improvements with Deno's built-in tools
+
+One of Deno's core strengths is a unified toolchain that comes with support for
+TypeScript out of the box, and tools like a linter, formatter and a test runner.
+Switching to Deno allows you to simplify your toolchain and reduces the number
+of moving components in your project. Deno also has a more secure runtime, with
+[runtime permissions](../basics/permissions.md) that allow you to control what
+your code can access.
+
+### deno.json (optional)
+
+Deno has its own config file, `deno.json` or `deno.jsonc`, which can be used to
+configure your project. You can use it to define tasks, dependencies, path
+mappings, and other runtime configurations.
+
+#### Migrating npm scripts to `deno.json` (optional)
+
+If preferred, you can move your npm scripts over to `deno.json`, where they can
+be run using `deno task`. This allows you to manage all necessary permission
+flags and other runtime configuration in one place.
 
 ```json
 {
@@ -166,103 +188,117 @@ all the necessary flags.
 }
 ```
 
-You can then run the task with `deno task dev`.
-
-### Running with all permissions enabled
-
-It is possible, but not recommended in production or sensitive environments, to
-run your programs with all runtime permissions enabled. This would be the
-default behavior of Node, which lacks a permission system. To run a program with
-all permissions enabled, you can do so with:
-
-```shell
-deno run -A server.js
+```sh
+deno task dev
 ```
 
-## Running scripts from `package.json`
+#### Migrating npm dependencies to `deno.json` (optional)
 
-Many Node.js projects make use of
-[npm scripts](https://docs.npmjs.com/cli/v9/using-npm/scripts) to drive local
-development. In Deno, you can continue to use your existing npm scripts while
-migrating over time to [`deno task`](../tools/task_runner.md).
+You can also migrate your dependencies over to `deno.json`. Deno supports
+importing dependencies from external package repositories, local files, and/or
+URLs. To import your npm dependencies, you can add them to the `imports` field
+in `deno.json`, and add the `npm:` specifier to the import path:
 
-### Running npm scripts in Deno
-
-One of the ways [Deno supports existing `package.json` files](./package_json.md)
-is by executing any scripts configured there with `deno task`. Consider the
-following Node.js project with a package.json and a script configured within it.
-
-```js title="bin/my_task.mjs"
-console.log("running my task...");
-```
-
-```json title="package.json"
+```json
 {
-  "name": "test",
-  "scripts": {
-    "start": "node bin/my_task.mjs"
+  "imports": {
+    "express": "npm:express@4"
   }
 }
 ```
 
-You can execute this script with Deno by running `deno task start`.
+Deno supports multiple package registries and allows you to import dependencies
+from npm, [JSR](https://jsr.io) and HTTP URLs.
 
-## Using and managing npm dependencies
+```json
+{
+  "imports": {
+    "express": "npm:express@4",
+    "@luca/cases": "jsr:@luca/cases@1",
+    "foo": "https://example.com/foo.ts"
+  }
+}
+```
 
-Deno supports
-[managing npm dependencies through a `package.json` file](./package_json.md).
-Note that unlike using npm at the command line, you can simply run your project
-with `deno run`, and the first time your script runs, Deno will cache all the
-necessary dependencies for your application.
+### Linting (optional)
 
-Going forward, we'd recommend that you manage dependencies through
-[`deno.json`](../getting_started/configuration_file.md) instead, which supports
-other types of imports as well.
+Deno ships with a built-in linter that is written with performance in mind. Deno
+can lint large projects in just a few milliseconds. You can try it out on your
+project by running:
 
-When importing npm packages, you would use the `npm:` specifier, much like you
-would the `node:` specifier for any built-in Node modules.
+```sh
+deno lint
+```
 
-```js
-import express from "npm:express@4";
+This will lint all files in your project. When the linter detects a problem, it
+will show the line in your editor and in the terminal output. An example of what
+that might look like:
 
-const app = express();
+```sh
+error[no-constant-condition]: Use of a constant expressions as conditions is not allowed.
+ --> /my-project/bar.ts:1:5
+  | 
+1 | if (true) {
+  |     ^^^^
+  = hint: Remove the constant expression
 
-app.get("/", function (_req, res) {
-  res.send("hello");
-});
+  docs: https://lint.deno.land/rules/no-constant-condition
 
-app.listen(3000, () => {
-  console.log("Express listening on :3000");
+
+Found 1 problem
+Checked 4 files
+```
+
+Many linting issues can be fixed automatically by passing the `--fix` flag:
+
+```sh
+deno lint --fix
+```
+
+A full list of all supported linting rules can be found on
+[https://lint.deno.land/](https://lint.deno.land/). To learn more about how to
+configure the linter, check out the [`deno lint` subcommand](../tools/linter/).
+
+### Formatting (optional)
+
+Deno ships with a [built-in formatter](../tools/formatter/) that can optionally
+format your code according to the Deno style guide. You can run the formatter on
+your project by running:
+
+```sh
+deno fmt
+```
+
+If using `deno fmt` in CI, you can pass the `--check` argument to make the
+formatter exit with an error when it detects improperly formatted code.
+
+```sh
+deno fmt --check
+```
+
+The formatting rules can be configured in your `deno.json` file. To learn more
+about how to configure the formatter, check out the
+[`deno fmt` subcommand](../tools/formatter/).
+
+### Testing (optional)
+
+Deno encourages writing tests for your code, and provides a built-in test runner
+to make it easy to write and run tests. The test runner is tightly integrated
+into Deno, so that you don't have to do any additional configuration to make
+TypeScript or other features work.
+
+```ts title="my_test.ts"
+Deno.test("my test", () => {
+  // Your test code here
 });
 ```
 
-## Node.js global objects
-
-In Node.js, there are a number of
-[global objects](https://nodejs.org/api/globals.html) that are available in the
-scope of all programs, like the `process` object or `__dirname` and
-`__filename`.
-
-Deno does not add additional objects and variables to the global scope, other
-than the [`Deno` namespace](../runtime/builtin_apis.md). Any API that doesn't
-exist as a web standard browser API will be found in this namespace.
-
-The equivalent Deno expression for every Node.js built-in global object will
-vary, but it should be possible to accomplish everything you can do in Node
-using a slightly different method in Deno. For example, the
-[process.cwd()](https://nodejs.org/api/process.html#processcwd) function in
-Node.js exists in Deno as [Deno.cwd()](https://www.deno.com/api?s=Deno.cwd).
-
-### `__filename` and `__dirname`
-
-Two very common Node.js global variables in CommonJS modules are
-[`__filename`](https://nodejs.org/api/globals.html#__filename) and
-[`__dirname`](https://nodejs.org/api/globals.html#__dirname). These globals are
-[not supported](https://nodejs.org/api/esm.html#no-__filename-or-__dirname) in
-ECMAScript modules in Deno or Node.js, but there is still a way to get the same
-information in Deno Runtime APIs:
-
-```js
-const __filename = import.meta.filename;
-const __dirname = import.meta.dirname;
+```sh
+deno test
 ```
+
+When passing the `--watch` flag, the test runner will automatically reload when
+any of the imported modules change.
+
+To learn more about the test runner and how to configure it, check out the
+[`deno test` subcommand](../tools/test/) documentation.

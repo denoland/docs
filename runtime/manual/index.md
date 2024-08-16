@@ -90,7 +90,7 @@ Deno programs on [Deno Deploy](/deploy/manual). Here's how it works.
 Install the [`deployctl` command line utility](/deploy/manual/deployctl):
 
 ```sh
-deno install -Arf https://deno.land/x/deploy/deployctl.ts
+deno install -Arf jsr:@deno/deployctl
 ```
 
 Deploy your server with `deployctl`. If this is your first time using Deno
@@ -101,7 +101,7 @@ deployctl deploy --include=./server.ts --entrypoint=./server.ts
 ```
 
 In a few moments, your server should be available on a public URL, deployed
-across 30+ datacenters worldwide.
+across datacenters worldwide.
 
 </details>
 

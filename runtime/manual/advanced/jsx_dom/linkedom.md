@@ -13,17 +13,6 @@ currently deno-dom is slower than LinkeDOM in some cases, both are significantly
 faster than jsdom, so if you require correctness or features not related to
 server side rendering, consider deno-dom.
 
-While LinkeDOM works under the Deno CLI, it does not type check. While the
-provided types work well when using an editor like VSCode, attempting to
-strictly type check them, like Deno does by default, at runtime, it will fail.
-This is the same if you were to use `tsc` to type check the code. The maintainer
-has indicated they aren't interested in
-[fixing this issue](https://github.com/WebReflection/linkedom/issues/87). This
-means for Deno, you need to use the `--no-check=remote` to avoid diagnostics
-stopping the execution of your programme.
-
-LinkedDOM runs under Deno Deploy, along with deno_dom, but jsdom does not.
-
 ## Basic example
 
 This example will take a test string and parse it as HTML and generate a DOM
@@ -31,8 +20,8 @@ structure based on it. It will then query that DOM structure, picking out the
 first heading it encounters and print out the text content of that heading:
 
 ```ts
-import { DOMParser } from "https://esm.sh/linkedom";
-import { assert } from "https://deno.land/std@0.224.0/assert/mod.ts";
+import { DOMParser } from "npm:linkedom";
+import { assert } from "jsr:@std/assert@1";
 
 const document = new DOMParser().parseFromString(
   `<!DOCTYPE html>
@@ -68,7 +57,7 @@ a `window` scope you can use to access API's outside of the scope of the
 `document`. For example:
 
 ```ts
-import { parseHTML } from "https://esm.sh/linkedom";
+import { parseHTML } from "npm:linkedom";
 
 const { document, customElements, HTMLElement } = parseHTML(`<!DOCTYPE html>
   <html lang="en">

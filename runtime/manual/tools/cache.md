@@ -146,13 +146,13 @@ detected from it's imports.
 - Cache the dependencies of a module
 
 ```bash
-deno cache https://deno.land/std/http/file_server.ts
+deno cache jsr:@std/http@0.225.3/file-server
 ```
 
 - Force a cache update
 
 ```bash
-deno cache --reload https://deno.land/std/http/file_server.ts
+deno cache --reload jsr:@std/http@0.225.3/file-server
 ```
 
 - Cache a known npm module

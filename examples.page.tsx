@@ -34,7 +34,7 @@ export const sidebar = [
 ];
 
 export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
-  const files = [...walkSync("./by-example/", {
+  const files = [...walkSync("./examples/", {
     exts: [".ts"],
   })];
   const examples = files.map((file) => {
@@ -54,13 +54,12 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
     ).join("\n");
 
     const url =
-      `https://github.com/denoland/deno-docs/blob/main/by-example/${example.name}${
+      `https://github.com/denoland/deno-docs/blob/main/examples/${example.name}${
         example.parsed.files.length > 1 ? "/main" : ""
       }`;
-    const rawUrl =
-      `https://raw.githubusercontent.com/denoland/deno-docs/main/by-example/${example.name}${
-        example.parsed.files.length > 1 ? "/main" : ""
-      }`;
+    const rawUrl = `https://docs.deno.com/examples/${example.name}${
+      example.parsed.files.length > 1 ? "/main" : ""
+    }`;
 
     yield {
       url: `/examples/${example.label}/index.html`,
@@ -322,7 +321,7 @@ function SnippetComponent(props: {
         <div class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight rounded-md">
           {props.snippet.code && (
             <div class="nocopy h-full markdown-body !bg-[var(--color-canvas-subtle)]">
-              <pre class="highlight language-ts"><code dangerouslySetInnerHTML={{__html: props.snippet.code}}></code></pre>
+              <pre class="highlight language-ts"><code dangerouslySetInnerHTML={{ __html: props.snippet.code }}></code></pre>
             </div>
           )}
         </div>
@@ -409,9 +408,6 @@ export interface ExampleSnippet {
 }
 
 export function parseExample(id: string, file: string): Example {
-  // Substitute $std/ with the full import url
-  file = file.replaceAll("$std/", "https://deno.land/std@0.207.0/");
-
   // Extract the multi line JS doc comment at the top of the file
   const [, jsdoc, rest] = file.match(/^\s*\/\*\*(.*?)\*\/\s*(.*)/s) || [];
 
@@ -549,7 +545,7 @@ export function parseExample(id: string, file: string): Example {
 
   const additionalResources: [string, string][] = [];
   for (const resource of resources) {
-    // @resource {https://deno.land/std/http/server.ts} std/http/server.ts
+    // @resource {https://jsr.io/@std/http/server/~/} std/http/server
     const [_, url, title] = resource.match(/^\{(.*?)\}\s(.*)/) || [];
     if (!url || !title) {
       throw new Error(`Invalid resource: ${resource}`);

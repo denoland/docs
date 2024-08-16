@@ -43,7 +43,7 @@ Deploy.
   - `WritableStream`
   - `TransformStream`
 - [URLPattern API](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern)
-- [Import Maps](https://deno.land/manual/linking_to_external_code/import_maps)
+- [Import Maps](https://docs.deno.com/runtime/manual/basics/import_maps/)
   - Note: `import maps` are currently only available via
     [deployctl](https://github.com/denoland/deployctl) or
     [deployctl GitHub Action](https://github.com/denoland/deployctl/blob/main/action/README.md)
@@ -53,39 +53,39 @@ Deploy.
 
 > Note: only stable APIs of Deno are made available in Deploy.
 
-- [`Deno.env`](https://doc.deno.land/deno/stable/~/Deno.env) - Interact with
+- [`Deno.env`](https://docs.deno.com/api/deno/~/Deno.env) - Interact with
   environment variables (secrets).
   - `get(key: string): string | undefined` - get the value of an environment
     variable.
   - `toObject(): { [key: string]: string }` - get all environment variables as
     an object.
-- [`Deno.connect`](https://doc.deno.land/deno/stable/~/Deno.connect) - Connect
-  to TCP sockets.
-- [`Deno.connectTls`](https://doc.deno.land/deno/stable/~/Deno.connectTls) -
+- [`Deno.connect`](https://docs.deno.com/api/deno/~/Deno.connect) - Connect to
+  TCP sockets.
+- [`Deno.connectTls`](https://docs.deno.com/api/deno/~/Deno.connectTls) -
   Connect to TCP sockets using TLS.
-- [`Deno.startTls`](https://doc.deno.land/deno/stable/~/Deno.startTls) - Start
-  TLS handshake from an existing TCP connection.
-- [`Deno.resolveDns`](https://doc.deno.land/deno/stable/~/Deno.resolveDns) -
-  Make DNS queries
+- [`Deno.startTls`](https://docs.deno.com/api/deno/~/Deno.startTls) - Start TLS
+  handshake from an existing TCP connection.
+- [`Deno.resolveDns`](https://docs.deno.com/api/deno/~/Deno.resolveDns) - Make
+  DNS queries
 - File system API
-  - [`Deno.cwd`](https://doc.deno.land/deno/stable/~/Deno.cwd) - Get the current
+  - [`Deno.cwd`](https://docs.deno.com/api/deno/~/Deno.cwd) - Get the current
     working directory
-  - [`Deno.readDir`](https://doc.deno.land/deno/stable/~/Deno.readDir) - Get
+  - [`Deno.readDir`](https://docs.deno.com/api/deno/~/Deno.readDir) - Get
     directory listings
-  - [`Deno.readFile`](https://doc.deno.land/deno/stable/~/Deno.readFile) - Read
-    a file into memory
-  - [`Deno.readTextFile`](https://doc.deno.land/deno/stable/~/Deno.readTextFile) -
+  - [`Deno.readFile`](https://docs.deno.com/api/deno/~/Deno.readFile) - Read a
+    file into memory
+  - [`Deno.readTextFile`](https://docs.deno.com/api/deno/~/Deno.readTextFile) -
     Read a text file into memory
-  - [`Deno.open`](https://doc.deno.land/deno/stable/~/Deno.open) - Open a file
-    for streaming reading
-  - [`Deno.stat`](https://doc.deno.land/deno/stable/~/Deno.stat) - Get file
-    system entry information
-  - [`Deno.lstat`](https://doc.deno.land/deno/stable/~/Deno.lstat) - Get file
+  - [`Deno.open`](https://docs.deno.com/api/deno/~/Deno.open) - Open a file for
+    streaming reading
+  - [`Deno.stat`](https://docs.deno.com/api/deno/~/Deno.stat) - Get file system
+    entry information
+  - [`Deno.lstat`](https://docs.deno.com/api/deno/~/Deno.lstat) - Get file
     system entry information without following symlinks
-  - [`Deno.realPath`](https://doc.deno.land/deno/stable/~/Deno.realPath) - Get
-    the real path of a file after resolving symlinks
-  - [`Deno.readLink`](https://doc.deno.land/deno/stable/~/Deno.readLink) - Get
-    the target path for the given symlink
+  - [`Deno.realPath`](https://docs.deno.com/api/deno/~/Deno.realPath) - Get the
+    real path of a file after resolving symlinks
+  - [`Deno.readLink`](https://docs.deno.com/api/deno/~/Deno.readLink) - Get the
+    target path for the given symlink
 
 ## Future support
 

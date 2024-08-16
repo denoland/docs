@@ -26,10 +26,14 @@
   }
 
   details {
-    @apply rounded border border-offblack p-8 bg-pink-100;
+    @apply rounded border border-gray-1 py-4 px-4;
 
     &[open] summary {
-      @apply pb-4 mb-4 border-b border-offblack;
+      @apply pb-4 mb-4 border-b border-gray-00;
+    }
+
+    summary::marker {
+      @apply text-gray-2;
     }
   }
 }
@@ -104,6 +108,36 @@ body:not(:has(.ddoc)) {
   font-feature-settings: "cv05" on, "cv08" on, "cv09" on, "ss01" on, "ss08" on;
 }
 
+/* Global docs CTA button style */
+
+.docs-cta {
+  @apply border text-balance border-gray-800 text-black bg-gray-500 font-bold inline-block py-3.5 px-4 rounded-md w-max hover:text-inherit hover:no-underline transition-colors duration-200;
+}
+
+.runtime-cta {
+  @apply bg-runtime-400 border-runtime-400 hover:bg-runtime-300;
+}
+
+.deploy-cta {
+  @apply bg-deploy-500 border-deploy-500 hover:bg-deploy-400;
+}
+
+.homepage-link {
+  @apply block font-semibold underline underline-offset-4;
+}
+
+.deploy-link {
+  @apply text-deploy-600 decoration-deploy-600/20 hover:decoration-deploy-600;
+}
+
+.runtime-link {
+  @apply text-runtime-600 decoration-runtime-600/20 hover:decoration-runtime-600;
+}
+
+.help-link {
+  @apply text-purple-600 decoration-purple-600/20 hover:decoration-purple-600;
+}
+
 /* Orama search style overrides */
 .searchbutton-module_searchbutton__gg7JJ {
   @apply w-64 border-gray-00 !important;
@@ -132,6 +166,14 @@ body:not(:has(.ddoc)) {
     padding-top: 0.25rem !important;
     padding-bottom: 0.25rem !important;
   }
+}
+
+.sidebar__current-item {
+  @apply text-blue-500;
+}
+
+.sidebar__current-item::before {
+  @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em] [clip-path:polygon(0%_10%,100%_50%,0%_90%)] bg-gray-200;
 }
 
 .markdown-body .admonition a {
@@ -221,21 +263,21 @@ body:not(:has(.ddoc)) {
 
 /* Custom DDOC styles for the Deno documentation */
 .ddoc {
-  /* Categories panel */
-  > .toc {
-    @apply border-r border-gray-000;
+  @apply pt-0 !important;
 
-    .documentNavigation {
-      > h3 {
-        margin: 0.75rem 0.75rem 0.5rem !important;
-        padding-bottom: 0.1rem;
-        @apply text-gray-4 font-normal text-xs border-b border-gray-000 leading-normal uppercase !important;
+  #categoryPanel {
+    @apply border-r border-gray-000;
+    @apply pt-4 !important;
+
+    li:hover {
+      @apply bg-blue-50 rounded-md !important;
+      > a {
+        @apply no-underline !important;
       }
     }
-  }
-
-  .documentNavigation > ul > li > a {
-    @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline  py-1.5 px-3.5 !important;
+    .active {
+      @apply bg-blue-50 rounded-md !important;
+    }
   }
 
   .contextLink {
@@ -244,13 +286,17 @@ body:not(:has(.ddoc)) {
     text-decoration-color: rgba(9, 107, 218, 0.4) !important;
   }
 
-  #content .toc .documentNavigation {
+  .documentNavigation {
     > h3 {
       @apply hidden !important;
     }
 
     > ul {
       @apply border-l border-gray-000 !important;
+
+      > li > a {
+        @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline  py-1.5 px-3.5 !important;
+      }
 
       > ul > li a {
         @apply hover:bg-blue-50 rounded-lg hover:no-underline !important;
@@ -268,13 +314,7 @@ body:not(:has(.ddoc)) {
       background-color: var(--color-neutral-muted) !important;
     }
   }
-}
-
-@media (min-width: 1024px) {
-  /* no category panel, category panel but no document navigation */
-  .ddoc:not(:has(> div.toc)),
-  .ddoc:has(> div.toc) > div:not(.toc) {
-    padding-top: 0.25rem !important;
-    padding-left: 0.5rem !important;
+  .markdown_summary :not(pre) > code {
+    background-color: var(--color-neutral-muted) !important;
   }
 }

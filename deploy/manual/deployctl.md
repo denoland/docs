@@ -16,7 +16,7 @@ running the following command:
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
-You don't need to setup a Deno Deploy account beforhand. It will be created
+You don't need to setup a Deno Deploy account beforehand. It will be created
 along the way when you deploy your first project.
 
 ## Install `deployctl`

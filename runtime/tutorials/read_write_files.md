@@ -7,12 +7,13 @@ oldUrl:
 ## Concepts
 
 - Deno's runtime API provides the
-  [Deno.readTextFile](https://deno.land/api?s=Deno.readTextFile) and
-  [Deno.writeTextFile](https://deno.land/api?s=Deno.writeTextFile) asynchronous
-  functions for reading and writing entire text files.
+  [Deno.readTextFile](https://docs.deno.com/api/deno/~/Deno.readTextFile) and
+  [Deno.writeTextFile](https://docs.deno.com/api/deno/~/Deno.writeTextFile)
+  asynchronous functions for reading and writing entire text files.
 - Like many of Deno's APIs, synchronous alternatives are also available. See
-  [Deno.readTextFileSync](https://deno.land/api?s=Deno.readTextFileSync) and
-  [Deno.writeTextFileSync](https://deno.land/api?s=Deno.writeTextFileSync).
+  [Deno.readTextFileSync](https://docs.deno.com/api/deno/~/Deno.readTextFileSync)
+  and
+  [Deno.writeTextFileSync](https://docs.deno.com/api/deno/~/Deno.writeTextFileSync).
 - Use `--allow-read` and `--allow-write` permissions to gain access to the file
   system.
 
@@ -20,8 +21,8 @@ oldUrl:
 
 Interacting with the filesystem to read and write files is a common requirement.
 Deno provides a number of ways to do this via the
-[standard library](https://deno.land/std) and the
-[Deno runtime API](https://deno.land/api).
+[standard library](https://jsr.io/@std) and the
+[Deno runtime API](https://docs.deno.com/api/deno/).
 
 As highlighted in the [Fetch Data example](./fetch_data.md), Deno restricts
 access to Input / Output by default for security reasons. Therefore when

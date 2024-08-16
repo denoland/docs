@@ -40,8 +40,8 @@ configuration under "Settings" for your repository.
 Our webhook handler function is relatively simple - without comments, it's only
 23 lines of code total. It connects to a Deno KV database, sets up a queue
 listener to process incoming messages, and sets up a simple server with
-[`Deno.serve`](https://deno.land/api?s=Deno.serve) which responds to incoming
-webhook requests.
+[`Deno.serve`](https://docs.deno.com/api/deno/~/Deno.serve) which responds to
+incoming webhook requests.
 
 Read along with the comments below to see what's happening at each step.
 

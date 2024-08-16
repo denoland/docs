@@ -254,7 +254,7 @@ support Deno.
 
 ### Kakoune
 
-[Kakoune](http://kakoune.org/) supports connecting to the Deno language server
+[Kakoune](https://kakoune.org/) supports connecting to the Deno language server
 via the [kak-lsp](https://github.com/kak-lsp/kak-lsp) client. Once
 [kak-lsp is installed](https://github.com/kak-lsp/kak-lsp#installation) an
 example of configuring it up to connect to the Deno language server is by adding
@@ -396,7 +396,7 @@ There are several environment variables which can impact the behavior of Deno:
 
 - `DENO_AUTH_TOKENS` - a list of authorization tokens which can be used to allow
   Deno to access remote private code. See the
-  [Private modules and repositories](../basics/modules/private_repositories.md)
+  [Private modules and repositories](../advanced/private_repositories.md)
   section for more details.
 - `DENO_TLS_CA_STORE` - a list of certificate stores which will be used when
   establishing TLS connections. The available stores are `mozilla` and `system`.

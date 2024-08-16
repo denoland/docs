@@ -5,30 +5,23 @@ title: "Stability"
 As of Deno 1.0.0, the `Deno` namespace APIs are stable. That means we will
 strive to make code working under 1.0.0 continue to work in future versions.
 
-However, not all of Deno's features are ready for production yet. Features which
-are not ready, because they are still in draft phase, are locked behind the
-`--unstable` command line flag.
+When introducing new APIs, these are first marked as unstable. This means that
+the API may change in the future. These APIs are not available to use unless you
+explicitly pass an unstable flag, like `--unstable-kv`.
+[Learn more about `--unstable-*` flags](/runtime/manual/tools/unstable_flags).
 
-```shell
-deno run --unstable mod_which_uses_unstable_stuff.ts
-```
+There are also some non-runtime features of Deno that are considered unstable,
+and are locked behind unstable flags. For example, the
+`--unstable-sloppy-imports` flag is used to enable `import`ing code without
+specifying file extensions.
 
-Passing this flag does a few things:
+## Standard library
 
-- It enables the use of unstable APIs during runtime.
-- It adds the
-  [`lib.deno.unstable.d.ts`](https://doc.deno.land/https://raw.githubusercontent.com/denoland/deno/main/cli/tsc/dts/lib.deno.unstable.d.ts)
-  file to the list of TypeScript definitions that are used for type checking.
-  This includes the output of `deno types`.
+The Deno standard library (https://jsr.io/@std) is partially stable. All
+standard library modules that are version 1.0.0 or higher are considered stable.
+All other modules (0.x) are considered unstable, and may change in the future.
 
-You should be aware that many unstable APIs have **not undergone a security
-review**, are likely to have **breaking API changes** in the future, and are
-**not ready for production**.
-
-## Standard modules
-
-Deno's standard modules (https://deno.land/std) are not yet stable. We currently
-version the standard modules differently from the CLI to reflect this. Note that
-unlike the `Deno` namespace, the use of the standard modules do not require the
-`--unstable` flag (unless the standard module itself makes use of an unstable
-Deno feature).
+Using unstable standard library modules is not recommended for production code,
+but it is a great way to experiment with new features and provide feedback to
+the Deno team. It is not necessary to use any unstable flags to use unstable
+standard library modules.

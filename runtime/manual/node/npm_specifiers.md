@@ -1,5 +1,5 @@
 ---
-title: "`npm:` specifiers"
+title: "npm: specifiers"
 ---
 
 Since version 1.28, Deno has native support for importing npm packages. This is
