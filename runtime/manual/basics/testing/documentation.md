@@ -3,7 +3,7 @@ title: "Documentation Tests"
 oldUrl: /runtime/manual/testing/documentation/
 ---
 
-Deno supports *type-checking* your documentation examples.
+Deno supports _type-checking_ your documentation examples.
 
 :::info
 
