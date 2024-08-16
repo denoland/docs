@@ -32,8 +32,14 @@ determined by the language identifier attribute which may be any of the
 following:
 
 - `js`
+- `javascript`
+- `mjs`
+- `cjs`
 - `jsx`
 - `ts`
+- `typescript`
+- `mts`
+- `cts`
 - `tsx`
 
 If no language identifier is specified then the language is inferred from media
