@@ -34,9 +34,11 @@ export const sidebar = [
 ];
 
 export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
-  const files = [...walkSync("./examples/", {
-    exts: [".ts"],
-  })];
+  const files = [
+    ...walkSync("./examples/", {
+      exts: [".ts"],
+    }),
+  ];
   const examples = files.map((file) => {
     const content = Deno.readTextFileSync(file.path);
 
@@ -52,7 +54,6 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
     const contentNoCommentary = example.parsed.files.map((file) =>
       file.snippets.map((snippet) => snippet.code).join("\n")
     ).join("\n");
-
     const url =
       `https://github.com/denoland/deno-docs/blob/main/examples/${example.name}${
         example.parsed.files.length > 1 ? "/main" : ""
@@ -97,8 +98,9 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
                 Edit
               </a>
             </div>
-            {example.parsed.description &&
-              <p class="mt-10 mb-6">{example.parsed.description}</p>}
+            {example.parsed.description && (
+              <p class="mt-10 mb-6">{example.parsed.description}</p>
+            )}
             <div class="relative block">
               <CopyButton text={contentNoCommentary} />
             </div>
@@ -129,9 +131,14 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
                     locally using the Deno CLI:
                   </p>
                   <div class="markdown-body">
-                    <pre className="highlight"><code>{example.parsed.run.startsWith("deno")
-                      ? example.parsed.run.replace("<url>", url)
-                      : "deno run " + example.parsed.run.replace("<url>", rawUrl)}</code></pre>
+                    <pre className="highlight">
+                      <code>
+                        {example.parsed.run.startsWith("deno")
+                          ? example.parsed.run.replace("<url>", url)
+                          : "deno run " +
+                            example.parsed.run.replace("<url>", rawUrl)}
+                      </code>
+                    </pre>
                   </div>
                 </>
               )}
@@ -215,7 +222,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
       return null;
     }
 
-    group.sort((a, b) => a.sortOrder - b.sortOrder);
+    group.sort((a, b) => a.parsed.sortOrder - b.parsed.sortOrder);
 
     return (
       <section
@@ -272,9 +279,9 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
           </div>
           <div className="w-full flex flex-col px-8 pt-6 mt-20 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-screen-xl mx-auto mb-24">
             <p className="max-w-prose mx-auto text-center">
-              Need an example that isn't here? Or want to add one of your
-              own?<br /> We welcome contributions!{" "}
-              <br />You can request more examples, or add your own at our{" "}
+              Need an example that isn't here? Or want to add one of your own?
+              <br /> We welcome contributions! <br />
+              You can request more examples, or add your own at our{" "}
               <a
                 href="https://github.com/denoland/deno-docs?tab=readme-ov-file#examples"
                 class="text-primary hover:underline focus:underline"
@@ -321,7 +328,11 @@ function SnippetComponent(props: {
         <div class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight rounded-md">
           {props.snippet.code && (
             <div class="nocopy h-full markdown-body !bg-[var(--color-canvas-subtle)]">
-              <pre class="highlight language-ts"><code dangerouslySetInnerHTML={{ __html: props.snippet.code }}></code></pre>
+              <pre class="highlight language-ts">
+                <code
+                  dangerouslySetInnerHTML={{ __html: props.snippet.code }}
+                ></code>
+              </pre>
             </div>
           )}
         </div>
@@ -366,11 +377,11 @@ export const TAGS = {
 };
 
 export const DIFFICULTIES = {
-  "beginner": {
+  beginner: {
     title: "Beginner",
     description: "No significant prior knowledge is required for this example.",
   },
-  "intermediate": {
+  intermediate: {
     title: "Intermediate",
     description: "Some prior knowledge is needed for this example.",
   },
