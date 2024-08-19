@@ -51,10 +51,9 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
   });
 
   for (const example of examples) {
-    const contentNoCommentary = example.parsed.files
-      .map((file) => file.snippets.map((snippet) => snippet.code).join("\n"))
-      .join("\n");
-
+    const contentNoCommentary = example.parsed.files.map((file) =>
+      file.snippets.map((snippet) => snippet.code).join("\n")
+    ).join("\n");
     const url =
       `https://github.com/denoland/deno-docs/blob/main/examples/${example.name}${
         example.parsed.files.length > 1 ? "/main" : ""
