@@ -1,10 +1,10 @@
 {
-	"deno.enable": true,
-	"editor.defaultFormatter": "denoland.vscode-deno",
-	"editor.formatOnSave": true,
-	"editor.formatOnPaste": false,
-	"[typescriptreact]": {
-		"editor.defaultFormatter": "denoland.vscode-deno"
-	},
-	"editor.detectIndentation": true
+  "deno.enable": true,
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "editor.detectIndentation": true
 }
