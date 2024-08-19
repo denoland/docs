@@ -23,8 +23,8 @@ export default function Layout(props: Lume.Data) {
           type="font/woff2"
           crossOrigin="true"
         />
-        <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/gfm.css" />
+        <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/overrides.css" />
         <script src="/orama-searchbox-1.0.0-rc47.js" defer></script>
         <script type="module" src="/sidebar.client.js"></script>
