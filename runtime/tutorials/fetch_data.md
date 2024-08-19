@@ -10,7 +10,7 @@ oldUrl:
   [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 - Deno is secure by default, meaning explicit permission must be granted to
   access the network.
-- See also: Deno's [permissions](../manual/basics/permissions.md) model.
+- See also: Deno's [permissions](TODO:permissions-link) model.
 
 ## Overview
 

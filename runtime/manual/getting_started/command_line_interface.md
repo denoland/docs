@@ -213,7 +213,7 @@ reported. (To turn on type-checking for all modules, use `--check=all`.)
 
 ### Permission flags
 
-These are listed [here](../basics/permissions.md#permissions-list).
+These are listed [here](TODO:permissions-link).
 
 ### Other runtime flags
 

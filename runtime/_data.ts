@@ -1,6 +1,7 @@
 import { Sidebar } from "../types.ts";
 
 export const sidebar = [
+
   {
     title: "Getting Started",
     items: [
@@ -16,7 +17,6 @@ export const sidebar = [
           "/runtime/manual/getting_started/command_line_interface/",
           "/runtime/manual/getting_started/configuration_file/",
           "/runtime/manual/getting_started/web_frameworks/",
-          "/runtime/manual/basics/permissions/",
           "/runtime/manual/basics/standard_library/",
           "/runtime/manual/basics/import_maps/",
           "/runtime/manual/basics/env_variables/",
@@ -27,6 +27,12 @@ export const sidebar = [
         ],
       },
     ],
+  },
+  {
+    title: "Fundamentals",
+    items: [
+      "/runtime/fundamentals/permissions/"
+    ]
   },
   {
     title: "Modules and APIs",
