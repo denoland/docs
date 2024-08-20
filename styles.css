@@ -2,16 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-Regular.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-Italic.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-SemiBold.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-SemiBoldItalic.woff2") format("woff2");
+  }
+}
+
 [id] {
   scroll-margin-top: 4rem;
 }
 
+h1 {
+  letter-spacing: -0.025em;
+}
+
+:where(h2, h3) {
+  letter-spacing: -0.0125em;
+}
+
 .markdown-body {
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  font-family: inherit;
+
+  :where(h1, h2, h3) {
+    letter-spacing: -0.0125em;
+  }
+
+  :where(h2, h3, h4, h5, h6) {
     .anchor-end {
       opacity: 0;
       transition: opacity 0.2s;
@@ -25,28 +69,28 @@
     }
   }
 
-  details {
+  & details {
     @apply rounded border border-gray-1 py-4 px-4;
 
     &[open] summary {
       @apply pb-4 mb-4 border-b border-gray-00;
     }
 
-    summary::marker {
+    & summary::marker {
       @apply text-gray-2;
     }
   }
 }
 
 body:not(:has(.ddoc)) {
-  pre:has(code.highlight),
-  pre.highlight:has(code) {
+  & pre:has(code.highlight),
+  & pre.highlight:has(code) {
     @apply p-8 max-sm:-mx-4;
     @apply max-sm:rounded-none !important;
   }
 
-  pre:has(code.highlight):hover + .copyButton,
-  pre.highlight:has(code):hover + .copyButton {
+  & pre:has(code.highlight):hover + .copyButton,
+  & pre.highlight:has(code):hover + .copyButton {
     @apply block;
   }
 
@@ -70,38 +114,6 @@ body:not(:has(.ddoc)) {
 
 .markdown-body h2:hover .anchor-end {
   opacity: 1;
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/inter/Inter-Regular.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/inter/Inter-Italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/fonts/inter/Inter-SemiBold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/fonts/inter/Inter-SemiBoldItalic.woff2") format("woff2");
 }
 
 :root {
@@ -269,7 +281,7 @@ body:not(:has(.ddoc)) {
     @apply border-r border-gray-000;
     @apply pt-4 !important;
 
-    li:hover {
+    & li:hover {
       @apply bg-blue-50 rounded-md !important;
       > a {
         @apply no-underline !important;
@@ -305,7 +317,7 @@ body:not(:has(.ddoc)) {
   }
 
   .markdown {
-    pre {
+    & pre {
       @apply border-gray-000 !important;
     }
 

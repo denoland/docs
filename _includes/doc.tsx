@@ -54,16 +54,21 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   return (
     <>
       <aside
-        class="lg:block absolute top-0 lg:top-16 bottom-0 -left-74 lg:left-0 sidebar-open:left-0 w-74 border-r border-gray-200 bg-white z-50 lg:z-0 transition-all"
+        class="flex flex-col absolute top-0 lg:top-16 bottom-0 -left-74 lg:left-0 sidebar-open:left-0 w-74 border-r border-gray-200 bg-white z-50 lg:z-0 transition-all"
         id="sidebar"
         data-open="false"
       >
         <div class="lg:hidden p-4 shadow-sm flex justify-between h-16">
           <a class="flex items-center gap-3 mr-6" href="/">
-            <div class="block size-6">
-              <img src="/img/logo.svg" alt="Deno Docs" />
-            </div>
-            <b class="text-xl">Docs</b>
+            <img
+              class="block size-6"
+              src="/img/logo.svg"
+              alt=""
+              aria-hidden="true"
+            />
+            <b class="text-xl">
+              <span class="sr-only">Deno</span> Docs
+            </b>
           </a>
           <button
             type="button"

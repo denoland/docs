@@ -22,10 +22,15 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
           >
             <div class="p-4 shadow-sm flex justify-between h-16">
               <a class="flex items-center gap-3 mr-6" href="/">
-                <div class="block size-6">
-                  <img src="/img/logo.svg" alt="Deno Docs" />
-                </div>
-                <b class="text-xl">Docs</b>
+                <img
+                  src="/img/logo.svg"
+                  class="block size-6"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <b class="text-xl">
+                  <span class="sr-only">Deno</span> Docs
+                </b>
               </a>
               <button
                 type="button"
