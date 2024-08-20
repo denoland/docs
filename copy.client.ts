@@ -9,7 +9,7 @@ function findParent(el, find) {
 document.addEventListener("click", (e) => {
   const target = findParent(
     e.target,
-    (el) => el instanceof HTMLButtonElement && el.dataset["copy"]
+    (el) => el instanceof HTMLButtonElement && el.dataset["copy"],
   );
   if (target) {
     navigator?.clipboard?.writeText(target.dataset["copy"]);
