@@ -50,7 +50,6 @@ await copy("foo.txt", join("dist", "foo.txt"));
 Alternatively, you can import modules directly with the `jsr:` specifier:
 
 ```js
-// This works without import map
 import { copy } from "jsr:@std/fs@^0.224.0";
 import { join } from "jsr:@std/path@^0.224.0";
 
