@@ -17,6 +17,7 @@ export const sidebar = [
   {
     title: "Fundamentals",
     items: [
+      "/runtime/fundamentals/ts_support/",
       "/runtime/fundamentals/permissions/"
     ]
   },
@@ -248,8 +249,6 @@ export const sidebar = [
       {
         label: "TypeScript in Deno",
         items: [
-          "/runtime/manual/advanced/typescript/overview/",
-          "/runtime/manual/advanced/typescript/types/",
           "/runtime/manual/advanced/typescript/configuration/",
           "/runtime/manual/advanced/typescript/migration/",
           "/runtime/manual/advanced/typescript/faqs/",
