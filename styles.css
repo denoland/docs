@@ -89,16 +89,17 @@ body:not(:has(.ddoc)) {
     @apply max-sm:rounded-none !important;
   }
 
-  & pre:has(code.highlight):hover + .copyButton,
-  & pre.highlight:has(code):hover + .copyButton {
-    @apply block;
+  & pre:has(code.highlight):where(:hover, :focus) + .copyButton,
+  & pre.highlight:has(code):where(:hover, :focus) + .copyButton {
+    @apply opacity-100;
   }
 
   .copyButton {
-    @apply hidden absolute top-2 right-2 p-1 rounded;
+    @apply opacity-0 transition-opacity duration-100 absolute top-2 right-2 p-1 rounded;
 
-    &:hover {
-      @apply block bg-gray-300;
+    &:hover,
+    &:focus {
+      @apply opacity-100 bg-gray-300;
     }
   }
 }

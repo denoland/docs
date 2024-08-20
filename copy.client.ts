@@ -3,13 +3,13 @@ function findParent(el, find) {
     if (find(el)) {
       return el;
     }
-  } while (el = el.parentElement);
+  } while ((el = el.parentElement));
 }
 
 document.addEventListener("click", (e) => {
   const target = findParent(
     e.target,
-    (el) => el instanceof HTMLButtonElement && el.dataset["copy"],
+    (el) => el instanceof HTMLButtonElement && el.dataset["copy"]
   );
   if (target) {
     navigator?.clipboard?.writeText(target.dataset["copy"]);
