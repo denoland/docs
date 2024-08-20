@@ -56,11 +56,14 @@ h1 {
   }
 
   :where(h2, h3, h4, h5, h6) {
+    .header-anchor:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
     .anchor-end {
       opacity: 0;
       transition: opacity 0.2s;
-      text-decoration: underline;
-      text-underline-offset: 4px;
       font-weight: normal;
     }
 
