@@ -41,7 +41,7 @@ import chalk from "npm:chalk@5";
 ```
 
 Some packages do not though, but you can specify their types with a
-[`@deno-types`](../advanced/typescript/types.md) directive. For example, using a
+[`@deno-types`](./runtime/fundamentals/ts_support.md) directive. For example, using a
 [`@types`](https://www.typescriptlang.org/docs/handbook/2/type-declarations.html#definitelytyped--types)
 package:
 
