@@ -108,7 +108,7 @@ to do this. This type of identifier encodes a UTC timestamp, is
 lexicographically sortable and is cryptographically random by default:
 
 ```js
-import { ulid } from "https://deno.land/x/ulid/mod.ts";
+import { ulid } from "jsr:@std/ulid";
 
 const kv = await Deno.openKv();
 
@@ -123,16 +123,14 @@ async function setUser(user) {
 ["users", "01H76YTWK5DM1G9TFR0Y5SCZQV"]; // Third user
 ```
 
-Furthermore, you can generate ULIDs monotonically increasingly using a factory
-function:
+Furthermore, you can generate ULIDs monotonically increasingly using
+`monotonicUlid` function:
 
 ```js
-import { monotonicFactory } from "https://deno.land/x/ulid/mod.ts";
-
-const ulid = monotonicFactory();
+import { monotonicUlid } from "jsr:@std/ulid";
 
 async function setUser(user) {
-  await kv.set(["users", ulid()], user);
+  await kv.set(["users", monotonicUlid()], user);
 }
 ```
 
