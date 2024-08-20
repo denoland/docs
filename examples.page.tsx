@@ -67,7 +67,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
       title: `${example.parsed.title} - Deno by Example`,
       content: (
         <div>
-          <main class="max-w-screen-lg mx-auto p-4">
+          <main class="max-w-screen-lg mx-auto py-4">
             <div class="flex gap-2 items-center">
               <p
                 class="italic m-0 mr-2"

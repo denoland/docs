@@ -83,12 +83,16 @@ h1 {
       @apply text-gray-2;
     }
   }
+
+  & pre {
+    @apply border border-gray-200 bg-gray-50;
+  }
 }
 
 body:not(:has(.ddoc)) {
   & pre:has(code.highlight),
   & pre.highlight:has(code) {
-    @apply p-8 max-sm:-mx-4;
+    @apply px-8 py-6 max-sm:-mx-4;
     @apply max-sm:rounded-none !important;
   }
 
@@ -98,21 +102,21 @@ body:not(:has(.ddoc)) {
   }
 
   .copyButton {
-    @apply hidden absolute top-2 right-2 p-1 rounded;
+    @apply hidden absolute top-2 right-2 p-1 border border-transparent rounded;
 
     &:hover {
-      @apply block bg-gray-300;
+      @apply block border-gray-200;
     }
   }
 }
 
 .markdownBlockTitle + div > pre:has(code.highlight) {
-  @apply rounded-t-none;
+  @apply rounded-t-none border-t-0;
 }
 
 .markdownBlockTitle {
   background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-  @apply px-8 py-4 max-sm:-mx-4 sm:rounded-t-md border-b border-gray-000 text-sm font-semibold;
+  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border border-gray-200 bg-gray-100 text-sm font-semibold;
 }
 
 .markdown-body h2:hover .anchor-end {
