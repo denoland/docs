@@ -65,4 +65,5 @@ Now that you have a basic project set up you can start building your
 application. Check out our [tutorials](./tutorials) and [examples](./examples/)
 for more ideas on what to build with Deno.
 
-You can [learn more about using TypeScript in Deno here](../fundamentals/ts_support.md).
+You can
+[learn more about using TypeScript in Deno here](../fundamentals/ts_support.md).

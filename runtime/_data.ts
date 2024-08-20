@@ -1,7 +1,6 @@
 import { Sidebar } from "../types.ts";
 
 export const sidebar = [
-
   {
     title: "Getting Started",
     items: [
@@ -18,8 +17,8 @@ export const sidebar = [
     title: "Fundamentals",
     items: [
       "/runtime/fundamentals/ts_support/",
-      "/runtime/fundamentals/permissions/"
-    ]
+      "/runtime/fundamentals/permissions/",
+    ],
   },
   {
     title: "Modules and APIs",
