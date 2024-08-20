@@ -10,7 +10,7 @@ oldUrl:
   - /runtime/manual/advanced/typescript/types/
 ---
 
-Deno treats TypeScript as a first class language, just like JavaScript or
+TypeScript is a first class language in Deno, just like JavaScript or
 WebAssembly, so you can run or import TypeScript without installing anything
 more than the Deno CLI.
 
@@ -56,7 +56,8 @@ TypeScript with warnings about being "unsafe".
 :::note
 
 **Deno type checks TypeScript in `strict mode` by default**, the TypeScript core
-team [recommends strict mode as a sensible default](https://www.typescriptlang.org/play/?#example/new-compiler-defaults).
+team
+[recommends strict mode as a sensible default](https://www.typescriptlang.org/play/?#example/new-compiler-defaults).
 
 :::
 
@@ -139,35 +140,48 @@ identifying the type of file of a remote module:
 
 ## Mixing JavaScript and TypeScript
 
-By default, Deno does not type check JavaScript. Check out the documentation on [configuring your project](./configuration.md) to find out more about how to configure your project to do this. Deno does support JavaScript importing TypeScript and TypeScript importing JavaScript, in complex scenarios.
+By default, Deno does not type check JavaScript. Check out the documentation on
+[configuring your project](./configuration.md) to find out more about how to
+configure your project to do this. Deno does support JavaScript importing
+TypeScript and TypeScript importing JavaScript, in complex scenarios.
 
 An important note though is that when type checking TypeScript, by default Deno
 will "read" all the JavaScript in order to be able to evaluate how it might have
 an impact on the TypeScript types. The type checker will do the best it can to
-figure out the types of the JavaScript you import into TypeScript,
-including reading any JSDoc comments. Details of this are discussed in detail in
-the [Types and type declarations](./types.md) section.
+figure out the types of the JavaScript you import into TypeScript, including
+reading any JSDoc comments. Details of this are discussed in detail in the
+[Types and type declarations](./types.md) section.
 
 ## Type resolution
 
-Deno adheres to a design principle of no non-standard module resolution, meaning it deals with explicit module specifiers. This can cause issues when importing JavaScript files that have corresponding type definition files. To address this, Deno offers these solutions:
+Deno adheres to a design principle of no non-standard module resolution, meaning
+it deals with explicit module specifiers. This can cause issues when importing
+JavaScript files that have corresponding type definition files. To address this,
+Deno offers these solutions:
 
-1. **Provide types when importing** to ensure that TypeScript uses the specified type definition file for type checking. Use the `@ts-types` compiler hint to specify a type definition file for a JavaScript module:
+1. **Provide types when importing** to ensure that TypeScript uses the specified
+   type definition file for type checking. Use the `@ts-types` compiler hint to
+   specify a type definition file for a JavaScript module:
 
-    ```ts
-    // @ts-types="./coolLib.d.ts"
-    import * as coolLib from "./coolLib.js";
-    ```
+   ```ts
+   // @ts-types="./coolLib.d.ts"
+   import * as coolLib from "./coolLib.js";
+   ```
 
-2. **Provide types when hosting**. Use the `@ts-self-types` pragma in the JavaScript file to point to the type definition file:
+2. **Provide types when hosting**. Use the `@ts-self-types` pragma in the
+   JavaScript file to point to the type definition file:
 
-    ```ts
-    // @ts-self-types="./coolLib.d.ts"
-    ```
+   ```ts
+   // @ts-self-types="./coolLib.d.ts"
+   ```
 
-This informs Deno to use the type definition file for type checking while still loading the JavaScript file for execution.
+This informs Deno to use the type definition file for type checking while still
+loading the JavaScript file for execution.
 
-3. **Using HTTP headers for remote modules**. Deno supports a header for remote modules that instructs the runtime on where to locate the types for a given module. For example, a response for https://example.com/coolLib.js might look like this:
+3. **Using HTTP headers for remote modules**. Deno supports a header for remote
+   modules that instructs the runtime on where to locate the types for a given
+   module. For example, a response for https://example.com/coolLib.js might look
+   like this:
 
 ```ts
 HTTP/1.1 200 OK
@@ -176,11 +190,15 @@ Content-Length: 648
 X-TypeScript-Types: ./coolLib.d.ts
 ```
 
-When seeing this header, Deno would attempt to retrieve https://example.com/coolLib.d.ts and use that when type checking the original module.
+When seeing this header, Deno would attempt to retrieve
+https://example.com/coolLib.d.ts and use that when type checking the original
+module.
 
 ## Using ambient or global types
 
-Using module/UMD type definitions with Deno is generally preferred, as it allows a module to explicitly import the types it depends on. Modular type definitions can augment the global scope using `declare` global. For example:
+Using module/UMD type definitions with Deno is generally preferred, as it allows
+a module to explicitly import the types it depends on. Modular type definitions
+can augment the global scope using `declare` global. For example:
 
 ```ts
 declare global {
@@ -188,13 +206,18 @@ declare global {
 }
 ```
 
-This makes `AGlobalString` available globally when the type definition is imported.
+This makes `AGlobalString` available globally when the type definition is
+imported.
 
-However, when using existing type libraries, it might not always be possible to use modular type definitions. In such cases, there are methods to include arbitrary type definitions during type checking.
+However, when using existing type libraries, it might not always be possible to
+use modular type definitions. In such cases, there are methods to include
+arbitrary type definitions during type checking.
 
 ### Using a triple-slash directive
 
-You can couple type definitions directly to the code by adding a triple-slash types directive in a TypeScript file. This includes the type definition during type checking. For example:
+You can couple type definitions directly to the code by adding a triple-slash
+types directive in a TypeScript file. This includes the type definition during
+type checking. For example:
 
 ```ts
 /// <reference types="./types.d.ts" />
@@ -208,7 +231,8 @@ The specifier can be a relative path or a fully qualified URL:
 
 ### Using a configuration file
 
-Another option is to use a configuration file to include type definitions by specifying a "types" value in the "compilerOptions". For example:
+Another option is to use a configuration file to include type definitions by
+specifying a "types" value in the "compilerOptions". For example:
 
 ```json
 {
@@ -222,28 +246,39 @@ Another option is to use a configuration file to include type definitions by spe
 }
 ```
 
-Relative specifiers in the "types" array are resolved relative to the config file’s path. Use the `--config=path/to/file` flag to tell Deno to use this configuration file.
+Relative specifiers in the "types" array are resolved relative to the config
+file’s path. Use the `--config=path/to/file` flag to tell Deno to use this
+configuration file.
 
 ## Type Checking Web Workers
 
-When Deno loads a TypeScript module in a web worker, it automatically type checks the module and its dependencies against the Deno web worker library. In contexts such as `deno cache` or in editors you may want to instruct Deno to use the web worker library. You can do this a couple of ways:
+When Deno loads a TypeScript module in a web worker, it automatically type
+checks the module and its dependencies against the Deno web worker library. In
+contexts such as `deno cache` or in editors you may want to instruct Deno to use
+the web worker library. You can do this a couple of ways:
 
 ### Using triple-slash directives
 
 This option couples the library settings with the code itself. By adding the
 following triple-slash directives near the top of the entry point file for the
-worker script, Deno will type check it as a Deno worker script, irrespective
-of how the module is analyzed:
+worker script, Deno will type check it as a Deno worker script, irrespective of
+how the module is analyzed:
 
 ```ts
 /// <reference no-default-lib="true" />
 /// <reference lib="deno.worker" />
 ```
 
-- The first directive ensures no other default libraries are used, preventing conflicting type definitions.
-- The second directive instructs Deno to apply the built-in Deno worker type definitions and dependent libraries.
+- The first directive ensures no other default libraries are used, preventing
+  conflicting type definitions.
+- The second directive instructs Deno to apply the built-in Deno worker type
+  definitions and dependent libraries.
 
-These directives help Deno automatically detect and apply the correct libraries during type checking when using commands like deno cache or deno bundle, or when using an IDE with the Deno language server. However, this approach makes the code less portable to non-Deno platforms like tsc, as only Deno includes the "deno.worker" library.
+These directives help Deno automatically detect and apply the correct libraries
+during type checking when using commands like deno cache or deno bundle, or when
+using an IDE with the Deno language server. However, this approach makes the
+code less portable to non-Deno platforms like tsc, as only Deno includes the
+"deno.worker" library.
 
 ### Using a configuration file
 
@@ -271,22 +306,32 @@ scripts.
 
 ### Type Declaration Semantics
 
-- Type declaration files (`.d.ts files`) in Deno are treated as module declarations (UMD) rather than ambient/global declarations.
+- Type declaration files (`.d.ts files`) in Deno are treated as module
+  declarations (UMD) rather than ambient/global declarations.
 
-- Importing within type declarations follows Deno’s normal import rules, which may cause compatibility issues with some `.d.ts` files available online.
+- Importing within type declarations follows Deno’s normal import rules, which
+  may cause compatibility issues with some `.d.ts` files available online.
 
-- The CDN [esm.sh](esm.sh) provides type declarations by default, which can be disabled by appending `?no-dts` to the import URL.
+- The CDN [esm.sh](esm.sh) provides type declarations by default, which can be
+  disabled by appending `?no-dts` to the import URL.
 
 ### Behavior of JavaScript When Type Checking
 
-- When importing JavaScript into TypeScript in Deno, the TypeScript compiler performs static analysis on the JavaScript module to determine the shape of its exports, even if `checkJs` is set to `false`.
+- When importing JavaScript into TypeScript in Deno, the TypeScript compiler
+  performs static analysis on the JavaScript module to determine the shape of
+  its exports, even if `checkJs` is set to `false`.
 
-- This can cause issues with modules that have special packaging or are global UMD modules, leading to misleading errors. Providing types using one of the mentioned methods can help.
+- This can cause issues with modules that have special packaging or are global
+  UMD modules, leading to misleading errors. Providing types using one of the
+  mentioned methods can help.
 
 ### Internals
 
-- Deno generates a module graph by parsing the root module and its dependencies, filling two potential slots: the code slot and the type slot.
+- Deno generates a module graph by parsing the root module and its dependencies,
+  filling two potential slots: the code slot and the type slot.
 
-- During type checking, Deno offers the type slot to the TypeScript compiler if it is filled, otherwise, it offers the code slot.
+- During type checking, Deno offers the type slot to the TypeScript compiler if
+  it is filled, otherwise, it offers the code slot.
 
-- This ensures that when importing a `.d.ts` module or using alternative type modules for JavaScript code, the correct types are provided to TypeScript.
+- This ensures that when importing a `.d.ts` module or using alternative type
+  modules for JavaScript code, the correct types are provided to TypeScript.
