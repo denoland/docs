@@ -36,7 +36,10 @@ export const sidebar = [
 
 export default function () {
   return (
-    <div class="flex flex-col px-8 pt-6 md:pt-12 mt-4 md:items-center md:justify-center max-w-[1200px] mx-auto mb-48">
+    <main
+      id="content"
+      class="flex flex-col px-8 pt-6 md:pt-12 mt-4 md:items-center md:justify-center max-w-[1200px] mx-auto mb-48"
+    >
       <div class="flex flex-col gap-4 md:gap-8 pb-16 align-middle md:pb-0">
         {/* Hero section */}
         <div class="grid grid-cols-1 md:grid-cols-3 mb-6 gap-4">
@@ -449,7 +452,7 @@ export default function () {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
