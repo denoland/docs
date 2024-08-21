@@ -159,11 +159,23 @@ body:not(:has(.ddoc)) {
 
 /* Orama search style overrides */
 .searchbutton-module_searchbutton__gg7JJ {
-  @apply w-64 border-gray-00 !important;
+  @apply w-64 border-gray-00 px-3 rounded-md gap-1 !important;
+}
+
+.searchbutton-module_searchbutton__gg7JJ > svg {
+  @apply w-3.5 h-3.5 !important;
 }
 
 .searchbutton-module_searchbutton__keys__qckL6 {
-  @apply border-gray-00 text-gray-1 !important;
+  @apply border-0 py-0.5 text-gray-1 text-sm !important;
+}
+
+.searlchbutton-module_searchbutton__keys__qckL6 > kbd:first-of-type {
+  @apply text-sm !important;
+}
+
+.searchbutton-module_searchbutton__label__TfmnN {
+  @apply text-sm !important;
 }
 
 .searchbox-module_searchbox__TygrP {
