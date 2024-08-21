@@ -56,11 +56,14 @@ h1 {
   }
 
   :where(h2, h3, h4, h5, h6) {
+    .header-anchor:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
     .anchor-end {
       opacity: 0;
       transition: opacity 0.2s;
-      text-decoration: underline;
-      text-underline-offset: 4px;
       font-weight: normal;
     }
 
@@ -80,12 +83,16 @@ h1 {
       @apply text-gray-2;
     }
   }
+
+  & pre {
+    @apply border border-gray-200 bg-gray-50;
+  }
 }
 
 body:not(:has(.ddoc)) {
   & pre:has(code.highlight),
   & pre.highlight:has(code) {
-    @apply p-8 max-sm:-mx-4;
+    @apply px-8 py-6 max-sm:-mx-4;
     @apply max-sm:rounded-none !important;
   }
 
@@ -95,6 +102,7 @@ body:not(:has(.ddoc)) {
   }
 
   .copyButton {
+
     @apply opacity-0 transition-all duration-100 absolute top-2 right-2 p-1 rounded;
 
     &:hover,
@@ -109,12 +117,12 @@ body:not(:has(.ddoc)) {
 }
 
 .markdownBlockTitle + div > pre:has(code.highlight) {
-  @apply rounded-t-none;
+  @apply rounded-t-none border-t-0;
 }
 
 .markdownBlockTitle {
   background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-  @apply px-8 py-4 max-sm:-mx-4 sm:rounded-t-md border-b border-gray-000 text-sm font-semibold;
+  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border border-gray-200 bg-gray-100 text-sm font-semibold;
 }
 
 .markdown-body h2:hover .anchor-end {
@@ -157,11 +165,23 @@ body:not(:has(.ddoc)) {
 
 /* Orama search style overrides */
 .searchbutton-module_searchbutton__gg7JJ {
-  @apply w-64 border-gray-00 !important;
+  @apply w-64 border-gray-00 px-3 rounded-md gap-1 !important;
+}
+
+.searchbutton-module_searchbutton__gg7JJ > svg {
+  @apply w-3.5 h-3.5 !important;
 }
 
 .searchbutton-module_searchbutton__keys__qckL6 {
-  @apply border-gray-00 text-gray-1 !important;
+  @apply border-0 py-0.5 text-gray-1 text-sm !important;
+}
+
+.searlchbutton-module_searchbutton__keys__qckL6 > kbd:first-of-type {
+  @apply text-sm !important;
+}
+
+.searchbutton-module_searchbutton__label__TfmnN {
+  @apply text-sm !important;
 }
 
 .searchbox-module_searchbox__TygrP {
