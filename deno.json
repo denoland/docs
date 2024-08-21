@@ -8,20 +8,14 @@
     "tailwindcss": "npm:tailwindcss@^3.4.9"
   },
   "tasks": {
-    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
-    "build": "deno task lume",
-    "serve": "deno task lume -s",
+    "build": "deno run -A lume.ts",
+    "serve": "deno run -A lume.ts -s",
     "prod": "cd _site && deno run --allow-read=. --allow-net server.ts"
   },
   "compilerOptions": {
-    "types": [
-      "lume/types.ts"
-    ],
+    "types": ["lume/types.ts"],
     "jsx": "precompile",
     "jsxImportSource": "npm:preact"
   },
-  "exclude": [
-    "_site",
-    "reference_gen"
-  ]
+  "exclude": ["_site", "reference_gen"]
 }

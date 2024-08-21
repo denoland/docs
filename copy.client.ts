@@ -1,17 +1,7 @@
-function findParent(el, find) {
-  do {
-    if (find(el)) {
-      return el;
-    }
-  } while (el = el.parentElement);
-}
+const copyBtns = document.querySelectorAll("button[data-copy]");
 
-document.addEventListener("click", (e) => {
-  const target = findParent(
-    e.target,
-    (el) => el instanceof HTMLButtonElement && el.dataset["copy"],
-  );
-  if (target) {
-    navigator?.clipboard?.writeText(target.dataset["copy"]);
-  }
+copyBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    navigator?.clipboard?.writeText(btn.getAttribute("data-copy") as string);
+  });
 });

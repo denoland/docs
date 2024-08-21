@@ -172,6 +172,25 @@ cargo clean && cargo build -vv
 ./target/debug/deno run tests/testdata/run/002_hello.ts
 ```
 
+## Running the Tests
+
+Deno has a comprehensive test suite written in both Rust and TypeScript. The
+Rust tests can be run during the build process using:
+
+```shell
+cargo test -vv
+```
+
+The TypeScript tests can be run using:
+
+```shell
+# Run all unit/tests:
+target/debug/deno test -A --unstable --lock=tools/deno.lock.json --config tests/config/deno.json tests/unit
+
+# Run a specific test:
+target/debug/deno test -A --unstable --lock=tools/deno.lock.json --config tests/config/deno.json tests/unit/os_test.ts
+```
+
 ## Working with Multiple Crates
 
 If a change-set spans multiple Deno crates, you may want to build multiple

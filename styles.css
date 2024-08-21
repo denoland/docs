@@ -2,21 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-Regular.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-Italic.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-SemiBold.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-SemiBoldItalic.woff2") format("woff2");
+  }
+}
+
 [id] {
   scroll-margin-top: 4rem;
 }
 
+h1 {
+  letter-spacing: -0.025em;
+}
+
+:where(h2, h3) {
+  letter-spacing: -0.0125em;
+}
+
 .markdown-body {
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  font-family: inherit;
+
+  :where(h1, h2, h3) {
+    letter-spacing: -0.0125em;
+  }
+
+  :where(h2, h3, h4, h5, h6) {
+    .header-anchor:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
     .anchor-end {
       opacity: 0;
       transition: opacity 0.2s;
-      text-decoration: underline;
-      text-underline-offset: 4px;
       font-weight: normal;
     }
 
@@ -25,83 +72,61 @@
     }
   }
 
-  details {
+  & details {
     @apply rounded border border-gray-1 py-4 px-4;
 
     &[open] summary {
       @apply pb-4 mb-4 border-b border-gray-00;
     }
 
-    summary::marker {
+    & summary::marker {
       @apply text-gray-2;
     }
+  }
+
+  & pre {
+    @apply border border-gray-200 bg-gray-50;
   }
 }
 
 body:not(:has(.ddoc)) {
-  pre:has(code.highlight),
-  pre.highlight:has(code) {
-    @apply p-8 max-sm:-mx-4;
+  & pre:has(code.highlight),
+  & pre.highlight:has(code) {
+    @apply px-8 py-6 max-sm:-mx-4;
     @apply max-sm:rounded-none !important;
   }
 
-  pre:has(code.highlight):hover + .copyButton,
-  pre.highlight:has(code):hover + .copyButton {
-    @apply block;
+  & pre:has(code.highlight):where(:hover, :focus) + .copyButton,
+  & pre.highlight:has(code):where(:hover, :focus) + .copyButton {
+    @apply opacity-100;
   }
 
   .copyButton {
-    @apply hidden absolute top-2 right-2 p-1 rounded;
 
-    &:hover {
-      @apply block bg-gray-300;
+    @apply opacity-0 transition-all duration-100 absolute top-2 right-2 p-1 rounded;
+
+    &:hover,
+    &:focus {
+      @apply opacity-100 bg-gray-200;
+    }
+
+    &:active {
+      transform: scale(1.2);
     }
   }
 }
 
 .markdownBlockTitle + div > pre:has(code.highlight) {
-  @apply rounded-t-none;
+  @apply rounded-t-none border-t-0;
 }
 
 .markdownBlockTitle {
   background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-  @apply px-8 py-4 max-sm:-mx-4 sm:rounded-t-md border-b border-gray-000 text-sm font-semibold;
+  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border border-gray-200 bg-gray-100 text-sm font-semibold;
 }
 
 .markdown-body h2:hover .anchor-end {
   opacity: 1;
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/inter/Inter-Regular.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/inter/Inter-Italic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/fonts/inter/Inter-SemiBold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/fonts/inter/Inter-SemiBoldItalic.woff2") format("woff2");
 }
 
 :root {
@@ -140,11 +165,23 @@ body:not(:has(.ddoc)) {
 
 /* Orama search style overrides */
 .searchbutton-module_searchbutton__gg7JJ {
-  @apply w-64 border-gray-00 !important;
+  @apply w-64 border-gray-00 px-3 rounded-md gap-1 !important;
+}
+
+.searchbutton-module_searchbutton__gg7JJ > svg {
+  @apply w-3.5 h-3.5 !important;
 }
 
 .searchbutton-module_searchbutton__keys__qckL6 {
-  @apply border-gray-00 text-gray-1 !important;
+  @apply border-0 py-0.5 text-gray-1 text-sm !important;
+}
+
+.searlchbutton-module_searchbutton__keys__qckL6 > kbd:first-of-type {
+  @apply text-sm !important;
+}
+
+.searchbutton-module_searchbutton__label__TfmnN {
+  @apply text-sm !important;
 }
 
 .searchbox-module_searchbox__TygrP {
@@ -269,7 +306,7 @@ body:not(:has(.ddoc)) {
     @apply border-r border-gray-000;
     @apply pt-4 !important;
 
-    li:hover {
+    & li:hover {
       @apply bg-blue-50 rounded-md !important;
       > a {
         @apply no-underline !important;
@@ -305,7 +342,7 @@ body:not(:has(.ddoc)) {
   }
 
   .markdown {
-    pre {
+    & pre {
       @apply border-gray-000 !important;
     }
 

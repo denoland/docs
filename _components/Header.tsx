@@ -7,7 +7,7 @@ export default function Header({
 }) {
   const reference = url.startsWith("/api");
   return (
-    <div
+    <header
       class={`bg-white shadow z-30 ${
         reference ? "" : "sticky top-0 left-0 right-0"
       }`}
@@ -127,7 +127,7 @@ export default function Header({
             </ul>
           </nav>
         )}
-    </div>
+    </header>
   );
 }
 

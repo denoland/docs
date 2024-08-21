@@ -12,7 +12,7 @@ export default function Sidebar(
 ) {
   return (
     <nav
-      class="pt-2 pb-8 p-2 pr-0 overflow-y-auto h-[calc(100%-2rem)]"
+      class="p-2 pr-0 overflow-y-auto"
       style={{ scrollbarGutter: "stable", scrollbarWidth: "thin" }}
     >
       <ul>
@@ -31,15 +31,24 @@ export default function Sidebar(
 function SidebarSection(
   props: { section: SidebarSection_; search: Searcher; url: string },
 ) {
+  const sluggify = (str: string) =>
+    str.replaceAll(/[\s_]/g, "-")
+      .replaceAll(/[^a-zA-Z0-9-]/g, "")
+      .toLowerCase();
+  const slug = sluggify(props.section.title ?? "");
+  const categoryTitle = `sidebar-category-${slug}`;
   return (
     <li class="mb-4">
       {props.section.title &&
         (
-          <h3 class="border-b border-gray-200 uppercase pt-2 pb-0.5 mx-3 mt-4 mb-3 text-xs font-semibold text-gray-3">
+          <h2
+            id={categoryTitle}
+            class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3"
+          >
             {props.section.title}
-          </h3>
+          </h2>
         )}
-      <ul>
+      <ul aria-labelledby={categoryTitle}>
         {props.section.items.map((item) => (
           <li class="mx-2 mt-1">
             {typeof item === "object" && "items" in item
@@ -115,8 +124,8 @@ function SidebarCategory(props: {
 
   return (
     <>
-      <div
-        class={LINK_CLASS + " flex justify-between items-center" +
+      <button
+        class={LINK_CLASS + " flex justify-between items-center w-full" +
           (containsCurrent ? " !text-blue-500" : "")}
         data-accordion-trigger
       >
@@ -135,7 +144,7 @@ function SidebarCategory(props: {
           >
           </path>
         </svg>
-      </div>
+      </button>
       <ul
         class={`ml-2 ${containsCurrent ? "" : "hidden"}`}
         data-accordion-content
