@@ -1,5 +1,6 @@
 ---
 title: "Workspaces"
+oldUrl: /runtime/manual/basics/workspaces
 ---
 
 Deno supports workspaces, also known as "monorepos", which allow you to manage
@@ -9,7 +10,7 @@ A "workspace" is a collection of folders containing `deno.json` or
 `package.json` configuration files. The root `deno.json` file defines the
 workspace:
 
-```jsonc, title="deno.json"
+```json, title="deno.json"
 {
   "workspace": ["./add", "./subtract"]
 }
@@ -30,13 +31,16 @@ workspace with multiple members.
 Let's expand on the `deno.json` workspace example and see its functionality. The
 file hierarchy looks like this:
 
-```
-/deno.json
-/main.ts
-/add/deno.json
-/add/mod.ts
-/subtract/deno.json
-/subtract/mod.ts
+```sh
+/
+├── deno.json
+├── main.ts
+├── add/
+│     ├── deno.json
+│     └── mod.ts
+└── subtract/
+      ├── deno.json
+      └── mod.ts
 ```
 
 There are two workspace members (add and subtract), each with `mod.ts` files.
@@ -111,7 +115,7 @@ export function subtract(a: number, b: number): number {
 
 Let's run it:
 
-```
+```sh
 > deno run main.ts
 1 + 2 = 3
 2 - 4 = -2
@@ -213,7 +217,7 @@ import { sayHiTo } from "@deno/hi";
 sayHiTo("friend");
 ```
 
-```
+```sh
 $ deno run main.ts
 Hi, friend!
 ```
