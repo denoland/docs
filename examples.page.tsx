@@ -67,7 +67,8 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
       title: `${example.parsed.title} - Deno by Example`,
       content: (
         <div>
-          <main class="max-w-screen-lg mx-auto py-4">
+          <main id="content" class="max-w-screen-lg mx-auto py-4">
+
             <div class="flex gap-2 items-center">
               <p
                 class="italic m-0 mr-2"
@@ -254,7 +255,10 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
     url: `/examples/`,
     title: `Deno by Example`,
     content: (
-      <div className="w-full flex flex-col px-8 pt-6 mt-16 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-screen-xl mx-auto mb-20">
+      <main
+        id="content"
+        className="w-full flex flex-col px-8 pt-6 mt-16 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-screen-xl mx-auto mb-20"
+      >
         <div className="pb-16 align-middle md:pb-0 w-full">
           <div className="mb-16 md:mb-24 text-center">
             <img
@@ -291,7 +295,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
             </p>
           </div>
         </div>
-      </div>
+      </main>
     ),
   };
 }

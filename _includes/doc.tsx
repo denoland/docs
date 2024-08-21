@@ -103,7 +103,10 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         class="absolute top-16 bottom-0 left-0 right-0 lg:left-74 overflow-y-auto lg:grid lg:grid-cols-7 lg:gap-8 max-w-screen-2xl mx-auto"
         style={{ scrollbarGutter: "stable" }}
       >
-        <main class="mx-auto max-w-screen-xl w-full pt-4 pb-8 flex flex-grow lg:col-span-5">
+        <main
+          id="content"
+          class="mx-auto max-w-screen-xl w-full pt-4 pb-8 flex flex-grow lg:col-span-5"
+        >
           <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full">
             <article class="max-w-[66ch] mx-auto">
               <Breadcrumbs

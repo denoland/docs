@@ -39,6 +39,12 @@ export default function Layout(props: Lume.Data) {
         <link rel="preconnect" href="https://www.googletagmanager.com"></link>
       </head>
       <body class={reference ? "" : "h-dvh overflow-hidden"}>
+        <a
+          href="#content"
+          class="opacity-0 absolute top-2 left-2 p-2 border -translate-y-12 transition-all focus:translate-y-0 focus:opacity-100 z-50 bg-white font-bold"
+        >
+          Skip to main content <span aria-hidden="true">-&gt;</span>
+        </a>
         <props.comp.Header url={props.url} hasSidebar={!!props.sidebar} />
         {props.children}
       </body>

@@ -96,16 +96,22 @@ body:not(:has(.ddoc)) {
     @apply max-sm:rounded-none !important;
   }
 
-  & pre:has(code.highlight):hover + .copyButton,
-  & pre.highlight:has(code):hover + .copyButton {
-    @apply block;
+  & pre:has(code.highlight):where(:hover, :focus) + .copyButton,
+  & pre.highlight:has(code):where(:hover, :focus) + .copyButton {
+    @apply opacity-100;
   }
 
   .copyButton {
-    @apply hidden absolute top-2 right-2 p-1 border border-transparent rounded;
 
-    &:hover {
-      @apply block border-gray-200;
+    @apply opacity-0 transition-all duration-100 absolute top-2 right-2 p-1 rounded;
+
+    &:hover,
+    &:focus {
+      @apply opacity-100 bg-gray-200;
+    }
+
+    &:active {
+      transform: scale(1.2);
     }
   }
 }
