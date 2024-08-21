@@ -95,11 +95,15 @@ body:not(:has(.ddoc)) {
   }
 
   .copyButton {
-    @apply opacity-0 transition-opacity duration-100 absolute top-2 right-2 p-1 rounded;
+    @apply opacity-0 transition-all duration-100 absolute top-2 right-2 p-1 rounded;
 
     &:hover,
     &:focus {
-      @apply opacity-100 bg-gray-300;
+      @apply opacity-100 bg-gray-200;
+    }
+
+    &:active {
+      transform: scale(1.2);
     }
   }
 }
