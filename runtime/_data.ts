@@ -19,6 +19,7 @@ export const sidebar = [
       "/runtime/fundamentals/ts_support/",
       "/runtime/fundamentals/permissions/",
       "/runtime/fundamentals/debugging/",
+      "/runtime/fundamentals/stability/",
     ],
   },
   {
