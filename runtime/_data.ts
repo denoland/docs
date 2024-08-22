@@ -22,7 +22,6 @@ export const sidebar = [
       "/runtime/fundamentals/debugging/",
       "/runtime/fundamentals/workspaces/",
       "/runtime/fundamentals/stability/",
-
     ],
   },
   {
