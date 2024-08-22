@@ -61,6 +61,24 @@ Deno.test({
 });
 ```
 
+If you prefer a "jest-like" `expect` style, the Deno standard library provides an
+`expect` function that can be used in place of `assertEquals`:
+
+```ts
+import { expect } from "jsr:@std/expect";
+import { add } from "./add.js";
+
+Deno.test("add function adds two numbers correctly", () => {
+  const result = add(2, 3);
+  expect(result).toBe(5);
+});
+
+Deno.test("add function handles negative numbers", () => {
+  const result = add(-2, -3);
+  expect(result).toBe(-5);
+});
+```
+
 ## Running Tests
 
 To run your tests, use the [`deno test`](TODO:deno-test-link) subcommand.
