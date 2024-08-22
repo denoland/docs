@@ -18,7 +18,11 @@ export const sidebar = [
     items: [
       "/runtime/fundamentals/ts_support/",
       "/runtime/fundamentals/permissions/",
+      "/runtime/fundamentals/standard_library/"
       "/runtime/fundamentals/testing/",
+      "/runtime/fundamentals/debugging/",
+      "/runtime/fundamentals/workspaces/",
+      "/runtime/fundamentals/stability/",
     ],
   },
   {
@@ -191,10 +195,6 @@ export const sidebar = [
             id: "/runtime/manual/tools/upgrade/",
           },
         ],
-      },
-      {
-        label: "Workspaces",
-        id: "/runtime/manual/basics/workspaces/",
       },
       {
         label: "Vendoring",
