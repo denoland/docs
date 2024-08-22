@@ -1,6 +1,6 @@
 ---
 title: "Node → Deno cheatsheet"
-oldUrl: 
+oldUrl:
 - /runtime/manual/references/cheatsheet/
 ---
 
