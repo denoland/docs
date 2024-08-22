@@ -19,6 +19,7 @@ export const sidebar = [
       "/runtime/fundamentals/ts_support/",
       "/runtime/fundamentals/permissions/",
       "/runtime/fundamentals/standard_library/"
+      "/runtime/fundamentals/testing/",
       "/runtime/fundamentals/debugging/",
       "/runtime/fundamentals/workspaces/",
       "/runtime/fundamentals/stability/",
@@ -193,19 +194,6 @@ export const sidebar = [
             label: "deno upgrade",
             id: "/runtime/manual/tools/upgrade/",
           },
-        ],
-      },
-      {
-        label: "Testing",
-        items: [
-          "/runtime/manual/basics/testing/",
-          "/runtime/manual/basics/testing/assertions/",
-          "/runtime/manual/basics/testing/coverage/",
-          "/runtime/manual/basics/testing/mocking/",
-          "/runtime/manual/basics/testing/sanitizers/",
-          "/runtime/manual/basics/testing/documentation/",
-          "/runtime/manual/basics/testing/behavior_driven_development/",
-          "/runtime/manual/basics/testing/snapshot_testing/",
         ],
       },
       {
