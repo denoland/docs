@@ -18,7 +18,7 @@ export const sidebar = [
     items: [
       "/runtime/fundamentals/ts_support/",
       "/runtime/fundamentals/permissions/",
-      "/runtime/fundamentals/standard_library/"
+      "/runtime/fundamentals/standard_library/",
       "/runtime/fundamentals/testing/",
       "/runtime/fundamentals/debugging/",
       "/runtime/fundamentals/workspaces/",
@@ -48,7 +48,6 @@ export const sidebar = [
           "/runtime/manual/runtime/import_meta_api/",
           "/runtime/manual/runtime/ffi_api/",
           "/runtime/manual/runtime/program_lifecycle/",
-          "/runtime/manual/runtime/stability/",
         ],
       },
       {
