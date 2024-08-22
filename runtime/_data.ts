@@ -18,6 +18,7 @@ export const sidebar = [
     items: [
       "/runtime/fundamentals/ts_support/",
       "/runtime/fundamentals/permissions/",
+      "/runtime/fundamentals/configuration/",
       "/runtime/fundamentals/standard_library/",
       "/runtime/fundamentals/testing/",
       "/runtime/fundamentals/debugging/",
