@@ -80,7 +80,6 @@ export const sidebar = [
           "/runtime/manual/advanced/jsx_dom/overview/",
           "/runtime/manual/advanced/jsx_dom/jsx/",
           "/runtime/manual/advanced/jsx_dom/css/",
-          "/runtime/manual/advanced/jsx_dom/twind/",
           "/runtime/manual/advanced/jsx_dom/jsdom/",
           "/runtime/manual/advanced/jsx_dom/deno_dom/",
           "/runtime/manual/advanced/jsx_dom/linkedom/",

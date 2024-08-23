@@ -54,16 +54,21 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   return (
     <>
       <aside
-        class="lg:block absolute top-0 lg:top-16 bottom-0 -left-74 lg:left-0 sidebar-open:left-0 w-74 border-r border-gray-200 bg-white z-50 lg:z-0 transition-all"
+        class="flex flex-col absolute top-0 lg:top-16 bottom-0 -left-74 lg:left-0 sidebar-open:left-0 w-74 border-r border-gray-200 bg-white z-50 lg:z-0 transition-all"
         id="sidebar"
         data-open="false"
       >
         <div class="lg:hidden p-4 shadow-sm flex justify-between h-16">
           <a class="flex items-center gap-3 mr-6" href="/">
-            <div class="block size-6">
-              <img src="/img/logo.svg" alt="Deno Docs" />
-            </div>
-            <b class="text-xl">Docs</b>
+            <img
+              class="block size-6"
+              src="/img/logo.svg"
+              alt=""
+              aria-hidden="true"
+            />
+            <b class="text-xl">
+              <span class="sr-only">Deno</span> Docs
+            </b>
           </a>
           <button
             type="button"
@@ -98,7 +103,10 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         class="absolute top-16 bottom-0 left-0 right-0 lg:left-74 overflow-y-auto lg:grid lg:grid-cols-7 lg:gap-8 max-w-screen-2xl mx-auto"
         style={{ scrollbarGutter: "stable" }}
       >
-        <main class="mx-auto max-w-screen-xl w-full pt-4 pb-8 flex flex-grow lg:col-span-5">
+        <main
+          id="content"
+          class="mx-auto max-w-screen-xl w-full pt-4 pb-8 flex flex-grow lg:col-span-5"
+        >
           <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full">
             <article class="max-w-[66ch] mx-auto">
               <Breadcrumbs

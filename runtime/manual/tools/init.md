@@ -99,3 +99,50 @@ Inside `deno.json` you'll see that the entries for `name`, `exports` and
   }
 }
 ```
+
+## Initialize a web server
+
+Running `deno init --serve` bootstraps a web server that works with
+[`deno serve`](./serve).
+
+```sh
+$ deno init --serve
+✅ Project initialized
+
+Run these commands to get started
+
+  # Run the server
+  deno serve -R main.ts
+
+  # Run the server and watch for file changes
+  deno task dev
+
+  # Run the tests
+  deno -R test
+```
+
+Your [`deno.json`](../getting_started/configuration_file) file will look like
+this:
+
+```json
+{
+  "tasks": {
+    "dev": "deno serve --watch -R main.ts"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/http": "jsr:@std/http@1"
+  }
+}
+```
+
+Now, you can start your web server, which
+[watches for changes](../getting_started/command_line_interface#watch-mode), by
+running `deno task dev`.
+
+```sh
+$ deno task dev
+Task dev deno serve --watch -R main.ts
+Watcher Process started.
+deno serve: Listening on http://0.0.0.0:8000/
+```
