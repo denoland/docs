@@ -34,6 +34,7 @@ export const sidebar = [
       "/runtime/fundamentals/testing/",
       "/runtime/fundamentals/debugging/",
       "/runtime/fundamentals/workspaces/",
+      "/runtime/fundamentals/web_frameworks/",
       "/runtime/fundamentals/installation/",
       "/runtime/fundamentals/stability/",
     ],
