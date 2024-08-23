@@ -1,18 +1,18 @@
 ---
-title: "Permissions"
+title: "Security and permissions"
 oldUrl:
   - /runtime/manual/basics/permissionsDeno/
   - /manual/basics/permissions
   - /runtime/manual/basics/permissions
 ---
 
-Deno is secure by default. Therefore, unless you specifically enable it, a
-program run with Deno has no access to sensitive APIs, such as file system
-access, network connectivity, or environment access. You must explicitly grant
-access to these resources with command line flags or with the runtime permission
-prompt. This is a major difference from Node, where dependencies are
-automatically granted full access to everything, potentially introducing hidden
-vulnerabilities into your project.
+Deno is secure by default. Unless you specifically enable it, a program run with
+Deno has no access to sensitive APIs, such as file system access, network
+connectivity, or environment access. You must explicitly grant access to these
+resources with command line flags or with the runtime permission prompt. This is
+a major difference from Node, where dependencies are automatically granted full
+access to everything, potentially introducing hidden vulnerabilities into your
+project.
 
 ## Granting permissions
 
@@ -27,7 +27,7 @@ deno run --allow-read mod.ts
 `mod.ts` has been granted read-only access to the file system. It cannot write
 to the file system, or perform any other security sensitive functions. For more
 examples of what you can do with different permissions, check out
-[Deno by Example](https://docs.deno.com/examples/).
+[Deno by Example](/examples/).
 
 ## Denying permissions
 

@@ -81,7 +81,8 @@ Deno.test("add function handles negative numbers", () => {
 
 ## Running Tests
 
-To run your tests, use the [`deno test`](TODO:deno-test-link) subcommand.
+To run your tests, use the [`deno test`](/runtime/manual/tools/test/)
+subcommand.
 
 If run without a file name or directory name, this subcommand will automatically
 find and execute all tests in the current directory (recursively) that match the
@@ -273,17 +274,17 @@ deno test --junit-path=./report.xml
 
 ## Spying, mocking (test doubles), stubbing and faking time
 
-The [Deno standard library](./standard_library.md) provides a set of functions
-to help you write tests that involve spying, mocking, and stubbing. Check out
-the [documentation on JSR](https://jsr.io/@std/testing) for more information on
-each of these utilities.
+The [Deno standard library](/runtime/fundamentals/standard_library/) provides a
+set of functions to help you write tests that involve spying, mocking, and
+stubbing. Check out the [documentation on JSR](https://jsr.io/@std/testing) for
+more information on each of these utilities.
 
 ## Assertions
 
 To help developers write tests, the
-[Deno standard library](./standard_library.md) comes with a built-in assertions
-module which can be imported from `jsr:@std/assert`. Check out the
-[documentation on JSR for its usage](https://jsr.io/@std/assert).
+[Deno standard library](/runtime/fundamentals/standard_library/) comes with a
+built-in assertions module which can be imported from `jsr:@std/assert`. Check
+out the [documentation on JSR for its usage](https://jsr.io/@std/assert).
 
 ## Coverage
 
@@ -292,7 +293,7 @@ the `--coverage` flag when starting `deno test`. This coverage information is
 acquired directly from the V8 JavaScript engine, ensuring high accuracy.
 
 This can then be further processed from the internal format into well known
-formats with the [`deno coverage`](TODO:coverage-link) tool.
+formats with the [`deno coverage`](/runtime/manual/tools/coverage/) tool.
 
 ## Behavior-Driven Development
 
@@ -415,7 +416,7 @@ Deno.test({
 
 ## Snapshot testing
 
-The [Deno standard library](./standard_library.md) includes a
+The [Deno standard library](/runtime/fundamentals/standard_library/) includes a
 [snapshot module](https://jsr.io/@std/testing/doc/snapshot/~) that allows
 developers to write tests by comparing values against reference snapshots. These
 snapshots are serialized representations of the original values and are stored
@@ -559,9 +560,8 @@ interface TestModuleDeleteParams {
 
 #### `deno/testRunProgress`
 
-When a [`deno/testRun`](#denotestrun) is requested from the client, the server
-will support progress of that test run via the `deno/testRunProgress`
-notification.
+When a `deno/testRun` is requested from the client, the server will support
+progress of that test run via the `deno/testRunProgress` notification.
 
 The client should process these messages and update any UI representation.
 

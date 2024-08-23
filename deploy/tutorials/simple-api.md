@@ -133,7 +133,7 @@ the `localhost` URL with your live production URL on Deno Deploy:
 ```shell
 curl --header "Content-Type: application/json" \
   --request POST \
-  --data '{"url":"https://docs.deno.com/runtime/manual","slug":"denodocs"}' \
+  --data '{"url":"https://docs.deno.com/runtime/","slug":"denodocs"}' \
   https://your-deno-project-url-here.deno.dev/
 ```
 

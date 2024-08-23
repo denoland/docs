@@ -72,11 +72,11 @@ Debugger listening on ws://127.0.0.1:9229/ws/1e82c406-85a9-44ab-86b6-7341583480b
 In a Chromium derived browser such as Google Chrome or Microsoft Edge, open
 `chrome://inspect` and click `Inspect` next to target:
 
-![chrome://inspect](../images/debugger1.jpg)
+![chrome://inspect](./images/debugger1.jpg)
 
 It might take a few seconds after opening the DevTools to load all modules.
 
-![DevTools opened](../images/debugger2.jpg)
+![DevTools opened](./images/debugger2.jpg)
 
 You might notice that DevTools pauses execution on the first line of
 `_constants.ts` instead of `file_server.ts`. This is expected behavior caused by
@@ -87,7 +87,7 @@ At this point all source code is available in the DevTools, so let's open up
 `file_server.ts` and add a breakpoint there; go to "Sources" pane and expand the
 tree:
 
-![Open file_server.ts](../images/debugger3.jpg)
+![Open file_server.ts](./images/debugger3.jpg)
 
 _Looking closely you'll find duplicate entries for each file; one written
 regularly and one in italics. The former is compiled source file (so in the case
@@ -96,7 +96,7 @@ source map for the file._
 
 Next, add a breakpoint in the `listenAndServe` method:
 
-![Break in file_server.ts](../images/debugger4.jpg)
+![Break in file_server.ts](./images/debugger4.jpg)
 
 As soon as we've added the breakpoint, DevTools automatically opens up the
 source map file, which allows us step through the actual source code that
@@ -112,7 +112,7 @@ Once our script is running, try send a request and inspect it in Devtools:
 curl http://0.0.0.0:4507/
 ```
 
-![Break in request handling](../images/debugger5.jpg)
+![Break in request handling](./images/debugger5.jpg)
 
 At this point we can introspect the contents of the request and go step-by-step
 to debug the code.
@@ -133,7 +133,7 @@ and enabled in Preferences / Settings | Plugins. For more information, see
 You can debug Deno using your JetBrains IDE by right-clicking the file you want
 to debug and selecting the `Debug 'Deno: <file name>'` option.
 
-![Debug file](../images/jb-ide-debug.png)
+![Debug file](./images/jb-ide-debug.png)
 
 This will create a run/debug configuration with no permission flags set. If you
 want to configure them, open your run/debug configuration and add the required

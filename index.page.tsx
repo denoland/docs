@@ -8,7 +8,7 @@ export const sidebar = [
     items: [
       {
         label: "Runtime Manual",
-        id: "/runtime/manual/",
+        id: "/runtime/",
       },
       {
         label: "Examples",
@@ -57,7 +57,7 @@ export default function () {
             <div class="flex flex-row gap-4 mt-8">
               <DocsCTA
                 text="Get Started"
-                href="/runtime/manual"
+                href="/runtime/"
                 product="runtime"
               />
               <DocsCTA
@@ -97,7 +97,7 @@ export default function () {
                 title="Deno basics"
                 description="New to Deno? This is the place to start."
                 linktext="Get started"
-                link="/runtime/manual/getting_started/first_steps"
+                link="/runtime/"
                 product="runtime"
               />
 
@@ -105,7 +105,7 @@ export default function () {
                 title="Configuration"
                 description="Customizations for Deno’s built-in TypeScript compiler, formatter, and linter."
                 linktext="Deno config"
-                link="/runtime/manual/getting_started/configuration_file"
+                link="/runtime/fundamentals/configuration"
                 product="runtime"
               />
 
@@ -399,7 +399,7 @@ export default function () {
                   title="Quick Start"
                   description="Configure your subhosting account and you'll be hosting customer code in minutes."
                   linktext="Quick start"
-                  link="/runtime/manual/getting_started/first_steps"
+                  link="/subhosting/manual/quick_start/"
                   product="deploy"
                 />
 
@@ -407,7 +407,7 @@ export default function () {
                   title="Subhosting architecture"
                   description="Learn how subhosting works with our platform architecture guides."
                   linktext="Learn about subhosting"
-                  link="/runtime/manual/getting_started/configuration_file"
+                  link="/runtime/fundamentals/configuration"
                   product="deploy"
                 />
 
@@ -415,7 +415,7 @@ export default function () {
                   title="REST API"
                   description="Quickly provision new projects and make deployments through our REST API."
                   linktext="REST API"
-                  link="/runtime/manual/basics/testing/"
+                  link="/subhosting/manual/#rest-api-reference-and-openapi-spec"
                   product="deploy"
                 />
               </div>

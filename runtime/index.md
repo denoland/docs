@@ -47,7 +47,7 @@ curl -fsSL https://deno.land/install.sh | sh
 </deno-tab>
 </deno-tabs>
 
-[Additional installation options can be found here](./resources/installation.md).
+[Additional installation options can be found here](/runtime/fundamentals/installation/).
 After installation, you should will the `deno` executable available on your
 system path. You can verify the installation by running:
 
@@ -57,12 +57,12 @@ deno --version
 
 ## Hello World
 
-Deno can run JavaScript and TypeScript with no additional tools or configuration
-required. We'll make and run a simple "hello world" program and run it with
-Deno.
+Deno can run JavaScript and [TypeScript](https://www.typescriptlang.org/) with
+no additional tools or configuration required. We'll make and run a simple
+"hello world" program and run it with Deno.
 
-Create a [TypeScript](https://www.typescriptlang.org/) or JavaScript file called
-`main` and include the following code:
+Create a TypeScript or JavaScript file called `main` and include the following
+code:
 
 <deno-tabs>
 <deno-tab value="TypeScript" label="TypeScript" default>
@@ -76,7 +76,7 @@ console.log(greet("world"));
 ```
 
 </deno-tab>
-<deno-tab  value="JavaScript" label="JavaScript">
+<deno-tab value="JavaScript" label="JavaScript">
 
 ```js title="main.js"
 function greet(name) {
@@ -115,6 +115,6 @@ Hello, world!
 Congratulations! You've just run your first Deno program. Read on to learn more
 about the Deno runtime.
 
-- [Making a Deno project](./installation.md)
-- [Setting up your environment](./setup_your_environment.md)
-- [Using the CLI](./setup_your_environment.md)
+- [Making a Deno project](/runtime/getting_started/installation/)
+- [Setting up your environment](/runtime/getting_started/setup_your_environment/)
+- [Using the CLI](/runtime/getting_started/command_line_interface)

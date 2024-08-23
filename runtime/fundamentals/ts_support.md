@@ -62,7 +62,7 @@ team
 :::
 
 Deno allows you to type-check your code (without executing it) with the
-[`deno check`](TODO:check-link) subcommand:
+[`deno check`](/runtime/manual/tools/check/) subcommand:
 
 ```shell
 deno check module.ts
@@ -180,8 +180,8 @@ loading the JavaScript file for execution.
 
 3. **Using HTTP headers for remote modules**. Deno supports a header for remote
    modules that instructs the runtime on where to locate the types for a given
-   module. For example, a response for https://example.com/coolLib.js might look
-   like this:
+   module. For example, a response for `https://example.com/coolLib.js` might
+   look like this:
 
 ```ts
 HTTP/1.1 200 OK
@@ -191,7 +191,7 @@ X-TypeScript-Types: ./coolLib.d.ts
 ```
 
 When seeing this header, Deno would attempt to retrieve
-https://example.com/coolLib.d.ts and use that when type checking the original
+`https://example.com/coolLib.d.ts` and use that when type checking the original
 module.
 
 ## Using ambient or global types

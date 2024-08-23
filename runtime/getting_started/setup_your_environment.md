@@ -4,9 +4,10 @@ oldUrl: /runtime/manual/getting_started/setup_your_environment/
 ---
 
 Deno comes with many of the tools that are commonly needed for developing
-applications, including a full [language server (LSP)](TODO:lsp-link) to help
-power your IDE of choice. This page will help you set up your environment to get
-the most out of Deno while you are developing.
+applications, including a full
+[language server (LSP)](/runtime/manual/tools/lsp/) to help power your IDE of
+choice. This page will help you set up your environment to get the most out of
+Deno while you are developing.
 
 We'll cover:
 

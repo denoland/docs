@@ -1,5 +1,6 @@
 ---
-title: "`deno.json` configuration file"
+title: "deno.json configuration file"
+oldUrl: /runtime/manual/getting_started/configuration_file/
 ---
 
 Deno supports a configuration file that allows you to customize the built-in

@@ -1,6 +1,6 @@
 ---
-pagination_next: /runtime/manual/basics/permissions
 title: "Web Frameworks"
+oldUrl: /runtime/manual/getting_started/web_frameworks
 ---
 
 Most likely, if you're building a more complex application, you'll be

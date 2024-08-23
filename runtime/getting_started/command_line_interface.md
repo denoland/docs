@@ -17,9 +17,10 @@ used to customize its behavior.
 You can view all of the available commands and flags by running the `deno help`
 subcommand in your terminal, or using the `-h` or `--help` flags.
 
-Check out the [CLI reference](TODO:cli-link) for a further documentation on all
-the subcommands and flags available. We'll take a look at a few commands in a
-bit more detail below to see how they can be used and configured.
+Check out the [CLI reference guide](/runtime/manual/tools/) for a further
+documentation on all the subcommands and flags available. We'll take a look at a
+few commands in a bit more detail below to see how they can be used and
+configured.
 
 ## An example subcommand - `deno run`
 
@@ -131,7 +132,7 @@ replacement mode. Instead of restarting the program, the runtime will try to
 update the program in-place. If updating in-place fails, the program will still
 be restarted.
 
-```shell
+```sh
 deno run --watch-hmr main.ts
 ```
 
@@ -152,12 +153,13 @@ addEventListener("hmr", (e) => {
 Affect commands which can download resources to the cache: `deno cache`,
 `deno run`, `deno test`, `deno doc`, and `deno compile`.
 
-```terminal
+```sh
 --lock <FILE>    Check the specified lock file
 --lock-write     Write lock file. Use with --lock.
 ```
 
-Find out more about these [here](../basics/modules/integrity_checking.md).
+Find out more about these
+[here](/runtime/manual/basics/modules/integrity_checking/).
 
 ### Cache and compilation flags
 
@@ -165,7 +167,7 @@ Affect commands which can populate the cache: `deno cache`, `deno run`,
 `deno test`, `deno doc`, and `deno compile`. As well as the flags above, this
 includes those which affect module resolution, compilation configuration etc.
 
-```terminal
+```sh
 --config <FILE>               Load configuration file
 --import-map <FILE>           Load import map file
 --no-remote                   Do not resolve remote modules
@@ -212,13 +214,13 @@ reported. (To turn on type-checking for all modules, use `--check=all`.)
 
 ### Permission flags
 
-These are listed [here](../basics/permissions.md#permissions-list).
+These are listed [here](/runtime/fundamentals/security/).
 
 ### Other runtime flags
 
 More flags which affect the execution environment.
 
-```terminal
+```sh
 --cached-only                Require that remote dependencies are already cached
 --inspect=<HOST:PORT>        activate inspector on host:port ...
 --inspect-brk=<HOST:PORT>    activate inspector on host:port and break at ...

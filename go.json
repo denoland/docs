@@ -1,7 +1,7 @@
 {
   "permissions": "/runtime/fundamentals/permissions/",
-  "config": "/runtime/manual/getting_started/configuration_file/",
-  "ide": "/runtime/manual/getting_started/setup_your_environment/#using-an-editor%2Fide",
+  "config": "/runtime/fundamentals/configuration/",
+  "ide": "/runtime/getting_started/setup_your_environment/#setting-up-your-editor%2Fide",
   "--allow-env": "/runtime/fundamentals/permissions/#environment-access",
   "--allow-ffi": "/runtime/fundamentals/permissions/#ffi-(foreign-function-interface)",
   "--allow-hrtime": "/runtime/fundamentals/permissions/#high-resolution-time",

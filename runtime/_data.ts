@@ -17,17 +17,7 @@ export const sidebar = [
     title: "Fundamentals",
     items: [
       "/runtime/fundamentals/ts_support/",
-      "/runtime/fundamentals/permissions/",
-      "/runtime/fundamentals/standard_library/",
-      "/runtime/fundamentals/testing/",
-      "/runtime/fundamentals/debugging/",
-      "/runtime/fundamentals/workspaces/",
-      "/runtime/fundamentals/stability/",
-    ],
-  },
-  {
-    title: "Modules and APIs",
-    items: [
+      "/runtime/fundamentals/security/",
       {
         label: "Using & Publishing Modules",
         items: [
@@ -39,6 +29,18 @@ export const sidebar = [
           "/runtime/manual/advanced/http_imports/",
         ],
       },
+      "/runtime/fundamentals/configuration/",
+      "/runtime/fundamentals/standard_library/",
+      "/runtime/fundamentals/testing/",
+      "/runtime/fundamentals/debugging/",
+      "/runtime/fundamentals/workspaces/",
+      "/runtime/fundamentals/installation/",
+      "/runtime/fundamentals/stability/",
+    ],
+  },
+  {
+    title: "Modules and APIs",
+    items: [
       {
         label: "Deno Runtime APIs",
         items: [
@@ -330,4 +332,4 @@ export const sidebar = [
 ] satisfies Sidebar;
 
 export const sectionTitle = "Runtime";
-export const sectionHref = "/runtime/manual/";
+export const sectionHref = "/runtime/";

@@ -94,12 +94,12 @@ $ deno run server.js
 └ Allow? [y/n/A] (y = yes, allow; n = no, deny; A = allow all net permissions) >
 ```
 
-Deno features [runtime security by default](TODO:permissions-link), meaning that
-you as the developer must opt in to giving your code access to the filesystem,
-network, system environment, and more. Doing this prevents supply chain attacks
-and other potential vulnerabilities in your code. By comparison, Node.js has no
-concept of runtime security, with all code executed with the same level of
-permission as the user running the code.
+Deno features [runtime security by default](/runtime/fundamentals/security/),
+meaning that you as the developer must opt in to giving your code access to the
+filesystem, network, system environment, and more. Doing this prevents supply
+chain attacks and other potential vulnerabilities in your code. By comparison,
+Node.js has no concept of runtime security, with all code executed with the same
+level of permission as the user running the code.
 
 To run your code like it would in Node.js, you can pass the `-A` flag to enable
 all permissions.
@@ -109,7 +109,8 @@ deno run -A server.js
 ```
 
 For more granular control, you can enable access to specific features by opting
-in to [individual permissions](TODO:permissions-link/#permissions-list).
+in to
+[individual permissions](/runtime/fundamentals/security/#permissions-list).
 
 ## Running scripts from `package.json`
 
