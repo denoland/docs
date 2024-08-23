@@ -1,6 +1,6 @@
 ---
 title: "Importing modules from HTTP URLs"
-oldUrl: 
+oldUrl:
 - runtime/manual/node/cdns.md
 ---
 

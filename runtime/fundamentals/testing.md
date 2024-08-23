@@ -1,6 +1,6 @@
 ---
 title: "Testing"
-oldUrl: 
+oldUrl:
   - /runtime/manual/advanced/language_server/testing_api/
   - /runtime/manual/basics/testing/
   - /runtime/manual/basics/testing/coverage/
@@ -61,8 +61,8 @@ Deno.test({
 });
 ```
 
-If you prefer a "jest-like" `expect` style, the Deno standard library provides an
-`expect` function that can be used in place of `assertEquals`:
+If you prefer a "jest-like" `expect` style, the Deno standard library provides
+an `expect` function that can be used in place of `assertEquals`:
 
 ```ts title="my_test.ts"
 import { expect } from "jsr:@std/expect";

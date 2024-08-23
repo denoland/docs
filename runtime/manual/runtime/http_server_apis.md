@@ -125,15 +125,15 @@ Deno.serve((req) => {
 });
 ```
 
-> ℹ️ Note the `cancel` function here. This is called when the client hangs up the
-> connection. This is important to make sure that you handle this case, as
+> ℹ️ Note the `cancel` function here. This is called when the client hangs up
+> the connection. This is important to make sure that you handle this case, as
 > otherwise the server will keep queuing up messages forever, and eventually run
 > out of memory.
 
-> ⚠️ Beware that the response body stream is "cancelled" when the client hangs up
-> the connection. Make sure to handle this case. This can surface itself as an
-> error in a `write()` call on a `WritableStream` object that is attached to the
-> response body `ReadableStream` object (for example through a
+> ⚠️ Beware that the response body stream is "cancelled" when the client hangs
+> up the connection. Make sure to handle this case. This can surface itself as
+> an error in a `write()` call on a `WritableStream` object that is attached to
+> the response body `ReadableStream` object (for example through a
 > `TransformStream`).
 
 ### HTTPS support
