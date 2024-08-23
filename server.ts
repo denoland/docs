@@ -116,7 +116,6 @@ server.use(async (req, next, info) => {
   try {
     const url = new URL(req.url, "http://localhost:8000");
     const redirect = REDIRECTS[url.pathname] || REDIRECTS[url.pathname + "/"];
-    console.log(" redirecting");
     if (redirect) {
       res = new Response(null, {
         status: 301,
@@ -135,7 +134,6 @@ server.use(async (req, next, info) => {
     err = e;
     throw e;
   } finally {
-    console.log("sending to ga4");
     ga4(
       req,
       info.remoteAddr,
