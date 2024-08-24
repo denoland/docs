@@ -42,7 +42,7 @@ differences. Here are some common ones:
 | `process.platform`           | `Deno.build.os`                 |
 | `process.arch`               | `Deno.build.arch`               |
 | `process.execPath()`         | `Deno.execPath()`               |
-| `process.exist(code)`        | `Deno.exit(code)`               |
+| `process.exit(code)`         | `Deno.exit(code)`               |
 
 It is also possible to import Node.js modules into your project using the
 `node:` specifier. For example:
