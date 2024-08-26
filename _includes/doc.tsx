@@ -170,7 +170,6 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         <aside class="hidden lg:block pb-8 pr-8 col-span-2">
           <div
             class="py-2 sticky overflow-y-auto top-4 h-[calc(100vh-7rem)]"
-            style={{ scrollbarGutter: "stable", scrollbarWidth: "thin" }}
             id="toc"
           >
             <ul class="border-l border-gray-200 py-2 pl-2 relative">
