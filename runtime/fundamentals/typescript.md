@@ -11,40 +11,10 @@ oldUrl:
 ---
 
 TypeScript is a first class language in Deno, just like JavaScript or
-WebAssembly, so you can run or import TypeScript without installing anything
-more than the Deno CLI.
-
-## The TS Compiler
-
-Deno has a built-in TypeScript compiler, which is used to compile TypeScript
-code to JavaScript. No extra installation or config is required making your
-development process simpler.
-
-### Automatic conversion and caching
-
-Deno converts TypeScript (as well as TSX and JSX) into JavaScript. It does this
-with a combination of the built in
-[TypeScript compiler](https://github.com/microsoft/TypeScript), and a Rust
-library called [swc](https://swc.rs/). When the code has been type checked and
-transformed, it is stored in a cache, ready for the next run without the need to
-convert it from its source to JavaScript again.
-
-You can see this cache location by running `deno info`:
-
-```shell
-$ deno info
-DENO_DIR location: "/path/to/cache/deno"
-Remote modules cache: "/path/to/cache/deno/deps"
-TypeScript compiler cache: "/path/to/cache/deno/gen"
-```
-
-If you were to look in the cache, you would see a directory structure that
-mimics your source directory structure and individual `.js` and `.meta` files.
-The `.js` file is the transformed source file while the `.meta` file contains
-meta data we want to cache about the file. The metadata contains a _hash_ of the
-source module that helps Deno to manage cache invalidation. You might also see a
-`.buildinfo` file, a TypeScript compiler incremental build information file,
-used to help speed up type checking.
+WebAssembly, you can run or import TypeScript without installing anything more
+than the Deno CLI. With its built-in TypeScript compiler, Deno will compile your
+TypeScript code to JavaScript with no extra config needed, making your
+development process a breeze.
 
 ## Type Checking
 
@@ -79,10 +49,9 @@ modules are not type-checked before they are executed**.
 
 :::
 
-When using the `deno run` command, Deno will only transpile the module before
-executing it, ignoring any potential type-related issues. In order to perform a
-type check of the module before execution occurs, you can use the `--check` flag
-with `deno run`:
+When using the `deno run` command, Deno will skip type-checking and run the code
+directly. In order to perform a type check of the module before execution
+occurs, you can use the `--check` flag with `deno run`:
 
 ```shell
 deno run --check module.ts
@@ -90,13 +59,21 @@ deno run --check module.ts
 deno run --check=all module.ts
 ```
 
-Deno treats type checking issues as terminal. If you have used the `--check`
-flag then type-related diagnostics will prevent the program from running: it
-will halt on these warnings, and exit the process before executing the code.
+When Deno encounters a type error, the process with exit before executing the
+code. If you have used the `--check` flag then type-related diagnostics will
+prevent the program from running: it will halt on these warnings, and exit the
+process before executing the code.
 
 In order to avoid this, you will either need to resolve the issue, use the
 `// @ts-ignore` or `// @ts-expect-error` pragmas, or skip type checking all
 together.
+
+When testing your code, type checking is enabled by default, you can use the
+`--no-check` flag to skip type checking if preferred:
+
+```shell
+deno test --no-check
+```
 
 ## Determining the type of file
 
@@ -143,7 +120,7 @@ identifying the type of file of a remote module:
 By default, Deno does not type check JavaScript. Check out the documentation on
 [configuring your project](./configuration.md) to find out more about how to
 configure your project to do this. Deno does support JavaScript importing
-TypeScript and TypeScript importing JavaScript, in complex scenarios.
+TypeScript and TypeScript importing JavaScript.
 
 An important note though is that when type checking TypeScript, by default Deno
 will "read" all the JavaScript in order to be able to evaluate how it might have
@@ -324,14 +301,3 @@ scripts.
 - This can cause issues with modules that have special packaging or are global
   UMD modules, leading to misleading errors. Providing types using one of the
   mentioned methods can help.
-
-### Internals
-
-- Deno generates a module graph by parsing the root module and its dependencies,
-  filling two potential slots: the code slot and the type slot.
-
-- During type checking, Deno offers the type slot to the TypeScript compiler if
-  it is filled, otherwise, it offers the code slot.
-
-- This ensures that when importing a `.d.ts` module or using alternative type
-  modules for JavaScript code, the correct types are provided to TypeScript.

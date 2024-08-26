@@ -16,7 +16,7 @@ export const sidebar = [
   {
     title: "Fundamentals",
     items: [
-      "/runtime/fundamentals/ts_support/",
+      "/runtime/fundamentals/typescript/",
       "/runtime/fundamentals/security/",
       {
         label: "Using & Publishing Modules",

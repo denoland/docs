@@ -10,7 +10,8 @@ IDEs with go-to-definition support and automatic code formatting.
 :::
 
 Starts the Deno language server. The language server is used by editors to
-provide features like intellisense, code formatting, and more.
+provide features like intellisense, code formatting, and more. Read more about
+[integrating with the Deno LSP](/runtime/manual/tools/lsp_integration/)
 
 ## Command
 
