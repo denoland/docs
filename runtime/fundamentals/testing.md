@@ -59,7 +59,7 @@ Deno.test({
 ```
 
 If you prefer a "jest-like" `expect` style, the Deno standard library provides
-an `expect` function that can be used in place of `assertEquals`:
+an [`expect`](https://jsr.io/@std/expect) function that can be used in place of `assertEquals`:
 
 ```ts title="my_test.ts"
 import { expect } from "jsr:@std/expect";
@@ -123,14 +123,14 @@ match test names.
 Consider the following tests:
 
 ```ts
-Deno.test({ name: "my-test", fn: myTest });
-Deno.test({ name: "test-1", fn: test1 });
-Deno.test({ name: "test-2", fn: test2 });
+Deno.test("my-test", () => {});
+Deno.test("test-1", () => {});
+Deno.test("test-2", () => {});
 ```
 
 ### Filtering by string
 
-To run all tests that contain the word "test" in their names, use:
+To run all tests that contain the word "my" in their names, use:
 
 ```sh
 deno test --filter "my" tests/
@@ -181,9 +181,6 @@ Or more likely:
   }
 }
 ```
-
-Then running `deno test` in the same directory tree as the configuration file
-will take these options into account.
 
 ## Test definition selection
 
