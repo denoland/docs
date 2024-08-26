@@ -69,11 +69,6 @@ Deno.test("add function adds two numbers correctly", () => {
   const result = add(2, 3);
   expect(result).toBe(5);
 });
-
-Deno.test("add function handles negative numbers", () => {
-  const result = add(-2, -3);
-  expect(result).toBe(-5);
-});
 ```
 
 ## Running Tests

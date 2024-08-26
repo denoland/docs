@@ -32,8 +32,8 @@ Your updates your deno.json import map will be updated to include those imports:
 ```json
 {
   "imports": {
-    "@std/fs": "jsr:@std/fs@^0.224.0",
-    "@std/path": "jsr:@std/path@^0.224.0"
+    "@std/fs": "jsr:@std/fs@^1.0.2",
+    "@std/path": "jsr:@std/path@^1.0.3"
   }
 }
 ```
@@ -50,8 +50,8 @@ await copy("foo.txt", join("dist", "foo.txt"));
 Alternatively, you can import modules directly with the `jsr:` specifier:
 
 ```js
-import { copy } from "jsr:@std/fs@^0.224.0";
-import { join } from "jsr:@std/path@^0.224.0";
+import { copy } from "jsr:@std/fs@^1.0.2";
+import { join } from "jsr:@std/path@^1.0.3";
 
 await copy("foo.txt", join("dist", "foo.txt"));
 ```
@@ -72,8 +72,8 @@ Will add those packages to your `package.json`:
 ```json
 {
   "dependencies": {
-    "@std/fs": "^0.224.0",
-    "@std/path": "^0.224.0"
+    "@std/fs": "npm:@jsr/std__fs@^1.0.2",
+    "@std/path": "npm:@jsr/std__path@^1.0.3"
   }
 }
 ```
