@@ -123,9 +123,9 @@ match test names.
 Consider the following tests:
 
 ```ts
-Deno.test({ name: "my-test", fn: myTest });
-Deno.test({ name: "test-1", fn: test1 });
-Deno.test({ name: "test-2", fn: test2 });
+Deno.test("my-test", () => {});
+Deno.test("test-1", () => {});
+Deno.test("test-2", () => {});
 ```
 
 ### Filtering by string
