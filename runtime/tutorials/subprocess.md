@@ -17,7 +17,8 @@ oldUrl:
 
 ## Simple example
 
-This example is the equivalent of running `'echo hello'` from the command line.
+This example is the equivalent of running `echo "Hello from Deno!"` from the
+command line.
 
 ```ts
 /**
@@ -25,10 +26,9 @@ This example is the equivalent of running `'echo hello'` from the command line.
  */
 
 // define command used to create the subprocess
-const command = new Deno.Command(Deno.execPath(), {
+const command = new Deno.Command("echo", {
   args: [
-    "eval",
-    "console.log('hello'); console.error('world')",
+    "Hello from Deno!",
   ],
 });
 
@@ -36,15 +36,15 @@ const command = new Deno.Command(Deno.execPath(), {
 const { code, stdout, stderr } = await command.output();
 
 console.assert(code === 0);
-console.assert("world\n" === new TextDecoder().decode(stderr));
 console.log(new TextDecoder().decode(stdout));
+console.log(new TextDecoder().decode(stderr));
 ```
 
 Run it:
 
 ```shell
-$ deno run --allow-run --allow-read ./subprocess_simple.ts
-hello
+$ deno run --allow-run=echo ./subprocess_simple.ts
+Hello from Deno!
 ```
 
 ## Security
@@ -105,5 +105,5 @@ setTimeout(() => {
 Run it:
 
 ```shell
-$ deno run --allow-run --allow-read --allow-write ./subprocess_piping_to_file.ts
+$ deno run --allow-run=yes --allow-read=. --allow-write=. ./subprocess_piping_to_file.ts
 ```
