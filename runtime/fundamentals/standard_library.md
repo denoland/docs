@@ -32,8 +32,8 @@ Your updates your deno.json import map will be updated to include those imports:
 ```json
 {
   "imports": {
-    "@std/fs": "jsr:@std/fs@^0.224.0",
-    "@std/path": "jsr:@std/path@^0.224.0"
+    "@std/fs": "jsr:@std/fs@^1.0.2",
+    "@std/path": "jsr:@std/path@^1.0.3"
   }
 }
 ```
