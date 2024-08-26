@@ -66,6 +66,38 @@ deno fmt src/
 
 This command will format all files in the `src/` directory.
 
+### Checking your formatting
+
+The `deno fmt --check` command is used to verify if your code is properly
+formatted according to Deno’s default formatting rules. Instead of modifying the
+files, it checks them and reports any formatting issues. This is particularly
+useful for integrating into continuous integration (CI) pipelines or pre-commit
+hooks to ensure code consistency across your project.
+
+If there are formatting issues, `deno fmt --check` will list the files that need
+formatting. If all files are correctly formatted, it will simply exit without
+any output.
+
+### Integration in CI
+
+You can add deno fmt --check to your CI pipeline to automatically check for
+formatting issues. For example, in a GitHub Actions workflow:
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - run: deno fmt --check
+```
+
+This ensures that any code changes adhere to the project’s formatting standards
+before being merged.
+
 ### Available options
 
 | Rule               | Description                                            | Default    | possible values         |
