@@ -133,11 +133,10 @@ Deno.test({ name: "test-2", fn: test2 });
 To run all tests that contain the word "test" in their names, use:
 
 ```sh
-deno test --filter "test" tests/
+deno test --filter "my" tests/
 ```
 
-This command will execute `my-test`, `test-1`, and `test-2` because they all
-include "test" in their names.
+This command will execute `my-test` because it contains the word "my".
 
 ### Filtering by Pattern
 
@@ -186,12 +185,12 @@ Or more likely:
 Then running `deno test` in the same directory tree as the configuration file
 will take these options into account.
 
-## Test definition filtering
+## Test definition selection
 
-Deno provides two options for filtering tests within the test definitions
+Deno provides two options for selecting tests within the test definitions
 themselves: ignoring tests and focusing on specific tests.
 
-### Filtering Out (Ignoring Tests)
+### Ignoring/Skipping Tests
 
 You can ignore certain tests based on specific conditions using the `ignore`
 boolean in the test definition. If `ignore` is set to `true`, the test will be
@@ -208,13 +207,30 @@ Deno.test({
 });
 ```
 
-### Filtering In (Only Running Specific Tests)
+If you want to ignore a test without passing any conditions, you can use the
+`ignore()` function from the `Deno.test` object:
+
+```ts
+Deno.test.ignore("my test", () => {
+  // your test code
+});
+```
+
+### Only Run Specific Tests
 
 If you want to focus on a particular test and ignore the rest, you can use the
 `only` option. This tells the test framework to run only the tests with only set
 to true. Multiple tests can have this option set. However, if any test is
 flagged with only, the overall test run will always fail, as this is intended to
 be a temporary measure for debugging.
+
+```ts
+Deno.test.only("my test", () => {
+  // some test code
+});
+```
+
+or
 
 ```ts
 Deno.test({
