@@ -72,8 +72,8 @@ Will add those packages to your `package.json`:
 ```json
 {
   "dependencies": {
-    "@std/fs": "^0.224.0",
-    "@std/path": "^0.224.0"
+    "@std/fs": "npm:@jsr/std__fs@^1.0.2",
+    "@std/path": "npm:@jsr/std__path@^1.0.3"
   }
 }
 ```
