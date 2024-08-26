@@ -276,7 +276,7 @@ deno run --deny-write=foo.txt,bar.txt script.ts
 ```
 
 _Any paths specified with `--deny-write[=<PATH>...]` will be denied access, even
-if they are specified in `--allow-write`.
+if they are specified in `--allow-write`._
 
 ### Certification errors
 
