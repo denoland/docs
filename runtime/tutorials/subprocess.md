@@ -56,7 +56,7 @@ permissions as if you were to run the command from the command line yourself.
 Be very careful using this permission as in many cases it does not provide much
 security. For example:
 
-1. Using `--allow-run` with no allow list is essentially the same as
+1. Using `--allow-run` without an allow list is essentially the same as
    `--allow-all`. A script could execute the `deno` executable with full
    permissions (ex. `deno eval '<malicious code goes here>'`).
 1. Using `--allow-run=... --allow-write` means a script could overwrite an
@@ -66,8 +66,9 @@ security. For example:
    executable and execute it.
 
 Even when locking down some of the scenarios listed above there are still
-possible exploits. Think through the combination of flags that you use carefully
-when using `--allow-run`!
+possible exploits (ex. when combining options with `--deny` flags). Think
+through the combination of flags that you use carefully when using
+`--allow-run`!
 
 ## Communicating with subprocesses
 
