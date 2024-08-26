@@ -355,3 +355,8 @@ body:not(:has(.ddoc)) {
     background-color: var(--color-neutral-muted) !important;
   }
 }
+
+#toc {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
