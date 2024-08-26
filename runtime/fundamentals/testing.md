@@ -183,9 +183,6 @@ Or more likely:
 }
 ```
 
-Then running `deno test` in the same directory tree as the configuration file
-will take these options into account.
-
 ## Test definition filtering
 
 Deno provides two options for filtering tests within the test definitions
