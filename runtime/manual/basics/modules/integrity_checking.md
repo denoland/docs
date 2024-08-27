@@ -21,10 +21,9 @@ file. To opt into a lock file, either:
 1. Create a `deno.json` file in the current or an ancestor directory, which will
    automatically create an additive lockfile at `deno.lock`.
 2. Use the `--lock=deno.lock` to enable and specify lock file checking. To
-   update or create a lock use `--lock=deno.lock --lock-write`. The
+   update or create a lock use `--lock=deno.lock --frozen=false`. The
    `--lock=deno.lock` tells Deno what the lock file to use is, while the
-   `--lock-write` is used to output dependency hashes to the lock file
-   (`--lock-write` must be used in conjunction with `--lock`).
+   `--frozen=false` is used to output dependency hashes to the lock file.
 
 A `deno.lock` might look like this, storing a hash of the file against the
 dependency:
@@ -59,39 +58,32 @@ Or disable automatically creating and validating a lockfile by specifying:
 }
 ```
 
-### Using `--lock` and `--lock-write` flags
+### Freezing the lockfile
 
-A typical workflow will look like this:
+The `--frozen` (alias `--frozen-lockfile`) flag causes Deno to error whenever an
+attempt to update the lockfile is made.
 
-**src/deps.ts**
+For example, say you're importing `npm:chalk@5.3.0` while using `--frozen`, and
+you later tried to import `npm:chalk@5.2.0`. Instead of quitely adding a second,
+out-of-date version of `chalk` to your dependency tree, Deno would fail, showing
+that `npm:chalk@5.2.0` would've otherwise been added to your lockfile.
 
-```ts
-// Add a new dependency to "src/deps.ts", used somewhere else.
-export { xyz } from "https://unpkg.com/xyz-lib@v0.9.0/lib.ts";
+```
+error: The lockfile is out of date. Run `deno cache --frozen=false` or rerun with `--frozen=false` to update it.
+changes:
+ 7 | -      "npm:chalk@5.3.0": "npm:chalk@5.3.0"
+ 7 | +      "npm:chalk@5.2.0": "npm:chalk@5.2.0",
+ 8 | +      "npm:chalk@5.3.0": "npm:chalk@5.3.0"
+21 | -      "chalk@5.3.0": {
+22 | +      "chalk@5.2.0": {
+23 | +        "integrity": "sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==",
+24 | +        "dependencies": {}
+25 | +      },
+26 | +      "chalk@5.3.0": {
 ```
 
-Then:
-
-```shell
-# Create/update the lock file "deno.lock".
-deno cache --lock=deno.lock --lock-write src/deps.ts
-
-# Include it when committing to source control.
-git add -u deno.lock
-git commit -m "feat: Add support for xyz using xyz-lib"
-git push
-```
-
-Collaborator on another machine -- in a freshly cloned project tree:
-
-```shell
-# Download the project's dependencies into the machine's cache, integrity
-# checking each resource.
-deno cache --reload --lock=deno.lock src/deps.ts
-
-# Done! You can proceed safely.
-deno test --allow-read src
-```
+If you intend to instead update you lockfile, you can specify `--frozen=false`,
+which will update the lockfile without error.
 
 ## Runtime verification
 
