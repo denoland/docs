@@ -85,6 +85,9 @@ changes:
 If you intend to instead update you lockfile, you can specify `--frozen=false`,
 which will update the lockfile without error.
 
+> [!NOTE] `--lock-write` was replaced by `--frozen=false` was replaced in
+> [Deno 1.45](https://deno.com/blog/v1.45#frozen-lockfile).
+
 ## Runtime verification
 
 Like caching above, you can also use lock files during use of the `deno run` sub
