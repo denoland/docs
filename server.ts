@@ -115,7 +115,10 @@ server.use(async (req, next, info) => {
   let res: Response;
   try {
     const url = new URL(req.url, "http://localhost:8000");
-    const redirect = REDIRECTS[url.pathname] || REDIRECTS[url.pathname + "/"];
+    const redirect = REDIRECTS[url.pathname] ||
+      (url.pathname.endsWith("/")
+        ? REDIRECTS[url.pathname.slice(0, -1)]
+        : REDIRECTS[url.pathname + "/"]);
     if (redirect) {
       res = new Response(null, {
         status: 301,
