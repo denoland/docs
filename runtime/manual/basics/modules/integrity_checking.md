@@ -61,7 +61,16 @@ Or disable automatically creating and validating a lockfile by specifying:
 ### Freezing the lockfile
 
 The `--frozen` (alias `--frozen-lockfile`) flag causes Deno to error whenever an
-attempt to update the lockfile is made.
+attempt to update the lockfile is made. You can also enable the same behavior by
+specifying the following configuration in your `deno.json` file:
+
+```json
+{
+  "lock": {
+    "frozen": true
+  }
+}
+```
 
 For example, say you're importing `npm:chalk@5.3.0` while using `--frozen`, and
 you later tried to import `npm:chalk@5.2.0`. Instead of quitely adding a second,
