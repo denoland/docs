@@ -17,11 +17,11 @@ building amazing applications.
 ## Linting
 
 Linting is the process of analyzing your code for potential errors, bugs, and
-stylistic issues. Deno’s built-in linter, [`deno lint`](TODO:lint-cli-ref),
-supports recommended set of rules from [ESLint](https://eslint.org/) to provide
-comprehensive feedback on your code. This includes identifying syntax errors,
-enforcing coding conventions, and highlighting potential issues that could lead
-to bugs.
+stylistic issues. Deno’s built-in linter,
+[`deno lint`](/runtime/manual/tools/linter/), supports recommended set of rules
+from [ESLint](https://eslint.org/) to provide comprehensive feedback on your
+code. This includes identifying syntax errors, enforcing coding conventions, and
+highlighting potential issues that could lead to bugs.
 
 To run the linter, use the following command in your terminal:
 
@@ -39,9 +39,9 @@ deno lint src/
 
 This command will lint all files in the `src/` directory.
 
-The linter can be configured in a [`deno.json`](TODO:config-link) file. You can
-specify custom rules, plugins, and settings to tailor the linting process to
-your needs.
+The linter can be configured in a
+[`deno.json`](/runtime/fundamentals/configuration/) file. You can specify custom
+rules, plugins, and settings to tailor the linting process to your needs.
 
 ## Formatting
 
@@ -113,6 +113,6 @@ before being merged.
 | unstable-yaml      | Enable formatting YAML files                           |            |                         |
 | use-tabs           | Use tabs instead of spaces for indentation             | **false**  | true, false             |
 
-The formatter can be configured in a [`deno.json`](TODO:config-link) file. You
-can specify custom rules, plugins, and settings to tailor the formatting process
-to your needs.
+The formatter can be configured in a
+[`deno.json`](/runtime/fundamentals/configuration/) file. You can specify custom
+rules, plugins, and settings to tailor the formatting process to your needs.
