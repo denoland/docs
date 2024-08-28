@@ -26,11 +26,16 @@ export default function Layout(props: Lume.Data) {
         <link rel="stylesheet" href="/gfm.css" />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/overrides.css" />
-        <script src="/orama-searchbox-1.0.0-rc47.js" defer></script>
         <script type="module" src="/sidebar.client.js"></script>
         <script type="module" src="/copy.client.js"></script>
         <script type="module" src="/search.client.js"></script>
         <script type="module" src="/tabs.client.js"></script>
+        <script
+          src="https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-ui.js"
+          type="module"
+          defer
+        />
+
         <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"
