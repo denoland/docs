@@ -146,3 +146,22 @@ Task dev deno serve --watch -R main.ts
 Watcher Process started.
 deno serve: Listening on http://0.0.0.0:8000/
 ```
+
+You can append a flag `--lib` to add extra parameters like add name, version and exports fields to deno.json.
+
+```sh
+$ deno init my_deno_project --lib
+✅ Project initialized
+
+...
+
+$ cat deno.json
+{
+  "name" : "my_deno_project",
+  "version": "1.0.0",
+  "exports": {},
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  }
+}
+```
