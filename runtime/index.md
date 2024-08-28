@@ -115,6 +115,6 @@ Hello, world!
 Congratulations! You've just run your first Deno program. Read on to learn more
 about the Deno runtime.
 
-- [Making a Deno project](/runtime/getting_started/installation/)
+- [Making a Deno project](/runtime/getting_started/first_project/)
 - [Setting up your environment](/runtime/getting_started/setup_your_environment/)
 - [Using the CLI](/runtime/getting_started/command_line_interface)
