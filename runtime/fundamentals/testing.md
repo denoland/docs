@@ -59,7 +59,8 @@ Deno.test({
 ```
 
 If you prefer a "jest-like" `expect` style, the Deno standard library provides
-an [`expect`](https://jsr.io/@std/expect) function that can be used in place of `assertEquals`:
+an [`expect`](https://jsr.io/@std/expect) function that can be used in place of
+`assertEquals`:
 
 ```ts title="my_test.ts"
 import { expect } from "jsr:@std/expect";
