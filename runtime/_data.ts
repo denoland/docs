@@ -36,6 +36,7 @@ export const sidebar = [
       "/runtime/fundamentals/workspaces/",
       "/runtime/fundamentals/web_frameworks/",
       "/runtime/fundamentals/installation/",
+      "/runtime/fundamentals/linting_and_formatting/",
       "/runtime/fundamentals/stability/",
     ],
   },
