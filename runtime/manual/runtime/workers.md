@@ -144,7 +144,7 @@ hello world
 ## Specifying worker permissions
 
 > This is an unstable Deno feature. Learn more about
-> [unstable features](./stability.md).
+> [unstable features](/runtime/fundamentals/stability/).
 
 The permissions available for the worker are analogous to the CLI permission
 flags, meaning every permission enabled there can be disabled at the level of

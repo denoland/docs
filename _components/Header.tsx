@@ -45,7 +45,7 @@ export default function Header({
           <HeaderItem
             url={url}
             activeOn="/runtime"
-            href="/runtime/manual"
+            href="/runtime/"
             name="Runtime Manual"
             hideOnMobile
           />

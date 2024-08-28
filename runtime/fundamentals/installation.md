@@ -1,5 +1,6 @@
 ---
 title: Installation
+oldUrl: /runtime/manual/getting_started/installation
 ---
 
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
