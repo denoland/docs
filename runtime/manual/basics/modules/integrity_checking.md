@@ -92,7 +92,16 @@ changes:
 ```
 
 If you intend to instead update you lockfile, you can specify `--frozen=false`,
-which will update the lockfile without error.
+which will update the lockfile without error. You can also enable the same
+functionality through the following `deno.json` configuration:
+
+```json
+{
+  "lock": {
+    "frozen": false
+  }
+}
+```
 
 > [!NOTE] `--lock-write` was replaced by `--frozen=false` was replaced in
 > [Deno 1.45](https://deno.com/blog/v1.45#frozen-lockfile).
