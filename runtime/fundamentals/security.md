@@ -4,6 +4,7 @@ oldUrl:
   - /runtime/manual/basics/permissionsDeno/
   - /manual/basics/permissions
   - /runtime/manual/basics/permissions
+  - /runtime/manual/getting_started/permissions
 ---
 
 Deno is secure by default. Unless you specifically enable it, a program run with
