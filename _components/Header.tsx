@@ -90,7 +90,7 @@ export default function Header({
           />
           <div class="w-[150px] lg:w-64">
             <orama-search-button />
-            <orama-searchbox />
+            <orama-search-box />
           </div>
         </div>
       </nav>
@@ -178,13 +178,4 @@ function HeaderItem({
         )}
     </a>
   );
-}
-
-declare module "npm:preact" {
-  namespace JSX {
-    interface IntrinsicElements {
-      "orama-searchbox": unknown;
-      "orama-search-button": unknown;
-    }
-  }
 }

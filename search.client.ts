@@ -1,42 +1,39 @@
-import { OramaClient } from "npm:@oramacloud/client@1";
-
-const client = new OramaClient({
-  endpoint: "https://cloud.orama.run/v1/indexes/deno-docs-pp7js4",
-  api_key: "BhHQBNY6gwBukMREm9FOproywA50UDQs",
-});
+// deno-lint-ignore-file no-explicit-any
+import "@orama/wc-components/dist/esm/orama-ui.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  oramaSearchbox.RegisterSearchBox({
-    oramaInstance: client,
-    colorScheme: "light",
-    resultsMap: {
+  const oramaSearchBox = document.querySelector(
+    "orama-search-box",
+  ) as any;
+
+  if (oramaSearchBox) {
+    oramaSearchBox.index = {
+      api_key: "BhHQBNY6gwBukMREm9FOproywA50UDQs",
+      endpoint: "https://cloud.orama.run/v1/indexes/deno-docs-pp7js4",
+    };
+    oramaSearchBox.colorScheme = "light";
+    oramaSearchBox.resultMap = {
       description: "content",
-    },
-    facetProperty: "category",
-  });
-  oramaSearchbox.RegisterSearchButton({
-    colorScheme: "light",
-    themeConfig: {
-      light: {
-        "--search-btn-background-color": "#fff",
-        "--search-btn-border-color": "rgb(229 231 235)",
-      },
-    },
-  });
+    };
+    oramaSearchBox.facetProperty = "category";
+  }
+
+  const oramaSearchButton = document
+    .querySelector(
+      "orama-search-button",
+    ) as any;
+  if (oramaSearchButton) {
+    oramaSearchButton.innerText = "Search";
+    oramaSearchButton.size = "small";
+    oramaSearchButton.colorScheme = "light";
+  }
 });
 
-declare global {
-  const oramaSearchbox: {
-    RegisterSearchBox: (options: {
-      oramaInstance: OramaClient;
-      colorScheme: "light" | "dark";
-      resultsMap: Record<string, string>;
-    }) => void;
-    RegisterSearchButton: (
-      options: {
-        colorScheme: "light" | "dark";
-        themeConfig: { light: Record<string, string> };
-      },
-    ) => void;
-  };
+declare module "npm:preact" {
+  namespace JSX {
+    interface IntrinsicElements {
+      "orama-search-box": unknown;
+      "orama-search-button": unknown;
+    }
+  }
 }

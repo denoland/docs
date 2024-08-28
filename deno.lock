@@ -77,6 +77,7 @@
       "jsr:@std/yaml@^0.224.1": "jsr:@std/yaml@0.224.3",
       "jsr:@std/yaml@^1.0.0-rc.1": "jsr:@std/yaml@1.0.0-rc.3",
       "npm:@js-temporal/polyfill@0.4.4": "npm:@js-temporal/polyfill@0.4.4",
+      "npm:@orama/wc-components@0.0.23": "npm:@orama/wc-components@0.0.23_@stencil+core@4.21.0_marked@13.0.3",
       "npm:@oramacloud/client@1": "npm:@oramacloud/client@1.2.3",
       "npm:@types/estree@1.0.5": "npm:@types/estree@1.0.5",
       "npm:@types/node": "npm:@types/node@18.16.19",
@@ -400,6 +401,16 @@
           "tslib": "tslib@2.6.3"
         }
       },
+      "@lit-labs/ssr-dom-shim@1.2.1": {
+        "integrity": "sha512-wx4aBmgeGvFmOKucFKY+8VFJSYZxs9poN3SDNQFF6lT6NrQUnHiPB2PWz2sc4ieEcAaYYzN+1uWahEeTq2aRIQ==",
+        "dependencies": {}
+      },
+      "@lit/reactive-element@2.0.4": {
+        "integrity": "sha512-GFn91inaUa2oHLak8awSIigYz0cU0Payr1rcFsrkf5OJ5eSPxElyZfKh0f2p9FsTiZWXQdWGJeXZICEfXXYSXQ==",
+        "dependencies": {
+          "@lit-labs/ssr-dom-shim": "@lit-labs/ssr-dom-shim@1.2.1"
+        }
+      },
       "@mongodb-js/saslprep@1.1.5": {
         "integrity": "sha512-XLNOMH66KhJzUJNwT/qlMnS4WsNDWD5ASdyaSH3EtK+F4r/CFGa3jT4GNi4mfOitGvWXtdLgQJkQjxSVrio+jA==",
         "dependencies": {
@@ -432,10 +443,42 @@
         "integrity": "sha512-XZpyjyNw4Mcpg94+gUvxmyyiFTZAdXvJ1aFPqHABarofu86oNwZL5tQUIj84xa1lrQiaeSxNKNBw0w4y5We5Yg==",
         "dependencies": {}
       },
+      "@orama/orama@2.0.23": {
+        "integrity": "sha512-hb99eZAKW0KBaTyf8f7iV1yFIniQtkcs3sV5pooQ7mh33DCjTyeB39qUW8IHyBDFSs2rjLoePjW0CROvhb3rkw==",
+        "dependencies": {}
+      },
+      "@orama/wc-components@0.0.23_@stencil+core@4.21.0_marked@13.0.3": {
+        "integrity": "sha512-vE8a1XR+0geKDKx9WRamEg9JGu6gJ6AWPXtzK82zArh9hionHanjrXL6ZQI9VjgyZWmhhB2M5bZJTZYSVoEyZA==",
+        "dependencies": {
+          "@orama/orama": "@orama/orama@2.0.23",
+          "@oramacloud/client": "@oramacloud/client@1.3.10",
+          "@phosphor-icons/webcomponents": "@phosphor-icons/webcomponents@2.1.5",
+          "@stencil/core": "@stencil/core@4.21.0",
+          "@stencil/store": "@stencil/store@2.0.16_@stencil+core@4.21.0",
+          "dompurify": "dompurify@3.1.6",
+          "highlight.js": "highlight.js@11.10.0",
+          "markdown-it": "markdown-it@14.1.0",
+          "marked": "marked@13.0.3",
+          "marked-highlight": "marked-highlight@2.1.4_marked@13.0.3",
+          "shiki": "shiki@1.14.1",
+          "sse.js": "sse.js@2.5.0"
+        }
+      },
       "@oramacloud/client@1.2.3": {
         "integrity": "sha512-PxD5wV6qeBR+zT+GwbronYQnoTzqrirVqyOiTZFlaGoq60MHrYbAcWuXq2cxZWO4Vr0Gg3P6NNG/JcWpUEYftA==",
         "dependencies": {
           "@orama/orama": "@orama/orama@2.0.21",
+          "@paralleldrive/cuid2": "@paralleldrive/cuid2@2.2.2",
+          "lodash": "lodash@4.17.21",
+          "openai": "openai@4.52.0",
+          "react": "react@18.3.1",
+          "vue": "vue@3.4.30"
+        }
+      },
+      "@oramacloud/client@1.3.10": {
+        "integrity": "sha512-8CJTZgFlOHMAVrixN22PdT9i4Go7qw4a75UWWDEexsZQas5Vbeyria3ZtnOXb9aeH5M2uYssz0255ctY8tHIaw==",
+        "dependencies": {
+          "@orama/orama": "@orama/orama@2.0.23",
           "@paralleldrive/cuid2": "@paralleldrive/cuid2@2.2.2",
           "lodash": "lodash@4.17.21",
           "openai": "openai@4.52.0",
@@ -449,13 +492,41 @@
           "@noble/hashes": "@noble/hashes@1.4.0"
         }
       },
+      "@phosphor-icons/webcomponents@2.1.5": {
+        "integrity": "sha512-JcvQkZxvcX2jK+QCclm8+e8HXqtdFW9xV4/kk2aL9Y3dJA2oQVt+pzbv1orkumz3rfx4K9mn9fDoMr1He1yr7Q==",
+        "dependencies": {
+          "lit": "lit@3.2.0"
+        }
+      },
       "@pkgjs/parseargs@0.11.0": {
         "integrity": "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==",
         "dependencies": {}
       },
+      "@shikijs/core@1.14.1": {
+        "integrity": "sha512-KyHIIpKNaT20FtFPFjCQB5WVSTpLR/n+jQXhWHWVUMm9MaOaG9BGOG0MSyt7yA4+Lm+4c9rTc03tt3nYzeYSfw==",
+        "dependencies": {
+          "@types/hast": "@types/hast@3.0.4"
+        }
+      },
+      "@stencil/core@4.21.0": {
+        "integrity": "sha512-v50lnVbzS8mpMSnEVxR+G75XpvxHKtkJaQrNPE8+/fF6Ppr5z4bcdcBhcP8LPfEW+4BZcic6VifMXRwTopc+kw==",
+        "dependencies": {}
+      },
+      "@stencil/store@2.0.16_@stencil+core@4.21.0": {
+        "integrity": "sha512-ET3EByKlmNyTA8O+tcp5YWePOiVnPIiuoiIaxTrf3zFFVo7JWVsVoak9IE0UTn3MkIM0ubR9lgxvi70uN588/A==",
+        "dependencies": {
+          "@stencil/core": "@stencil/core@4.21.0"
+        }
+      },
       "@types/estree@1.0.5": {
         "integrity": "sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==",
         "dependencies": {}
+      },
+      "@types/hast@3.0.4": {
+        "integrity": "sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==",
+        "dependencies": {
+          "@types/unist": "@types/unist@3.0.3"
+        }
       },
       "@types/linkify-it@5.0.0": {
         "integrity": "sha512-sVDA58zAw4eWAffKOaQH5/5j3XeayukzDk+ewSsnv3p4yJEZHCCzMDiZM8e0OUrRvmpGZ85jf4yDHkHsgBNr9Q==",
@@ -481,6 +552,14 @@
       },
       "@types/node@18.16.19": {
         "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
+        "dependencies": {}
+      },
+      "@types/trusted-types@2.0.7": {
+        "integrity": "sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==",
+        "dependencies": {}
+      },
+      "@types/unist@3.0.3": {
+        "integrity": "sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==",
         "dependencies": {}
       },
       "@types/webidl-conversions@7.0.3": {
@@ -840,6 +919,10 @@
         "integrity": "sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==",
         "dependencies": {}
       },
+      "dompurify@3.1.6": {
+        "integrity": "sha512-cTOAhc36AalkjtBpfG6O8JimdTMWNXjiePT2xQH/ppBGi/4uIpmj8eKyIkMJErXWARyINV/sB38yf8JCLF5pbQ==",
+        "dependencies": {}
+      },
       "eastasianwidth@0.2.0": {
         "integrity": "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==",
         "dependencies": {}
@@ -1083,6 +1166,10 @@
           "function-bind": "function-bind@1.1.2"
         }
       },
+      "highlight.js@11.10.0": {
+        "integrity": "sha512-SYVnVFswQER+zu1laSya563s+F8VDGt7o35d4utbamowvUNLLMovFqwCLSocpZTz3MgaSRA1IbqRWZv97dtErQ==",
+        "dependencies": {}
+      },
       "http-errors@2.0.0": {
         "integrity": "sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==",
         "dependencies": {
@@ -1184,6 +1271,28 @@
           "uc.micro": "uc.micro@2.1.0"
         }
       },
+      "lit-element@4.1.0": {
+        "integrity": "sha512-gSejRUQJuMQjV2Z59KAS/D4iElUhwKpIyJvZ9w+DIagIQjfJnhR20h2Q5ddpzXGS+fF0tMZ/xEYGMnKmaI/iww==",
+        "dependencies": {
+          "@lit-labs/ssr-dom-shim": "@lit-labs/ssr-dom-shim@1.2.1",
+          "@lit/reactive-element": "@lit/reactive-element@2.0.4",
+          "lit-html": "lit-html@3.2.0"
+        }
+      },
+      "lit-html@3.2.0": {
+        "integrity": "sha512-pwT/HwoxqI9FggTrYVarkBKFN9MlTUpLrDHubTmW4SrkL3kkqW5gxwbxMMUnbbRHBC0WTZnYHcjDSCM559VyfA==",
+        "dependencies": {
+          "@types/trusted-types": "@types/trusted-types@2.0.7"
+        }
+      },
+      "lit@3.2.0": {
+        "integrity": "sha512-s6tI33Lf6VpDu7u4YqsSX78D28bYQulM+VAzsGch4fx2H0eLZnJsUBsPWmGYSGoKDNbjtRv02rio1o+UdPVwvw==",
+        "dependencies": {
+          "@lit/reactive-element": "@lit/reactive-element@2.0.4",
+          "lit-element": "lit-element@4.1.0",
+          "lit-html": "lit-html@3.2.0"
+        }
+      },
       "lodash@4.17.21": {
         "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==",
         "dependencies": {}
@@ -1243,6 +1352,16 @@
           "punycode.js": "punycode.js@2.3.1",
           "uc.micro": "uc.micro@2.1.0"
         }
+      },
+      "marked-highlight@2.1.4_marked@13.0.3": {
+        "integrity": "sha512-D1GOkcdzP+1dzjoColL7umojefFrASDuLeyaHS0Zr/Uo9jkr1V6vpLRCzfi1djmEaWyK0SYMFtHnpkZ+cwFT1w==",
+        "dependencies": {
+          "marked": "marked@13.0.3"
+        }
+      },
+      "marked@13.0.3": {
+        "integrity": "sha512-rqRix3/TWzE9rIoFGIn8JmsVfhiuC8VIQ8IdX5TfzmeBucdY05/0UlzKaw0eVtpcN/OdVFpBk7CjKGo9iHJ/zA==",
+        "dependencies": {}
       },
       "mdurl@2.0.0": {
         "integrity": "sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==",
@@ -1700,6 +1819,13 @@
         "integrity": "sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==",
         "dependencies": {}
       },
+      "shiki@1.14.1": {
+        "integrity": "sha512-FujAN40NEejeXdzPt+3sZ3F2dx1U24BY2XTY01+MG8mbxCiA2XukXdcbyMyLAHJ/1AUUnQd1tZlvIjefWWEJeA==",
+        "dependencies": {
+          "@shikijs/core": "@shikijs/core@1.14.1",
+          "@types/hast": "@types/hast@3.0.4"
+        }
+      },
       "side-channel@1.0.6": {
         "integrity": "sha512-fDW/EZ6Q9RiO8eFG8Hj+7u/oW+XrPTIChwCOM2+th2A6OblDtYYIpve9m+KvI9Z4C9qSEXlaGR6bTEYHReuglA==",
         "dependencies": {
@@ -1722,6 +1848,10 @@
         "dependencies": {
           "memory-pager": "memory-pager@1.5.0"
         }
+      },
+      "sse.js@2.5.0": {
+        "integrity": "sha512-I7zYndqOOkNpz9KIdFZ8c8A7zs1YazNewBr8Nsi/tqThfJkVPuP1q7UE2h4B0RwoWZxbBYpd06uoW3NI3SaZXg==",
+        "dependencies": {}
       },
       "statuses@2.0.1": {
         "integrity": "sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==",
@@ -2663,7 +2793,34 @@
     "https://raw.githubusercontent.com/denoland/automation/0.19.2/helpers.ts": "71be90a0ecef229f0075782014f0f8402de112a467494b314e3cdb193f568e0a",
     "https://raw.githubusercontent.com/denoland/automation/0.19.2/mod.ts": "94c53674853b68977c3452262130d6430bdae2dfb5777b04c708d52fd9a73739",
     "https://raw.githubusercontent.com/denoland/automation/0.19.2/releases_md.ts": "4debb10b57849e20f97a58354773db22c2887b6a6a58134869366265729eb2e0",
-    "https://raw.githubusercontent.com/denoland/automation/0.19.2/repo.ts": "046f848101b200f240796063ad7b956f85feddd4b46d1be59eac15a67f9a5e8b"
+    "https://raw.githubusercontent.com/denoland/automation/0.19.2/repo.ts": "046f848101b200f240796063ad7b956f85feddd4b46d1be59eac15a67f9a5e8b",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/ChatService-be5bda70.js": "678884b2f37a2100cfdb6f6772f9856d081bc0199eccda68371edebe37589d93",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/GlobalContext-0a87b8bd.js": "2cf4f45d144b13d67f93012d4f3bb72a102426bfc9f06fc202a6d710f2a0ac65",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/PhMagnifyingGlass-e2c5522a.js": "2172eec0e23d2473fd802007452e33fb166c0b4630aed140cf4cacf1daac2544",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/PhX-2b4eb9b5.js": "6be0c11eefb0ce2ba438f25b90e82e6e0cc190aa776207c6af44318e6ff55b72",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/app-globals-0f993ce5.js": "fe745cee5fb8000d54ab8845fd0211b6a60112d773d3f4826e7b21abd5c171ac",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/chatContext-01d2f946.js": "1d3cfdd38b9ad64cbf4c70d6959e6a49563fcc441f5b669d64ac0ef00b0b1c0f",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/index-17add49b.js": "5902a45a9857e42fb19ba76f184ef21752a2d4d950bc3040deb547f44bd10a6d",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/index-4b708f0c.js": "6ac1d61e7b4edd7c2399cfc5f451f66874981409342786cbf8c6ed92306c96d8",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/index.js": "9e9e25803028566673d7a88cc9ea87091426c471563243500ba6570564422b88",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/loader.js": "72230905aad52a7338d9307dd5060ebea3fb5959a016943ce8021d7c384d3044",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-button.entry.js": "07ae733e4416a63a23e855f4657d3cc2398afab9b5b50370a908d203a6f1afeb",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-chat-assistent-message_5.entry.js": "3343fb91696308f273c9d91c6c6c7abe18b2625601d9c7018329f981f271d1ee",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-chat-box.entry.js": "5b5af669b3db54bc0505ef908a163a0b7a6f56e9f365bf090a6d0dfc47bb833e",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-chat-button_4.entry.js": "2fb40476d4890f4e58dae14d2761ca97282827edf83c5c690f235442dc7c5497",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-chat_3.entry.js": "e6153c6d6f9ec0f14fd3376d5483b1f149451eea98b9c12d4ece2bc791f6a047",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-footer_5.entry.js": "cc7b2b9a1bd71894767d7d5e0196025834bfe9838dcf4990d0be07f7b3300ae7",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-logo-icon.entry.js": "f8571ebbb732f743f96a16a2f58872cd11ddccce8fc460f1cce9822ca6dce479",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-search-box.entry.js": "46f46f81b8a8f900bf76cd3c437bc2cafa2d7d2a085a29973ba4db47bd23ef89",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-search-button.entry.js": "fb109d988916b87967f41ca8d6e1395bc84a45573f694cbbbd9e9403f47e6315",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-text.entry.js": "79a55534e2dd94ea3ee8708a6c71f13bec1b78d29afcafdd5e768a9b13da01b5",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-toggler.entry.js": "5b8cadf2d0ae1b2e5dd0433e13355bde620ead9cb42ec3bd3a56cc36a8facb6e",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/orama-ui.js": "e83720eda85cb27132040ef507714f0ccd2bb09bb0da3c450dbf76f273f38fcc",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/property-05c484f6.js": "68d8d769787d93736f9725db8c4681ec67f9d2e57f480ecb0023d7a6ac7d7f9b",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/searchContext-246f2109.js": "d12afb5073e94f2f5bf4f7c6d90fb5a5224a9ccb6422730a795ddeb65eeb2ad9",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/esm/utils-18b4d50b.js": "ba797e7ed7a03d4dabcaa8118c52cee848d306f15e497857be8dc4aea460233c",
+    "https://unpkg.com/@orama/wc-components@0.0.23/dist/index.js": "fadbaa00896b0ed5228aa9a72182c33a6446cf5c66771952e13d02ea712e4cfe",
+    "https://unpkg.com/@orama/wc-components@0.0.23/loader/index.js": "566f3784fd42219e510b12022e5d872a4de54a98862e2786865ad2025057b04b"
   },
   "workspace": {
     "dependencies": [
