@@ -305,7 +305,8 @@ The `describe` function creates a block that groups together several related
 tests. The `it` function registers an individual test case. For example:
 
 ```ts
-import { describe, expect, it } from "jsr:@std/testing/bdd";
+import { describe, it } from "jsr:@std/testing/bdd";
+import { expect } from "jsr:@std/expect";
 import { add } from "./add.js";
 
 describe("add function", () => {
