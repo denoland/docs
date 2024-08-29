@@ -67,4 +67,4 @@ application. Check out our [tutorials](/runtime/tutorials/) and
 [examples](/examples/) for more ideas on what to build with Deno.
 
 You can
-[learn more about using TypeScript in Deno here](../fundamentals/typescript.md).
+[learn more about using TypeScript in Deno here](/runtime/fundamentals/typescript).
