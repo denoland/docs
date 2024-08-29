@@ -6,13 +6,15 @@ oldUrl: /runtime/manual/getting_started/web_frameworks/
 Deno offers a secure and developer-friendly environment for building web
 applications, making your web dev a delightful experience.
 
-1. Deno has [secure defaults](./permissions.md), meaning it requires explicit
-   permission for file, network, and environment access, reducing the risk of
-   security vulnerabilities.
-2. Deno has [built-in TypeScript support](./ts_support.md), allowing you to
-   write TypeScript code without additional configuration or tooling.
-3. Deno comes with a [standard library](./standard_library.md) that includes
-   modules for common tasks like HTTP servers, file system operations, and more.
+1. Deno has [secure defaults](/runtime/fundamentals/security/), meaning it
+   requires explicit permission for file, network, and environment access,
+   reducing the risk of security vulnerabilities.
+2. Deno has [built-in TypeScript support](/runtime/fundamentals/typescript/),
+   allowing you to write TypeScript code without additional configuration or
+   tooling.
+3. Deno comes with a [standard library](/runtime/fundamentals/standard_library/)
+   that includes modules for common tasks like HTTP servers, file system
+   operations, and more.
 
 Most likely, if you're building a more complex application, you'll be
 interacting with Deno through a web framework.
