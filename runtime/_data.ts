@@ -327,7 +327,7 @@ export const sidebar = [
       },
       {
         label: "Std. Library",
-        href: "https://www.deno.land/std",
+        href: "https://jsr.io/@std",
       },
     ],
   },
