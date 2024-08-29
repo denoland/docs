@@ -17,8 +17,8 @@ Let's deploy your first application - it should only take a few minutes.
 ## Install Deno and `deployctl`
 
 If you haven't already, you can
-[install the Deno runtime](/runtime/manual/getting_started/installation) using
-one of the commands below:
+[install the Deno runtime](/runtime/fundamentals/installation) using one of the
+commands below:
 
 <deno-tabs group-id="operating-systems">
 <deno-tab mac" label="macOS" default>

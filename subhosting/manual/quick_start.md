@@ -82,7 +82,7 @@ of interacting with the API in this way. However, the techniques shown here will
 also work in any other environment capable of executing HTTP requests.
 
 The example code shown here and in future chapters assume that you have
-[Deno 1.38 or higher](/runtime/manual/getting_started/installation) installed.
+[Deno 1.38 or higher](/runtime/fundamentals/installation) installed.
 
 When working with a REST API, it is useful to store authentication credentials
 in the [system environment](/runtime/manual/basics/env_variables), to prevent
