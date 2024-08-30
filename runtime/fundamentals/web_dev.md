@@ -1,6 +1,8 @@
 ---
 title: "Web Development"
-oldUrl: /runtime/manual/getting_started/web_frameworks/
+oldUrl:
+ - /runtime/manual/getting_started/web_frameworks/
+ - /runtime/fundamentals/web_frameworks/
 ---
 
 Deno offers a secure and developer-friendly environment for building web
