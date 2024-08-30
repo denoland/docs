@@ -227,6 +227,13 @@ Enable unstable file system APIs in the `Deno` namespace. These APIs include:
 - [`Deno.funlockSync`](https://docs.deno.com/api/deno/~/Deno.funlockSync)
 - [`Deno.umask`](https://docs.deno.com/api/deno/~/Deno.umask)
 
+## `--unstable-http`
+
+Enable unstable HTTP APIs in the `Deno` namespace. These APIs include:
+
+- [`Deno.HttpClient`](https://deno.land/api?unstable=&s=Deno.HttpClient)
+- [`Deno.createHttpClient`](https://deno.land/api?unstable=&s=Deno.createHttpClient)
+
 ## `--unstable-net`
 
 Enable unstable net APIs in the `Deno` namespace. These APIs include:
