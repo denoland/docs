@@ -75,6 +75,8 @@ site.copy("deploy/kv/manual/images");
 site.copy("deploy/tutorials/images");
 site.copy("deploy/kv/tutorials/images");
 site.copy("runtime/manual/images");
+site.copy("runtime/fundamentals/images");
+site.copy("runtime/getting_started/images");
 site.copy("deploy/manual/images");
 site.copy("deno.json");
 site.copy("go.json");

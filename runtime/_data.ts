@@ -5,32 +5,19 @@ export const sidebar = [
     title: "Getting Started",
     items: [
       {
-        label: "Quick Start",
-        id: "/runtime/manual/",
+        label: "Hello World",
+        id: "/runtime/",
       },
-      {
-        label: "Deno Basics",
-        items: [
-          "/runtime/manual/getting_started/first_steps/",
-          "/runtime/manual/getting_started/setup_your_environment/",
-          "/runtime/manual/getting_started/command_line_interface/",
-          "/runtime/manual/getting_started/configuration_file/",
-          "/runtime/manual/getting_started/web_frameworks/",
-          "/runtime/manual/basics/permissions/",
-          "/runtime/manual/basics/standard_library/",
-          "/runtime/manual/basics/import_maps/",
-          "/runtime/manual/basics/env_variables/",
-          "/runtime/manual/basics/debugging_your_code/",
-          "/runtime/manual/basics/connecting_to_databases/",
-          "/runtime/manual/basics/react/",
-          "/runtime/manual/getting_started/installation/",
-        ],
-      },
+      "/runtime/getting_started/first_project/",
+      "/runtime/getting_started/setup_your_environment/",
+      "/runtime/getting_started/command_line_interface/",
     ],
   },
   {
-    title: "Modules and APIs",
+    title: "Fundamentals",
     items: [
+      "/runtime/fundamentals/typescript/",
+      "/runtime/fundamentals/security/",
       {
         label: "Using & Publishing Modules",
         items: [
@@ -42,6 +29,20 @@ export const sidebar = [
           "/runtime/manual/advanced/http_imports/",
         ],
       },
+      "/runtime/fundamentals/configuration/",
+      "/runtime/fundamentals/standard_library/",
+      "/runtime/fundamentals/web_dev/",
+      "/runtime/fundamentals/testing/",
+      "/runtime/fundamentals/debugging/",
+      "/runtime/fundamentals/workspaces/",
+      "/runtime/fundamentals/installation/",
+      "/runtime/fundamentals/linting_and_formatting/",
+      "/runtime/fundamentals/stability/",
+    ],
+  },
+  {
+    title: "Modules and APIs",
+    items: [
       {
         label: "Deno Runtime APIs",
         items: [
@@ -51,7 +52,6 @@ export const sidebar = [
           "/runtime/manual/runtime/import_meta_api/",
           "/runtime/manual/runtime/ffi_api/",
           "/runtime/manual/runtime/program_lifecycle/",
-          "/runtime/manual/runtime/stability/",
         ],
       },
       {
@@ -199,23 +199,6 @@ export const sidebar = [
         ],
       },
       {
-        label: "Testing",
-        items: [
-          "/runtime/manual/basics/testing/",
-          "/runtime/manual/basics/testing/assertions/",
-          "/runtime/manual/basics/testing/coverage/",
-          "/runtime/manual/basics/testing/mocking/",
-          "/runtime/manual/basics/testing/sanitizers/",
-          "/runtime/manual/basics/testing/documentation/",
-          "/runtime/manual/basics/testing/behavior_driven_development/",
-          "/runtime/manual/basics/testing/snapshot_testing/",
-        ],
-      },
-      {
-        label: "Workspaces",
-        id: "/runtime/manual/basics/workspaces/",
-      },
-      {
         label: "Vendoring",
         id: "/runtime/manual/basics/vendoring/",
       },
@@ -255,8 +238,6 @@ export const sidebar = [
       {
         label: "TypeScript in Deno",
         items: [
-          "/runtime/manual/advanced/typescript/overview/",
-          "/runtime/manual/advanced/typescript/types/",
           "/runtime/manual/advanced/typescript/configuration/",
           "/runtime/manual/advanced/typescript/migration/",
           "/runtime/manual/advanced/typescript/faqs/",
@@ -353,4 +334,4 @@ export const sidebar = [
 ] satisfies Sidebar;
 
 export const sectionTitle = "Runtime";
-export const sectionHref = "/runtime/manual/";
+export const sectionHref = "/runtime/";

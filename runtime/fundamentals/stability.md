@@ -1,5 +1,6 @@
 ---
 title: "Stability"
+oldUrl: /runtime/manual/runtime/stability/
 ---
 
 As of Deno 1.0.0, the `Deno` namespace APIs are stable. That means we will

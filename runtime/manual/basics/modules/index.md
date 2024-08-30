@@ -1,5 +1,8 @@
 ---
 title: "ECMAScript Modules in Deno"
+oldUrl:
+ - /runtime/fundamentals/esm.sh
+ - /runtime/manual/linking_to_external_code
 ---
 
 Deno by default standardizes the way modules are imported in both JavaScript and
