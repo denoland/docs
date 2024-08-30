@@ -2,7 +2,7 @@
  * @title Deno KV: Key/Value Database
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --unstable <url>
+ * @run --unstable-kv <url>
  * @resource {https://docs.deno.com/deploy/kv/manual} Deno KV user guide
  * @resource {https://docs.deno.com/api/deno/~/Deno.Kv} Deno KV Runtime API docs
  * @group Databases

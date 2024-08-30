@@ -2,7 +2,7 @@
  * @title Deno Queues
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --unstable <url>
+ * @run --unstable-kv <url>
  * @resource {https://docs.deno.com/deploy/kv/manual/queue_overview} Deno Queues user guide
  * @resource {https://docs.deno.com/api/deno/~/Deno.Kv} Deno Queues Runtime API docs
  * @group Scheduled Tasks
