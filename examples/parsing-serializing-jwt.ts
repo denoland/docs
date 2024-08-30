@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://datatracker.ietf.org/doc/html/rfc7519} 
+ * @resource {https://datatracker.ietf.org/doc/html/rfc7519}
  * @resource {https://jwt.io}
  * @group Encoding
  *
