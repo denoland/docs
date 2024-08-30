@@ -13,7 +13,6 @@ runtime.
 ## Basic
 
 - [Hello World](./hello_world.md)
-- [Manage Dependencies](./manage_dependencies.md)
 - [Fetch Data](./fetch_data.md)
 - [Read and Write Files](./read_write_files.md)
 - [Hashbang](./hashbang.md)

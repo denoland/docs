@@ -10,6 +10,7 @@ oldUrl:
   - /runtime/manual/testing/documentation/
   - /runtime/manual/basics/testing/sanitizers/
   - /runtime/manual/basics/testing/snapshot_testing/
+  - /runtime/manual/testing
 ---
 
 Deno provides a built-in test runner for writing and running tests in both
