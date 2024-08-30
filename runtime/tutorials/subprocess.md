@@ -66,7 +66,7 @@ security. For example:
    executable and execute it.
 
 Even when locking down some of the scenarios listed above there are still
-possible exploits (ex. when combining options with `--deny` flags). Think
+possible exploits (ex. when combining options with `--deny-*` flags). Think
 through the combination of flags that you use carefully when using
 `--allow-run`!
 
