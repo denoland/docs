@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli, web
  * @run <url>
- * @resource {https://deno.land/x/djwt}
+ * @resource {https://deno.land/x/djwt@v3.0.2/mod.ts}
  * @resource {https://jwt.io}
  * @group Encoding
  *
@@ -11,7 +11,7 @@
  * sections: header, payload, signature.
  */
 
-import { decode } from "https://deno.land/x/djwt/mod.ts";
+import { decode } from "https://deno.land/x/djwt@v3.0.2/mod.ts";
 
 // Prompt for the JWT token
 const token = prompt("Please enter your token:"); // https://docs.deno.com/examples/prompts/
