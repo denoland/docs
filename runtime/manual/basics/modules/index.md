@@ -95,7 +95,7 @@ publish and manage your modules for the best publishing experience. JSR offers
 automatic documentation generation, semver resolution and improved performance
 for TypeScript code. Deno also supports
 [other platforms](https://jsr.io/docs/other-registries) for publishing modules,
-such as npm, and JavaScript CDNs like deno.land/x, esm.h and unpkg.com
+such as npm, and JavaScript CDNs like deno.land/x, esm.sh and unpkg.com
 
 By default when you use the CLI, the package will be resolved from JSR.
 
