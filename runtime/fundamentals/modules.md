@@ -62,9 +62,9 @@ import { add } from "./calc.ts";
 
 ## Importing third party modules and libraries
 
-When working with third-party modules in Deno, use the same `import` syntax as you do for local code.
-Third party modules are typically imported from a remote registry and start with
-`jsr:` , `npm:` or `https://` for URL imports.
+When working with third-party modules in Deno, use the same `import` syntax as
+you do for local code. Third party modules are typically imported from a remote
+registry and start with `jsr:` , `npm:` or `https://` for URL imports.
 
 ```ts title="main.ts"
 import { camelCase } from "jsr:@luca/cases@1.0.0";
@@ -72,11 +72,17 @@ import { say } from "npm:cowsay@1.6.0";
 import { pascalCase } from "https://deno.land/x/case/mod.ts";
 ```
 
-Deno recommends [JSR](https://jsr.io), the modern JavaScript registry, for third party modules. There, you'll find plenty of well documented ES modules for your projects, including the [Deno Standard Library](/runtime/fundamentals/standard_library/).
+Deno recommends [JSR](https://jsr.io), the modern JavaScript registry, for third
+party modules. There, you'll find plenty of well documented ES modules for your
+projects, including the
+[Deno Standard Library](/runtime/fundamentals/standard_library/).
 
 ## Managing third party modules and libraries
 
-Typing out the module name with the full version specifier can become tedious when importing them in multiple files. You can centralize management of remote modules with an `imports` field in your `deno.json` file. We call this `imports` field the **import map**.
+Typing out the module name with the full version specifier can become tedious
+when importing them in multiple files. You can centralize management of remote
+modules with an `imports` field in your `deno.json` file. We call this `imports`
+field the **import map**.
 
 ```json title="deno.json"
 {
@@ -184,9 +190,10 @@ they provide URL access to JavaScript modules:
 - [unpkg.com](https://unpkg.com)
 
 URL imports are useful if you have a small, often single file, Deno project that
-doesn't require any other configuration. With URL imports, you can avoid having a
-`Deno.json` file at all. It is **not** advised to use this style of import in larger
-applications however, as you may end up with version conflicts (where different files use different version specifiers).
+doesn't require any other configuration. With URL imports, you can avoid having
+a `Deno.json` file at all. It is **not** advised to use this style of import in
+larger applications however, as you may end up with version conflicts (where
+different files use different version specifiers).
 
 :::info
 
@@ -325,11 +332,12 @@ dependency:
 
 ### Auto-generated lockfile
 
-As mentioned above, when a Deno configuration file is resolved (eg. `deno.json`), a lockfile will be automatically generated. By default, the path
-of this lockfile will be in the directory root - `deno.lock`. You can change this path by updating your
-`deno.json` to specify this:
+As mentioned above, when a Deno configuration file is resolved (eg.
+`deno.json`), a lockfile will be automatically generated. By default, the path
+of this lockfile will be in the directory root - `deno.lock`. You can change
+this path by updating your `deno.json` to specify this:
 
-```json title="deno.json"
+````json title="deno.json"
 {
   "lock": "./lock.file"
 }
@@ -340,7 +348,7 @@ You can disable the automatic creation and validation of a lockfile by specifyin
 {
   "lock": false
 }
-```
+````
 
 ### Using `--lock` and `--frozen=false` flags
 
@@ -379,8 +387,8 @@ Like caching above, you can also use lock files during use of the `deno run` sub
 command, validating the integrity of any locked modules during the run. Remember
 that this only validates against dependencies previously added to the lock file.
 
-You can take this a step further by using the `--cached-only` flag to
-require that remote dependencies are already cached.
+You can take this a step further by using the `--cached-only` flag to require
+that remote dependencies are already cached.
 
 ```shell
 deno run --lock=deno.lock --cached-only mod.ts

@@ -100,5 +100,5 @@ standard `fetch` API.
 Deno reads proxy configuration from environment variables: `HTTP_PROXY`,
 `HTTPS_PROXY` and `NO_PROXY`.
 
-On Windows, if environment variables are not found, Deno falls back to
-reading proxies from the registry.
+On Windows, if environment variables are not found, Deno falls back to reading
+proxies from the registry.
