@@ -24,10 +24,10 @@ promote a more efficient and consistent development experience. It's the
 official standard for JavaScript modules, allows for better tree-shaking,
 improved tooling integration, and native support across different environments.
 
-By adopting ECMAScript modules, Deno ensures compatibility with the evolving
-JavaScript ecosystem, providing developers with a streamlined and predictable
-module system that eliminates the complexities associated with legacy module
-formats like CommonJS.
+By adopting ECMAScript modules, Deno ensures compatibility with the
+ever-evolving JavaScript ecosystem. For developers, this means a streamlined and
+predictable module system that avoids the complexities associated with legacy
+module formats like CommonJS.
 
 ## Importing modules
 
@@ -112,7 +112,7 @@ automatically add the latest version of the package you requested to the
 
 ```sh
 # Add the latest version of the module to deno.json
-$ deno add @luca/cases
+$ deno add  @luca/cases
 Add @luca/cases - jsr:@luca/cases@^1.0.0
 ```
 
