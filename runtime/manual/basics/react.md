@@ -6,7 +6,7 @@ To use React with Deno, we recommend using one of the third-party frameworks
 below.
 
 If you want to better understand how JSX and Deno interface under the hood, read
-on [here](../advanced/jsx_dom).
+on [here](../advanced/jsx).
 
 Note: Fresh and Aleph.js provide a framework for developing React-like websites.
 However, Fresh uses an alternative foundational technology, Preact to provide a

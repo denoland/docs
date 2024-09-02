@@ -78,18 +78,7 @@ export const sidebar = [
           },
         ],
       },
-      {
-        label: "JSX and DOM APIs",
-        items: [
-          "/runtime/manual/advanced/jsx_dom/overview/",
-          "/runtime/manual/advanced/jsx_dom/jsx/",
-          "/runtime/manual/advanced/jsx_dom/css/",
-          "/runtime/manual/advanced/jsx_dom/jsdom/",
-          "/runtime/manual/advanced/jsx_dom/deno_dom/",
-          "/runtime/manual/advanced/jsx_dom/linkedom/",
-          "/runtime/manual/advanced/faqs/",
-        ],
-      },
+      "/runtime/manual/advanced/jsx/",
     ],
   },
   {
