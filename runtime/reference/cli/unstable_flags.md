@@ -216,7 +216,7 @@ Enabling this flag makes [Deno KV](/deploy/kv/manual) APIs available in the
 ## `--unstable-ffi`
 
 Enable unstable FFI APIs -
-[learn more about FFI](/runtime/manual/runtime/ffi_api).
+[learn more about FFI](/runtime/reference/deno_namespace_apis/#ffi).
 
 ## `--unstable-fs`
 

@@ -28,8 +28,9 @@ export const sidebar = [
       "/runtime/fundamentals/testing/",
       "/runtime/fundamentals/debugging/",
       "/runtime/fundamentals/workspaces/",
-      "/runtime/fundamentals/installation/",
       "/runtime/fundamentals/linting_and_formatting/",
+      "/runtime/fundamentals/http_server/",
+      "/runtime/fundamentals/installation/",
       "/runtime/fundamentals/stability/",
     ],
   },
@@ -137,32 +138,15 @@ export const sidebar = [
             id: "/runtime/reference/cli/upgrade/",
           },
         ],
-      }
+      },
+      "/runtime/reference/deno_namespace_apis/",
+      "/runtime/reference/web_platform_apis/",
+      "/runtime/reference/wasm/",
     ],
   },
   {
     title: "Modules and APIs",
     items: [
-      {
-        label: "Deno Runtime APIs",
-        items: [
-          "/runtime/manual/runtime/builtin_apis/",
-          "/runtime/manual/runtime/http_server_apis/",
-          "/runtime/manual/runtime/permission_apis/",
-          "/runtime/manual/runtime/import_meta_api/",
-          "/runtime/manual/runtime/ffi_api/",
-          "/runtime/manual/runtime/program_lifecycle/",
-        ],
-      },
-      {
-        label: "Web Platform APIs",
-        items: [
-          "/runtime/manual/runtime/web_platform_apis/",
-          "/runtime/manual/runtime/location_api/",
-          "/runtime/manual/runtime/web_storage_api/",
-          "/runtime/manual/runtime/workers/",
-        ],
-      },
       {
         label: "Interop with Node & npm",
         items: [
@@ -183,7 +167,7 @@ export const sidebar = [
   },
   {
     title: "Development Tools",
-    items: [     
+    items: [
       {
         label: "Visual Studio Code",
         items: [
@@ -224,15 +208,6 @@ export const sidebar = [
           "/runtime/manual/advanced/typescript/configuration/",
           "/runtime/manual/advanced/typescript/migration/",
           "/runtime/manual/advanced/typescript/faqs/",
-        ],
-      },
-      {
-        label: "WebAssembly",
-        items: [
-          "/runtime/manual/runtime/webassembly/",
-          "/runtime/manual/runtime/webassembly/using_wasm/",
-          "/runtime/manual/runtime/webassembly/using_streaming_wasm/",
-          "/runtime/manual/runtime/webassembly/wasm_resources/",
         ],
       },
       "/runtime/manual/advanced/migrate_deprecations/",

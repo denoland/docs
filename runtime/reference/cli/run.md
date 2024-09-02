@@ -24,9 +24,9 @@ deno run hello-world.ts
 
 By default, Deno runs programs in a sandbox without access to disk, network or
 ability to spawn subprocesses. This is because the Deno runtime is
-[secure by default](/runtime/manual/runtime/permission_apis). You can grant or
-deny required permissions using the
-[`--allow-*` and `--deny-*` flags](/runtime/manual/basics/permissions).
+[secure by default](/runtime/fundamentals/security/). You can grant or deny
+required permissions using the
+[`--allow-*` and `--deny-*` flags](/runtime/fundamentals/security/#permissions-list).
 
 ### Permissions examples
 

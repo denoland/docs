@@ -1,22 +1,14 @@
 ---
-title: "HTTP Server APIs"
+title: "Writing an HTTP Server"
+oldUrl:
+ - /runtime/manual/runtime/http_server_apis/
 ---
 
-Deno currently has two HTTP Server APIs:
+Deno has a built in HTTP server API that allows you to write HTTP servers. The
+[`Deno.serve`](https://docs.deno.com/api/deno/~/Deno.serve) API supports
+HTTP/1.1 and HTTP2.
 
-- [`Deno.serve`](https://docs.deno.com/api/deno/~/Deno.serve): native,
-  _higher-level_, supports HTTP/1.1 and HTTP2, this is the preferred API to
-  write HTTP servers in Deno.
-- [`Deno.serveHttp`](https://docs.deno.com/api/deno/~/Deno.serveHttp): native,
-  _low-level_, supports HTTP/1.1 and HTTP2.
-- [A "Hello World" server](#a-hello-world-server)
-- [Inspecting the incoming request](#inspecting-the-incoming-request)
-- [Responding with a response](#responding-with-a-response)
-- [HTTPS support](#https-support)
-- [HTTP/2 support](#http2-support)
-- [Serving WebSockets](#serving-websockets)
-
-### A "Hello World" server
+## A "Hello World" server
 
 To start a HTTP server on a given port, you can use the `Deno.serve` function.
 This function takes a handler function that will be called for each incoming
@@ -32,8 +24,8 @@ Deno.serve((_req) => {
 });
 ```
 
-> ℹ️ The handler can also return a `Promise<Response>`, which means it can be an
-> `async` function.
+The handler can also return a `Promise<Response>`, which means it can be an
+`async` function.
 
 By default `Deno.serve` will listen on port `8000`, but this can be changed by
 passing in a port number in options bag as the first or second argument:
@@ -46,7 +38,7 @@ Deno.serve({ port: 4242 }, handler);
 Deno.serve({ port: 4242, hostname: "0.0.0.0", handler });
 ```
 
-### Inspecting the incoming request
+## Inspecting the incoming request
 
 Most servers will not answer with the same response for every request. Instead
 they will change their answer depending on various aspects of the request: the
@@ -80,7 +72,7 @@ Deno.serve(async (req) => {
 > as `req.json()`, `req.formData()`, `req.arrayBuffer()`,
 > `req.body.getReader().read()`, `req.body.pipeTo()`, etc.
 
-### Responding with a response
+## Responding with a response
 
 Most servers also do not respond with "Hello, World!" to every request. Instead
 they might respond with different headers, status codes, and body contents (even
@@ -125,21 +117,24 @@ Deno.serve((req) => {
 });
 ```
 
-> ℹ️ Note the `cancel` function here. This is called when the client hangs up
-> the connection. This is important to make sure that you handle this case, as
-> otherwise the server will keep queuing up messages forever, and eventually run
-> out of memory.
+ℹNote the `cancel` function above. This is called when the client hangs up the
+connection. It is important to make sure that you handle this case, as otherwise
+the server will keep queuing up messages forever, and eventually run out of
+memory.
 
-> ⚠️ Beware that the response body stream is "cancelled" when the client hangs
-> up the connection. Make sure to handle this case. This can surface itself as
-> an error in a `write()` call on a `WritableStream` object that is attached to
-> the response body `ReadableStream` object (for example through a
-> `TransformStream`).
+Be aware that the response body stream is "cancelled" when the client hangs up
+the connection. Make sure to handle this case. This can surface itself as an
+error in a `write()` call on a `WritableStream` object that is attached to the
+response body `ReadableStream` object (for example through a `TransformStream`).
 
-### HTTPS support
+## HTTPS support
 
-> ℹ️ To use HTTPS, you will need a valid TLS certificate and a private key for
-> your server.
+:::note
+
+To use HTTPS, you will need a valid TLS certificate and a private key for your
+server.
+
+:::
 
 To use HTTPS, pass two extra arguments in the options bag: `cert` and `key`.
 These are contents of the certificate and key files, respectively.
@@ -152,15 +147,15 @@ Deno.serve({
 }, handler);
 ```
 
-### HTTP/2 support
+## HTTP/2 support
 
 HTTP/2 support is "automatic" when using the HTTP server APIs with Deno. You
-just need to create your server, and the server will handle HTTP/1 or HTTP/2
-requests seamlessly.
+just need to create your server, and it will handle HTTP/1 or HTTP/2 requests
+seamlessly.
 
 HTTP/2 is also supported over cleartext with prior knowledge.
 
-### Automatic body compression
+## Automatic body compression
 
 The HTTP server has built in automatic compression of response bodies. When a
 response is sent to a client, Deno determines if the response body can be safely
@@ -185,11 +180,11 @@ compressed if the following conditions are true:
 - The response body is greater than 64 bytes.
 
 When the response body is compressed, Deno will set the Content-Encoding header
-to reflect the encoding as well as ensure the Vary header is adjusted or added
-to indicate what request headers affected the response.
+to reflect the encoding, as well as ensure the Vary header is adjusted or added
+to indicate which request headers affected the response.
 
-When is compression skipped? In addition to the logic above, there are a few
-other reasons why a response won’t be compressed automatically:
+In addition to the logic above, there are a few reasons why a response **won’t**
+be compressed automatically:
 
 - The response contains a `Content-Encoding` header. This indicates your server
   has done some form of encoding already.
@@ -205,34 +200,39 @@ other reasons why a response won’t be compressed automatically:
   value. This indicates that your server doesn’t want Deno or any downstream
   proxies to modify the response.
 
-## `Deno.serveHttp`
+## Deno.serveHttp
 
-We generally recommend that you use the `Deno.serve` API described above, as it
-handles all of the intricacies of parallel requests on a single connection,
-error handling, and so on. However, if you are interested creating your own
-robust and performant web servers in Deno, lower-level, _native_ HTTP server
-APIs are available as of Deno 1.9 and later.
+We recommend that you use the `Deno.serve` API described above, as it handles
+all of the intricacies of parallel requests on a single connection, error
+handling, and so on. However, if you are interested creating your own robust and
+performant web servers in Deno, lower-level, _native_ HTTP server APIs are
+available.
 
-> ⚠️ You should probably not be using this API, as it is not easy to get right.
-> Use the `Deno.serve` API instead.
+:::warning
 
-### Listening for a connection
+You should probably not be using the `Deno.serveHTTP` API, as it is not easy to
+get right. Use the `Deno.serve` API instead.
+
+:::
+
+## Listening for a connection
 
 In order to accept requests, first you need to listen for a connection on a
-network port. To do this in Deno, you use `Deno.listen()`:
+network port. To do this in Deno, you use
+[`Deno.listen()`](/api/deno/~/Deno.listen):
 
 ```ts
 const server = Deno.listen({ port: 8080 });
 ```
 
-> ℹ️ When supplying a port, Deno assumes you are going to listen on a TCP socket
-> as well as bind to the localhost. You can specify `transport: "tcp"` to be
-> more explicit as well as provide an IP address or hostname in the `hostname`
-> property as well.
+ℹWhen supplying a port, Deno assumes you are going to listen on a TCP socket as
+well as bind to the localhost. You can specify `transport: "tcp"` to be more
+explicit as well as provide an IP address or hostname in the `hostname` property
+as well.
 
 If there is an issue with opening the network port, `Deno.listen()` will throw,
-so often in a server sense, you will want to wrap it in the `try ... catch`
-block in order to handle exceptions, like the port already being in use.
+so often in a server sense, you will want to wrap it in a `try ... catch` block
+in order to handle exceptions, such as the port already being in use.
 
 You can also listen for a TLS connection (e.g. HTTPS) using `Deno.listenTls()`:
 
@@ -251,17 +251,14 @@ The `alpnProtocols` property is optional, but if you want to be able to support
 HTTP/2 on the server, you add the protocols here, as the protocol negotiation
 happens during the TLS negotiation with the client and server.
 
-> ℹ️ Generating SSL certificates is outside of the scope of this documentation.
-> There are many resources on the web which address this.
-
-### Handling connections
+## Handling connections
 
 Once we are listening for a connection, we need to handle the connection. The
 return value of `Deno.listen()` or `Deno.listenTls()` is a `Deno.Listener` which
 is an async iterable which yields up `Deno.Conn` connections as well as provide
 a couple methods for handling connections.
 
-To use it as an async iterable we would do something like this:
+To use it as an async iterable you would do something like this:
 
 ```ts
 const server = Deno.listen({ port: 8080 });
@@ -271,10 +268,10 @@ for await (const conn of server) {
 }
 ```
 
-Every connection made would yield up a `Deno.Conn` assigned to `conn`. Then
-further processing can be applied to the connection.
+Every connection made would yield a `Deno.Conn` assigned to `conn`. Then further
+processing can be applied to the connection.
 
-There is also the `.accept()` method on the listener which can be used:
+There is also an `.accept()` method on the listener which can be used:
 
 ```ts
 const server = Deno.listen({ port: 8080 });
@@ -292,13 +289,13 @@ while (true) {
 
 Whether using the async iterator or the `.accept()` method, exceptions can be
 thrown and robust production code should handle these using `try ... catch`
-blocks. Especially when it comes to accepting TLS connections, there can be many
+blocks. When it comes to accepting TLS connections, there can be many
 conditions, like invalid or unknown certificates which can be surfaced on the
 listener and might need handling in the user code.
 
 A listener also has a `.close()` method which can be used to close the listener.
 
-### Serving HTTP
+## Serving HTTP
 
 Once a connection is accepted, you can use `Deno.serveHttp()` to handle HTTP
 requests and responses on the connection. `Deno.serveHttp()` returns a
@@ -374,7 +371,7 @@ In the examples from this point on, we will focus on what would occur within an
 example `handle()` function and remove the listening and connection
 "boilerplate".
 
-#### HTTP Requests and Responses
+### HTTP Requests and Responses
 
 HTTP requests and responses in Deno are essentially the inverse of web standard
 [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). The
@@ -435,7 +432,7 @@ wondering how to send a particular response, checkout the documentation for the
 web standard
 [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response).
 
-### HTTP/2 Support
+## HTTP/2 Support
 
 HTTP/2 support is effectively transparent within the Deno runtime. Typically
 HTTP/2 is negotiated between a client and a server during the TLS connection
@@ -463,7 +460,7 @@ HTTP/2 cleartext connection via the `Upgrade` header (see:
 [#10275](https://github.com/denoland/deno/issues/10275)), so therefore HTTP/2
 support is only available via a TLS/HTTPS connection.
 
-### Serving WebSockets
+## Serving WebSockets
 
 Deno can upgrade incoming HTTP requests to a WebSocket. This allows you to
 handle WebSocket endpoints on your HTTP servers.
