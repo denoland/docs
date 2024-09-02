@@ -2,7 +2,7 @@
  * @title Deno Cron
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --unstable <url>
+ * @run --unstable-cron <url>
  * @resource {https://docs.deno.com/deploy/kv/manual/cron} Deno Cron user guide
  * @resource {https://docs.deno.com/api/deno/~/Deno.cron} Deno Cron Runtime API docs
  * @group Scheduled Tasks

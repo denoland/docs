@@ -1,5 +1,7 @@
 ---
 title: "Caching dependencies locally (Vendoring)"
+oldUrl:
+  - /runtime/manual/tools/vendor
 ---
 
 If your project has external dependencies, you may want to store them locally to

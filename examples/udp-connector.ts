@@ -2,7 +2,7 @@
  * @title UDP Connector: Ping
  * @difficulty intermediate
  * @tags cli
- * @run --allow-net --unstable <url>
+ * @run --allow-net --unstable-net <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.connect} Doc: Deno.connect
  * @resource {/examples/udp-listener} Example: UDP Listener
  * @group Network

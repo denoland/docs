@@ -17,7 +17,8 @@ oldUrl:
 
 ## Simple example
 
-This example is the equivalent of running `'echo hello'` from the command line.
+This example is the equivalent of running `echo "Hello from Deno!"` from the
+command line.
 
 ```ts
 /**
@@ -25,10 +26,9 @@ This example is the equivalent of running `'echo hello'` from the command line.
  */
 
 // define command used to create the subprocess
-const command = new Deno.Command(Deno.execPath(), {
+const command = new Deno.Command("echo", {
   args: [
-    "eval",
-    "console.log('hello'); console.error('world')",
+    "Hello from Deno!",
   ],
 });
 
@@ -36,15 +36,15 @@ const command = new Deno.Command(Deno.execPath(), {
 const { code, stdout, stderr } = await command.output();
 
 console.assert(code === 0);
-console.assert("world\n" === new TextDecoder().decode(stderr));
 console.log(new TextDecoder().decode(stdout));
+console.log(new TextDecoder().decode(stderr));
 ```
 
 Run it:
 
 ```shell
-$ deno run --allow-run --allow-read ./subprocess_simple.ts
-hello
+$ deno run --allow-run=echo ./subprocess_simple.ts
+Hello from Deno!
 ```
 
 ## Security
@@ -52,6 +52,23 @@ hello
 The `--allow-run` permission is required for creation of a subprocess. Be aware
 that subprocesses are not run in a Deno sandbox and therefore have the same
 permissions as if you were to run the command from the command line yourself.
+
+Be very careful using this permission as in many cases it does not provide much
+security. For example:
+
+1. Using `--allow-run` without an allow list is essentially the same as
+   `--allow-all`. A script could execute the `deno` executable with full
+   permissions (ex. `deno eval '<malicious code goes here>'`).
+1. Using `--allow-run=... --allow-write` means a script could overwrite an
+   executable on the path and execute it.
+1. Using `--allow-run=... --allow-env=PATH` and any `--allow-write=...` means a
+   script could modify the `PATH` to a writable location, then write an
+   executable and execute it.
+
+Even when locking down some of the scenarios listed above there are still
+possible exploits (ex. when combining options with `--deny-*` flags). Think
+through the combination of flags that you use carefully when using
+`--allow-run`!
 
 ## Communicating with subprocesses
 
@@ -105,5 +122,5 @@ setTimeout(() => {
 Run it:
 
 ```shell
-$ deno run --allow-run --allow-read --allow-write ./subprocess_piping_to_file.ts
+$ deno run --allow-run=yes --allow-read=. --allow-write=. ./subprocess_piping_to_file.ts
 ```

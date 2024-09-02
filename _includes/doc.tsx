@@ -265,9 +265,21 @@ function Breadcrumbs(props: {
 
   return (
     <nav class="mb-3">
-      <ul class="flex flex-wrap text-gray-700 items-center">
-        <li class="pr-3 py-1.5 underline underline-offset-4 hover:no-underline hover:text-blue-600 transition duration-100">
-          <a href={props.sectionHref}>{props.sectionTitle}</a>
+      <ul
+        class="flex flex-wrap text-gray-700 items-center"
+        itemscope
+        itemtype="https://schema.org/BreadcrumbList"
+      >
+        <li
+          class="pr-3 py-1.5 underline underline-offset-4 hover:no-underline hover:text-blue-600 transition duration-100"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          <a itemprop="item" href={props.sectionHref}>
+            <span itemprop="name">{props.sectionTitle}</span>
+          </a>
+          <meta itemprop="position" content="1" />
         </li>
         <svg
           class="size-6 rotate-90"
@@ -281,7 +293,15 @@ function Breadcrumbs(props: {
         </svg>
         {crumbs.map((crumb, i) => (
           <>
-            <li class="px-2.5 py-1.5">{crumb}</li>
+            <li
+              class="px-2.5 py-1.5"
+              itemprop="itemListElement"
+              itemscope
+              itemtype="https://schema.org/ListItem"
+            >
+              <span itemprop="name">{crumb}</span>
+              <meta itemprop="position" content={String(i + 2)} />
+            </li>
             {i < crumbs.length - 1 && (
               <svg
                 class="size-6 rotate-90"

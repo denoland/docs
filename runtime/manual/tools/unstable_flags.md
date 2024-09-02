@@ -1,5 +1,7 @@
 ---
 title: "Unstable Feature Flags"
+oldUrl:
+ - /runtime/tools/unstable_flags/
 ---
 
 New features of the Deno runtime are often released behind feature flags, so
@@ -224,6 +226,13 @@ Enable unstable file system APIs in the `Deno` namespace. These APIs include:
 - [`Deno.funlock`](https://docs.deno.com/api/deno/~/Deno.funlock)
 - [`Deno.funlockSync`](https://docs.deno.com/api/deno/~/Deno.funlockSync)
 - [`Deno.umask`](https://docs.deno.com/api/deno/~/Deno.umask)
+
+## `--unstable-http`
+
+Enable unstable HTTP APIs in the `Deno` namespace. These APIs include:
+
+- [`Deno.HttpClient`](https://deno.land/api?unstable=&s=Deno.HttpClient)
+- [`Deno.createHttpClient`](https://deno.land/api?unstable=&s=Deno.createHttpClient)
 
 ## `--unstable-net`
 
