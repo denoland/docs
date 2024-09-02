@@ -62,7 +62,7 @@ import { add } from "./calc.ts";
 
 ## Importing third party modules and libraries
 
-Using third modules in Deno uses the same `import` syntax as your local code.
+When working with third-party modules in Deno, use the same `import` syntax as you do for local code.
 Third party modules are typically imported from a remote registry and start with
 `jsr:` , `npm:` or `https://` for URL imports.
 
@@ -72,15 +72,11 @@ import { say } from "npm:cowsay@1.6.0";
 import { pascalCase } from "https://deno.land/x/case/mod.ts";
 ```
 
-You'll find most Deno-related code on [JSR](https://jsr.io), which is the
-recommended registry to use with Deno.
+Deno recommends [JSR](https://jsr.io), the modern JavaScript registry, for third party modules. There, you'll find plenty of well documented ES modules for your projects, including the [Deno Standard Library](/runtime/fundamentals/standard_library/).
 
 ## Managing third party modules and libraries
 
-Typing out the module with the full version specifier can become tedious real
-fast when you're importing them from multiple files. We can centralize the
-management of remote modules via the `imports` key in `deno.json`. The `imports`
-key is used to remap specifiers. We call this the import map.
+Typing out the module name with the full version specifier can become tedious when importing them in multiple files. You can centralize management of remote modules with an `imports` field in your `deno.json` file. We call this `imports` field the **import map**.
 
 ```json title="deno.json"
 {
@@ -92,7 +88,7 @@ key is used to remap specifiers. We call this the import map.
 }
 ```
 
-With the remapped specifiers our code gets a bit simpler:
+With remapped specifiers, the code looks cleaner:
 
 ```ts title="main.ts"
 import { camelCase } from "@luca/cases";
