@@ -22,7 +22,7 @@ projects. If you have a Node.js project, it is not necessary to create a
 project. If both a `deno.json` and `package.json` file are present in the same
 directory, Deno will import the modules in the `package.json` file and use the
 `deno.json` file for Deno-specific configurations. Read more about
-[Node compatibility in Deno](TODO:node-compat).
+[Node compatibility in Deno](/runtime/manual/node/compatibility).
 
 ## module imports and scopes
 
@@ -103,7 +103,7 @@ deno task test
 deno task lint
 ```
 
-Read more about [`deno task`](TODO:task-link).
+Read more about [`deno task`](/runtime/manual/tools/task_runner/).
 
 ## Linting
 
@@ -140,7 +140,7 @@ This configuration will:
 You can find a full list of available linting rules in the
 [Deno lint documentation](https://lint.deno.land/).
 
-Read more about [linting with Deno](TODO:lint-link).
+Read more about [linting with Deno](/runtime/manual/tools/linter/).
 
 ## Formatting
 
@@ -176,13 +176,13 @@ This configuration will:
 - exclude files in the `src/testdata/` directory and any TypeScript files in the
   `src/fixtures/` directory.
 
-Read more about [formatting your code with Deno](TODO:fmt-link).
+Read more about [formatting your code with Deno](/runtime/fundamentals/linting_and_formatting/).
 
 ## lock
 
 The `lock` field in the `deno.json` file is used to specify the location of the
 lock file that Deno uses to
-[ensure the integrity of your dependencies](TODO:modules#integrity). A lock file
+[ensure the integrity of your dependencies](/runtime/fundamentals/modules/#integrity-checking-and-lock-files). A lock file
 records the exact versions and integrity hashes of the modules your project
 depends on, ensuring that the same versions are used every time the project is
 run, even if the dependencies are updated or changed remotely.
@@ -201,7 +201,7 @@ directory, respectively.
 The `npmRegistry` field in the `deno.json` file is used to specify a custom npm
 registry for resolving npm package specifiers. This allows you to direct Deno to
 use a different registry instead of the default npm registry. This can be
-particularly useful for using [private registries](TODO:private-registries-link)
+particularly useful for using [private registries](/runtime/manual/node/private_registries/)
 or mirrors of the npm registry.
 
 ## TypeScript compiler options
@@ -219,7 +219,7 @@ sharing code.
 :::
 
 See also
-[Configuring TypeScript in Deno](TODO:tsconfig-link-prev/manual/advanced/ts/config).
+[Configuring TypeScript in Deno](/runtime/manual/advanced/typescript/configuration/).
 
 ## unstable
 
@@ -227,7 +227,7 @@ The `unstable` field in a `deno.json` file is used to enable specific unstable
 feature flags for your Deno project. These features are still in development and
 not yet part of the stable API. By listing the desired features in the unstable
 array, you can experiment with and use these new capabilities before they are
-officially released. [Learn more](TODO:unstable-flags-cli).
+officially released. [Learn more](/runtime/manual/tools/unstable_flags/).
 
 ## include and exclude
 
