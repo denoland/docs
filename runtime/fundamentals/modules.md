@@ -237,23 +237,14 @@ project is used. Import maps used inside URL dependencies are ignored.
 
 Any Deno program that defines an export can be published as a module. This
 allows other developers to import and use your code in their own projects.
-Modules can be published to [JSR](https://jsr.io), the modern JavaScript and
-TypeScript registry. Check out the
-[JSR documentation on publishing modules](https://jsr.io/docs/publishing-packages)
-for more information.
+Modules can be published to:
 
-## Publishing for Node.js
-
-You can make your Deno modules available to Node.js users with the
-[dnt](https://github.com/denoland/dnt) build tool.
-
-dnt allows you to develop your Deno module mostly as-is and use a single Deno
-script to build, type check, and test an npm package in an output directory.
-Once built, you only need to `npm publish` the output directory to distribute it
-to Node.js users.
-
-For more details, see
-[https://github.com/denoland/dnt](https://github.com/denoland/dnt).
+- [JSR](https://jsr.io) - recommended, supports TypeScript natively and
+  auto-generates documentation for you
+- [npm](https://www.npmjs.com/) - use [dnt](https://github.com/denoland/dnt) to
+  create the npm package
+- [deno.land/x](https://deno.com/add_module) - for URL imports, use JSR instead
+  if possible
 
 ## Reloading modules
 
@@ -328,7 +319,7 @@ lock file, either:
 A `deno.lock` might look like this, storing a hash of the file against the
 dependency:
 
-```json
+```json title="deno.lock"
 {
   "https://deno.land/std@0.224.0/textproto/mod.ts": "3118d7a42c03c242c5a49c2ad91c8396110e14acca1324e7aaefd31a999b71a4",
   "https://deno.land/std@0.224.0/io/util.ts": "ae133d310a0fdcf298cea7bc09a599c49acb616d34e148e263bcb02976f80dee",
@@ -344,7 +335,7 @@ then an additive lockfile will be automatically generated. By default, the path
 of this lockfile will be `deno.lock`. You can change this path by updating your
 `deno.json` to specify this:
 
-```jsonc
+```json title="deno.json"
 {
   "lock": "./lock.file"
 }
@@ -352,13 +343,13 @@ of this lockfile will be `deno.lock`. You can change this path by updating your
 
 Or disable automatically creating and validating a lockfile by specifying:
 
-```jsonc
+```json title="deno.json"
 {
   "lock": false
 }
 ```
 
-### Using `--lock` and `--lock-write` flags
+### Using `--lock` and `--frozen=false` flags
 
 You may have a file that imports a dependency and looks something like this:
 
@@ -366,11 +357,11 @@ You may have a file that imports a dependency and looks something like this:
 export { xyz } from "https://unpkg.com/xyz-lib@v0.9.0/lib.ts";
 ```
 
-To create a lock file, you can use the `--lock` and `--lock-write` flags:
+To create a lock file, you can use the `--lock` and `--frozen=false` flags:
 
 ```shell
 # Create/update the lock file "deno.lock".
-deno cache --lock=deno.lock --lock-write src/deps.ts
+deno cache --lock=deno.lock --frozen=false src/deps.ts
 
 # Include it when committing to source control.
 git add -u deno.lock
