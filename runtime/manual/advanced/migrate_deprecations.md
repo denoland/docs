@@ -2,8 +2,8 @@
 title: "Deno 1.x to 2.x Migration Guide"
 ---
 
-This document contains guidance for migrating from Deno version 1.x to the
-upcoming Deno 2.0.
+This document contains guidance for migrating from Deno 1.x to 2.x, namely for
+subcommands, flags and symbols that have been removed or changed in Deno 2.
 
 :::caution Work in progress
 
@@ -12,11 +12,35 @@ will continue to be updated until the launch of 2.0.
 
 :::
 
-## API changes and deprecations
+## Subcommands
 
-The following APIs have changed or deprecated between Deno 1.x and 2.x, and will
-be removed in 2.x - guidance for migrating to a newer set of APIs is provided
-for each impacted API below.
+### `deno bundle`
+
+TODO
+
+### `deno vendor`
+
+TODO
+
+## Flags
+
+### `--allow-none`
+
+TODO
+
+### `--jobs`
+
+TODO
+
+### `--ts`
+
+TODO
+
+### `--trace-ops`
+
+TODO
+
+## Symbols
 
 ### `Deno.Buffer`
 
@@ -91,7 +115,7 @@ instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### `Deno.ListenTlsOptions.certChain`
+### `Deno.ConnectTlsOptions.certChain`
 
 Use
 [`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
