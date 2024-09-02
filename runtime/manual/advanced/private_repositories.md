@@ -5,7 +5,7 @@ title: "Private Modules and Repositories"
 :::note
 
 Not to be confused with
-[private npm registries](/runtime/manual/node/private_registries/).
+[private npm registries](/runtime/manual/node/private_registries).
 
 :::
 

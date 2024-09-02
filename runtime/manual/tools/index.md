@@ -29,8 +29,7 @@ Deno features before they are finalized.
 - [`deno jupyter`](./jupyter.md)- Deno kernel for Jupyter notebooks
 - [`deno lint`](./linter.md) - lint source files
 - [`deno lsp`](./lsp.md) - start the language server
-- [`deno publish`](../basics/modules/publishing_modules.md) - publish a module
-  to JSR
+- [`deno publish`](./publish.md) - publish a module to JSR
 - [`deno repl`](./repl.md) - read eval print loop
 - [`deno run`](./run.md) - run a JavaScript or TypeScript program
 - [`deno serve`](./serve.md) - run a server
