@@ -20,15 +20,15 @@ oldUrl:
 
 Deno uses
 [ECMAScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
-exclusively.
+as its default module system to align with modern JavaScript standards and to
+promote a more efficient and consistent development experience. It's the
+official standard for JavaScript modules, allows for better tree-shaking,
+improved tooling integration, and native support across different environments.
 
-Since 2015, ES Modules have been an integral part of the JavaScript
-specification, enabling seamless module usage directly in the browser. Unlike
-CommonJS, which is not natively supported in browsers, ES Modules provide a
-standardized way to manage dependencies and modularize code. Deno aims to narrow
-the gap between browser and server environments by fully embracing ES Modules,
-ensuring a more consistent and streamlined development experience across both
-platforms.
+By adopting ECMAScript modules, Deno ensures compatibility with the evolving
+JavaScript ecosystem, providing developers with a streamlined and predictable
+module system that eliminates the complexities associated with legacy module
+formats like CommonJS.
 
 ## Importing modules
 
@@ -41,31 +41,75 @@ export function add(a: number, b: number): number {
 ```
 
 ```ts title="main.ts"
+// imports the `calc.ts` module next to this file
 import { add } from "./calc.ts";
 
 console.log(add(1, 2)); // 3
 ```
 
 You can run this example by calling `deno run main.ts` in the directory that
-contains `main.ts` and `calc.ts`.
+contains both `main.ts` and `calc.ts`.
 
-## Adding third party modules and libraries to deno.json
+With ECMAScript modules, local import specifiers must always included the full
+file extension. It cannot be omitted.
 
-Using remote modules (downloaded from a registry) in Deno uses the same `import`
-syntax as your local code.
+```ts title="example.ts"
+// WRONG: missing file extension
+import { add } from "./calc";
 
-The modules that you add to your project are tracked as `imports` in
-`deno.json` - we call this the import map.
+// CORRECT: includes file extension
+import { add } from "./calc.ts";
+```
+
+## Importing third party modules and libraries
+
+Using third modules in Deno uses the same `import` syntax as your local code.
+Third party modules are typically imported from a remote registry and start with
+`jsr:` , `npm:` or `https://` for URL imports.
+
+```ts title="main.ts"
+import { camelCase } from "jsr:@luca/cases@1.0.0";
+import { say } from "npm:cowsay@1.6.0";
+import { pascalCase } from "https://deno.land/x/case/mod.ts";
+```
+
+You'll find most Deno-related code on [JSR](https://jsr.io), which is the
+recommended registry to use with Deno.
+
+## Managing third party modules and libraries
+
+Typing out the module with the full version specifier can become tedious real
+fast when you're importing them from multiple files. We can centralize the
+management of remote modules via the `imports` key in `deno.json`. The `imports`
+key is used to remap specifiers. We call this the import map.
 
 ```json title="deno.json"
 {
   "imports": {
-    "@scopename/mypackage": "jsr:@scopename/mypackage@^16.1.0"
+    "@luca/cases": "jsr:@luca/cases@^1.0.0",
+    "cowsay": "npm:cowsay@^1.6.0",
+    "cases": "https://deno.land/x/case/mod.ts"
   }
 }
 ```
 
-You can add modules using the `deno add` subcommand:
+With the remapped specifiers our code gets a bit simpler:
+
+```ts title="main.ts"
+import { camelCase } from "@luca/cases";
+import { say } from "cowsay";
+import { pascalCase } from "cases";
+```
+
+The remapped name can be any valid specifier. It's a very powerful feature in
+Deno that can remap anything. Learn more about everything the import map can do
+[here](/runtime/manual/basics/import_maps/).
+
+## Adding dependencies with deno add
+
+The installation process is made easier with the `deno add` subcommand. It will
+automatically add the latest version of the package you requested to the
+`imports` section in `deno.json`.
 
 ```sh
 # Add the latest version of the module to deno.json
@@ -81,125 +125,13 @@ Add @luca/cases - jsr:@luca/cases@^1.0.0
 }
 ```
 
-The `deno add` command will automatically add the latest version of the module
-you requested to your project imports, unless you specify an exact version:
+You can also specify an exact version:
 
 ```sh
 # Passing an exact version
 $ deno add @luca/cases@1.0.0
 Add @luca/cases - jsr:@luca/cases@^1.0.0
 ```
-
-## Local imports
-
-When importing local modules, use relative paths that start with `./` or `../`
-and include the full file extension. This means you need to specify `.ts`,
-`.js`, `.tsx`, `.jsx`, or `.mjs` extensions explicitly. This ensures that Deno
-correctly resolves the module location relative to the current file. For
-example:
-
-```ts
-// Always include the file extension
-import { add } from "./calc.ts";
-```
-
-## Using installed modules
-
-Once a package is added to the import map in `deno.json`, you can import the
-module by its name, and Deno will automatically resolve the module. For example:
-
-```ts title="main.ts"
-import { camelCase } from "@luca/cases";
-
-camelCase("hello world"); // "helloWorld"
-```
-
-## Package Registries
-
-Deno recommends that you use [JSR](https://jsr.io/), the JavaScript registry, to
-publish and manage your modules for the best publishing experience. JSR offers
-automatic documentation generation, semver resolution and improved performance
-for TypeScript code. Deno also supports
-[other platforms](https://jsr.io/docs/other-registries) for publishing modules,
-such as npm, and JavaScript CDNs like deno.land/x, esm.h and unpkg.com
-
-By default when you use the CLI, the package will be resolved from JSR.
-
-```bash
-deno add @scopename/mypackage
-```
-
-The resulting import map contains the `jsr:` import specifier in the resulting
-`deno.json` file.
-
-```json
-{
-  "imports": {
-    "@scopename/mypackage": "jsr:@scopename/mypackage@^16.1.0"
-  }
-}
-```
-
-Deno supports the following registries:
-
-| Registry | Specifier |
-| -------- | --------- |
-| JSR      | jsr:      |
-| npm      | npm:      |
-
-To import a package from `npm` you need to prefix the package name with the
-`npm:` specifier:
-
-```bash
-$ deno add npm:uuid
-Add uuid - npm:uuid@^10.0.0
-```
-
-The resulting `deno.json` will contain the following import:
-
-```json
-{
-  "imports": {
-    "uuid": "npm:uuid@^10.0.0"
-  }
-}
-```
-
-You can then use the npm module by importing it by name from the import map.
-
-```ts title="mod.ts"
-import * as uuid from "uuid";
-
-console.log(uuid.v4());
-```
-
-## Importing modules from HTTP URLs
-
-Deno supports importing modules from HTTP URLs. Note that npm packages can be
-directly imported via the
-[`npm:` specifier](/runtime/manual/node/npm_specifiers/).
-
-```typescript
-import { render } from "https://esm.sh/preact";
-```
-
-You can also import modules from a URL by adding it to your `deno.json` import
-map:
-
-```json title="deno.json"
-{
-  "imports": {
-    "preact": "https://esm.sh/preact"
-  }
-}
-```
-
-URL imports should be used with caution, as they can introduce security risks.
-When importing modules from a URL, you are trusting the server to serve the
-correct code. If the server is compromised, it could serve malicious code to
-your application. For this reason, it is recommended to **use URL imports only
-from trusted sources**. They can also cause versioning issues if you import
-different versions in different files.
 
 ## Package Versions
 
@@ -216,7 +148,7 @@ For example:
 @scopename/mypackage@~16.1.0   # latest version that doesn't increment the first non-zero portion
 ```
 
-### Import symbols
+Here is an overview of all the ways you can specify a version or a range:
 
 | Symbol    | Description                                                                                                                                                         | Example   |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
@@ -231,7 +163,7 @@ For example:
 | `1.x`     | Any minor and patch version within the major version 1. For example, `1.0.0`, `1.1.0`, `1.2.0`, etc.                                                                | `1.x`     |
 | `*`       | Any version is allowed.                                                                                                                                             | `*`       |
 
-## Importing by URL
+## URL imports
 
 Deno also supports import statements that reference URLs, either directly:
 
@@ -262,11 +194,15 @@ doesn't require any other configuration because you can avoid having a
 applications as you may end up with version conflicts (where different files use
 different version specifiers).
 
-From a security perspective, the contents of files at URLs can change, so we do
-not generally recommend this approach for third-party components.
+:::info
 
-URL imports remain supported, **but we recommend using a package registry for
-the best experience.**
+Use URL imports with caution, and only **from trusted sources**. If the server
+is compromised, it could serve malicious code to your application. They can also
+cause versioning issues if you import different versions in different files. URL
+imports remain supported, **but we recommend using a package registry for the
+best experience.**
+
+:::
 
 ### Overriding URL imports
 
@@ -436,53 +372,36 @@ Or disable automatically creating and validating a lockfile by specifying:
 }
 ```
 
-### Freezing the lockfile
+### Using `--lock` and `--lock-write` flags
 
-The `--frozen` (alias `--frozen-lockfile`) flag causes Deno to error whenever an
-attempt to update the lockfile is made. You can also enable the same behavior by
-specifying the following configuration in your `deno.json` file instead:
+You may have a file that imports a dependency and looks something like this:
 
-```json
-{
-  "lock": {
-    "frozen": true
-  }
-}
+```ts title="src/deps.ts"
+export { xyz } from "https://unpkg.com/xyz-lib@v0.9.0/lib.ts";
 ```
 
-For example, say you're importing `npm:chalk@5.3.0` while using `--frozen`, and
-you later tried to import `npm:chalk@5.2.0`. Instead of quitely adding a second,
-out-of-date version of `chalk` to your dependency tree, Deno would fail, showing
-that `npm:chalk@5.2.0` would've otherwise been added to your lockfile.
+To create a lock file, you can use the `--lock` and `--lock-write` flags:
 
-```
-error: The lockfile is out of date. Run `deno cache --frozen=false` or rerun with `--frozen=false` to update it.
-changes:
- 7 | -      "npm:chalk@5.3.0": "npm:chalk@5.3.0"
- 7 | +      "npm:chalk@5.2.0": "npm:chalk@5.2.0",
- 8 | +      "npm:chalk@5.3.0": "npm:chalk@5.3.0"
-21 | -      "chalk@5.3.0": {
-22 | +      "chalk@5.2.0": {
-23 | +        "integrity": "sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==",
-24 | +        "dependencies": {}
-25 | +      },
-26 | +      "chalk@5.3.0": {
+```shell
+# Create/update the lock file "deno.lock".
+deno cache --lock=deno.lock --lock-write src/deps.ts
+
+# Include it when committing to source control.
+git add -u deno.lock
+git commit -m "feat: Add support for xyz using xyz-lib"
+git push
 ```
 
-If you intend to instead update you lockfile, you can specify `--frozen=false`,
-which will update the lockfile without error. You can also enable the same
-functionality through the following `deno.json` configuration:
+Collaborator on another machine -- in a freshly cloned project tree:
 
-```json
-{
-  "lock": {
-    "frozen": false
-  }
-}
+```shell
+# Download the project's dependencies into the machine's cache, integrity
+# checking each resource.
+deno cache --reload --lock=deno.lock src/deps.ts
+
+# Done! You can proceed safely.
+deno test --allow-read src
 ```
-
-> [!NOTE] `--lock-write` was replaced by `--frozen=false` was replaced in
-> [Deno 1.45](https://deno.com/blog/v1.45#frozen-lockfile).
 
 ### Runtime verification
 
