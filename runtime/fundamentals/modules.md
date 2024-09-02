@@ -102,7 +102,7 @@ Deno that can remap anything. Learn more about everything the import map can do
 
 ## Adding dependencies with deno add
 
-The installation process is made easier with the `deno add` subcommand. It will
+The installation process is made easy with the `deno add` subcommand. It will
 automatically add the latest version of the package you requested to the
 `imports` section in `deno.json`.
 
@@ -184,10 +184,9 @@ they provide URL access to JavaScript modules:
 - [unpkg.com](https://unpkg.com)
 
 URL imports are useful if you have a small, often single file, Deno project that
-doesn't require any other configuration because you can avoid having a
-`Deno.json` file at all. It's not advised to use this style of import in larger
-applications as you may end up with version conflicts (where different files use
-different version specifiers).
+doesn't require any other configuration. With URL imports, you can avoid having a
+`Deno.json` file at all. It is **not** advised to use this style of import in larger
+applications however, as you may end up with version conflicts (where different files use different version specifiers).
 
 :::info
 
@@ -326,18 +325,16 @@ dependency:
 
 ### Auto-generated lockfile
 
-As mentioned above, when a Deno configuration file is resolved (ex. `deno.json`)
-then an additive lockfile will be automatically generated. By default, the path
-of this lockfile will be `deno.lock`. You can change this path by updating your
+As mentioned above, when a Deno configuration file is resolved (eg. `deno.json`), a lockfile will be automatically generated. By default, the path
+of this lockfile will be in the directory root - `deno.lock`. You can change this path by updating your
 `deno.json` to specify this:
 
 ```json title="deno.json"
 {
   "lock": "./lock.file"
 }
-```
 
-Or disable automatically creating and validating a lockfile by specifying:
+You can disable the automatic creation and validation of a lockfile by specifying:
 
 ```json title="deno.json"
 {
@@ -382,7 +379,7 @@ Like caching above, you can also use lock files during use of the `deno run` sub
 command, validating the integrity of any locked modules during the run. Remember
 that this only validates against dependencies previously added to the lock file.
 
-You can take this a step further as well by using the `--cached-only` flag to
+You can take this a step further by using the `--cached-only` flag to
 require that remote dependencies are already cached.
 
 ```shell
