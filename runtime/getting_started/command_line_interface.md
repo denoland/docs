@@ -162,7 +162,7 @@ Affect commands which can download resources to the cache: `deno cache`,
 ```
 
 Find out more about these
-[here](/runtime/manual/basics/modules/integrity_checking/).
+[here](/runtime/fundamentals/modules/#integrity-checking-and-lock-files).
 
 ### Cache and compilation flags
 
