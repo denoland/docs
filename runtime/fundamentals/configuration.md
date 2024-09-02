@@ -176,16 +176,17 @@ This configuration will:
 - exclude files in the `src/testdata/` directory and any TypeScript files in the
   `src/fixtures/` directory.
 
-Read more about [formatting your code with Deno](/runtime/fundamentals/linting_and_formatting/).
+Read more about
+[formatting your code with Deno](/runtime/fundamentals/linting_and_formatting/).
 
 ## lock
 
 The `lock` field in the `deno.json` file is used to specify the location of the
 lock file that Deno uses to
-[ensure the integrity of your dependencies](/runtime/fundamentals/modules/#integrity-checking-and-lock-files). A lock file
-records the exact versions and integrity hashes of the modules your project
-depends on, ensuring that the same versions are used every time the project is
-run, even if the dependencies are updated or changed remotely.
+[ensure the integrity of your dependencies](/runtime/fundamentals/modules/#integrity-checking-and-lock-files).
+A lock file records the exact versions and integrity hashes of the modules your
+project depends on, ensuring that the same versions are used every time the
+project is run, even if the dependencies are updated or changed remotely.
 
 ## Node modules directory
 
@@ -201,8 +202,9 @@ directory, respectively.
 The `npmRegistry` field in the `deno.json` file is used to specify a custom npm
 registry for resolving npm package specifiers. This allows you to direct Deno to
 use a different registry instead of the default npm registry. This can be
-particularly useful for using [private registries](/runtime/manual/node/private_registries/)
-or mirrors of the npm registry.
+particularly useful for using
+[private registries](/runtime/manual/node/private_registries/) or mirrors of the
+npm registry.
 
 ## TypeScript compiler options
 
