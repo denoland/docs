@@ -18,17 +18,7 @@ export const sidebar = [
     items: [
       "/runtime/fundamentals/typescript/",
       "/runtime/fundamentals/security/",
-      {
-        label: "Using & Publishing Modules",
-        items: [
-          "/runtime/manual/basics/modules/",
-          "/runtime/manual/basics/modules/publishing_modules/",
-          "/runtime/manual/basics/modules/reloading_modules/",
-          "/runtime/manual/basics/modules/integrity_checking/",
-          "/runtime/manual/advanced/private_repositories/",
-          "/runtime/manual/advanced/http_imports/",
-        ],
-      },
+      "/runtime/fundamentals/modules/",
       "/runtime/fundamentals/configuration/",
       "/runtime/fundamentals/standard_library/",
       "/runtime/fundamentals/web_dev/",
@@ -211,6 +201,7 @@ export const sidebar = [
   {
     title: "Advanced Topics",
     items: [
+      "/runtime/manual/advanced/private_repositories/",
       {
         label: "Deploying & Embedding Deno",
         items: [

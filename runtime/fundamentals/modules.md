@@ -7,11 +7,15 @@ oldUrl:
   - /runtime/manual/basics/modules/proxies/
   - /runtime/manual/basics/modules/publishing_modules/
   - /runtime/manual/basics/modules/reloading_modules/
+  - /runtime/manual/basics/vendoring/
+  - /runtime/manual/advanced/http_imports/
   - /runtime/manual/advanced/publishing/dnt/
   - /runtime/manual/advanced/publishing/
-  - /runtime/manual/basics/vendoring/
+  - /runtime/manual/examples/manage_dependencies
   - /runtime/manual/node/cdns.md
-  - /runtime/manual/advanced/http_imports/
+  - /runtime/manual/linking_to_external_code
+  - /runtime/manual/linking_to_external_code/reloading_modules
+  - /runtime/fundamentals/esm.sh
 ---
 
 Deno uses
@@ -172,7 +176,8 @@ console.log(uuid.v4());
 ## Importing modules from HTTP URLs
 
 Deno supports importing modules from HTTP URLs. Note that npm packages can be
-directly imported via the [`npm:` specifier](TODO:specifiers-link).
+directly imported via the
+[`npm:` specifier](/runtime/manual/node/npm_specifiers/).
 
 ```typescript
 import { render } from "https://esm.sh/preact";
