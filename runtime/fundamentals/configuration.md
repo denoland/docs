@@ -87,7 +87,7 @@ to the specific needs of your project.
 ```json
 {
   "tasks": {
-    "start": "deno run -allow-net --watch=static/,routes/,data/ dev.ts",
+    "start": "deno run --allow-net --watch=static/,routes/,data/ dev.ts",
     "test": "deno test --allow-net",
     "lint": "deno lint"
   }
