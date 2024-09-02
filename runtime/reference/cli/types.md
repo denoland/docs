@@ -1,5 +1,6 @@
 ---
 title: "deno types"
+oldUrl: /runtime/reference/cli/types/
 ---
 
 Prints runtime TypeScript declarations.

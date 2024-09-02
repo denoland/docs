@@ -1,5 +1,6 @@
 ---
 title: "Configuring Deno behavior"
+oldUrl: /runtime/reference/cli/env_variables/
 ---
 
 There are several environment variables which can impact the behavior of Deno:

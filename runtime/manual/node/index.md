@@ -19,6 +19,6 @@ Node.js projects to Deno.
 Node and npm compatibility is an ongoing project for the Deno team. As such,
 there are a number of unstable features aimed at improving compatibility that
 you may want to reference. Please check out the
-[unstable feature flags](/runtime/manual/tools/unstable_flags) documentation for
-options that may improve your project's compatibility with code written for
+[unstable feature flags](/runtime/reference/cli/unstable_flags) documentation
+for options that may improve your project's compatibility with code written for
 Node.js.

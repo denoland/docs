@@ -1,5 +1,6 @@
 ---
 title: "`deno bench`, benchmarking tool"
+oldUrl: /runtime/reference/cli/benchmarker/
 ---
 
 Deno has a built-in benchmark runner that you can use for checking performance

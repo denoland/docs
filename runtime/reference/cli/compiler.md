@@ -1,5 +1,6 @@
 ---
 title: "`deno compile`, standalone executables"
+oldUrl: /runtime/reference/cli/compiler/
 ---
 
 `deno compile [--output <OUT>] <SRC>` will compile the script into a

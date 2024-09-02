@@ -1,5 +1,6 @@
 ---
 title: "`deno install`, script installer"
+oldUrl: /runtime/reference/cli/script_installer/
 ---
 
 <!-- TODO: this needs to be updated for Deno 2 -->

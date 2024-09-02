@@ -1,5 +1,6 @@
 ---
 title: "deno eval"
+oldUrl: /runtime/reference/cli/eval/
 ---
 
 Evaluate JavaScript from the command line.

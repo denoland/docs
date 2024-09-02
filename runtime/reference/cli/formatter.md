@@ -2,6 +2,7 @@
 title: "`deno fmt`, code formatting"
 oldUrl:
  - /runtime/tools/formatter/
+ - /runtime/reference/cli/formatter/
 ---
 
 Deno ships with a built-in code formatter that will auto-format the following

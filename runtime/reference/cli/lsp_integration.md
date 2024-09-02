@@ -1,5 +1,6 @@
 ---
 title: "Language Server Protocol Integration"
+oldUrl: /runtime/reference/cli/lsp_integration/
 ---
 
 ## The testing API

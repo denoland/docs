@@ -1,5 +1,6 @@
 ---
 title: "`deno repl`, interactive scripting prompt"
+oldUrl: /runtime/reference/cli/repl/
 ---
 
 `deno repl` starts a read-eval-print-loop, which lets you interactively build up

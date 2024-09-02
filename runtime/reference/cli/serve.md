@@ -1,5 +1,6 @@
 ---
 title: "deno serve"
+oldUrl: /runtime/reference/cli/serve/
 ---
 
 In addition to `deno run`, Deno offers a `deno serve` command-line option that

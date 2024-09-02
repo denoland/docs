@@ -1,5 +1,6 @@
 ---
 title: "deno test"
+oldUrl: /runtime/reference/cli/test/
 ---
 
 Run tests using Deno's built-in test runner.

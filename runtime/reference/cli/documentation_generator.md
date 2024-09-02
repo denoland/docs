@@ -1,5 +1,6 @@
 ---
 title: "`deno doc`, documentation generator"
+oldUrl: /runtime/reference/cli/documentation_generator/
 ---
 
 `deno doc` followed by a list of one or more source files will print the JSDoc

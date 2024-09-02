@@ -3,6 +3,7 @@ title: "`deno lint`, linter"
 oldUrl:
  - /runtime/tools/linter/
  - /runtime/fundamentals/linting_and_formatting/lint-cli-ref
+ - /runtime/reference/cli/linter/
 ---
 
 Deno ships with a built-in code linter for JavaScript and TypeScript.
