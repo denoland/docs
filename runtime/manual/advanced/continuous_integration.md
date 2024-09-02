@@ -178,9 +178,9 @@ key: ${{ hashFiles('deno.lock') }}
 ```
 
 To make this work you will also need a have a lockfile in your Deno project,
-which is discussed in detail [here](../basics/modules/integrity_checking.md).
-Now, if the contents of `deno.lock` are changed, a new cache will be made and
-used in subsequent pipeline runs thereafter.
+which is discussed in detail [here](TODO:integrity-checking-link). Now, if the
+contents of `deno.lock` are changed, a new cache will be made and used in
+subsequent pipeline runs thereafter.
 
 To demonstrate, let's say you have a project that uses the logger from
 [`@std/log`](https://jsr.io/@std/log):
