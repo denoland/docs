@@ -83,7 +83,7 @@ permission to read the environment variables by checking the value of
 ### NO_PROXY
 
 Indicates hosts which should bypass the proxy set in the other environment
-variables. See the [Proxies](#proxiesd) section for more information.
+variables. See the [Proxies](#proxies) section for more information.
 
 ### NPM_CONFIG_REGISTRY
 
