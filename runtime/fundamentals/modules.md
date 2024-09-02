@@ -49,7 +49,7 @@ console.log(add(1, 2)); // 3
 You can run this example by calling `deno run main.ts` in the directory that
 contains both `main.ts` and `calc.ts`.
 
-With ECMAScript modules, local import specifiers must always included the full
+With ECMAScript modules, local import specifiers must always include the full
 file extension. It cannot be omitted.
 
 ```ts title="example.ts"
