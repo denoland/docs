@@ -4,7 +4,6 @@ oldUrl:
   - /runtime/manual/basics/modules/
   - /runtime/manual/basics/modules/integrity_checking/
   - /runtime/manual/basics/modules/module_metadata/
-  - /runtime/manual/basics/modules/proxies/
   - /runtime/manual/basics/modules/publishing_modules/
   - /runtime/manual/basics/modules/reloading_modules/
   - /runtime/manual/basics/vendoring/
@@ -233,19 +232,6 @@ URL imports have no notion of packages. Only the import map at the root of your
 project is used. Import maps used inside URL dependencies are ignored.
 
 :::
-
-## Proxies
-
-Deno is able to handle network requests through a proxy server, useful for
-various reasons such as security, caching, or accessing resources behind a
-firewall. The runtime supports supports proxies for module downloads and the Web
-standard `fetch` API.
-
-Deno reads proxy configuration from environment variables: `HTTP_PROXY`,
-`HTTPS_PROXY` and `NO_PROXY`.
-
-In case of Windows, if environment variables are not found, Deno falls back to
-reading proxies from the registry.
 
 ## Publishing modules
 
