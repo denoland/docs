@@ -18,7 +18,10 @@ export const sidebar = [
     items: [
       "/runtime/fundamentals/typescript/",
       "/runtime/fundamentals/security/",
-      "/runtime/fundamentals/modules/",
+      {
+        label: "Modules",
+        id: "/runtime/fundamentals/modules/",
+      },
       "/runtime/fundamentals/configuration/",
       "/runtime/fundamentals/standard_library/",
       "/runtime/fundamentals/web_dev/",
