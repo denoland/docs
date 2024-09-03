@@ -145,6 +145,7 @@ export const sidebar = [
       "/runtime/reference/deno_namespace_apis/",
       "/runtime/reference/web_platform_apis/",
       "/runtime/reference/wasm/",
+      "/runtime/reference/tcp_udp_connections/",
     ],
   },
   {
