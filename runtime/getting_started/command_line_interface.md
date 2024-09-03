@@ -4,6 +4,7 @@ oldUrl:
  - /manual/getting_started/command_line_interface
  - /runtime/manual/getting_started/command_line_interface/
  - /runtime/fundamentals/command_line_interface/
+ - /runtime/manual/tools/
 ---
 
 Deno is a command line program. The Deno command line interface (CLI) can be
