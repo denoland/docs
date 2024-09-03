@@ -77,6 +77,8 @@ party modules. There, you'll find plenty of well documented ES modules for your
 projects, including the
 [Deno Standard Library](/runtime/fundamentals/standard_library/).
 
+You can [read more about Deno's support for npm packages here](/runtime/reference/npm).
+
 ## Managing third party modules and libraries
 
 Typing out the module name with the full version specifier can become tedious
