@@ -5,6 +5,7 @@ oldUrl:
   - /runtime/manual/runtime/web_platform_apis/
   - /runtime/manual/runtime/location_api/
   - /runtime/manual/runtime/web_storage_api/
+  - /runtime/manual/runtime/workers/
 ---
 
 One way Deno simplifies web and cloud development is by using Web Platform APIs
