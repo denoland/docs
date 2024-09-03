@@ -1,6 +1,6 @@
 ---
 title: "Jupyter Kernel for Deno"
-oldUrl: /runtime/reference/cli/jupyter/
+oldUrl: /runtime/manual/tools/jupyter/
 ---
 
 Deno ships with a built-in Jupyter kernel that allows you to write JavaScript

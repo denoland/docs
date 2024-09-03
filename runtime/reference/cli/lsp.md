@@ -1,6 +1,6 @@
 ---
 title: "deno lsp"
-oldUrl: /runtime/reference/cli/lsp/
+oldUrl: /runtime/manual/tools/lsp/
 ---
 
 :::info

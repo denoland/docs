@@ -1,6 +1,6 @@
 ---
 title: "`deno info`, dependency inspector"
-oldUrl: /runtime/reference/cli/dependency_inspector/
+oldUrl: /runtime/manual/tools/dependency_inspector/
 ---
 
 `deno info [URL]` will inspect an ES module and all of its dependencies.

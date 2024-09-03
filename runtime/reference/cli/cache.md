@@ -1,6 +1,6 @@
 ---
 title: "deno cache"
-oldUrl: /runtime/reference/cli/cache/
+oldUrl: /runtime/manual/tools/cache/
 ---
 
 Cache and compile remote dependencies recursively.

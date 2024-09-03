@@ -1,6 +1,6 @@
 ---
 title: "deno completions"
-oldUrl: /runtime/reference/cli/completions/
+oldUrl: /runtime/manual/tools/completions/
 ---
 
 Output shell completion script to standard output.

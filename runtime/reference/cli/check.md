@@ -1,6 +1,6 @@
 ---
 title: "deno check"
-oldUrl: /runtime/reference/cli/check/
+oldUrl: /runtime/manual/tools/check/
 ---
 
 Type-check a program without execution.

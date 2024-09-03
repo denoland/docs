@@ -1,6 +1,6 @@
 ---
 title: "deno coverage"
-oldUrl: /runtime/reference/cli/coverage/
+oldUrl: /runtime/manual/tools/coverage/
 ---
 
 Print coverage reports from coverage profiles.

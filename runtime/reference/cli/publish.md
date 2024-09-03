@@ -1,6 +1,6 @@
 ---
 title: "deno publish"
-oldUrl: /runtime/reference/cli/publish/
+oldUrl: /runtime/manual/tools/publish/
 ---
 
 _This applies to `deno` v1.42.0. and above._

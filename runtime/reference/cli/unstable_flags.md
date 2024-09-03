@@ -2,7 +2,7 @@
 title: "Unstable Feature Flags"
 oldUrl:
  - /runtime/tools/unstable_flags/
- - /runtime/reference/cli/unstable_flags/
+ - /runtime/manual/tools/unstable_flags/
 ---
 
 New features of the Deno runtime are often released behind feature flags, so

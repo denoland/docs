@@ -1,6 +1,6 @@
 ---
 title: "`deno init`, start a new project"
-oldUrl: /runtime/reference/cli/init/
+oldUrl: /runtime/manual/tools/init/
 ---
 
 Starting a new project with Deno has always been incredibly simple: you just

@@ -1,6 +1,6 @@
 ---
 title: "deno upgrade"
-oldUrl: /runtime/reference/cli/upgrade/
+oldUrl: /runtime/manual/tools/upgrade/
 ---
 
 Upgrade deno executable to the given version.
