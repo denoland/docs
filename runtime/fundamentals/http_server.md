@@ -216,45 +216,37 @@ handle WebSocket endpoints on your HTTP servers.
 To upgrade an incoming `Request` to a WebSocket you use the
 `Deno.upgradeWebSocket` function. This returns an object consisting of a
 `Response` and a web standard `WebSocket` object. The returned response should
-be used to respond to the incoming request using the `respondWith` method. Only
-once `respondWith` is called with the returned response, the WebSocket is
-activated and can be used.
+be used to respond to the incoming request.
 
 Because the WebSocket protocol is symmetrical, the `WebSocket` object is
 identical to the one that can be used for client side communication.
 Documentation for it can be found
 [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket).
 
-> Note: We are aware that this API can be challenging to use, and are planning
-> to switch to
-> [`WebSocketStream`](https://github.com/ricea/websocketstream-explainer/blob/master/README.md)
-> once it is stabilized and ready for use.
-
 ```ts
-async function handle(conn: Deno.Conn) {
-  const httpConn = Deno.serveHttp(conn);
-  for await (const requestEvent of httpConn) {
-    await requestEvent.respondWith(handleReq(requestEvent.request));
+Deno.serve((req) => {
+  if (req.headers.get("upgrade") != "websocket") {
+    return new Response(null, { status: 501 });
   }
-}
 
-function handleReq(req: Request): Response {
-  const upgrade = req.headers.get("upgrade") || "";
-  if (upgrade.toLowerCase() != "websocket") {
-    return new Response("request isn't trying to upgrade to websocket.");
-  }
   const { socket, response } = Deno.upgradeWebSocket(req);
-  socket.onopen = () => console.log("socket opened");
-  socket.onmessage = (e) => {
-    console.log("socket message:", e.data);
-    socket.send(new Date().toString());
-  };
-  socket.onerror = (e) => console.log("socket errored:", e);
-  socket.onclose = () => console.log("socket closed");
+  socket.addEventListener("open", () => {
+    console.log("a client connected!");
+  });
+
+  socket.addEventListener("message", (event) => {
+    if (event.data === "ping") {
+      socket.send("pong");
+    }
+  });
+
   return response;
-}
+});
 ```
 
-WebSockets are only supported on HTTP/1.1 for now. The connection the WebSocket
-was created on can not be used for HTTP traffic after a WebSocket upgrade has
-been performed.
+:::note
+
+The connection the WebSocket was created on can not be used for HTTP traffic
+after a WebSocket upgrade has been performed.
+
+:::
