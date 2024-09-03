@@ -45,6 +45,10 @@ export const sidebar = [
         items: [
           "/runtime/reference/cli/unstable_flags/",
           {
+            label: "Environment Variables",
+            id: "/runtime/reference/cli/env_variables/",
+          },
+          {
             label: "deno bench",
             id: "/runtime/reference/cli/benchmarker/",
           },
