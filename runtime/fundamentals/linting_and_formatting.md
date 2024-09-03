@@ -18,7 +18,7 @@ building amazing applications.
 
 Linting is the process of analyzing your code for potential errors, bugs, and
 stylistic issues. Deno’s built-in linter,
-[`deno lint`](/runtime/manual/tools/linter/), supports recommended set of rules
+[`deno lint`](/runtime/reference/cli/linter/), supports recommended set of rules
 from [ESLint](https://eslint.org/) to provide comprehensive feedback on your
 code. This includes identifying syntax errors, enforcing coding conventions, and
 highlighting potential issues that could lead to bugs.

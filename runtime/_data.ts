@@ -28,34 +28,129 @@ export const sidebar = [
       "/runtime/fundamentals/testing/",
       "/runtime/fundamentals/debugging/",
       "/runtime/fundamentals/workspaces/",
-      "/runtime/fundamentals/installation/",
       "/runtime/fundamentals/linting_and_formatting/",
+      {
+        label: "HTTP Server",
+        id: "/runtime/fundamentals/http_server/",
+      },
+      "/runtime/fundamentals/installation/",
       "/runtime/fundamentals/stability/",
+    ],
+  },
+  {
+    title: "Reference Guides",
+    items: [
+      {
+        label: "Deno CLI",
+        items: [
+          "/runtime/reference/cli/unstable_flags/",
+          {
+            label: "deno bench",
+            id: "/runtime/reference/cli/benchmarker/",
+          },
+          {
+            label: "deno completions",
+            id: "/runtime/reference/cli/completions/",
+          },
+          {
+            label: "deno cache",
+            id: "/runtime/reference/cli/cache/",
+          },
+          {
+            label: "deno check",
+            id: "/runtime/reference/cli/check/",
+          },
+          {
+            label: "deno compile",
+            id: "/runtime/reference/cli/compiler/",
+          },
+          {
+            label: "deno coverage",
+            id: "/runtime/reference/cli/coverage/",
+          },
+          {
+            label: "deno doc",
+            id: "/runtime/reference/cli/documentation_generator/",
+          },
+          {
+            label: "deno eval",
+            id: "/runtime/reference/cli/eval/",
+          },
+          {
+            label: "deno fmt",
+            id: "/runtime/reference/cli/formatter/",
+          },
+          {
+            label: "deno info",
+            id: "/runtime/reference/cli/dependency_inspector/",
+          },
+          {
+            label: "deno init",
+            id: "/runtime/reference/cli/init/",
+          },
+          {
+            label: "deno install",
+            id: "/runtime/reference/cli/script_installer/",
+          },
+          {
+            label: "deno jupyter",
+            id: "/runtime/reference/cli/jupyter/",
+          },
+          {
+            label: "deno lint",
+            id: "/runtime/reference/cli/linter/",
+          },
+          {
+            label: "deno publish",
+            id: "/runtime/reference/cli/publish/",
+          },
+          {
+            label: "deno lsp",
+            id: "/runtime/reference/cli/lsp/",
+          },
+          {
+            label: "deno repl",
+            id: "/runtime/reference/cli/repl/",
+          },
+          {
+            label: "deno run",
+            id: "/runtime/reference/cli/run/",
+          },
+          {
+            label: "deno serve",
+            id: "/runtime/reference/cli/serve/",
+          },
+          {
+            label: "deno task",
+            id: "/runtime/reference/cli/task_runner/",
+          },
+          {
+            label: "deno test",
+            id: "/runtime/reference/cli/test/",
+          },
+          {
+            label: "deno types",
+            id: "/runtime/reference/cli/types/",
+          },
+          {
+            label: "deno uninstall",
+            id: "/runtime/reference/cli/uninstall/",
+          },
+          {
+            label: "deno upgrade",
+            id: "/runtime/reference/cli/upgrade/",
+          },
+        ],
+      },
+      "/runtime/reference/deno_namespace_apis/",
+      "/runtime/reference/web_platform_apis/",
+      "/runtime/reference/wasm/",
+      "/runtime/reference/tcp_udp_connections/",
     ],
   },
   {
     title: "Modules and APIs",
     items: [
-      {
-        label: "Deno Runtime APIs",
-        items: [
-          "/runtime/manual/runtime/builtin_apis/",
-          "/runtime/manual/runtime/http_server_apis/",
-          "/runtime/manual/runtime/permission_apis/",
-          "/runtime/manual/runtime/import_meta_api/",
-          "/runtime/manual/runtime/ffi_api/",
-          "/runtime/manual/runtime/program_lifecycle/",
-        ],
-      },
-      {
-        label: "Web Platform APIs",
-        items: [
-          "/runtime/manual/runtime/web_platform_apis/",
-          "/runtime/manual/runtime/location_api/",
-          "/runtime/manual/runtime/web_storage_api/",
-          "/runtime/manual/runtime/workers/",
-        ],
-      },
       {
         label: "Interop with Node & npm",
         items: [
@@ -77,113 +172,6 @@ export const sidebar = [
   {
     title: "Development Tools",
     items: [
-      {
-        label: "CLI Command Reference",
-        items: [
-          "/runtime/manual/tools/",
-          "/runtime/manual/tools/unstable_flags/",
-          {
-            label: "deno bench",
-            id: "/runtime/manual/tools/benchmarker/",
-          },
-          {
-            label: "deno completions",
-            id: "/runtime/manual/tools/completions/",
-          },
-          {
-            label: "deno cache",
-            id: "/runtime/manual/tools/cache/",
-          },
-          {
-            label: "deno check",
-            id: "/runtime/manual/tools/check/",
-          },
-          {
-            label: "deno compile",
-            id: "/runtime/manual/tools/compiler/",
-          },
-          {
-            label: "deno coverage",
-            id: "/runtime/manual/tools/coverage/",
-          },
-          {
-            label: "deno doc",
-            id: "/runtime/manual/tools/documentation_generator/",
-          },
-          {
-            label: "deno eval",
-            id: "/runtime/manual/tools/eval/",
-          },
-          {
-            label: "deno fmt",
-            id: "/runtime/manual/tools/formatter/",
-          },
-          {
-            label: "deno info",
-            id: "/runtime/manual/tools/dependency_inspector/",
-          },
-          {
-            label: "deno init",
-            id: "/runtime/manual/tools/init/",
-          },
-          {
-            label: "deno install",
-            id: "/runtime/manual/tools/script_installer/",
-          },
-          {
-            label: "deno jupyter",
-            id: "/runtime/manual/tools/jupyter/",
-          },
-          {
-            label: "deno lint",
-            id: "/runtime/manual/tools/linter/",
-          },
-          {
-            label: "deno publish",
-            id: "/runtime/manual/tools/publish/",
-          },
-          {
-            label: "deno lsp",
-            id: "/runtime/manual/tools/lsp/",
-          },
-          {
-            label: "deno repl",
-            id: "/runtime/manual/tools/repl/",
-          },
-          {
-            label: "deno run",
-            id: "/runtime/manual/tools/run/",
-          },
-          {
-            label: "deno serve",
-            id: "/runtime/manual/tools/serve/",
-          },
-          {
-            label: "deno task",
-            id: "/runtime/manual/tools/task_runner/",
-          },
-          {
-            label: "deno test",
-            id: "/runtime/manual/tools/test/",
-          },
-          {
-            label: "deno types",
-            id: "/runtime/manual/tools/types/",
-          },
-          {
-            label: "deno uninstall",
-            id: "/runtime/manual/tools/uninstall/",
-          },
-          {
-            label: "deno upgrade",
-            id: "/runtime/manual/tools/upgrade/",
-          },
-        ],
-      },
-      {
-        label: "Vendoring",
-        id: "/runtime/manual/basics/vendoring/",
-      },
       {
         label: "Visual Studio Code",
         items: [
@@ -224,15 +212,6 @@ export const sidebar = [
           "/runtime/manual/advanced/typescript/configuration/",
           "/runtime/manual/advanced/typescript/migration/",
           "/runtime/manual/advanced/typescript/faqs/",
-        ],
-      },
-      {
-        label: "WebAssembly",
-        items: [
-          "/runtime/manual/runtime/webassembly/",
-          "/runtime/manual/runtime/webassembly/using_wasm/",
-          "/runtime/manual/runtime/webassembly/using_streaming_wasm/",
-          "/runtime/manual/runtime/webassembly/wasm_resources/",
         ],
       },
       "/runtime/manual/advanced/migrate_deprecations/",

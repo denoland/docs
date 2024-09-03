@@ -75,7 +75,7 @@ Deno.test("add function adds two numbers correctly", () => {
 
 ## Running Tests
 
-To run your tests, use the [`deno test`](/runtime/manual/tools/test/)
+To run your tests, use the [`deno test`](/runtime/reference/cli/test/)
 subcommand.
 
 If run without a file name or directory name, this subcommand will automatically
@@ -293,7 +293,7 @@ the `--coverage` flag when starting `deno test`. This coverage information is
 acquired directly from the V8 JavaScript engine, ensuring high accuracy.
 
 This can then be further processed from the internal format into well known
-formats with the [`deno coverage`](/runtime/manual/tools/coverage/) tool.
+formats with the [`deno coverage`](/runtime/reference/cli/coverage/) tool.
 
 ## Behavior-Driven Development
 

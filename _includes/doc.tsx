@@ -299,8 +299,10 @@ function Breadcrumbs(props: {
               itemscope
               itemtype="https://schema.org/ListItem"
             >
-              <span itemprop="name">{crumb}</span>
-              <meta itemprop="position" content={String(i + 2)} />
+              <span itemprop="item">
+                <span itemprop="name">{crumb}</span>
+                <meta itemprop="position" content={String(i + 2)} />
+              </span>
             </li>
             {i < crumbs.length - 1 && (
               <svg
