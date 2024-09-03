@@ -87,11 +87,11 @@ import express from "npm:express@4";
 const app = express();
 
 app.get("/", function (_req, res) {
-    res.send("hello");
+  res.send("hello");
 });
 
 app.listen(3000, () => {
-    console.log("Express listening on :3000");
+  console.log("Express listening on :3000");
 });
 ```
 
@@ -132,10 +132,10 @@ Node.js project with a script called `start` inside its `package.json`:
 
 ```json title="package.json"
 {
-    "name": "my-project",
-    "scripts": {
-        "start": "eslint"
-    }
+  "name": "my-project",
+  "scripts": {
+    "start": "eslint"
+  }
 }
 ```
 
@@ -195,9 +195,9 @@ flags and other runtime configuration in one place.
 
 ```json
 {
-    "tasks": {
-        "dev": "deno run --allow-net --allow-read --allow-env server.js"
-    }
+  "tasks": {
+    "dev": "deno run --allow-net --allow-read --allow-env server.js"
+  }
 }
 ```
 
@@ -214,9 +214,9 @@ in `deno.json`, and add the `npm:` specifier to the import path:
 
 ```json
 {
-    "imports": {
-        "express": "npm:express@4"
-    }
+  "imports": {
+    "express": "npm:express@4"
+  }
 }
 ```
 
@@ -225,11 +225,11 @@ from npm, [JSR](https://jsr.io) and HTTP URLs.
 
 ```json
 {
-    "imports": {
-        "express": "npm:express@4",
-        "@luca/cases": "jsr:@luca/cases@1",
-        "foo": "https://example.com/foo.ts"
-    }
+  "imports": {
+    "express": "npm:express@4",
+    "@luca/cases": "jsr:@luca/cases@1",
+    "foo": "https://example.com/foo.ts"
+  }
 }
 ```
 
@@ -302,7 +302,7 @@ TypeScript or other features work.
 
 ```ts title="my_test.ts"
 Deno.test("my test", () => {
-    // Your test code here
+  // Your test code here
 });
 ```
 

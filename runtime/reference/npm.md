@@ -1,29 +1,29 @@
 ---
 title: "Using npm packages"
-oldUrl: 
+oldUrl:
 - /runtime/manual/node/npm_specifiers
 - /runtime/manual/node/private_registries
 ---
 
-Deno has native support for importing npm packages. This is
-done by importing using `npm:` specifiers. For example the following code:
+Deno has native support for importing npm packages. This is done using `npm:`
+specifiers. For example:
 
-```ts
-import { emojify } from "npm:node-emoji@2";
+```ts title="main.js"
+import * as emoji from "npm:node-emoji";
 
-console.log(emojify(":t-rex: :heart: NPM"));
+console.log(emoji.emojify(`:sauropod: :heart:  npm`));
 ```
 
 Can be run with:
 
 ```sh
 $ deno run main.js
-🦖 ❤️ NPM
+🦕 ❤️ npm
 ```
 
-When doing this, no `npm install` is necessary and no `node_modules` folder is
-created. These packages are also subject to the same
-[permissions](../basics/permissions.md) as other code in Deno.
+No `npm install` is necessary before the `deno run` command and no
+`node_modules` folder is created. These packages are also subject to the same
+[permissions](/runtime/fundamentals/security/) as other code in Deno.
 
 npm specifiers have the following format:
 
@@ -31,19 +31,19 @@ npm specifiers have the following format:
 npm:<package-name>[@<version-requirement>][/<sub-path>]
 ```
 
-For examples with popular libraries, please refer to our
+For examples with popular libraries, please refer to the
 [tutorial section](/runtime/tutorials).
 
 ## TypeScript types
 
-Many packages ship with types out of the box, you can import those and use them
-with types easily:
+Many npm packages ship with types, you can import these and use them with types
+directly:
 
 ```ts
 import chalk from "npm:chalk@5";
 ```
 
-Some packages do not though, but you can specify their types with a
+Some packages do not ship with types but you can specify their types with the
 [`@deno-types`](/runtime/fundamentals/typescript) directive. For example, using
 a
 [`@types`](https://www.typescriptlang.org/docs/handbook/2/type-declarations.html#definitelytyped--types)
@@ -75,12 +75,12 @@ If you want to use a package that doesn't support TypeScript's node16 module
 resolution, you can:
 
 1. Open an issue at the issue tracker of the package about the problem. (And
-   perhaps contribute a fix :) (Although there unfortunately currently is a lack
-   of tooling for packages to support both ESM and CJS, since default exports
-   require different syntaxes, see also
+   perhaps contribute a fix :) (Although, unfortunately, there is a lack of
+   tooling for packages to support both ESM and CJS, since default exports
+   require different syntaxes. See also
    [microsoft/TypeScript#54593](https://github.com/microsoft/TypeScript/issues/54593))
-2. Use a [CDN](./cdns.md), that rebuilds the packages for Deno support, instead
-   of an `npm:` identifier.
+2. Use a [CDN](/runtime/fundamentals/modules/#url_imports), that rebuilds the
+   packages for Deno support, instead of an `npm:` identifier.
 3. Ignore the type errors you get in your code base with `// @ts-expect-error`
    or `// @ts-ignore`.
 
@@ -148,19 +148,18 @@ import chalk from "npm:chalk@5";
 console.log(chalk.green("Hello"));
 ```
 
-Running this script with a `--node-modules-dir` like so...
-
 ```sh
 deno run --node-modules-dir main.ts
 ```
 
-...will create a `node_modules` folder in the current directory with a similar
-folder structure to npm.
+Running the above command, with a `--node-modules-dir` flag, will create a
+`node_modules` folder in the current directory with a similar folder structure
+to npm:
 
 ![](./images/node_modules_dir.png)
 
-Note that this is all done automatically when calling deno run and there is no
-separate install command necessary.
+This is done automatically when calling deno run, no separate install command
+necessary.
 
 Alternatively, if you wish to disable the creation of a `node_modules` directory
 entirely, you can set this flag to false (ex. `--node-modules-dir=false`) or add
@@ -181,7 +180,7 @@ deno run --node-modules-dir main.ts
 
 ## Private registries
 
-:::note
+:::caution
 
 Not to be confused with
 [private repositories and modules](/runtime/manual/advanced/private_repositories/).
