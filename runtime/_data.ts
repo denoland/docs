@@ -29,7 +29,10 @@ export const sidebar = [
       "/runtime/fundamentals/debugging/",
       "/runtime/fundamentals/workspaces/",
       "/runtime/fundamentals/linting_and_formatting/",
-      "/runtime/fundamentals/http_server/",
+      {
+        label: "HTTP Server",
+        id: "/runtime/fundamentals/http_server/",
+      },
       "/runtime/fundamentals/installation/",
       "/runtime/fundamentals/stability/",
     ],
