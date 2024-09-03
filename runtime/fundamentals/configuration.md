@@ -103,7 +103,7 @@ deno task test
 deno task lint
 ```
 
-Read more about [`deno task`](/runtime/manual/tools/task_runner/).
+Read more about [`deno task`](/runtime/reference/cli/task_runner/).
 
 ## Linting
 
@@ -140,7 +140,7 @@ This configuration will:
 You can find a full list of available linting rules in the
 [Deno lint documentation](https://lint.deno.land/).
 
-Read more about [linting with Deno](/runtime/manual/tools/linter/).
+Read more about [linting with Deno](/runtime/reference/cli/linter/).
 
 ## Formatting
 
@@ -229,7 +229,7 @@ The `unstable` field in a `deno.json` file is used to enable specific unstable
 feature flags for your Deno project. These features are still in development and
 not yet part of the stable API. By listing the desired features in the unstable
 array, you can experiment with and use these new capabilities before they are
-officially released. [Learn more](/runtime/manual/tools/unstable_flags/).
+officially released. [Learn more](/runtime/reference/cli/unstable_flags/).
 
 ## include and exclude
 

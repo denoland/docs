@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run deno bench <url>
- * @resource {https://docs.deno.com/runtime/manual/tools/benchmarker} Manual: Benchmarker tool
+ * @resource {https://docs.deno.com/runtime/reference/cli/benchmarker} Manual: Benchmarker tool
  * @resource {/examples/http-requests} Example: HTTP Requests
  * @group System
  *

@@ -3,9 +3,9 @@ title: Making a Deno project
 oldUrl: /runtime/manual/getting_started/first_steps/
 ---
 
-Deno has many [built in tools](/runtime/manual/tools/) to make your development
+Deno has many [built in tools](/runtime/reference/cli/) to make your development
 experience as smooth as possible. One of these tools is the
-[project initializer](/runtime/manual/tools/init/), which creates a new Deno
+[project initializer](/runtime/reference/cli/init/), which creates a new Deno
 project with a basic file structure and configuration.
 
 While you are welcome to use JavaScript, Deno has built-in support for

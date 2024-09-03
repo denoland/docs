@@ -414,7 +414,7 @@ There are several environment variables which can impact the behavior of Deno:
   specific certificate per TLS connection.
 - `DENO_CERT` - load a certificate authority from a PEM encoded file. This
   "overrides" the `--cert` option. See the
-  [Proxies](/runtime/manual/tools/env_variables#proxies) section for more
+  [Proxies](/runtime/reference/cli/env_variables#proxies) section for more
   information.
 - `DENO_DIR` - this will set the directory where cached information from the CLI
   is stored. This includes items like cached remote modules, cached transpiled
@@ -430,10 +430,10 @@ There are several environment variables which can impact the behavior of Deno:
   available.
 - `DENO_WEBGPU_TRACE` - The directory to use for WebGPU traces.
 - `HTTP_PROXY` - The proxy address to use for HTTP requests. See the
-  [Proxies](/runtime/manual/tools/env_variables#proxies) section for more
+  [Proxies](/runtime/reference/cli/env_variables#proxies) section for more
   information.
 - `HTTPS_PROXY` - The proxy address to use for HTTPS requests. See the
-  [Proxies](/runtime/manual/tools/env_variables#proxies) section for more
+  [Proxies](/runtime/reference/cli/env_variables#proxies) section for more
   information.
 - `NO_COLOR` - If set, this will prevent the Deno CLI from sending ANSI color
   codes when writing to stdout and stderr. See the website
@@ -443,7 +443,7 @@ There are several environment variables which can impact the behavior of Deno:
   `Deno.noColor`.
 - `NO_PROXY` - Indicates hosts which should bypass the proxy set in the other
   environment variables. See the
-  [Proxies](/runtime/manual/tools/env_variables#proxies) section for more
+  [Proxies](/runtime/reference/cli/env_variables#proxies) section for more
   information.
 - `NPM_CONFIG_REGISTRY` - The npm registry to use when loading modules via
   [npm specifiers](../node/npm_specifiers.md)
