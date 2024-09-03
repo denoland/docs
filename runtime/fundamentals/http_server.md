@@ -250,3 +250,9 @@ The connection the WebSocket was created on can not be used for HTTP traffic
 after a WebSocket upgrade has been performed.
 
 :::
+
+:::note
+
+Note that WebSockets are only supported on HTTP/1.1 for now.
+
+:::
