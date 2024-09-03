@@ -65,7 +65,7 @@ no additional tools or configuration required. We'll make and run a simple
 Create a TypeScript or JavaScript file called `main` and include the following
 code:
 
-<deno-tabs>
+<deno-tabs group-id="code">
 <deno-tab value="TypeScript" label="TypeScript" default>
 
 ```ts title="main.ts"
@@ -92,7 +92,7 @@ console.log(greet("world"));
 
 Save the file and run it with Deno:
 
-<deno-tabs>
+<deno-tabs group-id="commands">
 <deno-tab value="ts" label="main.ts" default>
 
 ```sh
