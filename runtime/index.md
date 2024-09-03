@@ -92,7 +92,7 @@ console.log(greet("world"));
 
 Save the file and run it with Deno:
 
-<deno-tabs  group-id="commands">
+<deno-tabs group-id="commands">
 <deno-tab value="ts" label="main.ts" default>
 
 ```sh
