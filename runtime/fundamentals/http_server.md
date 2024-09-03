@@ -66,11 +66,15 @@ Deno.serve(async (req) => {
 });
 ```
 
-> ⚠️ Be aware that the `req.text()` call can fail if the user hangs up the
-> connection before the body is fully received. Make sure to handle this case.
-> Do note this can happen in all methods that read from the request body, such
-> as `req.json()`, `req.formData()`, `req.arrayBuffer()`,
-> `req.body.getReader().read()`, `req.body.pipeTo()`, etc.
+:::caution
+
+Be aware that the `req.text()` call can fail if the user hangs up the connection
+before the body is fully received. Make sure to handle this case. Do note this
+can happen in all methods that read from the request body, such as `req.json()`,
+`req.formData()`, `req.arrayBuffer()`, `req.body.getReader().read()`,
+`req.body.pipeTo()`, etc.
+
+:::
 
 ## Responding with a response
 
@@ -117,10 +121,14 @@ Deno.serve((req) => {
 });
 ```
 
-ℹNote the `cancel` function above. This is called when the client hangs up the
+:::note
+
+Note the `cancel` function above. This is called when the client hangs up the
 connection. It is important to make sure that you handle this case, as otherwise
 the server will keep queuing up messages forever, and eventually run out of
 memory.
+
+:::
 
 Be aware that the response body stream is "cancelled" when the client hangs up
 the connection. Make sure to handle this case. This can surface itself as an
@@ -128,13 +136,6 @@ error in a `write()` call on a `WritableStream` object that is attached to the
 response body `ReadableStream` object (for example through a `TransformStream`).
 
 ## HTTPS support
-
-:::note
-
-To use HTTPS, you will need a valid TLS certificate and a private key for your
-server.
-
-:::
 
 To use HTTPS, pass two extra arguments in the options bag: `cert` and `key`.
 These are contents of the certificate and key files, respectively.
@@ -146,6 +147,13 @@ Deno.serve({
   key: Deno.readTextFileSync("./key.pem"),
 }, handler);
 ```
+
+:::note
+
+To use HTTPS, you will need a valid TLS certificate and a private key for your
+server.
+
+:::
 
 ## HTTP/2 support
 
@@ -179,9 +187,9 @@ compressed if the following conditions are true:
   [in the code](https://github.com/denoland/deno/blob/v1.21.0/ext/http/compressible.rs).)
 - The response body is greater than 64 bytes.
 
-When the response body is compressed, Deno will set the Content-Encoding header
-to reflect the encoding, as well as ensure the Vary header is adjusted or added
-to indicate which request headers affected the response.
+When the response body is compressed, Deno will set the `Content-Encoding`
+header to reflect the encoding, as well as ensure the `Vary` header is adjusted
+or added to indicate which request headers affected the response.
 
 In addition to the logic above, there are a few reasons why a response **won’t**
 be compressed automatically:
@@ -208,7 +216,7 @@ handling, and so on. However, if you are interested creating your own robust and
 performant web servers in Deno, lower-level, _native_ HTTP server APIs are
 available.
 
-:::warning
+:::caution
 
 You should probably not be using the `Deno.serveHTTP` API, as it is not easy to
 get right. Use the `Deno.serve` API instead.
@@ -225,10 +233,14 @@ network port. To do this in Deno, you use
 const server = Deno.listen({ port: 8080 });
 ```
 
-ℹWhen supplying a port, Deno assumes you are going to listen on a TCP socket as
+:::info
+
+When supplying a port, Deno assumes you are going to listen on a TCP socket as
 well as bind to the localhost. You can specify `transport: "tcp"` to be more
 explicit as well as provide an IP address or hostname in the `hostname` property
 as well.
+
+:::
 
 If there is an issue with opening the network port, `Deno.listen()` will throw,
 so often in a server sense, you will want to wrap it in a `try ... catch` block
