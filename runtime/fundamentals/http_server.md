@@ -6,7 +6,7 @@ oldUrl:
 
 Deno has a built in HTTP server API that allows you to write HTTP servers. The
 [`Deno.serve`](https://docs.deno.com/api/deno/~/Deno.serve) API supports
-HTTP/1.1 and HTTP2.
+HTTP/1.1 and HTTP/2.
 
 ## A "Hello World" server
 
