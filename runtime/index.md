@@ -49,7 +49,7 @@ curl -fsSL https://deno.land/install.sh | sh
 </deno-tabs>
 
 [Additional installation options can be found here](/runtime/fundamentals/installation/).
-After installation, you should will the `deno` executable available on your
+After installation, you should have the `deno` executable available on your
 system path. You can verify the installation by running:
 
 ```sh

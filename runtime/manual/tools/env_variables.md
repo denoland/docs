@@ -29,8 +29,7 @@ specific certificate per TLS connection.
 ### DENO_CERT
 
 Load a certificate authority from a PEM encoded file. This "overrides" the
-`--cert` option. See the [Proxies](../basics/modules/proxies.md) section for
-more information.
+`--cert` option. See the [Proxies](#proxies) section for more information.
 
 ### DENO_DIR
 
@@ -64,13 +63,13 @@ The directory to use for WebGPU traces.
 
 ### HTTP_PROXY
 
-The proxy address to use for HTTP requests. See the
-[Proxies](../basics/modules/proxies.md) section for more information.
+The proxy address to use for HTTP requests. See the [Proxies](#proxies) section
+for more information.
 
 ### HTTPS_PROXY
 
-The proxy address to use for HTTPS requests. See the
-[Proxies](../basics/modules/proxies.md) section for more information.
+The proxy address to use for HTTPS requests. See the [Proxies](#proxies) section
+for more information.
 
 ### NO_COLOR
 
@@ -84,10 +83,22 @@ permission to read the environment variables by checking the value of
 ### NO_PROXY
 
 Indicates hosts which should bypass the proxy set in the other environment
-variables. See the [Proxies](../basics/modules/proxies.md) section for more
-information.
+variables. See the [Proxies](#proxies) section for more information.
 
 ### NPM_CONFIG_REGISTRY
 
 The npm registry to use when loading modules via
 [npm specifiers](../node/npm_specifiers.md)
+
+## Proxies
+
+Deno is able to handle network requests through a proxy server, useful for
+various reasons such as security, caching, or accessing resources behind a
+firewall. The runtime supports supports proxies for module downloads and the Web
+standard `fetch` API.
+
+Deno reads proxy configuration from environment variables: `HTTP_PROXY`,
+`HTTPS_PROXY` and `NO_PROXY`.
+
+On Windows, if environment variables are not found, Deno falls back to reading
+proxies from the registry.

@@ -60,7 +60,7 @@ deno run --check module.ts
 deno run --check=all module.ts
 ```
 
-When Deno encounters a type error, the process with exit before executing the
+When Deno encounters a type error, the process will exit before executing the
 code. If you have used the `--check` flag then type-related diagnostics will
 prevent the program from running: it will halt on these warnings, and exit the
 process before executing the code.

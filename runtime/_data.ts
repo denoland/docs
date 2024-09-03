@@ -19,15 +19,8 @@ export const sidebar = [
       "/runtime/fundamentals/typescript/",
       "/runtime/fundamentals/security/",
       {
-        label: "Using & Publishing Modules",
-        items: [
-          "/runtime/manual/basics/modules/",
-          "/runtime/manual/basics/modules/publishing_modules/",
-          "/runtime/manual/basics/modules/reloading_modules/",
-          "/runtime/manual/basics/modules/integrity_checking/",
-          "/runtime/manual/advanced/private_repositories/",
-          "/runtime/manual/advanced/http_imports/",
-        ],
+        label: "Modules",
+        id: "/runtime/fundamentals/modules/",
       },
       "/runtime/fundamentals/configuration/",
       "/runtime/fundamentals/standard_library/",
@@ -78,18 +71,7 @@ export const sidebar = [
           },
         ],
       },
-      {
-        label: "JSX and DOM APIs",
-        items: [
-          "/runtime/manual/advanced/jsx_dom/overview/",
-          "/runtime/manual/advanced/jsx_dom/jsx/",
-          "/runtime/manual/advanced/jsx_dom/css/",
-          "/runtime/manual/advanced/jsx_dom/jsdom/",
-          "/runtime/manual/advanced/jsx_dom/deno_dom/",
-          "/runtime/manual/advanced/jsx_dom/linkedom/",
-          "/runtime/manual/advanced/faqs/",
-        ],
-      },
+      "/runtime/manual/advanced/jsx/",
     ],
   },
   {
@@ -222,6 +204,7 @@ export const sidebar = [
   {
     title: "Advanced Topics",
     items: [
+      "/runtime/manual/advanced/private_repositories/",
       {
         label: "Deploying & Embedding Deno",
         items: [

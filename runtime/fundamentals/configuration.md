@@ -1,46 +1,46 @@
 ---
-title: "deno.json configuration file"
+title: "deno.json and package.json"
 oldUrl: /runtime/manual/getting_started/configuration_file/
 ---
 
-Deno supports a configuration file that allows you to customize the built-in
-TypeScript compiler, formatter, and linter.
+You can configure Deno using a `deno.json` file. This file can be used to
+configure the TypeScript compiler, linter, formatter, and other Deno tools.
 
 The configuration file supports `.json` and
 [`.jsonc`](https://code.visualstudio.com/docs/languages/json#_json-with-comments)
 extensions.
-[Since v1.18](https://deno.com/blog/v1.18#auto-discovery-of-the-config-file),
+
 Deno will automatically detect a `deno.json` or `deno.jsonc` configuration file
 if it's in your current working directory or parent directories. The `--config`
 flag can be used to specify a different configuration file.
 
-:::info Version notes
+## package.json support
 
-- Before Deno v1.23, you needed to supply an explicit `--config` flag.
-- Starting with Deno v1.34, globs are supported in `include` and `exclude`
-  fields. You can use `*` to match any number of characters, `?` to match a
-  single character, and `**` to match any number of directories.
+Deno also supports a `package.json` file for compatibility with Node.js
+projects. If you have a Node.js project, it is not necessary to create a
+`deno.json` file. Deno will use the `package.json` file to configure the
+project. If both a `deno.json` and `package.json` file are present in the same
+directory, Deno will import the modules in the `package.json` file and use the
+`deno.json` file for Deno-specific configurations. Read more about
+[Node compatibility in Deno](/runtime/manual/node/compatibility).
 
-:::
+## module imports and scopes
 
-## `imports` and `scopes`
+The "imports" field in your `deno.json` allows you to control how Deno resolves
+modules. You can use it to map bare specifiers (module specifiers that refer to
+the package name or feature) to URLs or file paths making it easier to manage
+dependencies and module resolution in your applications.
 
-Since version 1.30, the `deno.json` configuration file acts as an
-[import map](../basics/import_maps.md) for resolving bare specifiers.
+For example, if you want to use the `assert` module from the standard library in
+your project, you could use this import map:
 
-```jsonc
+```json
 {
   "imports": {
     "std/assert": "jsr:@std/assert@^1.0.0"
-  },
-  "tasks": {
-    "dev": "deno run --watch main.ts"
   }
 }
 ```
-
-See [the import map section](../basics/import_maps.md) for more information on
-import maps.
 
 Then your script can use the bare specifier `std`:
 
@@ -53,25 +53,66 @@ assertEquals(1, 2);
 The top-level `deno.json` option `importMap` along with the `--importmap` flag
 can be used to specify the import map in other files.
 
-## `tasks`
-
-Similar to `package.json`'s `script` field. Essentially shortcuts for command
-line invocations.
+If you need to scope an import to a to a specific file or directory, you can use
+the "scopes" field. For example:
 
 ```json
 {
-  "tasks": {
-    "start": "deno run -A --watch=static/,routes/,data/ dev.ts"
+  "importMap": {
+    "imports": {
+      "lodash": "https://cdn.skypack.dev/lodash@4.17.21"
+    },
+    "scopes": {
+      "/special/": {
+        "lodash": "https://cdn.skypack.dev/lodash@4.17.20"
+      }
+    }
   }
 }
 ```
 
-Using `deno task start` will run the command. See also
-[`deno task`](../tools/task_runner.md).
+In this example, the `lodash` module is resolved to version 4.17.21 for all
+files except those in the `/special/` directory, where it is resolved to version
+4.17.20.
 
-## `lint`
+Read more about [module imports](./modules.md)
 
-Configuration for [`deno lint`](../tools/linter.md).
+## tasks
+
+The tasks field in your `deno.json` file is used to define custom commands that
+can be executed with the `deno task` command. It is similar to the `scripts`
+field in a `package.json` file and allows you to tailor commands and permissions
+to the specific needs of your project.
+
+```json
+{
+  "tasks": {
+    "start": "deno run --allow-net --watch=static/,routes/,data/ dev.ts",
+    "test": "deno test --allow-net",
+    "lint": "deno lint"
+  }
+}
+```
+
+To execute a task, use the `deno task` command followed by the task name. For
+example:
+
+```sh
+deno task start
+deno task test
+deno task lint
+```
+
+Read more about [`deno task`](/runtime/manual/tools/task_runner/).
+
+## Linting
+
+The `lint` field in the `deno.json` file is used to configure the behavior of
+Deno’s built-in linter. This allows you to specify which files to include or
+exclude from linting, as well as customize the linting rules to suit your
+project’s needs.
+
+For example:
 
 ```json
 {
@@ -87,9 +128,26 @@ Configuration for [`deno lint`](../tools/linter.md).
 }
 ```
 
-## `fmt`
+This configuration will:
 
-Configuration for [`deno fmt`](../tools/formatter.md)
+- only lint files in the `src/` directory,
+- will not lint files in the `src/testdata/` directory or any TypeScript files
+  in the `src/fixtures/` directory.
+- specifies that the recommended linting rules should be applied,
+- adds the `ban-untagged-todo`
+- removes the `no-unused-vars` rule excluded.
+
+You can find a full list of available linting rules in the
+[Deno lint documentation](https://lint.deno.land/).
+
+Read more about [linting with Deno](/runtime/manual/tools/linter/).
+
+## Formatting
+
+The `fmt` field in the `deno.json` file is used to configure the behavior of
+Deno’s built-in code formatter. This allows you to customize how your code is
+formatted, ensuring consistency across your project, making it easier to read
+and collaborate on. Here are the key options you can configure:
 
 ```json
 {
@@ -106,42 +164,79 @@ Configuration for [`deno fmt`](../tools/formatter.md)
 }
 ```
 
-## `lock`
+This configuration will:
 
-Used to specify a different file name for the lockfile. By default deno will use
-`deno.lock` and place it alongside the configuration file.
+- use tabs instead of spaces for indentation,
+- limit lines to 80 characters,
+- use an indentation width of 4 spaces,
+- add semicolons to the end of statements,
+- use single quotes for strings,
+- preserve prose wrapping,
+- format files in the `src/` directory,
+- exclude files in the `src/testdata/` directory and any TypeScript files in the
+  `src/fixtures/` directory.
 
-## `nodeModulesDir`
+Read more about
+[formatting your code with Deno](/runtime/fundamentals/linting_and_formatting/).
 
-Used to enable or disable the `node_modules` directory when using npm packages.
+## lock
 
-## `npmRegistry`
+The `lock` field in the `deno.json` file is used to specify the location of the
+lock file that Deno uses to
+[ensure the integrity of your dependencies](/runtime/fundamentals/modules/#integrity-checking-and-lock-files).
+A lock file records the exact versions and integrity hashes of the modules your
+project depends on, ensuring that the same versions are used every time the
+project is run, even if the dependencies are updated or changed remotely.
 
-Used to specify a custom npm registry for npm specifiers.
+## Node modules directory
 
-## `compilerOptions`
+The `nodeModulesDir` field in the `deno.json` file is used to explicitly enable
+or disable Deno’s use of the `node_modules` directory when working with npm
+packages. This setting is particularly useful for projects that need to
+integrate with existing Node.js ecosystems or gradually adopt Deno. It can be
+set to `true` or `false` to enable or disable the use of the `node_modules`
+directory, respectively.
 
-`deno.json` can also act as a TypeScript configuration file and supports
-[most of the TS compiler options](https://www.typescriptlang.org/tsconfig).
+## npm registry
 
-Deno encourages users to use the default TypeScript configuration to help
+The `npmRegistry` field in the `deno.json` file is used to specify a custom npm
+registry for resolving npm package specifiers. This allows you to direct Deno to
+use a different registry instead of the default npm registry. This can be
+particularly useful for using
+[private registries](/runtime/manual/node/private_registries/) or mirrors of the
+npm registry.
+
+## TypeScript compiler options
+
+The `compilerOptions` field in the `deno.json` file is used to configure
+[TypeScript compiler settings](https://www.typescriptlang.org/tsconfig) for your
+Deno project. This allows you to customize how TypeScript code is compiled,
+ensuring it aligns with your project’s requirements and coding standards.
+
+:::info
+
+Deno recommends the default TypeScript configuration. This will help when
 sharing code.
 
+:::
+
 See also
-[Configuring TypeScript in Deno](../advanced/typescript/configuration.md).
+[Configuring TypeScript in Deno](/runtime/manual/advanced/typescript/configuration/).
 
-## `unstable`
+## unstable
 
-The `unstable` property is an array of strings used to configure which unstable
-feature flags should be enabled for your program.
-[Learn more](../tools/unstable_flags.md).
+The `unstable` field in a `deno.json` file is used to enable specific unstable
+feature flags for your Deno project. These features are still in development and
+not yet part of the stable API. By listing the desired features in the unstable
+array, you can experiment with and use these new capabilities before they are
+officially released. [Learn more](/runtime/manual/tools/unstable_flags/).
 
-## `include` and `exclude`
+## include and exclude
 
 Many configurations (ex. `lint`, `fmt`) have an `include` and `exclude` property
 for specifying the files to include.
 
-### `include`
+### include
 
 Only the paths or patterns specified here will be included.
 
@@ -154,7 +249,7 @@ Only the paths or patterns specified here will be included.
 }
 ```
 
-### `exclude`
+### exclude
 
 The paths or patterns specified here will be excluded.
 
@@ -169,17 +264,6 @@ The paths or patterns specified here will be excluded.
 
 This has HIGHER precedence than `include` and will win over `include` if a path
 is matched in both `include` and `exclude`.
-
-```jsonc
-{
-  "lint": {
-    // only lint .js files in the src directory
-    "include": ["src/**/*.js"],
-    // js files in the src/fixtures folder will not be linted
-    "exclude": ["src/fixtures"]
-  }
-}
-```
 
 You may wish to exclude a directory, but include a sub directory. In Deno
 1.41.2+, you may un-exclude a more specific path by specifying a negated glob
@@ -198,7 +282,7 @@ below the more general exclude:
 }
 ```
 
-### Top level `exclude`
+### Top level exclude
 
 If there's a directory you never want Deno to fmt, lint, type check, analyze in
 the LSP, etc., then specify it in the top level exclude array:
@@ -233,9 +317,9 @@ specifying a negated glob in a more specific config:
 
 ### Publish - Override .gitignore
 
-The _.gitignore_ is taken into account for the unstable `deno publish` command.
-In Deno 1.41.2+, you can opt-out of excluded files ignored in the _.gitignore_
-by using a negated exclude glob:
+The `.gitignore` is taken into account for the `deno publish` command. In Deno
+1.41.2+, you can opt-out of excluded files ignored in the _.gitignore_ by using
+a negated exclude glob:
 
 ```title=".gitignore"
 dist/
