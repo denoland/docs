@@ -309,6 +309,7 @@ body:not(:has(.ddoc)) {
   @apply px-8 py-2 max-sm:-mx-4 sm:rounded-t-md border border-slate-200 bg-slate-600 text-white text-sm font-semibold;
 }
 
+/* Strips bottom margin in instances where multiple code samples exist in a tab. */
 .markdown-body .deno-tabs :not(div > pre + div > pre) {
   @apply mb-0;
 }
