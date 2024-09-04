@@ -248,7 +248,6 @@ It is not required to specify this setting, the following defaults are applied:
 - `"none"` if there is no `package.json` file in your project directory
 - `"manual"` is there is a `package.json` file in your project directory
 
----
 
 When using workspaces, this setting can only be used in the workspace root.
 Specifying it in any of the members will result in warnings. The `"manual"`
