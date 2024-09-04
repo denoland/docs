@@ -337,18 +337,20 @@ As mentioned above, when a Deno configuration file is resolved (eg.
 of this lockfile will be in the directory root - `deno.lock`. You can change
 this path by updating your `deno.json` to specify this:
 
-````json title="deno.json"
+```json title="deno.json"
 {
   "lock": "./lock.file"
 }
+```
 
-You can disable the automatic creation and validation of a lockfile by specifying:
+You can disable the automatic creation and validation of a lockfile by
+specifying:
 
 ```json title="deno.json"
 {
   "lock": false
 }
-````
+```
 
 ### Using `--lock` and `--frozen=false` flags
 
