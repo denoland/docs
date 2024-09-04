@@ -223,7 +223,7 @@ Deno uses lockfile by default, you can disable it with following configuration:
 
 ## Node modules directory
 
-By default Deno uses a `node_modules` directory based on the presence of
+By default Deno uses a local `node_modules` directory if you have a
 `package.json` file in your project directory.
 
 You can control this behavior using the `nodeModulesDir` field in the
