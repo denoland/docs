@@ -64,7 +64,7 @@ import { add } from "./calc.ts";
 
 When working with third-party modules in Deno, use the same `import` syntax as
 you do for local code. Third party modules are typically imported from a remote
-registry and start with `jsr:` , `npm:` or `https://` for URL imports.
+registry and start with `jsr:` , `npm:` or `https://`.
 
 ```ts title="main.ts"
 import { camelCase } from "jsr:@luca/cases@1.0.0";
@@ -82,7 +82,8 @@ projects, including the
 Typing out the module name with the full version specifier can become tedious
 when importing them in multiple files. You can centralize management of remote
 modules with an `imports` field in your `deno.json` file. We call this `imports`
-field the **import map**.
+field the **import map**, which is based on the
+[Import Maps Standard](https://github.com/WICG/import-maps).
 
 ```json title="deno.json"
 {
@@ -106,7 +107,7 @@ The remapped name can be any valid specifier. It's a very powerful feature in
 Deno that can remap anything. Learn more about everything the import map can do
 [here](/runtime/manual/basics/import_maps/).
 
-## Adding dependencies with deno add
+## Adding dependencies with `deno add`
 
 The installation process is made easy with the `deno add` subcommand. It will
 automatically add the latest version of the package you requested to the
@@ -114,8 +115,8 @@ automatically add the latest version of the package you requested to the
 
 ```sh
 # Add the latest version of the module to deno.json
-$ deno add  @luca/cases
-Add @luca/cases - jsr:@luca/cases@^1.0.0
+$ deno add @luca/cases
+Add @luca/cases - jsr:@luca/cases@1.0.0
 ```
 
 ```json title="deno.json"
@@ -131,7 +132,7 @@ You can also specify an exact version:
 ```sh
 # Passing an exact version
 $ deno add @luca/cases@1.0.0
-Add @luca/cases - jsr:@luca/cases@^1.0.0
+Add @luca/cases - jsr:@luca/cases@1.0.0
 ```
 
 ## Package Versions
@@ -143,10 +144,11 @@ follows the [semver](https://semver.org/) versioning scheme.
 For example:
 
 ```bash
-@scopename/mypackage           # latest version
+@scopename/mypackage           # highest version
 @scopename/mypackage@16.1.0    # exact version
-@scopename/mypackage@^16.1.0   # latest patch version 16.x
-@scopename/mypackage@~16.1.0   # latest version that doesn't increment the first non-zero portion
+@scopename/mypackage@16        # highest 16.x version >= 16.0.0
+@scopename/mypackage@^16.1.0   # highest 16.x version >= 16.1.0
+@scopename/mypackage@~16.1.0   # highest 16.1.x version >= 16.1.0
 ```
 
 Here is an overview of all the ways you can specify a version or a range:
@@ -164,9 +166,10 @@ Here is an overview of all the ways you can specify a version or a range:
 | `1.x`     | Any minor and patch version within the major version 1. For example, `1.0.0`, `1.1.0`, `1.2.0`, etc.                                                                | `1.x`     |
 | `*`       | Any version is allowed.                                                                                                                                             | `*`       |
 
-## URL imports
+## HTTPS imports
 
-Deno also supports import statements that reference URLs, either directly:
+Deno also supports import statements that reference HTTP/HTTPS URLs, either
+directly:
 
 ```js
 import { Application } from "https://deno.land/x/oak/mod.ts";
@@ -182,32 +185,32 @@ or part of your `deno.json` import map:
 }
 ```
 
-Supporting URL imports enables us to support the following JavaScript CDNs, as
+Supporting HTTPS imports enables us to support the following JavaScript CDNs, as
 they provide URL access to JavaScript modules:
 
 - [deno.land/x](https://deno.land/x)
 - [esm.sh](https://esm.sh)
 - [unpkg.com](https://unpkg.com)
 
-URL imports are useful if you have a small, often single file, Deno project that
-doesn't require any other configuration. With URL imports, you can avoid having
-a `Deno.json` file at all. It is **not** advised to use this style of import in
-larger applications however, as you may end up with version conflicts (where
-different files use different version specifiers).
+HTTPS imports are useful if you have a small, often single file, Deno project
+that doesn't require any other configuration. With HTTPS imports, you can avoid
+having a `deno.json` file at all. It is **not** advised to use this style of
+import in larger applications however, as you may end up with version conflicts
+(where different files use different version specifiers).
 
 :::info
 
-Use URL imports with caution, and only **from trusted sources**. If the server
+Use HTTPS imports with caution, and only **from trusted sources**. If the server
 is compromised, it could serve malicious code to your application. They can also
-cause versioning issues if you import different versions in different files. URL
-imports remain supported, **but we recommend using a package registry for the
-best experience.**
+cause versioning issues if you import different versions in different files.
+HTTPS imports remain supported, **but we recommend using a package registry for
+the best experience.**
 
 :::
 
-### Overriding URL imports
+### Overriding HTTPS imports
 
-The other situation where import maps can be very useful is to override URL
+The other situation where import maps can be very useful is to override HTTPS
 imports in specific modules.
 
 Let's say you want to override a `https://deno.land/x/my-library@1.0.0/mod.ts`
@@ -230,8 +233,8 @@ that looks something like this:
 
 :::note
 
-URL imports have no notion of packages. Only the import map at the root of your
-project is used. Import maps used inside URL dependencies are ignored.
+HTTPS imports have no notion of packages. Only the import map at the root of
+your project is used. Import maps used inside URL dependencies are ignored.
 
 :::
 
@@ -245,8 +248,8 @@ Modules can be published to:
   auto-generates documentation for you
 - [npm](https://www.npmjs.com/) - use [dnt](https://github.com/denoland/dnt) to
   create the npm package
-- [deno.land/x](https://deno.com/add_module) - for URL imports, use JSR instead
-  if possible
+- [deno.land/x](https://deno.com/add_module) - for HTTPS imports, use JSR
+  instead if possible
 
 ## Reloading modules
 
@@ -264,7 +267,19 @@ deno run --reload my_module.ts
 deno run --reload=jsr:@std/fs my_module.ts
 ```
 
-## Vendoring
+## Using only cached modules
+
+To force Deno to only use modules that have previously been cached, use the
+`--cached-only` flag:
+
+```shell
+deno run --cached-only mod.ts
+```
+
+This will fail if there are any dependencies in the dependency tree for mod.ts
+which are not yet cached.
+
+## Vendoring remote modules
 
 If your project has external dependencies, you may want to store them locally to
 avoid downloading them from the internet every time you build your project. This
@@ -306,93 +321,58 @@ cache (using a command like `deno cache --reload`).
 
 But what if the content at `https://some.url/a.ts` changes? This could result in
 your production module running with different dependency code than your local
-module. To prevent this, Deno uses integrity checking and lock files.
+module. To detect this, Deno uses integrity checking and lock files.
 
 Deno uses a `deno.lock` file to check external module integrity. To opt into a
 lock file, either:
 
 1. Create a `deno.json` file in the current or an ancestor directory, which will
    automatically create an additive lockfile at `deno.lock`.
-2. Use the `--lock=deno.lock` flag to enable and specify lock file checking. To
-   update or create a lock use `--lock=deno.lock --frozen=false`. The
-   `--lock=deno.lock` tells Deno what the lock file to use is, while the
-   `--frozen=false` is used to output dependency hashes to the lock file.
 
-A `deno.lock` might look like this, storing a hash of the file against the
-dependency:
+   Note that this can be disabled by specifying the following in your deno.json:
 
-```json title="deno.lock"
-{
-  "https://deno.land/std@0.224.0/textproto/mod.ts": "3118d7a42c03c242c5a49c2ad91c8396110e14acca1324e7aaefd31a999b71a4",
-  "https://deno.land/std@0.224.0/io/util.ts": "ae133d310a0fdcf298cea7bc09a599c49acb616d34e148e263bcb02976f80dee",
-  "https://deno.land/std@0.224.0/async/delay.ts": "35957d585a6e3dd87706858fb1d6b551cb278271b03f52c5a2cb70e65e00c26a",
-   ...
-}
-```
+   ```json title="deno.json"
+   {
+     "lock": false
+   }
+   ```
 
-### Auto-generated lockfile
+2. Use the `--lock` flag to enable and specify lock file checking.
 
-As mentioned above, when a Deno configuration file is resolved (eg.
-`deno.json`), a lockfile will be automatically generated. By default, the path
-of this lockfile will be in the directory root - `deno.lock`. You can change
-this path by updating your `deno.json` to specify this:
+### Frozen lockfile
 
-````json title="deno.json"
-{
-  "lock": "./lock.file"
-}
+By default, Deno uses an additive lockfile, where new dependencies are added to
+the lockfile instead of erroring.
 
-You can disable the automatic creation and validation of a lockfile by specifying:
+This might not be desired in certain scenarios (ex. CI pipelines or production
+environments) where you'd rather have Deno error when it encounters a dependency
+it's never seen before. To enable this, you can specify the `--frozen` flag or
+set the following in a deno.json file:
 
 ```json title="deno.json"
 {
-  "lock": false
+  "lock": {
+    "frozen": true
+  }
 }
-````
-
-### Using `--lock` and `--frozen=false` flags
-
-You may have a file that imports a dependency and looks something like this:
-
-```ts title="src/deps.ts"
-export { xyz } from "https://unpkg.com/xyz-lib@v0.9.0/lib.ts";
 ```
 
-To create a lock file, you can use the `--lock` and `--frozen=false` flags:
+When running a deno command with a frozen lockfile, any attempts to update the
+lockfile with new contents will cause the command to exit with an error showing
+the modifications that would have been made.
 
-```shell
-# Create/update the lock file "deno.lock".
-deno cache --lock=deno.lock --frozen=false src/deps.ts
+If you wish to update the lockfile, specify `--frozen=false` on the command line
+to temporarily disable the frozen lockfile.
 
-# Include it when committing to source control.
-git add -u deno.lock
-git commit -m "feat: Add support for xyz using xyz-lib"
-git push
+### Changing lockfile path
+
+The lockfile path can be configured by specifying `--lock=deps.lock` or the
+following in a Deno configuration file:
+
+```json title="deno.json"
+{
+  "lock": {
+    "path": "deps.lock"
+  }
+}
 ```
-
-Collaborator on another machine -- in a freshly cloned project tree:
-
-```shell
-# Download the project's dependencies into the machine's cache, integrity
-# checking each resource.
-deno cache --reload --lock=deno.lock src/deps.ts
-
-# Done! You can proceed safely.
-deno test --allow-read src
-```
-
-### Runtime verification
-
-Like caching above, you can also use lock files during use of the `deno run` sub
-command, validating the integrity of any locked modules during the run. Remember
-that this only validates against dependencies previously added to the lock file.
-
-You can take this a step further by using the `--cached-only` flag to require
-that remote dependencies are already cached.
-
-```shell
-deno run --lock=deno.lock --cached-only mod.ts
-```
-
-This will fail if there are any dependencies in the dependency tree for mod.ts
-which are not yet cached.
