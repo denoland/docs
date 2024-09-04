@@ -40,7 +40,7 @@ your project, you could use this import map:
 ```json title="deno.json"
 {
   "imports": {
-    "std/assert": "jsr:@std/assert@^1.0.0",
+    "@std/assert": "jsr:@std/assert@^1.0.0",
     "chalk": "npm:chalk@5"
   }
 }
@@ -49,7 +49,7 @@ your project, you could use this import map:
 Then your script can use the bare specifier `std/assert`:
 
 ```js title="script.ts"
-import { assertEquals } from "std/assert";
+import { assertEquals } from "@std/assert";
 import chalk from "chalk";
 
 assertEquals(1, 2);
@@ -248,11 +248,10 @@ It is not required to specify this setting, the following defaults are applied:
 - `"none"` if there is no `package.json` file in your project directory
 - `"manual"` is there is a `package.json` file in your project directory
 
-
 When using workspaces, this setting can only be used in the workspace root.
 Specifying it in any of the members will result in warnings. The `"manual"`
-setting will only be applied automatically if there's a `package.json` file in the workspace
-root.
+setting will only be applied automatically if there's a `package.json` file in
+the workspace root.
 
 ## TypeScript compiler options
 
