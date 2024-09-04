@@ -168,7 +168,8 @@ Here is an overview of all the ways you can specify a version or a range:
 
 ## HTTPS imports
 
-Deno also supports import statements that reference HTTPS URLs, either directly:
+Deno also supports import statements that reference HTTP/HTTPS URLs, either
+directly:
 
 ```js
 import { Application } from "https://deno.land/x/oak/mod.ts";
