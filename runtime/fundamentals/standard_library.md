@@ -3,20 +3,33 @@ title: "Standard Library"
 oldUrl: /runtime/manual/basics/standard_library/
 ---
 
-Deno provides a standard library, a set of standard modules that can be reused
-by programs, allowing you to focus on your application logic rather than
-"reinventing the wheel" for common tasks. All of the modules in the Deno
-standard library are audited by the core team and are guaranteed to work with
-Deno, ensuring consistency and reliability.
+Deno provides a standard library written in TypeScript. It is a set of standard
+modules that can be reused by programs, allowing you to focus on your
+application logic rather than "reinventing the wheel" for common tasks. All of
+the modules in the Deno standard library are audited by the core team and are
+guaranteed to work with Deno, ensuring consistency and reliability.
+
+Many packages in the Deno standard library are also compatible with Node.js,
+Cloudflare Workers, and other JavaScript environments. This allows you to write
+code that can be run in multiple environments without modification.
 
 The standard library is hosted on JSR and is available at: https://jsr.io/@std.
-Packages are documented, tested, and include usage examples.
+Packages are documented, tested, and include usage examples. You can browse the
+full list of standard library packages on JSR, but here are a few examples:
+
+- [@std/path](https://jsr.io/@std/path): Path manipulation utilities, akin to
+  Node.js's `path` module.
+- [@std/jsonc](https://jsr.io/@std/jsonc): (De)serialization of JSON with
+  comments
+- [@std/encoding](https://jsr.io/@std/encoding): Utilities for encoding and
+  decoding common formats like hex, base64, and varint
 
 ## Versioning and stability
 
 Each package of the standard library is independently versioned. Packages follow
-[semantic versioning rules](https://jsr.io/@std/semver). You can use version
-pinning or version ranges to prevent breaking changes.
+[semantic versioning rules](https://jsr.io/@std/semver). You can use
+[version pinning or version ranges](./modules#package-versions) to prevent major
+releases from affecting your code.
 
 ## Importing standard library modules
 
@@ -27,7 +40,7 @@ subcommand to add the package to your `deno.json` import map.
 deno add @std/fs @std/path
 ```
 
-Your updates your deno.json import map will be updated to include those imports:
+The `deno.json` `imports` field will be updated to include those imports:
 
 ```json
 {
@@ -67,7 +80,7 @@ environment.
 npx jsr add @std/fs @std/path
 ```
 
-Will add those packages to your `package.json`:
+Running this command will add those packages to your `package.json`:
 
 ```json
 {
@@ -78,4 +91,13 @@ Will add those packages to your `package.json`:
 }
 ```
 
-Then you can import them in your source code above.
+Then you can import them in your source code, just like you would with any other
+Node.js package. TypeScript will automatically find the type definitions for
+these packages.
+
+```ts
+import { copy } from "@std/fs";
+import { join } from "@std/path";
+
+await copy("foo.txt", join("dist", "foo.txt"));
+```
