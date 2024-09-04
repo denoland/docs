@@ -111,7 +111,7 @@ function foo(): any {
 ## Configuration
 
 Starting with Deno v1.14, the linter can be customized using either
-[a configuration file](../getting_started/configuration_file.md) or the
+[a configuration file](/runtime/fundamentals/configuration/#linting) or the
 following CLI flags:
 
 - `--rules-tags` - List of rule names that will be run. Empty list disables all
