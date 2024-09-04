@@ -4,6 +4,7 @@ oldUrl:
  - /manual/getting_started/command_line_interface
  - /runtime/manual/getting_started/command_line_interface/
  - /runtime/fundamentals/command_line_interface/
+ - /runtime/manual/tools/
 ---
 
 Deno is a command line program. The Deno command line interface (CLI) can be
@@ -20,7 +21,7 @@ used to customize its behavior.
 You can view all of the available commands and flags by running the `deno help`
 subcommand in your terminal, or using the `-h` or `--help` flags.
 
-Check out the [CLI reference guide](/runtime/manual/tools/) for a further
+Check out the [CLI reference guide](/runtime/reference/cli/) for a further
 documentation on all the subcommands and flags available. We'll take a look at a
 few commands in a bit more detail below to see how they can be used and
 configured.
@@ -162,7 +163,7 @@ Affect commands which can download resources to the cache: `deno cache`,
 ```
 
 Find out more about these
-[here](/runtime/manual/basics/modules/integrity_checking/).
+[here](/runtime/fundamentals/modules/#integrity-checking-and-lock-files).
 
 ### Cache and compilation flags
 

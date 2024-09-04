@@ -34,6 +34,12 @@ sidebarCover?.addEventListener("click", () => {
   sidebar.dataset.open = "false";
   sidebarCover.dataset.open = "false";
 });
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    sidebar.dataset.open = "false";
+    sidebarCover.dataset.open = "false";
+  }
+});
 
 const toc = document.getElementById("toc");
 if (toc !== null) {

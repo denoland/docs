@@ -9,7 +9,7 @@ strive to make code working under 1.0.0 continue to work in future versions.
 When introducing new APIs, these are first marked as unstable. This means that
 the API may change in the future. These APIs are not available to use unless you
 explicitly pass an unstable flag, like `--unstable-kv`.
-[Learn more about `--unstable-*` flags](/runtime/manual/tools/unstable_flags).
+[Learn more about `--unstable-*` flags](/runtime/reference/cli/unstable_flags).
 
 There are also some non-runtime features of Deno that are considered unstable,
 and are locked behind unstable flags. For example, the
