@@ -9,16 +9,21 @@ Deno supports the [V8 Inspector Protocol](https://v8.dev/docs/inspector) used by
 Chrome, Edge and Node.js. This makes it possible to debug Deno programs using
 Chrome DevTools or other clients that support the protocol (for example VSCode).
 
-To activate debugging capabilities run Deno with the `--inspect`,
-`--inspect-wait` or `--inspect-brk` flags.
+To activate debugging capabilities run Deno with one of the following flags:
+
+- `--inspect`
+- `--inspect-wait`
+- `--inspect-brk`
 
 ## --inspect
 
 Using the `--inspect` flag will start your program with an inspector server
-which can be connected to with a client that supports the V8 Inspector Protocol,
-for example Chrome DevTools. Visit `chrome://inspect` in a Chromium derived
-browser to connect Deno to the inspector server. This allows you to inspect your
-code, add breakpoints, and step through your code.
+which allows client connections from tools that support the V8 Inspector
+Protocol, for example Chrome DevTools.
+
+Visit `chrome://inspect` in a Chromium derived browser to connect Deno to the
+inspector server. This allows you to inspect your code, add breakpoints, and
+step through your code.
 
 ```sh
 deno run --inspect your_script.ts
@@ -28,16 +33,17 @@ deno run --inspect your_script.ts
 
 If you use the `--inspect` flag, the code will start executing immediately. If
 your program is short, you might not have enough time to connect the debugger
-before the program finishes execution. In such cases, try running with
-`--inspect-wait` or `--inspect-brk` flag instead, or add a timeout at the end of
-your code.
+before the program finishes execution.
+
+In such cases, try running with `--inspect-wait` or `--inspect-brk` flag
+instead, or add a timeout at the end of your code.
 
 :::
 
 ## --inspect-wait
 
-Before running the code, the `--inspect-wait` flag will pause execution until a
-debugger is attached.
+The `--inspect-wait` flag will wait for a debugger to connect before executing
+your code.
 
 ```sh
 deno run --inspect-wait your_script.ts
@@ -45,11 +51,13 @@ deno run --inspect-wait your_script.ts
 
 ## --inspect-brk
 
-The `--inspect-brk` flag will pause execution on the first line of the program.
-This will freeze your program as soon as you connect, allowing you to add
-additional breakpoints or evaluate expressions before resuming execution. **This
-is the most commonly used inspect flag**. JetBrains and VSCode IDEs use this
-flag by default.
+The `--inspect-brk` flag will wait for a debugger to connect before executing
+your code and then put a breakpoint in your program as soon as you connect,
+allowing you to add additional breakpoints or evaluate expressions before
+resuming execution.
+
+**This is the most commonly used inspect flag**. JetBrains and VSCode IDEs use
+this flag by default.
 
 ```sh
 deno run --inspect-brk your_script.ts
@@ -64,7 +72,7 @@ server.
 Use the `--inspect-brk` flag to break execution on the first line:
 
 ```sh
-$ deno run --inspect-brk --allow-read --allow-net jsr:@std/http@1.0.0-rc.5/file-server
+$ deno run --inspect-brk -RN jsr:@std/http@1.0.0/file-server
 Debugger listening on ws://127.0.0.1:9229/ws/1e82c406-85a9-44ab-86b6-7341583480b1
 ...
 ```
@@ -72,7 +80,7 @@ Debugger listening on ws://127.0.0.1:9229/ws/1e82c406-85a9-44ab-86b6-7341583480b
 In a Chromium derived browser such as Google Chrome or Microsoft Edge, open
 `chrome://inspect` and click `Inspect` next to target:
 
-![chrome://inspect](./images/debugger1.jpg)
+![chrome://inspect](./images/debugger1.png)
 
 It might take a few seconds after opening the DevTools to load all modules.
 
