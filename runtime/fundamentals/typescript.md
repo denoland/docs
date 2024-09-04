@@ -264,7 +264,7 @@ code. They are also not supported when publishing to JSR.
 To use ambient or global types in Deno, you can use either the `declare global`
 syntax, or load a `.d.ts` file that augments the global scope.
 
-### Using `declare global` to augment the global scope
+### Using declare global to augment the global scope
 
 You can use the `declare global` syntax in any of the TypeScript files that are
 imported in your project to augment the global scope with additional properties.
