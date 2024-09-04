@@ -24,7 +24,7 @@ deno check -h|--help
 
 Type-check without execution.
 
-```ts name="example.ts"
+```ts title="example.ts"
 const x: string = 1 + 1n;
 ```
 
