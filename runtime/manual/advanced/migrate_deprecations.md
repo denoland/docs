@@ -26,19 +26,46 @@ TODO
 
 ### `--allow-none`
 
-TODO
+Use the `--permit-no-files` CLI flag instead.
+
+```
+- deno test --allow-none
++ deno test --permit-no-files
+```
 
 ### `--jobs`
 
-TODO
+Use the
+[`DENO_JOBS`](https://docs.deno.com/runtime/manual/basics/env_variables/#special-environment-variables)
+environment variable instead.
+
+```diff
+- deno test --jobs=4 --parallel
++ DENO_JOBS=4 deno test --parallel
+```
 
 ### `--ts`
 
-TODO
+Use the `--ext=ts` CLI flag instead.
+
+```diff
+- deno run --ts script.ts
++ deno run --ext=ts script.ts
+```
+
+```diff
+- deno run -T script.ts
++ deno run --ext=ts script.ts
+```
 
 ### `--trace-ops`
 
-TODO
+Use the `--trace-leaks` CLI flag instead.
+
+```diff
+- deno test --trace-ops
++ deno test --trace-leaks
+```
 
 ## Symbols
 
@@ -52,6 +79,8 @@ Library instead.
 
 - const buffer = new Deno.Buffer();
 + const buffer = new Buffer();
+
+  // ...
 ```
 
 See [deno#9795][deno#9795] for details.
@@ -66,7 +95,7 @@ Library instead.
 
 - function foo(closer: Deno.Closer) {
 + function foo(closer: Closer) {
-  ...  
+  // ...  
 }
 ```
 
@@ -77,13 +106,21 @@ See [deno#9795][deno#9795] for details.
 Use the `.close()` method on the resource instead.
 
 ```diff
-- Deno.close(file.rid);
-+ file.close();
+  const conn = await Deno.connect({ port: 80 });
+
+  // ...
+
+- Deno.close(conn.rid);
++ conn.close();
 ```
 
 ```diff
-- Deno.close(conn.rid);
-+ conn.close();
+  const file = await Deno.open("/foo/bar.txt");
+
+  // ...
+
+- Deno.close(file.rid);
++ file.close();
 ```
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
@@ -94,23 +131,21 @@ Use [`Deno.Conn`](https://docs.deno.com/api/deno/~/Deno.Conn) instance methods
 instead.
 
 ```diff
+  const conn = await Deno.connect({ port: 80 });
+
+  const buffer = new Uint8Array(1_024);
 - await Deno.read(conn.rid, buffer);
 + await conn.read(buffer);
-```
 
-```diff
+  const data = new TextEncoder().encode("Hello, world!");
 - await Deno.write(conn.rid, data);
 + await conn.write(data);
-```
 
-```diff
-- Deno.close(conn.rid);
-+ conn.close();
-```
-
-```diff
 - await Deno.shutdown(conn.rid);
 + await conn.closeWrite();
+
+- Deno.close(conn.rid);
++ conn.close();
 ```
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
@@ -183,10 +218,10 @@ instead.
 ```diff
 + import { copy } from "jsr:@std/io/copy";
 
-...
+  using file = await Deno.open("/foo/bar.txt");
 
-- await Deno.copy(reader, writer);
-+ await copy(reader, writer);
+- await Deno.copy(file, Deno.stdout);
++ await copy(file, Deno.stdout);
 ```
 
 See [deno#9795][deno#9795] for details.
@@ -212,7 +247,7 @@ Use [`Deno.FsFile`](https://docs.deno.com/api/deno/~/Deno.FsFile) instead.
 ```diff
 - function foo(file: Deno.File) {
 + function foo(file: Deno.FsFile) {
-  ...
+  // ...
 }
 ```
 
@@ -225,6 +260,8 @@ Use
 instead.
 
 ```diff
+  using file = await Deno.open("/foo/bar.txt");
+
 - await Deno.flock(file.rid);
 + await file.lock();
 ```
@@ -238,6 +275,8 @@ Use
 instead.
 
 ```diff
+  using file = Deno.openSync("/foo/bar.txt");
+
 - Deno.flockSync(file.rid);
 + file.lockSync();
 ```
@@ -251,6 +290,8 @@ Use
 instead.
 
 ```diff
+  using file = Deno.openSync("/foo/bar.txt");
+
 - const fileInfo = Deno.fstatSync(file.rid);
 + const fileInfo = file.statSync();
 ```
@@ -264,6 +305,8 @@ Use
 instead.
 
 ```diff
+  using file = await Deno.open("/foo/bar.txt");
+
 - const fileInfo = await Deno.fstat(file.rid);
 + const fileInfo = await file.stat();
 ```
@@ -276,6 +319,10 @@ Use [`Deno.FsWatcher`](https://docs.deno.com/api/deno/~/Deno.FsWatcher) instance
 methods instead.
 
 ```diff
+  using watcher = Deno.watchFs("/dir");
+
+  // ...
+
 - Deno.close(watcher.rid);
 + watcher.close();
 ```
@@ -289,6 +336,8 @@ Use
 instead.
 
 ```diff
+  using file = Deno.openSync("/foo/bar.txt");
+
 - Deno.ftruncateSync(file.rid, 7);
 + file.truncateSync(7);
 ```
@@ -302,6 +351,8 @@ Use
 instead.
 
 ```diff
+  using file = await Deno.open("/foo/bar.txt");
+
 - await Deno.ftruncate(file.rid, 7);
 + await file.truncate(7);
 ```
@@ -315,6 +366,8 @@ Use
 instead.
 
 ```diff
+  using file = await Deno.open("/foo/bar.txt");
+
 - await Deno.funlock(file.rid);
 + await file.unlock();
 ```
@@ -328,6 +381,8 @@ Use
 instead.
 
 ```diff
+  using file = Deno.openSync("/foo/bar.txt");
+
 - Deno.funlockSync(file.rid);
 + file.unlockSync();
 ```
@@ -341,6 +396,8 @@ Use
 instead.
 
 ```diff
+  using file = Deno.openSync("/foo/bar.txt");
+
 - Deno.futimeSync(file.rid, 1556495550, new Date());
 + file.utimeSync(1556495550, new Date());
 ```
@@ -354,6 +411,8 @@ Use
 instead.
 
 ```diff
+  using file = await Deno.open("/foo/bar.txt");
+
 - await Deno.futime(file.rid, 1556495550, new Date());
 + await file.utime(1556495550, new Date());
 ```
@@ -366,6 +425,8 @@ Use `Deno.FsFile.isTerminal()`, `Deno.stdin.isTerminal()`,
 `Deno.stdout.isTerminal()` or `Deno.stderr.isTerminal()` instead.
 
 ```diff
+  using file = await Deno.open("/dev/tty6");
+
 - Deno.isatty(file.rid);
 + file.isTerminal();
 ```
@@ -396,9 +457,20 @@ from the Standard Library instead.
 ```diff
 + import { iterateReader } from "jsr:@std/io/iterate-reader";
 
-- for await (const chunk of Deno.iter(reader)) {
-+ for await (const chunk of iterateReader(reader)) {
-  ...
+- for await (const chunk of Deno.iter(Deno.stdout)) {
++ for await (const chunk of iterateReader(Deno.stdout)) {
+  // ...
+}
+```
+
+```diff
++ import { iterateReaderSync } from "jsr:@std/io/iterate-reader";
+
+  using file = await Deno.open("/foo/bar.txt");
+
+- for await (const chunk of Deno.iter(file)) {
++ for await (const chunk of iterateReader(file)) {
+  // ...
 }
 ```
 
@@ -413,9 +485,20 @@ from the Standard Library instead.
 ```diff
 + import { iterateReaderSync } from "jsr:@std/io/iterate-reader";
 
-- for (const chunk of Deno.iterSync(reader)) {
-+ for (const chunk of iterateReaderSync(reader)) {
-  ...
+- for (const chunk of Deno.iterSync(Deno.stdout)) {
++ for (const chunk of iterateReaderSync(Deno.stdout)) {
+  // ...
+}
+```
+
+```diff
++ import { iterateReaderSync } from "jsr:@std/io/iterate-reader";
+
+  using file = await Deno.open("/foo/bar.txt");
+
+- for (const chunk of Deno.iterSync(file)) {
++ for (const chunk of iterateReaderSync(file)) {
+  // ...
 }
 ```
 
@@ -427,6 +510,8 @@ Use [`Deno.Listener`](https://docs.deno.com/api/deno/~/Deno.Listener) instance
 methods instead.
 
 ```diff
+  const listener = Deno.listen({ port: 80 })
+
 - Deno.close(listener.rid);
 + listener.close();
 ```
@@ -475,10 +560,17 @@ the Standard Library instead.
 ```diff
 + import { readAllSync } from "jsr:@std/io/read-all";
 
-...
+- const data = Deno.readAllSync(Deno.stdin);
++ const data = readAllSync(Deno.stdin);
+```
 
-- const data = Deno.readAllSync(reader);
-+ const data = readAllSync(reader);
+```diff
++ import { readAllSync } from "jsr:@std/io/read-all";
+
+  using file = Deno.openSync("/foo/bar.txt", { read: true });
+
+- const data = Deno.readAllSync(file);
++ const data = readAllSync(file);
 ```
 
 See [deno#9795][deno#9795] for details.
@@ -491,10 +583,17 @@ Standard Library instead.
 ```diff
 + import { readAll } from "jsr:@std/io/read-all";
 
-...
+- const data = await Deno.readAll(Deno.stdin);
++ const data = await readAll(Deno.stdin);
+```
 
-- const data = await Deno.readAll(reader);
-+ const data = await readAll(reader);
+```diff
++ import { readAll } from "jsr:@std/io/read-all";
+
+  using file = await Deno.open("/foo/bar.txt", { read: true });
+
+- const data = await Deno.readAll(file);
++ const data = await readAll(file);
 ```
 
 See [deno#9795][deno#9795] for details.
@@ -509,7 +608,7 @@ instead.
 
 - function foo(closer: Deno.Reader) {
 + function foo(closer: Reader) {
-  ...  
+  // ...  
 }
 ```
 
@@ -525,7 +624,7 @@ Library instead.
 
 - function foo(reader: Deno.ReaderSync) {
 + function foo(reader: ReaderSync) {
-  ...  
+  // ...  
 }
 ```
 
@@ -536,11 +635,17 @@ See [deno#9795][deno#9795] for details.
 Use the `.readSync()` method on the resource itself.
 
 ```diff
+  using conn = await Deno.connect({ port: 80 });
+  const buffer = new Uint8Array(1_024);
+
 - Deno.readSync(conn.rid, buffer);
 + conn.readSync(buffer);
 ```
 
 ```diff
+  using file = Deno.openSync("/foo/bar.txt");
+  const buffer = new Uint8Array(1_024);
+
 - Deno.readSync(file.rid, buffer);
 + file.readSync(buffer);
 ```
@@ -552,11 +657,17 @@ See [deno#9795][deno#9795] for details.
 Use the `.read()` method on the resource itself.
 
 ```diff
+  using conn = await Deno.connect({ port: 80 });
+  const buffer = new Uint8Array(1_024);
+
 - await Deno.read(conn.rid, buffer);
 + await conn.read(buffer);
 ```
 
 ```diff
+  using file = await Deno.open("/foo/bar.txt");
+  const buffer = new Uint8Array(1_024);
+
 - await Deno.read(file.rid, buffer);
 + await file.read(buffer);
 ```
@@ -583,6 +694,25 @@ instead.
   console.log(new TextDecoder().decode(stdout));
 ```
 
+Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
+its implementation remains, in order to reduce breaking changes. So
+alternatively, you can ignore "property does not exist" TypeScript errors by
+using the
+[`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
+directive.
+
+```diff
++ // @ts-ignore `Deno.run()` is soft-removed as of Deno 2.
+  const process = Deno.run({ cmd: [ "echo", "hello world" ], stdout: "piped" });
+  const [{ success }, stdout] = await Promise.all([
+    process.status(),
+    process.output(),
+  ]);
+  process.close();
+  console.log(success);
+  console.log(new TextDecoder().decode(stdout));
+```
+
 See [deno#16516](https://github.com/denoland/deno/pull/16516) for details.
 
 ### `Deno.seekSync()`
@@ -592,6 +722,8 @@ Use
 instead.
 
 ```diff
+  using file = await Deno.open("/foo/bar.txt");
+
 - Deno.seekSync(file.rid, 6, Deno.SeekMode.Start);
 + file.seekSync(6, Deno.SeekMode.Start);
 ```
@@ -605,6 +737,8 @@ Use
 instead.
 
 ```diff
+  using file = await Deno.open("/foo/bar.txt");
+
 - await Deno.seek(file.rid, 6, Deno.SeekMode.Start);
 + await file.seek(6, Deno.SeekMode.Start);
 ```
@@ -625,6 +759,23 @@ Use [`Deno.serve()`](https://docs.deno.com/api/deno/~/Deno.serve) instead.
 + Deno.serve({ port: 80 }, () => new Response("Hello World"));
 ```
 
+Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
+its implementation remains, in order to reduce breaking changes. So
+alternatively, you can ignore "property does not exist" TypeScript errors by
+using the
+[`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
+directive.
+
+```diff
+  const conn = Deno.listen({ port: 80 });
++ // @ts-ignore `Deno.serveHttp()` is soft-removed as of Deno 2.
+  const httpConn = Deno.serveHttp(await conn.accept());
+  const e = await httpConn.nextRequest();
+  if (e) {
+   e.respondWith(new Response("Hello World"));
+  }
+```
+
 See the
 [Deno 1.35 blog post](https://deno.com/blog/v1.35#denoserve-is-now-stable) for
 details.
@@ -637,7 +788,7 @@ instead.
 ```diff
 - function foo(server: Deno.Server) {
 + function foo(server: Deno.HttpServer) {
-  ...  
+  // ...  
 }
 ```
 
@@ -650,6 +801,8 @@ Use
 instead.
 
 ```diff
+  using conn = await Deno.connect({ port: 80 });
+
 - await Deno.shutdown(conn.rid);
 + await conn.closeWrite();
 ```
@@ -662,18 +815,29 @@ Use [`Deno.stderr`](https://docs.deno.com/api/deno/~/Deno.stderr) instance
 methods instead.
 
 ```diff
-- await Deno.write(Deno.stderr.rid, data);
-+ await Deno.stderr.rid(data);
-```
+- if (Deno.isatty(Deno.stderr.rid)) {
++ if (Deno.stderr.isTerminal()) {
+    console.log("`Deno.stderr` is a terminal");
+  }
 
-```diff
+  const data = new TextEncoder().encode("Hello, world!");
+- await Deno.write(Deno.stderr.rid, data);
++ await Deno.stderr.write(data);
+
 - Deno.close(Deno.stderr.rid);
 + Deno.stderr.close();
 ```
 
+Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
+its implementation remains, in order to reduce breaking changes. So
+alternatively, you can ignore "property does not exist" TypeScript errors by
+using the
+[`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
+directive.
+
 ```diff
-- Deno.isatty(Deno.stderr.rid);
-+ Deno.stderr.isTerminal();
++ // @ts-ignore `Deno.stderr.rid` is soft-removed as of Deno 2.
+  Deno.isatty(Deno.stderr.rid);
 ```
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
@@ -684,18 +848,29 @@ Use [`Deno.stdin`](https://docs.deno.com/api/deno/~/Deno.stdin) instance methods
 instead.
 
 ```diff
-- await Deno.read(Deno.stdin.rid, buffer);
-+ await Deno.stdin.read(buffer);
-```
+- if (Deno.isatty(Deno.stdin.rid)) {
++ if (Deno.stdin.isTerminal()) {
+    console.log("`Deno.stdout` is a terminal");
+  }
 
-```diff
+  const buffer = new Uint8Array(1_024);
+- await Deno.write(Deno.stdin.rid, buffer);
++ await Deno.stdin.write(buffer);
+
 - Deno.close(Deno.stdin.rid);
 + Deno.stdin.close();
 ```
 
+Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
+its implementation remains, in order to reduce breaking changes. So
+alternatively, you can ignore "property does not exist" TypeScript errors by
+using the
+[`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
+directive.
+
 ```diff
-- Deno.isatty(Deno.stdin.rid);
-+ Deno.stdin.isTerminal();
++ // @ts-ignore `Deno.stdin.rid` is soft-removed as of Deno 2.
+  Deno.isatty(Deno.stdin.rid);
 ```
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
@@ -706,18 +881,29 @@ Use [`Deno.stdout`](https://docs.deno.com/api/deno/~/Deno.stdout) instance
 methods instead.
 
 ```diff
-- await Deno.read(Deno.stdout.rid, buffer);
-+ await Deno.stdout.read(buffer);
-```
+- if (Deno.isatty(Deno.stdout.rid)) {
++ if (Deno.stdout.isTerminal()) {
+    console.log("`Deno.stdout` is a terminal");
+  }
 
-```diff
+  const data = new TextEncoder().encode("Hello, world!");
+- await Deno.write(Deno.stdout.rid, data);
++ await Deno.stdout.write(data);
+
 - Deno.close(Deno.stdout.rid);
 + Deno.stdout.close();
 ```
 
+Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
+its implementation remains, in order to reduce breaking changes. So
+alternatively, you can ignore "property does not exist" TypeScript errors by
+using the
+[`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
+directive.
+
 ```diff
-- Deno.isatty(Deno.stdout.rid);
-+ Deno.stdout.isTerminal();
++ // @ts-ignore `Deno.stdout.rid` is soft-removed as of Deno 2.
+  Deno.isatty(Deno.stdout.rid);
 ```
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
@@ -728,23 +914,21 @@ Use [`Deno.TcpConn`](https://docs.deno.com/api/deno/~/Deno.TcpConn) instance
 methods instead.
 
 ```diff
+  using tcpConn = await Deno.connect({ port: 80 });
+
+  const buffer = new Uint8Array(1_024);
 - await Deno.read(tcpConn.rid, buffer);
 + await tcpConn.read(buffer);
-```
 
-```diff
+  const data = new TextEncoder().encode("Hello, world!");
 - await Deno.write(tcpConn.rid, data);
 + await tcpConn.write(data);
-```
 
-```diff
-- Deno.close(tcpConn.rid);
-+ tcpConn.close();
-```
-
-```diff
 - await Deno.shutdown(tcpConn.rid);
 + await tcpConn.closeWrite();
+
+- Deno.close(tcpConn.rid);
++ tcpConn.close();
 ```
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
@@ -755,23 +939,22 @@ Use [`Deno.TlsConn`](https://docs.deno.com/api/deno/~/Deno.TlsConn) instance
 methods instead.
 
 ```diff
+  const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
+  using tlsConn = await Deno.connectTls({ caCerts: [caCert], hostname: "192.0.2.1", port: 80 });
+
+  const buffer = new Uint8Array(1_024);
 - await Deno.read(tlsConn.rid, buffer);
 + await tlsConn.read(buffer);
-```
 
-```diff
+  const data = new TextEncoder().encode("Hello, world!");
 - await Deno.write(tlsConn.rid, data);
 + await tlsConn.write(data);
-```
 
-```diff
-- Deno.close(tlsConn.rid);
-+ tlsConn.close();
-```
-
-```diff
 - await Deno.shutdown(tlsConn.rid);
 + await tlsConn.closeWrite();
+
+- Deno.close(tlsConn.rid);
++ tlsConn.close();
 ```
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
@@ -782,23 +965,21 @@ Use [`Deno.UnixConn`](https://docs.deno.com/api/deno/~/Deno.UnixConn) instance
 methods instead.
 
 ```diff
+  using unixConn = await Deno.connect({ path: "/foo/bar.sock", transport: "unix" });
+
+  const buffer = new Uint8Array(1_024);
 - await Deno.read(unixConn.rid, buffer);
 + await unixConn.read(buffer);
-```
 
-```diff
+  const data = new TextEncoder().encode("Hello, world!");
 - await Deno.write(unixConn.rid, data);
 + await unixConn.write(data);
-```
 
-```diff
-- Deno.close(unixConn.rid);
-+ unixConn.close();
-```
-
-```diff
 - await Deno.shutdown(unixConn.rid);
 + await unixConn.closeWrite();
+
+- Deno.close(unixConn.rid);
++ unixConn.close();
 ```
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
@@ -811,10 +992,10 @@ Standard Library instead.
 ```diff
 + import { writeAllSync } from "jsr:@std/io/write-all";
 
-...
+  const data = new TextEncoder().encode("Hello, world!");
 
-- Deno.writeAllSync(writer, data);
-+ writeAllSync(writer, data);
+- Deno.writeAllSync(Deno.stdout, data);
++ writeAllSync(Deno.stdout, data);
 ```
 
 See [deno#9795][deno#9795] for details.
@@ -827,10 +1008,10 @@ Library instead.
 ```diff
 + import { writeAll } from "jsr:@std/io/write-all";
 
-...
+  const data = new TextEncoder().encode("Hello, world!");
 
-- await Deno.writeAll(writer, data);
-+ await writeAll(writer, data);
+- await Deno.writeAll(Deno.stdout, data);
++ await writeAll(Deno.stdout, data);
 ```
 
 See [deno#9795][deno#9795] for details.
@@ -845,7 +1026,7 @@ instead.
 
 - function foo(writer: Deno.Writer) {
 + function foo(writer: Writer) {
-  ...  
+  // ...  
 }
 ```
 
@@ -861,7 +1042,7 @@ Library instead.
 
 - function foo(writer: Deno.WriterSync) {
 + function foo(writer: WriterSync) {
-  ...  
+  // ...  
 }
 ```
 
@@ -872,11 +1053,17 @@ See [deno#9795][deno#9795] for details.
 Use the `.writeSync()` method on the resource itself.
 
 ```diff
+  using conn = await Deno.connect({ port: 80 });
+  const buffer = new TextEncoder().encode("My message");
+
 - Deno.writeSync(conn.rid, buffer);
 + conn.writeSync(buffer);
 ```
 
 ```diff
+  using file = Deno.openSync("/foo/bar.txt", { write: true });
+  const buffer = new TextEncoder().encode("My message");
+
 - Deno.writeSync(file.rid, buffer);
 + file.writeSync(buffer);
 ```
@@ -888,11 +1075,17 @@ See [deno#9795][deno#9795] for details.
 Use the `.write()` method on the resource itself.
 
 ```diff
+  using conn = await Deno.connect({ port: 80 });
+  const buffer = new TextEncoder().encode("My message");
+
 - await Deno.write(conn.rid, buffer);
 + await conn.write(buffer);
 ```
 
 ```diff
+  using file = await Deno.open("/foo/bar.txt", { write: true });
+  const buffer = new TextEncoder().encode("My message");
+
 - await Deno.write(file.rid, buffer);
 + await file.write(buffer);
 ```
@@ -906,8 +1099,21 @@ Use [`Deno.openSync()`](https://docs.deno.com/api/deno/~/Deno.openSync) or
 
 ```diff
 - const file = new Deno.FsFile(3);
-+ const file = await Deno.open("/foo/bar.txt");
++ using file = await Deno.open("/foo/bar.txt");
 ```
+
+### `window`
+
+Use `globalThis` instead.
+
+```diff
+  const messageBuffer = new TextEncoder().encode("Hello, world!");
+  
+- const hashBuffer = await window.crypto.subtle.digest("SHA-256", messageBuffer);
++ const hashBuffer = await globalThis.crypto.subtle.digest("SHA-256", messageBuffer);
+```
+
+See [deno#9795][deno#9795] for details.
 
 [deno#9795]: https://github.com/denoland/deno/issues/9795
 [Deno 1.40 blog post]: https://deno.com/blog/v1.40#deprecations-stabilizations-and-removals
