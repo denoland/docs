@@ -150,7 +150,10 @@ export const sidebar = [
       "/runtime/reference/web_platform_apis/",
       "/runtime/reference/continuous_integration/",
       "/runtime/reference/node/",
-      "/runtime/reference/npm/",
+      {
+        label: "npm packages",
+        id: "/runtime/reference/npm/",
+      },
       "/runtime/reference/wasm/",
       "/runtime/reference/tcp_udp_connections/",
     ],
