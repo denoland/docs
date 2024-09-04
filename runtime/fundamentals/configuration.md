@@ -25,7 +25,7 @@ If both a `deno.json` and `package.json` file are present in the same directory,
 Deno will understand dependencies specified in both `deno.json` and
 `package.json`; and use the `deno.json` file for Deno-specific configurations.
 Read more about
-[Node compatibility in Deno](/runtime/manual/node/compatibility).
+[Node compatibility in Deno](/runtime/reference/node/#node-compatibility).
 
 ## Dependencies
 
