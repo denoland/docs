@@ -252,7 +252,7 @@ It is not required to specify this setting, the following defaults are applied:
 
 When using workspaces, this setting can only be used in the workspace root.
 Specifying it in any of the members will result in warnings. The `"manual"`
-setting will only be applied if there's a `package.json` file in the workspace
+setting will only be applied automatically if there's a `package.json` file in the workspace
 root.
 
 ## TypeScript compiler options
