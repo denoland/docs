@@ -60,7 +60,7 @@ restricted.
 
 ## Run untrusted code with confidence
 
-Since Deno provides no I/O access by default, it is perfect for running
+Since Deno provides no I/O access by default, it is a great fit for running
 untrusted code and auditing third-party code. If you're building or extending a
 platform that runs user generated code, you can use Deno for running third-party
 code securely and host this code through
@@ -73,10 +73,10 @@ The following permissions are available:
 
 ### Environment access
 
-Allow or deny environment access for things like getting and setting of
-environment variables. You can specify an optional, comma-separated list of
-environment variables to provide an allow-list of allowed environment variables
-or a deny-list of environment variables.
+Allow or deny environment access for getting and setting of environment
+variables. You can specify an optional, comma-separated list of environment
+variables to provide an allow-list of allowed environment variables or a
+deny-list of environment variables.
 
 > Note for Windows users: environment variables are case insensitive on Windows,
 > so Deno also matches them case insensitively (on Windows only).
@@ -96,73 +96,82 @@ deno run --allow-env=HOME,FOO script.ts
 Definition: `--deny-env[=<VARIABLE_NAME>...]`
 
 ```sh
-# Deny access to all environment variables
-deno run --deny-env script.ts
+# Allow all environment variables except 
+# AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
+deno run \
+  --allow-env \
+  --deny-env=AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY \
+  script.ts
 
-# Deny access to HOME and FOO environment variable
-deno run --deny-env=HOME,FOO script.ts
+# Deny all access to env variables, disabling permission prompts.
+deno run --deny-env script.ts
 ```
 
 _Any environment variables specified in `--deny-env[=<VARIABLE_NAME>...]` will
 be denied access, even if they are specified in `--allow-env`._
 
-```sh
-# Allow all environment variables except AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
-deno run --allow-env --deny-env=AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY script.ts
-```
+### File System Read Access
 
-### FFI (Foreign Function Interface)
-
-🚧 This is an unstable feature
-
-Allow or deny loading of dynamic libraries. You can specify an optional,
+Allow or deny file system read access. You can specify an optional,
 comma-separated list of directories or files to provide an allow-list of allowed
-dynamic libraries to load or a deny-list of libraries to deny loading.
+file system access or a deny-list of denied file system access respectively.
 
-_Dynamic libraries are not run in a sandbox and therefore do not have the same
-security restrictions as the Deno process. Therefore, use with caution._
-
-Definition: `--allow-ffi[=<PATH>...]`
+Definition: `--allow-read[=<PATH>...]` or `-R[=<PATH>...]`
 
 ```sh
-# Allow loading dynamic libraries
-deno run --allow-ffi script.ts
+# Allow all reads from file system
+deno run -R script.ts
+# or 
+deno run --allow-read script.ts
 
-# Allow loading dynamic libraries from a specific path
-deno run --allow-ffi=./libfoo.so script.ts
+# Allow reads from file foo.txt and bar.txt only
+deno run --allow-read=foo.txt,bar.txt script.ts
 ```
 
-Definition: `--deny-ffi[=<PATH>...]`
+Definition: `--deny-read[=<PATH>...]`
 
 ```sh
-# Deny loading dynamic libraries
-deno run --deny-ffi script.ts
+# Allow reading files in /etc but disallow reading /etc/hosts
+deno run --allow-read=/etc --deny-read=/etc/hosts script.ts
 
-# Deny loading dynamic libraries from a specific path
-deno run --deny-ffi=./libfoo.so script.ts
+# Deny all read access to disk, disabling permission prompts.
+deno run --deny-env script.ts
 ```
 
-_Any libraries specified with `--deny-ffi[=<PATH>...]` will be denied access,
-even if they are specified in `--allow-ffi`._
+_Any paths specified in the deny-list will be denied access, even if they are
+specified in `--allow-read`._
 
-### High Resolution Time
+### File System Write Access
 
-Allow orr deny high resolution time (nanosecond precision time measurement). Can
-be used in timing attacks and fingerprinting.
+Allow or deny file system write access. You can specify an optional,
+comma-separated list of directories or files to provide an allow-list of allowed
+file system access or a deny-list of denied file system access respectively.
 
-Definition: `--allow-hrtime`
+Definition: `--allow-write[=<PATH>...]` or `-W[=<PATH>...]`
 
 ```sh
-# Allow high resolution time measurement
-deno run --allow-hrtime script.ts
+# Allow all writes to file system
+deno run -W script.ts
+# or 
+deno run --allow-write script.ts
+
+# Allow writes to file foo.txt and bar.txt only
+deno run --allow-write=foo.txt,bar.txt script.ts
 ```
 
-Definition: `--deny-hrtime`
+Definition: `--deny-write[=<PATH>...]`
 
 ```sh
-# Deny high resolution time measurement
-deno run --deny-hrtime script.ts
+# Allow reading files in current working directory 
+# but disallow writing to ./secrets directory.
+deno run --allow-write=./ --deny-write=./secrets script.ts
+
+# Deny all write access to disk, disabling permission prompts.
+deno run --deny-env script.ts
 ```
+
+_Any paths specified with `--deny-write[=<PATH>...]` will be denied access, even
+if they are specified in `--allow-write`._
 
 ### Network access
 
@@ -194,91 +203,16 @@ deno run --allow-net=[2606:4700:4700::1111] script.ts
 Definition: `--deny-net[=<IP_OR_HOSTNAME>...]`
 
 ```sh
-# Deny network access
-deno run --deny-net script.ts
+# Allow access to network, but deny access 
+# to github.com and jsr.io
+deno run --allow-net --deny-net=github.com,jsr.io script.ts
 
-# Deny network access to github.com and jsr.io
-deno run --deny-net=github.com,jsr.io script.ts
+# Deny all network access, disabling permission prompts.
+deno run --deny-net script.ts
 ```
 
 _Any addresses specified in the deny-list will be denied access, even if they
 are specified in `--allow-net`._
-
-### File System Read Access
-
-Allow or deny file system read access. You can specify an optional,
-comma-separated list of directories or files to provide an allow-list of allowed
-file system access or a deny-list of denied file system access respectively.
-
-Definition: `--allow-read[=<PATH>...]` or `-R[=<PATH>...]`
-
-```sh
-# Allow all reads from file system
-deno run -R script.ts
-# or 
-deno run --allow-read script.ts
-
-# Allow reads from file foo.txt and bar.txt only
-deno run --allow-read=foo.txt,bar.txt script.ts
-```
-
-Definition: `--deny-read[=<PATH>...]`
-
-```sh
-# Deny reads from file system
-deno run --deny-read script.ts
-
-# Deny reads from file foo.txt and bar.txt only
-deno run --deny-read=foo.txt,bar.txt script.ts
-```
-
-_Any paths specified in the deny-list will be denied access, even if they are
-specified in `--allow-read`._
-
-```sh
-# Allow reading files in /etc but disallow reading /etc/hosts
-deno run --allow-read=/etc --deny-read=/etc/hosts script.ts
-```
-
-### Running Subprocesses
-
-Allow or deny running subprocesses. You can specify an optional, comma-separated
-list of subprocesses to provide an allow-list of allowed subprocesses or a
-deny-list of denied subprocesses.
-
-Any subprocesses you spawn in you program runs independently of the permission
-you granted to the parent process. This means the child processes can access
-system resources regardless of the permissions you granted to the Deno process
-that spawned it. This is often referred to as privilege escalation.
-
-Because of this, make sure you carefully consider if you want to grant a program
-`--allow-run` access: it essentially invalidates the Deno security sandbox. If
-you really need to spawn a specific executable, you can reduce the risk by
-limiting which programs a Deno process can start by passing specific executable
-names to the `--allow-run` flag.
-
-Definition: `--allow-run[=<PROGRAM_NAME>...]`
-
-```sh
-# Allow running subprocesses
-deno run --allow-run script.ts
-
-# Allow running "whoami" and "ps" subprocesses
-deno run --allow-run="whoami,ps" script.ts
-```
-
-Definition: `--deny-run[=<PROGRAM_NAME>...]`
-
-```sh
-# Deny running subprocesses
-deno run --deny-run script.ts
-
-# Deny running "whoami" and "ps" subprocesses
-deno run --deny-run="whoami,ps" script.ts
-```
-
-_Any programs specified with `--deny-run[=<PROGRAM_NAME>...]` will be denied
-access, even if they are specified in `--allow-run`._
 
 ### System Information
 
@@ -305,52 +239,88 @@ deno run --allow-sys="systemMemoryInfo,osRelease" script.ts
 Definition: `--deny-sys[=<API_NAME>...]`
 
 ```sh
-# Deny all system information APIs
+# Allow accessing all system information but "networkInterfaces" 
+deno run --allow-sys --deny-sys="networkInterfaces" script.ts
+
+# Deny all access to system information, disabling permission prompts.
 deno run --deny-sys script.ts
-
-# Deny systemMemoryInfo and osRelease APIs
-deno run --deny-sys="systemMemoryInfo,osRelease" script.ts
 ```
 
-### File System Write Access
+_Any values specified in the deny-list will be denied access, even if they are
+specified in `--allow-sys`._
 
-Allow or deny file system write access. You can specify an optional,
+### Running Subprocesses
+
+Allow or deny running subprocesses. You can specify an optional, comma-separated
+list of subprocesses to provide an allow-list of allowed subprocesses or a
+deny-list of denied subprocesses.
+
+Any subprocesses you spawn in you program runs independently of the permission
+you granted to the parent process. This means the child processes can access
+system resources regardless of the permissions you granted to the Deno process
+that spawned it. This is often referred to as privilege escalation.
+
+Because of this, make sure you carefully consider if you want to grant a program
+`--allow-run` access: it essentially invalidates the Deno security sandbox. If
+you really need to spawn a specific executable, you can reduce the risk by
+limiting which programs a Deno process can start by passing specific executable
+names to the `--allow-run` flag.
+
+Definition: `--allow-run[=<PROGRAM_NAME>...]`
+
+```sh
+# Allow running all subprocesses
+deno run --allow-run script.ts
+
+# Allow running "deno" and "whoami" subprocesses
+deno run --allow-run="deno,whoami" script.ts
+```
+
+Definition: `--deny-run[=<PROGRAM_NAME>...]`
+
+```sh
+# Allow running running all programs, but "whoami" and "ps".
+deno run --allow-run --deny-run="whoami,ps" script.ts
+
+# Deny all access for spawning subprocessing, disabling
+# permission prompts.
+deno run --deny-run script.ts
+```
+
+_Any programs specified with `--deny-run[=<PROGRAM_NAME>...]` will be denied
+access, even if they are specified in `--allow-run`._
+
+### FFI (Foreign Function Interface)
+
+Allow or deny loading of dynamic libraries. You can specify an optional,
 comma-separated list of directories or files to provide an allow-list of allowed
-file system access or a deny-list of denied file system access respectively.
+dynamic libraries to load or a deny-list of libraries to deny loading.
 
-Definition: `--allow-write[=<PATH>...]` or `-W[=<PATH>...]`
+_Dynamic libraries are not run in a sandbox and therefore do not have the same
+security restrictions as the Deno process. Therefore, use with caution._
 
-```sh
-# Allow all writes to file system
-deno run -W script.ts
-# or 
-deno run --allow-write script.ts
-
-# Allow writes to file foo.txt and bar.txt only
-deno run --allow-write=foo.txt,bar.txt script.ts
-```
-
-Definition: `--deny-write[=<PATH>...]`
+Definition: `--allow-ffi[=<PATH>...]`
 
 ```sh
-deno run --deny-write script.ts
-# Deny writes to file foo.txt and bar.txt only
-deno run --deny-write=foo.txt,bar.txt script.ts
+# Allow loading dynamic all libraries
+deno run --allow-ffi script.ts
+
+# Allow loading dynamic libraries from a specific path
+deno run --allow-ffi=./libfoo.so script.ts
 ```
 
-_Any paths specified with `--deny-write[=<PATH>...]` will be denied access, even
-if they are specified in `--allow-write`._
-
-### Certification errors
-
-Disables verification of TLS certificates. This is a dangerous flag, use it with
-caution.
-
-Definition: `--unsafely-ignore-certificate-errors[=<HOSTNAMES>...]`
+Definition: `--deny-ffi[=<PATH>...]`
 
 ```sh
-deno run --unsafely-ignore-certificate-errors script.ts
+# Allow loading all dynamic libraries, but ./libfoo.so
+deno run --allow-ffi --deny-ffi=./libfoo.so script.ts
+
+# Deny loading all dynamic libraries, disabling permission prompts.
+deno run --deny-ffi script.ts
 ```
+
+_Any libraries specified with `--deny-ffi[=<PATH>...]` will be denied access,
+even if they are specified in `--allow-ffi`._
 
 ### All Permissions
 
@@ -362,4 +332,15 @@ Definition: `-A, --allow-all`
 ```sh
 deno run -A script.s
 deno run --allow-all scrip
+```
+
+### Certification errors
+
+Disables verification of TLS certificates. This is a dangerous flag, use it with
+caution.
+
+Definition: `--unsafely-ignore-certificate-errors[=<HOSTNAMES>...]`
+
+```sh
+deno run --unsafely-ignore-certificate-errors script.ts
 ```
