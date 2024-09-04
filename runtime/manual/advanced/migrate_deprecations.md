@@ -14,13 +14,47 @@ will continue to be updated until the launch of 2.0.
 
 ## Subcommands
 
-### `deno bundle`
+### deno bundle
 
-TODO
+The `deno bundle` command has been removed. We recommend using
+[`esbuild`](https://esbuild.github.io/) together with
+[`esbuild-deno-loader`](https://jsr.io/@luca/esbuild-deno-loader).
 
-### `deno vendor`
+```ts
+import * as esbuild from "npm:esbuild";
+import { denoPlugins } from "jsr:@luca/esbuild-deno-loader";
 
-TODO
+const result = await esbuild.build({
+  plugins: [...denoPlugins()],
+  entryPoints: ["https://deno.land/std@0.185.0/bytes/mod.ts"],
+  outfile: "./dist/bytes.esm.js",
+  bundle: true,
+  format: "esm",
+});
+
+esbuild.stop();
+```
+
+### deno cache
+
+The `deno cache` command has been merged into the `deno install` command under
+the `--entrypoint` option.
+
+```diff
+- deno cache main.ts
++ deno install --entrypoint main.ts
+```
+
+### deno vendor
+
+The `deno vendor` command has been replaced by a `"vendor": true` configuration
+option in `deno.json`.
+
+```json title="deno.json"
+{
+  "vendor": true
+}
+```
 
 ## Flags
 
@@ -28,7 +62,7 @@ TODO
 
 Use the `--permit-no-files` CLI flag instead.
 
-```
+```diff
 - deno test --allow-none
 + deno test --permit-no-files
 ```
