@@ -305,15 +305,11 @@ body:not(:has(.ddoc)) {
   @apply border border-blue-100 bg-white;
 }
 
-.deno-tabs-content > div[data-active="true"] {
-  @apply flex flex-col gap-2;
-}
-
 .deno-tabs .markdownBlockTitle {
   @apply px-8 py-2 max-sm:-mx-4 sm:rounded-t-md border border-slate-200 bg-slate-600 text-white text-sm font-semibold;
 }
 
-.markdown-body .deno-tabs pre {
+.markdown-body .deno-tabs :not(div > pre + div > pre) {
   @apply mb-0;
 }
 
