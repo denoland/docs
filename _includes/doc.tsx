@@ -282,7 +282,7 @@ function Breadcrumbs(props: {
           <meta itemprop="position" content="1" />
         </li>
         <svg
-          class="size-5 rotate-90"
+          class="size-4 rotate-90"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
@@ -306,7 +306,7 @@ function Breadcrumbs(props: {
             </li>
             {i < crumbs.length - 1 && (
               <svg
-                class="size-5 rotate-90"
+                class="size-4 rotate-90"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
