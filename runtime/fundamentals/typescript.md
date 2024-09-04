@@ -281,7 +281,7 @@ declare global {
 This makes the `polyfilledAPI` function available globally when the type
 definition is imported.
 
-### Using `.d.ts` files to augment the global scope
+### Using .d.ts files to augment the global scope
 
 You can also use `.d.ts` files to augment the global scope. For example, you can
 create a `global.d.ts` file with the following content:
