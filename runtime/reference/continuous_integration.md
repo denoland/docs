@@ -1,27 +1,20 @@
 ---
 title: "Continuous Integration"
+oldUrl: /runtime/manual/advanced/continuous_integration
 ---
 
 Deno's built-in tools make it easy to set up Continuous Integration (CI)
-pipelines for your projects. Testing, linting and formatting of code can all be
-done with the corresponding commands `deno test`, `deno lint` and `deno fmt`. In
-addition, you can generate code coverage reports from test results with
-`deno coverage` in pipelines.
-
-On this page we will discuss:
-
-- [Setting up a basic pipeline](#setting-up-a-basic-pipeline)
-- [Cross-platform workflows](#cross-platform-workflows)
-- [Speeding up Deno pipelines](#speeding-up-deno-pipelines)
-  - [Reducing repetition](#reducing-repetition)
-  - [Caching dependencies](#caching-dependencies)
-    - [Clearing the cache](#clearing-the-cache)
+pipelines for your projects. [Testing](/runtime/fundamentals/testing.md),
+[linting and formatting](/runtime/fundamentals/linting_and_formatting/) your
+code can all be done with the corresponding commands `deno test`, `deno lint`
+and `deno fmt`. In addition, you can generate code coverage reports from test
+results with `deno coverage` in pipelines.
 
 ## Setting up a basic pipeline
 
-This page will show you how to set up basic pipelines for Deno projects in
-GitHub Actions. The concepts explained on this page largely apply to other CI
-providers as well, such as Azure Pipelines, CircleCI or GitLab.
+You can set up basic pipelines for Deno projects in GitHub Actions. The concepts
+explained on this page largely apply to other CI providers as well, such as
+Azure Pipelines, CircleCI or GitLab.
 
 Building a pipeline for Deno generally starts with checking out the repository
 and installing Deno:
@@ -41,8 +34,7 @@ jobs:
           deno-version: v1.x # Run with latest stable Deno.
 ```
 
-To expand the workflow just add any of the `deno` subcommands that you might
-need:
+To expand the workflow, add any of the `deno` subcommands that you might need:
 
 ```yaml
       # Check if the code is formatted according to Deno's default
@@ -80,17 +72,21 @@ jobs:
       - run: deno test --allow-all --coverage cov/
 ```
 
-> Note: GitHub Actions has a known
-> [issue](https://github.com/actions/checkout/issues/135) with handling
-> Windows-style line endings (CRLF). This may cause issues when running
-> `deno fmt` in a pipeline with jobs that run on `windows`. To prevent this,
-> configure the Actions runner to use Linux-style line endings before running
-> the `actions/checkout@v3` step:
->
-> ```
-> git config --system core.autocrlf false
-> git config --system core.eol lf
-> ```
+:::caution
+
+Note: GitHub Actions has a known
+[issue](https://github.com/actions/checkout/issues/135) with handling
+Windows-style line endings (CRLF). This may cause issues when running `deno fmt`
+in a pipeline with jobs that run on `windows`. To prevent this, configure the
+Actions runner to use Linux-style line endings before running the
+`actions/checkout@v3` step:
+
+```sh
+git config --system core.autocrlf false
+git config --system core.eol lf
+```
+
+:::
 
 If you are working with experimental or unstable Deno APIs, you can include a
 matrix job running the canary version of Deno. This can help to spot breaking
