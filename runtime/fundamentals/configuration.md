@@ -14,7 +14,7 @@ Deno will automatically detect a `deno.json` or `deno.jsonc` configuration file
 if it's in your current working directory or parent directories. The `--config`
 flag can be used to specify a different configuration file.
 
-## `package.json` support
+## package.json support
 
 Deno also supports a `package.json` file for compatibility with Node.js
 projects. If you have a Node.js project, it is not necessary to create a
