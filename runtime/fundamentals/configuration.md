@@ -56,7 +56,7 @@ assertEquals(1, 2);
 console.log(chalk.yellow("Hello world"));
 ```
 
-You can also use `"dependencies"` field in `package.json`:
+You can also use a `"dependencies"` field in `package.json`:
 
 ```json title="package.json"
 {
