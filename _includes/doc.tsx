@@ -105,7 +105,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
       >
         <main
           id="content"
-          class="mx-auto max-w-screen-xl w-full pt-4 pb-8 flex flex-grow lg:col-span-5"
+          class="mx-auto max-w-screen-xl w-full pt-2 pb-8 flex flex-grow lg:col-span-5"
         >
           <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full">
             <article class="max-w-[66ch] mx-auto">
@@ -271,7 +271,7 @@ function Breadcrumbs(props: {
         itemtype="https://schema.org/BreadcrumbList"
       >
         <li
-          class="pr-3 py-1.5 underline underline-offset-4 hover:no-underline hover:text-blue-600 transition duration-100"
+          class="-ml-3 px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 rounded transition duration-100"
           itemprop="itemListElement"
           itemscope
           itemtype="https://schema.org/ListItem"
@@ -282,7 +282,7 @@ function Breadcrumbs(props: {
           <meta itemprop="position" content="1" />
         </li>
         <svg
-          class="size-6 rotate-90"
+          class="size-5 rotate-90"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
@@ -306,7 +306,7 @@ function Breadcrumbs(props: {
             </li>
             {i < crumbs.length - 1 && (
               <svg
-                class="size-6 rotate-90"
+                class="size-5 rotate-90"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
