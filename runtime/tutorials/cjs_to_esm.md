@@ -1,5 +1,6 @@
 ---
 title: "Updating from CommonJS to ESM"
+oldUrl: /runtime/manual/node/cjs_to_esm
 ---
 
 If your Node.js project uses CommonJS modules (e.g. it uses `require`), you'll
