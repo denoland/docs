@@ -35,6 +35,16 @@ const result = await esbuild.build({
 esbuild.stop();
 ```
 
+### deno cache
+
+The `deno cache` command has been merged into the `deno install` command under
+the `--entrypoint` option.
+
+```diff
+- deno cache main.ts
++ deno install --entrypoint main.ts
+```
+
 ### deno vendor
 
 The `deno vendor` command has been replaced by a `"vendor": true` configuration
