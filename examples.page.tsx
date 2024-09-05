@@ -71,7 +71,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
             id="content"
             class="max-w-screen-lg flex flex-col gap-8 mx-4 md:mx-auto pt-6 mb-20"
           >
-            <div class="flex justify-between items-center">
+            <div class="flex flex-col gap-4 md:flex-row justify-between items-start md:items-center">
               <div class="flex flex-col gap-2">
                 <h1 class="text-3xl font-bold">
                   {example.parsed.title}
