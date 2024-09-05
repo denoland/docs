@@ -905,7 +905,7 @@ directive.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.stdout.rid
+### Deno.stdout.prototype.rid
 
 Use [`Deno.stdout`](https://docs.deno.com/api/deno/~/Deno.stdout) instance
 methods instead.
