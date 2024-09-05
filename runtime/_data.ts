@@ -148,12 +148,13 @@ export const sidebar = [
       },
       "/runtime/reference/deno_namespace_apis/",
       "/runtime/reference/web_platform_apis/",
-      "/runtime/reference/continuous_integration/",
       "/runtime/reference/node/",
       {
         label: "npm packages",
         id: "/runtime/reference/npm/",
       },
+      "/runtime/reference/continuous_integration/",
+      "/runtime/reference/deploying_and_embedding/",
       "/runtime/reference/wasm/",
       "/runtime/reference/tcp_udp_connections/",
     ],
@@ -182,18 +183,6 @@ export const sidebar = [
     title: "Advanced Topics",
     items: [
       "/runtime/manual/advanced/private_repositories/",
-      {
-        label: "Deploying & Embedding Deno",
-        items: [
-          "/runtime/manual/advanced/deploying_deno/",
-          "/runtime/manual/advanced/deploying_deno/aws_lightsail/",
-          "/runtime/manual/advanced/deploying_deno/cloudflare_workers/",
-          "/runtime/manual/advanced/deploying_deno/digital_ocean/",
-          "/runtime/manual/advanced/deploying_deno/google_cloud_run/",
-          "/runtime/manual/advanced/deploying_deno/kinsta/",
-          "/runtime/manual/advanced/embedding_deno/",
-        ],
-      },
       {
         label: "TypeScript in Deno",
         items: [
@@ -248,6 +237,11 @@ export const sidebar = [
           "/runtime/tutorials/os_signals/",
           "/runtime/tutorials/file_system_events/",
           "/runtime/tutorials/module_metadata/",
+          "/runtime/tutorials/aws_lightsail/",
+          "/runtime/tutorials/cloudflare_workers/",
+          "/runtime/tutorials/digital_ocean/",
+          "/runtime/tutorials/google_cloud_run/",
+          "/runtime/tutorials/kinsta/",
         ],
       },
       {
