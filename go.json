@@ -2,6 +2,7 @@
   "permissions": "/runtime/fundamentals/security/",
   "config": "/runtime/fundamentals/configuration/",
   "ide": "/runtime/getting_started/setup_your_environment/#setting-up-your-editor%2Fide",
+  "import_maps": "/runtime/manual/basics/import_maps",
   "--allow-env": "/runtime/fundamentals/security/#environment-access",
   "--allow-ffi": "/runtime/fundamentals/security/#ffi-(foreign-function-interface)",
   "--allow-hrtime": "/runtime/fundamentals/security/#high-resolution-time",
@@ -11,5 +12,19 @@
   "--allow-sys": "/runtime/fundamentals/security/#system-information",
   "--allow-write": "/runtime/fundamentals/security/#file-system-write-access",
   "--allow-all": "/runtime/fundamentals/security/#all-permissions",
-  "--unsafely-ignore-certificate-errors": "/runtime/fundamentals/security/#certification-errors"
+  "--unsafely-ignore-certificate-errors": "/runtime/fundamentals/security/#certification-errors",
+  "cmd/bench": "/runtime/manual/tools/benchmarker",
+  "cmd/cache": "/runtime/manual/tools/cache",
+  "cmd/check": "/runtime/manual/tools/check",
+  "cmd/compile": "/runtime/manual/tools/compiler",
+  "cmd/coverage": "/runtime/manual/tools/coverage",
+  "cmd/doc": "/runtime/manual/tools/documentation_generator",
+  "cmd/eval": "/runtime/manual/tools/eval",
+  "cmd/fmt": "/runtime/manual/tools/formatter",
+  "cmd/info": "/runtime/manual/tools/dependency_inspector",
+  "cmd/lint": "/runtime/manual/tools/linter",
+  "cmd/run": "/runtime/manual/tools/run",
+  "cmd/serve": "/runtime/manual/tools/serve",
+  "cmd/test": "/runtime/manual/tools/test",
+  "cmd/upgrade": "/runtime/manual/tools/upgrade"
 }
