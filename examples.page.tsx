@@ -67,45 +67,32 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
       title: `${example.parsed.title} - Deno by Example`,
       content: (
         <div>
-          <main id="content" class="max-w-screen-lg mx-auto py-4">
-            <div class="flex gap-2 items-center">
-              <p
-                class="italic m-0 mr-2"
-                title={DIFFICULTIES[example.parsed.difficulty].description}
-              >
-                {DIFFICULTIES[example.parsed.difficulty].title}
-              </p>
-              <div class="flex gap-2 items-center">
-                {example.parsed.tags.map((tag) => (
-                  <span
-                    class="text-xs italic py-0.5 px-2 rounded-md"
-                    title={TAGS[tag].description}
-                    key={TAGS[tag].title}
-                  >
-                    {TAGS[tag].title}
-                  </span>
-                ))}
-              </div>
-            </div>
+          <main
+            id="content"
+            class="max-w-screen-lg flex flex-col gap-8 mx-4 md:mx-auto pt-6 mb-20"
+          >
             <div class="flex justify-between items-center">
-              <h1 class="mt-10 mb-0 text-3xl font-bold">
-                {example.parsed.title}
-              </h1>
+              <div class="flex flex-col gap-2">
+                <h1 class="text-3xl font-bold">
+                  {example.parsed.title}
+                </h1>
+                {example.parsed.description && (
+                  <p class="max-w-prose">{example.parsed.description}</p>
+                )}
+              </div>
+
               <a
                 href={url}
-                class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-300 text-slate-900"
+                class="px-4 py-2 rounded bg-gray-100 text-sm border border-gray-200 hover:bg-gray-50 text-gray-700"
               >
-                Edit
+                Edit on Github
               </a>
             </div>
-            {example.parsed.description && (
-              <p class="mt-10 mb-6">{example.parsed.description}</p>
-            )}
             <div class="relative block">
               <CopyButton text={contentNoCommentary} />
             </div>
             {example.parsed.files.map((file) => (
-              <div class="mt-10" key={file.name}>
+              <div class="flex flex-col gap-8" key={file.name}>
                 {file.snippets.map((snippet, i) => (
                   <SnippetComponent
                     key={i}
@@ -120,7 +107,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
             <div>
               {example.parsed.run && (
                 <>
-                  <p class="mt-16 mb-6">
+                  <p class="mt-4 mb-4">
                     Run{" "}
                     <a
                       href={url}
@@ -161,8 +148,8 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
               )}
               {example.parsed.additionalResources.length > 0 && (
                 <div class="col-span-3 mt-12 pt-6 border-t-1 border-gray-200">
-                  <p>Additional resources:</p>
-                  <ul class="list-disc list-inside mt-1">
+                  <h2 class="font-semibold">Additional resources</h2>
+                  <ul class="list-none mt-1">
                     {example.parsed.additionalResources.map(([link, title]) => (
                       <li
                         class="text-gray-700 hover:text-gray-900"
@@ -259,7 +246,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
         className="w-full flex flex-col px-8 pt-6 mt-16 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-screen-xl mx-auto mb-20"
       >
         <div className="pb-16 align-middle md:pb-0 w-full">
-          <div className="mb-16 md:mb-24 text-center">
+          <div className="mt-8 mb-16 md:mb-24 text-center">
             <img
               className="w-full max-w-32 mx-auto h-auto mb-4"
               alt="Deno Examples"
@@ -309,7 +296,7 @@ function SnippetComponent(props: {
     <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-8">
       <div
         class={`italic select-none text-sm ${
-          props.snippet.text ? "pt-[2.2rem] md:pt-9 pb-4 md:pb-0 " : " "
+          props.snippet.text ? "pb-4 md:pb-0 " : " "
         } ${props.snippet.code ? "col-span-3" : "col-span-full"}`}
       >
         {props.snippet.text}
@@ -321,7 +308,7 @@ function SnippetComponent(props: {
       >
         {props.filename && (
           <span
-            class={`font-mono text-xs absolute -top-3 left-4 bg-[var(--color-canvas-subtle)] z-10 p-1 rounded-sm ${
+            class={`font-mono text-xs absolute -top-3 left-4 z-10 p-1 rounded-sm ${
               props.firstOfFile ? "block" : "block sm:hidden"
             }`}
           >
@@ -330,7 +317,7 @@ function SnippetComponent(props: {
         )}
         <div class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight rounded-md">
           {props.snippet.code && (
-            <div class="nocopy h-full markdown-body !bg-[var(--color-canvas-subtle)]">
+            <div class="nocopy h-full markdown-body">
               <pre class="highlight language-ts">
                 <code
                   dangerouslySetInnerHTML={{ __html: props.snippet.code }}
