@@ -8,7 +8,7 @@ to be compatible with the web platform, making it easier to write code that can
 run in both the browser and Deno.
 
 Existing Node.js ecosystem compatibility is provided through a set of Node.js
-compatible APIs and Deno namespace APIs. These APIs are designed to be
+compatible APIs. These APIs are designed to be
 compatible with Node.js, making it easier to port existing Node.js code to Deno.
 
 Deno also provides its global namespace APIS, to empower developers with
