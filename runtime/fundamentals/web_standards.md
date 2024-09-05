@@ -2,17 +2,17 @@
 title: "Web Standards and Node APIs"
 ---
 
-Deno aims to bridge the gap between the browser and the backend with a set of
-web standard APIs that are familiar to web developers. These APIs are designed
-to be compatible with the web platform, making it easier to write code that can
-run in both the browser and Deno.
+Deno aims to narrow the gap between browser and server-side JavaScript by
+providing the same web APIs that are available client side, in the server. This
+means if you know how to program for a browser, you already know how to program
+Deno!
 
-Existing Node.js ecosystem compatibility is provided through a set of Node.js
-compatible APIs. These APIs are designed to be
-compatible with Node.js, making it easier to port existing Node.js code to Deno.
+Existing Node.js ecosystem compatibility is provided through a built-in
+compatibility layer that allows you to use any npm package directly in Deno.
 
-Deno also provides its global namespace APIS, to empower developers with
-low-level capabilities, often essential for system-level tasks.
+Deno also provides its own Deno specific APIs, accessible under the `Deno`
+global namespace, that are performant, simple ways to do server-side only
+operations.
 
 ## Web Platform APIs
 
@@ -24,19 +24,20 @@ your Deno projects.
 For more information about the web platform APIs, see the
 [Web Platform APIs](/runtime/reference/web_platform_apis/) documentation.
 
-## Node.js Compatibility and APIs
+## Node.js built-in APIs
 
 Deno’s Node.js compatibility isn’t about replacing Node, it’s about coexistence.
 Developers can gradually migrate their projects, leveraging Deno’s security
 features and built in tooling while benefiting from Node.js libraries. Many
 Node.js libraries are battle-tested and widely used. Deno’s compatibility allows
 developers to reuse this code seamlessly. No need for a complete rewrite—just
-import your favorite Node.js modules.
+import your favorite Node.js modules with a `node:` prefix, (eg `node:fs`) and
+they will operate exactly as they do in Node.js.
 
 For more information about Node.js compatibility, see the
 [Node.js Compatibility](/runtime/reference/node/) documentation.
 
-## Deno Namespace APIs
+## Deno APIs
 
 The global Deno namespace offers APIs that go beyond web standards. These APIs
 allow you to interact with system-level tasks such as the environment, file
