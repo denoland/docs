@@ -67,7 +67,7 @@ Use the `--permit-no-files` CLI flag instead.
 + deno test --permit-no-files
 ```
 
-### `--jobs`
+### --jobs
 
 Use the
 [`DENO_JOBS`](https://docs.deno.com/runtime/manual/basics/env_variables/#special-environment-variables)
