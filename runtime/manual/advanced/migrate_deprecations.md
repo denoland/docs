@@ -12,7 +12,7 @@ will continue to be updated until the launch of 2.0.
 
 :::
 
-## Subcommands
+## Updated subcommands
 
 ### deno bundle
 
@@ -56,7 +56,7 @@ option in `deno.json`.
 }
 ```
 
-## Flags
+## Updated flags
 
 ### `--allow-none`
 
@@ -101,7 +101,7 @@ Use the `--trace-leaks` CLI flag instead.
 + deno test --trace-leaks
 ```
 
-## Symbols
+## Updated symbols
 
 ### `Deno.Buffer`
 
@@ -729,8 +729,8 @@ instead.
 ```
 
 Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
-its implementation remains, in order to reduce breaking changes. So
-alternatively, you can ignore "property does not exist" TypeScript errors by
+its implementation remains in order to reduce breaking changes. 
+You can ignore "property does not exist" TypeScript errors by
 using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
@@ -794,8 +794,8 @@ Use [`Deno.serve()`](https://docs.deno.com/api/deno/~/Deno.serve) instead.
 ```
 
 Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
-its implementation remains, in order to reduce breaking changes. So
-alternatively, you can ignore "property does not exist" TypeScript errors by
+its implementation remains in order to reduce breaking changes. 
+You can ignore "property does not exist" TypeScript errors by
 using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
@@ -863,8 +863,8 @@ methods instead.
 ```
 
 Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
-its implementation remains, in order to reduce breaking changes. So
-alternatively, you can ignore "property does not exist" TypeScript errors by
+its implementation remains in order to reduce breaking changes. 
+You can ignore "property does not exist" TypeScript errors by
 using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
@@ -896,8 +896,8 @@ instead.
 ```
 
 Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
-its implementation remains, in order to reduce breaking changes. So
-alternatively, you can ignore "property does not exist" TypeScript errors by
+its implementation remains in order to reduce breaking changes. 
+You can ignore "property does not exist" TypeScript errors by
 using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
@@ -929,8 +929,8 @@ methods instead.
 ```
 
 Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
-its implementation remains, in order to reduce breaking changes. So
-alternatively, you can ignore "property does not exist" TypeScript errors by
+its implementation remains in order to reduce breaking changes. 
+You can ignore "property does not exist" TypeScript errors by
 using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
