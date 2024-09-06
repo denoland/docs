@@ -1,5 +1,6 @@
 ---
 title: "Deploying Deno to Cloudflare Workers"
+oldUrl: /runtime/manual/advanced/deploying_deno/cloudflare_workers/
 ---
 
 Cloudflare Workers allows you to run JavaScript on Cloudflare's edge network.

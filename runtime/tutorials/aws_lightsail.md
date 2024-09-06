@@ -1,5 +1,6 @@
 ---
 title: Deploy Deno to Amazon Lightsail
+oldUrl: /runtime/manual/advanced/deploying_deno/aws_lightsail/
 ---
 
 [Amazon Lightsail](https://aws.amazon.com/lightsail/) is the easiest and

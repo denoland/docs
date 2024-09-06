@@ -51,6 +51,31 @@ h1 {
 .markdown-body {
   font-family: inherit;
 
+  /* Override gfm base styles */
+  p {
+    @apply mb-6;
+  }
+
+  pre {
+    @apply mb-6;
+  }
+
+  h1:first-child {
+    @apply mt-0;
+  }
+
+  h2 {
+    @apply mt-12 mb-4;
+  }
+
+  h3 {
+    @apply mt-10 mb-4;
+  }
+
+  h4 {
+    @apply mt-6 mb-4;
+  }
+
   :where(h1, h2, h3) {
     letter-spacing: -0.0125em;
   }
