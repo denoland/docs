@@ -264,7 +264,7 @@ function Breadcrumbs(props: {
   crumbs.push(props.title);
 
   return (
-    <nav class="mb-3">
+    <nav class="mb-4">
       <ul
         class="flex flex-wrap text-gray-700 items-center"
         itemscope
