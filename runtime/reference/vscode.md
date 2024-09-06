@@ -400,8 +400,8 @@ and try to give likely causes.
 This is normally a situation where Deno is not enabled on a Deno project. If you
 look at the source of the diagnostic you are probably going to see a `ts(2691)`.
 The `ts` indicates that it is coming from the built-in TypeScript/JavaScript
-engine in VS Code. You will want to check that your configuration is set properly
-and the **Deno: Enable** setting - `deno.enable` is true.
+engine in VS Code. You will want to check that your configuration is set
+properly and the **Deno: Enable** setting - `deno.enable` is true.
 
 You can also check what the Deno language server thinks is your current active
 configuration by using **Deno: Language Server Status** from the command
