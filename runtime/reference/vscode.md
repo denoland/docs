@@ -97,7 +97,7 @@ use the Deno linter.
 ### Import maps
 
 It is possible to use
-[import maps](runtime/fundamentals/modules/#managing-third-party-modules-and-libraries)
+[import maps](/runtime/fundamentals/modules/#managing-third-party-modules-and-libraries)
 in the editor. The option `Deno: Import Map` (or `deno.importMap` if manually
 editing) should be set to the value of the import map file. If the path is a
 relative path, it will be resolved relative to the root of the workspace.
