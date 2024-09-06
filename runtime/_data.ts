@@ -160,6 +160,10 @@ export const sidebar = [
         label: "Language Server",
         id: "/runtime/reference/lsp/",
       },
+      {
+        label: "Deno & VS Code",
+        id: "/runtime/reference/vscode/",
+      },
       "/runtime/reference/tcp_udp_connections/",
     ],
   },
