@@ -156,6 +156,10 @@ export const sidebar = [
       "/runtime/reference/continuous_integration/",
       "/runtime/reference/deploying_and_embedding/",
       "/runtime/reference/wasm/",
+      {
+        label: "Language Server",
+        id: "/runtime/reference/lsp/",
+      },
       "/runtime/reference/tcp_udp_connections/",
     ],
   },
@@ -167,14 +171,6 @@ export const sidebar = [
         items: [
           "/runtime/manual/references/vscode_deno/",
           "/runtime/manual/references/vscode_deno/testing_api/",
-        ],
-      },
-      {
-        label: "Language Server",
-        items: [
-          "/runtime/manual/advanced/language_server/overview/",
-          "/runtime/manual/advanced/language_server/imports/",
-          "/runtime/manual/advanced/language_server/testing_api/",
         ],
       },
     ],
