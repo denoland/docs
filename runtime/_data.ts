@@ -164,6 +164,7 @@ export const sidebar = [
         label: "Deno & VS Code",
         id: "/runtime/reference/vscode/",
       },
+      "/runtime/reference/private_repositories/",
       "/runtime/reference/tcp_udp_connections/",
     ],
   },
@@ -182,7 +183,6 @@ export const sidebar = [
   {
     title: "Advanced Topics",
     items: [
-      "/runtime/manual/advanced/private_repositories/",
       {
         label: "TypeScript in Deno",
         items: [
