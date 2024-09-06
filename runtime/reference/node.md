@@ -389,673 +389,368 @@ which modules you need by
   <div>❌ = Stubs only</div>
 </div>
 
-<details>
-  <summary>
-    <code>node:assert</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/assert/">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
 
-<details>
-  <summary>
-    <code>node:async_hooks</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    <code>AsyncLocalStorage</code> is supported. <code>AsyncResource</code>,
-    <code>executionAsyncId</code>, and <code>createHook</code> are
-    non-functional stubs.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/async_hooks/">Reference docs</a>
-  </p>
-</details>
+### ✅ [`node:assert`](https://docs.deno.com/api/node/assert/)
 
-<details>
-  <summary>
-    <code>node:buffer</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/buffer/">Reference docs</a>
-  </p>
-</details>
+Fully supported.
 
-<details>
-  <summary>
-    <code>node:child_process</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/child_process/">Reference docs</a>
-  </p>
-</details>
+</div>
 
-<details>
-  <summary>
-    <code>node:cluster</code>
-    <div style="float: right">
-      <span>❌</span>
-    </div>
-  </summary>
-  <p>All exports are non-functional stubs.</p>
-  <p>
-    <a href="https://docs.deno.com/api/node/cluster/">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
 
-<details>
-  <summary>
-    <code>node:console</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/console/">Reference docs</a>
-  </p>
-</details>
+### ℹ️ [`node:async_hooks`](https://docs.deno.com/api/node/async_hooks/)
 
-<details>
-  <summary>
-    <code>node:crypto</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Missing <code>Certificate</code> class,
-    <code>crypto.Cipheriv.prototype.setAutoPadding</code>,
-    <code>crypto.Decipheriv.prototype.setAutoPadding</code>,
-    <code>crypto.publicDecrypt</code>,
-    <code>crypto.ECDH.prototype.convertKey</code>, <code>x448</code> option for
-    <code>generateKeyPair</code>, <code>crypto.KeyObject</code>,
-    <code>safe</code>, <code>add</code> and <code>rem</code> options for
-    <code>generatePrime</code>, <code>crypto.Sign.prototype.sign</code> and
-    <code>crypto.Verify.prototype.verify</code> with non <code>BinaryLike</code>
-    input, <code>crypto.secureHeapUsed</code>, <code>crypto.setEngine</code>,
-    legacy methods of <code>crypto.X509Certificate</code>.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/crypto/">Reference docs</a>
-  </p>
-</details>
+`AsyncLocalStorage` is supported. `AsyncResource`, `executionAsyncId`, and
+`createHook` are non-functional stubs.
 
-<details>
-  <summary>
-    <code>node:dgram</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Some <code>dgram.Socket</code> instance methods are non-functional stubs:
-    <ul>
-        <li><code>addMembership</code></li>
-        <li><code>addSourceSpecificMembership</code></li>
-        <li><code>dropMembership</code></li>
-        <li><code>dropSourceSpecificMembership</code></li>
-        <li><code>setBroadcast</code></li>
-        <li><code>setMulticastInterface</code></li>
-        <li><code>setMulticastLoopback</code></li>
-        <li><code>setMulticastTtl</code></li>
-        <li><code>setTtl</code></li>
-    </ul>
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/dgram/">Reference docs</a>
-  </p>
-</details>
+</div>
 
-<details>
-  <summary>
-    <code>node:diagnostics_channel</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/diagnostics_channel/">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
 
-<details>
-  <summary>
-    <code>node:dns</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Missing <code>dns.resolve*</code> with <code>ttl</code> option.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/dns/">Reference docs</a>
-  </p>
-</details>
+### ✅ [`node:buffer`](https://docs.deno.com/api/node/buffer/)
 
-<details>
-  <summary>
-    <code>node:domain</code>
-    <div style="float: right">
-      <span>❌</span>
-    </div>
-  </summary>
-  <p>All exports are non-functional stubs. This is a deprecated Node module.</p>
-  <p>
-    <a href="https://docs.deno.com/api/node/domain/">Reference docs</a>
-  </p>
-</details>
+Fully supported.
 
-<details>
-  <summary>
-    <code>node:events</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/events/">Reference docs</a>
-  </p>
-</details>
+</div>
 
-<details>
-  <summary>
-    <code>node:fs</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <h5>
-    <code>node:fs</code>
-  </h5>
-  <p>
-    Missing <code>utf16le</code>, <code>latin1</code> and <code>ucs2</code>
-    encoding for <code>fs.writeFile</code> and <code>fs.writeFileSync</code>.
-  </p>
-  <h5>
-    <code>node:fs/promises</code>
-  </h5>
-  <p>
-    Missing <code>lchmod</code>.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/fs/">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
 
-<details>
-  <summary>
-    <code>node:http</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    <code>createConnection</code> option is currently not supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/http/">Reference docs</a>
-  </p>
-</details>
+### ✅ [`node:child_process`](https://docs.deno.com/api/node/child_process/)
 
-<details>
-  <summary>
-    <code>node:http2</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Partially supported, major work in progress to enable <code>grpc-js</code>.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/http2/">Reference docs</a>
-  </p>
-</details>
+Fully supported.
 
-<details>
-  <summary>
-    <code>node:https</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Missing <code>https.Server.opts.cert</code> and
-    <code>https.Server.opts.key</code> array type.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/https/">Reference docs</a>
-  </p>
-</details>
+</div>
 
-<details>
-  <summary>
-    <code>node:inspector</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    <code>console</code> is supported. Other APIs are stubs and will throw an
-    error.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/inspector/">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
 
-<details>
-  <summary>
-    <code>node:module</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    The `register()` function is not supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/module/">Reference docs</a>
-  </p>
-</details>
+### ❌ [`node:cluster`](https://docs.deno.com/api/node/cluster/)
 
-<details>
-  <summary>
-    <code>node:net</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Missing <code>net.Socket.prototype.constructor</code> with <code>fd</code>
-    option.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/net/">Reference docs</a>
-  </p>
-</details>
+All exports are non-functional stubs.
 
-<details>
-  <summary>
-    <code>node:os</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/os/">Reference docs</a>
-  </p>
-</details>
+</div>
 
-<details>
-  <summary>
-    <code>node:path</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/path/">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
 
-<details>
-  <summary>
-    <code>node:perf_hooks</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Missing <code>perf_hooks.eventLoopUtilization</code>,
-    <code>perf_hooks.timerify</code>,
-    <code>perf_hooks.monitorEventLoopDelay</code>.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/perf_hooks/">Reference docs</a>
-  </p>
-</details>
+### ✅ [`node:console`](https://docs.deno.com/api/node/console/)
 
-<details>
-  <summary>
-    <code>node:punycode</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/punycode/">Reference docs</a>
-  </p>
-</details>
+Fully supported.
 
-<details>
-  <summary>
-    <code>node:process</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Missing <code>multipleResolves</code>, <code>worker</code> events.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/process/">Reference docs</a>
-  </p>
-</details>
+</div>
 
-<details>
-  <summary>
-    <code>node:querystring</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/querystring/">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
 
-<details>
-  <summary>
-    <code>node:readline</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/readline/">Reference docs</a>
-  </p>
-</details>
+### ✅ [`node:crypto`](https://docs.deno.com/api/node/crypto/)
 
-<details>
-  <summary>
-    <code>node:repl</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    <code>builtinModules</code> and <code>_builtinLibs</code> are supported.
-    Missing <code>REPLServer.prototype.constructor</code> and
-    <code>start()</code>.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/repl/">Reference docs</a>
-  </p>
-</details>
+Missing `Certificate` class, `crypto.Cipheriv.prototype.setAutoPadding`,
+`crypto.Decipheriv.prototype.setAutoPadding`, `crypto.publicDecrypt`,
+`crypto.ECDH.prototype.convertKey`, `x448` option for `generateKeyPair`,
+`crypto.KeyObject`, `safe`, `add` and `rem` options for `generatePrime`,
+`crypto.Sign.prototype.sign` and `crypto.Verify.prototype.verify` with non
+`BinaryLike` input, `crypto.secureHeapUsed`, `crypto.setEngine`, legacy methods
+of `crypto.X509Certificate`.
 
-<details>
-  <summary>
-    <code>node:stream</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/stream/">Reference docs</a>
-  </p>
-</details>
+</div>
 
-<details>
-  <summary>
-    <code>node:string_decoder</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/string_decoder/">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
 
-<details>
-  <summary>
-    <code>node:sys</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/util/">Reference docs</a>
-  </p>
-</details>
+### ℹ️ [`node:dgram`](https://docs.deno.com/api/node/dgram/)
 
-<details>
-  <summary>
-    <code>node:test</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Currently only <code>test</code> API is supported.
-  </p>
-  <p>
-    <a href="https://nodejs.org/api/test.html">Reference docs</a>
-  </p>
-</details>
+Some `dgram.Socket` instance methods are non-functional stubs:
 
-<details>
-  <summary>
-    <code>node:timers</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/timers/promises/">Reference docs</a>
-  </p>
-</details>
+- `addMembership`
+- `addSourceSpecificMembership`
+- `dropMembership`
+- `dropSourceSpecificMembership`
+- `setBroadcast`
+- `setMulticastInterface`
+- `setMulticastLoopback`
+- `setMulticastTtl`
+- `setTtl`
 
-<details>
-  <summary>
-    <code>node:tls</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Missing <code>createSecurePair</code>.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/tls/">Reference docs</a>
-  </p>
-</details>
+</div>
 
-<details>
-  <summary>
-    <code>node:trace_events</code>
-    <div style="float: right">
-      <span>❌</span>
-    </div>
-  </summary>
-  <p>All exports are non-functional stubs.</p>
-  <p>
-    <a href="https://docs.deno.com/api/node/trace_events/">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
 
-<details>
-  <summary>
-    <code>node:tty</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/tty/">Reference docs</a>
-  </p>
-</details>
+### ✅ [`node:diagnostics_channel`](https://docs.deno.com/api/node/diagnostics_channel/)
 
-<details>
-  <summary>
-    <code>node:util</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Missing <code>aborted</code>, <code>transferableAbortSignal</code>, <code>transferableAbortController</code>, <code>MIMEParams</code>, <code>MIMEType</code>and <code>getSystemErrorMap</code>.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/util/">Reference docs</a>
-  </p>
-</details>
+Fully supported.
 
-<details>
-  <summary>
-    <code>node:url</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/url/">Reference docs</a>
-  </p>
-</details>
+</div>
 
-<details>
-  <summary>
-    <code>node:v8</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    <code>cachedDataVersionTag</code> and <code>getHeapStatistics</code> are
-    supported. <code>setFlagsFromStrings</code> is a noop. Other APIs are not
-    supported and will throw and error.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/v8/">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
 
-<details>
-  <summary>
-    <code>node:vm</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Partial support.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/vm/">Reference docs</a>
-  </p>
-</details>
+### ℹ️ [`node:dns`](https://docs.deno.com/api/node/dns/)
 
-<details>
-  <summary>
-    <code>node:wasi</code>
-    <div style="float: right">
-      <span>❌</span>
-    </div>
-  </summary>
-  <p>All exports are non-functional stubs.</p>
-  <p>
-    <a href="https://docs.deno.com/api/node/wasi/">Reference docs</a>
-  </p>
-</details>
+Missing `dns.resolve*` with `ttl` option.
 
-<details>
-  <summary>
-    <code>node:worker_threads</code>
-    <div style="float: right">
-      <span>ℹ️</span>
-    </div>
-  </summary>
-  <p>
-    Missing <code>parentPort.emit</code>,
-    <code>parentPort.removeAllListeners</code>,
-    <code>markAsUntransferable</code>, <code>moveMessagePortToContext</code>,
-    <code>receiveMessageOnPort</code>,
-    <code>Worker.prototype.getHeapSnapshot</code>.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/worker_threads/">Reference docs</a>
-  </p>
-</details>
+</div>
 
-<details>
-  <summary>
-    <code>node:zlib</code>
-    <div style="float: right">
-      <span>✅</span>
-    </div>
-  </summary>
-  <p>
-    Fully supported.
-  </p>
-  <p>
-    <a href="https://docs.deno.com/api/node/zlib/~/Zlib">Reference docs</a>
-  </p>
-</details>
+<div class="module-info">
+
+### ❌ [`node:domain`](https://docs.deno.com/api/node/domain/)
+
+All exports are non-functional stubs. This is a deprecated Node module.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:events`](https://docs.deno.com/api/node/events/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:fs`](https://docs.deno.com/api/node/fs/)
+
+`node:fs` Missing `utf16le`, `latin1` and `ucs2` encoding for `fs.writeFile` and
+`fs.writeFileSync`.
+
+`node:fs/promises` Missing `lchmod`.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:http`](https://docs.deno.com/api/node/http/)
+
+`createConnection` option is currently not supported.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:http2`](https://docs.deno.com/api/node/http2/)
+
+Partially supported, major work in progress to enable `grpc-js`.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:https`](https://docs.deno.com/api/node/https/)
+
+Missing `https.Server.opts.cert` and `https.Server.opts.key` array type.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:inspector`](https://docs.deno.com/api/node/inspector/)
+
+`console` is supported. Other APIs are stubs and will throw an error.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:module`](https://docs.deno.com/api/node/module/)
+
+The `register()` function is not supported.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:net`](https://docs.deno.com/api/node/net/)
+
+Missing `net.Socket.prototype.constructor` with `fd` option.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:os`](https://docs.deno.com/api/node/os/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:path`](https://docs.deno.com/api/node/path/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:perf_hooks`](https://docs.deno.com/api/node/perf_hooks/)
+
+Missing `perf_hooks.eventLoopUtilization`, `perf_hooks.timerify`,
+`perf_hooks.monitorEventLoopDelay`.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:punycode`](https://docs.deno.com/api/node/punycode/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:process`](https://docs.deno.com/api/node/process/)
+
+Missing `multipleResolves`, `worker` events.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:querystring`](https://docs.deno.com/api/node/querystring/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:readline`](https://docs.deno.com/api/node/readline/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:repl`](https://docs.deno.com/api/node/repl/)
+
+`builtinModules` and `_builtinLibs` are supported. Missing
+`REPLServer.prototype.constructor` and `start()`.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:stream`](https://docs.deno.com/api/node/stream/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:string_decoder`](https://docs.deno.com/api/node/string_decoder/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:sys`](https://docs.deno.com/api/node/util/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:test`](https://nodejs.org/api/test.html)
+
+Currently only `test` API is supported.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:timers`](https://docs.deno.com/api/node/timers/promises/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:tls`](https://docs.deno.com/api/node/tls/)
+
+Missing `createSecurePair`.
+
+</div>
+
+<div class="module-info">
+
+### ❌ [`node:trace_events`](https://docs.deno.com/api/node/trace_events/)
+
+All exports are non-functional stubs.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:tty`](https://docs.deno.com/api/node/tty/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:util`](https://docs.deno.com/api/node/util/)
+
+Missing `aborted`, `transferableAbortSignal`, `transferableAbortController`,
+`MIMEParams`, `MIMEType` and `getSystemErrorMap`.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:url`](https://docs.deno.com/api/node/url/)
+
+Fully supported.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:v8`](https://docs.deno.com/api/node/v8/)
+
+`cachedDataVersionTag` and `getHeapStatistics` are supported.
+`setFlagsFromStrings` is a noop. Other APIs are not supported and will throw an
+error.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:vm`](https://docs.deno.com/api/node/vm/)
+
+Partial support.
+
+</div>
+
+<div class="module-info">
+
+### ❌ [`node:wasi`](https://docs.deno.com/api/node/wasi/)
+
+All exports are non-functional stubs.
+
+</div>
+
+<div class="module-info">
+
+### ℹ️ [`node:worker_threads`](https://docs.deno.com/api/node/worker_threads/)
+
+Missing `parentPort.emit`, `parentPort.removeAllListeners`,
+`markAsUntransferable`, `moveMessagePortToContext`, `receiveMessageOnPort`,
+`Worker.prototype.getHeapSnapshot`.
+
+</div>
+
+<div class="module-info">
+
+### ✅ [`node:zlib`](https://docs.deno.com/api/node/zlib/~/Zlib)
+
+Fully supported.
+
+</div>
 
 ## Globals
 
