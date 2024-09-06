@@ -61,7 +61,7 @@ language server:
 - `deno.codeLens.test`
 
 Deno analyzes these settings at multiple points in the language server process.
-First, when the `initialize` request from the client, the
+First, when the `initialize` request arrives from the client, the
 `initializationOptions` will be assumed to be an object that represents the
 `deno` namespace of options. For example, the following value will enable Deno
 with the unstable APIs for this instance of the language server.
