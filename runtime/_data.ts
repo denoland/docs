@@ -169,18 +169,6 @@ export const sidebar = [
     ],
   },
   {
-    title: "Development Tools",
-    items: [
-      {
-        label: "Visual Studio Code",
-        items: [
-          "/runtime/manual/references/vscode_deno/",
-          "/runtime/manual/references/vscode_deno/testing_api/",
-        ],
-      },
-    ],
-  },
-  {
     title: "Advanced Topics",
     items: [
       {
