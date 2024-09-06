@@ -148,29 +148,15 @@ export const sidebar = [
       },
       "/runtime/reference/deno_namespace_apis/",
       "/runtime/reference/web_platform_apis/",
+      "/runtime/reference/node/",
+      {
+        label: "npm packages",
+        id: "/runtime/reference/npm/",
+      },
+      "/runtime/reference/continuous_integration/",
+      "/runtime/reference/deploying_and_embedding/",
       "/runtime/reference/wasm/",
       "/runtime/reference/tcp_udp_connections/",
-    ],
-  },
-  {
-    title: "Modules and APIs",
-    items: [
-      {
-        label: "Interop with Node & npm",
-        items: [
-          "/runtime/manual/node/",
-          "/runtime/manual/node/migrate/",
-          "/runtime/manual/node/npm_specifiers/",
-          "/runtime/manual/node/private_registries/",
-          "/runtime/manual/node/cjs_to_esm/",
-          "/runtime/manual/node/cheatsheet/",
-          {
-            label: "Supported Node APIs and globals",
-            id: "/runtime/manual/node/compatibility/",
-          },
-        ],
-      },
-      "/runtime/manual/advanced/jsx/",
     ],
   },
   {
@@ -198,19 +184,6 @@ export const sidebar = [
     items: [
       "/runtime/manual/advanced/private_repositories/",
       {
-        label: "Deploying & Embedding Deno",
-        items: [
-          "/runtime/manual/advanced/deploying_deno/",
-          "/runtime/manual/advanced/deploying_deno/aws_lightsail/",
-          "/runtime/manual/advanced/deploying_deno/cloudflare_workers/",
-          "/runtime/manual/advanced/deploying_deno/digital_ocean/",
-          "/runtime/manual/advanced/deploying_deno/google_cloud_run/",
-          "/runtime/manual/advanced/deploying_deno/kinsta/",
-          "/runtime/manual/advanced/continuous_integration/",
-          "/runtime/manual/advanced/embedding_deno/",
-        ],
-      },
-      {
         label: "TypeScript in Deno",
         items: [
           "/runtime/manual/advanced/typescript/configuration/",
@@ -219,6 +192,7 @@ export const sidebar = [
         ],
       },
       "/runtime/manual/advanced/migrate_deprecations/",
+      "/runtime/manual/advanced/jsx/",
     ],
   },
   {
@@ -249,6 +223,7 @@ export const sidebar = [
           "/runtime/tutorials/fetch_data/",
           "/runtime/tutorials/read_write_files/",
           "/runtime/tutorials/hashbang/",
+          "/runtime/tutorials/cjs_to_esm/",
         ],
       },
       {
@@ -262,6 +237,11 @@ export const sidebar = [
           "/runtime/tutorials/os_signals/",
           "/runtime/tutorials/file_system_events/",
           "/runtime/tutorials/module_metadata/",
+          "/runtime/tutorials/aws_lightsail/",
+          "/runtime/tutorials/cloudflare_workers/",
+          "/runtime/tutorials/digital_ocean/",
+          "/runtime/tutorials/google_cloud_run/",
+          "/runtime/tutorials/kinsta/",
         ],
       },
       {

@@ -19,77 +19,85 @@ flag can be used to specify a different configuration file.
 Deno also supports a `package.json` file for compatibility with Node.js
 projects. If you have a Node.js project, it is not necessary to create a
 `deno.json` file. Deno will use the `package.json` file to configure the
-project. If both a `deno.json` and `package.json` file are present in the same
-directory, Deno will import the modules in the `package.json` file and use the
-`deno.json` file for Deno-specific configurations. Read more about
-[Node compatibility in Deno](/runtime/manual/node/compatibility).
+project.
 
-## module imports and scopes
+If both a `deno.json` and `package.json` file are present in the same directory,
+Deno will understand dependencies specified in both `deno.json` and
+`package.json`; and use the `deno.json` file for Deno-specific configurations.
+Read more about
+[Node compatibility in Deno](/runtime/reference/node/#node-compatibility).
 
-The "imports" field in your `deno.json` allows you to control how Deno resolves
-modules. You can use it to map bare specifiers (module specifiers that refer to
-the package name or feature) to URLs or file paths making it easier to manage
-dependencies and module resolution in your applications.
+## Dependencies
+
+The `"imports"` field in your `deno.json` allows you to specify dependencies
+used in your project. You can use it to map bare specifiers to URLs or file
+paths making it easier to manage dependencies and module resolution in your
+applications.
 
 For example, if you want to use the `assert` module from the standard library in
 your project, you could use this import map:
 
-```json
+```json title="deno.json"
 {
   "imports": {
-    "std/assert": "jsr:@std/assert@^1.0.0"
+    "@std/assert": "jsr:@std/assert@^1.0.0",
+    "chalk": "npm:chalk@5"
   }
 }
 ```
 
-Then your script can use the bare specifier `std`:
+Then your script can use the bare specifier `std/assert`:
 
-```js
-import { assertEquals } from "std/assert";
+```js title="script.ts"
+import { assertEquals } from "@std/assert";
+import chalk from "chalk";
 
 assertEquals(1, 2);
+console.log(chalk.yellow("Hello world"));
 ```
 
-The top-level `deno.json` option `importMap` along with the `--importmap` flag
-can be used to specify the import map in other files.
+You can also use a `"dependencies"` field in `package.json`:
 
-If you need to scope an import to a to a specific file or directory, you can use
-the "scopes" field. For example:
-
-```json
+```json title="package.json"
 {
-  "importMap": {
-    "imports": {
-      "lodash": "https://cdn.skypack.dev/lodash@4.17.21"
-    },
-    "scopes": {
-      "/special/": {
-        "lodash": "https://cdn.skypack.dev/lodash@4.17.20"
-      }
-    }
+  "dependencies": {
+    "express": "express@^1.0.0"
   }
 }
 ```
 
-In this example, the `lodash` module is resolved to version 4.17.21 for all
-files except those in the `/special/` directory, where it is resolved to version
-4.17.20.
+```js title="script.ts"
+import express from "express";
+
+const app = express();
+```
 
 Read more about [module imports](./modules.md)
 
-## tasks
+## Tasks
 
-The tasks field in your `deno.json` file is used to define custom commands that
-can be executed with the `deno task` command. It is similar to the `scripts`
-field in a `package.json` file and allows you to tailor commands and permissions
-to the specific needs of your project.
+The `tasks` field in your `deno.json` file is used to define custom commands
+that can be executed with the `deno task` command and allows you to tailor
+commands and permissions to the specific needs of your project.
 
-```json
+It is similar to the `scripts` field in a `package.json` file, which is also
+supported.
+
+```json title="deno.json"
 {
   "tasks": {
     "start": "deno run --allow-net --watch=static/,routes/,data/ dev.ts",
     "test": "deno test --allow-net",
     "lint": "deno lint"
+  }
+}
+```
+
+```json title="package.json"
+{
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build"
   }
 }
 ```
@@ -101,6 +109,8 @@ example:
 deno task start
 deno task test
 deno task lint
+deno task dev
+deno task build
 ```
 
 Read more about [`deno task`](/runtime/reference/cli/task_runner/).
@@ -114,7 +124,7 @@ project’s needs.
 
 For example:
 
-```json
+```json title="deno.json"
 {
   "lint": {
     "include": ["src/"],
@@ -149,7 +159,7 @@ Deno’s built-in code formatter. This allows you to customize how your code is
 formatted, ensuring consistency across your project, making it easier to read
 and collaborate on. Here are the key options you can configure:
 
-```json
+```json title="deno.json"
 {
   "fmt": {
     "useTabs": true,
@@ -179,32 +189,69 @@ This configuration will:
 Read more about
 [formatting your code with Deno](/runtime/fundamentals/linting_and_formatting/).
 
-## lock
+## Lockfile
 
-The `lock` field in the `deno.json` file is used to specify the location of the
+The `lock` field in the `deno.json` file is used to specify configuration of the
 lock file that Deno uses to
 [ensure the integrity of your dependencies](/runtime/fundamentals/modules/#integrity-checking-and-lock-files).
 A lock file records the exact versions and integrity hashes of the modules your
 project depends on, ensuring that the same versions are used every time the
 project is run, even if the dependencies are updated or changed remotely.
 
+```json title="deno.json"
+{
+  "lock": {
+    "path": "./deno.lock",
+    "frozen": true
+  }
+}
+```
+
+This configuration will:
+
+- specify lockfile location at `./deno.lock` (this is the default and can be
+  omitted)
+- tell Deno that you want to error out if any dependency changes
+
+Deno uses lockfile by default, you can disable it with following configuration:
+
+```json title="deno.json"
+{
+  "lock": false
+}
+```
+
 ## Node modules directory
 
-The `nodeModulesDir` field in the `deno.json` file is used to explicitly enable
-or disable Deno’s use of the `node_modules` directory when working with npm
-packages. This setting is particularly useful for projects that need to
-integrate with existing Node.js ecosystems or gradually adopt Deno. It can be
-set to `true` or `false` to enable or disable the use of the `node_modules`
-directory, respectively.
+By default Deno uses a local `node_modules` directory if you have a
+`package.json` file in your project directory.
 
-## npm registry
+You can control this behavior using the `nodeModulesDir` field in the
+`deno.json` file.
 
-The `npmRegistry` field in the `deno.json` file is used to specify a custom npm
-registry for resolving npm package specifiers. This allows you to direct Deno to
-use a different registry instead of the default npm registry. This can be
-particularly useful for using
-[private registries](/runtime/manual/node/private_registries/) or mirrors of the
-npm registry.
+```json title="deno.json"
+{
+  "nodeModulesDir": "auto"
+}
+```
+
+You can set this field to following values:
+
+| Value      | Behavior                                                                                                                           |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `"none"`   | Don't use a local `node_modules` directory. Instead use global cache in `$DENO_DIR` that is automatically kept up to date by Deno. |
+| `"auto"`   | Use a local `node_modules` directory. The directory is automatically create and kept up to date by Deno.                           |
+| `"manual"` | Use a local `node_modules` direcory. User must keep this directory up to date manually, eg. using `deno install` or `npm install`. |
+
+It is not required to specify this setting, the following defaults are applied:
+
+- `"none"` if there is no `package.json` file in your project directory
+- `"manual"` is there is a `package.json` file in your project directory
+
+When using workspaces, this setting can only be used in the workspace root.
+Specifying it in any of the members will result in warnings. The `"manual"`
+setting will only be applied automatically if there's a `package.json` file in
+the workspace root.
 
 ## TypeScript compiler options
 
@@ -223,13 +270,22 @@ sharing code.
 See also
 [Configuring TypeScript in Deno](/runtime/manual/advanced/typescript/configuration/).
 
-## unstable
+## Unstable features
 
 The `unstable` field in a `deno.json` file is used to enable specific unstable
-feature flags for your Deno project. These features are still in development and
-not yet part of the stable API. By listing the desired features in the unstable
-array, you can experiment with and use these new capabilities before they are
-officially released. [Learn more](/runtime/reference/cli/unstable_flags/).
+features for your Deno project.
+
+These features are still in development and not yet part of the stable API. By
+listing features in the `unstable` array, you can experiment with and use these
+new capabilities before they are officially released.
+
+```json title="deno.json"
+{
+  "unstable": ["cron", "kv", "webgpu"]
+}
+```
+
+[Learn more](/runtime/reference/cli/unstable_flags/).
 
 ## include and exclude
 
@@ -381,9 +437,8 @@ works as well:
     "exclude": ["src/testdata/", "src/fixtures/**/*.ts"]
   },
   "lock": false,
-  "nodeModulesDir": true,
+  "nodeModulesDir": "auto",
   "unstable": ["webgpu"],
-  "npmRegistry": "https://mycompany.net/artifactory/api/npm/virtual-npm",
   "test": {
     "include": ["src/"],
     "exclude": ["src/testdata/", "src/fixtures/**/*.ts"]

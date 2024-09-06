@@ -10,7 +10,7 @@ A "workspace" is a collection of folders containing `deno.json` or
 `package.json` configuration files. The root `deno.json` file defines the
 workspace:
 
-```json, title="deno.json"
+```json title="deno.json"
 {
   "workspace": ["./add", "./subtract"]
 }
@@ -49,7 +49,7 @@ There is also a root `deno.json` and a `main.ts`.
 The top-level `deno.json` configuration file defines the workspace and a
 top-level import map applied to all members:
 
-```json, title="deno.json"
+```json title="deno.json"
 {
   "workspace": ["./add", "./subtract"],
   "imports": {
@@ -77,7 +77,7 @@ is important for referencing the workspace member. The `deno.json` file also
 contains example configurations, like turning off semicolons when using
 `deno fmt`.
 
-```json, title="add/deno.json"
+```json title="add/deno.json"
 {
   "name": "@scope/add",
   "version": "0.1.0",
@@ -88,7 +88,7 @@ contains example configurations, like turning off semicolons when using
 }
 ```
 
-```ts, title="add/mod.ts"
+```ts title="add/mod.ts"
 export function add(a: number, b: number): number {
   return a + b;
 }
@@ -97,7 +97,7 @@ export function add(a: number, b: number): number {
 The `subtract/` subdirectory is similar but does not have the same `deno fmt`
 configuration.
 
-```json, title="subtract/deno.json"
+```json title="subtract/deno.json"
 {
   "name": "@scope/subtract",
   "version": "0.3.0",
@@ -105,7 +105,7 @@ configuration.
 }
 ```
 
-```ts, title="subtract/mod.ts"
+```ts title="subtract/mod.ts"
 import { add } from "@scope/add";
 
 export function subtract(a: number, b: number): number {
@@ -155,7 +155,7 @@ Node.js library called `@deno/log` that we developed a couple years back.
 
 We'll need to include a `deno.json` configuration file in the root:
 
-```json, title="deno.json"
+```json title="deno.json"
 {
   "workspace": {
     "members": ["hi"]
@@ -165,7 +165,7 @@ We'll need to include a `deno.json` configuration file in the root:
 
 Alongside our existing package.json workspace:
 
-```json, title="package.json"
+```json title="package.json"
 {
   "workspaces": ["log"]
 }
@@ -173,7 +173,7 @@ Alongside our existing package.json workspace:
 
 The workspace currently has a log npm package:
 
-```json, title="log/package.json"
+```json title="log/package.json"
 {
   "name": "@deno/log",
   "version": "0.5.0",
@@ -182,7 +182,7 @@ The workspace currently has a log npm package:
 }
 ```
 
-```js, title="log/index.js"
+```js title="log/index.js"
 export function log(output) {
   console.log(output);
 }
@@ -190,7 +190,7 @@ export function log(output) {
 
 Let's create an `@deno/hi` Deno-first package that imports `@deno/log`:
 
-```json, title="hi/deno.json"
+```json title="hi/deno.json"
 {
   "name": "@deno/hi",
   "version": "0.2.0",
@@ -201,7 +201,7 @@ Let's create an `@deno/hi` Deno-first package that imports `@deno/log`:
 }
 ```
 
-```ts, title="hi/mod.ts"
+```ts title="hi/mod.ts"
 import { log } from "log";
 
 export function sayHiTo(name: string) {
@@ -211,7 +211,7 @@ export function sayHiTo(name: string) {
 
 Now, we can write a `main.ts` file that imports and calls `hi`:
 
-```ts, title="main.ts"
+```ts title="main.ts"
 import { sayHiTo } from "@deno/hi";
 
 sayHiTo("friend");

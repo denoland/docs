@@ -16,8 +16,12 @@ oldUrl:
 Deno provides a built-in test runner for writing and running tests in both
 JavaScript and TypeScript. This makes it easy to ensure your code is reliable
 and functions as expected without needing to install any additional dependencies
-or tools. The deno test runner allows you fine-grained control over permissions
-for each test, enhancing your code security.
+or tools. The `deno test` runner allows you fine-grained control over
+permissions for each test, ensuring that code does not do anything unexpected.
+
+In addition to the built-in test runner, you can also use other test runners
+from the JS ecosystem, such as Jest, Mocha, or AVA, with Deno. We will not cover
+these in this document however.
 
 ## Writing Tests
 
@@ -25,22 +29,14 @@ To define a test in Deno, you use the `Deno.test()` function. Here are some
 examples:
 
 ```ts title="my_test.ts"
-import { assertEquals } from "@std/assert";
+import { assertEquals } from "jsr:@std/assert";
 
-// basic test
 Deno.test("simple test", () => {
   const x = 1 + 2;
   assertEquals(x, 3);
 });
 
-// a named test
-Deno.test("addition test", () => {
-  const sum = 2 + 3;
-  assertEquals(sum, 5);
-});
-
-// async test:
-import { delay } from "@std/async";
+import { delay } from "jsr:@std/async";
 
 Deno.test("async test", async () => {
   const x = 1 + 2;
@@ -48,7 +44,6 @@ Deno.test("async test", async () => {
   assertEquals(x, 3);
 });
 
-// test with permissions
 Deno.test({
   name: "read file test",
   permissions: { read: true },
@@ -59,9 +54,9 @@ Deno.test({
 });
 ```
 
-If you prefer a "jest-like" `expect` style, the Deno standard library provides
-an [`expect`](https://jsr.io/@std/expect) function that can be used in place of
-`assertEquals`:
+If you prefer a "jest-like" `expect` style of assertions, the Deno standard
+library provides an [`expect`](https://jsr.io/@std/expect) function that can be
+used in place of `assertEquals`:
 
 ```ts title="my_test.ts"
 import { expect } from "jsr:@std/expect";
@@ -95,7 +90,7 @@ deno test my_test.ts
 # Run test modules in parallel
 deno test --parallel
 
-# Pass additional arguments to the test file
+# Pass additional arguments to the test file that are visible in `Deno.args`
 deno test my_test.ts -- -e --foo --bar
 ```
 
@@ -107,6 +102,7 @@ test:
 
 ```ts
 Deno.test("database operations", async (t) => {
+  using db = await openDatabase();
   await t.step("insert user", async () => {
     // Insert user logic
   });
@@ -155,7 +151,7 @@ To indicate that you are using a pattern (regular expression), wrap your filter
 value with forward slashes `/`, much like JavaScript’s syntax for regular
 expressions.
 
-### Including and excluding paths in the configuration file
+### Including and excluding test files in the configuration file
 
 You can also filter tests by specifying paths to include or exclude in the Deno
 configuration file.
@@ -218,7 +214,7 @@ Deno.test.ignore("my test", () => {
 ### Only Run Specific Tests
 
 If you want to focus on a particular test and ignore the rest, you can use the
-`only` option. This tells the test framework to run only the tests with only set
+`only` option. This tells the test runner to run only the tests with `only` set
 to true. Multiple tests can have this option set. However, if any test is
 flagged with only, the overall test run will always fail, as this is intended to
 be a temporary measure for debugging.
@@ -249,6 +245,8 @@ failure, you can specify the `--fail-fast` flag when running the suite.
 ```shell
 deno test --fail-fast
 ```
+
+This will cause the test runner to stop execution after the first test failure.
 
 ## Reporters
 
@@ -283,8 +281,9 @@ deno test --junit-path=./report.xml
 
 The [Deno standard library](/runtime/fundamentals/standard_library/) provides a
 set of functions to help you write tests that involve spying, mocking, and
-stubbing. Check out the [documentation on JSR](https://jsr.io/@std/testing) for
-more information on each of these utilities.
+stubbing. Check out the
+[@std/testing documentation on JSR](https://jsr.io/@std/testing) for more
+information on each of these utilities.
 
 ## Coverage
 
@@ -293,7 +292,8 @@ the `--coverage` flag when starting `deno test`. This coverage information is
 acquired directly from the V8 JavaScript engine, ensuring high accuracy.
 
 This can then be further processed from the internal format into well known
-formats with the [`deno coverage`](/runtime/reference/cli/coverage/) tool.
+formats like `lcov` with the [`deno coverage`](/runtime/reference/cli/coverage/)
+tool.
 
 ## Behavior-Driven Development
 
@@ -355,9 +355,12 @@ deno test --doc example.ts
 The above command will extract this example, and then type-check it as a
 standalone module living in the same directory as the module being documented.
 
-### Documenting exports
+### Importing code in examples
 
-To document your exports, import the module using a relative path specifier:
+You can import code from the surrounding module into the example code block by
+using the `import` keyword followed by the relative path to the module. This
+allows you to test the code in the example block in the context of the module
+being documented.
 
 ````ts
 /**
@@ -365,6 +368,7 @@ To document your exports, import the module using a relative path specifier:
  *
  * ```ts
  * import { foo } from "./foo.ts";
+ * const x: string = foo();
  * ```
  */
 export function foo(): string {
@@ -379,8 +383,40 @@ reasonable and expected way.
 
 ### Resource sanitizer
 
-Ensures that all resources created during a test are closed to prevent leaks.
-Enabled by default, it can be disabled with `sanitizeResources: false`:
+The resource sanitizer ensures that all I/O resources created during a test are
+closed, to prevent leaks.
+
+I/O resources are things like `Deno.FsFile` handles, network connections,
+`fetch` bodies, timers, and other resources that are not automatically garbage
+collected.
+
+You should always close resources when you are done with them. For example, to
+close a file:
+
+```ts
+const file = await Deno.open("hello.txt");
+// Do something with the file
+file.close(); // <- Always close the file when you are done with it
+```
+
+To close a network connection:
+
+```ts
+const conn = await Deno.connect({ hostname: "example.com", port: 80 });
+// Do something with the connection
+conn.close(); // <- Always close the connection when you are done with it
+```
+
+To close a `fetch` body:
+
+```ts
+const response = await fetch("https://example.com");
+// Do something with the response
+await response.body?.cancel(); // <- Always cancel the body when you are done with it, if you didn't consume it otherwise
+```
+
+This sanitizer is enabled by default, but can be disabled in this test with
+`sanitizeResources: false`:
 
 ```ts
 Deno.test({
@@ -392,10 +428,27 @@ Deno.test({
 });
 ```
 
-### Op sanitizer
+### Async operation sanitizer
 
-Ensures that all async operations started in a test are completed before the
-test ends. Enabled by default, it can be disabled with `sanitizeOps: false`:
+The async operation sanitizer ensures that all async operations started in a
+test are completed before the test ends. This is important because if an async
+operation is not awaited, the test will end before the operation is completed,
+and the test will be marked as successful even if the operation may have
+actually failed.
+
+You should always await all async operations in your tests. For example:
+
+```ts
+Deno.test({
+  name: "async operation test",
+  async fn() {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  },
+});
+```
+
+This sanitizer is enabled by default, but can be disabled with
+`sanitizeOps: false`:
 
 ```ts
 Deno.test({
@@ -412,8 +465,11 @@ Deno.test({
 
 ### Exit sanitizer
 
-Ensures that tested code doesn’t call `Deno.exit()`, which could signal a false
-test success. Enabled by default, it can be disabled with `sanitizeExit: false`.
+The exit sanitizer ensures that tested code doesn’t call `Deno.exit()`, which
+could signal a false test success.
+
+This sanitizer is enabled by default, but can be disabled with
+`sanitizeExit: false`.
 
 ```ts
 Deno.test({

@@ -15,6 +15,7 @@ to what we consider as "Acceptable Use", and what we do not.
 - ✅ A personal blog
 - ✅ A company website
 - ✅ An e-commerce site
+- ✅ Reverse proxy
 
 ### Not Acceptable Use
 
@@ -22,7 +23,8 @@ to what we consider as "Acceptable Use", and what we do not.
 - ❌ Highly CPU-intensive load (e.g. machine learning)
 - ❌ Media hosting for external sites
 - ❌ Scrapers
-- ❌ Proxy or VPN
+- ❌ Forward proxy
+- ❌ VPN
 
 ## Guidelines
 
