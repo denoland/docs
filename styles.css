@@ -270,15 +270,15 @@ body:not(:has(.ddoc)) {
 }
 
 [data-example-position="first"] > .markdown-body > pre.snippet-code {
-  @apply border-t border-b-0 pt-4 rounded-t rounded-b-none;
+  @apply border-t border-b-0 pt-4 rounded-t h-full rounded-b-none;
 }
 
 [data-example-position="middle"] > .markdown-body > pre.snippet-code {
-  @apply border-t-0 border-b-0 pt-0 pb-16 rounded-none;
+  @apply border-t-0 border-b-0 pt-0 pb-16 h-full rounded-none;
 }
 
 [data-example-position="last"] > .markdown-body > pre.snippet-code {
-  @apply border-t-0 border-b pb-8 rounded-t-none rounded-b;
+  @apply border-t-0 border-b pb-8 h-full rounded-t-none rounded-b;
 }
 
 .deno-tabs {

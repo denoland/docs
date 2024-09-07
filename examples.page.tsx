@@ -297,7 +297,7 @@ function SnippetComponent(props: {
       <div
         class={`italic select-none text-sm ${
           props.snippet.text ? "pb-4 md:pb-0 " : " "
-        } ${props.snippet.code ? "col-span-3" : "col-span-full"}`}
+        } ${props.snippet.code ? "col-span-3" : "mt-4 col-span-full"}`}
       >
         {props.snippet.text}
       </div>
