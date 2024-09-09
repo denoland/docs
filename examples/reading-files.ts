@@ -34,7 +34,7 @@ console.log(`Read ${bytesRead} bytes`);
 
 // You can also seek to a known location in the file and read from there.
 const pos = await file.seek(6, Deno.SeekMode.Start);
-console.log(`Seeked to position ${pos}`);
+console.log(`Sought to position ${pos}`);
 const buffer2 = new Uint8Array(2);
 const bytesRead2 = await file.read(buffer2);
 console.log(`Read ${bytesRead2} bytes`);
