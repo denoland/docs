@@ -537,8 +537,9 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### Deno.isatty()
 
-Use `Deno.FsFile.prototype.isTerminal()`, `Deno.stdin.isTerminal()`,
-`Deno.stdout.isTerminal()` or `Deno.stderr.isTerminal()` instead.
+Use `Deno.FsFile.prototype.isTerminal()`, `Deno.stdin.prototype.isTerminal()`,
+`Deno.stdout.prototype.isTerminal()` or `Deno.stderr.prototype.isTerminal()`
+instead.
 
 ```diff
   using file = await Deno.open("/dev/tty6");
