@@ -274,6 +274,34 @@ class Foo {
 
 See [deno#9294](https://github.com/denoland/deno/issues/9294) for details.
 
+### Deno.fdatasync()
+
+Use
+[`Deno.FsFile.prototype.syncData()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.syncData)
+instead.
+
+```diff
+  using file = await Deno.open("/foo/bar.txt", { read: true, write: true });
+
+  await file.write(new TextEncoder().encode("Hello, world!"));
+- await Deno.fdatasync(file.rid);
++ await file.syncData();
+```
+
+### Deno.fdatasyncSync()
+
+Use
+[`Deno.FsFile.prototype.syncDataSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.syncDataSync)
+instead.
+
+```diff
+  using file = Deno.openSync("/foo/bar.txt", { read: true, write: true });
+
+  file.writeSync(new TextEncoder().encode("Hello, world!"));
+- Deno.fdatasyncSync(file.rid);
++ file.syncDataSync();
+```
+
 ### Deno.File
 
 Use [`Deno.FsFile`](https://docs.deno.com/api/deno/~/Deno.FsFile) instead.
@@ -290,7 +318,7 @@ See [deno#13661](https://github.com/denoland/deno/issues/13661) for details.
 ### Deno.flock()
 
 Use
-[`Deno.FsFile.lock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lock)
+[`Deno.FsFile.prototype.lock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lock)
 instead.
 
 ```diff
@@ -305,7 +333,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### Deno.flockSync()
 
 Use
-[`Deno.FsFile.lockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lockSync)
+[`Deno.FsFile.prototype.lockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lockSync)
 instead.
 
 ```diff
@@ -320,7 +348,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### Deno.fstatSync()
 
 Use
-[`Deno.FsFile.statSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.statSync)
+[`Deno.FsFile.prototype.statSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.statSync)
 instead.
 
 ```diff
@@ -335,7 +363,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### Deno.fstat()
 
 Use
-[`Deno.FsFile.stat()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.stat)
+[`Deno.FsFile.prototype.stat()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.stat)
 instead.
 
 ```diff
@@ -387,10 +415,40 @@ Alternatively, you can close the watcher resource by explicitly calling
 + watcher.close();
 ```
 
+### Deno.fsync()
+
+Use
+[`Deno.FsFile.prototype.sync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.sync)
+instead.
+
+```diff
+  using file = await Deno.open("/foo/bar.txt", { read: true, write: true });
+
+  await file.write(new TextEncoder().encode("Hello, world!"));
+  await file.truncate(1);
+- await Deno.fsync(file.rid);
++ await file.sync();
+```
+
+### Deno.fsyncSync()
+
+Use
+[`Deno.FsFile.prototype.syncSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.syncSync)
+instead.
+
+```diff
+  using file = Deno.openSync("/foo/bar.txt", { read: true, write: true });
+
+  file.writeSync("new TextEncoder().encode("Hello, world!"));
+  file.truncateSync(1);
+- Deno.fsyncSync(file.rid);
++ file.syncSync();
+```
+
 ### Deno.ftruncateSync()
 
 Use
-[`Deno.FsFile.truncateSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncateSync)
+[`Deno.FsFile.prototype.truncateSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncateSync)
 instead.
 
 ```diff
@@ -405,7 +463,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### Deno.ftruncate()
 
 Use
-[`Deno.FsFile.truncate()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncate)
+[`Deno.FsFile.prototype.truncate()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncate)
 instead.
 
 ```diff
@@ -420,7 +478,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### Deno.funlock()
 
 Use
-[`Deno.FsFile.unlock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlock)
+[`Deno.FsFile.prototype.unlock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlock)
 instead.
 
 ```diff
@@ -435,7 +493,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### Deno.funlockSync()
 
 Use
-[`Deno.FsFile.unlockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlockSync)
+[`Deno.FsFile.prototype.unlockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlockSync)
 instead.
 
 ```diff
@@ -450,7 +508,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### Deno.futimeSync()
 
 Use
-[`Deno.FsFile.utimeSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utimeSync)
+[`Deno.FsFile.prototype.utimeSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utimeSync)
 instead.
 
 ```diff
@@ -465,7 +523,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### Deno.futime()
 
 Use
-[`Deno.FsFile.utime()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utime)
+[`Deno.FsFile.prototype.utime()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utime)
 instead.
 
 ```diff
@@ -479,8 +537,9 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### Deno.isatty()
 
-Use `Deno.FsFile.isTerminal()`, `Deno.stdin.isTerminal()`,
-`Deno.stdout.isTerminal()` or `Deno.stderr.isTerminal()` instead.
+Use `Deno.FsFile.prototype.isTerminal()`, `Deno.stdin.prototype.isTerminal()`,
+`Deno.stdout.prototype.isTerminal()` or `Deno.stderr.prototype.isTerminal()`
+instead.
 
 ```diff
   using file = await Deno.open("/dev/tty6");
@@ -784,7 +843,7 @@ See [deno#16516](https://github.com/denoland/deno/pull/16516) for details.
 ### Deno.seekSync()
 
 Use
-[`Deno.FsFile.seekSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seekSync)
+[`Deno.FsFile.prototype.seekSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seekSync)
 instead.
 
 ```diff
@@ -799,7 +858,7 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### Deno.seek()
 
 Use
-[`Deno.FsFile.seek()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seek)
+[`Deno.FsFile.prototype.seek()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seek)
 instead.
 
 ```diff
