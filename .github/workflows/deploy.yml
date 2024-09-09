@@ -20,7 +20,7 @@ jobs:
       - name: Set up Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: 055cdd00f73892deedaa9cdc7de85a22f5029b68
+          deno-version: ea8bf0945ac93a16a3d8df2470c70d9cf1c36172
 
       - name: "Reference: generate types"
         working-directory: "reference_gen"
