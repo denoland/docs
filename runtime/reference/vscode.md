@@ -34,10 +34,10 @@ We realize that not every project you might work on in VS Code is a Deno
 project. By default, VS Code comes with a built-in TypeScript/JavaScript
 language service which is used when editing TypeScript or JavaScript files.
 
-In order to have support for Deno APIs, as well as the ability to resolve modules
-as the Deno CLI does, you need to enable Deno for the workspace. The most direct
-way to do this is to use the **Deno: Initialize Workspace Configuration** from the
-VS Code
+In order to have support for Deno APIs, as well as the ability to resolve
+modules as the Deno CLI does, you need to enable Deno for the workspace. The
+most direct way to do this is to use the **Deno: Initialize Workspace
+Configuration** from the VS Code
 [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).
 This will activate a helper which will ask if you want to enable linting and the
 Deno unstable APIs for the project. This command will instruct VS Code to store
@@ -49,14 +49,14 @@ notification that Deno is setup for the project.
 
 These settings (and other settings) are available via the VS Code
 [settings](https://code.visualstudio.com/docs/getstarted/userinterface#_settings)
-panel. In the panel the setting is **Deno: Enable** and when manually editing the
-JSON, the setting is `deno.enable`.
+panel. In the panel the setting is **Deno: Enable** and when manually editing
+the JSON, the setting is `deno.enable`.
 
 :::note
 
 VS Code has user and workspace settings. You probably don't want to enable Deno
-in the **user** settings, instead set it in **workspace** settings, or by default
-every workspace will be Deno enabled.
+in the **user** settings, instead set it in **workspace** settings, or by
+default every workspace will be Deno enabled.
 
 :::
 
@@ -83,11 +83,10 @@ TypeScript/JavaScript extension.
 
 ## Partially enabling Deno in a VS Code workspace
 
-In a workspace (or workspace folder), sub-paths can be enabled for
-Deno, while code outside those paths will be not be enabled and the VS Code
-built-in JavaScript/TypeScript language server will be used.
-Use the **Deno: Enable Paths** setting (or `deno.enablePaths` if manually
-editing)
+In a workspace (or workspace folder), sub-paths can be enabled for Deno, while
+code outside those paths will be not be enabled and the VS Code built-in
+JavaScript/TypeScript language server will be used. Use the **Deno: Enable
+Paths** setting (or `deno.enablePaths` if manually editing)
 
 For example if you have a project like this:
 
@@ -98,8 +97,8 @@ project
 ```
 
 Where you only want to enable the `worker` path (and its subpaths) to be Deno
-enabled, you will want to add `./worker` to the list of **Deno: Enable Paths** in
-the configuration.
+enabled, you will want to add `./worker` to the list of **Deno: Enable Paths**
+in the configuration.
 
 ## Mixed-Deno projects
 
@@ -141,8 +140,8 @@ automatic behavior.
 The Deno CLI comes with a
 [built-in formatter](/runtime/reference/cli/formatter/) which can be accessed
 using `deno fmt` but can also be configured to be used by VS Code. `Deno` should
-be on the drop down list for the **Editor: Default formatter** setting (or if you
-are editing settings manually, it would be
+be on the drop down list for the **Editor: Default formatter** setting (or if
+you are editing settings manually, it would be
 `"editor.defaultFormatter": "denoland.vscode-deno"`).
 
 ## Setting a path to the Deno CLI
