@@ -11,7 +11,7 @@ This page covers developing Deno applications using
 [vscode_deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
 extension.
 
-## Installing
+## Installation
 
 The Deno VS Code extension integrates directly with the Deno CLI using the
 [language server protocol](/runtime/reference/lsp/). This helps ensure that the
