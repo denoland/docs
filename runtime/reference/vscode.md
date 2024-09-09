@@ -28,7 +28,7 @@ page that welcomes you to the extension. (If you missed it, or want to see it
 again, <kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>P</kbd> to open the command palette, and
 run the `Deno: Welcome` command.)
 
-## Configuring the extension
+## Configuration
 
 ### Deno enabling a workspace
 
