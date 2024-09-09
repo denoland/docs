@@ -19,10 +19,7 @@ oldUrl:
 This is an example of a server which accepts connections on port 8080, and
 returns to the client anything it sends.
 
-```ts
-/**
- * echo_server.ts
- */
+```ts title="echo_server.ts"
 const listener = Deno.listen({ port: 8080 });
 console.log("listening on 0.0.0.0:8080");
 for await (const conn of listener) {

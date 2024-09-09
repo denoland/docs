@@ -20,11 +20,7 @@ oldUrl:
 This example is the equivalent of running `echo "Hello from Deno!"` from the
 command line.
 
-```ts
-/**
- * subprocess_simple.ts
- */
-
+```ts title="subprocess_simple.ts"
 // define command used to create the subprocess
 const command = new Deno.Command("echo", {
   args: [
@@ -80,11 +76,7 @@ started a subprocess you must use the `"piped"` option.
 
 This example is the equivalent of running `yes &> ./process_output` in bash.
 
-```ts
-/**
- * subprocess_piping_to_file.ts
- */
-
+```ts title="subprocess_piping_to_files.ts"
 import {
   mergeReadableStreams,
 } from "jsr:@std/streams@1.0.0-rc.4/merge-readable-streams";

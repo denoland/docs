@@ -27,10 +27,7 @@ APIs.
 
 You can use `Deno.addSignalListener()` function for handling OS signals:
 
-```ts
-/**
- * add_signal_listener.ts
- */
+```ts title="add_signal_listener.ts"
 console.log("Press Ctrl-C to trigger a SIGINT signal");
 
 Deno.addSignalListener("SIGINT", () => {
@@ -51,10 +48,7 @@ deno run add_signal_listener.ts
 You can use `Deno.removeSignalListener()` function to unregister previously
 added signal handler.
 
-```ts
-/**
- * signal_listeners.ts
- */
+```ts title="signal_listeners.ts"
 console.log("Press Ctrl-C to trigger a SIGINT signal");
 
 const sigIntHandler = () => {
