@@ -243,8 +243,9 @@ denoTest({
 If you want to disable this feature, you can do so by un-setting the **Deno >
 CodeLens: Test** setting - `deno.codeLens.test`.
 
-You can run tests from the Test Explorer view, from the code lense decorations, or via the command palette. You can also use the filter function in the Text Explorer view to exclude certain tests from a
-test run.
+You can run tests from the Test Explorer view, from the code lense decorations,
+or via the command palette. You can also use the filter function in the Text
+Explorer view to exclude certain tests from a test run.
 
 When a test fails, the failure message, including the stack trace, will be
 available when inspecting the test results in VS Code.
