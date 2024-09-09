@@ -15,7 +15,7 @@ applications.
 
 To do so, your `package.json` should look like this:
 
-```json
+```json title="package.json"
 {
   "name": "deno app",
   "scripts": {

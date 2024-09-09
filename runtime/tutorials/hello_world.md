@@ -22,10 +22,7 @@ and the code ensures the name provided is capitalized.
 
 **Command:** `deno run hello-world.js`
 
-```js
-/**
- * hello-world.js
- */
+```js title="hello-world.js"
 function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
@@ -57,10 +54,7 @@ rather than a `*.js` file.
 
 **Command:** `deno run hello-world.ts`
 
-```ts
-/**
- * hello-world.ts
- */
+```ts title="hello-world.ts"
 function capitalize(word: string): string {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
