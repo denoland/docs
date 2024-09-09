@@ -1,0 +1,5 @@
+symbols:
+  performance: |
+    The `eventLoopUtilization` method is a non-functional stub.
+    The `timerify` method is not implemented.
+  monitorEventLoopDelay: This symbol is not implemented.

@@ -1,0 +1,8 @@
+symbols:
+  parentPort: |
+    The `emit` method is not supported.
+    The `removeAllListeners` method is not supported.
+  markAsUntransferable: This symbol is not supported.
+  moveMessagePortToContext: This symbol is not supported.
+  receiveMessageOnPort: This symbol is not supported.
+  Worker: The `getHeapSnapshot` method is not supported.

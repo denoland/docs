@@ -1,0 +1,6 @@
+symbols:
+  transferableAbortSignal: This symbol is currently not supported.
+  transferableAbortController: This symbol is currently not supported.
+  MIMEParams: This symbol is currently not supported.
+  MIMEType: This symbol is currently not supported.
+  getSystemErrorMap: This symbol is currently not supported.
