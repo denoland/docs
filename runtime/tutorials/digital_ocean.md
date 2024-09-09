@@ -21,7 +21,7 @@ The pre-requisite for this is:
 To focus on the deployment, our app will simply be a `main.ts` file that returns
 a string as an HTTP response:
 
-```ts
+```ts title="main.ts"
 import { Application } from "https://deno.land/x/oak/mod.ts";
 
 const app = new Application();
@@ -38,7 +38,7 @@ build the Docker image.
 
 In our `Dockerfile`, let's add:
 
-```Dockerfile
+```Dockerfile title="Dockerfile"
 FROM denoland/deno
 
 EXPOSE 8000
