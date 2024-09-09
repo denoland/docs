@@ -20,13 +20,8 @@ _Note: Hashbangs do not work on Windows._
 In this program, we give the context permission to access the environment
 variables and print the Deno installation path.
 
-```ts
+```ts title="hashbang.ts"
 #!/usr/bin/env -S deno run --allow-env
-
-/**
- *  hashbang.ts
- */
-
 const path = Deno.env.get("DENO_INSTALL");
 
 console.log("Deno Install Path:", path);
