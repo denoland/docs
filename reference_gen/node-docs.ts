@@ -1,5 +1,37 @@
 import { Node, Project, ts } from "ts-morph";
 import EXCLUDE_MAP from "./node-exclude-map.json" with { type: "json" };
+import { walk } from "@std/fs";
+import { parse as yamlParse } from "@std/yaml";
+
+interface Description { kind: "NOTE" | "TIP" | "IMPORTANT" | "WARNING" | "CAUTION"; description: string; }
+function handleDescription(description: Description | string): Description {
+  if (typeof description === "string") {
+    return {
+      kind: "WARNING",
+      description,
+    };
+  } else {
+    return description;
+  }
+}
+
+const descriptions: Record<string, { description?: Description; symbols?: Record<string, Description> }> = {};
+for await (const dirEntry of walk("node_descriptions", { exts: ["yaml"] })) {
+  const file = await Deno.readTextFile(dirEntry.path);
+  const parsed = yamlParse(file);
+  if (!parsed) {
+    continue;
+  }
+  if (parsed.description) {
+    parsed.description = handleDescription(parsed.description);
+  }
+
+  if (parsed.symbols) {
+    parsed.symbols = Object.fromEntries(Object.entries(parsed.symbols).map(([key, value]) => [key, handleDescription(value)]));
+  }
+
+  descriptions[dirEntry.name.slice(0, -5)] = parsed;
+}
 
 await Deno.mkdir("types/node", { recursive: true });
 
@@ -203,6 +235,11 @@ const importRewriteProject = new Project();
 for (const [module, content] of Object.entries(modules)) {
   importRewriteProject.createSourceFile(`${module}.d.ts`, content);
 }
+
+function getNote(description: Description) {
+  return `> [!${description.kind}] Deno compatability\n> ` + description.description.replaceAll("\n", "\n> ") + "\n";
+}
+
 for (const file of importRewriteProject.getSourceFiles()) {
   const moduleName = file.getFilePath().slice(Deno.cwd().length + 1, -5);
 
@@ -219,6 +256,39 @@ for (const file of importRewriteProject.getSourceFiles()) {
         importOrExportDecl.setModuleSpecifier(
           `./${rewrittenModules[name]}.d.ts`,
         );
+      }
+    }
+  }
+
+  const fileDescriptions = descriptions[moduleName.slice("node__".length)];
+  if (fileDescriptions) {
+    if (fileDescriptions.description) {
+      const note = getNote(fileDescriptions.description);
+      const jsdoc = file.getFirstDescendantByKind(ts.SyntaxKind.JSDoc);
+      const jsdocStart = "/**" + note.replaceAll("\n", "\n* ");
+
+      if (jsdoc) {
+        const text = jsdoc.getText();
+        jsdoc.replaceWithText(jsdocStart + text.slice(3));
+      } else {
+        file.replaceWithText(jsdocStart + "\n **/" + file.getFullText());
+      }
+    }
+
+    for (const node of file.getDescendants()) {
+      if (!node.wasForgotten() && node.getName?.() && Node.isExportable(node) && Node.isJSDocable(node) && (fileDescriptions.symbols?.[node.getName()] || fileDescriptions.symbols?.["*"])) {
+        const description = fileDescriptions.symbols[node.getName()] || fileDescriptions.symbols["*"];
+
+        const jsdoc = node.getJsDocs().find((jsdoc) => !jsdoc.getTags().some((tag) => tag.getTagName() == "module"));
+        const note = getNote(description);
+
+        if (jsdoc) {
+          const text = jsdoc.getText();
+          const out = "/**" + note.replaceAll("\n", "\n* ") + text.slice(3);
+          jsdoc.replaceWithText(out);
+        } else {
+          node.addJsDoc(note);
+        }
       }
     }
   }

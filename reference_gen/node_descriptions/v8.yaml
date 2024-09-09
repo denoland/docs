@@ -1,0 +1,8 @@
+description: |
+  `cachedDataVersionTag` and `getHeapStatistics` are supported. 
+  `setFlagsFromStrings` is a noop.
+  Other APIs are not supported and will throw and error.
+
+symbols:
+  setFlagsFromStrings: This function is a noop.
+

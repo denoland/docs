@@ -1,11 +1,12 @@
 {
-  "nodeModulesDir": true,
+  "nodeModulesDir": "auto",
   "imports": {
     "@b-fuze/deno-dom": "jsr:@b-fuze/deno-dom@^0.1.47",
     "@std/async": "jsr:@std/async@^0.224.2",
-    "@std/fs": "jsr:@std/fs@^0.229.3",
+    "@std/fs": "jsr:@std/fs@^1.0.1",
     "@std/media-types": "jsr:@std/media-types@^0.224.1",
     "@std/path": "jsr:@std/path@^0.225.1",
+    "@std/yaml": "jsr:@std/yaml@^1.0.3",
     "@types/node": "npm:@types/node@20.12.7",
     "browserslist": "npm:browserslist@4.23.0",
     "dax": "jsr:@david/dax@^0.40.1",

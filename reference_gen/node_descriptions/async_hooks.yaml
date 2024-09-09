@@ -1,0 +1,4 @@
+symbols:
+  AsyncResource: The AsyncResource implementation is a non-functional stub.
+  executionAsyncId: The executionAsyncId implementation is a non-functional stub.
+  createHook: The createHook implementation is a non-functional stub.

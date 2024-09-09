@@ -10,7 +10,8 @@
   "tasks": {
     "build": "deno run -A lume.ts",
     "serve": "deno run -A lume.ts -s",
-    "prod": "cd _site && deno run --allow-read=. --allow-net server.ts"
+    "prod": "cd _site && deno run --allow-read=. --allow-net server.ts",
+    "reference": "cd reference_gen && deno task types && deno task doc"
   },
   "compilerOptions": {
     "types": ["lume/types.ts"],
