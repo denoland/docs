@@ -101,6 +101,37 @@ Use the `--trace-leaks` CLI flag instead.
 + deno test --trace-leaks
 ```
 
+### ---unstable
+
+Use granular unstable flags (`--unstable-*`) or configuration options instead.
+See
+[Unstable Feature Flags](https://docs.deno.com/runtime/reference/cli/unstable_flags/)
+for reference.
+
+```ts
+// kv.ts
+const kv = await Deno.openKv();
+
+// ...
+```
+
+```diff
+- deno run --unstable kv.ts
++ deno run --unstable-kv kv.ts
+```
+
+Or
+
+```diff
+{
++ "unstable": ["kv"]
+}
+```
+
+See the
+[Deno 1.40 Blog Post](https://deno.com/blog/v1.40#changes-to-how-we-handle-unstable-features)
+for details.
+
 ## Updated symbols
 
 ### Deno.Buffer
