@@ -23,7 +23,7 @@ export default function* () {
       let title = "";
       try {
         const match = titleRegexp.exec(content);
-        title = match[1];
+        title = match[1].slice(0, -"documentation".length) + "- Deno Docs";
       } catch (e) {
         if (!file.path.endsWith("prototype.html")) {
           console.error(file.path);
