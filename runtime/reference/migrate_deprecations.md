@@ -364,6 +364,30 @@ methods instead.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
+### Deno.FsWatcher.prototype.return()
+
+Ensure that the `Deno.FsWatcher` instance is closed once iteration is complete
+by instantiating it with the `using` keyword.
+
+```diff
+- const watcher = Deno.watchFs("./foo/bar");
++ using watcher = Deno.watchFs("./foo/bar");
+  for await (const event of watcher) {
+    // ...
+  }
+```
+
+Alternatively, you can close the watcher resource by explicitly calling
+`.close()`.
+
+```diff
+  const watcher = Deno.watchFs("./foo/bar");
+  for await (const event of watcher) {
+    // ...
+  }
++ watcher.close();
+```
+
 ### Deno.ftruncateSync()
 
 Use
@@ -587,6 +611,10 @@ using listener = Deno.listenTls({
 
 See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 
+### Deno.metrics()
+
+There is no replacement API for this symbol.
+
 ### Deno.readAllSync()
 
 Use [`readAllSync()`](https://jsr.io/@std/io/doc/read-all/~/readAllSync) from
@@ -708,6 +736,11 @@ Use the `.read()` method on the resource itself.
 ```
 
 See [deno#9795][deno#9795] for details.
+
+### Deno.resources()
+
+There is no replacement API for this symbol, as resource IDs (RIDs) are being
+phased-out.
 
 ### Deno.run()
 
