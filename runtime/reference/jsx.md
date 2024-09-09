@@ -3,11 +3,12 @@ title: "JSX"
 oldUrl:
   - /deploy/manual/using-jsx/
   - /runtime/manual/advanced/jsx_dom/jsx/
+  - /runtime/manual/advanced/jsx/
 ---
 
 Deno has built-in support for JSX in both `.jsx` files and `.tsx` files. JSX in
-Deno can be handy for server-side rendering or generating code for consumption
-in a browser.
+Deno can be handy for server-side rendering or generating code browser
+consumption.
 
 ## Default configuration
 

@@ -165,7 +165,17 @@ export const sidebar = [
         id: "/runtime/reference/vscode/",
       },
       "/runtime/reference/private_repositories/",
+      "/runtime/reference/jsx/",
       "/runtime/reference/tcp_udp_connections/",
+      "/runtime/reference/migrate_deprecations/",
+      {
+        label: "Full API Reference",
+        href: "/api/deno",
+      },
+      {
+        label: "Std. Library",
+        href: "https://jsr.io/@std",
+      },
     ],
   },
   {
@@ -179,8 +189,6 @@ export const sidebar = [
           "/runtime/manual/advanced/typescript/faqs/",
         ],
       },
-      "/runtime/manual/advanced/migrate_deprecations/",
-      "/runtime/manual/advanced/jsx/",
     ],
   },
   {
@@ -249,19 +257,6 @@ export const sidebar = [
       {
         label: "More on Deno by Example",
         href: "/examples",
-      },
-    ],
-  },
-  {
-    title: "Reference",
-    items: [
-      {
-        label: "Full API Reference",
-        href: "/api/deno",
-      },
-      {
-        label: "Std. Library",
-        href: "https://jsr.io/@std",
       },
     ],
   },
