@@ -1,6 +1,6 @@
 ---
 title: "Private Modules and Repositories"
-oldUrl: runtime/manual/advanced/private_repositories/
+oldUrl: /runtime/manual/advanced/private_repositories/
 ---
 
 :::note

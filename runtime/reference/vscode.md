@@ -11,7 +11,7 @@ This page covers developing Deno applications using
 [vscode_deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
 extension.
 
-## Installing
+## Installation
 
 The Deno VS Code extension integrates directly with the Deno CLI using the
 [language server protocol](/runtime/reference/lsp/). This helps ensure that the
@@ -28,7 +28,7 @@ page that welcomes you to the extension. (If you missed it, or want to see it
 again, <kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>P</kbd> to open the command palette, and
 run the `Deno: Welcome` command.)
 
-## Configuring the extension
+## Configuration
 
 ### Deno enabling a workspace
 
@@ -97,7 +97,7 @@ use the Deno linter.
 ### Import maps
 
 It is possible to use
-[import maps](runtime/fundamentals/modules/#managing-third-party-modules-and-libraries)
+[import maps](/runtime/fundamentals/modules/#managing-third-party-modules-and-libraries)
 in the editor. The option `Deno: Import Map` (or `deno.importMap` if manually
 editing) should be set to the value of the import map file. If the path is a
 relative path, it will be resolved relative to the root of the workspace.
