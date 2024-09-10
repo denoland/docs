@@ -32,9 +32,9 @@ configuration file with the check JS option enabled:
 
 ```json
 {
-    "compilerOptions": {
-        "checkJs": true
-    }
+  "compilerOptions": {
+    "checkJs": true
+  }
 }
 ```
 
@@ -190,10 +190,10 @@ using any APIs exclusive to one or the other. In such cases, a typical
 
 ```json title="deno.json"
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
-    }
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
+  }
 }
 ```
 
@@ -204,16 +204,16 @@ should add that library to the mix as well:
 
 ```json title="deno.json"
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "dom.asynciterable",
-            "deno.ns",
-            "deno.unstable"
-        ]
-    }
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "dom.asynciterable",
+      "deno.ns",
+      "deno.unstable"
+    ]
+  }
 }
 ```
 
@@ -332,7 +332,7 @@ via the `declare global` in the type definition. For example:
 
 ```ts
 declare global {
-    var AGlobalString: string;
+  var AGlobalString: string;
 }
 ```
 
@@ -368,13 +368,13 @@ your `deno.json`. For example:
 
 ```json title="deno.json"
 {
-    "compilerOptions": {
-        "types": [
-            "./types.d.ts",
-            "https://deno.land/x/pkg@1.0.0/types.d.ts",
-            "/Users/me/pkg/types.d.ts"
-        ]
-    }
+  "compilerOptions": {
+    "types": [
+      "./types.d.ts",
+      "https://deno.land/x/pkg@1.0.0/types.d.ts",
+      "/Users/me/pkg/types.d.ts"
+    ]
+  }
 }
 ```
 
@@ -424,10 +424,10 @@ library files. For example:
 
 ```json title="deno.json"
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "lib": ["deno.worker"]
-    }
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["deno.worker"]
+  }
 }
 ```
 

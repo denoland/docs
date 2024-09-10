@@ -6,7 +6,6 @@ oldUrl:
   - /runtime/manual/typescript/overview/
   - /runtime/manual/getting_started/typescript/
   - /manual/advanced/typescript
-
 ---
 
 TypeScript is a first class language in Deno, just like JavaScript or
