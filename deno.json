@@ -1,5 +1,6 @@
 {
   "imports": {
+    "@b-fuze/deno-dom": "jsr:@b-fuze/deno-dom@^0.1.48",
     "@std/fs": "jsr:@std/fs@^0.229.3",
     "autoprefixer": "npm:autoprefixer@^10.4.20",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
