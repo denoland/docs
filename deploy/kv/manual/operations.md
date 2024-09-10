@@ -62,8 +62,8 @@ parts, but not inclusive of an exact match of the key. The prefix selector may
 optionally be given a `start` OR `end` key to limit the range of keys returned.
 The `start` key is inclusive, and the `end` key is exclusive.
 
-The `range` selector matches all keys that are lexographically between the given
-`start` and `end` keys. The `start` key is inclusive, and the `end` key is
+The `range` selector matches all keys that are lexicographically between the
+given `start` and `end` keys. The `start` key is inclusive, and the `end` key is
 exclusive.
 
 > Note: In the case of the prefix selector, the `prefix` key must consist only

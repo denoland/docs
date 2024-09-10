@@ -3,7 +3,10 @@ import EXCLUDE_MAP from "./node-exclude-map.json" with { type: "json" };
 import { walk } from "@std/fs";
 import { parse as yamlParse } from "@std/yaml";
 
-interface Description { kind: "NOTE" | "TIP" | "IMPORTANT" | "WARNING" | "CAUTION"; description: string; }
+interface Description {
+  kind: "NOTE" | "TIP" | "IMPORTANT" | "WARNING" | "CAUTION";
+  description: string;
+}
 function handleDescription(description: Description | string): Description {
   if (typeof description === "string") {
     return {
@@ -15,7 +18,10 @@ function handleDescription(description: Description | string): Description {
   }
 }
 
-const descriptions: Record<string, { description?: Description; symbols?: Record<string, Description> }> = {};
+const descriptions: Record<
+  string,
+  { description?: Description; symbols?: Record<string, Description> }
+> = {};
 for await (const dirEntry of walk("node_descriptions", { exts: ["yaml"] })) {
   const file = await Deno.readTextFile(dirEntry.path);
   const parsed = yamlParse(file);
@@ -27,7 +33,11 @@ for await (const dirEntry of walk("node_descriptions", { exts: ["yaml"] })) {
   }
 
   if (parsed.symbols) {
-    parsed.symbols = Object.fromEntries(Object.entries(parsed.symbols).map(([key, value]) => [key, handleDescription(value)]));
+    parsed.symbols = Object.fromEntries(
+      Object.entries(parsed.symbols).map((
+        [key, value],
+      ) => [key, handleDescription(value)]),
+    );
   }
 
   descriptions[dirEntry.name.slice(0, -5)] = parsed;
@@ -237,7 +247,8 @@ for (const [module, content] of Object.entries(modules)) {
 }
 
 function getNote(description: Description) {
-  return `> [!${description.kind}] Deno compatability\n> ` + description.description.replaceAll("\n", "\n> ") + "\n";
+  return `> [!${description.kind}] Deno compatibility\n> ` +
+    description.description.replaceAll("\n", "\n> ") + "\n";
 }
 
 for (const file of importRewriteProject.getSourceFiles()) {
@@ -276,10 +287,18 @@ for (const file of importRewriteProject.getSourceFiles()) {
     }
 
     for (const node of file.getDescendants()) {
-      if (!node.wasForgotten() && node.getName?.() && Node.isExportable(node) && Node.isJSDocable(node) && (fileDescriptions.symbols?.[node.getName()] || fileDescriptions.symbols?.["*"])) {
-        const description = fileDescriptions.symbols[node.getName()] || fileDescriptions.symbols["*"];
+      if (
+        !node.wasForgotten() && node.getName?.() && Node.isExportable(node) &&
+        Node.isJSDocable(node) &&
+        (fileDescriptions.symbols?.[node.getName()] ||
+          fileDescriptions.symbols?.["*"])
+      ) {
+        const description = fileDescriptions.symbols[node.getName()] ||
+          fileDescriptions.symbols["*"];
 
-        const jsdoc = node.getJsDocs().find((jsdoc) => !jsdoc.getTags().some((tag) => tag.getTagName() == "module"));
+        const jsdoc = node.getJsDocs().find((jsdoc) =>
+          !jsdoc.getTags().some((tag) => tag.getTagName() == "module")
+        );
         const note = getNote(description);
 
         if (jsdoc) {
