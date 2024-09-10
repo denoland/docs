@@ -2,6 +2,7 @@
 title: "Contributing"
 oldUrl:
   - /runtime/manual/contributing/
+  - /runtime/manual/references/contributing/
 ---
 
 We welcome and appreciate all contributions to Deno.
