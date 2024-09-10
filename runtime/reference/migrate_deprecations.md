@@ -1,5 +1,6 @@
 ---
 title: "Deno 1.x to 2.x Migration Guide"
+oldUrl: /runtime/manual/advanced/migrate_deprecations/
 ---
 
 This document contains guidance for migrating from Deno 1.x to 2.x, namely for
