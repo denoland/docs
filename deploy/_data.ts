@@ -99,6 +99,7 @@ export const sidebar = [
       "/deploy/manual/fulfillment-policy/",
       "/deploy/manual/privacy-policy/",
       "/deploy/manual/security/",
+      "/deploy/manual/terms-and-conditions/",
     ],
   },
   {
