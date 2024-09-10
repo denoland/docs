@@ -92,7 +92,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
               <CopyButton text={contentNoCommentary} />
             </div>
             {example.parsed.files.map((file) => (
-              <div class="flex flex-col" key={file.name}>
+              <div class="flex flex-col gap-4 md:gap-0" key={file.name}>
                 {file.snippets.map((snippet, i) => (
                   <SnippetComponent
                     key={i}
@@ -315,17 +315,17 @@ function SnippetComponent(props: {
             {props.filename}
           </span>
         )}
-        <div
-          class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight"
-          data-example-position={props.firstOfFile
-            ? "first"
-            : props.lastOfFile
-            ? "last"
-            : "middle"}
-        >
+        <div class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight">
           {props.snippet.code && (
             <div class="nocopy h-full markdown-body">
-              <pre class="highlight snippet-code language-ts">
+              <pre
+                class="highlight snippet-code language-ts"
+                data-example-position={props.firstOfFile
+                  ? "first"
+                  : props.lastOfFile
+                  ? "last"
+                  : "middle"}
+              >
                 <code
                   dangerouslySetInnerHTML={{ __html: props.snippet.code }}
                 ></code>
