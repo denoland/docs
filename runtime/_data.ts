@@ -154,6 +154,10 @@ export const sidebar = [
         id: "/runtime/reference/npm/",
       },
       "/runtime/reference/continuous_integration/",
+      {
+        label: "Environment variables",
+        id: "/runtime/reference/env_variables/",
+      },
       "/runtime/reference/deploying_and_embedding/",
       "/runtime/reference/wasm/",
       {
@@ -166,6 +170,10 @@ export const sidebar = [
       },
       "/runtime/reference/private_repositories/",
       "/runtime/reference/jsx/",
+      {
+        label: "Testing code in docs",
+        id: "/runtime/reference/documentation/",
+      },
       "/runtime/reference/tcp_udp_connections/",
       "/runtime/reference/migrate_deprecations/",
       {
@@ -197,16 +205,16 @@ export const sidebar = [
       {
         label: "Contributing to Deno",
         items: [
-          "/runtime/manual/references/contributing/",
-          "/runtime/manual/references/contributing/architecture/",
-          "/runtime/manual/references/contributing/building_from_source/",
-          "/runtime/manual/references/contributing/profiling/",
-          "/runtime/manual/references/contributing/release_schedule/",
-          "/runtime/manual/references/contributing/style_guide/",
-          "/runtime/manual/references/contributing/web_platform_tests/",
+          "/runtime/contributing/contribute/",
+          "/runtime/contributing/architecture/",
+          "/runtime/contributing/building_from_source/",
+          "/runtime/contributing/profiling/",
+          "/runtime/contributing/release_schedule/",
+          "/runtime/contributing/style_guide/",
+          "/runtime/contributing/web_platform_tests/",
         ],
       },
-      "/runtime/manual/help/",
+      "/runtime/help/",
     ],
   },
   {
@@ -220,6 +228,7 @@ export const sidebar = [
           "/runtime/tutorials/read_write_files/",
           "/runtime/tutorials/hashbang/",
           "/runtime/tutorials/cjs_to_esm/",
+          "/runtime/tutorials/connecting_to_databases/",
         ],
       },
       {

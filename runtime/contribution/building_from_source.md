@@ -1,7 +1,8 @@
 ---
-title: "Building `deno` from Source"
+title: "Building deno from Source"
 oldUrl:
  - /runtime/references/contributing/building_from_source/
+ - /runtime/manual/references/contributing/building_from_source/
 ---
 
 Below are instructions on how to build Deno from source. If you just want to use
@@ -11,8 +12,8 @@ chapter).
 
 ## Cloning the Repository
 
-> Deno uses submodules, so you must remember to clone using
-> `--recurse-submodules`.
+:::note Deno uses submodules, so you must remember to clone using
+`--recurse-submodules`. :::
 
 **Linux(Debian)**/**Mac**/**WSL**:
 
@@ -35,9 +36,13 @@ git clone --recurse-submodules https://github.com/denoland/deno.git
 
 ### Rust
 
-> Deno requires a specific release of Rust. Deno may not support building on
-> other versions, or on the Rust Nightly Releases. The version of Rust required
-> for a particular release is specified in the `rust-toolchain.toml` file.
+:::note
+
+Deno requires a specific release of Rust. Deno may not support building on other
+versions, or on the Rust Nightly Releases. The version of Rust required for a
+particular release is specified in the `rust-toolchain.toml` file.
+
+:::
 
 [Update or Install Rust](https://www.rust-lang.org/tools/install). Check that
 Rust installed/updated correctly:
@@ -49,10 +54,10 @@ cargo -V
 
 ### Native Compilers and Linkers
 
-> Many components of Deno require a native compiler to build optimized native
-> functions.
+Many components of Deno require a native compiler to build optimized native
+functions.
 
-**Linux(Debian)/WSL**
+#### Linux(Debian)/WSL
 
 ```shell
 wget https://apt.llvm.org/llvm.sh
@@ -61,7 +66,7 @@ chmod +x llvm.sh
 apt install --install-recommends -y cmake libglib2.0-dev
 ```
 
-**Mac**:
+#### Mac
 
 Mac users must have the _XCode Command Line Tools_ installed.
 ([XCode](https://developer.apple.com/xcode/) already includes the _XCode Command
@@ -74,7 +79,7 @@ _Command Line Tools_.
 brew install cmake
 ```
 
-**Mac M1/M2**:
+#### Mac M1/M2
 
 For Apple aarch64 users `lld` must be installed.
 
@@ -83,7 +88,7 @@ brew install llvm
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
 
-**Windows**:
+#### Windows
 
 1. Get [VS Community 2019](https://www.visualstudio.com/downloads/) with the
    "Desktop development with C++" toolkit and make sure to select the following
@@ -109,39 +114,43 @@ brew install llvm
 
 ### Protobuf Compiler
 
-> Building Deno requires the
-> [Protocol Buffers compiler](https://grpc.io/docs/protoc-installation/).
+Building Deno requires the
+[Protocol Buffers compiler](https://grpc.io/docs/protoc-installation/).
 
-**Linux(Debian)**/**WSL**:
+#### Linux(Debian)/WSL
 
 ```sh
 apt install -y protobuf-compiler
 protoc --version  # Ensure compiler version is 3+
 ```
 
-**Mac**:
+#### Mac
 
 ```sh
 brew install protobuf
 protoc --version  # Ensure compiler version is 3+
 ```
 
-**Windows**
+#### Windows
 
 Windows users can download the latest binary release from
 [GitHub](https://github.com/protocolbuffers/protobuf/releases/latest).
 
 ## Python 3
 
-> Deno requires [Python 3](https://www.python.org/downloads) for running WPT
-> tests. Ensure that a suffix-less `python`/`python.exe` exists in your `PATH`
-> and it refers to Python 3.
+:::note
+
+Deno requires [Python 3](https://www.python.org/downloads) for running WPT
+tests. Ensure that a suffix-less `python`/`python.exe` exists in your `PATH` and
+it refers to Python 3.
+
+:::
 
 ## Building Deno
 
-The easiest way to build Deno is by using a precompiled version of V8:
+The easiest way to build Deno is by using a precompiled version of V8.
 
-> for WSL make sure you have sufficient memory allocated in .wslconfig
+_For WSL make sure you have sufficient memory allocated in `.wslconfig`_
 
 ```console
 cargo build -vv
@@ -219,7 +228,7 @@ If you are working on a change-set for few days, you may prefer to add the patch
 to your `Cargo.toml` file (just make sure you remove this before staging your
 changes):
 
-```
+```sh
 [patch.crates-io]
 deno_ast = { path = "../deno_ast" }
 ```

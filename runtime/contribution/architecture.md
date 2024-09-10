@@ -1,5 +1,6 @@
 ---
 title: "Internal Details"
+oldUrl: /runtime/manual/references/contributing/architecture/
 ---
 
 ## Deno and Linux analogy

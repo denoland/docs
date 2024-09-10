@@ -1,5 +1,6 @@
 ---
 title: "Profiling"
+oldUrl: /runtime/manual/references/contributing/profiling/
 ---
 
 ## Perf profiling:

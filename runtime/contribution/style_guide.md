@@ -1,13 +1,15 @@
 ---
 title: "Deno Style Guide"
-oldUrl: /runtime/manual/contributing/style_guide/
+oldUrl:
+- /runtime/manual/contributing/style_guide/
+- /runtime/manual/references/contributing/style_guide/
 ---
 
-> ⚠️ Note that this is the style guide for **internal runtime code** in the Deno
-> runtime, and in the Deno standard library. This is not meant as a general
-> style guide for users of Deno.
+:::note Note that this is the style guide for **internal runtime code** in the
+Deno runtime, and in the Deno standard library. This is not meant as a general
+style guide for users of Deno. :::
 
-## Copyright Headers
+### Copyright Headers
 
 Most modules in the repository should have the following copyright header:
 
@@ -18,16 +20,16 @@ Most modules in the repository should have the following copyright header:
 If the code originates elsewhere, ensure that the file has the proper copyright
 headers. We only allow MIT, BSD, and Apache licensed code.
 
-## Use underscores, not dashes in filenames.
+### Use underscores, not dashes in filenames
 
 Example: Use `file_server.ts` instead of `file-server.ts`.
 
-## Add tests for new features.
+### Add tests for new features
 
 Each module should contain or be accompanied by tests for its public
 functionality.
 
-## TODO Comments
+### TODO Comments
 
 TODO comments should usually include an issue or the author's github username in
 parentheses. Example:
@@ -38,29 +40,29 @@ parentheses. Example:
 // FIXME(#349): Sometimes panics.
 ```
 
-## Meta-programming is discouraged. Including the use of Proxy.
+### Meta-programming is discouraged. Including the use of Proxy
 
 Be explicit, even when it means more code.
 
 There are some situations where it may make sense to use such techniques, but in
 the vast majority of cases it does not.
 
-## Inclusive code
+### Inclusive code
 
 Please follow the guidelines for inclusive code outlined at
 https://chromium.googlesource.com/chromium/src/+/HEAD/styleguide/inclusive_code.md.
 
-## Rust
+### Rust
 
 Follow Rust conventions and be consistent with existing code.
 
-## TypeScript
+### TypeScript
 
 The TypeScript portion of the code base is the standard library `std`.
 
-### Use TypeScript instead of JavaScript.
+#### Use TypeScript instead of JavaScript
 
-### Do not use the filename `index.ts`/`index.js`.
+#### Do not use the filename `index.ts`/`index.js`
 
 Deno does not treat "index.js" or "index.ts" in a special way. By using these
 filenames, it suggests that they can be left out of the module specifier when
@@ -70,7 +72,7 @@ If a directory of code needs a default entry point, use the filename `mod.ts`.
 The filename `mod.ts` follows Rust's convention, is shorter than `index.ts`, and
 doesn't come with any preconceived notions about how it might work.
 
-### Exported functions: max 2 args, put the rest into an options object.
+#### Exported functions: max 2 args, put the rest into an options object
 
 When designing function interfaces, stick to the following rules.
 
@@ -188,7 +190,7 @@ flexibly. See examples like
 See also
 [this post](https://twitter.com/jaffathecake/status/1646798390355697664).
 
-### Export all interfaces that are used as parameters to an exported member
+#### Export all interfaces that are used as parameters to an exported member
 
 Whenever you are using interfaces that are included in the parameters or return
 type of an exported member, you should export the interface that is used. Here
@@ -210,19 +212,19 @@ export { createPerson } from "./my_file.ts";
 export type { Person } from "./my_file.ts";
 ```
 
-### Minimize dependencies; do not make circular imports.
+#### Minimize dependencies; do not make circular imports
 
 Although `std` has no external dependencies, we must still be careful to keep
 internal dependencies simple and manageable. In particular, be careful not to
 introduce circular imports.
 
-### If a filename starts with an underscore: `_foo.ts`, do not link to it.
+#### If a filename starts with an underscore: `_foo.ts`, do not link to it
 
 There may be situations where an internal module is necessary but its API is not
 meant to be stable or linked to. In this case prefix it with an underscore. By
 convention, only files in its own directory should import it.
 
-### Use JSDoc for exported symbols.
+#### Use JSDoc for exported symbols
 
 We strive for complete documentation. Every exported symbol ideally should have
 a documentation line.
@@ -292,7 +294,7 @@ Code examples should not contain additional comments and must not be indented.
 It is already inside a comment. If it needs further comments, it is not a good
 example.
 
-### Resolve linting problems using directives
+#### Resolve linting problems using directives
 
 Currently, the building process uses `dlint` to validate linting problems in the
 code. If the task requires code that is non-conformant to linter use
@@ -306,13 +308,13 @@ let x: any;
 This ensures the continuous integration process doesn't fail due to linting
 problems, but it should be used scarcely.
 
-### Each module should come with a test module.
+#### Each module should come with a test module
 
 Every module with public functionality `foo.ts` should come with a test module
 `foo_test.ts`. A test for a `std` module should go in `std/tests` due to their
 different contexts; otherwise, it should just be a sibling to the tested module.
 
-### Unit Tests should be explicit.
+#### Unit Tests should be explicit
 
 For a better understanding of the tests, function should be correctly named as
 it's prompted throughout the test command. Like:
@@ -335,7 +337,7 @@ Deno.test("foo() returns bar object", function () {
 Note: See [tracking issue](https://github.com/denoland/deno_std/issues/3754) for
 more information.
 
-### Top-level functions should not use arrow syntax.
+#### Top-level functions should not use arrow syntax
 
 Top-level functions should use the `function` keyword. Arrow syntax should be
 limited to closures.
@@ -356,56 +358,56 @@ export function foo(): string {
 }
 ```
 
-### Error Messages
+#### Error Messages
 
 User-facing error messages raised from JavaScript / TypeScript should be clear,
 concise, and consistent. Error messages should be in sentence case but should
 not end with a period. Error messages should be free of grammatical errors and
 typos and written in American English.
 
-> ⚠️ Note that the error message style guide is a work in progress, and not all
-> the error messages have been updated to conform to the current styles. Error
-> message styles that should be followed:
+:::note Note that the error message style guide is a work in progress, and not
+all the error messages have been updated to conform to the current styles. :::
+
+Error message styles that should be followed:
 
 1. Messages should start with an upper case:
 
-```
+```sh
 Bad: cannot parse input
 Good: Cannot parse input
 ```
 
 2. Messages should not end with a period:
 
-```
+```sh
 Bad: Cannot parse input.
 Good: Cannot parse input
 ```
 
 3. Message should use quotes for values for strings:
 
-```
+```sh
 Bad: Cannot parse input hello, world
 Good: Cannot parse input "hello, world"
-Good: Attempting to grow buffer by 10 bytes, which would exceed the maximum size of 100 bytes
 ```
 
 4. Message should state the action that lead to the error:
 
-```
+```sh
 Bad: Invalid input x
 Good: Cannot parse input x
 ```
 
 5. Active voice should be used:
 
-```
+```sh
 Bad: Input x cannot be parsed
 Good: Cannot parse input x
 ```
 
 6. Messages should not use contractions:
 
-```
+```sh
 Bad: Can't parse input x
 Good: Cannot parse input x
 ```
@@ -413,7 +415,7 @@ Good: Cannot parse input x
 7. Messages should use a colon when providing additional information. Periods
    should never be used. Other punctuation may be used as needed:
 
-```
+```sh
 Bad: Cannot parse input x. value is empty
 Good: Cannot parse input x: value is empty
 ```
@@ -421,13 +423,13 @@ Good: Cannot parse input x: value is empty
 8. Additional information should describe the current state, if possible, it
    should also describe the desired state in an affirmative voice:
 
-```
+```sh
 Bad: Cannot compute the square root for x: value must not be negative
 Good: Cannot compute the square root for x: current value is ${x}
 Better: Cannot compute the square root for x as x must be >= 0: current value is ${x}
 ```
 
-### `std`
+### std
 
 #### Do not depend on external code.
 
@@ -448,7 +450,7 @@ Maintain browser compatibility for such a module by either not using the global
 `Deno` namespace or feature-testing for it. Make sure any new dependencies are
 also browser compatible.
 
-#### Prefer `#` over `private`
+#### Prefer # over private keyword
 
 We prefer the private fields (`#`) syntax over `private` keyword of TypeScript
 in the standard modules codebase. The private fields make the properties and

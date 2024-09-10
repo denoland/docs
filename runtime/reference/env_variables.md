@@ -1,10 +1,11 @@
 ---
 title: "Environment variables"
+oldUrl: /runtime/manual/basics/env_variables/
 ---
 
 There are a few ways to use environment variables in Deno:
 
-## Built-in `Deno.env`
+## Built-in Deno.env
 
 The Deno runtime offers built-in support for environment variables with
 [`Deno.env`](https://docs.deno.com/api/deno/~/Deno.env).
@@ -20,7 +21,7 @@ console.log(Deno.env.get("FIREBASE_AUTH_DOMAIN")); // firebasedomain.com
 console.log(Deno.env.has("FIREBASE_AUTH_DOMAIN")); // true
 ```
 
-## `.env` file
+## .env file
 
 Deno supports `.env` files. You can cause Deno to read environment variables
 from `.env` using the `--env` flag: `deno run --env <script>`. This will read
