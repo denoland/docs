@@ -1,3 +1,7 @@
+---
+title: "Terms and Conditions"
+---
+
 **DENO TERMS AND CONDITIONS** 09 September 2024
 
 These Terms and Conditions (these “Terms”) are a legal agreement between you and
