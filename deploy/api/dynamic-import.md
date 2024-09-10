@@ -76,7 +76,7 @@ specifier starts with `./`.
 
 ```ts
 // ❌ Doesn't work because the analyzer can't statically determine if the
-// specifier starts with `./` or not in thie case.
+// specifier starts with `./` or not in this case.
 // Compare this to the previous example. Only difference is whether to put
 // `./` in the template literal or in the variable.
 const rand = Math.random();

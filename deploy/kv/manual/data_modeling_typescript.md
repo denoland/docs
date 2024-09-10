@@ -62,7 +62,7 @@ const a: Author = {
 await kv.set(["authors", a.username], a);
 ```
 
-When retreiving this same object from Deno KV, however, it won't by default have
+When retrieving this same object from Deno KV, however, it won't by default have
 type information associated with it. If you know the shape of the object that
 was stored for the key, however, you can use
 [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions)
