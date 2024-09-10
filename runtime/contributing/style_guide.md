@@ -7,9 +7,9 @@ oldUrl:
 
 :::note
 
-Note that this is the style guide for **internal runtime code** in the
-Deno runtime, and in the Deno standard library. This is not meant as a general
-style guide for users of Deno.
+Note that this is the style guide for **internal runtime code** in the Deno
+runtime, and in the Deno standard library. This is not meant as a general style
+guide for users of Deno.
 
 :::
 
@@ -371,8 +371,8 @@ typos and written in American English.
 
 :::note
 
-Note that the error message style guide is a work in progress, and not
-all the error messages have been updated to conform to the current styles.
+Note that the error message style guide is a work in progress, and not all the
+error messages have been updated to conform to the current styles.
 
 :::
 
