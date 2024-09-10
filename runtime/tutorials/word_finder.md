@@ -19,7 +19,7 @@ for any letter that isn't present in the pattern. `_` can stand for any letter.
 For example, the pattern `c?t` matches "cat" and "cut". The pattern `go?d`
 matches the words "goad" and "gold" (but not "good").
 
-![Untitled](./images/word_finder.png)
+![Word finder UI](./images/word_finder.png)
 
 ## Building the View
 

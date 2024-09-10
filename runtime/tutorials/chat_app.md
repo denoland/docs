@@ -10,7 +10,7 @@ through web sockets. After a client chooses a username, they can then start
 sending group messages to other online clients. Each client also displays the
 list of currently active users.
 
-![Untitled](./images/chat_app_render.png)
+![Chat app UI](./images/chat_app_render.png)
 
 ## Building the View
 
