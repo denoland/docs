@@ -304,12 +304,12 @@ regular basis.
 
 Please reach out to [support@deno.com](mailto:support@deno.com) for any
 questions, complaints, or requests regarding this Privacy Policy, and include in
-the subject line “Privacy Policy, or contact us by mail at:
+the subject line “Privacy Policy", or contact us by mail at:
 
 Deno Land Inc.\
 1111 6th Ave Ste 550\
 PMB 702973\
 San Diego CA, 92101\
-USA\
+USA
 
 **© 2024 Deno Land Inc. All rights reserved.**
