@@ -60,17 +60,17 @@ To access private repositories on GitHub, you would need to issue yourself a
 _personal access token_. You do this by logging into GitHub and going under
 _Settings -> Developer settings -> Personal access tokens_:
 
-![Personal access tokens settings on GitHub](../images/private-pat.png)
+![Personal access tokens settings on GitHub](./images/private-pat.png)
 
 You would then choose to _Generate new token_ and give your token a description
 and appropriate access:
 
-![Creating a new personal access token on GitHub](../images/private-github-new-token.png)
+![Creating a new personal access token on GitHub](./images/private-github-new-token.png)
 
 And once created GitHub will display the new token a single time, the value of
 which you would want to use in the environment variable:
 
-![Display of newly created token on GitHub](../images/private-github-token-display.png)
+![Display of newly created token on GitHub](./images/private-github-token-display.png)
 
 In order to access modules that are contained in a private repository on GitHub,
 you would want to use the generated token in the `DENO_AUTH_TOKENS` environment

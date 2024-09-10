@@ -70,7 +70,7 @@ services:
 Let's test this locally by running `docker compose -f docker-compose.yml build`,
 then `docker compose up`, and going to `localhost:8000`.
 
-![hello world from localhost](../../images/how-to/aws-lightsail/hello-world-from-localhost.png)
+![hello world from localhost](./images/how-to/aws-lightsail/hello-world-from-localhost.png)
 
 It works!
 
@@ -104,7 +104,7 @@ docker push {{ username }}/deno-on-aws-lightsail
 After that succeeds, you should be able to see the new image on your Docker Hub
 repository:
 
-![new image on docker hub](../../images/how-to/aws-lightsail/new-image-on-docker-hub.png)
+![new image on docker hub](./images/how-to/aws-lightsail/new-image-on-docker-hub.png)
 
 ## Create and Deploy to a Lightsail Container
 
@@ -126,14 +126,14 @@ created.
 
 The full form should look like below:
 
-![create container service interface](../../images/how-to/aws-lightsail/create-container-service-on-aws.png)
+![create container service interface](./images/how-to/aws-lightsail/create-container-service-on-aws.png)
 
 When you're ready, click "Create container service".
 
 After a few moments, your new container should be deployed. Click on the public
 address and you should see your Deno app:
 
-![Hello world from Deno and AWS Lightsail](../../images/how-to/aws-lightsail/hello-world-from-deno-and-aws-lightsail.png)
+![Hello world from Deno and AWS Lightsail](./images/how-to/aws-lightsail/hello-world-from-deno-and-aws-lightsail.png)
 
 ## Automate using GitHub Actions
 
@@ -287,4 +287,4 @@ with the config settings in `container.json`.
 When you push to GitHub and the Action succeeds, you'll be able to see your new
 Deno app on AWS:
 
-![deno on aws](../../images/how-to/aws-lightsail/hello-world-from-deno-and-aws-lightsail.png)
+![deno on aws](./images/how-to/aws-lightsail/hello-world-from-deno-and-aws-lightsail.png)

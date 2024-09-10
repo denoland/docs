@@ -74,7 +74,7 @@ services:
 Let's test this locally by running `docker compose -f docker-compose.yml build`,
 then `docker compose up`, and going to `localhost:8000`.
 
-![Hello from localhost](../../images/how-to/google-cloud-run/hello-world-from-localhost.png)
+![Hello from localhost](./images/how-to/google-cloud-run/hello-world-from-localhost.png)
 
 It works!
 
@@ -87,7 +87,7 @@ Before we can use it, go to GCP's
 "Create repository". You'll be asked for a name (`deno-repository`) and a region
 (`us-central1`). Then click "Create".
 
-![New repository in Google Artifact Repository](../../images/how-to/google-cloud-run/new-repository-in-google-artifact-repository.png)
+![New repository in Google Artifact Repository](./images/how-to/google-cloud-run/new-repository-in-google-artifact-repository.png)
 
 ### Build, Tag, and Push to Artifact Registry
 
@@ -127,7 +127,7 @@ _[More info on how to push and pull images to Google Artifact Registry](https://
 
 Your image should now appear in your Google Artifact Registry!
 
-![Image in Google Artifact Registry](../../images/how-to/google-cloud-run/image-in-google-artifact-registry.png)
+![Image in Google Artifact Registry](./images/how-to/google-cloud-run/image-in-google-artifact-registry.png)
 
 ### Create a Google Cloud Run Service
 
@@ -145,7 +145,7 @@ sure the port is `8000`.
 
 When it's done, your app should now be live:
 
-![Hello from Google Cloud Run](../../images/how-to/google-cloud-run/hello-from-google-cloud-run.png)
+![Hello from Google Cloud Run](./images/how-to/google-cloud-run/hello-from-google-cloud-run.png)
 
 Awesome!
 
@@ -162,7 +162,7 @@ For this example, the command is:
 gcloud run deploy hello-from-deno --image=us-central1-docker.pkg.dev/deno-app-368305/deno-repository/deno-cloudrun-image --region=us-central1 --allow-unauthenticated
 ```
 
-![Hello from Google Cloud Run](../../images/how-to/google-cloud-run/hello-from-google-cloud-run.png)
+![Hello from Google Cloud Run](./images/how-to/google-cloud-run/hello-from-google-cloud-run.png)
 
 Success!
 
