@@ -1,5 +1,6 @@
 ---
 title: "Where To Get Help"
+old_url: /runtime/manual/help/
 ---
 
 Stuck? Lost? Get Help from the Community.

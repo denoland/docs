@@ -1,5 +1,6 @@
 ---
 title: "Web Platform Test"
+oldUrl: /runtime/manual/references/contributing/web_platform_tests/
 ---
 
 Deno uses a custom test runner for Web Platform Tests. It can be found at

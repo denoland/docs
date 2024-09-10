@@ -1,5 +1,6 @@
 ---
 title: "Release Schedule"
+oldUrl: /runtime/manual/references/contributing/release_schedule/
 ---
 
 A new minor release for the `deno` cli is released every month, on the third

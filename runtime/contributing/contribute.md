@@ -2,6 +2,7 @@
 title: "Contributing"
 oldUrl:
   - /runtime/manual/contributing/
+  - /runtime/manual/references/contributing/
 ---
 
 We welcome and appreciate all contributions to Deno.
@@ -20,12 +21,12 @@ To help you decide which repository might be the best to start contributing
 (and/or falls into your interest), here's a short comparison (**codebases
 primarily comprise the languages in bold**):
 
-### [`deno`](https://github.com/denoland/deno)
+### [deno](https://github.com/denoland/deno)
 
 This is the main repository that provides the `deno` CLI.
 
 If you want to fix a bug or add a new feature to `deno` this is the repository
-you want to contribute to.
+to contribute to.
 
 Some systems, including a large part of the Node.js compatibility layer are
 implemented in JavaScript and TypeScript modules. These are a good place to
@@ -36,8 +37,8 @@ your `cargo` flags. This is a special development mode where the JS/TS sources
 are not included in the binary but read at runtime, meaning the binary will not
 have to be rebuilt if they are changed.
 
-> To use the commands below, you need to first install the necessary tools on
-> your system as described [here](building_from_source).
+To use the commands below, you need to first install the necessary tools on your
+system as described [here](building_from_source).
 
 ```sh
 # cargo build
@@ -78,51 +79,51 @@ To use a development version of the LSP in VSCode:
 
 Languages: **Rust**, **JavaScript**, **TypeScript**
 
-### [`deno_std`](https://github.com/denoland/deno_std)
+### [deno_std](https://github.com/denoland/deno_std)
 
 The standard library for Deno.
 
 Languages: **TypeScript**, WebAssembly
 
-### [`fresh`](https://github.com/denoland/fresh)
+### [fresh](https://github.com/denoland/fresh)
 
 The next-gen web framework.
 
 Languages: **TypeScript**, TSX
 
-### [`deno_lint`](https://github.com/denoland/deno_lint)
+### [deno_lint](https://github.com/denoland/deno_lint)
 
 Linter that powers `deno lint` subcommand.
 
 Languages: **Rust**
 
-### [`deno_doc`](https://github.com/denoland/deno_doc)
+### [deno_doc](https://github.com/denoland/deno_doc)
 
 Documentation generator that powers `deno doc` subcommand, and reference
 documentation on https://docs.deno.com/api, and https://jsr.io.
 
 Languages: **Rust**
 
-### [`rusty_v8`](https://github.com/denoland/rusty_v8)
+### [rusty_v8](https://github.com/denoland/rusty_v8)
 
 Rust bindings for the V8 JavaScript engine. Very technical and low-level.
 
 Languages: **Rust**
 
-### [`serde_v8`](https://github.com/denoland/deno_core/tree/main/serde_v8)
+### [serde_v8](https://github.com/denoland/deno_core/tree/main/serde_v8)
 
 Library that provides bijection layer between V8 and Rust objects. Based on
 [`serde`](https://crates.io/crates/serde) library. Very technical and low-level.
 
 Languages: **Rust**
 
-### [`deno_docker`](https://github.com/denoland/deno_docker)
+### [deno_docker](https://github.com/denoland/deno_docker)
 
 Official Docker images for Deno.
 
 ## General remarks
 
-- Read the [style guide](./style_guide.md).
+- Read the [style guide](/runtime/contribution/style_guide).
 
 - Please don't make [the benchmarks](https://deno.land/benchmarks) worse.
 

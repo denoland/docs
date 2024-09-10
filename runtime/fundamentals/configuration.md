@@ -1,6 +1,10 @@
 ---
 title: "deno.json and package.json"
-oldUrl: /runtime/manual/getting_started/configuration_file/
+oldUrl:
+- /runtime/manual/getting_started/configuration_file/
+- /runtime/manual/basics/modules/import_maps/
+- /runtime/basics/import_maps/
+- /runtime/manual/linking_to_external_code/import_maps
 ---
 
 You can configure Deno using a `deno.json` file. This file can be used to
@@ -73,6 +77,51 @@ const app = express();
 ```
 
 Read more about [module imports](./modules.md)
+
+### Custom path mappings
+
+The import map in `deno.json` can be used for more general path mapping of
+specifiers. You can map an exact specifiers to a third party module or a file
+directly, or you can map a part of an import specifier to a directory.
+
+```jsonc title="deno.jsonc"
+{
+  "imports": {
+    // Map to an exact file
+    "foo": "./some/long/path/foo.ts",
+    // Map to a directory, usage: "bar/file.ts"
+    "bar/": "./some/folder/bar/"
+  }
+}
+```
+
+Usage:
+
+```ts
+import * as foo from "foo";
+import * as bar from "bar/file.ts";
+```
+
+Path mapping of import specifies is commonly used in larger code bases for
+brevity.
+
+To use your project root for absolute imports:
+
+```json title="deno.json"
+{
+  "imports": {
+    "/": "./",
+    "./": "./"
+  }
+}
+```
+
+```ts title="main.ts"
+import { MyUtil } from "/util.ts";
+```
+
+This causes import specifiers starting with `/` to be resolved relative to the
+import map's URL or file path.
 
 ## Tasks
 
