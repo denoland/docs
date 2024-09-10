@@ -6,7 +6,7 @@ Deno Land Inc is a corporation registered in Delaware, USA doing business as
 "Deno". This privacy policy will explain how our organization uses the personal
 data we collect from you when you use our website.
 
-This privacy policy applies to all services provided at deno.com and deno.land.
+This privacy policy applies to all services provided at deno\.com and deno.land.
 
 Topics:
 
