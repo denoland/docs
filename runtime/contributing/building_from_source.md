@@ -12,8 +12,12 @@ chapter).
 
 ## Cloning the Repository
 
-:::note Deno uses submodules, so you must remember to clone using
-`--recurse-submodules`. :::
+:::note
+
+Deno uses submodules, so you must remember to clone using
+`--recurse-submodules`.
+
+:::
 
 **Linux(Debian)**/**Mac**/**WSL**:
 

@@ -5,9 +5,13 @@ oldUrl:
 - /runtime/manual/references/contributing/style_guide/
 ---
 
-:::note Note that this is the style guide for **internal runtime code** in the
+:::note
+
+Note that this is the style guide for **internal runtime code** in the
 Deno runtime, and in the Deno standard library. This is not meant as a general
-style guide for users of Deno. :::
+style guide for users of Deno.
+
+:::
 
 ### Copyright Headers
 
@@ -365,8 +369,12 @@ concise, and consistent. Error messages should be in sentence case but should
 not end with a period. Error messages should be free of grammatical errors and
 typos and written in American English.
 
-:::note Note that the error message style guide is a work in progress, and not
-all the error messages have been updated to conform to the current styles. :::
+:::note
+
+Note that the error message style guide is a work in progress, and not
+all the error messages have been updated to conform to the current styles.
+
+:::
 
 Error message styles that should be followed:
 
