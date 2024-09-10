@@ -42,7 +42,6 @@ Configuration** from the VS Code
 
 ![screenshot of the command palette with Deno: Initialize Workspace Configuration](./images/command_palette.png)]
 
-
 This will activate a helper which will ask if you want to enable linting and the
 Deno unstable APIs for the project. This command will instruct VS Code to store
 these settings in the workspace configuration (your workspace root
