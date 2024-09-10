@@ -1,5 +1,5 @@
 ---
-title: 'An Implementation of the Unix "cat" Program'
+title: 'Writing a Unix "cat" Program'
 oldUrl:
   - /runtime/manual/examples/unix_cat/
 ---
@@ -24,10 +24,7 @@ oldUrl:
 In this program each command-line argument is assumed to be a filename, the file
 is opened, and printed to stdout (e.g. the console).
 
-```ts
-/**
- * cat.ts
- */
+```ts title="cat.ts"
 for (const filename of Deno.args) {
   const file = await Deno.open(filename);
   await file.readable.pipeTo(Deno.stdout.writable, { preventClose: true });
@@ -37,5 +34,5 @@ for (const filename of Deno.args) {
 To run the program:
 
 ```shell
-deno run --allow-read https://deno.land/std@0.190.0/examples/cat.ts /etc/passwd
+deno run --allow-read cat.ts file1 file2
 ```

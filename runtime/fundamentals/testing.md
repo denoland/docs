@@ -29,14 +29,14 @@ To define a test in Deno, you use the `Deno.test()` function. Here are some
 examples:
 
 ```ts title="my_test.ts"
-import { assertEquals } from "@std/assert";
+import { assertEquals } from "jsr:@std/assert";
 
 Deno.test("simple test", () => {
   const x = 1 + 2;
   assertEquals(x, 3);
 });
 
-import { delay } from "@std/async";
+import { delay } from "jsr:@std/async";
 
 Deno.test("async test", async () => {
   const x = 1 + 2;

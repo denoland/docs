@@ -148,52 +148,47 @@ export const sidebar = [
       },
       "/runtime/reference/deno_namespace_apis/",
       "/runtime/reference/web_platform_apis/",
-      "/runtime/reference/continuous_integration/",
       "/runtime/reference/node/",
       {
         label: "npm packages",
         id: "/runtime/reference/npm/",
       },
-      "/runtime/reference/wasm/",
-      "/runtime/reference/tcp_udp_connections/",
-    ],
-  },
-  {
-    title: "Development Tools",
-    items: [
+      "/runtime/reference/continuous_integration/",
       {
-        label: "Visual Studio Code",
-        items: [
-          "/runtime/manual/references/vscode_deno/",
-          "/runtime/manual/references/vscode_deno/testing_api/",
-        ],
+        label: "Environment variables",
+        id: "/runtime/reference/env_variables/",
       },
+      "/runtime/reference/deploying_and_embedding/",
+      "/runtime/reference/wasm/",
       {
         label: "Language Server",
-        items: [
-          "/runtime/manual/advanced/language_server/overview/",
-          "/runtime/manual/advanced/language_server/imports/",
-          "/runtime/manual/advanced/language_server/testing_api/",
-        ],
+        id: "/runtime/reference/lsp/",
+      },
+      {
+        label: "Deno & VS Code",
+        id: "/runtime/reference/vscode/",
+      },
+      "/runtime/reference/private_repositories/",
+      "/runtime/reference/jsx/",
+      {
+        label: "Testing code in docs",
+        id: "/runtime/reference/documentation/",
+      },
+      "/runtime/reference/tcp_udp_connections/",
+      "/runtime/reference/migrate_deprecations/",
+      {
+        label: "Full API Reference",
+        href: "/api/deno",
+      },
+      {
+        label: "Std. Library",
+        href: "https://jsr.io/@std",
       },
     ],
   },
   {
     title: "Advanced Topics",
     items: [
-      "/runtime/manual/advanced/private_repositories/",
-      {
-        label: "Deploying & Embedding Deno",
-        items: [
-          "/runtime/manual/advanced/deploying_deno/",
-          "/runtime/manual/advanced/deploying_deno/aws_lightsail/",
-          "/runtime/manual/advanced/deploying_deno/cloudflare_workers/",
-          "/runtime/manual/advanced/deploying_deno/digital_ocean/",
-          "/runtime/manual/advanced/deploying_deno/google_cloud_run/",
-          "/runtime/manual/advanced/deploying_deno/kinsta/",
-          "/runtime/manual/advanced/embedding_deno/",
-        ],
-      },
       {
         label: "TypeScript in Deno",
         items: [
@@ -202,8 +197,6 @@ export const sidebar = [
           "/runtime/manual/advanced/typescript/faqs/",
         ],
       },
-      "/runtime/manual/advanced/migrate_deprecations/",
-      "/runtime/manual/advanced/jsx/",
     ],
   },
   {
@@ -212,16 +205,16 @@ export const sidebar = [
       {
         label: "Contributing to Deno",
         items: [
-          "/runtime/manual/references/contributing/",
-          "/runtime/manual/references/contributing/architecture/",
-          "/runtime/manual/references/contributing/building_from_source/",
-          "/runtime/manual/references/contributing/profiling/",
-          "/runtime/manual/references/contributing/release_schedule/",
-          "/runtime/manual/references/contributing/style_guide/",
-          "/runtime/manual/references/contributing/web_platform_tests/",
+          "/runtime/contributing/contribute/",
+          "/runtime/contributing/architecture/",
+          "/runtime/contributing/building_from_source/",
+          "/runtime/contributing/profiling/",
+          "/runtime/contributing/release_schedule/",
+          "/runtime/contributing/style_guide/",
+          "/runtime/contributing/web_platform_tests/",
         ],
       },
-      "/runtime/manual/help/",
+      "/runtime/help/",
     ],
   },
   {
@@ -235,6 +228,7 @@ export const sidebar = [
           "/runtime/tutorials/read_write_files/",
           "/runtime/tutorials/hashbang/",
           "/runtime/tutorials/cjs_to_esm/",
+          "/runtime/tutorials/connecting_to_databases/",
         ],
       },
       {
@@ -248,6 +242,11 @@ export const sidebar = [
           "/runtime/tutorials/os_signals/",
           "/runtime/tutorials/file_system_events/",
           "/runtime/tutorials/module_metadata/",
+          "/runtime/tutorials/aws_lightsail/",
+          "/runtime/tutorials/cloudflare_workers/",
+          "/runtime/tutorials/digital_ocean/",
+          "/runtime/tutorials/google_cloud_run/",
+          "/runtime/tutorials/kinsta/",
         ],
       },
       {
@@ -267,19 +266,6 @@ export const sidebar = [
       {
         label: "More on Deno by Example",
         href: "/examples",
-      },
-    ],
-  },
-  {
-    title: "Reference",
-    items: [
-      {
-        label: "Full API Reference",
-        href: "/api/deno",
-      },
-      {
-        label: "Std. Library",
-        href: "https://jsr.io/@std",
       },
     ],
   },
