@@ -237,11 +237,11 @@ You can control this behavior using the `nodeModulesDir` field in the
 
 You can set this field to following values:
 
-| Value      | Behavior                                                                                                                           |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `"none"`   | Don't use a local `node_modules` directory. Instead use global cache in `$DENO_DIR` that is automatically kept up to date by Deno. |
-| `"auto"`   | Use a local `node_modules` directory. The directory is automatically create and kept up to date by Deno.                           |
-| `"manual"` | Use a local `node_modules` direcory. User must keep this directory up to date manually, eg. using `deno install` or `npm install`. |
+| Value      | Behavior                                                                                                                            |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `"none"`   | Don't use a local `node_modules` directory. Instead use global cache in `$DENO_DIR` that is automatically kept up to date by Deno.  |
+| `"auto"`   | Use a local `node_modules` directory. The directory is automatically create and kept up to date by Deno.                            |
+| `"manual"` | Use a local `node_modules` directory. User must keep this directory up to date manually, eg. using `deno install` or `npm install`. |
 
 It is not required to specify this setting, the following defaults are applied:
 

@@ -102,6 +102,37 @@ Use the `--trace-leaks` CLI flag instead.
 + deno test --trace-leaks
 ```
 
+### ---unstable
+
+Use granular unstable flags (`--unstable-*`) or configuration options instead.
+See
+[Unstable Feature Flags](https://docs.deno.com/runtime/reference/cli/unstable_flags/)
+for reference.
+
+```ts
+// kv.ts
+const kv = await Deno.openKv();
+
+// ...
+```
+
+```diff
+- deno run --unstable kv.ts
++ deno run --unstable-kv kv.ts
+```
+
+Or
+
+```diff
+{
++ "unstable": ["kv"]
+}
+```
+
+See the
+[Deno 1.40 Blog Post](https://deno.com/blog/v1.40#changes-to-how-we-handle-unstable-features)
+for details.
+
 ## Updated symbols
 
 ### Deno.Buffer
@@ -122,7 +153,7 @@ See [deno#9795][deno#9795] for details.
 
 ### Deno.Closer
 
-Use [Closer](https://jsr.io/@std/io/doc/types/~/Closer) from the Standard
+Use [`Closer`](https://jsr.io/@std/io/doc/types/~/Closer) from the Standard
 Library instead.
 
 ```diff
@@ -187,9 +218,9 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### Deno.ConnectTlsOptions.certChain
 
-Use
-[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
-instead.
+Use the
+[`cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
+option instead.
 
 ```diff
 const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
@@ -207,9 +238,9 @@ See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 
 ### Deno.ConnectTlsOptions.certFile
 
-Use
-[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
-instead.
+Use the
+[`cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
+option instead.
 
 ```diff
 const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
@@ -227,9 +258,9 @@ See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 
 ### Deno.ConnectTlsOptions.privateKey
 
-Use
-[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_key)
-instead.
+Use the
+[`key`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_key)
+option instead.
 
 ```diff
 const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
@@ -275,6 +306,34 @@ class Foo {
 
 See [deno#9294](https://github.com/denoland/deno/issues/9294) for details.
 
+### Deno.fdatasync()
+
+Use
+[`Deno.FsFile.prototype.syncData()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.syncData)
+instead.
+
+```diff
+  using file = await Deno.open("/foo/bar.txt", { read: true, write: true });
+
+  await file.write(new TextEncoder().encode("Hello, world!"));
+- await Deno.fdatasync(file.rid);
++ await file.syncData();
+```
+
+### Deno.fdatasyncSync()
+
+Use
+[`Deno.FsFile.prototype.syncDataSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.syncDataSync)
+instead.
+
+```diff
+  using file = Deno.openSync("/foo/bar.txt", { read: true, write: true });
+
+  file.writeSync(new TextEncoder().encode("Hello, world!"));
+- Deno.fdatasyncSync(file.rid);
++ file.syncDataSync();
+```
+
 ### Deno.File
 
 Use [`Deno.FsFile`](https://docs.deno.com/api/deno/~/Deno.FsFile) instead.
@@ -291,7 +350,7 @@ See [deno#13661](https://github.com/denoland/deno/issues/13661) for details.
 ### Deno.flock()
 
 Use
-[`Deno.FsFile.lock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lock)
+[`Deno.FsFile.prototype.lock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lock)
 instead.
 
 ```diff
@@ -306,7 +365,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### Deno.flockSync()
 
 Use
-[`Deno.FsFile.lockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lockSync)
+[`Deno.FsFile.prototype.lockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lockSync)
 instead.
 
 ```diff
@@ -321,7 +380,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### Deno.fstatSync()
 
 Use
-[`Deno.FsFile.statSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.statSync)
+[`Deno.FsFile.prototype.statSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.statSync)
 instead.
 
 ```diff
@@ -336,7 +395,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### Deno.fstat()
 
 Use
-[`Deno.FsFile.stat()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.stat)
+[`Deno.FsFile.prototype.stat()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.stat)
 instead.
 
 ```diff
@@ -388,10 +447,40 @@ Alternatively, you can close the watcher resource by explicitly calling
 + watcher.close();
 ```
 
+### Deno.fsync()
+
+Use
+[`Deno.FsFile.prototype.sync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.sync)
+instead.
+
+```diff
+  using file = await Deno.open("/foo/bar.txt", { read: true, write: true });
+
+  await file.write(new TextEncoder().encode("Hello, world!"));
+  await file.truncate(1);
+- await Deno.fsync(file.rid);
++ await file.sync();
+```
+
+### Deno.fsyncSync()
+
+Use
+[`Deno.FsFile.prototype.syncSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.syncSync)
+instead.
+
+```diff
+  using file = Deno.openSync("/foo/bar.txt", { read: true, write: true });
+
+  file.writeSync("new TextEncoder().encode("Hello, world!"));
+  file.truncateSync(1);
+- Deno.fsyncSync(file.rid);
++ file.syncSync();
+```
+
 ### Deno.ftruncateSync()
 
 Use
-[`Deno.FsFile.truncateSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncateSync)
+[`Deno.FsFile.prototype.truncateSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncateSync)
 instead.
 
 ```diff
@@ -406,7 +495,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### Deno.ftruncate()
 
 Use
-[`Deno.FsFile.truncate()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncate)
+[`Deno.FsFile.prototype.truncate()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncate)
 instead.
 
 ```diff
@@ -421,7 +510,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### Deno.funlock()
 
 Use
-[`Deno.FsFile.unlock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlock)
+[`Deno.FsFile.prototype.unlock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlock)
 instead.
 
 ```diff
@@ -436,7 +525,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### Deno.funlockSync()
 
 Use
-[`Deno.FsFile.unlockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlockSync)
+[`Deno.FsFile.prototype.unlockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlockSync)
 instead.
 
 ```diff
@@ -451,7 +540,7 @@ See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 ### Deno.futimeSync()
 
 Use
-[`Deno.FsFile.utimeSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utimeSync)
+[`Deno.FsFile.prototype.utimeSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utimeSync)
 instead.
 
 ```diff
@@ -466,7 +555,7 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### Deno.futime()
 
 Use
-[`Deno.FsFile.utime()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utime)
+[`Deno.FsFile.prototype.utime()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utime)
 instead.
 
 ```diff
@@ -480,8 +569,9 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### Deno.isatty()
 
-Use `Deno.FsFile.isTerminal()`, `Deno.stdin.isTerminal()`,
-`Deno.stdout.isTerminal()` or `Deno.stderr.isTerminal()` instead.
+Use `Deno.FsFile.prototype.isTerminal()`, `Deno.stdin.prototype.isTerminal()`,
+`Deno.stdout.prototype.isTerminal()` or `Deno.stderr.prototype.isTerminal()`
+instead.
 
 ```diff
   using file = await Deno.open("/dev/tty6");
@@ -577,11 +667,26 @@ methods instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
+### Deno.ListenTlsOptions.certChain
+
+Use the
+[`cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
+option instead.
+
+```diff
+using listener = Deno.listenTls({
+  port: 443,
+- certChain: Deno.readTextFile("./server.crt"),
++ cert: Deno.readTextFile("./server.crt"),
+  key: Deno.readTextFileSync("./server.key"),
+});
+```
+
 ### Deno.ListenTlsOptions.certFile
 
-Pass the certificate file contents to
-[`Deno.ListenTlsOptions.cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
-instead.
+Pass the certificate file contents to the
+[`cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
+option instead.
 
 ```diff
 using listener = Deno.listenTls({
@@ -596,9 +701,9 @@ See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 
 ### Deno.ListenTlsOptions.keyFile
 
-Pass the key file contents to
-[`Deno.ListenTlsOptions.key`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_key)
-instead.
+Pass the key file contents to the
+[`key`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_key)
+option instead.
 
 ```diff
 using listener = Deno.listenTls({
@@ -782,10 +887,38 @@ directive.
 
 See [deno#16516](https://github.com/denoland/deno/pull/16516) for details.
 
+### Deno.Seeker
+
+Use [`Seeker`](https://jsr.io/@std/io/doc/types/~/Seeker) from the Standard
+Library instead.
+
+```diff
++ import type { Seeker } from "jsr:@std/io/types";
+
+- function foo(seeker: Deno.Seeker) {
++ function foo(seeker: Seeker) {
+  // ...  
+}
+```
+
+### Deno.SeekerSync
+
+Use [`SeekerSync`](https://jsr.io/@std/io/doc/types/~/SeekerSync) from the
+Standard Library instead.
+
+```diff
++ import type { SeekerSync } from "jsr:@std/io/types";
+
+- function foo(seeker: Deno.SeekerSync) {
++ function foo(seeker: SeekerSync) {
+  // ...  
+}
+```
+
 ### Deno.seekSync()
 
 Use
-[`Deno.FsFile.seekSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seekSync)
+[`Deno.FsFile.prototype.seekSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seekSync)
 instead.
 
 ```diff
@@ -800,7 +933,7 @@ See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 ### Deno.seek()
 
 Use
-[`Deno.FsFile.seek()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seek)
+[`Deno.FsFile.prototype.seek()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seek)
 instead.
 
 ```diff
