@@ -31,7 +31,8 @@ This will cause the type checker to infer type information about the JavaScript
 code and raise any issues as diagnostic issues.
 
 These can be turned on for all JavaScript files in a program by providing a
-configuration file with the check JS option enabled:
+configuration file with the check JS option set to `true`, as below. Then use
+the `--config` option when running on the command line.
 
 ```json
 {
@@ -40,8 +41,6 @@ configuration file with the check JS option enabled:
   }
 }
 ```
-
-And then setting the `--config` option on the command line.
 
 ## Using JSDoc in JavaScript
 
@@ -80,13 +79,14 @@ TypeScript wasn't able to detect before.
 
 ## Configuring TypeScript in Deno
 
-While TypeScript offers many configuration options, which can be daunting if
-you're just starting out with TS. Deno aims to simplify using TypeScript,
-instead of drowning you in countless settings, Deno configures TypeScript to
-**just work** out of the box. No extra configuration headaches required!
+TypeScript offers many configuration options, which can be daunting if you're
+just starting out with TS. Deno aims to simplify using TypeScript, instead of
+drowning you in countless settings. Deno configures TypeScript to **just work**
+out of the box. No extra configuration headaches required!
 
-If you do want to configure your setup, Deno does support using a `deno.json`
-file. Provide a path on the command line, or use the default. For example:
+However, if you do want to change the TypeScript compiler options, Deno allows
+you to do so in your `deno.json` file. Provide a path on the command line, or
+use the default. For example:
 
 ```console
 deno run --config ./deno.json main.ts
