@@ -44,12 +44,10 @@ for (const tabGroup of document.querySelectorAll<HTMLElement>(".deno-tabs")) {
     document.dispatchEvent(new GroupSelectEvent(groupId, storedTabId));
   }
 
-  // Check if any tab is active
   const anyTabActive = Array.from(tabs).some((tab) =>
     tab.dataset.active === "true"
   );
 
-  // If no tab is active, activate the first tab
   if (!anyTabActive && tabs.length > 0) {
     const firstTabId = tabs[0].dataset.tab!;
     document.dispatchEvent(new GroupSelectEvent(groupId, firstTabId));
