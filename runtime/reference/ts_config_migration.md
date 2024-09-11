@@ -141,10 +141,7 @@ to the
 
 ## Using the "lib" property
 
-Deno includes unique built-in libraries not found in other platforms (like
-`tsc`). This can sometimes pose challenges when writing code meant to run in
-both Deno and a browser. In such cases, you can tweak Deno’s behavior using the
-"lib" property within your `compilerOptions`.
+If you're working on a project that ships code to multiple runtimes, like browsers for example, you can tweak the default types via the "lib" property within the `compilerOptions`.
 
 The built-in libraries that are of interest to users:
 
