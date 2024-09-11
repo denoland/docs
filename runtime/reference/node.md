@@ -12,6 +12,7 @@ oldUrl:
 - /runtime/manual/node/compatibility/
 - /runtime/manual/references/cheatsheet/
 - /runtime/manual/node/cheatsheet/
+- /runtime/manual/node/faqs
 ---
 
 Modern Node.js projects will run in Deno with little to no reworking required.

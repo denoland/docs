@@ -7,6 +7,9 @@ oldUrl:
   - /runtime/manual/advanced/typescript/types/
   - /runtime/manual/typescript/types/
   - /runtime/manual/advanced/faqs/
+  - /runtime/advanced/typescript/configuration/
+  - /runtime/manual/typescript/typescript/faqs/
+  - /runtime/fundamentals/types/
 ---
 
 Deno’s flexibility shines in its equal treatment of TypeScript and JavaScript.
@@ -213,11 +216,6 @@ should add that library to the mix as well:
 Typically, when you use the `"lib"` option in TypeScript, you need to include an
 "es" library as well. In the case of `"deno.ns"` and `"deno.unstable"`, they
 automatically include `"esnext"` when you bring them in.
-
-The biggest "warning" when doing something like this, is that the type checking
-is significantly looser, and there is no way to validate that you are doing
-sufficient and effective feature detection in your code, which may lead to what
-could be trivial errors becoming runtime errors.
 
 :::note
 
