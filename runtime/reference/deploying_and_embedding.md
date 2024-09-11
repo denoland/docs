@@ -1,6 +1,6 @@
 ---
 title: "Deploying and embedding Deno"
-old_url:
+oldUrl:
 - /runtime/manual/advanced/embedding_deno/
 - /runtime/manual/advanced/deploying_deno/
 ---

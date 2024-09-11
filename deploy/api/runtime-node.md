@@ -2,6 +2,7 @@
 title: "Node.js built-in APIs"
 oldUrl:
   - /deploy/docs/runtime-node/
+  - /deploy/manual/runtime-node/
 ---
 
 Deno Deploy natively supports importing built-in Node.js modules like `fs`,
