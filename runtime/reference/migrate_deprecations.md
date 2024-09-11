@@ -687,6 +687,21 @@ methods instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
+### Deno.ListenTlsOptions.certChain
+
+Use the
+[`cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
+option instead.
+
+```diff
+using listener = Deno.listenTls({
+  port: 443,
+- certChain: Deno.readTextFile("./server.crt"),
++ cert: Deno.readTextFile("./server.crt"),
+  key: Deno.readTextFileSync("./server.key"),
+});
+```
+
 ### Deno.ListenTlsOptions.certFile
 
 Pass the certificate file contents to the
