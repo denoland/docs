@@ -73,7 +73,10 @@ have check JS enabled, by using the `nocheck` pragma:
 
 ## Renaming JS files to TS files
 
-TypeScript files benefit from the TypeScript compiler being able to do more thorough safety checks of your code. This is often referred to as _strict mode_. When you rename a `.js` file to `.ts` you'll might see new type errors that you TypeScript wasn't able to detect before.
+TypeScript files benefit from the TypeScript compiler being able to do more
+thorough safety checks of your code. This is often referred to as _strict mode_.
+When you rename a `.js` file to `.ts` you'll might see new type errors that you
+TypeScript wasn't able to detect before.
 
 ## Configuring TypeScript in Deno
 
@@ -140,7 +143,9 @@ to the
 
 ## Using the "lib" property
 
-If you're working on a project that ships code to multiple runtimes, like browsers for example, you can tweak the default types via the "lib" property within the `compilerOptions`.
+If you're working on a project that ships code to multiple runtimes, like
+browsers for example, you can tweak the default types via the "lib" property
+within the `compilerOptions`.
 
 The built-in libraries that are of interest to users:
 
@@ -161,8 +166,8 @@ The built-in libraries that are of interest to users:
   iterables that Deno implements (plus several browsers), so we have implemented
   it ourselves until it becomes available in TypeScript.
 
-These are common libraries that are not enabled by default, but are useful when writing
-code that is intended to also work in another runtime:
+These are common libraries that are not enabled by default, but are useful when
+writing code that is intended to also work in another runtime:
 
 - `"dom"` - The main browser global library that ships with TypeScript. The type
   definitions conflict in many ways with `"deno.window"` and so if `"dom"` is
@@ -219,7 +224,7 @@ automatically include `"esnext"` when you bring them in.
 
 :::note
 
-If you get type errors like `**cannot find `document` or `HTMLElement`**, it is
+If you get type errors like `**cannot find`document`or`HTMLElement`**, it is
 likely that the library you are using has dependencies on the DOM. This is
 common for packages that are designed to run in a browser as well as
 server-side. By default, Deno only includes the libraries that are directly
