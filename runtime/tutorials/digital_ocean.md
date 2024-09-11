@@ -9,7 +9,7 @@ hosting services ranging from networking, to compute, to storage.
 Here's a step by step guide to deploying a Deno app to Digital Ocean using
 Docker and GitHub Actions.
 
-The pre-requisite for this is:
+The pre-requisites for this are:
 
 - [`docker` CLI](https://docs.docker.com/engine/reference/commandline/cli/)
 - a [GitHub account](https://github.com)
