@@ -71,7 +71,7 @@ const data = [
       },
       {
         label: "Deploy System Status",
-        href: "https://www.denostatus.com",
+        href: "https://denostatus.com",
       },
       {
         label: "Deploy Feedback",

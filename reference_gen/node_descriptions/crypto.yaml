@@ -1,0 +1,15 @@
+symbols:
+  Certificate: The methods are non-functional stubs.
+  generateKeyPair: The `x448` option is not supported.
+  generatePrime: The `safe`, `add` and `rem` option is not supported.
+  KeyObject: The methods are non-functional stubs.
+  publicDecrypt: This symbol is a non-functional stub.
+  secureHeapUsed: This symbol is a non-functional stub.
+  setEngine: This symbol is a non-functional stub.
+  ECDH: The `convertKey` method is a non-functional sub.
+  Sign: The `sign` and `verify` methods are not supported with non BinaryLike input.
+
+# TODO:
+# crypto.Cipheriv.prototype.setAutoPadding
+# crypto.Decipheriv.prototype.setAutoPadding
+# legacy methods of crypto.X509Certificate

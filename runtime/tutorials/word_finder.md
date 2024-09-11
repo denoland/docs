@@ -28,9 +28,7 @@ You can specify a pattern and list of words to customize the HTML content. If a
 pattern is specified then it will show up in the search text box. If the word
 list is specified, then a bulleted list of words will be rendered.
 
-```jsx
-// render.js
-
+```jsx title="render.js"
 export function renderHtml(pattern, words) {
   let searchResultsContent = "";
   if (words.length > 0) {
@@ -99,9 +97,7 @@ We also need a simple search function which scans the dictionary and returns all
 words that match the specified pattern. The function below takes a pattern and
 dictionary and then returns all matched words.
 
-```jsx
-// search.js
-
+```jsx title="search.js"
 export function search(pattern, dictionary) {
   // Create regex pattern that excludes characters already present in word
   let excludeRegex = "";
@@ -141,9 +137,7 @@ HTML template with data and then return the customized HTML back to the viewer.
 We can conveniently rely on the `/usr/share/dict/words` file as our dictionary
 which is a standard file present on most Unix-like operating systems.
 
-```jsx
-// server.js
-
+```jsx title="server.js"
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 import { search } from "./search.js";
 import { renderHtml } from "./render.js";

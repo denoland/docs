@@ -26,5 +26,6 @@
   "run": "/runtime/manual/tools/run",
   "serve": "/runtime/manual/tools/serve",
   "test": "/runtime/manual/tools/test",
-  "upgrade": "/runtime/manual/tools/upgrade"
+  "upgrade": "/runtime/manual/tools/upgrade",
+  "env-vars": "/runtime/reference/env_variables"
 }

@@ -1,5 +1,7 @@
 ---
 title: Subhosting Quick Start
+oldUrl:
+- /deploy/manual/subhosting/projects_and_deployments/
 ---
 
 Looking for the smallest possible example that shows how to deploy code to

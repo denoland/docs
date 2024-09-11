@@ -43,4 +43,13 @@ for (const tabGroup of document.querySelectorAll<HTMLElement>(".deno-tabs")) {
   if (storedTabId) {
     document.dispatchEvent(new GroupSelectEvent(groupId, storedTabId));
   }
+
+  const anyTabActive = Array.from(tabs).some((tab) =>
+    tab.dataset.active === "true"
+  );
+
+  if (!anyTabActive && tabs.length > 0) {
+    const firstTabId = tabs[0].dataset.tab!;
+    document.dispatchEvent(new GroupSelectEvent(groupId, firstTabId));
+  }
 }

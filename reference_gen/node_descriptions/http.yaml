@@ -1,0 +1,6 @@
+symbols:
+  RequestOptions: Option `createConnection` is not supported.
+  ClientRequestArgs: Option `createConnection` is not supported.
+  ClientRequest: Constructor option `createConnection` is not supported.
+  request: Constructor option `createConnection` is not supported.
+  get: Constructor option `createConnection` is not supported.
