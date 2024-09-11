@@ -153,7 +153,7 @@ See [deno#9795][deno#9795] for details.
 
 ### Deno.Closer
 
-Use [`Closer`](https://jsr.io/@std/io/doc/types/~/Closer) from the Standard
+Use [Closer](https://jsr.io/@std/io/doc/types/~/Closer) from the Standard
 Library instead.
 
 ```diff
@@ -218,9 +218,9 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### Deno.ConnectTlsOptions.certChain
 
-Use the
-[`cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
-option instead.
+Use
+[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
+instead.
 
 ```diff
 const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
@@ -238,9 +238,9 @@ See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 
 ### Deno.ConnectTlsOptions.certFile
 
-Use the
-[`cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
-option instead.
+Use
+[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
+instead.
 
 ```diff
 const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
@@ -258,9 +258,9 @@ See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 
 ### Deno.ConnectTlsOptions.privateKey
 
-Use the
-[`key`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_key)
-option instead.
+Use
+[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_key)
+instead.
 
 ```diff
 const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
@@ -376,6 +376,26 @@ instead.
 ```
 
 See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
+
+### Deno.FsFile.prototype.rid
+
+Use [`Deno.FsFile`](https://docs.deno.com/api/deno/~/Deno.FsFile) instance
+methods instead.
+
+```diff
+  const file = await Deno.open("/foo/bar.txt");
+
+  const buffer = new Uint8Array(1_024);
+- await Deno.read(file.rid, buffer);
++ await file.read(buffer);
+
+  const data = new TextEncoder().encode("Hello, world!");
+- await Deno.write(file.rid, data);
++ await file.write(data);
+
+- Deno.close(file.rid);
++ file.close();
+```
 
 ### Deno.fstatSync()
 
@@ -659,7 +679,9 @@ Use [`Deno.Listener`](https://docs.deno.com/api/deno/~/Deno.Listener) instance
 methods instead.
 
 ```diff
-  const listener = Deno.listen({ port: 80 })
+  const listener = Deno.listen({ port: 80 });
+
+  // ...
 
 - Deno.close(listener.rid);
 + listener.close();
@@ -667,26 +689,11 @@ methods instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.ListenTlsOptions.certChain
-
-Use the
-[`cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
-option instead.
-
-```diff
-using listener = Deno.listenTls({
-  port: 443,
-- certChain: Deno.readTextFile("./server.crt"),
-+ cert: Deno.readTextFile("./server.crt"),
-  key: Deno.readTextFileSync("./server.key"),
-});
-```
-
 ### Deno.ListenTlsOptions.certFile
 
-Pass the certificate file contents to the
-[`cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
-option instead.
+Pass the certificate file contents to
+[`Deno.ListenTlsOptions.cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
+instead.
 
 ```diff
 using listener = Deno.listenTls({
@@ -701,9 +708,9 @@ See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 
 ### Deno.ListenTlsOptions.keyFile
 
-Pass the key file contents to the
-[`key`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_key)
-option instead.
+Pass the key file contents to
+[`Deno.ListenTlsOptions.key`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_key)
+instead.
 
 ```diff
 using listener = Deno.listenTls({
@@ -1151,6 +1158,26 @@ methods instead.
 
 - Deno.close(tlsConn.rid);
 + tlsConn.close();
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### Deno.TlsListener.prototype.rid
+
+Use [`Deno.TlsListener`](https://docs.deno.com/api/deno/~/Deno.TlsListener)
+instance methods instead.
+
+```diff
+  const listener = Deno.listenTls({
+    port: 443,
+    cert: Deno.readTextFileSync("./server.crt"),
+    key: Deno.readTextFileSync("./server.key"),
+  });
+
+  // ...
+
+- Deno.close(listener.rid);
++ listener.close();
 ```
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
