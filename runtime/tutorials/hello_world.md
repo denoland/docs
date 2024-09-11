@@ -4,23 +4,47 @@ oldUrl:
   - /runtime/manual/examples/hello_world/
 ---
 
-## Concepts
+## Introduction
 
-- Deno can run JavaScript or TypeScript out of the box with no additional tools
-  or config required.
+Deno is a secure runtime for JavaScript and TypeScript.
 
-## Overview
+A runtime is the environment where your code executes. It provides the necessary
+infrastructure for your programs to run, handling things like memory management,
+I/O operations, and interaction with external resources. The runtime is
+responsible for translating your high-level code (JavaScript or TypeScript) into
+machine instructions that the computer can understand.
 
-Deno is a secure runtime for both JavaScript and TypeScript. As the hello world
-examples below highlight the same functionality can be created in JavaScript or
-TypeScript, and Deno will execute both.
+When you run JavaScript in a web browser (like Chrome, Firefox, or Edge), you’re
+using a browser runtime.
 
-## JavaScript
+Browser runtimes are tightly coupled with the browser itself. They provide APIs
+for manipulating the Document Object Model (DOM), handling events, making
+network requests, and more. These runtimes are sandboxed, they operate within
+the browser’s security model. They can’t access resources outside the browser,
+such as the file system or environment variables.
 
-In this JavaScript example the message `Hello [name]` is printed to the console
-and the code ensures the name provided is capitalized.
+When you run your code with Deno, you’re executing your JavaScript or TypeScript
+code directly on your machine, outside the browser context. Therefore, Deno
+programs can access resources on the host computer, such as the file system,
+environment variables, and network sockets.
 
-**Command:** `deno run hello-world.js`
+Deno provides a seamless experience for running JavaScript and TypeScript code.
+Whether you prefer the dynamic nature of JavaScript or the type safety of
+TypeScript, Deno has you covered.
+
+## Tutorial
+
+In this tutorial we'll create a simple "Hello World" example in both JavaScript
+and TypeScript using Deno.
+
+We'll define a `capitalize` function that capitalizes the first letter of a
+word. Then, we define a `hello` function that returns a greeting message with
+the capitalized name. Finally, we call the `hello` function with different names
+and print the output to the console.
+
+### JavaScript
+
+First, create a `hello-world.js` file and add the following code:
 
 ```js title="hello-world.js"
 function capitalize(word) {
@@ -34,25 +58,23 @@ function hello(name) {
 console.log(hello("john"));
 console.log(hello("Sarah"));
 console.log(hello("kai"));
-
-/**
- * Output:
- *
- * Hello John
- * Hello Sarah
- * Hello Kai
- */
 ```
 
-## TypeScript
+Run the script using the `deno run` command:
+
+```sh
+$ deno run hello-world.js
+Hello John
+Hello Sarah
+Hello Kai
+```
+
+### TypeScript
 
 This TypeScript example is exactly the same as the JavaScript example above, the
 code just has the additional type information which TypeScript supports.
 
-The `deno run` command is exactly the same, it just references a `*.ts` file
-rather than a `*.js` file.
-
-**Command:** `deno run hello-world.ts`
+Create a `hello-world.ts` file and add the following code:
 
 ```ts title="hello-world.ts"
 function capitalize(word: string): string {
@@ -66,12 +88,16 @@ function hello(name: string): string {
 console.log(hello("john"));
 console.log(hello("Sarah"));
 console.log(hello("kai"));
-
-/**
- * Output:
- *
- * Hello John
- * Hello Sarah
- * Hello Kai
- */
 ```
+
+Run the TypeScript script using the `deno run` command:
+
+```sh
+$ deno run hello-world.ts
+Hello John
+Hello Sarah
+Hello Kai
+```
+
+🦕 Congratulations! Now you know how to create a simple script in both JS and TS
+and how to run it in Deno with the `deno run` command.
