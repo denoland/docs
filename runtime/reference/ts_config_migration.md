@@ -70,11 +70,7 @@ have check JS enabled, by using the `nocheck` pragma:
 
 ## Renaming JS files to TS files
 
-While this might work in some cases, it has some severe limits in Deno. This is
-because Deno, by default, runs type checking in what is called _strict mode_.
-This means a lot of unclear or ambiguous situations where are not caught in
-non-strict mode will result in diagnostics being generated, and JavaScript is
-nothing but unclear and ambiguous when it comes to types.
+TypeScript files benefit from the TypeScript compiler being able to do more thorough safety checks of your code. This is often referred to as _strict mode_. When you rename a `.js` file to `.ts` you'll might see new type errors that you TypeScript wasn't able to detect before.
 
 ## Configuring TypeScript in Deno
 
