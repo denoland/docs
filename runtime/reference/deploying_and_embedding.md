@@ -1,6 +1,6 @@
 ---
 title: "Deploying and embedding Deno"
-old_url:
+oldUrl:
 - /runtime/manual/advanced/embedding_deno/
 - /runtime/manual/advanced/deploying_deno/
 ---
@@ -28,6 +28,7 @@ For more information, check out the [Deploy documentation](/deploy/manual).
 
 We also have guides on deploying Deno to other cloud providers:
 
+- [AWS Lambda](/runtime/tutorials/aws_lambda/)
 - [Digital Ocean](/runtime/tutorials/digital_ocean/)
 - [AWS Lightsail](/runtime/tutorials/aws_lightsail/)
 - [Google Cloud Run](/runtime/tutorials/google_cloud_run/)

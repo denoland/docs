@@ -242,6 +242,7 @@ export const sidebar = [
           "/runtime/tutorials/os_signals/",
           "/runtime/tutorials/file_system_events/",
           "/runtime/tutorials/module_metadata/",
+          "/runtime/tutorials/aws_lambda/",
           "/runtime/tutorials/aws_lightsail/",
           "/runtime/tutorials/cloudflare_workers/",
           "/runtime/tutorials/digital_ocean/",

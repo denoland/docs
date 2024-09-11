@@ -3,6 +3,7 @@ title: "Deploy Quick Start"
 oldUrl:
   - /deploy/
   - /deploy/docs/
+  - /deploy/manual/hello-world/
 ---
 
 Deno Deploy is a globally distributed platform for serverless JavaScript

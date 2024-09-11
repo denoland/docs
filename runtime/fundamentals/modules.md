@@ -15,6 +15,7 @@ oldUrl:
   - /runtime/manual/linking_to_external_code
   - /runtime/manual/linking_to_external_code/reloading_modules
   - /runtime/fundamentals/esm.sh
+  - /runtime/manual/basics/import_maps/
 ---
 
 Deno uses
