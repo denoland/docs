@@ -1,5 +1,7 @@
 ---
 title: "CI and GitHub Actions"
+oldUrl:
+ - /deploy/docs/project/
 ---
 
 Deno Deploy's Git integration enables deployment of code changes that are pushed

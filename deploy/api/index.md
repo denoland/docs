@@ -4,6 +4,7 @@ sidebar_title: "Overview"
 pagination_next: /deploy/api/runtime-broadcast-channel
 oldUrl:
   - /deploy/docs/runtime-api/
+  - /deploy/manual/runtime-api/
 ---
 
 This is a reference for runtime APIs available on Deno Deploy. This API is very

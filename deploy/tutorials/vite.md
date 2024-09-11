@@ -2,6 +2,7 @@
 title: "Deploy a React app with Vite"
 oldUrl:
   - /deploy/docs/vite/
+  - /deploy/manual/vite
 ---
 
 This tutorial covers how to deploy a Vite Deno and React app on Deno Deploy.
