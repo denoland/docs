@@ -225,7 +225,7 @@ could be trivial errors becoming runtime errors.
 
 :::note
 
-If you get type errors like `**cannot find`document`or`HTMLElement`**, it is
+If you get type errors like `**cannot find `document` or `HTMLElement`**, it is
 likely that the library you are using has dependencies on the DOM. This is
 common for packages that are designed to run in a browser as well as
 server-side. By default, Deno only includes the libraries that are directly
