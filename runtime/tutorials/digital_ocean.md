@@ -69,7 +69,7 @@ services:
 Let's test this locally by running `docker compose -f docker-compose.yml build`,
 then `docker compose up`, and going to `localhost:8000`.
 
-![Hello from localhost](../../images/how-to/digital-ocean/hello-world-from-localhost.png)
+![Hello from localhost](../../runtime/manual/images/how-to/digital-ocean/hello-world-from-localhost.png)
 
 It works!
 
@@ -109,7 +109,7 @@ docker push registry.digitalocean.com/deno-on-digital-ocean/deno-image:new
 You should see your new `deno-image` with the `new` tag in your
 [Digital Ocean container registry](https://cloud.digitalocean.com/registry):
 
-![New deno image on Digital Ocean container registry](../../images/how-to/digital-ocean/new-deno-image-on-digital-ocean-container-registry.png)
+![New deno image on Digital Ocean container registry](../../runtime/manual/images/how-to/digital-ocean/new-deno-image-on-digital-ocean-container-registry.png)
 
 Perfect!
 
@@ -132,7 +132,7 @@ docker run -d --restart always -it -p 8000:8000 --name deno-image registry.digit
 
 Using our browser to go to the Digital Ocean address, we now see:
 
-![Hello from Deno and Digital Ocean](../../images/how-to/digital-ocean/hello-from-deno-and-digital-ocean.png)
+![Hello from Deno and Digital Ocean](../../runtime/manual/images/how-to/digital-ocean/hello-from-deno-and-digital-ocean.png)
 
 Boom!
 
