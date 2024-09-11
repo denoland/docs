@@ -153,7 +153,7 @@ See [deno#9795][deno#9795] for details.
 
 ### Deno.Closer
 
-Use [Closer](https://jsr.io/@std/io/doc/types/~/Closer) from the Standard
+Use [`Closer`](https://jsr.io/@std/io/doc/types/~/Closer) from the Standard
 Library instead.
 
 ```diff
@@ -218,9 +218,9 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### Deno.ConnectTlsOptions.certChain
 
-Use
-[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
-instead.
+Use the
+[`cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
+option instead.
 
 ```diff
 const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
@@ -238,9 +238,9 @@ See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 
 ### Deno.ConnectTlsOptions.certFile
 
-Use
-[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
-instead.
+Use the
+[`cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
+option instead.
 
 ```diff
 const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
@@ -258,9 +258,9 @@ See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 
 ### Deno.ConnectTlsOptions.privateKey
 
-Use
-[`Deno.TlsCertifiedKeyPem.cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_key)
-instead.
+Use the
+[`key`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_key)
+option instead.
 
 ```diff
 const caCert = await Deno.readTextFile("./certs/my_custom_root_CA.pem");
@@ -679,9 +679,7 @@ Use [`Deno.Listener`](https://docs.deno.com/api/deno/~/Deno.Listener) instance
 methods instead.
 
 ```diff
-  const listener = Deno.listen({ port: 80 });
-
-  // ...
+  const listener = Deno.listen({ port: 80 })
 
 - Deno.close(listener.rid);
 + listener.close();
@@ -691,9 +689,9 @@ See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
 ### Deno.ListenTlsOptions.certFile
 
-Pass the certificate file contents to
-[`Deno.ListenTlsOptions.cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
-instead.
+Pass the certificate file contents to the
+[`cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
+option instead.
 
 ```diff
 using listener = Deno.listenTls({
@@ -708,9 +706,9 @@ See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 
 ### Deno.ListenTlsOptions.keyFile
 
-Pass the key file contents to
-[`Deno.ListenTlsOptions.key`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_key)
-instead.
+Pass the key file contents to the
+[`key`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_key)
+option instead.
 
 ```diff
 using listener = Deno.listenTls({
