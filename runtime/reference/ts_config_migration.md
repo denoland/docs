@@ -162,7 +162,7 @@ The built-in libraries that are of interest to users:
   iterables that Deno implements (plus several browsers), so we have implemented
   it ourselves until it becomes available in TypeScript.
 
-These are common libraries that Deno doesn't use, but are useful when writing
+These are common libraries that are not enabled by default, but are useful when writing
 code that is intended to also work in another runtime:
 
 - `"dom"` - The main browser global library that ships with TypeScript. The type
