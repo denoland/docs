@@ -377,6 +377,26 @@ instead.
 
 See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 
+### Deno.FsFile.prototype.rid
+
+Use [`Deno.FsFile`](https://docs.deno.com/api/deno/~/Deno.FsFile) instance
+methods instead.
+
+```diff
+  const file = await Deno.open("/foo/bar.txt");
+
+  const buffer = new Uint8Array(1_024);
+- await Deno.read(file.rid, buffer);
++ await file.read(buffer);
+
+  const data = new TextEncoder().encode("Hello, world!");
+- await Deno.write(file.rid, data);
++ await file.write(data);
+
+- Deno.close(file.rid);
++ file.close();
+```
+
 ### Deno.fstatSync()
 
 Use
@@ -1151,6 +1171,26 @@ methods instead.
 
 - Deno.close(tlsConn.rid);
 + tlsConn.close();
+```
+
+See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
+
+### Deno.TlsListener.prototype.rid
+
+Use [`Deno.TlsListener`](https://docs.deno.com/api/deno/~/Deno.TlsListener)
+instance methods instead.
+
+```diff
+  const listener = Deno.listenTls({
+    port: 443,
+    cert: Deno.readTextFileSync("./server.crt"),
+    key: Deno.readTextFileSync("./server.key"),
+  });
+
+  // ...
+
+- Deno.close(listener.rid);
++ listener.close();
 ```
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.

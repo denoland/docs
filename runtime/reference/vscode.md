@@ -39,6 +39,9 @@ modules as the Deno CLI does, you need to enable Deno for the workspace. The
 most direct way to do this is to use the **Deno: Initialize Workspace
 Configuration** from the VS Code
 [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).
+
+![screenshot of the command palette with Deno: Initialize Workspace Configuration](./images/command_palette.png)]
+
 This will activate a helper which will ask if you want to enable linting and the
 Deno unstable APIs for the project. This command will instruct VS Code to store
 these settings in the workspace configuration (your workspace root
