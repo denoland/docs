@@ -1,5 +1,5 @@
 ---
-title: "Fetch or Stream Data"
+title: "Fetch and Stream Data"
 oldUrl:
   - /runtime/manual/examples/fetch_data/
 ---
