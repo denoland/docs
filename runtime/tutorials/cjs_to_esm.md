@@ -63,7 +63,7 @@ If you are using VS Code, you can use its built-in feature to convert CommonJS
 to ES6 modules. Right-click on the `require` statement, or the lightbulb icon
 and select `Quick Fix` and then `Convert to ES module`.
 
-![Quick Fix](../images/quick-fix.png)
+![Quick Fix](./images/quick-fix.png)
 
 ### CommonJS vs ECMAScript resolution
 
