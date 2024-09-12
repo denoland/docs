@@ -78,11 +78,11 @@ Create a new file called `server.ts` and add the following code:
 
 ```ts title="server.ts"
 export default {
-  fetch(request: Request) {
+  fetch(request) {
     const userAgent = request.headers.get("user-agent") || "Unknown";
-    return new Response(`User Agent: ${userAgent}`, { status: 200 });
+    return new Response(`User Agent: ${userAgent}`);
   },
-};
+} satisfies Deno.ServeDefaultExport;
 ```
 
 You can run this file with the `deno serve` command:
