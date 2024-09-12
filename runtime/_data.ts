@@ -153,6 +153,7 @@ export const sidebar = [
         label: "npm packages",
         id: "/runtime/reference/npm/",
       },
+      "/runtime/reference/ts_config_migration/",
       "/runtime/reference/continuous_integration/",
       {
         label: "Environment variables",
@@ -183,19 +184,6 @@ export const sidebar = [
       {
         label: "Std. Library",
         href: "https://jsr.io/@std",
-      },
-    ],
-  },
-  {
-    title: "Advanced Topics",
-    items: [
-      {
-        label: "TypeScript in Deno",
-        items: [
-          "/runtime/manual/advanced/typescript/configuration/",
-          "/runtime/manual/advanced/typescript/migration/",
-          "/runtime/manual/advanced/typescript/faqs/",
-        ],
       },
     ],
   },
