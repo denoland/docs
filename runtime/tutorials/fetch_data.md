@@ -1,55 +1,40 @@
 ---
-title: "Fetch Data"
+title: "Fetch or Stream Data"
 oldUrl:
   - /runtime/manual/examples/fetch_data/
 ---
 
-## Concepts
+Deno brings several familiar Web APIs to the server-side environment. If you've
+worked with browsers you may recognize the [`fetch()`](/api/web/fetch) method
+and the [`streams`](/api/web/streams) API, which are used to make network
+requests and access streams of data over the network. Deno implements these
+APIs, allowing you to fetch and stream data from the web.
 
-- Like browsers, Deno implements web standard APIs - such as
-  [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
-- Deno is secure by default, meaning explicit permission must be granted to
-  access the network.
-- See also: Deno's [permissions](/runtime/fundamentals/security/) model.
+## Tutorial
 
-## Overview
+### Fetching data
 
-When building a web application developers will usually need to retrieve data
-from somewhere else on the web. This works no differently in Deno than in any
-other JavaScript application, using the `fetch()` method. For more information
-read the
-[MDN documentation on fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+When building a web application, developers will often need to retrieve
+resources from somewhere else on the web. We can do so with the `fetch` API.
+We'll look at how to fetch different shapes of data from a url and how to handle
+an error if the request fails.
 
-The difference with Deno occurs when running a script which makes a call over
-the web. Deno is secure by design which means access to IO (Input / Output) is
-prohibited by default. To make a call over the web Deno must be explicitly told
-it is ok to do so. This is achieved by adding the `--allow-net` flag to the
-`deno run` command.
+Create a new file called `fetch.js` and add the following code:
 
-## Example
-
-**Command:** `deno run --allow-net fetch.ts`
-
-```js
-/**
- * Output: JSON Data
- */
+```ts title="fetch.js"
+// Output: JSON Data
 const jsonResponse = await fetch("https://api.github.com/users/denoland");
 const jsonData = await jsonResponse.json();
 
-console.log(jsonData);
+console.log(jsonData, "\n");
 
-/**
- * Output: HTML Data
- */
+// Output: HTML Data
 const textResponse = await fetch("https://deno.land/");
 const textData = await textResponse.text();
 
-console.log(textData);
+console.log(textData, "\n");
 
-/**
- * Output: Error Message
- */
+// Output: Error Message
 try {
   await fetch("https://does.not.exist/");
 } catch (error) {
@@ -57,22 +42,38 @@ try {
 }
 ```
 
-## Files and Streams
+You can run this code with the `deno run` command. Because it is fetching data
+across the network, you need to grant the `--allow-net` permission:
 
-Like in browsers, sending and receiving large files is possible thanks to the
-[Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API).
-[`Deno.FsFile`](https://docs.deno.com/api/deno/~/Deno.FsFile) API provides two
-properties:
-[`readable`](https://docs.deno.com/api/deno/~/Deno.FsFile#property_readable) and
-[`writable`](https://docs.deno.com/api/deno/~/Deno.FsFile#property_writable),
-which can be used to convert a Deno file into a writable or readable stream.
+```sh
+deno run --allow-net fetch.js
+```
 
-**Command:** `deno run --allow-read --allow-write --allow-net fetch_file.ts`
+You should see the JSON data, HTML data as text, and an error message in the
+console.
 
-```ts
-/**
- * Receiving a file
- */
+### Streaming data
+
+Sometimes you may want to send or receive large files over the network. When you
+don't know the size of a file in advance, streaming is a more efficient way to
+handle the data. The client can read from the stream until it says it is done.
+
+Deno provides a way to stream data using the `Streams API`. We'll look at how to
+convert a file into a readable or writable stream and how to send and receive
+files using streams.
+
+Create a new file called `stream.js`.
+
+We'll use the `fetch` API to retrieve a file. Then we'll use the
+[`Deno.open`](/api/deno/Deno.open) method to create and open a writable file and
+the [`pipeTo`](/api/web/~/ReadableStream.pipeTo) method from the Streams API to
+send the byte stream to the created file.
+
+Next, we'll use the `readable` property on a `POST` request to send the bite
+stream of the file to a server.
+
+```ts title="stream.js"
+// Receiving a file
 const fileResponse = await fetch("https://deno.land/logo.svg");
 
 if (fileResponse.body) {
@@ -81,9 +82,7 @@ if (fileResponse.body) {
   await fileResponse.body.pipeTo(file.writable);
 }
 
-/**
- * Sending a file
- */
+// Sending a file
 const file = await Deno.open("./logo.svg", { read: true });
 
 await fetch("https://example.com/", {
@@ -91,3 +90,21 @@ await fetch("https://example.com/", {
   body: file.readable,
 });
 ```
+
+You can run this code with the `deno run` command. Because it is fetching data
+across the network and writing to a file, you need to grant the `--allow-net`,
+`--allow-write` and `--allow-read` permissions:
+
+```sh
+deno run --allow-read --allow-write --allow-net stream.ts`
+```
+
+You should see the file `logo.svg` created and populated in the current
+directory and, if you owned example.com you would see the file being sent to the
+server.
+
+🦕 Now you know how to fetch and stream data across a network and how to stream
+that data to and from files! Whether you're serving static files, processing
+uploads, generating dynamic content or streaming large datasets, Deno’s file
+handling and streaming capabilities are great tools to have in your developer
+toolbox!

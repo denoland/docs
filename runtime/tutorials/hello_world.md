@@ -4,8 +4,6 @@ oldUrl:
   - /runtime/manual/examples/hello_world/
 ---
 
-## Introduction
-
 Deno is a secure runtime for JavaScript and TypeScript.
 
 A runtime is the environment where your code executes. It provides the necessary

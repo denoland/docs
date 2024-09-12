@@ -4,8 +4,6 @@ oldUrl:
   - /runtime/manual/examples/http_server/
 ---
 
-## Introduction
-
 An HTTP server is a software application that serves content over the web. It
 listens for incoming requests from clients (like web browsers) and sends back
 responses. HTTP servers are the backbone of the web, allowing you to access
@@ -58,7 +56,7 @@ The `Deno.serve` function creates an HTTP server that listens on the suggested
 
 You can run this code with:
 
-```shell
+```sh
 deno run --allow-net server.ts
 ```
 
@@ -70,29 +68,43 @@ The [`--allow-net` flag](/runtime/fundamentals/security/) is required to allow
 the server to listen for incoming requests. This flag grants Deno permissions to
 access the network.
 
-### Initialise a server project
+### Default fetch export
 
-If you're planning to build a more complex server, you may want to create a new
-project. Deno offers tools to do this for you using the `deno init` command:
+Another way to create an HTTP server in Deno is by exporting a default `fetch`
+function. [The fetch API](/api/web/~/fetch) initiates an HTTP request to
+retrieve data from across a network and is built into the Deno runtime.
 
-```shell
-deno init my_server --serve
+Create a new file called `server.ts` and add the following code:
+
+```ts title="server.ts"
+export default {
+  fetch(request: Request) {
+    const userAgent = request.headers.get("user-agent") || "Unknown";
+    return new Response(`User Agent: ${userAgent}`, { status: 200 });
+  },
+};
 ```
 
-This will create a basic http server project. You can then navigate into the
-project directory and run the server with:
+You can run this file with the `deno serve` command:
 
-```shell
-cd my_server
-deno task dev
+```sh
+deno serve server.ts
 ```
 
-If you take a look at the `deno.json` file in your new project, you'll see a
-`dev` task in the "tasks" field. This task serves the project and watches for
-changes to your files.
+The server will start and display a message in the console. Open your browser
+and navigate to [http://localhost:8000/](http://localhost:8000/) to see the
+user-agent information.
 
-```json title="deno.json"
-"tasks": {
-    "dev": "deno serve --watch -R main.ts"
-},
-```
+## Building on these examples
+
+You will likely want to expand on these examples to create more complex servers.
+Deno recommends using the [Oak](https://jsr.io/@oak/oak) middleware framework
+for building web servers. Oak is a middleware framework for Deno's HTTP server,
+designed to be expressive and easy to use. It provides a simple way to create
+web servers with middleware support. Check out the
+[Oak documentation](https://oakserver.github.io/oak/) for examples of how to
+define routes.
+
+🦕 Now you can create your own HTTP server! You've learned how to set up a
+server, handle requests, and respond to clients. Now you have the basis to start
+building APIs, serving static files, or experimenting with server-side code.

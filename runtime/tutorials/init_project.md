@@ -4,8 +4,6 @@ oldUrl:
   - /runtime/manual/examples/hello_world/
 ---
 
-## Introduction
-
 While it is possible to run scripts directly with `deno run`, for larger
 projects it is recommended to create a project structure. This way you can
 organize your code, manage dependencies, script tasks and run tests more easily.

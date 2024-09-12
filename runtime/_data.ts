@@ -220,22 +220,18 @@ export const sidebar = [
   {
     title: "Tutorials and Examples",
     items: [
-      {
-        label: "Basic Examples",
-        items: [
-          "/runtime/tutorials/hello_world/",
-          "/runtime/tutorials/fetch_data/",
-          "/runtime/tutorials/read_write_files/",
-          "/runtime/tutorials/hashbang/",
-          "/runtime/tutorials/cjs_to_esm/",
-          "/runtime/tutorials/connecting_to_databases/",
-        ],
-      },
+      "/runtime/tutorials/hello_world/",
+      "/runtime/tutorials/init_project/",
+      "/runtime/tutorials/fetch_data/",
+      "/runtime/tutorials/http_server/",
+      "/runtime/tutorials/read_write_files/",
+      "/runtime/tutorials/hashbang/",
+      "/runtime/tutorials/cjs_to_esm/",
+      "/runtime/tutorials/connecting_to_databases/",
       {
         label: "Advanced Examples",
         items: [
           "/runtime/tutorials/unix_cat/",
-          "/runtime/tutorials/http_server/",
           "/runtime/tutorials/file_server/",
           "/runtime/tutorials/tcp_echo/",
           "/runtime/tutorials/subprocess/",
