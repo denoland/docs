@@ -96,7 +96,7 @@ across the network and writing to a file, you need to grant the `--allow-net`,
 `--allow-write` and `--allow-read` permissions:
 
 ```sh
-deno run --allow-read --allow-write --allow-net stream.ts`
+deno run --allow-read --allow-write --allow-net stream.ts
 ```
 
 You should see the file `logo.svg` created and populated in the current
