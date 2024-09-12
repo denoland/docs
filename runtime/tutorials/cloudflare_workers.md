@@ -91,6 +91,6 @@ denoflare push main
 
 Next, you can view your new function in your Cloudflare account:
 
-![New function on Cloudflare Workers](../../images/how-to/cloudflare-workers/main-on-cloudflare.png)
+![New function on Cloudflare Workers](./images/how-to/cloudflare-workers/main-on-cloudflare.png)
 
 Boom!
