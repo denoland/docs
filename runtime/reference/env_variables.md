@@ -60,7 +60,7 @@ examples.
 The Deno runtime has these special environment variables.
 
 | name                 | description                                                                                                                                                                       |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | DENO_AUTH_TOKENS     | A semi-colon separated list of bearer tokens and hostnames to use when fetching remote modules from private repositories<br />(e.g. `abcde12345@deno.land;54321edcba@github.com`) |
 | DENO_TLS_CA_STORE    | Comma-separated list of order dependent certificate stores.<br />Possible values: `system`, `mozilla`. Defaults to `mozilla`.                                                     |
 | DENO_CERT            | Load certificate authority from PEM encoded file                                                                                                                                  |
