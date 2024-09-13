@@ -30,7 +30,7 @@ Deno provides a seamless experience for running JavaScript and TypeScript code.
 Whether you prefer the dynamic nature of JavaScript or the type safety of
 TypeScript, Deno has you covered.
 
-## Tutorial
+## Running a script
 
 In this tutorial we'll create a simple "Hello World" example in both JavaScript
 and TypeScript using Deno.
@@ -40,7 +40,7 @@ word. Then, we define a `hello` function that returns a greeting message with
 the capitalized name. Finally, we call the `hello` function with different names
 and print the output to the console.
 
-### JavaScript
+## JavaScript
 
 First, create a `hello-world.js` file and add the following code:
 
@@ -67,7 +67,7 @@ Hello Sarah
 Hello Kai
 ```
 
-### TypeScript
+## TypeScript
 
 This TypeScript example is exactly the same as the JavaScript example above, the
 code just has the additional type information which TypeScript supports.

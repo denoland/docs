@@ -10,9 +10,7 @@ and the [`streams`](/api/web/streams) API, which are used to make network
 requests and access streams of data over the network. Deno implements these
 APIs, allowing you to fetch and stream data from the web.
 
-## Tutorial
-
-### Fetching data
+## Fetching data
 
 When building a web application, developers will often need to retrieve
 resources from somewhere else on the web. We can do so with the `fetch` API.
@@ -52,7 +50,7 @@ deno run --allow-net fetch.js
 You should see the JSON data, HTML data as text, and an error message in the
 console.
 
-### Streaming data
+## Streaming data
 
 Sometimes you may want to send or receive large files over the network. When you
 don't know the size of a file in advance, streaming is a more efficient way to

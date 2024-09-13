@@ -11,9 +11,7 @@ organize your code, manage dependencies, script tasks and run tests more easily.
 This tutorial will show you how to create a simple project structure for Deno
 using the `deno init` command, which will scaffold out a Deno project for you.
 
-## Tutorial
-
-### Create a basic project
+## Create a basic project
 
 Initialize a new project by running the following command:
 
@@ -24,7 +22,7 @@ deno init my_project
 Where `my_project` is the name of your project. You can
 [read more about the project structure](/runtime/getting_started/first_project/).
 
-#### Run your project
+### Run your project
 
 Navigate to the project directory:
 
@@ -52,7 +50,7 @@ you can see, it runs the `main.ts` file with the `--watch` flag, which will
 automatically reload the script when changes are made. You can see this in
 action if you open the `main.ts` file and make a change.
 
-#### Run the tests
+### Run the tests
 
 In the project directory run:
 
@@ -65,7 +63,7 @@ This will execute all the tests in the project. You can read more about
 little more depth in a later tutorial. At the moment you have one test file,
 `main_test.ts`, which tests the `add` function in `main.ts`.
 
-### Adding to your project
+## Adding to your project
 
 The `main.ts` file serves as the entry point for your application. It’s where
 you’ll write your main program logic. When developing your project you will

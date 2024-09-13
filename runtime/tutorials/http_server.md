@@ -16,12 +16,10 @@ development, to serve your HTML, CSS, and JavaScript files, or perhaps you're
 building a REST API - having your own server lets you define endpoints, handle
 requests and manage data.
 
-## Tutorial
-
 Deno offers multiple ways to create an HTTP server. In this tutorial, we'll look
 at some of the most common methods.
 
-### Deno.serve
+## Deno.serve
 
 The simplest way to create an HTTP server in Deno is by using `Deno.serve`.
 
@@ -68,7 +66,7 @@ The [`--allow-net` flag](/runtime/fundamentals/security/) is required to allow
 the server to listen for incoming requests. This flag grants Deno permissions to
 access the network.
 
-### Default fetch export
+## Default fetch export
 
 Another way to create an HTTP server in Deno is by exporting a default `fetch`
 function. [The fetch API](/api/web/~/fetch) initiates an HTTP request to
