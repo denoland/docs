@@ -77,7 +77,12 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
                   {example.parsed.title}
                 </h1>
                 {example.parsed.description && (
-                  <p class="max-w-prose">{example.parsed.description}</p>
+                  <p
+                    className="max-w-prose"
+                    dangerouslySetInnerHTML={{
+                      __html: example.parsed.description,
+                    }}
+                  />
                 )}
               </div>
 
@@ -341,11 +346,11 @@ function SnippetComponent(props: {
 export function CopyButton(props: { text: string }) {
   return (
     <button
-      onClick={() => navigator?.clipboard?.writeText(props.text)}
       type="button"
       aria-label="Copy code to clipboard"
       title="Copy"
-      class="clean-btn copy-all absolute right-2 top-6 hover:bg-gray-200 text-gray-900 p-2 rounded-md z-10"
+      class="clean-btn copy-all absolute right-2 top-10 hover:bg-gray-200 text-gray-900 p-2 rounded-md z-10"
+      data-copy={props.text}
     >
       <svg viewBox="0 0 24 24" width="15" height="15">
         <path
