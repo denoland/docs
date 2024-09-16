@@ -61,8 +61,8 @@ We also use the `denoland/deno:bin-1.45.2` image to get the Deno binary and
 The `PORT` environment variable is set to `8000` to tell the AWS Lambda adapter
 that we are listening on port `8000`.
 
-We set the `DENO_DIR` environment variable to `/var/deno_dir` to store the Deno
-cache in the `/var/deno_dir` directory.
+We set the `DENO_DIR` environment variable to `/var/deno_dir` to store cached
+Deno source code and transpiled modules in the `/var/deno_dir` directory.
 
 The warmup caches step is used to warm up the Deno cache before the function is
 invoked. This is done to reduce the cold start time of the function. These
