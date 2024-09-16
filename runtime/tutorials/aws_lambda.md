@@ -36,6 +36,8 @@ COPY --from=aws-lambda-adapter /lambda-adapter /opt/extensions/lambda-adapter
 COPY --from=deno_bin /deno /usr/local/bin/deno
 ENV PORT=8000
 EXPOSE 8000
+RUN mkdir /var/deno_dir
+ENV DENO_DIR=/var/deno_dir
 
 # Copy the function code
 WORKDIR "/var/task"
@@ -58,6 +60,9 @@ We also use the `denoland/deno:bin-1.45.2` image to get the Deno binary and
 
 The `PORT` environment variable is set to `8000` to tell the AWS Lambda adapter
 that we are listening on port `8000`.
+
+We set the `DENO_DIR` environment variable to `/var/deno_dir` to store the Deno
+cache in the `/var/deno_dir` directory.
 
 The warmup caches step is used to warm up the Deno cache before the function is
 invoked. This is done to reduce the cold start time of the function. These
