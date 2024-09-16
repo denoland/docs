@@ -40,6 +40,9 @@ This will create a new Next.js app with TypeScript and run it with Deno. You can
 then open your browser to `http://localhost:3000` to see your new app, and start
 editing `page.tsx` to see your changes live.
 
+To better understand how JSX and Deno interface under the hood, read on
+[here](/runtime/reference/jsx/).
+
 ## Fresh
 
 [Fresh](https://fresh.deno.dev/) is the most popular web framework for Deno. It

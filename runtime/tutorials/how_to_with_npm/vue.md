@@ -31,7 +31,7 @@ deno task dev
 
 You should now be able to view your default Deno and Vue app in your browser:
 
-![default vue app](../../manual/images/how-to/vue/default-vue-app.png)
+![default vue app](../images/how-to/vue/default-vue-app.png)
 
 ## Add a backend
 
@@ -95,7 +95,7 @@ deno run --allow-env --allow-net api/main.ts
 
 If we go to `localhost:8000/api`, we see:
 
-![json response of dinosaurs](../../manual/images/how-to/vue/api-response.png)
+![json response of dinosaurs](../images/how-to/vue/api-response.png)
 
 Lookin' good so far.
 
@@ -353,6 +353,6 @@ app.mount("#app");
 
 Let's run it and see what we get so far:
 
-![Clicking on a dinosaur to get to an individual dinosaur page](../../manual/images/how-to/vue/vue-demo.gif)
+![Clicking on a dinosaur to get to an individual dinosaur page](../images/how-to/vue/vue-demo.gif)
 
 Awesome!
