@@ -12,3 +12,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v1
       - run: deno fmt --check
+      - run: deno task build
