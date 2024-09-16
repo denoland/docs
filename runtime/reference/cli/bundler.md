@@ -15,7 +15,7 @@ Use [deno_emit](https://github.com/denoland/deno_emit),
 Deno, which includes all dependencies of the specified input. For example:
 
 ```bash
-deno bundle https://deno.land/std@0.190.0/examples/colors.tsts colors.bundle.js
+$ deno bundle https://deno.land/std@0.190.0/examples/colors.tsts colors.bundle.js
 Bundle https://deno.land/std@0.190.0/examples/colors.ts
 Download https://deno.land/std@0.190.0/examples/colors.ts
 Download https://deno.land/std@0.190.0/fmt/colors.ts
