@@ -32,7 +32,7 @@ jobs:
 
       - name: "Reference: generate types"
         working-directory: "reference_gen"
-        run: deno task types
+        run: DENO_FUTURE=1 deno task types
 
       - name: "Reference: generate docs"
         working-directory: "reference_gen"
