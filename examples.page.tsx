@@ -77,7 +77,12 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
                   {example.parsed.title}
                 </h1>
                 {example.parsed.description && (
-                  <p class="max-w-prose">{example.parsed.description}</p>
+                  <p
+                    className="max-w-prose"
+                    dangerouslySetInnerHTML={{
+                      __html: example.parsed.description,
+                    }}
+                  />
                 )}
               </div>
 
@@ -89,7 +94,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
               </a>
             </div>
             <div class="relative block">
-              <CopyButton text={contentNoCommentary} />
+              <CopyButton text={contentNoCommentary}/>
             </div>
             {example.parsed.files.map((file) => (
               <div class="flex flex-col gap-4 md:gap-0" key={file.name}>
@@ -341,11 +346,12 @@ function SnippetComponent(props: {
 export function CopyButton(props: { text: string }) {
   return (
     <button
-      onClick={() => navigator?.clipboard?.writeText(props.text)}
       type="button"
       aria-label="Copy code to clipboard"
       title="Copy"
-      class="clean-btn copy-all absolute right-2 top-6 hover:bg-gray-200 text-gray-900 p-2 rounded-md z-10"
+      class="clean-btn copy-all absolute right-2 top-10 hover:bg-gray-200 text-gray-900 p-2 rounded-md z-10"
+      data-content={props.text}
+      onclick="navigator?.clipboard?.writeText(this.dataset['content'])"
     >
       <svg viewBox="0 0 24 24" width="15" height="15">
         <path
