@@ -220,7 +220,7 @@ export const sidebar = [
       {
         label: "Advanced Examples",
         items: [
-          "/runtime/tutorials/unix_cat/",
+          "/examples/unix-cat/",
           "/runtime/tutorials/file_server/",
           "/runtime/tutorials/tcp_echo/",
           "/runtime/tutorials/subprocess/",
