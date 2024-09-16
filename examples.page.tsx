@@ -94,7 +94,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
               </a>
             </div>
             <div class="relative block">
-              <CopyButton text={contentNoCommentary}/>
+              <CopyButton text={contentNoCommentary} />
             </div>
             {example.parsed.files.map((file) => (
               <div class="flex flex-col gap-4 md:gap-0" key={file.name}>
