@@ -2,6 +2,9 @@
 title: "Connecting to databases"
 ---
 
+It is common for applications to store and retrieve data from databases. Deno
+supports connecting to many database management systems.
+
 The Deno community has published a number of third-party modules that make it
 easy to connect to popular databases like MySQL, Postgres, and MongoDB.
 
@@ -15,7 +18,10 @@ for Deno.
 
 ### Connect to MySQL with deno_mysql
 
-```ts
+First import the `msql` module and create a new client instance. Then connect to
+the database passing an object with the connection details:
+
+```ts title="main.js"
 import { Client } from "https://deno.land/x/mysql/mod.ts";
 
 const client = await new Client().connect({
@@ -26,6 +32,8 @@ const client = await new Client().connect({
 });
 ```
 
+Once connected, you can execute queries, insert data and retrive information.
+
 ## Postgres
 
 [deno-postgres](https://deno.land/x/postgres) is a lightweight PostgreSQL driver
@@ -33,7 +41,11 @@ for Deno focused on developer experience.
 
 ### Connect to Postgres with deno-postgres
 
-```ts
+First, import the `Client` class from the `deno-postgres` module and create a
+new client instance. Then connect to the database passing an object with the
+connection details:
+
+```ts class="main.js"
 import { Client } from "https://deno.land/x/postgres/mod.ts";
 
 const client = new Client({
@@ -51,7 +63,10 @@ for Node.js and Deno.
 
 ### Connect to Postgres with postgresjs
 
-```js
+Import the `postgres` module and create a new client instance. Then connect to
+the database passing a connection string as an argument:
+
+```js title="main.js"
 import postgres from "https://deno.land/x/postgresjs/mod.js";
 
 const sql = postgres("postgres://username:password@host:port/database");
@@ -66,16 +81,17 @@ learn more about how to work with the driver
 only difference using this module in the context of Deno will be how you import
 the module using an `npm:` specifier.
 
-```ts title="Import the MongoDB driver using npm specifiers"
-// Import the latest major version of the MongoDB driver
+Import the MongoDB driver, set up connection configuration then connect to a
+MongoDB instance. You can then perform operations like inserting documents into
+a collection before closing the connection:
+
+```ts title="main.js"
 import { MongoClient } from "npm:mongodb@6";
 
-// Configure a MongoDB client
 const url = "mongodb://localhost:27017";
 const client = new MongoClient(url);
 const dbName = "myProject";
 
-// Connect to a MongoDB instance
 await client.connect();
 console.log("Connected successfully to server");
 
@@ -87,7 +103,6 @@ const collection = db.collection("documents");
 const insertResult = await collection.insertMany([{ a: 1 }, { a: 2 }]);
 console.log("Inserted documents =>", insertResult);
 
-// Close the connection
 client.close();
 ```
 
@@ -301,3 +316,7 @@ const response = await graphql({
 
 console.log(response);
 ```
+
+🦕 Now you can connect your Deno project to a database you'll be able to work
+with persistent data, perform CRUD operations and start building more complex
+applications.
