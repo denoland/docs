@@ -28,7 +28,7 @@ jobs:
 
       - name: "Reference: install"
         working-directory: "reference_gen"
-        run: deno install
+        run: DENO_FUTURE=1 deno install
 
       - name: "Reference: generate types"
         working-directory: "reference_gen"
