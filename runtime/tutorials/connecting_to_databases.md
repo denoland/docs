@@ -18,7 +18,7 @@ for Deno.
 
 ### Connect to MySQL with deno_mysql
 
-First import the `msql` module and create a new client instance. Then connect to
+First import the `mysql` module and create a new client instance. Then connect to
 the database passing an object with the connection details:
 
 ```ts title="main.js"
