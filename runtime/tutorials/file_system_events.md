@@ -14,10 +14,7 @@ oldUrl:
 
 To poll for file system events in the current directory:
 
-```ts
-/**
- * watcher.ts
- */
+```ts title="watcher.ts"
 const watcher = Deno.watchFs(".");
 for await (const event of watcher) {
   console.log(">>>> event", event);

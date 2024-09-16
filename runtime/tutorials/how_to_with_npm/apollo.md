@@ -2,6 +2,7 @@
 title: "How to use Apollo with Deno"
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/apollo/
+  - /runtime/manual/node/how_to_with_npm/apollo/
 ---
 
 [Apollo Server](https://www.apollographql.com/) is a GraphQL server that you can

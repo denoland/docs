@@ -14,7 +14,7 @@ This is a tutorial that walks you through building a simple React app with Deno
 in less than five minutes. The app will display a list of dinosaurs. When you
 click on one, it'll take you to a dinosaur page with more details.
 
-![demo of the app](../../manual/images/how-to/react/react-dinosaur-app-demo.gif)
+![demo of the app](./images/how-to/react/react-dinosaur-app-demo.gif)
 
 [View source](https://github.com/denoland/examples/tree/main/with-react) or
 [follow the video guide](https://www.youtube.com/watch?v=eStwt_2THd8).
@@ -93,7 +93,7 @@ deno run --allow-env --allow-net api/main.ts
 
 If we go to `localhost:8000`, we see:
 
-![json response of dinosaurs](../../manual/images/how-to/react/dinosaur-api.png)
+![json response of dinosaurs](../images/how-to/react/dinosaur-api.png)
 
 Lookin' good so far.
 
@@ -238,6 +238,6 @@ deno task start
 
 And click through the app:
 
-![demo of the app](../../manual/images/how-to/react/react-dinosaur-app-demo.gif)
+![demo of the app](./images/how-to/react/react-dinosaur-app-demo.gif)
 
 Huzzah!

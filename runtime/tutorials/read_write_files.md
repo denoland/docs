@@ -37,10 +37,7 @@ method returns a promise which provides access to the file's text data.
 
 **Command:** `deno run --allow-read read.ts`
 
-```typescript
-/**
- * read.ts
- */
+```typescript title="read.ts"
 const text = await Deno.readTextFile("./people.json");
 
 console.log(text);
@@ -67,10 +64,7 @@ command.
 
 **Command:** `deno run --allow-write write.ts`
 
-```typescript
-/**
- * write.ts
- */
+```typescript title="write.ts"
 await Deno.writeTextFile("./hello.txt", "Hello World!");
 
 console.log("File written to ./hello.txt");
@@ -96,10 +90,7 @@ To execute the code, the `deno run` command needs the write flag.
 
 **Command:** `deno run --allow-write write.ts`
 
-```typescript
-/**
- * write.ts
- */
+```typescript title="write.ts"
 function writeJson(path: string, data: object): string {
   try {
     Deno.writeTextFileSync(path, JSON.stringify(data));

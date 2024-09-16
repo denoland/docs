@@ -74,10 +74,10 @@ site.copy("deploy/docs-images");
 site.copy("deploy/kv/manual/images");
 site.copy("deploy/tutorials/images");
 site.copy("deploy/kv/tutorials/images");
-site.copy("runtime/manual/images");
 site.copy("runtime/fundamentals/images");
 site.copy("runtime/getting_started/images");
 site.copy("runtime/reference/images");
+site.copy("runtime/tutorials/images");
 site.copy("deploy/manual/images");
 site.copy("deno.json");
 site.copy("go.json");
@@ -216,6 +216,7 @@ site.ignore(
   "README.md",
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
+  (path) => path.includes("/reference_gen/node_descriptions"),
   "examples",
   // "deploy",
   // "examples.page.tsx",
