@@ -45,7 +45,7 @@ First, import the `Client` class from the `deno-postgres` module and create a
 new client instance. Then connect to the database passing an object with the
 connection details:
 
-```ts class="main.js"
+```ts 
 import { Client } from "https://deno.land/x/postgres/mod.ts";
 
 const client = new Client({
@@ -66,7 +66,7 @@ for Node.js and Deno.
 Import the `postgres` module and create a new client instance. Then connect to
 the database passing a connection string as an argument:
 
-```js title="main.js"
+```js
 import postgres from "https://deno.land/x/postgresjs/mod.js";
 
 const sql = postgres("postgres://username:password@host:port/database");
