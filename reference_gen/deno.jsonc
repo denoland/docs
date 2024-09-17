@@ -1,5 +1,6 @@
 {
-  "nodeModulesDir": "manual",
+  "nodeModulesDir": true,
+  "lock": false, // TODO(@crowlKats): remove when 2.0 releases
   "imports": {
     "@b-fuze/deno-dom": "jsr:@b-fuze/deno-dom@^0.1.47",
     "@std/async": "jsr:@std/async@^0.224.2",

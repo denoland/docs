@@ -272,9 +272,17 @@ Definition: `--allow-run[=<PROGRAM_NAME>...]`
 # Allow running all subprocesses
 deno run --allow-run script.ts
 
-# Allow running "deno" and "whoami" subprocesses
-deno run --allow-run="deno,whoami" script.ts
+# Allow running "curl" and "whoami" subprocesses
+deno run --allow-run="curl,whoami" script.ts
 ```
+
+:::caution
+
+You probably don't ever want to use `--allow-run=deno` as being able to spawn a
+`deno` process means the script can spawn another `deno` process with full
+permissions.
+
+:::
 
 Definition: `--deny-run[=<PROGRAM_NAME>...]`
 

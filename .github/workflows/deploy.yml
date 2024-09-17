@@ -19,20 +19,24 @@ jobs:
 
       - name: Set up Deno
         uses: denoland/setup-deno@v1
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v1
         with:
           deno-version: ea8bf0945ac93a16a3d8df2470c70d9cf1c36172
+          deno-binary-name: "deno_doc"
 
       - name: "Reference: install"
         working-directory: "reference_gen"
-        run: deno install
+        run: DENO_FUTURE=1 deno install
 
       - name: "Reference: generate types"
         working-directory: "reference_gen"
-        run: deno task types
+        run: DENO_FUTURE=1 deno task types
 
       - name: "Reference: generate docs"
         working-directory: "reference_gen"
-        run: deno task doc
+        run: deno_doc task doc
 
       - name: Build
         env:
