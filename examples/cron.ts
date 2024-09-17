@@ -1,5 +1,5 @@
 /**
- * @title Deno cron
+ * @title Deno Cron
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --unstable-cron <url>
