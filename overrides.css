@@ -33,11 +33,15 @@
 }
 
 .ddoc .usageContent {
-  @apply bg-primary/5 border-primary/25 max-w-[75ch] pt-3.5 pb-4 !important;
+  @apply bg-primary/5 border-primary/25 max-w-[75ch] py-4 mt-1 relative !important;
+}
+
+.ddoc .usageContent > div.markdown > pre.highlight {
+  @apply border-primary/25 !important;
 }
 
 .ddoc .usageContent > h3 {
-  @apply font-semibold ml-1.5 mb-1.5 !important;
+  @apply text-xs -top-2.5 bg-white border border-primary/25 px-2 py-0.5 rounded absolute !important;
 }
 
 .ddoc .usageContent > .markdown {
