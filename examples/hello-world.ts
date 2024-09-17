@@ -1,5 +1,5 @@
 /**
- * @title Hello World
+ * @title Hello world
  * @difficulty beginner
  * @tags cli, deploy, web
  * @run <url>

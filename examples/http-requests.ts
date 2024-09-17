@@ -1,5 +1,5 @@
 /**
- * @title HTTP Requests
+ * @title HTTP requests
  * @difficulty beginner
  * @tags cli, deploy, web
  * @run --allow-net <url>

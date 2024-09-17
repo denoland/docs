@@ -1,5 +1,5 @@
 /**
- * @title Moving/Renaming Files
+ * @title Moving/Renaming files
  * @difficulty beginner
  * @tags cli
  * @run --allow-read=./ --allow-write=./ <url>

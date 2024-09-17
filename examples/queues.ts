@@ -1,5 +1,5 @@
 /**
- * @title Deno Queues
+ * @title Deno queues
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --unstable-kv <url>

@@ -1,5 +1,5 @@
 /**
- * @title UDP Listener: Ping
+ * @title UDP listener: Ping
  * @difficulty intermediate
  * @tags cli
  * @run --allow-net --unstable-net <url>

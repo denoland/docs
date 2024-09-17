@@ -1,5 +1,5 @@
 /**
- * @title Importing & Exporting
+ * @title Importing & exporting
  * @difficulty beginner
  * @tags cli, deploy
  * @resource {/examples/dependency-management} Example: Dependency Management

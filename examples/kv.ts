@@ -1,5 +1,5 @@
 /**
- * @title Deno KV: Key/Value Database
+ * @title Deno KV: Key/Value database
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --unstable-kv <url>

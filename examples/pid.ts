@@ -1,5 +1,5 @@
 /**
- * @title Process Information
+ * @title Process information
  * @difficulty beginner
  * @tags cli
  * @run <url>

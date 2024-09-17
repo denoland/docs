@@ -1,5 +1,5 @@
 /**
- * @title HTTP Server: Streaming
+ * @title HTTP server: Streaming
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --allow-net <url>

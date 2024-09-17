@@ -1,5 +1,5 @@
 /**
- * @title Manipulating & Parsing URLs
+ * @title Manipulating & parsing URLs
  * @difficulty beginner
  * @tags cli, deploy, web
  * @run <url>

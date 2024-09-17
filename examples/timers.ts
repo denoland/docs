@@ -1,5 +1,5 @@
 /**
- * @title Timeouts & Intervals
+ * @title Timeouts & intervals
  * @difficulty beginner
  * @tags cli, deploy, web
  * @run <url>
