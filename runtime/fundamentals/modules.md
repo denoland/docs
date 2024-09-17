@@ -108,8 +108,8 @@ import { pascalCase } from "cases";
 ```
 
 The remapped name can be any valid specifier. It's a very powerful feature in
-Deno that can remap anything. Learn more about everything the import map can do
-[here](/runtime/manual/basics/import_maps/).
+Deno that can remap anything. Learn more about what the import map can do
+[here](/runtime/fundamentals/configuration/#dependencies).
 
 ## Adding dependencies with `deno add`
 
