@@ -1,5 +1,5 @@
 /**
- * @title Deleting Files
+ * @title Deleting files
  * @difficulty beginner
  * @tags cli
  * @resource {https://docs.deno.com/api/deno/~/Deno.remove} Doc: Deno.remove

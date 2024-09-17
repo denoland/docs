@@ -1,5 +1,5 @@
 /**
- * @title Reading Files
+ * @title Reading files
  * @difficulty beginner
  * @tags cli, deploy
  * @run --allow-read <url>

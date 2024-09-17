@@ -1,5 +1,5 @@
 /**
- * @title UDP Connector: Ping
+ * @title UDP connector: Ping
  * @difficulty intermediate
  * @tags cli
  * @run --allow-net --unstable-net <url>

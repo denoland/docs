@@ -1,5 +1,5 @@
 /**
- * @title Temporary Files & Directories
+ * @title Temporary files & directories
  * @difficulty beginner
  * @tags cli
  * @run --allow-read --allow-write <url>

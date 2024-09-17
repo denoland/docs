@@ -212,14 +212,15 @@ export const sidebar = [
       "/runtime/tutorials/init_project/",
       "/runtime/tutorials/fetch_data/",
       "/runtime/tutorials/http_server/",
-      "/runtime/tutorials/read_write_files/",
+      "/examples/reading-files/",
+      "/examples/writing-files/",
       "/runtime/tutorials/hashbang/",
       "/runtime/tutorials/cjs_to_esm/",
       "/runtime/tutorials/connecting_to_databases/",
       {
         label: "Advanced Examples",
         items: [
-          "/runtime/tutorials/unix_cat/",
+          "/examples/unix-cat/",
           "/runtime/tutorials/file_server/",
           "/runtime/tutorials/tcp_echo/",
           "/runtime/tutorials/subprocess/",

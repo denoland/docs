@@ -1,5 +1,5 @@
 /**
- * @title Deno KV Watch
+ * @title Deno KV watch
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --unstable-kv <url>

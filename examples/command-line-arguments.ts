@@ -1,5 +1,5 @@
 /**
- * @title Command Line Arguments
+ * @title Command line arguments
  * @difficulty beginner
  * @tags cli
  * @run <url> Deno Sushi --help --version=1.0.0 --no-color

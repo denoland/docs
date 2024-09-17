@@ -81,6 +81,7 @@ site.copy("runtime/tutorials/images");
 site.copy("deploy/manual/images");
 site.copy("deno.json");
 site.copy("go.json");
+site.copy("oldurls.json");
 site.copy("server.ts");
 site.copy("middleware.ts");
 site.copy("examples");

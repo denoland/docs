@@ -1,6 +1,7 @@
 import Server from "lume/core/server.ts";
 import REDIRECTS from "./_redirects.json" with { type: "json" };
 import GO_LINKS from "./go.json" with { type: "json" };
+import REDIRECT_LINKS from "./oldurls.json" with { type: "json" };
 import {
   type Event,
   formatStatus,
@@ -20,6 +21,10 @@ REDIRECTS["/api/"] = "/api/deno/";
 
 for (const [name, url] of Object.entries(GO_LINKS)) {
   REDIRECTS[`/go/${name}/`] = url;
+}
+
+for (const [name, url] of Object.entries(REDIRECT_LINKS)) {
+  REDIRECTS[name] = url;
 }
 
 const GA4_MEASUREMENT_ID = Deno.env.get("GA4_MEASUREMENT_ID");

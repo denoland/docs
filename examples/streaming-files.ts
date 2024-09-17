@@ -1,5 +1,5 @@
 /**
- * @title Streaming File Operations
+ * @title Streaming file operations
  * @difficulty intermediate
  * @tags cli
  * @run --allow-read --allow-write <url>

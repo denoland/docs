@@ -1,5 +1,5 @@
 /**
- * @title Creating & Resolving Symlinks
+ * @title Creating & resolving symlinks
  * @difficulty beginner
  * @tags cli
  * @run --allow-write --allow-read <url>

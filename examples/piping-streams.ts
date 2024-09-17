@@ -1,5 +1,5 @@
 /**
- * @title Piping Streams
+ * @title Piping streams
  * @difficulty intermediate
  * @tags cli
  * @run --allow-net --allow-read --allow-write <url>

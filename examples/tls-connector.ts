@@ -1,5 +1,5 @@
 /**
- * @title TCP/TLS Connector: Ping
+ * @title TCP/TLS connector: Ping
  * @difficulty intermediate
  * @tags cli
  * @run --allow-net --allow-read <url>

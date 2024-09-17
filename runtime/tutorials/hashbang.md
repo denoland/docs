@@ -1,24 +1,33 @@
 ---
-title: "Making Scripts Executable With a Hashbang (Shebang)"
+title: "Executable Scripts"
 oldUrl:
   - /runtime/manual/examples/hashbang/
 ---
 
-## Concepts
+Making Deno scripts executable can come in handy when creating small tools or
+utilities for tasks like file manipulation, data processing or repetitive tasks
+that you might want to run from the command line. Executable scripts allow you
+to create ad-hoc solutions without setting up an entire project.
 
-- [Deno.env] provides environment variables.
-- [env] runs a program in a modified environment.
+## Creating an example script
 
-## Overview
+To make a script executable, start the script with a hashbang, (sometimes called
+a shebang). This is a sequence of characters (#!) that tells your operating
+system how to execute a script. It is followed by the path to the interpreter
+that should be used to run the script.
 
-Making Deno scripts executable can come in handy when creating small tools.
+:::note
 
-_Note: Hashbangs do not work on Windows._
+To use a hashbang on Windows you will need to install the Windows Subsystem for
+Linux (WSL) or use a Unix-like shell like
+[Git Bash](https://git-scm.com/downloads).
 
-## Example
+:::
 
-In this program, we give the context permission to access the environment
-variables and print the Deno installation path.
+We'll make a simple script that prints the Deno installation path using the
+[Deno.env](/api/deno/~/Deno.env) API.
+
+Create a file named `hashbang.ts` with the following content:
 
 ```ts title="hashbang.ts"
 #!/usr/bin/env -S deno run --allow-env
@@ -27,38 +36,37 @@ const path = Deno.env.get("DENO_INSTALL");
 console.log("Deno Install Path:", path);
 ```
 
-### Permissions
+This script tells the system to use the deno runtime to run the script. The -S
+flag splits the command into arguments and indicates that the following argument
+(`deno run --allow-env`) should be passed to the env command.
 
-You may need to give the script execution permissions.
+The script then retrieves the value associated with the environment variable
+named `DENO_INSTALL` with `Deno.env.get()` and assigns it to a variable called
+`path`. Finally, it prints the path to the console using `console.log()`.
 
-#### Unix
+### Execute the script
 
-```shell
+In order to execute the script, you may need to give the script execution
+permissions, you can do so using the `chmod` command with a `+x` flag (for
+execute):
+
+```sh
 chmod +x hashbang.ts
 ```
 
-### Execute
+You can execute the script directly in the command line with:
 
-Start the script by calling it like any other command.
-
-```shell
+```sh
 ./hashbang.ts
 ```
 
-## Details
-
-- A hashbang has to be placed in the first line.
-
-- `-S` splits the command into arguments.
-
-- End the file name in `.ts` for the script to be interpreted as TypeScript.
-
 ## Using hashbang in files with no extension
 
-You may not wish to use an extension for your script's filename. In this case
-supply one using the `--ext` flag.
+For brevity, you may wish to omit the extension for your script's filename. In
+this case, supply one using the `--ext` flag in the script itself, then you can
+run the script with just the file name:
 
-```shell
+```shell title="my_script"
 $ cat my_script
 #!/usr/bin/env -S deno run --allow-env --ext=js
 console.log("Hello!");
@@ -66,5 +74,7 @@ $ ./my_script
 Hello!
 ```
 
-[Deno.env]: https://docs.deno.com/api/deno/~/Deno.env
-[env]: https://www.man7.org/linux/man-pages/man1/env.1.html
+🦕 Now you can directly execute Deno scripts from the command line! Remember to
+set the execute permission (`chmod +x`) for your script file, and you’re all set
+to build anything from simple utilities to complex tools. Check out the
+[Deno examples](/examples/) for inspiration on what you can script.

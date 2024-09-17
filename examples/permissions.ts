@@ -1,5 +1,5 @@
 /**
- * @title Permission Management
+ * @title Permission management
  * @difficulty beginner
  * @tags cli
  * @run <url>

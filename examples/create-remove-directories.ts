@@ -1,5 +1,5 @@
 /**
- * @title Creating & Removing Directories
+ * @title Creating & removing directories
  * @difficulty beginner
  * @tags cli
  * @run --allow-write <url>
