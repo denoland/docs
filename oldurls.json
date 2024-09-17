@@ -1,4 +1,4 @@
 {
-    "/runtime/manual/examples/read_write_files/": "/examples/",
-    "/runtime/tutorials/unix_cat/": "/tutorials/unix-cat/"
+  "/runtime/manual/examples/read_write_files/": "/examples/",
+  "/runtime/tutorials/unix_cat/": "/tutorials/unix-cat/"
 }

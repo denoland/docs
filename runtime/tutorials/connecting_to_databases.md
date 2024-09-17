@@ -18,8 +18,8 @@ for Deno.
 
 ### Connect to MySQL with deno_mysql
 
-First import the `mysql` module and create a new client instance. Then connect to
-the database passing an object with the connection details:
+First import the `mysql` module and create a new client instance. Then connect
+to the database passing an object with the connection details:
 
 ```ts title="main.js"
 import { Client } from "https://deno.land/x/mysql/mod.ts";
@@ -45,7 +45,7 @@ First, import the `Client` class from the `deno-postgres` module and create a
 new client instance. Then connect to the database passing an object with the
 connection details:
 
-```ts 
+```ts
 import { Client } from "https://deno.land/x/postgres/mod.ts";
 
 const client = new Client({
