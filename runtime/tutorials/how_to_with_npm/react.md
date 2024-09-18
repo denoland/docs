@@ -257,7 +257,7 @@ export default function () {
 
 Finally, we can point to these two new pages in the `src/App.tsx` file:
 
-```ts title="App.tsx"
+```tsx title="App.tsx"
 import { Route, Routes } from "react-router-dom";
 import Index from "./pages/Index";
 import Dinosaur from "./pages/Dinosaur";
