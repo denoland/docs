@@ -151,7 +151,7 @@ Update the `/src/main.tsx` file to import and use the
 [`BrowserRouter`](https://reactrouter.com/en/main/router-components/browser-router)
 component from `react-router-dom`:
 
-```ts title="main.tsx"
+```tsx title="main.tsx"
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
