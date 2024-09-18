@@ -173,7 +173,7 @@ We'll create two pages: `Index` and `Dinosaur`. The `Index` page will list all
 the dinosaurs and the `Dinosaur` page will show details of a specific dinosaur.
 
 Create a `pages` folder in the `src` directory and inside that create two files:
-`Index.tsx` and `Dinosaur.tsx`.
+`index.tsx` and `Dinosaur.tsx`.
 
 ### Types
 
