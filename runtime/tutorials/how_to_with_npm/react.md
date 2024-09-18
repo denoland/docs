@@ -46,9 +46,9 @@ app in the browser.
 The next step is to add a backend API. We'll create a very simple API that
 returns information about dinosaurs.
 
-In the root of your new project, create an `api` folder. In that folder, create a
-`main.ts` file, which will run the server, and a `data.json`, which will contain
-the hard coded dinosaur data.
+In the root of your new project, create an `api` folder. In that folder, create
+a `main.ts` file, which will run the server, and a `data.json`, which will
+contain the hard coded dinosaur data.
 
 Copy and paste
 [this json file](https://raw.githubusercontent.com/denoland/deno-vue-example/main/api/data.json)
@@ -125,7 +125,7 @@ In your `deno.json` file, update the `tasks` field to include the following:
   "tasks": {
     "dev": "deno task dev:api & deno task dev:vite",
     "dev:api": "deno run --allow-env --allow-net api/main.ts",
-    "dev:vite": "deno run -A npm:vite",
+    "dev:vite": "deno run -A npm:vite"
     // ...
   }
 }
