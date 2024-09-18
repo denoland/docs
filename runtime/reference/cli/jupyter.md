@@ -14,6 +14,13 @@ interactive notebooks.
 
 :::
 
+:::caution `deno jupyter` always runs with `--allow-all`
+
+Currently all code executed in the Jupyter kernel runs with `--allow-all` flag.
+This is a temporary limitation and will be addressed in the future.
+
+:::
+
 ## Quickstart
 
 Run `deno jupyter --unstable` and follow the instructions.
