@@ -226,7 +226,7 @@ export default function () {
 This page will fetch the details of a specific dinosaur from the API and render
 it in a paragraph:
 
-```ts title="Dinosaur.tsx"
+```tsx title="Dinosaur.tsx"
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Dino } from "../../types";
