@@ -440,6 +440,23 @@ Deno.test("example.ts$4-10.ts", async () => {
 });
 ```
 
+### Skipping code blocks
+
+You can skip the evaluation of code blocks by adding the `ignore` attribute.
+
+````ts
+/**
+ * This code block will not be run.
+ *
+ * ```ts ignore
+ * await sendEmail("deno@example.com");
+ * ```
+ */
+export async function sendEmail(to: string) {
+  // send an email to the given address...
+}
+````
+
 ## Sanitizers
 
 The test runner offers several sanitizers to ensure that the test behaves in a
