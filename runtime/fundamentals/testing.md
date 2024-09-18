@@ -399,11 +399,11 @@ markdown) instead.
 
 ### Exported items are automatically imported
 
-Looking at the generated test code above carefully, you will notice that it
-includes the `import` statement to import the `add` fucntion even though the
-original code block does not have it. Briefly, all items imported from the
-module being documented are automatically imported into the generated test code
-with the same name.
+Looking at the generated test code above, you will notice that it includes the
+`import` statement to import the `add` function even though the original code
+block does not have it. When documenting a module, any items exported from the
+module are automatically included in the generated test code using the same
+name.
 
 Let's say we have the following module:
 
