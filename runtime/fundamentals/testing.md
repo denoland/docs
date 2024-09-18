@@ -379,7 +379,7 @@ that looks like below:
 import { assertEquals } from "jsr:@std/assert/equals";
 import { add } from "file:///path/to/example.ts";
 
-Deno.test("example.ts$4-10", async () => {
+Deno.test("example.ts$4-10.ts", async () => {
   const sum = add(1, 2);
   assertEquals(sum, 3);
 });
@@ -434,7 +434,7 @@ This will get converted to the following test case:
 import { assertEquals } from "jsr:@std/assert/equals";
 import { add, ONE }, getTwo from "file:///path/to/example.ts";
 
-Deno.test("example.ts$4-10", async () => {
+Deno.test("example.ts$4-10.ts", async () => {
   const sum = add(ONE, getTwo());
   assertEquals(sum, 3);
 });
