@@ -46,7 +46,7 @@ app in the browser.
 The next step is to add a backend API. We'll create a very simple API that
 returns information about dinosaurs.
 
-In the root of your new project, create an `api` folder. In that folder,create a
+In the root of your new project, create an `api` folder. In that folder, create a
 `main.ts` file, which will run the server, and a `data.json`, which will contain
 the hard coded dinosaur data.
 
