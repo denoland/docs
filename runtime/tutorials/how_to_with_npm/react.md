@@ -120,13 +120,15 @@ task to run both the React app and the API server.
 
 In your `deno.json` file, update the `tasks` field to include the following:
 
-```json
+```jsonc
 {
   "tasks": {
     "dev": "deno task dev:api & deno task dev:vite",
     "dev:api": "deno run --allow-env --allow-net api/main.ts",
     "dev:vite": "deno run -A npm:vite",
-    ...
+    // ...
+  }
+}
 ```
 
 If you run `deno task dev` now and visit `localhost:8000`, in your browser you
