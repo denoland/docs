@@ -1,5 +1,5 @@
 /**
- * @title Web Workers
+ * @title Web workers
  * @difficulty intermediate
  * @tags cli, web
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers} MDN: Web Workers

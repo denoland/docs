@@ -1,0 +1,5 @@
+{
+  "/runtime/tutorials/read_write_files/": "/examples/",
+  "/runtime/tutorials/unix_cat/": "/examples/unix-cat/",
+  "/examples/dependency-management/": "/runtime/fundamentals/configuration/#dependencies"
+}

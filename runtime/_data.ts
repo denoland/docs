@@ -212,14 +212,25 @@ export const sidebar = [
       "/runtime/tutorials/init_project/",
       "/runtime/tutorials/fetch_data/",
       "/runtime/tutorials/http_server/",
-      "/runtime/tutorials/read_write_files/",
+      {
+        label: "Reading files",
+        id: "/examples/reading-files/",
+      },
+      {
+        label: "Writing files",
+        id: "/examples/writing-files/",
+      },
       "/runtime/tutorials/hashbang/",
       "/runtime/tutorials/cjs_to_esm/",
+      "/runtime/tutorials/how_to_with_npm/react/",
       "/runtime/tutorials/connecting_to_databases/",
       {
         label: "Advanced Examples",
         items: [
-          "/runtime/tutorials/unix_cat/",
+          {
+            label: "Unix cat",
+            id: "/examples/unix-cat/",
+          },
           "/runtime/tutorials/file_server/",
           "/runtime/tutorials/tcp_echo/",
           "/runtime/tutorials/subprocess/",
@@ -243,7 +254,6 @@ export const sidebar = [
           "/runtime/tutorials/how_to_with_npm/mysql2/",
           "/runtime/tutorials/how_to_with_npm/planetscale/",
           "/runtime/tutorials/how_to_with_npm/prisma/",
-          "/runtime/tutorials/how_to_with_npm/react/",
           "/runtime/tutorials/how_to_with_npm/redis/",
           "/runtime/tutorials/how_to_with_npm/vue/",
         ],

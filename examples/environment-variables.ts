@@ -1,5 +1,5 @@
 /**
- * @title Environment Variables
+ * @title Environment variables
  * @difficulty beginner
  * @tags cli, deploy
  * @run --allow-env <url>

@@ -1,5 +1,5 @@
 /**
- * @title Hex and Base64 Encoding
+ * @title Hex and base64 encoding
  * @difficulty beginner
  * @tags cli
  * @run <url>

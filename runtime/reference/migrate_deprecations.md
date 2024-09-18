@@ -443,30 +443,6 @@ methods instead.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.FsWatcher.prototype.return()
-
-Ensure that the `Deno.FsWatcher` instance is closed once iteration is complete
-by instantiating it with the `using` keyword.
-
-```diff
-- const watcher = Deno.watchFs("./foo/bar");
-+ using watcher = Deno.watchFs("./foo/bar");
-  for await (const event of watcher) {
-    // ...
-  }
-```
-
-Alternatively, you can close the watcher resource by explicitly calling
-`.close()`.
-
-```diff
-  const watcher = Deno.watchFs("./foo/bar");
-  for await (const event of watcher) {
-    // ...
-  }
-+ watcher.close();
-```
-
 ### Deno.fsync()
 
 Use

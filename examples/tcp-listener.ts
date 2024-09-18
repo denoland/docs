@@ -1,5 +1,5 @@
 /**
- * @title TCP Listener: Ping
+ * @title TCP listener: Ping
  * @difficulty intermediate
  * @tags cli
  * @run --allow-net <url>

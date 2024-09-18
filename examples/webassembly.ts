@@ -1,5 +1,5 @@
 /**
- * @title Web Assembly
+ * @title Web assembly
  * @difficulty intermediate
  * @tags cli, deploy, web
  * @run <url>

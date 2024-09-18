@@ -1,5 +1,5 @@
 /**
- * @title Input Prompts
+ * @title Input prompts
  * @difficulty beginner
  * @tags cli, web
  * @run <url>

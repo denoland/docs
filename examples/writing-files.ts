@@ -1,5 +1,5 @@
 /**
- * @title Writing Files
+ * @title Writing files
  * @difficulty beginner
  * @tags cli
  * @run --allow-read --allow-write <url>
