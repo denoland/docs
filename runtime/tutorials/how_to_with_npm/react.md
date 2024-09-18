@@ -259,7 +259,7 @@ Finally, we can point to these two new pages in the `src/App.tsx` file:
 
 ```tsx title="App.tsx"
 import { Route, Routes } from "react-router-dom";
-import Index from "./pages/Index";
+import Index from "./pages/index";
 import Dinosaur from "./pages/Dinosaur";
 import "./App.css";
 
