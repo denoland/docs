@@ -189,7 +189,7 @@ export type Dino = { name: string; description: string };
 This page will fetch the list of dinosaurs from the API and render them as
 links:
 
-```ts title="Index.tsx"
+```tsx title="index.tsx"
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Dino } from "../../types";
