@@ -227,11 +227,11 @@ export const sidebar = [
       {
         label: "Advanced Examples",
         items: [
+          "/runtime/tutorials/file_server/",
           {
             label: "Unix cat",
             id: "/examples/unix-cat/",
           },
-          "/runtime/tutorials/file_server/",
           "/runtime/tutorials/tcp_echo/",
           "/runtime/tutorials/subprocess/",
           "/runtime/tutorials/os_signals/",
