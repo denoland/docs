@@ -284,7 +284,7 @@ deno test --junit-path=./report.xml
 
 ## Spying, mocking (test doubles), stubbing and faking time
 
-The [Deno standard library](/runtime/fundamentals/standard_library/) provides a
+The [Deno Standard Library](/runtime/fundamentals/standard_library/) provides a
 set of functions to help you write tests that involve spying, mocking, and
 stubbing. Check out the
 [@std/testing documentation on JSR](https://jsr.io/@std/testing) for more
@@ -496,7 +496,7 @@ Deno.test({
 
 ## Snapshot testing
 
-The [Deno standard library](/runtime/fundamentals/standard_library/) includes a
+The [Deno Standard Library](/runtime/fundamentals/standard_library/) includes a
 [snapshot module](https://jsr.io/@std/testing/doc/snapshot/~) that allows
 developers to write tests by comparing values against reference snapshots. These
 snapshots are serialized representations of the original values and are stored

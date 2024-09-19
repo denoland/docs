@@ -51,7 +51,7 @@ Further documentation for `.env` handling can be found in the
 
 ## `std/cli`
 
-The Deno standard library has a [`std/cli` module](https://jsr.io/@std/cli) for
+The Deno Standard Library has a [`std/cli` module](https://jsr.io/@std/cli) for
 parsing command line arguments. Please refer to the module for documentation and
 examples.
 

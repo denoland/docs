@@ -227,6 +227,7 @@ export const sidebar = [
       {
         label: "Advanced Examples",
         items: [
+          "/runtime/tutorials/file_server/",
           {
             label: "Unix cat",
             id: "/examples/unix-cat/",
