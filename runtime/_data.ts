@@ -174,7 +174,6 @@ export const sidebar = [
         label: "Testing code in docs",
         id: "/runtime/reference/documentation/",
       },
-      "/runtime/reference/tcp_udp_connections/",
       "/runtime/reference/migrate_deprecations/",
       {
         label: "Full API Reference",
