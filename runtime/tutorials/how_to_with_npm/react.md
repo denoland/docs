@@ -26,7 +26,7 @@ you to import React components directly.
 In your terminal run the following command to create a new React app with Vite:
 
 ```sh
-deno run --A npm:create-vite-extra
+deno run -A npm:create-vite-extra
 ```
 
 From the offered options select `deno-react` and `typescript`.
@@ -77,7 +77,7 @@ const router = new Router();
 
 After this, in the same file, we'll define three routes. The first route at `/`
 will return the string `Welcome to the dinosaur API`, then we'll set up `/api`
-to return all the dinosaurs, and finally `/api/:donosaur` to return a specific
+to return all the dinosaurs, and finally `/api/:dinosaur` to return a specific
 dinosaur based on the name in the URL:
 
 ```ts title="main.ts"
