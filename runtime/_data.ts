@@ -159,7 +159,6 @@ export const sidebar = [
         label: "Environment variables",
         id: "/runtime/reference/env_variables/",
       },
-      "/runtime/reference/deploying_and_embedding/",
       "/runtime/reference/wasm/",
       {
         label: "Language Server",
