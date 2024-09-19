@@ -273,7 +273,7 @@ A full list of all supported linting rules can be found on
 [https://lint.deno.land/](https://lint.deno.land/). To learn more about how to
 configure the linter, check out the [`deno lint` subcommand](../tools/linter/).
 
-### Formatting (optional)
+#### Formatting (optional)
 
 Deno ships with a [built-in formatter](../tools/formatter/) that can optionally
 format your code according to the Deno style guide. You can run the formatter on
