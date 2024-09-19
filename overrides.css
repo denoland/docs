@@ -33,7 +33,7 @@
 }
 
 .ddoc .usageContent {
-  @apply bg-primary/5 border-primary/25 max-w-[75ch] py-4 mt-4 relative !important;
+  @apply bg-primary/5 border-primary/25 max-w-[75ch] py-4 mt-6 relative !important;
 }
 
 /* Adjust spacing for ref pages that don't have a header above usage */
