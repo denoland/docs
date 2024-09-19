@@ -72,10 +72,10 @@ The Deno runtime has these special environment variables.
 | DENO_NO_UPDATE_CHECK | Set to disable checking if a newer Deno version is available                                                                                                                      |
 | DENO_V8_FLAGS        | Set V8 command line options                                                                                                                                                       |
 | DENO_JOBS            | Number of parallel workers used for the `--parallel` flag with the test subcommand.<br />Defaults to number of available CPUs.                                                    |
+| DENO_WEBGPU_TRACE    | Path to a directory to output a [WGPU trace](https://github.com/gfx-rs/wgpu/pull/619) to when using the WebGPU API                                                                |
+| DENO_WEBGPU_BACKEND  | Select the backend WebGPU will use, or a comma separated list of backends in order of preference. Possible values are `vulkan`, `dx12`, `metal`, or `opengl`                      |
 | HTTP_PROXY           | Proxy address for HTTP requests (module downloads, fetch)                                                                                                                         |
 | HTTPS_PROXY          | Proxy address for HTTPS requests (module downloads, fetch)                                                                                                                        |
 | NPM_CONFIG_REGISTRY  | URL to use for the npm registry.                                                                                                                                                  |
 | NO_COLOR             | Set to disable color                                                                                                                                                              |
 | NO_PROXY             | Comma-separated list of hosts which do not use a proxy (module downloads, fetch)                                                                                                  |
-
-You can also view the same content with `deno --help`.
