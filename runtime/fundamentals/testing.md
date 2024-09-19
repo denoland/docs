@@ -93,6 +93,10 @@ deno test --parallel
 
 # Pass additional arguments to the test file that are visible in `Deno.args`
 deno test my_test.ts -- -e --foo --bar
+
+# Provide permission for deno to read from the filesystem, which is necessary
+# for the final test above to pass
+deno test --allow-read my_test.ts
 ```
 
 ## Test Steps
