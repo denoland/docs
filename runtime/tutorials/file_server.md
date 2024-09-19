@@ -1,7 +1,7 @@
 ---
 title: "File Server"
 oldUrl:
-  - /runtime/manual/examples/file-server/
+  - /runtime/manual/examples/file_server/
 ---
 
 A file server listens for incoming HTTP requests and serves files from the local
