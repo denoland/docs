@@ -24,7 +24,7 @@ you to import React components directly.
 In your terminal run the following command to create a new React app with Vite:
 
 ```sh
-deno run --A npm:create-vite-extra
+deno run -A npm:create-vite-extra
 ```
 
 From the offered options select `deno-react` and `typescript`.

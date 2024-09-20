@@ -159,7 +159,6 @@ export const sidebar = [
         label: "Environment variables",
         id: "/runtime/reference/env_variables/",
       },
-      "/runtime/reference/deploying_and_embedding/",
       "/runtime/reference/wasm/",
       {
         label: "Language Server",
@@ -175,7 +174,6 @@ export const sidebar = [
         label: "Testing code in docs",
         id: "/runtime/reference/documentation/",
       },
-      "/runtime/reference/tcp_udp_connections/",
       "/runtime/reference/migrate_deprecations/",
       {
         label: "Full API Reference",
@@ -227,12 +225,12 @@ export const sidebar = [
       {
         label: "Advanced Examples",
         items: [
+          "/runtime/tutorials/file_server/",
           {
             label: "Unix cat",
             id: "/examples/unix-cat/",
           },
           "/runtime/tutorials/file_server/",
-          "/runtime/tutorials/tcp_echo/",
           "/runtime/tutorials/subprocess/",
           "/runtime/tutorials/os_signals/",
           "/runtime/tutorials/file_system_events/",

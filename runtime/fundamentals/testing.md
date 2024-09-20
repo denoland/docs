@@ -284,7 +284,7 @@ deno test --junit-path=./report.xml
 
 ## Spying, mocking (test doubles), stubbing and faking time
 
-The [Deno standard library](/runtime/fundamentals/standard_library/) provides a
+The [Deno Standard Library](/runtime/fundamentals/standard_library/) provides a
 set of functions to help you write tests that involve spying, mocking, and
 stubbing. Check out the
 [@std/testing documentation on JSR](https://jsr.io/@std/testing) for more
@@ -333,8 +333,8 @@ more information on these functions and hooks.
 
 ## Documentation Tests
 
-Deno allows you to type-check the examples in your documentation to ensure they
-are up-to-date and functional.
+Deno allows you to evaluate code snippets written in JSDoc or markdown files.
+This ensures the examples in your documentation are up-to-date and functional.
 
 ### Example code blocks
 
@@ -343,41 +343,121 @@ are up-to-date and functional.
  * # Examples
  *
  * ```ts
- * const x = 42;
+ * import { assertEquals } from "jsr:@std/assert/equals";
+ *
+ * const sum = add(1, 2);
+ * assertEquals(sum, 3);
  * ```
  */
+export function add(a: number, b: number): number {
+  return a + b;
+}
 ````
 
 The triple backticks mark the start and end of code blocks, the language is
-determined by the language identifier attribute which may be `js`, `jsx`, `ts`
-or `tsx`. If no language identifier is specified then the language is inferred
-from media type of the source document that the code block is extracted from.
+determined by the language identifier attribute which may be one of the
+following:
+
+- `js`
+- `javascript`
+- `mjs`
+- `cjs`
+- `jsx`
+- `ts`
+- `typescript`
+- `mts`
+- `cts`
+- `tsx`
+
+If no language identifier is specified then the language is inferred from media
+type of the source document that the code block is extracted from.
 
 ```sh
 deno test --doc example.ts
 ```
 
-The above command will extract this example, and then type-check it as a
-standalone module living in the same directory as the module being documented.
+The above command will extract this example, turn it into a pseudo test case
+that looks like below:
 
-### Importing code in examples
+```ts title="example.ts$4-10.ts" ignore
+import { assertEquals } from "jsr:@std/assert/equals";
+import { add } from "file:///path/to/example.ts";
 
-You can import code from the surrounding module into the example code block by
-using the `import` keyword followed by the relative path to the module. This
-allows you to test the code in the example block in the context of the module
-being documented.
+Deno.test("example.ts$4-10.ts", async () => {
+  const sum = add(1, 2);
+  assertEquals(sum, 3);
+});
+```
 
-````ts
+and then run it as a standalone module living in the same directory as the
+module being documented.
+
+:::tip Want to type-check only?
+
+If you want to type-check your code snippets in JSDoc and markdown files without
+actually running them, you can use [`deno check`](/runtime/reference/cli/check/)
+command with `--doc` option (for JSDoc) or with `--doc-only` option (for
+markdown) instead.
+
+:::
+
+### Exported items are automatically imported
+
+Looking at the generated test code above, you will notice that it includes the
+`import` statement to import the `add` function even though the original code
+block does not have it. When documenting a module, any items exported from the
+module are automatically included in the generated test code using the same
+name.
+
+Let's say we have the following module:
+
+````ts title="example.ts"
 /**
  * # Examples
  *
  * ```ts
- * import { foo } from "./foo.ts";
- * const x: string = foo();
+ * import { assertEquals } from "jsr:@std/assert/equals";
+ *
+ * const sum = add(ONE, getTwo());
+ * assertEquals(sum, 3);
  * ```
  */
-export function foo(): string {
-  return "foo";
+export function add(a: number, b: number): number {
+  return a + b;
+}
+
+export const ONE = 1;
+export default function getTwo() {
+  return 2;
+}
+````
+
+This will get converted to the following test case:
+
+```ts title="example.ts$4-10.ts" ignore
+import { assertEquals } from "jsr:@std/assert/equals";
+import { add, ONE }, getTwo from "file:///path/to/example.ts";
+
+Deno.test("example.ts$4-10.ts", async () => {
+  const sum = add(ONE, getTwo());
+  assertEquals(sum, 3);
+});
+```
+
+### Skipping code blocks
+
+You can skip the evaluation of code blocks by adding the `ignore` attribute.
+
+````ts
+/**
+ * This code block will not be run.
+ *
+ * ```ts ignore
+ * await sendEmail("deno@example.com");
+ * ```
+ */
+export async function sendEmail(to: string) {
+  // send an email to the given address...
 }
 ````
 
@@ -496,7 +576,7 @@ Deno.test({
 
 ## Snapshot testing
 
-The [Deno standard library](/runtime/fundamentals/standard_library/) includes a
+The [Deno Standard Library](/runtime/fundamentals/standard_library/) includes a
 [snapshot module](https://jsr.io/@std/testing/doc/snapshot/~) that allows
 developers to write tests by comparing values against reference snapshots. These
 snapshots are serialized representations of the original values and are stored

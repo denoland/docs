@@ -1,5 +1,5 @@
 ---
-title: "Using Web Platform APIs"
+title: "Web Platform APIs"
 oldUrl:
   - /runtime/manual/runtime/navigator_api/
   - /runtime/manual/runtime/web_platform_apis/

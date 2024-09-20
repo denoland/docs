@@ -18,7 +18,7 @@ specifying file extensions.
 
 ## Standard library
 
-The Deno standard library (https://jsr.io/@std) is partially stable. All
+The Deno Standard Library (https://jsr.io/@std) is partially stable. All
 standard library modules that are version 1.0.0 or higher are considered stable.
 All other modules (0.x) are considered unstable, and may change in the future.
 

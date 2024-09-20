@@ -8,7 +8,7 @@ oldUrl:
 :::note
 
 Note that this is the style guide for **internal runtime code** in the Deno
-runtime, and in the Deno standard library. This is not meant as a general style
+runtime, and in the Deno Standard Library. This is not meant as a general style
 guide for users of Deno.
 
 :::
