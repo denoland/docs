@@ -154,7 +154,13 @@ Deno.jupyter.svg`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 You can use `prompt` and `confirm` Web APIs to wait for user input in your
 notebook.
 
-![`confirm` and `prompt` APIs example](../images/jupyter-confirm-prompt.mp4)
+<figure>
+
+<video class="w-full" alt="`confirm` and `prompt` APIs example" autoplay muted loop playsinline controls src="../images/jupyter-confirm-prompt.mp4"></video>
+
+<figcaption><span style="font-family: monospace;">confirm</span> and <span style="font-family: monospace;">prompt</span> APIs example</figcaption>
+
+</figure>
 
 ## IO pub channel broadcasting
 
@@ -181,7 +187,18 @@ await Deno.jupyter.broadcast("update_display_data", {
 });
 ```
 
-![`Deno.jupyter.broadcast` API example](../images/jupyter-broadcast.gif)
+<figure>
+
+<video class="w-full" alt="`Deno.jupyter.broadcast` API example" autoplay muted loop playsinline controls src="../images/jupyter-broadcast.mp4"></video>
+
+<figcaption><span style="font-family: monospace;">Deno.jupyter.broadcast</span> API example</figcaption>
+
+</figure>
+
+## Example notebooks
+
+https://github.com/rgbkrk/denotebooks contains more advanced examples leveraging
+data analysis and visualisation libraries like Polars, Observable and d3.
 
 ## `jupyter console` integration
 
