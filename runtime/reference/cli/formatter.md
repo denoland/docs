@@ -8,33 +8,70 @@ oldUrl:
 Deno ships with a built-in code formatter that will auto-format the following
 files:
 
-| File Type  | Extension          |
-| ---------- | ------------------ |
-| JavaScript | `.js`              |
-| TypeScript | `.ts`              |
-| JSX        | `.jsx`             |
-| TSX        | `.tsx`             |
-| Markdown   | `.md`, `.markdown` |
-| JSON       | `.json`            |
-| JSONC      | `.jsonc`           |
+| File Type  | Extension          | Notes               |
+| ---------- | ------------------ | ------------------- |
+| JavaScript | `.js`              |                     |
+| TypeScript | `.ts`              |                     |
+| JSX        | `.jsx`             |                     |
+| TSX        | `.tsx`             |                     |
+| Markdown   | `.md`, `.markdown` |                     |
+| JSON       | `.json`            |                     |
+| JSONC      | `.jsonc`           |                     |
+| CSS        | `.css`             |                     |
+| HTML       | `.html`            |                     |
+| YAML       | `.yml`, `.yaml`    |                     |
+| Sass       | `.sass`            |                     |
+| SCSS       | `.scss`            |                     |
+| LESS       | `.less`            |                     |
+| Astro      | `.astro`           | unstable, see below |
+| Svelte     | `.svelte`          | unstable, see below |
+| Vue        | `.vue`             | unstable, see below |
 
-In addition, `deno fmt` can format code snippets in Markdown files. Snippets
-must be enclosed in triple backticks and have a language attribute.
+:::note
+
+**`deno fmt` can format code snippets in Markdown files.** Snippets must be
+enclosed in triple backticks and have a language attribute.
+
+:::
+
+## Examples
+
+Format all supported files in the current directory and subdirectories
 
 ```shell
-# format all supported files in the current directory and subdirectories
 deno fmt
-# format specific files
+```
+
+Format specific files
+
+```shell
 deno fmt myfile1.ts myfile2.ts
-# format all supported files in specified directory and subdirectories
+
+deno fmt index.html styles.css
+```
+
+Format all supported files in specified directory and subdirectories
+
+```shell
 deno fmt src/
-# check if all the supported files in the current directory and subdirectories are formatted
+```
+
+Check if all the supported files in the current directory and subdirectories are
+formatted
+
+```shell
 deno fmt --check
-# format stdin and write to stdout
+```
+
+Format stdin and write to stdout
+
+```shell
 cat file.ts | deno fmt -
 ```
 
 ## Ignoring Code
+
+// TODO(bartlomieju): show examples in all supported langs
 
 Ignore formatting code by preceding it with a `// deno-fmt-ignore` comment in
 TS/JS/JSONC:
@@ -57,6 +94,8 @@ markdown, surround the code with `<!-- deno-fmt-ignore-start -->` and
 `<!-- deno-fmt-ignore-end -->` comments.
 
 ## Configuration
+
+// TODO(bartlomieju): update
 
 > ℹ️ It is recommended to stick with default options.
 
