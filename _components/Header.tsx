@@ -60,7 +60,7 @@ export default function Header({
             url={url}
             activeOn="/api"
             href="/api/deno"
-            name="Reference"
+            name="API reference"
             hideOnMobile
           />
           <span class="hidden lg:inline-block mx-2">//</span>
