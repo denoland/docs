@@ -154,7 +154,7 @@ addEventListener("hmr", (e) => {
 
 ### Integrity flags (lock files)
 
-Affect commands which can download resources to the cache: `deno cache`,
+Affect commands which can download resources to the cache: `deno install`,
 `deno run`, `deno test`, `deno doc`, and `deno compile`.
 
 ```sh
@@ -167,7 +167,7 @@ Find out more about these
 
 ### Cache and compilation flags
 
-Affect commands which can populate the cache: `deno cache`, `deno run`,
+Affect commands which can populate the cache: `deno install`, `deno run`,
 `deno test`, `deno doc`, and `deno compile`. As well as the flags above, this
 includes those which affect module resolution, compilation configuration etc.
 
@@ -199,16 +199,15 @@ argument to deno run:
 > deno run --check main.ts
 ```
 
-This flag affects `deno run`, `deno eval`, `deno repl` and `deno cache`. The
-following table describes the type-checking behavior of various subcommands.
-Here "Local" means that only errors from local code will induce type-errors,
-modules imported from https URLs (remote) may have type errors that are not
-reported. (To turn on type-checking for all modules, use `--check=all`.)
+This flag affects `deno run`, `deno eval`, `deno repl`. The following table
+describes the type-checking behavior of various subcommands. Here "Local" means
+that only errors from local code will induce type-errors, modules imported from
+https URLs (remote) may have type errors that are not reported. (To turn on
+type-checking for all modules, use `--check=all`.)
 
 | Subcommand     | Type checking mode |
 | -------------- | ------------------ |
 | `deno bench`   | 📁 Local           |
-| `deno cache`   | ❌ None            |
 | `deno check`   | 📁 Local           |
 | `deno compile` | 📁 Local           |
 | `deno eval`    | ❌ None            |

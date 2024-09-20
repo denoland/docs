@@ -191,7 +191,7 @@ In order to increment this version, you can update the `import` statement and
 then reload the cache and update the lockfile locally:
 
 ```console
-deno cache --reload --lock=deno.lock --lock-write deps.ts
+deno install --reload --lock=deno.lock --lock-write --entrypoint deps.ts
 ```
 
 You should see changes in the lockfile's contents after running this. When this

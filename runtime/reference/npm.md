@@ -135,7 +135,7 @@ $ deno run --allow-read npm:cowsay@1.5.0/cowthink What to eat?
 
 npm specifiers resolve npm packages to a central global npm cache. This works
 well in most cases and is ideal since it uses less space and doesn't require a
-node_modules directory. That said, you may find cases where an npm package
+`node_modules` directory. That said, you may find cases where an npm package
 expects itself to be executing from a `node_modules` directory. To improve
 compatibility and support those packages, you can use the `--node-modules-dir`
 flag.
@@ -158,22 +158,22 @@ to npm:
 
 ![](./images/node_modules_dir.png)
 
-This is done automatically when calling deno run, no separate install command
+This is done automatically when calling `deno run`, no separate install command
 necessary.
 
 Alternatively, if you wish to disable the creation of a `node_modules` directory
-entirely, you can set this flag to false (ex. `--node-modules-dir=false`) or add
-a `"nodeModulesDir": false` entry to your deno.json configuration file to make
-the setting apply to the entire directory tree.
+entirely, you can set this flag to `"nonde"` (ex. `--node-modules-dir=none`) or
+add a `"nodeModulesDir": "none"` entry to your deno.json configuration file to
+make the setting apply to the entire directory tree.
 
 In the case where you want to modify the contents of the `node_modules`
-directory before execution, you can run `deno cache` with `--node-modules-dir`,
-modify the contents, then run the script.
+directory before execution, you can run `deno install` with
+`--node-modules-dir`, modify the contents, then run the script.
 
 For example:
 
 ```sh
-deno cache --node-modules-dir main.ts
+deno install --node-modules-dir --entrypoint main.ts
 deno run --allow-read=. --allow-write=. scripts/your_script_to_modify_node_modules_dir.ts
 deno run --node-modules-dir main.ts
 ```
