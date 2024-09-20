@@ -164,7 +164,7 @@ Arguments passed to script files
   impacts test execution time.
 
 - `--doc`\
-  Type-check code blocks in JSDoc and Markdown
+  Evaluate code blocks in JSDoc and Markdown
 
 - `--fail-fast[=<N>]`\
   Stop after N errors. Defaults to stopping after first failure.

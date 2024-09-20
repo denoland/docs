@@ -38,6 +38,10 @@ Deno allows you to type-check your code (without executing it) with the
 deno check module.ts
 # or also type check remote modules and npm packages
 deno check --all module.ts
+# code snippets written in JSDoc can also be type checked
+deno check --doc module.ts
+# or type check code snippets in markdown files
+deno check --doc-only markdown.md
 ```
 
 :::note
