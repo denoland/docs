@@ -14,8 +14,6 @@ with more details.
 
 ![demo of the app](../images/how-to/react/react-dinosaur-app-demo.gif)
 
-[View source](https://github.com/denoland/examples/tree/main/with-react).
-
 ## Create a React app with Vite and Deno
 
 This tutorial will use [Vite](https://vitejs.dev/) to quickly scaffold a Deno
@@ -77,7 +75,7 @@ const router = new Router();
 
 After this, in the same file, we'll define three routes. The first route at `/`
 will return the string `Welcome to the dinosaur API`, then we'll set up `/api`
-to return all the dinosaurs, and finally `/api/:donosaur` to return a specific
+to return all the dinosaurs, and finally `/api/:dinosaur` to return a specific
 dinosaur based on the name in the URL:
 
 ```ts title="main.ts"
@@ -206,17 +204,17 @@ export default function () {
   }, []);
 
   return (
-    <div>
+    <main>
       <h1>Welcome to the Dinosaur app</h1>
       <p>Click on a dinosaur below to learn more.</p>
       {dinosaurs.map((dinosaur: Dino) => {
         return (
-          <div key={dinosaur.name}>
-            <Link to={`/${dinosaur.name.toLowerCase()}`}>{dinosaur.name}</Link>
-          </div>
+          <Link to={`/${dinosaur.name.toLowerCase()}`} key={dinosaur.name}>
+            {dinosaur.name}
+          </Link>
         );
       })}
-    </div>
+    </main>
   );
 }
 ```
@@ -247,7 +245,7 @@ export default function () {
     <div>
       <h1>{dinosaur.name}</h1>
       <p>{dinosaur.description}</p>
-      <Link to="/">See all</Link>
+      <Link to="/">🠠 Back to all dinosaurs</Link>
     </div>
   );
 }
