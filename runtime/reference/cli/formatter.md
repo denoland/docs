@@ -8,24 +8,24 @@ oldUrl:
 Deno ships with a built-in code formatter that will auto-format the following
 files:
 
-| File Type  | Extension          | Notes               |
-| ---------- | ------------------ | ------------------- |
-| JavaScript | `.js`              |                     |
-| TypeScript | `.ts`              |                     |
-| JSX        | `.jsx`             |                     |
-| TSX        | `.tsx`             |                     |
-| Markdown   | `.md`, `.markdown` |                     |
-| JSON       | `.json`            |                     |
-| JSONC      | `.jsonc`           |                     |
-| CSS        | `.css`             |                     |
-| HTML       | `.html`            |                     |
-| YAML       | `.yml`, `.yaml`    |                     |
-| Sass       | `.sass`            |                     |
-| SCSS       | `.scss`            |                     |
-| LESS       | `.less`            |                     |
-| Astro      | `.astro`           | unstable, see below |
-| Svelte     | `.svelte`          | unstable, see below |
-| Vue        | `.vue`             | unstable, see below |
+| File Type  | Extension          | Notes                                                                                 |
+| ---------- | ------------------ | ------------------------------------------------------------------------------------- |
+| JavaScript | `.js`              |                                                                                       |
+| TypeScript | `.ts`              |                                                                                       |
+| JSX        | `.jsx`             |                                                                                       |
+| TSX        | `.tsx`             |                                                                                       |
+| Markdown   | `.md`, `.markdown` |                                                                                       |
+| JSON       | `.json`            |                                                                                       |
+| JSONC      | `.jsonc`           |                                                                                       |
+| CSS        | `.css`             |                                                                                       |
+| HTML       | `.html`            |                                                                                       |
+| YAML       | `.yml`, `.yaml`    |                                                                                       |
+| Sass       | `.sass`            |                                                                                       |
+| SCSS       | `.scss`            |                                                                                       |
+| LESS       | `.less`            |                                                                                       |
+| Astro      | `.astro`           | Requires `--unstable-component` flag or `"unstable": ["fmt-component]` config option. |
+| Svelte     | `.svelte`          | Requires `--unstable-component` flag or `"unstable": ["fmt-component]` config option. |
+| Vue        | `.vue`             | Requires `--unstable-component` flag or `"unstable": ["fmt-component]` config option. |
 
 :::note
 
@@ -71,10 +71,9 @@ cat file.ts | deno fmt -
 
 ## Ignoring Code
 
-// TODO(bartlomieju): show examples in all supported langs
+### JavaScript / TypeScript / JSONC
 
-Ignore formatting code by preceding it with a `// deno-fmt-ignore` comment in
-TS/JS/JSONC:
+Ignore formatting code by preceding it with a `// deno-fmt-ignore` comment:
 
 ```ts
 // deno-fmt-ignore
@@ -88,14 +87,38 @@ export const identity = [
 Or ignore an entire file by adding a `// deno-fmt-ignore-file` comment at the
 top of the file.
 
-In markdown you may use a `<!-- deno-fmt-ignore -->` comment or ignore a whole
-file with a `<!-- deno-fmt-ignore-file -->` comment. To ignore a section of
-markdown, surround the code with `<!-- deno-fmt-ignore-start -->` and
-`<!-- deno-fmt-ignore-end -->` comments.
+### Markdown / HTML / CSS
+
+Ignore formatting next item by preceding it with `<!--- deno-fmt-ignore -->`
+comment:
+
+```html
+<html>
+  <body>
+    <p>Hello there
+      <!-- deno-fmt-ignore -->
+      </p>
+  </body>
+</html>
+```
+
+To ignore a section of code, surround the code with
+`<!-- deno-fmt-ignore-start -->` and `<!-- deno-fmt-ignore-end -->` comments.
+
+Or ignore an entire file by adding a `<!-- deno-fmt-ignore-file -->` comment at
+the top of the file.
+
+### YAML
+
+Ignore formatting next item by preceding it with `# deno-fmt-ignore` comment:
+
+```html
+# deno-fmt-ignore
+aaaaaa:
+          bbbbbbb
+```
 
 ## Configuration
-
-// TODO(bartlomieju): update
 
 > ℹ️ It is recommended to stick with default options.
 
