@@ -221,6 +221,7 @@ export const sidebar = [
       "/runtime/tutorials/hashbang/",
       "/runtime/tutorials/cjs_to_esm/",
       "/runtime/tutorials/how_to_with_npm/react/",
+      "/runtime/tutorials/how_to_with_npm/next/",
       "/runtime/tutorials/connecting_to_databases/",
       {
         label: "Advanced Examples",
