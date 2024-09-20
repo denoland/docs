@@ -15,7 +15,7 @@ Cache and compile remote dependencies recursively.
 deno cache [--no-check[=<NO_CHECK_TYPE>]] [--import-map <FILE>] [-q|--quiet] 
 [--no-remote] [--no-npm] [--node-modules-dir[=<node-modules-dir>]] [--vendor[=<vendor>]]
 [-c|--config <FILE>] [--no-config] [-r|--reload[=<CACHE_BLOCKLIST>...]]
-[--lock [<FILE>]] [--lock-write] [--no-lock] [--cert <FILE>] [--check[=<CHECK_TYPE>]] <FILE>
+[--lock [<FILE>]] [--frozen] [--no-lock] [--cert <FILE>] [--check[=<CHECK_TYPE>]] <FILE>
 
 deno cache -h|--help
 ```
@@ -117,9 +117,9 @@ detected from it's imports.
   Check the specified lock file. If value is not provided, defaults to
   "deno.lock" in the current working directory.
 
-- `--lock-write`
+- `--frozen[=<BOOLEAN>]`
 
-  Force overwriting the lock file
+  Error out if lockfile is out of date [possible values: true, false]
 
 - `--no-lock`
 

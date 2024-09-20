@@ -15,7 +15,7 @@ argument.
 ```bash
 deno eval [--no-check[=<NO_CHECK_TYPE]] [--import-map <FILE>] [-q|--quiet] [--no-remote] [--no-npm] 
 [--node-modules-dir[=<node-modules-dir>]] [--vendor[=<vendor>]] [-c|--config <FILE>] [--no-config]
-[-r|--reload[=<CACHE_BLOCKLIST>...]] [--lock [<FILE>]] [--lock-write] [--no-lock] [--cert <FILE>]
+[-r|--reload[=<CACHE_BLOCKLIST>...]] [--lock [<FILE>]] [--frozen] [--no-lock] [--cert <FILE>]
 [--inspect[=<HOST_AND_PORT>]] [--inspect-brk[=<HOST_AND_PORT>]] [--inspect-wait[=<HOST_AND_PORT>]]
 [--cached-only] [--location <HREF>] [--v8-flags[=<v8-flags>...]] [--seed <NUMBER>]
 [--check[=<CHECK_TYPE>]] [--ext <EXT>] [-p|--print] [--env[=<FILE>]] <CODE_ARG>
@@ -112,9 +112,9 @@ evaluate.
   Check the specified lock file. If value is not provided, defaults to
   "deno.lock" in the current working directory.
 
-- `--lock-write`
+- `--frozen[=<BOOLEAN>]`
 
-  Force overwriting the lock file
+  Error out if lockfile is out of date [possible values: true, false]
 
 - `--no-lock`
 
