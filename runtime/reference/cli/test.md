@@ -15,7 +15,7 @@ Run tests using Deno's built-in test runner.
 deno test [--no-check[=<NO_CHECK_TYPE>]] [--import-map <FILE>] [-q|--quiet] 
 [--no-remote] [--no-npm] [--node-modules-dir[=<node-modules-dir>]]
 [--vendor[=<vendor>]][-c|--config <FILE>] [--no-config] 
-[-r|--reload[=<CACHE_BLOCKLIST>...]] [--lock [<FILE>]] [--lock-write] 
+[-r|--reload[=<CACHE_BLOCKLIST>...]] [--lock [<FILE>]] [--frozen] 
 [--no-lock] [--cert <FILE>] [--allow-read[=<PATH>...]] [--deny-read[=<PATH>...]]
 [--allow-write[=<PATH>...]] [--deny-write[=<PATH>...]] 
 [--allow-net[=<IP_OR_HOSTNAME>...]] [--deny-net[=<IP_OR_HOSTNAME>...]] 
@@ -111,8 +111,9 @@ Arguments passed to script files
   Check the specified lock file. If value is not provided, defaults to
   "deno.lock" in the current working directory.
 
-- `--lock-write`\
-  Force overwriting the lock file.
+- `--frozen[=<BOOLEAN>]`
+
+  Error out if lockfile is out of date [possible values: true, false]
 
 - `--no-lock`\
   Disable auto discovery of the lock file.
