@@ -94,7 +94,7 @@ export const sidebar = [
           },
           {
             label: "deno install",
-            id: "/runtime/reference/cli/script_installer/",
+            id: "/runtime/reference/cli/install/",
           },
           {
             label: "deno jupyter",

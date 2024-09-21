@@ -1,9 +1,47 @@
 ---
-title: "`deno install`, script installer"
-oldUrl: /runtime/manual/tools/script_installer/
+title: "`deno install`"
+oldUrl:
+ - /runtime/manual/tools/script_installer/
+ - /runtime/reference/cli/script_installer/
 ---
 
 <!-- TODO: this needs to be updated for Deno 2 -->
+
+`deno install` is a tool that allows you to install remote dependencies to use
+in your project or as executables available on your machine.
+
+There are three ways to use `deno install`:
+
+- `deno install` - install all dependencies specified in `deno.json` and
+  `package.json`
+- `deno install [PACKAGES]` - install and add specified dependencies to
+  `deno.json` or `package.json`
+- `deno install --entrypoint [FILES]` - install all remote dependencies
+  discovered from the provided files
+- `deno install --global [PACKAGE_OR_URL]` - install a dependency as an
+  executable program on your machine
+
+:::info
+
+For users migrating from Node.js...
+
+:::
+
+## `deno install`
+
+// TODO:
+
+## `deno install [PACKAGES]`
+
+// TODO:
+
+## `deno install --entrypoint [FILES]`
+
+// TODO:
+
+## `deno install --global [PACKAGE_OR_URL]`
+
+// TODO:
 
 Deno provides `deno install` to easily install and distribute executable code.
 
