@@ -159,7 +159,7 @@ Affect commands which can download resources to the cache: `deno cache`,
 
 ```sh
 --lock <FILE>    Check the specified lock file
---lock-write     Write lock file. Use with --lock.
+--frozen[=<BOOLEAN>] Error out if lockfile is out of date
 ```
 
 Find out more about these
