@@ -162,7 +162,7 @@ This is done automatically when calling `deno run`, no separate install command
 necessary.
 
 Alternatively, if you wish to disable the creation of a `node_modules` directory
-entirely, you can set this flag to `"nonde"` (ex. `--node-modules-dir=none`) or
+entirely, you can set this flag to `"none"` (ex. `--node-modules-dir=none`) or
 add a `"nodeModulesDir": "none"` entry to your deno.json configuration file to
 make the setting apply to the entire directory tree.
 
