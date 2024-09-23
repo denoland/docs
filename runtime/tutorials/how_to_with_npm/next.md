@@ -7,7 +7,7 @@ server-side-rendered applications. It is built on top of React and provides a
 lot of features out of the box.
 
 In this tutorial, we'll build a simple Next.js application and run it with Deno.
-e app will display a list of dinosaurs. When you click on one, it'll take you to
+The app will display a list of dinosaurs. When you click on one, it'll take you to
 a dinosaur page with more details.
 
 ![demo of the app](../images/how-to/next/dinoapp.gif)
