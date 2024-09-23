@@ -256,7 +256,7 @@ details!
 
 🦕 Now you can build and run a Next.js app with Deno! To build on your app you
 could consider
-[adding a database](/runtime/tutorials/connecting_to_databases.md) to replace
+[adding a database](/runtime/tutorials/connecting_to_databases/) to replace
 your `data.json` file, or consider
 [writing some tests](/runtime/fundamentals/testing/) to make your app reliable
 and production ready.
