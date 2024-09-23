@@ -189,7 +189,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
     ["Scheduled Tasks", "IconClock"],
     ["Cryptography", "IconFileShredder"],
     ["Advanced", "IconStars"],
-    ["Unstable/Experimental APIs", "IconPersonDigging"],
+    ["Unstable APIs", "IconPersonDigging"],
   ];
 
   const groups = examples.reduce((acc, example) => {
