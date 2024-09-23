@@ -195,9 +195,31 @@ await Deno.jupyter.broadcast("update_display_data", {
 
 </figure>
 
-## Example notebooks
+## Examples
 
-https://github.com/rgbkrk/denotebooks contains more advanced examples leveraging
+Here's an example of using `@observablehq/plot` to generate a chart:
+
+```ts
+import { document, penguins } from "jsr:@ry/jupyter-helper";
+import * as Plot from "npm:@observablehq/plot";
+
+let p = await penguins();
+
+Plot.plot({
+  marks: [
+    Plot.dot(p.toRecords(), {
+      x: "culmen_depth_mm",
+      y: "culmen_length_mm",
+      fill: "species",
+    }),
+  ],
+  document,
+});
+```
+
+![Example plot generated using `@observablehq/plot` library](../images/jupyter-plot.png)
+
+See https://github.com/rgbkrk/denotebooks for more advanced examples leveraging
 data analysis and visualisation libraries like Polars, Observable and d3.
 
 ## `jupyter console` integration
