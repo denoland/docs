@@ -52,7 +52,7 @@ WORKDIR /app
 
 ADD . /app
 
-RUN deno cache main.ts
+RUN deno install --entrypoint main.ts
 
 CMD ["run", "--allow-net", "main.ts"]
 ```

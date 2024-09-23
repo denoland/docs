@@ -15,7 +15,7 @@ export const sidebar = [
         id: "/examples/",
       },
       {
-        label: "Reference",
+        label: "API reference",
         id: "/api/deno",
       },
       {
@@ -232,7 +232,7 @@ export default function () {
             <div class="flex flex-col">
               <div class="mb-8">
                 <h3 class="text-xl md:text-2xl font-semibold underline underline-offset-8 decoration-runtime-500 mb-4">
-                  API Reference
+                  API reference
                 </h3>
                 <p class="max-w-[75ch]">
                   Deno, Web, and Node API reference documentation, built for the
@@ -242,7 +242,7 @@ export default function () {
                     href="/api/deno"
                     class="runtime-link underline underline-offset-4"
                   >
-                    Reference
+                    API reference
                   </a>{" "}
                   section.
                 </p>
