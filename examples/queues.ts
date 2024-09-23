@@ -5,9 +5,9 @@
  * @run --unstable-kv <url>
  * @resource {https://docs.deno.com/deploy/kv/manual/queue_overview} Deno Queues user guide
  * @resource {https://docs.deno.com/api/deno/~/Deno.Kv} Deno Queues Runtime API docs
- * @group Scheduled Tasks
+ * @group Unstable/Experimental APIs
  *
- * Deno Queues, built on Deno KV, allow you to offload parts of your application
+ * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>Deno Queues, built on Deno KV, allow you to offload parts of your application
  * or schedule work for the future to run asynchronously. It's an easy way to add
  * scalable background processing to your project.
  */
