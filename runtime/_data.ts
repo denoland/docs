@@ -57,10 +57,6 @@ export const sidebar = [
             id: "/runtime/reference/cli/completions/",
           },
           {
-            label: "deno cache",
-            id: "/runtime/reference/cli/cache/",
-          },
-          {
             label: "deno check",
             id: "/runtime/reference/cli/check/",
           },

@@ -9,7 +9,6 @@ of subcommands that can be used to perform different tasks, check the links
 below for more information on each subcommand.
 
 - [deno bench](/runtime/reference/cli/benchmarker/) - benchmarking tool
-- [deno cache](/runtime/reference/cli/cache/) - cache and compile dependencies
 - [deno check](/runtime/reference/cli/check/) - type check your program without
   running it
 - [deno compile](/runtime/reference/cli/compiler/) - compile a program into a

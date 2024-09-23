@@ -300,10 +300,11 @@ Deno offers this functionality through a setting in your `deno.json` file:
 
 Add the above snippet to your `deno.json` file and Deno will cache all
 dependencies locally in a `vendor` directory when the project is run, or you can
-optionally run the `deno cache` command to cache the dependencies immediately:
+optionally run the `deno install --entrypoint` command to cache the dependencies
+immediately:
 
 ```bash
-deno cache main.ts
+deno install --entrypoint main.ts
 ```
 
 You can then run the application as usual with `deno run`:
@@ -321,7 +322,7 @@ Imagine your module relies on a remote module located at https://some.url/a.ts.
 When you compile your module for the first time, `a.ts` is fetched, compiled,
 and cached. This cached version will be used until you either run your module on
 a different machine (such as in a production environment) or manually reload the
-cache (using a command like `deno cache --reload`).
+cache (using a command like `deno install --reload`).
 
 But what if the content at `https://some.url/a.ts` changes? This could result in
 your production module running with different dependency code than your local

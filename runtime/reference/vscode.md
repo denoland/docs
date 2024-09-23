@@ -176,8 +176,8 @@ appropriate `settings.json`.
 
 Deno supports remote modules and will fetch remote modules and store them
 locally in a cache. When you do something like `deno run`, `deno test`,
-`deno info` or `deno cache` on the command line, the Deno CLI will go and try to
-fetch any remote modules and their dependencies and populate the cache.
+`deno info` or `deno install` on the command line, the Deno CLI will go and try
+to fetch any remote modules and their dependencies and populate the cache.
 
 While developing code in the editor, if the module is not in the cache, you will
 get a diagnostic such as
