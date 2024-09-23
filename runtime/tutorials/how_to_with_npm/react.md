@@ -68,14 +68,15 @@ Next, update `api/main.ts` to import the required modules and create a new
 
 ```ts title="main.ts"
 import { Application, Router } from "@oak/oak";
+import { oakCors } from "@tajpouria/cors";
 import data from "./data.json" with { type: "json" };
 
 const router = new Router();
 ```
 
 After this, in the same file, we'll define three routes. The first route at `/`
-will return the string `Welcome to the dinosaur API`, then we'll set up `/api`
-to return all the dinosaurs, and finally `/api/:dinosaur` to return a specific
+will return the string `Welcome to the dinosaur API`, then we'll set up `/dinosaurs`
+to return all the dinosaurs, and finally `/dinosaurs/:dinosaur` to return a specific
 dinosaur based on the name in the URL:
 
 ```ts title="main.ts"
@@ -83,10 +84,10 @@ router
   .get("/", (context) => {
     context.response.body = "Welcome to dinosaur API!";
   })
-  .get("/api", (context) => {
+  .get("/dinosaurs", (context) => {
     context.response.body = data;
   })
-  .get("/api/:dinosaur", (context) => {
+  .get("/dinosaurs/:dinosaur", (context) => {
     if (!context?.params?.dinosaur) {
       context.response.body = "No dinosaur name provided.";
     }
@@ -123,7 +124,7 @@ In your `deno.json` file, update the `tasks` field to include the following:
   "tasks": {
     "dev": "deno task dev:api & deno task dev:vite",
     "dev:api": "deno run --allow-env --allow-net api/main.ts",
-    "dev:vite": "deno run -A npm:vite"
+    "dev:vite": "deno run -A npm:vite",
     // ...
   }
 }
@@ -131,7 +132,7 @@ In your `deno.json` file, update the `tasks` field to include the following:
 
 If you run `deno task dev` now and visit `localhost:8000`, in your browser you
 should see the text `Welcome to dinosaur API!`, and if you visit
-`localhost:8000/api`, you should see a JSON response of all of the dinosaurs.
+`localhost:8000/dinosaurs`, you should see a JSON response of all of the dinosaurs.
 
 🦕 Lookin' good so far! Now lets build out the client side of the app.
 
@@ -197,7 +198,7 @@ export default function () {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`http://localhost:8000/api/`);
+      const response = await fetch(`http://localhost:8000/dinosaurs/`);
       const allDinosaurs = await response.json() as Dino[];
       setDinosaurs(allDinosaurs);
     })();
@@ -235,7 +236,7 @@ export default function () {
 
   useEffect(() => {
     (async () => {
-      const resp = await fetch(`http://localhost:8000/api/${selectedDinosaur}`);
+      const resp = await fetch(`http://localhost:8000/dinosaurs/${selectedDinosaur}`);
       const dino = await resp.json() as Dino;
       setDino(dino);
     })();
