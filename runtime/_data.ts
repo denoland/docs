@@ -34,7 +34,7 @@ export const sidebar = [
         id: "/runtime/fundamentals/http_server/",
       },
       "/runtime/fundamentals/installation/",
-      "/runtime/fundamentals/stability/",
+      "/runtime/fundamentals/stability_and_releases/",
     ],
   },
   {
