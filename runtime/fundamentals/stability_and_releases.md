@@ -30,7 +30,7 @@ Deno offers 4 release channels
   try out latest bug fixes and new features that might end up in the `stable`
   channel.
 
-### LTS releases
+### Long Term Support (LTS)
 
 Starting with Deno v2.1.0 (to be released in October 2024) Deno will offer a LTS
 (long-term support) channel.
@@ -40,9 +40,9 @@ compatible bug fixes.
 
 ![Deno long term support schedule](./images/deno-lts-support.png)
 
-A new LTS version is shipped annually and **supported for 5 quarters**, giving
-users a 3-month window to upgrade between LTS relases. A new patch version of an
-LTS channel will be released at least **once per quarter**.
+A new LTS version is shipped annually and **supported for 6 months**, giving
+users a month long window to upgrade between LTS relases. A new patch version of
+an LTS channel will be released at least **once per quarter**.
 
 LTS eligible backports include security fixes and defect fixes (crashes, wrong
 answers).
