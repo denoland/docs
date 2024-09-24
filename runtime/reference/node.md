@@ -40,7 +40,7 @@ any code using Node built-ins to function as it did in Node.js.
 To make updating existing code easier, Deno will provide helpful hints for
 imports that don't use `node:` prefix:
 
-```js title=main.mjs
+```js title="main.mjs"
 import * as os from "os";
 console.log(os.cpus());
 ```
