@@ -13,10 +13,10 @@ In this tutorial we'll build a simple Vue app with Vite and Deno. The app will d
 We'll use [Vite](https://vitejs.dev/) to scaffold a basic Vue app. In your terminal, run the following command to create a new Vue app with Vite:
 
 ```shell
-deno run -A npm:create-vite-extra@latest
+deno run -A npm:create-vite
 ```
 
-Give your app a name and from the offered options select `deno-vue` and `typescript`.
+Give your app a name and from the offered options select `vue` and `typescript`.
 
 Then, `cd` into your new project and run the following command to serve your new Vue app:
 
