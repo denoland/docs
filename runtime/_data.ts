@@ -219,6 +219,7 @@ export const sidebar = [
       "/runtime/tutorials/how_to_with_npm/react/",
       "/runtime/tutorials/how_to_with_npm/next/",
       "/runtime/tutorials/connecting_to_databases/",
+      "/runtime/tutorials/chat_app/",
       {
         label: "Advanced Examples",
         items: [

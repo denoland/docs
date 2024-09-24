@@ -13,12 +13,12 @@ Vue.
 [View source](https://github.com/denoland/examples/tree/main/with-vue) or
 [follow the video guide](https://www.youtube.com/watch?v=MDPauM8fZDE).
 
-## Run `npm:create-vite-extra`
+## Run `npm:create-vite`
 
 We'll use Vite to scaffold our Vue app. First, run:
 
 ```shell
-deno run --allow-read --allow-write --allow-env npm:create-vite-extra@latest
+deno run --allow-read --allow-write --allow-env npm:create-vite
 ```
 
 Name your project, then select "deno-vue".
