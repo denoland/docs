@@ -11,8 +11,8 @@ for constant polling. A frequent use case for web sockets is chat applications.
 In this tutorial we'll create a simple chat app using Deno and the built in
 [WebSockets API](/api/web/websockets). The chat app will allow multiple chat
 clients to connect to the same backend and send group messages. After a client
-enters a username, they can then start sending messages to other online
-clients. Each client also displays the list of currently active users.
+enters a username, they can then start sending messages to other online clients.
+Each client also displays the list of currently active users.
 
 ![Chat app UI](./images/websockets.gif)
 
