@@ -5,7 +5,7 @@
  * @run --allow-net --unstable-net <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.listenDatagram} Doc: Deno.listenDatagram
  * @resource {/examples/udp-connector} Example: UDP Connector
- * @group Unstable/Experimental APIs
+ * @group Unstable APIs
  *
  * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>An example of a UDP listener on localhost that will log the message
  * if written to and close the connection if connected to.
