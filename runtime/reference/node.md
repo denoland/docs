@@ -59,37 +59,76 @@ editor.
 
 In Node.js, there are a number of
 [global objects](https://nodejs.org/api/globals.html) available in the scope of
-all programs that are specific to Node.js, like the `process` object, `Buffer`,
-or `__dirname` and `__filename`.
+all programs that are specific to Node.js, eg. `process` object.
 
-TODO:
+Here are a few globals that you might enounter in the wild and how to use them
+in Deno:
 
-- `process` -
+- `process` - Deno provides the `process` global, which is by far the most
+  popular global used in popular npm packages. It is available to all code.
+  However, Deno will guide you towards importing it explicitly from
+  `node:process` module by providing lint warnings and quick-fixes:
 
-- `require()` -
+```js title="process.js"
+console.log(process.versions.deno);
+```
 
-- `Buffer` -
+```shell
+$ deno run process.js
+2.0.0
+$ deno lint process.js
+error[no-process-globals]: NodeJS process global is discouraged in Deno
+ --> /process.js:1:13
+  |
+1 | console.log(process.versions.deno);
+  |             ^^^^^^^
+  = hint: Add `import process from "node:process";`
 
-- `__filename` -
+  docs: https://lint.deno.land/rules/no-process-globals
 
-- `__dirname` -
 
-Deno provides the `process` global, which is by far the most popular global used
-in popular npm packages. All other Node.js specific global objects, need to
-imported explicitly from a relevant built-in `node:*` module.
+Found 1 problem (1 fixable via --fix)
+Checked 1 file
+```
 
-```js
+- `require()` function is only available for CommonJS modules, to use it in Deno
+  directly you can either run a file with `.cjs` extension, or create a
+  `require` instance explicitly:
+
+```js title="require.cjs"
+const lib = require("./lib");
+```
+
+```js title="require.js"
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const lib = require("./lib");
+```
+
+- `Buffer` - to use `Buffer` API it needs to be explicitly imported from the
+  `node:buffer` module:
+
+```js title="buffer.js"
 import { Buffer } from "node:buffer";
 
-const __filename = import.meta.filename;
-const __dirname = import.meta.dirname;
+const buf = new Buffer(5, "0");
 ```
+
+Prefer using
+[`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)
+or other
+[`TypedArray`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray)
+subclasses instead.
+
+- `__filename` - use `import.meta.filename` instead.
+
+- `__dirname` - use `import.meta.dirname` instead.
 
 ## Runtime permissions in Deno
 
 Consider the following simple [Express](https://expressjs.com/) server:
 
-```js
+```js title="server.js"
 import express from "npm:express@4";
 
 const app = express();
@@ -153,6 +192,44 @@ You can execute this script with Deno by running:
 deno task start
 ```
 
+## Migrating from Node.js to Deno
+
+Running your Node.js project with Deno is a straightforward process. In most
+cases you can expect little to no changes to be required, especially if your
+project is written using ES modules.
+
+Main points to be aware of, include:
+
+1. Importing Node.js built-in modules requires the `node:` specifier:
+
+```js
+// ❌
+import * as fs from "fs";
+import * as http from "http";
+
+// ✅
+import * as fs from "node:fs";
+import * as http from "node:http";
+```
+
+:::tip
+
+It is recommended to change these import specifiers in your existing project
+anyway. This is a recommended way to import them in Node.js too.
+
+:::
+
+2. Some [globals available in Node.js](#nodejs-global-objects) need to be
+   explicitly imported, eg. `Buffer`:
+
+```js
+import { Buffer } from "node:buffer";
+```
+
+3. `require()` is only available in files with `.cjs` extension, in other files
+   an instance of `require()`
+   [needs to be created manually](#nodejs-global-objects)
+
 ## Optional improvements with Deno's built-in tools
 
 One of Deno's core strengths is a unified toolchain that comes with support for
@@ -170,10 +247,9 @@ mappings, and other runtime configurations.
 
 #### Migrating npm scripts to deno.json
 
-TODO: bartlomieju this section can be removed in favor of other sections If
-preferred, you can move your npm scripts over to `deno.json`, where they can be
-run using `deno task`. This allows you to manage all necessary permission flags
-and other runtime configuration in one place.
+If preferred, you can move your npm scripts over to `deno.json`, where they can
+be run using `deno task`. This allows you to manage all necessary permission
+flags and other runtime configuration in one place.
 
 ```json
 {
@@ -275,7 +351,7 @@ The formatting rules can be configured in your `deno.json` file. To learn more
 about how to configure the formatter, check out the
 [`deno fmt` subcommand](../tools/formatter/).
 
-#### Testing (optional)
+#### Testing
 
 Deno encourages writing tests for your code, and provides a built-in test runner
 to make it easy to write and run tests. The test runner is tightly integrated
@@ -298,52 +374,12 @@ any of the imported modules change.
 To learn more about the test runner and how to configure it, check out the
 [`deno test` subcommand](../tools/test/) documentation.
 
-## Migrating from Node.js to Deno
-
-Running your Node.js project with Deno is a straightforward process, the main
-points to be aware of are:
-
-1. Usage of Node.js globals (like `process`, `Buffer`, etc)
-2. Imported Node.js built-in modules need the `node:` specifier (`fs` ->
-   `node:fs`)
-
-:::tip
-
-If your project is written with CommonJS (i.e. `require`), you will need to
-update it to use ECMAScript modules, check out our helpful
-[CommonJS to ESM guide](/runtime/tutorials/cjs_to_esm/) to get you up and
-running with Deno.
-
-:::
-
-### Node.js built-ins
-
-In Node.js 20 and earlier, built-in modules in the Node.js standard library
-could be imported with "bare specifiers". Consider the Node program below with a
-`.mjs` extension:
-
-```js title="index.mjs"
-import * as os from "os";
-console.log(os.cpus());
-```
-
-The [`os` module](https://nodejs.org/api/os.html#oscpus) is built in to the
-Node.js runtime, and can be imported using a bare specifier as above.
-
-:::info .mjs extensions not required in Deno
-
-The `.mjs` file extension is supported but not required in Deno. Because Node
-doesn't support ESM by default, it requires you to name any files that use ESM
-with a `.mjs` file extension.
-
-:::
-
 ## Node to Deno Cheatsheet
 
 | Node.js                                | Deno                          |
 | -------------------------------------- | ----------------------------- |
-| `node file.js`                         | `deno run file.js`            |
-| `ts-node file.ts`                      | `deno run file.ts`            |
+| `node file.js`                         | `deno file.js`                |
+| `ts-node file.ts`                      | `deno file.ts`                |
 | `nodemon`                              | `deno run --watch`            |
 | `node -e`                              | `deno eval`                   |
 | `npm i` / `npm install`                | `deno install`                |
