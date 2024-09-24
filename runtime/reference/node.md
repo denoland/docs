@@ -243,8 +243,16 @@ your code can access.
 #### deno.json
 
 Deno has its own config file, `deno.json` or `deno.jsonc`, which can be used to
-configure your project. You can use it to define tasks, dependencies, path
-mappings, and other runtime configurations.
+configure your project.
+
+You can use it to [define dependencies](/runtime/fundamentals/configuration/)
+using the `imports` option - you can migrate your dependencies one-by-one from
+`package.json`, or elect to not define them in the config file at all and use
+`npm:` specifiers inline in your code.
+
+In addition to specifying depenendencies you can use
+[`deno.json` to define](/runtime/fundamentals/configuration/) tasks, lint and
+format options, path mappings, and other runtime configurations.
 
 #### Linting
 
