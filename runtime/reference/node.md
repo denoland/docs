@@ -195,8 +195,8 @@ deno task start
 ## Migrating from Node.js to Deno
 
 Running your Node.js project with Deno is a straightforward process. In most
-cases you can expect little to no changes to be required, especially if your
-project is written using ES modules.
+cases you can expect little to no changes to be required, if your project is
+written using ES modules.
 
 Main points to be aware of, include:
 
@@ -228,7 +228,8 @@ import { Buffer } from "node:buffer";
 
 3. `require()` is only available in files with `.cjs` extension, in other files
    an instance of `require()`
-   [needs to be created manually](#nodejs-global-objects)
+   [needs to be created manually](#nodejs-global-objects). npm dependencies can
+   use `require()` regardless of file extension.
 
 ## Optional improvements with Deno's built-in tools
 
@@ -245,57 +246,15 @@ Deno has its own config file, `deno.json` or `deno.jsonc`, which can be used to
 configure your project. You can use it to define tasks, dependencies, path
 mappings, and other runtime configurations.
 
-#### Migrating npm scripts to deno.json
-
-If preferred, you can move your npm scripts over to `deno.json`, where they can
-be run using `deno task`. This allows you to manage all necessary permission
-flags and other runtime configuration in one place.
-
-```json
-{
-  "tasks": {
-    "dev": "deno run --allow-net --allow-read --allow-env server.js"
-  }
-}
-```
-
-```sh
-deno task dev
-```
-
-#### Migrating npm dependencies to deno.json
-
-You can also migrate your dependencies over to `deno.json`. Deno supports
-importing dependencies from external package repositories, local files, and/or
-URLs. To import your npm dependencies, you can add them to the `imports` field
-in `deno.json`, and add the `npm:` specifier to the import path:
-
-```json
-{
-  "imports": {
-    "express": "npm:express@4"
-  }
-}
-```
-
-Deno supports multiple package registries and allows you to import dependencies
-from npm, [JSR](https://jsr.io) and HTTP URLs.
-
-```json
-{
-  "imports": {
-    "express": "npm:express@4",
-    "@luca/cases": "jsr:@luca/cases@1",
-    "foo": "https://example.com/foo.ts"
-  }
-}
-```
-
 #### Linting
 
-Deno ships with a built-in linter that is written with performance in mind. Deno
-can lint large projects in just a few milliseconds. You can try it out on your
-project by running:
+Deno ships with a built-in linter that is written with performance in mind. It's
+similar to ESlint, though with a limited number of rules. If you don't rely on
+ESLint plugins, you can drop `eslint` dependency from `devDependencies` section
+of `package.json` and use `deno lint` instead.
+
+Deno can lint large projects in just a few milliseconds. You can try it out on
+your project by running:
 
 ```sh
 deno lint
@@ -333,8 +292,11 @@ configure the linter, check out the [`deno lint` subcommand](../tools/linter/).
 #### Formatting
 
 Deno ships with a [built-in formatter](../tools/formatter/) that can optionally
-format your code according to the Deno style guide. You can run the formatter on
-your project by running:
+format your code according to the Deno style guide. Instead of adding `prettier`
+to your `devDependencies` you can instead use Deno's built-in zero-config code
+formatter `deno fmt`.
+
+You can run the formatter on your project by running:
 
 ```sh
 deno fmt
