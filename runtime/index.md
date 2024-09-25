@@ -59,8 +59,8 @@ deno --version
 ## Hello World
 
 Deno can run JavaScript and [TypeScript](https://www.typescriptlang.org/) with
-no additional tools or configuration required. We'll make and run a simple
-"hello world" program and run it with Deno.
+no additional tools or configuration required. Let's create a simple "hello
+world" program and run it with Deno.
 
 Create a TypeScript or JavaScript file called `main` and include the following
 code:
@@ -96,7 +96,7 @@ Save the file and run it with Deno:
 <deno-tab value="ts" label="main.ts" default>
 
 ```sh
-$ deno run main.ts
+$ deno main.ts
 Hello, world!
 ```
 
@@ -104,7 +104,7 @@ Hello, world!
 <deno-tab value="js" label="main.js">
 
 ```sh
-$ deno run main.js
+$ deno main.js
 Hello, world!
 ```
 
