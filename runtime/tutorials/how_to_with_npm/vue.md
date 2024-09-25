@@ -196,7 +196,7 @@ at `/:dinosaur`.
 Finally, you can delete all of the code in the `src/App.vue` file to and update
 it to include only the `<RouterView>` component:
 
-```tsx title="App.vue"
+```vue title="App.vue"
 <template>
   <RouterView />
 </template>;
@@ -224,7 +224,7 @@ up earlier and render them as links using the
 `lang="ts"` attribute on the script tag.) Add the following code to the
 `Dinosaurs.vue` file:
 
-```tsx title="Dinosaurs.vue"
+```vue title="Dinosaurs.vue"
 <script lang="ts">
 import { defineComponent } from 'vue';
 
@@ -258,7 +258,7 @@ uniquely identify each dinosaur.
 The homepage will contain a heading and then it will render the `Dinosaurs`
 component. Add the following code to the `HomePage.vue` file:
 
-```tsx title="HomePage.vue"
+```vue title="HomePage.vue"
 <script setup lang="ts">
 import Dinosaurs from './Dinosaurs.vue';
 </script>
@@ -301,7 +301,7 @@ type ComponentData = {
 
 Then update the `Dinosaur.vue` file:
 
-```tsx title="Dinosaur.vue"
+```vue title="Dinosaur.vue"
 <script lang="ts">
 import { defineComponent } from 'vue';
 
