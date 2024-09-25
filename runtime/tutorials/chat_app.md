@@ -1,18 +1,21 @@
 ---
-title: "Chat application with WebSocket"
+title: "Chat application with WebSockets"
 oldUrl:
   - /runtime/manual/examples/chat_app/
 ---
 
 WebSockets are a powerful tool for building real-time applications. They allow
 for bidirectional communication between the client and server without the need
-for constant polling. A frequent use case for web sockets are chat applications.
+for constant polling. A frequent use case for WebSockets are chat applications.
 
 In this tutorial we'll create a simple chat app using Deno and the built in
 [WebSockets API](/api/web/websockets). The chat app will allow multiple chat
 clients to connect to the same backend and send group messages. After a client
 enters a username, they can then start sending messages to other online clients.
 Each client also displays the list of currently active users.
+
+You can see the
+[finished chat app on GitHub](https://github.com/denoland/tutorial-with-websockets).
 
 ![Chat app UI](./images/websockets.gif)
 
@@ -25,7 +28,7 @@ deno init chat-app
 cd deno-chat-app
 ```
 
-## Building the Backend
+## Build the backend
 
 We'll start by building the backend server that will handle the WebSocket
 connections and broadcast messages to all connected clients. We'll use the
@@ -33,6 +36,17 @@ connections and broadcast messages to all connected clients. We'll use the
 clients can connect to the server, send messages and receive updates about other
 connected users. Additionally the server will serve the static HTML, CSS and
 JavaScript files that make up the chat client.
+
+### Import dependencies
+
+First, we'll need to import the necessary dependencies. Use the `deno add`
+command to add Oak to your project:
+
+```sh
+deno add @oak.oak
+```
+
+### Set up the server
 
 In your `main.ts` file, add the following code:
 
@@ -146,7 +160,7 @@ The `broadcast` function sends a message to all connected clients and the
 `broadcast_usernames` function sends the list of currently connected users to
 all clients.
 
-## Building the Frontend
+## Build the frontend
 
 We'll build a simple UI that shows a text input and a send button and displays
 the sent messages, alongside a list of users in the chat.
@@ -161,7 +175,7 @@ file and add the following code:
     <head>
         <title>Deno Chat App</title>
         <link rel="stylesheet" href="/public/style.css">
-        <script src="/public/app.js"></script>
+        <script defer src="/public/app.js"></script>
     </head>
     <body>
         <header>
@@ -173,8 +187,8 @@ file and add the following code:
         </aside>
         <main>
             <div id="conversation"></div>
-            <form>
-                <textarea id="data" placeholder="send message"></textarea>
+            <form id="form">
+                <input type="text" id="data" placeholder="send message" autocomplete="off" />
                 <button type="submit" id="send">Send ᯓ✉︎</button>
             </form>
         </main>
@@ -185,9 +199,8 @@ file and add the following code:
 ### CSS
 
 If you'd like to style your chat app, create a `style.css` file in the `public`
-folder and add the following code:
-
-TODO: link to css
+folder and add this
+[pre-made CSS](https://raw.githubusercontent.com/denoland/tutorial-with-websockets/refs/heads/main/public/style.css).
 
 ### JavaScript
 
@@ -237,27 +250,18 @@ function addMessage(username, message) {
   conversation.prepend(messageDiv);
 }
 
-// Set up event listener for sending messages
-window.onload = () => {
-  const inputElement = document.getElementById("data");
-  const sendButton = document.getElementById("send");
+// Focus input field on page load to make typing instant
+const inputElement = document.getElementById("data");
+inputElement.focus();
 
-  // Listen for Enter key press
-  inputElement.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      const message = inputElement.value;
-      inputElement.value = "";
-      socket.send(JSON.stringify({ event: "send-message", message }));
-    }
-  });
+// On form submit, send message to server and empty the input field
+const form = document.getElementById("form");
 
-  // Listen for button click
-  sendButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    const message = inputElement.value;
-    inputElement.value = "";
-    socket.send(JSON.stringify({ event: "send-message", message }));
-  });
+form.onsubmit = (e) => {
+  e.preventDefault();
+  const message = inputElement.value;
+  inputElement.value = "";
+  socket.send(JSON.stringify({ event: "send-message", message }));
 };
 ```
 
@@ -268,13 +272,14 @@ updates the list of active users. It also sets up event listeners for either
 pressing the Enter key or clicking the send button to send a message to the
 server.
 
-## Running the server
+## Run the server
 
 To run the server we'll need to grant the necessary permissions to Deno. In your
 `deno.json` file, update the `dev` task to allow read and network access:
 
-```sh title="deno.json"
-"dev": "deno run --allow-net --allow-read --watch main.ts"
+```diff title="deno.json"
+-"dev": "deno run --watch main.ts"
++"dev": "deno run --allow-net --allow-read --watch main.ts"
 ```
 
 Now if you visit [http://localhost:8080](http://localhost:8080/) you will be
@@ -282,8 +287,6 @@ able to start a chat session. You can open 2 simultaneous tabs and try chatting
 with yourself.
 
 ![Chat app UI](./images/websockets.gif)
-
-TODO: link to repo
 
 🦕 Now you can use WebSockets with Deno you're ready to build all kinds of
 realtime applications! WebSockets can be used to build realtime dashboards,
