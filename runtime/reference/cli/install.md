@@ -8,12 +8,10 @@ oldUrl:
  - /runtime/reference/cli/cache/
 ---
 
-<!-- TODO: this needs to be updated for Deno 2 -->
-
 `deno install` is a tool that allows you to install remote dependencies to use
 in your project or as executables available on your machine.
 
-There are three ways to use `deno install`:
+There are four ways to use `deno install`:
 
 - `deno install` - install all dependencies specified in `deno.json` and
   `package.json`
@@ -26,25 +24,67 @@ There are three ways to use `deno install`:
 
 :::info
 
-For users migrating from Node.js...
+`deno install` works in similar manner to other package managers like `npm`,
+`yarn`, `pnpm` or `bun`.
 
 :::
 
 ## `deno install`
 
-// TODO:
+Use this command to install all dependencies defined in `deno.json` and/or
+`package.json`.
+
+The dependencies will be installed in the global cache, but if your project has
+a `package.json` file, a local `node_modules` directory will be set up as well.
+
+// TODO: show example `deno.json` and `package.json` combinations and project
+state after running `deno install`
 
 ## `deno install [PACKAGES]`
 
-// TODO:
+Use this command to install particular packages and add them to `deno.json` or
+`package.json`.
+
+```shell
+$ deno install jsr:@std/testing npm:express
+```
+
+:::tip
+
+You can also use `deno add` which is an alias to `deno install [PACKAGES]`
+
+:::
+
+If your project has a `package.json` file, the packages coming from npm will be
+added to `dependencies` in `package.json`. Otherwise all packages will be added
+to `deno.json`.
+
+// TODO: show project structure based on the info above
 
 ## `deno install --entrypoint [FILES]`
 
-// TODO:
+Use this command to install all depenedencies that are used in the provided
+files. This is particularly useful if you use `jsr:`, `npm:`, `http:` or
+`https:` specifiers in your code and want to cache all the dependencies before
+deploying your project.
+
+```js title="main.js"
+import * as colors from "jsr:@std/fmt/colors";
+import express from "npm:express";
+```
+
+```shell
+$ deno install -e main.js
+Download jsr:@std/fmt
+Download npm:express
+```
 
 ## `deno install --global [PACKAGE_OR_URL]`
 
-// TODO:
+Use this command to install provide package or script as a globally available
+binary on your system.
+
+// TODO: revise this section
 
 Deno provides `deno install` to easily install and distribute executable code.
 
