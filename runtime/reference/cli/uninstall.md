@@ -3,58 +3,120 @@ title: "deno uninstall"
 oldUrl: /runtime/manual/tools/uninstall/
 ---
 
-// TODO: update to align with new `deno install` behavior.
+`deno uninstall` is a tool that allows you to remove remote dependencies used in
+your project, or an executable script from your machine.
 
-Uninstalls an executable script in the installation root's bin directory.
+There are two ways to use `deno uninstall`:
 
-## Command
+- `deno uninstall [PACKAGES]` - remove dependencies specified in `deno.json` or
+  `package.json`
+- `deno uninstall --global [SCRIPT_NAME]` - uninstall executable script from you
+  machine
 
-`deno uninstall [OPTIONS] <NAME>` - Uninstalls `name`.
+## `deno uninstall [PACKAGES]`
 
-## Synopsis
+Remove dependencies specified in `deno.json` or `package.json`:
 
-```bash
-deno uninstall [--root <root>] [-g|--global] [-q|--quiet] <NAME>
+```shell
+$ deno add npm:express
+Add npm:express@5.0.0
 
-deno uninstall -h|--help
+$ cat deno.json
+{
+  "imports": {
+    "express": "npm:express@5.0.0"
+  }
+}
 ```
 
-## Description
+```shell
+$ deno uninstall express
+Removed express
 
-When uninstalling, the installation root is determined in the following order:
+$ cat deno.json
+{
+  "imports": {}
+}
+```
 
-- --root option
-- DENO_INSTALL_ROOT environment variable
-- $HOME/.deno
+:::tip
 
-## Arguments
+You can also use `deno remove` which is an alias to `deno uninstall [PACKAGES]`
 
-`NAME`
+:::
 
-The name of the script to uninstall.
+You can remove multiple dependencies at once:
 
-## Options
+```shell
+$ deno add npm:express jsr:@std/http
+Added npm:express@5.0.0
+Added jsr:@std/http@1.0.7
 
-- `--root <root>` Installation root
+$ cat deno.json
+{
+  "imports": {
+    "@std/http": "jsr:@std/http@^1.0.7",
+    "express": "npm:express@^5.0.0",
+  }
+}
+```
 
-- `-g, --global` Remove globally installed package or module
+```shell
+$ deno remove express @std/http
+Removed express
+Removed @std/http
 
-- `-q, --quiet` Suppress diagnostic output
+$ cat deno.json
+{
+  "imports": {}
+}
+```
 
-- `-h, --help`
+:::info
 
-  Prints help information
+While dependencies are removed from the `deno.json` and `package.json` they
+still persist in the global cache for future use.
 
-## Examples
+:::
+
+If your project contains `package.json`, `deno uninstall` can work with it too:
+
+```shell
+$ cat package.json
+{
+  "dependencies": {
+    "express": "^5.0.0"
+  }
+}
+
+$ deno remove express
+Removed express
+
+$ cat package.json
+{
+  "dependencies": {}
+}
+```
+
+## `deno uninstall --global [SCRIPT_NAME]`
+
+When uninstalling a script, the installation root is determined in the following
+order:
+
+- `--root` option
+- `DENO_INSTALL_ROOT` environment variable
+- `$HOME/.deno`
+
+### Examples
 
 - Uninstall `serve`
 
 ```bash
-deno uninstall serve
+deno uninstall --global serve
 ```
 
 - Uninstall `serve` from a specific installation root
 
 ```bash
-deno uninstall --root /usr/local serve
+deno uninstall -g --root /usr/local serve
 ```

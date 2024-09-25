@@ -8,7 +8,6 @@ runtime environment from your terminal or command prompt. The CLI has a number
 of subcommands that can be used to perform different tasks, check the links
 below for more information on each subcommand.
 
-- [deno add](/runtime/reference/cli/add/) - add a dependency
 - [deno bench](/runtime/reference/cli/benchmarker/) - benchmarking tool
 - [deno check](/runtime/reference/cli/check/) - type check your program without
   running it

@@ -37,9 +37,6 @@ Use this command to install all dependencies defined in `deno.json` and/or
 The dependencies will be installed in the global cache, but if your project has
 a `package.json` file, a local `node_modules` directory will be set up as well.
 
-// TODO: show example `deno.json` and `package.json` combinations and project
-state after running `deno install`
-
 ## `deno install [PACKAGES]`
 
 Use this command to install particular packages and add them to `deno.json` or
@@ -59,14 +56,14 @@ If your project has a `package.json` file, the packages coming from npm will be
 added to `dependencies` in `package.json`. Otherwise all packages will be added
 to `deno.json`.
 
-// TODO: show project structure based on the info above
-
 ## `deno install --entrypoint [FILES]`
 
 Use this command to install all depenedencies that are used in the provided
-files. This is particularly useful if you use `jsr:`, `npm:`, `http:` or
-`https:` specifiers in your code and want to cache all the dependencies before
-deploying your project.
+files and their dependencies.
+
+This is particularly useful if you use `jsr:`, `npm:`, `http:` or `https:`
+specifiers in your code and want to cache all the dependencies before deploying
+your project.
 
 ```js title="main.js"
 import * as colors from "jsr:@std/fmt/colors";
@@ -84,13 +81,6 @@ Download npm:express
 Use this command to install provide package or script as a globally available
 binary on your system.
 
-// TODO: revise this section
-
-Deno provides `deno install` to easily install and distribute executable code.
-
-`deno install [OPTIONS...] [URL] [SCRIPT_ARGS...]` will install the script
-available at `URL` under the name `EXE_NAME`.
-
 This command creates a thin, executable shell script which invokes `deno` using
 the specified CLI flags and main module. It is placed in the installation root's
 `bin` directory.
@@ -98,23 +88,23 @@ the specified CLI flags and main module. It is placed in the installation root's
 Example:
 
 ```shell
-$ deno install --allow-net --allow-read https://deno.land/std/http/file_server.ts
-[1/1] Compiling https://deno.land/std/http/file_server.ts
+$ deno install --global --allow-net --allow-read jsr:@std/http/file-server
+Download jsr:@std/http/file-server...
 
-✅ Successfully installed file_server.
-/Users/deno/.deno/bin/file_server
+✅ Successfully installed file-server.
+/Users/deno/.deno/bin/file-server
 ```
 
 To change the executable name, use `-n`/`--name`:
 
 ```shell
-deno install --allow-net --allow-read -n serve https://deno.land/std/http/file_server.ts
+deno install -g -N -R -n serve jsr:@std/http/file-server
 ```
 
 The executable name is inferred by default:
 
 - Attempt to take the file stem of the URL path. The above example would become
-  'file_server'.
+  'file-server'.
 - If the file stem is something generic like 'main', 'mod', 'index' or 'cli',
   and the path has no parent, take the file name of the parent path. Otherwise
   settle with the generic name.
@@ -123,7 +113,7 @@ The executable name is inferred by default:
 To change the installation root, use `--root`:
 
 ```shell
-deno install --allow-net --allow-read --root /usr/local https://deno.land/std/http/file_server.ts
+deno install -g -N -R --root /usr/local jsr:@std/http/file-server
 ```
 
 The installation root is determined, in order of precedence:
@@ -142,7 +132,7 @@ You must specify permissions that will be used to run the script at installation
 time.
 
 ```shell
-deno install --allow-net --allow-read https://deno.land/std/http/file_server.ts -- -p 8080
+deno install -g -N -R jsr:@std/http/file-server -- -p 8080
 ```
 
 The above command creates an executable called `file_server` that runs with
@@ -176,12 +166,17 @@ $ deno install -n awesome_cli https://example.com/awesome/cli.ts
 
 ## Uninstall
 
-You can uninstall the script with `deno uninstall` command.
+You can uninstall dependencies or binary script with `deno uninstall` command:
 
 ```shell
-$ deno uninstall file_server
-deleted /Users/deno/.deno/bin/file_server
-✅ Successfully uninstalled file_server
+$ deno uninstall express
+Removed express
 ```
 
-See `deno uninstall -h` for more details.
+```shell
+$ deno uninstall -g file-server
+deleted /Users/deno/.deno/bin/file-server
+✅ Successfully uninstalled file-server
+```
+
+See [`deno uninstall` page for more details](/runtime/reference/cli/uninstall/).
