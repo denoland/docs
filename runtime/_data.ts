@@ -34,7 +34,7 @@ export const sidebar = [
         id: "/runtime/fundamentals/http_server/",
       },
       "/runtime/fundamentals/installation/",
-      "/runtime/fundamentals/stability/",
+      "/runtime/fundamentals/stability_and_releases/",
     ],
   },
   {
@@ -218,6 +218,7 @@ export const sidebar = [
       "/runtime/tutorials/cjs_to_esm/",
       "/runtime/tutorials/how_to_with_npm/react/",
       "/runtime/tutorials/how_to_with_npm/next/",
+      "/runtime/tutorials/how_to_with_npm/vue/",
       "/runtime/tutorials/connecting_to_databases/",
       "/runtime/tutorials/chat_app/",
       {
@@ -251,7 +252,6 @@ export const sidebar = [
           "/runtime/tutorials/how_to_with_npm/planetscale/",
           "/runtime/tutorials/how_to_with_npm/prisma/",
           "/runtime/tutorials/how_to_with_npm/redis/",
-          "/runtime/tutorials/how_to_with_npm/vue/",
         ],
       },
       {

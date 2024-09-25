@@ -44,7 +44,7 @@ program.
 You can run this program with the following command:
 
 ```bash
-$ deno run main.ts
+$ deno main.ts
 Add 2 + 3 = 5
 ```
 
@@ -55,7 +55,7 @@ tests for your code and run them with the `deno test` command. Run the tests in
 your new project with:
 
 ```bash
-$ deno test main_test.ts
+$ deno test
 running 1 test from ./main_test.ts     
 addTest ... ok (1ms)
 
