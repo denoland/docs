@@ -34,7 +34,7 @@ export const sidebar = [
         id: "/runtime/fundamentals/http_server/",
       },
       "/runtime/fundamentals/installation/",
-      "/runtime/fundamentals/stability/",
+      "/runtime/fundamentals/stability_and_releases/",
     ],
   },
   {
@@ -55,10 +55,6 @@ export const sidebar = [
           {
             label: "deno completions",
             id: "/runtime/reference/cli/completions/",
-          },
-          {
-            label: "deno cache",
-            id: "/runtime/reference/cli/cache/",
           },
           {
             label: "deno check",

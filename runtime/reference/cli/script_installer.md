@@ -1,6 +1,9 @@
 ---
 title: "`deno install`, script installer"
-oldUrl: /runtime/manual/tools/script_installer/
+oldUrl:
+ - /runtime/manual/tools/script_installer/
+ - /runtime/manual/tools/cache/
+ - /runtime/reference/cli/cache/
 ---
 
 <!-- TODO: this needs to be updated for Deno 2 -->
