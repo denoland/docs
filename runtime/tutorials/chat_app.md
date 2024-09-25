@@ -6,7 +6,7 @@ oldUrl:
 
 WebSockets are a powerful tool for building real-time applications. They allow
 for bidirectional communication between the client and server without the need
-for constant polling. A frequent use case for web sockets is chat applications.
+for constant polling. A frequent use case for web sockets are chat applications.
 
 In this tutorial we'll create a simple chat app using Deno and the built in
 [WebSockets API](/api/web/websockets). The chat app will allow multiple chat
