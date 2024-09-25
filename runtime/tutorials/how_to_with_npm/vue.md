@@ -10,7 +10,8 @@ interfaces.
 
 In this tutorial we'll build a simple Vue.js app with Vite and Deno. The app
 will display a list of dinosaurs. When you click on one, it'll take you to a
-dinosaur page with more details.
+dinosaur page with more details. You can see the
+[finished app on GitHub](https://github.com/denoland/tutorial-with-vue).
 
 ![The Vue.js app in action](../images/how-to/vue/vue.gif)
 
@@ -46,7 +47,7 @@ create a `main.ts` file, which will run the server, and a `data.json`, which
 where we'll put the hard coded data.
 
 Copy and paste
-[this json file](https://raw.githubusercontent.com/denoland/deno-vue-example/refs/heads/main/api/data.json)
+[this json file](https://raw.githubusercontent.com/denoland/tutorial-with-vue/refs/heads/main/api/data.json)
 into `api/data.json`.
 
 We're going to build out a simple API server with routes that return dinosaur
