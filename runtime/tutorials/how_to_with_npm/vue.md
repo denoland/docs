@@ -125,7 +125,6 @@ following:
     "dev:api": "deno run --allow-env --allow-net api/main.ts",
     "dev:vite": "deno run -A npm:vite",
     // ...
-  }
 }
 ```
 
