@@ -13,7 +13,7 @@ Ask questions and chat with community members in real-time.
 
 Stack Overflow is a popular forum to ask code-level questions or if you're stuck
 with a specific error.
-[ask your own!](https://stackoverflow.com/questions/ask?tags=deno)
+[Ask your own!](https://stackoverflow.com/questions/ask?tags=deno)
 
 ## [DEV's Deno Community](https://dev.to/t/deno)
 
