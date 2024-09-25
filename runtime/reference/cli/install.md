@@ -29,7 +29,7 @@ There are four ways to use `deno install`:
 
 :::
 
-## `deno install`
+## deno install
 
 Use this command to install all dependencies defined in `deno.json` and/or
 `package.json`.
@@ -37,7 +37,7 @@ Use this command to install all dependencies defined in `deno.json` and/or
 The dependencies will be installed in the global cache, but if your project has
 a `package.json` file, a local `node_modules` directory will be set up as well.
 
-## `deno install [PACKAGES]`
+## deno install [PACKAGES]
 
 Use this command to install particular packages and add them to `deno.json` or
 `package.json`.
@@ -56,7 +56,7 @@ If your project has a `package.json` file, the packages coming from npm will be
 added to `dependencies` in `package.json`. Otherwise all packages will be added
 to `deno.json`.
 
-## `deno install --entrypoint [FILES]`
+## deno install --entrypoint [FILES]
 
 Use this command to install all depenedencies that are used in the provided
 files and their dependencies.
@@ -76,7 +76,17 @@ Download jsr:@std/fmt
 Download npm:express
 ```
 
-## `deno install --global [PACKAGE_OR_URL]`
+:::tip
+
+If you want to set up local `node_modules` directory, you can pass
+`--node-modules-dir=auto` flag.
+
+Some dependencies might not work correctly without a local `node_modules`
+directory.
+
+:::
+
+## deno install --global [PACKAGE_OR_URL]
 
 Use this command to install provide package or script as a globally available
 binary on your system.
