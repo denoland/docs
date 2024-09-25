@@ -3,6 +3,8 @@ title: "deno uninstall"
 oldUrl: /runtime/manual/tools/uninstall/
 ---
 
+// TODO: update to align with new `deno install` behavior.
+
 Uninstalls an executable script in the installation root's bin directory.
 
 ## Command
