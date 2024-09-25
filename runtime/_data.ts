@@ -170,6 +170,7 @@ export const sidebar = [
         label: "Testing code in docs",
         id: "/runtime/reference/documentation/",
       },
+      "/runtime/reference/security_model/",
       "/runtime/reference/migrate_deprecations/",
       {
         label: "Full API Reference",
