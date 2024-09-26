@@ -41,7 +41,7 @@ resp = await fetch("https://example.com", {
     "X-API-Key": "foobar",
   },
   body: JSON.stringify({
-    "param": "value"
+    param: "value",
   }),
 });
 
