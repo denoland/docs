@@ -43,7 +43,7 @@ First, we'll need to import the necessary dependencies. Use the `deno add`
 command to add Oak to your project:
 
 ```sh
-deno add @oak.oak
+deno add jsr:@oak/oak
 ```
 
 ### Set up the server
