@@ -51,15 +51,15 @@ deno add @oak.oak
 In your `main.ts` file, add the following code:
 
 ```ts title="main.ts"
-import { Application, Router } from "@oak/oak";
-
-const connectedClients = new Map();
+import { Application, Context, Router } from "@oak/oak";
+import ChatServer from "./ChatServer.ts";
 
 const app = new Application();
 const port = 8080;
 const router = new Router();
+const server = new ChatServer();
 
-router.get("/start_web_socket", async (ctx) => {});
+router.get("/start_web_socket", (ctx: Context) => server.handleConnection(ctx));
 
 app.use(router.routes());
 app.use(router.allowedMethods());
@@ -74,91 +74,92 @@ console.log("Listening at http://localhost:" + port);
 await app.listen({ port });
 ```
 
-This will set up a basic server that listens on port 8080 and serves the
-`index.html` file from the `public` directory. Now we'll set up the logic for
-handling the WebSockets connections. Inside the body of the
-`router.get("/start_web_socket", async (ctx) => {})` function add the following
-code:
+Next, create a new file called `ChatServer.ts` in the same directory as your
+`main.ts` file. In this file we'll put the logic for handling the WebSocket
+connections:
 
-```ts title="main.ts"
-const socket = await ctx.upgrade();
-const username = ctx.request.url.searchParams.get("username");
+```ts title="ChatServer.ts"
+import { Context } from "@oak/oak";
 
-if (connectedClients.has(username)) {
-  socket.close(1008, `Username ${username} is already taken`);
-  return;
-}
+type WebSocketWithUsername = WebSocket & { username: string };
+type AppEvent = { event: string; [key: string]: any };
 
-socket.username = username;
-connectedClients.set(username, socket);
-console.log(`New client connected: ${username}`);
+export default class ChatServer {
+  private connectedClients = new Map<string, WebSocketWithUsername>();
 
-// broadcast the active users list when a new user logs in
-socket.onopen = () => {
-  broadcast_usernames();
-};
+  public async handleConnection(ctx: Context) {
+    const socket = await ctx.upgrade() as WebSocketWithUsername;
+    const username = ctx.request.url.searchParams.get("username");
 
-// when a client disconnects, remove them from the connected clients list
-// and rebroadcast the active users list
-socket.onclose = () => {
-  console.log(`Client ${socket.username} disconnected`);
-  connectedClients.delete(socket.username);
-  broadcast_usernames();
-};
+    if (this.connectedClients.has(username)) {
+      socket.close(1008, `Username ${username} is already taken`);
+      return;
+    }
 
-// broadcast new message if someone sent one
-socket.onmessage = (m) => {
-  const data = JSON.parse(m.data);
-  switch (data.event) {
-    case "send-message":
-      broadcast(
-        JSON.stringify({
-          event: "send-message",
-          username: socket.username,
-          message: data.message,
-        }),
-      );
-      break;
+    socket.username = username;
+    socket.onopen = this.broadcastUsernames.bind(this);
+    socket.onclose = () => {
+      this.clientDisconnected(socket.username);
+    };
+    socket.onmessage = (m) => {
+      this.send(socket.username, m);
+    };
+    this.connectedClients.set(username, socket);
+
+    console.log(`New client connected: ${username}`);
   }
-};
-```
 
-This code sets up the WebSocket connection and adds the client username to the
-list of connected clients, disallowing multiple users with the same name. It
-also listens for new messages from the client and broadcasts them to all
-connected clients.
+  private send(username: string, message: any) {
+    const data = JSON.parse(message.data);
+    if (data.event !== "send-message") {
+      return;
+    }
 
-Finally, we'll define the `broadcast` and `broadcast_usernames` utility
-functions. Add the following code to the bottom of your `main.ts`, before the
-`app.use` statements:
-
-```ts title="main.ts"
-// send a message to all connected clients
-function broadcast(message) {
-  for (const client of connectedClients.values()) {
-    client.send(message);
+    this.broadcast({
+      event: "send-message",
+      username: username,
+      message: data.message,
+    });
   }
-}
 
-// send updated users list to all connected clients
-function broadcast_usernames() {
-  const usernames = [...connectedClients.keys()];
-  console.log(
-    "Sending updated username list to all clients: " +
-      JSON.stringify(usernames),
-  );
-  broadcast(
-    JSON.stringify({
-      event: "update-users",
-      usernames: usernames,
-    }),
-  );
+  private clientDisconnected(username: string) {
+    this.connectedClients.delete(username);
+    this.broadcastUsernames();
+
+    console.log(`Client ${username} disconnected`);
+  }
+
+  private broadcastUsernames() {
+    const usernames = [...this.connectedClients.keys()];
+    this.broadcast({ event: "update-users", usernames });
+
+    console.log("Sent username list:", JSON.stringify(usernames));
+  }
+
+  private broadcast(message: AppEvent) {
+    const messageString = JSON.stringify(message);
+    for (const client of this.connectedClients.values()) {
+      client.send(messageString);
+    }
+  }
 }
 ```
 
-The `broadcast` function sends a message to all connected clients and the
-`broadcast_usernames` function sends the list of currently connected users to
-all clients.
+This code sets up a `handleConnection` method that is called when a new
+WebSocket connection is established. It receives a Context object from the Oak
+framework and upgrades it to a WebSocket connection. It extracts the username
+from the URL query parameters. If the username is already taken (i.e., exists in
+connectedClients), it closes the socket with an appropriate message. Otherwise,
+it sets the username property on the socket, assigns event handlers, and adds
+the socket to `connectedClients`.
+
+When the socket opens, it triggers the `broadcastUsernames` method, which sends
+the list of connected usernames to all clients. When the socket closes, it calls
+the `clientDisconnected` method to remove the client from the list of connected
+clients.
+
+When a message of type `send-message` is received, it broadcasts the message to
+all connected clients, including the sender’s username.
 
 ## Build the frontend
 
@@ -170,29 +171,38 @@ the sent messages, alongside a list of users in the chat.
 In your new project directory, create a `public` folder and add an `index.html`
 file and add the following code:
 
-```html
+```html title="index.html"
 <html>
-    <head>
-        <title>Deno Chat App</title>
-        <link rel="stylesheet" href="/public/style.css">
-        <script defer src="/public/app.js"></script>
-    </head>
-    <body>
-        <header>
-            <h1>🦕 Deno Chat App</h1>
-        </header>
-        <aside>
-            <h2>Users online</h2>
-            <ul id="users"></ul>
-        </aside>
-        <main>
-            <div id="conversation"></div>
-            <form id="form">
-                <input type="text" id="data" placeholder="send message" autocomplete="off" />
-                <button type="submit" id="send">Send ᯓ✉︎</button>
-            </form>
-        </main>
-    </body>
+<head>
+    <title>Deno Chat App</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <script defer src="/public/app.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>🦕 Deno Chat App</h1>
+    </header>
+    <aside>
+        <h2>Users online</h2>
+        <ul id="users"></ul>
+    </aside>
+    <main>
+        <div id="conversation"></div>
+        <form id="form">
+            <input type="text" id="data" placeholder="send message" autocomplete="off" />
+            <button type="submit" id="send">Send ᯓ✉︎</button>
+        </form>
+    </main>
+    <template id="user">
+        <li></li>
+    </template>
+    <template id="message">
+        <div>
+            <span></span>
+            <p></p>
+        </div>
+</body>
 </html>
 ```
 
@@ -208,14 +218,12 @@ We'll set up the client side JavaScript in an `app.js` file, you'll have seen it
 linked in the HTML we just wrote. In the `public` folder and add an `app.js`
 file with the following code:
 
-```js
-// Initialize WebSocket connection
+```js title="app.js"
 const myUsername = prompt("Please enter your name") || "Anonymous";
-const socket = new WebSocket(
-  `ws://localhost:8080/start_web_socket?username=${myUsername}`,
-);
+const url = new URL(`./start_web_socket?username=${myUsername}`, location.href);
+url.protocol = url.protocol.replace("http", "ws");
+const socket = new WebSocket(url);
 
-// Handle WebSocket messages
 socket.onmessage = (event) => {
   const data = JSON.parse(event.data);
 
@@ -230,10 +238,9 @@ socket.onmessage = (event) => {
   }
 };
 
-// Update user list in the DOM
 function updateUserList(usernames) {
   const userList = document.getElementById("users");
-  userList.innerHTML = ""; // Clear existing list
+  userList.replaceChildren();
 
   for (const username of usernames) {
     const listItem = document.createElement("li");
@@ -242,19 +249,18 @@ function updateUserList(usernames) {
   }
 }
 
-// Add a new message to the conversation
 function addMessage(username, message) {
-  const conversation = document.getElementById("conversation");
-  const messageDiv = document.createElement("div");
-  messageDiv.innerHTML = `<span>${username}</span> ${message}`;
-  conversation.prepend(messageDiv);
+  const template = document.getElementById("message");
+  const clone = template.content.cloneNode(true);
+
+  clone.querySelector("span").textContent = username;
+  clone.querySelector("p").textContent = message;
+  document.getElementById("conversation").prepend(clone);
 }
 
-// Focus input field on page load to make typing instant
 const inputElement = document.getElementById("data");
 inputElement.focus();
 
-// On form submit, send message to server and empty the input field
 const form = document.getElementById("form");
 
 form.onsubmit = (e) => {
@@ -265,12 +271,13 @@ form.onsubmit = (e) => {
 };
 ```
 
-This code sets up a WebSocket connection to the server and listens for messages
-from the server. When a new message is received, if it is a `send-message` event
-it updates the DOM with the new message, and if it is an `update-users` event it
-updates the list of active users. It also sets up event listeners for either
-pressing the Enter key or clicking the send button to send a message to the
-server.
+This code prompts the user for a username, then creates a WebSocket connection
+to the server with the username as a query parameter. It listens for messages
+from the server and either updates the list of connected users or adds a new
+message to the chat window. It also sends messages to the server when the user
+submits the form either by pressing enter or clicking the send button. We use an
+[HTML template](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+to scaffold out the new messages to show in the chat window.
 
 ## Run the server
 
