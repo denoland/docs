@@ -122,7 +122,7 @@ Deno.test("database operations", async (t) => {
 Deno allows you to run specific tests or groups of tests using the `--filter`
 option on the command line. This option accepts either a string or a pattern to
 match test names. Filtering does not affect steps; if a test name matches the
-filter, all its steps are executed.
+filter, all of its steps are executed.
 
 Consider the following tests:
 
