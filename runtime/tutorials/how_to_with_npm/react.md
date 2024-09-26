@@ -50,7 +50,7 @@ a `main.ts` file, which will run the server, and a `data.json`, which will
 contain the hard coded dinosaur data.
 
 Copy and paste
-[this json file](https://raw.githubusercontent.com/denoland/deno-vue-example/main/api/data.json)
+[this json file](https://github.com/denoland/tutorial-with-react/blob/main/api/data.json)
 into the `api/data.json` file.
 
 We're going to build out a simple API server with routes that return dinosaur
