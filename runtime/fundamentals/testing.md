@@ -121,7 +121,8 @@ Deno.test("database operations", async (t) => {
 
 Deno allows you to run specific tests or groups of tests using the `--filter`
 option on the command line. This option accepts either a string or a pattern to
-match test names.
+match test names. Filtering does not affect steps; if a test name matches the
+filter, all of its steps are executed.
 
 Consider the following tests:
 
@@ -158,8 +159,8 @@ expressions.
 
 ### Including and excluding test files in the configuration file
 
-You can also filter tests by specifying paths to include or exclude in the Deno
-configuration file.
+You can also filter tests by specifying paths to include or exclude in the
+[Deno configuration file](/runtime/fundamentals/configuration).
 
 For example, if you want to only test `src/fetch_test.ts` and
 `src/signal_test.ts` and exclude everything in `out/`:

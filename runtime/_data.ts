@@ -17,6 +17,7 @@ export const sidebar = [
     title: "Fundamentals",
     items: [
       "/runtime/fundamentals/typescript/",
+      "/runtime/fundamentals/node/",
       "/runtime/fundamentals/security/",
       {
         label: "Modules",
@@ -144,7 +145,6 @@ export const sidebar = [
       },
       "/runtime/reference/deno_namespace_apis/",
       "/runtime/reference/web_platform_apis/",
-      "/runtime/reference/node/",
       {
         label: "npm packages",
         id: "/runtime/reference/npm/",

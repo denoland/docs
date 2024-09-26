@@ -189,7 +189,7 @@ body:not(:has(.ddoc)) {
 
 /* Orama search style overrides */
 .searchbutton-module_searchbutton__gg7JJ {
-  @apply w-64 border-gray-00 px-3 rounded-md gap-1 !important;
+  @apply w-full border-gray-00 px-3 rounded-md gap-1 !important;
 }
 
 .searchbutton-module_searchbutton__gg7JJ > svg {
