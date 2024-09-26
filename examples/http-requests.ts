@@ -40,7 +40,9 @@ resp = await fetch("https://example.com", {
     "Content-Type": "application/json",
     "X-API-Key": "foobar",
   },
-  body,
+  body: JSON.stringify({
+    "param": "value"
+  }),
 });
 
 // `fetch` also accepts a `Request` object instead of URL + options.
