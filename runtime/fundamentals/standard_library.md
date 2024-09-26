@@ -37,7 +37,7 @@ To install packages from the Deno Standard library, you can use the `deno add`
 subcommand to add the package to your `deno.json` import map.
 
 ```sh
-deno add @std/fs @std/path
+deno add jsr:@std/fs jsr:@std/path
 ```
 
 The `deno.json` `imports` field will be updated to include those imports:

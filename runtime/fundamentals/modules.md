@@ -119,7 +119,7 @@ automatically add the latest version of the package you requested to the
 
 ```sh
 # Add the latest version of the module to deno.json
-$ deno add @luca/cases
+$ deno add jsr:@luca/cases
 Add @luca/cases - jsr:@luca/cases@1.0.0
 ```
 
@@ -135,7 +135,7 @@ You can also specify an exact version:
 
 ```sh
 # Passing an exact version
-$ deno add @luca/cases@1.0.0
+$ deno add jsr:@luca/cases@1.0.0
 Add @luca/cases - jsr:@luca/cases@1.0.0
 ```
 
