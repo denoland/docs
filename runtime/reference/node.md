@@ -55,6 +55,66 @@ error: Relative import path "os" not prefixed with / or ./ or ../
 Same hints and additional quick-fixes are provided by the Deno LSP in your
 editor.
 
+## CommonJS support
+
+CommonJS is a module system that predetes
+[ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+
+There's millions of npm libraries that are written in CommonJS and Deno offers
+full support for them. Deno will automatically determine if a package is using
+CommonJS and makes it work seemlessly when imported:
+
+```js, title="main.js"
+import react from "npm:react";
+console.log(react);
+```
+
+```shell
+$ deno run -E main.js
+18.3.1
+```
+
+_`npm:react` is a CommonJS package. Deno provides a seemless way to import it._
+
+That said, Deno strongly encourages use of ES modules, and offers limited
+support for CommonJS in user code. There are two ways to write and cosume
+CommonJS code:
+
+- use `.cjs` extension
+
+For user code the support is limited to `.cjs` files. That
+
+// TODO: permissions when using CJS
+
+- `require()` function is only available for CommonJS modules, to use it in Deno
+  directly you can either run a file with `.cjs` extension, or create a
+  `require` instance explicitly:
+
+```js title="require.cjs"
+const lib = require("./lib");
+
+module.exports = { lib };
+```
+
+- create `require()` manually
+
+```js title="require.js"
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const lib = require("./lib");
+
+// Can't use `module.exports` here, instead use
+export default { lib };
+```
+
+### require(ESM)
+
+Deno's `require()` implementation support requiring ES modules.
+
+This works the same as in Node.js, where you can only `require()` es modules
+that don't have Top-Level Await in the whole module graph - or in other words
+are "synchronous".
+
 ## Node.js global objects
 
 In Node.js, there are a number of
@@ -91,19 +151,7 @@ Found 1 problem (1 fixable via --fix)
 Checked 1 file
 ```
 
-- `require()` function is only available for CommonJS modules, to use it in Deno
-  directly you can either run a file with `.cjs` extension, or create a
-  `require` instance explicitly:
-
-```js title="require.cjs"
-const lib = require("./lib");
-```
-
-```js title="require.js"
-import { createRequire } from "node:module";
-const require = createRequire(import.meta.url);
-const lib = require("./lib");
-```
+- `require()` - see [CommonJS support](#commonjs-support)
 
 - `Buffer` - to use `Buffer` API it needs to be explicitly imported from the
   `node:buffer` module:
