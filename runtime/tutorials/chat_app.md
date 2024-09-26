@@ -202,6 +202,7 @@ file and add the following code:
             <span></span>
             <p></p>
         </div>
+    </template>
 </body>
 </html>
 ```
