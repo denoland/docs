@@ -158,8 +158,8 @@ expressions.
 
 ### Including and excluding test files in the configuration file
 
-You can also filter tests by specifying paths to include or exclude in the [Deno
-configuration file](/runtime/fundamentals/configuration).
+You can also filter tests by specifying paths to include or exclude in the
+[Deno configuration file](/runtime/fundamentals/configuration).
 
 For example, if you want to only test `src/fetch_test.ts` and
 `src/signal_test.ts` and exclude everything in `out/`:
