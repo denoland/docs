@@ -1,6 +1,6 @@
 ---
 title: "Bundler (deprecated)"
-oldUrl: /runtime/reference/cli/bundler/
+oldUrl: /runtime/manual/cli/bundler/
 ---
 
 :::caution

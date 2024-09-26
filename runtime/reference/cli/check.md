@@ -12,10 +12,11 @@ Type-check a program without execution.
 ## Synopsis
 
 ```bash
-deno check [--import-map <FILE>] [--no-remote] [-q|--quiet] [--no-npm] 
+deno check [--import-map <FILE>] [--no-remote] [-q|--quiet] [--no-npm]
 [--node-modules-dir[=<node-modules-dir>]] [--vendor[=<vendor>]]
 [-c|--config <FILE>] [--no-config] [-r|--reload[=<CACHE_BLOCKLIST>...]]
-[--lock [<FILE>]] [--lock-write] [--no-lock] [--cert <FILE>] [--all] <FILE>
+[--lock [<FILE>]] [--frozen] [--no-lock] [--cert <FILE>]
+[--doc] [--doc-only] [--all] <FILE>
 
 deno check -h|--help
 ```
@@ -99,9 +100,9 @@ The module entrypoint can be a local file or a remote URL.
   Check the specified lock file. If value is not provided, defaults to
   "deno.lock" in the current working directory.
 
-- `--lock-write`
+- `--frozen[=<BOOLEAN>]`
 
-  Force overwriting the lock file
+  Error out if lockfile is out of date [possible values: true, false]
 
 - `--no-lock`
 
@@ -111,6 +112,16 @@ The module entrypoint can be a local file or a remote URL.
 
   Load the certificate from a
   [PEM encoded file](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)
+
+- `--doc`
+
+  Type-check code blocks in JSDoc as well as actual code. At most one of `--doc`
+  or `--doc-only` can be specified.
+
+- `--doc-only`
+
+  Type-check code blocks in JSDoc and Markdown only. At most one of `--doc` or
+  `--doc-only` can be specified.
 
 - `--all` Type-check all code, including remote modules and npm packages
 

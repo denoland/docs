@@ -34,7 +34,7 @@ export const sidebar = [
         id: "/runtime/fundamentals/http_server/",
       },
       "/runtime/fundamentals/installation/",
-      "/runtime/fundamentals/stability/",
+      "/runtime/fundamentals/stability_and_releases/",
     ],
   },
   {
@@ -55,10 +55,6 @@ export const sidebar = [
           {
             label: "deno completions",
             id: "/runtime/reference/cli/completions/",
-          },
-          {
-            label: "deno cache",
-            id: "/runtime/reference/cli/cache/",
           },
           {
             label: "deno check",
@@ -159,7 +155,6 @@ export const sidebar = [
         label: "Environment variables",
         id: "/runtime/reference/env_variables/",
       },
-      "/runtime/reference/deploying_and_embedding/",
       "/runtime/reference/wasm/",
       {
         label: "Language Server",
@@ -175,7 +170,6 @@ export const sidebar = [
         label: "Testing code in docs",
         id: "/runtime/reference/documentation/",
       },
-      "/runtime/reference/tcp_udp_connections/",
       "/runtime/reference/migrate_deprecations/",
       {
         label: "Full API Reference",
@@ -212,17 +206,30 @@ export const sidebar = [
       "/runtime/tutorials/init_project/",
       "/runtime/tutorials/fetch_data/",
       "/runtime/tutorials/http_server/",
-      "/examples/reading-files/",
-      "/examples/writing-files/",
+      {
+        label: "Reading files",
+        id: "/examples/reading-files/",
+      },
+      {
+        label: "Writing files",
+        id: "/examples/writing-files/",
+      },
       "/runtime/tutorials/hashbang/",
       "/runtime/tutorials/cjs_to_esm/",
+      "/runtime/tutorials/how_to_with_npm/react/",
+      "/runtime/tutorials/how_to_with_npm/next/",
+      "/runtime/tutorials/how_to_with_npm/vue/",
       "/runtime/tutorials/connecting_to_databases/",
+      "/runtime/tutorials/chat_app/",
       {
         label: "Advanced Examples",
         items: [
-          "/examples/unix-cat/",
           "/runtime/tutorials/file_server/",
-          "/runtime/tutorials/tcp_echo/",
+          {
+            label: "Unix cat",
+            id: "/examples/unix-cat/",
+          },
+          "/runtime/tutorials/file_server/",
           "/runtime/tutorials/subprocess/",
           "/runtime/tutorials/os_signals/",
           "/runtime/tutorials/file_system_events/",
@@ -244,9 +251,7 @@ export const sidebar = [
           "/runtime/tutorials/how_to_with_npm/mysql2/",
           "/runtime/tutorials/how_to_with_npm/planetscale/",
           "/runtime/tutorials/how_to_with_npm/prisma/",
-          "/runtime/tutorials/how_to_with_npm/react/",
           "/runtime/tutorials/how_to_with_npm/redis/",
-          "/runtime/tutorials/how_to_with_npm/vue/",
         ],
       },
       {

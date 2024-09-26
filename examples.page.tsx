@@ -14,7 +14,7 @@ export const sidebar = [
         id: "/examples/",
       },
       {
-        label: "Reference",
+        label: "API reference",
         id: "/api/deno",
       },
       {
@@ -189,6 +189,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
     ["Scheduled Tasks", "IconClock"],
     ["Cryptography", "IconFileShredder"],
     ["Advanced", "IconStars"],
+    ["Unstable APIs", "IconPersonDigging"],
   ];
 
   const groups = examples.reduce((acc, example) => {

@@ -418,4 +418,4 @@ way on Mac or Linux, then you may do so by running it through `sh`:
 file if it is discovered. Note that Deno does not respect or support any npm
 life cycle events like `preinstall` or `postinstall`—you must explicitly run the
 script entries you want to run (ex.
-`deno cache main.ts && deno task postinstall`).
+`deno install --entrypoint main.ts && deno task postinstall`).

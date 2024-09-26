@@ -60,7 +60,7 @@ export default function Header({
             url={url}
             activeOn="/api"
             href="/api/deno"
-            name="Reference"
+            name="API reference"
             hideOnMobile
           />
           <span class="hidden lg:inline-block mx-2">//</span>
@@ -88,7 +88,7 @@ export default function Header({
             external
             hideOnMobile
           />
-          <div class="w-[150px] lg:w-64">
+          <div class="min-w-[150px] md:w-32 xl:w-64">
             <orama-search-button />
             <orama-searchbox />
           </div>

@@ -224,7 +224,7 @@ automatically include `"esnext"` when you bring them in.
 
 :::note
 
-If you get type errors like `**cannot find`document`or`HTMLElement`**, it is
+If you get type errors like **cannot find `document` or `HTMLElement`**, it is
 likely that the library you are using has dependencies on the DOM. This is
 common for packages that are designed to run in a browser as well as
 server-side. By default, Deno only includes the libraries that are directly
@@ -383,7 +383,7 @@ sure to tell Deno to use this file by specifying `--config=path/to/file` flag.
 
 When Deno loads a TypeScript module in a web worker, it will automatically type
 check the module and its dependencies against the Deno web worker library. This
-can present a challenge in other contexts like `deno cache` or in editors. There
+can present a challenge in other contexts like `deno check` or in editors. There
 are a couple of ways to instruct Deno to use the worker libraries instead of the
 standard Deno libraries.
 
@@ -404,10 +404,6 @@ omitted, you will get some conflicting type definitions, because Deno will try
 to apply the standard Deno library as well. The second instructs Deno to apply
 the built-in Deno worker type definitions plus dependent libraries (like
 `"esnext"`).
-
-When you run a `deno cache` or `deno bundle` command or use an IDE which uses
-the Deno language server, Deno should automatically detect these directives and
-apply the correct libraries when type checking.
 
 The one disadvantage of this, is that it makes the code less portable to other
 non-Deno platforms like `tsc`, as it is only Deno which has the `"deno.worker"`
