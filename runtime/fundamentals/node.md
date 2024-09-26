@@ -60,9 +60,9 @@ editor.
 
 CommonJS is a module system that predetes
 [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
-
-There's millions of npm libraries that are written in CommonJS and Deno offers
-full support for them. Deno will automatically determine if a package is using
+While we firmly believe that ES modules are the future of JavaScript, there are
+millions of npm libraries that are written in CommonJS and Deno offers full
+support for them. Deno will automatically determine if a package is using
 CommonJS and makes it work seemlessly when imported:
 
 ```js, title="main.js"
@@ -77,50 +77,153 @@ $ deno run -E main.js
 
 _`npm:react` is a CommonJS package. Deno provides a seemless way to import it._
 
-That said, Deno strongly encourages use of ES modules, and offers limited
-support for CommonJS in user code. There are two ways to write and cosume
-CommonJS code:
+That said, Deno strongly encourages use of ES modules, and offers restriced
+support for CommonJS in user code. There are two ways to write and consume
+CommonJS code
 
-- use `.cjs` extension
+### Use `.cjs` extension
 
-For user code the support is limited to `.cjs` files. That
+If the file extension is `.cjs` Deno will treat this module as CommonJS.
 
-// TODO: permissions when using CJS
-
-- `require()` function is only available for CommonJS modules, to use it in Deno
-  directly you can either run a file with `.cjs` extension, or create a
-  `require` instance explicitly:
-
-```js title="require.cjs"
-const lib = require("./lib");
-
-module.exports = { lib };
+```js title="main.cjs"
+const express = require("express");
 ```
 
-- create `require()` manually
+Deno does not look for `package.json` files and `type` option to determine if
+the file is CommonJS or ESM.
 
-```js title="require.js"
+When using CommonJS, Deno expects that dependencies will be installed manually
+and `node_modules` directory will be present. It's best to set
+`"nodeModulesDir": "auto"` in your `deno.json` to ensure that.
+
+```shell
+$ cat deno.json
+{
+  "nodeModulesDir": "auto"
+}
+
+$ deno install npm:express
+Add npm:express@5.0.0
+
+$ deno run -R -E main.cjs
+[Function: createApplication] {
+  application: {
+    init: [Function: init],
+    defaultConfiguration: [Function: defaultConfiguration],
+    ...
+  }
+}
+```
+
+Notice that `-R` and `-E` flags were used to give access to read and env
+permissions.
+
+**Deno permission system is still in effect when using CommonJS modules.** It is
+necessary to provide at least `--allow-read` permission as Deno will probe the
+file system for `package.json` files and `node_modules` directory to properly
+resolve CommonJS modules.
+
+### Create `require()` manually
+
+Alternative option is to create an instance of `require()` function manually,
+this can be done as such:
+
+```js title="main.js"
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
-const lib = require("./lib");
-
-// Can't use `module.exports` here, instead use
-export default { lib };
+const express = require("express");
 ```
 
-:::info
-
-Using CommonJS modules requires appropriate perssmissions... link, flag, etc
-
-:::
+In this scenario the same requirements apply, as when running `.cjs` files -
+dependencies need to be installed manually and appropriate permission flags
+given.
 
 ### require(ESM)
 
 Deno's `require()` implementation support requiring ES modules.
 
-This works the same as in Node.js, where you can only `require()` es modules
-that don't have Top-Level Await in the whole module graph - or in other words
-are "synchronous".
+This works the same as in Node.js, where you can only `require()` ES modules
+that don't have Top-Level Await in their module graph - or in other words you
+can only `require()` ES modules that are "synchronous".
+
+```js title="greet.js"
+export function greet(name) {
+  return `Hello ${name}`;
+}
+```
+
+```js title="esm.js"
+import { greet } from "./greet.js";
+
+export { greet };
+```
+
+```js title="main.cjs"
+const esm = require("./esm");
+console.log(esm);
+console.log(esm.greet("Deno"));
+```
+
+```shell
+$ deno run -R main.cjs
+[Module: null prototype] { greet: [Function: greet] }
+Hello Deno
+```
+
+### import "./index.cjs"
+
+You can also import CommonJS files in ES modules, provided that these files use
+`.cjs` extension.
+
+Deno does not look for `package.json` files and `type` option to determine if
+the file is CommonJS or ESM.
+
+```js title="greet.cjs"
+module.exports = {
+  hello: "world",
+};
+```
+
+```js title="main.js"
+import greet from "./greet.js";
+console.log(greet);
+```
+
+```shell
+$ deno run main.js
+{
+  "hello": "world"
+}
+```
+
+_Notice that in this example no permission flags were specified - when importing
+CJS from ES modules, Deno can staticaly analyze and find relevant modules
+without having to probe file system at runtime._
+
+### Hints and suggestions
+
+Deno will provide useful hints and suggestions to guide you towards working code
+when working with CommonJS modules.
+
+As an example, if you try to run a CommonJS module that doesn't have `.cjs`
+extension you might see this:
+
+```js title="main.js"
+module.exports = {
+  hello: "world",
+};
+```
+
+```shell
+$ deno run main.js
+error: Uncaught (in promise) ReferenceError: module is not defined
+module.exports = {
+^
+    at file:///main.js:1:1
+
+    info: Deno does not support CommonJS modules without `.cjs` extension.
+    hint: Rewrite this module to ESM or change the file extension to `.cjs`.
+```
 
 ## Node.js global objects
 
