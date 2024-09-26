@@ -58,7 +58,7 @@ editor.
 
 ## CommonJS support
 
-CommonJS is a module system that predetes
+CommonJS is a module system that predates
 [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
 While we firmly believe that ES modules are the future of JavaScript, there are
 millions of npm libraries that are written in CommonJS and Deno offers full
@@ -75,11 +75,11 @@ $ deno run -E main.js
 18.3.1
 ```
 
-_`npm:react` is a CommonJS package. Deno provides a seemless way to import it._
+_`npm:react` is a CommonJS package. Deno allows to import it as it was an ES
+module._
 
-That said, Deno strongly encourages use of ES modules, and offers restriced
-support for CommonJS in user code. There are two ways to write and consume
-CommonJS code
+Deno strongly encourages use of ES modules in your code, and offers CommonJS
+support with following restrictions:
 
 ### Use `.cjs` extension
 
@@ -93,7 +93,7 @@ Deno does not look for `package.json` files and `type` option to determine if
 the file is CommonJS or ESM.
 
 When using CommonJS, Deno expects that dependencies will be installed manually
-and `node_modules` directory will be present. It's best to set
+and a `node_modules` directory will be present. It's best to set
 `"nodeModulesDir": "auto"` in your `deno.json` to ensure that.
 
 ```shell
