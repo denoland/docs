@@ -6,9 +6,7 @@
       "jsr:@std/cli@1.0.4": "jsr:@std/cli@1.0.4",
       "jsr:@std/cli@^1.0.4": "jsr:@std/cli@1.0.4",
       "jsr:@std/collections@^1.0.5": "jsr:@std/collections@1.0.5",
-      "jsr:@std/crypto": "jsr:@std/crypto@1.0.3",
       "jsr:@std/crypto@1.0.3": "jsr:@std/crypto@1.0.3",
-      "jsr:@std/encoding": "jsr:@std/encoding@1.0.3",
       "jsr:@std/encoding@1.0.3": "jsr:@std/encoding@1.0.3",
       "jsr:@std/encoding@^1.0.3": "jsr:@std/encoding@1.0.3",
       "jsr:@std/fmt@1.0.1": "jsr:@std/fmt@1.0.1",
@@ -19,18 +17,17 @@
       "jsr:@std/fs@^1.0.2": "jsr:@std/fs@1.0.2",
       "jsr:@std/html@1.0.0": "jsr:@std/html@1.0.0",
       "jsr:@std/http@1.0.4": "jsr:@std/http@1.0.4",
-      "jsr:@std/io@^0.224.6": "jsr:@std/io@0.224.7",
+      "jsr:@std/io@^0.224.6": "jsr:@std/io@0.224.8",
       "jsr:@std/json@^1.0.0": "jsr:@std/json@1.0.0",
       "jsr:@std/jsonc@1.0.1": "jsr:@std/jsonc@1.0.1",
       "jsr:@std/log@0.224.6": "jsr:@std/log@0.224.6",
       "jsr:@std/media-types@^1.0.3": "jsr:@std/media-types@1.0.3",
-      "jsr:@std/net@^1.0.1": "jsr:@std/net@1.0.2",
-      "jsr:@std/path": "jsr:@std/path@1.0.3",
+      "jsr:@std/net@^1.0.1": "jsr:@std/net@1.0.4",
       "jsr:@std/path@1.0.0": "jsr:@std/path@1.0.0",
       "jsr:@std/path@1.0.0-rc.1": "jsr:@std/path@1.0.0-rc.1",
       "jsr:@std/path@1.0.3": "jsr:@std/path@1.0.3",
       "jsr:@std/path@^1.0.3": "jsr:@std/path@1.0.3",
-      "jsr:@std/streams@^1.0.3": "jsr:@std/streams@1.0.4",
+      "jsr:@std/streams@^1.0.3": "jsr:@std/streams@1.0.5",
       "jsr:@std/toml@1.0.1": "jsr:@std/toml@1.0.1",
       "jsr:@std/toml@^1.0.1": "jsr:@std/toml@1.0.1",
       "jsr:@std/yaml@1.0.4": "jsr:@std/yaml@1.0.4",
@@ -39,7 +36,7 @@
       "npm:@oramacloud/client@1": "npm:@oramacloud/client@1.3.14",
       "npm:@types/estree@1.0.5": "npm:@types/estree@1.0.5",
       "npm:@types/node": "npm:@types/node@18.16.19",
-      "npm:autoprefixer@^10.4.20": "npm:autoprefixer@10.4.20_postcss@8.4.45",
+      "npm:autoprefixer@^10.4.20": "npm:autoprefixer@10.4.20_postcss@8.4.47",
       "npm:estree-walker@3.0.3": "npm:estree-walker@3.0.3",
       "npm:express@4.18.2": "npm:express@4.18.2",
       "npm:markdown-it-anchor@9": "npm:markdown-it-anchor@9.1.0_@types+markdown-it@14.1.2_markdown-it@14.1.0",
@@ -49,13 +46,13 @@
       "npm:markdown-it@14.1.0": "npm:markdown-it@14.1.0",
       "npm:meriyah@4.5.0": "npm:meriyah@4.5.0",
       "npm:mongodb@6.1.0": "npm:mongodb@6.1.0",
-      "npm:postcss@^8.4.41": "npm:postcss@8.4.45",
+      "npm:postcss@^8.4.41": "npm:postcss@8.4.47",
       "npm:preact": "npm:preact@10.23.2",
       "npm:preact-render-to-string@6.5.10": "npm:preact-render-to-string@6.5.10_preact@10.23.2",
       "npm:preact@10.23.2": "npm:preact@10.23.2",
       "npm:prismjs@1.29.0": "npm:prismjs@1.29.0",
-      "npm:tailwindcss": "npm:tailwindcss@3.4.10_postcss@8.4.45",
-      "npm:tailwindcss@^3.4.9": "npm:tailwindcss@3.4.10_postcss@8.4.45",
+      "npm:tailwindcss": "npm:tailwindcss@3.4.10_postcss@8.4.47",
+      "npm:tailwindcss@^3.4.9": "npm:tailwindcss@3.4.10_postcss@8.4.47",
       "npm:unidecode@1.1.0": "npm:unidecode@1.1.0"
     },
     "jsr": {
@@ -114,8 +111,8 @@
           "jsr:@std/streams@^1.0.3"
         ]
       },
-      "@std/io@0.224.7": {
-        "integrity": "a70848793c44a7c100926571a8c9be68ba85487bfcd4d0540d86deabe1123dc9"
+      "@std/io@0.224.8": {
+        "integrity": "f525d05d51fd873de6352b9afcf35cab9ab5dc448bf3c20e0c8b521ded9be392"
       },
       "@std/json@1.0.0": {
         "integrity": "985c1e544918d42e4e84072fc739ac4a19c3a5093292c99742ffcdd03fb6a268"
@@ -140,8 +137,8 @@
       "@std/media-types@1.0.3": {
         "integrity": "b12d30a7852f7578f4d210622df713bbfd1cbdd9b4ec2eaf5c1845ab70bab159"
       },
-      "@std/net@1.0.2": {
-        "integrity": "520c18ddb7f67d3830a1adfef03a155d496fe9683a9cb63bb823b5afb86484dc"
+      "@std/net@1.0.4": {
+        "integrity": "2f403b455ebbccf83d8a027d29c5a9e3a2452fea39bb2da7f2c04af09c8bc852"
       },
       "@std/path@1.0.0": {
         "integrity": "77fcb858b6e38777d1154df0f02245ba0b07e2c40ca3c0eec57c9233188c2d21"
@@ -152,8 +149,8 @@
       "@std/path@1.0.3": {
         "integrity": "cd89d014ce7eb3742f2147b990f6753ee51d95276bfc211bc50c860c1bc7df6f"
       },
-      "@std/streams@1.0.4": {
-        "integrity": "a1a5b01c74ca1d2dcaacfe1d4bbb91392e765946d82a3471bd95539adc6da83a"
+      "@std/streams@1.0.5": {
+        "integrity": "74e5c73d7d68eeab0d7fba3b05cbee3ba4ac5ae37c5f4e675f67e62f8f53edc4"
       },
       "@std/toml@1.0.1": {
         "integrity": "b55b407159930f338d384b1f8fd317c8e8a35e27ebb8946155f49e3a158d16c4",
@@ -342,7 +339,7 @@
           "@vue/shared": "@vue/shared@3.5.1",
           "entities": "entities@4.5.0",
           "estree-walker": "estree-walker@2.0.2",
-          "source-map-js": "source-map-js@1.2.0"
+          "source-map-js": "source-map-js@1.2.1"
         }
       },
       "@vue/compiler-dom@3.5.1": {
@@ -362,8 +359,8 @@
           "@vue/shared": "@vue/shared@3.5.1",
           "estree-walker": "estree-walker@2.0.2",
           "magic-string": "magic-string@0.30.11",
-          "postcss": "postcss@8.4.45",
-          "source-map-js": "source-map-js@1.2.0"
+          "postcss": "postcss@8.4.47",
+          "source-map-js": "source-map-js@1.2.1"
         }
       },
       "@vue/compiler-ssr@3.5.1": {
@@ -471,15 +468,15 @@
         "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==",
         "dependencies": {}
       },
-      "autoprefixer@10.4.20_postcss@8.4.45": {
+      "autoprefixer@10.4.20_postcss@8.4.47": {
         "integrity": "sha512-XY25y5xSv/wEoqzDyXXME4AFfkZI0P23z6Fs3YgymDnKJkCGOnkL0iTxCa85UTqaSgfcqyf3UA6+c7wUvx/16g==",
         "dependencies": {
           "browserslist": "browserslist@4.23.3",
-          "caniuse-lite": "caniuse-lite@1.0.30001655",
+          "caniuse-lite": "caniuse-lite@1.0.30001660",
           "fraction.js": "fraction.js@4.3.7",
           "normalize-range": "normalize-range@0.1.2",
           "picocolors": "picocolors@1.1.0",
-          "postcss": "postcss@8.4.45",
+          "postcss": "postcss@8.4.47",
           "postcss-value-parser": "postcss-value-parser@4.2.0"
         }
       },
@@ -523,8 +520,8 @@
       "browserslist@4.23.3": {
         "integrity": "sha512-btwCFJVjI4YWDNfau8RhZ+B1Q/VLoUITrm3RlP6y1tYGWIOa+InuYiRGXUBXo8nA1qKmHMyLB/iVQg5TT4eFoA==",
         "dependencies": {
-          "caniuse-lite": "caniuse-lite@1.0.30001655",
-          "electron-to-chromium": "electron-to-chromium@1.5.13",
+          "caniuse-lite": "caniuse-lite@1.0.30001660",
+          "electron-to-chromium": "electron-to-chromium@1.5.24",
           "node-releases": "node-releases@2.0.18",
           "update-browserslist-db": "update-browserslist-db@1.1.0_browserslist@4.23.3"
         }
@@ -551,8 +548,8 @@
         "integrity": "sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==",
         "dependencies": {}
       },
-      "caniuse-lite@1.0.30001655": {
-        "integrity": "sha512-jRGVy3iSGO5Uutn2owlb5gR6qsGngTw9ZTb4ali9f3glshcNmJ2noam4Mo9zia5P9Dk3jNNydy7vQjuE5dQmfg==",
+      "caniuse-lite@1.0.30001660": {
+        "integrity": "sha512-GacvNTTuATm26qC74pt+ad1fW15mlQ/zuTzzY1ZoIzECTP8HURDfF43kNxPgf7H1jmelCBQTTbBNxdSXOA7Bqg==",
         "dependencies": {}
       },
       "chokidar@3.6.0": {
@@ -664,8 +661,8 @@
         "integrity": "sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==",
         "dependencies": {}
       },
-      "electron-to-chromium@1.5.13": {
-        "integrity": "sha512-lbBcvtIJ4J6sS4tb5TLp1b4LyfCdMkwStzXPyAgVgTRAsep4bvrAGaBOP7ZJtQMNJpSQ9SqG4brWOroNaQtm7Q==",
+      "electron-to-chromium@1.5.24": {
+        "integrity": "sha512-0x0wLCmpdKFCi9ulhvYZebgcPmHTkFVUfU2wzDykadkslKwT4oAmDTHEKLnlrDsMGZe4B+ksn8quZfZjYsBetA==",
         "dependencies": {}
       },
       "emoji-regex@8.0.0": {
@@ -1243,34 +1240,34 @@
         "integrity": "sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==",
         "dependencies": {}
       },
-      "postcss-import@15.1.0_postcss@8.4.45": {
+      "postcss-import@15.1.0_postcss@8.4.47": {
         "integrity": "sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==",
         "dependencies": {
-          "postcss": "postcss@8.4.45",
+          "postcss": "postcss@8.4.47",
           "postcss-value-parser": "postcss-value-parser@4.2.0",
           "read-cache": "read-cache@1.0.0",
           "resolve": "resolve@1.22.8"
         }
       },
-      "postcss-js@4.0.1_postcss@8.4.45": {
+      "postcss-js@4.0.1_postcss@8.4.47": {
         "integrity": "sha512-dDLF8pEO191hJMtlHFPRa8xsizHaM82MLfNkUHdUtVEV3tgTp5oj+8qbEqYM57SLfc74KSbw//4SeJma2LRVIw==",
         "dependencies": {
           "camelcase-css": "camelcase-css@2.0.1",
-          "postcss": "postcss@8.4.45"
+          "postcss": "postcss@8.4.47"
         }
       },
-      "postcss-load-config@4.0.2_postcss@8.4.45": {
+      "postcss-load-config@4.0.2_postcss@8.4.47": {
         "integrity": "sha512-bSVhyJGL00wMVoPUzAVAnbEoWyqRxkjv64tUl427SKnPrENtq6hJwUojroMz2VB+Q1edmi4IfrAPpami5VVgMQ==",
         "dependencies": {
           "lilconfig": "lilconfig@3.1.2",
-          "postcss": "postcss@8.4.45",
+          "postcss": "postcss@8.4.47",
           "yaml": "yaml@2.5.1"
         }
       },
-      "postcss-nested@6.2.0_postcss@8.4.45": {
+      "postcss-nested@6.2.0_postcss@8.4.47": {
         "integrity": "sha512-HQbt28KulC5AJzG+cZtj9kvKB93CFCdLvog1WFLf1D+xmMvPGlBstkpTEZfK5+AN9hfJocyBFCNiqyS48bpgzQ==",
         "dependencies": {
-          "postcss": "postcss@8.4.45",
+          "postcss": "postcss@8.4.47",
           "postcss-selector-parser": "postcss-selector-parser@6.1.2"
         }
       },
@@ -1285,12 +1282,12 @@
         "integrity": "sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==",
         "dependencies": {}
       },
-      "postcss@8.4.45": {
-        "integrity": "sha512-7KTLTdzdZZYscUc65XmjFiB73vBhBfbPztCYdUNvlaso9PrzjzcmjqBPR0lNGkcVlcO4BjiO5rK/qNz+XAen1Q==",
+      "postcss@8.4.47": {
+        "integrity": "sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==",
         "dependencies": {
           "nanoid": "nanoid@3.3.7",
           "picocolors": "picocolors@1.1.0",
-          "source-map-js": "source-map-js@1.2.0"
+          "source-map-js": "source-map-js@1.2.1"
         }
       },
       "preact-render-to-string@6.5.10_preact@10.23.2": {
@@ -1454,8 +1451,8 @@
         "integrity": "sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==",
         "dependencies": {}
       },
-      "source-map-js@1.2.0": {
-        "integrity": "sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==",
+      "source-map-js@1.2.1": {
+        "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==",
         "dependencies": {}
       },
       "sparse-bitfield@3.0.3": {
@@ -1512,7 +1509,7 @@
         "integrity": "sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==",
         "dependencies": {}
       },
-      "tailwindcss@3.4.10_postcss@8.4.45": {
+      "tailwindcss@3.4.10_postcss@8.4.47": {
         "integrity": "sha512-KWZkVPm7yJRhdu4SRSl9d4AK2wM3a50UsvgHZO7xY77NQr2V+fIrEuoDGQcbvswWvFGbS2f6e+jC/6WJm1Dl0w==",
         "dependencies": {
           "@alloc/quick-lru": "@alloc/quick-lru@5.2.0",
@@ -1529,11 +1526,11 @@
           "normalize-path": "normalize-path@3.0.0",
           "object-hash": "object-hash@3.0.0",
           "picocolors": "picocolors@1.1.0",
-          "postcss": "postcss@8.4.45",
-          "postcss-import": "postcss-import@15.1.0_postcss@8.4.45",
-          "postcss-js": "postcss-js@4.0.1_postcss@8.4.45",
-          "postcss-load-config": "postcss-load-config@4.0.2_postcss@8.4.45",
-          "postcss-nested": "postcss-nested@6.2.0_postcss@8.4.45",
+          "postcss": "postcss@8.4.47",
+          "postcss-import": "postcss-import@15.1.0_postcss@8.4.47",
+          "postcss-js": "postcss-js@4.0.1_postcss@8.4.47",
+          "postcss-load-config": "postcss-load-config@4.0.2_postcss@8.4.47",
+          "postcss-nested": "postcss-nested@6.2.0_postcss@8.4.47",
           "postcss-selector-parser": "postcss-selector-parser@6.1.2",
           "resolve": "resolve@1.22.8",
           "sucrase": "sucrase@3.35.0"

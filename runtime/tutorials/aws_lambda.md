@@ -135,7 +135,5 @@ Now you can create a new AWS Lambda function from the AWS Management Console.
 You can now visit your Lambda function's URL to see the response from your Deno
 app.
 
-## Conclusion
-
-You have successfully deployed a Deno app to AWS Lambda using Docker. You can
+🦕 You have successfully deployed a Deno app to AWS Lambda using Docker. You can
 now use this setup to deploy more complex Deno apps to AWS Lambda.
