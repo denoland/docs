@@ -107,6 +107,12 @@ const lib = require("./lib");
 export default { lib };
 ```
 
+:::info
+
+Using CommonJS modules requires appropriate perssmissions... link, flag, etc
+
+:::
+
 ### require(ESM)
 
 Deno's `require()` implementation support requiring ES modules.
