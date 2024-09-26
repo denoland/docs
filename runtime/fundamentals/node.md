@@ -1,6 +1,7 @@
 ---
-title: "Node compatibility and interop"
+title: "Node.js support"
 oldUrl:
+- /runtime/reference/node/
 - /runtime/manual/npm_nodejs/std_node/
 - /runtime/manual/node/
 - /runtime/manual/npm_nodejs/cdns/
