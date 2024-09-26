@@ -172,6 +172,7 @@ In your new project directory, create a `public` folder and add an `index.html`
 file and add the following code:
 
 ```html title="index.html"
+<!DOCTYPE html>
 <html>
 <head>
     <title>Deno Chat App</title>
