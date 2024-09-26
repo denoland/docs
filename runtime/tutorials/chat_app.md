@@ -177,7 +177,7 @@ file and add the following code:
 <head>
     <title>Deno Chat App</title>
     <link rel="stylesheet" href="/public/style.css">
-    <script defer src="/public/app.js"></script>
+    <script defer type="module" src="/public/app.js"></script>
 </head>
 
 <body>
