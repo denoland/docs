@@ -57,24 +57,6 @@
   @apply bg-gray-000/25 !important;
 }
 
-/* Single column APIs */
-
-.ddoc .namespaceSection {
-  @apply grid-cols-1 gap-1 mt-4 !important;
-}
-
-.ddoc .section {
-  @apply max-w-[75ch] !important;
-}
-
-.ddoc .namespaceSection .namespaceItem {
-  @apply min-h-0 mb-4 !important;
-}
-
-.ddoc .section > div:first-child > h2 {
-  @apply mb-0 !important;
-}
-
 /* This section attempts to style the headings on the category index pages differently from the symbol detail pages */
 .ddoc .space-y-7 > .section {
   @apply mt-4 !important;
