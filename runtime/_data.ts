@@ -17,6 +17,7 @@ export const sidebar = [
     title: "Fundamentals",
     items: [
       "/runtime/fundamentals/typescript/",
+      "/runtime/fundamentals/node/",
       "/runtime/fundamentals/security/",
       {
         label: "Modules",
@@ -90,7 +91,7 @@ export const sidebar = [
           },
           {
             label: "deno install",
-            id: "/runtime/reference/cli/install/",
+            id: "/runtime/reference/cli/script_installer/",
           },
           {
             label: "deno jupyter",
@@ -144,7 +145,6 @@ export const sidebar = [
       },
       "/runtime/reference/deno_namespace_apis/",
       "/runtime/reference/web_platform_apis/",
-      "/runtime/reference/node/",
       {
         label: "npm packages",
         id: "/runtime/reference/npm/",
@@ -220,7 +220,6 @@ export const sidebar = [
       "/runtime/tutorials/how_to_with_npm/next/",
       "/runtime/tutorials/how_to_with_npm/vue/",
       "/runtime/tutorials/connecting_to_databases/",
-      "/runtime/tutorials/chat_app/",
       {
         label: "Advanced Examples",
         items: [
