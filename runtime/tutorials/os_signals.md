@@ -57,7 +57,7 @@ const sigIntHandler = () => {
 };
 Deno.addSignalListener("SIGINT", sigIntHandler);
 
-// Add a timeout to prevent process existing immediately.
+// Add a timeout to prevent process exiting immediately.
 setTimeout(() => {}, 5000);
 
 // Stop listening for a signal after 1s.
