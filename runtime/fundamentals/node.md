@@ -126,7 +126,7 @@ properly resolve CommonJS modules.
 ### Create `require()` manually
 
 An alternative option is to create an instance of the `require()` function
-manually, this can be done as such:
+manually:
 
 ```js title="main.js"
 import { createRequire } from "node:module";
