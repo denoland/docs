@@ -344,8 +344,8 @@ dinosaur to see more details!
 
 ![The vue app in action](../images/how-to/vue/vue.gif)
 
-Let's run it and see what we get so far:
-
-![Clicking on a dinosaur to get to an individual dinosaur page](../images/how-to/vue/vue-demo.gif)
-
-Awesome!
+🦕 Now that you can run a Vue app in Deno with Vite you're ready to build real
+world applications! If you'd like to expand upon this demo you could consider
+building out a backend server to serve the static app once built, then you'll be
+able to
+[deploy your dinosaur app to the cloud](https://docs.deno.com/deploy/manual/).
