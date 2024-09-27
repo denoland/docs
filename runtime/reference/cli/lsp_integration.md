@@ -1,5 +1,5 @@
 ---
-title: "Language Server Protocol Integration"
+title: "Language Server Integration"
 oldUrl:
 - /runtime/reference/cli/lsp_integration/
 - /runtime/manual/reference/lsp/
