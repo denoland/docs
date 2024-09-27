@@ -84,13 +84,18 @@ for (const file of files) {
       )
     ) {
       if (
+        !exportable.wasForgotten() &&
         exportable.getKind() !== ts.SyntaxKind.ImportEqualsDeclaration &&
         !(exportable.getKind() === ts.SyntaxKind.ModuleDeclaration &&
           exportable.getName() === "global")
       ) {
-        exportable.setIsExported(
-          !EXCLUDE_MAP[fileName]?.includes(exportable.getName?.()),
-        );
+        if (exportable.getName?.() === "BuiltInModule") {
+          exportable.remove();
+        } else {
+          exportable.setIsExported(
+            !EXCLUDE_MAP[fileName]?.includes(exportable.getName?.()),
+          );
+        }
       }
     }
 
