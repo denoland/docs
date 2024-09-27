@@ -171,6 +171,10 @@ body:not(:has(.ddoc)) {
   @apply bg-deploy-500 border-deploy-500 hover:bg-deploy-400;
 }
 
+.jsr-cta {
+  @apply bg-jsr-yellow-400 border-jsr-cyan-950 !text-jsr-cyan-950 border-2 hover:!no-underline hover:bg-jsr-yellow-300;
+}
+
 .homepage-link {
   @apply block font-semibold underline underline-offset-4;
 }
