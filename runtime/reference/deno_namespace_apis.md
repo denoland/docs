@@ -906,9 +906,6 @@ About to exit...
 Exiting
 ```
 
-This has allowed us to polyfill `process.on("beforeExit")` in the Node
-compatibility layer.
-
 ### unhandledrejection event
 
 This event is fired when a promise that has no rejection handler is rejected,
@@ -942,6 +939,3 @@ unhandled rejection at: Promise {
     at file:///dev/unhandled_rejection.js:10:1
 unhandled rejection at: Promise { <rejected> undefined } reason: undefined
 ```
-
-This API will allow us to polyfill `process.on("unhandledRejection")` in the
-Node compatibility layer in future releases.
