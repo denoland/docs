@@ -9,13 +9,19 @@ application logic rather than "reinventing the wheel" for common tasks. All of
 the modules in the Deno Standard Library are audited by the core team and are
 guaranteed to work with Deno, ensuring consistency and reliability.
 
+<a href="https://jsr.io/@std" class="docs-cta jsr-cta" aria-label="See all packages on JSR">See
+all packages on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg>
+</a>
+
 Many packages in the Deno Standard Library are also compatible with Node.js,
 Cloudflare Workers, and other JavaScript environments. This allows you to write
 code that can be run in multiple environments without modification.
 
-The standard library is hosted on JSR and is available at: https://jsr.io/@std.
-Packages are documented, tested, and include usage examples. You can browse the
-full list of standard library packages on JSR, but here are a few examples:
+The standard library is hosted on JSR and is available at:
+[https://jsr.io/@std](https://jsr.io/@std). Packages are documented, tested, and
+include usage examples. You can browse the full list of standard library
+packages on JSR, but here are a few examples:
 
 - [@std/path](https://jsr.io/@std/path): Path manipulation utilities, akin to
   Node.js's `path` module.

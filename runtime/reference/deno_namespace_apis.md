@@ -13,8 +13,9 @@ The global `Deno` namespace contains APIs that are not web standard, including
 APIs for reading from files, opening TCP sockets, serving HTTP, and executing
 subprocesses, etc.
 
-For a full list of Deno Built-in APIs, see the [reference](/api/deno/~/Deno).
-Below we highlight some of the most important.
+<a href="/api/deno/" class="docs-cta runtime-cta">Explore all Deno APIs</a>
+
+Below we highlight some of the most important Deno APIs to know.
 
 ## File System
 

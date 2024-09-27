@@ -13,8 +13,11 @@ One way Deno simplifies web and cloud development is by using Web Platform APIs
 browser, you're likely already familiar with Deno, and if you're learning Deno,
 you're also investing in your knowledge of the web.
 
-Check out the [reference guide for Deno's supported Web APIs](/api/web/). To
-check if a Web Platform API is available in Deno, you can click on
+<a href="/api/web/" class="docs-cta runtime-cta">Explore supported Web APIs</a>
+
+Below we'll highlight some of the standard Web APIs that Deno supports.
+
+To check if a Web Platform API is available in Deno, you can click on
 [the interface on MDN](https://developer.mozilla.org/en-US/docs/Web/API#interfaces)
 and refer to
 [its Browser Compatibility table](https://developer.mozilla.org/en-US/docs/Web/API/AbortController#browser_compatibility).
