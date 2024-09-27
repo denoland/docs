@@ -6,7 +6,7 @@ oldUrl: /runtime/manual/tools/compiler/
 `deno compile` allows you to create self-contained executables from a TypeScript
 or JavaScript file.
 
-This feature allows distribution of a Deno application to system that does not
+This feature allows distribution of a Deno application to systems that do not
 have Deno installed. Under the hood, `deno compile` bundles a slimmed down
 version of the Deno runtime along with your JavaScript or TypeScript code.
 
@@ -113,7 +113,7 @@ default. There are two ways to include workers:
 deno compile --include worker.ts main.ts
 ```
 
-2. Import worker module using a statically analyzable dynamic import.
+2. Import worker module using a statically analyzable import.
 
 ```ts
 // main.ts
