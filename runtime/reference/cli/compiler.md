@@ -11,7 +11,7 @@ have Deno installed. Under the hood, `deno compile` bundles a slimmed down
 version of the Deno runtime along with your JavaScript or TypeScript code.
 
 ```sh
-deno compile https://docs.deno.com/examples/welcome.ts
+deno compile --allow-read --allow-net jsr:@std/http@1.0.0/file-server
 ```
 
 ```sh
@@ -19,7 +19,7 @@ deno compile --output ./game game.tsx
 ```
 
 If you omit the `--output` flag, the name of the executable file will be
-inferred from the script name.
+inferred from the package or script name.
 
 ## Flags
 
