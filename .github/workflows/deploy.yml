@@ -23,7 +23,7 @@ jobs:
       - name: Set up Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: ea8bf0945ac93a16a3d8df2470c70d9cf1c36172
+          deno-version: 92529697807a652b627a7dbd4f5d0c3ad7bacf59
           deno-binary-name: "deno_doc"
 
       - name: "Reference: install"
