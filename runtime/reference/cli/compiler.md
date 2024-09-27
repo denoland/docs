@@ -105,10 +105,23 @@ deno compile --include calc.ts --include better_calc.ts main.ts
 
 Similarly to non-statically analyzable dynamic imports, code for
 [workers](../runtime/workers.md) is not included in the compiled executable by
-default. You must use the `--include <path>` flag to include the worker code.
+default. There are two ways to include workers:
+
+1. Use the `--include <path>` flag to include the worker code.
 
 ```shell
 deno compile --include worker.ts main.ts
+```
+
+2. Import worker module using a statically analyzable dynamic import.
+
+```ts
+// main.ts
+import "./worker.ts";
+```
+
+```shell
+deno compile main.ts
 ```
 
 ## Code Signing
