@@ -118,7 +118,7 @@ $ deno run -R -E main.cjs
 Notice that `-R` and `-E` flags were used to give access to read and env
 permissions.
 
-**Deno permission system is still in effect when using CommonJS modules.** It is
+**Deno's permission system is still in effect when using CommonJS modules.** It is
 necessary to provide at least `--allow-read` permission as Deno will probe the
 file system for `package.json` files and `node_modules` directory to properly
 resolve CommonJS modules.
