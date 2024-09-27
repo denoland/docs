@@ -115,7 +115,7 @@ $ deno run -R -E main.cjs
 }
 ```
 
-Notice that `-R` and `-E` flags were used to give access to read and env
+`-R` and `-E` flags are used to allow permissions to read files and environment variables.
 permissions.
 
 **Deno's permission system is still in effect when using CommonJS modules.** It is
