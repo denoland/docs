@@ -270,7 +270,7 @@ export default function () {
                     },
                     {
                       text: "Websocket",
-                      href: "/api/deno/websocket",
+                      href: "/api/deno/web-sockets",
                     },
                     {
                       text: "View all Deno APIs",
@@ -489,7 +489,7 @@ function ContentItem(props: {
 
   return (
     <div>
-      <h4 className="text-lg font-semibold mb-1">{props.title}</h4>
+      <h4 className="mb-1 text-lg font-semibold">{props.title}</h4>
       <p className="mb-3">{props.description}</p>
       <a className={`homepage-link ${productClass}`} href={props.link}>
         {props.linktext}{" "}
@@ -513,7 +513,7 @@ function LinkList(props: {
     : "help-link";
   return (
     <div>
-      <h4 className="text-lg font-semibold mb-1">{props.title}</h4>
+      <h4 className="mb-1 text-lg font-semibold">{props.title}</h4>
       {props.links.map((link, index) => (
         <a
           key={index}
