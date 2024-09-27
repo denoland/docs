@@ -93,7 +93,7 @@ router.get("/api/dinosaurs/:dinosaur", (context) => {
     item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
   );
 
-  context.response.body = dinosaur ? dinosaur : "No dinosaur found.";
+  context.response.body = dinosaur ?? "No dinosaur found.";
 });
 ```
 
