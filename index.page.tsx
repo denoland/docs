@@ -269,8 +269,8 @@ export default function () {
                       href: "/api/deno/permissions",
                     },
                     {
-                      text: "Websocket",
-                      href: "/api/deno/websocket",
+                      text: "WebSockets",
+                      href: "/api/deno/web-sockets",
                     },
                     {
                       text: "View all Deno APIs",
@@ -287,10 +287,6 @@ export default function () {
                       href: "/api/web/cache",
                     },
                     {
-                      text: "Cookies",
-                      href: "/api/web/cookies",
-                    },
-                    {
                       text: "Fetch",
                       href: "/api/web/fetch",
                     },
@@ -301,6 +297,10 @@ export default function () {
                     {
                       text: "URL",
                       href: "/api/web/url",
+                    },
+                    {
+                      text: "Canvas",
+                      href: "/api/web/canvas",
                     },
                     {
                       text: "View all Web APIs",
