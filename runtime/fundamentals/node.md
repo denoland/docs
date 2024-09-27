@@ -125,7 +125,7 @@ properly resolve CommonJS modules.
 
 ### Create `require()` manually
 
-Alternative option is to create an instance of `require()` function manually,
+An alternative option is to create an instance of the `require()` function manually,
 this can be done as such:
 
 ```js title="main.js"
