@@ -287,6 +287,10 @@ export default function () {
                       href: "/api/web/cache",
                     },
                     {
+                      text: "Canvas",
+                      href: "/api/web/canvas",
+                    },
+                    {
                       text: "Fetch",
                       href: "/api/web/fetch",
                     },
@@ -297,10 +301,6 @@ export default function () {
                     {
                       text: "URL",
                       href: "/api/web/url",
-                    },
-                    {
-                      text: "Canvas",
-                      href: "/api/web/canvas",
                     },
                     {
                       text: "View all Web APIs",
