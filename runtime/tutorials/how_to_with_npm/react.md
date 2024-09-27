@@ -6,11 +6,12 @@ oldUrl:
 ---
 
 [React](https://reactjs.org) is the most widely used JavaScript frontend
-framework.
+library.
 
 In this tutorial we'll build a simple React app with Deno. The app will display
 a list of dinosaurs. When you click on one, it'll take you to a dinosaur page
-with more details.
+with more details. You can see the
+[finished app repo on GitHub](https://github.com/denoland/tutorial-with-react)
 
 ![demo of the app](../images/how-to/react/react-dinosaur-app-demo.gif)
 
@@ -24,10 +25,10 @@ you to import React components directly.
 In your terminal run the following command to create a new React app with Vite:
 
 ```sh
-deno run -A npm:create-vite-extra
+deno run -A npm:create-vite@latest
 ```
 
-From the offered options select `deno-react` and `typescript`.
+From the offered options select `React` and `TypeScript`.
 
 Then, `cd` into the newly created project folder and the following command to
 serve your new react app:
@@ -49,7 +50,7 @@ a `main.ts` file, which will run the server, and a `data.json`, which will
 contain the hard coded dinosaur data.
 
 Copy and paste
-[this json file](https://raw.githubusercontent.com/denoland/deno-vue-example/main/api/data.json)
+[this json file](https://github.com/denoland/tutorial-with-react/blob/main/api/data.json)
 into the `api/data.json` file.
 
 We're going to build out a simple API server with routes that return dinosaur
@@ -74,30 +75,26 @@ import data from "./data.json" with { type: "json" };
 const router = new Router();
 ```
 
-After this, in the same file, we'll define three routes. The first route at `/`
-will return the string `Welcome to the dinosaur API`, then we'll set up
-`/dinosaurs` to return all the dinosaurs, and finally `/dinosaurs/:dinosaur` to
-return a specific dinosaur based on the name in the URL:
+After this, in the same file, we'll define two routes. One at `/api/dinosaurs`
+to return all the dinosaurs, and `/api/dinosaurs/:dinosaur` to return a specific
+dinosaur based on the name in the URL:
 
 ```ts title="main.ts"
-router
-  .get("/", (context) => {
-    context.response.body = "Welcome to dinosaur API!";
-  })
-  .get("/dinosaurs", (context) => {
-    context.response.body = data;
-  })
-  .get("/dinosaurs/:dinosaur", (context) => {
-    if (!context?.params?.dinosaur) {
-      context.response.body = "No dinosaur name provided.";
-    }
+router.get("/api/dinosaurs", (context) => {
+  context.response.body = data;
+});
 
-    const dinosaur = data.find((item) =>
-      item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
-    );
+router.get("/api/dinosaurs/:dinosaur", (context) => {
+  if (!context?.params?.dinosaur) {
+    context.response.body = "No dinosaur name provided.";
+  }
 
-    context.response.body = dinosaur ? dinosaur : "No dinosaur found.";
-  });
+  const dinosaur = data.find((item) =>
+    item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
+  );
+
+  context.response.body = dinosaur ?? "No dinosaur found.";
+});
 ```
 
 Finally, at the bottom of the same file, create a new `Application` instance and
@@ -117,25 +114,36 @@ You can run the API server with `deno run --allow-env --allow-net api/main.ts`.
 We'll create a task to run this command in the background and update the dev
 task to run both the React app and the API server.
 
-In your `deno.json` file, update the `tasks` field to include the following:
+In your `package.json` file, update the `scripts` field to include the
+following:
 
 ```jsonc
 {
-  "tasks": {
+  "scripts": {
     "dev": "deno task dev:api & deno task dev:vite",
     "dev:api": "deno run --allow-env --allow-net api/main.ts",
-    "dev:vite": "deno run -A npm:vite"
+    "dev:vite": "deno run -A npm:vite",
     // ...
-  }
 }
 ```
 
-If you run `deno task dev` now and visit `localhost:8000`, in your browser you
-should see the text `Welcome to dinosaur API!`, and if you visit
-`localhost:8000/dinosaurs`, you should see a JSON response of all of the
-dinosaurs.
+If you run `deno task dev` now and visit `localhost:8000/dinosaurs`, in your
+browser you should see a JSON response of all of the dinosaurs.
 
-🦕 Lookin' good so far! Now lets build out the client side of the app.
+## Update the entrypoint
+
+The entrypoint for the React app is in the `src/main.tsx` file. Ours is going to
+be very basic:
+
+```tsx title="main.tsx"
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <App />,
+);
+```
 
 ## Add a router
 
@@ -149,25 +157,31 @@ your project. In the project root run:
 deno add npm:react-router-dom
 ```
 
-Update the `/src/main.tsx` file to import and use the
+Update the `/src/App.tsx` file to import and use the
 [`BrowserRouter`](https://reactrouter.com/en/main/router-components/browser-router)
-component from `react-router-dom`:
+component from `react-router-dom` and define the two routes:
 
-```tsx title="main.tsx"
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import { BrowserRouter } from "react-router-dom";
-import "./index.css";
+```tsx title="App.tsx"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Index from "./pages/index";
+import Dinosaur from "./pages/Dinosaur";
+import "./App.css";
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-);
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/:selectedDinosaur" element={<Dinosaur />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
 ```
 
-## Create the routes and types
+## Create the pages
 
 We'll create two pages: `Index` and `Dinosaur`. The `Index` page will list all
 the dinosaurs and the `Dinosaur` page will show details of a specific dinosaur.
@@ -178,28 +192,29 @@ Create a `pages` folder in the `src` directory and inside that create two files:
 ### Types
 
 Both pages will use the `Dino` type to describe the shape of data they're
-expecting from the API, so let's create a `types.ts` file in the project root:
+expecting from the API, so let's create a `types.ts` file in the `src`
+directory:
 
 ```ts title="types.ts"
 export type Dino = { name: string; description: string };
 ```
 
-### Index.tsx
+### index.tsx
 
 This page will fetch the list of dinosaurs from the API and render them as
 links:
 
 ```tsx title="index.tsx"
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Dino } from "../../types";
+import { Dino } from "../types.ts";
 
-export default function () {
+export default function Index() {
   const [dinosaurs, setDinosaurs] = useState<Dino[]>([]);
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`http://localhost:8000/dinosaurs/`);
+      const response = await fetch(`/api/dinosaurs/`);
       const allDinosaurs = await response.json() as Dino[];
       setDinosaurs(allDinosaurs);
     })();
@@ -211,7 +226,11 @@ export default function () {
       <p>Click on a dinosaur below to learn more.</p>
       {dinosaurs.map((dinosaur: Dino) => {
         return (
-          <Link to={`/${dinosaur.name.toLowerCase()}`} key={dinosaur.name}>
+          <Link
+            to={`/${dinosaur.name.toLowerCase()}`}
+            key={dinosaur.name}
+            className="dinosaur"
+          >
             {dinosaur.name}
           </Link>
         );
@@ -227,23 +246,21 @@ This page will fetch the details of a specific dinosaur from the API and render
 it in a paragraph:
 
 ```tsx title="Dinosaur.tsx"
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Dino } from "../../types";
+import { Dino } from "../types";
 
-export default function () {
+export default function Dinosaur() {
   const { selectedDinosaur } = useParams();
   const [dinosaur, setDino] = useState<Dino>({ name: "", description: "" });
 
   useEffect(() => {
     (async () => {
-      const resp = await fetch(
-        `http://localhost:8000/dinosaurs/${selectedDinosaur}`,
-      );
+      const resp = await fetch(`/api/dinosaurs/${selectedDinosaur}`);
       const dino = await resp.json() as Dino;
       setDino(dino);
     })();
-  }, []);
+  }, [selectedDinosaur]);
 
   return (
     <div>
@@ -253,30 +270,6 @@ export default function () {
     </div>
   );
 }
-```
-
-## Update the App component to use the routes
-
-Finally, we can point to these two new pages in the `src/App.tsx` file:
-
-```tsx title="App.tsx"
-import { Route, Routes } from "react-router-dom";
-import Index from "./pages/index";
-import Dinosaur from "./pages/Dinosaur";
-import "./App.css";
-
-function App() {
-  return (
-    <div>
-      <Routes>
-        <Route exact path="/" element={<Index />} />
-        <Route exact path="/:selectedDinosaur" element={<Dinosaur />} />
-      </Routes>
-    </div>
-  );
-}
-
-export default App;
 ```
 
 ## Run the app
@@ -291,6 +284,96 @@ Navigate to the local server in your browser and you should see the list of
 dinosaurs displayed which you can click through to find out about each one.
 
 ![demo of the app](../images/how-to/react/react-dinosaur-app-demo.gif)
+
+## Build and deploy
+
+At this point the app is being served by the Vite development server. To serve
+the app in production, you can build the app with Vite and then serve the built
+files with Deno. To do so we'll need to update the api server to serve the built
+files. We'll write some middleware to do this. In your `api` directory create a
+new file called `routeStaticFilesFrom.ts` and add the following code:
+
+```ts title="routeStaticFilesFrom.ts"
+import { Next } from "jsr:@oak/oak/middleware";
+import { Context } from "jsr:@oak/oak/context";
+
+// Configure static site routes so that we can serve
+// the Vite build output and the public folder
+export default function routeStaticFilesFrom(staticPaths: string[]) {
+  return async (context: Context<Record<string, object>>, next: Next) => {
+    for (const path of staticPaths) {
+      try {
+        await context.send({ root: path, index: "index.html" });
+        return;
+      } catch {
+        continue;
+      }
+    }
+
+    await next();
+  };
+}
+```
+
+This middleware will attempt to serve the static files from the paths provided
+in the `staticPaths` array. If the file is not found it will call the next
+middleware in the chain. We can now update the `api/main.ts` file to use this
+middleware:
+
+```ts title="main.ts"
+import { Application, Router } from "@oak/oak";
+import { oakCors } from "@tajpouria/cors";
+import data from "./data.json" with { type: "json" };
+import routeStaticFilesFrom from "./util/routeStaticFilesFrom.ts";
+
+const router = new Router();
+
+router.get("/api/dinosaurs", (context) => {
+  context.response.body = data;
+});
+
+router.get("/api/dinosaurs/:dinosaur", (context) => {
+  if (!context?.params?.dinosaur) {
+    context.response.body = "No dinosaur name provided.";
+  }
+
+  const dinosaur = data.find((item) =>
+    item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
+  );
+
+  context.response.body = dinosaur ? dinosaur : "No dinosaur found.";
+});
+
+const app = new Application();
+app.use(oakCors());
+app.use(router.routes());
+app.use(router.allowedMethods());
+app.use(routeStaticFilesFrom([
+  `${Deno.cwd()}/dist`,
+  `${Deno.cwd()}/public`,
+]));
+
+await app.listen({ port: 8000 });
+```
+
+Add a `serve` script to your `package.json` file to build the app with Vite and
+then run the API server:
+
+```jsonc
+{
+  "scripts": {
+    // ...
+    "serve": "deno task build && deno task dev:api",
+}
+```
+
+Now you can serve the built app with Deno by running:
+
+```sh
+deno task serve
+```
+
+If you visit `localhost:8000` in your browser you should see the app running!
 
 🦕 Now you can scaffold and develop a React app with Vite and Deno! You’re ready
 to build blazing-fast web applications. We hope you enjoy exploring these
