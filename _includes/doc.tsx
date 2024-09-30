@@ -421,6 +421,8 @@ function Command(props: { command: string, helpers: Lume.Helpers }) {
     }
   }
 
+  delete options["Unstable options"];
+
   return (
     <div>
       <div dangerouslySetInnerHTML={{__html: props.helpers.md(about)}} />

@@ -6,7 +6,7 @@ oldUrl:
 command: fmt
 ---
 
-## Description
+## Supported File Types
 
 Deno ships with a built-in code formatter that will auto-format the following
 files:
@@ -36,41 +36,6 @@ files:
 enclosed in triple backticks and have a language attribute.
 
 :::
-
-## Examples
-
-Format all supported files in the current directory and subdirectories
-
-```shell
-deno fmt
-```
-
-Format specific files
-
-```shell
-deno fmt myfile1.ts myfile2.ts
-
-deno fmt index.html styles.css
-```
-
-Format all supported files in specified directory and subdirectories
-
-```shell
-deno fmt src/
-```
-
-Check if all the supported files in the current directory and subdirectories are
-formatted
-
-```shell
-deno fmt --check
-```
-
-Format stdin and write to stdout
-
-```shell
-cat file.ts | deno fmt -
-```
 
 ## Ignoring Code
 

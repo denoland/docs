@@ -4,19 +4,6 @@ oldUrl: /runtime/manual/tools/coverage/
 command: coverage
 ---
 
-## Description
-
-Print coverage reports from coverage profiles.
-
-By default, when you run `deno test --coverage` a coverage profile will be
-generated in the `/coverage` directory in the current working directory.
-Subsequently you can run `deno coverage` to print a coverage report to stdout.
-
-```bash
-deno test --coverage
-deno coverage
-```
-
 ## Inclusions and Exclusions
 
 By default coverage includes any of your code that exists on the local file
@@ -68,28 +55,28 @@ This will output a coverage report as a html file
 
 ## Examples
 
-- Generate a coverage report from the default coverage profile in your workspace
+Generate a coverage report from the default coverage profile in your workspace
 
 ```bash
 deno test --coverage
 deno coverage
 ```
 
-- Generate a coverage report from a coverage profile with a custom name
+Generate a coverage report from a coverage profile with a custom name
 
 ```bash
 deno test --coverage=custom_profile_name
 deno coverage custom_profile_name
 ```
 
-- Only include coverage that matches a specific pattern - in this case, only
+Only include coverage that matches a specific pattern - in this case, only
   include tests from main.ts
 
 ```bash
 deno coverage --include="main.ts"
 ```
 
-- Export test coverage from the default coverage profile to an lcov file
+Export test coverage from the default coverage profile to an lcov file
 
 ```bash
 deno test --coverage

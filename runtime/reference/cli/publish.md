@@ -4,15 +4,6 @@ oldUrl: /runtime/manual/tools/publish/
 command: publish
 ---
 
-## Description
-
-The `deno publish` command is used to
-[publish a package or workspace](https://jsr.io/docs/publishing-packages) to
-[JSR](https://jsr.io/).
-
-The command will upload the package to the registry and make it available for
-others to use.
-
 ## Package Requirements
 
 Your package must have a `name` and `version` and an `exports` field in its
@@ -38,32 +29,32 @@ Before you publish your package, you must create it in the registry by visiting
 
 ## Examples
 
-- Publish your current workspace
+Publish your current workspace
 
 ```bash
 deno publish
 ```
 
-- Publish your current workspace with a specific token, bypassing interactive
+Publish your current workspace with a specific token, bypassing interactive
   authentication
 
 ```bash
 deno publish --token c00921b1-0d4f-4d18-b8c8-ac98227f9275
 ```
 
-- Publish and check for errors in remote modules
+Publish and check for errors in remote modules
 
 ```bash
 deno publish --check=all
 ```
 
-- Perform a dry run to simulate publishing.
+Perform a dry run to simulate publishing.
 
 ```bash
 deno publish --dry-run
 ```
 
-- Publish using settings from a specific configuration file
+Publish using settings from a specific configuration file
 
 ```bash
 deno publish --config custom-config.json
