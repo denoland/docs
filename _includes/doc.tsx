@@ -425,11 +425,11 @@ function Command(props: { command: string, helpers: Lume.Helpers }) {
 
   return (
     <div>
-      <div dangerouslySetInnerHTML={{__html: props.helpers.md(about)}} />
-      <br />
       <div>
         Usage: <code>{command.usage.replaceAll(ANSI_RE, "").slice("usage: ".length)}</code>
       </div>
+      <br />
+      <div dangerouslySetInnerHTML={{__html: props.helpers.md(about)}} />
       <br/>
 
       {Object.entries(options).map(([heading, flags]) => {
