@@ -342,7 +342,44 @@ deno run -A script.s
 deno run --allow-all scrip
 ```
 
-### Certification errors
+### Importing from the Web
+
+Allow importing code from the Web. By default Deno limits hosts you can import
+code from. This is true for both static and dynamic imports.
+
+If you want to dynamic import code - either using `import()` or `new Worker()`
+API an additional permissions need to be granted. Importing from local file
+system [requires `--allow-read`](#file-system-read-access), but Deno also allows
+to import from `http:` and `https:` URLs. In such case you will need to specify
+an explicit `--allow-import` flag:
+
+```
+# allow importing code from `https://example.com`
+$ deno run --allow-import=example.com main.ts
+```
+
+By default Deno allows to import sources from following hosts:
+
+- `deno.land`
+- `esm.sh`
+- `jsr.io`
+- `raw.githubusercontent.com`
+- `gist.githubusercontent.com`
+
+**Imports are only allowed using HTTPS**
+
+This allow list is applied by default for static imports, and by default if
+`--allow-import` flag is specified.
+
+```
+# allow dynamically importing code from `https://deno.land`
+$ deno run --allow-import main.ts
+```
+
+Note, that specifying an allow list for `--allow-import` will override the list
+of default hosts.
+
+### TLS certificates errors
 
 Disables verification of TLS certificates. This is a dangerous flag, use it with
 caution.
