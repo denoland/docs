@@ -110,6 +110,10 @@ export const sidebar = [
             id: "/runtime/reference/cli/lsp/",
           },
           {
+            label: "LSP integration",
+            id: "/runtime/reference/cli/lsp_integration/",
+          },
+          {
             label: "deno repl",
             id: "/runtime/reference/cli/repl/",
           },
@@ -143,8 +147,14 @@ export const sidebar = [
           },
         ],
       },
-      "/runtime/reference/deno_namespace_apis/",
-      "/runtime/reference/web_platform_apis/",
+      {
+        label: "Deno APIs",
+        id: "/runtime/reference/deno_namespace_apis/",
+      },
+      {
+        label: "Web APIs",
+        id: "/runtime/reference/web_platform_apis/",
+      },
       {
         label: "npm packages",
         id: "/runtime/reference/npm/",
@@ -155,30 +165,21 @@ export const sidebar = [
         label: "Environment variables",
         id: "/runtime/reference/env_variables/",
       },
-      "/runtime/reference/wasm/",
-      {
-        label: "Language Server",
-        id: "/runtime/reference/lsp/",
-      },
       {
         label: "Deno & VS Code",
         id: "/runtime/reference/vscode/",
       },
       "/runtime/reference/private_repositories/",
-      "/runtime/reference/jsx/",
+      {
+        label: "Using JSX and React",
+        id: "/runtime/reference/jsx/",
+      },
       {
         label: "Testing code in docs",
         id: "/runtime/reference/documentation/",
       },
+      "/runtime/reference/wasm/",
       "/runtime/reference/migrate_deprecations/",
-      {
-        label: "Full API Reference",
-        href: "/api/deno",
-      },
-      {
-        label: "Std. Library",
-        href: "https://jsr.io/@std",
-      },
     ],
   },
   {
@@ -206,14 +207,6 @@ export const sidebar = [
       "/runtime/tutorials/init_project/",
       "/runtime/tutorials/fetch_data/",
       "/runtime/tutorials/http_server/",
-      {
-        label: "Reading files",
-        id: "/examples/reading-files/",
-      },
-      {
-        label: "Writing files",
-        id: "/examples/writing-files/",
-      },
       "/runtime/tutorials/hashbang/",
       "/runtime/tutorials/cjs_to_esm/",
       "/runtime/tutorials/how_to_with_npm/react/",

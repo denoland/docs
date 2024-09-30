@@ -156,6 +156,28 @@ example installation command to your repository:
 $ deno install -n awesome_cli https://example.com/awesome/cli.ts
 ```
 
+## Native Node.js addons
+
+A lot of popular packages npm packages like
+[`npm:sqlite3`](https://www.npmjs.com/package/sqlite3) or
+[`npm:duckdb`](https://www.npmjs.com/package/duckdb) depend on
+["lifecycle scripts"](https://docs.npmjs.com/cli/v10/using-npm/scripts#life-cycle-scripts),
+eg. `preinstall` or `postinstall` scripts. Most often running these scripts is
+required for a package to work correctly.
+
+Unlike npm, Deno does not run these scripts by default as they pose a potential
+security vulnerability.
+
+You can still run these scripts by passing the `--allow-scripts=<packages>` flag
+when running `deno install`:
+
+```shell
+deno install --allow-scripts=npm:sqlite3
+```
+
+_Install all dependencies and allow `npm:sqlite3` package to run its lifecycle
+scripts_.
+
 ## Uninstall
 
 You can uninstall dependencies or binary script with `deno uninstall` command:

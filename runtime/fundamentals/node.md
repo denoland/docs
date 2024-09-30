@@ -282,6 +282,24 @@ subclasses instead.
 
 - `__dirname` - use `import.meta.dirname` instead.
 
+## Node-API addons
+
+Deno supports [Node-API addons](https://nodejs.org/api/n-api.html) that are used
+by popular npm packages like [`esbuild`](https://www.npmjs.com/package/esbuild),
+[`npm:sqlite3`](https://www.npmjs.com/package/sqlite3) or
+[`npm:duckdb`](https://www.npmjs.com/package/duckdb).
+
+You can expect all packages that use public and documented Node-APIs to work.
+
+:::info
+
+Most packages using Node-API addons rely on npm "lifecycle scripts", like
+`postinstall`. While Deno supports them, they are not run by default due to
+security considerations. Read more in
+[`deno install` docs](/runtime/reference/cli/install/).
+
+:::
+
 ## Runtime permissions in Deno
 
 Consider the following simple [Express](https://expressjs.com/) server:
