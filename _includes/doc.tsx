@@ -6,6 +6,8 @@ import {
   SidebarLink as SidebarLink_,
   TableOfContentsItem as TableOfContentsItem_,
 } from "../types.ts";
+import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with { type: "json" };
+import ansiRegex from "npm:ansi-regex";
 
 export const layout = "layout.tsx";
 
@@ -140,6 +142,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                     Available since {props.available_since}
                   </div>
                 )}
+                {props.command && <Command command={props.command} helpers={helpers} />}
                 {props.children}
               </div>
             </article>
@@ -362,4 +365,109 @@ function TableOfContentsItemMobile(props: { item: TableOfContentsItem_ }) {
       )}
     </li>
   );
+}
+
+const ANSI_RE = ansiRegex();
+const SUBSEQUENT_ANSI_RE = new RegExp(`(?:${ANSI_RE.source})(?:${ANSI_RE.source})`, "g");
+const ENCAPSULATED_ANSI_RE = new RegExp(`(${ANSI_RE.source})(.+?)(${ANSI_RE.source})`, "g");
+const START_AND_END_ANSI_RE = new RegExp(`^(?:${ANSI_RE.source}).+?(?:${ANSI_RE.source})$`);
+
+const FLAGS_RE = /[^`]--\S+/g;
+function flagsToInlineCode(text: string): string {
+  return text.replaceAll(FLAGS_RE, "`$&`");
+}
+
+function Command(props: { command: string, helpers: Lume.Helpers }) {
+  const command = CLI_REFERENCE.subcommands.find((command) => command.name === props.command)!;
+
+  let about = command.about!.replaceAll(SUBSEQUENT_ANSI_RE, "");
+  let aboutLines = about.split("\n");
+  const aboutLinesReadMoreIndex= aboutLines.findLastIndex((line) => line.toLowerCase().replaceAll(ANSI_RE, "").trim().startsWith("read more:"));
+  if (aboutLinesReadMoreIndex !== -1) {
+    aboutLines = aboutLines.slice(0, aboutLinesReadMoreIndex);
+  }
+
+  about = aboutLines.join("\n").replaceAll(ENCAPSULATED_ANSI_RE, (_, opening, text, _closing, offset, string) => {
+    if (opening === "\u001b[32m") { // green, used as heading
+      return `### ${text}`;
+    } else if (opening === "\u001b[38;5;245m" || opening === "\u001b[36m") { // gray and cyan used for code and snippets
+      const lines = string.split("\n");
+      let line = "";
+
+      while (offset > 0) {
+        line = lines.shift();
+        offset -= line.length;
+      }
+
+      if (START_AND_END_ANSI_RE.test(line.trim())) {
+        return "\n```\n" + text + "\n```\n\n";
+      } else {
+        return "`" + text + "`";
+      }
+    } else {
+      return text;
+    }
+  });
+
+  const args = [];
+  const options = {};
+
+  for (const arg of command.args) {
+    if (arg.long) {
+      options[arg.help_heading ?? "Options"] ??= [];
+      options[arg.help_heading ?? "Options"].push(arg);
+    } else {
+      args.push(arg);
+    }
+  }
+
+  return (
+    <div>
+      <div dangerouslySetInnerHTML={{__html: props.helpers.md(about)}} />
+      <br />
+      <div>
+        Usage: <code>{command.usage.replaceAll(ANSI_RE, "").slice("usage: ".length)}</code>
+      </div>
+      <br/>
+
+      {Object.entries(options).map(([heading, flags]) => {
+        const id = heading.toLowerCase().replace(/\s/g, "-");
+        return (
+          <>
+            <h2 id={id}>{heading} <HeaderAnchor id={id} /></h2>
+            {flags.map((flag) => renderOption(id, flag, props.helpers))}
+          </>
+        );
+      })}
+    </div>
+  );
+}
+
+function HeaderAnchor(props: { id: string }) {
+  return <a className="header-anchor"
+    href={`#${props.id}`}><span className="sr-only">Jump to heading</span><span
+    aria-hidden="true"
+    class="anchor-end">#</span></a>
+}
+
+function renderOption(group: string, arg, helpers: Lume.Helpers) {
+  const id = `${group}-${arg.name}`;
+
+  let docsLink = null;
+  let help = arg.help.replaceAll(ANSI_RE, "");
+  const helpLines = help.split("\n");
+  const helpLinesDocsIndex= helpLines.findLastIndex((line) => line.toLowerCase().trim().startsWith("docs:"));
+  if (helpLinesDocsIndex !== -1) {
+    help = helpLines.slice(0, helpLinesDocsIndex).join("\n");
+    docsLink = helpLines[helpLinesDocsIndex].trim().slice("docs:".length);
+  }
+
+  return <>
+    <h3 id={id}>
+      {docsLink ? <a href={docsLink}>{"--" + arg.name}</a> : ("--" + arg.name)}{" "}
+      <HeaderAnchor id={id} />
+    </h3>
+    {arg.short && <p>Short flag: <code>-{arg.short}</code></p>}
+    {arg.help && <p dangerouslySetInnerHTML={{ __html: helpers.md(flagsToInlineCode(help) + ((help.endsWith(".") || help.endsWith("]")) ? "" : ".")) }} />}
+  </>
 }

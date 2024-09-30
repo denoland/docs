@@ -3,7 +3,10 @@ title: "`deno fmt`, code formatting"
 oldUrl:
  - /runtime/tools/formatter/
  - /runtime/manual/tools/formatter/
+command: fmt
 ---
+
+## Description
 
 Deno ships with a built-in code formatter that will auto-format the following
 files:
@@ -117,29 +120,3 @@ Ignore formatting next item by preceding it with `# deno-fmt-ignore` comment:
 aaaaaa:
           bbbbbbb
 ```
-
-## Configuration
-
-> ℹ️ It is recommended to stick with default options.
-
-Starting with Deno v1.14 a formatter can be customized using either
-[a configuration file](/runtime/fundamentals/configuration/#formatting) or
-following CLI flags:
-
-- `--use-tabs` - Whether to use tabs. Defaults to false (using spaces).
-
-- `--line-width` - The width of a line the printer will try to stay under. Note
-  that the printer may exceed this width in certain cases. Defaults to 80.
-
-- `--indent-width` - The number of characters for an indent. Defaults to 2.
-
-- `--no-semicolons` - To not use semicolons except where necessary.
-
-- `--single-quote` - Whether to use single quote. Defaults to false (using
-  double quote).
-
-- `--prose-wrap={always,never,preserve}` - Define how prose should be wrapped in
-  Markdown files. Defaults to "always".
-
-Note: In Deno versions < 1.31 you will have to prefix these flags with
-`options-` (ex. `--options-use-tabs`)

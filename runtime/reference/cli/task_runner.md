@@ -3,6 +3,7 @@ title: "`deno task`"
 oldUrl:
  - /runtime/tools/task_runner/
  - /runtime/manual/tools/task_runner/
+command: task
 ---
 
 `deno task` provides a cross-platform way to define and execute custom commands

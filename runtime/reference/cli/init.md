@@ -1,7 +1,10 @@
 ---
 title: "`deno init`, start a new project"
 oldUrl: /runtime/manual/tools/init/
+command: init
 ---
+
+## Description
 
 Starting a new project with Deno has always been incredibly simple: you just
 need a single file to get going. No need for any configuration files, dependency

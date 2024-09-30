@@ -1,35 +1,8 @@
 ---
 title: "`deno compile`, standalone executables"
 oldUrl: /runtime/manual/tools/compiler/
+command: compile
 ---
-
-`deno compile [--output <OUT>] <SRC>` will compile the script into a
-self-contained executable.
-
-```console
-> deno compile https://docs.deno.com/examples/welcome.ts
-```
-
-If you omit the `OUT` parameter, the name of the executable file will be
-inferred from the script name.
-
-## Flags
-
-As with [`deno install`](./script_installer.md), the runtime flags used to
-execute the script must be specified at compilation time. This includes
-permission flags.
-
-```console
-> deno compile --allow-read --allow-net jsr:@std/http@1.0.0-rc.5/file-server
-```
-
-[Script arguments](../getting_started/command_line_interface.md#script-arguments)
-can be partially embedded.
-
-```console
-> deno compile --allow-read --allow-net jsr:@std/http@1.0.0-rc.5/file-server -p 8080
-> ./file_server --help
-```
 
 ## Dynamic Imports
 

@@ -6,7 +6,10 @@ oldUrl:
  - /runtime/manual/tools/script_installer/
  - /runtime/manual/tools/cache/
  - /runtime/reference/cli/cache/
+command: install
 ---
+
+## Description
 
 `deno install` is a tool that allows you to install remote dependencies to use
 in your project or as executables available on your machine.

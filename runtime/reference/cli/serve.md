@@ -1,7 +1,10 @@
 ---
 title: "deno serve"
 oldUrl: /runtime/manual/tools/serve/
+command: serve
 ---
+
+## Description
 
 In addition to `deno run`, Deno offers a `deno serve` command-line option that
 automatically configures servers based on the exports of your main module,

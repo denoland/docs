@@ -1,9 +1,10 @@
 ---
 title: "`deno info`, dependency inspector"
 oldUrl: /runtime/manual/tools/dependency_inspector/
+command: info
 ---
 
-`deno info [URL]` will inspect an ES module and all of its dependencies.
+## Example
 
 ```shell
 $ deno info jsr:@std/http@1.0.0-rc.5/file-server

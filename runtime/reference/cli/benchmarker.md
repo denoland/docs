@@ -1,10 +1,8 @@
 ---
 title: "`deno bench`, benchmarking tool"
 oldUrl: /runtime/manual/tools/benchmarker/
+command: bench
 ---
-
-Deno has a built-in benchmark runner that you can use for checking performance
-of JavaScript or TypeScript code.
 
 ## Quickstart
 

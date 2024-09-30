@@ -1,7 +1,10 @@
 ---
 title: "deno uninstall"
 oldUrl: /runtime/manual/tools/uninstall/
+command: uninstall
 ---
+
+## Description
 
 `deno uninstall` is a tool that allows you to remove remote dependencies used in
 your project, or an executable script from your machine.
