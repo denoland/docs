@@ -5,7 +5,7 @@
 }
 
 .ddoc .namespaceSection {
-   display: block !important;
+  display: block !important;
 }
 
 /* Align content with the top of the TOC now that it has no header */
