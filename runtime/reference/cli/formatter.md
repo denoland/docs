@@ -63,9 +63,10 @@ comment:
 ```html
 <html>
   <body>
-    <p>Hello there
+    <p>
+      Hello there
       <!-- deno-fmt-ignore -->
-      </p>
+    </p>
   </body>
 </html>
 ```
@@ -81,7 +82,5 @@ the top of the file.
 Ignore formatting next item by preceding it with `# deno-fmt-ignore` comment:
 
 ```html
-# deno-fmt-ignore
-aaaaaa:
-          bbbbbbb
+# deno-fmt-ignore aaaaaa: bbbbbbb
 ```

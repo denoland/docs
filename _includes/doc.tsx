@@ -6,7 +6,9 @@ import {
   SidebarLink as SidebarLink_,
   TableOfContentsItem as TableOfContentsItem_,
 } from "../types.ts";
-import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with { type: "json" };
+import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
+  type: "json",
+};
 import ansiRegex from "npm:ansi-regex";
 
 export const layout = "layout.tsx";
@@ -376,51 +378,87 @@ function TableOfContentsItemMobile(props: { item: TableOfContentsItem_ }) {
 }
 
 const ANSI_RE = ansiRegex();
-const SUBSEQUENT_ANSI_RE = new RegExp(`(?:${ANSI_RE.source})(?:${ANSI_RE.source})`, "g");
-const ENCAPSULATED_ANSI_RE = new RegExp(`(${ANSI_RE.source})(.+?)(${ANSI_RE.source})`, "g");
-const START_AND_END_ANSI_RE = new RegExp(`^(?:${ANSI_RE.source}).+?(?:${ANSI_RE.source})$`);
-const SUBSEQUENT_ENCAPSULATED_ANSI_RE = new RegExp(`${ENCAPSULATED_ANSI_RE.source}( ?)${ENCAPSULATED_ANSI_RE.source}`, "g");
+const SUBSEQUENT_ANSI_RE = new RegExp(
+  `(?:${ANSI_RE.source})(?:${ANSI_RE.source})`,
+  "g",
+);
+const ENCAPSULATED_ANSI_RE = new RegExp(
+  `(${ANSI_RE.source})(.+?)(${ANSI_RE.source})`,
+  "g",
+);
+const START_AND_END_ANSI_RE = new RegExp(
+  `^(?:${ANSI_RE.source}).+?(?:${ANSI_RE.source})$`,
+);
+const SUBSEQUENT_ENCAPSULATED_ANSI_RE = new RegExp(
+  `${ENCAPSULATED_ANSI_RE.source}( ?)${ENCAPSULATED_ANSI_RE.source}`,
+  "g",
+);
 
 const FLAGS_RE = /[^`]--\S+/g;
 function flagsToInlineCode(text: string): string {
   return text.replaceAll(FLAGS_RE, "`$&`");
 }
 
-function renderCommand(commandName: string, helpers: Lume.Helpers): { rendered: any; toc: TableOfContentsItem_[]; } {
-  const command = CLI_REFERENCE.subcommands.find((command) => command.name === commandName)!;
+function renderCommand(
+  commandName: string,
+  helpers: Lume.Helpers,
+): { rendered: any; toc: TableOfContentsItem_[] } {
+  const command = CLI_REFERENCE.subcommands.find((command) =>
+    command.name === commandName
+  )!;
 
   const toc: TableOfContentsItem_[] = [];
 
-  let about = command.about!.replaceAll(SUBSEQUENT_ENCAPSULATED_ANSI_RE,function (_, _opening1, text1, _closing1, space, opening2, text2, closing2) {
-    return `${opening2}${text1}${space}${text2}${closing2}`;
-  }).replaceAll(SUBSEQUENT_ANSI_RE, "");
+  let about = command.about!.replaceAll(
+    SUBSEQUENT_ENCAPSULATED_ANSI_RE,
+    function (
+      _,
+      _opening1,
+      text1,
+      _closing1,
+      space,
+      opening2,
+      text2,
+      closing2,
+    ) {
+      return `${opening2}${text1}${space}${text2}${closing2}`;
+    },
+  ).replaceAll(SUBSEQUENT_ANSI_RE, "");
   let aboutLines = about.split("\n");
-  const aboutLinesReadMoreIndex= aboutLines.findLastIndex((line) => line.toLowerCase().replaceAll(ANSI_RE, "").trim().startsWith("read more:"));
+  const aboutLinesReadMoreIndex = aboutLines.findLastIndex((line) =>
+    line.toLowerCase().replaceAll(ANSI_RE, "").trim().startsWith("read more:")
+  );
   if (aboutLinesReadMoreIndex !== -1) {
     aboutLines = aboutLines.slice(0, aboutLinesReadMoreIndex);
   }
 
-  about = aboutLines.join("\n").replaceAll(ENCAPSULATED_ANSI_RE, (_, opening, text, _closing, offset, string) => {
-    if (opening === "\u001b[32m") { // green, used as heading
-      return `### ${text}`;
-    } else if (opening === "\u001b[38;5;245m" || opening === "\u001b[36m" || opening === "\u001b[1m" || opening === "\u001b[22m") { // gray and cyan used for code and snippets, and we treat yellow and bold as well as such
-      const lines = string.split("\n");
-      let line = "";
+  about = aboutLines.join("\n").replaceAll(
+    ENCAPSULATED_ANSI_RE,
+    (_, opening, text, _closing, offset, string) => {
+      if (opening === "\u001b[32m") { // green, used as heading
+        return `### ${text}`;
+      } else if (
+        opening === "\u001b[38;5;245m" || opening === "\u001b[36m" ||
+        opening === "\u001b[1m" || opening === "\u001b[22m"
+      ) { // gray and cyan used for code and snippets, and we treat yellow and bold as well as such
+        const lines = string.split("\n");
+        let line = "";
 
-      while (offset > 0) {
-        line = lines.shift();
-        offset -= line.length;
-      }
+        while (offset > 0) {
+          line = lines.shift();
+          offset -= line.length;
+        }
 
-      if (START_AND_END_ANSI_RE.test(line.trim())) {
-        return "\n```\n" + text + "\n```\n\n";
+        if (START_AND_END_ANSI_RE.test(line.trim())) {
+          return "\n```\n" + text + "\n```\n\n";
+        } else {
+          return "`" + text + "`";
+        }
       } else {
-        return "`" + text + "`";
+        return text;
       }
-    } else {
-      return text;
-    }
-  });
+    },
+  );
 
   const args = [];
   const options: Record<string, any> = {};
@@ -441,7 +479,9 @@ function renderCommand(commandName: string, helpers: Lume.Helpers): { rendered: 
   const rendered = (
     <div>
       <div class="p-4 bg-stone-100 rounded border border-gray-300 mt-6 mb-6 relative">
-        <h3 class="!text-xs !m-0 -top-2.5 bg-white border border-gray-600/25 px-2 py-0.5 rounded absolute !font-normal">Command-line Usage</h3>
+        <h3 class="!text-xs !m-0 -top-2.5 bg-white border border-gray-600/25 px-2 py-0.5 rounded absolute !font-normal">
+          Command-line Usage
+        </h3>
         <div>
           <pre class="!mb-0 !px-3 !py-2">
             <code>{command.usage.replaceAll(ANSI_RE, "").slice("usage: ".length)}</code>
@@ -449,13 +489,15 @@ function renderCommand(commandName: string, helpers: Lume.Helpers): { rendered: 
         </div>
       </div>
 
-      <div dangerouslySetInnerHTML={{__html: helpers.md(about)}} />
+      <div dangerouslySetInnerHTML={{ __html: helpers.md(about) }} />
       <br />
 
       {Object.entries(options).map(([heading, flags]) => {
         const id = heading.toLowerCase().replace(/\s/g, "-");
 
-        const renderedFlags = flags.map((flag) => renderOption(id, flag, helpers));
+        const renderedFlags = flags.map((flag) =>
+          renderOption(id, flag, helpers)
+        );
 
         toc.push({
           text: heading,
@@ -465,7 +507,9 @@ function renderCommand(commandName: string, helpers: Lume.Helpers): { rendered: 
 
         return (
           <>
-            <h2 id={id}>{heading} <HeaderAnchor id={id} /></h2>
+            <h2 id={id}>
+              {heading} <HeaderAnchor id={id} />
+            </h2>
             {renderedFlags}
           </>
         );
@@ -480,10 +524,17 @@ function renderCommand(commandName: string, helpers: Lume.Helpers): { rendered: 
 }
 
 function HeaderAnchor(props: { id: string }) {
-  return <a className="header-anchor"
-    href={`#${props.id}`}><span className="sr-only">Jump to heading</span><span
-    aria-hidden="true"
-    class="anchor-end">#</span></a>
+  return (
+    <a className="header-anchor" href={`#${props.id}`}>
+      <span className="sr-only">Jump to heading</span>
+      <span
+        aria-hidden="true"
+        class="anchor-end"
+      >
+        #
+      </span>
+    </a>
+  );
 }
 
 function renderOption(group: string, arg, helpers: Lume.Helpers) {
@@ -492,26 +543,39 @@ function renderOption(group: string, arg, helpers: Lume.Helpers) {
   let docsLink = null;
   let help = arg.help.replaceAll(ANSI_RE, "");
   const helpLines = help.split("\n");
-  const helpLinesDocsIndex = helpLines.findLastIndex((line) => line.toLowerCase()
-    .trim()
-    .startsWith("docs:"));
+  const helpLinesDocsIndex = helpLines.findLastIndex((line) =>
+    line.toLowerCase()
+      .trim()
+      .startsWith("docs:")
+  );
   if (helpLinesDocsIndex !== -1) {
     help = helpLines.slice(0, helpLinesDocsIndex).join("\n");
     docsLink = helpLines[helpLinesDocsIndex].trim().slice("docs:".length);
   }
 
-  return <>
-    <h3 id={id}>
-      {docsLink
-        ? <a href={docsLink}>{"--" + arg.name}</a>
-        : ("--" + arg.name)}{" "}
-      <HeaderAnchor id={id} />
-    </h3>
-    {arg.short && <p>Short flag: <code>-{arg.short}</code></p>}
-    {arg.help && <p class="block !whitespace-pre-line" dangerouslySetInnerHTML={{
-      __html: helpers.md(flagsToInlineCode(help) + ((help.endsWith(".") || help.endsWith("]"))
-        ? ""
-        : "."))
-    }} />}
-  </>
+  return (
+    <>
+      <h3 id={id}>
+        {docsLink
+          ? <a href={docsLink}>{"--" + arg.name}</a>
+          : ("--" + arg.name)} <HeaderAnchor id={id} />
+      </h3>
+      {arg.short && (
+        <p>
+          Short flag: <code>-{arg.short}</code>
+        </p>
+      )}
+      {arg.help && (
+        <p
+          class="block !whitespace-pre-line"
+          dangerouslySetInnerHTML={{
+            __html: helpers.md(
+              flagsToInlineCode(help) +
+                ((help.endsWith(".") || help.endsWith("]")) ? "" : "."),
+            ),
+          }}
+        />
+      )}
+    </>
+  );
 }

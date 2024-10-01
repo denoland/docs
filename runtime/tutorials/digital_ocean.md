@@ -55,7 +55,7 @@ CMD ["run", "--allow-net", "main.ts"]
 Then, in our `docker-compose.yml`:
 
 ```yml
-version: '3'
+version: "3"
 
 services:
   web:
@@ -234,43 +234,43 @@ jobs:
     name: Build, Push, and Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout main
-      uses: actions/checkout@v2
+      - name: Checkout main
+        uses: actions/checkout@v2
 
-    - name: Set $TAG from shortened sha
-      run: echo "TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+      - name: Set $TAG from shortened sha
+        run: echo "TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
 
-    - name: Build container image
-      run: docker compose -f docker-compose.yml build
+      - name: Build container image
+        run: docker compose -f docker-compose.yml build
 
-    - name: Tag container image
-      run: docker tag ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+      - name: Tag container image
+        run: docker tag ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
 
-    - name: Install `doctl`
-      uses: digitalocean/action-doctl@v2
-      with:
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Install `doctl`
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-    - name: Log in to Digital Ocean Container Registry
-      run: doctl registry login --expiry-seconds 600
+      - name: Log in to Digital Ocean Container Registry
+        run: doctl registry login --expiry-seconds 600
 
-    - name: Push image to Digital Ocean Container Registry
-      run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+      - name: Push image to Digital Ocean Container Registry
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
 
-    - name: Deploy via SSH
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.DIGITALOCEAN_HOST }}
-        username: ${{ secrets.DIGITALOCEAN_USERNAME }}
-        key: ${{ secrets.DIGITALOCEAN_SSHKEY }}
-        script: |
-          # Login to Digital Ocean Container Registry
-          docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
-          # Stop and remove a running image.
-          docker stop ${{ env.IMAGE_NAME }}
-          docker rm ${{ env.IMAGE_NAME }}
-          # Run a new container from a new image
-          docker run -d --restart always -it -p 8000:8000 --name ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DIGITALOCEAN_HOST }}
+          username: ${{ secrets.DIGITALOCEAN_USERNAME }}
+          key: ${{ secrets.DIGITALOCEAN_SSHKEY }}
+          script: |
+            # Login to Digital Ocean Container Registry
+            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
+            # Stop and remove a running image.
+            docker stop ${{ env.IMAGE_NAME }}
+            docker rm ${{ env.IMAGE_NAME }}
+            # Run a new container from a new image
+            docker run -d --restart always -it -p 8000:8000 --name ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
 ```
 
 When you push to GitHub, this yml file is automatically detected, triggering the

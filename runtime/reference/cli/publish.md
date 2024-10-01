@@ -36,7 +36,7 @@ deno publish
 ```
 
 Publish your current workspace with a specific token, bypassing interactive
-  authentication
+authentication
 
 ```bash
 deno publish --token c00921b1-0d4f-4d18-b8c8-ac98227f9275

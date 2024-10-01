@@ -56,7 +56,7 @@ CMD ["run", "--allow-net", "main.ts"]
 Then, in our `docker-compose.yml`:
 
 ```yml
-version: '3'
+version: "3"
 
 services:
   web:

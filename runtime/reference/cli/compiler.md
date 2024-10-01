@@ -4,7 +4,6 @@ oldUrl: /runtime/manual/tools/compiler/
 command: compile
 ---
 
-
 ## Flags
 
 As with [`deno install`](./script_installer.md), the runtime flags used to

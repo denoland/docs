@@ -70,7 +70,7 @@ deno coverage custom_profile_name
 ```
 
 Only include coverage that matches a specific pattern - in this case, only
-  include tests from main.ts
+include tests from main.ts
 
 ```bash
 deno coverage --include="main.ts"
