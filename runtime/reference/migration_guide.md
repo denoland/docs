@@ -1,27 +1,21 @@
 ---
 title: "Deno 1.x to 2.x Migration Guide"
-oldUrl: /runtime/manual/advanced/migrate_deprecations/
+oldUrl:
+  - /runtime/manual/advanced/migrate_deprecations/
+  - /runtime/reference/migrate_deprecations/
 ---
 
-When we first announced [Deno](http://localhost:8000/), a modern all-in-one
-toolchain for JavaScript and TypeScript development aimed at simplifying
-programming, developers loved the simplicity of not needing to configure
-separate linters, formatters, test runners, TypeScript, and diving right into
-building product. Developers also appreciated Deno’s stronger security measures
-with its [opt-in-permissions model](/runtime/fundamentals/security/), limiting
-supply chain vulnerabilities and protecting end users.
-
 While we’ve accomplished a ton in Deno 1.x, the next major version is focused on
-using Deno **at scale**. This means seamless interoperability with legacy
-JavaScript infrastructure and supporting a wider range of projects and
+using Deno **at scale**. This means seamless interoperability with Node.js and
+npm JavaScript infrastructure and supporting a wider range of projects and
 development teams, all without sacrificing the simplicity, security, and
 “batteries included” nature that developers love.
 
 ## Backwards compatibility with Node.js and npm
 
-Deno 2 is fully backwards compatible with Node.js and npm. This allows you to
-not only run Deno in your current Node.js projects, but also incrementally adopt
-pieces of Deno's all-in-one toolchain.
+Deno 2 is backwards compatible with Node.js and npm. This allows you to not only
+run Deno in your current Node.js projects, but also incrementally adopt pieces
+of Deno's all-in-one toolchain.
 
 For example you can use `deno install` on a Node.js project to install
 dependencies, run `deno fmt` to format code without needing Prettier, or use
@@ -32,6 +26,16 @@ workspaces, allowing you to migrate your existing projects using ESM with little
 effort.
 
 [Read more on `Node.js support` page](/runtime/fundamentals/node/)
+
+### Long Term Support releases
+
+Starting with Deno v2.1.0 (to be released in November 2024) Deno will offer a
+LTS (long-term support) channel.
+
+An LTS version is supported for 6 months, receiving bug fixes and critical
+performance fixes, before a new version is promoted to LTS.
+
+[Read more on `Stability and releases` page](/runtime/fundamentals/stability_and_releases/#long-term-support-(lts))
 
 ## Managing dependencies
 
