@@ -3,7 +3,10 @@ title: "`deno task`"
 oldUrl:
  - /runtime/tools/task_runner/
  - /runtime/manual/tools/task_runner/
+command: task
 ---
+
+## Description
 
 `deno task` provides a cross-platform way to define and execute custom commands
 specific to a codebase.
@@ -22,28 +25,6 @@ For example:
     "analyze": "deno run --allow-read=. scripts/analyze.js"
   }
 }
-```
-
-## Listing tasks
-
-To get an output showing all the defined tasks, run:
-
-```sh
-deno task
-```
-
-## Executing a task
-
-To execute a specific task, run:
-
-```shell
-deno task task-name [additional args]...
-```
-
-In the example above, to run the `data` task we would do:
-
-```shell
-deno task data
 ```
 
 ## Specifying the current working directory

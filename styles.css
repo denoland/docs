@@ -127,7 +127,8 @@ body:not(:has(.ddoc)) {
   }
 
   .copyButton {
-    @apply opacity-0 transition-all duration-100 absolute top-2 right-2 p-1 rounded;
+    @apply opacity-0 transition-all duration-100 absolute top-2 right-2 p-1
+      rounded;
 
     &:hover,
     &:focus {
@@ -146,7 +147,8 @@ body:not(:has(.ddoc)) {
 
 .markdownBlockTitle {
   background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border border-gray-200 bg-gray-100 text-sm font-semibold;
+  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border border-gray-200
+    bg-gray-100 text-sm font-semibold;
 }
 
 .markdown-body h2:hover .anchor-end {
@@ -159,7 +161,9 @@ body:not(:has(.ddoc)) {
 
 /* Common styles for all CTAs */
 .docs-cta {
-  @apply border text-balance text-black font-bold inline-block py-3.5 px-4 rounded-md w-max hover:text-inherit hover:no-underline transition-colors duration-200;
+  @apply border text-balance text-black font-bold inline-block py-3.5 px-4
+    rounded-md w-max hover:text-inherit hover:no-underline transition-colors
+    duration-200;
 }
 
 /* Specific styles for runtime CTAs */
@@ -180,7 +184,8 @@ body:not(:has(.ddoc)) {
 
 /* Specific styles for JSR CTAs */
 .jsr-cta {
-  @apply bg-jsr-yellow-400 border-jsr-cyan-950 !text-jsr-cyan-950 border-2 hover:!no-underline hover:bg-jsr-yellow-300;
+  @apply bg-jsr-yellow-400 border-jsr-cyan-950 !text-jsr-cyan-950 border-2
+    hover:!no-underline hover:bg-jsr-yellow-300;
 }
 
 .homepage-link {
@@ -192,7 +197,8 @@ body:not(:has(.ddoc)) {
 }
 
 .runtime-link {
-  @apply text-runtime-600 decoration-runtime-600/20 hover:decoration-runtime-600;
+  @apply text-runtime-600 decoration-runtime-600/20
+    hover:decoration-runtime-600;
 }
 
 .help-link {
@@ -246,7 +252,9 @@ body:not(:has(.ddoc)) {
 }
 
 .sidebar__current-item::before {
-  @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em] [clip-path:polygon(0%_10%,100%_50%,0%_90%)] bg-gray-200;
+  @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em]
+    bg-gray-200;
+  clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
 }
 
 .markdown-body .admonition a {
@@ -381,7 +389,8 @@ body:not(:has(.ddoc)) {
 }
 
 .markdown-body > pre.snippet-code[data-example-position="last"] {
-  @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none md:rounded-b;
+  @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none
+    md:rounded-b;
 }
 
 .deno-tabs {
@@ -397,15 +406,18 @@ body:not(:has(.ddoc)) {
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li > button {
-  @apply inline-block mr-2 px-4 py-2 text-sm font-semibold text-slate-700 rounded-t bg-slate-100/80 hover:bg-blue-50 border border-transparent;
+  @apply inline-block mr-2 px-4 py-2 text-sm font-semibold text-slate-700
+    rounded-t bg-slate-100/80 hover:bg-blue-50 border border-transparent;
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li > button[data-active="true"] {
-  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-transparent z-10 -mb-[1px] pb-[calc(0.5rem+1px)] relative;
+  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-transparent z-10
+    -mb-[1px] pb-[calc(0.5rem+1px)] relative;
 }
 
 .deno-tabs > div.deno-tabs-content > div {
-  @apply hidden py-4 px-4 rounded rounded-tl-none bg-slate-100 border border-slate-200;
+  @apply hidden py-4 px-4 rounded rounded-tl-none bg-slate-100 border
+    border-slate-200;
 }
 
 .deno-tabs > div.deno-tabs-content > div[data-active="true"] {
@@ -421,7 +433,8 @@ body:not(:has(.ddoc)) {
 }
 
 .deno-tabs .markdownBlockTitle {
-  @apply px-8 py-2 max-sm:-mx-4 sm:rounded-t-md border border-slate-200 bg-slate-50 text-slate-900 text-sm font-semibold;
+  @apply px-8 py-2 max-sm:-mx-4 sm:rounded-t-md border border-slate-200
+    bg-slate-50 text-slate-900 text-sm font-semibold;
 }
 
 /* Strips bottom margin in instances where multiple code samples exist in a tab. */
@@ -463,7 +476,8 @@ body:not(:has(.ddoc)) {
       @apply border-l border-gray-000 !important;
 
       > li > a {
-        @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline  py-1.5 px-3.5 !important;
+        @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline py-1.5
+          px-3.5 !important;
       }
 
       > ul > li a {

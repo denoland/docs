@@ -42,7 +42,7 @@ jobs:
         env:
           ORAMA_CLOUD_INDEX_ID: ${{ vars.ORAMA_CLOUD_INDEX_ID }}
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
-        run: deno task build
+        run: DENO_FUTURE=1 deno task build
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
