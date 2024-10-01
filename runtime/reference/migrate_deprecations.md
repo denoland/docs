@@ -31,20 +31,20 @@ Deno 2 understands `package.json`, `node_modules` directory and even npm
 workspaces, allowing you to migrate your existing projects using ESM with little
 effort.
 
+[Read more on `Node.js support` page](/runtime/fundamentals/node/)
+
 ## Managing dependencies
 
-// TODO: Deno 2 has full support for managing npm and JSR dependencies with
-tools like `deno install`, `deno add` or `deno remove`.
+Deno 2 greatly improves dependency management for npm and JSR packages with
+tools like:
 
-In Deno 2 we suggest using JSR and npm to get dependencies instead of using
-`http(s):` specifiers.
+- [`deno install`](/runtime/reference/cli/install/)
+- [`deno add`](/runtime/reference/cli/install/)
+- [`deno remove`](/runtime/reference/cli/uninstall/)
 
-## Publishing libraries
-
-// TODO: Prefer to use `jsr:` as it provides native support in Deno and great DX
-with npm.
-
-Lorem ipsum dolor sit amet
+You can expect seemless experience with Deno-first projects using `deno.json`,
+Node.js-first project using `package.json`, as well as hybrid projects using
+both `deno.json` and `package.json` to enable easy migration path.
 
 ## Monorepo, workspace and private registries support
 
@@ -60,11 +60,15 @@ with Node.js and npm, using an `.npmrc` file:
 mycompany.com:8111/:_authToken=token
 ```
 
+Learn more about private registry configuration
+[on `npm packages` page](/runtime/reference/npm/#how-to-use-private-registries-with-deno).
+
 Deno 2 has workspace support, allowing you to mix Deno-first and Node-first
 packages in the same monorepo, making incremental adoption fast and
 approachable.
 
-// TODO
+Read more
+[on `Workspaces and Monorepos` page](/runtime/fundamentals/workspaces/).
 
 ## Framework support
 
