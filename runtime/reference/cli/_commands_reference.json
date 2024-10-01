@@ -265,7 +265,7 @@
           "short": null,
           "long": "location",
           "required": false,
-          "help": "Value of 'globalThis.location' used by some web APIs",
+          "help": "Value of \u001b[38;5;245mglobalThis.location\u001b[39m used by some web APIs",
           "help_heading": null,
           "usage": "--location <HREF>"
         },
@@ -383,7 +383,7 @@
     },
     {
       "name": "serve",
-      "about": "Run a server defined in a main module\n\nThe serve command uses the default exports of the main module to determine which servers to start.\n\nSee https://docs.deno.com/runtime/manual/tools/serve for more detailed information.\n\nStart a server defined in server.ts:\n  \u001b[38;5;245mdeno serve server.ts\u001b[39m\n\nStart a server defined in server.ts, watching for changes and running on port 5050:\n  \u001b[38;5;245mdeno serve --watch --port 5050 server.ts\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/serve\u001b[39m",
+      "about": "Run a server defined in a main module\n\nThe serve command uses the default exports of the main module to determine which servers to start.\n\nStart a server defined in server.ts:\n  \u001b[38;5;245mdeno serve server.ts\u001b[39m\n\nStart a server defined in server.ts, watching for changes and running on port 5050:\n  \u001b[38;5;245mdeno serve --watch --port 5050 server.ts\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/serve\u001b[39m",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -633,7 +633,7 @@
           "short": null,
           "long": "location",
           "required": false,
-          "help": "Value of 'globalThis.location' used by some web APIs",
+          "help": "Value of \u001b[38;5;245mglobalThis.location\u001b[39m used by some web APIs",
           "help_heading": null,
           "usage": "--location <HREF>"
         },
@@ -660,7 +660,7 @@
           "short": null,
           "long": "port",
           "required": false,
-          "help": "The TCP port to serve on, defaulting to 8000. Pass 0 to pick a random free port",
+          "help": "The TCP port to serve on. Pass 0 to pick a random free port \u001b[38;5;245m[default: 8000]\u001b[39m",
           "help_heading": null,
           "usage": "--port <port>"
         },
@@ -1044,7 +1044,7 @@
           "short": null,
           "long": "location",
           "required": false,
-          "help": "Value of 'globalThis.location' used by some web APIs",
+          "help": "Value of \u001b[38;5;245mglobalThis.location\u001b[39m used by some web APIs",
           "help_heading": null,
           "usage": "--location <HREF>"
         },
@@ -1670,7 +1670,7 @@
     },
     {
       "name": "compile",
-      "about": "Compiles the given script into a self contained executable.\n\n  \u001b[38;5;245mdeno compile -A jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno compile --output file_server jsr:@std/http/file-server\u001b[39m\n\nAny flags specified which affect runtime behavior will be applied to the resulting binary.\n\nCross-compiling to different target architectures is supported using the \u001b[36m--target\u001b[39m flag.\nOn the first invocation with deno will download the proper binary and cache it in \u001b[36m$DENO_DIR\u001b[39m.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/compile\u001b[39m\n",
+      "about": "Compiles the given script into a self contained executable.\n\n  \u001b[38;5;245mdeno compile --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno compile --output file_server jsr:@std/http/file-server\u001b[39m\n\nAny flags specified which affect runtime behavior will be applied to the resulting binary.\n\nThis allows distribution of a Deno application to systems that do not have Deno installed.\nUnder the hood, it bundles a slimmed down version of the Deno runtime along with your\nJavaScript or TypeScript code.\n\nCross-compiling to different target architectures is supported using the \u001b[36m--target\u001b[39m flag.\nOn the first invocation with deno will download the proper binary and cache it in \u001b[36m$DENO_DIR\u001b[39m.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/compile\u001b[39m\n",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -1893,7 +1893,7 @@
           "short": null,
           "long": "location",
           "required": false,
-          "help": "Value of 'globalThis.location' used by some web APIs",
+          "help": "Value of \u001b[38;5;245mglobalThis.location\u001b[39m used by some web APIs",
           "help_heading": null,
           "usage": "--location <HREF>"
         },
@@ -2564,7 +2564,7 @@
           "short": null,
           "long": "location",
           "required": false,
-          "help": "Value of 'globalThis.location' used by some web APIs",
+          "help": "Value of \u001b[38;5;245mglobalThis.location\u001b[39m used by some web APIs",
           "help_heading": null,
           "usage": "--location <HREF>"
         },
@@ -2646,7 +2646,7 @@
     },
     {
       "name": "fmt",
-      "about": "Auto-format various file types.\n  \u001b[38;5;245mdeno fmt myfile1.ts myfile2.ts\u001b[39m\n\nSupported file types are:\n  \u001b[38;5;245mJavaScript, TypeScript, Markdown, JSON(C) and Jupyter Notebooks\u001b[39m\n\nSupported file types which are behind corresponding unstable flags (see formatting options):\n  \u001b[38;5;245mHTML, CSS, SCSS, SASS, LESS, YAML, Svelte, Vue, Astro and Angular\u001b[39m\n\nFormat stdin and write to stdout:\n  \u001b[38;5;245mcat file.ts | deno fmt -\u001b[39m\n\nIgnore formatting code by preceding it with an ignore comment:\n  \u001b[38;5;245m// deno-fmt-ignore\u001b[39m\n\nIgnore formatting a file by adding an ignore comment at the top of the file:\n  \u001b[38;5;245m// deno-fmt-ignore-file\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/fmt\u001b[39m",
+      "about": "Auto-format various file types.\n  \u001b[38;5;245mdeno fmt myfile1.ts myfile2.ts\u001b[39m\n\nSupported file types are:\n  \u001b[38;5;245mJavaScript, TypeScript, Markdown, JSON(C) and Jupyter Notebooks\u001b[39m\n\nSupported file types which are behind corresponding unstable flags (see formatting options):\n  \u001b[38;5;245mHTML, CSS, SCSS, SASS, LESS, YAML, Svelte, Vue, Astro and Angular\u001b[39m\n\nFormat stdin and write to stdout:\n  \u001b[38;5;245mcat file.ts | deno fmt -\u001b[39m\n\nCheck if the files are formatted:\n  \u001b[38;5;245mdeno fmt --check\u001b[39m\n\nIgnore formatting code by preceding it with an ignore comment:\n  \u001b[38;5;245m// deno-fmt-ignore\u001b[39m\n\nIgnore formatting a file by adding an ignore comment at the top of the file:\n  \u001b[38;5;245m// deno-fmt-ignore-file\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/fmt\u001b[39m",
       "args": [
         {
           "name": "config",
@@ -2798,7 +2798,7 @@
     },
     {
       "name": "init",
-      "about": "Initialize a new project",
+      "about": "scaffolds a basic Deno project with a script, test, and configuration file",
       "args": [
         {
           "name": "dir",
@@ -2894,7 +2894,7 @@
           "short": null,
           "long": "location",
           "required": false,
-          "help": "Show files used for origin bound APIs like the Web Storage API when running a script with '--location=<HREF>'",
+          "help": "Show files used for origin bound APIs like the Web Storage API when running a script with \u001b[36m--location=<HREF>\u001b[39m",
           "help_heading": null,
           "usage": "--location <HREF>"
         },
@@ -3003,7 +3003,7 @@
     },
     {
       "name": "install",
-      "about": "Installs dependencies either in the local project or globally to a bin directory.\n\n\u001b[32mLocal installation\u001b[39m\n\nAdd dependencies to the local project's configuration (\u001b[38;5;245mdeno.json / package.json\u001b[39m) and installs them\nin the package cache. If no dependency is specified, installs all dependencies listed in the config file.\nIf the \u001b[38;5;245m--entrypoint\u001b[39m flag is passed, installs the dependencies of the specified entrypoint(s).\n\n  \u001b[38;5;245mdeno install\u001b[39m\n  \u001b[38;5;245mdeno install @std/bytes\u001b[39m\n  \u001b[38;5;245mdeno install npm:chalk\u001b[39m\n  \u001b[38;5;245mdeno install --entrypoint entry1.ts entry2.ts\u001b[39m\n\n\u001b[32mGlobal installation\u001b[39m\n\nIf the \u001b[1m--global\u001b[22m flag is set, installs a script as an executable in the installation root's bin directory.\n\n  \u001b[38;5;245mdeno install --global --allow-net --allow-read jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno install -g https://examples.deno.land/color-logging.ts\u001b[39m\n\nTo change the executable name, use -n/--name:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read -n serve jsr:@std/http/file-server\u001b[39m\n\nThe executable name is inferred by default:\n  - Attempt to take the file stem of the URL path. The above example would\n    become \u001b[38;5;245mfile_server\u001b[39m.\n  - If the file stem is something generic like \u001b[38;5;245mmain\u001b[39m, \u001b[38;5;245mmod\u001b[39m, \u001b[38;5;245mindex\u001b[39m or \u001b[38;5;245mcli\u001b[39m,\n    and the path has no parent, take the file name of the parent path. Otherwise\n    settle with the generic name.\n  - If the resulting name has an \u001b[38;5;245m@...\u001b[39m suffix, strip it.\n\nTo change the installation root, use \u001b[36m--root\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read --root /usr/local jsr:@std/http/file-server\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m\n\nThese must be added to the path manually if required.",
+      "about": "Installs dependencies either in the local project or globally to a bin directory.\n\n\u001b[32mLocal installation\u001b[39m\n\nAdd dependencies to the local project's configuration (\u001b[38;5;245mdeno.json / package.json\u001b[39m) and installs them\nin the package cache. If no dependency is specified, installs all dependencies listed in the config file.\nIf the \u001b[38;5;245m--entrypoint\u001b[39m flag is passed, installs the dependencies of the specified entrypoint(s).\n\n  \u001b[38;5;245mdeno install\u001b[39m\n  \u001b[38;5;245mdeno install @std/bytes\u001b[39m\n  \u001b[38;5;245mdeno install npm:chalk\u001b[39m\n  \u001b[38;5;245mdeno install --entrypoint entry1.ts entry2.ts\u001b[39m\n\n\u001b[32mGlobal installation\u001b[39m\n\nIf the \u001b[1m--global\u001b[22m flag is set, installs a script as an executable in the installation root's bin directory.\n\n  \u001b[38;5;245mdeno install --global --allow-net --allow-read jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno install -g https://examples.deno.land/color-logging.ts\u001b[39m\n\nTo change the executable name, use \u001b[36m-n\u001b[39m/\u001b[36m--name\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read -n serve jsr:@std/http/file-server\u001b[39m\n\nThe executable name is inferred by default:\n  - Attempt to take the file stem of the URL path. The above example would\n    become \u001b[38;5;245mfile_server\u001b[39m.\n  - If the file stem is something generic like \u001b[38;5;245mmain\u001b[39m, \u001b[38;5;245mmod\u001b[39m, \u001b[38;5;245mindex\u001b[39m or \u001b[38;5;245mcli\u001b[39m,\n    and the path has no parent, take the file name of the parent path. Otherwise\n    settle with the generic name.\n  - If the resulting name has an \u001b[38;5;245m@...\u001b[39m suffix, strip it.\n\nTo change the installation root, use \u001b[36m--root\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read --root /usr/local jsr:@std/http/file-server\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m\n\nThese must be added to the path manually if required.",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -3253,7 +3253,7 @@
           "short": null,
           "long": "location",
           "required": false,
-          "help": "Value of 'globalThis.location' used by some web APIs",
+          "help": "Value of \u001b[38;5;245mglobalThis.location\u001b[39m used by some web APIs",
           "help_heading": null,
           "usage": "--location <HREF>"
         },
@@ -3742,7 +3742,7 @@
     },
     {
       "name": "publish",
-      "about": "Publish the current working directory's package or workspace",
+      "about": "Publish the current working directory's package or workspace to JSR",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -3858,7 +3858,7 @@
     },
     {
       "name": "repl",
-      "about": "Read Eval Print Loop",
+      "about": "Starts a read-eval-print-loop, which lets you interactively build up program state in the global context.\nIt is especially useful for quick prototyping and checking snippets of code.\n\nTypeScript is supported, however it is not type-checked, only transpiled.",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -4126,7 +4126,7 @@
           "short": null,
           "long": "location",
           "required": false,
-          "help": "Value of 'globalThis.location' used by some web APIs",
+          "help": "Value of \u001b[38;5;245mglobalThis.location\u001b[39m used by some web APIs",
           "help_heading": null,
           "usage": "--location <HREF>"
         },
@@ -4565,7 +4565,7 @@
           "short": null,
           "long": "location",
           "required": false,
-          "help": "Value of 'globalThis.location' used by some web APIs",
+          "help": "Value of \u001b[38;5;245mglobalThis.location\u001b[39m used by some web APIs",
           "help_heading": null,
           "usage": "--location <HREF>"
         },
