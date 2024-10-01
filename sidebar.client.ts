@@ -42,7 +42,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-const top = localStorage.getItem("sidebar-scroll");
+const top = sessionStorage.getItem("sidebar-scroll");
 if (top !== null) {
   sidebarNav.scrollTop = parseInt(top, 10);
 }
