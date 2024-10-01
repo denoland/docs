@@ -79,8 +79,13 @@ user-favorite frameworks like:
 - Qwik
 - and more
 
-You can take your existing project and run it with Deno - just replace
-`npm run dev` with `deno task dev` and get on with your work!
+Most existing project should require minimal or no changes; just replace
+`npm run dev` with `deno task dev` and get on with your work.
+
+Deno will provide helpful error messages with suggestions to guide you towards a
+working solution.
+
+You can also use `deno lint --fix` to automatically fix common incompatibilies.
 
 ---
 
