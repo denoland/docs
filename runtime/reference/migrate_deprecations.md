@@ -3,15 +3,84 @@ title: "Deno 1.x to 2.x Migration Guide"
 oldUrl: /runtime/manual/advanced/migrate_deprecations/
 ---
 
-This document contains guidance for migrating from Deno 1.x to 2.x, namely for
-subcommands, flags and symbols that have been removed or changed in Deno 2.
+When we first announced [Deno](http://localhost:8000/), a modern all-in-one
+toolchain for JavaScript and TypeScript development aimed at simplifying
+programming, developers loved the simplicity of not needing to configure
+separate linters, formatters, test runners, TypeScript, and diving right into
+building product. Developers also appreciated Deno’s stronger security measures
+with its [opt-in-permissions model](/runtime/fundamentals/security/), limiting
+supply chain vulnerabilities and protecting end users.
 
-:::caution Work in progress
+While we’ve accomplished a ton in Deno 1.x, the next major version is focused on
+using Deno **at scale**. This means seamless interoperability with legacy
+JavaScript infrastructure and supporting a wider range of projects and
+development teams, all without sacrificing the simplicity, security, and
+“batteries included” nature that developers love.
 
-Deno 2.0 is under active development - these API changes and recommendations
-will continue to be updated until the launch of 2.0.
+## Backwards compatibility with Node.js and npm
 
-:::
+Deno 2 is fully backwards compatible with Node.js and npm. This allows you to
+not only run Deno in your current Node.js projects, but also incrementally adopt
+pieces of Deno's all-in-one toolchain.
+
+For example you can use `deno install` on a Node.js project to install
+dependencies, run `deno fmt` to format code without needing Prettier, or use
+`deno lint` to checks for common pitfalls instead of using ESLint.
+
+Deno 2 understands `package.json`, `node_modules` directory and even npm
+workspaces, allowing you to migrate your existing projects using ESM with little
+effort.
+
+## Managing dependencies
+
+// TODO: Deno 2 has full support for managing npm and JSR dependencies with
+tools like `deno install`, `deno add` or `deno remove`.
+
+In Deno 2 we suggest using JSR and npm to get dependencies instead of using
+`http(s):` specifiers.
+
+## Publishing libraries
+
+// TODO: Prefer to use `jsr:` as it provides native support in Deno and great DX
+with npm.
+
+Lorem ipsum dolor sit amet
+
+## Monorepo, workspace and private registries support
+
+Deno 2 was built with development teams working on mission-critical projects in
+mind. These team work on complex codebases, sharing internal code, often using
+private registries.
+
+With Deno 2 your team can levarage private npm registries, the same way you'd do
+with Node.js and npm, using an `.npmrc` file:
+
+```js, title=".npmrc"
+@mycompany:registry=http://mycompany.com:8111/
+mycompany.com:8111/:_authToken=token
+```
+
+Deno 2 has workspace support, allowing you to mix Deno-first and Node-first
+packages in the same monorepo, making incremental adoption fast and
+approachable.
+
+// TODO
+
+## Framework support
+
+With improved Node.js and npm compatibility, Deno 2 supports a plethora or
+user-favorite frameworks like:
+
+- Next.js
+- SvelteKit
+- Remix
+- Nuxt
+- TanStack
+- Qwik
+- and more
+
+You can take your existing project and run it with Deno - just replace
+`npm run dev` with `deno task dev` and get on with your work!
 
 ## Updated subcommands
 
