@@ -294,11 +294,20 @@ You can expect all packages that use public and documented Node-APIs to work.
 :::info
 
 Most packages using Node-API addons rely on npm "lifecycle scripts", like
-`postinstall`. While Deno supports them, they are not run by default due to
-security considerations. Read more in
+`postinstall`.
+
+While Deno supports them, they are not run by default due to security
+considerations. Read more in
 [`deno install` docs](/runtime/reference/cli/install/).
 
 :::
+
+As of Deno 2.0, npm packages using Node-API addons **are only supported when a
+`node_modules/` directory is present**. Add `"nodeModulesDir": "auto"` or
+`"nodeModulesDir": "manual"` setting your `deno.json` file, or run with
+`--node-modules-dir=auto|manual` flag to ensure these packages work correctly.
+In case of misconfiguration Deno will provide hints how the situation can be
+resolved.
 
 ## Runtime permissions in Deno
 
