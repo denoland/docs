@@ -48,7 +48,7 @@ if (top !== null) {
 }
 
 globalThis.addEventListener("beforeunload", () => {
-  localStorage.setItem("sidebar-scroll", sidebarNav.scrollTop.toString());
+  sessionStorage.setItem("sidebar-scroll", sidebarNav.scrollTop.toString());
 });
 
 const toc = document.getElementById("toc");
