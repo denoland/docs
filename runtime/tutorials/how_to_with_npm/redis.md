@@ -1,5 +1,5 @@
 ---
-title: "How to Use Redis with Deno"
+title: "How to use Redis with Deno"
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/redis/
 ---

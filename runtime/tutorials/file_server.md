@@ -1,5 +1,5 @@
 ---
-title: "File server"
+title: "Write a file server"
 oldUrl:
   - /runtime/manual/examples/file_server/
 ---

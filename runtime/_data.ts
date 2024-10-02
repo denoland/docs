@@ -215,11 +215,6 @@ export const sidebar = [
         label: "More tutorials",
         items: [
           "/runtime/tutorials/file_server/",
-          {
-            label: "Unix cat",
-            id: "/examples/unix-cat/",
-          },
-          "/runtime/tutorials/file_server/",
           "/runtime/tutorials/subprocess/",
           "/runtime/tutorials/os_signals/",
           "/runtime/tutorials/file_system_events/",
