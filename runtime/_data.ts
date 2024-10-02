@@ -179,7 +179,7 @@ export const sidebar = [
         id: "/runtime/reference/documentation/",
       },
       "/runtime/reference/wasm/",
-      "/runtime/reference/migrate_deprecations/",
+      "/runtime/reference/migration_guide/",
     ],
   },
   {

@@ -1,21 +1,107 @@
 ---
 title: "Deno 1.x to 2.x Migration Guide"
-oldUrl: /runtime/manual/advanced/migrate_deprecations/
+oldUrl:
+  - /runtime/manual/advanced/migrate_deprecations/
+  - /runtime/reference/migrate_deprecations/
 ---
 
-This document contains guidance for migrating from Deno 1.x to 2.x, namely for
-subcommands, flags and symbols that have been removed or changed in Deno 2.
+While we’ve accomplished a ton in Deno 1.x, the next major version is focused on
+using Deno **at scale**. This means seamless interoperability with Node.js and
+npm JavaScript infrastructure and supporting a wider range of projects and
+development teams, all without sacrificing the simplicity, security, and
+“batteries included” nature that developers love.
 
-:::caution Work in progress
+## Backwards compatibility with Node.js and npm
 
-Deno 2.0 is under active development - these API changes and recommendations
-will continue to be updated until the launch of 2.0.
+Deno 2 is backwards compatible with Node.js and npm. This allows you to not only
+run Deno in your current Node.js projects, but also incrementally adopt pieces
+of Deno's all-in-one toolchain.
 
-:::
+For example you can use `deno install` on a Node.js project to install
+dependencies, run `deno fmt` to format code without needing Prettier, or use
+`deno lint` to checks for common pitfalls instead of using ESLint.
 
-## Updated subcommands
+Deno 2 understands `package.json`, `node_modules` directory and even npm
+workspaces, allowing you to migrate your existing projects using ESM with little
+effort.
 
-### deno bundle
+[Read more on `Node.js support` page](/runtime/fundamentals/node/)
+
+### Long Term Support releases
+
+Starting with Deno v2.1.0 (to be released in November 2024) Deno will offer a
+LTS (long-term support) channel.
+
+An LTS version is supported for 6 months, receiving bug fixes and critical
+performance fixes, before a new version is promoted to LTS.
+
+[Read more on `Stability and releases` page](/runtime/fundamentals/stability_and_releases/#long-term-support-(lts))
+
+## Managing dependencies
+
+Deno 2 greatly improves dependency management for npm and JSR packages with
+tools like:
+
+- [`deno install`](/runtime/reference/cli/install/)
+- [`deno add`](/runtime/reference/cli/install/)
+- [`deno remove`](/runtime/reference/cli/uninstall/)
+
+You can expect seemless experience with Deno-first projects using `deno.json`,
+Node.js-first project using `package.json`, as well as hybrid projects using
+both `deno.json` and `package.json` to enable easy migration path.
+
+## Monorepo, workspace and private registries support
+
+Deno 2 was built with development teams working on mission-critical projects in
+mind. These team work on complex codebases, sharing internal code, often using
+private registries.
+
+With Deno 2 your team can levarage private npm registries, the same way you'd do
+with Node.js and npm, using an `.npmrc` file:
+
+```js, title=".npmrc"
+@mycompany:registry=http://mycompany.com:8111/
+mycompany.com:8111/:_authToken=token
+```
+
+Learn more about private registry configuration
+[on `npm packages` page](/runtime/reference/npm/#how-to-use-private-registries-with-deno).
+
+Deno 2 has workspace support, allowing you to mix Deno-first and Node-first
+packages in the same monorepo, making incremental adoption fast and
+approachable.
+
+Read more
+[on `Workspaces and Monorepos` page](/runtime/fundamentals/workspaces/).
+
+## Framework support
+
+With improved Node.js and npm compatibility, Deno 2 supports a plethora or
+user-favorite frameworks like:
+
+- Next.js
+- SvelteKit
+- Remix
+- Nuxt
+- TanStack
+- Qwik
+- and more
+
+Most existing project should require minimal or no changes; just replace
+`npm run dev` with `deno task dev` and get on with your work.
+
+Deno will provide helpful error messages with suggestions to guide you towards a
+working solution.
+
+You can also use `deno lint --fix` to automatically fix common incompatibilies.
+
+---
+
+The following section outline CLI and API changes between Deno 1.x and Deno 2.
+
+## CLI changes
+
+- `deno bundle`
 
 The `deno bundle` command has been removed. We recommend using
 [`esbuild`](https://esbuild.github.io/) together with
@@ -36,7 +122,7 @@ const result = await esbuild.build({
 esbuild.stop();
 ```
 
-### deno cache
+- `deno cache`
 
 The `deno cache` command has been merged into the `deno install` command under
 the `--entrypoint` option.
@@ -46,7 +132,7 @@ the `--entrypoint` option.
 + deno install --entrypoint main.ts
 ```
 
-### deno vendor
+- `deno vendor`
 
 The `deno vendor` command has been replaced by a `"vendor": true` configuration
 option in `deno.json`.
@@ -57,9 +143,7 @@ option in `deno.json`.
 }
 ```
 
-## Updated flags
-
-### --allow-none
+- `--allow-none`
 
 Use the `--permit-no-files` CLI flag instead.
 
@@ -68,7 +152,7 @@ Use the `--permit-no-files` CLI flag instead.
 + deno test --permit-no-files
 ```
 
-### --jobs
+- `--jobs`
 
 Use the
 [`DENO_JOBS`](https://docs.deno.com/runtime/manual/basics/env_variables/#special-environment-variables)
@@ -79,7 +163,7 @@ environment variable instead.
 + DENO_JOBS=4 deno test --parallel
 ```
 
-### --ts
+- `--ts`
 
 Use the `--ext=ts` CLI flag instead.
 
@@ -93,7 +177,7 @@ Use the `--ext=ts` CLI flag instead.
 + deno run --ext=ts script.ts
 ```
 
-### --trace-ops
+- `--trace-ops`
 
 Use the `--trace-leaks` CLI flag instead.
 
@@ -102,7 +186,7 @@ Use the `--trace-leaks` CLI flag instead.
 + deno test --trace-leaks
 ```
 
-### ---unstable
+- `--unstable`
 
 Use granular unstable flags (`--unstable-*`) or configuration options instead.
 See
@@ -133,9 +217,9 @@ See the
 [Deno 1.40 Blog Post](https://deno.com/blog/v1.40#changes-to-how-we-handle-unstable-features)
 for details.
 
-## Updated symbols
+## API changes
 
-### Deno.Buffer
+- `Deno.Buffer`
 
 Use [`Buffer`](https://jsr.io/@std/io/doc/buffer/~/Buffer) from the Standard
 Library instead.
@@ -151,7 +235,7 @@ Library instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.Closer
+- `Deno.Closer`
 
 Use [`Closer`](https://jsr.io/@std/io/doc/types/~/Closer) from the Standard
 Library instead.
@@ -167,7 +251,7 @@ Library instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.close()
+- `Deno.close()`
 
 Use the `.close()` method on the resource instead.
 
@@ -191,7 +275,7 @@ Use the `.close()` method on the resource instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.Conn.prototype.rid
+- `Deno.Conn.prototype.rid`
 
 Use [`Deno.Conn`](https://docs.deno.com/api/deno/~/Deno.Conn) instance methods
 instead.
@@ -216,7 +300,7 @@ instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.ConnectTlsOptions.certChain
+- `Deno.ConnectTlsOptions.certChain`
 
 Use the
 [`cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
@@ -236,7 +320,7 @@ using conn = await Deno.connectTls({
 
 See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 
-### Deno.ConnectTlsOptions.certFile
+- `Deno.ConnectTlsOptions.certFile`
 
 Use the
 [`cert`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_cert)
@@ -256,7 +340,7 @@ using conn = await Deno.connectTls({
 
 See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 
-### Deno.ConnectTlsOptions.privateKey
+- `Deno.ConnectTlsOptions.privateKey`
 
 Use the
 [`key`](https://docs.deno.com/api/deno/~/Deno.TlsCertifiedKeyPem#property_key)
@@ -276,7 +360,7 @@ using conn = await Deno.connectTls({
 
 See [deno#22274](https://github.com/denoland/deno/pull/22274) for details.
 
-### Deno.copy()
+- `Deno.copy()`
 
 Use [`copy()`](https://jsr.io/@std/io/doc/copy/~/copy) from the Standard Library
 instead.
@@ -292,7 +376,7 @@ instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.customInspect
+- `Deno.customInspect`
 
 Use `Symbol.for("Deno.customInspect")` instead.
 
@@ -306,7 +390,7 @@ class Foo {
 
 See [deno#9294](https://github.com/denoland/deno/issues/9294) for details.
 
-### Deno.fdatasync()
+- `Deno.fdatasync()`
 
 Use
 [`Deno.FsFile.prototype.syncData()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.syncData)
@@ -320,7 +404,7 @@ instead.
 + await file.syncData();
 ```
 
-### Deno.fdatasyncSync()
+- `Deno.fdatasyncSync()`
 
 Use
 [`Deno.FsFile.prototype.syncDataSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.syncDataSync)
@@ -334,7 +418,7 @@ instead.
 + file.syncDataSync();
 ```
 
-### Deno.File
+- `Deno.File`
 
 Use [`Deno.FsFile`](https://docs.deno.com/api/deno/~/Deno.FsFile) instead.
 
@@ -347,7 +431,7 @@ Use [`Deno.FsFile`](https://docs.deno.com/api/deno/~/Deno.FsFile) instead.
 
 See [deno#13661](https://github.com/denoland/deno/issues/13661) for details.
 
-### Deno.flock()
+- `Deno.flock()`
 
 Use
 [`Deno.FsFile.prototype.lock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lock)
@@ -362,7 +446,7 @@ instead.
 
 See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 
-### Deno.flockSync()
+- `Deno.flockSync()`
 
 Use
 [`Deno.FsFile.prototype.lockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.lockSync)
@@ -377,7 +461,7 @@ instead.
 
 See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 
-### Deno.FsFile.prototype.rid
+- `Deno.FsFile.prototype.rid`
 
 Use [`Deno.FsFile`](https://docs.deno.com/api/deno/~/Deno.FsFile) instance
 methods instead.
@@ -397,7 +481,7 @@ methods instead.
 + file.close();
 ```
 
-### Deno.fstatSync()
+- `Deno.fstatSync()`
 
 Use
 [`Deno.FsFile.prototype.statSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.statSync)
@@ -412,7 +496,7 @@ instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.fstat()
+- `Deno.fstat()`
 
 Use
 [`Deno.FsFile.prototype.stat()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.stat)
@@ -427,7 +511,7 @@ instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.FsWatcher.prototype.rid
+- `Deno.FsWatcher.prototype.rid`
 
 Use [`Deno.FsWatcher`](https://docs.deno.com/api/deno/~/Deno.FsWatcher) instance
 methods instead.
@@ -443,7 +527,7 @@ methods instead.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.fsync()
+- `Deno.fsync()`
 
 Use
 [`Deno.FsFile.prototype.sync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.sync)
@@ -458,7 +542,7 @@ instead.
 + await file.sync();
 ```
 
-### Deno.fsyncSync()
+- `Deno.fsyncSync()`
 
 Use
 [`Deno.FsFile.prototype.syncSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.syncSync)
@@ -473,7 +557,7 @@ instead.
 + file.syncSync();
 ```
 
-### Deno.ftruncateSync()
+- `Deno.ftruncateSync()`
 
 Use
 [`Deno.FsFile.prototype.truncateSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncateSync)
@@ -488,7 +572,7 @@ instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.ftruncate()
+- `Deno.ftruncate()`
 
 Use
 [`Deno.FsFile.prototype.truncate()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.truncate)
@@ -503,7 +587,7 @@ instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.funlock()
+- `Deno.funlock()`
 
 Use
 [`Deno.FsFile.prototype.unlock()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlock)
@@ -518,7 +602,7 @@ instead.
 
 See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 
-### Deno.funlockSync()
+- `Deno.funlockSync()`
 
 Use
 [`Deno.FsFile.prototype.unlockSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.unlockSync)
@@ -533,7 +617,7 @@ instead.
 
 See [deno#22178](https://github.com/denoland/deno/issues/22178) for details.
 
-### Deno.futimeSync()
+- `Deno.futimeSync()`
 
 Use
 [`Deno.FsFile.prototype.utimeSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utimeSync)
@@ -548,7 +632,7 @@ instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.futime()
+- `Deno.futime()`
 
 Use
 [`Deno.FsFile.prototype.utime()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.utime)
@@ -563,7 +647,7 @@ instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.isatty()
+- `Deno.isatty()`
 
 Use `Deno.FsFile.prototype.isTerminal()`, `Deno.stdin.prototype.isTerminal()`,
 `Deno.stdout.prototype.isTerminal()` or `Deno.stderr.prototype.isTerminal()`
@@ -593,7 +677,7 @@ instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.iter()
+- `Deno.iter()`
 
 Use
 [`iterateReader()`](https://jsr.io/@std/io/doc/iterate-reader/~/iterateReader)
@@ -621,7 +705,7 @@ from the Standard Library instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.iterSync()
+- `Deno.iterSync()`
 
 Use
 [`iterateReaderSync()`](https://jsr.io/@std/io/doc/iterate-reader/~/iterateReaderSync)
@@ -649,7 +733,7 @@ from the Standard Library instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.Listener.prototype.rid
+- `Deno.Listener.prototype.rid`
 
 Use [`Deno.Listener`](https://docs.deno.com/api/deno/~/Deno.Listener) instance
 methods instead.
@@ -663,7 +747,7 @@ methods instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.ListenTlsOptions.certChain
+- `Deno.ListenTlsOptions.certChain`
 
 Use the
 [`cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
@@ -678,7 +762,7 @@ using listener = Deno.listenTls({
 });
 ```
 
-### Deno.ListenTlsOptions.certFile
+- `Deno.ListenTlsOptions.certFile`
 
 Pass the certificate file contents to the
 [`cert`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_cert)
@@ -695,7 +779,7 @@ using listener = Deno.listenTls({
 
 See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 
-### Deno.ListenTlsOptions.keyFile
+- `Deno.ListenTlsOptions.keyFile`
 
 Pass the key file contents to the
 [`key`](https://docs.deno.com/api/deno/~/Deno.ListenTlsOptions#property_key)
@@ -712,11 +796,11 @@ using listener = Deno.listenTls({
 
 See [deno#12639](https://github.com/denoland/deno/issues/12639) for details.
 
-### Deno.metrics()
+- `Deno.metrics()`
 
 There is no replacement API for this symbol.
 
-### Deno.readAllSync()
+- `Deno.readAllSync()`
 
 Use [`readAllSync()`](https://jsr.io/@std/io/doc/read-all/~/readAllSync) from
 the Standard Library instead.
@@ -739,7 +823,7 @@ the Standard Library instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.readAll()
+- `Deno.readAll()`
 
 Use [`readAll()`](https://jsr.io/@std/io/doc/read-all/~/readAll) from the
 Standard Library instead.
@@ -762,7 +846,7 @@ Standard Library instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.Reader
+- `Deno.Reader`
 
 Use [`Reader`](https://jsr.io/@std/io/doc/~/Reader) from the Standard Library
 instead.
@@ -778,7 +862,7 @@ instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.ReaderSync
+- `Deno.ReaderSync`
 
 Use [`ReaderSync`](https://jsr.io/@std/io/doc/~/ReaderSync) from the Standard
 Library instead.
@@ -794,7 +878,7 @@ Library instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.readSync()
+- `Deno.readSync()`
 
 Use the `.readSync()` method on the resource itself.
 
@@ -816,7 +900,7 @@ Use the `.readSync()` method on the resource itself.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.read()
+- `Deno.read()`
 
 Use the `.read()` method on the resource itself.
 
@@ -838,12 +922,12 @@ Use the `.read()` method on the resource itself.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.resources()
+- `Deno.resources()`
 
 There is no replacement API for this symbol, as resource IDs (RIDs) are being
 phased-out.
 
-### Deno.run()
+- `Deno.run()`
 
 Use [`new Deno.Command()`](https://docs.deno.com/api/deno/~/Deno.Command)
 instead.
@@ -883,7 +967,7 @@ directive.
 
 See [deno#16516](https://github.com/denoland/deno/pull/16516) for details.
 
-### Deno.Seeker
+- `Deno.Seeker`
 
 Use [`Seeker`](https://jsr.io/@std/io/doc/types/~/Seeker) from the Standard
 Library instead.
@@ -897,7 +981,7 @@ Library instead.
 }
 ```
 
-### Deno.SeekerSync
+- `Deno.SeekerSync`
 
 Use [`SeekerSync`](https://jsr.io/@std/io/doc/types/~/SeekerSync) from the
 Standard Library instead.
@@ -911,7 +995,7 @@ Standard Library instead.
 }
 ```
 
-### Deno.seekSync()
+- `Deno.seekSync()`
 
 Use
 [`Deno.FsFile.prototype.seekSync()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seekSync)
@@ -926,7 +1010,7 @@ instead.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.seek()
+- `Deno.seek()`
 
 Use
 [`Deno.FsFile.prototype.seek()`](https://docs.deno.com/api/deno/~/Deno.FsFile.prototype.seek)
@@ -941,7 +1025,7 @@ instead.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.serveHttp()
+- `Deno.serveHttp()`
 
 Use [`Deno.serve()`](https://docs.deno.com/api/deno/~/Deno.serve) instead.
 
@@ -975,7 +1059,7 @@ See the
 [Deno 1.35 blog post](https://deno.com/blog/v1.35#denoserve-is-now-stable) for
 details.
 
-### Deno.Server
+- `Deno.Server`
 
 Use [`Deno.HttpServer`](https://docs.deno.com/api/deno/~/Deno.HttpServer)
 instead.
@@ -989,7 +1073,7 @@ instead.
 
 See [deno#20840](https://github.com/denoland/deno/issues/20840) for details.
 
-### Deno.shutdown()
+- `Deno.shutdown()`
 
 Use
 [`Deno.Conn.closeWrite()`](https://docs.deno.com/api/deno/~/Deno.Conn#method_closeWrite_0)
@@ -1004,7 +1088,7 @@ instead.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.stderr.prototype.rid
+- `Deno.stderr.prototype.rid`
 
 Use [`Deno.stderr`](https://docs.deno.com/api/deno/~/Deno.stderr) instance
 methods instead.
@@ -1036,7 +1120,7 @@ directive.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.stdin.prototype.rid
+- `Deno.stdin.prototype.rid`
 
 Use [`Deno.stdin`](https://docs.deno.com/api/deno/~/Deno.stdin) instance methods
 instead.
@@ -1068,7 +1152,7 @@ directive.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.stdout.prototype.rid
+- `Deno.stdout.prototype.rid`
 
 Use [`Deno.stdout`](https://docs.deno.com/api/deno/~/Deno.stdout) instance
 methods instead.
@@ -1100,7 +1184,7 @@ directive.
 
 See [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.TcpConn.prototype.rid
+- `Deno.TcpConn.prototype.rid`
 
 Use [`Deno.TcpConn`](https://docs.deno.com/api/deno/~/Deno.TcpConn) instance
 methods instead.
@@ -1125,7 +1209,7 @@ methods instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.TlsConn.prototype.rid
+- `Deno.TlsConn.prototype.rid`
 
 Use [`Deno.TlsConn`](https://docs.deno.com/api/deno/~/Deno.TlsConn) instance
 methods instead.
@@ -1151,7 +1235,7 @@ methods instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.TlsListener.prototype.rid
+- `Deno.TlsListener.prototype.rid`
 
 Use [`Deno.TlsListener`](https://docs.deno.com/api/deno/~/Deno.TlsListener)
 instance methods instead.
@@ -1171,7 +1255,7 @@ instance methods instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.UnixConn.prototype.rid
+- `Deno.UnixConn.prototype.rid`
 
 Use [`Deno.UnixConn`](https://docs.deno.com/api/deno/~/Deno.UnixConn) instance
 methods instead.
@@ -1196,7 +1280,7 @@ methods instead.
 
 See the [Deno 1.40 blog post][Deno 1.40 blog post] for details.
 
-### Deno.writeAllSync()
+- `Deno.writeAllSync()`
 
 Use [`writeAllSync()`](https://jsr.io/@std/io/doc/~/writeAllSync) from the
 Standard Library instead.
@@ -1212,7 +1296,7 @@ Standard Library instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.writeAll()
+- `Deno.writeAll()`
 
 Use [`writeAll()`](https://jsr.io/@std/io/doc/~/writeAll) from the Standard
 Library instead.
@@ -1228,7 +1312,7 @@ Library instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.Writer
+- `Deno.Writer`
 
 Use [Writer](https://jsr.io/@std/io/doc/~/Writer) from the Standard Library
 instead.
@@ -1244,7 +1328,7 @@ instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.WriterSync
+- `Deno.WriterSync`
 
 Use [WriterSync](https://jsr.io/@std/io/doc/~/WriterSync) from the Standard
 Library instead.
@@ -1260,7 +1344,7 @@ Library instead.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.writeSync()
+- `Deno.writeSync()`
 
 Use the `.writeSync()` method on the resource itself.
 
@@ -1282,7 +1366,7 @@ Use the `.writeSync()` method on the resource itself.
 
 See [deno#9795][deno#9795] for details.
 
-### Deno.write()
+- `Deno.write()`
 
 Use the `.write()` method on the resource itself.
 
@@ -1304,7 +1388,7 @@ Use the `.write()` method on the resource itself.
 
 See [deno#9795][deno#9795] for details.
 
-### new Deno.FsFile()
+- `new Deno.FsFile()`
 
 Use [`Deno.openSync()`](https://docs.deno.com/api/deno/~/Deno.openSync) or
 [`Deno.open()`](https://docs.deno.com/api/deno/~/Deno.open) instead.
@@ -1314,7 +1398,7 @@ Use [`Deno.openSync()`](https://docs.deno.com/api/deno/~/Deno.openSync) or
 + using file = await Deno.open("/foo/bar.txt");
 ```
 
-### window
+- `window`
 
 Use `globalThis` instead.
 
