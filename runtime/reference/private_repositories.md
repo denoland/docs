@@ -1,5 +1,5 @@
 ---
-title: "Private Modules and Repositories"
+title: "Private modules and repositories"
 oldUrl: /runtime/manual/advanced/private_repositories/
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Where To Get Help"
+title: "Where to get help"
 old_url: /runtime/manual/help/
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Continuous Integration"
+title: "Continuous integration"
 oldUrl: /runtime/manual/advanced/continuous_integration
 ---
 

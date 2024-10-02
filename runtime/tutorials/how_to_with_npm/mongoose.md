@@ -22,7 +22,7 @@ and adds and updates a dinosaur to the database.
 First, we'll create the necessary files and directories:
 
 ```console
-$ touch main.ts && mkdir model && touch model/Dinosaur.ts
+touch main.ts && mkdir model && touch model/Dinosaur.ts
 ```
 
 In `/model/Dinosaur.ts`, we'll import `npm:mongoose`, define the [schema], and
