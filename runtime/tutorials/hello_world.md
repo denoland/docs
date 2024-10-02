@@ -191,10 +191,9 @@ my_project/
 This kind of structure keeps your project clean and makes it easier to find and
 manage files.
 
-🦕 Remember that Deno encourages simplicity and avoids complex build tools. Keep
-your project modular, testable, and organized. As your project grows, adapt the
-structure to fit your needs. And most importantly, have fun exploring Deno’s
-capabilities!
-
 🦕 Congratulations! Now you know how to create a simple script in both JS and TS
-and how to run it in Deno with the `deno run` command.
+and how to run it in Deno with the `deno run` command and how to create a brand
+new project with `deno init`. Remember that Deno encourages simplicity and
+avoids complex build tools. Keep your project modular, testable, and organized.
+As your project grows, adapt the structure to fit your needs. And most
+importantly, have fun exploring Deno’s capabilities!
