@@ -1,3 +1,4 @@
+status: good
 symbols:
   RequestOptions: Option `createConnection` is not supported.
   ClientRequestArgs: Option `createConnection` is not supported.
