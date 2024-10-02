@@ -4,18 +4,6 @@ oldUrl:
   - /runtime/manual/examples/http_server/
 ---
 
-An HTTP server is a software application that serves content over the web. It
-listens for incoming requests from clients (like web browsers) and sends back
-responses. HTTP servers are the backbone of the web, allowing you to access
-websites, download files, and interact with web services. In simple terms, HTTP
-servers deliver the content you see in your browser.
-
-When you build your own HTTP server, you have complete control over its behavior
-and can tailor it to your specific needs. You may be using it for local
-development, to serve your HTML, CSS, and JavaScript files, or perhaps you're
-building a REST API - having your own server lets you define endpoints, handle
-requests and manage data.
-
 Deno offers multiple ways to create an HTTP server. In this tutorial, we'll look
 at some of the most common methods.
 

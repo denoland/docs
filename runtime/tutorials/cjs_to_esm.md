@@ -85,3 +85,7 @@ Deno can add all the missing file extensions for you by running
 show a linting error when an import path doesn't contain the file extension.
 
 :::
+
+🦕 Now that you know how to port from CJS to ESM you can take advantage of the
+modern features that ESM offers, such as async module loading, interop with
+browsers, better readability, standardization and future proofing.
