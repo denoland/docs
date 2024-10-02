@@ -1,5 +1,5 @@
 ---
-title: "Handle OS Signals"
+title: "Handle OS signals"
 oldUrl:
   - /runtime/manual/examples/os_signals/
 ---

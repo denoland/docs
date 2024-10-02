@@ -1,5 +1,5 @@
 ---
-title: "Linting and Formatting"
+title: "Linting and formatting"
 ---
 
 In an ideal world, your code is always clean, consistent, and free of pesky

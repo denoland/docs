@@ -1,5 +1,5 @@
 ---
-title: "How to Deploy to Google Cloud Run"
+title: "How to deploy to Google Cloud Run"
 oldUrl: /runtime/manual/advanced/deploying_deno/google_cloud_run/
 ---
 

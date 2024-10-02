@@ -12,10 +12,9 @@ runtime.
 
 ## Basic
 
-- [Hello World](./hello_world.md)
-- [Fetch Data](./fetch_data.md)
-- [Read and Write Files](./read_write_files.md)
-- [Hashbang](./hashbang.md)
+- [Hello World](./hello_world.md) - Run a script and set up a basic Deno project
+- [Fetch and stream data](./fetch_data.md) - Using the built in `fetch` API
+- [Executable scripts](./hashbang.md)
 
 ## Advanced
 
