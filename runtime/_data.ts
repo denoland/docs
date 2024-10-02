@@ -204,9 +204,7 @@ export const sidebar = [
     title: "Tutorials and Examples",
     items: [
       "/runtime/tutorials/hello_world/",
-      "/runtime/tutorials/init_project/",
       "/runtime/tutorials/fetch_data/",
-      "/runtime/tutorials/http_server/",
       "/runtime/tutorials/hashbang/",
       "/runtime/tutorials/cjs_to_esm/",
       "/runtime/tutorials/how_to_with_npm/react/",
@@ -232,11 +230,6 @@ export const sidebar = [
           "/runtime/tutorials/digital_ocean/",
           "/runtime/tutorials/google_cloud_run/",
           "/runtime/tutorials/kinsta/",
-        ],
-      },
-      {
-        label: "npm Module Examples",
-        items: [
           "/runtime/tutorials/how_to_with_npm/apollo/",
           "/runtime/tutorials/how_to_with_npm/express/",
           "/runtime/tutorials/how_to_with_npm/mongoose/",
@@ -245,10 +238,6 @@ export const sidebar = [
           "/runtime/tutorials/how_to_with_npm/prisma/",
           "/runtime/tutorials/how_to_with_npm/redis/",
         ],
-      },
-      {
-        label: "More on Deno by Example",
-        href: "/examples",
       },
     ],
   },
