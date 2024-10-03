@@ -428,7 +428,7 @@ an explicit `--allow-import` flag:
 $ deno run --allow-import=example.com main.ts
 ```
 
-By default Deno allows to import sources from following hosts:
+By default Deno allows importing sources from following hosts:
 
 - `deno.land`
 - `esm.sh`
