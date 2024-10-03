@@ -440,8 +440,8 @@ By default Deno allows to import sources from following hosts:
 
 **Imports are only allowed using HTTPS**
 
-This allow list is applied by default for static imports, and by default if
-`--allow-import` flag is specified.
+This allow list is applied by default for static imports, and by default to
+dynamic imports if the `--allow-import` flag is specified.
 
 ```
 # allow dynamically importing code from `https://deno.land`
