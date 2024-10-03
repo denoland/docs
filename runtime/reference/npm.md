@@ -183,7 +183,7 @@ deno run --node-modules-dir main.ts
 :::caution
 
 Not to be confused with
-[private repositories and modules](/runtime/manual/advanced/private_repositories/).
+[private repositories and modules](/runtime/fundamentals/dependencies/#private-repositories).
 
 :::
 

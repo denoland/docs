@@ -76,7 +76,7 @@ import express from "express";
 const app = express();
 ```
 
-Read more about [module imports](./modules.md)
+Read more about [using dependencies](./dependencies.md)
 
 ### Custom path mappings
 

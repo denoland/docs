@@ -22,8 +22,8 @@ export const sidebar = [
       "/runtime/fundamentals/node/",
       "/runtime/fundamentals/security/",
       {
-        label: "Modules",
-        id: "/runtime/fundamentals/modules/",
+        label: "Dependencies",
+        id: "/runtime/fundamentals/dependencies/",
       },
       "/runtime/fundamentals/configuration/",
       "/runtime/fundamentals/standard_library/",
@@ -175,7 +175,6 @@ export const sidebar = [
         label: "Deno & VS Code",
         id: "/runtime/reference/vscode/",
       },
-      "/runtime/reference/private_repositories/",
       {
         label: "Using JSX and React",
         id: "/runtime/reference/jsx/",
