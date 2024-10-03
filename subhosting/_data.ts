@@ -6,7 +6,7 @@ export const sidebar = [
     items: [
       {
         label: "About Subhosting",
-        id: "/subhosting/manual/about/",
+        id: "/subhosting/manual/",
       },
       {
         label: "Quick start",
