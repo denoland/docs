@@ -1,2 +1,4 @@
 # TODO: we currently don't render the test module
-#  Currently only `test` API is supported.
+status: partial
+description: Currently only `test` API is supported.
+

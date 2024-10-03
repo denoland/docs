@@ -346,7 +346,7 @@ body:not(:has(.ddoc)) {
   @apply text-indigo-500;
 }
 
-.status-stubs {
+.status-unsupported {
   @apply text-red-500;
 }
 
@@ -370,7 +370,7 @@ body:not(:has(.ddoc)) {
   background-repeat: no-repeat;
 }
 
-.markdown-body .module-info.compat-status-stubs > h3::before {
+.markdown-body .module-info.compat-status-unsupported > h3::before {
   content: "";
   display: inline-block;
   width: 1.5rem;
