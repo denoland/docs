@@ -47,7 +47,7 @@ function SidebarSection(
       .toLowerCase();
   const slug = slugify(props.section.title ?? "");
   const categoryTitle = `sidebar-category-${slug}`;
-  const headingLink = props.section.headingLink;
+  const headingLink = props.section.href;
 
   return (
     <li class="mb-4">

@@ -270,7 +270,7 @@ function generateCrumbs(
     if (isSidebarCategory(item)) {
       const newCurrent = [...current, { label: item.label, href: item.href }];
       const result = generateCrumbs(url, title, item.items, newCurrent);
-      if (result.length > newCurrent.length) {
+      if (result.some(crumb => crumb.label === title)) {
         return result;
       }
     }
