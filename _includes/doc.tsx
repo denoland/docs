@@ -545,9 +545,9 @@ function renderCommand(
       {Object.entries(options).map(([heading, flags]) => {
         const id = heading.toLowerCase().replace(/\s/g, "-");
 
-        const renderedFlags = flags.map((flag) =>
-          renderOption(id, flag, helpers)
-        );
+        const renderedFlags = flags.toSorted((a, b) =>
+          a.name.localeCompare(b.name)
+        ).map((flag) => renderOption(id, flag, helpers));
 
         toc.push({
           text: heading,
@@ -606,9 +606,12 @@ function renderOption(group: string, arg, helpers: Lume.Helpers) {
   return (
     <>
       <h3 id={id}>
-        {docsLink
-          ? <a href={docsLink}>{"--" + arg.name}</a>
-          : ("--" + arg.name)} <HeaderAnchor id={id} />
+        <code>
+          {docsLink
+            ? <a href={docsLink}>{"--" + arg.name}</a>
+            : ("--" + arg.name)}
+        </code>{" "}
+        <HeaderAnchor id={id} />
       </h3>
       {arg.short && (
         <p>

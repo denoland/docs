@@ -52,6 +52,10 @@ export const sidebar = [
             id: "/runtime/reference/cli/env_variables/",
           },
           {
+            label: "deno add",
+            id: "/runtime/reference/cli/add/",
+          },
+          {
             label: "deno bench",
             id: "/runtime/reference/cli/benchmarker/",
           },
@@ -114,6 +118,10 @@ export const sidebar = [
           {
             label: "LSP integration",
             id: "/runtime/reference/cli/lsp_integration/",
+          },
+          {
+            label: "deno remove",
+            id: "/runtime/reference/cli/remove/",
           },
           {
             label: "deno repl",
@@ -318,7 +326,7 @@ export async function generateNodeCompatability() {
     keyA.localeCompare(keyB)
   ).map(([key, content]) => {
     let out =
-      `<div class="module-info compat-status-${content.status}">\n\n### [\`node:${key}\`](/api/node/${key})\n\n</div>\n\n`;
+      `<div class="module-info compat-status-${content.status}"><div class="compat-title"><a href="/api/node/${key}">node:${key}</a></div>\n\n`;
 
     if (content) {
       if (content.description) {
@@ -333,6 +341,6 @@ export async function generateNodeCompatability() {
       }
     }
 
-    return out;
+    return out + "</div>";
   }).join("\n\n");
 }
