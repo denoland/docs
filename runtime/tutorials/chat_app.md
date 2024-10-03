@@ -174,37 +174,42 @@ file and add the following code:
 ```html title="index.html"
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Deno Chat App</title>
-    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="/public/style.css" />
     <script defer type="module" src="/public/app.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1>🦕 Deno Chat App</h1>
+      <h1>🦕 Deno Chat App</h1>
     </header>
     <aside>
-        <h2>Users online</h2>
-        <ul id="users"></ul>
+      <h2>Users online</h2>
+      <ul id="users"></ul>
     </aside>
     <main>
-        <div id="conversation"></div>
-        <form id="form">
-            <input type="text" id="data" placeholder="send message" autocomplete="off" />
-            <button type="submit" id="send">Send ᯓ✉︎</button>
-        </form>
+      <div id="conversation"></div>
+      <form id="form">
+        <input
+          type="text"
+          id="data"
+          placeholder="send message"
+          autocomplete="off"
+        />
+        <button type="submit" id="send">Send ᯓ✉︎</button>
+      </form>
     </main>
     <template id="user">
-        <li></li>
+      <li></li>
     </template>
     <template id="message">
-        <div>
-            <span></span>
-            <p></p>
-        </div>
+      <div>
+        <span></span>
+        <p></p>
+      </div>
     </template>
-</body>
+  </body>
 </html>
 ```
 

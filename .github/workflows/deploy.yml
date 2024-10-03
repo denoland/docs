@@ -23,7 +23,7 @@ jobs:
       - name: Set up Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: 92529697807a652b627a7dbd4f5d0c3ad7bacf59
+          deno-version: 91860b34f52e498913e69bef3fc734fdf1ff817c
           deno-binary-name: "deno_doc"
 
       - name: "Reference: install"
@@ -42,7 +42,7 @@ jobs:
         env:
           ORAMA_CLOUD_INDEX_ID: ${{ vars.ORAMA_CLOUD_INDEX_ID }}
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
-        run: deno task build
+        run: DENO_FUTURE=1 deno task build
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1

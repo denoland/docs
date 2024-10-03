@@ -213,28 +213,6 @@ on the `Deno` namespace.
 Enabling this flag makes [Deno KV](/deploy/kv/manual) APIs available in the
 `Deno` namespace.
 
-## `--unstable-ffi`
-
-Enable unstable FFI APIs -
-[learn more about FFI](/runtime/reference/deno_namespace_apis/#ffi).
-
-## `--unstable-fs`
-
-Enable unstable file system APIs in the `Deno` namespace. These APIs include:
-
-- [`Deno.flock`](https://docs.deno.com/api/deno/~/Deno.flock)
-- [`Deno.flockSync`](https://docs.deno.com/api/deno/~/Deno.flockSync)
-- [`Deno.funlock`](https://docs.deno.com/api/deno/~/Deno.funlock)
-- [`Deno.funlockSync`](https://docs.deno.com/api/deno/~/Deno.funlockSync)
-- [`Deno.umask`](https://docs.deno.com/api/deno/~/Deno.umask)
-
-## `--unstable-http`
-
-Enable unstable HTTP APIs in the `Deno` namespace. These APIs include:
-
-- [`Deno.HttpClient`](https://deno.land/api?unstable=&s=Deno.HttpClient)
-- [`Deno.createHttpClient`](https://deno.land/api?unstable=&s=Deno.createHttpClient)
-
 ## `--unstable-net`
 
 Enable unstable net APIs in the `Deno` namespace. These APIs include:

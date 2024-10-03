@@ -1,12 +1,12 @@
 ---
-title: "Private Modules and Repositories"
+title: "Private modules and repositories"
 oldUrl: /runtime/manual/advanced/private_repositories/
 ---
 
 :::note
 
-Not to be confused with
-[private npm registries](/runtime/reference/npm/#private_registries).
+If you're looking for private npm registries and `.npmrc` support,
+[visit `Using npm packages` page](/runtime/reference/npm/#private-registries).
 
 :::
 

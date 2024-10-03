@@ -1,5 +1,5 @@
 ---
-title: "Workspaces and Monorepos"
+title: "Workspaces and monorepos"
 oldUrl: /runtime/manual/basics/workspaces
 ---
 

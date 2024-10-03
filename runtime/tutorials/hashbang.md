@@ -1,5 +1,5 @@
 ---
-title: "Executable Scripts"
+title: "Executable scripts"
 oldUrl:
   - /runtime/manual/examples/hashbang/
 ---

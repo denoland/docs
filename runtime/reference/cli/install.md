@@ -6,30 +6,12 @@ oldUrl:
  - /runtime/manual/tools/script_installer/
  - /runtime/manual/tools/cache/
  - /runtime/reference/cli/cache/
+command: install
 ---
 
-`deno install` is a tool that allows you to install remote dependencies to use
-in your project or as executables available on your machine.
+## Examples
 
-There are four ways to use `deno install`:
-
-- `deno install` - install all dependencies specified in `deno.json` and
-  `package.json`
-- `deno install [PACKAGES]` - install and add specified dependencies to
-  `deno.json` or `package.json`
-- `deno install --entrypoint [FILES]` - install all remote dependencies
-  discovered from the provided files
-- `deno install --global [PACKAGE_OR_URL]` - install a dependency as an
-  executable program on your machine
-
-:::info
-
-`deno install` works in similar manner to other package managers like `npm`,
-`yarn`, `pnpm` or `bun`.
-
-:::
-
-## deno install
+### deno install
 
 Use this command to install all dependencies defined in `deno.json` and/or
 `package.json`.
@@ -37,7 +19,7 @@ Use this command to install all dependencies defined in `deno.json` and/or
 The dependencies will be installed in the global cache, but if your project has
 a `package.json` file, a local `node_modules` directory will be set up as well.
 
-## deno install [PACKAGES]
+### deno install [PACKAGES]
 
 Use this command to install particular packages and add them to `deno.json` or
 `package.json`.
@@ -56,7 +38,7 @@ If your project has a `package.json` file, the packages coming from npm will be
 added to `dependencies` in `package.json`. Otherwise all packages will be added
 to `deno.json`.
 
-## deno install --entrypoint [FILES]
+### deno install --entrypoint [FILES]
 
 Use this command to install all depenedencies that are used in the provided
 files and their dependencies.
@@ -86,7 +68,7 @@ directory.
 
 :::
 
-## deno install --global [PACKAGE_OR_URL]
+### deno install --global [PACKAGE_OR_URL]
 
 Use this command to install provide package or script as a globally available
 binary on your system.
@@ -173,6 +155,28 @@ example installation command to your repository:
 
 $ deno install -n awesome_cli https://example.com/awesome/cli.ts
 ```
+
+## Native Node.js addons
+
+A lot of popular packages npm packages like
+[`npm:sqlite3`](https://www.npmjs.com/package/sqlite3) or
+[`npm:duckdb`](https://www.npmjs.com/package/duckdb) depend on
+["lifecycle scripts"](https://docs.npmjs.com/cli/v10/using-npm/scripts#life-cycle-scripts),
+eg. `preinstall` or `postinstall` scripts. Most often running these scripts is
+required for a package to work correctly.
+
+Unlike npm, Deno does not run these scripts by default as they pose a potential
+security vulnerability.
+
+You can still run these scripts by passing the `--allow-scripts=<packages>` flag
+when running `deno install`:
+
+```shell
+deno install --allow-scripts=npm:sqlite3
+```
+
+_Install all dependencies and allow `npm:sqlite3` package to run its lifecycle
+scripts_.
 
 ## Uninstall
 

@@ -1,3 +1,4 @@
+status: partial
 description: |
   `cachedDataVersionTag` and `getHeapStatistics` are supported. 
   `setFlagsFromStrings` is a noop.

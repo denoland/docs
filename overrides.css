@@ -4,6 +4,10 @@
   @apply max-w-[75ch] !important;
 }
 
+.ddoc .namespaceSection {
+  display: block !important;
+}
+
 /* Align content with the top of the TOC now that it has no header */
 
 #content {
@@ -33,7 +37,8 @@
 }
 
 .ddoc .usageContent {
-  @apply bg-primary/5 border-primary/25 max-w-[75ch] py-4 mt-6 relative !important;
+  @apply bg-primary/5 border-primary/25 max-w-[75ch] py-4 mt-6 relative
+    !important;
 }
 
 /* Adjust spacing for ref pages that don't have a header above usage */
@@ -46,7 +51,8 @@
 }
 
 .ddoc .usageContent > h3 {
-  @apply text-xs -top-2.5 bg-white border border-primary/25 px-2 py-0.5 rounded absolute !important;
+  @apply text-xs -top-2.5 bg-white border border-primary/25 px-2 py-0.5 rounded
+    absolute !important;
 }
 
 .ddoc .usageContent > .markdown {

@@ -1,5 +1,5 @@
 ---
-title: "Debugging Your Code"
+title: "Debugging your code"
 oldUrl:
 - /runtime/manual/getting_started/debugging_your_code/
 - /runtime/manual/basics/debugging_your_code/

@@ -1,5 +1,5 @@
 ---
-title: Command Line Interface
+title: Command line interface
 oldUrl:
  - /manual/getting_started/command_line_interface
  - /runtime/manual/getting_started/command_line_interface/

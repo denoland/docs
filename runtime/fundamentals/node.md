@@ -14,6 +14,7 @@ oldUrl:
 - /runtime/manual/references/cheatsheet/
 - /runtime/manual/node/cheatsheet/
 - /runtime/manual/node/faqs
+templateEngine: [vto, md]
 ---
 
 Modern Node.js projects will run in Deno with little to no reworking required.
@@ -281,6 +282,33 @@ subclasses instead.
 - `__filename` - use `import.meta.filename` instead.
 
 - `__dirname` - use `import.meta.dirname` instead.
+
+## Node-API addons
+
+Deno supports [Node-API addons](https://nodejs.org/api/n-api.html) that are used
+by popular npm packages like [`esbuild`](https://www.npmjs.com/package/esbuild),
+[`npm:sqlite3`](https://www.npmjs.com/package/sqlite3) or
+[`npm:duckdb`](https://www.npmjs.com/package/duckdb).
+
+You can expect all packages that use public and documented Node-APIs to work.
+
+:::info
+
+Most packages using Node-API addons rely on npm "lifecycle scripts", like
+`postinstall`.
+
+While Deno supports them, they are not run by default due to security
+considerations. Read more in
+[`deno install` docs](/runtime/reference/cli/install/).
+
+:::
+
+As of Deno 2.0, npm packages using Node-API addons **are only supported when a
+`node_modules/` directory is present**. Add `"nodeModulesDir": "auto"` or
+`"nodeModulesDir": "manual"` setting your `deno.json` file, or run with
+`--node-modules-dir=auto|manual` flag to ensure these packages work correctly.
+In case of misconfiguration Deno will provide hints how the situation can be
+resolved.
 
 ## Runtime permissions in Deno
 
@@ -552,339 +580,14 @@ which modules you need by
     </svg>
     = Partial support</div>
   <div>
-    <svg class="status-icon status-stubs" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+    <svg class="status-icon status-unsupported" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
       <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
     </svg>
-     = Stubs only
+     = Stubs only or unsupported
   </div>
 </div>
 
-<div class="module-info compat-status-good">
-
-### [`node:assert`](https://docs.deno.com/api/node/assert/)
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:async_hooks`](https://docs.deno.com/api/node/async_hooks/)
-
-`AsyncLocalStorage` is supported. `AsyncResource`, `executionAsyncId`, and
-`createHook` are non-functional stubs.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:buffer`](https://docs.deno.com/api/node/buffer/)
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:child_process`](https://docs.deno.com/api/node/child_process/)
-
-</div>
-
-<div class="module-info compat-status-stubs">
-
-### [`node:cluster`](https://docs.deno.com/api/node/cluster/)
-
-All exports are non-functional stubs.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:console`](https://docs.deno.com/api/node/console/)
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:crypto`](https://docs.deno.com/api/node/crypto/)
-
-Missing `Certificate` class, `crypto.Cipheriv.prototype.setAutoPadding`,
-`crypto.Decipheriv.prototype.setAutoPadding`, `crypto.publicDecrypt`,
-`crypto.ECDH.prototype.convertKey`, `x448` option for `generateKeyPair`,
-`crypto.KeyObject`, `safe`, `add` and `rem` options for `generatePrime`,
-`crypto.Sign.prototype.sign` and `crypto.Verify.prototype.verify` with non
-`BinaryLike` input, `crypto.secureHeapUsed`, `crypto.setEngine`, legacy methods
-of `crypto.X509Certificate`.
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:dgram`](https://docs.deno.com/api/node/dgram/)
-
-Some `dgram.Socket` instance methods are non-functional stubs:
-
-- `addMembership`
-- `addSourceSpecificMembership`
-- `dropMembership`
-- `dropSourceSpecificMembership`
-- `setBroadcast`
-- `setMulticastInterface`
-- `setMulticastLoopback`
-- `setMulticastTtl`
-- `setTtl`
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:diagnostics_channel`](https://docs.deno.com/api/node/diagnostics_channel/)
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:dns`](https://docs.deno.com/api/node/dns/)
-
-Missing `dns.resolve*` with `ttl` option.
-
-</div>
-
-<div class="module-info compat-status-stubs">
-
-### [`node:domain`](https://docs.deno.com/api/node/domain/)
-
-All exports are non-functional stubs. This is a deprecated Node module.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:events`](https://docs.deno.com/api/node/events/)
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:fs`](https://docs.deno.com/api/node/fs/)
-
-`node:fs` Missing `utf16le`, `latin1` and `ucs2` encoding for `fs.writeFile` and
-`fs.writeFileSync`.
-
-`node:fs/promises` Missing `lchmod`.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:http`](https://docs.deno.com/api/node/http/)
-
-`createConnection` option is currently not supported.
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:http2`](https://docs.deno.com/api/node/http2/)
-
-Partially supported, major work in progress to enable `grpc-js`.
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:https`](https://docs.deno.com/api/node/https/)
-
-Missing `https.Server.opts.cert` and `https.Server.opts.key` array type.
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:inspector`](https://docs.deno.com/api/node/inspector/)
-
-`console` is supported. Other APIs are stubs and will throw an error.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:module`](https://docs.deno.com/api/node/module/)
-
-The `register()` function is not supported.
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:net`](https://docs.deno.com/api/node/net/)
-
-Missing `net.Socket.prototype.constructor` with `fd` option.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:os`](https://docs.deno.com/api/node/os/)
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:path`](https://docs.deno.com/api/node/path/)
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:perf_hooks`](https://docs.deno.com/api/node/perf_hooks/)
-
-Missing `perf_hooks.eventLoopUtilization`, `perf_hooks.timerify`,
-`perf_hooks.monitorEventLoopDelay`.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:punycode`](https://docs.deno.com/api/node/punycode/)
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:process`](https://docs.deno.com/api/node/process/)
-
-Missing `multipleResolves`, `worker` events.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:querystring`](https://docs.deno.com/api/node/querystring/)
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:readline`](https://docs.deno.com/api/node/readline/)
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:repl`](https://docs.deno.com/api/node/repl/)
-
-`builtinModules` and `_builtinLibs` are supported. Missing
-`REPLServer.prototype.constructor` and `start()`.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:stream`](https://docs.deno.com/api/node/stream/)
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:string_decoder`](https://docs.deno.com/api/node/string_decoder/)
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:sys`](https://docs.deno.com/api/node/util/)
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:test`](https://nodejs.org/api/test.html)
-
-Currently only `test` API is supported.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:timers`](https://docs.deno.com/api/node/timers/promises/)
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:tls`](https://docs.deno.com/api/node/tls/)
-
-Missing `createSecurePair`.
-
-</div>
-
-<div class="module-info compat-status-stubs">
-
-### [`node:trace_events`](https://docs.deno.com/api/node/trace_events/)
-
-All exports are non-functional stubs.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:tty`](https://docs.deno.com/api/node/tty/)
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:util`](https://docs.deno.com/api/node/util/)
-
-Missing `aborted`, `transferableAbortSignal`, `transferableAbortController`,
-`MIMEParams`, `MIMEType` and `getSystemErrorMap`.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:url`](https://docs.deno.com/api/node/url/)
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:v8`](https://docs.deno.com/api/node/v8/)
-
-`cachedDataVersionTag` and `getHeapStatistics` are supported.
-`setFlagsFromStrings` is a noop. Other APIs are not supported and will throw an
-error.
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:vm`](https://docs.deno.com/api/node/vm/)
-
-Partial support.
-
-</div>
-
-<div class="module-info compat-status-stubs">
-
-### [`node:wasi`](https://docs.deno.com/api/node/wasi/)
-
-All exports are non-functional stubs.
-
-</div>
-
-<div class="module-info compat-status-partial">
-
-### [`node:worker_threads`](https://docs.deno.com/api/node/worker_threads/)
-
-Missing `parentPort.emit`, `parentPort.removeAllListeners`,
-`markAsUntransferable`, `moveMessagePortToContext`, `receiveMessageOnPort`,
-`Worker.prototype.getHeapSnapshot`.
-
-</div>
-
-<div class="module-info compat-status-good">
-
-### [`node:zlib`](https://docs.deno.com/api/node/zlib/~/Zlib)
-
-</div>
+{{ await generateNodeCompatability() }}
 
 ## Globals
 

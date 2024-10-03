@@ -4,24 +4,8 @@ oldUrl:
  - /runtime/tools/linter/
  - /runtime/fundamentals/linting_and_formatting/lint-cli-ref
  - /runtime/manual/tools/linter/
+command: lint
 ---
-
-Deno ships with a built-in code linter for JavaScript and TypeScript.
-
-```shell
-# lint all JS/TS files in the current directory and subdirectories
-deno lint
-# lint specific files
-deno lint myfile1.ts myfile2.ts
-# lint all JS/TS files in specified directory and subdirectories
-deno lint src/
-# print result as JSON
-deno lint --json
-# read from stdin
-cat file.ts | deno lint -
-```
-
-For more detail, run `deno lint --help`.
 
 ## Available rules
 
@@ -107,19 +91,3 @@ function foo(): any {
   // ...
 }
 ```
-
-## Configuration
-
-Starting with Deno v1.14, the linter can be customized using either
-[a configuration file](/runtime/fundamentals/configuration/#linting) or the
-following CLI flags:
-
-- `--rules-tags` - List of rule names that will be run. Empty list disables all
-  rules and will only use rules from `rules-include`. Defaults to "recommended".
-
-- `--rules-exclude` - List of rule names that will be excluded from configured
-  rule sets. Even if the same rule is in `include`, it will be excluded; in
-  other words, `--rules-exclude` has higher precedence over `--rules-include`.
-
-- `--rules-include` - List of rule names that will be run. If the same rule is
-  in `rules-exclude`, it will be excluded.

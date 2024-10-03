@@ -1,5 +1,5 @@
 ---
-title: "Web Development"
+title: "Web development"
 oldUrl:
  - /runtime/manual/getting_started/web_frameworks/
  - /runtime/fundamentals/web_frameworks/

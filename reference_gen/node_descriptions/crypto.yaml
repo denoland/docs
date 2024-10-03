@@ -1,3 +1,4 @@
+status: good
 symbols:
   Certificate: The methods are non-functional stubs.
   generateKeyPair: The `x448` option is not supported.

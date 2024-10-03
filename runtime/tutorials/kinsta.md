@@ -1,5 +1,5 @@
 ---
-title: "How to Deploy Deno on Kinsta"
+title: "How to deploy Deno on Kinsta"
 oldUrl: /runtime/manual/advanced/deploying_deno/kinsta/
 ---
 

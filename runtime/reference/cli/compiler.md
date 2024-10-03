@@ -1,25 +1,8 @@
 ---
 title: "`deno compile`, standalone executables"
 oldUrl: /runtime/manual/tools/compiler/
+command: compile
 ---
-
-`deno compile` allows you to create self-contained executables from a TypeScript
-or JavaScript file.
-
-This feature allows distribution of a Deno application to systems that do not
-have Deno installed. Under the hood, `deno compile` bundles a slimmed down
-version of the Deno runtime along with your JavaScript or TypeScript code.
-
-```sh
-deno compile --allow-read --allow-net jsr:@std/http@1.0.0/file-server
-```
-
-```sh
-deno compile --output ./game game.tsx
-```
-
-If you omit the `--output` flag, the name of the executable file will be
-inferred from the package or script name.
 
 ## Flags
 

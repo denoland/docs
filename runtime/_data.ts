@@ -1,4 +1,6 @@
 import { Sidebar } from "../types.ts";
+import { walk } from "jsr:@std/fs";
+import { parse as yamlParse } from "jsr:@std/yaml";
 
 export const sidebar = [
   {
@@ -91,7 +93,7 @@ export const sidebar = [
           },
           {
             label: "deno install",
-            id: "/runtime/reference/cli/script_installer/",
+            id: "/runtime/reference/cli/install/",
           },
           {
             label: "deno jupyter",
@@ -179,7 +181,7 @@ export const sidebar = [
         id: "/runtime/reference/documentation/",
       },
       "/runtime/reference/wasm/",
-      "/runtime/reference/migrate_deprecations/",
+      "/runtime/reference/migration_guide/",
     ],
   },
   {
@@ -204,9 +206,7 @@ export const sidebar = [
     title: "Tutorials and Examples",
     items: [
       "/runtime/tutorials/hello_world/",
-      "/runtime/tutorials/init_project/",
       "/runtime/tutorials/fetch_data/",
-      "/runtime/tutorials/http_server/",
       "/runtime/tutorials/hashbang/",
       "/runtime/tutorials/cjs_to_esm/",
       "/runtime/tutorials/how_to_with_npm/react/",
@@ -214,13 +214,8 @@ export const sidebar = [
       "/runtime/tutorials/how_to_with_npm/vue/",
       "/runtime/tutorials/connecting_to_databases/",
       {
-        label: "Advanced Examples",
+        label: "More tutorials",
         items: [
-          "/runtime/tutorials/file_server/",
-          {
-            label: "Unix cat",
-            id: "/examples/unix-cat/",
-          },
           "/runtime/tutorials/file_server/",
           "/runtime/tutorials/subprocess/",
           "/runtime/tutorials/os_signals/",
@@ -232,11 +227,6 @@ export const sidebar = [
           "/runtime/tutorials/digital_ocean/",
           "/runtime/tutorials/google_cloud_run/",
           "/runtime/tutorials/kinsta/",
-        ],
-      },
-      {
-        label: "npm Module Examples",
-        items: [
           "/runtime/tutorials/how_to_with_npm/apollo/",
           "/runtime/tutorials/how_to_with_npm/express/",
           "/runtime/tutorials/how_to_with_npm/mongoose/",
@@ -246,13 +236,103 @@ export const sidebar = [
           "/runtime/tutorials/how_to_with_npm/redis/",
         ],
       },
-      {
-        label: "More on Deno by Example",
-        href: "/examples",
-      },
     ],
   },
 ] satisfies Sidebar;
 
 export const sectionTitle = "Runtime";
 export const sectionHref = "/runtime/";
+
+export interface Description {
+  kind: "NOTE" | "TIP" | "IMPORTANT" | "WARNING" | "CAUTION";
+  description: string;
+}
+function handleDescription(description: Description | string): Description {
+  if (typeof description === "string") {
+    return {
+      kind: "WARNING",
+      description,
+    };
+  } else {
+    return description;
+  }
+}
+
+export type Descriptions = Record<
+  string,
+  {
+    status: "good" | "partial" | "stubs" | "unsupported";
+    description?: Description;
+    symbols?: Record<string, Description>;
+  }
+>;
+
+export async function generateDescriptions(): Promise<Descriptions> {
+  const descriptions: Descriptions = {};
+  for await (
+    const dirEntry of walk(
+      new URL(import.meta.resolve("../reference_gen/node_descriptions")),
+      { exts: ["yaml"] },
+    )
+  ) {
+    const file = await Deno.readTextFile(dirEntry.path);
+    const parsed = yamlParse(file);
+    if (!parsed) {
+      throw `Invalid or empty file: ${dirEntry.path}`;
+    }
+    if (parsed.description) {
+      parsed.description = handleDescription(parsed.description);
+    }
+
+    if (parsed.symbols) {
+      parsed.symbols = Object.fromEntries(
+        Object.entries(parsed.symbols).map((
+          [key, value],
+        ) => [key, handleDescription(value)]),
+      );
+    }
+
+    if (
+      !(parsed.status === "good" || parsed.status === "partial" ||
+        parsed.status === "stubs" || parsed.status === "unsupported")
+    ) {
+      throw `Invalid status provided in '${dirEntry.name}': ${parsed.status}`;
+    }
+
+    descriptions[dirEntry.name.slice(0, -5)] = parsed;
+  }
+
+  return descriptions;
+}
+
+/*
+generates the node compat list for the Node Support page.
+This the data is read from the files in the reference_gen/node_description directory.
+This function is called in node.md through the templating engine Vento,
+after which the normal markdown rendered is called.
+ */
+export async function generateNodeCompatability() {
+  const descriptions = await generateDescriptions();
+
+  return Object.entries(descriptions).sort(([keyA], [keyB]) =>
+    keyA.localeCompare(keyB)
+  ).map(([key, content]) => {
+    let out =
+      `<div class="module-info compat-status-${content.status}">\n\n### [\`node:${key}\`](/api/node/${key})\n\n</div>\n\n`;
+
+    if (content) {
+      if (content.description) {
+        out += `${content.description.description}\n\n`;
+      }
+      if (content.symbols) {
+        for (const [symbol, description] of Object.entries(content.symbols)) {
+          out += `**${
+            symbol === "*" ? "All symbols" : symbol
+          }**: ${description.description}<br />`;
+        }
+      }
+    }
+
+    return out;
+  }).join("\n\n");
+}

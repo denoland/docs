@@ -11,4 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v1
+        with:
+          deno-version: rc
+
       - run: deno fmt --check

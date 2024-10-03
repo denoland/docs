@@ -1,5 +1,5 @@
 ---
-title: "Set Up Your Environment"
+title: "Set up your environment"
 oldUrl: /runtime/manual/getting_started/setup_your_environment/
 ---
 

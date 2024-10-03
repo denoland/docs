@@ -1,16 +1,10 @@
 ---
 title: "`deno init`, start a new project"
 oldUrl: /runtime/manual/tools/init/
+command: init
 ---
 
-Starting a new project with Deno has always been incredibly simple: you just
-need a single file to get going. No need for any configuration files, dependency
-manifests, or build scripts.
-
-Users coming from other ecosystems are often not used to this simplicity - they
-often look for a tool to scaffold out a basic project structure to get them
-started on the right path. `deno init` subcommand scaffolds a basic Deno
-project.
+## Examples
 
 ```sh
 $ deno init

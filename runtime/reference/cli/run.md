@@ -1,9 +1,8 @@
 ---
 title: "`deno run`, run a file"
 oldUrl: /runtime/manual/tools/run/
+command: run
 ---
-
-`deno run [OPTIONS] [SCRIPT_ARG]` run a JavaScript or TypeScript file.
 
 ## Usage
 

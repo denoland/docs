@@ -1,5 +1,5 @@
 ---
-title: "Module Metadata"
+title: "Module metadata"
 oldUrl:
   - /runtime/manual/examples/module_metadata/
 ---
