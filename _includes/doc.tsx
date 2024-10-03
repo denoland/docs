@@ -5,6 +5,10 @@ import {
   SidebarItem,
   SidebarLink as SidebarLink_,
   TableOfContentsItem as TableOfContentsItem_,
+  isSidebarCategory,
+  isSidebarDoc,
+  isSidebarLink,
+  BreadcrumbItem,
 } from "../types.ts";
 import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
   type: "json",
@@ -247,35 +251,50 @@ function NavigationButton(props: {
   );
 }
 
+
+function generateCrumbs(url: string, title: string, items: SidebarItem[], current: BreadcrumbItem[] = []): BreadcrumbItem[] {
+
+  for (const item of items) {
+    const foundTargetPage = (typeof item == "string" && item === url) || (isSidebarDoc(item) && item.id === url) || (isSidebarLink(item) && item.href === url);
+    
+    if (foundTargetPage) {
+      current.push({ label: title });
+      return current;
+    }
+
+    if (isSidebarCategory(item)) {  
+      current.push({ label: item.label });
+      return generateCrumbs(url, title, item.items, current);
+    }
+  }
+
+  return [];
+}
+
+
 function Breadcrumbs(props: {
   title: string;
   sidebar: Sidebar_;
   url: string;
   sectionTitle: string;
   sectionHref: string;
-}) {
-  const crumbs = [];
-  outer: for (const section of props.sidebar) {
-    for (const item of section.items) {
-      if (typeof item === "string") {
-        if (item === props.url) break outer;
-      } else if ("items" in item) {
-        crumbs.push(item.label);
-        for (const subitem of item.items) {
-          if (typeof subitem === "string") {
-            if (subitem === props.url) break outer;
-          } else if (subitem.id === props.url) {
-            break outer;
-          }
-        }
-        crumbs.pop();
-      } else if ("id" in item && item.id === props.url) {
-        break outer;
-      }
+}) {  
+  const crumbs: BreadcrumbItem[] = [];
+
+  for (const section of props.sidebar) {
+    if (section.headingLink === props.url) {
+      crumbs.push({ label: props.title });
+      break;
+    }
+
+    const rootItem = { label: section.title, href: section.headingLink };
+    const potentialCrumbs = generateCrumbs(props.url, props.title, section.items, [ rootItem ]);
+    
+    if (potentialCrumbs.length > 1) {
+      crumbs.push(...potentialCrumbs);
+      break;
     }
   }
-
-  crumbs.push(props.title);
 
   return (
     <nav class="mb-4">
@@ -314,7 +333,7 @@ function Breadcrumbs(props: {
               itemtype="https://schema.org/ListItem"
             >
               <span itemprop="item">
-                <span itemprop="name">{crumb}</span>
+                {crumb.href ? (<a href={crumb.href} itemprop="item">{crumb.label}</a>) : <span itemprop="name">{crumb.label}</span>}
                 <meta itemprop="position" content={String(i + 2)} />
               </span>
             </li>
