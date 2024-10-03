@@ -5,6 +5,7 @@ import { parse as yamlParse } from "jsr:@std/yaml";
 export const sidebar = [
   {
     title: "Getting Started",
+    headingLink: "/runtime/",
     items: [
       "/runtime/getting_started/first_project/",
       "/runtime/getting_started/setup_your_environment/",
@@ -13,6 +14,7 @@ export const sidebar = [
   },
   {
     title: "Fundamentals",
+    headingLink: "/runtime/fundamentals/",
     items: [
       "/runtime/fundamentals/typescript/",
       "/runtime/fundamentals/node/",
@@ -38,6 +40,7 @@ export const sidebar = [
   },
   {
     title: "Reference Guides",
+    headingLink: "/runtime/reference/",
     items: [
       {
         label: "Deno CLI",
@@ -199,6 +202,7 @@ export const sidebar = [
   },
   {
     title: "Tutorials and Examples",
+    headingLink: "/runtime/tutorials/",
     items: [
       "/runtime/tutorials/hello_world/",
       "/runtime/tutorials/fetch_data/",
@@ -237,7 +241,6 @@ export const sidebar = [
 
 export const sectionTitle = "Runtime";
 export const sectionHref = "/runtime/";
-export const headerPath = "/runtime/";
 
 export interface Description {
   kind: "NOTE" | "TIP" | "IMPORTANT" | "WARNING" | "CAUTION";

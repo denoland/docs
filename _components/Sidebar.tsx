@@ -6,7 +6,6 @@ import {
   SidebarLink as SidebarLink_,
   SidebarSection as SidebarSection_,
 } from "../types.ts";
-import { sectionHref } from "../deploy/_data.ts";
 
 export default function Sidebar(
   props: {
@@ -27,7 +26,6 @@ export default function Sidebar(
             section={section}
             search={props.search}
             url={props.url}
-            headerPath={props.headerPath}
           />
         ))}
       </ul>
@@ -49,14 +47,14 @@ function SidebarSection(
       .toLowerCase();
   const slug = slugify(props.section.title ?? "");
   const categoryTitle = `sidebar-category-${slug}`;
-  const headerHref = props.headerPath + slug;
+  const headingLink = props.section.headingLink;
 
   return (
     <li class="mb-4">
       {props.section.title && (
-        props.headerPath
+        headingLink
           ? (
-            <a href={headerHref}>
+            <a href={headingLink}>
               <h2
                 id={categoryTitle}
                 class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3"

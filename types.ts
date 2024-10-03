@@ -4,6 +4,7 @@ export type Path = string;
 
 export interface SidebarSection {
   title: string;
+  headingLink?: string;
   items: SidebarItem[];
 }
 
