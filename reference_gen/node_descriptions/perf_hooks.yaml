@@ -1,3 +1,4 @@
+status: partial
 symbols:
   performance: |
     The `eventLoopUtilization` method is a non-functional stub.
