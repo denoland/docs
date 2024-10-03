@@ -4,8 +4,8 @@ import { parse as yamlParse } from "jsr:@std/yaml";
 
 export const sidebar = [
   {
-    title: "Getting Started",
-    headingLink: "/runtime/",
+    title: "Getting started",
+    href: "/runtime/",
     items: [
       "/runtime/getting_started/first_project/",
       "/runtime/getting_started/setup_your_environment/",
@@ -14,7 +14,7 @@ export const sidebar = [
   },
   {
     title: "Fundamentals",
-    headingLink: "/runtime/fundamentals/",
+    href: "/runtime/fundamentals/",
     items: [
       "/runtime/fundamentals/typescript/",
       "/runtime/fundamentals/node/",
@@ -39,15 +39,16 @@ export const sidebar = [
     ],
   },
   {
-    title: "Reference Guides",
-    headingLink: "/runtime/reference/",
+    title: "Reference guides",
+    href: "/runtime/reference/",
     items: [
       {
         label: "Deno CLI",
+        href: "/runtime/reference/cli/",
         items: [
           "/runtime/reference/cli/unstable_flags/",
           {
-            label: "Environment Variables",
+            label: "Environment variables",
             id: "/runtime/reference/cli/env_variables/",
           },
           {
@@ -151,6 +152,7 @@ export const sidebar = [
       {
         label: "Deno APIs",
         id: "/runtime/reference/deno_namespace_apis/",
+
       },
       {
         label: "Web APIs",
@@ -184,7 +186,7 @@ export const sidebar = [
     ],
   },
   {
-    title: "Contributing and Support",
+    title: "Contributing and support",
     items: [
       {
         label: "Contributing to Deno",
@@ -201,8 +203,8 @@ export const sidebar = [
     ],
   },
   {
-    title: "Tutorials and Examples",
-    headingLink: "/runtime/tutorials/",
+    title: "Tutorials",
+    href: "/runtime/tutorials/",
     items: [
       "/runtime/tutorials/hello_world/",
       "/runtime/tutorials/fetch_data/",

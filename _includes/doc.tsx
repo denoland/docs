@@ -1,14 +1,14 @@
 import Searcher from "lume/core/searcher.ts";
 import {
+  BreadcrumbItem,
+  isSidebarCategory,
+  isSidebarDoc,
+  isSidebarLink,
   Sidebar as Sidebar_,
   SidebarDoc as SidebarDoc_,
   SidebarItem,
   SidebarLink as SidebarLink_,
   TableOfContentsItem as TableOfContentsItem_,
-  isSidebarCategory,
-  isSidebarDoc,
-  isSidebarLink,
-  BreadcrumbItem,
 } from "../types.ts";
 import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
   type: "json",
@@ -251,26 +251,33 @@ function NavigationButton(props: {
   );
 }
 
-
-function generateCrumbs(url: string, title: string, items: SidebarItem[], current: BreadcrumbItem[] = []): BreadcrumbItem[] {
-
+function generateCrumbs(
+  url: string,
+  title: string,
+  items: SidebarItem[],
+  current: BreadcrumbItem[] = [],
+): BreadcrumbItem[] {
   for (const item of items) {
-    const foundTargetPage = (typeof item == "string" && item === url) || (isSidebarDoc(item) && item.id === url) || (isSidebarLink(item) && item.href === url);
-    
+    const foundTargetPage = (typeof item === "string" && item === url) ||
+      (isSidebarDoc(item) && item.id === url) ||
+      (isSidebarLink(item) && item.href === url);
+
     if (foundTargetPage) {
       current.push({ label: title });
       return current;
     }
 
-    if (isSidebarCategory(item)) {  
-      current.push({ label: item.label });
-      return generateCrumbs(url, title, item.items, current);
+    if (isSidebarCategory(item)) {
+      const newCurrent = [...current, { label: item.label, href: item.href }];
+      const result = generateCrumbs(url, title, item.items, newCurrent);
+      if (result.length > newCurrent.length) {
+        return result;
+      }
     }
   }
 
-  return [];
+  return current;
 }
-
 
 function Breadcrumbs(props: {
   title: string;
@@ -278,18 +285,23 @@ function Breadcrumbs(props: {
   url: string;
   sectionTitle: string;
   sectionHref: string;
-}) {  
+}) {
   const crumbs: BreadcrumbItem[] = [];
 
   for (const section of props.sidebar) {
-    if (section.headingLink === props.url) {
+    if (section.href === props.url) {
       crumbs.push({ label: props.title });
       break;
     }
 
-    const rootItem = { label: section.title, href: section.headingLink };
-    const potentialCrumbs = generateCrumbs(props.url, props.title, section.items, [ rootItem ]);
-    
+    const rootItem = { label: section.title, href: section.href };
+    const potentialCrumbs = generateCrumbs(
+      props.url,
+      props.title,
+      section.items,
+      [rootItem],
+    );
+
     if (potentialCrumbs.length > 1) {
       crumbs.push(...potentialCrumbs);
       break;
@@ -299,56 +311,70 @@ function Breadcrumbs(props: {
   return (
     <nav class="mb-4">
       <ul
-        class="flex flex-wrap text-gray-700 items-center"
+        class="flex flex-wrap text-gray-700 items-center -ml-3"
         itemscope
         itemtype="https://schema.org/BreadcrumbList"
       >
         <li
-          class="-ml-3 px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 rounded transition duration-100"
           itemprop="itemListElement"
           itemscope
           itemtype="https://schema.org/ListItem"
         >
-          <a itemprop="item" href={props.sectionHref}>
+          <a
+            class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 rounded transition duration-100 text-sm"
+            itemprop="item"
+            href={props.sectionHref}
+          >
             <span itemprop="name">{props.sectionTitle}</span>
           </a>
           <meta itemprop="position" content="1" />
         </li>
-        <svg
-          class="size-4 rotate-90"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="rgba(0,0,0,0.5)"
-            d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-          />
-        </svg>
+        <li>
+          <svg
+            class="size-4 rotate-90"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="rgba(0,0,0,0.5)"
+              d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+            />
+          </svg>
+        </li>
         {crumbs.map((crumb, i) => (
           <>
             <li
-              class="px-2.5 py-1.5"
               itemprop="itemListElement"
               itemscope
               itemtype="https://schema.org/ListItem"
             >
-              <span itemprop="item">
-                {crumb.href ? (<a href={crumb.href} itemprop="item">{crumb.label}</a>) : <span itemprop="name">{crumb.label}</span>}
-                <meta itemprop="position" content={String(i + 2)} />
-              </span>
+              {crumb.href
+                ? (
+                  <a
+                    href={crumb.href}
+                    itemprop="item"
+                    class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 rounded transition duration-100 text-sm"
+                  >
+                    {crumb.label}
+                  </a>
+                )
+                : <span itemprop="name" class="block px-3 py-1.5 text-sm">{crumb.label}</span>}
+              <meta itemprop="position" content={String(i + 2)} />
             </li>
             {i < crumbs.length - 1 && (
-              <svg
-                class="size-4 rotate-90"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="rgba(0,0,0,0.5)"
-                  d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+              <li>
+                <svg
+                  class="size-4 rotate-90"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
                 >
-                </path>
-              </svg>
+                  <path
+                    fill="rgba(0,0,0,0.5)"
+                    d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                  >
+                  </path>
+                </svg>
+              </li>
             )}
           </>
         ))}

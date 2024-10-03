@@ -57,7 +57,7 @@ function SidebarSection(
             <a href={headingLink}>
               <h2
                 id={categoryTitle}
-                class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3"
+                class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3 capitalize"
               >
                 {props.section.title}
               </h2>
@@ -66,7 +66,7 @@ function SidebarSection(
           : (
             <h2
               id={categoryTitle}
-              class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3"
+              class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3 capitalize"
             >
               {props.section.title}
             </h2>

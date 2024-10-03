@@ -6,7 +6,7 @@ export type SidebarItem = string | SidebarDoc | SidebarLink | SidebarCategory;
 
 export interface SidebarSection {
   title: string;
-  headingLink?: string;
+  href?: string;
   items: SidebarItem[];
 }
 
@@ -27,6 +27,7 @@ export interface BreadcrumbItem {
 
 export interface SidebarCategory {
   label: string;
+  href?: string;
   items: SidebarItem[];
 }
 
