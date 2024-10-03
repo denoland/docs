@@ -8,6 +8,24 @@
   display: block !important;
 }
 
+@media (max-width: 768px) {
+  .ddoc {
+    @apply px-0 !important;
+  }
+
+  .ddoc > div:not(.categoryPanel) {
+    @apply px-4 !important;
+  }
+
+  .ddoc .markdown .highlight {
+    @apply -mx-4 !important;
+  }
+
+  .ddoc .markdown pre > code:first-child {
+    @apply px-4 !important;
+  }
+}
+
 /* Align content with the top of the TOC now that it has no header */
 
 #content {
