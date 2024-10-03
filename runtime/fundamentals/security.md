@@ -418,8 +418,7 @@ deno run --deny-ffi script.ts
 Allow importing code from the Web. By default Deno limits hosts you can import
 code from. This is true for both static and dynamic imports.
 
-If you want to dynamic import code - either using `import()` or `new Worker()`
-API an additional permissions need to be granted. Importing from local file
+If you want to dynamically import code, either using the `import()` or the `new Worker()` APIs, additional permissions need to be granted. Importing from the local file
 system [requires `--allow-read`](#file-system-read-access), but Deno also allows
 to import from `http:` and `https:` URLs. In such case you will need to specify
 an explicit `--allow-import` flag:
