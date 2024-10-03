@@ -4,10 +4,6 @@ export const sidebar = [
   {
     title: "Getting Started",
     items: [
-      {
-        label: "Hello World",
-        id: "/runtime/",
-      },
       "/runtime/getting_started/first_project/",
       "/runtime/getting_started/setup_your_environment/",
       "/runtime/getting_started/command_line_interface/",
@@ -188,7 +184,6 @@ export const sidebar = [
       {
         label: "Contributing to Deno",
         items: [
-          "/runtime/contributing/contribute/",
           "/runtime/contributing/architecture/",
           "/runtime/contributing/building_from_source/",
           "/runtime/contributing/profiling/",
@@ -240,3 +235,4 @@ export const sidebar = [
 
 export const sectionTitle = "Runtime";
 export const sectionHref = "/runtime/";
+export const headerPath = "/runtime/";

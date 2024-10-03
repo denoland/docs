@@ -6,9 +6,15 @@ import {
   SidebarLink as SidebarLink_,
   SidebarSection as SidebarSection_,
 } from "../types.ts";
+import { sectionHref } from "../deploy/_data.ts";
 
 export default function Sidebar(
-  props: { sidebar: Sidebar_; search: Searcher; url: string },
+  props: {
+    sidebar: Sidebar_;
+    search: Searcher;
+    url: string;
+    headerPath: string;
+  },
 ) {
   return (
     <nav
@@ -21,6 +27,7 @@ export default function Sidebar(
             section={section}
             search={props.search}
             url={props.url}
+            headerPath={props.headerPath}
           />
         ))}
       </ul>
@@ -29,7 +36,12 @@ export default function Sidebar(
 }
 
 function SidebarSection(
-  props: { section: SidebarSection_; search: Searcher; url: string },
+  props: {
+    section: SidebarSection_;
+    search: Searcher;
+    url: string;
+    headerPath: string;
+  },
 ) {
   const slugify = (str: string) =>
     str.replaceAll(/[\s_]/g, "-")
@@ -37,17 +49,31 @@ function SidebarSection(
       .toLowerCase();
   const slug = slugify(props.section.title ?? "");
   const categoryTitle = `sidebar-category-${slug}`;
+  const headerHref = props.headerPath + slug;
+
   return (
     <li class="mb-4">
-      {props.section.title &&
-        (
-          <h2
-            id={categoryTitle}
-            class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3"
-          >
-            {props.section.title}
-          </h2>
-        )}
+      {props.section.title && (
+        props.headerPath
+          ? (
+            <a href={headerHref}>
+              <h2
+                id={categoryTitle}
+                class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3"
+              >
+                {props.section.title}
+              </h2>
+            </a>
+          )
+          : (
+            <h2
+              id={categoryTitle}
+              class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3"
+            >
+              {props.section.title}
+            </h2>
+          )
+      )}
       <ul aria-labelledby={categoryTitle}>
         {props.section.items.map((item) => (
           <li class="mx-2 mt-1">

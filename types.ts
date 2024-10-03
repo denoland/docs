@@ -1,5 +1,7 @@
 export type Sidebar = SidebarSection[];
 
+export type Path = string;
+
 export interface SidebarSection {
   title: string;
   items: SidebarItem[];

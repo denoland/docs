@@ -103,6 +103,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
           sidebar={sidebar}
           search={props.search}
           url={props.url}
+          headerPath={props.headerPath!}
         />
       </aside>
       <div
