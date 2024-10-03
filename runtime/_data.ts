@@ -116,10 +116,6 @@ export const sidebar = [
             id: "/runtime/reference/cli/lsp/",
           },
           {
-            label: "LSP integration",
-            id: "/runtime/reference/cli/lsp_integration/",
-          },
-          {
             label: "deno remove",
             id: "/runtime/reference/cli/remove/",
           },
@@ -190,6 +186,10 @@ export const sidebar = [
       },
       "/runtime/reference/wasm/",
       "/runtime/reference/migration_guide/",
+      {
+        label: "LSP integration",
+        id: "/runtime/reference/cli/lsp_integration/",
+      },
     ],
   },
   {
