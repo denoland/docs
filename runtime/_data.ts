@@ -305,6 +305,12 @@ export async function generateDescriptions(): Promise<Descriptions> {
   return descriptions;
 }
 
+/*
+generates the node compat list for the Node Support page.
+This the data is read from the files in the reference_gen/node_description directory.
+This function is called in node.md through the templating engine Vento,
+after which the normal markdown rendered is called.
+ */
 export async function generateNodeCompatability() {
   const descriptions = await generateDescriptions();
 
