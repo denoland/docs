@@ -152,7 +152,6 @@ export const sidebar = [
       {
         label: "Deno APIs",
         id: "/runtime/reference/deno_namespace_apis/",
-
       },
       {
         label: "Web APIs",

@@ -270,7 +270,7 @@ function generateCrumbs(
     if (isSidebarCategory(item)) {
       const newCurrent = [...current, { label: item.label, href: item.href }];
       const result = generateCrumbs(url, title, item.items, newCurrent);
-      if (result.some(crumb => crumb.label === title)) {
+      if (result.some((crumb) => crumb.label === title)) {
         return result;
       }
     }
@@ -358,7 +358,11 @@ function Breadcrumbs(props: {
                     {crumb.label}
                   </a>
                 )
-                : <span itemprop="name" class="block px-3 py-1.5 text-sm">{crumb.label}</span>}
+                : (
+                  <span itemprop="name" class="block px-3 py-1.5 text-sm">
+                    {crumb.label}
+                  </span>
+                )}
               <meta itemprop="position" content={String(i + 2)} />
             </li>
             {i < crumbs.length - 1 && (

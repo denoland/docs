@@ -38,15 +38,15 @@ export interface TableOfContentsItem {
   slug: string;
   children: TableOfContentsItem[];
 }
-    
+
 export function isSidebarLink(b: SidebarItem): b is SidebarLink {
-  return (b as SidebarLink).href !== undefined
+  return (b as SidebarLink).href !== undefined;
 }
 
 export function isSidebarDoc(b: SidebarItem): b is SidebarDoc {
-  return (b as SidebarDoc).id !== undefined
+  return (b as SidebarDoc).id !== undefined;
 }
 
 export function isSidebarCategory(b: SidebarItem): b is SidebarCategory {
-  return (b as SidebarCategory).items !== undefined
+  return (b as SidebarCategory).items !== undefined;
 }
