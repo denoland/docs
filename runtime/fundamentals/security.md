@@ -447,7 +447,7 @@ dynamic imports if the `--allow-import` flag is specified.
 $ deno run --allow-import main.ts
 ```
 
-Note, that specifying an allow list for `--allow-import` will override the list
+Note that specifying an allow list for `--allow-import` will override the list
 of default hosts.
 
 ## Evaluation of code
