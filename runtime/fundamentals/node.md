@@ -22,6 +22,13 @@ However, there are some key differences between the two runtimes that you can
 take advantage of to make your code simpler and smaller when migrating your
 Node.js projects to Deno.
 
+:::tip
+
+If you are looking for API reference for built-in Node modules, visit
+[Node API reference page](/api/node).
+
+:::
+
 ## Node built-in modules
 
 Deno provides a compatibility layer that allows the use of Node.js built-in APIs
