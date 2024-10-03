@@ -1,7 +1,6 @@
 ---
 title: "Language Server Integration"
 oldUrl:
-- /runtime/reference/cli/lsp_integration/
 - /runtime/manual/reference/lsp/
 - /runtime/manual/advanced/language_server/overview/
 - /runtime/manual/advanced/language_server/imports/
