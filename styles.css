@@ -318,12 +318,12 @@ body:not(:has(.ddoc)) {
   @apply mt-4;
 }
 
-.markdown-body .module-info > h3 {
+.markdown-body .module-info > .compat-title {
   @apply text-lg mt-0 mb-1 flex flex-row items-center font-semibold;
 }
 
-.markdown-body .module-info > h3 > a > code {
-  @apply bg-white pl-2;
+.markdown-body .module-info > .compat-title a {
+  @apply pl-2 font-mono;
 }
 
 .markdown-body .module-info > p {
@@ -350,7 +350,7 @@ body:not(:has(.ddoc)) {
   @apply text-red-500;
 }
 
-.markdown-body .module-info.compat-status-good > h3::before {
+.markdown-body .module-info.compat-status-good > .compat-title::before {
   content: "";
   display: inline-block;
   width: 1.5rem;
@@ -360,7 +360,7 @@ body:not(:has(.ddoc)) {
   background-repeat: no-repeat;
 }
 
-.markdown-body .module-info.compat-status-partial > h3::before {
+.markdown-body .module-info.compat-status-partial > .compat-title::before {
   content: "";
   display: inline-block;
   width: 1.5rem;
@@ -370,7 +370,7 @@ body:not(:has(.ddoc)) {
   background-repeat: no-repeat;
 }
 
-.markdown-body .module-info.compat-status-unsupported > h3::before {
+.markdown-body .module-info.compat-status-unsupported > .compat-title::before {
   content: "";
   display: inline-block;
   width: 1.5rem;

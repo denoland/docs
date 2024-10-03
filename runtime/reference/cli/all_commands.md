@@ -8,6 +8,7 @@ runtime environment from your terminal or command prompt. The CLI has a number
 of subcommands that can be used to perform different tasks, check the links
 below for more information on each subcommand.
 
+- [deno add](/runtime/reference/cli/add) - Add dependencies
 - [deno bench](/runtime/reference/cli/benchmarker/) - benchmarking tool
 - [deno check](/runtime/reference/cli/check/) - type check your program without
   running it
@@ -30,6 +31,7 @@ below for more information on each subcommand.
 - [deno lint](/runtime/reference/cli/linter/) - lint your code
 - [deno lsp](/runtime/reference/cli/lsp/) - language server protocol integration
 - [deno publish](/runtime/reference/cli/publish/) - publish a module
+- [deno remove](/runtime/reference/cli/remove) - Remove dependencies
 - [deno repl](/runtime/reference/cli/repl/) - starts a read-eval-print-loop
 - [deno run](/runtime/reference/cli/run/) - run a script
 - [deno serve](/runtime/reference/cli/serve/) - run a web server
