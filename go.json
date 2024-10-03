@@ -23,6 +23,7 @@
   "fmt": "/runtime/manual/tools/formatter",
   "info": "/runtime/manual/tools/dependency_inspector",
   "lint": "/runtime/manual/tools/linter",
+  "lsp": "/runtime/reference/cli/lsp",
   "run": "/runtime/manual/tools/run",
   "serve": "/runtime/manual/tools/serve",
   "test": "/runtime/manual/tools/test",
