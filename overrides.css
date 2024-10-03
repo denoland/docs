@@ -12,15 +12,15 @@
   .ddoc {
     @apply px-0 !important;
   }
-  
+
   .ddoc > div:not(.categoryPanel) {
     @apply px-4 !important;
   }
-  
+
   .ddoc .markdown .highlight {
     @apply -mx-4 !important;
   }
-  
+
   .ddoc .markdown pre > code:first-child {
     @apply px-4 !important;
   }
