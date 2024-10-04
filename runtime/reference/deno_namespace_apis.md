@@ -28,9 +28,9 @@ Refer to the links below for code examples of how to use the file system
 functions.
 
 - [Reading files in several different ways](/examples/reading-files)
-- [Reading files in streams](../../tutorials/file_server.md)
-- [Reading a text file (`Deno.readTextFile`)](../../tutorials/read_write_files.md#reading-a-text-file)
-- [Writing a text file (`Deno.writeTextFile`)](../../tutorials/read_write_files.md#writing-a-text-file)
+- [Reading files in streams](../tutorials/file_server.md)
+- [Reading a text file (`Deno.readTextFile`)](/examples/reading-files)
+- [Writing a text file (`Deno.writeTextFile`)](/examples/writing-files)
 
 ## Network
 
@@ -49,7 +49,7 @@ The Deno runtime comes with
 
 Refer to the links below for code samples of how to create a subprocess.
 
-- [Creating a subprocess (`Deno.Command`)](/tutorials/subprocess/)
+- [Creating a subprocess (`Deno.Command`)](../tutorials/subprocess.md)
 
 ## Errors
 

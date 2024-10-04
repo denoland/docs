@@ -161,7 +161,7 @@ The built-in libraries that are of interest to users:
   libraries.
 - `"deno.worker"` - This is the library used when checking a Deno web worker
   script. For more information about web workers, check out
-  [Type Checking Web Workers](./types.md#type-checking-web-workers).
+  [Type Checking Web Workers](/runtime/reference/ts_config_migration/#type-checking-web-workers).
 - `"dom.asynciterable"` - TypeScript currently does not include the DOM async
   iterables that Deno implements (plus several browsers), so we have implemented
   it ourselves until it becomes available in TypeScript.
