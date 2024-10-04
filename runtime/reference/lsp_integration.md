@@ -5,6 +5,7 @@ oldUrl:
 - /runtime/manual/advanced/language_server/overview/
 - /runtime/manual/advanced/language_server/imports/
 - /runtime/manual/advanced/language_server/testing_api/
+- /runtime/reference/cli/lsp_integration/
 ---
 
 :::tip

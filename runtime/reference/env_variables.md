@@ -1,6 +1,8 @@
 ---
 title: "Environment variables"
-oldUrl: /runtime/manual/basics/env_variables/
+oldUrl: 
+- /runtime/manual/basics/env_variables/
+- /runtime/reference/cli/env_variables/
 ---
 
 There are a few ways to use environment variables in Deno:
