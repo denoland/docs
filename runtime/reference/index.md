@@ -10,7 +10,7 @@ features and tools.
 
 Deno has extensive namespace APIs, which provide a wide range of functionalities
 for file system operations, network requests, subprocess management, and more.
-Deno also aims to bridge the gap between the server and the browser by brining
+Deno also aims to bridge the gap between the server and the browser by bringing
 modern Web APIs to the server-side environment. And finally, Deno provides a set
 of Node.js compatibility APIs to help you migrate your existing Node.js
 applications to Deno.
