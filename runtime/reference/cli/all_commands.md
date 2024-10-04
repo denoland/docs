@@ -18,36 +18,29 @@ below for more information on each subcommand.
 
 ## Dependency management
 
-- [deno add](/runtime/reference/cli/add) - Add dependencies
-- [deno install](/runtime/reference/cli/install/) - install a dependency or a
-- [deno uninstall](/runtime/reference/cli/uninstall/) - uninstall a dependency
+- [deno add](/runtime/reference/cli/add) - add dependencies
+- [deno install](/runtime/reference/cli/install/) - install a dependency or a script
+- [deno uninstall](/runtime/reference/cli/uninstall/) - uninstall a dependency or a script
 - [deno remove](/runtime/reference/cli/remove) - Remove dependencies
 
 ## Tooling
 
 - [deno bench](/runtime/reference/cli/benchmarker/) - benchmarking tool
-- [deno check](/runtime/reference/cli/check/) - type check your program without
-  running it
-- [deno compile](/runtime/reference/cli/compiler/) - compile a program into a
-  standalone executable
-- [deno completions](/runtime/reference/cli/completions/) - generate shell
-  completions
-- [deno coverage](/runtime/reference/cli/coverage/) - generate test coverage
-  reports
-- [deno doc](/runtime/reference/cli/documentation_generator/) - generate
-  documentation for a module
+- [deno check](/runtime/reference/cli/check/) - type check your program without running it
+- [deno compile](/runtime/reference/cli/compiler/) - compile a program into a standalone executable
+- [deno completions](/runtime/reference/cli/completions/) - generate shell completions
+- [deno coverage](/runtime/reference/cli/coverage/) - generate test coverage reports
+- [deno doc](/runtime/reference/cli/documentation_generator/) - generate documentation for a module
 - [deno fmt](/runtime/reference/cli/formatter/) - format your code
-- [deno info](/runtime/reference/cli/dependency_inspector/) - inspect an ES
-  module and all of its dependencies
+- [deno info](/runtime/reference/cli/dependency_inspector/) - inspect an ES module and all of its dependencies
 - [deno init](/runtime/reference/cli/init/) - create a new project script
 - [deno jupyter](/runtime/reference/cli/jupyter/) - run a Jupyter notebook
 - [deno lint](/runtime/reference/cli/linter/) - lint your code
 - [deno lsp](/runtime/reference/cli/lsp/) - language server protocol integration
 - [deno publish](/runtime/reference/cli/publish/) - publish a module
 - [deno test](/runtime/reference/cli/test/) - run your tests
-- [deno types](/runtime/reference/cli/types/) - print runtime types or a script
-- [deno upgrade](/runtime/reference/cli/upgrade/) - upgrade Deno to the latest
-  version
+- [deno types](/runtime/reference/cli/types/) - print runtime types
+- [deno upgrade](/runtime/reference/cli/upgrade/) - upgrade Deno to the latest version
 
 ## Other
 
