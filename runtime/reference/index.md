@@ -15,7 +15,7 @@ modern Web APIs to the server-side environment. And finally, Deno provides a set
 of Node.js compatibility APIs to help you migrate your existing Node.js
 applications to Deno.
 
-- [Deno namespace APIs](/runtime/reference/deno_namespace_apis/)
+- [Deno APIs](/runtime/reference/deno_namespace_apis/)
 - [Web API support](/runtime/reference/web_platform_apis/)
 - [Node API support](/api/node/)
 
