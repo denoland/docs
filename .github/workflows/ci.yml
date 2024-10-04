@@ -15,3 +15,8 @@ jobs:
           deno-version: rc
 
       - run: deno fmt --check
+
+      - name: Link checker
+        uses: ruzickap/action-my-markdown-link-checker@v1
+        with:
+          config_file: .github/.mlc_config.json
