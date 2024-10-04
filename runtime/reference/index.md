@@ -2,7 +2,7 @@
 title: Reference guides
 ---
 
-Welcome to the Reference Guides section. Here, you’ll find detailed technical
+Here, you’ll find detailed technical
 documentation and comprehensive guides to help you master Deno’s advanced
 features and tools.
 
