@@ -6,7 +6,7 @@ Here, you’ll find detailed technical
 documentation and comprehensive guides to help you master Deno’s advanced
 features and tools.
 
-## Deno APIs
+## Runtime APIs
 
 Deno has extensive namespace APIs, which provide a wide range of functionalities
 for file system operations, network requests, subprocess management, and more.
