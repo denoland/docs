@@ -49,7 +49,7 @@ jobs:
         working-directory: _site
         env:
           DENO_FUTURE: 1
-        run: deno run --allow-read=. --allow-net --allow-env server.ts
+        run: deno run --allow-read=. --allow-net --allow-env server.ts &
 
       - name: Link checker
         env:
