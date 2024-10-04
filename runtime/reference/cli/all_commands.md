@@ -43,7 +43,7 @@ below for more information on each subcommand.
 - [deno jupyter](/runtime/reference/cli/jupyter/) - run a Jupyter notebook
 - [deno lint](/runtime/reference/cli/linter/) - lint your code
 - [deno lsp](/runtime/reference/cli/lsp/) - language server protocol integration
-- [deno publish](/runtime/reference/cli/publish/) - publish a module
+- [deno publish](/runtime/reference/cli/publish/) - publish a module to JSR
 - [deno test](/runtime/reference/cli/test/) - run your tests
 - [deno types](/runtime/reference/cli/types/) - print runtime types or a script
 - [deno upgrade](/runtime/reference/cli/upgrade/) - upgrade Deno to the latest
