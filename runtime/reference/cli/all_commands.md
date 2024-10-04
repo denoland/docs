@@ -41,7 +41,7 @@ below for more information on each subcommand.
 - [deno fmt](/runtime/reference/cli/formatter/) - format your code
 - [deno info](/runtime/reference/cli/dependency_inspector/) - inspect an ES
   module and all of its dependencies
-- [deno init](/runtime/reference/cli/init/) - create a new project script
+- [deno init](/runtime/reference/cli/init/) - create a new project
 - [deno jupyter](/runtime/reference/cli/jupyter/) - run a Jupyter notebook
 - [deno lint](/runtime/reference/cli/linter/) - lint your code
 - [deno lsp](/runtime/reference/cli/lsp/) - language server protocol integration
