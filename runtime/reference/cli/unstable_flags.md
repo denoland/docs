@@ -1,5 +1,5 @@
 ---
-title: "Unstable Feature Flags"
+title: "Unstable feature flags"
 oldUrl:
  - /runtime/tools/unstable_flags/
  - /runtime/manual/tools/unstable_flags/
