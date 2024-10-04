@@ -2,9 +2,8 @@
 title: Reference guides
 ---
 
-Here, you’ll find detailed technical
-documentation and comprehensive guides to help you master Deno’s advanced
-features and tools.
+Here, you’ll find detailed technical documentation and comprehensive guides to
+help you master Deno’s advanced features and tools.
 
 ## Runtime APIs
 
