@@ -7,6 +7,11 @@ export const sidebar = [
     title: "Getting started",
     href: "/runtime/",
     items: [
+      {
+        label: "Hello World",
+        id: "/runtime/",
+      },
+      "/runtime/getting_started/installation/",
       "/runtime/getting_started/first_project/",
       "/runtime/getting_started/setup_your_environment/",
       "/runtime/getting_started/command_line_interface/",
@@ -34,7 +39,6 @@ export const sidebar = [
         label: "HTTP Server",
         id: "/runtime/fundamentals/http_server/",
       },
-      "/runtime/fundamentals/installation/",
       "/runtime/fundamentals/stability_and_releases/",
     ],
   },
@@ -116,10 +120,6 @@ export const sidebar = [
             id: "/runtime/reference/cli/lsp/",
           },
           {
-            label: "LSP integration",
-            id: "/runtime/reference/cli/lsp_integration/",
-          },
-          {
             label: "deno remove",
             id: "/runtime/reference/cli/remove/",
           },
@@ -190,6 +190,10 @@ export const sidebar = [
       },
       "/runtime/reference/wasm/",
       "/runtime/reference/migration_guide/",
+      {
+        label: "LSP integration",
+        id: "/runtime/reference/cli/lsp_integration/",
+      },
     ],
   },
   {

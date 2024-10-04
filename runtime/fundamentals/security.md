@@ -413,6 +413,44 @@ deno run --allow-ffi --deny-ffi=./libfoo.so script.ts
 deno run --deny-ffi script.ts
 ```
 
+### Importing from the Web
+
+Allow importing code from the Web. By default Deno limits hosts you can import
+code from. This is true for both static and dynamic imports.
+
+If you want to dynamically import code, either using the `import()` or the
+`new Worker()` APIs, additional permissions need to be granted. Importing from
+the local file system [requires `--allow-read`](#file-system-read-access), but
+Deno also allows to import from `http:` and `https:` URLs. In such case you will
+need to specify an explicit `--allow-import` flag:
+
+```
+# allow importing code from `https://example.com`
+$ deno run --allow-import=example.com main.ts
+```
+
+By default Deno allows importing sources from following hosts:
+
+- `deno.land`
+- `esm.sh`
+- `jsr.io`
+- `cdn.jsdelivr.net`
+- `raw.githubusercontent.com`
+- `gist.githubusercontent.com`
+
+**Imports are only allowed using HTTPS**
+
+This allow list is applied by default for static imports, and by default to
+dynamic imports if the `--allow-import` flag is specified.
+
+```
+# allow dynamically importing code from `https://deno.land`
+$ deno run --allow-import main.ts
+```
+
+Note that specifying an allow list for `--allow-import` will override the list
+of default hosts.
+
 ## Evaluation of code
 
 Deno sets no limits on the execution of code at the same privilege level. This
