@@ -28,7 +28,7 @@ deno run --unstable-byonm main.ts
 
 You can specify which unstable features you'd like to enable for your project
 using a
-[configuration option in `deno.json`](../../fundamentals/configuration.md).
+[configuration option in `deno.json`](/runtime/fundamentals/configuration/).
 
 ```json title="deno.json"
 {
