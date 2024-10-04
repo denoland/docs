@@ -158,6 +158,10 @@ export const sidebar = [
         id: "/runtime/reference/web_platform_apis/",
       },
       {
+        label: "Node APIs",
+        id: "/runtime/reference/node_apis/",
+      },
+      {
         label: "npm packages",
         id: "/runtime/reference/npm/",
       },

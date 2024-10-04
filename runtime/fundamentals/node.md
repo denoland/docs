@@ -1,5 +1,5 @@
 ---
-title: "Node.js support"
+title: "Node and npm support"
 oldUrl:
 - /runtime/reference/node/
 - /runtime/manual/npm_nodejs/std_node/
@@ -8,13 +8,12 @@ oldUrl:
 - /runtime/manual/using_deno_with_other_technologies/node/cdns/
 - /runtime/manual/node/node_specifiers
 - /runtime/manual/node/package_json
-- /runtime/manual/npm_nodejs/compatibility_mode/
 - /runtime/manual/node/migrate/
-- /runtime/manual/node/compatibility/
 - /runtime/manual/references/cheatsheet/
 - /runtime/manual/node/cheatsheet/
 - /runtime/manual/node/faqs
-templateEngine: [vto, md]
+- /runtime/manual/node/npm_specifiers
+- /runtime/manual/node/private_registries
 ---
 
 Modern Node.js projects will run in Deno with little to no reworking required.
@@ -22,14 +21,9 @@ However, there are some key differences between the two runtimes that you can
 take advantage of to make your code simpler and smaller when migrating your
 Node.js projects to Deno.
 
-:::tip
+<a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
 
-If you are looking for API reference for built-in Node modules, visit
-[Node API reference page](/api/node).
-
-:::
-
-## Node built-in modules
+## Using Node's built-in modules
 
 Deno provides a compatibility layer that allows the use of Node.js built-in APIs
 within Deno programs. However, in order to use them, you will need to add the
@@ -61,10 +55,41 @@ error: Relative import path "os" not prefixed with / or ./ or ../
     at file:///main.mjs:1:21
 ```
 
-Same hints and additional quick-fixes are provided by the Deno LSP in your
+The same hints and additional quick-fixes are provided by the Deno LSP in your
 editor.
 
-## CommonJS support
+## Using npm packages
+
+Deno has native support for importing npm packages by using `npm:`
+specifiers. For example:
+
+```ts title="main.js"
+import * as emoji from "npm:node-emoji";
+
+console.log(emoji.emojify(`:sauropod: :heart:  npm`));
+```
+
+Can be run with:
+
+```sh
+$ deno run main.js
+🦕 ❤️ npm
+```
+
+No `npm install` is necessary before the `deno run` command and no
+`node_modules` folder is created. These packages are also subject to the same
+[permissions](/runtime/fundamentals/security/) as other code in Deno.
+
+npm specifiers have the following format:
+
+```console
+npm:<package-name>[@<version-requirement>][/<sub-path>]
+```
+
+For examples with popular libraries, please refer to the
+[tutorial section](/runtime/tutorials).
+
+### CommonJS support
 
 CommonJS is a module system that predates
 [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
@@ -89,7 +114,7 @@ module._
 Deno strongly encourages use of ES modules in your code, and offers CommonJS
 support with following restrictions:
 
-### Use `.cjs` extension
+**Use .cjs extension**
 
 If the file extension is `.cjs` Deno will treat this module as CommonJS.
 
@@ -131,7 +156,7 @@ is necessary to provide at least `--allow-read` permission as Deno will probe
 the file system for `package.json` files and `node_modules` directory to
 properly resolve CommonJS modules.
 
-### Create `require()` manually
+***Create require() manually**
 
 An alternative option is to create an instance of the `require()` function
 manually:
@@ -146,9 +171,9 @@ In this scenario the same requirements apply, as when running `.cjs` files -
 dependencies need to be installed manually and appropriate permission flags
 given.
 
-### require(ESM)
+**require(ESM)**
 
-Deno's `require()` implementation support requiring ES modules.
+Deno's `require()` implementation supports requiring ES modules.
 
 This works the same as in Node.js, where you can only `require()` ES modules
 that don't have Top-Level Await in their module graph - or in other words you
@@ -178,7 +203,7 @@ $ deno run -R main.cjs
 Hello Deno
 ```
 
-### import "./index.cjs"
+**import index.cjs**
 
 You can also import CommonJS files in ES modules, provided that these files use
 `.cjs` extension.
@@ -208,7 +233,7 @@ _Notice that in this example no permission flags were specified - when importing
 CJS from ES modules, Deno can staticaly analyze and find relevant modules
 without having to probe file system at runtime._
 
-### Hints and suggestions
+**Hints and suggestions**
 
 Deno will provide useful hints and suggestions to guide you towards working code
 when working with CommonJS modules.
@@ -233,13 +258,157 @@ module.exports = {
     hint: Rewrite this module to ESM or change the file extension to `.cjs`.
 ```
 
+### Importing types
+
+Many npm packages ship with types, you can import these and use them with types
+directly:
+
+```ts
+import chalk from "npm:chalk@5";
+```
+
+Some packages do not ship with types but you can specify their types with the
+[`@deno-types`](/runtime/fundamentals/typescript) directive. For example, using
+a
+[`@types`](https://www.typescriptlang.org/docs/handbook/2/type-declarations.html#definitelytyped--types)
+package:
+
+```ts
+// @deno-types="npm:@types/express@^4.17"
+import express from "npm:express@^4.17";
+```
+
+**Module resolution**
+
+The official TypeScript compiler `tsc` supports different
+[moduleResolution](https://www.typescriptlang.org/tsconfig#moduleResolution)
+settings. Deno only supports the modern `node16` resolution. Unfortunately many
+npm packages fail to correctly provide types under node16 module resolution,
+which can result in `deno check` reporting type errors, that `tsc` does not
+report.
+
+If a default export from an `npm:` import appears to have a wrong type (with the
+right type seemingly being available under the `.default` property), it's most
+likely that the package provides wrong types under node16 module resolution for
+imports from ESM. You can verify this by checking if the error also occurs with
+`tsc --module node16` and `"type": "module"` in `package.json` or by consulting
+the [Are the types wrong?](https://arethetypeswrong.github.io/) website
+(particularly the "node16 from ESM" row).
+
+If you want to use a package that doesn't support TypeScript's node16 module
+resolution, you can:
+
+1. Open an issue at the issue tracker of the package about the problem. (And
+   perhaps contribute a fix :) (Although, unfortunately, there is a lack of
+   tooling for packages to support both ESM and CJS, since default exports
+   require different syntaxes. See also
+   [microsoft/TypeScript#54593](https://github.com/microsoft/TypeScript/issues/54593))
+2. Use a [CDN](/runtime/fundamentals/modules/#url_imports), that rebuilds the
+   packages for Deno support, instead of an `npm:` identifier.
+3. Ignore the type errors you get in your code base with `// @ts-expect-error`
+   or `// @ts-ignore`.
+
+### Including Node types
+
+Node ships with many built-in types like `Buffer` that might be referenced in an
+npm package's types. To load these you must add a types reference directive to
+the `@types/node` package:
+
+```ts
+/// <reference types="npm:@types/node" />
+```
+
+Note that it is fine to not specify a version for this in most cases because
+Deno will try to keep it in sync with its internal Node code, but you can always
+override the version used if necessary.
+
+### Executable npm scripts
+
+npm packages with `bin` entries can be executed from the command line without an
+`npm install` using a specifier in the following format:
+
+```console
+npm:<package-name>[@<version-requirement>][/<binary-name>]
+```
+
+For example:
+
+```sh
+$ deno run --allow-read npm:cowsay@1.5.0 Hello there!
+ ______________
+< Hello there! >
+ --------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+$ deno run --allow-read npm:cowsay@1.5.0/cowthink What to eat?
+ ______________
+( What to eat? )
+ --------------
+        o   ^__^
+         o  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+```
+
+### Node modules directory
+
+npm specifiers resolve npm packages to a central global npm cache. This works
+well in most cases and is ideal since it uses less space and doesn't require a
+`node_modules` directory. That said, you may find cases where an npm package
+expects itself to be executing from a `node_modules` directory. To improve
+compatibility and support those packages, you can use the `--node-modules-dir`
+flag.
+
+For example, given `main.ts`:
+
+```ts
+import chalk from "npm:chalk@5";
+
+console.log(chalk.green("Hello"));
+```
+
+```sh
+deno run --node-modules-dir main.ts
+```
+
+Running the above command, with a `--node-modules-dir` flag, will create a
+`node_modules` folder in the current directory with a similar folder structure
+to npm:
+
+![Node modules directory](./images/node_modules_dir.png)
+
+This is done automatically when calling `deno run`, no separate install command
+necessary.
+
+Alternatively, if you wish to disable the creation of a `node_modules` directory
+entirely, you can set this flag to `"none"` (ex. `--node-modules-dir=none`) or
+add a `"nodeModulesDir": "none"` entry to your deno.json configuration file to
+make the setting apply to the entire directory tree.
+
+In the case where you want to modify the contents of the `node_modules`
+directory before execution, you can run `deno install` with
+`--node-modules-dir`, modify the contents, then run the script.
+
+For example:
+
+```sh
+deno install --node-modules-dir --entrypoint main.ts
+deno run --allow-read=. --allow-write=. scripts/your_script_to_modify_node_modules_dir.ts
+deno run --node-modules-dir main.ts
+```
+
 ## Node.js global objects
 
 In Node.js, there are a number of
 [global objects](https://nodejs.org/api/globals.html) available in the scope of
 all programs that are specific to Node.js, eg. `process` object.
 
-Here are a few globals that you might enounter in the wild and how to use them
+Here are a few globals that you might encounter in the wild and how to use them
 in Deno:
 
 - `process` - Deno provides the `process` global, which is by far the most
@@ -317,75 +486,7 @@ As of Deno 2.0, npm packages using Node-API addons **are only supported when a
 In case of misconfiguration Deno will provide hints how the situation can be
 resolved.
 
-## Runtime permissions in Deno
-
-Consider the following simple [Express](https://expressjs.com/) server:
-
-```js title="server.js"
-import express from "npm:express@4";
-
-const app = express();
-
-app.get("/", function (_req, res) {
-  res.send("hello");
-});
-
-app.listen(3000, () => {
-  console.log("Express listening on :3000");
-});
-```
-
-If you run the above with `deno run server.js`, you will be prompted for
-permissions required to execute the code and its dependencies. For example:
-
-```sh
-$ deno run server.js
-┌ ⚠️  Deno requests net access to "0.0.0.0:8000".
-├ Requested by `Deno.listen()` API.
-├ Run again with --allow-net to bypass this prompt.
-└ Allow? [y/n/A] (y = yes, allow; n = no, deny; A = allow all net permissions) >
-```
-
-Deno features [runtime security by default](/runtime/fundamentals/security/),
-meaning that you as the developer must opt in to giving your code access to the
-filesystem, network, system environment, and more. Doing this prevents supply
-chain attacks and other potential vulnerabilities in your code. By comparison,
-Node.js has no concept of runtime security, with all code executed with the same
-level of permission as the user running the code.
-
-To run your code as you would in Node.js, you can pass the `-A` flag to enable
-all permissions.
-
-```sh
-deno run -A server.js
-```
-
-For more granular control, you can enable access to specific features by opting
-in to
-[individual permissions](/runtime/fundamentals/security/#permissions-list).
-
-## Running scripts from package.json
-
-Deno supports running npm scripts natively with the
-[`deno task`](../tools/task_runner.md) subcommand. Consider the following
-Node.js project with a script called `start` inside its `package.json`:
-
-```json title="package.json"
-{
-  "name": "my-project",
-  "scripts": {
-    "start": "eslint"
-  }
-}
-```
-
-You can execute this script with Deno by running:
-
-```sh
-deno task start
-```
-
-## Migrating from Node.js to Deno
+## Migrating from Node to Deno
 
 Running your Node.js project with Deno is a straightforward process. In most
 cases you can expect little to no changes to be required, if your project is
@@ -424,30 +525,48 @@ import { Buffer } from "node:buffer";
    [needs to be created manually](#nodejs-global-objects). npm dependencies can
    use `require()` regardless of file extension.
 
-## Optional improvements with Deno's built-in tools
+### Running scripts
+
+Deno supports running npm scripts natively with the
+[`deno task`](/runtime/reference/cli/task_runner/) subcommand (If you're migrating from Node.js, this is similar to the `npm run script` command). Consider the following
+Node.js project with a script called `start` inside its `package.json`:
+
+```json title="package.json"
+{
+  "name": "my-project",
+  "scripts": {
+    "start": "eslint"
+  }
+}
+```
+
+You can execute this script with Deno by running:
+
+```sh
+deno task start
+```
+
+### Optional improvements
 
 One of Deno's core strengths is a unified toolchain that comes with support for
 TypeScript out of the box, and tools like a linter, formatter and a test runner.
 Switching to Deno allows you to simplify your toolchain and reduces the number
-of moving components in your project. Deno also has a more secure runtime, with
-[runtime permissions](../basics/permissions.md) that allow you to control what
-your code can access.
+of moving components in your project.
 
-#### deno.json
+**Configuration**
 
 Deno has its own config file, `deno.json` or `deno.jsonc`, which can be used to
-configure your project.
+[configure your project](/runtime/fundamentals/configuration/)
 
 You can use it to [define dependencies](/runtime/fundamentals/configuration/)
 using the `imports` option - you can migrate your dependencies one-by-one from
 `package.json`, or elect to not define them in the config file at all and use
 `npm:` specifiers inline in your code.
 
-In addition to specifying depenendencies you can use
-[`deno.json` to define](/runtime/fundamentals/configuration/) tasks, lint and
+In addition to specifying dependencies you can use `deno.json` to define tasks, lint and
 format options, path mappings, and other runtime configurations.
 
-#### Linting
+**Linting**
 
 Deno ships with a built-in linter that is written with performance in mind. It's
 similar to ESlint, though with a limited number of rules. If you don't rely on
@@ -490,7 +609,7 @@ A full list of all supported linting rules can be found on
 [https://lint.deno.land/](https://lint.deno.land/). To learn more about how to
 configure the linter, check out the [`deno lint` subcommand](../tools/linter/).
 
-#### Formatting
+**Formatting**
 
 Deno ships with a [built-in formatter](../tools/formatter/) that can optionally
 format your code according to the Deno style guide. Instead of adding `prettier`
@@ -514,7 +633,7 @@ The formatting rules can be configured in your `deno.json` file. To learn more
 about how to configure the formatter, check out the
 [`deno fmt` subcommand](../tools/formatter/).
 
-#### Testing
+**Testing**
 
 Deno encourages writing tests for your code, and provides a built-in test runner
 to make it easy to write and run tests. The test runner is tightly integrated
@@ -536,6 +655,77 @@ any of the imported modules change.
 
 To learn more about the test runner and how to configure it, check out the
 [`deno test` subcommand](../tools/test/) documentation.
+
+## Private registries
+
+:::caution
+
+Not to be confused with
+[private repositories and modules](/runtime/manual/advanced/private_repositories/).
+
+:::
+
+Deno supports private registries, which allow you to host and share your own
+modules. This is useful for organizations that want to keep their code private
+or for individuals who want to share their code with a select group of people.
+
+### What are private registries?
+
+Large organizations often host their own private npm registries to manage
+internal packages securely. These private registries serve as repositories where
+organizations can publish and store their proprietary or custom packages. Unlike
+public npm registries, private registries are accessible only to authorized
+users within the organization.
+
+### How to use private registries with Deno
+
+First, configure your
+[`.npmrc`](https://docs.npmjs.com/cli/v10/configuring-npm/npmrc) file to point
+to your private registry. The `.npmrc` file must be in the project root or
+`$HOME` directory. Add the following to your `.npmrc` file:
+
+```sh
+@mycompany:registry=http://mycompany.com:8111/
+//mycompany.com:8111/:_auth=secretToken
+```
+
+Replace `http://mycompany.com:8111/` with the actual URL of your private
+registry and `secretToken` with your authentication token.
+
+Then update Your `deno.json` or `package.json` to specify the import path for
+your private package. For example:
+
+```json title="deno.json"
+{
+  "imports": {
+    "@mycompany/package": "npm:@mycompany/package@1.0.0"
+  }
+}
+```
+
+or if you're using a `package.json`:
+
+```json title="package.json"
+{
+  "dependencies": {
+    "@mycompany/package": "1.0.0"
+  }
+}
+```
+
+Now you can import your private package in your Deno code:
+
+```typescript title="main.ts"
+import { hello } from "@mycompany/package";
+
+console.log(hello());
+```
+
+and run it using the `deno run` command:
+
+```sh
+deno run main.ts
+```
 
 ## Node to Deno Cheatsheet
 
@@ -563,117 +753,3 @@ To learn more about the test runner and how to configure it, check out the
 
 ¹ Type checking happens automatically, TypeScript compiler is built into the
 `deno` binary.
-
-## Node Compatibility
-
-Deno provides polyfills for a number of built-in Node.js modules and globals.
-For a full list of Node built-in modules, see the
-[reference](https://docs.deno.com/api/node/).
-
-Node compatibility is an ongoing project - help us identify gaps and let us know
-which modules you need by
-[opening an issue on GitHub](https://github.com/denoland/deno).
-
-<div class="flex flex-row gap-3 flex-wrap items-center mb-2">
-  <div>
-    <svg class="status-icon status-good" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-    </svg>
-     = Full support
-  </div>
-  <div>
-    <svg class="status-icon status-info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-    </svg>
-    = Partial support</div>
-  <div>
-    <svg class="status-icon status-unsupported" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-    </svg>
-     = Stubs only or unsupported
-  </div>
-</div>
-
-{{ await generateNodeCompatability() }}
-
-## Globals
-
-This is the list of Node globals that Deno supports. These globals are only
-available in the `npm` package scope. In your own code you can use them by
-importing them from the relevant `node:` module.
-
-| Global name                                                                                                      | Status                                       |
-| ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| [`AbortController`](https://nodejs.org/api/globals.html#class-abortcontroller)                                   | ✅                                           |
-| [`AbortSignal`](https://nodejs.org/api/globals.html#class-abortsignal)                                           | ✅                                           |
-| [`Blob`](https://nodejs.org/api/globals.html#class-blob)                                                         | ✅                                           |
-| [`Buffer`](https://nodejs.org/api/globals.html#class-buffer)                                                     | ✅                                           |
-| [`ByteLengthQueuingStrategy`](https://nodejs.org/api/globals.html#class-bytelengthqueuingstrategy)               | ✅                                           |
-| [`__dirname`](https://nodejs.org/api/globals.html#__dirname)                                                     | ⚠️ [Info](./migrate/#node.js-global-objects) |
-| [`__filename`](https://nodejs.org/api/globals.html#__filename)                                                   | ⚠️ [Info](./migrate/#nodejs-global-objects)  |
-| [`atob`](https://nodejs.org/api/globals.html#atobdata)                                                           | ✅                                           |
-| [`BroadcastChannel`](https://nodejs.org/api/globals.html#broadcastchannel)                                       | ✅                                           |
-| [`btoa`](https://nodejs.org/api/globals.html#btoadata)                                                           | ✅                                           |
-| [`clearImmediate`](https://nodejs.org/api/globals.html#clearimmediateimmediateobject)                            | ✅                                           |
-| [`clearInterval`](https://nodejs.org/api/globals.html#clearintervalintervalobject)                               | ✅                                           |
-| [`clearTimeout`](https://nodejs.org/api/globals.html#cleartimeouttimeoutobject)                                  | ✅                                           |
-| [`CompressionStream`](https://nodejs.org/api/globals.html#class-compressionstream)                               | ✅                                           |
-| [`console`](https://nodejs.org/api/globals.html#console)                                                         | ✅                                           |
-| [`CountQueuingStrategy`](https://nodejs.org/api/globals.html#class-countqueuingstrategy)                         | ✅                                           |
-| [`Crypto`](https://nodejs.org/api/globals.html#crypto)                                                           | ✅                                           |
-| [`CryptoKey`](https://nodejs.org/api/globals.html#cryptokey)                                                     | ✅                                           |
-| [`CustomEvent`](https://nodejs.org/api/globals.html#customevent)                                                 | ✅                                           |
-| [`CustomEvent`](https://nodejs.org/api/globals.html#customevent)                                                 | ✅                                           |
-| [`DecompressionStream`](https://nodejs.org/api/globals.html#class-decompressionstream)                           | ✅                                           |
-| [`Event`](https://nodejs.org/api/globals.html#event)                                                             | ✅                                           |
-| [`EventTarget`](https://nodejs.org/api/globals.html#eventtarget)                                                 | ✅                                           |
-| [`exports`](https://nodejs.org/api/globals.html#exports)                                                         | ✅                                           |
-| [`fetch`](https://nodejs.org/api/globals.html#fetch)                                                             | ✅                                           |
-| [`fetch`](https://nodejs.org/api/globals.html#fetch)                                                             | ✅                                           |
-| [`File`](https://nodejs.org/api/globals.html#class-file)                                                         | ✅                                           |
-| [`File`](https://nodejs.org/api/globals.html#class-file)                                                         | ✅                                           |
-| [`FormData`](https://nodejs.org/api/globals.html#class-formdata)                                                 | ✅                                           |
-| [`global`](https://nodejs.org/api/globals.html#global)                                                           | ✅                                           |
-| [`Headers`](https://nodejs.org/api/globals.html#class-headers)                                                   | ✅                                           |
-| [`MessageChannel`](https://nodejs.org/api/globals.html#messagechannel)                                           | ✅                                           |
-| [`MessageEvent`](https://nodejs.org/api/globals.html#messageevent)                                               | ✅                                           |
-| [`MessagePort`](https://nodejs.org/api/globals.html#messageport)                                                 | ✅                                           |
-| [`module`](https://nodejs.org/api/globals.html#module)                                                           | ✅                                           |
-| [`PerformanceEntry`](https://nodejs.org/api/globals.html#performanceentry)                                       | ✅                                           |
-| [`PerformanceMark`](https://nodejs.org/api/globals.html#performancemark)                                         | ✅                                           |
-| [`PerformanceMeasure`](https://nodejs.org/api/globals.html#performancemeasure)                                   | ✅                                           |
-| [`PerformanceObserver`](https://nodejs.org/api/globals.html#performanceobserver)                                 | ✅                                           |
-| [`PerformanceObserverEntryList`](https://nodejs.org/api/globals.html#performanceobserverentrylist)               | ❌                                           |
-| [`PerformanceResourceTiming`](https://nodejs.org/api/globals.html#performanceresourcetiming)                     | ❌                                           |
-| [`performance`](https://nodejs.org/api/globals.html#performance)                                                 | ✅                                           |
-| [`process`](https://nodejs.org/api/globals.html#process)                                                         | ✅                                           |
-| [`queueMicrotask`](https://nodejs.org/api/globals.html#queuemicrotaskcallback)                                   | ✅                                           |
-| [`ReadableByteStreamController`](https://nodejs.org/api/globals.html#class-readablebytestreamcontroller)         | ✅                                           |
-| [`ReadableStream`](https://nodejs.org/api/globals.html#class-readablestream)                                     | ✅                                           |
-| [`ReadableStreamBYOBReader`](https://nodejs.org/api/globals.html#class-readablestreambyobreader)                 | ✅                                           |
-| [`ReadableStreamBYOBRequest`](https://nodejs.org/api/globals.html#class-readablestreambyobrequest)               | ✅                                           |
-| [`ReadableStreamDefaultController`](https://nodejs.org/api/globals.html#class-readablestreamdefaultcontroller)   | ✅                                           |
-| [`ReadableStreamDefaultReader`](https://nodejs.org/api/globals.html#class-readablestreamdefaultreader)           | ✅                                           |
-| [`require`](https://nodejs.org/api/globals.html#require)                                                         | ✅                                           |
-| [`Response`](https://nodejs.org/api/globals.html#response)                                                       | ✅                                           |
-| [`Request`](https://nodejs.org/api/globals.html#request)                                                         | ✅                                           |
-| [`setImmediate`](https://nodejs.org/api/globals.html#setimmediatecallback-args)                                  | ✅                                           |
-| [`setInterval`](https://nodejs.org/api/globals.html#setintervalcallback-delay-args)                              | ✅                                           |
-| [`setTimeout`](https://nodejs.org/api/globals.html#settimeoutcallback-delay-args)                                | ✅                                           |
-| [`structuredClone`](https://nodejs.org/api/globals.html#structuredclonevalue-options)                            | ✅                                           |
-| [`structuredClone`](https://nodejs.org/api/globals.html#structuredclonevalue-options)                            | ✅                                           |
-| [`SubtleCrypto`](https://nodejs.org/api/globals.html#subtlecrypto)                                               | ✅                                           |
-| [`DOMException`](https://nodejs.org/api/globals.html#domexception)                                               | ✅                                           |
-| [`TextDecoder`](https://nodejs.org/api/globals.html#textdecoder)                                                 | ✅                                           |
-| [`TextDecoderStream`](https://nodejs.org/api/globals.html#class-textdecoderstream)                               | ✅                                           |
-| [`TextEncoder`](https://nodejs.org/api/globals.html#textencoder)                                                 | ✅                                           |
-| [`TextEncoderStream`](https://nodejs.org/api/globals.html#class-textencoderstream)                               | ✅                                           |
-| [`TransformStream`](https://nodejs.org/api/globals.html#class-transformstream)                                   | ✅                                           |
-| [`TransformStreamDefaultController`](https://nodejs.org/api/globals.html#class-transformstreamdefaultcontroller) | ✅                                           |
-| [`URL`](https://nodejs.org/api/globals.html#url)                                                                 | ✅                                           |
-| [`URLSearchParams`](https://nodejs.org/api/globals.html#urlsearchparams)                                         | ✅                                           |
-| [`URLSearchParams`](https://nodejs.org/api/globals.html#urlsearchparams)                                         | ✅                                           |
-| [`WebAssembly`](https://nodejs.org/api/globals.html#webassembly)                                                 | ✅                                           |
-| [`WritableStream`](https://nodejs.org/api/globals.html#class-writablestream)                                     | ✅                                           |
-| [`WritableStreamDefaultController`](https://nodejs.org/api/globals.html#class-writablestreamdefaultcontroller)   | ✅                                           |
-| [`WritableStreamDefaultWriter`](https://nodejs.org/api/globals.html#class-writablestreamdefaultwriter)           | ✅                                           |
