@@ -360,8 +360,11 @@ hello world
 
 ### Specifying worker permissions
 
-::: warning This is an unstable Deno feature. Learn more about
+:::warning
+
+This is an unstable Deno feature. Learn more about
 [unstable features](../fundamentals/stability_and_releases.md#unstable-apis).
+
 :::
 
 The permissions available for the worker are analogous to the CLI permission

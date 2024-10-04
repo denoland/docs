@@ -14,7 +14,7 @@ extension.
 ## Installation
 
 The Deno VS Code extension integrates directly with the Deno CLI using the
-[language server protocol](./cli/lsp_integration.md). This helps ensure that the
+[language server protocol](./lsp_integration.md). This helps ensure that the
 information you get about your code aligns to how that code will work when you
 run it with the Deno CLI.
 
@@ -220,7 +220,7 @@ _References_ setting mentioned above.
 
 ### Testing code lens
 
-The Deno CLI includes a [built-in testing API](./cli/lsp_integration.md#testing)
+The Deno CLI includes a [built-in testing API](./lsp_integration.md#testing)
 available under `Deno.test`. The extension and language server have a code lens
 enabled by default which provides the ability to run a test from within the
 editor.
