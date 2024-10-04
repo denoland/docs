@@ -268,10 +268,13 @@ function generateCrumbs(
     }
 
     if (isSidebarCategory(item)) {
-      const newCurrent = [...current, { label: item.label, href: item.href }];
-      const result = generateCrumbs(url, title, item.items, newCurrent);
-      if (result.some((crumb) => crumb.label === title)) {
-        return result;
+      const childItems: BreadcrumbItem[] = [];
+      generateCrumbs(url, title, item.items, childItems);
+
+      if (childItems.length > 0) {
+        current.push({ label: item.label, href: item.href });
+        current.push(...childItems);
+        return current;
       }
     }
   }

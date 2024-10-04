@@ -50,11 +50,6 @@ export const sidebar = [
         label: "Deno CLI",
         href: "/runtime/reference/cli/",
         items: [
-          "/runtime/reference/cli/unstable_flags/",
-          {
-            label: "Environment variables",
-            id: "/runtime/reference/cli/env_variables/",
-          },
           {
             label: "deno add",
             id: "/runtime/reference/cli/add/",
@@ -155,6 +150,7 @@ export const sidebar = [
             label: "deno upgrade",
             id: "/runtime/reference/cli/upgrade/",
           },
+          "/runtime/reference/cli/unstable_flags/",
         ],
       },
       {
@@ -192,7 +188,7 @@ export const sidebar = [
       "/runtime/reference/migration_guide/",
       {
         label: "LSP integration",
-        id: "/runtime/reference/cli/lsp_integration/",
+        id: "/runtime/reference/lsp_integration/",
       },
     ],
   },
