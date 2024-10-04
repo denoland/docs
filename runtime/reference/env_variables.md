@@ -1,6 +1,6 @@
 ---
 title: "Environment variables"
-oldUrl: 
+oldUrl:
 - /runtime/manual/basics/env_variables/
 - /runtime/reference/cli/env_variables/
 ---

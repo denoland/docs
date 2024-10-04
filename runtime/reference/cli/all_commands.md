@@ -39,15 +39,13 @@ below for more information on each subcommand.
 - [deno fmt](/runtime/reference/cli/formatter/) - format your code
 - [deno info](/runtime/reference/cli/dependency_inspector/) - inspect an ES
   module and all of its dependencies
-- [deno init](/runtime/reference/cli/init/) - create a new project
-  script
+- [deno init](/runtime/reference/cli/init/) - create a new project script
 - [deno jupyter](/runtime/reference/cli/jupyter/) - run a Jupyter notebook
 - [deno lint](/runtime/reference/cli/linter/) - lint your code
 - [deno lsp](/runtime/reference/cli/lsp/) - language server protocol integration
 - [deno publish](/runtime/reference/cli/publish/) - publish a module
 - [deno test](/runtime/reference/cli/test/) - run your tests
-- [deno types](/runtime/reference/cli/types/) - print runtime types
-  or a script
+- [deno types](/runtime/reference/cli/types/) - print runtime types or a script
 - [deno upgrade](/runtime/reference/cli/upgrade/) - upgrade Deno to the latest
   version
 
