@@ -8,8 +8,8 @@ There are several environment variables which can impact the behavior of Deno:
 
 A list of authorization tokens which can be used to allow Deno to access remote
 private code. See the
-[Private modules and repositories](/runtime/reference/private_repositories) section
-for more details.
+[Private modules and repositories](/runtime/reference/private_repositories)
+section for more details.
 
 ### DENO_TLS_CA_STORE
 

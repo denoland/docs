@@ -132,8 +132,8 @@ this:
 ```
 
 Now, you can start your web server, which
-[watches for changes](../../getting_started/command_line_interface.md#watch-mode), by
-running `deno task dev`.
+[watches for changes](../../getting_started/command_line_interface.md#watch-mode),
+by running `deno task dev`.
 
 ```sh
 $ deno task dev

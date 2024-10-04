@@ -316,8 +316,7 @@ sharing code.
 
 :::
 
-See also
-[Configuring TypeScript in Deno](../reference/ts_config_migration.md).
+See also [Configuring TypeScript in Deno](../reference/ts_config_migration.md).
 
 ## Unstable features
 

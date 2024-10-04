@@ -74,9 +74,9 @@ const sql = postgres("postgres://username:password@host:port/database");
 
 ## MongoDB
 
-We suggest using [npm specifiers](../reference/npm.md) to work with the
-official [MongoDB driver on npm](https://www.npmjs.com/package/mongodb). You can
-learn more about how to work with the driver
+We suggest using [npm specifiers](../reference/npm.md) to work with the official
+[MongoDB driver on npm](https://www.npmjs.com/package/mongodb). You can learn
+more about how to work with the driver
 [in the official docs](https://www.mongodb.com/docs/drivers/node/current/). The
 only difference using this module in the context of Deno will be how you import
 the module using an `npm:` specifier.
@@ -142,7 +142,8 @@ db.close();
 To connect to Firebase with Deno, import the
 [firestore npm module](https://firebase.google.com/docs/firestore/quickstart)
 with the [ESM CDN](https://esm.sh/). To learn more about using npm modules in
-Deno with a CDN, see [Using npm packages with CDNs](../fundamentals/modules.md#https-imports).
+Deno with a CDN, see
+[Using npm packages with CDNs](../fundamentals/modules.md#https-imports).
 
 ### Connect to Firebase with the firestore npm module
 
@@ -185,7 +186,8 @@ const auth = getAuth(app);
 To connect to Supabase with Deno, import the
 [supabase-js npm module](https://supabase.com/docs/reference/javascript) with
 the [esm.sh CDN](https://esm.sh/). To learn more about using npm modules in Deno
-with a CDN, see [Using npm packages with CDNs](../fundamentals/modules.md#https-imports).
+with a CDN, see
+[Using npm packages with CDNs](../fundamentals/modules.md#https-imports).
 
 ### Connect to Supabase with the supabase-js npm module
 

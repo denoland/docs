@@ -367,8 +367,9 @@ in to
 ## Running scripts from package.json
 
 Deno supports running npm scripts natively with the
-[`deno task`](../reference/cli/task_runner.md) subcommand. Consider the following
-Node.js project with a script called `start` inside its `package.json`:
+[`deno task`](../reference/cli/task_runner.md) subcommand. Consider the
+following Node.js project with a script called `start` inside its
+`package.json`:
 
 ```json title="package.json"
 {
@@ -430,8 +431,8 @@ One of Deno's core strengths is a unified toolchain that comes with support for
 TypeScript out of the box, and tools like a linter, formatter and a test runner.
 Switching to Deno allows you to simplify your toolchain and reduces the number
 of moving components in your project. Deno also has a more secure runtime, with
-[runtime permissions](../fundamentals/security.md) that allow you to control what
-your code can access.
+[runtime permissions](../fundamentals/security.md) that allow you to control
+what your code can access.
 
 #### deno.json
 
@@ -488,14 +489,15 @@ deno lint --fix
 
 A full list of all supported linting rules can be found on
 [https://lint.deno.land/](https://lint.deno.land/). To learn more about how to
-configure the linter, check out the [`deno lint` subcommand](../reference/cli/linter.md).
+configure the linter, check out the
+[`deno lint` subcommand](../reference/cli/linter.md).
 
 #### Formatting
 
-Deno ships with a [built-in formatter](../reference/cli/formatter.md) that can optionally
-format your code according to the Deno style guide. Instead of adding `prettier`
-to your `devDependencies` you can instead use Deno's built-in zero-config code
-formatter `deno fmt`.
+Deno ships with a [built-in formatter](../reference/cli/formatter.md) that can
+optionally format your code according to the Deno style guide. Instead of adding
+`prettier` to your `devDependencies` you can instead use Deno's built-in
+zero-config code formatter `deno fmt`.
 
 You can run the formatter on your project by running:
 
