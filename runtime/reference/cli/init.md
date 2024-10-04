@@ -116,7 +116,7 @@ Run these commands to get started
   deno -R test
 ```
 
-Your [`deno.json`](../getting_started/configuration_file) file will look like
+Your [`deno.json`](../../fundamentals/configuration.md) file will look like
 this:
 
 ```json
@@ -132,7 +132,7 @@ this:
 ```
 
 Now, you can start your web server, which
-[watches for changes](../getting_started/command_line_interface#watch-mode), by
+[watches for changes](../../getting_started/command_line_interface.md#watch-mode), by
 running `deno task dev`.
 
 ```sh

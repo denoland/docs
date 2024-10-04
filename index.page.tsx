@@ -113,7 +113,7 @@ export default function () {
                 title="Testing in Deno"
                 description="All about Deno’s built-in test runner for JavaScript or TypeScript code."
                 linktext="More about Testing"
-                link="/runtime/manual/basics/testing/"
+                link="/runtime/fundamentals/testing"
                 product="runtime"
               />
             </div>
@@ -438,7 +438,7 @@ export default function () {
                 title="Connect with our community"
                 description="Get help from the Deno community"
                 linktext="Learn more"
-                link="/runtime/manual/help/"
+                link="/runtime/help"
                 product="help"
               />
               <ContentItem

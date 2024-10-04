@@ -18,14 +18,8 @@ async function traversePage(url: URL, content: string) {
   const doc = new DOMParser().parseFromString(content, "text/html");
   await Promise.allSettled([...doc.querySelectorAll("a").values()]
     .map((a) => {
-      const href = a.getAttribute("href");
-      if (!href) {
-        hasInvalidHrefs = true;
-        console.error(`Missing href in ${url.pathname}: ${a.outerHTML}`);
-        return;
-      }
-
-      if (href.startsWith("http") || href.startsWith("mailto")) {
+      const href = a.getAttribute("href")?.trim();
+      if (!href || href.startsWith("http") || href.startsWith("mailto")) {
         return;
       }
 

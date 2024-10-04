@@ -12,7 +12,7 @@ command: task
 specific to a codebase.
 
 To get started, define your commands in your codebase's
-[Deno configuration file](../getting_started/configuration_file.md) under a
+[Deno configuration file](../../fundamentals/configuration.md) under a
 `"tasks"` key.
 
 For example:

@@ -106,7 +106,7 @@ you will see the contents of your local directory.
 
 ### Using the @std/http file server in a Deno project
 
-To use the file-server in a [Deno project](/runtime/tutorials/init_project/),
+To use the file-server in a [Deno project](/runtime/getting_started/first_project),
 you can add it to your `deno.json` file with:
 
 ```sh

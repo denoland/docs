@@ -85,7 +85,7 @@ The example code shown here and in future chapters assume that you have
 [Deno 1.38 or higher](/runtime/getting_started/installation) installed.
 
 When working with a REST API, it is useful to store authentication credentials
-in the [system environment](/runtime/manual/basics/env_variables), to prevent
+in the [system environment](/runtime/reference/env_variables), to prevent
 you from accidentally checking them in to source control.
 
 For this tutorial, we'll use the new `--env` flag

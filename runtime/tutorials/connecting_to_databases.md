@@ -74,7 +74,7 @@ const sql = postgres("postgres://username:password@host:port/database");
 
 ## MongoDB
 
-We suggest using [npm specifiers](../node/npm_specifiers.md) to work with the
+We suggest using [npm specifiers](../reference/npm.md) to work with the
 official [MongoDB driver on npm](https://www.npmjs.com/package/mongodb). You can
 learn more about how to work with the driver
 [in the official docs](https://www.mongodb.com/docs/drivers/node/current/). The
@@ -113,7 +113,7 @@ There are two primary solutions to connect to SQLite in Deno:
 ### Connect to SQLite with the FFI Module
 
 [sqlite3](https://deno.land/x/sqlite3) provides JavaScript bindings to the
-SQLite3 C API, using [Deno FFI](../runtime/ffi_api.md).
+SQLite3 C API, using [Deno FFI](../reference/deno_namespace_apis.md#ffi).
 
 ```ts
 import { Database } from "https://deno.land/x/sqlite3@LATEST_VERSION/mod.ts";
@@ -142,7 +142,7 @@ db.close();
 To connect to Firebase with Deno, import the
 [firestore npm module](https://firebase.google.com/docs/firestore/quickstart)
 with the [ESM CDN](https://esm.sh/). To learn more about using npm modules in
-Deno with a CDN, see [Using npm packages with CDNs](../node/cdns.md).
+Deno with a CDN, see [Using npm packages with CDNs](../fundamentals/modules.md#https-imports).
 
 ### Connect to Firebase with the firestore npm module
 
@@ -185,7 +185,7 @@ const auth = getAuth(app);
 To connect to Supabase with Deno, import the
 [supabase-js npm module](https://supabase.com/docs/reference/javascript) with
 the [esm.sh CDN](https://esm.sh/). To learn more about using npm modules in Deno
-with a CDN, see [Using npm packages with CDNs](../node/cdns.md).
+with a CDN, see [Using npm packages with CDNs](../fundamentals/modules.md#https-imports).
 
 ### Connect to Supabase with the supabase-js npm module
 
@@ -289,7 +289,7 @@ Deno.serve({ port: 3000 }, async () => {
 To make GraphQL client calls in Deno, import the
 [graphql npm module](https://www.npmjs.com/package/graphql) with the
 [esm CDN](https://esm.sh/). To learn more about using npm modules in Deno via
-CDN read [here](../node/cdns.md).
+CDN read [here](../fundamentals/modules.md#https-imports).
 
 #### Make GraphQL client calls with the graphql npm module
 

@@ -71,7 +71,7 @@ that works both with the Deno CLI and Deno Deploy.
 
 Deno only supports absolute file URLs, this means that `fetch("./some.json")`
 will not work. It should be noted though that if
-[`--location`](./location_api.md) is specified, relative URLs use the
+[`--location`](#location) is specified, relative URLs use the
 `--location` as the base, but a `file:` URL cannot be passed as the
 `--location`.
 
@@ -361,13 +361,12 @@ hello world
 
 ### Specifying worker permissions
 
-:::warning This is an unstable Deno feature. Learn more about
-[unstable features](/runtime/fundamentals/stability/). :::
+::: warning This is an unstable Deno feature. Learn more about [unstable features](../fundamentals/stability_and_releases.md#unstable-apis). :::
 
 The permissions available for the worker are analogous to the CLI permission
 flags, meaning every permission enabled there can be disabled at the level of
 the Worker API. You can find a more detailed description of each of the
-permission options [here](../basics/permissions.md).
+permission options [here](../fundamentals/security.md).
 
 By default a worker will inherit permissions from the thread it was created in,
 however in order to allow users to limit the access of this worker we provide

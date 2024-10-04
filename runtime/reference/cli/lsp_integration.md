@@ -19,7 +19,7 @@ The Deno CLI comes with a built in language server that can provide an
 intelligent editing experience, as well as a way to easily access the other
 tools that come built in with Deno. For most users, using the language server
 would be via an editor such as
-[Visual Studio Code](/runtime/manual/references/vscode_deno/) or
+[Visual Studio Code](../vscode.md) or
 [other editors](/runtime/getting_started/setup_your_environment/).
 
 This page is designed for those creating integrations to the language server or
