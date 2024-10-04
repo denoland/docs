@@ -609,14 +609,15 @@ deno lint --fix
 
 A full list of all supported linting rules can be found on
 [https://lint.deno.land/](https://lint.deno.land/). To learn more about how to
-configure the linter, check out the [`deno lint` subcommand](../tools/linter/).
+configure the linter, check out the
+[`deno lint` subcommand](/runtime/reference/cli/linter/).
 
 **Formatting**
 
-Deno ships with a [built-in formatter](../tools/formatter/) that can optionally
-format your code according to the Deno style guide. Instead of adding `prettier`
-to your `devDependencies` you can instead use Deno's built-in zero-config code
-formatter `deno fmt`.
+Deno ships with a [built-in formatter](/runtime/reference/cli/formatter/) that
+can optionally format your code according to the Deno style guide. Instead of
+adding `prettier` to your `devDependencies` you can instead use Deno's built-in
+zero-config code formatter `deno fmt`.
 
 You can run the formatter on your project by running:
 
@@ -633,7 +634,7 @@ deno fmt --check
 
 The formatting rules can be configured in your `deno.json` file. To learn more
 about how to configure the formatter, check out the
-[`deno fmt` subcommand](../tools/formatter/).
+[`deno fmt` subcommand](/runtime/reference/cli/formatter/).
 
 **Testing**
 
@@ -656,14 +657,14 @@ When passing the `--watch` flag, the test runner will automatically reload when
 any of the imported modules change.
 
 To learn more about the test runner and how to configure it, check out the
-[`deno test` subcommand](../tools/test/) documentation.
+[`deno test` subcommand](/runtime/reference/cli/test/) documentation.
 
 ## Private registries
 
 :::caution
 
 Not to be confused with
-[private repositories and modules](/runtime/manual/advanced/private_repositories/).
+[private repositories and modules](/runtime/reference/private_repositories/).
 
 :::
 

@@ -6,15 +6,14 @@ command: compile
 
 ## Flags
 
-As with [`deno install`](./script_installer.md), the runtime flags used to
-execute the script must be specified at compilation time. This includes
-permission flags.
+As with [`deno install`](./install.md), the runtime flags used to execute the
+script must be specified at compilation time. This includes permission flags.
 
 ```sh
 deno compile --allow-read --allow-net jsr:@std/http@1.0.0/file-server
 ```
 
-[Script arguments](../getting_started/command_line_interface.md#script-arguments)
+[Script arguments](../../getting_started/command_line_interface.md#passing-script-arguments)
 can be partially embedded.
 
 ```console
@@ -87,8 +86,8 @@ deno compile --include calc.ts --include better_calc.ts main.ts
 ## Workers
 
 Similarly to non-statically analyzable dynamic imports, code for
-[workers](../runtime/workers.md) is not included in the compiled executable by
-default. There are two ways to include workers:
+[workers](../web_platform_apis.md#web-workers) is not included in the compiled
+executable by default. There are two ways to include workers:
 
 1. Use the `--include <path>` flag to include the worker code.
 
@@ -145,4 +144,4 @@ $ signtool sign /fd SHA256 main.exe
 
 ## Unavailable in executables
 
-- [Web Storage API](../runtime/web_storage_api.md)
+- [Web Storage API](../web_platform_apis.md#web-storage)
