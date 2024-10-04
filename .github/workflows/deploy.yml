@@ -44,6 +44,15 @@ jobs:
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
         run: DENO_FUTURE=1 deno task build
 
+      - name: Run server
+        working-directory: _site
+        run: deno run --allow-read=. --allow-net --allow-env --allow-import=cdn.jsdelivr.net,raw.githubusercontent.com,deno.land,jsr.io server.ts
+
+      - name: Link checker
+        env:
+          DOCS_ROOT: "http://localhost:8000"
+        run: deno run --allow-net .github/workflows/link_checker.ts
+
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:

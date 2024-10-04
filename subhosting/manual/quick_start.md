@@ -6,7 +6,7 @@ oldUrl:
 
 Looking for the smallest possible example that shows how to deploy code to
 Deno's isolate cloud? We've got you covered below, or you can skip to the
-[more detailed getting started guide](#getting_started).
+[more detailed getting started guide](#getting-started-with-subhosting).
 
 ```ts
 // 1.) Get API access info ready
@@ -55,8 +55,6 @@ console.log(
   `https://${project.name}-${deployment.id}.deno.dev`,
 );
 ```
-
-<a name="getting_started"></a>
 
 ## Getting started with subhosting
 

@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@b-fuze/deno-dom@*": "0.1.48",
     "jsr:@davidbonnet/astring@1.8.6": "1.8.6",
     "jsr:@std/cli@1.0.4": "1.0.4",
     "jsr:@std/cli@^1.0.4": "1.0.4",
@@ -58,6 +59,9 @@
     "npm:unidecode@1.1.0": "1.1.0"
   },
   "jsr": {
+    "@b-fuze/deno-dom@0.1.48": {
+      "integrity": "bf5b591aef2e9e9c59adfcbb93a9ecd45bab5b7c8263625beafa5c8f1662e7da"
+    },
     "@davidbonnet/astring@1.8.6": {
       "integrity": "98b4914c8863cdf8c0ff83bb5c528caa67a8dca6020ad6234113499f00583e3a"
     },
