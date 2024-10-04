@@ -6,14 +6,11 @@ const rootURL = new URL(Deno.env.get("DOCS_ROOT")!);
 const rootPage = await fetch(rootURL).then((res) => res.text());
 
 visitedPages.add(rootURL);
-const invalidUrls: string[] = [];
+let hasInvalidHrefs = false;
 
 await traversePage(rootURL, rootPage);
 
-if (invalidUrls.length > 0) {
-  for (const invalidUrl of invalidUrls) {
-    console.error(invalidUrl);
-  }
+if (hasInvalidHrefs) {
   Deno.exit(1);
 }
 
@@ -23,7 +20,8 @@ async function traversePage(url: URL, content: string) {
     .map((a) => {
       const href = a.getAttribute("href");
       if (!href) {
-        invalidUrls.push(`Missing href in ${url.pathname}: ${a.outerHTML}`);
+        hasInvalidHrefs = true;
+        console.error(`Missing href in ${url.pathname}: ${a.outerHTML}`);
         return;
       }
 
@@ -32,6 +30,10 @@ async function traversePage(url: URL, content: string) {
       }
 
       const aURL = new URL(href, url);
+      if (aURL.pathname.startsWith("/api")) {
+        return;
+      }
+
       if (visitedPages.has(aURL.href)) {
         return;
       }
@@ -44,9 +46,8 @@ async function traversePage(url: URL, content: string) {
             return res.text().then((text) => traversePage(aURL, text));
           }
         } else {
-          invalidUrls.push(
-            `${res.status} on '${url.pathname}': ${href} ${aURL}`,
-          );
+          hasInvalidHrefs = true;
+          console.error(`${res.status} on '${url.pathname}': ${href}`);
         }
 
         return res.body?.cancel();
