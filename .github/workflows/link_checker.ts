@@ -1,6 +1,6 @@
 import { DOMParser } from "jsr:@b-fuze/deno-dom";
 
-const visitedPages = new Set<URL>();
+const visitedPages = new Set<string>();
 
 const rootURL = new URL(Deno.env.get("DOCS_ROOT")!);
 const rootPage = await fetch(rootURL).then((res) => res.text());
@@ -23,8 +23,8 @@ async function traversePage(url: URL, content: string) {
     .map((a) => {
       const href = a.getAttribute("href");
       if (!href) {
-        console.error(`Empty href in ${url.pathname}`);
-        Deno.exit(1);
+        invalidUrls.push(`Missing href in ${url.pathname}: ${a.outerHTML}`);
+        return;
       }
 
       if (href.startsWith("http") || href.startsWith("mailto")) {
@@ -32,11 +32,11 @@ async function traversePage(url: URL, content: string) {
       }
 
       const aURL = new URL(href, url);
-      if (visitedPages.has(aURL)) {
+      if (visitedPages.has(aURL.href)) {
         return;
       }
 
-      visitedPages.add(aURL);
+      visitedPages.add(aURL.href);
 
       return fetch(aURL).then((res) => {
         if (res.status === 200) {
@@ -48,6 +48,8 @@ async function traversePage(url: URL, content: string) {
             `${res.status} on '${url.pathname}': ${href} ${aURL}`,
           );
         }
+
+        return res.body?.cancel();
       });
     }));
 }
