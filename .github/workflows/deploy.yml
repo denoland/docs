@@ -47,15 +47,12 @@ jobs:
 
       - name: Run server
         working-directory: _site
-        env:
-          DENO_FUTURE: 1
-        run: deno run --allow-read=. --allow-net --allow-env server.ts &
+        run: deno run --no-lock --allow-read=. --allow-net --allow-env server.ts &
 
       - name: Link checker
         env:
           DOCS_ROOT: "http://localhost:8000"
-          DENO_FUTURE: 1
-        run: deno run --allow-net .github/workflows/link_checker.ts
+        run: deno run --no-lock --allow-net .github/workflows/link_checker.ts
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
