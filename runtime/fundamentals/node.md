@@ -60,8 +60,8 @@ editor.
 
 ## Using npm packages
 
-Deno has native support for importing npm packages by using `npm:`
-specifiers. For example:
+Deno has native support for importing npm packages by using `npm:` specifiers.
+For example:
 
 ```ts title="main.js"
 import * as emoji from "npm:node-emoji";
@@ -528,8 +528,10 @@ import { Buffer } from "node:buffer";
 ### Running scripts
 
 Deno supports running npm scripts natively with the
-[`deno task`](/runtime/reference/cli/task_runner/) subcommand (If you're migrating from Node.js, this is similar to the `npm run script` command). Consider the following
-Node.js project with a script called `start` inside its `package.json`:
+[`deno task`](/runtime/reference/cli/task_runner/) subcommand (If you're
+migrating from Node.js, this is similar to the `npm run script` command).
+Consider the following Node.js project with a script called `start` inside its
+`package.json`:
 
 ```json title="package.json"
 {
@@ -563,8 +565,8 @@ using the `imports` option - you can migrate your dependencies one-by-one from
 `package.json`, or elect to not define them in the config file at all and use
 `npm:` specifiers inline in your code.
 
-In addition to specifying dependencies you can use `deno.json` to define tasks, lint and
-format options, path mappings, and other runtime configurations.
+In addition to specifying dependencies you can use `deno.json` to define tasks,
+lint and format options, path mappings, and other runtime configurations.
 
 **Linting**
 
