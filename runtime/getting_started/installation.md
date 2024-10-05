@@ -2,6 +2,7 @@
 title: Installation
 oldUrl:
   - /runtime/manual/fundamentals/installation
+  - /runtime/fundamentals/installation
 ---
 
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
