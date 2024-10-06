@@ -65,7 +65,7 @@ mycompany.com:8111/:_authToken=token
 ```
 
 Learn more about private registry configuration
-[on `npm packages` page](/runtime/reference/npm/#how-to-use-private-registries-with-deno).
+[on `npm packages` page](/runtime/fundamentals/node/#private-registries).
 
 Deno 2 has workspace support, allowing you to mix Deno-first and Node-first
 packages in the same monorepo, making incremental adoption fast and
