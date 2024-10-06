@@ -74,7 +74,7 @@ const sql = postgres("postgres://username:password@host:port/database");
 
 ## MongoDB
 
-We suggest using [npm specifiers](../reference/npm.md) to work with the official
+We suggest using [npm specifiers](/runtime/fundamentals/node/#using-npm-packages) to work with the official
 [MongoDB driver on npm](https://www.npmjs.com/package/mongodb). You can learn
 more about how to work with the driver
 [in the official docs](https://www.mongodb.com/docs/drivers/node/current/). The

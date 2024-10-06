@@ -79,7 +79,7 @@ projects, including the
 [Deno Standard Library](/runtime/fundamentals/standard_library/).
 
 You can
-[read more about Deno's support for npm packages here](/runtime/reference/npm).
+[read more about Deno's support for npm packages here](/runtime/fundamentals/node/#using-npm-modules).
 
 ## Managing third party modules and libraries
 
