@@ -1,1 +1,7 @@
-status: good
+status: partial
+symbols:
+  Options: This class is not supported.
+  BrotliOptions: This class is not supported.
+  BrotliCOmpress: This class is not supported.
+  BrotliDecompress: This class is not supported.
+  ZlibBase: This class is not supported.
