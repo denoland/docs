@@ -53,5 +53,5 @@ Deno embraces modern JavaScript features, including ESModules. This means you
 can use the latest syntax and capabilities of the language, ensuring your code
 is up-to-date and leveraging the best practices in the industry.
 
-- [Using ESModules](/runtime/fundamentals/esmodules/)
+- [Using ESModules](/runtime/fundamentals/modules/)
 - [Migrating from CJS to ESM](/runtime/tutorials/cjs_to_esm/)

@@ -36,4 +36,4 @@ This comprehensive resource covers all the commands and options available in the
 Deno command line interface, providing you with the knowledge you need to
 effectively manage and run your Deno applications.
 
-- [Deno CLI Reference Guide](/runtime/reference/cli/all_commands/)
+- [Deno CLI Reference Guide](/runtime/reference/cli/)
