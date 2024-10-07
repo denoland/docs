@@ -363,7 +363,7 @@ hello world
 :::warning
 
 This is an unstable Deno feature. Learn more about
-[unstable features](/runtime/fundamentals/stability_and_releases.md#unstable-apis).
+[unstable features](/runtime/fundamentals/stability_and_releases/#unstable-apis).
 
 :::
 

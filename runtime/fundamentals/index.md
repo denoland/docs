@@ -27,7 +27,7 @@ ecosystem of existing libraries and tools. This compatibility ensures that you
 can integrate Deno into your projects seamlessly.
 
 - [Node.js compatibility](/runtime/fundamentals/node/)
-- [npm compatibility](/runtime/reference/npm/)
+- [npm compatibility](/runtime/fundamentals/node/#using-npm-packages)
 
 ## Standard Library
 
