@@ -120,6 +120,7 @@ and any other notes about that option:
 | `noErrorTruncation`              | `false`                 |                                                                                                                                           |
 | `noFallthroughCasesInSwitch`     | `false`                 |                                                                                                                                           |
 | `noImplicitAny`                  | `true`                  |                                                                                                                                           |
+| `noImplicitOverride`             | `true`                  |                                                                                                                                           |
 | `noImplicitReturns`              | `false`                 |                                                                                                                                           |
 | `noImplicitThis`                 | `true`                  |                                                                                                                                           |
 | `noImplicitUseStrict`            | `true`                  |                                                                                                                                           |
@@ -135,7 +136,7 @@ and any other notes about that option:
 | `strictNullChecks`               | `true`                  |                                                                                                                                           |
 | `suppressExcessPropertyErrors`   | `false`                 |                                                                                                                                           |
 | `suppressImplicitAnyIndexErrors` | `false`                 |                                                                                                                                           |
-| `useUnknownInCatchVariables`     | `false`                 |                                                                                                                                           |
+| `useUnknownInCatchVariables`     | `true`                  |                                                                                                                                           |
 
 For a full list of compiler options and how they affect TypeScript, please refer
 to the

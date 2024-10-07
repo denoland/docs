@@ -1,7 +1,8 @@
 ---
-title: "Contributing"
+title: "Contributing and support"
 oldUrl:
   - /runtime/manual/contributing/
+  - /runtime/manual/contributing/contribute
   - /runtime/manual/references/contributing/
 ---
 

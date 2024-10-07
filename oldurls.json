@@ -8,7 +8,5 @@
   "/runtime/manual/advanced/embedding_deno/": "/deploy/manual/",
   "/runtime/manual/advanced/deploying_deno/": "/deploy/manual/",
   "/runtime/reference/tcp_udp_connections/": "/examples/",
-  "/runtime/fundamentals/": "/runtime/",
-  "/runtime/getting_started/": "/runtime/",
-  "/runtime/reference/": "/runtime/"
+  "/runtime/getting_started/": "/runtime/"
 }

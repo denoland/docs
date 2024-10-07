@@ -4,12 +4,9 @@ import { parse as yamlParse } from "jsr:@std/yaml";
 
 export const sidebar = [
   {
-    title: "Getting Started",
+    title: "Getting started",
+    href: "/runtime/",
     items: [
-      {
-        label: "Hello World",
-        id: "/runtime/",
-      },
       "/runtime/getting_started/installation/",
       "/runtime/getting_started/first_project/",
       "/runtime/getting_started/setup_your_environment/",
@@ -18,6 +15,7 @@ export const sidebar = [
   },
   {
     title: "Fundamentals",
+    href: "/runtime/fundamentals/",
     items: [
       "/runtime/fundamentals/typescript/",
       "/runtime/fundamentals/node/",
@@ -41,10 +39,12 @@ export const sidebar = [
     ],
   },
   {
-    title: "Reference Guides",
+    title: "Reference guides",
+    href: "/runtime/reference/",
     items: [
       {
         label: "Deno CLI",
+        href: "/runtime/reference/cli/",
         items: [
           {
             label: "deno add",
@@ -189,12 +189,11 @@ export const sidebar = [
     ],
   },
   {
-    title: "Contributing and Support",
+    title: "Contributing and support",
     items: [
       {
         label: "Contributing to Deno",
         items: [
-          "/runtime/contributing/contribute/",
           "/runtime/contributing/architecture/",
           "/runtime/contributing/building_from_source/",
           "/runtime/contributing/profiling/",
@@ -207,7 +206,8 @@ export const sidebar = [
     ],
   },
   {
-    title: "Tutorials and Examples",
+    title: "Tutorials",
+    href: "/runtime/tutorials/",
     items: [
       "/runtime/tutorials/hello_world/",
       "/runtime/tutorials/fetch_data/",
