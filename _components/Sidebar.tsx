@@ -57,7 +57,8 @@ function SidebarSection(
             <a href={headingLink}>
               <h2
                 id={categoryTitle}
-                class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3 capitalize"
+                class="border-b border-gray-200 pt-2 pb-1.5 -mx-5 px-8 mt-4 mb-2 text-sm font-semibold hover:bg-blue-50 current:bg-blue-50 current:text-blue-500 text-gray-3 capitalize"
+                aria-current={props.url === headingLink ? "page" : undefined}
               >
                 {props.section.title}
               </h2>
@@ -66,12 +67,12 @@ function SidebarSection(
           : (
             <h2
               id={categoryTitle}
-              class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3 capitalize"
+              class="border-b border-gray-200 pt-2 pb-0.5 -mx-5 px-8 mt-4 mb-3 text-sm font-semibold text-gray-3 capitalize"
             >
               {props.section.title}
             </h2>
           )
-      )}
+      )}{" "}
       <ul aria-labelledby={categoryTitle}>
         {props.section.items.map((item) => (
           <li class="mx-2 mt-1">
