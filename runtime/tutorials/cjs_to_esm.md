@@ -10,8 +10,8 @@ to run it in Deno. This guide will help you update your code to use ESM syntax.
 
 ## Module imports and exports
 
-Deno supports [ECMAScript modules](../fundamentals/modules.md) exclusively. If
-your Node.js code uses
+Deno supports [ECMAScript modules](/runtime/fundamentals/modules/) exclusively.
+If your Node.js code uses
 [`require`](https://nodejs.org/api/modules.html#modules-commonjs-modules), you
 should update it to use `import` statements instead. If your internal code uses
 CommonJS-style exports, those will also need to be updated.
@@ -29,8 +29,8 @@ const addNumbers = require("./add_numbers");
 console.log(addNumbers(2, 2));
 ```
 
-To convert these to [ECMAScript modules](../fundamentals/modules.md), we'll make
-a few minor changes:
+To convert these to [ECMAScript modules](/runtime/fundamentals/modules/), we'll
+make a few minor changes:
 
 ```js title="add_numbers.js"
 export function addNumbers(num1, num2) {

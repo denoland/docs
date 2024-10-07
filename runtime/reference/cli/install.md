@@ -131,7 +131,7 @@ The above command creates an executable called `file_server` that runs with
 network and read permissions and binds to port 8080.
 
 For good practice, use the
-[`import.meta.main`](../../tutorials/module_metadata.md) idiom to specify the
+[`import.meta.main`](/runtime/tutorials/module_metadata/) idiom to specify the
 entry point in an executable script.
 
 Example:

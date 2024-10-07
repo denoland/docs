@@ -664,7 +664,7 @@ To learn more about the test runner and how to configure it, check out the
 :::caution
 
 Not to be confused with
-[private repositories and modules](/runtime/reference/private_repositories/).
+[private repositories and modules](/runtime/fundamentals/modules/#private-repositories).
 
 :::
 

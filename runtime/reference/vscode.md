@@ -14,9 +14,9 @@ extension.
 ## Installation
 
 The Deno VS Code extension integrates directly with the Deno CLI using the
-[language server protocol](./lsp_integration.md). This helps ensure that the
-information you get about your code aligns to how that code will work when you
-run it with the Deno CLI.
+[language server protocol](/runtime/reference/lsp_integration/). This helps
+ensure that the information you get about your code aligns to how that code will
+work when you run it with the Deno CLI.
 
 The Deno extension is installed like other extensions in VS Code. Search for
 `Deno` in the extensions tab of VS Code and click the **install** button, or
