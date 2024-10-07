@@ -28,7 +28,7 @@ packages on JSR, but here are a few examples:
 - [@std/jsonc](https://jsr.io/@std/jsonc): (De)serialization of JSON with
   comments
 - [@std/encoding](https://jsr.io/@std/encoding): Utilities for encoding and
-  decoding common formats like hex, base64, and varint
+  decoding common formats like hex, base64, and variant
 
 ## Versioning and stability
 

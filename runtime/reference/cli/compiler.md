@@ -14,7 +14,7 @@ permission flags.
 deno compile --allow-read --allow-net jsr:@std/http@1.0.0/file-server
 ```
 
-[Script arguments](/runtime/getting_started/command_line_interface.md#passing-script-arguments)
+[Script arguments](/runtime/getting_started/command_line_interface/#passing-script-arguments)
 can be partially embedded.
 
 ```console
