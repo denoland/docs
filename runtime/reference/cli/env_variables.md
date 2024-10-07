@@ -88,7 +88,7 @@ variables. See the [Proxies](#proxies) section for more information.
 ### NPM_CONFIG_REGISTRY
 
 The npm registry to use when loading modules via
-[npm specifiers](/runtime/reference/npm)
+[npm specifiers](/runtime/fundamentals/node/#using-npm-packages)
 
 ## Proxies
 
