@@ -28,7 +28,7 @@ deno run --unstable-byonm main.ts
 
 You can specify which unstable features you'd like to enable for your project
 using a
-[configuration option in `deno.json`](../getting_started/configuration_file.md).
+[configuration option in `deno.json`](/runtime/fundamentals/configuration/).
 
 ```json title="deno.json"
 {
@@ -58,10 +58,10 @@ export DENO_UNSTABLE_BARE_NODE_BUILTINS=true
 **Environment variable:** `DENO_UNSTABLE_BARE_NODE_BUILTINS`
 
 This flag enables you to
-[import Node.js built-in modules](../node/node_specifiers.md) without a `node:`
-specifier, as in the example below. You can also use this flag to enable npm
-packages without an `npm:` specifier if you are manually managing your Node.js
-dependencies ([see `byonm` flag](#--unstable-byonm)).
+[import Node.js built-in modules](../../fundamentals/node.md#node-built-in-modules)
+without a `node:` specifier, as in the example below. You can also use this flag
+to enable npm packages without an `npm:` specifier if you are manually managing
+your Node.js dependencies ([see `byonm` flag](#--unstable-byonm)).
 
 ```ts title="example.ts"
 import { readFileSync } from "fs";

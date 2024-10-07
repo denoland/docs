@@ -124,7 +124,7 @@ Official Docker images for Deno.
 
 ## General remarks
 
-- Read the [style guide](/runtime/contribution/style_guide).
+- Read the [style guide](/runtime/contributing/style_guide).
 
 - Please don't make [the benchmarks](https://deno.land/benchmarks) worse.
 

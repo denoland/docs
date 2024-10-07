@@ -10,8 +10,6 @@ within the system. These resources are also represented in the
 
 ![overview of subhosting resources](./images/subhosting-org-structure.svg)
 
-<a id="organizations"></a>
-
 ## Organizations
 
 [**Organizations**](https://apidocs.deno.com/#get-/organizations/-organizationId-)
@@ -25,8 +23,6 @@ Other Deploy users can be invited to collaborate on an organization, and
 with organization access the ability to modify resources within the org via API.
 New organizations can be created in the
 [Deploy dashboard](https://dash.deno.com/orgs/new).
-
-<a id="projects"></a>
 
 ## Projects
 
@@ -45,8 +41,6 @@ minute granularity.
 > do not cost anything. However analytics are reported on a per-project basis,
 > if you have multiple tenants we recommend setting up a project for each.
 > Particularly if you expect to bill your users for their usage.
-
-<a id="deployments"></a>
 
 ## Deployments
 
@@ -83,8 +77,6 @@ deployments and make them unreachable.
 > and then remap its domain to the new deployment. The redeploy endpoint can
 > create a new deployment from an existing one with different settings.
 
-<a id="domains"></a>
-
 ## Custom domains
 
 [**Custom domains**](https://apidocs.deno.com/#get-/organizations/-organizationId-/domains)
@@ -110,8 +102,6 @@ a developer opens a github pull request, and commits to the “main” branch ar
 automatically turned into production deployments. Although subhosting does not
 provide github integration out of the box, it has all the primitives you need to
 define your own semantics for creating preview and production deployments.
-
-<a id="database"></a>
 
 ## Connecting a KV Database
 

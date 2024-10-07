@@ -2,6 +2,7 @@
 title: Installation
 oldUrl:
   - /runtime/manual/fundamentals/installation
+  - /runtime/fundamentals/installation
 ---
 
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
@@ -203,4 +204,4 @@ deno upgrade --version 1.0.1
 ## Building from source
 
 Information about how to build from source can be found in the
-[`Contributing`](../references/contributing/building_from_source.md) chapter.
+[`Contributing`](../contributing/building_from_source.md) chapter.
