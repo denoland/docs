@@ -1903,7 +1903,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/fs@~0.229.3",
+      "jsr:@std/fs@^0.229.3",
       "npm:autoprefixer@^10.4.20",
       "npm:postcss@^8.4.41",
       "npm:tailwindcss@^3.4.9"
