@@ -34,7 +34,7 @@ export default function Header({
             </button>
           )}
           <a class="flex items-center gap-2.5 mr-5" href="/">
-            <div class="block size-6">
+            <div class="block size-8">
               <img src="/img/logo.svg" alt="Deno Docs" />
             </div>
             {/* custom font size for logo */}
