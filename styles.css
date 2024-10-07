@@ -132,7 +132,7 @@ body:not(:has(.ddoc)) {
 
     &:hover,
     &:focus {
-      @apply opacity-100 bg-gray-200;
+      @apply opacity-100 bg-gray-100;
     }
 
     &:active {
