@@ -7,7 +7,7 @@ export type SidebarItem = string | SidebarDoc | SidebarLink | SidebarCategory;
 export interface SidebarSection {
   title: string;
   href?: string;
-  items: SidebarItem[];
+  items: (string | SidebarItem)[];
 }
 
 export interface SidebarDoc {

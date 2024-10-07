@@ -7,10 +7,6 @@ export const sidebar = [
     title: "Getting started",
     href: "/runtime/",
     items: [
-      {
-        label: "Hello World",
-        id: "/runtime/",
-      },
       "/runtime/getting_started/installation/",
       "/runtime/getting_started/first_project/",
       "/runtime/getting_started/setup_your_environment/",
