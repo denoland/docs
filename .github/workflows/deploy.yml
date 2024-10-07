@@ -45,10 +45,6 @@ jobs:
           DENO_FUTURE: 1
         run: deno task build
 
-      - name: Run server
-        working-directory: _site
-        run: deno run --no-lock --allow-read=. --allow-net --allow-env server.ts &
-
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
