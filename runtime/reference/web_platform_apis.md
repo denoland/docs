@@ -363,14 +363,14 @@ hello world
 :::warning
 
 This is an unstable Deno feature. Learn more about
-[unstable features](../fundamentals/stability_and_releases.md#unstable-apis).
+[unstable features](/runtime/fundamentals/stability_and_releases.md#unstable-apis).
 
 :::
 
 The permissions available for the worker are analogous to the CLI permission
 flags, meaning every permission enabled there can be disabled at the level of
 the Worker API. You can find a more detailed description of each of the
-permission options [here](../fundamentals/security.md).
+permission options [here](/runtime/fundamentals/security/).
 
 By default a worker will inherit permissions from the thread it was created in,
 however in order to allow users to limit the access of this worker we provide

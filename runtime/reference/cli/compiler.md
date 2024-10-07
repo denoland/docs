@@ -6,14 +6,15 @@ command: compile
 
 ## Flags
 
-As with [`deno install`](./install.md), the runtime flags used to execute the
-script must be specified at compilation time. This includes permission flags.
+As with [`deno install`](/runtime/reference/cli/install/), the runtime flags
+used to execute the script must be specified at compilation time. This includes
+permission flags.
 
 ```sh
 deno compile --allow-read --allow-net jsr:@std/http@1.0.0/file-server
 ```
 
-[Script arguments](../../getting_started/command_line_interface.md#passing-script-arguments)
+[Script arguments](/runtime/getting_started/command_line_interface.md#passing-script-arguments)
 can be partially embedded.
 
 ```console

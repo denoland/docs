@@ -137,7 +137,8 @@ Sloppy imports will allow (but print warnings for) the following:
 - Import a directory path, and automatically use `index.js` or `index.ts` as the
   import for that directory
 
-[`deno compile`](./compiler.md) does not support sloppy imports.
+[`deno compile`](/runtime/reference/cli/compiler/) does not support sloppy
+imports.
 
 ## `--unstable-unsafe-proto`
 
