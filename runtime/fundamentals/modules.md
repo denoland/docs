@@ -426,7 +426,6 @@ remote modules. The value of the environment variable is in the format of _n_
 number of tokens delimited by a semi-colon (`;`) where each token is either:
 
 - a bearer token in the format of `{token}@{hostname[:port]}` or
-
 - basic auth data in the format of `{username}:{password}@{hostname[:port]}`
 
 For example, a single token for `deno.land` would look something like this:
