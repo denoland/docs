@@ -116,7 +116,7 @@ Run these commands to get started
   deno -R test
 ```
 
-Your [`deno.json`](../../fundamentals/configuration.md) file will look like
+Your [`deno.json`](/runtime/fundamentals/configuration/) file will look like
 this:
 
 ```json

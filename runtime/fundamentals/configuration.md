@@ -76,7 +76,8 @@ import express from "express";
 const app = express();
 ```
 
-Read more about [module imports](./modules.md)
+Read more about
+[module imports and dependencies](/runtime/fundamentals/modules/)
 
 ### Custom path mappings
 
@@ -316,7 +317,8 @@ sharing code.
 
 :::
 
-See also [Configuring TypeScript in Deno](../reference/ts_config_migration.md).
+See also
+[Configuring TypeScript in Deno](/runtime/reference/ts_config_migration/).
 
 ## Unstable features
 

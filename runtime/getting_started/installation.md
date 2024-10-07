@@ -175,7 +175,8 @@ To test your installation, run `deno --version`. If this prints the Deno version
 to the console the installation was successful.
 
 Use `deno help` to see help text documenting Deno's flags and usage. Get a
-detailed guide on the CLI [here](./command_line_interface.md).
+detailed guide on the CLI
+[here](/runtime/getting_started/command_line_interface/).
 
 ## Updating
 
@@ -204,4 +205,4 @@ deno upgrade --version 1.0.1
 ## Building from source
 
 Information about how to build from source can be found in the
-[`Contributing`](../contributing/building_from_source.md) chapter.
+[`Contributing`](/runtime/contributing/building_from_source/) chapter.

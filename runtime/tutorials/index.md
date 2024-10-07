@@ -16,14 +16,14 @@ your favorite tools.
 - [Fetch and stream data](/runtime/tutorials/fetch_data/)
 - [Make executable scripts](/runtime/tutorials/hashbang/)
 - [Convert CJS to ESM](/runtime/tutorials/cjs_to_esm/)
-- [Write a file server](./file_server.md)
+- [Write a file server](/runtime/tutorials/file_server/)
 
 ## Web frameworks and libraries
 
-- [React](./how_to_with_npm/react.md)
-- [Next.js](./how_to_with_npm/react.md)
+- [React](/runtime/tutorials/how_to_with_npm/react/)
+- [Next.js](/runtime/tutorials/how_to_with_npm/react/)
 - [Fresh](https://fresh.deno.dev/docs/getting-started/create-a-project)
-- [Vue.js](./how_to_with_npm/vue.md)
+- [Vue.js](/runtime/tutorials/how_to_with_npm/vue/)
 - [Express](/runtime/tutorials/how_to_with_npm/express/)
 - [Apollo GraphQL](/runtime/tutorials/how_to_with_npm/apollo/)
 
