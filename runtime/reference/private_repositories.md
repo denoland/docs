@@ -6,7 +6,7 @@ oldUrl: /runtime/manual/advanced/private_repositories/
 :::note
 
 If you're looking for private npm registries and `.npmrc` support,
-[visit `Using npm packages` page](/runtime/reference/npm/#private-registries).
+[visit `Using npm packages` page](/runtime/fundamentals/node/#private-registries).
 
 :::
 
