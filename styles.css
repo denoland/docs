@@ -505,3 +505,11 @@ body:not(:has(.ddoc)) {
   scrollbar-gutter: stable;
   scrollbar-width: thin;
 }
+
+.copyButton[data-copied="true"] .copy-icon {
+  display: none;
+}
+
+.copyButton[data-copied="true"] .check-icon {
+  display: inline;
+}
