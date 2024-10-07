@@ -132,7 +132,7 @@ body:not(:has(.ddoc)) {
 
     &:hover,
     &:focus {
-      @apply opacity-100 bg-gray-200;
+      @apply opacity-100 bg-gray-100;
     }
 
     &:active {
@@ -504,4 +504,12 @@ body:not(:has(.ddoc)) {
 #toc {
   scrollbar-gutter: stable;
   scrollbar-width: thin;
+}
+
+.copyButton[data-copied="true"] .copy-icon {
+  display: none;
+}
+
+.copyButton[data-copied="true"] .check-icon {
+  display: inline;
 }
