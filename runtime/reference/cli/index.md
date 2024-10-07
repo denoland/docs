@@ -1,6 +1,6 @@
 ---
 title: "Deno CLI Subcommands"
-oldUrl: "/runtime/reference/cli/"
+oldUrl: "/runtime/reference/cli/all_commands"
 ---
 
 The Deno CLI (Command Line Interface) allows you to interact with the Deno
