@@ -24,10 +24,20 @@ class PageIndexer {
     this.parser = new DOMParser();
     this.rootUrl = rootUrl;
     this.excludedPaths = ["/api"];
-    this.excludedExtensions = [".ts", ".js", ".svg", ".json", ".png", ".css", ".ico", ".xml", "robots.txt"];
+    this.excludedExtensions = [
+      ".ts",
+      ".js",
+      ".svg",
+      ".json",
+      ".png",
+      ".css",
+      ".ico",
+      ".xml",
+      "robots.txt",
+    ];
     this.excludedProtocolPrefixes = [
       "mailto",
-      "vscode:"
+      "vscode:",
     ];
   }
 
@@ -37,21 +47,33 @@ class PageIndexer {
 
     for await (const [url, content] of this.processIndexQueue()) {
       this.log && console.debug(url, "Processing");
-      !this.log && process.stdout.write('.');
+      !this.log && process.stdout.write(".");
 
       const pageLinks = await this.extractPageLinks(url, content);
-      const toProcess = pageLinks.filter(link => !this.alreadyProcessed(link.href) && !this.indexQueue.includes(link.href));
-      const newQueueItems = toProcess.map(link => link.href);
+      const toProcess = pageLinks.filter((link) =>
+        !this.alreadyProcessed(link.href) &&
+        !this.indexQueue.includes(link.href)
+      );
+      const newQueueItems = toProcess.map((link) => link.href);
 
       this.indexQueue.push(...newQueueItems);
-      this.log && console.debug(url, "Found", pageLinks.length, "links", "Queued", toProcess.length, "new links");
+      this.log &&
+        console.debug(
+          url,
+          "Found",
+          pageLinks.length,
+          "links",
+          "Queued",
+          toProcess.length,
+          "new links",
+        );
     }
 
-    !this.log && process.stdout.write('\n');
+    !this.log && process.stdout.write("\n");
     return this.anyErrors ? 1 : 0;
   }
 
-  private async * processIndexQueue() {
+  private async *processIndexQueue() {
     while (this.indexQueue.length > 0) {
       const url = this.indexQueue.pop();
       if (!url || this.alreadyProcessed(url)) {
@@ -86,7 +108,9 @@ class PageIndexer {
     this.log && console.debug("Found", aElements.length, "links on", pageUrl);
 
     const emptyLinks = aElements.filter((a) => !a.getAttribute("href")?.trim());
-    const pageLinkStrings: string[] = aElements.map((a) => a.getAttribute("href")?.trim())
+    const pageLinkStrings: string[] = aElements.map((a) =>
+      a.getAttribute("href")?.trim()
+    )
       .map((href) => href?.split("#")[0]!)
       .filter((href) => href)
       .filter((value, index, self) => self.indexOf(value) === index)
@@ -95,26 +119,31 @@ class PageIndexer {
     this.log && console.debug(pageLinkStrings);
 
     const pageLinks = pageLinkStrings.map((href) => {
-      return href.startsWith("/") ? new URL(href, this.rootUrl) : new URL(href)
+      return href.startsWith("/") ? new URL(href, this.rootUrl) : new URL(href);
     });
 
     this.displayAnyEmptyLinkErrors(emptyLinks, pageUrl);
 
-    return pageLinks.filter(link => this.isCheckableLink(link));
+    return pageLinks.filter((link) => this.isCheckableLink(link));
   }
 
   private isCheckableLink(url: URL) {
-    return !this.excludedProtocolPrefixes.some((prefix) => url.href.startsWith(prefix))
-      && !this.excludedPaths.some((path) => url.pathname.startsWith(path))
-      && !this.excludedExtensions.some((ext) => url.pathname.endsWith(ext))
-      && url.href.startsWith(this.rootUrl.href);
+    return !this.excludedProtocolPrefixes.some((prefix) =>
+      url.href.startsWith(prefix)
+    ) &&
+      !this.excludedPaths.some((path) => url.pathname.startsWith(path)) &&
+      !this.excludedExtensions.some((ext) => url.pathname.endsWith(ext)) &&
+      url.href.startsWith(this.rootUrl.href);
   }
 
   private alreadyProcessed(url: string) {
     return this.visitedPages.has(url) || this.failedPages.has(url);
   }
 
-  private displayAnyEmptyLinkErrors(emptyLinks: HTMLAnchorElement[], pageUrl: string) {
+  private displayAnyEmptyLinkErrors(
+    emptyLinks: HTMLAnchorElement[],
+    pageUrl: string,
+  ) {
     if (emptyLinks.length > 0) {
       this.anyErrors = true;
       for (const link of emptyLinks) {
@@ -137,7 +166,10 @@ const indexer = new PageIndexer(rootURL, debug);
 const result = await indexer.check();
 
 console.timeEnd("Link Checker");
-console.log("Distinct Pages checked:", indexer.visitedPages.size + indexer.failedPages.size);
+console.log(
+  "Distinct Pages checked:",
+  indexer.visitedPages.size + indexer.failedPages.size,
+);
 console.log("Successful Pages:", indexer.visitedPages.size);
 console.log("Failed Pages:", indexer.failedPages.size);
 
@@ -148,7 +180,10 @@ if (verbose) {
 
 if (result !== 0) {
   console.error("Errors were found!");
-  console.error("Pages that were linked to but failed to load:", indexer.failedPages);
+  console.error(
+    "Pages that were linked to but failed to load:",
+    indexer.failedPages,
+  );
 }
 
 Deno.exit(result);
