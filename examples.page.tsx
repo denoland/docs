@@ -265,7 +265,12 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
               A collection of annotated Deno examples, to be used as a reference
               for how to build with Deno, or as a guide to learn about many of
               Deno's features.
-              <a href="/runtime/contributing/examples/" className="homepage-link runtime-link text-center mt-4">Commit an example and we'll send you some stickers!</a>
+              <a
+                href="/runtime/contributing/examples/"
+                className="homepage-link runtime-link text-center mt-4"
+              >
+                Commit an example and we'll send you some stickers!
+              </a>
             </p>
           </div>
           <div
