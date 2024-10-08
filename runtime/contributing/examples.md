@@ -13,7 +13,7 @@ If you have a Deno example that you would like to share with the community, you
 can contribute it to the
 [Deno docs repository](https://github.com/denoland/docs?tab=readme-ov-file#examples)
 or make an issue if there's an example you'd like to see. If your example is
-merged, it will be published on the Deno by Example website and we'll credit you
+merged, we'll credit you
 as the author and send you some awesome special edition Deno stickers so that
 you can show off your contributor status as a token of our appreciation.
 
