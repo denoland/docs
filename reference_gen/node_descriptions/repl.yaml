@@ -1,4 +1,5 @@
-status: partial
+status: unsupported
+description: All symbols are not supported.
+
 symbols:
-  REPLServer: This symbol is not supported.
-  start: This symbol is not supported.
+  "*": This symbol is not supported.
