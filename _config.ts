@@ -60,7 +60,7 @@ const site = lume({
           getTokensText(tokens) {
             return tokens
               .filter((t) => ["text", "code_inline"].includes(t.type))
-              .map((t) => t.content.replaceAll( /\([0-9/]+?\)/g, ""))
+              .map((t) => t.content.replaceAll(/ \([0-9/]+?\)/g, ""))
               .join("")
               .trim();
           },
