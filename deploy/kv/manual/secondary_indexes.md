@@ -37,7 +37,7 @@ To implement a unique secondary index for this example, follow these steps:
 
 1. Create a `User` interface representing the data:
 
-   ```tsx
+   ```ts
    interface User {
      id: string;
      name: string;
@@ -48,7 +48,7 @@ To implement a unique secondary index for this example, follow these steps:
 2. Define an `insertUser` function that stores user data at both the primary and
    secondary keys:
 
-   ```tsx
+   ```ts
    async function insertUser(user: User) {
      const primaryKey = ["users", user.id];
      const byEmailKey = ["users_by_email", user.email];
@@ -70,7 +70,7 @@ To implement a unique secondary index for this example, follow these steps:
 
 3. Define a `getUser` function to retrieve a user by their ID:
 
-   ```tsx
+   ```ts
    async function getUser(id: string): Promise<User | null> {
      const res = await kv.get<User>(["users", id]);
      return res.value;
@@ -79,7 +79,7 @@ To implement a unique secondary index for this example, follow these steps:
 
 4. Define a `getUserByEmail` function to retrieve a user by their email address:
 
-   ```tsx
+   ```ts
    async function getUserByEmail(email: string): Promise<User | null> {
      const res = await kv.get<User>(["users_by_email", email]);
      return res.value;
@@ -91,7 +91,7 @@ To implement a unique secondary index for this example, follow these steps:
 
 5. Define a deleteUser function to delete users by their ID:
 
-   ```tsx
+   ```ts
    async function deleteUser(id: string) {
      let res = { ok: false };
      while (!res.ok) {
