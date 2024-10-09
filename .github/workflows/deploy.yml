@@ -28,11 +28,11 @@ jobs:
 
       - name: "Reference: install"
         working-directory: "reference_gen"
-        run: DENO_FUTURE=1 deno install
+        run: deno install
 
       - name: "Reference: generate types"
         working-directory: "reference_gen"
-        run: DENO_FUTURE=1 deno task types
+        run: deno task types
 
       - name: "Reference: generate docs"
         working-directory: "reference_gen"
@@ -42,7 +42,6 @@ jobs:
         env:
           ORAMA_CLOUD_INDEX_ID: ${{ vars.ORAMA_CLOUD_INDEX_ID }}
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
-          DENO_FUTURE: 1
         run: deno task build
 
       - name: Run server
