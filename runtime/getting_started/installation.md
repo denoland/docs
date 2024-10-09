@@ -2,6 +2,7 @@
 title: Installation
 oldUrl:
   - /runtime/manual/fundamentals/installation
+  - /runtime/manual/getting_started/installation
   - /runtime/fundamentals/installation
 ---
 
