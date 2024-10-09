@@ -262,14 +262,13 @@ function handleDescription(description: Description | string): Description {
   }
 }
 
-export type Descriptions = Record<
-  string,
-  {
-    status: "good" | "partial" | "stubs" | "unsupported";
-    description?: Description;
-    symbols?: Record<string, Description>;
-  }
->;
+export type Descriptions = Record<string, DescriptionItem>;
+
+type DescriptionItem = {
+  status: "good" | "partial" | "stubs" | "unsupported";
+  description?: Description;
+  symbols?: Record<string, Description>;
+};
 
 export async function generateDescriptions(): Promise<Descriptions> {
   const descriptions: Descriptions = {};
@@ -317,26 +316,63 @@ after which the normal markdown rendered is called.
  */
 export async function generateNodeCompatability() {
   const descriptions = await generateDescriptions();
-
-  return Object.entries(descriptions).sort(([keyA], [keyB]) =>
+  const sorted = Object.entries(descriptions).toSorted(([keyA], [keyB]) =>
     keyA.localeCompare(keyB)
-  ).map(([key, content]) => {
-    let out =
-      `<div class="module-info compat-status-${content.status}"><div class="compat-title"><a href="/api/node/${key}">node:${key}</a></div>\n\n`;
+  );
+  const grouped: Record<
+    string,
+    { title: string; icon: string; items: Array<[string, DescriptionItem]> }
+  > = {
+    good: {
+      title: "Fully supported modules",
+      icon:
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#22c55e"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
+      items: [],
+    },
+    partial: {
+      title: "Partially supported modules",
+      icon:
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#6366f1"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>',
+      items: [],
+    },
+    unsupported: {
+      title: "Unsupported modules",
+      icon:
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#ef4444"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
+      items: [],
+    },
+  };
+  for (const item of sorted) {
+    grouped[item[1].status].items.push(item);
+  }
 
-    if (content) {
-      if (content.description) {
-        out += `${content.description.description}\n\n`;
-      }
-      if (content.symbols) {
-        for (const [symbol, description] of Object.entries(content.symbols)) {
-          out += `**${
-            symbol === "*" ? "All symbols" : symbol
-          }**: ${description.description}<br />`;
+  return Object.entries(grouped).map(([_status, entries]) => {
+    let content =
+      `<div class="module-info">\n\n## ${entries.icon} ${entries.title} (${entries.items.length}/${
+        Object.keys(descriptions).length
+      })\n\n`;
+
+    content += entries.items.map(([key, content]) => {
+      let out = `\n\n### <a href="/api/node/${key}">node:${
+        key.replaceAll("--", "/")
+      }</a>\n\n<div class="item-content">\n\n`;
+
+      if (content) {
+        if (content.description) {
+          out += `${content.description.description}\n\n`;
+        }
+        if (content.symbols) {
+          for (const [symbol, description] of Object.entries(content.symbols)) {
+            out += `**${
+              symbol === "*" ? "All symbols" : symbol
+            }**: ${description.description}\n\n`;
+          }
         }
       }
-    }
 
-    return out + "</div>";
+      return out + "</div>";
+    }).join("\n\n");
+
+    return content;
   }).join("\n\n");
 }

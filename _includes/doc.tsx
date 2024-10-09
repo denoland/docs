@@ -358,7 +358,7 @@ function Breadcrumbs(props: {
                     itemprop="item"
                     class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 rounded transition duration-100 text-sm"
                   >
-                    {crumb.label}
+                    <span itemprop="name">{crumb.label}</span>
                   </a>
                 )
                 : (
@@ -397,7 +397,7 @@ function TableOfContentsItem(props: { item: TableOfContentsItem_ }) {
         href={`#${props.item.slug}`}
         class="text-[13px] text-gray-600 hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
       >
-        {props.item.text}
+        {props.item.text.replaceAll(/ \([0-9/]+?\)/g, "")}
       </a>
       {props.item.children.length > 0 && (
         <ul class="ml-2">
@@ -417,7 +417,7 @@ function TableOfContentsItemMobile(props: { item: TableOfContentsItem_ }) {
         href={`#${props.item.slug}`}
         class="text-sm text-gray-600 hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
       >
-        {props.item.text}
+        {props.item.text.replaceAll(/ \([0-9/]+?\)/g, "")}
       </a>
       {props.item.children.length > 0 && (
         <ul class="ml-2">
