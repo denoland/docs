@@ -61,7 +61,7 @@ and the [`cors` middleware](https://jsr.io/@tajpouria/cors) to enable
 Use the `deno add` command to add the required dependencies to your project:
 
 ```shell
-deno add jsr:@oak/oak @tajpouria/cors
+deno add jsr:@oak/oak jsr:@tajpouria/cors
 ```
 
 Next, update `api/main.ts` to import the required modules and create a new
