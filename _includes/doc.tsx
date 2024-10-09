@@ -358,7 +358,7 @@ function Breadcrumbs(props: {
                     itemprop="item"
                     class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 rounded transition duration-100 text-sm"
                   >
-                    {crumb.label}
+                    <span itemprop="name">{crumb.label}</span>
                   </a>
                 )
                 : (
