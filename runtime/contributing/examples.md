@@ -2,10 +2,11 @@
 title: Contributing an example
 ---
 
-![Deno stickers laid out on a table](./images/stickers.jpg)
-
 [Deno by Example](/examples/) is a collection of examples that demonstrate how
-to use Deno and its APIs.
+to use Deno and its APIs. If you contribute an example, we'll send you a free
+pack of stickers!
+
+![Deno stickers laid out on a table](./images/stickers.jpg)
 
 ## Contributing an example
 
