@@ -361,9 +361,9 @@ When you run `npm install`, npm creates a `node_modules` directory in your
 project which houses the dependencies as specified in the `package.json` file.
 
 Deno uses [npm specifiers](/runtime/fundamentals/node/#using-npm-packages) to
-resolve npm packages to a central global npm cache, instead of using
-`node_modules`. This is ideal since it uses less space and doesn't require a
-`node_modules` directory.
+resolve npm packages to a central global npm cache, instead of using a
+`node_modules` folder in your projects. This is ideal since it uses less space
+and keeps your project directory clean.
 
 There may however be cases where you need a local `node_modules` directory in
 your Deno project, even if you don’t have a `package.json` (eg. when using
