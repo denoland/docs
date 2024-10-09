@@ -1,13 +1,13 @@
 /**
- * @title UDP Connector: Ping
+ * @title UDP connector: Ping
  * @difficulty intermediate
  * @tags cli
- * @run --allow-net --unstable <url>
+ * @run --allow-net --unstable-net <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.connect} Doc: Deno.connect
  * @resource {/examples/udp-listener} Example: UDP Listener
- * @group Network
+ * @group Unstable APIs
  *
- * An example of writing a 'ping' message to a UDP server on localhost.
+ * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>An example of writing a 'ping' message to a UDP server on localhost.
  */
 
 // Instantiate an instance of text encoder to write to the UDP stream.

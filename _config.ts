@@ -57,6 +57,13 @@ const site = lume({
               `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
             placement: "after",
           }),
+          getTokensText(tokens) {
+            return tokens
+              .filter((t) => ["text", "code_inline"].includes(t.type))
+              .map((t) => t.content.replaceAll(/\([0-9/]+?\)/g, ""))
+              .join("")
+              .trim();
+          },
         },
       ],
       relativeLinksPlugin,
@@ -74,10 +81,14 @@ site.copy("deploy/docs-images");
 site.copy("deploy/kv/manual/images");
 site.copy("deploy/tutorials/images");
 site.copy("deploy/kv/tutorials/images");
-site.copy("runtime/manual/images");
+site.copy("runtime/fundamentals/images");
+site.copy("runtime/getting_started/images");
+site.copy("runtime/reference/images");
+site.copy("runtime/tutorials/images");
 site.copy("deploy/manual/images");
 site.copy("deno.json");
 site.copy("go.json");
+site.copy("oldurls.json");
 site.copy("server.ts");
 site.copy("middleware.ts");
 site.copy("examples");
@@ -213,6 +224,7 @@ site.ignore(
   "README.md",
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
+  (path) => path.includes("/reference_gen/node_descriptions"),
   "examples",
   // "deploy",
   // "examples.page.tsx",

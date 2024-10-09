@@ -74,3 +74,7 @@ For a complete reference for the REST API used to implement subhosting, you can
 also provides an [OpenAPI specification](https://api.deno.com/v1/openapi.json)
 which can be used with
 [a number of OpenAPI-compatible tools](https://openapi.tools/).
+
+We also offer SDKs in [JavaScript](https://www.npmjs.com/package/subhosting),
+[Python](https://pypi.org/project/subhosting/0.0.1a0/), and
+[Go](https://github.com/denoland/subhosting-go).

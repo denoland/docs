@@ -1,5 +1,5 @@
 /**
- * @title Running DNS Queries
+ * @title Running DNS queries
  * @difficulty beginner
  * @tags cli, deploy
  * @run --allow-net <url>

@@ -18,6 +18,7 @@ for (const el of document.querySelectorAll("[data-accordion-trigger]")) {
 }
 
 const sidebar = document.getElementById("sidebar")!;
+const sidebarNav = sidebar.querySelector("nav")!;
 const sidebarOpen = document.getElementById("sidebar-open");
 const sidebarClose = document.getElementById("sidebar-close");
 const sidebarCover = document.getElementById("sidebar-cover")!;
@@ -33,6 +34,21 @@ sidebarClose?.addEventListener("click", () => {
 sidebarCover?.addEventListener("click", () => {
   sidebar.dataset.open = "false";
   sidebarCover.dataset.open = "false";
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    sidebar.dataset.open = "false";
+    sidebarCover.dataset.open = "false";
+  }
+});
+
+const top = sessionStorage.getItem("sidebar-scroll");
+if (top !== null) {
+  sidebarNav.scrollTop = parseInt(top, 10);
+}
+
+globalThis.addEventListener("beforeunload", () => {
+  sessionStorage.setItem("sidebar-scroll", sidebarNav.scrollTop.toString());
 });
 
 const toc = document.getElementById("toc");

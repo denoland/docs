@@ -1,5 +1,5 @@
 /**
- * @title HTTP Server: Serving Files
+ * @title HTTP server: Serving files
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --allow-net --allow-read <url>

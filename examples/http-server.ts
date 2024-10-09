@@ -1,5 +1,5 @@
 /**
- * @title HTTP Server: Hello World
+ * @title HTTP Server: Hello world
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --allow-net <url>

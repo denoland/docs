@@ -22,6 +22,16 @@ replacements.CLI_VERSION = latestCliVersion;
 
 replacementsFile.writeJsonPrettySync(replacements);
 
+const cliCommandsReferenceFile = $.path(
+  "runtime/reference/cli/_commands_reference.json",
+);
+const jsonReference = new Deno.Command(Deno.execPath(), {
+  args: ["json_reference"],
+});
+cliCommandsReferenceFile.writeJsonPrettySync(
+  JSON.parse(new TextDecoder().decode(jsonReference.outputSync().stdout)),
+);
+
 if (Deno.args.includes("--create-pr")) {
   await tryCreatePr();
 }

@@ -1,5 +1,5 @@
 /**
- * @title Hex and Base64 Encoding
+ * @title Hex and base64 encoding
  * @difficulty beginner
  * @tags cli
  * @run <url>
@@ -7,7 +7,7 @@
  *
  * There are a few cases where it would be practical to encode
  * and decode between different string and array buffer formats.
- * The Deno standard library makes this easy.
+ * The Deno Standard Library makes this easy.
  */
 
 // The standard library provides hex and base64 encoding and decoding utilities

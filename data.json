@@ -7,7 +7,7 @@
     "category": "Runtime"
   },
   {
-    "path": "/runtime/manual/tools/test/",
+    "path": "/runtime/reference/cli/test/",
     "title": "deno test",
     "content": "Run tests using Deno's built-in test runner.\n",
     "section": "deno test",

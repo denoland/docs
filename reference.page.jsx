@@ -2,6 +2,10 @@ import { walkSync } from "@std/fs/walk";
 
 export const layout = "raw.tsx";
 
+const resetRegexp =
+  /<link id="ddocResetStylesheet" rel="stylesheet" href=".*?reset\.css">\s+/;
+const titleRegexp = /<title>(.+?)<\/title>\s*/s;
+
 export default function* () {
   try {
     if (Deno.env.has("SKIP_REFERENCE")) {
@@ -13,9 +17,20 @@ export default function* () {
 
     for (const file of files) {
       const content = Deno.readTextFileSync(file.path).replace(
-        /<link id="ddocResetStylesheet" rel="stylesheet" href=".*?reset\.css">\s+/,
+        resetRegexp,
         "",
       );
+
+      let title = "";
+      try {
+        const match = titleRegexp.exec(content);
+        title = match[1].slice(0, -"documentation".length) + "- Deno Docs";
+      } catch (e) {
+        if (!file.path.endsWith("prototype.html")) {
+          console.error(file.path);
+          throw e;
+        }
+      }
 
       const trailingLength = file.path.endsWith("index.html")
         ? -"index.html".length
@@ -26,15 +41,9 @@ export default function* () {
       // replace slashes for windows
       path = path.replace(/\\/g, "/");
 
-      const name = file.name.slice(0, -".html".length);
-      const [_, group, subgroup] = path.split("/");
-      const groupDisplay = group.charAt(0).toUpperCase() + group.slice(1);
-
       yield {
         url: "/api" + path,
-        title: `${groupDisplay} Reference for ${
-          name === "index" ? (subgroup || "") : name
-        }`,
+        title,
         content,
       };
     }

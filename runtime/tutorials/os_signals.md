@@ -1,5 +1,5 @@
 ---
-title: "Handle OS Signals"
+title: "Handle OS signals"
 oldUrl:
   - /runtime/manual/examples/os_signals/
 ---
@@ -27,10 +27,7 @@ APIs.
 
 You can use `Deno.addSignalListener()` function for handling OS signals:
 
-```ts
-/**
- * add_signal_listener.ts
- */
+```ts title="add_signal_listener.ts"
 console.log("Press Ctrl-C to trigger a SIGINT signal");
 
 Deno.addSignalListener("SIGINT", () => {
@@ -51,10 +48,7 @@ deno run add_signal_listener.ts
 You can use `Deno.removeSignalListener()` function to unregister previously
 added signal handler.
 
-```ts
-/**
- * signal_listeners.ts
- */
+```ts title="signal_listeners.ts"
 console.log("Press Ctrl-C to trigger a SIGINT signal");
 
 const sigIntHandler = () => {
@@ -63,7 +57,7 @@ const sigIntHandler = () => {
 };
 Deno.addSignalListener("SIGINT", sigIntHandler);
 
-// Add a timeout to prevent process existing immediately.
+// Add a timeout to prevent process exiting immediately.
 setTimeout(() => {}, 5000);
 
 // Stop listening for a signal after 1s.

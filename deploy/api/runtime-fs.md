@@ -2,6 +2,7 @@
 title: "File system APIs"
 oldUrl:
   - /deploy/docs/runtime-fs/
+  - /deploy/manual/runtime-fs/
 ---
 
 Deno Deploy supports a limited set of the file system APIs available in Deno.
@@ -229,6 +230,14 @@ async function handler(_req) {
 
 Deno.serve(handler);
 ```
+
+:::note
+
+When you iterate over a file stream as shown below, the file descriptor will be
+automatically closed at the end of iteration. There is no need to manually close
+the file descriptor: `const iterator = fd.readable[Symbol.asyncIterator]();`
+
+:::
 
 ## Deno.File
 

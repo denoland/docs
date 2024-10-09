@@ -1,5 +1,5 @@
 /**
- * @title HTTP Requests
+ * @title HTTP requests
  * @difficulty beginner
  * @tags cli, deploy, web
  * @run --allow-net <url>
@@ -33,14 +33,15 @@ for await (const chunk of resp.body!) {
 }
 
 // When making a request, you can also specify the method, headers, and a body.
-const body = `{"name": "Deno"}`;
 resp = await fetch("https://example.com", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
     "X-API-Key": "foobar",
   },
-  body,
+  body: JSON.stringify({
+    param: "value",
+  }),
 });
 
 // `fetch` also accepts a `Request` object instead of URL + options.

@@ -1,114 +1,141 @@
 ---
-title: "File Server"
+title: "Write a file server"
 oldUrl:
   - /runtime/manual/examples/file_server/
 ---
 
-## Concepts
+A file server listens for incoming HTTP requests and serves files from the local
+file system. This tutorial demonstrates how to create a simple file server using
+Deno's built-in [file system APIs](/api/deno/file-system).
 
-- Use [Deno.open](https://docs.deno.com/api/deno/~/Deno.open) to read a file's
-  content in chunks.
-- Transform a Deno file into a
-  [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream).
-- Use Deno's integrated HTTP server to run your own file server.
+## Write a simple File Server
 
-## Overview
+To start, create a new file called `file-server.ts`.
 
-Sending files over the network is a common requirement. As seen in the
-[Fetch Data example](./fetch_data.md), because files can be of any size, it is
-important to use streams in order to prevent having to load entire files into
-memory.
+We'll use Deno's built in [HTTP server](/api/deno/~/Deno.serve) to listen for
+incoming requests. In your new `file-server.ts` file, add the following code:
 
-## Example
+```ts title="file-server.ts"
+Deno.serve(
+  { hostname: "localhost", port: 8080 },
+  (request) => {
+    const url = new URL(request.url);
+    const filepath = decodeURIComponent(url.pathname);
+  },
+);
+```
 
-**Command:** `deno run --allow-read=. --allow-net file_server.ts`
+> If you're not familiar with the `URL` object, you can learn more about it in
+> the [URL API](https://developer.mozilla.org/en-US/docs/Web/API/URL)
+> documentation. The
+> [decodeURIComponent function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent)
+> is used to decode the URL-encoded path, in the case that characters have been
+> percent-encoded.)
+
+### Open a file and stream its contents
+
+When a request is received, we'll attempt to open the file specified in the
+request URL with [`Deno.open`](/api/deno/~/Deno.open).
+
+If the requested file exists, we'll convert it into a readable stream of data
+with the
+[ReadableStream API](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream),
+and stream its contents to the response. We don't know how large the requested
+file might be, so streaming it will prevent memory issues when serving large
+files or multiple requests concurrently.
+
+If the file does not exist, we'll return a "404 Not Found" response.
+
+In the body of the request handler, below the two variables, add the following
+code:
 
 ```ts
-// Start listening on port 8080 of localhost.
-const server = Deno.listen({ port: 8080 });
-console.log("File server running on http://localhost:8080/");
-
-for await (const conn of server) {
-  handleHttp(conn).catch(console.error);
-}
-
-async function handleHttp(conn: Deno.Conn) {
-  const httpConn = Deno.serveHttp(conn);
-  for await (const requestEvent of httpConn) {
-    // Use the request pathname as filepath
-    const url = new URL(requestEvent.request.url);
-    const filepath = decodeURIComponent(url.pathname);
-
-    // Try opening the file
-    let file;
-    try {
-      file = await Deno.open("." + filepath, { read: true });
-    } catch {
-      // If the file cannot be opened, return a "404 Not Found" response
-      const notFoundResponse = new Response("404 Not Found", { status: 404 });
-      await requestEvent.respondWith(notFoundResponse);
-      continue;
-    }
-
-    // Build a readable stream so the file doesn't have to be fully loaded into
-    // memory while we send it
-    const readableStream = file.readable;
-
-    // Build and send the response
-    const response = new Response(readableStream);
-    await requestEvent.respondWith(response);
-  }
+try {
+  const file = await Deno.open("." + filepath, { read: true });
+  return new Response(file.readable);
+} catch {
+  return new Response("404 Not Found", { status: 404 });
 }
 ```
 
-## Using the `std/http` file server
+### Run the file server
 
-The Deno standard library provides you with a
+Run your new file server with the `deno run` command, allowing read access and
+network access:
+
+```shell
+deno run --allow-read=. --allow-net file-server.ts
+```
+
+## Using the file server provided by the Deno Standard Library
+
+Writing a file server from scratch is a good exercise to understand how Deno's
+HTTP server works. However, writing production ready file server from scratch
+can be complex and error-prone. It's better to use a tested and reliable
+solution.
+
+The Deno Standard Library provides you with a
 [file server](https://jsr.io/@std/http/doc/file-server/~) so that you don't have
 to write your own.
 
-To use it, first install the remote script to your local file system. This will
-install the script to the Deno installation root's bin directory, e.g.
-`/home/alice/.deno/bin/file-server`.
+To use it, first install the remote script to your local file system:
 
 ```shell
-deno install --allow-net --allow-read jsr:@std/http@1.0.0-rc.5/file-server
+# Deno 1.x
+deno install --allow-net --allow-read jsr:@std/http@1/file-server
+# Deno 2.x
+deno install --global --allow-net --allow-read jsr:@std/http@1/file-server
 ```
 
-You can now run the script with the simplified script name. Run it:
+> This will install the script to the Deno installation root's bin directory,
+> e.g. `/home/user/.deno/bin/file-server`.
+
+You can now run the script with the simplified script name:
 
 ```shell
 $ file-server .
-[...]
 Listening on:
-- Local: http://0.0.0.0:4507
+- Local: http://0.0.0.0:8000
 ```
 
-Now go to [http://0.0.0.0:4507/](http://0.0.0.0:4507/) in your web browser to
-see your local directory contents.
+To see the complete list of options available with the file server, run
+`file-server --help`.
 
-The complete list of options are available via:
+If you visit [http://0.0.0.0:8000/](http://0.0.0.0:8000/) in your web browser
+you will see the contents of your local directory.
 
-```shell
-file-server --help
+### Using the @std/http file server in a Deno project
+
+To use the file-server in a
+[Deno project](/runtime/getting_started/first_project), you can add it to your
+`deno.json` file with:
+
+```sh
+deno add jsr:@std/http
 ```
 
-Example output:
+And then import it in your project:
 
-```shell
-Deno File Server
-    Serves a local directory in HTTP.
-  INSTALL:
-    deno install --allow-net --allow-read jsr:@std/http@1.0.0-rc.5/file_server
-  USAGE:
-    file_server [path] [options]
-  OPTIONS:
-    -h, --help          Prints help information
-    -p, --port <PORT>   Set port
-    --cors              Enable CORS via the "Access-Control-Allow-Origin" header
-    --host     <HOST>   Hostname (default is 0.0.0.0)
-    -c, --cert <FILE>   TLS certificate file (enables TLS)
-    -k, --key  <FILE>   TLS key file (enables TLS)
-    --no-dir-listing    Disable directory listing
-    All TLS options are required when one is provided.
+```ts title="file-server.ts"
+import { serveDir } from "@std/http/file-server";
+
+Deno.serve((req) => {
+  const pathname = new URL(req.url).pathname;
+  if (pathname.startsWith("/static")) {
+    return serveDir(req, {
+      fsRoot: "path/to/static/files/dir",
+    });
+  }
+  return new Response();
+});
 ```
+
+This code will set up an HTTP server with `Deno.serve`. When a request comes in,
+it checks if the requested path starts with “/static”. If so, it serves files
+from the specified directory. Otherwise, it responds with an empty response.
+
+🦕 Now you know how to write your own simple file server, and how to use the
+file-server utility provided by the Deno Standard Library. You're equipped to
+tackle a whole variety of tasks - whether it’s serving static files, handling
+uploads, transforming data, or managing access control - you're ready to serve
+files with Deno.

@@ -8,10 +8,10 @@
  * @group File System
  *
  * Many applications need to manipulate file paths in one way or another.
- * The Deno standard library provides simple utilities for this.
+ * The Deno Standard Library provides simple utilities for this.
  */
 
-// First we will import the module from the Deno standard library
+// First we will import the module from the Deno Standard Library
 import * as path from "jsr:@std/path";
 import * as posix from "jsr:@std/path/posix";
 import * as windows from "jsr:@std/path/windows";

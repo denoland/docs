@@ -2,12 +2,12 @@
  * @title Deno Cron
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --unstable <url>
+ * @run --unstable-cron <url>
  * @resource {https://docs.deno.com/deploy/kv/manual/cron} Deno Cron user guide
  * @resource {https://docs.deno.com/api/deno/~/Deno.cron} Deno Cron Runtime API docs
- * @group Scheduled Tasks
+ * @group Unstable APIs
  *
- * Deno Cron is a cron task scheduler built into the Deno runtime and works with
+ * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>Deno Cron is a cron task scheduler built into the Deno runtime and works with
  * zero configuration on Deno Deploy. There's no overlapping cron executions and
  * has automatic handler retries on exceptions.
  */

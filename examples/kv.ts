@@ -1,13 +1,13 @@
 /**
- * @title Deno KV: Key/Value Database
+ * @title Deno KV: Key/Value database
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --unstable <url>
+ * @run --unstable-kv <url>
  * @resource {https://docs.deno.com/deploy/kv/manual} Deno KV user guide
  * @resource {https://docs.deno.com/api/deno/~/Deno.Kv} Deno KV Runtime API docs
- * @group Databases
+ * @group Unstable APIs
  *
- * Deno KV is a key/value database built in to the Deno runtime, and works with
+ * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>Deno KV is a key/value database built in to the Deno runtime, and works with
  * zero configuration on Deno Deploy. It's great for use cases that require fast
  * reads and don't require the query flexibility of a SQL database.
  */

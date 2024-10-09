@@ -8,11 +8,16 @@ import {
 } from "../types.ts";
 
 export default function Sidebar(
-  props: { sidebar: Sidebar_; search: Searcher; url: string },
+  props: {
+    sidebar: Sidebar_;
+    search: Searcher;
+    url: string;
+    headerPath: string;
+  },
 ) {
   return (
     <nav
-      class="p-2 pr-0 overflow-y-auto"
+      class="p-2 pt-0 pr-0 overflow-y-auto overflow-x-hidden"
       style={{ scrollbarGutter: "stable", scrollbarWidth: "thin" }}
     >
       <ul>
@@ -29,25 +34,45 @@ export default function Sidebar(
 }
 
 function SidebarSection(
-  props: { section: SidebarSection_; search: Searcher; url: string },
+  props: {
+    section: SidebarSection_;
+    search: Searcher;
+    url: string;
+    headerPath: string;
+  },
 ) {
-  const sluggify = (str: string) =>
+  const slugify = (str: string) =>
     str.replaceAll(/[\s_]/g, "-")
       .replaceAll(/[^a-zA-Z0-9-]/g, "")
       .toLowerCase();
-  const slug = sluggify(props.section.title ?? "");
+  const slug = slugify(props.section.title ?? "");
   const categoryTitle = `sidebar-category-${slug}`;
+  const headingLink = props.section.href;
+
   return (
     <li class="mb-4">
-      {props.section.title &&
-        (
-          <h2
-            id={categoryTitle}
-            class="border-b border-gray-200 pt-2 pb-0.5 mx-3 mt-4 mb-3 text-sm font-semibold text-gray-3"
-          >
-            {props.section.title}
-          </h2>
-        )}
+      {props.section.title && (
+        headingLink
+          ? (
+            <a href={headingLink}>
+              <h2
+                id={categoryTitle}
+                class="border-b border-gray-200 pt-2 pb-1.5 -mx-5 px-8 mt-4 mb-2 text-sm font-semibold hover:bg-blue-50 current:bg-blue-50 current:text-blue-500 text-gray-3 capitalize"
+                aria-current={props.url === headingLink ? "page" : undefined}
+              >
+                {props.section.title}
+              </h2>
+            </a>
+          )
+          : (
+            <h2
+              id={categoryTitle}
+              class="border-b border-gray-200 pt-2 pb-0.5 -mx-5 px-8 mt-4 mb-3 text-sm font-semibold text-gray-3 capitalize"
+            >
+              {props.section.title}
+            </h2>
+          )
+      )}{" "}
       <ul aria-labelledby={categoryTitle}>
         {props.section.items.map((item) => (
           <li class="mx-2 mt-1">

@@ -45,7 +45,7 @@ export default function Header({
           <HeaderItem
             url={url}
             activeOn="/runtime"
-            href="/runtime/manual"
+            href="/runtime/"
             name="Runtime Manual"
             hideOnMobile
           />
@@ -60,7 +60,7 @@ export default function Header({
             url={url}
             activeOn="/api"
             href="/api/deno"
-            name="Reference"
+            name="API reference"
             hideOnMobile
           />
           <span class="hidden lg:inline-block mx-2">//</span>
@@ -88,7 +88,7 @@ export default function Header({
             external
             hideOnMobile
           />
-          <div class="w-[150px] lg:w-64">
+          <div class="min-w-[150px] md:w-32 xl:w-64">
             <orama-search-button />
             <orama-searchbox />
           </div>
@@ -152,10 +152,10 @@ function HeaderItem({
     <a
       class={`mt-1 ${
         firstItem ? "ml-0" : ""
-      } mx-2.5 px-0.5 text-md hover:text-primary text-nowrap flex items-center ${
+      } mx-1 px-2 text-md hover:text-primary hover:bg-blue-50 hover:rounded text-nowrap flex items-center ${
         activeOn && url.startsWith(activeOn)
-          ? "text-primary border-b-[1.5px] font-semibold border-blue-200"
-          : "border-b-2 border-transparent"
+          ? "text-primary mx-2.5 px-0.5 underline font-semibold underline-offset-[6px] decoration-primary/20"
+          : ""
       } ${hideOnMobile ? "max-lg:!hidden" : ""}`}
       href={href}
     >

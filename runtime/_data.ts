@@ -1,356 +1,377 @@
 import { Sidebar } from "../types.ts";
+import { walk } from "jsr:@std/fs";
+import { parse as yamlParse } from "jsr:@std/yaml";
 
 export const sidebar = [
   {
-    title: "Getting Started",
+    title: "Getting started",
+    href: "/runtime/",
     items: [
-      {
-        label: "Quick Start",
-        id: "/runtime/manual/",
-      },
-      {
-        label: "Deno Basics",
-        items: [
-          "/runtime/manual/getting_started/first_steps/",
-          "/runtime/manual/getting_started/setup_your_environment/",
-          "/runtime/manual/getting_started/command_line_interface/",
-          "/runtime/manual/getting_started/configuration_file/",
-          "/runtime/manual/getting_started/web_frameworks/",
-          "/runtime/manual/basics/permissions/",
-          "/runtime/manual/basics/standard_library/",
-          "/runtime/manual/basics/import_maps/",
-          "/runtime/manual/basics/env_variables/",
-          "/runtime/manual/basics/debugging_your_code/",
-          "/runtime/manual/basics/connecting_to_databases/",
-          "/runtime/manual/basics/react/",
-          "/runtime/manual/getting_started/installation/",
-        ],
-      },
+      "/runtime/getting_started/installation/",
+      "/runtime/getting_started/first_project/",
+      "/runtime/getting_started/setup_your_environment/",
+      "/runtime/getting_started/command_line_interface/",
     ],
   },
   {
-    title: "Modules and APIs",
+    title: "Fundamentals",
+    href: "/runtime/fundamentals/",
+    items: [
+      "/runtime/fundamentals/typescript/",
+      "/runtime/fundamentals/node/",
+      "/runtime/fundamentals/security/",
+      {
+        label: "Modules and dependencies",
+        id: "/runtime/fundamentals/modules/",
+      },
+      "/runtime/fundamentals/configuration/",
+      "/runtime/fundamentals/standard_library/",
+      "/runtime/fundamentals/web_dev/",
+      "/runtime/fundamentals/testing/",
+      "/runtime/fundamentals/debugging/",
+      "/runtime/fundamentals/workspaces/",
+      "/runtime/fundamentals/linting_and_formatting/",
+      {
+        label: "HTTP Server",
+        id: "/runtime/fundamentals/http_server/",
+      },
+      "/runtime/fundamentals/stability_and_releases/",
+    ],
+  },
+  {
+    title: "Reference guides",
+    href: "/runtime/reference/",
     items: [
       {
-        label: "Using & Publishing Modules",
+        label: "Deno CLI",
+        href: "/runtime/reference/cli/",
         items: [
-          "/runtime/manual/basics/modules/",
-          "/runtime/manual/basics/modules/publishing_modules/",
-          "/runtime/manual/basics/modules/reloading_modules/",
-          "/runtime/manual/basics/modules/integrity_checking/",
-          "/runtime/manual/advanced/private_repositories/",
-          "/runtime/manual/advanced/http_imports/",
-        ],
-      },
-      {
-        label: "Deno Runtime APIs",
-        items: [
-          "/runtime/manual/runtime/builtin_apis/",
-          "/runtime/manual/runtime/http_server_apis/",
-          "/runtime/manual/runtime/permission_apis/",
-          "/runtime/manual/runtime/import_meta_api/",
-          "/runtime/manual/runtime/ffi_api/",
-          "/runtime/manual/runtime/program_lifecycle/",
-          "/runtime/manual/runtime/stability/",
-        ],
-      },
-      {
-        label: "Web Platform APIs",
-        items: [
-          "/runtime/manual/runtime/web_platform_apis/",
-          "/runtime/manual/runtime/location_api/",
-          "/runtime/manual/runtime/web_storage_api/",
-          "/runtime/manual/runtime/workers/",
-        ],
-      },
-      {
-        label: "Interop with Node & npm",
-        items: [
-          "/runtime/manual/node/",
-          "/runtime/manual/node/migrate/",
-          "/runtime/manual/node/npm_specifiers/",
-          "/runtime/manual/node/private_registries/",
-          "/runtime/manual/node/cjs_to_esm/",
-          "/runtime/manual/node/cheatsheet/",
           {
-            label: "Supported Node APIs and globals",
-            id: "/runtime/manual/node/compatibility/",
+            label: "deno add",
+            id: "/runtime/reference/cli/add/",
           },
-        ],
-      },
-      {
-        label: "JSX and DOM APIs",
-        items: [
-          "/runtime/manual/advanced/jsx_dom/overview/",
-          "/runtime/manual/advanced/jsx_dom/jsx/",
-          "/runtime/manual/advanced/jsx_dom/css/",
-          "/runtime/manual/advanced/jsx_dom/jsdom/",
-          "/runtime/manual/advanced/jsx_dom/deno_dom/",
-          "/runtime/manual/advanced/jsx_dom/linkedom/",
-          "/runtime/manual/advanced/faqs/",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Development Tools",
-    items: [
-      {
-        label: "CLI Command Reference",
-        items: [
-          "/runtime/manual/tools/",
-          "/runtime/manual/tools/unstable_flags/",
           {
             label: "deno bench",
-            id: "/runtime/manual/tools/benchmarker/",
+            id: "/runtime/reference/cli/benchmarker/",
           },
           {
             label: "deno completions",
-            id: "/runtime/manual/tools/completions/",
-          },
-          {
-            label: "deno cache",
-            id: "/runtime/manual/tools/cache/",
+            id: "/runtime/reference/cli/completions/",
           },
           {
             label: "deno check",
-            id: "/runtime/manual/tools/check/",
+            id: "/runtime/reference/cli/check/",
           },
           {
             label: "deno compile",
-            id: "/runtime/manual/tools/compiler/",
+            id: "/runtime/reference/cli/compiler/",
           },
           {
             label: "deno coverage",
-            id: "/runtime/manual/tools/coverage/",
+            id: "/runtime/reference/cli/coverage/",
           },
           {
             label: "deno doc",
-            id: "/runtime/manual/tools/documentation_generator/",
+            id: "/runtime/reference/cli/documentation_generator/",
           },
           {
             label: "deno eval",
-            id: "/runtime/manual/tools/eval/",
+            id: "/runtime/reference/cli/eval/",
           },
           {
             label: "deno fmt",
-            id: "/runtime/manual/tools/formatter/",
+            id: "/runtime/reference/cli/formatter/",
           },
           {
             label: "deno info",
-            id: "/runtime/manual/tools/dependency_inspector/",
+            id: "/runtime/reference/cli/dependency_inspector/",
           },
           {
             label: "deno init",
-            id: "/runtime/manual/tools/init/",
+            id: "/runtime/reference/cli/init/",
           },
           {
             label: "deno install",
-            id: "/runtime/manual/tools/script_installer/",
+            id: "/runtime/reference/cli/install/",
           },
           {
             label: "deno jupyter",
-            id: "/runtime/manual/tools/jupyter/",
+            id: "/runtime/reference/cli/jupyter/",
           },
           {
             label: "deno lint",
-            id: "/runtime/manual/tools/linter/",
+            id: "/runtime/reference/cli/linter/",
           },
           {
             label: "deno publish",
-            id: "/runtime/manual/tools/publish/",
+            id: "/runtime/reference/cli/publish/",
           },
           {
             label: "deno lsp",
-            id: "/runtime/manual/tools/lsp/",
+            id: "/runtime/reference/cli/lsp/",
+          },
+          {
+            label: "deno remove",
+            id: "/runtime/reference/cli/remove/",
           },
           {
             label: "deno repl",
-            id: "/runtime/manual/tools/repl/",
+            id: "/runtime/reference/cli/repl/",
           },
           {
             label: "deno run",
-            id: "/runtime/manual/tools/run/",
+            id: "/runtime/reference/cli/run/",
           },
           {
             label: "deno serve",
-            id: "/runtime/manual/tools/serve/",
+            id: "/runtime/reference/cli/serve/",
           },
           {
             label: "deno task",
-            id: "/runtime/manual/tools/task_runner/",
+            id: "/runtime/reference/cli/task_runner/",
           },
           {
             label: "deno test",
-            id: "/runtime/manual/tools/test/",
+            id: "/runtime/reference/cli/test/",
           },
           {
             label: "deno types",
-            id: "/runtime/manual/tools/types/",
+            id: "/runtime/reference/cli/types/",
           },
           {
             label: "deno uninstall",
-            id: "/runtime/manual/tools/uninstall/",
+            id: "/runtime/reference/cli/uninstall/",
           },
           {
             label: "deno upgrade",
-            id: "/runtime/manual/tools/upgrade/",
+            id: "/runtime/reference/cli/upgrade/",
           },
+          "/runtime/reference/cli/unstable_flags/",
         ],
       },
       {
-        label: "Testing",
-        items: [
-          "/runtime/manual/basics/testing/",
-          "/runtime/manual/basics/testing/assertions/",
-          "/runtime/manual/basics/testing/coverage/",
-          "/runtime/manual/basics/testing/mocking/",
-          "/runtime/manual/basics/testing/sanitizers/",
-          "/runtime/manual/basics/testing/documentation/",
-          "/runtime/manual/basics/testing/behavior_driven_development/",
-          "/runtime/manual/basics/testing/snapshot_testing/",
-        ],
+        label: "Deno APIs",
+        id: "/runtime/reference/deno_namespace_apis/",
       },
       {
-        label: "Workspaces",
-        id: "/runtime/manual/basics/workspaces/",
+        label: "Web APIs",
+        id: "/runtime/reference/web_platform_apis/",
       },
       {
-        label: "Vendoring",
-        id: "/runtime/manual/basics/vendoring/",
+        label: "Node APIs",
+        id: "/runtime/reference/node_apis/",
+      },
+      "/runtime/reference/ts_config_migration/",
+      "/runtime/reference/continuous_integration/",
+      {
+        label: "Environment variables",
+        id: "/runtime/reference/env_variables/",
       },
       {
-        label: "Visual Studio Code",
-        items: [
-          "/runtime/manual/references/vscode_deno/",
-          "/runtime/manual/references/vscode_deno/testing_api/",
-        ],
+        label: "Deno & VS Code",
+        id: "/runtime/reference/vscode/",
       },
       {
-        label: "Language Server",
-        items: [
-          "/runtime/manual/advanced/language_server/overview/",
-          "/runtime/manual/advanced/language_server/imports/",
-          "/runtime/manual/advanced/language_server/testing_api/",
-        ],
+        label: "Using JSX and React",
+        id: "/runtime/reference/jsx/",
+      },
+      {
+        label: "Testing code in docs",
+        id: "/runtime/reference/documentation/",
+      },
+      "/runtime/reference/wasm/",
+      "/runtime/reference/migration_guide/",
+      {
+        label: "LSP integration",
+        id: "/runtime/reference/lsp_integration/",
       },
     ],
   },
   {
-    title: "Advanced Topics",
-    items: [
-      {
-        label: "Deploying & Embedding Deno",
-        items: [
-          "/runtime/manual/advanced/deploying_deno/",
-          "/runtime/manual/advanced/deploying_deno/aws_lightsail/",
-          "/runtime/manual/advanced/deploying_deno/cloudflare_workers/",
-          "/runtime/manual/advanced/deploying_deno/digital_ocean/",
-          "/runtime/manual/advanced/deploying_deno/google_cloud_run/",
-          "/runtime/manual/advanced/deploying_deno/kinsta/",
-          "/runtime/manual/advanced/continuous_integration/",
-          "/runtime/manual/advanced/embedding_deno/",
-        ],
-      },
-      {
-        label: "TypeScript in Deno",
-        items: [
-          "/runtime/manual/advanced/typescript/overview/",
-          "/runtime/manual/advanced/typescript/types/",
-          "/runtime/manual/advanced/typescript/configuration/",
-          "/runtime/manual/advanced/typescript/migration/",
-          "/runtime/manual/advanced/typescript/faqs/",
-        ],
-      },
-      {
-        label: "WebAssembly",
-        items: [
-          "/runtime/manual/runtime/webassembly/",
-          "/runtime/manual/runtime/webassembly/using_wasm/",
-          "/runtime/manual/runtime/webassembly/using_streaming_wasm/",
-          "/runtime/manual/runtime/webassembly/wasm_resources/",
-        ],
-      },
-      "/runtime/manual/advanced/migrate_deprecations/",
-    ],
-  },
-  {
-    title: "Contributing and Support",
+    title: "Contributing and support",
     items: [
       {
         label: "Contributing to Deno",
         items: [
-          "/runtime/manual/references/contributing/",
-          "/runtime/manual/references/contributing/architecture/",
-          "/runtime/manual/references/contributing/building_from_source/",
-          "/runtime/manual/references/contributing/profiling/",
-          "/runtime/manual/references/contributing/release_schedule/",
-          "/runtime/manual/references/contributing/style_guide/",
-          "/runtime/manual/references/contributing/web_platform_tests/",
+          "/runtime/contributing/architecture/",
+          "/runtime/contributing/building_from_source/",
+          "/runtime/contributing/profiling/",
+          "/runtime/contributing/release_schedule/",
+          "/runtime/contributing/style_guide/",
+          "/runtime/contributing/web_platform_tests/",
         ],
       },
-      "/runtime/manual/help/",
+      "/runtime/help/",
     ],
   },
   {
-    title: "Tutorials and Examples",
+    title: "Tutorials",
+    href: "/runtime/tutorials/",
     items: [
+      "/runtime/tutorials/hello_world/",
+      "/runtime/tutorials/fetch_data/",
+      "/runtime/tutorials/hashbang/",
+      "/runtime/tutorials/cjs_to_esm/",
+      "/runtime/tutorials/how_to_with_npm/react/",
+      "/runtime/tutorials/how_to_with_npm/next/",
+      "/runtime/tutorials/how_to_with_npm/vue/",
+      "/runtime/tutorials/connecting_to_databases/",
       {
-        label: "Basic Examples",
+        label: "More tutorials",
         items: [
-          "/runtime/tutorials/hello_world/",
-          "/runtime/tutorials/fetch_data/",
-          "/runtime/tutorials/read_write_files/",
-          "/runtime/tutorials/hashbang/",
-        ],
-      },
-      {
-        label: "Advanced Examples",
-        items: [
-          "/runtime/tutorials/unix_cat/",
-          "/runtime/tutorials/http_server/",
           "/runtime/tutorials/file_server/",
-          "/runtime/tutorials/tcp_echo/",
           "/runtime/tutorials/subprocess/",
           "/runtime/tutorials/os_signals/",
           "/runtime/tutorials/file_system_events/",
           "/runtime/tutorials/module_metadata/",
-        ],
-      },
-      {
-        label: "npm Module Examples",
-        items: [
+          "/runtime/tutorials/aws_lambda/",
+          "/runtime/tutorials/aws_lightsail/",
+          "/runtime/tutorials/cloudflare_workers/",
+          "/runtime/tutorials/digital_ocean/",
+          "/runtime/tutorials/google_cloud_run/",
+          "/runtime/tutorials/kinsta/",
           "/runtime/tutorials/how_to_with_npm/apollo/",
           "/runtime/tutorials/how_to_with_npm/express/",
           "/runtime/tutorials/how_to_with_npm/mongoose/",
           "/runtime/tutorials/how_to_with_npm/mysql2/",
           "/runtime/tutorials/how_to_with_npm/planetscale/",
           "/runtime/tutorials/how_to_with_npm/prisma/",
-          "/runtime/tutorials/how_to_with_npm/react/",
           "/runtime/tutorials/how_to_with_npm/redis/",
-          "/runtime/tutorials/how_to_with_npm/vue/",
         ],
-      },
-      {
-        label: "More on Deno by Example",
-        href: "/examples",
-      },
-    ],
-  },
-  {
-    title: "Reference",
-    items: [
-      {
-        label: "Full API Reference",
-        href: "/api/deno",
-      },
-      {
-        label: "Std. Library",
-        href: "https://www.deno.land/std",
       },
     ],
   },
 ] satisfies Sidebar;
 
 export const sectionTitle = "Runtime";
-export const sectionHref = "/runtime/manual/";
+export const sectionHref = "/runtime/";
+
+export interface Description {
+  kind: "NOTE" | "TIP" | "IMPORTANT" | "WARNING" | "CAUTION";
+  description: string;
+}
+function handleDescription(description: Description | string): Description {
+  if (typeof description === "string") {
+    return {
+      kind: "WARNING",
+      description,
+    };
+  } else {
+    return description;
+  }
+}
+
+export type Descriptions = Record<string, DescriptionItem>;
+
+type DescriptionItem = {
+  status: "good" | "partial" | "stubs" | "unsupported";
+  description?: Description;
+  symbols?: Record<string, Description>;
+};
+
+export async function generateDescriptions(): Promise<Descriptions> {
+  const descriptions: Descriptions = {};
+  for await (
+    const dirEntry of walk(
+      new URL(import.meta.resolve("../reference_gen/node_descriptions")),
+      { exts: ["yaml"] },
+    )
+  ) {
+    const file = await Deno.readTextFile(dirEntry.path);
+    const parsed = yamlParse(file);
+    if (!parsed) {
+      throw `Invalid or empty file: ${dirEntry.path}`;
+    }
+    if (parsed.description) {
+      parsed.description = handleDescription(parsed.description);
+    }
+
+    if (parsed.symbols) {
+      parsed.symbols = Object.fromEntries(
+        Object.entries(parsed.symbols).map((
+          [key, value],
+        ) => [key, handleDescription(value)]),
+      );
+    }
+
+    if (
+      !(parsed.status === "good" || parsed.status === "partial" ||
+        parsed.status === "stubs" || parsed.status === "unsupported")
+    ) {
+      throw `Invalid status provided in '${dirEntry.name}': ${parsed.status}`;
+    }
+
+    descriptions[dirEntry.name.slice(0, -5)] = parsed;
+  }
+
+  return descriptions;
+}
+
+/*
+generates the node compat list for the Node Support page.
+This the data is read from the files in the reference_gen/node_description directory.
+This function is called in node.md through the templating engine Vento,
+after which the normal markdown rendered is called.
+ */
+export async function generateNodeCompatability() {
+  const descriptions = await generateDescriptions();
+  const sorted = Object.entries(descriptions).toSorted(([keyA], [keyB]) =>
+    keyA.localeCompare(keyB)
+  );
+  const grouped: Record<
+    string,
+    { title: string; icon: string; items: Array<[string, DescriptionItem]> }
+  > = {
+    good: {
+      title: "Fully supported modules",
+      icon:
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#22c55e"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
+      items: [],
+    },
+    partial: {
+      title: "Partially supported modules",
+      icon:
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#6366f1"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>',
+      items: [],
+    },
+    unsupported: {
+      title: "Unsupported modules",
+      icon:
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#ef4444"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
+      items: [],
+    },
+  };
+  for (const item of sorted) {
+    grouped[item[1].status].items.push(item);
+  }
+
+  return Object.entries(grouped).map(([_status, entries]) => {
+    let content =
+      `<div class="module-info">\n\n## ${entries.icon} ${entries.title} (${entries.items.length}/${
+        Object.keys(descriptions).length
+      })\n\n`;
+
+    content += entries.items.map(([key, content]) => {
+      let out = `\n\n### <a href="/api/node/${key}">node:${
+        key.replaceAll("--", "/")
+      }</a>\n\n<div class="item-content">\n\n`;
+
+      if (content) {
+        if (content.description) {
+          out += `${content.description.description}\n\n`;
+        }
+        if (content.symbols) {
+          for (const [symbol, description] of Object.entries(content.symbols)) {
+            out += `**${
+              symbol === "*" ? "All symbols" : symbol
+            }**: ${description.description}\n\n`;
+          }
+        }
+      }
+
+      return out + "</div>";
+    }).join("\n\n");
+
+    return content;
+  }).join("\n\n");
+}

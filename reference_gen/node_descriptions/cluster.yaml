@@ -1,0 +1,4 @@
+status: unsupported
+description: All exports are non-functional stubs.
+symbols:
+  "*": This symbol is a non-functional stub.

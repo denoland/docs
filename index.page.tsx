@@ -8,14 +8,14 @@ export const sidebar = [
     items: [
       {
         label: "Runtime Manual",
-        id: "/runtime/manual/",
+        id: "/runtime/",
       },
       {
         label: "Examples",
         id: "/examples/",
       },
       {
-        label: "Reference",
+        label: "API reference",
         id: "/api/deno",
       },
       {
@@ -57,7 +57,7 @@ export default function () {
             <div class="flex flex-row gap-4 mt-8">
               <DocsCTA
                 text="Get Started"
-                href="/runtime/manual"
+                href="/runtime/"
                 product="runtime"
               />
               <DocsCTA
@@ -97,7 +97,7 @@ export default function () {
                 title="Deno basics"
                 description="New to Deno? This is the place to start."
                 linktext="Get started"
-                link="/runtime/manual/getting_started/first_steps"
+                link="/runtime/"
                 product="runtime"
               />
 
@@ -105,7 +105,7 @@ export default function () {
                 title="Configuration"
                 description="Customizations for Deno’s built-in TypeScript compiler, formatter, and linter."
                 linktext="Deno config"
-                link="/runtime/manual/getting_started/configuration_file"
+                link="/runtime/fundamentals/configuration"
                 product="runtime"
               />
 
@@ -113,7 +113,7 @@ export default function () {
                 title="Testing in Deno"
                 description="All about Deno’s built-in test runner for JavaScript or TypeScript code."
                 linktext="More about Testing"
-                link="/runtime/manual/basics/testing/"
+                link="/runtime/fundamentals/testing"
                 product="runtime"
               />
             </div>
@@ -232,7 +232,7 @@ export default function () {
             <div class="flex flex-col">
               <div class="mb-8">
                 <h3 class="text-xl md:text-2xl font-semibold underline underline-offset-8 decoration-runtime-500 mb-4">
-                  API Reference
+                  API reference
                 </h3>
                 <p class="max-w-[75ch]">
                   Deno, Web, and Node API reference documentation, built for the
@@ -242,7 +242,7 @@ export default function () {
                     href="/api/deno"
                     class="runtime-link underline underline-offset-4"
                   >
-                    Reference
+                    API reference
                   </a>{" "}
                   section.
                 </p>
@@ -269,8 +269,8 @@ export default function () {
                       href: "/api/deno/permissions",
                     },
                     {
-                      text: "Websocket",
-                      href: "/api/deno/websocket",
+                      text: "WebSockets",
+                      href: "/api/deno/web-sockets",
                     },
                     {
                       text: "View all Deno APIs",
@@ -287,8 +287,8 @@ export default function () {
                       href: "/api/web/cache",
                     },
                     {
-                      text: "Cookies",
-                      href: "/api/web/cookies",
+                      text: "Canvas",
+                      href: "/api/web/canvas",
                     },
                     {
                       text: "Fetch",
@@ -399,7 +399,7 @@ export default function () {
                   title="Quick Start"
                   description="Configure your subhosting account and you'll be hosting customer code in minutes."
                   linktext="Quick start"
-                  link="/runtime/manual/getting_started/first_steps"
+                  link="/subhosting/manual/quick_start/"
                   product="deploy"
                 />
 
@@ -407,7 +407,7 @@ export default function () {
                   title="Subhosting architecture"
                   description="Learn how subhosting works with our platform architecture guides."
                   linktext="Learn about subhosting"
-                  link="/runtime/manual/getting_started/configuration_file"
+                  link="/runtime/fundamentals/configuration"
                   product="deploy"
                 />
 
@@ -415,7 +415,7 @@ export default function () {
                   title="REST API"
                   description="Quickly provision new projects and make deployments through our REST API."
                   linktext="REST API"
-                  link="/runtime/manual/basics/testing/"
+                  link="/subhosting/manual/#rest-api-reference-and-openapi-spec"
                   product="deploy"
                 />
               </div>
@@ -438,7 +438,7 @@ export default function () {
                 title="Connect with our community"
                 description="Get help from the Deno community"
                 linktext="Learn more"
-                link="/runtime/manual/help/"
+                link="/runtime/help"
                 product="help"
               />
               <ContentItem

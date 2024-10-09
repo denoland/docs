@@ -17,11 +17,9 @@ const modules: Record<string, string> = {
 const UNSTABLE_PREFIX = "**UNSTABLE**: New API, yet to be vetted.";
 
 for (const jsdoc of file.getDescendantsOfKind(ts.SyntaxKind.JSDoc)) {
-  if (jsdoc.compilerNode.comment?.startsWith?.(UNSTABLE_PREFIX)) {
-    let jsdocBody = jsdoc.compilerNode.comment.trim()
-      .slice(UNSTABLE_PREFIX.length)
-      .trim();
-    jsdoc.setDescription(jsdocBody);
+  const text = jsdoc.getText();
+  if (text?.includes?.(UNSTABLE_PREFIX)) {
+    jsdoc.replaceWithText(text.replace(UNSTABLE_PREFIX, ""));
   }
 }
 

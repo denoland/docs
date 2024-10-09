@@ -2,14 +2,14 @@ import { Sidebar } from "../types.ts";
 
 export const sidebar = [
   {
-    title: "Getting Started",
+    title: "Getting started",
     items: [
       {
-        label: "Quick Start",
+        label: "Quick start",
         id: "/deploy/manual/",
       },
       {
-        label: "Deploy Basics",
+        label: "Deploy basics",
         items: [
           "/deploy/manual/use-cases/",
           "/deploy/manual/playgrounds/",
@@ -23,18 +23,18 @@ export const sidebar = [
     ],
   },
   {
-    title: "Deploy Platform",
+    title: "Deploy platform",
     items: [
       {
         label: "Deployments",
         id: "/deploy/manual/deployments/",
       },
       {
-        label: "Custom Domains",
+        label: "Custom domains",
         id: "/deploy/manual/custom-domains/",
       },
       {
-        label: "Environment Variables",
+        label: "Environment variables",
         id: "/deploy/manual/environment-variables/",
       },
       {
@@ -68,13 +68,13 @@ export const sidebar = [
         id: "/deploy/kv/manual/cron/",
       },
       {
-        label: "Edge Cache",
+        label: "Edge cache",
         id: "/deploy/manual/edge-cache/",
       },
     ],
   },
   {
-    title: "Connecting to Databases",
+    title: "Connecting to databases",
     items: [
       {
         label: "Deno KV",
@@ -99,6 +99,7 @@ export const sidebar = [
       "/deploy/manual/fulfillment-policy/",
       "/deploy/manual/privacy-policy/",
       "/deploy/manual/security/",
+      "/deploy/manual/terms-and-conditions/",
     ],
   },
   {

@@ -1,5 +1,5 @@
 /**
- * @title Subprocesses: Collecting Output
+ * @title Subprocesses: Collecting output
  * @difficulty intermediate
  * @tags cli
  * @run --allow-run <url>

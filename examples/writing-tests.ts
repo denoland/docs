@@ -1,5 +1,5 @@
 /**
- * @title Writing Tests
+ * @title Writing tests
  * @difficulty beginner
  * @tags cli
  * @run deno test --allow-read --allow-write <url>
