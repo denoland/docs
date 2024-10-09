@@ -418,9 +418,9 @@ export default function () {
 
                 <ContentItem
                   title="Subhosting architecture"
-                  description="Learn how subhosting works with our platform architecture guides."
+                  description="Manage key resources in your systems - handle data, manage deployments and their analytics. All while ensuring stability and efficiency."
                   linktext="Learn about subhosting"
-                  link="/runtime/fundamentals/configuration"
+                  link="/subhosting/api/"
                   product="deploy"
                 />
 
