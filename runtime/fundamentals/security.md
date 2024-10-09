@@ -85,8 +85,8 @@ in Node.js (ie none).
 Definition: `-A, --allow-all`
 
 ```sh
-deno run -A script.s
-deno run --allow-all scrip
+deno run -A script.ts
+deno run --allow-all script.ts
 ```
 
 ### File system access
