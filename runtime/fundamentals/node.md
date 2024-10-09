@@ -355,14 +355,85 @@ $ deno run --allow-read npm:cowsay@1.5.0/cowthink What to eat?
                 ||     ||
 ```
 
-### Node modules directory
+### node_modules
 
-npm specifiers resolve npm packages to a central global npm cache. This works
-well in most cases and is ideal since it uses less space and doesn't require a
-`node_modules` directory. That said, you may find cases where an npm package
-expects itself to be executing from a `node_modules` directory. To improve
-compatibility and support those packages, you can use the `--node-modules-dir`
-flag.
+When you run `npm install`, npm creates a `node_modules` directory in your
+project which houses the dependencies as specified in the `package.json` file.
+
+Deno uses [npm specifiers](/runtime/fundamentals/node/#using-npm-packages) to
+resolve npm packages to a central global npm cache. This is ideal since it uses
+less space and doesn't require a `node_modules` directory.
+
+There may however be cases where you need a local `node_modules` directory in
+your Deno project, even if you don’t have a `package.json` (eg. when using
+frameworks like Next.js or Svelte or when depending on npm packages that use
+Node-API).
+
+#### Default Deno dependencies behavior
+
+By default, Deno will not create a `node_modules` directory when you use the
+`deno run` command, dependencies will be installed into the global cache. This
+is the recommended setup for new Deno projects.
+
+#### Automatic node_modules creation
+
+If you need a `node_modules` directory in your project, you can use the
+`--node-modules-dir` flag or `nodeModulesDir: auto` option in the config file to
+tell Deno to create a `node_modules` directory in the current working directory:
+
+```sh
+deno run --node-modules-dir=auto main.ts
+```
+
+or with a configuration file:
+
+```json title="deno.json"
+{
+  "nodeModulesDir": "auto"
+}
+```
+
+The auto mode automatically installs dependencies into the global cache and
+creates a local node_modules directory in the project root. This is recommended
+for projects that have npm dependencies that rely on node_modules directory -
+mostly projects using bundlers or ones that have npm dependencies with
+postinstall scripts.
+
+#### Manual node_modules creation
+
+If your project has a `package.json` file, you can use the manual mode, which
+requires an installation step to create your `node_modules` directory:
+
+```sh
+deno run --node-modules-dir=manual main.ts
+deno install
+```
+
+or with a configuration file:
+
+```json title="deno.json"
+{ "nodeModulesDir": "manual" }
+```
+
+You would then run `deno install/npm install/pnpm install` or any other package
+manager to create the `node_modules` directory.
+
+Manual mode is the default mode for projects using a `package.json`. You may
+recognize this workflow from Node.js projects. It is recommended for projects
+using frameworks like Next.js, Remix, Svelte, Qwik etc, or tools like Vite,
+Parcel or Rollup.
+
+:::note
+
+We recommend that you use the default `none` mode, and fallback to `auto` or
+`manual` mode if you get errors about missing packages inside the `node_modules`
+directory.
+
+:::
+
+#### node_modules with Deno 1.X
+
+Use the `--node-modules-dir` flag.
 
 For example, given `main.ts`:
 
@@ -378,29 +449,7 @@ deno run --node-modules-dir main.ts
 
 Running the above command, with a `--node-modules-dir` flag, will create a
 `node_modules` folder in the current directory with a similar folder structure
-to npm:
-
-![Node modules directory](./images/node_modules_dir.png)
-
-This is done automatically when calling `deno run`, no separate install command
-necessary.
-
-Alternatively, if you wish to disable the creation of a `node_modules` directory
-entirely, you can set this flag to `"none"` (ex. `--node-modules-dir=none`) or
-add a `"nodeModulesDir": "none"` entry to your deno.json configuration file to
-make the setting apply to the entire directory tree.
-
-In the case where you want to modify the contents of the `node_modules`
-directory before execution, you can run `deno install` with
-`--node-modules-dir`, modify the contents, then run the script.
-
-For example:
-
-```sh
-deno install --node-modules-dir --entrypoint main.ts
-deno run --allow-read=. --allow-write=. scripts/your_script_to_modify_node_modules_dir.ts
-deno run --node-modules-dir main.ts
-```
+to npm.
 
 ## Node.js global objects
 
