@@ -98,7 +98,7 @@ In addition to a max key size of 2 KiB and max value size of 64 KiB, there are
 certain limits with the Deno KV transaction API:
 
 - **Max keys per `kv.getMany()`**: 10
-- **Max limit per `kv.list()`**: 1000
+- **Max batch size per `kv.list()`**: 1000
 - **Max checks in an atomic operation**: 100
 - **Max mutations in an atomic operation**: 1000
 - **Max total size of an atomic operation**: 800 KiB. This includes all keys and
