@@ -1,4 +1,6 @@
-# Environment variables
+---
+title: "Environment variables"
+---
 
 Environment variables are useful to store values like access tokens of web
 services. Each deployment has a set of environment variables defined at the

@@ -1,4 +1,9 @@
-# How to use Express with Deno
+---
+title: "How to use Express with Deno"
+oldUrl:
+  - /runtime/manual/examples/how_to_with_npm/express/
+  - /runtime/manual/node/how_to_with_npm/express/
+---
 
 [Express](https://expressjs.com/) is a popular web framework known for being
 simple and unopinionated with a large ecosystem of middleware.

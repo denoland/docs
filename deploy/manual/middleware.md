@@ -1,4 +1,6 @@
-# Reverse proxy middleware
+---
+title: "Reverse proxy middleware"
+---
 
 This quickstart will cover how to deploy a small piece of middleware that
 reverse proxies another server (in this case example.com). For additional

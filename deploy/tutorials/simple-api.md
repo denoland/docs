@@ -1,4 +1,8 @@
-# Simple API server
+---
+title: "Simple API server"
+oldUrl:
+  - /deploy/docs/simple-api/
+---
 
 Deno is great for creating simple, light-weight API servers. Learn how to create
 and deploy one using Deno Deploy in this tutorial.
@@ -129,7 +133,7 @@ the `localhost` URL with your live production URL on Deno Deploy:
 ```shell
 curl --header "Content-Type: application/json" \
   --request POST \
-  --data '{"url":"https://docs.deno.com/runtime/manual","slug":"denodocs"}' \
+  --data '{"url":"https://docs.deno.com/runtime/","slug":"denodocs"}' \
   https://your-deno-project-url-here.deno.dev/
 ```
 

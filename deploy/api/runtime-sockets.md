@@ -1,4 +1,8 @@
-# TCP sockets and TLS
+---
+title: "TCP sockets and TLS"
+oldUrl:
+  - /deploy/docs/sockets/
+---
 
 Deno Deploy supports outbound TCP and TLS connections. These APIs allow you to
 use databases like PostgreSQL, SQLite, MongoDB, etc., with Deploy.
@@ -8,8 +12,8 @@ use databases like PostgreSQL, SQLite, MongoDB, etc., with Deploy.
 Make outbound TCP connections.
 
 The function definition is same as
-[Deno](https://doc.deno.land/deno/stable/~/Deno.connect) with the limitation
-that `transport` option can only be `tcp` and `hostname` cannot be localhost or
+[Deno](https://docs.deno.com/api/deno/~/Deno.connect) with the limitation that
+`transport` option can only be `tcp` and `hostname` cannot be localhost or
 empty.
 
 ```ts
@@ -53,7 +57,7 @@ Deno.serve(handler);
 Make outbound TLS connections.
 
 The function definition is the same as
-[Deno](https://doc.deno.land/deno/stable/~/Deno.connectTls) with the limitation
+[Deno](https://docs.deno.com/api/deno/~/Deno.connectTls) with the limitation
 that hostname cannot be localhost or empty.
 
 ```ts

@@ -1,4 +1,8 @@
-# How to create a RESTful API with Prisma and Oak
+---
+title: "How to create a RESTful API with Prisma and Oak"
+oldUrl:
+  - /runtime/manual/examples/how_to_with_npm/prisma/
+---
 
 [Prisma](https://prisma.io) has been one of our top requested modules to work
 with in Deno. The demand is understandable, given that Prisma's developer
@@ -97,9 +101,6 @@ And in `./prisma/seed.ts`:
 
 ```ts
 import { Prisma, PrismaClient } from "../generated/client/deno/edge.ts";
-import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
-
-const envVars = await load();
 
 const prisma = new PrismaClient({
   datasourceUrl: envVars.DATABASE_URL,
@@ -138,8 +139,13 @@ await prisma.$disconnect();
 We can now run `seed.ts` with:
 
 ```shell
-deno run -A prisma/seed.ts
+deno run -A --env prisma/seed.ts
 ```
+
+> [!TIP]
+>
+> The `--env` flag is used to tell Deno to load environment variables from the
+> `.env` file.
 
 After doing so, you should be able to see your data on Prisma Studio by running
 the following command:
@@ -150,7 +156,7 @@ deno run -A npm:prisma studio
 
 You should see something similar to the following screenshot:
 
-![New dinosaurs are in Prisma dashboard](../../manual/images/how-to/prisma/1-dinosaurs-in-prisma.png)
+![New dinosaurs are in Prisma dashboard](../images/how-to/prisma/1-dinosaurs-in-prisma.png)
 
 ## Create your API routes
 
@@ -168,9 +174,6 @@ Then, in your `main.ts` file:
 ```ts
 import { PrismaClient } from "./generated/client/deno/edge.ts";
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
-import { load } from "https://deno.land/std@$STD_VERSION/dotenv/mod.ts";
-
-const envVars = await load();
 
 /**
  * Initialize.
@@ -248,12 +251,12 @@ await app.listen({ port: 8000 });
 Now, let's run it:
 
 ```shell
-deno run -A main.ts
+deno run -A --env main.ts
 ```
 
 Let's visit `localhost:8000/dinosaurs`:
 
-![List of all dinosaurs from REST API](../../manual/images/how-to/prisma/2-dinosaurs-from-api.png)
+![List of all dinosaurs from REST API](../images/how-to/prisma/2-dinosaurs-from-api.png)
 
 Next, let's `POST` a new user with this `curl` command:
 
@@ -263,7 +266,7 @@ curl -X POST http://localhost:8000/dinosaur -H "Content-Type: application/json" 
 
 You should now see a new row on Prisma Studio:
 
-![New dinosaur Deno in Prisma](../../manual/images/how-to/prisma/3-new-dinosaur-in-prisma.png)
+![New dinosaur Deno in Prisma](../images/how-to/prisma/3-new-dinosaur-in-prisma.png)
 
 Nice!
 

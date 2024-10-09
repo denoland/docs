@@ -1,4 +1,8 @@
-# Simple HTTP server
+---
+title: "Simple HTTP server"
+oldUrl:
+  - /deploy/docs/tutorial-http-server/
+---
 
 In this tutorial, let's build a HTTP server that responds to all incoming HTTP
 requests with `Hello, world!` and a `200 OK` HTTP status. We will be using the
@@ -7,7 +11,7 @@ Deno Deploy playground to deploy and edit this script.
 ## Step 1: Write the HTTP server script
 
 A simple HTTP server can be written with a single line of code in Deno using
-[`Deno.serve`](https://deno.land/api?s=Deno.serve):
+[`Deno.serve`](https://docs.deno.com/api/deno/~/Deno.serve):
 
 ```js title="One-line HTTP server"
 Deno.serve(() => new Response("Hello, world!"));
@@ -15,8 +19,8 @@ Deno.serve(() => new Response("Hello, world!"));
 
 While this type of server is useful for getting started, `Deno.serve` is capable
 of supporting more advanced usage as well
-([API reference docs](https://deno.land/api?s=Deno.serve)). Below is an example
-of a more complex server that takes advantage of other API features.
+([API reference docs](https://docs.deno.com/api/deno/~/Deno.serve)). Below is an
+example of a more complex server that takes advantage of other API features.
 
 ```ts title="More complex Hello World server"
 Deno.serve({

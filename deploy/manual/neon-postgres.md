@@ -1,4 +1,6 @@
-# Connect to Neon Postgres
+---
+title: "Connect to Neon Postgres"
+---
 
 This tutorial covers how to connect to a Neon Postgres database from an
 application deployed on Deno Deploy.

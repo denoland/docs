@@ -1,8 +1,12 @@
-# Subhosting Quick Start
+---
+title: Subhosting Quick Start
+oldUrl:
+- /deploy/manual/subhosting/projects_and_deployments/
+---
 
 Looking for the smallest possible example that shows how to deploy code to
 Deno's isolate cloud? We've got you covered below, or you can skip to the
-[more detailed getting started guide](#getting_started).
+[more detailed getting started guide](#getting-started-with-subhosting).
 
 ```ts
 // 1.) Get API access info ready
@@ -22,6 +26,7 @@ const pr = await fetch(`${API}/organizations/${orgId}/projects`, {
     name: null, // randomly generates project name
   }),
 });
+
 const project = await pr.json();
 
 // 3.) Deploy a "hello world" server to the new project
@@ -33,17 +38,23 @@ const dr = await fetch(`${API}/projects/${project.id}/deployments`, {
     assets: {
       "main.ts": {
         "kind": "file",
-        "content": `Deno.serve(() => new Response("Hello, World!"));`,
+        "content":
+          `export default { async fetch(req) { return new Response("Hello, World!"); } }`,
         "encoding": "utf-8",
       },
     },
     envVars: {},
   }),
 });
-console.log(dr.status);
-```
 
-<a name="getting_started"></a>
+const deployment = await dr.json();
+
+console.log(dr.status);
+console.log(
+  "Visit your site here:",
+  `https://${project.name}-${deployment.id}.deno.dev`,
+);
+```
 
 ## Getting started with subhosting
 
@@ -71,11 +82,11 @@ of interacting with the API in this way. However, the techniques shown here will
 also work in any other environment capable of executing HTTP requests.
 
 The example code shown here and in future chapters assume that you have
-[Deno 1.38 or higher](/runtime/manual/getting_started/installation) installed.
+[Deno 1.38 or higher](/runtime/getting_started/installation) installed.
 
 When working with a REST API, it is useful to store authentication credentials
-in the [system environment](/runtime/manual/basics/env_variables), to prevent
-you from accidentally checking them in to source control.
+in the [system environment](/runtime/reference/env_variables), to prevent you
+from accidentally checking them in to source control.
 
 For this tutorial, we'll use the new `--env` flag
 [introduced in Deno 1.38](https://deno.com/blog/v1.38#deno-run---env) to manage
@@ -161,7 +172,7 @@ like this:
 }
 ```
 
-Note the `id` of the project that was returned with this repsonse - this is the
+Note the `id` of the project that was returned with this response - this is the
 project ID we'll use in the next step.
 
 Now that we have REST API access configured and a project set up, we can move on

@@ -1,4 +1,8 @@
-# How to use Mongoose with Deno
+---
+title: "How to use Mongoose with Deno"
+oldUrl:
+  - /runtime/manual/examples/how_to_with_npm/mongoose/
+---
 
 [Mongoose](https://mongoosejs.com/) is a popular, schema-based library that
 models data for [MongoDB](https://www.mongodb.com/). It simplifies writing
@@ -18,7 +22,7 @@ and adds and updates a dinosaur to the database.
 First, we'll create the necessary files and directories:
 
 ```console
-$ touch main.ts && mkdir model && touch model/Dinosaur.ts
+touch main.ts && mkdir model && touch model/Dinosaur.ts
 ```
 
 In `/model/Dinosaur.ts`, we'll import `npm:mongoose`, define the [schema], and

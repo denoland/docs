@@ -1,4 +1,9 @@
-# About Subhosting
+---
+title: About Subhosting
+oldUrl:
+  - /subhosting/
+  - /deploy/manual/subhosting/
+---
 
 Deno Subhosting is a robust platform designed to allow Software as a Service
 (SaaS) providers to securely run code written by their customers. The Subhosting
@@ -69,3 +74,7 @@ For a complete reference for the REST API used to implement subhosting, you can
 also provides an [OpenAPI specification](https://api.deno.com/v1/openapi.json)
 which can be used with
 [a number of OpenAPI-compatible tools](https://openapi.tools/).
+
+We also offer SDKs in [JavaScript](https://www.npmjs.com/package/subhosting),
+[Python](https://pypi.org/project/subhosting/0.0.1a0/), and
+[Go](https://github.com/denoland/subhosting-go).

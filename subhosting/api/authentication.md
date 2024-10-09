@@ -1,4 +1,6 @@
-# Authentication
+---
+title: Authentication
+---
 
 Developers can provision projects, domains, KV databases, and other resources
 using the Subhosting REST API.

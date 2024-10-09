@@ -1,8 +1,11 @@
-# Edge Cache
+---
+title: "Edge Cache"
+---
 
 :::caution Beta feature
 
-Cache API support on Deno Deploy is currently in beta.
+Cache API support on Deno Deploy is currently in closed beta and is not
+available to all users yet.
 
 :::
 
@@ -33,5 +36,6 @@ lost, out-of-order or temporarily invisible.
 
 ## Limitations
 
-- The `Content-Length` header is required for cached requests.
+- If a response is not constructed from a `Uint8Array` or `string` body, the
+  `Content-Length` header needs to be manually set.
 - Deletion is not yet supported.

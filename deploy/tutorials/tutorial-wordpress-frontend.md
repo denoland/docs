@@ -1,4 +1,8 @@
-# Use WordPress as a headless CMS
+---
+title: "Use WordPress as a headless CMS"
+oldUrl:
+  - /deploy/docs/tutorial-wordpress-frontend/
+---
 
 WordPress is the most popular CMS in the world, but is difficult to use in a
 "headless" form, i.e. with a custom frontend.
@@ -6,21 +10,21 @@ WordPress is the most popular CMS in the world, but is difficult to use in a
 In this tutorial, we show how to use Fresh, a modern web framework built on
 Deno, to create a frontend for headless WordPress.
 
-## **Step 1:** Clone the Fresh WordPress theme
+## Step 1: Clone the Fresh WordPress theme
 
 Fresh offers two ready-to-go themes, one for a blog and one for shopfront.
 
-**Blog**
+### Blog
 
-```console
+```bash
 git clone https://github.com/denoland/fresh-wordpress-themes.git
 cd fresh-wordpress-themes/blog
 deno task docker
 ```
 
-**Shop**
+### Shop
 
-```sh
+```bash
 git clone https://github.com/denoland/fresh-wordpress-themes.git
 cd fresh-wordpress-themes/corporate
 deno task docker
@@ -29,13 +33,13 @@ deno task docker
 Note that Blog and Shop themes use different setups for WordPress server. Make
 sure you run `deno task docker` command in the right directory.
 
-## **Step 2:** Open another terminal in the same directory and run:
+## Step 2: Open another terminal in the same directory and run:
 
 ```sh
 deno task start
 ```
 
-## **Step 3:** Visit http://localhost:8000/
+## Step 3: Visit http://localhost:8000/
 
 You can manage the contents of the site via the WordPress dashboard at
 http://localhost/wp-admin (username: `user`, password: `password`).
@@ -44,7 +48,7 @@ http://localhost/wp-admin (username: `user`, password: `password`).
 
 There are a lot of options for hosting WordPress on the internet. Many cloud
 providers
-[have](https://aws.amazon.com/getting-sstarted/hands-on/launch-a-wordpress-website/)
+[have](https://aws.amazon.com/getting-started/hands-on/launch-a-wordpress-website/)
 [special](https://cloud.google.com/wordpress)
 [guides](https://learn.microsoft.com/en-us/azure/app-service/quickstart-wordpress)
 and

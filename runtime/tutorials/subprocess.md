@@ -1,30 +1,30 @@
-# Creating a Subprocess
+---
+title: "Creating a subprocess"
+oldUrl:
+  - /runtime/manual/examples/subprocess/
+---
 
 ## Concepts
 
 - Deno is capable of spawning a subprocess via
-  [Deno.Command](https://deno.land/api?s=Deno.Command).
+  [Deno.Command](https://docs.deno.com/api/deno/~/Deno.Command).
 - `--allow-run` permission is required to spawn a subprocess.
 - Spawned subprocesses do not run in a security sandbox.
 - Communicate with the subprocess via the
-  [stdin](https://deno.land/api?s=Deno.stdin),
-  [stdout](https://deno.land/api?s=Deno.stdout) and
-  [stderr](https://deno.land/api?s=Deno.stderr) streams.
+  [stdin](https://docs.deno.com/api/deno/~/Deno.stdin),
+  [stdout](https://docs.deno.com/api/deno/~/Deno.stdout) and
+  [stderr](https://docs.deno.com/api/deno/~/Deno.stderr) streams.
 
 ## Simple example
 
-This example is the equivalent of running `'echo hello'` from the command line.
+This example is the equivalent of running `echo "Hello from Deno!"` from the
+command line.
 
-```ts
-/**
- * subprocess_simple.ts
- */
-
+```ts title="subprocess_simple.ts"
 // define command used to create the subprocess
-const command = new Deno.Command(Deno.execPath(), {
+const command = new Deno.Command("echo", {
   args: [
-    "eval",
-    "console.log('hello'); console.error('world')",
+    "Hello from Deno!",
   ],
 });
 
@@ -32,15 +32,15 @@ const command = new Deno.Command(Deno.execPath(), {
 const { code, stdout, stderr } = await command.output();
 
 console.assert(code === 0);
-console.assert("world\n" === new TextDecoder().decode(stderr));
 console.log(new TextDecoder().decode(stdout));
+console.log(new TextDecoder().decode(stderr));
 ```
 
 Run it:
 
 ```shell
-$ deno run --allow-run --allow-read ./subprocess_simple.ts
-hello
+$ deno run --allow-run=echo ./subprocess_simple.ts
+Hello from Deno!
 ```
 
 ## Security
@@ -59,14 +59,10 @@ started a subprocess you must use the `"piped"` option.
 
 This example is the equivalent of running `yes &> ./process_output` in bash.
 
-```ts
-/**
- * subprocess_piping_to_file.ts
- */
-
+```ts title="subprocess_piping_to_files.ts"
 import {
   mergeReadableStreams,
-} from "https://deno.land/std@$STD_VERSION/streams/merge_readable_streams.ts";
+} from "jsr:@std/streams@1.0.0-rc.4/merge-readable-streams";
 
 // create the file to attach the process to
 const file = await Deno.open("./process_output.txt", {
@@ -101,5 +97,5 @@ setTimeout(() => {
 Run it:
 
 ```shell
-$ deno run --allow-run --allow-read --allow-write ./subprocess_piping_to_file.ts
+$ deno run --allow-run=yes --allow-read=. --allow-write=. ./subprocess_piping_to_file.ts
 ```

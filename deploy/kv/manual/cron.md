@@ -1,10 +1,12 @@
-import Admonition from "./_admonition.mdx";
+---
+title: "Scheduling cron tasks"
+oldUrl:
+  - /kv/manual/cron/
+---
 
-# Scheduling cron tasks
+<deno-admonition></deno-admonition>
 
-<Admonition />
-
-The [`Deno.cron`](https://deno.land/api?s=Deno.cron&unstable=) interface enables
+The [`Deno.cron`](https://docs.deno.com/api/deno/~/Deno.cron) interface enables
 you to configure JavaScript or TypeScript code that executes on a configurable
 schedule using [cron syntax](https://en.wikipedia.org/wiki/Cron). In the example
 below, we configure a block of JavaScript code that will execute every minute.
@@ -60,12 +62,12 @@ Below are some design details and limitations to be aware of when using
 
 ### Tasks must be defined at the top level module scope
 
-The [`Deno.cron`](https://deno.land/api?s=Deno.cron&unstable=) interface is
+The [`Deno.cron`](https://docs.deno.com/api/deno/~/Deno.cron) interface is
 designed to support static definition of cron tasks based on pre-defined
 schedules. All `Deno.cron` tasks must be defined at the top-level of a module.
 Any nested `Deno.cron` definitions (e.g. inside
-[`Deno.serve`](https://deno.land/api?s=Deno.serve&unstable=) handler) will
-result in an error or will be ignored.
+[`Deno.serve`](https://docs.deno.com/api/deno/~/Deno.serve) handler) will result
+in an error or will be ignored.
 
 If you need to schedule tasks dynamically during your Deno program execution,
 you can use the [Deno Queues](./queue_overview) APIs.

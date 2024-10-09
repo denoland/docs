@@ -17,24 +17,46 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: lts/*
+      - name: Set up Deno
+        uses: denoland/setup-deno@v1
 
       - name: Set up Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: canary
+          deno-version: 91860b34f52e498913e69bef3fc734fdf1ff817c
+          deno-binary-name: "deno_doc"
 
-      - name: Build step
+      - name: "Reference: install"
+        working-directory: "reference_gen"
+        run: DENO_FUTURE=1 deno install
+
+      - name: "Reference: generate types"
+        working-directory: "reference_gen"
+        run: DENO_FUTURE=1 deno task types
+
+      - name: "Reference: generate docs"
+        working-directory: "reference_gen"
+        run: deno_doc task doc
+
+      - name: Build
         env:
+          ORAMA_CLOUD_INDEX_ID: ${{ vars.ORAMA_CLOUD_INDEX_ID }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
           DENO_FUTURE: 1
-        run: npm install && deno task build
+        run: deno task build
+
+      - name: Run server
+        working-directory: _site
+        run: deno run --no-lock --allow-read=. --allow-net --allow-env server.ts &
+
+      - name: Link checker
+        env:
+          DOCS_ROOT: "http://localhost:8000"
+        run: deno run --no-lock --allow-net --allow-env .github/workflows/better_link_checker.ts
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "deno-docs"
           entrypoint: "server.ts"
-          root: "build"
+          root: "_site"

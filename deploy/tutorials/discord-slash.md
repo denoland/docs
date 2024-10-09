@@ -1,4 +1,8 @@
-# Discord Slash Command
+---
+title: "Discord Slash Command"
+oldUrl:
+  - /deploy/docs/discord-slash/
+---
 
 Discord has a new feature called **Slash Commands**. They allow you to type `/`
 followed by a command name to perform some action. For example, you can type

@@ -1,4 +1,6 @@
-# Local development
+---
+title: "Local development"
+---
 
 For local development you can use the `deno` CLI. To install `deno`, follow the
 instructions in the

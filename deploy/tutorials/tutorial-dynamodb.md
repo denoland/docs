@@ -1,4 +1,8 @@
-# API server with DynamoDB
+---
+title: "API server with DynamoDB"
+oldUrl:
+  - /deploy/docs/tutorial-dynamodb/
+---
 
 In this tutorial let's take a look at how we can use it to build a small API
 that has endpoints to insert and retrieve information, backed by DynamoDB.

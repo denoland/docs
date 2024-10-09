@@ -1,0 +1,515 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-Regular.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-Italic.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-SemiBold.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-SemiBoldItalic.woff2") format("woff2");
+  }
+}
+
+[id] {
+  scroll-margin-top: 4rem;
+}
+
+h1 {
+  letter-spacing: -0.025em;
+}
+
+:where(h2, h3) {
+  letter-spacing: -0.0125em;
+}
+
+.markdown-body {
+  font-family: inherit;
+
+  /* Override gfm base styles */
+  p {
+    @apply mb-6;
+  }
+
+  pre {
+    @apply mb-6;
+  }
+
+  h1:first-child {
+    @apply mt-0;
+  }
+
+  h2 {
+    @apply mt-12 mb-4;
+  }
+
+  h3 {
+    @apply mt-10 mb-4;
+  }
+
+  h4 {
+    @apply mt-6 mb-4;
+  }
+
+  :where(h1, h2, h3) {
+    letter-spacing: -0.0125em;
+  }
+
+  :where(h2, h3, h4, h5, h6) {
+    .header-anchor:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .anchor-end {
+      opacity: 0;
+      transition: opacity 0.2s;
+      font-weight: normal;
+    }
+
+    &:hover .anchor-end {
+      opacity: 1;
+    }
+  }
+
+  & details {
+    @apply rounded border border-gray-1 py-4 px-4;
+
+    &[open] summary {
+      @apply pb-4 mb-4 border-b border-gray-00;
+    }
+
+    & summary::marker {
+      @apply text-gray-2;
+    }
+  }
+
+  & pre {
+    @apply border border-gray-200 bg-gray-50;
+  }
+}
+
+body:not(:has(.ddoc)) {
+  & pre:has(code.highlight),
+  & pre.highlight:has(code) {
+    @apply px-8 py-6 max-sm:-mx-4;
+    @apply max-sm:rounded-none !important;
+  }
+
+  & pre:has(code.highlight):where(:hover, :focus) + .copyButton,
+  & pre.highlight:has(code):where(:hover, :focus) + .copyButton {
+    @apply opacity-100;
+  }
+
+  .copyButton {
+    @apply opacity-0 transition-all duration-100 absolute top-2 right-2 p-1
+      rounded;
+
+    &:hover,
+    &:focus {
+      @apply opacity-100 bg-gray-100;
+    }
+
+    &:active {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.markdownBlockTitle + div > pre:has(code.highlight) {
+  @apply rounded-t-none border-t-0;
+}
+
+.markdownBlockTitle {
+  background-color: var(--bgColor-muted, var(--color-canvas-subtle));
+  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border border-gray-200
+    bg-gray-100 text-sm font-semibold;
+}
+
+.markdown-body h2:hover .anchor-end {
+  opacity: 1;
+}
+
+:root {
+  font-feature-settings: "cv05" on, "cv08" on, "cv09" on, "ss01" on, "ss08" on;
+}
+
+/* Common styles for all CTAs */
+.docs-cta {
+  @apply border text-balance text-black font-bold inline-block py-3.5 px-4
+    rounded-md w-max hover:text-inherit hover:no-underline transition-colors
+    duration-200;
+}
+
+/* Specific styles for runtime CTAs */
+.runtime-cta {
+  @apply bg-runtime-400 border-runtime-400 hover:bg-runtime-300;
+}
+
+/* Override for when CTA is used in markdown body */
+.markdown-body .runtime-cta,
+.markdown-body .deploy-cta {
+  @apply border-gray-4 hover:!no-underline !text-gray-4;
+}
+
+/* Specific styles for deploy CTAs */
+.deploy-cta {
+  @apply bg-deploy-500 border-deploy-500 hover:bg-deploy-400;
+}
+
+/* Specific styles for JSR CTAs */
+.jsr-cta {
+  @apply bg-jsr-yellow-400 border-jsr-cyan-950 !text-jsr-cyan-950 border-2
+    hover:!no-underline hover:bg-jsr-yellow-300;
+}
+
+.homepage-link {
+  @apply block font-semibold underline underline-offset-4;
+}
+
+.deploy-link {
+  @apply text-deploy-600 decoration-deploy-600/20 hover:decoration-deploy-600;
+}
+
+.runtime-link {
+  @apply text-runtime-600 decoration-runtime-600/20
+    hover:decoration-runtime-600;
+}
+
+.help-link {
+  @apply text-purple-600 decoration-purple-600/20 hover:decoration-purple-600;
+}
+
+/* Orama search style overrides */
+.searchbutton-module_searchbutton__gg7JJ {
+  @apply w-full border-gray-00 px-3 rounded-md gap-1 !important;
+}
+
+.searchbutton-module_searchbutton__gg7JJ > svg {
+  @apply w-3.5 h-3.5 !important;
+}
+
+.searchbutton-module_searchbutton__keys__qckL6 {
+  @apply border-0 py-0.5 text-gray-1 text-sm !important;
+}
+
+.searlchbutton-module_searchbutton__keys__qckL6 > kbd:first-of-type {
+  @apply text-sm !important;
+}
+
+.searchbutton-module_searchbutton__label__TfmnN {
+  @apply text-sm !important;
+}
+
+.searchbox-module_searchbox__TygrP {
+  border: var(--ifm-toc-border-color) 1px solid;
+}
+
+.searchbox-module_searchbox_container__kkcyK {
+  backdrop-filter: blur(6px) brightness(60%);
+}
+
+@media (max-width: 1023px) {
+  .searchbutton-module_searchbutton__keys__qckL6 {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .searchbutton-module_searchbutton__gg7JJ {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+}
+
+.sidebar__current-item {
+  @apply text-blue-500;
+}
+
+.sidebar__current-item::before {
+  @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em]
+    bg-gray-200;
+  clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
+}
+
+.markdown-body .admonition a {
+  @apply text-primary underline underline-offset-2;
+}
+
+.markdown-body .admonition {
+  @apply py-4 px-6 pb-2 rounded-lg border-2 bg-gray-1/5 border-gray-3;
+}
+
+.markdown-body .admonition .title {
+  @apply font-bold uppercase flex items-center;
+}
+
+.markdown-body .admonition .title::before {
+  content: "";
+  @apply inline-block size-5 mr-2;
+}
+
+.markdown-body .admonition > p {
+  @apply mb-2;
+}
+
+.markdown-body .admonition.info {
+  @apply bg-primary/5 border-blue-900/50 text-blue-900;
+}
+
+.markdown-body .admonition.note {
+  @apply bg-primary/5 border-blue-900/50 text-blue-900;
+}
+
+.markdown-body .admonition.caution {
+  @apply bg-yellow-50/5 border-yellow-500/50 text-yellow-900 fill-yellow-900;
+}
+
+.markdown-body .admonition.tip {
+  @apply bg-green-50/5 border-green-600/50 text-green-900;
+}
+
+.markdown-body .admonition.info .title::before {
+  /* circle exclamation mark */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(29 78 216)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></svg>');
+}
+
+.markdown-body .admonition.note .title::before {
+  /* circle exclamation mark */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(29 78 216)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></svg>');
+}
+
+.markdown-body .admonition.caution .title::before {
+  /* exclamation mark in a filled warning triangle */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(113 63 18)"><path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg>');
+}
+
+.markdown-body .admonition.tip .title::before {
+  /* lightbulb svg */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(22 163 74)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>');
+}
+
+.markdown-body .module-info {
+  @apply mt-4;
+}
+
+.markdown-body .module-info > .compat-title {
+  @apply text-lg mt-0 mb-1 flex flex-row items-center font-semibold;
+}
+
+.markdown-body .module-info > .compat-title a {
+  @apply pl-2 font-mono;
+}
+
+.markdown-body .module-info > p {
+  @apply pl-8;
+}
+
+.markdown-body .module-info > ul {
+  @apply pl-12;
+}
+
+.status-icon {
+  @apply inline-block w-6 h-6;
+}
+
+.status-good {
+  @apply text-green-500;
+}
+
+.status-info {
+  @apply text-indigo-500;
+}
+
+.status-unsupported {
+  @apply text-red-500;
+}
+
+.markdown-body .module-info.compat-status-good > .compat-title::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="%2322c55e" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.markdown-body .module-info.compat-status-partial > .compat-title::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="%236366f1" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.markdown-body .module-info.compat-status-unsupported > .compat-title::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="%23ef4444" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.markdown-body > pre.snippet-code[data-example-position="first"] {
+  @apply md:border-t md:border-b-0 md:pt-4 rounded-t h-full md:rounded-b-none;
+}
+
+.markdown-body > pre.snippet-code[data-example-position="middle"] {
+  @apply md:border-t-0 md:border-b-0 md:pt-0 md:pb-16 h-full md:rounded-none;
+}
+
+.markdown-body > pre.snippet-code[data-example-position="last"] {
+  @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none
+    md:rounded-b;
+}
+
+.deno-tabs {
+  @apply mb-4;
+}
+
+.deno-tabs > ul.deno-tabs-buttons {
+  @apply flex flex-wrap list-none p-0 m-0;
+}
+
+.deno-tabs > ul.deno-tabs-buttons > li {
+  @apply m-0 m-0;
+}
+
+.deno-tabs > ul.deno-tabs-buttons > li > button {
+  @apply inline-block mr-2 px-4 py-2 text-sm font-semibold text-slate-700
+    rounded-t bg-slate-100/80 hover:bg-blue-50 border border-transparent;
+}
+
+.deno-tabs > ul.deno-tabs-buttons > li > button[data-active="true"] {
+  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-transparent z-10
+    -mb-[1px] pb-[calc(0.5rem+1px)] relative;
+}
+
+.deno-tabs > div.deno-tabs-content > div {
+  @apply hidden py-4 px-4 rounded rounded-tl-none bg-slate-100 border
+    border-slate-200;
+}
+
+.deno-tabs > div.deno-tabs-content > div[data-active="true"] {
+  @apply flex flex-col gap-4;
+}
+
+.deno-tabs > div.deno-tabs-content > div > p {
+  @apply mb-0;
+}
+
+.deno-tabs pre {
+  @apply border border-slate-200 bg-white;
+}
+
+.deno-tabs .markdownBlockTitle {
+  @apply px-8 py-2 max-sm:-mx-4 sm:rounded-t-md border border-slate-200
+    bg-slate-50 text-slate-900 text-sm font-semibold;
+}
+
+/* Strips bottom margin in instances where multiple code samples exist in a tab. */
+.markdown-body .deno-tabs :not(div > pre + div > pre) {
+  @apply mb-0;
+}
+
+/* Custom DDOC styles for the Deno documentation */
+.ddoc {
+  @apply pt-0 !important;
+
+  #categoryPanel {
+    @apply border-r border-gray-000;
+    @apply pt-4 !important;
+
+    & li:hover {
+      @apply bg-blue-50 rounded-md !important;
+      > a {
+        @apply no-underline !important;
+      }
+    }
+    .active {
+      @apply bg-blue-50 rounded-md !important;
+    }
+  }
+
+  .contextLink {
+    @apply text-primary !important;
+    /* 40% opacity of for decoration color primary */
+    text-decoration-color: rgba(9, 107, 218, 0.4) !important;
+  }
+
+  .documentNavigation {
+    > h3 {
+      @apply hidden !important;
+    }
+
+    > ul {
+      @apply border-l border-gray-000 !important;
+
+      > li > a {
+        @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline py-1.5
+          px-3.5 !important;
+      }
+
+      > ul > li a {
+        @apply hover:bg-blue-50 rounded-lg hover:no-underline !important;
+      }
+    }
+  }
+
+  .markdown {
+    & pre {
+      @apply border-gray-000 !important;
+    }
+
+    /* This comes from gfm css, should be replaced with something in our color palette once we establish it. */
+    :not(pre) > code {
+      background-color: var(--color-neutral-muted) !important;
+    }
+  }
+  .markdown_summary :not(pre) > code {
+    background-color: var(--color-neutral-muted) !important;
+  }
+}
+
+#toc {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+.copyButton[data-copied="true"] .copy-icon {
+  display: none;
+}
+
+.copyButton[data-copied="true"] .check-icon {
+  display: inline;
+}

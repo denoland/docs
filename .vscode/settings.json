@@ -1,14 +1,10 @@
 {
-  "deno.cacheOnSave": true,
-  "deno.disablePaths": ["./src"],
   "deno.enable": true,
-  "deno.lint": true,
-  "deno.unstable": true,
-  "editor.formatOnSave": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
-  "[markdown]": {
-    "editor.formatOnSave": true,
-    "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "[typescriptreact]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
-  }
+  },
+  "editor.detectIndentation": true
 }

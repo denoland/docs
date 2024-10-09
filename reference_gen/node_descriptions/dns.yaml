@@ -1,0 +1,15 @@
+status: partial
+symbols:
+  resolve: The `ttl` option is not supported.
+  resolve4: The `ttl` option is not supported.
+  resolve6: The `ttl` option is not supported.
+  resolveCname: The `ttl` option is not supported.
+  resolveCaa: The `ttl` option is not supported.
+  resolveMx: The `ttl` option is not supported.
+  resolveNaptr: The `ttl` option is not supported.
+  resolveNs: The `ttl` option is not supported.
+  resolvePtr: The `ttl` option is not supported.
+  resolveSoa: The `ttl` option is not supported.
+  resolveSrv: The `ttl` option is not supported.
+  resolveTxt: The `ttl` option is not supported.
+  resolveAny: The `ttl` option is not supported.

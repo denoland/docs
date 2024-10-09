@@ -1,4 +1,8 @@
-# How to Use Redis with Deno
+---
+title: "How to use Redis with Deno"
+oldUrl:
+  - /runtime/manual/examples/how_to_with_npm/redis/
+---
 
 [Redis](https://redis.io/) is an in-memory data store you can use for caching,
 as a message broker, or for streaming data.
@@ -76,7 +80,7 @@ deno run --allow-net main.ts
 If we then go to [http://localhost:3000/ry](http://localhost:3000/ry) in
 Postman, we'll get the Github response:
 
-![uncached-redis-body.png](../../manual/images/how-to/redis/uncached-redis-body.png)
+![uncached-redis-body.png](../images/how-to/redis/uncached-redis-body.png)
 
 Let's cache this response using Redis.
 
@@ -139,16 +143,16 @@ server.listenAndServe();
 Running this first time gives us the same response as above, and we'll see the
 `is-cached` header set to `false`:
 
-![uncached-redis-header.png](../../manual/images/how-to/redis/uncached-redis-header.png)
+![uncached-redis-header.png](../images/how-to/redis/uncached-redis-header.png)
 
 But call with the same username again, and we get the cached result. The body is
 identical:
 
-![cached-redis-body.png](../../manual/images/how-to/redis/cached-redis-body.png)
+![cached-redis-body.png](../images/how-to/redis/cached-redis-body.png)
 
 But the header shows we have the cache:
 
-![cached-redis-header.png](../../manual/images/how-to/redis/cached-redis-header.png)
+![cached-redis-header.png](../images/how-to/redis/cached-redis-header.png)
 
 We can also see that the response was ~200ms quicker!
 

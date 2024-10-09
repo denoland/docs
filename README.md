@@ -2,86 +2,69 @@
 
 This repository contains the website running
 [docs.deno.com](https://docs.deno.com). The intent of this project is to
-eventually centralize all official Deno documentation content in a single
-website. The Deno Docs site is built using
-[Docusaurus 2](https://docusaurus.io/), a static site generator optimized for
-documentation websites.
+centralize all official Deno documentation content in a single website. The Deno
+Docs site is built using [Lume](https://lume.land/), an extremely fast static
+site generator.
 
-The `docs.deno.com` website is hosted on [Deno Deploy](https://deno.com/deploy),
-where it is fronted by a [Hono](https://hono.dev/) web server that handles
-redirects and other dynamic content requests as they become necessary.
+The `docs.deno.com` website is hosted on [Deno Deploy](https://deno.com/deploy).
 
 ## Local development
 
-Install [Deno](https://deno.com) and your favorite package manager (eg: `npm`)
-
-```console
-npm install
-```
+Install [Deno](https://deno.com).
 
 You can then start the local development server with:
 
 ```console
-DENO_FUTURE=1 deno task start
+deno task serve
 ```
 
 This will launch a browser window open to
 [localhost:3000](http://localhost:3000), where you will see any doc content
-changes you make update live.
-
-To test the generated static site in a production configuration, run:
-
-```console
-DENO_FUTURE=1 deno task build
-```
-
-This will generate a static site to the `build` folder locally. To test the
-production server (through the actual Deno / Hono server), run this command:
+changes you make update live. Here redirects will not work. If you want
+redirects to work, you need to run:
 
 ```console
-DENO_FUTURE=1 deno task serve
+deno task build
+deno task prod
 ```
 
-This will start a Deno server on [localhost:8000](http://localhost:8000), where
-you can preview the site as it will run on Deno Deploy.
-
-Sometimes, after making a Docusaurus config change, you will run into an error
-and need to clean Docusaurus' generated assets. You can do this by running:
-
-```console
-DENO_FUTURE=1 deno task clear
-```
-
-This will solve most errors you encounter while refactoring the site. Static
-assets will be rebuilt from scratch the next time you run `build` or `start`
-scripts.
+Which will start a Deno server on [localhost:8000](http://localhost:8000) used
+in production, which handles redirects.
 
 ## Editing content
 
-The actual content of the docs site is found mostly in these three folders:
+The actual content of the docs site is found mostly in these folders:
 
 - `runtime` - docs for the Deno CLI / runtime
 - `deploy` - docs for the Deno Deploy cloud service
-- `kv` - docs for Deno KV, Deno's integrated database
+- `subhosting` - docs for Deno Subhosting
+- `examples` - docs for the [Examples](#Examples) section
 
-Most files are [markdown](https://docusaurus.io/docs/markdown-features), but
-even markdown files are processed with [MDX](https://mdxjs.com/), which enables
-you to use JSX syntax within your markdown files.
+Most files are [markdown](https://lume.land/plugins/markdown/), but even
+markdown files are processed with [MDX](https://mdxjs.com/), which enables you
+to use JSX syntax within your markdown files.
 
-Left navigation for the different doc sections are configured in one of these
-files:
+Left navigation for the different doc sections are configured in the `_data.ts`
+files in their respective content directories.
 
-- `sidebars/runtime.js` - sidebar config for the Runtime section
-- `sidebars/deploy.js` - sidebar config for the Deno Deploy section
-- `sidebars/kv.js` - sidebar config for the KV section
+- `runtime/_data.ts` - sidebar config for the Runtime section
+- `deploy/_data.ts` - sidebar config for the Deno Deploy section
 
 Static files (like screenshots) can be included directly in the `runtime`,
 `deploy`, or `kv` folders, and referenced by relative URLs in your markdown.
 
-Docusaurus provides a number of nice extensions to markdown you might want to
-use, like tabs, admonitions, and code blocks.
-[Refer to the Docusaurus docs](https://docusaurus.io/docs/markdown-features) for
-more details.
+## Reference docs
+
+The reference docs served at `/api` are generated via the `deno doc` subcommand.
+To generate the reference docs locally, in the `reference_gen` directory, run:
+
+```console
+deno task types
+deno task doc
+```
+
+This will generate the reference docs, and you can use the `serve` or `build`
+tasks.
 
 ## Versioning docs content
 
@@ -100,83 +83,6 @@ For additive changes, it should usually be sufficient to indicate which version
 a feature or API was released in. For example - in the Node 20 docs, the
 [register function](https://nodejs.org/dist/latest-v20.x/docs/api/module.html#moduleregister)
 is marked as being added in version `20.6.0`.
-
-When we do want to maintain versioned docs for major releases, we currently plan
-to use [Docusaurus versions](https://docusaurus.io/docs/versioning).
-
-## Including version numbers in code and content
-
-It may occasionally be desirable to dynamically include the current Deno CLI or
-standard library version in content or code samples. We can accomplish this
-using the `replacements.json` file at the root of this repository.
-
-Any values you would like to change once, and then have appear dynamically in a
-number of generated files, should be included in `replacements.json`.
-
-In code samples (fenced with backticks), you can include a `$` character,
-followed by the replacement variable name, directly within the code sample. When
-the markdown is transformed, the current version number will be replaced within
-it.
-
-```ts
-import { copy } from "https://deno.land/std@$STD_VERSION/fs/copy.ts";
-```
-
-To include version number in markdown / MDX content, we recommend using the
-`<Replacement />` component:
-
-```mdx
-import Replacement from "@site/src/components/Replacement";
-
-The current CLI version is **<Replacement for="CLI_VERSION"/>**.
-```
-
-If you are writing inline JSX, you can also use the replacements object directly
-like so:
-
-```mdx
-import { replacements } from "@site/src/components/Replacement";
-
-<p>
-  The current CLI version is <code>{ replacements.CLI_VERSION }</code>.
-</p>
-```
-
-## Server-side code and redirects
-
-The Deno code that serves the site in production is in the `src-deno` folder.
-When the `npm run build` command is executed for a production Docusaurus build,
-it also copies the contents of the `src-deno` folder (unchanged) into the
-resulting `build` folder, which will be our project root for Deno Deploy.
-
-Right now, there is just a very thin [Hono](https://hono.dev/) server sitting on
-top of the static assets generated by Docusaurus. The only interesting job the
-Hono app has right now is handling redirects, of which there are several from
-the previous Deno doc sites.
-
-To add a redirect, open `src-deno/redirects.ts` and configure a new route in the
-default exported function. The default status code of `301` should be sufficient
-for most cases.
-
-## New release process for Deno runtime
-
-Let's say that a new minor release is ready for Deno, with CLI version `1.99`
-and standard library version `0.999.0`. Here's how I would recommend approaching
-the docs for this release right now.
-
-- Create a feature branch for the release, like `release_1_99` or similar
-- Update `replacements.json` with the upcoming CLI and standard lib versions
-- As the release is developed, add docs changes to this branch
-- When the release is ready, submit a PR to the `main` branch from this feature
-  branch
-- When the branch is merged, create a `v1.99` tag from the new `main` branch
-
-For patch releases, I would recommend simply submitting pull requests to the
-`main` branch with relevant updates to `replacements.json` as required.
-
-If we decide we'd like to have "canary" docs for upcoming versions, we can
-discuss how to make that possible with
-[Docusaurus versions](https://docusaurus.io/docs/versioning).
 
 ## Contribution
 
@@ -217,7 +123,7 @@ snippets showcasing various functions of the APIs implemented in Deno.
 
 ### Adding an example
 
-To add an example, create a file in the `by-example` directory. The file name
+To add an example, create a file in the `examples` directory. The file name
 should be a short description of the example (in kebab case) and the contents
 should be the code for the example. The file should be in the `.ts` format. The
 file should start with a JSDoc style multi line comment that describes the
