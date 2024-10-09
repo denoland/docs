@@ -235,8 +235,8 @@ When you iterate over a file stream as shown below, the file descriptor
 will be automatically closed at the end of iteration. There is no need to
 manually close the file descriptor.
 
-```ts
-const iterator = fd.readable[Symbol.asyncIterator]();
+
+`const iterator = fd.readable[Symbol.asyncIterator]();`
 
 :::
 
