@@ -89,9 +89,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: denoland/setup-deno@v2
+      - uses: denoland/setup-deno@v1
         with:
-          deno-version: v2.x
+          deno-version: v1.x
       - run: deno fmt --check
 ```
 
