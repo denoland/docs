@@ -77,9 +77,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Deno
-        uses: denoland/setup-deno@v2
+        uses: denoland/setup-deno@v1
         with:
-          deno-version: v2.x
+          deno-version: v1.x
 
       - name: Build step
         run: "deno task build"
