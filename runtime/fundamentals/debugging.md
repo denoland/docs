@@ -1,5 +1,5 @@
 ---
-title: "Debugging Your Code"
+title: "Debugging your code"
 oldUrl:
 - /runtime/manual/getting_started/debugging_your_code/
 - /runtime/manual/basics/debugging_your_code/
@@ -129,7 +129,7 @@ to debug the code.
 
 Deno can be debugged using VSCode. This is best done with help from the official
 `vscode_deno` extension. Documentation for this can be found
-[here](/runtime/manual/references/vscode_deno/#using-the-debugger).
+[here](/runtime/reference/vscode#using-the-debugger).
 
 ## JetBrains IDEs
 

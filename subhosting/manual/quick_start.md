@@ -6,7 +6,7 @@ oldUrl:
 
 Looking for the smallest possible example that shows how to deploy code to
 Deno's isolate cloud? We've got you covered below, or you can skip to the
-[more detailed getting started guide](#getting_started).
+[more detailed getting started guide](#getting-started-with-subhosting).
 
 ```ts
 // 1.) Get API access info ready
@@ -56,8 +56,6 @@ console.log(
 );
 ```
 
-<a name="getting_started"></a>
-
 ## Getting started with subhosting
 
 To get started with subhosting, you will need to create an organization in the
@@ -84,11 +82,11 @@ of interacting with the API in this way. However, the techniques shown here will
 also work in any other environment capable of executing HTTP requests.
 
 The example code shown here and in future chapters assume that you have
-[Deno 1.38 or higher](/runtime/fundamentals/installation) installed.
+[Deno 1.38 or higher](/runtime/getting_started/installation) installed.
 
 When working with a REST API, it is useful to store authentication credentials
-in the [system environment](/runtime/manual/basics/env_variables), to prevent
-you from accidentally checking them in to source control.
+in the [system environment](/runtime/reference/env_variables), to prevent you
+from accidentally checking them in to source control.
 
 For this tutorial, we'll use the new `--env` flag
 [introduced in Deno 1.38](https://deno.com/blog/v1.38#deno-run---env) to manage

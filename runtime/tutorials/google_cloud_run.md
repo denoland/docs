@@ -1,5 +1,5 @@
 ---
-title: "How to Deploy to Google Cloud Run"
+title: "How to deploy to Google Cloud Run"
 oldUrl: /runtime/manual/advanced/deploying_deno/google_cloud_run/
 ---
 
@@ -60,7 +60,7 @@ CMD ["run", "--allow-net", "main.ts"]
 Then, in our `docker-compose.yml`:
 
 ```yml
-version: '3'
+version: "3"
 
 services:
   web:
@@ -188,52 +188,52 @@ on:
       - main
 
 env:
-  PROJECT_ID: {{ PROJECT_ID }}
-  GAR_LOCATION: {{ GAR_LOCATION }}
-  REPOSITORY: {{ GAR_REPOSITORY }}
-  SERVICE: {{ SERVICE }}
-  REGION: {{ REGION }}
+  PROJECT_ID: { { PROJECT_ID } }
+  GAR_LOCATION: { { GAR_LOCATION } }
+  REPOSITORY: { { GAR_REPOSITORY } }
+  SERVICE: { { SERVICE } }
+  REGION: { { REGION } }
 
 jobs:
   deploy:
     name: Deploy
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: "read"
+      id-token: "write"
 
     runs-on: ubuntu-latest
     steps:
-    - name: CHeckout
-      uses: actions/checkout@v3
+      - name: CHeckout
+        uses: actions/checkout@v3
 
-    - name: Google Auth
-      id: auth
-      uses: 'google-github-actions/auth@v0'
-      with:
-        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+      - name: Google Auth
+        id: auth
+        uses: "google-github-actions/auth@v0"
+        with:
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
-    - name: Login to GAR
-      uses: docker/login-action@v2.1.0
-      with:
-        registry: ${{ env.GAR_LOCATION }}-docker.pkg.dev
-        username: _json_key
-        password: ${{ secrets.GCP_CREDENTIALS }}
+      - name: Login to GAR
+        uses: docker/login-action@v2.1.0
+        with:
+          registry: ${{ env.GAR_LOCATION }}-docker.pkg.dev
+          username: _json_key
+          password: ${{ secrets.GCP_CREDENTIALS }}
 
-    - name: Build and Push Container
-      run: |-
-        docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" ./
-        docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
+      - name: Build and Push Container
+        run: |-
+          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" ./
+          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
 
-    - name: Deploy to Cloud Run
-      id: deploy
-      uses: google-github-actions/deploy-cloudrun@v0
-      with:
-        service: ${{ env.SERVICE }}
-        region: ${{ env.REGION }}
-        image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0
+        with:
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}
 
-    - name: Show Output
-      run: echo ${{ steps.deploy.outputs.url }}
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}
 ```
 
 The environment variables that we need to set are (the examples in parenthesis

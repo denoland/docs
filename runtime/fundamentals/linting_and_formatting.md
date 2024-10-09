@@ -1,5 +1,5 @@
 ---
-title: "Linting and Formatting"
+title: "Linting and formatting"
 ---
 
 In an ideal world, your code is always clean, consistent, and free of pesky
@@ -89,9 +89,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.x
+          deno-version: v2.x
       - run: deno fmt --check
 ```
 

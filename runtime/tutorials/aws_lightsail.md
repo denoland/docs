@@ -56,7 +56,7 @@ CMD ["run", "--allow-net", "main.ts"]
 Then, in our `docker-compose.yml`:
 
 ```yml
-version: '3'
+version: "3"
 
 services:
   web:
@@ -288,3 +288,6 @@ When you push to GitHub and the Action succeeds, you'll be able to see your new
 Deno app on AWS:
 
 ![deno on aws](./images/how-to/aws-lightsail/hello-world-from-deno-and-aws-lightsail.png)
+
+🦕 Now you can deploy a Deno app to Amazon Lightsail using Docker, Docker Hub,
+and GitHub Actions.

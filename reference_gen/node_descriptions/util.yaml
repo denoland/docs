@@ -1,3 +1,4 @@
+status: partial
 symbols:
   transferableAbortSignal: This symbol is currently not supported.
   transferableAbortController: This symbol is currently not supported.

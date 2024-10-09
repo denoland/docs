@@ -1,5 +1,5 @@
 ---
-title: "Unstable Feature Flags"
+title: "Unstable feature flags"
 oldUrl:
  - /runtime/tools/unstable_flags/
  - /runtime/manual/tools/unstable_flags/
@@ -28,7 +28,7 @@ deno run --unstable-byonm main.ts
 
 You can specify which unstable features you'd like to enable for your project
 using a
-[configuration option in `deno.json`](../getting_started/configuration_file.md).
+[configuration option in `deno.json`](/runtime/fundamentals/configuration/).
 
 ```json title="deno.json"
 {
@@ -58,10 +58,10 @@ export DENO_UNSTABLE_BARE_NODE_BUILTINS=true
 **Environment variable:** `DENO_UNSTABLE_BARE_NODE_BUILTINS`
 
 This flag enables you to
-[import Node.js built-in modules](../node/node_specifiers.md) without a `node:`
-specifier, as in the example below. You can also use this flag to enable npm
-packages without an `npm:` specifier if you are manually managing your Node.js
-dependencies ([see `byonm` flag](#--unstable-byonm)).
+[import Node.js built-in modules](../../fundamentals/node.md#node-built-in-modules)
+without a `node:` specifier, as in the example below. You can also use this flag
+to enable npm packages without an `npm:` specifier if you are manually managing
+your Node.js dependencies ([see `byonm` flag](#--unstable-byonm)).
 
 ```ts title="example.ts"
 import { readFileSync } from "fs";
@@ -137,7 +137,8 @@ Sloppy imports will allow (but print warnings for) the following:
 - Import a directory path, and automatically use `index.js` or `index.ts` as the
   import for that directory
 
-[`deno compile`](./compiler.md) does not support sloppy imports.
+[`deno compile`](/runtime/reference/cli/compiler/) does not support sloppy
+imports.
 
 ## `--unstable-unsafe-proto`
 
@@ -212,28 +213,6 @@ on the `Deno` namespace.
 
 Enabling this flag makes [Deno KV](/deploy/kv/manual) APIs available in the
 `Deno` namespace.
-
-## `--unstable-ffi`
-
-Enable unstable FFI APIs -
-[learn more about FFI](/runtime/reference/deno_namespace_apis/#ffi).
-
-## `--unstable-fs`
-
-Enable unstable file system APIs in the `Deno` namespace. These APIs include:
-
-- [`Deno.flock`](https://docs.deno.com/api/deno/~/Deno.flock)
-- [`Deno.flockSync`](https://docs.deno.com/api/deno/~/Deno.flockSync)
-- [`Deno.funlock`](https://docs.deno.com/api/deno/~/Deno.funlock)
-- [`Deno.funlockSync`](https://docs.deno.com/api/deno/~/Deno.funlockSync)
-- [`Deno.umask`](https://docs.deno.com/api/deno/~/Deno.umask)
-
-## `--unstable-http`
-
-Enable unstable HTTP APIs in the `Deno` namespace. These APIs include:
-
-- [`Deno.HttpClient`](https://deno.land/api?unstable=&s=Deno.HttpClient)
-- [`Deno.createHttpClient`](https://deno.land/api?unstable=&s=Deno.createHttpClient)
 
 ## `--unstable-net`
 

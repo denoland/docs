@@ -1,10 +1,10 @@
 ---
-title: "Continuous Integration"
+title: "Continuous integration"
 oldUrl: /runtime/manual/advanced/continuous_integration
 ---
 
 Deno's built-in tools make it easy to set up Continuous Integration (CI)
-pipelines for your projects. [Testing](/runtime/fundamentals/testing.md),
+pipelines for your projects. [Testing](/runtime/fundamentals/testing),
 [linting and formatting](/runtime/fundamentals/linting_and_formatting/) your
 code can all be done with the corresponding commands `deno test`, `deno lint`
 and `deno fmt`. In addition, you can generate code coverage reports from test
@@ -29,29 +29,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.x # Run with latest stable Deno.
+          deno-version: v2.x # Run with latest stable Deno.
 ```
 
 To expand the workflow, add any of the `deno` subcommands that you might need:
 
 ```yaml
-      # Check if the code is formatted according to Deno's default
-      # formatting conventions.
-      - run: deno fmt --check
+# Check if the code is formatted according to Deno's default
+# formatting conventions.
+- run: deno fmt --check
 
-      # Scan the code for syntax errors and style issues. If
-      # you want to use a custom linter configuration you can add a configuration file with --config <myconfig>
-      - run: deno lint
+# Scan the code for syntax errors and style issues. If
+# you want to use a custom linter configuration you can add a configuration file with --config <myconfig>
+- run: deno lint
 
-      # Run all test files in the repository and collect code coverage. The example
-      # runs with all permissions, but it is recommended to run with the minimal permissions your program needs (for example --allow-read).
-      - run: deno test --allow-all --coverage=cov/
+# Run all test files in the repository and collect code coverage. The example
+# runs with all permissions, but it is recommended to run with the minimal permissions your program needs (for example --allow-read).
+- run: deno test --allow-all --coverage=cov/
 
-      # This generates a report from the collected coverage in `deno test --coverage`. It is
-      # stored as a .lcov file which integrates well with services such as Codecov, Coveralls and Travis CI.
-      - run: deno coverage --lcov cov/ > cov.lcov
+# This generates a report from the collected coverage in `deno test --coverage`. It is
+# stored as a .lcov file which integrates well with services such as Codecov, Coveralls and Travis CI.
+- run: deno coverage --lcov cov/ > cov.lcov
 ```
 
 ## Cross-platform workflows
@@ -67,7 +67,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - run: deno test --allow-all --coverage cov/
 ```
@@ -99,10 +99,10 @@ jobs:
     continue-on-error: ${{ matrix.canary }} # Continue in case the canary run does not succeed
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
-        deno-version: [ v1.x ]
-        canary: [ false ]
-        include: 
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        deno-version: [v1.x]
+        canary: [false]
+        include:
           - deno-version: canary
             os: ubuntu-latest
             canary: true
@@ -150,7 +150,7 @@ env:
   DENO_DIR: my_cache_directory
 
 steps:
-  - name: Cache Deno dependencies 
+  - name: Cache Deno dependencies
     uses: actions/cache@v2
     with:
       path: ${{ env.DENO_DIR }}

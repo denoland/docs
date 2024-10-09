@@ -1,5 +1,5 @@
 ---
-title: Command Line Interface
+title: Command line interface
 oldUrl:
  - /manual/getting_started/command_line_interface
  - /runtime/manual/getting_started/command_line_interface/
@@ -21,10 +21,10 @@ used to customize its behavior.
 You can view all of the available commands and flags by running the `deno help`
 subcommand in your terminal, or using the `-h` or `--help` flags.
 
-Check out the [CLI reference guide](/runtime/reference/cli/all_commands/) for a
-further documentation on all the subcommands and flags available. We'll take a
-look at a few commands in a bit more detail below to see how they can be used
-and configured.
+Check out the [CLI reference guide](/runtime/reference/cli/) for a further
+documentation on all the subcommands and flags available. We'll take a look at a
+few commands in a bit more detail below to see how they can be used and
+configured.
 
 ## An example subcommand - `deno run`
 

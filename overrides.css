@@ -4,6 +4,28 @@
   @apply max-w-[75ch] !important;
 }
 
+.ddoc .namespaceSection {
+  display: block !important;
+}
+
+@media (max-width: 768px) {
+  .ddoc {
+    @apply px-0 !important;
+  }
+
+  .ddoc > div:not(.categoryPanel) {
+    @apply px-4 !important;
+  }
+
+  .ddoc .markdown .highlight {
+    @apply -mx-4 !important;
+  }
+
+  .ddoc .markdown pre > code:first-child {
+    @apply px-4 !important;
+  }
+}
+
 /* Align content with the top of the TOC now that it has no header */
 
 #content {
@@ -33,7 +55,8 @@
 }
 
 .ddoc .usageContent {
-  @apply bg-primary/5 border-primary/25 max-w-[75ch] py-4 mt-6 relative !important;
+  @apply bg-primary/5 border-primary/25 max-w-[75ch] py-4 mt-6 relative
+    !important;
 }
 
 /* Adjust spacing for ref pages that don't have a header above usage */
@@ -46,7 +69,8 @@
 }
 
 .ddoc .usageContent > h3 {
-  @apply text-xs -top-2.5 bg-white border border-primary/25 px-2 py-0.5 rounded absolute !important;
+  @apply text-xs -top-2.5 bg-white border border-primary/25 px-2 py-0.5 rounded
+    absolute !important;
 }
 
 .ddoc .usageContent > .markdown {
@@ -55,24 +79,6 @@
 
 .ddoc .context_button:hover {
   @apply bg-gray-000/25 !important;
-}
-
-/* Single column APIs */
-
-.ddoc .namespaceSection {
-  @apply grid-cols-1 gap-1 mt-4 !important;
-}
-
-.ddoc .section {
-  @apply max-w-[75ch] !important;
-}
-
-.ddoc .namespaceSection .namespaceItem {
-  @apply min-h-0 mb-4 !important;
-}
-
-.ddoc .section > div:first-child > h2 {
-  @apply mb-0 !important;
 }
 
 /* This section attempts to style the headings on the category index pages differently from the symbol detail pages */

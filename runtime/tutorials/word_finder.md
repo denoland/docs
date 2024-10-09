@@ -1,5 +1,5 @@
 ---
-title: "Building a Word Finder App with Deno"
+title: "Building a word finder app with Deno"
 oldUrl:
   - /runtime/manual/examples/word_finder/
 ---

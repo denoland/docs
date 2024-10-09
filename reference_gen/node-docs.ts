@@ -1,47 +1,8 @@
 import { Node, Project, ts } from "ts-morph";
 import EXCLUDE_MAP from "./node-exclude-map.json" with { type: "json" };
-import { walk } from "@std/fs";
-import { parse as yamlParse } from "@std/yaml";
+import { generateDescriptions, Description } from "../runtime/_data.ts";
 
-interface Description {
-  kind: "NOTE" | "TIP" | "IMPORTANT" | "WARNING" | "CAUTION";
-  description: string;
-}
-function handleDescription(description: Description | string): Description {
-  if (typeof description === "string") {
-    return {
-      kind: "WARNING",
-      description,
-    };
-  } else {
-    return description;
-  }
-}
-
-const descriptions: Record<
-  string,
-  { description?: Description; symbols?: Record<string, Description> }
-> = {};
-for await (const dirEntry of walk("node_descriptions", { exts: ["yaml"] })) {
-  const file = await Deno.readTextFile(dirEntry.path);
-  const parsed = yamlParse(file);
-  if (!parsed) {
-    continue;
-  }
-  if (parsed.description) {
-    parsed.description = handleDescription(parsed.description);
-  }
-
-  if (parsed.symbols) {
-    parsed.symbols = Object.fromEntries(
-      Object.entries(parsed.symbols).map((
-        [key, value],
-      ) => [key, handleDescription(value)]),
-    );
-  }
-
-  descriptions[dirEntry.name.slice(0, -5)] = parsed;
-}
+const descriptions = await generateDescriptions();
 
 await Deno.mkdir("types/node", { recursive: true });
 
@@ -84,13 +45,18 @@ for (const file of files) {
       )
     ) {
       if (
+        !exportable.wasForgotten() &&
         exportable.getKind() !== ts.SyntaxKind.ImportEqualsDeclaration &&
         !(exportable.getKind() === ts.SyntaxKind.ModuleDeclaration &&
           exportable.getName() === "global")
       ) {
-        exportable.setIsExported(
-          !EXCLUDE_MAP[fileName]?.includes(exportable.getName?.()),
-        );
+        if (exportable.getName?.() === "BuiltInModule") {
+          exportable.remove();
+        } else {
+          exportable.setIsExported(
+            !EXCLUDE_MAP[fileName]?.includes(exportable.getName?.()),
+          );
+        }
       }
     }
 

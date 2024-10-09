@@ -29,7 +29,7 @@ If both a `deno.json` and `package.json` file are present in the same directory,
 Deno will understand dependencies specified in both `deno.json` and
 `package.json`; and use the `deno.json` file for Deno-specific configurations.
 Read more about
-[Node compatibility in Deno](/runtime/reference/node/#node-compatibility).
+[Node compatibility in Deno](/runtime/fundamentals/node/#node-compatibility).
 
 ## Dependencies
 
@@ -76,7 +76,8 @@ import express from "express";
 const app = express();
 ```
 
-Read more about [module imports](./modules.md)
+Read more about
+[module imports and dependencies](/runtime/fundamentals/modules/)
 
 ### Custom path mappings
 
@@ -317,7 +318,7 @@ sharing code.
 :::
 
 See also
-[Configuring TypeScript in Deno](/runtime/manual/advanced/typescript/configuration/).
+[Configuring TypeScript in Deno](/runtime/reference/ts_config_migration/).
 
 ## Unstable features
 

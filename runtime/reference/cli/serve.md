@@ -1,12 +1,10 @@
 ---
 title: "deno serve"
 oldUrl: /runtime/manual/tools/serve/
+command: serve
 ---
 
-In addition to `deno run`, Deno offers a `deno serve` command-line option that
-automatically configures servers based on the exports of your main module,
-abstracting away implementation details, making your code easier to reason about
-and maintain.
+## Example
 
 Here's an example of how you can create a simple HTTP server with declarative
 fetch:

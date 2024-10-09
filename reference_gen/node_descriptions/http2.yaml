@@ -1,1 +1,29 @@
-description:  Partially supported, major work in progress to enable `grpc-js`.
+status: partial
+symbols:
+  Http2Session: |
+    The following methods are non-functional stubs:
+    - setLocalWindowSize
+    - ping
+    - localSettings
+    - remoteSettings
+    - settings
+    - ref
+    - unref
+  ServerHttp2Session: All methods are non-functional stubs.
+  Http2Stream: |
+    The following methods are non-functional stubs:
+    - aborted
+    - bufferSize
+    - endAfterHeaders
+    - id
+    - pending
+    - priority
+    - rstCode
+    - sentHeaders
+    - sentInfoHeaders
+    - sentTrailers
+    - state
+  ClientHttp2Stream: All methods are non-functional stubs.
+  getDefaultSettings: This function is a non-functional stub.
+  getPackedSettings: This function is a non-functional stub.
+  getUnpackedSettings: This function is a non-functional stub.

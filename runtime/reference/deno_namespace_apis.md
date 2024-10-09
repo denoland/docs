@@ -13,8 +13,9 @@ The global `Deno` namespace contains APIs that are not web standard, including
 APIs for reading from files, opening TCP sockets, serving HTTP, and executing
 subprocesses, etc.
 
-For a full list of Deno Built-in APIs, see the [reference](/api/deno/~/Deno).
-Below we highlight some of the most important.
+<a href="/api/deno/" class="docs-cta runtime-cta">Explore all Deno APIs</a>
+
+Below we highlight some of the most important Deno APIs to know.
 
 ## File System
 
@@ -27,9 +28,9 @@ Refer to the links below for code examples of how to use the file system
 functions.
 
 - [Reading files in several different ways](/examples/reading-files)
-- [Reading files in streams](../../tutorials/file_server.md)
-- [Reading a text file (`Deno.readTextFile`)](../../tutorials/read_write_files.md#reading-a-text-file)
-- [Writing a text file (`Deno.writeTextFile`)](../../tutorials/read_write_files.md#writing-a-text-file)
+- [Reading files in streams](/runtime/tutorials/file_server/)
+- [Reading a text file (`Deno.readTextFile`)](/examples/reading-files)
+- [Writing a text file (`Deno.writeTextFile`)](/examples/writing-files)
 
 ## Network
 
@@ -48,7 +49,7 @@ The Deno runtime comes with
 
 Refer to the links below for code samples of how to create a subprocess.
 
-- [Creating a subprocess (`Deno.Command`)](/tutorials/subprocess/)
+- [Creating a subprocess (`Deno.Command`)](/runtime/tutorials/subprocess/)
 
 ## Errors
 
@@ -906,9 +907,6 @@ About to exit...
 Exiting
 ```
 
-This has allowed us to polyfill `process.on("beforeExit")` in the Node
-compatibility layer.
-
 ### unhandledrejection event
 
 This event is fired when a promise that has no rejection handler is rejected,
@@ -942,6 +940,3 @@ unhandled rejection at: Promise {
     at file:///dev/unhandled_rejection.js:10:1
 unhandled rejection at: Promise { <rejected> undefined } reason: undefined
 ```
-
-This API will allow us to polyfill `process.on("unhandledRejection")` in the
-Node compatibility layer in future releases.

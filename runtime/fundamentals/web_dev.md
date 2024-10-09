@@ -1,5 +1,5 @@
 ---
-title: "Web Development"
+title: "Web development"
 oldUrl:
  - /runtime/manual/getting_started/web_frameworks/
  - /runtime/fundamentals/web_frameworks/
@@ -193,4 +193,4 @@ deno run --allow-net server.ts
 ## Node projects
 
 Deno will run your Node.js projects out the box. Check out our guide on
-[migrating your Node.js project to Deno](/runtime/reference/node/#migrating-from-node.js-to-deno).
+[migrating your Node.js project to Deno](/runtime/fundamentals/node/#migrating-from-node.js-to-deno).

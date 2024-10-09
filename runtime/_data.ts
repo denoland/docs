@@ -1,13 +1,13 @@
 import { Sidebar } from "../types.ts";
+import { walk } from "jsr:@std/fs";
+import { parse as yamlParse } from "jsr:@std/yaml";
 
 export const sidebar = [
   {
-    title: "Getting Started",
+    title: "Getting started",
+    href: "/runtime/",
     items: [
-      {
-        label: "Hello World",
-        id: "/runtime/",
-      },
+      "/runtime/getting_started/installation/",
       "/runtime/getting_started/first_project/",
       "/runtime/getting_started/setup_your_environment/",
       "/runtime/getting_started/command_line_interface/",
@@ -15,11 +15,13 @@ export const sidebar = [
   },
   {
     title: "Fundamentals",
+    href: "/runtime/fundamentals/",
     items: [
       "/runtime/fundamentals/typescript/",
+      "/runtime/fundamentals/node/",
       "/runtime/fundamentals/security/",
       {
-        label: "Modules",
+        label: "Modules and dependencies",
         id: "/runtime/fundamentals/modules/",
       },
       "/runtime/fundamentals/configuration/",
@@ -33,20 +35,20 @@ export const sidebar = [
         label: "HTTP Server",
         id: "/runtime/fundamentals/http_server/",
       },
-      "/runtime/fundamentals/installation/",
       "/runtime/fundamentals/stability_and_releases/",
     ],
   },
   {
-    title: "Reference Guides",
+    title: "Reference guides",
+    href: "/runtime/reference/",
     items: [
       {
         label: "Deno CLI",
+        href: "/runtime/reference/cli/",
         items: [
-          "/runtime/reference/cli/unstable_flags/",
           {
-            label: "Environment Variables",
-            id: "/runtime/reference/cli/env_variables/",
+            label: "deno add",
+            id: "/runtime/reference/cli/add/",
           },
           {
             label: "deno bench",
@@ -90,7 +92,7 @@ export const sidebar = [
           },
           {
             label: "deno install",
-            id: "/runtime/reference/cli/script_installer/",
+            id: "/runtime/reference/cli/install/",
           },
           {
             label: "deno jupyter",
@@ -107,6 +109,10 @@ export const sidebar = [
           {
             label: "deno lsp",
             id: "/runtime/reference/cli/lsp/",
+          },
+          {
+            label: "deno remove",
+            id: "/runtime/reference/cli/remove/",
           },
           {
             label: "deno repl",
@@ -140,14 +146,20 @@ export const sidebar = [
             label: "deno upgrade",
             id: "/runtime/reference/cli/upgrade/",
           },
+          "/runtime/reference/cli/unstable_flags/",
         ],
       },
-      "/runtime/reference/deno_namespace_apis/",
-      "/runtime/reference/web_platform_apis/",
-      "/runtime/reference/node/",
       {
-        label: "npm packages",
-        id: "/runtime/reference/npm/",
+        label: "Deno APIs",
+        id: "/runtime/reference/deno_namespace_apis/",
+      },
+      {
+        label: "Web APIs",
+        id: "/runtime/reference/web_platform_apis/",
+      },
+      {
+        label: "Node APIs",
+        id: "/runtime/reference/node_apis/",
       },
       "/runtime/reference/ts_config_migration/",
       "/runtime/reference/continuous_integration/",
@@ -155,39 +167,32 @@ export const sidebar = [
         label: "Environment variables",
         id: "/runtime/reference/env_variables/",
       },
-      "/runtime/reference/wasm/",
-      {
-        label: "Language Server",
-        id: "/runtime/reference/lsp/",
-      },
       {
         label: "Deno & VS Code",
         id: "/runtime/reference/vscode/",
       },
-      "/runtime/reference/private_repositories/",
-      "/runtime/reference/jsx/",
+      {
+        label: "Using JSX and React",
+        id: "/runtime/reference/jsx/",
+      },
       {
         label: "Testing code in docs",
         id: "/runtime/reference/documentation/",
       },
-      "/runtime/reference/migrate_deprecations/",
+      "/runtime/reference/wasm/",
+      "/runtime/reference/migration_guide/",
       {
-        label: "Full API Reference",
-        href: "/api/deno",
-      },
-      {
-        label: "Std. Library",
-        href: "https://jsr.io/@std",
+        label: "LSP integration",
+        id: "/runtime/reference/lsp_integration/",
       },
     ],
   },
   {
-    title: "Contributing and Support",
+    title: "Contributing and support",
     items: [
       {
         label: "Contributing to Deno",
         items: [
-          "/runtime/contributing/contribute/",
           "/runtime/contributing/architecture/",
           "/runtime/contributing/building_from_source/",
           "/runtime/contributing/profiling/",
@@ -200,33 +205,20 @@ export const sidebar = [
     ],
   },
   {
-    title: "Tutorials and Examples",
+    title: "Tutorials",
+    href: "/runtime/tutorials/",
     items: [
       "/runtime/tutorials/hello_world/",
-      "/runtime/tutorials/init_project/",
       "/runtime/tutorials/fetch_data/",
-      "/runtime/tutorials/http_server/",
-      {
-        label: "Reading files",
-        id: "/examples/reading-files/",
-      },
-      {
-        label: "Writing files",
-        id: "/examples/writing-files/",
-      },
       "/runtime/tutorials/hashbang/",
       "/runtime/tutorials/cjs_to_esm/",
       "/runtime/tutorials/how_to_with_npm/react/",
       "/runtime/tutorials/how_to_with_npm/next/",
+      "/runtime/tutorials/how_to_with_npm/vue/",
       "/runtime/tutorials/connecting_to_databases/",
       {
-        label: "Advanced Examples",
+        label: "More tutorials",
         items: [
-          "/runtime/tutorials/file_server/",
-          {
-            label: "Unix cat",
-            id: "/examples/unix-cat/",
-          },
           "/runtime/tutorials/file_server/",
           "/runtime/tutorials/subprocess/",
           "/runtime/tutorials/os_signals/",
@@ -238,11 +230,6 @@ export const sidebar = [
           "/runtime/tutorials/digital_ocean/",
           "/runtime/tutorials/google_cloud_run/",
           "/runtime/tutorials/kinsta/",
-        ],
-      },
-      {
-        label: "npm Module Examples",
-        items: [
           "/runtime/tutorials/how_to_with_npm/apollo/",
           "/runtime/tutorials/how_to_with_npm/express/",
           "/runtime/tutorials/how_to_with_npm/mongoose/",
@@ -250,12 +237,7 @@ export const sidebar = [
           "/runtime/tutorials/how_to_with_npm/planetscale/",
           "/runtime/tutorials/how_to_with_npm/prisma/",
           "/runtime/tutorials/how_to_with_npm/redis/",
-          "/runtime/tutorials/how_to_with_npm/vue/",
         ],
-      },
-      {
-        label: "More on Deno by Example",
-        href: "/examples",
       },
     ],
   },
@@ -263,3 +245,133 @@ export const sidebar = [
 
 export const sectionTitle = "Runtime";
 export const sectionHref = "/runtime/";
+
+export interface Description {
+  kind: "NOTE" | "TIP" | "IMPORTANT" | "WARNING" | "CAUTION";
+  description: string;
+}
+function handleDescription(description: Description | string): Description {
+  if (typeof description === "string") {
+    return {
+      kind: "WARNING",
+      description,
+    };
+  } else {
+    return description;
+  }
+}
+
+export type Descriptions = Record<string, DescriptionItem>;
+
+type DescriptionItem = {
+  status: "good" | "partial" | "stubs" | "unsupported";
+  description?: Description;
+  symbols?: Record<string, Description>;
+};
+
+export async function generateDescriptions(): Promise<Descriptions> {
+  const descriptions: Descriptions = {};
+  for await (
+    const dirEntry of walk(
+      new URL(import.meta.resolve("../reference_gen/node_descriptions")),
+      { exts: ["yaml"] },
+    )
+  ) {
+    const file = await Deno.readTextFile(dirEntry.path);
+    const parsed = yamlParse(file);
+    if (!parsed) {
+      throw `Invalid or empty file: ${dirEntry.path}`;
+    }
+    if (parsed.description) {
+      parsed.description = handleDescription(parsed.description);
+    }
+
+    if (parsed.symbols) {
+      parsed.symbols = Object.fromEntries(
+        Object.entries(parsed.symbols).map((
+          [key, value],
+        ) => [key, handleDescription(value)]),
+      );
+    }
+
+    if (
+      !(parsed.status === "good" || parsed.status === "partial" ||
+        parsed.status === "stubs" || parsed.status === "unsupported")
+    ) {
+      throw `Invalid status provided in '${dirEntry.name}': ${parsed.status}`;
+    }
+
+    descriptions[dirEntry.name.slice(0, -5)] = parsed;
+  }
+
+  return descriptions;
+}
+
+/*
+generates the node compat list for the Node Support page.
+This the data is read from the files in the reference_gen/node_description directory.
+This function is called in node.md through the templating engine Vento,
+after which the normal markdown rendered is called.
+ */
+export async function generateNodeCompatability() {
+  const descriptions = await generateDescriptions();
+  const sorted = Object.entries(descriptions).toSorted(([keyA], [keyB]) =>
+    keyA.localeCompare(keyB)
+  );
+  const grouped: Record<
+    string,
+    { title: string; icon: string; items: Array<[string, DescriptionItem]> }
+  > = {
+    good: {
+      title: "Fully supported modules",
+      icon:
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#22c55e"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
+      items: [],
+    },
+    partial: {
+      title: "Partially supported modules",
+      icon:
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#6366f1"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>',
+      items: [],
+    },
+    unsupported: {
+      title: "Unsupported modules",
+      icon:
+        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#ef4444"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
+      items: [],
+    },
+  };
+  for (const item of sorted) {
+    grouped[item[1].status].items.push(item);
+  }
+
+  return Object.entries(grouped).map(([_status, entries]) => {
+    let content =
+      `<div class="module-info">\n\n## ${entries.icon} ${entries.title} (${entries.items.length}/${
+        Object.keys(descriptions).length
+      })\n\n`;
+
+    content += entries.items.map(([key, content]) => {
+      let out = `\n\n### <a href="/api/node/${key}">node:${
+        key.replaceAll("--", "/")
+      }</a>\n\n<div class="item-content">\n\n`;
+
+      if (content) {
+        if (content.description) {
+          out += `${content.description.description}\n\n`;
+        }
+        if (content.symbols) {
+          for (const [symbol, description] of Object.entries(content.symbols)) {
+            out += `**${
+              symbol === "*" ? "All symbols" : symbol
+            }**: ${description.description}\n\n`;
+          }
+        }
+      }
+
+      return out + "</div>";
+    }).join("\n\n");
+
+    return content;
+  }).join("\n\n");
+}

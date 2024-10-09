@@ -18,21 +18,21 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
 
       - name: Set up Deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
         with:
-          deno-version: ea8bf0945ac93a16a3d8df2470c70d9cf1c36172
+          deno-version: canary
           deno-binary-name: "deno_doc"
 
       - name: "Reference: install"
         working-directory: "reference_gen"
-        run: DENO_FUTURE=1 deno install
+        run: deno install
 
       - name: "Reference: generate types"
         working-directory: "reference_gen"
-        run: DENO_FUTURE=1 deno task types
+        run: deno task types
 
       - name: "Reference: generate docs"
         working-directory: "reference_gen"
@@ -43,6 +43,15 @@ jobs:
           ORAMA_CLOUD_INDEX_ID: ${{ vars.ORAMA_CLOUD_INDEX_ID }}
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
         run: deno task build
+
+      - name: Run server
+        working-directory: _site
+        run: deno run --no-lock --allow-read=. --allow-net --allow-env server.ts &
+
+      - name: Link checker
+        env:
+          DOCS_ROOT: "http://localhost:8000"
+        run: deno run --no-lock --allow-net --allow-env .github/workflows/better_link_checker.ts
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1

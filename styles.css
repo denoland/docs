@@ -127,11 +127,12 @@ body:not(:has(.ddoc)) {
   }
 
   .copyButton {
-    @apply opacity-0 transition-all duration-100 absolute top-2 right-2 p-1 rounded;
+    @apply opacity-0 transition-all duration-100 absolute top-2 right-2 p-1
+      rounded;
 
     &:hover,
     &:focus {
-      @apply opacity-100 bg-gray-200;
+      @apply opacity-100 bg-gray-100;
     }
 
     &:active {
@@ -146,7 +147,8 @@ body:not(:has(.ddoc)) {
 
 .markdownBlockTitle {
   background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border border-gray-200 bg-gray-100 text-sm font-semibold;
+  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border border-gray-200
+    bg-gray-100 text-sm font-semibold;
 }
 
 .markdown-body h2:hover .anchor-end {
@@ -157,18 +159,33 @@ body:not(:has(.ddoc)) {
   font-feature-settings: "cv05" on, "cv08" on, "cv09" on, "ss01" on, "ss08" on;
 }
 
-/* Global docs CTA button style */
-
+/* Common styles for all CTAs */
 .docs-cta {
-  @apply border text-balance border-gray-800 text-black bg-gray-500 font-bold inline-block py-3.5 px-4 rounded-md w-max hover:text-inherit hover:no-underline transition-colors duration-200;
+  @apply border text-balance text-black font-bold inline-block py-3.5 px-4
+    rounded-md w-max hover:text-inherit hover:no-underline transition-colors
+    duration-200;
 }
 
+/* Specific styles for runtime CTAs */
 .runtime-cta {
   @apply bg-runtime-400 border-runtime-400 hover:bg-runtime-300;
 }
 
+/* Override for when CTA is used in markdown body */
+.markdown-body .runtime-cta,
+.markdown-body .deploy-cta {
+  @apply border-gray-4 hover:!no-underline !text-gray-4;
+}
+
+/* Specific styles for deploy CTAs */
 .deploy-cta {
   @apply bg-deploy-500 border-deploy-500 hover:bg-deploy-400;
+}
+
+/* Specific styles for JSR CTAs */
+.jsr-cta {
+  @apply bg-jsr-yellow-400 border-jsr-cyan-950 !text-jsr-cyan-950 border-2
+    hover:!no-underline hover:bg-jsr-yellow-300;
 }
 
 .homepage-link {
@@ -180,7 +197,8 @@ body:not(:has(.ddoc)) {
 }
 
 .runtime-link {
-  @apply text-runtime-600 decoration-runtime-600/20 hover:decoration-runtime-600;
+  @apply text-runtime-600 decoration-runtime-600/20
+    hover:decoration-runtime-600;
 }
 
 .help-link {
@@ -189,7 +207,7 @@ body:not(:has(.ddoc)) {
 
 /* Orama search style overrides */
 .searchbutton-module_searchbutton__gg7JJ {
-  @apply w-64 border-gray-00 px-3 rounded-md gap-1 !important;
+  @apply w-full border-gray-00 px-3 rounded-md gap-1 !important;
 }
 
 .searchbutton-module_searchbutton__gg7JJ > svg {
@@ -234,7 +252,9 @@ body:not(:has(.ddoc)) {
 }
 
 .sidebar__current-item::before {
-  @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em] [clip-path:polygon(0%_10%,100%_50%,0%_90%)] bg-gray-200;
+  @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em]
+    bg-gray-200;
+  clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
 }
 
 .markdown-body .admonition a {
@@ -294,70 +314,28 @@ body:not(:has(.ddoc)) {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(22 163 74)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>');
 }
 
-.markdown-body .module-info {
-  @apply mt-4;
+.markdown-body .module-info svg {
+  @apply inline-block w-6 h-6 !important;
 }
 
-.markdown-body .module-info > h3 {
-  @apply text-lg mt-0 mb-1 flex flex-row items-center font-semibold;
+.markdown-body .module-info h2 {
+  @apply flex gap-2 items-center;
 }
 
-.markdown-body .module-info > h3 > a > code {
-  @apply bg-white pl-2;
+.markdown-body .module-info h3 {
+  @apply my-2;
 }
 
-.markdown-body .module-info > p {
-  @apply pl-8;
+.markdown-body .module-info .item-content {
+  @apply ml-3;
 }
 
-.markdown-body .module-info > ul {
-  @apply pl-12;
+.markdown-body .module-info p {
+  @apply mb-1;
 }
 
-.status-icon {
-  @apply inline-block w-6 h-6;
-}
-
-.status-good {
-  @apply text-green-500;
-}
-
-.status-info {
-  @apply text-indigo-500;
-}
-
-.status-stubs {
-  @apply text-red-500;
-}
-
-.markdown-body .module-info.compat-status-good > h3::before {
-  content: "";
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="%2322c55e" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>');
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.markdown-body .module-info.compat-status-partial > h3::before {
-  content: "";
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="%236366f1" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>');
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.markdown-body .module-info.compat-status-stubs > h3::before {
-  content: "";
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="%23ef4444" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>');
-  background-size: contain;
-  background-repeat: no-repeat;
+.markdown-body .module-info ul {
+  @apply pl-6;
 }
 
 .markdown-body > pre.snippet-code[data-example-position="first"] {
@@ -369,7 +347,8 @@ body:not(:has(.ddoc)) {
 }
 
 .markdown-body > pre.snippet-code[data-example-position="last"] {
-  @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none md:rounded-b;
+  @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none
+    md:rounded-b;
 }
 
 .deno-tabs {
@@ -385,15 +364,18 @@ body:not(:has(.ddoc)) {
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li > button {
-  @apply inline-block mr-2 px-4 py-2 text-sm font-semibold text-slate-700 rounded-t bg-slate-100/80 hover:bg-blue-50 border border-transparent;
+  @apply inline-block mr-2 px-4 py-2 text-sm font-semibold text-slate-700
+    rounded-t bg-slate-100/80 hover:bg-blue-50 border border-transparent;
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li > button[data-active="true"] {
-  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-transparent z-10 -mb-[1px] pb-[calc(0.5rem+1px)] relative;
+  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-transparent z-10
+    -mb-[1px] pb-[calc(0.5rem+1px)] relative;
 }
 
 .deno-tabs > div.deno-tabs-content > div {
-  @apply hidden py-4 px-4 rounded rounded-tl-none bg-slate-100 border border-slate-200;
+  @apply hidden py-4 px-4 rounded rounded-tl-none bg-slate-100 border
+    border-slate-200;
 }
 
 .deno-tabs > div.deno-tabs-content > div[data-active="true"] {
@@ -409,7 +391,8 @@ body:not(:has(.ddoc)) {
 }
 
 .deno-tabs .markdownBlockTitle {
-  @apply px-8 py-2 max-sm:-mx-4 sm:rounded-t-md border border-slate-200 bg-slate-50 text-slate-900 text-sm font-semibold;
+  @apply px-8 py-2 max-sm:-mx-4 sm:rounded-t-md border border-slate-200
+    bg-slate-50 text-slate-900 text-sm font-semibold;
 }
 
 /* Strips bottom margin in instances where multiple code samples exist in a tab. */
@@ -451,7 +434,8 @@ body:not(:has(.ddoc)) {
       @apply border-l border-gray-000 !important;
 
       > li > a {
-        @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline  py-1.5 px-3.5 !important;
+        @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline py-1.5
+          px-3.5 !important;
       }
 
       > ul > li a {
@@ -478,4 +462,12 @@ body:not(:has(.ddoc)) {
 #toc {
   scrollbar-gutter: stable;
   scrollbar-width: thin;
+}
+
+.copyButton[data-copied="true"] .copy-icon {
+  display: none;
+}
+
+.copyButton[data-copied="true"] .check-icon {
+  display: inline;
 }

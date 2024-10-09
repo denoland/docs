@@ -1,16 +1,10 @@
 ---
 title: "`deno init`, start a new project"
 oldUrl: /runtime/manual/tools/init/
+command: init
 ---
 
-Starting a new project with Deno has always been incredibly simple: you just
-need a single file to get going. No need for any configuration files, dependency
-manifests, or build scripts.
-
-Users coming from other ecosystems are often not used to this simplicity - they
-often look for a tool to scaffold out a basic project structure to get them
-started on the right path. `deno init` subcommand scaffolds a basic Deno
-project.
+## Examples
 
 ```sh
 $ deno init
@@ -122,7 +116,7 @@ Run these commands to get started
   deno -R test
 ```
 
-Your [`deno.json`](../getting_started/configuration_file) file will look like
+Your [`deno.json`](/runtime/fundamentals/configuration/) file will look like
 this:
 
 ```json
@@ -138,8 +132,8 @@ this:
 ```
 
 Now, you can start your web server, which
-[watches for changes](../getting_started/command_line_interface#watch-mode), by
-running `deno task dev`.
+[watches for changes](/runtime/getting_started/command_line_interface/#watch-mode),
+by running `deno task dev`.
 
 ```sh
 $ deno task dev
