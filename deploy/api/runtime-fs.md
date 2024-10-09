@@ -237,6 +237,9 @@ manually close the file descriptor.
 
 ```ts
 const iterator = fd.readable[Symbol.asyncIterator]();
+
+:::
+
 ## Deno.File
 
 `Deno.File` is a file handle returned from [`Deno.open()`](#denoopen). It can be
