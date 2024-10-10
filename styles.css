@@ -189,7 +189,7 @@ body:not(:has(.ddoc)) {
 }
 
 .homepage-link {
-  @apply block font-semibold underline underline-offset-4;
+  @apply block font-normal underline underline-offset-4;
 }
 
 .deploy-link {
