@@ -107,7 +107,7 @@ await Deno.jupyter.display({
 
 ![`Deno.jupyter.display` API example](../images/jupyter-display.png)
 
-Your notebook frontned will automatically select the "richest" MIME type to
+Your notebook frontend will automatically select the "richest" MIME type to
 display based on its capabilities.
 
 ---
