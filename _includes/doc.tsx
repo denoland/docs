@@ -272,7 +272,9 @@ function generateCrumbs(
       generateCrumbs(url, title, item.items, childItems);
 
       if (childItems.length > 0) {
-        current.push({ label: item.label, href: item.href });
+        if (item.href) {
+          current.push({ label: item.label, href: item.href });
+        }
         current.push(...childItems);
         return current;
       }
