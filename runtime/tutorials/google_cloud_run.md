@@ -203,7 +203,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - name: CHeckout
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Google Auth
