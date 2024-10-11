@@ -4,6 +4,7 @@
  * @tags cli, deploy
  * @run --allow-net <url>
  * @resource {https://fresh.deno.dev/docs/concepts/forms#-handling-file-uploads} Handling File Uploads in Fresh
+ * @resource {/examples/writing-files} Writing files
  * @resource {/examples/http-server-routing} Example: HTTP server: Server routing
  * @group Network
  *
