@@ -14,10 +14,10 @@ dependencies. This allows you to focus on writing code rather than configuring
 your environment.
 
 - [Configuring your project](/runtime/fundamentals/configuration/)
-- [TypeScript support](/runtime/fundamentals/testing/)
+- [TypeScript support](/runtime/fundamentals/typescript/)
 - [Linting and formatting](/runtime/fundamentals/linting_and_formatting/)
 - [Testing](/runtime/fundamentals/testing/)
-- [Debugging](/runtime/fundamentals/testing/)
+- [Debugging](/runtime/fundamentals/debugging/)
 - [HTTP server](/runtime/fundamentals/http_server/)
 
 ## Node and npm Support
