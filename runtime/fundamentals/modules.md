@@ -462,7 +462,9 @@ _Settings -> Developer settings -> Personal access tokens_:
 ![Personal access tokens settings on GitHub](./images/private-pat.png)
 
 You would then choose to _Generate new token_ and give your token a description
-and appropriate access to the `repo` scope. The `repo` scope will enable reading file contents (more on [scopes in the GitHub docs](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps#available-scopes)):
+and appropriate access to the `repo` scope. The `repo` scope will enable reading
+file contents (more on
+[scopes in the GitHub docs](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps#available-scopes)):
 
 ![Creating a new personal access token on GitHub](./images/private-github-new-token.png)
 
