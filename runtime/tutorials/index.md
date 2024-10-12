@@ -21,7 +21,7 @@ your favorite tools.
 ## Web frameworks and libraries
 
 - [React](/runtime/tutorials/how_to_with_npm/react/)
-- [Next.js](/runtime/tutorials/how_to_with_npm/react/)
+- [Next.js](/runtime/tutorials/how_to_with_npm/next/)
 - [Fresh](https://fresh.deno.dev/docs/getting-started/create-a-project)
 - [Vue.js](/runtime/tutorials/how_to_with_npm/vue/)
 - [Express](/runtime/tutorials/how_to_with_npm/express/)
