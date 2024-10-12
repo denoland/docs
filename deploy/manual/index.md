@@ -48,7 +48,7 @@ curl -fsSL https://deno.land/install.sh | sh
 After Deno is installed, install the [`deployctl`](./deployctl.md) utility:
 
 ```
-deno install -A jsr:@deno/deployctl
+deno install -A jsr:@deno/deployctl --global
 ```
 
 You can confirm `deployctl` has been installed correctly by running:
