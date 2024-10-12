@@ -56,11 +56,10 @@ Static files (like screenshots) can be included directly in the `runtime`,
 ## Reference docs
 
 The reference docs served at `/api` are generated via the `deno doc` subcommand.
-To generate the reference docs locally, in the `reference_gen` directory, run:
+To generate the reference docs locally, run:
 
 ```console
-deno task types
-deno task doc
+deno task reference
 ```
 
 This will generate the reference docs, and you can use the `serve` or `build`
