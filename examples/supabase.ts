@@ -16,13 +16,13 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 // Create a single supabase client for interacting with your database
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
-  Deno.env.get("SUPABASE_KEY")!
+  Deno.env.get("SUPABASE_KEY")!,
 );
 
 // Insert data into the countries table
 export async function insertCountryData(
   code: string = "JP",
-  name: string = "Japan"
+  name: string = "Japan",
 ) {
   const { data, error } = await supabase
     .from("countries")
