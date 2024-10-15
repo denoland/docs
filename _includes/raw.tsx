@@ -16,7 +16,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
       {props.sidebar && (
         <>
           <aside
-            class="absolute top-0 bottom-0 -left-74 sidebar-open:left-0 w-74 border-r border-gray-200 bg-white z-50 lg:hidden transition-all"
+            class="absolute top-0 bottom-0 -left-74 sidebar-open:left-0 w-74 border-r border-gray-200 bg-background-primary z-50 xl:hidden transition-all"
             id="sidebar"
             data-open="false"
           >
@@ -41,7 +41,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
                   viewBox="0 0 15 15"
                   width="21"
                   height="21"
-                  class="text-gray-600"
+                  class="text-foreground-secondary"
                 >
                   <g stroke="currentColor" stroke-width="1.2">
                     <path d="M.75.75l13.5 13.5M14.25.75L.75 14.25"></path>
@@ -56,7 +56,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
             />
           </aside>
           <div
-            class="absolute inset-0 backdrop-brightness-50 z-40 hidden sidebar-open:block sidebar-open:lg:hidden"
+            class="absolute inset-0 backdrop-brightness-50 z-40 hidden sidebar-open:block sidebar-open:xl:hidden"
             id="sidebar-cover"
             data-open="false"
           >
