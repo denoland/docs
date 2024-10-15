@@ -45,8 +45,9 @@ the key principles of Deno's security model:
   explicitly to an escalation via interactive prompt or a invocation time flag.
 - **The initial static module graph can import local files without
   restrictions**: All files that are imported in the initial static module graph
-  can be imported without restrictions, so even if a explicit read permission is
-  not granted for that file. This does not apply to any dynamic module imports.
+  can be imported without restrictions, so even if an explicit read permission
+  is not granted for that file. This does not apply to any dynamic module
+  imports.
 
 These key principles are designed to provide an environment where a user can
 execute code with minimal risk of harm to the host machine or network. The
