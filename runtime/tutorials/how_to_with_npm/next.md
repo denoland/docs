@@ -195,7 +195,7 @@ return (
 ### Create the dinosaur page
 
 Inside the `app` directory, create a new folder called `[dinosaur]`. Inside this
-foler create a `page.tsx` file. This file will fetch the details of a specific
+folder create a `page.tsx` file. This file will fetch the details of a specific
 dinosaur from the API and render them on the page.
 
 Much like the homepage, we'll need client side code, and we'll import the
