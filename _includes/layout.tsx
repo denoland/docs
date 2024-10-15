@@ -2,7 +2,10 @@ export default function Layout(props: Lume.Data) {
   const reference = props.url.startsWith("/api");
 
   return (
-    <html lang="en" class={reference ? "" : "h-dvh overflow-hidden"}>
+    <html
+      lang="en"
+      class={`light ${reference ? "" : "h-dvh overflow-hidden"}`}
+    >
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,6 +29,8 @@ export default function Layout(props: Lume.Data) {
         <link rel="stylesheet" href="/gfm.css" />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/overrides.css" />
+        <script src="/darkmode.client.js"></script>
+        <script type="module" src="/darkmode-toggle.client.js"></script>
         <script src="/orama-searchbox-1.0.0-rc47.js" defer></script>
         <script type="module" src="/sidebar.client.js"></script>
         <script type="module" src="/copy.client.js"></script>
@@ -38,10 +43,14 @@ export default function Layout(props: Lume.Data) {
         </script>
         <link rel="preconnect" href="https://www.googletagmanager.com"></link>
       </head>
-      <body class={reference ? "" : "h-dvh overflow-hidden"}>
+      <body
+        class={`bg-background-primary text-foreground-primary ${
+          reference ? "" : "h-dvh overflow-hidden"
+        }`}
+      >
         <a
           href="#content"
-          class="opacity-0 absolute top-2 left-2 p-2 border -translate-y-12 transition-all focus:translate-y-0 focus:opacity-100 z-50 bg-white font-bold"
+          class="opacity-0 absolute top-2 left-2 p-2 border -translate-y-12 transition-all focus:translate-y-0 focus:opacity-100 z-50 bg-background-primary font-bold"
         >
           Skip to main content <span aria-hidden="true">-&gt;</span>
         </a>

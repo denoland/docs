@@ -2,6 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light and dark theme variables */
+.light {
+  --background-primary: 215deg, 81%, 100%;
+  --background-secondary: 213deg 100% 96%;
+  --foreground-primary: 0deg, 0%, 25%;
+  --foreground-secondary: 0deg, 0%, 42%;
+  
+  --runtime-background: 124deg, 100%, 97.1%;
+  --runtime-foreground: 184deg, 100%, 10%;
+  
+  --primary: 217deg, 91%, 59%;
+
+
+  --info: 224deg, 64.3%, 32.9%;
+  --note: 224deg, 64.3%, 32.9%;
+  --caution: 45.4deg, 93.39%, 47.45%;
+  --tip: 142deg, 76.2%, 36.3%;
+
+}
+.dark {
+  --background-primary: 216deg, 27.8%, 7.1%;
+  --background-secondary: 216deg, 27.7%, 14%;
+  --foreground-primary: 215deg, 17%, 99%;
+  --foreground-secondary: 215deg, 17%, 81%;
+
+  --runtime-background: 124deg, 100%, 3%;
+  --runtime-foreground: 184deg, 100%, 90%;
+  
+  /* The following are not different from light mode (yet?) */
+  --primary: 217deg, 91%, 59%;
+  --info: 224deg, 64.3%, 32.9%;
+  --note: 224deg, 64.3%, 32.9%;
+  --caution: 45.4deg, 93.39%, 47.45%;
+  --tip: 142deg, 76.2%, 36.3%;
+}
+
+/* Scrollbar colors that look good on light and dark theme */
+* {
+  scrollbar-color: hsla(0deg, 0%, 50%, 0.5) hsla(0deg, 0%, 50%, 0.1) !important;
+}
+
+/* Hack to make orama search dark without needing reload */
+#orama-searchbox>div>div {
+  @apply dark:invert;
+}
+#orama-searchbox>div>div>footer div>a>img {
+  @apply dark:invert;
+}
+
+.dark-mode-toggle-button img {
+  @apply fill-foreground-primary;
+}
+
 @layer base {
   @font-face {
     font-family: "Inter";
@@ -50,6 +103,7 @@ h1 {
 
 .markdown-body {
   font-family: inherit;
+  @apply bg-transparent !important;
 
   /* Override gfm base styles */
   p {
@@ -110,7 +164,7 @@ h1 {
   }
 
   & pre {
-    @apply border border-gray-200 bg-gray-50;
+    @apply border;
   }
 }
 
@@ -145,10 +199,19 @@ body:not(:has(.ddoc)) {
   @apply rounded-t-none border-t-0;
 }
 
+.ddoc .markdown .highlight {
+  @apply dark:invert !important;
+}
+
+.ddoc .markdown tr:nth-child(2n) {
+  @apply bg-background-secondary !important;
+}
+
+
 .markdownBlockTitle {
   background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border border-gray-200
-    bg-gray-100 text-sm font-semibold;
+  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border 
+    text-sm font-semibold;
 }
 
 .markdown-body h2:hover .anchor-end {
@@ -162,7 +225,7 @@ body:not(:has(.ddoc)) {
 /* Common styles for all CTAs */
 .docs-cta {
   @apply border text-balance text-black font-bold inline-block py-3.5 px-4
-    rounded-md w-max hover:text-inherit hover:no-underline transition-colors
+    rounded-md w-max hover:no-underline transition-colors
     duration-200;
 }
 
@@ -253,7 +316,7 @@ body:not(:has(.ddoc)) {
 
 .sidebar__current-item::before {
   @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em]
-    bg-gray-200;
+    bg-background-secondary;
   clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
 }
 
@@ -279,19 +342,19 @@ body:not(:has(.ddoc)) {
 }
 
 .markdown-body .admonition.info {
-  @apply bg-primary/5 border-blue-900/50 text-blue-900;
+  @apply bg-primary/5 border-info/50 text-info;
 }
 
 .markdown-body .admonition.note {
-  @apply bg-primary/5 border-blue-900/50 text-blue-900;
+  @apply bg-primary/5 border-note/50 text-note;
 }
 
 .markdown-body .admonition.caution {
-  @apply bg-yellow-50/5 border-yellow-500/50 text-yellow-900 fill-yellow-900;
+  @apply bg-caution/5 border-caution/50 text-caution fill-caution;
 }
 
 .markdown-body .admonition.tip {
-  @apply bg-green-50/5 border-green-600/50 text-green-900;
+  @apply bg-tip/5 border-tip/50 text-tip;
 }
 
 .markdown-body .admonition.info .title::before {
@@ -387,7 +450,7 @@ body:not(:has(.ddoc)) {
 }
 
 .deno-tabs pre {
-  @apply border border-slate-200 bg-white;
+  @apply border border-slate-200 ;
 }
 
 .deno-tabs .markdownBlockTitle {
@@ -404,18 +467,26 @@ body:not(:has(.ddoc)) {
 .ddoc {
   @apply pt-0 !important;
 
+  #topnav {
+    @apply bg-background-primary !important;
+    
+    svg, path {
+      @apply fill-foreground-primary !important;
+    }
+  }
+
   #categoryPanel {
-    @apply border-r border-gray-000;
+    @apply border-r border-background-secondary;
     @apply pt-4 !important;
 
     & li:hover {
-      @apply bg-blue-50 rounded-md !important;
+      @apply bg-background-primary text-primary rounded-md !important;
       > a {
         @apply no-underline !important;
       }
     }
     .active {
-      @apply bg-blue-50 rounded-md !important;
+      @apply bg-background-secondary text-foreground-secondary rounded-md !important;
     }
   }
 
@@ -431,15 +502,19 @@ body:not(:has(.ddoc)) {
     }
 
     > ul {
-      @apply border-l border-gray-000 !important;
+      @apply border-l border-foreground-secondary !important;
 
       > li > a {
-        @apply text-gray-3 hover:bg-blue-50 rounded-lg hover:no-underline py-1.5
-          px-3.5 !important;
+        @apply text-foreground-secondary hover:bg-background-secondary rounded-lg hover:no-underline py-1.5
+          px-3.5 hover:text-primary !important;
+      }
+
+      > li > ul > li > a {
+        @apply hover:text-primary !important;
       }
 
       > ul > li a {
-        @apply hover:bg-blue-50 rounded-lg hover:no-underline !important;
+        @apply hover:bg-background-secondary hover:text-primary rounded-lg hover:no-underline !important;
       }
     }
   }
@@ -456,6 +531,9 @@ body:not(:has(.ddoc)) {
   }
   .markdown_summary :not(pre) > code {
     background-color: var(--color-neutral-muted) !important;
+  }
+  .markdown_summary p {
+    @apply text-foreground-secondary;
   }
 }
 

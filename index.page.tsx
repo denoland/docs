@@ -79,7 +79,7 @@ export default function () {
         {/* Main content  */}
         <div class="flex flex-col gap-8 md:gap-16">
           {/* Temporary banner  */}
-          <div class="flex flex-col gap-4 p-4 bg-runtime-50 border-l-4 border-runtime-500">
+          <div class="flex flex-col gap-4 p-4 bg-runtime-background border-l-4 text-runtime-foreground border-runtime-500">
             <p class="text-lg">
               <strong>Deno 2.0</strong> is out now! Learn about{"  "}
               <a

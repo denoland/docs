@@ -8,14 +8,14 @@ export default function Header({
   const reference = url.startsWith("/api");
   return (
     <header
-      class={`bg-white shadow z-30 ${
+      class={`bg-background-primary text-foreground-primary shadow z-30 ${
         reference ? "" : "sticky top-0 left-0 right-0"
       }`}
     >
       <nav class="p-4 py-3 md:px-6 min-h-16 flex items-center justify-between">
         <div class="flex items-center">
           {hasSidebar && (
-            <button class="mr-2 lg:hidden" id="sidebar-open">
+            <button class="mr-2 xl:hidden" id="sidebar-open">
               <svg
                 width="24"
                 height="24"
@@ -34,7 +34,7 @@ export default function Header({
             </button>
           )}
           <a class="flex gap-2.5 mr-5" href="/">
-            <div class="block w-24 h-auto">
+            <div class="block w-24 h-auto dark:invert">
               <img src="/img/deno-docs.svg" alt="Deno Docs" />
             </div>
             {/* custom font size for logo */}
@@ -60,7 +60,7 @@ export default function Header({
             name="API reference"
             hideOnMobile
           />
-          <span class="hidden lg:inline-block mx-2">//</span>
+          <span class="hidden xl:inline-block mx-2">//</span>
           <HeaderItem
             url={url}
             activeOn="/deploy"
@@ -86,15 +86,44 @@ export default function Header({
             hideOnMobile
           />
           <div class="min-w-[150px] md:w-32 xl:w-64">
-            <orama-search-button />
+            <orama-search-button class="dark:invert" />
             <orama-searchbox />
+          </div>
+          <div class="dark-mode-toggle">
+            <button class="dark-mode-toggle button p-1 rounded bg-background-primary border border-foreground-secondary/20">
+              <span class="dark:hidden">
+                <svg
+                  class="fill-foreground-primary w-6 h-6"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z">
+                  </path>
+                </svg>
+              </span>
+              <span class="hidden dark:block">
+                <svg
+                  class="fill-foreground-primary w-6 h-6"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1
+                  0 100-2H3a1 1 0 000 2h1z"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                  >
+                  </path>
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
       </nav>
 
       {reference &&
         (
-          <nav className="px-4 md:px-6 pt-2 pb-3 text-sm bg-white flex items-center justify-between border-box border-t border-gray-200 z-[1000]">
+          <nav className="px-4 md:px-6 pt-2 pb-3 text-sm bg-background-primary flex items-center justify-between border-box border-t border-background-secondary z-[1000]">
             <ul className="flex">
               <li>
                 <HeaderItem
@@ -149,11 +178,11 @@ function HeaderItem({
     <a
       class={`${
         firstItem ? "ml-0" : ""
-      } mx-1 px-2 text-md hover:text-primary hover:bg-blue-50 hover:rounded text-nowrap flex items-center ${
+      } mx-1 px-2 text-md hover:text-primary hover:bg-background-secondary/50 hover:rounded text-nowrap flex items-center ${
         activeOn && url.startsWith(activeOn)
           ? "text-primary mx-2.5 px-0.5 underline font-semibold underline-offset-[6px] decoration-primary/20"
           : ""
-      } ${hideOnMobile ? "max-lg:!hidden" : ""}`}
+      } ${hideOnMobile ? "max-xl:!hidden" : ""}`}
       href={href}
     >
       {name}
