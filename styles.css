@@ -197,7 +197,7 @@ body:not(:has(.ddoc)) {
 }
 
 .markdown-body a {
-  @apply dark:invert !important;
+  @apply dark:invert text-primary !important;
 }
 
 .ddoc .markdown tr:nth-child(2n) {
