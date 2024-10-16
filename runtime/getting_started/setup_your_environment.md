@@ -77,11 +77,10 @@ instructions to enable the
 [supplied Deno configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols).
 
 Note that if you also have `ts_ls` as an LSP client, you may run into issues
-where both `ts_ls` and `denols` are attached to your current buffer. To
-resolve this, make sure to set some unique `root_dir` for both `ts_ls` and
-`denols`. You may also need to set `single_file_support` to `false` for
-`ts_ls` to prevent it from running in `single file mode`. Here is an example
-of such a configuration:
+where both `ts_ls` and `denols` are attached to your current buffer. To resolve
+this, make sure to set some unique `root_dir` for both `ts_ls` and `denols`. You
+may also need to set `single_file_support` to `false` for `ts_ls` to prevent it
+from running in `single file mode`. Here is an example of such a configuration:
 
 ```lua
 local nvim_lsp = require('lspconfig')
