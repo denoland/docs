@@ -3,10 +3,9 @@
  * @difficulty intermediate
  * @tags cli, deploy, web
  * @run <url>
- * @resource {https://en.wikipedia.org/wiki/Exponential_backoff}
- * Wikipedia: Exponential backoff
+ * @resource {https://en.wikipedia.org/wiki/Exponential_backoff} Wikipedia: Exponential backoff
  * @resource {https://jsr.io/@std/async/doc/~/retry} Doc: @std/async > retry
- * @group Basics
+ * @group Advanced
  *
  * Exponential backoff is a technique used in computer systems to handle retries and
  * avoid overwhelming services. We can easily implement this by using the `retry`
