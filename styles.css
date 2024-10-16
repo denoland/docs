@@ -196,6 +196,10 @@ body:not(:has(.ddoc)) {
   @apply dark:invert !important;
 }
 
+.markdown-body a {
+  @apply dark:invert !important;
+}
+
 .ddoc .markdown tr:nth-child(2n) {
   @apply bg-background-secondary !important;
 }
