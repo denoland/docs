@@ -1,42 +1,39 @@
-import { OramaClient } from "npm:@oramacloud/client@1";
-
-const client = new OramaClient({
-  endpoint: "https://cloud.orama.run/v1/indexes/deno-docs-pp7js4",
-  api_key: "BhHQBNY6gwBukMREm9FOproywA50UDQs",
-});
+import { defineCustomElements } from "@orama/wc-components/loader/index.js";
+import { JSX as OramaJSX } from "@orama/wc-components/dist/types/index.d.ts";
 
 document.addEventListener("DOMContentLoaded", () => {
-  oramaSearchbox.RegisterSearchBox({
-    oramaInstance: client,
-    colorScheme: "light",
-    resultsMap: {
+  defineCustomElements();
+  const oramaSearchBox: OramaJSX.OramaSearchBox | null =
+    document.querySelector("orama-search-box");
+
+  if (oramaSearchBox) {
+    oramaSearchBox.index = {
+      api_key: "BhHQBNY6gwBukMREm9FOproywA50UDQs",
+      endpoint: "https://cloud.orama.run/v1/indexes/deno-docs-pp7js4",
+    };
+    oramaSearchBox.colorScheme = "light";
+    oramaSearchBox.resultMap = {
       description: "content",
-    },
-    facetProperty: "category",
-  });
-  oramaSearchbox.RegisterSearchButton({
-    colorScheme: "light",
-    themeConfig: {
-      light: {
-        "--search-btn-background-color": "#fff",
-        "--search-btn-border-color": "rgb(229 231 235)",
-      },
-    },
-  });
+      section: "section",
+    };
+    oramaSearchBox.facetProperty = "category";
+  }
+
+  const oramaSearchButton: OramaJSX.OramaSearchButton | null =
+    document.querySelector("orama-search-button");
+
+  if (oramaSearchButton) {
+    oramaSearchButton.innerText = "Search";
+    oramaSearchButton.size = "small";
+    oramaSearchButton.colorScheme = "light";
+  }
 });
 
-declare global {
-  const oramaSearchbox: {
-    RegisterSearchBox: (options: {
-      oramaInstance: OramaClient;
-      colorScheme: "light" | "dark";
-      resultsMap: Record<string, string>;
-    }) => void;
-    RegisterSearchButton: (
-      options: {
-        colorScheme: "light" | "dark";
-        themeConfig: { light: Record<string, string> };
-      },
-    ) => void;
-  };
+declare module "npm:preact" {
+  namespace JSX {
+    interface IntrinsicElements {
+      "orama-search-box": OramaJSX.OramaSearchBox;
+      "orama-search-button": OramaJSX.OramaSearchButton;
+    }
+  }
 }
