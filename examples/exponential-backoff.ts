@@ -15,8 +15,7 @@
 // Import the 'retry' utility from '@std/async'.
 import { retry, RetryError, type RetryOptions } from "jsr:@std/async";
 
-// A function that will throw an error when called after logging 'hello world' in the
-// console.
+// A function that logs 'hello world' to the console and returns a rejected Promise.
 const fn = () => {
   console.log("hello world");
   return Promise.reject("rejected");
@@ -37,8 +36,8 @@ try {
   // Wrap the function with the 'retry' utility along with the retry configuration.
   await retry(fn, options);
 } catch (err) {
-  // Error thrown by retry utility will be an instance of RetryError class from
-  // '@std/async'.
+  // When max attempts are exhausted, a RetryError is thrown containing the original
+  // rejection reason 'rejected' as its cause property.
   if (err instanceof RetryError) {
     console.log("Retry error :", err.message);
     console.log("Error cause :", err.cause);
