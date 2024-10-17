@@ -35,9 +35,7 @@ following configuration:
 
 ```json
 {
-  "deno.enable": true,
-  "deno.lint": true,
-  "deno.unstable": true
+  "deno.enable": true
 }
 ```
 
