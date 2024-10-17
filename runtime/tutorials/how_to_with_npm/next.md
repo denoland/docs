@@ -92,9 +92,9 @@ export async function GET() {
 }
 ```
 
-### /api/dinosaur/[dinosaur]
+### /api/dinosaurs/[dinosaur]
 
-And for the final route, `/api/dinosaur/[dinosaur]`, we'll create a folder
+And for the final route, `/api/dinosaurs/[dinosaur]`, we'll create a folder
 called `[dinosaur]` in the `dinosaurs` directory. In there, create a `route.ts`
 file. In this file we'll read the `data.json` file, find the dinosaur with the
 name in the URL, and return it as JSON:
