@@ -406,8 +406,8 @@ If your project has a `package.json` file, you can use the manual mode, which
 requires an installation step to create your `node_modules` directory:
 
 ```sh
-deno run --node-modules-dir=manual main.ts
 deno install
+deno run --node-modules-dir=manual main.ts
 ```
 
 or with a configuration file:
