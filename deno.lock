@@ -1560,6 +1560,9 @@
       "integrity": "sha512-bLQOjaX/ADgQ20isPJRvF0iRUHIxVhYvr53Of7wGcWlO2jvtUlH5m87DsmulFVxRpNLOnI4tB6p/oh8D7kpn9Q=="
     }
   },
+  "redirects": {
+    "https://unpkg.com/@orama/wc-components@0.1.5/loader": "https://unpkg.com/@orama/wc-components@0.1.5/loader/index.js"
+  },
   "remote": {
     "https://cdn.jsdelivr.net/gh/lumeland/lume@864fb83b508b4164afa8cedef100db672b883152/cli.ts": "71f6e24caf5eb661fb1b903ed6a914718a08ee6711daa689dc61fa5e5a37c54c",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@864fb83b508b4164afa8cedef100db672b883152/cli/build.ts": "122f3e3bc431f952b8139199f588441efcf8ecfe844d9ab454f46f3b1c3fc15d",
@@ -1899,11 +1902,37 @@
     "https://raw.githubusercontent.com/denoland/automation/0.19.2/helpers.ts": "71be90a0ecef229f0075782014f0f8402de112a467494b314e3cdb193f568e0a",
     "https://raw.githubusercontent.com/denoland/automation/0.19.2/mod.ts": "94c53674853b68977c3452262130d6430bdae2dfb5777b04c708d52fd9a73739",
     "https://raw.githubusercontent.com/denoland/automation/0.19.2/releases_md.ts": "4debb10b57849e20f97a58354773db22c2887b6a6a58134869366265729eb2e0",
-    "https://raw.githubusercontent.com/denoland/automation/0.19.2/repo.ts": "046f848101b200f240796063ad7b956f85feddd4b46d1be59eac15a67f9a5e8b"
+    "https://raw.githubusercontent.com/denoland/automation/0.19.2/repo.ts": "046f848101b200f240796063ad7b956f85feddd4b46d1be59eac15a67f9a5e8b",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/ChatService-3d446bc4.js": "c7a63d27bcdacfcba2952ec532de284c17d31d6351664145d0f8b8f9d6f24ac1",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/GlobalContext-0a87b8bd.js": "2cf4f45d144b13d67f93012d4f3bb72a102426bfc9f06fc202a6d710f2a0ac65",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/PhCaretLeft-c5a6c8bf.js": "32c644c99663fb604bad42cf61740351ba3a9ec51d3252e6367529491516511c",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/PhMagnifyingGlass-e2c5522a.js": "2172eec0e23d2473fd802007452e33fb166c0b4630aed140cf4cacf1daac2544",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/PhX-b19eebc7.js": "6dac17652bedc97094d8e23cfb710c52bf1fab7b45ffdb0ac866b0b9c8afba44",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/app-globals-0f993ce5.js": "fe745cee5fb8000d54ab8845fd0211b6a60112d773d3f4826e7b21abd5c171ac",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/chatContext-92438e72.js": "5e1c4fbfd9182ae17d1cf75adeeab9848c91467e29f449e8be3c9e2dcc459299",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/index-17add49b.js": "5902a45a9857e42fb19ba76f184ef21752a2d4d950bc3040deb547f44bd10a6d",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/index-4b708f0c.js": "a2f3c6c5c4dc8c9538660d2a9ac3cb29a17a95ad98d2ff27878b70e93c6df2da",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/loader.js": "5f749d3c51852ddaecbcb72895041a18f20f11661f06c70149cc1f7d51b6e5ac",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-button.entry.js": "7a04cb9a53d4cfe5a7aec7250dd40619a17de4117c40021acca7204166021c20",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-chat-assistent-message_6.entry.js": "40594bfb3b923657f114fcb32ce56dba34722d2e8fd0524ba994e4f7bb95488b",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-chat-box.entry.js": "f854ad1207772b5e87dd50e9b55b77a74580728ae147331a6972949e6de4bb34",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-chat-button_7.entry.js": "96819918826e88b6da79ee4a31bd152df24d66addf9c092ca4556a1200132a56",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-chat_3.entry.js": "55ceccde37827423a2712b940c798b5a9d602d6ffd25015a3490c0e802a26ebf",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-facets_3.entry.js": "349dd47f74c574f9e4f204c3b208285ca5acb75adb8afc6736fdde6c4cc48400",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-logo-icon.entry.js": "262bfa2b7eb62eae9e165f298ee774d4e9c26e543670ee405a71988a10af4677",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-search-box.entry.js": "c78e5cff49b29c6b23b91a7ad9f278891c2b29aebf15a4d80404f3aa985a79e5",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-search-button.entry.js": "67e9f43f05b27146c4bafbd1ec66f5425310c1c2b852a191fd51efb50f272654",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-text.entry.js": "ffd1fb2b9ed8978a90521332f0fe750f797d467df9a08d46356e2deca6e5cb16",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-toggler.entry.js": "5b8cadf2d0ae1b2e5dd0433e13355bde620ead9cb42ec3bd3a56cc36a8facb6e",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/orama-ui.js": "c2e1f6651dd22e319f3ee3f95c4817c4ede4c2d95d467d795472f5d97738b223",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/property-05c484f6.js": "68d8d769787d93736f9725db8c4681ec67f9d2e57f480ecb0023d7a6ac7d7f9b",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/searchContext-246f2109.js": "d12afb5073e94f2f5bf4f7c6d90fb5a5224a9ccb6422730a795ddeb65eeb2ad9",
+    "https://unpkg.com/@orama/wc-components@0.1.5/dist/esm/utils-234b80ec.js": "d7a04a6a49f0fc7c254809fcf9c87eb001c7433a894107e237001782692c7787",
+    "https://unpkg.com/@orama/wc-components@0.1.5/loader/index.js": "566f3784fd42219e510b12022e5d872a4de54a98862e2786865ad2025057b04b"
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/fs@^0.229.3",
+      "jsr:@std/fs@~0.229.3",
       "npm:autoprefixer@^10.4.20",
       "npm:postcss@^8.4.41",
       "npm:tailwindcss@^3.4.9"
