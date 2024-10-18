@@ -27,7 +27,7 @@ console.log(Deno.env.has("FIREBASE_AUTH_DOMAIN")); // true
 
 Deno supports `.env` files. You can cause Deno to read environment variables
 from `.env` using the `--env` flag: `deno run --env <script>`. This will read
-`.env` by default; if you want need to load environment variables from a
+`.env` by default; if you want or need to load environment variables from a
 different file, you can specify that file as a parameter to the flag.
 
 Alternately, the `dotenv` package in the standard library will load environment
