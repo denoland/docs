@@ -1393,7 +1393,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -1644,7 +1644,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -2187,7 +2187,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -2858,7 +2858,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -4299,6 +4299,15 @@
           "help": "Specify the directory to run the task in",
           "help_heading": null,
           "usage": "--cwd <DIR>"
+        },
+        {
+          "name": "node-modules-dir",
+          "short": null,
+          "long": "node-modules-dir",
+          "required": false,
+          "help": "Sets the node modules management mode for npm packages",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-dir[=<MODE>]"
         },
         {
           "name": "unstable",
