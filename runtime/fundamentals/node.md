@@ -89,7 +89,7 @@ npm:<package-name>[@<version-requirement>][/<sub-path>]
 For examples with popular libraries, please refer to the
 [tutorial section](/runtime/tutorials).
 
-### CommonJS support
+## CommonJS support
 
 CommonJS is a module system that predates
 [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
@@ -114,7 +114,12 @@ module._
 Deno strongly encourages use of ES modules in your code, and offers CommonJS
 support with following restrictions:
 
-**Use .cjs extension**
+**Deno's permission system is still in effect when using CommonJS modules.** It
+is necessary to provide at least `--allow-read` permission as Deno will probe
+the file system for `package.json` files and `node_modules` directory to
+properly resolve CommonJS modules.
+
+### Use .cjs extension
 
 If the file extension is `.cjs` Deno will treat this module as CommonJS.
 
@@ -149,14 +154,31 @@ $ deno run -R -E main.cjs
 ```
 
 `-R` and `-E` flags are used to allow permissions to read files and environment
-variables. permissions.
+variables.
 
-**Deno's permission system is still in effect when using CommonJS modules.** It
-is necessary to provide at least `--allow-read` permission as Deno will probe
-the file system for `package.json` files and `node_modules` directory to
-properly resolve CommonJS modules.
+### package.json type option
 
-***Create require() manually**
+Deno will treat files as CommonJS if there's a `package.json` file with
+`"type": "commonjs"` option next to the file, or up in the directory tree.
+
+```json title="package.json"
+{
+  "type": "commonjs"
+}
+```
+
+```js title="main.js"
+const express = require("express");
+```
+
+Tools like Next.js's bundler and others will generate a `package.json` file like
+that automatically.
+
+If you have an existing project that uses CommonJS modules, you can make it work
+with both Node.js and Deno, by adding `"type": "commonjs"` option to the
+`package.json` file.
+
+### Create require() manually
 
 An alternative option is to create an instance of the `require()` function
 manually:
@@ -171,7 +193,7 @@ In this scenario the same requirements apply, as when running `.cjs` files -
 dependencies need to be installed manually and appropriate permission flags
 given.
 
-**require(ESM)**
+### require(ESM)
 
 Deno's `require()` implementation supports requiring ES modules.
 
@@ -203,7 +225,7 @@ $ deno run -R main.cjs
 Hello Deno
 ```
 
-**import index.cjs**
+### import index.cjs
 
 You can also import CommonJS files in ES modules, provided that these files use
 `.cjs` extension.
@@ -258,7 +280,7 @@ module.exports = {
     hint: Rewrite this module to ESM or change the file extension to `.cjs`.
 ```
 
-### Importing types
+## Importing types
 
 Many npm packages ship with types, you can import these and use them with types
 directly:
@@ -308,7 +330,7 @@ resolution, you can:
 3. Ignore the type errors you get in your code base with `// @ts-expect-error`
    or `// @ts-ignore`.
 
-### Including Node types
+## Including Node types
 
 Node ships with many built-in types like `Buffer` that might be referenced in an
 npm package's types. To load these you must add a types reference directive to
@@ -322,7 +344,7 @@ Note that it is fine to not specify a version for this in most cases because
 Deno will try to keep it in sync with its internal Node code, but you can always
 override the version used if necessary.
 
-### Executable npm scripts
+## Executable npm scripts
 
 npm packages with `bin` entries can be executed from the command line without an
 `npm install` using a specifier in the following format:
@@ -355,7 +377,7 @@ $ deno run --allow-read npm:cowsay@1.5.0/cowthink What to eat?
                 ||     ||
 ```
 
-### node_modules
+## node_modules
 
 When you run `npm install`, npm creates a `node_modules` directory in your
 project which houses the dependencies as specified in the `package.json` file.
