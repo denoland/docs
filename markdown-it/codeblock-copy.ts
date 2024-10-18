@@ -35,7 +35,10 @@ export default function codeblockCopyPlugin(md: any) {
         (function() {
           const button = document.getElementById('${uniqueId}');
           button.addEventListener('click', function() {
-            const textToCopy = this.getAttribute('data-copy');
+            let textToCopy = this.getAttribute('data-copy');
+            // CLEAN COMMANDS:  Remove leading spaces, $, and > from each line
+            textToCopy = textToCopy.replace(/^[\$>\s]+/, '');
+
             navigator.clipboard.writeText(textToCopy).then(() => {
               this.querySelector('.copy-icon').classList.add('hidden');
               this.querySelector('.check-icon').classList.remove('hidden');
