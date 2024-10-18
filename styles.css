@@ -189,14 +189,6 @@ body:not(:has(.ddoc)) {
   @apply rounded-t-none border-t-0;
 }
 
-/* .ddoc .markdown .highlight {
-  @apply dark:invert !important;
-} */
-
-/* .markdown-body a {
-  @apply dark:invert text-primary !important;
-} */
-
 .ddoc .markdown tr:nth-child(2n) {
   @apply bg-background-secondary !important;
 }
