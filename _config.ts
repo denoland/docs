@@ -108,6 +108,7 @@ site.use(esbuild({
   extensions: [".client.ts"],
   options: {
     minify: false,
+    splitting: true,
   },
 }));
 
@@ -146,7 +147,6 @@ site.copy("reference_gen/gen/web/script.js", "/api/web/script.js");
 site.copy("reference_gen/gen/node/page.css", "/api/node/page.css");
 site.copy("reference_gen/gen/node/styles.css", "/api/node/styles.css");
 site.copy("reference_gen/gen/node/script.js", "/api/node/script.js");
-site.copy("orama-searchbox-1.0.0-rc47.js");
 
 site.process([".html"], (pages) => {
   for (const page of pages) {
@@ -233,11 +233,11 @@ site.ignore(
   // "subhosting",
 );
 
-site.remoteFile(
-  "orama-searchbox-1.0.0-rc47.js",
-  "https://unpkg.com/@orama/searchbox@1.0.0-rc47/dist/bundle.js",
-);
-
 site.scopedUpdates((path) => path == "/overrides.css");
 
+site.remoteFile(
+  "orama.css",
+  "https://unpkg.com/@orama/wc-components@0.1.5/dist/orama-ui/orama-ui.css",
+);
+site.copy("orama.css");
 export default site;
