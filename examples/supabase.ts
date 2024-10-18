@@ -20,31 +20,24 @@ const supabase = createClient(
 );
 
 // Insert data into the countries table
-export async function insertCountryData(
-  code: string = "JP",
-  name: string = "Japan",
-) {
-  const { data, error } = await supabase
-    .from("countries")
-    .insert({ code, name })
-    .select();
+let resource = await supabase
+  .from("countries")
+  .insert({ code: "JP", name: "Japan" })
+  .select();
 
-  if (error) {
-    console.error(error);
-  }
-
-  return data; // [ { code: "JP", name: "Japan" } ]
+if (resource.error) {
+  console.error(resource.error);
 }
+
+console.log(resource.data); // [ { code: "JP", name: "Japan" } ]
 
 // Get data from the countries table
-export async function getData() {
-  const { data, error } = await supabase
-    .from("countries")
-    .select();
+resource = await supabase
+  .from("countries")
+  .select();
 
-  if (error) {
-    console.error(error);
-  }
-
-  return data; // [ { code: "JP", name: "Japan" }, ... ]
+if (resource.error) {
+  console.error(resource.error);
 }
+
+console.log(resource.data); // [ { code: "JP", name: "Japan" }, ... ]
