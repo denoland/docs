@@ -44,18 +44,14 @@ export default function Layout(props: Lume.Data) {
         <link rel="preconnect" href="https://www.googletagmanager.com"></link>
         <script>
           {/*js*/ `
-          // const markdownBlocks = document.querySelectorAll('div.markdown-body');
-
-          // markdownBlocks.forEach((element) => {
+          /* Without this, @media theme preference will override manual theme selection, if different. A little janky but works ok for now, especially since it's just the one edge case where a user's global preference doesn't match their chosen docs theme preference */
           window.onload = () => {
             const colorThemes = document.querySelectorAll(\`[data-color-mode]\`);
-              const ps = document.querySelectorAll('p');
+            const ps = document.querySelectorAll('p');
             colorThemes.forEach((el) => {
               el.setAttribute('data-color-mode', localStorage.theme);
             });
-          // });
-            }
-          `}
+          }`}
         </script>
       </head>
       <body
