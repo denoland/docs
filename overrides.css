@@ -73,6 +73,11 @@
     py-0.5 rounded absolute !important;
 }
 
+.dark .ddoc .usageContent pre {
+  background: inherit;
+  color: inherit;
+}
+
 .ddoc .usageContent > .markdown {
   @apply max-w-full !important;
 }

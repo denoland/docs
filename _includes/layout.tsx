@@ -42,6 +42,21 @@ export default function Layout(props: Lume.Data) {
         >
         </script>
         <link rel="preconnect" href="https://www.googletagmanager.com"></link>
+        <script>
+          {/*js*/ `
+          // const markdownBlocks = document.querySelectorAll('div.markdown-body');
+
+          // markdownBlocks.forEach((element) => {
+          window.onload = () => {
+            const colorThemes = document.querySelectorAll(\`[data-color-mode]\`);
+              const ps = document.querySelectorAll('p');
+            colorThemes.forEach((el) => {
+              el.setAttribute('data-color-mode', localStorage.theme);
+            });
+          // });
+            }
+          `}
+        </script>
       </head>
       <body
         class={`bg-background-primary text-foreground-primary ${

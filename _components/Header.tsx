@@ -1,3 +1,5 @@
+import Logo from "./Logo.tsx";
+
 export default function Header({
   url,
   hasSidebar,
@@ -34,8 +36,8 @@ export default function Header({
             </button>
           )}
           <a class="flex gap-2.5 mr-5" href="/">
-            <div class="block w-24 h-auto dark:invert">
-              <img src="/img/deno-docs.svg" alt="Deno Docs" />
+            <div class="w-auto h-9">
+              <Logo />
             </div>
             {/* custom font size for logo */}
           </a>
@@ -86,7 +88,7 @@ export default function Header({
             hideOnMobile
           />
           <div class="min-w-[150px] md:w-32 xl:w-64">
-            <orama-search-button class="dark:invert" />
+            <orama-search-button />
             <orama-searchbox />
           </div>
           <div class="dark-mode-toggle">

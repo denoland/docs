@@ -1,4 +1,9 @@
 import Searcher from "lume/core/searcher.ts";
+import ansiRegex from "npm:ansi-regex";
+import Logo from "../_components/Logo.tsx";
+import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
+  type: "json",
+};
 import {
   BreadcrumbItem,
   isSidebarCategory,
@@ -10,10 +15,6 @@ import {
   SidebarLink as SidebarLink_,
   TableOfContentsItem as TableOfContentsItem_,
 } from "../types.ts";
-import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
-  type: "json",
-};
-import ansiRegex from "npm:ansi-regex";
 
 export const layout = "layout.tsx";
 
@@ -70,21 +71,13 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   return (
     <>
       <aside
-        class="flex flex-col absolute top-0 xl:top-16 bottom-0 -left-74 xl:left-0 sidebar-open:left-0 w-74 border-r border-background-secondary bg-background-primary z-50 xl:z-0 transition-all"
+        class="flex flex-col absolute top-0 xl:top-16 bottom-0 -translate-x-74 xl:left-0 sidebar-open:translate-x-0 w-74 border-r border-background-secondary bg-background-primary z-50 xl:z-0 xl:translate-x-0 transition-transform"
         id="sidebar"
         data-open="false"
       >
         <div class="xl:hidden p-4 shadow-sm flex justify-between h-16">
           <a class="flex items-center gap-3 mr-6" href="/">
-            <img
-              class="block size-6"
-              src="/img/logo.svg"
-              alt=""
-              aria-hidden="true"
-            />
-            <b class="text-xl text-foreground-primary">
-              <span class="sr-only">Deno</span> Docs
-            </b>
+            <Logo />
           </a>
           <button
             type="button"
@@ -146,10 +139,10 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 </details>
               )}
               <div
-                data-color-mode="light"
+                data-color-mode="auto"
                 data-light-theme="light"
                 data-dark-theme="dark"
-                class="markdown-body mt-4 rounded-lg dark:invert"
+                class="markdown-body mt-4 rounded-lg"
               >
                 <h1
                   dangerouslySetInnerHTML={{
@@ -195,7 +188,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
             class="py-2 sticky overflow-y-auto top-4 h-[calc(100vh-7rem)]"
             id="toc"
           >
-            <ul class="border-l border-background-secondary py-2 pl-2 relative">
+            <ul class="border-l border-background-secondary dark:border-background-tertiary py-2 pl-2 relative">
               {(props.toc as TableOfContentsItem_[]).map((item) => (
                 <TableOfContentsItem item={item} />
               ))}
@@ -331,7 +324,7 @@ function Breadcrumbs(props: {
           itemtype="https://schema.org/ListItem"
         >
           <a
-            class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 rounded transition duration-100 text-sm"
+            class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
             itemprop="item"
             href={props.sectionHref}
           >
@@ -363,7 +356,7 @@ function Breadcrumbs(props: {
                   <a
                     href={crumb.href}
                     itemprop="item"
-                    class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 rounded transition duration-100 text-sm"
+                    class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
                   >
                     <span itemprop="name">{crumb.label}</span>
                   </a>

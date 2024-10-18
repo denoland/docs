@@ -126,7 +126,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
                     data-color-mode="light"
                     data-dark-theme="dark"
                     data-light-theme="light"
-                    class="markdown-body dark:invert"
+                    class="markdown-body"
                   >
                     <pre className="highlight">
                       <code>
@@ -338,7 +338,7 @@ function SnippetComponent(props: {
               data-color-mode="light"
               data-dark-theme="dark"
               data-light-theme="light"
-              class="nocopy h-full markdown-body dark:invert"
+              class="nocopy h-full markdown-body"
             >
               <pre
                 class="highlight snippet-code language-ts"

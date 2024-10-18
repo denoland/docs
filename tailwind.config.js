@@ -18,6 +18,7 @@ export default {
         // Dark/light with Tailwind done right using CSS variables:
         "background-primary": "hsla(var(--background-primary))",
         "background-secondary": "hsla(var(--background-secondary))",
+        "background-tertiary": "hsla(var(--background-tertiary))",
         "foreground-primary": "hsla(var(--foreground-primary))",
         "foreground-secondary": "hsla(var(--foreground-secondary))",
 
