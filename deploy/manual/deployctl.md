@@ -25,7 +25,7 @@ With the Deno runtime installed, you can install the `deployctl` utility with
 the following command:
 
 ```sh
-deno install -Arf jsr:@deno/deployctl
+deno install -gArf jsr:@deno/deployctl
 ```
 
 The `-A` option in the deno install command grants all permissions to the
