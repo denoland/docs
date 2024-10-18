@@ -27,15 +27,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -250,15 +241,6 @@
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
           "usage": "--inspect-wait[=<HOST_AND_PORT>]"
-        },
-        {
-          "name": "allow-scripts",
-          "short": null,
-          "long": "allow-scripts",
-          "required": false,
-          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
-          "help_heading": null,
-          "usage": "--allow-scripts[=<PACKAGE>...]"
         },
         {
           "name": "frozen",
@@ -413,15 +395,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -636,15 +609,6 @@
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
           "usage": "--inspect-wait[=<HOST_AND_PORT>]"
-        },
-        {
-          "name": "allow-scripts",
-          "short": null,
-          "long": "allow-scripts",
-          "required": false,
-          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
-          "help_heading": null,
-          "usage": "--allow-scripts[=<PACKAGE>...]"
         },
         {
           "name": "frozen",
@@ -814,7 +778,7 @@
     },
     {
       "name": "add",
-      "about": "Add dependencies to your configuration file.\n  \u001b[38;5;245mdeno add jsr:@std/path\u001b[39m\n\nYou can add multiple dependencies at once:\n  \u001b[38;5;245mdeno add jsr:@std/path jsr:@std/assert\u001b[39m",
+      "about": "Add dependencies to your configuration file.\n  \u001b[38;5;245mdeno add @std/path\u001b[39m\n\nYou can add multiple dependencies at once:\n  \u001b[38;5;245mdeno add @std/path @std/assert\u001b[39m",
       "args": [
         {
           "name": "packages",
@@ -833,15 +797,6 @@
           "help": "Add as a dev dependency",
           "help_heading": null,
           "usage": "--dev"
-        },
-        {
-          "name": "allow-scripts",
-          "short": null,
-          "long": "allow-scripts",
-          "required": false,
-          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
-          "help_heading": null,
-          "usage": "--allow-scripts[=<PACKAGE>...]"
         }
       ],
       "subcommands": [],
@@ -876,15 +831,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1074,15 +1020,6 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
-        },
-        {
-          "name": "allow-scripts",
-          "short": null,
-          "long": "allow-scripts",
-          "required": false,
-          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
-          "help_heading": null,
-          "usage": "--allow-scripts[=<PACKAGE>...]"
         },
         {
           "name": "frozen",
@@ -1264,15 +1201,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -1306,15 +1234,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1503,15 +1422,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1772,15 +1682,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -1968,15 +1869,6 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
-        },
-        {
-          "name": "allow-scripts",
-          "short": null,
-          "long": "allow-scripts",
-          "required": false,
-          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
-          "help_heading": null,
-          "usage": "--allow-scripts[=<PACKAGE>...]"
         },
         {
           "name": "frozen",
@@ -2228,15 +2120,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -2441,15 +2324,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -2666,15 +2540,6 @@
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
           "usage": "--inspect-wait[=<HOST_AND_PORT>]"
-        },
-        {
-          "name": "allow-scripts",
-          "short": null,
-          "long": "allow-scripts",
-          "required": false,
-          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
-          "help_heading": null,
-          "usage": "--allow-scripts[=<PACKAGE>...]"
         },
         {
           "name": "frozen",
@@ -2980,15 +2845,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -3147,7 +3003,7 @@
     },
     {
       "name": "install",
-      "about": "Installs dependencies either in the local project or globally to a bin directory.\n\n\u001b[32mLocal installation\u001b[39m\n\nAdd dependencies to the local project's configuration (\u001b[38;5;245mdeno.json / package.json\u001b[39m) and installs them\nin the package cache. If no dependency is specified, installs all dependencies listed in the config file.\nIf the \u001b[38;5;245m--entrypoint\u001b[39m flag is passed, installs the dependencies of the specified entrypoint(s).\n\n  \u001b[38;5;245mdeno install\u001b[39m\n  \u001b[38;5;245mdeno install jsr:@std/bytes\u001b[39m\n  \u001b[38;5;245mdeno install npm:chalk\u001b[39m\n  \u001b[38;5;245mdeno install --entrypoint entry1.ts entry2.ts\u001b[39m\n\n\u001b[32mGlobal installation\u001b[39m\n\nIf the \u001b[1m--global\u001b[22m flag is set, installs a script as an executable in the installation root's bin directory.\n\n  \u001b[38;5;245mdeno install --global --allow-net --allow-read jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno install -g https://examples.deno.land/color-logging.ts\u001b[39m\n\nTo change the executable name, use \u001b[36m-n\u001b[39m/\u001b[36m--name\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read -n serve jsr:@std/http/file-server\u001b[39m\n\nThe executable name is inferred by default:\n  - Attempt to take the file stem of the URL path. The above example would\n    become \u001b[38;5;245mfile_server\u001b[39m.\n  - If the file stem is something generic like \u001b[38;5;245mmain\u001b[39m, \u001b[38;5;245mmod\u001b[39m, \u001b[38;5;245mindex\u001b[39m or \u001b[38;5;245mcli\u001b[39m,\n    and the path has no parent, take the file name of the parent path. Otherwise\n    settle with the generic name.\n  - If the resulting name has an \u001b[38;5;245m@...\u001b[39m suffix, strip it.\n\nTo change the installation root, use \u001b[36m--root\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read --root /usr/local jsr:@std/http/file-server\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m\n\nThese must be added to the path manually if required.",
+      "about": "Installs dependencies either in the local project or globally to a bin directory.\n\n\u001b[32mLocal installation\u001b[39m\n\nAdd dependencies to the local project's configuration (\u001b[38;5;245mdeno.json / package.json\u001b[39m) and installs them\nin the package cache. If no dependency is specified, installs all dependencies listed in the config file.\nIf the \u001b[38;5;245m--entrypoint\u001b[39m flag is passed, installs the dependencies of the specified entrypoint(s).\n\n  \u001b[38;5;245mdeno install\u001b[39m\n  \u001b[38;5;245mdeno install @std/bytes\u001b[39m\n  \u001b[38;5;245mdeno install npm:chalk\u001b[39m\n  \u001b[38;5;245mdeno install --entrypoint entry1.ts entry2.ts\u001b[39m\n\n\u001b[32mGlobal installation\u001b[39m\n\nIf the \u001b[1m--global\u001b[22m flag is set, installs a script as an executable in the installation root's bin directory.\n\n  \u001b[38;5;245mdeno install --global --allow-net --allow-read jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno install -g https://examples.deno.land/color-logging.ts\u001b[39m\n\nTo change the executable name, use \u001b[36m-n\u001b[39m/\u001b[36m--name\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read -n serve jsr:@std/http/file-server\u001b[39m\n\nThe executable name is inferred by default:\n  - Attempt to take the file stem of the URL path. The above example would\n    become \u001b[38;5;245mfile_server\u001b[39m.\n  - If the file stem is something generic like \u001b[38;5;245mmain\u001b[39m, \u001b[38;5;245mmod\u001b[39m, \u001b[38;5;245mindex\u001b[39m or \u001b[38;5;245mcli\u001b[39m,\n    and the path has no parent, take the file name of the parent path. Otherwise\n    settle with the generic name.\n  - If the resulting name has an \u001b[38;5;245m@...\u001b[39m suffix, strip it.\n\nTo change the installation root, use \u001b[36m--root\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read --root /usr/local jsr:@std/http/file-server\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m\n\nThese must be added to the path manually if required.",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -3157,15 +3013,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -3552,15 +3399,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -3746,15 +3584,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -3925,15 +3754,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -4050,15 +3870,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -4156,6 +3967,15 @@
           "help": null,
           "help_heading": null,
           "usage": "[ARGS]..."
+        },
+        {
+          "name": "no-check",
+          "short": null,
+          "long": "no-check",
+          "required": false,
+          "help": "Skip type-checking. If the value of \"remote\" is supplied, diagnostic errors from remote modules will be ignored",
+          "help_heading": "Type checking options",
+          "usage": "--no-check[=<NO_CHECK_TYPE>]"
         },
         {
           "name": "import-map",
@@ -4329,6 +4149,15 @@
           "usage": "--seed <NUMBER>"
         },
         {
+          "name": "check",
+          "short": null,
+          "long": "check",
+          "required": false,
+          "help": "Enable type-checking. This subcommand does not type-check by default\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help_heading": "Type checking options",
+          "usage": "--check[=<CHECK_TYPE>]"
+        },
+        {
           "name": "eval-file",
           "short": null,
           "long": "eval-file",
@@ -4371,15 +4200,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -4514,15 +4334,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -4739,15 +4550,6 @@
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
           "usage": "--inspect-wait[=<HOST_AND_PORT>]"
-        },
-        {
-          "name": "allow-scripts",
-          "short": null,
-          "long": "allow-scripts",
-          "required": false,
-          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
-          "help_heading": null,
-          "usage": "--allow-scripts[=<PACKAGE>...]"
         },
         {
           "name": "frozen",
@@ -5077,15 +4879,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
