@@ -33,9 +33,9 @@ your project.
 ![environment_variable](../docs-images/fauna2.png)
 
 Updating an existing environment variable works the same way. Click on the
-`Add Variable` button, enter the same name of the environment variable you
-wish to update and enter the new value. Click on the `Save` button to complete
-the update.
+"Add Variable" button, enter the same name of the environment variable you
+wish to update and enter the new value. Click on the "Save" button to
+complete the update.
 
 ## Deployment environment variables
 
