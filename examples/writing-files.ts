@@ -21,6 +21,9 @@ await Deno.writeFile("hello.txt", bytes, { mode: 0o644 });
 // You can also write a string instead of a byte array.
 await Deno.writeTextFile("hello.txt", "Hello World");
 
+// To append to a text file, set the `append` parameter to `true`.
+await Deno.writeTextFile("server.log", "Request: ...", { append: true });
+
 // Synchronous writing is also supported.
 Deno.writeFileSync("hello.txt", bytes);
 Deno.writeTextFileSync("hello.txt", "Hello World");
