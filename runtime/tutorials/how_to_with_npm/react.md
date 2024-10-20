@@ -127,7 +127,7 @@ following:
 }
 ```
 
-If you run `deno task dev` now and visit `localhost:8000/dinosaurs`, in your
+If you run `deno task dev` now and visit `localhost:8000/api/dinosaurs`, in your
 browser you should see a JSON response of all of the dinosaurs.
 
 ## Update the entrypoint
@@ -179,6 +179,30 @@ function App() {
 }
 
 export default App;
+```
+
+### Proxy to forward the api requests
+
+Vite will be serving the application on port `5173` while our api is running on
+port `8000`. Therefore, we'll need to set up a proxy to allow the `api/`-paths
+to get to be reachable by the router. Overwrite `vite.config.ts` with the
+following to configure a proxy:
+
+```ts title="vite.config.ts"
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+      },
+    },
+  },
+});
 ```
 
 ## Create the pages
@@ -280,8 +304,9 @@ To run the app use the task you set up earlier
 deno task dev
 ```
 
-Navigate to the local server in your browser and you should see the list of
-dinosaurs displayed which you can click through to find out about each one.
+Navigate to the local Vite server in your browser (`localhost:5173`) and you
+should see the list of dinosaurs displayed which you can click through to find
+out about each one.
 
 ![demo of the app](../images/how-to/react/react-dinosaur-app-demo.gif)
 
