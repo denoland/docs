@@ -21,7 +21,7 @@ const openai = new OpenAI({
 // Define the user prompt for generating a response
 const userPrompt = "What are some cool things to do in fall?";
 
-// Send the user prompt and system message to OpenAI for chat completion. 
+// Send the user prompt and system message to OpenAI for chat completion.
 const completion = await openai.chat.completions.create({
   model: "gpt-4", // Specify the GPT-4 (or any other valid) model for the completion
   messages: [
