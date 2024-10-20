@@ -31,7 +31,13 @@ deno run -A npm:create-vite@latest
 From the offered options select `React` and `TypeScript`.
 
 Then, `cd` into the newly created project folder and the following command to
-serve your new react app:
+install the dependencies:
+
+```sh
+deno install
+```
+
+Now you can serve your new react app by running:
 
 ```sh
 deno task dev
