@@ -22,16 +22,15 @@ and React app. Vite is a build tool and development server for modern web
 projects. It pairs well with React and Deno, leveraging ES modules and allowing
 you to import React components directly.
 
-In your terminal run the following command to create a new React app with Vite:
+In your terminal run the following command to create a new React app with Vite
+using the typescript template:
 
 ```sh
-deno run -A npm:create-vite@latest
+deno run -A npm:create-vite@latest --template react-ts
 ```
 
-From the offered options select `React` and `TypeScript`.
-
-Then, `cd` into the newly created project folder and the following command to
-install the dependencies:
+When prompted, give your app a name, and `cd` into the newly created project
+directory. Then run the following command to install the dependencies:
 
 ```sh
 deno install
