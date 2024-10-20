@@ -108,10 +108,10 @@ $ deno run -E main.js
 18.3.1
 ```
 
-_`npm:react` is a CommonJS package. Deno allows to import it as it was an ES
-module._
+_`npm:react` is a CommonJS package. Deno allows you to import it as if it were
+an ES module._
 
-Deno strongly encourages use of ES modules in your code, and offers CommonJS
+Deno strongly encourages the use of ES modules in your code but offers CommonJS
 support with following restrictions:
 
 **Use .cjs extension**
@@ -406,8 +406,8 @@ If your project has a `package.json` file, you can use the manual mode, which
 requires an installation step to create your `node_modules` directory:
 
 ```sh
-deno run --node-modules-dir=manual main.ts
 deno install
+deno run --node-modules-dir=manual main.ts
 ```
 
 or with a configuration file:
