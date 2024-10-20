@@ -296,6 +296,18 @@ export default function Dinosaur() {
 }
 ```
 
+### Styling the list of dinosaurs
+
+Since we are displaying the list of dinosaurs on the main page, let's do som
+basic formatting. Add the following to the bottom of `src/App.css` to display
+our list of dinosaurs in an orderly fashion:
+
+```css title="src/App.css"
+.dinosaur {
+  display: block;
+}
+```
+
 ## Run the app
 
 To run the app use the task you set up earlier
