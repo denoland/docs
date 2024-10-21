@@ -13,7 +13,8 @@ command: install
 
 ### deno install
 
-Use this command to install all dependencies defined in `deno.json` and/or
+Use this command with no particular pacakges specified to install all dependencies
+defined in the `imports` field of `deno.json` and/or the `dependencies` field of
 `package.json`.
 
 The dependencies will be installed in the global cache, but if your project has
@@ -21,8 +22,8 @@ a `package.json` file, a local `node_modules` directory will be set up as well.
 
 ### deno install [PACKAGES]
 
-Use this command to install particular packages and add them to `deno.json` or
-`package.json`.
+Use this command with particular packages specified to add them to `imports` in
+`deno.json` or `dependencies` in `package.json`, and then immediately install them.
 
 ```shell
 $ deno install jsr:@std/testing npm:express
@@ -30,13 +31,14 @@ $ deno install jsr:@std/testing npm:express
 
 :::tip
 
-You can also use `deno add` which is an alias to `deno install [PACKAGES]`
+The [`deno add`](/runtime/reference/cli/add/) command will add packages to `imports`
+in `deno.json`, without installing the packages.
 
 :::
 
 If your project has a `package.json` file, the packages coming from npm will be
 added to `dependencies` in `package.json`. Otherwise all packages will be added
-to `deno.json`.
+to `imports` in `deno.json`.
 
 ### deno install --entrypoint [FILES]
 

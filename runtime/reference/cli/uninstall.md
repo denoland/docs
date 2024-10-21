@@ -6,7 +6,7 @@ command: uninstall
 
 ## `deno uninstall [PACKAGES]`
 
-Remove dependencies specified in `deno.json` or `package.json`:
+Remove dependencies specified in `deno.json` or `package.json` and uninstall them:
 
 ```shell
 $ deno add npm:express
@@ -32,7 +32,8 @@ $ cat deno.json
 
 :::tip
 
-You can also use `deno remove` which is an alias to `deno uninstall [PACKAGES]`
+The [`deno remove`](/runtime/reference/cli/remove/) command will remove packages
+from the configuration file, without uninstalling the packages.
 
 :::
 
@@ -62,13 +63,6 @@ $ cat deno.json
   "imports": {}
 }
 ```
-
-:::info
-
-While dependencies are removed from the `deno.json` and `package.json` they
-still persist in the global cache for future use.
-
-:::
 
 If your project contains `package.json`, `deno uninstall` can work with it too:
 
