@@ -63,7 +63,7 @@ async function handler(req: Request): Promise<Response> {
   }
 
   // If the method handler is not found, return a 501:Not Implemented response.
-  return new Response("Method not implmeneted", { status: 501 });
+  return new Response("Method not implemented", { status: 501 });
 }
 
 // Start the server on the default port.
