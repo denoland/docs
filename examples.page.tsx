@@ -88,7 +88,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
 
               <a
                 href={url}
-                class="px-4 py-2 rounded bg-gray-100 text-sm border border-gray-200 hover:bg-gray-50 text-gray-700"
+                class="px-4 py-2 rounded bg-background-secondary text-sm border border-foreground-secondary hover:bg-background-primary text-foreground-primary"
               >
                 Edit on Github
               </a>
@@ -122,7 +122,12 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
                     </a>{" "}
                     locally using the Deno CLI:
                   </p>
-                  <div class="markdown-body">
+                  <div
+                    data-color-mode="light"
+                    data-dark-theme="dark"
+                    data-light-theme="light"
+                    class="markdown-body"
+                  >
                     <pre className="highlight">
                       <code>
                         {example.parsed.run.startsWith("deno")
@@ -136,7 +141,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
               )}
               {example.parsed.playground && (
                 <div class="col-span-3 mt-8">
-                  <p class="text-gray-700">
+                  <p class="text-foreground-secondary">
                     Try this example in a Deno Deploy playground:
                   </p>
                   <p class="mt-3">
@@ -329,7 +334,12 @@ function SnippetComponent(props: {
         )}
         <div class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight">
           {props.snippet.code && (
-            <div class="nocopy h-full markdown-body">
+            <div
+              data-color-mode="light"
+              data-dark-theme="dark"
+              data-light-theme="light"
+              class="nocopy h-full markdown-body"
+            >
               <pre
                 class="highlight snippet-code language-ts"
                 data-example-position={props.firstOfFile

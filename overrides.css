@@ -69,8 +69,13 @@
 }
 
 .ddoc .usageContent > h3 {
-  @apply text-xs -top-2.5 bg-white border border-primary/25 px-2 py-0.5 rounded
-    absolute !important;
+  @apply text-xs -top-2.5 bg-background-primary border border-primary/25 px-2
+    py-0.5 rounded absolute !important;
+}
+
+.dark .ddoc .usageContent pre {
+  background: inherit;
+  color: inherit;
 }
 
 .ddoc .usageContent > .markdown {
