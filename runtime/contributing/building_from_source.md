@@ -87,7 +87,7 @@ brew install cmake
 For Apple aarch64 users `lld` must be installed.
 
 ```console
-brew install llvm
+brew install llvm lld
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
 
