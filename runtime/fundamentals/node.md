@@ -334,7 +334,7 @@ npm:<package-name>[@<version-requirement>][/<binary-name>]
 For example:
 
 ```sh
-$ deno run --allow-read npm:cowsay@1.5.0 Hello there!
+$ deno run --allow-read npm:cowsay@1.5.0 "Hello there!"
  ______________
 < Hello there! >
  --------------
@@ -344,7 +344,7 @@ $ deno run --allow-read npm:cowsay@1.5.0 Hello there!
                 ||----w |
                 ||     ||
 
-$ deno run --allow-read npm:cowsay@1.5.0/cowthink What to eat?
+$ deno run --allow-read npm:cowsay@1.5.0/cowthink "What to eat?"
  ______________
 ( What to eat? )
  --------------
