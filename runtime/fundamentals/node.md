@@ -159,7 +159,8 @@ variables.
 ### package.json type option
 
 Deno will treat files as CommonJS if there's a `package.json` file with
-`"type": "commonjs"` option next to the file, or up in the directory tree.
+`"type": "commonjs"` option next to the file, or up in the directory tree and
+`--unstable-detect-cjs` flag is passed on the CLI.
 
 ```json title="package.json"
 {
