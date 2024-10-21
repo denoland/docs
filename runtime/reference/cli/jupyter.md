@@ -123,8 +123,8 @@ HTML in the notebook.
 
 ```js
 Deno.jupyter.html`<h1>Hello, world!</h1>
-<h2>From Deno kernel<h2>
-<p>Lorem ipsum <i>dolor</i> <b>sit</b> <u>amet</u>`;
+<h2>From Deno kernel</h2>
+<p>Lorem ipsum <i>dolor</i> <b>sit</b> <u>amet</u></p>`;
 ```
 
 ![`Deno.jupyter.html` API example](../images/jupyter-html.png)
