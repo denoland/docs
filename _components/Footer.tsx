@@ -108,7 +108,7 @@ const data = [
 
 export default function Footer() {
   return (
-    <footer class="w-full border-t border-gray-200 pt-12">
+    <footer class="w-full border-t border-foreground-secondary/20 pt-12">
       <div class="max-w-screen-xl mx-auto pb-16 px-4 sm:px-8 md:px-16">
         <div class="grid md:grid-cols-2 lg:grid-cols-4 md:-mx-8">
           {data.map((category) => (
@@ -118,7 +118,7 @@ export default function Footer() {
                 {category.items.map((item) => (
                   <li>
                     <a
-                      class="block items-center py-1 text-gray-600 hover:text-primary hover:underline"
+                      class="block items-center py-1 text-foreground-secondary hover:text-primary hover:underline"
                       href={item.to ?? item.href}
                     >
                       {item.label}
