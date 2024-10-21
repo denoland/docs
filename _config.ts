@@ -26,10 +26,10 @@ import relativeLinksPlugin from "./markdown-it/relative-path.ts";
 import replacerPlugin from "./markdown-it/replacer.ts";
 import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 import {
+  deploy as oramaDeploy,
   generateDocumentsForExamples,
   generateDocumentsForPage,
   generateDocumentsForSymbols,
-  deploy as oramaDeploy,
   OramaDocument,
 } from "./orama.ts";
 
@@ -53,7 +53,8 @@ const site = lume(
           anchor,
           {
             permalink: anchor.permalink.linkInsideHeader({
-              symbol: `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
+              symbol:
+                `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
               placement: "after",
             }),
             getTokensText(tokens) {
@@ -72,7 +73,7 @@ const site = lume(
         langPrefix: "highlight notranslate language-",
       },
     },
-  }
+  },
 );
 
 site.copy("static", ".");
@@ -97,7 +98,7 @@ site.copy("examples");
 site.use(
   redirects({
     output: "json",
-  })
+  }),
 );
 site.use(search());
 site.use(jsx());
@@ -106,7 +107,7 @@ site.use(jsx());
 site.use(
   tailwindcss({
     options: tailwindConfig,
-  })
+  }),
 );
 site.use(
   esbuild({
@@ -114,7 +115,7 @@ site.use(
     options: {
       minify: false,
     },
-  })
+  }),
 );
 
 // This is a work-around due to deno-dom's dependency of nwsapi not supporting
@@ -132,7 +133,7 @@ site.process([".html"], (pages) => {
 site.use(
   prism({
     cssSelector: "body.apply-prism pre code",
-  })
+  }),
 );
 
 site.use(toc({ anchor: false }));
@@ -218,7 +219,7 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
     } catch (e) {
       console.warn(
         "⚠️ Orama documents for reference docs were not generated.",
-        e
+        e,
       );
     }
 
@@ -234,7 +235,7 @@ site.ignore(
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
-  "examples"
+  "examples",
   // "deploy",
   // "examples.page.tsx",
   // "runtime",
@@ -243,7 +244,7 @@ site.ignore(
 
 site.remoteFile(
   "orama-searchbox-1.0.0-rc47.js",
-  "https://unpkg.com/@orama/searchbox@1.0.0-rc47/dist/bundle.js"
+  "https://unpkg.com/@orama/searchbox@1.0.0-rc47/dist/bundle.js",
 );
 
 site.scopedUpdates((path) => path == "/overrides.css");

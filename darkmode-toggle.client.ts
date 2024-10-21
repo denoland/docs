@@ -18,7 +18,7 @@ const toggleDarkMode = () => {
 };
 
 const darkModeToggleButtons = document.querySelectorAll(
-  ".dark-mode-toggle.button"
+  ".dark-mode-toggle.button",
 );
 
 darkModeToggleButtons.forEach((button) => {

@@ -195,7 +195,9 @@ body:not(:has(.ddoc)) {
 
 .markdownBlockTitle {
   background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border text-sm font-semibold dark:bg-background-secondary dark:text-foreground-secondary dark:border-background-tertiary;
+  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border text-sm font-semibold
+    dark:bg-background-secondary dark:text-foreground-secondary
+    dark:border-background-tertiary;
 }
 
 .markdown-body h2:hover .anchor-end {
@@ -253,7 +255,9 @@ body:not(:has(.ddoc)) {
 
 /* Orama search style overrides */
 .searchbutton-module_searchbutton__gg7JJ {
-  @apply w-full border-gray-00 px-3 rounded-md gap-1 dark:border-background-tertiary dark:bg-background-secondary dark:text-slate-50 !important;
+  @apply w-full border-gray-00 px-3 rounded-md gap-1
+    dark:border-background-tertiary dark:bg-background-secondary
+    dark:text-slate-50 !important;
 }
 
 .searchbutton-module_searchbutton__gg7JJ > svg {
@@ -435,17 +439,21 @@ body:not(:has(.ddoc)) {
 
 .deno-tabs > ul.deno-tabs-buttons > li > button {
   @apply inline-block mr-2 px-4 py-2 text-sm font-semibold text-slate-700
-    rounded-t bg-slate-100/80 hover:bg-blue-50 border border-transparent border-b-0 dark:text-slate-400 dark:bg-transparent dark:border-background-tertiary dark:hover:bg-slate-700;
+    rounded-t bg-slate-100/80 hover:bg-blue-50 border border-transparent
+    border-b-0 dark:text-slate-400 dark:bg-transparent
+    dark:border-background-tertiary dark:hover:bg-slate-700;
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li > button[data-active="true"] {
-  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-0 z-10
-    -mb-[1px] pb-[calc(0.5rem+1px)] relative dark:text-foreground-secondary dark:bg-background-secondary dark:border-background-tertiary;
+  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-0 z-10 -mb-[1px]
+    pb-[calc(0.5rem+1px)] relative dark:text-foreground-secondary
+    dark:bg-background-secondary dark:border-background-tertiary;
 }
 
 .deno-tabs > div.deno-tabs-content > div {
   @apply hidden py-4 px-4 rounded rounded-tl-none bg-slate-100 border
-    border-slate-200 dark:bg-background-secondary dark:border-background-tertiary;
+    border-slate-200 dark:bg-background-secondary
+    dark:border-background-tertiary;
 }
 
 .deno-tabs > div.deno-tabs-content > div[data-active="true"] {
@@ -457,12 +465,15 @@ body:not(:has(.ddoc)) {
 }
 
 .markdown-body .deno-tabs pre {
-  @apply border bg-white border-slate-200 dark:bg-background-primary dark:border-background-tertiary;
+  @apply border bg-white border-slate-200 dark:bg-background-primary
+    dark:border-background-tertiary;
 }
 
 .deno-tabs .markdownBlockTitle {
   @apply px-8 py-2 max-sm:-mx-4 sm:rounded-t-md border border-slate-200
-    bg-slate-50 text-slate-900 text-sm font-semibold dark:bg-background-secondary dark:border-background-tertiary dark:text-foreground-secondary;
+    bg-slate-50 text-slate-900 text-sm font-semibold
+    dark:bg-background-secondary dark:border-background-tertiary
+    dark:text-foreground-secondary;
 }
 
 /* Strips bottom margin in instances where multiple code samples exist in a tab. */
@@ -472,7 +483,8 @@ body:not(:has(.ddoc)) {
 
 .markdown-body .highlight pre,
 .markdown-body pre {
-  @apply bg-gray-50 dark:border-background-tertiary dark:bg-background-secondary;
+  @apply bg-gray-50 dark:border-background-tertiary
+    dark:bg-background-secondary;
 }
 
 /* Custom DDOC styles for the Deno documentation */
