@@ -127,7 +127,7 @@ following:
 }
 ```
 
-If you run `deno task dev` now and visit `localhost:8000/dinosaurs`, in your
+If you run `deno task dev` now and visit `localhost:8000/api/dinosaurs`, in your
 browser you should see a JSON response of all of the dinosaurs.
 
 ## Update the entrypoint
