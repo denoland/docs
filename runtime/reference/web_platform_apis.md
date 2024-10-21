@@ -361,7 +361,7 @@ hello world
 
 ### Specifying worker permissions
 
-:::warning
+:::caution
 
 This is an unstable Deno feature. Learn more about
 [unstable features](/runtime/fundamentals/stability_and_releases/#unstable-apis).
