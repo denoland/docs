@@ -62,7 +62,7 @@ async function handler(req: Request): Promise<Response> {
     return module[method](req);
   }
 
-  // If the method handler is not found, return a 501:Not Imlemented response.
+  // If the method handler is not found, return a 501:Not Implemented response.
   return new Response("Method not implmeneted", { status: 501 });
 }
 
