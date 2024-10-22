@@ -119,7 +119,7 @@ update the `jsxImportSource` value accordingly.
 
 Setting the `"jsx"` option to `"react-jsxdev"` instead of `"react-jsx"` will
 pass additional debugging information to each JSX node. The additional
-information are the file path, line number and column number of the callsite of
+information is the file path, line number and column number of the callsite of
 each JSX node.
 
 This information is typically used in frameworks to enhance the debugging
