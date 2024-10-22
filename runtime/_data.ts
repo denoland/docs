@@ -220,6 +220,7 @@ export const sidebar = [
           "/runtime/tutorials/how_to_with_npm/planetscale/",
           "/runtime/tutorials/how_to_with_npm/prisma/",
           "/runtime/tutorials/how_to_with_npm/redis/",
+          "/runtime/tutorials/file_based_routing/",
         ],
       },
     ],
@@ -349,14 +350,12 @@ export async function generateNodeCompatability() {
 
   return Object.entries(grouped).map(([_status, entries]) => {
     let content =
-      `<div class="module-info">\n\n## ${entries.icon} ${entries.title} (${entries.items.length}/${
-        Object.keys(descriptions).length
+      `<div class="module-info">\n\n## ${entries.icon} ${entries.title} (${entries.items.length}/${Object.keys(descriptions).length
       })\n\n`;
 
     content += entries.items.map(([key, content]) => {
-      let out = `\n\n### <a href="/api/node/${key}">node:${
-        key.replaceAll("--", "/")
-      }</a>\n\n<div class="item-content">\n\n`;
+      let out = `\n\n### <a href="/api/node/${key}">node:${key.replaceAll("--", "/")
+        }</a>\n\n<div class="item-content">\n\n`;
 
       if (content) {
         if (content.description) {
@@ -364,9 +363,8 @@ export async function generateNodeCompatability() {
         }
         if (content.symbols) {
           for (const [symbol, description] of Object.entries(content.symbols)) {
-            out += `**${
-              symbol === "*" ? "All symbols" : symbol
-            }**: ${description.description}\n\n`;
+            out += `**${symbol === "*" ? "All symbols" : symbol
+              }**: ${description.description}\n\n`;
           }
         }
       }
