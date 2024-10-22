@@ -81,8 +81,7 @@ deno run --allow-net --allow-read server.ts
 ```
 
 This will start the server on `localhost:8080`. You can now make a `GET` request
-to `localhost:8000/users` or visit http://localhost:8000/users and you should
-see the response `Hello from user.ts`.
+to `localhost:8000/users` and you should see the response `Hello from user.ts`.
 
 This command requires the `--allow-net` and `--allow-read`
 [permissions flags](/runtime/fundamentals/security/) to allow access to the
