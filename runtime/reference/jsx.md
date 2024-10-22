@@ -27,6 +27,24 @@ options by default:
 }
 ```
 
+Using the `"react"` option will convert JSX into the following JavaScript code:
+
+```jsx
+// input
+const jsx = (
+  <div className="foo">
+    <MyComponent value={2} />
+  </div>
+);
+
+// output:
+const jsx = React.createElement(
+  "div",
+  { className: "foo" },
+  React.createElement(MyComponent, { value: 2 }),
+);
+```
+
 ## JSX automatic runtime (recommended)
 
 In React 17, the React team added what they called
@@ -58,6 +76,28 @@ Behind the scenes the `jsxImportSource` setting will always append a
 import { jsx as _jsx } from "react/jsx-runtime";
 ```
 
+Using the `"react-jsx"` option will convert JSX into the following JavaScript
+code:
+
+```jsx
+// input
+const jsx = (
+  <div className="foo">
+    <MyComponent value={2} />
+  </div>
+);
+
+// output
+import { jsx as _jsx } from "react/jsx-runtime";
+const jsx = _jsx(
+  "div",
+  {
+    className: "foo",
+    children: _jsx(MyComponent, { value: 2 }),
+  },
+);
+```
+
 If you want to use [Preact](https://preactjs.com/) instead of React you can
 update the `jsxImportSource` value accordingly.
 
@@ -74,6 +114,69 @@ update the `jsxImportSource` value accordingly.
     }
   }
 ```
+
+### Development transform
+
+Setting the `"jsx"` option to `"react-jsxdev"` instead of `"react-jsx"` will
+pass additional debugging information to each JSX node. The additional
+information is the file path, line number and column number of the callsite of
+each JSX node.
+
+This information is typically used in frameworks to enhance the debugging
+experience during development. In React this information is used to enhance
+stack traces and show where a component was instantiated in the React developer
+tools browser extension.
+
+Using the `"react-jsxdev"` option will convert JSX into the following JavaScript
+code:
+
+```jsx
+// input
+const jsx = (
+  <div className="foo">
+    <MyComponent value={2} />
+  </div>
+);
+
+// output
+import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+const _jsxFileName = "file:///input.tsx";
+const jsx = _jsxDEV(
+  "div",
+  {
+    className: "foo",
+    children: _jsxDEV(
+      MyComponent,
+      {
+        value: 2,
+      },
+      void 0,
+      false,
+      {
+        fileName: _jsxFileName,
+        lineNumber: 3,
+        columnNumber: 5,
+      },
+      this,
+    ),
+  },
+  void 0,
+  false,
+  {
+    fileName: _jsxFileName,
+    lineNumber: 1,
+    columnNumber: 14,
+  },
+  this,
+);
+```
+
+:::caution
+
+Only use the `"react-jsxdev"` information during development and not in
+production.
+
+:::
 
 ### Using the JSX import source pragma
 
@@ -167,3 +270,34 @@ The `precompile` transform works best with [Preact](https://preactjs.com/) or
 [Hono](https://hono.dev/). It is not supported in React.
 
 :::
+
+Using the `"precompile"` option will convert JSX into the following JavaScript
+code:
+
+```jsx
+// input
+const jsx = (
+  <div className="foo">
+    <MyComponent value={2} />
+  </div>
+);
+
+// output:
+import {
+  jsx as _jsx,
+  jsxTemplate as _jsxTemplate,
+} from "npm:preact/jsx-runtime";
+const $$_tpl_1 = [
+  '<div class="foo">',
+  "</div>",
+];
+function MyComponent() {
+  return null;
+}
+const jsx = _jsxTemplate(
+  $$_tpl_1,
+  _jsx(MyComponent, {
+    value: 2,
+  }),
+);
+```
