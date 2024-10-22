@@ -65,7 +65,7 @@ functions.
 ```shell
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
-./llvm.sh 16
+./llvm.sh 17
 apt install --install-recommends -y cmake libglib2.0-dev
 ```
 
@@ -87,7 +87,7 @@ brew install cmake
 For Apple aarch64 users `lld` must be installed.
 
 ```console
-brew install llvm
+brew install llvm lld
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
 

@@ -188,23 +188,6 @@ export const sidebar = [
     ],
   },
   {
-    title: "Contributing and support",
-    items: [
-      {
-        label: "Contributing to Deno",
-        items: [
-          "/runtime/contributing/architecture/",
-          "/runtime/contributing/building_from_source/",
-          "/runtime/contributing/profiling/",
-          "/runtime/contributing/release_schedule/",
-          "/runtime/contributing/style_guide/",
-          "/runtime/contributing/web_platform_tests/",
-        ],
-      },
-      "/runtime/help/",
-    ],
-  },
-  {
     title: "Tutorials",
     href: "/runtime/tutorials/",
     items: [
@@ -239,6 +222,25 @@ export const sidebar = [
           "/runtime/tutorials/how_to_with_npm/redis/",
         ],
       },
+    ],
+  },
+  {
+    title: "Contributing and support",
+    href: "/runtime/contributing/",
+    items: [
+      {
+        label: "Contributing to Deno",
+        items: [
+          "/runtime/contributing/architecture/",
+          "/runtime/contributing/building_from_source/",
+          "/runtime/contributing/profiling/",
+          "/runtime/contributing/release_schedule/",
+          "/runtime/contributing/style_guide/",
+          "/runtime/contributing/web_platform_tests/",
+          "/runtime/contributing/examples/",
+        ],
+      },
+      "/runtime/help/",
     ],
   },
 ] satisfies Sidebar;

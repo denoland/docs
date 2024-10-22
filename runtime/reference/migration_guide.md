@@ -43,8 +43,8 @@ Deno 2 greatly improves dependency management for npm and JSR packages with
 tools like:
 
 - [`deno install`](/runtime/reference/cli/install/)
-- [`deno add`](/runtime/reference/cli/install/)
-- [`deno remove`](/runtime/reference/cli/uninstall/)
+- [`deno add`](/runtime/reference/cli/add/)
+- [`deno remove`](/runtime/reference/cli/remove/)
 
 You can expect seemless experience with Deno-first projects using `deno.json`,
 Node.js-first project using `package.json`, as well as hybrid projects using

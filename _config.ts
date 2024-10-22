@@ -60,7 +60,7 @@ const site = lume({
           getTokensText(tokens) {
             return tokens
               .filter((t) => ["text", "code_inline"].includes(t.type))
-              .map((t) => t.content.replaceAll(/\([0-9/]+?\)/g, ""))
+              .map((t) => t.content.replaceAll(/ \([0-9/]+?\)/g, ""))
               .join("")
               .trim();
           },
@@ -84,6 +84,7 @@ site.copy("deploy/kv/tutorials/images");
 site.copy("runtime/fundamentals/images");
 site.copy("runtime/getting_started/images");
 site.copy("runtime/reference/images");
+site.copy("runtime/contributing/images");
 site.copy("runtime/tutorials/images");
 site.copy("deploy/manual/images");
 site.copy("deno.json");

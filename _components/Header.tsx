@@ -12,7 +12,7 @@ export default function Header({
         reference ? "" : "sticky top-0 left-0 right-0"
       }`}
     >
-      <nav class="px-4 md:px-6 pt-2.5 pb-2 h-16 flex items-center justify-between">
+      <nav class="p-4 py-3 md:px-6 min-h-16 flex items-center justify-between">
         <div class="flex items-center">
           {hasSidebar && (
             <button class="mr-2 lg:hidden" id="sidebar-open">
@@ -33,14 +33,11 @@ export default function Header({
               </svg>
             </button>
           )}
-          <a class="flex items-center gap-2.5 mr-5" href="/">
-            <div class="block size-6">
-              <img src="/img/logo.svg" alt="Deno Docs" />
+          <a class="flex gap-2.5 mr-5" href="/">
+            <div class="block w-24 h-auto">
+              <img src="/img/deno-docs.svg" alt="Deno Docs" />
             </div>
             {/* custom font size for logo */}
-            <span style={{ fontSize: "1.375rem" }} class="font-semibold">
-              Docs
-            </span>
           </a>
           <HeaderItem
             url={url}
@@ -150,7 +147,7 @@ function HeaderItem({
 }) {
   return (
     <a
-      class={`mt-1 ${
+      class={`${
         firstItem ? "ml-0" : ""
       } mx-1 px-2 text-md hover:text-primary hover:bg-blue-50 hover:rounded text-nowrap flex items-center ${
         activeOn && url.startsWith(activeOn)
