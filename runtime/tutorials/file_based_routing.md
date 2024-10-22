@@ -16,22 +16,22 @@ argument:
 
 ```ts title="server.ts"
 async function handler(req: Request): Promise<Response> {
-    const url = new URL(req.url);
-    const path = url.pathname;
-    const method = req.method;
-    let module;
+  const url = new URL(req.url);
+  const path = url.pathname;
+  const method = req.method;
+  let module;
 
-    try {
-        module = await import(`.${path}.ts`);
-    } catch (_error) {
-        return new Response("Not found", { status: 404 });
-    }
+  try {
+    module = await import(`.${path}.ts`);
+  } catch (_error) {
+    return new Response("Not found", { status: 404 });
+  }
 
-    if (module[method]) {
-        return module[method](req);
-    }
+  if (module[method]) {
+    return module[method](req);
+  }
 
-    return new Response("Method not implemented", { status: 501 });
+  return new Response("Method not implemented", { status: 501 });
 }
 
 Deno.serve(handler);
@@ -68,7 +68,7 @@ as an argument:
 
 ```ts title="users.ts"
 export function GET(_req: Request): Response {
-    return new Response("Hello from user.ts", { status: 200 });
+  return new Response("Hello from user.ts", { status: 200 });
 }
 ```
 
