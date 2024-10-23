@@ -7,7 +7,7 @@
  * @resource {https://jsr.io/@supabase/supabase-js} supabase-js on jsr.io
  * @group Databases
  *
- * Connect to a Supabase database with the supabase-js library. 
+  * Connect to a Supabase database with the supabase-js library.
  */
 
 // Import the createClient function from jsr supabase-js package
