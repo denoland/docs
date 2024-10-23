@@ -214,7 +214,7 @@ import Link from "next/link";
 
 type RouteParams = { params: Promise<{ dinosaur: string }> };
 
-export default function Dinosaur(request: RouteParams) {
+export default function Dinosaur({ params }: RouteParams) {
 }
 ```
 
