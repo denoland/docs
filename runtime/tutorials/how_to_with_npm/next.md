@@ -151,7 +151,6 @@ page and export the default function that will render the page:
 import { useEffect, useState } from "react";
 import { Dino } from "./types";
 import Link from "next/link";
-import styles from "./page.module.css";
 
 export default function Home() {
 }
@@ -181,13 +180,17 @@ return (
   <main className={styles.main}>
     <h1>Welcome to the Dinosaur app</h1>
     <p>Click on a dinosaur below to learn more.</p>
-    {dinosaurs.map((dinosaur: Dino) => {
-      return (
-        <Link key="dinosaur.name" href={`/${dinosaur.name.toLowerCase()}`}>
-          {dinosaur.name}
-        </Link>
-      );
-    })}
+    <ul>
+      {dinosaurs.map((dinosaur: Dino) => {
+        return (
+          <li key={dinosaur.name}>
+            <Link href={`/${dinosaur.name.toLowerCase()}`}>
+              {dinosaur.name}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
   </main>
 );
 ```
@@ -208,9 +211,8 @@ function and set up a type for this parameter:
 import { useEffect, useState } from "react";
 import { Dino } from "../types";
 import Link from "next/link";
-import styles from "../page.module.css";
 
-type RouteParams = { params: { dinosaur: string } };
+type RouteParams = { params: Promise<{ dinosaur: string }> };
 
 export default function Dinosaur(request: RouteParams) {
 }
@@ -221,12 +223,12 @@ the request, set up a state variable to store the dinosaur data, and write a
 `useEffect` hook to fetch the data from the API when the component mounts:
 
 ```tsx title="[dinosaur]/page.tsx"
-const selectedDinosaur = request.params.dinosaur;
+const selectedDinosaur = params.then((params) => params.dinosaur);
 const [dinosaur, setDino] = useState<Dino>({ name: "", description: "" });
 
 useEffect(() => {
   (async () => {
-    const resp = await fetch(`/api/dinosaurs/${selectedDinosaur}`);
+    const resp = await fetch(`/api/dinosaurs/${await selectedDinosaur}`);
     const dino = await resp.json() as Dino;
     setDino(dino);
   })();
@@ -238,7 +240,7 @@ element containing the dinosaur's name and description:
 
 ```tsx title="[dinosaur]/page.tsx"
 return (
-  <main className={styles.main}>
+  <main>
     <h1>{dinosaur.name}</h1>
     <p>{dinosaur.description}</p>
     <Link href="/">🠠 Back to all dinosaurs</Link>
