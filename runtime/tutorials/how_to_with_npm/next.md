@@ -92,9 +92,9 @@ export async function GET() {
 }
 ```
 
-### /api/dinosaur/[dinosaur]
+### /api/dinosaurs/[dinosaur]
 
-And for the final route, `/api/dinosaur/[dinosaur]`, we'll create a folder
+And for the final route, `/api/dinosaurs/[dinosaur]`, we'll create a folder
 called `[dinosaur]` in the `dinosaurs` directory. In there, create a `route.ts`
 file. In this file we'll read the `data.json` file, find the dinosaur with the
 name in the URL, and return it as JSON:
@@ -195,7 +195,7 @@ return (
 ### Create the dinosaur page
 
 Inside the `app` directory, create a new folder called `[dinosaur]`. Inside this
-foler create a `page.tsx` file. This file will fetch the details of a specific
+folder create a `page.tsx` file. This file will fetch the details of a specific
 dinosaur from the API and render them on the page.
 
 Much like the homepage, we'll need client side code, and we'll import the

@@ -22,16 +22,21 @@ and React app. Vite is a build tool and development server for modern web
 projects. It pairs well with React and Deno, leveraging ES modules and allowing
 you to import React components directly.
 
-In your terminal run the following command to create a new React app with Vite:
+In your terminal run the following command to create a new React app with Vite
+using the typescript template:
 
 ```sh
-deno run -A npm:create-vite@latest
+deno run -A npm:create-vite@latest --template react-ts
 ```
 
-From the offered options select `React` and `TypeScript`.
+When prompted, give your app a name, and `cd` into the newly created project
+directory. Then run the following command to install the dependencies:
 
-Then, `cd` into the newly created project folder and the following command to
-serve your new react app:
+```sh
+deno install
+```
+
+Now you can serve your new react app by running:
 
 ```sh
 deno task dev
@@ -127,7 +132,7 @@ following:
 }
 ```
 
-If you run `deno task dev` now and visit `localhost:8000/dinosaurs`, in your
+If you run `deno task dev` now and visit `localhost:8000/api/dinosaurs`, in your
 browser you should see a JSON response of all of the dinosaurs.
 
 ## Update the entrypoint
@@ -179,6 +184,30 @@ function App() {
 }
 
 export default App;
+```
+
+### Proxy to forward the api requests
+
+Vite will be serving the application on port `5173` while our api is running on
+port `8000`. Therefore, we'll need to set up a proxy to allow the `api/`-paths
+to get to be reachable by the router. Overwrite `vite.config.ts` with the
+following to configure a proxy:
+
+```ts title="vite.config.ts"
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+      },
+    },
+  },
+});
 ```
 
 ## Create the pages
@@ -272,6 +301,18 @@ export default function Dinosaur() {
 }
 ```
 
+### Styling the list of dinosaurs
+
+Since we are displaying the list of dinosaurs on the main page, let's do som
+basic formatting. Add the following to the bottom of `src/App.css` to display
+our list of dinosaurs in an orderly fashion:
+
+```css title="src/App.css"
+.dinosaur {
+  display: block;
+}
+```
+
 ## Run the app
 
 To run the app use the task you set up earlier
@@ -280,8 +321,9 @@ To run the app use the task you set up earlier
 deno task dev
 ```
 
-Navigate to the local server in your browser and you should see the list of
-dinosaurs displayed which you can click through to find out about each one.
+Navigate to the local Vite server in your browser (`localhost:5173`) and you
+should see the list of dinosaurs displayed which you can click through to find
+out about each one.
 
 ![demo of the app](../images/how-to/react/react-dinosaur-app-demo.gif)
 
