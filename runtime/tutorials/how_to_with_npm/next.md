@@ -177,7 +177,7 @@ of links, each linking to the dinosaur's page:
 
 ```tsx title="page.tsx"
 return (
-  <main className={styles.main}>
+  <main>
     <h1>Welcome to the Dinosaur app</h1>
     <p>Click on a dinosaur below to learn more.</p>
     <ul>
