@@ -202,7 +202,7 @@ deno run --allow-net=github.com,jsr.io script.ts
 deno run --allow-net=example.com:80 script.ts
 
 # An IPv4 address on port 443
-deno run --allow-net=1.1.1.1:443 script.
+deno run --allow-net=1.1.1.1:443 script.ts
 
 # An IPv6 address, all ports allowed
 deno run --allow-net=[2606:4700:4700::1111] script.ts

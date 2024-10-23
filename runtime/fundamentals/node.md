@@ -108,10 +108,10 @@ $ deno run -E main.js
 18.3.1
 ```
 
-_`npm:react` is a CommonJS package. Deno allows to import it as it was an ES
-module._
+_`npm:react` is a CommonJS package. Deno allows you to import it as if it were
+an ES module._
 
-Deno strongly encourages use of ES modules in your code, and offers CommonJS
+Deno strongly encourages the use of ES modules in your code but offers CommonJS
 support with following restrictions:
 
 **Use .cjs extension**
@@ -334,7 +334,7 @@ npm:<package-name>[@<version-requirement>][/<binary-name>]
 For example:
 
 ```sh
-$ deno run --allow-read npm:cowsay@1.5.0 Hello there!
+$ deno run --allow-read npm:cowsay@1.5.0 "Hello there!"
  ______________
 < Hello there! >
  --------------
@@ -344,7 +344,7 @@ $ deno run --allow-read npm:cowsay@1.5.0 Hello there!
                 ||----w |
                 ||     ||
 
-$ deno run --allow-read npm:cowsay@1.5.0/cowthink What to eat?
+$ deno run --allow-read npm:cowsay@1.5.0/cowthink "What to eat?"
  ______________
 ( What to eat? )
  --------------
