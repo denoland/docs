@@ -33,47 +33,48 @@ import {
 } from "./orama.ts";
 import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 
-const site = lume({
-  location: new URL("https://docs.deno.com"),
-  caseSensitiveUrls: true,
-  server: {
-    middlewares: [
-      apiDocumentContentTypeMiddleware,
-    ],
-  },
-}, {
-  markdown: {
-    plugins: [
-      replacerPlugin,
-      emoji,
-      admonitionPlugin,
-      codeblockCopyPlugin,
-      codeblockTitlePlugin,
-      [
-        anchor,
-        {
-          permalink: anchor.permalink.linkInsideHeader({
-            symbol:
-              `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
-            placement: "after",
-          }),
-          getTokensText(tokens) {
-            return tokens
-              .filter((t) => ["text", "code_inline"].includes(t.type))
-              .map((t) => t.content.replaceAll(/ \([0-9/]+?\)/g, ""))
-              .join("")
-              .trim();
-          },
-        },
-      ],
-      relativeLinksPlugin,
-    ],
-    options: {
-      linkify: true,
-      langPrefix: "highlight notranslate language-",
+const site = lume(
+  {
+    location: new URL("https://docs.deno.com"),
+    caseSensitiveUrls: true,
+    server: {
+      middlewares: [apiDocumentContentTypeMiddleware],
     },
   },
-});
+  {
+    markdown: {
+      plugins: [
+        replacerPlugin,
+        emoji,
+        admonitionPlugin,
+        codeblockCopyPlugin,
+        codeblockTitlePlugin,
+        [
+          anchor,
+          {
+            permalink: anchor.permalink.linkInsideHeader({
+              symbol:
+                `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
+              placement: "after",
+            }),
+            getTokensText(tokens) {
+              return tokens
+                .filter((t) => ["text", "code_inline"].includes(t.type))
+                .map((t) => t.content.replaceAll(/ \([0-9/]+?\)/g, ""))
+                .join("")
+                .trim();
+            },
+          },
+        ],
+        relativeLinksPlugin,
+      ],
+      options: {
+        linkify: true,
+        langPrefix: "highlight notranslate language-",
+      },
+    },
+  },
+);
 
 site.copy("static", ".");
 site.copy("subhosting/api/images");
@@ -94,22 +95,29 @@ site.copy("server.ts");
 site.copy("middleware.ts");
 site.copy("examples");
 
-site.use(redirects({
-  output: "json",
-}));
+site.use(
+  redirects({
+    output: "json",
+  }),
+);
 site.use(search());
 site.use(jsx());
 
 // Custom plugin that for tailwind + postcss combined
-site.use(tailwindcss({
-  options: tailwindConfig,
-}));
-site.use(esbuild({
-  extensions: [".client.ts"],
-  options: {
-    minify: false,
-  },
-}));
+site.use(
+  tailwindcss({
+    options: tailwindConfig,
+  }),
+);
+site.use(
+  esbuild({
+    extensions: [".client.ts"],
+    options: {
+      minify: false,
+      splitting: true,
+    },
+  }),
+);
 
 // This is a work-around due to deno-dom's dependency of nwsapi not supporting
 // :has selectors, nor having intention of supporting them, so using `body:not(:has(.ddoc))`
@@ -123,9 +131,11 @@ site.process([".html"], (pages) => {
     }
   }
 });
-site.use(prism({
-  cssSelector: "body.apply-prism pre code",
-}));
+site.use(
+  prism({
+    cssSelector: "body.apply-prism pre code",
+  }),
+);
 
 site.use(toc({ anchor: false }));
 site.use(title());
@@ -146,7 +156,6 @@ site.copy("reference_gen/gen/web/script.js", "/api/web/script.js");
 site.copy("reference_gen/gen/node/page.css", "/api/node/page.css");
 site.copy("reference_gen/gen/node/styles.css", "/api/node/styles.css");
 site.copy("reference_gen/gen/node/script.js", "/api/node/script.js");
-site.copy("orama-searchbox-1.0.0-rc47.js");
 
 site.process([".html"], (pages) => {
   for (const page of pages) {
@@ -233,11 +242,11 @@ site.ignore(
   // "subhosting",
 );
 
-site.remoteFile(
-  "orama-searchbox-1.0.0-rc47.js",
-  "https://unpkg.com/@orama/searchbox@1.0.0-rc47/dist/bundle.js",
-);
-
 site.scopedUpdates((path) => path == "/overrides.css");
 
+site.remoteFile(
+  "orama.css",
+  "https://unpkg.com/@orama/wc-components@0.1.7/dist/orama-ui/orama-ui.css",
+);
+site.copy("orama.css");
 export default site;

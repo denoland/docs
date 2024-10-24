@@ -220,6 +220,7 @@ export const sidebar = [
           "/runtime/tutorials/how_to_with_npm/planetscale/",
           "/runtime/tutorials/how_to_with_npm/prisma/",
           "/runtime/tutorials/how_to_with_npm/redis/",
+          "/runtime/tutorials/file_based_routing/",
         ],
       },
     ],
