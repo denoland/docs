@@ -43,12 +43,10 @@ const decoder = new TextDecoder();
 
 // Let's read each chunk from the file
 // and print it to the console.
-let done = false;
-do {
+while (true) {
   const result = await inputReader.read();
-  done = result.done;
-
-  if (result.value) {
-    console.log(`Read chunk: ${decoder.decode(result.value)}`);
+  if (result.done) {
+    break;
   }
-} while (!done);
+  console.log(`Read chunk: ${decoder.decode(result.value)}`);
+}
