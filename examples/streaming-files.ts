@@ -44,9 +44,9 @@ const decoder = new TextDecoder();
 // Let's read each chunk from the file
 // and print it to the console.
 while (true) {
-  const result = await inputReader.read()
+  const result = await inputReader.read();
   if (result.done) {
     break;
   }
-  console.log(`Read chunk: ${decoder.decode(result.value)}`)
+  console.log(`Read chunk: ${decoder.decode(result.value)}`);
 }
