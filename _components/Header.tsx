@@ -60,7 +60,7 @@ export default function Header({
             name="API reference"
             hideOnMobile
           />
-          <span class="hidden lg:inline-block mx-2">//</span>
+          <span class="hidden lg:inline-block text-gray-300 mx-2">//</span>
           <HeaderItem
             url={url}
             activeOn="/deploy"
@@ -149,7 +149,7 @@ function HeaderItem({
     <a
       class={`${
         firstItem ? "ml-0" : ""
-      } mx-1 px-2 text-md hover:text-primary hover:bg-blue-50 hover:rounded text-nowrap flex items-center ${
+      } mx-1 px-2 text-md hover:text-primary hover:bg-blue-50 ring-1 ring-transparent hover:ring-blue-100 hover:rounded transition-colors duration-200 ease-in-out text-nowrap flex items-center ${
         activeOn && url.startsWith(activeOn)
           ? "text-primary mx-2.5 px-0.5 underline font-semibold underline-offset-[6px] decoration-primary/20"
           : ""
@@ -160,8 +160,8 @@ function HeaderItem({
       {external &&
         (
           <svg
-            width="13.5"
-            height="13.5"
+            width="10"
+            height="10"
             aria-hidden="true"
             viewBox="0 0 24 24"
             class="inline  ml-2"
