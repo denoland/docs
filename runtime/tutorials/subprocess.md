@@ -52,8 +52,8 @@ permissions as if you were to run the command from the command line yourself.
 ## Communicating with subprocesses
 
 By default when you use `Deno.Command()` the subprocess inherits `stdin`,
-`stdout` and `stderr` of the parent process. If you want to communicate with
-started a subprocess you must use the `"piped"` option.
+`stdout` and `stderr` of the parent process. If you want to communicate with a
+started subprocess you must use the `"piped"` option.
 
 ## Piping to files
 
