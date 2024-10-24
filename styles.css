@@ -206,16 +206,16 @@ body:not(:has(.ddoc)) {
 }
 
 /* Orama search style overrides */
-.searchbutton-module_searchbutton__gg7JJ {
-  @apply w-full border-gray-00 px-3 rounded-md gap-1 !important;
+button.searchbutton-module_searchbutton__gg7JJ {
+  @apply w-full border-gray-300 px-3 text-gray-500 rounded gap-1 !important;
 }
 
 .searchbutton-module_searchbutton__gg7JJ > svg {
-  @apply w-3.5 h-3.5 !important;
+  @apply w-3 h-3 !important;
 }
 
 .searchbutton-module_searchbutton__keys__qckL6 {
-  @apply border-0 py-0.5 text-gray-1 text-sm !important;
+  @apply border-0 py-0.5 text-gray-400 text-sm !important;
 }
 
 .searlchbutton-module_searchbutton__keys__qckL6 > kbd:first-of-type {
