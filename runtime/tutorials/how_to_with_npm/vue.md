@@ -29,11 +29,13 @@ and `TypeScript` as a variant.
 
 Once created, `cd` into your new project and run the following command to
 install dependencies:
+
 ```shell
 deno install
 ```
 
 Then, run the following command to serve your new Vue.js app:
+
 ```shell
 deno task dev
 ```
