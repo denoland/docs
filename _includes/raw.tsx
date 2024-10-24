@@ -16,7 +16,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
       {props.sidebar && (
         <>
           <aside
-            class="absolute top-0 bottom-0 -left-74 sidebar-open:left-0 w-74 border-r border-gray-200 bg-background-primary z-50 xl:hidden transition-all"
+            class="absolute top-0 bottom-0 -left-74 sidebar-open:left-0 w-74 border-r border-foreground-tertiary bg-background-primary z-50 xl:hidden transition-all"
             id="sidebar"
             data-open="false"
           >

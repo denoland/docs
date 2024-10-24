@@ -5,10 +5,11 @@
 /* Light and dark theme variables */
 .light {
   --background-primary: 215deg, 81%, 100%;
-  --background-secondary: 213deg 100% 92%;
+  --background-secondary: 213deg 100% 95%;
   --background-tertiary: 213deg 100% 84%; /* Not actually used anywhere yet */
   --foreground-primary: 0deg, 0%, 25%;
   --foreground-secondary: 0deg, 0%, 42%;
+  --foreground-tertiary: 0deg, 0%, 90%;
   --runtime-background: 124deg, 100%, 97.1%;
   --runtime-foreground: 184deg, 100%, 10%;
   --primary: 217deg, 91%, 59%;
@@ -23,6 +24,7 @@
   --background-tertiary: 216deg, 27.7%, 22%;
   --foreground-primary: 215deg, 17%, 99%;
   --foreground-secondary: 215deg, 17%, 61%;
+  --foreground-tertiary: 215deg, 17%, 20%;
   --runtime-background: 124deg, 100%, 3%;
   --runtime-foreground: 184deg, 100%, 90%;
   --note: 224deg, 64.3%, 82.9%;
@@ -500,7 +502,7 @@ body:not(:has(.ddoc)) {
   }
 
   #categoryPanel {
-    @apply border-r border-background-secondary;
+    @apply border-r border-foreground-tertiary;
     @apply pt-4 !important;
 
     & li:hover {

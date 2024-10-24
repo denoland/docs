@@ -57,7 +57,7 @@ function SidebarSection(
             <a href={headingLink}>
               <h2
                 id={categoryTitle}
-                class="border-b border-background-secondary pt-2 pb-1.5 -mx-5 px-8 mt-4 mb-2 text-sm font-semibold hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 text-foreground-primary capitalize"
+                class="border-b border-foreground-tertiary pt-2 pb-1.5 -mx-5 px-8 mt-4 mb-2 text-sm font-semibold hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 text-foreground-primary capitalize"
                 aria-current={props.url === headingLink ? "page" : undefined}
               >
                 {props.section.title}
@@ -67,7 +67,7 @@ function SidebarSection(
           : (
             <h2
               id={categoryTitle}
-              class="border-b border-background-secondary pt-2 pb-0.5 -mx-5 px-8 mt-4 mb-3 text-sm font-semibold text-foreground-primary capitalize"
+              class="border-b border-foreground-tertiary pt-2 pb-0.5 -mx-5 px-8 mt-4 mb-3 text-sm font-semibold text-foreground-primary capitalize"
             >
               {props.section.title}
             </h2>
@@ -99,7 +99,7 @@ function SidebarSection(
 }
 
 const LINK_CLASS =
-  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-foreground-secondary rounded-md hover:bg-blue-50 ring-1 ring-transparent hover:ring-secondary-100 hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 transition-colors duration-200 ease-in-out select-none";
+  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-foreground-secondary rounded-md hover:bg-blue-50 ring-1 ring-transparent hover:ring-background-secondary hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 current:font-semibold transition-colors duration-200 ease-in-out select-none";
 
 function SidebarItem(props: {
   item: string | SidebarDoc_ | SidebarLink_;

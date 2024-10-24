@@ -95,7 +95,7 @@ export default function Header({
             <button class="dark-mode-toggle button p-1 rounded bg-background-primary border border-foreground-secondary/20">
               <span class="dark:hidden">
                 <svg
-                  class="fill-foreground-primary w-6 h-6"
+                  class="fill-foreground-primary w-5 h-5"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -105,7 +105,7 @@ export default function Header({
               </span>
               <span class="hidden dark:block">
                 <svg
-                  class="fill-foreground-primary w-6 h-6"
+                  class="fill-foreground-primary w-5 h-5"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -125,7 +125,7 @@ export default function Header({
 
       {reference &&
         (
-          <nav className="px-4 md:px-6 pt-2 pb-3 text-sm bg-background-primary flex items-center justify-between border-box border-t border-background-secondary z-[1000]">
+          <nav className="px-4 md:px-6 pt-2 pb-3 text-sm bg-background-primary flex items-center justify-between border-box border-t border-foreground-tertiary z-[1000]">
             <ul className="flex">
               <li>
                 <HeaderItem
