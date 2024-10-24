@@ -5,7 +5,8 @@
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
     "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@864fb83b508b4164afa8cedef100db672b883152/",
     "postcss": "npm:postcss@^8.4.41",
-    "tailwindcss": "npm:tailwindcss@^3.4.9"
+    "tailwindcss": "npm:tailwindcss@^3.4.9",
+    "@orama/wc-components/": "https://unpkg.com/@orama/wc-components@0.1.7/"
   },
   "tasks": {
     "build": "deno run -A lume.ts",

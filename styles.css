@@ -261,11 +261,11 @@ body:not(:has(.ddoc)) {
 }
 
 .searchbutton-module_searchbutton__gg7JJ > svg {
-  @apply w-3.5 h-3.5 !important;
+  @apply w-3 h-3 !important;
 }
 
 .searchbutton-module_searchbutton__keys__qckL6 {
-  @apply border-0 py-0.5 text-gray-1 text-sm !important;
+  @apply border-0 py-0.5 text-gray-400 text-sm !important;
 }
 
 .searchbutton-module_searchbutton__keys__qckL6 > kbd:first-of-type {

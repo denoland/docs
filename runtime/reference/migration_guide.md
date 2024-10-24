@@ -255,10 +255,13 @@ See [deno#9795][deno#9795] for details.
 
 Use the `.close()` method on the resource instead.
 
+<a href="#" id="rid">test</a>
+
 ```diff
   const conn = await Deno.connect({ port: 80 });
 
   // ...
+
 
 - Deno.close(conn.rid);
 + conn.close();

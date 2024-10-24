@@ -75,7 +75,7 @@ function SidebarSection(
       )}{" "}
       <ul aria-labelledby={categoryTitle}>
         {props.section.items.map((item) => (
-          <li class="mx-2 mt-1">
+          <li class="mx-2">
             {typeof item === "object" && "items" in item
               ? (
                 <SidebarCategory
@@ -99,7 +99,7 @@ function SidebarSection(
 }
 
 const LINK_CLASS =
-  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-foreground-secondary rounded-md hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 transition-colors duration-200 ease-in-out select-none";
+  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-foreground-secondary rounded-md hover:bg-blue-50 ring-1 ring-transparent hover:ring-secondary-100 hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 transition-colors duration-200 ease-in-out select-none";
 
 function SidebarItem(props: {
   item: string | SidebarDoc_ | SidebarLink_;
@@ -121,7 +121,7 @@ function SidebarItem(props: {
   }
 
   return (
-    <li class="mx-2 mt-1">
+    <li class="mx-2">
       <a
         class={LINK_CLASS}
         href={"id" in item ? item.id : "href" in item ? item.href : undefined}
