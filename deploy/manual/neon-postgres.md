@@ -10,10 +10,6 @@ top of Postgres [here](../tutorials/tutorial-postgres).
 
 ## Setup Postgres
 
-> This tutorial will focus entirely on connecting to Postgres unencrypted. If
-> you would like to use encryption with a custom CA certificate, use the
-> documentation [here](https://deno-postgres.com/#/?id=ssltls-connection).
-
 To get started, we need to create a new Postgres instance for us to connect to.
 For this tutorial, we will be using [Neon Postgres](https://neon.tech/) as they
 provide free, managed Postgres instances. If you like to host your database
@@ -53,32 +49,45 @@ environment variables:
 
 ## Write code that connects to Postgres
 
-To read/write to Postgres, import the Postgres module, read the connection
-string from the environment variables, and create a connection pool.
+To read/write to Postgres using the
+[Neon serverless driver](https://deno.com/blog/neon-on-jsr), first install it
+using the `deno add` command:
+
+```sh
+deno add jsr:@neon/serverless
+```
+
+This will create or update your `deno.json` file with the dependency:
+
+```json
+{
+  "imports": {
+    "@neon/serverless": "jsr:@neon/serverless@^0.10.1"
+  }
+}
+```
+
+Now you can use the driver in your code:
 
 ```ts
-import { Pool } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
+import { neon } from "@neon/serverless";
 
 // Get the connection string from the environment variable "DATABASE_URL"
 const databaseUrl = Deno.env.get("DATABASE_URL")!;
 
-// Create a database pool with three connections that are lazily established
-const pool = new Pool(databaseUrl, 3, true);
-
-// Connect to the database
-const connection = await pool.connect();
+// Create a SQL query executor
+const sql = neon(databaseUrl);
 
 try {
   // Create the table
-  await connection.queryObject`
+  await sql`
     CREATE TABLE IF NOT EXISTS todos (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL
     )
   `;
-} finally {
-  // Release the connection back into the pool
-  connection.release();
+} catch (error) {
+  console.error(error);
 }
 ```
 
