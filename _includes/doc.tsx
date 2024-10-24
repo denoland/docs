@@ -531,9 +531,9 @@ function renderCommand(
 
   const rendered = (
     <div>
-      <div class="p-4 bg-stone-100 rounded border border-gray-300 mt-6 mb-6 relative">
+      <div class="p-4 bg-stone-100 dark:bg-transparent rounded border border-gray-300 dark:border-background-tertiary mt-6 mb-6 relative">
         <h3 class="!text-xs !m-0 -top-2.5 bg-background-primary border border-gray-600/25 px-2 py-0.5 rounded absolute !font-normal">
-          Command-line Usage
+          Command line usage
         </h3>
         <div>
           <pre class="!mb-0 !px-3 !py-2">
