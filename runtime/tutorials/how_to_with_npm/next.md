@@ -92,9 +92,9 @@ export async function GET() {
 }
 ```
 
-### /api/dinosaur/[dinosaur]
+### /api/dinosaurs/[dinosaur]
 
-And for the final route, `/api/dinosaur/[dinosaur]`, we'll create a folder
+And for the final route, `/api/dinosaurs/[dinosaur]`, we'll create a folder
 called `[dinosaur]` in the `dinosaurs` directory. In there, create a `route.ts`
 file. In this file we'll read the `data.json` file, find the dinosaur with the
 name in the URL, and return it as JSON:
@@ -103,18 +103,20 @@ name in the URL, and return it as JSON:
 import { NextRequest } from "next/server";
 import data from "../data.json" with { type: "json" };
 
-type RouteParams = { params: { dinosaur: string } };
+type RouteParams = { params: Promise<{ dinosaur: string }> };
 
-export const GET = (request: NextRequest, context: RouteParams) => {
-  if (!context?.params?.dinosaur) {
+export const GET = async (request: NextRequest, { params }: RouteParams) => {
+  const { dinosaur } = await params;
+
+  if (!dinosaur) {
     return Response.json("No dinosaur name provided.");
   }
 
-  const dinosaur = data.find((item) =>
+  const dinosaurData = data.find((item) =>
     item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
   );
 
-  return Response.json(dinosaur ? dinosaur : "No dinosaur found.");
+  return Response.json(dinosaurData ? dinosaurData : "No dinosaur found.");
 };
 ```
 
