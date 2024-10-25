@@ -1,5 +1,9 @@
 import type { Searcher } from "https://cdn.jsdelivr.net/gh/lumeland/lume@864fb83b508b4164afa8cedef100db672b883152/core/searcher";
-import type { SidebarItem, SidebarDoc as SidebarDoc_, SidebarLink as SidebarLink_ } from "../types.ts";
+import type {
+  SidebarDoc as SidebarDoc_,
+  SidebarItem,
+  SidebarLink as SidebarLink_,
+} from "../types.ts";
 
 export function NavigationButton(props: {
   item: SidebarItem;
@@ -18,10 +22,11 @@ export function NavigationButton(props: {
     };
   } else if ("items" in props.item) {
     return (
-      <NavigationButton 
+      <NavigationButton
         item={props.item.items[0]}
         search={props.search}
-        direction={props.direction} />
+        direction={props.direction}
+      />
     );
   } else {
     item = props.item;
@@ -32,7 +37,7 @@ export function NavigationButton(props: {
     : "items-end";
 
   return (
-    <a 
+    <a
       className={`flex flex-col py-3 px-6 ${alignmentClass} border border-gray-000 hover:border-blue-700 hover:bg-blue-50/10 transition-colors duration-300 transition-timing-function cubic-bezier(0.4, 0, 0.2, 1) rounded`}
       href={"id" in item ? item.id : "href" in item ? item.href : undefined}
     >

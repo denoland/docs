@@ -5,7 +5,6 @@ import CLI_REFERENCE from "../../runtime/reference/cli/_commands_reference.json"
 import ansiRegex from "npm:ansi-regex";
 import { HeaderAnchor } from "../../_components/HeaderAnchor.tsx";
 
-
 const ANSI_RE = ansiRegex();
 const SUBSEQUENT_ANSI_RE = new RegExp(
   `(?:${ANSI_RE.source})(?:${ANSI_RE.source})`,
@@ -152,7 +151,11 @@ export function renderCommand(
   };
 }
 
-function renderOption(group: string, arg: { help: string, name: string, short: string }, helpers: Lume.Helpers) {
+function renderOption(
+  group: string,
+  arg: { help: string; name: string; short: string },
+  helpers: Lume.Helpers,
+) {
   const id = `${group}-${arg.name}`;
 
   let docsLink = null;

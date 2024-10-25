@@ -179,7 +179,6 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 </div>
               </nav>
             )}
-
           </div>
         </main>
         <aside class="hidden lg:block pb-8 pr-8 col-span-2">
@@ -201,4 +200,3 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
     </>
   );
 }
-
