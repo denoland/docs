@@ -5,6 +5,7 @@ oldUrl:
 - /runtime/manual/basics/modules/import_maps/
 - /runtime/basics/import_maps/
 - /runtime/manual/linking_to_external_code/import_maps
+- /manual/linking_to_external_code/proxies
 ---
 
 You can configure Deno using a `deno.json` file. This file can be used to
@@ -510,3 +511,13 @@ works as well:
 A JSON schema file is available for editors to provide autocompletion. The file
 is versioned and available at:
 https://deno.land/x/deno/cli/schemas/config-file.v1.json
+
+## Proxies
+
+Deno supports proxies for module downloads and the fetch API. Proxy
+configuration is read from
+[environment variables](https://docs.deno.com/runtime/reference/env_variables/#special-environment-variables):
+HTTP_PROXY, HTTPS_PROXY and NO_PROXY.
+
+If you are using Windows - if environment variables are not found Deno falls
+back to reading proxies from the registry.
