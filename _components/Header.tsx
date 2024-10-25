@@ -125,7 +125,7 @@ export default function Header({
 
       {reference &&
         (
-          <nav className="px-4 md:px-6 pt-2 pb-3 text-sm bg-background-primary flex items-center justify-between border-box border-t border-foreground-tertiary z-[1000]">
+          <nav className="px-4 md:px-6 py-3 text-sm bg-background-primary flex items-center justify-between border-box border-t border-foreground-tertiary z-[1000]">
             <ul className="flex">
               <li>
                 <HeaderItem
