@@ -99,7 +99,7 @@ function SidebarSection(
 }
 
 const LINK_CLASS =
-  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-foreground-secondary rounded-md hover:bg-blue-50 ring-1 ring-transparent hover:ring-background-secondary hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 current:font-semibold transition-colors duration-200 ease-in-out select-none";
+  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-foreground-secondary rounded-md ring-1 ring-transparent hover:ring-background-tertiary hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 current:font-semibold transition-colors duration-200 ease-in-out select-none";
 
 function SidebarItem(props: {
   item: string | SidebarDoc_ | SidebarLink_;

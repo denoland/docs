@@ -188,7 +188,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
             class="py-2 sticky overflow-y-auto top-4 h-[calc(100vh-7rem)]"
             id="toc"
           >
-            <ul class="border-l border-background-secondary dark:border-background-tertiary py-2 pl-2 relative">
+            <ul class="border-l border-foreground-tertiary dark:border-background-tertiary py-2 pl-2 relative">
               {(props.toc as TableOfContentsItem_[]).map((item) => (
                 <TableOfContentsItem item={item} />
               ))}
@@ -324,7 +324,7 @@ function Breadcrumbs(props: {
           itemtype="https://schema.org/ListItem"
         >
           <a
-            class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
+            class="block px-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
             itemprop="item"
             href={props.sectionHref}
           >
@@ -334,12 +334,12 @@ function Breadcrumbs(props: {
         </li>
         <li>
           <svg
-            class="size-4 rotate-90"
+            class="size-4 text-foreground-secondary rotate-90"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
             <path
-              fill="rgba(0,0,0,0.5)"
+              fill="currentColor"
               d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
             />
           </svg>
@@ -356,7 +356,7 @@ function Breadcrumbs(props: {
                   <a
                     href={crumb.href}
                     itemprop="item"
-                    class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
+                    class="block px-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
                   >
                     <span itemprop="name">{crumb.label}</span>
                   </a>
@@ -371,12 +371,12 @@ function Breadcrumbs(props: {
             {i < crumbs.length - 1 && (
               <li>
                 <svg
-                  class="size-4 rotate-90"
+                  class="size-4 text-foreground-secondary rotate-90"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    fill="rgba(0,0,0,0.5)"
+                    fill="currentColor"
                     d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
                   >
                   </path>

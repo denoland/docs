@@ -10,7 +10,7 @@ export default function Header({
   const reference = url.startsWith("/api");
   return (
     <header
-      class={`bg-background-primary text-foreground-primary shadow z-30 ${
+      class={`bg-background-primary text-foreground-primary border-b border-foreground-tertiary z-30 ${
         reference ? "" : "sticky top-0 left-0 right-0"
       }`}
     >
@@ -180,7 +180,7 @@ function HeaderItem({
     <a
       class={`${
         firstItem ? "ml-0" : ""
-      } mx-1 px-2 text-md hover:text-primary hover:bg-background-secondary/50 ring-1 ring-transparent hover:ring-secondary-100 hover:rounded transition-colors duration-200 ease-in-out text-nowrap flex items-center ${
+      } mx-1 px-2 text-md hover:bg-background-secondary ring-1 ring-transparent hover:ring-background-tertiary hover:rounded transition-colors duration-200 ease-in-out text-nowrap flex items-center ${
         activeOn && url.startsWith(activeOn)
           ? "text-primary mx-2.5 px-0.5 underline font-semibold underline-offset-[6px] decoration-primary/20"
           : ""
