@@ -2,7 +2,7 @@ const colorThemes = document.querySelectorAll("[data-color-mode]");
 const toggleDarkMode = () => {
   const getCurrentTheme = () => {
     const userPrefersDark = globalThis.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches;
     if (localStorage.denoDocsTheme) return localStorage.denoDocsTheme;
     return userPrefersDark ? "dark" : "light";
@@ -25,7 +25,7 @@ const toggleDarkMode = () => {
 };
 
 const darkModeToggleButtons = document.querySelectorAll(
-  ".dark-mode-toggle.button"
+  ".dark-mode-toggle.button",
 );
 
 darkModeToggleButtons.forEach((button) => {
