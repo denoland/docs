@@ -1,14 +1,21 @@
+const colorThemes = document.querySelectorAll("[data-color-mode]");
 const toggleDarkMode = () => {
-  const colorThemes = document.querySelectorAll("[data-color-mode]");
-  if (localStorage.theme === "light") {
-    localStorage.theme = "dark";
+  const getCurrentTheme = () => {
+    const userPrefersDark = globalThis.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    if (localStorage.denoDocsTheme) return localStorage.denoDocsTheme;
+    return userPrefersDark ? "dark" : "light";
+  };
+  if (getCurrentTheme() === "light") {
+    localStorage.denoDocsTheme = "dark";
     document.documentElement.classList.add("dark");
     document.documentElement.classList.remove("light");
     colorThemes.forEach((el) => {
       el.setAttribute("data-color-mode", "dark");
     });
   } else {
-    localStorage.theme = "light";
+    localStorage.denoDocsTheme = "light";
     document.documentElement.classList.add("light");
     document.documentElement.classList.remove("dark");
     colorThemes.forEach((el) => {
@@ -18,7 +25,7 @@ const toggleDarkMode = () => {
 };
 
 const darkModeToggleButtons = document.querySelectorAll(
-  ".dark-mode-toggle.button",
+  ".dark-mode-toggle.button"
 );
 
 darkModeToggleButtons.forEach((button) => {

@@ -1,6 +1,6 @@
 if (
-  localStorage.theme === "dark" ||
-  (!("theme" in localStorage) &&
+  localStorage.denoDocsTheme === "dark" ||
+  (!("denoDocsTheme" in localStorage) &&
     globalThis.matchMedia("(prefers-color-scheme: dark)").matches)
 ) {
   document.documentElement.classList.add("dark");

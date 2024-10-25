@@ -46,10 +46,10 @@ export default function Layout(props: Lume.Data) {
           {/*js*/ `
           /* Without this, @media theme preference will override manual theme selection, if different. A little janky but works ok for now, especially since it's just the one edge case where a user's global preference doesn't match their chosen docs theme preference */
           window.onload = () => {
-            const colorThemes = document.querySelectorAll(\`[data-color-mode]\`);
+            const colorThemes = document.querySelectorAll('[data-color-mode]');
             const ps = document.querySelectorAll('p');
             colorThemes.forEach((el) => {
-              el.setAttribute('data-color-mode', localStorage.theme);
+              el.setAttribute('data-color-mode', localStorage.denoDocsTheme || 'auto');
             });
           }`}
         </script>
