@@ -293,7 +293,7 @@ dinosaur and a link to go back to the full list.
 First, we'll set up some types for the data we'll be fetching. Create a
 `types.ts` file in the `src` directory and add the following code:
 
-```ts title="types.d.ts"
+```ts title="types.ts"
 type Dinosaur = {
   name: string;
   description: string;
