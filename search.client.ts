@@ -33,7 +33,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     oramaSearchBox.themeConfig = {
       colors: {
-        light: {},
+        light: {
+          "--text-color-primary": "#1f2328",
+          "--text-color-secondary": "#404040",
+          "--text-color-accent": "#3680f6",
+          "--text-color-inactive": "#737373",
+          "--background-color-tertiary": "#e7f1ff",
+          "--border-color-primary": "#e6e6e6",
+          "--border-color-secondary": "#ffffff",
+          "--border-color-accent": "#e7f1ff",
+          "--icon-color-accent": "#3680f6",
+          "--button-text-color-primary": "#e7f1ff",
+          "--button-background-color-primary": "#3680f6",
+          "--chat-button-border-color-gradientThree": "#ffffff",
+          "--chat-button-border-color-gradientFour": "#3680f6",
+          "--chat-button-background-color-gradientOne": "#3680f6",
+        },
       },
     };
     oramaSearchBox.index = {
@@ -83,7 +98,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     oramaSearchButton.themeConfig = {
       colors: {
-        light: {},
+        light: {
+          "--text-color-primary": "#1f2328",
+          "--text-color-secondary": "#404040",
+          "--text-color-accent": "#3680f6",
+          "--text-color-inactive": "#737373",
+          "--background-color-tertiary": "#e7f1ff",
+          "--border-color-primary": "#e6e6e6",
+          "--border-color-secondary": "#ffffff",
+          "--border-color-accent": "#e7f1ff",
+          "--icon-color-accent": "#3680f6",
+          "--button-text-color-primary": "#e7f1ff",
+          "--button-background-color-primary": "#3680f6",
+          "--button-background-color-secondary-hover": "#e7f1ff",
+          "--chat-button-border-color-gradientThree": "#ffffff",
+          "--chat-button-border-color-gradientFour": "#3680f6",
+          "--chat-button-background-color-gradientOne": "#3680f6",
+        },
       },
     };
     oramaSearchButton.innerText = "Search";

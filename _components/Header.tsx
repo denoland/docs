@@ -94,10 +94,10 @@ export default function Header({
             <orama-search-box />
           </div>
           <div class="dark-mode-toggle">
-            <button class="dark-mode-toggle button p-1 rounded bg-background-primary border border-foreground-secondary/20">
+            <button class="dark-mode-toggle button p-1 rounded bg-background-primary ring ring-transparent hover:ring-foreground-tertiary">
               <span class="dark:hidden">
                 <svg
-                  class="fill-foreground-primary w-5 h-5"
+                  class="fill-foreground-primary w-6 h-6"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -107,7 +107,7 @@ export default function Header({
               </span>
               <span class="hidden dark:block">
                 <svg
-                  class="fill-foreground-primary w-5 h-5"
+                  class="fill-foreground-primary w-6 h-6"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
