@@ -113,7 +113,7 @@ export const GET = async (request: NextRequest, { params }: RouteParams) => {
   }
 
   const dinosaurData = data.find((item) =>
-    item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
+    item.name.toLowerCase() === dinosaur.toLowerCase()
   );
 
   return Response.json(dinosaurData ? dinosaurData : "No dinosaur found.");
