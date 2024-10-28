@@ -77,6 +77,8 @@ import express from "express";
 const app = express();
 ```
 
+Note that this will require you to run `deno install`.
+
 Read more about
 [module imports and dependencies](/runtime/fundamentals/modules/)
 
