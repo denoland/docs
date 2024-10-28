@@ -62,7 +62,9 @@ export default function Header({
             name="API reference"
             hideOnMobile
           />
-          <span class="hidden lg:inline-block text-gray-300 mx-2">//</span>
+          <span class="hidden xl:inline-block text-foreground-secondary mx-2">
+            //
+          </span>
           <HeaderItem
             url={url}
             activeOn="/deploy"
