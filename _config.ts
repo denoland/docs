@@ -5,8 +5,9 @@ import prism from "lume/plugins/prism.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
-import tailwindcss from "./plugins/tailwind.ts";
+import postcss from "lume/plugins/postcss.ts";
 
+import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
 
 import "npm:prismjs@1.29.0/components/prism-bash.js";
@@ -103,10 +104,9 @@ site.use(
 site.use(search());
 site.use(jsx());
 
-// Custom plugin that for tailwind + postcss combined
 site.use(
-  tailwindcss({
-    options: tailwindConfig,
+  postcss({
+    plugins: [tw(tailwindConfig)],
   }),
 );
 site.use(
