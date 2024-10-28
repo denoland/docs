@@ -11,24 +11,24 @@ command: fmt
 Deno ships with a built-in code formatter that will auto-format the following
 files:
 
-| File Type  | Extension          | Notes                                                                                 |
-| ---------- | ------------------ | ------------------------------------------------------------------------------------- |
-| JavaScript | `.js`              |                                                                                       |
-| TypeScript | `.ts`              |                                                                                       |
-| JSX        | `.jsx`             |                                                                                       |
-| TSX        | `.tsx`             |                                                                                       |
-| Markdown   | `.md`, `.markdown` |                                                                                       |
-| JSON       | `.json`            |                                                                                       |
-| JSONC      | `.jsonc`           |                                                                                       |
-| CSS        | `.css`             |                                                                                       |
-| HTML       | `.html`            |                                                                                       |
-| YAML       | `.yml`, `.yaml`    |                                                                                       |
-| Sass       | `.sass`            |                                                                                       |
-| SCSS       | `.scss`            |                                                                                       |
-| LESS       | `.less`            |                                                                                       |
-| Astro      | `.astro`           | Requires `--unstable-component` flag or `"unstable": ["fmt-component]` config option. |
-| Svelte     | `.svelte`          | Requires `--unstable-component` flag or `"unstable": ["fmt-component]` config option. |
-| Vue        | `.vue`             | Requires `--unstable-component` flag or `"unstable": ["fmt-component]` config option. |
+| File Type  | Extension          | Notes                                                                                  |
+| ---------- | ------------------ | -------------------------------------------------------------------------------------- |
+| JavaScript | `.js`              |                                                                                        |
+| TypeScript | `.ts`              |                                                                                        |
+| JSX        | `.jsx`             |                                                                                        |
+| TSX        | `.tsx`             |                                                                                        |
+| Markdown   | `.md`, `.markdown` |                                                                                        |
+| JSON       | `.json`            |                                                                                        |
+| JSONC      | `.jsonc`           |                                                                                        |
+| CSS        | `.css`             |                                                                                        |
+| HTML       | `.html`            |                                                                                        |
+| YAML       | `.yml`, `.yaml`    |                                                                                        |
+| Sass       | `.sass`            |                                                                                        |
+| SCSS       | `.scss`            |                                                                                        |
+| LESS       | `.less`            |                                                                                        |
+| Astro      | `.astro`           | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
+| Svelte     | `.svelte`          | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
+| Vue        | `.vue`             | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
 
 :::note
 

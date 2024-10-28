@@ -47,8 +47,8 @@ rules, plugins, and settings to tailor the linting process to your needs.
 
 Formatting is the process of automatically adjusting the layout of your code to
 adhere to a consistent style. Deno’s built-in formatter, `deno fmt`, uses the
-powerful [Prettier](https://prettier.io/) engine to ensure that your code is
-always clean, readable, and consistent.
+powerful [dprint](https://dprint.dev/) engine to ensure that your code is always
+clean, readable, and consistent.
 
 To format your code, simply execute the following command in your terminal:
 
@@ -89,9 +89,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.x
+          deno-version: v2.x
       - run: deno fmt --check
 ```
 

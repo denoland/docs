@@ -31,10 +31,10 @@ addTest ... ok (6ms)
 ok | 1 passed | 0 failed (29ms)
 ```
 
-This subcommand will create two files (`main.ts` and `main_test.ts`). These
-files provide a basic example of how to write a Deno program and how to write
-tests for it. The `main.ts` file exports a `add` function that adds two numbers
-together and the `main_test.ts` file contains a test for this function.
+The `init` subcommand will create two files (`main.ts` and `main_test.ts`).
+These files provide a basic example of how to write a Deno program and how to
+write tests for it. The `main.ts` file exports a `add` function that adds two
+numbers together and the `main_test.ts` file contains a test for this function.
 
 You can also specify an argument to `deno init` to initialize a project in a
 specific directory:
@@ -140,4 +140,31 @@ $ deno task dev
 Task dev deno serve --watch -R main.ts
 Watcher Process started.
 deno serve: Listening on http://0.0.0.0:8000/
+```
+
+## Generate a library project
+
+You can append a `--lib` flag to add extra parameters to your `deno.json`, such
+as "name", "version" and an "exports" fields.
+
+```sh
+$ deno init my_deno_project --lib
+✅ Project initialized
+```
+
+The resulting `deno.json will be as follows:
+
+```jsonc
+{
+  "name": "my_deno_project",
+  "version": "0.1.0",
+  "exports": "./mod.ts",
+  "tasks": {
+    "dev": "deno test --watch mod.ts"
+  },
+  "license": "MIT",
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1"
+  }
+}
 ```

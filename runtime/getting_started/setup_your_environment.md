@@ -74,14 +74,13 @@ integrate to the Deno language server while ALE supports it _out of the box_.
 To use the Deno language server install
 [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) and follow the
 instructions to enable the
-[supplied Deno configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#denols).
+[supplied Deno configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols).
 
-Note that if you also have `tsserver` as an LSP client, you may run into issues
-where both `tsserver` and `denols` are attached to your current buffer. To
-resolve this, make sure to set some unique `root_dir` for both `tsserver` and
-`denols`. You may also need to set `single_file_support` to `false` for
-`tsserver` to prevent it from running in `single file mode`. Here is an example
-of such a configuration:
+Note that if you also have `ts_ls` as an LSP client, you may run into issues
+where both `ts_ls` and `denols` are attached to your current buffer. To resolve
+this, make sure to set some unique `root_dir` for both `ts_ls` and `denols`. You
+may also need to set `single_file_support` to `false` for `ts_ls` to prevent it
+from running in `single file mode`. Here is an example of such a configuration:
 
 ```lua
 local nvim_lsp = require('lspconfig')
@@ -90,7 +89,7 @@ nvim_lsp.denols.setup {
   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
 }
 
-nvim_lsp.tsserver.setup {
+nvim_lsp.ts_ls.setup {
   on_attach = on_attach,
   root_dir = nvim_lsp.util.root_pattern("package.json"),
   single_file_support = false
