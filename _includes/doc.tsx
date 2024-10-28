@@ -14,6 +14,7 @@ import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" wi
   type: "json",
 };
 import ansiRegex from "npm:ansi-regex";
+import Feedback from "../_components/Feedback.tsx";
 
 export const layout = "layout.tsx";
 
@@ -159,6 +160,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 )}
                 {renderedCommand}
                 {props.children}
+              <Feedback />
               </div>
             </article>
             {parentNavigation && (
