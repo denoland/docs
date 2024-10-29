@@ -461,16 +461,15 @@ body:not(:has(.ddoc)) {
     }
 
     > ul {
-      @apply border-l border-foreground-secondary !important;
+      @apply border-l border-foreground-tertiary !important;
 
       > li > a {
-        @apply text-foreground-secondary hover:bg-background-secondary
-          rounded-lg hover:no-underline py-1.5 px-3.5 hover:text-primary
-          !important;
+        @apply text-foreground-primary hover:bg-background-secondary rounded-lg
+          hover:no-underline py-1.5 px-3.5 hover:text-primary !important;
       }
 
       > li > ul > li > a {
-        @apply hover:text-primary !important;
+        @apply text-foreground-secondary hover:text-primary !important;
       }
 
       > ul > li a {
