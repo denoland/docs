@@ -490,7 +490,7 @@ body:not(:has(.ddoc)) {
 
     /* This comes from gfm css, should be replaced with something in our color palette once we establish it. */
     :not(pre) > code {
-      @apply bg-foreground-quaternary !important;
+      @apply bg-foreground-quaternary hover:bg-foreground-tertiary !important;
     }
     & a:not(.no-color) {
       @apply text-primary !important;
