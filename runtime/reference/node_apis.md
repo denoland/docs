@@ -50,7 +50,6 @@ importing them from the relevant `node:` module.
 | [`exports`](https://nodejs.org/api/globals.html#exports)                                                         | ✅                                 |
 | [`fetch`](https://nodejs.org/api/globals.html#fetch)                                                             | ✅                                 |
 | [`File`](https://nodejs.org/api/globals.html#class-file)                                                         | ✅                                 |
-| [`File`](https://nodejs.org/api/globals.html#class-file)                                                         | ✅                                 |
 | [`FormData`](https://nodejs.org/api/globals.html#class-formdata)                                                 | ✅                                 |
 | [`global`](https://nodejs.org/api/globals.html#global)                                                           | ✅                                 |
 | [`Headers`](https://nodejs.org/api/globals.html#class-headers)                                                   | ✅                                 |
