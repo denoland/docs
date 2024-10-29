@@ -1,9 +1,9 @@
 import lume from "lume/mod.ts";
+import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
 import prism from "lume/plugins/prism.ts";
-import search from "lume/plugins/search.ts";
-import esbuild from "lume/plugins/esbuild.ts";
 import redirects from "lume/plugins/redirects.ts";
+import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import postcss from "lume/plugins/postcss.ts";
 
@@ -19,16 +19,17 @@ import "npm:prismjs@1.29.0/components/prism-json5.js";
 
 Prism.languages.jsonc = Prism.languages.json5;
 
-import { full as emoji } from "npm:markdown-it-emoji@3";
+import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
+import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
+import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 import anchor from "npm:markdown-it-anchor@9";
-import relativeLinksPlugin from "./markdown-it/relative-path.ts";
-import replacerPlugin from "./markdown-it/replacer.ts";
+import { full as emoji } from "npm:markdown-it-emoji@3";
 import admonitionPlugin from "./markdown-it/admonition.ts";
 import codeblockCopyPlugin from "./markdown-it/codeblock-copy.ts";
 import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
-import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
-import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
-import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
+import relativeLinksPlugin from "./markdown-it/relative-path.ts";
+import replacerPlugin from "./markdown-it/replacer.ts";
+import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 import {
   deploy as oramaDeploy,
   generateDocumentsForExamples,
@@ -36,7 +37,6 @@ import {
   generateDocumentsForSymbols,
   OramaDocument,
 } from "./orama.ts";
-import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 
 const site = lume(
   {
@@ -62,7 +62,7 @@ const site = lume(
                 `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
               placement: "after",
             }),
-            getTokensText(tokens) {
+            getTokensText(tokens: { type: string; content: string }[]) {
               return tokens
                 .filter((t) => ["text", "code_inline"].includes(t.type))
                 .map((t) => t.content.replaceAll(/ \([0-9/]+?\)/g, ""))

@@ -8,25 +8,89 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   if (oramaSearchBox) {
-    oramaSearchBox.colorScheme = "light";
+    // Get current theme
+    const currentTheme = localStorage.denoDocsTheme ||
+      (globalThis.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light");
+
+    oramaSearchBox.colorScheme = currentTheme;
+
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target instanceof HTMLElement) {
+          const isDark = mutation.target.classList.contains("dark");
+          oramaSearchBox.colorScheme = isDark ? "dark" : "light";
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
     oramaSearchBox.themeConfig = {
       colors: {
         light: {
-          "--button-text-color-primary": "#0B0D11",
-          "--button-background-color-primary": "#32f59a",
-          "--button-background-color-secondary-hover": "#d6ffe1",
-          "--background-color-tertiary": "#f0fff1",
-          "--border-color-accent": "#09dc8b",
-          "--chat-button-background-color-gradientOne": "#31F69A",
-          "--chat-button-background-color-gradientTwo": "#d6ffe1",
-          "--text-color-accent": "#01b780",
-
-          "--chat-button-border-color-gradientOne": "#d6ffe1",
-          "--chat-button-border-color-gradientTwo": "#d6ffe1",
-          "--chat-button-border-color-gradientThree": "#09dc8b",
-          "--chat-button-border-color-gradientFour": "#09dc8b",
-          "--chat-button-border-color-gradientFive": "#d6ffe1",
-          "--chat-button-border-color-gradientSix": "#d6ffe1",
+          "--text-color-primary": "hsl(var(--foreground-primary))",
+          "--text-color-secondary": "hsl(var(--foreground-secondary))",
+          "--text-color-accent": "hsl(var(--primary))",
+          "--text-color-inactive": "hsl(var(--foreground-secondary))",
+          "--background-color-primary": "#ffffff",
+          "--background-color-secondary": "#ffffff",
+          "--background-color-tertiary": "hsl(var(--background-tertiary))",
+          "--border-color-primary": "hsl(var(--foreground-tertiary))",
+          "--border-color-secondary": "#ffffff",
+          "--border-color-tertiary": "hsl(var(--foreground-tertiary))",
+          "--border-color-accent": "hsl(var(--background-tertiary))",
+          "--icon-color-accent": "hsl(var(--primary))",
+          "--button-text-color-primary": "hsl(var(--background-tertiary))",
+          "--button-background-color-primary": "hsl(var(--primary))",
+          "--button-background-color-secondary": "#ffffff",
+          "--button-background-color-secondary-hover":
+            "hsl(var(--background-tertiary))",
+          "--button-border-color-secondary": "hsl(var(--foreground-tertiary))",
+          "--chat-button-border-color-gradientOne": "#ffffff",
+          "--chat-button-border-color-gradientTwo": "#ffffff",
+          "--chat-button-border-color-gradientThree": "#ffffff",
+          "--chat-button-border-color-gradientFour": "hsl(var(--primary))",
+          "--chat-button-border-color-gradientFive": "#ffffff",
+          "--chat-button-border-color-gradientSix": "#ffffff",
+          "--chat-button-background-color-gradientOne": "hsl(var(--primary))",
+        },
+        dark: {
+          "--text-color-primary": "hsl(var(--foreground-primary))",
+          "--text-color-secondary": "hsl(var(--foreground-primary))",
+          "--text-color-accent": "hsl(var(--primary))",
+          "--text-color-inactive": "hsl(var(--foreground-secondary))",
+          "--background-color-primary": "hsl(var(--background-primary))",
+          "--background-color-secondary": "hsl(var(--background-primary))",
+          "--background-color-tertiary": "hsl(var(--background-primary))",
+          "--border-color-primary": "hsl(var(--background-tertiary))",
+          "--border-color-secondary": "hsl(var(--background-tertiary))",
+          "--border-color-tertiary": "hsl(var(--background-tertiary))",
+          "--border-color-accent": "hsl(var(--primary))",
+          "--icon-color-accent": "hsl(var(--primary))",
+          "--button-text-color-primary": "hsl(var(--foreground-primary))",
+          "--button-background-color-primary": "hsl(var(--primary))",
+          "--button-background-color-secondary":
+            "hsl(var(--background-secondary))",
+          "--button-background-color-secondary-hover":
+            "hsl(var(--background-tertiary))",
+          "--button-border-color-secondary": "hsl(var(--background-tertiary))",
+          "--chat-button-border-color-gradientOne":
+            "hsl(var(--background-tertiary))",
+          "--chat-button-border-color-gradientTwo":
+            "hsl(var(--background-tertiary))",
+          "--chat-button-border-color-gradientThree": "hsl(var(--primary))",
+          "--chat-button-border-color-gradientFour": "hsl(var(--primary))",
+          "--chat-button-border-color-gradientFive":
+            "hsl(var(--background-tertiary))",
+          "--chat-button-border-color-gradientSix":
+            "hsl(var(--background-tertiary))",
+          "--chat-button-background-color-gradientOne": "hsl(var(--primary))",
         },
       },
     };
@@ -52,12 +116,89 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelector("orama-search-button");
 
   if (oramaSearchButton) {
-    oramaSearchButton.colorScheme = "light";
+    // Get current theme
+    const currentTheme = localStorage.denoDocsTheme ||
+      (globalThis.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light");
+
+    oramaSearchButton.colorScheme = currentTheme;
+
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target instanceof HTMLElement) {
+          const isDark = mutation.target.classList.contains("dark");
+          oramaSearchButton.colorScheme = isDark ? "dark" : "light";
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
     oramaSearchButton.themeConfig = {
       colors: {
         light: {
-          "--button-background-color-secondary-hover": "#f6f7f9",
-          "--background-color-tertiary": "#f0fff1",
+          "--text-color-primary": "hsl(var(--foreground-primary))",
+          "--text-color-secondary": "hsl(var(--foreground-secondary))",
+          "--text-color-accent": "hsl(var(--primary))",
+          "--text-color-inactive": "hsl(var(--foreground-secondary))",
+          "--background-color-primary": "#ffffff",
+          "--background-color-secondary": "#ffffff",
+          "--background-color-tertiary": "hsl(var(--background-tertiary))",
+          "--border-color-primary": "hsl(var(--foreground-tertiary))",
+          "--border-color-secondary": "#ffffff",
+          "--border-color-tertiary": "hsl(var(--foreground-tertiary))",
+          "--border-color-accent": "hsl(var(--background-tertiary))",
+          "--icon-color-accent": "hsl(var(--primary))",
+          "--button-text-color-primary": "hsl(var(--background-tertiary))",
+          "--button-background-color-primary": "hsl(var(--primary))",
+          "--button-background-color-secondary": "#ffffff",
+          "--button-background-color-secondary-hover":
+            "hsl(var(--background-tertiary))",
+          "--button-border-color-secondary": "hsl(var(--foreground-tertiary))",
+          "--chat-button-border-color-gradientOne": "#ffffff",
+          "--chat-button-border-color-gradientTwo": "#ffffff",
+          "--chat-button-border-color-gradientThree": "#ffffff",
+          "--chat-button-border-color-gradientFour": "hsl(var(--primary))",
+          "--chat-button-border-color-gradientFive": "#ffffff",
+          "--chat-button-border-color-gradientSix": "#ffffff",
+          "--chat-button-background-color-gradientOne": "hsl(var(--primary))",
+        },
+        dark: {
+          "--text-color-primary": "hsl(var(--foreground-primary))",
+          "--text-color-secondary": "hsl(var(--foreground-primary))",
+          "--text-color-accent": "hsl(var(--primary))",
+          "--text-color-inactive": "hsl(var(--foreground-secondary))",
+          "--background-color-primary": "hsl(var(--background-primary))",
+          "--background-color-secondary": "hsl(var(--background-primary))",
+          "--background-color-tertiary": "hsl(var(--background-primary))",
+          "--border-color-primary": "hsl(var(--background-tertiary))",
+          "--border-color-secondary": "hsl(var(--background-tertiary))",
+          "--border-color-tertiary": "hsl(var(--background-tertiary))",
+          "--border-color-accent": "hsl(var(--primary))",
+          "--icon-color-accent": "hsl(var(--primary))",
+          "--button-text-color-primary": "hsl(var(--foreground-primary))",
+          "--button-background-color-primary": "hsl(var(--primary))",
+          "--button-background-color-secondary":
+            "hsl(var(--background-secondary))",
+          "--button-background-color-secondary-hover":
+            "hsl(var(--background-tertiary))",
+          "--button-border-color-secondary": "hsl(var(--background-tertiary))",
+          "--chat-button-border-color-gradientOne":
+            "hsl(var(--background-tertiary))",
+          "--chat-button-border-color-gradientTwo":
+            "hsl(var(--background-tertiary))",
+          "--chat-button-border-color-gradientThree": "hsl(var(--primary))",
+          "--chat-button-border-color-gradientFour": "hsl(var(--primary))",
+          "--chat-button-border-color-gradientFive":
+            "hsl(var(--background-tertiary))",
+          "--chat-button-border-color-gradientSix":
+            "hsl(var(--background-tertiary))",
+          "--chat-button-background-color-gradientOne": "hsl(var(--primary))",
         },
       },
     };
