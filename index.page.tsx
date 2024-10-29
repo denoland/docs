@@ -439,7 +439,7 @@ export default function () {
 
           <div class="flex flex-col gap-8">
             <div>
-              <h2 class="text-3xl md:text-4xl font-semibold underline underline-offset-8 decoration-purple-600 mb-8">
+              <h2 class="text-3xl md:text-4xl font-semibold underline underline-offset-8 decoration-purple-600 dark:decoration-purple-300 mb-8">
                 Help
               </h2>
               <p class="max-w-[75ch]">
