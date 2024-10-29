@@ -22,6 +22,7 @@ export default {
         "foreground-primary": "hsla(var(--foreground-primary))",
         "foreground-secondary": "hsla(var(--foreground-secondary))",
         "foreground-tertiary": "hsla(var(--foreground-tertiary))",
+        "foreground-quaternary": "hsla(var(--foreground-quaternary))",
         "runtime-background": "hsla(var(--runtime-background))",
         "runtime-foreground": "hsla(var(--runtime-foreground))",
 

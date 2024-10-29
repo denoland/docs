@@ -5,11 +5,12 @@
 /* Light and dark theme variables */
 .light {
   --background-primary: 215deg, 81%, 100%;
-  --background-secondary: 213deg 100% 95%;
-  --background-tertiary: 213deg 100% 84%; /* Not actually used anywhere yet */
+  --background-secondary: 213deg, 100% 95%;
+  --background-tertiary: 213deg, 100% 84%;
   --foreground-primary: 0deg, 0%, 25%;
   --foreground-secondary: 0deg, 0%, 42%;
   --foreground-tertiary: 0deg, 0%, 90%;
+  --foreground-quaternary: 0deg, 0%, 95%;
   --runtime-background: 124deg, 100%, 97.1%;
   --runtime-foreground: 184deg, 100%, 10%;
   --primary: 217deg, 91%, 59%;
@@ -25,6 +26,7 @@
   --foreground-primary: 215deg, 17%, 99%;
   --foreground-secondary: 215deg, 17%, 61%;
   --foreground-tertiary: 215deg, 17%, 20%;
+  --foreground-quaternary: 215deg, 17%, 10%;
   --runtime-background: 124deg, 100%, 3%;
   --runtime-foreground: 184deg, 100%, 90%;
   --note: 224deg, 64.3%, 82.9%;
@@ -488,11 +490,14 @@ body:not(:has(.ddoc)) {
 
     /* This comes from gfm css, should be replaced with something in our color palette once we establish it. */
     :not(pre) > code {
-      background-color: var(--color-neutral-muted) !important;
+      @apply bg-foreground-quaternary !important;
+    }
+    & a:not(.no-color) {
+      @apply text-primary !important;
     }
   }
   .markdown_summary :not(pre) > code {
-    background-color: var(--color-neutral-muted) !important;
+    background-color: var(--foreground-tertiary) !important;
   }
   .markdown_summary p {
     @apply text-foreground-secondary;
