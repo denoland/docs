@@ -10,10 +10,14 @@ import postcss from "lume/plugins/postcss.ts";
 import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
 
+import Prism from "npm:prismjs@1.29.0";
 import "npm:prismjs@1.29.0/components/prism-typescript.js";
 import "npm:prismjs@1.29.0/components/prism-diff.js";
 import "npm:prismjs@1.29.0/components/prism-json.js";
 import "npm:prismjs@1.29.0/components/prism-bash.js";
+import "npm:prismjs@1.29.0/components/prism-json5.js";
+
+Prism.languages.jsonc = Prism.languages.json5;
 
 import { full as emoji } from "npm:markdown-it-emoji@3";
 import anchor from "npm:markdown-it-anchor@9";
