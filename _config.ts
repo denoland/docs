@@ -40,7 +40,9 @@ import {
 } from "./orama.ts";
 
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
-import redirectsMiddleware, { toFileAndInMemory } from "./middleware/redirects.ts";
+import redirectsMiddleware, {
+  toFileAndInMemory,
+} from "./middleware/redirects.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import createGAMiddleware from "./middleware/googleAnalytics.ts";
 
@@ -52,8 +54,10 @@ const site = lume(
       middlewares: [
         redirectsMiddleware,
         createRoutingMiddleware(),
-        createGAMiddleware({ addr: { transport: "tcp", hostname: "localhost", port: 3000 } }),
-        apiDocumentContentTypeMiddleware
+        createGAMiddleware({
+          addr: { transport: "tcp", hostname: "localhost", port: 3000 },
+        }),
+        apiDocumentContentTypeMiddleware,
       ],
     },
   },
