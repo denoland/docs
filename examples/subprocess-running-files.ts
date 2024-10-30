@@ -17,35 +17,35 @@ import { parseArgs } from "jsr:@std/cli";
 import { expandGlob } from "jsr:@std/fs";
 
 const flags = parseArgs(Deno.args, {
-	string: ["file"],
-	default: {
-		file: "",
-	},
+  string: ["file"],
+  default: {
+    file: "",
+  },
 });
 
 if (!flags.file) {
-	console.error("No file provided");
-	Deno.exit(1);
+  console.error("No file provided");
+  Deno.exit(1);
 }
 
 // Use the expandGlob function to find all files that match the provided
 // file name.
 const FilesList = await Array.fromAsync(
-	expandGlob(`**/*${flags.file}*`, { root: "." }),
+  expandGlob(`**/*${flags.file}*`, { root: "." }),
 );
 
 const files = FilesList.filter((files) => files.name.includes(flags.file));
 
 // If no files are found, exit with an error.
 if (files.length === 0) {
-	console.error("No files found");
-	Deno.exit(1);
+  console.error("No files found");
+  Deno.exit(1);
 }
 
 // If multiple files are found, exit with an error.
 if (files.length > 1) {
-	console.error("Multiple files found");
-	Deno.exit(1);
+  console.error("Multiple files found");
+  Deno.exit(1);
 }
 
 const file = files[0];
@@ -53,16 +53,16 @@ const file = files[0];
 // Use the Deno.Command class to create a new command that will run the
 // specified file.
 const command = new Deno.Command(Deno.execPath(), {
-	args: [file?.path],
+  args: [file?.path],
 });
 
 // Try to spawn the command and catch any errors that may occur.
 // Wait for the subprocess to finish and log the exit code.
 try {
-	const child = command.spawn();
+  const child = command.spawn();
 
-	child.ref();
+  child.ref();
 } catch (error) {
-	console.error("Error while running the file: ", error);
-	Deno.exit(4);
+  console.error("Error while running the file: ", error);
+  Deno.exit(4);
 }
