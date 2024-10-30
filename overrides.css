@@ -4,12 +4,20 @@
   @apply max-w-[75ch] !important;
 }
 
+.ddoc .markdown_summary {
+  @apply text-foreground-secondary !important;
+}
+
 .ddoc .namespaceSection {
   display: block !important;
 }
 
 .ddoc .namespaceSection .namespaceItem {
-  @apply min-h-0 mb-2 !important;
+  @apply min-h-0 mb-3 !important;
+}
+
+.ddoc .namespaceSection .namespaceItem .namespaceItemContent > div {
+  @apply text-foreground-secondary !important;
 }
 
 @media (max-width: 768px) {
