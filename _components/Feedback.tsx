@@ -1,11 +1,9 @@
 export default function Feedback() {
     return (
         <section class="mt-4">
-            <h2>Help and Support</h2>
+            <h2>Help us make these docs great!</h2>
             <form class="" aria-live="polite">
-                <h3 id="survey-title" class="f4 mb-3">
-                    Did you find what you needed?
-                </h3>
+                <h3 class="f4 mb-3">Did you find what you needed?</h3>
                 <input type="text" class="" name="survey-token" value="" />
                 <div class="" role="radiogroup" aria-labelledby="survey-title">
                     <input

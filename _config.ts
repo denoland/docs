@@ -31,14 +31,20 @@ import {
   generateDocumentsForSymbols,
   OramaDocument,
 } from "./orama.ts";
-import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
+import { apiDocumentContentTypeMiddleware } from "./middleware/apiDocContentType.ts";
+import redirectsMiddleware from "./middleware/redirects.ts";
+import feedbackApiMiddleware from "./middleware/feedbackApi.ts";
 
 const site = lume(
   {
     location: new URL("https://docs.deno.com"),
     caseSensitiveUrls: true,
     server: {
-      middlewares: [apiDocumentContentTypeMiddleware],
+      middlewares: [
+        redirectsMiddleware,
+        feedbackApiMiddleware,
+        apiDocumentContentTypeMiddleware
+      ],
     },
   },
   {
@@ -92,7 +98,7 @@ site.copy("deno.json");
 site.copy("go.json");
 site.copy("oldurls.json");
 site.copy("server.ts");
-site.copy("middleware.ts");
+site.copy("middleware");
 site.copy("examples");
 
 site.use(
