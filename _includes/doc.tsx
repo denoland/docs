@@ -1,4 +1,9 @@
 import Searcher from "lume/core/searcher.ts";
+import ansiRegex from "npm:ansi-regex";
+import Logo from "../_components/Logo.tsx";
+import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
+  type: "json",
+};
 import {
   BreadcrumbItem,
   isSidebarCategory,
@@ -10,6 +15,7 @@ import {
   SidebarLink as SidebarLink_,
   TableOfContentsItem as TableOfContentsItem_,
 } from "../types.ts";
+
 import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
   type: "json",
 };
@@ -71,21 +77,13 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   return (
     <>
       <aside
-        class="flex flex-col absolute top-0 lg:top-16 bottom-0 -left-74 lg:left-0 sidebar-open:left-0 w-74 border-r border-gray-200 bg-white z-50 lg:z-0 transition-all"
+        class="flex flex-col absolute top-0 xl:top-16 bottom-0 -translate-x-74 xl:left-0 sidebar-open:translate-x-0 w-74 border-r border-foreground-tertiary bg-background-primary z-50 xl:z-0 xl:translate-x-0 transition-transform"
         id="sidebar"
         data-open="false"
       >
-        <div class="lg:hidden p-4 shadow-sm flex justify-between h-16">
+        <div class="xl:hidden p-4 shadow-sm flex justify-between h-16">
           <a class="flex items-center gap-3 mr-6" href="/">
-            <img
-              class="block size-6"
-              src="/img/logo.svg"
-              alt=""
-              aria-hidden="true"
-            />
-            <b class="text-xl">
-              <span class="sr-only">Deno</span> Docs
-            </b>
+            <Logo />
           </a>
           <button
             type="button"
@@ -96,7 +94,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
               viewBox="0 0 15 15"
               width="16"
               height="16"
-              class="text-gray-600"
+              class="text-foreground-secondary"
             >
               <g stroke="currentColor" stroke-width="1.2">
                 <path d="M.75.75l13.5 13.5M14.25.75L.75 14.25"></path>
@@ -112,18 +110,18 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         />
       </aside>
       <div
-        class="absolute inset-0 backdrop-brightness-50 z-40 hidden sidebar-open:block sidebar-open:lg:hidden"
+        class="absolute inset-0 backdrop-brightness-50 z-40 hidden sidebar-open:block sidebar-open:xl:hidden"
         id="sidebar-cover"
         data-open="false"
       >
       </div>
       <div
-        class="absolute top-16 bottom-0 left-0 right-0 lg:left-74 overflow-y-auto lg:grid lg:grid-cols-7 lg:gap-8 max-w-screen-2xl mx-auto"
+        class="absolute top-16 bottom-0 left-0 right-0 xl:left-74 overflow-y-auto xl:grid xl:grid-cols-7 xl:gap-8 max-w-screen-2xl mx-auto"
         style={{ scrollbarGutter: "stable" }}
       >
         <main
           id="content"
-          class="mx-auto max-w-screen-xl w-full pt-2 pb-8 flex flex-grow lg:col-span-5"
+          class="mx-auto max-w-screen-xl w-full pt-2 pb-8 flex flex-grow xl:col-span-5"
         >
           <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full">
             <article class="max-w-[66ch] mx-auto">
@@ -135,7 +133,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 sectionHref={props.sectionHref!}
               />
               {props.toc && props.toc.length > 0 && (
-                <details class="block lg:hidden my-4 bg-gray-100 rounded-md group">
+                <details class="block xl:hidden my-4 bg-background-secondary rounded-md group">
                   <summary class="px-4 py-2 group-open:border-b border-gray-300">
                     On this page
                   </summary>
@@ -146,7 +144,12 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                   </ul>
                 </details>
               )}
-              <div class="markdown-body mt-4">
+              <div
+                data-color-mode="auto"
+                data-light-theme="light"
+                data-dark-theme="dark"
+                class="markdown-body mt-4 rounded-lg"
+              >
                 <h1
                   dangerouslySetInnerHTML={{
                     __html: helpers.md(props.title!, true),
@@ -187,19 +190,19 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
             )}
           </div>
         </main>
-        <aside class="hidden lg:block pb-8 pr-8 col-span-2">
+        <aside class="hidden xl:block pb-8 pr-8 col-span-2">
           <div
             class="py-2 sticky overflow-y-auto top-4 h-[calc(100vh-7rem)]"
             id="toc"
           >
-            <ul class="border-l border-gray-200 py-2 pl-2 relative">
+            <ul class="border-l border-foreground-tertiary dark:border-background-tertiary py-2 pl-2 relative">
               {(props.toc as TableOfContentsItem_[]).map((item) => (
                 <TableOfContentsItem item={item} />
               ))}
             </ul>
           </div>
         </aside>
-        <div class="lg:col-span-full">
+        <div class="xl:col-span-full">
           <props.comp.Footer />
         </div>
       </div>
@@ -240,10 +243,10 @@ function NavigationButton(props: {
 
   return (
     <a
-      className={`flex flex-col py-3 px-6 ${alignmentClass} border border-gray-000 hover:border-blue-700 hover:bg-blue-50/10 transition-colors duration-300 transition-timing-function cubic-bezier(0.4, 0, 0.2, 1) rounded`}
+      className={`flex flex-col py-3 px-6 ${alignmentClass} border border-foreground-secondary/20 hover:border-blue-700 hover:bg-blue-50/10 transition-colors duration-300 transition-timing-function cubic-bezier(0.4, 0, 0.2, 1) rounded`}
       href={"id" in item ? item.id : "href" in item ? item.href : undefined}
     >
-      <span className="text-sm text-gray-2">{directionText}</span>
+      <span className="text-sm text-foreground-secondary">{directionText}</span>
       <div className="flex flex-row max-w-full items-center text-blue-500 gap-2">
         {props.direction === "prev" && <>&laquo;</>}
         <span className="font-semibold flex-shrink truncate">{item.label}</span>
@@ -318,7 +321,7 @@ function Breadcrumbs(props: {
   return (
     <nav class="mb-4">
       <ul
-        class="flex flex-wrap text-gray-700 items-center -ml-3"
+        class="flex flex-wrap text-foreground-secondary items-center -ml-3"
         itemscope
         itemtype="https://schema.org/BreadcrumbList"
       >
@@ -328,7 +331,7 @@ function Breadcrumbs(props: {
           itemtype="https://schema.org/ListItem"
         >
           <a
-            class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 rounded transition duration-100 text-sm"
+            class="block px-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
             itemprop="item"
             href={props.sectionHref}
           >
@@ -338,12 +341,12 @@ function Breadcrumbs(props: {
         </li>
         <li>
           <svg
-            class="size-4 rotate-90"
+            class="size-4 text-foreground-secondary rotate-90"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
             <path
-              fill="rgba(0,0,0,0.5)"
+              fill="currentColor"
               d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
             />
           </svg>
@@ -360,7 +363,7 @@ function Breadcrumbs(props: {
                   <a
                     href={crumb.href}
                     itemprop="item"
-                    class="block px-3 py-1.5 underline underline-offset-4 decoration-gray-300 hover:decoration-blue-950 hover:text-blue-950 hover:underline-medium hover:bg-blue-50 rounded transition duration-100 text-sm"
+                    class="block px-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
                   >
                     <span itemprop="name">{crumb.label}</span>
                   </a>
@@ -375,12 +378,12 @@ function Breadcrumbs(props: {
             {i < crumbs.length - 1 && (
               <li>
                 <svg
-                  class="size-4 rotate-90"
+                  class="size-4 text-foreground-secondary rotate-90"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
                   <path
-                    fill="rgba(0,0,0,0.5)"
+                    fill="currentColor"
                     d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
                   >
                   </path>
@@ -399,7 +402,7 @@ function TableOfContentsItem(props: { item: TableOfContentsItem_ }) {
     <li class="m-2 leading-4">
       <a
         href={`#${props.item.slug}`}
-        class="text-[13px] text-gray-600 hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
+        class="text-[13px] text-foreground-secondary hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
       >
         {props.item.text.replaceAll(/ \([0-9/]+?\)/g, "")}
       </a>
@@ -419,7 +422,7 @@ function TableOfContentsItemMobile(props: { item: TableOfContentsItem_ }) {
     <li class="my-1.5 mx-3">
       <a
         href={`#${props.item.slug}`}
-        class="text-sm text-gray-600 hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
+        class="text-sm text-foreground-secondary hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
       >
         {props.item.text.replaceAll(/ \([0-9/]+?\)/g, "")}
       </a>
@@ -535,9 +538,9 @@ function renderCommand(
 
   const rendered = (
     <div>
-      <div class="p-4 bg-stone-100 rounded border border-gray-300 mt-6 mb-6 relative">
-        <h3 class="!text-xs !m-0 -top-2.5 bg-white border border-gray-600/25 px-2 py-0.5 rounded absolute !font-normal">
-          Command-line Usage
+      <div class="p-4 bg-stone-100 dark:bg-transparent rounded border border-gray-300 dark:border-background-tertiary mt-6 mb-6 relative">
+        <h3 class="!text-xs !m-0 -top-2.5 bg-background-primary border border-gray-600/25 px-2 py-0.5 rounded absolute !font-normal">
+          Command line usage
         </h3>
         <div>
           <pre class="!mb-0 !px-3 !py-2">

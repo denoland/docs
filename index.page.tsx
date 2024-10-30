@@ -79,7 +79,7 @@ export default function () {
         {/* Main content  */}
         <div class="flex flex-col gap-8 md:gap-16">
           {/* Temporary banner  */}
-          <div class="flex flex-col gap-4 p-4 bg-runtime-50 border-l-4 border-runtime-500">
+          <div class="flex flex-col gap-4 p-4 bg-runtime-background dark:bg-background-secondary border-l-4 text-runtime-foreground border-runtime-500">
             <p class="text-lg">
               <strong>Deno 2.0</strong> is out now! Learn about{"  "}
               <a
@@ -439,7 +439,7 @@ export default function () {
 
           <div class="flex flex-col gap-8">
             <div>
-              <h2 class="text-3xl md:text-4xl font-semibold underline underline-offset-8 decoration-purple-600 mb-8">
+              <h2 class="text-3xl md:text-4xl font-semibold underline underline-offset-8 decoration-purple-600 dark:decoration-purple-300 mb-8">
                 Help
               </h2>
               <p class="max-w-[75ch]">

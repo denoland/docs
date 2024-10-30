@@ -57,7 +57,7 @@ function SidebarSection(
             <a href={headingLink}>
               <h2
                 id={categoryTitle}
-                class="border-b border-gray-200 pt-2 pb-1.5 -mx-5 px-8 mt-4 mb-2 text-sm font-semibold hover:bg-blue-50 current:bg-blue-50 current:text-blue-500 text-gray-3 capitalize"
+                class="border-b border-foreground-tertiary pt-2 pb-1.5 -mx-5 px-8 mt-4 mb-2 text-sm font-semibold hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 text-foreground-primary capitalize"
                 aria-current={props.url === headingLink ? "page" : undefined}
               >
                 {props.section.title}
@@ -67,7 +67,7 @@ function SidebarSection(
           : (
             <h2
               id={categoryTitle}
-              class="border-b border-gray-200 pt-2 pb-0.5 -mx-5 px-8 mt-4 mb-3 text-sm font-semibold text-gray-3 capitalize"
+              class="border-b border-foreground-tertiary pt-2 pb-0.5 -mx-5 px-8 mt-4 mb-3 text-sm font-semibold text-foreground-primary capitalize"
             >
               {props.section.title}
             </h2>
@@ -99,7 +99,7 @@ function SidebarSection(
 }
 
 const LINK_CLASS =
-  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-gray-500 rounded-md hover:bg-blue-50 ring-1 ring-transparent hover:ring-blue-100 current:bg-blue-50 current:text-blue-500 current:font-semibold transition-colors duration-200 ease-in-out select-none";
+  "block px-3 py-1.5 text-[.8125rem] leading-4 font-normal text-foreground-secondary rounded-md ring-1 ring-transparent hover:ring-background-tertiary hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 current:font-semibold transition-colors duration-200 ease-in-out select-none";
 
 function SidebarItem(props: {
   item: string | SidebarDoc_ | SidebarLink_;
@@ -156,7 +156,7 @@ function SidebarCategory(props: {
       >
         {props.item.label}
         <svg
-          class="transition duration-300 size-5"
+          class="transition duration-300 text-foreground-secondary size-4"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           style={{
@@ -164,7 +164,7 @@ function SidebarCategory(props: {
           }}
         >
           <path
-            fill="rgba(0,0,0,0.5)"
+            fill="currentColor"
             d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
           >
           </path>
