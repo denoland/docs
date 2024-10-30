@@ -16,10 +16,6 @@ import {
   TableOfContentsItem as TableOfContentsItem_,
 } from "../types.ts";
 
-import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
-  type: "json",
-};
-import ansiRegex from "npm:ansi-regex";
 import Feedback from "../_components/Feedback.tsx";
 
 export const layout = "layout.tsx";
