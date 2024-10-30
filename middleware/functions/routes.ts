@@ -3,6 +3,6 @@ import healthRequestHandler from "./health.ts";
 import feedbackRequestHandler from "./feedback.ts";
 
 export default {
-    "/_api/health": healthRequestHandler,
-    "/_api/send-feedback": feedbackRequestHandler
+  "/_api/health": healthRequestHandler,
+  "/_api/send-feedback": feedbackRequestHandler,
 } satisfies Record<string, RequestHandler>;

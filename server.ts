@@ -6,7 +6,7 @@ import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware from "./middleware/redirects.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 
-export const server = new Server({ root: ".", });
+export const server = new Server({ root: "." });
 
 server.use(redirectsMiddleware);
 server.use(createRoutingMiddleware());

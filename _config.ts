@@ -50,7 +50,7 @@ const site = lume(
       middlewares: [
         redirectsMiddleware,
         feedbackApiMiddleware,
-        apiDocumentContentTypeMiddleware
+        apiDocumentContentTypeMiddleware,
       ],
     },
   },

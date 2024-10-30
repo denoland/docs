@@ -31,8 +31,8 @@
     "jsr:@std/fs@~0.229.3": "0.229.3",
     "jsr:@std/html@1.0.0": "1.0.0",
     "jsr:@std/http@1.0.4": "1.0.4",
-    "jsr:@std/internal@^1.0.4": "1.0.4",
     "jsr:@std/http@1.0.7": "1.0.7",
+    "jsr:@std/internal@^1.0.4": "1.0.4",
     "jsr:@std/io@~0.224.6": "0.224.9",
     "jsr:@std/io@~0.224.9": "0.224.9",
     "jsr:@std/json@1": "1.0.0",
@@ -2418,7 +2418,6 @@
       "jsr:@std/assert@^1.0.6",
       "jsr:@std/dotenv@~0.225.2",
       "jsr:@std/fs@~0.229.3",
-      "npm:autoprefixer@^10.4.20",
       "npm:googleapis@144",
       "npm:postcss@^8.4.41",
       "npm:tailwindcss@^3.4.9"

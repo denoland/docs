@@ -163,7 +163,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 )}
                 {renderedCommand}
                 {props.children}
-              <Feedback />
+                <Feedback />
               </div>
             </article>
             {parentNavigation && (
