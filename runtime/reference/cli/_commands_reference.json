@@ -1730,6 +1730,15 @@
           "usage": "[file]..."
         },
         {
+          "name": "frozen",
+          "short": null,
+          "long": "frozen",
+          "required": false,
+          "help": "Error out if lockfile is out of date",
+          "help_heading": "Dependency management options",
+          "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
           "name": "allow-import",
           "short": "I",
           "long": "allow-import",
