@@ -8,6 +8,10 @@
   display: block !important;
 }
 
+.ddoc .namespaceSection .namespaceItem {
+  @apply min-h-0 mb-2 !important;
+}
+
 @media (max-width: 768px) {
   .ddoc {
     @apply px-0 !important;
