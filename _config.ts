@@ -1,3 +1,5 @@
+import "@std/dotenv/load";
+
 import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
@@ -38,9 +40,12 @@ import {
   OramaDocument,
 } from "./orama.ts";
 
-import { apiDocumentContentTypeMiddleware } from "./middleware/apiDocContentType.ts";
-import redirectsMiddleware from "./middleware/redirects.ts";
-import feedbackApiMiddleware from "./middleware/feedbackApi.ts";
+import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
+import redirectsMiddleware, {
+  toFileAndInMemory,
+} from "./middleware/redirects.ts";
+import createRoutingMiddleware from "./middleware/functionRoutes.ts";
+import createGAMiddleware from "./middleware/googleAnalytics.ts";
 
 const site = lume(
   {
@@ -49,7 +54,10 @@ const site = lume(
     server: {
       middlewares: [
         redirectsMiddleware,
-        feedbackApiMiddleware,
+        createRoutingMiddleware(),
+        createGAMiddleware({
+          addr: { transport: "tcp", hostname: "localhost", port: 3000 },
+        }),
         apiDocumentContentTypeMiddleware,
       ],
     },
@@ -107,6 +115,7 @@ site.copy("oldurls.json");
 site.copy("server.ts");
 site.copy("middleware");
 site.copy("examples");
+site.copy(".env");
 
 site.use(
   redirects({
