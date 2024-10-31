@@ -9,8 +9,8 @@
  * It demonstrates the CRUD(Create, Read, Update and Delete) operations on file-based SQLite Database using HTTP methods (Get, Post, Put, Delete, Options)
  */
 
-import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
-import { Database } from "jsr:@db/sqlite@0.11";
+import { Application, Router } from "jsr:@oak/oak";
+import { Database } from "jsr:@db/sqlite";
 
 // Open a database from file, creates if doesn't exist. here the 'people.db' is a file-based database
 const peopleDb = new Database("people.db");
@@ -27,13 +27,15 @@ const router = new Router();
 const PORT = "8369";
 // Create person record into people database
 router.post("/people", async (ctx) => {
-  const { name, age } = await (await ctx.request.body("json")).value;
+  const { name, age } = await ctx.request.body.json();
   const result = await peopleDb.prepare(
     "INSERT INTO people (name, age) VALUES (?,?)",
   )
     .run(name, age);
+  // Get the last inserted row ID
+  const lastInsertRowId = await peopleDb.lastInsertRowId;
   ctx.response.status = 201;
-  ctx.response.body = { id: result.lastInsertRowId, name, age };
+  ctx.response.body = { id: lastInsertRowId, name, age };
 });
 
 // Read all records from people database
@@ -45,7 +47,7 @@ router.get("/people", async (ctx) => {
 // Updates person record in people database (name value is optional)
 router.put("/people/:id", async (ctx) => {
   const id = ctx.params.id;
-  const { name, age } = await (await ctx.request.body("json")).value;
+  const { name, age } = await ctx.request.body.json();
   let result = 0;
   if (name) {
     result = await peopleDb.prepare(
