@@ -128,7 +128,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
               />
               {props.toc && props.toc.length > 0 && (
                 <details class="block xl:hidden my-4 bg-background-secondary rounded-md group">
-                  <summary class="px-4 py-2 group-open:border-b border-gray-300">
+                  <summary class="px-4 py-2 group-open:border-b border-foreground-tertiary">
                     On this page
                   </summary>
                   <ul class="pl-1 py-1.5">
