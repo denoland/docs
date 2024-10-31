@@ -1,7 +1,5 @@
 export const layout = "raw.tsx";
 export const url = "/";
-export const title =
-  "Deno: the easiest, most secure JavaScript runtime | Deno Docs";
 
 export const sidebar = [
   {
