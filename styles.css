@@ -516,3 +516,19 @@ body:not(:has(.ddoc)) {
 .copyButton[data-copied="true"] .check-icon {
   display: inline;
 }
+
+.btn {
+  @apply inline-block mr-3 px-4 py-2 text-sm font-semibold text-slate-700
+    rounded bg-slate-100/80 hover:bg-blue-50 border border-transparent
+    border-b-0 dark:text-slate-400 dark:bg-transparent
+    dark:border-background-tertiary dark:hover:bg-slate-700;
+  & svg {
+    @apply inline-block w-4 h-4 mr-2;
+  }
+}
+
+.btn[data-active="true"] {
+  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-0 z-10 -mb-[1px]
+    pb-[calc(0.5rem+1px)] relative dark:text-foreground-secondary
+    dark:bg-background-secondary dark:border-background-tertiary;
+}

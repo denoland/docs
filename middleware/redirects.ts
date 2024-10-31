@@ -5,6 +5,22 @@ import { existsSync } from "@std/fs";
 import type Site from "lume/core/site.ts";
 import { Page } from "lume/core/file.ts";
 
+type Status = 301 | 302 | 307 | 308;
+type Redirect = [string, string, Status];
+let redirectsSingleton: Record<string, string> | null = null;
+
+function getRedirects() {
+  if (redirectsSingleton) {
+    return redirectsSingleton;
+  }
+
+  const redirects = loadFromJson();
+  addGoLinksAndRedirectLinks(redirects);
+
+  redirectsSingleton = redirects;
+  return redirectsSingleton;
+}
+
 export default async function redirectsMiddleware(
   req: Request,
   next: RequestHandler,
@@ -38,13 +54,7 @@ export default async function redirectsMiddleware(
   }
 }
 
-let redirectsSingleton: Record<string, string> | null = null;
-
-function getRedirects() {
-  if (redirectsSingleton) {
-    return redirectsSingleton;
-  }
-
+function loadFromJson() {
   let redirects: Record<string, string> = {};
 
   if (existsSync("./_redirects.json")) {
@@ -59,9 +69,16 @@ function getRedirects() {
   }
 
   console.log(
-    `redirectsMiddleware: Found ${Object.keys(redirects).length} redirects.`,
+    `redirectsMiddleware: Total number of redirects loaded: ${
+      Object.keys(redirects).length
+    }.`,
   );
-  console.log(`redirectsMiddleware: Adding additional redirects...`);
+
+  return redirects;
+}
+
+function addGoLinksAndRedirectLinks(redirects: Record<string, string>) {
+  console.log(`addGoLinksAndRedirectLinks: Adding additional redirects...`);
 
   redirects["/api/"] = "/api/deno/";
 
@@ -76,15 +93,11 @@ function getRedirects() {
   }
 
   console.log(
-    `redirectsMiddleware: Loaded ${Object.keys(redirects).length} redirects.`,
+    `addGoLinksAndRedirectLinks: Total number of redirects loaded: ${
+      Object.keys(redirects).length
+    }.`,
   );
-
-  redirectsSingleton = redirects;
-  return redirectsSingleton;
 }
-
-type Status = 301 | 302 | 307 | 308;
-type Redirect = [string, string, Status];
 
 export function toFileAndInMemory(redirects: Redirect[], site: Site): void {
   jsonWriter(redirects, site);
@@ -98,6 +111,8 @@ export function toFileAndInMemory(redirects: Redirect[], site: Site): void {
   }
 
   console.log(`toFileAndInMemory: Added ${redirects.length} redirects.`);
+
+  addGoLinksAndRedirectLinks(redirectsSingleton);
 }
 
 // Copied from redirects plugin because it's not exported :'(
