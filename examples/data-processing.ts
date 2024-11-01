@@ -13,20 +13,20 @@ import { omit, partition, pick } from "jsr:@std/collections";
 
 // Define the User type with fields for id, name, role, age, and country
 type User = {
-    id: number;
-    name: string;
-    role: string;
-    age: number;
-    country: string;
+  id: number;
+  name: string;
+  role: string;
+  age: number;
+  country: string;
 };
 
 // Sample array of user data for demonstration purposes
 const users: User[] = [
-    { id: 1, name: "Alice", role: "admin", age: 30, country: "USA" },
-    { id: 2, name: "Bob", role: "user", age: 25, country: "Canada" },
-    { id: 3, name: "Charlie", role: "user", age: 28, country: "USA" },
-    { id: 4, name: "Dave", role: "admin", age: 35, country: "Canada" },
-    { id: 5, name: "Eve", role: "user", age: 22, country: "UK" },
+  { id: 1, name: "Alice", role: "admin", age: 30, country: "USA" },
+  { id: 2, name: "Bob", role: "user", age: 25, country: "Canada" },
+  { id: 3, name: "Charlie", role: "user", age: 28, country: "USA" },
+  { id: 4, name: "Dave", role: "admin", age: 35, country: "Canada" },
+  { id: 5, name: "Eve", role: "user", age: 22, country: "UK" },
 ];
 
 // 1. Pick specific fields from each user for selective data extraction
@@ -42,8 +42,8 @@ console.log("Omitted user data:", omitUsers);
 // 3. Partition users based on role to categorize them into admins and regular users
 // Using partition to split users array into two groups: admins and regular users
 const [admins, regularUsers] = partition(
-    users,
-    (user) => user.role === "admin", // Condition to check if user role is admin
+  users,
+  (user) => user.role === "admin", // Condition to check if user role is admin
 );
 console.log("Admins:", admins);
 console.log("Regular Users:", regularUsers);
