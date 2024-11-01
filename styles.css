@@ -24,7 +24,7 @@
   --background-secondary: 216deg, 27.7%, 12%;
   --background-tertiary: 216deg, 27.7%, 22%;
   --foreground-primary: 215deg, 17%, 99%;
-  --foreground-secondary: 215deg, 17%, 61%;
+  --foreground-secondary: 215deg, 17%, 71%;
   --foreground-tertiary: 215deg, 17%, 20%;
   --foreground-quaternary: 215deg, 17%, 10%;
   --runtime-background: 124deg, 100%, 3%;
@@ -175,12 +175,12 @@ body:not(:has(.ddoc)) {
   }
 
   .copyButton {
-    @apply opacity-0 transition-all duration-100 absolute top-2 right-2 p-1
-      rounded;
+    @apply opacity-0 text-foreground-secondary transition-all duration-100
+      absolute top-2 right-2 p-1 rounded;
 
     &:hover,
     &:focus {
-      @apply opacity-100 bg-gray-100;
+      @apply opacity-100 bg-foreground-quaternary;
     }
 
     &:active {
@@ -364,11 +364,11 @@ body:not(:has(.ddoc)) {
 }
 
 .deno-tabs {
-  @apply mb-4;
+  @apply -mx-4 mb-4 md:mx-0;
 }
 
 .deno-tabs > ul.deno-tabs-buttons {
-  @apply flex flex-wrap list-none p-0 m-0;
+  @apply flex flex-wrap list-none p-0 ml-4 md:m-0;
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li {
@@ -403,7 +403,7 @@ body:not(:has(.ddoc)) {
 }
 
 .markdown-body .deno-tabs pre {
-  @apply border bg-white border-slate-200 dark:bg-background-primary
+  @apply border mx-0 bg-white border-slate-200 dark:bg-background-primary
     dark:border-background-tertiary;
 }
 
