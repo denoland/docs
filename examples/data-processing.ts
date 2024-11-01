@@ -1,7 +1,7 @@
 /**
  * @title User Data Processing with Deno Collections
  * @difficulty intermediate
- * @tags cli, deploy, web
+ * @tags cli, deploy
  * @group Data Processing
  * @run --allow-read data-processing.ts
  *
