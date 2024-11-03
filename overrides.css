@@ -98,3 +98,19 @@
 .ddoc .space-y-7 > .section .markdown {
   @apply mb-6 !important;
 }
+
+#feedback-no:checked + label {
+  background-color: red;
+}
+
+#feedback-yes:checked + label {
+  background-color: green;
+}
+
+#feedback-no:checked ~ #feedback-more, #feedback-yes:checked ~ #feedback-more {
+  display: block !important;
+}
+
+#feedback-more label {
+  display: block;
+}

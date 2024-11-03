@@ -5,21 +5,21 @@ export default function Feedback(path) {
 
   const githubPath = "https://github.com/denoland/docs/edit/main" + path;
   return (
-    <section class="mt-4 flex flex-wrap gap-1">
+    <section class="mt-4 flex flex-wrap justify-between">
       <h2 class="w-full">Help us make these docs great!</h2>
-      <form class="" aria-live="polite">
+      <form aria-live="polite" id="feedback-form">
         <h3 class="f4 mb-3">Did you find what you needed?</h3>
-        <input type="text" class="" name="survey-token" value="" />
-        <div class="" role="radiogroup" aria-labelledby="survey-title">
+        <input type="text" name="feedback-token" value="" />
+        <div role="radiogroup" aria-labelledby="feedback-title">
           <input
             class="hidden"
-            id="survey-yes"
+            id="feedback-yes"
             type="radio"
-            name="survey-vote"
+            name="feedback-vote"
             aria-label="Yes"
-            value="Y"
+            value="yes"
           />
-          <label class="btn mr-1" for="survey-yes">
+          <label class="btn mr-1" for="feedback-yes">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -37,19 +37,20 @@ export default function Feedback(path) {
           </label>
           <input
             class="hidden"
-            id="survey-no"
+            id="feedback-no"
             type="radio"
-            name="survey-vote"
+            name="feedback-vote"
             aria-label="No"
-            value="N"
+            value="no"
           />
-          <label class="btn" for="survey-no">
+          <label class="btn" for="feedback-no">
             <svg
               aria-hidden="true"
               focusable="false"
               viewBox="0 0 16 16"
               width="16"
               height="16"
+              fill="currentColor"
               style="display:inline-block;user-select:none;vertical-align:text-bottom;"
             >
               <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z">
@@ -57,16 +58,52 @@ export default function Feedback(path) {
             </svg>
             No
           </label>
+          <div id="feedback-more" class="hidden">
+            <p role="status">
+              Thank you! We received your feedback.
+            </p>
+            <label for="feedback-comment">
+              Can you tell us more about your rating? (Optional)
+            </label>
+            <textarea
+              name="feedback-comment"
+              id="feedback-comment"
+            >
+            </textarea>
+            <label for="feedback-contact">
+              Leave your email if we can contact you.(Optional)
+            </label>
+            <input
+              type="email"
+              name="feedback-contact"
+              id="feedback-contact"
+              aria-invalid="false"
+              value=""
+            />
+            <p>
+              If you need a reply, please contact{" "}
+              <a href="https://support.github.com/">support</a>.
+            </p>
+            <div>
+              <button type="button" class="btn">
+                Cancel
+              </button>
+              <button type="submit" class="btn">
+                Send
+              </button>
+            </div>
+          </div>
           <a
-            class="text-sm"
+            rel=""
+            class="f6 text-underline"
             target="_blank"
-            href="/deploy/manual/privacy-policy/"
+            href="/en/site-policy/privacy-policies/github-privacy-statement"
           >
             Privacy policy
           </a>
         </div>
       </form>
-      <div class="">
+      <div>
         <h3>Make a contribution</h3>
         <p class="max-w-xs color-fg-muted mb-3">
           Deno's docs are open source. See something that's wrong or unclear?
