@@ -1,5 +1,5 @@
 /**
- * @title Suprocess Spawning: runing other files using subprocesses
+ * @title Subprocess Spawning: running other files using subprocesses
  * @difficulty intermediate
  * @tags cli
  * @run --allow-net --allow-run --allow-read <url>
@@ -12,7 +12,7 @@
  */
 
 import { parseArgs } from "jsr:@std/cli";
-// Grab the file name using the standard libraries parseArgs funciton.
+// Grab the file name using the parseArgs function from the standard library.
 // If no file is provided, exit with an error.
 import { expandGlob } from "jsr:@std/fs";
 
@@ -28,8 +28,7 @@ if (!flags.file) {
   Deno.exit(1);
 }
 
-// Use the expandGlob function to find all files that match the provided
-// file name.
+// Use expandGlob to find all files matching the provided filename.
 const FilesList = await Array.fromAsync(
   expandGlob(`**/*${flags.file}*`, { root: "." }),
 );
