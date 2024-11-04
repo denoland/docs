@@ -6,8 +6,5 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "editor.detectIndentation": true,
-  "[typescript]": {
-    "editor.defaultFormatter": "ms-vsliveshare.vsliveshare"
-  }
+  "editor.detectIndentation": true
 }
