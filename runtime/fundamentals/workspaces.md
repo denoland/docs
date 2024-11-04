@@ -63,7 +63,7 @@ imports the `add` and `subtract` functions from the workspace members. Note that
 it imports them using `@scope/add` and `@scope/subtract`, even though these are
 not proper URLs and aren't in the import map. How are they resolved?
 
-```js, title="main.ts"
+```ts title="main.ts"
 import chalk from "chalk";
 import { add } from "@scope/add";
 import { subtract } from "@scope/subtract";
