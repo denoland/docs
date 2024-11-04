@@ -97,7 +97,7 @@ export default function Feedback(path) {
             rel=""
             class="f6 text-underline"
             target="_blank"
-            href="/en/site-policy/privacy-policies/github-privacy-statement"
+            href="/deploy/manual/privacy-policy"
           >
             Privacy policy
           </a>
