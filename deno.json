@@ -8,7 +8,7 @@
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
     "googleapis": "npm:googleapis@^144.0.0",
     "lume/": "https://deno.land/x/lume@v2.3.3/",
-    "tailwindcss": "npm:tailwindcss@^3.4.9",
+    "tailwindcss": "npm:tailwindcss@^3.4.9"
   },
   "tasks": {
     "build": "deno run -A lume.ts",
