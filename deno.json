@@ -9,7 +9,6 @@
     "googleapis": "npm:googleapis@^144.0.0",
     "lume/": "https://deno.land/x/lume@v2.3.3/",
     "tailwindcss": "npm:tailwindcss@^3.4.9",
-    "@orama/wc-components/": "https://unpkg.com/@orama/wc-components@0.1.7/"
   },
   "tasks": {
     "build": "deno run -A lume.ts",
