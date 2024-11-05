@@ -1,5 +1,7 @@
 export default function Layout(props: Lume.Data) {
   const reference = props.url.startsWith("/api");
+  const description = props.description ||
+    "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
 
   return (
     <html
@@ -26,6 +28,37 @@ export default function Layout(props: Lume.Data) {
           type="font/woff2"
           crossOrigin="true"
         />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@deno_land" />
+        <link rel="me" href="https://fosstodon.org/@deno_land" />
+        <meta name="twitter:title" content={props.title} />
+        <meta property="og:title" content={props.title} />
+
+        <meta property="og:description" content={description} />
+        <meta name="twitter:description" content={description} />
+        <meta name="description" content={description} />
+
+        <meta name="twitter:image" content="/img/og.webp" />
+        <meta
+          name="twitter:image:alt"
+          content="Deno docs: Deno documentation, guides, and reference materials. docs.deno.com"
+        />
+        <meta property="og:image" content="/img/og.webp" />
+        <meta
+          property="og:image:alt"
+          content="Deno docs: Deno documentation, guides, and reference materials. docs.deno.com"
+        />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Deno" />
+        <meta property="og:locale" content="en_US" />
+
+        <meta
+          name="keywords"
+          content="Deno, JavaScript, TypeScript, reference, documentation, guide, tutorial, example"
+        />
+
         <link rel="stylesheet" href="/gfm.css" />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/overrides.css" />
