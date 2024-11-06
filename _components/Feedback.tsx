@@ -99,7 +99,10 @@ export default function Feedback(path) {
                   <button type="button" class="btn">
                     Cancel
                   </button>
-                  <button type="submit" class="btn !bg-primary">
+                  <button
+                    type="submit"
+                    class="mr-3 px-4 py-2 text-sm font-semibold text-background-primary rounded bg-primary hover:bg-primary-dark border border-primary-dark dark:border-background-tertiary transition"
+                  >
                     Send
                   </button>
                 </div>
