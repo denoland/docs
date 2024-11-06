@@ -145,6 +145,10 @@ h1 {
     }
   }
 
+  & section :where(h2, h3, h4, h5, h6) {
+    @apply m-0 border-b-0 tracking-normal;
+  }
+
   & details {
     @apply rounded border border-gray-1 py-4 px-4;
 
@@ -159,6 +163,34 @@ h1 {
 
   & pre {
     @apply border;
+  }
+
+  & .feedback-form {
+    @apply flex flex-col mt-12 gap-2 p-4 border-2 border-blue-100
+      dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary
+      rounded;
+
+    & .form-header {
+      @apply text-xl border-b border-blue-100 dark:border-background-tertiary
+        mb-2;
+    }
+
+    & .form-section-header {
+      @apply w-full text-base font-semibold mb-2;
+    }
+
+    & p {
+      @apply mb-4;
+    }
+
+    & textarea, input {
+      @apply p-2 border border-foreground-tertiary dark:bg-background-primary
+        rounded;
+    }
+
+    & input {
+      @apply h-10;
+    }
   }
 }
 
@@ -518,17 +550,28 @@ body:not(:has(.ddoc)) {
 }
 
 .btn {
-  @apply inline-block mr-3 px-4 py-2 text-sm font-semibold text-slate-700
-    rounded bg-slate-100/80 hover:bg-blue-50 border border-transparent
-    border-b-0 dark:text-slate-400 dark:bg-transparent
-    dark:border-background-tertiary dark:hover:bg-slate-700;
+  @apply mr-3 px-4 py-2 text-sm font-semibold text-foreground-primary rounded
+    bg-background-primary hover:bg-foreground-quaternary border
+    border-foreground-tertiary dark:border-background-tertiary transition
+    inline-flex items-center no-underline;
   & svg {
-    @apply inline-block w-4 h-4 mr-2;
+    @apply inline-block w-3 h-3 ml-2;
   }
 }
 
-.btn[data-active="true"] {
-  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-0 z-10 -mb-[1px]
-    pb-[calc(0.5rem+1px)] relative dark:text-foreground-secondary
-    dark:bg-background-secondary dark:border-background-tertiary;
+#feedback-no:checked + label {
+  @apply bg-red-400 dark:bg-red-600;
+}
+
+#feedback-yes:checked + label {
+  @apply bg-green-400 dark:bg-green-600;
+}
+
+#feedback-no:checked ~ #feedback-more, #feedback-yes:checked ~ #feedback-more {
+  margin-top: 1rem;
+  @apply !flex flex-col gap-2;
+}
+
+#feedback-more label {
+  @apply block text-sm mb-2;
 }
