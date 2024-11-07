@@ -20,6 +20,7 @@ export const layout = "layout.tsx";
 
 export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   const sidebar = props.sidebar as Sidebar_;
+  const file = props.page.sourcePath;
   if (sidebar === undefined) {
     throw new Error("Missing sidebar for " + props.url);
   }
@@ -157,6 +158,8 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 )}
                 {renderedCommand}
                 {props.children}
+
+                {props.comp.Feedback({ file })}
               </div>
             </article>
             {parentNavigation && (
