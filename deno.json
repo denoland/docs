@@ -2,7 +2,7 @@
   "imports": {
     "@std/fs": "jsr:@std/fs@^0.229.3",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
-    "lume/": "https://deno.land/x/lume@v2.3.3/",
+    "lume/": "https://deno.land/x/lume@v2.4.0/",
     "tailwindcss": "npm:tailwindcss@^3.4.9",
     "@orama/wc-components/": "https://unpkg.com/@orama/wc-components@0.1.7/"
   },

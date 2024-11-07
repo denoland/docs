@@ -1,5 +1,6 @@
 _site
 _cache
+_broken_links.json
 
 .idea
 
