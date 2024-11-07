@@ -1,7 +1,7 @@
 import { google } from "googleapis";
 import type { FeedbackSubmission } from "../../types.ts";
 
-const privateKey = Deno.env.get("FEEDBACK_PRIVATE_KEY");
+const { privateKey } = JSON.parse(Deno.env.get("FEEDBACK_PRIVATE_KEY") || "{}");
 const serviceAccountEmail = Deno.env.get("FEEDBACK_SERVICE_ACCOUNT_EMAIL");
 const spreadsheetId = Deno.env.get("FEEDBACK_SHEET_ID");
 const enableFeedbackMiddleware = privateKey && serviceAccountEmail &&
