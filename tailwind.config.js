@@ -8,34 +8,31 @@ export default {
   corePlugins: {
     preflight: true,
   },
-  darkMode: ["class", '[data-theme="dark"]'],
+  darkMode: "selector",
   theme: {
     extend: {
       colors: {
         transparent: "transparent",
         current: "currentColor",
 
-        // New design system
-        white: "#ffffff",
-        black: "#0B0D11",
-        "true-black": "#000000",
-        offblack: "#121417",
-        "white-veil": "#ffffff03",
-        "black-veil": "#00000003",
+        // Dark/light with Tailwind done right using CSS variables:
+        "background-primary": "hsla(var(--background-primary))",
+        "background-secondary": "hsla(var(--background-secondary))",
+        "background-tertiary": "hsla(var(--background-tertiary))",
+        "foreground-primary": "hsla(var(--foreground-primary))",
+        "foreground-secondary": "hsla(var(--foreground-secondary))",
+        "foreground-tertiary": "hsla(var(--foreground-tertiary))",
+        "foreground-quaternary": "hsla(var(--foreground-quaternary))",
+        "runtime-background": "hsla(var(--runtime-background))",
+        "runtime-foreground": "hsla(var(--runtime-foreground))",
 
-        "primary": "rgb(9, 105, 218)",
+        "info": "hsla(var(--info))",
+        "note": "hsla(var(--note))",
+        "caution": "hsla(var(--caution))",
+        "tip": "hsla(var(--tip))",
 
-        "runtime-dark": "#172723",
-        "runtime-secondary": "#EBFF01",
-        "runtime-secondary-dark": "#232711",
-
-        "deploy-dark": "#0C212A",
-
-        subhosting: "#FF8A01",
-        "subhosting-dark": "#251C11",
-
-        fresh: "#FFDB1E",
-        "fresh-dark": "#401C00",
+        "primary": "hsla(var(--primary))",
+        "primary-dark": "hsla(var(--primary-dark))",
 
         runtime: {
           "50": "#f0fff1",

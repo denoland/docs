@@ -1,29 +1,36 @@
-import lume from "lume/mod.ts";
-import jsx from "lume/plugins/jsx_preact.ts";
-import tailwindcss from "./plugins/tailwind.ts";
-import prism from "lume/plugins/prism.ts";
-import search from "lume/plugins/search.ts";
-import esbuild from "lume/plugins/esbuild.ts";
-import redirects from "lume/plugins/redirects.ts";
-import sitemap from "lume/plugins/sitemap.ts";
+import "@std/dotenv/load";
 
+import lume from "lume/mod.ts";
+import esbuild from "lume/plugins/esbuild.ts";
+import jsx from "lume/plugins/jsx_preact.ts";
+import prism from "lume/plugins/prism.ts";
+import redirects from "lume/plugins/redirects.ts";
+import search from "lume/plugins/search.ts";
+import sitemap from "lume/plugins/sitemap.ts";
+import postcss from "lume/plugins/postcss.ts";
+
+import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
 
+import Prism from "npm:prismjs@1.29.0";
 import "npm:prismjs@1.29.0/components/prism-typescript.js";
 import "npm:prismjs@1.29.0/components/prism-diff.js";
 import "npm:prismjs@1.29.0/components/prism-json.js";
 import "npm:prismjs@1.29.0/components/prism-bash.js";
+import "npm:prismjs@1.29.0/components/prism-json5.js";
 
-import { full as emoji } from "npm:markdown-it-emoji@3";
+Prism.languages.jsonc = Prism.languages.json5;
+
+import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
+import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
+import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 import anchor from "npm:markdown-it-anchor@9";
-import relativeLinksPlugin from "./markdown-it/relative-path.ts";
-import replacerPlugin from "./markdown-it/replacer.ts";
+import { full as emoji } from "npm:markdown-it-emoji@3";
 import admonitionPlugin from "./markdown-it/admonition.ts";
 import codeblockCopyPlugin from "./markdown-it/codeblock-copy.ts";
 import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
-import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
-import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
-import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
+import relativeLinksPlugin from "./markdown-it/relative-path.ts";
+import replacerPlugin from "./markdown-it/replacer.ts";
 import {
   deploy as oramaDeploy,
   generateDocumentsForExamples,
@@ -31,49 +38,63 @@ import {
   generateDocumentsForSymbols,
   OramaDocument,
 } from "./orama.ts";
-import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 
-const site = lume({
-  location: new URL("https://docs.deno.com"),
-  caseSensitiveUrls: true,
-  server: {
-    middlewares: [
-      apiDocumentContentTypeMiddleware,
-    ],
-  },
-}, {
-  markdown: {
-    plugins: [
-      replacerPlugin,
-      emoji,
-      admonitionPlugin,
-      codeblockCopyPlugin,
-      codeblockTitlePlugin,
-      [
-        anchor,
-        {
-          permalink: anchor.permalink.linkInsideHeader({
-            symbol:
-              `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
-            placement: "after",
-          }),
-          getTokensText(tokens) {
-            return tokens
-              .filter((t) => ["text", "code_inline"].includes(t.type))
-              .map((t) => t.content.replaceAll(/ \([0-9/]+?\)/g, ""))
-              .join("")
-              .trim();
-          },
-        },
+import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
+import redirectsMiddleware, {
+  toFileAndInMemory,
+} from "./middleware/redirects.ts";
+import createRoutingMiddleware from "./middleware/functionRoutes.ts";
+import createGAMiddleware from "./middleware/googleAnalytics.ts";
+
+const site = lume(
+  {
+    location: new URL("https://docs.deno.com"),
+    caseSensitiveUrls: true,
+    server: {
+      middlewares: [
+        redirectsMiddleware,
+        createRoutingMiddleware(),
+        createGAMiddleware({
+          addr: { transport: "tcp", hostname: "localhost", port: 3000 },
+        }),
+        apiDocumentContentTypeMiddleware,
       ],
-      relativeLinksPlugin,
-    ],
-    options: {
-      linkify: true,
-      langPrefix: "highlight notranslate language-",
     },
   },
-});
+  {
+    markdown: {
+      plugins: [
+        replacerPlugin,
+        emoji,
+        admonitionPlugin,
+        codeblockCopyPlugin,
+        codeblockTitlePlugin,
+        [
+          anchor,
+          {
+            permalink: anchor.permalink.linkInsideHeader({
+              symbol:
+                `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
+              placement: "after",
+            }),
+            getTokensText(tokens: { type: string; content: string }[]) {
+              return tokens
+                .filter((t) => ["text", "code_inline"].includes(t.type))
+                .map((t) => t.content.replaceAll(/ \([0-9/]+?\)/g, ""))
+                .join("")
+                .trim();
+            },
+          },
+        ],
+        relativeLinksPlugin,
+      ],
+      options: {
+        linkify: true,
+        langPrefix: "highlight notranslate language-",
+      },
+    },
+  },
+);
 
 site.copy("static", ".");
 site.copy("subhosting/api/images");
@@ -91,25 +112,32 @@ site.copy("deno.json");
 site.copy("go.json");
 site.copy("oldurls.json");
 site.copy("server.ts");
-site.copy("middleware.ts");
+site.copy("middleware");
 site.copy("examples");
+site.copy(".env");
 
-site.use(redirects({
-  output: "json",
-}));
+site.use(
+  redirects({
+    output: toFileAndInMemory,
+  }),
+);
 site.use(search());
 site.use(jsx());
 
-// Custom plugin that for tailwind + postcss combined
-site.use(tailwindcss({
-  options: tailwindConfig,
-}));
-site.use(esbuild({
-  extensions: [".client.ts"],
-  options: {
-    minify: false,
-  },
-}));
+site.use(
+  postcss({
+    plugins: [tw(tailwindConfig)],
+  }),
+);
+site.use(
+  esbuild({
+    extensions: [".client.ts"],
+    options: {
+      minify: false,
+      splitting: true,
+    },
+  }),
+);
 
 // This is a work-around due to deno-dom's dependency of nwsapi not supporting
 // :has selectors, nor having intention of supporting them, so using `body:not(:has(.ddoc))`
@@ -117,15 +145,17 @@ site.use(esbuild({
 // don't use a ddoc class.
 site.process([".html"], (pages) => {
   for (const page of pages) {
-    const document = page.document;
+    const document = page.document!;
     if (!document.querySelector(".ddoc")) {
       document.body.classList.add("apply-prism");
     }
   }
 });
-site.use(prism({
-  cssSelector: "body.apply-prism pre code",
-}));
+site.use(
+  prism({
+    cssSelector: "body.apply-prism pre code",
+  }),
+);
 
 site.use(toc({ anchor: false }));
 site.use(title());
@@ -146,7 +176,6 @@ site.copy("reference_gen/gen/web/script.js", "/api/web/script.js");
 site.copy("reference_gen/gen/node/page.css", "/api/node/page.css");
 site.copy("reference_gen/gen/node/styles.css", "/api/node/styles.css");
 site.copy("reference_gen/gen/node/script.js", "/api/node/script.js");
-site.copy("orama-searchbox-1.0.0-rc47.js");
 
 site.process([".html"], (pages) => {
   for (const page of pages) {
@@ -233,11 +262,11 @@ site.ignore(
   // "subhosting",
 );
 
-site.remoteFile(
-  "orama-searchbox-1.0.0-rc47.js",
-  "https://unpkg.com/@orama/searchbox@1.0.0-rc47/dist/bundle.js",
-);
-
 site.scopedUpdates((path) => path == "/overrides.css");
 
+site.remoteFile(
+  "orama.css",
+  "https://unpkg.com/@orama/wc-components@0.1.7/dist/orama-ui/orama-ui.css",
+);
+site.copy("orama.css");
 export default site;

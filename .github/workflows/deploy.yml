@@ -18,21 +18,21 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
 
       - name: Set up Deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
         with:
-          deno-version: 91860b34f52e498913e69bef3fc734fdf1ff817c
+          deno-version: canary
           deno-binary-name: "deno_doc"
 
       - name: "Reference: install"
         working-directory: "reference_gen"
-        run: DENO_FUTURE=1 deno install
+        run: deno install
 
       - name: "Reference: generate types"
         working-directory: "reference_gen"
-        run: DENO_FUTURE=1 deno task types
+        run: deno task types
 
       - name: "Reference: generate docs"
         working-directory: "reference_gen"
@@ -42,7 +42,6 @@ jobs:
         env:
           ORAMA_CLOUD_INDEX_ID: ${{ vars.ORAMA_CLOUD_INDEX_ID }}
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
-          DENO_FUTURE: 1
         run: deno task build
 
       - name: Run server

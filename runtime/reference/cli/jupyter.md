@@ -33,6 +33,9 @@ notebooks.
 
 - Install the
   [VSCode Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
+- Open or create a notebook file by opening the Command Palette (Ctrl+Shift+P)
+  and selecting "Create: New Jupyter Notebook". This can be done manually by
+  creating a file with the ".ipynb" file extension.
 - When on a new or existing Notebook, click creating a new Jupyter Notebook
   select "Jupyter kernels" and then select Deno
 
@@ -120,8 +123,8 @@ HTML in the notebook.
 
 ```js
 Deno.jupyter.html`<h1>Hello, world!</h1>
-<h2>From Deno kernel<h2>
-<p>Lorem ipsum <i>dolor</i> <b>sit</b> <u>amet</u>`;
+<h2>From Deno kernel</h2>
+<p>Lorem ipsum <i>dolor</i> <b>sit</b> <u>amet</u></p>`;
 ```
 
 ![`Deno.jupyter.html` API example](../images/jupyter-html.png)

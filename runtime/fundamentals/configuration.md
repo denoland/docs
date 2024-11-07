@@ -5,6 +5,7 @@ oldUrl:
 - /runtime/manual/basics/modules/import_maps/
 - /runtime/basics/import_maps/
 - /runtime/manual/linking_to_external_code/import_maps
+- /manual/linking_to_external_code/proxies
 ---
 
 You can configure Deno using a `deno.json` file. This file can be used to
@@ -75,6 +76,8 @@ import express from "express";
 
 const app = express();
 ```
+
+Note that this will require you to run `deno install`.
 
 Read more about
 [module imports and dependencies](/runtime/fundamentals/modules/)
@@ -296,7 +299,7 @@ You can set this field to following values:
 It is not required to specify this setting, the following defaults are applied:
 
 - `"none"` if there is no `package.json` file in your project directory
-- `"manual"` is there is a `package.json` file in your project directory
+- `"manual"` if there is a `package.json` file in your project directory
 
 When using workspaces, this setting can only be used in the workspace root.
 Specifying it in any of the members will result in warnings. The `"manual"`
@@ -510,3 +513,13 @@ works as well:
 A JSON schema file is available for editors to provide autocompletion. The file
 is versioned and available at:
 https://deno.land/x/deno/cli/schemas/config-file.v1.json
+
+## Proxies
+
+Deno supports proxies for module downloads and the fetch API. Proxy
+configuration is read from
+[environment variables](https://docs.deno.com/runtime/reference/env_variables/#special-environment-variables):
+HTTP_PROXY, HTTPS_PROXY and NO_PROXY.
+
+If you are using Windows - if environment variables are not found Deno falls
+back to reading proxies from the registry.

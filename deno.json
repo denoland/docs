@@ -1,22 +1,31 @@
 {
   "imports": {
+    "@orama/wc-components/": "https://unpkg.com/@orama/wc-components@0.1.7/",
+    "@std/assert": "jsr:@std/assert@^1.0.6",
+    "@std/dotenv": "jsr:@std/dotenv@^0.225.2",
     "@std/fs": "jsr:@std/fs@^0.229.3",
-    "autoprefixer": "npm:autoprefixer@^10.4.20",
+    "@std/media-types": "jsr:@std/media-types@^1.0.3",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
-    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@864fb83b508b4164afa8cedef100db672b883152/",
-    "postcss": "npm:postcss@^8.4.41",
+    "googleapis": "npm:googleapis@^144.0.0",
+    "lume/": "https://deno.land/x/lume@v2.3.3/",
     "tailwindcss": "npm:tailwindcss@^3.4.9"
   },
   "tasks": {
     "build": "deno run -A lume.ts",
     "serve": "deno run -A lume.ts -s",
-    "prod": "cd _site && deno run --allow-read=. --allow-net server.ts",
+    "debug": "deno task build && deno task prod",
+    "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
     "reference": "cd reference_gen && deno task types && deno task doc"
   },
   "compilerOptions": {
-    "types": ["lume/types.ts"],
+    "types": [
+      "lume/types.ts"
+    ],
     "jsx": "precompile",
     "jsxImportSource": "npm:preact"
   },
-  "exclude": ["_site", "reference_gen"]
+  "exclude": [
+    "_site",
+    "reference_gen"
+  ]
 }
