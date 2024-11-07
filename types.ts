@@ -50,3 +50,20 @@ export function isSidebarDoc(b: SidebarItem): b is SidebarDoc {
 export function isSidebarCategory(b: SidebarItem): b is SidebarCategory {
   return (b as SidebarCategory).items !== undefined;
 }
+
+export interface FeedbackSubmission {
+  path: string;
+  sentiment: "yes" | "no";
+  id?: string | null;
+  comment?: string;
+  contact?: string;
+}
+
+export interface GoogleSheetsUpdateResponse {
+  updates: {
+    updatedRange: string;
+    updatedRows: number;
+    updatedColumns: number;
+    updatedCells: number;
+  };
+}

@@ -1,3 +1,5 @@
+import "@std/dotenv/load";
+
 import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
@@ -29,7 +31,6 @@ import codeblockCopyPlugin from "./markdown-it/codeblock-copy.ts";
 import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
 import relativeLinksPlugin from "./markdown-it/relative-path.ts";
 import replacerPlugin from "./markdown-it/replacer.ts";
-import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 import {
   deploy as oramaDeploy,
   generateDocumentsForExamples,
@@ -38,12 +39,26 @@ import {
   OramaDocument,
 } from "./orama.ts";
 
+import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
+import redirectsMiddleware, {
+  toFileAndInMemory,
+} from "./middleware/redirects.ts";
+import createRoutingMiddleware from "./middleware/functionRoutes.ts";
+import createGAMiddleware from "./middleware/googleAnalytics.ts";
+
 const site = lume(
   {
     location: new URL("https://docs.deno.com"),
     caseSensitiveUrls: true,
     server: {
-      middlewares: [apiDocumentContentTypeMiddleware],
+      middlewares: [
+        redirectsMiddleware,
+        createRoutingMiddleware(),
+        createGAMiddleware({
+          addr: { transport: "tcp", hostname: "localhost", port: 3000 },
+        }),
+        apiDocumentContentTypeMiddleware,
+      ],
     },
   },
   {
@@ -97,12 +112,13 @@ site.copy("deno.json");
 site.copy("go.json");
 site.copy("oldurls.json");
 site.copy("server.ts");
-site.copy("middleware.ts");
+site.copy("middleware");
 site.copy("examples");
+site.copy(".env");
 
 site.use(
   redirects({
-    output: "json",
+    output: toFileAndInMemory,
   }),
 );
 site.use(search());
@@ -129,7 +145,7 @@ site.use(
 // don't use a ddoc class.
 site.process([".html"], (pages) => {
   for (const page of pages) {
-    const document = page.document;
+    const document = page.document!;
     if (!document.querySelector(".ddoc")) {
       document.body.classList.add("apply-prism");
     }

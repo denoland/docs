@@ -14,6 +14,7 @@
   --runtime-background: 124deg, 100%, 97.1%;
   --runtime-foreground: 184deg, 100%, 10%;
   --primary: 217deg, 91%, 59%;
+  --primary-dark: 217deg, 91%, 49%;
   --info: 224deg, 64.3%, 32.9%;
   --note: 224deg, 64.3%, 32.9%;
   --caution: 45.4deg, 93.39%, 47.45%;
@@ -34,6 +35,7 @@
   --caution: 45.4deg, 93.39%, 67.11%;
   /* The following are not different from light mode (yet?) */
   --primary: 217deg, 91%, 59%;
+  --primary-dark: 217deg, 91%, 49%;
   --tip: 142deg, 76.2%, 36.3%;
 
   color: var(--foreground-primary);
@@ -145,6 +147,10 @@ h1 {
     }
   }
 
+  & section :where(h2, h3, h4, h5, h6) {
+    @apply m-0 border-b-0 tracking-normal;
+  }
+
   & details {
     @apply rounded border border-gray-1 py-4 px-4;
 
@@ -159,6 +165,34 @@ h1 {
 
   & pre {
     @apply border;
+  }
+
+  & .feedback-form {
+    @apply flex flex-col mt-12 gap-2 p-4 border-2 border-blue-100
+      dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary
+      rounded;
+
+    & .form-header {
+      @apply text-xl border-b border-blue-100 dark:border-background-tertiary
+        mb-2;
+    }
+
+    & .form-section-header {
+      @apply w-full text-base font-semibold mb-2;
+    }
+
+    & p {
+      @apply mb-4;
+    }
+
+    & textarea, input {
+      @apply p-2 border border-foreground-tertiary dark:bg-background-primary
+        rounded;
+    }
+
+    & input {
+      @apply h-10;
+    }
   }
 }
 
@@ -515,4 +549,35 @@ body:not(:has(.ddoc)) {
 
 .copyButton[data-copied="true"] .check-icon {
   display: inline;
+}
+
+.btn {
+  @apply mr-3 px-4 py-2 text-sm font-semibold text-foreground-primary rounded
+    bg-background-primary hover:bg-foreground-quaternary border
+    border-foreground-tertiary dark:border-background-tertiary transition
+    inline-flex items-center no-underline;
+  & svg {
+    @apply inline-block w-3 h-3 ml-2;
+  }
+}
+
+#feedback-no:checked + label {
+  @apply bg-red-400 dark:bg-red-600;
+}
+
+#feedback-yes:checked + label {
+  @apply bg-green-400 dark:bg-green-600;
+}
+
+#feedback-more:has(div #feedback-cancel:checked) {
+  @apply hidden;
+}
+
+#feedback-no:checked ~ #feedback-more, #feedback-yes:checked ~ #feedback-more {
+  margin-top: 1rem;
+  @apply flex flex-col gap-2;
+}
+
+#feedback-more label {
+  @apply inline-block text-sm mb-2;
 }

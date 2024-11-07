@@ -1,10 +1,10 @@
-import type { Middleware } from "lume/core/server.ts";
-import { parseMediaType } from "https://jsr.io/@std/media-types/1.0.1/parse_media_type.ts";
+import type { RequestHandler } from "lume/core/server.ts";
+import { parseMediaType } from "@std/media-types";
 
-export const apiDocumentContentTypeMiddleware: Middleware = async (
-  request,
-  next,
-) => {
+export default async function apiDocumentContentTypeMiddleware(
+  request: Request,
+  next: RequestHandler,
+): Promise<Response> {
   const response = await next(request);
 
   // Requests to API docs located under `/api` should all be served as HTML with
@@ -22,7 +22,7 @@ export const apiDocumentContentTypeMiddleware: Middleware = async (
   }
 
   return response;
-};
+}
 
 function isCssOrJs(contentType: string | null): boolean {
   if (contentType === null) {
