@@ -251,6 +251,9 @@ site.scopedUpdates((path) => path == "/overrides.css");
 site.use(checkUrls({
   external: false, // Set to true to check external links
   output: "_broken_links.json",
+  ignore: [
+    "https://www.googletagmanager.com",
+  ],
 }));
 
 site.remoteFile(
