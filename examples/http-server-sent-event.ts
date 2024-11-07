@@ -106,15 +106,19 @@ function handler(_req: Request): Response {
         const message = `It is ${new Date().toString()}`;
         if (!controller.desiredSize) return; // Check if the stream is still writable
         controller.enqueue({ data: message });
-        controller.enqueue({ data: { deno: "land" }, id: counter, event: "data" });
+        controller.enqueue({
+          data: { deno: "land" },
+          id: counter,
+          event: "data",
+        });
       }, 1000);
-      //stop timer in 10 seconds
+      //stop timer in 5 seconds
       setTimeout(() => {
         clearInterval(timer);
-        controller.enqueue({ data: '[DONE]' });//just like OPEN AI Server Sent Event
+        controller.enqueue({ data: "[DONE]" }); //just like OPEN AI Server Sent Event
         if (!controller.desiredSize) return; // Check if the stream is still writable
         controller.close();
-      }, 4000);
+      }, 5000);
     },
     cancel() {
       if (timer !== undefined) {
