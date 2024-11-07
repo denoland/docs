@@ -569,11 +569,15 @@ body:not(:has(.ddoc)) {
   @apply bg-green-400 dark:bg-green-600;
 }
 
+#feedback-more:has(div #feedback-cancel:checked) {
+  @apply hidden;
+}
+
 #feedback-no:checked ~ #feedback-more, #feedback-yes:checked ~ #feedback-more {
   margin-top: 1rem;
-  @apply !flex flex-col gap-2;
+  @apply flex flex-col gap-2;
 }
 
 #feedback-more label {
-  @apply block text-sm mb-2;
+  @apply inline-block text-sm mb-2;
 }
