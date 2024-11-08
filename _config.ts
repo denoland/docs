@@ -32,10 +32,12 @@ import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
 import relativeLinksPlugin from "./markdown-it/relative-path.ts";
 import replacerPlugin from "./markdown-it/replacer.ts";
 import {
+  clear as oramaClear,
   deploy as oramaDeploy,
   generateDocumentsForExamples,
   generateDocumentsForPage,
   generateDocumentsForSymbols,
+  notify as oramaNotify,
   OramaDocument,
 } from "./orama.ts";
 
@@ -219,7 +221,9 @@ const ORAMA_API_KEY = Deno.env.get("ORAMA_CLOUD_API_KEY");
 const ORAMA_INDEX_ID = Deno.env.get("ORAMA_CLOUD_INDEX_ID");
 if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
   site.process([".html"], async (pages) => {
-    let searchEntries: OramaDocument[] = [];
+    let pageEntries: OramaDocument[] = [];
+
+    await oramaClear(ORAMA_API_KEY, ORAMA_INDEX_ID);
 
     for (const page of pages) {
       if (
@@ -228,14 +232,26 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
           page.data.url.startsWith("/deploy/") ||
           page.data.url.startsWith("/subhosting/"))
       ) {
-        searchEntries = searchEntries.concat(generateDocumentsForPage(page));
+        pageEntries = pageEntries.concat(generateDocumentsForPage(page));
       }
     }
 
-    searchEntries = searchEntries.concat(await generateDocumentsForExamples());
+    await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, pageEntries, "pages");
+
+    await oramaNotify(
+      ORAMA_API_KEY,
+      ORAMA_INDEX_ID,
+      await generateDocumentsForExamples(),
+      "examples",
+    );
 
     try {
-      searchEntries = searchEntries.concat(await generateDocumentsForSymbols());
+      await oramaNotify(
+        ORAMA_API_KEY,
+        ORAMA_INDEX_ID,
+        await generateDocumentsForSymbols(),
+        "symbols",
+      );
     } catch (e) {
       console.warn(
         "⚠️ Orama documents for reference docs were not generated.",
@@ -243,7 +259,7 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
       );
     }
 
-    await oramaDeploy(ORAMA_API_KEY, ORAMA_INDEX_ID, searchEntries);
+    await oramaDeploy(ORAMA_API_KEY, ORAMA_INDEX_ID);
   });
 } else {
   console.warn("⚠️ Orama documents were not generated.");
