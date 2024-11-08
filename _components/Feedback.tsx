@@ -4,14 +4,14 @@ export default function Feedback({ file }) {
   } else {
     const githubPath = "https://github.com/denoland/docs/edit/main" + file;
     return (
-      <section class="flex flex-col mt-12 gap-2 p-4 border-2 border-blue-100
+      <section class="flex flex-col mt-12 gap-2 p-4 border border-blue-100
       dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary
       rounded max-w-[66ch] mx-auto">
         <h2 class="text-xl border-b border-blue-100 dark:border-background-tertiary
         mb-2 pb-2 font-normal">
           Did you find what you needed?
         </h2>
-        <div class="flex flex-col sm:flex-row gap-8">
+        <div class="flex flex-col sm:flex-row sm:flex-wrap gap-8">
           <div class="flex-1">
             <form aria-live="polite" id="feedback-form">
               <div
@@ -90,11 +90,11 @@ export default function Feedback({ file }) {
                     />
                   </svg>
                 </a>
-                <div id="feedback-more" class="hidden">
+                <div id="feedback-more" class="hidden w-full mt-4">
                   <p class="font-semibold !mb-2" role="status">
                     Thank you! Feedback received.
                   </p>
-                  <div>
+                  <div class="space-y-1">
                     <label for="feedback-comment">
                       Any additional comments? (Optional)
                     </label>
@@ -105,7 +105,7 @@ export default function Feedback({ file }) {
                     >
                     </textarea>
                   </div>
-                  <div>
+                  <div class="space-y-1">
                     <label for="feedback-contact">
                       Email address (optional)
                     </label>
@@ -119,26 +119,17 @@ export default function Feedback({ file }) {
                     />
                   </div>
                   <p class="!mt-2 mb-4 text-sm">
-                    If you need a reply, please contact{" "}
-                    <a href="https://support.github.com/">support</a>.
+                    If you need a reply, please{" "}
+                    <a href="https://support.github.com/" class="underline">
+                      contact support
+                    </a>.
                   </p>
-                  <div>
-                    <input
-                      class="hidden"
-                      id="feedback-cancel"
-                      type="radio"
-                      name="feedback-vote"
-                      aria-label="cancel"
-                      value="cancel"
-                    />
-                    <label class="btn" for="feedback-cancel">
-                      Cancel
-                    </label>
+                  <div class="flex flex-wrap gap-2 items-center">
                     <button
                       type="submit"
-                      class="btn"
+                      class="btn bg-green-400 dark:bg-green-600"
                     >
-                      Send
+                      Send feedback
                     </button>
                   </div>
                 </div>
