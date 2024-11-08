@@ -40,20 +40,17 @@ most direct way to do this is to use the **Deno: Initialize Workspace
 Configuration** from the VS Code
 [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).
 
-![screenshot of the command palette with Deno: Initialize Workspace Configuration](./images/command_palette.png)]
+![screenshot of the command palette with Deno: Initialize Workspace Configuration](./images/command_palette.png)
 
-This will activate a helper which will ask if you want to enable linting and the
-Deno unstable APIs for the project. This command will instruct VS Code to store
-these settings in the workspace configuration (your workspace root
-`.vscode/settings.json`). Once the helper is finished, you will get a
-notification that Deno is setup for the project.
+This command will add `"deno.enable": true` to the workspace configuration (your
+workspace root `.vscode/settings.json`). Once the command is finished, you will
+get a notification that Deno workspace is initialized.
 
-![screenshot of the .vscode/setting.json configured as a workspace folder](./images/workspace_folder_config.png)
+![screenshot of the notification 'Deno workspace initialized'](./images/vscode_workspace_initialized.png)
 
 These settings (and other settings) are available via the VS Code
 [settings](https://code.visualstudio.com/docs/getstarted/userinterface#_settings)
-panel. In the panel the setting is **Deno: Enable** and when manually editing
-the JSON, the setting is `deno.enable`.
+panel. In the panel the setting is **Deno: Enable**.
 
 :::note
 
