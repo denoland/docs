@@ -26,11 +26,11 @@ import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 import {
   clear as oramaClear,
-  notify as oramaNotify,
   deploy as oramaDeploy,
   generateDocumentsForExamples,
   generateDocumentsForPage,
   generateDocumentsForSymbols,
+  notify as oramaNotify,
   OramaDocument,
 } from "./orama.ts";
 import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
@@ -218,11 +218,20 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
 
     await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, pageEntries, "pages");
 
-
-    await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, await generateDocumentsForExamples(), "examples");
+    await oramaNotify(
+      ORAMA_API_KEY,
+      ORAMA_INDEX_ID,
+      await generateDocumentsForExamples(),
+      "examples",
+    );
 
     try {
-      await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, await generateDocumentsForSymbols(), "symbols");
+      await oramaNotify(
+        ORAMA_API_KEY,
+        ORAMA_INDEX_ID,
+        await generateDocumentsForSymbols(),
+        "symbols",
+      );
     } catch (e) {
       console.warn(
         "⚠️ Orama documents for reference docs were not generated.",

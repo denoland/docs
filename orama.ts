@@ -157,7 +157,11 @@ export async function notify(
     },
   );
   if (!res.ok) {
-    console.error(`Orama notify '${label}' failed`, res.status, await res.text());
+    console.error(
+      `Orama notify '${label}' failed`,
+      res.status,
+      await res.text(),
+    );
   } else {
     console.log(`🚀 Orama notify '${label}' succeeded`);
   }
