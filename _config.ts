@@ -25,6 +25,8 @@ import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 import {
+  clear as oramaClear,
+  notify as oramaNotify,
   deploy as oramaDeploy,
   generateDocumentsForExamples,
   generateDocumentsForPage,
@@ -199,7 +201,9 @@ const ORAMA_API_KEY = Deno.env.get("ORAMA_CLOUD_API_KEY");
 const ORAMA_INDEX_ID = Deno.env.get("ORAMA_CLOUD_INDEX_ID");
 if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
   site.process([".html"], async (pages) => {
-    let searchEntries: OramaDocument[] = [];
+    let pageEntries: OramaDocument[] = [];
+
+    await oramaClear(ORAMA_API_KEY, ORAMA_INDEX_ID);
 
     for (const page of pages) {
       if (
@@ -208,14 +212,17 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
           page.data.url.startsWith("/deploy/") ||
           page.data.url.startsWith("/subhosting/"))
       ) {
-        searchEntries = searchEntries.concat(generateDocumentsForPage(page));
+        pageEntries = pageEntries.concat(generateDocumentsForPage(page));
       }
     }
 
-    searchEntries = searchEntries.concat(await generateDocumentsForExamples());
+    await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, pageEntries, "pages");
+
+
+    await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, await generateDocumentsForExamples(), "examples");
 
     try {
-      searchEntries = searchEntries.concat(await generateDocumentsForSymbols());
+      await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, await generateDocumentsForSymbols(), "symbols");
     } catch (e) {
       console.warn(
         "⚠️ Orama documents for reference docs were not generated.",
@@ -223,7 +230,7 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
       );
     }
 
-    await oramaDeploy(ORAMA_API_KEY, ORAMA_INDEX_ID, searchEntries);
+    await oramaDeploy(ORAMA_API_KEY, ORAMA_INDEX_ID);
   });
 } else {
   console.warn("⚠️ Orama documents were not generated.");

@@ -121,10 +121,9 @@ export async function generateDocumentsForExamples(): Promise<OramaDocument[]> {
   }));
 }
 
-export async function deploy(
+export async function clear(
   apiKey: string,
   indexId: string,
-  documents: OramaDocument[],
 ) {
   const res = await fetch(
     `https://api.oramasearch.com/api/v1/webhooks/${indexId}/snapshot`,
@@ -134,15 +133,44 @@ export async function deploy(
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
       },
-      body: JSON.stringify(documents),
+      body: "[]",
     },
   );
   if (!res.ok) {
-    console.error(`Orama snapshot failed`, res.status, await res.text());
+    console.error(`Orama clear failed`, res.status, await res.text());
   } else {
-    console.log(`🚀 Orama snapshot succeeded`);
+    console.log(`🚀 Orama clear succeeded`);
   }
+}
 
+export async function notify(
+  apiKey: string,
+  indexId: string,
+  documents: OramaDocument[],
+  label: string,
+) {
+  const res = await fetch(
+    `https://api.oramasearch.com/api/v1/webhooks/${indexId}/notify`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({ upsert: documents }),
+    },
+  );
+  if (!res.ok) {
+    console.error(`Orama notify '${label}' failed`, res.status, await res.text());
+  } else {
+    console.log(`🚀 Orama notify '${label}' succeeded`);
+  }
+}
+
+export async function deploy(
+  apiKey: string,
+  indexId: string,
+) {
   const resp = await fetch(
     `https://api.oramasearch.com/api/v1/webhooks/${indexId}/deploy`,
     {
