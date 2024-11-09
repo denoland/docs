@@ -32,7 +32,13 @@ When prompted, select the default options to create a new Next.js app with
 TypeScript.
 
 Then, `cd` into the newly created project folder and run the following command
-to serve your new Next.js app:
+to install the dependencies
+
+```sh
+deno install
+```
+
+Now you can serve your new Next.js app:
 
 ```sh
 deno task dev
