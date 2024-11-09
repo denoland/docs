@@ -36,6 +36,83 @@ This default setting prevents your test code from contributing to your coverage
 report. For a URL to match it must match the include pattern and not match the
 exclude pattern.
 
+## Ignoring Code
+
+Code can be ignored in generated coverage reports by adding coverage ignore
+comments. Branches and lines in ignored code will be excluded from the report.
+Ignored branches and lines do not count as covered lines. Instead, ignored
+lines of code are treated as empty lines.
+
+To ignore an entire file, add a `// deno-coverage-ignore-file` comment at the
+top of the file.
+
+```ts
+// deno-coverage-ignore-file
+
+// all code in this file is ignored
+```
+
+Ignored files will not appear in the coverage report.
+
+To ignore a single line, add a `// deno-coverage-ignore-next` comment on the
+line above the code you want to ignore.
+
+```ts
+// deno-coverage-ignore-next
+console.log("this line is ignored");
+```
+
+To ignore multiple lines, add a `// deno-coverage-ignore-start` comment above
+the code you want to ignore and a `// deno-coverage-ignore-stop` comment below.
+
+```ts
+// deno-coverage-ignore-start
+if (condition) {
+  console.log("both the branch and lines are ignored");
+}
+// deno-coverage-ignore-stop
+```
+
+All code after a `// deno-coverage-ignore-start` comment is ignored until a
+`// deno-coverage-ignore-stop` is reached. However, if there are multiple
+consecutive start comments, each of these must be terminated by a corresponding
+stop comment.
+
+```ts
+// deno-coverage-ignore-start
+if (condition) {
+  // deno-coverage-ignore-start
+  console.log('this line is ignored');
+  // deno-coverage-ignore-stop
+  console.log('this line is also ignored');
+}
+// deno-coverage-ignore-stop
+
+console.log('this line is not ignored');
+```
+
+Only white space may precede the coverage directive in a coverage comment.
+However, any text may trail the directive.
+
+```ts
+// deno-coverage-ignore-next Trailing text is allowed.
+console.log('This line is ignored');
+
+// But leading text isn't. deno-coverage-ignore-next
+console.log('This line is not ignored');
+```
+
+Coverage comments must start with `//`. Comments starting with `/*` are not
+valid coverage comments.
+
+```ts
+// deno-coverage-ignore-next
+console.log('This line is ignored');
+
+/* deno-coverage-ignore-next */
+console.log('This line is not ignored');
+```
+
 ## Output Formats
 
 By default we support Deno's own coverage format - but you can also output
