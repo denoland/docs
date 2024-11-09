@@ -40,8 +40,8 @@ exclude pattern.
 
 Code can be ignored in generated coverage reports by adding coverage ignore
 comments. Branches and lines in ignored code will be excluded from the report.
-Ignored branches and lines do not count as covered lines. Instead, ignored
-lines of code are treated as empty lines.
+Ignored branches and lines do not count as covered lines. Instead, ignored lines
+of code are treated as empty lines.
 
 To ignore an entire file, add a `// deno-coverage-ignore-file` comment at the
 top of the file.
@@ -82,13 +82,13 @@ stop comment.
 // deno-coverage-ignore-start
 if (condition) {
   // deno-coverage-ignore-start
-  console.log('this line is ignored');
+  console.log("this line is ignored");
   // deno-coverage-ignore-stop
-  console.log('this line is also ignored');
+  console.log("this line is also ignored");
 }
 // deno-coverage-ignore-stop
 
-console.log('this line is not ignored');
+console.log("this line is not ignored");
 ```
 
 Only white space may precede the coverage directive in a coverage comment.
@@ -96,10 +96,10 @@ However, any text may trail the directive.
 
 ```ts
 // deno-coverage-ignore-next Trailing text is allowed.
-console.log('This line is ignored');
+console.log("This line is ignored");
 
 // But leading text isn't. deno-coverage-ignore-next
-console.log('This line is not ignored');
+console.log("This line is not ignored");
 ```
 
 Coverage comments must start with `//`. Comments starting with `/*` are not
@@ -107,10 +107,10 @@ valid coverage comments.
 
 ```ts
 // deno-coverage-ignore-next
-console.log('This line is ignored');
+console.log("This line is ignored");
 
 /* deno-coverage-ignore-next */
-console.log('This line is not ignored');
+console.log("This line is not ignored");
 ```
 
 ## Output Formats
