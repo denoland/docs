@@ -814,7 +814,7 @@
     },
     {
       "name": "add",
-      "about": "Add dependencies to your configuration file.\n  \u001b[38;5;245mdeno add jsr:@std/path\u001b[39m\n\nYou can add multiple dependencies at once:\n  \u001b[38;5;245mdeno add jsr:@std/path jsr:@std/assert\u001b[39m",
+      "about": "Add dependencies to your configuration file.\n  \u001b[38;5;245mdeno add jsr:@std/path\u001b[39m\n\nYou can add multiple dependencies at once:\n  \u001b[38;5;245mdeno add jsr:@std/path jsr:@std/assert\u001b[39m\n\nYou can also add npm packages:\n  \u001b[38;5;245mdeno add npm:react\u001b[39m\n\nYou can mix both jsr and npm packages:\n  \u001b[38;5;245mdeno add jsr:@std/path npm:node-emoji\u001b[39m",
       "args": [
         {
           "name": "packages",
