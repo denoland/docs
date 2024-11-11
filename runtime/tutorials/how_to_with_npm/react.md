@@ -332,8 +332,9 @@ out about each one.
 At this point the app is being served by the Vite development server. To serve
 the app in production, you can build the app with Vite and then serve the built
 files with Deno. To do so we'll need to update the api server to serve the built
-files. We'll write some middleware to do this. In your `api` directory create a
-new file called `routeStaticFilesFrom.ts` and add the following code:
+files. We'll write some middleware to do this. In your `api` directory create a 
+`util` folder. Inside this folder, create a new file called `routeStaticFilesFrom.ts`
+and add the following code:
 
 ```ts title="routeStaticFilesFrom.ts"
 import { Next } from "jsr:@oak/oak/middleware";
