@@ -524,7 +524,7 @@ body:not(:has(.ddoc)) {
 }
 
 .btn {
-  @apply px-4 py-2 text-sm font-semibold !text-foreground-primary
+  @apply max-w-max px-4 py-2 text-sm font-semibold !text-foreground-primary
     bg-background-tertiary border border-foreground-secondary
     dark:border-background-tertiary rounded-full transition inline-flex gap-2
     items-center cursor-pointer !no-underline;
@@ -541,9 +541,12 @@ body:not(:has(.ddoc)) {
   @apply bg-green-400 dark:bg-green-600;
 }
 
-#feedback-no:checked ~ #feedback-more,
-#feedback-yes:checked ~ #feedback-more {
-  @apply flex flex-col gap-2;
+#feedback-form__content:has(input[type="radio"]:checked) {
+  grid-template-rows: max-content 1fr;
+
+  #feedback-more {
+    @apply flex flex-col gap-2;
+  }
 }
 
 #feedback-more label {

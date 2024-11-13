@@ -28,7 +28,8 @@ feedbackForm?.addEventListener("submit", (event) => {
     comment: form["feedback-comment"] as string,
     contact: form["feedback-contact"] as string,
   });
-  feedbackForm.innerHTML = "<p>Thank you for your feedback!</p>";
+  feedbackForm.innerHTML =
+    "<p>Thank you for helping make the Deno docs awesome!</p>";
 });
 
 async function sendFeedback(feedback: Partial<FeedbackSubmission>) {
