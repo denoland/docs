@@ -525,12 +525,18 @@ body:not(:has(.ddoc)) {
 
 .btn {
   @apply max-w-max px-4 py-2 text-sm font-semibold !text-foreground-primary
-    bg-background-tertiary border border-foreground-secondary
+    bg-background-primary dark:bg-background-tertiary border border-foreground-secondary
+    hover:shadow-[inset_0_0_0_1px] focus:shadow-[inset_0_0_0_1px]
     dark:border-background-tertiary rounded-full transition inline-flex gap-2
     items-center cursor-pointer !no-underline;
   & svg {
     @apply inline-block size-4;
   }
+}
+
+#feedback-no:focus + label,
+#feedback-yes:focus + label {
+  @apply shadow-[inset_0_0_0_1px];
 }
 
 #feedback-no:checked + label {

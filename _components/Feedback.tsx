@@ -4,9 +4,12 @@ export default function Feedback({ file }) {
   } else {
     const githubPath = "https://github.com/denoland/docs/edit/main" + file;
     return (
-      <section class="flex flex-col mt-12 gap-2 p-4 border border-blue-100
+      <section
+        id="feedback-section"
+        class="flex flex-col mt-12 gap-2 p-4 border border-blue-100
       dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary
-      rounded max-w-[66ch] mx-auto">
+      rounded max-w-[66ch] mx-auto"
+      >
         <h2 class="text-xl border-b border-blue-100 dark:border-background-tertiary
         mb-2 pb-2 font-normal">
           Did you find what you needed?
@@ -99,13 +102,13 @@ export default function Feedback({ file }) {
                   id="feedback-more"
                   class="hidden w-full overflow-hidden"
                 >
-                  <p class="font-semibold !my-2">
+                  <p class="font-semibold !mt-2 !mb-4">
                     Thank you! Feedback received.{" "}
                     <span aria-hidden="true">✅</span>
                   </p>
                   <div class="space-y-1">
                     <label for="feedback-comment">
-                      Any additional comments? (optional)
+                      Any additional comments? (<i>optional</i>)
                     </label>
                     <textarea
                       class="block w-full p-2 border border-foreground-tertiary dark:bg-background-primary rounded"
@@ -116,7 +119,7 @@ export default function Feedback({ file }) {
                   </div>
                   <div class="space-y-1">
                     <label for="feedback-contact">
-                      Email address (optional)
+                      Email address (<i>optional</i>)
                     </label>
                     <input
                       type="email"
