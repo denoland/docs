@@ -84,7 +84,7 @@ export default function () {
                 href="/runtime/reference/migration_guide"
                 class="runtime-link underline underline-offset-4"
               >
-                what has changed
+                what's changed
               </a>{" "}
               in the release.
             </p>

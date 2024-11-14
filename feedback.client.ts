@@ -6,6 +6,7 @@ let lastFeedbackItemId: string | null = null;
 const feedbackYes = document.getElementById("feedback-yes");
 const feedbackNo = document.getElementById("feedback-no");
 const feedbackForm = document.getElementById("feedback-form");
+const feedbackSection = document.getElementById("feedback-section");
 
 feedbackYes?.addEventListener("click", () => {
   sendFeedback({
@@ -28,7 +29,10 @@ feedbackForm?.addEventListener("submit", (event) => {
     comment: form["feedback-comment"] as string,
     contact: form["feedback-contact"] as string,
   });
-  feedbackForm.innerHTML = "<p>Thank you for your feedback!</p>";
+  if (feedbackSection) {
+    feedbackSection.innerHTML =
+      "<p>Thank you for helping make the Deno docs awesome!</p>";
+  }
 });
 
 async function sendFeedback(feedback: Partial<FeedbackSubmission>) {
