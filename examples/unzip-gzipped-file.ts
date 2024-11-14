@@ -8,7 +8,6 @@
  * An example of how to decompress a gzipped file and save it to disk.
  */
 
-
 // Open the gzipped file for reading
 const file = await Deno.open("large_file.json.gz");
 
@@ -16,7 +15,7 @@ const file = await Deno.open("large_file.json.gz");
 const outputPath = await Deno.create("large_file.json");
 
 // Get the writable stream of the output file
-const writableStream = (outputPath).writable;
+const writableStream = outputPath.writable;
 
 // Create a decompression stream for gzip format
 const stream = new DecompressionStream("gzip");
