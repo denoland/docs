@@ -193,7 +193,6 @@ using any APIs exclusive to one or the other. In such cases, a typical
 ```json title="deno.json"
 {
   "compilerOptions": {
-    "target": "esnext",
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   }
 }
@@ -207,7 +206,6 @@ should add that library to the mix as well:
 ```json title="deno.json"
 {
   "compilerOptions": {
-    "target": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
