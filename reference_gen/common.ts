@@ -1,6 +1,5 @@
 import { HrefResolver, ShortPath } from "@deno/doc";
 import { dirname, join } from "@std/path";
-import { pooledMap } from "@std/async";
 
 export function renderMarkdown(
   md: string,
@@ -32,20 +31,14 @@ export const hrefResolver: HrefResolver = {
 export async function writeFiles(root: string, files: Record<string, string>) {
   await Deno.remove(root, { recursive: true });
 
-  const pool = pooledMap(
-    300,
-    Object.entries(files),
-    async ([path, content]) => {
+  await Promise.all(
+    Object.entries(files).map(async ([path, content]) => {
       const joined = join(root, path);
 
       await Deno.mkdir(dirname(joined), { recursive: true });
       await Deno.writeTextFile(joined, content);
-    },
+    }),
   );
-
-  for await (const _ of pool) {
-    //
-  }
 
   console.log(`Written ${Object.keys(files).length} files`);
 }
