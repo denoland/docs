@@ -158,8 +158,6 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 )}
                 {renderedCommand}
                 {props.children}
-
-                {props.comp.Feedback({ file })}
               </div>
             </article>
             {parentNavigation && (
@@ -184,8 +182,10 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 </div>
               </nav>
             )}
+            {props.comp.Feedback({ file })}
           </div>
         </main>
+
         <aside class="hidden xl:block pb-8 pr-8 col-span-2">
           <div
             class="py-2 sticky overflow-y-auto top-4 h-[calc(100vh-7rem)]"
