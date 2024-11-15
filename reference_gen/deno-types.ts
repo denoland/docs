@@ -25,8 +25,8 @@ for (const jsdoc of file.getDescendantsOfKind(ts.SyntaxKind.JSDoc)) {
 
 for (
   const denoNs of file.getDescendantsOfKind(ts.SyntaxKind.ModuleDeclaration)
-  .filter((descendant) => descendant.getName() === "Deno")
-  ) {
+    .filter((descendant) => descendant.getName() === "Deno")
+) {
   const denoNsJSDoc = denoNs.getFirstChildIfKind(ts.SyntaxKind.JSDoc);
   if (denoNsJSDoc) {
     denoNsJSDoc.addTag({

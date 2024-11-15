@@ -24,7 +24,7 @@ const files = await generateHtml({ [url]: nodes }, {
     singleMode: true,
     compose(_currentResolve, _usageToMd) {
       return new Map();
-    }
+    },
   },
   markdownRenderer: renderMarkdown,
   markdownStripper: stripMarkdown,

@@ -40,7 +40,7 @@ const files = await generateHtml(nodesByUrl, {
       } else {
         return new Map();
       }
-    }
+    },
   },
   markdownRenderer: renderMarkdown,
   markdownStripper: stripMarkdown,
