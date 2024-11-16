@@ -84,7 +84,7 @@ export default function () {
                 href="/runtime/reference/migration_guide"
                 class="runtime-link underline underline-offset-4"
               >
-                what has changed
+                what's changed
               </a>{" "}
               in the release.
             </p>
@@ -352,7 +352,21 @@ export default function () {
               </div>
             </div>
           </div>
-
+          <div class="flex flex-col gap-4 p-4 bg-deploy-50 dark:bg-background-secondary border-l-4 text-deploy-foreground border-deploy-500">
+            <p class="text-lg">
+              Run Deno Deploy on your own infrastructure with our self-hosted
+              solution running on AWS, GCP, or Azure.{"  "}
+              <a
+                href="https://unf275cfh14.typeform.com/to/dIicJYSQ"
+                class="deploy-link underline underline-offset-4 external"
+              >
+                Learn more{" "}
+                <span aria-hidden="true" class="whitespace-pre">
+                  -&gt;
+                </span>
+              </a>
+            </p>
+          </div>
           {/* Deploy content */}
           <div class="flex flex-col gap-8">
             {/* Scection Header */}
