@@ -6,8 +6,9 @@
     "@std/fs": "jsr:@std/fs@^0.229.3",
     "@std/media-types": "jsr:@std/media-types@^1.0.3",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
+    "lume/": "https://deno.land/x/lume@v2.4.1/",
+    "@orama/wc-components/": "https://unpkg.com/@orama/wc-components@0.1.7/",
     "googleapis": "npm:googleapis@^144.0.0",
-    "lume/": "https://deno.land/x/lume@v2.3.3/",
     "tailwindcss": "npm:tailwindcss@^3.4.9"
   },
   "tasks": {
@@ -15,7 +16,8 @@
     "serve": "deno run -A lume.ts -s",
     "debug": "deno task build && deno task prod",
     "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
-    "reference": "cd reference_gen && deno task types && deno task doc"
+    "reference": "cd reference_gen && deno task types && deno task doc",
+    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -"
   },
   "compilerOptions": {
     "types": [
