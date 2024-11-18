@@ -69,6 +69,7 @@ export default function Layout(props: Lume.Data) {
         <script type="module" src="/copy.client.js"></script>
         <script type="module" src="/search.client.js"></script>
         <script type="module" src="/tabs.client.js"></script>
+        <script type="module" src="/feedback.client.js"></script>
         <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"

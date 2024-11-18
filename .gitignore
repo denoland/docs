@@ -11,3 +11,4 @@ reference_gen/node_modules
 reference_gen/types
 
 .DS_Store
+.env

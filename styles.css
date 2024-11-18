@@ -14,6 +14,7 @@
   --runtime-background: 124deg, 100%, 97.1%;
   --runtime-foreground: 184deg, 100%, 10%;
   --primary: 217deg, 91%, 59%;
+  --primary-dark: 217deg, 91%, 49%;
   --info: 224deg, 64.3%, 32.9%;
   --note: 224deg, 64.3%, 32.9%;
   --caution: 45.4deg, 93.39%, 47.45%;
@@ -34,6 +35,7 @@
   --caution: 45.4deg, 93.39%, 67.11%;
   /* The following are not different from light mode (yet?) */
   --primary: 217deg, 91%, 59%;
+  --primary-dark: 217deg, 91%, 49%;
   --tip: 142deg, 76.2%, 36.3%;
 
   color: var(--foreground-primary);
@@ -145,6 +147,10 @@ h1 {
     }
   }
 
+  & section :where(h2, h3, h4, h5, h6) {
+    @apply m-0 border-b-0 tracking-normal;
+  }
+
   & details {
     @apply rounded border border-gray-1 py-4 px-4;
 
@@ -215,7 +221,7 @@ body:not(:has(.ddoc)) {
 /* Common styles for all CTAs */
 .docs-cta {
   @apply border text-balance text-black font-bold inline-block py-3.5 px-4
-    rounded-md w-max hover:no-underline transition-colors duration-200;
+    rounded-full w-max hover:no-underline transition-colors duration-200;
 }
 
 /* Specific styles for runtime CTAs */
@@ -515,4 +521,40 @@ body:not(:has(.ddoc)) {
 
 .copyButton[data-copied="true"] .check-icon {
   display: inline;
+}
+
+.btn {
+  @apply max-w-max px-4 py-2 text-sm font-semibold !text-foreground-primary
+    bg-background-primary dark:bg-background-tertiary border
+    border-foreground-secondary hover:shadow-[inset_0_0_0_1px]
+    focus:shadow-[inset_0_0_0_1px] dark:border-background-tertiary rounded-full
+    transition inline-flex gap-2 items-center cursor-pointer !no-underline;
+  & svg {
+    @apply inline-block size-4;
+  }
+}
+
+#feedback-no:focus + label,
+#feedback-yes:focus + label {
+  @apply shadow-[inset_0_0_0_1px];
+}
+
+#feedback-no:checked + label {
+  @apply bg-red-400 dark:bg-red-600;
+}
+
+#feedback-yes:checked + label {
+  @apply bg-green-400 dark:bg-green-600;
+}
+
+#feedback-form__content:has(input[type="radio"]:checked) {
+  grid-template-rows: max-content 1fr;
+
+  #feedback-more {
+    @apply flex flex-col gap-2;
+  }
+}
+
+#feedback-more label {
+  @apply inline-block text-sm;
 }

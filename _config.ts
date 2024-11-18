@@ -1,3 +1,5 @@
+import "@std/dotenv/load";
+
 import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
@@ -30,21 +32,36 @@ import codeblockCopyPlugin from "./markdown-it/codeblock-copy.ts";
 import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
 import relativeLinksPlugin from "./markdown-it/relative-path.ts";
 import replacerPlugin from "./markdown-it/replacer.ts";
-import { apiDocumentContentTypeMiddleware } from "./middleware.ts";
 import {
+  clear as oramaClear,
   deploy as oramaDeploy,
   generateDocumentsForExamples,
   generateDocumentsForPage,
   generateDocumentsForSymbols,
+  notify as oramaNotify,
   OramaDocument,
 } from "./orama.ts";
+
+import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
+import redirectsMiddleware, {
+  toFileAndInMemory,
+} from "./middleware/redirects.ts";
+import createRoutingMiddleware from "./middleware/functionRoutes.ts";
+import createGAMiddleware from "./middleware/googleAnalytics.ts";
 
 const site = lume(
   {
     location: new URL("https://docs.deno.com"),
     caseSensitiveUrls: true,
     server: {
-      middlewares: [apiDocumentContentTypeMiddleware],
+      middlewares: [
+        redirectsMiddleware,
+        createRoutingMiddleware(),
+        createGAMiddleware({
+          addr: { transport: "tcp", hostname: "localhost", port: 3000 },
+        }),
+        apiDocumentContentTypeMiddleware,
+      ],
     },
   },
   {
@@ -98,12 +115,13 @@ site.copy("deno.json");
 site.copy("go.json");
 site.copy("oldurls.json");
 site.copy("server.ts");
-site.copy("middleware.ts");
+site.copy("middleware");
 site.copy("examples");
+site.copy(".env");
 
 site.use(
   redirects({
-    output: "json",
+    output: toFileAndInMemory,
   }),
 );
 site.use(search());
@@ -130,7 +148,7 @@ site.use(
 // don't use a ddoc class.
 site.process([".html"], (pages) => {
   for (const page of pages) {
-    const document = page.document;
+    const document = page.document!;
     if (!document.querySelector(".ddoc")) {
       document.body.classList.add("apply-prism");
     }
@@ -204,7 +222,9 @@ const ORAMA_API_KEY = Deno.env.get("ORAMA_CLOUD_API_KEY");
 const ORAMA_INDEX_ID = Deno.env.get("ORAMA_CLOUD_INDEX_ID");
 if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
   site.process([".html"], async (pages) => {
-    let searchEntries: OramaDocument[] = [];
+    let pageEntries: OramaDocument[] = [];
+
+    await oramaClear(ORAMA_API_KEY, ORAMA_INDEX_ID);
 
     for (const page of pages) {
       if (
@@ -213,14 +233,26 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
           page.data.url.startsWith("/deploy/") ||
           page.data.url.startsWith("/subhosting/"))
       ) {
-        searchEntries = searchEntries.concat(generateDocumentsForPage(page));
+        pageEntries = pageEntries.concat(generateDocumentsForPage(page));
       }
     }
 
-    searchEntries = searchEntries.concat(await generateDocumentsForExamples());
+    await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, pageEntries, "pages");
+
+    await oramaNotify(
+      ORAMA_API_KEY,
+      ORAMA_INDEX_ID,
+      await generateDocumentsForExamples(),
+      "examples",
+    );
 
     try {
-      searchEntries = searchEntries.concat(await generateDocumentsForSymbols());
+      await oramaNotify(
+        ORAMA_API_KEY,
+        ORAMA_INDEX_ID,
+        await generateDocumentsForSymbols(),
+        "symbols",
+      );
     } catch (e) {
       console.warn(
         "⚠️ Orama documents for reference docs were not generated.",
@@ -228,7 +260,7 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
       );
     }
 
-    await oramaDeploy(ORAMA_API_KEY, ORAMA_INDEX_ID, searchEntries);
+    await oramaDeploy(ORAMA_API_KEY, ORAMA_INDEX_ID);
   });
 } else {
   console.warn("⚠️ Orama documents were not generated.");
