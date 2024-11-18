@@ -8,6 +8,7 @@ import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import postcss from "lume/plugins/postcss.ts";
+import checkUrls from "lume/plugins/check_urls.ts";
 
 import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
@@ -279,6 +280,13 @@ site.ignore(
 );
 
 site.scopedUpdates((path) => path == "/overrides.css");
+site.use(checkUrls({
+  external: false, // Set to true to check external links
+  output: "_broken_links.json",
+  ignore: [
+    "https://www.googletagmanager.com",
+  ],
+}));
 
 site.remoteFile(
   "orama.css",
