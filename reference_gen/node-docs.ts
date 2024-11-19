@@ -1,6 +1,6 @@
 import { Node, Project, ts } from "ts-morph";
 import EXCLUDE_MAP from "./node-exclude-map.json" with { type: "json" };
-import { Description, generateDescriptions } from "../runtime/_data.ts";
+import { generateDescriptions, Description } from "../runtime/_data.ts";
 
 const descriptions = await generateDescriptions();
 
