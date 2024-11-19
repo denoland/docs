@@ -72,9 +72,19 @@ await kv.delete(["players", "carlos"]);
 const aliceScoreKey = ["scores", "alice"];
 await kv.set(aliceScoreKey, new Deno.KvU64(0n));
 
+
+// To prepare an atomic transaction to update the score, first we need to
+// check if the score has been modified since we read it. We can use the
+// versionstamp to check if the value has been modified since we read it.
+const aliceScoreEntry = await kv.get<Deno.KvU64>(aliceScoreKey);
+const atomicCheck = {
+  key: aliceScoreEntry.key,
+  versionstamp: aliceScoreEntry.versionstamp,
+};
+
 // Add 10 to the player's score in an atomic transaction
 const res = await kv.atomic()
-  .check({ key: aliceScoreKey, versionstamp: null }) // Check if this key has been modified since we read it
+  .check(atomicCheck)
   .mutate({
     type: "sum",
     key: aliceScoreKey,
