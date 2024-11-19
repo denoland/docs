@@ -98,11 +98,7 @@ Then read the data file relative to the directory path of the current module via
 
 ```ts
 // main.ts
-import { join } from "@std/path/join";
-
-const names = Deno.readTextFileSync(
-  join(import.meta.dirname, "./names.csv"),
-);
+const names = Deno.readTextFileSync(import.meta.dirname + "/names.csv");
 
 // use data and names here
 ```
