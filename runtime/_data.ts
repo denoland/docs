@@ -35,6 +35,7 @@ export const sidebar = [
         label: "HTTP Server",
         id: "/runtime/fundamentals/http_server/",
       },
+      "/runtime/fundamentals/tracing_and_opentelemetry/",
       "/runtime/fundamentals/stability_and_releases/",
     ],
   },
