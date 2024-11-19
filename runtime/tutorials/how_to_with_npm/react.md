@@ -303,7 +303,7 @@ export default function Dinosaur() {
 
 ### Styling the list of dinosaurs
 
-Since we are displaying the list of dinosaurs on the main page, let's do som
+Since we are displaying the list of dinosaurs on the main page, let's do some
 basic formatting. Add the following to the bottom of `src/App.css` to display
 our list of dinosaurs in an orderly fashion:
 
@@ -366,7 +366,7 @@ middleware:
 import { Application, Router } from "@oak/oak";
 import { oakCors } from "@tajpouria/cors";
 import data from "./data.json" with { type: "json" };
-import routeStaticFilesFrom from "./util/routeStaticFilesFrom.ts";
+import routeStaticFilesFrom from "./api/routeStaticFilesFrom.ts";
 
 const router = new Router();
 

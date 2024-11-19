@@ -166,34 +166,6 @@ h1 {
   & pre {
     @apply border;
   }
-
-  & .feedback-form {
-    @apply flex flex-col mt-12 gap-2 p-4 border-2 border-blue-100
-      dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary
-      rounded;
-
-    & .form-header {
-      @apply text-xl border-b border-blue-100 dark:border-background-tertiary
-        mb-2;
-    }
-
-    & .form-section-header {
-      @apply w-full text-base font-semibold mb-2;
-    }
-
-    & p {
-      @apply mb-4;
-    }
-
-    & textarea, input {
-      @apply p-2 border border-foreground-tertiary dark:bg-background-primary
-        rounded;
-    }
-
-    & input {
-      @apply h-10;
-    }
-  }
 }
 
 body:not(:has(.ddoc)) {
@@ -249,7 +221,7 @@ body:not(:has(.ddoc)) {
 /* Common styles for all CTAs */
 .docs-cta {
   @apply border text-balance text-black font-bold inline-block py-3.5 px-4
-    rounded-md w-max hover:no-underline transition-colors duration-200;
+    rounded-full w-max hover:no-underline transition-colors duration-200;
 }
 
 /* Specific styles for runtime CTAs */
@@ -552,13 +524,19 @@ body:not(:has(.ddoc)) {
 }
 
 .btn {
-  @apply mr-3 px-4 py-2 text-sm font-semibold text-foreground-primary rounded
-    bg-background-primary hover:bg-foreground-quaternary border
-    border-foreground-tertiary dark:border-background-tertiary transition
-    inline-flex items-center no-underline;
+  @apply max-w-max px-4 py-2 text-sm font-semibold !text-foreground-primary
+    bg-background-primary dark:bg-background-tertiary border
+    border-foreground-secondary hover:shadow-[inset_0_0_0_1px]
+    focus:shadow-[inset_0_0_0_1px] dark:border-background-tertiary rounded-full
+    transition inline-flex gap-2 items-center cursor-pointer !no-underline;
   & svg {
-    @apply inline-block w-3 h-3 ml-2;
+    @apply inline-block size-4;
   }
+}
+
+#feedback-no:focus + label,
+#feedback-yes:focus + label {
+  @apply shadow-[inset_0_0_0_1px];
 }
 
 #feedback-no:checked + label {
@@ -569,15 +547,14 @@ body:not(:has(.ddoc)) {
   @apply bg-green-400 dark:bg-green-600;
 }
 
-#feedback-more:has(div #feedback-cancel:checked) {
-  @apply hidden;
-}
+#feedback-form__content:has(input[type="radio"]:checked) {
+  grid-template-rows: max-content 1fr;
 
-#feedback-no:checked ~ #feedback-more, #feedback-yes:checked ~ #feedback-more {
-  margin-top: 1rem;
-  @apply flex flex-col gap-2;
+  #feedback-more {
+    @apply flex flex-col gap-2;
+  }
 }
 
 #feedback-more label {
-  @apply inline-block text-sm mb-2;
+  @apply inline-block text-sm;
 }

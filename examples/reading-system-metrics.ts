@@ -5,10 +5,11 @@
  * @run --allow-sys <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.systemMemoryInfo} Doc: Deno.systemMemoryInfo
  * @resource {https://docs.deno.com/api/deno/~/Deno.loadavg} Doc: Deno.loadavg
+ * @resource {https://docs.deno.com/api/deno/~/Deno.memoryUsage} Doc: Deno.memoryUsage
  * @group System
  *
  * This example demonstrates how to use Deno's built-in methods to read
- * system metrics such as memory information and load averages.
+ * system metrics such as memory information, load averages and memory usage.
  */
 
 // Get metrics like total memory, free memory, available memory, memory used for buffers and caching,
@@ -30,3 +31,11 @@ console.log("Load Averages:");
 console.log(`1 Minute Load Average: ${loadAvg[0]}`);
 console.log(`5 Minute Load Average: ${loadAvg[1]}`);
 console.log(`15 Minute Load Average: ${loadAvg[2]}`);
+
+// Get memory usage details such as external memory, resident set size (RSS), total heap size, and heap used.
+const memoryUsage = Deno.memoryUsage();
+console.log("Memory Usage:");
+console.log(`External: ${memoryUsage.external / 1024 / 1024} MB`);
+console.log(`RSS: ${memoryUsage.rss / 1024 / 1024} MB`);
+console.log(`Heap Total: ${memoryUsage.heapTotal / 1024 / 1024} MB`);
+console.log(`Heap Used: ${memoryUsage.heapUsed / 1024 / 1024} MB`);

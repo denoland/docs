@@ -152,6 +152,16 @@ Deno.jupyter.svg`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 
 ![`Deno.jupyter.svg` API example](../images/jupyter-svg.png)
 
+`Deno.jupyter.image` is function that will render a JPG or PNG image. You can
+pass a filepath, or already read bytes:
+
+```js
+Deno.jupyter.image("./cat.jpg");
+
+const data = Deno.readFileSync("./dog.png");
+Deno.jupyter.image(data);
+```
+
 ## prompt and confirm APIs
 
 You can use `prompt` and `confirm` Web APIs to wait for user input in your

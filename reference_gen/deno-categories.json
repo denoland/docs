@@ -13,5 +13,5 @@
   "Runtime": "System-related functionality, process management, and observability. \n\nEg {@linkcode Deno.mainModule}, {@linkcode Deno.exit}, {@linkcode Deno.cwd}",
   "Sub Process": "Spawn and manage child processes, execute commands, and collect output. Useful for executing external programs from Deno.\n\nEg {@linkcode Deno.Command}",
   "Testing": "Robust testing and benchmarking capabilities to ensure code quality and performance.\n\nEg {@linkcode Deno.test}, {@linkcode Deno.bench}",
-  "Web Sockets": "Enable real-time communication between clients and servers using WebSockets. Tools to create interactive and dynamic applications.\n\nEg {@linkcode WebSocket}"
+  "WebSockets": "Enable real-time communication between clients and servers using WebSockets. Tools to create interactive and dynamic applications.\n\nEg {@linkcode WebSocket}"
 }
