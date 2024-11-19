@@ -1,5 +1,6 @@
 {
-  "nodeModulesDir": "auto",
+  "nodeModulesDir": true,
+  "lock": false, // TODO(@crowlKats): remove when 2.0 releases
   "imports": {
     "@b-fuze/deno-dom": "jsr:@b-fuze/deno-dom@^0.1.47",
     "@std/async": "jsr:@std/async@^0.224.2",
@@ -7,7 +8,6 @@
     "@std/media-types": "jsr:@std/media-types@^0.224.1",
     "@std/path": "jsr:@std/path@^0.225.1",
     "@std/yaml": "jsr:@std/yaml@^1.0.3",
-    "@deno/doc": "jsr:@deno/doc@0.159.0",
     "@types/node": "npm:@types/node@22.7.2",
     "browserslist": "npm:browserslist@4.23.0",
     "dax": "jsr:@david/dax@^0.40.1",
@@ -15,12 +15,12 @@
     "ts-morph": "jsr:@ts-morph/ts-morph@23.0.0"
   },
   "tasks": {
-    "types:deno": "deno run --allow-read --allow-write --allow-run --allow-env --allow-sys deno-types.ts",
-    "types:node": "deno run --allow-read --allow-write=. --allow-env --allow-sys node-types.ts",
+    "types:deno": "deno run --allow-read --allow-write --allow-run --allow-env --allow-sys deno-docs.ts",
+    "types:node": "deno run --allow-read --allow-write=. --allow-env --allow-sys node-docs.ts",
     "types": "deno task types:deno && deno task types:node",
-    "doc:deno": "mkdir -p gen/deno && deno run --allow-read --allow-write --allow-env --allow-net deno-doc.ts",
-    "doc:web": "mkdir -p gen/web && deno run --allow-read --allow-write --allow-env --allow-net web-doc.ts",
-    "doc:node": "mkdir -p gen/node && deno run --allow-read --allow-write --allow-env --allow-net node-doc.ts",
+    "doc:deno": "mkdir -p gen/deno && DENO_INTERNAL_HTML_DOCS=deno deno doc --html --name=Deno --category-docs=deno-categories.json --output=gen/deno --strip-trailing-html types/deno.d.ts",
+    "doc:web": "mkdir -p gen/web && DENO_INTERNAL_HTML_DOCS=deno deno doc --html --name=Web --category-docs=web-categories.json --output=gen/web --strip-trailing-html types/web.d.ts",
+    "doc:node": "mkdir -p gen/node && DENO_INTERNAL_HTML_DOCS=node deno doc --html --name=Node --output=gen/node --symbol-redirect-map=node-symbol-map.json --default-symbol-map=node-default-map.json --strip-trailing-html types/node/[!_]*",
     "doc": "deno task doc:deno && deno task doc:web && deno task doc:node"
   },
   "exports": {
