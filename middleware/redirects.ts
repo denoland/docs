@@ -45,6 +45,20 @@ export default async function redirectsMiddleware(
     } else {
       res = await next(req);
     }
+
+    if (res.status === 404) {
+      const url = new URL(req.url);
+      const finalPartIndex = url.pathname.lastIndexOf("/");
+      url.pathname = url.pathname.slice(0, finalPartIndex + 1);
+
+      res = new Response(null, {
+        headers: {
+          location: url.href,
+        },
+        status: 302,
+      });
+    }
+
     return res;
   } catch (e) {
     res = new Response("Internal Server Error", {
