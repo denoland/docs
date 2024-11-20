@@ -35,7 +35,7 @@ const tracer = trace.getTracer("my-app");
 
 Deno.serve(async (request) => {
   return await tracer.startActiveSpan("request", async (span) => {
-    console.log("Incoming request", request);
+    console.log("Incoming request for", request.url);
     const body = await fetch("https://hello.deno.dev/").then((r) => r.text());
     const response = new Response(body, { statusCode: 200 });
     span.end();
