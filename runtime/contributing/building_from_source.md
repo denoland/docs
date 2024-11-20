@@ -30,7 +30,7 @@ git clone --recurse-submodules https://github.com/denoland/deno.git
    (otherwise symlinks would require administrator privileges).
 2. Make sure you are using git version 2.19.2.windows.1 or newer.
 3. Set `core.symlinks=true` before the checkout:
-   
+
    ```shell
    git config --global core.symlinks true
    git clone --recurse-submodules https://github.com/denoland/deno.git
