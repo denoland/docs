@@ -60,9 +60,10 @@ $ deno run -A --unstable-otel my-app.js
 ```
 We can see logs and traces have been collected, and explore the data they contain:
 
-| | |
-|-|-|
-| [](https://gc.gy/a2e7b6a1-ee6f-40ff-a7b5-895d15568374.png) | [](https://gc.gy/38d70281-fa06-48c4-9068-8a96d4ea9fe8.png) |
+<div align="center">
+<img src="https://gc.gy/a2e7b6a1-ee6f-40ff-a7b5-895d15568374.png" width="460px">
+<img src="https://gc.gy/38d70281-fa06-48c4-9068-8a96d4ea9fe8.png" width="360px">
+</div>
 
 [1]: https://opentelemetry.io/docs/what-is-opentelemetry/
 [2]: https://opentelemetry.io/docs/specs/otel/protocol/exporter/
