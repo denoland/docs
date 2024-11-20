@@ -4,16 +4,16 @@ title: "Tracing and OpenTelemetry"
 
 Deno provides an experimental high-performance implementation of OpenTelemetry
 ([What is OpenTelemetry?][1]). You can use the official `@opentelemetry`
-packages in combination with Deno's `@deno/otel` package to automatically
-export telemetry from your application.
+packages in combination with Deno's `@deno/otel` package to automatically export
+telemetry from your application.
 
 To activate OpenTelemetry, at least two environment variables are needed:
 
 - [`OTEL_EXPORTER_OTLP_ENDPOINT`][2]: The URL to which spans, metrics, and logs
-will be sent. The default is `http://localhost:4318` and any scheme, host,
-port, and path provided will override that section of the default URL.
+  will be sent. The default is `http://localhost:4318` and any scheme, host,
+  port, and path provided will override that section of the default URL.
 - [`OTEL_EXPORTER_OTLP_PROTOCOL`][2]: Currently this may be one of
-`http/protobuf` or `http/json`.
+  `http/protobuf` or `http/json`.
 
 The OpenTelemetry specification provides a full list of environment variables:
 https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/.
@@ -35,8 +35,8 @@ const tracer = trace.getTracer("my-app");
 
 Deno.serve(async (request) => {
   return await tracer.startActiveSpan("request", async (span) => {
-    console.log('Incoming request', request);
-    const body = await fetch('https://hello.deno.dev/').then((r) => r.text());
+    console.log("Incoming request", request);
+    const body = await fetch("https://hello.deno.dev/").then((r) => r.text());
     const response = new Response(body, { statusCode: 200 });
     span.end();
     return response;
@@ -58,7 +58,9 @@ $ deno run -A --unstable-otel my-app.js
   # Try making some requests to localhost:8000 and
   # exploring the Grafana dashboard.
 ```
-We can see logs and traces have been collected, and explore the data they contain:
+
+We can see logs and traces have been collected, and explore the data they
+contain:
 
 <div align="center">
 <img src="https://gc.gy/a2e7b6a1-ee6f-40ff-a7b5-895d15568374.png" width="460px">
