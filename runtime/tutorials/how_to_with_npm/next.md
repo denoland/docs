@@ -28,6 +28,12 @@ run the following command to create a new Next.js app with Deno:
 deno run -A npm:create-next-app@latest
 ```
 
+If you need to migrate your existing Next 14 app, you can do:
+
+```sh
+deno run -A npm:create-next-app@14
+```
+
 When prompted, select the default options to create a new Next.js app with
 TypeScript.
 
