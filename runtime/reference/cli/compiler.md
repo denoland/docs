@@ -86,8 +86,8 @@ deno compile --include calc.ts --include better_calc.ts main.ts
 
 ## Including Data Files or Directories
 
-To include files or directories in the executable, specify them via the
-`--include <path>` flag.
+Starting in Deno 2.1, you can include files or directories in the executable by
+specifying them via the `--include <path>` flag.
 
 ```shell
 deno compile --include names.csv --include data main.ts
