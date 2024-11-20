@@ -114,5 +114,5 @@ before being merged.
 | use-tabs           | Use tabs instead of spaces for indentation             | **false**  | true, false             |
 
 The formatter can be configured in a
-[`deno.json`](/runtime/fundamentals/configuration/) file. You can specify custom
-rules, plugins, and settings to tailor the formatting process to your needs.
+[`deno.json`](/runtime/fundamentals/configuration/#formatting) file. You can
+specify custom setting to tailor the formatting process to your needs.
