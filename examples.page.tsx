@@ -69,7 +69,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
         <div>
           <main
             id="content"
-            class="max-w-screen-lg flex flex-col gap-8 mx-4 md:mx-auto pt-6 mb-20"
+            class="max-w-screen-lg flex flex-col gap-8 px-4 md:mx-auto pt-6 mb-20"
           >
             <div class="flex flex-col gap-4 md:flex-row justify-between items-start md:items-center">
               <div class="flex flex-col gap-2">
@@ -88,7 +88,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
 
               <a
                 href={url}
-                class="px-4 py-2 rounded bg-background-secondary text-sm border border-foreground-secondary hover:bg-background-primary text-foreground-primary"
+                class="px-4 py-2 rounded bg-background-secondary text-sm whitespace-nowrap border border-foreground-secondary hover:bg-background-primary text-foreground-primary"
               >
                 Edit on Github
               </a>
