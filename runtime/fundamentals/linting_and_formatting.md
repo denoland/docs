@@ -115,4 +115,4 @@ before being merged.
 
 The formatter can be configured in a
 [`deno.json`](/runtime/fundamentals/configuration/#formatting) file. You can
-specify custom setting to tailor the formatting process to your needs.
+specify custom settings to tailor the formatting process to your needs.
