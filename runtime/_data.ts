@@ -250,13 +250,13 @@ export const sectionTitle = "Runtime";
 export const sectionHref = "/runtime/";
 
 export interface Description {
-  kind: "NOTE" | "TIP" | "IMPORTANT" | "WARNING" | "CAUTION";
+  kind: "note" | "tip" | "info" | "caution";
   description: string;
 }
 function handleDescription(description: Description | string): Description {
   if (typeof description === "string") {
     return {
-      kind: "WARNING",
+      kind: "caution",
       description,
     };
   } else {

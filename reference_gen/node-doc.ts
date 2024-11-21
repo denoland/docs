@@ -8,6 +8,13 @@ import {
 } from "./common.ts";
 import symbolRedirectMap from "./node-symbol-map.json" with { type: "json" };
 import defaultSymbolMap from "./node-default-map.json" with { type: "json" };
+import rewriteMap from "./node-rewrite-map.json" with { type: "json" };
+
+const newRewriteMap = Object.fromEntries(
+  Object.entries(rewriteMap).map((
+    [key, val],
+  ) => [import.meta.resolve(val), key]),
+);
 
 const nodesByUrl: Record<string, DocNode[]> = {};
 
@@ -26,6 +33,7 @@ const files = await generateHtml(nodesByUrl, {
   disableSearch: true,
   symbolRedirectMap,
   defaultSymbolMap,
+  rewriteMap: newRewriteMap,
   hrefResolver,
   usageComposer: {
     singleMode: true,

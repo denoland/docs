@@ -4,7 +4,7 @@
   @apply max-w-[75ch] !important;
 }
 
-.ddoc .markdown_summary {
+.ddoc .markdown-summary {
   @apply text-foreground-secondary !important;
 }
 
@@ -29,11 +29,11 @@
     @apply px-4 !important;
   }
 
-  .ddoc .markdown .highlight {
+  .ddoc .markdown-body .highlight {
     @apply -mx-4 !important;
   }
 
-  .ddoc .markdown pre > code:first-child {
+  .ddoc .markdown-body pre > code:first-child {
     @apply px-4 !important;
   }
 }
@@ -76,7 +76,7 @@
   @apply mt-1 !important;
 }
 
-.ddoc .usageContent > div.markdown > pre.highlight {
+.ddoc .usageContent > div.markdown-body > pre.highlight {
   @apply border-primary/25 !important;
 }
 
@@ -90,7 +90,7 @@
   color: inherit;
 }
 
-.ddoc .usageContent > .markdown {
+.ddoc .usageContent > .markdown-body {
   @apply max-w-full !important;
 }
 
@@ -107,6 +107,6 @@
   @apply mt-0 !important;
 }
 
-.ddoc .space-y-7 > .section .markdown {
+.ddoc .space-y-7 > .section .markdown-body {
   @apply mb-6 !important;
 }

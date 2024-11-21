@@ -11,8 +11,8 @@
     "tailwindcss": "npm:tailwindcss@^3.4.9"
   },
   "tasks": {
-    "build": "deno run -A lume.ts",
-    "serve": "deno run -A lume.ts -s",
+    "build": "deno run -A -- lume.ts",
+    "serve": "deno run -A --v8-flags=--max-heap-size=12288 lume.ts -s",
     "debug": "deno task build && deno task prod",
     "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
     "reference": "cd reference_gen && deno task types && deno task doc"

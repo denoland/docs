@@ -141,23 +141,7 @@ site.use(
   }),
 );
 
-// This is a work-around due to deno-dom's dependency of nwsapi not supporting
-// :has selectors, nor having intention of supporting them, so using `body:not(:has(.ddoc))`
-// is not possible. This works around by adding an `apply-prism` class on pages that
-// don't use a ddoc class.
-site.process([".html"], (pages) => {
-  for (const page of pages) {
-    const document = page.document!;
-    if (!document.querySelector(".ddoc")) {
-      document.body.classList.add("apply-prism");
-    }
-  }
-});
-site.use(
-  prism({
-    cssSelector: "body.apply-prism pre code",
-  }),
-);
+site.use(prism());
 
 site.use(toc({ anchor: false }));
 site.use(title());

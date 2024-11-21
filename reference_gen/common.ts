@@ -1,5 +1,106 @@
-import { HrefResolver, ShortPath } from "@deno/doc";
+import type { HrefResolver, ShortPath } from "@deno/doc";
 import { dirname, join } from "@std/path";
+import markdownit from "markdown-it";
+
+import admonitionPlugin from "../markdown-it/admonition.ts";
+import codeblockCopyPlugin from "../markdown-it/codeblock-copy.ts";
+
+const titleOnlyAllowedTypes = new Set([
+  "inline",
+  "paragraph_open",
+  "paragraph_close",
+  "heading_open",
+  "heading_close",
+  "text",
+  "code_inline",
+  "html_inline",
+  "em_open",
+  "em_close",
+  "strong_open",
+  "strong_close",
+  "s_open",
+  "s_close",
+  "sup_open",
+  "sup_close",
+  "link_open",
+  "link_close",
+  "math_inline",
+  "softbreak",
+  "underline_open",
+  "underline_close",
+]);
+
+function walkTitleTokens(tokens) {
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+
+    if (titleOnlyAllowedTypes.has(token.type)) {
+      if (token.children) {
+        walkTitleTokens(token.children);
+      }
+    } else {
+      tokens.splice(i, 1);
+    }
+  }
+}
+
+function titleOnlyPlugin(md) {
+  md.core.ruler.push("titleOnly", function titleOnly(state) {
+    walkTitleTokens(state.tokens);
+
+    const paragraphEnd = state.tokens.findIndex((token) =>
+      token.type === "paragraph_close"
+    );
+
+    if (paragraphEnd !== -1) {
+      state.tokens.splice(paragraphEnd);
+    }
+  });
+}
+
+function createAnchorizePlugin(
+  anchorizer: (content: string, depthLevel: number) => string,
+) {
+  return function anchorizePlugin(md) {
+    md.core.ruler.push("anchorize", function anchorize(state) {
+      const tokens = state.tokens;
+
+      for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
+
+        if (token.type === "heading_open") {
+          const level = parseInt(token.tag.substring(1));
+
+          const nextToken = tokens[i + 1];
+
+          if (nextToken && nextToken.type === "inline") {
+            const content = nextToken.children
+              .filter((t) => t.type === "text" || t.type === "code_inline")
+              .map((t) => t.content)
+              .join("");
+
+            const id = anchorizer(content, level);
+            token.attrSet("id", id);
+          }
+        }
+      }
+    });
+  };
+}
+
+function createRenderer(
+  anchorizer: (content: string, depthLevel: number) => string,
+) {
+  return markdownit({
+    html: true,
+    linkify: true,
+    langPrefix: "highlight notranslate language-",
+  })
+    .disable("code")
+    .use(admonitionPlugin)
+    .use(codeblockCopyPlugin)
+    .use(createAnchorizePlugin(anchorizer));
+}
 
 export function renderMarkdown(
   md: string,
@@ -7,11 +108,40 @@ export function renderMarkdown(
   _filePath: ShortPath | undefined,
   anchorizer: (content: string, depthLevel: number) => string,
 ): string | undefined {
-  return md;
+  const renderer = createRenderer(anchorizer);
+  if (titleOnly) {
+    return `<div class="markdown-body markdown-summary">${
+      renderer.use(titleOnlyPlugin).render(md)
+    }</div>`;
+  } else {
+    return `<div class="markdown-body">${renderer.render(md)}</div>`;
+  }
+}
+
+function strip(tokens) {
+  let out = "";
+
+  for (const token of tokens) {
+    if (token.type === "text" || token.type === "code_inline") {
+      out += token.content;
+    } else if (token.type === "fence") {
+      out += token.content + "\n";
+    } else if (token.type === "softbreak") {
+      out += "\n";
+    } else if (token.type === "heading_close" || token.type === "paragraph_close") {
+      out += "\n\n";
+    } else if (token.children && token.children.length) {
+      out += strip(token.children);
+    }
+  }
+
+  return out;
 }
 
 export function stripMarkdown(md: string): string {
-  return md;
+  const renderer = createRenderer(() => "");
+  const tokens = renderer.parse(md);
+  return strip(tokens);
 }
 
 export const hrefResolver: HrefResolver = {

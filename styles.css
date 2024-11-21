@@ -168,30 +168,42 @@ h1 {
   }
 }
 
-body:not(:has(.ddoc)) {
-  & pre:has(code.highlight),
-  & pre.highlight:has(code) {
-    @apply px-8 py-6 max-sm:-mx-4;
-    @apply max-sm:rounded-none !important;
+.markdown-body.markdown-summary {
+  font-size: .875rem !important;
+  
+  @apply inline text-stone-600;
+  
+  p {
+    @apply inline-block line-clamp-4;
+  }
+  
+  :not(pre) > code {
+    @apply font-mono text-sm py-0.5 px-1.5 rounded bg-stone-200;
+  }
+}
+
+pre:has(code.highlight),
+pre.highlight:has(code) {
+  @apply px-8 py-6 max-sm:-mx-4;
+  @apply max-sm:rounded-none !important;
+}
+
+pre:has(code.highlight):where(:hover, :focus) + .copyButton,
+pre.highlight:has(code):where(:hover, :focus) + .copyButton {
+  @apply opacity-100;
+}
+
+.copyButton {
+  @apply opacity-0 text-foreground-secondary transition-all duration-100
+    absolute top-2 right-2 p-1 rounded;
+
+  &:hover,
+  &:focus {
+    @apply opacity-100 bg-foreground-quaternary;
   }
 
-  & pre:has(code.highlight):where(:hover, :focus) + .copyButton,
-  & pre.highlight:has(code):where(:hover, :focus) + .copyButton {
-    @apply opacity-100;
-  }
-
-  .copyButton {
-    @apply opacity-0 text-foreground-secondary transition-all duration-100
-      absolute top-2 right-2 p-1 rounded;
-
-    &:hover,
-    &:focus {
-      @apply opacity-100 bg-foreground-quaternary;
-    }
-
-    &:active {
-      transform: scale(1.2);
-    }
+  &:active {
+    transform: scale(1.2);
   }
 }
 
@@ -199,7 +211,7 @@ body:not(:has(.ddoc)) {
   @apply rounded-t-none border-t-0;
 }
 
-.ddoc .markdown tr:nth-child(2n) {
+.ddoc .markdown-body tr:nth-child(2n) {
   @apply bg-background-secondary !important;
 }
 
@@ -298,6 +310,10 @@ body:not(:has(.ddoc)) {
 
 .markdown-body .admonition.info {
   @apply bg-primary/5 border-info/50 text-info;
+}
+
+.markdown-body .admonition.note {
+  @apply bg-primary/5 border-note/50 text-note;
 }
 
 .markdown-body .admonition.note {
@@ -489,7 +505,7 @@ body:not(:has(.ddoc)) {
     }
   }
 
-  .markdown {
+  .markdown-body {
     & pre {
       @apply border-gray-000 !important;
     }
@@ -502,11 +518,31 @@ body:not(:has(.ddoc)) {
       @apply text-primary !important;
     }
   }
-  .markdown_summary :not(pre) > code {
+  .markdown-summary :not(pre) > code {
     background-color: var(--foreground-tertiary) !important;
   }
-  .markdown_summary p {
+  .markdown-summary p {
     @apply text-foreground-secondary;
+  }
+  
+  .usageContent .markdown-body pre:has(code.highlight) {
+    @apply mb-0 px-3 py-2 text-sm;
+  }
+}
+
+@media (min-width:640px) {
+  .ddoc .markdown-body {
+    max-width:640px
+  }
+}
+@media (min-width:768px) {
+  .ddoc .markdown-body {
+    max-width:768px
+  }
+}
+@media (min-width:1024px) {
+  .ddoc .markdown-body {
+    max-width:75ch;
   }
 }
 

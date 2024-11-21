@@ -213,8 +213,7 @@ for (const [module, content] of Object.entries(modules)) {
 }
 
 function getNote(description: Description) {
-  return `> [!${description.kind}] Deno compatibility\n> ` +
-    description.description.replaceAll("\n", "\n> ") + "\n";
+  return `:::${description.kind} Deno compatibility\n\n${description.description}\n\n:::\n`;
 }
 
 for (const file of importRewriteProject.getSourceFiles()) {
