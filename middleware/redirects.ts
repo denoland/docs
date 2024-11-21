@@ -1,9 +1,9 @@
+import { existsSync } from "@std/fs";
+import { Page } from "lume/core/file.ts";
 import type { RequestHandler } from "lume/core/server.ts";
+import type Site from "lume/core/site.ts";
 import GO_LINKS from "../go.json" with { type: "json" };
 import REDIRECT_LINKS from "../oldurls.json" with { type: "json" };
-import { existsSync } from "@std/fs";
-import type Site from "lume/core/site.ts";
-import { Page } from "lume/core/file.ts";
 
 type Status = 301 | 302 | 307 | 308;
 type Redirect = [string, string, Status];
@@ -45,6 +45,7 @@ export default async function redirectsMiddleware(
     } else {
       res = await next(req);
     }
+
     return res;
   } catch (e) {
     res = new Response("Internal Server Error", {

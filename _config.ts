@@ -1,24 +1,24 @@
 import "@std/dotenv/load";
 
 import lume from "lume/mod.ts";
+import checkUrls from "lume/plugins/check_urls.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
+import postcss from "lume/plugins/postcss.ts";
 import prism from "lume/plugins/prism.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
-import postcss from "lume/plugins/postcss.ts";
-import checkUrls from "lume/plugins/check_urls.ts";
 
 import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
 
 import Prism from "npm:prismjs@1.29.0";
-import "npm:prismjs@1.29.0/components/prism-typescript.js";
+import "npm:prismjs@1.29.0/components/prism-bash.js";
 import "npm:prismjs@1.29.0/components/prism-diff.js";
 import "npm:prismjs@1.29.0/components/prism-json.js";
-import "npm:prismjs@1.29.0/components/prism-bash.js";
 import "npm:prismjs@1.29.0/components/prism-json5.js";
+import "npm:prismjs@1.29.0/components/prism-typescript.js";
 
 Prism.languages.jsonc = Prism.languages.json5;
 
@@ -43,11 +43,11 @@ import {
 } from "./orama.ts";
 
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
+import createRoutingMiddleware from "./middleware/functionRoutes.ts";
+import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware, {
   toFileAndInMemory,
 } from "./middleware/redirects.ts";
-import createRoutingMiddleware from "./middleware/functionRoutes.ts";
-import createGAMiddleware from "./middleware/googleAnalytics.ts";
 
 const site = lume(
   {
@@ -62,6 +62,7 @@ const site = lume(
         }),
         apiDocumentContentTypeMiddleware,
       ],
+      page404: "/404",
     },
   },
   {
@@ -280,13 +281,13 @@ site.ignore(
 );
 
 site.scopedUpdates((path) => path == "/overrides.css");
-site.use(checkUrls({
-  external: false, // Set to true to check external links
-  output: "_broken_links.json",
-  ignore: [
-    "https://www.googletagmanager.com",
-  ],
-}));
+site.use(
+  checkUrls({
+    external: false, // Set to true to check external links
+    output: "_broken_links.json",
+    ignore: ["https://www.googletagmanager.com"],
+  }),
+);
 
 site.remoteFile(
   "orama.css",
