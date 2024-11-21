@@ -33,13 +33,13 @@ import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
 import relativeLinksPlugin from "./markdown-it/relative-path.ts";
 import replacerPlugin from "./markdown-it/replacer.ts";
 import {
+  clear as oramaClear,
+  deploy as oramaDeploy,
   generateDocumentsForExamples,
   generateDocumentsForPage,
   generateDocumentsForSymbols,
-  clear as oramaClear,
-  deploy as oramaDeploy,
-  OramaDocument,
   notify as oramaNotify,
+  OramaDocument,
 } from "./orama.ts";
 
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
@@ -77,7 +77,8 @@ const site = lume(
           anchor,
           {
             permalink: anchor.permalink.linkInsideHeader({
-              symbol: `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
+              symbol:
+                `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
               placement: "after",
             }),
             getTokensText(tokens: { type: string; content: string }[]) {
@@ -96,7 +97,7 @@ const site = lume(
         langPrefix: "highlight notranslate language-",
       },
     },
-  }
+  },
 );
 
 site.copy("static", ".");
@@ -122,7 +123,7 @@ site.copy(".env");
 site.use(
   redirects({
     output: toFileAndInMemory,
-  })
+  }),
 );
 site.use(search());
 site.use(jsx());
@@ -130,7 +131,7 @@ site.use(jsx());
 site.use(
   postcss({
     plugins: [tw(tailwindConfig)],
-  })
+  }),
 );
 site.use(
   esbuild({
@@ -139,7 +140,7 @@ site.use(
       minify: false,
       splitting: true,
     },
-  })
+  }),
 );
 
 // This is a work-around due to deno-dom's dependency of nwsapi not supporting
@@ -157,7 +158,7 @@ site.process([".html"], (pages) => {
 site.use(
   prism({
     cssSelector: "body.apply-prism pre code",
-  })
+  }),
 );
 
 site.use(toc({ anchor: false }));
@@ -243,7 +244,7 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
       ORAMA_API_KEY,
       ORAMA_INDEX_ID,
       await generateDocumentsForExamples(),
-      "examples"
+      "examples",
     );
 
     try {
@@ -251,12 +252,12 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
         ORAMA_API_KEY,
         ORAMA_INDEX_ID,
         await generateDocumentsForSymbols(),
-        "symbols"
+        "symbols",
       );
     } catch (e) {
       console.warn(
         "⚠️ Orama documents for reference docs were not generated.",
-        e
+        e,
       );
     }
 
@@ -272,7 +273,7 @@ site.ignore(
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
-  "examples"
+  "examples",
   // "deploy",
   // "examples.page.tsx",
   // "runtime",
@@ -285,12 +286,12 @@ site.use(
     external: false, // Set to true to check external links
     output: "_broken_links.json",
     ignore: ["https://www.googletagmanager.com"],
-  })
+  }),
 );
 
 site.remoteFile(
   "orama.css",
-  "https://unpkg.com/@orama/wc-components@0.1.7/dist/orama-ui/orama-ui.css"
+  "https://unpkg.com/@orama/wc-components@0.1.7/dist/orama-ui/orama-ui.css",
 );
 site.copy("orama.css");
 export default site;
