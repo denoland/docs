@@ -27,9 +27,6 @@ export default function* () {
         title =
           match[1].slice(0, -"documentation".length).replace("&#x2F;", "/") +
           "- Deno Docs";
-        if (title.includes("/")) {
-          console.log(title);
-        }
       } catch (e) {
         if (!file.path.endsWith("prototype.html")) {
           console.error(file.path);
