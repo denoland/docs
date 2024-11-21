@@ -1753,6 +1753,7 @@
       "jsr:@std/fs@~0.229.3",
       "jsr:@std/media-types@^1.0.3",
       "npm:googleapis@144",
+      "npm:preact@*",
       "npm:tailwindcss@^3.4.9"
     ]
   }

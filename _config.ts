@@ -144,14 +144,12 @@ site.process([".html"], (pages) => {
     const document = page.document!;
     if (!document.querySelector(".ddoc")) {
       document.body.classList.add("apply-prism");
+      document.querySelectorAll("body.apply-prism pre code").forEach((
+        element,
+      ) => Prism.highlightElement(element));
     }
   }
 });
-site.use(
-  prism({
-    cssSelector: "body.apply-prism pre code",
-  }),
-);
 
 site.use(toc({ anchor: false }));
 site.use(title());
