@@ -24,6 +24,8 @@ below for more information on each subcommand.
 - [deno uninstall](/runtime/reference/cli/uninstall/) - uninstall a dependency
   or a script
 - [deno remove](/runtime/reference/cli/remove) - Remove dependencies
+- [deno outdated](/runtime/reference/cli/outdated) - view or update outdated
+  dependencies
 
 ## Tooling
 

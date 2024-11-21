@@ -84,6 +84,29 @@ To include non-statically analyzable dynamic imports, specify an
 deno compile --include calc.ts --include better_calc.ts main.ts
 ```
 
+## Including Data Files or Directories
+
+Starting in Deno 2.1, you can include files or directories in the executable by
+specifying them via the `--include <path>` flag.
+
+```shell
+deno compile --include names.csv --include data main.ts
+```
+
+Then read the file relative to the directory path of the current module via
+`import.meta.dirname`:
+
+```ts
+// main.ts
+const names = Deno.readTextFileSync(import.meta.dirname + "/names.csv");
+const dataFiles = Deno.readDirSync(import.meta.dirname + "/data");
+
+// use names and dataFiles here
+```
+
+Note this currently only works for files on the file system and not remote
+files.
+
 ## Workers
 
 Similarly to non-statically analyzable dynamic imports, code for
