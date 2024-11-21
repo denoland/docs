@@ -22,7 +22,10 @@ For example:
   "tasks": {
     "data": "deno task collect && deno task analyze",
     "collect": "deno run --allow-read=. --allow-write=. scripts/collect.js",
-    "analyze": "deno run --allow-read=. scripts/analyze.js"
+    "analyze": {
+      "description": "Run analysis script",
+      "command": "deno run --allow-read=. scripts/analyze.js"
+    }
   }
 }
 ```
@@ -70,6 +73,154 @@ argument in case it contains spaces):
     "start": "deno run main.ts \"$INIT_CWD\""
   }
 }
+```
+
+## Task dependencies
+
+You can specify dependecnies for a task:
+
+```json title="deno.json"
+{
+  "tasks": {
+    "build": "deno run -RW build.ts",
+    "generate": "deno run -RW generate.ts",
+    "serve": {
+      "command": "deno run -RN server.ts",
+      "dependencies": ["build", "generate"]
+    }
+  }
+}
+```
+
+In the above example, running `deno task serve` will first execute `build` and
+`generate` tasks in parallel, and once both of them finish successfully the
+`serve` task will be executed:
+
+```bash
+$ deno task serve
+Task build deno run -RW build.ts
+Task generate deno run -RW generate.ts
+Generating data...
+Starting the build...
+Build finished
+Data generated
+Task serve deno run -RN server.ts
+Listening on http://localhost:8000/
+```
+
+Dependency tasks are in parallel, with the default parallel limit being equal to
+number of cores on your machine. To change this limit use `DENO_JOBS`
+environmental variable.
+
+Dependencies are tracked and if multiple tasks depend on the same task, that
+task will only be run once:
+
+```jsonc title="deno.json"
+{
+  //   a
+  //  / \
+  // b   c
+  //  \ /
+  //   d
+  "tasks": {
+    "a": {
+      "command": "deno run a.js",
+      "dependencies": ["b", "c"]
+    },
+    "b": {
+      "command": "deno run b.js",
+      "dependencies": ["d"]
+    },
+    "c": {
+      "command": "deno run c.js",
+      "dependencies": ["d"]
+    },
+    "d": "deno run d.js"
+  }
+}
+```
+
+```bash
+$ deno task a
+Task d deno run d.js
+Running d
+Task c deno run c.js
+Running c
+Task b deno run b.js
+Running b
+Task a deno run a.js
+Running a
+```
+
+If a cycle between dependencies is discovered, an error will be returned:
+
+```jsonc title="deno.json"
+{
+  "tasks": {
+    "a": {
+      "command": "deno run a.js",
+      "dependencies": ["b"]
+    },
+    "b": {
+      "command": "deno run b.js",
+      "dependencies": ["a"]
+    }
+  }
+}
+```
+
+```bash
+$ deno task a
+Task cycle detected: a -> b -> a
+```
+
+## Workspace support
+
+`deno task` can be used in workspaces, to run tasks from multiple member
+directories in parallel. To execute `dev` tasks from all workspace members use
+`--recursive` flag:
+
+```jsonc title="deno.json"
+{
+  "workspace": [
+    "client",
+    "server"
+  ]
+}
+```
+
+```jsonc title="client/deno.json"
+{
+  "tasks": {
+    "dev": "deno run -RN build.ts"
+  }
+}
+```
+
+```jsonc title="server/deno.json"
+{
+  "tasks": {
+    "dev": "deno run -RN server.ts"
+  }
+}
+```
+
+```bash
+$ deno task --recursive dev
+Task dev deno run -RN build.ts
+Task dev deno run -RN server.ts
+Bundling project...
+Listening on http://localhost:8000/
+Project bundled
+```
+
+Tasks to run can be filtered based on the workspace members:
+
+```bash
+$ deno task --filter "client/*" dev
+Task dev deno run -RN build.ts
+Bundling project...
+Project bundled
 ```
 
 ## Syntax
