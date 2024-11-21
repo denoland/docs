@@ -169,14 +169,14 @@ h1 {
 }
 
 .markdown-body.markdown-summary {
-  font-size: .875rem !important;
-  
+  font-size: 0.875rem !important;
+
   @apply inline text-stone-600;
-  
+
   p {
     @apply inline-block line-clamp-4;
   }
-  
+
   :not(pre) > code {
     @apply font-mono text-sm py-0.5 px-1.5 rounded bg-stone-200;
   }
@@ -522,25 +522,25 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
   .markdown-summary p {
     @apply text-foreground-secondary;
   }
-  
+
   .usageContent .markdown-body pre:has(code.highlight) {
     @apply mb-0 px-3 py-2 text-sm;
   }
 }
 
-@media (min-width:640px) {
+@media (min-width: 640px) {
   .ddoc .markdown-body {
-    max-width:640px
+    max-width: 640px;
   }
 }
-@media (min-width:768px) {
+@media (min-width: 768px) {
   .ddoc .markdown-body {
-    max-width:768px
+    max-width: 768px;
   }
 }
-@media (min-width:1024px) {
+@media (min-width: 1024px) {
   .ddoc .markdown-body {
-    max-width:75ch;
+    max-width: 75ch;
   }
 }
 

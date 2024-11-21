@@ -57,7 +57,9 @@ function titleOnlyPlugin(md) {
       state.tokens.splice(paragraphEnd);
     }
 
-    if (state.tokens.length === 1 && state.tokens[0].type === "paragraph_open") {
+    if (
+      state.tokens.length === 1 && state.tokens[0].type === "paragraph_open"
+    ) {
       state.tokens = [];
     }
   });
@@ -106,7 +108,7 @@ function createRenderer(
       } else {
         return "";
       }
-    }
+    },
   })
     .disable("code")
     .use(admonitionPlugin)
@@ -146,7 +148,9 @@ function strip(tokens) {
       out += token.content + "\n";
     } else if (token.type === "softbreak") {
       out += "\n";
-    } else if (token.type === "heading_close" || token.type === "paragraph_close") {
+    } else if (
+      token.type === "heading_close" || token.type === "paragraph_close"
+    ) {
       out += "\n\n";
     } else if (token.children && token.children.length) {
       out += strip(token.children);
