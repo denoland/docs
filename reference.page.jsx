@@ -3,7 +3,7 @@ import { walkSync } from "@std/fs/walk";
 export const layout = "raw.tsx";
 
 const resetRegexp =
-  /<link id="ddocResetStylesheet" rel="stylesheet" href=".*?reset\.css">\s+/;
+  /<link id="ddocResetStylesheet" rel="stylesheet" href=".*?reset\.css">\s*/;
 const titleRegexp = /<title>(.+?)<\/title>\s*/s;
 
 export default function* () {

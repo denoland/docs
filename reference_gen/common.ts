@@ -130,11 +130,13 @@ export function renderMarkdown(
       return undefined;
     }
 
-    return `<div class="markdown-body markdown-summary">${
+    return `<div data-color-mode="dark" data-light-theme="light" data-dark-theme="dark" class="markdown-body markdown-summary">${
       titleOnlyRenderer.renderer.render(parsed, titleOnlyRenderer.options, {})
     }</div>`;
   } else {
-    return `<div class="markdown-body">${renderer.render(md)}</div>`;
+    return `<div data-color-mode="dark" data-light-theme="light" data-dark-theme="dark" class="markdown-body">${
+      renderer.render(md)
+    }</div>`;
   }
 }
 
