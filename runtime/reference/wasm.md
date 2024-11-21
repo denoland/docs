@@ -17,7 +17,7 @@ importing them as modules.
 
 ## Wasm modules
 
-Starting in Deno 2.1, WebAssembly modules can be imported and its use type
+Starting in Deno 2.1, WebAssembly modules can be imported and their use type
 checked.
 
 Say we have a
