@@ -709,7 +709,7 @@ opaque pointer object or `null` for null pointers.
 to simplify glue code generation of Deno FFI libraries written in Rust.
 
 It is similar to [`wasm-bindgen`](https://github.com/rustwasm/wasm-bindgen) in
-the Rust WASM ecosystem.
+the Rust Wasm ecosystem.
 
 Here's an example showing its usage:
 
