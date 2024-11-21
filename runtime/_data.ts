@@ -103,6 +103,10 @@ export const sidebar = [
             id: "/runtime/reference/cli/linter/",
           },
           {
+            label: "deno outdated",
+            id: "/runtime/reference/cli/outdated/",
+          },
+          {
             label: "deno publish",
             id: "/runtime/reference/cli/publish/",
           },
