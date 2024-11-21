@@ -2,24 +2,7 @@
   "version": "4",
   "specifiers": {
     "jsr:@davidbonnet/astring@1.8.6": "1.8.6",
-    "jsr:@db/sqlite@*": "0.12.0",
-    "jsr:@db/sqlite@0.12": "0.12.0",
-    "jsr:@denosaurs/plug@1": "1.0.6",
-    "jsr:@hono/hono@*": "4.6.11",
-    "jsr:@luca/cases@1": "1.0.0",
-    "jsr:@oak/commons@1": "1.0.0",
-    "jsr:@oak/oak@*": "17.1.3",
-    "jsr:@std/assert@*": "1.0.8",
-    "jsr:@std/assert@0.217": "0.217.0",
-    "jsr:@std/assert@0.221": "0.221.0",
-    "jsr:@std/assert@1": "1.0.8",
     "jsr:@std/assert@^1.0.6": "1.0.8",
-    "jsr:@std/async@*": "1.0.5",
-    "jsr:@std/bytes@*": "1.0.4",
-    "jsr:@std/bytes@1": "1.0.4",
-    "jsr:@std/bytes@^1.0.2": "1.0.4",
-    "jsr:@std/bytes@^1.0.3": "1.0.4",
-    "jsr:@std/cli@*": "1.0.6",
     "jsr:@std/cli@1.0.6": "1.0.6",
     "jsr:@std/cli@^1.0.6": "1.0.6",
     "jsr:@std/collections@*": "1.0.9",
@@ -47,11 +30,9 @@
     "jsr:@std/fs@^1.0.4": "1.0.5",
     "jsr:@std/fs@~0.229.3": "0.229.3",
     "jsr:@std/html@1.0.3": "1.0.3",
-    "jsr:@std/http@*": "1.0.9",
-    "jsr:@std/http@1": "1.0.9",
+    "jsr:@std/html@^1.0.3": "1.0.3",
     "jsr:@std/http@1.0.9": "1.0.9",
     "jsr:@std/internal@^1.0.5": "1.0.5",
-    "jsr:@std/io@0.224": "0.224.9",
     "jsr:@std/io@0.225": "0.225.0",
     "jsr:@std/json@1": "1.0.1",
     "jsr:@std/jsonc@1.0.1": "1.0.1",
@@ -125,63 +106,11 @@
     "@deno/gfm@0.8.2": {
       "integrity": "a7528367cbd954a2d0de316bd0097ee92f06d2cb66502c8574de133ed223424f"
     },
-    "@denosaurs/plug@1.0.6": {
-      "integrity": "6cf5b9daba7799837b9ffbe89f3450510f588fafef8115ddab1ff0be9cb7c1a7",
-      "dependencies": [
-        "jsr:@std/encoding@0.221",
-        "jsr:@std/fmt@0.221",
-        "jsr:@std/fs@0.221",
-        "jsr:@std/path@0.221"
-      ]
-    },
-    "@hono/hono@4.6.11": {
-      "integrity": "07399d911f09e94b7dc1e0e0a0577d35fe66578af20163d513958364c4e9e702"
-    },
-    "@luca/cases@1.0.0": {
-      "integrity": "b5f9471f1830595e63a2b7d62821ac822a19e16899e6584799be63f17a1fbc30"
-    },
-    "@oak/commons@1.0.0": {
-      "integrity": "49805b55603c3627a9d6235c0655aa2b6222d3036b3a13ff0380c16368f607ac",
-      "dependencies": [
-        "jsr:@std/assert@1",
-        "jsr:@std/bytes@1",
-        "jsr:@std/crypto@1",
-        "jsr:@std/encoding@1",
-        "jsr:@std/http@1",
-        "jsr:@std/media-types@1"
-      ]
-    },
-    "@oak/oak@17.1.3": {
-      "integrity": "d89296c22db91681dd3a2a1e1fd14e258d0d5a9654de55637aee5b661c159f33",
-      "dependencies": [
-        "jsr:@oak/commons",
-        "jsr:@std/assert@1",
-        "jsr:@std/bytes@1",
-        "jsr:@std/crypto@1",
-        "jsr:@std/http@1",
-        "jsr:@std/io@0.224",
-        "jsr:@std/media-types@1",
-        "jsr:@std/path@1",
-        "npm:path-to-regexp"
-      ]
-    },
-    "@std/assert@0.217.0": {
-      "integrity": "c98e279362ca6982d5285c3b89517b757c1e3477ee9f14eb2fdf80a45aaa9642"
-    },
-    "@std/assert@0.221.0": {
-      "integrity": "a5f1aa6e7909dbea271754fd4ab3f4e687aeff4873b4cef9a320af813adb489a"
-    },
     "@std/assert@1.0.8": {
       "integrity": "ebe0bd7eb488ee39686f77003992f389a06c3da1bbd8022184804852b2fa641b",
       "dependencies": [
         "jsr:@std/internal"
       ]
-    },
-    "@std/async@1.0.5": {
-      "integrity": "31d68214bfbb31bd4c6022401d484e3964147c76c9220098baa703a39b6c2da6"
-    },
-    "@std/bytes@1.0.4": {
-      "integrity": "11a0debe522707c95c7b7ef89b478c13fb1583a7cfb9a85674cd2cc2e3a28abc"
     },
     "@std/cli@1.0.6": {
       "integrity": "d22d8b38c66c666d7ad1f2a66c5b122da1704f985d3c47f01129f05abb6c5d3d"
@@ -262,6 +191,9 @@
       "dependencies": [
         "jsr:@std/bytes@^1.0.2"
       ]
+    },
+    "@std/internal@1.0.5": {
+      "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
     },
     "@std/io@0.225.0": {
       "integrity": "c1db7c5e5a231629b32d64b9a53139445b2ca640d828c26bf23e1c55f8c079b3"
@@ -2167,6 +2099,7 @@
       "jsr:@std/assert@^1.0.6",
       "jsr:@std/dotenv@~0.225.2",
       "jsr:@std/fs@~0.229.3",
+      "jsr:@std/html@^1.0.3",
       "jsr:@std/media-types@^1.0.3",
       "jsr:@std/path@^1.0.8",
       "npm:googleapis@144",
