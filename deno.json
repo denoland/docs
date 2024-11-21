@@ -4,6 +4,7 @@
     "@std/assert": "jsr:@std/assert@^1.0.6",
     "@std/dotenv": "jsr:@std/dotenv@^0.225.2",
     "@std/fs": "jsr:@std/fs@^0.229.3",
+    "@std/html": "jsr:@std/html@^1.0.3",
     "@std/media-types": "jsr:@std/media-types@^1.0.3",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
     "lume/": "https://deno.land/x/lume@v2.4.1/",
