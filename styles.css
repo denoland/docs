@@ -518,9 +518,7 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
       @apply text-primary !important;
     }
   }
-  .markdown-summary :not(pre) > code {
-    background-color: var(--foreground-tertiary) !important;
-  }
+
   .markdown-summary p {
     @apply text-foreground-secondary;
   }

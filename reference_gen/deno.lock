@@ -47,7 +47,8 @@
     "npm:@types/node@22.7.2": "22.7.2",
     "npm:browserslist@4.23.0": "4.23.0",
     "npm:lightningcss@1.15": "1.15.1",
-    "npm:markdown-it@14.1.0": "14.1.0"
+    "npm:markdown-it@14.1.0": "14.1.0",
+    "npm:prismjs@1.29.0": "1.29.0"
   },
   "jsr": {
     "@b-fuze/deno-dom@0.1.48": {
@@ -327,6 +328,9 @@
     },
     "picocolors@1.1.1": {
       "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="
+    },
+    "prismjs@1.29.0": {
+      "integrity": "sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q=="
     },
     "punycode.js@2.3.1": {
       "integrity": "sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA=="

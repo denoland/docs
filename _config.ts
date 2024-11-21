@@ -12,14 +12,7 @@ import postcss from "lume/plugins/postcss.ts";
 import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
 
-import Prism from "npm:prismjs@1.29.0";
-import "npm:prismjs@1.29.0/components/prism-typescript.js";
-import "npm:prismjs@1.29.0/components/prism-diff.js";
-import "npm:prismjs@1.29.0/components/prism-json.js";
-import "npm:prismjs@1.29.0/components/prism-bash.js";
-import "npm:prismjs@1.29.0/components/prism-json5.js";
-
-Prism.languages.jsonc = Prism.languages.json5;
+import Prism from "./prism.ts";
 
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
@@ -141,7 +134,23 @@ site.use(
   }),
 );
 
-site.use(prism());
+// This is a work-around due to deno-dom's dependency of nwsapi not supporting
+// :has selectors, nor having intention of supporting them, so using `body:not(:has(.ddoc))`
+// is not possible. This works around by adding an `apply-prism` class on pages that
+// don't use a ddoc class.
+site.process([".html"], (pages) => {
+  for (const page of pages) {
+    const document = page.document!;
+    if (!document.querySelector(".ddoc")) {
+      document.body.classList.add("apply-prism");
+    }
+  }
+});
+site.use(
+  prism({
+    cssSelector: "body.apply-prism pre code",
+  }),
+);
 
 site.use(toc({ anchor: false }));
 site.use(title());

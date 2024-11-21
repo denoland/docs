@@ -1,6 +1,7 @@
 import type { HrefResolver, ShortPath } from "@deno/doc";
 import { dirname, join } from "@std/path";
 import markdownit from "markdown-it";
+import Prism from "../prism.ts";
 
 import admonitionPlugin from "../markdown-it/admonition.ts";
 import codeblockCopyPlugin from "../markdown-it/codeblock-copy.ts";
@@ -55,6 +56,10 @@ function titleOnlyPlugin(md) {
     if (paragraphEnd !== -1) {
       state.tokens.splice(paragraphEnd);
     }
+
+    if (state.tokens.length === 1 && state.tokens[0].type === "paragraph_open") {
+      state.tokens = [];
+    }
   });
 }
 
@@ -95,6 +100,13 @@ function createRenderer(
     html: true,
     linkify: true,
     langPrefix: "highlight notranslate language-",
+    highlight(content: string, lang: string) {
+      if (Prism.languages[lang]) {
+        return Prism.highlight(content, Prism.languages[lang], lang);
+      } else {
+        return "";
+      }
+    }
   })
     .disable("code")
     .use(admonitionPlugin)
@@ -110,8 +122,14 @@ export function renderMarkdown(
 ): string | undefined {
   const renderer = createRenderer(anchorizer);
   if (titleOnly) {
+    const titleOnlyRenderer = renderer.use(titleOnlyPlugin);
+    const parsed = titleOnlyRenderer.parse(md, {});
+    if (parsed.length === 0) {
+      return undefined;
+    }
+
     return `<div class="markdown-body markdown-summary">${
-      renderer.use(titleOnlyPlugin).render(md)
+      titleOnlyRenderer.renderer.render(parsed, titleOnlyRenderer.options, {})
     }</div>`;
   } else {
     return `<div class="markdown-body">${renderer.render(md)}</div>`;
@@ -140,7 +158,7 @@ function strip(tokens) {
 
 export function stripMarkdown(md: string): string {
   const renderer = createRenderer(() => "");
-  const tokens = renderer.parse(md);
+  const tokens = renderer.parse(md, {});
   return strip(tokens);
 }
 
