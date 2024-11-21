@@ -37,9 +37,14 @@
   --primary: 217deg, 91%, 59%;
   --primary-dark: 217deg, 91%, 49%;
   --tip: 142deg, 76.2%, 36.3%;
+  --color-fg-default: #fff;
 
   color: var(--foreground-primary);
   background-color: var(--background-primary);
+
+  .ddoc .markdown-body pre {
+    border-color: hsla(var(--background-tertiary)) !important;
+  }
 }
 
 /* Scrollbar colors that look good on light and dark theme */
@@ -99,6 +104,7 @@ h1 {
 
 .markdown-body {
   font-family: inherit;
+  color: inherit;
   @apply bg-transparent !important;
 
   /* Override gfm base styles */
