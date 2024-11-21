@@ -1,9 +1,9 @@
+import { existsSync } from "@std/fs";
+import { Page } from "lume/core/file.ts";
 import type { RequestHandler } from "lume/core/server.ts";
+import type Site from "lume/core/site.ts";
 import GO_LINKS from "../go.json" with { type: "json" };
 import REDIRECT_LINKS from "../oldurls.json" with { type: "json" };
-import { existsSync } from "@std/fs";
-import type Site from "lume/core/site.ts";
-import { Page } from "lume/core/file.ts";
 
 type Status = 301 | 302 | 307 | 308;
 type Redirect = [string, string, Status];
@@ -44,19 +44,6 @@ export default async function redirectsMiddleware(
       });
     } else {
       res = await next(req);
-    }
-
-    if (res.status === 404) {
-      const url = new URL(req.url);
-      const finalPartIndex = url.pathname.lastIndexOf("/");
-      url.pathname = url.pathname.slice(0, finalPartIndex + 1);
-
-      res = new Response(null, {
-        headers: {
-          location: url.href,
-        },
-        status: 302,
-      });
     }
 
     return res;

@@ -1,24 +1,24 @@
 import "@std/dotenv/load";
 
 import lume from "lume/mod.ts";
+import checkUrls from "lume/plugins/check_urls.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
+import postcss from "lume/plugins/postcss.ts";
 import prism from "lume/plugins/prism.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
-import postcss from "lume/plugins/postcss.ts";
-import checkUrls from "lume/plugins/check_urls.ts";
 
 import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
 
 import Prism from "npm:prismjs@1.29.0";
-import "npm:prismjs@1.29.0/components/prism-typescript.js";
+import "npm:prismjs@1.29.0/components/prism-bash.js";
 import "npm:prismjs@1.29.0/components/prism-diff.js";
 import "npm:prismjs@1.29.0/components/prism-json.js";
-import "npm:prismjs@1.29.0/components/prism-bash.js";
 import "npm:prismjs@1.29.0/components/prism-json5.js";
+import "npm:prismjs@1.29.0/components/prism-typescript.js";
 
 Prism.languages.jsonc = Prism.languages.json5;
 
@@ -33,21 +33,21 @@ import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
 import relativeLinksPlugin from "./markdown-it/relative-path.ts";
 import replacerPlugin from "./markdown-it/replacer.ts";
 import {
-  clear as oramaClear,
-  deploy as oramaDeploy,
   generateDocumentsForExamples,
   generateDocumentsForPage,
   generateDocumentsForSymbols,
-  notify as oramaNotify,
+  clear as oramaClear,
+  deploy as oramaDeploy,
   OramaDocument,
+  notify as oramaNotify,
 } from "./orama.ts";
 
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
+import createRoutingMiddleware from "./middleware/functionRoutes.ts";
+import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware, {
   toFileAndInMemory,
 } from "./middleware/redirects.ts";
-import createRoutingMiddleware from "./middleware/functionRoutes.ts";
-import createGAMiddleware from "./middleware/googleAnalytics.ts";
 
 const site = lume(
   {
@@ -62,6 +62,7 @@ const site = lume(
         }),
         apiDocumentContentTypeMiddleware,
       ],
+      page404: "/404",
     },
   },
   {
@@ -76,8 +77,7 @@ const site = lume(
           anchor,
           {
             permalink: anchor.permalink.linkInsideHeader({
-              symbol:
-                `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
+              symbol: `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
               placement: "after",
             }),
             getTokensText(tokens: { type: string; content: string }[]) {
@@ -96,7 +96,7 @@ const site = lume(
         langPrefix: "highlight notranslate language-",
       },
     },
-  },
+  }
 );
 
 site.copy("static", ".");
@@ -122,7 +122,7 @@ site.copy(".env");
 site.use(
   redirects({
     output: toFileAndInMemory,
-  }),
+  })
 );
 site.use(search());
 site.use(jsx());
@@ -130,7 +130,7 @@ site.use(jsx());
 site.use(
   postcss({
     plugins: [tw(tailwindConfig)],
-  }),
+  })
 );
 site.use(
   esbuild({
@@ -139,7 +139,7 @@ site.use(
       minify: false,
       splitting: true,
     },
-  }),
+  })
 );
 
 // This is a work-around due to deno-dom's dependency of nwsapi not supporting
@@ -157,7 +157,7 @@ site.process([".html"], (pages) => {
 site.use(
   prism({
     cssSelector: "body.apply-prism pre code",
-  }),
+  })
 );
 
 site.use(toc({ anchor: false }));
@@ -243,7 +243,7 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
       ORAMA_API_KEY,
       ORAMA_INDEX_ID,
       await generateDocumentsForExamples(),
-      "examples",
+      "examples"
     );
 
     try {
@@ -251,12 +251,12 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
         ORAMA_API_KEY,
         ORAMA_INDEX_ID,
         await generateDocumentsForSymbols(),
-        "symbols",
+        "symbols"
       );
     } catch (e) {
       console.warn(
         "⚠️ Orama documents for reference docs were not generated.",
-        e,
+        e
       );
     }
 
@@ -272,7 +272,7 @@ site.ignore(
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
-  "examples",
+  "examples"
   // "deploy",
   // "examples.page.tsx",
   // "runtime",
@@ -280,17 +280,17 @@ site.ignore(
 );
 
 site.scopedUpdates((path) => path == "/overrides.css");
-site.use(checkUrls({
-  external: false, // Set to true to check external links
-  output: "_broken_links.json",
-  ignore: [
-    "https://www.googletagmanager.com",
-  ],
-}));
+site.use(
+  checkUrls({
+    external: false, // Set to true to check external links
+    output: "_broken_links.json",
+    ignore: ["https://www.googletagmanager.com"],
+  })
+);
 
 site.remoteFile(
   "orama.css",
-  "https://unpkg.com/@orama/wc-components@0.1.7/dist/orama-ui/orama-ui.css",
+  "https://unpkg.com/@orama/wc-components@0.1.7/dist/orama-ui/orama-ui.css"
 );
 site.copy("orama.css");
 export default site;
