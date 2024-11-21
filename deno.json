@@ -6,6 +6,7 @@
     "@std/fs": "jsr:@std/fs@^0.229.3",
     "@std/html": "jsr:@std/html@^1.0.3",
     "@std/media-types": "jsr:@std/media-types@^1.0.3",
+    "@std/path": "jsr:@std/path@^1.0.8",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
     "lume/": "https://deno.land/x/lume@v2.4.1/",
     "@orama/wc-components/": "https://unpkg.com/@orama/wc-components@0.1.7/",
@@ -18,7 +19,8 @@
     "debug": "deno task build && deno task prod",
     "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
     "reference": "cd reference_gen && deno task types && deno task doc",
-    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -"
+    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
+    "test": "deno test -A"
   },
   "compilerOptions": {
     "types": [
@@ -26,6 +28,11 @@
     ],
     "jsx": "precompile",
     "jsxImportSource": "npm:preact"
+  },
+  "test": {
+    "exclude": [
+      "middleware"
+    ]
   },
   "exclude": [
     "_site",
