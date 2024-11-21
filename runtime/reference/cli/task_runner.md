@@ -115,7 +115,7 @@ environmental variable.
 Dependencies are tracked and if multiple tasks depend on the same task, that
 task will only be run once:
 
-```json title="deno.json"
+```jsonc title="deno.json"
 {
   //   a
   //  / \
