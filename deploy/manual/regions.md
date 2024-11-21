@@ -20,3 +20,7 @@ following regions:
 1. California (`us-west1`)
 
 We will update the list as we add more regions.
+
+Code is deployed to all regions and is served from the region closest to the end
+user to minimize latency. It is not currently possible to restrict the regions
+in which your code is deployed.

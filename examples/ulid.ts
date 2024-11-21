@@ -13,7 +13,7 @@
  */
 
 // The standard library contains a function for generating ULIDs.
-import { ulid } from "jsr:@std/ulid";
+import { ulid } from "jsr:@std/ulid@1";
 
 // To generate a ULID, simply call the function.
 console.log(ulid());
@@ -28,13 +28,13 @@ console.log(ulid(timestamp));
 console.log(ulid(timestamp));
 
 // Given a ULID, you can get the timestamp back out
-import { decodeTime } from "jsr:@std/ulid@0.224/mod.ts";
+import { decodeTime } from "jsr:@std/ulid@1";
 const myULID = ulid();
 console.log(decodeTime(myULID));
 
 // Optionally, if you're not on a distributed system and want monotonic ULIDs,
 // you can use the monotonic ULID generator instead.
-import { monotonicUlid } from "jsr:@std/ulid@0.224/mod.ts";
+import { monotonicUlid } from "jsr:@std/ulid@1";
 console.log(monotonicUlid(150000)); // 000XAL6S41ACTAV9WEVGEMMVR8
 console.log(monotonicUlid(150000)); // 000XAL6S41ACTAV9WEVGEMMVR9
 console.log(monotonicUlid(150000)); // 000XAL6S41ACTAV9WEVGEMMVRA

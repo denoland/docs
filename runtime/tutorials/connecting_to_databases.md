@@ -124,11 +124,11 @@ const db = new Database("test.db");
 db.close();
 ```
 
-### Connect to SQLite with the WASM-Optimized Module
+### Connect to SQLite with the Wasm-Optimized Module
 
 [sqlite](https://deno.land/x/sqlite) is a SQLite module for JavaScript and
 TypeScript. The wrapper made specifically for Deno and uses a version of SQLite3
-compiled to WebAssembly (WASM).
+compiled to WebAssembly (Wasm).
 
 ```ts
 import { DB } from "https://deno.land/x/sqlite/mod.ts";
