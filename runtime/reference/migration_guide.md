@@ -56,7 +56,7 @@ Deno 2 was built with development teams working on mission-critical projects in
 mind. These team work on complex codebases, sharing internal code, often using
 private registries.
 
-With Deno 2 your team can levarage private npm registries, the same way you'd do
+With Deno 2 your team can leverage private npm registries, the same way you'd do
 with Node.js and npm, using an `.npmrc` file:
 
 ```js, title=".npmrc"
