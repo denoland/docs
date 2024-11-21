@@ -1,6 +1,8 @@
 import { join } from "@std/path";
 import { walk } from "@std/fs";
-import { assertEquals } from "@std/assert";
+import { assertEquals, assertNotMatch } from "@std/assert";
+
+const decoder = new TextDecoder();
 
 Deno.test("Check examples", async (t) => {
   for await (const item of walk("./examples")) {
@@ -13,6 +15,7 @@ Deno.test("Check examples", async (t) => {
         args: ["info", path],
       }).output();
       assertEquals(result.code, 0);
+      assertNotMatch(decoder.decode(result.stdout), /\(resolve error\)/);
     });
   }
 });
