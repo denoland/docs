@@ -1,5 +1,6 @@
 ---
 title: "deno outdated"
+command: outdated
 ---
 
 ## Checking for outdated dependencies
