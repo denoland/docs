@@ -18,10 +18,18 @@ const styles = /*css*/ `
   margin-block-start: 0;
 }
 
-#content nav :where(li, a, h2, button) {
+#content nav :where(li, h2) {
   padding-inline-start: 0;
+  margin-inline: 0;
   text-wrap: balance;
 }`;
+
+const scripts = /*js*/ `
+  const searchParams = new URLSearchParams(document.location.search);
+  const pathParam = searchParams.get("path");
+  const decodedPath = decodeURIComponent(pathParam);
+  document.getElementById("tried-path").innerText = decodedPath;
+`;
 
 export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   return (
@@ -30,14 +38,21 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
       class="max-w-screen-xl px-4 md:px-12 md:mx-auto pt-6 mb-20"
     >
       <style>{styles}</style>
-      <div class="space-y-2 mt-8 mb-16">
-        <h1 class="text-2xl font-semibold sm:text-3xl lg:text-4xl">
-          Sorry, couldn't find that page
+      <div class="mt-8 mb-16 lg:mb-24">
+        <h1 class="text-2xl font-semibold sm:text-3xl md:text-4xl">
+          Sorry, couldn’t find that page.
         </h1>
-        <p class="md:text-xl">
-          Maybe one of these links is what you're looking for?
+        <p class="text-sm mt-3">
+          Failed to match route{" "}
+          <code class="p-1 rounded bg-foreground-tertiary" id="tried-path">
+            404
+          </code>
+        </p>
+        <p class="md:text-lg mt-6">
+          Maybe one of these links has what you're looking for?
         </p>
       </div>
+      <script dangerouslySetInnerHTML={{ __html: scripts }} />
 
       <props.comp.Sidebar
         sidebar={sidebar}

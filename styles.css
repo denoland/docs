@@ -232,8 +232,22 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
   opacity: 1;
 }
 
-:root {
-  font-feature-settings: "cv05" on, "cv08" on, "cv09" on, "ss01" on, "ss08" on;
+@font-feature-values Inter {
+  @character-variant {
+    cv05: 5;
+    cv08: 8;
+    cv10: 10;
+  }
+  @styleset {
+    ss01: 1;
+    ss07: 7;
+    ss08: 8;
+  }
+}
+
+body {
+  font-variant-alternates: character-variant(cv05, cv08, cv10)
+    styleset(ss01, ss07, ss08);
 }
 
 /* Common styles for all CTAs */
