@@ -13,4 +13,4 @@ jobs:
       - uses: denoland/setup-deno@v2
 
       - run: deno fmt --check
-      - run: deno task testd
+      - run: deno task test
