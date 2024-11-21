@@ -1,4 +1,6 @@
 import { walkSync } from "@std/fs/walk";
+import { unescape } from "@std/html/entities";
+import entityList from "@std/html/named-entity-list.json" with { type: "json" };
 
 export const layout = "raw.tsx";
 
@@ -24,9 +26,9 @@ export default function* () {
       let title = "";
       try {
         const match = titleRegexp.exec(content);
-        title =
-          match[1].slice(0, -"documentation".length).replace("&#x2F;", "/") +
-          "- Deno Docs";
+        const titleFirst = match[1].slice(0, -"documentation".length);
+
+        title = unescape(titleFirst, { entityList }) + "- Deno Docs";
       } catch (e) {
         if (!file.path.endsWith("prototype.html")) {
           console.error(file.path);
