@@ -1,6 +1,8 @@
 ---
 title: "`deno info`, dependency inspector"
-oldUrl: /runtime/manual/tools/dependency_inspector/
+oldUrl:
+ - /runtime/manual/tools/dependency_inspector/
+ - /runtime/reference/cli/dependency_inspector/
 command: info
 ---
 

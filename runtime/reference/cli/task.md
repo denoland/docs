@@ -3,6 +3,7 @@ title: "`deno task`"
 oldUrl:
  - /runtime/tools/task_runner/
  - /runtime/manual/tools/task_runner/
+ - /runtime/reference/cli/task_runner/
 command: task
 ---
 
