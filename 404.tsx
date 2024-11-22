@@ -1,6 +1,6 @@
 export const layout = "raw.tsx";
 export const url = "/404";
-import { sidebar } from "../runtime/_data.ts";
+import { sidebar } from "./runtime/_data.ts";
 
 const styles = /*css*/ `
 #content nav {
@@ -18,24 +18,28 @@ const styles = /*css*/ `
   margin-block-start: 0;
 }
 
-#content nav :where(li, a, h2, button) {
+#content nav :where(li, h2) {
   padding-inline-start: 0;
+  margin-inline: 0;
   text-wrap: balance;
 }`;
 
-export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
+export default function Page(props: Lume.Data, _helpers: Lume.Helpers) {
   return (
     <main
       id="content"
       class="max-w-screen-xl px-4 md:px-12 md:mx-auto pt-6 mb-20"
     >
       <style>{styles}</style>
-      <div class="space-y-2 mt-8 mb-16">
-        <h1 class="text-2xl font-semibold sm:text-3xl lg:text-4xl">
-          Sorry, couldn't find that page
+      <div class="mt-8 mb-16 lg:mb-24">
+        <h1 class="text-2xl font-semibold sm:text-3xl md:text-4xl">
+          <div class="text-[400%] font-semibold text-runtime-300 opacity-50 dark:opacity-15 relative -z-10">
+            404
+          </div>
+          Sorry, couldn’t find that page.
         </h1>
-        <p class="md:text-xl">
-          Maybe one of these links is what you're looking for?
+        <p class="md:text-lg mt-4">
+          Maybe one of these links has what you're looking for?
         </p>
       </div>
 
