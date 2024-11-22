@@ -38,11 +38,10 @@ below for more information on each subcommand.
   completions
 - [deno coverage](/runtime/reference/cli/coverage/) - generate test coverage
   reports
-- [deno doc](/runtime/reference/cli/doc/) - generate
-  documentation for a module
+- [deno doc](/runtime/reference/cli/doc/) - generate documentation for a module
 - [deno fmt](/runtime/reference/cli/fmt/) - format your code
-- [deno info](/runtime/reference/cli/info/) - inspect an ES
-  module and all of its dependencies
+- [deno info](/runtime/reference/cli/info/) - inspect an ES module and all of
+  its dependencies
 - [deno init](/runtime/reference/cli/init/) - create a new project
 - [deno jupyter](/runtime/reference/cli/jupyter/) - run a Jupyter notebook
 - [deno lint](/runtime/reference/cli/lint/) - lint your code
