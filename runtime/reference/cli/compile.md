@@ -1,6 +1,8 @@
 ---
 title: "`deno compile`, standalone executables"
-oldUrl: /runtime/manual/tools/compiler/
+oldUrl: 
+ - /runtime/manual/tools/compiler/
+ - /runtime/reference/cli/check/
 command: compile
 ---
 

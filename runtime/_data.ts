@@ -43,7 +43,7 @@ export const sidebar = [
     href: "/runtime/reference/",
     items: [
       {
-        label: "Deno CLI",
+        label: "CLI",
         href: "/runtime/reference/cli/",
         items: [
           {

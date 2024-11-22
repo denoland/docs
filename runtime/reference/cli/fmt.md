@@ -3,6 +3,7 @@ title: "`deno fmt`, code formatting"
 oldUrl:
  - /runtime/tools/formatter/
  - /runtime/manual/tools/formatter/
+ - /runtime/reference/cli/formatter/
 command: fmt
 ---
 

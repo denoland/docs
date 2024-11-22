@@ -1,6 +1,8 @@
 ---
 title: "`deno doc`, documentation generator"
-oldUrl: /runtime/manual/tools/documentation_generator/
+oldUrl: 
+ - /runtime/manual/tools/documentation_generator/
+ - /runtime/reference/cli/documentation_generator/
 command: doc
 ---
 

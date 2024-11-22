@@ -12,7 +12,7 @@ below for more information on each subcommand.
 
 - [deno run](/runtime/reference/cli/run/) - run a script
 - [deno serve](/runtime/reference/cli/serve/) - run a web server
-- [deno task](/runtime/reference/cli/task_runner/) - run a task
+- [deno task](/runtime/reference/cli/task/) - run a task
 - [deno repl](/runtime/reference/cli/repl/) - starts a read-eval-print-loop
 - [deno eval](/runtime/reference/cli/eval/) - evaluate provided script
 
@@ -29,23 +29,23 @@ below for more information on each subcommand.
 
 ## Tooling
 
-- [deno bench](/runtime/reference/cli/benchmarker/) - benchmarking tool
+- [deno bench](/runtime/reference/cli/bench/) - benchmarking tool
 - [deno check](/runtime/reference/cli/check/) - type check your program without
   running it
-- [deno compile](/runtime/reference/cli/compiler/) - compile a program into a
+- [deno compile](/runtime/reference/cli/compile/) - compile a program into a
   standalone executable
 - [deno completions](/runtime/reference/cli/completions/) - generate shell
   completions
 - [deno coverage](/runtime/reference/cli/coverage/) - generate test coverage
   reports
-- [deno doc](/runtime/reference/cli/documentation_generator/) - generate
+- [deno doc](/runtime/reference/cli/doc/) - generate
   documentation for a module
-- [deno fmt](/runtime/reference/cli/formatter/) - format your code
-- [deno info](/runtime/reference/cli/dependency_inspector/) - inspect an ES
+- [deno fmt](/runtime/reference/cli/fmt/) - format your code
+- [deno info](/runtime/reference/cli/info/) - inspect an ES
   module and all of its dependencies
 - [deno init](/runtime/reference/cli/init/) - create a new project
 - [deno jupyter](/runtime/reference/cli/jupyter/) - run a Jupyter notebook
-- [deno lint](/runtime/reference/cli/linter/) - lint your code
+- [deno lint](/runtime/reference/cli/lint/) - lint your code
 - [deno lsp](/runtime/reference/cli/lsp/) - language server protocol integration
 - [deno publish](/runtime/reference/cli/publish/) - publish a module to JSR
 - [deno test](/runtime/reference/cli/test/) - run your tests
