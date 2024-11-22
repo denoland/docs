@@ -1,5 +1,5 @@
 export const layout = "raw.tsx";
-export const url = "/404.html";
+export const url = "/404";
 import { sidebar } from "./runtime/_data.ts";
 
 const styles = /*css*/ `
