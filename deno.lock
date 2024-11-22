@@ -2166,7 +2166,6 @@
       "jsr:@std/media-types@^1.0.3",
       "jsr:@std/path@^1.0.8",
       "npm:googleapis@144",
-      "npm:preact@*",
       "npm:tailwindcss@^3.4.9"
     ]
   }
