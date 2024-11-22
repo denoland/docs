@@ -52,7 +52,7 @@ export const sidebar = [
           },
           {
             label: "deno bench",
-            id: "/runtime/reference/cli/benchmarker/",
+            id: "/runtime/reference/cli/bench/",
           },
           {
             label: "deno completions",
@@ -64,7 +64,7 @@ export const sidebar = [
           },
           {
             label: "deno compile",
-            id: "/runtime/reference/cli/compiler/",
+            id: "/runtime/reference/cli/compile/",
           },
           {
             label: "deno coverage",
@@ -72,7 +72,7 @@ export const sidebar = [
           },
           {
             label: "deno doc",
-            id: "/runtime/reference/cli/documentation_generator/",
+            id: "/runtime/reference/cli/doc/",
           },
           {
             label: "deno eval",
@@ -80,11 +80,11 @@ export const sidebar = [
           },
           {
             label: "deno fmt",
-            id: "/runtime/reference/cli/formatter/",
+            id: "/runtime/reference/cli/fmt/",
           },
           {
             label: "deno info",
-            id: "/runtime/reference/cli/dependency_inspector/",
+            id: "/runtime/reference/cli/info/",
           },
           {
             label: "deno init",
@@ -100,7 +100,7 @@ export const sidebar = [
           },
           {
             label: "deno lint",
-            id: "/runtime/reference/cli/linter/",
+            id: "/runtime/reference/cli/lint/",
           },
           {
             label: "deno outdated",
@@ -132,7 +132,7 @@ export const sidebar = [
           },
           {
             label: "deno task",
-            id: "/runtime/reference/cli/task_runner/",
+            id: "/runtime/reference/cli/task/",
           },
           {
             label: "deno test",
