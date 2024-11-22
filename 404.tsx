@@ -1,6 +1,6 @@
 export const layout = "raw.tsx";
-export const url = "/404";
-import { sidebar } from "../runtime/_data.ts";
+export const url = "/404.html";
+import { sidebar } from "./runtime/_data.ts";
 
 const styles = /*css*/ `
 #content nav {
@@ -42,13 +42,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         <h1 class="text-2xl font-semibold sm:text-3xl md:text-4xl">
           Sorry, couldn’t find that page.
         </h1>
-        <p class="text-sm mt-3">
-          Failed to match route{" "}
-          <code class="p-1 rounded bg-foreground-tertiary" id="tried-path">
-            404
-          </code>
-        </p>
-        <p class="md:text-lg mt-6">
+        <p class="md:text-lg mt-4">
           Maybe one of these links has what you're looking for?
         </p>
       </div>

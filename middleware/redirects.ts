@@ -46,15 +46,6 @@ export default async function redirectsMiddleware(
       res = await next(req);
     }
 
-    if (res.status === 404) {
-      res = new Response(null, {
-        headers: {
-          location: "/404" + "?path=" + encodeURIComponent(url.pathname)
-        },
-        status: 303,
-      });
-    }
-
     return res;
   } catch (e) {
     res = new Response("Internal Server Error", {
