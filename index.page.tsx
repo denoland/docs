@@ -79,7 +79,7 @@ export default function () {
           {/* Temporary banner  */}
           <div class="flex flex-col gap-4 p-4 bg-runtime-background dark:bg-background-secondary border-l-4 text-runtime-foreground border-runtime-500">
             <p class="text-lg">
-              <strong>Deno 2.0</strong> is out now! Learn about{"  "}
+              <strong>Deno 2</strong> is out now! Learn about{"  "}
               <a
                 href="/runtime/reference/migration_guide"
                 class="runtime-link underline underline-offset-4"
