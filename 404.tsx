@@ -33,7 +33,7 @@ export default function Page(props: Lume.Data, _helpers: Lume.Helpers) {
       <style>{styles}</style>
       <div class="mt-8 mb-16 lg:mb-24">
         <h1 class="text-2xl font-semibold sm:text-3xl md:text-4xl">
-          <div class="text-[400%] font-semibold text-runtime-300 opacity-50 relative -z-10">
+          <div class="text-[400%] font-semibold text-runtime-300 opacity-50 dark:opacity-15 relative -z-10">
             404
           </div>
           Sorry, couldn’t find that page.
