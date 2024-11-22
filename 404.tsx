@@ -24,14 +24,7 @@ const styles = /*css*/ `
   text-wrap: balance;
 }`;
 
-const scripts = /*js*/ `
-  const searchParams = new URLSearchParams(document.location.search);
-  const pathParam = searchParams.get("path");
-  const decodedPath = decodeURIComponent(pathParam);
-  document.getElementById("tried-path").innerText = decodedPath;
-`;
-
-export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
+export default function Page(props: Lume.Data, _helpers: Lume.Helpers) {
   return (
     <main
       id="content"
@@ -40,13 +33,15 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
       <style>{styles}</style>
       <div class="mt-8 mb-16 lg:mb-24">
         <h1 class="text-2xl font-semibold sm:text-3xl md:text-4xl">
+          <div class="text-[400%] font-semibold text-runtime-300 opacity-50 relative -z-10">
+            404
+          </div>
           Sorry, couldn’t find that page.
         </h1>
         <p class="md:text-lg mt-4">
           Maybe one of these links has what you're looking for?
         </p>
       </div>
-      <script dangerouslySetInnerHTML={{ __html: scripts }} />
 
       <props.comp.Sidebar
         sidebar={sidebar}
