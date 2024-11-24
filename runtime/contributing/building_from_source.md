@@ -244,3 +244,19 @@ version instead of fetching it from `crates.io`.
 `Cargo.toml` match the version of the dependencies you have on disk.
 
 Use `cargo search <dependency_name>` to inspect the versions.
+
+## Consuming the DenoRT
+
+Deno Runtime (DenoRT) is an internal name given to the executable used to create
+a deno compile binary. It is a trimmed down version of the deno binary with the
+tooling and non-runtime stuff removed.
+
+By default, when `deno compile` is run, it will download a DenoRT that matches
+the version of the deno binary. If you want to use a custom DenoRT, you can
+specify the `DENORT_BIN` environment variable to point to the DenoRT binary. The
+DenoRT binary can be found in the `target/` directory next to the `deno`
+executable.
+
+```shell
+DENORT_BIN=~/git/deno/deno/target/debug/denort ~/git/deno/deno/target/debug/deno compile
+```
