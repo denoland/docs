@@ -1,11 +1,11 @@
 import { walkSync } from "@std/fs/walk";
 import LandingPage from "./_pages/LandingPage.tsx";
 import ExamplePage from "./_pages/ExamplePage.tsx";
-import { Example, ExampleFile, ExampleFromFileSystem, DIFFICULTIES, TAGS } from "./types.ts";
-import { parseExample } from "./utils/parseExample.ts";
+import ExamplesPage from "./_pages/ExamplesPage.tsx";
 import TutorialPage from "./_pages/TutorialsPage.tsx";
 import VideoPage from "./_pages/VideosPage.tsx";
-import Examples from "./_pages/ExamplesPage.tsx";
+import {ExampleFromFileSystem } from "./types.ts";
+import { parseExample } from "./utils/parseExample.ts";
 
 export const layout = "raw.tsx";
 
@@ -41,7 +41,7 @@ export const sidebar = [
 ];
 
 export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
-  const files = [...walkSync("./examples/", { exts: [".ts"] }) ];
+  const files = [...walkSync("./learn/examples/", { exts: [".ts"] }) ];
   
   const examples = files.map((file) => {
     const content = Deno.readTextFileSync(file.path);
@@ -77,12 +77,12 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
   yield {
     url: `/learn/examples/index.html`,
     title: `Deno by Example`,
-    content: <Examples examples={examples} />,
+    content: <ExamplesPage examples={examples} />,
   };
 
   yield {
     url: `/learn/index.html`,
     title: `Learning Hub`,
-    content: <LandingPage examples={examples} />,
+    content: <LandingPage />,
   };
 }

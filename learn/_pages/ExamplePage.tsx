@@ -13,7 +13,7 @@ export default function ExamplePage({ example }: Props) {
         `https://github.com/denoland/deno-docs/blob/main/examples/${example.name}${
           example.parsed.files.length > 1 ? "/main" : ""
         }`;
-      const rawUrl = `https://docs.deno.com/examples/${example.name}${
+      const rawUrl = `https://docs.deno.com/learn/examples/${example.name}${
         example.parsed.files.length > 1 ? "/main" : ""
       }`;  
 
