@@ -199,4 +199,3 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
     </>
   );
 }
-

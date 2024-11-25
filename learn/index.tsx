@@ -4,7 +4,7 @@ import ExamplePage from "./_pages/ExamplePage.tsx";
 import ExamplesPage from "./_pages/ExamplesPage.tsx";
 import TutorialPage from "./_pages/TutorialsPage.tsx";
 import VideoPage from "./_pages/VideosPage.tsx";
-import {ExampleFromFileSystem } from "./types.ts";
+import { ExampleFromFileSystem } from "./types.ts";
 import { parseExample } from "./utils/parseExample.ts";
 
 export const layout = "raw.tsx";
@@ -41,8 +41,8 @@ export const sidebar = [
 ];
 
 export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
-  const files = [...walkSync("./learn/examples/", { exts: [".ts"] }) ];
-  
+  const files = [...walkSync("./learn/examples/", { exts: [".ts"] })];
+
   const examples = files.map((file) => {
     const content = Deno.readTextFileSync(file.path);
 
