@@ -1,3 +1,3 @@
 export default function TutorialPage() {
-  return <div>My tutorial page</div>;
+  return <div>The tutorials page</div>;
 }

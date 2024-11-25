@@ -3,9 +3,9 @@ import LandingPage from "./_pages/LandingPage.tsx";
 import ExamplePage from "./_pages/ExamplePage.tsx";
 import { Example, ExampleFile, ExampleFromFileSystem, DIFFICULTIES, TAGS } from "./types.ts";
 import { parseExample } from "./utils/parseExample.ts";
-import TutorialPage from "./_pages/TutorialPage.tsx";
-import VideoPage from "./_pages/VideoPage.tsx";
-import Examples from "./_pages/Examples.tsx";
+import TutorialPage from "./_pages/TutorialsPage.tsx";
+import VideoPage from "./_pages/VideosPage.tsx";
+import Examples from "./_pages/ExamplesPage.tsx";
 
 export const layout = "raw.tsx";
 
@@ -64,13 +64,13 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
 
   yield {
     url: `/learn/tutorials/index.html`,
-    title: `Deno by Tutorial`,
+    title: `Tutorials`,
     content: <TutorialPage />,
   };
 
   yield {
     url: `/learn/videos/index.html`,
-    title: `Deno by Video`,
+    title: `Videos`,
     content: <VideoPage />,
   };
 
@@ -82,7 +82,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
 
   yield {
     url: `/learn/index.html`,
-    title: `Learning Centre`,
+    title: `Learning Hub`,
     content: <LandingPage examples={examples} />,
   };
 }
