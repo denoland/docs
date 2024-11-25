@@ -5,7 +5,7 @@ import { assertEquals, assertNotMatch } from "@std/assert";
 const decoder = new TextDecoder();
 
 Deno.test("Check examples", async (t) => {
-  for await (const item of walk("./learn/examples")) {
+  for await (const item of walk("./learn/examples/")) {
     const path = join("examples", item.name);
 
     if (!path.endsWith(".ts")) continue;
