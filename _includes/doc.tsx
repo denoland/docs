@@ -1,20 +1,18 @@
-import Searcher from "lume/core/searcher.ts";
 import ansiRegex from "npm:ansi-regex";
 import Logo from "../_components/Logo.tsx";
 import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
   type: "json",
 };
 import {
-  BreadcrumbItem,
-  isSidebarCategory,
-  isSidebarDoc,
-  isSidebarLink,
   Sidebar as Sidebar_,
-  SidebarDoc as SidebarDoc_,
   SidebarItem,
-  SidebarLink as SidebarLink_,
   TableOfContentsItem as TableOfContentsItem_,
 } from "../types.ts";
+import { Breadcrumbs } from "../_components/Breadcrumbs.tsx";
+import { HeaderAnchor } from "../_components/HeaderAnchor.tsx";
+import { NavigationButton } from "../_components/NavigationButton.tsx";
+import { TableOfContentsItem } from "../_components/TableOfContentsItem.tsx";
+import { TableOfContentsItemMobile } from "../_components/TableOfContentsItemMobile.tsx";
 
 export const layout = "layout.tsx";
 
@@ -206,233 +204,6 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   );
 }
 
-function NavigationButton(props: {
-  item: SidebarItem;
-  search: Searcher;
-  direction: "prev" | "next";
-}) {
-  let item: SidebarDoc_ | SidebarLink_;
-  if (typeof props.item === "string") {
-    const data = props.search.data(props.item)!;
-    if (!data) {
-      throw new Error(`No data found for ${props.item}`);
-    }
-    item = {
-      label: data.sidebar_title ?? data.title!,
-      id: data.url!,
-    };
-  } else if ("items" in props.item) {
-    return (
-      <NavigationButton
-        item={props.item.items[0]}
-        search={props.search}
-        direction={props.direction}
-      />
-    );
-  } else {
-    item = props.item;
-  }
-  const directionText = props.direction === "prev" ? "Prev" : "Next";
-  const alignmentClass = props.direction === "prev"
-    ? "items-start"
-    : "items-end";
-
-  return (
-    <a
-      className={`flex flex-col py-3 px-6 ${alignmentClass} border border-foreground-secondary/20 hover:border-blue-700 hover:bg-blue-50/10 transition-colors duration-300 transition-timing-function cubic-bezier(0.4, 0, 0.2, 1) rounded`}
-      href={"id" in item ? item.id : "href" in item ? item.href : undefined}
-    >
-      <span className="text-sm text-foreground-secondary">{directionText}</span>
-      <div className="flex flex-row max-w-full items-center text-blue-500 gap-2">
-        {props.direction === "prev" && <>&laquo;</>}
-        <span className="font-semibold flex-shrink truncate">{item.label}</span>
-        {props.direction === "next" && <>&raquo;</>}
-      </div>
-    </a>
-  );
-}
-
-function generateCrumbs(
-  url: string,
-  title: string,
-  items: SidebarItem[],
-  current: BreadcrumbItem[] = [],
-): BreadcrumbItem[] {
-  for (const item of items) {
-    const foundTargetPage = (typeof item === "string" && item === url) ||
-      (isSidebarDoc(item) && item.id === url) ||
-      (isSidebarLink(item) && item.href === url);
-
-    if (foundTargetPage) {
-      current.push({ label: title });
-      return current;
-    }
-
-    if (isSidebarCategory(item)) {
-      const childItems: BreadcrumbItem[] = [];
-      generateCrumbs(url, title, item.items, childItems);
-
-      if (childItems.length > 0) {
-        if (item.href) {
-          current.push({ label: item.label, href: item.href });
-        }
-        current.push(...childItems);
-        return current;
-      }
-    }
-  }
-
-  return current;
-}
-
-function Breadcrumbs(props: {
-  title: string;
-  sidebar: Sidebar_;
-  url: string;
-  sectionTitle: string;
-  sectionHref: string;
-}) {
-  const crumbs: BreadcrumbItem[] = [];
-
-  for (const section of props.sidebar) {
-    if (section.href === props.url) {
-      crumbs.push({ label: props.title });
-      break;
-    }
-
-    const rootItem = { label: section.title, href: section.href };
-    const potentialCrumbs = generateCrumbs(
-      props.url,
-      props.title,
-      section.items,
-      [rootItem],
-    );
-
-    if (potentialCrumbs.length > 1) {
-      crumbs.push(...potentialCrumbs);
-      break;
-    }
-  }
-
-  return (
-    <nav class="mb-4">
-      <ul
-        class="flex flex-wrap text-foreground-secondary items-center -ml-3"
-        itemscope
-        itemtype="https://schema.org/BreadcrumbList"
-      >
-        <li
-          itemprop="itemListElement"
-          itemscope
-          itemtype="https://schema.org/ListItem"
-        >
-          <a
-            class="block px-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
-            itemprop="item"
-            href={props.sectionHref}
-          >
-            <span itemprop="name">{props.sectionTitle}</span>
-          </a>
-          <meta itemprop="position" content="1" />
-        </li>
-        <li>
-          <svg
-            class="size-4 text-foreground-secondary rotate-90"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-            />
-          </svg>
-        </li>
-        {crumbs.map((crumb, i) => (
-          <>
-            <li
-              itemprop="itemListElement"
-              itemscope
-              itemtype="https://schema.org/ListItem"
-            >
-              {crumb.href
-                ? (
-                  <a
-                    href={crumb.href}
-                    itemprop="item"
-                    class="block px-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
-                  >
-                    <span itemprop="name">{crumb.label}</span>
-                  </a>
-                )
-                : (
-                  <span itemprop="name" class="block px-3 py-1.5 text-sm">
-                    {crumb.label}
-                  </span>
-                )}
-              <meta itemprop="position" content={String(i + 2)} />
-            </li>
-            {i < crumbs.length - 1 && (
-              <li>
-                <svg
-                  class="size-4 text-foreground-secondary rotate-90"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-                  >
-                  </path>
-                </svg>
-              </li>
-            )}
-          </>
-        ))}
-      </ul>
-    </nav>
-  );
-}
-
-function TableOfContentsItem(props: { item: TableOfContentsItem_ }) {
-  return (
-    <li class="m-2 leading-4">
-      <a
-        href={`#${props.item.slug}`}
-        class="text-[13px] text-foreground-secondary hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
-      >
-        {props.item.text.replaceAll(/ \([0-9/]+?\)/g, "")}
-      </a>
-      {props.item.children.length > 0 && (
-        <ul class="ml-2">
-          {props.item.children.map((item) => (
-            <TableOfContentsItem item={item} />
-          ))}
-        </ul>
-      )}
-    </li>
-  );
-}
-
-function TableOfContentsItemMobile(props: { item: TableOfContentsItem_ }) {
-  return (
-    <li class="my-1.5 mx-3">
-      <a
-        href={`#${props.item.slug}`}
-        class="text-sm text-foreground-secondary hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
-      >
-        {props.item.text.replaceAll(/ \([0-9/]+?\)/g, "")}
-      </a>
-      {props.item.children.length > 0 && (
-        <ul class="ml-2">
-          {props.item.children.map((item) => (
-            <TableOfContentsItemMobile item={item} />
-          ))}
-        </ul>
-      )}
-    </li>
-  );
-}
-
 const ANSI_RE = ansiRegex();
 const SUBSEQUENT_ANSI_RE = new RegExp(
   `(?:${ANSI_RE.source})(?:${ANSI_RE.source})`,
@@ -577,20 +348,6 @@ function renderCommand(
     rendered,
     toc,
   };
-}
-
-function HeaderAnchor(props: { id: string }) {
-  return (
-    <a className="header-anchor" href={`#${props.id}`}>
-      <span className="sr-only">Jump to heading</span>
-      <span
-        aria-hidden="true"
-        class="anchor-end"
-      >
-        #
-      </span>
-    </a>
-  );
 }
 
 function renderOption(group: string, arg, helpers: Lume.Helpers) {
