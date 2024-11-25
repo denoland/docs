@@ -1,3 +1,5 @@
+import Header from "../_components/Header.tsx";
+
 export default function Layout(props: Lume.Data) {
   const reference = props.url.startsWith("/api");
   const description = props.description ||
@@ -99,7 +101,7 @@ export default function Layout(props: Lume.Data) {
         >
           Skip to main content <span aria-hidden="true">-&gt;</span>
         </a>
-        <props.comp.Header url={props.url} hasSidebar={!!props.sidebar} />
+        <Header url={props.url} hasSidebar={!!props.sidebar} />
         {props.children}
       </body>
     </html>
