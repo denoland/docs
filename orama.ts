@@ -1,6 +1,6 @@
 import { Data, Page } from "lume/core/file.ts";
 import { walkSync } from "@std/fs/walk";
-import { parseExample } from "./examples.page.tsx";
+import { parseExample } from "./learn/utils/parseExample.ts";
 
 export interface OramaDocument {
   path: string;

@@ -50,16 +50,16 @@ export default function Header({
           />
           <HeaderItem
             url={url}
-            activeOn="/examples"
-            href="/examples"
-            name="Examples"
+            activeOn="/api"
+            href="/api/deno"
+            name="API reference"
             hideOnMobile
           />
           <HeaderItem
             url={url}
-            activeOn="/api"
-            href="/api/deno"
-            name="API reference"
+            activeOn="/learn"
+            href="/learn"
+            name="Learning hub"
             hideOnMobile
           />
           <span class="hidden xl:inline-block text-foreground-secondary mx-2">
