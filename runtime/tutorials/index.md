@@ -1,7 +1,5 @@
 ---
 title: "Tutorials"
-sidebar_title: "Overview"
-pagination_next: /runtime/tutorials/hello_world
 oldUrl:
   - /runtime/manual/examples/
   - /runtime/manual/examples/how_to_with_npm/
@@ -20,7 +18,8 @@ your favorite tools.
 
 ## Web frameworks and libraries
 
-- [React](/runtime/tutorials/how_to_with_npm/react/)
+- [React with package.json](/runtime/tutorials/how_to_with_npm/create-react/)
+- [React with deno.json](/runtime/tutorials/how_to_with_npm/react/)
 - [Next.js](/runtime/tutorials/how_to_with_npm/next/)
 - [Fresh](https://fresh.deno.dev/docs/getting-started/create-a-project)
 - [Vue.js](/runtime/tutorials/how_to_with_npm/vue/)
