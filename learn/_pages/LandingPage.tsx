@@ -14,15 +14,15 @@ export default function LandingPage() {
           </h1>
           <p className="max-w-prose mx-auto">
             Tutorials, videos and example code to help you go from Deno beginner
-            to expert.
+            to Deno expert.
           </p>
         </div>
-        <div className="align-middle flex flex-row gap-8">
-          <div className="w-full">
+        <div className="align-middle flex items-center gap-8 mb-20">
+          <div className="flex-1">
             <EmbedVideo id="H8VLifMOBHU" />
           </div>
-          <div className="text-center ">
-            <h2 className="text-2xl font-semibold">What is Deno?</h2>
+          <div className="flex-1 text-center">
+            <h2 className="text-2xl font-semibold ">What is Deno?</h2>
             <p className="my-4">
               Deno, is an open-source runtime for TypeScript and JavaScript.
               Features built-in dev tools, powerful platform APIs, and native
@@ -36,28 +36,34 @@ export default function LandingPage() {
             </p>
           </div>
         </div>
-        <h2 className="text-2xl mt-16 mb-8 font-semibold text-center">
+        <h2 className="text-3xl mt-20 mb-8 font-semibold text-center">
           How do you like to learn?
         </h2>
-        <div className="align-middle flex flex-row gap-8">
-          <SectionTeaser
-            title="By example"
-            text="Our examples section holds a collection of annotated Deno examples, to be used as a reference for how to build with Deno, or as a guide to learn about many of Deno's features."
-            link="/learn/examples/"
-            cta="Explore the examples"
-          />
-          <SectionTeaser
-            title="With video"
-            text="Explore our playlists of videos curated to guide you through getting the best out of using Deno for your development projects."
-            link="/learn/videos/"
-            cta="Explore the videos"
-          />
-          <SectionTeaser
-            title="Through tutorials"
-            text="Explore our playlists of videos curated to guide you through getting the best out of using Deno for your development projects."
-            link="/learn/tutorials/"
-            cta="Explore the tutorials"
-          />
+        <div className="align-middle flex flex-row gap-8 mb-20">
+          <div className="flex-1">
+            <SectionTeaser
+              title="By example"
+              text="Our examples section holds a collection of annotated Deno examples, to be used as a reference for how to build with Deno, or as a guide to learn about many of Deno's features."
+              link="/learn/examples/"
+              cta="Explore the examples"
+            />
+          </div>
+          <div className="flex-1">
+            <SectionTeaser
+              title="With video"
+              text="Explore our playlists of videos curated to guide you through getting the best out of using Deno for your development projects."
+              link="/learn/videos/"
+              cta="Explore the videos"
+            />
+          </div>
+          <div className="flex-1">
+            <SectionTeaser
+              title="Through tutorials"
+              text="Explore our playlists of videos curated to guide you through getting the best out of using Deno for your development projects."
+              link="/learn/tutorials/"
+              cta="Explore the tutorials"
+            />
+          </div>
         </div>
       </div>
     </main>
