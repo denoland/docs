@@ -18,10 +18,10 @@ export default function LandingPage() {
           </p>
         </div>
         <div className="align-middle flex flex-row gap-8">
-          <div className="w-1/2">
-            <EmbedVideo url="https://www.youtube.com/watch?v=sNzJXb6vV8o" />
+          <div className="w-full">
+            <EmbedVideo id="H8VLifMOBHU" />
           </div>
-          <div className="text-center">
+          <div className="text-center ">
             <h2 className="text-2xl font-semibold">What is Deno?</h2>
             <p className="my-4">
               Deno, is an open-source runtime for TypeScript and JavaScript.
