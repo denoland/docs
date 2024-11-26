@@ -1,8 +1,5 @@
 ---
-title: "Build a React App"
-oldUrl:
-  - /runtime/manual/examples/how_to_with_npm/react/
-  - /runtime/manual/basics/react/
+title: "Build a React app with create-vite"
 ---
 
 [React](https://reactjs.org) is the most widely used JavaScript frontend
@@ -17,8 +14,8 @@ with more details. You can see the
 
 ## Create a React app with Vite and Deno
 
-This tutorial will use [Vite](https://vitejs.dev/) to quickly scaffold a Deno
-and React app. Vite is a build tool and development server for modern web
+This tutorial will use [create-vite](https://vitejs.dev/) to quickly scaffold a
+Deno and React app. Vite is a build tool and development server for modern web
 projects. It pairs well with React and Deno, leveraging ES modules and allowing
 you to import React components directly.
 
@@ -43,7 +40,13 @@ deno task dev
 ```
 
 This will start the Vite server, click the output link to localhost to see your
-app in the browser.
+app in the browser. If you have the Deno extension for VSCode installed, you may
+notice that the editor highlights some errors in the code. This is because the
+app created by Vite is designed with Node in mind and so uses conventions that
+Deno does not (such as 'sloppy imports' - importing modules without the file
+extension). Disable the Deno extension for this project to avoid these errors or
+try out the
+[tutorial to build a React app with a deno.json file](/runtime/tutorials/how_to_with_npm/react/).
 
 ## Add a backend
 
