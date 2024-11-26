@@ -31,6 +31,7 @@
     "jsr:@std/path@1.0.0-rc.1": "1.0.0-rc.1",
     "jsr:@std/path@1.0.8": "1.0.8",
     "jsr:@std/path@^1.0.7": "1.0.8",
+    "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/streams@^1.0.7": "1.0.8",
     "jsr:@std/toml@1.0.1": "1.0.1",
     "jsr:@std/toml@^1.0.1": "1.0.1",
@@ -1772,6 +1773,7 @@
       "jsr:@std/path@^1.0.8",
       "npm:googleapis@144",
       "npm:preact@*",
+      "npm:prismjs@1.29.0",
       "npm:tailwindcss@^3.4.9"
     ]
   }
