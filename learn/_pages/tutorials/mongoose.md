@@ -2,6 +2,7 @@
 title: "How to use Mongoose with Deno"
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/mongoose/
+  - /runtime/tutorials/how_to_with_npm/mongoose/
 ---
 
 [Mongoose](https://mongoosejs.com/) is a popular, schema-based library that

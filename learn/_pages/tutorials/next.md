@@ -1,5 +1,7 @@
 ---
 title: "Build a Next.js App"
+oldUrl:
+  - /runtime/tutorials/how_to_with_npm/
 ---
 
 [Next.js](https://nextjs.org/) is a popular framework for building

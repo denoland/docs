@@ -3,6 +3,7 @@ title: "Build a React App"
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/react/
   - /runtime/manual/basics/react/
+  - /runtime/tutorials/how_to_with_npm/react/
 ---
 
 [React](https://reactjs.org) is the most widely used JavaScript frontend
