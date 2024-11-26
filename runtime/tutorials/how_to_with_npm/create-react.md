@@ -40,7 +40,7 @@ deno task dev
 ```
 
 This will start the Vite server, click the output link to localhost to see your
-app in the browser. If you have the Deno extension for VSCode installed, you may
+app in the browser. If you have the [Deno extension for VSCode](/runtime/getting_started/setup_your_environment/#visual-studio-code) installed, you may
 notice that the editor highlights some errors in the code. This is because the
 app created by Vite is designed with Node in mind and so uses conventions that
 Deno does not (such as 'sloppy imports' - importing modules without the file
