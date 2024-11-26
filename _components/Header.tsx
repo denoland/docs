@@ -59,7 +59,7 @@ export default function Header({
             url={url}
             activeOn="/learn"
             href="/learn"
-            name="Learning hub"
+            name="Learn"
             hideOnMobile
           />
           <span class="hidden xl:inline-block text-foreground-secondary mx-2">
