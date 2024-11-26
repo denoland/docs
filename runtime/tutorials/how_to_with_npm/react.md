@@ -1,5 +1,5 @@
 ---
-title: "Build a React App with a starter template"
+title: "Build a React app with a starter template"
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/react/
   - /runtime/manual/basics/react/
