@@ -116,7 +116,7 @@ There are two primary solutions to connect to SQLite in Deno:
 ### Connect to SQLite with the FFI Module
 
 [@db/sqlite](https://jsr.io/@db/sqlite) provides JavaScript bindings to the
-SQLite3 C API, using [Deno FFI](runtime/reference/deno_namespace_apis/#ffi).
+SQLite3 C API, using [Deno FFI](/runtime/reference/deno_namespace_apis/#ffi).
 
 ```ts
 import { Database } from "jsr:@db/sqlite@0.12";

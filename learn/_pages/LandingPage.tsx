@@ -33,7 +33,7 @@ export default function LandingPage() {
                 Deno and its core concepts
               </p>
               <p>
-                <a className="homepage-link runtime-link" href="/learn/video/">
+                <a className="homepage-link runtime-link" href="/learn/videos/">
                   Watch the getting started video series
                 </a>
               </p>
