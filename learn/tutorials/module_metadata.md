@@ -2,6 +2,7 @@
 title: "Module metadata"
 oldUrl:
   - /runtime/manual/examples/module_metadata/
+  - /runtime/tutorials/module_metadata/
 ---
 
 ## Concepts

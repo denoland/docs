@@ -2,6 +2,7 @@
 title: "How to use MySQL2 with Deno"
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/mysql2/
+  - /runtime/tutorials/how_to_with_npm/mysql2/
 ---
 
 [MySQL](https://www.mysql.com/) is the most popular database in the

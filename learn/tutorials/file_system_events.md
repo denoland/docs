@@ -2,6 +2,7 @@
 title: "File system events"
 oldUrl:
   - /runtime/manual/examples/file_system_events/
+  - /runtime/tutorials/file_system_events/
 ---
 
 ## Concepts

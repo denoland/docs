@@ -2,6 +2,7 @@
 title: "How to use Redis with Deno"
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/redis/
+  - /runtime/tutorials/how_to_with_npm/redis/
 ---
 
 [Redis](https://redis.io/) is an in-memory data store you can use for caching,

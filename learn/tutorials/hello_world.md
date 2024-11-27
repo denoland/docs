@@ -3,6 +3,7 @@ title: "Hello World"
 oldUrl:
   - /runtime/manual/examples/hello_world/
   - /runtime/tutorials/init_project/
+  - /runtime/tutorials/hello_world/
 ---
 
 Deno is a secure runtime for JavaScript and TypeScript.

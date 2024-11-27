@@ -4,20 +4,38 @@ import { SubNavigation } from "../_components/SubNavigation.tsx";
 
 export default function LandingPage() {
   return (
-    <>
-      <SubNavigation active="learn" />
-      <main
-        id="content"
-        className="w-full flex flex-col px-8 pt-6 mt-16 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-screen-xl mx-auto mb-20"
-      >
-        <div className="pb-16 align-middle md:pb-0 w-full">
-          <div className="mt-8 mb-16 md:mb-24 text-center">
-            <h1 className="text-4xl md:text-6xl font-semibold mb-4">
-              Learn Deno
-            </h1>
-            <p className="max-w-prose mx-auto">
-              Tutorials, videos and example code to help you go from Deno
-              beginner to Deno expert.
+        <>
+        <SubNavigation active="learn" />
+    <main
+      id="content"
+      className="w-full flex flex-col px-8 pt-6 mt-16 md:items-center md:justify-center md:flex-row gap-0 md:gap-16 max-w-screen-xl mx-auto mb-20"
+    >
+      <div className="pb-16 align-middle md:pb-0 w-full">
+        <div className="mt-8 mb-16 md:mb-24 text-center">
+          <h1 className="text-4xl md:text-6xl font-semibold mb-4">
+            Learn Deno
+          </h1>
+          <p className="max-w-prose mx-auto">
+            Tutorials, videos and example code to help you go from Deno beginner
+            to Deno expert.
+          </p>
+        </div>
+        <div className="align-middle flex items-center gap-8 mb-20">
+          <div className="flex-1">
+            <EmbedVideo id="H8VLifMOBHU" />
+          </div>
+          <div className="flex-1 text-center">
+            <h2 className="text-2xl font-semibold ">What is Deno?</h2>
+            <p className="my-4">
+              Deno, is an open-source runtime for TypeScript and JavaScript.
+              Features built-in dev tools, powerful platform APIs, and native
+              support for TypeScript and JSX. In this video we'll introduce Deno
+              and its core concepts.
+            </p>
+            <p>
+              <a className="homepage-link runtime-link" href="/learn/videos/">
+                Watch the getting started video series
+              </a>
             </p>
           </div>
           <div className="align-middle flex items-center gap-8 mb-20">

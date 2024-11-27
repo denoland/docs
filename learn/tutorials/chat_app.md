@@ -2,6 +2,7 @@
 title: "Chat application with WebSockets"
 oldUrl:
   - /runtime/manual/examples/chat_app/
+  - /runtime/tutorials/chat_app/
 ---
 
 WebSockets are a powerful tool for building real-time applications. They allow

@@ -2,6 +2,7 @@
 title: "Build a Vue.js App"
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/vue/
+  - /runtime/tutorials/how_to_with_npm/vue/
 ---
 
 [Vue.js](https://vuejs.org/) is a progressive front-end JavaScript framework. It
