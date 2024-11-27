@@ -1,6 +1,6 @@
 ---
 title: "Deploying Deno to Cloudflare Workers"
-oldUrl: 
+oldUrl:
 - /runtime/manual/advanced/deploying_deno/cloudflare_workers/
 - /runtime/tutorials/cloudflare_workers/
 ---

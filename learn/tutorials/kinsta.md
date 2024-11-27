@@ -1,6 +1,6 @@
 ---
 title: "How to deploy Deno on Kinsta"
-oldUrl: 
+oldUrl:
 - /runtime/manual/advanced/deploying_deno/kinsta/
 - runtime/tutorials/kinsta
 ---

@@ -147,7 +147,7 @@ export const sidebar = [
       {
         label: "Build a word finder app",
         id: "/learn/tutorials/word_finder/",
-      }
+      },
     ],
   },
 ] satisfies Sidebar;
