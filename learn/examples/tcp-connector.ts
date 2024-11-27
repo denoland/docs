@@ -4,7 +4,7 @@
  * @tags cli
  * @run --allow-net <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.connect} Doc: Deno.connect
- * @resource {/examples/tcp-listener} Example: TCP Listener
+ * @resource {/learn/examples/tcp-listener} Example: TCP Listener
  * @group Network
  *
  * An example of connecting to a TCP server on localhost and writing a 'ping' message to the server.

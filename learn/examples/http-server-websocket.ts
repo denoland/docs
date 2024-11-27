@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --allow-net <url>
- * @resource {/examples/http-server} Example: HTTP Server: Hello World
+ * @resource {/learn/examples/http-server} Example: HTTP Server: Hello World
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/WebSocket} MDN: WebSocket
  * @group Network
  *

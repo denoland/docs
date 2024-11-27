@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli, deploy, web
  * @run <url>
- * @resource {/examples/import-export} Example: Importing & Exporting
+ * @resource {/learn/examples/import-export} Example: Importing & Exporting
  * @resource {https://yaml.org} Spec: YAML
  * @group Encoding
  *

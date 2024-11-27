@@ -18,7 +18,7 @@ export const sidebar = [
       },
       {
         label: "Examples",
-        id: "/examples/",
+        id: "/learn/examples/",
       },
       {
         label: "API reference",

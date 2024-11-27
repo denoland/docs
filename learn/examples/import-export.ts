@@ -2,7 +2,7 @@
  * @title Importing & exporting
  * @difficulty beginner
  * @tags cli, deploy
- * @resource {/examples/dependency-management} Example: Dependency Management
+ * @resource {/learn/examples/dependency-management} Example: Dependency Management
  * @resource {https://docs.deno.com/runtime/manual/basics/modules} Manual: Modules
  * @group Basics
  *

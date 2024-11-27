@@ -4,7 +4,7 @@
  * @tags cli
  * @run --allow-net --allow-read <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.connectTls} Doc: Deno.connectTls
- * @resource {/examples/tls-listener} Example: TCP/TLS Listener
+ * @resource {/learn/examples/tls-listener} Example: TCP/TLS Listener
  * @group Network
  *
  * An example of connecting to a TCP server using TLS on localhost and writing a 'ping' message to the server.

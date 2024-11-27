@@ -108,7 +108,7 @@ export async function generateDocumentsForExamples(): Promise<OramaDocument[]> {
     const label = file.name.replace(".ts", "");
 
     return {
-      path: `/examples/${label}`,
+      path: `/learn/examples/${label}`,
       title: parsed.title,
       content: parsed.description,
       section: parsed.group,

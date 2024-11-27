@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli, deploy, web
  * @run --allow-net <url>
- * @resource {/examples/http-server-websocket} HTTP Server: WebSockets
+ * @resource {/learn/examples/http-server-websocket} HTTP Server: WebSockets
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/WebSocket} MDN: WebSocket
  * @group Network
  *

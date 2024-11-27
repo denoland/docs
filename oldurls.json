@@ -1,7 +1,7 @@
 {
   "/runtime/tutorials/read_write_files/": "/examples/",
   "/runtime/tutorials/unix_cat/": "/examples/unix-cat/",
-  "/examples/dependency-management/": "/runtime/fundamentals/configuration/#dependencies",
+  "/learn/examples/dependency-management/": "/runtime/fundamentals/configuration/#dependencies",
   "/runtime/tutorials/tcp_echo/": "/examples/tcp-echo-server/",
   "/runtime/tutorials/tcp_server/": "/examples/tcp-echo-server/",
   "/runtime/reference/deploying_and_embedding/": "/deploy/manual/",
