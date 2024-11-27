@@ -115,8 +115,8 @@ Deno strongly encourages the use of ES modules in your code but offers CommonJS
 support with following restrictions:
 
 **Deno's permission system is still in effect when using CommonJS modules.** It
-is necessary to provide at least `--allow-read` permission as Deno will probe
-the file system for `package.json` files and `node_modules` directory to
+may be necessary to provide at least `--allow-read` permission as Deno will
+probe the file system for `package.json` files and `node_modules` directory to
 properly resolve CommonJS modules.
 
 ### Use .cjs extension
@@ -158,9 +158,9 @@ variables.
 
 ### package.json type option
 
-Deno will treat files as CommonJS if there's a `package.json` file with
-`"type": "commonjs"` option next to the file, or up in the directory tree and
-`--unstable-detect-cjs` flag is passed on the CLI.
+Deno will attempt to load `.js`, `.jsx`, `.ts`, and `.tsx` files as CommonJS if
+there's a `package.json` file with `"type": "commonjs"` option next to the file,
+or up in the directory tree when in a project with a package.json file.
 
 ```json title="package.json"
 {
@@ -178,6 +178,16 @@ that automatically.
 If you have an existing project that uses CommonJS modules, you can make it work
 with both Node.js and Deno, by adding `"type": "commonjs"` option to the
 `package.json` file.
+
+### Always detecting if a file might be CommonJS
+
+Telling Deno to analyze modules as possibly being CommonJS is possible by
+running with the `--unstable-detect-cjs` in Deno >= 2.1.2. This will take
+effect, except when there's a _package.json_ file with `{ "type": "module" }`.
+
+Looking for package.json files on the file system and analyzing a module to
+detect if its CommonJS takes longer than not doing it. For this reason and to
+discourage the use of CommonJS, Deno does not do this behavior by default.
 
 ### Create require() manually
 
@@ -226,13 +236,9 @@ $ deno run -R main.cjs
 Hello Deno
 ```
 
-### import index.cjs
+### Import CommonJS modules
 
-You can also import CommonJS files in ES modules, provided that these files use
-`.cjs` extension.
-
-Deno does not look for `package.json` files and `type` option to determine if
-the file is CommonJS or ESM.
+You can also import CommonJS files in ES modules.
 
 ```js title="greet.cjs"
 module.exports = {
@@ -252,17 +258,14 @@ $ deno run main.js
 }
 ```
 
-_Notice that in this example no permission flags were specified - when importing
-CJS from ES modules, Deno can staticaly analyze and find relevant modules
-without having to probe file system at runtime._
-
 **Hints and suggestions**
 
 Deno will provide useful hints and suggestions to guide you towards working code
 when working with CommonJS modules.
 
 As an example, if you try to run a CommonJS module that doesn't have `.cjs`
-extension you might see this:
+extension or doesn't have a `package.json` with `{ "type": "commonjs" }` you
+might see this:
 
 ```js title="main.js"
 module.exports = {
@@ -277,8 +280,13 @@ module.exports = {
 ^
     at file:///main.js:1:1
 
-    info: Deno does not support CommonJS modules without `.cjs` extension.
-    hint: Rewrite this module to ESM or change the file extension to `.cjs`.
+    info: Deno supports CommonJS modules in .cjs files, or when the closest
+          package.json has a "type": "commonjs" option.
+    hint: Rewrite this module to ESM,
+          or change the file extension to .cjs,
+          or add package.json next to the file with "type": "commonjs" option,
+          or pass --unstable-detect-cjs flag to detect CommonJS when loading.
+    docs: https://docs.deno.com/go/commonjs
 ```
 
 ## Importing types
