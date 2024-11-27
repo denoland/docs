@@ -112,7 +112,7 @@ files.
 ## Workers
 
 Similarly to non-statically analyzable dynamic imports, code for
-[workers](../web_platform_apis.md#web-workers) is not included in the compiled
+[workers](../web_platform_apis/#web-workers) is not included in the compiled
 executable by default. There are two ways to include workers:
 
 1. Use the `--include <path>` flag to include the worker code.
@@ -170,4 +170,4 @@ $ signtool sign /fd SHA256 main.exe
 
 ## Unavailable in executables
 
-- [Web Storage API](../web_platform_apis.md#web-storage)
+- [Web Storage API](/runtime/reference/web_platform_apis/#web-storage)

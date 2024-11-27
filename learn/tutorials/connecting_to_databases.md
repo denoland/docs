@@ -116,7 +116,7 @@ There are two primary solutions to connect to SQLite in Deno:
 ### Connect to SQLite with the FFI Module
 
 [@db/sqlite](https://jsr.io/@db/sqlite) provides JavaScript bindings to the
-SQLite3 C API, using [Deno FFI](../reference/deno_namespace_apis.md#ffi).
+SQLite3 C API, using [Deno FFI](runtime/reference/deno_namespace_apis/#ffi).
 
 ```ts
 import { Database } from "jsr:@db/sqlite@0.12";
@@ -149,7 +149,7 @@ To connect to Firebase with Deno, import the
 [firestore npm module](https://firebase.google.com/docs/firestore/quickstart)
 with the [ESM CDN](https://esm.sh/). To learn more about using npm modules in
 Deno with a CDN, see
-[Using npm packages with CDNs](../fundamentals/modules.md#https-imports).
+[Using npm packages with CDNs](/runtime/fundamentals/modules/#https-imports).
 
 ### Connect to Firebase with the firestore npm module
 
@@ -193,7 +193,7 @@ To connect to Supabase with Deno, import the
 [supabase-js npm module](https://supabase.com/docs/reference/javascript) with
 the [esm.sh CDN](https://esm.sh/). To learn more about using npm modules in Deno
 with a CDN, see
-[Using npm packages with CDNs](../fundamentals/modules.md#https-imports).
+[Using npm packages with CDNs](/runtime/fundamentals/modules/#https-imports).
 
 ### Connect to Supabase with the supabase-js npm module
 
@@ -297,7 +297,7 @@ Deno.serve({ port: 3000 }, async () => {
 To make GraphQL client calls in Deno, import the
 [graphql npm module](https://www.npmjs.com/package/graphql) with the
 [esm CDN](https://esm.sh/). To learn more about using npm modules in Deno via
-CDN read [here](../fundamentals/modules.md#https-imports).
+CDN read [here](/runtime/fundamentals/modules/#https-imports).
 
 #### Make GraphQL client calls with the graphql npm module
 
