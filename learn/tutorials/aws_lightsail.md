@@ -1,6 +1,6 @@
 ---
 title: Deploy Deno to Amazon Lightsail
-oldUrl: 
+oldUrl:
 - /runtime/manual/advanced/deploying_deno/aws_lightsail/
 - /runtime/tutorials/aws_lightsail/
 ---

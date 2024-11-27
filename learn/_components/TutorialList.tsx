@@ -7,7 +7,9 @@ export function TutorialList(
       <ul className="">
         {props.items.map((item) => (
           <li>
-            <a className="homepage-link mb-1 runtime-link" href={item.id}>{item.label}</a>
+            <a className="homepage-link mb-1 runtime-link" href={item.id}>
+              {item.label}
+            </a>
           </li>
         ))}
       </ul>

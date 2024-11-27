@@ -1,6 +1,6 @@
 ---
 title: "How to deploy Deno to Digital Ocean"
-oldUrl: 
+oldUrl:
 - /runtime/manual/advanced/deploying_deno/digital_ocean/
 - /runtime/tutorials/digital_ocean/
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Connecting to databases"
-oldUrl: 
+oldUrl:
 - /runtime/tutorials/connecting_to_databases/
 ---
 
