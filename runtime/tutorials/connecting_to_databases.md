@@ -1,5 +1,7 @@
 ---
 title: "Connecting to databases"
+oldUrl:
+- /runtime/tutorials/connecting_to_databases/
 ---
 
 It is common for applications to store and retrieve data from databases. Deno

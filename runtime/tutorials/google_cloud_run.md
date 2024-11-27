@@ -1,6 +1,8 @@
 ---
 title: "How to deploy to Google Cloud Run"
-oldUrl: /runtime/manual/advanced/deploying_deno/google_cloud_run/
+oldUrl:
+- /runtime/manual/advanced/deploying_deno/google_cloud_run/
+- /runtime/tutorials/google_cloud_run
 ---
 
 [Google Cloud Run](https://cloud.google.com/run) is a managed compute platform

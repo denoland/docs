@@ -1,6 +1,8 @@
 ---
 title: "How to deploy Deno on Kinsta"
-oldUrl: /runtime/manual/advanced/deploying_deno/kinsta/
+oldUrl:
+- /runtime/manual/advanced/deploying_deno/kinsta/
+- runtime/tutorials/kinsta
 ---
 
 [Kinsta Application Hosting](https://kinsta.com/application-hosting) is a

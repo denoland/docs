@@ -1,6 +1,8 @@
 ---
 title: "How to deploy Deno to Digital Ocean"
-oldUrl: /runtime/manual/advanced/deploying_deno/digital_ocean/
+oldUrl:
+- /runtime/manual/advanced/deploying_deno/digital_ocean/
+- /runtime/tutorials/digital_ocean/
 ---
 
 Digital Ocean is a popular cloud infrastructure provider offering a variety of

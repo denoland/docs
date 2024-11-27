@@ -1,5 +1,7 @@
 ---
 title: "Build a React app with create-vite"
+oldUrl:
+- /runtime/tutorials/how_to_with_npm/create-react/
 ---
 
 [React](https://reactjs.org) is the most widely used JavaScript frontend

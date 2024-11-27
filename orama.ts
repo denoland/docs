@@ -98,7 +98,7 @@ export async function generateDocumentsForSymbols(): Promise<OramaDocument[]> {
 }
 
 export async function generateDocumentsForExamples(): Promise<OramaDocument[]> {
-  const files = [...walkSync("./examples/", {
+  const files = [...walkSync("./learn/examples/", {
     exts: [".ts"],
   })];
   return await Promise.all(files.map(async (file) => {
