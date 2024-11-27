@@ -27,10 +27,10 @@ to the file system.
 Refer to the links below for code examples of how to use the file system
 functions.
 
-- [Reading files in several different ways](/examples/reading-files)
-- [Reading files in streams](/runtime/tutorials/file_server/)
-- [Reading a text file (`Deno.readTextFile`)](/examples/reading-files)
-- [Writing a text file (`Deno.writeTextFile`)](/examples/writing-files)
+- [Reading files in several different ways](/learn/examples/reading-files/)
+- [Reading files in streams](/learn/runtime/tutorials/file_server/)
+- [Reading a text file (`Deno.readTextFile`)](/learn/examples/reading-files/)
+- [Writing a text file (`Deno.writeTextFile`)](/learn/examples/writing-files/)
 
 ## Network
 

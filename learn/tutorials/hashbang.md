@@ -78,4 +78,4 @@ Hello!
 🦕 Now you can directly execute Deno scripts from the command line! Remember to
 set the execute permission (`chmod +x`) for your script file, and you’re all set
 to build anything from simple utilities to complex tools. Check out the
-[Deno examples](/examples/) for inspiration on what you can script.
+[Deno examples](/learn/examples/) for inspiration on what you can script.

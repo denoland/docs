@@ -2,7 +2,7 @@
 title: Contributing an example
 ---
 
-[Deno by Example](/examples/) is a collection of examples that demonstrate how
+[Deno by Example](/learn/examples/) is a collection of examples that demonstrate how
 to use Deno and its APIs. If you contribute an example, we'll send you a free
 pack of stickers!
 

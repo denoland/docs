@@ -35,7 +35,7 @@ export const sidebar = [
       },
       {
         label: "Build a React app with create-vite",
-        id: "/learn/tutorials/react/create-react/",
+        id: "/learn/tutorials/create-react/",
       },
       {
         label: "Build a Next.js app",
