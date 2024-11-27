@@ -199,7 +199,14 @@ export const sidebar = [
       "/runtime/tutorials/fetch_data/",
       "/runtime/tutorials/hashbang/",
       "/runtime/tutorials/cjs_to_esm/",
-      "/runtime/tutorials/how_to_with_npm/react/",
+      {
+        label: "React with deno.json",
+        id: "/runtime/tutorials/how_to_with_npm/react/",
+      },
+      {
+        label: "React with package.json",
+        id: "/runtime/tutorials/how_to_with_npm/create-react/",
+      },
       "/runtime/tutorials/how_to_with_npm/next/",
       "/runtime/tutorials/how_to_with_npm/vue/",
       "/runtime/tutorials/connecting_to_databases/",
