@@ -280,7 +280,7 @@ body {
     hover:!no-underline hover:bg-jsr-yellow-300;
 }
 
-.homepage-link {
+.homepage-link, .learn-link {
   @apply block font-normal underline underline-offset-4;
 }
 
