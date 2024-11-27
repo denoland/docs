@@ -27,10 +27,10 @@ export default function LandingPage() {
               Deno, is an open-source runtime for TypeScript and JavaScript.
               Features built-in dev tools, powerful platform APIs, and native
               support for TypeScript and JSX. In this video we'll introduce Deno
-              and its core concepts
+              and its core concepts.
             </p>
             <p>
-              <a className="homepage-link runtime-link" href="/learn/video/">
+              <a className="homepage-link runtime-link" href="/learn/videos/">
                 Watch the getting started video series
               </a>
             </p>
