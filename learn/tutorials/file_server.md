@@ -2,6 +2,7 @@
 title: "Write a file server"
 oldUrl:
   - /runtime/manual/examples/file_server/
+  - /runtime/tutorials/file_server/
 ---
 
 A file server listens for incoming HTTP requests and serves files from the local

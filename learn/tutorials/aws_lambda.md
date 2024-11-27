@@ -1,5 +1,8 @@
 ---
 title: "How to Deploy Deno to AWS Lambda"
+oldUrl: 
+- /runtime/tutorials/aws_lambda/
+
 ---
 
 AWS Lambda is a serverless computing service provided by Amazon Web Services. It

@@ -2,6 +2,7 @@
 title: "Fetch and stream data"
 oldUrl:
   - /runtime/manual/examples/fetch_data/
+  - /runtime/tutorials/fetch_data/
 ---
 
 Deno brings several familiar Web APIs to the server-side environment. If you've

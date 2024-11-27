@@ -1,13 +1,15 @@
 export function TutorialList(
-  props: { group: string; name: string; link: string },
+  props: { title: string; items: ({ label: string; id: string })[] },
 ) {
   return (
-    <section>
-      <h2>{props.group}</h2>
-      <ul>
-        <li>
-          <a href={props.link}>{props.name}</a>
-        </li>
+    <section className="mb-6">
+      <h2 className="text-lg font-semibold mb-3">{props.title}</h2>
+      <ul className="">
+        {props.items.map((item) => (
+          <li>
+            <a className="homepage-link mb-1 runtime-link" href={item.id}>{item.label}</a>
+          </li>
+        ))}
       </ul>
     </section>
   );

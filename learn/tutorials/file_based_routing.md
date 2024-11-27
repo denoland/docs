@@ -1,6 +1,8 @@
 ---
 title: File-based routing
-oldUrl: /examples/http-server-file-router/
+oldUrl: 
+- /examples/http-server-file-router/
+- /runtime/tutorials/file_based_routing/
 ---
 
 If you've used frameworks like [Next.js](https://nextjs.org/), you might be
