@@ -2,6 +2,7 @@
 title: "Executable scripts"
 oldUrl:
   - /runtime/manual/examples/hashbang/
+  - /runtime/tutorials/hashbang/
 ---
 
 Making Deno scripts executable can come in handy when creating small tools or

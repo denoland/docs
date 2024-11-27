@@ -2,6 +2,7 @@
 title: "How to create a RESTful API with Prisma and Oak"
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/prisma/
+  - /runtime/tutorials/how_to_with_npm/prisma/
 ---
 
 [Prisma](https://prisma.io) has been one of our top requested modules to work
