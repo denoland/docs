@@ -114,3 +114,14 @@
 .ddoc .space-y-7 > .section .markdown-body {
   @apply mb-6 !important;
 }
+
+.active:after {
+  background-color: rgb(1 183 128 / var(--tw-text-opacity, 1));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: "";
+  height: 0.4rem;
+  left: calc(50% - 0.4rem);
+  position: absolute;
+  top: -0.5rem;
+  width: 0.8rem;
+}
