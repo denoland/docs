@@ -728,7 +728,7 @@ export const sidebar = [
       },
     ],
   },
-] satisfies Sidebar;
+];
 
 export const sectionTitle = "Learning hub";
 export const sectionHref = "/learn/";
