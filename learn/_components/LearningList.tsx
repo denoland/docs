@@ -13,9 +13,12 @@ export function LearningList(
       <h2 className="text-lg font-semibold mb-3">{props.title}</h2>
       <ul className="mb-8">
         {props.items.map((item) => (
-          <li className="leading-7">
+          <li
+            className="leading-7 learning-list-item"
+            data-category={item.type}
+          >
             <a
-              className={`homepage-link mb-1 runtime-link ${item.type}`}
+              className="homepage-link mb-1 runtime-link"
               href={item.id}
             >
               {item.type === "tutorial" && <TutorialIcon color="#9d9d9d" />}
