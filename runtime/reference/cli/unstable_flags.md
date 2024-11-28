@@ -110,6 +110,22 @@ console.log(cowsay.say({
 }));
 ```
 
+## `--unstable-detect-cjs`
+
+**Environment variable:** `DENO_UNSTABLE_DETECT_CJS`
+
+Loads `.js`, `.jsx`, `.ts`, and `.tsx` modules as possibly being CommonJS in the
+following additional scenarios:
+
+1. The _package.json_ has no `"type"` field.
+1. No _package.json_ exists.
+
+By default, Deno only loads these modules as being possibly CommonJS when you're
+in a project with a _package.json_ and the closest _package.json_ has
+`{ "type": "commonjs" }`.
+
+Requires Deno >= 2.1.2
+
 ## `--unstable-sloppy-imports`
 
 **Environment variable:** `DENO_UNSTABLE_SLOPPY_IMPORTS`
