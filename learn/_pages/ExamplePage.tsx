@@ -2,6 +2,8 @@ import { CopyButton } from "../_components/CopyButton.tsx";
 import SnippetComponent from "../_components/SnippetComponent.tsx";
 import { ExampleFromFileSystem } from "../types.ts";
 
+export const layout = "doc.tsx";
+
 type Props = { example: ExampleFromFileSystem };
 
 export default function ExamplePage({ example }: Props) {

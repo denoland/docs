@@ -2,7 +2,7 @@
 /** @type {import('npm:tailwindcss').Config} */
 export default {
   content: [
-    "{by-example,deploy,_components,_includes,runtime,static,subhosting,404}/**/*.{md,ts,tsx}",
+    "{by-example,deploy,_components,_includes,runtime,static,subhosting,404,learn}/**/*.{md,ts,tsx}",
     "*.{ts,tsx}",
   ],
   corePlugins: {

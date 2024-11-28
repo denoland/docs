@@ -63,6 +63,8 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
     props.toc = toc.concat(...props.toc);
   }
 
+  let isLearnHub = props.url.includes("learn");
+
   return (
     <>
       <aside
@@ -114,13 +116,16 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         >
           <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full">
             <article class="max-w-[66ch] mx-auto">
-              <Breadcrumbs
-                title={props.title!}
-                sidebar={sidebar}
-                url={props.url}
-                sectionTitle={props.sectionTitle!}
-                sectionHref={props.sectionHref!}
-              />
+              {!isLearnHub && (
+                <Breadcrumbs
+                  title={props.title!}
+                  sidebar={sidebar}
+                  url={props.url}
+                  sectionTitle={props.sectionTitle!}
+                  sectionHref={props.sectionHref!}
+                />
+              )}
+
               {props.toc && props.toc.length > 0 && (
                 <details class="block xl:hidden my-4 bg-background-secondary rounded-md group">
                   <summary class="px-4 py-2 group-open:border-b border-foreground-tertiary">
