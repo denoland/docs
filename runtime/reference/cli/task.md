@@ -78,7 +78,7 @@ argument in case it contains spaces):
 
 ## Task dependencies
 
-You can specify dependecnies for a task:
+You can specify dependencies for a task:
 
 ```json title="deno.json"
 {
