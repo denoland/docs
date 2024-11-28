@@ -1,5 +1,6 @@
 import { TutorialIcon } from "./TutorialIcon.tsx";
 import { ExampleIcon } from "./ExampleIcon.tsx";
+import { VideoIcon } from "./VideoIcon.tsx";
 
 export function LearningList(
   props: {
@@ -19,6 +20,7 @@ export function LearningList(
             >
               {item.type === "tutorial" && <TutorialIcon color="#9d9d9d" />}
               {item.type === "example" && <ExampleIcon color="#9d9d9d" />}
+              {item.type === "video" && <VideoIcon color="#9d9d9d" />}
 
               {item.label}
             </a>
