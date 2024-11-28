@@ -13,26 +13,22 @@ export default function LandingPage() {
   });
 
   return (
-    <>
-      <main
-        id="content"
-        className="w-full px-8 pt-6 mt-16 max-w-screen-xl mx-auto mb-20"
-      >
-        <div className="pb-16 md:pb-0 w-full flex items-center">
-          <div className="align-middle gap-8 mb-20">
-            <h1 className="text-4xl md:text-6xl font-semibold mb-4">
-              Learning hub
-            </h1>
-            <p className="max-w-prose mx-auto">
-              Walkthrough tutorials, examples and guides to teach you about the
-              Deno runtime and how to use it with your favorite tools.
-            </p>
-          </div>
-        </div>
-        <div className="grid grid-cols-3 gap-8">
-          {componentsPerSidebarItem}
-        </div>
-      </main>
-    </>
+    <main
+      id="content"
+      className="w-full px-8 pt-6 mt-16 max-w-screen-xl mx-auto mb-20"
+    >
+      <div className="pb-16 md:pb-0 w-full mb-6">
+        <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl mb-3">
+          Learning hub
+        </h1>
+        <p className="max-w-prose mb-6">
+          Walkthrough tutorials, examples and guides to teach you about the Deno
+          runtime <br/>and how to use it with your favorite tools.
+        </p>
+      </div>
+      <div className="columns-3 gap-8">
+        {componentsPerSidebarItem}
+      </div>
+    </main>
   );
 }

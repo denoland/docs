@@ -334,7 +334,7 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "HTTP server: Performing CRUD operations using SQLite3",
+        label: "HTTP server: CRUD with SQLite3",
         id: "/learn/examples/http-server-oak-crud-middleware-with-sqlite3-db",
         type: "example",
       },
@@ -394,7 +394,17 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Subprocesses: Collecting output",
+        label: "Create a subprocess",
+        id: "/learn/tutorials/subprocess/",
+        type: "tutorial",
+      },
+      {
+        label: "Subprocess Spawning",
+        id: "/learn/examples/subprocess-running-files",
+        type: "example",
+      },
+      {
+        label: "Collecting output from subprocesses",
         id: "/learn/examples/subprocesses-output",
         type: "example",
       },
@@ -449,12 +459,7 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Subprocess Spawning: running other files using subprocesses",
-        id: "/learn/examples/subprocess-running-files",
-        type: "example",
-      },
-      {
-        label: "Creating &amp; removing directories",
+        label: "Creating & removing directories",
         id: "/learn/examples/create-remove-directories",
         type: "example",
       },
@@ -469,12 +474,12 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Creating &amp; resolving symlinks",
+        label: "Creating & resolving symlinks",
         id: "/learn/examples/symlinks",
         type: "example",
       },
       {
-        label: "Temporary files &amp; directories",
+        label: "Temporary files & directories",
         id: "/learn/examples/temporary-files",
         type: "example",
       },
@@ -509,7 +514,7 @@ export const sidebar = [
     title: "Crypotography",
     items: [
       {
-        label: "Generating &amp; validating UUIDs",
+        label: "Generating & validating UUIDs",
         id: "/learn/examples/uuids",
         type: "example",
       },
@@ -543,11 +548,6 @@ export const sidebar = [
   {
     title: "Advanced",
     items: [
-      {
-        label: "Create a subprocess",
-        id: "/learn/tutorials/subprocess/",
-        type: "tutorial",
-      },
       {
         label: "File system events",
         id: "/learn/tutorials/file_system_events/",
