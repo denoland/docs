@@ -1,4 +1,4 @@
-export function TutorialList(
+export function LearningList(
   props: { title: string; items: ({ label: string; id: string })[] },
 ) {
   return (
