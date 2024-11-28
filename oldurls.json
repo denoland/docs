@@ -14,6 +14,6 @@
   "/runtime/tutorials/": "/learn/",
   "/runtime/manual/examples/how_to_with_npm/": "/learn/",
   "/runtime/manual/tutorials/": "/learn/",
-  "/runtime/learn/tutorials/": "/learn/",
-  "/runtime/learn/examples/": "/learn/"
+  "/learn/tutorials/": "/learn/",
+  "/learn/examples/": "/learn/"
 }

@@ -120,7 +120,7 @@ export const sidebar = [
       },
       {
         label: "Use Express with Deno",
-        id: "/learn/tutorials/learn/express/",
+        id: "/learn/tutorials/express/",
         type: "tutorial",
       },
       {
