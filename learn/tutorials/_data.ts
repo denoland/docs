@@ -3,6 +3,12 @@ export const sidebar = [
     title: "Basics",
     items: [
       {
+        label: "What is Deno?",
+        id:
+          "https://www.youtube.com/watch?v=KPTOo4k8-GE&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe",
+        type: "video",
+      },
+      {
         label: "Run a script",
         id: "/learn/tutorials/run_script/",
         type: "tutorial",
@@ -18,6 +24,12 @@ export const sidebar = [
         type: "example",
       },
       {
+        label: "Your Deno Development Environment",
+        id:
+          "https://www.youtube.com/watch?v=BFfrGrLm2tw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=3",
+        type: "video",
+      },
+      {
         label: "Initialize a project",
         id: "/learn/tutorials/initialize_project/",
         type: "tutorial",
@@ -28,15 +40,50 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        label: "All-in-one tooling",
+        id:
+          "https://www.youtube.com/watch?v=-4e9DkUrCr4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=5",
+        type: "video",
+      },
+      {
+        label: "Tasks and configuration with deno.json",
+        id:
+          "https://www.youtube.com/watch?v=bTmO5Tfgke4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=10",
+        type: "video",
+      },
+      {
         label: "Update from CommonJS to ESM",
         id: "/learn/tutorials/cjs_to_esm/",
         type: "tutorial",
       },
+
       {
         label: "Import and export functions",
         id: "/learn/examples/import-export",
         type: "example",
       },
+      {
+        label: "Interoperability with Node.js",
+        id:
+          "https://www.youtube.com/watch?v=mgX1ymfqPSQ&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=2",
+        type: "video",
+      },
+      {
+        label: "Introduction to Deno APIs",
+        id:
+          "https://www.youtube.com/watch?v=p28ujFMrdA0&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=7",
+        type: "video",
+      },
+      {
+        label: "Simple file server",
+        id: "/learn/tutorials/file_server/",
+        type: "tutorial",
+      },
+    ],
+  },
+  {
+    title: "Modules and package management",
+    items: [
       {
         label: "Use Node.js' built-in modules",
         id: "/learn/examples/node/",
@@ -48,15 +95,29 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Simple file server",
-        id: "/learn/tutorials/file_server/",
-        type: "tutorial",
+        label: "ECMAScript Modules in Deno",
+        id:
+          "https://www.youtube.com/watch?v=cTFBiwYY3vs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=9",
+        type: "video",
+      },
+      {
+        label: "Publishing Modules with JSR",
+        id:
+          "https://www.youtube.com/watch?v=7uiL4WYvZVs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=8",
+        type: "video",
       },
     ],
   },
+
   {
     title: "Web standard APIs",
     items: [
+      {
+        label: "Browser APIs in Deno",
+        id:
+          "https://www.youtube.com/watch?v=oxVwTT-rZRo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=6",
+        type: "video",
+      },
       {
         label: "Manipulating & parsing URLs",
         id: "/learn/examples/url-parsing/",
