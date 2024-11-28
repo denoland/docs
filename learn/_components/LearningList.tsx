@@ -1,5 +1,5 @@
 export function LearningList(
-  props: { title: string; items: ({ label: string; id: string })[] },
+  props: { title: string; items: ({ label: string; id: string, type: string })[] },
 ) {
   return (
     <section className="mb-6">
@@ -7,7 +7,7 @@ export function LearningList(
       <ul className="">
         {props.items.map((item) => (
           <li>
-            <a className="homepage-link mb-1 runtime-link" href={item.id}>
+            <a className={`homepage-link mb-1 runtime-link ${item.type}`} href={item.id}>
               {item.label}
             </a>
           </li>
