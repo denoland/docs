@@ -3,6 +3,12 @@ export const sidebar = [
     title: "Basics",
     items: [
       {
+        label: "What is Deno?",
+        id:
+          "https://www.youtube.com/watch?v=KPTOo4k8-GE&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe",
+        type: "video",
+      },
+      {
         label: "Run a script",
         id: "/learn/tutorials/run_script/",
         type: "tutorial",
@@ -18,6 +24,12 @@ export const sidebar = [
         type: "example",
       },
       {
+        label: "Your Deno Development Environment",
+        id:
+          "https://www.youtube.com/watch?v=BFfrGrLm2tw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=3",
+        type: "video",
+      },
+      {
         label: "Initialize a project",
         id: "/learn/tutorials/initialize_project/",
         type: "tutorial",
@@ -28,15 +40,50 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        label: "All-in-one tooling",
+        id:
+          "https://www.youtube.com/watch?v=-4e9DkUrCr4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=5",
+        type: "video",
+      },
+      {
+        label: "Tasks and configuration with deno.json",
+        id:
+          "https://www.youtube.com/watch?v=bTmO5Tfgke4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=10",
+        type: "video",
+      },
+      {
         label: "Update from CommonJS to ESM",
         id: "/learn/tutorials/cjs_to_esm/",
         type: "tutorial",
       },
+
       {
         label: "Import and export functions",
         id: "/learn/examples/import-export",
         type: "example",
       },
+      {
+        label: "Interoperability with Node.js",
+        id:
+          "https://www.youtube.com/watch?v=mgX1ymfqPSQ&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=2",
+        type: "video",
+      },
+      {
+        label: "Introduction to Deno APIs",
+        id:
+          "https://www.youtube.com/watch?v=p28ujFMrdA0&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=7",
+        type: "video",
+      },
+      {
+        label: "Simple file server",
+        id: "/learn/tutorials/file_server/",
+        type: "tutorial",
+      },
+    ],
+  },
+  {
+    title: "Modules and package management",
+    items: [
       {
         label: "Use Node.js' built-in modules",
         id: "/learn/examples/node/",
@@ -48,15 +95,35 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Simple file server",
-        id: "/learn/tutorials/file_server/",
-        type: "tutorial",
+        label: "Backward Compatibility with Node.js and npm",
+        id:
+          "https://www.youtube.com/watch?v=QPLchkJ7eas&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=12",
+        type: "video",
+      },
+      {
+        label: "ECMAScript Modules in Deno",
+        id:
+          "https://www.youtube.com/watch?v=cTFBiwYY3vs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=9",
+        type: "video",
+      },
+      {
+        label: "Publishing Modules with JSR",
+        id:
+          "https://www.youtube.com/watch?v=7uiL4WYvZVs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=8",
+        type: "video",
       },
     ],
   },
+
   {
     title: "Web standard APIs",
     items: [
+      {
+        label: "Browser APIs in Deno",
+        id:
+          "https://www.youtube.com/watch?v=oxVwTT-rZRo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=6",
+        type: "video",
+      },
       {
         label: "Manipulating & parsing URLs",
         id: "/learn/examples/url-parsing/",
@@ -94,6 +161,12 @@ export const sidebar = [
     title: "Web frameworks and libraries",
     items: [
       {
+        label: "TypeScript and JSX in Deno",
+        id:
+          "https://www.youtube.com/watch?v=KoM8ahe8O74&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=11",
+        type: "video",
+      },
+      {
         label: "Build a React App",
         id: "/learn/tutorials/react/",
         type: "tutorial",
@@ -128,6 +201,12 @@ export const sidebar = [
         id: "/learn/tutorials/apollo/",
         type: "tutorial",
       },
+      {
+        label: "Build an API server with TypeScript",
+        id:
+          "https://www.youtube.com/watch?v=J8kZ-s-5-ms&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=13",
+        type: "video",
+      },
     ],
   },
   {
@@ -137,6 +216,12 @@ export const sidebar = [
         label: "AWS Lambda",
         id: "/learn/tutorials/aws_lambda/",
         type: "tutorial",
+      },
+      {
+        label: "Deploy Deno to AWS Lambda",
+        id:
+          "https://www.youtube.com/watch?v=_xLOrT3cWK4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=17",
+        type: "video",
       },
       {
         label: "AWS Lightsail",
@@ -162,6 +247,12 @@ export const sidebar = [
         label: "Kinsta",
         id: "/learn/tutorials/kinsta/",
         type: "tutorial",
+      },
+      {
+        label: "Deploying Deno with Docker",
+        id:
+          "https://www.youtube.com/watch?v=VRryNeYm6yw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=16",
+        type: "video",
       },
     ],
   },
@@ -268,6 +359,12 @@ export const sidebar = [
   {
     title: "CLI",
     items: [
+      {
+        label: "Build a Command Line Utility",
+        id:
+          "https://www.youtube.com/watch?v=TUxj2TS5pNo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=14",
+        type: "video",
+      },
       {
         label: "Input prompts",
         id: "/learn/examples/prompts",
@@ -567,6 +664,12 @@ export const sidebar = [
         label: "Build a chat app with WebSockets",
         id: "/learn/tutorials/chat_app/",
         type: "tutorial",
+      },
+      {
+        label: "Build a Real-Time WebSocket Application",
+        id:
+          "https://www.youtube.com/watch?v=FC4IrkHEg4A&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=15",
+        type: "video",
       },
       {
         label: "Build a word finder app",
