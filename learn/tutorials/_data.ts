@@ -95,6 +95,12 @@ export const sidebar = [
         type: "example",
       },
       {
+        label: "Backward Compatibility with Node.js and npm",
+        id:
+          "https://www.youtube.com/watch?v=QPLchkJ7eas&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=12",
+        type: "video",
+      },
+      {
         label: "ECMAScript Modules in Deno",
         id:
           "https://www.youtube.com/watch?v=cTFBiwYY3vs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=9",
@@ -155,6 +161,12 @@ export const sidebar = [
     title: "Web frameworks and libraries",
     items: [
       {
+        label: "TypeScript and JSX in Deno",
+        id:
+          "https://www.youtube.com/watch?v=KoM8ahe8O74&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=11",
+        type: "video",
+      },
+      {
         label: "Build a React App",
         id: "/learn/tutorials/react/",
         type: "tutorial",
@@ -189,6 +201,12 @@ export const sidebar = [
         id: "/learn/tutorials/apollo/",
         type: "tutorial",
       },
+      {
+        label: "Build an API server with TypeScript",
+        id:
+          "https://www.youtube.com/watch?v=J8kZ-s-5-ms&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=13",
+        type: "video",
+      },
     ],
   },
   {
@@ -198,6 +216,12 @@ export const sidebar = [
         label: "AWS Lambda",
         id: "/learn/tutorials/aws_lambda/",
         type: "tutorial",
+      },
+      {
+        label: "Deploy Deno to AWS Lambda",
+        id:
+          "https://www.youtube.com/watch?v=_xLOrT3cWK4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=17",
+        type: "video",
       },
       {
         label: "AWS Lightsail",
@@ -223,6 +247,12 @@ export const sidebar = [
         label: "Kinsta",
         id: "/learn/tutorials/kinsta/",
         type: "tutorial",
+      },
+      {
+        label: "Deploying Deno with Docker",
+        id:
+          "https://www.youtube.com/watch?v=VRryNeYm6yw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=16",
+        type: "video",
       },
     ],
   },
@@ -329,6 +359,12 @@ export const sidebar = [
   {
     title: "CLI",
     items: [
+      {
+        label: "Build a Command Line Utility",
+        id:
+          "https://www.youtube.com/watch?v=TUxj2TS5pNo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=14",
+        type: "video",
+      },
       {
         label: "Input prompts",
         id: "/learn/examples/prompts",
@@ -628,6 +664,12 @@ export const sidebar = [
         label: "Build a chat app with WebSockets",
         id: "/learn/tutorials/chat_app/",
         type: "tutorial",
+      },
+      {
+        label: "Build a Real-Time WebSocket Application",
+        id:
+          "https://www.youtube.com/watch?v=FC4IrkHEg4A&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=15",
+        type: "video",
       },
       {
         label: "Build a word finder app",
