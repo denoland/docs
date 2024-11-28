@@ -23,7 +23,7 @@ export default function LandingPage() {
         </h1>
         <p className="max-w-prose mb-6">
           Walkthrough tutorials, examples and guides to teach you about the Deno
-          runtime <br/>and how to use it with your favorite tools.
+          runtime <br />and how to use it with your favorite tools.
         </p>
       </div>
       <div className="columns-3 gap-8">
