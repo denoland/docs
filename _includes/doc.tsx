@@ -115,7 +115,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
           class="mx-auto max-w-screen-xl w-full pt-2 pb-8 flex flex-grow xl:col-span-5"
         >
           <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full">
-            <article class="max-w-[66ch] mx-auto">
+            <article class="{props.toc && props.toc.length > 0 && (max-w-[66ch])} mx-auto">
               {!isLearnHub && (
                 <Breadcrumbs
                   title={props.title!}
