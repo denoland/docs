@@ -4,7 +4,8 @@ export const sidebar = [
     items: [
       {
         label: "What is Deno?",
-        id:
+        id: "/learn/videos/what-is-deno/",
+        externalURL:
           "https://www.youtube.com/watch?v=KPTOo4k8-GE&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe",
         type: "video",
       },
@@ -25,7 +26,8 @@ export const sidebar = [
       },
       {
         label: "Your Deno Development Environment",
-        id:
+        id: "/learn/videos/your-deno-development-environment/",
+        externalURL:
           "https://www.youtube.com/watch?v=BFfrGrLm2tw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=3",
         type: "video",
       },
@@ -41,13 +43,15 @@ export const sidebar = [
       },
       {
         label: "All-in-one tooling",
-        id:
+        id: "/learn/videos/all-in-one-tooling/",
+        externalURL:
           "https://www.youtube.com/watch?v=-4e9DkUrCr4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=5",
         type: "video",
       },
       {
         label: "Tasks and configuration with deno.json",
-        id:
+        id: "/learn/videos/tasks-and-configuration-with-deno-json/",
+        externalURL:
           "https://www.youtube.com/watch?v=bTmO5Tfgke4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=10",
         type: "video",
       },
@@ -64,13 +68,15 @@ export const sidebar = [
       },
       {
         label: "Interoperability with Node.js",
-        id:
+        id: "/learn/videos/interoperability-with-nodejs/",
+        externalURL:
           "https://www.youtube.com/watch?v=mgX1ymfqPSQ&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=2",
         type: "video",
       },
       {
         label: "Introduction to Deno APIs",
-        id:
+        id: "/learn/videos/introduction-to-deno-apis/",
+        externalURL:
           "https://www.youtube.com/watch?v=p28ujFMrdA0&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=7",
         type: "video",
       },
@@ -96,19 +102,22 @@ export const sidebar = [
       },
       {
         label: "Backward Compatibility with Node.js and npm",
-        id:
+        id: "/learn/videos/backward-compatibility-with-nodejs-and-npm/",
+        externalURL:
           "https://www.youtube.com/watch?v=QPLchkJ7eas&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=12",
         type: "video",
       },
       {
         label: "ECMAScript Modules in Deno",
-        id:
+        id: "/learn/videos/ecmascript-modules-in-deno/",
+        externalURL:
           "https://www.youtube.com/watch?v=cTFBiwYY3vs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=9",
         type: "video",
       },
       {
         label: "Publishing Modules with JSR",
-        id:
+        id: "/learn/videos/publishing-modules-with-jsr/",
+        externalURL:
           "https://www.youtube.com/watch?v=7uiL4WYvZVs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=8",
         type: "video",
       },
@@ -120,7 +129,8 @@ export const sidebar = [
     items: [
       {
         label: "Browser APIs in Deno",
-        id:
+        id: "/learn/videos/browser-apis-in-deno/",
+        externalURL:
           "https://www.youtube.com/watch?v=oxVwTT-rZRo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=6",
         type: "video",
       },
@@ -162,7 +172,8 @@ export const sidebar = [
     items: [
       {
         label: "TypeScript and JSX in Deno",
-        id:
+        id: "/learn/videos/typescript-and-jsx-in-deno/",
+        externalURL:
           "https://www.youtube.com/watch?v=KoM8ahe8O74&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=11",
         type: "video",
       },
@@ -203,7 +214,8 @@ export const sidebar = [
       },
       {
         label: "Build an API server with TypeScript",
-        id:
+        id: "/learn/videos/build-an-api-server-with-typescript/",
+        externalURL:
           "https://www.youtube.com/watch?v=J8kZ-s-5-ms&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=13",
         type: "video",
       },
@@ -219,7 +231,8 @@ export const sidebar = [
       },
       {
         label: "Deploy Deno to AWS Lambda",
-        id:
+        id: "/learn/videos/deploy-deno-to-aws-lambda/",
+        externalURL:
           "https://www.youtube.com/watch?v=_xLOrT3cWK4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=17",
         type: "video",
       },
@@ -250,7 +263,8 @@ export const sidebar = [
       },
       {
         label: "Deploying Deno with Docker",
-        id:
+        id: "/learn/videos/deploying-deno-with-docker/",
+        externalURL:
           "https://www.youtube.com/watch?v=VRryNeYm6yw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=16",
         type: "video",
       },
@@ -361,7 +375,8 @@ export const sidebar = [
     items: [
       {
         label: "Build a Command Line Utility",
-        id:
+        id: "/learn/videos/build-a-command-line-utility/",
+        externalURL:
           "https://www.youtube.com/watch?v=TUxj2TS5pNo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=14",
         type: "video",
       },
@@ -667,7 +682,8 @@ export const sidebar = [
       },
       {
         label: "Build a Real-Time WebSocket Application",
-        id:
+        id: "/learn/videos/build-a-real-time-websocket-application/",
+        externalURL:
           "https://www.youtube.com/watch?v=FC4IrkHEg4A&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=15",
         type: "video",
       },
