@@ -126,6 +126,7 @@
   height: 1rem;
   display: block;
   margin-left: 0.5rem;
+  margin-right: 1rem;
 }
 
 .switch input {

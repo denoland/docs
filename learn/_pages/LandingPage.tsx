@@ -32,11 +32,11 @@ export default function LandingPage() {
             favorite tools.
           </p>
         </div>
-        <h2 className="text-lg font-semibold mb-2 mt-2">
+        <div className=" mb-2 flex gap-2 flex-wrap items-center">
+        <h2 className="font-semibold mb-2 mt-2">
           Filter by type:
         </h2>
-        <div className=" mb-2 flex gap-8 flex-wrap">
-          <label for="example" className="mr-4 flex items-center">
+          <label for="example" className="mr-4 ml-4 flex items-center">
             <ExampleIcon color="#9d9d9d" />Examples:
             <span className="switch">
               <input
@@ -50,7 +50,7 @@ export default function LandingPage() {
             </span>
           </label>
 
-          <label for="tutorial" className="mr-4 flex items-center">
+          <label for="tutorial" className="mr-4 ml-4 flex items-center">
             <TutorialIcon color="#9d9d9d" />Tutorials:
             <span className="switch">
               <input
@@ -64,7 +64,7 @@ export default function LandingPage() {
             </span>
           </label>
 
-          <label for="video" className="mr-4 flex items-center">
+          <label for="video" className="mr-4 ml-4 flex items-center">
             <VideoIcon color="#9d9d9d" />Videos:
             <span className="switch">
               <input
