@@ -62,7 +62,9 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
   return (
     <>
       <aside
-        className={`flex flex-col absolute top-0 xl:top-16 bottom-0 -translate-x-74 xl:left-0 sidebar-open:translate-x-0 w-74 border-r border-foreground-tertiary bg-background-primary z-50 xl:z-0 xl:translate-x-0 transition-transform ${isLearnHub && "xl:hidden"}`}
+        className={`flex flex-col absolute top-0 xl:top-16 bottom-0 -translate-x-74 xl:left-0 sidebar-open:translate-x-0 w-74 border-r border-foreground-tertiary bg-background-primary z-50 xl:z-0 xl:translate-x-0 transition-transform ${
+          isLearnHub && "xl:hidden"
+        }`}
         id="sidebar"
         data-open="false"
       >

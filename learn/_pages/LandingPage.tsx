@@ -33,9 +33,9 @@ export default function LandingPage() {
           </p>
         </div>
         <div className=" mb-2 flex gap-2 flex-wrap items-center">
-        <h2 className="font-semibold mb-2 mt-2">
-          Filter by type:
-        </h2>
+          <h2 className="font-semibold mb-2 mt-2">
+            Filter by type:
+          </h2>
           <label for="example" className="mr-4 ml-4 flex items-center">
             <ExampleIcon color="#9d9d9d" />Examples:
             <span className="switch">
