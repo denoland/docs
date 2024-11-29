@@ -118,7 +118,7 @@ display based on its capabilities.
 `Deno.jupyter` provides several helper methods for rich output of common media
 types.
 
-`Deno.jupyter.html` is a tagged template that will render provided string as an
+`Deno.jupyter.html` is a tagged template that will render the provided string as an
 HTML in the notebook.
 
 ```js
@@ -180,7 +180,7 @@ notebook.
 `Deno.jupyter.broadcast` allows to publish messages to the IO pub channel
 allowing to provide live updates as the cell is evaluated.
 
-Consider this example that prints a message before we start a compution and
+Consider this example that prints a message before we start a computation and
 another when the computation is finished:
 
 ```js
