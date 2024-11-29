@@ -18,7 +18,7 @@ export default function VideoPage({ example }: Props) {
         </p>
       </div>
 
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-8">
+      <div>
         <EmbedVideo id={example.externalURL} />
       </div>
     </main>
