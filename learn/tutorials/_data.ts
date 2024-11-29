@@ -294,13 +294,13 @@ export const sidebar = [
         type: "tutorial",
       },
       {
-        label: "Mongoose and MongoDB",
-        id: "/learn/tutorials/mongoose/",
+        label: "Use Prisma with Deno",
+        id: "/learn/tutorials/prisma/",
         type: "tutorial",
       },
       {
-        label: "Use Prisma with Deno",
-        id: "/learn/tutorials/prisma/",
+        label: "Mongoose and MongoDB",
+        id: "/learn/tutorials/mongoose/",
         type: "tutorial",
       },
       {
@@ -446,13 +446,13 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Piping streams",
-        id: "/learn/examples/piping-streams",
+        label: "HTTP server: WebSockets",
+        id: "/learn/examples/http-server-websocket",
         type: "example",
       },
       {
-        label: "HTTP server: WebSockets",
-        id: "/learn/examples/http-server-websocket",
+        label: "Piping streams",
+        id: "/learn/examples/piping-streams",
         type: "example",
       },
       {
@@ -461,13 +461,13 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "TCP connector: Ping",
-        id: "/learn/examples/tcp-connector",
+        label: "TCP Echo Server",
+        id: "/learn/examples/tcp-echo-server",
         type: "example",
       },
       {
-        label: "TCP Echo Server",
-        id: "/learn/examples/tcp-echo-server",
+        label: "TCP connector: Ping",
+        id: "/learn/examples/tcp-connector",
         type: "example",
       },
       {
@@ -481,13 +481,13 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Running DNS queries",
-        id: "/learn/examples/dns-queries",
+        label: "TCP/TLS listener: Ping",
+        id: "/learn/examples/tls-listener",
         type: "example",
       },
       {
-        label: "TCP/TLS listener: Ping",
-        id: "/learn/examples/tls-listener",
+        label: "Running DNS queries",
+        id: "/learn/examples/dns-queries",
         type: "example",
       },
     ],
@@ -561,13 +561,23 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Moving/Renaming files",
-        id: "/learn/examples/moving-renaming-files",
+        label: "Writing files",
+        id: "/learn/examples/writing-files",
         type: "example",
       },
       {
-        label: "Watching the filesystem",
-        id: "/learn/examples/watching-files",
+        label: "Deleting files",
+        id: "/learn/examples/deleting-files",
+        type: "example",
+      },
+      {
+        label: "Checking for file existence",
+        id: "/learn/examples/checking-file-existence",
+        type: "example",
+      },
+      {
+        label: "Moving/Renaming files",
+        id: "/learn/examples/moving-renaming-files",
         type: "example",
       },
       {
@@ -576,13 +586,18 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Unix cat",
-        id: "/learn/examples/unix-cat",
+        label: "Watching the filesystem",
+        id: "/learn/examples/watching-files",
         type: "example",
       },
       {
-        label: "Checking for file existence",
-        id: "/learn/examples/checking-file-existence",
+        label: "Walking directories",
+        id: "/learn/examples/walking-directories",
+        type: "example",
+      },
+      {
+        label: "Unix cat",
+        id: "/learn/examples/unix-cat",
         type: "example",
       },
       {
@@ -596,11 +611,6 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Walking directories",
-        id: "/learn/examples/walking-directories",
-        type: "example",
-      },
-      {
         label: "Streaming file operations",
         id: "/learn/examples/streaming-files",
         type: "example",
@@ -608,16 +618,6 @@ export const sidebar = [
       {
         label: "Unzip gzipped file",
         id: "/learn/examples/unzip-gzipped-file",
-        type: "example",
-      },
-      {
-        label: "Deleting files",
-        id: "/learn/examples/deleting-files",
-        type: "example",
-      },
-      {
-        label: "Writing files",
-        id: "/learn/examples/writing-files",
         type: "example",
       },
     ],
@@ -723,23 +723,23 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "UDP listener: Ping",
-        id: "/learn/examples/udp-listener",
-        type: "example",
-      },
-      {
         label: "Deno queues",
         id: "/learn/examples/queues",
         type: "example",
       },
       {
-        label: "UDP connector: Ping",
-        id: "/learn/examples/udp-connector",
+        label: "Deno KV: Key/Value database",
+        id: "/learn/examples/kv",
         type: "example",
       },
       {
-        label: "Deno KV: Key/Value database",
-        id: "/learn/examples/kv",
+        label: "UDP listener: Ping",
+        id: "/learn/examples/udp-listener",
+        type: "example",
+      },
+      {
+        label: "UDP connector: Ping",
+        id: "/learn/examples/udp-connector",
         type: "example",
       },
     ],
