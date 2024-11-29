@@ -23,7 +23,7 @@ export default function Sidebar(
     >
       {props.url !== "/" &&
         (
-          <ul className="md:hidden">
+          <ul className="xl:hidden">
             <SidebarTopNav name="Runtime" url="/runtime/" />
             <SidebarTopNav name="Examples" url="/examples/" />
             <SidebarTopNav name="API reference" url="/api/deno" />
