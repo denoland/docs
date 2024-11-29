@@ -111,6 +111,7 @@ before being merged.
 | unstable-css       | Enable formatting CSS, SCSS, Sass and Less files       |            |                         |
 | unstable-html      | Enable formatting HTML files                           |            |                         |
 | unstable-yaml      | Enable formatting YAML files                           |            |                         |
+| unstable-sql       | Enable formatting SQL files                            |            |                         |
 | use-tabs           | Use tabs instead of spaces for indentation             | **false**  | true, false             |
 
 The formatter can be configured in a
