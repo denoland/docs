@@ -5,7 +5,8 @@ import { ExampleFromFileSystem } from "./types.ts";
 import { parseExample } from "./utils/parseExample.ts";
 import { sidebar as sidebar_ } from "./tutorials/_data.ts";
 
-export const layout = "raw_with_sidebar.tsx";
+export const layout = "doc.tsx";
+// export const layout = "raw_with_sidebar.tsx";
 
 export const sidebar = sidebar_;
 export const toc = [];
@@ -19,7 +20,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
   for (const video of videos) {
     yield {
       url: `${video.id}/index.html`,
-      title: `${video.label} - Deno by Example`,
+      title: `${video.label}`,
       content: <VideoPage example={video} />,
     };
   }

@@ -1,26 +1,16 @@
-import { LearningList } from "../_components/LearningList.tsx";
-import { sidebar } from "../tutorials/_data.ts";
 import { EmbedVideo } from "../_components/EmbedVideo.tsx";
+import { ExampleFromFileSystem } from "../types.ts";
+
+type Props = { example: ExampleFromFileSystem };
 
 export default function VideoPage({ example }: Props) {
   return (
-    <main
-      id="content"
-      className="w-full px-8 pt-6 mt-16 max-w-screen-xl mx-auto mb-20"
-    >
-      <div className="w-full mb-8">
-        <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl mb-3">
-          {example.label}
-        </h1>
-        <p className="max-w-prose mb-6">
-          Walkthrough tutorials, examples and guides to teach you about the Deno
-          runtime <br />and how to use it with your favorite tools.
-        </p>
+    <>
+      <EmbedVideo id={example.externalURL} />
+      <div className="my-12">
+        Find more videos in the <a href="/learn/">Learning Hub</a> and on our
+        {"  "}<a href="https://www.youtube.com/@deno_land">YouTube channel</a>.
       </div>
-
-      <div>
-        <EmbedVideo id={example.externalURL} />
-      </div>
-    </main>
+    </>
   );
 }
