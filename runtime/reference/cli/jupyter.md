@@ -118,8 +118,8 @@ display based on its capabilities.
 `Deno.jupyter` provides several helper methods for rich output of common media
 types.
 
-`Deno.jupyter.html` is a tagged template that will render the provided string as an
-HTML in the notebook.
+`Deno.jupyter.html` is a tagged template that will render the provided string as
+an HTML in the notebook.
 
 ```js
 Deno.jupyter.html`<h1>Hello, world!</h1>
