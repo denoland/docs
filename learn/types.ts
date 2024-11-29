@@ -29,6 +29,7 @@ export type ExampleFromFileSystem = {
   content: string;
   label: string;
   parsed: Example;
+  externalURL?: string;
 };
 
 export interface Example {
