@@ -411,18 +411,8 @@ export const sidebar = [
     title: "Network",
     items: [
       {
-        label: "HTTP server: Streaming",
-        id: "/learn/examples/http-server-streaming",
-        type: "example",
-      },
-      {
-        label: "TCP connector: Ping",
-        id: "/learn/examples/tcp-connector",
-        type: "example",
-      },
-      {
-        label: "HTTP server: Routing",
-        id: "/learn/examples/http-server-routing",
+        label: "HTTP requests",
+        id: "/learn/examples/http-requests",
         type: "example",
       },
       {
@@ -431,18 +421,18 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "TCP Echo Server",
-        id: "/learn/examples/tcp-echo-server",
+        label: "HTTP server: Routing",
+        id: "/learn/examples/http-server-routing",
         type: "example",
       },
       {
-        label: "Piping streams",
-        id: "/learn/examples/piping-streams",
+        label: "HTTP server: Serving files",
+        id: "/learn/examples/http-server-files",
         type: "example",
       },
       {
-        label: "HTTP requests",
-        id: "/learn/examples/http-requests",
+        label: "HTTP server: Streaming",
+        id: "/learn/examples/http-server-streaming",
         type: "example",
       },
       {
@@ -453,6 +443,31 @@ export const sidebar = [
       {
         label: "Hono HTTP server",
         id: "/learn/examples/hono",
+        type: "example",
+      },
+      {
+        label: "Piping streams",
+        id: "/learn/examples/piping-streams",
+        type: "example",
+      },
+      {
+        label: "HTTP server: WebSockets",
+        id: "/learn/examples/http-server-websocket",
+        type: "example",
+      },
+      {
+        label: "Outbound WebSockets",
+        id: "/learn/examples/websocket",
+        type: "example",
+      },
+      {
+        label: "TCP connector: Ping",
+        id: "/learn/examples/tcp-connector",
+        type: "example",
+      },
+      {
+        label: "TCP Echo Server",
+        id: "/learn/examples/tcp-echo-server",
         type: "example",
       },
       {
@@ -471,23 +486,8 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "HTTP server: WebSockets",
-        id: "/learn/examples/http-server-websocket",
-        type: "example",
-      },
-      {
-        label: "Outbound WebSockets",
-        id: "/learn/examples/websocket",
-        type: "example",
-      },
-      {
         label: "TCP/TLS listener: Ping",
         id: "/learn/examples/tls-listener",
-        type: "example",
-      },
-      {
-        label: "HTTP server: Serving files",
-        id: "/learn/examples/http-server-files",
         type: "example",
       },
     ],
