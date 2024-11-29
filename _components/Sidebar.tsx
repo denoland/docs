@@ -1,4 +1,5 @@
 import Searcher from "lume/core/searcher.ts";
+import SidebarTopNav from "./SidebarTopNav.tsx";
 import {
   Sidebar as Sidebar_,
   SidebarCategory as SidebarCategory_,
@@ -20,6 +21,16 @@ export default function Sidebar(
       class="p-2 pt-0 pr-0 overflow-y-auto overflow-x-hidden"
       style={{ scrollbarGutter: "stable", scrollbarWidth: "thin" }}
     >
+      {props.url !== "/" &&
+        (
+          <ul className="md:hidden">
+            <SidebarTopNav name="Runtime" url="/runtime/" />
+            <SidebarTopNav name="Examples" url="/examples/" />
+            <SidebarTopNav name="API reference" url="/api/deno" />
+            <SidebarTopNav name="Deploy" url="/deploy/" />
+            <SidebarTopNav name="Subhosting" url="/subhosting/" />
+          </ul>
+        )}
       <ul>
         {props.sidebar.map((section) => (
           <SidebarSection
