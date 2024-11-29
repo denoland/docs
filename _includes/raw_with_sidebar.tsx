@@ -56,12 +56,13 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
     props.toc = toc.concat(...props.toc);
   }
 
-  let isLearnHub = props.url.includes("learn");
+  const checkIsHub = /^\/learn\/$/;
+  const isLearnHub = checkIsHub.test(props.url);
 
   return (
     <>
       <aside
-        class="flex flex-col absolute top-0 xl:top-16 bottom-0 -translate-x-74 xl:left-0 sidebar-open:translate-x-0 w-74 border-r border-foreground-tertiary bg-background-primary z-50 xl:z-0 xl:translate-x-0 transition-transform"
+        className={`flex flex-col absolute top-0 xl:top-16 bottom-0 -translate-x-74 xl:left-0 sidebar-open:translate-x-0 w-74 border-r border-foreground-tertiary bg-background-primary z-50 xl:z-0 xl:translate-x-0 transition-transform ${isLearnHub && "xl:hidden"}`}
         id="sidebar"
         data-open="false"
       >
@@ -108,7 +109,8 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
           style={{ scrollbarGutter: "stable" }}
         >
           {props.children}
-          <div class="xl:col-span-full">
+          {props.comp.Feedback({ file })}
+          <div class="xl:col-span-full mt-4">
             <props.comp.Footer />
           </div>
         </div>
