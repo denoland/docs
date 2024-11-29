@@ -13,16 +13,16 @@ export const sidebar = [
         id: "/api/deno/",
       },
       {
-        label: "Examples",
-        id: "/examples/",
+        label: "Learn",
+        id: "/learn/examples/",
       },
       {
         label: "Deploy",
-        id: "/Deploy/",
+        id: "/deploy/",
       },
       {
         label: "Subhosting",
-        id: "/Subhosting/",
+        id: "/subhosting/",
       },
     ],
   },
