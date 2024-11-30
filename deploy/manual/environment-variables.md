@@ -10,7 +10,7 @@ are 2 ways to define the environment variables of a deployment:
 ## Project environment variables
 
 You can define environment variables at the project level. When you create a
-deployment, it will get the set of environment variables the the project has
+deployment, it will get the set of environment variables the project has
 defined _at that particular moment_.
 
 For convenience, When you change the environment variables of a project, the
