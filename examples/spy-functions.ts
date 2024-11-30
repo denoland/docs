@@ -39,11 +39,11 @@ Deno.test("logger uses the log function", () => {
 });
 
 Deno.test("Creating a spy with the using keyword", () => {
-  // method spies are disposable, so we can create them with the keyword `using`
+  // method spys are disposable, so we can create them with the keyword `using`
   using logSpy = spy(logger, "log");
 
   logger.log("Disposable spy");
 
-  // Spies created with the `using` keyword are automatically restored at the end of the test
+  // Spys created with the `using` keyword are automatically restored at the end of the test
   assertSpyCalls(logSpy, 1);
 });
