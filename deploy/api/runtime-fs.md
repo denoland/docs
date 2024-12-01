@@ -14,15 +14,15 @@ files are for example:
 
 The APIs that are available are:
 
-- [Deno.cwd](#denocwd)
-- [Deno.readDir](#denoreaddir)
-- [Deno.readFile](#denoreadfile)
-- [Deno.readTextFile](#denoreadtextfile)
-- [Deno.open](#denoopen)
-- [Deno.stat](#denostat)
-- [Deno.lstat](#denolstat)
-- [Deno.realPath](#denorealpath)
-- [Deno.readLink](#denoreadlink)
+- [Deno.cwd](#deno.cwd)
+- [Deno.readDir](#deno.readdir)
+- [Deno.readFile](#deno.readfile)
+- [Deno.readTextFile](#deno.readtextfile)
+- [Deno.open](#deno.open)
+- [Deno.stat](#deno.stat)
+- [Deno.lstat](#deno.lstat)
+- [Deno.realPath](#deno.realpath)
+- [Deno.readLink](#deno.readlink)
 
 ## Deno.cwd
 
