@@ -241,9 +241,9 @@ the file descriptor: `const iterator = fd.readable[Symbol.asyncIterator]();`
 
 ## Deno.File
 
-`Deno.File` is a file handle returned from [`Deno.open()`](#deno.open). It can be
-used to read chunks of the file using the `read()` method. The file handle can
-be closed using the `close()` method.
+`Deno.File` is a file handle returned from [`Deno.open()`](#deno.open). It can
+be used to read chunks of the file using the `read()` method. The file handle
+can be closed using the `close()` method.
 
 The interface is similar to [Deno](https://docs.deno.com/api/deno/~/Deno.File),
 but it doesn't support writing to the file, or seeking. Support for the latter
