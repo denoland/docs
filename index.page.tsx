@@ -52,7 +52,7 @@ export default function () {
             </p>
             {/* CTA Group */}
 
-            <div class="flex flex-row gap-4 mt-8">
+            <div class="flex flex-row flex-wrap gap-4 mt-8">
               <DocsCTA
                 text="Get Started"
                 href="/runtime/"
