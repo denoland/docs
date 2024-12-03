@@ -36,7 +36,7 @@ class UserRepository {
   }
 }
 
-// As we want to test the `findOrThrow` method, we don't actually want to access the database
+// As we want to test the `findOrThrow` method, we don't actually need to access the database
 Deno.test("findOrThrow method throws when the user was not found", () => {
   // Stub the `getUserById` function to return `undefined` when called.
   using dbStub = stub(database, "getUserById", returnsNext([undefined]));
