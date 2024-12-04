@@ -90,10 +90,6 @@ export default function Header({
             hideOnMobile
           />
           <div class="min-w-[150px] md:w-32 xl:w-64">
-            {
-              /* <orama-search-button />
-            <orama-search-box /> */
-            }
             <SearchInput />
           </div>
           <div class="dark-mode-toggle">
