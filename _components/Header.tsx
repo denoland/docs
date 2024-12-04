@@ -1,5 +1,5 @@
 import Logo from "./Logo.tsx";
-
+import SearchInput from "./SearchInput.tsx";
 export default function Header({
   url,
   hasSidebar,
@@ -90,8 +90,11 @@ export default function Header({
             hideOnMobile
           />
           <div class="min-w-[150px] md:w-32 xl:w-64">
-            <orama-search-button />
-            <orama-search-box />
+            {
+              /* <orama-search-button />
+            <orama-search-box /> */
+            }
+            <SearchInput />
           </div>
           <div class="dark-mode-toggle">
             <button class="dark-mode-toggle button p-1 rounded bg-background-primary ring ring-transparent hover:ring-foreground-tertiary">
