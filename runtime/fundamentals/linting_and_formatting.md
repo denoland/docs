@@ -43,6 +43,9 @@ The linter can be configured in a
 [`deno.json`](/runtime/fundamentals/configuration/) file. You can specify custom
 rules, plugins, and settings to tailor the linting process to your needs.
 
+You can view and search the list of available rules and their usage on
+[Deno lint rules](https://lint.deno.land/).
+
 ## Formatting
 
 Formatting is the process of automatically adjusting the layout of your code to
@@ -111,6 +114,7 @@ before being merged.
 | unstable-css       | Enable formatting CSS, SCSS, Sass and Less files       |            |                         |
 | unstable-html      | Enable formatting HTML files                           |            |                         |
 | unstable-yaml      | Enable formatting YAML files                           |            |                         |
+| unstable-sql       | Enable formatting SQL files                            |            |                         |
 | use-tabs           | Use tabs instead of spaces for indentation             | **false**  | true, false             |
 
 The formatter can be configured in a

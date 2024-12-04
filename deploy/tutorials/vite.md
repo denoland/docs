@@ -12,7 +12,7 @@ This tutorial covers how to deploy a Vite Deno and React app on Deno Deploy.
 Let's use [Vite](https://vitejs.dev/) to quickly scaffold a Deno and React app:
 
 ```sh
-deno run --allow-read --allow-write --allow-env npm:create-vite-extra@latest
+deno run -RWE npm:create-vite-extra@latest
 ```
 
 We'll name our project `vite-project`. Be sure to select `deno-react` in the

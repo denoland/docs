@@ -242,7 +242,7 @@ You will see a code lens just above the test:
 ▶ Run Test
 ```
 
-If you click on the code lense, the extension will start up the Deno CLI to run
+If you click on the code lens, the extension will start up the Deno CLI to run
 the test for you and display the output. Based on your other settings, the
 extension will try to run your test with the same settings. If you need to
 adjust the arguments provided when doing `deno test`, you can do so by setting
@@ -264,7 +264,7 @@ denoTest({
 If you want to disable this feature, you can do so by un-setting the **Deno >
 CodeLens: Test** setting - `deno.codeLens.test`.
 
-You can run tests from the Test Explorer view, from the code lense decorations,
+You can run tests from the Test Explorer view, from the code lens decorations,
 or via the command palette. You can also use the filter function in the Text
 Explorer view to exclude certain tests from a test run.
 
