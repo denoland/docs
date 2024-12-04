@@ -19,6 +19,10 @@ const db = open(":memory:");
 
 const connection = db.connect();
 
+for (const row of connection.stream("select 42 as number")) {
+  console.debug(`Row Number: ${row.number}`); // -> { number: 42 }
+}
+
 const prepared = connection.prepare(
   "SELECT ?::INTEGER AS number, ?::VARCHAR AS text;",
 );
