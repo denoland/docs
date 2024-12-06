@@ -261,7 +261,7 @@ deno run --allow-env script.ts
 deno run --allow-env=HOME,FOO script.ts
 
 # Allow access to all environment variables starting with AWS_
-deno run --allow-env=AWS_* script.ts
+deno run --allow-env="AWS_*" script.ts
 ```
 
 Definition: `--deny-env[=<VARIABLE_NAME>...]`
