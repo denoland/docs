@@ -47,12 +47,10 @@ async function verifyJWT(token: string): Promise<JWTPayload | null> {
   }
 }
 
-(async () => {
-  // Creating a JWT with user-specific information.
-  const token = await createJWT({ userId: 123, username: "john_doe" });
-  console.log("Created JWT:", token);
+// Creating a JWT with user-specific information.
+const token = await createJWT({ userId: 123, username: "john_doe" });
+console.log("Created JWT:", token);
 
-  // Verifying the generated JWT to ensure it has not been tampered with.
-  const verifiedPayload = await verifyJWT(token);
-  console.log("Verified Payload:", verifiedPayload);
-})();
+// Verifying the generated JWT to ensure it has not been tampered with.
+const verifiedPayload = await verifyJWT(token);
+console.log("Verified Payload:", verifiedPayload);
