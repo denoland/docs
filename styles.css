@@ -614,3 +614,12 @@ body {
 #feedback-more label {
   @apply inline-block text-sm;
 }
+
+input[type="search"] {
+  background-image: url("/img/search.svg");
+  background-repeat: no-repeat;
+  background-size: 1em;
+  background-position-y: center;
+  background-position-x: 0.5em;
+  padding-left: 2em;
+}
