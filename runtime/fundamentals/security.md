@@ -246,7 +246,8 @@ includes reading environment variables, and setting new values.
 
 Access to environment variables is granted using the `--allow-env` flag. This
 flag can be specified with a list of environment variables to allow access to
-specific environment variables.
+specific environment variables. Starting with Deno v2.1, you can now specify
+suffix wildcards to allow “scoped” access to environmental variables.
 
 Definition: `--allow-env[=<VARIABLE_NAME>...]` or `-E[=<VARIABLE_NAME>...]`
 
@@ -256,8 +257,11 @@ deno run -E script.ts
 # or
 deno run --allow-env script.ts
 
-# Allow HOME and FOO environment variable
+# Allow HOME and FOO environment variables
 deno run --allow-env=HOME,FOO script.ts
+
+# Allow access to all environment variables starting with AWS_
+deno run --allow-env=AWS_* script.ts
 ```
 
 Definition: `--deny-env[=<VARIABLE_NAME>...]`
