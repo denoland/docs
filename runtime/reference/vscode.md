@@ -217,10 +217,10 @@ _References_ setting mentioned above.
 
 ### Testing code lens
 
-The Deno CLI includes a [built-in testing API](./lsp_integration.md#testing)
-available under `Deno.test`. The extension and language server have a code lens
-enabled by default which provides the ability to run a test from within the
-editor.
+The Deno CLI includes a
+[built-in testing API](/runtime/reference/lsp_integration/#testing) available
+under `Deno.test`. The extension and language server have a code lens enabled by
+default which provides the ability to run a test from within the editor.
 
 When you have a block of code that provides a test:
 

@@ -29,7 +29,7 @@ const data = [
       },
       {
         label: "Examples",
-        href: "/examples",
+        href: "/learn/examples",
       },
       {
         label: "Standard Library",

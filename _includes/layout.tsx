@@ -1,3 +1,5 @@
+import Header from "../_components/Header.tsx";
+
 export default function Layout(props: Lume.Data) {
   const reference = props.url.startsWith("/api");
   const description = props.description ||
@@ -70,6 +72,8 @@ export default function Layout(props: Lume.Data) {
         <script type="module" src="/search.client.js"></script>
         <script type="module" src="/tabs.client.js"></script>
         <script type="module" src="/feedback.client.js"></script>
+        <script type="module" src="/learn_filter.client.js"></script>
+        <script type="module" src="/youtube-lite.client.js"></script>
         <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"
@@ -99,7 +103,7 @@ export default function Layout(props: Lume.Data) {
         >
           Skip to main content <span aria-hidden="true">-&gt;</span>
         </a>
-        <props.comp.Header url={props.url} hasSidebar={!!props.sidebar} />
+        <Header url={props.url} hasSidebar={!!props.sidebar} />
         {props.children}
       </body>
     </html>

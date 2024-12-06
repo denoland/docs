@@ -102,7 +102,7 @@ site.copy("runtime/fundamentals/images");
 site.copy("runtime/getting_started/images");
 site.copy("runtime/reference/images");
 site.copy("runtime/contributing/images");
-site.copy("runtime/tutorials/images");
+site.copy("learn/tutorials/images");
 site.copy("deploy/manual/images");
 site.copy("deno.json");
 site.copy("go.json");
@@ -127,7 +127,7 @@ site.use(
 );
 site.use(
   esbuild({
-    extensions: [".client.ts"],
+    extensions: [".client.ts", ".client.js"],
     options: {
       minify: false,
       splitting: true,

@@ -1,6 +1,6 @@
 import { Data, Page } from "lume/core/file.ts";
 import { walkSync } from "@std/fs/walk";
-import { parseExample } from "./examples.page.tsx";
+import { parseExample } from "./learn/utils/parseExample.ts";
 
 export interface OramaDocument {
   path: string;
@@ -98,7 +98,7 @@ export async function generateDocumentsForSymbols(): Promise<OramaDocument[]> {
 }
 
 export async function generateDocumentsForExamples(): Promise<OramaDocument[]> {
-  const files = [...walkSync("./examples/", {
+  const files = [...walkSync("./learn/examples/", {
     exts: [".ts"],
   })];
   return await Promise.all(files.map(async (file) => {
@@ -108,7 +108,7 @@ export async function generateDocumentsForExamples(): Promise<OramaDocument[]> {
     const label = file.name.replace(".ts", "");
 
     return {
-      path: `/examples/${label}`,
+      path: `/learn/examples/${label}`,
       title: parsed.title,
       content: parsed.description,
       section: parsed.group,
