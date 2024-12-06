@@ -26,9 +26,10 @@ projects. If you have a Node.js project, it is not necessary to create a
 `deno.json` file. Deno will use the `package.json` file to configure the
 project.
 
-If both a `deno.json` and `package.json` file are present in the same directory,
-Deno will understand dependencies specified in both `deno.json` and
-`package.json`; and use the `deno.json` file for Deno-specific configurations.
+If both a `deno.json` and `package.json` file are present in the same directory
+(or a `package.json` in a parent directory), Deno will understand dependencies
+specified in both `deno.json` and `package.json`; and use the `deno.json` file
+for Deno-specific configurations.
 Read more about
 [Node compatibility in Deno](/runtime/fundamentals/node/#node-compatibility).
 
