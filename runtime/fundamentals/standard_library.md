@@ -34,8 +34,8 @@ packages on JSR, but here are a few examples:
 
 Each package of the standard library is independently versioned. Packages follow
 [semantic versioning rules](https://jsr.io/@std/semver). You can use
-[version pinning or version ranges](./modules#package-versions) to prevent major
-releases from affecting your code.
+[version pinning or version ranges](/runtime/fundamentals/modules/#package-versions)
+to prevent major releases from affecting your code.
 
 ## Importing standard library modules
 
