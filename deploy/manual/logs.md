@@ -25,5 +25,13 @@ can:
 
 Logs older than the retention period are automatically deleted from the system.
 
+## Limits
+
+There are limits on both the size of a log message and the volume of logs
+produced in a certain amount of time.
+
 Log messages have a maximum size of 2KB. Messages larger than this limit are
 trimmed to 2KB.
+
+A deployment is allowed to produce up to 1000 log entries per second. If it is
+exceeded, we may terminate the deployment.
