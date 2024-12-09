@@ -132,7 +132,7 @@ export const sidebar = [
       },
       {
         label: "More on Deno by Example",
-        href: "/learn/examples",
+        href: "/examples/",
       },
     ],
   },

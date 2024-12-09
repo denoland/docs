@@ -63,7 +63,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
     props.toc = toc.concat(...props.toc);
   }
 
-  let isLearnHub = props.url.includes("learn");
+  const isLearnHub = props.url.includes("examples");
 
   return (
     <>

@@ -17,19 +17,19 @@ const data = [
     items: [
       {
         label: "Deno Runtime",
-        to: "/runtime/manual",
+        to: "/runtime/",
       },
       {
         label: "Deno Deploy",
-        to: "/deploy/manual",
+        to: "/deploy/manual/",
       },
       {
         label: "Deno Subhosting",
-        to: "/subhosting/manual",
+        to: "/subhosting/manual/",
       },
       {
         label: "Examples",
-        href: "/learn/examples",
+        href: "/examples/",
       },
       {
         label: "Standard Library",

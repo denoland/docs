@@ -13,8 +13,8 @@ export const sidebar = [
         id: "/api/deno",
       },
       {
-        label: "Learn",
-        id: "/learn/",
+        label: "Examples",
+        id: "/examples/",
       },
       {
         label: "Deploy",
@@ -139,7 +139,7 @@ export default function () {
                   reference for how to build with Deno, or as a guide to learn
                   about many of Deno's features. Find more examples in the{" "}
                   <a
-                    href="/learn/examples/"
+                    href="/examples/"
                     class="runtime-link underline underline-offset-4"
                   >
                     Examples
@@ -154,19 +154,19 @@ export default function () {
                   links={[
                     {
                       text: "Importing modules from npm",
-                      href: "/learn/examples/npm",
+                      href: "/examples/npm",
                     },
                     {
                       text: "Hello World",
-                      href: "/learn/examples/hello-world",
+                      href: "/examples/hello-world",
                     },
                     {
                       text: "Using Node.js built-in modules",
-                      href: "/learn/examples/node",
+                      href: "/examples/node",
                     },
                     {
                       text: "Manipulating & Parsing URLs",
-                      href: "/learn/examples/url-parsing",
+                      href: "/examples/url-parsing",
                     },
                   ]}
                 />
@@ -176,19 +176,19 @@ export default function () {
                   links={[
                     {
                       text: "HTTP Server: Hello World",
-                      href: "/learn/examples/http-server",
+                      href: "/examples/http-server",
                     },
                     {
                       text: "HTTP Server: WebSockets",
-                      href: "/learn/examples/http-server-websocket",
+                      href: "/examples/http-server-websocket",
                     },
                     {
                       text: "HTTP Server: Streaming",
-                      href: "/learn/examples/http-server-streaming",
+                      href: "/examples/http-server-streaming",
                     },
                     {
                       text: "TCP Connector: Ping",
-                      href: "/learn/examples/tcp-connector",
+                      href: "/examples/tcp-connector",
                     },
                   ]}
                 />
@@ -198,19 +198,19 @@ export default function () {
                   links={[
                     {
                       text: "Command Line Arguments",
-                      href: "/learn/examples/command-line-arguments",
+                      href: "/examples/command-line-arguments",
                     },
                     {
                       text: "Environment Variables",
-                      href: "/learn/examples/environment-variables",
+                      href: "/examples/environment-variables",
                     },
                     {
                       text: "Reading Files",
-                      href: "/learn/examples/reading-files",
+                      href: "/examples/reading-files",
                     },
                     {
                       text: "Walking directories",
-                      href: "/learn/examples/walking-directories",
+                      href: "/examples/walking-directories",
                     },
                   ]}
                 />
@@ -220,19 +220,19 @@ export default function () {
                   links={[
                     {
                       text: "KV",
-                      href: "/learn/examples/kv",
+                      href: "/examples/kv",
                     },
                     {
                       text: "Queues",
-                      href: "/learn/examples/queues",
+                      href: "/examples/queues",
                     },
                     {
                       text: "Cron",
-                      href: "/learn/examples/cron",
+                      href: "/examples/cron",
                     },
                     {
                       text: "KV Watch",
-                      href: "/learn/examples/kv-watch",
+                      href: "/examples/kv-watch",
                     },
                   ]}
                 />

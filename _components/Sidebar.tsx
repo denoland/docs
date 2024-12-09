@@ -125,7 +125,8 @@ function SidebarItem(props: {
       <a
         class={LINK_CLASS}
         href={"id" in item ? item.id : "href" in item ? item.href : undefined}
-        aria-current={("id" in item && item.id === props.url)
+        aria-current={("id" in item &&
+            (item.id === props.url || item.id + "/" === props.url))
           ? "page"
           : undefined}
       >

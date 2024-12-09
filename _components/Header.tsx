@@ -57,9 +57,9 @@ export default function Header({
           />
           <HeaderItem
             url={url}
-            activeOn="/learn"
-            href="/learn"
-            name="Learn"
+            activeOn="/examples"
+            href="/examples"
+            name="Examples"
             hideOnMobile
           />
           <span class="hidden xl:inline-block text-foreground-secondary mx-2">
