@@ -250,7 +250,7 @@ of the source files.
 ## Configuring built-in Deno tools
 
 Some configuration options only make sense at the root of the workspace, eg.
-specifying `nodeModuleDir` option in one of the members is not available and
+specifying `nodeModulesDir` option in one of the members is not available and
 Deno will warn if an option needs to be applied at the workspace root.
 
 Here's a full matrix of various `deno.json` options available at the workspace

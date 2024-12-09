@@ -1,6 +1,5 @@
 {
   "imports": {
-    "@orama/wc-components/": "https://unpkg.com/@orama/wc-components@0.1.7/",
     "@std/assert": "jsr:@std/assert@^1.0.6",
     "@std/dotenv": "jsr:@std/dotenv@^0.225.2",
     "@std/fs": "jsr:@std/fs@^0.229.3",
@@ -9,7 +8,6 @@
     "@std/path": "jsr:@std/path@^1.0.8",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
     "lume/": "https://deno.land/x/lume@v2.4.1/",
-    "@orama/wc-components/": "https://unpkg.com/@orama/wc-components@0.1.7/",
     "googleapis": "npm:googleapis@^144.0.0",
     "prismjs": "npm:prismjs@1.29.0",
     "tailwindcss": "npm:tailwindcss@^3.4.9"

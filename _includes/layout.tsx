@@ -66,10 +66,8 @@ export default function Layout(props: Lume.Data) {
         <link rel="stylesheet" href="/overrides.css" />
         <script src="/darkmode.client.js"></script>
         <script type="module" src="/darkmode-toggle.client.js"></script>
-        <link rel="stylesheet" href="/orama.css" />
         <script type="module" src="/sidebar.client.js"></script>
         <script type="module" src="/copy.client.js"></script>
-        <script type="module" src="/search.client.js"></script>
         <script type="module" src="/tabs.client.js"></script>
         <script type="module" src="/feedback.client.js"></script>
         <script type="module" src="/learn_filter.client.js"></script>

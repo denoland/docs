@@ -39,7 +39,7 @@ export default {
           "100": "#d6ffe1",
           "200": "#b3ffcd",
           "300": "#70ffae",
-          DEFAULT: "70ffae",
+          DEFAULT: "#70ffae",
           "400": "#32f59a",
           "500": "#09dc8b",
           "600": "#01b780",
