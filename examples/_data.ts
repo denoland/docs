@@ -25,8 +25,8 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Your Deno Development Environment",
-        id: "/examples/your-deno-development-environment",
+        label: "Your Deno Dev Environment",
+        id: "/examples/deno-dev-environment",
         externalURL:
           "https://www.youtube.com/watch?v=BFfrGrLm2tw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=3",
         type: "video",

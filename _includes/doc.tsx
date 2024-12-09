@@ -63,7 +63,8 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
     props.toc = toc.concat(...props.toc);
   }
 
-  const isLearnHub = props.url.includes("examples");
+  const noToC = props.toc.length === 0;
+  const isExamples = props.url.includes("/examples/");
 
   return (
     <>
@@ -112,19 +113,18 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
       >
         <main
           id="content"
-          class="mx-auto max-w-screen-xl w-full pt-2 pb-8 flex flex-grow xl:col-span-5"
+          class={`mx-auto max-w-screen-xl w-full pt-2 pb-8 flex flex-grow xl:col-span-5 ${noToC && "xl:col-span-6"}`}
         >
           <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full">
-            <article class="{props.toc && props.toc.length > 0 && (max-w-[66ch])} mx-auto">
-              {!isLearnHub && (
+            <article class="mx-auto">
+              {!isExamples && (
                 <Breadcrumbs
                   title={props.title!}
                   sidebar={sidebar}
                   url={props.url}
                   sectionTitle={props.sectionTitle!}
                   sectionHref={props.sectionHref!}
-                />
-              )}
+                /> )}
 
               {props.toc && props.toc.length > 0 && (
                 <details class="block xl:hidden my-4 bg-background-secondary rounded-md group">

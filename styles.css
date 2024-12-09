@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --max-text-width: 65ch;
+}
+
 /* Light and dark theme variables */
 .light {
   --background-primary: 215deg, 81%, 100%;
@@ -52,6 +56,10 @@
 /* Scrollbar colors that look good on light and dark theme */
 * {
   scrollbar-color: hsla(0deg, 0%, 50%, 0.5) hsla(0deg, 0%, 50%, 0.1) !important;
+}
+
+p {
+  max-width: var(--max-text-width);
 }
 
 .dark-mode-toggle-button img {
@@ -394,6 +402,11 @@ body {
 
 .markdown-body .module-info ul {
   @apply pl-6;
+}
+
+.markdown-body > pre.snippet-code[data-example-position="only"] {
+  @apply md:border-t md:border-b md:pt-4 rounded-t h-full md:rounded;
+  md:rounded-b;
 }
 
 .markdown-body > pre.snippet-code[data-example-position="first"] {

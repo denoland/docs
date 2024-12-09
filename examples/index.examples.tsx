@@ -26,7 +26,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
   for (const example of examples) {
     yield {
       url: `/examples/${example.label}/index.html`,
-      title: `${example.parsed.title} - Deno by Example`,
+      title: `${example.parsed.title}`,
       content: <ExamplePage example={example} />,
     };
   }

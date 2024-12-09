@@ -2,6 +2,7 @@ import { ExampleSnippet } from "../types.ts";
 
 export default function SnippetComponent(props: {
   filename: string;
+  onlyOneSnippet: boolean;
   firstOfFile: boolean;
   lastOfFile: boolean;
   snippet: ExampleSnippet;
@@ -9,8 +10,8 @@ export default function SnippetComponent(props: {
   return (
     <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-8">
       <div
-        class={`italic select-none text-sm ${
-          props.snippet.text ? "pb-4 md:pb-0 " : " "
+        class={`italic text-right select-none text-sm ${
+          props.snippet.text ? "pb-4 mt-4 md:pb-0 " : " "
         } ${props.snippet.code ? "col-span-3" : "mt-4 col-span-full"}`}
       >
         {props.snippet.text}
@@ -39,7 +40,9 @@ export default function SnippetComponent(props: {
             >
               <pre
                 class="highlight snippet-code language-ts"
-                data-example-position={props.firstOfFile
+                data-example-position={props.onlyOneSnippet
+                  ? "only"
+                  : props.firstOfFile
                   ? "first"
                   : props.lastOfFile
                   ? "last"
