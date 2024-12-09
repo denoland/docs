@@ -31,7 +31,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -426,7 +426,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -900,7 +900,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -1295,7 +1295,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -1339,7 +1339,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -1536,7 +1536,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -1821,7 +1821,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -2295,7 +2295,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -2510,7 +2510,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -3074,7 +3074,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -3253,7 +3253,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -3655,7 +3655,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -3835,7 +3835,7 @@
     },
     {
       "name": "outdated",
-      "about": "Find and update outdated dependencies.\nBy default, outdated dependencies are only displayed.\n\nDisplay outdated dependencies:\n  \u001b[38;5;245mdeno outdated\u001b[39m\n  \u001b[38;5;245mdeno outdated --compatible\u001b[39m\n  \nUpdate dependencies:\n  \u001b[38;5;245mdeno outdated --update\u001b[39m\n  \u001b[38;5;245mdeno outdated --update --latest\u001b[39m\n  \u001b[38;5;245mdeno outdated --update\u001b[39m\n\nFilters can be used to select which packages to act on. Filters can include wildcards (*) to match multiple packages.\n  \u001b[38;5;245mdeno outdated --update --latest \"@std/*\"\u001b[39m\n  \u001b[38;5;245mdeno outdated --update --latest \"react*\"\u001b[39m\nNote that filters act on their aliases configured in deno.json / package.json, not the actual package names:\n  Given \"foobar\": \"npm:react@17.0.0\" in deno.json or package.json, the filter \"foobar\" would update npm:react to\n  the latest version.\n  \u001b[38;5;245mdeno outdated --update --latest foobar\u001b[39m\nFilters can be combined, and negative filters can be used to exclude results:\n  \u001b[38;5;245mdeno outdated --update --latest \"@std/*\" \"!@std/fmt*\"\u001b[39m\n\nSpecific version requirements to update to can be specified:\n  \u001b[38;5;245mdeno outdated --update @std/fmt@^1.0.2\u001b[39m\n",
+      "about": "Find and update outdated dependencies.\nBy default, outdated dependencies are only displayed.\n\nDisplay outdated dependencies:\n  \u001b[38;5;245mdeno outdated\u001b[39m\n  \u001b[38;5;245mdeno outdated --compatible\u001b[39m\n\nUpdate dependencies:\n  \u001b[38;5;245mdeno outdated --update\u001b[39m\n  \u001b[38;5;245mdeno outdated --update --latest\u001b[39m\n  \u001b[38;5;245mdeno outdated --update\u001b[39m\n\nFilters can be used to select which packages to act on. Filters can include wildcards (*) to match multiple packages.\n  \u001b[38;5;245mdeno outdated --update --latest \"@std/*\"\u001b[39m\n  \u001b[38;5;245mdeno outdated --update --latest \"react*\"\u001b[39m\nNote that filters act on their aliases configured in deno.json / package.json, not the actual package names:\n  Given \"foobar\": \"npm:react@17.0.0\" in deno.json or package.json, the filter \"foobar\" would update npm:react to\n  the latest version.\n  \u001b[38;5;245mdeno outdated --update --latest foobar\u001b[39m\nFilters can be combined, and negative filters can be used to exclude results:\n  \u001b[38;5;245mdeno outdated --update --latest \"@std/*\" \"!@std/fmt*\"\u001b[39m\n\nSpecific version requirements to update to can be specified:\n  \u001b[38;5;245mdeno outdated --update @std/fmt@^1.0.2\u001b[39m\n",
       "args": [
         {
           "name": "filters",
@@ -3929,7 +3929,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -4108,7 +4108,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -4242,7 +4242,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -4558,7 +4558,7 @@
     },
     {
       "name": "task",
-      "about": "Run a task defined in the configuration file.\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks:\n  \u001b[38;5;245mdeno task\u001b[39m\n  \nEvaluate a task from string\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
+      "about": "Run a task defined in the configuration file.\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks:\n  \u001b[38;5;245mdeno task\u001b[39m\n\nEvaluate a task from string\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -4574,7 +4574,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -4753,7 +4753,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },
@@ -5325,7 +5325,7 @@
           "short": null,
           "long": "unstable-detect-cjs",
           "required": false,
-          "help": "Reads the package.json type field in a project to treat .js files as .cjs",
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
         },

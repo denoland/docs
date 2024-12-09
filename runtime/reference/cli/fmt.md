@@ -3,6 +3,7 @@ title: "`deno fmt`, code formatting"
 oldUrl:
  - /runtime/tools/formatter/
  - /runtime/manual/tools/formatter/
+ - /runtime/manual/tools/fmt/
  - /runtime/reference/cli/formatter/
 command: fmt
 ---
@@ -12,24 +13,33 @@ command: fmt
 Deno ships with a built-in code formatter that will auto-format the following
 files:
 
-| File Type  | Extension          | Notes                                                                                  |
-| ---------- | ------------------ | -------------------------------------------------------------------------------------- |
-| JavaScript | `.js`              |                                                                                        |
-| TypeScript | `.ts`              |                                                                                        |
-| JSX        | `.jsx`             |                                                                                        |
-| TSX        | `.tsx`             |                                                                                        |
-| Markdown   | `.md`, `.markdown` |                                                                                        |
-| JSON       | `.json`            |                                                                                        |
-| JSONC      | `.jsonc`           |                                                                                        |
-| CSS        | `.css`             |                                                                                        |
-| HTML       | `.html`            |                                                                                        |
-| YAML       | `.yml`, `.yaml`    |                                                                                        |
-| Sass       | `.sass`            |                                                                                        |
-| SCSS       | `.scss`            |                                                                                        |
-| LESS       | `.less`            |                                                                                        |
-| Astro      | `.astro`           | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
-| Svelte     | `.svelte`          | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
-| Vue        | `.vue`             | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
+<!-- This list needs to be updated along with https://github.com/denoland/deno/blob/main/cli/tools/fmt.rs -->
+
+| File Type            | Extension                                              | Notes                                                                                  |
+| -------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| JavaScript           | `.js`, `.cjs`, `.mjs`                                  |                                                                                        |
+| TypeScript           | `.ts`, `.mts`, `.cts`                                  |                                                                                        |
+| JSX                  | `.jsx`                                                 |                                                                                        |
+| TSX                  | `.tsx`                                                 |                                                                                        |
+| Markdown             | `.md`, `.mkd`, `.mkdn`, `.mdwn`, `.mdown`, `.markdown` |                                                                                        |
+| JSON                 | `.json`                                                |                                                                                        |
+| JSONC                | `.jsonc`                                               |                                                                                        |
+| CSS                  | `.css`                                                 |                                                                                        |
+| HTML                 | `.html`                                                |                                                                                        |
+| [Nunjucks][Nunjucks] | `.njk`                                                 |                                                                                        |
+| [Vento][Vento]       | `.vto`                                                 |                                                                                        |
+| YAML                 | `.yml`, `.yaml`                                        |                                                                                        |
+| Sass                 | `.sass`                                                |                                                                                        |
+| SCSS                 | `.scss`                                                |                                                                                        |
+| LESS                 | `.less`                                                |                                                                                        |
+| Jupyter Notebook     | `.ipynb`                                               |                                                                                        |
+| Astro                | `.astro`                                               | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
+| Svelte               | `.svelte`                                              | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
+| Vue                  | `.vue`                                                 | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
+| SQL                  | `.sql`                                                 | Requires `--unstable-sql` flag or `"unstable": ["fmt-sql"]` config option.             |
+
+[Nunjucks]: https://mozilla.github.io/nunjucks/
+[Vento]: https://github.com/ventojs/vento
 
 :::note
 
