@@ -1,4 +1,4 @@
-export function VideoIcon(props: { color: string }) {
+export function VideoIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +14,7 @@ export function VideoIcon(props: { color: string }) {
         rx="24.7"
         ry="24.7"
         fill="none"
-        stroke={props.color}
+        className="example-icon"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="30"
@@ -24,7 +24,7 @@ export function VideoIcon(props: { color: string }) {
         cy="122.2"
         r="56.2"
         fill="none"
-        stroke={props.color}
+        className="example-icon"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="30"
@@ -34,7 +34,7 @@ export function VideoIcon(props: { color: string }) {
         cy="96.7"
         r="81.7"
         fill="none"
-        stroke={props.color}
+        className="example-icon"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="30"
@@ -42,7 +42,7 @@ export function VideoIcon(props: { color: string }) {
       <path
         d="m306 246 85-53c4-3 10 0 10 5v135c0 5-6 8-10 6l-85-53"
         fill="none"
-        stroke={props.color}
+        className="example-icon"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="30"

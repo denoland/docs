@@ -37,13 +37,13 @@ export default function LandingPage() {
             Filter by type:
           </h2>
           <label for="example" className="mr-4 ml-4 flex items-center">
-            <ExampleIcon color="#9d9d9d" />Examples:
+            <ExampleIcon />Examples:
             <span className="switch">
               <input
                 type="checkbox"
                 id="example"
                 value="Examples"
-                className="mr-2"
+                className="filter mr-2"
                 checked
               />
               <span className="slider"></span>
@@ -51,13 +51,13 @@ export default function LandingPage() {
           </label>
 
           <label for="tutorial" className="mr-4 ml-4 flex items-center">
-            <TutorialIcon color="#9d9d9d" />Tutorials:
+            <TutorialIcon />Tutorials:
             <span className="switch">
               <input
                 type="checkbox"
                 id="tutorial"
                 value="Tutorials"
-                className="mr-2"
+                className="filter mr-2"
                 checked
               />
               <span className="slider"></span>
@@ -65,13 +65,13 @@ export default function LandingPage() {
           </label>
 
           <label for="video" className="mr-4 ml-4 flex items-center">
-            <VideoIcon color="#9d9d9d" />Videos:
+            <VideoIcon />Videos:
             <span className="switch">
               <input
                 type="checkbox"
                 id="video"
                 value="Videos"
-                className="mr-2"
+                className="filter mr-2"
                 checked
               />
               <span className="slider"></span>

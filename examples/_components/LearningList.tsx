@@ -11,7 +11,7 @@ export function LearningList(
   return (
     <section className="break-inside-avoid-column">
       <h2 className="text-lg font-semibold mb-3">{props.title}</h2>
-      <ul className="mb-8">
+      <ul className="mb-8 examples-list">
         {props.items.map((item) => (
           <li
             className="leading-7 learning-list-item"
@@ -21,9 +21,9 @@ export function LearningList(
               className="homepage-link mb-1 runtime-link"
               href={item.id}
             >
-              {item.type === "tutorial" && <TutorialIcon color="#9d9d9d" />}
-              {item.type === "example" && <ExampleIcon color="#9d9d9d" />}
-              {item.type === "video" && <VideoIcon color="#9d9d9d" />}
+              {item.type === "tutorial" && <TutorialIcon />}
+              {item.type === "example" && <ExampleIcon />}
+              {item.type === "video" && <VideoIcon />}
 
               {item.label}
             </a>

@@ -309,6 +309,10 @@ body {
     hover:decoration-purple-600;
 }
 
+.example-icon {
+  @apply stroke-foreground-secondary;
+}
+
 .sidebar__current-item {
   color: var(--color-accent-fg);
 }
@@ -406,7 +410,7 @@ body {
 
 .markdown-body > pre.snippet-code[data-example-position="only"] {
   @apply md:border-t md:border-b md:pt-4 rounded-t h-full md:rounded;
-  md:rounded-b;
+  md: rounded-b;
 }
 
 .markdown-body > pre.snippet-code[data-example-position="first"] {

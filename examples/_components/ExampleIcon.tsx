@@ -1,4 +1,4 @@
-export function ExampleIcon(props: { color: string }) {
+export function ExampleIcon() {
   return (
     <svg
       className="inline mr-2"
@@ -9,7 +9,7 @@ export function ExampleIcon(props: { color: string }) {
       <path
         d="m86 58-71 70 71 72M186 15l-46 228M242 59l71 71-71 72"
         fill="none"
-        stroke={props.color}
+        className="example-icon"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="30"

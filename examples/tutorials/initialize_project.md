@@ -5,8 +5,8 @@ oldUrl:
 ---
 
 While it is possible to run scripts directly with `deno run`, for larger
-projects it is recommended to create a sensible directory structure. This way you
-can organize your code, manage dependencies, script tasks and run tests more
+projects it is recommended to create a sensible directory structure. This way
+you can organize your code, manage dependencies, script tasks and run tests more
 easily.
 
 Initialize a new project by running the following command:
