@@ -9,12 +9,12 @@ export const sidebar = [
         id: "/runtime/",
       },
       {
-        label: "Examples",
-        id: "/examples/",
-      },
-      {
         label: "API reference",
         id: "/api/deno",
+      },
+      {
+        label: "Examples",
+        id: "/examples/",
       },
       {
         label: "Deploy",
