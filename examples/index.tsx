@@ -33,7 +33,7 @@ export const toc = [];
 export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
   yield {
     url: `/examples/`,
-    title: `Learning Hub`,
+    title: `Deno examples and tutorials`,
     content: <LandingPage />,
   };
 }

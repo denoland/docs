@@ -97,7 +97,7 @@ export default function LandingPage() {
           Maybe remove a filter to see some examples?
         </p>
         <img
-          src="/examples/tutorials/images/skateboard.png"
+          src="/examples/tutorials/images/deno-educator.png"
           alt="deno on a skateboard"
         />
       </div>

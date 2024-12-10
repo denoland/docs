@@ -697,6 +697,10 @@ input[type="search"] {
   border-radius: 50%;
 }
 
+.fully-filtered {
+  @apply flex flex-col gap-2 items-center mb-4;
+}
+
 .filter:checked + .slider {
   background-color: #2196f3;
 }
