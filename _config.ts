@@ -92,14 +92,14 @@ site.copy("runtime/fundamentals/images");
 site.copy("runtime/getting_started/images");
 site.copy("runtime/reference/images");
 site.copy("runtime/contributing/images");
-site.copy("runtime/tutorials/images");
+site.copy("examples/tutorials/images");
 site.copy("deploy/manual/images");
 site.copy("deno.json");
 site.copy("go.json");
 site.copy("oldurls.json");
 site.copy("server.ts");
 site.copy("middleware");
-site.copy("examples");
+site.copy("examples/examples");
 site.copy(".env");
 
 site.use(
@@ -117,7 +117,7 @@ site.use(
 );
 site.use(
   esbuild({
-    extensions: [".client.ts"],
+    extensions: [".client.ts", ".client.js"],
     options: {
       minify: false,
       splitting: true,
@@ -205,9 +205,7 @@ site.ignore(
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
-  "examples",
   // "deploy",
-  // "examples.page.tsx",
   // "runtime",
   // "subhosting",
 );

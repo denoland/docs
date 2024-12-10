@@ -1,6 +1,12 @@
+@import "./youtube-lite.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --max-text-width: 65ch;
+}
 
 /* Light and dark theme variables */
 .light {
@@ -50,6 +56,10 @@
 /* Scrollbar colors that look good on light and dark theme */
 * {
   scrollbar-color: hsla(0deg, 0%, 50%, 0.5) hsla(0deg, 0%, 50%, 0.1) !important;
+}
+
+p {
+  max-width: var(--max-text-width);
 }
 
 .dark-mode-toggle-button img {
@@ -282,6 +292,10 @@ body {
   @apply block font-normal underline underline-offset-4;
 }
 
+.learn-link {
+  @apply flex gap-2 items-center font-normal underline underline-offset-4;
+}
+
 .deploy-link {
   @apply text-deploy-600 decoration-deploy-600/20 hover:decoration-deploy-600;
 }
@@ -297,6 +311,10 @@ body {
   @apply text-purple-600 dark:text-purple-300 decoration-purple-600/20
     dark:decoration-purple-300/20 dark:hover:decoration-purple-300
     hover:decoration-purple-600;
+}
+
+.example-icon {
+  @apply stroke-foreground-secondary;
 }
 
 .sidebar__current-item {
@@ -392,6 +410,11 @@ body {
 
 .markdown-body .module-info ul {
   @apply pl-6;
+}
+
+.markdown-body > pre.snippet-code[data-example-position="only"] {
+  @apply md:border-t md:border-b md:pt-4 rounded-t h-full md:rounded;
+  md: rounded-b;
 }
 
 .markdown-body > pre.snippet-code[data-example-position="first"] {
@@ -615,6 +638,10 @@ body {
   @apply inline-block text-sm;
 }
 
+.learning-list-item {
+  @apply leading-7 mb-1;
+}
+
 input[type="search"] {
   background-image: url("/img/search.svg");
   background-repeat: no-repeat;
@@ -622,4 +649,108 @@ input[type="search"] {
   background-position-y: center;
   background-position-x: 0.5em;
   padding-left: 2em;
+}
+
+/* Examples styles */
+
+.hub-header {
+  border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));
+  padding-bottom: 0.3em;
+}
+
+label:has(.switch input:focus-visible) .slider {
+  outline: 2px solid var(--color-accent-fg);
+  outline-offset: 2px;
+}
+
+.switch {
+  position: relative;
+  width: 1.8rem;
+  height: 1rem;
+  display: block;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: background-color 0.2s;
+  border-radius: 1rem;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: calc(1rem - 4px);
+  width: calc(1rem - 4px);
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: transform 0.2s cubic-bezier(0.86, 0, 0.07, 1);
+  border-radius: 50%;
+}
+
+.fully-filtered {
+  @apply flex flex-col gap-2 items-center mb-4;
+}
+
+.filter:checked + .slider {
+  background-color: #2196f3;
+}
+
+.filter:checked + .slider:before {
+  transform: translateX(calc(0.8rem));
+}
+
+[data-category="tutorial"],
+[data-category="video"],
+[data-category="example"],
+.unfiltered {
+  display: none;
+}
+
+main:has(#tutorial:checked) {
+  .fully-filtered {
+    display: none;
+  }
+  .unfiltered {
+    display: block;
+  }
+  & [data-category="tutorial"] {
+    display: block;
+  }
+}
+
+main:has(#video:checked) {
+  .fully-filtered {
+    display: none;
+  }
+  .unfiltered {
+    display: block;
+  }
+  & [data-category="video"] {
+    display: block;
+  }
+}
+
+main:has(#example:checked) {
+  .fully-filtered {
+    display: none;
+  }
+  .unfiltered {
+    display: block;
+  }
+  & [data-category="example"] {
+    display: block;
+  }
 }
