@@ -21,7 +21,7 @@ export default function LandingPage() {
       id="content"
       className="flex flex-col px-8 pt-6 md:pt-12 mt-4 md:items-center md:justify-center max-w-[1200px] mx-auto mb-48"
     >
-      <div className="w-full mb-6 max-w-screen-xl mx-auto hub-header">
+      <div className="flex flex-col md:flex-row w-full mb-8 max-w-screen-xl justify-between hub-header">
         <div className="max-w-prose mb-8">
           <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl mb-3">
             Examples
@@ -32,11 +32,11 @@ export default function LandingPage() {
             favorite tools.
           </p>
         </div>
-        <div className=" mb-2 flex gap-2 flex-wrap items-center">
-          <h2 className="font-semibold mb-2 mt-2">
+        <div className="flex flex-col gap-1 items-end">
+          <h2 className="text-xs font-semibold mb-1">
             Filter by type:
           </h2>
-          <label for="example" className="mr-4 ml-4 flex items-center">
+          <label for="example" className="flex items-center">
             <ExampleIcon />Examples:
             <span className="switch">
               <input
@@ -50,7 +50,7 @@ export default function LandingPage() {
             </span>
           </label>
 
-          <label for="tutorial" className="mr-4 ml-4 flex items-center">
+          <label for="tutorial" className="flex items-center">
             <TutorialIcon />Tutorials:
             <span className="switch">
               <input
@@ -64,7 +64,7 @@ export default function LandingPage() {
             </span>
           </label>
 
-          <label for="video" className="mr-4 ml-4 flex items-center">
+          <label for="video" className="flex items-center">
             <VideoIcon />Videos:
             <span className="switch">
               <input
