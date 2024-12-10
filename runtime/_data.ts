@@ -292,7 +292,7 @@ export async function generateDescriptions(): Promise<Descriptions> {
     )
   ) {
     const file = await Deno.readTextFile(dirEntry.path);
-    const parsed = yamlParse(file);
+    const parsed = yamlParse(file) as DescriptionItem;
     if (!parsed) {
       throw `Invalid or empty file: ${dirEntry.path}`;
     }
