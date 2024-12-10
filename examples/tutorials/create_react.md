@@ -1,6 +1,6 @@
 ---
 title: "Build a React app with create-vite"
-url: /examples/create-react_tutorial/
+url: /examples/create_react_tutorial/
 oldUrl:
 - /runtime/tutorials/how_to_with_npm/create-react/
 ---

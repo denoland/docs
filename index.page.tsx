@@ -158,15 +158,15 @@ export default function () {
                     },
                     {
                       text: "Hello World",
-                      href: "/examples/hello-world",
+                      href: "/examples/hello_world",
                     },
                     {
                       text: "Using Node.js built-in modules",
-                      href: "/examples/node",
+                      href: "/examples/node_built_in",
                     },
                     {
                       text: "Manipulating & Parsing URLs",
-                      href: "/examples/url-parsing",
+                      href: "/examples/url_parsing",
                     },
                   ]}
                 />
@@ -176,19 +176,19 @@ export default function () {
                   links={[
                     {
                       text: "HTTP Server: Hello World",
-                      href: "/examples/http-server",
+                      href: "/examples/http_server",
                     },
                     {
                       text: "HTTP Server: WebSockets",
-                      href: "/examples/http-server-websocket",
+                      href: "/examples/http_server_websocket",
                     },
                     {
                       text: "HTTP Server: Streaming",
-                      href: "/examples/http-server-streaming",
+                      href: "/examples/http_server_streaming",
                     },
                     {
                       text: "TCP Connector: Ping",
-                      href: "/examples/tcp-connector",
+                      href: "/examples/tcp_connector",
                     },
                   ]}
                 />
@@ -198,19 +198,19 @@ export default function () {
                   links={[
                     {
                       text: "Command Line Arguments",
-                      href: "/examples/command-line-arguments",
+                      href: "/examples/command_line_arguments",
                     },
                     {
                       text: "Environment Variables",
-                      href: "/examples/environment-variables",
+                      href: "/examples/environment_variables",
                     },
                     {
                       text: "Reading Files",
-                      href: "/examples/reading-files",
+                      href: "/examples/reading_files",
                     },
                     {
                       text: "Walking directories",
-                      href: "/examples/walking-directories",
+                      href: "/examples/walking_directories",
                     },
                   ]}
                 />
@@ -232,7 +232,7 @@ export default function () {
                     },
                     {
                       text: "KV Watch",
-                      href: "/examples/kv-watch",
+                      href: "/examples/kv_watch",
                     },
                   ]}
                 />
