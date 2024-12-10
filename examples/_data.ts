@@ -392,6 +392,11 @@ export const sidebar = [
         externalURL: "https://www.youtube.com/watch?v=P8VzA_XSF8w",
         type: "video",
       },
+      {
+        label: "Connect to DuckDB",
+        id: "/examples/duckdb",
+        type: "example",
+      },
     ],
   },
   {
