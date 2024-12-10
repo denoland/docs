@@ -8,7 +8,7 @@
  * @resource {https://github.com/suketa/ruby-duckdb?tab=readme-ov-file#pre-requisite-setup-linux} DuckDB Pre-requisite setup (Linux)
  * @group Databases
  *
- * Using the Deno with DuckDB, you can connect to memory or a persistent
+ * Using Deno with DuckDB, you can connect to memory or a persistent
  * database with a filename.
  */
 
