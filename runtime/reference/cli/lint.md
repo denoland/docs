@@ -13,6 +13,10 @@ command: lint
 For a complete list of supported rules, visit
 [the deno_lint rule documentation](https://lint.deno.land).
 
+This is some JSX:
+
+{ 2 + 2 }
+
 ## Ignore directives
 
 ### Files
