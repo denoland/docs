@@ -104,7 +104,8 @@ authored.
 ## Examples
 
 [Deno by Example](https://docs.deno.com/examples) is a collection of small
-snippets of code, tutorials and videos showcasing various functions of the APIs implemented in Deno.
+snippets of code, tutorials and videos showcasing various functions of the APIs
+implemented in Deno.
 
 ### Adding an example script
 
@@ -124,11 +125,11 @@ snippets of code, tutorials and videos showcasing various functions of the APIs 
 
 ### Adding an example
 
-To add an example, create a file in the `examples/scripts` directory. The file name
-should be a short description of the example (in kebab case) and the contents
-should be the code for the example. The file should be in the `.ts` format. The
-file should start with a JSDoc style multi line comment that describes the
-example:
+To add an example, create a file in the `examples/scripts` directory. The file
+name should be a short description of the example (in kebab case) and the
+contents should be the code for the example. The file should be in the `.ts`
+format. The file should start with a JSDoc style multi line comment that
+describes the example:
 
 ```ts
 /**
