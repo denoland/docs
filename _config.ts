@@ -24,16 +24,6 @@ import codeblockCopyPlugin from "./markdown-it/codeblock-copy.ts";
 import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
 import relativeLinksPlugin from "./markdown-it/relative-path.ts";
 import replacerPlugin from "./markdown-it/replacer.ts";
-import {
-  clear as oramaClear,
-  deploy as oramaDeploy,
-  generateDocumentsForExamples,
-  generateDocumentsForPage,
-  generateDocumentsForSymbols,
-  notify as oramaNotify,
-  OramaDocument,
-} from "./orama.ts";
-
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import createGAMiddleware from "./middleware/googleAnalytics.ts";
@@ -209,54 +199,6 @@ site.process([".html"], (pages) => {
   }
 });
 
-const ORAMA_API_KEY = Deno.env.get("ORAMA_CLOUD_API_KEY");
-const ORAMA_INDEX_ID = Deno.env.get("ORAMA_CLOUD_INDEX_ID");
-if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
-  site.process([".html"], async (pages) => {
-    let pageEntries: OramaDocument[] = [];
-
-    await oramaClear(ORAMA_API_KEY, ORAMA_INDEX_ID);
-
-    for (const page of pages) {
-      if (
-        page.document &&
-        (page.data.url.startsWith("/runtime/") ||
-          page.data.url.startsWith("/deploy/") ||
-          page.data.url.startsWith("/subhosting/"))
-      ) {
-        pageEntries = pageEntries.concat(generateDocumentsForPage(page));
-      }
-    }
-
-    await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, pageEntries, "pages");
-
-    await oramaNotify(
-      ORAMA_API_KEY,
-      ORAMA_INDEX_ID,
-      await generateDocumentsForExamples(),
-      "examples",
-    );
-
-    try {
-      await oramaNotify(
-        ORAMA_API_KEY,
-        ORAMA_INDEX_ID,
-        await generateDocumentsForSymbols(),
-        "symbols",
-      );
-    } catch (e) {
-      console.warn(
-        "⚠️ Orama documents for reference docs were not generated.",
-        e,
-      );
-    }
-
-    await oramaDeploy(ORAMA_API_KEY, ORAMA_INDEX_ID);
-  });
-} else {
-  console.warn("⚠️ Orama documents were not generated.");
-}
-
 site.ignore(
   "old",
   "README.md",
@@ -279,9 +221,4 @@ site.use(
   }),
 );
 
-site.remoteFile(
-  "orama.css",
-  "https://unpkg.com/@orama/wc-components@0.1.7/dist/orama-ui/orama-ui.css",
-);
-site.copy("orama.css");
 export default site;

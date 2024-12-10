@@ -287,8 +287,10 @@ body {
 }
 
 .runtime-link {
-  @apply text-runtime-600 decoration-runtime-600/20
-    hover:decoration-runtime-600;
+  @apply dark:text-runtime dark:decoration-runtime dark:hover:text-runtime-600
+    dark:hover:decoration-runtime-600 decoration-1 text-runtime-800
+    decoration-runtime-800 hover:decoration-runtime-600 hover:text-runtime-600
+    transition-colors duration-100;
 }
 
 .help-link {
@@ -611,4 +613,13 @@ body {
 
 #feedback-more label {
   @apply inline-block text-sm;
+}
+
+input[type="search"] {
+  background-image: url("/img/search.svg");
+  background-repeat: no-repeat;
+  background-size: 1em;
+  background-position-y: center;
+  background-position-x: 0.5em;
+  padding-left: 2em;
 }
