@@ -13,7 +13,7 @@ a list of dinosaurs. When you click on one, it'll take you to a dinosaur page
 with more details. You can see the
 [finished app repo on GitHub](https://github.com/denoland/tutorial-with-react)
 
-![demo of the app](../images/how-to/react/react-dinosaur-app-demo.gif)
+![demo of the app](./images/how-to/react/react-dinosaur-app-demo.gif)
 
 ## Create a React app with Vite and Deno
 
@@ -332,7 +332,7 @@ Navigate to the local Vite server in your browser (`localhost:5173`) and you
 should see the list of dinosaurs displayed which you can click through to find
 out about each one.
 
-![demo of the app](../images/how-to/react/react-dinosaur-app-demo.gif)
+![demo of the app](./images/how-to/react/react-dinosaur-app-demo.gif)
 
 ## Build and deploy
 

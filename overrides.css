@@ -173,18 +173,45 @@
   transform: translateX(calc(0.8rem));
 }
 
-[data-category="tutorial"], [data-category="video"], [data-category="example"] {
+[data-category="tutorial"],
+[data-category="video"],
+[data-category="example"],
+.unfiltered {
   display: none;
 }
 
-main:has(#tutorial:checked) [data-category="tutorial"] {
-  display: block;
+main:has(#tutorial:checked) {
+  .fully-filtered {
+    display: none;
+  }
+  .unfiltered {
+    display: block;
+  }
+  & [data-category="tutorial"] {
+    display: block;
+  }
 }
 
-main:has(#video:checked) [data-category="video"] {
-  display: block;
+main:has(#video:checked) {
+  .fully-filtered {
+    display: none;
+  }
+  .unfiltered {
+    display: block;
+  }
+  & [data-category="video"] {
+    display: block;
+  }
 }
 
-main:has(#example:checked) [data-category="example"] {
-  display: block;
+main:has(#example:checked) {
+  .fully-filtered {
+    display: none;
+  }
+  .unfiltered {
+    display: block;
+  }
+  & [data-category="example"] {
+    display: block;
+  }
 }

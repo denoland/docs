@@ -24,7 +24,7 @@ export default function LandingPage() {
       <div className="w-full mb-6 max-w-screen-xl mx-auto hub-header">
         <div className="max-w-prose mb-8">
           <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl mb-3">
-            Learning hub
+            Examples
           </h1>
           <p>
             A collection of walkthrough tutorials, examples, videos and guides
@@ -79,8 +79,14 @@ export default function LandingPage() {
           </label>
         </div>
       </div>
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 mb-8">
+      <div className="unfiltered columns-1 sm:columns-2 lg:columns-3 gap-8 mb-8">
         {componentsPerSidebarItem}
+      </div>
+      <div className="fully-filtered">
+
+        <h2 class="text-2xl font-semibold sm:text-3xl md:text-4xl">Oops! You've filtered everything</h2>
+        <p class="md:text-lg mt-4">Maybe remove a filter to see some examples?</p>
+        <img src="/examples/tutorials/images/skateboard.png" alt="deno on a skateboard" />
       </div>
       <p class="max-w-prose mx-auto text-center pt-4 mt-3">
         Need an example that isn't here? Or want to add one of your own?<br />
@@ -96,7 +102,7 @@ export default function LandingPage() {
       </p>
       <a
         href="/runtime/contributing/examples/"
-        class="homepage-link runtime-link text-center mt-4"
+        class="text-primary hover:underline focus:underline text-center mt-4"
       >
         Commit an example and we'll send you some stickers!
       </a>

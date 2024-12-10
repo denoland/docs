@@ -15,7 +15,7 @@ a list of dinosaurs. When you click on one, it'll take you to a dinosaur page
 with more details. You can see the
 [finished app repo on GitHub](https://github.com/denoland/tutorial-with-react-denojson)
 
-![demo of the app](../images/how-to/react/react-dinosaur-app-demo.gif)
+![demo of the app](./images/how-to/react/react-dinosaur-app-demo.gif)
 
 This tutorial will use [Vite](https://vitejs.dev/) to serve the app locally.
 Vite is a build tool and development server for modern web projects. It pairs
@@ -362,7 +362,7 @@ Navigate to the local Vite server in your browser (`localhost:5173`) and you
 should see the list of dinosaurs displayed which you can click through to find
 out about each one.
 
-![demo of the app](../images/how-to/react/react-dinosaur-app-demo.gif)
+![demo of the app](./images/how-to/react/react-dinosaur-app-demo.gif)
 
 ## Build and deploy
 

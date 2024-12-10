@@ -15,7 +15,7 @@ will display a list of dinosaurs. When you click on one, it'll take you to a
 dinosaur page with more details. You can see the
 [finished app on GitHub](https://github.com/denoland/tutorial-with-vue).
 
-![The Vue.js app in action](../images/how-to/vue/vue.gif)
+![The Vue.js app in action](./images/how-to/vue/vue.gif)
 
 ## Create a Vue.js app with Vite and Deno
 
@@ -350,7 +350,7 @@ deno task dev
 Visit the output localhost link in your browser to see the app. Click on a
 dinosaur to see more details!
 
-![The vue app in action](../images/how-to/vue/vue.gif)
+![The vue app in action](./images/how-to/vue/vue.gif)
 
 🦕 Now that you can run a Vue app in Deno with Vite you're ready to build real
 world applications! If you'd like to expand upon this demo you could consider

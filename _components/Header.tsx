@@ -183,8 +183,8 @@ function HeaderItem({
         firstItem ? "ml-0" : ""
       } mx-1 px-2 text-md hover:bg-background-secondary ring-1 ring-transparent hover:ring-background-tertiary hover:rounded transition-colors duration-200 ease-in-out text-nowrap flex items-center ${
         activeOn && url.startsWith(activeOn)
-          ? "text-primary mx-2.5 px-0.5 underline font-semibold underline-offset-[6px] decoration-primary/20"
-          : ""
+          ? "text-primary underline font-semibold underline-offset-[6px] decoration-primary/20"
+          : "[letter-spacing:0.2px]"
       } ${hideOnMobile ? "max-xl:!hidden" : ""}`}
       href={href}
     >

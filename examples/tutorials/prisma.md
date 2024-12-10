@@ -158,7 +158,7 @@ deno run -A npm:prisma studio
 
 You should see something similar to the following screenshot:
 
-![New dinosaurs are in Prisma dashboard](../images/how-to/prisma/1-dinosaurs-in-prisma.png)
+![New dinosaurs are in Prisma dashboard](./images/how-to/prisma/1-dinosaurs-in-prisma.png)
 
 ## Create your API routes
 
@@ -258,7 +258,7 @@ deno run -A --env main.ts
 
 Let's visit `localhost:8000/dinosaurs`:
 
-![List of all dinosaurs from REST API](../images/how-to/prisma/2-dinosaurs-from-api.png)
+![List of all dinosaurs from REST API](./images/how-to/prisma/2-dinosaurs-from-api.png)
 
 Next, let's `POST` a new user with this `curl` command:
 
@@ -268,7 +268,7 @@ curl -X POST http://localhost:8000/dinosaur -H "Content-Type: application/json" 
 
 You should now see a new row on Prisma Studio:
 
-![New dinosaur Deno in Prisma](../images/how-to/prisma/3-new-dinosaur-in-prisma.png)
+![New dinosaur Deno in Prisma](./images/how-to/prisma/3-new-dinosaur-in-prisma.png)
 
 Nice!
 

@@ -815,5 +815,5 @@ export const sidebar = [
   },
 ];
 
-export const sectionTitle = "Learning hub";
+export const sectionTitle = "Examples";
 export const sectionHref = "/examples/";

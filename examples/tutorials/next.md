@@ -13,7 +13,7 @@ In this tutorial, we'll build a simple Next.js application and run it with Deno.
 The app will display a list of dinosaurs. When you click on one, it'll take you
 to a dinosaur page with more details.
 
-![demo of the app](../images/how-to/next/dinoapp.gif)
+![demo of the app](./images/how-to/next/dinoapp.gif)
 
 Start by verifying that you have the latest version of Deno installed, you will
 need at least Deno 1.46.0:
@@ -265,7 +265,7 @@ Now you can run the app with `deno task dev` and visit `http://localhost:3000`
 in your browser to see the list of dinosaurs. Click on a dinosaur to see more
 details!
 
-![demo of the app](../images/how-to/next/dinoapp.gif)
+![demo of the app](./images/how-to/next/dinoapp.gif)
 
 🦕 Now you can build and run a Next.js app with Deno! To build on your app you
 could consider [adding a database](/runtime/tutorials/connecting_to_databases/)

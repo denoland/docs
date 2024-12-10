@@ -8,8 +8,9 @@ export default function VideoPage({ video }: Props) {
     <>
       <EmbedVideo id={video.externalURL} />
       <div className="my-12">
-        Find more videos in the <a href="/examples/">Learning Hub</a> and on our
-        {"  "}<a href="https://www.youtube.com/@deno_land">YouTube channel</a>.
+        Find more videos in the <a href="/examples/">Exampples page</a>{" "}
+        and on our{"  "}
+        <a href="https://www.youtube.com/@deno_land">YouTube channel</a>.
       </div>
     </>
   );
