@@ -125,7 +125,7 @@ export const sidebar = [
         type: "example",
       },
       {
-        label: "Backward Compatibility with Node.js and npm",
+        label: "Compatibility with Node & npm",
         id: "/examples/backward_compat_with_node_npm/",
         externalURL:
           "https://www.youtube.com/watch?v=QPLchkJ7eas&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=12",

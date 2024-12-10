@@ -288,8 +288,12 @@ body {
     hover:!no-underline hover:bg-jsr-yellow-300;
 }
 
-.homepage-link, .learn-link {
+.homepage-link {
   @apply block font-normal underline underline-offset-4;
+}
+
+.learn-link {
+  @apply flex gap-2 items-center font-normal underline underline-offset-4;
 }
 
 .deploy-link {
@@ -634,6 +638,10 @@ body {
   @apply inline-block text-sm;
 }
 
+.learning-list-item {
+  @apply leading-7 mb-1;
+}
+
 input[type="search"] {
   background-image: url("/img/search.svg");
   background-repeat: no-repeat;
@@ -655,7 +663,6 @@ input[type="search"] {
   width: 1.8rem;
   height: 1rem;
   display: block;
-  margin-left: 0.5rem;
 }
 
 .switch input {

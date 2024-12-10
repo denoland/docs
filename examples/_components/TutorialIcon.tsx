@@ -3,7 +3,6 @@ export function TutorialIcon() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 502 384"
-      className="inline mr-2"
       width="1rem"
     >
       <path

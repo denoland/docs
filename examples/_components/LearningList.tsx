@@ -14,11 +14,11 @@ export function LearningList(
       <ul className="mb-8 examples-list">
         {props.items.map((item) => (
           <li
-            className="leading-7 learning-list-item"
+            className="learning-list-item"
             data-category={item.type}
           >
             <a
-              className="homepage-link mb-1 runtime-link"
+              className="learn-link runtime-link"
               href={item.id}
             >
               {item.type === "tutorial" && <TutorialIcon />}

@@ -1,7 +1,6 @@
 export function ExampleIcon() {
   return (
     <svg
-      className="inline mr-2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 328 258"
       width="1rem"

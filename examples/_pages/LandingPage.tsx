@@ -32,12 +32,11 @@ export default function LandingPage() {
             favorite tools.
           </p>
         </div>
-        <div className="flex flex-col gap-1 items-end">
+        <div className="flex flex-col gap-1 md:ml-4">
           <h2 className="text-xs font-semibold mb-1">
-            Filter by type:
+            Filter by type
           </h2>
-          <label for="example" className="flex items-center">
-            <ExampleIcon />Examples:
+          <label for="example" className="flex gap-2 items-center">
             <span className="switch">
               <input
                 type="checkbox"
@@ -48,10 +47,11 @@ export default function LandingPage() {
               />
               <span className="slider"></span>
             </span>
+            <ExampleIcon />
+            <span>Examples</span>
           </label>
 
-          <label for="tutorial" className="flex items-center">
-            <TutorialIcon />Tutorials:
+          <label for="tutorial" className="flex gap-2 items-center">
             <span className="switch">
               <input
                 type="checkbox"
@@ -62,10 +62,13 @@ export default function LandingPage() {
               />
               <span className="slider"></span>
             </span>
+            <TutorialIcon />
+            <span>
+              Tutorials
+            </span>
           </label>
 
-          <label for="video" className="flex items-center">
-            <VideoIcon />Videos:
+          <label for="video" className="flex gap-2 items-center">
             <span className="switch">
               <input
                 type="checkbox"
@@ -75,6 +78,10 @@ export default function LandingPage() {
                 checked
               />
               <span className="slider"></span>
+            </span>
+            <VideoIcon />
+            <span>
+              Videos
             </span>
           </label>
         </div>
