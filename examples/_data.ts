@@ -4,7 +4,7 @@ export const sidebar = [
     items: [
       {
         label: "What is Deno?",
-        id: "/examples/what-is-deno",
+        id: "/examples/what_is_deno",
         externalURL:
           "https://www.youtube.com/watch?v=KPTOo4k8-GE&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe",
         type: "video",
@@ -16,17 +16,17 @@ export const sidebar = [
       },
       {
         label: "Hello World",
-        id: "/examples/hello-world/",
+        id: "/examples/hello_world/",
         type: "example",
       },
       {
         label: "Built in TypeScript support",
-        id: "/examples/typescript/",
+        id: "/examples/typescript_support/",
         type: "example",
       },
       {
         label: "Your Deno Dev Environment",
-        id: "/examples/deno-dev-environment",
+        id: "/examples/deno_dev_environment",
         externalURL:
           "https://www.youtube.com/watch?v=BFfrGrLm2tw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=3",
         type: "video",
@@ -43,14 +43,14 @@ export const sidebar = [
       },
       {
         label: "All-in-one tooling",
-        id: "/examples/all-in-one-tooling",
+        id: "/examples/all-in-one_tooling",
         externalURL:
           "https://www.youtube.com/watch?v=-4e9DkUrCr4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=5",
         type: "video",
       },
       {
         label: "Tasks and configuration with deno.json",
-        id: "/examples/tasks-and-configuration-with-deno-json",
+        id: "/examples/configuration_with_deno_json",
         externalURL:
           "https://www.youtube.com/watch?v=bTmO5Tfgke4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=10",
         type: "video",
@@ -63,19 +63,19 @@ export const sidebar = [
 
       {
         label: "Import and export functions",
-        id: "/examples/import-export",
+        id: "/examples/import_export",
         type: "example",
       },
       {
         label: "Interoperability with Node.js",
-        id: "/examples/interoperability-with-nodejs",
+        id: "/examples/interoperability_with_nodejs",
         externalURL:
           "https://www.youtube.com/watch?v=mgX1ymfqPSQ&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=2",
         type: "video",
       },
       {
         label: "Introduction to Deno APIs",
-        id: "/examples/introduction-to-deno-apis/",
+        id: "/examples/intro_to_deno_apis/",
         externalURL:
           "https://www.youtube.com/watch?v=p28ujFMrdA0&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=7",
         type: "video",
@@ -87,25 +87,25 @@ export const sidebar = [
       },
       {
         label: "Better testing with Deno coverage",
-        id: "/examples/deno-coverage",
+        id: "/examples/deno_coverage",
         externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
         type: "video",
       },
       {
         label: "Formatting with Deno fmt",
-        id: "/examples/deno-fmt",
+        id: "/examples/deno_fmt",
         externalURL: "https://www.youtube.com/watch?v=Ouzso9gQqnc",
         type: "video",
       },
       {
         label: "Benchmarking with Deno bench",
-        id: "/examples/deno-bench",
+        id: "/examples/deno_bench",
         externalURL: "https://www.youtube.com/watch?v=IVde_GTN6TM",
         type: "video",
       },
       {
         label: "Getting started with Deno test",
-        id: "/examples/deno-test",
+        id: "/examples/deno_test",
         externalURL: "https://www.youtube.com/watch?v=gDtDVfsgHgs",
         type: "video",
       },
@@ -116,7 +116,7 @@ export const sidebar = [
     items: [
       {
         label: "Use Node.js' built-in modules",
-        id: "/examples/node/",
+        id: "/examples/node_built_in/",
         type: "example",
       },
       {
@@ -126,21 +126,21 @@ export const sidebar = [
       },
       {
         label: "Backward Compatibility with Node.js and npm",
-        id: "/examples/backward-compatibility-with-nodejs-and-npm/",
+        id: "/examples/backward_compat_with_node_npm/",
         externalURL:
           "https://www.youtube.com/watch?v=QPLchkJ7eas&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=12",
         type: "video",
       },
       {
-        label: "ECMAScript Modules in Deno",
-        id: "/examples/ecmascript-modules-in-deno/",
+        label: "ECMAScript Modules",
+        id: "/examples/esmodules/",
         externalURL:
           "https://www.youtube.com/watch?v=cTFBiwYY3vs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=9",
         type: "video",
       },
       {
         label: "Publishing Modules with JSR",
-        id: "/examples/publishing-modules-with-jsr/",
+        id: "/examples/publishing_modules_with_jsr/",
         externalURL:
           "https://www.youtube.com/watch?v=7uiL4WYvZVs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=8",
         type: "video",
@@ -153,14 +153,14 @@ export const sidebar = [
     items: [
       {
         label: "Browser APIs in Deno",
-        id: "/examples/browser-apis-in-deno/",
+        id: "/examples/browser_apis_in_deno/",
         externalURL:
           "https://www.youtube.com/watch?v=oxVwTT-rZRo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=6",
         type: "video",
       },
       {
         label: "Manipulating & parsing URLs",
-        id: "/examples/url-parsing/",
+        id: "/examples/url_parsing/",
         type: "example",
       },
       {
@@ -175,12 +175,12 @@ export const sidebar = [
       },
       {
         label: "Logging with colors",
-        id: "/examples/color-logging/",
+        id: "/examples/color_logging/",
         type: "example",
       },
       {
         label: "Web workers",
-        id: "/examples/web-workers/",
+        id: "/examples/web_workers/",
         type: "example",
       },
       {
@@ -195,8 +195,8 @@ export const sidebar = [
     title: "Web frameworks and libraries",
     items: [
       {
-        label: "TypeScript and JSX in Deno",
-        id: "/examples/typescript-and-jsx-in-deno/",
+        label: "TypeScript and JSX",
+        id: "/examples/ts_jsx/",
         externalURL:
           "https://www.youtube.com/watch?v=KoM8ahe8O74&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=11",
         type: "video",
@@ -208,7 +208,7 @@ export const sidebar = [
       },
       {
         label: "Build a React app with create-vite",
-        id: "/examples/create-react_tutorial/",
+        id: "/examples/create_react_tutorial/",
         type: "tutorial",
       },
       {
@@ -249,20 +249,20 @@ export const sidebar = [
       },
       {
         label: "Build an API server with TypeScript",
-        id: "/examples/build-an-api-server-with-typescript",
+        id: "/examples/build_api_server_ts",
         externalURL:
           "https://www.youtube.com/watch?v=J8kZ-s-5-ms&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=13",
         type: "video",
       },
       {
         label: "Build a Vue app",
-        id: "/examples/vue",
+        id: "/examples/vue_app_video",
         externalURL: "https://www.youtube.com/watch?v=MDPauM8fZDE",
         type: "video",
       },
       {
         label: "Build a React app",
-        id: "/examples/react",
+        id: "/examples/react_app_video",
         externalURL: "https://www.youtube.com/watch?v=eStwt_2THd8",
         type: "video",
       },
@@ -278,7 +278,7 @@ export const sidebar = [
       },
       {
         label: "Deploy Deno to AWS Lambda",
-        id: "/examples/deploy-deno-to-aws-lambda",
+        id: "/examples/deploy_deno_to_aws_lambda",
         externalURL:
           "https://www.youtube.com/watch?v=_xLOrT3cWK4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=17",
         type: "video",
@@ -310,7 +310,7 @@ export const sidebar = [
       },
       {
         label: "Deploying Deno with Docker",
-        id: "/examples/deploying-deno-with-docker",
+        id: "/examples/deploying_deno_with_docker",
         externalURL:
           "https://www.youtube.com/watch?v=VRryNeYm6yw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=16",
         type: "video",
@@ -399,37 +399,37 @@ export const sidebar = [
     items: [
       {
         label: "Hex and base64 encoding",
-        id: "/examples/hex-base64-encoding",
+        id: "/examples/hex_base64_encoding",
         type: "example",
       },
       {
         label: "Parsing and serializing TOML",
-        id: "/examples/parsing-serializing-toml",
+        id: "/examples/parsing_serializing_toml",
         type: "example",
       },
       {
         label: "Importing JSON",
-        id: "/examples/importing-json",
+        id: "/examples/importing_json",
         type: "example",
       },
       {
         label: "Parsing and serializing CSV",
-        id: "/examples/parsing-serializing-csv",
+        id: "/examples/parsing_serializing_csv",
         type: "example",
       },
       {
         label: "Parsing and serializing JSON",
-        id: "/examples/parsing-serializing-json",
+        id: "/examples/parsing_serializing_json",
         type: "example",
       },
       {
         label: "Parsing and serializing YAML",
-        id: "/examples/parsing-serializing-yaml",
+        id: "/examples/parsing_serializing_yaml",
         type: "example",
       },
       {
         label: "Manipulating byte arrays",
-        id: "/examples/byte-manipulation",
+        id: "/examples/byte_manipulation",
         type: "example",
       },
     ],
@@ -439,7 +439,7 @@ export const sidebar = [
     items: [
       {
         label: "Build a Command Line Utility",
-        id: "/examples/build-a-command-line-utility",
+        id: "/examples/command_line_utility",
         externalURL:
           "https://www.youtube.com/watch?v=TUxj2TS5pNo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=14",
         type: "video",
@@ -456,17 +456,17 @@ export const sidebar = [
       },
       {
         label: "Command line arguments",
-        id: "/examples/command-line-arguments",
+        id: "/examples/command_line_arguments",
         type: "example",
       },
       {
         label: "Writing tests",
-        id: "/examples/writing-tests",
+        id: "/examples/writing_tests",
         type: "example",
       },
       {
         label: "Getting the Deno version",
-        id: "/examples/deno-version",
+        id: "/examples/deno_version",
         type: "example",
       },
     ],
@@ -476,32 +476,32 @@ export const sidebar = [
     items: [
       {
         label: "HTTP requests",
-        id: "/examples/http-requests",
+        id: "/examples/http_requests",
         type: "example",
       },
       {
         label: "HTTP Server: Hello world",
-        id: "/examples/http-server",
+        id: "/examples/http_server",
         type: "example",
       },
       {
         label: "HTTP server: Routing",
-        id: "/examples/http-server-routing",
+        id: "/examples/http_server_routing",
         type: "example",
       },
       {
         label: "HTTP server: Serving files",
-        id: "/examples/http-server-files",
+        id: "/examples/http_server_files",
         type: "example",
       },
       {
         label: "HTTP server: Streaming",
-        id: "/examples/http-server-streaming",
+        id: "/examples/http_server_streaming",
         type: "example",
       },
       {
         label: "HTTP server: CRUD with SQLite3",
-        id: "/examples/http-server-oak-crud-middleware-with-sqlite3-db",
+        id: "/examples/http_server_oak_crud_middleware_with_sqlite3_db",
         type: "example",
       },
       {
@@ -511,12 +511,12 @@ export const sidebar = [
       },
       {
         label: "HTTP server: WebSockets",
-        id: "/examples/http-server-websocket",
+        id: "/examples/http_server_websocket",
         type: "example",
       },
       {
         label: "Piping streams",
-        id: "/examples/piping-streams",
+        id: "/examples/piping_streams",
         type: "example",
       },
       {
@@ -526,32 +526,32 @@ export const sidebar = [
       },
       {
         label: "TCP Echo Server",
-        id: "/examples/tcp-echo-server",
+        id: "/examples/tcp_echo_server",
         type: "example",
       },
       {
         label: "TCP connector: Ping",
-        id: "/examples/tcp-connector",
+        id: "/examples/tcp_connector",
         type: "example",
       },
       {
         label: "TCP listener: Ping",
-        id: "/examples/tcp-listener",
+        id: "/examples/tcp_listener",
         type: "example",
       },
       {
         label: "TCP/TLS connector: Ping",
-        id: "/examples/tls-connector",
+        id: "/examples/tls_connector",
         type: "example",
       },
       {
         label: "TCP/TLS listener: Ping",
-        id: "/examples/tls-listener",
+        id: "/examples/tls_listener",
         type: "example",
       },
       {
         label: "Running DNS queries",
-        id: "/examples/dns-queries",
+        id: "/examples/dns_queries",
         type: "example",
       },
     ],
@@ -561,7 +561,7 @@ export const sidebar = [
     items: [
       {
         label: "Handling OS signals",
-        id: "/examples/os-signals",
+        id: "/examples/os_signals",
         type: "example",
       },
       {
@@ -576,17 +576,17 @@ export const sidebar = [
       },
       {
         label: "Subprocess Spawning",
-        id: "/examples/subprocess-running-files",
+        id: "/examples/subprocess_running_files",
         type: "example",
       },
       {
         label: "Collecting output from subprocesses",
-        id: "/examples/subprocesses-output",
+        id: "/examples/subprocesses_output",
         type: "example",
       },
       {
         label: "Reading system metrics",
-        id: "/examples/reading-system-metrics",
+        id: "/examples/reading_system_metrics",
         type: "example",
       },
       {
@@ -596,12 +596,12 @@ export const sidebar = [
       },
       {
         label: "Environment variables",
-        id: "/examples/environment-variables",
+        id: "/examples/environment_variables",
         type: "example",
       },
       {
         label: "Subprocesses: Spawning",
-        id: "/examples/subprocesses-spawn",
+        id: "/examples/subprocesses_spawn",
         type: "example",
       },
       {
@@ -616,52 +616,52 @@ export const sidebar = [
     items: [
       {
         label: "Path operations",
-        id: "/examples/path-operations",
+        id: "/examples/path_operations",
         type: "example",
       },
       {
         label: "Reading files",
-        id: "/examples/reading-files",
+        id: "/examples/reading_files",
         type: "example",
       },
       {
         label: "Writing files",
-        id: "/examples/writing-files",
+        id: "/examples/writing_files",
         type: "example",
       },
       {
         label: "Deleting files",
-        id: "/examples/deleting-files",
+        id: "/examples/deleting_files",
         type: "example",
       },
       {
         label: "Checking for file existence",
-        id: "/examples/checking-file-existence",
+        id: "/examples/checking_file_existence",
         type: "example",
       },
       {
         label: "Moving/Renaming files",
-        id: "/examples/moving-renaming-files",
+        id: "/examples/moving_renaming_files",
         type: "example",
       },
       {
         label: "Creating & removing directories",
-        id: "/examples/create-remove-directories",
+        id: "/examples/create_remove_directories",
         type: "example",
       },
       {
         label: "Watching the filesystem",
-        id: "/examples/watching-files",
+        id: "/examples/watching_files",
         type: "example",
       },
       {
         label: "Walking directories",
-        id: "/examples/walking-directories",
+        id: "/examples/walking_directories",
         type: "example",
       },
       {
         label: "Unix cat",
-        id: "/examples/unix-cat",
+        id: "/examples/unix_cat",
         type: "example",
       },
       {
@@ -671,17 +671,17 @@ export const sidebar = [
       },
       {
         label: "Temporary files & directories",
-        id: "/examples/temporary-files",
+        id: "/examples/temporary_files",
         type: "example",
       },
       {
         label: "Streaming file operations",
-        id: "/examples/streaming-files",
+        id: "/examples/streaming_files",
         type: "example",
       },
       {
         label: "Unzip gzipped file",
-        id: "/examples/unzip-gzipped-file",
+        id: "/examples/unzip_gzipped_file",
         type: "example",
       },
     ],
@@ -706,17 +706,17 @@ export const sidebar = [
       },
       {
         label: "RSASSA-PKCS1-v1_5 Signature and Verification",
-        id: "/examples/rsa-signature",
+        id: "/examples/rsa_signature",
         type: "example",
       },
       {
         label: "HMAC Generation and Verification",
-        id: "/examples/hmac-generate-verify",
+        id: "/examples/hmac_generate_verify",
         type: "example",
       },
       {
         label: "AES Encryption and Decryption",
-        id: "/examples/aes-encryption",
+        id: "/examples/aes_encryption",
         type: "example",
       },
     ],
@@ -745,8 +745,8 @@ export const sidebar = [
         type: "tutorial",
       },
       {
-        label: "Build a Real-Time WebSocket Application",
-        id: "/examples/build-a-real-time-websocket-application",
+        label: "Build a Realtime WebSocket Application",
+        id: "/examples/realtime_websocket_app",
         externalURL:
           "https://www.youtube.com/watch?v=FC4IrkHEg4A&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=15",
         type: "video",
@@ -758,17 +758,17 @@ export const sidebar = [
       },
       {
         label: "Connect to OpenAI - Chat completion",
-        id: "/examples/openai-chat-completion/",
+        id: "/examples/openai_chat_completion/",
         type: "example",
       },
       {
         label: "User Data Processing with Deno Collections",
-        id: "/examples/data-processing",
+        id: "/examples/data_processing",
         type: "example",
       },
       {
         label: "Exponential backoff",
-        id: "/examples/exponential-backoff/",
+        id: "/examples/exponential_backoff/",
         type: "example",
       },
     ],
@@ -778,7 +778,7 @@ export const sidebar = [
     items: [
       {
         label: "Deno KV watch",
-        id: "/examples/kv-watch",
+        id: "/examples/kv_watch",
         type: "example",
       },
       {
@@ -798,12 +798,12 @@ export const sidebar = [
       },
       {
         label: "UDP listener: Ping",
-        id: "/examples/udp-listener",
+        id: "/examples/udp_listener",
         type: "example",
       },
       {
         label: "UDP connector: Ping",
-        id: "/examples/udp-connector",
+        id: "/examples/udp_connector",
         type: "example",
       },
     ],

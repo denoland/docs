@@ -6,10 +6,10 @@ command: run
 
 ## Usage
 
-To run [this file](https://docs.deno.com/examples/examples/hello-world.ts) use:
+To run [this file](https://docs.deno.com/examples/scripts/hello-world.ts) use:
 
 ```console
-deno run https://docs.deno.com/examples/examples/hello-world.ts
+deno run https://docs.deno.com/examples/scripts/hello-world.ts
 ```
 
 You can also run files locally. Ensure that you are in the correct directory and

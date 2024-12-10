@@ -10,7 +10,7 @@ export const sidebar = sidebar_;
 export const toc = [];
 
 export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
-  const files = [...walkSync("./examples/examples/", { exts: [".ts"] })];
+  const files = [...walkSync("./examples/scripts/", { exts: [".ts"] })];
 
   const examples = files.map((file) => {
     const content = Deno.readTextFileSync(file.path);
