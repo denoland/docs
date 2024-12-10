@@ -66,8 +66,8 @@ console if there are errors while you work.
 
 ## Running a package.json script
 
-`package.json` scripts can be executed with the [`deno task`](/runtime/reference/cli/task/)
-command.
+`package.json` scripts can be executed with the
+[`deno task`](/runtime/reference/cli/task/) command.
 
 ## Running code from stdin
 
