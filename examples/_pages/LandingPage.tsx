@@ -83,10 +83,16 @@ export default function LandingPage() {
         {componentsPerSidebarItem}
       </div>
       <div className="fully-filtered">
-
-        <h2 class="text-2xl font-semibold sm:text-3xl md:text-4xl">Oops! You've filtered everything</h2>
-        <p class="md:text-lg mt-4">Maybe remove a filter to see some examples?</p>
-        <img src="/examples/tutorials/images/skateboard.png" alt="deno on a skateboard" />
+        <h2 class="text-2xl font-semibold sm:text-3xl md:text-4xl">
+          Oops! You've filtered everything
+        </h2>
+        <p class="md:text-lg mt-4">
+          Maybe remove a filter to see some examples?
+        </p>
+        <img
+          src="/examples/tutorials/images/skateboard.png"
+          alt="deno on a skateboard"
+        />
       </div>
       <p class="max-w-prose mx-auto text-center pt-4 mt-3">
         Need an example that isn't here? Or want to add one of your own?<br />
