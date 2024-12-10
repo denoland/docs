@@ -98,7 +98,7 @@ export default function LandingPage() {
         </p>
         <img
           src="/examples/tutorials/images/deno-educator.png"
-          alt="deno on a skateboard"
+          alt="sad Deno with a grad cap"
         />
       </div>
       <p class="max-w-prose mx-auto text-center pt-4 mt-3">
