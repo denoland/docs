@@ -1,8 +1,8 @@
-import { ExampleIcon } from "../_components/ExampleIcon.tsx";
-import { LearningList } from "../_components/LearningList.tsx";
-import { TutorialIcon } from "../_components/TutorialIcon.tsx";
-import { VideoIcon } from "../_components/VideoIcon.tsx";
-import { sidebar } from "../_data.ts";
+import { ExampleIcon } from "../examples/_components/ExampleIcon.tsx";
+import { LearningList } from "../examples/_components/LearningList.tsx";
+import { TutorialIcon } from "../examples/_components/TutorialIcon.tsx";
+import { VideoIcon } from "../examples/_components/VideoIcon.tsx";
+import { sidebar } from "../examples/_data.ts";
 
 export default function LandingPage() {
   const componentsPerSidebarItem = sidebar.map(
