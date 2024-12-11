@@ -14,7 +14,16 @@ templateEngine: [vto, md]
 For a complete list of supported rules, visit
 [the deno_lint rule documentation](https://lint.deno.land).
 
-{{ await generateLintRuleList() }}
+<ul>
+{{ for lintRule of await generateLintRuleList() }}
+  <li>
+    <b>{{ lintRule.name }}</b>
+    <pre>
+      {{ lintRule.mdContent.slice(0, 100) }}
+    </pre>
+  </li>
+{{ /for }}
+</ul>
 
 ## Ignore directives
 

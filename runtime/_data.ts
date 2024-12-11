@@ -414,10 +414,6 @@ export async function generateLintRuleList() {
   }
 
   lintRules.sort((a, b) => a.name.localeCompare(b.name));
-  let content = `<ul>`;
-  lintRules.forEach((rule) => {
-    content += `<li><b>${rule.name}</b></li>`;
-  });
-  content += `</ul>`;
-  return content;
+
+  return lintRules;
 }
