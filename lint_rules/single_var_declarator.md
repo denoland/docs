@@ -1,12 +1,12 @@
 Disallows multiple variable definitions in the same declaration statement
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const foo = 1, bar = "2";
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const foo = 1;

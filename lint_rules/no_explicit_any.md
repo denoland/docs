@@ -7,7 +7,7 @@ immediately clear what type of value is being referenced. It is better to be
 explicit about all types. For a more type-safe alternative to `any`, use
 `unknown` if you are unable to choose a more specific type.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const someNumber: any = "two";
@@ -16,7 +16,7 @@ function foo(): any {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const someNumber: string = "two";

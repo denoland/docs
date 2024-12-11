@@ -1,6 +1,6 @@
 Ensure consistent use of curly braces around JSX expressions.
 
-### Invalid:
+**Invalid:**
 
 ```tsx
 const foo = <Foo foo=<div /> />;
@@ -8,7 +8,7 @@ const foo = <Foo str={"foo"} />;
 const foo = <div>{"foo"}</div>;
 ```
 
-### Valid:
+**Valid:**
 
 ```tsx
 const foo = <Foo foo={<div />} />;

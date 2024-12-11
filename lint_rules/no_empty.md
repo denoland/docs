@@ -5,7 +5,7 @@ and can make code less readable. This rule ignores block statements that only
 contain comments. This rule also ignores empty constructors and function bodies
 (including arrow functions).
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 if (foo) {}
@@ -21,7 +21,7 @@ try {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 if (foo) {

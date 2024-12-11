@@ -4,7 +4,7 @@ Disallows the use of `eval`
 of security vulnerabilities. In addition to being slow, `eval` is also often
 unnecessary with better solutions available.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const obj = { x: "foo" };
@@ -12,7 +12,7 @@ const key = "x",
 const value = eval("obj." + key);
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const obj = { x: "foo" };

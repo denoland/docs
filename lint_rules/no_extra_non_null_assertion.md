@@ -5,7 +5,7 @@ know this value is not null. Specifying this operator more than once in a row,
 or in combination with the optional chaining operator (`?`) is confusing and
 unnecessary.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const foo: { str: string } | null = null;
@@ -19,7 +19,7 @@ function anotherFunc(bar?: { str: string }) {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const foo: { str: string } | null = null;

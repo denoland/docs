@@ -5,7 +5,7 @@ In general, the primary reason to use async functions is to use await
 expressions or await using declarations inside. If an async function has
 neither, it is most likely an unintentional mistake.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 async function f1() {
@@ -31,7 +31,7 @@ class MyClass {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 await asyncFunction();

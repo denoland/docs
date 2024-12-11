@@ -1,7 +1,7 @@
 Disallow duplicated JSX props. Later props will always overwrite earlier props
 often leading to unexpected results.
 
-### Invalid:
+**Invalid:**
 
 ```tsx
 <div id="1" id="2" />;
@@ -9,7 +9,7 @@ often leading to unexpected results.
 <App a {...b} a />;
 ```
 
-### Valid:
+**Valid:**
 
 ```tsx
 <div id="1" />

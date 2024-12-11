@@ -11,7 +11,7 @@ This lint rule suggests using const assertion because it will generally lead to
 a safer code. For more details about const assertion, see
 [the official handbook](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions).
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 let a: 2 = 2; // type annotation
@@ -20,7 +20,7 @@ let c = <2> 2; // type assertion
 let d = { foo: 1 as 1 }; // type assertion
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 let a = 2 as const;

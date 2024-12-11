@@ -1,13 +1,13 @@
 Pass children as JSX children instead of as an attribute.
 
-### Invalid:
+**Invalid:**
 
 ```tsx
 <div children="foo" />
 <div children={[<Foo />, <Bar />]} />
 ```
 
-### Valid:
+**Valid:**
 
 ```tsx
 <div>foo</div>

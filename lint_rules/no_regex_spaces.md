@@ -14,7 +14,7 @@ const re = /foo   bar/;
 const re = /foo {3}var/;
 ```
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const re1 = /  /;
@@ -28,7 +28,7 @@ const re7 = new RegExp(" a b  c d ");
 const re8 = new RegExp("foo  {3}bar");
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const re1 = /foo/;

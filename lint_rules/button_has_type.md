@@ -1,7 +1,7 @@
 Checks that a `<button>` JSX element has a valid `type` attribute. The default
 value is `"submit"` which is often not the desired behavior.
 
-### Invalid:
+**Invalid:**
 
 ```tsx
 <button />
@@ -11,7 +11,7 @@ value is `"submit"` which is often not the desired behavior.
 <button type={2} />
 ```
 
-### Valid:
+**Valid:**
 
 ```tsx
 <button type="submit" />

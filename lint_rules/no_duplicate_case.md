@@ -3,7 +3,7 @@ Disallows using the same case clause in a switch statement more than once
 When you reuse a case test expression in a `switch` statement, the duplicate
 case will never be reached meaning this is almost always a bug.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const someText = "a";
@@ -19,7 +19,7 @@ switch (someText) {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const someText = "a";

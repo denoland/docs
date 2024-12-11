@@ -2,14 +2,14 @@ Disallows the use of top level await expressions.
 
 Top level await cannot be used when distributing CommonJS/UMD via dnt.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 await foo();
 for await (item of items) {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 async function foo() {

@@ -3,13 +3,13 @@ Disallows the declaration of an empty enum
 An enum with no members serves no purpose. This rule will capture these
 situations as either unnecessary code or a mistaken empty implementation.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 enum Foo {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 enum Foo {

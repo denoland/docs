@@ -11,7 +11,7 @@ As for functions and parameters, JavaScript just treats these as runtime errors,
 throwing `SyntaxError` when being run. It's also beneficial to detect this sort
 of errors statically.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 var a = 3;
@@ -33,7 +33,7 @@ function e(arg: number) {
 function f(arg: number, arg: string) {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 var a = 3;

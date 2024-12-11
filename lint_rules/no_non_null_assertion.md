@@ -6,7 +6,7 @@ tell the type system new information is often a sign that code is not fully
 type-safe. It's generally better to structure program logic so that TypeScript
 understands when values may be nullable.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 interface Example {
@@ -17,7 +17,7 @@ declare const example: Example;
 const includes = example.property!.includes("foo");
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 interface Example {

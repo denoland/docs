@@ -7,7 +7,7 @@ constructors.
 
 [`ReferenceError`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 class A extends B {
@@ -25,7 +25,7 @@ class C extends D {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 class A extends B {

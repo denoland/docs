@@ -9,7 +9,7 @@ A common solution is to refactor the code to run the loop body asynchronously
 and capture the promises generated. After the loop finishes you can then await
 all the promises at once.
 
-### Invalid:
+**Invalid:**
 
 ```javascript
 async function doSomething(items) {
@@ -22,7 +22,7 @@ async function doSomething(items) {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```javascript
 async function doSomething(items) {

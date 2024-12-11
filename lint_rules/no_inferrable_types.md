@@ -5,7 +5,7 @@ their type. Specifying their type can add additional verbosity to the code. For
 example, with `const x: number = 5`, specifying `number` is unnecessary as it is
 obvious that `5` is a number.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const a: bigint = 10n;
@@ -34,7 +34,7 @@ class Foo {
 function fn(s: number = 5, t: boolean = true) {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const a = 10n;

@@ -1,6 +1,6 @@
 Disallow the use of undeclared variables
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const foo = someFunction();

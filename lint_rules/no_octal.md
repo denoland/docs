@@ -7,14 +7,14 @@ mode throws `SyntaxError` for the expression.
 Since ES2015, the other prefix `0o` has been introduced as an alternative. This
 new one is always encouraged to use in today's code.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const a = 042;
 const b = 7 + 042;
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const a = 0o42;

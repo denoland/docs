@@ -9,7 +9,7 @@ itself, the results of comparisons to `NaN` are confusing:
 Therefore, this rule makes you use the `isNaN()` or `Number.isNaN()` to judge
 the value is `NaN` or not.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 if (foo == NaN) {
@@ -31,7 +31,7 @@ switch (foo) {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 if (isNaN(foo)) {

@@ -4,14 +4,14 @@ Disallow non-null assertions after an optional chain expression
 `undefined`. Using a `!` non-null assertion to assert the result of an `?.`
 optional chain expression is non-nullable is likely wrong.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 foo?.bar!;
 foo?.bar()!;
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 foo?.bar;

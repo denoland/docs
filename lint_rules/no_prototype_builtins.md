@@ -11,7 +11,7 @@ properties from `Object.prototype` and attempt to call the following methods:
 Instead, it's always encouraged to call these methods from `Object.prototype`
 explicitly.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const a = foo.hasOwnProperty("bar");
@@ -19,7 +19,7 @@ const b = foo.isPrototypeOf("bar");
 const c = foo.propertyIsEnumerable("bar");
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const a = Object.prototype.hasOwnProperty.call(foo, "bar");

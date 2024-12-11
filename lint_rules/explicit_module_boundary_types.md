@@ -5,7 +5,7 @@ inputs and outputs of a module (known as the module boundary). This will make it
 very clear to any users of the module how to supply inputs and handle outputs in
 a type safe manner.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 // Missing return type (e.g. void)
@@ -22,7 +22,7 @@ export function isValid() {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 // Typed input parameters and return value

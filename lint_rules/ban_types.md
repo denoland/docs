@@ -17,7 +17,7 @@ safety with the function.
 Finally, `Object` and `{}` means "any non-nullish value" rather than "any object
 type". `object` is a good choice for a meaning of "any object type".
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 let a: Boolean;
@@ -29,7 +29,7 @@ let f: Object;
 let g: {};
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 let a: boolean;

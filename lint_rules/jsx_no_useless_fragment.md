@@ -1,7 +1,7 @@
 Fragments are only necessary at the top of a JSX "block" and only when there are
 multiple children. Fragments are not needed in other scenarios.
 
-### Invalid:
+**Invalid:**
 
 ```tsx
 <></>
@@ -10,7 +10,7 @@ multiple children. Fragments are not needed in other scenarios.
 <p>foo <>bar</></p>
 ```
 
-### Valid:
+**Valid:**
 
 ```tsx
 <>{foo}</>

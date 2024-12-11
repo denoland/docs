@@ -5,7 +5,7 @@ whether a named export is present.
 
 ["ambient" namespaces]: https://www.typescriptlang.org/docs/handbook/namespaces.html#ambient-namespaces
 
-### Invalid:
+**Invalid:**
 
 ```ts
 // foo.ts or foo.d.ts
@@ -15,7 +15,7 @@ declare namespace ns {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```ts
 // foo.ts or foo.d.ts

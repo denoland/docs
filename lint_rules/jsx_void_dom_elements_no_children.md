@@ -3,14 +3,14 @@ HTML. See
 [`Void element` article on MDN](https://developer.mozilla.org/en-US/docs/Glossary/Void_element)
 for more information.
 
-### Invalid:
+**Invalid:**
 
 ```tsx
 <br>foo</br>
 <img src="a.jpg">foo</img>
 ```
 
-### Valid:
+**Valid:**
 
 ```tsx
 <br />

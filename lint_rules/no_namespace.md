@@ -13,7 +13,7 @@ cases:
 
 ["ambient" namespaces]: https://www.typescriptlang.org/docs/handbook/namespaces.html#ambient-namespaces
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 // foo.ts
@@ -26,7 +26,7 @@ namespace ns {}
 // all usage of `module` and `namespace` keywords are allowed in `.d.ts`
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 // foo.ts

@@ -6,7 +6,7 @@ points we use the `yield` keyword. In other words, it makes no sense at all to
 create generator functions that contain no `yield` keyword, since such functions
 could be written as normal functions.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 function* f1() {
@@ -14,7 +14,7 @@ function* f1() {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 function* f1() {

@@ -4,7 +4,7 @@ reference (`#issue`).
 TODOs without reference to a user or an issue become stale with no easy way to
 get more information.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 // TODO Improve calc engine
@@ -21,7 +21,7 @@ export function calcValue(): number {}
 export function calcValue(): number {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 // TODO(djones) Improve calc engine

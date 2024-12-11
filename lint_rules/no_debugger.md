@@ -5,7 +5,7 @@ environment and start the debugger at the statement. Modern debuggers and
 tooling no longer need this statement and leaving it in can cause the execution
 of your code to stop in production.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 function isLongString(x: string) {
@@ -14,7 +14,7 @@ function isLongString(x: string) {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 function isLongString(x: string) {

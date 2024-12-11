@@ -5,7 +5,7 @@ result of mistyping the equality operator, `==`. If an assignment within a
 conditional statement is required then this rule allows it by wrapping the
 assignment in parentheses.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 let x;
@@ -22,7 +22,7 @@ function setHeight(someNode) {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 let x;

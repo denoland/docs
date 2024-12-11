@@ -25,7 +25,7 @@ If you want to declare unused variables intentionally, prefix them with the
 underscore character `_`, like `_a`. This rule ignores variables that are
 prefixed with `_`.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const a = 0;
@@ -55,7 +55,7 @@ export function e(x: number): number {
 const f = "unused variable";
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const a = 0;

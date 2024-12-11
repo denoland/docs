@@ -4,7 +4,7 @@ Because the control flow statements (`return`, `throw`, `break` and `continue`)
 unconditionally exit a block of code, any statements after them cannot be
 executed.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 function foo() {
@@ -48,7 +48,7 @@ for (;;) {}
 console.log("done");
 ```
 
-### Valid
+**Valid:**
 
 ```typescript
 function foo() {

@@ -4,7 +4,7 @@ Defined constructors of derived classes (e.g. `class A extends B`) must always
 call `super()`. Classes which extend non-constructors (e.g.
 `class A extends null`) must not have a constructor.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 class A {}
@@ -30,7 +30,7 @@ class E extends null {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 class A {}

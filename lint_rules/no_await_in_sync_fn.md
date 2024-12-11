@@ -4,7 +4,7 @@ Using the `await` keyword inside a non-async function is a syntax error. To be
 able to use `await` inside a function, the function needs to be marked as async
 via the `async` keyword
 
-### Invalid:
+**Invalid:**
 
 ```javascript
 function foo() {
@@ -20,7 +20,7 @@ const fooFn = () => {
 };
 ```
 
-### Valid:
+**Valid:**
 
 ```javascript
 async function foo() {

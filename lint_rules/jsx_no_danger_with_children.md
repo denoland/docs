@@ -1,7 +1,7 @@
 Using JSX children together with `dangerouslySetInnerHTML` is invalid as they
 will be ignored.
 
-### Invalid:
+**Invalid:**
 
 ```tsx
 <div dangerouslySetInnerHTML={{ __html: "<h1>hello</h1>" }}>
@@ -9,7 +9,7 @@ will be ignored.
 </div>;
 ```
 
-### Valid:
+**Valid:**
 
 ```tsx
 <div dangerouslySetInnerHTML={{ __html: "<h1>hello</h1>" }} />;

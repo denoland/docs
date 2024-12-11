@@ -4,13 +4,13 @@ Disallows the use of `new` operators with built-in `Symbol`s
 with the `new` operator by mistake. This rule detects such wrong usage of the
 `new` operator.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const foo = new Symbol("foo");
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const foo = Symbol("foo");

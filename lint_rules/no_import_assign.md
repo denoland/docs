@@ -4,7 +4,7 @@ ES module import bindings should be treated as read-only since modifying them
 during code execution will likely result in runtime errors. It also makes for
 poor code readability and difficult maintenance.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 import defaultMod, { namedMod } from "./mod.js";
@@ -16,7 +16,7 @@ modNameSpace.someExportedMember = "hello";
 modNameSpace = {};
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 import defaultMod, { namedMod } from "./mod.js";

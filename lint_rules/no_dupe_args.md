@@ -4,7 +4,7 @@ If you supply multiple arguments of the same name to a function, the last
 instance will shadow the preceding one(s). This is most likely an unintentional
 typo.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 function withDupes(a, b, a) {
@@ -12,7 +12,7 @@ function withDupes(a, b, a) {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 function withoutDupes(a, b, c) {

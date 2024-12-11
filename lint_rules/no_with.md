@@ -5,7 +5,7 @@ and compatibility issues. For more details, see [with - JavaScript | MDN].
 
 [with - JavaScript | MDN]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 with (someVar) {

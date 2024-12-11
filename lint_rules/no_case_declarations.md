@@ -7,7 +7,7 @@ assigned, which only happens if that case/default is reached. This can lead to
 unexpected errors. The solution is to ensure each `case` or `default` block is
 wrapped in brackets to scope limit the declarations.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 switch (choice) {
@@ -28,7 +28,7 @@ switch (choice) {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 switch (choice) {

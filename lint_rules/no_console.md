@@ -9,7 +9,7 @@ disallowing the use of `console`.
 This rule is especially useful in libraries where you almost never want to
 output to the console.
 
-### Invalid
+**Invalid:**
 
 ```typescript
 console.log("Debug message");
@@ -23,7 +23,7 @@ function log() {
 }
 ```
 
-### Valid
+**Valid:**
 
 It is recommended to explicitly enable the console via a `deno-lint-ignore`
 comment for any calls where you actually want to use it.

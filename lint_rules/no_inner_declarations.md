@@ -10,7 +10,7 @@ code. Because these variables are hoisted to the module root, it is best to
 declare them there for clarity. Note that variables declared with `let` or
 `const` are block scoped and therefore this rule does not apply to them.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 if (someBool) {
@@ -24,7 +24,7 @@ function someFunc(someVal: number): void {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 function doSomething() {}

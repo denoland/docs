@@ -13,7 +13,7 @@ Of note:
 - This rule also applies to variables imported or exported via ES modules, but
   not to object properties of those variables
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 let first_name = "Ichigo";
@@ -41,7 +41,7 @@ interface snake_case_interface {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 let firstName = "Ichigo";

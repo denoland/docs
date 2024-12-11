@@ -4,7 +4,7 @@ Javascript allows for the reassignment of a function definition. This is
 generally a mistake on the developers part, or poor coding practice as code
 readability and maintainability will suffer.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 function foo() {}
@@ -18,7 +18,7 @@ myFunc = existingFunc;
 function myFunc() {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 function foo() {}

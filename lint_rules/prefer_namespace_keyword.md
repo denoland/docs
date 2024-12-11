@@ -8,7 +8,7 @@ always use `namespace` instead whenever we write TypeScript these days. See
 [TypeScript v1.5 release note](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-5.html#namespace-keyword)
 for more details.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 module modA {}
@@ -16,7 +16,7 @@ module modA {}
 declare module modB {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 namespace modA {}

@@ -7,14 +7,14 @@ directives is generally discouraged in favor of ECMAScript Module imports. This
 rule reports on the use of `/// <reference path="..." />`,
 `/// <reference types="..." />`, or `/// <reference lib="..." />` directives.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 /// <reference types="foo" />
 import * as foo from "foo";
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 import * as foo from "foo";

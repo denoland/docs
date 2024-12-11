@@ -9,7 +9,7 @@ A simple fix for the points mentioned above is the use of self documenting
 constants that will end up working as "named booleans", that allow for a better
 understanding on what the parameters mean in the context of the function call.
 
-### Invalid
+**Invalid:**
 
 ```typescript
 function redraw(allViews: boolean, inline: boolean) {
@@ -28,7 +28,7 @@ function enableLogs(enable: boolean) {
 enableLogs(true);
 ```
 
-### Valid
+**Valid:**
 
 ```typescript
 function redraw(allViews: boolean, inline: boolean) {

@@ -1,7 +1,7 @@
 Ensure the `key` attribute is present when passing iterables into JSX. It allows
 frameworks to optimize checking the order of elements.
 
-### Invalid:
+**Invalid:**
 
 ```tsx
 const foo = [<div>foo</div>];
@@ -10,7 +10,7 @@ const foo = [<>foo</>];
 Array.from([1, 2, 3], () => <div />);
 ```
 
-### Valid:
+**Valid:**
 
 ```tsx
 const foo = [<div key="a">foo</div>];

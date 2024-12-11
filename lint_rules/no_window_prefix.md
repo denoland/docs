@@ -13,7 +13,7 @@ different meanings in Workers. In other words, this lint rule complains about
 the use of `window` only if it's completely replaceable with `self`,
 `globalThis`, or no prefix.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const a = await window.fetch("https://deno.land");
@@ -21,7 +21,7 @@ const a = await window.fetch("https://deno.land");
 const b = window.Deno.metrics();
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const a1 = await fetch("https://deno.land");

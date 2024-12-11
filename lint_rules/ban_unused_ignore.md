@@ -9,7 +9,7 @@ likely to confuse future code readers, and to make matters worse, might hide
 future lint errors unintentionally. To prevent such situations, this rule
 detects unused, superfluous ignore directives.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 // Actually this line is valid since `export` means "used",
@@ -18,7 +18,7 @@ detects unused, superfluous ignore directives.
 export const foo = 42;
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 export const foo = 42;

@@ -4,7 +4,7 @@ Control characters are invisible characters in the ASCII range of 0-31. It is
 uncommon to use these in a regular expression and more often it is a mistake in
 the regular expression.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 // Examples using ASCII (31) Carriage Return (hex x0d)
@@ -14,7 +14,7 @@ const pattern3 = new RegExp("\\x0d");
 const pattern4 = new RegExp("\\u000d");
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 // Examples using ASCII (32) Space (hex x20)

@@ -22,7 +22,7 @@ as this cannot be guaranteed. An exception to this is comparing the results of
 two `typeof` operations as these are both guaranteed to return on of the above
 strings.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 // typo
@@ -38,7 +38,7 @@ typeof baz === anotherVariable;
 typeof foo == 5;
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 typeof foo === "undefined";

@@ -17,9 +17,9 @@ the `types` directive.
 [v1.9.2]: https://deno.land/manual@v1.9.2/typescript/types#using-the-triple-slash-reference-directive
 [the latest manual]: https://deno.land/manual/typescript/types#using-the-triple-slash-reference-directive
 
-### Invalid:
+**Invalid:**
 
-#### JavaScript
+_JavaScript_
 
 ```javascript
 /// <reference path="./mod.d.ts" />
@@ -29,7 +29,7 @@ the `types` directive.
 // ... the rest of the JavaScript ...
 ```
 
-#### TypeScript
+_TypeScript_
 
 ```typescript
 /// <reference foo="bar" />
@@ -37,9 +37,9 @@ the `types` directive.
 // ... the rest of the TypeScript ...
 ```
 
-### Valid:
+**Valid:**
 
-#### JavaScript
+_JavaScript_
 
 ```javascript
 /// <reference types="./mod.d.ts" />
@@ -48,7 +48,7 @@ the `types` directive.
 // ... the rest of the JavaScript ...
 ```
 
-#### TypeScript
+_TypeScript_
 
 ```typescript
 /// <reference types="./mod.d.ts" />

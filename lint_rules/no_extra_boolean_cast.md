@@ -5,7 +5,7 @@ automatically coerced into a boolean. Therefore, techniques such as double
 negation (`!!foo`) or casting (`Boolean(foo)`) are unnecessary and produce the
 same result as without the negation or casting.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 if (!!foo) {}
@@ -14,7 +14,7 @@ while (!!foo) {}
 for (; Boolean(foo);) {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 if (foo) {}

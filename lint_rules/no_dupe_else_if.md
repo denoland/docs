@@ -4,7 +4,7 @@ When you reuse a condition in an `if`/`else if` statement, the duplicate
 condition will never be reached (without unusual side-effects) meaning this is
 almost always a bug.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 if (a) {}
@@ -16,7 +16,7 @@ else if (a === 6) {}
 else if (a === 5) {} // duplicate of condition above
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 if (a) {}

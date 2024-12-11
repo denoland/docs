@@ -4,7 +4,7 @@ The `window` global is no longer available in Deno. Deno does not have a window
 and `typeof window === "undefined"` is often used to tell if the code is running
 in the browser.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const a = await window.fetch("https://deno.land");
@@ -17,7 +17,7 @@ window.addEventListener("load", () => {
 });
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const a1 = await fetch("https://deno.land");

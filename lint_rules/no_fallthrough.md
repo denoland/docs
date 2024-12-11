@@ -8,7 +8,7 @@ enforces that you either end each case statement with a break statement or an
 explicit comment that fallthrough was intentional. The fallthrough comment must
 contain one of `fallthrough`, `falls through` or `fall through`.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 switch (myVar) {
@@ -21,7 +21,7 @@ switch (myVar) {
 // If myVar = 1, outputs both `1` and `2`.  Was this intentional?
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 switch (myVar) {

@@ -4,7 +4,7 @@ A label that is declared but never used is most likely developer's mistake. If
 that label is meant to be used, then write a code so that it will be used.
 Otherwise, remove the label.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 LABEL1:
@@ -23,7 +23,7 @@ for (const x of xs) {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 LABEL1:

@@ -4,7 +4,7 @@ Explicit return types have a number of advantages including easier to understand
 code and better type safety. It is clear from the signature what the return type
 of the function (if any) will be.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 function someCalc() {
@@ -15,7 +15,7 @@ function anotherCalc() {
 }
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 function someCalc(): number {

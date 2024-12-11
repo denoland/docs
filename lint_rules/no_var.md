@@ -5,13 +5,13 @@ variables. Block scoped variables are defined using `const` and `let` keywords.
 not accessible outside their block scope. On the other hand, variables defined
 using `var` keyword are only limited by their function scope.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 var foo = "bar";
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const foo = 1;

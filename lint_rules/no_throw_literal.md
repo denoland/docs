@@ -5,7 +5,7 @@ object using the `Error` object as base objects for user-defined exceptions. The
 fundamental benefit of `Error` objects is that they automatically keep track of
 where they were built and originated.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 throw "error";
@@ -14,7 +14,7 @@ throw undefined;
 throw null;
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 throw new Error("error");

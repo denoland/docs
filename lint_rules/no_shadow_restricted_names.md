@@ -31,7 +31,7 @@ function foo() {
 Of course, shadowing like this most likely confuse other developers and should
 be avoided. This lint rule detects and warn them.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const undefined = 42;
@@ -46,7 +46,7 @@ try {
 } catch (eval) {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 // If not assigned a value, `undefined` may be shadowed

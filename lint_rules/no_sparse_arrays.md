@@ -12,13 +12,13 @@ lead to unexpected behavior:
 [1, undefined, 2].flatMap((item) => item); // => [1, undefined, 2]
 ```
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const items = ["foo", , "bar"];
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const items = ["foo", "bar"];

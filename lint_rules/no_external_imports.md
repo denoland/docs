@@ -15,13 +15,13 @@ Disallows the use of external imports
   - so if you'd like to follow the "deps.ts convention" or to use import maps,
     this rule is for you.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 import { assertEquals } from "https://deno.land/std@0.126.0/testing/asserts.ts";
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 import { assertEquals } from "./deps.ts";

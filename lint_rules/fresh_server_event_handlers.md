@@ -7,7 +7,7 @@ will have no effect.
 Note that this rule only applies to server components inside the `routes/`
 folder, not to fresh islands or any other components.
 
-### Invalid:
+**Invalid:**
 
 ```jsx
 <button onClick={() => {}} />
@@ -15,7 +15,7 @@ folder, not to fresh islands or any other components.
 <my-custom-element foo={() => {}} />
 ```
 
-### Valid:
+**Valid:**
 
 ```jsx
 <button />

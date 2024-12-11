@@ -14,7 +14,7 @@ Deno's internal JavaScript code. If you want to make sure your codebase is made
 up of ASCII characters only (e.g. want to disallow non-ASCII identifiers) for
 some reasons, then this rule will be helpful.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const π = Math.PI;
@@ -32,7 +32,7 @@ function こんにちは(名前: string) {
 // U+201C
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const pi = Math.PI;

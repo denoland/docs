@@ -20,7 +20,7 @@ detecting and warning [`var`] variables.
 [`const`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const
 [`var`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 let a = 0;
@@ -40,7 +40,7 @@ let e;
 e = 2;
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 // uninitialized variable is allowed

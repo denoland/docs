@@ -66,7 +66,7 @@ obj.doSomethingLater();
 This example is taken from
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const self = this;
@@ -80,7 +80,7 @@ const bar = () => {
 };
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const self = "this";

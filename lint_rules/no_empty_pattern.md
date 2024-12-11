@@ -3,7 +3,7 @@ Disallows the use of empty patterns in destructuring
 In destructuring, it is possible to use empty patterns such as `{}` or `[]`
 which have no effect, most likely not what the author intended.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 // In these examples below, {} and [] are not object literals or empty arrays,
@@ -16,7 +16,7 @@ function myFunc({}) {}
 function myFunc([]) {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const { a } = someObj;

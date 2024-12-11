@@ -12,7 +12,7 @@ const foo: any = 42;
 This rule checks for the validity of the specified rule names (i.e. whether
 `deno_lint` provides the rule or not).
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 // typo
@@ -24,7 +24,7 @@ console.assert(x == 42);
 const b = "b";
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 // deno-lint-ignore eq-eq-eq

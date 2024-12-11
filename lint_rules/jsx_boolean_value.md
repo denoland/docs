@@ -1,14 +1,14 @@
 Enforce a consistent JSX boolean value style. Passing `true` as the boolean
 value can be omitted with the shorthand syntax.
 
-### Invalid:
+**Invalid:**
 
 ```tsx
 const foo = <Foo isFoo={true} />;
 const foo = <Foo isFoo={false} />;
 ```
 
-### Valid:
+**Valid:**
 
 ```tsx
 const foo = <Foo isFoo />;

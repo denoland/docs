@@ -1,7 +1,7 @@
 Spreading the same expression twice is typically a mistake and causes
 unnecessary computations.
 
-### Invalid:
+**Invalid:**
 
 ```tsx
 <div {...foo} {...foo} />
@@ -9,7 +9,7 @@ unnecessary computations.
 <Foo {...foo.bar} {...foo.bar} />
 ```
 
-### Valid:
+**Valid:**
 
 ```tsx
 <div {...foo} />

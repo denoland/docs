@@ -5,7 +5,7 @@ Disallows the deletion of variables
 Setting `strict` mode on will raise a syntax error when attempting to delete a
 variable.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const a = 1;
@@ -16,7 +16,7 @@ delete b; // would return false
 delete c; // would return false
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 let obj = {

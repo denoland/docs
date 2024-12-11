@@ -4,7 +4,7 @@ Self assignments like `a = a;` have no effect at all. If there are self
 assignments in the code, most likely it means that the author is still in the
 process of refactoring and there's remaining work they have to do.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 a = a;
@@ -15,7 +15,7 @@ a = a;
 a.b = a.b;
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 let a = a;

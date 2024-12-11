@@ -4,7 +4,7 @@ Using sync functions like `Deno.readTextFileSync` blocks the deno event loop so
 it's not recommended to use it inside of an async function, because it stops
 progress of all other async tasks.
 
-### Invalid:
+**Invalid:**
 
 ```javascript
 async function foo() {
@@ -20,7 +20,7 @@ const fooFn = async () => {
 };
 ```
 
-### Valid:
+**Valid:**
 
 ```javascript
 async function foo() {

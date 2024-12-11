@@ -11,7 +11,7 @@ they look like constructors:
 Calling these as functions would result in runtime errors. This rule statically
 prevents such wrong usage of them.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const math = Math();
@@ -27,7 +27,7 @@ const atomics = Atomics();
 const newAtomics = new Atomics();
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 const area = (radius: number): number => Math.PI * radius * radius;

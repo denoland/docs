@@ -9,7 +9,7 @@ the linter is quite beneficial.
 Note that returning without a value is allowed; this is a useful technique to do
 early-return from a function.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 const a = {
@@ -33,7 +33,7 @@ const c = {
 };
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 // return without a value is allowed since it is used to do early-return

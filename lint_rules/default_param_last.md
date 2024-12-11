@@ -5,14 +5,14 @@ the function call without mapping the function inputs to different parameters
 which is confusing and error prone. Specifying them last allows them to be left
 out without changing the semantics of the other parameters.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 function f(a = 2, b) {}
 function f(a = 5, b, c = 5) {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 function f() {}

@@ -14,14 +14,14 @@ idea for several reasons:
   the new Promise constructor can be reduced, extracting the async code and
   changing it to be synchronous.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 new Promise(async function (resolve, reject) {});
 new Promise(async (resolve, reject) => {});
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 new Promise(function (resolve, reject) {});

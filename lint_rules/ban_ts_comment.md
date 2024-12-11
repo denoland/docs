@@ -4,7 +4,7 @@ Typescript directives reduce the effectiveness of the compiler, something which
 should only be done in exceptional circumstances. The reason why should be
 documented in a comment alongside the directive.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 // @ts-expect-error
@@ -21,7 +21,7 @@ let a: number = "I am a string";
 let a: number = "I am a string";
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 // @ts-expect-error: Temporary workaround (see ticket #422)

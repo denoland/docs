@@ -6,14 +6,14 @@ value. On the other hand `==` and `!=` do type coercion before value checking
 which can lead to unexpected results. For example `5 == "5"` is `true`, while
 `5 === "5"` is `false`.
 
-### Invalid:
+**Invalid:**
 
 ```typescript
 if (a == 5) {}
 if ("hello world" != input) {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 if (a === 5) {}

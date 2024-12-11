@@ -3,7 +3,7 @@ Requires overload signatures to be adjacent to each other.
 Overloaded signatures which are not next to each other can lead to code which is
 hard to read and maintain.
 
-### Invalid:
+**Invalid:**
 
 (`bar` is declared in-between `foo` overloads)
 
@@ -41,7 +41,7 @@ export function bar(): void {}
 export function foo(sn: string | number): void {}
 ```
 
-### Valid:
+**Valid:**
 
 (`bar` is declared after `foo`)
 

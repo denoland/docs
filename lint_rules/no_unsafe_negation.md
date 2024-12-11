@@ -12,7 +12,7 @@ they want it to behave just like `!(key in someObject)`, but actually it behaves
 like `(!key) in someObject`. This lint rule warns such usage of `!` operator so
 it will be less confusing.
 
-### Invalid:
+**Invalid:**
 
 <!-- deno-fmt-ignore -->
 
@@ -21,7 +21,7 @@ if (!key in object) {}
 if (!foo instanceof Foo) {}
 ```
 
-### Valid:
+**Valid:**
 
 ```typescript
 if (!(key in object)) {}

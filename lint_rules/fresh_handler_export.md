@@ -5,7 +5,7 @@ rendering happens. They are expected to be available as a named export called
 `handler`. This rule checks for when the export was incorrectly named `handlers`
 instead of `handler`.
 
-### Invalid:
+**Invalid:**
 
 ```js
 export const handlers = {
@@ -16,7 +16,7 @@ export function handlers() {}
 export async function handlers() {}
 ```
 
-### Valid:
+**Valid:**
 
 ```jsx
 export const handler = {

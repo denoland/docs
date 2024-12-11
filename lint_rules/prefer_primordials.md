@@ -22,7 +22,7 @@ The second line of this example should be:
 const evens = primordials.ArrayPrototypeFilter(arr, (val) => val % 2 === 0);
 ```
 
-### Invalid:
+**Invalid:**
 
 ```javascript
 const arr = new Array();
@@ -34,7 +34,7 @@ const i = parseInt("42");
 const { ownKeys } = Reflect;
 ```
 
-### Valid:
+**Valid:**
 
 ```javascript
 const { Array } = primordials;
