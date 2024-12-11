@@ -41,8 +41,9 @@ to install the dependencies
 deno install
 ```
 
-Next.js has some dependencies that still rely on `Object.prototype.__proto__`, so you need to allow it first.
-In a new `deno.json` file, add the following lines:
+Next.js has some dependencies that still rely on `Object.prototype.__proto__`,
+so you need to allow it. In a new `deno.json` file, add the following
+lines:
 
 ```json deno.json
 {
