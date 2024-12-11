@@ -133,7 +133,6 @@ html {
   scroll-timeline: --showScrollTop vertical;
 }
 
-
 @keyframes showToTop {
   0% {
     opacity: 0;

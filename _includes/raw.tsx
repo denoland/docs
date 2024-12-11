@@ -49,7 +49,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
           </aside>
         </>
       )}
-      <div style={{ scrollbarGutter: "stable" }} >
+      <div style={{ scrollbarGutter: "stable" }}>
         {props.children}
         {reference && <props.comp.ToTop />}
         {!reference && <props.comp.Footer />}

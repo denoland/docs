@@ -18,7 +18,7 @@ export const sidebar = [
       {
         label: "Node APIs",
         id: "/api/node/",
-      }
+      },
     ],
   },
 ];
