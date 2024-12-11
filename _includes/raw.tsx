@@ -3,14 +3,6 @@ export const layout = "layout.tsx";
 export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
   const reference = props.url.startsWith("/api");
 
-  if (reference) {
-    return (
-      <div>
-        {props.children}
-      </div>
-    );
-  }
-
   return (
     <>
       {props.sidebar && (
@@ -68,7 +60,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
         style={{ scrollbarGutter: "stable" }}
       >
         {props.children}
-        <props.comp.Footer />
+        {!reference && <props.comp.Footer />}
       </div>
     </>
   );
