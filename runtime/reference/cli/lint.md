@@ -6,12 +6,21 @@ oldUrl:
  - /runtime/manual/tools/linter/
  - /runtime/reference/cli/linter/
 command: lint
+templateEngine: [vto, md]
 ---
 
 ## Available rules
 
 For a complete list of supported rules, visit
 [the deno_lint rule documentation](https://lint.deno.land).
+
+{{ for lintRule of await generateLintRuleList() }}
+
+### {{ lintRule.name }}
+
+{{ lintRule.mdContent }}
+
+{{ /for }}
 
 ## Ignore directives
 
