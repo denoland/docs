@@ -6,6 +6,7 @@ oldUrl:
  - /runtime/manual/tools/linter/
  - /runtime/reference/cli/linter/
 command: lint
+templateEngine: [vto, md]
 ---
 
 ## Available rules
@@ -13,9 +14,7 @@ command: lint
 For a complete list of supported rules, visit
 [the deno_lint rule documentation](https://lint.deno.land).
 
-This is some JSX:
-
-{ 2 + 2 }
+{{ await generateLintRuleList() }}
 
 ## Ignore directives
 

@@ -205,6 +205,7 @@ site.ignore(
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
+  (path) => path.includes("/lint_rules"),
   "examples",
   // "deploy",
   // "examples.page.tsx",
