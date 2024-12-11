@@ -25,8 +25,8 @@ export default function Sidebar(
         (
           <ul className="xl:hidden">
             <SidebarTopNav name="Runtime" url="/runtime/" />
-            <SidebarTopNav name="Examples" url="/examples/" />
             <SidebarTopNav name="API reference" url="/api/deno" />
+            <SidebarTopNav name="Examples" url="/examples/" />
             <SidebarTopNav name="Deploy" url="/deploy/" />
             <SidebarTopNav name="Subhosting" url="/subhosting/" />
           </ul>
@@ -37,6 +37,7 @@ export default function Sidebar(
             section={section}
             search={props.search}
             url={props.url}
+            headerPath={props.headerPath}
           />
         ))}
       </ul>
@@ -156,7 +157,7 @@ function SidebarCategory(props: {
     if (typeof item === "string") {
       return item === props.url;
     }
-    return item.id === props.url;
+    return typeof item === "object" && "id" in item && item.id === props.url;
   });
 
   return (
@@ -187,7 +188,21 @@ function SidebarCategory(props: {
         data-accordion-content
       >
         {props.item.items.map((item) => (
-          <SidebarItem item={item} search={props.search} url={props.url} />
+          typeof item === "object" && "items" in item
+            ? (
+              <SidebarCategory
+                item={item}
+                url={props.url}
+                search={props.search}
+              />
+            )
+            : (
+              <SidebarItem
+                item={item}
+                search={props.search}
+                url={props.url}
+              />
+            )
         ))}
       </ul>
     </>
