@@ -63,8 +63,8 @@ ok | 1 passed | 0 failed (3ms)
 ```
 
 Now that you have a basic project set up you can start building your
-application. Check out our [tutorials](/runtime/tutorials/) and
-[examples](/examples/) for more ideas on what to build with Deno.
+application. Check out our [examples and tutorials](/examples/) for more ideas
+on what to build with Deno.
 
 You can
 [learn more about using TypeScript in Deno here](/runtime/fundamentals/typescript).

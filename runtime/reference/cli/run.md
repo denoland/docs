@@ -6,12 +6,10 @@ command: run
 
 ## Usage
 
-To run the file at
-[https://docs.deno.com/examples/hello-world.ts](https://docs.deno.com/examples/hello-world.ts)
-use:
+To run [this file](https://docs.deno.com/examples/scripts/hello_world.ts) use:
 
 ```console
-deno run https://docs.deno.com/examples/hello-world.ts
+deno run https://docs.deno.com/examples/scripts/hello_world.ts
 ```
 
 You can also run files locally. Ensure that you are in the correct directory and
@@ -49,7 +47,7 @@ deno run -A server.ts
 ```
 
 If your project requires multiple security flags you should consider using a
-[`deno task`](./task_runner) to execute them.
+[`deno task`](/runtime/reference/cli/task/) to execute them.
 
 ## Watch
 
@@ -68,15 +66,15 @@ console if there are errors while you work.
 
 ## Running a package.json script
 
-`package.json` scripts can be executed with the [`deno task`](./task_runner)
-command.
+`package.json` scripts can be executed with the
+[`deno task`](/runtime/reference/cli/task/) command.
 
 ## Running code from stdin
 
 You can pipe code from stdin and run it immediately with:
 
 ```console
-curl https://docs.deno.com/examples/hello-world.ts | deno run -
+curl https://docs.deno.com/examples/scripts/hello_world.ts | deno run -
 ```
 
 ## Terminate run
