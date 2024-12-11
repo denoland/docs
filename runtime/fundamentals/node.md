@@ -299,13 +299,12 @@ import chalk from "npm:chalk@5";
 ```
 
 Some packages do not ship with types but you can specify their types with the
-[`@deno-types`](/runtime/fundamentals/typescript) directive. For example, using
-a
+[`@ts-types`](/runtime/fundamentals/typescript) directive. For example, using a
 [`@types`](https://www.typescriptlang.org/docs/handbook/2/type-declarations.html#definitelytyped--types)
 package:
 
 ```ts
-// @deno-types="npm:@types/express@^4.17"
+// @ts-types="npm:@types/express@^4.17"
 import express from "npm:express@^4.17";
 ```
 
