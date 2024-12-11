@@ -57,8 +57,8 @@ function SidebarSection(
     str.replaceAll(/[\s_]/g, "-")
       .replaceAll(/[^a-zA-Z0-9-]/g, "")
       .toLowerCase();
-  const slug = slugify(props.section.title ?? "");
-  const categoryTitle = `sidebar-category-${slug}`;
+  const slug = "-" + slugify(props.section.title ?? "");
+  const categoryTitle = `sidebar-category${slug}`;
   const headingLink = props.section.href;
 
   return (

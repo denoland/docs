@@ -47,19 +47,11 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
               url={props.url}
             />
           </aside>
-          <div
-            class="absolute inset-0 backdrop-brightness-50 z-40 hidden sidebar-open:block sidebar-open:xl:hidden"
-            id="sidebar-cover"
-            data-open="false"
-          >
-          </div>
         </>
       )}
-      <div
-        class="absolute top-16 bottom-0 left-0 right-0 overflow-y-auto"
-        style={{ scrollbarGutter: "stable" }}
-      >
+      <div style={{ scrollbarGutter: "stable" }} >
         {props.children}
+        {reference && <props.comp.ToTop />}
         {!reference && <props.comp.Footer />}
       </div>
     </>
