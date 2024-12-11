@@ -1,6 +1,10 @@
 export default function SearchInput() {
   return (
-    <form action="https://www.google.com/search" method="get" class="search">
+    <form
+      action="https://www.google.com/search"
+      method="get"
+      class="search m-0"
+    >
       <input type="hidden" name="q" id="q" value="site:https://deno.com" />
       <input
         type="search"
