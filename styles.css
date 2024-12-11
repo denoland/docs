@@ -11,8 +11,8 @@
 /* Light and dark theme variables */
 .light {
   --background-primary: 215deg, 81%, 100%;
-  --background-secondary: 213deg, 100% 95%;
-  --background-tertiary: 213deg, 100% 84%;
+  --background-secondary: 213deg, 100%, 95%;
+  --background-tertiary: 213deg, 100%, 84%;
   --foreground-primary: 0deg, 0%, 25%;
   --foreground-secondary: 0deg, 0%, 42%;
   --foreground-tertiary: 0deg, 0%, 90%;
