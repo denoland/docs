@@ -236,7 +236,7 @@ function SidebarTopNav(
           isCurrentlyActivePath ? "font-semibold" : "font-normal"
         }`}
         href={props.url}
-        aria-current={props.currentPath === props.url ? "page" : undefined}
+        aria-current={isCurrentlyActivePath ? "page" : undefined}
       >
         {props.name}
       </a>
