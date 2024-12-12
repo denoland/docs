@@ -53,6 +53,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Scrollbar colors that look good on light and dark theme */
 * {
   scrollbar-color: hsla(0deg, 0%, 50%, 0.5) hsla(0deg, 0%, 50%, 0.1) !important;

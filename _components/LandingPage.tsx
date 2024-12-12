@@ -22,7 +22,7 @@ export default function LandingPage() {
         id="content"
         className="flex flex-col px-8 xl:px-0 pt-6 md:pt-12 mt-4 md:items-center md:justify-center max-w-[1200px] mx-auto mb-12"
       >
-        <div className="flex flex-col md:flex-row w-full mb-8 max-w-screen-xl justify-between hub-header">
+        <div className="flex flex-col md:flex-row w-full mb-8 max-w-screen-xl justify-between">
           <div className="max-w-prose mb-8">
             <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl mb-3">
               Examples
@@ -33,60 +33,62 @@ export default function LandingPage() {
               favorite tools.
             </p>
           </div>
-          <div className="flex flex-col gap-1 md:ml-4 mb-8">
-            <h2 className="text-xs font-semibold mb-1">
-              Filter by type
-            </h2>
-            <label for="example" className="flex gap-2 items-center">
-              <span className="switch">
-                <input
-                  type="checkbox"
-                  id="example"
-                  value="Examples"
-                  className="filter mr-2"
-                  checked
-                />
-                <span className="slider"></span>
-              </span>
-              <ExampleIcon />
-              <span>Examples</span>
-            </label>
-
-            <label for="tutorial" className="flex gap-2 items-center">
-              <span className="switch">
-                <input
-                  type="checkbox"
-                  id="tutorial"
-                  value="Tutorials"
-                  className="filter mr-2"
-                  checked
-                />
-                <span className="slider"></span>
-              </span>
-              <TutorialIcon />
-              <span>
-                Tutorials
-              </span>
-            </label>
-
-            <label for="video" className="flex gap-2 items-center">
-              <span className="switch">
-                <input
-                  type="checkbox"
-                  id="video"
-                  value="Videos"
-                  className="filter mr-2"
-                  checked
-                />
-                <span className="slider"></span>
-              </span>
-              <VideoIcon />
-              <span>
-                Videos
-              </span>
-            </label>
+        <img
+          className="w-full max-w-32 mx-auto h-auto mb-4"
+          alt="Deno Examples"
+          src="/examples.png"
+          />
           </div>
+        <div className="flex gap-4 flex-wrap justify-start items-center w-full p-4 bg-runtime-background dark:bg-background-secondary mb-4 -ml-8">
+          <h2 className="font-semibold">
+            Filter by type:
+          </h2>
+          <label for="example" className="flex gap-2 items-center mr-4">
+            <ExampleIcon />
+            <span>Examples:</span>
+            <span className="switch">
+              <input
+                type="checkbox"
+                id="example"
+                value="Examples"
+                className="filter mr-2"
+                checked
+              />
+              <span className="slider"></span>
+            </span>
+          </label>
+
+          <label for="tutorial" className="flex gap-2 items-center mr-4">
+            <TutorialIcon />
+            <span>Tutorials:</span>
+            <span className="switch">
+              <input
+                type="checkbox"
+                id="tutorial"
+                value="Tutorials"
+                className="filter mr-2"
+                checked
+              />
+              <span className="slider"></span>
+            </span>
+          </label>
+
+          <label for="video" className="flex gap-2 items-center mr-4">
+            <VideoIcon />
+            <span>Videos:</span>
+            <span className="switch">
+              <input
+                type="checkbox"
+                id="video"
+                value="Videos"
+                className="filter mr-2"
+                checked
+              />
+              <span className="slider"></span>
+            </span>
+          </label>
         </div>
+
         <div className="unfiltered columns-1 sm:columns-2 lg:columns-3 gap-8 mb-8">
           {componentsPerSidebarItem}
         </div>
