@@ -1,12 +1,19 @@
 ---
-title: Deno linter rules
+title: Lint rules
 templateEngine: [vto, md]
 ---
 
-{{ for lintRule of await generateLintRuleList() }}
+<div>
 
-## {{ lintRule.name }}
+{{ for lintRule of lintRulePages }}
 
-{{ lintRule.mdContent }}
+<div>
+  <a href="{{ lintRule.href }}">{{ lintRule.label }}</a>
+  {{ for tag of lintRule.tags }}
+    <span class="lint-tag-{{ tag }}">{{ tag }}</span>
+  {{/for }}
+</div>
 
 {{ /for }}
+
+</div>
