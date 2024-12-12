@@ -99,7 +99,7 @@ site.copy("go.json");
 site.copy("oldurls.json");
 site.copy("server.ts");
 site.copy("middleware");
-site.copy("examples/examples");
+site.copy("examples/scripts");
 site.copy(".env");
 
 site.use(
