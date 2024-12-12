@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the `assert` keyword for import attributes
 
 ES import attributes (previously called import assertions) has been changed to

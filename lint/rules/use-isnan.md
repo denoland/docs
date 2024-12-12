@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows comparisons to `NaN`.
 
 Because `NaN` is unique in JavaScript by not being equal to anything, including

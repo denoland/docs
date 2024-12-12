@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Bans the use of primitive wrapper objects (e.g. `String` the object is a wrapper
 of `string` the primitive) in addition to the non-explicit `Function` type and
 the misunderstood `Object` type.

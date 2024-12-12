@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows use of `this` or `super` before calling `super()` in constructors.
 
 The access to `this` or `super` before calling `super()` in the constructor of

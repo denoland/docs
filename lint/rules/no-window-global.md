@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallows the use of the `window` object.
 
 The `window` global is no longer available in Deno. Deno does not have a window

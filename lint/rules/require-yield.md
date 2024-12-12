@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows generator functions that have no `yield`.
 
 JavaScript provides generator functions expressed as `function*`, where we can

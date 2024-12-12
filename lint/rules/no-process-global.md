@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallows the use of NodeJS `process` global.
 
 NodeJS and Deno expose `process` global but they are hard to statically analyze

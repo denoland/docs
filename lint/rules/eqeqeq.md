@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Enforces the use of type-safe equality operators `===` and `!==` instead of the
 more error prone `==` and `!=` operators.
 

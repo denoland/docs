@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Using JSX children together with `dangerouslySetInnerHTML` is invalid as they
 will be ignored.
 

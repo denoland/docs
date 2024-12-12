@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallows the use of `eval`
 
 `eval` is a potentially dangerous function which can open your code to a number

@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of NodeJS global objects.
 
 NodeJS exposes a set of global objects that differs from deno (and the web), so

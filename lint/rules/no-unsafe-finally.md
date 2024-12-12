@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of control flow statements within `finally` blocks.
 
 Use of the control flow statements (`return`, `throw`, `break` and `continue`)

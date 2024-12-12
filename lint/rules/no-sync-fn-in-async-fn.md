@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallow sync function inside async function
 
 Using sync functions like `Deno.readTextFileSync` blocks the deno event loop so

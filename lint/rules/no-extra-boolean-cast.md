@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows unnecessary boolean casts
 
 In certain contexts, such as `if`, `while` or `for` statements, expressions are

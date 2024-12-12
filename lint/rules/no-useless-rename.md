@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallow useless rename operations where both the original and new name are
 exactly the same. This is often a leftover from a refactoring procedure and can
 be safely removed.

@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows modifying variables of class declarations
 
 Declaring a class such as `class A {}`, creates a variable `A`. Like any

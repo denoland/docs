@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallows the use of top level await expressions.
 
 Top level await cannot be used when distributing CommonJS/UMD via dnt.

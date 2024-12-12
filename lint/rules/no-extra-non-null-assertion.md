@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows unnecessary non-null assertions
 
 Non-null assertions are specified with an `!` saying to the compiler that you

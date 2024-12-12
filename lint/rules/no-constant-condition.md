@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of a constant expression in conditional test
 
 Using a constant expression in a conditional test is often either a mistake or a

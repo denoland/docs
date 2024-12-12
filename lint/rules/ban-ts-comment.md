@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of Typescript directives without a comment.
 
 Typescript directives reduce the effectiveness of the compiler, something which

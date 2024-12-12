@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallows the use of implicit exports in ["ambient" namespaces].
 
 TypeScript implicitly export all members of an ["ambient" namespaces], except

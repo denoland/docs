@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallow duplicated JSX props. Later props will always overwrite earlier props
 often leading to unexpected results.
 

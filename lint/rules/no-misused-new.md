@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows defining `constructor`s for interfaces or `new` for classes
 
 Specifying a `constructor` for an interface or defining a `new` method for a

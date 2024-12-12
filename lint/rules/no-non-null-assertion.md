@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallow non-null assertions using the `!` postfix operator
 
 TypeScript's `!` non-null assertion operator asserts to the type system that an

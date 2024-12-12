@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Verifies the correct usage of constructors and calls to `super()`.
 
 Defined constructors of derived classes (e.g. `class A extends B`) must always

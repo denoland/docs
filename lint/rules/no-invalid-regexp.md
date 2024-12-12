@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows specifying invalid regular expressions in RegExp constructors
 
 Specifying an invalid regular expression literal will result in a SyntaxError at

@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Enforce a consistent JSX boolean value style. Passing `true` as the boolean
 value can be omitted with the shorthand syntax.
 

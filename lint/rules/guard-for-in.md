@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Require `for-in` loops to include an `if` statement
 
 Looping over objects with a `for-in` loop will include properties that are

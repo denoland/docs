@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Requires all module exports to have fully typed declarations
 
 Having fully typed function arguments and return values clearly defines the

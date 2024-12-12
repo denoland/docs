@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows comparing against negative zero (`-0`).
 
 Comparing a value directly against negative may not work as expected as it will

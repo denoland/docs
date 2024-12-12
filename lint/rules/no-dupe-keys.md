@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows duplicate keys in object literals.
 
 Setting the same key multiple times in an object literal will override other

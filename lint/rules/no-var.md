@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Enforces the use of block scoped variables over more error prone function scoped
 variables. Block scoped variables are defined using `const` and `let` keywords.
 

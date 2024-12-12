@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallows comparisons where both sides are exactly the same.
 
 Comparing a variable or value against itself is usually an error, either a typo

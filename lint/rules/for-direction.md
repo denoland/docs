@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Requires `for` loop control variables to increment in the correct direction
 
 Incrementing `for` loop control variables in the wrong direction leads to

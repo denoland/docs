@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows using an argument name more than once in a function signature
 
 If you supply multiple arguments of the same name to a function, the last

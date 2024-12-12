@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows async functions that have no await expression or await using
 declaration
 

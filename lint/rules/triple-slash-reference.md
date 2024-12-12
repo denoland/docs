@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallow certain triple slash directives in favor of ES6-style import
 declarations
 

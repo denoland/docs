@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows reassignment of imported module bindings
 
 ES module import bindings should be treated as read-only since modifying them

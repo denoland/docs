@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallow throwing literals as exceptions
 
 It is considered good practice to only `throw` the `Error` object itself or an

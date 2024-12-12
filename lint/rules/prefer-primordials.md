@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Suggests using frozen intrinsics from `primordials` rather than the default
 globals.
 

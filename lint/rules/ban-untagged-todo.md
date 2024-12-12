@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Requires TODOs to be annotated with either a user tag (`@user`) or an issue
 reference (`#issue`).
 

@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the unreachable code after the control flow statements.
 
 Because the control flow statements (`return`, `throw`, `break` and `continue`)

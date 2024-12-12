@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows using the same case clause in a switch statement more than once
 
 When you reuse a case test expression in a `switch` statement, the duplicate

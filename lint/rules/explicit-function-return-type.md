@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Requires all functions to have explicit return types.
 
 Explicit return types have a number of advantages including easier to understand

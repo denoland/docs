@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallows sparse arrays
 
 Sparse arrays are arrays that contain _empty slots_, which later could be

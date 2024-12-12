@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of `Object.prototype` builtins directly
 
 If objects are created via `Object.create(null)` they have no prototype

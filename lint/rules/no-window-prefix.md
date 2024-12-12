@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of Web APIs via the `window` object.
 
 In most situations, the global variable `window` works like `globalThis`. For

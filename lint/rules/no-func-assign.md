@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the overwriting/reassignment of an existing function
 
 Javascript allows for the reassignment of a function definition. This is

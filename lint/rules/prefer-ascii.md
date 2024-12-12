@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Ensures that the code is fully written in ASCII characters.
 
 V8, the JavaScript engine Deno relies on, provides a method that strings get

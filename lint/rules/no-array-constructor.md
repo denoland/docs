@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Enforce conventional usage of array construction
 
 Array construction is conventionally done via literal notation such as `[]` or

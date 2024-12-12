@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Enforces the use of camelCase in variable names
 
 Consistency in a code base is key for readability and maintainability. This rule

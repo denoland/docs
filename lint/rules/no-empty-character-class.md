@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows using the empty character class in a regular expression
 
 Regular expression character classes are a series of characters in brackets,

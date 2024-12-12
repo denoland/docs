@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the implicit fallthrough of case statements
 
 Case statements without a `break` will execute their body and then fallthrough

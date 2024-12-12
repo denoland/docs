@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows assignment to native Javascript objects
 
 In Javascript, `String` and `Object` for example are native objects. Like any

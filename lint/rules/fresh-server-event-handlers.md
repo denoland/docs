@@ -1,3 +1,7 @@
+---
+tags: [fresh]
+---
+
 Disallows event handlers in fresh server components
 
 Components inside the `routes/` folder in a fresh app are exclusively rendered

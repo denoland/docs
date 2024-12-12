@@ -1,3 +1,7 @@
+---
+tags: [fresh]
+---
+
 Checks correct naming for named fresh middleware export
 
 Files inside the `routes/` folder can export middlewares that run before any

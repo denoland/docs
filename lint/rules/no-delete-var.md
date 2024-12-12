@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the deletion of variables
 
 `delete` is used to remove a property from an object. Variables declared via

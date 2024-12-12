@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of the assignment operator, `=`, in conditional statements.
 
 Use of the assignment operator within a conditional statement is often the

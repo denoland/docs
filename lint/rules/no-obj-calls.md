@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows calling built-in global objects like functions
 
 The following built-in objects should not be invoked like functions, even though

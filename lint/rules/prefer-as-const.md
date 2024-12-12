@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Recommends using const assertion (`as const`) over explicitly specifying literal
 types or using type assertion.
 

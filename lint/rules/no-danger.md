@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Prevent the use of `dangerouslySetInnerHTML` which can lead to XSS
 vulnerabilities if used incorrectly.
 

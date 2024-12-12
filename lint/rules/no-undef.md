@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallow the use of undeclared variables
 
 **Invalid:**

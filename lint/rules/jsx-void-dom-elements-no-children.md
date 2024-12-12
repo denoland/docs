@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Ensure that void elements in HTML don't have any children as that is not valid
 HTML. See
 [`Void element` article on MDN](https://developer.mozilla.org/en-US/docs/Glossary/Void_element)

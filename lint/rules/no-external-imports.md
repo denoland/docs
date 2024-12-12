@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallows the use of external imports
 
 - what's the motivation of this lint rule?

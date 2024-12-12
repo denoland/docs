@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Enforces default parameter(s) to be last in the function signature.
 
 Parameters with default values are optional by nature but cannot be left out of

@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of `namespace` and `module` keywords in TypeScript code.
 
 `namespace` and `module` are both thought of as outdated keywords to organize

@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows multiple spaces in regular expression literals.
 
 Multiple spaces in regular expression literals are generally hard to read when

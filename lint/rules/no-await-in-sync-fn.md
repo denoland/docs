@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallow `await` keyword inside a non-async function
 
 Using the `await` keyword inside a non-async function is a syntax error. To be

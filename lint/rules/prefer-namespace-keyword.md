@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Recommends the use of `namespace` keyword over `module` keyword when declaring
 TypeScript module.
 

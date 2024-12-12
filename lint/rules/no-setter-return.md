@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows returning values from setters.
 
 Setters are supposed to be used for setting some value to the property, which

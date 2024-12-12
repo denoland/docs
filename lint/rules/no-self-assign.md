@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows self assignments
 
 Self assignments like `a = a;` have no effect at all. If there are self

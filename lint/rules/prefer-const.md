@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Recommends declaring variables with [`const`] over [`let`].
 
 Since ES2015, JavaScript supports [`let`] and [`const`] for declaring variables.

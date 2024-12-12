@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the reassignment of exception parameters
 
 There is generally no good reason to reassign an exception parameter. Once

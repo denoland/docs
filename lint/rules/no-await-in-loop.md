@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Requires `await` is not used in a for loop body
 
 Async and await are used in Javascript to provide parallel execution. If each

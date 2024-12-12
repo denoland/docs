@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of empty patterns in destructuring
 
 In destructuring, it is possible to use empty patterns such as `{}` or `[]`

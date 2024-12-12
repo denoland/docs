@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Enforces all variables are used at least once.
 
 If there are variables that are declared but not used anywhere, it's most likely

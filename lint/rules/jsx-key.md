@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Ensure the `key` attribute is present when passing iterables into JSX. It allows
 frameworks to optimize checking the order of elements.
 

@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows shadowing of restricted names.
 
 The following (a) properties of the global object, or (b) identifiers are

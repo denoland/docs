@@ -1,3 +1,7 @@
+---
+tags: [jsr]
+---
+
 Enforces type imports to be declared as type imports.
 
 This rule ensures that the code works when the `verbatimModuleSyntax` TypeScript

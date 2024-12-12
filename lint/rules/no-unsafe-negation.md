@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the usage of negation operator `!` as the left operand of relational
 operators.
 

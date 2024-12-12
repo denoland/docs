@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Restricts the use of the `typeof` operator to a specific set of string literals.
 
 When used with a value the `typeof` operator returns one of the following

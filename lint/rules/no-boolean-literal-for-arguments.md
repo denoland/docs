@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Requires all functions called with any amount of `boolean` literals as
 parameters to use a self-documenting constant instead.
 

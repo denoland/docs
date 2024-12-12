@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Ensure consistent use of curly braces around JSX expressions.
 
 **Invalid:**

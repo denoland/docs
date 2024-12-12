@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of the `debugger` statement
 
 `debugger` is a statement which is meant for stopping the javascript execution

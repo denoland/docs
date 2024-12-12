@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows the use of empty block statements.
 
 Empty block statements are legal but often represent that something was missed

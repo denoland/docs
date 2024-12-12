@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows unused labels.
 
 A label that is declared but never used is most likely developer's mistake. If

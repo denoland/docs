@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Requires overload signatures to be adjacent to each other.
 
 Overloaded signatures which are not next to each other can lead to code which is

@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallows easily inferrable types
 
 Variable initializations to JavaScript primitives (and `null`) are obvious in

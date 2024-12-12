@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows using the same condition twice in an `if`/`else if` statement
 
 When you reuse a condition in an `if`/`else if` statement, the duplicate

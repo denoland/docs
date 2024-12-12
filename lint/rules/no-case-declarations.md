@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Requires lexical declarations (`let`, `const`, `function` and `class`) in switch
 `case` or `default` clauses to be scoped with brackets.
 

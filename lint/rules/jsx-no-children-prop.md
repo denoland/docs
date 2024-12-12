@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Pass children as JSX children instead of as an attribute.
 
 **Invalid:**

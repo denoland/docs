@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Requires `deno-lint-ignore` to be annotated with one or more rule names.
 
 Ignoring all rules can mask unexpected or future problems. Therefore you need to

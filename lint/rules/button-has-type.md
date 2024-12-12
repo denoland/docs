@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Checks that a `<button>` JSX element has a valid `type` attribute. The default
 value is `"submit"` which is often not the desired behavior.
 

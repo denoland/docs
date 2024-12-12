@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Disallows assigning variables to `this`.
 
 In most cases, storing a reference to `this` in a variable could be avoided by

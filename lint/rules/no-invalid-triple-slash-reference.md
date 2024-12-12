@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Warns the wrong usage of triple-slash reference directives.
 
 Deno supports the triple-slash reference directives of `types`, `path`, `lib`,

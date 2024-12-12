@@ -1,3 +1,7 @@
+---
+tags: []
+---
+
 Disallows modifying a variable declared as `const`.
 
 Modifying a variable declared as `const` will result in a runtime error.

@@ -1,3 +1,7 @@
+---
+tags: [recommended]
+---
+
 Requires that async promise executor functions are not used
 
 Promise constructors take an executor function as an argument with `resolve` and
