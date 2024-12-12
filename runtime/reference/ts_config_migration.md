@@ -279,7 +279,8 @@ The compiler hint pattern-matching is quite flexible, it accepts both quoted and
 non-quoted values for the specifier, as well as any whitespace around the equals
 sign.
 
-> ℹ️ _Note_: In the past the `@ts-types` directive was called `@deno-types`. This alias still works, but is not recommended anymore. Use `@ts-types`.
+> ℹ️ _Note_: In the past the `@ts-types` directive was called `@deno-types`.
+> This alias still works, but is not recommended anymore. Use `@ts-types`.
 > `@ts-types`. This is not recommended anymore.
 
 ## Providing types when hosting
