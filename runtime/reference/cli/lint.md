@@ -6,7 +6,6 @@ oldUrl:
  - /runtime/manual/tools/linter/
  - /runtime/reference/cli/linter/
 command: lint
-templateEngine: [vto, md]
 ---
 
 ## Available rules
