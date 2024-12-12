@@ -5,6 +5,26 @@ export const sidebar = [
   {
     items: [
       {
+        label: "Runtime Manual",
+        id: "/runtime/",
+      },
+      {
+        label: "API reference",
+        id: "/api/deno",
+      },
+      {
+        label: "Examples",
+        id: "/examples/",
+      },
+      {
+        label: "Deploy",
+        id: "/deploy/manual/",
+      },
+      {
+        label: "Subhosting",
+        id: "/subhosting/manual/",
+      },
+      {
         label: "deno.com",
         id: "https://deno.com",
       },
