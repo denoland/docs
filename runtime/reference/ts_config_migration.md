@@ -275,8 +275,12 @@ When you’re performing type checking on `coolLib` and using it in your file, t
 TypeScript type definitions from `coolLib.d.ts` will take precedence over
 examining the JavaScript file.
 
-> ℹ️ _Note_: In the past the `@ts-types` directive was called `@deno-types`.
-> This alias still works, but is not recommended anymore. Use `@ts-types`.
+:::note
+
+In the past the `@ts-types` directive was called `@deno-types`.
+This alias still works, but is not recommended anymore. Use `@ts-types`.
+
+:::
 
 ## Providing types when hosting
 
