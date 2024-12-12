@@ -277,7 +277,6 @@ examining the JavaScript file.
 
 > ℹ️ _Note_: In the past the `@ts-types` directive was called `@deno-types`.
 > This alias still works, but is not recommended anymore. Use `@ts-types`.
-> `@ts-types`. This is not recommended anymore.
 
 ## Providing types when hosting
 
