@@ -33,12 +33,12 @@ export default function LandingPage() {
               favorite tools.
             </p>
           </div>
-        <img
-          className="w-full max-w-32 mx-auto h-auto mb-4"
-          alt="Deno Examples"
-          src="/examples.png"
+          <img
+            className="w-full max-w-32 mx-auto h-auto mb-4"
+            alt="Deno Examples"
+            src="/examples.png"
           />
-          </div>
+        </div>
         <div className="flex gap-4 flex-wrap justify-start items-center w-full p-4 bg-runtime-background dark:bg-background-secondary mb-4 -ml-8">
           <h2 className="font-semibold">
             Filter by type:
