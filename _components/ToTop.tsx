@@ -1,6 +1,6 @@
 export default function ToTop() {
   return (
-    <a href="#" className="top docs-cta runtime-cta text-[0px]">
+    <a href="#" className="totop">
       Back to top
     </a>
   );
