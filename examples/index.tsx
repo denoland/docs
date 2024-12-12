@@ -1,30 +1,5 @@
 export const layout = "raw.tsx";
-export const sidebar = [
-  {
-    items: [
-      {
-        label: "Runtime",
-        id: "/runtime/",
-      },
-      {
-        label: "API Reference",
-        id: "/api/deno/",
-      },
-      {
-        label: "Examples",
-        id: "/examples/",
-      },
-      {
-        label: "Deploy",
-        id: "/deploy/",
-      },
-      {
-        label: "Subhosting",
-        id: "/subhosting/",
-      },
-    ],
-  },
-];
+export const sidebar = [];
 
 export const toc = [];
 

@@ -13,8 +13,10 @@
     "tailwindcss": "npm:tailwindcss@^3.4.9"
   },
   "tasks": {
-    "build": "deno run -A lume.ts",
     "serve": "deno run -A lume.ts -s",
+    "start": "deno task serve",
+    "dev": "deno task serve",
+    "build": "deno run -A lume.ts",
     "debug": "deno task build && deno task prod",
     "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
     "reference": "cd reference_gen && deno task types && deno task doc",

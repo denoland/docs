@@ -1,13 +1,13 @@
+import { Breadcrumbs } from "../_components/Breadcrumbs.tsx";
 import Logo from "../_components/Logo.tsx";
+import { NavigationButton } from "../_components/NavigationButton.tsx";
+import { TableOfContentsItem } from "../_components/TableOfContentsItem.tsx";
+import { TableOfContentsItemMobile } from "../_components/TableOfContentsItemMobile.tsx";
 import {
   Sidebar as Sidebar_,
   SidebarItem,
   TableOfContentsItem as TableOfContentsItem_,
 } from "../types.ts";
-import { Breadcrumbs } from "../_components/Breadcrumbs.tsx";
-import { NavigationButton } from "../_components/NavigationButton.tsx";
-import { TableOfContentsItem } from "../_components/TableOfContentsItem.tsx";
-import { TableOfContentsItemMobile } from "../_components/TableOfContentsItemMobile.tsx";
 import renderCommand from "./renderCommand.tsx";
 
 export const layout = "layout.tsx";
@@ -73,7 +73,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
         id="sidebar"
         data-open="false"
       >
-        <div class="xl:hidden p-4 shadow-sm flex justify-between h-16">
+        <div class="xl:hidden p-4 flex justify-between h-16">
           <a class="flex items-center gap-3 mr-6" href="/">
             <Logo />
           </a>
