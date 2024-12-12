@@ -20,36 +20,33 @@ export default function Sidebar(
       class="overflow-y-auto overflow-x-hidden"
       style={{ scrollbarGutter: "stable", scrollbarWidth: "thin" }}
     >
-      {props.url !== "/" &&
-        (
-          <ul className="xl:hidden border-bg-tertiary relative bg-background-secondary m-2 mt-0 mb-4 py-2 rounded-md border border-background-tertiary">
-            <SidebarTopNav
-              name="Runtime"
-              url="/runtime/"
-              currentPath={props.url}
-            />
-            <SidebarTopNav
-              name="API reference"
-              url="/api/deno/"
-              currentPath={props.url}
-            />
-            <SidebarTopNav
-              name="Examples"
-              url="/examples/"
-              currentPath={props.url}
-            />
-            <SidebarTopNav
-              name="Deploy"
-              url="/deploy/"
-              currentPath={props.url}
-            />
-            <SidebarTopNav
-              name="Subhosting"
-              url="/subhosting/"
-              currentPath={props.url}
-            />
-          </ul>
-        )}
+      <ul className="xl:hidden border-bg-tertiary relative bg-background-secondary m-2 mt-0 mb-4 py-2 rounded-md border border-background-tertiary">
+        <SidebarTopNav
+          name="Runtime"
+          url="/runtime/"
+          currentPath={props.url}
+        />
+        <SidebarTopNav
+          name="API reference"
+          url="/api/deno/"
+          currentPath={props.url}
+        />
+        <SidebarTopNav
+          name="Examples"
+          url="/examples/"
+          currentPath={props.url}
+        />
+        <SidebarTopNav
+          name="Deploy"
+          url="/deploy/"
+          currentPath={props.url}
+        />
+        <SidebarTopNav
+          name="Subhosting"
+          url="/subhosting/"
+          currentPath={props.url}
+        />
+      </ul>
       <ul>
         {props.sidebar.map((section, idx) => (
           <SidebarSection
