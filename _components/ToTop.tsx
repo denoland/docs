@@ -1,7 +1,9 @@
 export default function ToTop() {
   return (
     <a href="#" className="totop">
-      Back to top
+      <span className="sr-only">
+        Back to top
+      </span>
     </a>
   );
 }

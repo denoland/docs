@@ -12,7 +12,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
             id="sidebar"
             data-open="false"
           >
-            <div class="p-4 shadow-sm flex justify-between h-16">
+            <div class="p-4 flex justify-between h-16">
               <a class="flex items-center gap-3 mr-6" href="/">
                 <img
                   src="/img/logo.svg"
