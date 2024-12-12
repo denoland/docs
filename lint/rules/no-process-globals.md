@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [recommended]
 ---
 
 Disallows the use of NodeJS `process` global.

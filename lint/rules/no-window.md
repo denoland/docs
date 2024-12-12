@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [recommended]
 ---
 
 Disallows the use of the `window` object.
