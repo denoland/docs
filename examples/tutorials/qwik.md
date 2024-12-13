@@ -88,7 +88,7 @@ We’ll start by adding our
 [dinosaur data](https://github.com/denoland/examples/blob/main/with-qwik/src/data/dinosaurs.json)
 to a new `./src/data` directory as `dinosaurs.json`:
 
-```json
+```jsonc
 // ./src/data/dinosaurs.json
 
 {
