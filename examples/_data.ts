@@ -243,6 +243,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        label: "Build a Qwik app with Deno",
+        id: "/examples/qwik_tutorial/",
+        type: "tutorial",
+      },
+      {
         label: "Build a Typesafe API with tRPC and Deno",
         id: "/examples/trpc_tutorial/",
         type: "tutorial",
