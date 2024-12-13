@@ -48,7 +48,7 @@ export default function Sidebar(
         />
       </ul>
       <ul>
-        {props.sidebar.map((section, idx) => (
+        {props.sidebar.map((section) => (
           <SidebarSection
             section={section}
             search={props.search}
