@@ -18,6 +18,8 @@ for (const el of document.querySelectorAll("[data-accordion-trigger]")) {
 }
 
 const sidebar = document.getElementById("sidebar");
+console.log(sidebar);
+
 if (sidebar) {
   const sidebarNav = sidebar.querySelector("nav")!;
   const sidebarOpen = document.getElementById("sidebar-open");

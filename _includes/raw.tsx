@@ -3,14 +3,6 @@ export const layout = "layout.tsx";
 export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
   const reference = props.url.startsWith("/api");
 
-  if (reference) {
-    return (
-      <div>
-        {props.children}
-      </div>
-    );
-  }
-
   return (
     <>
       {props.sidebar && (
@@ -20,7 +12,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
             id="sidebar"
             data-open="false"
           >
-            <div class="p-4 shadow-sm flex justify-between h-16">
+            <div class="p-4 flex justify-between h-16">
               <a class="flex items-center gap-3 mr-6" href="/">
                 <img
                   src="/img/logo.svg"
@@ -55,20 +47,12 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
               url={props.url}
             />
           </aside>
-          <div
-            class="absolute inset-0 backdrop-brightness-50 z-40 hidden sidebar-open:block sidebar-open:xl:hidden"
-            id="sidebar-cover"
-            data-open="false"
-          >
-          </div>
         </>
       )}
-      <div
-        class="absolute top-16 bottom-0 left-0 right-0 overflow-y-auto"
-        style={{ scrollbarGutter: "stable" }}
-      >
+      <div style={{ scrollbarGutter: "stable" }}>
         {props.children}
-        <props.comp.Footer />
+        {reference && <props.comp.ToTop />}
+        {!reference && <props.comp.Footer />}
       </div>
     </>
   );

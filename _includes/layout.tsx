@@ -8,7 +8,7 @@ export default function Layout(props: Lume.Data) {
   return (
     <html
       lang="en"
-      class={`light ${reference ? "" : "h-dvh overflow-hidden"}`}
+      class={`light ${reference ? "" : "h-dvh"}`}
     >
       <head>
         <meta charset="utf-8" />
@@ -91,7 +91,7 @@ export default function Layout(props: Lume.Data) {
       </head>
       <body
         class={`bg-background-primary text-foreground-primary ${
-          reference ? "" : "h-dvh overflow-hidden"
+          reference ? "" : "h-dvh"
         }`}
       >
         <a

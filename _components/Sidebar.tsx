@@ -17,15 +17,43 @@ export default function Sidebar(
 ) {
   return (
     <nav
-      class="p-2 pt-0 pr-0 overflow-y-auto overflow-x-hidden"
+      class="overflow-y-auto overflow-x-hidden"
       style={{ scrollbarGutter: "stable", scrollbarWidth: "thin" }}
     >
+      <ul className="xl:hidden border-bg-tertiary relative bg-background-secondary m-2 mt-0 mb-4 py-2 rounded-md border border-background-tertiary">
+        <SidebarTopNav
+          name="Runtime"
+          url="/runtime/"
+          currentPath={props.url}
+        />
+        <SidebarTopNav
+          name="API reference"
+          url="/api/deno/"
+          currentPath={props.url}
+        />
+        <SidebarTopNav
+          name="Examples"
+          url="/examples/"
+          currentPath={props.url}
+        />
+        <SidebarTopNav
+          name="Deploy"
+          url="/deploy/"
+          currentPath={props.url}
+        />
+        <SidebarTopNav
+          name="Subhosting"
+          url="/subhosting/"
+          currentPath={props.url}
+        />
+      </ul>
       <ul>
         {props.sidebar.map((section) => (
           <SidebarSection
             section={section}
             search={props.search}
             url={props.url}
+            headerPath={props.headerPath}
           />
         ))}
       </ul>
@@ -45,8 +73,8 @@ function SidebarSection(
     str.replaceAll(/[\s_]/g, "-")
       .replaceAll(/[^a-zA-Z0-9-]/g, "")
       .toLowerCase();
-  const slug = slugify(props.section.title ?? "");
-  const categoryTitle = `sidebar-category-${slug}`;
+  const slug = "-" + slugify(props.section.title ?? "");
+  const categoryTitle = `sidebar-category${slug}`;
   const headingLink = props.section.href;
 
   return (
@@ -57,7 +85,7 @@ function SidebarSection(
             <a href={headingLink}>
               <h2
                 id={categoryTitle}
-                class="border-b border-foreground-tertiary pt-2 pb-1.5 -mx-5 px-8 mt-4 mb-2 text-sm font-semibold hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 text-foreground-primary capitalize"
+                class="border-b border-foreground-tertiary pt-2 pb-1.5 -mx-5 px-8 mb-2 text-sm font-semibold hover:bg-background-secondary current:bg-background-secondary current:text-blue-500 text-foreground-primary capitalize"
                 aria-current={props.url === headingLink ? "page" : undefined}
               >
                 {props.section.title}
@@ -67,13 +95,13 @@ function SidebarSection(
           : (
             <h2
               id={categoryTitle}
-              class="border-b border-foreground-tertiary pt-2 pb-0.5 -mx-5 px-8 mt-4 mb-3 text-sm font-semibold text-foreground-primary capitalize"
+              class="border-b border-foreground-tertiary pt-2 pb-0.5 -mx-5 px-8 mb-3 text-sm font-semibold text-foreground-primary capitalize"
             >
               {props.section.title}
             </h2>
           )
       )}{" "}
-      <ul aria-labelledby={categoryTitle}>
+      <ul aria-labelledby={categoryTitle} class="mb-4">
         {props.section.items.map((item) => (
           <li class="mx-2">
             {typeof item === "object" && "items" in item
@@ -145,7 +173,7 @@ function SidebarCategory(props: {
     if (typeof item === "string") {
       return item === props.url;
     }
-    return item.id === props.url;
+    return typeof item === "object" && "id" in item && item.id === props.url;
   });
 
   return (
@@ -176,9 +204,42 @@ function SidebarCategory(props: {
         data-accordion-content
       >
         {props.item.items.map((item) => (
-          <SidebarItem item={item} search={props.search} url={props.url} />
+          typeof item === "object" && "items" in item
+            ? (
+              <SidebarCategory
+                item={item}
+                url={props.url}
+                search={props.search}
+              />
+            )
+            : (
+              <SidebarItem
+                item={item}
+                search={props.search}
+                url={props.url}
+              />
+            )
         ))}
       </ul>
     </>
+  );
+}
+
+function SidebarTopNav(
+  props: { name: string; url: string; currentPath: string },
+) {
+  const isCurrentlyActivePath = props.currentPath.startsWith(props.url);
+  return (
+    <li class="mx-2">
+      <a
+        class={`relative block py-1.5 px-1.5 text-base text-foreground-primary leading-snug rounded ring-1 ring-transparent hover:ring-background-tertiary hover:bg-background-secondary transition-colors duration-200 ease-in-out select-none current:bg-background-tertiary ${
+          isCurrentlyActivePath ? "font-semibold" : "font-normal"
+        }`}
+        href={props.url}
+        aria-current={isCurrentlyActivePath ? "page" : undefined}
+      >
+        {props.name}
+      </a>
+    </li>
   );
 }
