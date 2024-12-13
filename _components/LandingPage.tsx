@@ -34,12 +34,12 @@ export default function LandingPage() {
             </p>
           </div>
           <img
-            className="w-full max-w-32 mx-auto h-auto mb-4"
+            className="w-full max-w-32 mx-auto h-auto mb-4 hidden md:block"
             alt="Deno Examples"
             src="/examples.png"
           />
         </div>
-        <div className="flex gap-4 flex-wrap justify-start items-center w-full p-4 bg-runtime-background dark:bg-background-secondary mb-4 -ml-8">
+        <div className="flex flex-col gap-4 w-full mb-4 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded md:flex-wrap md:justify-start md:items-center md:flex-row">
           <h2 className="font-semibold">
             Filter by type:
           </h2>
@@ -89,7 +89,7 @@ export default function LandingPage() {
           </label>
         </div>
 
-        <div className="unfiltered columns-1 sm:columns-2 lg:columns-3 gap-8 mb-8">
+        <div className="unfiltered columns-1 sm:columns-2 lg:columns-3 gap-8 mb-8 w-[100%]">
           {componentsPerSidebarItem}
         </div>
         <div className="fully-filtered">

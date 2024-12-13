@@ -108,7 +108,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
       >
       </div>
       <div
-        class="absolute top-16 bottom-0 left-0 right-0 xl:left-74 overflow-y-auto xl:grid xl:grid-cols-7 xl:gap-8 max-w-screen-2xl mx-auto"
+        class="absolute top-16 bottom-0 left-0 right-0 xl:left-74 overflow-y-auto xl:grid xl:grid-cols-7 xl:gap-8 mx-auto"
         style={{ scrollbarGutter: "stable" }}
       >
         <main

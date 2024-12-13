@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --max-text-width: 65ch;
-}
-
 /* Light and dark theme variables */
 .light {
   --background-primary: 215deg, 81%, 100%;
