@@ -103,7 +103,7 @@ will be excluded from the measurement.
 ```ts
 Deno.bench("foo", async (b) => {
   // Open a file that we will act upon.
-  const file = await Deno.open("a_big_data_file.txt");
+  using file = await Deno.open("a_big_data_file.txt");
 
   // Tell the benchmarking tool that this is the only section you want
   // to measure.
@@ -114,12 +114,10 @@ Deno.bench("foo", async (b) => {
 
   // End measurement here.
   b.end();
-
-  // Now we can perform some potentially time-consuming teardown that will not
-  // taint out benchmark results.
-  file.close();
 });
 ```
+
+The above example requires the `--allow-read` flag to run the benchmark: `deno bench file_reading.ts --allow-read`.
 
 ## Grouping and baselines
 
