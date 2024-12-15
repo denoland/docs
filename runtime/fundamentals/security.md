@@ -96,9 +96,10 @@ By default, executing code can not read or write arbitrary files on the file
 system. This includes listing the contents of directories, checking for the
 existence of a given file, and opening or connecting to Unix sockets.
 
-Access to read files is granted using the `--allow-read` flag, and access to
-write files is granted using the `--allow-write` flag. These flags can be
-specified with a list of paths to allow access to specific files or directories.
+Access to read files is granted using the `--allow-read` (or `-R`) flag, and
+access to write files is granted using the `--allow-write` (or `-W`) flag. These
+flags can be specified with a list of paths to allow access to specific files or
+directories.
 
 Definition: `--allow-read[=<PATH>...]` or `-R[=<PATH>...]`
 
