@@ -117,18 +117,32 @@ Deno 1.x and Deno 2.
 - `nodeModulesDir`
 
 Using a boolean value for the `nodeModulesDir` and `--node-modules-dir` config
-options has been deprecated in favor of multiple directory behavior options. If
-you previously used `false,` use `none`. If previously using `true` or had no
-value set up, use `auto`.
-
-See
-[Node modules directory](https://docs.deno.com/runtime/fundamentals/configuration/#node-modules-directory)
-for reference.
+options has been deprecated in favor of selecting from multiple behavior
+options. For this reason, the default value when the option is not set has
+changed.
 
 ```diff
 - "nodeModulesDir": false | true
 + "nodeModulesDir": "none" | "auto" | "manual"
+
+- Default value without package.json: false (corresponding to "none")
++ Default value without package.json: "none"
+
+- Default value with package.json:  true (corresponding to "auto")
++ Default value with package.json:  "manual"
 ```
+
+If your project does not contain a `package.json` file, the default behavior
+will remain unchanged.
+
+If your project contains a `package.json` file and you do not specify the
+`nodeModulesDir` option, you must set it to `auto` to keep the default Deno 1.x
+auto-installing behavior. The new default in Deno 2 is `manual`, which expects
+the user to keep this directory up to date manually.
+
+See
+[Node modules directory](https://docs.deno.com/runtime/fundamentals/configuration/#node-modules-directory)
+for reference.
 
 ## CLI changes
 
