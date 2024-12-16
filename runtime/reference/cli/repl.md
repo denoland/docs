@@ -114,7 +114,7 @@ readTextFileSync  readFileSync      readDir           readLink          readAllS
 | Ctrl-A, Home          | Move cursor to the beginning of line                                                             |
 | Ctrl-B, Left          | Move cursor one character left                                                                   |
 | Ctrl-C                | Interrupt and cancel the current edit                                                            |
-| Ctrl-D                | If if line _is_ empty, signal end of line                                                        |
+| Ctrl-D                | If line _is_ empty, signal end of line                                                           |
 | Ctrl-D, Del           | If line is _not_ empty, delete character under cursor                                            |
 | Ctrl-E, End           | Move cursor to end of line                                                                       |
 | Ctrl-F, Right         | Move cursor one character right                                                                  |
