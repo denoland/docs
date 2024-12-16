@@ -90,7 +90,7 @@ user-favorite frameworks like:
 Most existing projects should require minimal or no changes; just replace
 `npm run dev` with `deno task dev` and get on with your work.
 
-Deno will provide helpful error messages with suggestions to guide you toward a
+Deno will provide helpful error messages with suggestions to guide you towards a
 working solution.
 
 You can also use `deno lint --fix` to automatically fix common incompatibilities.
