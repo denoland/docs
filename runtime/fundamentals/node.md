@@ -98,7 +98,7 @@ millions of npm libraries that are written in CommonJS and Deno offers full
 support for them. Deno will automatically determine if a package is using
 CommonJS and make it work seamlessly when imported:
 
-```js, title="main.js"
+```js title="main.js"
 import react from "npm:react";
 console.log(react);
 ```
