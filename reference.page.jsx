@@ -4,6 +4,25 @@ import entityList from "@std/html/named-entity-list.json" with { type: "json" };
 
 export const layout = "raw.tsx";
 
+export const sidebar = [
+  {
+    items: [
+      {
+        label: "Deno APIs",
+        id: "/api/deno/",
+      },
+      {
+        label: "Web APIs",
+        id: "/api/web/",
+      },
+      {
+        label: "Node APIs",
+        id: "/api/node/",
+      },
+    ],
+  },
+];
+
 const resetRegexp =
   /<link id="ddocResetStylesheet" rel="stylesheet" href=".*?reset\.css">\s*/;
 const titleRegexp = /<title>(.+?)<\/title>\s*/s;

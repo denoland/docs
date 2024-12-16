@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --max-text-width: 65ch;
-}
-
 /* Light and dark theme variables */
 .light {
   --background-primary: 215deg, 81%, 100%;
@@ -51,6 +47,10 @@
   .ddoc .markdown-body pre {
     border-color: hsla(var(--background-tertiary)) !important;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 /* Scrollbar colors that look good on light and dark theme */
