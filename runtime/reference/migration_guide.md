@@ -131,7 +131,7 @@ the default value used when the option is not set has changed.
 + Default value with package.json:  "manual"
 ```
 
-If your project does not contain a `package.json` file, the behavior will remain unchanged.
+If your project does not contain a `package.json` file, the default behavior will remain unchanged.
 
 If your project contains a `package.json` file and you do not specify the `nodeModulesDir` option, you 
 must set it to `auto` to keep the existing behavior. This is because the previous default was `true`, corresponding 
