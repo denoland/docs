@@ -87,7 +87,7 @@ user-favorite frameworks like:
 - Qwik
 - and more
 
-Most existing projects should require minimal or no changes; just replace
+Most existing projects will require minimal or no changes; just replace
 `npm run dev` with `deno task dev` and get on with your work.
 
 Deno will provide helpful error messages with suggestions to guide you towards a
