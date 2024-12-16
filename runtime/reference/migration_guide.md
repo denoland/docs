@@ -25,6 +25,17 @@ Deno 2 understands `package.json`, the `node_modules` directory, and even npm
 workspaces, allowing you to migrate your existing projects using ESM with little
 effort.
 
+For better Node compatibility, npm packages are no longer installed by default
+when there is a package.json and instead running `deno install` is recommended.
+To get Deno 1.x behavior of auto-installing, add the following to your
+deno.json:
+
+```json title="deno.json"
+{
+  "nodeModulesDir": "auto"
+}
+```
+
 [Read more on `Node.js support` page](/runtime/fundamentals/node/)
 
 ### Long Term Support releases
@@ -59,7 +70,7 @@ private registries.
 With Deno 2 your team can leverage private npm registries the same way you'd do
 with Node.js and npm, using an `.npmrc` file:
 
-```js, title=".npmrc"
+```js title=".npmrc"
 @mycompany:registry=http://mycompany.com:8111/
 mycompany.com:8111/:_authToken=token
 ```
