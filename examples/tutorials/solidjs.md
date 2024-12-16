@@ -375,7 +375,7 @@ could enhance your dinosaur application:
 
 - Add persistent data store
   [using a database like Postgres or MongoDB](https://docs.deno.com/runtime/tutorials/connecting_to_databases/)
-  and an ORM like [Drizzle](/blog/build-database-app-drizzle) or
+  and an ORM like [Drizzle](https://deno.com/blog/build-database-app-drizzle) or
   [Prisma](https://docs.deno.com/runtime/tutorials/how_to_with_npm/prisma/)
 - Implement global state using SolidJS's
   [`createContext`](https://docs.solidjs.com/reference/component-apis/create-context)
