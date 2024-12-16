@@ -64,7 +64,7 @@ with Node.js and npm, using an `.npmrc` file:
 mycompany.com:8111/:_authToken=token
 ```
 
-Learn more about private registry configuration.
+Learn more about private registry configuration
 [on `npm packages` page](/runtime/fundamentals/node/#private-registries).
 
 Deno 2 has workspace support, allowing you to mix Deno-first and Node-first
