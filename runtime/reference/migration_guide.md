@@ -6,7 +6,7 @@ oldUrl:
 ---
 
 While we’ve accomplished a ton in Deno 1.x, the next major version is focused on
-using Deno **at scale**. This means seamless interoperability with Node.js and
+using Deno **at scale**. This means seamless interoperability with Node.js and
 npm JavaScript infrastructure and supporting a wider range of projects and
 development teams, all without sacrificing the simplicity, security, and
 “batteries included” nature that developers love.
@@ -93,19 +93,22 @@ Most existing projects will require minimal or no changes; just replace
 Deno will provide helpful error messages with suggestions to guide you towards a
 working solution.
 
-You can also use `deno lint --fix` to automatically fix common incompatibilities.
+You can also use `deno lint --fix` to automatically fix common
+incompatibilities.
 
 ---
 
-The following section outlines the configuration, CLI, and API changes between Deno 1.x and Deno 2.
+The following section outlines the configuration, CLI, and API changes between
+Deno 1.x and Deno 2.
 
 ## Config changes
 
 - `nodeModulesDir`
 
-Using a boolean value for the `nodeModulesDir` and `--node-modules-dir` config options has been deprecated in favor 
-of multiple directory behavior options. If you previously used `false,` use `none`. If previously 
-using `true` or had no value set up, use `auto`.
+Using a boolean value for the `nodeModulesDir` and `--node-modules-dir` config
+options has been deprecated in favor of multiple directory behavior options. If
+you previously used `false,` use `none`. If previously using `true` or had no
+value set up, use `auto`.
 
 See
 [Node modules directory](https://docs.deno.com/runtime/fundamentals/configuration/#node-modules-directory)
@@ -968,8 +971,8 @@ instead.
 ```
 
 Note: This symbol is soft-removed as of Deno 2. Its types have been removed, but
-its implementation remains to reduce breaking changes. You can ignore
-"property does not exist" TypeScript errors by using the
+its implementation remains to reduce breaking changes. You can ignore "property
+does not exist" TypeScript errors by using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
 
@@ -1060,8 +1063,8 @@ Use [`Deno.serve()`](https://docs.deno.com/api/deno/~/Deno.serve) instead.
 ```
 
 Note: This symbol is soft-removed as of Deno 2. Its types have been removed, but
-its implementation remains to reduce breaking changes. You can ignore
-"property does not exist" TypeScript errors by using the
+its implementation remains to reduce breaking changes. You can ignore "property
+does not exist" TypeScript errors by using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
 
@@ -1128,8 +1131,8 @@ methods instead.
 ```
 
 Note: This symbol is soft-removed as of Deno 2. Its types have been removed, but
-its implementation remains to reduce breaking changes. You can ignore
-"property does not exist" TypeScript errors by using the
+its implementation remains to reduce breaking changes. You can ignore "property
+does not exist" TypeScript errors by using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
 
@@ -1160,8 +1163,8 @@ instead.
 ```
 
 Note: This symbol is soft-removed as of Deno 2. Its types have been removed, but
-its implementation remains to reduce breaking changes. You can ignore
-"property does not exist" TypeScript errors by using the
+its implementation remains to reduce breaking changes. You can ignore "property
+does not exist" TypeScript errors by using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
 
@@ -1192,8 +1195,8 @@ methods instead.
 ```
 
 Note: This symbol is soft-removed as of Deno 2. Its types have been removed, but
-its implementation remains to reduce breaking changes. You can ignore
-"property does not exist" TypeScript errors by using the
+its implementation remains to reduce breaking changes. You can ignore "property
+does not exist" TypeScript errors by using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
 
