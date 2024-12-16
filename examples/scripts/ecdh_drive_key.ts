@@ -65,7 +65,7 @@ async function decryptMessage(
   return decoder.decode(decryptedData);
 }
 
-// Display
+// Get a human-readable string
 async function getBase64Key(key: CryptoKey) {
   const buffer = await crypto.subtle.exportKey("raw", key);
   return btoa(String.fromCharCode(...new Uint8Array(buffer)));
