@@ -8,7 +8,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
       {props.sidebar && (
         <>
           <aside
-            class="absolute top-0 bottom-0 -left-74 sidebar-open:left-0 w-74 border-r border-foreground-tertiary bg-background-primary z-50 xl:hidden transition-all"
+            class="fixed top-0 bottom-0 -left-74 sidebar-open:left-0 w-74 border-r border-foreground-tertiary bg-background-primary z-50 xl:hidden transition-all"
             id="sidebar"
             data-open="false"
           >
@@ -47,6 +47,12 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
               url={props.url}
             />
           </aside>
+          <div
+            class="fixed inset-0 backdrop-brightness-50 z-40 hidden sidebar-open:block sidebar-open:xl:hidden"
+            id="sidebar-cover"
+            data-open="false"
+          >
+          </div>
         </>
       )}
       <div style={{ scrollbarGutter: "stable" }}>
