@@ -21,7 +21,8 @@
     "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
     "reference": "cd reference_gen && deno task types && deno task doc",
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
-    "test": "deno test -A"
+    "test": "deno test -A",
+    "update_lint_rules": "deno run -A update_lint_rules.ts"
   },
   "compilerOptions": {
     "types": [
