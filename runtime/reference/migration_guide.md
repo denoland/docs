@@ -13,7 +13,7 @@ development teams, all without sacrificing the simplicity, security, and
 
 ## Backwards compatibility with Node.js and npm
 
-Deno 2 is backward compatible with Node.js and npm. This allows you to not only
+Deno 2 is backwards compatible with Node.js and npm. This allows you to not only
 run Deno in your current Node.js projects, but also incrementally adopt pieces
 of Deno's all-in-one toolchain.
 
