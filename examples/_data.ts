@@ -218,8 +218,7 @@ export const sidebar = [
       },
       {
         label: "Build a Fresh app",
-        id:
-          "https://fresh.deno.dev/docs/getting-started/create-a-project",
+        id: "https://fresh.deno.dev/docs/getting-started/create-a-project",
         type: "tutorial",
       },
       {
