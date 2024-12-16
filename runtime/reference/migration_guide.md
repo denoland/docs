@@ -118,7 +118,7 @@ Deno 1.x and Deno 2.
 
 Using a boolean value for the `nodeModulesDir` and `--node-modules-dir` config
 options has been deprecated in favor of selecting from multiple behavior options. For this reason,
-the default value used when the option is not set has changed.
+the default value when the option is not set has changed.
 
 ```diff
 - "nodeModulesDir": false | true
