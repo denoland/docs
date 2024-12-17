@@ -754,3 +754,11 @@ main:has(#example:checked) {
     display: block;
   }
 }
+
+.lintRuleLogosGroup {
+  @apply flex gap-3 flex-row mb-5;
+}
+
+.lintRuleLogo {
+  @apply size-5;
+}
