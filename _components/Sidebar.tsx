@@ -208,8 +208,8 @@ function SidebarCategory(props: {
             ? (
               <SidebarCategory
                 item={item}
-                url={props.url}
                 search={props.search}
+                url={props.url}
               />
             )
             : (
