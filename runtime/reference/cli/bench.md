@@ -117,7 +117,8 @@ Deno.bench("foo", async (b) => {
 });
 ```
 
-The above example requires the `--allow-read` flag to run the benchmark: `deno bench file_reading.ts --allow-read`.
+The above example requires the `--allow-read` flag to run the benchmark:
+`deno bench --allow-read file_reading.ts`.
 
 ## Grouping and baselines
 
