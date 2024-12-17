@@ -64,6 +64,11 @@ export default function (data: Lume.Data, _helpers: Lume.Helpers) {
         <div>
           <a href={lintRule.href}>{lintRule.label}</a>{" "}
           {lintRule.tags.map((tag) => getTag(tag))}
+          <br />
+          <span>
+            Lorem ipsum dolor sit amet, <pre>consectetur</pre>{" "}
+            adipiscing elit, sed do eiusmod tempor.
+          </span>
         </div>
       ))}
     </div>
