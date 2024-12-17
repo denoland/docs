@@ -2,36 +2,38 @@ export const title = "Lint rules";
 
 export const toc = [];
 
-const JsrLogo = () => (
+const JsrIcon = () => (
   <img src="/img/jsr.svg" className="lintRuleLogo" alt="jsr" />
 );
 
-const JsxLogo = () => (
+const JsxIcon = () => (
   <img src="/img/jsx.svg" className="lintRuleLogo" alt="jsx" />
 );
 
-const ReactLogo = () => (
+const ReactIcon = () => (
   <img src="/img/react.svg" className="lintRuleLogo" alt="react" />
 );
 
-const FreshLogo = () => (
+const FreshIcon = () => (
   <img src="/img/fresh.svg" className="lintRuleLogo" alt="fresh" />
 );
 
-const RecommendedLogo = () => <>✅</>;
+const RecommendedIcon = () => (
+  <img src="/img/checkmark.svg" className="lintRuleLogo" alt="recommended" />
+);
 
 function getTag(tag: string) {
   switch (tag) {
     case "jsr":
-      return <JsrLogo />;
+      return <JsrIcon />;
     case "react":
-      return <ReactLogo />;
+      return <ReactIcon />;
     case "jsx":
-      return <JsxLogo />;
+      return <JsxIcon />;
     case "recommended":
-      return <RecommendedLogo />;
+      return <RecommendedIcon />;
     case "fresh":
-      return <FreshLogo />;
+      return <FreshIcon />;
     default:
       break;
   }
@@ -42,19 +44,19 @@ export default function (data: Lume.Data, _helpers: Lume.Helpers) {
     <div>
       <div class="lintRuleLogosGroup">
         <div>
-          <RecommendedLogo /> = recommended
+          <RecommendedIcon /> = recommended
         </div>
         <div>
-          <FreshLogo /> = fresh
+          <FreshIcon /> = fresh
         </div>
         <div>
-          <JsxLogo /> = jsx
+          <JsxIcon /> = jsx
         </div>
         <div>
-          <ReactLogo /> = react
+          <ReactIcon /> = react
         </div>
         <div>
-          <JsrLogo /> = jsr
+          <JsrIcon /> = jsr
         </div>
       </div>
 
