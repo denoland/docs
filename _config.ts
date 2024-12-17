@@ -35,6 +35,7 @@ const site = lume(
   {
     location: new URL("https://docs.deno.com"),
     caseSensitiveUrls: true,
+    emptyDest: false,
     server: {
       middlewares: [
         redirectsMiddleware,
@@ -45,6 +46,14 @@ const site = lume(
         apiDocumentContentTypeMiddleware,
       ],
       page404: "/404",
+    },
+    watcher: {
+      ignore: [
+        "/.git",
+        "/.github",
+        "/.vscode",
+      ],
+      debounce: 2_000,
     },
   },
   {
@@ -77,6 +86,13 @@ const site = lume(
       options: {
         linkify: true,
         langPrefix: "highlight notranslate language-",
+        highlight: (code, lang) => {
+          if (!lang || !Prism.languages[lang]) {
+            return code;
+          }
+          const result = Prism.highlight(code, Prism.languages[lang], lang);
+          return result || code;
+        },
       },
     },
   },
@@ -107,6 +123,7 @@ site.use(
     output: toFileAndInMemory,
   }),
 );
+
 site.use(search());
 site.use(jsx());
 
@@ -115,6 +132,7 @@ site.use(
     plugins: [tw(tailwindConfig)],
   }),
 );
+
 site.use(
   esbuild({
     extensions: [".client.ts", ".client.js"],
@@ -125,28 +143,13 @@ site.use(
   }),
 );
 
-// This is a work-around due to deno-dom's dependency of nwsapi not supporting
-// :has selectors, nor having intention of supporting them, so using `body:not(:has(.ddoc))`
-// is not possible. This works around by adding an `apply-prism` class on pages that
-// don't use a ddoc class.
-site.process([".html"], (pages) => {
-  for (const page of pages) {
-    const document = page.document!;
-    if (!document.querySelector(".ddoc")) {
-      document.body.classList.add("apply-prism");
-      document
-        .querySelectorAll("body.apply-prism pre code")
-        .forEach((element) => Prism.highlightElement(element));
-    }
-  }
-});
-
 site.use(toc({ anchor: false }));
 site.use(title());
 site.use(sitemap());
 
 site.addEventListener("afterBuild", () => {
   Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
+  console.timeLog("Build", "Copied GFM CSS");
 });
 
 site.copy("reference_gen/gen/deno/page.css", "/api/deno/page.css");
@@ -161,44 +164,6 @@ site.copy("reference_gen/gen/node/page.css", "/api/node/page.css");
 site.copy("reference_gen/gen/node/styles.css", "/api/node/styles.css");
 site.copy("reference_gen/gen/node/script.js", "/api/node/script.js");
 
-site.process([".html"], (pages) => {
-  for (const page of pages) {
-    const document = page.document;
-    if (document) {
-      const tabGroups = document.querySelectorAll("deno-tabs");
-      for (const tabGroup of tabGroups) {
-        const newGroup = document.createElement("div");
-        newGroup.classList.add("deno-tabs");
-        newGroup.dataset.id = tabGroup.getAttribute("group-id")!;
-        const buttons = document.createElement("ul");
-        buttons.classList.add("deno-tabs-buttons");
-        newGroup.appendChild(buttons);
-        const tabs = document.createElement("div");
-        tabs.classList.add("deno-tabs-content");
-        newGroup.appendChild(tabs);
-        for (const tab of tabGroup.children) {
-          if (tab.tagName === "DENO-TAB") {
-            const selected = tab.getAttribute("default") !== null;
-            const buttonContainer = document.createElement("li");
-            buttons.appendChild(buttonContainer);
-            const button = document.createElement("button");
-            button.textContent = tab.getAttribute("label")!;
-            button.dataset.tab = tab.getAttribute("value")!;
-            button.dataset.active = String(selected);
-            buttonContainer.appendChild(button);
-            const content = document.createElement("div");
-            content.innerHTML = tab.innerHTML;
-            content.dataset.tab = tab.getAttribute("value")!;
-            content.dataset.active = String(selected);
-            tabs.appendChild(content);
-          }
-        }
-        tabGroup.replaceWith(newGroup);
-      }
-    }
-  }
-});
-
 site.ignore(
   "old",
   "README.md",
@@ -210,7 +175,12 @@ site.ignore(
   // "subhosting",
 );
 
-site.scopedUpdates((path) => path == "/overrides.css");
+site.scopedUpdates(
+  (path) => path == "/overrides.css",
+  (path) => /\.(js|ts)$/.test(path),
+  (path) => path.startsWith("/api/deno/"),
+);
+
 site.use(
   checkUrls({
     external: false, // Set to true to check external links
