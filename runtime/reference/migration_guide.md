@@ -6,7 +6,7 @@ oldUrl:
 ---
 
 While we’ve accomplished a ton in Deno 1.x, the next major version is focused on
-using Deno **at scale**. This means seamless interoperability with Node.js and
+using Deno **at scale**. This means seamless interoperability with Node.js and
 npm JavaScript infrastructure and supporting a wider range of projects and
 development teams, all without sacrificing the simplicity, security, and
 “batteries included” nature that developers love.
@@ -17,13 +17,24 @@ Deno 2 is backwards compatible with Node.js and npm. This allows you to not only
 run Deno in your current Node.js projects, but also incrementally adopt pieces
 of Deno's all-in-one toolchain.
 
-For example you can use `deno install` on a Node.js project to install
+For example, you can use `deno install` on a Node.js project to install
 dependencies, run `deno fmt` to format code without needing Prettier, or use
-`deno lint` to checks for common pitfalls instead of using ESLint.
+`deno lint` to check for common pitfalls instead of using ESLint.
 
-Deno 2 understands `package.json`, `node_modules` directory and even npm
+Deno 2 understands `package.json`, the `node_modules` directory, and even npm
 workspaces, allowing you to migrate your existing projects using ESM with little
 effort.
+
+For better Node compatibility, npm packages are no longer installed by default
+when there is a package.json and instead running `deno install` is recommended.
+To get Deno 1.x behavior of auto-installing, add the following to your
+deno.json:
+
+```json title="deno.json"
+{
+  "nodeModulesDir": "auto"
+}
+```
 
 [Read more on `Node.js support` page](/runtime/fundamentals/node/)
 
@@ -33,7 +44,7 @@ Starting with Deno v2.1.0 (to be released in November 2024) Deno will offer a
 LTS (long-term support) channel.
 
 An LTS version is supported for 6 months, receiving bug fixes and critical
-performance fixes, before a new version is promoted to LTS.
+performance fixes before a new version is promoted to LTS.
 
 [Read more on `Stability and releases` page](/runtime/fundamentals/stability_and_releases/#long-term-support-(lts))
 
@@ -46,20 +57,20 @@ tools like:
 - [`deno add`](/runtime/reference/cli/add/)
 - [`deno remove`](/runtime/reference/cli/remove/)
 
-You can expect seemless experience with Deno-first projects using `deno.json`,
+You can expect a seamless experience with Deno-first projects using `deno.json`,
 Node.js-first project using `package.json`, as well as hybrid projects using
-both `deno.json` and `package.json` to enable easy migration path.
+both `deno.json` and `package.json` to enable an easy migration path.
 
 ## Monorepo, workspace and private registries support
 
 Deno 2 was built with development teams working on mission-critical projects in
-mind. These team work on complex codebases, sharing internal code, often using
+mind. These teams work on complex codebases, sharing internal code, often using
 private registries.
 
-With Deno 2 your team can leverage private npm registries, the same way you'd do
+With Deno 2 your team can leverage private npm registries the same way you'd do
 with Node.js and npm, using an `.npmrc` file:
 
-```js, title=".npmrc"
+```js title=".npmrc"
 @mycompany:registry=http://mycompany.com:8111/
 mycompany.com:8111/:_authToken=token
 ```
@@ -87,17 +98,51 @@ user-favorite frameworks like:
 - Qwik
 - and more
 
-Most existing project should require minimal or no changes; just replace
+Most existing projects will require minimal or no changes; just replace
 `npm run dev` with `deno task dev` and get on with your work.
 
 Deno will provide helpful error messages with suggestions to guide you towards a
 working solution.
 
-You can also use `deno lint --fix` to automatically fix common incompatibilies.
+You can also use `deno lint --fix` to automatically fix common
+incompatibilities.
 
 ---
 
-The following section outline CLI and API changes between Deno 1.x and Deno 2.
+The following section outlines the configuration, CLI, and API changes between
+Deno 1.x and Deno 2.
+
+## Config changes
+
+- `nodeModulesDir`
+
+Using a boolean value for the `nodeModulesDir` and `--node-modules-dir` config
+options has been deprecated in favor of selecting from multiple behavior
+options. For this reason, the default value when the option is not set has
+changed.
+
+```diff
+- "nodeModulesDir": false | true
++ "nodeModulesDir": "none" | "auto" | "manual"
+
+- Default value without package.json: false (corresponding to "none")
++ Default value without package.json: "none"
+
+- Default value with package.json:  true (corresponding to "auto")
++ Default value with package.json:  "manual"
+```
+
+If your project does not contain a `package.json` file, the default behavior
+will remain unchanged.
+
+If your project contains a `package.json` file and you do not specify the
+`nodeModulesDir` option, you must set it to `auto` to keep the default Deno 1.x
+auto-installing behavior. The new default in Deno 2 is `manual`, which expects
+the user to keep this directory up to date manually.
+
+See
+[Node modules directory](https://docs.deno.com/runtime/fundamentals/configuration/#node-modules-directory)
+for reference.
 
 ## CLI changes
 
@@ -950,9 +995,9 @@ instead.
   console.log(new TextDecoder().decode(stdout));
 ```
 
-Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
-its implementation remains in order to reduce breaking changes. You can ignore
-"property does not exist" TypeScript errors by using the
+Note: This symbol is soft-removed as of Deno 2. Its types have been removed, but
+its implementation remains to reduce breaking changes. You can ignore "property
+does not exist" TypeScript errors by using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
 
@@ -1042,9 +1087,9 @@ Use [`Deno.serve()`](https://docs.deno.com/api/deno/~/Deno.serve) instead.
 + Deno.serve({ port: 80 }, () => new Response("Hello World"));
 ```
 
-Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
-its implementation remains in order to reduce breaking changes. You can ignore
-"property does not exist" TypeScript errors by using the
+Note: This symbol is soft-removed as of Deno 2. Its types have been removed, but
+its implementation remains to reduce breaking changes. You can ignore "property
+does not exist" TypeScript errors by using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
 
@@ -1110,9 +1155,9 @@ methods instead.
 + Deno.stderr.close();
 ```
 
-Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
-its implementation remains in order to reduce breaking changes. You can ignore
-"property does not exist" TypeScript errors by using the
+Note: This symbol is soft-removed as of Deno 2. Its types have been removed, but
+its implementation remains to reduce breaking changes. You can ignore "property
+does not exist" TypeScript errors by using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
 
@@ -1142,9 +1187,9 @@ instead.
 + Deno.stdin.close();
 ```
 
-Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
-its implementation remains in order to reduce breaking changes. You can ignore
-"property does not exist" TypeScript errors by using the
+Note: This symbol is soft-removed as of Deno 2. Its types have been removed, but
+its implementation remains to reduce breaking changes. You can ignore "property
+does not exist" TypeScript errors by using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
 
@@ -1174,9 +1219,9 @@ methods instead.
 + Deno.stdout.close();
 ```
 
-Note: This symbol is soft-removed as of Deno 2. Its types have been removed but
-its implementation remains in order to reduce breaking changes. You can ignore
-"property does not exist" TypeScript errors by using the
+Note: This symbol is soft-removed as of Deno 2. Its types have been removed, but
+its implementation remains to reduce breaking changes. You can ignore "property
+does not exist" TypeScript errors by using the
 [`@ts-ignore`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#suppress-errors-in-ts-files-using--ts-ignore-comments)
 directive.
 
