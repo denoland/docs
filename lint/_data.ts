@@ -1,7 +1,7 @@
-import { Sidebar, SidebarLink } from "../types.ts";
+import { extractYaml } from "jsr:@std/front-matter@1.0.5";
 import { walk } from "jsr:@std/fs";
 import { basename } from "jsr:@std/path";
-import { extractYaml } from "jsr:@std/front-matter@1.0.5";
+import { Sidebar, SidebarLink } from "../types.ts";
 
 async function generateSidebarItems() {
   const sidebarItems = [];
@@ -43,9 +43,9 @@ export const lintRulePages = await generateSidebarItems();
 
 export const sidebar = [
   {
-    title: "Lint rules",
+    title: "Deno lint rules",
     items: lintRulePages,
   },
 ] satisfies Sidebar;
 
-export const sectionTitle = "Lint rules";
+export const sectionTitle = "Deno lint rules";
