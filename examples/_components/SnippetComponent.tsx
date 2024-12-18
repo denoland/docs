@@ -1,4 +1,5 @@
 import { ExampleSnippet } from "../types.ts";
+import Prism from "prismjs";
 
 export default function SnippetComponent(props: {
   filename: string;
@@ -7,6 +8,8 @@ export default function SnippetComponent(props: {
   lastOfFile: boolean;
   snippet: ExampleSnippet;
 }) {
+  const html = Prism.highlight(props.snippet.code, Prism.languages.js, "js");
+
   return (
     <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-8">
       <div
@@ -49,7 +52,7 @@ export default function SnippetComponent(props: {
                   : "middle"}
               >
                   <code
-                    dangerouslySetInnerHTML={{ __html: props.snippet.code }}
+                    dangerouslySetInnerHTML={{ __html: html }}
                   ></code>
               </pre>
             </div>

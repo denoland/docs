@@ -9,6 +9,8 @@ import { type Event } from "ga4";
 import type { RequestHandler } from "lume/core/server.ts";
 import type Server from "lume/core/server.ts";
 import nullMiddleware from "./null.ts";
+import { cliNow } from "../timeUtils.ts";
+import { log } from "lume/core/utils/log.ts";
 
 const GA4_MEASUREMENT_ID = Deno.env.get("GA4_MEASUREMENT_ID");
 
@@ -16,15 +18,15 @@ export default function createGAMiddleware(
   server: Server | { addr?: Deno.Addr } | null = null,
 ) {
   if (GA4_MEASUREMENT_ID == null) {
-    console.warn(
-      "createGAMiddleware: GA4_MEASUREMENT_ID is not set. Google Analytics middleware will be disabled.",
+    log.warn(
+      `${cliNow()} <cyan>createGAMiddleware</cyan>: GA4_MEASUREMENT_ID is not set. Google Analytics middleware will be disabled.`,
     );
     return nullMiddleware;
   }
 
   if (server == null) {
-    console.warn(
-      "createGAMiddleware: Server object is not provided. Google Analytics middleware will be disabled.",
+    log.warn(
+      `${cliNow()} <cyan>createGAMiddleware</cyan>: Server object is not provided. Google Analytics middleware will be disabled.`,
     );
     return nullMiddleware;
   }
