@@ -55,6 +55,7 @@ const site = lume(
         "/.github",
         "/.vscode",
       ],
+      debounce: 1_000,
     },
   },
   {
