@@ -14,6 +14,7 @@
   },
   "tasks": {
     "serve": "deno run -A lume.ts -s",
+    "serve:no_logs": "LUME_LOGS=WARN SKIP_CHECK_URLS=true deno run -A lume.ts -s",
     "start": "deno task serve",
     "dev": "deno task serve",
     "build": "deno run -A lume.ts",

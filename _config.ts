@@ -30,6 +30,8 @@ import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware, {
   toFileAndInMemory,
 } from "./middleware/redirects.ts";
+import { cliNow } from "./timeUtils.ts";
+import { log } from "lume/core/utils/log.ts";
 
 const site = lume(
   {
@@ -53,7 +55,6 @@ const site = lume(
         "/.github",
         "/.vscode",
       ],
-      debounce: 1_000,
     },
   },
   {
@@ -149,7 +150,6 @@ site.use(sitemap());
 
 site.addEventListener("afterBuild", () => {
   Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
-  console.timeLog("Build", "Copied GFM CSS");
 });
 
 site.copy("reference_gen/gen/deno/page.css", "/api/deno/page.css");
@@ -181,12 +181,29 @@ site.scopedUpdates(
   (path) => path.startsWith("/api/deno/"),
 );
 
-site.use(
-  checkUrls({
-    external: false, // Set to true to check external links
-    output: "_broken_links.json",
-    ignore: ["https://www.googletagmanager.com"],
-  }),
-);
+const SKIP_CHECK_URLS = (Deno.env.get("SKIP_CHECK_URLS") || "false")
+  .toLowerCase();
+
+if (SKIP_CHECK_URLS !== "true") {
+  log.info(`${cliNow()} Enabling broken link checker`);
+
+  site.use(
+    checkUrls({
+      external: false, // Set to true to check external links
+      output: "_broken_links.json",
+      ignore: ["https://www.googletagmanager.com"],
+    }),
+  );
+} else {
+  log.warn(
+    `${cliNow()} <cyan>checkUrls</cyan>: Skipping broken link check for local performance.`,
+  );
+}
+
+site.addEventListener("afterStartServer", () => {
+  log.warn(
+    `${cliNow()} Server available at <green>http://localhost:3000</green>`,
+  );
+});
 
 export default site;
