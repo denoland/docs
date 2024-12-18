@@ -186,7 +186,7 @@ const SKIP_CHECK_URLS = (Deno.env.get("SKIP_CHECK_URLS") || "false")
   .toLowerCase();
 
 if (SKIP_CHECK_URLS !== "true") {
-  log.info(`${cliNow()} Enabling broken link checker`);
+  log.info(`${cliNow()} Enabling broken-link checker`);
 
   site.use(
     checkUrls({
