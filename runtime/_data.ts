@@ -205,6 +205,7 @@ export const sidebar = [
           "/runtime/contributing/release_schedule/",
           "/runtime/contributing/style_guide/",
           "/runtime/contributing/web_platform_tests/",
+          "/runtime/contributing/docs/",
           "/runtime/contributing/examples/",
         ],
       },
