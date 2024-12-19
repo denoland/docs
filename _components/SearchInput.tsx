@@ -4,6 +4,7 @@ export default function SearchInput() {
       action="https://www.google.com/search"
       method="get"
       class="search m-0"
+      target="_blank"
     >
       <input
         type="search"
