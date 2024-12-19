@@ -26,7 +26,7 @@ async function generateSidebarItems() {
 
     sidebarItems.push(
       {
-        href: `/lint/rules/${lintRuleName}`,
+        href: `/lint/rules/${lintRuleName}/`,
         label: lintRuleName,
         tags,
         // description,
@@ -41,11 +41,14 @@ async function generateSidebarItems() {
 
 export const lintRulePages = await generateSidebarItems();
 
+export const sectionTitle = "Lint rules";
+
+export const sectionHref = "/lint/";
+
 export const sidebar = [
   {
-    title: "Deno lint rules",
+    title: sectionTitle,
+    href: sectionHref,
     items: lintRulePages,
   },
 ] satisfies Sidebar;
-
-export const sectionTitle = "Deno lint rules";
