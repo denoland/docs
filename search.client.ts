@@ -110,6 +110,18 @@ document.addEventListener("DOMContentLoaded", () => {
       "How to configure?",
       "How to deploy?",
     ];
+
+    oramaSearchBox.searchParams = {
+      boost: {
+        "content": 100,
+        "section": 900,
+        "parent_H2.section": 700,
+        "title": 1_000,
+        "parent_H2.content": 1,
+        "parent_H1.content": 1,
+      },
+      properties: ["title", "section", "content", "parent_H2.section", "parent_H2.content"],
+    }
   }
 
   const oramaSearchButton: OramaJSX.OramaSearchButton | null = document

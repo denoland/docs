@@ -211,11 +211,10 @@ site.process([".html"], (pages) => {
 
 const ORAMA_API_KEY = Deno.env.get("ORAMA_CLOUD_API_KEY");
 const ORAMA_INDEX_ID = Deno.env.get("ORAMA_CLOUD_INDEX_ID");
+
 if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
   site.process([".html"], async (pages) => {
     let pageEntries: OramaDocument[] = [];
-
-    await oramaClear(ORAMA_API_KEY, ORAMA_INDEX_ID);
 
     for (const page of pages) {
       if (
@@ -228,7 +227,14 @@ if (ORAMA_API_KEY && ORAMA_INDEX_ID) {
       }
     }
 
-    await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, pageEntries, "pages");
+    await oramaClear(ORAMA_API_KEY, ORAMA_INDEX_ID);
+
+    console.log('Pushing', pageEntries.length, 'pages to Orama');
+    const chunkSize = 100;
+    for (let i = 0; i < pageEntries.length; i += chunkSize) {
+      const chunk = pageEntries.slice(i, i + chunkSize);
+      await oramaNotify(ORAMA_API_KEY, ORAMA_INDEX_ID, chunk, "pages");
+    }
 
     await oramaNotify(
       ORAMA_API_KEY,

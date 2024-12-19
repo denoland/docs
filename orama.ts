@@ -8,6 +8,7 @@ export interface OramaDocument {
   content: string;
   section: string;
   category: string;
+  headerType: string;
 }
 
 export function generateDocumentsForPage(page: Page<Data>): OramaDocument[] {
@@ -45,7 +46,30 @@ export function generateDocumentsForPage(page: Page<Data>): OramaDocument[] {
       category: page.data.url.startsWith("/runtime/")
         ? "Runtime"
         : (page.data.url.startsWith("/deploy/") ? "Deploy" : "Subhosting"),
+      headerType: header.tagName,
     });
+  }
+
+  const allData: OramaDocument[] = []
+  for (let i = 0; i < documents.length; i++) {
+    const parents: OramaDocument[] = []
+    for (let j = 0; j < i; j++) {
+      const possibleParent = documents[j]
+      if (possibleParent.headerType < documents[i].headerType) {
+        parents.push(possibleParent)
+      }
+    }
+
+    const doc = documents[i]
+
+    for (const parent of parents) {
+      doc[`parent_${parent.headerType}`] = {
+        section: parent.section,
+        content: parent.content,
+      }
+    }
+
+    allData.push(doc)
   }
 
   return documents;
@@ -84,9 +108,8 @@ export async function generateDocumentsForSymbols(): Promise<OramaDocument[]> {
           .replace(/\.html$/, ""),
         title: node.name,
         content: node.doc,
-        section: `API > ${kind}${node.file !== "." ? ` > ${node.file}` : ""}${
-          node.category ? ` > ${node.category}` : ""
-        }`,
+        section: `API > ${kind}${node.file !== "." ? ` > ${node.file}` : ""}${node.category ? ` > ${node.category}` : ""
+          }`,
         category: "Reference",
       });
     }
