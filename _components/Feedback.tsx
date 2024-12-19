@@ -3,6 +3,20 @@ export default function Feedback({ file }) {
     return <></>;
   } else {
     const githubPath = "https://github.com/denoland/docs/edit/main" + file;
+
+    let modifiedDate = null;
+    try {
+      const dateString = new TextDecoder().decode((new Deno.Command("git", {
+        args: [
+          "log", "-1", "--pretty=%cI", "./" + file
+        ],
+      })).outputSync().stdout);
+
+      modifiedDate = new Date(dateString);
+    } catch (e) {
+      console.log(e);
+    }
+
     return (
       <section
         id="feedback-section"
@@ -138,6 +152,16 @@ export default function Feedback({ file }) {
                   </button>
                 </div>
               </div>
+              { modifiedDate &&
+		            <div class="mt-4">
+			            This page was last modified on{" "}
+			            <time datetime={modifiedDate.toString()}>{modifiedDate.toLocaleString("en", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}</time>.
+		            </div>}
+
               <a
                 rel=""
                 class="mt-4 !underline underline-offset-2 text-xs block"
