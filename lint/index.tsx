@@ -44,9 +44,16 @@ export default function LintRulesIndex(
         ))}
       </ul>
 
+      <div class="flex mb-8">
+        <input type="text" id="lint-rule-search" placeholder="Search..." />
+      </div>
+
       <ul class="flex flex-col gap-4 !list-none !pl-0">
         {data.lintRulePages.map((lintRule) => (
-          <li class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4">
+          <li
+            class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4 lint-rule-box"
+            id={lintRule.label}
+          >
             <div class="flex flex-row justify-start items-center gap-4 mb-4">
               <a href={lintRule.href} class="block text-lg font-mono">
                 {lintRule.label}
@@ -54,7 +61,7 @@ export default function LintRulesIndex(
               {lintRule.tags.map((tag: LintIconType) => getLintIcon(tag))}
             </div>
             <div>
-              Lorem ipsum dolor sit amet, <pre>consectetur</pre>{" "}
+              Lorem ipsum dolor sit amet, <code>consectetur</code>{" "}
               adipiscing elit, sed do eiusmod tempor.
             </div>
           </li>
