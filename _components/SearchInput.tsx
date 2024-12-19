@@ -4,8 +4,8 @@ export default function SearchInput() {
       action="https://www.google.com/search"
       method="get"
       class="search m-0"
+      target="_blank"
     >
-      <input type="hidden" name="q" id="q" value="site:https://deno.com" />
       <input
         type="search"
         name="q"
@@ -30,6 +30,7 @@ export default function SearchInput() {
           hover:bg-slate-200
           duration-150 ease-in-out"
       />
+      <input type="hidden" name="q" id="q" value="site:deno.com" />
     </form>
   );
 }
