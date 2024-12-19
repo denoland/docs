@@ -5,7 +5,7 @@ title: "Deno documentation"
 We welcome and appreciate contributions to the Deno documentation. If you find
 an issue, or want to add to the docs, each page has an "Edit this page" button
 at the bottom of the page. Clicking this button will take you to the source file
-for that page in the [Deno docs repository](https://github.com/denoland/docs/) .
+for that page in the [Deno docs repository](https://github.com/denoland/docs/).
 You can then make your changes and submit a pull request.
 
 Some pages in the Deno documentation are generated from source files in the Deno
