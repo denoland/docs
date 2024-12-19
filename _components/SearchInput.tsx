@@ -30,7 +30,7 @@ export default function SearchInput() {
           hover:bg-slate-200
           duration-150 ease-in-out"
       />
-      <input type="hidden" name="q" id="q" value="site:https://deno.com" />
+      <input type="hidden" name="q" id="q" value="site:deno.com" />
     </form>
   );
 }
