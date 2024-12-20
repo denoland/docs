@@ -17,8 +17,8 @@ export const getLintIcon = (
   return (
     <img
       src={`/img/${svgFileName}.svg`}
-      class="size-6"
-      alt={type}
+      class="size-6 !bg-transparent"
+      alt={getReadableIconName(type)}
       title={getReadableIconName(type)}
     />
   );
@@ -37,23 +37,15 @@ export default function LintRulesIndex(
   ] as LintIconType[];
   return (
     <div>
-      <ul class="flex gap-1 flex-col mb-8 !list-none !pl-0">
-        {TYPES.map((iconType) => (
-          <li>
-            {getLintIcon(iconType)} = {getReadableIconName(iconType)}
-          </li>
-        ))}
-      </ul>
-
-      <div class="flex mb-8">
+      <div class="flex flex-col gap-4 mb-8">
         <input
           type="text"
           id="lint-rule-search"
-          placeholder="Search..."
+          placeholder="Search lint rules"
           className="
           w-full
           lg:flex
-          rounded-lg
+          rounded-md
           items-center
           text-sm
           leading-6
@@ -69,6 +61,17 @@ export default function LintRulesIndex(
           hover:bg-slate-200
           duration-150 ease-in-out"
         />
+
+        <ul
+          class="flex flex-wrap gap-2 mb-8 !list-none !pl-0"
+          aria-labelledby="lint-rules-key"
+        >
+          {TYPES.map((iconType) => (
+            <li class="p-1.5 px-3 rounded-md bg-background-secondary/30 border border-background-secondary w-max !m-0 whitespace-pre-wrap">
+              {getLintIcon(iconType)}&ensp;{getReadableIconName(iconType)}
+            </li>
+          ))}
+        </ul>
       </div>
 
       <ul class="flex flex-col gap-4 !list-none !pl-0">
@@ -77,13 +80,18 @@ export default function LintRulesIndex(
             class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4 lint-rule-box"
             id={lintRule.label}
           >
-            <div class="flex flex-row justify-start items-center gap-4 mb-4">
-              <a href={lintRule.href} class="block text-lg font-mono">
+            <div class="flex flex-row justify-start items-center gap-4 mb-2">
+              <a href={lintRule.href} class="block font-mono">
                 {lintRule.label}
               </a>{" "}
-              {lintRule.tags.map((tag: LintIconType) => getLintIcon(tag))}
+              {lintRule.tags.map((tag: LintIconType) => (
+                <div class="bg-background-secondary/30 border border-background-secondary rounded-md p-1">
+                  {getLintIcon(tag)}
+                </div>
+              ))}
             </div>
             <div
+              class="text-sm [&>*]:last:mb-0"
               dangerouslySetInnerHTML={{
                 __html: helpers.md(lintRule.content).split("\n")[0],
               }}
