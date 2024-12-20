@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Warns unused ignore directives
+Warns unused ignore directives.
 
 We sometimes have to suppress and ignore lint errors for some reasons and we can
 do so using [ignore directives](https://lint.deno.land/ignoring-rules).

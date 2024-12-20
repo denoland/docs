@@ -2,7 +2,7 @@
 tags: []
 ---
 
-Disallows sparse arrays
+Disallows sparse arrays.
 
 Sparse arrays are arrays that contain _empty slots_, which later could be
 handled either as `undefined` value or skipped by array methods, and this may

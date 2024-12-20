@@ -67,7 +67,7 @@ export default function LintRulesIndex(
           aria-labelledby="lint-rules-key"
         >
           {TYPES.map((iconType) => (
-            <li class="p-1.5 px-3 rounded-md bg-background-secondary/30 border border-background-secondary w-max !m-0 whitespace-pre-wrap">
+            <li class="p-1.5 px-3 rounded-md bg-background-secondary/30 border border-background-secondary w-max max-w-full !m-0 whitespace-pre-wrap">
               {getLintIcon(iconType)}&ensp;{getReadableIconName(iconType)}
             </li>
           ))}
@@ -75,7 +75,7 @@ export default function LintRulesIndex(
       </div>
 
       <ul class="flex flex-col gap-4 !list-none !pl-0">
-        {data.lintRulePages.map((lintRule) => (
+        {data.lintRulePages.map((lintRule, idx: number) => (
           <li
             class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4 lint-rule-box"
             id={lintRule.label}
@@ -93,7 +93,10 @@ export default function LintRulesIndex(
             <div
               class="text-sm [&>*]:last:mb-0"
               dangerouslySetInnerHTML={{
-                __html: helpers.md(lintRule.content).split("\n")[0],
+                __html: helpers.md(
+                  lintRule.content.split(/\n\n/)[0] +
+                    ` <a href="${lintRule.href}">Details<span class="sr-only"> about ${lintRule.label}</span></a>`,
+                ),
               }}
             >
             </div>

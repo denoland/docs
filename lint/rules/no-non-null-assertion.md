@@ -2,7 +2,7 @@
 tags: []
 ---
 
-Disallow non-null assertions using the `!` postfix operator
+Disallow non-null assertions using the `!` postfix operator.
 
 TypeScript's `!` non-null assertion operator asserts to the type system that an
 expression is non-nullable, as in not `null` or `undefined`. Using assertions to

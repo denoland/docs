@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows expressing octal numbers via numeric literals beginning with `0`
+Disallows expressing octal numbers via numeric literals beginning with `0`.
 
 Octal numbers can be expressed via numeric literals with leading `0` like `042`,
 but this expression often confuses programmers. That's why ECMAScript's strict

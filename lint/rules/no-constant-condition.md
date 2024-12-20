@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows the use of a constant expression in conditional test
+Disallows the use of a constant expression in conditional test.
 
 Using a constant expression in a conditional test is often either a mistake or a
 temporary situation introduced during development and is not ready for
