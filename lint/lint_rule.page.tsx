@@ -1,6 +1,6 @@
+import { extractYaml } from "@std/front-matter";
 import { walkSync } from "@std/fs/walk";
 import { basename } from "@std/path";
-import { extractYaml } from "@std/front-matter";
 export { sectionHref, sidebar } from "./_data.ts";
 
 export const sectionTitle = "Lint rules";

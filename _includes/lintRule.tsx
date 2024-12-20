@@ -1,5 +1,3 @@
-import { getLintIcon } from "../lint/index.tsx";
-
 export const layout = "doc.tsx";
 
 const generateConfigFileForTag = (tag: string) => {
@@ -35,32 +33,36 @@ function LintRuleTags(props: { tags: string[] }) {
   }
 
   return (
-    <div class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4">
-      {tags.map((tag) => getLintIcon(tag))} <br />
+    <div class="rounded-md p-4 bg-background-secondary text-sm mb-8 flex flex-col gap-1">
       {tags.length === 1
         ? (
           <>
-            <span>
-              This rule can be enabled using <code>{tags[0]}</code> tag.
-            </span>
-            <br />
-            <span>In the config file:</span>
+            <div class="mb-4">
+              <b>NOTE:</b> this rule is part of the <code>{tags[0]}</code>{" "}
+              rule set.
+            </div>
+            <div>
+              Enable full set in <code>deno.json</code>:
+            </div>
             <pre>{generateConfigFileForTag(tags[0])}</pre>
-            <span>Using CLI:</span>
-            <pre>{generateCliForTag(tags[0])}</pre>
+            <div>Enable full set using the Deno CLI:</div>
+            <pre class="!mb-0">{generateCliForTag(tags[0])}</pre>
           </>
         )
         : (
           <>
-            <span>
-              This rule can be enabled using one of{" "}
-              <code>{tags.join(", ")}</code> tags.
-            </span>
-            <br />
-            <span>In the config file:</span>
+            <div class="mb-4">
+              <span class="flex flex-wrap items-center gap-2">
+                <b>NOTE:</b> this rule is included the following rule sets:
+                {tags.map((tag) => <code>{tag}</code>)}
+              </span>
+            </div>
+            <div>
+              Enable full set in <code>deno.json</code>:
+            </div>
             <pre>{generateConfigFileForTags(tags)}</pre>
-            <span>Using CLI:</span>
-            <pre>{generateCliForTags(tags)}</pre>
+            <div>Enable full set using the Deno CLI:</div>
+            <pre class="!mb-0">{generateCliForTags(tags)}</pre>
           </>
         )}
     </div>
