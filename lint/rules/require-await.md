@@ -3,7 +3,7 @@ tags: [recommended]
 ---
 
 Disallows async functions that have no await expression or await using
-declaration
+declaration.
 
 In general, the primary reason to use async functions is to use await
 expressions or await using declarations inside. If an async function has

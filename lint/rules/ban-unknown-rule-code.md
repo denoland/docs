@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Warns the usage of unknown rule codes in ignore directives
+Warns the usage of unknown rule codes in ignore directives.
 
 We sometimes have to suppress and ignore lint errors for some reasons. We can do
 so using [ignore directives](https://lint.deno.land/ignoring-rules) with rule

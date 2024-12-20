@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows using the empty character class in a regular expression
+Disallows using the empty character class in a regular expression.
 
 Regular expression character classes are a series of characters in brackets,
 e.g. `[abc]`. if nothing is supplied in the brackets it will not match anything

@@ -2,7 +2,7 @@
 tags: []
 ---
 
-Disallow throwing literals as exceptions
+Disallow throwing literals as exceptions.
 
 It is considered good practice to only `throw` the `Error` object itself or an
 object using the `Error` object as base objects for user-defined exceptions. The

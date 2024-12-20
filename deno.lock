@@ -1930,6 +1930,7 @@
     "dependencies": [
       "jsr:@std/assert@^1.0.6",
       "jsr:@std/dotenv@~0.225.2",
+      "jsr:@std/front-matter@1.0.5",
       "jsr:@std/fs@~0.229.3",
       "jsr:@std/html@^1.0.3",
       "jsr:@std/media-types@^1.0.3",

@@ -2,22 +2,21 @@
 tags: []
 ---
 
-Disallows the use of external imports
+Disallows the use of external imports.
 
-- what's the motivation of this lint rule?
-  - this rule emits warnings if external modules are imported via URL. "deps.ts"
+- What's the motivation of this lint rule?
+  - This rule emits warnings if external modules are imported via URL. "deps.ts"
     and import maps are exception.
-- why is linted code considered bad?
-  - importing external modules just works fine, but it will take time and effort
+- Why is linted code considered bad?
+  - Importing external modules just works fine, but it will take time and effort
     when you want to upgrade those modules if they are imported in multiple
     places in your project.
-- who should use it?
-  - to avoid it you could use "deps.ts convention" or
+- When should it be used?
+  - To avoid it you could use "deps.ts convention" or
     [import maps](https://docs.deno.com/runtime/manual/basics/import_maps),
     where you import all external modules and then re-export them or assign
     aliases to them.
-  - so if you'd like to follow the "deps.ts convention" or to use import maps,
-    this rule is for you.
+  - If you'd like to follow the "deps.ts convention" or use import maps.
 
 **Invalid:**
 

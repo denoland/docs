@@ -2,7 +2,7 @@
 tags: []
 ---
 
-Requires all module exports to have fully typed declarations
+Requires all module exports to have fully typed declarations.
 
 Having fully typed function arguments and return values clearly defines the
 inputs and outputs of a module (known as the module boundary). This will make it

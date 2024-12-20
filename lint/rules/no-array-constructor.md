@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Enforce conventional usage of array construction
+Enforce conventional usage of array construction.
 
 Array construction is conventionally done via literal notation such as `[]` or
 `[1, 2, 3]`. Using the `new Array()` is discouraged as is `new Array(1, 2, 3)`.

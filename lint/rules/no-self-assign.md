@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows self assignments
+Disallows self assignments.
 
 Self assignments like `a = a;` have no effect at all. If there are self
 assignments in the code, most likely it means that the author is still in the

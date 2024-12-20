@@ -2,7 +2,7 @@
 tags: []
 ---
 
-Disallows multiple variable definitions in the same declaration statement
+Disallows multiple variable definitions in the same declaration statement.
 
 **Invalid:**
 
