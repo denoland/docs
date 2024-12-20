@@ -26,7 +26,7 @@ export const getLintIcon = (
 
 export default function LintRulesIndex(
   data: Lume.Data,
-  _helpers: Lume.Helpers,
+  helpers: Lume.Helpers,
 ) {
   const TYPES = [
     "recommended",
@@ -83,9 +83,11 @@ export default function LintRulesIndex(
               </a>{" "}
               {lintRule.tags.map((tag: LintIconType) => getLintIcon(tag))}
             </div>
-            <div>
-              Lorem ipsum dolor sit amet, <code>consectetur</code>{" "}
-              adipiscing elit, sed do eiusmod tempor.
+            <div
+              dangerouslySetInnerHTML={{
+                __html: helpers.md(lintRule.content).split("\n")[0],
+              }}
+            >
             </div>
           </li>
         ))}

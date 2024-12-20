@@ -21,15 +21,14 @@ async function generateSidebarItems() {
       frontMatterData.body = mdContent;
     }
     const tags = frontMatterData.attrs.tags ?? [];
-    // TODO(bartlomieju): handle descriptions properly
-    // const description = frontMatterData.body.split(".")[0];
+    const content = frontMatterData.body;
 
     sidebarItems.push(
       {
         href: `/lint/rules/${lintRuleName}/`,
         label: lintRuleName,
         tags,
-        // description,
+        content,
       } satisfies SidebarLink,
     );
   }
