@@ -1,4 +1,4 @@
-import { extractYaml } from "jsr:@std/front-matter@1.0.5";
+import { extractYaml } from "@std/front-matter";
 import { walk } from "jsr:@std/fs";
 import { basename } from "jsr:@std/path";
 import { Sidebar, SidebarLink } from "../types.ts";

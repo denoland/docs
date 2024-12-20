@@ -10,7 +10,7 @@ const getReadableIconName = (iconType: LintIconType) => {
   return iconType.charAt(0).toUpperCase() + iconType.slice(1);
 };
 
-const getLintIcon = (
+export const getLintIcon = (
   type: LintIconType,
 ) => {
   const svgFileName = type === "recommended" ? "checkmark" : type;
@@ -19,6 +19,7 @@ const getLintIcon = (
       src={`/img/${svgFileName}.svg`}
       class="size-6"
       alt={type}
+      title={getReadableIconName(type)}
     />
   );
 };

@@ -1,9 +1,9 @@
 import { walkSync } from "@std/fs/walk";
 import { basename } from "@std/path";
-export { sectionHref, sectionTitle, sidebar } from "./lint/_data.ts";
-import { extractYaml } from "jsr:@std/front-matter@1.0.5";
+import { extractYaml } from "@std/front-matter";
+export { sectionHref, sectionTitle, sidebar } from "./_data.ts";
 
-export const layout = "doc.tsx";
+export const layout = "lintRule.tsx";
 
 export const toc = [];
 
@@ -29,6 +29,9 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
       url: `/lint/rules/${ruleName}/`,
       title: ruleName,
       content: helpers.md(fmData.body),
+      data: {
+        tags: fmData.attrs.tags,
+      },
     };
   }
 }
