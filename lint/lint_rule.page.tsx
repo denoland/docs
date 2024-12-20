@@ -1,7 +1,9 @@
 import { walkSync } from "@std/fs/walk";
 import { basename } from "@std/path";
 import { extractYaml } from "@std/front-matter";
-export { sectionHref, sectionTitle, sidebar } from "./_data.ts";
+export { sectionHref, sidebar } from "./_data.ts";
+
+export const sectionTitle = "Lint rules";
 
 export const layout = "lintRule.tsx";
 

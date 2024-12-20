@@ -1,6 +1,6 @@
 type LintIconType = "jsr" | "react" | "jsx" | "recommended" | "fresh";
 
-export const title = "Overview";
+export const title = "List of rules";
 export const toc = [];
 
 const getReadableIconName = (iconType: LintIconType) => {

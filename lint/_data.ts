@@ -47,7 +47,7 @@ export const sectionHref = "/lint/";
 
 export const sidebar = [
   {
-    title: sectionTitle,
+    title: "List of rules",
     href: sectionHref,
     items: lintRulePages,
   },
