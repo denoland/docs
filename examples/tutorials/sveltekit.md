@@ -1,14 +1,19 @@
 # Building a SvelteKit app with sv and Dino
 
-SvelteKit has been a stable popular vote since its launch and with Svelte version 5 releasing recently, as of time of writing, there isn't a better time to show off running it with Deno!
+SvelteKit has been a stable popular vote since its launch and with Svelte
+version 5 releasing recently, as of time of writing, there isn't a better time
+to show off running it with Deno!
 
-Through this tutorial we will walk through setting up a SvelteKit project, made easier with the sv cli release and look at loading patters.
+Through this tutorial we will walk through setting up a SvelteKit project, made
+easier with the sv cli release and look at loading patters.
 
-You can see the finished app at [GitHub](https://github.com/s-petey/deno-sveltekit)
+You can see the finished app at
+[GitHub](https://github.com/s-petey/deno-sveltekit)
 
 ## Getting started
 
-We can scaffold an application easily with `npx sv create`. This is [SvelteKit's CLI](https://github.com/sveltejs/cli) which has a lot of utility.
+We can scaffold an application easily with `npx sv create`. This is
+[SvelteKit's CLI](https://github.com/sveltejs/cli) which has a lot of utility.
 
 https://github.com/user-attachments/assets/8357d46b-b535-44e3-9191-1496e0632bd1
 
@@ -28,40 +33,54 @@ If you have followed the video above great! If not, here are the selections:
 - Package manager
   - Deno
 
-For the remainder of this, you should have `deno task dev` running in the background so you can see your changes and the application running locally.
+For the remainder of this, you should have `deno task dev` running in the
+background so you can see your changes and the application running locally.
 
 ### Walkthrough
 
 There are a few different folders to be mindful of.
 
-`src` this is the root of your application code and where most of your time and effort will go.
+`src` this is the root of your application code and where most of your time and
+effort will go.
 
-`src/lib` this is a SvelteKit aliased directory for fast import and where many of your helpers or library code will live.
+`src/lib` this is a SvelteKit aliased directory for fast import and where many
+of your helpers or library code will live.
 
-`src/routes` this is the rendered pages for your application with SvelteKit, there is folder routing.
+`src/routes` this is the rendered pages for your application with SvelteKit,
+there is folder routing.
 
 #### Good info
 
-There are a few conventions which we will use in our SvelteKit application. (Although there are more available, I am only covering the ones used).
+There are a few conventions which we will use in our SvelteKit application.
+(Although there are more available, I am only covering the ones used).
 
-- Files or folders with `server` in the name are meant to **only** be run on the server and may cause errors if you try to run them in the client.
+- Files or folders with `server` in the name are meant to **only** be run on the
+  server and may cause errors if you try to run them in the client.
 - Within `src/routes` files have a naming conventions:
   - `+page.svelte` -- this is the rendered file in the browser
-  - `+page.server.ts` -- This file will run on the server and sends, and can receive, data directly and type safely to the `+page.svelte` it is directly next to.
-  - `+layout.svelte` -- a file which defines a layout with an outlet to be added to any `+page.svelte` on the same directory or any child directories.
-  - `+error.svelte` -- A custom error page you can add to make error pages nicer to come across.
+  - `+page.server.ts` -- This file will run on the server and sends, and can
+    receive, data directly and type safely to the `+page.svelte` it is directly
+    next to.
+  - `+layout.svelte` -- a file which defines a layout with an outlet to be added
+    to any `+page.svelte` on the same directory or any child directories.
+  - `+error.svelte` -- A custom error page you can add to make error pages nicer
+    to come across.
 
-Additional note later you will see we put the `dino.ts` file within a `lib/server` directory. This will mean as stated above that this file is meant to **only** be accessed by other server files.
+Additional note later you will see we put the `dino.ts` file within a
+`lib/server` directory. This will mean as stated above that this file is meant
+to **only** be accessed by other server files.
 
 ### Setup our "database"
 
-We will be using a ts file with a `Map` to access and find our items for simplicity. Create a file and folder:
+We will be using a ts file with a `Map` to access and find our items for
+simplicity. Create a file and folder:
 
 ```
 src/lib/server/dino.ts
 ```
 
-Within this file we will set up a type for our `Dino`s and store the array of data to be exported as a map.
+Within this file we will set up a type for our `Dino`s and store the array of
+data to be exported as a map.
 
 ```ts
 export type Dino = { name: string; description: string };
@@ -83,7 +102,8 @@ With this setup we have our "database"! Next to access it on a page.
 
 ### Loading data to be rendered
 
-We now need to create a `+page.server.ts` file which will be at the root of our routes directory. There should already be a `+page.svlete` there.
+We now need to create a `+page.server.ts` file which will be at the root of our
+routes directory. There should already be a `+page.svlete` there.
 
 ```
 src/routes/+page.server.ts
@@ -100,7 +120,9 @@ export const load = async ({ url }) => {
 });
 ```
 
-All we are doing here is converting our map to an array so we can see them rendered on the `+page.svelte`. Within this page you can remove anything you'd like or just add the following.
+All we are doing here is converting our map to an array so we can see them
+rendered on the `+page.svelte`. Within this page you can remove anything you'd
+like or just add the following.
 
 ```svelte
 <script lang="ts">
@@ -115,44 +137,54 @@ All we are doing here is converting our map to an array so we can see them rende
 </section>
 ```
 
-Notice while you are working with `data` we have type safety to know that `data.dinos` exists and the types that are available!
+Notice while you are working with `data` we have type safety to know that
+`data.dinos` exists and the types that are available!
 
 ### Adding an individual Dino page
 
-Now that we are rendering each dino and have links on each of them setup, we can add a route to handle rendering this data.
+Now that we are rendering each dino and have links on each of them setup, we can
+add a route to handle rendering this data.
 
 ```
 src/routes/[name]/+page.server.ts
 src/routes/[name]/+page.svelte
 ```
 
-There is something neat and unique about this route. I am sure you noticed the `[name]` inserted as a folder name. This allows us to have a named route parameter. We could have used anything as the `name`, however we want to be able to route to `localhost:5173/Ingenia` and see our dinosaur and since that is the name I've used the parameter `name`.
+There is something neat and unique about this route. I am sure you noticed the
+`[name]` inserted as a folder name. This allows us to have a named route
+parameter. We could have used anything as the `name`, however we want to be able
+to route to `localhost:5173/Ingenia` and see our dinosaur and since that is the
+name I've used the parameter `name`.
 
-With that explained now we can access this without our server loader to get our dino and send it to the page!
+With that explained now we can access this without our server loader to get our
+dino and send it to the page!
 
 ```ts
 /// src/routes/[name]/+page.server.ts
-import { dinos } from '$lib/server/dino.js';
-import { error } from '@sveltejs/kit';
+import { dinos } from "$lib/server/dino.js";
+import { error } from "@sveltejs/kit";
 
 export const load = async ({ params: { name } }) => {
   const dino = dinos.get(name.toLowerCase());
 
   if (!dino) {
-    throw error(404, { message: 'Dino not found' });
+    throw error(404, { message: "Dino not found" });
   }
 
   return { name: dino.name, description: dino.description };
 };
 ```
 
-Notice we are throwing an error here. We don't have an `+error.svelte` page set up yet, so any errors will currently bubble to the default SvelteKit error page. Lets add one at the root level to handle any errors.
+Notice we are throwing an error here. We don't have an `+error.svelte` page set
+up yet, so any errors will currently bubble to the default SvelteKit error page.
+Lets add one at the root level to handle any errors.
 
 ```
 src/routes/+error.svelte
 ```
 
-This is a very simple page, feel free to spruce up the styles here or add your own flair!
+This is a very simple page, feel free to spruce up the styles here or add your
+own flair!
 
 ```svelte
 <script lang="ts">
@@ -162,9 +194,12 @@ This is a very simple page, feel free to spruce up the styles here or add your o
 <h1>{page.status}: {page.error?.message}</h1>
 ```
 
-We simply want to show that something went wrong and with the `page` exposed by SvelteKit, we can show the status code thrown and if there was a message attached to the error.
+We simply want to show that something went wrong and with the `page` exposed by
+SvelteKit, we can show the status code thrown and if there was a message
+attached to the error.
 
-Now with that pesky error distraction handled, pun intended, we can get back to showing our individual dinosaur!
+Now with that pesky error distraction handled, pun intended, we can get back to
+showing our individual dinosaur!
 
 ```svelte
 <script lang="ts">
@@ -177,13 +212,18 @@ Now with that pesky error distraction handled, pun intended, we can get back to 
 <p>{data.description}</p>
 ```
 
-Starting to work on this page you can see we still get the type safety knowing a `name` and `description` will exist on our data and we can render it!
+Starting to work on this page you can see we still get the type safety knowing a
+`name` and `description` will exist on our data and we can render it!
 
-However, there is another problem if you navigate to this page, either by clicking on one of the links on the main page or by manually adding the dinosaur name to the URL we have no way of getting back!
+However, there is another problem if you navigate to this page, either by
+clicking on one of the links on the main page or by manually adding the dinosaur
+name to the URL we have no way of getting back!
 
 ### Layouts
 
-We want to have a standard layout so that our pages can share different information or links. This can be achieved through `+layout.svelte` pages. Lets go ahead and update the one up at the root of the `routes` directory.
+We want to have a standard layout so that our pages can share different
+information or links. This can be achieved through `+layout.svelte` pages. Lets
+go ahead and update the one up at the root of the `routes` directory.
 
 Here are a few things we want to achieve:
 
@@ -216,20 +256,27 @@ Here are a few things we want to achieve:
 </footer>
 ```
 
-As you see, we are seeing `{@render children()}` for the first time. This just works as an "outlet" if you are coming from the React world to render whatever other child page may need to be output.
+As you see, we are seeing `{@render children()}` for the first time. This just
+works as an "outlet" if you are coming from the React world to render whatever
+other child page may need to be output.
 
-Going back to your application you can see our heading `h1` has a link to go back to the home page.
+Going back to your application you can see our heading `h1` has a link to go
+back to the home page.
 
 ### Advanced routing, search parameters, and styling
 
-We don't want to render all of the dinos at a single time; as that is too much to scroll through. We want our users to be able to search and click through pages of dinosaurs, which will also showcase another awesome Svelte 5 feature, snippets!
+We don't want to render all of the dinos at a single time; as that is too much
+to scroll through. We want our users to be able to search and click through
+pages of dinosaurs, which will also showcase another awesome Svelte 5 feature,
+snippets!
 
 Lets open our main page and its server page to make a few changes.
 
-Previously we were returning an array version of our dinos, lets allow users to search them and add some pagination logic.
+Previously we were returning an array version of our dinos, lets allow users to
+search them and add some pagination logic.
 
 ```ts
-import { dinos } from '$lib/server/dino.js';
+import { dinos } from "$lib/server/dino.js";
 
 export const load = async ({ url }) => {
   //  We can access the search params by using the `url` provided
@@ -237,9 +284,9 @@ export const load = async ({ url }) => {
   const queryParams = url.searchParams;
 
   // We will use `q` as our search string
-  const q = queryParams.get('q');
+  const q = queryParams.get("q");
   // We will use `page` to know which page we are on
-  const pageParam = queryParams.get('page');
+  const pageParam = queryParams.get("page");
   let page = 1;
   // We should verify there is a page param, if there is verify it is a number
   // otherwise use our default of 1
@@ -249,7 +296,7 @@ export const load = async ({ url }) => {
       page = parsedPage;
     }
   }
-  const limitParam = queryParams.get('limit');
+  const limitParam = queryParams.get("limit");
   let limit = 25;
   // We should verify there is a limit param, if there is verify it is a number
   // otherwise use our default of 1
@@ -275,7 +322,7 @@ export const load = async ({ url }) => {
   const offset = Math.abs((page - 1) * limit);
   const paginatedDinos = Array.from(filteredDinos).slice(
     offset,
-    offset + limit
+    offset + limit,
   );
   const totalDinos = filteredDinos.length;
   const totalPages = Math.ceil(totalDinos / limit);
@@ -293,7 +340,8 @@ export const load = async ({ url }) => {
 };
 ```
 
-Wuuf, that was a lot of work, and with it out of the way lets get some pagination and search inputs added to the UI!
+Wuuf, that was a lot of work, and with it out of the way lets get some
+pagination and search inputs added to the UI!
 
 ```svelte
 <script lang="ts">
@@ -402,13 +450,21 @@ Wuuf, that was a lot of work, and with it out of the way lets get some paginatio
 </style>
 ```
 
-Notice for the input we use `defaultValue={data.q ?? ''}` so that when it is rendered in the UI we don't get `undefined` or `null` showing.
+Notice for the input we use `defaultValue={data.q ?? ''}` so that when it is
+rendered in the UI we don't get `undefined` or `null` showing.
 
-With snippets you can create re-useable parts of Svelte code for easier rendering. `{#snippet pageButton(...)}` allows us to define the section to be rendered. We can then use it and pass the required type safe parameters using `{@render pageButton(...)}`. You can see this for all of the pagination buttons.
+With snippets you can create re-useable parts of Svelte code for easier
+rendering. `{#snippet pageButton(...)}` allows us to define the section to be
+rendered. We can then use it and pass the required type safe parameters using
+`{@render pageButton(...)}`. You can see this for all of the pagination buttons.
 
-Another neat Svelte trick is whenever `<style>` is defined on the page, it is scoped only to the file it is used in. So we are able to add these classes knowing that it will not affect any of our other files if they also used that styling.
+Another neat Svelte trick is whenever `<style>` is defined on the page, it is
+scoped only to the file it is used in. So we are able to add these classes
+knowing that it will not affect any of our other files if they also used that
+styling.
 
-I have updated some of the styling to make it more pleasant to look at, but I know you have great taste and are free to make it look however you'd like!
+I have updated some of the styling to make it more pleasant to look at, but I
+know you have great taste and are free to make it look however you'd like!
 
 # App Showcase
 
