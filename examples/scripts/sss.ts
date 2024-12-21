@@ -89,8 +89,8 @@ while (selectedIndices.size < threshold) {
   selectedIndices.add(await getSecureRandom(0, totalShares));
 }
 
-const selectedShares = Array.from(selectedIndices).map((index) => 
- shares[index]
+const selectedShares = Array.from(selectedIndices).map((index) =>
+  shares[index]
 );
 console.log("Selected Shares for Reconstruction:", selectedShares);
 
