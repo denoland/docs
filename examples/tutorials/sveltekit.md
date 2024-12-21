@@ -2,19 +2,17 @@
 
 SvelteKit has been a stable popular vote since its launch and with Svelte version 5 releasing recently, as of time of writing, there isn't a better time to show off running it with Deno!
 
-Through this tutorial we will walk through setting up a SvelteKit project, made much easier with the sv cli release and look at loading patters.
+Through this tutorial we will walk through setting up a SvelteKit project, made easier with the sv cli release and look at loading patters.
 
 You can see the finished app at [GitHub](https://github.com/s-petey/deno-sveltekit)
-
-<!-- TODO: Add gif / video of the app sv_create -->
 
 ## Getting started
 
 We can scaffold an application easily with `npx sv create`. This is [SvelteKit's CLI](https://github.com/sveltejs/cli) which has a lot of utility.
 
-<!-- Insert video DRAG AND DROP online -->
+https://github.com/user-attachments/assets/8357d46b-b535-44e3-9191-1496e0632bd1
 
-If you have followed the video above great! if not, here are the selections:
+If you have followed the video above great! If not, here are the selections:
 
 - Template
   - SvelteKit minimal
@@ -30,21 +28,21 @@ If you have followed the video above great! if not, here are the selections:
 - Package manager
   - Deno
 
-For the remainder of this you should have `deno task dev` running in the background so you can see your changes and the application running locally!
+For the remainder of this, you should have `deno task dev` running in the background so you can see your changes and the application running locally.
 
 ### Walkthrough
 
 There are a few different folders to be mindful of.
 
-`src` this is the root of your application code and where most of your time and effort will go into.
+`src` this is the root of your application code and where most of your time and effort will go.
 
-`src/lib` this is a SvelteKit aliased directory for fast import and where a lot of your helpers or library code will live.
+`src/lib` this is a SvelteKit aliased directory for fast import and where many of your helpers or library code will live.
 
-`src/routes` this is the rendered pages for your application with SvelteKit there is folder routing.
+`src/routes` this is the rendered pages for your application with SvelteKit, there is folder routing.
 
 #### Good info
 
-There are a few conventions which we will use in our SvelteKit application. There are more but I am only covering the ones used.
+There are a few conventions which we will use in our SvelteKit application. (Although there are more available, I am only covering the ones used).
 
 - Files or folders with `server` in the name are meant to **only** be run on the server and may cause errors if you try to run them in the client.
 - Within `src/routes` files have a naming conventions:
@@ -91,7 +89,7 @@ We now need to create a `+page.server.ts` file which will be at the root of our 
 src/routes/+page.server.ts
 ```
 
-With this file created now we need to initialize the function to load our dinos!
+With this file created, we need to initialize the function to load our dinos!
 
 ```ts
 /// src/routes/+page.server.ts
@@ -102,7 +100,7 @@ export const load = async ({ url }) => {
 });
 ```
 
-All we are doing here is converting our map to an array so we can see them rendered on the `+page.svelte`. Within this page you can remove everything if you'd like or just add the following.
+All we are doing here is converting our map to an array so we can see them rendered on the `+page.svelte`. Within this page you can remove anything you'd like or just add the following.
 
 ```svelte
 <script lang="ts">
@@ -121,14 +119,14 @@ Notice while you are working with `data` we have type safety to know that `data.
 
 ### Adding an individual Dino page
 
-Now that we are rendering each dino and have links on each of them setup we can add a route to handle rendering this data.
+Now that we are rendering each dino and have links on each of them setup, we can add a route to handle rendering this data.
 
 ```
 src/routes/[name]/+page.server.ts
 src/routes/[name]/+page.svelte
 ```
 
-There is something neat and unique about this route. I am sure you noticed the `[name]` inserted as a folder name. This allows us to have a named route parameter. We could have used anything as the `name` here, however we want to be able to route to `localhost:5173/Ingenia` and see our dinosaur and since that is the name I've used the parameter `name`.
+There is something neat and unique about this route. I am sure you noticed the `[name]` inserted as a folder name. This allows us to have a named route parameter. We could have used anything as the `name`, however we want to be able to route to `localhost:5173/Ingenia` and see our dinosaur and since that is the name I've used the parameter `name`.
 
 With that explained now we can access this without our server loader to get our dino and send it to the page!
 
@@ -164,7 +162,7 @@ This is a very simple page, feel free to spruce up the styles here or add your o
 <h1>{page.status}: {page.error?.message}</h1>
 ```
 
-We simply want to show that something went wrong and with the `page` exposed by SvelteKit we can show the status code thrown and if there was a message attached to the error.
+We simply want to show that something went wrong and with the `page` exposed by SvelteKit, we can show the status code thrown and if there was a message attached to the error.
 
 Now with that pesky error distraction handled, pun intended, we can get back to showing our individual dinosaur!
 
@@ -179,15 +177,15 @@ Now with that pesky error distraction handled, pun intended, we can get back to 
 <p>{data.description}</p>
 ```
 
-Sorry for the simplicity of styling here, but you can see here we still get the type safety knowing a `name` and `description` will exist on our data and we can render it!
+Starting to work on this page you can see we still get the type safety knowing a `name` and `description` will exist on our data and we can render it!
 
-However there is another problem if you navigate to this page, either by clicking on one of the links on the main page or by manually adding the dinosaur name to the URL we have no way of getting back!
+However, there is another problem if you navigate to this page, either by clicking on one of the links on the main page or by manually adding the dinosaur name to the URL we have no way of getting back!
 
 ### Layouts
 
-We want to have a standard layout so that our pages can share different information or links. This can be achieved through `+layout.svelte` pages lets go ahead and update the one up at the root of the `routes` directory.
+We want to have a standard layout so that our pages can share different information or links. This can be achieved through `+layout.svelte` pages. Lets go ahead and update the one up at the root of the `routes` directory.
 
-There are a few things we want to achieve here:
+Here are a few things we want to achieve:
 
 1. Allow users to navigate to the home page
 2. Show the awesome docs for Deno and SvelteKit
@@ -218,17 +216,17 @@ There are a few things we want to achieve here:
 </footer>
 ```
 
-We are seeing `{@render children()}` for the first time here. All it does is works as an "outlet" if you are coming from the React world to just render whatever other child page may need to be output there.
+As you see, we are seeing `{@render children()}` for the first time. This just works as an "outlet" if you are coming from the React world to render whatever other child page may need to be output.
 
-Now if you go back to your application you can see our heading `h1` has a link to go back to the home page!
+Going back to your application you can see our heading `h1` has a link to go back to the home page.
 
 ### Advanced routing, search parameters, and styling
 
-We don't want to render all of the dinos at a single time as that is too much to scroll through. We want our users to be able to search and click through pages of dinosaurs. This will also showcase another awesome Svelte 5 feature, snippets!
+We don't want to render all of the dinos at a single time; as that is too much to scroll through. We want our users to be able to search and click through pages of dinosaurs, which will also showcase another awesome Svelte 5 feature, snippets!
 
 Lets open our main page and its server page to make a few changes.
 
-Previously we were just returning an array version of our dinos lets allow users to search them and add some pagination logic.
+Previously we were returning an array version of our dinos, lets allow users to search them and add some pagination logic.
 
 ```ts
 import { dinos } from '$lib/server/dino.js';
@@ -295,7 +293,7 @@ export const load = async ({ url }) => {
 };
 ```
 
-Wuuf that was a lot of work and with it out of the way lets get some pagination and search inputs added to the UI!
+Wuuf, that was a lot of work, and with it out of the way lets get some pagination and search inputs added to the UI!
 
 ```svelte
 <script lang="ts">
@@ -406,10 +404,12 @@ Wuuf that was a lot of work and with it out of the way lets get some pagination 
 
 Notice for the input we use `defaultValue={data.q ?? ''}` so that when it is rendered in the UI we don't get `undefined` or `null` showing.
 
-With snippets you can create re-useable parts of Svelte code for easier rendering. `{#snippet pageButton(...)}` allows us to define the section to be rendered. Then we can use it and pass the required type safe parameters using `{@render pageButton(...)}`. You can see this for all of the pagination buttons.
+With snippets you can create re-useable parts of Svelte code for easier rendering. `{#snippet pageButton(...)}` allows us to define the section to be rendered. We can then use it and pass the required type safe parameters using `{@render pageButton(...)}`. You can see this for all of the pagination buttons.
 
-Another neat Svelte trick is that whenever we have `<style>` defined on the page that is scoped only to the file it is used in. So we are able to add these classes knowing that it will not effect any of our other files if they also used that styling.
+Another neat Svelte trick is whenever `<style>` is defined on the page, it is scoped only to the file it is used in. So we are able to add these classes knowing that it will not affect any of our other files if they also used that styling.
 
 I have updated some of the styling to make it more pleasant to look at, but I know you have great taste and are free to make it look however you'd like!
 
-<!-- TODO: Add video of application running app_showcase -->
+# App Showcase
+
+https://github.com/user-attachments/assets/c5926d48-1ea3-420f-9d3d-d74a5a49486a
