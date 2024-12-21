@@ -24,6 +24,7 @@
   "ide": "/runtime/getting_started/setup_your_environment/#setting-up-your-editor%2Fide",
   "import_maps": "/runtime/manual/basics/import_maps",
   "info": "/runtime/manual/tools/info",
+  "lint-ignore": "/runtime/reference/cli/lint/#ignore-directives",
   "lint": "/runtime/manual/tools/lint",
   "lsp": "/runtime/reference/cli/lsp",
   "permissions": "/runtime/fundamentals/security/",
