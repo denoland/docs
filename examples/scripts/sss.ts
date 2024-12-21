@@ -1,7 +1,7 @@
 /**
  * @title Shamir's Secret Sharing Implementation
  * @difficulty intermediate
- * @tags cryptography, security
+ * @tags cli
  * @run <url>
  * @group Cryptography
  *
