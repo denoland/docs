@@ -5,8 +5,8 @@
  * @run <url>
  * @group Cryptography
  *
- * Implementation of Shamir's Secret Sharing where a secret, split into shares,
- * allows its reconstruction only when a sufficient number of shares are combined.
+ * This example demonstrates Shamir's Secret Sharing, where a secret, split into shares, allows its
+ * reconstruction only when a sufficient number of shares are combined.
  */
 
 // Random Number Generation within a range
@@ -89,7 +89,9 @@ while (selectedIndices.size < threshold) {
   selectedIndices.add(await getSecureRandom(0, totalShares));
 }
 
-const selectedShares = Array.from(selectedIndices).map((index) => shares[index]);
+const selectedShares = Array.from(selectedIndices).map((index) => 
+ shares[index]
+);
 console.log("Selected Shares for Reconstruction:", selectedShares);
 
 // Reconstruct the secret
