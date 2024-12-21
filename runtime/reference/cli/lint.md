@@ -110,10 +110,10 @@ function foo(): any {
 
 ## Ignore `ban-unused-ignore` itself
 
-deno_lint provides `ban-unused-ignore` rule, which will detect ignore directives
-that don't ever suppress certain diagnostics. This is useful when you want to
-discover ignore directives that are no longer necessary after refactoring the
-code.
+`deno lint` provides [`ban-unused-ignore` rule](/lint/rules/ban-unused-ignore/),
+which will detect ignore directives that don't ever suppress certain
+diagnostics. This is useful when you want to discover ignore directives that are
+no longer necessary after refactoring the code.
 
 In a few cases, however, you might want to ignore `ban-unused-ignore` rule
 itself. One of the typical cases would be when working with auto-generated
