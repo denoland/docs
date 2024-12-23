@@ -201,7 +201,7 @@ This configuration will:
 - removes the `no-unused-vars` rule excluded.
 
 You can find a full list of available linting rules in the
-[Deno lint documentation](https://lint.deno.land/).
+[List of rules](/lint/) documentation page.
 
 Read more about [linting with Deno](/runtime/reference/cli/linter/).
 
