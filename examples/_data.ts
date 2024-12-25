@@ -696,7 +696,7 @@ export const sidebar = [
     ],
   },
   {
-    title: "Crypotography",
+    title: "Cryptography",
     items: [
       {
         label: "Generating & validating UUIDs",
