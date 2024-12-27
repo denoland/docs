@@ -398,6 +398,6 @@ the fish config folder:
 
 If you are writing or supporting a community integration using the Deno language
 server, read more about
-[integrating with the Deno LSP](/runtime/reference/lsp_integration/),
-but also feel free to join our
-[Discord community](https://discord.gg/deno) in the `#dev-lsp` channel.
+[integrating with the Deno LSP](/runtime/reference/lsp_integration/), but also
+feel free to join our [Discord community](https://discord.gg/deno) in the
+`#dev-lsp` channel.
