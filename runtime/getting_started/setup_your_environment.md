@@ -397,7 +397,7 @@ the fish config folder:
 ## Other tools
 
 If you are writing or supporting a community integration using the Deno language
-server, you will find
-[documentation](https://github.com/denoland/deno/tree/main/cli/lsp#deno-language-server)
-located in the Deno CLI code repository, but also feel free to join our
-[Discord community](https://discord.gg/deno) in the `#dev-lsp` channel.
+server, read more about
+[integrating with the Deno LSP](/runtime/reference/lsp_integration/), but also
+feel free to join our [Discord community](https://discord.gg/deno) in the
+`#dev-lsp` channel.
