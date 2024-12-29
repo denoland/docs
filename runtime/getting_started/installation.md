@@ -160,6 +160,12 @@ You can also build and install from source using
 cargo install deno --locked
 ```
 
+Or install it using [npm](https://npmjs.com/package/deno):
+
+```shell
+npm install -g deno
+```
+
 Deno binaries can also be installed manually, by downloading a zip file at
 [github.com/denoland/deno/releases](https://github.com/denoland/deno/releases).
 These packages contain just a single executable file. You will have to set the
