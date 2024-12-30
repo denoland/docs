@@ -11,7 +11,7 @@ command: lint
 ## Available rules
 
 For a complete list of supported rules, visit
-[the deno_lint rule documentation](https://lint.deno.land).
+[List of rules](https://docs.deno.com/lint/) documentation page.
 
 ## Ignore directives
 

@@ -44,7 +44,7 @@ The linter can be configured in a
 rules, plugins, and settings to tailor the linting process to your needs.
 
 You can view and search the list of available rules and their usage on
-[Deno lint rules](https://lint.deno.land/).
+[List of rules](/lint/) documentation page.
 
 ## Formatting
 
