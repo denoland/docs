@@ -162,7 +162,7 @@ You will have two ways to enable the LSP Server. One is to have a `deno.json` or
 `DENO_ENABLE=1`. Also if you want to highlight syntax in the intellisense
 tooltip, you can add this code to your `.vimrc` configuration too:
 
-``` vim
+```vim
 let g:markdown_fenced_languages = ["ts=typescript"]
 ```
 
