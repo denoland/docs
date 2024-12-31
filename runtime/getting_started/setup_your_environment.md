@@ -131,7 +131,8 @@ deno. You can get more information from
 
 #### Vim-Lsp
 
-After installing Vim-Lsp through [vim-plug](https://github.com/prabirshrestha/vim-lsp?tab=readme-ov-file#installing)
+After installing Vim-Lsp through
+[vim-plug](https://github.com/prabirshrestha/vim-lsp?tab=readme-ov-file#installing)
 or vim packages. Add this code to your `.vimrc` configuration:
 
 ```vim
@@ -156,9 +157,10 @@ if executable('deno')
 endif
 ```
 
-You will have two ways to enable the LSP Server. One is to have a `deno.json` or `deno.jsonc` in your current working directory,
-or force it with `DENO_ENABLE=1`. Also if you want to highlight syntax in the intellisense tooltip, you can add this code to your
-`.vimrc` configuration too:
+You will have two ways to enable the LSP Server. One is to have a `deno.json` or
+`deno.jsonc` in your current working directory, or force it with
+`DENO_ENABLE=1`. Also if you want to highlight syntax in the intellisense
+tooltip, you can add this code to your `.vimrc` configuration too:
 
 ``` vim
 let g:markdown_fenced_languages = ["ts=typescript"]
