@@ -63,8 +63,9 @@ to learn more about how to get started with Deno in Jetbrains IDEs.
 Deno is well-supported on both [Vim](https://www.vim.org/) and
 [Neovim](https://neovim.io/) via
 [coc.nvim](https://github.com/neoclide/coc.nvim),
-[vim-easycomplete](https://github.com/jayli/vim-easycomplete) and
-[ALE](https://github.com/dense-analysis/ale). coc.nvim offers plugins to
+[vim-easycomplete](https://github.com/jayli/vim-easycomplete),
+[ALE](https://github.com/dense-analysis/ale) and
+[vim-lsp](https://github.com/prabirshrestha/vim-lsp). coc.nvim offers plugins to
 integrate to the Deno language server while ALE supports it _out of the box_.
 
 ### Neovim 0.6+ using the built-in language server
@@ -127,6 +128,41 @@ Vim-EasyComplete supports Deno without any other configuration. Once you have
 you need install deno via `:InstallLspServer deno` if you haven't installed
 deno. You can get more information from
 [official documentation](https://github.com/jayli/vim-easycomplete).
+
+#### Vim-Lsp
+
+After installing Vim-Lsp through [vim-plug](https://github.com/prabirshrestha/vim-lsp?tab=readme-ov-file#installing)
+or vim packages. Add this code to your `.vimrc` configuration:
+
+```vim
+if executable('deno')
+  let server_config = {
+    \ 'name': 'deno',
+    \ 'cmd': {server_info->['deno', 'lsp']},
+    \ 'allowlist': ['typescript', 'javascript', 'javascriptreact', 'typescriptreact'],
+    \ }
+
+  if exists('$DENO_ENABLE') 
+    let deno_enabled = $DENO_ENABLE == '1'
+
+    if deno_enabled
+      let server_config['workspace_config'] = { 'deno': { 'enable': v:true } }
+    else
+      let server_config['workspace_config'] = { 'deno': { 'enable': v:false } }
+    endif
+  endif
+
+  au User lsp_setup call lsp#register_server(server_config)
+endif
+```
+
+You will have two ways to enable the LSP Server. One is to have a `deno.json` or `deno.jsonc` in your current working directory,
+or force it with `DENO_ENABLE=1`. Also if you want to highlight syntax in the intellisense tooltip, you can add this code to your
+`.vimrc` configuration too:
+
+``` vim
+let g:markdown_fenced_languages = ["ts=typescript"]
+```
 
 ### Emacs
 
