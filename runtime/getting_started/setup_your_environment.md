@@ -144,13 +144,8 @@ if executable('deno')
     \ }
 
   if exists('$DENO_ENABLE') 
-    let deno_enabled = $DENO_ENABLE == '1'
-
-    if deno_enabled
-      let server_config['workspace_config'] = { 'deno': { 'enable': v:true } }
-    else
-      let server_config['workspace_config'] = { 'deno': { 'enable': v:false } }
-    endif
+    let deno_enabled = $DENO_ENABLE == '1' 
+    let server_config['workspace_config'] = { 'deno': { 'enable': deno_enabled ? v:true : v:false } } 
   endif
 
   au User lsp_setup call lsp#register_server(server_config)
