@@ -284,11 +284,12 @@ Enabling connection to the Deno language server requires changes in the
 ```toml
 [[language]]
 name = "typescript"
-language-id = "typescript"
-scope = "source.ts"
-injection-regex = "^(ts|typescript)$"
-file-types = ["ts"]
-shebangs = ["deno"]
+roots = ["deno.json", "deno.jsonc", "package.json"]
+auto-format = true
+language-servers = ["deno-lsp"]
+
+[[language]]
+name = "javascript"
 roots = ["deno.json", "deno.jsonc", "package.json"]
 auto-format = true
 language-servers = ["deno-lsp"]
@@ -296,9 +297,7 @@ language-servers = ["deno-lsp"]
 [language-server.deno-lsp]
 command = "deno"
 args = ["lsp"]
-
-[language-server.deno-lsp.config.deno]
-enable = true
+config.deno.enable = true
 ```
 
 ## Shell completions
