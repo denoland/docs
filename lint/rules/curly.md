@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [recommended]
 ---
 
 Enfore consistent brace style for all control statements.
