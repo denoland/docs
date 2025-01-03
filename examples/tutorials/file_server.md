@@ -89,8 +89,8 @@ deno install --allow-net --allow-read jsr:@std/http@1/file-server
 deno install --global --allow-net --allow-read jsr:@std/http@1/file-server
 ```
 
-> This will install the script to the Deno installation root's bin directory,
-> e.g. `/home/user/.deno/bin/file-server`.
+> This will install the script to the Deno installation root, e.g.
+> `/home/user/.deno/bin/file-server`.
 
 You can now run the script with the simplified script name:
 
