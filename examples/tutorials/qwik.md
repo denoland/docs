@@ -214,7 +214,7 @@ export default component$(() => {
       <h1 class="text-3xl font-bold mb-4">Welcome to the Dinosaur app</h1>
       <p class="mb-4">Click on a dinosaur below to learn more.</p>
       <ul class="space-y-2">
-        {dinosaursSignal.value.map((dinosaur: Dino) => (
+        {dinosaursSignal.value.dinosaurs.map((dinosaur: Dino) => (
           <li key={dinosaur.name}>
             <Link
               href={`/${dinosaur.name.toLowerCase()}`}
@@ -250,7 +250,7 @@ import type { Dino } from "~/types";
 import data from "~/data/dinosaurs.json" with { type: "json" };
 
 export const useDinosaurDetails = routeLoader$(({ params }): Dino => {
-  const dinosaurs = data;
+  const { dinosaurs } = data;
   const dinosaur = dinosaurs.find(
     (dino: Dino) => dino.name.toLowerCase() === params.name.toLowerCase(),
   );
