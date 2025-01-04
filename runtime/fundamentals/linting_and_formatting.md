@@ -83,7 +83,7 @@ any output.
 
 ### Integration in CI
 
-You can add deno fmt --check to your CI pipeline to automatically check for
+You can add `deno fmt --check` to your CI pipeline to automatically check for
 formatting issues. For example, in a GitHub Actions workflow:
 
 ```yaml
