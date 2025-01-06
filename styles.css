@@ -222,19 +222,14 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
   }
 }
 
-.markdownBlockTitle + div > pre:has(code.highlight) {
-  @apply rounded-t-none border-t-0;
-}
-
 .ddoc .markdown-body tr:nth-child(2n) {
   @apply bg-background-secondary !important;
 }
 
 .markdownBlockTitle {
-  background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-  @apply px-4 py-2 max-sm:-mx-4 sm:rounded-t-md border-y sm:border text-xs font-semibold
-    dark:bg-background-secondary text-foreground-secondary/80
-    dark:border-background-tertiary;
+  @apply bg-slate-100 p-2 leading-none rounded border text-xs font-semibold
+    z-10 relative w-max left-2 !-mb-4 text-foreground-secondary/80
+    dark:border-background-tertiary dark:bg-slate-900;
 }
 
 .markdown-body h2:hover .anchor-end {
@@ -442,15 +437,15 @@ body {
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li > button {
-  @apply inline-block mr-2 px-4 py-2 text-sm font-semibold text-slate-700
+  @apply inline-block mr-2 px-4 py-2 text-sm font-semibold text-slate-500
     rounded-t bg-slate-100/80 hover:bg-blue-50 border border-transparent
-    border-b-0 dark:text-slate-400 dark:bg-transparent
-    dark:border-background-tertiary dark:hover:bg-slate-700;
+    border-b-0 dark:text-slate-500 dark:bg-transparent
+    dark:border-background-tertiary dark:hover:bg-slate-600;
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li > button[data-active="true"] {
   @apply border-slate-200 bg-slate-100 text-slate-950 border-b-0 z-10 -mb-[1px]
-    pb-[calc(0.5rem+1px)] relative dark:text-foreground-secondary
+    pb-[calc(0.5rem+1px)] relative dark:text-slate-50
     dark:bg-background-secondary dark:border-background-tertiary;
 }
 
@@ -473,21 +468,6 @@ body {
     dark:border-background-tertiary;
 }
 
-.deno-tabs:has(.markdownBlockTitle) {
-  .markdownBlockTitle {
-    @apply rounded-t;
-  }
-  & pre {
-    @apply !rounded-t-none;
-  }
-}
-
-.deno-tabs .markdownBlockTitle {
-  @apply sm:rounded-t-md border border-slate-200
-    bg-slate-50 text-sm font-semibold
-    dark:bg-background-secondary dark:border-background-tertiary;
-}
-
 /* Strips bottom margin in instances where multiple code samples exist in a tab. */
 .markdown-body .deno-tabs :not(div > pre + div > pre) {
   @apply mb-0;
@@ -495,7 +475,7 @@ body {
 
 .markdown-body .highlight pre,
 .markdown-body pre {
-  @apply bg-gray-50 dark:border-background-tertiary
+  @apply bg-slate-50 dark:border-background-tertiary
     dark:bg-background-secondary;
 }
 
