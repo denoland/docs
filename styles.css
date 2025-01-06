@@ -200,8 +200,7 @@ h1 {
 
 pre:has(code.highlight),
 pre.highlight:has(code) {
-  @apply px-8 py-6 max-sm:-mx-4;
-  @apply max-sm:rounded-none !important;
+  @apply px-4 py-8 max-sm:-mx-4 border-x-0 sm:border sm:px-8 max-sm:!rounded-none;
 }
 
 pre:has(code.highlight):where(:hover, :focus) + .copyButton,
@@ -233,8 +232,8 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 
 .markdownBlockTitle {
   background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-  @apply px-8 py-3 max-sm:-mx-4 sm:rounded-t-md border text-sm font-semibold
-    dark:bg-background-secondary dark:text-foreground-secondary
+  @apply px-4 py-2 max-sm:-mx-4 sm:rounded-t-md border-y sm:border text-xs font-semibold
+    dark:bg-background-secondary text-foreground-secondary/80
     dark:border-background-tertiary;
 }
 
@@ -431,11 +430,11 @@ body {
 }
 
 .deno-tabs {
-  @apply -mx-4 mb-4 md:mx-0;
+  @apply -mx-4 mb-6 sm:mx-0;
 }
 
 .deno-tabs > ul.deno-tabs-buttons {
-  @apply flex flex-wrap list-none p-0 ml-4 md:m-0;
+  @apply flex flex-wrap list-none p-0 ml-4 sm:m-0;
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li {
@@ -456,7 +455,7 @@ body {
 }
 
 .deno-tabs > div.deno-tabs-content > div {
-  @apply hidden py-4 px-4 rounded rounded-tl-none bg-slate-100 border
+  @apply hidden py-2 px-2 sm:rounded-lg sm:rounded-tl-none bg-slate-100 border
     border-slate-200 dark:bg-background-secondary
     dark:border-background-tertiary;
 }
@@ -470,15 +469,23 @@ body {
 }
 
 .markdown-body .deno-tabs pre {
-  @apply border mx-0 bg-white border-slate-200 dark:bg-background-primary
+  @apply border mx-0 bg-white border-slate-200 dark:bg-background-primary !rounded
     dark:border-background-tertiary;
 }
 
+.deno-tabs:has(.markdownBlockTitle) {
+  .markdownBlockTitle {
+    @apply rounded-t;
+  }
+  & pre {
+    @apply !rounded-t-none;
+  }
+}
+
 .deno-tabs .markdownBlockTitle {
-  @apply px-8 py-2 max-sm:-mx-4 sm:rounded-t-md border border-slate-200
-    bg-slate-50 text-slate-900 text-sm font-semibold
-    dark:bg-background-secondary dark:border-background-tertiary
-    dark:text-foreground-secondary;
+  @apply sm:rounded-t-md border border-slate-200
+    bg-slate-50 text-sm font-semibold
+    dark:bg-background-secondary dark:border-background-tertiary;
 }
 
 /* Strips bottom margin in instances where multiple code samples exist in a tab. */
