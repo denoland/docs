@@ -229,8 +229,12 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 
 .markdownBlockTitle {
   @apply bg-slate-100 p-2 leading-none rounded border text-xs font-semibold z-10
-    relative w-max left-2 !-mb-4 text-foreground-secondary/80
+    relative w-max !-mb-4 text-foreground-secondary/80 sm:left-2
     dark:border-background-tertiary dark:bg-slate-900;
+}
+
+.deno-tabs .markdownBlockTitle {
+  @apply left-2;
 }
 
 .markdown-body h2:hover .anchor-end {
@@ -451,7 +455,7 @@ body {
 }
 
 .deno-tabs > div.deno-tabs-content > div {
-  @apply hidden py-2 px-2 sm:rounded-lg sm:rounded-tl-none bg-slate-100 border
+  @apply hidden p-2 sm:rounded-lg sm:rounded-tl-none sm:p-4 bg-slate-100 border
     border-slate-200 dark:bg-background-secondary
     dark:border-background-tertiary;
 }
