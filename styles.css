@@ -200,7 +200,8 @@ h1 {
 
 pre:has(code.highlight),
 pre.highlight:has(code) {
-  @apply px-4 py-8 max-sm:-mx-4 border-x-0 sm:border sm:px-8 max-sm:!rounded-none;
+  @apply px-4 py-8 max-sm:-mx-4 border-x-0 sm:border sm:px-8
+    max-sm:!rounded-none;
 }
 
 pre:has(code.highlight):where(:hover, :focus) + .copyButton,
@@ -227,8 +228,8 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 }
 
 .markdownBlockTitle {
-  @apply bg-slate-100 p-2 leading-none rounded border text-xs font-semibold
-    z-10 relative w-max left-2 !-mb-4 text-foreground-secondary/80
+  @apply bg-slate-100 p-2 leading-none rounded border text-xs font-semibold z-10
+    relative w-max left-2 !-mb-4 text-foreground-secondary/80
     dark:border-background-tertiary dark:bg-slate-900;
 }
 
@@ -407,8 +408,8 @@ body {
 }
 
 .markdown-body > pre.snippet-code[data-example-position="only"] {
-  @apply md:border-t md:border-b md:pt-4 rounded-t h-full md:rounded;
-  md: rounded-b;
+  @apply md:border-t md:border-b md:pt-4 rounded-t h-full md:rounded
+    md:rounded-b;
 }
 
 .markdown-body > pre.snippet-code[data-example-position="first"] {
@@ -433,7 +434,7 @@ body {
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li {
-  @apply m-0 m-0;
+  @apply m-0;
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li > button {
@@ -464,8 +465,8 @@ body {
 }
 
 .markdown-body .deno-tabs pre {
-  @apply border mx-0 bg-white border-slate-200 dark:bg-background-primary !rounded
-    dark:border-background-tertiary;
+  @apply border mx-0 bg-white border-slate-200 dark:bg-background-primary
+    !rounded dark:border-background-tertiary;
 }
 
 /* Strips bottom margin in instances where multiple code samples exist in a tab. */
