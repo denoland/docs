@@ -1,6 +1,5 @@
 import { Sidebar } from "../types.ts";
 import { walk } from "jsr:@std/fs";
-import { basename } from "jsr:@std/path";
 import { parse as yamlParse } from "jsr:@std/yaml";
 
 export const sidebar = [
