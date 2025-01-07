@@ -284,11 +284,12 @@ Enabling connection to the Deno language server requires changes in the
 ```toml
 [[language]]
 name = "typescript"
-language-id = "typescript"
-scope = "source.ts"
-injection-regex = "^(ts|typescript)$"
-file-types = ["ts"]
-shebangs = ["deno"]
+roots = ["deno.json", "deno.jsonc", "package.json"]
+auto-format = true
+language-servers = ["deno-lsp"]
+
+[[language]]
+name = "javascript"
 roots = ["deno.json", "deno.jsonc", "package.json"]
 auto-format = true
 language-servers = ["deno-lsp"]
@@ -296,9 +297,7 @@ language-servers = ["deno-lsp"]
 [language-server.deno-lsp]
 command = "deno"
 args = ["lsp"]
-
-[language-server.deno-lsp.config.deno]
-enable = true
+config.deno.enable = true
 ```
 
 ## Shell completions
@@ -397,7 +396,7 @@ the fish config folder:
 ## Other tools
 
 If you are writing or supporting a community integration using the Deno language
-server, you will find
-[documentation](https://github.com/denoland/deno/tree/main/cli/lsp#deno-language-server)
-located in the Deno CLI code repository, but also feel free to join our
-[Discord community](https://discord.gg/deno) in the `#dev-lsp` channel.
+server, read more about
+[integrating with the Deno LSP](/runtime/reference/lsp_integration/), but also
+feel free to join our [Discord community](https://discord.gg/deno) in the
+`#dev-lsp` channel.

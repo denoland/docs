@@ -44,7 +44,7 @@ The linter can be configured in a
 rules, plugins, and settings to tailor the linting process to your needs.
 
 You can view and search the list of available rules and their usage on
-[Deno lint rules](https://lint.deno.land/).
+[List of rules](/lint/) documentation page.
 
 ## Formatting
 
@@ -83,7 +83,7 @@ any output.
 
 ### Integration in CI
 
-You can add deno fmt --check to your CI pipeline to automatically check for
+You can add `deno fmt --check` to your CI pipeline to automatically check for
 formatting issues. For example, in a GitHub Actions workflow:
 
 ```yaml

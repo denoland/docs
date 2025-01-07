@@ -18,7 +18,7 @@ interface is part of the Fetch API and represents the request of fetch().
 The Request() constructor creates a new Request instance.
 
 ```ts
-let request = new Request(input, init);
+let request = new Request(resource, init);
 ```
 
 #### Parameters
