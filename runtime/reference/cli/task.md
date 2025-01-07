@@ -109,8 +109,8 @@ Task serve deno run -RN server.ts
 Listening on http://localhost:8000/
 ```
 
-Dependency tasks are in executed parallel, with the default parallel limit being
-equal to the number of cores on your machine. To change this limit use the
+Dependency tasks are executed in parallel, with the default parallel limit being
+equal to number of cores on your machine. To change this limit, use the
 `DENO_JOBS` environmental variable.
 
 Dependencies are tracked and if multiple tasks depend on the same task, that
