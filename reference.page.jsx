@@ -45,9 +45,14 @@ export default function* () {
       let title = "";
       try {
         const match = titleRegexp.exec(content);
-        const titleFirst = match[1].slice(0, -"documentation".length);
 
-        title = unescape(titleFirst, { entityList }) + "- Deno Docs";
+        if (!match) {
+          //console.log("No title found in", file.path);
+          title = file.path + " - Deno Docs";
+        } else {
+          const titleFirst = match[1].slice(0, -"documentation".length);
+          title = unescape(titleFirst, { entityList }) + "- Deno Docs";
+        }
       } catch (e) {
         if (!file.path.endsWith("prototype.html")) {
           console.error(file.path);
