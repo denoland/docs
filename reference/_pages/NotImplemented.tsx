@@ -1,5 +1,6 @@
 import { DocNode, DocNodeBase } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext } from "../types.ts";
+import ReferencePage from "../_layouts/ReferencePage.tsx";
 
 type Props = { data: DocNode };
 
@@ -25,9 +26,9 @@ export default function* getPages(
 
 export function NotImplemented({ data }: Props) {
   return (
-    <div>
+    <ReferencePage>
       I am not yet implemented, but I am supposed to represent:{" "}
       {JSON.stringify(data)}
-    </div>
+    </ReferencePage>
   );
 }

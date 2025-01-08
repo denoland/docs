@@ -1,5 +1,6 @@
 import { DocNodeInterface } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext } from "../types.ts";
+import ReferencePage from "../_layouts/ReferencePage.tsx";
 
 type Props = { data: DocNodeInterface; context: ReferenceContext };
 
@@ -30,7 +31,7 @@ export function Interface({ data, context }: Props) {
   ));
 
   return (
-    <div>
+    <ReferencePage>
       <h1>Interface: {fullName}</h1>
       {isUnstable && <p>UNSTABLE</p>}
       {jsDocParagraphs && jsDocParagraphs}
@@ -46,6 +47,6 @@ export function Interface({ data, context }: Props) {
       <pre>
         {JSON.stringify(data, null, 2)}
       </pre>
-    </div>
+    </ReferencePage>
   );
 }

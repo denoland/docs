@@ -2,6 +2,7 @@ import { doc } from "@deno/doc";
 import registrations from "../reference_gen/registrations.ts";
 import factoryFor from "./pageFactory.ts";
 import getCategoryPages from "./_pages/Category.tsx";
+import { flattenItems, populateItemNamespaces } from "./_util/common.ts";
 
 export const layout = "raw.tsx";
 const root = "/new_api";
@@ -24,9 +25,14 @@ export default async function* () {
       throw new Error();
     }
 
-    for await (
-      const { key, dataCollection, generateOptions } of referenceItems()
-    ) {
+    const sources = referenceItems();
+    const referenceDocContext = {
+      categories: sidebar[0].items,
+    };
+
+    for await (const { key, dataCollection, generateOptions } of sources) {
+      populateItemNamespaces(dataCollection);
+
       const section = generateOptions.packageName || "unknown";
       const definitionFile = key;
 
@@ -36,6 +42,7 @@ export default async function* () {
         dataCollection,
         definitionFile,
         parentName: "",
+        referenceDocContext,
       };
 
       for (

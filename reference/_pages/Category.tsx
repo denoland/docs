@@ -1,4 +1,12 @@
-import { LumeDocument, ReferenceContext } from "../types.ts";
+import { DocNodeBase } from "@deno/doc/types";
+import ReferencePage from "../_layouts/ReferencePage.tsx";
+import { flattenItems } from "../_util/common.ts";
+import {
+  HasNamespace,
+  LumeDocument,
+  MightHaveNamespace,
+  ReferenceContext,
+} from "../types.ts";
 
 type Props = {
   data: Record<string, string | undefined>;
@@ -12,58 +20,124 @@ export default function* getPages(
   yield {
     title: context.section,
     url: `${context.root}/${context.section.toLocaleLowerCase()}/`,
-    content: <Category data={item} context={context} />,
+    content: <CategoryHomePage data={item} context={context} />,
   };
 
-  for (const [key, value] of Object.entries(item)) {
-    if (value) {
-      yield {
-        title: key,
-        url:
-          `${context.root}/${context.section.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`,
-        content: <CategoryListing data={item} context={context} />,
-      };
-    }
+  for (const [key] of Object.entries(item)) {
+    yield {
+      title: key,
+      url:
+        `${context.root}/${context.section.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`,
+      content: <SingleCategoryView categoryName={key} context={context} />,
+    };
   }
 }
 
-export function Category({ data, context }: Props) {
+export function CategoryHomePage({ data, context }: Props) {
+  const categoryListItems = Object.entries(data).map(([key, value]) => {
+    const categoryLinkUrl =
+      `${context.root}/${context.section.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`;
+
+    return (
+      <li>
+        <a href={categoryLinkUrl}>{key}</a>
+        <p>{value}</p>
+      </li>
+    );
+  });
+
   return (
-    <div>
-      <h1>I am a category: {data.name}</h1>
-      <ul>
-        {Object.entries(data).map(([key, value]) => (
-          <li key={key}>
-            {value
-              ? (
-                <>
-                  <a
-                    href={`${context.root}/${context.section.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`}
-                  >
-                    {key}
-                  </a>
-                  <p>
-                    {value}
-                  </p>
-                </>
-              )
-              : key}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ReferencePage>
+      <div>
+        <h1>I am a category: {data.name}</h1>
+        <ul>
+          {categoryListItems}
+        </ul>
+      </div>
+    </ReferencePage>
   );
 }
 
-export function CategoryListing({ data, context }: Props) {
-  // const itemsInThisCategory = context.dataCollection.filter((item) => item.jsDoc?.tag === data.name);
+type ListingProps = {
+  categoryName: string;
+  context: ReferenceContext;
+};
+
+export function SingleCategoryView({ categoryName, context }: ListingProps) {
+  const allItems = flattenItems(context.dataCollection);
+
+  const itemsInThisCategory = allItems.filter((item) =>
+    item.jsDoc?.tags?.some((tag) =>
+      tag.kind === "category" &&
+      tag.doc.toLocaleLowerCase() === categoryName?.toLocaleLowerCase()
+    )
+  );
+
+  const classes = itemsInThisCategory.filter((item) => item.kind === "class")
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const functions = itemsInThisCategory.filter((item) =>
+    item.kind === "function"
+  ).sort((a, b) => a.name.localeCompare(b.name));
+
+  const interfaces = itemsInThisCategory.filter((item) =>
+    item.kind === "interface"
+  ).sort((a, b) => a.name.localeCompare(b.name));
+
+  const typeAliases = itemsInThisCategory.filter((item) =>
+    item.kind === "typeAlias"
+  ).sort((a, b) => a.name.localeCompare(b.name));
 
   return (
-    <div>
-      <h1>I am a category listing page {data.name}</h1>
-      <ul>
-        <li>This is a list of all the APIs in this category</li>
-      </ul>
-    </div>
+    <ReferencePage>
+      <h1>I am a category listing page {categoryName}</h1>
+
+      <h2 className={"anchorable mb-1"}>Classes</h2>
+      <div className={"namespaceSection"}>
+        <CategoryPageList items={classes} />
+      </div>
+      <CategoryPageSection title={"Functions"} items={functions} />
+      <CategoryPageSection title={"Interfaces"} items={interfaces} />
+      <CategoryPageSection title={"Type Aliases"} items={typeAliases} />
+    </ReferencePage>
   );
+}
+
+function CategoryPageSection(
+  { title, items }: { title: string; items: DocNodeBase[] },
+) {
+  return (
+    <section>
+      <h2>{title}</h2>
+      <CategoryPageList items={items} />
+    </section>
+  );
+}
+
+function CategoryPageList({ items }: { items: DocNodeBase[] }) {
+  return (
+    <ul className={"anchorable mb-1"}>
+      {items.map((item) => (
+        <li>
+          <CategoryPageListItem item={item} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function CategoryPageListItem(
+  { item }: { item: DocNodeBase & MightHaveNamespace },
+) {
+  return (
+    <li>
+      <a href={`~/${item.fullName || item.name}`}>
+        <ItemName item={item} />
+      </a>
+    </li>
+  );
+}
+
+function ItemName({ item }: { item: DocNodeBase & MightHaveNamespace }) {
+  return <>{item.fullName || item.name}</>;
 }

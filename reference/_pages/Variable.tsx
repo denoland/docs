@@ -1,5 +1,6 @@
 import { DocNodeVariable } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext } from "../types.ts";
+import ReferencePage from "../_layouts/ReferencePage.tsx";
 
 type Props = { data: DocNodeVariable };
 
@@ -18,7 +19,7 @@ export default function* getPages(
 
 export function Variable({ data }: Props) {
   return (
-    <div>
+    <ReferencePage>
       I am a variable, my name is {data.name}
 
       {data.jsDoc?.doc && <p>{data.jsDoc?.doc}</p>}
@@ -26,6 +27,6 @@ export function Variable({ data }: Props) {
       <pre>
         {JSON.stringify(data, null, 2)}
       </pre>
-    </div>
+    </ReferencePage>
   );
 }

@@ -1,5 +1,6 @@
 import { DocNode, DocNodeModuleDoc } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext } from "../types.ts";
+import ReferencePage from "../_layouts/ReferencePage.tsx";
 
 type Props = { data: DocNode };
 
@@ -19,12 +20,12 @@ export default function* getPages(
 
 export function Module({ data }: Props) {
   return (
-    <div>
+    <ReferencePage>
       I am a module, my name is {data.name}
 
       <pre>
         {JSON.stringify(data, null, 2)}
       </pre>
-    </div>
+    </ReferencePage>
   );
 }

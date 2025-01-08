@@ -1,6 +1,7 @@
 import { DocNodeNamespace } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext } from "../types.ts";
 import factoryFor from "../pageFactory.ts";
+import ReferencePage from "../_layouts/ReferencePage.tsx";
 
 type Props = { data: DocNodeNamespace; context: ReferenceContext };
 
@@ -36,7 +37,7 @@ export function Namespace({ data, context }: Props) {
   );
 
   return (
-    <div>
+    <ReferencePage>
       <h1>Namespace: {context.section} - {data.name}</h1>
 
       <h2>Classes</h2>
@@ -64,6 +65,6 @@ export function Namespace({ data, context }: Props) {
       <pre>
         {JSON.stringify(data, null, 2)}
       </pre>
-    </div>
+    </ReferencePage>
   );
 }

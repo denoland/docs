@@ -1,6 +1,7 @@
 import { DocNodeClass } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext } from "../types.ts";
 import factoryFor from "../pageFactory.ts";
+import ReferencePage from "../_layouts/ReferencePage.tsx";
 
 type Props = { data: DocNodeClass; context: ReferenceContext };
 
@@ -49,8 +50,8 @@ export function Class({ data, context }: Props) {
     );
   });
 
-  return (
-    <div>
+  return (    
+    <ReferencePage>
       <h1>Class: {fullName}</h1>
       {isUnstable && <p>UNSTABLE</p>}
       {jsDocParagraphs && jsDocParagraphs}
@@ -68,6 +69,6 @@ export function Class({ data, context }: Props) {
       <pre>
         {JSON.stringify(data, null, 2)}
       </pre>
-    </div>
+    </ReferencePage>
   );
 }

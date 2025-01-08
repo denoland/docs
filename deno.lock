@@ -53,6 +53,7 @@
     "jsr:@std/yaml@1.0.5": "1.0.5",
     "jsr:@std/yaml@^1.0.5": "1.0.5",
     "npm:@js-temporal/polyfill@0.4.4": "0.4.4",
+    "npm:@preact/compat@*": "18.3.1_preact@10.24.3",
     "npm:@supabase/auth-js@2.65.1": "2.65.1",
     "npm:@supabase/functions-js@2.4.3": "2.4.3",
     "npm:@supabase/node-fetch@2.6.15": "2.6.15",
@@ -314,6 +315,12 @@
     },
     "@pkgjs/parseargs@0.11.0": {
       "integrity": "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg=="
+    },
+    "@preact/compat@18.3.1_preact@10.24.3": {
+      "integrity": "sha512-Kog4PSRxtT4COtOXjsuQPV1vMXpUzREQfv+6Dmcy9/rMk0HOPK0HTE9fspFjAmY8R80T/T8gtgmZ68u5bOSngw==",
+      "dependencies": [
+        "preact"
+      ]
     },
     "@supabase/auth-js@2.65.1": {
       "integrity": "sha512-IA7i2Xq2SWNCNMKxwmPlHafBQda0qtnFr8QnyyBr+KaSxoXXqEzFCnQ1dGTy6bsZjVBgXu++o3qrDypTspaAPw==",
