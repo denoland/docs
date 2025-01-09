@@ -32,7 +32,7 @@ Deno offers 4 release channels
 
 ### Long Term Support (LTS)
 
-Starting with Deno v2.1.0 (to be released in November 2024) Deno will offer a
+Starting with Deno v2.1.0 (released in November 2024) Deno offers a
 LTS (long-term support) channel.
 
 An LTS channel is a semver minor version that we maintain with only backwards
