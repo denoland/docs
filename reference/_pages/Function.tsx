@@ -1,26 +1,27 @@
-import { DocNodeFunction, DocNodeImport } from "@deno/doc/types";
-import { LumeDocument, ReferenceContext } from "../types.ts";
+import { DocNodeFunction } from "@deno/doc/types";
+import { HasFullName, LumeDocument, ReferenceContext } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 
-type Props = { data: DocNodeFunction };
+type Props = { data: DocNodeFunction & HasFullName; context: ReferenceContext };
 
 export default function* getPages(
-  item: DocNodeFunction,
+  item: DocNodeFunction & HasFullName,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
-  const prefix = context.parentName ? `${context.parentName}.` : "";
-
   yield {
     title: item.name,
     url:
-      `${context.root}/${context.section.toLocaleLowerCase()}/~/${prefix}${item.name}`,
-    content: <Function data={item} />,
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.fullName}`,
+    content: <Function data={item} context={context} />,
   };
 }
 
-export function Function({ data }: Props) {
+export function Function({ data, context }: Props) {
   return (
-    <ReferencePage>
+    <ReferencePage
+      context={context}
+      navigation={{ category: context.packageName, currentItemName: data.name }}
+    >
       I am a function, my name is {data.name}
 
       {data.jsDoc?.doc && <p>{data.jsDoc?.doc}</p>}

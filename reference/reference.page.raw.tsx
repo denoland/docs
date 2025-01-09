@@ -1,19 +1,30 @@
-import { doc } from "@deno/doc";
-import registrations from "../reference_gen/registrations.ts";
-import factoryFor from "./pageFactory.ts";
+import generatePageFor from "./pageFactory.ts";
 import getCategoryPages from "./_pages/Category.tsx";
-import { flattenItems, populateItemNamespaces } from "./_util/common.ts";
+import { populateItemNamespaces } from "./_util/common.ts";
+import { getSymbols } from "./_dataSources/dtsSymbolSource.ts";
+import webCategoryDocs from "./_categories/web-categories.json" with {
+  type: "json",
+};
+import denoCategoryDocs from "./_categories/deno-categories.json" with {
+  type: "json",
+};
+import { DocNode } from "@deno/doc/types";
 
 export const layout = "raw.tsx";
-const root = "/new_api";
+
+const root = "/api";
+const sections = [
+  { name: "Deno APIs", path: "deno", categoryDocs: denoCategoryDocs },
+  { name: "Web APIs", path: "web", categoryDocs: webCategoryDocs },
+  { name: "Node APIs", path: "node", categoryDocs: undefined },
+];
 
 export const sidebar = [
   {
-    items: [
-      { label: "Deno APIs", id: `${root}/deno/` },
-      { label: "Web APIs", id: `${root}/web/` },
-      { label: "Node APIs", id: `${root}/node/` },
-    ],
+    items: sections.map((section) => ({
+      label: section.name,
+      id: `${root}/${section.path}/`,
+    })),
   },
 ];
 
@@ -25,54 +36,37 @@ export default async function* () {
       throw new Error();
     }
 
-    const sources = referenceItems();
-    const referenceDocContext = {
-      categories: sidebar[0].items,
-    };
+    for await (const { packageName, symbols } of getSymbols()) {
+      const cleanedSymbols = populateItemNamespaces(symbols) as DocNode[];
 
-    for await (const { key, dataCollection, generateOptions } of sources) {
-      populateItemNamespaces(dataCollection);
-
-      const section = generateOptions.packageName || "unknown";
-      const definitionFile = key;
+      const currentCategoryList = sections.filter((x) =>
+        x.path === packageName.toLocaleLowerCase()
+      )[0]!.categoryDocs as Record<string, string | undefined>;
 
       const context = {
         root,
-        section,
-        dataCollection,
-        definitionFile,
-        parentName: "",
-        referenceDocContext,
+        packageName,
+        symbols: cleanedSymbols,
+        currentCategoryList: currentCategoryList,
       };
 
-      for (
-        const catPage of getCategoryPages(
-          generateOptions.categoryDocs!,
-          context,
-        )
-      ) {
-        yield catPage;
-        generated.push(catPage.url);
+      for (const p of getCategoryPages(context)) {
+        yield p;
+        generated.push(p.url);
       }
 
-      for (const item of dataCollection) {
-        const factory = factoryFor(item);
-        const pages = factory(item, context);
-
-        if (!pages) {
-          continue;
-        }
+      for (const item of cleanedSymbols) {
+        const pages = generatePageFor(item, context);
 
         for await (const page of pages) {
           if (generated.includes(page.url)) {
-            console.warn(
-              `⚠️ Skipping duplicate page: ${page.url} - NEED TO MERGE THESE DOCS`,
-            );
+            console.warn(`⚠️ Skipping duplicate page: ${page.url}!`);
             continue;
           }
 
           yield page;
           generated.push(page.url);
+          console.log("Generated", page.url);
         }
       }
     }
@@ -81,33 +75,4 @@ export default async function* () {
   }
 
   console.log("Generated", generated.length, "reference pages");
-}
-
-async function* referenceItems() {
-  for (const { sources, generateOptions } of registrations) {
-    const paths = sources.map((file) => {
-      if (!file.startsWith("./")) {
-        return `file://${file}`;
-      } else {
-        const newPath = file.replace("./", "../reference_gen/");
-        return import.meta.resolve(newPath);
-      }
-    });
-
-    const docs = await loadDocumentation(paths);
-
-    for (const key of Object.keys(docs)) {
-      const dataCollection = docs[key];
-      yield { key, dataCollection, generateOptions };
-    }
-  }
-}
-
-async function loadDocumentation(paths: string[]) {
-  const docGenerationPromises = paths.map(async (path) => {
-    return await doc([path]);
-  });
-
-  const nodes = await Promise.all(docGenerationPromises);
-  return nodes.reduce((acc, val) => ({ ...acc, ...val }), {});
 }

@@ -1,4 +1,4 @@
-import { DocNodeBase } from "@deno/doc/types";
+import { DocNodeBase, DocNodeClass } from "@deno/doc/types";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { flattenItems } from "../_util/common.ts";
 import {
@@ -7,55 +7,28 @@ import {
   MightHaveNamespace,
   ReferenceContext,
 } from "../types.ts";
-
-type Props = {
-  data: Record<string, string | undefined>;
-  context: ReferenceContext;
-};
+import { insertLinkCodes } from "./primatives/LinkCode.tsx";
+import { AnchorableHeading } from "./primatives/AnchorableHeading.tsx";
+import { CodeIcon } from "./primatives/CodeIcon.tsx";
+import { Package } from "./Package.tsx";
 
 export default function* getPages(
-  item: Record<string, string | undefined>,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
   yield {
-    title: context.section,
-    url: `${context.root}/${context.section.toLocaleLowerCase()}/`,
-    content: <CategoryHomePage data={item} context={context} />,
+    title: context.packageName,
+    url: `${context.root}/${context.packageName.toLocaleLowerCase()}/`,
+    content: <Package data={context.currentCategoryList} context={context} />,
   };
 
-  for (const [key] of Object.entries(item)) {
+  for (const [key] of Object.entries(context.currentCategoryList)) {
     yield {
       title: key,
       url:
-        `${context.root}/${context.section.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`,
-      content: <SingleCategoryView categoryName={key} context={context} />,
+        `${context.root}/${context.packageName.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`,
+      content: <CategoryBrowse categoryName={key} context={context} />,
     };
   }
-}
-
-export function CategoryHomePage({ data, context }: Props) {
-  const categoryListItems = Object.entries(data).map(([key, value]) => {
-    const categoryLinkUrl =
-      `${context.root}/${context.section.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`;
-
-    return (
-      <li>
-        <a href={categoryLinkUrl}>{key}</a>
-        <p>{value}</p>
-      </li>
-    );
-  });
-
-  return (
-    <ReferencePage>
-      <div>
-        <h1>I am a category: {data.name}</h1>
-        <ul>
-          {categoryListItems}
-        </ul>
-      </div>
-    </ReferencePage>
-  );
 }
 
 type ListingProps = {
@@ -63,8 +36,8 @@ type ListingProps = {
   context: ReferenceContext;
 };
 
-export function SingleCategoryView({ categoryName, context }: ListingProps) {
-  const allItems = flattenItems(context.dataCollection);
+export function CategoryBrowse({ categoryName, context }: ListingProps) {
+  const allItems = flattenItems(context.symbols);
 
   const itemsInThisCategory = allItems.filter((item) =>
     item.jsDoc?.tags?.some((tag) =>
@@ -89,16 +62,21 @@ export function SingleCategoryView({ categoryName, context }: ListingProps) {
   ).sort((a, b) => a.name.localeCompare(b.name));
 
   return (
-    <ReferencePage>
-      <h1>I am a category listing page {categoryName}</h1>
-
-      <h2 className={"anchorable mb-1"}>Classes</h2>
-      <div className={"namespaceSection"}>
-        <CategoryPageList items={classes} />
-      </div>
-      <CategoryPageSection title={"Functions"} items={functions} />
-      <CategoryPageSection title={"Interfaces"} items={interfaces} />
-      <CategoryPageSection title={"Type Aliases"} items={typeAliases} />
+    <ReferencePage
+      context={context}
+      navigation={{
+        category: context.packageName,
+        currentItemName: categoryName,
+      }}
+    >
+      <main>
+        <div className={"space-y-7"}>
+          <CategoryPageSection title={"Classes"} items={classes} />
+          <CategoryPageSection title={"Functions"} items={functions} />
+          <CategoryPageSection title={"Interfaces"} items={interfaces} />
+          <CategoryPageSection title={"Type Aliases"} items={typeAliases} />
+        </div>
+      </main>
     </ReferencePage>
   );
 }
@@ -106,38 +84,73 @@ export function SingleCategoryView({ categoryName, context }: ListingProps) {
 function CategoryPageSection(
   { title, items }: { title: string; items: DocNodeBase[] },
 ) {
+  const anchorId = title.replace(" ", "-").toLocaleLowerCase();
   return (
-    <section>
-      <h2>{title}</h2>
-      <CategoryPageList items={items} />
+    <section id={anchorId} className={"section"}>
+      <AnchorableHeading anchor={anchorId}>{title}</AnchorableHeading>
+      <div className={"namespaceSection"}>
+        {items.map((item) => <CategoryPageItem item={item} />)}
+      </div>
     </section>
   );
 }
 
-function CategoryPageList({ items }: { items: DocNodeBase[] }) {
-  return (
-    <ul className={"anchorable mb-1"}>
-      {items.map((item) => (
-        <li>
-          <CategoryPageListItem item={item} />
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function CategoryPageListItem(
+function CategoryPageItem(
   { item }: { item: DocNodeBase & MightHaveNamespace },
 ) {
+  const displayName = item.fullName || item.name;
+  const firstLineOfJsDoc = item.jsDoc?.doc?.split("\n")[0] || "";
+  const descriptionWithLinkCode = insertLinkCodes(firstLineOfJsDoc);
+
   return (
-    <li>
-      <a href={`~/${item.fullName || item.name}`}>
-        <ItemName item={item} />
-      </a>
-    </li>
+    <div className={"namespaceItem"}>
+      <CodeIcon glyph={item.kind} />
+      <div className={"namespaceItemContent"}>
+        <a href={`~/${displayName}`}>
+          {displayName}
+        </a>
+        <p>
+          {descriptionWithLinkCode}
+        </p>
+        <MethodLinks item={item} />
+      </div>
+    </div>
   );
 }
 
-function ItemName({ item }: { item: DocNodeBase & MightHaveNamespace }) {
-  return <>{item.fullName || item.name}</>;
+function MethodLinks({ item }: { item: DocNodeBase }) {
+  if (item.kind !== "class") {
+    return <></>;
+  }
+
+  const asClass = item as DocNodeClass & HasNamespace;
+  const methods = asClass.classDef.methods.sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  const filteredMethodsList = [
+    "[Symbol.dispose]",
+    "[Symbol.asyncDispose]",
+    "[Symbol.asyncIterator]",
+  ];
+
+  const filteredMethods = methods.filter((method) =>
+    !filteredMethodsList.includes(method.name)
+  );
+
+  const methodLinks = filteredMethods.map((method) => {
+    return (
+      <li>
+        <a href={`~/${asClass.fullName}#${method.name}`}>
+          {method.name}
+        </a>
+      </li>
+    );
+  });
+
+  return (
+    <ul className={"namespaceItemContentSubItems"}>
+      {methodLinks}
+    </ul>
+  );
 }

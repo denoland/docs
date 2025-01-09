@@ -1,6 +1,6 @@
 import { DocNodeNamespace } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext } from "../types.ts";
-import factoryFor from "../pageFactory.ts";
+import generatePageFor from "../pageFactory.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 
 type Props = { data: DocNodeNamespace; context: ReferenceContext };
@@ -12,17 +12,14 @@ export default function* getPages(
   yield {
     title: item.name,
     url:
-      `${context.root}/${context.section.toLocaleLowerCase()}/${item.name.toLocaleLowerCase()}`,
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/${item.name.toLocaleLowerCase()}`,
     content: <Namespace data={item} context={context} />,
   };
 
   for (const element of item.namespaceDef.elements) {
-    const factory = factoryFor(element);
-
-    yield* factory(element, {
+    yield* generatePageFor(element, {
       ...context,
-      dataCollection: item.namespaceDef.elements,
-      parentName: item.name,
+      symbols: item.namespaceDef.elements,
     });
   }
 }
@@ -37,8 +34,11 @@ export function Namespace({ data, context }: Props) {
   );
 
   return (
-    <ReferencePage>
-      <h1>Namespace: {context.section} - {data.name}</h1>
+    <ReferencePage
+      context={context}
+      navigation={{ category: context.packageName, currentItemName: data.name }}
+    >
+      <h1>Namespace: {context.packageName} - {data.name}</h1>
 
       <h2>Classes</h2>
       <ul>

@@ -1,27 +1,25 @@
 import { DocNodeInterface } from "@deno/doc/types";
-import { LumeDocument, ReferenceContext } from "../types.ts";
+import { HasFullName, LumeDocument, ReferenceContext } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 
-type Props = { data: DocNodeInterface; context: ReferenceContext };
+type Props = {
+  data: DocNodeInterface & HasFullName;
+  context: ReferenceContext;
+};
 
 export default function* getPages(
-  item: DocNodeInterface,
+  item: DocNodeInterface & HasFullName,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
-  const prefix = context.parentName ? `${context.parentName}.` : "";
-
   yield {
     title: item.name,
-    url: `${context.root}/${context.section.toLocaleLowerCase()}/~/${prefix}${item.name}`,
+    url:
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.fullName}`,
     content: <Interface data={item} context={context} />,
   };
 }
 
 export function Interface({ data, context }: Props) {
-  const fullName = context.parentName
-    ? `${context.parentName}.${data.name}`
-    : data.name;
-
   const isUnstable = data.jsDoc?.tags?.some((tag) =>
     tag.kind === "experimental" as string
   );
@@ -31,8 +29,14 @@ export function Interface({ data, context }: Props) {
   ));
 
   return (
-    <ReferencePage>
-      <h1>Interface: {fullName}</h1>
+    <ReferencePage
+      context={context}
+      navigation={{
+        category: context.packageName,
+        currentItemName: data.fullName,
+      }}
+    >
+      <h1>Interface: {data.fullName}</h1>
       {isUnstable && <p>UNSTABLE</p>}
       {jsDocParagraphs && jsDocParagraphs}
 

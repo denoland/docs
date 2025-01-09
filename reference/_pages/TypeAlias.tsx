@@ -1,24 +1,30 @@
 import { DocNodeTypeAlias } from "@deno/doc/types";
-import { LumeDocument, ReferenceContext } from "../types.ts";
+import { HasFullName, LumeDocument, ReferenceContext } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 
-type Props = { data: DocNodeTypeAlias };
+type Props = {
+  data: DocNodeTypeAlias & HasFullName;
+  context: ReferenceContext;
+};
 
 export default function* getPages(
-  item: DocNodeTypeAlias,
+  item: DocNodeTypeAlias & HasFullName,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
-  const prefix = context.parentName ? `${context.parentName}.` : "";
   yield {
     title: item.name,
-    url: `${context.root}/${context.section.toLocaleLowerCase()}/~/${prefix}${item.name}`,
-    content: <TypeAlias data={item} />,
+    url:
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.fullName}`,
+    content: <TypeAlias data={item} context={context} />,
   };
 }
 
-export function TypeAlias({ data }: Props) {
+export function TypeAlias({ data, context }: Props) {
   return (
-    <ReferencePage>
+    <ReferencePage
+      context={context}
+      navigation={{ category: context.packageName, currentItemName: data.name }}
+    >
       I am a type alias, my name is {data.name}
 
       {data.jsDoc?.doc && <p>{data.jsDoc?.doc}</p>}

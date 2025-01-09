@@ -2,7 +2,7 @@ import { DocNode, DocNodeModuleDoc } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 
-type Props = { data: DocNode };
+type Props = { data: DocNode; context: ReferenceContext };
 
 export default function* getPages(
   item: DocNodeModuleDoc,
@@ -11,16 +11,19 @@ export default function* getPages(
   yield {
     title: item.name,
     url:
-      `${context.root}/${context.section.toLocaleLowerCase()}/${item.name.toLocaleLowerCase()}`,
-    content: <Module data={item} />,
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/${item.name.toLocaleLowerCase()}`,
+    content: <Module data={item} context={context} />,
   };
 
   console.log("Module found", item);
 }
 
-export function Module({ data }: Props) {
+export function Module({ data, context }: Props) {
   return (
-    <ReferencePage>
+    <ReferencePage
+      context={context}
+      navigation={{ category: context.packageName, currentItemName: data.name }}
+    >
       I am a module, my name is {data.name}
 
       <pre>
