@@ -236,6 +236,11 @@ Enable unstable net APIs in the `Deno` namespace. These APIs include:
 
 - [`Deno.DatagramConn`](https://docs.deno.com/api/deno/~/Deno.DatagramConn)
 
+## `--unstable-otel`
+
+Enable the
+[OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry).
+
 ## `--unstable`
 
 :::caution --unstable is deprecated - use granular flags instead
