@@ -36,10 +36,6 @@ export const sidebar = [
         label: "HTTP Server",
         id: "/runtime/fundamentals/http_server/",
       },
-      {
-        label: "Open Telemetry",
-        id: "/runtime/fundamentals/open_telemetry/",
-      },
       "/runtime/fundamentals/stability_and_releases/",
     ],
   },

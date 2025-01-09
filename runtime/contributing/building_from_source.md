@@ -154,8 +154,7 @@ it refers to Python 3.
 
 The easiest way to build Deno is by using a precompiled version of V8.
 
-_For WSL make sure you have sufficient memory allocated in `.wslconfig`. It is
-recommended that you allocate at least 16GB._
+_For WSL make sure you have sufficient memory allocated in `.wslconfig`_
 
 ```console
 cargo build -vv
