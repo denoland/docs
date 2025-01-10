@@ -21,7 +21,7 @@ click on the name:
 - [Next steps](#next-steps)
 
 You can find the code for this project in this
-[repo](https://github.com/argotdev/deno-nuxt).
+[repo](https://github.com/denoland/examples/tree/main/with-nuxt).
 
 ## Scaffold a Nuxt app with Deno
 
@@ -57,7 +57,7 @@ NUXT-APP/
 Let’s first start by creating the API routes that serve the dinosaur data.
 
 First, our
-[dinosaur data](https://github.com/denoland/examples/blob/main/with-qwik/src/data/dinosaurs.json)
+[dinosaur data](https://github.com/denoland/examples/blob/main/with-nuxt/server/api/data.json)
 will live within the server directory as `server/api/data.json`:
 
 ```json
