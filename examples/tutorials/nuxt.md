@@ -115,7 +115,6 @@ data array without any filtering:
 ```tsx
 // server/api/dinosaurs.get.ts
 
-import { defineCachedEventHandler } from "#imports";
 import data from "./data.json" with { type: "json" };
 
 export default defineCachedEventHandler(() => {
@@ -132,12 +131,10 @@ invalid dinosaur names. To pass the name parameter, let’s name this route as
 ```tsx
 // server/api/dinosaurs/[name].get.ts
 
-import { defineCachedEventHandler } from "#imports";
 import data from "../data.json";
-import { H3Event } from "h3";
 
-export default defineCachedEventHandler((event: H3Event) => {
-  const name = event.context.params?.name;
+export default defineCachedEventHandler((event) => {
+  const name = getRouterParam(event, 'name');
 
   if (!name) {
     throw createError({
@@ -193,10 +190,7 @@ created in the previous section:
 // pages/index.vue
 
 <script setup lang="ts">
-import type { Dino } from "~/types";
-import { useFetch } from "nuxt/app";
-
-const { data: dinosaurs } = await useFetch<Dino[]>("/api/dinosaurs");
+const { data: dinosaurs } = await useFetch("/api/dinosaurs");
 </script>
 
 <template>
@@ -229,11 +223,8 @@ parameter:
 // pages/[name].vue
 
 <script setup lang="ts">
-import type { Dino } from "~/types";
-import { useFetch, useRoute } from "nuxt/app";
-
 const route = useRoute();
-const { data: dinosaur } = await useFetch<Dino>(
+const { data: dinosaur } = await useFetch(
   `/api/dinosaurs/${route.params.name}`
 );
 </script>
@@ -352,9 +343,7 @@ utilities;
 
 The only other thing we'll need to do is update our `nuxt.config.ts` file to
 configure our Nuxt application for Deno compatibility, enable development tools,
-and set up Tailwind CSS. We're disabling SSR and instead generating the entire
-site for the greatest flexibility in deployment options, and setting up proper
-meta tags for SEO.
+and set up Tailwind CSS.
 
 ```tsx
 // nuxt.config.ts
@@ -363,21 +352,14 @@ import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  ssr: false,
 
   nitro: {
     preset: "deno",
   },
 
-  modules: ["@nuxt/devtools"],
-
   app: {
     head: {
       title: "Dinosaur Encyclopedia",
-      meta: [
-        { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-      ],
     },
   },
 
