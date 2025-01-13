@@ -5,10 +5,9 @@ url: /examples/nuxt_tutorial/
 
 [Nuxt](https://nuxt.com/) is a framework that provides an intuitive way to
 create full-stack applications based on [Vue](https://vuejs.org/). It offers
-file-based routing, a variety of rendering options, and automatic code
-splitting out of the box. With its modular architecture, Nuxt simplifies the
-development process by providing a structured approach to building Vue
-applications.
+file-based routing, a variety of rendering options, and automatic code splitting
+out of the box. With its modular architecture, Nuxt simplifies the development
+process by providing a structured approach to building Vue applications.
 
 In this tutorial, we'll build a simple Nuxt application with Deno that will
 display a list of dinosaurs and allow you to learn more about each one when you
@@ -31,8 +30,8 @@ We can create a new Nuxt project using deno like this:
 deno -A npm:nuxi@latest init
 ```
 
-We'll use Deno to manage our package dependencies, and can grab the Nuxt package from npm. This will create a nuxt-app with
-this project structure:
+We'll use Deno to manage our package dependencies, and can grab the Nuxt package
+from npm. This will create a nuxt-app with this project structure:
 
 ```
 NUXT-APP/
@@ -353,8 +352,9 @@ utilities;
 
 The only other thing we'll need to do is update our `nuxt.config.ts` file to
 configure our Nuxt application for Deno compatibility, enable development tools,
-and set up Tailwind CSS. We're disabling SSR and instead generating the entire site for the greatest flexibility in deployment options, and
-setting up proper meta tags for SEO.
+and set up Tailwind CSS. We're disabling SSR and instead generating the entire
+site for the greatest flexibility in deployment options, and setting up proper
+meta tags for SEO.
 
 ```tsx
 // nuxt.config.ts
