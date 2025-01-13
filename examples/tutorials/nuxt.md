@@ -353,7 +353,7 @@ utilities;
 
 The only other thing we'll need to do is update our `nuxt.config.ts` file to
 configure our Nuxt application for Deno compatibility, enable development tools,
-and set up Tailwind CSS. We're disabling SSR for better Deno compatibility and
+and set up Tailwind CSS. We're disabling SSR and instead generating the entire site for the greatest flexibility in deployment options, and
 setting up proper meta tags for SEO.
 
 ```tsx
