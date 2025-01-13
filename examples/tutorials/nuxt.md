@@ -31,7 +31,7 @@ We can create a new Nuxt project using deno like this:
 deno -A npm:nuxi@latest init
 ```
 
-Here, we’re using npm as the package manager. This will create a nuxt-app with
+We'll use Deno to manage our package dependencies, and can grab the Nuxt package from npm. This will create a nuxt-app with
 this project structure:
 
 ```
