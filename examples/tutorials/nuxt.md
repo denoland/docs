@@ -5,7 +5,7 @@ url: /examples/nuxt_tutorial/
 
 [Nuxt](https://nuxt.com/) is a framework that provides an intuitive way to
 create full-stack applications based on [Vue](https://vuejs.org/). It offers
-file-based routing, server-side rendering capabilities, and automatic code
+file-based routing, a variety of rendering options, and automatic code
 splitting out of the box. With its modular architecture, Nuxt simplifies the
 development process by providing a structured approach to building Vue
 applications.
