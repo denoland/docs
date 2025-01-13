@@ -134,7 +134,7 @@ invalid dinosaur names. To pass the name parameter, let’s name this route as
 import data from "../data.json";
 
 export default defineCachedEventHandler((event) => {
-  const name = getRouterParam(event, 'name');
+  const name = getRouterParam(event, "name");
 
   if (!name) {
     throw createError({
