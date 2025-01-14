@@ -2,6 +2,16 @@ import { DocNodeNamespace } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext } from "../types.ts";
 import generatePageFor from "../pageFactory.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
+import { NameHeading } from "./partials/NameHeading.tsx";
+import { JsDocDescription } from "./partials/JsDocDescription.tsx";
+import {
+  TableOfContents,
+  TocListItem,
+  TocSection,
+} from "./partials/TableOfContents.tsx";
+import { SymbolSummaryItem } from "./partials/SymbolSummaryItem.tsx";
+import { sections } from "../_util/common.ts";
+import { MemberSection } from "./partials/MemberSection.tsx";
 
 type Props = { data: DocNodeNamespace; context: ReferenceContext };
 
@@ -12,7 +22,7 @@ export default function* getPages(
   yield {
     title: item.name,
     url:
-      `${context.root}/${context.packageName.toLocaleLowerCase()}/${item.name.toLocaleLowerCase()}`,
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.name}`,
     content: <Namespace data={item} context={context} />,
   };
 
@@ -25,46 +35,53 @@ export default function* getPages(
 }
 
 export function Namespace({ data, context }: Props) {
-  const interfaces = data.namespaceDef.elements.filter((elements) =>
-    elements.kind === "interface"
-  );
-
-  const classes = data.namespaceDef.elements.filter((elements) =>
-    elements.kind === "class"
+  const children = data.namespaceDef.elements.sort((a, b) =>
+    a.name.localeCompare(b.name)
   );
 
   return (
     <ReferencePage
       context={context}
-      navigation={{ category: context.packageName, currentItemName: data.name }}
+      navigation={{
+        category: context.packageName,
+        currentItemName: data.name,
+      }}
     >
-      <h1>Namespace: {context.packageName} - {data.name}</h1>
-
-      <h2>Classes</h2>
-      <ul>
-        {classes.map((classDef) => (
-          <li>
-            <a href={`~/${data.name}.${classDef.name}`}>
-              {data.name}.{classDef.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <h2>Interfaces</h2>
-      <ul>
-        {interfaces.map((interfaceDef) => (
-          <li>
-            <a href={`~/${data.name}.${interfaceDef.name}`}>
-              {data.name}.{interfaceDef.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <pre>
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      <main class={"symbolGroup"}>
+        <article>
+          <div>
+            <div>
+              <NameHeading fullName={data.name} headingType="Namespace" />
+            </div>
+          </div>
+          <div>
+            <JsDocDescription jsDoc={data.jsDoc} />
+          </div>
+        </article>
+        {sections.map(([title, kind]) => {
+          return (
+            <MemberSection
+              title={title}
+              children={children.filter((x) => x.kind === kind).map((x) => {
+                return <SymbolSummaryItem item={x} />;
+              })}
+            />
+          );
+        })}
+      </main>
+      <TableOfContents>
+        <ul>
+          {sections.map(([title, kind]) => {
+            return (
+              <TocSection title={title}>
+                {children.filter((x) => x.kind === kind).map((x) => {
+                  return <TocListItem item={x} type={kind} />;
+                })}
+              </TocSection>
+            );
+          })}
+        </ul>
+      </TableOfContents>
     </ReferencePage>
   );
 }

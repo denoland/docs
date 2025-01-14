@@ -13,6 +13,7 @@ export default function Layout(
       {/* sorry mum, put these somewhere good */}
       <link rel="stylesheet" href="/reference-styles/styles.css" />
       <link rel="stylesheet" href="/reference-styles/page.css" />
+      <link rel="stylesheet" href="/reference-styles/extra-styles.css" />
 
       <div className={"ddoc"}>
         <CategoryPanel context={context} />
@@ -30,7 +31,7 @@ export default function Layout(
 function CategoryPanel({ context }: { context: ReferenceContext }) {
   const categories = context.currentCategoryList;
 
-  const categoryListItems = Object.entries(categories).map(([key, value]) => {
+  const categoryListItems = categories.entries().map(([key]) => {
     const categoryLinkUrl =
       `${context.root}/${context.packageName.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`;
 
@@ -39,7 +40,7 @@ function CategoryPanel({ context }: { context: ReferenceContext }) {
         <a href={categoryLinkUrl}>{key}</a>
       </li>
     );
-  });
+  }).toArray();
 
   return (
     <div id={"categoryPanel"}>

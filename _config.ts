@@ -12,18 +12,9 @@ import sitemap from "lume/plugins/sitemap.ts";
 import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
 
-import Prism from "./prism.ts";
-
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
-import anchor from "npm:markdown-it-anchor@9";
-import { full as emoji } from "npm:markdown-it-emoji@3";
-import admonitionPlugin from "./markdown-it/admonition.ts";
-import codeblockCopyPlugin from "./markdown-it/codeblock-copy.ts";
-import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
-import relativeLinksPlugin from "./markdown-it/relative-path.ts";
-import replacerPlugin from "./markdown-it/replacer.ts";
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import createGAMiddleware from "./middleware/googleAnalytics.ts";
@@ -32,6 +23,7 @@ import redirectsMiddleware, {
 } from "./middleware/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
 import { log } from "lume/core/utils/log.ts";
+import markdownConfig from "./_config.markdown.ts";
 
 const site = lume(
   {
@@ -59,44 +51,7 @@ const site = lume(
     },
   },
   {
-    markdown: {
-      plugins: [
-        replacerPlugin,
-        emoji,
-        admonitionPlugin,
-        codeblockCopyPlugin,
-        codeblockTitlePlugin,
-        [
-          anchor,
-          {
-            permalink: anchor.permalink.linkInsideHeader({
-              symbol:
-                `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
-              placement: "after",
-            }),
-            getTokensText(tokens: { type: string; content: string }[]) {
-              return tokens
-                .filter((t) => ["text", "code_inline"].includes(t.type))
-                .map((t) => t.content.replaceAll(/ \([0-9/]+?\)/g, ""))
-                .join("")
-                .trim();
-            },
-          },
-        ],
-        relativeLinksPlugin,
-      ],
-      options: {
-        linkify: true,
-        langPrefix: "highlight notranslate language-",
-        highlight: (code, lang) => {
-          if (!lang || !Prism.languages[lang]) {
-            return code;
-          }
-          const result = Prism.highlight(code, Prism.languages[lang], lang);
-          return result || code;
-        },
-      },
-    },
+    markdown: markdownConfig,
   },
 );
 

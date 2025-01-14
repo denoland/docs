@@ -14,8 +14,6 @@ export default function* getPages(
       `${context.root}/${context.packageName.toLocaleLowerCase()}/${item.name.toLocaleLowerCase()}`,
     content: <Module data={item} context={context} />,
   };
-
-  console.log("Module found", item);
 }
 
 export function Module({ data, context }: Props) {

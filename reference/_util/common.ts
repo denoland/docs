@@ -1,5 +1,15 @@
-import { DocNode, DocNodeBase } from "@deno/doc/types";
+import { DocNode, DocNodeBase, DocNodeNamespace } from "@deno/doc/types";
 import { HasFullName, HasNamespace, MightHaveNamespace } from "../types.ts";
+
+export const sections = [
+  ["Classes", "class"],
+  ["Enums", "enum"],
+  ["Functions", "function"],
+  ["Interfaces", "interface"],
+  ["Namespaces", "namespace"],
+  ["Type Aliases", "typeAlias"],
+  ["Variables", "variable"],
+];
 
 export function flattenItems(
   items: DocNode[],
@@ -27,6 +37,11 @@ export function populateItemNamespaces(
     withFullName.fullName = item.name;
 
     if (item.kind === "namespace") {
+      const withNamespace = item as DocNodeNamespace & HasNamespace;
+      withNamespace.namespace = "";
+      withNamespace.fullName = item.name;
+      flattened.push(withNamespace);
+
       const namespace = ns + (ns ? "." : "") + item.name;
       flattened.push(
         ...populateItemNamespaces(
@@ -45,4 +60,17 @@ export function populateItemNamespaces(
   }
 
   return flattened;
+}
+
+export const nbsp = "\u00A0";
+
+export function countSymbols(symbols: DocNode[]): number {
+  let count = 0;
+  for (const symbol of symbols) {
+    count++;
+    if (symbol.kind === "namespace" && symbol.namespaceDef) {
+      count += countSymbols(symbol.namespaceDef.elements);
+    }
+  }
+  return count;
 }

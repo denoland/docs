@@ -1,4 +1,17 @@
-import { DocNode, DocNodeBase } from "@deno/doc/types";
+import {
+  ClassConstructorDef,
+  ClassMethodDef,
+  ClassPropertyDef,
+  DocNode,
+  DocNodeBase,
+  InterfaceCallSignatureDef,
+  InterfaceIndexSignatureDef,
+  InterfaceMethodDef,
+  InterfacePropertyDef,
+  LiteralCallSignatureDef,
+  LiteralMethodDef,
+  LiteralPropertyDef,
+} from "@deno/doc/types";
 import { JSX } from "npm:preact/jsx-runtime";
 
 export type LumeDocument = {
@@ -39,9 +52,62 @@ export type ReferenceContext = {
   root: string;
   packageName: string;
   symbols: DocNode[];
-  currentCategoryList: Record<string, string | undefined>;
+  currentCategoryList: Map<string, string>;
 };
 
 export type ReferenceDocumentFactoryFunction<
   T extends DocNodeBase = DocNodeBase,
 > = (item: T, context: ReferenceContext) => IterableIterator<LumeDocument>;
+
+export type ValidPropertyType =
+  | ClassPropertyDef
+  | InterfacePropertyDef
+  | LiteralPropertyDef;
+export type ValidMethodType =
+  | ClassMethodDef
+  | InterfaceMethodDef
+  | LiteralMethodDef;
+export type ValidCallSignaturesType =
+  | InterfaceCallSignatureDef
+  | LiteralCallSignatureDef;
+export type ValidIndexSignaturesType =
+  | InterfaceIndexSignatureDef
+  | InterfaceIndexSignatureDef;
+
+export type HasJsDoc = {
+  jsDoc: { doc: string };
+};
+
+export type ValidPropertyWithOptionalJsDoc = ValidPropertyType & {
+  jsDoc?: { doc: string };
+};
+
+export function isClassMethodDef(
+  method: ValidMethodType,
+): method is ClassMethodDef {
+  return (method as ClassMethodDef).functionDef !== undefined;
+}
+
+export function isInterfaceMethodDef(
+  method: ValidMethodType,
+): method is InterfaceMethodDef {
+  return (method as InterfaceMethodDef).location !== undefined &&
+    (method as ClassMethodDef).functionDef === undefined;
+}
+
+// deno-lint-ignore no-explicit-any
+export function hasJsDoc(obj: any): obj is HasJsDoc {
+  return obj.jsDoc !== undefined;
+}
+
+export interface ClosureContent {
+  kind: string;
+  constructors: ClassConstructorDef[];
+  methods: ValidMethodType[];
+  properties: ValidPropertyWithOptionalJsDoc[];
+  callSignatures: ValidCallSignaturesType[];
+  indexSignatures: ValidIndexSignaturesType[];
+
+  instanceMethods?: ClassMethodDef[];
+  staticMethods?: ClassMethodDef[];
+}

@@ -1,6 +1,11 @@
-import { DocNodeInterface } from "@deno/doc/types";
+import { DocNodeInterface, TsTypeDef } from "@deno/doc/types";
 import { HasFullName, LumeDocument, ReferenceContext } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
+import { NameHeading } from "./partials/NameHeading.tsx";
+import { StabilitySummary } from "./partials/Badges.tsx";
+import { TypeSummary } from "./primitives/TypeSummary.tsx";
+import { nbsp } from "../_util/common.ts";
+import { getSymbolDetails } from "./partials/SymbolDetails.tsx";
 
 type Props = {
   data: DocNodeInterface & HasFullName;
@@ -20,13 +25,7 @@ export default function* getPages(
 }
 
 export function Interface({ data, context }: Props) {
-  const isUnstable = data.jsDoc?.tags?.some((tag) =>
-    tag.kind === "experimental" as string
-  );
-
-  const jsDocParagraphs = data.jsDoc?.doc?.split("\n\n").map((paragraph) => (
-    <p>{paragraph}</p>
-  ));
+  const { details, contents } = getSymbolDetails(data);
 
   return (
     <ReferencePage
@@ -36,21 +35,44 @@ export function Interface({ data, context }: Props) {
         currentItemName: data.fullName,
       }}
     >
-      <h1>Interface: {data.fullName}</h1>
-      {isUnstable && <p>UNSTABLE</p>}
-      {jsDocParagraphs && jsDocParagraphs}
-
-      <h2>Constructors</h2>
-
-      <h2>Properties</h2>
-
-      <h2>Methods</h2>
-
-      <h2>Static Methods</h2>
-
-      <pre>
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      <main class={"symbolGroup"}>
+        <article>
+          <div>
+            <div>
+              <NameHeading fullName={data.fullName} headingType="Interface" />
+              <ExtendsSummary typeDef={data.interfaceDef.extends} />
+              <StabilitySummary jsDoc={data.jsDoc} />
+            </div>
+          </div>
+          <div>
+            {details}
+          </div>
+        </article>
+      </main>
+      {contents}
     </ReferencePage>
+  );
+}
+
+function ExtendsSummary({ typeDef }: { typeDef: TsTypeDef[] }) {
+  if (typeDef.length === 0) {
+    return null;
+  }
+
+  const spans = typeDef.map((iface) => {
+    return <TypeSummary typeDef={iface} />;
+  });
+
+  if (spans.length === 0) {
+    return null;
+  }
+
+  return (
+    <div class="symbolSubtitle">
+      <div>
+        <span class="type">extends{nbsp}</span>
+        {spans}
+      </div>
+    </div>
   );
 }

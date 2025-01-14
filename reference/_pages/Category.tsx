@@ -1,16 +1,19 @@
-import { DocNodeBase, DocNodeClass } from "@deno/doc/types";
+import { DocNodeBase } from "@deno/doc/types";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
-import { flattenItems } from "../_util/common.ts";
+import { flattenItems, sections } from "../_util/common.ts";
 import {
-  HasNamespace,
   LumeDocument,
   MightHaveNamespace,
   ReferenceContext,
 } from "../types.ts";
-import { insertLinkCodes } from "./primatives/LinkCode.tsx";
-import { AnchorableHeading } from "./primatives/AnchorableHeading.tsx";
-import { CodeIcon } from "./primatives/CodeIcon.tsx";
+import { AnchorableHeading } from "./partials/AnchorableHeading.tsx";
 import { Package } from "./Package.tsx";
+import { SymbolSummaryItem } from "./partials/SymbolSummaryItem.tsx";
+import {
+  TableOfContents,
+  TocListItem,
+  TocSection,
+} from "./partials/TableOfContents.tsx";
 
 export default function* getPages(
   context: ReferenceContext,
@@ -21,7 +24,7 @@ export default function* getPages(
     content: <Package data={context.currentCategoryList} context={context} />,
   };
 
-  for (const [key] of Object.entries(context.currentCategoryList)) {
+  for (const [key] of context.currentCategoryList) {
     yield {
       title: key,
       url:
@@ -39,27 +42,23 @@ type ListingProps = {
 export function CategoryBrowse({ categoryName, context }: ListingProps) {
   const allItems = flattenItems(context.symbols);
 
-  const itemsInThisCategory = allItems.filter((item) =>
+  const validItems = allItems.filter((item) =>
     item.jsDoc?.tags?.some((tag) =>
       tag.kind === "category" &&
       tag.doc.toLocaleLowerCase() === categoryName?.toLocaleLowerCase()
     )
-  );
-
-  const classes = itemsInThisCategory.filter((item) => item.kind === "class")
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  const functions = itemsInThisCategory.filter((item) =>
-    item.kind === "function"
   ).sort((a, b) => a.name.localeCompare(b.name));
 
-  const interfaces = itemsInThisCategory.filter((item) =>
-    item.kind === "interface"
-  ).sort((a, b) => a.name.localeCompare(b.name));
-
-  const typeAliases = itemsInThisCategory.filter((item) =>
-    item.kind === "typeAlias"
-  ).sort((a, b) => a.name.localeCompare(b.name));
+  const itemsOfType = new Map<string, (DocNodeBase & MightHaveNamespace)[]>();
+  for (const item of validItems) {
+    if (!itemsOfType.has(item.kind)) {
+      itemsOfType.set(item.kind, []);
+    }
+    const collection = itemsOfType.get(item.kind);
+    if (!collection?.includes(item)) {
+      collection?.push(item);
+    }
+  }
 
   return (
     <ReferencePage
@@ -71,12 +70,31 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
     >
       <main>
         <div className={"space-y-7"}>
-          <CategoryPageSection title={"Classes"} items={classes} />
-          <CategoryPageSection title={"Functions"} items={functions} />
-          <CategoryPageSection title={"Interfaces"} items={interfaces} />
-          <CategoryPageSection title={"Type Aliases"} items={typeAliases} />
+          {sections.map(([title, kind]) => {
+            const matching = itemsOfType.get(kind) || [];
+            return <CategoryPageSection title={title} items={matching} />;
+          })}
         </div>
       </main>
+      <TableOfContents>
+        <ul>
+          {sections.map(([title, kind]) => {
+            const matching = itemsOfType.get(kind) || [];
+            return (
+              <TocSection title={title}>
+                {matching.map((x) => {
+                  return (
+                    <TocListItem
+                      item={{ name: x.fullName || x.name }}
+                      type={kind}
+                    />
+                  );
+                })}
+              </TocSection>
+            );
+          })}
+        </ul>
+      </TableOfContents>
     </ReferencePage>
   );
 }
@@ -84,73 +102,17 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
 function CategoryPageSection(
   { title, items }: { title: string; items: DocNodeBase[] },
 ) {
+  if (items.length === 0) {
+    return null;
+  }
+
   const anchorId = title.replace(" ", "-").toLocaleLowerCase();
   return (
     <section id={anchorId} className={"section"}>
       <AnchorableHeading anchor={anchorId}>{title}</AnchorableHeading>
       <div className={"namespaceSection"}>
-        {items.map((item) => <CategoryPageItem item={item} />)}
+        {items.map((item) => <SymbolSummaryItem item={item} />)}
       </div>
     </section>
-  );
-}
-
-function CategoryPageItem(
-  { item }: { item: DocNodeBase & MightHaveNamespace },
-) {
-  const displayName = item.fullName || item.name;
-  const firstLineOfJsDoc = item.jsDoc?.doc?.split("\n")[0] || "";
-  const descriptionWithLinkCode = insertLinkCodes(firstLineOfJsDoc);
-
-  return (
-    <div className={"namespaceItem"}>
-      <CodeIcon glyph={item.kind} />
-      <div className={"namespaceItemContent"}>
-        <a href={`~/${displayName}`}>
-          {displayName}
-        </a>
-        <p>
-          {descriptionWithLinkCode}
-        </p>
-        <MethodLinks item={item} />
-      </div>
-    </div>
-  );
-}
-
-function MethodLinks({ item }: { item: DocNodeBase }) {
-  if (item.kind !== "class") {
-    return <></>;
-  }
-
-  const asClass = item as DocNodeClass & HasNamespace;
-  const methods = asClass.classDef.methods.sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
-
-  const filteredMethodsList = [
-    "[Symbol.dispose]",
-    "[Symbol.asyncDispose]",
-    "[Symbol.asyncIterator]",
-  ];
-
-  const filteredMethods = methods.filter((method) =>
-    !filteredMethodsList.includes(method.name)
-  );
-
-  const methodLinks = filteredMethods.map((method) => {
-    return (
-      <li>
-        <a href={`~/${asClass.fullName}#${method.name}`}>
-          {method.name}
-        </a>
-      </li>
-    );
-  });
-
-  return (
-    <ul className={"namespaceItemContentSubItems"}>
-      {methodLinks}
-    </ul>
   );
 }
