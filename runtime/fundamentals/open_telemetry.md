@@ -33,10 +33,10 @@ Deno provides the following features:
 ## Quick start
 
 To enable the OpenTelemetry integration, run your Deno script with the
-`--unstable-otel` flag and set the environment variable `OTEL_DENO=1`:
+`--unstable-otel` flag and set the environment variable `OTEL_DENO=true`:
 
 ```sh
-OTEL_DENO=1 deno run --unstable-otel my_script.ts
+OTEL_DENO=true deno run --unstable-otel my_script.ts
 ```
 
 This will automatically collect and export runtime observability data to an
@@ -524,7 +524,7 @@ Learn more about the full context API in the
 
 ## Configuration
 
-The OpenTelemetry integration can be enabled by setting the `OTEL_DENO=1`
+The OpenTelemetry integration can be enabled by setting the `OTEL_DENO=true`
 environment variable.
 
 The endpoint and protocol for the OTLP exporter can be configured using the
