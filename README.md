@@ -73,8 +73,7 @@ reference documentation when the Deno documentation site is next updated.
 
 ### Previewing API reference changes
 
-In order to preview changes to the API reference, we need to take the following
-steps:
+In order to preview changes to the API reference, take the following steps:
 
 1. Make changes to the JSDoc comments in the Deno source code
 1. [Build the Deno CLI locally](https://docs.deno.com/runtime/contributing/building_from_source/),
