@@ -65,6 +65,26 @@ deno task reference
 This will generate the reference docs, and you can use the `serve` or `build`
 tasks.
 
+Content is generated automatically from the Deno source code to populate the API
+references. This content can be edited by modifying the corresponding JSDoc
+comments in the source code which is then ingested into the docs site during a
+build once those changes are published in the latest binary of the Deno CLI.
+
+### Previewing API reference changes
+
+In order to preview changes to the API reference, we need to take the following
+steps:
+
+1. Make changes to the JSDoc comments in the Deno source code
+1. [Build the Deno CLI locally](https://docs.deno.com/runtime/contributing/building_from_source/),
+   including your JSDoc changes
+1. For convenience, create an alias of `d_deno` to point to your local build of
+   the Deno CLI (typically in the `target/debug/deno` directory of your CLI
+   repo)
+1. Generate the reference docs from your local build of the Deno CLI by running
+   in the root directory `d_deno task reference`
+1. Run the `deno task serve` command in the root directory to see the changes
+
 ## Versioning docs content
 
 Philosophically, we want to maintain as few discrete versions of the
