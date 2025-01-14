@@ -65,10 +65,11 @@ deno task reference
 This will generate the reference docs, and you can use the `serve` or `build`
 tasks.
 
-Content is generated automatically from the Deno source code to populate the API
-references. This content can be edited by modifying the corresponding JSDoc
-comments in the source code which is then ingested into the docs site during a
-build once those changes are published in the latest binary of the Deno CLI.
+The API reference documentation is generated from type definitions in the
+[Deno source code](https://github.com/denoland/deno). The API reference content
+can be edited by modifying the JSDoc comments in the corresponding `d.ts` files
+in the Deno source code. Once merged, the changes will be reflected in the API
+reference documentation when the Deno documentation site is next updated.
 
 ### Previewing API reference changes
 
