@@ -80,8 +80,11 @@ with non-zero exit code and the output is reported to standard error.
 
 ## Supported JSDoc tags
 
-Deno implements a large set of JSDoc tags, but also additional tags that are not
-specified in the JSDoc specification. The following tags are supported:
+Deno implements a large set of JSDoc tags, but does not strictly adhere to the
+JSDoc standard, but rather align with sensible standards and features provided
+by widely used tools and ecosystems in the same feature-space, like
+[TSDoc](https://tsdoc.org/) and [TypeDoc](https://typedoc.org/). The following
+tags are supported:
 
 - [`constructor`/`class`](https://jsdoc.app/tags-class): mark a function to be a
   constructor.
@@ -106,12 +109,15 @@ specified in the JSDoc specification. The following tags are supported:
   future version.
 - [`module`](https://jsdoc.app/tags-module): this tag can be defined on a
   top-level JSDoc comment, which will treat that comment to be for the file
-  instead of the subsequent symbol.
+  instead of the subsequent symbol. A value can be specified, which will use the
+  value as an identifier for the module (ie for default exports).
 - `category`/`group`: mark a symbol to be of a specific category/group. This is
   useful for grouping together various symbols together.
 - [`see`](https://jsdoc.app/tags-see): define an external reference related to
   the symbol.
 - [`example`](https://jsdoc.app/tags-example): define an example for the symbol.
+  Unlike JSDoc, code examples need to be wrapped in triple backtick
+  (markdown-style codeblocks), which aligns more with TSDoc than JSDoc.
 - `tags`: define additional custom labels for a symbol, via a comma separated
   list.
 - [`since`](https://jsdoc.app/tags-since): define since when the symbol has been
@@ -136,6 +142,16 @@ specified in the JSDoc specification. The following tags are supported:
 - [`type`](https://jsdoc.app/tags-type): define the type of a symbol.
 - [`default`](https://jsdoc.app/tags-default): define the default value for a
   variable, property or field.
+
+Another supported feature is linking to other symbols and modules.
+
+You can add inline links in your descriptions to other symbols via
+`{@link MySymbol}` and `{@linkcode MySymbol}`, where the latter will use
+monospace inlined code formatting.
+
+For module linking, the same applies, but you use the `{@link [myModule]}`
+syntax. You can also link to symbols in a different module via
+`{@link [myModule].mysymbol}`.
 
 ## HTML output
 
