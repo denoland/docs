@@ -88,8 +88,9 @@ You can
 Typing out the module name with the full version specifier can become tedious
 when importing them in multiple files. You can centralize management of remote
 modules with an `imports` field in your `deno.json` file. We call this `imports`
-field the **import map**, which is based on the
-[Import Maps Standard](https://github.com/WICG/import-maps).
+field the **import map**, which is based on the [Import Maps Standard].
+
+[Import Maps Standard]: https://github.com/WICG/import-maps
 
 ```json title="deno.json"
 {
@@ -112,6 +113,38 @@ import { pascalCase } from "cases";
 The remapped name can be any valid specifier. It's a very powerful feature in
 Deno that can remap anything. Learn more about what the import map can do
 [here](/runtime/fundamentals/configuration/#dependencies).
+
+## Differentiating between `imports` or `importMap` in `deno.json` and `--import-map` option
+
+The [Import Maps Standard] requires two entries for each module: one for the
+module specifier and another for the specifier with a trailing `/`. This is
+because the standard allows only one entry per module specifier, and the
+trailing `/` indicates that the specifier refers to a directory. For example,
+when using the `--import-map import_map.json` option, the `import_map.json` file
+must include both entries for each module (note the use of `jsr:/@std/async`
+instead of `jsr:@std/async`):
+
+```json title="import_map.json"
+{
+  "imports": {
+    "@std/async": "jsr:@std/async@^1.0.0",
+    "@std/async/": "jsr:/@std/async@^1.0.0/"
+  }
+}
+```
+
+In contrast, `deno.json` extends the import maps standard. When you use the
+imports field in `deno.json` or reference an `import_map.json` file via the
+`importMap` field, you only need to specify the module specifier without the
+trailing `/`:
+
+```json title="deno.json"
+{
+  "imports": {
+    "@std/async": "jsr:@std/async@^1.0.0"
+  }
+}
+```
 
 ## Adding dependencies with `deno add`
 
