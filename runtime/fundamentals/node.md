@@ -511,7 +511,7 @@ error[no-process-globals]: NodeJS process global is discouraged in Deno
   |             ^^^^^^^
   = hint: Add `import process from "node:process";`
 
-  docs: https://lint.deno.land/rules/no-process-globals
+  docs: https://docs.deno.com/lint/rules/no-process-globals
 
 
 Found 1 problem (1 fixable via --fix)
@@ -674,7 +674,7 @@ error[no-constant-condition]: Use of a constant expressions as conditions is not
   |     ^^^^
   = hint: Remove the constant expression
 
-  docs: https://lint.deno.land/rules/no-constant-condition
+  docs: https://docs.deno.com/lint/rules/no-constant-condition
 
 
 Found 1 problem
@@ -688,8 +688,8 @@ deno lint --fix
 ```
 
 A full list of all supported linting rules can be found on
-[https://lint.deno.land/](https://lint.deno.land/). To learn more about how to
-configure the linter, check out the
+[https://docs.deno.com/lint/](https://docs.deno.com/lint/). To learn more about
+how to configure the linter, check out the
 [`deno lint` subcommand](/runtime/reference/cli/linter/).
 
 **Formatting**

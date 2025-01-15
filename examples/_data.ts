@@ -247,6 +247,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        label: "Build a Nuxt app with Deno",
+        id: "/examples/nuxt_tutorial/",
+        type: "tutorial",
+      },
+      {
         label: "Build a Typesafe API with tRPC and Deno",
         id: "/examples/trpc_tutorial/",
         type: "tutorial",
@@ -696,7 +701,7 @@ export const sidebar = [
     ],
   },
   {
-    title: "Crypotography",
+    title: "Cryptography",
     items: [
       {
         label: "Generating & validating UUIDs",

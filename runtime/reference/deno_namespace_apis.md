@@ -827,7 +827,7 @@ A couple notes on this example:
 
 - `addEventListener` and `onload`/`onunload` are prefixed with `globalThis`, but
   you could also use `self` or no prefix at all.
-  [It is not recommended to use `window` as a prefix](https://lint.deno.land/#no-window-prefix).
+  [It is not recommended to use `window` as a prefix](https://docs.deno.com/lint/rules/no-window-prefix).
 - You can use `addEventListener` and/or `onload`/`onunload` to define handlers
   for events. There is a major difference between them, let's run the example:
 

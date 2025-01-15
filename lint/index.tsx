@@ -2,6 +2,7 @@ type LintIconType = "jsr" | "react" | "jsx" | "recommended" | "fresh";
 
 export const title = "List of rules";
 export const toc = [];
+export const oldUrl = "/lint/rules";
 
 const getReadableIconName = (iconType: LintIconType) => {
   if (["jsx", "jsr"].includes(iconType)) {

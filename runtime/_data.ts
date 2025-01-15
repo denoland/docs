@@ -1,6 +1,5 @@
 import { Sidebar } from "../types.ts";
 import { walk } from "jsr:@std/fs";
-import { basename } from "jsr:@std/path";
 import { parse as yamlParse } from "jsr:@std/yaml";
 
 export const sidebar = [
@@ -35,6 +34,10 @@ export const sidebar = [
       {
         label: "HTTP Server",
         id: "/runtime/fundamentals/http_server/",
+      },
+      {
+        label: "OpenTelemetry",
+        id: "/runtime/fundamentals/open_telemetry/",
       },
       "/runtime/fundamentals/stability_and_releases/",
     ],
