@@ -386,7 +386,7 @@ then deploy the app by connecting your GitHub repository and selecting the
 branch you want to deploy.
 
 Give the project a name, and make sure that the `build step` is set to
-`deno run build` and the `Entrypoint` is `./server.main.ts`.
+`deno run build` and the `Entrypoint` is `./main.ts`.
 
 Click the `Deploy Project` button and your app will be live!
 
