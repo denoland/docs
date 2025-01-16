@@ -184,6 +184,19 @@ site.scopedUpdates(
   (path) => path.startsWith("/api/deno/"),
 );
 
+// Do more expensive operations if we're building the full site
+if (Deno.env.get("BUILD_TYPE") == "FULL") {
+  console.log("Including resource-heavy operations in the build");
+
+  // Use Lume's built in date function to get the last modified date of the file
+  // This will replace the default date exposed to the page layouts
+  site.data("date", "Git Last Modified");
+
+  // Generate Open Graph images
+  // TODO: Add custom OG iomage generation
+  // site.use(ogImages());
+}
+
 const SKIP_CHECK_URLS = (Deno.env.get("SKIP_CHECK_URLS") || "false")
   .toLowerCase();
 
