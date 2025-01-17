@@ -378,7 +378,7 @@ during installation (like with `deno install`), as this would allow arbitrary
 code execution. When running with the `--allow-scripts` flag, post-install
 scripts for npm packages will be executed as a subprocess.
 
-### FFI
+### FFI (Foreign Function Interface)
 
 Deno provides a mechanism for executing code written in other languages, such as
 Rust, C, or C++, from within a Deno runtime. This is done using the
