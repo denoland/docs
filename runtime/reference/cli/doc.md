@@ -78,13 +78,20 @@ These lints are meant to help you write better documentation and speed up
 type-checking in your projects. If any problems are found, the program exits
 with non-zero exit code and the output is reported to standard error.
 
-## Supported JSDoc tags
+## Supported JSDoc features and tags
 
 Deno implements a large set of JSDoc tags, but does not strictly adhere to the
 JSDoc standard, but rather align with sensible standards and features provided
 by widely used tools and ecosystems in the same feature-space, like
-[TSDoc](https://tsdoc.org/) and [TypeDoc](https://typedoc.org/). The following
-tags are supported:
+[TSDoc](https://tsdoc.org/) and [TypeDoc](https://typedoc.org/).
+
+For any free-form text places, ie the main description of a JSDoc comment, the
+description of a parameter, etc. accept markdown.
+
+### Supported Tags
+
+The following tags are supported, being a selection of tags used and specified
+by JSDoc, TSDoc and TypeDoc:
 
 - [`constructor`/`class`](https://jsdoc.app/tags-class): mark a function to be a
   constructor.
@@ -143,11 +150,25 @@ tags are supported:
 - [`default`](https://jsdoc.app/tags-default): define the default value for a
   variable, property or field.
 
-Another supported feature is linking to other symbols and modules.
+### Inline Linking
+
+Inline links let you specify links to other parts of the page, other symbols, or
+modules. Besides just supporting markdown-style links,
+[JSDoc style inline-links](https://jsdoc.app/tags-inline-link) are also
+supported.
+
+For example, you can do`{@link https://docs.deno.com}`, which will be rendered
+as the following 'https://docs.deno.com'. `{@linkcode https://docs.deno.com}`
+can also be used, to make it in a monospace font, and will be rendered roughly
+like this: '`https://docs.deno.com`'.
+
+You can also specify a replacement label, via
+`{@link https://docs.deno.com | Deno Docs}`, which will use the text after `|`
+as the text to display instead of the link. The previous example would render as
+'[Deno Docs](https://docs.deno.com)'.
 
 You can add inline links in your descriptions to other symbols via
-`{@link MySymbol}` and `{@linkcode MySymbol}`, where the latter will use
-monospace inlined code formatting.
+`{@link MySymbol}`.
 
 For module linking, the same applies, but you use the `{@link [myModule]}`
 syntax. You can also link to symbols in a different module via
