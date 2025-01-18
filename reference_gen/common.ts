@@ -130,13 +130,11 @@ export function renderMarkdown(
       return undefined;
     }
 
-    return `<div data-color-mode="dark" data-light-theme="light" data-dark-theme="dark" class="markdown-body markdown-summary">${
-      titleOnlyRenderer.renderer.render(parsed, titleOnlyRenderer.options, {})
-    }</div>`;
+    return `<div data-color-mode="dark" data-light-theme="light" data-dark-theme="dark" class="markdown-body markdown-summary">${titleOnlyRenderer.renderer.render(parsed, titleOnlyRenderer.options, {})
+      }</div>`;
   } else {
-    return `<div data-color-mode="dark" data-light-theme="light" data-dark-theme="dark" class="markdown-body">${
-      renderer.render(md)
-    }</div>`;
+    return `<div data-color-mode="dark" data-light-theme="light" data-dark-theme="dark" class="markdown-body">${renderer.render(md)
+      }</div>`;
   }
 }
 
@@ -183,7 +181,9 @@ export const hrefResolver: HrefResolver = {
 };
 
 export async function writeFiles(root: string, files: Record<string, string>) {
-  await Deno.remove(root, { recursive: true });
+  if (await fileExists(root)) {
+    await Deno.remove(root, { recursive: true });
+  }
 
   await Promise.all(
     Object.entries(files).map(async ([path, content]) => {
@@ -195,4 +195,13 @@ export async function writeFiles(root: string, files: Record<string, string>) {
   );
 
   console.log(`Written ${Object.keys(files).length} files`);
+}
+
+export async function fileExists(path: string) {
+  try {
+    await Deno.lstat(path);
+    return true;
+  } catch {
+    return false;
+  }
 }
