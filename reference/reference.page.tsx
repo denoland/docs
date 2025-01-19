@@ -1,6 +1,6 @@
 import generatePageFor from "./pageFactory.ts";
 import getCategoryPages from "./_pages/Category.tsx";
-import { countSymbols, populateItemNamespaces } from "./_util/common.ts";
+import { countSymbols, decorateNodesWithExtraData } from "./_util/common.ts";
 import { getSymbols } from "./_dataSources/dtsSymbolSource.ts";
 import webCategoryDocs from "./_categories/web-categories.json" with {
   type: "json",
@@ -92,13 +92,13 @@ async function getAllSymbols() {
       } symbols`,
     );
 
-    const cleaned = populateItemNamespaces(
+    const enrichedItems = decorateNodesWithExtraData(
       symbols,
     ) as (DocNode & HasNamespace)[];
 
     const symbolsByName = new Map<string, (DocNode & HasNamespace)[]>();
 
-    for (const symbol of cleaned) {
+    for (const symbol of enrichedItems) {
       const existing = symbolsByName.get(symbol.fullName) || [];
       symbolsByName.set(symbol.name, [...existing, symbol]);
     }

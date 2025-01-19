@@ -24,7 +24,7 @@ export function flattenItems(items: DocNode[]): (DocNodeBase & MightHaveNamespac
     return flattened;
 }
 
-export function populateItemNamespaces(items: DocNode[], populateNamespace = true, ns = ""): (DocNodeBase & HasNamespace)[] {
+export function decorateNodesWithExtraData(items: DocNode[], populateNamespace = true, ns = ""): (DocNodeBase & HasNamespace)[] {
     const flattened: (DocNodeBase & HasNamespace)[] = [];
 
     for (const item of items) {
@@ -38,7 +38,7 @@ export function populateItemNamespaces(items: DocNode[], populateNamespace = tru
             flattened.push(withNamespace);
 
             const namespace = ns + (ns ? "." : "") + item.name;
-            flattened.push(...populateItemNamespaces(item.namespaceDef.elements, populateNamespace, namespace));
+            flattened.push(...decorateNodesWithExtraData(item.namespaceDef.elements, populateNamespace, namespace));
         } else {
             const withNamespace = item as DocNodeBase & HasNamespace;
             withNamespace.namespace = ns;
