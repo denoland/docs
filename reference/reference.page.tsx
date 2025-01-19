@@ -1,18 +1,14 @@
 import generatePageFor from "./pageFactory.ts";
 import getCategoryPages from "./_pages/Category.tsx";
-import { countSymbols, decorateNodesWithExtraData } from "./_util/common.ts";
-import { getSymbols } from "./_dataSources/dtsSymbolSource.ts";
 import webCategoryDocs from "./_categories/web-categories.json" with {
   type: "json",
 };
 import denoCategoryDocs from "./_categories/deno-categories.json" with {
   type: "json",
 };
-import { DocNode } from "@deno/doc/types";
-import { HasNamespace } from "./types.ts";
-import { mergeSymbolsWithCollidingNames } from "./_util/symbolMerging.ts";
 import { getCategories } from "./_util/categoryBuilding.ts";
 import { cliNow } from "../timeUtils.ts";
+import { getAllSymbols } from "./symbolLoading.ts";
 
 export const layout = "raw.tsx";
 
@@ -80,32 +76,4 @@ export default async function* () {
   console.log(
     `${cliNow()} Generated ${generated.length} pages, skipped ${skipped}`,
   );
-}
-
-async function getAllSymbols() {
-  const allSymbols = new Map<string, DocNode[]>();
-  for await (const { packageName, symbols, sourceFileName } of getSymbols()) {
-    console.log(
-      `${cliNow()} 📚 ${packageName}:${sourceFileName} has ${
-        countSymbols(symbols)
-      } symbols`,
-    );
-
-    const enrichedItems = decorateNodesWithExtraData(
-      symbols,
-    ) as (DocNode & HasNamespace)[];
-
-    const symbolsByName = new Map<string, (DocNode & HasNamespace)[]>();
-
-    for (const symbol of enrichedItems) {
-      const existing = symbolsByName.get(symbol.fullName) || [];
-      symbolsByName.set(symbol.name, [...existing, symbol]);
-    }
-
-    const mergedSymbols = mergeSymbolsWithCollidingNames(symbolsByName);
-
-    allSymbols.set(packageName, mergedSymbols);
-  }
-
-  return allSymbols;
 }
