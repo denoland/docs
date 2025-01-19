@@ -14,11 +14,13 @@ export function getCategories(
 
   const catsFromSymbols = getCategoriesFromSymbols(symbols, descriptions);
 
-  catsFromSymbols.set("All Symbols", {
-    title: "All Symbols",
-    description: "All symbols in this package",
-    urlStub: "all_symbols",
-  });
+  if (catsFromSymbols.size > 0) {
+    catsFromSymbols.set("All Symbols", {
+      title: "All Symbols",
+      description: "All symbols in this package",
+      urlStub: "all_symbols",
+    });
+  }
 
   return catsFromSymbols;
 }
@@ -39,6 +41,11 @@ export function getCategoriesFromSymbols(
     .filter((x) => x !== undefined)
     .sort()
     .reduce((acc, category) => {
+      if (!descriptions) {
+        acc.set(category, "");
+        return acc;
+      }
+
       const description = descriptions[category] || "";
       acc.set(category, description);
       return acc;
