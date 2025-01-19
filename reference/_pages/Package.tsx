@@ -1,10 +1,10 @@
 import ReferencePage from "../_layouts/ReferencePage.tsx";
-import { ReferenceContext } from "../types.ts";
+import { ReferenceContext, WebCategoryDetails } from "../types.ts";
 import { AnchorableHeading } from "./partials/AnchorableHeading.tsx";
 import { linkCodeAndParagraph } from "./primitives/LinkCode.tsx";
 
 type Props = {
-  data: Map<string, string>;
+  data: Map<string, WebCategoryDetails>;
   context: ReferenceContext;
 };
 
@@ -15,7 +15,7 @@ export function Package({ data, context }: Props) {
         <CategorySummary
           identifier={key}
           context={context}
-          summary={value || ""}
+          summary={value.description || ""}
         />
       );
     },

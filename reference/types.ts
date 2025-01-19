@@ -48,11 +48,16 @@ export type Navigation = {
   currentItemName: string;
 };
 
+export type WebCategoryDetails = {
+  description: string;
+  urlStub: string;
+};
+
 export type ReferenceContext = {
   root: string;
   packageName: string;
   symbols: DocNode[];
-  currentCategoryList: Map<string, string>;
+  currentCategoryList: Map<string, WebCategoryDetails>;
 };
 
 export type ReferenceDocumentFactoryFunction<

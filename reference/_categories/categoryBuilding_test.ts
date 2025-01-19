@@ -9,8 +9,8 @@ Deno.test("parseCategories, no category description metadata available, still su
   ], {});
 
   assertEquals(categoryMap.size, 2);
-  assertEquals(categoryMap.get("cat-1"), "");
-  assertEquals(categoryMap.get("cat-2"), "");
+  assertEquals(categoryMap.get("cat-1")?.description, "");
+  assertEquals(categoryMap.get("cat-2")?.description, "");
 });
 
 Deno.test("parseCategories, category description metadata available, doesn't return items with no symbols", () => {
@@ -30,5 +30,5 @@ Deno.test("parseCategories, tagged symbols and matching metadata available, retu
   });
 
   assertEquals(categoryMap.size, 1);
-  assertEquals(categoryMap.get("cat-1"), "Category 1");
+  assertEquals(categoryMap.get("cat-1")?.description, "Category 1");
 });

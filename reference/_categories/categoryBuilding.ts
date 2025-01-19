@@ -1,5 +1,5 @@
 import { DocNode, JsDocTagDoc } from "@deno/doc/types";
-
+import { WebCategoryDetails } from "../types.ts";
 // deno-lint-ignore no-explicit-any
 type CategoryDescription = { path: string; categoryDocs: any };
 
@@ -12,13 +12,20 @@ export function getCategories(
     x.path === packageName.toLocaleLowerCase()
   )[0]!.categoryDocs as Record<string, string | undefined>;
 
-  return getCategoriesFromSymbols(symbols, descriptions);
+  const catsFromSymbols = getCategoriesFromSymbols(symbols, descriptions);
+
+  catsFromSymbols.set("All Symbols", {
+    description: "All symbols in this package",
+    urlStub: "all_symbols",
+  });
+
+  return catsFromSymbols;
 }
 
 export function getCategoriesFromSymbols(
   symbols: DocNode[],
   descriptions: Record<string, string | undefined>,
-): Map<string, string> {
+): Map<string, WebCategoryDetails> {
   const allCategoriesFromJsDocTags = symbols.map((item) =>
     item.jsDoc?.tags?.filter((tag) => tag.kind === "category")
   ).flat() as JsDocTagDoc[];
@@ -27,7 +34,7 @@ export function getCategoriesFromSymbols(
     ...new Set(allCategoriesFromJsDocTags.map((tag) => tag?.doc?.trim())),
   ];
 
-  return distinctCategories
+  const categoriesWithDescriptions = distinctCategories
     .filter((x) => x !== undefined)
     .sort()
     .reduce((acc, category) => {
@@ -35,4 +42,23 @@ export function getCategoriesFromSymbols(
       acc.set(category, description);
       return acc;
     }, new Map<string, string>());
+
+  const enrichedWitUrls = new Map<string, WebCategoryDetails>();
+
+  categoriesWithDescriptions.forEach((description, category) => {
+    enrichedWitUrls.set(category, {
+      description: description,
+      urlStub: createCategoryUrl(category),
+    });
+  });
+
+  return enrichedWitUrls;
+}
+
+function createCategoryUrl(category: string) {
+  let categoryUrl = category.replace(/\s/g, "_").toLocaleLowerCase();
+  categoryUrl = categoryUrl.replace(/[^a-zA-Z0-9-_]/g, "");
+  categoryUrl = categoryUrl.toLocaleLowerCase();
+
+  return categoryUrl;
 }

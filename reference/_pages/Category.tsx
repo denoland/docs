@@ -24,12 +24,16 @@ export default function* getPages(
     content: <Package data={context.currentCategoryList} context={context} />,
   };
 
-  for (const [key] of context.currentCategoryList) {
+  for (const [key, details] of context.currentCategoryList) {
+    const BrowsePage = key === "All Symbols"
+      ? AllSymbolsBrowse
+      : CategoryBrowse;
+
     yield {
       title: key,
       url:
-        `${context.root}/${context.packageName.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`,
-      content: <CategoryBrowse categoryName={key} context={context} />,
+        `${context.root}/${context.packageName.toLocaleLowerCase()}/${details.urlStub}`,
+      content: <BrowsePage categoryName={key} context={context} />,
     };
   }
 }
@@ -40,14 +44,18 @@ type ListingProps = {
 };
 
 export function CategoryBrowse({ categoryName, context }: ListingProps) {
-  const allItems = flattenItems(context.symbols);
+  const allItems = flattenItems(context.symbols).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
-  const validItems = allItems.filter((item) =>
+  const validItems: (DocNodeBase & MightHaveNamespace)[] = allItems.filter((
+    item,
+  ) =>
     item.jsDoc?.tags?.some((tag) =>
       tag.kind === "category" &&
       tag.doc.toLocaleLowerCase() === categoryName?.toLocaleLowerCase()
     )
-  ).sort((a, b) => a.name.localeCompare(b.name));
+  );
 
   const itemsOfType = new Map<string, (DocNodeBase & MightHaveNamespace)[]>();
   for (const item of validItems) {
@@ -95,6 +103,32 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
           })}
         </ul>
       </TableOfContents>
+    </ReferencePage>
+  );
+}
+
+type AllSymbolsBrowseProps = {
+  context: ReferenceContext;
+};
+
+function AllSymbolsBrowse({ context }: AllSymbolsBrowseProps) {
+  const allItems = flattenItems(context.symbols).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  return (
+    <ReferencePage
+      context={context}
+      navigation={{
+        category: context.packageName,
+        currentItemName: "All Symbols",
+      }}
+    >
+      <main>
+        <div className={"space-y-7"}>
+          <CategoryPageSection title={"Default"} items={allItems} />;
+        </div>
+      </main>
     </ReferencePage>
   );
 }
