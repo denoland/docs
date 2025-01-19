@@ -26,8 +26,10 @@ export async function* getSymbols() {
         const docs = await loadDocumentation(paths);
 
         for (const sourceFile of Object.keys(docs)) {
+            const sourceFileName = sourceFile.split("/").pop();
+
             const symbols = docs[sourceFile];
-            yield { packageName, symbols };
+            yield { packageName, symbols, sourceFile, sourceFileName };
         }
     }
 }
@@ -43,7 +45,7 @@ async function loadDocumentation(paths: string[]) {
 
 async function getNodeTypeFiles() {
     const urls: string[] = [];
-    for await (const file of expandGlob("./types/node/[!_]*")) {
+    for await (const file of expandGlob("./reference_gen/types/node/[!_]*")) {
         urls.push(file.path);
     }
     return urls;

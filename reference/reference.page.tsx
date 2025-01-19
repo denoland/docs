@@ -12,6 +12,7 @@ import { DocNode } from "@deno/doc/types";
 import { HasNamespace } from "./types.ts";
 import { mergeSymbolsWithCollidingNames } from "./_util/symbolMerging.ts";
 import { categoryDataFrom, parseCategories } from "./_util/categoryBuilding.ts";
+import { cliNow } from "../timeUtils.ts";
 
 export const layout = "raw.tsx";
 
@@ -74,22 +75,26 @@ export default async function* () {
       }
     }
   } catch (ex) {
-    console.warn("⚠️ Reference docs were not generated." + ex);
+    console.warn(`"${cliNow()} ⚠️ Reference docs were not generated.` + ex);
   }
 
-  console.log("Generated", generated.length, "pages", skipped, "skipped");
+  console.log(
+    `${cliNow()} Generated ${generated.length} pages, skipped ${skipped}`,
+  );
 }
 
 async function getAllSymbols() {
   const allSymbols = new Map<string, DocNode[]>();
-  for await (const { packageName, symbols } of getSymbols()) {
-    console.log(`📚 ${packageName} has ${countSymbols(symbols)} symbols`);
+  for await (const { packageName, symbols, sourceFileName } of getSymbols()) {
+    console.log(
+      `${cliNow()} 📚 ${packageName}:${sourceFileName} has ${
+        countSymbols(symbols)
+      } symbols`,
+    );
 
     const cleaned = populateItemNamespaces(
       symbols,
     ) as (DocNode & HasNamespace)[];
-
-    console.log(`📚 ${packageName} has ${countSymbols(cleaned)} cleaned`);
 
     const symbolsByName = new Map<string, (DocNode & HasNamespace)[]>();
 
