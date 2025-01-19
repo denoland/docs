@@ -49,6 +49,7 @@ export type Navigation = {
 };
 
 export type WebCategoryDetails = {
+  title: string;
   description: string;
   urlStub: string;
 };

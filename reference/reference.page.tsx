@@ -54,7 +54,7 @@ export default async function* () {
 
       for (const p of getCategoryPages(context)) {
         yield p;
-        console.log(`${cliNow()} 📄 Generated category page: ${p.url}`);
+        // console.log(`${cliNow()} 📄 Generated category page: ${p.url}`);
         generated.push(p.url);
       }
 

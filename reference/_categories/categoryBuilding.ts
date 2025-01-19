@@ -15,6 +15,7 @@ export function getCategories(
   const catsFromSymbols = getCategoriesFromSymbols(symbols, descriptions);
 
   catsFromSymbols.set("All Symbols", {
+    title: "All Symbols",
     description: "All symbols in this package",
     urlStub: "all_symbols",
   });
@@ -47,6 +48,7 @@ export function getCategoriesFromSymbols(
 
   categoriesWithDescriptions.forEach((description, category) => {
     enrichedWitUrls.set(category, {
+      title: category,
       description: description,
       urlStub: createCategoryUrl(category),
     });
