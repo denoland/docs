@@ -88,7 +88,7 @@ const data = [
     items: [
       {
         label: "Blog",
-        href: "https://www.deno.com/blog",
+        href: "https://deno.com/blog",
       },
       {
         label: "Careers",
