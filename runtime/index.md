@@ -9,7 +9,7 @@ oldUrl:
   - /runtime/manual/getting_started/
 ---
 
-[Deno](https://www.deno.com)
+[Deno](https://deno.com)
 ([/ˈdiːnoʊ/](http://ipa-reader.com/?text=%CB%88di%CB%90no%CA%8A), pronounced
 `dee-no`) is an
 [open source](https://github.com/denoland/deno/blob/main/LICENSE.md) JavaScript,
