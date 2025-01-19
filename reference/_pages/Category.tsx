@@ -82,14 +82,14 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
             const matching = itemsOfType.get(kind) || [];
             return (
               <TocSection title={title}>
-                  {matching.map((x) => {
-                    return (
-                      <TocListItem
-                        item={{ name: x.fullName || x.name }}
-                        type={kind}
-                      />
-                    );
-                  })}
+                {matching.map((x) => {
+                  return (
+                    <TocListItem
+                      item={{ name: x.fullName || x.name }}
+                      type={kind}
+                    />
+                  );
+                })}
               </TocSection>
             );
           })}
