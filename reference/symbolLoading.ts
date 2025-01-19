@@ -26,7 +26,12 @@ export async function getAllSymbols() {
 
     const mergedSymbols = mergeSymbolsWithCollidingNames(symbolsByName);
 
-    allSymbols.set(packageName, mergedSymbols);
+    if (allSymbols.has(packageName)) {
+      const existingSymbols = allSymbols.get(packageName) || [];
+      allSymbols.set(packageName, [...existingSymbols, ...mergedSymbols]);
+    } else {
+      allSymbols.set(packageName, mergedSymbols);
+    }
   }
 
   return allSymbols;
