@@ -11,7 +11,7 @@ import denoCategoryDocs from "./_categories/deno-categories.json" with {
 import { DocNode } from "@deno/doc/types";
 import { HasNamespace } from "./types.ts";
 import { mergeSymbolsWithCollidingNames } from "./_util/symbolMerging.ts";
-import { categoryDataFrom, parseCategories } from "./_util/categoryBuilding.ts";
+import { getCategories } from "./_util/categoryBuilding.ts";
 import { cliNow } from "../timeUtils.ts";
 
 export const layout = "raw.tsx";
@@ -44,8 +44,7 @@ export default async function* () {
     const allSymbols = await getAllSymbols();
 
     for (const [packageName, symbols] of allSymbols.entries()) {
-      const descriptions = categoryDataFrom(sections, packageName);
-      const categories = parseCategories(symbols, descriptions);
+      const categories = getCategories(packageName, symbols, sections);
 
       const context = {
         root,

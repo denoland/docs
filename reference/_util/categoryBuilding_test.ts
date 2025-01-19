@@ -1,9 +1,9 @@
-import { parseCategories } from "./categoryBuilding.ts";
+import { getCategoriesFromSymbols } from "./categoryBuilding.ts";
 import { assertEquals } from "@std/assert/equals";
 import { classFor } from "./testData.ts";
 
 Deno.test("parseCategories, no category description metadata available, still surfaces categories from tags", () => {
-    const categoryMap = parseCategories([
+    const categoryMap = getCategoriesFromSymbols([
         classFor("cat-1"),
         classFor("cat-2"),
     ], {});
@@ -14,7 +14,7 @@ Deno.test("parseCategories, no category description metadata available, still su
 });
 
 Deno.test("parseCategories, category description metadata available, doesn't return items with no symbols", () => {
-    const categoryMap = parseCategories([
+    const categoryMap = getCategoriesFromSymbols([
     ], {
         "cat-1": "Category 1",
         "cat-2": "Category 2",
@@ -24,7 +24,7 @@ Deno.test("parseCategories, category description metadata available, doesn't ret
 });
 
 Deno.test("parseCategories, tagged symbols and matching metadata available, returns both", () => {
-    const categoryMap = parseCategories([
+    const categoryMap = getCategoriesFromSymbols([
         classFor("cat-1")
     ], {
         "cat-1": "Category 1",
