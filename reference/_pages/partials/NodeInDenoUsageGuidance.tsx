@@ -20,15 +20,15 @@ export function NodeInDenoUsageGuidance(
           <pre>
             <code class="highlight notranslate language-typescript">
             <span class="token keyword">import</span>
-            {nbsp}
+            {" "}
             <span class="token operator">*</span>
-            {nbsp}
+            {" "}
             <span class="token keyword">as</span>
-            {nbsp}
+            {" "}
              mod
-             {nbsp}
+             {" "}
              <span class="token keyword">from</span>
-             {nbsp}
+             {" "}
              <span class="token string">"node:{nodePackage}"</span>
              <span class="token punctuation">;</span>
           </code>

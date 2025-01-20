@@ -17,7 +17,7 @@ export function PropertyName(
   const typeInfoElements = property.tsType
     ? (
       <>
-        <span className={propertyTypeClass}>:{nbsp}</span>
+        <span className={propertyTypeClass}>:{" "}</span>
         <TypeSummary
           typeDef={property.tsType}
           extraClasses={["font-medium", "text-stone-500"]}

@@ -16,7 +16,7 @@ const factories = new Map<
   ReferenceDocumentFactoryFunction<DocNodeBase>
 >();
 
-// Any types used here because denofmt ruins the formatting
+// Any types are used here because deno fmt ruins the formatting
 // Safe because this factories collection never escapes this file
 // Actual type: ReferenceDocumentFactoryFunction<DocNodeBase>
 

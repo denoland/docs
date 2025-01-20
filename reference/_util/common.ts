@@ -24,5 +24,3 @@ export function flattenItems(
   }
   return flattened;
 }
-
-export const nbsp = "\u00A0";
