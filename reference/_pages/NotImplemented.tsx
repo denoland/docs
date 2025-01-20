@@ -1,8 +1,7 @@
-import { DocNodeBase } from "@deno/doc/types";
-import { LumeDocument, ReferenceContext } from "../types.ts";
+import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 
 export default function* getPages(
-  _: DocNodeBase,
+  _: SymbolDoc,
   __: ReferenceContext,
 ): IterableIterator<LumeDocument> {
 }

@@ -1,11 +1,11 @@
-import { DocNode, DocNodeBase, DocNodeNamespace } from "@deno/doc/types";
+import { DocNode, DocNodeBase, NamespaceDef } from "@deno/doc/types";
 import { cliNow } from "../timeUtils.ts";
 import { getSymbols } from "./_dataSources/dtsSymbolSource.ts";
-import { HasFullName, HasNamespace } from "./types.ts";
+import { HasWrappedElements, SymbolDoc } from "./types.ts";
 import { mergeSymbolsWithCollidingNames } from "./_util/symbolMerging.ts";
 
 export async function getAllSymbols() {
-  const allSymbols = new Map<string, DocNode[]>();
+  const allSymbols = new Map<string, SymbolDoc[]>();
   for await (const { packageName, symbols, sourceFileName } of getSymbols()) {
     console.log(
       `${cliNow()} 📚 ${packageName}:${sourceFileName} has ${
@@ -15,16 +15,17 @@ export async function getAllSymbols() {
 
     const enrichedItems = decorateNodesWithExtraData(
       symbols,
-    ) as (DocNode & HasNamespace)[];
+      packageName,
+    );
 
-    const symbolsByName = new Map<string, (DocNode & HasNamespace)[]>();
+    const symbolsByIdentifier = new Map<string, SymbolDoc[]>();
 
     for (const symbol of enrichedItems) {
-      const existing = symbolsByName.get(symbol.fullName) || [];
-      symbolsByName.set(symbol.name, [...existing, symbol]);
+      const existing = symbolsByIdentifier.get(symbol.identifier) || [];
+      symbolsByIdentifier.set(symbol.identifier, [...existing, symbol]);
     }
 
-    const mergedSymbols = mergeSymbolsWithCollidingNames(symbolsByName);
+    const mergedSymbols = mergeSymbolsWithCollidingNames(symbolsByIdentifier);
 
     if (allSymbols.has(packageName)) {
       const existingSymbols = allSymbols.get(packageName) || [];
@@ -39,40 +40,55 @@ export async function getAllSymbols() {
 
 function decorateNodesWithExtraData(
   items: DocNode[],
+  packageName: string,
   populateNamespace = true,
   ns = "",
-): (DocNodeBase & HasNamespace)[] {
-  const flattened: (DocNodeBase & HasNamespace)[] = [];
+): SymbolDoc[] {
+  const flattened: SymbolDoc[] = [];
 
   for (const item of items) {
-    const withFullName = item as DocNodeBase & HasFullName;
-    withFullName.fullName = item.name;
+    const wrapped = createSymbolWrapper(item, packageName, ns);
 
     if (item.kind === "namespace") {
-      const withNamespace = item as DocNodeNamespace & HasNamespace;
-      withNamespace.namespace = "";
-      withNamespace.fullName = item.name;
-      flattened.push(withNamespace);
+      flattened.push(wrapped);
 
-      const namespace = ns + (ns ? "." : "") + item.name;
-
-      flattened.push(
-        ...decorateNodesWithExtraData(
-          item.namespaceDef.elements,
-          populateNamespace,
-          namespace,
-        ),
+      const childrensNamespace = ns + (ns ? "." : "") + item.name;
+      const children = decorateNodesWithExtraData(
+        item.namespaceDef.elements,
+        packageName,
+        populateNamespace,
+        childrensNamespace,
       );
-    } else {
-      const withNamespace = item as DocNodeBase & HasNamespace;
-      withNamespace.namespace = ns;
-      withNamespace.fullName = ns ? `${ns}.${item.name}` : item.name;
 
-      flattened.push(withNamespace);
+      const asWrappedContainer = item.namespaceDef as
+        & NamespaceDef
+        & HasWrappedElements;
+
+      asWrappedContainer.wrappedElements = children;
+
+      flattened.push(...children);
+    } else {
+      flattened.push(wrapped);
     }
   }
 
   return flattened;
+}
+
+function createSymbolWrapper(
+  data: DocNodeBase,
+  packageName: string,
+  ns = "",
+): SymbolDoc {
+  const nameString = ns ? `${ns}.${data.name}` : data.name;
+  return {
+    name: data.name,
+    fullName: nameString,
+    namespace: ns,
+    package: packageName,
+    identifier: (data.kind + "/" + nameString).toLowerCase(),
+    data,
+  };
 }
 
 export function countSymbols(symbols: DocNode[]): number {

@@ -1,5 +1,11 @@
 import { DocNodeNamespace } from "@deno/doc/types";
-import { LumeDocument, ReferenceContext } from "../types.ts";
+import {
+  containsWrappedElements,
+  HasWrappedElements,
+  LumeDocument,
+  ReferenceContext,
+  SymbolDoc,
+} from "../types.ts";
 import generatePageFor from "../pageFactory.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
@@ -13,29 +19,33 @@ import { SymbolSummaryItem } from "./partials/SymbolSummaryItem.tsx";
 import { sections } from "../_util/common.ts";
 import { MemberSection } from "./partials/MemberSection.tsx";
 
-type Props = { data: DocNodeNamespace; context: ReferenceContext };
+type Props = { data: SymbolDoc<DocNodeNamespace>; context: ReferenceContext };
 
 export default function* getPages(
-  item: DocNodeNamespace,
+  item: SymbolDoc<DocNodeNamespace>,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
   yield {
     title: item.name,
     url:
-      `${context.root}/${context.packageName.toLocaleLowerCase()}/${item.name}`,
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/${item.identifier}`,
     content: <Namespace data={item} context={context} />,
   };
 
-  for (const element of item.namespaceDef.elements) {
-    yield* generatePageFor(element, {
-      ...context,
-      symbols: item.namespaceDef.elements,
-    });
+  if (containsWrappedElements(item.data.namespaceDef)) {
+    for (const element of item.data.namespaceDef.wrappedElements) {
+      yield* generatePageFor(element, {
+        ...context,
+        symbols: item.data.namespaceDef.wrappedElements,
+      });
+    }
   }
 }
 
 export function Namespace({ data, context }: Props) {
-  const children = data.namespaceDef.elements.sort((a, b) =>
+  const namespaceDef = data.data.namespaceDef as unknown as HasWrappedElements;
+
+  const children = namespaceDef.wrappedElements.sort((a, b) =>
     a.name.localeCompare(b.name)
   );
 
@@ -55,16 +65,18 @@ export function Namespace({ data, context }: Props) {
             </div>
           </div>
           <div>
-            <JsDocDescription jsDoc={data.jsDoc} />
+            <JsDocDescription jsDoc={data.data.jsDoc} />
           </div>
         </article>
         {sections.map(([title, kind]) => {
           return (
             <MemberSection
               title={title}
-              children={children.filter((x) => x.kind === kind).map((x) => {
-                return <SymbolSummaryItem item={x} />;
-              })}
+              children={children.filter((x) => x.data.kind === kind).map(
+                (x) => {
+                  return <SymbolSummaryItem item={x} />;
+                },
+              )}
             />
           );
         })}
@@ -74,7 +86,7 @@ export function Namespace({ data, context }: Props) {
           {sections.map(([title, kind]) => {
             return (
               <TocSection title={title}>
-                {children.filter((x) => x.kind === kind).map((x) => {
+                {children.filter((x) => x.data.kind === kind).map((x) => {
                   return <TocListItem item={x} type={kind} />;
                 })}
               </TocSection>

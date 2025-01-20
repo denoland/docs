@@ -1,21 +1,21 @@
 import { DocNodeClass } from "@deno/doc/types";
-import { HasFullName, LumeDocument, ReferenceContext } from "../types.ts";
+import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
 import { StabilitySummary } from "./partials/Badges.tsx";
 import { ImplementsSummary } from "./partials/ImplementsSummary.tsx";
 import { getSymbolDetails } from "./partials/SymbolDetails.tsx";
 
-type Props = { data: DocNodeClass & HasFullName; context: ReferenceContext };
+type Props = { data: SymbolDoc<DocNodeClass>; context: ReferenceContext };
 
 export default function* getPages(
-  item: DocNodeClass & HasFullName,
+  item: SymbolDoc<DocNodeClass>,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
   yield {
     title: item.name,
     url:
-      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.fullName}`,
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}`,
     content: <Class data={item} context={context} />,
   };
 }
@@ -36,8 +36,8 @@ export function Class({ data, context }: Props) {
           <div>
             <div>
               <NameHeading fullName={data.fullName} headingType="Class" />
-              <ImplementsSummary typeDef={data.classDef.implements} />
-              <StabilitySummary jsDoc={data.jsDoc} />
+              <ImplementsSummary typeDef={data.data.classDef.implements} />
+              <StabilitySummary jsDoc={data.data.jsDoc} />
             </div>
           </div>
           <div>

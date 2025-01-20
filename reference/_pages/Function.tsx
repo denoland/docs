@@ -1,21 +1,21 @@
 import { DocNodeFunction } from "@deno/doc/types";
-import { HasFullName, LumeDocument, ReferenceContext } from "../types.ts";
+import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
 import { StabilitySummary } from "./partials/Badges.tsx";
 import { JsDocDescription } from "./partials/JsDocDescription.tsx";
 import { FunctionSignature } from "./primitives/FunctionSignature.tsx";
 
-type Props = { data: DocNodeFunction & HasFullName; context: ReferenceContext };
+type Props = { data: SymbolDoc<DocNodeFunction>; context: ReferenceContext };
 
 export default function* getPages(
-  item: DocNodeFunction & HasFullName,
+  item: SymbolDoc<DocNodeFunction>,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
   yield {
     title: item.name,
     url:
-      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.fullName}`,
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}`,
     content: <Function data={item} context={context} />,
   };
 }
@@ -36,17 +36,17 @@ export function Function({ data, context }: Props) {
           <div>
             <div>
               <NameHeading fullName={data.fullName} headingType="Function" />
-              <StabilitySummary jsDoc={data.jsDoc} />
+              <StabilitySummary jsDoc={data.data.jsDoc} />
             </div>
           </div>
           <div>
             <FunctionSignature
-              functionDef={data.functionDef}
+              functionDef={data.data.functionDef}
               nameOverride={nameOnly}
             />
           </div>
           <div>
-            <JsDocDescription jsDoc={data.jsDoc} />
+            <JsDocDescription jsDoc={data.data.jsDoc} />
           </div>
         </article>
       </main>

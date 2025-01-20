@@ -1,11 +1,11 @@
-import { DocNode, JsDocTagDoc } from "@deno/doc/types";
-import { WebCategoryDetails } from "../types.ts";
+import { JsDocTagDoc } from "@deno/doc/types";
+import { SymbolDoc, WebCategoryDetails } from "../types.ts";
 // deno-lint-ignore no-explicit-any
 type CategoryDescription = { path: string; categoryDocs: any };
 
 export function getCategories(
   packageName: string,
-  symbols: DocNode[],
+  symbols: SymbolDoc[],
   descriptionsConfig: CategoryDescription[],
 ) {
   const descriptions = descriptionsConfig.filter((x) =>
@@ -26,11 +26,11 @@ export function getCategories(
 }
 
 export function getCategoriesFromSymbols(
-  symbols: DocNode[],
+  symbols: SymbolDoc[],
   descriptions: Record<string, string | undefined>,
 ): Map<string, WebCategoryDetails> {
   const allCategoriesFromJsDocTags = symbols.map((item) =>
-    item.jsDoc?.tags?.filter((tag) => tag.kind === "category")
+    item.data.jsDoc?.tags?.filter((tag) => tag.kind === "category")
   ).flat() as JsDocTagDoc[];
 
   const distinctCategories = [

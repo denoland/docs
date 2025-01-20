@@ -1,20 +1,20 @@
 import { DocNodeTypeAlias } from "@deno/doc/types";
-import { HasFullName, LumeDocument, ReferenceContext } from "../types.ts";
+import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 
 type Props = {
-  data: DocNodeTypeAlias & HasFullName;
+  data: SymbolDoc<DocNodeTypeAlias>;
   context: ReferenceContext;
 };
 
 export default function* getPages(
-  item: DocNodeTypeAlias & HasFullName,
+  item: SymbolDoc<DocNodeTypeAlias>,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
   yield {
     title: item.name,
     url:
-      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.fullName}`,
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}`,
     content: <TypeAlias data={item} context={context} />,
   };
 }
@@ -27,7 +27,7 @@ export function TypeAlias({ data, context }: Props) {
     >
       I am a type alias, my name is {data.name}
 
-      {data.jsDoc?.doc && <p>{data.jsDoc?.doc}</p>}
+      {data.data.jsDoc?.doc && <p>{data.data.jsDoc?.doc}</p>}
 
       <pre>
         {JSON.stringify(data, null, 2)}

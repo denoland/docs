@@ -1,17 +1,17 @@
 import { DocNode, DocNodeImport } from "@deno/doc/types";
-import { LumeDocument, ReferenceContext } from "../types.ts";
+import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 
-type Props = { data: DocNode; context: ReferenceContext };
+type Props = { data: SymbolDoc<DocNode>; context: ReferenceContext };
 
 export default function* getPages(
-  item: DocNodeImport,
+  item: SymbolDoc<DocNodeImport>,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
   yield {
     title: item.name,
     url:
-      `${context.root}/${context.packageName.toLocaleLowerCase()}/${item.name.toLocaleLowerCase()}.import`,
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/${item.identifier}`,
     content: <Import data={item} context={context} />,
   };
 }

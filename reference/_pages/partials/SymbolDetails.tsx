@@ -2,6 +2,7 @@ import { ClassConstructorDef, DocNode } from "@deno/doc/types";
 import {
   ClosureContent,
   hasJsDoc,
+  SymbolDoc,
   ValidMethodType,
   ValidPropertyWithOptionalJsDoc,
 } from "../../types.ts";
@@ -17,11 +18,11 @@ import {
   TocSection,
 } from "./TableOfContents.tsx";
 
-export function getSymbolDetails(data: DocNode) {
+export function getSymbolDetails(data: SymbolDoc<DocNode>) {
   const members = getMembers(data);
 
   const details = [
-    <JsDocDescription jsDoc={data.jsDoc} />,
+    <JsDocDescription jsDoc={data.data.jsDoc} />,
     <Constructors data={members.constructors} />,
     <Properties properties={members.properties} />,
     <Methods methods={members.methods} />,
@@ -65,40 +66,46 @@ export function getSymbolDetails(data: DocNode) {
   return { details, contents: <TableOfContents>{contents}</TableOfContents> };
 }
 
-function getMembers(x: DocNode): ClosureContent {
-  if (x.kind === "class" && x.classDef) {
+function getMembers(x: SymbolDoc<DocNode>): ClosureContent {
+  if (x.data.kind === "class" && x.data.classDef) {
     return {
       kind: "class",
-      constructors: x.classDef.constructors,
-      methods: x.classDef.methods,
-      properties: x.classDef.properties as ValidPropertyWithOptionalJsDoc[],
+      constructors: x.data.classDef.constructors,
+      methods: x.data.classDef.methods,
+      properties: x.data.classDef
+        .properties as ValidPropertyWithOptionalJsDoc[],
       callSignatures: [],
-      indexSignatures: x.classDef.indexSignatures,
-      instanceMethods: x.classDef.methods.filter((method) => !method.isStatic),
-      staticMethods: x.classDef.methods.filter((method) => method.isStatic),
+      indexSignatures: x.data.classDef.indexSignatures,
+      instanceMethods: x.data.classDef.methods.filter((method) =>
+        !method.isStatic
+      ),
+      staticMethods: x.data.classDef.methods.filter((method) =>
+        method.isStatic
+      ),
     };
   }
 
-  if (x.kind === "interface" && x.interfaceDef) {
+  if (x.data.kind === "interface" && x.data.interfaceDef) {
     return {
       kind: "interface",
       constructors: [],
-      methods: x.interfaceDef.methods,
-      properties: x.interfaceDef.properties as ValidPropertyWithOptionalJsDoc[],
-      callSignatures: x.interfaceDef.callSignatures,
-      indexSignatures: x.interfaceDef.indexSignatures,
+      methods: x.data.interfaceDef.methods,
+      properties: x.data.interfaceDef
+        .properties as ValidPropertyWithOptionalJsDoc[],
+      callSignatures: x.data.interfaceDef.callSignatures,
+      indexSignatures: x.data.interfaceDef.indexSignatures,
     };
   }
 
-  if (x.kind === "variable") {
-    if (x.variableDef?.tsType?.kind === "typeLiteral") {
+  if (x.data.kind === "variable") {
+    if (x.data.variableDef?.tsType?.kind === "typeLiteral") {
       return {
         kind: "typeLiteral",
         constructors: [],
-        methods: x.variableDef.tsType.typeLiteral.methods,
-        properties: x.variableDef.tsType.typeLiteral.properties,
-        callSignatures: x.variableDef.tsType.typeLiteral.callSignatures,
-        indexSignatures: x.variableDef.tsType.typeLiteral.indexSignatures,
+        methods: x.data.variableDef.tsType.typeLiteral.methods,
+        properties: x.data.variableDef.tsType.typeLiteral.properties,
+        callSignatures: x.data.variableDef.tsType.typeLiteral.callSignatures,
+        indexSignatures: x.data.variableDef.tsType.typeLiteral.indexSignatures,
       };
     } else {
       return {
@@ -112,7 +119,7 @@ function getMembers(x: DocNode): ClosureContent {
     }
   }
 
-  throw new Error(`Unexpected kind: ${x.kind}`);
+  throw new Error(`Unexpected kind: ${x.data.kind}`);
 }
 
 function Methods(

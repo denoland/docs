@@ -1,7 +1,8 @@
 import { DocNode } from "@deno/doc/types";
+import { SymbolDoc } from "../types.ts";
 
-export function classFor(name: string): DocNode {
-  return {
+export function classFor(name: string): SymbolDoc<DocNode> {
+  return wrap({
     kind: "class",
     name: "A",
     classDef: {
@@ -30,5 +31,16 @@ export function classFor(name: string): DocNode {
         },
       ],
     },
+  });
+}
+
+export function wrap(data: DocNode) {
+  return {
+    name: data.name,
+    fullName: data.name,
+    namespace: "namespace",
+    package: "packageName",
+    identifier: data.kind + "_" + ["packageName", data.name].join("."),
+    data,
   };
 }

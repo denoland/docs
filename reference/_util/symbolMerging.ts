@@ -1,60 +1,69 @@
 import {
-  DocNode,
   DocNodeClass,
   DocNodeInterface,
   DocNodeNamespace,
 } from "@deno/doc/types";
-import { HasNamespace } from "../types.ts";
+import { SymbolDoc } from "../types.ts";
 
 export function mergeSymbolsWithCollidingNames(
-  symbolsByName: Map<string, (DocNode & HasNamespace)[]>,
+  symbolsByIdentifier: Map<string, SymbolDoc[]>,
 ) {
-  const mergedSymbols = Array.from(symbolsByName.values()).map((items) => {
-    if (items.length === 1) {
-      return items[0];
-    }
+  const mergedSymbols = Array.from(symbolsByIdentifier.values()).map(
+    (items) => {
+      if (items.length === 1) {
+        return items[0];
+      }
 
-    // Sort by priority (class > interface > other)
-    const sorted = items.sort((a, b) => {
-      if (a.kind === "class") return -1;
-      if (b.kind === "class") return 1;
-      if (a.kind === "interface") return -1;
-      if (b.kind === "interface") return 1;
-      return 0;
-    });
+      // Sort by priority (class > interface > other)
+      const sorted = items.sort((a, b) => {
+        if (a.data.kind === "class") return -1;
+        if (b.data.kind === "class") return 1;
+        if (a.data.kind === "interface") return -1;
+        if (b.data.kind === "interface") return 1;
+        return 0;
+      });
 
-    // Merge docs if available
-    const primary = sorted[0];
-    const jsDoc = sorted
-      .map((s) => s.jsDoc?.doc)
-      .filter(Boolean)
-      .join("\n\n");
+      // Merge docs if available
+      const primary = sorted[0];
+      const jsDoc = sorted
+        .map((s) => s.data.jsDoc?.doc)
+        .filter(Boolean)
+        .join("\n\n");
 
-    if (jsDoc) {
-      primary.jsDoc = { ...primary.jsDoc, doc: jsDoc };
-    }
+      if (jsDoc) {
+        primary.data.jsDoc = { ...primary.data.jsDoc, doc: jsDoc };
+      }
 
-    // merge members
-    if (primary.kind === "namespace") {
-      const asType = sorted as (DocNodeNamespace & HasNamespace)[];
-      const namespaceDefs = asType.map((s) => s.namespaceDef);
-      mergeSymbolCollections(namespaceDefs);
-    }
+      // merge members
+      if (primary.data.kind === "namespace") {
+        mergeSymbolCollections(
+          sorted.map((s) =>
+            s.data.kind === "namespace" &&
+            (s.data as DocNodeNamespace).namespaceDef
+          ),
+        );
+      }
 
-    if (primary.kind === "class") {
-      const asType = sorted as (DocNodeClass & HasNamespace)[];
-      const classDefs = asType.map((s) => s.classDef);
-      mergeSymbolCollections(classDefs);
-    }
+      if (primary.data.kind === "class") {
+        mergeSymbolCollections(
+          sorted.map((s) =>
+            s.data.kind === "class" && (s.data as DocNodeClass).classDef
+          ),
+        );
+      }
 
-    if (primary.kind === "interface") {
-      const asType = sorted as (DocNodeInterface & HasNamespace)[];
-      const interfaceDefs = asType.map((s) => s.interfaceDef);
-      mergeSymbolCollections(interfaceDefs);
-    }
+      if (primary.data.kind === "interface") {
+        mergeSymbolCollections(
+          sorted.map((s) =>
+            s.data.kind === "interface" &&
+            (s.data as DocNodeInterface).interfaceDef
+          ),
+        );
+      }
 
-    return primary;
-  });
+      return primary;
+    },
+  );
 
   return mergedSymbols;
 }

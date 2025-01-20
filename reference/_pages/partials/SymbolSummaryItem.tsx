@@ -1,19 +1,19 @@
-import { DocNodeBase, DocNodeClass } from "@deno/doc/types";
+import { DocNodeClass } from "@deno/doc/types";
 import { CodeIcon } from "./CodeIcon.tsx";
 import { MarkdownContent } from "../primitives/MarkdownContent.tsx";
-import { HasNamespace, MightHaveNamespace } from "../../types.ts";
+import { HasNamespace, SymbolDoc } from "../../types.ts";
 
 export function SymbolSummaryItem(
-  { item }: { item: DocNodeBase & MightHaveNamespace },
+  { item }: { item: SymbolDoc },
 ) {
   const displayName = item.fullName || item.name;
-  const firstLine = item.jsDoc?.doc?.split("\n\n")[0];
+  const firstLine = item.data.jsDoc?.doc?.split("\n\n")[0];
 
   return (
     <div className={"namespaceItem"}>
-      <CodeIcon glyph={item.kind} />
+      <CodeIcon glyph={item.data.kind} />
       <div className={"namespaceItemContent"}>
-        <a href={`~/${displayName}`}>
+        <a href={`~/${item.identifier}`}>
           {displayName}
         </a>
         <MarkdownContent text={firstLine} />
@@ -23,12 +23,12 @@ export function SymbolSummaryItem(
   );
 }
 
-function MethodLinks({ item }: { item: DocNodeBase }) {
-  if (item.kind !== "class") {
+function MethodLinks({ item }: { item: SymbolDoc }) {
+  if (item.data.kind !== "class") {
     return <></>;
   }
 
-  const asClass = item as DocNodeClass & HasNamespace;
+  const asClass = item.data as DocNodeClass & HasNamespace;
   const methods = asClass.classDef.methods.sort((a, b) =>
     a.name.localeCompare(b.name)
   );

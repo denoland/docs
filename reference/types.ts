@@ -11,8 +11,49 @@ import {
   LiteralCallSignatureDef,
   LiteralMethodDef,
   LiteralPropertyDef,
+  NamespaceDef,
 } from "@deno/doc/types";
 import { JSX } from "npm:preact/jsx-runtime";
+
+export interface SymbolDoc<T = DocNodeBase> {
+  name: string;
+  fullName: string;
+  namespace: string;
+  package: string;
+  identifier: string;
+
+  data: T;
+}
+
+export interface HasWrappedElements {
+  wrappedElements: SymbolDoc<DocNodeBase>[];
+}
+
+export interface HasNamespaceDef {
+  namespaceDef: NamespaceDef;
+}
+
+export interface HasModuleDoc {
+  moduleDoc: DocNode;
+}
+
+export function containsWrappedElements(
+  method: unknown,
+): method is HasWrappedElements {
+  return (method as HasWrappedElements).wrappedElements !== undefined;
+}
+
+export function containsNamespaceDef(
+  method: unknown,
+): method is HasNamespaceDef {
+  return (method as HasNamespaceDef).namespaceDef !== undefined;
+}
+
+export function containsModuleDoc(
+  method: unknown,
+): method is HasModuleDoc {
+  return (method as HasModuleDoc).moduleDoc !== undefined;
+}
 
 export type LumeDocument = {
   title: string;
@@ -57,13 +98,16 @@ export type WebCategoryDetails = {
 export type ReferenceContext = {
   root: string;
   packageName: string;
-  symbols: DocNode[];
+  symbols: SymbolDoc[];
   currentCategoryList: Map<string, WebCategoryDetails>;
 };
 
 export type ReferenceDocumentFactoryFunction<
   T extends DocNodeBase = DocNodeBase,
-> = (item: T, context: ReferenceContext) => IterableIterator<LumeDocument>;
+> = (
+  item: SymbolDoc<T>,
+  context: ReferenceContext,
+) => IterableIterator<LumeDocument>;
 
 export type ValidPropertyType =
   | ClassPropertyDef
