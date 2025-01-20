@@ -3,7 +3,6 @@ import {
   InterfacePropertyDef,
   LiteralPropertyDef,
 } from "@deno/doc/types";
-import { nbsp } from "../../_util/common.ts";
 import { TypeSummary } from "./TypeSummary.tsx";
 
 export function PropertyName(
