@@ -1,21 +1,21 @@
 import ReferencePage from "../_layouts/ReferencePage.tsx";
-import { ReferenceContext } from "../types.ts";
+import { ReferenceContext, WebCategoryDetails } from "../types.ts";
 import { AnchorableHeading } from "./partials/AnchorableHeading.tsx";
 import { linkCodeAndParagraph } from "./primitives/LinkCode.tsx";
 
 type Props = {
-  data: Map<string, string>;
+  data: Map<string, WebCategoryDetails>;
   context: ReferenceContext;
 };
 
 export function Package({ data, context }: Props) {
   const categoryElements = data.entries().map(
-    ([key, value]) => {
+    ([_, details]) => {
       return (
         <CategorySummary
-          identifier={key}
+          details={details}
           context={context}
-          summary={value || ""}
+          summary={details.description || ""}
         />
       );
     },
@@ -44,21 +44,21 @@ export function Package({ data, context }: Props) {
 }
 
 export function CategorySummary(
-  { identifier, context, summary }: {
-    identifier: string;
+  { details, context, summary }: {
+    details: WebCategoryDetails;
     context: ReferenceContext;
     summary: string;
   },
 ) {
   const href =
-    `${context.root}/${context.packageName.toLocaleLowerCase()}/${identifier.toLocaleLowerCase()}`;
-  const anchorId = identifier.replace(" ", "-").toLocaleLowerCase();
+    `${context.root}/${context.packageName.toLocaleLowerCase()}/${details.urlStub}`;
+  const anchorId = details.urlStub;
   const processedDescription = linkCodeAndParagraph(summary);
 
   return (
     <section id={anchorId} className={"section"}>
       <AnchorableHeading anchor={anchorId}>
-        <a href={href}>{identifier}</a>
+        <a href={href}>{details.title}</a>
       </AnchorableHeading>
       <div
         data-color-mode="auto"

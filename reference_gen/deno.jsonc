@@ -20,7 +20,7 @@
     "types:deno": "deno run --allow-read --allow-write --allow-run --allow-env --allow-sys deno-types.ts",
     "types:node": "deno run --allow-read --allow-write=. --allow-env --allow-sys node-types.ts",
     "types": "deno task types:deno && deno task types:node",
-    "doc": ""
+    "doc": "echo 'deliberately removed but left in place until ci changes are made'"
   },
   "exclude": [
     "types",

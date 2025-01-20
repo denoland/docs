@@ -1,17 +1,16 @@
 import generatePageFor from "./pageFactory.ts";
 import getCategoryPages from "./_pages/Category.tsx";
-import { countSymbols, populateItemNamespaces } from "./_util/common.ts";
-import { getSymbols } from "./_dataSources/dtsSymbolSource.ts";
 import webCategoryDocs from "./_categories/web-categories.json" with {
   type: "json",
 };
 import denoCategoryDocs from "./_categories/deno-categories.json" with {
   type: "json",
 };
-import { DocNode } from "@deno/doc/types";
-import { HasNamespace } from "./types.ts";
-import { mergeSymbolsWithCollidingNames } from "./_util/symbolMerging.ts";
-import { categoryDataFrom, parseCategories } from "./_util/categoryBuilding.ts";
+import { getCategories } from "./_categories/categoryBuilding.ts";
+import { cliNow } from "../timeUtils.ts";
+import { getAllSymbols } from "./symbolLoading.ts";
+import { ReferenceContext } from "./types.ts";
+import { log } from "lume/core/utils/log.ts";
 
 export const layout = "raw.tsx";
 
@@ -32,8 +31,8 @@ export const sidebar = [
 ];
 
 export default async function* () {
-  let skipped = 0;
   const generated: string[] = [];
+  const skippedPages: string[] = [];
 
   try {
     if (Deno.env.has("SKIP_REFERENCE")) {
@@ -43,20 +42,25 @@ export default async function* () {
     const allSymbols = await getAllSymbols();
 
     for (const [packageName, symbols] of allSymbols.entries()) {
-      const descriptions = categoryDataFrom(sections, packageName);
-      const categories = parseCategories(symbols, descriptions);
+      const categories = getCategories(packageName, symbols, sections);
 
-      const context = {
+      const context: ReferenceContext = {
         root,
         packageName,
         symbols,
         currentCategoryList: categories,
       };
 
+      console.log(`${cliNow()} 💭 Generating categories for ${packageName}`);
+
       for (const p of getCategoryPages(context)) {
         yield p;
+        // console.log(`${cliNow()} 📄 Generated category page: ${p.url}`);
         generated.push(p.url);
       }
+
+      console.log(`${cliNow()} 💭 Generating symbol pages for ${packageName}`);
+      console.log(`${cliNow()} ℹ️ Found ${symbols.length} top level symbols`);
 
       for (const item of symbols) {
         const pages = generatePageFor(item, context);
@@ -64,7 +68,7 @@ export default async function* () {
         for await (const page of pages) {
           if (generated.includes(page.url)) {
             //console.warn(`⚠️ Skipping duplicate page: ${page.url}!`);
-            skipped++;
+            skippedPages.push(page.url);
             continue;
           }
 
@@ -74,34 +78,24 @@ export default async function* () {
       }
     }
   } catch (ex) {
-    console.warn("⚠️ Reference docs were not generated." + ex);
+    console.warn(`"${cliNow()} ⚠️ Reference docs were not generated.` + ex);
   }
 
-  console.log("Generated", generated.length, "pages", skipped, "skipped");
-}
+  console.log(
+    `${cliNow()} Generated ${generated.length} pages, skipped ${skippedPages.length}`,
+  );
 
-async function getAllSymbols() {
-  const allSymbols = new Map<string, DocNode[]>();
-  for await (const { packageName, symbols } of getSymbols()) {
-    console.log(`📚 ${packageName} has ${countSymbols(symbols)} symbols`);
+  if (skippedPages.length > 0) {
+    console.log(
+      `${cliNow()} Skipped pages indicate symbol naming conflicts, items will be hidden from the docs.`,
+    );
+    console.log(
+      `${cliNow()} This is normally due to conflicting (matching) names for different symbol types.`,
+    );
 
-    const cleaned = populateItemNamespaces(
-      symbols,
-    ) as (DocNode & HasNamespace)[];
-
-    console.log(`📚 ${packageName} has ${countSymbols(cleaned)} cleaned`);
-
-    const symbolsByName = new Map<string, (DocNode & HasNamespace)[]>();
-
-    for (const symbol of cleaned) {
-      const existing = symbolsByName.get(symbol.fullName) || [];
-      symbolsByName.set(symbol.name, [...existing, symbol]);
+    log.debug("Pages with naming collisions:");
+    for (const page of skippedPages) {
+      log.debug(`- ${page}`);
     }
-
-    const mergedSymbols = mergeSymbolsWithCollidingNames(symbolsByName);
-
-    allSymbols.set(packageName, mergedSymbols);
   }
-
-  return allSymbols;
 }

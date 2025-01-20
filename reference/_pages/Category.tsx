@@ -5,6 +5,7 @@ import {
   LumeDocument,
   MightHaveNamespace,
   ReferenceContext,
+  WebCategoryDetails,
 } from "../types.ts";
 import { AnchorableHeading } from "./partials/AnchorableHeading.tsx";
 import { Package } from "./Package.tsx";
@@ -14,6 +15,8 @@ import {
   TocListItem,
   TocSection,
 } from "./partials/TableOfContents.tsx";
+import { JsDocDescription } from "./partials/JsDocDescription.tsx";
+import { NodeInDenoUsageGuidance } from "./partials/NodeInDenoUsageGuidance.tsx";
 
 export default function* getPages(
   context: ReferenceContext,
@@ -24,30 +27,45 @@ export default function* getPages(
     content: <Package data={context.currentCategoryList} context={context} />,
   };
 
-  for (const [key] of context.currentCategoryList) {
+  for (const [key, details] of context.currentCategoryList) {
+    const BrowsePage = key === "All Symbols"
+      ? AllSymbolsBrowse
+      : CategoryBrowse;
+
     yield {
       title: key,
       url:
-        `${context.root}/${context.packageName.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`,
-      content: <CategoryBrowse categoryName={key} context={context} />,
+        `${context.root}/${context.packageName.toLocaleLowerCase()}/${details.urlStub}`,
+      content: (
+        <BrowsePage
+          categoryName={key}
+          categoryDetails={details}
+          context={context}
+        />
+      ),
     };
   }
 }
 
 type ListingProps = {
   categoryName: string;
+  categoryDetails: WebCategoryDetails;
   context: ReferenceContext;
 };
 
 export function CategoryBrowse({ categoryName, context }: ListingProps) {
-  const allItems = flattenItems(context.symbols);
+  const allItems = flattenItems(context.symbols).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
-  const validItems = allItems.filter((item) =>
+  const validItems: (DocNodeBase & MightHaveNamespace)[] = allItems.filter((
+    item,
+  ) =>
     item.jsDoc?.tags?.some((tag) =>
       tag.kind === "category" &&
       tag.doc.toLocaleLowerCase() === categoryName?.toLocaleLowerCase()
     )
-  ).sort((a, b) => a.name.localeCompare(b.name));
+  );
 
   const itemsOfType = new Map<string, (DocNodeBase & MightHaveNamespace)[]>();
   for (const item of validItems) {
@@ -60,6 +78,18 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
     }
   }
 
+  const jsDocData = validItems.find((x) => x.kind === "moduleDoc")?.jsDoc;
+  const isFromNodeJs = validItems.some((x) =>
+    x.jsDoc?.tags?.some((tag) =>
+      tag.kind === "tags" &&
+      tag.tags.includes("node")
+    )
+  );
+
+  const nodeCompatibilityElement = isFromNodeJs
+    ? <NodeInDenoUsageGuidance nodePackage={categoryName} />
+    : <></>;
+
   return (
     <ReferencePage
       context={context}
@@ -69,6 +99,8 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
       }}
     >
       <main>
+        {nodeCompatibilityElement}
+        <JsDocDescription jsDoc={jsDocData} />
         <div className={"space-y-7"}>
           {sections.map(([title, kind]) => {
             const matching = itemsOfType.get(kind) || [];
@@ -82,19 +114,45 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
             const matching = itemsOfType.get(kind) || [];
             return (
               <TocSection title={title}>
-                  {matching.map((x) => {
-                    return (
-                      <TocListItem
-                        item={{ name: x.fullName || x.name }}
-                        type={kind}
-                      />
-                    );
-                  })}
+                {matching.map((x) => {
+                  return (
+                    <TocListItem
+                      item={{ name: x.fullName || x.name }}
+                      type={kind}
+                    />
+                  );
+                })}
               </TocSection>
             );
           })}
         </ul>
       </TableOfContents>
+    </ReferencePage>
+  );
+}
+
+type AllSymbolsBrowseProps = {
+  context: ReferenceContext;
+};
+
+function AllSymbolsBrowse({ context }: AllSymbolsBrowseProps) {
+  const allItems = flattenItems(context.symbols).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  return (
+    <ReferencePage
+      context={context}
+      navigation={{
+        category: context.packageName,
+        currentItemName: "All Symbols",
+      }}
+    >
+      <main>
+        <div className={"space-y-7"}>
+          <CategoryPageSection title={"Default"} items={allItems} />;
+        </div>
+      </main>
     </ReferencePage>
   );
 }

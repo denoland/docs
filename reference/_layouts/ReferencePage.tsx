@@ -31,9 +31,9 @@ export default function Layout(
 function CategoryPanel({ context }: { context: ReferenceContext }) {
   const categories = context.currentCategoryList;
 
-  const categoryListItems = categories.entries().map(([key]) => {
+  const categoryListItems = categories.entries().map(([key, details]) => {
     const categoryLinkUrl =
-      `${context.root}/${context.packageName.toLocaleLowerCase()}/${key.toLocaleLowerCase()}`;
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/${details.urlStub}`;
 
     return (
       <li>
