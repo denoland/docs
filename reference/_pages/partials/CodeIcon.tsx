@@ -15,6 +15,9 @@ export function CodeIcon({ glyph }: { glyph: DocNodeKind }) {
     case "typeAlias":
       classStyle = "text-TypeAlias bg-TypeAlias/15";
       break;
+    case "variable":
+      classStyle = "text-Variable bg-Variable/15";
+      break;
   }
 
   let title = "";
@@ -30,6 +33,9 @@ export function CodeIcon({ glyph }: { glyph: DocNodeKind }) {
       break;
     case "typeAlias":
       title = "T";
+      break;
+    case "variable":
+      title = "v";
       break;
   }
 
