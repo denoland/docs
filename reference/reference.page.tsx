@@ -10,6 +10,7 @@ import { getCategories } from "./_categories/categoryBuilding.ts";
 import { cliNow } from "../timeUtils.ts";
 import { getAllSymbols } from "./symbolLoading.ts";
 import { ReferenceContext } from "./types.ts";
+import { log } from "lume/core/utils/log.ts";
 
 export const layout = "raw.tsx";
 
@@ -92,8 +93,9 @@ export default async function* () {
       `${cliNow()} This is normally due to conflicting (matching) names for different symbol types.`,
     );
 
-    // for (const page of skippedPages) {
-    //   console.log(`- ${page}`);
-    // }
+    log.debug("Pages with naming collisions:");
+    for (const page of skippedPages) {
+      log.debug(`- ${page}`);
+    }
   }
 }
