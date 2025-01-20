@@ -30,8 +30,8 @@ export const sidebar = [
 ];
 
 export default async function* () {
-  let skipped = 0;
   const generated: string[] = [];
+  const skippedPages: string[] = [];
 
   try {
     if (Deno.env.has("SKIP_REFERENCE")) {
@@ -67,7 +67,7 @@ export default async function* () {
         for await (const page of pages) {
           if (generated.includes(page.url)) {
             //console.warn(`⚠️ Skipping duplicate page: ${page.url}!`);
-            skipped++;
+            skippedPages.push(page.url);
             continue;
           }
 
@@ -81,6 +81,19 @@ export default async function* () {
   }
 
   console.log(
-    `${cliNow()} Generated ${generated.length} pages, skipped ${skipped}`,
+    `${cliNow()} Generated ${generated.length} pages, skipped ${skippedPages.length}`,
   );
+
+  if (skippedPages.length > 0) {
+    console.log(
+      `${cliNow()} Skipped pages indicate symbol naming conflicts, items will be hidden from the docs.`,
+    );
+    console.log(
+      `${cliNow()} This is normally due to conflicting (matching) names for different symbol types.`,
+    );
+
+    // for (const page of skippedPages) {
+    //   console.log(`- ${page}`);
+    // }
+  }
 }
