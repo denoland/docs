@@ -6,9 +6,9 @@ export default function codeblockCopyPlugin(md: any) {
   md.renderer.rules.fence = function (
     tokens: any[],
     idx: number,
-    options,
-    env,
-    self,
+    options: any,
+    env: any,
+    self: any,
   ) {
     const render = defaultRender(tokens, idx, options, env, self);
     const uniqueId = `copy-button-${idx}`;
