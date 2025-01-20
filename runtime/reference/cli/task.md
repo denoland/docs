@@ -193,6 +193,7 @@ directories in parallel. To execute `dev` tasks from all workspace members use
 ```jsonc title="client/deno.json"
 {
   "tasks": {
+    "name": "@scope/client",
     "dev": "deno run -RN build.ts"
   }
 }
@@ -201,6 +202,7 @@ directories in parallel. To execute `dev` tasks from all workspace members use
 ```jsonc title="server/deno.json"
 {
   "tasks": {
+    "name": "@scope/server",
     "dev": "deno run -RN server.ts"
   }
 }
@@ -218,11 +220,14 @@ Project bundled
 Tasks to run can be filtered based on the workspace members:
 
 ```bash
-$ deno task --filter "client/*" dev
+$ deno task --filter "client" dev
 Task dev deno run -RN build.ts
 Bundling project...
 Project bundled
 ```
+
+Note that the filter matches against the workspace member names as specified in
+the `name` field of each member's `deno.json` file.
 
 ## Syntax
 
