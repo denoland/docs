@@ -4,7 +4,6 @@ import {
   ClassPropertyDef,
   DocNode,
   DocNodeBase,
-  DocNodeKind,
   InterfaceCallSignatureDef,
   InterfaceIndexSignatureDef,
   InterfaceMethodDef,
