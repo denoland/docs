@@ -10,7 +10,7 @@ export default function Layout(
 ) {
   return (
     <>
-      {/* sorry mum, put these somewhere good */}
+      {/* TODO: delete these, move styles over to site styles */}
       <link rel="stylesheet" href="/reference-styles/styles.css" />
       <link rel="stylesheet" href="/reference-styles/page.css" />
       <link rel="stylesheet" href="/reference-styles/extra-styles.css" />
