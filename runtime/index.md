@@ -10,7 +10,7 @@ oldUrl:
 ---
 
 [Deno](https://deno.com)
-([/ˈdiːnoʊ/](http://ipa-reader.com/?text=%CB%88di%CB%90no%CA%8A), pronounced
+([/ˈdiːnoʊ/](https://ipa-reader.com/?text=%CB%88di%CB%90no%CA%8A), pronounced
 `dee-no`) is an
 [open source](https://github.com/denoland/deno/blob/main/LICENSE.md) JavaScript,
 TypeScript, and WebAssembly runtime with secure defaults and a great developer
