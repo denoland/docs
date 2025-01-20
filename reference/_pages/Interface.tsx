@@ -4,7 +4,6 @@ import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
 import { StabilitySummary } from "./partials/Badges.tsx";
 import { TypeSummary } from "./primitives/TypeSummary.tsx";
-import { nbsp } from "../_util/common.ts";
 import { getSymbolDetails } from "./partials/SymbolDetails.tsx";
 
 type Props = {

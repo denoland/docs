@@ -86,7 +86,7 @@ function createSymbolWrapper(
     fullName: nameString,
     namespace: ns,
     package: packageName,
-    identifier: (data.kind + "/" + nameString).toLowerCase(),
+    identifier: nameString,
     data,
   };
 }
