@@ -5,6 +5,7 @@ import {
   LumeDocument,
   MightHaveNamespace,
   ReferenceContext,
+  WebCategoryDetails,
 } from "../types.ts";
 import { AnchorableHeading } from "./partials/AnchorableHeading.tsx";
 import { Package } from "./Package.tsx";
@@ -14,6 +15,8 @@ import {
   TocListItem,
   TocSection,
 } from "./partials/TableOfContents.tsx";
+import { JsDocDescription } from "./partials/JsDocDescription.tsx";
+import { NodeInDenoUsageGuidance } from "./partials/NodeInDenoUsageGuidance.tsx";
 
 export default function* getPages(
   context: ReferenceContext,
@@ -33,13 +36,20 @@ export default function* getPages(
       title: key,
       url:
         `${context.root}/${context.packageName.toLocaleLowerCase()}/${details.urlStub}`,
-      content: <BrowsePage categoryName={key} context={context} />,
+      content: (
+        <BrowsePage
+          categoryName={key}
+          categoryDetails={details}
+          context={context}
+        />
+      ),
     };
   }
 }
 
 type ListingProps = {
   categoryName: string;
+  categoryDetails: WebCategoryDetails;
   context: ReferenceContext;
 };
 
@@ -68,6 +78,18 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
     }
   }
 
+  const jsDocData = validItems.find((x) => x.kind === "moduleDoc")?.jsDoc;
+  const isFromNodeJs = validItems.some((x) =>
+    x.jsDoc?.tags?.some((tag) =>
+      tag.kind === "tags" &&
+      tag.tags.includes("node")
+    )
+  );
+
+  const nodeCompatibilityElement = isFromNodeJs
+    ? <NodeInDenoUsageGuidance nodePackage={categoryName} />
+    : <></>;
+
   return (
     <ReferencePage
       context={context}
@@ -77,6 +99,8 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
       }}
     >
       <main>
+        {nodeCompatibilityElement}
+        <JsDocDescription jsDoc={jsDocData} />
         <div className={"space-y-7"}>
           {sections.map(([title, kind]) => {
             const matching = itemsOfType.get(kind) || [];

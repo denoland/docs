@@ -70,6 +70,11 @@ function addAutoTags(symbols: DocNode[], sourceFileName: string) {
         kind: "category",
         doc: category,
       });
+
+      symbol.jsDoc.tags.push({
+        kind: "tags",
+        tags: ["node"],
+      });
     }
   }
 }
