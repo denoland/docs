@@ -18,14 +18,14 @@ export async function getAllSymbols() {
       packageName,
     );
 
-    const symbolsByName = new Map<string, SymbolDoc[]>();
+    const symbolsByIdentifier = new Map<string, SymbolDoc[]>();
 
     for (const symbol of enrichedItems) {
-      const existing = symbolsByName.get(symbol.identifier) || [];
-      symbolsByName.set(symbol.identifier, [...existing, symbol]);
+      const existing = symbolsByIdentifier.get(symbol.identifier) || [];
+      symbolsByIdentifier.set(symbol.identifier, [...existing, symbol]);
     }
 
-    const mergedSymbols = mergeSymbolsWithCollidingNames(symbolsByName);
+    const mergedSymbols = mergeSymbolsWithCollidingNames(symbolsByIdentifier);
 
     if (allSymbols.has(packageName)) {
       const existingSymbols = allSymbols.get(packageName) || [];
