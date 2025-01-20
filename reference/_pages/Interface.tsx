@@ -70,7 +70,7 @@ function ExtendsSummary({ typeDef }: { typeDef: TsTypeDef[] }) {
   return (
     <div class="symbolSubtitle">
       <div>
-        <span class="type">extends{nbsp}</span>
+        <span class="type">extends{" "}</span>
         {spans}
       </div>
     </div>

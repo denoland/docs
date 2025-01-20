@@ -18,7 +18,7 @@ export function ImplementsSummary({ typeDef }: { typeDef: TsTypeDef[] }) {
   return (
     <div class="symbolSubtitle">
       <div>
-        <span class="type">implements{nbsp}</span>
+        <span class="type">implements{" "}</span>
         {spans}
       </div>
     </div>

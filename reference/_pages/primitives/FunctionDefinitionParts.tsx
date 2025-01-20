@@ -30,8 +30,8 @@ export function FunctionDefinitionParts(
   }
 
   return (
-    <>
+    <code>
       {partElements}
-    </>
+    </code>
   );
 }

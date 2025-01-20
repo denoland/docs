@@ -1,5 +1,3 @@
-import { nbsp } from "../../_util/common.ts";
-
 export function NameHeading(
   { fullName, headingType }: {
     fullName: string;
@@ -21,7 +19,7 @@ export function NameHeading(
     <div className={"text-2xl leading-none break-all"}>
       <span class={className}>{displayName}</span>
       <span class="font-bold">
-        {nbsp}
+        {" "}
         {fullName}
       </span>
     </div>
