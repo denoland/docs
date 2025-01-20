@@ -1,5 +1,9 @@
 // deno-lint-ignore-file no-explicit-any
-import { ReferenceContext, ReferenceDocumentFactoryFunction } from "./types.ts";
+import {
+  ReferenceContext,
+  ReferenceDocumentFactoryFunction,
+  SymbolDoc,
+} from "./types.ts";
 import getPagesForNamespace from "./_pages/Namespace.tsx";
 import getPagesForNotImplemented from "./_pages/NotImplemented.tsx";
 import getPagesForModule from "./_pages/Module.tsx";
@@ -31,13 +35,13 @@ factories.set("interface", getPagesForInterface as any);
 factories.set("import", getPagesForImport as any);
 
 function factoryFor<T extends DocNodeBase>(
-  item: T,
+  item: SymbolDoc<T>,
 ): ReferenceDocumentFactoryFunction<T> {
-  return factories.get(item.kind) || getPagesForNotImplemented;
+  return factories.get(item.data.kind) || getPagesForNotImplemented;
 }
 
 export default function generatePageFor<T extends DocNodeBase>(
-  item: T,
+  item: SymbolDoc<T>,
   context: ReferenceContext,
 ) {
   const factory = factoryFor(item);

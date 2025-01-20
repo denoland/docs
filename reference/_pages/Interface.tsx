@@ -1,5 +1,5 @@
 import { DocNodeInterface, TsTypeDef } from "@deno/doc/types";
-import { HasFullName, LumeDocument, ReferenceContext } from "../types.ts";
+import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
 import { StabilitySummary } from "./partials/Badges.tsx";
@@ -8,12 +8,12 @@ import { nbsp } from "../_util/common.ts";
 import { getSymbolDetails } from "./partials/SymbolDetails.tsx";
 
 type Props = {
-  data: DocNodeInterface & HasFullName;
+  data: SymbolDoc<DocNodeInterface>;
   context: ReferenceContext;
 };
 
 export default function* getPages(
-  item: DocNodeInterface & HasFullName,
+  item: SymbolDoc<DocNodeInterface>,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
   yield {
@@ -40,8 +40,8 @@ export function Interface({ data, context }: Props) {
           <div>
             <div>
               <NameHeading fullName={data.fullName} headingType="Interface" />
-              <ExtendsSummary typeDef={data.interfaceDef.extends} />
-              <StabilitySummary jsDoc={data.jsDoc} />
+              <ExtendsSummary typeDef={data.data.interfaceDef.extends} />
+              <StabilitySummary jsDoc={data.data.jsDoc} />
             </div>
           </div>
           <div>

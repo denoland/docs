@@ -1,5 +1,9 @@
 import { DocNode, DocNodeBase } from "@deno/doc/types";
-import { MightHaveNamespace } from "../types.ts";
+import {
+  containsNamespaceDef,
+  containsWrappedElements,
+  SymbolDoc,
+} from "../types.ts";
 
 export const sections = [
   ["Classes", "class"],
@@ -12,12 +16,23 @@ export const sections = [
 ];
 
 export function flattenItems(
-  items: DocNode[],
-): (DocNodeBase & MightHaveNamespace)[] {
-  const flattened: (DocNodeBase)[] = [];
+  items: (SymbolDoc<DocNode | DocNodeBase>)[],
+) {
+  const flattened: SymbolDoc<DocNode | DocNodeBase>[] = [];
   for (const item of items) {
-    if (item.kind === "namespace") {
-      flattened.push(...flattenItems(item.namespaceDef.elements));
+    if (item.data.kind === "namespace") {
+      if (
+        containsNamespaceDef(item.data) &&
+        containsWrappedElements(item.data.namespaceDef)
+      ) {
+        const eles = item.data.namespaceDef.wrappedElements as SymbolDoc<
+          DocNode
+        >[];
+
+        flattened.push(...flattenItems(eles));
+      } else {
+        throw new Error("NamespaceDef does not have wrappedElements");
+      }
     } else {
       flattened.push(item);
     }

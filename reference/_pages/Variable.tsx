@@ -1,5 +1,5 @@
 import { DocNodeVariable, VariableDef } from "@deno/doc/types";
-import { HasFullName, LumeDocument, ReferenceContext } from "../types.ts";
+import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
 import { StabilitySummary } from "./partials/Badges.tsx";
@@ -9,10 +9,10 @@ import { MemberSection } from "./partials/MemberSection.tsx";
 import { TypeSummary } from "./primitives/TypeSummary.tsx";
 import { getSymbolDetails } from "./partials/SymbolDetails.tsx";
 
-type Props = { data: DocNodeVariable & HasFullName; context: ReferenceContext };
+type Props = { data: SymbolDoc<DocNodeVariable>; context: ReferenceContext };
 
 export default function* getPages(
-  item: DocNodeVariable & HasFullName,
+  item: SymbolDoc<DocNodeVariable>,
   context: ReferenceContext,
 ): IterableIterator<LumeDocument> {
   yield {
@@ -39,12 +39,12 @@ export function Variable({ data, context }: Props) {
           <div>
             <div>
               <NameHeading fullName={data.fullName} headingType="Variable" />
-              <StabilitySummary jsDoc={data.jsDoc} />
+              <StabilitySummary jsDoc={data.data.jsDoc} />
             </div>
           </div>
           <div>
-            <JsDocDescription jsDoc={data.jsDoc} />
-            <VariableType type={data.variableDef} />
+            <JsDocDescription jsDoc={data.data.jsDoc} />
+            <VariableType type={data.data.variableDef} />
           </div>
           <div>
             {details}

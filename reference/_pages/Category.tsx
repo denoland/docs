@@ -5,6 +5,7 @@ import {
   LumeDocument,
   MightHaveNamespace,
   ReferenceContext,
+  SymbolDoc,
   WebCategoryDetails,
 } from "../types.ts";
 import { AnchorableHeading } from "./partials/AnchorableHeading.tsx";
@@ -58,29 +59,30 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
     a.name.localeCompare(b.name)
   );
 
-  const validItems: (DocNodeBase & MightHaveNamespace)[] = allItems.filter((
+  const validItems: SymbolDoc<DocNodeBase>[] = allItems.filter((
     item,
   ) =>
-    item.jsDoc?.tags?.some((tag) =>
+    item.data.jsDoc?.tags?.some((tag) =>
       tag.kind === "category" &&
       tag.doc.toLocaleLowerCase() === categoryName?.toLocaleLowerCase()
     )
   );
 
-  const itemsOfType = new Map<string, (DocNodeBase & MightHaveNamespace)[]>();
+  const itemsOfType = new Map<string, SymbolDoc<DocNodeBase>[]>();
   for (const item of validItems) {
-    if (!itemsOfType.has(item.kind)) {
-      itemsOfType.set(item.kind, []);
+    if (!itemsOfType.has(item.data.kind)) {
+      itemsOfType.set(item.data.kind, []);
     }
-    const collection = itemsOfType.get(item.kind);
+    const collection = itemsOfType.get(item.data.kind);
     if (!collection?.includes(item)) {
       collection?.push(item);
     }
   }
 
-  const jsDocData = validItems.find((x) => x.kind === "moduleDoc")?.jsDoc;
+  const anyModuleDoc = validItems.find((x) => x.data.kind === "moduleDoc");
+  const jsDocData = anyModuleDoc?.data.jsDoc;
   const isFromNodeJs = validItems.some((x) =>
-    x.jsDoc?.tags?.some((tag) =>
+    x.data.jsDoc?.tags?.some((tag) =>
       tag.kind === "tags" &&
       tag.tags.includes("node")
     )
@@ -158,7 +160,7 @@ function AllSymbolsBrowse({ context }: AllSymbolsBrowseProps) {
 }
 
 function CategoryPageSection(
-  { title, items }: { title: string; items: DocNodeBase[] },
+  { title, items }: { title: string; items: SymbolDoc[] },
 ) {
   if (items.length === 0) {
     return null;
