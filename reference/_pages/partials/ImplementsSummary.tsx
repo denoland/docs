@@ -1,6 +1,5 @@
 import { TsTypeDef } from "@deno/doc/types";
 import { TypeSummary } from "../primitives/TypeSummary.tsx";
-import { nbsp } from "../../_util/common.ts";
 
 export function ImplementsSummary({ typeDef }: { typeDef: TsTypeDef[] }) {
   if (typeDef.length === 0) {
@@ -18,7 +17,7 @@ export function ImplementsSummary({ typeDef }: { typeDef: TsTypeDef[] }) {
   return (
     <div class="symbolSubtitle">
       <div>
-        <span class="type">implements{nbsp}</span>
+        <span class="type">implements{" "}</span>
         {spans}
       </div>
     </div>

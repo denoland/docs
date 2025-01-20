@@ -3,7 +3,6 @@ import {
   InterfacePropertyDef,
   LiteralPropertyDef,
 } from "@deno/doc/types";
-import { nbsp } from "../../_util/common.ts";
 import { TypeSummary } from "./TypeSummary.tsx";
 
 export function PropertyName(
@@ -17,7 +16,7 @@ export function PropertyName(
   const typeInfoElements = property.tsType
     ? (
       <>
-        <span className={propertyTypeClass}>:{nbsp}</span>
+        <span className={propertyTypeClass}>:{" "}</span>
         <TypeSummary
           typeDef={property.tsType}
           extraClasses={["font-medium", "text-stone-500"]}
