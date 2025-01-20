@@ -21,8 +21,8 @@ export async function getAllSymbols() {
     const symbolsByName = new Map<string, SymbolDoc[]>();
 
     for (const symbol of enrichedItems) {
-      const existing = symbolsByName.get(symbol.fullName) || [];
-      symbolsByName.set(symbol.name, [...existing, symbol]);
+      const existing = symbolsByName.get(symbol.identifier) || [];
+      symbolsByName.set(symbol.identifier, [...existing, symbol]);
     }
 
     const mergedSymbols = mergeSymbolsWithCollidingNames(symbolsByName);
@@ -86,7 +86,7 @@ function createSymbolWrapper(
     fullName: nameString,
     namespace: ns,
     package: packageName,
-    identifier: data.kind + "_" + [packageName, nameString].join("."),
+    identifier: (data.kind + "/" + nameString).toLowerCase(),
     data,
   };
 }

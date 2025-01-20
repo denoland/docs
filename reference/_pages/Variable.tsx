@@ -18,7 +18,7 @@ export default function* getPages(
   yield {
     title: item.name,
     url:
-      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.fullName}`,
+      `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}`,
     content: <Variable data={item} context={context} />,
   };
 }

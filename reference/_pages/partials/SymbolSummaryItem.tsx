@@ -13,7 +13,7 @@ export function SymbolSummaryItem(
     <div className={"namespaceItem"}>
       <CodeIcon glyph={item.data.kind} />
       <div className={"namespaceItemContent"}>
-        <a href={`~/${displayName}`}>
+        <a href={`~/${item.identifier}`}>
           {displayName}
         </a>
         <MarkdownContent text={firstLine} />

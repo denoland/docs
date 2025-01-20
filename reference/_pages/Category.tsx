@@ -3,7 +3,6 @@ import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { flattenItems, sections } from "../_util/common.ts";
 import {
   LumeDocument,
-  MightHaveNamespace,
   ReferenceContext,
   SymbolDoc,
   WebCategoryDetails,
