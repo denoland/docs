@@ -44,7 +44,6 @@ export default function* getPages(
 
 export function Namespace({ data, context }: Props) {
   const namespaceDef = data.data.namespaceDef as unknown as HasWrappedElements;
-
   const children = namespaceDef.wrappedElements.sort((a, b) =>
     a.name.localeCompare(b.name)
   );

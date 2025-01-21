@@ -31,7 +31,7 @@ function replaceCustomTokens(contents: string) {
 
   contents = contents.replace(
     /<p>:::(\w+)\s+([^\n<]+)<\/p>([^]*?)<p>:::<\/p>/g,
-    (match, type, title, content) => {
+    (_match, type, title, content) => {
       return `<div class="admonition ${type}">
                 <div class="title">${title}</div>
                 ${content}

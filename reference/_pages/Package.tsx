@@ -1,7 +1,6 @@
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { ReferenceContext, WebCategoryDetails } from "../types.ts";
 import { AnchorableHeading } from "./partials/AnchorableHeading.tsx";
-import { linkCodeAndParagraph } from "./primitives/LinkCode.tsx";
 import { MarkdownContent } from "./primitives/MarkdownContent.tsx";
 
 type Props = {

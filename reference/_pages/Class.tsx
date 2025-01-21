@@ -21,7 +21,7 @@ export default function* getPages(
 }
 
 export function Class({ data, context }: Props) {
-  const { details, contents } = getSymbolDetails(data);
+  const { details, toc } = getSymbolDetails(data);
 
   return (
     <ReferencePage
@@ -45,7 +45,7 @@ export function Class({ data, context }: Props) {
           </div>
         </article>
       </main>
-      {contents}
+      {toc}
     </ReferencePage>
   );
 }

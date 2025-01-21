@@ -63,7 +63,7 @@ export function getSymbolDetails(data: SymbolDoc<DocNode>) {
     </ul>,
   ];
 
-  return { details, contents: <TableOfContents>{contents}</TableOfContents> };
+  return { details, toc: <TableOfContents>{contents}</TableOfContents> };
 }
 
 function getMembers(x: SymbolDoc<DocNode>): ClosureContent {

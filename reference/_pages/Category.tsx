@@ -1,4 +1,3 @@
-import { DocNodeBase } from "@deno/doc/types";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { flattenItems, sections } from "../_util/common.ts";
 import {
@@ -17,6 +16,12 @@ import {
 } from "./partials/TableOfContents.tsx";
 import { JsDocDescription } from "./partials/JsDocDescription.tsx";
 import { NodeInDenoUsageGuidance } from "./partials/NodeInDenoUsageGuidance.tsx";
+import {
+  filterByCategory,
+  firstOrDefaultOfType,
+  groupBySymbolType,
+  tagIncludes,
+} from "../_util/queries.ts";
 
 export default function* getPages(
   context: ReferenceContext,
@@ -58,34 +63,12 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
     a.name.localeCompare(b.name)
   );
 
-  const validItems: SymbolDoc<DocNodeBase>[] = allItems.filter((
-    item,
-  ) =>
-    item.data.jsDoc?.tags?.some((tag) =>
-      tag.kind === "category" &&
-      tag.doc.toLocaleLowerCase() === categoryName?.toLocaleLowerCase()
-    )
-  );
+  const validItems = filterByCategory(allItems, categoryName);
+  const itemsOfType = groupBySymbolType(validItems);
 
-  const itemsOfType = new Map<string, SymbolDoc<DocNodeBase>[]>();
-  for (const item of validItems) {
-    if (!itemsOfType.has(item.data.kind)) {
-      itemsOfType.set(item.data.kind, []);
-    }
-    const collection = itemsOfType.get(item.data.kind);
-    if (!collection?.includes(item)) {
-      collection?.push(item);
-    }
-  }
-
-  const anyModuleDoc = validItems.find((x) => x.data.kind === "moduleDoc");
-  const jsDocData = anyModuleDoc?.data.jsDoc;
-  const isFromNodeJs = validItems.some((x) =>
-    x.data.jsDoc?.tags?.some((tag) =>
-      tag.kind === "tags" &&
-      tag.tags.includes("node")
-    )
-  );
+  const isFromNodeJs = tagIncludes(validItems, "node");
+  const moduleDoc = firstOrDefaultOfType(validItems, "moduleDoc");
+  const jsDocData = moduleDoc?.data.jsDoc;
 
   const nodeCompatibilityElement = isFromNodeJs
     ? <NodeInDenoUsageGuidance nodePackage={categoryName} />
@@ -117,10 +100,7 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
               <TocSection title={title}>
                 {matching.map((x) => {
                   return (
-                    <TocListItem
-                      item={{ name: x.fullName || x.name }}
-                      type={kind}
-                    />
+                    <TocListItem item={{ name: x.fullName }} type={kind} />
                   );
                 })}
               </TocSection>
