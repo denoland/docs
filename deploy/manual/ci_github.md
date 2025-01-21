@@ -26,7 +26,7 @@ for **Automatic** and **GitHub Actions** mode.
 ## Automatic
 
 If your project doesn't require any additional build steps, then the system
-choose **Automatic** mode. The entrypoint file is simply the file that Deno
+chooses **Automatic** mode. The entrypoint file is simply the file that Deno
 Deploy will run.
 
 ## GitHub Actions

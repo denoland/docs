@@ -30,28 +30,6 @@ export default function codeblockCopyPlugin(md: any) {
       </button>
     `;
 
-    const script = `
-      <script>
-        (function() {
-          const button = document.getElementById('${uniqueId}');
-          button.addEventListener('click', function() {
-            let textToCopy = this.getAttribute('data-copy');
-            // CLEAN COMMANDS:  Remove leading spaces, $, and > from each line
-            textToCopy = textToCopy.replace(/^[\$>\s]+/, '');
-
-            navigator.clipboard.writeText(textToCopy).then(() => {
-              this.querySelector('.copy-icon').classList.add('hidden');
-              this.querySelector('.check-icon').classList.remove('hidden');
-              setTimeout(() => {
-                this.querySelector('.copy-icon').classList.remove('hidden');
-                this.querySelector('.check-icon').classList.add('hidden');
-              }, 2000);
-            });
-          });
-        })();
-      </script>
-    `;
-
-    return `<div class="relative">${render}${buttonHtml}${script}</div>`;
+    return `<div class="relative">${render}${buttonHtml}</div>`;
   };
 }
