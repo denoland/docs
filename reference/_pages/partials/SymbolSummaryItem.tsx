@@ -1,7 +1,7 @@
 import { DocNodeClass } from "@deno/doc/types";
 import { CodeIcon } from "./CodeIcon.tsx";
 import { MarkdownContent } from "../primitives/MarkdownContent.tsx";
-import { HasNamespace, SymbolDoc } from "../../types.ts";
+import { SymbolDoc } from "../../types.ts";
 
 export function SymbolSummaryItem(
   { item }: { item: SymbolDoc },

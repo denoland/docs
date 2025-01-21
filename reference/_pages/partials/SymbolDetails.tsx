@@ -8,7 +8,6 @@ import {
 } from "../../types.ts";
 import { MethodSignature } from "../primitives/MethodSignature.tsx";
 import { MemberSection } from "./MemberSection.tsx";
-import { PropertyItem } from "./PropertyItem.tsx";
 import { DetailedSection } from "./DetailedSection.tsx";
 import { MarkdownContent } from "../primitives/MarkdownContent.tsx";
 import { JsDocDescription } from "./JsDocDescription.tsx";
@@ -17,6 +16,8 @@ import {
   TocListItem,
   TocSection,
 } from "./TableOfContents.tsx";
+import { PropertyBadges } from "./Badges.tsx";
+import { PropertyName } from "../primitives/PropertyName.tsx";
 
 export function getSymbolDetails(data: SymbolDoc<DocNode>) {
   const members = getMembers(data);
@@ -179,6 +180,30 @@ function Properties(
     <MemberSection title="Properties">
       {properties.map((prop) => <PropertyItem property={prop} />)}
     </MemberSection>
+  );
+}
+
+function PropertyItem(
+  { property }: {
+    property: ValidPropertyWithOptionalJsDoc;
+  },
+) {
+  const jsDocSection = property.jsDoc?.doc
+    ? (
+      <DetailedSection>
+        <MarkdownContent text={property.jsDoc?.doc} />
+      </DetailedSection>
+    )
+    : null;
+
+  return (
+    <div id={"property_" + property.name}>
+      <h3>
+        <PropertyBadges property={property} />
+        <PropertyName property={property} />
+      </h3>
+      {jsDocSection}
+    </div>
   );
 }
 

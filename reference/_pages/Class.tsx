@@ -1,11 +1,11 @@
-import { DocNodeClass } from "@deno/doc/types";
+import { DocNodeClass, TsTypeDef } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
 import { StabilitySummary } from "./partials/Badges.tsx";
-import { ImplementsSummary } from "./partials/ImplementsSummary.tsx";
 import { getSymbolDetails } from "./partials/SymbolDetails.tsx";
 import { Function } from "./Function.tsx";
+import { TypeSummary } from "./primitives/TypeSummary.tsx";
 
 type Props = { data: SymbolDoc<DocNodeClass>; context: ReferenceContext };
 
@@ -59,5 +59,29 @@ export function Class({ data, context }: Props) {
       </main>
       {toc}
     </ReferencePage>
+  );
+}
+
+
+function ImplementsSummary({ typeDef }: { typeDef: TsTypeDef[] }) {
+  if (typeDef.length === 0) {
+    return null;
+  }
+
+  const spans = typeDef.map((iface) => {
+    return <TypeSummary typeDef={iface} />;
+  });
+
+  if (spans.length === 0) {
+    return null;
+  }
+
+  return (
+    <div class="symbolSubtitle">
+      <div>
+        <span class="type">implements{" "}</span>
+        {spans}
+      </div>
+    </div>
   );
 }
