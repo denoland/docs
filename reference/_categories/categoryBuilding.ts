@@ -42,7 +42,17 @@ export function getCategoriesFromSymbols(
     .sort()
     .reduce((acc, category) => {
       if (!descriptions) {
-        acc.set(category, "");
+        // get from moduleDoc
+
+        const moduleDoc = symbols.find((x) =>
+          x.data.kind === "moduleDoc" &&
+          x.data.jsDoc?.tags?.some((tag) =>
+            tag.kind === "category" && tag.doc === category
+          )
+        );
+
+        const description = (moduleDoc?.data.jsDoc?.doc || "").split("\n\n")[0];
+        acc.set(category, description);
         return acc;
       }
 
