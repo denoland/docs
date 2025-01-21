@@ -9,7 +9,8 @@ export function MarkdownContent(
   }
 
   const renderedDescription = markdownRenderer.render(text);
-  const withLinkCode = insertLinkCodes(renderedDescription);
+  const withCustomSubstitutions = replaceCustomTokens(renderedDescription);
+  const withLinkCode = insertLinkCodes(withCustomSubstitutions);
 
   const paragraphs = withLinkCode
     .split(/\n\n+/)
@@ -22,4 +23,19 @@ export function MarkdownContent(
   ));
 
   return <>{elements}</>;
+}
+
+function replaceCustomTokens(contents: string) {
+  // Deno compatibility note
+  contents = contents.replace(
+    /<p>:::(\w+)\s+([^\n<]+)<\/p>([^]*?)<p>:::<\/p>/g,
+    (match, type, title, content) => {
+      return `<div class="admonition ${type}">
+                <div class="title">${title}</div>
+                ${content}
+              </div>`;
+    },
+  );
+
+  return contents;
 }
