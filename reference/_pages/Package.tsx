@@ -2,6 +2,7 @@ import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { ReferenceContext, WebCategoryDetails } from "../types.ts";
 import { AnchorableHeading } from "./partials/AnchorableHeading.tsx";
 import { linkCodeAndParagraph } from "./primitives/LinkCode.tsx";
+import { MarkdownContent } from "./primitives/MarkdownContent.tsx";
 
 type Props = {
   data: Map<string, WebCategoryDetails>;
@@ -53,7 +54,6 @@ export function CategorySummary(
   const href =
     `${context.root}/${context.packageName.toLocaleLowerCase()}/${details.urlStub}`;
   const anchorId = details.urlStub;
-  const processedDescription = linkCodeAndParagraph(summary);
 
   return (
     <section id={anchorId} className={"section"}>
@@ -66,7 +66,7 @@ export function CategorySummary(
         data-dark-theme="dark"
         class="markdown-body"
       >
-        {processedDescription}
+        <MarkdownContent text={summary || ""} />
       </div>
     </section>
   );
