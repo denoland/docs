@@ -27,6 +27,8 @@ export function MarkdownContent(
 
 function replaceCustomTokens(contents: string) {
   // Deno compatibility note
+  // I wish this was in a jsdoc tag really?
+
   contents = contents.replace(
     /<p>:::(\w+)\s+([^\n<]+)<\/p>([^]*?)<p>:::<\/p>/g,
     (match, type, title, content) => {
