@@ -25,14 +25,15 @@ export function getSymbolDetails(data: SymbolDoc<DocNode>) {
     <JsDocDescription jsDoc={data.data.jsDoc} />,
     <Constructors data={members.constructors} />,
     <Properties properties={members.properties} />,
-    <Methods methods={members.methods} />,
+    <Methods parent={data} methods={members.methods} />,
   ];
 
   if (members.kind === "class") {
     details.pop();
     details.push(
-      <Methods methods={members.instanceMethods || []} />,
+      <Methods parent={data} methods={members.instanceMethods || []} />,
       <Methods
+        parent={data}
         methods={members.staticMethods || []}
         label={"Static Methods"}
       />,
@@ -123,7 +124,8 @@ function getMembers(x: SymbolDoc<DocNode>): ClosureContent {
 }
 
 function Methods(
-  { methods, label = "Methods" }: {
+  { parent, methods, label = "Methods" }: {
+    parent: SymbolDoc<DocNode>;
     methods: ValidMethodType[];
     label?: string;
   },
@@ -135,13 +137,15 @@ function Methods(
   return (
     <MemberSection title={label}>
       {methods.map((method) => {
-        return <MethodSummary method={method} />;
+        return <MethodSummary parent={parent} method={method} />;
       })}
     </MemberSection>
   );
 }
 
-function MethodSummary({ method }: { method: ValidMethodType }) {
+function MethodSummary(
+  { parent, method }: { parent: SymbolDoc<DocNode>; method: ValidMethodType },
+) {
   const detailedSection = hasJsDoc(method)
     ? (
       <DetailedSection>
@@ -150,10 +154,14 @@ function MethodSummary({ method }: { method: ValidMethodType }) {
     )
     : null;
 
+  const link = `${parent.identifier}.prototype.${method.name}`;
+
   return (
     <div>
       <div>
-        <MethodSignature method={method} />
+        <a href={link}>
+          <MethodSignature method={method} />
+        </a>
       </div>
       {detailedSection}
     </div>
