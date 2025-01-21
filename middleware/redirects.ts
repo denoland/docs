@@ -74,7 +74,8 @@ function loadFromJson() {
   }
 
   log.info(
-    `${cliNow()} <cyan>redirectsMiddleware</cyan>: Total number of redirects loaded: ${Object.keys(redirects).length
+    `${cliNow()} <cyan>redirectsMiddleware</cyan>: Total number of redirects loaded: ${
+      Object.keys(redirects).length
     }.`,
   );
 
@@ -103,7 +104,8 @@ function addGoLinksAndRedirectLinks(redirects: Record<string, string>) {
   }
 
   log.warn(
-    `${cliNow()} <cyan>addGoLinksAndRedirectLinks</cyan>: Total number of redirects loaded: <green>${Object.keys(redirects).length
+    `${cliNow()} <cyan>addGoLinksAndRedirectLinks</cyan>: Total number of redirects loaded: <green>${
+      Object.keys(redirects).length
     }</green>.`,
   );
 }
