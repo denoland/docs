@@ -115,6 +115,7 @@ export type ValidPropertyType =
   | LiteralPropertyDef;
 export type ValidMethodType =
   | ClassMethodDef
+  | ClassConstructorDef
   | InterfaceMethodDef
   | LiteralMethodDef;
 export type ValidCallSignaturesType =
