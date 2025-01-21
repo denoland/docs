@@ -55,3 +55,17 @@ export function getCategoryFromTag(item: SymbolDoc) {
 
   return tag?.doc || "";
 }
+
+export function getCategoryDescription(
+  symbols: SymbolDoc<DocNodeBase>[],
+  category: string,
+) {
+  const moduleDoc = symbols.find((x) =>
+    x.data.kind === "moduleDoc" &&
+    x.data.jsDoc?.tags?.some((tag) =>
+      tag.kind === "category" && tag.doc === category
+    )
+  );
+
+  return (moduleDoc?.data.jsDoc?.doc || "").split("\n\n")[0];
+}

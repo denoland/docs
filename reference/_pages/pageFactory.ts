@@ -3,17 +3,17 @@ import {
   ReferenceContext,
   ReferenceDocumentFactoryFunction,
   SymbolDoc,
-} from "./types.ts";
-import getPagesForNamespace from "./_pages/Namespace.tsx";
-import getPagesForNotImplemented from "./_pages/NotImplemented.tsx";
-import getPagesForModule from "./_pages/Module.tsx";
-import getPagesForClass from "./_pages/Class.tsx";
-import getPagesForInterface from "./_pages/Interface.tsx";
-import getPagesForImport from "./_pages/Import.tsx";
-import getPagesForFunction from "./_pages/Function.tsx";
-import getPagesForTypeAlias from "./_pages/TypeAlias.tsx";
-import getPagesForVariable from "./_pages/Variable.tsx";
-import getPagesForEnum from "./_pages/Enum.tsx";
+} from "../types.ts";
+import getPagesForNamespace from "./Namespace.tsx";
+import getPagesForNotImplemented from "./NotImplemented.tsx";
+import getPagesForModule from "./Module.tsx";
+import getPagesForClass from "./Class.tsx";
+import getPagesForInterface from "./Interface.tsx";
+import getPagesForImport from "./Import.tsx";
+import getPagesForFunction from "./Function.tsx";
+import getPagesForTypeAlias from "./TypeAlias.tsx";
+import getPagesForVariable from "./Variable.tsx";
+import getPagesForEnum from "./Enum.tsx";
 import { DocNodeBase } from "@deno/doc/types";
 
 const factories = new Map<

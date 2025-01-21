@@ -1,18 +1,7 @@
-import { expandGlob } from "@std/fs";
 import { doc, DocNode } from "@deno/doc";
+import { PackageConfig } from "../types.ts";
 
-export type Package = {
-  name: string;
-  symbols: DocNode[];
-};
-
-const packages = [
-  { packageName: "Web", files: ["./types/web.d.ts"] },
-  { packageName: "Deno", files: ["./types/deno.d.ts"] },
-  { packageName: "Node", files: await getNodeTypeFiles() },
-];
-
-export async function* getSymbols() {
+export async function* getSymbols(packages: PackageConfig[]) {
   for (const { packageName, files } of packages) {
     const paths = files.map((file) => {
       if (!file.startsWith("./")) {
@@ -46,14 +35,6 @@ async function loadDocumentation(paths: string[]) {
 
   const nodes = await Promise.all(docGenerationPromises);
   return nodes.reduce((acc, val) => ({ ...acc, ...val }), {});
-}
-
-async function getNodeTypeFiles() {
-  const urls: string[] = [];
-  for await (const file of expandGlob("./reference_gen/types/node/[!_]*")) {
-    urls.push(file.path);
-  }
-  return urls;
 }
 
 function addAutoTags(symbols: DocNode[], sourceFileName: string) {

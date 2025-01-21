@@ -6,7 +6,7 @@ import {
   ReferenceContext,
   SymbolDoc,
 } from "../types.ts";
-import generatePageFor from "../pageFactory.ts";
+import generatePageFor from "./pageFactory.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
 import { JsDocDescription } from "./partials/JsDocDescription.tsx";

@@ -1,5 +1,7 @@
 import { JsDocTagDoc } from "@deno/doc/types";
 import { SymbolDoc, WebCategoryDetails } from "../types.ts";
+import { getCategoryDescription } from "../_util/queries.ts";
+
 // deno-lint-ignore no-explicit-any
 type CategoryDescription = { path: string; categoryDocs: any };
 
@@ -42,16 +44,7 @@ export function getCategoriesFromSymbols(
     .sort()
     .reduce((acc, category) => {
       if (!descriptions) {
-        // get from moduleDoc
-
-        const moduleDoc = symbols.find((x) =>
-          x.data.kind === "moduleDoc" &&
-          x.data.jsDoc?.tags?.some((tag) =>
-            tag.kind === "category" && tag.doc === category
-          )
-        );
-
-        const description = (moduleDoc?.data.jsDoc?.doc || "").split("\n\n")[0];
+        const description = getCategoryDescription(symbols, category);
         acc.set(category, description);
         return acc;
       }
@@ -78,6 +71,5 @@ function createCategoryUrl(category: string) {
   let categoryUrl = category.replace(/\s/g, "_").toLocaleLowerCase();
   categoryUrl = categoryUrl.replace(/[^a-zA-Z0-9-_]/g, "");
   categoryUrl = categoryUrl.toLocaleLowerCase();
-
   return categoryUrl;
 }

@@ -1,25 +1,13 @@
-import generatePageFor from "./pageFactory.ts";
+import generatePageFor from "./_pages/pageFactory.ts";
 import getCategoryPages from "./_pages/Category.tsx";
-import webCategoryDocs from "./_categories/web-categories.json" with {
-  type: "json",
-};
-import denoCategoryDocs from "./_categories/deno-categories.json" with {
-  type: "json",
-};
 import { getCategories } from "./_categories/categoryBuilding.ts";
 import { cliNow } from "../timeUtils.ts";
-import { getAllSymbols } from "./symbolLoading.ts";
+import { getAllSymbols } from "./_util/symbolLoading.ts";
 import { ReferenceContext } from "./types.ts";
 import { log } from "lume/core/utils/log.ts";
+import { packages, root, sections } from "./config.ts";
 
 export const layout = "raw.tsx";
-
-const root = "/api";
-const sections = [
-  { name: "Deno APIs", path: "deno", categoryDocs: denoCategoryDocs },
-  { name: "Web APIs", path: "web", categoryDocs: webCategoryDocs },
-  { name: "Node APIs", path: "node", categoryDocs: undefined },
-];
 
 export const sidebar = [
   {
@@ -39,7 +27,7 @@ export default async function* () {
       throw new Error();
     }
 
-    const allSymbols = await getAllSymbols();
+    const allSymbols = await getAllSymbols(packages);
 
     for (const [packageName, symbols] of allSymbols.entries()) {
       const categories = getCategories(packageName, symbols, sections);

@@ -102,6 +102,16 @@ export type ReferenceContext = {
   currentCategoryList: Map<string, WebCategoryDetails>;
 };
 
+export type Package = {
+  name: string;
+  symbols: DocNode[];
+};
+
+export type PackageConfig = {
+  packageName: string;
+  files: string[];
+};
+
 export type ReferenceDocumentFactoryFunction<
   T extends DocNodeBase = DocNodeBase,
 > = (

@@ -1,13 +1,15 @@
 import { DocNode, NamespaceDef } from "@deno/doc/types";
-import { cliNow } from "../timeUtils.ts";
-import { getSymbols } from "./_dataSources/dtsSymbolSource.ts";
-import { HasWrappedElements, SymbolDoc } from "./types.ts";
-import { mergeSymbolsWithCollidingNames } from "./_util/symbolMerging.ts";
-import { generateSymbolIdentity } from "./_util/identityGenerator.ts";
+import { cliNow } from "../../timeUtils.ts";
+import { getSymbols } from "../_dataSources/dtsSymbolSource.ts";
+import { HasWrappedElements, PackageConfig, SymbolDoc } from "../types.ts";
+import { mergeSymbolsWithCollidingNames } from "./symbolMerging.ts";
+import { generateSymbolIdentity } from "./identityGenerator.ts";
 
-export async function getAllSymbols() {
+export async function getAllSymbols(packages: PackageConfig[]) {
   const allSymbols = new Map<string, SymbolDoc[]>();
-  for await (const { packageName, symbols, sourceFileName } of getSymbols()) {
+  for await (
+    const { packageName, symbols, sourceFileName } of getSymbols(packages)
+  ) {
     console.log(
       `${cliNow()} 📚 ${packageName}:${sourceFileName} has ${
         countSymbols(symbols)
