@@ -5,6 +5,7 @@ import { NameHeading } from "./partials/NameHeading.tsx";
 import { StabilitySummary } from "./partials/Badges.tsx";
 import { ImplementsSummary } from "./partials/ImplementsSummary.tsx";
 import { getSymbolDetails } from "./partials/SymbolDetails.tsx";
+import { Function } from "./Function.tsx";
 
 type Props = { data: SymbolDoc<DocNodeClass>; context: ReferenceContext };
 
@@ -18,6 +19,17 @@ export default function* getPages(
       `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}`,
     content: <Class data={item} context={context} />,
   };
+
+  for (const method of item.data.classDef.methods) {
+    yield {
+      title: method.name,
+      url:
+        `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}.prototype.${method.name}`,
+      content: (
+        <Function name={method.name} data={method} context={context} />
+      ),
+    };
+  }
 }
 
 export function Class({ data, context }: Props) {

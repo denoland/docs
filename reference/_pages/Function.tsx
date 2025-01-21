@@ -1,12 +1,13 @@
-import { DocNodeFunction } from "@deno/doc/types";
+import { ClassMethodDef, DocNodeFunction } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
 import { StabilitySummary } from "./partials/Badges.tsx";
 import { JsDocDescription } from "./partials/JsDocDescription.tsx";
 import { FunctionSignature } from "./primitives/FunctionSignature.tsx";
-
-type Props = { data: SymbolDoc<DocNodeFunction>; context: ReferenceContext };
+import { MemberSection } from "./partials/MemberSection.tsx";
+import { parameter } from "../_util/symbolStringBuilding.ts";
+import { TypeSummary } from "./primitives/TypeSummary.tsx";
 
 export default function* getPages(
   item: SymbolDoc<DocNodeFunction>,
@@ -16,38 +17,58 @@ export default function* getPages(
     title: item.name,
     url:
       `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}`,
-    content: <Function data={item} context={context} />,
+    content: (
+      <Function name={item.fullName} data={item.data} context={context} />
+    ),
   };
 }
 
-export function Function({ data, context }: Props) {
-  const nameOnly = data.fullName.split(".").pop();
+type Props = {
+  name: string;
+  data: DocNodeFunction | ClassMethodDef;
+  context: ReferenceContext;
+};
+
+export function Function({ name, data, context }: Props) {
+  const nameOnly = name.split(".").pop();
 
   return (
     <ReferencePage
       context={context}
       navigation={{
         category: context.packageName,
-        currentItemName: data.fullName,
+        currentItemName: name,
       }}
     >
       <main class={"symbolGroup"}>
         <article>
           <div>
             <div>
-              <NameHeading fullName={data.fullName} headingType="Function" />
-              <StabilitySummary jsDoc={data.data.jsDoc} />
+              <NameHeading fullName={name} headingType="Method" />
+              <StabilitySummary jsDoc={data.jsDoc} />
             </div>
           </div>
           <div>
             <FunctionSignature
-              functionDef={data.data.functionDef}
+              functionDef={data.functionDef}
               nameOverride={nameOnly}
             />
           </div>
           <div>
-            <JsDocDescription jsDoc={data.data.jsDoc} />
+            <JsDocDescription jsDoc={data.jsDoc} />
           </div>
+          <MemberSection title="Parameters">
+            {data.functionDef.params.map((param) => (
+              <div>
+                {parameter(param).map((part) => {
+                  return <span className={part.kind}>{part.value}</span>;
+                })}
+              </div>
+            ))}
+          </MemberSection>
+          <MemberSection title="Return Type">
+            <TypeSummary typeDef={data.functionDef.returnType} />
+          </MemberSection>
         </article>
       </main>
     </ReferencePage>
