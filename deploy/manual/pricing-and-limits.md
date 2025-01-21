@@ -2,9 +2,9 @@
 title: "Pricing and limitations"
 ---
 
-Please see [our pricing page](https://www.deno.com/deploy/pricing) for the
-overview of the available features in all plans. If you have a use case that
-exceeds any of these limits, [please reach out](mailto:deploy@deno.com).
+Please see [our pricing page](https://deno.com/deploy/pricing) for the overview
+of the available features in all plans. If you have a use case that exceeds any
+of these limits, [please reach out](mailto:deploy@deno.com).
 
 No uptime guarantees are provided during the initial public beta for Deno
 Deploy. Access to the service will be controlled by
