@@ -1,9 +1,12 @@
 import { DocNodeTypeAlias } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
+import { NameHeading } from "./partials/NameHeading.tsx";
+import { JsDocDescription } from "./partials/JsDocDescription.tsx";
+import { TypeSummary } from "./primitives/TypeSummary.tsx";
 
 type Props = {
-  data: SymbolDoc<DocNodeTypeAlias>;
+  item: SymbolDoc<DocNodeTypeAlias>;
   context: ReferenceContext;
 };
 
@@ -15,23 +18,31 @@ export default function* getPages(
     title: item.name,
     url:
       `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}`,
-    content: <TypeAlias data={item} context={context} />,
+    content: <TypeAlias item={item} context={context} />,
   };
 }
 
-export function TypeAlias({ data, context }: Props) {
+export function TypeAlias({ item, context }: Props) {
   return (
     <ReferencePage
       context={context}
-      navigation={{ category: context.packageName, currentItemName: data.name }}
+      navigation={{ category: context.packageName, currentItemName: item.name }}
     >
-      I am a type alias, my name is {data.name}
-
-      {data.data.jsDoc?.doc && <p>{data.data.jsDoc?.doc}</p>}
-
-      <pre>
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      <main class={"symbolGroup"}>
+        <article>
+          <div>
+            <div>
+              <NameHeading fullName={item.fullName} headingType="TypeAlias" />
+            </div>
+          </div>
+          <div>
+            <JsDocDescription jsDoc={item.data.jsDoc} />
+          </div>
+        </article>
+        <div>
+          Alias for: <TypeSummary typeDef={item.data.typeAliasDef.tsType} />
+        </div>
+      </main>
     </ReferencePage>
   );
 }

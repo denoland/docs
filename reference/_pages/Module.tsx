@@ -1,8 +1,10 @@
-import { DocNode, DocNodeModuleDoc } from "@deno/doc/types";
+import { DocNodeModuleDoc } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
+import { NameHeading } from "./partials/NameHeading.tsx";
+import { JsDocDescription } from "./partials/JsDocDescription.tsx";
 
-type Props = { data: DocNode; context: ReferenceContext };
+type Props = { item: SymbolDoc<DocNodeModuleDoc>; context: ReferenceContext };
 
 export default function* getPages(
   item: SymbolDoc<DocNodeModuleDoc>,
@@ -12,21 +14,29 @@ export default function* getPages(
     title: item.name,
     url:
       `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}`,
-    content: <Module data={item.data} context={context} />,
+    content: <Module item={item} context={context} />,
   };
 }
 
-export function Module({ data, context }: Props) {
+export function Module({ item, context }: Props) {
   return (
     <ReferencePage
       context={context}
-      navigation={{ category: context.packageName, currentItemName: data.name }}
+      navigation={{ category: context.packageName, currentItemName: item.name }}
     >
-      I am a module, my name is {data.name}
-
-      <pre>
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      <main class={"symbolGroup"}>
+        <article>
+          <div>
+            <div>
+              <NameHeading fullName={item.fullName} headingType="Module" />
+            </div>
+          </div>
+          <div>
+            <JsDocDescription jsDoc={item.data.jsDoc} />
+          </div>
+        </article>
+        <div>{item.data.declarationKind}</div>
+      </main>
     </ReferencePage>
   );
 }

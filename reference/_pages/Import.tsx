@@ -1,8 +1,10 @@
 import { DocNode, DocNodeImport } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
+import { NameHeading } from "./partials/NameHeading.tsx";
+import { JsDocDescription } from "./partials/JsDocDescription.tsx";
 
-type Props = { data: SymbolDoc<DocNode>; context: ReferenceContext };
+type Props = { item: SymbolDoc<DocNodeImport>; context: ReferenceContext };
 
 export default function* getPages(
   item: SymbolDoc<DocNodeImport>,
@@ -12,21 +14,32 @@ export default function* getPages(
     title: item.name,
     url:
       `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}`,
-    content: <Import data={item} context={context} />,
+    content: <Import item={item} context={context} />,
   };
 }
 
-export function Import({ data, context }: Props) {
+export function Import({ item, context }: Props) {
   return (
     <ReferencePage
       context={context}
-      navigation={{ category: context.packageName, currentItemName: data.name }}
+      navigation={{ category: context.packageName, currentItemName: item.name }}
     >
-      I am a Import, my name is {data.name}
-
-      <pre>
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      <main class={"symbolGroup"}>
+        <article>
+          <div>
+            <div>
+              <NameHeading fullName={item.fullName} headingType="Import" />
+            </div>
+          </div>
+          <div>
+            <JsDocDescription jsDoc={item.data.jsDoc} />
+          </div>
+        </article>
+        <ul>
+          <li>src: {item.data.importDef.src}</li>
+          <li>imported: {item.data.importDef.imported}</li>
+        </ul>
+      </main>
     </ReferencePage>
   );
 }
