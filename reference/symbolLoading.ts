@@ -1,4 +1,4 @@
-import { DocNode, DocNodeBase, NamespaceDef } from "@deno/doc/types";
+import { DocNode, NamespaceDef } from "@deno/doc/types";
 import { cliNow } from "../timeUtils.ts";
 import { getSymbols } from "./_dataSources/dtsSymbolSource.ts";
 import { HasWrappedElements, SymbolDoc } from "./types.ts";
@@ -43,17 +43,25 @@ function decorateNodesWithExtraData(
   items: DocNode[],
   packageName: string,
   populateNamespace = true,
-  ns = "",
+  namespace = "",
 ): SymbolDoc[] {
   const flattened: SymbolDoc[] = [];
 
   for (const item of items) {
-    const wrapped = createSymbolWrapper(item, packageName, ns);
+    const identity = generateSymbolIdentity(item, packageName, namespace);
+    const wrapped = {
+      name: item.name,
+      fullName: identity,
+      namespace: namespace,
+      package: packageName,
+      identifier: identity,
+      data: item,
+    };
 
     if (item.kind === "namespace") {
       flattened.push(wrapped);
 
-      const childrensNamespace = ns + (ns ? "." : "") + item.name;
+      const childrensNamespace = namespace + (namespace ? "." : "") + item.name;
       const children = decorateNodesWithExtraData(
         item.namespaceDef.elements,
         packageName,
@@ -74,22 +82,6 @@ function decorateNodesWithExtraData(
   }
 
   return flattened;
-}
-
-function createSymbolWrapper(
-  data: DocNodeBase,
-  packageName: string,
-  namespace: string,
-): SymbolDoc {
-  const nameString = generateSymbolIdentity(data, packageName, namespace);
-  return {
-    name: data.name,
-    fullName: nameString,
-    namespace: namespace,
-    package: packageName,
-    identifier: nameString,
-    data,
-  };
 }
 
 export function countSymbols(symbols: DocNode[]): number {
