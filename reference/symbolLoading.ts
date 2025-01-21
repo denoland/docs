@@ -3,6 +3,7 @@ import { cliNow } from "../timeUtils.ts";
 import { getSymbols } from "./_dataSources/dtsSymbolSource.ts";
 import { HasWrappedElements, SymbolDoc } from "./types.ts";
 import { mergeSymbolsWithCollidingNames } from "./_util/symbolMerging.ts";
+import { generateSymbolIdentity } from "./_util/identityGenerator.ts";
 
 export async function getAllSymbols() {
   const allSymbols = new Map<string, SymbolDoc[]>();
@@ -78,13 +79,13 @@ function decorateNodesWithExtraData(
 function createSymbolWrapper(
   data: DocNodeBase,
   packageName: string,
-  ns = "",
+  namespace: string,
 ): SymbolDoc {
-  const nameString = ns ? `${ns}.${data.name}` : data.name;
+  const nameString = generateSymbolIdentity(data, packageName, namespace);
   return {
     name: data.name,
     fullName: nameString,
-    namespace: ns,
+    namespace: namespace,
     package: packageName,
     identifier: nameString,
     data,
