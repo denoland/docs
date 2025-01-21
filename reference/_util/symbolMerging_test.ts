@@ -61,6 +61,7 @@ Deno.test("mergeSymbolsWithCollidingNames, merges elements in classDef", () => {
   assert(merged.classDef.constructors.some((x) => x.name === "baz"));
 });
 
+// deno-lint-ignore no-explicit-any
 export function wrap(data: any) {
   return {
     name: data.name,

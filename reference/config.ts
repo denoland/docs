@@ -20,6 +20,16 @@ export const packages: PackageConfig[] = [
   { packageName: "Node", files: await getNodeTypeFiles() },
 ];
 
+export const detailSections = [
+  ["Classes", "class"],
+  ["Enums", "enum"],
+  ["Functions", "function"],
+  ["Interfaces", "interface"],
+  ["Namespaces", "namespace"],
+  ["Type Aliases", "typeAlias"],
+  ["Variables", "variable"],
+];
+
 async function getNodeTypeFiles() {
   const urls: string[] = [];
   for await (const file of expandGlob("./reference_gen/types/node/[!_]*")) {

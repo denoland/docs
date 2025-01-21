@@ -5,16 +5,6 @@ import {
   SymbolDoc,
 } from "../types.ts";
 
-export const sections = [
-  ["Classes", "class"],
-  ["Enums", "enum"],
-  ["Functions", "function"],
-  ["Interfaces", "interface"],
-  ["Namespaces", "namespace"],
-  ["Type Aliases", "typeAlias"],
-  ["Variables", "variable"],
-];
-
 export function flattenItems(
   items: (SymbolDoc<DocNode | DocNodeBase>)[],
 ) {

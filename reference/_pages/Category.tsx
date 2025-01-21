@@ -1,5 +1,5 @@
 import ReferencePage from "../_layouts/ReferencePage.tsx";
-import { flattenItems, sections } from "../_util/common.ts";
+import { flattenItems } from "../_util/common.ts";
 import {
   LumeDocument,
   ReferenceContext,
@@ -22,6 +22,7 @@ import {
   groupBySymbolType,
   tagIncludes,
 } from "../_util/queries.ts";
+import { detailSections } from "../config.ts";
 
 export default function* getPages(
   context: ReferenceContext,
@@ -86,7 +87,7 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
         {nodeCompatibilityElement}
         <JsDocDescription jsDoc={jsDocData} />
         <div className={"space-y-7"}>
-          {sections.map(([title, kind]) => {
+          {detailSections.map(([title, kind]) => {
             const matching = itemsOfType.get(kind) || [];
             return <CategoryPageSection title={title} items={matching} />;
           })}
@@ -94,7 +95,7 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
       </main>
       <TableOfContents>
         <ul>
-          {sections.map(([title, kind]) => {
+          {detailSections.map(([title, kind]) => {
             const matching = itemsOfType.get(kind) || [];
             return (
               <TocSection title={title}>
