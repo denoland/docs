@@ -9,7 +9,8 @@ export function NameHeading(
       | "Variable"
       | "Module"
       | "Namespace"
-      | "Import";
+      | "Import"
+      | "Enum";
   },
 ) {
   const className = "text-" + headingType;

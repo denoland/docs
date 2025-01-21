@@ -13,6 +13,7 @@ import getPagesForImport from "./_pages/Import.tsx";
 import getPagesForFunction from "./_pages/Function.tsx";
 import getPagesForTypeAlias from "./_pages/TypeAlias.tsx";
 import getPagesForVariable from "./_pages/Variable.tsx";
+import getPagesForEnum from "./_pages/Enum.tsx";
 import { DocNodeBase } from "@deno/doc/types";
 
 const factories = new Map<
@@ -28,7 +29,7 @@ factories.set("moduleDoc", getPagesForModule as any);
 factories.set("namespace", getPagesForNamespace as any);
 factories.set("function", getPagesForFunction as any);
 factories.set("variable", getPagesForVariable as any);
-factories.set("enum", getPagesForNotImplemented as any);
+factories.set("enum", getPagesForEnum as any);
 factories.set("class", getPagesForClass as any);
 factories.set("typeAlias", getPagesForTypeAlias as any);
 factories.set("interface", getPagesForInterface as any);
