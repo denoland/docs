@@ -16,8 +16,8 @@ import {
   TocSection,
 } from "./partials/TableOfContents.tsx";
 import { SymbolSummaryItem } from "./partials/SymbolSummaryItem.tsx";
-import { sections } from "../_util/common.ts";
 import { MemberSection } from "./partials/MemberSection.tsx";
+import { detailSections } from "../config.ts";
 
 type Props = { data: SymbolDoc<DocNodeNamespace>; context: ReferenceContext };
 
@@ -67,7 +67,7 @@ export function Namespace({ data, context }: Props) {
             <JsDocDescription jsDoc={data.data.jsDoc} />
           </div>
         </article>
-        {sections.map(([title, kind]) => {
+        {detailSections.map(([title, kind]) => {
           return (
             <MemberSection
               title={title}
@@ -82,7 +82,7 @@ export function Namespace({ data, context }: Props) {
       </main>
       <TableOfContents>
         <ul>
-          {sections.map(([title, kind]) => {
+          {detailSections.map(([title, kind]) => {
             return (
               <TocSection title={title}>
                 {children.filter((x) => x.data.kind === kind).map((x) => {
