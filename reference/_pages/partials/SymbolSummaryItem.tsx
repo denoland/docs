@@ -9,8 +9,10 @@ export function SymbolSummaryItem(
   const displayName = item.fullName || item.name;
   const firstLine = item.data.jsDoc?.doc?.split("\n\n")[0];
 
+  const anchor = item.data.kind + "_" + item.fullName;
+
   return (
-    <div className={"namespaceItem"}>
+    <div id={anchor} className={"namespaceItem"}>
       <CodeIcon glyph={item.data.kind} />
       <div className={"namespaceItemContent"}>
         <a href={`~/${item.identifier}`}>
