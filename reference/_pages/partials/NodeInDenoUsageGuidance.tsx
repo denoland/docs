@@ -1,7 +1,7 @@
 import { nbsp } from "../../_util/common.ts";
 
 export function NodeInDenoUsageGuidance(
-  { nodePackage, typeAlias }: { nodePackage: string; typeAlias?: string },
+  { nodePackage, importValue }: { nodePackage: string; importValue?: string },
 ) {
   if (!nodePackage) {
     return null;
@@ -18,14 +18,12 @@ export function NodeInDenoUsageGuidance(
     </>
   );
 
-  if (typeAlias) {
+  if (importValue) {
     importDef = (
       <>
         <span class="token">{"{"}</span>
         {nbsp}
-        type
-        {nbsp}
-        <span class="type">{typeAlias}</span>
+        <span class="type">{importValue}</span>
         {nbsp}
         <span class="token">{"}"}</span>
         {nbsp}

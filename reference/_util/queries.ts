@@ -1,4 +1,4 @@
-import { DocNodeBase, DocNodeKind } from "@deno/doc/types";
+import { DocNodeBase, DocNodeKind, JsDocTagDoc } from "@deno/doc/types";
 import { SymbolDoc } from "../types.ts";
 
 export function firstOrDefaultOfType(
@@ -46,4 +46,12 @@ export function tagIncludes(
       tag.tags.includes(tagValue)
     )
   );
+}
+
+export function getCategoryFromTag(item: SymbolDoc) {
+  const tag = item.data.jsDoc?.tags?.find((tag) => tag.kind === "category") as
+    | JsDocTagDoc
+    | undefined;
+
+  return tag?.doc || "";
 }

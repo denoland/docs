@@ -5,7 +5,7 @@ import { NameHeading } from "./partials/NameHeading.tsx";
 import { JsDocDescription } from "./partials/JsDocDescription.tsx";
 import { TypeSummary } from "./primitives/TypeSummary.tsx";
 import { MemberSection } from "./partials/MemberSection.tsx";
-import { tagIncludes } from "../_util/queries.ts";
+import { getCategoryFromTag, tagIncludes } from "../_util/queries.ts";
 import { NodeInDenoUsageGuidance } from "./partials/NodeInDenoUsageGuidance.tsx";
 
 type Props = {
@@ -26,16 +26,13 @@ export default function* getPages(
 }
 
 export function TypeAlias({ item, context }: Props) {
-  const categoryFromTag = item.data.jsDoc?.tags?.find((tag) =>
-    tag.kind === "category"
-  ) as JsDocTagDoc | undefined;
-
+  const category = getCategoryFromTag(item);
   const isFromNodeJs = tagIncludes([item], "node");
   const nodeCompatibilityElement = isFromNodeJs
     ? (
       <NodeInDenoUsageGuidance
-        nodePackage={categoryFromTag?.doc || ""}
-        typeAlias={item.name}
+        nodePackage={category}
+        importValue={"type " + item.name}
       />
     )
     : <></>;
