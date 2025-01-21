@@ -30,7 +30,7 @@ function MethodLinks({ item }: { item: SymbolDoc }) {
     return <></>;
   }
 
-  const asClass = item.data as DocNodeClass & HasNamespace;
+  const asClass = item.data as DocNodeClass;
   const methods = asClass.classDef.methods.sort((a, b) =>
     a.name.localeCompare(b.name)
   );
@@ -48,7 +48,7 @@ function MethodLinks({ item }: { item: SymbolDoc }) {
   const methodLinks = filteredMethods.map((method) => {
     return (
       <li>
-        <a href={`~/${asClass.fullName}#${method.name}`}>
+        <a href={`~/${item.fullName}#method_${method.name}`}>
           {method.name}
         </a>
       </li>
