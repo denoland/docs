@@ -1,9 +1,12 @@
-import { DocNodeTypeAlias } from "@deno/doc/types";
+import { DocNodeTypeAlias, JsDocTagDoc } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
 import { JsDocDescription } from "./partials/JsDocDescription.tsx";
 import { TypeSummary } from "./primitives/TypeSummary.tsx";
+import { MemberSection } from "./partials/MemberSection.tsx";
+import { tagIncludes } from "../_util/queries.ts";
+import { NodeInDenoUsageGuidance } from "./partials/NodeInDenoUsageGuidance.tsx";
 
 type Props = {
   item: SymbolDoc<DocNodeTypeAlias>;
@@ -23,6 +26,20 @@ export default function* getPages(
 }
 
 export function TypeAlias({ item, context }: Props) {
+  const categoryFromTag = item.data.jsDoc?.tags?.find((tag) =>
+    tag.kind === "category"
+  ) as JsDocTagDoc | undefined;
+
+  const isFromNodeJs = tagIncludes([item], "node");
+  const nodeCompatibilityElement = isFromNodeJs
+    ? (
+      <NodeInDenoUsageGuidance
+        nodePackage={categoryFromTag?.doc || ""}
+        typeAlias={item.name}
+      />
+    )
+    : <></>;
+
   return (
     <ReferencePage
       context={context}
@@ -36,12 +53,16 @@ export function TypeAlias({ item, context }: Props) {
             </div>
           </div>
           <div>
+            {nodeCompatibilityElement}
             <JsDocDescription jsDoc={item.data.jsDoc} />
           </div>
         </article>
-        <div>
-          Alias for: <TypeSummary typeDef={item.data.typeAliasDef.tsType} />
-        </div>
+        <MemberSection title="Definition">
+          <TypeSummary
+            typeDef={item.data.typeAliasDef.tsType}
+            beforeEach={<br />}
+          />
+        </MemberSection>
       </main>
     </ReferencePage>
   );

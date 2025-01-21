@@ -66,10 +66,10 @@ export function CategoryBrowse({ categoryName, context }: ListingProps) {
   const validItems = filterByCategory(allItems, categoryName);
   const itemsOfType = groupBySymbolType(validItems);
 
-  const isFromNodeJs = tagIncludes(validItems, "node");
   const moduleDoc = firstOrDefaultOfType(validItems, "moduleDoc");
   const jsDocData = moduleDoc?.data.jsDoc;
 
+  const isFromNodeJs = tagIncludes(validItems, "node");
   const nodeCompatibilityElement = isFromNodeJs
     ? <NodeInDenoUsageGuidance nodePackage={categoryName} />
     : <></>;

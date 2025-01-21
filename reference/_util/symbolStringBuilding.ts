@@ -166,7 +166,10 @@ export function typeInformation(type: TsTypeDef | undefined): CodePart[] {
   }
 
   if (type.kind === "literal") {
-    parts.push({ value: type.literal.kind, kind: "type" });
+    if (type.literal.kind === "string") {
+      parts.pop(); // remove last type
+      parts.push({ value: `"${type?.repr}"`, kind: "string" });
+    }
   }
 
   if (type.kind == "typeLiteral") {

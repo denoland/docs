@@ -1,4 +1,4 @@
-import { DocNode, DocNodeImport } from "@deno/doc/types";
+import { DocNodeImport } from "@deno/doc/types";
 import { LumeDocument, ReferenceContext, SymbolDoc } from "../types.ts";
 import ReferencePage from "../_layouts/ReferencePage.tsx";
 import { NameHeading } from "./partials/NameHeading.tsx";
