@@ -3,7 +3,8 @@
  * @difficulty intermediate
  * @tags cli, deploy
  * @run <url>
- * @resource {https://deno.land/x/jose} Doc: jose library for Deno
+ * @resource {https://docs.deno.com/runtime/manual/node/npm_specifiers} npm: specifiers
+ * @resource {https://www.npmjs.com/package/jose} jose library on npm
  * @group Authentication
  *
  * This example demonstrates how to create and verify a JSON Web Token (JWT)
@@ -14,11 +15,7 @@
  */
 
 // Import necessary functions and types from the `jose` library.
-import {
-  JWTPayload,
-  jwtVerify,
-  SignJWT,
-} from "https://deno.land/x/jose@v5.9.4/index.ts";
+import { JWTPayload, jwtVerify, SignJWT } from "npm:jose@5.9.6";
 
 // Define a secret key used for signing and verifying JWTs. Ensure that this secret is kept secure in a real-world application.
 const secret = new TextEncoder().encode("secret-that-no-one-knows");
