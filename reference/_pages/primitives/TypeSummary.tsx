@@ -21,7 +21,6 @@ export function TypeSummary(
     const classes = [part.kind, ...extraClasses].join(" ");
     return (
       <>
-      <div></div>
         {part.kind === "separator" && beforeEach}
         <span className={classes}>{part.value}</span>
       </>

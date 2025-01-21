@@ -18,7 +18,7 @@ export function PropertyItem(
     : null;
 
   return (
-    <div>
+    <div id={"property_" + property.name}>
       <h3>
         <PropertyBadges property={property} />
         <PropertyName property={property} />

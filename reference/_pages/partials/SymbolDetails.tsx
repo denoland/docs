@@ -158,7 +158,7 @@ function MethodSummary(
 
   return (
     <div>
-      <div>
+      <div id={"method_" + method.name}>
         <a href={link}>
           <MethodSignature method={method} />
         </a>
@@ -190,7 +190,11 @@ function Constructors({ data }: { data: ClassConstructorDef[] }) {
   return (
     <MemberSection title="Constructors">
       {data.map((constructor) => {
-        return <MethodSignature method={constructor} />;
+        return (
+          <div id={"constructor_" + constructor.name}>
+            <MethodSignature method={constructor} />
+          </div>
+        );
       })}
     </MemberSection>
   );
