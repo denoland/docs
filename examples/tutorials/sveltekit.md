@@ -5,7 +5,7 @@ version 5 releasing recently, as of time of writing, there isn't a better time
 to show off running it with Deno!
 
 Through this tutorial we will walk through setting up a SvelteKit project, made
-easier with the sv cli release and look at loading patters.
+easier with the sv cli release and look at loading patterns.
 
 You can see the finished app at
 [GitHub](https://github.com/s-petey/deno-sveltekit)
