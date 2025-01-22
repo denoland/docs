@@ -1,0 +1,748 @@
+@import "./youtube-lite.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light and dark theme variables */
+.light {
+  --background-primary: 215deg, 81%, 100%;
+  --background-secondary: 213deg, 100%, 95%;
+  --background-tertiary: 213deg, 100%, 84%;
+  --foreground-primary: 0deg, 0%, 25%;
+  --foreground-secondary: 0deg, 0%, 42%;
+  --foreground-tertiary: 0deg, 0%, 90%;
+  --foreground-quaternary: 0deg, 0%, 95%;
+  --runtime-background: 124deg, 100%, 97.1%;
+  --runtime-foreground: 184deg, 100%, 10%;
+  --primary: 217deg, 91%, 59%;
+  --primary-dark: 217deg, 91%, 49%;
+  --info: 224deg, 64.3%, 32.9%;
+  --note: 224deg, 64.3%, 32.9%;
+  --caution: 45.4deg, 93.39%, 47.45%;
+  --tip: 142deg, 76.2%, 36.3%;
+}
+.dark {
+  --background-primary: 216deg, 27.8%, 7.1%;
+  --background-secondary: 216deg, 27.7%, 12%;
+  --background-tertiary: 216deg, 27.7%, 22%;
+  --foreground-primary: 215deg, 17%, 99%;
+  --foreground-secondary: 215deg, 17%, 71%;
+  --foreground-tertiary: 215deg, 17%, 20%;
+  --foreground-quaternary: 215deg, 17%, 10%;
+  --runtime-background: 124deg, 100%, 3%;
+  --runtime-foreground: 184deg, 100%, 90%;
+  --note: 224deg, 64.3%, 82.9%;
+  --info: 224deg, 64.3%, 69%;
+  --caution: 45.4deg, 93.39%, 67.11%;
+  /* The following are not different from light mode (yet?) */
+  --primary: 217deg, 91%, 59%;
+  --primary-dark: 217deg, 91%, 49%;
+  --tip: 142deg, 76.2%, 36.3%;
+  --color-fg-default: #fff;
+
+  color: var(--foreground-primary);
+  background-color: var(--background-primary);
+
+  .ddoc .markdown-body pre {
+    border-color: hsla(var(--background-tertiary)) !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar colors that look good on light and dark theme */
+* {
+  scrollbar-color: hsla(0deg, 0%, 50%, 0.5) hsla(0deg, 0%, 50%, 0.1) !important;
+}
+
+p {
+  max-width: var(--max-text-width);
+}
+
+.dark-mode-toggle-button img {
+  @apply fill-foreground-primary;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-Regular.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-Italic.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-SemiBold.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-SemiBoldItalic.woff2") format("woff2");
+  }
+}
+
+[id] {
+  scroll-margin-top: 4rem;
+}
+
+h1 {
+  letter-spacing: -0.025em;
+}
+
+:where(h2, h3) {
+  letter-spacing: -0.0125em;
+}
+
+.markdown-body {
+  font-family: inherit;
+  color: inherit;
+  @apply bg-transparent !important;
+
+  /* Override gfm base styles */
+  p {
+    @apply mb-6;
+  }
+
+  pre {
+    @apply mb-6;
+  }
+
+  h1:first-child {
+    @apply mt-0;
+  }
+
+  h2 {
+    @apply mt-12 mb-4;
+  }
+
+  h3 {
+    @apply mt-10 mb-4;
+  }
+
+  h4 {
+    @apply mt-6 mb-4;
+  }
+
+  :where(h1, h2, h3) {
+    letter-spacing: -0.0125em;
+  }
+
+  :where(h2, h3, h4, h5, h6) {
+    .header-anchor:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .anchor-end {
+      opacity: 0;
+      transition: opacity 0.2s;
+      font-weight: normal;
+    }
+
+    &:hover .anchor-end {
+      opacity: 1;
+    }
+  }
+
+  & section :where(h2, h3, h4, h5, h6) {
+    @apply m-0 border-b-0 tracking-normal;
+  }
+
+  & details {
+    @apply rounded border border-gray-1 py-4 px-4;
+
+    &[open] summary {
+      @apply pb-4 mb-4 border-b border-gray-00;
+    }
+
+    & summary::marker {
+      @apply text-gray-2;
+    }
+  }
+
+  & pre {
+    @apply border;
+  }
+}
+
+.markdown-body.markdown-summary {
+  font-size: 0.875rem !important;
+
+  @apply inline text-stone-600;
+
+  p {
+    @apply inline-block line-clamp-4;
+  }
+
+  :not(pre) > code {
+    @apply font-mono text-sm py-0.5 px-1.5 rounded bg-stone-200;
+  }
+}
+
+pre:has(code.highlight),
+pre.highlight:has(code) {
+  @apply px-4 py-8 max-sm:-mx-4 border-x-0 sm:border sm:px-8
+    max-sm:!rounded-none;
+}
+
+pre:has(code.highlight):where(:hover, :focus) + .copyButton,
+pre.highlight:has(code):where(:hover, :focus) + .copyButton {
+  @apply opacity-100;
+}
+
+.copyButton {
+  @apply opacity-0 text-foreground-secondary transition-all duration-100
+    absolute top-2 right-2 p-1 rounded;
+
+  &:hover,
+  &:focus {
+    @apply opacity-100 bg-foreground-quaternary;
+  }
+
+  &:active {
+    transform: scale(1.2);
+  }
+}
+
+.ddoc .markdown-body tr:nth-child(2n) {
+  @apply bg-background-secondary !important;
+}
+
+.markdownBlockTitle {
+  @apply bg-slate-100 p-2 leading-none rounded border text-xs font-semibold z-10
+    relative w-max !-mb-4 text-foreground-secondary/80 sm:left-2
+    dark:border-background-tertiary dark:bg-slate-900;
+}
+
+.deno-tabs .markdownBlockTitle {
+  @apply left-2;
+}
+
+.markdown-body h2:hover .anchor-end {
+  opacity: 1;
+}
+
+@font-feature-values Inter {
+  @character-variant {
+    cv05: 5;
+    cv08: 8;
+    cv10: 10;
+  }
+  @styleset {
+    ss01: 1;
+    ss07: 7;
+    ss08: 8;
+  }
+}
+
+body {
+  font-variant-alternates: character-variant(cv05, cv08, cv10)
+    styleset(ss01, ss07, ss08);
+}
+
+/* Common styles for all CTAs */
+.docs-cta {
+  @apply border text-balance text-black font-bold inline-block py-3.5 px-4
+    rounded-full w-max hover:no-underline transition-colors duration-200;
+}
+
+/* Specific styles for runtime CTAs */
+.runtime-cta {
+  @apply bg-runtime-400 border-runtime-400 hover:bg-runtime-300;
+}
+
+/* Override for when CTA is used in markdown body */
+.markdown-body .runtime-cta,
+.markdown-body .deploy-cta {
+  @apply border-gray-4 hover:!no-underline !text-gray-4;
+}
+
+/* Specific styles for deploy CTAs */
+.deploy-cta {
+  @apply bg-deploy-500 border-deploy-500 hover:bg-deploy-400;
+}
+
+/* Specific styles for JSR CTAs */
+.jsr-cta {
+  @apply bg-jsr-yellow-400 border-jsr-cyan-950 !text-jsr-cyan-950 border-2
+    hover:!no-underline hover:bg-jsr-yellow-300;
+}
+
+.homepage-link {
+  @apply block font-normal underline underline-offset-4;
+}
+
+.learn-link {
+  @apply flex gap-2 items-center font-normal underline underline-offset-4;
+}
+
+.deploy-link {
+  @apply text-deploy-600 decoration-deploy-600/20 hover:decoration-deploy-600;
+}
+
+.runtime-link {
+  @apply dark:text-runtime dark:decoration-runtime dark:hover:text-runtime-600
+    dark:hover:decoration-runtime-600 decoration-1 text-runtime-800
+    decoration-runtime-800 hover:decoration-runtime-600 hover:text-runtime-600
+    transition-colors duration-100;
+}
+
+.help-link {
+  @apply text-purple-600 dark:text-purple-300 decoration-purple-600/20
+    dark:decoration-purple-300/20 dark:hover:decoration-purple-300
+    hover:decoration-purple-600;
+}
+
+.example-icon {
+  @apply stroke-foreground-secondary;
+}
+
+.sidebar__current-item {
+  color: var(--color-accent-fg);
+}
+
+.sidebar__current-item::before {
+  @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em]
+    bg-background-secondary dark:bg-background-tertiary;
+  clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
+}
+
+.markdown-body .admonition a {
+  @apply text-primary underline underline-offset-2;
+}
+
+.markdown-body .admonition {
+  @apply py-4 px-6 pb-2 rounded-lg border-2 bg-gray-1/5 border-gray-3;
+}
+
+.markdown-body .admonition .title {
+  @apply font-bold uppercase flex items-center;
+}
+
+.markdown-body .admonition .title::before {
+  content: "";
+  @apply inline-block size-5 mr-2;
+}
+
+.markdown-body .admonition > p {
+  @apply mb-2;
+}
+
+.markdown-body .admonition.info {
+  @apply bg-primary/5 border-info/50 text-info;
+}
+
+.markdown-body .admonition.note {
+  @apply bg-primary/5 border-note/50 text-note;
+}
+
+.markdown-body .admonition.note {
+  @apply bg-primary/5 border-note/50 text-note;
+}
+
+.markdown-body .admonition.caution {
+  @apply bg-caution/5 border-caution/50 text-caution fill-caution;
+}
+
+.markdown-body .admonition.tip {
+  @apply bg-tip/5 border-tip/50 text-tip;
+}
+
+.markdown-body .admonition.info .title::before {
+  /* circle exclamation mark */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(29 78 216)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></svg>');
+}
+
+.markdown-body .admonition.note .title::before {
+  /* circle exclamation mark */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(29 78 216)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></svg>');
+}
+
+.markdown-body .admonition.caution .title::before {
+  /* exclamation mark in a filled warning triangle */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(113 63 18)"><path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg>');
+}
+
+.markdown-body .admonition.tip .title::before {
+  /* lightbulb svg */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(22 163 74)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>');
+}
+
+.markdown-body .module-info svg {
+  @apply inline-block w-6 h-6 !important;
+}
+
+.markdown-body .module-info h2 {
+  @apply flex gap-2 items-center;
+}
+
+.markdown-body .module-info h3 {
+  @apply my-2;
+}
+
+.markdown-body .module-info .item-content {
+  @apply ml-3;
+}
+
+.markdown-body .module-info p {
+  @apply mb-1;
+}
+
+.markdown-body .module-info ul {
+  @apply pl-6;
+}
+
+.markdown-body > pre.snippet-code[data-example-position="only"] {
+  @apply md:border-t md:border-b md:pt-4 rounded-t h-full md:rounded
+    md:rounded-b;
+}
+
+.markdown-body > pre.snippet-code[data-example-position="first"] {
+  @apply md:border-t md:border-b-0 md:pt-4 rounded-t h-full md:rounded-b-none;
+}
+
+.markdown-body > pre.snippet-code[data-example-position="middle"] {
+  @apply md:border-t-0 md:border-b-0 md:pt-0 md:pb-16 h-full md:rounded-none;
+}
+
+.markdown-body > pre.snippet-code[data-example-position="last"] {
+  @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none
+    md:rounded-b;
+}
+
+.deno-tabs {
+  @apply -mx-4 mb-6 sm:mx-0;
+}
+
+.deno-tabs > ul.deno-tabs-buttons {
+  @apply flex flex-wrap list-none p-0 ml-4 sm:m-0;
+}
+
+.deno-tabs > ul.deno-tabs-buttons > li {
+  @apply m-0;
+}
+
+.deno-tabs > ul.deno-tabs-buttons > li > button {
+  @apply inline-block mr-2 px-4 py-2 text-sm font-semibold text-slate-500
+    rounded-t bg-slate-100/80 hover:bg-blue-50 border border-transparent
+    border-b-0 dark:text-slate-500 dark:bg-transparent
+    dark:border-background-tertiary dark:hover:bg-slate-600;
+}
+
+.deno-tabs > ul.deno-tabs-buttons > li > button[data-active="true"] {
+  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-0 z-10 -mb-[1px]
+    pb-[calc(0.5rem+1px)] relative dark:text-slate-50
+    dark:bg-background-secondary dark:border-background-tertiary;
+}
+
+.deno-tabs > div.deno-tabs-content > div {
+  @apply hidden p-2 sm:rounded-lg sm:rounded-tl-none sm:p-4 bg-slate-100 border
+    border-slate-200 dark:bg-background-secondary
+    dark:border-background-tertiary;
+}
+
+.deno-tabs > div.deno-tabs-content > div[data-active="true"] {
+  @apply flex flex-col gap-4;
+}
+
+.deno-tabs > div.deno-tabs-content > div > p {
+  @apply mb-0;
+}
+
+.markdown-body .deno-tabs pre {
+  @apply border mx-0 bg-white border-slate-200 dark:bg-background-primary
+    !rounded dark:border-background-tertiary;
+}
+
+/* Strips bottom margin in instances where multiple code samples exist in a tab. */
+.markdown-body .deno-tabs :not(div > pre + div > pre) {
+  @apply mb-0;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  @apply bg-slate-50 dark:border-background-tertiary
+    dark:bg-background-secondary;
+}
+
+/* Custom DDOC styles for the Deno documentation */
+.ddoc {
+  @apply pt-0 !important;
+
+  #topnav {
+    @apply bg-background-primary !important;
+    svg,
+    path {
+      @apply fill-foreground-primary !important;
+    }
+  }
+
+  #categoryPanel {
+    @apply border-r border-foreground-tertiary;
+    @apply pt-4 !important;
+
+    & li:hover {
+      @apply bg-background-primary text-primary rounded-md !important;
+      > a {
+        @apply no-underline !important;
+      }
+    }
+    .active {
+      @apply bg-background-secondary text-foreground-secondary rounded-md
+        !important;
+    }
+  }
+
+  .contextLink {
+    @apply text-primary !important;
+    /* 40% opacity of for decoration color primary */
+    text-decoration-color: rgba(9, 107, 218, 0.4) !important;
+  }
+
+  .documentNavigation {
+    > h3 {
+      @apply hidden !important;
+    }
+
+    > ul {
+      @apply border-l border-foreground-tertiary !important;
+
+      > li > a {
+        @apply text-foreground-primary hover:bg-background-secondary rounded-lg
+          hover:no-underline py-1.5 px-3.5 hover:text-primary !important;
+      }
+
+      > li > ul > li > a {
+        @apply text-foreground-secondary hover:text-primary !important;
+      }
+
+      > ul > li a {
+        @apply hover:bg-background-secondary hover:text-primary rounded-lg
+          hover:no-underline !important;
+      }
+    }
+  }
+
+  .markdown-body {
+    & pre {
+      @apply border-gray-000 !important;
+    }
+
+    /* This comes from gfm css, should be replaced with something in our color palette once we establish it. */
+    :not(pre) > code {
+      @apply bg-foreground-quaternary hover:bg-foreground-tertiary !important;
+    }
+    & a:not(.no-color) {
+      @apply text-primary !important;
+    }
+  }
+
+  .markdown-summary p {
+    @apply text-foreground-secondary;
+  }
+
+  .usageContent .markdown-body pre:has(code.highlight) {
+    @apply mb-0 px-3 py-2 text-sm;
+  }
+}
+
+@media (min-width: 640px) {
+  .ddoc .markdown-body {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+  .ddoc .markdown-body {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  .ddoc .markdown-body {
+    max-width: 75ch;
+  }
+}
+
+#toc {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+.copyButton[data-copied="true"] .copy-icon {
+  display: none;
+}
+
+.copyButton[data-copied="true"] .check-icon {
+  display: inline;
+}
+
+.btn {
+  @apply max-w-max px-4 py-2 text-sm font-semibold !text-foreground-primary
+    bg-background-primary dark:bg-background-tertiary border
+    border-foreground-secondary hover:shadow-[inset_0_0_0_1px]
+    focus:shadow-[inset_0_0_0_1px] dark:border-background-tertiary rounded-full
+    transition inline-flex gap-2 items-center cursor-pointer !no-underline;
+  & svg {
+    @apply inline-block size-4;
+  }
+}
+
+#feedback-no:focus + label,
+#feedback-yes:focus + label {
+  @apply shadow-[inset_0_0_0_1px];
+}
+
+#feedback-no:checked + label {
+  @apply bg-red-400 dark:bg-red-600;
+}
+
+#feedback-yes:checked + label {
+  @apply bg-green-400 dark:bg-green-600;
+}
+
+#feedback-form__content:has(input[type="radio"]:checked) {
+  grid-template-rows: max-content 1fr;
+
+  #feedback-more {
+    @apply flex flex-col gap-2;
+  }
+}
+
+#feedback-more label {
+  @apply inline-block text-sm;
+}
+
+.learning-list-item {
+  @apply leading-7 mb-1;
+}
+
+input[type="search"] {
+  background-image: url("/img/search.svg");
+  background-repeat: no-repeat;
+  background-size: 1em;
+  background-position-y: center;
+  background-position-x: 0.5em;
+  padding-left: 2em;
+}
+
+/* Examples styles */
+
+.hub-header {
+  border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));
+  padding-bottom: 0.3em;
+}
+
+label:has(.switch input:focus-visible) .slider {
+  outline: 2px solid var(--color-accent-fg);
+  outline-offset: 2px;
+}
+
+.switch {
+  position: relative;
+  width: 1.8rem;
+  height: 1rem;
+  display: block;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: background-color 0.2s;
+  border-radius: 1rem;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: calc(1rem - 4px);
+  width: calc(1rem - 4px);
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: transform 0.2s cubic-bezier(0.86, 0, 0.07, 1);
+  border-radius: 50%;
+}
+
+.fully-filtered {
+  @apply flex flex-col gap-2 items-center mb-4;
+}
+
+.filter:checked + .slider {
+  background-color: #2196f3;
+}
+
+.filter:checked + .slider:before {
+  transform: translateX(calc(0.8rem));
+}
+
+[data-category="tutorial"],
+[data-category="video"],
+[data-category="example"],
+.unfiltered {
+  display: none;
+}
+
+main:has(#tutorial:checked) {
+  .fully-filtered {
+    display: none;
+  }
+  .unfiltered {
+    display: block;
+  }
+  & [data-category="tutorial"] {
+    display: block;
+  }
+}
+
+main:has(#video:checked) {
+  .fully-filtered {
+    display: none;
+  }
+  .unfiltered {
+    display: block;
+  }
+  & [data-category="video"] {
+    display: block;
+  }
+}
+
+main:has(#example:checked) {
+  .fully-filtered {
+    display: none;
+  }
+  .unfiltered {
+    display: block;
+  }
+  & [data-category="example"] {
+    display: block;
+  }
+}

@@ -1,0 +1,4 @@
+status: good
+symbols:
+  writeFile: Missing `utf16le`, `latin1` and `ucs2` encoding.
+  writeFileSync: Missing `utf16le`, `latin1` and `ucs2` encoding.

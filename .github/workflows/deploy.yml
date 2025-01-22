@@ -1,0 +1,55 @@
+name: Deploy
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-22.04-xl
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+
+      - name: "Reference: install"
+        working-directory: "reference_gen"
+        run: deno install
+
+      - name: "Reference: generate types"
+        working-directory: "reference_gen"
+        run: deno task types
+
+      - name: "Reference: generate docs"
+        working-directory: "reference_gen"
+        run: deno task doc
+
+      - name: Build
+        env:
+          ORAMA_CLOUD_INDEX_ID: ${{ vars.ORAMA_CLOUD_INDEX_ID }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
+        run: deno task build
+
+      - name: Run server
+        working-directory: _site
+        run: deno run --no-lock --allow-read=. --allow-net --allow-env server.ts &
+
+      - name: Link checker
+        env:
+          DOCS_ROOT: "http://localhost:8000"
+        run: deno run --no-lock --allow-net --allow-env .github/workflows/better_link_checker.ts
+
+      - name: Upload to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: "deno-docs"
+          entrypoint: "server.ts"
+          root: "_site"

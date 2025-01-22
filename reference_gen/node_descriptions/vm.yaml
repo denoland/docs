@@ -1,0 +1,8 @@
+status: partial
+symbols:
+  measureMemory: This is a non-functional stub.
+  compile: The `importModuleDynamically` parameter is not supported.
+  createContext: The `importModuleDynamically` parameter is not supported.
+  Script: |
+    The `importModuleDynamically` parameter is not supported.
+    The `runInContext` method does not support break on `SIGINT`.
