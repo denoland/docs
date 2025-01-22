@@ -25,9 +25,7 @@ export default function* getPages(
       title: method.name,
       url:
         `${context.root}/${context.packageName.toLocaleLowerCase()}/~/${item.identifier}.prototype.${method.name}`,
-      content: (
-        <Function name={method.name} data={method} context={context} />
-      ),
+      content: <Function name={method.name} data={method} context={context} />,
     };
   }
 }
@@ -61,7 +59,6 @@ export function Class({ data, context }: Props) {
     </ReferencePage>
   );
 }
-
 
 function ImplementsSummary({ typeDef }: { typeDef: TsTypeDef[] }) {
   if (typeDef.length === 0) {
