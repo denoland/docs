@@ -1,4 +1,4 @@
-# Building a SvelteKit app with sv and Dino
+# Building a SvelteKit app with sv and Deno
 
 SvelteKit has been a stable popular vote since its launch and with Svelte
 version 5 releasing recently, as of time of writing, there isn't a better time
@@ -66,9 +66,9 @@ There are a few conventions which we will use in our SvelteKit application.
   - `+error.svelte` -- A custom error page you can add to make error pages nicer
     to come across.
 
-Additional note later you will see we put the `dino.ts` file within a
-`lib/server` directory. This will mean as stated above that this file is meant
-to **only** be accessed by other server files.
+Additional note later you will see we put the dinosaurs (aka dinos) `dino.ts`
+file within a `lib/server` directory. This will mean as stated above that this
+file is meant to **only** be accessed by other server files.
 
 ### Setup our "database"
 
@@ -251,7 +251,7 @@ Here are a few things we want to achieve:
 		<a href="https://svelte.dev/docs/kit">Sveltekit docs</a>
 	</p>
 	<p class="font-bold">
-		<a href="https://docs.deno.com/">Dino docs</a>
+		<a href="https://docs.deno.com/">Deno docs</a>
 	</p>
 </footer>
 ```
@@ -265,8 +265,8 @@ back to the home page.
 
 ### Advanced routing, search parameters, and styling
 
-We don't want to render all of the dinos at a single time; as that is too much
-to scroll through. We want our users to be able to search and click through
+We don't want to render all of the dinosaurs at a single time; as that is too
+much to scroll through. We want our users to be able to search and click through
 pages of dinosaurs, which will also showcase another awesome Svelte 5 feature,
 snippets!
 
@@ -468,4 +468,4 @@ know you have great taste and are free to make it look however you'd like!
 
 # App Showcase
 
-https://github.com/user-attachments/assets/c5926d48-1ea3-420f-9d3d-d74a5a49486a
+[Video walkthrough](https://github.com/user-attachments/assets/c5926d48-1ea3-420f-9d3d-d74a5a49486a)
