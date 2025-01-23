@@ -1,4 +1,4 @@
-import { doc, DocNode } from "@deno/doc";
+import { doc, DocNode, DocNodeNamespace, NamespaceDef } from "@deno/doc";
 import { PackageConfig } from "../types.ts";
 
 export async function* getSymbols(packages: PackageConfig[]) {
@@ -56,6 +56,23 @@ function addAutoTags(symbols: DocNode[], sourceFileName: string) {
         kind: "tags",
         tags: ["node"],
       });
+
+      if (symbol.kind === "namespace") {
+        const nsDef = symbol as DocNodeNamespace;
+        for (const child of nsDef.namespaceDef.elements) {
+          child.jsDoc = child.jsDoc || {};
+          child.jsDoc.tags = child.jsDoc.tags || [];
+          child.jsDoc.tags.push({
+            kind: "category",
+            doc: category,
+          });
+
+          child.jsDoc.tags.push({
+            kind: "tags",
+            tags: ["node"],
+          });
+        }
+      }
     }
   }
 }
