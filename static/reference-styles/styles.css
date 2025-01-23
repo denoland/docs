@@ -1252,7 +1252,7 @@
 }
 
 .anchorable a:nth-child(2) {
-  color: hsla(var(--primary)) !important
+  color: hsla(var(--primary)) !important;
 }
 
 .markdown-body span {
