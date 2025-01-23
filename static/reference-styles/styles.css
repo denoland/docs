@@ -1250,3 +1250,11 @@
 .ddoc .hover\:bg-writeonly\/5:hover {
   background-color: #7b61ff0d;
 }
+
+.anchorable a:nth-child(2) {
+  color: hsla(var(--primary)) !important
+}
+
+.markdown-body span {
+  display: contents;
+}

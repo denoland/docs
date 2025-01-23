@@ -18,8 +18,8 @@ export function MarkdownContent(
     .filter((p) => p.length > 0);
 
   const elements = paragraphs.map((paragraph, index) => (
-    <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }}>
-    </p>
+    <span key={index} dangerouslySetInnerHTML={{ __html: paragraph }}>
+    </span>
   ));
 
   return <>{elements}</>;
