@@ -19,12 +19,8 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
     throw new Error("Missing sidebar for " + props.url);
   }
 
-  function displayDate(date: string) {
-    return new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
+  function displayDate(date: Date): string {
+    return date.toISOString().slice(0, 10);
   }
 
   function walk(
@@ -163,7 +159,7 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                 </h1>
 
                 <div class="text-sm mt-0 mb-8 text-foreground-secondary">
-                  Last updated: {displayDate(props.date.toISOString())}
+                  Last updated: {displayDate(props.date)}
                 </div>
 
                 {props.available_since && (
