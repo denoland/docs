@@ -6,13 +6,12 @@ Deno Deploy deploys your code throughout the world. Each new request is served
 from the closest region to your user. Deploy is presently located in the
 following regions:
 
-- Tokyo (`asia-northeast1`)
 - Singapore (`asia-southeast1`)
 - London (`europe-west2`)
-- Netherlands (`europe-west4`)
+- Frankfurt (`europe-west3`)
 - Sao Paolo (`southamerica-east1`)
 - North Virginia (`us-east4`)
-- California (`us-west1`)
+- California (`us-west2`)
 
 We will update the list as we add more regions.
 
