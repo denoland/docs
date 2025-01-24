@@ -7,7 +7,7 @@
     "@std/media-types": "jsr:@std/media-types@^0.224.1",
     "@std/path": "jsr:@std/path@^0.225.1",
     "@std/yaml": "jsr:@std/yaml@^1.0.3",
-    "@deno/doc": "jsr:@deno/doc@0.159.0",
+    "@deno/doc": "jsr:@deno/doc@0.166.0",
     "@types/node": "npm:@types/node@22.7.2",
     "browserslist": "npm:browserslist@4.23.0",
     "dax": "jsr:@david/dax@^0.40.1",
@@ -19,9 +19,9 @@
     "types:deno": "deno run --allow-read --allow-write --allow-run --allow-env --allow-sys deno-types.ts",
     "types:node": "deno run --allow-read --allow-write=. --allow-env --allow-sys node-types.ts",
     "types": "deno task types:deno && deno task types:node",
-    "doc:deno": "mkdir -p gen/deno && deno run --allow-read --allow-write --allow-env --allow-net deno-doc.ts",
-    "doc:web": "mkdir -p gen/web && deno run --allow-read --allow-write --allow-env --allow-net web-doc.ts",
-    "doc:node": "mkdir -p gen/node && deno run --allow-read --allow-write --allow-env --allow-net node-doc.ts",
+    "doc:deno": "mkdir -p gen && deno run --allow-read --allow-write --allow-env --allow-net deno-doc.ts",
+    "doc:web": "mkdir -p gen && deno run --allow-read --allow-write --allow-env --allow-net web-doc.ts",
+    "doc:node": "mkdir -p gen && deno run --allow-read --allow-write --allow-env --allow-net node-doc.ts",
     "doc": "deno task doc:deno && deno task doc:web && deno task doc:node"
   },
   "exclude": [

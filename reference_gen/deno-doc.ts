@@ -1,9 +1,8 @@
-import { doc, generateHtml } from "@deno/doc";
+import { doc, generateHtmlAsJSON } from "@deno/doc";
 import {
   hrefResolver,
   renderMarkdown,
   stripMarkdown,
-  writeFiles,
 } from "./common.ts";
 import categoryDocs from "./deno-categories.json" with { type: "json" };
 
@@ -11,11 +10,11 @@ const url = import.meta.resolve("./types/deno.d.ts");
 
 console.log("Generating doc nodes...");
 
-const nodes = await doc(url, { includeAll: true });
+const nodes = await doc([url], { includeAll: true });
 
-console.log("Generating html files...");
+console.log("Generating json structure...");
 
-const files = await generateHtml({ [url]: nodes }, {
+const files = await generateHtmlAsJSON(nodes, {
   packageName: "Deno",
   categoryDocs,
   disableSearch: true,
@@ -30,4 +29,4 @@ const files = await generateHtml({ [url]: nodes }, {
   markdownStripper: stripMarkdown,
 });
 
-await writeFiles("./gen/deno", files);
+await Deno.writeTextFile("./gen/deno.json", JSON.stringify(files));
