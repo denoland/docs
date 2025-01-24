@@ -192,8 +192,8 @@ directories in parallel. To execute `dev` tasks from all workspace members use
 
 ```jsonc title="client/deno.json"
 {
+  "name": "@scope/client",
   "tasks": {
-    "name": "@scope/client",
     "dev": "deno run -RN build.ts"
   }
 }
@@ -201,8 +201,8 @@ directories in parallel. To execute `dev` tasks from all workspace members use
 
 ```jsonc title="server/deno.json"
 {
+  "name": "@scope/server",
   "tasks": {
-    "name": "@scope/server",
     "dev": "deno run -RN server.ts"
   }
 }
