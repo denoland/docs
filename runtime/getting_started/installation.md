@@ -30,8 +30,8 @@ Using [npm](https://npmjs.com/package/deno):
 npm install -g deno
 ```
 
-> <small>The startup time of the Deno command gets affected if it's installed via
-> npm. We recommend the shell install script for better performance.</small>
+> <small>The startup time of the Deno command gets affected if it's installed
+> via npm. We recommend the shell install script for better performance.</small>
 
 Using [Homebrew](https://formulae.brew.sh/formula/deno):
 
