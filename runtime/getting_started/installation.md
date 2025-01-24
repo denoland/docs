@@ -93,8 +93,8 @@ Using [npm](https://npmjs.com/package/deno):
 npm install -g deno
 ```
 
-> <small>The startup time of Deno command gets affected if it's installed via
-> npm. We recommend the PowerShell install script for the better
+> <small>The startup time of the Deno command gets affected if it's installed
+> via npm. We recommend the PowerShell install script for better
 > performance.</small>
 
 Using [Scoop](https://scoop.sh/):
@@ -142,8 +142,8 @@ Using [npm](https://npmjs.com/package/deno):
 npm install -g deno
 ```
 
-> <small>The startup time of Deno command gets affected if it's installed via
-> npm. We recommend the shell install script for the better performance.</small>
+> <small>The startup time of the Deno command gets affected if it's installed
+> via npm. We recommend the shell install script for better performance.</small>
 
 Using [Nix](https://nixos.org/download.html):
 
