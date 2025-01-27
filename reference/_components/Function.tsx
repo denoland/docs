@@ -19,7 +19,11 @@ export default function (
               />
             </code>
 
-            <comp.Deprecated deprecated={func.deprecated} />
+            {func.deprecated && (
+              <comp.Deprecated
+                deprecated={func.deprecated}
+              />
+            )}
             <comp.SymbolContent symbolContent={func.content} />
           </div>
           {index !== (functionCtx.functions.length - 1) && (
