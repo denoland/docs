@@ -24,6 +24,15 @@ Using Shell:
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
+Using [npm](https://npmjs.com/package/deno):
+
+```shell
+npm install -g deno
+```
+
+> <small>The startup time of the Deno command gets affected if it's installed
+> via npm. We recommend the shell install script for better performance.</small>
+
 Using [Homebrew](https://formulae.brew.sh/formula/deno):
 
 ```shell
@@ -78,6 +87,16 @@ Using PowerShell (Windows):
 irm https://deno.land/install.ps1 | iex
 ```
 
+Using [npm](https://npmjs.com/package/deno):
+
+```shell
+npm install -g deno
+```
+
+> <small>The startup time of the Deno command gets affected if it's installed
+> via npm. We recommend the PowerShell install script for better
+> performance.</small>
+
 Using [Scoop](https://scoop.sh/):
 
 ```shell
@@ -116,6 +135,15 @@ Using Shell:
 ```shell
 curl -fsSL https://deno.land/install.sh | sh
 ```
+
+Using [npm](https://npmjs.com/package/deno):
+
+```shell
+npm install -g deno
+```
+
+> <small>The startup time of the Deno command gets affected if it's installed
+> via npm. We recommend the shell install script for better performance.</small>
 
 Using [Nix](https://nixos.org/download.html):
 
