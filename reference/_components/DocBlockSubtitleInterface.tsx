@@ -10,7 +10,7 @@ export default function (
         <>
           <span dangerouslySetInnerHTML={{ __html: item }} />
           {/*typedef rendering*/}
-          {i > 1 && (<span>,{" "}</span>)}
+          {i > 1 && <span>,{" "}</span>}
         </>
       ))}
     </div>
