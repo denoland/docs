@@ -39,7 +39,7 @@ Deno supports running scripts directly from URLs. This is particularly useful
 for quickly testing or running code without downloading it first:
 
 ```shell
-deno run https://docs.deno.com/examples/hello-world.ts
+deno run https://docs.deno.com/examples/scripts/hello_world.ts
 ```
 
 You can also run a script by piping it through standard input. This is useful

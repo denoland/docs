@@ -100,5 +100,5 @@ deno uninstall --global serve
 Uninstall `serve` from a specific installation root
 
 ```bash
-deno uninstall -g --root /usr/local serve
+deno uninstall -g --root /usr/local/bin serve
 ```
