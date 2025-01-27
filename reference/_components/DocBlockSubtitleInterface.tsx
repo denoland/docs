@@ -8,9 +8,9 @@ export default function (
       <span className="type">extends</span>{" "}
       {subtitle.extends.map((item, i) => (
         <>
-          <span dangerouslySetInnerHTML={{ __html: item }} />{" "}
+          <span dangerouslySetInnerHTML={{ __html: item }} />
           {/*typedef rendering*/}
-          {i > 1 && (<span>,</span>)}
+          {i > 1 && (<span>,{" "}</span>)}
         </>
       ))}
     </div>
