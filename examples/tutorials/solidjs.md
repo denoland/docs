@@ -91,7 +91,7 @@ Within our main directory, we will set up an `api/` directory and create two
 files. First, our dinosaur data file,
 [`api/data.json`](https://github.com/denoland/examples/blob/main/with-solidjs/api/data.json):
 
-```json
+```jsonc
 // api/data.json
 
 [
