@@ -6,7 +6,7 @@
     "jsr:@david/dax@~0.40.1": "0.40.1",
     "jsr:@david/which@0.3": "0.3.0",
     "jsr:@deno/cache-dir@0.14": "0.14.0",
-    "jsr:@deno/doc@0.166.0": "0.166.0",
+    "jsr:@deno/doc@0.167.0": "0.167.0",
     "jsr:@denosaurs/plug@1.0.3": "1.0.3",
     "jsr:@std/assert@0.221": "0.221.0",
     "jsr:@std/assert@0.226": "0.226.0",
@@ -82,8 +82,8 @@
         "jsr:@std/path@^1.0.8"
       ]
     },
-    "@deno/doc@0.166.0": {
-      "integrity": "ad946964be6a6a718be8437deb0370fd33ae09301536ebb5d0de937e6e5d6299",
+    "@deno/doc@0.167.0": {
+      "integrity": "0dc4b3cfd3af250546e6efea6d2a39a18dde64e169b38dc515d3bd0cf70be68a",
       "dependencies": [
         "jsr:@deno/cache-dir"
       ]
@@ -349,7 +349,7 @@
     "dependencies": [
       "jsr:@b-fuze/deno-dom@~0.1.47",
       "jsr:@david/dax@~0.40.1",
-      "jsr:@deno/doc@0.166.0",
+      "jsr:@deno/doc@0.167.0",
       "jsr:@std/async@~0.224.2",
       "jsr:@std/fs@^1.0.1",
       "jsr:@std/media-types@~0.224.1",

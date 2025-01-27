@@ -53,26 +53,28 @@ export default function (
   }
 
   return (
-    <section className="section" id={section.header.anchor.id}>
-      <div>
-        <h2 className="anchorable mb-1">
-          <comp.Anchor anchor={section.header.anchor} />
-          {section.header.href
-            ? (
-              <a href={section.header.href} className="contextLink">
-                {section.header.title}
-              </a>
-            )
-            : (
-              section.header.title
-            )}
-        </h2>
+    <section className="section" id={section.header?.anchor.id}>
+      {section.header && (
+        <div>
+          <h2 className="anchorable mb-1">
+            <comp.Anchor anchor={section.header.anchor} />
+            {section.header.href
+              ? (
+                <a href={section.header.href} className="contextLink">
+                  {section.header.title}
+                </a>
+              )
+              : (
+                section.header.title
+              )}
+          </h2>
 
-        {/*markdown rendering*/}
-        {section.header.doc && (
-          <span dangerouslySetInnerHTML={{ __html: section.header.doc }} />
-        )}
-      </div>
+          {/*markdown rendering*/}
+          {section.header.doc && (
+            <span dangerouslySetInnerHTML={{ __html: section.header.doc }} />
+          )}
+        </div>
+      )}
 
       {content}
     </section>
