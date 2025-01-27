@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Warns the usage of the deprecated - Deno APIs
+Warns the usage of the deprecated - Deno APIs.
 
 The following APIs will be removed from the `Deno.*` namespace but have newer
 APIs to migrate to. See the

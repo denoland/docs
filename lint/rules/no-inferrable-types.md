@@ -2,7 +2,7 @@
 tags: []
 ---
 
-Disallows easily inferrable types
+Disallows easily inferrable types.
 
 Variable initializations to JavaScript primitives (and `null`) are obvious in
 their type. Specifying their type can add additional verbosity to the code. For

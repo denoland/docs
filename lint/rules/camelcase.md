@@ -2,7 +2,7 @@
 tags: []
 ---
 
-Enforces the use of camelCase in variable names
+Enforces the use of camelCase in variable names.
 
 Consistency in a code base is key for readability and maintainability. This rule
 enforces variable declarations and object property names which you create to be

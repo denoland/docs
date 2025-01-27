@@ -3,7 +3,7 @@ tags: []
 ---
 
 Disallow certain triple slash directives in favor of ES6-style import
-declarations
+declarations.
 
 TypeScript's `///` triple-slash references are a way to indicate that types from
 another module are available in a file. Use of triple-slash reference type

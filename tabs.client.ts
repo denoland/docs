@@ -1,3 +1,40 @@
+const tabGroups = document.querySelectorAll("deno-tabs");
+
+for (const tabGroup of tabGroups) {
+  const newGroup = document.createElement("div");
+  newGroup.classList.add("deno-tabs");
+  newGroup.dataset.id = tabGroup.getAttribute("group-id")!;
+
+  const buttons = document.createElement("ul");
+  buttons.classList.add("deno-tabs-buttons");
+  newGroup.appendChild(buttons);
+
+  const tabs = document.createElement("div");
+  tabs.classList.add("deno-tabs-content");
+  newGroup.appendChild(tabs);
+
+  for (const tab of tabGroup.children) {
+    if (tab.tagName === "DENO-TAB") {
+      const selected = tab.getAttribute("default") !== null;
+      const buttonContainer = document.createElement("li");
+      buttons.appendChild(buttonContainer);
+
+      const button = document.createElement("button");
+      button.textContent = tab.getAttribute("label")!;
+      button.dataset.tab = tab.getAttribute("value")!;
+      button.dataset.active = String(selected);
+      buttonContainer.appendChild(button);
+
+      const content = document.createElement("div");
+      content.innerHTML = tab.innerHTML;
+      content.dataset.tab = tab.getAttribute("value")!;
+      content.dataset.active = String(selected);
+      tabs.appendChild(content);
+    }
+  }
+  tabGroup.replaceWith(newGroup);
+}
+
 class GroupSelectEvent extends Event {
   groupId: string;
   tabId: string;

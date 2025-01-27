@@ -2,7 +2,7 @@
 tags: [fresh]
 ---
 
-Checks correct naming for named fresh middleware export
+Checks correct naming for named fresh middleware export.
 
 Files inside the `routes/` folder can export middlewares that run before any
 rendering happens. They are expected to be available as a named export called

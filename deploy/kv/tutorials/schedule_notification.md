@@ -8,7 +8,7 @@ A common use case for [queues](../manual/queue_overview.md) is scheduling work
 to be completed at some point in the future. To help demonstrate how this works,
 we've provided a sample application (described below) that schedules
 notification messages sent through the [Courier API](https://www.courier.com/).
-The application runs on [Deno Deploy](https://www.deno.com/deploy), using the
+The application runs on [Deno Deploy](https://deno.com/deploy), using the
 built-in KV and queue API implementations available there with zero
 configuration.
 

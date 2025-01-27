@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows unnecessary non-null assertions
+Disallows unnecessary non-null assertions.
 
 Non-null assertions are specified with an `!` saying to the compiler that you
 know this value is not null. Specifying this operator more than once in a row,

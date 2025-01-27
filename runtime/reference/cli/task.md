@@ -109,9 +109,9 @@ Task serve deno run -RN server.ts
 Listening on http://localhost:8000/
 ```
 
-Dependency tasks are in parallel, with the default parallel limit being equal to
-number of cores on your machine. To change this limit use `DENO_JOBS`
-environmental variable.
+Dependency tasks are executed in parallel, with the default parallel limit being
+equal to number of cores on your machine. To change this limit, use the
+`DENO_JOBS` environmental variable.
 
 Dependencies are tracked and if multiple tasks depend on the same task, that
 task will only be run once:
@@ -192,6 +192,7 @@ directories in parallel. To execute `dev` tasks from all workspace members use
 
 ```jsonc title="client/deno.json"
 {
+  "name": "@scope/client",
   "tasks": {
     "dev": "deno run -RN build.ts"
   }
@@ -200,6 +201,7 @@ directories in parallel. To execute `dev` tasks from all workspace members use
 
 ```jsonc title="server/deno.json"
 {
+  "name": "@scope/server",
   "tasks": {
     "dev": "deno run -RN server.ts"
   }
@@ -218,11 +220,14 @@ Project bundled
 Tasks to run can be filtered based on the workspace members:
 
 ```bash
-$ deno task --filter "client/*" dev
+$ deno task --filter "client" dev
 Task dev deno run -RN build.ts
 Bundling project...
 Project bundled
 ```
+
+Note that the filter matches against the workspace member names as specified in
+the `name` field of each member's `deno.json` file.
 
 ## Syntax
 

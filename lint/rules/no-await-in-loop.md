@@ -2,7 +2,7 @@
 tags: []
 ---
 
-Requires `await` is not used in a for loop body
+Requires `await` is not used in a for loop body.
 
 Async and await are used in Javascript to provide parallel execution. If each
 element in the for loop is waited upon using `await`, then this negates the

@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows use of the `any` type
+Disallows use of the `any` type.
 
 Use of the `any` type disables the type check system around that variable,
 defeating the purpose of Typescript which is to provide type safe code.

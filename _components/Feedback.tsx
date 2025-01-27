@@ -8,7 +8,7 @@ export default function Feedback({ file }) {
         id="feedback-section"
         class="flex flex-col mt-12 gap-2 p-4 border border-blue-100
       dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary
-      rounded max-w-[66ch] mx-auto"
+      rounded mx-auto"
       >
         <h2 class="text-xl border-b border-blue-100 dark:border-background-tertiary
         mb-2 pb-2 font-normal">

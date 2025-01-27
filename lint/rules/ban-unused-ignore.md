@@ -2,10 +2,10 @@
 tags: [recommended]
 ---
 
-Warns unused ignore directives
+Warns unused ignore directives.
 
 We sometimes have to suppress and ignore lint errors for some reasons and we can
-do so using [ignore directives](https://lint.deno.land/ignoring-rules).
+do so using [ignore directives](/go/lint-ignore/).
 
 In some cases, however, like after refactoring, we may end up having ignore
 directives that are no longer necessary. Such superfluous ignore directives are
