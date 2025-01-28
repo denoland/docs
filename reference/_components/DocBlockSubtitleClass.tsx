@@ -7,12 +7,12 @@ export default function (
     <>
       {subtitle.implements && (
         <div>
-          <span className="type">implements</span>
+          <span className="type">implements</span>{" "}
           {subtitle.implements.map((impl, i) => (
             <>
               {/*typedef rendering*/}
               <span dangerouslySetInnerHTML={{ __html: impl }} />
-              {i !== (subtitle.implements.length - 1) && <span>,</span>}
+              {i !== (subtitle.implements.length - 1) && <span>,{" "}</span>}
             </>
           ))}
         </div>
