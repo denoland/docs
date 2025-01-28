@@ -269,6 +269,9 @@ the best experience.**
 Deno provides mechanisms to override dependencies, enabling developers to use
 custom or local versions of libraries during development or testing.
 
+Note: If you need to cache and modify dependencies locally for use across
+builds, consider [vendoring remote modules](#vendoring-remote-modules).
+
 ### Overriding local JSR packages
 
 For developers familiar with `npm link` in Node.js, Deno provides a similar
@@ -374,6 +377,9 @@ deno run main.ts
 
 After vendoring, you can run `main.ts` without internet access by using the
 `--cached-only` flag, which forces Deno to use only locally available modules.
+
+For more advanced overrides, such as substituting dependencies during
+development, see [Overriding dependencies](#overriding-dependencies).
 
 ## Publishing modules
 
