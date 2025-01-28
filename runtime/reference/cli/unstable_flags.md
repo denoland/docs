@@ -126,6 +126,20 @@ in a project with a _package.json_ and the closest _package.json_ has
 
 Requires Deno >= 2.1.2
 
+## `--unstable-node-globals`
+
+This flags injects Node specific globals into the global scope. The injected
+globals are:
+
+- `Buffer`
+- `global`
+- `setImmediate`
+- `clearTimeout`
+
+Note, that `process` is already available as a global startin with Deno 2.0.
+
+Requires Deno >= 2.1.0
+
 ## `--unstable-sloppy-imports`
 
 **Environment variable:** `DENO_UNSTABLE_SLOPPY_IMPORTS`
