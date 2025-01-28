@@ -134,7 +134,7 @@ globals are:
 - `Buffer`
 - `global`
 - `setImmediate`
-- `clearTimeout`
+- `clearImmediate`
 
 Note, that `process` is already available as a global startin with Deno 2.0.
 
