@@ -297,18 +297,9 @@ Key points:
 - Currently, `patch` works only with JSR packages. Attempting to patch `npm`
   packages issues a warning and has no effect.
 
-Use cases and workflows:
-
-1. **Local development workflows**: Share domain models or utility libraries
-   between client and server projects by linking local directories, similar to
-   `npm link`.
-2. **Patching dependencies**: Test and modify dependencies locally without
-   publishing them.
-3. **Replacing remote dependencies**: Redirect HTTPS imports to local paths for
-   debugging or testing.
-
 Limitations:
 
+- The patch feature is still unstable and subject to change.
 - Overriding `npm` packages is not yet supported. This functionality is planned
   for future updates.
 - Git-based dependency overrides are not currently available.
