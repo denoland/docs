@@ -10,9 +10,9 @@ import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 export const server = new Server({ root: "." });
 
 server.use(redirectsMiddleware);
+server.use(createGAMiddleware(server));
 server.use(NotFoundMiddleware({ root: ".", page404: "./404" }));
 server.use(createRoutingMiddleware());
-server.use(createGAMiddleware(server));
 server.use(apiDocumentContentTypeMiddleware);
 
 server.start();
