@@ -123,39 +123,6 @@ export default function Header({
           </div>
         </div>
       </nav>
-
-      {reference &&
-        (
-          <nav className="px-4 md:px-6 py-3 text-sm bg-background-primary flex items-center justify-between border-box border-t border-foreground-tertiary z-[1000]">
-            <ul className="flex">
-              <li>
-                <HeaderItem
-                  url={url}
-                  activeOn="/api/deno"
-                  href="/api/deno"
-                  name="Deno APIs"
-                  firstItem={true}
-                />
-              </li>
-              <li>
-                <HeaderItem
-                  url={url}
-                  activeOn="/api/web"
-                  href="/api/web"
-                  name="Web APIs"
-                />
-              </li>
-              <li>
-                <HeaderItem
-                  url={url}
-                  activeOn="/api/node"
-                  href="/api/node"
-                  name="Node APIs"
-                />
-              </li>
-            </ul>
-          </nav>
-        )}
     </header>
   );
 }
