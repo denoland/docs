@@ -267,9 +267,9 @@ the best experience.**
 ## Overriding dependencies
 
 Deno provides mechanisms to override dependencies, enabling developers to use
-custom or local versions of libraries during development. This feature supports
-both HTTPS imports and local packages, allowing for flexible workflows that
-cater to common use cases like patching or testing libraries.
+custom or local versions of libraries during development and in production. This
+feature supports both HTTPS imports and local packages, allowing for flexible
+workflows that cater to common use cases like patching or testing libraries.
 
 ### Overriding local packages
 
