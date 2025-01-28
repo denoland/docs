@@ -19,6 +19,10 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
     throw new Error("Missing sidebar for " + props.url);
   }
 
+  function displayDate(date: Date): string {
+    return date.toISOString().slice(0, 10);
+  }
+
   function walk(
     sidebarItems: SidebarItem[],
   ): [SidebarItem[], number] | undefined {
@@ -153,6 +157,11 @@ export default function Page(props: Lume.Data, helpers: Lume.Helpers) {
                   }}
                 >
                 </h1>
+
+                <div class="text-sm mt-0 mb-8 text-foreground-secondary">
+                  Last updated: {displayDate(props.date)}
+                </div>
+
                 {props.available_since && (
                   <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">
                     Available since {props.available_since}
