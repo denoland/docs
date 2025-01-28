@@ -52,7 +52,7 @@ type-checking the code block.
 ````
 
 If this example was in a file named foo.ts, running `deno test --doc foo.ts`
-will extract this example, and then both type-check and evaluate it as a 
+will extract this example, and then both type-check and evaluate it as a
 standalone module living in the same directory as the module being documented.
 
 To document your exports, import the module using a relative path specifier:
