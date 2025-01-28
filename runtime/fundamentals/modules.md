@@ -267,16 +267,16 @@ the best experience.**
 ## Overriding dependencies
 
 Deno provides mechanisms to override dependencies, enabling developers to use
-custom or local versions of libraries during development and in production. This
-feature supports both HTTPS imports and local packages, allowing for flexible
-workflows that cater to common use cases like patching or testing libraries.
+custom or local versions of libraries during development or testing. These
+features support both HTTPS imports and local packages, allowing for flexible
+workflows like patching, debugging, or testing libraries.
 
 ### Overriding local packages
 
-For developers familiar with `npm link` in Node.js, Deno offers a similar
-feature for local JSR packages via the `patch` field in `deno.json`. This allows
-you to override dependencies with local versions during development without
-publishing them.
+For developers familiar with `npm link` in Node.js, Deno provides a similar
+feature for local JSR packages through the `patch` field in `deno.json`. This
+allows you to override dependencies with local versions during development
+without needing to publish them.
 
 Example:
 
@@ -290,31 +290,31 @@ Example:
 
 Key points:
 
-- The `patch` field accepts directories pointing to JSR packages or workspaces.
-  Referencing a single package in a workspace includes the entire workspace.
-- This feature is respected only in the workspace root. Using it elsewhere
-  triggers warnings.
-- Currently, `patch` works only with JSR packages. Attempting to patch `npm`
-  packages issues a warning and has no effect.
+- The `patch` field accepts paths to directories containing JSR packages or
+  workspaces. If you reference a single package within a workspace, the entire
+  workspace will be included.
+- This feature is only respected in the workspace root. Using `patch` elsewhere
+  will trigger warnings.
+- Currently, `patch` is limited to JSR packages. Attempting to patch `npm`
+  packages will result in a warning with no effect.
 
 Limitations:
 
-- The patch feature is still unstable and subject to change.
-- Overriding `npm` packages is not yet supported. This functionality is planned
-  for future updates.
-- Git-based dependency overrides are not currently available.
-- Both `patch` and `scopes` require proper configuration in the workspace root
-  to function correctly.
+- `npm` package overrides are not supported yet. This is planned for future
+  updates.
+- Git-based dependency overrides are unavailable.
+- The `patch` field requires proper configuration in the workspace root.
+- This feature is experimental and may change based on user feedback.
 
-These features allow developers to tailor their workflows and use local
-libraries more flexibly, addressing gaps like those highlighted by users
-transitioning from Node.js.
+These capabilities help developers replicate workflows from Node.js, such as
+linking local libraries, and address common use cases like sharing domain models
+between projects during development.
 
 ### Overriding HTTPS imports
 
-You can override specific HTTPS imports by defining scopes in the `importMap`
-field of your `deno.json` file. This is useful when you want to substitute a
-remote dependency with a local patched version for development or testing.
+Deno also allows overriding HTTPS imports through the `importMap` field in
+`deno.json`. This feature is particularly useful when substituting a remote
+dependency with a local patched version for debugging or temporary fixes.
 
 Example:
 
@@ -333,10 +333,11 @@ Example:
 
 Key points:
 
-- The `scopes` field lets you redirect specific imports to alternative paths.
-- This feature is typically used for overriding HTTPS imports with local files
-  for debugging or testing purposes.
-- Import maps apply only to the root of your project; nested import maps in
+- The `scopes` field in the import map allows you to redirect specific imports
+  to alternative paths.
+- This is commonly used to override remote dependencies with local files for
+  testing or development purposes.
+- Import maps apply only to the root of your project. Nested import maps within
   dependencies are ignored.
 
 ## Publishing modules
