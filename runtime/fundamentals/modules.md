@@ -368,6 +368,44 @@ deno run main.ts
 After vendoring, you can run `main.ts` without internet access by using the
 `--cached-only` flag, which forces Deno to use only locally available modules.
 
+You should add the new section **"Overriding packages with local versions"**
+after the **"Vendoring remote modules"** section in `modules.md`. Here's the
+content for the section:
+
+## Overriding dependencies with local versions
+
+Deno supports an experimental feature to override dependencies by specifying
+local directories, similar to the `patch` feature in Cargo. This feature is
+currently limited to JSR packages and workspaces.
+
+To use this functionality, add a `patch` field to your `deno.json` file:
+
+```json
+{
+  "patch": [
+    "../some-package-or-workspace"
+  ]
+}
+```
+
+Key details:
+
+- The `patch` field accepts an array of paths to directories. These directories
+  can reference a single JSR package or an entire workspace. If a single package
+  is found within a workspace, the entire workspace will be used.
+- The `patch` field is only respected in the workspace root. Using it outside
+  the root will result in warnings.
+- Currently, attempting to reference an `npm` package with `patch` will issue a
+  warning and have no effect. Support for `npm` packages is planned but not yet
+  implemented.
+- This feature is unstable and subject to change based on user feedback.
+
+This functionality is particularly useful during development when you need to
+test or modify local versions of dependencies without publishing them.
+
+For more details, refer to the related Cargo documentation:
+[Overriding Dependencies in Cargo](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html).
+
 ## Integrity Checking and Lock Files
 
 Imagine your module relies on a remote module located at https://some.url/a.ts.
