@@ -342,6 +342,39 @@ Key points:
 - Import maps apply only to the root of your project. Nested import maps within
   dependencies are ignored.
 
+## Vendoring remote modules
+
+If your project has external dependencies, you may want to store them locally to
+avoid downloading them from the internet every time you build your project. This
+is especially useful when building your project on a CI server or in a Docker
+container, or patching or otherwise modifying the remote dependencies.
+
+Deno offers this functionality through a setting in your `deno.json` file:
+
+```json
+{
+  "vendor": true
+}
+```
+
+Add the above snippet to your `deno.json` file and Deno will cache all
+dependencies locally in a `vendor` directory when the project is run, or you can
+optionally run the `deno install --entrypoint` command to cache the dependencies
+immediately:
+
+```bash
+deno install --entrypoint main.ts
+```
+
+You can then run the application as usual with `deno run`:
+
+```bash
+deno run main.ts
+```
+
+After vendoring, you can run `main.ts` without internet access by using the
+`--cached-only` flag, which forces Deno to use only locally available modules.
+
 ## Publishing modules
 
 Any Deno program that defines an export can be published as a module. This
@@ -382,39 +415,6 @@ deno run --cached-only mod.ts
 
 This will fail if there are any dependencies in the dependency tree for mod.ts
 which are not yet cached.
-
-## Vendoring remote modules
-
-If your project has external dependencies, you may want to store them locally to
-avoid downloading them from the internet every time you build your project. This
-is especially useful when building your project on a CI server or in a Docker
-container, or patching or otherwise modifying the remote dependencies.
-
-Deno offers this functionality through a setting in your `deno.json` file:
-
-```json
-{
-  "vendor": true
-}
-```
-
-Add the above snippet to your `deno.json` file and Deno will cache all
-dependencies locally in a `vendor` directory when the project is run, or you can
-optionally run the `deno install --entrypoint` command to cache the dependencies
-immediately:
-
-```bash
-deno install --entrypoint main.ts
-```
-
-You can then run the application as usual with `deno run`:
-
-```bash
-deno run main.ts
-```
-
-After vendoring, you can run `main.ts` without internet access by using the
-`--cached-only` flag, which forces Deno to use only locally available modules.
 
 ## Integrity Checking and Lock Files
 
