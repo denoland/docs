@@ -5,12 +5,12 @@ export default function (
 ) {
   return (
     <div>
-      <span className="type">extends</span>
+      <span className="type">extends</span>{" "}
       {subtitle.extends.map((item, i) => (
         <>
-          <span dangerouslySetInnerHTML={{ __html: item }} />{" "}
+          <span dangerouslySetInnerHTML={{ __html: item }} />
           {/*typedef rendering*/}
-          {i !== (subtitle.length - 1) && <span>,</span>}
+          {i > 1 && <span>,{" "}</span>}
         </>
       ))}
     </div>
