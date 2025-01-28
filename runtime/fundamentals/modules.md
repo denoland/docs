@@ -267,11 +267,9 @@ the best experience.**
 ## Overriding dependencies
 
 Deno provides mechanisms to override dependencies, enabling developers to use
-custom or local versions of libraries during development or testing. These
-features support both HTTPS imports and local packages, allowing for flexible
-workflows like patching, debugging, or testing libraries.
+custom or local versions of libraries during development or testing.
 
-### Overriding local packages
+### Overriding local JSR packages
 
 For developers familiar with `npm link` in Node.js, Deno provides a similar
 feature for local JSR packages through the `patch` field in `deno.json`. This
@@ -309,6 +307,14 @@ Limitations:
 These capabilities help developers replicate workflows from Node.js, such as
 linking local libraries, and address common use cases like sharing domain models
 between projects during development.
+
+### Overriding NPM packages
+
+We plan to support NPM packages with the patch functionality described above,
+but until then if you have a `node_modules` directory, `npm link` can be used
+without change to accheive the same effect. This is typically done with
+`{ "nodeModulesDir": "manual" }` set in the `deno.json` file. See also the
+documentation on [`node_modules`](/runtime/fundamentals/node/#node_modules)
 
 ### Overriding HTTPS imports
 
