@@ -20,8 +20,7 @@ export default function (
 
       {subtitle.extends && (
         <div>
-          <span class="type">extends</span>
-          {subtitle.extends.href
+          <span class="type">extends</span> {subtitle.extends.href
             ? (
               <a class="link" href={subtitle.extends.href}>
                 {subtitle.extends.symbol}
