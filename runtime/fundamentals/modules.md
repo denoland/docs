@@ -304,10 +304,6 @@ Limitations:
 - The `patch` field requires proper configuration in the workspace root.
 - This feature is experimental and may change based on user feedback.
 
-These capabilities help developers replicate workflows from Node.js, such as
-linking local libraries, and address common use cases like sharing domain models
-between projects during development.
-
 ### Overriding NPM packages
 
 We plan to support NPM packages with the patch functionality described above,
