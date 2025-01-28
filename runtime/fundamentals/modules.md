@@ -264,17 +264,22 @@ the best experience.**
 
 :::
 
+## Overriding dependencies
+
+Deno provides mechanisms to override dependencies, enabling developers to use
+custom or local versions of libraries during development. This feature supports
+both HTTPS imports and local packages, allowing for flexible workflows that
+cater to common use cases like patching or testing libraries.
+
 ### Overriding HTTPS imports
 
-The other situation where import maps can be very useful is to override HTTPS
-imports in specific modules.
+You can override specific HTTPS imports by defining scopes in the `importMap`
+field of your `deno.json` file. This is useful when you want to substitute a
+remote dependency with a local patched version for development or testing.
 
-Let's say you want to override a `https://deno.land/x/my-library@1.0.0/mod.ts`
-specifier that is used inside files coming from `https://deno.land/x/example/`
-to a local patched version. You can do this by using a scope in the import map
-that looks something like this:
+Example:
 
-```json
+```json title="deno.json"
 {
   "imports": {
     "example/": "https://deno.land/x/example/"
@@ -287,12 +292,61 @@ that looks something like this:
 }
 ```
 
-:::note
+Key points:
 
-HTTPS imports have no notion of packages. Only the import map at the root of
-your project is used. Import maps used inside URL dependencies are ignored.
+- The `scopes` field lets you redirect specific imports to alternative paths.
+- This feature is typically used for overriding HTTPS imports with local files
+  for debugging or testing purposes.
+- Import maps apply only to the root of your project; nested import maps in
+  dependencies are ignored.
 
-:::
+### Overriding local packages (alternative to `npm link`)
+
+For developers familiar with `npm link` in Node.js, Deno offers a similar
+feature for local JSR packages via the `patch` field in `deno.json`. This allows
+you to override dependencies with local versions during development without
+publishing them.
+
+Example:
+
+```json title="deno.json"
+{
+  "patch": [
+    "../some-package-or-workspace"
+  ]
+}
+```
+
+Key points:
+
+- The `patch` field accepts directories pointing to JSR packages or workspaces.
+  Referencing a single package in a workspace includes the entire workspace.
+- This feature is respected only in the workspace root. Using it elsewhere
+  triggers warnings.
+- Currently, `patch` works only with JSR packages. Attempting to patch `npm`
+  packages issues a warning and has no effect.
+
+### Use cases and workflows
+
+1. **Local development workflows**: Share domain models or utility libraries
+   between client and server projects by linking local directories, similar to
+   `npm link`.
+2. **Patching dependencies**: Test and modify dependencies locally without
+   publishing them.
+3. **Replacing remote dependencies**: Redirect HTTPS imports to local paths for
+   debugging or testing.
+
+### Limitations
+
+- Overriding `npm` packages is not yet supported. This functionality is planned
+  for future updates.
+- Git-based dependency overrides are not currently available.
+- Both `patch` and `scopes` require proper configuration in the workspace root
+  to function correctly.
+
+These features allow developers to tailor their workflows and use local
+libraries more flexibly, addressing gaps like those highlighted by users
+transitioning from Node.js.
 
 ## Publishing modules
 
