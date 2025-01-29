@@ -30,7 +30,7 @@ const process = command.spawn();
 // We can now pipe the input into stdin. To do this we must first get
 // a writer from the stream and write to it
 const writer = process.stdin.getWriter();
-writer.write(new TextEncoder().encode("console.log('hello')"));
+await writer.write(new TextEncoder().encode("console.log('hello')"));
 writer.releaseLock();
 
 // We must then close stdin

@@ -3,15 +3,7 @@ title: "Documentation Tests"
 oldUrl: /runtime/manual/testing/documentation/
 ---
 
-Deno supports _type-checking_ your documentation examples.
-
-:::info
-
-No runtime behavior is tested for code snippets in documentation as of now.
-Tracking issue:
-[denoland/deno#4716](https://github.com/denoland/deno/issues/4716)
-
-:::
+Deno supports both type-checking evaluating your documentation examples.
 
 This makes sure that examples within your documentation are up to date and
 working.
@@ -60,8 +52,8 @@ type-checking the code block.
 ````
 
 If this example was in a file named foo.ts, running `deno test --doc foo.ts`
-will extract this example, and then type-check it as a standalone module living
-in the same directory as the module being documented.
+will extract this example, and then both type-check and evaluate it as a
+standalone module living in the same directory as the module being documented.
 
 To document your exports, import the module using a relative path specifier:
 

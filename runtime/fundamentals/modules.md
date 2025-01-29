@@ -264,17 +264,66 @@ the best experience.**
 
 :::
 
+## Overriding dependencies
+
+Deno provides mechanisms to override dependencies, enabling developers to use
+custom or local versions of libraries during development or testing.
+
+Note: If you need to cache and modify dependencies locally for use across
+builds, consider [vendoring remote modules](#vendoring-remote-modules).
+
+### Overriding local JSR packages
+
+For developers familiar with `npm link` in Node.js, Deno provides a similar
+feature for local JSR packages through the `patch` field in `deno.json`. This
+allows you to override dependencies with local versions during development
+without needing to publish them.
+
+Example:
+
+```json title="deno.json"
+{
+  "patch": [
+    "../some-package-or-workspace"
+  ]
+}
+```
+
+Key points:
+
+- The `patch` field accepts paths to directories containing JSR packages or
+  workspaces. If you reference a single package within a workspace, the entire
+  workspace will be included.
+- This feature is only respected in the workspace root. Using `patch` elsewhere
+  will trigger warnings.
+- Currently, `patch` is limited to JSR packages. Attempting to patch `npm`
+  packages will result in a warning with no effect.
+
+Limitations:
+
+- `npm` package overrides are not supported yet. This is planned for future
+  updates.
+- Git-based dependency overrides are unavailable.
+- The `patch` field requires proper configuration in the workspace root.
+- This feature is experimental and may change based on user feedback.
+
+### Overriding NPM packages
+
+We plan to support NPM packages with the patch functionality described above,
+but until then if you have a `node_modules` directory, `npm link` can be used
+without change to accheive the same effect. This is typically done with
+`{ "nodeModulesDir": "manual" }` set in the `deno.json` file. See also the
+documentation on [`node_modules`](/runtime/fundamentals/node/#node_modules)
+
 ### Overriding HTTPS imports
 
-The other situation where import maps can be very useful is to override HTTPS
-imports in specific modules.
+Deno also allows overriding HTTPS imports through the `importMap` field in
+`deno.json`. This feature is particularly useful when substituting a remote
+dependency with a local patched version for debugging or temporary fixes.
 
-Let's say you want to override a `https://deno.land/x/my-library@1.0.0/mod.ts`
-specifier that is used inside files coming from `https://deno.land/x/example/`
-to a local patched version. You can do this by using a scope in the import map
-that looks something like this:
+Example:
 
-```json
+```json title="deno.json"
 {
   "imports": {
     "example/": "https://deno.land/x/example/"
@@ -287,12 +336,50 @@ that looks something like this:
 }
 ```
 
-:::note
+Key points:
 
-HTTPS imports have no notion of packages. Only the import map at the root of
-your project is used. Import maps used inside URL dependencies are ignored.
+- The `scopes` field in the import map allows you to redirect specific imports
+  to alternative paths.
+- This is commonly used to override remote dependencies with local files for
+  testing or development purposes.
+- Import maps apply only to the root of your project. Nested import maps within
+  dependencies are ignored.
 
-:::
+## Vendoring remote modules
+
+If your project has external dependencies, you may want to store them locally to
+avoid downloading them from the internet every time you build your project. This
+is especially useful when building your project on a CI server or in a Docker
+container, or patching or otherwise modifying the remote dependencies.
+
+Deno offers this functionality through a setting in your `deno.json` file:
+
+```json
+{
+  "vendor": true
+}
+```
+
+Add the above snippet to your `deno.json` file and Deno will cache all
+dependencies locally in a `vendor` directory when the project is run, or you can
+optionally run the `deno install --entrypoint` command to cache the dependencies
+immediately:
+
+```bash
+deno install --entrypoint main.ts
+```
+
+You can then run the application as usual with `deno run`:
+
+```bash
+deno run main.ts
+```
+
+After vendoring, you can run `main.ts` without internet access by using the
+`--cached-only` flag, which forces Deno to use only locally available modules.
+
+For more advanced overrides, such as substituting dependencies during
+development, see [Overriding dependencies](#overriding-dependencies).
 
 ## Publishing modules
 
@@ -334,39 +421,6 @@ deno run --cached-only mod.ts
 
 This will fail if there are any dependencies in the dependency tree for mod.ts
 which are not yet cached.
-
-## Vendoring remote modules
-
-If your project has external dependencies, you may want to store them locally to
-avoid downloading them from the internet every time you build your project. This
-is especially useful when building your project on a CI server or in a Docker
-container, or patching or otherwise modifying the remote dependencies.
-
-Deno offers this functionality through a setting in your `deno.json` file:
-
-```json
-{
-  "vendor": true
-}
-```
-
-Add the above snippet to your `deno.json` file and Deno will cache all
-dependencies locally in a `vendor` directory when the project is run, or you can
-optionally run the `deno install --entrypoint` command to cache the dependencies
-immediately:
-
-```bash
-deno install --entrypoint main.ts
-```
-
-You can then run the application as usual with `deno run`:
-
-```bash
-deno run main.ts
-```
-
-After vendoring, you can run `main.ts` without internet access by using the
-`--cached-only` flag, which forces Deno to use only locally available modules.
 
 ## Integrity Checking and Lock Files
 

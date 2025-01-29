@@ -270,6 +270,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        label: "Build a SolidJS app",
+        id: "/examples/solidjs_tutorial",
+        type: "tutorial",
+      },
+      {
         label: "Build a React app",
         id: "/examples/react_app_video",
         externalURL: "https://www.youtube.com/watch?v=eStwt_2THd8",
