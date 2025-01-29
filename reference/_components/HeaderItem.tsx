@@ -1,10 +1,8 @@
 export default function HeaderItem({
-  url,
   active,
   href,
   name,
   hideOnMobile,
-  firstItem,
 }: {
   url: string;
   active: boolean;
@@ -19,6 +17,7 @@ export default function HeaderItem({
       ${hideOnMobile ? "max-xl:!hidden" : ""}
       ${active ? "current:text-blue-500 current:font-semibold" : ""}`}
       href={href}
+      aria-current={active ? "page" : undefined}
     >
       {name}
     </a>

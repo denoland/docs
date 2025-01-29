@@ -8,28 +8,33 @@ export default function Base(
 ) {
   return (
     <>
-      <comp.CategoryPanel categoryPanel={data.categories_panel} />
-      <div className="absolute top-16 bottom-0 left-0 right-0 xl:left-74 overflow-y-auto xl:grid xl:grid-cols-7 xl:gap-8 mx-auto">
-
-        <nav className="top-0 sticky bg-white z-50 py-3 h-14" id="topnav">
-          <div className="h-full">
-            <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
-          </div>
+      <comp.CategoryPanel
+        categoryPanel={data.categories_panel}
+        url={data.url}
+      />
+      <main className="absolute top-16 bottom-0 left-0 right-0 xl:left-74 overflow-y-auto mx-auto px-4 sm:px-5 md:px-6">
+        <nav className="mb-4">
+          <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
         </nav>
+        <div className="markdown-body mt-4 rounded-lg">
+          <div id="content">
+          {(() => {
+            const name = data.breadcrumbs_ctx.parts[data.breadcrumbs_ctx.parts.length - 1].name;
+            return <h1>{name}</h1>;
+          })()}
+            {children}
 
-        <div id="content">
-          {children}
-
-          {"toc_ctx" in data && (
-            <comp.Toc
-              documentNavigation={(data.toc_ctx as ToCCtx)
-                .document_navigation}
-              documentNavigationStr={(data.toc_ctx as ToCCtx)
-                .document_navigation_str}
-            />
-          )}
+            {"toc_ctx" in data && (
+              <comp.Toc
+                documentNavigation={(data.toc_ctx as ToCCtx)
+                  .document_navigation}
+                documentNavigationStr={(data.toc_ctx as ToCCtx)
+                  .document_navigation_str}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

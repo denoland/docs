@@ -65,6 +65,8 @@ export default function* () {
           continue;
         }
 
+        (content as Page & { url: string }).url = url;
+
         let layout;
         if (content.kind === "IndexCtx") {
           layout = "index";
