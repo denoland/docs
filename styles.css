@@ -770,6 +770,7 @@ main:has(#example:checked) {
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1rem;
+  --tw-text-opacity: 1;
 }
 
 .text-Class {
@@ -777,8 +778,23 @@ main:has(#example:checked) {
   background-color: #20b44b26;
 }
 
+.text-Function {
+  color: rgb(5 108 240/var(--tw-text-opacity));
+  background-color: #056cf026;
+}
+
+.text-Interface {
+  color: rgb(210 160 100/var(--tw-text-opacity));
+  background-color: #d2a06426;
+}
+
+.namespaceSection {
+  max-width: 960px;
+}
+
 .namespaceItemContentSubItems {
   display: flex;
+  margin-bottom: 1.5rem !important;
   padding: 0 !important;
   list-style: none !important;
   font-size: small;
@@ -786,12 +802,12 @@ main:has(#example:checked) {
 
 .namespaceItemContentSubItemListItem {
   margin-top: 0 !important;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 .namespaceItemContentSubItemListItem:not(:last-child):after {
   content: "|";
-  padding-left: 1rem;
+  padding-left: 0.5rem;
   opacity: 0.5;
 }
 
@@ -814,4 +830,30 @@ main:has(#example:checked) {
       }
     }
   }
+}
+
+.namespaceItemContentDoc {
+  margin: 0.5rem 0;
+}
+
+.section {
+  margin-top: 1rem;
+}
+
+.documentNavigation {
+  ul li {
+    a {
+      font-weight: bold;
+    }
+    ul {
+      margin-bottom: 1rem;
+      li a {
+        font-weight: normal;
+      }
+    }
+  }
+}
+
+#categoryPanel {
+  height: calc(100vh - 4rem);
 }

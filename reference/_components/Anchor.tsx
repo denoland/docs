@@ -3,7 +3,7 @@ import type { AnchorCtx } from "@deno/doc";
 export default function ({ comp, anchor }: { comp: any; anchor: AnchorCtx }) {
   return (
     <a
-      href={`#${anchor.id}`}
+      href={`#${anchor.id.replace(" ", "-").toLowerCase()}`}
       class="header-anchor"
       aria-label="Anchor"
       tabIndex="-1"

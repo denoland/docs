@@ -53,7 +53,10 @@ export default function (
   }
 
   return (
-    <section className="section" id={section.header?.anchor.id}>
+    <section
+      className="section"
+      id={section.header?.anchor.id.replace(" ", "-").toLowerCase()}
+    >
       {section.header && (
         <div>
           <h2 className="anchorable mb-1">

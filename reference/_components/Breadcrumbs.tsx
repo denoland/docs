@@ -1,7 +1,7 @@
 import type { BreadcrumbCtx } from "@deno/doc";
 
 export default function (
-  { comp, parts }: { comp: any; parts: BreadcrumbCtx[] },
+  { parts }: { comp: any; parts: BreadcrumbCtx[] },
 ) {
   const pathParts: BreadcrumbCtx[] = [];
   const symbolParts: BreadcrumbCtx[] = [];
@@ -15,7 +15,7 @@ export default function (
   }
 
   return (
-    <ul class="flex flex-wrap text-foreground-secondary items-center mt-4">
+    <ul class="flex flex-wrap text-foreground-secondary items-center -ml-3">
       {pathParts.map((part, i) => {
         const isLast =
           !(i !== (pathParts.length - 1) || symbolParts.length > 0);

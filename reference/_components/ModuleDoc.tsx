@@ -5,12 +5,10 @@ export default function (
 ) {
   return (
     <section>
-      <div class="space-y-2 flex-1">
-        {moduleDoc.deprecated && (
-          <comp.Deprecated deprecated={moduleDoc.deprecated} />
-        )}
-        <comp.SymbolContent symbolContent={moduleDoc.sections} />
-      </div>
+      {moduleDoc.deprecated && (
+        <comp.Deprecated deprecated={moduleDoc.deprecated} />
+      )}
+      <comp.SymbolContent symbolContent={moduleDoc.sections} />
     </section>
   );
 }

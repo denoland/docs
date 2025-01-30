@@ -10,8 +10,7 @@ export default function Header({
   const reference = url.startsWith("/api");
   return (
     <header
-      class={`bg-background-primary text-foreground-primary border-b border-foreground-tertiary z-30 ${
-        reference ? "" : "sticky top-0 left-0 right-0"
+      class={`bg-background-primary text-foreground-primary border-b border-foreground-tertiary z-30 sticky top-0 left-0 right-0"
       }`}
     >
       <nav class="p-4 py-3 md:px-6 min-h-16 flex items-center justify-between">

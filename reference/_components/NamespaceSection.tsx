@@ -30,7 +30,7 @@ export default function (
             </div>
 
             {section.subitems && (
-              <ul className="namespaceItemContentSubItems mt-3">
+              <ul className="namespaceItemContentSubItems">
                 {section.subitems.map((subitem) => (
                   <li
                     className="namespaceItemContentSubItemListItem"

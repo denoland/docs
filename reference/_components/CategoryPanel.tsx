@@ -14,9 +14,9 @@ export default function (
   return (
     <div
       id="categoryPanel"
-      className="flex flex-col bottom-0 w-74 pt-2 h-full border-r border-gray-300 "
+      className="w-74 pt-2 h-full shrink-0 grow-0 sticky top-16 hidden xl:block border-r border-foreground-tertiary dark:border-background-tertiary"
     >
-      <ul class=" border-bg-tertiary relative bg-background-secondary m-2 mt-0 mb-4 py-2 rounded-md border border-background-tertiary">
+      <ul class="border-bg-tertiary bg-background-secondary m-2 mt-0 mb-4 py-2 rounded-md border border-background-tertiary">
         <li className="mx-2">
           <comp.HeaderItem
             url="/api/deno"
