@@ -14,14 +14,12 @@ export default function (
   //  needs reworking since it doesnt properly work
   if (documentNavigationStr) {
     return (
-      <div className="toc">
-        <div>
+      <aside className="toc hidden xl:block fixed top-16 right-0 w-74 h-full overflow-y-auto px-4 sm:px-5 md:px-6">
           <nav
-            className="documentNavigation"
+            className="documentNavigation border-l border-foreground-tertiary dark:border-background-tertiary py-2 pl-2"
             dangerouslySetInnerHTML={{ __html: documentNavigationStr }}
           />
-        </div>
-      </div>
+      </aside>
     );
   }
 

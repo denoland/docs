@@ -24,7 +24,19 @@ export default function (
           <>
             {renderPart(part, isLast)}
             {!isLast && (
-             <li><svg class="size-4 text-foreground-secondary rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg></li>
+              <li>
+                <svg
+                  class="size-4 text-foreground-secondary rotate-90"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                  >
+                  </path>
+                </svg>
+              </li>
             )}
           </>
         );
@@ -51,16 +63,14 @@ export default function (
 function renderPart(part: BreadcrumbCtx, isLast: boolean) {
   return (
     <li className="block px-3 py-1.5 text-sm">
-      {isLast
-        ? part.name
-        : (
-          <a
-            href={part.href}
-            className="py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
-          >
-            {part.name}
-          </a>
-        )}
+      {isLast ? part.name : (
+        <a
+          href={part.href}
+          className="py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
+        >
+          {part.name}
+        </a>
+      )}
     </li>
   );
 }

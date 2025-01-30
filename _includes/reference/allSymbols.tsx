@@ -7,8 +7,8 @@ export default function AllSymbols(
   _helpers: Lume.Helpers,
 ) {
   return (
-    <main>
+    <>
       <comp.SymbolContent symbolContent={data.content} />
-    </main>
+    </>
   );
 }
