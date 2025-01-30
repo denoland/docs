@@ -39,5 +39,5 @@ util.sayHello("World");
 import { camelCase } from "jsr:@luca/cases@1";
 console.log(camelCase("hello world")); // helloWorld
 
-import OpenAI from jsr:@openai/openai 
+import OpenAI from "jsr:@openai/openai"
 const client = new OpenAI();
