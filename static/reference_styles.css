@@ -485,8 +485,6 @@ a {
   word-wrap: break-word;
 }
 
-
-
 .section {
   max-width: 75ch;
   margin-bottom: 0.5rem;
@@ -552,7 +550,7 @@ a {
 .namespaceSection .namespaceItem[aria-label="deprecated"] {
   opacity: 0.6;
 }
-  .namespaceSection
+.namespaceSection
   .namespaceItem[aria-label="deprecated"]
   .namespaceItemContent
   > a {
@@ -563,7 +561,7 @@ a {
   text-decoration-thickness: 2px;
 }
 .namespaceSection .namespaceItem .namespaceItemContent > a,
-  .namespaceSection
+.namespaceSection
   .namespaceItem
   .namespaceItemContent
   .namespaceItemContentSubItems
@@ -573,7 +571,7 @@ a {
 }
 :is(
   .namespaceSection .namespaceItem .namespaceItemContent > a,
-      .namespaceSection
+  .namespaceSection
     .namespaceItem
     .namespaceItemContent
     .namespaceItemContentSubItems
@@ -587,7 +585,7 @@ a {
   line-height: 1.25;
   display: block;
 }
-  .namespaceSection
+.namespaceSection
   .namespaceItem
   .namespaceItemContent
   .namespaceItemContentDoc {
@@ -597,7 +595,7 @@ a {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-  .namespaceSection
+.namespaceSection
   .namespaceItem
   .namespaceItemContent
   .namespaceItemContentSubItems {
@@ -608,7 +606,7 @@ a {
   line-height: 1.25rem;
   display: flex;
 }
-  .namespaceSection
+.namespaceSection
   .namespaceItem
   .namespaceItemContent
   .namespaceItemContentSubItems
@@ -636,7 +634,7 @@ a {
   align-items: flex-start;
   display: flex;
 }
-  .symbolGroup
+.symbolGroup
   article
   > div:first-child
   > div:first-child
@@ -1233,38 +1231,7 @@ a {
     --tw-drop-shadow
   );
 }
-{
-  align-items: flex-start;
-  gap: 1.5rem;
-  min-height: fit-content;
-  padding: 1rem;
-  display: flex;
-}
-@media (min-width: 1024px) {
-  has(#categoryPanel) {
-    padding: 0.5rem;
-  }
-}
-@media (min-width: 1024px) {
-  has(#categoryPanel) > div:not(#categoryPanel) {
-    padding-top: 1rem;
-  }
-  has(#categoryPanel) #topnav {
-    margin-left: -1.5rem !important;
-    padding-left: 1.5rem !important;
-  }
-}
-not(:has(#categoryPanel)),
-has(#categoryPanel) > div:not(#categoryPanel) {
-  padding-top: 0.25rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-> div:not(#categoryPanel) {
-  flex-direction: column;
-  flex-grow: 1;
-  display: flex;
-}
+
 #categoryPanel {
   box-sizing: border-box;
   flex-shrink: 0;

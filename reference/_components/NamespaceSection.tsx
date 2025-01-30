@@ -32,7 +32,10 @@ export default function (
             {section.subitems && (
               <ul className="namespaceItemContentSubItems mt-3">
                 {section.subitems.map((subitem) => (
-                  <li className="namespaceItemContentSubItemListItem" key={subitem.title}>
+                  <li
+                    className="namespaceItemContentSubItemListItem"
+                    key={subitem.title}
+                  >
                     <a href={subitem.href}>{subitem.title}</a>
                   </li>
                 ))}

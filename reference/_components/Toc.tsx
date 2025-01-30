@@ -15,10 +15,10 @@ export default function (
   if (documentNavigationStr) {
     return (
       <aside className="toc hidden xl:block fixed top-16 right-0 w-74 h-full overflow-y-auto px-4 sm:px-5 md:px-6">
-          <nav
-            className="documentNavigation border-l border-foreground-tertiary dark:border-background-tertiary py-2 pl-2"
-            dangerouslySetInnerHTML={{ __html: documentNavigationStr }}
-          />
+        <nav
+          className="documentNavigation border-l border-foreground-tertiary dark:border-background-tertiary py-2 pl-2"
+          dangerouslySetInnerHTML={{ __html: documentNavigationStr }}
+        />
       </aside>
     );
   }
