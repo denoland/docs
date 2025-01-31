@@ -116,6 +116,10 @@ brew install llvm lld
      (Notice: it will download the files, you should install
      `X64 Debuggers And Tools-x64_en-us.msi` file manually.)
 
+### Clang
+
+Deno depends on [bindgen](https://rust-lang.github.io/rust-bindgen/requirements.html) for its libuv bindings. Bindgen needs `libclang`. To install it, [follow their instructions](https://rust-lang.github.io/rust-bindgen/requirements.html).
+
 ### Protobuf Compiler
 
 Building Deno requires the
