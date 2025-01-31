@@ -72,7 +72,7 @@ server.
 Use the `--inspect-brk` flag to break execution on the first line:
 
 ```sh
-$ deno run --inspect-brk -RN jsr:@std/http@1.0.0/file-server
+$ deno run --inspect-brk -RN jsr:@std/http/file-server
 Debugger listening on ws://127.0.0.1:9229/ws/1e82c406-85a9-44ab-86b6-7341583480b1
 ...
 ```
