@@ -78,6 +78,7 @@
     "npm:path-to-regexp@6.2.1": "6.2.1",
     "npm:postcss-import@16.1.0": "16.1.0_postcss@8.4.47",
     "npm:postcss@8.4.47": "8.4.47",
+    "npm:postgres@*": "3.4.5",
     "npm:preact-render-to-string@6.5.11": "6.5.11_preact@10.24.3",
     "npm:preact@*": "10.24.3",
     "npm:preact@10.24.3": "10.24.3",
@@ -1250,6 +1251,9 @@
         "picocolors",
         "source-map-js"
       ]
+    },
+    "postgres@3.4.5": {
+      "integrity": "sha512-cDWgoah1Gez9rN3H4165peY9qfpEo+SA61oQv65O3cRUE1pOEoJWwddwcqKE8XZYjbblOJlYDlLV4h67HrEVDg=="
     },
     "preact-render-to-string@6.5.11_preact@10.24.3": {
       "integrity": "sha512-ubnauqoGczeGISiOh6RjX0/cdaF8v/oDXIjO85XALCQjwQP+SB4RDXXtvZ6yTYSjG+PC1QRP2AhPgCEsM2EvUw==",
