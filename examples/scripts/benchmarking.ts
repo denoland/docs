@@ -2,7 +2,6 @@
  * @title Benchmarking
  * @difficulty beginner
  * @tags cli
- * @run deno bench <url>
  * @resource {https://docs.deno.com/runtime/reference/cli/benchmarker} Manual: Benchmarker tool_requests} Example: HTTP Requests
  * @group System
  *
