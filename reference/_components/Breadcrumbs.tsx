@@ -1,7 +1,7 @@
 import type { BreadcrumbCtx } from "@deno/doc";
 
 export default function (
-  { comp, parts }: { comp: any; parts: BreadcrumbCtx[] },
+  { parts }: { comp: any; parts: BreadcrumbCtx[] },
 ) {
   const pathParts: BreadcrumbCtx[] = [];
   const symbolParts: BreadcrumbCtx[] = [];
@@ -15,7 +15,7 @@ export default function (
   }
 
   return (
-    <ul class="breadcrumbs">
+    <ul class="flex flex-wrap text-foreground-secondary items-center -ml-3">
       {pathParts.map((part, i) => {
         const isLast =
           !(i !== (pathParts.length - 1) || symbolParts.length > 0);
@@ -24,9 +24,19 @@ export default function (
           <>
             {renderPart(part, isLast)}
             {!isLast && (
-              <span className="text-[#0F172A]">
-                <comp.Arrow />
-              </span>
+              <li>
+                <svg
+                  class="size-4 text-foreground-secondary rotate-90"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
+                  >
+                  </path>
+                </svg>
+              </li>
             )}
           </>
         );
@@ -52,10 +62,15 @@ export default function (
 
 function renderPart(part: BreadcrumbCtx, isLast: boolean) {
   return (
-    <li>
-      {isLast
-        ? part.name
-        : <a href={part.href} className="contextLink">{part.name}</a>}
+    <li className="block px-3 py-1.5 text-sm">
+      {isLast ? part.name : (
+        <a
+          href={part.href}
+          className="py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
+        >
+          {part.name}
+        </a>
+      )}
     </li>
   );
 }

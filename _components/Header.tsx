@@ -10,8 +10,7 @@ export default function Header({
   const reference = url.startsWith("/api");
   return (
     <header
-      class={`bg-background-primary text-foreground-primary border-b border-foreground-tertiary z-30 ${
-        reference ? "" : "sticky top-0 left-0 right-0"
+      class={`bg-background-primary text-foreground-primary border-b border-foreground-tertiary z-30 sticky top-0 left-0 right-0"
       }`}
     >
       <nav class="p-4 py-3 md:px-6 min-h-16 flex items-center justify-between">
@@ -123,39 +122,6 @@ export default function Header({
           </div>
         </div>
       </nav>
-
-      {reference &&
-        (
-          <nav className="px-4 md:px-6 py-3 text-sm bg-background-primary flex items-center justify-between border-box border-t border-foreground-tertiary z-[1000]">
-            <ul className="flex">
-              <li>
-                <HeaderItem
-                  url={url}
-                  activeOn="/api/deno"
-                  href="/api/deno"
-                  name="Deno APIs"
-                  firstItem={true}
-                />
-              </li>
-              <li>
-                <HeaderItem
-                  url={url}
-                  activeOn="/api/web"
-                  href="/api/web"
-                  name="Web APIs"
-                />
-              </li>
-              <li>
-                <HeaderItem
-                  url={url}
-                  activeOn="/api/node"
-                  href="/api/node"
-                  name="Node APIs"
-                />
-              </li>
-            </ul>
-          </nav>
-        )}
     </header>
   );
 }

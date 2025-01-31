@@ -53,11 +53,13 @@ export default function (
   }
 
   return (
-    <section className="section" id={section.header?.anchor.id}>
+    <section
+      className="section"
+      id={section.header?.anchor.id.replace(" ", "-").toLowerCase()}
+    >
       {section.header && (
         <div>
           <h2 className="anchorable mb-1">
-            <comp.Anchor anchor={section.header.anchor} />
             {section.header.href
               ? (
                 <a href={section.header.href} className="contextLink">
@@ -66,7 +68,7 @@ export default function (
               )
               : (
                 section.header.title
-              )}
+              )} <comp.Anchor anchor={section.header.anchor} />
           </h2>
 
           {/*markdown rendering*/}
