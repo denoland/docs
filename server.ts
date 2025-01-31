@@ -1,3 +1,5 @@
+process.env = Deno.env.toObject();
+
 import "@std/dotenv/load";
 
 import Server from "lume/core/server.ts";
