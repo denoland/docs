@@ -1,4 +1,5 @@
-process.env = Deno.env.toObject();
+// process.env = Deno.env.toObject();
+import "data:application/javascript;charset=utf-8;base64,cHJvY2Vzcy5lbnYgPSBEZW5vLmVudi50b09iamVjdCgpOw=="
 
 import "@std/dotenv/load";
 
