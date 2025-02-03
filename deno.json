@@ -25,7 +25,11 @@
     "reference": "cd reference_gen && deno task types && deno task doc",
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "test": "deno test -A",
-    "update_lint_rules": "deno run -A update_lint_rules.ts"
+    "update_lint_rules": "deno run -A update_lint_rules.ts",
+    "styleguide": {
+      "description": "Build, server, and watch the stylguide page",
+      "command": "deno task lume -s --config=_config-styles.ts"
+    }
   },
   "compilerOptions": {
     "types": [
