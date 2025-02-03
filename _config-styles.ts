@@ -1,4 +1,5 @@
 import lume from "lume/mod.ts";
+import jsx from "lume/plugins/jsx_preact.ts";
 
 const site = lume({
   src: ".",
@@ -6,7 +7,9 @@ const site = lume({
   emptyDest: false,
 });
 
-// site.data("layout", "base.vto");
+site.use(jsx());
+
+site.data("layout", "base.tsx");
 
 // Ignore all fodlers that are not "styleguide"
 site.ignore("deploy");
