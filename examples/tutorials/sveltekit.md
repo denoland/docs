@@ -1,4 +1,7 @@
-# Building a SvelteKit app with sv and Deno
+---
+title: "Building a SvelteKit app with sv and Deno"
+url: /examples/sveltekit_tutorial/
+---
 
 SvelteKit has been a stable popular vote since its launch and with Svelte
 version 5 releasing recently, as of time of writing, there isn't a better time
@@ -124,16 +127,16 @@ All we are doing here is converting our map to an array so we can see them
 rendered on the `+page.svelte`. Within this page you can remove anything you'd
 like or just add the following.
 
-```svelte
+```html
 <script lang="ts">
-	/// src/routes/+page.svelte
-	let { data } = $props();
+  /// src/routes/+page.svelte
+  let { data } = $props();
 </script>
 
 <section class="mb-4 grid max-h-96 grid-cols-2 gap-4 overflow-y-auto">
-	{#each data.dinos as item}
-		<a class="rounded border p-4" href="/{item.name}">{item.name}</a>
-	{/each}
+  {#each data.dinos as item}
+  <a class="rounded border p-4" href="/{item.name}">{item.name}</a>
+  {/each}
 </section>
 ```
 
@@ -186,9 +189,9 @@ src/routes/+error.svelte
 This is a very simple page, feel free to spruce up the styles here or add your
 own flair!
 
-```svelte
+```html
 <script lang="ts">
-	import { page } from '$app/state';
+  import { page } from "$app/state";
 </script>
 
 <h1>{page.status}: {page.error?.message}</h1>
@@ -201,10 +204,10 @@ attached to the error.
 Now with that pesky error distraction handled, pun intended, we can get back to
 showing our individual dinosaur!
 
-```svelte
+```html
 <script lang="ts">
-	/// src/routes/[name]/+page.svelte
-	let { data } = $props();
+  /// src/routes/[name]/+page.svelte
+  let { data } = $props();
 </script>
 
 <h1>{data.name}</h1>
@@ -231,28 +234,28 @@ Here are a few things we want to achieve:
 2. Show the awesome docs for Deno and SvelteKit
 3. Show a cute Dino on the page!
 
-```svelte
+```html
 <script lang="ts">
-	import '../app.css';
-	let { children } = $props();
+  import "../app.css";
+  let { children } = $props();
 </script>
 
 <header class="flex flex-row place-content-between items-center p-4">
-	<h1 class="text-2xl"><a href="/">Deno Sveltekit</a></h1>
-	<img id="deno" class="w-32" src="/vite-deno.svg" alt="Vite with Deno" />
+  <h1 class="text-2xl"><a href="/">Deno Sveltekit</a></h1>
+  <img id="deno" class="w-32" src="/vite-deno.svg" alt="Vite with Deno" />
 </header>
 
 <main class="container mx-auto p-4">
-	{@render children()}
+  {@render children()}
 </main>
 
 <footer class="my-4 flex flex-row justify-center gap-4">
-	<p class="font-bold">
-		<a href="https://svelte.dev/docs/kit">Sveltekit docs</a>
-	</p>
-	<p class="font-bold">
-		<a href="https://docs.deno.com/">Deno docs</a>
-	</p>
+  <p class="font-bold">
+    <a href="https://svelte.dev/docs/kit">Sveltekit docs</a>
+  </p>
+  <p class="font-bold">
+    <a href="https://docs.deno.com/">Deno docs</a>
+  </p>
 </footer>
 ```
 
@@ -343,7 +346,7 @@ export const load = async ({ url }) => {
 Wuuf, that was a lot of work, and with it out of the way lets get some
 pagination and search inputs added to the UI!
 
-```svelte
+```html
 <script lang="ts">
 	import { goto, invalidate, replaceState } from '$app/navigation';
 	import { page as sveltePage } from '$app/state';
