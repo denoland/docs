@@ -468,7 +468,3 @@ styling.
 
 I have updated some of the styling to make it more pleasant to look at, but I
 know you have great taste and are free to make it look however you'd like!
-
-# App Showcase
-
-[Video walkthrough](https://github.com/user-attachments/assets/c5926d48-1ea3-420f-9d3d-d74a5a49486a)
