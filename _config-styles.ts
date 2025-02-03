@@ -12,17 +12,10 @@ site.use(jsx());
 // Use the base layout for all pages unless otherwise specified
 site.data("layout", "base.tsx");
 
-// Ignore all fodlers that are not "styleguide"
-site.ignore("deploy");
-site.ignore("examples");
-site.ignore("lint");
-site.ignore("markdown-it");
-site.ignore("middleware");
-site.ignore("reference");
-site.ignore("reference_gen");
-site.ignore("runtime");
-site.ignore("subhosting");
-site.ignore("README.md");
-site.ignore("404.tsx");
-site.ignore("index.page.tsx");
+// Ignore all folders that are not "styleguide"
+// but honor edits to layouts and components etc
+site.ignore((path) => {
+  return path.match(/^\/styleguide/) === null;
+});
+
 export default site;
