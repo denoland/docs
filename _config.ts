@@ -100,6 +100,10 @@ const site = lume(
   },
 );
 
+// Use the doc layout for all pages unless otherwise specified
+site.data("layout", "doc.tsx");
+site.data("layout", "base.tsx", "/styleguide");
+
 site.copy("static", ".");
 site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");

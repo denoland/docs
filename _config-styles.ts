@@ -9,6 +9,7 @@ const site = lume({
 
 site.use(jsx());
 
+// Use the base layout for all pages unless otherwise specified
 site.data("layout", "base.tsx");
 
 // Ignore all fodlers that are not "styleguide"
