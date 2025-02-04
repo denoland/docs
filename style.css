@@ -1,0 +1,66 @@
+:root {
+    --max-text-width: 40rem;
+    --viewport-small: 600px;
+}
+
+/* Light and dark theme variables */
+.light {
+  --background-primary: hsl(215deg, 81%, 100%);
+  --background-secondary: hsl(213deg, 100%, 95%);
+  --background-tertiary: hsl(213deg, 100%, 84%);
+  --foreground-primary: hsl(0deg, 0%, 25%);
+  --foreground-secondary: hsl(0deg, 0%, 42%);
+  --foreground-tertiary: hsl(0deg, 0%, 90%);
+  --foreground-quaternary: hsl(0deg, 0%, 95%);
+  --runtime-background: hsl(124deg, 100%, 97.1%);
+  --runtime-foreground: hsl(184deg, 100%, 10%);
+  --primary: hsl(217deg, 91%, 59%);
+  --primary-dark: hsl(217deg, 91%, 49%);
+  --info: hsl(224deg, 64.3%, 32.9%);
+  --note: hsl(224deg, 64.3%, 32.9%);
+  --caution: hsl(45.4deg, 93.39%, 47.45%);
+  --tip: hsl(142deg, 76.2%, 36.3%);
+}
+.dark {
+  --background-primary: hsl(216deg, 27.8%, 7.1%);
+  --background-secondary: hsl(216deg, 27.7%, 12%);
+  --background-tertiary: hsl(216deg, 27.7%, 22%);
+  --foreground-primary: hsl(215deg, 17%, 99%);
+  --foreground-secondary: hsl(215deg, 17%, 71%);
+  --foreground-tertiary: hsl(215deg, 17%, 20%);
+  --foreground-quaternary: hsl(215deg, 17%, 10%);
+  --runtime-background: hsl(124deg, 100%, 3%);
+  --runtime-foreground: hsl(184deg, 100%, 90%);
+  --note: hsl(224deg, 64.3%, 82.9%);
+  --info: hsl(224deg, 64.3%, 69%);
+  --caution: hsl(45.4deg, 93.39%, 67.11%);
+  /* The following are not different from light mode (yet?) */
+  --primary: hsl(217deg, 91%, 59%);
+  --primary-dark: hsl(217deg, 91%, 49%);
+  --tip: hsl(142deg, 76.2%, 36.3%);
+  --color-fg-default: #fff;
+
+  color: var(--foreground-primary);
+  background-color: var(--background-primary);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: var(--primary);
+    text-decoration: none;
+    &:hover {
+    text-decoration: underline;
+  }
+}
+
+p {
+  max-width: var(--max-text-width);
+}
+

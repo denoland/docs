@@ -1,5 +1,5 @@
 export const title = "Styleguide";
-// export const layout = "base.tsx";
+export const layout = "base.tsx";
 
 export default (data: Lume.Data, helpers: Lume.Helpers) => (
   <>
