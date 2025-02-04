@@ -8,6 +8,7 @@ export default (
       <link rel="icon" href="/favicon.ico" />
       <link rel="stylesheet" href="/style.css" />
       <link rel="stylesheet" href="/components.css" />
+      <script type="module" src="/components.js"></script>
 
       <title>{title}</title>
     </head>

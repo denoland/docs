@@ -1,5 +1,3 @@
-console.log("ohai");
-
 if (
   localStorage.denoDocsTheme === "dark" ||
   (!("denoDocsTheme" in localStorage) &&

@@ -46,6 +46,11 @@
 
 html {
   scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 body {
@@ -53,8 +58,9 @@ body {
 }
 
 a {
-  color: var(--primary);
   text-decoration: none;
+  color: var(--primary);
+  cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
@@ -63,3 +69,4 @@ a {
 p {
   max-width: var(--max-text-width);
 }
+

@@ -1,37 +1,44 @@
 export const css = `
 header {
-  display: flex;  
   position: sticky;
   top: 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--foreground-tertiary);
 }
 
 nav {
   display: none;
 }
 
-.logo {
-display: block;
-height: 3rem;
+.external {
+  margin-left: auto;
 }
-
-
-
-@media screen and (min-width: var(--viewport-small)) {
+  
+@media (min-width:650px) {
   nav {
     display: flex;
   }
 }
+      
+.logo-link {
+  margin-right: auto;
+}
 
-header {
-  background-color: red;
+.logo {
+  display: block;
+  height: 2.3rem;
 }
 `;
 
 export default function (data: Lume.Data, helpers: Lume.Helpers) {
   return (
     <header>
-      <a href="/" title="Deno docs home">
-        <img src="/images/logo.svg" alt="Deno Docs logo" className="logo" />
+      <a href="/" title="Deno docs home" className="logo-link">
+        <data.comp.Logo />
       </a>
       <nav>
         <a href="/runtime/">Manual</a>
@@ -40,7 +47,9 @@ export default function (data: Lume.Data, helpers: Lume.Helpers) {
         <a href="/deploy/manual/">About</a>
         <a href="/subhosting/manual/">Subhosting</a>
       </nav>
-      <a href="https://deno.com" className="external">deno.com</a>
+      <data.comp.ExternalLink url="https://deno.com">
+        deno.com
+      </data.comp.ExternalLink>
       <data.comp.SearchInput />
       <data.comp.ThemeToggle />
     </header>

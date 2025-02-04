@@ -27,7 +27,11 @@ site.use(
     extensions: [".client.ts", ".client.js"],
     options: {
       minify: false,
+      format: "esm",
       splitting: true,
+      bundle: true,
+      platform: "browser",
+      target: "esnext",
     },
   }),
 );
