@@ -78,8 +78,7 @@ argument in case it contains spaces):
 
 ## Wildcard matching of tasks
 
-`deno task` can run multiple tasks in parallel, that match a wildcard pattern,
-specified by `*` character:
+The `deno task` command can run multiple tasks in parallel by passing a wildcard pattern. A wildcard pattern is specified with the `*` character.
 
 ```json title="deno.json"
 {
