@@ -8,9 +8,10 @@ export default (
       <link rel="icon" href="/favicon.ico" />
       <link rel="stylesheet" href="/style.css" />
       <link rel="stylesheet" href="/components.css" />
+
       <title>{title}</title>
     </head>
-    <body class="light">
+    <body>
       <comp.Header_new />
       {children}
       <comp.Button>Click me!</comp.Button>

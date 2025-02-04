@@ -1,7 +1,20 @@
 export const css = `
+header {
+  display: flex;  
+  position: sticky;
+  top: 0;
+}
+
 nav {
   display: none;
 }
+
+.logo {
+display: block;
+height: 3rem;
+}
+
+
 
 @media screen and (min-width: var(--viewport-small)) {
   nav {
@@ -17,7 +30,9 @@ header {
 export default function (data: Lume.Data, helpers: Lume.Helpers) {
   return (
     <header>
-      <a href="/">Deno Docs</a>
+      <a href="/" title="Deno docs home">
+        <img src="/images/logo.svg" alt="Deno Docs logo" className="logo" />
+      </a>
       <nav>
         <a href="/runtime/">Manual</a>
         <a href="/api/">API reference</a>

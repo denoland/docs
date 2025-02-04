@@ -1,6 +1,6 @@
 :root {
-    --max-text-width: 40rem;
-    --viewport-small: 600px;
+  --max-text-width: 40rem;
+  --viewport-small: 600px;
 }
 
 /* Light and dark theme variables */
@@ -54,8 +54,8 @@ body {
 
 a {
   color: var(--primary);
-    text-decoration: none;
-    &:hover {
+  text-decoration: none;
+  &:hover {
     text-decoration: underline;
   }
 }
@@ -63,4 +63,3 @@ a {
 p {
   max-width: var(--max-text-width);
 }
-

@@ -1,5 +1,6 @@
 import lume from "lume/mod.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
+import esbuild from "lume/plugins/esbuild.ts";
 import postcss from "lume/plugins/postcss.ts";
 import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
@@ -15,11 +16,19 @@ site.use(jsx());
 // Use the base layout for all pages unless otherwise specified
 site.data("layout", "base.tsx");
 
-// site.copy("style.css");
-
 site.use(
   postcss({
     plugins: [tw(tailwindConfig)],
+  }),
+);
+
+site.use(
+  esbuild({
+    extensions: [".client.ts", ".client.js"],
+    options: {
+      minify: false,
+      splitting: true,
+    },
   }),
 );
 
