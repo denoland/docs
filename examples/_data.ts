@@ -825,6 +825,11 @@ export const sidebar = [
         id: "/examples/udp_connector",
         type: "example",
       },
+      {
+        label: "WebGPU",
+        id: "/examples/webgpu",
+        type: "example",
+      },
     ],
   },
 ];
