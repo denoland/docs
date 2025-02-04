@@ -1,5 +1,6 @@
 export default (
-  { title, children, comp }: Lume.Data, helpers: Lume.Helpers) => (
+  { title, children, comp }: Lume.Data,
+) => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />

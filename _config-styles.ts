@@ -4,21 +4,18 @@ import postcss from "lume/plugins/postcss.ts";
 import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
 
-
 const site = lume({
-  src: ".",
+  src: "./",
   dest: "./_site",
   emptyDest: false,
 });
-
-
 
 site.use(jsx());
 
 // Use the base layout for all pages unless otherwise specified
 site.data("layout", "base.tsx");
 
-site.copy("style.css");
+// site.copy("style.css");
 
 site.use(
   postcss({
@@ -31,5 +28,8 @@ site.use(
 site.ignore((path) => {
   return path.match(/^\/styleguide/) === null;
 });
+
+// Copy static files to output directory
+site.copy("styleguide/_static/", ".");
 
 export default site;
