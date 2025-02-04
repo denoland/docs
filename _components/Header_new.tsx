@@ -1,38 +1,4 @@
-export const css = `
-header {
-  position: sticky;
-  top: 0;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem;
-  border-bottom: 1px solid var(--foreground-tertiary);
-}
-
-nav {
-  display: none;
-}
-
-.external {
-  margin-left: auto;
-}
-  
-@media (min-width:650px) {
-  nav {
-    display: flex;
-  }
-}
-      
-.logo-link {
-  margin-right: auto;
-}
-
-.logo {
-  display: block;
-  height: 2.3rem;
-}
-`;
+import { styledComponent } from "../_plugins/cssHotReload.ts";
 
 export default function (data: Lume.Data, helpers: Lume.Helpers) {
   return (
@@ -55,3 +21,5 @@ export default function (data: Lume.Data, helpers: Lume.Helpers) {
     </header>
   );
 }
+
+export const css = styledComponent(import.meta.url);

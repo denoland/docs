@@ -9,7 +9,7 @@
     "@std/path": "jsr:@std/path@^1.0.8",
     "@deno/doc": "jsr:@deno/doc@0.167.0",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
-    "lume/": "https://deno.land/x/lume@v2.4.1/",
+    "lume/": "https://deno.land/x/lume@v2.5.1/",
     "googleapis": "npm:googleapis@^144.0.0",
     "prismjs": "npm:prismjs@1.29.0",
     "tailwindcss": "npm:tailwindcss@^3.4.9"
