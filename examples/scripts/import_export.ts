@@ -34,10 +34,10 @@ sayHello("World");
 import * as util from "./util.ts";
 util.sayHello("World");
 
-// Imports don't have to be relative, they can also reference absolute file,
-// https, or [JSR](https://jsr.io) URLs.
+// Imports don't have to be relative, they can also reference
+// absolute file, https, npm, or [JSR](https://jsr.io) URLs.
 import { camelCase } from "jsr:@luca/cases@1";
 console.log(camelCase("hello world")); // helloWorld
 
-import OpenAI from "https://deno.land/x/openai@v4.53.0/mod.ts";
+import OpenAI from "jsr:@openai/openai";
 const client = new OpenAI();
