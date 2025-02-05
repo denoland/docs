@@ -1,0 +1,6 @@
+.light .logo-name {
+fill: black;
+} 
+.dark .logo-name {
+fill: white;
+}

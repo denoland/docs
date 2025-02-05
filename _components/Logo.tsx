@@ -1,11 +1,4 @@
-export const css = `
-.light .logo-name {
-  fill: black;
-} 
-.dark .logo-name {
-  fill: white;
-}
-`;
+export const css = "@import './_components/Logo.css';";
 
 export default function Logo() {
   return (

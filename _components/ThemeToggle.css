@@ -10,7 +10,6 @@
   border: 1px solid transparent;
   transition: all 200ms ease-in-out;
   color: var(--foreground-secondary);
-  background-color: red;
   &:hover {
     text-decoration: none;
     background-color: var(--background-secondary);
