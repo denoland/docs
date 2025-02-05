@@ -69,3 +69,26 @@ a {
 p {
   max-width: var(--max-text-width);
 }
+
+@media screen and (min-width: 1240px) {
+  body {
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "sidebar main"
+      "footer footer";
+  }
+
+  header {
+    grid-area: header;
+  }
+  header + nav {
+    grid-area: sidebar;
+  }
+  main {
+    grid-area: main;
+  }
+  footer {
+    grid-area: footer;
+  }
+}

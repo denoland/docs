@@ -1,15 +1,16 @@
 export default function (data: Lume.Data) {
   return (
     <header>
+      <h1>Deno documentation</h1>
       <a href="/" title="Deno docs home" className="logo-link">
         <data.comp.Logo />
       </a>
       <nav>
-        <a href="/runtime/">Manual</a>
-        <a href="/api/">API reference</a>
-        <a href="/examples/">Examples</a>
-        <a href="/deploy/manual/">About</a>
-        <a href="/subhosting/manual/">Subhosting</a>
+        <a href="/runtime/" className="header-nav-link">Manual</a>
+        <a href="/api/" className="header-nav-link">API reference</a>
+        <a href="/examples/" className="header-nav-link">Examples</a>
+        <a href="/deploy/manual/" className="header-nav-link">About</a>
+        <a href="/subhosting/manual/" className="header-nav-link">Subhosting</a>
       </nav>
       <data.comp.ExternalLink url="https://deno.com">
         deno.com

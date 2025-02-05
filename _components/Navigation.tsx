@@ -1,8 +1,14 @@
 export default function (data: Lume.Data) {
   return (
-    <nav>
-      sidebar
-    </nav>
+    <>
+      <data.comp.Hamburger />
+      <nav className="nav">
+        <a href="#">
+          <h2>Getting Started</h2>
+        </a>
+        <a href="#">Installation</a>
+      </nav>
+    </>
   );
 }
 

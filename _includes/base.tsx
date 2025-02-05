@@ -15,8 +15,9 @@ export default (
     <body>
       <comp.Header_new />
       <comp.Navigation />
-      {children}
-      <comp.Button>Click me!</comp.Button>
+      <main>
+        {children}
+      </main>
       <comp.Footer_new />
     </body>
   </html>
