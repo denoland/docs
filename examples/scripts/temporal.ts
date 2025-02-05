@@ -3,6 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
+ * @resource {https://docs.deno.com/api/web/~/Temporal} Temporal API reference documentation
  * @resource {https://tc39.es/proposal-temporal/docs} Temporal API proposal documentation
  * @group Unstable APIs
  */
