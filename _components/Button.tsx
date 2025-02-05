@@ -5,3 +5,5 @@ export default function ({ children }) {
     </button>
   );
 }
+
+export const css = `@import "./_components/Button.css";`;

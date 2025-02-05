@@ -1,26 +1,6 @@
-export const css = `
-.external {
-    display: none;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    border: 1px solid transparent;
-    transition: all 200ms ease-in-out;
-    color: var(--foreground-secondary);
-    &:hover {
-        text-decoration: none;
-        background-color: var(--background-secondary);
-        border-color: var(--background-tertiary);
-    }
-}
-@media (min-width: 650px) {
-    .external {
-        display: block;
-    }
-}
-`;
-
-export default function ExternalLink({ href, children }) {
+export default function ExternalLink(
+  { href, children }: { href: string; children: string },
+) {
   return (
     <a
       href={href}
@@ -31,3 +11,5 @@ export default function ExternalLink({ href, children }) {
     </a>
   );
 }
+
+export const css = "@import './_components/ExternalLink.css';";

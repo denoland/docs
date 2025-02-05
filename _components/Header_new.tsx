@@ -1,6 +1,4 @@
-import { styledComponent } from "../_plugins/cssHotReload.ts";
-
-export default function (data: Lume.Data, helpers: Lume.Helpers) {
+export default function (data: Lume.Data) {
   return (
     <header>
       <a href="/" title="Deno docs home" className="logo-link">
@@ -22,4 +20,4 @@ export default function (data: Lume.Data, helpers: Lume.Helpers) {
   );
 }
 
-export const css = styledComponent(import.meta.url);
+export const css = "@import './_components/Header_new.css';";

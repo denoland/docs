@@ -1,6 +1,6 @@
 import lume from "lume/mod.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
-import { enableCssHotReload } from "./_plugins/cssHotReload.ts";
+import postcss from "lume/plugins/postcss.ts";
 
 const site = lume({
   src: "./",
@@ -9,6 +9,7 @@ const site = lume({
 });
 
 site.use(jsx());
+site.use(postcss());
 
 // Use the base layout for all pages unless otherwise specified
 site.data("layout", "base.tsx");
@@ -21,7 +22,5 @@ site.ignore((path) => {
 
 // Copy static files to output directory
 site.copy("styleguide/_static/", ".");
-
-enableCssHotReload();
 
 export default site;
