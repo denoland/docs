@@ -5,11 +5,11 @@ import postcss from "lume/plugins/postcss.ts";
 const site = lume({
   src: "./",
   dest: "./_site",
-  emptyDest: false,
+  emptyDest: true,
 });
 
-site.use(jsx());
 site.use(postcss());
+site.use(jsx());
 
 // Use the base layout for all pages unless otherwise specified
 site.data("layout", "base.tsx");
