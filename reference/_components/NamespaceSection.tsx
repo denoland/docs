@@ -7,12 +7,12 @@ export default function (
   },
 ) {
   return (
-    <div className="namespaceSection">
+    <div className="namespaceSection mt-1">
       {namespaceSections.map((section) => (
         <div
           key={section.id}
           id={section.id}
-          className="namespaceItem"
+          className="namespaceItem flex gap-3"
           aria-label={section.deprecated ? "deprecated" : undefined}
         >
           <comp.DocNodeKindIcon kinds={section.doc_node_kind_ctx} />
@@ -32,7 +32,10 @@ export default function (
             {section.subitems && (
               <ul className="namespaceItemContentSubItems">
                 {section.subitems.map((subitem) => (
-                  <li>
+                  <li
+                    className="namespaceItemContentSubItemListItem"
+                    key={subitem.title}
+                  >
                     <a href={subitem.href}>{subitem.title}</a>
                   </li>
                 ))}

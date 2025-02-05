@@ -4,7 +4,7 @@ export default function (
   { comp, symbolGroup }: { comp: any; symbolGroup: SymbolGroupCtx },
 ) {
   return (
-    <main className="symbolGroup" id={`symbol_${symbolGroup.name}`}>
+    <div className="symbolGroup" id={`symbol_${symbolGroup.name}`}>
       {symbolGroup.symbols.map((symbol, i) => (
         <article>
           <div>
@@ -53,6 +53,6 @@ export default function (
           </div>
         </article>
       ))}
-    </main>
+    </div>
   );
 }

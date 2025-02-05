@@ -7,35 +7,34 @@ export default function Base(
   _helpers: Lume.Helpers,
 ) {
   return (
-    <div className="ddoc">
-      <link rel="stylesheet" href="/reference_styles.css" />
-
-      <comp.CategoryPanel categoryPanel={data.categories_panel} />
-
-      <div>
-        <nav className="top-0 sticky bg-white z-50 py-3 h-14" id="topnav">
-          <div className="h-full">
-            <div>
-              <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
-            </div>
-          </div>
-        </nav>
-
-        <div id="content">
+    <div className="flex items-stretch">
+      <comp.CategoryPanel
+        categoryPanel={data.categories_panel}
+        url={data.url}
+      />
+      <div className="mx-auto px-4 sm:px-5 md:px-6 pt-4">
+        {data.breadcrumbs_ctx.parts.length > 1 && (
+          <nav>
+            <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
+          </nav>
+        )}
+        <main id="content" className="markdown-body mt-4 rounded-lg">
+          {(() => {
+            const name = data.breadcrumbs_ctx
+              .parts[data.breadcrumbs_ctx.parts.length - 1].name;
+            return <h1>{name}</h1>;
+          })()}
           {children}
-
-          <div>
-            {"toc_ctx" in data && (
-              <comp.Toc
-                documentNavigation={(data.toc_ctx as ToCCtx)
-                  .document_navigation}
-                documentNavigationStr={(data.toc_ctx as ToCCtx)
-                  .document_navigation_str}
-              />
-            )}
-          </div>
-        </div>
+        </main>
       </div>
+      {"toc_ctx" in data && (
+        <comp.Toc
+          documentNavigation={(data.toc_ctx as ToCCtx)
+            .document_navigation}
+          documentNavigationStr={(data.toc_ctx as ToCCtx)
+            .document_navigation_str}
+        />
+      )}
     </div>
   );
 }
