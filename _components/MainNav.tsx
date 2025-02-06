@@ -6,7 +6,13 @@ export default function (data: Lume.Data) {
       <ul className="main-nav">
         {data.navigation.map((nav: NavData) => (
           <li>
-            <a href={nav.url} className="main-nav-link" data-active={data.currentUrl===nav.url}>{nav.name}</a>
+            <a
+              href={nav.url}
+              className="main-nav-link"
+              data-active={data.currentUrl === nav.url}
+            >
+              {nav.name}
+            </a>
           </li>
         ))}
       </ul>
