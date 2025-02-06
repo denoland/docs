@@ -1,0 +1,28 @@
+.sub-nav-heading {
+  margin: 0 0 0.5rem;
+  font-size: 1.1em;
+}
+
+.sub-nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sub-nav-heading-link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--foreground-tertiary);
+  color: var(--foreground-secondary);
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.sub-nav-heading-link[data-active] {
+  background-color: var(--background-tertiary);
+}
+
+.sub-nav-link {
+  display: block;
+}

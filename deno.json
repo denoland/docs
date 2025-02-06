@@ -9,7 +9,7 @@
     "@std/path": "jsr:@std/path@^1.0.8",
     "@deno/doc": "jsr:@deno/doc@0.167.0",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
-    "lume/": "https://deno.land/x/lume@v2.4.1/",
+    "lume/": "https://deno.land/x/lume@v2.5.1/",
     "googleapis": "npm:googleapis@^144.0.0",
     "prismjs": "npm:prismjs@1.29.0",
     "tailwindcss": "npm:tailwindcss@^3.4.9"
@@ -25,13 +25,17 @@
     "reference": "cd reference_gen && deno task types && deno task doc",
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "test": "deno test -A",
-    "update_lint_rules": "deno run -A update_lint_rules.ts"
+    "update_lint_rules": "deno run -A update_lint_rules.ts",
+    "styleguide": {
+      "description": "Build, server, and watch the stylguide page",
+      "command": "deno task lume -s --config=_config-styles.ts"
+    }
   },
   "compilerOptions": {
     "types": [
       "lume/types.ts"
     ],
-    "jsx": "precompile",
+    "jsx": "react-jsx",
     "jsxImportSource": "npm:preact"
   },
   "test": {
