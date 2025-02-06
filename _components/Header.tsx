@@ -1,5 +1,4 @@
 import Logo from "./Logo.tsx";
-import SearchInput from "./SearchInput.tsx";
 export default function Header({
   data,
   url,
@@ -91,9 +90,7 @@ export default function Header({
             external
             hideOnMobile
           />
-          <div class="min-w-[150px] md:w-32 xl:w-64">
-            <SearchInput />
-          </div>
+         <data.comp.SearchInput />
           <data.comp.ThemeToggle />
         </div>
       </nav>
