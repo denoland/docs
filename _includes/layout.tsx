@@ -101,7 +101,11 @@ export default function Layout(data: Lume.Data) {
         >
           Skip to main content <span aria-hidden="true">-&gt;</span>
         </a>
-        <data.comp.Header data={data} url={data.url} hasSidebar={!!data.sidebar} />
+        <data.comp.Header
+          data={data}
+          url={data.url}
+          hasSidebar={!!data.sidebar}
+        />
         {data.children}
       </body>
     </html>
