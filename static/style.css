@@ -1,0 +1,12 @@
+:root {
+  --max-text-width: 40rem;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+p {
+  max-width: var(--max-text-width);
+}

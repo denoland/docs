@@ -65,6 +65,8 @@ export default function Layout(props: Lume.Data) {
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/overrides.css" />
         <script src="/darkmode.client.js"></script>
+        <link rel="stylesheet" href="/style.css" />
+        <link rel="stylesheet" href="/components.css" />
         <script type="module" src="/darkmode-toggle.client.js"></script>
         <script type="module" src="/sidebar.client.js"></script>
         <script type="module" src="/lint_rules.client.js"></script>
@@ -72,6 +74,7 @@ export default function Layout(props: Lume.Data) {
         <script type="module" src="/tabs.client.js"></script>
         <script type="module" src="/feedback.client.js"></script>
         <script type="module" src="/youtube-lite.client.js"></script>
+        <script type="module" src="/components.js"></script>
         <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"
