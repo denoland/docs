@@ -1,0 +1,26 @@
+.main-nav {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0.5rem 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--background-tertiary);
+  background-color: var(--background-secondary);
+  list-style: none;
+}
+
+.main-nav-link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  color: var(--foreground-primary);
+  &:hover {
+    background-color: var(--background-tertiary);
+    text-decoration: none;
+  }
+}
+
+.main-nav-link[data-active="true"] {
+  font-weight: bold;
+  background-color: var(--background-tertiary);
+}

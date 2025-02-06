@@ -1,5 +1,8 @@
 .nav {
   height: 100%;
+  border-right: 1px solid var(--foreground-tertiary);
+  font-size: 0.8rem;
+  background-color: var(--background-primary);
 }
 
 @media (max-width: 1239px) {
@@ -7,7 +10,6 @@
     position: fixed;
     width: 100%;
     max-width: 650px;
-    background-color: blue;
     transition: all 200ms ease-in-out;
     transform: translateX(-100%);
   }

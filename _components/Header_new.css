@@ -10,26 +10,8 @@ header {
   border-bottom: 1px solid var(--foreground-tertiary);
   background-color: var(--background-primary);
 
-  h1 {
-    display: none;
-  }
-
   nav {
     display: none;
-  }
-
-  .header-nav-link {
-    padding: 0.5rem;
-    margin: 0 1rem;
-    font-size: 1.2rem;
-    border-radius: 0.25rem;
-    border: 1px solid transparent;
-    transition: all 200ms ease-in-out;
-    &:hover {
-      text-decoration: none;
-      background-color: var(--background-secondary);
-      border-color: var(--background-tertiary);
-    }
   }
 
   .external {
@@ -38,7 +20,6 @@ header {
 
   .logo-link {
     display: flex;
-    margin-right: auto;
     height: 2.3rem;
   }
 
@@ -50,9 +31,12 @@ header {
 
 @media (min-width: 1240px) {
   header {
-    padding-left: 0.75rem;
+    padding-left: 1rem;
     nav {
       display: flex;
     }
+  }
+  .header-nav-link[data-active="true"] {
+    color: var(--primary);
   }
 }

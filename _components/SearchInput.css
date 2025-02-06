@@ -11,7 +11,7 @@
   background: url(/images/search.svg) no-repeat 0.5em 50%;
   background-size: 1em;
   background-color: var(--background-secondary);
-  color: var(--primary);
+  color: var(--foreground-primary);
   border-color: var(--foreground-tertiary);
   &:hover {
     background-color: var(--background-tertiary);

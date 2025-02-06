@@ -4,7 +4,7 @@ export default function ExternalLink(
   return (
     <a
       href={href}
-      className="external"
+      className="external blocklink"
       target="_blank"
     >
       {children}

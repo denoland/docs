@@ -1,6 +1,4 @@
-export default (
-  { title, children, comp }: Lume.Data,
-) => (
+export default (data: Lume.Data) => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />
@@ -10,15 +8,16 @@ export default (
       <link rel="stylesheet" href="/components.css" />
       <script type="module" src="/components.js"></script>
 
-      <title>{title}</title>
+      <title>{data.title}</title>
     </head>
     <body>
-      <comp.Header_new />
-      <comp.Navigation />
+      <h1>{data.url}</h1>
+      <data.comp.Header_new currentUrl={data.url} />
+      <data.comp.Navigation currentUrl={data.url}  />
       <main>
-        {children}
+        {data.children}
       </main>
-      <comp.Footer_new />
+      <data.comp.Footer_new />
     </body>
   </html>
 );
