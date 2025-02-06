@@ -1,8 +1,6 @@
-import Header from "../_components/Header.tsx";
-
-export default function Layout(props: Lume.Data) {
-  const reference = props.url.startsWith("/api");
-  const description = props.description ||
+export default function Layout(data: Lume.Data) {
+  const reference = data.url.startsWith("/api");
+  const description = data.description ||
     "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
 
   return (
@@ -13,7 +11,7 @@ export default function Layout(props: Lume.Data) {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{props.title}</title>
+        <title>{data.title}</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link
@@ -34,8 +32,8 @@ export default function Layout(props: Lume.Data) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@deno_land" />
         <link rel="me" href="https://fosstodon.org/@deno_land" />
-        <meta name="twitter:title" content={props.title} />
-        <meta property="og:title" content={props.title} />
+        <meta name="twitter:title" content={data.title} />
+        <meta property="og:title" content={data.title} />
 
         <meta property="og:description" content={description} />
         <meta name="twitter:description" content={description} />
@@ -67,7 +65,6 @@ export default function Layout(props: Lume.Data) {
         <script src="/darkmode.client.js"></script>
         <link rel="stylesheet" href="/style.css" />
         <link rel="stylesheet" href="/components.css" />
-        <script type="module" src="/darkmode-toggle.client.js"></script>
         <script type="module" src="/sidebar.client.js"></script>
         <script type="module" src="/lint_rules.client.js"></script>
         <script type="module" src="/copy.client.js"></script>
@@ -104,8 +101,8 @@ export default function Layout(props: Lume.Data) {
         >
           Skip to main content <span aria-hidden="true">-&gt;</span>
         </a>
-        <Header url={props.url} hasSidebar={!!props.sidebar} />
-        {props.children}
+        <data.comp.Header data={data} url={data.url} hasSidebar={!!data.sidebar} />
+        {data.children}
       </body>
     </html>
   );
