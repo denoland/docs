@@ -2,7 +2,7 @@
   "navigation": [
     {
       "name": "Manual",
-      "url": "/manual/"
+      "url": "/runtime/"
     },
     {
       "name": "API reference",
