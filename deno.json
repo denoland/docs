@@ -15,11 +15,11 @@
     "tailwindcss": "npm:tailwindcss@^3.4.9"
   },
   "tasks": {
-    "serve": "deno run -A lume.ts -s",
-    "serve:no_logs": "LUME_LOGS=WARN SKIP_CHECK_URLS=true deno run -A lume.ts -s",
+    "serve": "deno run --env-file -A lume.ts -s",
+    "serve:no_logs": "LUME_LOGS=WARN SKIP_CHECK_URLS=true deno run --env-file -A lume.ts -s",
     "start": "deno task serve",
     "dev": "deno task serve",
-    "build": "deno run -A lume.ts",
+    "build": "deno run --env-file -A lume.ts",
     "debug": "deno task build && deno task prod",
     "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
     "reference": "cd reference_gen && deno task types && deno task doc",
