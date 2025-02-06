@@ -1,9 +1,7 @@
 import { Client } from "npm:@notionhq/client";
 import type { FeedbackSubmission } from "../../types.ts";
 
-// Collecting entries to this internal Notion page:
-// https://www.notion.so/denolandinc/192771466362800da55dc4552ad9a70c?v=192771466362803793d5000c0f522280
-
+// Collecting entries to an internal Notion page
 const apiKey = Deno.env.get("NOTION_FEEDBACK_API_KEY");
 const databaseID = Deno.env.get("NOTION_FEEDBACK_DATABASE_ID");
 
