@@ -90,7 +90,7 @@ export default function Header({
             external
             hideOnMobile
           />
-         <data.comp.SearchInput />
+          <data.comp.SearchInput />
           <data.comp.ThemeToggle />
         </div>
       </nav>
