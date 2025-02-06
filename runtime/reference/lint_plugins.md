@@ -8,9 +8,16 @@ This is an experimental feature and requires Deno `2.2.0` or newer.
 
 :::
 
-The built-in linter can be extended with plugins to add custom lint rules. Whilst Deno ships with [many lint rules](/lint/) out of the box, there are cases where you need a custom rule tailored particularily to your project. This is where the lint plugin API comes into play. The API is intentionally modelled after the ESLint API so that existing knowledge can be reused if you happen to have written custom ESLint rules in the past.
+The built-in linter can be extended with plugins to add custom lint rules.
+Whilst Deno ships with [many lint rules](/lint/) out of the box, there are cases
+where you need a custom rule tailored particularily to your project. This is
+where the lint plugin API comes into play. The API is intentionally modelled
+after the ESLint API so that existing knowledge can be reused if you happen to
+have written custom ESLint rules in the past.
 
-Plugins are loaded by adding a `plugins` section under `lint` in `deno.json`. The value is an array of specifiers to plugins. These can be paths, `npm:` or `jsr:` specifiers.
+Plugins are loaded by adding a `plugins` section under `lint` in `deno.json`.
+The value is an array of specifiers to plugins. These can be paths, `npm:` or
+`jsr:` specifiers.
 
 ```json title="deno.json"
 {
@@ -20,7 +27,8 @@ Plugins are loaded by adding a `plugins` section under `lint` in `deno.json`. Th
 }
 ```
 
-A plugin always has the same shape. It has a default export which is your plugin object.
+A plugin always has the same shape. It has a default export which is your plugin
+object.
 
 ```ts title="my-plugin.ts"
 export default {
@@ -59,7 +67,10 @@ export default {
 
 ## Using selectors to match nodes
 
-Writing code to match a specific node can sometimes become a bit tedious if you write it in plain JavaScript. Sometimes this matching logic would be easier to express via a selector, similar to CSS selectors. The using a string as the property name in the returned visitor object, we can specify a custom selector.
+Writing code to match a specific node can sometimes become a bit tedious if you
+write it in plain JavaScript. Sometimes this matching logic would be easier to
+express via a selector, similar to CSS selectors. The using a string as the
+property name in the returned visitor object, we can specify a custom selector.
 
 ```ts title="my-plugin.ts"
 export default {
@@ -83,7 +94,9 @@ export default {
 } satisfies Deno.lint.Plugin;
 ```
 
-Note, that we can always refine our match further in JavaScript if the matching logic is too complex to be expressed as a selector alone. The full list of the supported syntax for selectors is:
+Note, that we can always refine our match further in JavaScript if the matching
+logic is too complex to be expressed as a selector alone. The full list of the
+supported syntax for selectors is:
 
 | Syntax                 | Description                   |
 | ---------------------- | ----------------------------- |
@@ -101,7 +114,9 @@ Note, that we can always refine our match further in JavaScript if the matching 
 
 ## Running cleanup code
 
-If your plugin requires running cleanup code after a file has been linted, you can hook into the linter via the `destroy()` hook. It is called after a file has been linted and just before the plugin context is destroyed.
+If your plugin requires running cleanup code after a file has been linted, you
+can hook into the linter via the `destroy()` hook. It is called after a file has
+been linted and just before the plugin context is destroyed.
 
 ```ts title="my-plugin.ts"
 export default {
@@ -123,7 +138,9 @@ export default {
 
 ## Excluding custom rules
 
-Similar to built-in rules, you can disable custom rules provided by a plugin. To do so, add it to the `lint.rules.exclude` key in `deno.json`. The format of a custom lint rule is always `<plugin-name>/<rule-name>`.
+Similar to built-in rules, you can disable custom rules provided by a plugin. To
+do so, add it to the `lint.rules.exclude` key in `deno.json`. The format of a
+custom lint rule is always `<plugin-name>/<rule-name>`.
 
 ```json title="deno.json"
 {
