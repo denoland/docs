@@ -10,7 +10,7 @@ This is an experimental feature and requires Deno `2.2.0` or newer.
 
 The built-in linter can be extended with plugins to add custom lint rules. Whilst Deno ships with [many lint rules](/lint/) out of the box, there are cases where you need a custom rule tailored particularily to your project. This is where the lint plugin API comes into play. The API is intentionally modelled after the ESLint API so that existing knowledge can be reused if you happen to have written custom ESLint rules in the past.
 
-Plugins are loaded by adding a `plugins` section under `lint` in `deno.json`. The value is an array of specifiers to plugins. These can be local relative paths or remote specifiers like `jsr:` for example.
+Plugins are loaded by adding a `plugins` section under `lint` in `deno.json`. The value is an array of specifiers to plugins. These can be paths, `npm:` or `jsr:` specifiers.
 
 ```json title="deno.json"
 {
