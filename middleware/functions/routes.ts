@@ -1,6 +1,6 @@
 import type { RequestHandler } from "lume/core/server.ts";
 import healthRequestHandler from "./health.ts";
-import feedbackRequestHandler from "./feedback-notion.ts";
+import feedbackRequestHandler from "./feedback.ts";
 
 export default {
   "/_api/health": healthRequestHandler,
