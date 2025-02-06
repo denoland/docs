@@ -19,13 +19,14 @@ const insertData = async (
 ) => {
   // Assemble the properties to send to the API
   type Properties = {
-    Url: { title: { text: { content: string } }[] };
+    "Docs Url": { title: { text: { content: string } }[] };
     "Helpful?": { rich_text: { text: { content: "yes" | "no" } }[] };
     Feedback?: { rich_text: { text: { content: string } }[] };
     Email?: { email: string };
   };
+
   const properties: Properties = {
-    "Url": { "title": [{ "text": { "content": path } }] },
+    "Docs Url": { "title": [{ "text": { "content": path } }] },
     "Helpful?": { "rich_text": [{ "text": { "content": sentiment } }] },
   };
 
@@ -87,6 +88,8 @@ export default async function feedbackRequestHandler(
       contact: contactCapped,
       id: id,
     });
+
+    console.log(response);
 
     return new Response(
       JSON.stringify({
