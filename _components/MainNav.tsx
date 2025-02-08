@@ -7,9 +7,9 @@ export default function (data: Lume.Data) {
         {data.navigation.map((nav: NavData) => (
           <li>
             <a
-              href={nav.url}
+              href={nav.href}
               className="main-nav-link"
-              data-active={data.currentUrl === nav.url}
+              data-active={nav.href.includes(data.currentSection)}
             >
               {nav.name}
             </a>

@@ -2,23 +2,23 @@
   "navigation": [
     {
       "name": "Manual",
-      "url": "/runtime/"
+      "href": "/runtime/"
     },
     {
       "name": "API reference",
-      "url": "/api/"
+      "href": "/api/"
     },
     {
       "name": "Examples",
-      "url": "/examples/"
+      "href": "/examples/"
     },
     {
       "name": "Deploy",
-      "url": "/deploy/manual/"
+      "href": "/deploy/manual/"
     },
     {
       "name": "Subhosting",
-      "url": "/subhosting/manual/"
+      "href": "/subhosting/manual/"
     }
   ]
 }

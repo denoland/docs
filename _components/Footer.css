@@ -38,12 +38,12 @@ footer {
   color: hsl(var(--foreground-secondary));
 }
 
-@media screen and (min-width: 1240px) {
+@media screen and (min-width: 1024px) {
   footer {
     padding: 2vw 3vw;
   }
   .footer-nav {
-    max-width: 1240px;
+    max-width: 1024px;
     margin: 0 auto;
   }
 }

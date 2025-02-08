@@ -1,11 +1,12 @@
 .nav {
   height: 100%;
+  min-width: 280px;
   border-right: 1px solid hsl(var(--foreground-tertiary));
   font-size: 0.8rem;
   background-color: hsl(var(--background-primary));
 }
 
-@media (max-width: 1239px) {
+@media (max-width: 1023px) {
   .nav {
     position: fixed;
     width: 100%;

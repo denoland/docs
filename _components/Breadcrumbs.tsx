@@ -1,33 +1,26 @@
-import type {
-  BreadcrumbItem,
-  Sidebar as Sidebar_,
-  SidebarItem,
-} from "../types.ts";
-import { isSidebarCategory, isSidebarDoc, isSidebarLink } from "../types.ts";
+import type { Sidebar as Sidebar_, SidebarItem } from "../types.ts";
 
 export function generateCrumbs(
   url: string,
   title: string,
   items: SidebarItem[],
-  current: BreadcrumbItem[] = [],
-): BreadcrumbItem[] {
+  current: SidebarItem[] = [],
+): SidebarItem[] {
   for (const item of items) {
-    const foundTargetPage = (typeof item === "string" && item === url) ||
-      (isSidebarDoc(item) && item.id === url) ||
-      (isSidebarLink(item) && item.href === url);
+    const foundTargetPage = item.href === url;
 
     if (foundTargetPage) {
-      current.push({ label: title });
+      current.push({ title: title });
       return current;
     }
 
-    if (isSidebarCategory(item)) {
-      const childItems: BreadcrumbItem[] = [];
+    if (item.items) {
+      const childItems: SidebarItem[] = [];
       generateCrumbs(url, title, item.items, childItems);
 
       if (childItems.length > 0) {
         if (item.href) {
-          current.push({ label: item.label, href: item.href });
+          current.push({ title: item.title, href: item.href });
         }
         current.push(...childItems);
         return current;
@@ -45,19 +38,19 @@ export function Breadcrumbs(props: {
   sectionTitle: string;
   sectionHref: string;
 }) {
-  const crumbs: BreadcrumbItem[] = [];
+  const crumbs: SidebarItem[] = [];
 
   for (const section of props.sidebar) {
     if (section.href === props.url) {
-      crumbs.push({ label: props.title });
+      crumbs.push({ title: props.title });
       break;
     }
 
-    const rootItem = { label: section.title, href: section.href };
+    const rootItem = { title: section.title, href: section.href };
     const potentialCrumbs = generateCrumbs(
       props.url,
       props.title,
-      section.items,
+      section?.items || [],
       [rootItem],
     );
 
@@ -114,12 +107,12 @@ export function Breadcrumbs(props: {
                     itemprop="item"
                     class="block px-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
                   >
-                    <span itemprop="name">{crumb.label}</span>
+                    <span itemprop="name">{crumb.title}</span>
                   </a>
                 )
                 : (
                   <span itemprop="name" class="block px-3 py-1.5 text-sm">
-                    {crumb.label}
+                    {crumb.title}
                   </span>
                 )}
               <meta itemprop="position" content={String(i + 2)} />

@@ -47,7 +47,7 @@
   }
 }
 
-@media screen and (min-width: 1240px) {
+@media screen and (min-width: 1024px) {
   .hamburger-label {
     display: none;
   }

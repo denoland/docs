@@ -1,5 +1,6 @@
 export default function Layout(data: Lume.Data) {
   const reference = data.url.startsWith("/api");
+  const section = data.url.split("/").filter(Boolean)[0];
   const description = data.description ||
     "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
 
@@ -90,23 +91,17 @@ export default function Layout(data: Lume.Data) {
           }`}
         </script>
       </head>
-      <body
-        class={`bg-background-primary text-foreground-primary ${
-          reference ? "" : "h-dvh"
-        }`}
-      >
-        <a
-          href="#content"
-          class="opacity-0 absolute top-2 left-2 p-2 border -translate-y-12 transition-all focus:translate-y-0 focus:opacity-100 z-50 bg-background-primary font-bold"
-        >
-          Skip to main content <span aria-hidden="true">-&gt;</span>
-        </a>
-        <data.comp.Header
-          data={data}
-          url={data.url}
-          hasSidebar={!!data.sidebar}
-        />
-        {data.children}
+      <body>
+        {}
+        <data.comp.Header currentSection={section} />
+        <div className="content">
+          <data.comp.Navigation
+            currentSection={section}
+            currentUrl={data.url}
+          />
+          {data.children}
+        </div>
+        <data.comp.Footer />
       </body>
     </html>
   );

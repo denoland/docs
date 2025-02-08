@@ -25,9 +25,14 @@ p {
   }
 }
 
-@media screen and (min-width: 1240px) {
+@media screen and (min-width: 1024px) {
   body {
     display: grid;
     grid-template-rows: auto 1fr auto;
   }
+
+  .content {
+    display: flex;
+  }
+
 }

@@ -9,9 +9,15 @@ header {
   padding-left: 3rem;
   border-bottom: 1px solid hsl(var(--foreground-tertiary));
   background-color: hsl(var(--background-primary));
+  z-index: 999; /* sorry mum */
 
   nav {
     display: none;
+  }
+
+  .header-nav-link {
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    white-space: nowrap;
   }
 
   .external {
@@ -29,14 +35,14 @@ header {
   }
 }
 
-@media (min-width: 1240px) {
+@media (min-width: 1024px) {
   header {
     padding-left: 1rem;
     nav {
       display: flex;
     }
   }
-  .header-nav-link[data-active="true"] {
+  .header-nav-link[data-active] {
     color: hsl(var(--primary));
   }
 }

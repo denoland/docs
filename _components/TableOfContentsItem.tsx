@@ -1,6 +1,8 @@
 import type { TableOfContentsItem as TableOfContentsItem_ } from "../types.ts";
 
-export function TableOfContentsItem(props: { item: TableOfContentsItem_ }) {
+export default function TableOfContentsItem(
+  props: { item: TableOfContentsItem_ },
+) {
   return (
     <li class="m-2 leading-4">
       <a
