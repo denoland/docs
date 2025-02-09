@@ -1,4 +1,3 @@
-import { Breadcrumbs } from "../_components/Breadcrumbs.tsx";
 import renderCommand from "./renderCommand.tsx";
 
 export const layout = "layout.tsx";
@@ -16,22 +15,23 @@ export default function Page(data: Lume.Data, helpers: Lume.Helpers) {
   }
 
   const isExamples = data.url.includes("/examples/");
+  const isHome = data.url === "/";
 
   return (
     <div id="content" className="content">
-      <div class="flex-grow px-4 sm:px-5 md:px-6 max-w-full">
+      <div class="px-4 sm:px-5 md:px-6 max-w-full">
         <article class="mx-auto">
-          {!isExamples && (
-            <Breadcrumbs
-              title={data.title!}
-              sidebar={sidebar}
-              url={data.url}
-              sectionTitle={data.sectionTitle!}
-              sectionHref={data.sectionHref!}
-            />
-          )}
+          {!isExamples || !isHome && (
+                <data.comp.Breadcrumbs
+                  title={data.title!}
+                  sidebar={sidebar}
+                  url={data.url}
+                  sectionTitle={data.sectionTitle!}
+                  sectionHref={data.sectionHref!}
+                />
+              )}
 
-          <data.comp.TableOfContents toc={data.toc} data={data} />
+          <data.comp.TableOfContentsMobile toc={data.toc} data={data} />
 
           <div
             data-color-mode="auto"
@@ -56,6 +56,7 @@ export default function Page(data: Lume.Data, helpers: Lume.Helpers) {
         </article>
         <data.comp.Feedback file={file} />
       </div>
+      <data.comp.TableOfContents toc={data.toc} data={data} />
     </div>
   );
 }

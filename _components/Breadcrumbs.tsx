@@ -1,6 +1,6 @@
 import type { Sidebar as Sidebar_, SidebarItem } from "../types.ts";
 
-export function generateCrumbs(
+function generateCrumbs(
   url: string,
   title: string,
   items: SidebarItem[],
@@ -31,7 +31,7 @@ export function generateCrumbs(
   return current;
 }
 
-export function Breadcrumbs(props: {
+export default function (props: {
   title: string;
   sidebar: Sidebar_;
   url: string;
@@ -61,9 +61,9 @@ export function Breadcrumbs(props: {
   }
 
   return (
-    <nav class="mb-4">
+    <nav>
       <ul
-        class="flex flex-wrap text-foreground-secondary items-center -ml-3"
+        class="crumbs"
         itemscope
         itemtype="https://schema.org/BreadcrumbList"
       >
@@ -73,25 +73,13 @@ export function Breadcrumbs(props: {
           itemtype="https://schema.org/ListItem"
         >
           <a
-            class="block px-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
+            class="crumb-link pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
             itemprop="item"
             href={props.sectionHref}
           >
             <span itemprop="name">{props.sectionTitle}</span>
           </a>
           <meta itemprop="position" content="1" />
-        </li>
-        <li>
-          <svg
-            class="size-4 text-foreground-secondary rotate-90"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-            />
-          </svg>
         </li>
         {crumbs.map((crumb, i) => (
           <>
@@ -105,7 +93,7 @@ export function Breadcrumbs(props: {
                   <a
                     href={crumb.href}
                     itemprop="item"
-                    class="block px-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
+                    class="crumb-link pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
                   >
                     <span itemprop="name">{crumb.title}</span>
                   </a>
@@ -117,24 +105,11 @@ export function Breadcrumbs(props: {
                 )}
               <meta itemprop="position" content={String(i + 2)} />
             </li>
-            {i < crumbs.length - 1 && (
-              <li>
-                <svg
-                  class="size-4 text-foreground-secondary rotate-90"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"
-                  >
-                  </path>
-                </svg>
-              </li>
-            )}
           </>
         ))}
       </ul>
     </nav>
   );
 }
+
+export const css = `@import './_components/Breadcrumbs.css';`;

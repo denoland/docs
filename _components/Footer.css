@@ -1,11 +1,12 @@
 footer {
+  margin-top: 2rem;
   padding: 3rem;
   border-top: 1px solid hsl(var(--foreground-tertiary));
 }
 
 .footer-nav {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 1rem;
 }
 
@@ -42,8 +43,9 @@ footer {
   footer {
     padding: 2vw 3vw;
   }
+
   .footer-nav {
-    max-width: 1024px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 }

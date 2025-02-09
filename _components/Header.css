@@ -9,7 +9,7 @@ header {
   padding-left: 3rem;
   border-bottom: 1px solid hsl(var(--foreground-tertiary));
   background-color: hsl(var(--background-primary));
-  z-index: 999; /* sorry mum */
+  z-index: 100;
 
   nav {
     display: none;

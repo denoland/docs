@@ -5,6 +5,8 @@ export interface SidebarItem {
   title: string;
   href?: string;
   items?: SidebarItem[];
+  externalUrl?: string;
+  type?: "video" | "example" | "tutorial";
 }
 
 export interface NavigationData {

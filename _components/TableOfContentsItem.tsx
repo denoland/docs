@@ -7,7 +7,7 @@ export default function TableOfContentsItem(
     <li class="m-2 leading-4">
       <a
         href={`#${props.item.slug}`}
-        class="text-[13px] text-foreground-secondary hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none"
+        className="text-[13px] text-foreground-secondary hover:text-indigo-600 transition-colors duration-200 ease-in-out select-none toc-link"
       >
         {props.item.text.replaceAll(/ \([0-9/]+?\)/g, "")}
       </a>

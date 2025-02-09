@@ -20,5 +20,15 @@
       "name": "Subhosting",
       "href": "/subhosting/manual/"
     }
+  ],
+  "sidebar": [
+    {
+      "items": [
+        {
+          "title": "deno.com",
+          "href": "https://deno.com"
+        }
+      ]
+    }
   ]
 }

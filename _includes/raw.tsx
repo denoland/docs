@@ -5,7 +5,7 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
 
   return (
     <>
-      <div style={{ scrollbarGutter: "stable" }}>
+      <div className="raw-container">
         {props.children}
         {reference && <props.comp.ToTop />}
       </div>

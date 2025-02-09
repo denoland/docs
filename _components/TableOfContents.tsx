@@ -9,16 +9,12 @@ export default function TableOfContents({ data, toc }: {
   }
 
   return (
-    <details>
-      <summary>
-        On this page
-      </summary>
-
-      <ul>
-        {toc.map((item: TableOfContentsItem_) => (
-          <data.comp.TableOfContentsItem item={item} />
-        ))}
-      </ul>
-    </details>
+    <ul className="toc-list toc-desktop" id="toc">
+      {toc.map((item: TableOfContentsItem_) => (
+        <data.comp.TableOfContentsItem item={item} />
+      ))}
+    </ul>
   );
 }
+
+export const css = `@import './_components/TableOfContents.css';`;
