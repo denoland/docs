@@ -63,10 +63,8 @@ export default function Layout(data: Lume.Data) {
         <link rel="stylesheet" href="/gfm.css" />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/overrides.css" />
-        <script src="/darkmode.client.js"></script>
         <link rel="stylesheet" href="/style.css" />
         <link rel="stylesheet" href="/components.css" />
-        <script type="module" src="/sidebar.client.js"></script>
         <script type="module" src="/lint_rules.client.js"></script>
         <script type="module" src="/copy.client.js"></script>
         <script type="module" src="/tabs.client.js"></script>
