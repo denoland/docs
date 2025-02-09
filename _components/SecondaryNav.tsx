@@ -9,18 +9,17 @@ export default function (data: Lume.Data) {
       {sectionData.map((nav: SidebarItem) => (
         <nav aria-labelledby="section-navigation">
           <h2 className="sub-nav-heading">
-            {nav.href ? (
-            <a
-              href={nav.href}
-              className="sub-nav-heading-link"
-              data-active={nav.href === currentUrl}
-            >
-              {nav.title}
-            </a>
-
-            ) : (
-              <>{nav.title}</>
-            )}
+            {nav.href
+              ? (
+                <a
+                  href={nav.href}
+                  className="sub-nav-heading-link"
+                  data-active={nav.href === currentUrl}
+                >
+                  {nav.title}
+                </a>
+              )
+              : <>{nav.title}</>}
           </h2>
 
           <ul className="sub-nav">
