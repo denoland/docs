@@ -111,9 +111,6 @@ before being merged.
 | prose-wrap         | Define how prose should be wrapped                     | **always** | always, never, preserve |
 | single-quote       | Use single quotes                                      | **false**  | true, false             |
 | unstable-component | Enable formatting Svelte, Vue, Astro and Angular files |            |                         |
-| unstable-css       | Enable formatting CSS, SCSS, Sass and Less files       |            |                         |
-| unstable-html      | Enable formatting HTML files                           |            |                         |
-| unstable-yaml      | Enable formatting YAML files                           |            |                         |
 | unstable-sql       | Enable formatting SQL files                            |            |                         |
 | use-tabs           | Use tabs instead of spaces for indentation             | **false**  | true, false             |
 

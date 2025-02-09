@@ -54,16 +54,16 @@ nix-shell -p deno
 Using [asdf](https://asdf-vm.com/):
 
 ```shell
-asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
+asdf plugin add deno https://github.com/asdf-community/asdf-deno.git
 
 # Download and install the latest version of Deno
 asdf install deno latest
 
 # To set as the default version of Deno globally
-asdf global deno latest
+asdf set -u deno latest
 
 # To set as the default version of Deno locally (current project only)
-asdf local deno latest
+asdf set deno latest
 ```
 
 Using [vfox](https://vfox.lhan.me/):
@@ -154,16 +154,16 @@ nix-shell -p deno
 Using [asdf](https://asdf-vm.com/):
 
 ```shell
-asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
+asdf plugin add deno https://github.com/asdf-community/asdf-deno.git
 
 # Download and install the latest version of Deno
 asdf install deno latest
 
 # To set as the default version of Deno globally
-asdf global deno latest
+asdf set -u deno latest
 
 # To set as the default version of Deno locally (current project only)
-asdf local deno latest
+asdf set deno latest
 ```
 
 Using [vfox](https://vfox.lhan.me/):
