@@ -207,7 +207,7 @@ export const sidebar = [
       },
       {
         title: "Deno APIs",
-        href: "/runtime/reference/deno_titlespace_apis/",
+        href: "/runtime/reference/deno_namespace_apis/",
       },
       {
         title: "Web APIs",
@@ -408,14 +408,12 @@ export async function generateNodeCompatability() {
 
   return Object.entries(grouped).map(([_status, entries]) => {
     let content =
-      `<div class="module-info">\n\n## ${entries.icon} ${entries.label} (${entries.items.length}/${
-        Object.keys(descriptions).length
+      `<div class="module-info">\n\n## ${entries.icon} ${entries.label} (${entries.items.length}/${Object.keys(descriptions).length
       })\n\n`;
 
     content += entries.items.map(([key, content]) => {
-      let out = `\n\n### <a href="/api/node/${key}">node:${
-        key.replaceAll("--", "/")
-      }</a>\n\n<div class="item-content">\n\n`;
+      let out = `\n\n### <a href="/api/node/${key}">node:${key.replaceAll("--", "/")
+        }</a>\n\n<div class="item-content">\n\n`;
 
       if (content) {
         if (content.description) {
@@ -423,9 +421,8 @@ export async function generateNodeCompatability() {
         }
         if (content.symbols) {
           for (const [symbol, description] of Object.entries(content.symbols)) {
-            out += `**${
-              symbol === "*" ? "All symbols" : symbol
-            }**: ${description.description}\n\n`;
+            out += `**${symbol === "*" ? "All symbols" : symbol
+              }**: ${description.description}\n\n`;
           }
         }
       }
