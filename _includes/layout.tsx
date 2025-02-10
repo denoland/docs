@@ -90,7 +90,6 @@ export default function Layout(data: Lume.Data) {
         </script>
       </head>
       <body>
-        {}
         <data.comp.Header currentSection={section} />
         <div className="container">
           <data.comp.Navigation
