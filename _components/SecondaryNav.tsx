@@ -19,7 +19,7 @@ export default function (data: Lume.Data) {
                   {nav.title}
                 </a>
               )
-              : <span className="sub-nav-heading-link">{nav.title}</span>}
+              : <span className="sub-nav-heading-text">{nav.title}</span>}
           </h2>
 
           <ul className="sub-nav">

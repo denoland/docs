@@ -20,6 +20,14 @@
   }
 }
 
+.sub-nav-heading-text {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid hsl(var(--foreground-tertiary));
+  color: hsl(var(--foreground-secondary));
+  font-weight: bold;
+}
+
 .sub-nav-heading-link[data-active], .sub-nav-heading-link:hover {
   background-color: hsl(var(--background-secondary));
 }
