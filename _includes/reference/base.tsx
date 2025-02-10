@@ -7,9 +7,10 @@ export default function Base(
   _helpers: Lume.Helpers,
 ) {
   return (
+    <>
+      <comp.RefNav data={data} url="/reference" />
     <div className="ddoc">
       <link rel="stylesheet" href="/reference_styles.css" />
-
       <comp.CategoryPanel categoryPanel={data.categories_panel} />
 
       <div>
@@ -37,5 +38,6 @@ export default function Base(
         </div>
       </div>
     </div>
+    </>
   );
 }
