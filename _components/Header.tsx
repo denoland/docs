@@ -17,7 +17,7 @@ export default function (data: Lume.Data) {
           </a>
         ))}
       </nav>
-      <data.comp.ExternalLink url="https://deno.com">
+      <data.comp.ExternalLink href="https://deno.com">
         deno.com
       </data.comp.ExternalLink>
       <data.comp.SearchInput />
