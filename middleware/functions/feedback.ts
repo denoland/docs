@@ -87,8 +87,6 @@ export default async function feedbackRequestHandler(
       id: id,
     });
 
-    console.log(response);
-
     return new Response(
       JSON.stringify({
         success: true,
