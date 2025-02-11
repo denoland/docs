@@ -87,7 +87,7 @@ Read more
 
 ## Framework support
 
-With improved Node.js and npm compatibility, Deno 2 supports a plethora or
+With improved Node.js and npm compatibility, Deno 2 supports a plethora of
 user-favorite frameworks like:
 
 - Next.js
