@@ -1,4 +1,4 @@
-export default function Feedback({ file }) {
+export default function Feedback({ file }: { file: string | undefined }) {
   if (!file) {
     return <></>;
   } else {
