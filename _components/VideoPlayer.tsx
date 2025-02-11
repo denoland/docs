@@ -1,5 +1,4 @@
 export const css = "@import './_components/VideoPlayer.css';";
-export const js = `import "/js/youtube-lite-client.js";`;
 
 /**
  * Embed a YouTube video.
@@ -35,3 +34,7 @@ function urlMatcher(url: string): string | undefined {
   const match = url.match(urlPattern);
   return match?.[3];
 }
+
+export const js = `
+import "/js/youtube-lite.client.js";
+`;
