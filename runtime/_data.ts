@@ -184,6 +184,10 @@ export const sidebar = [
         id: "/runtime/reference/jsx/",
       },
       {
+        label: "Lint Plugins",
+        id: "/runtime/reference/lint_plugins/",
+      },
+      {
         label: "Testing code in docs",
         id: "/runtime/reference/documentation/",
       },
