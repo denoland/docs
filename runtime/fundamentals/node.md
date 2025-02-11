@@ -504,14 +504,14 @@ console.log(process.versions.deno);
 $ deno run process.js
 2.0.0
 $ deno lint process.js
-error[no-process-globals]: NodeJS process global is discouraged in Deno
+error[no-process-global]: NodeJS process global is discouraged in Deno
  --> /process.js:1:13
   |
 1 | console.log(process.versions.deno);
   |             ^^^^^^^
   = hint: Add `import process from "node:process";`
 
-  docs: https://docs.deno.com/lint/rules/no-process-globals
+  docs: https://docs.deno.com/lint/rules/no-process-global
 
 
 Found 1 problem (1 fixable via --fix)
