@@ -149,7 +149,10 @@ packages in a single workspace.
 
 ### Multiple package entries
 
-So far, our package only has a single entry. This is fine for simple packages, but often you'll want to have multiple entries that group relevant aspects of your package. This can be done by passing an `object` instead of a `string` to `exports`:
+So far, our package only has a single entry. This is fine for simple packages,
+but often you'll want to have multiple entries that group relevant aspects of
+your package. This can be done by passing an `object` instead of a `string` to
+`exports`:
 
 ```json title="my-package/deno.json"
 {
@@ -163,7 +166,9 @@ So far, our package only has a single entry. This is fine for simple packages, b
 }
 ```
 
-The `"."` entry is the default entry that's picked when importing `@scope/my-package`. Therefore, the above `deno.json` example provides the folowing entries:
+The `"."` entry is the default entry that's picked when importing
+`@scope/my-package`. Therefore, the above `deno.json` example provides the
+folowing entries:
 
 - `@scope/my-package`
 - `@scope/my-package/foo`
@@ -313,7 +318,7 @@ root and its members:
 | bench.exclude      | ✅        | ✅      |                                                                                                                                                                                                                                                                                                        |
 | bench.files        | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                                                                                                             |
 | lock               | ✅        | ❌      | Only a single lock file may exist per resolver, and only resolver may exist per workspace, so conditional enablement of the lockfile per package does not make sense.                                                                                                                                  |
-| unstable           | ✅        | ❌      | For simplicities sake, we do not allow unstable flags, because a lot of the CLI assumes that unstable flags are immutable and global to the entire process. Also weird interaction with DENO*UNSTABLE*\* flags.                                                                                        |
+| unstable           | ✅        | ❌      | For simplicities sake, we do not allow unstable flags, because a lot of the CLI assumes that unstable flags are immutable and global to the entire process. Also weird interaction with DENO_UNSTABLE_\* flags.                                                                                        |
 | name               | ❌        | ✅      |                                                                                                                                                                                                                                                                                                        |
 | version            | ❌        | ✅      |                                                                                                                                                                                                                                                                                                        |
 | exports            | ❌        | ✅      |                                                                                                                                                                                                                                                                                                        |
