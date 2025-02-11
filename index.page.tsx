@@ -1,17 +1,6 @@
 export const layout = "raw.tsx";
 export const url = "/";
 
-export const sidebar = [
-  {
-    items: [
-      {
-        label: "deno.com",
-        id: "https://deno.com",
-      },
-    ],
-  },
-];
-
 export default function () {
   return (
     <main

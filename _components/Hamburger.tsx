@@ -1,4 +1,4 @@
-export default function (data: Lume.Data) {
+export default function () {
   return (
     <>
       <label htmlFor="hamburger" className="hamburger-label">

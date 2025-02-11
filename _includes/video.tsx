@@ -1,12 +1,12 @@
-import { EmbedVideo } from "../_components/EmbedVideo.tsx";
-import { VideoReference } from "../types.ts";
+export const layout = "doc.tsx";
 
-type Props = { video: VideoReference };
-
-export default function VideoPage({ video }: Props) {
+export default function Raw(data: Lume.Data) {
   return (
     <>
-      <EmbedVideo id={video.externalURL} />
+      <data.comp.VideoPlayer id={data.videoUrl} />
+
+      {data.children}
+
       <div className="my-12">
         Find more videos in the <a href="/examples/">Examples page</a>{" "}
         and on our{"  "}

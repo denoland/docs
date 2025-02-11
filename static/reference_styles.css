@@ -1393,9 +1393,6 @@
   max-height: 100%;
   overflow-y: auto;
 }
-#content {
-  margin-top: 1rem;
-}
 #content > main {
   flex-direction: column;
   flex-grow: 1;
