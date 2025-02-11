@@ -69,7 +69,6 @@ export default function Layout(data: Lume.Data) {
         <script type="module" src="/copy.client.js"></script>
         <script type="module" src="/tabs.client.js"></script>
         <script type="module" src="/feedback.client.js"></script>
-        <script type="module" src="/youtube-lite.client.js"></script>
         <script type="module" src="/components.js"></script>
         <script
           async

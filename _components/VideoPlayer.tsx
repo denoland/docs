@@ -1,16 +1,16 @@
+export const css = "@import './_components/VideoPlayer.css';";
+export const js = `import "/js/youtube-lite-client.js";`;
+
 /**
  * Embed a YouTube video.
  * @param props.id - The YouTube ID or URL.
  * @returns A custom element that embeds the YouTube video with Lite YouTube Embed.
  */
-export function EmbedVideo(
+export default function (
   props: { id: string },
 ) {
   const videoid = extractID(props.id);
-  return (
-    <lite-youtube videoid={videoid}>
-    </lite-youtube>
-  );
+  return <lite-youtube videoid={videoid}></lite-youtube>;
 }
 
 /**
