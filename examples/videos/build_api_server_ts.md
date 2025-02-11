@@ -205,7 +205,7 @@ to [Deno deploy](https://deno.com/deploy).
 You can deploy this to any cloud VPS like AWS, GCP, Digital Ocean, with the
 [official Docker image](https://github.com/denoland/deno_docker)
 
-### Complete code sample
+## Complete code sample
 
 ```ts
 import { Hono } from "@hono/hono";
