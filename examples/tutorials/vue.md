@@ -206,7 +206,7 @@ it to include only the `<RouterView>` component:
 ```html title="App.vue"
 <template>
   <RouterView />
-</template>;
+</template>
 ```
 
 ### The components
