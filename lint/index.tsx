@@ -39,7 +39,13 @@ export default function LintRulesIndex(
   return (
     <div>
       <div class="flex flex-col gap-4 mb-8">
-        <p>These lint rules are provided by the <a href="/runtime/reference/cli/lint/"><code>deno lint</code></a> command.</p>
+        <p>
+          These lint rules are provided by the{" "}
+          <a href="/runtime/reference/cli/lint/">
+            <code>deno lint</code>
+          </a>{" "}
+          command.
+        </p>
         <input
           type="text"
           id="lint-rule-search"

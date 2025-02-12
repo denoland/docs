@@ -45,8 +45,8 @@ rules, plugins, and settings to tailor the linting process to your needs.
 
 ### Linting rules
 
-You can view and search the list of available rules and their usage on
-the [List of rules](/lint/) documentation page.
+You can view and search the list of available rules and their usage on the
+[List of rules](/lint/) documentation page.
 
 ## Formatting
 

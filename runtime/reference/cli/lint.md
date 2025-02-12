@@ -10,8 +10,8 @@ command: lint
 
 ## Available rules
 
-For a complete list of supported rules, visit
-[List of rules](/lint/) documentation page.
+For a complete list of supported rules, visit [List of rules](/lint/)
+documentation page.
 
 ## Ignore directives
 
