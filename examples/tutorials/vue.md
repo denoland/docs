@@ -233,23 +233,25 @@ up earlier and render them as links using the
 
 ```html title="Dinosaurs.vue"
 <script lang="ts">
-import { defineComponent } from 'vue';
+  import { defineComponent } from "vue";
 
-export default defineComponent({
+  export default defineComponent({
     async setup() {
-        const res = await fetch("http://localhost:8000/dinosaurs")
-        const dinosaurs = await res.json() as Dinosaur[];
-        return { dinosaurs };
-    }
-});
+      const res = await fetch("http://localhost:8000/dinosaurs");
+      const dinosaurs = await res.json() as Dinosaur[];
+      return { dinosaurs };
+    },
+  });
 </script>
 
 <template>
-    <div v-for="dinosaur in dinosaurs" :key="dinosaur.name">
-        <RouterLink :to="{ name: 'Dinosaur', params: { dinosaur: `${dinosaur.name.toLowerCase()}` } }" >
-            {{ dinosaur.name }}
-        </RouterLink>
-    </div>
+  <div v-for="dinosaur in dinosaurs" :key="dinosaur.name">
+    <RouterLink
+      :to="{ name: 'Dinosaur', params: { dinosaur: `${dinosaur.name.toLowerCase()}` } }"
+    >
+      {{ dinosaur.name }}
+    </RouterLink>
+  </div>
 </template>
 ```
 
@@ -267,7 +269,7 @@ component. Add the following code to the `HomePage.vue` file:
 
 ```html title="HomePage.vue"
 <script setup lang="ts">
-import Dinosaurs from './Dinosaurs.vue';
+  import Dinosaurs from "./Dinosaurs.vue";
 </script>
 <template>
   <h1>Welcome to the Dinosaur App! 🦕</h1>
@@ -310,26 +312,28 @@ Then update the `Dinosaur.vue` file:
 
 ```html title="Dinosaur.vue"
 <script lang="ts">
-import { defineComponent } from 'vue';
+  import { defineComponent } from "vue";
 
-export default defineComponent({
+  export default defineComponent({
     props: { dinosaur: String },
     data(): ComponentData {
-        return { 
-            dinosaurDetails: null 
-        };
+      return {
+        dinosaurDetails: null,
+      };
     },
     async mounted() {
-        const res = await fetch(`http://localhost:8000/dinosaurs/${this.dinosaur}`);
-        this.dinosaurDetails = await res.json();
-    }
-});
+      const res = await fetch(
+        `http://localhost:8000/dinosaurs/${this.dinosaur}`,
+      );
+      this.dinosaurDetails = await res.json();
+    },
+  });
 </script>
 
 <template>
-    <h1>{{ dinosaurDetails?.name }}</h1>
-    <p>{{ dinosaurDetails?.description }}</p>
-    <RouterLink to="/">🠠 Back to all dinosaurs</RouterLink>
+  <h1>{{ dinosaurDetails?.name }}</h1>
+  <p>{{ dinosaurDetails?.description }}</p>
+  <RouterLink to="/">🠠 Back to all dinosaurs</RouterLink>
 </template>
 ```
 
