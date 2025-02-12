@@ -43,8 +43,10 @@ The linter can be configured in a
 [`deno.json`](/runtime/fundamentals/configuration/) file. You can specify custom
 rules, plugins, and settings to tailor the linting process to your needs.
 
+### Linting rules
+
 You can view and search the list of available rules and their usage on
-[List of rules](/lint/) documentation page.
+the [List of rules](/lint/) documentation page.
 
 ## Formatting
 
