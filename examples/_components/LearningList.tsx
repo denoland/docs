@@ -1,11 +1,12 @@
 import { TutorialIcon } from "./TutorialIcon.tsx";
 import { ExampleIcon } from "./ExampleIcon.tsx";
 import { VideoIcon } from "./VideoIcon.tsx";
+import { SidebarItem } from "../../types.ts";
 
 export function LearningList(
   props: {
     title: string;
-    items: ({ label: string; id: string; type: string })[];
+    items: SidebarItem[];
   },
 ) {
   return (
@@ -19,13 +20,13 @@ export function LearningList(
           >
             <a
               className="learn-link runtime-link"
-              href={item.id}
+              href={item.href}
             >
               {item.type === "tutorial" && <TutorialIcon />}
               {item.type === "example" && <ExampleIcon />}
               {item.type === "video" && <VideoIcon />}
 
-              {item.label}
+              {item.title}
             </a>
           </li>
         ))}
