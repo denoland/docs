@@ -1,0 +1,20 @@
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-left: -0.75rem;
+  color: hsl(var(--foreground-secondary));
+}
+
+.crumb-link {
+  display: flex;
+  align-items: center;
+  &::after {
+    content: "";
+    width: 1em;
+    height: 1em;
+    background: url(./img/chevron.svg) no-repeat center;
+    display: inline-block;
+    margin-left: 1rem;
+  }
+}

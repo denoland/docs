@@ -20,7 +20,13 @@
   }
 }
 
-.main-nav-link[data-active="true"] {
+.main-nav-link[data-active] {
   font-weight: bold;
   background-color: hsl(var(--background-tertiary));
+}
+
+@media (min-width: 1024px) {
+  .main-nav {
+    display: none;
+  }
 }
