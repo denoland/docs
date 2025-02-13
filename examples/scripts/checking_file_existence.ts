@@ -5,38 +5,30 @@
  * @run --allow-read --allow-write <url>
  * @group File System
  *
- * Sometimes we as developers think that we need to check
- * if a file exists or not. More often than not, we are
- * entirely wrong.
+ * When creating files it can be useful to first ensure that
+ * such a file doesn't already exist.
+ * There are a number of ways to do this.
  */
 
-// Let's say we wanted to create a folder if one doesn't
-// already exist. Logically it makes sense to first verify
-// that the folder exists, then try to create it right?
-// Wrong. This will create a race condition where if a folder
-// gets created in between when you check if the folder exists
-// and when you create a folder, your program will crash.
-// Instead, you should just create a folder and try to catch
-// errors like so.
-try {
-  await Deno.mkdir("new_dir");
-} catch (err) {
-  if (!(err instanceof Deno.errors.AlreadyExists)) {
-    throw err;
-  }
-}
+// Use the `exists` utility from the std library to check for existence of a file or folder.
+// Note: Can create a race condition if followed by file operation.
+// Consider the alternative below.
+import { exists } from "jsr:@std/fs/exists";
+await exists("./this_file_or_folder_exists"); // true
+await exists("./this_file_or_folder_does_not_exist"); // false
 
-// This applies to almost every usecase. If you have a niche
-// usecase that requires you to check for existence of a file
-// without doing an filesystem operations other than that
-// (which is quite rare), then you can simply lstat the file
-// and catch the error.
+// We can also use this function to check if the item on a path is a file or a directory
+await exists("./file", { isFile: true }); // true
+await exists("./directory", { isFile: true }); // false
+
+// Do not use the above function if performing a check directly before another operation on that file.
+// Doing so creates a race condition. The `exists` function is not recommended for that usecase.
+// Consider this alternative which checks for existence of a file without doing any other filesystem operations.
 try {
-  await Deno.lstat("example.txt");
-  console.log("exists!");
+  const stats = await Deno.lstat("example.txt");
 } catch (err) {
   if (!(err instanceof Deno.errors.NotFound)) {
     throw err;
   }
-  console.log("not exists!");
+  console.log("File does not exist");
 }
