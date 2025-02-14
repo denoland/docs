@@ -17,7 +17,7 @@ export default function ExamplePage({ example }: Props) {
   }`;
 
   return (
-    <>
+    <div data-content="example">
       <div class="flex flex-col gap-4 md:flex-row justify-between items-start md:items-center relative">
         <div class="flex flex-col gap-2">
           {example.parsed.description && (
@@ -37,7 +37,7 @@ export default function ExamplePage({ example }: Props) {
           Edit on Github
         </a>
       </div>
-      <div class="relative block">
+      <div class="relative block mt-8">
         <CopyButton text={contentNoCommentary} />
       </div>
       {example.parsed.files.map((file) => (
@@ -122,6 +122,6 @@ export default function ExamplePage({ example }: Props) {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
