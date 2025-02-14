@@ -1,0 +1,33 @@
+:root {
+  --max-text-width: 40rem;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+p {
+  max-width: var(--max-text-width);
+}
+
+.blocklink {
+  padding: 0.25rem 0.75rem;
+  margin: 0 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  transition: all 200ms ease-in-out;
+  color: hsl(var(--foreground-primary));
+  &:hover {
+    text-decoration: none;
+    background-color: hsl(var(--background-secondary));
+    border-color: hsl(var(--background-tertiary));
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+}

@@ -223,7 +223,7 @@ Once we have defined `./src/db/schema.ts`, we can create the tables and their
 specified relationship by creating a migration:
 
 ```bash
-deno -A npm:drizzle-kit generate
+deno -A --node-modules-dir npm:drizzle-kit generate
 
 Failed to find Response internal state key
 No config path provided, using default 'drizzle.config.ts'

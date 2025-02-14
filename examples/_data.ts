@@ -659,6 +659,11 @@ export const sidebar = [
         type: "example",
       },
       {
+        label: "Checking for directory existence",
+        id: "/examples/checking_directory_existence",
+        type: "example",
+      },
+      {
         label: "Moving/Renaming files",
         id: "/examples/moving_renaming_files",
         type: "example",
@@ -823,6 +828,11 @@ export const sidebar = [
       {
         label: "UDP connector: Ping",
         id: "/examples/udp_connector",
+        type: "example",
+      },
+      {
+        label: "Temporal API",
+        id: "/examples/temporal",
         type: "example",
       },
     ],

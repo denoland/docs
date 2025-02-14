@@ -24,12 +24,8 @@ const toggleDarkMode = () => {
   }
 };
 
-const darkModeToggleButtons = document.querySelectorAll(
-  ".dark-mode-toggle.button",
-);
+const darkModeToggleButtons = document.getElementById("theme-toggle");
 
-darkModeToggleButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    toggleDarkMode();
-  });
+darkModeToggleButtons.addEventListener("click", () => {
+  toggleDarkMode();
 });

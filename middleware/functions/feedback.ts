@@ -1,12 +1,60 @@
-import { google } from "googleapis";
+import { Client } from "npm:@notionhq/client";
 import type { FeedbackSubmission } from "../../types.ts";
 
-const { privateKey } = JSON.parse(Deno.env.get("FEEDBACK_PRIVATE_KEY") || "{}");
-const serviceAccountEmail = Deno.env.get("FEEDBACK_SERVICE_ACCOUNT_EMAIL");
-const spreadsheetId = Deno.env.get("FEEDBACK_SHEET_ID");
-const enableFeedbackMiddleware = privateKey && serviceAccountEmail &&
-  spreadsheetId;
+// Collecting entries to an internal Notion page
+const apiKey = Deno.env.get("NOTION_FEEDBACK_API_KEY");
+const databaseID = Deno.env.get("NOTION_FEEDBACK_DATABASE_ID");
 
+// Check if the API key and database ID are set
+const enableFeedbackMiddleware = apiKey && databaseID;
+
+// Connect to Notion
+const notion = new Client({ auth: apiKey });
+
+// Insert data into Notion
+const insertData = async (
+  { path, sentiment, comment, contact, id }: FeedbackSubmission,
+) => {
+  // Assemble the properties to send to the API
+  type Properties = {
+    "Docs Url": { title: { text: { content: string } }[] };
+    "Helpful?": { rich_text: { text: { content: "yes" | "no" } }[] };
+    Feedback?: { rich_text: { text: { content: string } }[] };
+    Email?: { email: string };
+  };
+
+  const properties: Properties = {
+    "Docs Url": { "title": [{ "text": { "content": path } }] },
+    "Helpful?": { "rich_text": [{ "text": { "content": sentiment } }] },
+  };
+
+  if (comment) {
+    properties["Feedback"] = {
+      "rich_text": [{ "text": { "content": comment } }],
+    };
+  }
+  if (contact) {
+    properties["Email"] = { "email": contact };
+  }
+
+  // update to or create the record
+  if (id) {
+    return await notion.pages.update({
+      page_id: id,
+      properties: properties,
+    });
+  } else {
+    return await notion.pages.create({
+      parent: {
+        type: "database_id",
+        database_id: databaseID || "",
+      },
+      properties: properties,
+    });
+  }
+};
+
+// Handle the request
 export default async function feedbackRequestHandler(
   req: Request,
 ): Promise<Response> {
@@ -17,9 +65,11 @@ export default async function feedbackRequestHandler(
     );
   }
 
+  // Gather data from submission
   const submission = await req.json() as FeedbackSubmission;
   const { path, sentiment, comment, contact, id } = submission;
 
+  // Cap data at sensible max lengths
   const contactCapped = contact && contact.length > 256
     ? contact?.slice(0, 256)
     : contact;
@@ -28,57 +78,30 @@ export default async function feedbackRequestHandler(
     ? comment?.slice(0, 1000)
     : comment;
 
-  const rowData = [path, sentiment, contactCapped || "", commentCapped || ""];
-
   try {
-    const sheets = google.sheets({ version: "v4" });
+    const response = await insertData({
+      path: path,
+      sentiment: sentiment,
+      comment: commentCapped,
+      contact: contactCapped,
+      id: id,
+    });
 
-    const request = {
-      spreadsheetId,
-      range: id ? atob(id) : `Sheet1!A1`,
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: [rowData],
-      },
-    };
-
-    const auth = getAuth();
-
-    let response: any;
-    let updates: any;
-
-    // The google package claims that it returns nothing but it actually does.
-    if (id) {
-      response = await sheets.spreadsheets.values.update(request, { auth });
-      updates = response.data;
-    } else {
-      response = await sheets.spreadsheets.values.append(request, { auth });
-      updates = response.data.updates;
-    }
+    console.log(response);
 
     return new Response(
       JSON.stringify({
         success: true,
-        id: btoa(updates.updatedRange),
+        id: response.id,
       }),
-      {
-        status: 200,
-      },
+      { status: 200 },
     );
   } catch (error) {
-    console.error("Error appending row:", error);
-    return new Response(JSON.stringify({ success: false }), { status: 500 });
+    return new Response(
+      JSON.stringify({
+        error: "Failed to insert data into Notion",
+      }),
+      { status: 500 },
+    );
   }
-}
-
-function getAuth(): any {
-  return new google.auth.JWT({
-    email: serviceAccountEmail,
-    key: privateKey,
-    scopes: [
-      "https://www.googleapis.com/auth/drive",
-      "https://www.googleapis.com/auth/drive.file",
-      "https://www.googleapis.com/auth/spreadsheets",
-    ],
-  });
 }

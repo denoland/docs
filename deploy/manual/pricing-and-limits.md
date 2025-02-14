@@ -17,6 +17,10 @@ terminated.
 When uploading assets to a deployment, the total size of all files within the
 deployment (source files and static files) **should not exceed 1 gigabyte**.
 
+## Memory allocation
+
+Applications have a maximum memory allocation of 512MB
+
 ## TLS proxying
 
 TLS termination is required for outgoing connections to port 443 (the port used

@@ -2,13 +2,6 @@
 title: "Edge Cache"
 ---
 
-:::caution Beta feature
-
-Cache API support on Deno Deploy is currently in closed beta and is not
-available to all users yet.
-
-:::
-
 The [Web Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache) is
 supported on Deno Deploy. The cache is designed to provide microsecond-level
 read latency, multi-GB/s write throughput and unbounded storage, with the

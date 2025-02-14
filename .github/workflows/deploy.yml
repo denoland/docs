@@ -40,7 +40,7 @@ jobs:
 
       - name: Run server
         working-directory: _site
-        run: deno run --no-lock --allow-read=. --allow-net --allow-env server.ts &
+        run: deno run --allow-read=. --allow-net --allow-env --lock=../deno.lock server.ts &
 
       - name: Link checker
         env:

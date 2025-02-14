@@ -61,10 +61,10 @@ const client = new Client({
 await client.connect();
 ```
 
+### Connect to Postgres with postgresjs
+
 [postgresjs](https://deno.land/x/postgresjs) is a full-featured Postgres client
 for Node.js and Deno.
-
-### Connect to Postgres with postgresjs
 
 Import the `postgres` module and create a new client instance. Then connect to
 the database passing a connection string as an argument:

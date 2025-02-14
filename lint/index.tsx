@@ -39,6 +39,13 @@ export default function LintRulesIndex(
   return (
     <div>
       <div class="flex flex-col gap-4 mb-8">
+        <p>
+          These lint rules are provided by the{" "}
+          <a href="/runtime/reference/cli/lint/">
+            <code>deno lint</code>
+          </a>{" "}
+          command.
+        </p>
         <input
           type="text"
           id="lint-rule-search"
@@ -78,7 +85,7 @@ export default function LintRulesIndex(
       <ul class="flex flex-col gap-4 !list-none !pl-0">
         {data.lintRulePages.map((lintRule, idx: number) => (
           <li
-            class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4 lint-rule-box"
+            class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4 lint-rule-box dark:border-gray-700"
             id={lintRule.label}
           >
             <div class="flex flex-row justify-start items-center gap-4 mb-2">

@@ -24,7 +24,7 @@ const styles = /*css*/ `
   text-wrap: balance;
 }`;
 
-export default function Page(props: Lume.Data, _helpers: Lume.Helpers) {
+export default function Page(data: Lume.Data, _helpers: Lume.Helpers) {
   return (
     <main
       id="content"
@@ -43,11 +43,11 @@ export default function Page(props: Lume.Data, _helpers: Lume.Helpers) {
         </p>
       </div>
 
-      <props.comp.Sidebar
+      <data.comp.Sidebar
         sidebar={sidebar}
-        search={props.search}
-        url={props.url}
-        headerPath={props.headerPath!}
+        search={data.search}
+        url={data.url}
+        headerPath={data.headerPath!}
       />
     </main>
   );

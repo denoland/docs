@@ -13,7 +13,7 @@ following regions:
 - North Virginia (`us-east4`)
 - California (`us-west2`)
 
-We will update the list as we add more regions.
+This list will be maintained to reflect the latest summary of our regions.
 
 Code is deployed to all regions and is served from the region closest to the end
 user to minimize latency. It is not currently possible to restrict the regions

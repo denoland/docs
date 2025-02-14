@@ -1,0 +1,26 @@
+.theme-toggle {
+  height: 2.3rem;
+  width: 2.3rem;
+  font-size: 0;
+  color: transparent;
+  background: transparent no-repeat center;
+  background-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  transition: all 200ms ease-in-out;
+  color: hsl(var(--foreground-secondary));
+  &:hover {
+    text-decoration: none;
+    background-color: hsl(var(--background-secondary));
+    border-color: hsl(var(--background-tertiary));
+  }
+}
+
+.light .theme-toggle {
+  background-image: url(/img/dark.svg);
+}
+
+.dark .theme-toggle {
+  background-image: url(/img/light.svg);
+}

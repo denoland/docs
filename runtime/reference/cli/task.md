@@ -76,6 +76,31 @@ argument in case it contains spaces):
 }
 ```
 
+## Wildcard matching of tasks
+
+The `deno task` command can run multiple tasks in parallel by passing a wildcard
+pattern. A wildcard pattern is specified with the `*` character.
+
+```json title="deno.json"
+{
+  "tasks": {
+    "build-client": "deno run -RW client/build.ts",
+    "build-server": "deno run -RW server/build.ts"
+  }
+}
+```
+
+Running `deno task "build-*"` will run both `build-client` and `build-server`
+tasks.
+
+:::note
+
+**When using a wildcard** make sure to quote the task name (eg. `"build-*"`),
+otherwise your shell might try to expand the wildcard character, leading to
+suprising errors.
+
+:::
+
 ## Task dependencies
 
 You can specify dependencies for a task:
@@ -174,6 +199,23 @@ If a cycle between dependencies is discovered, an error will be returned:
 $ deno task a
 Task cycle detected: a -> b -> a
 ```
+
+You can also specify a task that has `dependencies` but no `command`. This is
+useful to logically group several tasks together:
+
+```json title="deno.json"
+{
+  "tasks": {
+    "dev-client": "deno run --watch client/mod.ts",
+    "dev-server": "deno run --watch sever/mod.ts",
+    "dev": {
+      "dependencies": ["dev-client", "dev-server"]
+    }
+  }
+}
+```
+
+Running `deno task dev` will run both `dev-client` and `dev-server` in parallel.
 
 ## Workspace support
 

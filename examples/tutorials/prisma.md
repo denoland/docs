@@ -73,7 +73,7 @@ deno run -A npm:prisma@latest db push
 After that's complete, we'll need to generate a Prisma Client:
 
 ```shell
-deno run -A --unstable npm:prisma@latest generate --no-engine
+deno run -A --unstable-detect-cjs npm:prisma@latest generate --no-engine
 ```
 
 ## Setup Accelerate in the Prisma Data Platform

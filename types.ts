@@ -67,3 +67,5 @@ export interface GoogleSheetsUpdateResponse {
     updatedCells: number;
   };
 }
+
+export type NavData = { name: string; url: string };
