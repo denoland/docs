@@ -1,4 +1,5 @@
 import type { SymbolPageCtx } from "@deno/doc";
+export const layout = "doc.tsx";
 
 export default function Symbol(
   { data, comp }: { data: SymbolPageCtx } & Lume.Data,

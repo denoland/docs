@@ -1,6 +1,3 @@
-import { CategoriesPanelCategoryCtx } from "@deno/doc/html-types";
-import { SidebarItem } from "../types.ts";
-
 export default function (data: Lume.Data) {
   const sectionData = data.sectionData;
   const currentUrl = data.currentUrl;
@@ -20,7 +17,11 @@ export default function (data: Lume.Data) {
                   {nav.title || nav.name}
                 </a>
               )
-              : <span className="sub-nav-heading-text">{nav.title}</span>}
+              : (
+                <span className="sub-nav-heading-text">
+                  {nav.title || nav.name}
+                </span>
+              )}
           </h2>
 
           <ul className="sub-nav">
@@ -61,7 +62,7 @@ export default function (data: Lume.Data) {
                       className="sub-nav-link blocklink"
                       data-active={item.href === currentUrl}
                     >
-                      {item.title}
+                      {item.title || item.name}
                     </a>
                   )}
               </li>

@@ -1,107 +1,14 @@
-import Logo from "./Logo.tsx";
-export default function Header({
-  data,
-  url,
-  hasSidebar,
-}: {
-  data: Lume.Data;
-  url: string;
-  hasSidebar?: boolean;
-}) {
-  const reference = url.startsWith("/api");
+export default function Header({currentUrl}: {currentUrl: string}) {
+  const reference = currentUrl.startsWith("/api");
   return (
-    <header
-      class={`bg-background-primary text-foreground-primary border-b border-foreground-tertiary z-30 ${
-        reference ? "" : "sticky top-0 left-0 right-0"
-      }`}
-    >
-      <nav class="p-4 py-3 md:px-6 min-h-16 flex items-center justify-between">
-        <div class="flex items-center">
-          {hasSidebar && (
-            <button class="mr-2 xl:hidden" id="sidebar-open">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 30 30"
-                aria-hidden="true"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-miterlimit="10"
-                  stroke-width="2"
-                  d="M4 7h22M4 15h22M4 23h22"
-                >
-                </path>
-              </svg>
-            </button>
-          )}
-          <a class="flex gap-2.5 mr-5" href="/">
-            <div class="w-auto h-9">
-              <Logo />
-            </div>
-            {/* custom font size for logo */}
-          </a>
-          <HeaderItem
-            url={url}
-            activeOn="/runtime"
-            href="/runtime/"
-            name="Manual"
-            hideOnMobile
-          />
-          <HeaderItem
-            url={url}
-            activeOn="/api"
-            href="/api/deno"
-            name="API reference"
-            hideOnMobile
-          />
-          <HeaderItem
-            url={url}
-            activeOn="/examples"
-            href="/examples"
-            name="Examples"
-            hideOnMobile
-          />
-          <span class="hidden xl:inline-block text-foreground-secondary mx-2">
-            //
-          </span>
-          <HeaderItem
-            url={url}
-            activeOn="/deploy"
-            href="/deploy/manual"
-            name="Deploy"
-            hideOnMobile
-          />
-          <HeaderItem
-            url={url}
-            activeOn="/subhosting"
-            href="/subhosting/manual"
-            name="Subhosting"
-            hideOnMobile
-          />
-        </div>
-
-        <div class="flex items-center gap-2">
-          <HeaderItem
-            url={url}
-            href="https://deno.com"
-            name="deno.com"
-            external
-            hideOnMobile
-          />
-          <data.comp.SearchInput />
-          <data.comp.ThemeToggle />
-        </div>
-      </nav>
-
+    <>
       {reference &&
         (
           <nav className="px-4 md:px-6 py-3 text-sm bg-background-primary flex items-center justify-between border-box border-t border-foreground-tertiary z-[1000]">
             <ul className="flex">
               <li>
                 <HeaderItem
-                  url={url}
+                  url={currentUrl}
                   activeOn="/api/deno"
                   href="/api/deno"
                   name="Deno APIs"
@@ -110,7 +17,7 @@ export default function Header({
               </li>
               <li>
                 <HeaderItem
-                  url={url}
+                  url={currentUrl}
                   activeOn="/api/web"
                   href="/api/web"
                   name="Web APIs"
@@ -118,7 +25,7 @@ export default function Header({
               </li>
               <li>
                 <HeaderItem
-                  url={url}
+                  url={currentUrl}
                   activeOn="/api/node"
                   href="/api/node"
                   name="Node APIs"
@@ -127,7 +34,7 @@ export default function Header({
             </ul>
           </nav>
         )}
-    </header>
+    </>
   );
 }
 

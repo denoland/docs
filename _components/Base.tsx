@@ -6,7 +6,6 @@ export default function Base(
 ) {
   return (
     <>
-      <comp.RefNav data={data} url="/reference" />
       <div className="ddoc">
         <link rel="stylesheet" href="/reference_styles.css" />
         <div>
