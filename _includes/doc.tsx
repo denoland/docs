@@ -2,7 +2,7 @@ import renderCommand from "./renderCommand.tsx";
 
 export const layout = "layout.tsx";
 
-export default function Page(data: Lume.Data, helpers: Lume.Helpers) {
+export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   const file = data.page.sourcePath;
 
   const sidebar = data.sidebar;

@@ -1,6 +1,17 @@
-export default function (data: Lume.Data) {
-  const dataPath = data.currentUrl?.split("/")[1];
-  const sectionData = data.search.data(`/${dataPath}/`)?.sidebar;
+export default function (
+  { data, currentUrl, currentSection }: {
+    data: Lume.Data;
+    currentUrl: string;
+    currentSection: string;
+  },
+) {
+  const dataPath = currentUrl?.split("/")[1];
+  let sectionData = data.search.data(`/${dataPath}/`)?.sidebar;
+
+  if (data.page?.data?.data?.categories_panel) {
+    sectionData = data.page.data.data.categories_panel.categories;
+    //console.log(sectionData);
+  }
 
   if (!sectionData || sectionData.length === 0) {
     return null;
@@ -10,10 +21,10 @@ export default function (data: Lume.Data) {
     <>
       <data.comp.Hamburger />
       <div className="nav">
-        <data.comp.MainNav currentSection={data.currentSection} />
+        <data.comp.MainNav currentSection={currentSection} />
         <data.comp.SecondaryNav
           sectionData={sectionData}
-          currentUrl={data.currentUrl}
+          currentUrl={currentUrl}
         />
       </div>
     </>

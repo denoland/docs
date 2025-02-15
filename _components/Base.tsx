@@ -1,7 +1,5 @@
 import type { PageBase, ToCCtx } from "@deno/doc";
 
-export const layout = "raw.tsx";
-
 export default function Base(
   { data, comp, children }: Lume.Data & { data: PageBase },
   _helpers: Lume.Helpers,
@@ -11,8 +9,6 @@ export default function Base(
       <comp.RefNav data={data} url="/reference" />
       <div className="ddoc">
         <link rel="stylesheet" href="/reference_styles.css" />
-        <comp.CategoryPanel categoryPanel={data.categories_panel} />
-
         <div>
           <nav className="top-0 sticky bg-white z-50 py-3 h-14" id="topnav">
             <div className="h-full">

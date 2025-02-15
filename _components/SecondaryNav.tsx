@@ -1,3 +1,4 @@
+import { CategoriesPanelCategoryCtx } from "@deno/doc/html-types";
 import { SidebarItem } from "../types.ts";
 
 export default function (data: Lume.Data) {
@@ -6,7 +7,7 @@ export default function (data: Lume.Data) {
 
   return (
     <>
-      {sectionData.map((nav: SidebarItem) => (
+      {sectionData.map((nav: any) => (
         <nav aria-labelledby="section-navigation">
           <h2 className="sub-nav-heading">
             {nav.href && nav.href.length > 0
@@ -14,16 +15,16 @@ export default function (data: Lume.Data) {
                 <a
                   href={nav.href}
                   className="sub-nav-heading-link"
-                  data-active={nav.href === currentUrl}
+                  data-active={nav.href === currentUrl || nav.active}
                 >
-                  {nav.title}
+                  {nav.title || nav.name}
                 </a>
               )
               : <span className="sub-nav-heading-text">{nav.title}</span>}
           </h2>
 
           <ul className="sub-nav">
-            {nav.items?.map((item: SidebarItem) => (
+            {nav.items?.map((item: any) => (
               <li key={item.href}>
                 {item.items && item.items.length > 0
                   ? (
@@ -32,7 +33,7 @@ export default function (data: Lume.Data) {
                         htmlFor={`sub-nav-toggle-${item.href}`}
                         className="sub-nav-toggle blocklink"
                       >
-                        {item.title}
+                        {item.title || item.name}
                       </label>
                       <input
                         type="checkbox"
@@ -40,14 +41,14 @@ export default function (data: Lume.Data) {
                         className="sub-nav-toggle-checkbox"
                       />
                       <ul className="sub-nav tertiary-nav">
-                        {item.items.map((subItem: SidebarItem) => (
+                        {item.items.map((subItem: any) => (
                           <li key={subItem.href}>
                             <a
                               href={subItem.href}
                               className="sub-nav-link blocklink"
                               data-active={subItem.href === currentUrl}
                             >
-                              {subItem.title}
+                              {subItem.title || subItem.name}
                             </a>
                           </li>
                         ))}
