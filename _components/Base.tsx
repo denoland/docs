@@ -9,13 +9,7 @@ export default function Base(
       <div className="ddoc">
         <link rel="stylesheet" href="/reference_styles.css" />
         <div>
-          <nav className="top-0 sticky bg-white z-50 py-3 h-14" id="topnav">
-            <div className="h-full">
-              <div>
-                <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
-              </div>
-            </div>
-          </nav>
+          <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
 
           <div id="content">
             {children}

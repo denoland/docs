@@ -14,7 +14,7 @@ export default function (
   return (
     <>
       <data.comp.Hamburger />
-      <div className="nav">
+      <div className="nav" data-section={currentSection}>
         <data.comp.MainNav currentSection={currentSection} />
         <data.comp.SecondaryNav
           sectionData={sectionData}

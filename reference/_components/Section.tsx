@@ -57,7 +57,6 @@ export default function (
       {section.header && (
         <div>
           <h2 className="anchorable mb-1">
-            <comp.Anchor anchor={section.header.anchor} />
             {section.header.href
               ? (
                 <a href={section.header.href} className="contextLink">
@@ -67,6 +66,7 @@ export default function (
               : (
                 section.header.title
               )}
+            <comp.Anchor anchor={section.header.anchor} />
           </h2>
 
           {/*markdown rendering*/}

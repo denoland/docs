@@ -1,0 +1,31 @@
+.refheader {
+  position: sticky;
+  top: calc(4rem - 1px);
+  padding: 0.5rem;
+  padding-left: 0;
+  background-color: hsl(var(--background-secondary));
+  border-bottom: 1px solid hsl(var(--foreground-tertiary));
+  z-index: 5;
+}
+
+.refheader-link[data-active] {
+  color: hsl(var(--primary));
+}
+
+.nav[data-section="api"] {
+  top: 6.5rem;
+  padding-top: 0.5rem;
+}
+
+/* putting other reference styles in here for now until they are moved out into components*/
+
+.refcrumbs {
+  position: sticky;
+  top: 6.5rem;
+  width: 100%;
+  padding: 1rem;
+  padding-left: 0 !important;
+  margin: 0;
+  background-color: hsl(var(--background-primary));
+  z-index: 2;
+}

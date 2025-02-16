@@ -14,6 +14,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
     data.toc = toc.concat(...data.toc);
   }
 
+  const isReference = data.url.includes("/api/");
   const isExamples = data.url.includes("/examples/");
   const isHome = data.url === "/";
 
@@ -39,12 +40,14 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             data-dark-theme="dark"
             class="markdown-body mt-4 rounded-lg"
           >
-            <h1
-              dangerouslySetInnerHTML={{
-                __html: helpers.md(data.title!, true),
-              }}
-            >
-            </h1>
+            {!isReference && (
+              <h1
+                dangerouslySetInnerHTML={{
+                  __html: helpers.md(data.title!, true),
+                }}
+              >
+              </h1>
+            )}
             {data.available_since && (
               <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">
                 Available since {data.available_since}
@@ -54,7 +57,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             {data.children}
           </div>
         </article>
-        <data.comp.Feedback file={file} />
+        {!isReference && <data.comp.Feedback file={file} />}
       </div>
       <data.comp.TableOfContents toc={data.toc} data={data} />
     </div>

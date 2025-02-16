@@ -1,19 +1,19 @@
-export default function Header({currentUrl}: {currentUrl: string}) {
+export default function Header({ currentUrl }: { currentUrl: string }) {
   const reference = currentUrl.startsWith("/api");
   return (
     <>
       {reference &&
         (
-          <nav className="px-4 md:px-6 py-3 text-sm bg-background-primary flex items-center justify-between border-box border-t border-foreground-tertiary z-[1000]">
+          <nav className="refheader">
             <ul className="flex">
               <li>
-                <HeaderItem
-                  url={currentUrl}
-                  activeOn="/api/deno"
+                <a
+                  className="blocklink refheader-link"
+                  data-active={currentUrl.includes("/api/deno")}
                   href="/api/deno"
-                  name="Deno APIs"
-                  firstItem={true}
-                />
+                >
+                  Deno APIs
+                </a>
               </li>
               <li>
                 <HeaderItem
@@ -86,3 +86,5 @@ function HeaderItem({
     </a>
   );
 }
+
+export const css = "@import './_components/RefHeader.css';";

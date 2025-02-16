@@ -1,7 +1,34 @@
 export default function (data: Lume.Data) {
   const sectionData = data.sectionData;
   const currentUrl = data.currentUrl;
+  const isReference = currentUrl.includes("/api/");
 
+  // Reference page nav has no heirarchy and a different data names
+  if (isReference) {
+    return (
+      <>
+        {sectionData.map((nav: any) => (
+          <nav aria-labelledby="section-navigation">
+            <ul className="sub-nav">
+              {nav.items?.map((item: any) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="sub-nav-link blocklink"
+                    data-active={item.active}
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
+      </>
+    );
+  }
+
+  // Navigation for rest of site
   return (
     <>
       {sectionData.map((nav: any) => (
@@ -12,14 +39,14 @@ export default function (data: Lume.Data) {
                 <a
                   href={nav.href}
                   className="sub-nav-heading-link"
-                  data-active={nav.href === currentUrl || nav.active}
+                  data-active={nav.href === currentUrl}
                 >
-                  {nav.title || nav.name}
+                  {nav.title}
                 </a>
               )
               : (
                 <span className="sub-nav-heading-text">
-                  {nav.title || nav.name}
+                  {nav.title}
                 </span>
               )}
           </h2>
@@ -34,7 +61,7 @@ export default function (data: Lume.Data) {
                         htmlFor={`sub-nav-toggle-${item.href}`}
                         className="sub-nav-toggle blocklink"
                       >
-                        {item.title || item.name}
+                        {item.title}
                       </label>
                       <input
                         type="checkbox"
@@ -49,7 +76,7 @@ export default function (data: Lume.Data) {
                               className="sub-nav-link blocklink"
                               data-active={subItem.href === currentUrl}
                             >
-                              {subItem.title || subItem.name}
+                              {subItem.title}
                             </a>
                           </li>
                         ))}
@@ -62,7 +89,7 @@ export default function (data: Lume.Data) {
                       className="sub-nav-link blocklink"
                       data-active={item.href === currentUrl}
                     >
-                      {item.title || item.name}
+                      {item.title}
                     </a>
                   )}
               </li>
