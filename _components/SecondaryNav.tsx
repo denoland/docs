@@ -58,7 +58,9 @@ export default function (data: Lume.Data) {
                   ? (
                     <>
                       <label
-                        htmlFor={`sub-nav-toggle-${item.title.replaceAll(" ", "")}`}
+                        htmlFor={`sub-nav-toggle-${
+                          item.title.replaceAll(" ", "")
+                        }`}
                         className="sub-nav-toggle blocklink"
                       >
                         {item.title}

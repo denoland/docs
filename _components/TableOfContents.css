@@ -11,7 +11,7 @@
     display: grid;
     grid-template-columns: minmax(auto, 960px) 1fr;
   }
-  
+
   .toc-desktop {
     display: block;
     position: sticky;
