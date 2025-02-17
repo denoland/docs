@@ -1,14 +1,10 @@
 export default function Layout(data: Lume.Data) {
-  const reference = data.url.startsWith("/api");
   const section = data.url.split("/").filter(Boolean)[0];
   const description = data.description ||
     "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
 
   return (
-    <html
-      lang="en"
-      class={`light ${reference ? "" : "h-dvh"}`}
-    >
+    <html lang="en">
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,34 +56,34 @@ export default function Layout(data: Lume.Data) {
           content="Deno, JavaScript, TypeScript, reference, documentation, guide, tutorial, example"
         />
 
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              const theme = localStorage.getItem('denoDocsTheme') || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+              document.documentElement.classList.add(theme);
+            })();
+          `
+        }}>
+        </script>
+
         <link rel="stylesheet" href="/gfm.css" />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/overrides.css" />
         <link rel="stylesheet" href="/style.css" />
         <link rel="stylesheet" href="/components.css" />
+        <script type="module" defer src="/components.js"></script>
         <script type="module" defer src="/lint_rules.client.js"></script>
         <script type="module" defer src="/copy.client.js"></script>
         <script type="module" defer src="/tabs.client.js"></script>
         <script type="module" defer src="/feedback.client.js"></script>
         <script type="module" defer src="/youtube-lite.client.js"></script>
-        <script type="module" defer src="/components.js"></script>
         <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"
         >
         </script>
         <link rel="preconnect" href="https://www.googletagmanager.com"></link>
-        <script>
-          {/*js*/ `
-          /* Without this, @media theme preference will override manual theme selection, if different. A little janky but works ok for now, especially since it's just the one edge case where a user's global preference doesn't match their chosen docs theme preference */
-          window.onload = () => {
-            const colorThemes = document.querySelectorAll('[data-color-mode]');
-            const ps = document.querySelectorAll('p');
-            colorThemes.forEach((el) => {
-              el.setAttribute('data-color-mode', localStorage.denoDocsTheme || 'auto');
-            });
-          }`}
-        </script>
       </head>
       <body>
         <data.comp.Header currentSection={section} />
