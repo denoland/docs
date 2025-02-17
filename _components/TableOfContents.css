@@ -43,3 +43,29 @@
     clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
   }
 }
+
+/* Reference ToC styles */
+.documentNavigation.toc-desktop {
+  position: sticky;
+  top: 6.5rem;
+  font-size: small;
+  text-overflow: ellipsis;
+  color: hsl(var(--foreground-secondary));
+  ul li {
+    margin: 0.25rem 0;
+    a {
+      font-weight: bold;
+      line-height: 1.2rem;
+      &:hover {
+        color: hsl(var(--primary));
+        text-decoration: underline;
+      }
+    }
+    ul {
+      margin-bottom: 1rem;
+      li a {
+        font-weight: normal;
+      }
+    }
+  }
+}

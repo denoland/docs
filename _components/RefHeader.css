@@ -13,6 +13,7 @@
 }
 
 .nav[data-section="api"] {
+  height: calc(100vh - 6.5rem);
   top: 6.5rem;
   padding-top: 0.5rem;
 }

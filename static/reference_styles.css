@@ -580,7 +580,6 @@
   margin-top: 1.5rem;
   padding-bottom: 1rem;
   margin-bottom: 0.5rem;
-  scroll-margin-top: 4rem;
 }
 .ddoc .section > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
