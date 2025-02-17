@@ -1,7 +1,7 @@
 export default function (data: Lume.Data) {
   const sectionData = data.sectionData;
   const currentUrl = data.currentUrl;
-  const isReference = currentUrl.includes("/api/");
+  const isReference = currentUrl.startsWith("/api/");
 
   // Reference page nav has no heirarchy and a different data names
   if (isReference) {
