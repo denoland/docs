@@ -1,5 +1,4 @@
 import renderCommand from "./renderCommand.tsx";
-import type { ToCCtx } from "@deno/doc";
 
 export const layout = "layout.tsx";
 
@@ -16,22 +15,22 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   }
 
   const isReference = data.url.startsWith("/api/");
-  const isExamples = data.url.includes("/examples/");
+  const isExamples = data.url.startsWith("/examples/");
   const isHome = data.url === "/";
 
   return (
     <div id="content" className="content">
       <div class="px-4 sm:px-5 md:px-6 max-w-full">
         <article class="mx-auto">
-          {!isExamples || !isHome && (
-                <data.comp.Breadcrumbs
-                  title={data.title!}
-                  sidebar={sidebar}
-                  url={data.url}
-                  sectionTitle={data.sectionTitle!}
-                  sectionHref={data.sectionHref!}
-                />
-              )}
+          {(!isExamples && !isHome && !isReference) && (
+            <data.comp.Breadcrumbs
+              title={data.title!}
+              sidebar={sidebar}
+              url={data.url}
+              sectionTitle={data.sectionTitle!}
+              sectionHref={data.sectionHref!}
+            />
+          )}
 
           <data.comp.TableOfContentsMobile toc={data.toc} data={data} />
 

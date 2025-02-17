@@ -28,7 +28,7 @@ p {
 }
 
 @media screen and (min-width: 1024px) {
-  .container {
+  .layout {
     display: grid;
     grid-template-areas:
       "nav main"
@@ -46,7 +46,7 @@ p {
     grid-area: main;
   }
 
-  .container:has(.raw-container) {
+  .layout:has(.raw-container) {
     display: contents;
     .nav {
       display: none;

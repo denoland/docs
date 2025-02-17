@@ -92,7 +92,7 @@ export default function Layout(data: Lume.Data) {
       <body>
         <data.comp.Header currentSection={section} />
         <data.comp.RefHeader currentUrl={data.url} />
-        <div className="container">
+        <div className="layout">
           <data.comp.Navigation
             data={data}
             currentSection={section}

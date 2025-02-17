@@ -5,9 +5,14 @@ footer {
 }
 
 .footer-nav {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer-section {
+  min-width: 200px;
 }
 
 .footer-section-heading {

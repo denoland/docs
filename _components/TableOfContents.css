@@ -1,10 +1,14 @@
 .content {
   display: grid;
-  grid-template-columns: 1fr 200px;
+  grid-template-columns: minmax(auto, 960px) 200px;
 }
 
 .toc-desktop {
   display: none;
+}
+
+.toc-list {
+  padding: 1rem;
 }
 
 @media (min-width: 1024px) {
