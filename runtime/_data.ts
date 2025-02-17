@@ -104,16 +104,20 @@ export const sidebar = [
             href: "/runtime/reference/cli/bench/",
           },
           {
-            title: "deno completions",
-            href: "/runtime/reference/cli/completions/",
-          },
-          {
             title: "deno check",
             href: "/runtime/reference/cli/check/",
           },
           {
+            title: "deno clean",
+            href: "/runtime/reference/cli/clean/",
+          },
+          {
             title: "deno compile",
             href: "/runtime/reference/cli/compile/",
+          },
+          {
+            title: "deno completions",
+            href: "/runtime/reference/cli/completions/",
           },
           {
             title: "deno coverage",

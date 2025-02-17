@@ -147,6 +147,33 @@ Deno workspaces are flexible and can work with Node packages. To make migration
 for existing Node.js projects easier you can have both Deno-first and Node-first
 packages in a single workspace.
 
+### Multiple package entries
+
+So far, our package only has a single entry. This is fine for simple packages,
+but often you'll want to have multiple entries that group relevant aspects of
+your package. This can be done by passing an `object` instead of a `string` to
+`exports`:
+
+```json title="my-package/deno.json"
+{
+  "name": "@scope/my-package",
+  "version": "0.3.0",
+  "exports": {
+    ".": "./mod.ts",
+    "./foo": "./foo.ts",
+    "./other": "./dir/other.ts"
+  }
+}
+```
+
+The `"."` entry is the default entry that's picked when importing
+`@scope/my-package`. Therefore, the above `deno.json` example provides the
+folowing entries:
+
+- `@scope/my-package`
+- `@scope/my-package/foo`
+- `@scope/my-package/other`
+
 ### Migrating from `npm` workspaces
 
 Deno workspaces support using a Deno-first package from an existing npm package.
@@ -259,7 +286,7 @@ root and its members:
 | Option             | Workspace | Package | Notes                                                                                                                                                                                                                                                                                                  |
 | ------------------ | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | compilerOptions    | ✅        | ❌      | For now we only allow one set of compilerOptions per workspace. This is because multiple changes to both deno_graph and the TSC integration are required to allow more than one set. Also we’d have to determine what compilerOptions apply to remote dependencies. We can revisit this in the future. |
-| importMap          | ✅        | ❌      | Exclusive with imports and scopes per config file. It is allowed to have importMap in the workspace config, and imports in the package config.                                                                                                                                                         |
+| importMap          | ✅        | ❌      | Exclusive with imports and scopes per config file. Additionally, it is not supported to have importMap in the workspace config, and imports in the package config.                                                                                                                                     |
 | imports            | ✅        | ✅      | Exclusive with importMap per config file.                                                                                                                                                                                                                                                              |
 | scopes             | ✅        | ❌      | Exclusive with importMap per config file.                                                                                                                                                                                                                                                              |
 | exclude            | ✅        | ✅      |                                                                                                                                                                                                                                                                                                        |
@@ -278,7 +305,7 @@ root and its members:
 | fmt.singleQuote    | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                                                                                                                 |
 | fmt.proseWrap      | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                                                                                                                 |
 | fmt.semiColons     | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                                                                                                                 |
-| fmt.options.*      | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                                                                                                             |
+| fmt.options.\*     | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                                                                                                             |
 | nodeModulesDir     | ✅        | ❌      | Resolution behaviour must be the same in the entire workspace.                                                                                                                                                                                                                                         |
 | vendor             | ✅        | ❌      | Resolution behaviour must be the same in the entire workspace.                                                                                                                                                                                                                                         |
 | tasks              | ✅        | ✅      | Package tasks take priority over workspace. cwd used is the cwd of the config file that the task was inside of.                                                                                                                                                                                        |
@@ -291,7 +318,7 @@ root and its members:
 | bench.exclude      | ✅        | ✅      |                                                                                                                                                                                                                                                                                                        |
 | bench.files        | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                                                                                                             |
 | lock               | ✅        | ❌      | Only a single lock file may exist per resolver, and only resolver may exist per workspace, so conditional enablement of the lockfile per package does not make sense.                                                                                                                                  |
-| unstable           | ✅        | ❌      | For simplicities sake, we do not allow unstable flags, because a lot of the CLI assumes that unstable flags are immutable and global to the entire process. Also weird interaction with DENO_UNSTABLE_* flags.                                                                                         |
+| unstable           | ✅        | ❌      | For simplicities sake, we do not allow unstable flags, because a lot of the CLI assumes that unstable flags are immutable and global to the entire process. Also weird interaction with DENO_UNSTABLE_\* flags.                                                                                        |
 | name               | ❌        | ✅      |                                                                                                                                                                                                                                                                                                        |
 | version            | ❌        | ✅      |                                                                                                                                                                                                                                                                                                        |
 | exports            | ❌        | ✅      |                                                                                                                                                                                                                                                                                                        |
