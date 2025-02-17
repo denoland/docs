@@ -7,7 +7,7 @@ export default function Symbol(
 ) {
   return (
     <comp.Base data={data} comp={comp}>
-      <comp.SymbolGroup symbolGroup={data.symbol_group_ctx} />;
+      <comp.SymbolGroup symbolGroup={data.symbol_group_ctx} />
     </comp.Base>
   );
 }
