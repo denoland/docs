@@ -56,15 +56,17 @@ export default function Layout(data: Lume.Data) {
           content="Deno, JavaScript, TypeScript, reference, documentation, guide, tutorial, example"
         />
 
-        <script dangerouslySetInnerHTML={{
-          __html: `
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
             (function() {
               const theme = localStorage.getItem('denoDocsTheme') || 
                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               document.documentElement.classList.add(theme);
             })();
-          `
-        }}>
+          `,
+          }}
+        >
         </script>
 
         <link rel="stylesheet" href="/gfm.css" />
