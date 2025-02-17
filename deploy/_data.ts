@@ -10,7 +10,6 @@ export const sidebar = [
       },
       {
         title: "Deploy basics",
-        href: "deploybasics",
         items: [
           { title: "Use cases", href: "/deploy/manual/use-cases/" },
           { title: "Playgrounds", href: "/deploy/manual/playgrounds/" },
