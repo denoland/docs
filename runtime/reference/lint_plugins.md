@@ -6,7 +6,7 @@ title: "Lint Plugins"
 
 This is an experimental feature and requires Deno `2.2.0` or newer.
 
-The plugin API is still unstable and subject to changes in the future.
+The plugin API is currently marked as "unstable" since it is subject to changes in the future.
 
 :::
 
