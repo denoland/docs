@@ -456,9 +456,10 @@ body {
 }
 
 .deno-tabs > ul.deno-tabs-buttons > li > button[data-active="true"] {
-  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-0 z-10 -mb-[1px]
+  @apply border-slate-200 bg-slate-100 text-slate-950 border-b-0 -mb-[1px]
     pb-[calc(0.5rem+1px)] relative dark:text-slate-50
     dark:bg-background-secondary dark:border-background-tertiary;
+    z-index: 2;
 }
 
 .deno-tabs > div.deno-tabs-content > div {
