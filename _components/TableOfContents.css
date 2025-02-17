@@ -1,8 +1,3 @@
-.content {
-  display: grid;
-  grid-template-columns: minmax(auto, 960px) 1fr;
-}
-
 .toc-desktop {
   display: none;
 }
@@ -12,6 +7,11 @@
 }
 
 @media (min-width: 1024px) {
+  .content {
+    display: grid;
+    grid-template-columns: minmax(auto, 960px) 1fr;
+  }
+  
   .toc-desktop {
     display: block;
     position: sticky;

@@ -52,7 +52,6 @@ export const sidebar = [
       },
       {
         title: "KV",
-        href: "deploykv",
         items: [
           { title: "Overview", href: "/deploy/kv/manual/" },
           { title: "Key space", href: "/deploy/kv/manual/key_space/" },
@@ -97,7 +96,6 @@ export const sidebar = [
       },
       {
         title: "Third-Party Databases",
-        href: "deploydatabases",
         items: [
           { title: "DynamoDB", href: "/deploy/manual/dynamodb/" },
           { title: "FaunaDB", href: "/deploy/manual/faunadb/" },
@@ -132,7 +130,6 @@ export const sidebar = [
     items: [
       {
         title: "Deploy Tutorials",
-        href: "deployexamples",
         items: [
           { title: "Overview", href: "/deploy/tutorials/" },
           {

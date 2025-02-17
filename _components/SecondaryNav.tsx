@@ -58,14 +58,14 @@ export default function (data: Lume.Data) {
                   ? (
                     <>
                       <label
-                        htmlFor={`sub-nav-toggle-${item.href}`}
+                        htmlFor={`sub-nav-toggle-${item.title.replaceAll(" ", "")}`}
                         className="sub-nav-toggle blocklink"
                       >
                         {item.title}
                       </label>
                       <input
                         type="checkbox"
-                        id={`sub-nav-toggle-${item.href}`}
+                        id={`sub-nav-toggle-${item.title.replaceAll(" ", "")}`}
                         className="sub-nav-toggle-checkbox"
                       />
                       <ul className="sub-nav tertiary-nav">
