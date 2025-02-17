@@ -19,6 +19,7 @@
     top: 4rem;
     max-height: calc(100vh - 4rem);
     height: max-content;
+    min-width: 250px;
     overflow-y: auto;
     border-left: 1px solid hsl(var(--foreground-tertiary));
   }

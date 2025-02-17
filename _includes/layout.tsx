@@ -65,12 +65,12 @@ export default function Layout(data: Lume.Data) {
         <link rel="stylesheet" href="/overrides.css" />
         <link rel="stylesheet" href="/style.css" />
         <link rel="stylesheet" href="/components.css" />
-        <script type="module" src="/lint_rules.client.js"></script>
-        <script type="module" src="/copy.client.js"></script>
-        <script type="module" src="/tabs.client.js"></script>
-        <script type="module" src="/feedback.client.js"></script>
-        <script type="module" src="/youtube-lite.client.js"></script>
-        <script type="module" src="/components.js"></script>
+        <script type="module" defer src="/lint_rules.client.js"></script>
+        <script type="module" defer src="/copy.client.js"></script>
+        <script type="module" defer src="/tabs.client.js"></script>
+        <script type="module" defer src="/feedback.client.js"></script>
+        <script type="module" defer src="/youtube-lite.client.js"></script>
+        <script type="module" defer src="/components.js"></script>
         <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"
