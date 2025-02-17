@@ -8,9 +8,9 @@ export default function Base(
     <>
       <div className="ddoc">
         <link rel="stylesheet" href="/reference_styles.css" />
-          <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
-          <div id="content">
-            {children}
+        <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
+        <div id="content">
+          {children}
         </div>
       </div>
     </>
