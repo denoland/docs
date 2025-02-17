@@ -6,6 +6,8 @@ title: "Lint Plugins"
 
 This is an experimental feature and requires Deno `2.2.0` or newer.
 
+The plugin API is still unstable and subject to changes in the future.
+
 :::
 
 The built-in linter can be extended with plugins to add custom lint rules.
