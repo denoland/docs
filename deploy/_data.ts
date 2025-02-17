@@ -10,6 +10,7 @@ export const sidebar = [
       },
       {
         title: "Deploy basics",
+        href: "deploybasics",
         items: [
           { title: "Use cases", href: "/deploy/manual/use-cases/" },
           { title: "Playgrounds", href: "/deploy/manual/playgrounds/" },
@@ -27,6 +28,7 @@ export const sidebar = [
   },
   {
     title: "Deploy platform",
+    href: "deployplatform",
     items: [
       {
         title: "Deployments",
@@ -50,6 +52,7 @@ export const sidebar = [
       },
       {
         title: "KV",
+        href: "deploykv",
         items: [
           { title: "Overview", href: "/deploy/kv/manual/" },
           { title: "Key space", href: "/deploy/kv/manual/key_space/" },
@@ -94,6 +97,7 @@ export const sidebar = [
       },
       {
         title: "Third-Party Databases",
+        href: "deploydatabases",
         items: [
           { title: "DynamoDB", href: "/deploy/manual/dynamodb/" },
           { title: "FaunaDB", href: "/deploy/manual/faunadb/" },
@@ -128,6 +132,7 @@ export const sidebar = [
     items: [
       {
         title: "Deploy Tutorials",
+        href: "deployexamples",
         items: [
           { title: "Overview", href: "/deploy/tutorials/" },
           {
@@ -190,10 +195,7 @@ export const sidebar = [
   {
     title: "Reference",
     items: [
-      {
-        title: "Runtime API",
-        href: "/deploy/api",
-      },
+      { title: "Runtime API", href: "/deploy/api" },
       { title: "Runtime FS", href: "/deploy/api/runtime-fs/" },
       { title: "Runtime Node", href: "/deploy/api/runtime-node/" },
       { title: "Compression", href: "/deploy/api/compression/" },
