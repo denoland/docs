@@ -28,7 +28,6 @@ export const sidebar = [
   },
   {
     title: "Deploy platform",
-    href: "deployplatform",
     items: [
       {
         title: "Deployments",
