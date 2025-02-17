@@ -6,7 +6,8 @@ title: "Lint Plugins"
 
 This is an experimental feature and requires Deno `2.2.0` or newer.
 
-The plugin API is currently marked as "unstable" since it is subject to changes in the future.
+The plugin API is currently marked as "unstable" since it is subject to changes
+in the future.
 
 :::
 
@@ -134,9 +135,13 @@ supported syntax for selectors is:
 
 ## Applying fixes
 
-A custom lint rule can supply a function to apply a fix when reporting a problem. The optional `fix()` method is called when running `deno lint --fix` or applying a fix from inside your editor through the Deno LSP.
+A custom lint rule can supply a function to apply a fix when reporting a
+problem. The optional `fix()` method is called when running `deno lint --fix` or
+applying a fix from inside your editor through the Deno LSP.
 
-The `fix()` method receives a `fixer` instance which contains helper methods to make creating a fix easier. A fix consists of a start position, an end position and the new text that should be put in this range.
+The `fix()` method receives a `fixer` instance which contains helper methods to
+make creating a fix easier. A fix consists of a start position, an end position
+and the new text that should be put in this range.
 
 ```ts
 context.report({
@@ -159,9 +164,11 @@ The `fixer` object has the following methods:
 - `replaceText(node, text)`: Replace the text in the given node.
 - `replaceTextRange(range, text)`: Replace the text in the given range.
 
-The `fix()` method can also return an array of fixes or yield multiple fixes if it's a generator function.
+The `fix()` method can also return an array of fixes or yield multiple fixes if
+it's a generator function.
 
-Sometimes the original source text of a node is needed to create a fix. To get the source code of any node use `context.sourceCode.getText()`:
+Sometimes the original source text of a node is needed to create a fix. To get
+the source code of any node use `context.sourceCode.getText()`:
 
 ```ts
 context.report({
