@@ -9,13 +9,21 @@ This is an experimental feature and requires Deno `2.2.0` or newer.
 :::
 
 The built-in linter can be extended with plugins to add custom lint rules.
-Whilst Deno ships with [many lint rules](/lint/) out of the box, there are cases
-where you need a custom rule tailored particularily to your project. This is
-where the lint plugin API comes into play. The API is intentionally modelled
-after the ESLint API so that existing knowledge can be reused if you happen to
-have written custom ESLint rules in the past.
 
-Plugins are loaded by adding a `plugins` section under `lint` in `deno.json`.
+Whilst Deno ships with [many lint rules](/lint/) out of the box, there are cases
+where you need a custom rule tailored particularily to your project - whether to
+catch a context-specific problem or enforce company-wide conventions.
+
+This is where the lint plugin API comes into play.
+
+The lint plugin API is intentionally modelled after the
+[ESLint API](https://eslint.org/docs/latest/extend/custom-rules). While this API
+doesn't provide 100% compatibility, the existing knowledge of authoring ESLint
+plugins can be mostly reused if you happen to have written custom
+[ESLint](https://eslint.org/) rules in the past.
+
+Plugins are loaded via `lint.plugins` setting in `deno.json`.
+
 The value is an array of specifiers to plugins. These can be paths, `npm:` or
 `jsr:` specifiers.
 
@@ -27,8 +35,18 @@ The value is an array of specifiers to plugins. These can be paths, `npm:` or
 }
 ```
 
+## Example plugin
+
 A plugin always has the same shape. It has a default export which is your plugin
 object.
+
+:::info
+
+Deno provides type declarations for the lint plugins API.
+
+All the typings are available under the `Deno.lint` namespace.
+
+:::
 
 ```ts title="my-plugin.ts"
 export default {
@@ -135,6 +153,16 @@ export default {
   },
 } satisfies Deno.lint.Plugin;
 ```
+
+:::caution
+
+It is not safe to assume that your plugin code will be executed again for each
+of the files linted.
+
+Prefer not to keep a global state, and do cleanup in the `destroy` hook, in case
+`deno lint` decides to reuse the existing plugin instance.
+
+:::
 
 ## Excluding custom rules
 
