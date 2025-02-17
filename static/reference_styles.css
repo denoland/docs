@@ -1357,3 +1357,7 @@ a.anchor-link {
 .anchorable-heading:hover .anchor-link {
   display: inline-block;
 }
+
+.ddoc [id] {
+  scroll-margin-top: 10.5rem;
+}
