@@ -132,6 +132,49 @@ supported syntax for selectors is:
 | `:not(> Bar)`          | Not pseudo-class              |
 | `:is(> Bar)`           | Is pseudo-class               |
 
+## Applying fixes
+
+A custom lint rule can supply a function to apply a fix when reporting a problem. The optional `fix()` method is called when running `deno lint --fix` or applying a fix from inside your editor through the Deno LSP.
+
+The `fix()` method receives a `fixer` instance which contains helper methods to make creating a fix easier. A fix consists of a start position, an end position and the new text that should be put in this range.
+
+```ts
+context.report({
+  node,
+  message: "should be _b",
+  fix(fixer) {
+    return fixer.replaceText(node, "_b");
+  },
+});
+```
+
+The `fixer` object has the following methods:
+
+- `insertTextAfter(node, text)`: Insert text after the given node.
+- `insertTextAfterRange(range, text)`: Insert text after the given range.
+- `insertTextBefore(node, text)`: Insert text before the given node.
+- `insertTextBeforeRange(range, text)`: Insert text before the given range.
+- `remove(node)`: Remove the given node.
+- `removeRange(range)`: Remove text in the given range.
+- `replaceText(node, text)`: Replace the text in the given node.
+- `replaceTextRange(range, text)`: Replace the text in the given range.
+
+The `fix()` method can also return an array of fixes or yield multiple fixes if it's a generator function.
+
+Sometimes the original source text of a node is needed to create a fix. To get the source code of any node use `context.sourceCode.getText()`:
+
+```ts
+context.report({
+  node,
+  message: "should be _b",
+  fix(fixer) {
+    const original = context.sourceCode.getText(node);
+    const newText = `{ ${original} }`;
+    return fixer.replaceText(node, newText);
+  },
+});
+```
+
 ## Running cleanup code
 
 If your plugin requires running cleanup code after a file has been linted, you
