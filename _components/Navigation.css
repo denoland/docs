@@ -37,6 +37,6 @@
     position: sticky;
     top: 4rem;
     height: 100vh;
-    overflow: scroll;
+    overflow-y: auto;
   }
 }

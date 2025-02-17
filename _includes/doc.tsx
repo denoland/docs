@@ -1,4 +1,5 @@
 import renderCommand from "./renderCommand.tsx";
+import type { ToCCtx } from "@deno/doc";
 
 export const layout = "layout.tsx";
 
@@ -14,7 +15,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
     data.toc = toc.concat(...data.toc);
   }
 
-  const isReference = data.url.includes("/api/");
+  const isReference = data.url.startsWith("/api/");
   const isExamples = data.url.includes("/examples/");
   const isHome = data.url === "/";
 
@@ -59,7 +60,16 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
         </article>
         {!isReference && <data.comp.Feedback file={file} />}
       </div>
-      <data.comp.TableOfContents toc={data.toc} data={data} />
+      {!isReference && <data.comp.TableOfContents toc={data.toc} data={data} />}
+
+      {(isReference && data.children.props.data.toc_ctx) && (
+        <data.comp.RefToc
+          documentNavigation={data.children.props.data.toc_ctx
+            .document_navigation}
+          documentNavigationStr={data.children.props.data.toc_ctx
+            .document_navigation_str}
+        />
+      )}
     </div>
   );
 }
