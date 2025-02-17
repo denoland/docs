@@ -128,9 +128,9 @@ supported syntax for selectors is:
 | `Foo[attr.length < 2]` | Attribute value comparison    |
 | `:first-child`         | First child pseudo-class      |
 | `:last-child`          | Last child pseudo-class       |
-| `:nth-child(2n + 1)`   | Nth-child speudo-class        |
-| `:not(> Bar)`          | Not speudo-class              |
-| `:is(> Bar)`           | Is speudo-class               |
+| `:nth-child(2n + 1)`   | Nth-child pseudo-class        |
+| `:not(> Bar)`          | Not pseudo-class              |
+| `:is(> Bar)`           | Is pseudo-class               |
 
 ## Running cleanup code
 
