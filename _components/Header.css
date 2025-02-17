@@ -27,6 +27,7 @@ header {
   .logo-link {
     display: flex;
     height: 2.3rem;
+    margin-right: auto;
   }
 
   .logo {
