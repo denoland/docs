@@ -576,7 +576,8 @@ While the OpenTelemetry integration for Deno is in development, there are some
 limitations to be aware of:
 
 - Traces are always sampled (i.e. `OTEL_TRACE_SAMPLER=parentbased_always_on`).
-- Traces do not support events and links.
+- Traces do not support events.
+- Traces only support links with no attributes.
 - Automatic propagation of the trace context in `Deno.serve` and `fetch` is not
   supported.
 - Metric exemplars are not supported.
@@ -597,7 +598,7 @@ limitations to be aware of:
 - HTTP methods are that are not known are not normalized to `_OTHER` in the
   `http.request.method` span attribute as per the OpenTelemetry semantic
   conventions.
-- The HTTP server span for `Deno.serve` does not have an OpenTelemtry status
+- The HTTP server span for `Deno.serve` does not have an OpenTelemetry status
   set, and if the handler throws (ie `onError` is invoked), the span will not
   have an error status set and the error will not be attached to the span via
   event.
