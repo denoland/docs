@@ -1,14 +1,11 @@
 const searchbar = document.getElementById("lint-rule-search");
-console.log(searchbar);
-
 function selectAllLintRuleBoxes() {
   return document.querySelectorAll(".lint-rule-box");
 }
 
 if (searchbar) {
   searchbar.addEventListener("input", (e) => {
-    const query = e.currentTarget.value;
-    console.log("search query", query);
+    const query = e.currentTarget?.value;
 
     if (query) {
       const allBoxes = selectAllLintRuleBoxes();
