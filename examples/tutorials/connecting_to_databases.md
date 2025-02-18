@@ -116,6 +116,8 @@ There are multiple solutions to connect to SQLite in Deno:
 
 ### Connect to SQLite using the `node:sqlite` module
 
+_`node:sqlite` module has been added in Deno v2.2._
+
 ```ts
 import { DatabaseSync } from "node:sqlite";
 const database = new DatabaseSync("test.db");
