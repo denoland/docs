@@ -1,17 +1,8 @@
 ---
 title: "deno uninstall"
 oldUrl: /runtime/manual/tools/uninstall/
+command: uninstall
 ---
-
-`deno uninstall` is a tool that allows you to remove remote dependencies used in
-your project, or an executable script from your machine.
-
-There are two ways to use `deno uninstall`:
-
-- `deno uninstall [PACKAGES]` - remove dependencies specified in `deno.json` or
-  `package.json`
-- `deno uninstall --global [SCRIPT_NAME]` - uninstall executable script from you
-  machine
 
 ## `deno uninstall [PACKAGES]`
 
@@ -100,23 +91,14 @@ $ cat package.json
 
 ## `deno uninstall --global [SCRIPT_NAME]`
 
-When uninstalling a script, the installation root is determined in the following
-order:
-
-- `--root` option
-- `DENO_INSTALL_ROOT` environment variable
-- `$HOME/.deno`
-
-### Examples
-
-- Uninstall `serve`
+Uninstall `serve`
 
 ```bash
 deno uninstall --global serve
 ```
 
-- Uninstall `serve` from a specific installation root
+Uninstall `serve` from a specific installation root
 
 ```bash
-deno uninstall -g --root /usr/local serve
+deno uninstall -g --root /usr/local/bin serve
 ```

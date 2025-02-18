@@ -5,7 +5,7 @@ oldUrl: /runtime/manual/getting_started/first_steps/
 
 Deno has many [built in tools](/runtime/reference/cli/) to make your development
 experience as smooth as possible. One of these tools is the
-[project initializer](/runtime/reference/cli/init/), which creates a new Deno
+[project initializer](/runtime/reference/cli/init), which creates a new Deno
 project with a basic file structure and configuration.
 
 While you are welcome to use JavaScript, Deno has built-in support for
@@ -63,8 +63,8 @@ ok | 1 passed | 0 failed (3ms)
 ```
 
 Now that you have a basic project set up you can start building your
-application. Check out our [tutorials](/runtime/tutorials/) and
-[examples](/examples/) for more ideas on what to build with Deno.
+application. Check out our [examples and tutorials](/examples/) for more ideas
+on what to build with Deno.
 
 You can
 [learn more about using TypeScript in Deno here](/runtime/fundamentals/typescript).

@@ -18,8 +18,8 @@ Let's deploy your first application - it should only take a few minutes.
 ## Install Deno and `deployctl`
 
 If you haven't already, you can
-[install the Deno runtime](/runtime/fundamentals/installation) using one of the
-commands below:
+[install the Deno runtime](/runtime/getting_started/installation) using one of
+the commands below:
 
 <deno-tabs group-id="operating-systems">
 <deno-tab mac" label="macOS" default>
@@ -48,7 +48,7 @@ curl -fsSL https://deno.land/install.sh | sh
 After Deno is installed, install the [`deployctl`](./deployctl.md) utility:
 
 ```
-deno install -A jsr:@deno/deployctl
+deno install -A jsr:@deno/deployctl --global
 ```
 
 You can confirm `deployctl` has been installed correctly by running:
@@ -98,7 +98,7 @@ Now that you've created your first deployment, you can
 out what other options you have to deploy your code to Deno Deploy. We're so
 excited to see what you'll ship with Deno Deploy!
 
-### <a name="existingproject"></a>Deploy your existing project
+### Deploy your existing project
 
 Import a project and run it on the edge it with Deno Deploy.
 

@@ -14,9 +14,9 @@ extension.
 ## Installation
 
 The Deno VS Code extension integrates directly with the Deno CLI using the
-[language server protocol](/runtime/reference/lsp/). This helps ensure that the
-information you get about your code aligns to how that code will work when you
-run it with the Deno CLI.
+[language server protocol](/runtime/reference/lsp_integration/). This helps
+ensure that the information you get about your code aligns to how that code will
+work when you run it with the Deno CLI.
 
 The Deno extension is installed like other extensions in VS Code. Search for
 `Deno` in the extensions tab of VS Code and click the **install** button, or
@@ -40,20 +40,17 @@ most direct way to do this is to use the **Deno: Initialize Workspace
 Configuration** from the VS Code
 [command palette](https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette).
 
-![screenshot of the command palette with Deno: Initialize Workspace Configuration](./images/command_palette.png)]
+![screenshot of the command palette with Deno: Initialize Workspace Configuration](./images/command_palette.png)
 
-This will activate a helper which will ask if you want to enable linting and the
-Deno unstable APIs for the project. This command will instruct VS Code to store
-these settings in the workspace configuration (your workspace root
-`.vscode/settings.json`). Once the helper is finished, you will get a
-notification that Deno is setup for the project.
+This command will add `"deno.enable": true` to the workspace configuration (your
+workspace root `.vscode/settings.json`). Once the command is finished, you will
+get a notification that Deno workspace is initialized.
 
-![screenshot of the .vscode/setting.json configured as a workspace folder](./images/workspace_folder_config.png)
+![screenshot of the notification 'Deno workspace initialized'](./images/vscode_workspace_initialized.png)
 
 These settings (and other settings) are available via the VS Code
 [settings](https://code.visualstudio.com/docs/getstarted/userinterface#_settings)
-panel. In the panel the setting is **Deno: Enable** and when manually editing
-the JSON, the setting is `deno.enable`.
+panel. In the panel the setting is **Deno: Enable**.
 
 :::note
 
@@ -220,10 +217,10 @@ _References_ setting mentioned above.
 
 ### Testing code lens
 
-The Deno CLI includes a [built-in testing API](/runtime/reference/lsp/#testing)
-available under `Deno.test`. The extension and language server have a code lens
-enabled by default which provides the ability to run a test from within the
-editor.
+The Deno CLI includes a
+[built-in testing API](/runtime/reference/lsp_integration/#testing) available
+under `Deno.test`. The extension and language server have a code lens enabled by
+default which provides the ability to run a test from within the editor.
 
 When you have a block of code that provides a test:
 
@@ -245,7 +242,7 @@ You will see a code lens just above the test:
 ▶ Run Test
 ```
 
-If you click on the code lense, the extension will start up the Deno CLI to run
+If you click on the code lens, the extension will start up the Deno CLI to run
 the test for you and display the output. Based on your other settings, the
 extension will try to run your test with the same settings. If you need to
 adjust the arguments provided when doing `deno test`, you can do so by setting
@@ -267,7 +264,7 @@ denoTest({
 If you want to disable this feature, you can do so by un-setting the **Deno >
 CodeLens: Test** setting - `deno.codeLens.test`.
 
-You can run tests from the Test Explorer view, from the code lense decorations,
+You can run tests from the Test Explorer view, from the code lens decorations,
 or via the command palette. You can also use the filter function in the Text
 Explorer view to exclude certain tests from a test run.
 

@@ -16,7 +16,7 @@
   "Streams": "Manage data streams, queuing strategies, and transformations. Handle data in chunks, process large datasets, and optimize memory usage.\n\nEg {@linkcode ReadableStream}, {@linkcode WritableStream}, {@linkcode TransformStream}",
   "Temporal": "Date and time handling. Includes long-lived Workflows, calendar systems, time zones, and precise duration calculations.\n\nEg {@linkcode Temporal.Now}, {@linkcode Temporal.PlainDate}",
   "URL": "Manipulate URLs, extract data from URLs and manage query parameters.\n\nEg {@linkcode URL}",
-  "WASM": "Efficiently execute computationally intensive tasks. WASM module compilation, instantiation, memory management, and interaction with imports and exports.\n\nEg {@linkcode WebAssembly.instantiate}, {@linkcode WebAssembly.Module}, {@linkcode WebAssembly.Instance}",
+  "Wasm": "Efficiently execute computationally intensive tasks. Wasm module compilation, instantiation, memory management, and interaction with imports and exports.\n\nEg {@linkcode WebAssembly.instantiate}, {@linkcode WebAssembly.Module}, {@linkcode WebAssembly.Instance}",
   "WebSockets": "Enable real-time communication between clients and servers using WebSockets. Tools to create interactive and dynamic applications.\n\nEg {@linkcode WebSocket}",
   "Workers": "Run script operations in background threads. Manage worker threads, communicate with workers, and handle data transfer between workers and the main thread.\n\nEg {@linkcode Worker}"
 }

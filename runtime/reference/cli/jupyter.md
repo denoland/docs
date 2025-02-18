@@ -33,6 +33,9 @@ notebooks.
 
 - Install the
   [VSCode Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
+- Open or create a notebook file by opening the Command Palette (Ctrl+Shift+P)
+  and selecting "Create: New Jupyter Notebook". This can be done manually by
+  creating a file with the ".ipynb" file extension.
 - When on a new or existing Notebook, click creating a new Jupyter Notebook
   select "Jupyter kernels" and then select Deno
 
@@ -107,7 +110,7 @@ await Deno.jupyter.display({
 
 ![`Deno.jupyter.display` API example](../images/jupyter-display.png)
 
-Your notebook frontned will automatically select the "richest" MIME type to
+Your notebook frontend will automatically select the "richest" MIME type to
 display based on its capabilities.
 
 ---
@@ -115,13 +118,13 @@ display based on its capabilities.
 `Deno.jupyter` provides several helper methods for rich output of common media
 types.
 
-`Deno.jupyter.html` is a tagged template that will render provided string as an
-HTML in the notebook.
+`Deno.jupyter.html` is a tagged template that will render the provided string as
+an HTML in the notebook.
 
 ```js
 Deno.jupyter.html`<h1>Hello, world!</h1>
-<h2>From Deno kernel<h2>
-<p>Lorem ipsum <i>dolor</i> <b>sit</b> <u>amet</u>`;
+<h2>From Deno kernel</h2>
+<p>Lorem ipsum <i>dolor</i> <b>sit</b> <u>amet</u></p>`;
 ```
 
 ![`Deno.jupyter.html` API example](../images/jupyter-html.png)
@@ -149,6 +152,16 @@ Deno.jupyter.svg`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 
 ![`Deno.jupyter.svg` API example](../images/jupyter-svg.png)
 
+`Deno.jupyter.image` is function that will render a JPG or PNG image. You can
+pass a filepath, or already read bytes:
+
+```js
+Deno.jupyter.image("./cat.jpg");
+
+const data = Deno.readFileSync("./dog.png");
+Deno.jupyter.image(data);
+```
+
 ## prompt and confirm APIs
 
 You can use `prompt` and `confirm` Web APIs to wait for user input in your
@@ -167,7 +180,7 @@ notebook.
 `Deno.jupyter.broadcast` allows to publish messages to the IO pub channel
 allowing to provide live updates as the cell is evaluated.
 
-Consider this example that prints a message before we start a compution and
+Consider this example that prints a message before we start a computation and
 another when the computation is finished:
 
 ```js

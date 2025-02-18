@@ -9,8 +9,8 @@ oldUrl:
   - /runtime/manual/getting_started/
 ---
 
-[Deno](https://www.deno.com)
-([/ˈdiːnoʊ/](http://ipa-reader.xyz/?text=%CB%88di%CB%90no%CA%8A), pronounced
+[Deno](https://deno.com)
+([/ˈdiːnoʊ/](https://ipa-reader.com/?text=%CB%88di%CB%90no%CA%8A), pronounced
 `dee-no`) is an
 [open source](https://github.com/denoland/deno/blob/main/LICENSE.md) JavaScript,
 TypeScript, and WebAssembly runtime with secure defaults and a great developer
@@ -48,7 +48,7 @@ curl -fsSL https://deno.land/install.sh | sh
 </deno-tab>
 </deno-tabs>
 
-[Additional installation options can be found here](/runtime/fundamentals/installation/).
+[Additional installation options can be found here](/runtime/getting_started/installation/).
 After installation, you should have the `deno` executable available on your
 system path. You can verify the installation by running:
 

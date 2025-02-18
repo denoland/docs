@@ -12,7 +12,7 @@ This tutorial covers how to deploy a Vite Deno and React app on Deno Deploy.
 Let's use [Vite](https://vitejs.dev/) to quickly scaffold a Deno and React app:
 
 ```sh
-deno run --allow-read --allow-write --allow-env npm:create-vite-extra@latest
+deno run -RWE npm:create-vite-extra@latest
 ```
 
 We'll name our project `vite-project`. Be sure to select `deno-react` in the
@@ -25,7 +25,7 @@ Then, `cd` into the newly created project folder.
 To see and edit your new project locally you can run:
 
 ```sh
-deno task run
+deno run dev
 ```
 
 ## Step 3: Deploy your project with Deno Deploy
@@ -43,11 +43,11 @@ Now that we have everything in place, let's deploy your new project!
 7. Set the **Root directory** to `dist`
 8. Click **Deploy Project**
 
-> NB. The entrypoint that is set will be `jsr:@std/http@1.0.0-rc.5/file-server`.
-> Note that this is not a file that exists in the Vite repo itself. Instead, it
-> is an external program. When run, this program uploads all the static asset
-> files in your current repo (`vite-project/dist`) to Deno Deploy. Then when you
-> navigate to the deployment URL, it serves up the local directory.
+> NB. The entrypoint that is set will be `jsr:@std/http/file-server`. Note that
+> this is not a file that exists in the Vite repo itself. Instead, it is an
+> external program. When run, this program uploads all the static asset files in
+> your current repo (`vite-project/dist`) to Deno Deploy. Then when you navigate
+> to the deployment URL, it serves up the local directory.
 
 ### `deployctl`
 
@@ -56,5 +56,5 @@ Deploy.
 
 ```console
 cd /dist
-deployctl deploy --project=<project-name> jsr:@std/http@1.0.0-rc.5/file-server
+deployctl deploy --project=<project-name> --entrypoint=jsr:@std/http/file-server
 ```

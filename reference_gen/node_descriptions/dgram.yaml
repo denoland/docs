@@ -1,12 +1,13 @@
+status: partial
 symbols:
   Socket: |
-   The following methods are non-functional stubs:
-    -  addMembership
-    -  addSourceSpecificMembership
-    -  dropMembership
-    -  dropSourceSpecificMembership
-    -  setBroadcast
-    -  setMulticastInterface
-    -  setMulticastLoopback
-    -  setMulticastTtl
-    -  setTtl
+    The following methods are non-functional stubs:
+     -  addMembership
+     -  addSourceSpecificMembership
+     -  dropMembership
+     -  dropSourceSpecificMembership
+     -  setBroadcast
+     -  setMulticastInterface
+     -  setMulticastLoopback
+     -  setMulticastTtl
+     -  setTtl

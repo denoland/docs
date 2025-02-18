@@ -1,25 +1,17 @@
-export type Sidebar = SidebarSection[];
+export type Sidebar = SidebarItem[];
+export type Path = string;
 
-export interface SidebarSection {
+export interface SidebarItem {
   title: string;
-  items: SidebarItem[];
+  href?: string;
+  items?: SidebarItem[];
+  externalUrl?: string;
+  type?: "video" | "example" | "tutorial";
 }
 
-export type SidebarItem = string | SidebarDoc | SidebarLink | SidebarCategory;
-
-export interface SidebarDoc {
-  label: string;
-  id: string;
-}
-
-export interface SidebarLink {
-  label: string;
-  href: string;
-}
-
-export interface SidebarCategory {
-  label: string;
-  items: (string | SidebarDoc)[];
+export interface NavigationData {
+  sectionData: SidebarItem[];
+  currentUrl: string;
 }
 
 export type TableOfContents = TableOfContentsItem[];
@@ -29,3 +21,22 @@ export interface TableOfContentsItem {
   slug: string;
   children: TableOfContentsItem[];
 }
+
+export interface FeedbackSubmission {
+  path: string;
+  sentiment: "yes" | "no";
+  id?: string | null;
+  comment?: string;
+  contact?: string;
+}
+
+export interface GoogleSheetsUpdateResponse {
+  updates: {
+    updatedRange: string;
+    updatedRows: number;
+    updatedColumns: number;
+    updatedCells: number;
+  };
+}
+
+export type NavData = { name: string; href: string };

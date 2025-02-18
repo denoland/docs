@@ -1,5 +1,5 @@
 ---
-title: "Unstable Feature Flags"
+title: "Unstable feature flags"
 oldUrl:
  - /runtime/tools/unstable_flags/
  - /runtime/manual/tools/unstable_flags/
@@ -18,17 +18,17 @@ deno --help
 
 You can enable a feature flag when you run a Deno program from the command line
 by passing in the flag as an option to the CLI. Here's an example of running a
-program with the `--unstable-byonm` flag enabled:
+program with the `--unstable-node-globals` flag enabled:
 
 ```sh
-deno run --unstable-byonm main.ts
+deno run --unstable-node-globals main.ts
 ```
 
 ## Configuring flags in `deno.json`
 
 You can specify which unstable features you'd like to enable for your project
 using a
-[configuration option in `deno.json`](../getting_started/configuration_file.md).
+[configuration option in `deno.json`](/runtime/fundamentals/configuration/).
 
 ```json title="deno.json"
 {
@@ -58,10 +58,10 @@ export DENO_UNSTABLE_BARE_NODE_BUILTINS=true
 **Environment variable:** `DENO_UNSTABLE_BARE_NODE_BUILTINS`
 
 This flag enables you to
-[import Node.js built-in modules](../node/node_specifiers.md) without a `node:`
-specifier, as in the example below. You can also use this flag to enable npm
-packages without an `npm:` specifier if you are manually managing your Node.js
-dependencies ([see `byonm` flag](#--unstable-byonm)).
+[import Node.js built-in modules](/runtime/fundamentals/node/#node-built-in-modules)
+without a `node:` specifier, as in the example below. You can also use this flag
+to enable npm packages without an `npm:` specifier if you are manually managing
+your Node.js dependencies ([see `byonm` flag](#--unstable-byonm)).
 
 ```ts title="example.ts"
 import { readFileSync } from "fs";
@@ -69,46 +69,35 @@ import { readFileSync } from "fs";
 console.log(readFileSync("deno.json", { encoding: "utf8" }));
 ```
 
-## `--unstable-byonm`
+## `--unstable-detect-cjs`
 
-**Environment variable:** `DENO_UNSTABLE_BYONM`
+**Environment variable:** `DENO_UNSTABLE_DETECT_CJS`
 
-This feature flag enables support for resolving modules from a local
-`node_modules` folder that you manage outside of Deno with
-[npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), or
-[yarn](https://yarnpkg.com/). This may improve compatibility with Node.js
-modules that have hard requirements on the installation behavior of npm clients,
-or the presence of a `node_modules` folder.
+Loads `.js`, `.jsx`, `.ts`, and `.tsx` modules as possibly being CommonJS in the
+following additional scenarios:
 
-In your Deno project folder, include a `package.json` file which declares your
-dependencies, and manage them through an npm client as you would normally.
-Consider a `package.json` with the following dependencies:
+1. The _package.json_ has no `"type"` field.
+1. No _package.json_ exists.
 
-```json title="package.json"
-{
-  ...
-  "dependencies": {
-    "cowsay": "^1.5.0"
-  }
-  ...
-}
-```
+By default, Deno only loads these modules as being possibly CommonJS when you're
+in a project with a _package.json_ and the closest _package.json_ has
+`{ "type": "commonjs" }`.
 
-You would install them as usual with:
+Requires Deno >= 2.1.2
 
-```sh
-npm install
-```
+## `--unstable-node-globals`
 
-Afterward, you could write code in a Deno program that looks like this:
+This flags injects Node specific globals into the global scope. The injected
+globals are:
 
-```ts title="example.ts"
-import cowsay from "cowsay";
+- `Buffer`
+- `global`
+- `setImmediate`
+- `clearImmediate`
 
-console.log(cowsay.say({
-  text: "Hello from Deno using BYONM!",
-}));
-```
+Note, that `process` is already available as a global startin with Deno 2.0.
+
+Requires Deno >= 2.1.0
 
 ## `--unstable-sloppy-imports`
 
@@ -137,7 +126,8 @@ Sloppy imports will allow (but print warnings for) the following:
 - Import a directory path, and automatically use `index.js` or `index.ts` as the
   import for that directory
 
-[`deno compile`](./compiler.md) does not support sloppy imports.
+[`deno compile`](/runtime/reference/cli/compile/) does not support sloppy
+imports.
 
 ## `--unstable-unsafe-proto`
 
@@ -213,33 +203,16 @@ on the `Deno` namespace.
 Enabling this flag makes [Deno KV](/deploy/kv/manual) APIs available in the
 `Deno` namespace.
 
-## `--unstable-ffi`
-
-Enable unstable FFI APIs -
-[learn more about FFI](/runtime/reference/deno_namespace_apis/#ffi).
-
-## `--unstable-fs`
-
-Enable unstable file system APIs in the `Deno` namespace. These APIs include:
-
-- [`Deno.flock`](https://docs.deno.com/api/deno/~/Deno.flock)
-- [`Deno.flockSync`](https://docs.deno.com/api/deno/~/Deno.flockSync)
-- [`Deno.funlock`](https://docs.deno.com/api/deno/~/Deno.funlock)
-- [`Deno.funlockSync`](https://docs.deno.com/api/deno/~/Deno.funlockSync)
-- [`Deno.umask`](https://docs.deno.com/api/deno/~/Deno.umask)
-
-## `--unstable-http`
-
-Enable unstable HTTP APIs in the `Deno` namespace. These APIs include:
-
-- [`Deno.HttpClient`](https://deno.land/api?unstable=&s=Deno.HttpClient)
-- [`Deno.createHttpClient`](https://deno.land/api?unstable=&s=Deno.createHttpClient)
-
 ## `--unstable-net`
 
 Enable unstable net APIs in the `Deno` namespace. These APIs include:
 
 - [`Deno.DatagramConn`](https://docs.deno.com/api/deno/~/Deno.DatagramConn)
+
+## `--unstable-otel`
+
+Enable the
+[OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry).
 
 ## `--unstable`
 

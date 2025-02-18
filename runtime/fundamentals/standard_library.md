@@ -28,14 +28,14 @@ packages on JSR, but here are a few examples:
 - [@std/jsonc](https://jsr.io/@std/jsonc): (De)serialization of JSON with
   comments
 - [@std/encoding](https://jsr.io/@std/encoding): Utilities for encoding and
-  decoding common formats like hex, base64, and varint
+  decoding common formats like hex, base64, and variant
 
 ## Versioning and stability
 
 Each package of the standard library is independently versioned. Packages follow
 [semantic versioning rules](https://jsr.io/@std/semver). You can use
-[version pinning or version ranges](./modules#package-versions) to prevent major
-releases from affecting your code.
+[version pinning or version ranges](/runtime/fundamentals/modules/#package-versions)
+to prevent major releases from affecting your code.
 
 ## Importing standard library modules
 

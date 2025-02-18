@@ -1,5 +1,5 @@
 ---
-title: "Using modules in Deno"
+title: "Modules and dependencies"
 oldUrl:
   - /runtime/manual/basics/modules/
   - /runtime/manual/basics/modules/integrity_checking/
@@ -16,6 +16,8 @@ oldUrl:
   - /runtime/manual/linking_to_external_code/reloading_modules
   - /runtime/fundamentals/esm.sh
   - /runtime/manual/basics/import_maps/
+  - /runtime/manual/advanced/private_repositories/
+  - /runtime/reference/private_repositories/
 ---
 
 Deno uses
@@ -79,15 +81,16 @@ projects, including the
 [Deno Standard Library](/runtime/fundamentals/standard_library/).
 
 You can
-[read more about Deno's support for npm packages here](/runtime/reference/npm).
+[read more about Deno's support for npm packages here](/runtime/fundamentals/node/#using-npm-modules).
 
 ## Managing third party modules and libraries
 
 Typing out the module name with the full version specifier can become tedious
 when importing them in multiple files. You can centralize management of remote
 modules with an `imports` field in your `deno.json` file. We call this `imports`
-field the **import map**, which is based on the
-[Import Maps Standard](https://github.com/WICG/import-maps).
+field the **import map**, which is based on the [Import Maps Standard].
+
+[Import Maps Standard]: https://github.com/WICG/import-maps
 
 ```json title="deno.json"
 {
@@ -110,6 +113,38 @@ import { pascalCase } from "cases";
 The remapped name can be any valid specifier. It's a very powerful feature in
 Deno that can remap anything. Learn more about what the import map can do
 [here](/runtime/fundamentals/configuration/#dependencies).
+
+## Differentiating between `imports` or `importMap` in `deno.json` and `--import-map` option
+
+The [Import Maps Standard] requires two entries for each module: one for the
+module specifier and another for the specifier with a trailing `/`. This is
+because the standard allows only one entry per module specifier, and the
+trailing `/` indicates that the specifier refers to a directory. For example,
+when using the `--import-map import_map.json` option, the `import_map.json` file
+must include both entries for each module (note the use of `jsr:/@std/async`
+instead of `jsr:@std/async`):
+
+```json title="import_map.json"
+{
+  "imports": {
+    "@std/async": "jsr:@std/async@^1.0.0",
+    "@std/async/": "jsr:/@std/async@^1.0.0/"
+  }
+}
+```
+
+In contrast, `deno.json` extends the import maps standard. When you use the
+imports field in `deno.json` or reference an `import_map.json` file via the
+`importMap` field, you only need to specify the module specifier without the
+trailing `/`:
+
+```json title="deno.json"
+{
+  "imports": {
+    "@std/async": "jsr:@std/async@^1.0.0"
+  }
+}
+```
 
 ## Adding dependencies with `deno add`
 
@@ -138,6 +173,23 @@ You can also specify an exact version:
 $ deno add jsr:@luca/cases@1.0.0
 Add @luca/cases - jsr:@luca/cases@1.0.0
 ```
+
+Read more in [`deno add` reference](/runtime/reference/cli/add/).
+
+You can also remove dependencies using `deno remove`:
+
+```sh
+$ deno remove @luca/cases
+Remove @luca/cases
+```
+
+```json title="deno.json"
+{
+  "imports": {}
+}
+```
+
+Read more in [`deno remove` reference](/runtime/reference/cli/remove/).
 
 ## Package Versions
 
@@ -212,17 +264,66 @@ the best experience.**
 
 :::
 
+## Overriding dependencies
+
+Deno provides mechanisms to override dependencies, enabling developers to use
+custom or local versions of libraries during development or testing.
+
+Note: If you need to cache and modify dependencies locally for use across
+builds, consider [vendoring remote modules](#vendoring-remote-modules).
+
+### Overriding local JSR packages
+
+For developers familiar with `npm link` in Node.js, Deno provides a similar
+feature for local JSR packages through the `patch` field in `deno.json`. This
+allows you to override dependencies with local versions during development
+without needing to publish them.
+
+Example:
+
+```json title="deno.json"
+{
+  "patch": [
+    "../some-package-or-workspace"
+  ]
+}
+```
+
+Key points:
+
+- The `patch` field accepts paths to directories containing JSR packages or
+  workspaces. If you reference a single package within a workspace, the entire
+  workspace will be included.
+- This feature is only respected in the workspace root. Using `patch` elsewhere
+  will trigger warnings.
+- Currently, `patch` is limited to JSR packages. Attempting to patch `npm`
+  packages will result in a warning with no effect.
+
+Limitations:
+
+- `npm` package overrides are not supported yet. This is planned for future
+  updates.
+- Git-based dependency overrides are unavailable.
+- The `patch` field requires proper configuration in the workspace root.
+- This feature is experimental and may change based on user feedback.
+
+### Overriding NPM packages
+
+We plan to support NPM packages with the patch functionality described above,
+but until then if you have a `node_modules` directory, `npm link` can be used
+without change to accheive the same effect. This is typically done with
+`{ "nodeModulesDir": "manual" }` set in the `deno.json` file. See also the
+documentation on [`node_modules`](/runtime/fundamentals/node/#node_modules)
+
 ### Overriding HTTPS imports
 
-The other situation where import maps can be very useful is to override HTTPS
-imports in specific modules.
+Deno also allows overriding HTTPS imports through the `importMap` field in
+`deno.json`. This feature is particularly useful when substituting a remote
+dependency with a local patched version for debugging or temporary fixes.
 
-Let's say you want to override a `https://deno.land/x/my-library@1.0.0/mod.ts`
-specifier that is used inside files coming from `https://deno.land/x/example/`
-to a local patched version. You can do this by using a scope in the import map
-that looks something like this:
+Example:
 
-```json
+```json title="deno.json"
 {
   "imports": {
     "example/": "https://deno.land/x/example/"
@@ -235,12 +336,50 @@ that looks something like this:
 }
 ```
 
-:::note
+Key points:
 
-HTTPS imports have no notion of packages. Only the import map at the root of
-your project is used. Import maps used inside URL dependencies are ignored.
+- The `scopes` field in the import map allows you to redirect specific imports
+  to alternative paths.
+- This is commonly used to override remote dependencies with local files for
+  testing or development purposes.
+- Import maps apply only to the root of your project. Nested import maps within
+  dependencies are ignored.
 
-:::
+## Vendoring remote modules
+
+If your project has external dependencies, you may want to store them locally to
+avoid downloading them from the internet every time you build your project. This
+is especially useful when building your project on a CI server or in a Docker
+container, or patching or otherwise modifying the remote dependencies.
+
+Deno offers this functionality through a setting in your `deno.json` file:
+
+```json
+{
+  "vendor": true
+}
+```
+
+Add the above snippet to your `deno.json` file and Deno will cache all
+dependencies locally in a `vendor` directory when the project is run, or you can
+optionally run the `deno install --entrypoint` command to cache the dependencies
+immediately:
+
+```bash
+deno install --entrypoint main.ts
+```
+
+You can then run the application as usual with `deno run`:
+
+```bash
+deno run main.ts
+```
+
+After vendoring, you can run `main.ts` without internet access by using the
+`--cached-only` flag, which forces Deno to use only locally available modules.
+
+For more advanced overrides, such as substituting dependencies during
+development, see [Overriding dependencies](#overriding-dependencies).
 
 ## Publishing modules
 
@@ -282,39 +421,6 @@ deno run --cached-only mod.ts
 
 This will fail if there are any dependencies in the dependency tree for mod.ts
 which are not yet cached.
-
-## Vendoring remote modules
-
-If your project has external dependencies, you may want to store them locally to
-avoid downloading them from the internet every time you build your project. This
-is especially useful when building your project on a CI server or in a Docker
-container, or patching or otherwise modifying the remote dependencies.
-
-Deno offers this functionality through a setting in your `deno.json` file:
-
-```json
-{
-  "vendor": true
-}
-```
-
-Add the above snippet to your `deno.json` file and Deno will cache all
-dependencies locally in a `vendor` directory when the project is run, or you can
-optionally run the `deno install --entrypoint` command to cache the dependencies
-immediately:
-
-```bash
-deno install --entrypoint main.ts
-```
-
-You can then run the application as usual with `deno run`:
-
-```bash
-deno run main.ts
-```
-
-After vendoring, you can run `main.ts` without internet access by using the
-`--cached-only` flag, which forces Deno to use only locally available modules.
 
 ## Integrity Checking and Lock Files
 
@@ -381,3 +487,97 @@ following in a Deno configuration file:
   }
 }
 ```
+
+## Private repositories
+
+:::note
+
+If you're looking for private npm registries and `.npmrc` support, visit the
+[npm support](/runtime/fundamentals/node/#private-registries) page.
+
+:::
+
+There may be instances where you want to load a remote module that is located in
+a _private_ repository, like a private repository on GitHub.
+
+Deno supports sending bearer tokens when requesting a remote module. Bearer
+tokens are the predominant type of access token used with OAuth 2.0, and are
+broadly supported by hosting services (e.g., GitHub, GitLab, Bitbucket,
+Cloudsmith, etc.).
+
+### DENO_AUTH_TOKENS
+
+The Deno CLI will look for an environment variable named `DENO_AUTH_TOKENS` to
+determine what authentication tokens it should consider using when requesting
+remote modules. The value of the environment variable is in the format of _n_
+number of tokens delimited by a semi-colon (`;`) where each token is either:
+
+- a bearer token in the format of `{token}@{hostname[:port]}` or
+- basic auth data in the format of `{username}:{password}@{hostname[:port]}`
+
+For example, a single token for `deno.land` would look something like this:
+
+```sh
+DENO_AUTH_TOKENS=a1b2c3d4e5f6@deno.land
+```
+
+or:
+
+```sh
+DENO_AUTH_TOKENS=username:password@deno.land
+```
+
+And multiple tokens would look like this:
+
+```sh
+DENO_AUTH_TOKENS=a1b2c3d4e5f6@deno.land;f1e2d3c4b5a6@example.com:8080;username:password@deno.land
+```
+
+When Deno goes to fetch a remote module, where the hostname matches the hostname
+of the remote module, Deno will set the `Authorization` header of the request to
+the value of `Bearer {token}` or `Basic {base64EncodedData}`. This allows the
+remote server to recognize that the request is an authorized request tied to a
+specific authenticated user, and provide access to the appropriate resources and
+modules on the server.
+
+### GitHub
+
+To access private repositories on GitHub, you would need to issue yourself a
+_personal access token_. You do this by logging into GitHub and going under
+_Settings -> Developer settings -> Personal access tokens_:
+
+![Personal access tokens settings on GitHub](./images/private-pat.png)
+
+You would then choose to _Generate new token_ and give your token a description
+and appropriate access to the `repo` scope. The `repo` scope will enable reading
+file contents (more on
+[scopes in the GitHub docs](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps#available-scopes)):
+
+![Creating a new personal access token on GitHub](./images/private-github-new-token.png)
+
+And once created GitHub will display the new token a single time, the value of
+which you would want to use in the environment variable:
+
+![Display of newly created token on GitHub](./images/private-github-token-display.png)
+
+In order to access modules that are contained in a private repository on GitHub,
+you would want to use the generated token in the `DENO_AUTH_TOKENS` environment
+variable scoped to the `raw.githubusercontent.com` hostname. For example:
+
+```sh
+DENO_AUTH_TOKENS=a1b2c3d4e5f6@raw.githubusercontent.com
+```
+
+This should allow Deno to access any modules that the user who the token was
+issued for has access to.
+
+When the token is incorrect, or the user does not have access to the module,
+GitHub will issue a `404 Not Found` status, instead of an unauthorized status.
+So if you are getting errors that the modules you are trying to access are not
+found on the command line, check the environment variable settings and the
+personal access token settings.
+
+In addition, `deno run -L debug` should print out a debug message about the
+number of tokens that are parsed out of the environment variable. It will print
+an error message if it feels any of the tokens are malformed. It won't print any
+details about the tokens for security purposes.

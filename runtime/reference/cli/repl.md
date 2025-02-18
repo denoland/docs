@@ -1,20 +1,8 @@
 ---
 title: "`deno repl`, interactive scripting prompt"
 oldUrl: /runtime/manual/tools/repl/
+command: repl
 ---
-
-`deno repl` starts a read-eval-print-loop, which lets you interactively build up
-program state in the global context, it is especially useful for quick
-prototyping and checking snippets of code.
-
-> ⚠️ Deno REPL supports JavaScript as well as TypeScript, however TypeScript
-> code is not type-checked, instead it is transpiled to JavaScript behind the
-> scenes.
-
-> ⚠️ To make it easier to copy-paste code samples, Deno REPL supports import and
-> export declarations. It means that you can paste code containing
-> `import ... from ...;`, `export class ...` or `export function ...` and it
-> will work as if you were executing a regular ES module.
 
 ## Special variables
 
@@ -126,7 +114,7 @@ readTextFileSync  readFileSync      readDir           readLink          readAllS
 | Ctrl-A, Home          | Move cursor to the beginning of line                                                             |
 | Ctrl-B, Left          | Move cursor one character left                                                                   |
 | Ctrl-C                | Interrupt and cancel the current edit                                                            |
-| Ctrl-D                | If if line _is_ empty, signal end of line                                                        |
+| Ctrl-D                | If line _is_ empty, signal end of line                                                           |
 | Ctrl-D, Del           | If line is _not_ empty, delete character under cursor                                            |
 | Ctrl-E, End           | Move cursor to end of line                                                                       |
 | Ctrl-F, Right         | Move cursor one character right                                                                  |

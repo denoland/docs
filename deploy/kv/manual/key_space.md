@@ -25,11 +25,11 @@ delimiter.
 > key-value store by injecting delimiters used in the key encoding scheme into a
 > user controlled variable, leading to unintended behavior or unauthorized
 > access. For example, consider a key-value store using a slash (/) as a
-> delimiter, with keys like "user/alice/settings" and "user/bob/settings". An
+> delimiter, with keys like "users/alice/settings" and "users/bob/settings". An
 > attacker could create a new user with the name "alice/settings/hacked" to form
-> the key "user/alice/settings/hacked/settings", injecting the delimiter and
+> the key "users/alice/settings/hacked/settings", injecting the delimiter and
 > manipulating the key structure. In Deno KV, the injection would result in the
-> key `["user", "alice/settings/hacked", "settings"]`, which is not harmful.
+> key `["users", "alice/settings/hacked", "settings"]`, which is not harmful.
 
 Between key parts, invisible delimiters are used to separate the parts. These
 delimiters are never visible, but ensure that one part can not be confused with

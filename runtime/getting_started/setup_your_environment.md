@@ -1,5 +1,5 @@
 ---
-title: "Set Up Your Environment"
+title: "Set up your environment"
 oldUrl: /runtime/manual/getting_started/setup_your_environment/
 ---
 
@@ -35,9 +35,7 @@ following configuration:
 
 ```json
 {
-  "deno.enable": true,
-  "deno.lint": true,
-  "deno.unstable": true
+  "deno.enable": true
 }
 ```
 
@@ -65,8 +63,9 @@ to learn more about how to get started with Deno in Jetbrains IDEs.
 Deno is well-supported on both [Vim](https://www.vim.org/) and
 [Neovim](https://neovim.io/) via
 [coc.nvim](https://github.com/neoclide/coc.nvim),
-[vim-easycomplete](https://github.com/jayli/vim-easycomplete) and
-[ALE](https://github.com/dense-analysis/ale). coc.nvim offers plugins to
+[vim-easycomplete](https://github.com/jayli/vim-easycomplete),
+[ALE](https://github.com/dense-analysis/ale) and
+[vim-lsp](https://github.com/prabirshrestha/vim-lsp). coc.nvim offers plugins to
 integrate to the Deno language server while ALE supports it _out of the box_.
 
 ### Neovim 0.6+ using the built-in language server
@@ -74,14 +73,13 @@ integrate to the Deno language server while ALE supports it _out of the box_.
 To use the Deno language server install
 [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) and follow the
 instructions to enable the
-[supplied Deno configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#denols).
+[supplied Deno configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols).
 
-Note that if you also have `tsserver` as an LSP client, you may run into issues
-where both `tsserver` and `denols` are attached to your current buffer. To
-resolve this, make sure to set some unique `root_dir` for both `tsserver` and
-`denols`. You may also need to set `single_file_support` to `false` for
-`tsserver` to prevent it from running in `single file mode`. Here is an example
-of such a configuration:
+Note that if you also have `ts_ls` as an LSP client, you may run into issues
+where both `ts_ls` and `denols` are attached to your current buffer. To resolve
+this, make sure to set some unique `root_dir` for both `ts_ls` and `denols`. You
+may also need to set `single_file_support` to `false` for `ts_ls` to prevent it
+from running in `single file mode`. Here is an example of such a configuration:
 
 ```lua
 local nvim_lsp = require('lspconfig')
@@ -90,7 +88,7 @@ nvim_lsp.denols.setup {
   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
 }
 
-nvim_lsp.tsserver.setup {
+nvim_lsp.ts_ls.setup {
   on_attach = on_attach,
   root_dir = nvim_lsp.util.root_pattern("package.json"),
   single_file_support = false
@@ -130,6 +128,38 @@ Vim-EasyComplete supports Deno without any other configuration. Once you have
 you need install deno via `:InstallLspServer deno` if you haven't installed
 deno. You can get more information from
 [official documentation](https://github.com/jayli/vim-easycomplete).
+
+#### Vim-Lsp
+
+After installing Vim-Lsp through
+[vim-plug](https://github.com/prabirshrestha/vim-lsp?tab=readme-ov-file#installing)
+or vim packages. Add this code to your `.vimrc` configuration:
+
+```vim
+if executable('deno')
+  let server_config = {
+    \ 'name': 'deno',
+    \ 'cmd': {server_info->['deno', 'lsp']},
+    \ 'allowlist': ['typescript', 'javascript', 'javascriptreact', 'typescriptreact'],
+    \ }
+
+  if exists('$DENO_ENABLE') 
+    let deno_enabled = $DENO_ENABLE == '1' 
+    let server_config['workspace_config'] = { 'deno': { 'enable': deno_enabled ? v:true : v:false } } 
+  endif
+
+  au User lsp_setup call lsp#register_server(server_config)
+endif
+```
+
+You will have two ways to enable the LSP Server. One is to have a `deno.json` or
+`deno.jsonc` in your current working directory, or force it with
+`DENO_ENABLE=1`. Also if you want to highlight syntax in the intellisense
+tooltip, you can add this code to your `.vimrc` configuration too:
+
+```vim
+let g:markdown_fenced_languages = ["ts=typescript"]
+```
 
 ### Emacs
 
@@ -287,11 +317,12 @@ Enabling connection to the Deno language server requires changes in the
 ```toml
 [[language]]
 name = "typescript"
-language-id = "typescript"
-scope = "source.ts"
-injection-regex = "^(ts|typescript)$"
-file-types = ["ts"]
-shebangs = ["deno"]
+roots = ["deno.json", "deno.jsonc", "package.json"]
+auto-format = true
+language-servers = ["deno-lsp"]
+
+[[language]]
+name = "javascript"
 roots = ["deno.json", "deno.jsonc", "package.json"]
 auto-format = true
 language-servers = ["deno-lsp"]
@@ -299,9 +330,7 @@ language-servers = ["deno-lsp"]
 [language-server.deno-lsp]
 command = "deno"
 args = ["lsp"]
-
-[language-server.deno-lsp.config.deno]
-enable = true
+config.deno.enable = true
 ```
 
 ## Shell completions
@@ -400,7 +429,7 @@ the fish config folder:
 ## Other tools
 
 If you are writing or supporting a community integration using the Deno language
-server, you will find
-[documentation](https://github.com/denoland/deno/tree/main/cli/lsp#deno-language-server)
-located in the Deno CLI code repository, but also feel free to join our
-[Discord community](https://discord.gg/deno) in the `#dev-lsp` channel.
+server, read more about
+[integrating with the Deno LSP](/runtime/reference/lsp_integration/), but also
+feel free to join our [Discord community](https://discord.gg/deno) in the
+`#dev-lsp` channel.

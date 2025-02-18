@@ -14,15 +14,15 @@ files are for example:
 
 The APIs that are available are:
 
-- [Deno.cwd](#denocwd)
-- [Deno.readDir](#denoreaddir)
-- [Deno.readFile](#denoreadfile)
-- [Deno.readTextFile](#denoreadtextfile)
-- [Deno.open](#denoopen)
-- [Deno.stat](#denostat)
-- [Deno.lstat](#denolstat)
-- [Deno.realPath](#denorealpath)
-- [Deno.readLink](#denoreadlink)
+- [Deno.cwd](#deno.cwd)
+- [Deno.readDir](#deno.readdir)
+- [Deno.readFile](#deno.readfile)
+- [Deno.readTextFile](#deno.readtextfile)
+- [Deno.open](#deno.open)
+- [Deno.stat](#deno.stat)
+- [Deno.lstat](#deno.lstat)
+- [Deno.realPath](#deno.realpath)
+- [Deno.readLink](#deno.readlink)
 
 ## Deno.cwd
 
@@ -200,7 +200,7 @@ Deno.serve(handler);
 
 `Deno.open()` allows you to open a file, returning a file handle. This file
 handle can then be used to read the contents of the file. See
-[`Deno.File`](#denofile) for information on the methods available on the file
+[`Deno.File`](#deno.file) for information on the methods available on the file
 handle.
 
 The function definition is similar to
@@ -231,11 +231,19 @@ async function handler(_req) {
 Deno.serve(handler);
 ```
 
+:::note
+
+When you iterate over a file stream as shown below, the file descriptor will be
+automatically closed at the end of iteration. There is no need to manually close
+the file descriptor: `const iterator = fd.readable[Symbol.asyncIterator]();`
+
+:::
+
 ## Deno.File
 
-`Deno.File` is a file handle returned from [`Deno.open()`](#denoopen). It can be
-used to read chunks of the file using the `read()` method. The file handle can
-be closed using the `close()` method.
+`Deno.File` is a file handle returned from [`Deno.open()`](#deno.open). It can
+be used to read chunks of the file using the `read()` method. The file handle
+can be closed using the `close()` method.
 
 The interface is similar to [Deno](https://docs.deno.com/api/deno/~/Deno.File),
 but it doesn't support writing to the file, or seeking. Support for the latter
@@ -322,8 +330,8 @@ The path can be a relative or absolute. It can also be a `file:` URL.
 ## Deno.FileInfo
 
 The `Deno.FileInfo` interface is used to represent a file system entry's
-metadata. It is returned by the [`Deno.stat()`](#denostat) and
-[`Deno.lstat()`](#denolstat) functions. It can represent either a file, a
+metadata. It is returned by the [`Deno.stat()`](#deno.stat) and
+[`Deno.lstat()`](#deno.lstat) functions. It can represent either a file, a
 directory, or a symlink.
 
 In Deno Deploy, only the file type, and size properties are available. The size

@@ -5,6 +5,7 @@ oldUrl:
 - /runtime/manual/basics/modules/import_maps/
 - /runtime/basics/import_maps/
 - /runtime/manual/linking_to_external_code/import_maps
+- /manual/linking_to_external_code/proxies
 ---
 
 You can configure Deno using a `deno.json` file. This file can be used to
@@ -76,7 +77,10 @@ import express from "express";
 const app = express();
 ```
 
-Read more about [module imports](./modules.md)
+Note that this will require you to run `deno install`.
+
+Read more about
+[module imports and dependencies](/runtime/fundamentals/modules/)
 
 ### Custom path mappings
 
@@ -197,7 +201,7 @@ This configuration will:
 - removes the `no-unused-vars` rule excluded.
 
 You can find a full list of available linting rules in the
-[Deno lint documentation](https://lint.deno.land/).
+[List of rules](/lint/) documentation page.
 
 Read more about [linting with Deno](/runtime/reference/cli/linter/).
 
@@ -289,13 +293,13 @@ You can set this field to following values:
 | Value      | Behavior                                                                                                                            |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | `"none"`   | Don't use a local `node_modules` directory. Instead use global cache in `$DENO_DIR` that is automatically kept up to date by Deno.  |
-| `"auto"`   | Use a local `node_modules` directory. The directory is automatically create and kept up to date by Deno.                            |
+| `"auto"`   | Use a local `node_modules` directory. The directory is automatically created and kept up to date by Deno.                           |
 | `"manual"` | Use a local `node_modules` directory. User must keep this directory up to date manually, eg. using `deno install` or `npm install`. |
 
 It is not required to specify this setting, the following defaults are applied:
 
 - `"none"` if there is no `package.json` file in your project directory
-- `"manual"` is there is a `package.json` file in your project directory
+- `"manual"` if there is a `package.json` file in your project directory
 
 When using workspaces, this setting can only be used in the workspace root.
 Specifying it in any of the members will result in warnings. The `"manual"`
@@ -317,7 +321,7 @@ sharing code.
 :::
 
 See also
-[Configuring TypeScript in Deno](/runtime/manual/advanced/typescript/configuration/).
+[Configuring TypeScript in Deno](/runtime/reference/ts_config_migration/).
 
 ## Unstable features
 
@@ -509,3 +513,13 @@ works as well:
 A JSON schema file is available for editors to provide autocompletion. The file
 is versioned and available at:
 https://deno.land/x/deno/cli/schemas/config-file.v1.json
+
+## Proxies
+
+Deno supports proxies for module downloads and the fetch API. Proxy
+configuration is read from
+[environment variables](https://docs.deno.com/runtime/reference/env_variables/#special-environment-variables):
+HTTP_PROXY, HTTPS_PROXY and NO_PROXY.
+
+If you are using Windows - if environment variables are not found Deno falls
+back to reading proxies from the registry.

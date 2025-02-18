@@ -7,8 +7,7 @@ oldUrl:
 
 Below are instructions on how to build Deno from source. If you just want to use
 Deno you can download a prebuilt executable (more information in the
-[`Getting Started`](../../getting_started/installation.md#download-and-install)
-chapter).
+[`Getting Started`](/runtime/getting_started/installation/) chapter).
 
 ## Cloning the Repository
 
@@ -31,6 +30,7 @@ git clone --recurse-submodules https://github.com/denoland/deno.git
    (otherwise symlinks would require administrator privileges).
 2. Make sure you are using git version 2.19.2.windows.1 or newer.
 3. Set `core.symlinks=true` before the checkout:
+
    ```shell
    git config --global core.symlinks true
    git clone --recurse-submodules https://github.com/denoland/deno.git
@@ -66,7 +66,7 @@ functions.
 ```shell
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
-./llvm.sh 16
+./llvm.sh 17
 apt install --install-recommends -y cmake libglib2.0-dev
 ```
 
@@ -88,7 +88,7 @@ brew install cmake
 For Apple aarch64 users `lld` must be installed.
 
 ```console
-brew install llvm
+brew install llvm lld
 # Add /opt/homebrew/opt/llvm/bin/ to $PATH
 ```
 
@@ -154,7 +154,8 @@ it refers to Python 3.
 
 The easiest way to build Deno is by using a precompiled version of V8.
 
-_For WSL make sure you have sufficient memory allocated in `.wslconfig`_
+_For WSL make sure you have sufficient memory allocated in `.wslconfig`. It is
+recommended that you allocate at least 16GB._
 
 ```console
 cargo build -vv

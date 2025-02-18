@@ -25,7 +25,7 @@ With the Deno runtime installed, you can install the `deployctl` utility with
 the following command:
 
 ```sh
-deno install -Arf jsr:@deno/deployctl
+deno install -gArf jsr:@deno/deployctl
 ```
 
 The `-A` option in the deno install command grants all permissions to the
@@ -99,7 +99,7 @@ deploy an static site using `std/http/file_server.ts` (more details in
 [Static Site Tutorial](https://docs.deno.com/deploy/tutorials/static-site)):
 
 ```shell
-deployctl deploy --include=dist --entrypoint=jsr:@std/http/file_server
+deployctl deploy --include=dist --entrypoint=jsr:@std/http/file-server
 ```
 
 ### Environment variables

@@ -10,8 +10,8 @@ are 2 ways to define the environment variables of a deployment:
 ## Project environment variables
 
 You can define environment variables at the project level. When you create a
-deployment, it will get the set of environment variables the the project has
-defined _at that particular moment_.
+deployment, it will get the set of environment variables the project has defined
+_at that particular moment_.
 
 For convenience, When you change the environment variables of a project, the
 current production deployment is _redeployed_, creating a new production
@@ -32,12 +32,31 @@ your project.
 
 ![environment_variable](../docs-images/fauna2.png)
 
+Updating an existing environment variable works the same way. Click on the "Add
+Variable" button, enter the same name of the environment variable you wish to
+update and enter the new value. Click on the "Save" button to complete the
+update.
+
 ## Deployment environment variables
 
 When deploying using `deployctl`, you can specify environment variables
 [using the `--env` or `--env-file` flags](./deployctl.md#environment-variables),
-complementing the environment variables already defined for the project. These
-env variables will be specific for the deployment being created.
+complementing the environment variables already defined for the project. You can
+also pass multiple `--env-file` arguments (e.g.,
+`--env-file=.env.one --env-file=.env.two`) to include variables from multiple
+files.
+
+:::note
+
+When multiple declarations for the same environment variable exist within a
+single `.env` file, the first occurrence is applied. However, if the same
+variable is defined across multiple `.env` files (using multiple `--env-file`
+arguments), the value from the last file specified takes precedence. This means
+that the first occurrence found in the last `.env` file listed will be applied.
+
+:::
+
+These env variables will be specific for the deployment being created.
 
 ### Default environment variables
 

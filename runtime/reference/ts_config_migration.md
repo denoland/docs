@@ -120,6 +120,7 @@ and any other notes about that option:
 | `noErrorTruncation`              | `false`                 |                                                                                                                                           |
 | `noFallthroughCasesInSwitch`     | `false`                 |                                                                                                                                           |
 | `noImplicitAny`                  | `true`                  |                                                                                                                                           |
+| `noImplicitOverride`             | `true`                  |                                                                                                                                           |
 | `noImplicitReturns`              | `false`                 |                                                                                                                                           |
 | `noImplicitThis`                 | `true`                  |                                                                                                                                           |
 | `noImplicitUseStrict`            | `true`                  |                                                                                                                                           |
@@ -135,7 +136,7 @@ and any other notes about that option:
 | `strictNullChecks`               | `true`                  |                                                                                                                                           |
 | `suppressExcessPropertyErrors`   | `false`                 |                                                                                                                                           |
 | `suppressImplicitAnyIndexErrors` | `false`                 |                                                                                                                                           |
-| `useUnknownInCatchVariables`     | `false`                 |                                                                                                                                           |
+| `useUnknownInCatchVariables`     | `true`                  |                                                                                                                                           |
 
 For a full list of compiler options and how they affect TypeScript, please refer
 to the
@@ -161,7 +162,7 @@ The built-in libraries that are of interest to users:
   libraries.
 - `"deno.worker"` - This is the library used when checking a Deno web worker
   script. For more information about web workers, check out
-  [Type Checking Web Workers](./types.md#type-checking-web-workers).
+  [Type Checking Web Workers](/runtime/reference/ts_config_migration/#type-checking-web-workers).
 - `"dom.asynciterable"` - TypeScript currently does not include the DOM async
   iterables that Deno implements (plus several browsers), so we have implemented
   it ourselves until it becomes available in TypeScript.
@@ -192,7 +193,6 @@ using any APIs exclusive to one or the other. In such cases, a typical
 ```json title="deno.json"
 {
   "compilerOptions": {
-    "target": "esnext",
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   }
 }
@@ -206,7 +206,6 @@ should add that library to the mix as well:
 ```json title="deno.json"
 {
   "compilerOptions": {
-    "target": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -276,9 +275,12 @@ When you’re performing type checking on `coolLib` and using it in your file, t
 TypeScript type definitions from `coolLib.d.ts` will take precedence over
 examining the JavaScript file.
 
-The compiler hint pattern-matching is quite flexible, it accepts both quoted and
-non-quoted values for the specifier, as well as any whitespace around the equals
-sign.
+:::note
+
+In the past the `@ts-types` directive was called `@deno-types`. This alias still
+works, but is not recommended anymore. Use `@ts-types`.
+
+:::
 
 ## Providing types when hosting
 
