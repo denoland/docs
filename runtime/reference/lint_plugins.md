@@ -241,7 +241,7 @@ particular input.
 
 Let's use the example plugin, defined above:
 
-```ts, title="my-plugin-test.ts"
+```ts title="my-plugin-test.ts"
 import { assert, assertEquals } from "jsr:@std/assert";
 import myPlugin from "./my-plugin.ts";
 
