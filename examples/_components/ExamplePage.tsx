@@ -1,5 +1,5 @@
-import { CopyButton } from "../_components/CopyButton.tsx";
-import SnippetComponent from "../_components/SnippetComponent.tsx";
+import { CopyButton } from "./CopyButton.tsx";
+import SnippetComponent from "./SnippetComponent.tsx";
 import { ExampleFromFileSystem } from "../types.ts";
 
 type Props = { example: ExampleFromFileSystem };
@@ -19,6 +19,12 @@ export default function ExamplePage({ example }: Props) {
   return (
     <div data-content="example">
       <div class="flex flex-col gap-4 md:flex-row justify-between items-start md:items-center relative">
+        <a
+          href={url}
+          className="blocklink absolute top-[-4rem] right-0"
+        >
+          Edit on Github
+        </a>
         <div class="flex flex-col gap-2">
           {example.parsed.description && (
             <p
@@ -29,13 +35,6 @@ export default function ExamplePage({ example }: Props) {
             />
           )}
         </div>
-
-        <a
-          href={url}
-          class="px-4 py-2 rounded bg-background-secondary text-sm whitespace-nowrap border border-foreground-secondary hover:bg-background-primary text-foreground-primary md:-translate-y-[6rem]"
-        >
-          Edit on Github
-        </a>
       </div>
       <div class="relative block mt-8">
         <CopyButton text={contentNoCommentary} />

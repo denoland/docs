@@ -5,6 +5,8 @@
 body {
   min-height: 100vh;
   margin: 0;
+  background-color: hsl(var(--background-primary));
+  color: hsl(var(--foreground-primary));
 }
 
 p {
@@ -25,9 +27,33 @@ p {
   }
 }
 
-@media screen and (min-width: 1240px) {
-  body {
+@media screen and (min-width: 1024px) {
+  .layout {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "nav main"
+      "nav footer";
+    grid-template-columns: auto 1fr;
+  }
+
+  .nav {
+    grid-area: nav;
+  }
+  footer {
+    grid-area: footer;
+  }
+  .content {
+    grid-area: main;
+  }
+
+  .layout:has(.raw-container) {
+    display: contents;
+    .nav {
+      display: none;
+    }
+  }
+
+  .raw-container {
+    min-width: 100vw;
   }
 }
