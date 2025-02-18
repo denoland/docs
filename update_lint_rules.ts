@@ -1,4 +1,4 @@
-import { extractYaml } from "jsr:@std/front-matter@1.0.5";
+import { extractYaml } from "@std/front-matter";
 
 interface DenoLintRuleDesc {
   code: string;

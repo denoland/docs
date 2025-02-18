@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows the use of the `debugger` statement
+Disallows the use of the `debugger` statement.
 
 `debugger` is a statement which is meant for stopping the javascript execution
 environment and start the debugger at the statement. Modern debuggers and

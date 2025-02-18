@@ -1,4 +1,3 @@
-import ExamplePage from "./_pages/ExamplePage.tsx";
 import { walkSync } from "@std/fs/walk";
 import { ExampleFromFileSystem } from "./types.ts";
 import { parseExample } from "./utils/parseExample.ts";
@@ -27,7 +26,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
     yield {
       url: `/examples/${example.label}/index.html`,
       title: `${example.parsed.title}`,
-      content: <ExamplePage example={example} />,
+      content: <_data.comp.ExamplePage example={example} />,
     };
   }
 }

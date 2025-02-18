@@ -1,7 +1,6 @@
 import "@std/dotenv/load";
 
 import lume from "lume/mod.ts";
-import checkUrls from "lume/plugins/check_urls.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
 import postcss from "lume/plugins/postcss.ts";
@@ -172,6 +171,7 @@ site.ignore(
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
+  (path) => path.includes("/lint/rules/"),
   // "deploy",
   // "runtime",
   // "subhosting",
@@ -182,25 +182,6 @@ site.scopedUpdates(
   (path) => /\.(js|ts)$/.test(path),
   (path) => path.startsWith("/api/deno/"),
 );
-
-const SKIP_CHECK_URLS = (Deno.env.get("SKIP_CHECK_URLS") || "false")
-  .toLowerCase();
-
-if (SKIP_CHECK_URLS !== "true") {
-  log.info(`${cliNow()} Enabling broken-link checker`);
-
-  site.use(
-    checkUrls({
-      external: false, // Set to true to check external links
-      output: "_broken_links.json",
-      ignore: ["https://www.googletagmanager.com"],
-    }),
-  );
-} else {
-  log.warn(
-    `${cliNow()} <cyan>checkUrls</cyan>: Skipping broken link check for local performance.`,
-  );
-}
 
 site.addEventListener("afterStartServer", () => {
   log.warn(

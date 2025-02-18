@@ -74,8 +74,7 @@ Use this command to install provide package or script as a globally available
 binary on your system.
 
 This command creates a thin, executable shell script which invokes `deno` using
-the specified CLI flags and main module. It is placed in the installation root's
-`bin` directory.
+the specified CLI flags and main module. It is placed in the installation root.
 
 Example:
 
@@ -105,14 +104,14 @@ The executable name is inferred by default:
 To change the installation root, use `--root`:
 
 ```shell
-deno install -g -N -R --root /usr/local jsr:@std/http/file-server
+deno install -g -N -R --root /usr/local/bin jsr:@std/http/file-server
 ```
 
 The installation root is determined, in order of precedence:
 
 - `--root` option
 - `DENO_INSTALL_ROOT` environment variable
-- `$HOME/.deno`
+- `$HOME/.deno/bin`
 
 These must be added to the path manually if required.
 

@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows the reassignment of exception parameters
+Disallows the reassignment of exception parameters.
 
 There is generally no good reason to reassign an exception parameter. Once
 reassigned the code from that point on has no reference to the error anymore.

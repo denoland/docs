@@ -1,6 +1,7 @@
 ---
 title: "`deno compile`, standalone executables"
 oldUrl:
+ - /runtime/manual/tools/compile/
  - /runtime/manual/tools/compiler/
  - /runtime/reference/cli/compiler/
 command: compile
@@ -13,14 +14,14 @@ used to execute the script must be specified at compilation time. This includes
 permission flags.
 
 ```sh
-deno compile --allow-read --allow-net jsr:@std/http@1.0.0/file-server
+deno compile --allow-read --allow-net jsr:@std/http/file-server
 ```
 
 [Script arguments](/runtime/getting_started/command_line_interface/#passing-script-arguments)
 can be partially embedded.
 
 ```console
-deno compile --allow-read --allow-net jsr:@std/http@1.0.0/file-server -p 8080
+deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
 
 ./file_server --help
 ```

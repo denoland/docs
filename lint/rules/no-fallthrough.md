@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows the implicit fallthrough of case statements
+Disallows the implicit fallthrough of case statements.
 
 Case statements without a `break` will execute their body and then fallthrough
 to the next case or default block and execute this block as well. While this is

@@ -1,0 +1,34 @@
+{
+  "navigation": [
+    {
+      "name": "Manual",
+      "href": "/runtime/"
+    },
+    {
+      "name": "API reference",
+      "href": "/api/"
+    },
+    {
+      "name": "Examples",
+      "href": "/examples/"
+    },
+    {
+      "name": "Deploy",
+      "href": "/deploy/manual/"
+    },
+    {
+      "name": "Subhosting",
+      "href": "/subhosting/manual/"
+    }
+  ],
+  "sidebar": [
+    {
+      "items": [
+        {
+          "title": "deno.com",
+          "href": "https://deno.com"
+        }
+      ]
+    }
+  ]
+}

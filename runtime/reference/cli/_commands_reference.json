@@ -400,7 +400,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -822,7 +822,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -1269,7 +1269,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -1313,7 +1313,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -1510,7 +1510,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -1788,7 +1788,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -2172,7 +2172,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -2484,7 +2484,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -2843,7 +2843,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -3227,7 +3227,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -3622,7 +3622,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -3781,7 +3781,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -4078,11 +4078,20 @@
           "usage": "--no-clear-screen"
         },
         {
+          "name": "allow-import",
+          "short": "I",
+          "long": "allow-import",
+          "required": false,
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -4216,7 +4225,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -4548,7 +4557,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -4727,7 +4736,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -5239,7 +5248,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -5343,7 +5352,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }

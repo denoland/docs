@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows reassignment of imported module bindings
+Disallows reassignment of imported module bindings.
 
 ES module import bindings should be treated as read-only since modifying them
 during code execution will likely result in runtime errors. It also makes for

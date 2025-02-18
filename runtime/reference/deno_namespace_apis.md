@@ -674,12 +674,12 @@ Here's a list of types supported currently by the Deno FFI API.
 | `u16`                  | `number`             | `unsigned short int`     | `u16`                     |
 | `i32`                  | `number`             | `int` / `signed int`     | `i32`                     |
 | `u32`                  | `number`             | `unsigned int`           | `u32`                     |
-| `i64`                  | `number \| bigint`   | `long long int`          | `i64`                     |
-| `u64`                  | `number \| bigint`   | `unsigned long long int` | `u64`                     |
-| `usize`                | `number \| bigint`   | `size_t`                 | `usize`                   |
-| `isize`                | `number \| bigint`   | `size_t`                 | `isize`                   |
-| `f32`                  | `number \| bigint`   | `float`                  | `f32`                     |
-| `f64`                  | `number \| bigint`   | `double`                 | `f64`                     |
+| `i64`                  | `bigint`             | `long long int`          | `i64`                     |
+| `u64`                  | `bigint`             | `unsigned long long int` | `u64`                     |
+| `usize`                | `bigint`             | `size_t`                 | `usize`                   |
+| `isize`                | `bigint`             | `size_t`                 | `isize`                   |
+| `f32`                  | `number`             | `float`                  | `f32`                     |
+| `f64`                  | `number`             | `double`                 | `f64`                     |
 | `void`[1]              | `undefined`          | `void`                   | `()`                      |
 | `pointer`              | `{} \| null`         | `void *`                 | `*mut c_void`             |
 | `buffer`[2]            | `TypedArray \| null` | `uint8_t *`              | `*mut u8`                 |
@@ -827,7 +827,7 @@ A couple notes on this example:
 
 - `addEventListener` and `onload`/`onunload` are prefixed with `globalThis`, but
   you could also use `self` or no prefix at all.
-  [It is not recommended to use `window` as a prefix](https://lint.deno.land/#no-window-prefix).
+  [It is not recommended to use `window` as a prefix](https://docs.deno.com/lint/rules/no-window-prefix).
 - You can use `addEventListener` and/or `onload`/`onunload` to define handlers
   for events. There is a major difference between them, let's run the example:
 

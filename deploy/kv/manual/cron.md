@@ -91,9 +91,9 @@ different compared to other cron engines which use 0-6 representation.
 
 ## Usage on Deno Deploy
 
-With [Deno Deploy](https://www.deno.com/deploy), you can run your background
-tasks on V8 isolates in the cloud. When doing so, there are a few considerations
-to keep in mind.
+With [Deno Deploy](https://deno.com/deploy), you can run your background tasks
+on V8 isolates in the cloud. When doing so, there are a few considerations to
+keep in mind.
 
 ### Differences with Deno CLI
 

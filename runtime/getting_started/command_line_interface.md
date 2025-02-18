@@ -39,7 +39,7 @@ Deno supports running scripts directly from URLs. This is particularly useful
 for quickly testing or running code without downloading it first:
 
 ```shell
-deno run https://docs.deno.com/examples/hello-world.ts
+deno run https://docs.deno.com/examples/scripts/hello_world.ts
 ```
 
 You can also run a script by piping it through standard input. This is useful
@@ -91,17 +91,16 @@ below.
 
 ### Watch mode
 
-You can supply the `--watch` flag to `deno run`, `deno test`, `deno compile`,
-and `deno fmt` to enable the built-in file watcher. The watcher enables
-automatic reloading of your application whenever changes are detected in the
-source files. This is particularly useful during development, as it allows you
-to see the effects of your changes immediately without manually restarting the
-application.
+You can supply the `--watch` flag to `deno run`, `deno test`, and `deno fmt` to
+enable the built-in file watcher. The watcher enables automatic reloading of
+your application whenever changes are detected in the source files. This is
+particularly useful during development, as it allows you to see the effects of
+your changes immediately without manually restarting the application.
 
 The files that are watched will depend on the subcommand used:
 
-- for `deno run`, `deno test`, and `deno compile` the entrypoint, and all local
-  files that the entrypoint statically imports will be watched.
+- for `deno run` and `deno test` the entrypoint, and all local files that the
+  entrypoint statically imports will be watched.
 - for `deno fmt` all local files and directories specified as command line
   arguments (or the working directory if no specific files/directories is
   passed) are watched.

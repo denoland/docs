@@ -99,7 +99,7 @@ deploy an static site using `std/http/file_server.ts` (more details in
 [Static Site Tutorial](https://docs.deno.com/deploy/tutorials/static-site)):
 
 ```shell
-deployctl deploy --include=dist --entrypoint=jsr:@std/http/file_server
+deployctl deploy --include=dist --entrypoint=jsr:@std/http/file-server
 ```
 
 ### Environment variables

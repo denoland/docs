@@ -1,7 +1,7 @@
-import { Sidebar, SidebarLink } from "../types.ts";
+import { extractYaml } from "@std/front-matter";
 import { walk } from "jsr:@std/fs";
 import { basename } from "jsr:@std/path";
-import { extractYaml } from "jsr:@std/front-matter@1.0.5";
+import { Sidebar, SidebarLink } from "../types.ts";
 
 async function generateSidebarItems() {
   const sidebarItems = [];
@@ -21,15 +21,14 @@ async function generateSidebarItems() {
       frontMatterData.body = mdContent;
     }
     const tags = frontMatterData.attrs.tags ?? [];
-    // TODO(bartlomieju): handle descriptions properly
-    // const description = frontMatterData.body.split(".")[0];
+    const content = frontMatterData.body;
 
     sidebarItems.push(
       {
-        href: `/lint/rules/${lintRuleName}`,
+        href: `/lint/rules/${lintRuleName}/`,
         label: lintRuleName,
         tags,
-        // description,
+        content,
       } satisfies SidebarLink,
     );
   }
@@ -41,11 +40,14 @@ async function generateSidebarItems() {
 
 export const lintRulePages = await generateSidebarItems();
 
+export const sectionTitle = "Lint rules";
+
+export const sectionHref = "/lint/";
+
 export const sidebar = [
   {
-    title: "Lint rules",
+    title: "List of rules",
+    href: sectionHref,
     items: lintRulePages,
   },
 ] satisfies Sidebar;
-
-export const sectionTitle = "Lint rules";

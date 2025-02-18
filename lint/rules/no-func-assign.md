@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows the overwriting/reassignment of an existing function
+Disallows the overwriting/reassignment of an existing function.
 
 Javascript allows for the reassignment of a function definition. This is
 generally a mistake on the developers part, or poor coding practice as code
