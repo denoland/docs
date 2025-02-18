@@ -256,6 +256,15 @@ Deno.test("my-plugin", () => {
 });
 ```
 
+:::info
+
+`Deno.lint.runPlugin` API is only available in `deno test` and `deno bench`
+subcommands.
+
+Trying to use it with any other subcommand will result in an error thrown.
+
+:::
+
 Consult [API reference](/api/deno/) for more information on
 [`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) and
 [`Deno.lint.Diagnostic`](/api/deno/~/Deno.lint.runPlugin).
