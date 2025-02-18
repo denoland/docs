@@ -247,7 +247,7 @@ export const sidebar = [
       },
       {
         title: "Lint Plugins",
-        id: "/runtime/reference/lint_plugins/",
+        href: "/runtime/reference/lint_plugins/",
       },
       {
         title: "WebAssembly",
