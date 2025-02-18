@@ -12,7 +12,7 @@ const data = "Hello, Deno 2.0!";
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
-// Drive symmetric keys from ECDH key pairs
+// Derive symmetric keys from ECDH key pairs
 async function driveSymmetricKey(
   privateKey: CryptoKey,
   publicKey: CryptoKey,
@@ -36,7 +36,7 @@ async function driveSymmetricKey(
 async function encryptMessage(
   key: CryptoKey,
   iv: Uint8Array,
-  data: string,
+  data: Uint8Array,
 ): Promise<ArrayBuffer> {
   const dataBuffer = encoder.encode(data);
   return await crypto.subtle.encrypt(
@@ -53,8 +53,8 @@ async function decryptMessage(
   key: CryptoKey,
   iv: Uint8Array,
   data: ArrayBuffer,
-): Promise<string> {
-  const decryptedData = await crypto.subtle.decrypt(
+): Promise<ArrayBuffer> {
+  return await crypto.subtle.decrypt(
     {
       name: "AES-GCM",
       iv,
@@ -62,11 +62,10 @@ async function decryptMessage(
     key,
     data,
   );
-  return decoder.decode(decryptedData);
 }
 
 // Get a human-readable string
-async function getBase64Key(key: CryptoKey) {
+async function getBase64Key(key: CryptoKey): Promise<string> {
   const buffer = await crypto.subtle.exportKey("raw", key);
   return btoa(String.fromCharCode(...new Uint8Array(buffer)));
 }
@@ -75,24 +74,20 @@ async function getBase64Key(key: CryptoKey) {
 const AliceKey = await crypto.subtle.generateKey(
   {
     name: "ECDH",
-    hash: { name: "SHA-256" },
     namedCurve: "P-256", // Use the NIST P-256 curve, or P-384 or P-521
   },
   true,
   ["deriveKey"],
 );
-
 // Generate an ECDH key pair for Bob
 const BobKey = await crypto.subtle.generateKey(
   {
     name: "ECDH",
-    hash: { name: "SHA-256" },
     namedCurve: "P-256", // Use the NIST P-256 curve, or P-384 or P-521
   },
   true,
   ["deriveKey"],
 );
-
 // Drive symmetric keys for Alice
 const AliceSymmetricKey = await driveSymmetricKey(
   AliceKey.privateKey,
@@ -112,12 +107,15 @@ const BobSymmetricKey = await driveSymmetricKey(
 console.log("Bob's symmetric key:", await getBase64Key(BobSymmetricKey));
 
 // Generate a random initialization vector (IV) for AES-GCM
-// The IV must be unique for each encryption operation but doesn't need to be secret.
+// The IV must be unique for each encryption operation but doesn't need to be secret. The IV length for AES-GCM is typically 12 bytes.
 const iv = crypto.getRandomValues(new Uint8Array(12)); // 12-byte IV for AES-GCM
 
 // Encrypt and decrypt a message using the derived symmetric keys
-const encryptedData = await encryptMessage(AliceSymmetricKey, iv, data);
+const dataBuffer = encoder.encode(data);
+const encryptedData = await encryptMessage(AliceSymmetricKey, iv, dataBuffer);
 console.log("Encrypted Data:", new Uint8Array(encryptedData));
 
-const decryptedText = await decryptMessage(BobSymmetricKey, iv, encryptedData);
-console.log("Verification of Decrypted Text:", decryptedText === data);
+const decryptedData = await decryptMessage(BobSymmetricKey, iv, encryptedData);
+const decryptedMessage = decoder.decode(decryptedData);
+console.log("Verification of Decrypted Message:", decryptedMessage === data);
+console.log("Verification of Decrypted Message:", decryptedMessage === data);
