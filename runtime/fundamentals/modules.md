@@ -150,7 +150,8 @@ trailing `/`:
 
 The installation process is made easy with the `deno add` subcommand. It will
 automatically add the latest version of the package you requested to the
-`imports` section in `deno.json`.
+`imports` section in `deno.json` (unless there's already a `package.json`
+file in the current or parent directories).
 
 ```sh
 # Add the latest version of the module to deno.json
