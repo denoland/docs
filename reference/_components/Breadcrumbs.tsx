@@ -15,7 +15,7 @@ export default function (
   }
 
   return (
-    <ul class="breadcrumbs">
+    <ul className="breadcrumbs refcrumbs">
       {pathParts.map((part, i) => {
         const isLast =
           !(i !== (pathParts.length - 1) || symbolParts.length > 0);

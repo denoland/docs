@@ -7,21 +7,17 @@ export default function (
   },
 ) {
   if (documentNavigation.length === 0) {
-    return null;
+    return;
   }
 
   // TODO: dont use the string version, but rather use the implementation below.
   //  needs reworking since it doesnt properly work
   if (documentNavigationStr) {
     return (
-      <div className="toc">
-        <div>
-          <nav
-            className="documentNavigation"
-            dangerouslySetInnerHTML={{ __html: documentNavigationStr }}
-          />
-        </div>
-      </div>
+      <nav
+        className="documentNavigation toc-desktop"
+        dangerouslySetInnerHTML={{ __html: documentNavigationStr }}
+      />
     );
   }
 

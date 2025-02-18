@@ -18,10 +18,10 @@ deno --help
 
 You can enable a feature flag when you run a Deno program from the command line
 by passing in the flag as an option to the CLI. Here's an example of running a
-program with the `--unstable-byonm` flag enabled:
+program with the `--unstable-node-globals` flag enabled:
 
 ```sh
-deno run --unstable-byonm main.ts
+deno run --unstable-node-globals main.ts
 ```
 
 ## Configuring flags in `deno.json`
@@ -67,47 +67,6 @@ your Node.js dependencies ([see `byonm` flag](#--unstable-byonm)).
 import { readFileSync } from "fs";
 
 console.log(readFileSync("deno.json", { encoding: "utf8" }));
-```
-
-## `--unstable-byonm`
-
-**Environment variable:** `DENO_UNSTABLE_BYONM`
-
-This feature flag enables support for resolving modules from a local
-`node_modules` folder that you manage outside of Deno with
-[npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), or
-[yarn](https://yarnpkg.com/). This may improve compatibility with Node.js
-modules that have hard requirements on the installation behavior of npm clients,
-or the presence of a `node_modules` folder.
-
-In your Deno project folder, include a `package.json` file which declares your
-dependencies, and manage them through an npm client as you would normally.
-Consider a `package.json` with the following dependencies:
-
-```json title="package.json"
-{
-  ...
-  "dependencies": {
-    "cowsay": "^1.5.0"
-  }
-  ...
-}
-```
-
-You would install them as usual with:
-
-```sh
-npm install
-```
-
-Afterward, you could write code in a Deno program that looks like this:
-
-```ts title="example.ts"
-import cowsay from "cowsay";
-
-console.log(cowsay.say({
-  text: "Hello from Deno using BYONM!",
-}));
 ```
 
 ## `--unstable-detect-cjs`

@@ -1,0 +1,23 @@
+.search {
+  margin-bottom: 0;
+}
+
+.search-input {
+  width: 100%;
+  min-width: 10rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  padding: 0.375rem 0.75rem 0.375rem 0.5rem;
+  padding-left: 2em;
+  border: 1px solid;
+  transition: all 150ms ease-in-out;
+  background: url(/img/search.svg) no-repeat 0.5em 50%;
+  background-size: 1em;
+  background-color: hsl(var(--foreground-quaternary));
+  color: hsl(var(--foreground-primary));
+  border-color: hsl(var(--foreground-tertiary));
+  &:hover, &:focus {
+    background-color: hsl(var(--background-secondary));
+  }
+}
