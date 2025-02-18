@@ -475,7 +475,7 @@ While Deno provides security features that are designed to protect the host
 machine and network from harm, untrusted code is still scary. When executing
 untrusted code, it is important to have more than one layer of defense. Some
 suggestions for executing untrusted code are outlined below, and we recommend
-using using all of these when executing arbitrary untrusted code:
+using all of these when executing arbitrary untrusted code:
 
 - Run `deno` with limited permissions and determine upfront what code actually
   needs to run (and prevent more code being loaded using `--frozen` lockfile and
