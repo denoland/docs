@@ -112,7 +112,21 @@ client.close();
 
 ## SQLite
 
-There are two primary solutions to connect to SQLite in Deno:
+There are multiple solutions to connect to SQLite in Deno:
+
+### Connect to SQLite using the `node:sqlite` module
+
+_`node:sqlite` module has been added in Deno v2.2._
+
+```ts
+import { DatabaseSync } from "node:sqlite";
+const database = new DatabaseSync("test.db");
+
+const result = database.prepare("select sqlite_version()").get();
+console.log(result);
+
+db.close();
+```
 
 ### Connect to SQLite with the FFI Module
 
