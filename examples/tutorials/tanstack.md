@@ -157,7 +157,7 @@ deno install npm:@tanstack/react-query npm:@tanstack/react-router
 Let's update our `deno tasks` in our `deno.json` to add a command to start the
 Vite server:
 
-```json
+```jsonc
 // deno.json
 {
   "tasks": {
