@@ -7,39 +7,84 @@ export const sidebar = [
     title: "Getting started",
     href: "/runtime/",
     items: [
-      "/runtime/getting_started/installation/",
-      "/runtime/getting_started/first_project/",
-      "/runtime/getting_started/setup_your_environment/",
-      "/runtime/getting_started/command_line_interface/",
+      {
+        title: "Installation",
+        href: "/runtime/getting_started/installation/",
+      },
+      {
+        title: "First project",
+        href: "/runtime/getting_started/first_project/",
+      },
+      {
+        title: "Setup your environment",
+        href: "/runtime/getting_started/setup_your_environment/",
+      },
+      {
+        title: "Command line interface",
+        href: "/runtime/getting_started/command_line_interface/",
+      },
     ],
   },
   {
     title: "Fundamentals",
     href: "/runtime/fundamentals/",
     items: [
-      "/runtime/fundamentals/typescript/",
-      "/runtime/fundamentals/node/",
-      "/runtime/fundamentals/security/",
       {
-        label: "Modules and dependencies",
-        id: "/runtime/fundamentals/modules/",
-      },
-      "/runtime/fundamentals/configuration/",
-      "/runtime/fundamentals/standard_library/",
-      "/runtime/fundamentals/web_dev/",
-      "/runtime/fundamentals/testing/",
-      "/runtime/fundamentals/debugging/",
-      "/runtime/fundamentals/workspaces/",
-      "/runtime/fundamentals/linting_and_formatting/",
-      {
-        label: "HTTP Server",
-        id: "/runtime/fundamentals/http_server/",
+        title: "TypeScript",
+        href: "/runtime/fundamentals/typescript/",
       },
       {
-        label: "OpenTelemetry",
-        id: "/runtime/fundamentals/open_telemetry/",
+        title: "Node",
+        href: "/runtime/fundamentals/node/",
       },
-      "/runtime/fundamentals/stability_and_releases/",
+      {
+        title: "Security",
+        href: "/runtime/fundamentals/security/",
+      },
+      {
+        title: "Modules and dependencies",
+        href: "/runtime/fundamentals/modules/",
+      },
+      {
+        title: "Configuration",
+        href: "/runtime/fundamentals/configuration/",
+      },
+      {
+        title: "Standard library",
+        href: "/runtime/fundamentals/standard_library/",
+      },
+      {
+        title: "Web development",
+        href: "/runtime/fundamentals/web_dev/",
+      },
+      {
+        title: "Testing",
+        href: "/runtime/fundamentals/testing/",
+      },
+      {
+        title: "Debugging",
+        href: "/runtime/fundamentals/debugging/",
+      },
+      {
+        title: "Workspaces",
+        href: "/runtime/fundamentals/workspaces/",
+      },
+      {
+        title: "Linting and formatting",
+        href: "/runtime/fundamentals/linting_and_formatting/",
+      },
+      {
+        title: "HTTP Server",
+        href: "/runtime/fundamentals/http_server/",
+      },
+      {
+        title: "OpenTelemetry",
+        href: "/runtime/fundamentals/open_telemetry/",
+      },
+      {
+        title: "Stability and releases",
+        href: "/runtime/fundamentals/stability_and_releases/",
+      },
     ],
   },
   {
@@ -47,155 +92,174 @@ export const sidebar = [
     href: "/runtime/reference/",
     items: [
       {
-        label: "CLI",
+        title: "CLI",
         href: "/runtime/reference/cli/",
         items: [
           {
-            label: "deno add",
-            id: "/runtime/reference/cli/add/",
+            title: "deno add",
+            href: "/runtime/reference/cli/add/",
           },
           {
-            label: "deno bench",
-            id: "/runtime/reference/cli/bench/",
+            title: "deno bench",
+            href: "/runtime/reference/cli/bench/",
           },
           {
-            label: "deno completions",
-            id: "/runtime/reference/cli/completions/",
+            title: "deno check",
+            href: "/runtime/reference/cli/check/",
           },
           {
-            label: "deno check",
-            id: "/runtime/reference/cli/check/",
+            title: "deno clean",
+            href: "/runtime/reference/cli/clean/",
           },
           {
-            label: "deno compile",
-            id: "/runtime/reference/cli/compile/",
+            title: "deno compile",
+            href: "/runtime/reference/cli/compile/",
           },
           {
-            label: "deno coverage",
-            id: "/runtime/reference/cli/coverage/",
+            title: "deno completions",
+            href: "/runtime/reference/cli/completions/",
           },
           {
-            label: "deno doc",
-            id: "/runtime/reference/cli/doc/",
+            title: "deno coverage",
+            href: "/runtime/reference/cli/coverage/",
           },
           {
-            label: "deno eval",
-            id: "/runtime/reference/cli/eval/",
+            title: "deno doc",
+            href: "/runtime/reference/cli/doc/",
           },
           {
-            label: "deno fmt",
-            id: "/runtime/reference/cli/fmt/",
+            title: "deno eval",
+            href: "/runtime/reference/cli/eval/",
           },
           {
-            label: "deno info",
-            id: "/runtime/reference/cli/info/",
+            title: "deno fmt",
+            href: "/runtime/reference/cli/fmt/",
           },
           {
-            label: "deno init",
-            id: "/runtime/reference/cli/init/",
+            title: "deno info",
+            href: "/runtime/reference/cli/info/",
           },
           {
-            label: "deno install",
-            id: "/runtime/reference/cli/install/",
+            title: "deno init",
+            href: "/runtime/reference/cli/init/",
           },
           {
-            label: "deno jupyter",
-            id: "/runtime/reference/cli/jupyter/",
+            title: "deno install",
+            href: "/runtime/reference/cli/install/",
           },
           {
-            label: "deno lint",
-            id: "/runtime/reference/cli/lint/",
+            title: "deno jupyter",
+            href: "/runtime/reference/cli/jupyter/",
           },
           {
-            label: "deno outdated",
-            id: "/runtime/reference/cli/outdated/",
+            title: "deno lint",
+            href: "/runtime/reference/cli/lint/",
           },
           {
-            label: "deno publish",
-            id: "/runtime/reference/cli/publish/",
+            title: "deno outdated",
+            href: "/runtime/reference/cli/outdated/",
           },
           {
-            label: "deno lsp",
-            id: "/runtime/reference/cli/lsp/",
+            title: "deno publish",
+            href: "/runtime/reference/cli/publish/",
           },
           {
-            label: "deno remove",
-            id: "/runtime/reference/cli/remove/",
+            title: "deno lsp",
+            href: "/runtime/reference/cli/lsp/",
           },
           {
-            label: "deno repl",
-            id: "/runtime/reference/cli/repl/",
+            title: "deno remove",
+            href: "/runtime/reference/cli/remove/",
           },
           {
-            label: "deno run",
-            id: "/runtime/reference/cli/run/",
+            title: "deno repl",
+            href: "/runtime/reference/cli/repl/",
           },
           {
-            label: "deno serve",
-            id: "/runtime/reference/cli/serve/",
+            title: "deno run",
+            href: "/runtime/reference/cli/run/",
           },
           {
-            label: "deno task",
-            id: "/runtime/reference/cli/task/",
+            title: "deno serve",
+            href: "/runtime/reference/cli/serve/",
           },
           {
-            label: "deno test",
-            id: "/runtime/reference/cli/test/",
+            title: "deno task",
+            href: "/runtime/reference/cli/task/",
           },
           {
-            label: "deno types",
-            id: "/runtime/reference/cli/types/",
+            title: "deno test",
+            href: "/runtime/reference/cli/test/",
           },
           {
-            label: "deno uninstall",
-            id: "/runtime/reference/cli/uninstall/",
+            title: "deno types",
+            href: "/runtime/reference/cli/types/",
           },
           {
-            label: "deno upgrade",
-            id: "/runtime/reference/cli/upgrade/",
+            title: "deno uninstall",
+            href: "/runtime/reference/cli/uninstall/",
           },
-          "/runtime/reference/cli/unstable_flags/",
+          {
+            title: "deno upgrade",
+            href: "/runtime/reference/cli/upgrade/",
+          },
+          {
+            title: "deno unstable flags",
+            href: "/runtime/reference/cli/unstable_flags/",
+          },
         ],
       },
       {
-        label: "Deno APIs",
-        id: "/runtime/reference/deno_namespace_apis/",
+        title: "Deno APIs",
+        href: "/runtime/reference/deno_namespace_apis/",
       },
       {
-        label: "Web APIs",
-        id: "/runtime/reference/web_platform_apis/",
+        title: "Web APIs",
+        href: "/runtime/reference/web_platform_apis/",
       },
       {
-        label: "Node APIs",
-        id: "/runtime/reference/node_apis/",
-      },
-      "/runtime/reference/ts_config_migration/",
-      "/runtime/reference/continuous_integration/",
-      {
-        label: "Environment variables",
-        id: "/runtime/reference/env_variables/",
+        title: "Node APIs",
+        href: "/runtime/reference/node_apis/",
       },
       {
-        label: "Deno & VS Code",
-        id: "/runtime/reference/vscode/",
+        title: "TS Config Migration",
+        href: "/runtime/reference/ts_config_migration/",
       },
       {
-        label: "Using JSX and React",
-        id: "/runtime/reference/jsx/",
+        title: "Continuous Integration",
+        href: "/runtime/reference/continuous_integration/",
       },
       {
-        label: "Lint Plugins",
+        title: "Environment variables",
+        href: "/runtime/reference/env_variables/",
+      },
+      {
+        title: "Deno & VS Code",
+        href: "/runtime/reference/vscode/",
+      },
+      {
+        title: "Using JSX and React",
+        href: "/runtime/reference/jsx/",
+      },
+      {
+        title: "Testing code in docs",
+        href: "/runtime/reference/documentation/",
+      },
+      {
+        title: "Lint Plugins",
         id: "/runtime/reference/lint_plugins/",
       },
       {
-        label: "Testing code in docs",
-        id: "/runtime/reference/documentation/",
+        title: "WebAssembly",
+        href: "/runtime/reference/wasm/",
       },
-      "/runtime/reference/wasm/",
-      "/runtime/reference/migration_guide/",
       {
-        label: "LSP integration",
-        id: "/runtime/reference/lsp_integration/",
+        title: "Migration Guide",
+        href: "/runtime/reference/migration_guide/",
+      },
+      {
+        title: "LSP integration",
+        href: "/runtime/reference/lsp_integration/",
       },
     ],
   },
@@ -204,19 +268,46 @@ export const sidebar = [
     href: "/runtime/contributing/",
     items: [
       {
-        label: "Contributing to Deno",
+        title: "Contributing to Deno",
         items: [
-          "/runtime/contributing/architecture/",
-          "/runtime/contributing/building_from_source/",
-          "/runtime/contributing/profiling/",
-          "/runtime/contributing/release_schedule/",
-          "/runtime/contributing/style_guide/",
-          "/runtime/contributing/web_platform_tests/",
-          "/runtime/contributing/docs/",
-          "/runtime/contributing/examples/",
+          {
+            title: "Architecture",
+            href: "/runtime/contributing/architecture/",
+          },
+          {
+            title: "Building from source",
+            href: "/runtime/contributing/building_from_source/",
+          },
+          {
+            title: "Profiling",
+            href: "/runtime/contributing/profiling/",
+          },
+          {
+            title: "Release schedule",
+            href: "/runtime/contributing/release_schedule/",
+          },
+          {
+            title: "Style guide",
+            href: "/runtime/contributing/style_guide/",
+          },
+          {
+            title: "Web platform tests",
+            href: "/runtime/contributing/web_platform_tests/",
+          },
+          {
+            title: "Documentation",
+            href: "/runtime/contributing/docs/",
+          },
+          {
+            title: "Examples",
+            href: "/runtime/contributing/examples/",
+          },
         ],
       },
-      "/runtime/help/",
+      {
+        title: "Help",
+        href: "/runtime/help/",
+      },
     ],
   },
 ] satisfies Sidebar;
@@ -298,22 +389,22 @@ export async function generateNodeCompatability() {
   );
   const grouped: Record<
     string,
-    { title: string; icon: string; items: Array<[string, DescriptionItem]> }
+    { label: string; icon: string; items: Array<[string, DescriptionItem]> }
   > = {
     good: {
-      title: "Fully supported modules",
+      label: "Fully supported modules",
       icon:
         '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#22c55e"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
       items: [],
     },
     partial: {
-      title: "Partially supported modules",
+      label: "Partially supported modules",
       icon:
         '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#6366f1"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>',
       items: [],
     },
     unsupported: {
-      title: "Unsupported modules",
+      label: "Unsupported modules",
       icon:
         '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#ef4444"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
       items: [],
@@ -325,7 +416,7 @@ export async function generateNodeCompatability() {
 
   return Object.entries(grouped).map(([_status, entries]) => {
     let content =
-      `<div class="module-info">\n\n## ${entries.icon} ${entries.title} (${entries.items.length}/${
+      `<div class="module-info">\n\n## ${entries.icon} ${entries.label} (${entries.items.length}/${
         Object.keys(descriptions).length
       })\n\n`;
 

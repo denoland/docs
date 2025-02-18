@@ -1,31 +1,3 @@
-.ddoc .container {
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .ddoc .container {
-    max-width: 640px;
-  }
-}
-@media (min-width: 768px) {
-  .ddoc .container {
-    max-width: 768px;
-  }
-}
-@media (min-width: 1024px) {
-  .ddoc .container {
-    max-width: 1024px;
-  }
-}
-@media (min-width: 1280px) {
-  .ddoc .container {
-    max-width: 1280px;
-  }
-}
-@media (min-width: 1536px) {
-  .ddoc .container {
-    max-width: 1536px;
-  }
-}
 .ddoc .static {
   position: static;
 }
@@ -127,11 +99,6 @@
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
-}
-.ddoc .space-y-7 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.75rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.75rem * var(--tw-space-y-reverse));
 }
 .ddoc .space-y-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -515,24 +482,15 @@
   --tw-text-opacity: 1;
   color: rgb(96 165 250/var(--tw-text-opacity));
 }
-.ddoc .anchor {
-  float: left;
+.anchor {
+  float: none;
   --tw-text-opacity: 1;
   color: rgb(87 83 78/var(--tw-text-opacity));
-  margin-left: -24px;
   padding: 0.25rem;
   line-height: 1;
   display: none;
-  top: 0;
-  bottom: 0;
 }
-.ddoc .anchorable {
-  scroll-margin-top: 4rem;
-  position: relative;
-}
-.ddoc .anchorable:hover .anchor {
-  display: block;
-}
+
 .ddoc .deprecated > div:first-child {
   --tw-text-opacity: 1;
   color: rgb(239 68 68/var(--tw-text-opacity));
@@ -591,8 +549,9 @@
 }
 .ddoc .section {
   max-width: 75ch;
+  margin-top: 1.5rem;
+  padding-bottom: 1rem;
   margin-bottom: 0.5rem;
-  scroll-margin-top: 4rem;
 }
 .ddoc .section > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -604,14 +563,7 @@
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
-.ddoc .section > div:first-child > h2 {
-  margin-bottom: 0;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.5rem;
-}
+
 .ddoc .section > div:first-child > div {
   max-width: 75ch;
   font-size: 1rem;
@@ -703,17 +655,23 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-.ddoc
-  .namespaceSection
-  .namespaceItem
-  .namespaceItemContent
-  .namespaceItemContentSubItems {
+
+ul.namespaceItemContentSubItems {
   flex-wrap: wrap;
   row-gap: 0.25rem;
   margin-top: 0.375rem;
+  padding: 0;
   font-size: 0.875rem;
   line-height: 1.25rem;
   display: flex;
+  align-items: center;
+  list-style: none;
+  li {
+    margin: 0 !important;
+    a {
+      color: hsl(var(--foreground-secondary));
+    }
+  }
 }
 .ddoc
   .namespaceSection
@@ -1031,56 +989,19 @@
   opacity: 1;
   display: block;
 }
-.ddoc #categoryPanel {
-  padding-top: 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-.ddoc #categoryPanel ul > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
-}
-.ddoc #categoryPanel ul {
-  overflow-y: auto;
-}
-.ddoc #categoryPanel ul li {
-  margin-left: 0.25rem;
-  margin-right: 0.75rem;
-}
-.ddoc #categoryPanel ul li a {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding: 0.375rem 0.875rem;
-  display: block;
-  overflow: hidden;
-}
-.ddoc #categoryPanel ul li a:hover {
-  text-decoration-line: underline;
-}
-.ddoc .contextLink {
-  color: #0e6590cc;
-  text-underline-offset: 0.15em;
-  text-decoration-line: underline;
-  text-decoration-color: #0e659080;
-  text-decoration-thickness: 1.5px;
-}
 .ddoc .contextLink:hover {
   --tw-text-opacity: 1;
   color: rgb(14 101 144/var(--tw-text-opacity));
-  text-decoration-color: #0e6590;
 }
-.ddoc .contextLink {
-  -webkit-text-decoration-skip: ink;
-  -webkit-text-decoration-skip-ink: auto;
-  text-decoration-skip-ink: auto;
-}
+
 .ddoc .breadcrumbs {
+  margin: 0;
   word-break: break-all;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.25rem;
   display: inline-flex;
+  z-index: 1;
 }
 .ddoc .breadcrumbs > li:first-child {
   font-size: 1.5rem;
@@ -1342,98 +1263,12 @@
     --tw-drop-shadow
   );
 }
-.ddoc {
-  align-items: flex-start;
-  gap: 1.5rem;
-  min-height: fit-content;
-  padding: 1rem;
-  display: flex;
-}
-@media (min-width: 1024px) {
-  .ddoc:has(#categoryPanel) {
-    padding: 0.5rem;
-  }
-}
-@media (min-width: 1024px) {
-  .ddoc:has(#categoryPanel) > div:not(#categoryPanel) {
-    padding-top: 1rem;
-  }
-  .ddoc:has(#categoryPanel) #topnav {
-    margin-left: -1.5rem !important;
-    padding-left: 1.5rem !important;
-  }
-}
-.ddoc:not(:has(#categoryPanel)),
-.ddoc:has(#categoryPanel) > div:not(#categoryPanel) {
-  padding-top: 0.25rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-.ddoc > div:not(#categoryPanel) {
-  flex-direction: column;
-  flex-grow: 1;
-  display: flex;
-}
-#categoryPanel {
-  box-sizing: border-box;
-  flex-shrink: 0;
-  width: 250px;
-  height: 100vh;
-  margin-top: 0;
-  padding-top: 0;
-  position: sticky;
-  top: 0;
-}
-@media not all and (min-width: 1024px) {
-  #categoryPanel {
-    display: none;
-  }
-}
-#categoryPanel > ul {
-  max-height: 100%;
-  overflow-y: auto;
-}
-#content {
-  margin-top: 1rem;
-}
-#content > main {
-  flex-direction: column;
-  flex-grow: 1;
-  grid-column: 1/-1;
-  gap: 0.75rem;
-  min-width: 0;
-  padding-bottom: 0;
-  display: flex;
-}
-@media (min-width: 768px) {
-  #content > main {
-    padding-bottom: 2rem;
-  }
-}
-@media (min-width: 1024px) {
-  #content > main {
-    padding-bottom: 3rem;
-  }
-  #content:has(.toc) > main {
-    grid-column: span 3/span 3;
-    grid-row-start: 1;
-  }
-}
+
 #topnav {
   margin-left: -1rem;
   padding-left: 1rem;
 }
-#content, #topnav > div {
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 2rem;
-  display: flex;
-}
-@media (min-width: 1024px) {
-  #content, #topnav > div {
-    gap: 3rem;
-  }
-}
+
 .toc, #searchbar {
   flex-shrink: 0;
   min-width: 250px;
@@ -1484,4 +1319,17 @@
 .hover\:bg-stone-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 244/var(--tw-bg-opacity));
+}
+
+a.anchor-link {
+  color: hsl(var(--primary));
+  display: none;
+}
+
+.anchorable-heading:hover .anchor-link {
+  display: inline-block;
+}
+
+.ddoc [id] {
+  scroll-margin-top: 10.5rem;
 }

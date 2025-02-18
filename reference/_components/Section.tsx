@@ -55,9 +55,8 @@ export default function (
   return (
     <section className="section" id={section.header?.anchor.id}>
       {section.header && (
-        <div>
-          <h2 className="anchorable mb-1">
-            <comp.Anchor anchor={section.header.anchor} />
+        <>
+          <h3 className="anchorable-heading">
             {section.header.href
               ? (
                 <a href={section.header.href} className="contextLink">
@@ -66,14 +65,14 @@ export default function (
               )
               : (
                 section.header.title
-              )}
-          </h2>
+              )} <comp.Anchor anchor={section.header.anchor} />
+          </h3>
 
           {/*markdown rendering*/}
           {section.header.doc && (
             <span dangerouslySetInnerHTML={{ __html: section.header.doc }} />
           )}
-        </div>
+        </>
       )}
 
       {content}

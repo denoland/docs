@@ -43,7 +43,9 @@ The linter can be configured in a
 [`deno.json`](/runtime/fundamentals/configuration/) file. You can specify custom
 rules, plugins, and settings to tailor the linting process to your needs.
 
-You can view and search the list of available rules and their usage on
+### Linting rules
+
+You can view and search the list of available rules and their usage on the
 [List of rules](/lint/) documentation page.
 
 ## Formatting
@@ -111,9 +113,6 @@ before being merged.
 | prose-wrap         | Define how prose should be wrapped                     | **always** | always, never, preserve |
 | single-quote       | Use single quotes                                      | **false**  | true, false             |
 | unstable-component | Enable formatting Svelte, Vue, Astro and Angular files |            |                         |
-| unstable-css       | Enable formatting CSS, SCSS, Sass and Less files       |            |                         |
-| unstable-html      | Enable formatting HTML files                           |            |                         |
-| unstable-yaml      | Enable formatting YAML files                           |            |                         |
 | unstable-sql       | Enable formatting SQL files                            |            |                         |
 | use-tabs           | Use tabs instead of spaces for indentation             | **false**  | true, false             |
 

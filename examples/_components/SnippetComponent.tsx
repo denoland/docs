@@ -1,5 +1,5 @@
-import { ExampleSnippet } from "../types.ts";
 import Prism from "prismjs";
+import { ExampleSnippet } from "../types.ts";
 
 export default function SnippetComponent(props: {
   filename: string;
@@ -13,9 +13,11 @@ export default function SnippetComponent(props: {
   return (
     <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-8">
       <div
-        class={`italic text-right select-none text-sm ${
+        class={`italic select-none text-sm text-balance ${
           props.snippet.text ? "pb-4 mt-4 md:pb-0 " : " "
-        } ${props.snippet.code ? "col-span-3" : "mt-4 col-span-full"}`}
+        } ${
+          props.snippet.code ? "col-span-5 sm:col-span-3" : "mt-4 col-span-full"
+        }`}
       >
         {props.snippet.text}
       </div>
