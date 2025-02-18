@@ -280,6 +280,11 @@ export const sidebar = [
         externalURL: "https://www.youtube.com/watch?v=eStwt_2THd8",
         type: "video",
       },
+      {
+        title: "Build a Tanstack app",
+        href: "/examples/tanstack_tutorial",
+        type: "tutorial",
+      },
     ],
   },
   {
