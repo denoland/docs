@@ -232,3 +232,30 @@ custom lint rule is always `<plugin-name>/<rule-name>`.
   }
 }
 ```
+
+## Testing plugins
+
+`Deno.lint.runPlugin` API provides a convenient way to test your plugins. It
+allows you to assert that the plugin produces expected diagnostics given the
+particular input.
+
+Let's use the example plugin, defined above:
+
+```ts, title="my-plugin-test.ts"
+import { assert, assertEquals } from "jsr:@std/assert";
+import myPlugin from "./my-plugin.ts";
+
+Deno.test("my-plugin", () => {
+  const diagnostics = Deno.lint.runPlugin(plugin, "main.ts", "const _a = 'a';");
+
+  assertEquals(diagnostics.length, 1);
+  const d = diagnostics[0];
+  assertEquals(d.id, "my-plugin/my-rule");
+  assertEquals(d.message, "should be _b");
+  assert(typeof d.fix === "function");
+});
+```
+
+Consult [API reference](/api/deno/) for more information on
+[`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) and
+[`Deno.lint.Diagnostic`](/api/deno/~/Deno.lint.runPlugin).
