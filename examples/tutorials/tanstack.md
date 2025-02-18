@@ -1,5 +1,6 @@
 ---
 title: "Build an app with Tanstack and Deno"
+url: /examples/tanstack_tutorial/
 ---
 
 [Tanstack](https://tanstack.com/) is a set of framework-agnostic data management
