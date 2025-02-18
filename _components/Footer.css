@@ -1,12 +1,18 @@
 footer {
+  margin-top: 2rem;
   padding: 3rem;
   border-top: 1px solid hsl(var(--foreground-tertiary));
 }
 
 .footer-nav {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer-section {
+  min-width: 200px;
 }
 
 .footer-section-heading {
@@ -38,12 +44,13 @@ footer {
   color: hsl(var(--foreground-secondary));
 }
 
-@media screen and (min-width: 1240px) {
+@media screen and (min-width: 1024px) {
   footer {
     padding: 2vw 3vw;
   }
+
   .footer-nav {
-    max-width: 1240px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 }

@@ -5,7 +5,7 @@
 
 .sub-nav {
   padding: 0;
-  margin: 0;
+  margin: 0 0 0.5rem;
   list-style: none;
 }
 
@@ -14,15 +14,66 @@
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid hsl(var(--foreground-tertiary));
   color: hsl(var(--foreground-secondary));
+  font-weight: bold;
   &:hover {
     text-decoration: none;
   }
 }
 
-.sub-nav-heading-link[data-active] {
-  background-color: hsl(var(--background-tertiary));
+.sub-nav-heading-text {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid hsl(var(--foreground-tertiary));
+  color: hsl(var(--foreground-secondary));
+  font-weight: bold;
+}
+
+.sub-nav-heading-link[data-active], .sub-nav-heading-link:hover {
+  background-color: hsl(var(--background-secondary));
 }
 
 .sub-nav-link {
   display: block;
+}
+
+.sub-nav-link[data-active] {
+  background-color: hsl(var(--background-secondary));
+  border: 1px solid hsl(var(--foreground-tertiary));
+}
+
+.sub-nav-toggle {
+  display: block;
+  position: relative;
+  font-family: inherit;
+  &::after {
+    content: "";
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    right: 0.5rem;
+    top: -0.25rem;
+    background: url(./img/chevron.svg) no-repeat center;
+    transform: translateY(50%);
+    transition: all 0.1s ease-in;
+  }
+}
+
+.sub-nav-toggle-checkbox {
+  display: none;
+}
+
+.tertiary-nav {
+  max-height: 0;
+  margin: 0 1rem;
+  overflow-y: clip;
+}
+
+.sub-nav-toggle-checkbox:checked + .tertiary-nav {
+  height: auto;
+  max-height: 100vh;
+}
+
+.sub-nav-toggle:has(+ .sub-nav-toggle-checkbox:checked)::after {
+  transform: translateY(50%) rotate(90deg);
 }
