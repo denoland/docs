@@ -22,7 +22,7 @@ export default function Sidebar(
     >
       <ul className="xl:hidden border-bg-tertiary relative bg-background-secondary m-2 mt-0 mb-4 py-2 rounded-md border border-background-tertiary">
         <SidebarTopNav
-          name="Runtime"
+          name="Manual"
           url="/runtime/"
           currentPath={props.url}
         />
@@ -208,8 +208,8 @@ function SidebarCategory(props: {
             ? (
               <SidebarCategory
                 item={item}
-                url={props.url}
                 search={props.search}
+                url={props.url}
               />
             )
             : (

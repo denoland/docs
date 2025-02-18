@@ -1,10 +1,9 @@
-import { doc, DocNode, generateHtml } from "@deno/doc";
+import { doc, generateHtmlAsJSON } from "@deno/doc";
 import { expandGlob } from "@std/fs";
 import {
   hrefResolver,
   renderMarkdown,
   stripMarkdown,
-  writeFiles,
 } from "./common.ts";
 import symbolRedirectMap from "./node-symbol-map.json" with { type: "json" };
 import defaultSymbolMap from "./node-default-map.json" with { type: "json" };
@@ -16,19 +15,19 @@ const newRewriteMap = Object.fromEntries(
   ) => [import.meta.resolve(val), key]),
 );
 
-const nodesByUrl: Record<string, DocNode[]> = {};
+const fileNames: string[] = [];
 
 console.log("Generating doc nodes...");
 
 for await (const file of expandGlob("./types/node/[!_]*")) {
-  const path = `file://${file.path}`;
-
-  nodesByUrl[path] = await doc(path);
+  fileNames.push(`file://${file.path}`);
 }
 
-console.log("Generating html files...");
+const nodes = await doc(fileNames);
 
-const files = await generateHtml(nodesByUrl, {
+console.log("Generating json structure...");
+
+const files = await generateHtmlAsJSON(nodes, {
   packageName: "Node",
   disableSearch: true,
   symbolRedirectMap,
@@ -54,4 +53,4 @@ const files = await generateHtml(nodesByUrl, {
   markdownStripper: stripMarkdown,
 });
 
-await writeFiles("./gen/node", files);
+await Deno.writeTextFile("./gen/node.json", JSON.stringify(files));

@@ -333,10 +333,10 @@ its privileges without user consent.
 Deno provides a mechanism for executing subprocesses, but this requires explicit
 permission from the user. This is done using the `--allow-run` flag.
 
-Any subprocesses you spawn in you program runs independently of the permission
-you granted to the parent process. This means the child processes can access
-system resources regardless of the permissions you granted to the Deno process
-that spawned it. This is often referred to as privilege escalation.
+Any subprocesses you spawn from your program run independently from the
+permissions granted to the parent process. This means the child processes can
+access system resources regardless of the permissions you granted to the Deno
+process that spawned it. This is often referred to as privilege escalation.
 
 Because of this, make sure you carefully consider if you want to grant a program
 `--allow-run` access: it essentially invalidates the Deno security sandbox. If
@@ -378,7 +378,7 @@ during installation (like with `deno install`), as this would allow arbitrary
 code execution. When running with the `--allow-scripts` flag, post-install
 scripts for npm packages will be executed as a subprocess.
 
-### FFI
+### FFI (Foreign Function Interface)
 
 Deno provides a mechanism for executing code written in other languages, such as
 Rust, C, or C++, from within a Deno runtime. This is done using the

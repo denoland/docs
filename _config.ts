@@ -1,7 +1,6 @@
 import "@std/dotenv/load";
 
 import lume from "lume/mod.ts";
-import checkUrls from "lume/plugins/check_urls.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
 import postcss from "lume/plugins/postcss.ts";
@@ -30,11 +29,14 @@ import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware, {
   toFileAndInMemory,
 } from "./middleware/redirects.ts";
+import { cliNow } from "./timeUtils.ts";
+import { log } from "lume/core/utils/log.ts";
 
 const site = lume(
   {
     location: new URL("https://docs.deno.com"),
     caseSensitiveUrls: true,
+    emptyDest: false,
     server: {
       middlewares: [
         redirectsMiddleware,
@@ -45,6 +47,14 @@ const site = lume(
         apiDocumentContentTypeMiddleware,
       ],
       page404: "/404",
+    },
+    watcher: {
+      ignore: [
+        "/.git",
+        "/.github",
+        "/.vscode",
+      ],
+      debounce: 1_000,
     },
   },
   {
@@ -77,12 +87,20 @@ const site = lume(
       options: {
         linkify: true,
         langPrefix: "highlight notranslate language-",
+        highlight: (code, lang) => {
+          if (!lang || !Prism.languages[lang]) {
+            return code;
+          }
+          const result = Prism.highlight(code, Prism.languages[lang], lang);
+          return result || code;
+        },
       },
     },
   },
 );
 
 site.copy("static", ".");
+site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
 site.copy("deploy/kv/manual/images");
@@ -107,6 +125,7 @@ site.use(
     output: toFileAndInMemory,
   }),
 );
+
 site.use(search());
 site.use(jsx());
 
@@ -115,6 +134,7 @@ site.use(
     plugins: [tw(tailwindConfig)],
   }),
 );
+
 site.use(
   esbuild({
     extensions: [".client.ts", ".client.js"],
@@ -124,22 +144,6 @@ site.use(
     },
   }),
 );
-
-// This is a work-around due to deno-dom's dependency of nwsapi not supporting
-// :has selectors, nor having intention of supporting them, so using `body:not(:has(.ddoc))`
-// is not possible. This works around by adding an `apply-prism` class on pages that
-// don't use a ddoc class.
-site.process([".html"], (pages) => {
-  for (const page of pages) {
-    const document = page.document!;
-    if (!document.querySelector(".ddoc")) {
-      document.body.classList.add("apply-prism");
-      document
-        .querySelectorAll("body.apply-prism pre code")
-        .forEach((element) => Prism.highlightElement(element));
-    }
-  }
-});
 
 site.use(toc({ anchor: false }));
 site.use(title());
@@ -161,62 +165,28 @@ site.copy("reference_gen/gen/node/page.css", "/api/node/page.css");
 site.copy("reference_gen/gen/node/styles.css", "/api/node/styles.css");
 site.copy("reference_gen/gen/node/script.js", "/api/node/script.js");
 
-site.process([".html"], (pages) => {
-  for (const page of pages) {
-    const document = page.document;
-    if (document) {
-      const tabGroups = document.querySelectorAll("deno-tabs");
-      for (const tabGroup of tabGroups) {
-        const newGroup = document.createElement("div");
-        newGroup.classList.add("deno-tabs");
-        newGroup.dataset.id = tabGroup.getAttribute("group-id")!;
-        const buttons = document.createElement("ul");
-        buttons.classList.add("deno-tabs-buttons");
-        newGroup.appendChild(buttons);
-        const tabs = document.createElement("div");
-        tabs.classList.add("deno-tabs-content");
-        newGroup.appendChild(tabs);
-        for (const tab of tabGroup.children) {
-          if (tab.tagName === "DENO-TAB") {
-            const selected = tab.getAttribute("default") !== null;
-            const buttonContainer = document.createElement("li");
-            buttons.appendChild(buttonContainer);
-            const button = document.createElement("button");
-            button.textContent = tab.getAttribute("label")!;
-            button.dataset.tab = tab.getAttribute("value")!;
-            button.dataset.active = String(selected);
-            buttonContainer.appendChild(button);
-            const content = document.createElement("div");
-            content.innerHTML = tab.innerHTML;
-            content.dataset.tab = tab.getAttribute("value")!;
-            content.dataset.active = String(selected);
-            tabs.appendChild(content);
-          }
-        }
-        tabGroup.replaceWith(newGroup);
-      }
-    }
-  }
-});
-
 site.ignore(
   "old",
   "README.md",
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
+  (path) => path.includes("/lint/rules/"),
   // "deploy",
   // "runtime",
   // "subhosting",
 );
 
-site.scopedUpdates((path) => path == "/overrides.css");
-site.use(
-  checkUrls({
-    external: false, // Set to true to check external links
-    output: "_broken_links.json",
-    ignore: ["https://www.googletagmanager.com"],
-  }),
+site.scopedUpdates(
+  (path) => path == "/overrides.css",
+  (path) => /\.(js|ts)$/.test(path),
+  (path) => path.startsWith("/api/deno/"),
 );
+
+site.addEventListener("afterStartServer", () => {
+  log.warn(
+    `${cliNow()} Server available at <green>http://localhost:3000</green>`,
+  );
+});
 
 export default site;

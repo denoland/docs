@@ -84,13 +84,13 @@ To use it, first install the remote script to your local file system:
 
 ```shell
 # Deno 1.x
-deno install --allow-net --allow-read jsr:@std/http@1/file-server
+deno install --allow-net --allow-read jsr:@std/http/file-server
 # Deno 2.x
-deno install --global --allow-net --allow-read jsr:@std/http@1/file-server
+deno install --global --allow-net --allow-read jsr:@std/http/file-server
 ```
 
-> This will install the script to the Deno installation root's bin directory,
-> e.g. `/home/user/.deno/bin/file-server`.
+> This will install the script to the Deno installation root, e.g.
+> `/home/user/.deno/bin/file-server`.
 
 You can now run the script with the simplified script name:
 

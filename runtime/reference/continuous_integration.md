@@ -151,7 +151,7 @@ env:
 
 steps:
   - name: Cache Deno dependencies
-    uses: actions/cache@v2
+    uses: actions/cache@v4
     with:
       path: ${{ env.DENO_DIR }}
       key: my_cache_key

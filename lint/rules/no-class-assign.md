@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows modifying variables of class declarations
+Disallows modifying variables of class declarations.
 
 Declaring a class such as `class A {}`, creates a variable `A`. Like any
 variable this can be modified or reassigned. In most cases this is a mistake and

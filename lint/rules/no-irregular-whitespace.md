@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows the use of non-space or non-tab whitespace characters
+Disallows the use of non-space or non-tab whitespace characters.
 
 Non-space or non-tab whitespace characters can be very difficult to spot in your
 code as editors will often render them invisibly. These invisible characters can

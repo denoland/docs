@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows unnecessary boolean casts
+Disallows unnecessary boolean casts.
 
 In certain contexts, such as `if`, `while` or `for` statements, expressions are
 automatically coerced into a boolean. Therefore, techniques such as double

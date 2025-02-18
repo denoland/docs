@@ -18,8 +18,8 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
     }
 
     yield {
-      url: `${video.id}/index.html`,
-      title: `${video.label}`,
+      url: `${video.href}/index.html`,
+      title: `${video.title}`,
       content: <VideoPage video={video} />,
     };
   }

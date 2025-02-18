@@ -2,7 +2,7 @@
 tags: [recommended]
 ---
 
-Disallows variable or function definitions in nested blocks
+Disallows variable or function definitions in nested blocks.
 
 Function declarations in nested blocks can lead to less readable code and
 potentially unexpected results due to compatibility issues in different
