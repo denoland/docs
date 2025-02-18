@@ -31,7 +31,7 @@ or follow along below!
 Within our main directory, let's setup an `api/` directory and create our
 dinosaur data file, `api/data.json`:
 
-```json
+```jsonc
 // api/data.json
 
 [
