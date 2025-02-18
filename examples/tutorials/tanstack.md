@@ -126,7 +126,7 @@ The Hono server provides two API endpoints:
 Before we start working on the frontend, let's update our `deno tasks` in our
 `deno.json` file. Yours should look something like this:
 
-```json
+```jsonc
 {
   "tasks": {
     "dev": "deno --allow-env --allow-net api/main.ts"
