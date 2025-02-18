@@ -46,4 +46,7 @@ header {
   .header-nav-link[data-active] {
     color: hsl(var(--primary));
   }
+  .logo-link {
+    margin-right: 0;
+  }
 }
