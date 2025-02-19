@@ -26,7 +26,7 @@ for **Automatic** and **GitHub Actions** mode.
 ## Automatic
 
 If your project doesn't require any additional build steps, then the system
-choose **Automatic** mode. The entrypoint file is simply the file that Deno
+chooses **Automatic** mode. The entrypoint file is simply the file that Deno
 Deploy will run.
 
 ## GitHub Actions
@@ -74,12 +74,12 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.x
+          deno-version: v2.x
 
       - name: Build step
         run: "deno task build"

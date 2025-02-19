@@ -89,7 +89,7 @@ npm:<package-name>[@<version-requirement>][/<sub-path>]
 For examples with popular libraries, please refer to the
 [tutorial section](/runtime/tutorials).
 
-### CommonJS support
+## CommonJS support
 
 CommonJS is a module system that predates
 [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
@@ -98,7 +98,7 @@ millions of npm libraries that are written in CommonJS and Deno offers full
 support for them. Deno will automatically determine if a package is using
 CommonJS and make it work seamlessly when imported:
 
-```js, title="main.js"
+```js title="main.js"
 import react from "npm:react";
 console.log(react);
 ```
@@ -108,13 +108,18 @@ $ deno run -E main.js
 18.3.1
 ```
 
-_`npm:react` is a CommonJS package. Deno allows to import it as it was an ES
-module._
+_`npm:react` is a CommonJS package. Deno allows you to import it as if it were
+an ES module._
 
-Deno strongly encourages use of ES modules in your code, and offers CommonJS
+Deno strongly encourages the use of ES modules in your code but offers CommonJS
 support with following restrictions:
 
-**Use .cjs extension**
+**Deno's permission system is still in effect when using CommonJS modules.** It
+may be necessary to provide at least `--allow-read` permission as Deno will
+probe the file system for `package.json` files and `node_modules` directory to
+properly resolve CommonJS modules.
+
+### Use .cjs extension
 
 If the file extension is `.cjs` Deno will treat this module as CommonJS.
 
@@ -149,14 +154,42 @@ $ deno run -R -E main.cjs
 ```
 
 `-R` and `-E` flags are used to allow permissions to read files and environment
-variables. permissions.
+variables.
 
-**Deno's permission system is still in effect when using CommonJS modules.** It
-is necessary to provide at least `--allow-read` permission as Deno will probe
-the file system for `package.json` files and `node_modules` directory to
-properly resolve CommonJS modules.
+### package.json type option
 
-***Create require() manually**
+Deno will attempt to load `.js`, `.jsx`, `.ts`, and `.tsx` files as CommonJS if
+there's a `package.json` file with `"type": "commonjs"` option next to the file,
+or up in the directory tree when in a project with a package.json file.
+
+```json title="package.json"
+{
+  "type": "commonjs"
+}
+```
+
+```js title="main.js"
+const express = require("express");
+```
+
+Tools like Next.js's bundler and others will generate a `package.json` file like
+that automatically.
+
+If you have an existing project that uses CommonJS modules, you can make it work
+with both Node.js and Deno, by adding `"type": "commonjs"` option to the
+`package.json` file.
+
+### Always detecting if a file might be CommonJS
+
+Telling Deno to analyze modules as possibly being CommonJS is possible by
+running with the `--unstable-detect-cjs` in Deno >= 2.1.2. This will take
+effect, except when there's a _package.json_ file with `{ "type": "module" }`.
+
+Looking for package.json files on the file system and analyzing a module to
+detect if its CommonJS takes longer than not doing it. For this reason and to
+discourage the use of CommonJS, Deno does not do this behavior by default.
+
+### Create require() manually
 
 An alternative option is to create an instance of the `require()` function
 manually:
@@ -171,7 +204,7 @@ In this scenario the same requirements apply, as when running `.cjs` files -
 dependencies need to be installed manually and appropriate permission flags
 given.
 
-**require(ESM)**
+### require(ESM)
 
 Deno's `require()` implementation supports requiring ES modules.
 
@@ -203,13 +236,9 @@ $ deno run -R main.cjs
 Hello Deno
 ```
 
-**import index.cjs**
+### Import CommonJS modules
 
-You can also import CommonJS files in ES modules, provided that these files use
-`.cjs` extension.
-
-Deno does not look for `package.json` files and `type` option to determine if
-the file is CommonJS or ESM.
+You can also import CommonJS files in ES modules.
 
 ```js title="greet.cjs"
 module.exports = {
@@ -229,17 +258,14 @@ $ deno run main.js
 }
 ```
 
-_Notice that in this example no permission flags were specified - when importing
-CJS from ES modules, Deno can staticaly analyze and find relevant modules
-without having to probe file system at runtime._
-
 **Hints and suggestions**
 
 Deno will provide useful hints and suggestions to guide you towards working code
 when working with CommonJS modules.
 
 As an example, if you try to run a CommonJS module that doesn't have `.cjs`
-extension you might see this:
+extension or doesn't have a `package.json` with `{ "type": "commonjs" }` you
+might see this:
 
 ```js title="main.js"
 module.exports = {
@@ -254,11 +280,16 @@ module.exports = {
 ^
     at file:///main.js:1:1
 
-    info: Deno does not support CommonJS modules without `.cjs` extension.
-    hint: Rewrite this module to ESM or change the file extension to `.cjs`.
+    info: Deno supports CommonJS modules in .cjs files, or when the closest
+          package.json has a "type": "commonjs" option.
+    hint: Rewrite this module to ESM,
+          or change the file extension to .cjs,
+          or add package.json next to the file with "type": "commonjs" option,
+          or pass --unstable-detect-cjs flag to detect CommonJS when loading.
+    docs: https://docs.deno.com/go/commonjs
 ```
 
-### Importing types
+## Importing types
 
 Many npm packages ship with types, you can import these and use them with types
 directly:
@@ -268,13 +299,12 @@ import chalk from "npm:chalk@5";
 ```
 
 Some packages do not ship with types but you can specify their types with the
-[`@deno-types`](/runtime/fundamentals/typescript) directive. For example, using
-a
+[`@ts-types`](/runtime/fundamentals/typescript) directive. For example, using a
 [`@types`](https://www.typescriptlang.org/docs/handbook/2/type-declarations.html#definitelytyped--types)
 package:
 
 ```ts
-// @deno-types="npm:@types/express@^4.17"
+// @ts-types="npm:@types/express@^4.17"
 import express from "npm:express@^4.17";
 ```
 
@@ -308,7 +338,7 @@ resolution, you can:
 3. Ignore the type errors you get in your code base with `// @ts-expect-error`
    or `// @ts-ignore`.
 
-### Including Node types
+## Including Node types
 
 Node ships with many built-in types like `Buffer` that might be referenced in an
 npm package's types. To load these you must add a types reference directive to
@@ -322,7 +352,7 @@ Note that it is fine to not specify a version for this in most cases because
 Deno will try to keep it in sync with its internal Node code, but you can always
 override the version used if necessary.
 
-### Executable npm scripts
+## Executable npm scripts
 
 npm packages with `bin` entries can be executed from the command line without an
 `npm install` using a specifier in the following format:
@@ -334,7 +364,7 @@ npm:<package-name>[@<version-requirement>][/<binary-name>]
 For example:
 
 ```sh
-$ deno run --allow-read npm:cowsay@1.5.0 Hello there!
+$ deno run --allow-read npm:cowsay@1.5.0 "Hello there!"
  ______________
 < Hello there! >
  --------------
@@ -344,7 +374,7 @@ $ deno run --allow-read npm:cowsay@1.5.0 Hello there!
                 ||----w |
                 ||     ||
 
-$ deno run --allow-read npm:cowsay@1.5.0/cowthink What to eat?
+$ deno run --allow-read npm:cowsay@1.5.0/cowthink "What to eat?"
  ______________
 ( What to eat? )
  --------------
@@ -355,7 +385,7 @@ $ deno run --allow-read npm:cowsay@1.5.0/cowthink What to eat?
                 ||     ||
 ```
 
-### node_modules
+## node_modules
 
 When you run `npm install`, npm creates a `node_modules` directory in your
 project which houses the dependencies as specified in the `package.json` file.
@@ -406,8 +436,8 @@ If your project has a `package.json` file, you can use the manual mode, which
 requires an installation step to create your `node_modules` directory:
 
 ```sh
-deno run --node-modules-dir=manual main.ts
 deno install
+deno run --node-modules-dir=manual main.ts
 ```
 
 or with a configuration file:
@@ -474,14 +504,14 @@ console.log(process.versions.deno);
 $ deno run process.js
 2.0.0
 $ deno lint process.js
-error[no-process-globals]: NodeJS process global is discouraged in Deno
+error[no-process-global]: NodeJS process global is discouraged in Deno
  --> /process.js:1:13
   |
 1 | console.log(process.versions.deno);
   |             ^^^^^^^
   = hint: Add `import process from "node:process";`
 
-  docs: https://lint.deno.land/rules/no-process-globals
+  docs: https://docs.deno.com/lint/rules/no-process-global
 
 
 Found 1 problem (1 fixable via --fix)
@@ -644,7 +674,7 @@ error[no-constant-condition]: Use of a constant expressions as conditions is not
   |     ^^^^
   = hint: Remove the constant expression
 
-  docs: https://lint.deno.land/rules/no-constant-condition
+  docs: https://docs.deno.com/lint/rules/no-constant-condition
 
 
 Found 1 problem
@@ -658,8 +688,8 @@ deno lint --fix
 ```
 
 A full list of all supported linting rules can be found on
-[https://lint.deno.land/](https://lint.deno.land/). To learn more about how to
-configure the linter, check out the
+[https://docs.deno.com/lint/](https://docs.deno.com/lint/). To learn more about
+how to configure the linter, check out the
 [`deno lint` subcommand](/runtime/reference/cli/linter/).
 
 **Formatting**

@@ -24,6 +24,15 @@ Using Shell:
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
+Using [npm](https://npmjs.com/package/deno):
+
+```shell
+npm install -g deno
+```
+
+> <small>The startup time of the Deno command gets affected if it's installed
+> via npm. We recommend the shell install script for better performance.</small>
+
 Using [Homebrew](https://formulae.brew.sh/formula/deno):
 
 ```shell
@@ -45,16 +54,16 @@ nix-shell -p deno
 Using [asdf](https://asdf-vm.com/):
 
 ```shell
-asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
+asdf plugin add deno https://github.com/asdf-community/asdf-deno.git
 
 # Download and install the latest version of Deno
 asdf install deno latest
 
 # To set as the default version of Deno globally
-asdf global deno latest
+asdf set -u deno latest
 
 # To set as the default version of Deno locally (current project only)
-asdf local deno latest
+asdf set deno latest
 ```
 
 Using [vfox](https://vfox.lhan.me/):
@@ -77,6 +86,16 @@ Using PowerShell (Windows):
 ```powershell
 irm https://deno.land/install.ps1 | iex
 ```
+
+Using [npm](https://npmjs.com/package/deno):
+
+```shell
+npm install -g deno
+```
+
+> <small>The startup time of the Deno command gets affected if it's installed
+> via npm. We recommend the PowerShell install script for better
+> performance.</small>
 
 Using [Scoop](https://scoop.sh/):
 
@@ -117,6 +136,15 @@ Using Shell:
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
+Using [npm](https://npmjs.com/package/deno):
+
+```shell
+npm install -g deno
+```
+
+> <small>The startup time of the Deno command gets affected if it's installed
+> via npm. We recommend the shell install script for better performance.</small>
+
 Using [Nix](https://nixos.org/download.html):
 
 ```shell
@@ -126,16 +154,16 @@ nix-shell -p deno
 Using [asdf](https://asdf-vm.com/):
 
 ```shell
-asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
+asdf plugin add deno https://github.com/asdf-community/asdf-deno.git
 
 # Download and install the latest version of Deno
 asdf install deno latest
 
 # To set as the default version of Deno globally
-asdf global deno latest
+asdf set -u deno latest
 
 # To set as the default version of Deno locally (current project only)
-asdf local deno latest
+asdf set deno latest
 ```
 
 Using [vfox](https://vfox.lhan.me/):

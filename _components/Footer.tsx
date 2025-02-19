@@ -1,3 +1,34 @@
+export default function Footer_new() {
+  return (
+    <footer>
+      <nav aria-labelledby="footer-navigation" className="footer-nav">
+        {data.map((category) => (
+          <section className="footer-section">
+            <h3 class="footer-section-heading">{category.title}</h3>
+            <ul class="footer-list">
+              {category.items.map((item) => (
+                <li>
+                  <a
+                    class="footer-link"
+                    href={item.to ?? item.href}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </nav>
+      <p class="copyright">
+        Copyright © {new Date().getFullYear()} the Deno authors.
+      </p>
+    </footer>
+  );
+}
+
+export const css = "@import './_components/Footer.css';";
+
 interface FooterCategory {
   title: string;
   items: FooterItem[];
@@ -17,19 +48,19 @@ const data = [
     items: [
       {
         label: "Deno Runtime",
-        to: "/runtime/manual",
+        to: "/runtime/",
       },
       {
         label: "Deno Deploy",
-        to: "/deploy/manual",
+        to: "/deploy/manual/",
       },
       {
         label: "Deno Subhosting",
-        to: "/subhosting/manual",
+        to: "/subhosting/manual/",
       },
       {
         label: "Examples",
-        href: "/examples",
+        href: "/examples/",
       },
       {
         label: "Standard Library",
@@ -88,7 +119,7 @@ const data = [
     items: [
       {
         label: "Blog",
-        href: "https://www.deno.com/blog",
+        href: "https://deno.com/blog",
       },
       {
         label: "Careers",
@@ -105,34 +136,3 @@ const data = [
     ],
   },
 ] satisfies FooterCategory[];
-
-export default function Footer() {
-  return (
-    <footer class="w-full border-t border-gray-200 pt-12">
-      <div class="max-w-screen-xl mx-auto pb-16 px-4 sm:px-8 md:px-16">
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 md:-mx-8">
-          {data.map((category) => (
-            <div class="md:mx-4 mb-12">
-              <h3 class="font-bold mb-4">{category.title}</h3>
-              <ul>
-                {category.items.map((item) => (
-                  <li>
-                    <a
-                      class="block items-center py-1 text-gray-600 hover:text-primary hover:underline"
-                      href={item.to ?? item.href}
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <p class="text-center mt-12 text-sm col-span-4">
-          Copyright © {new Date().getFullYear()} the Deno authors.
-        </p>
-      </div>
-    </footer>
-  );
-}

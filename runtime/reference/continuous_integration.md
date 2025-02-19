@@ -29,9 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.x # Run with latest stable Deno.
+          deno-version: v2.x # Run with latest stable Deno.
 ```
 
 To expand the workflow, add any of the `deno` subcommands that you might need:
@@ -151,7 +151,7 @@ env:
 
 steps:
   - name: Cache Deno dependencies
-    uses: actions/cache@v2
+    uses: actions/cache@v4
     with:
       path: ${{ env.DENO_DIR }}
       key: my_cache_key

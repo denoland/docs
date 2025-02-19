@@ -1,0 +1,8 @@
+.external {
+  display: none;
+}
+@media (min-width: 650px) {
+  .external {
+    display: block;
+  }
+}

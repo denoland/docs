@@ -6,8 +6,8 @@ In an ideal world, your code is always clean, consistent, and free of pesky
 errors. That’s the promise of Deno’s built-in linting and formatting tools. By
 integrating these features directly into the runtime, Deno eliminates the need
 for external dependencies and complex configurations in your projects. These
-inbuilt tools are fast and performant, only saving time but also ensuring that
-every line of code adheres to best practices.
+inbuilt tools are fast and performant, not only saving time but also ensuring
+that every line of code adheres to best practices.
 
 With `deno fmt` and `deno lint`, you can focus on writing great code, knowing
 that Deno has your back. It’s like having a vigilant assistant who keeps your
@@ -42,6 +42,11 @@ This command will lint all files in the `src/` directory.
 The linter can be configured in a
 [`deno.json`](/runtime/fundamentals/configuration/) file. You can specify custom
 rules, plugins, and settings to tailor the linting process to your needs.
+
+### Linting rules
+
+You can view and search the list of available rules and their usage on the
+[List of rules](/lint/) documentation page.
 
 ## Formatting
 
@@ -80,7 +85,7 @@ any output.
 
 ### Integration in CI
 
-You can add deno fmt --check to your CI pipeline to automatically check for
+You can add `deno fmt --check` to your CI pipeline to automatically check for
 formatting issues. For example, in a GitHub Actions workflow:
 
 ```yaml
@@ -89,9 +94,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.x
+          deno-version: v2.x
       - run: deno fmt --check
 ```
 
@@ -108,11 +113,9 @@ before being merged.
 | prose-wrap         | Define how prose should be wrapped                     | **always** | always, never, preserve |
 | single-quote       | Use single quotes                                      | **false**  | true, false             |
 | unstable-component | Enable formatting Svelte, Vue, Astro and Angular files |            |                         |
-| unstable-css       | Enable formatting CSS, SCSS, Sass and Less files       |            |                         |
-| unstable-html      | Enable formatting HTML files                           |            |                         |
-| unstable-yaml      | Enable formatting YAML files                           |            |                         |
+| unstable-sql       | Enable formatting SQL files                            |            |                         |
 | use-tabs           | Use tabs instead of spaces for indentation             | **false**  | true, false             |
 
 The formatter can be configured in a
-[`deno.json`](/runtime/fundamentals/configuration/) file. You can specify custom
-rules, plugins, and settings to tailor the formatting process to your needs.
+[`deno.json`](/runtime/fundamentals/configuration/#formatting) file. You can
+specify custom settings to tailor the formatting process to your needs.

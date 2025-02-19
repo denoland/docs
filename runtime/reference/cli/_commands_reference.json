@@ -27,6 +27,15 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -70,6 +79,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-temporal",
@@ -241,6 +259,15 @@
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
           "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+        },
+        {
+          "name": "allow-scripts",
+          "short": null,
+          "long": "allow-scripts",
+          "required": false,
+          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-scripts[=<PACKAGE>...]"
         },
         {
           "name": "frozen",
@@ -355,7 +382,7 @@
           "short": null,
           "long": "env-file",
           "required": false,
-          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten.\u001b[39m",
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
           "help_heading": null,
           "usage": "--env-file[=<FILE>]"
         },
@@ -373,7 +400,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -393,6 +420,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -438,6 +474,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-temporal",
@@ -609,6 +654,15 @@
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
           "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+        },
+        {
+          "name": "allow-scripts",
+          "short": null,
+          "long": "allow-scripts",
+          "required": false,
+          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-scripts[=<PACKAGE>...]"
         },
         {
           "name": "frozen",
@@ -750,7 +804,7 @@
           "short": null,
           "long": "env-file",
           "required": false,
-          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten.\u001b[39m",
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
           "help_heading": null,
           "usage": "--env-file[=<FILE>]"
         },
@@ -768,7 +822,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -778,7 +832,7 @@
     },
     {
       "name": "add",
-      "about": "Add dependencies to your configuration file.\n  \u001b[38;5;245mdeno add @std/path\u001b[39m\n\nYou can add multiple dependencies at once:\n  \u001b[38;5;245mdeno add @std/path @std/assert\u001b[39m",
+      "about": "Add dependencies to your configuration file.\n  \u001b[38;5;245mdeno add jsr:@std/path\u001b[39m\n\nYou can also add npm packages:\n  \u001b[38;5;245mdeno add npm:react\u001b[39m\n\nOr multiple dependencies at once:\n  \u001b[38;5;245mdeno add jsr:@std/path jsr:@std/assert npm:chalk\u001b[39m",
       "args": [
         {
           "name": "packages",
@@ -797,6 +851,15 @@
           "help": "Add as a dev dependency",
           "help_heading": null,
           "usage": "--dev"
+        },
+        {
+          "name": "allow-scripts",
+          "short": null,
+          "long": "allow-scripts",
+          "required": false,
+          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-scripts[=<PACKAGE>...]"
         }
       ],
       "subcommands": [],
@@ -831,6 +894,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -876,6 +948,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-temporal",
@@ -1022,6 +1103,15 @@
           "usage": "--cert <FILE>"
         },
         {
+          "name": "allow-scripts",
+          "short": null,
+          "long": "allow-scripts",
+          "required": false,
+          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-scripts[=<PACKAGE>...]"
+        },
+        {
           "name": "frozen",
           "short": null,
           "long": "frozen",
@@ -1161,7 +1251,7 @@
           "short": null,
           "long": "env-file",
           "required": false,
-          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten.\u001b[39m",
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
           "help_heading": null,
           "usage": "--env-file[=<FILE>]"
         },
@@ -1179,7 +1269,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -1201,6 +1291,15 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -1214,7 +1313,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -1234,6 +1333,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1393,7 +1501,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -1402,7 +1510,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -1422,6 +1530,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1467,6 +1584,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-temporal",
@@ -1640,11 +1766,20 @@
           "usage": "[file]..."
         },
         {
+          "name": "frozen",
+          "short": null,
+          "long": "frozen",
+          "required": false,
+          "help": "Error out if lockfile is out of date",
+          "help_heading": "Dependency management options",
+          "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
           "name": "allow-import",
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -1653,7 +1788,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -1680,6 +1815,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1725,6 +1869,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-temporal",
@@ -1871,6 +2024,15 @@
           "usage": "--cert <FILE>"
         },
         {
+          "name": "allow-scripts",
+          "short": null,
+          "long": "allow-scripts",
+          "required": false,
+          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-scripts[=<PACKAGE>...]"
+        },
+        {
           "name": "frozen",
           "short": null,
           "long": "frozen",
@@ -1929,7 +2091,7 @@
           "short": null,
           "long": "include",
           "required": false,
-          "help": "Includes an additional module in the compiled executable's module graph.\n  \u001b[38;5;245mUse this flag if a dynamically imported module or a web worker main module\n  fails to load in the executable. This flag can be passed multiple times,\n  to include multiple additional modules.\u001b[39m",
+          "help": "Includes an additional module or file/directory in the compiled executable.\n  \u001b[38;5;245mUse this flag if a dynamically imported module or a web worker main module\n  fails to load in the executable or to embed a file or directory in the executable.\n  This flag can be passed multiple times, to include multiple additional modules.\u001b[39m",
           "help_heading": "Compile options",
           "usage": "--include <include>"
         },
@@ -1950,6 +2112,15 @@
           "help": "Target OS architecture",
           "help_heading": "Compile options",
           "usage": "--target <target>"
+        },
+        {
+          "name": "no-code-cache",
+          "short": null,
+          "long": "no-code-cache",
+          "required": false,
+          "help": "Disable V8 code cache feature",
+          "help_heading": null,
+          "usage": "--no-code-cache"
         },
         {
           "name": "no-terminal",
@@ -1983,7 +2154,7 @@
           "short": null,
           "long": "env-file",
           "required": false,
-          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten.\u001b[39m",
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
           "help_heading": null,
           "usage": "--env-file[=<FILE>]"
         },
@@ -2001,7 +2172,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -2120,6 +2291,15 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -2187,7 +2367,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -2304,7 +2484,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -2324,6 +2504,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -2369,6 +2558,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-temporal",
@@ -2542,6 +2740,15 @@
           "usage": "--inspect-wait[=<HOST_AND_PORT>]"
         },
         {
+          "name": "allow-scripts",
+          "short": null,
+          "long": "allow-scripts",
+          "required": false,
+          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-scripts[=<PACKAGE>...]"
+        },
+        {
           "name": "frozen",
           "short": null,
           "long": "frozen",
@@ -2627,7 +2834,7 @@
           "short": null,
           "long": "env-file",
           "required": false,
-          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten.\u001b[39m",
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
           "help_heading": null,
           "usage": "--env-file[=<FILE>]"
         },
@@ -2636,7 +2843,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -2791,6 +2998,15 @@
           "help": "Enable formatting Svelte, Vue, Astro and Angular files",
           "help_heading": "Formatting options",
           "usage": "--unstable-component"
+        },
+        {
+          "name": "unstable-sql",
+          "short": null,
+          "long": "unstable-sql",
+          "required": false,
+          "help": "Enable formatting SQL files.",
+          "help_heading": "Formatting options",
+          "usage": "--unstable-sql"
         }
       ],
       "subcommands": [],
@@ -2801,13 +3017,22 @@
       "about": "scaffolds a basic Deno project with a script, test, and configuration file",
       "args": [
         {
-          "name": "dir",
+          "name": "args",
           "short": null,
           "long": null,
           "required": false,
           "help": null,
           "help_heading": null,
-          "usage": "[dir]"
+          "usage": "[DIRECTORY OR PACKAGE]..."
+        },
+        {
+          "name": "npm",
+          "short": null,
+          "long": "npm",
+          "required": false,
+          "help": "Generate a npm create-* project",
+          "help_heading": null,
+          "usage": "--npm"
         },
         {
           "name": "lib",
@@ -2829,7 +3054,7 @@
         }
       ],
       "subcommands": [],
-      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno init\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[dir]\u001b[0m"
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno init\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[DIRECTORY OR PACKAGE]...\u001b[0m"
     },
     {
       "name": "info",
@@ -2845,6 +3070,15 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -2858,7 +3092,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -2993,7 +3227,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -3003,7 +3237,7 @@
     },
     {
       "name": "install",
-      "about": "Installs dependencies either in the local project or globally to a bin directory.\n\n\u001b[32mLocal installation\u001b[39m\n\nAdd dependencies to the local project's configuration (\u001b[38;5;245mdeno.json / package.json\u001b[39m) and installs them\nin the package cache. If no dependency is specified, installs all dependencies listed in the config file.\nIf the \u001b[38;5;245m--entrypoint\u001b[39m flag is passed, installs the dependencies of the specified entrypoint(s).\n\n  \u001b[38;5;245mdeno install\u001b[39m\n  \u001b[38;5;245mdeno install @std/bytes\u001b[39m\n  \u001b[38;5;245mdeno install npm:chalk\u001b[39m\n  \u001b[38;5;245mdeno install --entrypoint entry1.ts entry2.ts\u001b[39m\n\n\u001b[32mGlobal installation\u001b[39m\n\nIf the \u001b[1m--global\u001b[22m flag is set, installs a script as an executable in the installation root's bin directory.\n\n  \u001b[38;5;245mdeno install --global --allow-net --allow-read jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno install -g https://examples.deno.land/color-logging.ts\u001b[39m\n\nTo change the executable name, use \u001b[36m-n\u001b[39m/\u001b[36m--name\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read -n serve jsr:@std/http/file-server\u001b[39m\n\nThe executable name is inferred by default:\n  - Attempt to take the file stem of the URL path. The above example would\n    become \u001b[38;5;245mfile_server\u001b[39m.\n  - If the file stem is something generic like \u001b[38;5;245mmain\u001b[39m, \u001b[38;5;245mmod\u001b[39m, \u001b[38;5;245mindex\u001b[39m or \u001b[38;5;245mcli\u001b[39m,\n    and the path has no parent, take the file name of the parent path. Otherwise\n    settle with the generic name.\n  - If the resulting name has an \u001b[38;5;245m@...\u001b[39m suffix, strip it.\n\nTo change the installation root, use \u001b[36m--root\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read --root /usr/local jsr:@std/http/file-server\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m\n\nThese must be added to the path manually if required.",
+      "about": "Installs dependencies either in the local project or globally to a bin directory.\n\n\u001b[32mLocal installation\u001b[39m\n\nAdd dependencies to the local project's configuration (\u001b[38;5;245mdeno.json / package.json\u001b[39m) and installs them\nin the package cache. If no dependency is specified, installs all dependencies listed in the config file.\nIf the \u001b[38;5;245m--entrypoint\u001b[39m flag is passed, installs the dependencies of the specified entrypoint(s).\n\n  \u001b[38;5;245mdeno install\u001b[39m\n  \u001b[38;5;245mdeno install jsr:@std/bytes\u001b[39m\n  \u001b[38;5;245mdeno install npm:chalk\u001b[39m\n  \u001b[38;5;245mdeno install --entrypoint entry1.ts entry2.ts\u001b[39m\n\n\u001b[32mGlobal installation\u001b[39m\n\nIf the \u001b[1m--global\u001b[22m flag is set, installs a script as an executable in the installation root's bin directory.\n\n  \u001b[38;5;245mdeno install --global --allow-net --allow-read jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno install -g https://examples.deno.land/color-logging.ts\u001b[39m\n\nTo change the executable name, use \u001b[36m-n\u001b[39m/\u001b[36m--name\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read -n serve jsr:@std/http/file-server\u001b[39m\n\nThe executable name is inferred by default:\n  - Attempt to take the file stem of the URL path. The above example would\n    become \u001b[38;5;245mfile_server\u001b[39m.\n  - If the file stem is something generic like \u001b[38;5;245mmain\u001b[39m, \u001b[38;5;245mmod\u001b[39m, \u001b[38;5;245mindex\u001b[39m or \u001b[38;5;245mcli\u001b[39m,\n    and the path has no parent, take the file name of the parent path. Otherwise\n    settle with the generic name.\n  - If the resulting name has an \u001b[38;5;245m@...\u001b[39m suffix, strip it.\n\nTo change the installation root, use \u001b[36m--root\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read --root /usr/local jsr:@std/http/file-server\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m\n\nThese must be added to the path manually if required.",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -3013,6 +3247,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -3058,6 +3301,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-temporal",
@@ -3352,7 +3604,7 @@
           "short": null,
           "long": "env-file",
           "required": false,
-          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten.\u001b[39m",
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
           "help_heading": null,
           "usage": "--env-file[=<FILE>]"
         },
@@ -3370,7 +3622,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -3397,6 +3649,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -3442,6 +3703,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-temporal",
@@ -3511,7 +3781,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -3564,6 +3834,77 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno uninstall\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[name-or-package]\u001b[0m \u001b[32m[additional-packages]...\u001b[0m"
     },
     {
+      "name": "outdated",
+      "about": "Find and update outdated dependencies.\nBy default, outdated dependencies are only displayed.\n\nDisplay outdated dependencies:\n  \u001b[38;5;245mdeno outdated\u001b[39m\n  \u001b[38;5;245mdeno outdated --compatible\u001b[39m\n\nUpdate dependencies to latest semver compatible versions:\n  \u001b[38;5;245mdeno outdated --update\u001b[39m\nUpdate dependencies to latest versions, ignoring semver requirements:\n  \u001b[38;5;245mdeno outdated --update --latest\u001b[39m\n\nFilters can be used to select which packages to act on. Filters can include wildcards (*) to match multiple packages.\n  \u001b[38;5;245mdeno outdated --update --latest \"@std/*\"\u001b[39m\n  \u001b[38;5;245mdeno outdated --update --latest \"react*\"\u001b[39m\nNote that filters act on their aliases configured in deno.json / package.json, not the actual package names:\n  Given \"foobar\": \"npm:react@17.0.0\" in deno.json or package.json, the filter \"foobar\" would update npm:react to\n  the latest version.\n  \u001b[38;5;245mdeno outdated --update --latest foobar\u001b[39m\nFilters can be combined, and negative filters can be used to exclude results:\n  \u001b[38;5;245mdeno outdated --update --latest \"@std/*\" \"!@std/fmt*\"\u001b[39m\n\nSpecific version requirements to update to can be specified:\n  \u001b[38;5;245mdeno outdated --update @std/fmt@^1.0.2\u001b[39m\n",
+      "args": [
+        {
+          "name": "filters",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": "Filters selecting which packages to act on. Can include wildcards (*) to match multiple packages. If a version requirement is specified, the matching packages will be updated to the given requirement.",
+          "help_heading": null,
+          "usage": "[filters]..."
+        },
+        {
+          "name": "no-lock",
+          "short": null,
+          "long": "no-lock",
+          "required": false,
+          "help": "Disable auto discovery of the lock file",
+          "help_heading": "Dependency management options",
+          "usage": "--no-lock"
+        },
+        {
+          "name": "lock",
+          "short": null,
+          "long": "lock",
+          "required": false,
+          "help": "Check the specified lock file. (If value is not provided, defaults to \"./deno.lock\")",
+          "help_heading": "Dependency management options",
+          "usage": "--lock [<FILE>]"
+        },
+        {
+          "name": "latest",
+          "short": null,
+          "long": "latest",
+          "required": false,
+          "help": "Update to the latest version, regardless of semver constraints",
+          "help_heading": null,
+          "usage": "--latest"
+        },
+        {
+          "name": "update",
+          "short": "u",
+          "long": "update",
+          "required": false,
+          "help": "Update dependency versions",
+          "help_heading": null,
+          "usage": "--update"
+        },
+        {
+          "name": "compatible",
+          "short": null,
+          "long": "compatible",
+          "required": false,
+          "help": "Only output versions that satisfy semver requirements",
+          "help_heading": null,
+          "usage": "--compatible"
+        },
+        {
+          "name": "recursive",
+          "short": "r",
+          "long": "recursive",
+          "required": false,
+          "help": "include all workspace members",
+          "help_heading": null,
+          "usage": "--recursive"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno outdated\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[filters]...\u001b[0m"
+    },
+    {
       "name": "lsp",
       "about": "The 'deno lsp' subcommand provides a way for code editors and IDEs to interact with Deno\nusing the Language Server Protocol. Usually humans do not use this subcommand directly.\nFor example, 'deno lsp' can provide IDEs with go-to-definition support and automatic code formatting.\n\nHow to connect various editors and IDEs to 'deno lsp': https://docs.deno.com/go/lsp",
       "args": [],
@@ -3582,6 +3923,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -3728,11 +4078,20 @@
           "usage": "--no-clear-screen"
         },
         {
+          "name": "allow-import",
+          "short": "I",
+          "long": "allow-import",
+          "required": false,
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,user.githubusercontent.com:443\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -3752,6 +4111,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -3826,6 +4194,15 @@
           "usage": "--no-provenance"
         },
         {
+          "name": "set-version",
+          "short": null,
+          "long": "set-version",
+          "required": false,
+          "help": "Set version for a package to be published.\n  \u001b[38;5;245mThis flag can be used while publishing individual packages and cannot be used in a workspace.\u001b[39m",
+          "help_heading": "Publishing options",
+          "usage": "--set-version <VERSION>"
+        },
+        {
           "name": "check",
           "short": null,
           "long": "check",
@@ -3848,7 +4225,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -3868,6 +4245,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -3915,6 +4301,15 @@
           "usage": "--unstable-net"
         },
         {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
+        },
+        {
           "name": "unstable-temporal",
           "short": null,
           "long": "unstable-temporal",
@@ -3955,7 +4350,7 @@
           "short": null,
           "long": "env-file",
           "required": false,
-          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten.\u001b[39m",
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
           "help_heading": null,
           "usage": "--env-file[=<FILE>]"
         },
@@ -3967,15 +4362,6 @@
           "help": null,
           "help_heading": null,
           "usage": "[ARGS]..."
-        },
-        {
-          "name": "no-check",
-          "short": null,
-          "long": "no-check",
-          "required": false,
-          "help": "Skip type-checking. If the value of \"remote\" is supplied, diagnostic errors from remote modules will be ignored",
-          "help_heading": "Type checking options",
-          "usage": "--no-check[=<NO_CHECK_TYPE>]"
         },
         {
           "name": "import-map",
@@ -4149,15 +4535,6 @@
           "usage": "--seed <NUMBER>"
         },
         {
-          "name": "check",
-          "short": null,
-          "long": "check",
-          "required": false,
-          "help": "Enable type-checking. This subcommand does not type-check by default\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
-          "help_heading": "Type checking options",
-          "usage": "--check[=<CHECK_TYPE>]"
-        },
-        {
           "name": "eval-file",
           "short": null,
           "long": "eval-file",
@@ -4180,7 +4557,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -4190,7 +4567,7 @@
     },
     {
       "name": "task",
-      "about": "Run a task defined in the configuration file.\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks:\n  \u001b[38;5;245mdeno task\u001b[39m",
+      "about": "Run a task defined in the configuration file.\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks:\n  \u001b[38;5;245mdeno task\u001b[39m\n\nEvaluate a task from string\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -4200,6 +4577,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -4245,6 +4631,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-temporal",
@@ -4301,11 +4696,47 @@
           "usage": "--cwd <DIR>"
         },
         {
+          "name": "recursive",
+          "short": "r",
+          "long": "recursive",
+          "required": false,
+          "help": "Run the task in all projects in the workspace",
+          "help_heading": null,
+          "usage": "--recursive"
+        },
+        {
+          "name": "filter",
+          "short": "f",
+          "long": "filter",
+          "required": false,
+          "help": "Filter members of the workspace by name - should be used with --recursive",
+          "help_heading": null,
+          "usage": "--filter <filter>"
+        },
+        {
+          "name": "eval",
+          "short": null,
+          "long": "eval",
+          "required": false,
+          "help": "Evaluate the passed value as if, it was a task in a configuration file",
+          "help_heading": null,
+          "usage": "--eval"
+        },
+        {
+          "name": "node-modules-dir",
+          "short": null,
+          "long": "node-modules-dir",
+          "required": false,
+          "help": "Sets the node modules management mode for npm packages",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -4325,6 +4756,15 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -4370,6 +4810,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Expose Node globals everywhere",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-temporal",
@@ -4541,6 +4990,15 @@
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
           "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+        },
+        {
+          "name": "allow-scripts",
+          "short": null,
+          "long": "allow-scripts",
+          "required": false,
+          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-scripts[=<PACKAGE>...]"
         },
         {
           "name": "frozen",
@@ -4772,7 +5230,7 @@
           "short": null,
           "long": "env-file",
           "required": false,
-          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten.\u001b[39m",
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
           "help_heading": null,
           "usage": "--env-file[=<FILE>]"
         },
@@ -4790,7 +5248,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -4872,6 +5330,15 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -4885,7 +5352,7 @@
           "short": null,
           "long": "unstable",
           "required": false,
-          "help": "Enable all unstable features and APIs. Instead of using this flag, consider enabling individual unstable features",
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
           "help_heading": "Unstable options",
           "usage": "--unstable"
         }
@@ -5044,6 +5511,13 @@
           "args": [],
           "subcommands": [],
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help uninstall\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
+          "name": "outdated",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help outdated\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
           "name": "lsp",

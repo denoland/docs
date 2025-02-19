@@ -1,38 +1,5 @@
 export const layout = "raw.tsx";
 export const url = "/";
-export const title =
-  "Deno: the easiest, most secure JavaScript runtime | Deno Docs";
-
-export const sidebar = [
-  {
-    items: [
-      {
-        label: "Runtime Manual",
-        id: "/runtime/",
-      },
-      {
-        label: "Examples",
-        id: "/examples/",
-      },
-      {
-        label: "API reference",
-        id: "/api/deno",
-      },
-      {
-        label: "Deploy",
-        id: "/deploy/manual/",
-      },
-      {
-        label: "Subhosting",
-        id: "/subhosting/manual/",
-      },
-      {
-        label: "deno.com",
-        id: "https://deno.com",
-      },
-    ],
-  },
-];
 
 export default function () {
   return (
@@ -54,7 +21,7 @@ export default function () {
             </p>
             {/* CTA Group */}
 
-            <div class="flex flex-row gap-4 mt-8">
+            <div class="flex flex-row flex-wrap gap-4 mt-8">
               <DocsCTA
                 text="Get Started"
                 href="/runtime/"
@@ -79,14 +46,14 @@ export default function () {
         {/* Main content  */}
         <div class="flex flex-col gap-8 md:gap-16">
           {/* Temporary banner  */}
-          <div class="flex flex-col gap-4 p-4 bg-runtime-50 border-l-4 border-runtime-500">
+          <div class="flex flex-col gap-4 p-4 bg-runtime-background dark:bg-background-secondary border-l-4 text-runtime-foreground border-runtime-500">
             <p class="text-lg">
-              <strong>Deno 2.0</strong> is out now! Learn about{"  "}
+              <strong>Deno 2</strong> is out now! Learn about{"  "}
               <a
                 href="/runtime/reference/migration_guide"
                 class="runtime-link underline underline-offset-4"
               >
-                what has changed
+                what's changed
               </a>{" "}
               in the release.
             </p>
@@ -160,15 +127,15 @@ export default function () {
                     },
                     {
                       text: "Hello World",
-                      href: "/examples/hello-world",
+                      href: "/examples/hello_world",
                     },
                     {
                       text: "Using Node.js built-in modules",
-                      href: "/examples/node",
+                      href: "/examples/node_built_in",
                     },
                     {
                       text: "Manipulating & Parsing URLs",
-                      href: "/examples/url-parsing",
+                      href: "/examples/url_parsing",
                     },
                   ]}
                 />
@@ -178,19 +145,19 @@ export default function () {
                   links={[
                     {
                       text: "HTTP Server: Hello World",
-                      href: "/examples/http-server",
+                      href: "/examples/http_server",
                     },
                     {
                       text: "HTTP Server: WebSockets",
-                      href: "/examples/http-server-websocket",
+                      href: "/examples/http_server_websocket",
                     },
                     {
                       text: "HTTP Server: Streaming",
-                      href: "/examples/http-server-streaming",
+                      href: "/examples/http_server_streaming",
                     },
                     {
                       text: "TCP Connector: Ping",
-                      href: "/examples/tcp-connector",
+                      href: "/examples/tcp_connector",
                     },
                   ]}
                 />
@@ -200,19 +167,19 @@ export default function () {
                   links={[
                     {
                       text: "Command Line Arguments",
-                      href: "/examples/command-line-arguments",
+                      href: "/examples/command_line_arguments",
                     },
                     {
                       text: "Environment Variables",
-                      href: "/examples/environment-variables",
+                      href: "/examples/environment_variables",
                     },
                     {
                       text: "Reading Files",
-                      href: "/examples/reading-files",
+                      href: "/examples/reading_files",
                     },
                     {
                       text: "Walking directories",
-                      href: "/examples/walking-directories",
+                      href: "/examples/walking_directories",
                     },
                   ]}
                 />
@@ -234,7 +201,7 @@ export default function () {
                     },
                     {
                       text: "KV Watch",
-                      href: "/examples/kv-watch",
+                      href: "/examples/kv_watch",
                     },
                   ]}
                 />
@@ -354,7 +321,21 @@ export default function () {
               </div>
             </div>
           </div>
-
+          <div class="flex flex-col gap-4 p-4 bg-deploy-50 dark:bg-background-secondary border-l-4 text-deploy-foreground border-deploy-500">
+            <p class="text-lg">
+              Run Deno Deploy on your own infrastructure with our self-hosted
+              solution running on AWS, GCP, or Azure.{"  "}
+              <a
+                href="https://unf275cfh14.typeform.com/to/dIicJYSQ"
+                class="deploy-link underline underline-offset-4 external"
+              >
+                Learn more{" "}
+                <span aria-hidden="true" class="whitespace-pre">
+                  -&gt;
+                </span>
+              </a>
+            </p>
+          </div>
           {/* Deploy content */}
           <div class="flex flex-col gap-8">
             {/* Scection Header */}
@@ -439,7 +420,7 @@ export default function () {
 
           <div class="flex flex-col gap-8">
             <div>
-              <h2 class="text-3xl md:text-4xl font-semibold underline underline-offset-8 decoration-purple-600 mb-8">
+              <h2 class="text-3xl md:text-4xl font-semibold underline underline-offset-8 decoration-purple-600 dark:decoration-purple-300 mb-8">
                 Help
               </h2>
               <p class="max-w-[75ch]">

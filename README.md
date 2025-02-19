@@ -56,15 +56,34 @@ Static files (like screenshots) can be included directly in the `runtime`,
 ## Reference docs
 
 The reference docs served at `/api` are generated via the `deno doc` subcommand.
-To generate the reference docs locally, in the `reference_gen` directory, run:
+To generate the reference docs locally, run:
 
 ```console
-deno task types
-deno task doc
+deno task reference
 ```
 
 This will generate the reference docs, and you can use the `serve` or `build`
 tasks.
+
+The API reference documentation is generated from type definitions in the
+[Deno source code](https://github.com/denoland/deno). The API reference content
+can be edited by modifying the JSDoc comments in the corresponding `d.ts` files
+in the Deno source code. Once merged, the changes will be reflected in the API
+reference documentation when the Deno documentation site is next updated.
+
+### Previewing API reference changes
+
+In order to preview changes to the API reference, take the following steps:
+
+1. Make changes to the JSDoc comments in the Deno source code
+1. [Build the Deno CLI locally](https://docs.deno.com/runtime/contributing/building_from_source/),
+   including your JSDoc changes
+1. For convenience, create an alias of `d_deno` to point to your local build of
+   the Deno CLI (typically in the `target/debug/deno` directory of your CLI
+   repo)
+1. Generate the reference docs from your local build of the Deno CLI by running
+   in the root directory `d_deno task reference`
+1. Run the `deno task serve` command in the root directory to see the changes
 
 ## Versioning docs content
 
@@ -105,7 +124,10 @@ authored.
 ## Examples
 
 [Deno by Example](https://docs.deno.com/examples) is a collection of small
-snippets showcasing various functions of the APIs implemented in Deno.
+snippets of code, tutorials and videos showcasing various functions of the APIs
+implemented in Deno.
+
+### Adding an example script
 
 - Examples are written in TypeScript
 - Each example should be a single file, no more than 50 lines
@@ -123,11 +145,11 @@ snippets showcasing various functions of the APIs implemented in Deno.
 
 ### Adding an example
 
-To add an example, create a file in the `examples` directory. The file name
-should be a short description of the example (in kebab case) and the contents
-should be the code for the example. The file should be in the `.ts` format. The
-file should start with a JSDoc style multi line comment that describes the
-example:
+To add an example, create a file in the `examples/scripts` directory. The file
+name should be a short description of the example (in kebab case) and the
+contents should be the code for the example. The file should be in the `.ts`
+format. The file should start with a JSDoc style multi line comment that
+describes the example:
 
 ```ts
 /**
@@ -170,7 +192,7 @@ hundreds of developers since 2018. You can view a list of historical
 contributors to the Deno documentation in this repository and the manual with
 this command:
 
-```
+```bash
 git shortlog -s -n
 ```
 

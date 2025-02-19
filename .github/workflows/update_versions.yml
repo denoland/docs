@@ -16,7 +16,7 @@ jobs:
           token: ${{ secrets.DENOBOT_PAT }}
 
       - name: Install deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
 
       - name: Build and Create PR
         env:

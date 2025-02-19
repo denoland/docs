@@ -193,7 +193,6 @@ using any APIs exclusive to one or the other. In such cases, a typical
 ```json title="deno.json"
 {
   "compilerOptions": {
-    "target": "esnext",
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
   }
 }
@@ -207,7 +206,6 @@ should add that library to the mix as well:
 ```json title="deno.json"
 {
   "compilerOptions": {
-    "target": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -277,9 +275,12 @@ When you’re performing type checking on `coolLib` and using it in your file, t
 TypeScript type definitions from `coolLib.d.ts` will take precedence over
 examining the JavaScript file.
 
-The compiler hint pattern-matching is quite flexible, it accepts both quoted and
-non-quoted values for the specifier, as well as any whitespace around the equals
-sign.
+:::note
+
+In the past the `@ts-types` directive was called `@deno-types`. This alias still
+works, but is not recommended anymore. Use `@ts-types`.
+
+:::
 
 ## Providing types when hosting
 
