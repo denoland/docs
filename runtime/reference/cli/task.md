@@ -217,6 +217,20 @@ useful to logically group several tasks together:
 
 Running `deno task dev` will run both `dev-client` and `dev-server` in parallel.
 
+## Node and npx binary support
+
+By default, `deno task` will execute commands with the `deno` binary. If you
+need to ensure that a command is run with the `npm` or `npx` binary, you can do
+so by invoking the `npm` or `npx` `run` command respectively. For example:
+
+```json
+{
+  "tasks": {
+    "test:node": "npm run test"
+  }
+}
+```
+
 ## Workspace support
 
 `deno task` can be used in workspaces, to run tasks from multiple member
