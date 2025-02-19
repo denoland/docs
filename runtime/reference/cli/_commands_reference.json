@@ -4198,7 +4198,7 @@
           "short": null,
           "long": "set-version",
           "required": false,
-          "help": "Set version for a package to be published.\n  <p(245)>This flag can be used while publishing individual packages and cannot be used in a workspace.</>",
+          "help": "Set version for a package to be published.\n  \u001b[38;5;245mThis flag can be used while publishing individual packages and cannot be used in a workspace.\u001b[39m",
           "help_heading": "Publishing options",
           "usage": "--set-version <VERSION>"
         },

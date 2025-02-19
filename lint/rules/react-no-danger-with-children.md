@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [react, fresh]
 ---
 
 Using JSX children together with `dangerouslySetInnerHTML` is invalid as they

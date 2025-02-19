@@ -246,6 +246,10 @@ export const sidebar = [
         href: "/runtime/reference/documentation/",
       },
       {
+        title: "Lint Plugins",
+        href: "/runtime/reference/lint_plugins/",
+      },
+      {
         title: "WebAssembly",
         href: "/runtime/reference/wasm/",
       },

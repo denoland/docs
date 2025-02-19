@@ -163,7 +163,81 @@ After the response is received, the following attributes are added:
 
 The following metrics are automatically collected and exported:
 
-_None yet_
+#### `Deno.serve` / `Deno.serveHttp`
+
+##### `http.server.request.duration`
+
+A histogram of the duration of incoming HTTP requests served with `Deno.serve`
+or `Deno.serveHttp`. The time that is measured is from when the request is
+received to when the response headers are sent. This does not include the time
+to send the response body. The unit of this metric is seconds. The histogram
+buckets are
+`[0.005, 0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1.0, 2.5, 5.0, 7.5, 10.0]`.
+
+This metric is recorded with the following attributes:
+
+- `http.request.method`: The HTTP method of the request.
+- `url.scheme`: The scheme of the request URL.
+- `network.protocol.version`: The version of the HTTP protocol used for the
+  request (e.g. `1.1` or `2`).
+- `server.address`: The address that the server is listening on.
+- `server.port`: The port that the server is listening on.
+- `http.response.status_code`: The status code of the response (if the request
+  has been handled without a fatal error).
+- `error.type`: The type of error that occurred (if the request handling was
+  subject to an error).
+
+##### `http.server.active_requests`
+
+A gauge of the number of active requests being handled by `Deno.serve` or
+`Deno.serveHttp` at any given time. This is the number of requests that have
+been received but not yet responded to (where the response headers have not yet
+been sent). This metric is recorded with the following attributes:
+
+- `http.request.method`: The HTTP method of the request.
+- `url.scheme`: The scheme of the request URL.
+- `server.address`: The address that the server is listening on.
+- `server.port`: The port that the server is listening on.
+
+##### `http.server.request.body.size`
+
+A histogram of the size of the request body of incoming HTTP requests served
+with `Deno.serve` or `Deno.serveHttp`. The unit of this metric is bytes. The
+histogram buckets are
+`[0, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000]`.
+
+This metric is recorded with the following attributes:
+
+- `http.request.method`: The HTTP method of the request.
+- `url.scheme`: The scheme of the request URL.
+- `network.protocol.version`: The version of the HTTP protocol used for the
+  request (e.g. `1.1` or `2`).
+- `server.address`: The address that the server is listening on.
+- `server.port`: The port that the server is listening on.
+- `http.response.status_code`: The status code of the response (if the request
+  has been handled without a fatal error).
+- `error.type`: The type of error that occurred (if the request handling was
+  subject to an error).
+
+##### `http.server.response.body.size`
+
+A histogram of the size of the response body of incoming HTTP requests served
+with `Deno.serve` or `Deno.serveHttp`. The unit of this metric is bytes. The
+histogram buckets are
+`[0, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000]`.
+
+This metric is recorded with the following attributes:
+
+- `http.request.method`: The HTTP method of the request.
+- `url.scheme`: The scheme of the request URL.
+- `network.protocol.version`: The version of the HTTP protocol used for the
+  request (e.g. `1.1` or `2`).
+- `server.address`: The address that the server is listening on.
+- `server.port`: The port that the server is listening on.
+- `http.response.status_code`: The status code of the response (if the request
+  has been handled without a fatal error).
+- `error.type`: The type of error that occurred (if the request handling was
+  subject to an error).
 
 ### Logs
 
@@ -576,7 +650,8 @@ While the OpenTelemetry integration for Deno is in development, there are some
 limitations to be aware of:
 
 - Traces are always sampled (i.e. `OTEL_TRACE_SAMPLER=parentbased_always_on`).
-- Traces do not support events and links.
+- Traces do not support events.
+- Traces only support links with no attributes.
 - Automatic propagation of the trace context in `Deno.serve` and `fetch` is not
   supported.
 - Metric exemplars are not supported.
@@ -597,7 +672,7 @@ limitations to be aware of:
 - HTTP methods are that are not known are not normalized to `_OTHER` in the
   `http.request.method` span attribute as per the OpenTelemetry semantic
   conventions.
-- The HTTP server span for `Deno.serve` does not have an OpenTelemtry status
+- The HTTP server span for `Deno.serve` does not have an OpenTelemetry status
   set, and if the handler throws (ie `onError` is invoked), the span will not
   have an error status set and the error will not be attached to the span via
   event.
