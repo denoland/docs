@@ -147,6 +147,62 @@ Deno workspaces are flexible and can work with Node packages. To make migration
 for existing Node.js projects easier you can have both Deno-first and Node-first
 packages in a single workspace.
 
+## How Deno Resolves Workspace Dependencies
+
+When running a project in a workspace that imports from another workspace
+member, Deno follows these steps to resolve the dependencies:
+
+1. Deno starts in the directory of the executing project (e.g., project A)
+2. It looks up in the parent directory for a root `deno.json` file
+3. If found, it checks for the `workspace` property in that file
+4. For each import statement in project A, Deno checks if the import matches a
+   package name defined in any workspace member's `deno.json`
+5. If a matching package name is found, Deno verifies that the containing
+   directory is listed in the root workspace configuration
+6. The import is then resolved to the correct file using the `exports` field in
+   the workspace member's `deno.json`
+
+For example, given this structure:
+
+```sh
+/
+├── deno.json         # workspace: ["./project-a", "./project-b"]
+├── project-a/
+│   ├── deno.json     # name: "@scope/project-a"
+│   └── mod.ts        # imports from "@scope/project-b"
+└── project-b/
+    ├── deno.json     # name: "@scope/project-b"
+    └── mod.ts
+```
+
+When `project-a/mod.ts` imports from `"@scope/project-b"`, Deno:
+
+1. Sees the import statement
+2. Checks parent directory's `deno.json`
+3. Finds `project-b` in the workspace array
+4. Verifies `project-b/deno.json` exists and has matching package name
+5. Resolves the import using `project-b`'s exports
+
+### Important Note for Containerization
+
+When containerizing a workspace member that depends on other workspace members,
+you must include:
+
+1. The root `deno.json` file
+2. All dependent workspace packages
+3. The same directory structure as your development environment
+
+For example, if dockerizing `project-a` above, your Dockerfile should:
+
+```dockerfile
+COPY deno.json /app/deno.json
+COPY project-a/ /app/project-a/
+COPY project-b/ /app/project-b/
+```
+
+This preserves the workspace resolution mechanism that Deno uses to find and
+import workspace dependencies.
+
 ### Multiple package entries
 
 So far, our package only has a single entry. This is fine for simple packages,
