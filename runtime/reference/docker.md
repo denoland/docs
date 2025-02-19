@@ -18,11 +18,6 @@ FROM denoland/deno:latest
 # Create working directory
 WORKDIR /app
 
-# Cache dependencies
-COPY deno.json .
-COPY deno.lock* .
-RUN deno cache deps.ts
-
 # Copy source
 COPY . .
 
@@ -35,24 +30,7 @@ CMD ["deno", "run", "--allow-net", "main.ts"]
 
 ### Best Practices
 
-#### 1. Cache Dependencies
-
-Cache your dependencies in a separate layer to leverage Docker's layer caching:
-
-```dockerfile
-FROM denoland/deno:latest
-WORKDIR /app
-
-# Cache deps first
-COPY deno.json deno.lock* ./
-RUN deno cache deps.ts
-
-# Then copy and cache source
-COPY . .
-RUN deno cache main.ts
-```
-
-#### 2. Use Multi-stage Builds
+#### Use Multi-stage Builds
 
 For smaller production images:
 
@@ -70,7 +48,7 @@ COPY --from=builder /app .
 CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
 
-#### 3. Permission Flags
+#### Permission Flags
 
 Specify required permissions explicitly:
 
@@ -78,7 +56,7 @@ Specify required permissions explicitly:
 CMD ["deno", "run", "--allow-net=api.example.com", "--allow-read=/data", "main.ts"]
 ```
 
-#### 4. Development Container
+#### Development Container
 
 For development with hot-reload:
 
