@@ -119,4 +119,3 @@ const decryptedData = await decryptMessage(BobSymmetricKey, iv, encryptedData);
 const decryptedMessage = decoder.decode(decryptedData);
 console.log("Verification of Decrypted Message:", decryptedMessage === data);
 console.log("Verification of Decrypted Message:", decryptedMessage === data);
-
