@@ -2,7 +2,8 @@
 tags: [recommended, react, jsx, fresh]
 ---
 
-JavaScript comments inside text nodes are rendered as plain text in JSX. This is often unexpected.
+JavaScript comments inside text nodes are rendered as plain text in JSX. This is
+often unexpected.
 
 **Invalid:**
 
@@ -14,5 +15,5 @@ JavaScript comments inside text nodes are rendered as plain text in JSX. This is
 **Valid:**
 
 ```tsx
-<div>{/* comment */}</div>
+<div>{/* comment */}</div>;
 ```

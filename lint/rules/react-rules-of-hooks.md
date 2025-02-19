@@ -2,7 +2,9 @@
 tags: [react, fresh]
 ---
 
-Ensure that hooks are called correctly in React/Preact components. They must be called at the top level of a component and not inside a conditional statement or a loop.
+Ensure that hooks are called correctly in React/Preact components. They must be
+called at the top level of a component and not inside a conditional statement or
+a loop.
 
 **Invalid:**
 

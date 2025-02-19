@@ -2,7 +2,8 @@
 tags: [recommended, react, jsx, fresh]
 ---
 
-Leaving the `>` or `}` character in JSX is often undesired and difficult to spot. Enforce that these characters must be passed as strings.
+Leaving the `>` or `}` character in JSX is often undesired and difficult to
+spot. Enforce that these characters must be passed as strings.
 
 **Invalid:**
 

@@ -2,7 +2,9 @@
 tags: [recommended, react, jsx, fresh]
 ---
 
-Enforce `<button>` elements to have a `type` attribute. If a `<button>` is placed inside a `<form>` element it will act as a submit button by default which can be unexpected.
+Enforce `<button>` elements to have a `type` attribute. If a `<button>` is
+placed inside a `<form>` element it will act as a submit button by default which
+can be unexpected.
 
 **Invalid:**
 
