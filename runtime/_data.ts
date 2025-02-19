@@ -261,6 +261,10 @@ export const sidebar = [
         title: "LSP integration",
         href: "/runtime/reference/lsp_integration/",
       },
+      {
+        title: "Docker",
+        href: "/runtime/reference/docker/",
+      },
     ],
   },
   {
