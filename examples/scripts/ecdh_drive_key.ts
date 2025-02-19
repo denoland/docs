@@ -99,8 +99,8 @@ console.log("Alice's symmetric key:", await getBase64Key(AliceSymmetricKey));
 // Drive symmetric keys for Bob
 const BobSymmetricKey = await deriveSymmetricKey(
   bobKey.privateKey,
-  aliceKey.publicKey
-)
+  aliceKey.publicKey,
+);
 
 // Output the derived symmetric key for Bob
 console.log("Bob's symmetric key:", await getBase64Key(BobSymmetricKey));
