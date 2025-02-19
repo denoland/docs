@@ -118,6 +118,103 @@ _build/
 node_modules/
 ```
 
+### Available Docker Tags
+
+Deno provides several official tags:
+
+- `denoland/deno:latest` - Latest stable release
+- `denoland/deno:alpine` - Alpine-based smaller image
+- `denoland/deno:distroless` - Google's distroless-based image
+- `denoland/deno:ubuntu` - Ubuntu-based image
+- `denoland/deno:1.x` - Specific version tags
+
+### Environment Variables
+
+Common environment variables for Deno in Docker:
+
+```dockerfile
+ENV DENO_DIR=/deno-dir/
+ENV DENO_INSTALL_ROOT=/usr/local
+ENV PATH=${DENO_INSTALL_ROOT}/bin:${PATH}
+
+# Optional environment variables
+ENV DENO_NO_UPDATE_CHECK=1
+ENV DENO_NO_PROMPT=1
+```
+
+### Running Tests in Docker
+
+```dockerfile
+FROM denoland/deno:latest
+
+WORKDIR /app
+COPY . .
+
+# Run tests
+CMD ["deno", "test", "--allow-none"]
+```
+
+### Using Docker Compose
+
+```yaml
+// filepath: docker-compose.yml
+version: "3.8"
+services:
+  deno-app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DENO_ENV=development
+    command: ["deno", "run", "--watch", "--allow-net", "main.ts"]
+```
+
+### Health Checks
+
+```dockerfile
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD deno eval "try { await fetch('http://localhost:8000/health'); } catch { exit(1); }"
+```
+
+### Common Development Workflow
+
+For local development:
+
+1. Build the image: `docker build -t my-deno-app .`
+2. Run with volume mount:
+
+```bash
+docker run -it --rm \
+  -v ${PWD}:/app \
+  -p 8000:8000 \
+  my-deno-app
+```
+
+### Security Considerations
+
+- Run as non-root user:
+
+```dockerfile
+# Create deno user
+RUN addgroup --system deno && \
+    adduser --system --ingroup deno deno
+
+# Switch to deno user
+USER deno
+
+# Continue with rest of Dockerfile
+```
+
+- Use minimal permissions:
+
+```dockerfile
+CMD ["deno", "run", "--allow-net=api.example.com", "--allow-read=/app", "main.ts"]
+```
+
+- Consider using `--deny-*` flags for additional security
+
 ## Working with Workspaces in Docker
 
 When working with Deno workspaces (monorepos) in Docker, there are two main
