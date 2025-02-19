@@ -17,7 +17,7 @@ export default function SnippetComponent(props: {
           props.snippet.text ? "pb-4 mt-4 " : " "
         } ${
           props.snippet.code
-            ? "italic text-balance col-span-5 sm:col-span-3"
+            ? "italic text-balance col-span-5 sm:col-span-3 md:pb-0"
             : "mt-4 col-span-full"
         }`}
       >
