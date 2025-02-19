@@ -219,9 +219,9 @@ Running `deno task dev` will run both `dev-client` and `dev-server` in parallel.
 
 ## Node and npx binary support
 
-When running `deno task`, Deno will alias the node and npx binary to Deno
-equivalent commands. If you need run a specific Node command you can do so by
-invoking the `npm` or `npx` `run` command respectively. For example:
+By default, `deno task` will execute commands with the `deno` binary. If you
+need to ensure that a command is run with the `npm` or `npx` binary, you can do
+so by invoking the `npm` or `npx` `run` command respectively. For example:
 
 ```json
 {
