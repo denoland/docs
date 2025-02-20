@@ -13,10 +13,12 @@ export default function SnippetComponent(props: {
   return (
     <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-8">
       <div
-        class={`italic select-none text-sm text-balance ${
-          props.snippet.text ? "pb-4 mt-4 md:pb-0 " : " "
+        class={`select-none text-sm ${
+          props.snippet.text ? "pb-4 mt-4 " : " "
         } ${
-          props.snippet.code ? "col-span-5 sm:col-span-3" : "mt-4 col-span-full"
+          props.snippet.code
+            ? "italic text-balance col-span-5 sm:col-span-3 md:pb-0"
+            : "mt-4 col-span-full"
         }`}
       >
         {props.snippet.text}
