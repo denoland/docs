@@ -12,7 +12,7 @@
 
 // This example is what you may be used to with NodeJS when using CommonJS modules.
 // Notice that for "await" to be used in this example, it must be wrapped in an "async" function.
-const fs = require("fs");
+const fs = require("node:fs");
 
 async function readFile() {
   try {
