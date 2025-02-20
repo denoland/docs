@@ -9,7 +9,7 @@
 @media (min-width: 1024px) {
   .content {
     display: grid;
-    grid-template-columns: minmax(auto, 960px) 1fr;
+    grid-template-columns: minmax(0, 8fr) minmax(0, 3fr);
   }
 
   .toc-desktop {
@@ -19,7 +19,6 @@
     top: 4rem;
     max-height: calc(100vh - 4rem);
     height: max-content;
-    min-width: 250px;
     overflow-y: auto;
     border-left: 1px solid hsl(var(--foreground-tertiary));
   }
@@ -48,6 +47,12 @@
     height: 1.3em;
     background-color: hsl(var(--background-secondary));
     clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
+  }
+}
+
+@media (min-width: 86rem) {
+  .content {
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, max-content);
   }
 }
 
