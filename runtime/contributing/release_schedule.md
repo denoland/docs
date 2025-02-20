@@ -3,15 +3,13 @@ title: "Release Schedule"
 oldUrl: /runtime/manual/references/contributing/release_schedule/
 ---
 
-A new minor release for the `deno` cli is released every month, on the third
-Thursday of the month.
+A new minor release for the `deno` cli is scheduled for release every 12 weeks.
 
 See [Milestones on Deno's GitHub](https://github.com/denoland/deno/milestones)
 for the upcoming releases.
 
-There are usually two or three patch releases (done weekly) after a minor
-releases; after that a merge window for new features opens for the upcoming
-minor release.
+There are usually several patch releases (done weekly) after a minor release;
+after that a merge window for new features opens for the upcoming minor release.
 
 Stable releases can be found on the
 [GitHub releases page](https://github.com/denoland/deno/releases).
