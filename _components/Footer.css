@@ -11,10 +11,6 @@ footer {
   gap: 2rem;
 }
 
-.footer-section {
-  min-width: 200px;
-}
-
 .footer-section-heading {
   margin-bottom: 1rem;
   font-size: 1rem;
