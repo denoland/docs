@@ -57,7 +57,7 @@ export const sidebar = [
       },
       {
         title: "Top level await",
-        href: "/examples/await_commonjs/",
+        href: "/examples/top_level_await/",
         type: "example",
       },
       {
