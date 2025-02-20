@@ -34,6 +34,7 @@ p {
       "nav main"
       "nav footer";
     grid-template-columns: auto 1fr;
+    width: 100%;
   }
 
   .nav {
