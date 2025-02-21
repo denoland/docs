@@ -164,6 +164,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Better debugging with the console API",
+        href: "/examples/tutorials/debugging-with-console/",
+        type: "tutorial",
+      },
+      {
         title: "Manipulating & parsing URLs",
         href: "/examples/url_parsing/",
         type: "example",
