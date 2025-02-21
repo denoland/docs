@@ -41,10 +41,6 @@
 
   color: var(--foreground-primary);
   background-color: var(--background-primary);
-
-  .ddoc .markdown-body pre {
-    border-color: hsla(var(--background-tertiary)) !important;
-  }
 }
 
 html {
@@ -159,10 +155,6 @@ h1 {
     &:hover .anchor-end {
       opacity: 1;
     }
-  }
-
-  & section :where(h2, h3, h4, h5, h6) {
-    @apply m-0 border-b-0 tracking-normal;
   }
 
   & details {
@@ -483,12 +475,6 @@ body {
   @apply mb-0;
 }
 
-.markdown-body .highlight pre,
-.markdown-body pre {
-  @apply bg-slate-50 dark:border-background-tertiary
-    dark:bg-background-secondary;
-}
-
 /* Custom DDOC styles for the Deno documentation */
 .ddoc {
   @apply pt-0 !important;
@@ -501,26 +487,9 @@ body {
     }
   }
 
-  #categoryPanel {
-    @apply border-r border-foreground-tertiary;
-    @apply pt-4 !important;
-
-    & li:hover {
-      @apply bg-background-primary text-primary rounded-md !important;
-      > a {
-        @apply no-underline !important;
-      }
-    }
-    .active {
-      @apply bg-background-secondary text-foreground-secondary rounded-md
-        !important;
-    }
-  }
-
-  .contextLink {
-    @apply text-primary !important;
-    /* 40% opacity of for decoration color primary */
-    text-decoration-color: rgba(9, 107, 218, 0.4) !important;
+  .section {
+    border-bottom: 1px solid hsl(var(--foreground-tertiary));
+    padding-bottom: 1rem;
   }
 
   .documentNavigation {
@@ -552,10 +521,6 @@ body {
       @apply border-gray-000 !important;
     }
 
-    /* This comes from gfm css, should be replaced with something in our color palette once we establish it. */
-    :not(pre) > code {
-      @apply bg-foreground-quaternary hover:bg-foreground-tertiary !important;
-    }
     & a:not(.no-color) {
       @apply text-primary !important;
     }
@@ -570,18 +535,8 @@ body {
   }
 }
 
-@media (min-width: 640px) {
-  .ddoc .markdown-body {
-    max-width: 640px;
-  }
-}
-@media (min-width: 768px) {
-  .ddoc .markdown-body {
-    max-width: 768px;
-  }
-}
 @media (min-width: 1024px) {
-  .ddoc .markdown-body {
+  .ddoc .markdown-body p {
     max-width: 75ch;
   }
 }

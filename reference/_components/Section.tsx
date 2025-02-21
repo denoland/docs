@@ -59,7 +59,7 @@ export default function (
           <h3 className="anchorable-heading">
             {section.header.href
               ? (
-                <a href={section.header.href} className="contextLink">
+                <a href={section.header.href} className="context-link">
                   {section.header.title}
                 </a>
               )
@@ -79,3 +79,5 @@ export default function (
     </section>
   );
 }
+
+export const css = "@import './reference/_components/Section.css';";
