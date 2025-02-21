@@ -10,11 +10,11 @@ strive to make code working under 1.0.0 continue to work in future versions.
 
 ## Release schedule, channels and long term support
 
-Deno releases a new stable, minor version (eg. v2.1.0, v2.0.0) on a monthly
+Deno releases a new stable, minor version (eg. v2.1.0, v2.0.0) on a 12 week
 schedule.
 
 Patch releases including bug fixes for the latest minor version are released as
-needed - you can expect two or three patch releases before a new minor version
+needed - you can expect several patch releases before a new minor version
 is released.
 
 ### Release channels
