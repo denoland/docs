@@ -133,6 +133,19 @@ supported syntax for selectors is:
 | `:not(> Bar)`          | Not pseudo-class              |
 | `:is(> Bar)`           | Is pseudo-class               |
 
+There is also the `:exit` pseudo that is only valid at the end of the whole
+selector. When it's present, Deno will call the function while going **up** the
+tree instead of when going down.
+
+:::tip
+
+We highly recommend using the
+[typescript-eslint playground](https://typescript-eslint.io/play/) when
+developing lint rules. It allows you to inspect code and the resulting AST
+format. This makes it easier to see which selectors match which node.
+
+:::
+
 ## Applying fixes
 
 A custom lint rule can supply a function to apply a fix when reporting a
