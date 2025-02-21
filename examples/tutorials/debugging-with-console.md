@@ -16,7 +16,7 @@ going to get so much easier!
 Hello, old friend! You’ll most likely be using this to output logging messages
 to the console to help you debug.
 
-```json
+```js
 console.log("Hello, world!"); // "Hello, world!"
 ```
 
