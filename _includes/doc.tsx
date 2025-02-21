@@ -20,7 +20,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
 
   return (
     <div id="content" className="content">
-      <div class="px-4 sm:px-5 md:px-6 max-w-full">
+      <div class="px-4 sm:px-5 md:px-6 w-full max-w-[60rem] mx-auto">
         <article class="mx-auto">
           {(!isExamples && !isHome && !isReference) && (
             <data.comp.Breadcrumbs
