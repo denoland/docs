@@ -25,9 +25,9 @@ doesn't provide 100% compatibility, the existing knowledge of authoring ESLint
 plugins can be mostly reused if you happen to have written custom
 [ESLint](https://eslint.org/) rules in the past.
 
-Plugins are loaded via `lint.plugins` setting in `deno.json`.
+Plugins are loaded via the `lint.plugins` setting in `deno.json`.
 
-The value is an array of specifiers to plugins. These can be paths, `npm:` or
+The value is an array of plugin specifiers. These can be paths, `npm:`, or
 `jsr:` specifiers.
 
 ```json title="deno.json"
