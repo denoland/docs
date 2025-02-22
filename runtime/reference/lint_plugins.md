@@ -19,7 +19,7 @@ catch a context-specific problem or enforce company-wide conventions.
 
 This is where the lint plugin API comes into play.
 
-The lint plugin API is intentionally modelled after the
+The lint plugin API is intentionally modeled after the
 [ESLint API](https://eslint.org/docs/latest/extend/custom-rules). While this API
 doesn't provide 100% compatibility, the existing knowledge of authoring ESLint
 plugins can be mostly reused if you happen to have written custom
@@ -90,7 +90,7 @@ export default {
 
 Writing code to match a specific node can sometimes become a bit tedious if you
 write it in plain JavaScript. Sometimes this matching logic would be easier to
-express via a selector, similar to CSS selectors. The using a string as the
+express via a selector, similar to CSS selectors. By using a string as the
 property name in the returned visitor object, we can specify a custom selector.
 
 ```ts title="my-plugin.ts"
@@ -248,7 +248,7 @@ custom lint rule is always `<plugin-name>/<rule-name>`.
 
 ## Testing plugins
 
-`Deno.lint.runPlugin` API provides a convenient way to test your plugins. It
+The `Deno.lint.runPlugin` API provides a convenient way to test your plugins. It
 allows you to assert that the plugin produces expected diagnostics given the
 particular input.
 
@@ -271,10 +271,10 @@ Deno.test("my-plugin", () => {
 
 :::info
 
-`Deno.lint.runPlugin` API is only available in `deno test` and `deno bench`
-subcommands.
+The `Deno.lint.runPlugin` API is only available in the `deno test` and
+`deno bench` subcommands.
 
-Trying to use it with any other subcommand will result in an error thrown.
+Trying to use it with any other subcommand will throw an error.
 
 :::
 
