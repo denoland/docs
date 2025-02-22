@@ -3,6 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @resource {https://docs.deno.com/api/deno/~/Deno.readTextFile} Doc: Deno.readTextFile
+ * @run <url>
  * @group Basics
  *
  * Example of how top-level await can be used by default in Deno. This example would assist in migrating from NodeJS (CommonJS) to Deno.
@@ -12,7 +13,7 @@
 
 // This example is what you may be used to with NodeJS when using CommonJS modules.
 // Notice that for "await" to be used in this example, it must be wrapped in an "async" function.
-const fs = require("fs");
+const fs = require("node:fs");
 
 async function readFile() {
   try {

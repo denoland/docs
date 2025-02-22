@@ -11,7 +11,7 @@
  * _`node:sqlite` module has been added in Deno v2.2._
  */
 
-// Import the Database class from jsr:@db/sqlite
+// Import the DatabaseSync class from node:sqlite
 import { DatabaseSync } from "node:sqlite";
 
 // Open or create an SQLite database named 'test.db'

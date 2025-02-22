@@ -1211,6 +1211,15 @@
           "usage": "--no-run"
         },
         {
+          "name": "permit-no-files",
+          "short": null,
+          "long": "permit-no-files",
+          "required": false,
+          "help": "Don't return an error code if no bench files were found",
+          "help_heading": null,
+          "usage": "--permit-no-files"
+        },
+        {
           "name": "watch",
           "short": null,
           "long": "watch",
@@ -1279,7 +1288,7 @@
     },
     {
       "name": "bundle",
-      "about": "⚠️ `deno bundle` was removed in Deno 2.\n\nSee the Deno 1.x to 2.x Migration Guide for migration instructions: https://docs.deno.com/runtime/manual/advanced/migrate_deprecations",
+      "about": "`deno bundle` was removed in Deno 2.\n\nSee the Deno 1.x to 2.x Migration Guide for migration instructions: https://docs.deno.com/runtime/manual/advanced/migrate_deprecations",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -1728,6 +1737,15 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
+        },
+        {
+          "name": "no-code-cache",
+          "short": null,
+          "long": "no-code-cache",
+          "required": false,
+          "help": "Disable V8 code cache feature",
+          "help_heading": null,
+          "usage": "--no-code-cache"
         },
         {
           "name": "all",
@@ -3869,7 +3887,7 @@
           "short": null,
           "long": "latest",
           "required": false,
-          "help": "Update to the latest version, regardless of semver constraints",
+          "help": "Consider the latest version, regardless of semver constraints",
           "help_heading": null,
           "usage": "--latest"
         },
@@ -3883,11 +3901,20 @@
           "usage": "--update"
         },
         {
+          "name": "interactive",
+          "short": "i",
+          "long": "interactive",
+          "required": false,
+          "help": "Interactively select which dependencies to update",
+          "help_heading": null,
+          "usage": "--interactive"
+        },
+        {
           "name": "compatible",
           "short": null,
           "long": "compatible",
           "required": false,
-          "help": "Only output versions that satisfy semver requirements",
+          "help": "Only consider versions that satisfy semver requirements",
           "help_heading": null,
           "usage": "--compatible"
         },
@@ -4687,6 +4714,15 @@
           "usage": "--config <FILE>"
         },
         {
+          "name": "frozen",
+          "short": null,
+          "long": "frozen",
+          "required": false,
+          "help": "Error out if lockfile is out of date",
+          "help_heading": "Dependency management options",
+          "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
           "name": "cwd",
           "short": null,
           "long": "cwd",
@@ -4709,7 +4745,7 @@
           "short": "f",
           "long": "filter",
           "required": false,
-          "help": "Filter members of the workspace by name - should be used with --recursive",
+          "help": "Filter members of the workspace by name, implies --recursive flag",
           "help_heading": null,
           "usage": "--filter <filter>"
         },
@@ -4718,7 +4754,7 @@
           "short": null,
           "long": "eval",
           "required": false,
-          "help": "Evaluate the passed value as if, it was a task in a configuration file",
+          "help": "Evaluate the passed value as if it was a task in a configuration file",
           "help_heading": null,
           "usage": "--eval"
         },
@@ -5318,7 +5354,7 @@
     },
     {
       "name": "vendor",
-      "about": "⚠️ `deno vendor` was removed in Deno 2.\n\nSee the Deno 1.x to 2.x Migration Guide for migration instructions: https://docs.deno.com/runtime/manual/advanced/migrate_deprecations",
+      "about": "`deno vendor` was removed in Deno 2.\n\nSee the Deno 1.x to 2.x Migration Guide for migration instructions: https://docs.deno.com/runtime/manual/advanced/migrate_deprecations",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
