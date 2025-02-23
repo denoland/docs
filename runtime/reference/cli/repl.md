@@ -128,7 +128,7 @@ readTextFileSync  readFileSync      readDir           readLink          readAllS
 | Ctrl-R                | Reverse Search history (Ctrl-S forward, Ctrl-G cancel)                                           |
 | Ctrl-T                | Transpose previous character with current character                                              |
 | Ctrl-U                | Delete from start of line to cursor                                                              |
-| Ctrl-V                | Insert any special character without performing its associated action                            |
+| Ctrl-V, Ctrl-Q        | Insert the subsequent character verbatim instead of performing any Action associated with it. For example, to insert a newline while editing a multi-line history entry, press Ctrl-V then Ctrl-J (Ctrl-J is the ASCII Control Character `Line Feed`) |
 | Ctrl-W                | Delete word leading up to cursor (using white space as a word boundary)                          |
 | Ctrl-X Ctrl-U         | Undo                                                                                             |
 | Ctrl-Y                | Paste from Yank buffer                                                                           |
