@@ -165,7 +165,7 @@ export const sidebar = [
       },
       {
         title: "Better debugging with the console API",
-        href: "/examples/tutorials/debugging-with-console/",
+        href: "/examples/debugging_with_console_tutorial/",
         type: "tutorial",
       },
       {
