@@ -217,6 +217,20 @@ useful to logically group several tasks together:
 
 Running `deno task dev` will run both `dev-client` and `dev-server` in parallel.
 
+## Node and npx binary support
+
+By default, `deno task` will execute commands with the `deno` binary. If you
+need to ensure that a command is run with the `npm` or `npx` binary, you can do
+so by invoking the `npm` or `npx` `run` command respectively. For example:
+
+```json
+{
+  "tasks": {
+    "test:node": "npm run test"
+  }
+}
+```
+
 ## Workspace support
 
 `deno task` can be used in workspaces, to run tasks from multiple member
@@ -311,21 +325,21 @@ deno run output_data.ts ; deno run --allow-net server.ts
 Async commands provide a way to make a command execute asynchronously. This can
 be useful when starting multiple processes. To make a command asynchronous, add
 an `&` to the end of it. For example the following would execute
-`sleep 1 && deno run --allow-net client.ts` and `deno run --allow-net server.ts`
+`sleep 1 && deno run --allow-net server.ts` and `deno run --allow-net client.ts`
 at the same time:
 
 ```sh
-sleep 1 && deno run --allow-net client.ts & deno run --allow-net server.ts
+sleep 1 && deno run --allow-net server.ts & deno run --allow-net client.ts
 ```
 
 Unlike in most shells, the first async command to fail will cause all the other
 commands to fail immediately. In the example above, this would mean that if the
-client command fails then the server command will also fail and exit. You can
+server command fails then the cleint command will also fail and exit. You can
 opt out of this behavior by adding `|| true` to the end of a command, which will
 force a `0` exit code. For example:
 
 ```sh
-deno run --allow-net client.ts || true & deno run --allow-net server.ts || true
+deno run --allow-net server.ts || true & deno run --allow-net client.ts || true
 ```
 
 ### Environment variables

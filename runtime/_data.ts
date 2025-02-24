@@ -246,6 +246,10 @@ export const sidebar = [
         href: "/runtime/reference/documentation/",
       },
       {
+        title: "Lint Plugins",
+        href: "/runtime/reference/lint_plugins/",
+      },
+      {
         title: "WebAssembly",
         href: "/runtime/reference/wasm/",
       },
@@ -256,6 +260,10 @@ export const sidebar = [
       {
         title: "LSP integration",
         href: "/runtime/reference/lsp_integration/",
+      },
+      {
+        title: "Docker",
+        href: "/runtime/reference/docker/",
       },
     ],
   },

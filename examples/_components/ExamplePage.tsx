@@ -45,8 +45,9 @@ export default function ExamplePage({ example }: Props) {
             <SnippetComponent
               key={i}
               onlyOneSnippet={file.snippets.length === 1}
-              firstOfFile={i === 0}
-              lastOfFile={i === file.snippets.length - 1}
+              firstOfFile={i === 0 || !file.snippets[i - 1].code}
+              lastOfFile={i === file.snippets.length - 1 ||
+                !file.snippets[i + 1].code}
               filename={file.name}
               snippet={snippet}
             />

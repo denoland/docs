@@ -1,6 +1,5 @@
 .nav {
   height: 100%;
-  min-width: 280px;
   border-right: 1px solid hsl(var(--foreground-tertiary));
   font-size: 0.8rem;
   background-color: hsl(var(--background-primary));
@@ -36,7 +35,7 @@
   .nav {
     position: sticky;
     top: 4rem;
-    height: 100vh;
+    height: calc(100vh - 4rem);
     overflow-y: auto;
   }
 }

@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [recommended, react, jsx, fresh]
 ---
 
 Ensure that void elements in HTML don't have any children as that is not valid

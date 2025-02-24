@@ -56,6 +56,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Top level await",
+        href: "/examples/top_level_await/",
+        type: "example",
+      },
+      {
         title: "Update from CommonJS to ESM",
         href: "/examples/cjs_to_esm_tutorial/",
         type: "tutorial",
@@ -279,6 +284,11 @@ export const sidebar = [
         href: "/examples/react_app_video",
         externalURL: "https://www.youtube.com/watch?v=eStwt_2THd8",
         type: "video",
+      },
+      {
+        title: "Build a Tanstack app",
+        href: "/examples/tanstack_tutorial",
+        type: "tutorial",
       },
     ],
   },
