@@ -183,5 +183,5 @@ There’s more to explore, but these handy methods can give your JavaScript
 debugging a boost and they are ready and waiting for you to use right in your
 browser or in your Deno application.
 
-Take a look at [console in the API references](/api/web/~/Console) of our docs
+Take a look at [console support](/api/web/~/Console) in the API Reference docs.
 for more.
