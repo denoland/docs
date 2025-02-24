@@ -40,9 +40,9 @@ compatible bug fixes.
 
 ![Deno long term support schedule](./images/deno-lts-support.png)
 
-A new LTS version is released every year, and **supported for a full year**. A
-new patch version of an LTS channel will be released at least **once per
-quarter**.
+A new LTS version is released every year, and **supported for a full year**,
+giving users a three-month window to upgrade between LTS releases. A new patch
+version of an LTS channel will be released at least **once per quarter**.
 
 LTS eligible backports include security fixes and defect fixes (crashes, wrong
 answers).
