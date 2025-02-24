@@ -8,6 +8,7 @@
   "HTTP Server": "Handling HTTP requests, serving responses, and managing server behavior. \n\nEg {@linkcode Deno.serveHttp}, {@linkcode Deno.serve}",
   "I/O": "Interfaces for reading, writing, seeking, and managing resources. For handling of data streams, file I/O, and console interactions. \n\nEg {@linkcode Deno.stdin}, {@linkcode Deno.inspect}",
   "Jupyter": "Create interactive notebooks and execute code cells. Useful for data analysis, visualization, and educational purposes. \n\nEg {@linkcode Deno.jupyter}",
+  "Linter": "Interfaces and helpers for writing and testing custom lint rules.\n\nEg {@linkcode Deno.lint.Plugin}",
   "Network": "A wide range of networking tasks, from low-level connections to high-level server creation. Handle HTTP requests, WebSocket communication, and DNS resolution. Useful for building web servers, clients, and networking tools. \n\nEg {@linkcode Deno.connect}, {@linkcode Deno.listen}, {@linkcode Deno.resolveDns}",
   "Permissions": "Permission system controls access to resources (e.g., file system, network, environment variables).\n\nRequest permissions explicitly, enhancing security and user trust. \n\nEg {@linkcode Deno.permissions}",
   "Runtime": "System-related functionality, process management, and observability. \n\nEg {@linkcode Deno.mainModule}, {@linkcode Deno.exit}, {@linkcode Deno.cwd}",
