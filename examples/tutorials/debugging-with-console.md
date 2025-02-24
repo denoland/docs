@@ -1,6 +1,6 @@
 ---
 title: "Better debugging with the console API"
-url: /examples/debugging-with-console/
+url: /examples/debugging_with_console_tutorial/
 ---
 
 Some of the console API is probably muscle memory for web developers, but there
