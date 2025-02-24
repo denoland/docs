@@ -98,6 +98,28 @@ nvim_lsp.ts_ls.setup {
 For Deno, the example above assumes a `deno.json` or `deno.jsonc` file exists at
 the root of the project.
 
+##### Kickstart.nvim and Mason LSP
+
+If you are using [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)
+add the above configuration like this inside the servers table in your
+configuration `init.lua`.
+
+```lua
+local servers = {
+        -- ... some configuration
+        ts_ls = {
+            root_dir = require("lspconfig").util.root_pattern({ "package.json", "tsconfig.json" }),
+            single_file_support = false,
+            settings = {},
+        },
+        denols = {
+            root_dir = require("lspconfig").util.root_pattern({"deno.json", "deno.jsonc"}),
+            single_file_support = false,
+            settings = {},
+        },
+    }
+```
+
 #### coc.nvim
 
 Once you have
