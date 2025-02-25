@@ -51,7 +51,6 @@ export default function (
       break;
     }
   }
-
   return (
     <section className="section" id={section.header?.anchor.id}>
       {section.header && (

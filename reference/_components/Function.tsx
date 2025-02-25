@@ -10,7 +10,7 @@ export default function (
           {functionCtx.functions.length > 1 && <h2>Overload {index + 1}</h2>}
           <div className="scroll-mt-16" id={func.id}>
             <code
-              className={`anchorable break-words inline-code-block ${func.summary.length}`}
+              className={`anchorable break-words inline-code-block`}
             >
               <comp.Anchor anchor={func.anchor} />
               <span className="font-bold">{func.name}</span>

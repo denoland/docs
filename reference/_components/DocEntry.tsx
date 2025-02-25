@@ -15,7 +15,8 @@ export default function (
           </div>
         )}
 
-        <code>
+        {/* Chosen 200 as a guestimate of when code is blocks rather than inline, would be better if this was in the markup sent from ddoc */}
+        <code className={docEntry.content.length > 200 ? "inline-code-block" : ""}>
           {docEntry.name && <comp.Anchor anchor={docEntry.anchor} />}
 
           {docEntry.name_href

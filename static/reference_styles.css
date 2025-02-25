@@ -17,7 +17,8 @@
   margin-left: 1rem;
 }
 .ddoc .ml-indent {
-  margin-left: 2ch;
+  display: inline;
+  margin: 0;
 }
 .ddoc .mr-2 {
   margin-right: 0.5rem;
@@ -527,7 +528,7 @@
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
-.ddoc .docEntry .docEntryHeader > div {
+.ddoc .docEntry .> div {
   overflow-wrap: break-word;
 }
 .ddoc .section > :not([hidden]) ~ :not([hidden]) {
