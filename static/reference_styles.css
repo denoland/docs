@@ -603,7 +603,6 @@
   .namespaceItemContentSubItems
   a {
   text-decoration-line: underline;
-  text-decoration-color: #d6d3d1;
 }
 :is(
   .ddoc .namespaceSection .namespaceItem .namespaceItemContent > a,

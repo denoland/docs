@@ -184,7 +184,7 @@ h1 {
   }
 
   :not(pre) > code {
-    @apply font-mono text-sm py-0.5 px-1.5 rounded bg-stone-200;
+    @apply font-mono text-sm py-0.5 px-1.5 rounded;
   }
 }
 
@@ -490,6 +490,10 @@ body {
   .section {
     border-bottom: 1px solid hsl(var(--foreground-tertiary));
     padding-bottom: 1rem;
+  }
+
+  .section:last-child {
+    border: 0;
   }
 
   .documentNavigation {

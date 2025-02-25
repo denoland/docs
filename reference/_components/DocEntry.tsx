@@ -34,7 +34,7 @@ export default function (
             )}
           {/*typedef rendering*/}
           <span
-            className="font-medium text-stone-500"
+            className="font-medium"
             dangerouslySetInnerHTML={{ __html: docEntry.content }}
           />
         </code>
