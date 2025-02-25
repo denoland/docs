@@ -12,6 +12,8 @@
     grid-template-columns: minmax(0, 8fr) minmax(0, 3fr);
   }
 
+  .examples-content {}
+
   .toc-desktop {
     display: block;
     position: sticky;
