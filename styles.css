@@ -13,7 +13,7 @@
   --foreground-quaternary: 0deg, 0%, 95%;
   --runtime-background: 124deg, 100%, 97.1%;
   --runtime-foreground: 184deg, 100%, 10%;
-  --primary: 217deg, 91%, 59%;
+  --primary: 217deg, 91%, 49%;
   --primary-dark: 217deg, 91%, 49%;
   --info: 224deg, 64.3%, 32.9%;
   --note: 224deg, 64.3%, 32.9%;
@@ -34,7 +34,7 @@
   --info: 224deg, 64.3%, 69%;
   --caution: 45.4deg, 93.39%, 67.11%;
   /* The following are not different from light mode (yet?) */
-  --primary: 217deg, 91%, 59%;
+  --primary: 219deg, 100%, 72%;
   --primary-dark: 217deg, 91%, 49%;
   --tip: 142deg, 76.2%, 36.3%;
   --color-fg-default: #fff;
@@ -108,10 +108,13 @@ h1 {
 
 .markdown-body {
   font-family: inherit;
-  color: inherit;
   @apply bg-transparent !important;
 
   /* Override gfm base styles */
+  a {
+    color: hsl(var(--primary));
+  }
+
   p {
     @apply mb-6;
   }
