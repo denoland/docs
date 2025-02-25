@@ -1,6 +1,6 @@
 export default function (data: Lume.Data) {
   const sectionData = data.sectionData;
-  const currentUrl = data.currentUrl;
+  const currentUrl = data.currentUrl.replace(/\/$/, "");
   const isReference = currentUrl.startsWith("/api/");
   const isDenoAPI = currentUrl.startsWith("/api/deno/");
 
@@ -79,7 +79,8 @@ export default function (data: Lume.Data) {
                             <a
                               href={subItem.href}
                               className="sub-nav-link blocklink"
-                              data-active={subItem.href === currentUrl}
+                              data-active={subItem.href.replace(/\/$/, "") ===
+                                currentUrl}
                             >
                               {subItem.title}
                             </a>
@@ -92,7 +93,7 @@ export default function (data: Lume.Data) {
                     <a
                       href={item.href}
                       className="sub-nav-link blocklink"
-                      data-active={item.href === currentUrl}
+                      data-active={item.href.replace(/\/$/, "") === currentUrl}
                     >
                       {item.title}
                     </a>
