@@ -1,5 +1,5 @@
 ---
-tags: [recommended, react, jsx, fresh]
+tags: [recommended, react, jsx]
 ---
 
 Disallow duplicated JSX props. Later props will always overwrite earlier props

@@ -2,6 +2,7 @@ export default function (data: Lume.Data) {
   const sectionData = data.sectionData;
   const currentUrl = data.currentUrl;
   const isReference = currentUrl.startsWith("/api/");
+  const isDenoAPI = currentUrl.startsWith("/api/deno/");
 
   // Reference page nav has no heirarchy and a different data names
   if (isReference) {
@@ -12,13 +13,15 @@ export default function (data: Lume.Data) {
             <ul className="sub-nav">
               {nav.items?.map((item: any) => (
                 <li key={item.href}>
-                  <a
-                    href={item.href}
-                    className="sub-nav-link blocklink"
-                    data-active={item.active}
-                  >
-                    {item.name}
-                  </a>
+                  {(isDenoAPI && item.name === "Uncategorized") ? <></> : (
+                    <a
+                      href={item.href}
+                      className="sub-nav-link blocklink"
+                      data-active={item.active}
+                    >
+                      {item.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
