@@ -74,5 +74,6 @@
   "/examples/watching-files": "/examples/watching_files",
   "/examples/web-workers": "/examples/web_workers",
   "/examples/writing-files": "/examples/writing_files",
-  "/examples/writing-tests": "/examples/writing_tests"
+  "/examples/writing-tests": "/examples/writing_tests",
+  "/api/deno/": "/api/deno/~/Deno"
 }
