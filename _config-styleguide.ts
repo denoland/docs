@@ -1,11 +1,8 @@
 // Further refine the global Lume config for this section of the site
-
 import site from "./_config.ts";
 import ogImages from "lume/plugins/og_images.ts";
 
-// site.ignore("runtime");
-// site.ignore("apis");
-
+// Ignore everythig not in the styleguide folder
 site.ignore((path) => {
   return path.match(/^\/styleguide.*$/) === null;
 });

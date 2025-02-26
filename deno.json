@@ -33,13 +33,13 @@
     "serve:style": {
       "description": "Build, serve, and watch just the styles and styleguide",
       "command": "deno task lume -s --config=_config-styleguide.ts"
-    },
+    }
   },
   "compilerOptions": {
     "types": [
       "lume/types.ts"
     ],
-    "jsx": "react-jsx",
+    "jsx": "precompile",
     "jsxImportSource": "npm:preact"
   },
   "test": {
