@@ -9,9 +9,6 @@ and [images](https://hub.docker.com/r/denoland/deno).
 
 To use the official image, create a `Dockerfile` in your project directory:
 
-````dockerfile
-Dockerfile:
-
 ```dockerfile
 FROM denoland/deno:latest
 
@@ -26,7 +23,7 @@ RUN deno cache main.ts
 
 # Run the app
 CMD ["deno", "run", "--allow-net", "main.ts"]
-````
+```
 
 ### Best Practices
 
