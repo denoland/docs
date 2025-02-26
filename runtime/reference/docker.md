@@ -9,9 +9,6 @@ and [images](https://hub.docker.com/r/denoland/deno).
 
 To use the official image, create a `Dockerfile` in your project directory:
 
-````dockerfile
-Dockerfile:
-
 ```dockerfile
 FROM denoland/deno:latest
 
