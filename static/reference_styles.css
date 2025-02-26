@@ -17,7 +17,8 @@
   margin-left: 1rem;
 }
 .ddoc .ml-indent {
-  margin-left: 2ch;
+  display: inline;
+  margin: 0;
 }
 .ddoc .mr-2 {
   margin-right: 0.5rem;
@@ -339,10 +340,6 @@
   font-size: 1.5rem;
   line-height: 2rem;
 }
-.ddoc .text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
 .ddoc .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -398,10 +395,6 @@
   --tw-text-opacity: 1;
   color: rgb(126 87 192/var(--tw-text-opacity));
 }
-.ddoc .text-\[\#0F172A\] {
-  --tw-text-opacity: 1;
-  color: rgb(15 23 42/var(--tw-text-opacity));
-}
 .ddoc .text-abstract {
   --tw-text-opacity: 1;
   color: rgb(12 175 198/var(--tw-text-opacity));
@@ -454,13 +447,11 @@
 .ddoc {
   --ddoc-selection-border-width: 2px;
   --ddoc-selection-border-color-default: #d6d3d1;
-  --ddoc-selection-selected-border-color: #2564eb;
   --ddoc-selection-selected-bg: #056cf00c;
   --ddoc-selection-padding: 9px 15px;
 }
 .ddoc .link {
   --tw-text-opacity: 1;
-  color: rgb(37 99 235/var(--tw-text-opacity));
   transition-property:
     color,
     background-color,
@@ -533,25 +524,8 @@
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
-.ddoc .docEntry .docEntryHeader {
-  justify-content: space-between;
-  align-items: flex-start;
-  display: flex;
-}
-@media (min-width: 768px) {
-  .ddoc .docEntry .docEntryHeader {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-}
 .ddoc .docEntry .docEntryHeader > div {
   overflow-wrap: break-word;
-}
-.ddoc .section {
-  max-width: 75ch;
-  margin-top: 1.5rem;
-  padding-bottom: 1rem;
-  margin-bottom: 0.5rem;
 }
 .ddoc .section > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -625,7 +599,6 @@
   .namespaceItemContentSubItems
   a {
   text-decoration-line: underline;
-  text-decoration-color: #d6d3d1;
 }
 :is(
   .ddoc .namespaceSection .namespaceItem .namespaceItemContent > a,
@@ -983,11 +956,6 @@ ul.namespaceItemContentSubItems {
   opacity: 1;
   display: block;
 }
-.ddoc .contextLink:hover {
-  --tw-text-opacity: 1;
-  color: rgb(14 101 144/var(--tw-text-opacity));
-}
-
 .ddoc .breadcrumbs {
   margin: 0;
   word-break: break-all;
@@ -1326,4 +1294,11 @@ a.anchor-link {
 
 .ddoc [id] {
   scroll-margin-top: 10.5rem;
+}
+
+.ddoc .link {
+  color: hsl(var(--primary));
+  &:hover {
+    color: hsl(var(--primary));
+  }
 }
