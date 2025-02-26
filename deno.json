@@ -39,7 +39,7 @@
     "types": [
       "lume/types.ts"
     ],
-    "jsx": "precompile",
+    "jsx": "react-jsx",
     "jsxImportSource": "npm:preact"
   },
   "test": {
