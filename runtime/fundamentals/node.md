@@ -23,7 +23,7 @@ oldUrl:
 
 For example, here's how you'd import Hono from npm in a Deno project:
 
-```
+```ts
 import { Hono } from "npm:hono";
 ```
 
