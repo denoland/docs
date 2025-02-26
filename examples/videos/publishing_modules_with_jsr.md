@@ -27,7 +27,7 @@ HTTP requests. I'll search for it here, and this will take me to
 
 If you want to install a package, all you need to do is add it:
 
-```
+```sh
 deno add jsr:@oak/oak
 ```
 
