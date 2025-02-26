@@ -72,7 +72,7 @@
 
 .sub-nav-toggle-checkbox:checked + .tertiary-nav {
   height: auto;
-  max-height: 100vh;
+  max-height: fit-content;
 }
 
 .sub-nav-toggle:has(+ .sub-nav-toggle-checkbox:checked)::after {
