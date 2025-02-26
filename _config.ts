@@ -3,6 +3,7 @@ import "@std/dotenv/load";
 import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
+import mdx from "lume/plugins/mdx.ts";
 import postcss from "lume/plugins/postcss.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
@@ -132,6 +133,7 @@ site.use(
 
 site.use(search());
 site.use(jsx());
+site.use(mdx());
 
 site.use(
   postcss({
@@ -187,7 +189,8 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
   // site.data("date", "Git Last Modified");;
 
   // Generate Open Graph images
-  site.data("openGraphLayout", "/og_images.jsx");
+  site.data("openGraphLayout", "/open_graph/default.jsx");
+  site.data("openGraphLayout", "/examples", "/open_graph/examples.jsx");
   site.use(ogImages());
 }
 
