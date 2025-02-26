@@ -25,13 +25,17 @@
     "reference": "cd reference_gen && deno task types && deno task doc",
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "test": "deno test -A",
-    "update_lint_rules": "deno run -A update_lint_rules.ts"
+    "update_lint_rules": "deno run -A update_lint_rules.ts",
+    "serve:prod": {
+      "description": "Build, serve, and watch just the APIs section of the docs",
+      "command": "BUILD_TYPE=FULL deno task serve"
+    }
   },
   "compilerOptions": {
     "types": [
       "lume/types.ts"
     ],
-    "jsx": "precompile",
+    "jsx": "react-jsx",
     "jsxImportSource": "npm:preact"
   },
   "test": {

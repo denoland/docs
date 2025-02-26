@@ -7,6 +7,7 @@ import postcss from "lume/plugins/postcss.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
+import ogImages from "lume/plugins/og_images.ts";
 
 import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
@@ -176,6 +177,16 @@ site.ignore(
   // "runtime",
   // "subhosting",
 );
+
+// Do more expensive operations if we're building the full site
+if (Deno.env.get("BUILD_TYPE") == "FULL") {
+  // Use Lume's built in date function to get the last modified date of the file
+  // site.data("date", "Git Last Modified");;
+
+  // Generate Open Graph images
+  site.data("openGraphLayout", "/og_images.jsx");
+  site.use(ogImages());
+}
 
 site.scopedUpdates(
   (path) => path == "/overrides.css",
