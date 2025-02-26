@@ -13,7 +13,7 @@
   --foreground-quaternary: 0deg, 0%, 95%;
   --runtime-background: 124deg, 100%, 97.1%;
   --runtime-foreground: 184deg, 100%, 10%;
-  --primary: 217deg, 91%, 59%;
+  --primary: 217deg, 91%, 49%;
   --primary-dark: 217deg, 91%, 49%;
   --info: 224deg, 64.3%, 32.9%;
   --note: 224deg, 64.3%, 32.9%;
@@ -34,17 +34,13 @@
   --info: 224deg, 64.3%, 69%;
   --caution: 45.4deg, 93.39%, 67.11%;
   /* The following are not different from light mode (yet?) */
-  --primary: 217deg, 91%, 59%;
+  --primary: 219deg, 100%, 72%;
   --primary-dark: 217deg, 91%, 49%;
   --tip: 142deg, 76.2%, 36.3%;
   --color-fg-default: #fff;
 
   color: var(--foreground-primary);
   background-color: var(--background-primary);
-
-  .ddoc .markdown-body pre {
-    border-color: hsla(var(--background-tertiary)) !important;
-  }
 }
 
 html {
@@ -112,10 +108,13 @@ h1 {
 
 .markdown-body {
   font-family: inherit;
-  color: inherit;
   @apply bg-transparent !important;
 
   /* Override gfm base styles */
+  a {
+    color: hsl(var(--primary));
+  }
+
   p {
     @apply mb-6;
   }
@@ -161,10 +160,6 @@ h1 {
     }
   }
 
-  & section :where(h2, h3, h4, h5, h6) {
-    @apply m-0 border-b-0 tracking-normal;
-  }
-
   & details {
     @apply rounded border border-gray-1 py-4 px-4;
 
@@ -192,14 +187,14 @@ h1 {
   }
 
   :not(pre) > code {
-    @apply font-mono text-sm py-0.5 px-1.5 rounded bg-stone-200;
+    @apply font-mono text-sm py-0.5 px-1.5 rounded;
   }
 }
 
 pre:has(code.highlight),
 pre.highlight:has(code) {
   @apply px-4 py-8 max-sm:-mx-4 border-x-0 sm:border sm:px-8
-    max-sm:!rounded-none;
+    max-sm:!rounded-none border-foreground-tertiary;
   overflow-x: auto;
 }
 
@@ -483,12 +478,6 @@ body {
   @apply mb-0;
 }
 
-.markdown-body .highlight pre,
-.markdown-body pre {
-  @apply bg-slate-50 dark:border-background-tertiary
-    dark:bg-background-secondary;
-}
-
 /* Custom DDOC styles for the Deno documentation */
 .ddoc {
   @apply pt-0 !important;
@@ -501,26 +490,13 @@ body {
     }
   }
 
-  #categoryPanel {
-    @apply border-r border-foreground-tertiary;
-    @apply pt-4 !important;
-
-    & li:hover {
-      @apply bg-background-primary text-primary rounded-md !important;
-      > a {
-        @apply no-underline !important;
-      }
-    }
-    .active {
-      @apply bg-background-secondary text-foreground-secondary rounded-md
-        !important;
-    }
+  .section {
+    border-bottom: 1px solid hsl(var(--foreground-tertiary));
+    padding-bottom: 1rem;
   }
 
-  .contextLink {
-    @apply text-primary !important;
-    /* 40% opacity of for decoration color primary */
-    text-decoration-color: rgba(9, 107, 218, 0.4) !important;
+  .section:last-child {
+    border: 0;
   }
 
   .documentNavigation {
@@ -552,10 +528,6 @@ body {
       @apply border-gray-000 !important;
     }
 
-    /* This comes from gfm css, should be replaced with something in our color palette once we establish it. */
-    :not(pre) > code {
-      @apply bg-foreground-quaternary hover:bg-foreground-tertiary !important;
-    }
     & a:not(.no-color) {
       @apply text-primary !important;
     }
@@ -570,18 +542,8 @@ body {
   }
 }
 
-@media (min-width: 640px) {
-  .ddoc .markdown-body {
-    max-width: 640px;
-  }
-}
-@media (min-width: 768px) {
-  .ddoc .markdown-body {
-    max-width: 768px;
-  }
-}
 @media (min-width: 1024px) {
-  .ddoc .markdown-body {
+  .ddoc .markdown-body p {
     max-width: 75ch;
   }
 }

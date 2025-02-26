@@ -16,11 +16,15 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
 
   const isReference = data.url.startsWith("/api/");
   const isExamples = data.url.startsWith("/examples/");
+  const isExampleScript = (data.page.data.content as { type?: string })?.type;
   const isHome = data.url === "/";
 
   return (
-    <div id="content" className="content">
-      <div class="px-4 sm:px-5 md:px-6 w-full max-w-[60rem] mx-auto">
+    <div
+      id="content"
+      className={isExampleScript ? "examples-content" : "content"}
+    >
+      <div class="px-4 sm:px-5 md:px-6 w-full mx-auto">
         <article class="mx-auto">
           {(!isExamples && !isHome && !isReference) && (
             <data.comp.Breadcrumbs
