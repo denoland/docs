@@ -29,7 +29,11 @@
     "serve:prod": {
       "description": "Build, serve, and watch just the APIs section of the docs",
       "command": "BUILD_TYPE=FULL deno task serve"
-    }
+    },
+    "serve:style": {
+      "description": "Build, serve, and watch just the styles and styleguide",
+      "command": "deno task lume -s --config=_config-styleguide.ts"
+    },
   },
   "compilerOptions": {
     "types": [

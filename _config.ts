@@ -100,6 +100,9 @@ const site = lume(
   },
 );
 
+// ignore some folders that have their own build tasks
+// site.ignore("styleguide");
+
 site.copy("static", ".");
 site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");
