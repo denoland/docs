@@ -194,7 +194,7 @@ h1 {
 pre:has(code.highlight),
 pre.highlight:has(code) {
   @apply px-4 py-8 max-sm:-mx-4 border-x-0 sm:border sm:px-8
-    max-sm:!rounded-none;
+    max-sm:!rounded-none border-foreground-tertiary;
   overflow-x: auto;
 }
 
