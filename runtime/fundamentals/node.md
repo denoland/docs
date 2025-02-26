@@ -16,8 +16,8 @@ oldUrl:
 - /runtime/manual/node/private_registries
 ---
 
-- **Deno is fully Node-compatible**. Virtually any modern Node project will run
-  in Deno with little or no change!
+- **Deno is Node-compatible**. Most Node projects will run in Deno with little
+  or no change!
 - **Deno supports virtually all npm packages**. Just use the `npm:` specifier in
   the import, and Deno takes care of the rest.
 
