@@ -18,7 +18,7 @@ oldUrl:
 
 - **Deno is Node-compatible**. Most Node projects will run in Deno with little
   or no change!
-- **Deno supports virtually all npm packages**. Just use the `npm:` specifier in
+- **Deno supports npm packages**. Just use the `npm:` specifier in
   the import, and Deno takes care of the rest.
 
 For example, here's how you'd import Hono from npm in a Deno project:
