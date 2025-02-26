@@ -183,6 +183,9 @@ site.ignore(
   // "subhosting",
 );
 
+// the default layout if no other layout is specified
+site.data("layout", "doc.tsx");
+
 // Do more expensive operations if we're building the full site
 if (Deno.env.get("BUILD_TYPE") == "FULL") {
   // Use Lume's built in date function to get the last modified date of the file
