@@ -1,6 +1,6 @@
 ---
-title: "OG images"
-description: "examples of OG images in the Deno documentation site"
+title: "OG images could potentially have a really long title"
+description: "Examples of OG images in the Deno documentation site. What if this was super long?"
 ---
 
 ## Default OG image
