@@ -18,8 +18,10 @@ repository. These pages are not directly editable:
   [_commands_reference.json](https://github.com/denoland/docs/blob/main/runtime/reference/cli/_commands_reference.json).
 - Pages for individual [Lint rules](/lint/) reside in the
   [Deno docs repository](https://github.com/denoland/docs/) but direct edit
-  links are broken [at the moment](https://github.com/denoland/docs/issues/1511). In the
-  meantime, check thed [main/lint/rules](https://github.com/denoland/docs/tree/main/lint/rules)
+  links are broken
+  [at the moment](https://github.com/denoland/docs/issues/1511). In the
+  meantime, check the
+  [main/lint/rules](https://github.com/denoland/docs/tree/main/lint/rules)
   directory.
 
 If you find an issue with one of these pages, you can either submit a pull
