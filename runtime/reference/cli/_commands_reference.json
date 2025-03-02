@@ -184,7 +184,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -579,7 +579,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -1053,7 +1053,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -1420,7 +1420,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -1689,7 +1689,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -1992,7 +1992,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -2681,7 +2681,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -2878,7 +2878,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -3200,7 +3200,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -3424,7 +3424,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -3983,7 +3983,7 @@
           "short": null,
           "long": "ext",
           "required": false,
-          "help": "Specify the file extension to lint when reading from stdin.For example, use `jsx` to lint JSX files or `tsx` for TSX files.This argument is necessary because stdin input does not automatically infer the file type.Example usage: `cat file.jsx | deno lint - --ext=jsx`.",
+          "help": "Specify the file extension to lint when reading from stdin. For example, use `jsx` to lint JSX files or `tsx` for TSX files. This argument is necessary because stdin input does not automatically infer the file type. Example usage: `cat file.jsx | deno lint - --ext=jsx`.",
           "help_heading": null,
           "usage": "--ext=<EXT>"
         },
@@ -4037,7 +4037,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4171,7 +4171,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4440,7 +4440,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4709,7 +4709,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4951,7 +4951,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
