@@ -14,9 +14,14 @@ repository. These pages are not directly editable:
 - The [API reference](/api/deno/) pages are generated from type definitions in
   the Deno repository.
 - The [CLI reference](/runtime/reference/cli/) pages for each individual command
-  are generated from source files in the Deno repository.
+  are generated from source files in the Deno repository. Check
+  [_commands_reference.json](https://github.com/denoland/docs/blob/main/runtime/reference/cli/_commands_reference.json).
+- Pages for individual [Lint rules](/lint/) reside in the [Deno docs
+  repository](https://github.com/denoland/docs/) but direct edit links are broken
+  [at the moment](https://github.com/denoland/docs/issues/1511). In the meantime,
+  check that https://github.com/denoland/docs/tree/main/lint/rules directory.
 
 If you find an issue with one of these pages, you can either submit a pull
-request to the Deno repository. Or raise an issue in the
+request to the Deno repository, or raise an issue in the
 [Deno docs repository](https://github.com/denoland/docs/issues) and we'll get it
 fixed.
