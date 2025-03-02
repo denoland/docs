@@ -15,8 +15,8 @@ const generateConfigFileForTags = (tags: string[]) => {
   "lint": {
     "rules": {
       "tags": ["${tags[0]}"] // ...or ${
-      tags.slice(1).map((tag) => `"${tag}"`).join(", ")
-    }
+    tags.slice(1).map((tag) => `"${tag}"`).join(", ")
+  }
     }
   }
 }`;
