@@ -194,11 +194,11 @@ For example:
 This configuration will:
 
 - only lint files in the `src/` directory,
-- will not lint files in the `src/testdata/` directory or any TypeScript files
+- not lint files in the `src/testdata/` directory or any TypeScript files
   in the `src/fixtures/` directory.
-- specifies that the recommended linting rules should be applied,
-- adds the `ban-untagged-todo`
-- removes the `no-unused-vars` rule excluded.
+- specify that the recommended linting rules should be applied,
+- add the `ban-untagged-todo`, and
+- exclude the `no-unused-vars` rule.
 
 You can find a full list of available linting rules in the
 [List of rules](/lint/) documentation page.
