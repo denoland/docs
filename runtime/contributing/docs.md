@@ -16,10 +16,11 @@ repository. These pages are not directly editable:
 - The [CLI reference](/runtime/reference/cli/) pages for each individual command
   are generated from source files in the Deno repository. Check
   [_commands_reference.json](https://github.com/denoland/docs/blob/main/runtime/reference/cli/_commands_reference.json).
-- Pages for individual [Lint rules](/lint/) reside in the [Deno docs
-  repository](https://github.com/denoland/docs/) but direct edit links are broken
-  [at the moment](https://github.com/denoland/docs/issues/1511). In the meantime,
-  check that https://github.com/denoland/docs/tree/main/lint/rules directory.
+- Pages for individual [Lint rules](/lint/) reside in the
+  [Deno docs repository](https://github.com/denoland/docs/) but direct edit
+  links are broken [at the moment](https://github.com/denoland/docs/issues/1511). In the
+  meantime, check thed [main/lint/rules](https://github.com/denoland/docs/tree/main/lint/rules)
+  directory.
 
 If you find an issue with one of these pages, you can either submit a pull
 request to the Deno repository, or raise an issue in the
