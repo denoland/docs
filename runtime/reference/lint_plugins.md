@@ -257,8 +257,8 @@ particular input.
 
 Let's use the example plugin, defined above:
 
-```ts title="my-plugin-test.ts"
-import { assert, assertEquals } from "jsr:@std/assert";
+```ts title="my-plugin_test.ts"
+import { assertEquals } from "jsr:@std/assert";
 import myPlugin from "./my-plugin.ts";
 
 Deno.test("my-plugin", () => {
@@ -272,6 +272,7 @@ Deno.test("my-plugin", () => {
   const d = diagnostics[0];
   assertEquals(d.id, "my-plugin/my-rule");
   assertEquals(d.message, "should be _b");
+  assertEquals(d.fix, [{ range: [6, 8], text: "_b" }]);
 });
 ```
 
