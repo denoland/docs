@@ -52,7 +52,7 @@ All the typings are available under the `Deno.lint` namespace.
 :::
 
 ```ts title="my-plugin.ts"
-export default {
+const plugin: Deno.lint.Plugin = {
   // The name of your plugin. Will be shown in error output
   name: "my-plugin",
   // Object with rules. The property name is the rule name and
@@ -83,7 +83,8 @@ export default {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
+export default plugin;
 ```
 
 ## Using selectors to match nodes
@@ -94,7 +95,7 @@ express via a selector, similar to CSS selectors. By using a string as the
 property name in the returned visitor object, we can specify a custom selector.
 
 ```ts title="my-plugin.ts"
-export default {
+const plugin: Deno.lint.Plugin = {
   name: "my-plugin",
   rules: {
     "my-rule": {
@@ -112,7 +113,8 @@ export default {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
+export default plugin;
 ```
 
 Note, that we can always refine our match further in JavaScript if the matching
@@ -202,7 +204,7 @@ can hook into the linter via the `destroy()` hook. It is called after a file has
 been linted and just before the plugin context is destroyed.
 
 ```ts title="my-plugin.ts"
-export default {
+const plugin: Deno.lint.Plugin = {
   name: "my-plugin",
   rules: {
     "my-rule": {
@@ -216,7 +218,8 @@ export default {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
+export default plugin;
 ```
 
 :::caution
