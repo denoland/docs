@@ -44,7 +44,10 @@ export default function LintRulesIndex(
           <a href="/runtime/reference/cli/lint/">
             <code>deno lint</code>
           </a>{" "}
-          command.
+          command. You can enable sets of rules in <code>deno.json(c)</code>
+          {" "}
+          by adding their tags (e.g. <code>recommended</code>,{" "}
+          <code>react</code>) to the <code>lint.rules.tags</code> array.
         </p>
         <input
           type="text"
