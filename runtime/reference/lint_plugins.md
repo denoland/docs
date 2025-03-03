@@ -260,7 +260,7 @@ import myPlugin from "./my-plugin.ts";
 
 Deno.test("my-plugin", () => {
   const diagnostics = Deno.lint.runPlugin(
-    plugin,
+    myPlugin,
     "main.ts", // Dummy filename, file doesn't need to exist.
     "const _a = 'a';",
   );
