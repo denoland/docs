@@ -17,7 +17,7 @@ export default function (data: Lume.Data) {
                     <a
                       href={item.href}
                       className="sub-nav-link blocklink"
-                      data-active={item.active}
+                      {...(item.active ? { "data-active": true } : {})}
                     >
                       {item.name}
                     </a>
@@ -42,7 +42,7 @@ export default function (data: Lume.Data) {
                 <a
                   href={nav.href}
                   className="sub-nav-heading-link"
-                  data-active={nav.href === currentUrl}
+                  {...(nav.href === currentUrl ? { "data-active": true } : {})}
                 >
                   {nav.title}
                 </a>
@@ -79,8 +79,9 @@ export default function (data: Lume.Data) {
                             <a
                               href={subItem.href}
                               className="sub-nav-link blocklink"
-                              data-active={subItem.href.replace(/\/$/, "") ===
-                                currentUrl}
+                              {...(subItem.href === currentUrl
+                                ? { "data-active": true }
+                                : {})}
                             >
                               {subItem.title}
                             </a>
@@ -93,7 +94,9 @@ export default function (data: Lume.Data) {
                     <a
                       href={item.href}
                       className="sub-nav-link blocklink"
-                      data-active={item.href.replace(/\/$/, "") === currentUrl}
+                      {...(item.href === currentUrl
+                        ? { "data-active": true }
+                        : {})}
                     >
                       {item.title}
                     </a>
