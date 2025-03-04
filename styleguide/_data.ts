@@ -5,16 +5,20 @@ export const sidebar = [
     title: "Style Guide",
     href: "/styleguide/",
     items: [
-      { 
+      {
         title: "Typography",
         href: "/styleguide/typography/",
+      },
+      {
+        title: "Components",
+        href: "/styleguide/components/",
       },
       {
         title: "OG images",
         href: "/styleguide/og/",
       },
     ],
-  }
+  },
 ] satisfies Sidebar;
 
 export const sectionTitle = "Style Guide";
