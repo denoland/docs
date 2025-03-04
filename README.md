@@ -31,6 +31,28 @@ deno task prod
 Which will start a Deno server on [localhost:8000](http://localhost:8000) used
 in production, which handles redirects.
 
+## Developing styles and components
+
+We are increasingly making use of global components to improve consistency and
+reduce duplication. A styleguide has been created to preview and develop these
+components and is generated during the build process.
+
+You can browse to it in the site at `/styleguide/`
+
+To avoid longer build times of rthe sntire site and all of its content while
+developing UI elements and components, a styulguide-only build is avaiable which
+performs the initial global configureation for the site, but then only generates
+and wacthes for changes in the `/styleguide` folder of the repo.
+
+To work on just the components and UI elements and review them within
+styleguide, run:
+
+```console
+deno task serve:style
+```
+
+Then browse to the styleguide section of the site at `/styleguide/`
+
 ## Editing content
 
 The actual content of the docs site is found mostly in these folders:
