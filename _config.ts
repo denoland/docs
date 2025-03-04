@@ -47,7 +47,7 @@ const site = lume(
         }),
         apiDocumentContentTypeMiddleware,
       ],
-      page404: "/404",
+      page404: "/404/",
     },
     watcher: {
       ignore: [
@@ -180,6 +180,7 @@ site.ignore(
   // "deploy",
   // "runtime",
   // "subhosting",
+  // "404",
 );
 
 // the default layout if no other layout is specified
