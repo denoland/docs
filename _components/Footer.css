@@ -6,9 +6,12 @@ footer {
 
 .footer-nav {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2rem;
+  flex-direction: column;
+  row-gap: 3rem;
+}
+
+.footer-section {
+  min-width: 170px;
 }
 
 .footer-section-heading {
@@ -40,13 +43,18 @@ footer {
   color: hsl(var(--foreground-secondary));
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 500px) {
   footer {
-    padding: 2vw 3vw;
+    padding: 2rem 5vw;
   }
-
+  
   .footer-nav {
-    max-width: 1200px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1000px;
+    column-gap: clamp(4rem, 5vw, 65px);
+    row-gap: 4rem;
     margin: 0 auto;
   }
 }
