@@ -138,7 +138,7 @@ behaves exactly the same as using the `--import-map` option, with the same
 requirements for including both entries for each module as shown above.
 
 In contrast, `deno.json` extends the import maps standard. When you use the
-imports field in `deno.json` you only need to specify the module specifier
+imports field in `deno.json`, you only need to specify the module specifier
 without the trailing `/`:
 
 ```json title="deno.json"
