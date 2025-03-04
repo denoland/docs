@@ -97,7 +97,6 @@ export default function (data: Lume.Data) {
                       {...(item.href === currentUrl
                         ? { "data-active": true }
                         : {})}
-
                     >
                       {item.title}
                     </a>
