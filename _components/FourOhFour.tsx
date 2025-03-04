@@ -15,4 +15,3 @@ export default function () {
 }
 
 export const css = "@import './_components/FourOhFour.css';";
-

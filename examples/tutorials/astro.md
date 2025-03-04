@@ -1,6 +1,7 @@
 ---
 title: "Build Astro with Deno"
 url: /examples/astro_tutorial/
+description: "Learn how to build a simple Astro project using Deno"
 ---
 
 [Astro](https://astro.build/) is a modern web framework focused on
