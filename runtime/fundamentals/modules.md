@@ -133,10 +133,13 @@ instead of `jsr:@std/async`):
 }
 ```
 
+An `import_map.json` file referenced by the `importMap` field in `deno.json`
+behaves exactly the same as using the `--import-map` option, with the same
+requirements for including both entries for each module as shown above.
+
 In contrast, `deno.json` extends the import maps standard. When you use the
-imports field in `deno.json` or reference an `import_map.json` file via the
-`importMap` field, you only need to specify the module specifier without the
-trailing `/`:
+imports field in `deno.json`, you only need to specify the module specifier
+without the trailing `/`:
 
 ```json title="deno.json"
 {

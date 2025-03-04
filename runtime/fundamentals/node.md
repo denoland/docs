@@ -16,12 +16,20 @@ oldUrl:
 - /runtime/manual/node/private_registries
 ---
 
-Modern Node.js projects will run in Deno with little to no reworking required.
-However, there are some key differences between the two runtimes that you can
-take advantage of to make your code simpler and smaller when migrating your
-Node.js projects to Deno.
+- **Deno is Node-compatible**. Most Node projects will run in Deno with little
+  or no change!
+- **Deno supports npm packages**. Just use the `npm:` specifier in the import,
+  and Deno takes care of the rest.
 
-<a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
+For example, here's how you'd import Hono from npm in a Deno project:
+
+```ts
+import { Hono } from "npm:hono";
+```
+
+That's all you really need to know to get started! However, there are some key
+differences between the two runtimes that you can take advantage of to make your
+code simpler and smaller when migrating your Node.js projects to Deno.
 
 ## Using Node's built-in modules
 
@@ -57,6 +65,8 @@ error: Relative import path "os" not prefixed with / or ./ or ../
 
 The same hints and additional quick-fixes are provided by the Deno LSP in your
 editor.
+
+<a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
 
 ## Using npm packages
 
@@ -669,7 +679,7 @@ that might look like:
 ```sh
 error[no-constant-condition]: Use of a constant expressions as conditions is not allowed.
  --> /my-project/bar.ts:1:5
-  | 
+  |
 1 | if (true) {
   |     ^^^^
   = hint: Remove the constant expression

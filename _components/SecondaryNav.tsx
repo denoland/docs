@@ -1,6 +1,6 @@
 export default function (data: Lume.Data) {
   const sectionData = data.sectionData;
-  const currentUrl = data.currentUrl;
+  const currentUrl = data.currentUrl.replace(/\/$/, "");
   const isReference = currentUrl.startsWith("/api/");
   const isDenoAPI = currentUrl.startsWith("/api/deno/");
 
