@@ -4,7 +4,6 @@ export const layout = "layout.tsx";
 
 export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   let file = data.page.sourcePath;
-
   const sidebar = data.sidebar;
   let renderedCommand = null;
 
@@ -20,6 +19,8 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   const isLintRule = data.url.startsWith("/lint/rules/");
   const isHome = data.url === "/";
 
+  const hasBreadcrumbs = !isExamples && !isHome && !isReference;
+
   if (isLintRule) {
     file = `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`;
   }
@@ -27,11 +28,11 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   return (
     <div
       id="content"
-      className={isExampleScript ? "examples-content" : "content"}
+      className={isExampleScript ? "wide-content" : "content"}
     >
       <div class="px-4 sm:px-5 md:px-6 w-full mx-auto">
         <article class="mx-auto">
-          {(!isExamples && !isHome && !isReference) && (
+          {hasBreadcrumbs && (
             <data.comp.Breadcrumbs
               title={data.title!}
               sidebar={sidebar}
