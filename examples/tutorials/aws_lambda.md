@@ -1,5 +1,6 @@
 ---
 title: "How to Deploy Deno to AWS Lambda"
+description: "Step-by-step tutorial on deploying Deno applications to AWS Lambda. Learn about Docker containerization, ECR repositories, function configuration, and how to set up serverless Deno apps on AWS."
 url: /examples/aws_lambda_tutorial/
 oldUrl:
 - /runtime/tutorials/aws_lambda/

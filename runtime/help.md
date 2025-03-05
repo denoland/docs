@@ -1,6 +1,6 @@
 ---
 title: "Where to get help"
-description: "Stuck? Lost? Get Help from the Deno Community."
+description: "Guide to getting help with Deno. Find community resources, support channels, discussion forums, and how to engage with the Deno community for troubleshooting and assistance."
 oldUrl: /runtime/manual/help/
 ---
 
