@@ -17,7 +17,7 @@ it's secure by default.
 
 Deno was created by Ryan Dahl, the creator of Node.js, and in 2018, he gave
 [a famous talk at JSConf EU](https://www.youtube.com/watch?v=M3BM9TB-8yA) about
-regrets that he had about Node. And Deno provides solutions to all of them. W
+regrets that he had about Node. And Deno provides solutions to all of them.
 
 With the hindsight of someone who's been there, Deno gives us a runtime that's
 thought a lot about the details. Details like TypeScript support by default. You
