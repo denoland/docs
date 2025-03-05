@@ -289,8 +289,9 @@ provided in the **Deno > Testing: Args** setting.
 
 The extension provides integration with the built-in VS Code debugger. You can
 generate a configuration by: going to `Run and Debug` panel, clicking
-`create a launch.json file` and selecting `Deno` option from the available
-debugger options.
+`create a launch.json file` and selecting the `Deno` option from the available
+debugger options. (The generated `type` of the configuration will be `node`;
+that's ok.)
 
 ## Tasks
 

@@ -10,6 +10,10 @@ export const sidebar = [
         href: "/styleguide/typography/",
       },
       {
+        title: "Components",
+        href: "/styleguide/components/",
+      },
+      {
         title: "OG images",
         href: "/styleguide/og/",
       },

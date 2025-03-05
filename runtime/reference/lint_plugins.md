@@ -53,7 +53,7 @@ All the typings are available under the `Deno.lint` namespace.
 :::
 
 ```ts title="my-plugin.ts"
-export default {
+const plugin: Deno.lint.Plugin = {
   // The name of your plugin. Will be shown in error output
   name: "my-plugin",
   // Object with rules. The property name is the rule name and
@@ -84,7 +84,8 @@ export default {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
+export default plugin;
 ```
 
 ## Using selectors to match nodes
@@ -95,7 +96,7 @@ express via a selector, similar to CSS selectors. By using a string as the
 property name in the returned visitor object, we can specify a custom selector.
 
 ```ts title="my-plugin.ts"
-export default {
+const plugin: Deno.lint.Plugin = {
   name: "my-plugin",
   rules: {
     "my-rule": {
@@ -113,7 +114,8 @@ export default {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
+export default plugin;
 ```
 
 Note, that we can always refine our match further in JavaScript if the matching
@@ -203,7 +205,7 @@ can hook into the linter via the `destroy()` hook. It is called after a file has
 been linted and just before the plugin context is destroyed.
 
 ```ts title="my-plugin.ts"
-export default {
+const plugin: Deno.lint.Plugin = {
   name: "my-plugin",
   rules: {
     "my-rule": {
@@ -217,7 +219,8 @@ export default {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
+export default plugin;
 ```
 
 :::caution
@@ -255,18 +258,22 @@ particular input.
 
 Let's use the example plugin, defined above:
 
-```ts title="my-plugin-test.ts"
-import { assert, assertEquals } from "jsr:@std/assert";
+```ts title="my-plugin_test.ts"
+import { assertEquals } from "jsr:@std/assert";
 import myPlugin from "./my-plugin.ts";
 
 Deno.test("my-plugin", () => {
-  const diagnostics = Deno.lint.runPlugin(plugin, "main.ts", "const _a = 'a';");
+  const diagnostics = Deno.lint.runPlugin(
+    myPlugin,
+    "main.ts", // Dummy filename, file doesn't need to exist.
+    "const _a = 'a';",
+  );
 
   assertEquals(diagnostics.length, 1);
   const d = diagnostics[0];
   assertEquals(d.id, "my-plugin/my-rule");
   assertEquals(d.message, "should be _b");
-  assert(typeof d.fix === "function");
+  assertEquals(d.fix, [{ range: [6, 8], text: "_b" }]);
 });
 ```
 
@@ -281,4 +288,4 @@ Trying to use it with any other subcommand will throw an error.
 
 Consult [the API reference](/api/deno/) for more information on
 [`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) and
-[`Deno.lint.Diagnostic`](/api/deno/~/Deno.lint.runPlugin).
+[`Deno.lint.Diagnostic`](/api/deno/~/Deno.lint.Diagnostic).
