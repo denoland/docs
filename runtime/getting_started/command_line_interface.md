@@ -198,7 +198,7 @@ argument to deno run:
 > deno run --check main.ts
 ```
 
-This flag affects `deno run`, `deno eval`, `deno repl`. The following table
+This flag affects `deno run` and `deno eval`. The following table
 describes the type-checking behavior of various subcommands. Here "Local" means
 that only errors from local code will induce type-errors, modules imported from
 https URLs (remote) may have type errors that are not reported. (To turn on
