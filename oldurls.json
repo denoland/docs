@@ -75,5 +75,6 @@
   "/examples/web-workers": "/examples/web_workers",
   "/examples/writing-files": "/examples/writing_files",
   "/examples/writing-tests": "/examples/writing_tests",
-  "/api/deno/": "/api/deno/~/Deno"
+  "/api/deno/": "/api/deno/~/Deno",
+  "/api/web/": "/api/web/all_symbols"
 }
