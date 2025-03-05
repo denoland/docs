@@ -1,5 +1,7 @@
 ---
 title: "Security and permissions"
+description: "A guide to Deno's security model and permissions system. Learn about secure defaults, permission flags, runtime prompts, and how to safely execute code with granular access controls."
+
 oldUrl:
   - /runtime/manual/basics/permissionsDeno/
   - /manual/basics/permissions

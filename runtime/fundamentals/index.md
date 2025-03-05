@@ -1,5 +1,6 @@
 ---
 title: Fundamentals
+description: "The core guide to Deno's fundamental concepts and features. Learn about built-in tooling, TypeScript support, Node.js compatibility, security model, and modern JavaScript features that make Deno powerful and developer-friendly."
 ---
 
 Deno is designed with the developer in mind, aiming to provide a smooth and
