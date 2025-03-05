@@ -25,7 +25,7 @@ const messageBuffer = new TextEncoder().encode(message);
 // we'll need to do a little more work.
 const hashBuffer = await crypto.subtle.digest("SHA-256", messageBuffer);
 
-// We can decode this into a string using the standard
+// We can encode this into a string using the standard
 // library's encodeHex method.
 import { encodeHex } from "jsr:@std/encoding/hex";
 const hash = encodeHex(hashBuffer);
