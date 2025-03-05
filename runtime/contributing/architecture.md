@@ -1,6 +1,6 @@
 ---
-title: "Internal Details"
-oldUrl: /runtime/manual/references/contributing/architecture/
+title: "Architecture Overview"
+description: "Deep dive into Deno's internal architecture, explaining core components like the runtime, compiler, and security sandbox. Learn how Deno processes requests and executes JavaScript/TypeScript code."
 ---
 
 ## Deno and Linux analogy

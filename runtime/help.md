@@ -1,9 +1,10 @@
 ---
 title: "Where to get help"
+description: "Stuck? Lost? Get Help from the Deno Community."
 oldUrl: /runtime/manual/help/
 ---
 
-Stuck? Lost? Get Help from the Community.
+Stuck? Lost? Get Help from the Deno Community.
 
 ## [Community Discord](https://discord.gg/deno)
 

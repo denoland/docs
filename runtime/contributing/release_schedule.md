@@ -1,5 +1,6 @@
 ---
 title: "Release Schedule"
+description: "Overview of Deno's release cycle and versioning process. Learn about stable releases, canary builds, and how to manage different Deno versions including upgrading to specific builds."
 oldUrl: /runtime/manual/references/contributing/release_schedule/
 ---
 
