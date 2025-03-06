@@ -1,7 +1,6 @@
 ---
 title: "WebAssembly"
 description: "A guide to using WebAssembly (Wasm) in Deno. Learn about module imports, type checking, streaming APIs, optimization techniques, and how to work with various programming languages that compile to Wasm."
-
 oldUrl:
   - /runtime/manual/getting_started/webassembly/
   - /runtime/manual/runtime/webassembly/
