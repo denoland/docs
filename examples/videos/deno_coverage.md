@@ -28,7 +28,7 @@ deno coverage ./coverage
 
 to see a coverage report.
 
-In Dino 1.39, Dino coverage was updated in two ways; first it now outputs a
+In Deno 1.39, `deno coverage` was updated in two ways; first it now outputs a
 concise summary table and second, if you add the `--html` flag:
 
 ```sh
