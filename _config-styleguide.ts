@@ -9,6 +9,8 @@ site.ignore((path) => {
 
 site.data("openGraphLayout", "/open_graph/default.jsx");
 site.data("openGraphLayout", "/examples", "/open_graph/examples.jsx");
+site.data("openGraphColor", "#32f59a");
+site.data("openGraphColor", "/examples", "#fff");
 site.use(ogImages());
 
 export default site;
