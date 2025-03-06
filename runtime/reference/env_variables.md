@@ -78,7 +78,7 @@ This can be useful when you want to vary a task based on an environment
 variable, and can be helpfully combined with
 [`deno task`](/runtime/reference/cli/task/) commands like so:
 
-```json title="deno.json"
+```jsonc title="deno.json"
 {
 
   ...
