@@ -2,7 +2,7 @@
 import site from "./_config.ts";
 import ogImages from "lume/plugins/og_images.ts";
 
-// Ignore everythig not in the styleguide folder
+// Ignore everything not in the styleguide folder
 site.ignore((path) => {
   return path.match(/^\/styleguide.*$/) === null;
 });

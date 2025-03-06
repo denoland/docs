@@ -195,7 +195,30 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
   // Generate Open Graph images
   site.data("openGraphLayout", "/open_graph/default.jsx");
   site.data("openGraphLayout", "/examples", "/open_graph/examples.jsx");
-  site.use(ogImages());
+  site.use(ogImages({
+    satori: {
+      fonts: [
+        {
+          name: "inter",
+          weight: 400,
+          style: "normal",
+          data: await read(
+            "https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/src/inter/Inter-Regular.woff",
+            true,
+          ),
+        },
+        {
+          name: "inter",
+          weight: 700,
+          style: "normal",
+          data: await read(
+            "https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/src/inter/Inter-SemiBold.woff",
+            true,
+          ),
+        },
+      ],
+    }
+  }));
 }
 
 site.scopedUpdates(
