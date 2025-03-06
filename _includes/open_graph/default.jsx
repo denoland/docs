@@ -1,12 +1,13 @@
 /** @jsxImportSource npm:react@18.2.0 */
 
-export default function ({ title, description }) {
+export default function ({ title, description, openGraphColor }) {
   if (!title) {
     title = "Deno documentation";
   }
   if (!description) {
-    description = "The official Deno docs. Learn more at docs.deno.com";
+    description = "Learn more at docs.deno.com";
   }
+
   return (
     <div
       style={{
@@ -15,7 +16,7 @@ export default function ({ title, description }) {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        backgroundColor: "#32f59a",
+        backgroundColor: openGraphColor || "#32f59a",
         fontSize: 26,
         fontWeight: 400,
         padding: "90px",

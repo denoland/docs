@@ -33,6 +33,7 @@ import redirectsMiddleware, {
 } from "./middleware/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
 import { log } from "lume/core/utils/log.ts";
+import { sidebar } from "./examples/_data.ts";
 
 const site = lume(
   {
@@ -195,6 +196,8 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
   // Generate Open Graph images
   site.data("openGraphLayout", "/open_graph/default.jsx");
   site.data("openGraphLayout", "/examples", "/open_graph/examples.jsx");
+  site.data("openGraphColor", "#32f59a");
+  site.data("openGraphColor", "/examples", "#fff");
   site.use(ogImages());
 }
 
