@@ -19,6 +19,7 @@ export default function ({ title, description }) {
         fontSize: 26,
         fontWeight: 400,
         padding: "90px",
+        textWrap: "balance",
       }}
     >
       <h1
@@ -43,7 +44,7 @@ export default function ({ title, description }) {
       <p
         style={{
           marginTop: 0,
-          width: "70%",
+          width: "72%",
           lineHeight: "1.6em",
         }}
       >
