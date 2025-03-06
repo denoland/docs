@@ -217,7 +217,7 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
           ),
         },
       ],
-    }
+    },
   }));
 }
 
