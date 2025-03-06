@@ -1,5 +1,6 @@
 ---
 title: "Build a React app with create-vite"
+description: "A tutorial on building React applications with Deno and Vite. Learn how to set up a project, configure TypeScript, add API endpoints, implement routing, and deploy your React app using modern development tools."
 url: /examples/create_react_tutorial/
 oldUrl:
 - /runtime/tutorials/how_to_with_npm/create-react/
