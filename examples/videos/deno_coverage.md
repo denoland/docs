@@ -39,4 +39,4 @@ the coverage tool generates static HTML so that you can explore your coverage in
 a browser.
 
 We got more plans for Deno coverage, like simplifying the steps into a single
-command and more thanks for watching!
+command and more.
