@@ -80,6 +80,9 @@ variable, and can be helpfully combined with
 
 ```json title="deno.json"
 {
+
+  ...
+  
   "tasks": {
     "build:full": {
       "description": "Build the site with all features",
