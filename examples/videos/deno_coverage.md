@@ -13,7 +13,7 @@ We updated `deno coverage` in 1.39 with a better output and HTML generation.
 
 If you're using `deno test`, have you checked out `deno coverage`?
 
-Dino coverage is a great way to see how much test coverage you have, just add
+`deno coverage` is a great way to see how much test coverage you have, just add
 the coverage flag to Deno test:
 
 ```sh
