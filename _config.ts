@@ -4,11 +4,11 @@ import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
 import mdx from "lume/plugins/mdx.ts";
+import ogImages from "lume/plugins/og_images.ts";
 import postcss from "lume/plugins/postcss.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
-import ogImages from "lume/plugins/og_images.ts";
 
 import tw from "tailwindcss";
 import tailwindConfig from "./tailwind.config.js";
@@ -18,6 +18,7 @@ import Prism from "./prism.ts";
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
+import { log } from "lume/core/utils/log.ts";
 import anchor from "npm:markdown-it-anchor@9";
 import { full as emoji } from "npm:markdown-it-emoji@3";
 import admonitionPlugin from "./markdown-it/admonition.ts";
@@ -32,8 +33,6 @@ import redirectsMiddleware, {
   toFileAndInMemory,
 } from "./middleware/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
-import { log } from "lume/core/utils/log.ts";
-import { sidebar } from "./examples/_data.ts";
 
 const site = lume(
   {
@@ -196,7 +195,7 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
   // Generate Open Graph images
   site.data("openGraphLayout", "/open_graph/default.jsx");
   site.data("openGraphLayout", "/examples", "/open_graph/examples.jsx");
-  site.data("openGraphColor", "#32f59a");
+  site.data("openGraphColor", "#70ffaf");
   site.data("openGraphColor", "/examples", "#fff");
   site.use(ogImages());
 }
