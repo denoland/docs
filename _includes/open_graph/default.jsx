@@ -10,6 +10,25 @@ export default function ({ title, description, openGraphColor }) {
 
   const bgColor = openGraphColor || "#32f59a";
 
+  function lightenColor(hex, percent) {
+    hex = hex.replace(/^#/, "");
+
+    let num = parseInt(hex, 16);
+    let r = (num >> 16) & 0xFF;
+    let g = (num >> 8) & 0xFF;
+    let b = num & 0xFF;
+
+    r = Math.round(r + (255 - r) * (percent / 100));
+    g = Math.round(g + (255 - g) * (percent / 100));
+    b = Math.round(b + (255 - b) * (percent / 100));
+
+    // Convert the new RGB values back to a hex string
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b)
+      .toString(16)
+      .slice(1)
+      .toUpperCase();
+  }
+
   return (
     <div
       style={{
@@ -18,13 +37,13 @@ export default function ({ title, description, openGraphColor }) {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        background:
-          `linear-gradient(-45deg, #fff, #fff 15.5%, ${bgColor} 15.5%, #fff 200%)`,
+        background: `linear-gradient(-45deg, #fff, #fff 14%, ${bgColor} 14%, ${
+          lightenColor(bgColor, 60)
+        })`,
         fontSize: 26,
         fontWeight: 400,
         padding: "0 90px",
         textWrap: "balance",
-        border: "2px solid",
       }}
     >
       <p
@@ -73,8 +92,8 @@ export default function ({ title, description, openGraphColor }) {
         fill-rule="evenodd"
         style={{
           position: "absolute",
-          bottom: "2.5rem",
-          right: "2.5rem",
+          bottom: "2rem",
+          right: "2rem",
           width: "80px",
           height: "80px",
         }}
