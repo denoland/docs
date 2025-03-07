@@ -1,6 +1,9 @@
 ---
 title: "Building from Source"
 description: "Step-by-step guide for building Deno from source code. Learn how to set up your development environment and compile Deno for your target platform."
+oldUrl:
+ - /runtime/references/contributing/building_from_source/
+ - /runtime/manual/references/contributing/building_from_source/
 ---
 
 Below are instructions on how to build Deno from source. If you just want to use
