@@ -1,5 +1,6 @@
 ---
 title: "How to deploy to Google Cloud Run"
+description: "Step-by-step guide to deploying Deno applications on Google Cloud Run. Learn about Docker containerization, Artifact Registry configuration, GitHub Actions automation, and how to set up continuous deployment to Google Cloud."
 url: /examples/google_cloud_run_tutorial/
 oldUrl:
 - /runtime/manual/advanced/deploying_deno/google_cloud_run/

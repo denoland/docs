@@ -5,7 +5,7 @@ videoUrl: https://www.youtube.com/watch?v=oxVwTT-rZRo&list=PLvvLnBDNuTEov9EBIp3M
 layout: video.tsx
 ---
 
-## Description of video
+## Video description
 
 Deno wants to give developers the most browser-like programming environment
 possible. Deno uses web standard APIs, so if you're familiar with building for
