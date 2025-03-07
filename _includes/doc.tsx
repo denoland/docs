@@ -31,9 +31,13 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   return (
     <div
       id="content"
-      className={isExampleScript ? "examples-content" : "content"}
+      class={isExampleScript ? "" : "content"}
     >
-      <div class="px-4 sm:px-5 md:px-6 w-full mx-auto">
+      <div
+        class={`px-4 sm:px-5 md:px-6 w-full mx-auto 2xl:px-0 ${
+          isExampleScript ? "max-w-[75rem]" : "max-w-[40rem]"
+        }`}
+      >
         <article class="mx-auto">
           {(!isExamples && !isHome && !isReference) && (
             <data.comp.Breadcrumbs

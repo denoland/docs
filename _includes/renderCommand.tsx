@@ -89,7 +89,7 @@ export default function renderCommand(
 
         while (offset > 0) {
           line = lines.shift();
-          offset -= line.length;
+          offset -= line.length + 1;
         }
 
         if (START_AND_END_ANSI_RE.test(line.trim())) {

@@ -250,7 +250,7 @@ export default function () {
                     },
                     {
                       text: "WebSockets",
-                      href: "/api/deno/web-sockets",
+                      href: "/api/deno/websockets",
                     },
                     {
                       text: "View all Deno APIs",

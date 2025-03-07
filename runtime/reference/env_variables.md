@@ -66,6 +66,37 @@ console.log(Deno.env.get("GREETING")); // "Hello, world."
 Further documentation for `.env` handling can be found in the
 [@std/dotenv](https://jsr.io/@std/dotenv/doc) documentation.
 
+## Set a variable when running a command
+
+As with other CLI commands, you can set environment variables before running a
+command like so:
+
+```shell
+MY_VAR="my value" deno run main.ts
+```
+
+This can be useful when you want to vary a task based on an environment
+variable, and can be helpfully combined with
+[`deno task`](/runtime/reference/cli/task/) commands like so:
+
+```jsonc title="deno.json"
+{
+
+  ...
+  
+  "tasks": {
+    "build:full": {
+      "description": "Build the site with all features",
+      "command": "BUILD_TYPE=FULL deno run main.ts"
+    },
+    "build:light": {
+      "description": "Build the site without expensive operations",
+      "command": "BUILD_TYPE=LIGHT deno run main.ts"
+    }
+  }
+}
+```
+
 ## `std/cli`
 
 The Deno Standard Library has a [`std/cli` module](https://jsr.io/@std/cli) for

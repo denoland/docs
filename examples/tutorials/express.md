@@ -14,21 +14,37 @@ simple and unopinionated with a large ecosystem of middleware.
 This How To guide will show you how to create a simple API using Express and
 Deno.
 
-[View source here.](https://github.com/denoland/examples/tree/main/with-express)
+[View source here.](https://github.com/denoland/tutorial-with-express)
 
-## Create `main.ts`
+## Initialize a new deno project
 
-Let's create `main.ts`:
+In your commandline run the command to create a new starter project, then
+navigate into the project directory:
 
-```console
-touch main.ts
+```sh
+deno init my-express-project
+cd my-express-project
 ```
 
-In `main.ts`, let's create a simple server:
+## Install Express
+
+To install Express, we'll use the `npm:` module specifier. This specifier allows
+us to import modules from npm:
+
+```sh
+deno add npm:express
+```
+
+This will add the latest `express` package to the `imports` field in your
+`deno.json` file. Now you can import `express` in your code with
+`import express from "express";`.
+
+## Update `main.ts`
+
+In the `main.ts`, let's create a simple server:
 
 ```ts
-// @ts-types="npm:@types/express@4.17.15"
-import express from "npm:express@4.18.2";
+import express from "express";
 
 const app = express();
 
@@ -37,15 +53,43 @@ app.get("/", (req, res) => {
 });
 
 app.listen(8000);
+console.log(`Server is running on http://localhost:8000`);
 ```
 
-Let's run this server:
+You may notice that your editor is complaining about the `req` and `res`
+parameters. This is because Deno does not have types for the `express` module.
+To fix this, you can import the Express types file directly from npm. Add the
+following comment to the top of your `main.ts` file:
 
-```console
-deno run -A main.ts
+```ts
+// @ts-types="npm:@types/express@4.17.15"
 ```
 
-And point our browser to `localhost:8000`. You should see:
+This comment tells Deno to use the types from the `@types/express` package.
+
+## Run the server
+
+When you initialized the project, Deno set up a task which will run the main.ts
+file, you can see it in the `deno.json` file. Update the `dev` task to include
+the [`--allow-net`](/runtime/fundamentals/security/#network-access) flag:
+
+````jsonc
+{
+  "scripts": {
+    "dev": "deno run --allow-net main.ts"
+  }, 
+  ...
+}
+
+This will allow the project to make network requests. You can [read more about permissions flags](/runtime/fundamentals/security/).
+
+Now you can run the server with:
+
+```sh
+deno run dev
+````
+
+If you visit `localhost:8000` in your browser, you should see:
 
 **Welcome to the Dinosaur API!**
 
@@ -54,26 +98,22 @@ And point our browser to `localhost:8000`. You should see:
 The next step here is to add some data. We'll use this Dinosaur data that we
 found from [this article](https://www.thoughtco.com/dinosaurs-a-to-z-1093748).
 Feel free to
-[copy it from here](https://github.com/denoland/examples/blob/main/with-express/data.json).
+[copy it from here](https://raw.githubusercontent.com/denoland/tutorial-with-express/refs/heads/main/data.json).
 
-Let's create `data.json`:
+Create a `data.json` file in the root of your project, and paste in the dinosaur
+data.
 
-```console
-touch data.json
-```
-
-And paste in the dinosaur data.
-
-Next, let's import that data into `main.ts`. Let's add this line at the top of
-the file:
+Next, we'll import that data into `main.ts`:
 
 ```ts
-import data from "./data.json" assert { type: "json" };
+import data from "./data.json" with { type: "json" };
 ```
 
-Then, we can create the routes to access that data. To keep it simple, let's
-just define `GET` handlers for `/api/` and `/api/:dinosaur`. Add the below after
-the `const app = express();` line:
+We will create the routes to access that data.
+
+To keep it simple, let's just define `GET` handlers for `/api/` and
+`/api/:dinosaur`. Add the following code after the `const app = express();`
+line:
 
 ```ts
 app.get("/", (req, res) => {
@@ -98,12 +138,13 @@ app.get("/api/:dinosaur", (req, res) => {
 });
 
 app.listen(8000);
+console.log(`Server is running on http://localhost:8000`);
 ```
 
-Let's run the server with `deno run -A main.ts` and check out
-`localhost:8000/api`. You should see a list of dinosaurs:
+Let's run the server with `deno run dev` and check out `localhost:8000/api` in
+your browser. You should see a list of dinosaurs!
 
-```json
+```jsonc
 [
   {
     "name": "Aardonyx",
@@ -120,7 +161,8 @@ Let's run the server with `deno run -A main.ts` and check out
 ...
 ```
 
-And when we go to `localhost:8000/api/aardonyx`:
+You can also get the details of a specific dinosaur by visiting "/api/dinosaur
+name", for example `localhost:8000/api/aardonyx` will display:
 
 ```json
 {
@@ -129,4 +171,6 @@ And when we go to `localhost:8000/api/aardonyx`:
 }
 ```
 
-Great!
+🦕 Now you're all set to use Express with Deno. You could consider expanding
+this example into a dinosaur web app. Or take a look at
+[Deno's built in HTTP server](https://docs.deno.com/runtime/fundamentals/http_server/).
