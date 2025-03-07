@@ -5,7 +5,7 @@ videoUrl: https://www.youtube.com/watch?v=BFfrGrLm2tw&list=PLvvLnBDNuTEov9EBIp3M
 layout: video.tsx
 ---
 
-## Description of video
+## Video description
 
 How to set up your development environment for Deno
 

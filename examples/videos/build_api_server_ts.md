@@ -5,7 +5,7 @@ videoUrl: https://www.youtube.com/watch?v=J8kZ-s-5-ms&list=PLvvLnBDNuTEov9EBIp3M
 layout: video.tsx
 ---
 
-## Description of video
+## Video description
 
 Use the light-weight Hono framework (spiritual successor to Express) to build a
 RESTful API server that supports CRUD operations with a database.

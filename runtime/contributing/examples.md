@@ -1,5 +1,6 @@
 ---
-title: Contributing an example
+title: "Contributing an example"
+description: "Learn how to create and contribute meaningful examples to the Deno docs."
 ---
 
 [Deno by Example](/examples/) is a collection of examples that demonstrate how

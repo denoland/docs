@@ -1,5 +1,6 @@
 ---
 title: "Creating a subprocess"
+description: "A guide to working with subprocesses in Deno. Learn how to spawn processes, handle input/output streams, manage process lifecycles, and implement inter-process communication patterns safely."
 url: /examples/subprocess_tutorial/
 oldUrl:
   - /runtime/manual/examples/subprocess/

@@ -1,5 +1,6 @@
 ---
 title: File-based routing
+description: "Tutorial on implementing file-based routing in Deno. Learn how to create a dynamic routing system similar to Next.js, handle HTTP methods, manage nested routes, and build a flexible server architecture."
 url: /examples/file_based_routing_tutorial/
 oldUrl:
 - /examples/http-server-file-router/
