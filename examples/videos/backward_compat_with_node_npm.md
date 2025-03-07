@@ -107,4 +107,4 @@ deno task dev
 ```
 
 We can use all of the code that we've written before without having to change it
-or stretch it too much Deno just makes it work!
+or stretch it too much, Deno just makes it work!
