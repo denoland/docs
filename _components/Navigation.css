@@ -17,6 +17,7 @@
     transition: transform 200ms ease-in-out;
     transform: translateX(-100%);
     background-color: hsl(var(--background-primary));
+    z-index: 11;
   }
 
   .hamburger-label {
