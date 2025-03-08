@@ -1,5 +1,6 @@
 ---
 title: "How to create a RESTful API with Prisma and Oak"
+description: "Guide to building a RESTful API using Prisma and Oak with Deno. Learn how to set up database schemas, generate clients, implement CRUD operations, and deploy your API with proper type safety."
 url: /examples/prisma_tutorial/
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/prisma/

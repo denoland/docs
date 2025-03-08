@@ -1,5 +1,6 @@
 ---
 title: "Configuring TypeScript"
+description: "A guide to TypeScript configuration in Deno. Learn about compiler options, type checking JavaScript, JSDoc support, type declarations, and configuring TypeScript for cross-platform compatibility."
 oldUrl:
   - /runtime/manual/advanced/typescript/faqs/
   - /runtime/manual/advanced/typescript/migration/

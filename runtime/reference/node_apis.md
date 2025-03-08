@@ -1,5 +1,6 @@
 ---
 title: Node APIs
+description: "A guide to Node.js compatibility in Deno. Learn about supported Node.js built-in modules, global objects, and how to use Node.js packages in Deno projects."
 templateEngine: [vto, md]
 oldUrl:
 - /runtime/manual/node/compatibility/

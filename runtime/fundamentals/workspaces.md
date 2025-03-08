@@ -1,5 +1,6 @@
 ---
 title: "Workspaces and monorepos"
+description: "A guide to managing workspaces and monorepos in Deno. Learn about workspace configuration, package management, dependency resolution, and how to structure multi-package projects effectively."
 oldUrl: /runtime/manual/basics/workspaces
 ---
 
