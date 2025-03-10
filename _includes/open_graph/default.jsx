@@ -8,22 +8,7 @@ export default function ({ title, description, openGraphColor }) {
     description = "Learn more at docs.deno.com";
   }
 
-  const bgColor = openGraphColor || "#32f59a";
-
-  function lightenColor(hex, percent) {
-    hex = hex.replace(/^#/, "");
-    const num = parseInt(hex, 16);
-    let r = (num >> 16) & 0xFF;
-    let g = (num >> 8) & 0xFF;
-    let b = num & 0xFF;
-    r = Math.round(r + (255 - r) * (percent / 100));
-    g = Math.round(g + (255 - g) * (percent / 100));
-    b = Math.round(b + (255 - b) * (percent / 100));
-    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b)
-      .toString(16)
-      .slice(1)
-      .toUpperCase();
-  }
+  const bgColor = openGraphColor || "#70ffaf";
 
   return (
     <div
@@ -31,16 +16,15 @@ export default function ({ title, description, openGraphColor }) {
         height: "100%",
         width: "100%",
         display: "flex",
+        position: "relative",
         flexDirection: "column",
         justifyContent: "center",
-        background:
-          `linear-gradient(-45deg, #fff, #fff 13.75%, ${bgColor} 13.75%, ${
-            lightenColor(bgColor, 60)
-          })`,
+        padding: "0 90px",
         fontSize: 26,
         fontWeight: 400,
-        padding: "0 90px",
         textWrap: "balance",
+        background: "radial-gradient(circle at 98% 98%, #ffffff 12%, #70ffaf 70%)",
+        borderRadius: "40px",
       }}
     >
       <p
@@ -92,7 +76,7 @@ export default function ({ title, description, openGraphColor }) {
           bottom: "2rem",
           right: "2rem",
           width: "80px",
-          height: "80px",
+          height: "80px"
         }}
       >
         <path d="M261.684 245.149c33.861 1.662 69.225-13.535 80.203-43.776 10.978-30.241 6.721-60.148-32.661-78.086-39.381-17.944-57.569-39.272-89.385-52.14-20.787-8.408-43.915-3.418-67.664 9.707-63.963 35.351-121.274 147.038-94.858 250.518a3.185 3.185 0 0 1-1.544 3.615 3.189 3.189 0 0 1-3.877-.64C16.282 295.06-3.759 241.788.593 184.791 8.998 74.728 105.178-7.806 215.241.599 325.296 9.003 407.83 105.182 399.425 215.245c-3.529 46.221-22.535 87.584-51.559 119.399-22.195 22.8-50.473 32.935-74.07 32.516-17.107-.303-33.839-7.112-45.409-17.066-16.516-14.228-23.191-30.485-25.474-48.635-.572-4.507-.236-16.797 2.112-25.309 1.745-6.343 6.185-18.599 12.676-23.957-7.595-3.266-17.361-10.388-20.446-13.805-.753-.838-.652-2.156.026-3.057a2.56 2.56 0 0 1 2.925-.88c6.528 2.239 14.477 4.444 22.86 5.851 11.021 1.844 24.729 4.159 38.618 4.847ZM192.777 85.086c10.789-.846 20.202 8.363 21.825 20.609 2.164 16.314-3.822 33.166-23.511 33.554-16.819.335-21.915-16.625-20.8-26.9 1.107-10.275 9.577-26.25 22.486-27.263Z" />
