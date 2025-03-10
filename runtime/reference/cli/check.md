@@ -4,6 +4,7 @@ oldUrl: /runtime/manual/tools/check/
 command: check
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno check"
+description: "Download and type-check code without execution"
 ---
 
 ## Example

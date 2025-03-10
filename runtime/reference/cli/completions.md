@@ -4,6 +4,7 @@ oldUrl: /runtime/manual/tools/completions/
 command: completions
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno completions"
+description: "Generate shell completions for Deno"
 ---
 
 You can use the output script to configure autocompletion for `deno` commands.

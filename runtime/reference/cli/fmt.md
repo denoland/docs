@@ -8,6 +8,7 @@ oldUrl:
 command: fmt
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno fmt"
+description: "Format your code with Deno's built-in formatter"
 ---
 
 ## Supported File Types

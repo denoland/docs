@@ -4,6 +4,7 @@ oldUrl: /runtime/manual/tools/run/
 command: run
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno run"
+description: "Run a JavaScript or TypeScript program from a file or URL with Deno's runtime"
 ---
 
 ## Usage

@@ -4,6 +4,7 @@ oldUrl: /runtime/manual/tools/test/
 command: test
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno test"
+description: "Run tests for your project with Deno's built-in test runner"
 ---
 
 ## Additional information

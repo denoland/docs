@@ -4,6 +4,7 @@ oldUrl: /runtime/manual/tools/repl/
 command: repl
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno repl"
+description: "Interact with Deno's runtime in a REPL environment"
 ---
 
 ## Special variables

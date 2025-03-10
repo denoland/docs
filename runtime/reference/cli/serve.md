@@ -4,6 +4,7 @@ oldUrl: /runtime/manual/tools/serve/
 command: serve
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno serve"
+description: "A flexible and configurable HTTP server for Deno"
 ---
 
 ## Example

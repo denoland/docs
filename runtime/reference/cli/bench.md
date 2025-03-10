@@ -6,6 +6,7 @@ oldUrl:
 command: bench
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno bench"
+description: "Run benchmarks using Deno's built-in bench tool."
 ---
 
 ## Quickstart

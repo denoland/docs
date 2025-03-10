@@ -6,6 +6,7 @@ oldUrl:
 command: info
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno info"
+description: "Inspect the dependencies of your project"
 ---
 
 ## Example

@@ -7,6 +7,7 @@ oldUrl:
 command: compile
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno compile"
+description: "Compile your code into a standalone executable"
 ---
 
 ## Flags
