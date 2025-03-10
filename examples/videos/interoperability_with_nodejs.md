@@ -19,7 +19,7 @@ Node. For example, we can use the core Node.js built in APIs. All we have to do
 is add this Node specifier here.
 
 ```ts
-import { fs } from "node:fs/priomses";
+import { fs } from "node:fs/promises";
 ```
 
 Deno also supports the use of NPM modules. All you need to do is add the NPM

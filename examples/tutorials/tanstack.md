@@ -187,7 +187,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 
 async function fetchDinosaurs() {
-  const response = await fetch("http://localhost:8000/api/dinosaurs/");
+  const response = await fetch("http://localhost:8000/api/dinosaurs");
   if (!response.ok) {
     throw new Error("Failed to fetch dinosaurs");
   }
