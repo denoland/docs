@@ -1,5 +1,6 @@
 ---
 title: "Profiling"
+description: "Guide to profiling and performance analysis in Deno. Learn how to use various profiling tools including perf, flamegraph, v8 profiling, and LLDB debugging for analyzing Deno's performance."
 oldUrl: /runtime/manual/references/contributing/profiling/
 ---
 

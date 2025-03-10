@@ -1,5 +1,6 @@
 ---
 title: "Write a file server"
+description: "Tutorial on building a file server with Deno. Learn how to handle HTTP requests, serve static files, implement streaming responses, and use the standard library's file server module for production deployments."
 url: /examples/file_server_tutorial/
 oldUrl:
   - /runtime/manual/examples/file_server/
