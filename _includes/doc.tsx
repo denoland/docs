@@ -3,7 +3,7 @@ import renderCommand from "./renderCommand.tsx";
 export const layout = "layout.tsx";
 
 export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
-  const file = data.page.sourcePath;
+  let file = data.page.sourcePath;
 
   const sidebar = data.sidebar;
   let renderedCommand = null;
@@ -17,14 +17,23 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   const isReference = data.url.startsWith("/api/");
   const isExamples = data.url.startsWith("/examples/");
   const isExampleScript = (data.page.data.content as { type?: string })?.type;
+  const isLintRule = data.url.startsWith("/lint/rules/");
   const isHome = data.url === "/";
+
+  if (isLintRule) {
+    file = `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`;
+  }
 
   return (
     <div
       id="content"
-      className={isExampleScript ? "examples-content" : "content"}
+      class={isExampleScript ? "" : "content"}
     >
-      <div class="px-4 sm:px-5 md:px-6 w-full mx-auto">
+      <div
+        class={`px-4 sm:px-5 md:px-6 w-full mx-auto 2xl:px-0 ${
+          isExampleScript ? "max-w-[75rem]" : "max-w-[40rem]"
+        }`}
+      >
         <article class="mx-auto">
           {(!isExamples && !isHome && !isReference) && (
             <data.comp.Breadcrumbs

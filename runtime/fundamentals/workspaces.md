@@ -310,7 +310,7 @@ package. Additionally, you could remove the package.json in the root and specify
 the npm package in the deno.json workspace members. That allows you to gradually
 migrate to Deno, without putting a lot of upfront work.
 
-For example, you can add `log/deno.json` like to to configure Deno's linter and
+For example, you can add `log/deno.json` to configure Deno's linter and
 formatter:
 
 ```jsonc

@@ -1,7 +1,7 @@
 import { walkSync } from "@std/fs/walk";
+import { sidebar as sidebar_ } from "./_data.ts";
 import { ExampleFromFileSystem } from "./types.ts";
 import { parseExample } from "./utils/parseExample.ts";
-import { sidebar as sidebar_ } from "./_data.ts";
 
 export const layout = "doc.tsx";
 
