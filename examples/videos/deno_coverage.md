@@ -1,5 +1,6 @@
 ---
 title: "Deno coverage"
+description: "Learn how to measure test coverage in Deno projects. Watch how to generate coverage reports, analyze code coverage metrics, and use the HTML report feature."
 url: /examples/deno_coverage/
 videoUrl: https://www.youtube.com/watch?v=P2BBYNPpgW8
 layout: video.tsx
