@@ -43,7 +43,7 @@
     },
     "serve:style": {
       "description": "Build, serve, and watch just the styles and styleguide",
-      "command": "deno task lume -s --config=_config-styleguide.ts"
+      "command": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts"
     }
   },
   "compilerOptions": {
