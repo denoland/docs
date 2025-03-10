@@ -197,7 +197,43 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
   site.data("openGraphLayout", "/examples", "/open_graph/examples.jsx");
   site.data("openGraphColor", "#70ffaf");
   site.data("openGraphColor", "/examples", "#fff");
-  site.use(ogImages());
+  site.data(
+    "openGraphLayout",
+    "/runtime/reference/cli",
+    "/open_graph/cli-commands.jsx",
+  );
+  site.use(ogImages({
+    satori: {
+      width: 1200,
+      height: 630,
+      fonts: [
+        {
+          name: "Courier",
+          style: "normal",
+          data: await Deno.readFile(
+            "./static/fonts/courier/CourierPrime-Regular.ttf",
+          ),
+        },
+        {
+          name: "Inter",
+          weight: 400,
+          style: "normal",
+          data: await Deno.readFile(
+            "./static/fonts/inter/Inter-Regular.woff",
+          ),
+        },
+        {
+          name: "Inter",
+          weight: 700,
+          style: "bold",
+          data: await Deno.readFile(
+            "./static/fonts/inter/Inter-SemiBold.woff",
+          ),
+        },
+      ],
+    },
+    cache: false,
+  }));
 }
 
 site.scopedUpdates(
