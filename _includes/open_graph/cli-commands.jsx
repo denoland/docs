@@ -1,8 +1,8 @@
 /** @jsxImportSource npm:react@18.2.0 */
 
-export default function ({ title, description, cliCommand }) {
-  if (!title) {
-    title = "Deno CLI commands";
+export default function ({ title, description, openGraphTitle }) {
+  if (!openGraphTitle) {
+    title = "deno help";
   }
   if (!description) {
     description = "Learn more at docs.deno.com";
@@ -59,7 +59,7 @@ export default function ({ title, description, cliCommand }) {
             textShadow: "0 0 8px #70ffafff",
           }}
         >
-          deno {cliCommand}
+          {openGraphTitle}
         </span>
       </h1>
       <p

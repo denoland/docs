@@ -2,6 +2,8 @@
 title: "deno test"
 oldUrl: /runtime/manual/tools/test/
 command: test
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno test"
 ---
 
 ## Additional information

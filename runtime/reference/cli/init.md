@@ -2,6 +2,8 @@
 title: "`deno init`, start a new project"
 oldUrl: /runtime/manual/tools/init/
 command: init
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno init"
 ---
 
 ## Examples

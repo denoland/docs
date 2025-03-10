@@ -195,11 +195,6 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
   // Generate Open Graph images
   site.data("openGraphLayout", "/open_graph/default.jsx");
   site.data("openGraphColor", "#70ffaf");
-  site.data(
-    "openGraphLayout",
-    "/runtime/reference/cli",
-    "/open_graph/cli-commands.jsx",
-  );
   site.use(ogImages({
     satori: {
       width: 1200,

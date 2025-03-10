@@ -1,7 +1,7 @@
 ---
 title: "An example OG image with only a title that is long enough to wrap"
 openGraphLayout: "/open_graph/cli-commands.jsx"
-cliCommand: "command"
+openGraphTitle: "deno command"
 ---
 
 There are different variants of the OG image depending on what content is

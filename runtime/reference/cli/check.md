@@ -2,6 +2,8 @@
 title: "deno check"
 oldUrl: /runtime/manual/tools/check/
 command: check
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno check"
 ---
 
 ## Example

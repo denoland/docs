@@ -5,6 +5,8 @@ oldUrl:
  - /runtime/manual/tools/compiler/
  - /runtime/reference/cli/compiler/
 command: compile
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno compile"
 ---
 
 ## Flags

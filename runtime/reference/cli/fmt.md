@@ -6,6 +6,8 @@ oldUrl:
  - /runtime/manual/tools/fmt/
  - /runtime/reference/cli/formatter/
 command: fmt
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno fmt"
 ---
 
 ## Supported File Types

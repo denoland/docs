@@ -2,6 +2,8 @@
 title: "`deno repl`, interactive scripting prompt"
 oldUrl: /runtime/manual/tools/repl/
 command: repl
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno repl"
 ---
 
 ## Special variables

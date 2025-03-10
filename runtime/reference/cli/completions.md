@@ -2,6 +2,8 @@
 title: "deno completions"
 oldUrl: /runtime/manual/tools/completions/
 command: completions
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno completions"
 ---
 
 You can use the output script to configure autocompletion for `deno` commands.

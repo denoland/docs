@@ -2,6 +2,8 @@
 title: "deno coverage"
 oldUrl: /runtime/manual/tools/coverage/
 command: coverage
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno coverage"
 ---
 
 ## Inclusions and Exclusions
