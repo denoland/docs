@@ -194,9 +194,7 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
 
   // Generate Open Graph images
   site.data("openGraphLayout", "/open_graph/default.jsx");
-  site.data("openGraphLayout", "/examples", "/open_graph/examples.jsx");
   site.data("openGraphColor", "#70ffaf");
-  site.data("openGraphColor", "/examples", "#fff");
   site.data(
     "openGraphLayout",
     "/runtime/reference/cli",
