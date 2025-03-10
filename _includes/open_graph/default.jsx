@@ -23,7 +23,7 @@ export default function ({ title, description, openGraphColor }) {
         fontSize: 26,
         fontWeight: 400,
         textWrap: "balance",
-        background: "radial-gradient(circle at 98% 98%, #ffffff 12%, #70ffaf 70%)",
+        background: `radial-gradient(circle at 98% 98%, #ffffff 12%, ${bgColor} 70%)`,
         borderRadius: "40px",
         fontFamily: "Inter",
       }}
