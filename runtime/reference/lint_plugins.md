@@ -1,5 +1,6 @@
 ---
 title: "Lint Plugins"
+description: "Guide to creating and using custom lint plugins in Deno. Learn how to write custom lint rules, use selectors for AST matching, implement fixes, and test your plugins using Deno's lint plugin API."
 ---
 
 :::caution

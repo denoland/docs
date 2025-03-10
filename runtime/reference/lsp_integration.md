@@ -1,5 +1,6 @@
 ---
 title: "Language Server Integration"
+description: "Technical guide to integrating Deno's Language Server Protocol (LSP). Learn about LSP implementation details, custom commands, requests, notifications, and testing API integration for editor and tool developers."
 oldUrl:
 - /runtime/manual/reference/lsp/
 - /runtime/manual/advanced/language_server/overview/

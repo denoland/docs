@@ -19,16 +19,31 @@
     "serve:no_logs": "LUME_LOGS=WARN deno run --env-file -A lume.ts -s",
     "start": "deno task serve",
     "dev": "deno task serve",
-    "build": "deno run --env-file -A lume.ts",
+    "build": {
+      "description": "Full production build by default",
+      "command": "deno task build:prod"
+    },
+    "build:prod": {
+      "description": "Build the entire site including expensive operations",
+      "command": "BUILD_TYPE=FULL deno run --env-file -A lume.ts"
+    },
+    "build:light": {
+      "description": "Build the site without expensive operations",
+      "command": "deno run --env-file -A lume.ts"
+    },
     "debug": "deno task build && deno task prod",
     "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
     "reference": "cd reference_gen && deno task types && deno task doc",
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "test": "deno test -A",
     "update_lint_rules": "deno run -A update_lint_rules.ts",
+    "serve:prod": {
+      "description": "Build, serve, and watch just the APIs section of the docs",
+      "command": "BUILD_TYPE=FULL deno task serve"
+    },
     "serve:style": {
       "description": "Build, serve, and watch just the styles and styleguide",
-      "command": "deno task lume -s --config=_config-styleguide.ts"
+      "command": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts"
     }
   },
   "compilerOptions": {

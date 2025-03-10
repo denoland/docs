@@ -1,5 +1,6 @@
 ---
 title: "Better debugging with the console API"
+description: "An in-depth guide to advanced console debugging in Deno. Learn about console.table, timers, counters, tracers, and how to leverage the full console API beyond basic logging for better debugging workflows."
 url: /examples/debugging_with_console_tutorial/
 ---
 

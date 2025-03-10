@@ -1,5 +1,6 @@
 ---
 title: "Build an app with Tanstack and Deno"
+description: "Complete guide to building applications with Tanstack and Deno. Learn how to implement Query for data fetching, Router for navigation, manage server state, and create type-safe full-stack applications."
 url: /examples/tanstack_tutorial/
 ---
 

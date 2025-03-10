@@ -1,5 +1,6 @@
 ---
 title: "Standard Library"
+description: "An introduction to Deno's Standard Library. Learn about TypeScript-first modules, cross-platform compatibility, versioning, package management, and how to use standard modules in your Deno projects."
 oldUrl: /runtime/manual/basics/standard_library/
 ---
 
