@@ -18,12 +18,11 @@ export default function ({ title, description, openGraphTitle }) {
         justifyContent: "center",
         background:
           `radial-gradient(circle at 95% 95%, #090909 10%, #292929 70%)`,
-        fontSize: 26,
+        fontSize: 28,
         fontWeight: 400,
         padding: "0 90px",
         textWrap: "balance",
         color: "#fff",
-        borderRadius: "40px",
         fontFamily: "Inter",
       }}
     >
@@ -45,7 +44,7 @@ export default function ({ title, description, openGraphTitle }) {
           lineHeight: "1.1",
           marginTop: 0,
           marginLeft: "-16px",
-          marginBottom: "6rem",
+          marginBottom: "2rem",
         }}
       >
         <span
