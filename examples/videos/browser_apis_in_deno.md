@@ -1,5 +1,6 @@
 ---
 title: "Browser APIs in Deno"
+description: "Explore web standard APIs in Deno's server-side environment. Learn how to use fetch, streams, text encoders, and other browser-compatible features while building modern applications with familiar web APIs."
 url: /examples/browser_apis_in_deno/
 videoUrl: https://www.youtube.com/watch?v=oxVwTT-rZRo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=6
 layout: video.tsx
