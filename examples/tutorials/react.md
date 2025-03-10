@@ -13,7 +13,7 @@ library.
 In this tutorial we'll build a simple React app with Deno. The app will display
 a list of dinosaurs. When you click on one, it'll take you to a dinosaur page
 with more details. You can see the
-[finished app repo on GitHub](https://github.com/denoland/tutorial-with-react-denojson)
+[finished app repo on GitHub](https://github.com/denoland/tutorial-with-react)
 
 ![demo of the app](./images/how-to/react/react-dinosaur-app-demo.gif)
 

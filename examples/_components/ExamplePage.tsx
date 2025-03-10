@@ -1,6 +1,6 @@
+import { ExampleFromFileSystem } from "../types.ts";
 import { CopyButton } from "./CopyButton.tsx";
 import SnippetComponent from "./SnippetComponent.tsx";
-import { ExampleFromFileSystem } from "../types.ts";
 
 type Props = { example: ExampleFromFileSystem };
 
