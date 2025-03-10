@@ -1,6 +1,6 @@
 /** @jsxImportSource npm:react@18.2.0 */
 
-export default function ({ title, description, openGraphColor }) {
+export default function ({ title, description, cliCommand }) {
   if (!title) {
     title = "Deno documentation";
   }
@@ -8,7 +8,7 @@ export default function ({ title, description, openGraphColor }) {
     description = "Learn more at docs.deno.com";
   }
 
-  const bgColor = openGraphColor || "#32f59a";
+  const bgColor = "#191919";
 
   function lightenColor(hex, percent) {
     hex = hex.replace(/^#/, "");
@@ -34,13 +34,12 @@ export default function ({ title, description, openGraphColor }) {
         flexDirection: "column",
         justifyContent: "center",
         background:
-          `linear-gradient(-45deg, #fff, #fff 13.75%, ${bgColor} 13.75%, ${
-            lightenColor(bgColor, 60)
-          })`,
+          `linear-gradient(-45deg, #fff, #fff 13.75%, ${bgColor} 13.75%, ${bgColor})`,
         fontSize: 26,
         fontWeight: 400,
         padding: "0 90px",
         textWrap: "balance",
+        color: "#fff",
         fontFamily: "Inter",
       }}
     >
@@ -59,22 +58,26 @@ export default function ({ title, description, openGraphColor }) {
           margin: "0",
           fontSize: 60,
           fontWeight: 800,
-          width: "100%",
           lineHeight: "1.1",
           marginTop: 0,
+          marginLeft: "-16px",
+          marginBottom: "6rem",
         }}
       >
-        {title}
+        <span
+          style={{
+            background: "#000",
+            borderRadius: "10px",
+            padding: "10px 18px 4px 18px",
+            fontFamily: "Courier",
+            lineHeight: "1.2",
+            color: "#ffffff",
+            textShadow: "0 0 8px #70ffafdd",
+          }}
+        >
+          deno {cliCommand}
+        </span>
       </h1>
-      <div
-        style={{
-          width: "400px",
-          height: "1px",
-          margin: "3rem 0",
-          background: "#000",
-        }}
-      >
-      </div>
       <p
         style={{
           marginTop: 0,
