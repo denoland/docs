@@ -1,5 +1,6 @@
 ---
 title: "Web Platform APIs"
+description: "A guide to the Web Platform APIs available in Deno. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
 oldUrl:
   - /runtime/manual/runtime/navigator_api/
   - /runtime/manual/runtime/web_platform_apis/

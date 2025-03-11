@@ -1,5 +1,6 @@
 ---
 title: "How to deploy Deno on Kinsta"
+description: "Step-by-step guide to deploying Deno applications on Kinsta. Learn how to configure package.json, handle environment variables, set up Git deployments, and use Kinsta's application hosting platform."
 url: /examples/kinsta_tutorial/
 oldUrl:
 - /runtime/manual/advanced/deploying_deno/kinsta/

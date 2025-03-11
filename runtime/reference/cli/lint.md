@@ -6,6 +6,9 @@ oldUrl:
  - /runtime/manual/tools/linter/
  - /runtime/reference/cli/linter/
 command: lint
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno lint"
+description: "Run the Deno linter to check your code for errors and apply automated fixes"
 ---
 
 ## Available rules

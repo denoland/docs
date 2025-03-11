@@ -5,7 +5,7 @@ videoUrl: https://www.youtube.com/watch?v=KPTOo4k8-GE&list=PLvvLnBDNuTEov9EBIp3M
 layout: video.tsx
 ---
 
-## Description of video
+## Video description
 
 A short introduction to Deno and its history
 

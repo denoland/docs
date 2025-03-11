@@ -4,6 +4,9 @@ oldUrl:
  - /runtime/manual/tools/documentation_generator/
  - /runtime/reference/cli/documentation_generator/
 command: doc
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno doc"
+description: "Generate documentation from your code"
 ---
 
 ## Examples
