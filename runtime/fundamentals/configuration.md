@@ -513,7 +513,7 @@ works as well:
 
 A JSON schema file is available for editors to provide autocompletion. The file
 is versioned and available at:
-https://deno.land/x/deno/cli/schemas/config-file.v1.json
+[https://github.com/denoland/deno/blob/main/cli/schemas/config-file.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/config-file.v1.json)
 
 ## Proxies
 
