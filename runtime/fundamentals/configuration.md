@@ -1,5 +1,6 @@
 ---
 title: "deno.json and package.json"
+description: "The guide to configuring your Deno projects. Learn about TypeScript settings, tasks, dependencies, formatting, linting, and how to use both deno.json and/or package.json effectively."
 oldUrl:
 - /runtime/manual/getting_started/configuration_file/
 - /runtime/manual/basics/modules/import_maps/
@@ -194,11 +195,11 @@ For example:
 This configuration will:
 
 - only lint files in the `src/` directory,
-- will not lint files in the `src/testdata/` directory or any TypeScript files
-  in the `src/fixtures/` directory.
-- specifies that the recommended linting rules should be applied,
-- adds the `ban-untagged-todo`
-- removes the `no-unused-vars` rule excluded.
+- not lint files in the `src/testdata/` directory or any TypeScript files in the
+  `src/fixtures/` directory.
+- specify that the recommended linting rules should be applied,
+- add the `ban-untagged-todo`, and
+- exclude the `no-unused-vars` rule.
 
 You can find a full list of available linting rules in the
 [List of rules](/lint/) documentation page.

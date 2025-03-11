@@ -1,5 +1,6 @@
 ---
 title: "TypeScript support"
+description: "Learn how to use TypeScript with Deno. Covers configuration options, type checking, and best practices for writing type-safe Deno applications."
 oldUrl:
   - /runtime/manual/advanced/typescript/
   - /runtime/manual/typescript/

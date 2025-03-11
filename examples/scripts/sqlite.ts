@@ -1,23 +1,24 @@
 /**
  * @title Connect to SQLite
- * @difficulty intermediate
+ * @difficulty beginner
  * @tags cli, deploy
- * @run --allow-read --allow-write --allow-env --allow-net --allow-ffi <url>
- * @resource {https://jsr.io/@db/sqlite} @db/sqlite on JSR
+ * @run --allow-read --allow-write <url>
  * @group Databases
  *
- * Using the Deno SQLite3 module, you can connect to an SQLite3 database
+ * Using the `node:sqlite` module, you can connect to an SQLite3 database
  * stored locally and perform basic database operations.
+ *
+ * _`node:sqlite` module has been added in Deno v2.2._
  */
 
-// Import the Database class from jsr:@db/sqlite
-import { Database } from "jsr:@db/sqlite@0.12";
+// Import the DatabaseSync class from node:sqlite
+import { DatabaseSync } from "node:sqlite";
 
 // Open or create an SQLite database named 'test.db'
-const db = new Database("test.db");
+const db = new DatabaseSync("test.db");
 
 // Create a table called "people" if it doesn't exist
-db.prepare(
+db.exec(
   `
 	CREATE TABLE IF NOT EXISTS people (
 	  id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -25,7 +26,7 @@ db.prepare(
 	  age INTEGER
 	);
   `,
-).run();
+);
 
 // Insert a new row into the "people" table
 db.prepare(

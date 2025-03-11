@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [recommended, react, jsx]
 ---
 
 Ensure consistent use of curly braces around JSX expressions.

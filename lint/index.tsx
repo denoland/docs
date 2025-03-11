@@ -44,7 +44,10 @@ export default function LintRulesIndex(
           <a href="/runtime/reference/cli/lint/">
             <code>deno lint</code>
           </a>{" "}
-          command.
+          command. You can enable sets of rules in <code>deno.json(c)</code>
+          {" "}
+          by adding their tags (e.g. <code>recommended</code>,{" "}
+          <code>react</code>) to the <code>lint.rules.tags</code> array.
         </p>
         <input
           type="text"
@@ -85,12 +88,12 @@ export default function LintRulesIndex(
       <ul class="flex flex-col gap-4 !list-none !pl-0">
         {data.lintRulePages.map((lintRule, idx: number) => (
           <li
-            class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4 lint-rule-box dark:border-gray-700"
-            id={lintRule.label}
+            class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4 lint-rule-box dark:border-gray-700 !mt-0"
+            id={lintRule.title}
           >
             <div class="flex flex-row justify-start items-center gap-4 mb-2">
               <a href={lintRule.href} class="block font-mono">
-                {lintRule.label}
+                {lintRule.title}
               </a>{" "}
               {lintRule.tags.map((tag: LintIconType) => (
                 <div class="bg-background-secondary/30 border border-background-secondary rounded-md p-1">

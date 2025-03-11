@@ -1,0 +1,22 @@
+.docs-cta {
+  @apply border text-balance text-black font-bold inline-block py-3.5 px-6
+    rounded-full w-max hover:no-underline transition-colors duration-200 mb-6;
+}
+
+.runtime-cta,
+.deploy-cta {
+  @apply border-gray-4 hover:!no-underline !text-gray-4;
+}
+
+.runtime-cta {
+  @apply bg-runtime-400 border-runtime-400 hover:bg-runtime-300;
+}
+
+.deploy-cta {
+  @apply bg-deploy-500 border-deploy-500 hover:bg-deploy-400;
+}
+
+.jsr-cta {
+  @apply bg-jsr-yellow-400 border-jsr-cyan-950 !text-jsr-cyan-950 border-2
+    hover:!no-underline hover:bg-jsr-yellow-300;
+}

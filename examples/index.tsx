@@ -1,5 +1,4 @@
 export const layout = "raw.tsx";
-export const sidebar = [];
 
 export const toc = [];
 

@@ -25,7 +25,7 @@ Then, `cd` into the newly created project folder.
 To see and edit your new project locally you can run:
 
 ```sh
-deno run dev
+deno task dev
 ```
 
 ## Step 3: Deploy your project with Deno Deploy

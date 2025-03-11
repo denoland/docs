@@ -1,17 +1,6 @@
 export const layout = "raw.tsx";
 export const url = "/";
 
-export const sidebar = [
-  {
-    items: [
-      {
-        label: "deno.com",
-        id: "https://deno.com",
-      },
-    ],
-  },
-];
-
 export default function () {
   return (
     <main
@@ -261,7 +250,7 @@ export default function () {
                     },
                     {
                       text: "WebSockets",
-                      href: "/api/deno/web-sockets",
+                      href: "/api/deno/websockets",
                     },
                     {
                       text: "View all Deno APIs",

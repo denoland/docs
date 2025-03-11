@@ -1,5 +1,6 @@
 ---
 title: "How to deploy Deno to Digital Ocean"
+description: "A step-by-step guide to deploying Deno applications on Digital Ocean. Learn about Docker containerization, GitHub Actions automation, container registries, and how to set up continuous deployment workflows."
 url: /examples/digital_ocean_tutorial/
 oldUrl:
 - /runtime/manual/advanced/deploying_deno/digital_ocean/

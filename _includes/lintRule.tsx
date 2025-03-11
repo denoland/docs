@@ -3,7 +3,9 @@ export const layout = "doc.tsx";
 const generateConfigFileForTag = (tag: string) => {
   return `{
   "lint": {
-    "tags": ["${tag}"]
+    "rules": {
+      "tags": ["${tag}"]
+    }
   }
 }`;
 };
@@ -11,19 +13,21 @@ const generateConfigFileForTag = (tag: string) => {
 const generateConfigFileForTags = (tags: string[]) => {
   return `{
   "lint": {
-    "tags": ["${tags[0]}"] // ...or ${
+    "rules": {
+      "tags": ["${tags[0]}"] // ...or ${
     tags.slice(1).map((tag) => `"${tag}"`).join(", ")
   }
+    }
   }
 }`;
 };
 
 const generateCliForTag = (tag: string) => {
-  return `deno lint --tags=${tag}`;
+  return `deno lint --rules-tags=${tag}`;
 };
 
 const generateCliForTags = (tags: string[]) => {
-  return tags.map((tag) => `deno lint --tags=${tag}`).join("\n# or ...\n");
+  return tags.map(generateCliForTag).join("\n# or ...\n");
 };
 
 function LintRuleTags(props: { tags: string[] }) {

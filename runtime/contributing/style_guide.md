@@ -1,5 +1,6 @@
 ---
 title: "Deno Style Guide"
+description: "Comprehensive style guide for contributing to Deno's internal runtime code and standard library. Covers coding conventions, documentation standards, testing requirements, and best practices for TypeScript and Rust development."
 oldUrl:
 - /runtime/manual/contributing/style_guide/
 - /runtime/manual/references/contributing/style_guide/

@@ -1,5 +1,6 @@
 ---
-title: "Node and npm support"
+title: "Node and npm Compatibility"
+description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
 - /runtime/reference/node/
 - /runtime/manual/npm_nodejs/std_node/
@@ -16,12 +17,20 @@ oldUrl:
 - /runtime/manual/node/private_registries
 ---
 
-Modern Node.js projects will run in Deno with little to no reworking required.
-However, there are some key differences between the two runtimes that you can
-take advantage of to make your code simpler and smaller when migrating your
-Node.js projects to Deno.
+- **Deno is Node-compatible**. Most Node projects will run in Deno with little
+  or no change!
+- **Deno supports npm packages**. Just use the `npm:` specifier in the import,
+  and Deno takes care of the rest.
 
-<a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
+For example, here's how you'd import Hono from npm in a Deno project:
+
+```ts
+import { Hono } from "npm:hono";
+```
+
+That's all you really need to know to get started! However, there are some key
+differences between the two runtimes that you can take advantage of to make your
+code simpler and smaller when migrating your Node.js projects to Deno.
 
 ## Using Node's built-in modules
 
@@ -57,6 +66,8 @@ error: Relative import path "os" not prefixed with / or ./ or ../
 
 The same hints and additional quick-fixes are provided by the Deno LSP in your
 editor.
+
+<a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
 
 ## Using npm packages
 
@@ -504,14 +515,14 @@ console.log(process.versions.deno);
 $ deno run process.js
 2.0.0
 $ deno lint process.js
-error[no-process-globals]: NodeJS process global is discouraged in Deno
+error[no-process-global]: NodeJS process global is discouraged in Deno
  --> /process.js:1:13
   |
 1 | console.log(process.versions.deno);
   |             ^^^^^^^
   = hint: Add `import process from "node:process";`
 
-  docs: https://docs.deno.com/lint/rules/no-process-globals
+  docs: https://docs.deno.com/lint/rules/no-process-global
 
 
 Found 1 problem (1 fixable via --fix)
@@ -669,7 +680,7 @@ that might look like:
 ```sh
 error[no-constant-condition]: Use of a constant expressions as conditions is not allowed.
  --> /my-project/bar.ts:1:5
-  | 
+  |
 1 | if (true) {
   |     ^^^^
   = hint: Remove the constant expression

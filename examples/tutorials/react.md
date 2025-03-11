@@ -1,5 +1,6 @@
 ---
 title: "Build a React app with a starter template"
+description: "Complete guide to building React applications with Deno and Vite. Learn how to set up a project from a template, implement routing, add API endpoints, and deploy your full-stack TypeScript application."
 url: /examples/react_tutorial/
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/react/
@@ -13,7 +14,7 @@ library.
 In this tutorial we'll build a simple React app with Deno. The app will display
 a list of dinosaurs. When you click on one, it'll take you to a dinosaur page
 with more details. You can see the
-[finished app repo on GitHub](https://github.com/denoland/tutorial-with-react-denojson)
+[finished app repo on GitHub](https://github.com/denoland/tutorial-with-react)
 
 ![demo of the app](./images/how-to/react/react-dinosaur-app-demo.gif)
 

@@ -2,6 +2,9 @@
 title: "deno publish"
 oldUrl: /runtime/manual/tools/publish/
 command: publish
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno publish"
+description: "Publish your package or workspace to the JSR registry"
 ---
 
 ## Package Requirements

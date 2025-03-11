@@ -1,5 +1,6 @@
 ---
 title: "Build a Database App with Drizzle ORM and Deno"
+description: "Step-by-step guide to building database applications with Drizzle ORM and Deno. Learn about schema management, type-safe queries, PostgreSQL integration, migrations, and how to implement CRUD operations."
 url: /examples/drizzle_tutorial/
 oldUrl:
   - /runtime/tutorials/drizzle

@@ -26,14 +26,14 @@ async function generateSidebarItems() {
     sidebarItems.push(
       {
         href: `/lint/rules/${lintRuleName}/`,
-        label: lintRuleName,
+        title: lintRuleName,
         tags,
         content,
       } satisfies SidebarLink,
     );
   }
 
-  sidebarItems.sort((a, b) => a.label.localeCompare(b.label));
+  sidebarItems.sort((a, b) => a.title.localeCompare(b.title));
 
   return sidebarItems;
 }

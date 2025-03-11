@@ -1,8 +1,7 @@
-import ExamplePage from "./_pages/ExamplePage.tsx";
 import { walkSync } from "@std/fs/walk";
+import { sidebar as sidebar_ } from "./_data.ts";
 import { ExampleFromFileSystem } from "./types.ts";
 import { parseExample } from "./utils/parseExample.ts";
-import { sidebar as sidebar_ } from "./_data.ts";
 
 export const layout = "doc.tsx";
 
@@ -27,7 +26,7 @@ export default function* (_data: Lume.Data, helpers: Lume.Helpers) {
     yield {
       url: `/examples/${example.label}/index.html`,
       title: `${example.parsed.title}`,
-      content: <ExamplePage example={example} />,
+      content: <_data.comp.ExamplePage example={example} />,
     };
   }
 }

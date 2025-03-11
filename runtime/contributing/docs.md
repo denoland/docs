@@ -1,5 +1,6 @@
 ---
-title: "Deno documentation"
+title: "Documentation guidelines"
+description: "Guide for contributing to Deno's documentation. Learn our documentation standards, writing style, and how to submit documentation changes."
 ---
 
 We welcome and appreciate contributions to the Deno documentation. If you find

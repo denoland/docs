@@ -1,5 +1,6 @@
 ---
 title: "Build a Nuxt app with Deno"
+description: "Step-by-step guide to building Nuxt applications with Deno. Learn how to create a full-stack Vue.js app, implement server-side rendering, add Tailwind styling, and deploy your application."
 url: /examples/nuxt_tutorial/
 ---
 

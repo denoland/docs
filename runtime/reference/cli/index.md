@@ -1,6 +1,8 @@
 ---
 title: "Deno CLI Subcommands"
 oldUrl: "/runtime/reference/cli/all_commands"
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno help"
 ---
 
 The Deno CLI (Command Line Interface) allows you to interact with the Deno
