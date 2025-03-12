@@ -108,7 +108,7 @@ The following attributes are automatically added to the span on creation:
 
 After the request is handled, the following attributes are added:
 
-- `http.status_code`: The status code of the response.
+- `http.response.status_code`: The status code of the response.
 
 Deno does not automatically add a `http.route` attribute to the span as the
 route is not known by the runtime, and instead is determined by the routing
