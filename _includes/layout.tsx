@@ -1,3 +1,7 @@
+export function deleteBackticks(str?: string) {
+  return str?.replace(/`/g, "");
+}
+
 export default function Layout(data: Lume.Data) {
   const section = data.url.split("/").filter(Boolean)[0];
   const description = data.description ||
@@ -8,7 +12,7 @@ export default function Layout(data: Lume.Data) {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{data.title}</title>
+        <title>{deleteBackticks(data.title)}</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link
@@ -40,7 +44,7 @@ export default function Layout(data: Lume.Data) {
           dangerouslySetInnerHTML={{
             __html: `
             (function() {
-              const theme = localStorage.getItem('denoDocsTheme') || 
+              const theme = localStorage.getItem('denoDocsTheme') ||
                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               document.documentElement.classList.add(theme);
             })();
