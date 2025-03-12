@@ -253,34 +253,6 @@ body {
     styleset(ss01, ss07, ss08);
 }
 
-/* Common styles for all CTAs */
-.docs-cta {
-  @apply border text-balance text-black font-bold inline-block py-3.5 px-4
-    rounded-full w-max hover:no-underline transition-colors duration-200;
-}
-
-/* Specific styles for runtime CTAs */
-.runtime-cta {
-  @apply bg-runtime-400 border-runtime-400 hover:bg-runtime-300;
-}
-
-/* Override for when CTA is used in markdown body */
-.markdown-body .runtime-cta,
-.markdown-body .deploy-cta {
-  @apply border-gray-4 hover:!no-underline !text-gray-4;
-}
-
-/* Specific styles for deploy CTAs */
-.deploy-cta {
-  @apply bg-deploy-500 border-deploy-500 hover:bg-deploy-400;
-}
-
-/* Specific styles for JSR CTAs */
-.jsr-cta {
-  @apply bg-jsr-yellow-400 border-jsr-cyan-950 !text-jsr-cyan-950 border-2
-    hover:!no-underline hover:bg-jsr-yellow-300;
-}
-
 .homepage-link {
   @apply block font-normal underline underline-offset-4;
 }
@@ -524,10 +496,6 @@ body {
   }
 
   .markdown-body {
-    & pre {
-      @apply border-gray-000 !important;
-    }
-
     & a:not(.no-color) {
       @apply text-primary !important;
     }

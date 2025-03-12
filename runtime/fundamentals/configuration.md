@@ -462,7 +462,7 @@ works as well:
 }
 ```
 
-## Full example
+## An example `deno.json` file
 
 ```json
 {
@@ -509,11 +509,16 @@ works as well:
 }
 ```
 
+This is an example of a `deno.json` file that configures the TypeScript compiler
+options, linter, formatter, node modules directory, etc. For a full list of
+available fields and configurations, see the
+[Deno configuration file schema](#json-schema).
+
 ## JSON schema
 
 A JSON schema file is available for editors to provide autocompletion. The file
 is versioned and available at:
-https://deno.land/x/deno/cli/schemas/config-file.v1.json
+[https://github.com/denoland/deno/blob/main/cli/schemas/config-file.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/config-file.v1.json)
 
 ## Proxies
 

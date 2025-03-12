@@ -104,7 +104,7 @@ existence of a given file, and opening or connecting to Unix sockets.
 Access to read files is granted using the `--allow-read` (or `-R`) flag, and
 access to write files is granted using the `--allow-write` (or `-W`) flag. These
 flags can be specified with a list of paths to allow access to specific files or
-directories.
+directories and any subdirectories in them.
 
 Definition: `--allow-read[=<PATH>...]` or `-R[=<PATH>...]`
 
@@ -116,6 +116,9 @@ deno run --allow-read script.ts
 
 # Allow reads from file foo.txt and bar.txt only
 deno run --allow-read=foo.txt,bar.txt script.ts
+
+# Allow reads from any file in any subdirectory of ./node_modules
+deno run --allow-read=node_modules script.ts
 ```
 
 Definition: `--deny-read[=<PATH>...]`
