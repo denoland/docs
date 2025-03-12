@@ -496,10 +496,6 @@ body {
   }
 
   .markdown-body {
-    & pre {
-      @apply border-gray-000 !important;
-    }
-
     & a:not(.no-color) {
       @apply text-primary !important;
     }
