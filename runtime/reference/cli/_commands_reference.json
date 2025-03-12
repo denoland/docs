@@ -3,6 +3,15 @@
   "about": null,
   "args": [
     {
+      "name": "help",
+      "short": "h",
+      "long": "help",
+      "required": false,
+      "help": null,
+      "help_heading": null,
+      "usage": "--help[=<CONTEXT>]"
+    },
+    {
       "name": "quiet",
       "short": "q",
       "long": "quiet",

@@ -7,6 +7,9 @@ oldUrl:
  - /runtime/manual/tools/cache/
  - /runtime/reference/cli/cache/
 command: install
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno install"
+description: "Install and cache dependencies for your project"
 ---
 
 ## Examples

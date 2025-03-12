@@ -14,12 +14,15 @@
  */
 
 // The easiest way to write a file, is to dump an entire buffer into the file at
-// once.
+// once. Here is a simple example that writes an array of bytes to a file.
 const bytes = new Uint8Array([72, 101, 108, 108, 111]);
 await Deno.writeFile("hello.txt", bytes, { mode: 0o644 });
 
 // You can also write a string instead of a byte array.
 await Deno.writeTextFile("hello.txt", "Hello World");
+
+// Or you can write binary data as a string.
+await Deno.writeTextFile("hello.txt", "Hello World", { encoding: "utf8" });
 
 // To append to a text file, set the `append` parameter to `true`.
 await Deno.writeTextFile("server.log", "Request: ...", { append: true });

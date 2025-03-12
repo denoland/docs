@@ -1,5 +1,6 @@
 ---
 title: "Deno & Visual Studio Code"
+description: "Complete guide to using Deno with Visual Studio Code. Learn about extension setup, workspace configuration, debugging, testing, task automation, and advanced IDE features for Deno development."
 oldUrl:
 - /runtime/manual/vscode_deno/
 - /runtime/manual/references/vscode_deno/
@@ -288,8 +289,9 @@ provided in the **Deno > Testing: Args** setting.
 
 The extension provides integration with the built-in VS Code debugger. You can
 generate a configuration by: going to `Run and Debug` panel, clicking
-`create a launch.json file` and selecting `Deno` option from the available
-debugger options.
+`create a launch.json file` and selecting the `Deno` option from the available
+debugger options. (The generated `type` of the configuration will be `node`;
+that's ok.)
 
 ## Tasks
 

@@ -1,5 +1,6 @@
 ---
 title: "Security and permissions"
+description: "A guide to Deno's security model and permissions system. Learn about secure defaults, permission flags, runtime prompts, and how to safely execute code with granular access controls."
 oldUrl:
   - /runtime/manual/basics/permissionsDeno/
   - /manual/basics/permissions
@@ -90,6 +91,10 @@ deno run -A script.ts
 deno run --allow-all script.ts
 ```
 
+By default, Deno will not generate a stack trace for permission requests as it
+comes with a hit to performance. Users can enable stack traces with the
+`DENO_TRACE_PERMISSIONS` environment variable.
+
 ### File system access
 
 By default, executing code can not read or write arbitrary files on the file
@@ -99,7 +104,7 @@ existence of a given file, and opening or connecting to Unix sockets.
 Access to read files is granted using the `--allow-read` (or `-R`) flag, and
 access to write files is granted using the `--allow-write` (or `-W`) flag. These
 flags can be specified with a list of paths to allow access to specific files or
-directories.
+directories and any subdirectories in them.
 
 Definition: `--allow-read[=<PATH>...]` or `-R[=<PATH>...]`
 
@@ -111,6 +116,9 @@ deno run --allow-read script.ts
 
 # Allow reads from file foo.txt and bar.txt only
 deno run --allow-read=foo.txt,bar.txt script.ts
+
+# Allow reads from any file in any subdirectory of ./node_modules
+deno run --allow-read=node_modules script.ts
 ```
 
 Definition: `--deny-read[=<PATH>...]`

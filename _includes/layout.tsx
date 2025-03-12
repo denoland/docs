@@ -25,37 +25,17 @@ export default function Layout(data: Lume.Data) {
           type="font/woff2"
           crossOrigin="true"
         />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@deno_land" />
         <link rel="me" href="https://fosstodon.org/@deno_land" />
-        <meta name="twitter:title" content={data.title} />
-        <meta property="og:title" content={data.title} />
-
-        <meta property="og:description" content={description} />
-        <meta name="twitter:description" content={description} />
-        <meta name="description" content={description} />
-
-        <meta name="twitter:image" content="/img/og.webp" />
-        <meta
-          name="twitter:image:alt"
-          content="Deno docs: Deno documentation, guides, and reference materials. docs.deno.com"
+        <data.comp.OpenGraph
+          title={data.title}
+          description={description}
+          section={section}
+          url={data.url}
         />
-        <meta property="og:image" content="/img/og.webp" />
-        <meta
-          property="og:image:alt"
-          content="Deno docs: Deno documentation, guides, and reference materials. docs.deno.com"
-        />
-
-        <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Deno" />
-        <meta property="og:locale" content="en_US" />
-
         <meta
           name="keywords"
           content="Deno, JavaScript, TypeScript, reference, documentation, guide, tutorial, example"
         />
-
         <script
           dangerouslySetInnerHTML={{
             __html: `

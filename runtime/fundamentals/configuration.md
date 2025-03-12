@@ -1,5 +1,6 @@
 ---
 title: "deno.json and package.json"
+description: "The guide to configuring your Deno projects. Learn about TypeScript settings, tasks, dependencies, formatting, linting, and how to use both deno.json and/or package.json effectively."
 oldUrl:
 - /runtime/manual/getting_started/configuration_file/
 - /runtime/manual/basics/modules/import_maps/
@@ -461,7 +462,7 @@ works as well:
 }
 ```
 
-## Full example
+## An example `deno.json` file
 
 ```json
 {
@@ -508,11 +509,16 @@ works as well:
 }
 ```
 
+This is an example of a `deno.json` file that configures the TypeScript compiler
+options, linter, formatter, node modules directory, etc. For a full list of
+available fields and configurations, see the
+[Deno configuration file schema](#json-schema).
+
 ## JSON schema
 
 A JSON schema file is available for editors to provide autocompletion. The file
 is versioned and available at:
-https://deno.land/x/deno/cli/schemas/config-file.v1.json
+[https://github.com/denoland/deno/blob/main/cli/schemas/config-file.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/config-file.v1.json)
 
 ## Proxies
 

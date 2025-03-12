@@ -2,6 +2,10 @@ import renderCommand from "./renderCommand.tsx";
 
 export const layout = "layout.tsx";
 
+export const ogImage = (data: Lume.Data) => {
+  return data.url + "/index.png";
+};
+
 export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   let file = data.page.sourcePath;
   const sidebar = data.sidebar;
@@ -28,9 +32,13 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   return (
     <div
       id="content"
-      className={isExampleScript ? "wide-content" : "content"}
+      class={isExampleScript ? "" : "content"}
     >
-      <div class="px-4 sm:px-5 md:px-6 w-full mx-auto">
+      <div
+        class={`px-4 sm:px-5 md:px-6 w-full mx-auto 2xl:px-0 ${
+          isExampleScript ? "max-w-[75rem]" : "max-w-[40rem]"
+        }`}
+      >
         <article class="mx-auto">
           {hasBreadcrumbs && (
             <data.comp.Breadcrumbs

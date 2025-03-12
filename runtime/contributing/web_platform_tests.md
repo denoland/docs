@@ -1,5 +1,6 @@
 ---
 title: "Web Platform Test"
+description: "Guide to running and maintaining Web Platform Tests (WPT) in Deno. Learn how to set up the test environment, run tests, update test expectations, and contribute to Deno's web platform compatibility testing."
 oldUrl: /runtime/manual/references/contributing/web_platform_tests/
 ---
 

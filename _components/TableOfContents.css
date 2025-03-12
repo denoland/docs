@@ -12,10 +12,6 @@
     grid-template-columns: minmax(0, 8fr) minmax(0, 3fr);
   }
 
-  .wide-content {
-    max-width: 1200px;
-  }
-
   .toc-desktop {
     display: block;
     position: sticky;
