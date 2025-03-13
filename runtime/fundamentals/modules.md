@@ -75,7 +75,10 @@ import data from "./data.json" with { type: "json" };
 console.log(data.property); // Access JSON data as an object
 ```
 
-This is the only import attribute type currently supported in Deno. Support for `type: text` and `type: bytes` is being considered for future updates, and currently waiting on the [Module Harmony proposal](https://github.com/whatwg/html/issues/9444).
+This is the only import attribute type currently supported in Deno. Support for
+`type: text` and `type: bytes` is being considered for future updates, and
+currently waiting on the
+[Module Harmony proposal](https://github.com/whatwg/html/issues/9444).
 
 ## Importing third party modules and libraries
 
