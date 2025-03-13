@@ -64,13 +64,13 @@ import { add } from "./calc";
 import { add } from "./calc.ts";
 ```
 
-## Import assertions
+## Import attributes
 
-Deno supports the `assert { type: "json" }` import assertion syntax for
-importing JSON files:
+Deno supports the `with { type: "json" }` import attribue syntax for importing
+JSON files:
 
 ```ts
-import data from "./data.json" assert { type: "json" };
+import data from "./data.json" with { type: "json" };
 
 console.log(data.property); // Access JSON data as an object
 ```
@@ -86,7 +86,7 @@ Without the assertion, importing JSON files directly will result in an error:
 import data from "./data.json";
 
 // This is correct
-import data from "./data.json" assert { type: "json" };
+import data from "./data.json" with { type: "json" };
 ```
 
 ## Importing third party modules and libraries
