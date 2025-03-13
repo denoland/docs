@@ -95,7 +95,7 @@ globals are:
 - `setImmediate`
 - `clearImmediate`
 
-Note, that `process` is already available as a global startin with Deno 2.0.
+Note, that `process` is already available as a global starting with Deno 2.0.
 
 Requires Deno >= 2.1.0
 
