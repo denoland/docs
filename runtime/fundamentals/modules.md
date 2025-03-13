@@ -66,7 +66,7 @@ import { add } from "./calc.ts";
 
 ## Import attributes
 
-Deno supports the `with { type: "json" }` import attribue syntax for importing
+Deno supports the `with { type: "json" }` import attribute syntax for importing
 JSON files:
 
 ```ts
@@ -75,19 +75,7 @@ import data from "./data.json" with { type: "json" };
 console.log(data.property); // Access JSON data as an object
 ```
 
-This is the only import assertion type currently supported in Deno. The
-assertion is required when importing JSON files to explicitly indicate that the
-imported content should be parsed as JSON.
-
-Without the assertion, importing JSON files directly will result in an error:
-
-```ts
-// This will fail
-import data from "./data.json";
-
-// This is correct
-import data from "./data.json" with { type: "json" };
-```
+This is the only import attribute type currently supported in Deno. Support for `type: text` and `type: bytes` is being considered for future updates, and currently waiting on the [Module Harmony proposal](https://github.com/whatwg/html/issues/9444).
 
 ## Importing third party modules and libraries
 
