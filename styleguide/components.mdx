@@ -35,6 +35,52 @@ Decorator for external links
   deno.com
 </comp.ExternalLink>
 
+## Hero
+
+A hero section for the top of a page
+
+```tsx
+<comp.Hero  bgImage="deno-looking-up.svg">
+    <h1>Title text</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</comp.Hero>
+```
+
+<comp.Hero  bgImage="deno-looking-up.svg">
+    <h1>Title text</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</comp.Hero>
+
+## Banner
+
+A banner style component for highlighting important information with different colors based on their `type` prop
+
+```tsx
+
+<comp.Banner type="runtime">
+<p class="text-lg"><strong>Strong Text</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod</p>
+</comp.Banner>
+```
+
+<comp.Banner type="runtime">
+<p class="text-lg"><strong>Strong Text</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod</p>
+</comp.Banner>
+
+## Heading
+
+Headings with a coloured underline based on the `type` prop. Heading level set with  `level` prop
+
+```tsx
+<comp.Heading level="2" type="runtime">A secondary heading</comp.Heading>
+<comp.Heading level="3" type="runtime">A secondary heading</comp.Heading>
+<comp.Heading level="3" type="deploy">A secondary heading</comp.Heading>
+<comp.Heading level="3" type="purple">A secondary heading</comp.Heading>
+```
+
+<comp.Heading level="2" type="runtime">A secondary heading</comp.Heading>
+<comp.Heading level="3" type="runtime">A tertiary heading</comp.Heading>
+<comp.Heading level="3" type="deploy">A tertiary heading</comp.Heading>
+<comp.Heading level="3" type="purple">A tertiary heading</comp.Heading>
 
 
 ## Theme toggle
@@ -63,3 +109,44 @@ Call to action button with different colors based on their `type` prop
 <comp.CTA href="https://deno.com" type="jsr">See all packages on JSR</comp.CTA><br/>
 
 <comp.CTA href="https://deno.com" type="deploy">Get started</comp.CTA><br/>
+
+## Columns
+
+A component for displaying content in equal width columns
+
+```tsx
+<comp.Columns>
+    <div>
+        <h4 class="text-lg font-semibold mb-1">Column 1</h4>
+        <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <a class="homepage-link deploy-link" href="/deploy/kv/manual/">KV docs</a>
+    </div>
+    <div>
+        <h4 class="text-lg font-semibold mb-1">Column 2</h4>
+        <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <a class="homepage-link deploy-link" href="/deploy/kv/manual/cron">Cron docs</a>
+    </div>
+    <div>
+        <h4 class="text-lg font-semibold mb-1">Column 3</h4>
+        <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <a class="homepage-link deploy-link" href="/deploy/kv/manual/queue_overview/">Queues docs</a>
+    </div>
+</comp.Columns>
+```
+<comp.Columns>
+    <div>
+        <h4 class="text-lg font-semibold mb-1">Column 1</h4>
+        <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <a class="homepage-link deploy-link" href="/deploy/kv/manual/">KV docs</a>
+    </div>
+    <div>
+        <h4 class="text-lg font-semibold mb-1">Column 2</h4>
+        <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <a class="homepage-link deploy-link" href="/deploy/kv/manual/cron">Cron docs</a>
+    </div>
+    <div>
+        <h4 class="text-lg font-semibold mb-1">Column 3</h4>
+        <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <a class="homepage-link deploy-link" href="/deploy/kv/manual/queue_overview/">Queues docs</a>
+    </div>
+</comp.Columns>

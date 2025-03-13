@@ -1,0 +1,10 @@
+.banner {
+  @apply flex flex-col gap-4 p-4 border-l-4 text-runtime-foreground
+    bg-runtime-background dark:bg-background-secondary border-runtime-500;
+  width: 100%;
+  margin: 4rem 0;
+}
+
+.banner-deploy {
+  @apply border-deploy-500 bg-deploy-50
+}

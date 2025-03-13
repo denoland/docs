@@ -1,0 +1,19 @@
+h2.heading {
+ @apply text-3xl md:text-4xl font-semibold underline underline-offset-8 mb-6
+}
+
+h3.heading {
+ @apply text-xl md:text-2xl font-semibold underline underline-offset-8 mb-4
+}
+
+.heading-runtime {
+    @apply decoration-runtime-500
+}
+
+.heading-deploy {
+    @apply decoration-deploy-500
+}
+
+.heading-purple {
+    @apply decoration-purple-500
+}
