@@ -102,7 +102,7 @@ export default function LandingPage() {
           />
         </div>
       </main>
-      <aside class="px-8 xl:px-0 max-w-[1200px] mx-auto mb-24 space-y-4 border-t pt-8">
+      <aside class="px-8 xl:px-0 max-w-[1200px] mb-24 space-y-4 border-t pt-8">
         <h2 class="text-2xl md:text-3xl font-bold">
           We welcome contributions!
         </h2>
