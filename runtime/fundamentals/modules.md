@@ -64,6 +64,22 @@ import { add } from "./calc";
 import { add } from "./calc.ts";
 ```
 
+## Import attributes
+
+Deno supports the `with { type: "json" }` import attribute syntax for importing
+JSON files:
+
+```ts
+import data from "./data.json" with { type: "json" };
+
+console.log(data.property); // Access JSON data as an object
+```
+
+This is the only import attribute type currently supported in Deno. Support for
+`type: text` and `type: bytes` is being considered for future updates, and
+currently waiting on the
+[Module Harmony proposal](https://github.com/whatwg/html/issues/9444).
+
 ## Importing third party modules and libraries
 
 When working with third-party modules in Deno, use the same `import` syntax as
