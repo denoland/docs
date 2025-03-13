@@ -43,8 +43,8 @@ to `deno.json`.
 
 ### deno install --entrypoint [FILES]
 
-Use this command to install all depenedencies that are used in the provided
-files and their dependencies.
+Use this command to install all dependencies that are used in the provided files
+and their dependencies.
 
 This is particularly useful if you use `jsr:`, `npm:`, `http:` or `https:`
 specifiers in your code and want to cache all the dependencies before deploying

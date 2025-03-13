@@ -47,7 +47,15 @@ export default function LintRulesIndex(
           command. You can enable sets of rules in <code>deno.json(c)</code>
           {" "}
           by adding their tags (e.g. <code>recommended</code>,{" "}
-          <code>react</code>) to the <code>lint.rules.tags</code> array.
+          <code>react</code>) to the{" "}
+          <a href="/runtime/fundamentals/configuration/#linting">
+            <code>lint.rules.tags</code>
+          </a>{" "}
+          array.
+        </p>
+        <p>
+          If no tag is provided, then the <code>recommended</code>{" "}
+          set of rules will be enabled by default.
         </p>
         <input
           type="text"

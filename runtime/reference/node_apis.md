@@ -15,7 +15,7 @@ Node compatibility is an ongoing project - help us identify gaps and let us know
 which modules you need by
 [opening an issue on GitHub](https://github.com/denoland/deno).
 
-{{ await generateNodeCompatability() }}
+{{ await generateNodeCompatibility() }}
 
 ## Globals
 
