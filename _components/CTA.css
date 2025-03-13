@@ -1,5 +1,5 @@
 .docs-cta {
-  @apply border text-balance text-black font-bold inline-block py-3.5 px-6
+  @apply border text-balance text-black font-bold inline-block py-3.5 px-6 mr-4
     rounded-full w-max hover:no-underline transition-colors duration-200 mb-6;
 }
 

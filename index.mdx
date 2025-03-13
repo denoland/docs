@@ -1,0 +1,143 @@
+---
+title: "Deno Documentation"
+description: "Guides, references, tutorials and examples for using Deno, the secure runtime for JavaScript and TypeScript."
+layout: "raw.tsx"
+---
+
+<comp.Hero  bgImage="deno-looking-up.svg">
+    <h1>Deno Docs</h1>
+    <p>Deno, the open-source runtime for TypeScript and JavaScript. Features built-in dev tools, powerful platform APIs, and native support for TypeScript and JSX.</p>
+    <comp.CTA href="/manual" type="runtime">Get Started -></comp.CTA>
+    <comp.CTA href="/manual" type="deploy">Try Deno Deploy -></comp.CTA>
+</comp.Hero>
+
+<comp.Banner type="runtime">
+<p class="text-lg"><strong>Deno 2</strong> is out now! Learn about  <a href="/runtime/reference/migration_guide" class="runtime-link underline underline-offset-4">what's changed</a> in the release.</p>
+</comp.Banner>
+
+<comp.Heading level="2" type="runtime">Deno Runtime</comp.Heading>
+
+<p>Deno (/ˈdiːnoʊ/, pronounced dee-no) is an open source JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great developer experience. It's built on V8, Rust, and Tokio.</p>
+
+<comp.Columns>
+<div>
+   <h4 class="text-lg font-semibold mb-1">Deno basics</h4>
+   <p class="mb-3">New to Deno? This is the place to start.</p>
+   <a class="homepage-link runtime-link" href="/runtime/">Get started <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+</div>
+<div>
+   <h4 class="text-lg font-semibold mb-1">Configuration</h4>
+   <p class="mb-3">Customizations for Deno’s built-in TypeScript compiler, formatter, and linter.</p>
+   <a class="homepage-link runtime-link" href="/runtime/fundamentals/configuration">Deno config <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+</div>
+<div>
+   <h4 class="text-lg font-semibold mb-1">Testing in Deno</h4>
+   <p class="mb-3">All about Deno’s built-in test runner for JavaScript or TypeScript code.</p>
+   <a class="homepage-link runtime-link" href="/runtime/fundamentals/testing">More about Testing <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+</div>
+</comp.Columns>
+
+<comp.Heading level="3" type="runtime">Examples</comp.Heading>
+<p>A collection of annotated Deno examples, to be used as a reference for how to build with Deno, or as a guide to learn about many of Deno's features. Find more examples in the <a href="/examples/" class="runtime-link underline underline-offset-4">Examples</a> section.</p>
+
+<comp.Columns>
+   <div>
+      <h4 class="text-lg font-semibold mb-1">Basics</h4>
+      <a class="homepage-link mb-1 runtime-link" href="/examples/npm">Importing modules from npm</a><a class="homepage-link mb-1 runtime-link" href="/examples/hello_world">Hello World</a><a class="homepage-link mb-1 runtime-link" href="/examples/node_built_in">Using Node.js built-in modules</a><a class="homepage-link mb-1 runtime-link" href="/examples/url_parsing">Manipulating &amp; Parsing URLs</a>
+   </div>
+   <div>
+      <h4 class="text-lg font-semibold mb-1">Network</h4>
+      <a class="homepage-link mb-1 runtime-link" href="/examples/http_server">HTTP Server: Hello World</a><a class="homepage-link mb-1 runtime-link" href="/examples/http_server_websocket">HTTP Server: WebSockets</a><a class="homepage-link mb-1 runtime-link" href="/examples/http_server_streaming">HTTP Server: Streaming</a><a class="homepage-link mb-1 runtime-link" href="/examples/tcp_connector">TCP Connector: Ping</a>
+   </div>
+   <div>
+      <h4 class="text-lg font-semibold mb-1">System and CLI</h4>
+      <a class="homepage-link mb-1 runtime-link" href="/examples/command_line_arguments">Command Line Arguments</a><a class="homepage-link mb-1 runtime-link" href="/examples/environment_variables">Environment Variables</a><a class="homepage-link mb-1 runtime-link" href="/examples/reading_files">Reading Files</a><a class="homepage-link mb-1 runtime-link" href="/examples/walking_directories">Walking directories</a>
+   </div>
+   <div>
+      <h4 class="text-lg font-semibold mb-1">Deno Cloud Primitives</h4>
+      <a class="homepage-link mb-1 runtime-link" href="/examples/kv">KV</a><a class="homepage-link mb-1 runtime-link" href="/examples/queues">Queues</a><a class="homepage-link mb-1 runtime-link" href="/examples/cron">Cron</a><a class="homepage-link mb-1 runtime-link" href="/examples/kv_watch">KV Watch</a>
+   </div>
+</comp.Columns>
+
+<comp.Heading level="3" type="runtime">API reference</comp.Heading>
+<p>Deno, Web, and Node API reference documentation, built for the Deno experience. Explore the APIs available in Deno in the <a href="/api/deno" class="runtime-link underline underline-offset-4">API reference</a> section.</p>
+
+<comp.Columns>
+<div>
+   <h4 class="text-lg font-semibold mb-1">Deno APIs</h4>
+   <a class="homepage-link mb-1 runtime-link" href="/api/deno/cloud">Cloud</a><a class="homepage-link mb-1 runtime-link" href="/api/deno/ffi">FFI</a><a class="homepage-link mb-1 runtime-link" href="/api/deno/network">Network</a><a class="homepage-link mb-1 runtime-link" href="/api/deno/permissions">Permissions</a><a class="homepage-link mb-1 runtime-link" href="/api/deno/websockets">WebSockets</a><a class="homepage-link mb-1 runtime-link" href="/api/deno">View all Deno APIs</a>
+</div>
+<div>
+   <h4 class="text-lg font-semibold mb-1">Web APIs</h4>
+   <a class="homepage-link mb-1 runtime-link" href="/api/web/cache">Cache</a><a class="homepage-link mb-1 runtime-link" href="/api/web/canvas">Canvas</a><a class="homepage-link mb-1 runtime-link" href="/api/web/fetch">Fetch</a><a class="homepage-link mb-1 runtime-link" href="/api/web/streams">Streams</a><a class="homepage-link mb-1 runtime-link" href="/api/web/url">URL</a><a class="homepage-link mb-1 runtime-link" href="/api/web">View all Web APIs</a>
+</div>
+<div>
+   <h4 class="text-lg font-semibold mb-1">Node APIs</h4>
+   <a class="homepage-link mb-1 runtime-link" href="/api/node/assert">assert</a><a class="homepage-link mb-1 runtime-link" href="/api/node/buffer">buffer</a><a class="homepage-link mb-1 runtime-link" href="/api/node/fs">fs</a><a class="homepage-link mb-1 runtime-link" href="/api/node/path">path</a><a class="homepage-link mb-1 runtime-link" href="/api/node/process">process</a><a class="homepage-link mb-1 runtime-link" href="/api/node">View all Node APIs</a>
+</div>
+<div></div>
+</comp.Columns>
+
+<comp.Banner type="deploy">
+<p class="text-lg">Run Deno Deploy on your own infrastructure with our self-hosted solution running on AWS, GCP, or Azure.  <a href="https://unf275cfh14.typeform.com/to/dIicJYSQ" class="deploy-link underline underline-offset-4 external">Learn more <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a></p>
+</comp.Banner>
+
+<comp.Heading level="2" type="deploy">Deno Deploy</comp.Heading>
+<p>Serverless platform for deploying JavaScript code to a fast, global edge network. Supports Deno APIs and Node.js / npm modules</p>
+
+<comp.Columns>
+<div>
+   <h4 class="text-lg font-semibold mb-1">KV</h4>
+   <p class="mb-3">Key/value database built in to the Deno runtime. Simple API, works with zero configuration on Deno Deploy.</p>
+   <a class="homepage-link deploy-link" href="/deploy/kv/manual/">KV docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+</div>
+<div>
+   <h4 class="text-lg font-semibold mb-1">Cron</h4>
+   <p class="mb-3">Execute code on a configurable schedule at the edge in any time zone.</p>
+   <a class="homepage-link deploy-link" href="/deploy/kv/manual/cron">Cron docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+</div>
+<div>
+   <h4 class="text-lg font-semibold mb-1">Queues</h4>
+   <p class="mb-3">Deno’s queueing API for offloading larger workloads or scheduling tasks with guaranteed delivery.</p>
+   <a class="homepage-link deploy-link" href="/deploy/kv/manual/queue_overview/">Queues docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+</div>
+</comp.Columns>
+
+<comp.Heading level="3" type="deploy">Subhosting</comp.Heading>
+
+<p>Deno Subhosting is a robust platform designed to allow Software as a Service (SaaS) providers to securely run code written by their customers.</p>
+
+<comp.Columns>
+<div>
+    <h4 class="text-lg font-semibold mb-1">Quick Start</h4>
+    <p class="mb-3">Configure your subhosting account and you'll be hosting customer code in minutes.</p>
+    <a class="homepage-link deploy-link" href="/subhosting/manual/quick_start/">Quick start <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+</div>
+<div>
+    <h4 class="text-lg font-semibold mb-1">Subhosting architecture</h4>
+    <p class="mb-3">Manage key resources in your systems - handle data, manage deployments and their analytics. All while ensuring stability and efficiency.</p>
+    <a class="homepage-link deploy-link" href="/subhosting/api/">Learn about subhosting <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+</div>
+<div>
+    <h4 class="text-lg font-semibold mb-1">REST API</h4>
+    <p class="mb-3">Quickly provision new projects and make deployments through our REST API.</p>
+    <a class="homepage-link deploy-link" href="/subhosting/manual/#rest-api-reference-and-openapi-spec">REST API <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+</div>
+</comp.Columns>
+
+<comp.Heading level="2" type="purple">Help</comp.Heading>
+
+<comp.Columns>
+   <div>
+      <h4 class="text-lg font-semibold mb-1">Connect with our community</h4>
+      <p class="mb-3">Get help from the Deno community</p>
+      <a class="homepage-link help-link" href="/runtime/help">Learn more <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+   </div>
+   <div>
+      <h4 class="text-lg font-semibold mb-1">Enterprise support</h4>
+      <p class="mb-3">Explore Deno's enterprise support options</p>
+      <a class="homepage-link help-link" href="https://deno.com/enterprise">Learn more <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
+   </div>
+   <div></div>
+
+</comp.Columns>
