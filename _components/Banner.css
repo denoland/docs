@@ -6,5 +6,5 @@
 }
 
 .banner-deploy {
-  @apply border-deploy-500 bg-deploy-50
+  @apply border-deploy-500 bg-deploy-50 dark:bg-background-secondary;
 }
