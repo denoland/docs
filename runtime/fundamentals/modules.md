@@ -64,6 +64,31 @@ import { add } from "./calc";
 import { add } from "./calc.ts";
 ```
 
+## Import assertions
+
+Deno supports the `assert { type: "json" }` import assertion syntax for
+importing JSON files:
+
+```ts
+import data from "./data.json" assert { type: "json" };
+
+console.log(data.property); // Access JSON data as an object
+```
+
+This is the only import assertion type currently supported in Deno. The
+assertion is required when importing JSON files to explicitly indicate that the
+imported content should be parsed as JSON.
+
+Without the assertion, importing JSON files directly will result in an error:
+
+```ts
+// This will fail
+import data from "./data.json";
+
+// This is correct
+import data from "./data.json" assert { type: "json" };
+```
+
 ## Importing third party modules and libraries
 
 When working with third-party modules in Deno, use the same `import` syntax as
