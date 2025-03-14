@@ -31,8 +31,7 @@ export default function (
             className="font-medium"
             dangerouslySetInnerHTML={{ __html: docEntry.content }}
           />
-        </code>
-        {" "}
+        </code>{" "}
         {docEntry.tags && docEntry.tags.length > 0 && (
           <span>
             {docEntry.tags.map((tag, index) => (
