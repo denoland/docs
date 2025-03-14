@@ -857,7 +857,7 @@
           "short": "D",
           "long": "dev",
           "required": false,
-          "help": "Add as a dev dependency",
+          "help": "Add the package as a dev dependency. Note: This only applies when adding to a `package.json` file.",
           "help_heading": null,
           "usage": "--dev"
         },
@@ -3640,7 +3640,7 @@
           "short": "D",
           "long": "dev",
           "required": false,
-          "help": "Add as a dev dependency",
+          "help": "Add the package as a dev dependency. Note: This only applies when adding to a `package.json` file.",
           "help_heading": null,
           "usage": "--dev"
         },
