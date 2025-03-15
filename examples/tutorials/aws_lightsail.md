@@ -27,7 +27,7 @@ To focus on the deployment, our app will simply be a `main.ts` file that returns
 a string as an HTTP response:
 
 ```ts
-import { Application } from "https://deno.land/x/oak/mod.ts";
+import { Application } from "jsr:@oak/oak";
 
 const app = new Application();
 
