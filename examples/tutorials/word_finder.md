@@ -41,7 +41,7 @@ export function renderHtml(pattern, words) {
     }
     searchResultsContent = `
         <p id="search-result-count" data-count="${words.length}">Words found: ${words.length}</p>
-        <ul id="search-result" name="search-results"> 
+        <ul id="search-result" name="search-results">
           ${wordList}
         </ul>
       `;
@@ -54,17 +54,17 @@ export function renderHtml(pattern, words) {
     </head>
     <body>
         <h1>Deno Word Finder</h1>
-  
+
         <form id="perform-search" name="perform-search" method="get" action="/api/search">
             <label for="search-text">Search text:</label>
             <input id="search-text" name="search-text" type="text" value="${pattern}" />
             <input type="submit" />
         </form>
-  
+
         ${searchResultsContent}
-  
+
         <h2>Instructions</h2>
-  
+
         <p>
             Enter a word using _ and ? as needed for unknown characters. Using ? means to include letters that aren't already used (you can think of it as a "Wheel of Fortune" placeholder). Using _ will find words that contain any character (whether it's currently "revealed" or not).
             <br />
@@ -133,8 +133,8 @@ export function search(pattern, dictionary) {
 
 ## Running a Deno Server
 
-[Oak](https://jsr.io/@oak/oak) is a framework that lets you easily setup
-a server in Deno (analogous to JavaScript's Express) and we'll be using it to
+[Oak](https://jsr.io/@oak/oak) is a framework that lets you easily setup a
+server in Deno (analogous to JavaScript's Express) and we'll be using it to
 host our application. Our server will use our search function to populate our
 HTML template with data and then return the customized HTML back to the viewer.
 We can conveniently rely on the `/usr/share/dict/words` file as our dictionary
