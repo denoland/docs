@@ -134,10 +134,10 @@ export function search(pattern, dictionary) {
 ## Running a Deno Server
 
 [Oak](https://jsr.io/@oak/oak) is a framework that lets you easily setup a
-server in Deno (analogous to JavaScript's Express) and we'll be using it to
-host our application. Our server will use our search function to populate our
-HTML template with data and then return the customized HTML back to the viewer.
-We can conveniently rely on the `/usr/share/dict/words` file as our dictionary
+server in Deno (analogous to JavaScript's Express) and we'll be using it to host
+our application. Our server will use our search function to populate our HTML
+template with data and then return the customized HTML back to the viewer. We
+can conveniently rely on the `/usr/share/dict/words` file as our dictionary
 which is a standard file present on most Unix-like operating systems.
 
 ```jsx title="server.js"
