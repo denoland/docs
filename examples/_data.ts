@@ -198,6 +198,11 @@ export const sidebar = [
         href: "/examples/webassembly/",
         type: "example",
       },
+      {
+        title: "Create object URL",
+        href: "/examples/create_object_url/",
+        type: "example",
+      },
     ],
   },
 
