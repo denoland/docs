@@ -1,8 +1,8 @@
 /**
- * @title Create Object URL
+ * @title Generate downloadable files
  * @difficulty beginner
  * @tags web
- * @run -allow-net
+ * @run --allow-net
  * @resource {https://docs.deno.com/api/web/~/URL.createObjectURL } Doc: Deno.createObjectURL
  * @group Web Standard APIs
  *
@@ -23,7 +23,7 @@ const html = `<!DOCTYPE html>
     }
     .example {
       margin-bottom: 30px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #eee;deno
       padding-bottom: 20px;
     }
   </style>
