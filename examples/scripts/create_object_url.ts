@@ -21,21 +21,6 @@ const html = `<!DOCTYPE html>
       margin: 0 auto;
       padding: 20px;
     }
-    button {
-      padding: 10px 15px;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin: 10px 0;
-    }
-    pre {
-      background: #f4f4f4;
-      padding: 10px;
-      border-radius: 4px;
-      overflow: auto;
-    }
     .example {
       margin-bottom: 30px;
       border-bottom: 1px solid #eee;
