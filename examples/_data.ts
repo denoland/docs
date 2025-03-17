@@ -198,6 +198,11 @@ export const sidebar = [
         href: "/examples/webassembly/",
         type: "example",
       },
+      {
+        title: "Browser-based virtual file system",
+        href: "/examples/virtual_file_system_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
 
