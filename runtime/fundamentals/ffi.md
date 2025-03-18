@@ -57,26 +57,12 @@ The basic pattern for using FFI in Deno involves:
 Here's a simple example loading a C library:
 
 ```ts
-// Define the symbols (functions) we want to use from the library
-const libName = {
-  windows: "example.dll",
-  linux: "libexample.so",
-  darwin: "libexample.dylib",
-}[Deno.build.os];
-
-// Define the function signatures
-const signatures = {
+const dylib = Deno.dlopen("libexample.so", {
   add: { parameters: ["i32", "i32"], result: "i32" },
-} as const;
+});
 
-// Open the library
-const dylib = Deno.dlopen(libName, signatures);
+console.log(dylib.symbols.add(5, 3)); // 8
 
-// Use the function
-const result = dylib.symbols.add(5, 3);
-console.log(result); // 8
-
-// Close the library when done
 dylib.close();
 ```
 
