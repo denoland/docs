@@ -78,6 +78,10 @@ export const sidebar = [
         href: "/runtime/fundamentals/http_server/",
       },
       {
+        title: "FFI",
+        href: "/runtime/fundamentals/ffi/",
+      },
+      {
         title: "OpenTelemetry",
         href: "/runtime/fundamentals/open_telemetry/",
       },
