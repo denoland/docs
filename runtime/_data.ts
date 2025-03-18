@@ -42,6 +42,10 @@ export const sidebar = [
         href: "/runtime/fundamentals/security/",
       },
       {
+        title: "FFI",
+        href: "/runtime/fundamentals/ffi/",
+      },
+      {
         title: "Modules and dependencies",
         href: "/runtime/fundamentals/modules/",
       },
