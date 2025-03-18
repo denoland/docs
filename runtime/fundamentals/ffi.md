@@ -21,7 +21,7 @@ allows you to:
 Deno's FFI implementation is based on the `Deno.dlopen` API, which loads dynamic
 libraries and creates JavaScript bindings to the functions they export.
 
-## Security Considerations
+## Security considerations
 
 FFI requires explicit permission using the
 [`--allow-ffi`](/runtime/fundamentals/security#ffi-foreign-function-interface)
@@ -46,7 +46,7 @@ Always ensure you trust the native libraries you're loading through FFI.
 
 :::
 
-## Basic Usage
+## Basic usage
 
 The basic pattern for using FFI in Deno involves:
 
@@ -80,7 +80,7 @@ console.log(result); // 8
 dylib.close();
 ```
 
-## Supported Types
+## Supported types
 
 Deno's FFI supports a variety of data types for parameters and return values:
 
@@ -92,7 +92,7 @@ Deno's FFI supports a variety of data types for parameters and return values:
 | `buffer`                                                           | Pointer to a buffer (typed array)        |
 | `struct`                                                           | C struct representation                  |
 
-## Working with Structs
+## Working with structs
 
 You can define and use C structures in your FFI code:
 
@@ -135,7 +135,7 @@ const point2 = new Deno.UnsafePointer(
 const dist = dylib.symbols.distance(point1, point2);
 ```
 
-## Working with Callbacks
+## Working with callbacks
 
 You can pass JavaScript functions as callbacks to native code:
 
@@ -169,7 +169,24 @@ dylib.symbols.runCallback();
 callback.close();
 ```
 
-## Example: Using a Rust Library
+## Best practices with FFI
+
+1. Always close resources. Close libraries with `dylib.close()` and callbacks
+   with `callback.close()` when done.
+
+2. Prefer TypeScript. Use TypeScript for better type-checking when working with
+   FFI.
+
+3. Wrap FFI calls in try/catch blocks to handle errors gracefully.
+
+4. Be extremely careful when using FFI, as native code can bypass Deno's
+   security sandbox.
+
+5. Keep the FFI interface as small as possible to reduce the attack surface.
+
+## Examples
+
+### Using a Rust library
 
 Here's an example of creating and using a Rust library with Deno:
 
@@ -215,38 +232,23 @@ console.log(`Fibonacci(10) = ${result}`); // 55
 dylib.close();
 ```
 
-## Best Practices with FFI
-
-1. Always close resources. Close libraries with `dylib.close()` and callbacks
-   with `callback.close()` when done.
-
-2. Prefer TypeScript. Use TypeScript for better type-checking when working with
-   FFI.
-
-3. Wrap FFI calls in try/catch blocks to handle errors gracefully.
-
-4. Be extremely careful when using FFI, as native code can bypass Deno's
-   security sandbox.
-
-5. Keep the FFI interface as small as possible to reduce the attack surface.
-
-## Examples Repository
+### Examples repo
 
 For more examples of using FFI with Deno, check out the
-[DenOFFI Examples Repository](https://github.com/denoffi/denoffi_examples). This
-community-maintained collection includes working examples of FFI integrations
-with various native libraries across different operating systems.
+[Deno FFI examples repository](https://github.com/denoffi/denoffi_examples).
+This community-maintained collection includes working examples of FFI
+integrations with various native libraries across different operating systems.
 
 ## Alternatives to FFI
 
 Before using FFI, consider these alternatives:
 
-- [WebAssembly](/runtime/reference/wasm/): For portable native code that runs
+- [WebAssembly](/runtime/reference/wasm/), for portable native code that runs
   within Deno's sandbox.
-- [Deno subprocesses](/runtime/reference/deno_namespace_apis#subprocesses): Use
-  `Deno.run` to execute external binaries with controlled permissions.
-- [Native Deno APIs](/api/deno): Check if Deno's built-in APIs already provide
-  what you need.
+- Use `Deno.run` to execute external binaries and subprocesses with controlled
+  permissions.
+- Check whether [Deno's native APIs](/api/deno) already provide the
+  functionality you need.
 
 Deno's FFI capabilities provide powerful integration with native code, enabling
 performance optimizations and access to system-level functionality. However,
