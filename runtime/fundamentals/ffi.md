@@ -10,8 +10,8 @@ code performance and capabilities directly into your Deno applications.
 
 ## Introduction to FFI
 
-FFI (Foreign Function Interface) provides a bridge between Deno's JavaScript
-runtime and native code. This allows you to:
+FFI provides a bridge between Deno's JavaScript runtime and native code. This
+allows you to:
 
 - Use existing native libraries within your Deno applications
 - Implement performance-critical code in languages like Rust or C
@@ -23,8 +23,9 @@ libraries and creates JavaScript bindings to the functions they export.
 
 ## Security Considerations
 
-FFI requires explicit permission using the `--allow-ffi` flag, as native code
-runs outside of Deno's security sandbox:
+FFI requires explicit permission using the
+[`--allow-ffi`](/runtime/fundamentals/security#ffi-foreign-function-interface)
+flag, as native code runs outside of Deno's security sandbox:
 
 ```sh
 deno run --allow-ffi my_ffi_script.ts
@@ -214,22 +215,20 @@ console.log(`Fibonacci(10) = ${result}`); // 55
 dylib.close();
 ```
 
-## Best Practices
+## Best Practices with FFI
 
-1. **Always close resources**: Close libraries with `dylib.close()` and
-   callbacks with `callback.close()` when done.
+1. Always close resources. Close libraries with `dylib.close()` and callbacks
+   with `callback.close()` when done.
 
-2. **Prefer TypeScript**: Use TypeScript for better type-checking when working
-   with FFI.
+2. Prefer TypeScript. Use TypeScript for better type-checking when working with
+   FFI.
 
-3. **Error handling**: Wrap FFI calls in try/catch blocks to handle errors
-   gracefully.
+3. Wrap FFI calls in try/catch blocks to handle errors gracefully.
 
-4. **Security**: Be extremely careful when using FFI, as native code can bypass
-   Deno's security sandbox.
+4. Be extremely careful when using FFI, as native code can bypass Deno's
+   security sandbox.
 
-5. **Minimal surface**: Keep the FFI interface as small as possible to reduce
-   the attack surface.
+5. Keep the FFI interface as small as possible to reduce the attack surface.
 
 ## Examples Repository
 
@@ -242,11 +241,12 @@ with various native libraries across different operating systems.
 
 Before using FFI, consider these alternatives:
 
-1. **WebAssembly**: For portable native code that runs within Deno's sandbox.
-2. **Deno subprocesses**: Use `Deno.run` to execute external binaries with
-   controlled permissions.
-3. **Native Deno APIs**: Check if Deno's built-in APIs already provide what you
-   need.
+- [WebAssembly](/runtime/reference/wasm/): For portable native code that runs
+  within Deno's sandbox.
+- [Deno subprocesses](/runtime/reference/deno_namespace_apis#subprocesses): Use
+  `Deno.run` to execute external binaries with controlled permissions.
+- [Native Deno APIs](/api/deno): Check if Deno's built-in APIs already provide
+  what you need.
 
 Deno's FFI capabilities provide powerful integration with native code, enabling
 performance optimizations and access to system-level functionality. However,
