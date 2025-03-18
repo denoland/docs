@@ -230,7 +230,7 @@ console.log(`Fibonacci(10) = ${result}`); // 55
 dylib.close();
 ```
 
-### More examples
+### Examples
 
 - [Netsaur](https://github.com/denosaurs/netsaur/blob/c1efc3e2df6e2aaf4a1672590a404143203885a6/packages/core/src/backends/cpu/mod.ts)
 - [WebView_deno](https://github.com/webview/webview_deno/blob/main/src/ffi.ts)
@@ -239,6 +239,42 @@ dylib.close();
 
 These community-maintained repos includes working examples of FFI integrations
 with various native libraries across different operating systems.
+
+## Related Approaches to Native Code Integration
+
+While Deno's FFI provides a direct way to call native functions, there are other
+approaches to integrate native code:
+
+### Using Node-API (N-API) with Deno
+
+Deno supports [Node-API (N-API)](https://nodejs.org/api/n-api.html) for
+compatibility with native Node.js addons. This enables you to use existing
+native modules written for Node.js.
+
+Directly loading a Node-API addon:
+
+```ts
+import process from "node:process";
+process.dlopen(module, "./native_module.node", 0);
+```
+
+Using an npm package that uses a Node-API addon:
+
+```ts
+import someNativeAddon from "npm:some-native-addon";
+console.log(someNativeAddon.doSomething());
+```
+
+How is this different from FFI?
+
+| **Aspect**  | **FFI**                | **Node-API Support**                        |
+| ----------- | ---------------------- | ------------------------------------------- |
+| Setup       | No build step required | Requires precompiled binaries or build step |
+| Portability | Tied to library ABI    | ABI-stable across versions                  |
+| Use Case    | Direct library calls   | Reuse Node.js addons                        |
+
+Node-API support is ideal for leveraging existing Node.js native modules,
+whereas FFI is best for direct, lightweight calls to native libraries.
 
 ## Alternatives to FFI
 
