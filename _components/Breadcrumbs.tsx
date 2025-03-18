@@ -37,7 +37,7 @@ export default function (props: {
   url: string;
   sectionTitle: string;
   sectionHref: string;
-}) {
+}, helpers: Lume.Helpers) {
   const crumbs: SidebarItem[] = [];
 
   for (const section of props.sidebar) {
@@ -99,9 +99,13 @@ export default function (props: {
                   </a>
                 )
                 : (
-                  <span itemprop="name" class="block px-3 py-1.5 text-sm">
-                    {crumb.title}
-                  </span>
+                  <span
+                    itemprop="name"
+                    class="block px-3 py-1.5 text-sm"
+                    dangerouslySetInnerHTML={{
+                      __html: helpers.md(crumb.title, true),
+                    }}
+                  />
                 )}
               <meta itemprop="position" content={String(i + 2)} />
             </li>
