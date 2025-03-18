@@ -70,25 +70,25 @@ dylib.close();
 
 Deno's FFI supports a variety of data types for parameters and return values:
 
- | FFI Type               | Deno                 | C                        | Rust                      | 
- | ---------------------- | -------------------- | ------------------------ | ------------------------- | 
- | `i8`                   | `number`             | `char` / `signed char`   | `i8`                      | 
- | `u8`                   | `number`             | `unsigned char`          | `u8`                      | 
- | `i16`                  | `number`             | `short int`              | `i16`                     | 
- | `u16`                  | `number`             | `unsigned short int`     | `u16`                     | 
- | `i32`                  | `number`             | `int` / `signed int`     | `i32`                     | 
- | `u32`                  | `number`             | `unsigned int`           | `u32`                     | 
- | `i64`                  | `bigint`             | `long long int`          | `i64`                     | 
- | `u64`                  | `bigint`             | `unsigned long long int` | `u64`                     | 
- | `usize`                | `bigint`             | `size_t`                 | `usize`                   | 
- | `isize`                | `bigint`             | `size_t`                 | `isize`                   | 
- | `f32`                  | `number`             | `float`                  | `f32`                     | 
- | `f64`                  | `number`             | `double`                 | `f64`                     | 
- | `void`[1]              | `undefined`          | `void`                   | `()`                      | 
- | `pointer`              | `{} \| null`         | `void *`                 | `*mut c_void`             | 
- | `buffer`[2]            | `TypedArray \| null` | `uint8_t *`              | `*mut u8`                 | 
- | `function`[3]          | `{} \| null`         | `void (*fun)()`          | `Option<extern "C" fn()>` | 
- | `{ struct: [...] }`[4] | `TypedArray`         | `struct MyStruct`        | `MyStruct`                | 
+| FFI Type               | Deno                 | C                        | Rust                      |
+| ---------------------- | -------------------- | ------------------------ | ------------------------- |
+| `i8`                   | `number`             | `char` / `signed char`   | `i8`                      |
+| `u8`                   | `number`             | `unsigned char`          | `u8`                      |
+| `i16`                  | `number`             | `short int`              | `i16`                     |
+| `u16`                  | `number`             | `unsigned short int`     | `u16`                     |
+| `i32`                  | `number`             | `int` / `signed int`     | `i32`                     |
+| `u32`                  | `number`             | `unsigned int`           | `u32`                     |
+| `i64`                  | `bigint`             | `long long int`          | `i64`                     |
+| `u64`                  | `bigint`             | `unsigned long long int` | `u64`                     |
+| `usize`                | `bigint`             | `size_t`                 | `usize`                   |
+| `isize`                | `bigint`             | `size_t`                 | `isize`                   |
+| `f32`                  | `number`             | `float`                  | `f32`                     |
+| `f64`                  | `number`             | `double`                 | `f64`                     |
+| `void`[1]              | `undefined`          | `void`                   | `()`                      |
+| `pointer`              | `{} \| null`         | `void *`                 | `*mut c_void`             |
+| `buffer`[2]            | `TypedArray \| null` | `uint8_t *`              | `*mut u8`                 |
+| `function`[3]          | `{} \| null`         | `void (*fun)()`          | `Option<extern "C" fn()>` |
+| `{ struct: [...] }`[4] | `TypedArray`         | `struct MyStruct`        | `MyStruct`                |
 
 ## Working with structs
 
@@ -237,7 +237,7 @@ dylib.close();
 - [Deno_sdl2](https://github.com/littledivy/deno_sdl2/blob/main/mod.ts)
 - [Deno FFI examples repository](https://github.com/denoffi/denoffi_examples)
 
-Thes community-maintained repos includes working examples of FFI integrations
+These community-maintained repos includes working examples of FFI integrations
 with various native libraries across different operating systems.
 
 ## Alternatives to FFI
