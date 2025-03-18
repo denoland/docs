@@ -42,10 +42,6 @@ export const sidebar = [
         href: "/runtime/fundamentals/security/",
       },
       {
-        title: "FFI",
-        href: "/runtime/fundamentals/ffi/",
-      },
-      {
         title: "Modules and dependencies",
         href: "/runtime/fundamentals/modules/",
       },
@@ -80,6 +76,10 @@ export const sidebar = [
       {
         title: "HTTP Server",
         href: "/runtime/fundamentals/http_server/",
+      },
+      {
+        title: "FFI",
+        href: "/runtime/fundamentals/ffi/",
       },
       {
         title: "OpenTelemetry",
