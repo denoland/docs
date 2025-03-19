@@ -22,7 +22,7 @@ The pre-requisites for this are:
 Create a new Deno app using the following code:
 
 ```ts title="main.ts"
-Deno.serve((req) => new Response("Hello World!"));
+Deno.serve((req) => new Response("Hello World from Deno on AWS Lambda!"));
 ```
 
 Save this code in a file named `main.ts`.
@@ -32,112 +32,213 @@ Save this code in a file named `main.ts`.
 Create a new file named `Dockerfile` with the following content:
 
 ```Dockerfile
-# Set up the base image
-FROM public.ecr.aws/awsguru/aws-lambda-adapter:0.8.4 AS aws-lambda-adapter
-FROM denoland/deno:bin-1.45.2 AS deno_bin
-FROM debian:bookworm-20230703-slim AS deno_runtime
-COPY --from=aws-lambda-adapter /lambda-adapter /opt/extensions/lambda-adapter
-COPY --from=deno_bin /deno /usr/local/bin/deno
-ENV PORT=8000
+FROM amazon/aws-lambda-nodejs:20 as lambda-base
+
+# Install Deno
+RUN curl -fsSL https://deno.land/install.sh | sh
+ENV DENO_INSTALL=/root/.deno
+ENV PATH=${DENO_INSTALL}/bin:${PATH}
+
+# Copy function code
+WORKDIR ${LAMBDA_TASK_ROOT}
+COPY . ${LAMBDA_TASK_ROOT}
+
+# Create wrapper script for Lambda
+RUN echo '#!/bin/bash\n\
+NODE_OPTIONS="--experimental-fetch" exec node lambda-adapter.js\
+' > /var/runtime/bootstrap \
+&& chmod +x /var/runtime/bootstrap
+
+# Create Lambda adapter script
+RUN echo 'const { spawn } = require("child_process");\n\
+const { readFileSync } = require("fs");\n\
+\n\
+// Parse Lambda runtime API address\n\
+const API_ADDRESS = process.env.AWS_LAMBDA_RUNTIME_API;\n\
+\n\
+// Start Deno server in background\n\
+const deno = spawn("deno", ["run", "--allow-net", "--allow-env", "main.ts"]);\n\
+deno.stdout.on("data", data => console.log(`stdout: ${data}`));\n\
+deno.stderr.on("data", data => console.error(`stderr: ${data}`));\n\
+\n\
+// Wait for server to start\n\
+const sleep = ms => new Promise(r => setTimeout(r, ms));\n\
+const waitForServer = async () => {\n\
+  let attempt = 0;\n\
+  while (attempt < 10) {\n\
+    try {\n\
+      await fetch("http://localhost:8000");\n\
+      return;\n\
+    } catch (e) {\n\
+      attempt++;\n\
+      await sleep(500);\n\
+    }\n\
+  }\n\
+  throw new Error("Server failed to start");\n\
+};\n\
+\n\
+// Handle Lambda requests\n\
+const handleRequest = async () => {\n\
+  try {\n\
+    // Get event\n\
+    const res = await fetch(`http://${API_ADDRESS}/2018-06-01/runtime/invocation/next`);\n\
+    const requestId = res.headers.get("lambda-runtime-aws-request-id");\n\
+    const event = await res.json();\n\
+\n\
+    // Forward to Deno server\n\
+    const denoRes = await fetch("http://localhost:8000");\n\
+    const body = await denoRes.text();\n\
+\n\
+    // Return response\n\
+    await fetch(\n\
+      `http://${API_ADDRESS}/2018-06-01/runtime/invocation/${requestId}/response`,\n\
+      {\n\
+        method: "POST",\n\
+        body: JSON.stringify({\n\
+          statusCode: denoRes.status,\n\
+          headers: Object.fromEntries(denoRes.headers.entries()),\n\
+          body,\n\
+          isBase64Encoded: false,\n\
+        }),\n\
+      }\n\
+    );\n\
+  } catch (error) {\n\
+    console.error("Error:", error);\n\
+    // Report error\n\
+    await fetch(\n\
+      `http://${API_ADDRESS}/2018-06-01/runtime/invocation/${requestId}/error`,\n\
+      {\n\
+        method: "POST",\n\
+        body: JSON.stringify({\n\
+          errorMessage: error.message,\n\
+          errorType: error.constructor.name,\n\
+          stackTrace: error.stack.split("\\n"),\n\
+        }),\n\
+      }\n\
+    );\n\
+  }\n\
+};\n\
+\n\
+// Main function\n\
+const main = async () => {\n\
+  try {\n\
+    await waitForServer();\n\
+    console.log("Server started successfully");\n\
+\n\
+    // Process events in a loop\n\
+    while (true) {\n\
+      await handleRequest();\n\
+    }\n\
+  } catch (error) {\n\
+    console.error("Fatal error:", error);\n\
+    process.exit(1);\n\
+  }\n\
+};\n\
+\n\
+main();\n\
+' > ${LAMBDA_TASK_ROOT}/lambda-adapter.js
+
 EXPOSE 8000
-RUN mkdir /var/deno_dir
-ENV DENO_DIR=/var/deno_dir
-
-# Copy the function code
-WORKDIR "/var/task"
-COPY . /var/task
-
-# Warmup caches
-RUN timeout 10s deno run -A main.ts || [ $? -eq 124 ] || exit 1
-
-CMD ["deno", "run", "-A", "main.ts"]
+CMD ["node", "lambda-adapter.js"]
 ```
 
-This Dockerfile uses the
-[`aws-lambda-adapter`](https://github.com/awslabs/aws-lambda-web-adapter)
-project to adapt regular HTTP servers, like Deno's `Deno.serve`, to the AWS
-Lambda runtime API.
+This Dockerfile uses the official `amazon/aws-lambda-nodejs:20` base image,
+which is officially supported by AWS Lambda. We then:
 
-We also use the `denoland/deno:bin-1.45.2` image to get the Deno binary and
-`debian:bookworm-20230703-slim` as the base image. The
-`debian:bookworm-20230703-slim` image is used to keep the image size small.
-
-The `PORT` environment variable is set to `8000` to tell the AWS Lambda adapter
-that we are listening on port `8000`.
-
-We set the `DENO_DIR` environment variable to `/var/deno_dir` to store cached
-Deno source code and transpiled modules in the `/var/deno_dir` directory.
-
-The warmup caches step is used to warm up the Deno cache before the function is
-invoked. This is done to reduce the cold start time of the function. These
-caches contain the compiled code and dependencies of your function code. This
-step starts your server for 10 seconds and then exits.
-
-When using a package.json, remember to run `deno install` to install
-`node_modules` from your `package.json` file before warming up the caches or
-running the function.
+1. Install Deno using the official install script
+2. Set up a custom bootstrap script that Lambda will use to start the function
+3. Create a Node.js adapter script that:
+   - Starts your Deno application as a child process
+   - Acts as a bridge between the AWS Lambda runtime API and your Deno server
+   - Forwards requests and responses between Lambda and your Deno app
 
 ## Step 3: Build the Docker Image
 
 Build the Docker image using the following command:
 
 ```bash
-docker build -t hello-world .
+docker build -t deno-lambda .
 ```
 
-## Step 4: Create an ECR Docker repository and push the image
+## Step 4: Create an ECR Repository and Push the Image
 
-With the AWS CLI, create an ECR repository and push the Docker image to it:
+First, create an ECR repository:
 
 ```bash
-aws ecr create-repository --repository-name hello-world --region us-east-1 | grep repositoryUri
+aws ecr create-repository --repository-name deno-lambda --region us-east-1
 ```
 
-This should output a repository URI that looks like
-`<account_id>.dkr.ecr.us-east-1.amazonaws.com/hello-world`.
+Note the repository URI in the output, it will look like:
+`<account_id>.dkr.ecr.us-east-1.amazonaws.com/deno-lambda`
 
-Authenticate Docker with ECR, using the repository URI from the previous step:
+Authenticate Docker with ECR:
 
 ```bash
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <account_id>.dkr.ecr.us-east-1.amazonaws.com
 ```
 
-Tag the Docker image with the repository URI, again using the repository URI
-from the previous steps:
+Tag and push your Docker image:
 
 ```bash
-docker tag hello-world:latest <account_id>.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
+docker tag deno-lambda:latest <account_id>.dkr.ecr.us-east-1.amazonaws.com/deno-lambda:latest
+docker push <account_id>.dkr.ecr.us-east-1.amazonaws.com/deno-lambda:latest
 ```
 
-Finally, push the Docker image to the ECR repository, using the repository URI
-from the previous steps:
+## Step 5: Create an AWS Lambda Function
 
-```bash
-docker push <account_id>.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
-```
+1. Go to the [AWS Lambda console](https://console.aws.amazon.com/lambda/home)
+2. Click "Create function"
+3. Select "Container image"
+4. Enter a function name (e.g., "deno-function")
+5. Under "Container image URI", click "Browse images"
+6. Select the repository and image you just pushed
+7. Click "Create function"
 
-## Step 5: Create an AWS Lambda function
+After the function is created:
 
-Now you can create a new AWS Lambda function from the AWS Management Console.
+1. In the "Configuration" tab, click "Edit" in the "General configuration"
+   section
+2. Set the timeout to at least 30 seconds (to allow for Deno startup time)
+3. Click "Save"
 
-1. Go to the AWS Management Console and
-   [navigate to the Lambda service](https://us-east-1.console.aws.amazon.com/lambda/home?region=us-east-1).
-2. Click on the "Create function" button.
-3. Choose "Container image".
-4. Enter a name for the function, like "hello-world".
-5. Click on the "Browse images" button and select the image you pushed to ECR.
-6. Click on the "Create function" button.
-7. Wait for the function to be created.
-8. In the "Configuration" tab, go to the "Function URL" section and click on
-   "Create function URL".
-9. Choose "NONE" for the auth type (this will make the lambda function publicly
-   accessible).
-10. Click on the "Save" button.
+To create a function URL:
 
-## Step 6: Test the Lambda function
+1. Go to the "Configuration" tab
+2. Select "Function URL" from the left sidebar
+3. Click "Create function URL"
+4. For "Auth type", select "NONE" (for public access)
+5. Click "Save"
 
-You can now visit your Lambda function's URL to see the response from your Deno
-app.
+## Step 6: Test the Lambda Function
 
-🦕 You have successfully deployed a Deno app to AWS Lambda using Docker. You can
-now use this setup to deploy more complex Deno apps to AWS Lambda.
+You can now visit the provided function URL to see your Deno application running
+on AWS Lambda!
+
+For more advanced setups, you might want to:
+
+- Configure API Gateway to handle more complex HTTP routing
+- Set up environment variables for your Deno application
+- Create a CI/CD pipeline using GitHub Actions to automate deployments
+
+## Troubleshooting
+
+If you encounter issues:
+
+1. **Cold start timeouts**: Increase the Lambda function timeout in the
+   configuration
+2. **Memory issues**: Increase the allocated memory for your Lambda function
+3. **Permissions errors**: Check the CloudWatch logs for specific error messages
+4. **Request format issues**: Modify the lambda-adapter.js script to handle
+   different types of Lambda events
+
+## Next Steps
+
+Now that you've successfully deployed a simple Deno application to AWS Lambda,
+consider exploring:
+
+- [AWS SAM](https://aws.amazon.com/serverless/sam/) for more complex serverless
+  deployments
+- [API Gateway integration](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-api-as-simple-proxy-for-lambda.html)
+- [AWS CDK](https://aws.amazon.com/cdk/) for infrastructure as code
+
+🦕 You've successfully deployed a Deno application to AWS Lambda!
