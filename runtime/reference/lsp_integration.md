@@ -106,7 +106,8 @@ client, which the client is expected to implement:
 ### .cache
 
 `deno.cache` is sent as a resolution code action when there is an un-cached
-module specifier that is being imported into a module. It will be sent with argument that contains the resolved specifier as a string to be cached.
+module specifier that is being imported into a module. It will be sent with
+argument that contains the resolved specifier as a string to be cached.
 
 ### showReferences
 
