@@ -1,3 +1,5 @@
+import lume from "lume/mod.ts";
+
 export function deleteBackticks(str?: string) {
   return str?.replace(/`/g, "");
 }
@@ -34,7 +36,7 @@ export default function Layout(data: Lume.Data) {
           title={data.title}
           description={description}
           section={section}
-          url={data.url}
+          url={`${data.site?.location ?? ""}${data.url}`}
         />
         <meta
           name="keywords"
