@@ -1,5 +1,3 @@
-import lume from "lume/mod.ts";
-
 export function deleteBackticks(str?: string) {
   return str?.replace(/`/g, "");
 }
