@@ -807,7 +807,7 @@ export const sidebar = [
       },
       {
         title: "OpenTelemetry Tracing with Datadog",
-        href: "/examples/datadog_otel_tutoral/",
+        href: "/examples/datadog_otel_tutorial/",
         type: "tutorial",
       },
     ],
