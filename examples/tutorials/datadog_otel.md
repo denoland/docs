@@ -1,6 +1,7 @@
 ---
 title: Using Deno with Datadog
 description: "Learn how to monitor your Deno applications with Datadog using OpenTelemetry. This tutorial covers setup, configuration, and sending traces, metrics, and logs to Datadog."
+url: /examples/datadog_otel_tutorial
 ---
 
 # Using Deno with Datadog
