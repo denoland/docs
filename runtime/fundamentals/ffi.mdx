@@ -33,20 +33,18 @@ flag, as native code runs outside of Deno's security sandbox:
 deno run --allow-ffi my_ffi_script.ts
 ```
 
-:::info
+<comp.Admonition type="info">
+  <strong>Important security warning</strong>: Unlike JavaScript code running in the Deno
+  sandbox, native libraries loaded via FFI have the same access level as the Deno
+  process itself. This means they can:
 
-⚠️ **Important security warning**: Unlike JavaScript code running in the Deno
-sandbox, native libraries loaded via FFI have the same access level as the Deno
-process itself. This means they can:
+  - Access the filesystem
+  - Make network connections
+  - Access environment variables
+  - Execute system commands
 
-- Access the filesystem
-- Make network connections
-- Access environment variables
-- Execute system commands
-
-Always ensure you trust the native libraries you're loading through FFI.
-
-:::
+  Always ensure you trust the native libraries you're loading through FFI.
+</comp.Admonition>
 
 ## Basic usage
 
@@ -91,6 +89,21 @@ Deno's FFI supports a variety of data types for parameters and return values:
 | `buffer`[2]            | `TypedArray \| null` | `uint8_t *`              | `*mut u8`                 |
 | `function`[3]          | `{} \| null`         | `void (*fun)()`          | `Option<extern "C" fn()>` |
 | `{ struct: [...] }`[4] | `TypedArray`         | `struct MyStruct`        | `MyStruct`                |
+
+As of Deno 1.25, the `pointer` type has been split into a `pointer` and a
+`buffer` type to ensure users take advantage of optimizations for Typed Arrays,
+and as of Deno 1.31 the JavaScript representation of `pointer` has become an
+opaque pointer object or `null` for null pointers.
+- [1] `void` type can only be used as a result type.
+- [2] `buffer` type accepts TypedArrays as parameter, but it always returns a
+  pointer object or `null` when used as result type like the `pointer` type.
+- [3] `function` type works exactly the same as the `pointer` type as a
+  parameter and result type.
+- [4] `struct` type is for passing and returning C structs by value (copy). The
+  `struct` array must enumerate each of the struct's fields' type in order. The
+  structs are padded automatically: Packed structs can be defined by using an
+  appropriate amount of `u8` fields to avoid padding. Only TypedArrays are
+  supported as structs, and structs are always returned as `Uint8Array`s.
 
 ## Working with structs
 
