@@ -1,12 +1,7 @@
 type AdmonitionType =
   | "note"
   | "caution"
-  | "warning"
-  | "tip"
-  | "danger"
-  | "info"
-  | "success"
-  | "error";
+  | "tip";
 
 export default function Admonition(
   props: { type: AdmonitionType; children: any },
