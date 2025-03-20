@@ -92,6 +92,21 @@ Deno's FFI supports a variety of data types for parameters and return values:
 | `function`[3]          | `{} \| null`         | `void (*fun)()`          | `Option<extern "C" fn()>` |
 | `{ struct: [...] }`[4] | `TypedArray`         | `struct MyStruct`        | `MyStruct`                |
 
+As of Deno 1.25, the `pointer` type has been split into a `pointer` and a
+`buffer` type to ensure users take advantage of optimizations for Typed Arrays,
+and as of Deno 1.31 the JavaScript representation of `pointer` has become an
+opaque pointer object or `null` for null pointers.
+- [1] `void` type can only be used as a result type.
+- [2] `buffer` type accepts TypedArrays as parameter, but it always returns a
+  pointer object or `null` when used as result type like the `pointer` type.
+- [3] `function` type works exactly the same as the `pointer` type as a
+  parameter and result type.
+- [4] `struct` type is for passing and returning C structs by value (copy). The
+  `struct` array must enumerate each of the struct's fields' type in order. The
+  structs are padded automatically: Packed structs can be defined by using an
+  appropriate amount of `u8` fields to avoid padding. Only TypedArrays are
+  supported as structs, and structs are always returned as `Uint8Array`s.
+
 ## Working with structs
 
 You can define and use C structures in your FFI code:
