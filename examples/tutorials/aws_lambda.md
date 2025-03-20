@@ -152,6 +152,21 @@ which is officially supported by AWS Lambda. We then:
    - Acts as a bridge between the AWS Lambda runtime API and your Deno server
    - Forwards requests and responses between Lambda and your Deno app
 
+:::note
+
+It may seem counterintuitive to use Node.js Lambda base when we're trying to
+deploy a Deno application. This approach is necessary because of AWS Lambda's
+Runtime Architecture Lambda's Runtime Interface. AWS Lambda has specific runtime
+interfaces designed to work with officially supported runtimes (like Node.js,
+Python, Java, etc.). Deno is not yet an officially supported runtime.
+
+When deploying a container to Lambda, AWS expects it to implement the Lambda
+Runtime API, which follows specific protocols for receiving events and sending
+responses. Node.js is Needed as a bridge. The Node.js layer serves as an adapter
+AWS Lambda's runtime API expectations and your Deno application.
+
+:::
+
 ## Step 3: Build the Docker Image
 
 Build the Docker image using the following command:
