@@ -796,6 +796,11 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "OpenTelemetry Tracing with Datadog",
+        href: "/examples/datadog_otel_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "User Data Processing with Deno Collections",
         href: "/examples/data_processing/",
         type: "example",
