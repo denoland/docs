@@ -34,7 +34,7 @@ export default function Layout(data: Lume.Data) {
           title={data.title}
           description={description}
           section={section}
-          url={`${data.site?.location ?? ""}${data.url}`}
+          url={`https://docs.deno.com${data.url}`}
         />
         <meta
           name="keywords"
