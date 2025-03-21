@@ -32,7 +32,7 @@ types of requests and serve content accordingly:
 ```typescript title="server.ts"
 export default {
   async fetch(request) {
-    if (request.url.startsWith("/json")) {
+    if (request.url.endsWith("/json")) {
       return Response.json({ hello: "world" });
     }
 
