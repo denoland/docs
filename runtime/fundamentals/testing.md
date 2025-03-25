@@ -588,3 +588,51 @@ Snapshot testing enables catching a wide array of bugs with very little code. It
 is particularly helpful in situations where it is difficult to precisely express
 what should be asserted, without requiring a prohibitive amount of code, or
 where the assertions a test makes are expected to change often.
+
+## Managing Permissions in Tests
+
+When running tests in Deno, it's important to understand that the `permissions`
+object in test configuration doesn't grant permissions to the test. Instead, it
+specifies which permissions the test requires to run correctly.
+
+A test cannot have more permissions than were granted to the Deno process itself
+when it was started (e.g., with `deno test --allow-read`). This security model
+prevents JavaScript from breaking out of its sandbox, which could create
+security vulnerabilities.
+
+For example, if you run `deno test` without any permission flags, tests that
+specify permissions will still be denied those permissions. You must explicitly
+run the test command with the necessary permission flags.
+
+You can explicitly limit permissions with the permissions object:
+
+```ts
+Deno.test({
+  name: "file and network permissions test",
+  permissions: {
+    read: ["./data"], // Declares that this test needs read access to ./data
+    write: false, // Explicitly states this test doesn't need write access
+    net: ["deno.land", "example.com"], // Declares that this test needs network access to specific domains
+    env: true, // Declares that this test needs environment access
+    run: false, // Declares that this test doesn't need to run subprocesses
+    ffi: false, // Declares that this test doesn't need FFI access
+    hrtime: false, // Declares that this test doesn't need high-resolution time
+  },
+  async fn() {
+    // Test code here
+    const data = await Deno.readTextFile("./data/test.json");
+    const response = await fetch("https://deno.land/");
+    // ...
+  },
+});
+```
+
+To run this test successfully, you would need to execute:
+
+```sh
+deno test --allow-read=./data --allow-net=deno.land,example.com --allow-env
+```
+
+This granular permission control helps ensure that your tests only get access to
+the resources they actually need, following the principle of least privilege. It
+also serves as documentation for what resources each test requires.
