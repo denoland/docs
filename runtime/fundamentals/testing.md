@@ -593,7 +593,7 @@ where the assertions a test makes are expected to change often.
 
 The `permissions` property in the `Deno.test` configuration allows you to
 specifically deny permissions, but does not grant them. Permissions must be
-provided when running the test command. IWhen building robust applications, you
+provided when running the test command. When building robust applications, you
 often need to handle cases where permissions are denied, (for example you may
 want to write tests to check whether fallbacks have been set up correctly).
 
