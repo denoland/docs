@@ -592,7 +592,7 @@ where the assertions a test makes are expected to change often.
 ## Managing Permissions in Tests
 
 When running tests in Deno, it's important to understand that the `permissions`
-object in test configuration doesn't grant permissions to the test. Instead, it
+object in test configuration doesn't grant additional permissions to a test case that the running process doesn't have. Instead, it
 specifies which permissions the test requires to run correctly.
 
 A test cannot have more permissions than were granted to the Deno process itself
