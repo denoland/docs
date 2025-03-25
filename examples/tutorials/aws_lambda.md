@@ -33,7 +33,7 @@ Create a new file named `Dockerfile` with the following content:
 
 ```Dockerfile
 # Set up the base image
-FROM public.ecr.aws/awsguru/aws-lambda-adapter:0.0.0 AS aws-lambda-adapter
+FROM public.ecr.aws/awsguru/aws-lambda-adapter:0.8.4 AS aws-lambda-adapter
 FROM denoland/deno:bin-1.45.2 AS deno_bin
 FROM debian:bookworm-20230703-slim AS deno_runtime
 COPY --from=aws-lambda-adapter /lambda-adapter /opt/extensions/lambda-adapter
