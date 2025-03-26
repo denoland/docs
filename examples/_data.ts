@@ -1,5 +1,3 @@
-import { title } from "../lint/index.tsx";
-
 export const sidebar = [
   {
     title: "Basics",
