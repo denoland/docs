@@ -1,3 +1,5 @@
+import { title } from "../lint/index.tsx";
+
 export const sidebar = [
   {
     title: "Basics",
@@ -100,18 +102,6 @@ export const sidebar = [
         title: "Formatting with Deno fmt",
         href: "/examples/deno_fmt/",
         externalURL: "https://www.youtube.com/watch?v=Ouzso9gQqnc",
-        type: "video",
-      },
-      {
-        title: "Benchmarking with Deno bench",
-        href: "/examples/deno_bench/",
-        externalURL: "https://www.youtube.com/watch?v=IVde_GTN6TM",
-        type: "video",
-      },
-      {
-        title: "Getting started with Deno test",
-        href: "/examples/deno_test/",
-        externalURL: "https://www.youtube.com/watch?v=gDtDVfsgHgs",
         type: "video",
       },
     ],
@@ -294,6 +284,32 @@ export const sidebar = [
         title: "Build a Tanstack app",
         href: "/examples/tanstack_tutorial/",
         type: "tutorial",
+      },
+    ],
+  },
+  {
+    title: "Testing",
+    items: [
+      {
+        title: "Writing tests",
+        href: "/examples/writing_tests/",
+        type: "example",
+      },
+      {
+        title: "Basics of testing",
+        href: "/examples/testing_tutorials/",
+      },
+      {
+        title: "Getting started with Deno test",
+        href: "/examples/deno_test/",
+        externalURL: "https://www.youtube.com/watch?v=gDtDVfsgHgs",
+        type: "video",
+      },
+      {
+        title: "Benchmarking with Deno bench",
+        href: "/examples/deno_bench/",
+        externalURL: "https://www.youtube.com/watch?v=IVde_GTN6TM",
+        type: "video",
       },
     ],
   },
@@ -491,11 +507,6 @@ export const sidebar = [
       {
         title: "Command line arguments",
         href: "/examples/command_line_arguments/",
-        type: "example",
-      },
-      {
-        title: "Writing tests",
-        href: "/examples/writing_tests/",
         type: "example",
       },
       {
