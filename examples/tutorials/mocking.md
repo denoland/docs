@@ -1,6 +1,6 @@
 ---
 title: "Testing in isolation with mocks"
-description: "Master the art of mocking in your unit tests in with this comprehensive guide. Learn how spies, stubs, and fake time, and other Deno helpers let you to isolate your code during testing, making your unit tests more reliable and efficient."
+description: "Master the art of mocking in your unit tests. Learn how spies, stubs, fake time, and other Deno tools let you improve your code and confidence"
 url: /examples/mocking_tutorial/
 ---
 
