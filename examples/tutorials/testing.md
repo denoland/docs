@@ -4,12 +4,10 @@ description: "Learn how to write effective tests in Deno with step-by-step examp
 url: /examples/testing_tutorial/
 ---
 
-# Writing tests in Deno: A complete guide
-
-Testing is a critical practice in software development that helps ensure your
-code works as expected and continues to work as you make changes. Tests verify
-that your functions, modules, and applications behave correctly, handle edge
-cases appropriately, and maintain expected performance characteristics.
+Testing is critical in software development to ensure your code works as
+expected, and continues to work as you make changes. Tests verify that your
+functions, modules, and applications behave correctly, handle edge cases
+appropriately, and maintain expected performance characteristics.
 
 ## Table of Contents
 
@@ -26,10 +24,10 @@ cases appropriately, and maintain expected performance characteristics.
 
 ## Why testing matters
 
-Writing tests as you go allows you to catch issues in your code before they
-reach production, saving time and resources. Tests are also useful to help plan
-out the logic of your application, they can serve as a human readable
-description of how your code is meant to be used.
+Testing your code allows you to catch bugs and issues before they reach
+production, saving time and resources. Tests are also useful to help plan out
+the logic of your application, they can serve as a human readable description of
+how your code is meant to be used.
 
 Having thorough tests allows you to refactor your code with confidence, knowing
 you'll be alerted if something breaks or you introduce a bug or regression.
