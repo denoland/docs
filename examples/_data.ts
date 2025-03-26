@@ -96,6 +96,12 @@ export const sidebar = [
         externalURL: "https://www.youtube.com/watch?v=Ouzso9gQqnc",
         type: "video",
       },
+      {
+        title: "Benchmarking with Deno bench",
+        href: "/examples/deno_bench/",
+        externalURL: "https://www.youtube.com/watch?v=IVde_GTN6TM",
+        type: "video",
+      },
     ],
   },
   {
@@ -312,12 +318,6 @@ export const sidebar = [
         title: "Better testing with Deno coverage",
         href: "/examples/deno_coverage/",
         externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
-        type: "video",
-      },
-      {
-        title: "Benchmarking with Deno bench",
-        href: "/examples/deno_bench/",
-        externalURL: "https://www.youtube.com/watch?v=IVde_GTN6TM",
         type: "video",
       },
     ],
