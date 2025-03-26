@@ -443,6 +443,18 @@ authentication service that:
 2. Calls an API to authenticate
 3. Stores tokens with expiration times
 
+In the example below, we'll create a full `AuthService` class that handles user
+login, token management, and authentication. We'll test it thoroughly using
+various mocking techniques covered earlier: stubbing fetch requests, spying on
+methods, and manipulating time to test token expiration - all within organized
+test steps.
+
+Deno's testing API provides a useful `t.step()` function that allows you to
+organize your tests into logical steps or sub-tests. This makes complex tests
+more readable and helps pinpoint exactly which part of a test is failing. Each
+step can have its own assertions and will be reported separately in the test
+output.
+
 ```ts
 import { assertEquals, assertRejects } from "jsr:@std/assert";
 import { FakeTime, fakeTime, spy, stub } from "jsr:@std/testing/mock";
@@ -581,6 +593,17 @@ Deno.test("AuthService comprehensive test", async (t) => {
   });
 });
 ```
+
+This code defines `AuthService` class with three main functionalities:
+
+- Login - Validates credentials, calls an API, and stores a token with an
+  expiration time
+- GetToken - Returns the token if valid and not expired
+- Logout - Clears the token and expiration
+
+The testing structure is organized as a single main test with three logical
+**steps**, each testing a different aspect of the service; credential
+validation, API call handling and token expiration.
 
 🦕 Effective mocking is essential for writing reliable, maintainable unit tests.
 Deno provides several powerful tools to help you isolate your code during

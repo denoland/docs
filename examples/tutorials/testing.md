@@ -264,7 +264,8 @@ Deno.test("assertion examples", () => {
 });
 ```
 
-For those who prefer a more "Jest-like" syntax, you can use the `expect` module:
+For those that prefer fluent assertions (familiar to users of Jest), you can use
+the `expect` module:
 
 ```ts
 import { expect } from "jsr:@std/expect";
