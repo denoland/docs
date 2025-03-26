@@ -102,7 +102,7 @@ Deno.test("basic addition test", () => {
 
 To run this test, use the `deno test` command:
 
-```bash
+```sh
 deno test hello_test.ts
 ```
 
@@ -115,15 +115,17 @@ basic addition test ... ok (2ms)
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (2ms)
 ```
 
-Try changing the expected value to make the test fail:
+Try changing the function implementation to make the test fail:
 
 ```ts
-assertEquals(result, 4); // This would fail
+function add(a: number, b: number): number {
+  return a - b; // Changed from addition to subtraction
+}
 ```
 
 You'll see an error message that clearly shows what went wrong:
 
-```
+```sh
 running 1 test from ./hello_test.ts
 basic addition test ... FAILED (3ms)
 
@@ -134,7 +136,7 @@ error: AssertionError: Values are not equal:
     
     [Diff] Actual / Expected
     
-    -   4
+    -   -1
     +   3
 
   at assertEquals (https://jsr.io/@std/assert@0.218.2/assert_equals.ts:31:9)
@@ -222,16 +224,16 @@ from the [Deno standard library](https://jsr.io/@std/assert):
 
 ```ts
 import {
-  assertArrayIncludes, // Check if array contains value
-  assertEquals, // Check if values are equal
-  assertExists, // Check if value is not null or undefined
-  assertMatch, // Check if string matches regex pattern
-  assertNotEquals, // Check if values are not equal
-  assertObjectMatch, // Check if object has expected properties
-  assertRejects, // Check if Promise rejects
-  assertStrictEquals, // Check if values are strictly equal (===)
-  assertStringIncludes, // Check if string contains substring
-  assertThrows, // Check if function throws an error
+  assertArrayIncludes, // Check that array contains value
+  assertEquals, // Check that values are equal
+  assertExists, // Check that value is not null or undefined
+  assertMatch, // Check that string matches regex pattern
+  assertNotEquals, // Check that values are not equal
+  assertObjectMatch, // Check that object has expected properties
+  assertRejects, // Check that Promise rejects
+  assertStrictEquals, // Check that values are strictly equal (===)
+  assertStringIncludes, // Check that string contains substring
+  assertThrows, // Check that function throws an error
 } from "jsr:@std/assert";
 
 Deno.test("assertion examples", () => {
