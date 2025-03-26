@@ -196,6 +196,56 @@ function now returns `true`.
 At the end we use a `finally` block to ensure the original function is restored
 so that we don't accidentally affect other tests.
 
+### Stubbing environment variables
+
+For deterministic testing, you often need to control environment variables.
+Deno's Standard Library provides utilities to achieve this:
+
+```ts
+import { assertEquals } from "jsr:@std/assert";
+import { stub } from "jsr:@std/testing/mock";
+
+// Function that depends on environment variables and time
+function generateReport() {
+  const environment = Deno.env.get("ENVIRONMENT") || "development";
+  const timestamp = new Date().toISOString();
+
+  return {
+    environment,
+    generatedAt: timestamp,
+    data: {/* report data */},
+  };
+}
+
+Deno.test("report generation with controlled environment", () => {
+  // Stub environment
+  const originalEnv = Deno.env.get;
+  const envStub = stub(Deno.env, "get", (key: string) => {
+    if (key === "ENVIRONMENT") return "production";
+    return originalEnv.call(Deno.env, key);
+  });
+
+  // Stub time
+  const dateStub = stub(
+    Date.prototype,
+    "toISOString",
+    () => "2023-06-15T12:00:00Z",
+  );
+
+  try {
+    const report = generateReport();
+
+    // Verify results with controlled values
+    assertEquals(report.environment, "production");
+    assertEquals(report.generatedAt, "2023-06-15T12:00:00Z");
+  } finally {
+    // Always restore stubs to prevent affecting other tests
+    envStub.restore();
+    dateStub.restore();
+  }
+});
+```
+
 ### Faking time
 
 Time-dependent code can be challenging to test because it may produce different
