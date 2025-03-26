@@ -533,7 +533,7 @@ Deno.test("spy example", () => {
 ```
 
 For more advanced mocking techniques, check our
-[dedicated guide on mocking in Deno](/examples/mocking/).
+[dedicated guide on mocking in Deno](/examples/mocking_tutorial/).
 
 ## Test parallelization
 
@@ -723,6 +723,6 @@ applications are well-tested and reliable.
 For more information about testing in Deno, check out:
 
 - [Testing documentation](/runtime/fundamentals/testing)
-- [Mocking data for tests](/examples/mocking/)
+- [Mocking data for tests](/examples/mocking_tutorial/)
 - [Advanced testing techniques](/examples/advanced_testing/)
 - [Writing benchmark tests](/examples/benchmarking/)
