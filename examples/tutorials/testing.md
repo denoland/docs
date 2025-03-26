@@ -43,8 +43,9 @@ implement robust testing practices in your projects.
 Defining a test in Deno is straightforward - use the `Deno.test()` function to
 register your test with the test runner. This function accepts either a test
 name and function, or a configuration object with more detailed options. All
-test functions are automatically discovered and executed when you run
-`deno test` command.
+test functions in files that match patterns like `*_test.{ts,js,mjs,jsx,tsx}` or
+`*.test.{ts,js,mjs,jsx,tsx}` are automatically discovered and executed when you
+run the `deno test` command.
 
 Here are the basic ways to define tests:
 
