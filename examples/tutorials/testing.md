@@ -727,5 +727,4 @@ For more information about testing in Deno, check out:
 
 - [Testing documentation](/runtime/fundamentals/testing)
 - [Mocking data for tests](/examples/mocking_tutorial/)
-- [Advanced testing techniques](/examples/advanced_testing/)
 - [Writing benchmark tests](/examples/benchmarking/)
