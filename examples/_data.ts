@@ -91,12 +91,6 @@ export const sidebar = [
         type: "tutorial",
       },
       {
-        title: "Better testing with Deno coverage",
-        href: "/examples/deno_coverage/",
-        externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
-        type: "video",
-      },
-      {
         title: "Formatting with Deno fmt",
         href: "/examples/deno_fmt/",
         externalURL: "https://www.youtube.com/watch?v=Ouzso9gQqnc",
@@ -295,12 +289,18 @@ export const sidebar = [
       },
       {
         title: "Basics of testing",
-        href: "/examples/testing_tutorials/",
+        href: "/examples/testing_tutorial/",
       },
       {
         title: "Getting started with Deno test",
         href: "/examples/deno_test/",
         externalURL: "https://www.youtube.com/watch?v=gDtDVfsgHgs",
+        type: "video",
+      },
+      {
+        title: "Better testing with Deno coverage",
+        href: "/examples/deno_coverage/",
+        externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
         type: "video",
       },
       {
