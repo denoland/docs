@@ -290,6 +290,17 @@ export const sidebar = [
       {
         title: "Basics of testing",
         href: "/examples/testing_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Mocking data in tests",
+        href: "/examples/mocking_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Spy functions",
+        href: "/examples/spy_functions/",
+        type: "example",
       },
       {
         title: "Getting started with Deno test",
