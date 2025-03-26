@@ -1,6 +1,6 @@
 ---
 title: "Writing tests in Deno: A complete guide"
-description: "Learn how to write effective tests in Deno with step-by-step examples. This comprehensive guide covers test setup and structure, assertions, async testing, mocking, test fixtures, parallelization, and measuring code coverage to ensure your Deno applications are reliable and well-tested."
+description: "Learn key concepts like test setup and structure, assertions, async testing, mocking, test fixtures, parallelization, and code coverage"
 url: /examples/testing_tutorial/
 ---
 
