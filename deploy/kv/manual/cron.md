@@ -158,8 +158,8 @@ Deno.cron("Run every fifteen minutes", "*/15 * * * *", () => {
 });
 ```
 
-```ts title="Run once an hour, on the hour"
-Deno.cron("Run once an hour, on the hour", "0 * * * *", () => {
+```ts title="Run once an hour on the hour"
+Deno.cron("Run once an hour on the hour", "0 * * * *", () => {
   console.log("Hello, cron!");
 });
 ```
