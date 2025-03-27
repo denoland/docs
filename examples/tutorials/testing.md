@@ -409,11 +409,8 @@ import { fetchUserData } from "./async-function.ts";
 Deno.test("fetchUserData success", async () => {
   // Mock the fetch function for testing
   globalThis.fetch = async (url: string) => {
-    return {
-      ok: true,
-      status: 200,
-      json: async () => ({ id: "123", name: "Test User" }),
-    } as Response;
+    const data = JSON.stringify({ id: "123", name: "Test User" });
+    return new Response(data, { status: 200 });
   };
 
   const userData = await fetchUserData("123");
