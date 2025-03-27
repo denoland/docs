@@ -538,13 +538,8 @@ can run tests in parallel for faster execution:
 
 ```ts
 // Run tests concurrently
-Deno.test({
-  name: "concurrent test",
-  fn: async () => {
-    // Test code here
-  },
-  sanitizeResources: false,
-  sanitizeOps: false,
+Deno.test("My test case", () => {
+  // Test code here
 });
 ```
 
