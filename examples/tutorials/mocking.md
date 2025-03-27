@@ -4,23 +4,9 @@ description: "Master the art of mocking in your unit tests. Learn how spies, stu
 url: /examples/mocking_tutorial/
 ---
 
-# Testing in isolation with mocks
-
 This guide builds on the
 [basics of testing in Deno](/examples/testing_tutorial/) to focus specifically
 on mocking techniques that help you isolate your code during testing.
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Spying](#spying)
-- [Stubbing](#stubbing)
-- [Faking time](#faking-time)
-- [Advanced mocking patterns](#advanced-mocking-patterns)
-- [Real-world example](#real-world-example)
-- [Summary](#summary)
-
-## Introduction
 
 For effective unit testing, you'll often need to "mock" the data that your code
 interacts with. Mocking is a technique used in testing where you replace real
