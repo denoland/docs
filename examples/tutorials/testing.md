@@ -421,10 +421,7 @@ Deno.test("fetchUserData success", async () => {
 Deno.test("fetchUserData failure", async () => {
   // Mock the fetch function to simulate an error
   globalThis.fetch = async (url: string) => {
-    return {
-      ok: false,
-      status: 404,
-    } as Response;
+    return new Response("Not Found", { status: 404 });
   };
 
   await assertRejects(
