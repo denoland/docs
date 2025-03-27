@@ -23,17 +23,14 @@ appropriately, and maintain expected performance characteristics.
 
 ## Why testing matters
 
-Testing your code allows you to catch bugs and issues before they reach
-production, saving time and resources. Tests are also useful to help plan out
-the logic of your application, they can serve as a human readable description of
-how your code is meant to be used.
+Testing your code allows you to catch bugs, issues or regressions before they
+reach production, saving time and resources. Tests are also useful to help plan
+out the logic of your application, they can serve as a human readable
+description of how your code is meant to be used.
 
-Having thorough tests allows you to refactor your code with confidence, knowing
-you'll be alerted if something breaks or you introduce a bug or regression.
-
-Deno provides [built-in testing capabilities](/runtime/fundamentals/testing/)
-without requiring external frameworks or tools, making it straightforward to
-implement robust testing practices in your projects.
+Deno provides [built-in testing capabilities](/runtime/fundamentals/testing/),
+making it straightforward to implement robust testing practices in your
+projects.
 
 ## Writing tests with `Deno.test`
 
@@ -628,15 +625,15 @@ meaningful coverage with high quality tests over 100% coverage.
 If you're coming from other JavaScript testing frameworks, here's how Deno's
 testing capabilities compare:
 
-| Feature          | Deno             | Jest                   | Mocha                      | Jasmine               |
-| ---------------- | ---------------- | ---------------------- | -------------------------- | --------------------- |
-| Setup            | Built-in         | Requires installation  | Requires installation      | Requires installation |
-| Syntax           | `Deno.test()`    | `test()`, `describe()` | `it()`, `describe()`       | `it()`, `describe()`  |
-| Assertions       | From std library | Built-in expect        | Requires assertion library | Built-in expect       |
-| Mocking          | From std library | Built-in jest.mock()   | Requires sinon or similar  | Built-in spies        |
-| Async support    | Native           | Needs special handling | Supports promises          | Supports promises     |
-| File watching    | `--watch` flag   | watch mode             | Requires nodemon           | Requires extra tools  |
-| Code coverage    | Built-in         | Built-in               | Requires istanbul          | Requires istanbul     |
+| Feature       | Deno             | Jest                   | Mocha                      | Jasmine               |
+| ------------- | ---------------- | ---------------------- | -------------------------- | --------------------- |
+| Setup         | Built-in         | Requires installation  | Requires installation      | Requires installation |
+| Syntax        | `Deno.test()`    | `test()`, `describe()` | `it()`, `describe()`       | `it()`, `describe()`  |
+| Assertions    | From std library | Built-in expect        | Requires assertion library | Built-in expect       |
+| Mocking       | From std library | Built-in jest.mock()   | Requires sinon or similar  | Built-in spies        |
+| Async support | Native           | Needs special handling | Supports promises          | Supports promises     |
+| File watching | `--watch` flag   | watch mode             | Requires nodemon           | Requires extra tools  |
+| Code coverage | Built-in         | Built-in               | Requires istanbul          | Requires istanbul     |
 
 ### Testing Style Comparison
 

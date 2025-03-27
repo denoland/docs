@@ -22,18 +22,22 @@ on mocking techniques that help you isolate your code during testing.
 
 ## Introduction
 
-For effective unit testing, you'll often need to mock dependencies. Mocking is a
-technique used in testing where you replace real dependencies with simulated
-versions that you can control. This is particularly useful when testing
-components that interact with external services, such as APIs or databases.
+For effective unit testing, you'll often need to "mock" the data that your code
+interacts with. Mocking is a technique used in testing where you replace real
+data with simulated versions that you can control. This is particularly useful
+when testing components that interact with external services, such as APIs or
+databases.
 
-Deno provides powerful mocking utilities through the standard library without
-requiring additional frameworks, making your tests more reliable and faster.
+Deno provides [helpful mocking utilities](https://jsr.io/@std/testing/doc/mock)
+through the Deno Standard Library, making your tests easier to write, more
+reliable and faster.
 
 ### Spying
 
 In Deno, you can [`spy`](https://jsr.io/@std/testing/doc/mock#spying) on a
-function to test that it behaves as expected.
+function to track how it's called during test execution. Spies don't change how
+a function behaves, but they record important details like how many times the
+function was called and what arguments were passed to it.
 
 By using spies, you can verify that your code interacts correctly with its
 dependencies without setting up complex infrastructure.
@@ -199,8 +203,15 @@ so that we don't accidentally affect other tests.
 ### Stubbing environment variables
 
 For deterministic testing, you often need to control environment variables.
-Deno's Standard Library provides utilities to achieve this as we see in this code, and the explanation of it which follows below
-onment = Deno.env.get("ENVIRONMENT") || "development";
+Deno's Standard Library provides utilities to achieve this:
+
+```ts
+import { assertEquals } from "jsr:@std/assert";
+import { stub } from "jsr:@std/testing/mock";
+
+// Function that depends on environment variables and time
+function generateReport() {
+  const environment = Deno.env.get("ENVIRONMENT") || "development";
   const timestamp = new Date().toISOString();
 
   return {
