@@ -825,6 +825,11 @@ export const sidebar = [
         href: "/examples/exponential_backoff/",
         type: "example",
       },
+      {
+        title: "OpenTelemetry Tracing with Datadog",
+        href: "/examples/datadog_otel_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
