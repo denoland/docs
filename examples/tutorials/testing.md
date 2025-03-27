@@ -1,6 +1,6 @@
 ---
 title: "Writing tests in Deno: A complete guide"
-description: "Learn key concepts like test setup and structure, assertions, async testing, mocking, test fixtures, parallelization, and code coverage"
+description: "Learn key concepts like test setup and structure, assertions, async testing, mocking, test fixtures, and code coverage"
 url: /examples/testing_tutorial/
 ---
 
@@ -17,7 +17,6 @@ appropriately, and maintain expected performance characteristics.
 - [Assertions](#assertions)
 - [Async testing](#async-testing)
 - [Mocking in tests](#mocking-in-tests)
-- [Test parallelization](#test-parallelization)
 - [Coverage](#coverage)
 - [Comparison with other testing frameworks](#comparison-with-other-testing-frameworks)
 - [Next steps](#next-steps)
@@ -537,33 +536,6 @@ Deno.test("spy example", () => {
 For more advanced mocking techniques, check our
 [dedicated guide on mocking in Deno](/examples/mocking_tutorial/).
 
-## Test parallelization
-
-By default, Deno runs tests sequentially for predictable results. However, you
-can run tests in parallel for faster execution:
-
-```ts
-// Run tests concurrently
-Deno.test({
-  name: "concurrent test",
-  fn: async () => {
-    // Test code here
-  },
-  sanitizeResources: false,
-  sanitizeOps: false,
-});
-```
-
-For test files, you can use the `--parallel` flag:
-
-```bash
-deno test --parallel
-```
-
-Keep in mind that parallel tests may interact with each other if they share
-global state or resources. Use this feature carefully, especially for
-integration tests that access shared resources like databases or files.
-
 ## Coverage
 
 Code coverage is a metric that helps you understand how much of your code is
@@ -671,7 +643,6 @@ testing capabilities compare:
 | Async support    | Native           | Needs special handling | Supports promises          | Supports promises     |
 | File watching    | `--watch` flag   | watch mode             | Requires nodemon           | Requires extra tools  |
 | Code coverage    | Built-in         | Built-in               | Requires istanbul          | Requires istanbul     |
-| Parallel testing | Supported        | Supported              | Limited support            | Limited support       |
 
 ### Testing Style Comparison
 

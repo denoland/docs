@@ -199,16 +199,8 @@ so that we don't accidentally affect other tests.
 ### Stubbing environment variables
 
 For deterministic testing, you often need to control environment variables.
-Deno's Standard Library provides utilities to achieve this as we see in this
-code, and the explanation of it which follows below
-
-```ts
-import { assertEquals } from "jsr:@std/assert";
-import { stub } from "jsr:@std/testing/mock";
-
-// Function that depends on environment variables and time
-function generateReport() {
-  const environment = Deno.env.get("ENVIRONMENT") || "development";
+Deno's Standard Library provides utilities to achieve this as we see in this code, and the explanation of it which follows below
+onment = Deno.env.get("ENVIRONMENT") || "development";
   const timestamp = new Date().toISOString();
 
   return {
