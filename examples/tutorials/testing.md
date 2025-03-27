@@ -1,5 +1,5 @@
 ---
-title: "Writing tests in Deno: A complete guide"
+title: "Writing tests"
 description: "Learn key concepts like test setup and structure, assertions, async testing, mocking, test fixtures, and code coverage"
 url: /examples/testing_tutorial/
 ---
@@ -8,18 +8,6 @@ Testing is critical in software development to ensure your code works as
 expected, and continues to work as you make changes. Tests verify that your
 functions, modules, and applications behave correctly, handle edge cases
 appropriately, and maintain expected performance characteristics.
-
-## Table of Contents
-
-- [Why testing matters](#why-testing-matters)
-- [Writing tests with `Deno.test`](#writing-tests-with-denotest)
-- [Test structure and organization](#test-structure-and-organization)
-- [Assertions](#assertions)
-- [Async testing](#async-testing)
-- [Mocking in tests](#mocking-in-tests)
-- [Coverage](#coverage)
-- [Comparison with other testing frameworks](#comparison-with-other-testing-frameworks)
-- [Next steps](#next-steps)
 
 ## Why testing matters
 
