@@ -388,8 +388,9 @@ scripts for npm packages will be executed as a subprocess.
 
 ### FFI (Foreign Function Interface)
 
-Deno provides a mechanism for executing code written in other languages, such as
-Rust, C, or C++, from within a Deno runtime. This is done using the
+Deno provides an
+[FFI mechanism for executing code written in other languages](/runtime/fundamentals/ffi/),
+such as Rust, C, or C++, from within a Deno runtime. This is done using the
 `Deno.dlopen` API, which can load shared libraries and call functions from them.
 
 By default, executing code can not use the `Deno.dlopen` API, as this would
