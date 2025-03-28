@@ -87,16 +87,13 @@ export default function ExamplePage({ example }: Props) {
         {example.parsed.playground && (
           <div class="col-span-3 mt-8">
             <p class="text-foreground-secondary">
-              Try this example in a Deno Deploy playground:
-            </p>
-            <p class="mt-3">
+              Try this example in a{" "}
               <a
-                class="py-2 px-4 bg-black inline-block text-white text-base rounded-md opacity-90 hover:opacity-100"
                 href={example.parsed.playground}
                 target="_blank"
                 rel="noreferrer"
               >
-                Deploy
+                Deno Deploy playground
               </a>
             </p>
           </div>
