@@ -304,6 +304,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Snapshot testing",
+        href: "/examples/snapshot_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Spy functions",
         href: "/examples/spy_functions/",
         type: "example",
