@@ -160,7 +160,7 @@ business reorganization, we may transfer the Information, including personal
 information, to the new or surviving entity. 
 
 _Protection of Rights and Compliance_. We may use your Information to protect
-the rights, privacy or safety you, us or others; to ensure our compliance with
+the rights, privacy or safety of you, us or others; to ensure our compliance with
 legal and contractual requirements; and to prevent and investigate illegal,
 unethical, or unauthorized activities (including cyberattacks and identity
 theft).
