@@ -563,7 +563,7 @@ By capturing a snapshot of the HTML output, you can:
 - Document the expected output format of components
 
 ```ts
-Deno.test("HTML rendering", async function (t): Promise<void> {
+Deno.test("HTML rendering", async (t) => {
   const renderComponent = () => {
     return `<div class="card">
       <h2>User Profile</h2>
