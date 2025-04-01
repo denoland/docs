@@ -200,7 +200,7 @@ function if desired:
 
 ```ts title="example_test.ts"
 // example_test.ts
-import { assertSnapshot } from "https://deno.land/std@0.145.0/testing/snapshot.ts";
+import { assertSnapshot } from "jsr:@std/testing/snapshot";
 
 class HTMLTag {
   constructor(
