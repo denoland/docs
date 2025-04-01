@@ -588,7 +588,7 @@ particularly valuable for:
   application
 
 ```ts
-Deno.test("API response format", async function (t): Promise<void> {
+Deno.test("API response format", async (t) => {
   const mockApiResponse = {
     status: 200,
     data: {
