@@ -49,7 +49,7 @@ OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 If you do not have an OpenTelemetry collector set up yet, you can get started
 with a
 [local LGTM stack in Docker](https://github.com/grafana/docker-otel-lgtm/tree/main?tab=readme-ov-file)
-(Loki (logs), Grafana (dashboard), Tempo (traces), and Mimir (metrics)) by
+(Loki (logs), Grafana (dashboard), Tempo (traces), and Prometheus (metrics)) by
 running the following command:
 
 ```sh
