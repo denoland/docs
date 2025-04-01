@@ -128,7 +128,7 @@ offers greater flexibility and enables some non standard use cases:
 ```ts
 import { assertSnapshot } from "jsr:@std/testing/snapshot";
 
-Deno.test("isSnapshotMatch", async function (t): Promise<void> {
+Deno.test("isSnapshotMatch", async (t) => {
   const a = {
     hello: "world!",
     example: 123,
