@@ -38,7 +38,7 @@ snapshots.
 ```ts title="example_test.ts"
 import { assertSnapshot } from "jsr:@std/testing/snapshot";
 
-Deno.test("isSnapshotMatch", async function (t): Promise<void> {
+Deno.test("isSnapshotMatch", async (t) => {
   const a = {
     hello: "world!",
     example: 123,
