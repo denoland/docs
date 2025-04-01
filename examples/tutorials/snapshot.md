@@ -169,7 +169,7 @@ function customSerializer(actual: string) {
   return serialize(stripColor(actual));
 }
 
-Deno.test("Custom Serializer", async function (t): Promise<void> {
+Deno.test("Custom Serializer", async (t) => {
   const output = "\x1b[34mHello World!\x1b[39m";
   await assertSnapshot(t, output, {
     serializer: customSerializer,
