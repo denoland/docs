@@ -475,7 +475,7 @@ When testing asynchronous functions, ensure you await the results before passing
 them to the snapshot:
 
 ```ts
-Deno.test("async function test", async function (t): Promise<void> {
+Deno.test("async function test", async (t) => {
   const fetchData = async () => {
     // Simulate API call
     return { success: true, data: ["item1", "item2"] };
