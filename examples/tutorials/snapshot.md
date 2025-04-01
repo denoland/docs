@@ -454,7 +454,7 @@ your custom error message.
 Snapshot testing works with various data types and structures:
 
 ```ts
-Deno.test("snapshot various types", async function (t): Promise<void> {
+Deno.test("snapshot various types", async (t) => {
   // Arrays
   await assertSnapshot(t, [1, 2, 3, "four", { five: true }]);
 
