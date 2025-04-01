@@ -433,7 +433,7 @@ Used to set a custom error message. This will overwrite the default error
 message, which includes the diff for failed snapshots:
 
 ```ts
-Deno.test("custom error message example", async function (t): Promise<void> {
+Deno.test("custom error message example", async (t) => {
   const userData = {
     name: "John Doe",
     role: "admin",
