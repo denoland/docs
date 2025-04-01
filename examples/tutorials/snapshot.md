@@ -529,7 +529,6 @@ await assertSnapshot(t, component, {
 When running snapshot tests in CI environments, you'll typically want to verify
 existing snapshots rather than updating them:
 
-
 ```yaml title=".github/workflows/test.yml"
 name: Test
 on: [push, pull_request]
