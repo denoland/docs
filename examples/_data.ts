@@ -325,6 +325,11 @@ export const sidebar = [
         externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
         type: "video",
       },
+      {
+        title: "Testing web applications",
+        href: "/examples/web_testing_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
