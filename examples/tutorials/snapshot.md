@@ -500,7 +500,7 @@ Use descriptive test names that clearly indicate what's being tested:
 ```ts
 Deno.test(
   "renders user profile card with all required fields",
-  async function (t): Promise<void> {
+  async (t) => {
     // ... test code
     await assertSnapshot(t, component);
   },
