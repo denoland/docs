@@ -277,7 +277,7 @@ For web tests, you might need additional permissions:
 deno test --allow-net --allow-read --allow-env
 ```
 
-🦕 Byfollowing the patterns in this tutorial, you can write comprehensive tests
+🦕 By following the patterns in this tutorial, you can write comprehensive tests
 for your web applications that verify both functionality and user experience.
 
 Remember that effective testing leads to more robust applications and helps
