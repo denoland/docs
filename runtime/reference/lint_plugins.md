@@ -257,7 +257,9 @@ custom lint rule is always `<plugin-name>/<rule-name>`.
 
 ## Ignoring custom lint reports
 
-Sometimes you want to disable a reported lint error for a particular place in your code. Instead of disabling the custom lint rule entirely, you can disable a reported location by placing a code comment before it.
+Sometimes you want to disable a reported lint error for a particular place in
+your code. Instead of disabling the custom lint rule entirely, you can disable a
+reported location by placing a code comment before it.
 
 ```ts
 // deno-lint-ignore my-custom-plugin/no-console
@@ -288,7 +290,7 @@ Deno.test("my-plugin", () => {
   const diagnostics = Deno.lint.runPlugin(
     myPlugin,
     "main.ts", // Dummy filename, file doesn't need to exist.
-    "const _a = 'a';"
+    "const _a = 'a';",
   );
 
   assertEquals(diagnostics.length, 1);
