@@ -256,7 +256,7 @@ Deno.test("complex web component test", async (t) => {
 2. Use names to show intent - descriptive names for tests make it clear what is
    being tested and give more readable output in the console
 
-3. Clean up after your tests -remove any DOM elements created during tests to
+3. Clean up after your tests - remove any DOM elements created during tests to
    prevent test pollution.
 
 4. Mock external services (such as APIs) to make tests faster and more reliable.
