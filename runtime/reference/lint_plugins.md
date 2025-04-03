@@ -255,6 +255,25 @@ custom lint rule is always `<plugin-name>/<rule-name>`.
 }
 ```
 
+## Ignoring custom lint reports
+
+Sometimes you want to disable a reported lint error for a particular place in
+your code. Instead of disabling the custom lint rule entirely, you can disable a
+reported location by placing a code comment before it.
+
+```ts
+// deno-lint-ignore my-custom-plugin/no-console
+console.log("hey");
+```
+
+This will disable the lint rule from a lint plugin for this particular line.
+
+The syntax for the ignore comment is:
+
+```ts
+// deno-lint-ignore <my-plugin>/<my-rule>
+```
+
 ## Testing plugins
 
 The `Deno.lint.runPlugin` API provides a convenient way to test your plugins. It
