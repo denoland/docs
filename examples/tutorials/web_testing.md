@@ -1,7 +1,7 @@
 ---
 title: "Testing web apps"
 description: "A comprehensive guide to testing web applications with Deno"
-url: "/examples/tweb_testing_tutorial"
+url: "/examples/web_testing_tutorial/"
 ---
 
 Deno is a JavaScript runtime that operates outside of the browser, as such, you
