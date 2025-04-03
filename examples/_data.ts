@@ -304,6 +304,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Snapshot testing",
+        href: "/examples/snapshot_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Spy functions",
         href: "/examples/spy_functions/",
         type: "example",
@@ -319,6 +324,11 @@ export const sidebar = [
         href: "/examples/deno_coverage/",
         externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
         type: "video",
+      },
+      {
+        title: "Testing web applications",
+        href: "/examples/web_testing_tutorial/",
+        type: "tutorial",
       },
     ],
   },
