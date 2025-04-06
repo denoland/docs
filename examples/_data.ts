@@ -875,6 +875,11 @@ export const sidebar = [
         href: "/examples/temporal/",
         type: "example",
       },
+      {
+        label: "WebGPU",
+        id: "/examples/webgpu",
+        type: "example",
+      },
     ],
   },
 ];
