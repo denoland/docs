@@ -57,11 +57,11 @@ top of the file.
 
 Ignored files will not appear in the coverage report.
 
-To ignore a single line, add a `// deno-coverage-ignore-next` comment on the
+To ignore a single line, add a `// deno-coverage-ignore` comment on the
 line above the code you want to ignore.
 
 ```ts
-// deno-coverage-ignore-next
+// deno-coverage-ignore
 console.log("this line is ignored");
 ```
 
@@ -98,10 +98,10 @@ Only white space may precede the coverage directive in a coverage comment.
 However, any text may trail the directive.
 
 ```ts
-// deno-coverage-ignore-next Trailing text is allowed.
+// deno-coverage-ignore Trailing text is allowed.
 console.log("This line is ignored");
 
-// But leading text isn't. deno-coverage-ignore-next
+// But leading text isn't. deno-coverage-ignore
 console.log("This line is not ignored");
 ```
 
@@ -109,10 +109,10 @@ Coverage comments must start with `//`. Comments starting with `/*` are not
 valid coverage comments.
 
 ```ts
-// deno-coverage-ignore-next
+// deno-coverage-ignore
 console.log("This line is ignored");
 
-/* deno-coverage-ignore-next */
+/* deno-coverage-ignore */
 console.log("This line is not ignored");
 ```
 
