@@ -57,8 +57,8 @@ top of the file.
 
 Ignored files will not appear in the coverage report.
 
-To ignore a single line, add a `// deno-coverage-ignore` comment on the
-line above the code you want to ignore.
+To ignore a single line, add a `// deno-coverage-ignore` comment on the line
+above the code you want to ignore.
 
 ```ts
 // deno-coverage-ignore
