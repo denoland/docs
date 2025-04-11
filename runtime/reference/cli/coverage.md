@@ -57,11 +57,11 @@ top of the file.
 
 Ignored files will not appear in the coverage report.
 
-To ignore a single line, add a `// deno-coverage-ignore-next` comment on the
-line above the code you want to ignore.
+To ignore a single line, add a `// deno-coverage-ignore` comment on the line
+above the code you want to ignore.
 
 ```ts
-// deno-coverage-ignore-next
+// deno-coverage-ignore
 console.log("this line is ignored");
 ```
 
@@ -77,31 +77,39 @@ if (condition) {
 ```
 
 All code after a `// deno-coverage-ignore-start` comment is ignored until a
-`// deno-coverage-ignore-stop` is reached. However, if there are multiple
-consecutive start comments, each of these must be terminated by a corresponding
-stop comment.
+`// deno-coverage-ignore-stop` is reached.
+
+Each `// deno-coverage-ignore-start` comment must be terminated by a
+`// deno-coverage-ignore-stop` comment, and ignored ranges may not be nested.
+When these requirements are not met, some lines may be unintentionally included
+in the coverage report. The `deno coverage` command will log warnings for any
+invalid comments.
 
 ```ts
 // deno-coverage-ignore-start
 if (condition) {
-  // deno-coverage-ignore-start
-  console.log("this line is ignored");
+  // deno-coverage-ignore-start - A warning will be logged because the previous
+  //                              coverage range is unterminated.
+  console.log("this code is ignored");
   // deno-coverage-ignore-stop
-  console.log("this line is also ignored");
 }
 // deno-coverage-ignore-stop
 
-console.log("this line is not ignored");
+// ...
+
+// deno-coverage-ignore-start - This comment will be ignored and a warning will
+//                              be logged, because this range is unterminated.
+console.log("this code is not ignored");
 ```
 
 Only white space may precede the coverage directive in a coverage comment.
 However, any text may trail the directive.
 
 ```ts
-// deno-coverage-ignore-next Trailing text is allowed.
+// deno-coverage-ignore Trailing text is allowed.
 console.log("This line is ignored");
 
-// But leading text isn't. deno-coverage-ignore-next
+// But leading text isn't. deno-coverage-ignore
 console.log("This line is not ignored");
 ```
 
@@ -109,10 +117,10 @@ Coverage comments must start with `//`. Comments starting with `/*` are not
 valid coverage comments.
 
 ```ts
-// deno-coverage-ignore-next
+// deno-coverage-ignore
 console.log("This line is ignored");
 
-/* deno-coverage-ignore-next */
+/* deno-coverage-ignore */
 console.log("This line is not ignored");
 ```
 
