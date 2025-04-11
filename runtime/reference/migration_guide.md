@@ -265,8 +265,8 @@ for details.
 
 ## Import assertions removal
 
-Support for import assertions was removed in favor of import attributes because
-import assertions was removed from JavaScript.
+Import assertions were removed from JavaScript and are now deprecated in Deno
+2.0. Use import attributes instead:
 
 ```diff
 - import data from "./data.json" assert { type: "json" };
