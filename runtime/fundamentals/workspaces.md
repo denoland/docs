@@ -206,6 +206,9 @@ import workspace dependencies.
 
 ### Multiple package entries
 
+The `exports` property details the entry points and exposes which modules should
+be importable by users of your package.
+
 So far, our package only has a single entry. This is fine for simple packages,
 but often you'll want to have multiple entries that group relevant aspects of
 your package. This can be done by passing an `object` instead of a `string` to
