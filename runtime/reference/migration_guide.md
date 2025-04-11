@@ -265,7 +265,8 @@ for details.
 
 ## Import assertions removal
 
-Support for import assertions was removed in favor of import attributes.
+Support for import assertions was removed in favor of import attributes because
+import assertions was removed from JavaScript.
 
 ```diff
 - import data from "./data.json" assert { type: "json" };
