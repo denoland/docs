@@ -154,6 +154,10 @@ readTextFileSync  readFileSync      readDir           readLink          readAllS
 
 ## `DENO_REPL_HISTORY`
 
+By default, Deno stores REPL history in a `deno_history.txt` file within the
+`DENO_DIR` directory. The location of your `DENO_DIR` directory and other
+resources, can be found by running the `deno info`.
+
 You can use `DENO_REPL_HISTORY` environmental variable to control where Deno
 stores the REPL history file. You can set it to an empty value, Deno will not
 store the history file.
