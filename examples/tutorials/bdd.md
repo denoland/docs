@@ -41,7 +41,7 @@ First, let's import the necessary functions:
 import { 
   afterAll, 
   afterEach, 
-  beforeAll, gi
+  beforeAll, 
   beforeEach, 
   describe, 
   it 
