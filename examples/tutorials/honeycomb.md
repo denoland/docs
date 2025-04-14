@@ -24,8 +24,13 @@ You can view the source of this tutorial [on GitHub](https://example.com).
 
 Since this tutorial focuses on how to export data to Honeycomb.io, we'll use a
 very simple chat application. Note that you can use any Deno (or Node.js)
-program. What's important is that you run it with Deno and the OTel flag
-enabled:
+program. What's important is that you run it with Deno and the following flags:
+
+- `OTEL_SERVICE_NAME`
+- `OTEL_DENO=true`
+- `--unstable-otel`
+
+This is the command we will run for this example:
 
 ```tsx
 $ OTEL_DENO=true OTEL_SERVICE_NAME=chat-app deno run --unstable-otel --allow-net --allow-read --allow-env --env-file main.ts
