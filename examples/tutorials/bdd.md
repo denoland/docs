@@ -1,6 +1,6 @@
 ---
 title: "Behavior-Driven Development with Deno"
-description: "Learn how to implement Behavior-Driven Development with Deno using the Standard Library's BDD module. This tutorial covers creating readable test specifications, organizing test suites, and writing effective assertions."
+description: "Implementing Behavior-Driven Development with Deno's Standard Library's BDD module. Create readable, well organised tests with effective assertions."
 url: /examples/bdd_tutorial/
 ---
 
