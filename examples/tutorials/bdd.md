@@ -38,13 +38,13 @@ from the [Deno Standard Library](https://jsr.io/@std/testing/doc/bdd).
 First, let's import the necessary functions:
 
 ```ts
-import { 
-  afterAll, 
-  afterEach, 
-  beforeAll, 
-  beforeEach, 
-  describe, 
-  it 
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  it,
 } from "jsr:@std/testing/bdd";
 import { assertEquals, assertThrows } from "jsr:@std/assert";
 ```
