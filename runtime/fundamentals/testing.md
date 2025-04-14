@@ -291,7 +291,7 @@ set of functions to help you write tests that involve spying, mocking, and
 stubbing. Check out the
 [@std/testing documentation on JSR](https://jsr.io/@std/testing) for more
 information on each of these utilities or our
-[tutorial on mocking and in tests with deno](/examples/tutorials/mocking/)
+[tutorial on mocking and spying in tests with deno](/examples/tutorials/mocking/).
 
 ## Coverage
 
