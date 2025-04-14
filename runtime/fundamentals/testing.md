@@ -291,7 +291,7 @@ set of functions to help you write tests that involve spying, mocking, and
 stubbing. Check out the
 [@std/testing documentation on JSR](https://jsr.io/@std/testing) for more
 information on each of these utilities or our
-[tutorial on mocking and spying in tests with deno](/examples/tutorials/mocking/).
+[tutorial on mocking and spying in tests with deno](/examples/tutorials/mocking_tutorial/).
 
 ## Coverage
 
@@ -334,7 +334,7 @@ describe("add function", () => {
 Check out the [documentation on JSR](https://jsr.io/@std/testing/doc/bdd/~) for
 more information on these functions and hooks.
 
-- [BDD testing tutorial](/examples/tutorials/bdd/)
+- [BDD testing tutorial](/examples/tutorials/bdd_tutorial/)
 
 ## Documentation Tests
 
@@ -592,7 +592,7 @@ is particularly helpful in situations where it is difficult to precisely express
 what should be asserted, without requiring a prohibitive amount of code, or
 where the assertions a test makes are expected to change often.
 
-- [Snapshot testing tutorial](/examples/tutorials/snapshot/)
+- [Snapshot testing tutorial](/examples/tutorials/snapshot_tutorial/)
 
 ## Tests and Permissions
 
