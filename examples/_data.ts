@@ -333,6 +333,16 @@ export const sidebar = [
     ],
   },
   {
+    title: "OpenTelemetry",
+    items: [
+      {
+        title: "Export telemetry to Honeycomb",
+        href: "/examples/honeycomb_tutorial/",
+        type: "tutorial",
+      },
+    ],
+  },
+  {
     title: "Deploying Deno projects",
     items: [
       {
