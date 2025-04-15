@@ -342,7 +342,7 @@ export const sidebar = [
     items: [
       {
         title: "Export telemetry to Honeycomb",
-        href: "/examples/honeycomb_tutorial/",
+        href: "/examples/honeycombio_tutorial/",
         type: "tutorial",
       },
     ],
