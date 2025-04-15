@@ -447,6 +447,5 @@ successful BDD implementations combine these technical practices with regular
 conversations between developers, testers, product and business stakeholders.
 
 To continue learning about testing in Deno, explore other modules in the
-Standard Library's testing suite, such as
-[mocking](/examples/tutorials/mocking/) and
-[snapshot testing](/examples/tutorials/snapshot/).
+Standard Library's testing suite, such as [mocking](/examples/mocking_tutorial/)
+and [snapshot testing](/examples/snapshot_tutorial/).
