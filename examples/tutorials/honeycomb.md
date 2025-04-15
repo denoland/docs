@@ -123,19 +123,19 @@ View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux
 Once the service is running, make a few requests on your Deno app. Afterwards,
 when we go to our Honeycomb.io account, we can see telemetry data:
 
-![Viewing data in Honeycomb](./images/how-to/honeycomb/honeycomb1.webp)
+![Viewing data in Honeycomb](./images/how-to/honeycomb/honeycomb-1.webp)
 
 We can view our logs:
 
-![Viewing logs in Honeycomb](./images/how-to/honeycomb/honeycomb2.webp)
+![Viewing logs in Honeycomb](./images/how-to/honeycomb/honeycomb-2.webp)
 
 As well as traces:
 
-![Viewing traces in Honeycomb](./images/how-to/honeycomb/honeycomb3.webp)
+![Viewing traces in Honeycomb](./images/how-to/honeycomb/honeycomb-3.webp)
 
 And explore each span operation within a trace:
 
-![Viewing expanded traces in Honeycomb](./images/how-to/honeycomb/honeycomb4.webp)
+![Viewing expanded traces in Honeycomb](./images/how-to/honeycomb/honeycomb-4.webp)
 
 ## What's next
 
