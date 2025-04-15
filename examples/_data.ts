@@ -330,6 +330,11 @@ export const sidebar = [
         href: "/examples/web_testing_tutorial/",
         type: "tutorial",
       },
+      {
+        title: "BDD testing",
+        href: "/examples/bdd_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
