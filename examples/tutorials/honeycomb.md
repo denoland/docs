@@ -1,7 +1,7 @@
 ---
-title: "How to export telemetry data to Honeycomb.io"
+title: "How to export telemetry data to Honeycomb"
 description: "Step-by-step guide to export telemetry data with OpenTelemetry and Honeycomb.io."
-url: /examples/honeycomb_tutorial/
+url: /examples/honeycombio_tutorial/
 ---
 
 [Honeycomb.io](https://honeycomb.io) is a powerful observability platform
@@ -16,7 +16,8 @@ Node.js project to Honeycomb.io without any additional code or config:
 - traces
 - metrics
 
-You can view the source of this tutorial [on GitHub](https://example.com).
+You can view the source of this tutorial
+[on GitHub](https://github.com/denoland/examples/tree/main/with-honeycomb).
 
 [_Learn more about Deno's built-in OTel support and how it can level up your debugging immediately._](https://deno.com/blog/zero-config-debugging-deno-opentelemetry)
 
@@ -32,14 +33,9 @@ program. What's important is that you run it with Deno and the following flags:
 
 This is the command we will run for this example:
 
-```tsx
-$ OTEL_DENO=true OTEL_SERVICE_NAME=chat-app deno run --unstable-otel --allow-net --allow-read --allow-env --env-file main.ts
+```sh
+OTEL_DENO=true OTEL_SERVICE_NAME=chat-app deno run --unstable-otel --allow-net --allow-read --allow-env --env-file main.ts
 ```
-
-_Interested in building your Deno app with other frameworks? We have tutorials
-for [Next.js](/examples/next_tutorial/), [React](/examples/react_tutorial),
-[SolidJS](/examples/solidjs_tutorial), [Qwik](/examples/qwik_tutorial),
-[Astro](/examples/astro_tutorial), [and more](/examples)._
 
 ## Setup Honeycomb.io
 
@@ -107,7 +103,8 @@ service:
       exporters: [otlp]
 ```
 
-[If you want more information about setting up Honeycomb.io, check out their documentation.](https://docs.honeycomb.io/send-data/opentelemetry/collector/)
+If you want more information about setting up Honeycomb.io,
+[check out their documentation.](https://docs.honeycomb.io/send-data/opentelemetry/collector/)
 
 Now we can start the OTel collector service with the following command:
 
