@@ -358,6 +358,11 @@ args = ["lsp"]
 config.deno.enable = true
 ```
 
+### Zed
+
+The [Zed editor](https://zed.dev) can integrate the Deno language server via the
+[Deno extension](https://zed.dev/extensions?query=deno&filter=language-servers).
+
 ## Shell completions
 
 Built into the Deno CLI is support to generate shell completion information for

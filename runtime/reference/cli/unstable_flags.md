@@ -205,8 +205,9 @@ Enabling this flag makes [Deno KV](/deploy/kv/manual) APIs available in the
 
 ## `--unstable-net`
 
-Enable unstable net APIs in the `Deno` namespace. These APIs include:
+Enable unstable net APIs. These APIs include:
 
+- [`WebSocketStream`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocketStream)
 - [`Deno.DatagramConn`](https://docs.deno.com/api/deno/~/Deno.DatagramConn)
 
 ## `--unstable-otel`
