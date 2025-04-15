@@ -290,7 +290,8 @@ The [Deno Standard Library](/runtime/fundamentals/standard_library/) provides a
 set of functions to help you write tests that involve spying, mocking, and
 stubbing. Check out the
 [@std/testing documentation on JSR](https://jsr.io/@std/testing) for more
-information on each of these utilities.
+information on each of these utilities or our
+[tutorial on mocking and spying in tests with deno](/examples/mocking_tutorial/).
 
 ## Coverage
 
@@ -332,6 +333,8 @@ describe("add function", () => {
 
 Check out the [documentation on JSR](https://jsr.io/@std/testing/doc/bdd/~) for
 more information on these functions and hooks.
+
+- [BDD testing tutorial](/examples/bdd_tutorial/)
 
 ## Documentation Tests
 
@@ -588,6 +591,8 @@ Snapshot testing enables catching a wide array of bugs with very little code. It
 is particularly helpful in situations where it is difficult to precisely express
 what should be asserted, without requiring a prohibitive amount of code, or
 where the assertions a test makes are expected to change often.
+
+- [Snapshot testing tutorial](/examples/snapshot_tutorial/)
 
 ## Tests and Permissions
 
