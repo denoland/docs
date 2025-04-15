@@ -330,9 +330,14 @@ export const sidebar = [
         href: "/examples/web_testing_tutorial/",
         type: "tutorial",
       },
+    ],
+  },
+  {
+    title: "OpenTelemetry",
+    items: [
       {
-        title: "BDD testing",
-        href: "/examples/bdd_tutorial/",
+        title: "Export telemetry to Hyperdx",
+        href: "/examples/hyperdx_tutorial/",
         type: "tutorial",
       },
     ],
