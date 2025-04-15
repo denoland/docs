@@ -341,12 +341,14 @@ Enabling connection to the Deno language server requires changes in the
 [[language]]
 name = "typescript"
 roots = ["deno.json", "deno.jsonc", "package.json"]
+file-types = ["ts", "tsx"]
 auto-format = true
 language-servers = ["deno-lsp"]
 
 [[language]]
 name = "javascript"
 roots = ["deno.json", "deno.jsonc", "package.json"]
+file-types = ["js", "jsx"]
 auto-format = true
 language-servers = ["deno-lsp"]
 
