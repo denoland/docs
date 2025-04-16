@@ -6,9 +6,9 @@ oldUrl:
   - /runtime/manual/runtime/kv/
 ---
 
-:::caution This feature is still unstable
+:::caution
 
-Make sure you add the `--unstable-kv` flag to your run command to enable it.
+Deno KV is still in development and may change. To use it, you must pass the `--unstable-kv` flag to Deno.
 
 :::
 
