@@ -6,6 +6,12 @@ oldUrl:
   - /runtime/manual/runtime/kv/
 ---
 
+:::caution This feature is still unstable
+
+Make sure you use `--unstable-kv` flag to your command line to enable it.
+
+:::
+
 **Deno KV** is a
 [key-value database](https://en.wikipedia.org/wiki/Key%E2%80%93value_database)
 built directly into the Deno runtime, available in the
