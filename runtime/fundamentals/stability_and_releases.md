@@ -9,7 +9,7 @@ oldUrl:
 As of Deno 1.0.0, the `Deno` namespace APIs are stable. That means we will
 strive to make code working under 1.0.0 continue to work in future versions.
 
-## Release schedule, channels and long term support
+## Release schedule, channels, and long term support
 
 Deno releases a new stable, minor version (eg. v2.1.0, v2.0.0) on a 12 week
 schedule.
@@ -27,7 +27,7 @@ Deno offers 4 release channels
 - `lts` - long term support for a particular stable release, recommended for
   enterprise users who prefer not to upgrade so often. See below for details.
 - `rc` - a release candidate for the upcoming semver minor release.
-- `canary` - an unstable release that changes multiple timer per day, allows to
+- `canary` - an unstable release that changes multiple times per day, allows to
   try out latest bug fixes and new features that might end up in the `stable`
   channel.
 
