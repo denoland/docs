@@ -1,7 +1,7 @@
 ---
 title: "How to export telemetry data to Honeycomb"
 description: "Step-by-step guide to export telemetry data with OpenTelemetry and Honeycomb.io."
-url: /examples/honeycombio_tutorial/
+url: /examples/honeycomb_tutorial/
 ---
 
 [Honeycomb.io](https://honeycomb.io) is a powerful observability platform
