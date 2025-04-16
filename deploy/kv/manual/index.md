@@ -8,7 +8,7 @@ oldUrl:
 
 :::caution This feature is still unstable
 
-Make sure you use `--unstable-kv` flag to your command line to enable it.
+Make sure you add the `--unstable-kv` flag to your run command to enable it.
 
 :::
 
