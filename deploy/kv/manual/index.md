@@ -6,11 +6,6 @@ oldUrl:
   - /runtime/manual/runtime/kv/
 ---
 
-:::caution
-
-Deno KV is still in development and may change. To use it, you must pass the `--unstable-kv` flag to Deno.
-
-:::
 
 **Deno KV** is a
 [key-value database](https://en.wikipedia.org/wiki/Key%E2%80%93value_database)
@@ -20,7 +15,12 @@ for many kinds of data storage use cases, but excels at storing simple data
 structures that benefit from very fast reads and writes. Deno KV is available in
 the Deno CLI and on [Deno Deploy](./on_deploy).
 
-<deno-admonition></deno-admonition>
+:::caution
+
+Deno KV is still in development and may change. To use it, you must pass the
+`--unstable-kv` flag to Deno.
+
+:::
 
 Let's walk through the key features of Deno KV.
 
