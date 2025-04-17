@@ -341,6 +341,11 @@ export const sidebar = [
     title: "OpenTelemetry",
     items: [
       {
+        title: "Export telemetry to Hyperdx",
+        href: "/examples/hyperdx_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Export telemetry to Honeycomb",
         href: "/examples/honeycomb_tutorial/",
         type: "tutorial",
