@@ -299,10 +299,6 @@ export const sidebar = [
             href: "/runtime/contributing/style_guide/",
           },
           {
-            title: "Web platform tests",
-            href: "/runtime/contributing/web_platform_tests/",
-          },
-          {
             title: "Documentation",
             href: "/runtime/contributing/docs/",
           },
