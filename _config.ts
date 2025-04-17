@@ -157,6 +157,13 @@ site.use(sitemap());
 
 site.addEventListener("afterBuild", () => {
   Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
+  // Check if the 404 page exists in the build output
+  try {
+    const exists = Deno.statSync(site.dest("404/index.html")).isFile;
+    console.log("404 page exists in build:", exists);
+  } catch {
+    console.warn("404 page not found in build output!");
+  }
 });
 
 site.copy("reference_gen/gen/deno/page.css", "/api/deno/page.css");
