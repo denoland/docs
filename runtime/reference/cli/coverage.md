@@ -157,6 +157,14 @@ deno test --coverage=custom_profile_name
 deno coverage custom_profile_name
 ```
 
+> Note: You can alternatively set coverage directory by `DENO_COVERAGE_DIR` env
+> var.
+>
+> ```
+> DENO_COVERAGE_DIR=custom_profile_name deno test
+> deno coverage custom_profile_name
+> ```
+
 Only include coverage that matches a specific pattern - in this case, only
 include tests from main.ts
 
