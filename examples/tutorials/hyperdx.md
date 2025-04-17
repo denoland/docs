@@ -1,68 +1,78 @@
 ---
-title: "How to export telemetry data to Hyperdx"
-description: "Step-by-step guide to export telemetry data with OpenTelemetry and Hyperdx."
+title: "How to export telemetry data to HyperDX"
+description: "Complete guide to exporting telemetry data with OpenTelemetry and HyperDX. Learn how to configure collectors, visualize traces, logs, metrics, and debug distributed applications effectively."
 url: /examples/hyperdx_tutorial/
 ---
 
-[HyperDX](https://hyperdx.io) is an open source, full-stack observability
-platform designed to help developers and teams debug applications faster by
-unifying logs, traces, metrics, exceptions, and session replays into a single
-interface.
+[HyperDX](https://hyperdx.io) is an open source observability platform that
+unifies logs, traces, metrics, exceptions, and session replays into a single
+interface. It helps developers debug applications faster by providing a complete
+view of your system's behavior and performance.
 
-In this tutorial, we'll show how to export telemetry data from your Deno or
-Node.js project to Hyperdx without any additional code or config:
+[OpenTelemetry](https://opentelemetry.io/) (often abbreviated as OTel) provides
+a standardized way to collect and export telemetry data. Deno includes built-in
+OpenTelemetry support, allowing you to instrument your applications without
+additional dependencies. This integration works seamlessly with platforms like
+HyperDX to collect and visualize telemetry data.
 
-- console.logs associated with HTTP requests
-- traces
-- metrics
+In this tutorial, we'll build a simple application and export its telemetry data
+to HyperDX:
 
-You can view the source of this tutorial
+- [Setting up your application](#setup-your-app)
+- [Configuring the OpenTelemetry collector](#setup-the-collector)
+- [Viewing telemetry data](#viewing-telemetry-data)
+- [Next steps](#whats-next)
+
+You can find the complete source code for this tutorial
 [on GitHub](https://github.com/denoland/examples/tree/main/with-hyperdx).
 
-[_Learn more about Deno's built-in OTel support and how it can level up your debugging without additional code._](https://deno.com/blog/zero-config-debugging-deno-opentelemetry)
+## Set up the app
 
-## Setup your app
+For this tutorial, we'll use a simple chat application to demonstrate how to
+export telemetry data. You can find the
+[code for the app on GitHub](https://github.com/denoland/examples/tree/main/with-hyperdx).
 
-Since this tutorial focuses on how to export data to Hyperdx, we'll use a very
-simple chat application. Note that you can use any Deno (or Node.js) program.
-What's important is that you run it with Deno and the following flags:
+Either take a copy of that repository or create a
+[main.ts](https://github.com/denoland/examples/blob/main/with-hyperdx/main.ts)
+file and a
+[.env](https://github.com/denoland/examples/blob/main/with-hyperdx/.env.example)
+file.
 
-- `OTEL_SERVICE_NAME`
-- `OTEL_DENO=true`
-- `--unstable-otel`
+In order to run the app you will need an OpenAI API key. You can get one by
+signing up for an account at [OpenAI](https://platform.openai.com/signup) and
+creating a new secret key. You can find your API key in the
+[API keys section](https://platform.openai.com/account/api-keys) of your OpenAI
+account. Once you have an API key, set up an `OPENAI_API-KEY` environment
+variable in your `.env` file:
 
-This is the command we will run for this example:
-
-```sh
-OTEL_DENO=true OTEL_SERVICE_NAME=chat-app deno run --unstable-otel --allow-net --allow-read --allow-env --env-file main.ts
+```env title=".env"
+OPENAI_API_KEY=your_openai_api_key
 ```
 
-If you haven’t yet, create a free Hyperdx account. Once you have created an
-account, you’ll receive a Hyperdx API key. We’ll need this in the next step when
-we setup the OpenTelemetry collector.
+## Set up the collector
 
-Next, let’s setup the OpenTelemetry collector with two new files: a `Dockerfile`
-and a `otel-collector.yml` configuration file. These files will tell the
-collector to export OTel data to Hyperdx.
+First, create a free HyperDX account to get your API key. Then, we'll set up two
+files to configure the OpenTelemetry collector:
 
-In the `Dockerfile`, we’ll pull from the `otel/opentelemetry-collector` image.
-Here, we use `latest` tag, but in production, we recommend using a specific
-version:
+1. Create a `Dockerfile`:
 
-```bash
+```dockerfile title="Dockerfile"
 FROM otel/opentelemetry-collector:latest
 
-# Copy the OTel Collector config into the container
 COPY otel-collector.yml /otel-config.yml
 
-# Run the OTel Collector with the provided config
 CMD ["--config", "/otel-config.yml"]
 ```
 
-Next, let’s create our `otel-collector.yml` . Note that your Hyperdx API key is
-used in the authorization headers under `exporters`:
+This Dockerfile:
 
-```yml
+- Uses the official OpenTelemetry Collector as the base image
+- Copies your configuration into the container
+- Sets up the collector to use your config when it starts
+
+2. Create a file called `otel-collector.yml`:
+
+```yml title="otel-collector.yml"
 receivers:
   otlp:
     protocols:
@@ -97,48 +107,81 @@ service:
       exporters: [otlphttp/hdx]
 ```
 
-[For more information about setting up OpenTelemetry with Hyperdx, refer to their documentation.](https://www.hyperdx.io/docs/install/opentelemetry)
+This configuration file sets up the OpenTelemetry collector to receive telemetry
+data from your application and export it to HyperDX. It includes:
 
-Now we can start the OTel collector service with the following command:
+- The receivers section accepts data via gRPC (4317) and HTTP (4318)
+- The Exporters section sends data to HyperDX with compression and
+  authentication
+- The processors section batches telemetry data for efficient transmission
+- The pipelines section defines separate flows for logs, traces, and metrics
 
-```tsx
-$ docker build -t otel-collector . && docker run -p 4317:4317 -p 4318:4318 otel-collector
+Build and run the docker instance to start collecting your telemetry data with
+the following command:
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/7a06yg0bmv0lfxwpnfibvjoo6
-2025-04-11T23:54:54.583Z	info	service@v0.123.0/service.go:197	Setting up own telemetry...
-2025-04-11T23:54:54.584Z	info	service@v0.123.0/service.go:264	Starting otelcol...	{"Version": "0.123.0", "NumCPU": 14}
-2025-04-11T23:54:54.584Z	info	extensions/extensions.go:41	Starting extensions...
-2025-04-11T23:54:54.584Z	info	otlpreceiver@v0.123.0/otlp.go:116	Starting GRPC server	{"endpoint": "0.0.0.0:4317"}
-2025-04-11T23:54:54.584Z	info	otlpreceiver@v0.123.0/otlp.go:173	Starting HTTP server	{"endpoint": "0.0.0.0:4318"}
-2025-04-11T23:54:54.584Z	info	service@v0.123.0/service.go:287	Everything is ready. Begin running and processing data.
+```sh
+docker build -t otel-collector . && docker run -p 4317:4317 -p 4318:4318 otel-collector
 ```
 
-Once the service is running, make a few requests on your Deno app.
+## Generating telemetry data
 
-Afterwards, when we go to our Hyperdx account, we can see telemetry data. Here
-are the logs:
+Now that we have the app and the docker container set up, we can start
+generating telemetry data. Run your application with these environment variables
+to send data to the collector:
 
-![Viewing logs in Hyperdx](./images/how-to/hyperdx/hyperdx-1.webp)
+```sh
+OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318 \
+OTEL_SERVICE_NAME=chat-app \
+OTEL_DENO=true \
+deno run --unstable-otel --allow-net --allow-env --env-file --allow-read main.ts
+```
 
-We can click on a single log:
+This command:
 
-![Viewing a single log in Hyperdx](./images/how-to/hyperdx/hyperdx-2.webp)
+- Points the OpenTelemetry exporter to your local collector (`localhost:4318`)
+- Names your service "chat-app" in HyperDX
+- Enables Deno's OpenTelemetry integration
+- Runs your application with the necessary permissions
 
-And view all of the logs within a single request:
+To generate some telemetry data, make a few requests to your running application
+in your browser at [`http://localhost:8000`](http://localhost:8000).
 
-![Viewing all the logs in a single request in Hyperdx](./images/how-to/hyperdx/hyperdx-3.webp)
+Each request will:
 
-You can also view metrics:
+1. Generate traces as it flows through your application
+2. Send logs from your application's console output
+3. Create metrics about the request performance
+4. Forward all this data through the collector to HyperDX
 
-![Viewing metrics in Hyperdx](./images/how-to/hyperdx/hyperdx-4.webp)
+## Viewing telemetry data
 
-## What’s next
+In your HyperDX dashboard, you'll see different views of your telemetry data:
 
-You can use this configuration to export telemetry data from any Deno or Node.js
-program to Hyperdx.
+### Logs View
 
-You can also host this — the app and the OTel collector service — on any VPS
-platform via Docker, such as
-[Fly.io](https://docs.deno.com/examples/deploying_deno_with_docker/),
-[Digital Ocean](https://docs.deno.com/examples/digital_ocean_tutorial/),
-[Amazon](https://docs.deno.com/examples/aws_lightsail_tutorial/), and more.
+![Viewing logs in HyperDX](./images/how-to/hyperdx/hyperdx-1.webp)
+
+Click any log to see details:
+![Viewing a single log in HyperDX](./images/how-to/hyperdx/hyperdx-2.webp)
+
+### Request Traces
+
+See all logs within a single request:
+![Viewing all logs in a request in HyperDX](./images/how-to/hyperdx/hyperdx-3.webp)
+
+### Metrics Dashboard
+
+Monitor system performance:
+![Viewing metrics in HyperDX](./images/how-to/hyperdx/hyperdx-4.webp)
+
+🦕 Now that you have telemetry export working, you could:
+
+1. Add custom spans and attributes to better understand your application
+2. Set up alerts based on latency or error conditions
+3. Deploy your application and collector to production using platforms like:
+   - [Fly.io](https://docs.deno.com/examples/deploying_deno_with_docker/)
+   - [Digital Ocean](https://docs.deno.com/examples/digital_ocean_tutorial/)
+   - [AWS Lightsail](https://docs.deno.com/examples/aws_lightsail_tutorial/)
+
+🦕 For more details on OpenTelemetry configuration with HyperDX, see their
+[documentation](https://www.hyperdx.io/docs/install/opentelemetry).
