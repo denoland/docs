@@ -22,7 +22,7 @@ to Honeycomb. We'll cover:
 - [Viewing telemetry data](#viewing-telemetry-data)
 - [Next steps](#whats-next)
 
-## Setup your app
+## Set up your chat app
 
 For this tutorial, we'll use a simple chat application to demonstrate how to
 export telemetry data. You can find the
@@ -39,24 +39,20 @@ signing up for an account at [OpenAI](https://platform.openai.com/signup) and
 creating a new secret key. You can find your API key in the
 [API keys section](https://platform.openai.com/account/api-keys) of your OpenAI
 account. Once you have an API key, set up an `OPENAI_API-KEY` environment
-variable in your `.env` file.
+variable in your `.env` file:
 
 ```env title=".env"
 OPENAI_API_KEY=your_openai_api_key
 ```
 
-You can run this app with:
+## Set up a Docker collector
 
-```sh
-deno run --allow-net --allow-env --env-file main.ts
-```
-
-## Setup Honeycomb.io
+Next, we'll set up a Docker container to run the OpenTelemetry collector. The
+collector is responsible for receiving telemetry data from your application and
+exporting it to Honeycomb.
 
 If you have not already, create a free Honeycomb account and set up an
 [ingest API key](https://docs.honeycomb.io/configure/environments/manage-api-keys/).
-
-Next we will set up the OpenTelemetry collector.
 
 In the same directory as your `main.ts` file, create a `Dockerfile` and an
 `otel-collector.yml` file. The `Dockerfile` will be used to build a Docker
@@ -148,14 +144,9 @@ docker build -t otel-collector . && docker run -p 4317:4317 -p 4318:4318 otel-co
 
 ## Generating telemetry data
 
-Now that we have both pieces set up:
-
-1. The OpenTelemetry collector running in Docker (listening on ports 4317
-   and 4318)
-2. Our chat application with the OpenTelemetry flags enabled
-
-We can start generating telemetry data. Run your application with these
-environment variables to send data to the collector:
+Now that we have the app and the docker container set up, we can start
+generating telemetry data. Run your application with these environment variables
+to send data to the collector:
 
 ```sh
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318 \
