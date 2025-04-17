@@ -127,7 +127,9 @@ console.log("This line is not ignored");
 ## Output Formats
 
 By default we support Deno's own coverage format - but you can also output
-coverage reports in the lcov format, or in html.
+coverage reports in the
+[lcov format](https://github.com/linux-test-project/lcov?tab=readme-ov-file) (a
+standard file format used to describe code coverage data), or in html.
 
 ```bash
 deno coverage --lcov --output=cov.lcov
