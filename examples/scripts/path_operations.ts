@@ -56,3 +56,18 @@ console.log(joinPath);
 // We can get the current working directory using the built-in cwd method
 const current = Deno.cwd();
 console.log(current);
+
+// We can get the directory name of the current module using the built-in
+// dirname method
+const dirname = import.meta.dirname;
+console.log(dirname);
+
+// We can get the URL of the current module using the built-in
+// url method
+const url = import.meta.url;
+console.log(url);
+
+// We can get the file name of the current module using the built-in
+// filename method
+const filename = import.meta.filename;
+console.log(filename);
