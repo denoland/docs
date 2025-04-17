@@ -17,10 +17,13 @@ complex, modern distributed systems.
 In this tutorial, we'll build a simple application and export its telemetry data
 to Honeycomb. We'll cover:
 
-- [Setting up your application](#setup-your-app)
-- [Configuring Honeycomb.io](#setup-honeycombio)
+- [Set up your chat app](#set-up-your-chat-app)
+- [Set up a Docker collector](#set-up-a-docker-collector)
+- [Generating telemetry data](#generating-telemetry-data)
 - [Viewing telemetry data](#viewing-telemetry-data)
-- [Next steps](#whats-next)
+
+You can find the complete source code for this tutorial
+[on GitHub](https://github.com/denoland/examples/tree/main/with-honeycomb).
 
 ## Set up your chat app
 
