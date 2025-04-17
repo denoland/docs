@@ -1,73 +1,91 @@
 ---
 title: "How to export telemetry data to Honeycomb"
-description: "Step-by-step guide to export telemetry data with OpenTelemetry and Honeycomb.io."
+description: "Complete guide to exporting telemetry data with OpenTelemetry and Honeycomb.io. Learn how to configure collectors, visualize traces, and monitor application performance."
 url: /examples/honeycomb_tutorial/
 ---
 
-[Honeycomb.io](https://honeycomb.io) is a powerful observability platform
-designed for debugging and understanding complex, modern distributed systems,
-with support for real-time, high-cardinality data, as well as sophisticated
-event correlation.
+[OpenTelemetry](https://opentelemetry.io/) (often abbreviated as OTel) is an
+open-source observability framework that provides a standardized way to collect
+and export telemetry data such as traces, metrics and logs. Deno has built-in
+support for OpenTelemetry, making it easy to instrument your applications
+without adding external dependencies. This integration works out of the box with
+observability platforms like [Honeycomb](https://honeycomb.io).
 
-In this tutorial, we'll show how to export telemetry data from your Deno or
-Node.js project to Honeycomb.io without any additional code or config:
+Honeycomb is an observability platform designed for debugging and understanding
+complex, modern distributed systems.
 
-- console.logs associated with HTTP requests
-- traces
-- metrics
+In this tutorial, we'll build a simple application and export its telemetry data
+to Honeycomb. We'll cover:
 
-You can view the source of this tutorial
-[on GitHub](https://github.com/denoland/examples/tree/main/with-honeycomb).
-
-[_Learn more about Deno's built-in OTel support and how it can level up your debugging immediately._](https://deno.com/blog/zero-config-debugging-deno-opentelemetry)
+- [Setting up your application](#setup-your-app)
+- [Configuring Honeycomb.io](#setup-honeycombio)
+- [Viewing telemetry data](#viewing-telemetry-data)
+- [Next steps](#whats-next)
 
 ## Setup your app
 
-Since this tutorial focuses on how to export data to Honeycomb.io, we'll use a
-very simple chat application. Note that you can use any Deno (or Node.js)
-program. What's important is that you run it with Deno and the following flags:
+For this tutorial, we'll use a simple chat application to demonstrate how to
+export telemetry data. You can find the
+[code for the app on GitHub](https://github.com/denoland/examples/tree/main/with-honeycomb).
 
-- `OTEL_SERVICE_NAME`
-- `OTEL_DENO=true`
-- `--unstable-otel`
+Either take a copy of that repository or create a
+[main.ts](https://github.com/denoland/examples/blob/main/with-honeycomb/main.ts)
+file and a
+[.env](https://github.com/denoland/examples/blob/main/with-honeycomb/.env.example)
+file.
 
-This is the command we will run for this example:
+In order to run the app you will need an OpenAI API key. You can get one by
+signing up for an account at [OpenAI](https://platform.openai.com/signup) and
+creating a new secret key. You can find your API key in the
+[API keys section](https://platform.openai.com/account/api-keys) of your OpenAI
+account. Once you have an API key, set up an `OPENAI_API-KEY` environment
+variable in your `.env` file.
+
+```env title=".env"
+OPENAI_API_KEY=your_openai_api_key
+```
+
+You can run this app with:
 
 ```sh
-OTEL_DENO=true OTEL_SERVICE_NAME=chat-app deno run --unstable-otel --allow-net --allow-read --allow-env --env-file main.ts
+deno run --allow-net --allow-env --env-file main.ts
 ```
 
 ## Setup Honeycomb.io
 
-If you haven't yet, create a free Honeycomb.io account. Once you have created an
-account, you'll receive a Honeycomb.io API key. We'll need this in the next step
-when we setup the OpenTelemetry collector.
+If you have not already, create a free Honeycomb account and set up an
+[ingest API key](https://docs.honeycomb.io/configure/environments/manage-api-keys/).
 
-Next, let's setup the OpenTelemetry collector with two new files: a `Dockerfile`
-and a `otel-collector.yml` configuration file. These files will tell the
-collector to export OTel data to Honeycomb.io.
+Next we will set up the OpenTelemetry collector.
 
-In the `Dockerfile`, we'll pull from the
-[`otel/opentelemetry-collector` image](https://hub.docker.com/r/otel/opentelemetry-collector).
-Here, we use `latest` tag, but in production, we recommend using a specific
-version:
+In the same directory as your `main.ts` file, create a `Dockerfile` and an
+`otel-collector.yml` file. The `Dockerfile` will be used to build a Docker
+image:
 
-```bash
-# Dockerfile
-
+```dockerfile title="Dockerfile"
 FROM otel/opentelemetry-collector:latest
 
-# Copy the OTel Collector config into the container
 COPY otel-collector.yml /otel-config.yml
 
-# Run the OTel Collector with the provided config
 CMD ["--config", "/otel-config.yml"]
 ```
 
-Next, let's create our `otel-collector.yml` . Note that your Honeycomb.io API
-key is used in the `exporters` section, as the `x-honeycomb-team` header:
+`FROM otel/opentelemetry-collector:latest` - This line specifies the base image
+for the container. It uses the official OpenTelemetry Collector image and pulls
+the latest version.
 
-```yml
+`COPY otel-collector.yml /otel-config.yml` - This instruction copies our
+configuration file named `otel-collector.yml` from the local build context into
+the container. The file is renamed to `/otel-config.yml` inside the container.
+
+`CMD ["--config", "/otel-config.yml"]` - This sets the default command that will
+run when the container starts. It tells the OpenTelemetry Collector to use the
+configuration file we copied in the previous step.
+
+Next, add the following to your `otel-collector.yml` file to define how how
+telemetry data should be collected and exported to Honeycomb:
+
+```yml title="otel-collector.yml"
 receivers:
   otlp:
     protocols:
@@ -103,47 +121,89 @@ service:
       exporters: [otlp]
 ```
 
-If you want more information about setting up Honeycomb.io,
-[check out their documentation.](https://docs.honeycomb.io/send-data/opentelemetry/collector/)
+The `receivers` section configures how the collector receives data. It sets up
+an OTLP (OpenTelemetry Protocol) receiver that listens on two protocols, `gRPC`
+and `HTTP`, the `0.0.0.0` address means it will accept data from any source.
 
-Now we can start the OTel collector service with the following command:
+The `exporters` section defines where the collected data should be sent. It's
+configured to send data to Honeycomb's API endpoint at `api.honeycomb.io:443`.
+The configuration requires an API key for authentication, swap
+`$_HONEYCOMB_API_KEY` for your actual Honeycomb API key.
 
-```bash
-$ docker build -t otel-collector . && docker run -p 4317:4317 -p 4318:4318 otel-collector
+The `processors` section defines how the data should be processed before export.
+It uses batch processing with a timeout of 5 seconds and a maximum batch size of
+5000 items.
 
-View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/2vyhm3qruhhhb55mow5ir4hp0
-2025-04-11T23:05:55.905Z	info	service@v0.123.0/service.go:197	Setting up own telemetry...
-2025-04-11T23:05:55.906Z	info	service@v0.123.0/service.go:264	Starting otelcol...	{"Version": "0.123.0", "NumCPU": 14}
-2025-04-11T23:05:55.906Z	info	extensions/extensions.go:41	Starting extensions...
-2025-04-11T23:05:55.907Z	info	otlpreceiver@v0.123.0/otlp.go:116	Starting GRPC server	{"endpoint": "0.0.0.0:4317"}
-2025-04-11T23:05:55.907Z	info	otlpreceiver@v0.123.0/otlp.go:173	Starting HTTP server	{"endpoint": "0.0.0.0:4318"}
-2025-04-11T23:05:55.907Z	info	service@v0.123.0/service.go:287	Everything is ready. Begin running and processing data.
+The `service` section ties everything together by defining three pipelines. Each
+pipeline is responsible for a different type of telemetry data. The logs
+pipeline collects application logs. The traces pipeline is for distributed
+tracing data. The metric pipeline is for performance metrics.
+
+Build and run the docker instance to start collecting your telemetry data with
+the following command:
+
+```sh
+docker build -t otel-collector . && docker run -p 4317:4317 -p 4318:4318 otel-collector
 ```
 
-Once the service is running, make a few requests on your Deno app. Afterwards,
-when we go to our Honeycomb.io account, we can see telemetry data:
+## Generating telemetry data
 
-![Viewing data in Honeycomb](./images/how-to/honeycomb/honeycomb-1.webp)
+Now that we have both pieces set up:
 
-We can view our logs:
+1. The OpenTelemetry collector running in Docker (listening on ports 4317
+   and 4318)
+2. Our chat application with the OpenTelemetry flags enabled
 
-![Viewing logs in Honeycomb](./images/how-to/honeycomb/honeycomb-2.webp)
+We can start generating telemetry data. Run your application with these
+environment variables to send data to the collector:
 
-As well as traces:
+```sh
+OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318 \
+OTEL_SERVICE_NAME=chat-app \
+OTEL_DENO=true \
+deno run --unstable-otel --allow-net --allow-env --env-file --allow-read main.ts
+```
+
+This command:
+
+- Points the OpenTelemetry exporter to your local collector (`localhost:4318`)
+- Names your service "chat-app" in Honeycomb
+- Enables Deno's OpenTelemetry integration
+- Runs your application with the necessary permissions
+
+To generate some telemetry data, make a few requests to your running application
+in your browser at [`http://localhost:8000`](http://localhost:8000).
+
+Each request will:
+
+1. Generate traces as it flows through your application
+2. Send logs from your application's console output
+3. Create metrics about the request performance
+4. Forward all this data through the collector to Honeycomb
+
+## Viewing telemetry data
+
+After making some requests to your application, you'll see three types of data
+in your Honeycomb.io dashboard:
+
+1. **Traces** - End-to-end request flows through your system
+2. **Logs** - Console output and structured log data
+3. **Metrics** - Performance and resource utilization data
 
 ![Viewing traces in Honeycomb](./images/how-to/honeycomb/honeycomb-3.webp)
 
-And explore each span operation within a trace:
+You can drill down into individual spans to debug performance issues:
 
 ![Viewing expanded traces in Honeycomb](./images/how-to/honeycomb/honeycomb-4.webp)
 
-## What's next
+🦕 Now that you have telemetry export working, you could:
 
-You can use this configuration to export telemetry data from any Deno or Node.js
-program to Honeycomb.io.
+1. Add custom spans and attributes to better understand your application
+2. Set up alerts based on latency or error conditions
+3. Deploy your application and collector to production using platforms like:
+   - [Fly.io](https://docs.deno.com/examples/deploying_deno_with_docker/)
+   - [Digital Ocean](https://docs.deno.com/examples/digital_ocean_tutorial/)
+   - [AWS Lightsail](https://docs.deno.com/examples/aws_lightsail_tutorial/)
 
-You can also host this — the app and the OTel collector service — on any VPS
-platform via Docker, such as
-[Fly.io](https://docs.deno.com/examples/deploying_deno_with_docker/),
-[Digital Ocean](https://docs.deno.com/examples/digital_ocean_tutorial/),
-[Amazon](https://docs.deno.com/examples/aws_lightsail_tutorial/), and more.
+For more details on OpenTelemetry configuration, check out the
+[Honeycomb documentation](https://docs.honeycomb.io/send-data/opentelemetry/collector/).
