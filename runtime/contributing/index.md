@@ -1,5 +1,6 @@
 ---
 title: "Contributing and support"
+description: "Guide to contributing to the Deno project and ecosystem. Learn about different Deno repositories, contribution guidelines, and how to submit effective pull requests."
 oldUrl:
   - /runtime/manual/contributing/
   - /runtime/manual/contributing/contribute
@@ -33,6 +34,12 @@ to contribute to.
 Some systems, including a large part of the Node.js compatibility layer are
 implemented in JavaScript and TypeScript modules. These are a good place to
 start if you are looking to make your first contribution.
+
+[Here](https://node-test-viewer.deno.dev/results/latest) is a list of Node.js
+test cases, including both successful and failing ones. Reviewing these can
+provide valuable insight into how the compatibility layer works in practice, and
+where improvements might be needed. They can also serve as a useful guide for
+identifying areas where contributions are most impactful.
 
 While iterating on such modules it is recommended to include `--features hmr` in
 your `cargo` flags. This is a special development mode where the JS/TS sources

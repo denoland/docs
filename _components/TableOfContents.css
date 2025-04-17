@@ -12,15 +12,12 @@
     grid-template-columns: minmax(0, 8fr) minmax(0, 3fr);
   }
 
-  .examples-content {
-    max-width: 1200px;
-  }
-
   .toc-desktop {
     display: block;
     position: sticky;
     padding: 1rem;
     top: 4rem;
+    max-width: 300px;
     max-height: calc(100vh - 4rem);
     height: max-content;
     overflow-y: auto;

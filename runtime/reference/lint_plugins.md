@@ -1,5 +1,6 @@
 ---
 title: "Lint Plugins"
+description: "Guide to creating and using custom lint plugins in Deno. Learn how to write custom lint rules, use selectors for AST matching, implement fixes, and test your plugins using Deno's lint plugin API."
 ---
 
 :::caution
@@ -14,7 +15,7 @@ in the future.
 The built-in linter can be extended with plugins to add custom lint rules.
 
 Whilst Deno ships with [many lint rules](/lint/) out of the box, there are cases
-where you need a custom rule tailored particularily to your project - whether to
+where you need a custom rule tailored particularly to your project - whether to
 catch a context-specific problem or enforce company-wide conventions.
 
 This is where the lint plugin API comes into play.
@@ -121,19 +122,24 @@ Note, that we can always refine our match further in JavaScript if the matching
 logic is too complex to be expressed as a selector alone. The full list of the
 supported syntax for selectors is:
 
-| Syntax                 | Description                   |
-| ---------------------- | ----------------------------- |
-| `Foo + Foo`            | Next sibling selector         |
-| `Foo > Bar`            | Child combinator              |
-| `Foo ~ Bar`            | Subsequent sibling combinator |
-| `Foo Bar`              | Descendant combinator         |
-| `Foo[attr]`            | Attribute existance           |
-| `Foo[attr.length < 2]` | Attribute value comparison    |
-| `:first-child`         | First child pseudo-class      |
-| `:last-child`          | Last child pseudo-class       |
-| `:nth-child(2n + 1)`   | Nth-child pseudo-class        |
-| `:not(> Bar)`          | Not pseudo-class              |
-| `:is(> Bar)`           | Is pseudo-class               |
+| Syntax                    | Description                            |
+| ------------------------- | -------------------------------------- |
+| `Foo + Foo`               | Next sibling selector                  |
+| `Foo > Bar`               | Child combinator                       |
+| `Foo ~ Bar`               | Subsequent sibling combinator          |
+| `Foo Bar`                 | Descendant combinator                  |
+| `Foo[attr]`               | Attribute existence                    |
+| `Foo[attr.length < 2]`    | Attribute value comparison             |
+| `Foo[attr=/(foo\|bar)*/]` | Attribute value regex check            |
+| `:first-child`            | First child pseudo-class               |
+| `:last-child`             | Last child pseudo-class                |
+| `:nth-child(2n + 1)`      | Nth-child pseudo-class                 |
+| `:not(> Bar)`             | Not pseudo-class                       |
+| `:is(> Bar)`              | Is pseudo-class                        |
+| `:where(> Bar)`           | Where pseudo-class (same as `:is()`)   |
+| `:matches(> Bar)`         | Matches pseudo-class (same as `:is()`) |
+| `:has(> Bar)`             | Has pseudo-class                       |
+| `IfStatement.test`        | Field selector `.<field>`              |
 
 There is also the `:exit` pseudo that is only valid at the end of the whole
 selector. When it's present, Deno will call the function while going **up** the
@@ -247,6 +253,25 @@ custom lint rule is always `<plugin-name>/<rule-name>`.
     }
   }
 }
+```
+
+## Ignoring custom lint reports
+
+Sometimes you want to disable a reported lint error for a particular place in
+your code. Instead of disabling the custom lint rule entirely, you can disable a
+reported location by placing a code comment before it.
+
+```ts
+// deno-lint-ignore my-custom-plugin/no-console
+console.log("hey");
+```
+
+This will disable the lint rule from a lint plugin for this particular line.
+
+The syntax for the ignore comment is:
+
+```ts
+// deno-lint-ignore <my-plugin>/<my-rule>
 ```
 
 ## Testing plugins

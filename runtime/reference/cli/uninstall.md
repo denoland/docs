@@ -2,6 +2,9 @@
 title: "deno uninstall"
 oldUrl: /runtime/manual/tools/uninstall/
 command: uninstall
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno uninstall"
+description: "Remove a dependency from your project or from your global cache"
 ---
 
 ## `deno uninstall [PACKAGES]`

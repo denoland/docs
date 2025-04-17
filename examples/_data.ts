@@ -91,12 +91,6 @@ export const sidebar = [
         type: "tutorial",
       },
       {
-        title: "Better testing with Deno coverage",
-        href: "/examples/deno_coverage/",
-        externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
-        type: "video",
-      },
-      {
         title: "Formatting with Deno fmt",
         href: "/examples/deno_fmt/",
         externalURL: "https://www.youtube.com/watch?v=Ouzso9gQqnc",
@@ -106,12 +100,6 @@ export const sidebar = [
         title: "Benchmarking with Deno bench",
         href: "/examples/deno_bench/",
         externalURL: "https://www.youtube.com/watch?v=IVde_GTN6TM",
-        type: "video",
-      },
-      {
-        title: "Getting started with Deno test",
-        href: "/examples/deno_test/",
-        externalURL: "https://www.youtube.com/watch?v=gDtDVfsgHgs",
         type: "video",
       },
     ],
@@ -293,6 +281,73 @@ export const sidebar = [
       {
         title: "Build a Tanstack app",
         href: "/examples/tanstack_tutorial/",
+        type: "tutorial",
+      },
+    ],
+  },
+  {
+    title: "Testing",
+    items: [
+      {
+        title: "Writing tests",
+        href: "/examples/writing_tests/",
+        type: "example",
+      },
+      {
+        title: "Basics of testing",
+        href: "/examples/testing_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Mocking data in tests",
+        href: "/examples/mocking_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Snapshot testing",
+        href: "/examples/snapshot_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Spy functions",
+        href: "/examples/spy_functions/",
+        type: "example",
+      },
+      {
+        title: "Getting started with Deno test",
+        href: "/examples/deno_test/",
+        externalURL: "https://www.youtube.com/watch?v=gDtDVfsgHgs",
+        type: "video",
+      },
+      {
+        title: "Better testing with Deno coverage",
+        href: "/examples/deno_coverage/",
+        externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
+        type: "video",
+      },
+      {
+        title: "Testing web applications",
+        href: "/examples/web_testing_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "BDD testing",
+        href: "/examples/bdd_tutorial/",
+        type: "tutorial",
+      },
+    ],
+  },
+  {
+    title: "OpenTelemetry",
+    items: [
+      {
+        title: "Export telemetry to Hyperdx",
+        href: "/examples/hyperdx_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Export telemetry to Honeycomb",
+        href: "/examples/honeycomb_tutorial/",
         type: "tutorial",
       },
     ],
@@ -491,11 +546,6 @@ export const sidebar = [
       {
         title: "Command line arguments",
         href: "/examples/command_line_arguments/",
-        type: "example",
-      },
-      {
-        title: "Writing tests",
-        href: "/examples/writing_tests/",
         type: "example",
       },
       {

@@ -1,5 +1,6 @@
 ---
 title: "Fetch and stream data"
+description: "A tutorial on working with network requests in Deno. Learn how to use the fetch API for HTTP requests, handle responses, implement data streaming, and manage file uploads and downloads."
 url: /examples/fetch_data_tutorial/
 oldUrl:
   - /runtime/manual/examples/fetch_data/

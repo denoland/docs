@@ -1,3 +1,7 @@
+export function deleteBackticks(str?: string) {
+  return str?.replace(/`/g, "");
+}
+
 export default function Layout(data: Lume.Data) {
   const section = data.url.split("/").filter(Boolean)[0];
   const description = data.description ||
@@ -8,7 +12,7 @@ export default function Layout(data: Lume.Data) {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{data.title}</title>
+        <title>{deleteBackticks(data.title)}</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link
@@ -25,42 +29,22 @@ export default function Layout(data: Lume.Data) {
           type="font/woff2"
           crossOrigin="true"
         />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@deno_land" />
         <link rel="me" href="https://fosstodon.org/@deno_land" />
-        <meta name="twitter:title" content={data.title} />
-        <meta property="og:title" content={data.title} />
-
-        <meta property="og:description" content={description} />
-        <meta name="twitter:description" content={description} />
-        <meta name="description" content={description} />
-
-        <meta name="twitter:image" content="/img/og.webp" />
-        <meta
-          name="twitter:image:alt"
-          content="Deno docs: Deno documentation, guides, and reference materials. docs.deno.com"
+        <data.comp.OpenGraph
+          title={data.title}
+          description={description}
+          section={section}
+          url={`https://docs.deno.com${data.url}`}
         />
-        <meta property="og:image" content="/img/og.webp" />
-        <meta
-          property="og:image:alt"
-          content="Deno docs: Deno documentation, guides, and reference materials. docs.deno.com"
-        />
-
-        <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Deno" />
-        <meta property="og:locale" content="en_US" />
-
         <meta
           name="keywords"
           content="Deno, JavaScript, TypeScript, reference, documentation, guide, tutorial, example"
         />
-
         <script
           dangerouslySetInnerHTML={{
             __html: `
             (function() {
-              const theme = localStorage.getItem('denoDocsTheme') || 
+              const theme = localStorage.getItem('denoDocsTheme') ||
                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               document.documentElement.classList.add(theme);
             })();

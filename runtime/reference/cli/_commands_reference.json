@@ -3,6 +3,15 @@
   "about": null,
   "args": [
     {
+      "name": "help",
+      "short": "h",
+      "long": "help",
+      "required": false,
+      "help": null,
+      "help_heading": null,
+      "usage": "--help[=<CONTEXT>]"
+    },
+    {
       "name": "quiet",
       "short": "q",
       "long": "quiet",
@@ -34,6 +43,15 @@
           "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -79,6 +97,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -184,7 +211,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -431,6 +458,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -474,6 +510,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -579,7 +624,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -848,7 +893,7 @@
           "short": "D",
           "long": "dev",
           "required": false,
-          "help": "Add as a dev dependency",
+          "help": "Add the package as a dev dependency. Note: This only applies when adding to a `package.json` file.",
           "help_heading": null,
           "usage": "--dev"
         },
@@ -905,6 +950,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -948,6 +1002,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -1053,7 +1116,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -1309,6 +1372,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -1351,6 +1423,15 @@
           "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1420,7 +1501,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -1550,6 +1631,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -1593,6 +1683,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -1689,7 +1788,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -1823,7 +1922,7 @@
     },
     {
       "name": "compile",
-      "about": "Compiles the given script into a self contained executable.\n\n  \u001b[38;5;245mdeno compile --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno compile --output file_server jsr:@std/http/file-server\u001b[39m\n\nAny flags specified which affect runtime behavior will be applied to the resulting binary.\n\nThis allows distribution of a Deno application to systems that do not have Deno installed.\nUnder the hood, it bundles a slimmed down version of the Deno runtime along with your\nJavaScript or TypeScript code.\n\nCross-compiling to different target architectures is supported using the \u001b[36m--target\u001b[39m flag.\nOn the first invocation with deno will download the proper binary and cache it in \u001b[36m$DENO_DIR\u001b[39m.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/compile\u001b[39m\n",
+      "about": "Compiles the given script into a self contained executable.\n\n  \u001b[38;5;245mdeno compile --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno compile --output file_server jsr:@std/http/file-server\u001b[39m\n\nAny flags specified which affect runtime behavior will be applied to the resulting binary.\n\nThis allows distribution of a Deno application to systems that do not have Deno installed.\nUnder the hood, it bundles a slimmed down version of the Deno runtime along with your\nJavaScript or TypeScript code.\n\nCross-compiling to different target architectures is supported using the \u001b[36m--target\u001b[39m flag.\nOn the first invocation of `deno compile`, Deno will download the relevant binary and cache it in \u001b[36m$DENO_DIR\u001b[39m.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/compile\u001b[39m\n",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -1842,6 +1941,15 @@
           "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1887,6 +1995,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -1992,7 +2109,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -2318,6 +2435,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -2533,6 +2659,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -2576,6 +2711,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -2681,7 +2825,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -2878,7 +3022,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -3097,6 +3241,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -3200,7 +3353,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -3276,6 +3429,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -3319,6 +3481,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -3424,7 +3595,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -3631,7 +3802,7 @@
           "short": "D",
           "long": "dev",
           "required": false,
-          "help": "Add as a dev dependency",
+          "help": "Add the package as a dev dependency. Note: This only applies when adding to a `package.json` file.",
           "help_heading": null,
           "usage": "--dev"
         },
@@ -3678,6 +3849,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -3721,6 +3901,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -3961,6 +4150,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -4037,7 +4235,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4149,6 +4347,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -4171,7 +4378,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4283,6 +4490,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -4326,6 +4542,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -4440,7 +4665,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4615,6 +4840,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -4658,6 +4892,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -4709,7 +4952,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4803,6 +5046,15 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -4846,6 +5098,15 @@
           "help": "Enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -4951,7 +5212,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -5373,6 +5634,15 @@
           "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
         },
         {
           "name": "unstable-sloppy-imports",

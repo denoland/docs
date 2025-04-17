@@ -1,5 +1,6 @@
 ---
 title: "Testing"
+description: "A guide to Deno's testing capabilities. Learn about the built-in test runner, assertions, mocking, coverage reporting, snapshot testing, and how to write effective tests for your Deno applications."
 oldUrl:
   - /runtime/manual/advanced/language_server/testing_api/
   - /runtime/manual/basics/testing/
@@ -289,7 +290,8 @@ The [Deno Standard Library](/runtime/fundamentals/standard_library/) provides a
 set of functions to help you write tests that involve spying, mocking, and
 stubbing. Check out the
 [@std/testing documentation on JSR](https://jsr.io/@std/testing) for more
-information on each of these utilities.
+information on each of these utilities or our
+[tutorial on mocking and spying in tests with deno](/examples/mocking_tutorial/).
 
 ## Coverage
 
@@ -331,6 +333,8 @@ describe("add function", () => {
 
 Check out the [documentation on JSR](https://jsr.io/@std/testing/doc/bdd/~) for
 more information on these functions and hooks.
+
+- [BDD testing tutorial](/examples/bdd_tutorial/)
 
 ## Documentation Tests
 
@@ -587,3 +591,72 @@ Snapshot testing enables catching a wide array of bugs with very little code. It
 is particularly helpful in situations where it is difficult to precisely express
 what should be asserted, without requiring a prohibitive amount of code, or
 where the assertions a test makes are expected to change often.
+
+- [Snapshot testing tutorial](/examples/snapshot_tutorial/)
+
+## Tests and Permissions
+
+The `permissions` property in the `Deno.test` configuration allows you to
+specifically deny permissions, but does not grant them. Permissions must be
+provided when running the test command. When building robust applications, you
+often need to handle cases where permissions are denied, (for example you may
+want to write tests to check whether fallbacks have been set up correctly).
+
+Consider a situation where you are reading from a file, you may want to offer a
+fallback value in the case that the function does not have read permission:
+
+```ts
+import { assertEquals } from "jsr:@std/assert";
+import getFileText from "./main.ts";
+
+Deno.test({
+  name: "File reader gets text with permission",
+  permissions: { read: true },
+  fn: async () => {
+    const result = await getFileText();
+    console.log(result);
+    assertEquals(result, "the content of the file");
+  },
+});
+
+Deno.test({
+  name: "File reader falls back to error message without permission",
+  permissions: { read: false },
+  fn: async () => {
+    const result = await getFileText();
+    console.log(result);
+    assertEquals(result, "oops don't have permission");
+  },
+});
+```
+
+```sh
+# Run the tests with read permission
+deno test --allow-read
+```
+
+The permissions object supports detailed configuration:
+
+```ts
+Deno.test({
+  name: "permission configuration example",
+  permissions: {
+    read: true, // Grant all read permissions
+    // OR
+    read: ["./data", "./config"], // Grant read to specific paths only
+
+    write: false, // Explicitly deny write permissions
+    net: ["example.com:443"], // Allow specific host:port combinations
+    env: ["API_KEY"], // Allow access to specific env variables
+    run: false, // Deny subprocess execution
+    ffi: false, // Deny loading dynamic libraries
+    hrtime: false, // Deny high-resolution time
+  },
+  fn() {
+    // Test code that respects these permission boundaries
+  },
+});
+```
+
+Remember that any permission not explicitly granted at the command line will be
+denied, regardless of what's specified in the test configuration.

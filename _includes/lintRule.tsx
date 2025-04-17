@@ -30,8 +30,9 @@ const generateCliForTags = (tags: string[]) => {
   return tags.map(generateCliForTag).join("\n# or ...\n");
 };
 
-function LintRuleTags(props: { tags: string[] }) {
+function LintRuleTags(props: { tags: string[]; ruleName: string }) {
   const tags = props.tags;
+  const ruleName = props.ruleName;
   if (tags.length === 0) {
     return null;
   }
@@ -69,6 +70,24 @@ function LintRuleTags(props: { tags: string[] }) {
             <pre class="!mb-0">{generateCliForTags(tags)}</pre>
           </>
         )}
+      <div class="mt-4">
+        This rule can be explictly included to or excluded from the rules
+        present in the current tag by adding it to the <code>include</code> or
+        {" "}
+        <code>exclude</code> array in <code>deno.json</code>:
+      </div>
+      <pre>
+        {
+          `{
+  "lint": {
+    "rules": {
+      "include": ["${ruleName}"],
+      "exclude": ["${ruleName}"]
+    }
+  }
+}`
+      }
+      </pre>
     </div>
   );
 }
@@ -78,7 +97,7 @@ export default function LintRule(props: Lume.Data, _helpers: Lume.Helpers) {
 
   return (
     <>
-      <LintRuleTags tags={tags} />
+      <LintRuleTags tags={tags} ruleName={props.title} />
       {props.children}
     </>
   );

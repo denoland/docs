@@ -1,5 +1,6 @@
 ---
-title: "Node and npm support"
+title: "Node and npm Compatibility"
+description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
 - /runtime/reference/node/
 - /runtime/manual/npm_nodejs/std_node/

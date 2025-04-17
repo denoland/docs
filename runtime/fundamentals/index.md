@@ -1,5 +1,6 @@
 ---
 title: Fundamentals
+description: "A guide to Deno's fundamental concepts and features. Learn about built-in tooling, TypeScript support, Node.js compatibility, security model, and modern JavaScript features that make Deno powerful and developer-friendly."
 ---
 
 Deno is designed with the developer in mind, aiming to provide a smooth and
@@ -8,7 +9,7 @@ easy to pick up, even for those new to the backend development.
 
 ## Built in tooling
 
-Deno’s inbuilt tooling significantly eases the onboarding process. With a single
+Deno's inbuilt tooling significantly eases the onboarding process. With a single
 executable, you can get started without worrying about complex setups or
 dependencies. This allows you to focus on writing code rather than configuring
 your environment.
@@ -33,8 +34,8 @@ can integrate Deno into your projects seamlessly.
 
 Deno comes with a comprehensive standard library written in TypeScript. This
 library includes modules for common tasks such as HTTP servers, file system
-operations, and more, allowing you to avoid “reinventing the wheel” and focus on
-your application’s features.
+operations, and more, allowing you to avoid "reinventing the wheel" and focus on
+your application's features.
 
 - [Standard Library](/runtime/fundamentals/standard_library/)
 
@@ -46,6 +47,7 @@ vulnerabilities. This secure-by-default approach helps protect your applications
 from potential threats.
 
 - [Security and permissions](/runtime/fundamentals/security/)
+- [Foreign Function Interface (FFI)](/runtime/fundamentals/ffi/)
 
 ## Modern Language Features
 

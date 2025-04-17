@@ -1,5 +1,6 @@
 ---
 title: "Environment variables"
+description: "A guide to working with environment variables in Deno. Learn about Deno.env API, .env file support, CLI configuration, and special environment variables that control Deno's behavior."
 oldUrl:
 - /runtime/manual/basics/env_variables/
 - /runtime/reference/cli/env_variables/
@@ -65,6 +66,37 @@ console.log(Deno.env.get("GREETING")); // "Hello, world."
 Further documentation for `.env` handling can be found in the
 [@std/dotenv](https://jsr.io/@std/dotenv/doc) documentation.
 
+## Set a variable when running a command
+
+As with other CLI commands, you can set environment variables before running a
+command like so:
+
+```shell
+MY_VAR="my value" deno run main.ts
+```
+
+This can be useful when you want to vary a task based on an environment
+variable, and can be helpfully combined with
+[`deno task`](/runtime/reference/cli/task/) commands like so:
+
+```jsonc title="deno.json"
+{
+
+  ...
+  
+  "tasks": {
+    "build:full": {
+      "description": "Build the site with all features",
+      "command": "BUILD_TYPE=FULL deno run main.ts"
+    },
+    "build:light": {
+      "description": "Build the site without expensive operations",
+      "command": "BUILD_TYPE=LIGHT deno run main.ts"
+    }
+  }
+}
+```
+
 ## `std/cli`
 
 The Deno Standard Library has a [`std/cli` module](https://jsr.io/@std/cli) for
@@ -80,6 +112,7 @@ The Deno runtime has these special environment variables.
 | DENO_AUTH_TOKENS     | A semi-colon separated list of bearer tokens and hostnames to use when fetching remote modules from private repositories<br />(e.g. `abcde12345@deno.land;54321edcba@github.com`) |
 | DENO_TLS_CA_STORE    | Comma-separated list of order dependent certificate stores.<br />Possible values: `system`, `mozilla`. Defaults to `mozilla`.                                                     |
 | DENO_CERT            | Load certificate authority from PEM encoded file                                                                                                                                  |
+| DENO_COVERAGE_DIR    | Set the directory for collecting coverage profile data. This option only works for [`deno test` subcommand](/runtime/reference/cli/test/).                                        |
 | DENO_DIR             | Set the cache directory                                                                                                                                                           |
 | DENO_INSTALL_ROOT    | Set deno install's output directory (defaults to `$HOME/.deno/bin`)                                                                                                               |
 | DENO_REPL_HISTORY    | Set REPL history file path History file is disabled when the value is empty <br />(defaults to `$DENO_DIR/deno_history.txt`)                                                      |

@@ -1,5 +1,6 @@
 ---
 title: "Build a React app with a starter template"
+description: "Complete guide to building React applications with Deno and Vite. Learn how to set up a project from a template, implement routing, add API endpoints, and deploy your full-stack TypeScript application."
 url: /examples/react_tutorial/
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/react/

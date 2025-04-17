@@ -1,5 +1,6 @@
 ---
 title: "Workspaces and monorepos"
+description: "A guide to managing workspaces and monorepos in Deno. Learn about workspace configuration, package management, dependency resolution, and how to structure multi-package projects effectively."
 oldUrl: /runtime/manual/basics/workspaces
 ---
 
@@ -205,6 +206,9 @@ import workspace dependencies.
 
 ### Multiple package entries
 
+The `exports` property details the entry points and exposes which modules should
+be importable by users of your package.
+
 So far, our package only has a single entry. This is fine for simple packages,
 but often you'll want to have multiple entries that group relevant aspects of
 your package. This can be done by passing an `object` instead of a `string` to
@@ -310,7 +314,7 @@ package. Additionally, you could remove the package.json in the root and specify
 the npm package in the deno.json workspace members. That allows you to gradually
 migrate to Deno, without putting a lot of upfront work.
 
-For example, you can add `log/deno.json` like to to configure Deno's linter and
+For example, you can add `log/deno.json` to configure Deno's linter and
 formatter:
 
 ```jsonc

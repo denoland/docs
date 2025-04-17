@@ -13,6 +13,10 @@ export const sidebar = [
         title: "Components",
         href: "/styleguide/components/",
       },
+      {
+        title: "OG images",
+        href: "/styleguide/og/",
+      },
     ],
   },
 ] satisfies Sidebar;

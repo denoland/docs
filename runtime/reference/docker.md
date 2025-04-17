@@ -1,5 +1,6 @@
 ---
 title: Deno and Docker
+description: "Complete guide to using Deno with Docker containers. Learn about official Deno images, writing Dockerfiles, multi-stage builds, workspace containerization, and Docker best practices for Deno applications."
 ---
 
 ## Using Deno with Docker
@@ -150,7 +151,7 @@ services:
 
 ```dockerfile
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD deno eval "try { await fetch('http://localhost:8000/health'); } catch { exit(1); }"
+  CMD deno eval "try { await fetch('http://localhost:8000/health'); } catch { Deno.exit(1); }"
 ```
 
 ### Common Development Workflow

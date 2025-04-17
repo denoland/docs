@@ -30,7 +30,7 @@ export default function SnippetComponent(props: {
       >
         {props.filename && (
           <span
-            class={`font-mono text-xs absolute -top-3 left-4 z-10 p-1 rounded-sm ${
+            class={`font-mono text-xs absolute -top-3 left-0 z-10 p-1 rounded-sm bg-foreground-tertiary ${
               props.firstOfFile ? "block" : "block sm:hidden"
             }`}
           >

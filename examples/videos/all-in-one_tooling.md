@@ -1,11 +1,12 @@
 ---
 title: "All-in-one tooling"
+description: "Learn about Deno's built-in developer tools. Watch how to use the integrated formatter, linter, and test runner to improve code quality without additional configuration or third-party dependencies."
 url: /examples/all-in-one_tooling/
 videoUrl: https://www.youtube.com/watch?v=-4e9DkUrCr4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=5
 layout: video.tsx
 ---
 
-## Description of video
+## Video description
 
 In Node.js, before we can get started working on our project, we have to go
 through a configuration step for things like linting, formatting, and testing.

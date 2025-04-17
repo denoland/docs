@@ -5,7 +5,7 @@ videoUrl: https://www.youtube.com/watch?v=mgX1ymfqPSQ&list=PLvvLnBDNuTEov9EBIp3M
 layout: video.tsx
 ---
 
-## Description of video
+## Video description
 
 Deno gained lots of interpoperability capabilities at its v2.0 release. In this
 video, we'll look at how to use Node.js built-in APIs, NPM modules, and JSR
@@ -19,7 +19,7 @@ Node. For example, we can use the core Node.js built in APIs. All we have to do
 is add this Node specifier here.
 
 ```ts
-import { fs } from "node:fs/priomses";
+import { fs } from "node:fs/promises";
 ```
 
 Deno also supports the use of NPM modules. All you need to do is add the NPM

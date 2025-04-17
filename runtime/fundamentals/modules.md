@@ -1,5 +1,6 @@
 ---
 title: "Modules and dependencies"
+description: "A guide to managing modules and dependencies in Deno. Learn about ECMAScript modules, third-party packages, import maps, dependency management, versioning, and how to publish your own modules."
 oldUrl:
   - /runtime/manual/basics/modules/
   - /runtime/manual/basics/modules/integrity_checking/
@@ -62,6 +63,22 @@ import { add } from "./calc";
 // CORRECT: includes file extension
 import { add } from "./calc.ts";
 ```
+
+## Import attributes
+
+Deno supports the `with { type: "json" }` import attribute syntax for importing
+JSON files:
+
+```ts
+import data from "./data.json" with { type: "json" };
+
+console.log(data.property); // Access JSON data as an object
+```
+
+This is the only import attribute type currently supported in Deno. Support for
+`type: text` and `type: bytes` is being considered for future updates, and
+currently waiting on the
+[Module Harmony proposal](https://github.com/whatwg/html/issues/9444).
 
 ## Importing third party modules and libraries
 
