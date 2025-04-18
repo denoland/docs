@@ -48,7 +48,7 @@ const site = lume(
         }),
         apiDocumentContentTypeMiddleware,
       ],
-      page404: "/404/",
+      page404: "/404",
     },
     watcher: {
       ignore: [
