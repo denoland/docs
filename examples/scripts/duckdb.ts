@@ -12,7 +12,7 @@
  * database with a filename.
  */
 
-import { open } from "https://deno.land/x/duckdb/mod.ts";
+import { open } from "jsr:@divy/duckdb";
 
 // const db = open("./example.db");
 const db = open(":memory:");
