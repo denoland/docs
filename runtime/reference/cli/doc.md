@@ -134,7 +134,7 @@ by JSDoc, TSDoc and TypeDoc:
   available.
 - [`callback`](https://jsdoc.app/tags-callback): define a callback.
 - [`template`/`typeparam`/`typeParam`](https://tsdoc.org/pages/tags/typeparam):
-  define a callback.
+  define a generic parameter.
 - [`prop`/`property`](https://jsdoc.app/tags-property): define a property on a
   symbol.
 - [`typedef`](https://jsdoc.app/tags-typedef): define a type.
