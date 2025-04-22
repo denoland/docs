@@ -314,36 +314,27 @@ it in a paragraph:
 
 ```tsx title="Dinosaur.tsx"
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Dino } from "../types.ts";
+import { Link, useParams } from "react-router-dom";
+import { Dino } from "../types";
 
-export default function Index() {
-  const [dinosaurs, setDinosaurs] = useState<Dino[]>([]);
+export default function Dinosaur() {
+  const { selectedDinosaur } = useParams();
+  const [dinosaur, setDino] = useState<Dino>({ name: "", description: "" });
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`/api/dinosaurs/`);
-      const allDinosaurs = await response.json() as Dino[];
-      setDinosaurs(allDinosaurs);
+      const resp = await fetch(`/api/dinosaurs/${selectedDinosaur}`);
+      const dino = await resp.json() as Dino;
+      setDino(dino);
     })();
-  }, []);
+  }, [selectedDinosaur]);
 
   return (
-    <main>
-      <h1>Welcome to the Dinosaur app</h1>
-      <p>Click on a dinosaur below to learn more.</p>
-      {dinosaurs.map((dinosaur: Dino) => {
-        return (
-          <Link
-            to={`/${dinosaur.name.toLowerCase()}`}
-            key={dinosaur.name}
-            className="dinosaur"
-          >
-            {dinosaur.name}
-          </Link>
-        );
-      })}
-    </main>
+    <div>
+      <h1>{dinosaur.name}</h1>
+      <p>{dinosaur.description}</p>
+      <Link to="/">🠠 Back to all dinosaurs</Link>
+    </div>
   );
 }
 ```
