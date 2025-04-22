@@ -48,10 +48,10 @@ will attempt to retry failed callbacks three times - after one second, five
 seconds, and then ten seconds.
 
 ```ts
-Deno.cron("Retry example", "* * * * *", () => {
-  throw new Error("Deno.cron will retry this three times, to no avail!");
-}, {
+Deno.cron("Retry example", "* * * * *", {
   backoffSchedule: [1000, 5000, 10000],
+}, () => {
+  throw new Error("Deno.cron will retry this three times, to no avail!");
 });
 ```
 
