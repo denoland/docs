@@ -155,21 +155,21 @@ if (import.meta.main) {
 ```
 
 You can run the API server with
-`deno run --allow-env --allow-net server/main.ts`. We'll create a task to run
-this command in the background and update the dev task to run both the React app
-and the API server.
+`deno run --allow-env --allow-net --allow-read server/main.ts`. We'll create a
+task to run this command in the background and update the dev task to run both
+the React app and the API server.
 
-In your `package.json` file, update the `scripts` field to include the
-following:
+In your `deno.json` file, update the `tasks` field to include the following:
 
 ```diff title="deno.json"
 {
   "tasks": {
-+   "dev": "deno run -A --node-modules-dir=auto npm:vite & deno run server:start",
-    "build": "deno run -A --node-modules-dir=auto npm:vite build",
++   "dev": "deno run -A npm:vite & deno run server:start",
+    "build": "deno run -A npm:vite build",
     "server:start": "deno run -A --node-modules-dir --watch ./server/main.ts",
     "serve": "deno run build && deno run server:start"
-}
+},
++ "nodeModulesDir": "auto",
 ```
 
 If you run `deno run dev` now and visit `localhost:8000/api/dinosaurs`, in your
@@ -314,27 +314,36 @@ it in a paragraph:
 
 ```tsx title="Dinosaur.tsx"
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Dino } from "../types";
+import { Link } from "react-router-dom";
+import { Dino } from "../types.ts";
 
-export default function Dinosaur() {
-  const { selectedDinosaur } = useParams();
-  const [dinosaur, setDino] = useState<Dino>({ name: "", description: "" });
+export default function Index() {
+  const [dinosaurs, setDinosaurs] = useState<Dino[]>([]);
 
   useEffect(() => {
     (async () => {
-      const resp = await fetch(`/api/dinosaurs/${selectedDinosaur}`);
-      const dino = await resp.json() as Dino;
-      setDino(dino);
+      const response = await fetch(`/api/dinosaurs/`);
+      const allDinosaurs = await response.json() as Dino[];
+      setDinosaurs(allDinosaurs);
     })();
-  }, [selectedDinosaur]);
+  }, []);
 
   return (
-    <div>
-      <h1>{dinosaur.name}</h1>
-      <p>{dinosaur.description}</p>
-      <Link to="/">🠠 Back to all dinosaurs</Link>
-    </div>
+    <main>
+      <h1>Welcome to the Dinosaur app</h1>
+      <p>Click on a dinosaur below to learn more.</p>
+      {dinosaurs.map((dinosaur: Dino) => {
+        return (
+          <Link
+            to={`/${dinosaur.name.toLowerCase()}`}
+            key={dinosaur.name}
+            className="dinosaur"
+          >
+            {dinosaur.name}
+          </Link>
+        );
+      })}
+    </main>
   );
 }
 ```
@@ -359,7 +368,7 @@ To run the app use the task you set up earlier
 deno run dev
 ```
 
-Navigate to the local Vite server in your browser (`localhost:5173`) and you
+Navigate to the local Vite server in your browser (`localhost:3000`) and you
 should see the list of dinosaurs displayed which you can click through to find
 out about each one.
 
