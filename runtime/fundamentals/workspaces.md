@@ -517,3 +517,14 @@ This approach allows you to:
 2. Share code between packages without publishing to a registry
 3. Test and develop interdependent modules together
 4. Gradually migrate monolithic codebases to modular architecture
+
+## Publishing Workspace Packages
+
+Deno workspaces are particularly useful for developing packages that you plan to
+publish. You can
+[publish individual packages from your workspace to JSR](https://docs.deno.com/runtime/fundamentals/modules/#publishing-modules)
+while maintaining their interdependencies during development.
+
+When working with interdependent packages in a workspace, it's important to keep
+versions synchronized. Ensure that you use a consistent versioning strategy
+across packages and update dependent packages when a dependency changes.
