@@ -21,6 +21,8 @@ below for more information on each subcommand.
 ## Dependency management
 
 - [deno add](/runtime/reference/cli/add) - add dependencies
+- deno cache - _(Deprecated. Please use
+  [deno install](/runtime/reference/cli/install/))_
 - [deno install](/runtime/reference/cli/install/) - install a dependency or a
   script
 - [deno uninstall](/runtime/reference/cli/uninstall/) - uninstall a dependency

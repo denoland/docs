@@ -97,6 +97,17 @@ npm specifiers have the following format:
 npm:<package-name>[@<version-requirement>][/<sub-path>]
 ```
 
+This also allows functionality that may be familar from the `npx` command.
+
+```console
+# npx allows remote execution of a package from npm or a URL
+$ npx create-next-app@latest
+
+# deno run allows remote execution of a package from various locations,
+# and can scoped to npm via the `npm:` specifier.
+$ deno run -A npm:create-next-app@latest
+```
+
 For examples with popular libraries, please refer to the
 [tutorial section](/runtime/tutorials).
 
