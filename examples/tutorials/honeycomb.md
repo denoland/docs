@@ -9,7 +9,8 @@ open-source observability framework that provides a standardized way to collect
 and export telemetry data such as traces, metrics and logs. Deno has built-in
 support for OpenTelemetry, making it easy to instrument your applications
 without adding external dependencies. This integration works out of the box with
-observability platforms like [Honeycomb](https://honeycomb.io).
+observability platforms like [Honeycomb](https://honeycomb.io) or
+[Dash0](https://www.dash0.com).
 
 Honeycomb is an observability platform designed for debugging and understanding
 complex, modern distributed systems.
