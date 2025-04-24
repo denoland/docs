@@ -4,14 +4,17 @@
     "jsr:@davidbonnet/astring@1.8.6": "1.8.6",
     "jsr:@deno/cache-dir@0.14": "0.14.0",
     "jsr:@deno/doc@0.169.1": "0.169.1",
+    "jsr:@iuioiua/redis@*": "1.1.1",
     "jsr:@std/assert@^1.0.6": "1.0.12",
     "jsr:@std/bytes@^1.0.5": "1.0.5",
     "jsr:@std/cli@1.0.6": "1.0.6",
     "jsr:@std/cli@^1.0.6": "1.0.6",
     "jsr:@std/collections@^1.0.10": "1.0.10",
     "jsr:@std/collections@^1.0.5": "1.0.10",
+    "jsr:@std/crypto@*": "1.0.3",
     "jsr:@std/crypto@1.0.3": "1.0.3",
     "jsr:@std/dotenv@~0.225.2": "0.225.3",
+    "jsr:@std/encoding@*": "1.0.5",
     "jsr:@std/encoding@1.0.5": "1.0.5",
     "jsr:@std/encoding@^1.0.5": "1.0.5",
     "jsr:@std/fmt@1.0.3": "1.0.3",
@@ -109,6 +112,13 @@
     },
     "@deno/gfm@0.8.2": {
       "integrity": "a7528367cbd954a2d0de316bd0097ee92f06d2cb66502c8574de133ed223424f"
+    },
+    "@iuioiua/redis@1.1.1": {
+      "integrity": "09b2490429e463af6202f8b86699e2e3d8ff02ca9a6bac41e220b6f790a63125",
+      "dependencies": [
+        "jsr:@std/bytes",
+        "jsr:@std/collections@^1.0.10"
+      ]
     },
     "@std/assert@1.0.12": {
       "integrity": "08009f0926dda9cbd8bef3a35d3b6a4b964b0ab5c3e140a4e0351fbf34af5b9a",

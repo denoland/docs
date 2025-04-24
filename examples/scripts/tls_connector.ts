@@ -2,7 +2,7 @@
  * @title TCP/TLS connector: Ping
  * @difficulty intermediate
  * @tags cli
- * @run --allow-net --allow-read <url>
+ * @run -N -R <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.connectTls} Doc: Deno.connectTls
  * @resource {/examples/tls_listener} Example: TCP/TLS Listener
  * @group Network

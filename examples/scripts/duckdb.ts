@@ -2,7 +2,7 @@
  * @title Connect to DuckDB
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --allow-read --allow-write --allow-env --allow-net --allow-ffi <url>
+ * @run -R -W -E -N --allow-ffi <url>
  * @resource {https://duckdb.org/} DuckDB - An in-process SQL OLAP database management system
  * @resource {https://www.npmjs.com/package/@duckdb/node-api} npm:@duckdb/node-api
  * @group Databases

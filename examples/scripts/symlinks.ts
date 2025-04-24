@@ -2,7 +2,7 @@
  * @title Creating & resolving symlinks
  * @difficulty beginner
  * @tags cli
- * @run --allow-write --allow-read <url>
+ * @run -W -R <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.writeTextFile} Doc: Deno.writeTextFile
  * @resource {https://docs.deno.com/api/deno/~/Deno.symlink} Doc: Deno.symlink
  * @group File System

@@ -2,7 +2,7 @@
  * @title Path operations
  * @difficulty beginner
  * @tags cli
- * @run --allow-read <url>
+ * @run -R <url>
  * @resource {https://jsr.io/@std/path/doc} Doc: @std/path
  * @resource {https://docs.deno.com/api/deno/~/Deno.cwd} Deno: Deno.cwd
  * @group File System
