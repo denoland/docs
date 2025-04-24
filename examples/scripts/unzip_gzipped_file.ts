@@ -2,7 +2,7 @@
  * @title Unzip gzipped file
  * @difficulty beginner
  * @tags cli, deploy
- * @run --allow-write --allow-read <url>
+ * @run -W -R <url>
  * @group File System
  *
  * An example of how to decompress a gzipped file and save it to disk.

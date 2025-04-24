@@ -2,7 +2,7 @@
  * @title HTTP server: Streaming
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --allow-net <url>
+ * @run -N <url>
  * @resource {/examples/http_server} Example: HTTP Server: Hello World
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream} MDN: ReadableStream
  * @playground https://dash.deno.com/playground/example-streaming

@@ -2,7 +2,7 @@
  * @title Connect to SQLite
  * @difficulty beginner
  * @tags cli, deploy
- * @run --allow-read --allow-write <url>
+ * @run -R -W <url>
  * @group Databases
  *
  * Using the `node:sqlite` module, you can connect to an SQLite3 database
