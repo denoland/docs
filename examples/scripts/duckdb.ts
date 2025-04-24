@@ -4,7 +4,7 @@
  * @tags cli, deploy
  * @run --allow-read --allow-write --allow-env --allow-net --allow-ffi <url>
  * @resource {https://duckdb.org/} DuckDB - An in-process SQL OLAP database management system
- * @resource {https://www.npmjs.com/package/@duckdb/node-api} Official high-level API for DuckDB
+ * @resource {https://www.npmjs.com/package/@duckdb/node-api} npm:@duckdb/node-api
  * @group Databases
  *
  * Using Deno with DuckDB, you can connect to memory or a persistent
