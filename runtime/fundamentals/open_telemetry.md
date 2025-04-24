@@ -74,6 +74,35 @@ You can also create your own metrics, traces, and logs using the
 `npm:@opentelemetry/api` package.
 [Learn more about user defined metrics](#user-metrics).
 
+## Understanding Spans in OpenTelemetry
+
+In OpenTelemetry, a span represents a single operation or unit of work within a
+trace. A trace is a tree of spans that shows the path of work through a system.
+Spans are the fundamental building blocks of distributed tracing and help you
+understand the flow and performance of operations in your application.
+
+Key characteristics of spans:
+
+- **Name**: Each span has a name that describes the operation it represents
+  (e.g., "GET /users", "query_database", "process_payment")
+- **Start and End Time**: Spans track when an operation begins and completes,
+  allowing for duration calculations
+- **Context**: Spans maintain the context needed to correlate operations across
+  service boundaries
+- **Parent-Child Relationships**: Spans form a hierarchy that shows how
+  operations relate to each other
+- **Attributes**: Key-value pairs that add details about the operation (e.g.,
+  "http.method": "GET")
+- **Events**: Time-stamped annotations within a span (e.g., "cache_miss",
+  "retry_attempt")
+- **Status**: Indicates whether the operation succeeded or failed (OK or ERROR)
+- **Kind**: Describes the span's role in the system (SERVER, CLIENT, PRODUCER,
+  CONSUMER, or INTERNAL)
+
+Spans allow you to visualize and analyze the flow of requests through your
+application, identify bottlenecks, and troubleshoot performance issues or
+errors.
+
 ## Auto instrumentation
 
 Deno automatically collects and exports some observability data to the OTLP
