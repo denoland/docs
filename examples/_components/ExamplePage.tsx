@@ -40,7 +40,10 @@ export default function ExamplePage({ example }: Props) {
         <CopyButton text={contentNoCommentary} />
       </div>
       {example.parsed.files.map((file) => (
-        <div class="flex flex-col gap-4 md:gap-0" key={file.name}>
+        <div
+          class="flex flex-col gap-4 md:gap-0 example-content"
+          key={file.name}
+        >
           {file.snippets.map((snippet, i) => (
             <SnippetComponent
               key={i}

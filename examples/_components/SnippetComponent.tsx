@@ -11,14 +11,12 @@ export default function SnippetComponent(props: {
   const html = Prism.highlight(props.snippet.code, Prism.languages.js, "js");
 
   return (
-    <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-8">
+    <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-4 example-block">
       <div
-        class={`select-none text-sm ${
-          props.snippet.text ? "pb-4 mt-4 " : " "
-        } ${
+        class={`select-none text-sm ${props.snippet.text ? "pb-4" : " "} ${
           props.snippet.code
-            ? "italic text-balance col-span-5 sm:col-span-3 md:pb-0"
-            : "mt-4 col-span-full"
+            ? "italic md:text-balance md:text-right col-span-5 sm:col-span-3 md:pb-0 snippet-comment"
+            : "col-span-full mt-8"
         }`}
       >
         {props.snippet.text}
@@ -37,7 +35,7 @@ export default function SnippetComponent(props: {
             {props.filename}
           </span>
         )}
-        <div class="-mx-4 h-full sm:mx-0 overflow-scroll sm:overflow-hidden relative gfm-highlight">
+        <div class="-mx-4 h-full sm:mx-0 overflow-auto relative gfm-highlight">
           {props.snippet.code && (
             <div
               data-color-mode="light"
