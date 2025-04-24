@@ -16,14 +16,15 @@ import { DuckDBInstance } from "npm:@duckdb/node-api";
 // For graceful cleanup of resources
 using stack = new DisposableStack();
 
+// Create an in-memory database
 const instance = await DuckDBInstance.create(":memory:");
-// Or you can specify a path to a persistent database
-// const instance = await DuckDBInstance.create("./my_duckdb.db");
 
 // Close the instance when `stack` gets out of scope
 stack.defer(() => instance.closeSync());
 
+// Connect to the database
 const connection = await instance.connect();
+
 // Close the connection when `stack` gets out of scope
 stack.defer(() => connection.closeSync());
 
