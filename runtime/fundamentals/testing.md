@@ -48,7 +48,6 @@ Deno.test("async test", async () => {
 
 Deno.test({
   name: "read file test",
-  permissions: { read: true },
   fn: () => {
     const data = Deno.readTextFileSync("./somefile.txt");
     assertEquals(data, "expected content");
@@ -97,7 +96,7 @@ deno test my_test.ts -- -e --foo --bar
 
 # Provide permission for deno to read from the filesystem, which is necessary
 # for the final test above to pass
-deno test --allow-read my_test.ts
+deno test --allow-read=. my_test.ts
 ```
 
 ## Test Steps
@@ -611,7 +610,7 @@ import getFileText from "./main.ts";
 
 Deno.test({
   name: "File reader gets text with permission",
-  permissions: { read: true },
+  // no `permissions` means "inherit"
   fn: async () => {
     const result = await getFileText();
     console.log(result);
@@ -640,11 +639,9 @@ The permissions object supports detailed configuration:
 ```ts
 Deno.test({
   name: "permission configuration example",
+  // permissions: { read: true } // Grant all read permissions and deny all others
   permissions: {
-    read: true, // Grant all read permissions
-    // OR
     read: ["./data", "./config"], // Grant read to specific paths only
-
     write: false, // Explicitly deny write permissions
     net: ["example.com:443"], // Allow specific host:port combinations
     env: ["API_KEY"], // Allow access to specific env variables
