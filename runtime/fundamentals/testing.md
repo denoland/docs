@@ -640,6 +640,7 @@ The permissions object supports detailed configuration:
 Deno.test({
   name: "permission configuration example",
   // permissions: { read: true } // Grant all read permissions and deny all others
+  // OR
   permissions: {
     read: ["./data", "./config"], // Grant read to specific paths only
     write: false, // Explicitly deny write permissions
