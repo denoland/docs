@@ -4819,7 +4819,7 @@
     },
     {
       "name": "task",
-      "about": "Run a task defined in the configuration file.\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks:\n  \u001b[38;5;245mdeno task\u001b[39m\n\nEvaluate a task from string\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
+      "about": "Run a task defined in the configuration file:\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks (from config files in the current and ancestor directories):\n  \u001b[38;5;245mdeno task\u001b[39m\n\nEvaluate a task from string:\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -5428,7 +5428,7 @@
           "short": null,
           "long": "coverage",
           "required": false,
-          "help": "Collect coverage profile data into DIR. If DIR is not specified, it uses 'coverage/'",
+          "help": "Collect coverage profile data into DIR. If DIR is not specified, it uses 'coverage/'.\n  \u001b[38;5;245mThis option can also be set via the DENO_COVERAGE_DIR environment variable.\u001b[39m",
           "help_heading": "Testing options",
           "usage": "--coverage[=<DIR>]"
         },
