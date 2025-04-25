@@ -28,64 +28,6 @@ primarily comprise the languages in bold**):
 
 This is the main repository that provides the `deno` CLI.
 
-If you want to fix a bug or add a new feature to `deno` this is the repository
-to contribute to.
-
-Some systems, including a large part of the Node.js compatibility layer are
-implemented in JavaScript and TypeScript modules. These are a good place to
-start if you are looking to make your first contribution.
-
-[Here](https://node-test-viewer.deno.dev/results/latest) is a list of Node.js
-test cases, including both successful and failing ones. Reviewing these can
-provide valuable insight into how the compatibility layer works in practice, and
-where improvements might be needed. They can also serve as a useful guide for
-identifying areas where contributions are most impactful.
-
-While iterating on such modules it is recommended to include `--features hmr` in
-your `cargo` flags. This is a special development mode where the JS/TS sources
-are not included in the binary but read at runtime, meaning the binary will not
-have to be rebuilt if they are changed.
-
-To use the commands below, you need to first install the necessary tools on your
-system as described [here](building_from_source).
-
-```sh
-# cargo build
-cargo build --features hmr
-
-# cargo run -- run hello.ts
-cargo run --features hmr -- run hello.ts
-
-# cargo test integration::node_unit_tests::os_test
-cargo test --features hmr integration::node_unit_tests::os_test
-```
-
-Also remember to reference this feature flag in your editor settings. For VSCode
-users, combine the following into your workspace file:
-
-```jsonc
-{
-  "settings": {
-    "rust-analyzer.cargo.features": ["hmr"],
-    // Adds support for resolving internal `ext:*` modules
-    "deno.importMap": "tools/core_import_map.json"
-  }
-}
-```
-
-To use a development version of the LSP in VSCode:
-
-1. Install and enable the
-   [Deno VSCode extension](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
-2. Update your VSCode settings and point `deno.path` to your development binary:
-
-```jsonc
-// .vscode/settings.json
-{
-  "deno.path": "/path/to/your/deno/target/debug/deno"
-}
-```
-
 Languages: **Rust**, **JavaScript**, **TypeScript**
 
 ### [deno_std](https://github.com/denoland/deno_std)
@@ -171,37 +113,6 @@ Examples of bad PR title:
 
 2. Ensure there is a related issue and that it is referenced in the PR text.
 3. Ensure there are tests that cover the changes.
-
-## Submitting a PR to [`deno`](https://github.com/denoland/deno)
-
-In addition to the above make sure that:
-
-> To use the commands below, you need to first install the necessary tools on
-> your system as described [here](building_from_source).
-
-1. `cargo test` passes - this will run full test suite for `deno` including unit
-   tests, integration tests and Web Platform Tests
-
-1. Run `./tools/format.js` - this will format all of the code to adhere to the
-   consistent style in the repository
-
-1. Run `./tools/lint.js` - this will check Rust and JavaScript code for common
-   mistakes and errors using `clippy` (for Rust) and `dlint` (for JavaScript)
-
-## Submitting a PR to [`deno_std`](https://github.com/denoland/deno_std)
-
-In addition to the above make sure that:
-
-1. All of the code you wrote is in `TypeScript` (ie. don't use `JavaScript`)
-
-1. `deno test --unstable --allow-all` passes - this will run full test suite for
-   the standard library
-
-1. Run `deno fmt` in the root of repository - this will format all of the code
-   to adhere to the consistent style in the repository.
-
-1. Run `deno lint` - this will check TypeScript code for common mistakes and
-   errors.
 
 ## Submitting a PR to [`fresh`](https://github.com/denoland/fresh)
 
