@@ -114,12 +114,6 @@ Examples of bad PR title:
 2. Ensure there is a related issue and that it is referenced in the PR text.
 3. Ensure there are tests that cover the changes.
 
-## Submitting a PR to [`fresh`](https://github.com/denoland/fresh)
-
-First, please be sure to
-[install Puppeteer](https://github.com/lucacasonato/deno-puppeteer#installation).
-Then, please ensure `deno task ok` is run and successfully passes.
-
 ## Documenting APIs
 
 It is important to document all public APIs and we want to do that inline with
