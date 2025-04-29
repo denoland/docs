@@ -340,7 +340,6 @@ To use a local npm package, configure the `patch` field in your `deno.json`:
   "patch": [
     "../path/to/local_npm_package"
   ],
-  // required until Deno 2.3, but it will still be considered unstable
   "unstable": ["npm-patch"]
 }
 ```
