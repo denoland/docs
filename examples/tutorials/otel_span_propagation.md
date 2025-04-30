@@ -60,7 +60,7 @@ Deno.serve({ port: 8000 }, (req) => {
 });
 ```
 
-### CThe client
+### The client
 
 Now, let's create a client that will make requests to our server:
 
