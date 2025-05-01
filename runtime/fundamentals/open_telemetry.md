@@ -388,6 +388,21 @@ and
 added to them. Events are points in time that are associated with the span.
 Links are references to other spans.
 
+```ts
+// Add an event to the span
+span.addEvent("button_clicked", {
+  id: "submit-button",
+  action: "submit",
+});
+
+// Add an event with a timestamp
+span.addEvent("process_completed", { status: "success" }, Date.now());
+```
+
+Events can include optional attributes similar to spans. They are useful for
+marking significant moments within the span's lifetime without creating separate
+spans.
+
 Spans can also be created manually with `tracer.startSpan` which returns a span
 object. This method does not set the created span as the active span, so it will
 not automatically be used as the parent span for any spans created later, or any
@@ -710,7 +725,6 @@ While the OpenTelemetry integration for Deno is in development, there are some
 limitations to be aware of:
 
 - Traces are always sampled (i.e. `OTEL_TRACE_SAMPLER=parentbased_always_on`).
-- Traces do not support events.
 - Traces only support links with no attributes.
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
