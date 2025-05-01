@@ -17,8 +17,13 @@ export default {
   async fetch(_req) {
     return new Response("Hello world!");
   },
-};
+} satisfies Deno.ServeDefaultExport;
 ```
+
+The `satisfies Deno.ServeDefaultExport` type assertion ensures that your
+exported object conforms to the expected interface for Deno's HTTP server. This
+provides type safety and better editor autocomplete while allowing you to
+maintain the inferred types of your implementation.
 
 You can then run the server using the `deno serve` command:
 
@@ -38,5 +43,5 @@ export default {
 
     return new Response("Hello world!");
   },
-};
+} satisfies Deno.ServeDefaultExport;
 ```

@@ -36,33 +36,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -76,25 +49,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -115,6 +115,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -139,7 +157,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -449,33 +467,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -489,25 +480,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -528,6 +546,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -552,7 +588,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -773,6 +809,15 @@
           "usage": "--host <host>"
         },
         {
+          "name": "open",
+          "short": null,
+          "long": "open",
+          "required": false,
+          "help": "Open the browser on the address that the server is running on.",
+          "help_heading": null,
+          "usage": "--open"
+        },
+        {
           "name": "parallel",
           "short": null,
           "long": "parallel",
@@ -905,6 +950,24 @@
           "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
           "help_heading": null,
           "usage": "--allow-scripts[=<PACKAGE>...]"
+        },
+        {
+          "name": "npm",
+          "short": null,
+          "long": "npm",
+          "required": false,
+          "help": "assume unprefixed package names are npm packages",
+          "help_heading": null,
+          "usage": "--npm"
+        },
+        {
+          "name": "jsr",
+          "short": null,
+          "long": "jsr",
+          "required": false,
+          "help": "assume unprefixed package names are jsr packages",
+          "help_heading": null,
+          "usage": "--jsr"
         }
       ],
       "subcommands": [],
@@ -941,33 +1004,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -981,25 +1017,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -1020,6 +1083,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -1044,7 +1125,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -1278,7 +1359,7 @@
           "short": null,
           "long": "permit-no-files",
           "required": false,
-          "help": "Don't return an error code if no bench files were found",
+          "help": "Don't return an error code if no files were found",
           "help_heading": null,
           "usage": "--permit-no-files"
         },
@@ -1381,6 +1462,24 @@
           "usage": "--unstable-lazy-dynamic-imports"
         },
         {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -1432,6 +1531,24 @@
           "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
           "help_heading": "Unstable options",
           "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1622,33 +1739,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -1662,25 +1752,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -1701,6 +1818,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -1725,7 +1860,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -1916,9 +2051,55 @@
     {
       "name": "clean",
       "about": "Remove the cache directory (\u001b[36m$DENO_DIR\u001b[39m)",
-      "args": [],
+      "args": [
+        {
+          "name": "except-paths",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "[except-paths]..."
+        },
+        {
+          "name": "except",
+          "short": "e",
+          "long": "except",
+          "required": false,
+          "help": "Retain cache data needed by the given files",
+          "help_heading": null,
+          "usage": "--except"
+        },
+        {
+          "name": "dry-run",
+          "short": null,
+          "long": "dry-run",
+          "required": false,
+          "help": "Show what would be removed without performing any actions",
+          "help_heading": null,
+          "usage": "--dry-run"
+        },
+        {
+          "name": "node-modules-dir",
+          "short": null,
+          "long": "node-modules-dir",
+          "required": false,
+          "help": "Sets the node modules management mode for npm packages",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "vendor",
+          "short": null,
+          "long": "vendor",
+          "required": false,
+          "help": "Toggles local vendor folder usage for remote modules and a node_modules folder for npm packages",
+          "help_heading": "Dependency management options",
+          "usage": "--vendor[=<vendor>]"
+        }
+      ],
       "subcommands": [],
-      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno clean\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno clean\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[except-paths]...\u001b[0m"
     },
     {
       "name": "compile",
@@ -1934,33 +2115,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -1974,25 +2128,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -2013,6 +2194,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -2037,7 +2236,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -2229,6 +2428,15 @@
           "help": "Includes an additional module or file/directory in the compiled executable.\n  \u001b[38;5;245mUse this flag if a dynamically imported module or a web worker main module\n  fails to load in the executable or to embed a file or directory in the executable.\n  This flag can be passed multiple times, to include multiple additional modules.\u001b[39m",
           "help_heading": "Compile options",
           "usage": "--include <include>"
+        },
+        {
+          "name": "exclude",
+          "short": null,
+          "long": "exclude",
+          "required": false,
+          "help": "Excludes a file/directory in the compiled executable.\n  \u001b[38;5;245mUse this flag to exclude a specific file or directory within the included files.\n  For example, to exclude a certain folder in the bundled node_modules directory.\u001b[39m",
+          "help_heading": "Compile options",
+          "usage": "--exclude <exclude>"
         },
         {
           "name": "output",
@@ -2444,6 +2652,24 @@
           "usage": "--unstable-lazy-dynamic-imports"
         },
         {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -2650,33 +2876,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -2690,25 +2889,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -2729,6 +2955,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -2753,7 +2997,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -3072,6 +3316,15 @@
           "usage": "[files]..."
         },
         {
+          "name": "permit-no-files",
+          "short": null,
+          "long": "permit-no-files",
+          "required": false,
+          "help": "Don't return an error code if no files were found",
+          "help_heading": null,
+          "usage": "--permit-no-files"
+        },
+        {
           "name": "watch",
           "short": null,
           "long": "watch",
@@ -3250,6 +3503,24 @@
           "usage": "--unstable-lazy-dynamic-imports"
         },
         {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -3420,33 +3691,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -3460,25 +3704,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -3499,6 +3770,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -3523,7 +3812,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -3807,6 +4096,24 @@
           "usage": "--dev"
         },
         {
+          "name": "npm",
+          "short": null,
+          "long": "npm",
+          "required": false,
+          "help": "assume unprefixed package names are npm packages",
+          "help_heading": null,
+          "usage": "--npm"
+        },
+        {
+          "name": "jsr",
+          "short": null,
+          "long": "jsr",
+          "required": false,
+          "help": "assume unprefixed package names are jsr packages",
+          "help_heading": null,
+          "usage": "--jsr"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -3840,33 +4147,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -3880,25 +4160,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -3919,6 +4226,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -3943,7 +4268,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -4159,6 +4484,24 @@
           "usage": "--unstable-lazy-dynamic-imports"
         },
         {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -4276,6 +4619,15 @@
           "usage": "[files]..."
         },
         {
+          "name": "permit-no-files",
+          "short": null,
+          "long": "permit-no-files",
+          "required": false,
+          "help": "Don't return an error code if no files were found",
+          "help_heading": null,
+          "usage": "--permit-no-files"
+        },
+        {
           "name": "watch",
           "short": null,
           "long": "watch",
@@ -4354,6 +4706,24 @@
           "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
           "help_heading": "Unstable options",
           "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -4481,33 +4851,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -4521,25 +4864,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -4560,6 +4930,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -4584,7 +4972,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -4819,7 +5207,7 @@
     },
     {
       "name": "task",
-      "about": "Run a task defined in the configuration file.\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks:\n  \u001b[38;5;245mdeno task\u001b[39m\n\nEvaluate a task from string\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
+      "about": "Run a task defined in the configuration file:\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks (from config files in the current and ancestor directories):\n  \u001b[38;5;245mdeno task\u001b[39m\n\nEvaluate a task from string:\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -4829,33 +5217,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-broadcast-channel",
@@ -4871,25 +5232,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -4910,6 +5298,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -4934,7 +5340,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -5037,33 +5443,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -5077,25 +5456,52 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
         },
@@ -5116,6 +5522,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -5140,7 +5564,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -5401,7 +5825,7 @@
           "short": null,
           "long": "permit-no-files",
           "required": false,
-          "help": "Don't return an error code if no test files were found",
+          "help": "Don't return an error code if no files were found",
           "help_heading": "Testing options",
           "usage": "--permit-no-files"
         },
@@ -5428,9 +5852,18 @@
           "short": null,
           "long": "coverage",
           "required": false,
-          "help": "Collect coverage profile data into DIR. If DIR is not specified, it uses 'coverage/'",
+          "help": "Collect coverage profile data into DIR. If DIR is not specified, it uses 'coverage/'.\n  \u001b[38;5;245mThis option can also be set via the DENO_COVERAGE_DIR environment variable.\u001b[39m",
           "help_heading": "Testing options",
           "usage": "--coverage[=<DIR>]"
+        },
+        {
+          "name": "coverage-raw-data-only",
+          "short": null,
+          "long": "coverage-raw-data-only",
+          "required": false,
+          "help": "Only collect raw coverage data, without generating a report",
+          "help_heading": "Testing options",
+          "usage": "--coverage-raw-data-only"
         },
         {
           "name": "clean",
@@ -5643,6 +6076,24 @@
           "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
           "help_heading": "Unstable options",
           "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
         },
         {
           "name": "unstable-sloppy-imports",
