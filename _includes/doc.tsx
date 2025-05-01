@@ -8,7 +8,6 @@ export const ogImage = (data: Lume.Data) => {
 
 export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   let file = data.page.sourcePath;
-
   const sidebar = data.sidebar;
   let renderedCommand = null;
 
@@ -24,6 +23,8 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   const isLintRule = data.url.startsWith("/lint/rules/");
   const isHome = data.url === "/";
 
+  const hasBreadcrumbs = !isExamples && !isHome && !isReference;
+
   if (isLintRule) {
     file = `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`;
   }
@@ -31,15 +32,15 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   return (
     <div
       id="content"
-      class={isExampleScript ? "" : "content"}
+      class={isExampleScript ? "examples-content" : "content"}
     >
       <div
         class={`px-4 sm:px-5 md:px-6 w-full mx-auto 2xl:px-0 ${
-          isExampleScript ? "max-w-[75rem]" : "max-w-[40rem]"
+          isExampleScript ? "max-w-[70rem]" : "max-w-[40rem]"
         }`}
       >
         <article class="mx-auto">
-          {(!isExamples && !isHome && !isReference) && (
+          {hasBreadcrumbs && (
             <data.comp.Breadcrumbs
               title={data.title!}
               sidebar={sidebar}

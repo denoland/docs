@@ -36,12 +36,19 @@ Deno allows you to type-check your code (without executing it) with the
 [`deno check`](/runtime/reference/cli/check/) subcommand:
 
 ```shell
+# Check the current directory/module
+deno check
+
+# Check a specific TypeScript file
 deno check module.ts
-# or also type check remote modules and npm packages
+
+# Include remote modules and npm packages in the check
 deno check --all module.ts
-# code snippets written in JSDoc can also be type checked
+
+# Check code snippets in JSDoc comments
 deno check --doc module.ts
-# or type check code snippets in markdown files
+
+# Check code snippets in markdown files
 deno check --doc-only markdown.md
 ```
 

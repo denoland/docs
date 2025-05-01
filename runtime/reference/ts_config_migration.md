@@ -360,7 +360,7 @@ can be a fully qualified URL as well:
 /// <reference types="https://deno.land/x/pkg@1.0.0/types.d.ts" />
 ```
 
-### Suppling "types" in deno.json
+### Supplying "types" in deno.json
 
 Another option is to provide a `"types"` value to the `"compilerOptions"` in
 your `deno.json`. For example:

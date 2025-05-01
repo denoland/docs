@@ -2,7 +2,7 @@
  * @title Creating & removing directories
  * @difficulty beginner
  * @tags cli
- * @run --allow-write <url>
+ * @run -W <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.mkdir} Doc: Deno.mkdir
  * @resource {https://docs.deno.com/api/deno/~/Deno.remove} Doc: Deno.remove
  * @group File System

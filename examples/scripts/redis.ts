@@ -2,32 +2,32 @@
  * @title Connect to Redis
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --allow-net --allow-env <url>
- * @resource {https://deno.land/x/r2d2} r2d2 on deno.land/x
+ * @run -N -E <url>
+ * @resource {https://jsr.io/@iuioiua/redis} redis on jsr.io
  * @resource {https://redis.io/docs/getting-started/} Getting started with Redis
  * @group Databases
  *
- * Using the r2d2 module, you can connect to a Redis database running anywhere.
+ * Using the jsr:@iuioiua/redis module, you can connect to a Redis database running anywhere.
  */
 
-// Import the `sendCommand()` function from r2d2
-import { sendCommand } from "https://deno.land/x/r2d2/mod.ts";
+// Import the `RedisClient` from jsr:@iuioiua/redis
+import { RedisClient } from "jsr:@iuioiua/redis";
 
 // Create a TCP connection with the Redis server
-const redisConn = await Deno.connect({ port: 6379 });
+using redisConn = await Deno.connect({ port: 6379 });
+
+// Create an instance of 'RedisClient'
+const redisClient = new RedisClient(redisConn);
 
 // Authenticate with the server by sending the command "AUTH <username> <password>"
-await sendCommand(redisConn, [
+await redisClient.sendCommand([
   "AUTH",
   Deno.env.get("REDIS_USERNAME")!,
   Deno.env.get("REDIS_PASSWORD")!,
 ]);
 
 // Set the "hello" key to have value "world" using the command "SET hello world"
-await sendCommand(redisConn, ["SET", "hello", "world"]); // "OK"
+await redisClient.sendCommand(["SET", "hello", "world"]); // "OK"
 
 // Get the "hello" key using the command "GET hello"
-await sendCommand(redisConn, ["GET", "hello"]); // "world"
-
-// Close the connection to the database
-redisConn.close();
+await redisClient.sendCommand(["GET", "hello"]); // "world"

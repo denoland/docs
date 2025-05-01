@@ -2,7 +2,7 @@
  * @title TCP/TLS listener: Ping
  * @difficulty intermediate
  * @tags cli
- * @run --allow-net --allow-read <url>
+ * @run -N -R <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.listenTls} Doc: Deno.listenTls
  * @group Network
  *

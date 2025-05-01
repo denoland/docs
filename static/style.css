@@ -53,8 +53,4 @@ p {
       display: none;
     }
   }
-
-  .raw-container {
-    min-width: 100vw;
-  }
 }

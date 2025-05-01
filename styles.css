@@ -255,6 +255,7 @@ body {
 
 .homepage-link {
   @apply block font-normal underline underline-offset-4;
+  line-height: 1.8rem;
 }
 
 .learn-link {
@@ -496,10 +497,6 @@ body {
   }
 
   .markdown-body {
-    & pre {
-      @apply border-gray-000 !important;
-    }
-
     & a:not(.no-color) {
       @apply text-primary !important;
     }

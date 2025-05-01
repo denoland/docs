@@ -2,7 +2,7 @@
  * @title Moving/Renaming files
  * @difficulty beginner
  * @tags cli
- * @run --allow-read=./ --allow-write=./ <url>
+ * @run -R=./ -W=./ <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.rename} Doc: Deno.rename
  * @group File System
  *

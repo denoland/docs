@@ -17,8 +17,13 @@ export default {
   async fetch(_req) {
     return new Response("Hello world!");
   },
-};
+} satisfies Deno.ServeDefaultExport;
 ```
+
+The `satisfies Deno.ServeDefaultExport` type assertion ensures that your
+exported object conforms to the expected interface for Deno's HTTP server. This
+provides type safety and better editor autocomplete while allowing you to
+maintain the inferred types of your implementation.
 
 You can then run the server using the `deno serve` command:
 
@@ -32,11 +37,11 @@ types of requests and serve content accordingly:
 ```typescript title="server.ts"
 export default {
   async fetch(request) {
-    if (request.url.startsWith("/json")) {
+    if (request.url.endsWith("/json")) {
       return Response.json({ hello: "world" });
     }
 
     return new Response("Hello world!");
   },
-};
+} satisfies Deno.ServeDefaultExport;
 ```

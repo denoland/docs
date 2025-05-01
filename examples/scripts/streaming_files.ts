@@ -2,7 +2,7 @@
  * @title Streaming file operations
  * @difficulty intermediate
  * @tags cli
- * @run --allow-read --allow-write <url>
+ * @run -R -W <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.open} Doc: Deno.open
  * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile} Doc: Deno.FsFile
  * @group File System

@@ -64,6 +64,22 @@ import { add } from "./calc";
 import { add } from "./calc.ts";
 ```
 
+## Import attributes
+
+Deno supports the `with { type: "json" }` import attribute syntax for importing
+JSON files:
+
+```ts
+import data from "./data.json" with { type: "json" };
+
+console.log(data.property); // Access JSON data as an object
+```
+
+This is the only import attribute type currently supported in Deno. Support for
+`type: text` and `type: bytes` is being considered for future updates, and
+currently waiting on the
+[Module Harmony proposal](https://github.com/whatwg/html/issues/9444).
+
 ## Importing third party modules and libraries
 
 When working with third-party modules in Deno, use the same `import` syntax as
@@ -313,11 +329,38 @@ Limitations:
 
 ### Overriding NPM packages
 
-We plan to support NPM packages with the patch functionality described above,
-but until then if you have a `node_modules` directory, `npm link` can be used
-without change to accheive the same effect. This is typically done with
-`{ "nodeModulesDir": "manual" }` set in the `deno.json` file. See also the
-documentation on [`node_modules`](/runtime/fundamentals/node/#node_modules)
+Deno supports patching npm packages with local versions, similar to how JSR
+packages can be patched. This allows you to use a local copy of an npm package
+during development without publishing it.
+
+To use a local npm package, configure the `patch` field in your `deno.json`:
+
+```json
+{
+  "patch": [
+    "../path/to/local_npm_package"
+  ],
+  "unstable": ["npm-patch"]
+}
+```
+
+This feature requires a `node_modules` directory and has different behaviors
+depending on your `nodeModulesDir` setting:
+
+- With `"nodeModulesDir": "auto"`: The directory is recreated on each run, which
+  slightly increases startup time but ensures the latest version is always used.
+- With `"nodeModulesDir": "manual"` (default when using package.json): You must
+  run `deno install` after updating the package to get the changes into the
+  workspace's `node_modules` directory.
+
+Limitations:
+
+- Specifying a local copy of an npm package or changing its dependencies will
+  purge npm packages from the lockfile, which may cause npm resolution to work
+  differently.
+- The npm package name must exist in the registry, even if you're using a local
+  copy.
+- This feature is currently behind the `unstable` flag.
 
 ### Overriding HTTPS imports
 

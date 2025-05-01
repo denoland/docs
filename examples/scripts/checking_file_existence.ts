@@ -2,7 +2,7 @@
  * @title Checking for file existence
  * @difficulty beginner
  * @tags cli, deploy
- * @run --allow-read --allow-write <url>
+ * @run -R -W <url>
  * @group File System
  *
  * When creating files it can be useful to first ensure that

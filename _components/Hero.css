@@ -1,0 +1,25 @@
+.hero {
+  background-size: 0;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding-right: 400px;
+    background-size: 360px;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+}
+
+.hero h1 {
+  @apply text-4xl md:text-5xl mb-2 md:mb-6 font-bold;
+}
+
+.hero p {
+  margin-bottom: 2rem;
+  font-size: 1.15rem;
+  line-height: 1.75rem;
+  text-wrap: balance;
+  max-width: 600px;
+}

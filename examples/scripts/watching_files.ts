@@ -2,7 +2,7 @@
  * @title Watching the filesystem
  * @difficulty beginner
  * @tags cli
- * @run --allow-read <url>
+ * @run -R <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.watchFs} Doc: Deno.watchFs
  * @resource {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} MDN: for await of
  * @resource {https://jsr.io/@std/async/doc/debounce/~} Doc: @std/async/debounce

@@ -263,6 +263,19 @@ See the
 [Deno 1.40 Blog Post](https://deno.com/blog/v1.40#changes-to-how-we-handle-unstable-features)
 for details.
 
+## Import assertions removal
+
+Import assertions were removed from JavaScript and are now deprecated in Deno
+2.0. Use import attributes instead:
+
+```diff
+- import data from "./data.json" assert { type: "json" };
++ import data from "./data.json" with { type: "json" };
+```
+
+This was one of the rare cases when a proposal was
+[downgraded after hitting Stage 3](https://github.com/tc39/proposal-import-attributes?tab=readme-ov-file#history).
+
 ## API changes
 
 - `Deno.Buffer`

@@ -2,7 +2,7 @@
  * @title Temporary files & directories
  * @difficulty beginner
  * @tags cli
- * @run --allow-read --allow-write <url>
+ * @run -R -W <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.makeTempFile} Doc: Deno.makeTempFile
  * @resource {https://docs.deno.com/api/deno/~/Deno.makeTempDir} Doc: Deno.makeTempDir
  * @group File System

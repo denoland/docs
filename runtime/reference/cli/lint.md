@@ -140,3 +140,10 @@ ignore directives. This means that per line directives, like
 `// deno-lint-ignore ban-unused-ignore`, don't work at all. If you want to
 ignore `ban-unused-ignore` for some special reasons, make sure to add it as a
 file-level ignore directive.
+
+## More about linting and formatting
+
+For more information about linting and formating in Deno, and the differences
+between these two utilities, visit the
+[Linting and Formatting](/runtime/fundamentals/linting_and_formatting/) page in
+our Fundamentals section.

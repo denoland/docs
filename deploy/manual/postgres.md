@@ -74,11 +74,12 @@ environment variables:
 
 ## Write code that connects to Postgres
 
-To read/write to Postgres, import the Postgres module, read the connection
+To read/write to Postgres, import a suitable Postgres module such as
+[this one from JSR](https://jsr.io/@bartlomieju/postgres), read the connection
 string from the environment variables, and create a connection pool.
 
 ```ts
-import { Pool } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
+import { Pool } from "jsr:@bartlomieju/postgres";
 
 // Get the connection string from the environment variable "DATABASE_URL"
 const databaseUrl = Deno.env.get("DATABASE_URL")!;

@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli, deploy
  * @group Data Processing
- * @run --allow-read data-processing.ts
+ * @run -R data-processing.ts
  *
  * Demonstrates using Deno's @std/collections library for processing user data.
  * This example uses pick, omit, and partition to manipulate data structures.

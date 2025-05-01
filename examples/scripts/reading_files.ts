@@ -2,7 +2,7 @@
  * @title Reading files
  * @difficulty beginner
  * @tags cli, deploy
- * @run --allow-read <url>
+ * @run -R <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.readFile} Doc: Deno.readFile
  * @resource {https://docs.deno.com/api/deno/~/Deno.open} Doc: Deno.open
  * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile} Doc: Deno.FsFile
@@ -54,4 +54,4 @@ const buf = new Uint8Array(5);
 f.readSync(buf);
 f.close();
 
-// The `--allow-read` permission is required to read files.
+// The `-R` permission is required to read files.

@@ -2,7 +2,7 @@
  * @title Connect to OpenAI: Chat Completion
  * @difficulty intermediate
  * @tags cli, web
- * @run --allow-net --allow-env <url>
+ * @run -N -E <url>
  * @resource {https://deno.land/x/openai} OpenAI module on deno.land/x
  * @group Basics
  *

@@ -9,12 +9,6 @@ export default function (
       id={docEntry.id}
     >
       <div className="docEntryHeader">
-        {docEntry.tags && docEntry.tags.length > 0 && (
-          <div className="space-x-1 mb-1">
-            {docEntry.tags.map((tag) => <comp.Tag tag={tag} />)}
-          </div>
-        )}
-
         {/* Chosen 200 as a guestimate of when code is blocks rather than inline, would be better if this was in the markup sent from ddoc */}
         <code
           className={docEntry.content.length > 200 ? "inline-code-block" : ""}
@@ -37,7 +31,14 @@ export default function (
             className="font-medium"
             dangerouslySetInnerHTML={{ __html: docEntry.content }}
           />
-        </code>
+        </code>{" "}
+        {docEntry.tags && docEntry.tags.length > 0 && (
+          <span>
+            {docEntry.tags.map((tag, index) => (
+              <comp.Tag key={index} tag={tag} />
+            ))}
+          </span>
+        )}
       </div>
 
       {/*markdown rendering*/}

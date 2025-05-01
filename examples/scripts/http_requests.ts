@@ -2,7 +2,7 @@
  * @title HTTP requests
  * @difficulty beginner
  * @tags cli, deploy, web
- * @run --allow-net <url>
+ * @run -N <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API} MDN: Fetch API
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream} MDN: ReadableStream
  * @group Network

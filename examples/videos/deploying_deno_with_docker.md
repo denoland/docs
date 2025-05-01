@@ -14,6 +14,7 @@ environment.
 
 - https://github.com/denoland/deno_docker
 - https://fly.io/
+- https://docs.deno.com/runtime/reference/docker/
 
 ## Transcript and code
 
@@ -164,3 +165,9 @@ at that location.
 
 So with Deno, we can use Docker to containerize the app and with Fly we can get
 the app hosted in production in just a few minutes.
+
+## More information on working with Docker
+
+For a closer look at Deno's support of Docker, including best practices, running
+tests with Docker, using workspaces, and more, please take a look at our
+[Deno and Docker reference documentation](https://docs.deno.com/runtime/reference/docker/).

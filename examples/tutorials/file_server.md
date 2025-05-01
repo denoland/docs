@@ -21,7 +21,7 @@ incoming requests. In your new `file-server.ts` file, add the following code:
 ```ts title="file-server.ts"
 Deno.serve(
   { hostname: "localhost", port: 8080 },
-  (request) => {
+  async (request) => {
     const url = new URL(request.url);
     const filepath = decodeURIComponent(url.pathname);
   },

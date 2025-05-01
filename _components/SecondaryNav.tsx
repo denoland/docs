@@ -79,7 +79,8 @@ export default function (data: Lume.Data) {
                             <a
                               href={subItem.href}
                               className="sub-nav-link blocklink"
-                              {...(subItem.href === currentUrl
+                              {...(subItem.href.replace(/\/$/, "") ===
+                                  currentUrl
                                 ? { "data-active": true }
                                 : {})}
                             >
@@ -94,7 +95,7 @@ export default function (data: Lume.Data) {
                     <a
                       href={item.href}
                       className="sub-nav-link blocklink"
-                      {...(item.href === currentUrl
+                      {...(item.href.replace(/\/$/, "") === currentUrl
                         ? { "data-active": true }
                         : {})}
                     >

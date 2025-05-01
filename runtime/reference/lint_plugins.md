@@ -15,7 +15,7 @@ in the future.
 The built-in linter can be extended with plugins to add custom lint rules.
 
 Whilst Deno ships with [many lint rules](/lint/) out of the box, there are cases
-where you need a custom rule tailored particularily to your project - whether to
+where you need a custom rule tailored particularly to your project - whether to
 catch a context-specific problem or enforce company-wide conventions.
 
 This is where the lint plugin API comes into play.
@@ -128,7 +128,7 @@ supported syntax for selectors is:
 | `Foo > Bar`               | Child combinator                       |
 | `Foo ~ Bar`               | Subsequent sibling combinator          |
 | `Foo Bar`                 | Descendant combinator                  |
-| `Foo[attr]`               | Attribute existance                    |
+| `Foo[attr]`               | Attribute existence                    |
 | `Foo[attr.length < 2]`    | Attribute value comparison             |
 | `Foo[attr=/(foo\|bar)*/]` | Attribute value regex check            |
 | `:first-child`            | First child pseudo-class               |
@@ -253,6 +253,25 @@ custom lint rule is always `<plugin-name>/<rule-name>`.
     }
   }
 }
+```
+
+## Ignoring custom lint reports
+
+Sometimes you want to disable a reported lint error for a particular place in
+your code. Instead of disabling the custom lint rule entirely, you can disable a
+reported location by placing a code comment before it.
+
+```ts
+// deno-lint-ignore my-custom-plugin/no-console
+console.log("hey");
+```
+
+This will disable the lint rule from a lint plugin for this particular line.
+
+The syntax for the ignore comment is:
+
+```ts
+// deno-lint-ignore <my-plugin>/<my-rule>
 ```
 
 ## Testing plugins

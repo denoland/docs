@@ -2,7 +2,7 @@
  * @title Writing files
  * @difficulty beginner
  * @tags cli
- * @run --allow-read --allow-write <url>
+ * @run -R -W <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.writeFile} Doc: Deno.writeFile
  * @resource {https://docs.deno.com/api/deno/~/Deno.create} Doc: Deno.create
  * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile} Doc: Deno.FsFile
@@ -14,12 +14,15 @@
  */
 
 // The easiest way to write a file, is to dump an entire buffer into the file at
-// once.
+// once. Here is a simple example that writes an array of bytes to a file.
 const bytes = new Uint8Array([72, 101, 108, 108, 111]);
 await Deno.writeFile("hello.txt", bytes, { mode: 0o644 });
 
 // You can also write a string instead of a byte array.
 await Deno.writeTextFile("hello.txt", "Hello World");
+
+// Or you can write binary data as a string.
+await Deno.writeTextFile("hello.txt", "Hello World", { encoding: "utf8" });
 
 // To append to a text file, set the `append` parameter to `true`.
 await Deno.writeTextFile("server.log", "Request: ...", { append: true });
@@ -44,4 +47,4 @@ await writer.write(new TextEncoder().encode("World!"));
 // If you don't use a writer, make sure to close the file after you are done with it.
 await writer.close();
 
-// The `--allow-write` permission is required to write files.
+// The `-W` permission is required to write files.

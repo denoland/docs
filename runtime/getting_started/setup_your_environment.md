@@ -341,12 +341,14 @@ Enabling connection to the Deno language server requires changes in the
 [[language]]
 name = "typescript"
 roots = ["deno.json", "deno.jsonc", "package.json"]
+file-types = ["ts", "tsx"]
 auto-format = true
 language-servers = ["deno-lsp"]
 
 [[language]]
 name = "javascript"
 roots = ["deno.json", "deno.jsonc", "package.json"]
+file-types = ["js", "jsx"]
 auto-format = true
 language-servers = ["deno-lsp"]
 
@@ -355,6 +357,11 @@ command = "deno"
 args = ["lsp"]
 config.deno.enable = true
 ```
+
+### Zed
+
+The [Zed editor](https://zed.dev) can integrate the Deno language server via the
+[Deno extension](https://zed.dev/extensions?query=deno&filter=language-servers).
 
 ## Shell completions
 

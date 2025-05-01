@@ -24,8 +24,8 @@ console.log("Hello, world!"); // "Hello, world!"
 You can output multiple items by separated by commas like so:
 
 ```jsx
-const person = {"name": "Jane", "city": "New York"}
-console.log("Hello, " person.name, "from ", person.city); // "Hello, Jane from New York"
+const person = { "name": "Jane", "city": "New York" };
+console.log("Hello, ", person.name, "from ", person.city); // "Hello, Jane from New York"
 ```
 
 Or you can use string literals:

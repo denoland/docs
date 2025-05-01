@@ -2,7 +2,7 @@
  * @title Connect to Postgres
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --allow-net --allow-env <url>
+ * @run -N -E <url>
  * @group Databases
  *
  * Using the npm Postgres client, you can connect to a Postgres database

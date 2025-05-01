@@ -100,7 +100,7 @@ tasks.
 
 **When using a wildcard** make sure to quote the task name (eg. `"build-*"`),
 otherwise your shell might try to expand the wildcard character, leading to
-suprising errors.
+surprising errors.
 
 :::
 
@@ -337,7 +337,7 @@ sleep 1 && deno run --allow-net server.ts & deno run --allow-net client.ts
 
 Unlike in most shells, the first async command to fail will cause all the other
 commands to fail immediately. In the example above, this would mean that if the
-server command fails then the cleint command will also fail and exit. You can
+server command fails then the client command will also fail and exit. You can
 opt out of this behavior by adding `|| true` to the end of a command, which will
 force a `0` exit code. For example:
 

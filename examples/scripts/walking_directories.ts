@@ -2,7 +2,7 @@
  * @title Walking directories
  * @difficulty beginner
  * @tags cli
- * @run --allow-read <url>
+ * @run -R <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.readDir} Doc: Deno.readDir
  * @resource {https://jsr.io/@std/fs/doc/walk/~} Doc: @std/fs/walk
  * @group File System

@@ -130,7 +130,7 @@ task to run both the React app and the API server.
 In your `package.json` file, update the `scripts` field to include the
 following:
 
-```jsonc
+```jsonc title="package.json"
 {
   "scripts": {
     "dev": "deno task dev:api & deno task dev:vite",
@@ -143,18 +143,46 @@ following:
 If you run `deno task dev` now and visit `localhost:8000/api/dinosaurs`, in your
 browser you should see a JSON response of all of the dinosaurs.
 
+## React support in Deno
+
+At this point, your IDE or editor may be showing you warnings about missing
+types in your project. Deno has built-in TypeScript support for React
+applications. To enable this, you'll need to configure your project with the
+appropriate type definitions and DOM libraries. Create or update your
+`deno.json` file with the following TypeScript compiler options:
+
+```jsonc title="deno.json"
+"compilerOptions": {
+  "types": [
+    "react",
+    "react-dom",
+    "@types/react"
+  ],
+  "lib": [
+    "dom",
+    "dom.iterable",
+    "deno.ns"
+  ],
+  "jsx": "react-jsx",
+  "jsxImportSource": "react"
+}
+```
+
 ## Update the entrypoint
 
 The entrypoint for the React app is in the `src/main.tsx` file. Ours is going to
 be very basic:
 
 ```tsx title="main.tsx"
-import ReactDOM from "react-dom/client";
-import App from "./App";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import "./index.css";
+import App from "./App.tsx";
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <App />,
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
 );
 ```
 
@@ -176,8 +204,8 @@ component from `react-router-dom` and define the two routes:
 
 ```tsx title="App.tsx"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Index from "./pages/index";
-import Dinosaur from "./pages/Dinosaur";
+import Index from "./pages/index.tsx";
+import Dinosaur from "./pages/Dinosaur.tsx";
 import "./App.css";
 
 function App() {
@@ -285,7 +313,7 @@ it in a paragraph:
 ```tsx title="Dinosaur.tsx"
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Dino } from "../types";
+import { Dino } from "../types.ts";
 
 export default function Dinosaur() {
   const { selectedDinosaur } = useParams();

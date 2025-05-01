@@ -48,10 +48,10 @@ will attempt to retry failed callbacks three times - after one second, five
 seconds, and then ten seconds.
 
 ```ts
-Deno.cron("Retry example", "* * * * *", () => {
-  throw new Error("Deno.cron will retry this three times, to no avail!");
-}, {
+Deno.cron("Retry example", "* * * * *", {
   backoffSchedule: [1000, 5000, 10000],
+}, () => {
+  throw new Error("Deno.cron will retry this three times, to no avail!");
 });
 ```
 
@@ -158,8 +158,8 @@ Deno.cron("Run every fifteen minutes", "*/15 * * * *", () => {
 });
 ```
 
-```ts title="Run once an hour, on the hour"
-Deno.cron("Run once an hour, on the hour", "0 * * * *", () => {
+```ts title="Run once an hour on the hour"
+Deno.cron("Run once an hour on the hour", "0 * * * *", () => {
   console.log("Hello, cron!");
 });
 ```

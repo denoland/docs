@@ -524,6 +524,12 @@
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
+
+.docEntryHeader {
+  display: flex;
+  gap: 1rem;
+}
+
 .ddoc .docEntry .docEntryHeader > div {
   overflow-wrap: break-word;
 }

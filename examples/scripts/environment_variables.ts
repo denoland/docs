@@ -2,7 +2,7 @@
  * @title Environment variables
  * @difficulty beginner
  * @tags cli, deploy
- * @run --allow-env <url>
+ * @run -E <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.env} Doc: Deno.env
  * @resource {https://docs.deno.com/deploy/manual/environment-variables} Deploy Docs: Environment Variables
  * @group System
@@ -37,5 +37,5 @@ console.log("UPPERCASE:", Deno.env.get("MY_PASSWORD"));
 console.log("lowercase:", Deno.env.get("my_password"));
 
 // Access to environment variables is only possible if the Deno process is
-// running with env var permissions (`--allow-env`). You can limit the permission
-// to only a specific number of environment variables (`--allow-env=PORT,MY_PASSWORD`).
+// running with env var permissions (`-E`). You can limit the permission
+// to only a specific number of environment variables (`-E=PORT,MY_PASSWORD`).

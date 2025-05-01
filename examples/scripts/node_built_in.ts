@@ -2,7 +2,7 @@
  * @title Use Node.js built-in modules
  * @difficulty beginner
  * @tags cli, deploy
- * @run --allow-env <url>
+ * @run -E <url>
  * @resource {https://docs.deno.com/runtime/fundamentals/node} Node.js / npm support in Deno
  * @resource {https://docs.deno.com/runtime/fundamentals/node/#node_specifiers} node: specifiers
  * @group Basics

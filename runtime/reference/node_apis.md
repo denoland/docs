@@ -15,7 +15,7 @@ Node compatibility is an ongoing project - help us identify gaps and let us know
 which modules you need by
 [opening an issue on GitHub](https://github.com/denoland/deno).
 
-{{ await generateNodeCompatability() }}
+{{ await generateNodeCompatibility() }}
 
 ## Globals
 
@@ -96,3 +96,9 @@ importing them from the relevant `node:` module.
 | [`WritableStream`](https://nodejs.org/api/globals.html#class-writablestream)                                     | ✅                                 |
 | [`WritableStreamDefaultController`](https://nodejs.org/api/globals.html#class-writablestreamdefaultcontroller)   | ✅                                 |
 | [`WritableStreamDefaultWriter`](https://nodejs.org/api/globals.html#class-writablestreamdefaultwriter)           | ✅                                 |
+
+## Node test results
+
+If you're interested in a more detailed view of compatibility on a per-test-case
+basis, you can find a list of both passing and failing Node.js test cases on
+[this page](https://node-test-viewer.deno.dev/).

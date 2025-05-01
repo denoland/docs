@@ -40,7 +40,10 @@ export default function ExamplePage({ example }: Props) {
         <CopyButton text={contentNoCommentary} />
       </div>
       {example.parsed.files.map((file) => (
-        <div class="flex flex-col gap-4 md:gap-0" key={file.name}>
+        <div
+          class="flex flex-col gap-4 md:gap-0 example-content"
+          key={file.name}
+        >
           {file.snippets.map((snippet, i) => (
             <SnippetComponent
               key={i}
@@ -87,16 +90,13 @@ export default function ExamplePage({ example }: Props) {
         {example.parsed.playground && (
           <div class="col-span-3 mt-8">
             <p class="text-foreground-secondary">
-              Try this example in a Deno Deploy playground:
-            </p>
-            <p class="mt-3">
+              Try this example in a{" "}
               <a
-                class="py-2 px-4 bg-black inline-block text-white text-base rounded-md opacity-90 hover:opacity-100"
                 href={example.parsed.playground}
                 target="_blank"
                 rel="noreferrer"
               >
-                Deploy
+                Deno Deploy playground
               </a>
             </p>
           </div>

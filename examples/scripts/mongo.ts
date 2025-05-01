@@ -2,7 +2,7 @@
  * @title Connect to MongoDB
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --allow-net --allow-sys --allow-read <url>
+ * @run -N -S -R <url>
  * @resource {https://deno.land/x/mongo} Deno MongoDB on deno.land/x
  * @group Databases
  *

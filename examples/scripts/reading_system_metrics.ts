@@ -2,7 +2,7 @@
  * @title Reading system metrics
  * @difficulty beginner
  * @tags cli, deploy
- * @run --allow-sys <url>
+ * @run -S <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.systemMemoryInfo} Doc: Deno.systemMemoryInfo
  * @resource {https://docs.deno.com/api/deno/~/Deno.loadavg} Doc: Deno.loadavg
  * @resource {https://docs.deno.com/api/deno/~/Deno.memoryUsage} Doc: Deno.memoryUsage

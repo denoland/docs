@@ -12,7 +12,7 @@
  */
 
 // In the most simple case, we can just request a permission by it's name.
-// In this case, we ask for --allow-env and prompt the user. The user will
+// In this case, we ask for -E and prompt the user. The user will
 // not be prompted if it was already allowed in the past and not revoked.
 let status = await Deno.permissions.request({ name: "env" });
 if (status.state === "granted") {
