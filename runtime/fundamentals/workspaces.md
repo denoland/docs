@@ -488,10 +488,16 @@ to redefine them.
 
 ### Managing Version Conflicts
 
-The workspace root's import map takes precedence over member-specific imports,
-which helps ensure consistent versions across your workspace. For example, if
-both the root and a member specify different versions of the same dependency,
-the root's version will be used.
+When resolving dependencies, workspace members can override dependencies defined
+in the root. If both the root and a member specify different versions of the
+same dependency, the member's version will be used when resolving within that
+member's folder. This allows individual packages to use specific dependency
+versions when needed.
+
+However, member-specific dependencies are scoped only to that member's folder.
+Outside of member folders, or when working with files at the workspace root
+level, the workspace root's import map will be used for resolving dependencies
+(including JSR and HTTPS dependencies).
 
 ### Interdependent Workspace Members
 
