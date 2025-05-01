@@ -383,3 +383,143 @@ root and its members:
 | version            | ❌        | ✅      |                                                                                                                                                                                                                 |
 | exports            | ❌        | ✅      |                                                                                                                                                                                                                 |
 | workspace          | ✅        | ❌      | Nested workspaces are not supported.                                                                                                                                                                            |
+
+## Running Commands Across Workspaces
+
+Deno provides several ways to run commands across all or specific workspace
+members:
+
+### Running Tests
+
+To run tests across all workspace members, simply execute `deno test` from the
+workspace root:
+
+```sh
+deno test
+```
+
+This will run tests in all workspace members according to their individual test
+configurations.
+
+To run tests for a specific workspace member, you can either:
+
+1. Change to that member's directory and run the test command:
+
+```sh
+cd my-directory
+deno test
+```
+
+2. Or specify the path from the workspace root:
+
+```sh
+deno test my-directory/
+```
+
+### Formatting and Linting
+
+Similar to testing, formatting and linting commands run across all workspace
+members by default:
+
+```sh
+deno fmt
+deno lint
+```
+
+Each workspace member follows its own formatting and linting rules as defined in
+its `deno.json` file, with some settings inherited from the root configuration
+as shown in the table above.
+
+### Using Workspace Tasks
+
+You can define tasks at both the workspace root and in individual workspace
+members:
+
+```json title="deno.json"
+{
+  "workspace": ["./add", "./subtract"],
+  "tasks": {
+    "build": "echo 'Building all packages'",
+    "test:all": "deno test"
+  }
+}
+```
+
+```json title="add/deno.json"
+{
+  "name": "@scope/add",
+  "version": "0.1.0",
+  "exports": "./mod.ts",
+  "tasks": {
+    "build": "echo 'Building add package'",
+    "test": "deno test"
+  }
+}
+```
+
+To run a task defined in a specific package:
+
+```sh
+deno task --cwd=add build
+```
+
+## Sharing and Managing Dependencies
+
+Workspaces provide powerful ways to share and manage dependencies across
+projects:
+
+### Sharing Development Dependencies
+
+Common development dependencies like testing libraries can be defined at the
+workspace root:
+
+```json title="deno.json"
+{
+  "workspace": ["./add", "./subtract"],
+  "imports": {
+    "@std/testing/": "jsr:@std/testing@^0.218.0/",
+    "chai": "npm:chai@^4.3.7"
+  }
+}
+```
+
+This makes these dependencies available to all workspace members without needing
+to redefine them.
+
+### Managing Version Conflicts
+
+When resolving dependencies, workspace members can override dependencies defined
+in the root. If both the root and a member specify different versions of the
+same dependency, the member's version will be used when resolving within that
+member's folder. This allows individual packages to use specific dependency
+versions when needed.
+
+However, member-specific dependencies are scoped only to that member's folder.
+Outside of member folders, or when working with files at the workspace root
+level, the workspace root's import map will be used for resolving dependencies
+(including JSR and HTTPS dependencies).
+
+### Interdependent Workspace Members
+
+As shown in the earlier example with the `add` and `subtract` modules, workspace
+members can depend on each other. This enables a clean separation of concerns
+while maintaining the ability to develop and test interdependent modules
+together.
+
+The `subtract` module imports functionality from the `add` module, demonstrating
+how workspace members can build upon each other:
+
+```ts title="subtract/mod.ts"
+import { add } from "@scope/add";
+
+export function subtract(a: number, b: number): number {
+  return add(a, b * -1);
+}
+```
+
+This approach allows you to:
+
+1. Break down complex projects into manageable, single-purpose packages
+2. Share code between packages without publishing to a registry
+3. Test and develop interdependent modules together
+4. Gradually migrate monolithic codebases to modular architecture
