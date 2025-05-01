@@ -69,40 +69,36 @@ import { SpanStatusCode, trace } from "npm:@opentelemetry/api@1";
 
 const tracer = trace.getTracer("api-client", "1.0.0");
 
-async function main() {
-  // Create a parent span for the client operation
-  await tracer.startActiveSpan("call-api", async (parentSpan) => {
-    try {
-      console.log("Client: Starting API call");
+// Create a parent span for the client operation
+await tracer.startActiveSpan("call-api", async (parentSpan) => {
+  try {
+    console.log("Client: Starting API call");
 
-      // The fetch call inside this span will automatically:
-      // 1. Create a child span for the fetch operation
-      // 2. Inject the trace context into the outgoing request headers
-      const response = await fetch("http://localhost:8000/");
-      const data = await response.json();
+    // The fetch call inside this span will automatically:
+    // 1. Create a child span for the fetch operation
+    // 2. Inject the trace context into the outgoing request headers
+    const response = await fetch("http://localhost:8000/");
+    const data = await response.json();
 
-      console.log(`Client: Received response: ${JSON.stringify(data)}`);
+    console.log(`Client: Received response: ${JSON.stringify(data)}`);
 
-      parentSpan.addEvent("received_response", {
-        status: response.status,
-        timestamp: Date.now(),
-      });
-    } catch (error) {
-      console.error("Error calling API:", error);
-      if (error instanceof Error) {
-        parentSpan.recordException(error);
-      }
-      parentSpan.setStatus({
-        code: SpanStatusCode.ERROR,
-        message: error instanceof Error ? error.message : String(error),
-      });
-    } finally {
-      parentSpan.end();
+    parentSpan.addEvent("received_response", {
+      status: response.status,
+      timestamp: Date.now(),
+    });
+  } catch (error) {
+    console.error("Error calling API:", error);
+    if (error instanceof Error) {
+      parentSpan.recordException(error);
     }
-  });
-}
-
-await main();
+    parentSpan.setStatus({
+      code: SpanStatusCode.ERROR,
+      message: error instanceof Error ? error.message : String(error),
+    });
+  } finally {
+    parentSpan.end();
+  }
+});
 ```
 
 ## Tracing with OpenTelemetry
@@ -144,8 +140,8 @@ To run this example, first, start the server, giving your otel service a name:
 OTEL_DENO=true OTEL_SERVICE_NAME=server deno run --unstable-otel --allow-net server.ts
 ```
 
-Then, in another terminal, run the client, giving the client a different
-service name to make observing the propagation clearer:
+Then, in another terminal, run the client, giving the client a different service
+name to make observing the propagation clearer:
 
 ```sh
 OTEL_DENO=true OTEL_SERVICE_NAME=client deno run --unstable-otel --allow-net client.ts
