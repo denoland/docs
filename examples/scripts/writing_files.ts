@@ -2,7 +2,7 @@
  * @title Writing files
  * @difficulty beginner
  * @tags cli
- * @run --allow-read --allow-write <url>
+ * @run -R -W <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.writeFile} Doc: Deno.writeFile
  * @resource {https://docs.deno.com/api/deno/~/Deno.create} Doc: Deno.create
  * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile} Doc: Deno.FsFile
@@ -47,4 +47,4 @@ await writer.write(new TextEncoder().encode("World!"));
 // If you don't use a writer, make sure to close the file after you are done with it.
 await writer.close();
 
-// The `--allow-write` permission is required to write files.
+// The `-W` permission is required to write files.

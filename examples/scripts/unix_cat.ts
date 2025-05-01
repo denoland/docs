@@ -2,7 +2,7 @@
  * @title Unix cat
  * @difficulty beginner
  * @tags cli
- * @run --allow-read cat.ts file1 file2
+ * @run -R cat.ts file1 file2
  * @resource {https://docs.deno.com/api/deno/~/Deno.args} Deno args API docs
  * @resource {https://docs.deno.com/api/deno/~/Deno.open} Deno open API docs
  * @resource {https://docs.deno.com/api/deno/~/Deno.stdout} Deno stdout API docs

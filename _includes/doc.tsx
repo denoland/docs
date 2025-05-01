@@ -32,11 +32,11 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   return (
     <div
       id="content"
-      class={isExampleScript ? "" : "content"}
+      class={isExampleScript ? "examples-content" : "content"}
     >
       <div
         class={`px-4 sm:px-5 md:px-6 w-full mx-auto 2xl:px-0 ${
-          isExampleScript ? "max-w-[75rem]" : "max-w-[40rem]"
+          isExampleScript ? "max-w-[70rem]" : "max-w-[40rem]"
         }`}
       >
         <article class="mx-auto">

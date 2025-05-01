@@ -2,7 +2,7 @@
  * @title Connect to Redis
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --allow-net --allow-env <url>
+ * @run -N -E <url>
  * @resource {https://jsr.io/@iuioiua/redis} redis on jsr.io
  * @resource {https://redis.io/docs/getting-started/} Getting started with Redis
  * @group Databases

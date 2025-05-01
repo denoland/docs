@@ -2,7 +2,7 @@
  * @title Import modules from npm
  * @difficulty beginner
  * @tags cli
- * @run --allow-net --allow-read --allow-env <url>
+ * @run -N -R -E <url>
  * @resource {https://docs.deno.com/runtime/manual/node} Node.js / npm support in Deno
  * @resource {https://docs.deno.com/runtime/manual/node/npm_specifiers} npm: specifiers
  * @resource {https://www.npmjs.com/package/express} express module on npm

@@ -2,35 +2,43 @@
  * @title Connect to DuckDB
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --allow-read --allow-write --allow-env --allow-net --allow-ffi <url>
- * @resource {https://deno.land/x/duckdb} Deno DuckDB on deno.land/x
+ * @run -R -W -E -N --allow-ffi <url>
  * @resource {https://duckdb.org/} DuckDB - An in-process SQL OLAP database management system
- * @resource {https://github.com/suketa/ruby-duckdb?tab=readme-ov-file#pre-requisite-setup-linux} DuckDB Pre-requisite setup (Linux)
+ * @resource {https://www.npmjs.com/package/@duckdb/node-api} npm:@duckdb/node-api
  * @group Databases
  *
  * Using Deno with DuckDB, you can connect to memory or a persistent
  * database with a filename.
  */
 
-import { open } from "jsr:@divy/duckdb";
+import { DuckDBInstance } from "npm:@duckdb/node-api";
 
-// const db = open("./example.db");
-const db = open(":memory:");
+// For graceful cleanup of resources
+using stack = new DisposableStack();
 
-const connection = db.connect();
+// Create an in-memory database
+const instance = await DuckDBInstance.create(":memory:");
 
-for (const row of connection.stream("select 42 as number")) {
-  console.debug(`Row Number: ${row.number}`); // -> { number: 42 }
-}
+// Close the instance when `stack` gets out of scope
+stack.defer(() => instance.closeSync());
 
-const prepared = connection.prepare(
-  "SELECT ?::INTEGER AS number, ?::VARCHAR AS text;",
-);
+// Connect to the database
+const connection = await instance.connect();
 
-const result = prepared.query(1337, "foo"); // [{ number: 1337, text: 'foo' }]
+// Close the connection when `stack` gets out of scope
+stack.defer(() => connection.closeSync());
 
-console.debug(`Number: ${result[0].number}`);
-console.debug(`Text: ${result[0].text}`);
+// Simple select query
+const reader = await connection.runAndReadAll("select 10, 'foo'");
+const rows = reader.getRows();
 
-connection.close();
-db.close();
+console.debug(rows); // [ [ 10, "foo" ] ]
+
+// Prepared statement
+const prepared = await connection.prepare("select $1, $2");
+prepared.bindInteger(1, 20);
+prepared.bindVarchar(2, "bar");
+const reader2 = await prepared.runAndReadAll();
+const rows2 = reader2.getRows();
+
+console.debug(rows2); // [ [ 20, "bar" ] ]

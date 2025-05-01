@@ -155,21 +155,21 @@ if (import.meta.main) {
 ```
 
 You can run the API server with
-`deno run --allow-env --allow-net server/main.ts`. We'll create a task to run
-this command in the background and update the dev task to run both the React app
-and the API server.
+`deno run --allow-env --allow-net --allow-read server/main.ts`. We'll create a
+task to run this command in the background and update the dev task to run both
+the React app and the API server.
 
-In your `package.json` file, update the `scripts` field to include the
-following:
+In your `deno.json` file, update the `tasks` field to include the following:
 
 ```diff title="deno.json"
 {
   "tasks": {
-+   "dev": "deno run -A --node-modules-dir=auto npm:vite & deno run server:start",
-    "build": "deno run -A --node-modules-dir=auto npm:vite build",
++   "dev": "deno run -A npm:vite & deno run server:start",
+    "build": "deno run -A npm:vite build",
     "server:start": "deno run -A --node-modules-dir --watch ./server/main.ts",
     "serve": "deno run build && deno run server:start"
-}
+},
++ "nodeModulesDir": "auto",
 ```
 
 If you run `deno run dev` now and visit `localhost:8000/api/dinosaurs`, in your
@@ -359,7 +359,7 @@ To run the app use the task you set up earlier
 deno run dev
 ```
 
-Navigate to the local Vite server in your browser (`localhost:5173`) and you
+Navigate to the local Vite server in your browser (`localhost:3000`) and you
 should see the list of dinosaurs displayed which you can click through to find
 out about each one.
 
