@@ -144,7 +144,7 @@ To run this example, first, start the server, giving your otel service a name:
 OTEL_DENO=true OTEL_SERVICE_NAME=server deno run --unstable-otel --allow-net server.ts
 ```
 
-Then, in another terminal, run the client, giving the client a differente
+Then, in another terminal, run the client, giving the client a different
 service name to make observing the propagation clearer:
 
 ```sh
