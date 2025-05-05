@@ -1,5 +1,6 @@
 ---
 title: "How to deploy Deno to Digital Ocean"
+description: "A step-by-step guide to deploying Deno applications on Digital Ocean. Learn about Docker containerization, GitHub Actions automation, container registries, and how to set up continuous deployment workflows."
 url: /examples/digital_ocean_tutorial/
 oldUrl:
 - /runtime/manual/advanced/deploying_deno/digital_ocean/
@@ -25,7 +26,7 @@ To focus on the deployment, our app will simply be a `main.ts` file that returns
 a string as an HTTP response:
 
 ```ts title="main.ts"
-import { Application } from "https://deno.land/x/oak/mod.ts";
+import { Application } from "jsr:@oak/oak";
 
 const app = new Application();
 

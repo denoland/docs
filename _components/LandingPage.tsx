@@ -18,10 +18,7 @@ export default function LandingPage() {
 
   return (
     <>
-      <main
-        id="content"
-        className="flex flex-col px-8 xl:px-0 pt-6 md:pt-12 mt-4 md:items-center md:justify-center max-w-[1200px] mx-auto mb-12"
-      >
+      <main id="content">
         <div className="flex flex-col md:flex-row w-full mb-8 max-w-screen-xl justify-between">
           <div className="max-w-prose mb-8">
             <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl mb-3">
@@ -105,7 +102,7 @@ export default function LandingPage() {
           />
         </div>
       </main>
-      <aside class="px-8 xl:px-0 max-w-[1200px] mx-auto mb-24 space-y-4 border-t pt-8">
+      <aside class="px-8 xl:px-0 max-w-[1200px] mb-24 space-y-4 border-t pt-8">
         <h2 class="text-2xl md:text-3xl font-bold">
           We welcome contributions!
         </h2>

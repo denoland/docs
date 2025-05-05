@@ -1,0 +1,20 @@
+.columns {
+  margin: 2rem 0;
+  div {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (min-width: 750px) {
+  .columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+
+    div {
+      flex: 1;
+      text-wrap: balance;
+      margin-bottom: 1rem;
+    }
+  }
+}

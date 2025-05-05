@@ -1,5 +1,6 @@
 ---
 title: Deploy Deno to Amazon Lightsail
+description: "Step-by-step tutorial on deploying Deno applications to AWS Lightsail. Learn about Docker containers, GitHub Actions automation, continuous deployment, and how to set up cost-effective cloud hosting for Deno apps."
 url: /examples/aws_lightsail_tutorial/
 oldUrl:
 - /runtime/manual/advanced/deploying_deno/aws_lightsail/
@@ -26,7 +27,7 @@ To focus on the deployment, our app will simply be a `main.ts` file that returns
 a string as an HTTP response:
 
 ```ts
-import { Application } from "https://deno.land/x/oak/mod.ts";
+import { Application } from "jsr:@oak/oak";
 
 const app = new Application();
 

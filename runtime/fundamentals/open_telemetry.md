@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry
+description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
 
 :::caution
@@ -48,7 +49,7 @@ OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 If you do not have an OpenTelemetry collector set up yet, you can get started
 with a
 [local LGTM stack in Docker](https://github.com/grafana/docker-otel-lgtm/tree/main?tab=readme-ov-file)
-(Loki (logs), Grafana (dashboard), Tempo (traces), and Mimir (metrics)) by
+(Loki (logs), Grafana (dashboard), Tempo (traces), and Prometheus (metrics)) by
 running the following command:
 
 ```sh
@@ -107,7 +108,7 @@ The following attributes are automatically added to the span on creation:
 
 After the request is handled, the following attributes are added:
 
-- `http.status_code`: The status code of the response.
+- `http.response.status_code`: The status code of the response.
 
 Deno does not automatically add a `http.route` attribute to the span as the
 route is not known by the runtime, and instead is determined by the routing
@@ -163,7 +164,81 @@ After the response is received, the following attributes are added:
 
 The following metrics are automatically collected and exported:
 
-_None yet_
+#### `Deno.serve` / `Deno.serveHttp`
+
+##### `http.server.request.duration`
+
+A histogram of the duration of incoming HTTP requests served with `Deno.serve`
+or `Deno.serveHttp`. The time that is measured is from when the request is
+received to when the response headers are sent. This does not include the time
+to send the response body. The unit of this metric is seconds. The histogram
+buckets are
+`[0.005, 0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1.0, 2.5, 5.0, 7.5, 10.0]`.
+
+This metric is recorded with the following attributes:
+
+- `http.request.method`: The HTTP method of the request.
+- `url.scheme`: The scheme of the request URL.
+- `network.protocol.version`: The version of the HTTP protocol used for the
+  request (e.g. `1.1` or `2`).
+- `server.address`: The address that the server is listening on.
+- `server.port`: The port that the server is listening on.
+- `http.response.status_code`: The status code of the response (if the request
+  has been handled without a fatal error).
+- `error.type`: The type of error that occurred (if the request handling was
+  subject to an error).
+
+##### `http.server.active_requests`
+
+A gauge of the number of active requests being handled by `Deno.serve` or
+`Deno.serveHttp` at any given time. This is the number of requests that have
+been received but not yet responded to (where the response headers have not yet
+been sent). This metric is recorded with the following attributes:
+
+- `http.request.method`: The HTTP method of the request.
+- `url.scheme`: The scheme of the request URL.
+- `server.address`: The address that the server is listening on.
+- `server.port`: The port that the server is listening on.
+
+##### `http.server.request.body.size`
+
+A histogram of the size of the request body of incoming HTTP requests served
+with `Deno.serve` or `Deno.serveHttp`. The unit of this metric is bytes. The
+histogram buckets are
+`[0, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000]`.
+
+This metric is recorded with the following attributes:
+
+- `http.request.method`: The HTTP method of the request.
+- `url.scheme`: The scheme of the request URL.
+- `network.protocol.version`: The version of the HTTP protocol used for the
+  request (e.g. `1.1` or `2`).
+- `server.address`: The address that the server is listening on.
+- `server.port`: The port that the server is listening on.
+- `http.response.status_code`: The status code of the response (if the request
+  has been handled without a fatal error).
+- `error.type`: The type of error that occurred (if the request handling was
+  subject to an error).
+
+##### `http.server.response.body.size`
+
+A histogram of the size of the response body of incoming HTTP requests served
+with `Deno.serve` or `Deno.serveHttp`. The unit of this metric is bytes. The
+histogram buckets are
+`[0, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000]`.
+
+This metric is recorded with the following attributes:
+
+- `http.request.method`: The HTTP method of the request.
+- `url.scheme`: The scheme of the request URL.
+- `network.protocol.version`: The version of the HTTP protocol used for the
+  request (e.g. `1.1` or `2`).
+- `server.address`: The address that the server is listening on.
+- `server.port`: The port that the server is listening on.
+- `http.response.status_code`: The status code of the response (if the request
+  has been handled without a fatal error).
+- `error.type`: The type of error that occurred (if the request handling was
+  subject to an error).
 
 ### Logs
 
@@ -312,6 +387,21 @@ and
 [links](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api.Span.html#addLink)
 added to them. Events are points in time that are associated with the span.
 Links are references to other spans.
+
+```ts
+// Add an event to the span
+span.addEvent("button_clicked", {
+  id: "submit-button",
+  action: "submit",
+});
+
+// Add an event with a timestamp
+span.addEvent("process_completed", { status: "success" }, Date.now());
+```
+
+Events can include optional attributes similar to spans. They are useful for
+marking significant moments within the span's lifetime without creating separate
+spans.
 
 Spans can also be created manually with `tracer.startSpan` which returns a span
 object. This method does not set the created span as the active span, so it will
@@ -558,6 +648,13 @@ variable, the following attributes are automatically set:
 - `telemetry.sdk.version`: The version of the Deno runtime, plus the version of
   the `opentelemetry` Rust crate being used by Deno, separated by a `-`.
 
+Propagators can be configured using the `OTEL_PROPAGATORS` environment variable.
+The default value is `tracecontext,baggage`. Multiple propagators can be
+specified by separating them with commas. Currently supported propagators are:
+
+- `tracecontext`: W3C Trace Context propagation format
+- `baggage`: W3C Baggage propagation format
+
 Metric collection frequency can be configured using the
 `OTEL_METRIC_EXPORT_INTERVAL` environment variable. The default value is `60000`
 milliseconds (60 seconds).
@@ -570,15 +667,65 @@ Log exporter batching can be configured using the batch log record processor
 environment variables described in the
 [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#batch-log-record-processor).
 
+## Propagators
+
+Deno supports context propagators which enable automatic propagation of trace
+context across process boundaries for distributed tracing, allowing you to track
+requests as they flow through different services.
+
+Propagators are responsible for encoding and decoding context information (like
+trace and span IDs) into and from carrier formats (like HTTP headers). This
+enables the trace context to be maintained across service boundaries.
+
+By default, Deno supports the following propagators:
+
+- `tracecontext`: The W3C Trace Context propagation format, which is the
+  standard way to propagate trace context via HTTP headers.
+- `baggage`: The W3C Baggage propagation format, which allows passing key-value
+  pairs across service boundaries.
+
+:::note
+
+These propagators automatically work with Deno's `fetch` API and `Deno.serve`,
+enabling end-to-end tracing across HTTP requests without manual context
+management.
+
+:::
+
+You can access the propagation API through the `@opentelemetry/api` package:
+
+```ts
+import { context, propagation, trace } from "npm:@opentelemetry/api@1";
+
+// Extract context from incoming headers
+function extractContextFromHeaders(headers: Headers) {
+  const ctx = context.active();
+  return propagation.extract(ctx, headers);
+}
+
+// Inject context into outgoing headers
+function injectContextIntoHeaders(headers: Headers) {
+  const ctx = context.active();
+  propagation.inject(ctx, headers);
+  return headers;
+}
+
+// Example: Making a fetch request that propagates trace context
+async function tracedFetch(url: string) {
+  const headers = new Headers();
+  injectContextIntoHeaders(headers);
+
+  return await fetch(url, { headers });
+}
+```
+
 ## Limitations
 
 While the OpenTelemetry integration for Deno is in development, there are some
 limitations to be aware of:
 
 - Traces are always sampled (i.e. `OTEL_TRACE_SAMPLER=parentbased_always_on`).
-- Traces do not support events and links.
-- Automatic propagation of the trace context in `Deno.serve` and `fetch` is not
-  supported.
+- Traces only support links with no attributes.
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
   are not supported.
@@ -597,7 +744,7 @@ limitations to be aware of:
 - HTTP methods are that are not known are not normalized to `_OTHER` in the
   `http.request.method` span attribute as per the OpenTelemetry semantic
   conventions.
-- The HTTP server span for `Deno.serve` does not have an OpenTelemtry status
+- The HTTP server span for `Deno.serve` does not have an OpenTelemetry status
   set, and if the handler throws (ie `onError` is invoked), the span will not
   have an error status set and the error will not be attached to the span via
   event.

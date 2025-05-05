@@ -9,7 +9,9 @@ export default function (data: Lume.Data) {
             <a
               href={nav.href}
               className="main-nav-link"
-              data-active={nav.href.includes(data.currentSection)}
+              {...(nav.href.includes(data.currentSection)
+                ? { "data-active": true }
+                : {})}
             >
               {nav.name}
             </a>

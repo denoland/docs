@@ -3,7 +3,9 @@ export const layout = "doc.tsx";
 const generateConfigFileForTag = (tag: string) => {
   return `{
   "lint": {
-    "tags": ["${tag}"]
+    "rules": {
+      "tags": ["${tag}"]
+    }
   }
 }`;
 };
@@ -11,23 +13,26 @@ const generateConfigFileForTag = (tag: string) => {
 const generateConfigFileForTags = (tags: string[]) => {
   return `{
   "lint": {
-    "tags": ["${tags[0]}"] // ...or ${
+    "rules": {
+      "tags": ["${tags[0]}"] // ...or ${
     tags.slice(1).map((tag) => `"${tag}"`).join(", ")
   }
+    }
   }
 }`;
 };
 
 const generateCliForTag = (tag: string) => {
-  return `deno lint --tags=${tag}`;
+  return `deno lint --rules-tags=${tag}`;
 };
 
 const generateCliForTags = (tags: string[]) => {
-  return tags.map((tag) => `deno lint --tags=${tag}`).join("\n# or ...\n");
+  return tags.map(generateCliForTag).join("\n# or ...\n");
 };
 
-function LintRuleTags(props: { tags: string[] }) {
+function LintRuleTags(props: { tags: string[]; ruleName: string }) {
   const tags = props.tags;
+  const ruleName = props.ruleName;
   if (tags.length === 0) {
     return null;
   }
@@ -65,6 +70,24 @@ function LintRuleTags(props: { tags: string[] }) {
             <pre class="!mb-0">{generateCliForTags(tags)}</pre>
           </>
         )}
+      <div class="mt-4">
+        This rule can be explictly included to or excluded from the rules
+        present in the current tag by adding it to the <code>include</code> or
+        {" "}
+        <code>exclude</code> array in <code>deno.json</code>:
+      </div>
+      <pre>
+        {
+          `{
+  "lint": {
+    "rules": {
+      "include": ["${ruleName}"],
+      "exclude": ["${ruleName}"]
+    }
+  }
+}`
+      }
+      </pre>
     </div>
   );
 }
@@ -74,7 +97,7 @@ export default function LintRule(props: Lume.Data, _helpers: Lume.Helpers) {
 
   return (
     <>
-      <LintRuleTags tags={tags} />
+      <LintRuleTags tags={tags} ruleName={props.title} />
       {props.children}
     </>
   );

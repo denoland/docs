@@ -1,5 +1,6 @@
 ---
 title: "How to create a RESTful API with Prisma and Oak"
+description: "Guide to building a RESTful API using Prisma and Oak with Deno. Learn how to set up database schemas, generate clients, implement CRUD operations, and deploy your API with proper type safety."
 url: /examples/prisma_tutorial/
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/prisma/
@@ -162,7 +163,7 @@ You should see something similar to the following screenshot:
 
 ## Create your API routes
 
-We'll use [`oak`](https://deno.land/x/oak) to create the API routes. Let's keep
+We'll use [`oak`](https://jsr.io/@oak/oak) to create the API routes. Let's keep
 them simple for now.
 
 Let's create a `main.ts` file:
@@ -175,7 +176,7 @@ Then, in your `main.ts` file:
 
 ```ts
 import { PrismaClient } from "./generated/client/deno/edge.ts";
-import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
+import { Application, Router } from "jsr:@oak/oak";
 
 /**
  * Initialize.

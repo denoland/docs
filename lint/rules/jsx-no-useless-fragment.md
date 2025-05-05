@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [recommended, react, jsx, fresh]
 ---
 
 Fragments are only necessary at the top of a JSX "block" and only when there are

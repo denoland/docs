@@ -1,6 +1,8 @@
 ---
 title: "Deno CLI Subcommands"
 oldUrl: "/runtime/reference/cli/all_commands"
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno help"
 ---
 
 The Deno CLI (Command Line Interface) allows you to interact with the Deno
@@ -19,6 +21,8 @@ below for more information on each subcommand.
 ## Dependency management
 
 - [deno add](/runtime/reference/cli/add) - add dependencies
+- deno cache - _(Deprecated. Please use
+  [deno install](/runtime/reference/cli/install/))_
 - [deno install](/runtime/reference/cli/install/) - install a dependency or a
   script
 - [deno uninstall](/runtime/reference/cli/uninstall/) - uninstall a dependency

@@ -2,7 +2,7 @@
  * @title TCP listener: Ping
  * @difficulty intermediate
  * @tags cli
- * @run --allow-net <url>
+ * @run -N <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.listen} Doc: Deno.listen
  * @group Network
  *

@@ -1,4 +1,2 @@
-status: unsupported
-description: This module is not implemented.
-symbols:
-  "*": This module is not implemented.
+status: good
+description: This module has been added in Deno v2.2.

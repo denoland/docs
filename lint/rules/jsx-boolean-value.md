@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [recommended, react, jsx]
 ---
 
 Enforce a consistent JSX boolean value style. Passing `true` as the boolean

@@ -2,7 +2,7 @@
  * @title Subprocess Spawning: running other files using subprocesses
  * @difficulty intermediate
  * @tags cli
- * @run --allow-net --allow-run --allow-read <url>
+ * @run -N --allow-run -R <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.Command} Doc: Deno.Command
  * @resource {https://docs.deno.com/api/deno/~/Deno.FsFile} Doc: Deno.FsFile
  * @resource {https://docs.deno.com/api/deno/~/Deno.args} Doc: Deno.args

@@ -1,0 +1,19 @@
+h1.ref-h1 {
+  font-size: 1.6rem;
+  border: 0;
+  padding: 0;
+}
+
+code.inline-code-block {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+hr.hr {
+  height: 1px;
+}
+
+.anchorable-heading .context-link {
+  color: hsl(var(--foreground-primary));
+}

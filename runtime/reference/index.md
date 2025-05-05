@@ -1,5 +1,6 @@
 ---
 title: Reference guides
+description: "Technical references and guides for Deno. Includes detailed documentation on runtime APIs, environment setup, CLI tools, and advanced features for experienced Deno developers."
 ---
 
 Here, you’ll find detailed technical documentation and comprehensive guides to

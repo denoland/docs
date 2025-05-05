@@ -3,6 +3,8 @@ import "@std/dotenv/load";
 import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx_preact.ts";
+import mdx from "lume/plugins/mdx.ts";
+import ogImages from "lume/plugins/og_images.ts";
 import postcss from "lume/plugins/postcss.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
@@ -16,6 +18,7 @@ import Prism from "./prism.ts";
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
+import { log } from "lume/core/utils/log.ts";
 import anchor from "npm:markdown-it-anchor@9";
 import { full as emoji } from "npm:markdown-it-emoji@3";
 import admonitionPlugin from "./markdown-it/admonition.ts";
@@ -30,7 +33,6 @@ import redirectsMiddleware, {
   toFileAndInMemory,
 } from "./middleware/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
-import { log } from "lume/core/utils/log.ts";
 
 const site = lume(
   {
@@ -46,7 +48,7 @@ const site = lume(
         }),
         apiDocumentContentTypeMiddleware,
       ],
-      page404: "/404",
+      page404: "/404/",
     },
     watcher: {
       ignore: [
@@ -99,6 +101,9 @@ const site = lume(
   },
 );
 
+// ignore some folders that have their own build tasks
+// site.ignore("styleguide");
+
 site.copy("static", ".");
 site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");
@@ -128,6 +133,7 @@ site.use(
 
 site.use(search());
 site.use(jsx());
+site.use(mdx());
 
 site.use(
   postcss({
@@ -175,7 +181,53 @@ site.ignore(
   // "deploy",
   // "runtime",
   // "subhosting",
+  // "404",
 );
+
+// the default layout if no other layout is specified
+site.data("layout", "doc.tsx");
+
+// Do more expensive operations if we're building the full site
+if (Deno.env.get("BUILD_TYPE") == "FULL") {
+  // Use Lume's built in date function to get the last modified date of the file
+  // site.data("date", "Git Last Modified");;
+
+  // Generate Open Graph images
+  site.data("openGraphLayout", "/open_graph/default.jsx");
+  site.data("openGraphColor", "#70ffaf");
+  site.use(ogImages({
+    satori: {
+      width: 1200,
+      height: 630,
+      fonts: [
+        {
+          name: "Courier",
+          style: "normal",
+          data: await Deno.readFile(
+            "./static/fonts/courier/CourierPrime-Regular.ttf",
+          ),
+        },
+        {
+          name: "Inter",
+          weight: 400,
+          style: "normal",
+          data: await Deno.readFile(
+            "./static/fonts/inter/Inter-Regular.woff",
+          ),
+        },
+        {
+          name: "Inter",
+          weight: 700,
+          style: "bold",
+          data: await Deno.readFile(
+            "./static/fonts/inter/Inter-SemiBold.woff",
+          ),
+        },
+      ],
+    },
+    cache: false,
+  }));
+}
 
 site.scopedUpdates(
   (path) => path == "/overrides.css",

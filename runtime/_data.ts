@@ -78,6 +78,10 @@ export const sidebar = [
         href: "/runtime/fundamentals/http_server/",
       },
       {
+        title: "FFI",
+        href: "/runtime/fundamentals/ffi/",
+      },
+      {
         title: "OpenTelemetry",
         href: "/runtime/fundamentals/open_telemetry/",
       },
@@ -246,6 +250,10 @@ export const sidebar = [
         href: "/runtime/reference/documentation/",
       },
       {
+        title: "Lint Plugins",
+        href: "/runtime/reference/lint_plugins/",
+      },
+      {
         title: "WebAssembly",
         href: "/runtime/reference/wasm/",
       },
@@ -256,6 +264,10 @@ export const sidebar = [
       {
         title: "LSP integration",
         href: "/runtime/reference/lsp_integration/",
+      },
+      {
+        title: "Docker",
+        href: "/runtime/reference/docker/",
       },
     ],
   },
@@ -285,10 +297,6 @@ export const sidebar = [
           {
             title: "Style guide",
             href: "/runtime/contributing/style_guide/",
-          },
-          {
-            title: "Web platform tests",
-            href: "/runtime/contributing/web_platform_tests/",
           },
           {
             title: "Documentation",
@@ -378,7 +386,7 @@ This the data is read from the files in the reference_gen/node_description direc
 This function is called in node.md through the templating engine Vento,
 after which the normal markdown rendered is called.
  */
-export async function generateNodeCompatability() {
+export async function generateNodeCompatibility() {
   const descriptions = await generateDescriptions();
   const sorted = Object.entries(descriptions).toSorted(([keyA], [keyB]) =>
     keyA.localeCompare(keyB)

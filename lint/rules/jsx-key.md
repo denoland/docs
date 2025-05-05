@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [recommended, react, jsx]
 ---
 
 Ensure the `key` attribute is present when passing iterables into JSX. It allows

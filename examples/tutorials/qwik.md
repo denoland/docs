@@ -1,5 +1,6 @@
 ---
 title: "Build Qwik with Deno"
+description: "Step-by-step guide to building Qwik applications with Deno. Learn about resumability, server-side rendering, route handling, and how to create fast, modern web applications with zero client-side JavaScript by default."
 url: /examples/qwik_tutorial/
 ---
 

@@ -3,6 +3,15 @@
   "about": null,
   "args": [
     {
+      "name": "help",
+      "short": "h",
+      "long": "help",
+      "required": false,
+      "help": null,
+      "help_heading": null,
+      "usage": "--help[=<CONTEXT>]"
+    },
+    {
       "name": "quiet",
       "short": "q",
       "long": "quiet",
@@ -27,24 +36,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -58,27 +49,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -88,6 +115,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -112,7 +157,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -184,7 +229,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -422,24 +467,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -453,27 +480,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -483,6 +546,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -507,7 +588,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -579,7 +660,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -728,6 +809,15 @@
           "usage": "--host <host>"
         },
         {
+          "name": "open",
+          "short": null,
+          "long": "open",
+          "required": false,
+          "help": "Open the browser on the address that the server is running on.",
+          "help_heading": null,
+          "usage": "--open"
+        },
+        {
           "name": "parallel",
           "short": null,
           "long": "parallel",
@@ -848,7 +938,7 @@
           "short": "D",
           "long": "dev",
           "required": false,
-          "help": "Add as a dev dependency",
+          "help": "Add the package as a dev dependency. Note: This only applies when adding to a `package.json` file.",
           "help_heading": null,
           "usage": "--dev"
         },
@@ -860,6 +950,24 @@
           "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
           "help_heading": null,
           "usage": "--allow-scripts[=<PACKAGE>...]"
+        },
+        {
+          "name": "npm",
+          "short": null,
+          "long": "npm",
+          "required": false,
+          "help": "assume unprefixed package names are npm packages",
+          "help_heading": null,
+          "usage": "--npm"
+        },
+        {
+          "name": "jsr",
+          "short": null,
+          "long": "jsr",
+          "required": false,
+          "help": "assume unprefixed package names are jsr packages",
+          "help_heading": null,
+          "usage": "--jsr"
         }
       ],
       "subcommands": [],
@@ -896,24 +1004,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -927,27 +1017,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -957,6 +1083,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -981,7 +1125,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -1053,7 +1197,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -1211,6 +1355,15 @@
           "usage": "--no-run"
         },
         {
+          "name": "permit-no-files",
+          "short": null,
+          "long": "permit-no-files",
+          "required": false,
+          "help": "Don't return an error code if no files were found",
+          "help_heading": null,
+          "usage": "--permit-no-files"
+        },
+        {
           "name": "watch",
           "short": null,
           "long": "watch",
@@ -1279,7 +1432,7 @@
     },
     {
       "name": "bundle",
-      "about": "⚠️ `deno bundle` was removed in Deno 2.\n\nSee the Deno 1.x to 2.x Migration Guide for migration instructions: https://docs.deno.com/runtime/manual/advanced/migrate_deprecations",
+      "about": "`deno bundle` was removed in Deno 2.\n\nSee the Deno 1.x to 2.x Migration Guide for migration instructions: https://docs.deno.com/runtime/manual/advanced/migrate_deprecations",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -1298,6 +1451,33 @@
           "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1342,6 +1522,33 @@
           "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -1411,7 +1618,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -1532,24 +1739,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -1563,27 +1752,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -1593,6 +1818,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -1617,7 +1860,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -1680,7 +1923,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -1728,6 +1971,15 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
+        },
+        {
+          "name": "no-code-cache",
+          "short": null,
+          "long": "no-code-cache",
+          "required": false,
+          "help": "Disable V8 code cache feature",
+          "help_heading": null,
+          "usage": "--no-code-cache"
         },
         {
           "name": "all",
@@ -1799,13 +2051,59 @@
     {
       "name": "clean",
       "about": "Remove the cache directory (\u001b[36m$DENO_DIR\u001b[39m)",
-      "args": [],
+      "args": [
+        {
+          "name": "except-paths",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "[except-paths]..."
+        },
+        {
+          "name": "except",
+          "short": "e",
+          "long": "except",
+          "required": false,
+          "help": "Retain cache data needed by the given files",
+          "help_heading": null,
+          "usage": "--except"
+        },
+        {
+          "name": "dry-run",
+          "short": null,
+          "long": "dry-run",
+          "required": false,
+          "help": "Show what would be removed without performing any actions",
+          "help_heading": null,
+          "usage": "--dry-run"
+        },
+        {
+          "name": "node-modules-dir",
+          "short": null,
+          "long": "node-modules-dir",
+          "required": false,
+          "help": "Sets the node modules management mode for npm packages",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "vendor",
+          "short": null,
+          "long": "vendor",
+          "required": false,
+          "help": "Toggles local vendor folder usage for remote modules and a node_modules folder for npm packages",
+          "help_heading": "Dependency management options",
+          "usage": "--vendor[=<vendor>]"
+        }
+      ],
       "subcommands": [],
-      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno clean\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno clean\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[except-paths]...\u001b[0m"
     },
     {
       "name": "compile",
-      "about": "Compiles the given script into a self contained executable.\n\n  \u001b[38;5;245mdeno compile --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno compile --output file_server jsr:@std/http/file-server\u001b[39m\n\nAny flags specified which affect runtime behavior will be applied to the resulting binary.\n\nThis allows distribution of a Deno application to systems that do not have Deno installed.\nUnder the hood, it bundles a slimmed down version of the Deno runtime along with your\nJavaScript or TypeScript code.\n\nCross-compiling to different target architectures is supported using the \u001b[36m--target\u001b[39m flag.\nOn the first invocation with deno will download the proper binary and cache it in \u001b[36m$DENO_DIR\u001b[39m.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/compile\u001b[39m\n",
+      "about": "Compiles the given script into a self contained executable.\n\n  \u001b[38;5;245mdeno compile --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno compile --output file_server jsr:@std/http/file-server\u001b[39m\n\nAny flags specified which affect runtime behavior will be applied to the resulting binary.\n\nThis allows distribution of a Deno application to systems that do not have Deno installed.\nUnder the hood, it bundles a slimmed down version of the Deno runtime along with your\nJavaScript or TypeScript code.\n\nCross-compiling to different target architectures is supported using the \u001b[36m--target\u001b[39m flag.\nOn the first invocation of `deno compile`, Deno will download the relevant binary and cache it in \u001b[36m$DENO_DIR\u001b[39m.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/compile\u001b[39m\n",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -1815,24 +2113,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-broadcast-channel",
@@ -1848,27 +2128,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -1878,6 +2194,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -1902,7 +2236,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -1974,7 +2308,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -2094,6 +2428,15 @@
           "help": "Includes an additional module or file/directory in the compiled executable.\n  \u001b[38;5;245mUse this flag if a dynamically imported module or a web worker main module\n  fails to load in the executable or to embed a file or directory in the executable.\n  This flag can be passed multiple times, to include multiple additional modules.\u001b[39m",
           "help_heading": "Compile options",
           "usage": "--include <include>"
+        },
+        {
+          "name": "exclude",
+          "short": null,
+          "long": "exclude",
+          "required": false,
+          "help": "Excludes a file/directory in the compiled executable.\n  \u001b[38;5;245mUse this flag to exclude a specific file or directory within the included files.\n  For example, to exclude a certain folder in the bundled node_modules directory.\u001b[39m",
+          "help_heading": "Compile options",
+          "usage": "--exclude <exclude>"
         },
         {
           "name": "output",
@@ -2298,6 +2641,33 @@
           "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -2506,24 +2876,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -2537,27 +2889,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -2567,6 +2955,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -2591,7 +2997,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -2663,7 +3069,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -2860,7 +3266,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -2908,6 +3314,15 @@
           "help": null,
           "help_heading": null,
           "usage": "[files]..."
+        },
+        {
+          "name": "permit-no-files",
+          "short": null,
+          "long": "permit-no-files",
+          "required": false,
+          "help": "Don't return an error code if no files were found",
+          "help_heading": null,
+          "usage": "--permit-no-files"
         },
         {
           "name": "watch",
@@ -3079,6 +3494,33 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -3182,7 +3624,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -3249,24 +3691,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -3280,27 +3704,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -3310,6 +3770,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -3334,7 +3812,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -3406,7 +3884,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -3613,9 +4091,27 @@
           "short": "D",
           "long": "dev",
           "required": false,
-          "help": "Add as a dev dependency",
+          "help": "Add the package as a dev dependency. Note: This only applies when adding to a `package.json` file.",
           "help_heading": null,
           "usage": "--dev"
+        },
+        {
+          "name": "npm",
+          "short": null,
+          "long": "npm",
+          "required": false,
+          "help": "assume unprefixed package names are npm packages",
+          "help_heading": null,
+          "usage": "--npm"
+        },
+        {
+          "name": "jsr",
+          "short": null,
+          "long": "jsr",
+          "required": false,
+          "help": "assume unprefixed package names are jsr packages",
+          "help_heading": null,
+          "usage": "--jsr"
         },
         {
           "name": "unstable",
@@ -3651,24 +4147,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -3682,27 +4160,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -3712,6 +4226,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -3736,7 +4268,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -3869,7 +4401,7 @@
           "short": null,
           "long": "latest",
           "required": false,
-          "help": "Update to the latest version, regardless of semver constraints",
+          "help": "Consider the latest version, regardless of semver constraints",
           "help_heading": null,
           "usage": "--latest"
         },
@@ -3883,11 +4415,20 @@
           "usage": "--update"
         },
         {
+          "name": "interactive",
+          "short": "i",
+          "long": "interactive",
+          "required": false,
+          "help": "Interactively select which dependencies to update",
+          "help_heading": null,
+          "usage": "--interactive"
+        },
+        {
           "name": "compatible",
           "short": null,
           "long": "compatible",
           "required": false,
-          "help": "Only output versions that satisfy semver requirements",
+          "help": "Only consider versions that satisfy semver requirements",
           "help_heading": null,
           "usage": "--compatible"
         },
@@ -3932,6 +4473,33 @@
           "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
         },
         {
           "name": "unstable-sloppy-imports",
@@ -4010,7 +4578,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4049,6 +4617,15 @@
           "help": null,
           "help_heading": null,
           "usage": "[files]..."
+        },
+        {
+          "name": "permit-no-files",
+          "short": null,
+          "long": "permit-no-files",
+          "required": false,
+          "help": "Don't return an error code if no files were found",
+          "help_heading": null,
+          "usage": "--permit-no-files"
         },
         {
           "name": "watch",
@@ -4122,6 +4699,33 @@
           "usage": "--unstable-detect-cjs"
         },
         {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
           "name": "unstable-sloppy-imports",
           "short": null,
           "long": "unstable-sloppy-imports",
@@ -4144,7 +4748,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4198,7 +4802,7 @@
           "short": null,
           "long": "set-version",
           "required": false,
-          "help": "Set version for a package to be published.\n  <p(245)>This flag can be used while publishing individual packages and cannot be used in a workspace.</>",
+          "help": "Set version for a package to be published.\n  \u001b[38;5;245mThis flag can be used while publishing individual packages and cannot be used in a workspace.\u001b[39m",
           "help_heading": "Publishing options",
           "usage": "--set-version <VERSION>"
         },
@@ -4247,24 +4851,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -4278,27 +4864,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -4308,6 +4930,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -4332,7 +4972,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -4413,7 +5053,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -4567,7 +5207,7 @@
     },
     {
       "name": "task",
-      "about": "Run a task defined in the configuration file.\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks:\n  \u001b[38;5;245mdeno task\u001b[39m\n\nEvaluate a task from string\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
+      "about": "Run a task defined in the configuration file:\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks (from config files in the current and ancestor directories):\n  \u001b[38;5;245mdeno task\u001b[39m\n\nEvaluate a task from string:\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -4577,24 +5217,6 @@
           "help": "Enable unstable bare node builtins feature",
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-broadcast-channel",
@@ -4610,27 +5232,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -4640,6 +5298,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -4664,7 +5340,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -4682,9 +5358,18 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
+        },
+        {
+          "name": "frozen",
+          "short": null,
+          "long": "frozen",
+          "required": false,
+          "help": "Error out if lockfile is out of date",
+          "help_heading": "Dependency management options",
+          "usage": "--frozen[=<BOOLEAN>]"
         },
         {
           "name": "cwd",
@@ -4709,7 +5394,7 @@
           "short": "f",
           "long": "filter",
           "required": false,
-          "help": "Filter members of the workspace by name - should be used with --recursive",
+          "help": "Filter members of the workspace by name, implies --recursive flag",
           "help_heading": null,
           "usage": "--filter <filter>"
         },
@@ -4718,7 +5403,7 @@
           "short": null,
           "long": "eval",
           "required": false,
-          "help": "Evaluate the passed value as if, it was a task in a configuration file",
+          "help": "Evaluate the passed value as if it was a task in a configuration file",
           "help_heading": null,
           "usage": "--eval"
         },
@@ -4758,24 +5443,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
           "name": "unstable-broadcast-channel",
           "short": null,
           "long": "unstable-broadcast-channel",
@@ -4789,27 +5456,63 @@
           "short": null,
           "long": "unstable-cron",
           "required": false,
-          "help": "Enable unstable Deno.cron API",
+          "help": "Enable unstable `Deno.cron` API",
           "help_heading": "Unstable options",
           "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
         },
         {
           "name": "unstable-kv",
           "short": null,
           "long": "unstable-kv",
           "required": false,
-          "help": "Enable unstable Key-Value store APIs",
+          "help": "Enable unstable KV APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
         },
         {
           "name": "unstable-net",
           "short": null,
           "long": "unstable-net",
           "required": false,
-          "help": "Enable unstable net APIs",
+          "help": "enable unstable net APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
         },
         {
           "name": "unstable-node-globals",
@@ -4819,6 +5522,24 @@
           "help": "Expose Node globals everywhere",
           "help_heading": "Unstable options",
           "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
         },
         {
           "name": "unstable-temporal",
@@ -4843,7 +5564,7 @@
           "short": null,
           "long": "unstable-webgpu",
           "required": false,
-          "help": "Enable unstable `WebGPU` APIs",
+          "help": "Enable unstable WebGPU APIs",
           "help_heading": "Unstable options",
           "usage": "--unstable-webgpu"
         },
@@ -4915,7 +5636,7 @@
           "short": "c",
           "long": "config",
           "required": false,
-          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
           "help_heading": null,
           "usage": "--config <FILE>"
         },
@@ -5104,7 +5825,7 @@
           "short": null,
           "long": "permit-no-files",
           "required": false,
-          "help": "Don't return an error code if no test files were found",
+          "help": "Don't return an error code if no files were found",
           "help_heading": "Testing options",
           "usage": "--permit-no-files"
         },
@@ -5131,9 +5852,18 @@
           "short": null,
           "long": "coverage",
           "required": false,
-          "help": "Collect coverage profile data into DIR. If DIR is not specified, it uses 'coverage/'",
+          "help": "Collect coverage profile data into DIR. If DIR is not specified, it uses 'coverage/'.\n  \u001b[38;5;245mThis option can also be set via the DENO_COVERAGE_DIR environment variable.\u001b[39m",
           "help_heading": "Testing options",
           "usage": "--coverage[=<DIR>]"
+        },
+        {
+          "name": "coverage-raw-data-only",
+          "short": null,
+          "long": "coverage-raw-data-only",
+          "required": false,
+          "help": "Only collect raw coverage data, without generating a report",
+          "help_heading": "Testing options",
+          "usage": "--coverage-raw-data-only"
         },
         {
           "name": "clean",
@@ -5318,7 +6048,7 @@
     },
     {
       "name": "vendor",
-      "about": "⚠️ `deno vendor` was removed in Deno 2.\n\nSee the Deno 1.x to 2.x Migration Guide for migration instructions: https://docs.deno.com/runtime/manual/advanced/migrate_deprecations",
+      "about": "`deno vendor` was removed in Deno 2.\n\nSee the Deno 1.x to 2.x Migration Guide for migration instructions: https://docs.deno.com/runtime/manual/advanced/migrate_deprecations",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -5337,6 +6067,33 @@
           "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
           "help_heading": "Unstable options",
           "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
         },
         {
           "name": "unstable-sloppy-imports",

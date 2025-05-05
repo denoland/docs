@@ -1,5 +1,6 @@
 ---
 title: "Getting Started"
+description: "A step-by-step guide to getting started with Deno. Learn how to install Deno, create your first program, and understand the basics of this secure JavaScript, TypeScript, and WebAssembly runtime."
 pagination_next: /runtime/getting_started/first_project/
 oldUrl:
   - /manual/

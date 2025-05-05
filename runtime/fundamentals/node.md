@@ -1,5 +1,6 @@
 ---
-title: "Node and npm support"
+title: "Node and npm Compatibility"
+description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
 - /runtime/reference/node/
 - /runtime/manual/npm_nodejs/std_node/
@@ -16,12 +17,20 @@ oldUrl:
 - /runtime/manual/node/private_registries
 ---
 
-Modern Node.js projects will run in Deno with little to no reworking required.
-However, there are some key differences between the two runtimes that you can
-take advantage of to make your code simpler and smaller when migrating your
-Node.js projects to Deno.
+- **Deno is Node-compatible**. Most Node projects will run in Deno with little
+  or no change!
+- **Deno supports npm packages**. Just use the `npm:` specifier in the import,
+  and Deno takes care of the rest.
 
-<a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
+For example, here's how you'd import Hono from npm in a Deno project:
+
+```ts
+import { Hono } from "npm:hono";
+```
+
+That's all you really need to know to get started! However, there are some key
+differences between the two runtimes that you can take advantage of to make your
+code simpler and smaller when migrating your Node.js projects to Deno.
 
 ## Using Node's built-in modules
 
@@ -58,6 +67,8 @@ error: Relative import path "os" not prefixed with / or ./ or ../
 The same hints and additional quick-fixes are provided by the Deno LSP in your
 editor.
 
+<a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
+
 ## Using npm packages
 
 Deno has native support for importing npm packages by using `npm:` specifiers.
@@ -84,6 +95,17 @@ npm specifiers have the following format:
 
 ```console
 npm:<package-name>[@<version-requirement>][/<sub-path>]
+```
+
+This also allows functionality that may be familar from the `npx` command.
+
+```console
+# npx allows remote execution of a package from npm or a URL
+$ npx create-next-app@latest
+
+# deno run allows remote execution of a package from various locations,
+# and can scoped to npm via the `npm:` specifier.
+$ deno run -A npm:create-next-app@latest
 ```
 
 For examples with popular libraries, please refer to the
@@ -669,7 +691,7 @@ that might look like:
 ```sh
 error[no-constant-condition]: Use of a constant expressions as conditions is not allowed.
  --> /my-project/bar.ts:1:5
-  | 
+  |
 1 | if (true) {
   |     ^^^^
   = hint: Remove the constant expression
