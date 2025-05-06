@@ -175,3 +175,4 @@ $ signtool sign /fd SHA256 main.exe
 ## Unavailable in executables
 
 - [Web Storage API](/runtime/reference/web_platform_apis/#web-storage)
+- [Web Cache](/api/web/~/Cache)
