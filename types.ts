@@ -1,5 +1,3 @@
-import SecondaryNav from "./_components/SecondaryNav.tsx";
-
 export type Sidebar = SidebarItem[];
 export type Path = string;
 
