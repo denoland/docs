@@ -320,7 +320,7 @@ packages work as expected:
 
 ```sh
 # Test a published package
-deno add @scope/my-published-package
+deno add jsr:@scope/my-published-package
 deno test integration-test.ts
 ```
 
