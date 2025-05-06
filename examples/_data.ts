@@ -283,6 +283,11 @@ export const sidebar = [
         href: "/examples/tanstack_tutorial/",
         type: "tutorial",
       },
+      {
+        title: "HTTP server file upload",
+        href: "/examples/http_server_file_upload/",
+        type: "example",
+      },
     ],
   },
   {
