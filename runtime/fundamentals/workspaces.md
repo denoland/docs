@@ -264,53 +264,6 @@ cd my-package
 deno publish
 ```
 
-You can also publish directly from the workspace root by specifying the package
-path:
-
-```sh
-deno publish ./my-package
-```
-
-If your workspace contains multiple packages that need to be published together
-with proper versioning, consider using the `--dry-run` flag first to verify what
-files will be included:
-
-```sh
-deno publish ./my-package --dry-run
-```
-
-#### Publishing to NPM
-
-Deno workspaces can also be configured to publish packages to NPM. This is
-useful for libraries that target both Deno and Node.js users:
-
-1. Add npm-specific configuration to your package:
-
-```json title="my-package/deno.json"
-{
-  "name": "@scope/my-package",
-  "version": "1.0.0",
-  "exports": "./mod.ts",
-  "publish": {
-    "exclude": ["tests/", "*.test.ts", "examples/"],
-    "registry": ["jsr", "npm"]
-  },
-  "npmRegistry": {
-    "name": "my-npm-package",
-    "provenance": true
-  }
-}
-```
-
-2. Publish to both registries:
-
-```sh
-cd my-package
-deno publish
-```
-
-This will build your package for both JSR and NPM compatibility.
-
 #### Managing interdependent packages
 
 When publishing packages from a workspace with interdependencies, use consistent
@@ -320,7 +273,7 @@ packages work as expected:
 
 ```sh
 # Test a published package
-deno add @scope/my-published-package
+deno add jsr:@scope/my-published-package
 deno test integration-test.ts
 ```
 
