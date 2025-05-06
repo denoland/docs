@@ -19,6 +19,8 @@
   --note: 224deg, 64.3%, 32.9%;
   --caution: 45.4deg, 93.39%, 47.45%;
   --tip: 142deg, 76.2%, 36.3%;
+  --services: 32.36deg 100% 50.2%;
+  --services-secondary: 32.36deg 100% 90%;
 }
 .dark {
   --background-primary: 216deg, 27.8%, 7.1%;
@@ -38,6 +40,8 @@
   --primary-dark: 217deg, 91%, 49%;
   --tip: 142deg, 76.2%, 36.3%;
   --color-fg-default: #fff;
+  --services: 32.36deg 100% 50.2%;
+  --services-secondary: 32.36deg 100% 90%;
 
   color: var(--foreground-primary);
   background-color: var(--background-primary);

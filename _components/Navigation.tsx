@@ -17,6 +17,7 @@ export default function (
       <div className="nav" data-section={currentSection} id="nav">
         <data.comp.MainNav currentSection={currentSection} />
         <data.comp.SecondaryNav
+          secondaryNavData={data.secondaryNav}
           sectionData={sectionData}
           currentUrl={currentUrl}
         />

@@ -1,3 +1,5 @@
+import SecondaryNav from "./_components/SecondaryNav.tsx";
+
 export type Sidebar = SidebarItem[];
 export type Path = string;
 
@@ -39,4 +41,17 @@ export interface GoogleSheetsUpdateResponse {
   };
 }
 
-export type NavData = { name: string; href: string };
+export type NavData = { name: string; href: string; style?: string };
+
+export type SecondaryNav = SecondaryNavItem[];
+
+export interface SecondaryNavItem {
+  title: string;
+  href: string;
+  items?: NavData[];
+}
+
+export interface SecondaryNavProps {
+  secondaryNav: SecondaryNav[];
+  currentUrl: string;
+}
