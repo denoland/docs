@@ -342,32 +342,6 @@ Deno.test("foo() returns bar object", function () {
 Note: See [tracking issue](https://github.com/denoland/deno_std/issues/3754) for
 more information.
 
-#### Top-level functions should not use arrow syntax
-
-Top-level functions should use the `function` keyword. Arrow syntax should be
-limited to closures.
-
-Bad:
-
-```ts
-export const foo = (): string => {
-  return "bar";
-};
-```
-
-Good:
-
-```ts
-export function foo(): string {
-  return "bar";
-}
-```
-
-Regular functions and arrow functions have different behavior with respect to
-hoisting, binding, arguments, and constructability. The `function` keyword
-clearly indicates the intent to define a function, improving legibility and
-tracibility while debugging.
-
 #### Error Messages
 
 User-facing error messages raised from JavaScript / TypeScript should be clear,
