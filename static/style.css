@@ -14,16 +14,32 @@ p {
 }
 
 .blocklink {
+  display: inline-block;
+  position: relative;
   padding: 0.25rem 0.75rem;
   margin: 0 0.5rem;
   border-radius: 0.25rem;
   border: 1px solid transparent;
   transition: all 200ms ease-in-out;
   color: hsl(var(--foreground-primary));
-  &:hover {
+
+  &:hover:not([data-active="true"]) {
     text-decoration: none;
     background-color: hsl(var(--background-secondary));
     border-color: hsl(var(--background-tertiary));
+  }
+
+  &[data-active="true"] {
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0.25rem;
+      left: 0.75rem;
+      display: block;
+      width: calc(100% - 1.5rem);
+      height: 1px;
+      background-color: hsl(var(--background-tertiary));
+    }
   }
 }
 

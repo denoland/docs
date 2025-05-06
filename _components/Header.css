@@ -35,15 +35,6 @@ header {
   }
 }
 
-.services:hover {
-  background-color: hsl(var(--services-secondary));
-  border-color: hsl(var(--services));
-}
-
-.header-nav-link.services[data-active] {
-  color: hsl(var(--services));
-}
-
 @media (min-width: 1024px) {
   header {
     padding-left: 1rem;
@@ -53,6 +44,7 @@ header {
   }
   .header-nav-link[data-active] {
     color: hsl(var(--primary));
+    position: relative;
   }
 }
 
