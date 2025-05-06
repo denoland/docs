@@ -283,6 +283,90 @@ Rust crates useful. `web_sys` contains bindings to most of the Web APIs that are
 available in Deno, while `js_sys` provides bindings to JavaScript's standard,
 built-in objects.
 
+## Using wasmbuild for Rust WebAssembly in Deno
+
+[wasmbuild](https://jsr.io/@deno/wasmbuild) is an official Deno tool that
+simplifies working with Rust and WebAssembly in Deno projects. It automates the
+process of compiling Rust code to WebAssembly and generating TypeScript
+bindings, making it easy to call Rust functions from JavaScript.
+
+To use wasmbuild, you first need to install it:
+
+```sh
+deno add jsr:@deno/wasmbuild
+```
+
+You can either scaffold out out starter project with
+
+```sh
+deno task wasmbuild new
+```
+
+or create a basic project structure with a Rust crate and a JavaScript file:
+
+```sh
+my-project/
+├── src/
+│   └── lib.rs
+├── Cargo.toml
+└── main.ts
+```
+
+In your `lib.rs` file, define the functions you want to expose to JavaScript:
+
+```rust
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+#[wasm_bindgen]
+pub fn greet(name: &str) -> String {
+    format!("Hello, {}!", name)
+}
+```
+
+In your `Cargo.toml`, include the necessary dependencies:
+
+```toml
+[package]
+name = "my-wasm-lib"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+```
+
+Run wasmbuild to build your Rust code:
+
+```sh
+deno task wasmbuild
+```
+
+This command will compile your Rust code to WebAssembly and generate TypeScript
+bindings in the `./lib` directory.
+
+Now you can import and use your Rust functions in your `main.ts`:
+
+```ts
+import { add, greet } from "./lib/my-wasm-lib.js";
+
+console.log(add(1, 2)); // 3
+console.log(greet("Deno")); // "Hello, Deno!"
+```
+
+wasmbuild generates TypeScript definitions for your Rust functions, providing
+full type checking. The generated JavaScript can be used with bundlers like
+esbuild. Generated files can be committed directly to source control for easy
+deployment, and wasmbuild can watch your source files and rebuild when changes
+are detected.
+
 ## Optimization
 
 For production builds you can perform optimizations on WebAssembly binaries. If
