@@ -3,7 +3,6 @@ export default function (data: Lume.Data) {
   const currentUrl = data.currentUrl.replace(/\/$/, "");
   const isReference = currentUrl.startsWith("/api/");
   const isDenoAPI = currentUrl.startsWith("/api/deno/");
-  const hasSecondaryNav = data.secondaryNavData?.length !== undefined;
 
   // Reference page nav has no heirarchy and a different data names
   if (isReference) {
