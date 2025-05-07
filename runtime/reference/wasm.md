@@ -293,8 +293,7 @@ bindings, making it easy to call Rust functions from JavaScript.
 wasmbuild generates TypeScript definitions for your Rust functions, providing
 full type checking. The generated JavaScript can be used with bundlers like
 esbuild. Generated files can be committed directly to source control for easy
-deployment, and wasmbuild can watch your source files and rebuild when changes
-are detected.
+deployment.
 
 ## Optimization
 
