@@ -140,3 +140,29 @@ Find more at: https://jsdoc.app/
 Use
 [this guide](https://doc.rust-lang.org/rustdoc/how-to-write-documentation.html)
 for writing documentation comments in Rust code.
+
+## Profiling
+
+When contributing to performance-sensitive parts of the codebase, it's helpful
+to profile your changes to ensure they don't negatively impact performance or to
+verify your optimizations are effective.
+
+### Using Samply
+
+[Samply](https://github.com/mstange/samply) is a sampling profiler for macOS and
+Linux that works well with Deno. It produces flamegraphs that help you visualize
+where CPU time is being spent.
+
+```sh
+# Basic usage
+samply record -r 20000 deno run -A main.js
+```
+
+You can analyze the generated flamegraph to identify:
+
+- Hot spots where most CPU time is spent
+- Unexpected function calls
+- Potential areas for optimization
+
+When submitting performance-related contributions, including profiling data can
+help the team to understand and validate your improvements.
