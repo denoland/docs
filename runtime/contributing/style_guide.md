@@ -363,6 +363,11 @@ export function foo(): string {
 }
 ```
 
+Regular functions and arrow functions have different behavior with respect to
+hoisting, binding, arguments, and constructability. The `function` keyword
+clearly indicates the intent to define a function, improving legibility and
+tracibility while debugging.
+
 #### Error Messages
 
 User-facing error messages raised from JavaScript / TypeScript should be clear,
