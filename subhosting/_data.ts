@@ -1,4 +1,4 @@
-import { Sidebar } from "../types.ts";
+import { SecondaryNav, Sidebar } from "../types.ts";
 
 export const sidebar = [
   {
@@ -47,3 +47,13 @@ export const sidebar = [
 
 export const sectionTitle = "Subhosting";
 export const sectionHref = "/subhosting/manual/";
+export const secondaryNav = [
+  {
+    title: "Deploy",
+    href: "/deploy/manual/",
+  },
+  {
+    title: "Subhosting",
+    href: "/subhosting/manual/",
+  },
+] satisfies SecondaryNav;

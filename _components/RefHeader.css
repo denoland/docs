@@ -8,7 +8,7 @@
   z-index: 5;
 }
 
-.refheader-link[data-active] {
+.refheader-link[data-active="true"] {
   color: hsl(var(--primary));
 }
 
