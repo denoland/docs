@@ -82,7 +82,7 @@ currently waiting on the
 
 ## Data URL imports
 
-Deno supports dynamic importing of data URLs, which allows you to import content
+Deno supports importing of data URLs, which allows you to import content
 that isn't in a separate file or available via HTTP. This is useful for testing,
 prototyping, or when you need to programmatically generate modules.
 
