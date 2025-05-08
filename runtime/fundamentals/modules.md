@@ -83,7 +83,7 @@ currently waiting on the
 ## Data URL imports
 
 Deno supports importing of data URLs, which allows you to import content
-that isn't in a separate file or available via HTTP. This is useful for testing,
+that isn't in a separate file. This is useful for testing,
 prototyping, or when you need to programmatically generate modules.
 
 You can create modules on the fly using the `data:` URL scheme:
