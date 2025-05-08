@@ -117,8 +117,6 @@ TypeScript is also supported with `application/typescript`. This feature is
 particularly useful for testing modules in isolation and creeating mock modules
 during tests.
 
-Data URL imports must be used with dynamic `import()` calls and cannot be used
-with static `import` statements.
 
 ## Importing third party modules and libraries
 
