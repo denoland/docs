@@ -90,9 +90,7 @@ You can create modules on the fly using the `data:` URL scheme:
 
 ```ts
 // Import a simple JavaScript module from a data URL
-const module = await import(
-  "data:application/javascript;base64,ZXhwb3J0IGNvbnN0IG1lc3NhZ2UgPSAiSGVsbG8gZnJvbSBkYXRhIFVSTCI7"
-);
+import * as module from "data:application/javascript;base64,ZXhwb3J0IGNvbnN0IG1lc3NhZ2UgPSAiSGVsbG8gZnJvbSBkYXRhIFVSTCI7";
 console.log(module.message); // Outputs: Hello from data URL
 
 // You can also use the non-base64 format
