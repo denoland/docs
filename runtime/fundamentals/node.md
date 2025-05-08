@@ -551,6 +551,18 @@ import { Buffer } from "node:buffer";
 const buf = new Buffer(5, "0");
 ```
 
+For TypeScript users needing Node.js-specific types like `BufferEncoding`, these
+are available through the `NodeJS` namespace when using `@types/node`:
+
+```ts title="buffer-types.ts"
+/// <reference types="npm:@types/node" />
+
+// Now you can use NodeJS namespace types
+function writeToBuffer(data: string, encoding: NodeJS.BufferEncoding): Buffer {
+  return Buffer.from(data, encoding);
+}
+```
+
 Prefer using
 [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)
 or other
