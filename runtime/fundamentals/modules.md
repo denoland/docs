@@ -82,9 +82,9 @@ currently waiting on the
 
 ## Data URL imports
 
-Deno supports importing of data URLs, which allows you to import content
-that isn't in a separate file. This is useful for testing,
-prototyping, or when you need to programmatically generate modules.
+Deno supports importing of data URLs, which allows you to import content that
+isn't in a separate file. This is useful for testing, prototyping, or when you
+need to programmatically generate modules.
 
 You can create modules on the fly using the `data:` URL scheme:
 
@@ -116,7 +116,6 @@ For JavaScript modules, use `application/javascript` as the media type.
 TypeScript is also supported with `application/typescript`. This feature is
 particularly useful for testing modules in isolation and creeating mock modules
 during tests.
-
 
 ## Importing third party modules and libraries
 
