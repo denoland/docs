@@ -235,4 +235,5 @@ deno upgrade --version 1.0.1
 ## Building from source
 
 Information about how to build from source can be found in the
-[`Contributing`](/runtime/contributing/building_from_source/) chapter.
+[`Building from source`](https://github.com/denoland/deno/blob/main/.github/CONTRIBUTING.md#building-from-source)
+guide.
