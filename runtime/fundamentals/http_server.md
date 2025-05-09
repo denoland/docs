@@ -302,6 +302,12 @@ The server will start and display a message in the console. Open your browser
 and navigate to [http://localhost:8000/](http://localhost:8000/) to see the
 user-agent information.
 
+The
+[`Deno.ServeDefaultExport`](https://docs.deno.com/api/deno/~/Deno.ServeDefaultExport)
+interface defines the structure for default exports that can be used with the
+`deno serve` command. To ensure your code is type-checked properly, make sure to
+add `satisfies Deno.ServeDefaultExport` to the `export default { ... }`.
+
 ## Building on these examples
 
 You will likely want to expand on these examples to create more complex servers.
