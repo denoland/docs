@@ -424,65 +424,37 @@ creating mocks.
 
 ### Basic Mocking
 
-For simple cases, you can override global or imported objects directly:
+You can create simple mocks by
+[replacing functions or objects with your own
+implementations](/examples/mocking_tutorial/). This allows you to control the
+behavior of dependencies and test how your code interacts with them.
 
 ```ts
-// database.ts
-export async function getUserFromDB(id: string) {
-  // In reality, this would connect to a database
-  // For this example, we'll just simulate an async operation
-  return { id, name: "User " + id };
-}
+// Example of a module with a function we want to mock
+const api = {
+  fetchData: async () => {
+    const response = await fetch("https://api.example.com/data");
+    return response.json();
+  },
+};
 
-// service.ts
-import { getUserFromDB } from "./database.ts";
+// In your test file
+Deno.test("basic mocking example", async () => {
+  // Store the original function
+  const originalFetchData = api.fetchData;
 
-export async function getUserDetails(id: string) {
-  const user = await getUserFromDB(id);
-  return {
-    ...user,
-    formattedName: user.name.toUpperCase(),
-    timestamp: new Date().toISOString(),
-  };
-}
-
-// service_test.ts
-import { assertEquals } from "jsr:@std/assert";
-import { getUserDetails } from "./service.ts";
-import * as db from "./database.ts";
-
-Deno.test("getUserDetails formats the name correctly", async () => {
-  // Replace the real implementation with a mock
-  const originalGetUserFromDB = db.getUserFromDB;
-
-  // Create a mock that returns a predictable result
-  db.getUserFromDB = async (id: string) => {
-    return { id, name: "Test User" };
+  // Replace with mock implementation
+  api.fetchData = async () => {
+    return { id: 1, name: "Test Data" };
   };
 
   try {
-    // Mock the Date object to return a fixed timestamp
-    const originalDate = globalThis.Date;
-    const fixedDate = new Date("2023-01-01T12:00:00Z");
-    globalThis.Date = class extends originalDate {
-      constructor() {
-        super();
-        return fixedDate;
-      }
-    } as DateConstructor;
-
-    const result = await getUserDetails("123");
-
-    assertEquals(result, {
-      id: "123",
-      name: "Test User",
-      formattedName: "TEST USER",
-      timestamp: "2023-01-01T12:00:00.000Z",
-    });
+    // Test using the mock
+    const result = await api.fetchData();
+    assertEquals(result, { id: 1, name: "Test Data" });
   } finally {
-    // Restore the original implementations
-    db.getUserFromDB = originalGetUserFromDB;
-    globalThis.Date = originalDate;
+    // Restore the original function
+    api.fetchData = originalFetchData;
   }
 });
 ```
