@@ -72,8 +72,10 @@
     "npm:jose@5.9.6": "5.9.6",
     "npm:markdown-it-anchor@9": "9.2.0_@types+markdown-it@14.1.2_markdown-it@14.1.0",
     "npm:markdown-it-attrs@4.2.0": "4.2.0_markdown-it@14.1.0",
+    "npm:markdown-it-container@*": "4.0.0",
     "npm:markdown-it-deflist@3.0.0": "3.0.0",
     "npm:markdown-it-emoji@3": "3.0.0",
+    "npm:markdown-it@*": "14.1.0",
     "npm:markdown-it@14.1.0": "14.1.0",
     "npm:meriyah@6.0.3": "6.0.3",
     "npm:mongodb@6.1.0": "6.1.0",
@@ -1689,6 +1691,9 @@
       "dependencies": [
         "markdown-it"
       ]
+    },
+    "markdown-it-container@4.0.0": {
+      "integrity": "sha512-HaNccxUH0l7BNGYbFbjmGpf5aLHAMTinqRZQAEQbMr2cdD3z91Q6kIo1oUn1CQndkT03jat6ckrdRYuwwqLlQw=="
     },
     "markdown-it-deflist@3.0.0": {
       "integrity": "sha512-OxPmQ/keJZwbubjiQWOvKLHwpV2wZ5I3Smc81OjhwbfJsjdRrvD5aLTQxmZzzePeO0kbGzAo3Krk4QLgA8PWLg=="
