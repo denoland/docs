@@ -438,7 +438,7 @@ it("should fetch user data asynchronously", async () => {
 ```
 
 🦕 By following the BDD principles and practices outlined in this tutorial, you
-can build more reliable software and solidify your resoning about the 'business
+can build more reliable software and solidify your reasoning about the 'business
 logic' of your code.
 
 Remember that BDD is not just about the syntax or tools but about the
