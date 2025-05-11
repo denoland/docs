@@ -222,7 +222,7 @@ Calculator
 ok | 11 passed | 0 failed (234ms)
 ```
 
-## Organizing tests with dested describe blocks
+## Organizing tests with nested describe blocks
 
 One of the powerful features of BDD is the ability to nest `describe` blocks,
 which helps organize tests hierarchically. In the calculator example, we grouped
