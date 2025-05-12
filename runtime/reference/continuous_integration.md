@@ -146,7 +146,7 @@ can be preserved between workflows by setting the `DENO_DIR` environment
 variable and adding a caching step to the workflow:
 
 ```yaml
-# Set DENO_DIR to the cache directory on the runner.
+# Set DENO_DIR to the temp directory on the runner
 env:
   DENO_DIR: ${{ runner.temp }}/.cache/deno
 
