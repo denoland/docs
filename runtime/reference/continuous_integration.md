@@ -148,7 +148,7 @@ variable and adding a caching step to the workflow:
 ```yaml
 # Set DENO_DIR to the cache directory on the runner.
 env:
-  DENO_DIR: ${{ env.HOME }}/.cache/deno
+  DENO_DIR: ${{ runner.temp }}/.cache/deno
 
 steps:
   - name: Cache Deno dependencies
