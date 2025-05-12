@@ -172,12 +172,16 @@ lockfile, then rename that key to a hardcoded value.
 To demonstrate, let's say you have a project that uses the logger from
 [`@std/log`](https://jsr.io/@std/log):
 
-```ts
-import * as log from "jsr:@std/log@0.224.5";
+```json, title="deno.json"
+{
+  "imports": {
+    "@std/log": "jsr:@std/log@0.224.5"
+  }
+}
 ```
 
-In order to increment this version, you can update the `import` statement and
-then reload the cache and update the lockfile locally:
+In order to increment this version, you can update the dependency and then
+reload the cache and update the lockfile locally:
 
 ```console
 deno install --reload --frozen=false
