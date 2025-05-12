@@ -8,8 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      DENO_DIR: ${{ env.HOME }}/.cache/deno
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.DENO_DIR }}
+          key: ${{ hashFiles('deno.lock') }}
       - uses: denoland/setup-deno@v2
 
       - run: deno fmt --check

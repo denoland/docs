@@ -146,16 +146,17 @@ can be preserved between workflows by setting the `DENO_DIR` environment
 variable and adding a caching step to the workflow:
 
 ```yaml
-# Set DENO_DIR to an absolute or relative path on the runner.
+# Set DENO_DIR to the cache directory on the runner.
 env:
-  DENO_DIR: my_cache_directory
+  DENO_DIR: ${{ env.HOME }}/.cache/deno
 
 steps:
   - name: Cache Deno dependencies
     uses: actions/cache@v4
     with:
       path: ${{ env.DENO_DIR }}
-      key: my_cache_key
+      # bust the cache when the lockfile changes
+      key: ${{ hashFiles('deno.lock') }}
 ```
 
 At first, when this workflow runs the cache is still empty and commands like
@@ -163,23 +164,10 @@ At first, when this workflow runs the cache is still empty and commands like
 the contents of `DENO_DIR` are saved and any subsequent runs can restore them
 from cache instead of re-downloading.
 
-There is still an issue in the workflow above: at the moment the name of the
-cache key is hardcoded to `my_cache_key`, which is going to restore the same
-cache every time, even if one or more dependencies are updated. This can lead to
-older versions being used in the pipeline even though you have updated some
-dependencies. The solution is to generate a different key each time the cache
-needs to be updated, which can be achieved by using a lockfile and by using the
-`hashFiles` function provided by GitHub Actions:
-
-```yaml
-key: ${{ hashFiles('deno.lock') }}
-```
-
-To make this work you will also need a have a lockfile in your Deno project,
-which is discussed in detail
-[here](/runtime/fundamentals/modules/#integrity-checking-and-lock-files). Now,
-if the contents of `deno.lock` are changed, a new cache will be made and used in
-subsequent pipeline runs thereafter.
+Note that the above setup requires a
+[lockfile](/runtime/fundamentals/modules/#integrity-checking-and-lock-files)
+which will bust the cache when the lockfile changes. If you're not using a
+lockfile, then rename that key to a hardcoded value.
 
 To demonstrate, let's say you have a project that uses the logger from
 [`@std/log`](https://jsr.io/@std/log):
@@ -192,7 +180,7 @@ In order to increment this version, you can update the `import` statement and
 then reload the cache and update the lockfile locally:
 
 ```console
-deno install --reload --lock=deno.lock --frozen=false --entrypoint deps.ts
+deno install --reload --frozen=false
 ```
 
 You should see changes in the lockfile's contents after running this. When this
