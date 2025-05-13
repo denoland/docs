@@ -21,7 +21,7 @@ export default function Header({ currentUrl }: { currentUrl: string }) {
                   data-active={currentUrl.includes("/api/web")}
                   href="/api/web"
                 >
-                  Deno APIs
+                  Web APIs
                 </a>
               </li>
               <li>
@@ -30,7 +30,7 @@ export default function Header({ currentUrl }: { currentUrl: string }) {
                   data-active={currentUrl.includes("/api/node")}
                   href="/api/node"
                 >
-                  Deno APIs
+                  Node APIs
                 </a>
               </li>
             </ul>
