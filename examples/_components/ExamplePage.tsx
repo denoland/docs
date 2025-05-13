@@ -18,17 +18,19 @@ export default function ExamplePage({ example }: Props) {
 
   return (
     <div data-content="example">
-      <div class="flex flex-col gap-4 md:flex-row justify-between items-start md:items-center relative">
-        <a
-          href={url}
-          className="blocklink absolute top-[-4rem] right-0"
-        >
-          Edit on Github
-        </a>
+      <div class="relative">
+        <div class="absolute top-[-4rem] right-0">
+          <a
+            href={url}
+            className="blocklink "
+          >
+            Edit on Github
+          </a>
+        </div>
         <div class="flex flex-col gap-2">
           {example.parsed.description && (
             <p
-              className="max-w-prose"
+              className="max-w-[100%]"
               dangerouslySetInnerHTML={{
                 __html: example.parsed.description,
               }}
