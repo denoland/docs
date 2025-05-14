@@ -108,6 +108,7 @@ site.copy("static", ".");
 site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
+site.copy("deploy_early_access/images");
 site.copy("deploy/kv/manual/images");
 site.copy("deploy/tutorials/images");
 site.copy("deploy/kv/tutorials/images");
