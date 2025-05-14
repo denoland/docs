@@ -186,8 +186,8 @@ down all timelines that this build is deployed to are shown, such as
 `Production`, or `Git Branch` timelines.
 
 You can also see how the build was triggered on this page. This can either be
-`manual action`, for builds triggered through the UI, or `GitHub repo` for builds
-triggered through the GitHub integration.
+`manual action`, for builds triggered through the UI, or `GitHub repo` for
+builds triggered through the GitHub integration.
 
 You can view the application through either the preview URL, or any of the other
 URLs shown in the timelines list.
