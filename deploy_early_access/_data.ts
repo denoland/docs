@@ -15,7 +15,7 @@ export const sidebar = [
       },
       {
         title: "Usage and Limitations",
-        href: "/deploy_early_access/usage_and_limitations/",
+        href: "/deploy_early_access/usage/",
       },
       {
         title: "Support",
