@@ -5,8 +5,8 @@ description: "Step-by-step guide to creating and configuring your first Deno Dep
 
 :::caution
 
-⚠️ Deno Deploy EA is in private access. You must be explicitly granted
-permission to use it, otherwise you will be unable to visit the new dashboard.
+Deno Deploy EA is in private access. You must be explicitly granted permission
+to use it, otherwise you will be unable to visit the new dashboard.
 
 :::
 

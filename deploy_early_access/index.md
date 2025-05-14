@@ -3,6 +3,13 @@ title: "Deno Deploy Early Access"
 description: "Guide to Deno Deploy Early Access features, comparison with Deno Deploy Classic, and getting started instructions for deployment."
 ---
 
+:::info
+
+You are viewing the documentation for Deploy Early Access. Looking for Deploy
+Classic documentation? [View it here](/deploy/).
+
+:::
+
 Deno Deploy Early Access is a complete revamp of the original Deno Deploy,
 featuring:
 
