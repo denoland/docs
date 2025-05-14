@@ -10,8 +10,16 @@ export const sidebar = [
     href: "/deploy_early_access/getting_started/",
     items: [
       {
-        title: "Reference",
+        title: "Reference guide",
         href: "/deploy_early_access/reference/",
+      },
+      {
+        title: "Usage and Limitations",
+        href: "/deploy_early_access/usage_and_limitations/",
+      },
+      {
+        title: "Support",
+        href: "/deploy_early_access/support/",
       },
     ],
   },
