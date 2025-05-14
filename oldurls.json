@@ -77,5 +77,6 @@
   "/examples/writing-tests": "/examples/writing_tests",
   "/api/deno/": "/api/deno/~/Deno",
   "/api/web/": "/api/web/all_symbols",
-  "/runtime/contributing/profiling/": "/runtime/contributing#profiling"
+  "/runtime/contributing/profiling/": "/runtime/contributing#profiling",
+  "/runtime/manual/advanced/jsx_dom/jsdom": "/runtime/reference/jsx/"
 }
