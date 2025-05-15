@@ -18,7 +18,7 @@ featuring:
 - Integrated build system
 - Significantly enhanced underlying infrastructure
 
-<a href="app.deno.com" class="docs-cta runtime-cta">Try out Deploy Early
+<a href="https://app.deno.com" class="docs-cta runtime-cta">Try out Deploy Early
 Access</a>
 
 Deno Deploy EA comes with a new dashboard at
