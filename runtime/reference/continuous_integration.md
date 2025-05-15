@@ -180,7 +180,7 @@ You should see changes in the lockfile's contents after running this. When this
 is committed and run through the pipeline, you should then see a new cache and
 using it in any runs that follow.
 
-By default, the cache is automatically keyed by;
+By default, the cache is automatically keyed by:
 
 - the github
   [job_id](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_id)
