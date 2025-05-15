@@ -36,7 +36,9 @@ and preview URLs for projects in that organization. For example, an org with the
 slug `acme-inc` would have a default organization domain of `acme-inc.deno.net`.
 
 At this time, organizations cannot be deleted.
+
 ## Further docs coming soon
+
 ### Members
 
 - inviting members
