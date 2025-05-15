@@ -17,10 +17,9 @@ our regular service level agreements.
 
 :::
 
-At this time, the Deno company is already using Deno Deploy EA to host our own
-websites. As may imagine, we are putting significant care into avoiding any
-service interruptions, but as this is a new system, service interruptions can
-not always be avoided.**
+The Deno company is now using Deno Deploy EA to host our own
+websites, and are putting significant efforts into avoiding any
+service interruptions, but as this is a new system, minor service interruptions can not always be guaranteed.
 
 While Deno Deploy EA is in closed beta, we are not charging for usage of the
 platform. However, the
