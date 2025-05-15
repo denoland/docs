@@ -68,4 +68,4 @@ To begin using Deno Deploy Early Access:
 
 For detailed documentation on deploying specific frameworks or configuring your
 application, visit our
-[comprehensive guides](https://docs.deno.com/deploy/early-access).
+[guides and resources](/deploy/early-access).
