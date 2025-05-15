@@ -3,8 +3,7 @@ title: "Deno Deploy Early Access Usage Guidelines"
 description: "Important limitations, service level expectations, and terms of use for the Deno Deploy Early Access program."
 ---
 
-You should be aware of the following limitations when deciding to use Deno
-Deploy EA:
+As an early access product, Deno Deploy Early Access currently has a number of limitations you should be aware of before using it:
 
 - Pro account features do not extend to Deno Deploy EA yet.
 - CLI deployment, and deployment from GitHub Actions are not available at this
