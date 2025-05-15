@@ -80,7 +80,7 @@ Note: GitHub Actions has a known
 Windows-style line endings (CRLF). This may cause issues when running `deno fmt`
 in a pipeline with jobs that run on `windows`. To prevent this, configure the
 Actions runner to use Linux-style line endings before running the
-`actions/checkout@v3` step:
+`actions/checkout@v4` step:
 
 ```sh
 git config --system core.autocrlf false
