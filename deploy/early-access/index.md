@@ -46,7 +46,7 @@ left of the dashboard.
 | Queues                          | ⏳ Coming soon                 | ✅ Supported                                                                                                                            |
 | Cron                            | ⏳ Coming soon                 | ✅ Supported                                                                                                                            |
 | Deploy from GitHub              | ✅ Supported                   | ✅ Supported                                                                                                                            |
-| Deploy from CLI                 | ⏳ Work in progress            | ✅ Supported                                                                                                                            |
+| Deploy from CLI                 | ⏳ Coming soon            | ✅ Supported                                                                                                                            |
 | Instant Rollback                | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Logs                            | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Tracing                         | ✅ Supported                   | ❌ Not supported                                                                                                                        |
