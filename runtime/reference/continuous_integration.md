@@ -155,13 +155,8 @@ steps:
 
 At first, when this workflow runs the cache is still empty and commands like
 `deno test` will still have to download dependencies, but when the job succeeds
-the contents of `DENO_DIR` are saved and any subsequent runs can restore them
-from cache instead of re-downloading.
-
-Note that the above setup requires a
-[lockfile](/runtime/fundamentals/modules/#integrity-checking-and-lock-files)
-which will bust the cache when the lockfile changes. If you're not using a
-lockfile, then rename that key to a hardcoded value.
+the contents of cached dependencies are saved and any subsequent runs can
+restore them from cache instead of re-downloading.
 
 To demonstrate, let's say you have a project that uses the logger from
 [`@std/log`](https://jsr.io/@std/log):
@@ -182,18 +177,24 @@ deno install --reload --frozen=false
 ```
 
 You should see changes in the lockfile's contents after running this. When this
-is committed and run through the pipeline, you should then see the `hashFiles`
-function saving a new cache and using it in any runs that follow.
+is committed and run through the pipeline, you should then see a new cache and
+using it in any runs that follow.
 
-#### Clearing the cache
+By default, the cache is automatically keyed by;
 
-Occasionally you may run into a cache that has been corrupted or malformed,
-which can happen for various reasons. It is possible to clear a cache from the
-GitHub Actions UI, or you can simply change the name of the cache key. A
-practical way of doing so without having to forcefully change your lockfile is
-to add a variable to the cache key name, which can be stored as a GitHub secret
-and can be changed if a new cache is needed:
+- the github
+  [job_id](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_id)
+- the runner os and architecture
+- a hash of the `deno.lock` files in the project
+
+It is possible to customize the default hash
+(`${{ hashFiles('**/deno.lock') }}`) used as part of the cache key via the
+`cache-hash` input.
 
 ```yaml
-key: ${{ secrets.CACHE_VERSION }}-${{ hashFiles('deno.lock') }}
+- uses: denoland/setup-deno@v2
+  with:
+    # setting `cache-hash` implies `cache: true` and will replace
+    # the default cache-hash of `${{ hashFiles('**/deno.lock') }}`
+    cache-hash: ${{ hashFiles('**/deno.json') }}
 ```
