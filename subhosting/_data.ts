@@ -53,10 +53,6 @@ export const secondaryNav = [
     href: "/deploy/manual/",
   },
   {
-    title: "Deploy Early Access",
-    href: "/deploy_early_access/",
-  },
-  {
     title: "Subhosting",
     href: "/subhosting/manual/",
   },

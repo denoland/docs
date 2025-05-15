@@ -20,7 +20,6 @@ import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 import { log } from "lume/core/utils/log.ts";
 import anchor from "npm:markdown-it-anchor@9";
-import { full as emoji } from "npm:markdown-it-emoji@3";
 import admonitionPlugin from "./markdown-it/admonition.ts";
 import codeblockCopyPlugin from "./markdown-it/codeblock-copy.ts";
 import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
@@ -63,7 +62,6 @@ const site = lume(
     markdown: {
       plugins: [
         replacerPlugin,
-        emoji,
         admonitionPlugin,
         codeblockCopyPlugin,
         codeblockTitlePlugin,
@@ -108,7 +106,7 @@ site.copy("static", ".");
 site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
-site.copy("deploy_early_access/images");
+site.copy("deploy/images");
 site.copy("deploy/kv/manual/images");
 site.copy("deploy/tutorials/images");
 site.copy("deploy/kv/tutorials/images");

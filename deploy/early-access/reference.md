@@ -24,8 +24,12 @@ members and appears in the organization dropdown in both Deno Deploy EA and Deno
 Deploy Classic. The organization slug is used for the default domain of the
 organization.
 
-:::caution Organizations cannot currently be renamed, nor can their slug be
-altered after creation. :::
+:::caution
+
+Organizations cannot currently be renamed, nor can their slug be altered after
+creation.
+
+:::
 
 Every organization has a default domain that is used for production, git branch,
 and preview URLs for projects in that organization. For example, an org with the
