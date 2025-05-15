@@ -55,7 +55,6 @@ left of the dashboard.
 | Regions                         | 2                              | 6                                                                                                                                       |
 | Self hostable regions           | ✅ Supported                   | ❌ Not supported                                                                                                                        |
 
-**Legend**: ✅ Fully supported | 🟠 Partially supported | ❌ Not supported | ⏳
 Coming soon
 
 ## Getting Started
