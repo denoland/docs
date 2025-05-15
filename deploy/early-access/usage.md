@@ -12,8 +12,8 @@ As an early access product, Deno Deploy Early Access currently has a number of l
 
 :::info
 
-Deno Deploy EA is an early access product, and as such is not covered by our
-regular service level agreements yet.
+Deno Deploy EA is an early access product, and as such is not currently covered by
+our regular service level agreements.
 
 :::
 
