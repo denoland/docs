@@ -29,7 +29,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x # Run with latest stable Deno.
@@ -142,21 +142,15 @@ speed things up is to cache dependencies so that they do not need to be
 downloaded anew.
 
 Deno stores dependencies locally in a cache directory. In a pipeline the cache
-can be preserved between workflows by setting the `DENO_DIR` environment
-variable and adding a caching step to the workflow:
+can be preserved between workflows by turning on the `cache: true` option on
+`denoland/setup-deno`:
 
 ```yaml
-# Set DENO_DIR to the temp directory on the runner
-env:
-  DENO_DIR: ${{ runner.temp }}/.cache/deno
-
 steps:
-  - name: Cache Deno dependencies
-    uses: actions/cache@v4
+  - uses: actions/checkout@v4
+  - uses: denoland/setup-deno@v2
     with:
-      path: ${{ env.DENO_DIR }}
-      # bust the cache when the lockfile changes
-      key: ${{ hashFiles('deno.lock') }}
+      cache: true
 ```
 
 At first, when this workflow runs the cache is still empty and commands like

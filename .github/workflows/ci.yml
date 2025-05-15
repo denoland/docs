@@ -17,6 +17,8 @@ jobs:
           path: ${{ env.DENO_DIR }}
           key: ${{ hashFiles('deno.lock') }}
       - uses: denoland/setup-deno@v2
+        with:
+          cache: true
 
       - run: deno fmt --check
       - run: deno task test
