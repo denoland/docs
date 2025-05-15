@@ -42,11 +42,11 @@ left of the dashboard.
 | Environment Variables           | ✅ Different dev/prod env vars | 🟠 One set of env vars for all deployments                                                                                              |
 | CDN caching                     | ✅ Supported                   | ❌ Not supported                                                                                                                        |
 | Web Cache API                   | ✅ Supported                   | ✅ Supported                                                                                                                            |
-| Automatic Deno KV               | ⏳ Coming soon                 | ✅ Supported                                                                                                                            |
-| Queues                          | ⏳ Coming soon                 | ✅ Supported                                                                                                                            |
-| Cron                            | ⏳ Coming soon                 | ✅ Supported                                                                                                                            |
+| Databases                       | ⏳ Coming soon                 | 🟠 Deno KV                                                                                                                              |
+| Queues                          | ❌ Not supported               | ✅ Supported                                                                                                                            |
+| Cron                            | ❌ Not supported               | ✅ Supported                                                                                                                            |
 | Deploy from GitHub              | ✅ Supported                   | ✅ Supported                                                                                                                            |
-| Deploy from CLI                 | ⏳ Coming soon            | ✅ Supported                                                                                                                            |
+| Deploy from CLI                 | ⏳ Coming soon                 | ✅ Supported                                                                                                                            |
 | Instant Rollback                | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Logs                            | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Tracing                         | ✅ Supported                   | ❌ Not supported                                                                                                                        |
@@ -67,5 +67,4 @@ To begin using Deno Deploy Early Access:
 4. Connect your GitHub repository or deploy directly from the dashboard
 
 For detailed documentation on deploying specific frameworks or configuring your
-application, visit our
-[guides and resources](/deploy/early-access).
+application, visit our [guides and resources](/deploy/early-access).
