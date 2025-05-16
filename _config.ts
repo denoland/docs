@@ -116,6 +116,7 @@ site.copy("runtime/reference/images");
 site.copy("runtime/contributing/images");
 site.copy("examples/tutorials/images");
 site.copy("deploy/manual/images");
+site.copy("deploy/early-access/images");
 site.copy("deno.json");
 site.copy("go.json");
 site.copy("oldurls.json");
