@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
+        with:
+          deno-version: "2.3.1"
 
       - run: deno fmt --check
       - run: deno task test
