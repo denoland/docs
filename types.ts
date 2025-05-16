@@ -1,8 +1,52 @@
-export type Sidebar = SidebarItem[];
+export type Sidebar = SidebarSection[];
 export type Path = string;
+
+export type NavData = {
+  name: string;
+  href: string;
+  style?: string;
+};
+
+export type SecondaryNav = SecondaryNavItem[];
+
+export interface SecondaryNavItem {
+  title: string;
+  href: string;
+  items?: NavData[];
+}
+
+export interface SidebarSection {
+  title?: string;
+  href?: string;
+  items?: SidebarItem[];
+}
+
+export interface SidebarCategory {
+  label?: string;
+  items?: SidebarItem[];
+}
+
+export interface SidebarDoc {
+  label?: string;
+  id?: string;
+}
+
+export interface SidebarLink {
+  label: string;
+  href?: string;
+  id?: string;
+}
+
+export interface SidebarSectionProps {
+  section: SidebarSection;
+  search: import("lume/core/searcher.ts").default;
+  url: string;
+  headerPath: string;
+}
 
 export interface SidebarItem {
   title: string;
+  label?: string;
   href?: string;
   items?: SidebarItem[];
   externalUrl?: string;
@@ -37,19 +81,4 @@ export interface GoogleSheetsUpdateResponse {
     updatedColumns: number;
     updatedCells: number;
   };
-}
-
-export type NavData = { name: string; href: string; style?: string };
-
-export type SecondaryNav = SecondaryNavItem[];
-
-export interface SecondaryNavItem {
-  title: string;
-  href: string;
-  items?: NavData[];
-}
-
-export interface SecondaryNavProps {
-  secondaryNav: SecondaryNav[];
-  currentUrl: string;
 }
