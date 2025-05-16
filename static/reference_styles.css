@@ -710,8 +710,14 @@ ul.namespaceItemContentSubItems {
   width: 1.25rem;
   height: 1.25rem;
   font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
-    Courier New, monospace;
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    Liberation Mono,
+    Courier New,
+    monospace;
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.25rem;
