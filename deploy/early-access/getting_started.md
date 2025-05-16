@@ -17,6 +17,7 @@ organization. You can do this by visiting [app.deno.com](http://app.deno.com).
 
 Upon first visiting the dashboard, you’ll be greeted by the Deno Deploy EA
 organization creation screen:
+
 ![The Deno Deploy EA organization creation screen.](./images/create_org.png)
 
 You can not currently create an organization that has the same slug as any
@@ -33,6 +34,7 @@ can navigate to the organization settings, and the custom domains list which
 manages the custom domains attached to your organization.
 
 To create an app, press the `+ New App` button:
+
 ![Screenshot of deploy app creation screen](./images/create_app.png)
 
 An application is a single deployed web service with one build configuration,
