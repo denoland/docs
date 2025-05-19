@@ -39,7 +39,7 @@ deno fmt
 You could even pipe in a string or file:
 
 ```sh
-echo ' console.log(    5  );' | deno fmt
+echo ' console.log(    5  );' | deno fmt -
 ## console.log(5);
 ```
 
@@ -48,8 +48,8 @@ formatted by `deno fmt`. If it's not formatted, it will return a nonzero exit
 code:
 
 ```sh
-echo 'deno fmt --check
-## error: Found 1 not formatted file in 1 files
+echo ' console.log(    5  );' | deno fmt --check -
+## Not formatted stdin
 ```
 
 This is useful in CI where you want to check if the code is formatted properly.
