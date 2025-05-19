@@ -105,9 +105,11 @@ const foo = [
 `deno fmt` can also reduce the escaped characters in your strings. For example,
 if you have a string with escaped quotes, `deno fmt` will remove them:
 
+<!-- deno-fmt-ignore-start -->
 ```typescript
-console.log('hello "world"');
+console.log("hello \"world\"");
 ```
+<!-- deno-fmt-ignore-end -->
 
 will be formatted to:
 
