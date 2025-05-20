@@ -69,9 +69,9 @@ export interface TableOfContentsItem {
 export interface FeedbackSubmission {
   path: string;
   sentiment: "yes" | "no";
-  id?: string | null;
   comment?: string;
-  contact?: string;
+  contact?: string; // Now represents GitHub username instead of email
+  id?: string | null;
 }
 
 export interface GoogleSheetsUpdateResponse {

@@ -102,39 +102,41 @@ export default function Feedback({ file }: { file: string | undefined }) {
                   id="feedback-more"
                   class="hidden w-full overflow-hidden"
                 >
-                  <p class="font-semibold !mt-2 !mb-4">
-                    Thank you! Feedback received.{" "}
-                    <span aria-hidden="true">✅</span>
+                  <p class="font-semibold !mt-2">
+                    What can we do to improve this page?
                   </p>
                   <div class="space-y-1">
-                    <label for="feedback-comment">
-                      Any additional comments? (<i>optional</i>)
-                    </label>
                     <textarea
                       class="block w-full p-2 border border-foreground-tertiary dark:bg-background-primary rounded"
                       name="feedback-comment"
                       id="feedback-comment"
+                      placeholder="Your feedback will be posted as an issue in the denoland/docs GitHub repo"
                     >
                     </textarea>
                   </div>
                   <div class="space-y-1">
                     <label for="feedback-contact">
-                      Email address (<i>optional</i>)
+                      GitHub username (<i>optional</i>)
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       class="block w-full p-2 border border-foreground-tertiary dark:bg-background-primary rounded"
                       name="feedback-contact"
                       id="feedback-contact"
                       aria-invalid="false"
+                      placeholder="username"
                       value=""
                     />
+                    <p class="text-xs text-gray-600 dark:text-gray-400 italic mt-1">
+                      If provided, you'll be @mentioned in the created GitHub
+                      issue
+                    </p>
                   </div>
                   <button
                     type="submit"
                     class="btn bg-green-400 dark:bg-green-600 mt-4"
                   >
-                    Send additional feedback
+                    Send us feedback
                   </button>
                 </div>
               </div>
