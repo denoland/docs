@@ -1,56 +1,104 @@
-import { Client } from "npm:@notionhq/client";
+import { Octokit } from "npm:@octokit/core";
 import type { FeedbackSubmission } from "../../types.ts";
 
-// Collecting entries to an internal Notion page
-const apiKey = Deno.env.get("NOTION_FEEDBACK_API_KEY");
-const databaseID = Deno.env.get("NOTION_FEEDBACK_DATABASE_ID");
+// GitHub API configuration
+const githubToken = Deno.env.get("GITHUB_FEEDBACK_TOKEN");
+const githubRepo = Deno.env.get("GITHUB_FEEDBACK_REPO") || "denoland/docs";
+const [owner, repo] = githubRepo.split("/");
 
-// Check if the API key and database ID are set
-const enableFeedbackMiddleware = apiKey && databaseID;
+// Check if the API key is set
+const enableFeedbackMiddleware = !!githubToken;
 
-// Connect to Notion
-const notion = new Client({ auth: apiKey });
+// Create Octokit instance
+const octokit = new Octokit({
+  auth: githubToken,
+});
 
-// Insert data into Notion
+// Create GitHub issue for feedback only when comments are provided
 const insertData = async (
   { path, sentiment, comment, contact, id }: FeedbackSubmission,
 ) => {
-  // Assemble the properties to send to the API
-  type Properties = {
-    "Docs Url": { title: { text: { content: string } }[] };
-    "Helpful?": { rich_text: { text: { content: "yes" | "no" } }[] };
-    Feedback?: { rich_text: { text: { content: string } }[] };
-    Email?: { email: string };
-  };
-
-  const properties: Properties = {
-    "Docs Url": { "title": [{ "text": { "content": path } }] },
-    "Helpful?": { "rich_text": [{ "text": { "content": sentiment } }] },
-  };
-
-  if (comment) {
-    properties["Feedback"] = {
-      "rich_text": [{ "text": { "content": comment } }],
-    };
-  }
-  if (contact) {
-    properties["Email"] = { "email": contact };
+  // Record basic sentiment without creating GitHub issue if no comment
+  if (!comment || comment.trim() === "") {
+    console.log(
+      `Feedback received for ${path}: ${sentiment} (no comment, no GitHub issue created)`,
+    );
+    return { id: null }; // Return null ID as no GitHub issue was created
   }
 
-  // update to or create the record
+  // If comment exists, create or update GitHub issue
   if (id) {
-    return await notion.pages.update({
-      page_id: id,
-      properties: properties,
-    });
+    // If an ID exists, it means we're updating an existing issue
+    const commentBody = `
+Additional feedback:
+${comment ? `\n> ${comment}` : "No additional comment provided"}
+${contact ? `\n**GitHub User:** @${contact}` : ""}
+`;
+
+    try {
+      const response = await octokit.request(
+        "POST /repos/{owner}/{repo}/issues/{issue_number}/comments",
+        {
+          owner,
+          repo,
+          issue_number: parseInt(id),
+          body: commentBody,
+          headers: {
+            "X-GitHub-Api-Version": "2022-11-28",
+          },
+        },
+      );
+
+      return { id };
+    } catch (error) {
+      console.error(`GitHub API error response (comment):`, error);
+      throw error;
+    }
   } else {
-    return await notion.pages.create({
-      parent: {
-        type: "database_id",
-        database_id: databaseID || "",
-      },
-      properties: properties,
-    });
+    // Create a new issue
+    const title = `Feedback: ${path} - ${
+      sentiment === "yes" ? "Positive" : "Needs Improvement"
+    }`;
+
+    let body = `
+## Documentation Feedback
+
+**Path:** ${path}
+**Helpful:** ${sentiment === "yes" ? "Yes ✅" : "No ❌"}
+
+${comment ? `**Feedback:**\n> ${comment}` : "No additional comment provided"}
+${contact ? `\n**GitHub User:** @${contact}` : ""}
+
+---
+*This issue was automatically created from the documentation feedback system.*
+`;
+
+    try {
+      const response = await octokit.request(
+        "POST /repos/{owner}/{repo}/issues",
+        {
+          owner,
+          repo,
+          title,
+          body,
+          labels: [
+            "feedback",
+            sentiment === "yes" ? "positive" : "needs-improvement",
+          ],
+          headers: {
+            "X-GitHub-Api-Version": "2022-11-28",
+          },
+        },
+      );
+
+      console.log(
+        `Created GitHub issue #${response.data.number} for feedback on ${path}`,
+      );
+      return { id: response.data.number };
+    } catch (error) {
+      console.error(`GitHub API error response (issue):`, error);
+      throw error;
+    }
   }
 };
 
@@ -60,7 +108,7 @@ export default async function feedbackRequestHandler(
 ): Promise<Response> {
   if (!enableFeedbackMiddleware) {
     return new Response(
-      "Feedback API is not enabled - have you set the correct environment variables?",
+      "Feedback API is not enabled - have you set the GitHub token?",
       { status: 500 },
     );
   }
@@ -87,7 +135,11 @@ export default async function feedbackRequestHandler(
       id: id,
     });
 
-    console.log(response);
+    if (response.id) {
+      console.log("GitHub issue created/updated successfully");
+    } else {
+      console.log("Feedback recorded without GitHub issue");
+    }
 
     return new Response(
       JSON.stringify({
@@ -97,9 +149,12 @@ export default async function feedbackRequestHandler(
       { status: 200 },
     );
   } catch (error) {
+    console.error("GitHub issue creation failed:", error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
     return new Response(
       JSON.stringify({
-        error: "Failed to insert data into Notion",
+        error: "Failed to create GitHub issue",
+        details: errorMessage,
       }),
       { status: 500 },
     );
