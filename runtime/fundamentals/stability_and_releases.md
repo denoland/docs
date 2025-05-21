@@ -39,7 +39,11 @@ Starting with Deno v2.1.0 (released in November 2024), Deno offers an LTS
 An LTS channel is a minor semver version that we maintain with only
 backwards-compatible bug fixes.
 
-![Deno long-term support schedule](./images/deno-lts-support.png)
+| LTS release version | LTS maintenance start | LTS maintenance end |
+| ------------------- | --------------------- | ------------------- |
+| v2.1                | Feb 1st, 2025         | Apr 30th, 2025      |
+| v2.2                | May 1st, 2025         | Oct 31st, 2025      |
+| v2.4                | Nov 1st, 2025         | Apr 30th, 2026      |
 
 We are initially keeping the LTS support window short while we refine the
 process. **LTS releases occur every six months**, with patch releases as needed
