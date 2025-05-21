@@ -25,7 +25,7 @@
     },
     "build:prod": {
       "description": "Build the entire site including expensive operations",
-      "command": "BUILD_TYPE=FULL deno run --env-file -A lume.ts"
+      "command": "BUILD_TYPE=FULL deno run --env-file -A lume.ts && deno task generate:llms"
     },
     "build:light": {
       "description": "Build the site without expensive operations",
@@ -44,6 +44,10 @@
     "serve:style": {
       "description": "Build, serve, and watch just the styles and styleguide",
       "command": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts"
+    },
+    "generate:llms": {
+      "description": "Generate LLM-friendly documentation files (llms.txt and llms-full.txt)",
+      "command": "deno run -A generate_llms_files.ts"
     }
   },
   "compilerOptions": {
