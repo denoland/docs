@@ -292,7 +292,7 @@ async function main() {
   const llmsTxt = generateLlmsTxt(files);
   await Deno.writeTextFile(join(staticDir, "llms.txt"), llmsTxt);
   console.log("Generated llms.txt in static directory");
-  
+
   // Generate llms-full.txt
   const llmsFullTxt = generateLlmsFullTxt(files);
   await Deno.writeTextFile(join(staticDir, "llms-full.txt"), llmsFullTxt);
