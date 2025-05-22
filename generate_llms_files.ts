@@ -2,6 +2,10 @@
 /**
  * This script generates llms.txt and llms-full.txt files for the Deno documentation,
  * following the llmstxt.org standard to create LLM-friendly documentation.
+ *
+ * By default, files are generated in the same directory as the generation script. When running
+ * during the build process, files are generated in the _site directory so they can be served
+ * at the site's root.
  */
 
 import { walk } from "@std/fs";
@@ -270,19 +274,22 @@ function getSectionDescription(section: string): string {
   return descriptions[section] || "";
 }
 
-async function main() {
+async function main(outputDir?: string) {
   console.log("Generating LLM-friendly documentation files...");
 
   const files = await collectFiles();
   console.log(`Collected ${files.length} documentation files`);
 
-  // Ensure the static directory exists
-  const staticDir = join(ROOT_DIR, "static");
+  // Use the specified output directory or default to the static directory
+  const outDir = outputDir
+    ? join(ROOT_DIR, outputDir)
+    : join(ROOT_DIR, "static");
+
   try {
-    await Deno.stat(staticDir);
+    await Deno.stat(outDir);
   } catch (error) {
     if (error instanceof Deno.errors.NotFound) {
-      console.error("The static directory does not exist");
+      console.error(`The output directory ${outDir} does not exist`);
       Deno.exit(1);
     }
     throw error;
@@ -290,18 +297,28 @@ async function main() {
 
   // Generate llms.txt
   const llmsTxt = generateLlmsTxt(files);
-  await Deno.writeTextFile(join(staticDir, "llms.txt"), llmsTxt);
-  console.log("Generated llms.txt in static directory");
+  await Deno.writeTextFile(join(outDir, "llms.txt"), llmsTxt);
+  console.log(`Generated llms.txt in ${outDir}`);
 
   // Generate llms-full.txt
   const llmsFullTxt = generateLlmsFullTxt(files);
-  await Deno.writeTextFile(join(staticDir, "llms-full.txt"), llmsFullTxt);
-  console.log("Generated llms-full.txt in static directory");
+  await Deno.writeTextFile(join(outDir, "llms-full.txt"), llmsFullTxt);
+  console.log(`Generated llms-full.txt in ${outDir}`);
 
   console.log("Done!");
 }
 
 // Run the main function
 if (import.meta.main) {
-  main();
+  // Check if an output directory is specified as a command-line argument
+  const args = Deno.args;
+  const outputDir = args.length > 0 ? args[0] : undefined;
+  main(outputDir);
 }
+
+// Export functions for use in the site build process
+export default {
+  collectFiles,
+  generateLlmsTxt,
+  generateLlmsFullTxt,
+};
