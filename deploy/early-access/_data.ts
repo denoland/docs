@@ -23,4 +23,8 @@ export const sidebar = [
       },
     ],
   },
+  {
+    title: "Changelog",
+    href: "/deploy/early-access/changelog/",
+  },
 ] satisfies Sidebar;
