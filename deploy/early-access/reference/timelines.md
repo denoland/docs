@@ -2,6 +2,13 @@
 title: Timelines
 ---
 
+:::info
+
+You are viewing the documentation for Deploy Early Access. Looking for Deploy
+Classic documentation? [View it here](/deploy/).
+
+:::
+
 A timeline is a representation of the history of one branch of the application.
 Each timeline has a set of revisions, which are the individual items in the
 timeline. One of the revisions (usually the most recent one) is the "active"

@@ -2,6 +2,13 @@
 title: Environment Variables and Contexts
 ---
 
+:::info
+
+You are viewing the documentation for Deploy Early Access. Looking for Deploy
+Classic documentation? [View it here](/deploy/).
+
+:::
+
 In Deno Deploy EA, environment variables can be used to configure an application
 using some static values, such as API keys or database connection strings.
 
