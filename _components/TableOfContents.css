@@ -32,7 +32,8 @@
     display: none;
   }
 
-  .toc-link:focus, .toc-link:hover {
+  .toc-link:focus,
+  .toc-link:hover {
     color: hsl(var(--primary));
   }
 
@@ -57,6 +58,10 @@
   }
 }
 
+body:has(.refheader) .toc-desktop {
+  top: 7rem;
+}
+
 /* Reference ToC styles */
 .documentNavigation.toc-desktop {
   position: sticky;
@@ -64,18 +69,23 @@
   font-size: small;
   text-overflow: ellipsis;
   color: hsl(var(--foreground-secondary));
+
   ul li {
     margin: 0.25rem 0;
+
     a {
       font-weight: bold;
       line-height: 1.2rem;
+
       &:hover {
         color: hsl(var(--primary));
         text-decoration: underline;
       }
     }
+
     ul {
       margin-bottom: 1rem;
+
       li a {
         font-weight: normal;
       }
