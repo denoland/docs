@@ -29,8 +29,12 @@ export const sidebar = [
         href: "/deploy/early-access/reference/builds/",
       },
       {
-        title: "Contexts and Timelines",
-        href: "/deploy/early-access/reference/contexts-and-timelines/",
+        title: "Environment Variables and Contexts",
+        href: "/deploy/early-access/reference/env-vars-and-contexts/",
+      },
+      {
+        title: "Timelines",
+        href: "/deploy/early-access/reference/timelines/",
       },
       {
         title: "Observability",
