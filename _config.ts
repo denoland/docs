@@ -155,8 +155,37 @@ site.use(toc({ anchor: false }));
 site.use(title());
 site.use(sitemap());
 
-site.addEventListener("afterBuild", () => {
+site.addEventListener("afterBuild", async () => {
+  // Write GFM CSS
   Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
+
+  // Generate LLMs documentation files directly to _site directory
+  if (Deno.env.get("BUILD_TYPE") == "FULL") {
+    try {
+      const { default: generateModule } = await import(
+        "./generate_llms_files.ts"
+      );
+      const { collectFiles, generateLlmsTxt, generateLlmsFullTxt } =
+        generateModule;
+
+      log.info("Generating LLM-friendly documentation files...");
+
+      const files = await collectFiles();
+      log.info(`Collected ${files.length} documentation files for LLMs`);
+
+      // Generate llms.txt
+      const llmsTxt = generateLlmsTxt(files);
+      Deno.writeTextFileSync(site.dest("llms.txt"), llmsTxt);
+      log.info("Generated llms.txt in site root");
+
+      // Generate llms-full.txt
+      const llmsFullTxt = generateLlmsFullTxt(files);
+      Deno.writeTextFileSync(site.dest("llms-full.txt"), llmsFullTxt);
+      log.info("Generated llms-full.txt in site root");
+    } catch (error) {
+      log.error("Error generating LLMs files:", error);
+    }
+  }
 });
 
 site.copy("reference_gen/gen/deno/page.css", "/api/deno/page.css");
