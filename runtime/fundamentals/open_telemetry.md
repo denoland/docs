@@ -648,6 +648,13 @@ variable, the following attributes are automatically set:
 - `telemetry.sdk.version`: The version of the Deno runtime, plus the version of
   the `opentelemetry` Rust crate being used by Deno, separated by a `-`.
 
+Propagators can be configured using the `OTEL_PROPAGATORS` environment variable.
+The default value is `tracecontext,baggage`. Multiple propagators can be
+specified by separating them with commas. Currently supported propagators are:
+
+- `tracecontext`: W3C Trace Context propagation format
+- `baggage`: W3C Baggage propagation format
+
 Metric collection frequency can be configured using the
 `OTEL_METRIC_EXPORT_INTERVAL` environment variable. The default value is `60000`
 milliseconds (60 seconds).
@@ -660,6 +667,58 @@ Log exporter batching can be configured using the batch log record processor
 environment variables described in the
 [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#batch-log-record-processor).
 
+## Propagators
+
+Deno supports context propagators which enable automatic propagation of trace
+context across process boundaries for distributed tracing, allowing you to track
+requests as they flow through different services.
+
+Propagators are responsible for encoding and decoding context information (like
+trace and span IDs) into and from carrier formats (like HTTP headers). This
+enables the trace context to be maintained across service boundaries.
+
+By default, Deno supports the following propagators:
+
+- `tracecontext`: The W3C Trace Context propagation format, which is the
+  standard way to propagate trace context via HTTP headers.
+- `baggage`: The W3C Baggage propagation format, which allows passing key-value
+  pairs across service boundaries.
+
+:::note
+
+These propagators automatically work with Deno's `fetch` API and `Deno.serve`,
+enabling end-to-end tracing across HTTP requests without manual context
+management.
+
+:::
+
+You can access the propagation API through the `@opentelemetry/api` package:
+
+```ts
+import { context, propagation, trace } from "npm:@opentelemetry/api@1";
+
+// Extract context from incoming headers
+function extractContextFromHeaders(headers: Headers) {
+  const ctx = context.active();
+  return propagation.extract(ctx, headers);
+}
+
+// Inject context into outgoing headers
+function injectContextIntoHeaders(headers: Headers) {
+  const ctx = context.active();
+  propagation.inject(ctx, headers);
+  return headers;
+}
+
+// Example: Making a fetch request that propagates trace context
+async function tracedFetch(url: string) {
+  const headers = new Headers();
+  injectContextIntoHeaders(headers);
+
+  return await fetch(url, { headers });
+}
+```
+
 ## Limitations
 
 While the OpenTelemetry integration for Deno is in development, there are some
@@ -667,8 +726,6 @@ limitations to be aware of:
 
 - Traces are always sampled (i.e. `OTEL_TRACE_SAMPLER=parentbased_always_on`).
 - Traces only support links with no attributes.
-- Automatic propagation of the trace context in `Deno.serve` and `fetch` is not
-  supported.
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
   are not supported.

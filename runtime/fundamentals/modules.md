@@ -80,6 +80,43 @@ This is the only import attribute type currently supported in Deno. Support for
 currently waiting on the
 [Module Harmony proposal](https://github.com/whatwg/html/issues/9444).
 
+## Data URL imports
+
+Deno supports importing of data URLs, which allows you to import content that
+isn't in a separate file. This is useful for testing, prototyping, or when you
+need to programmatically generate modules.
+
+You can create modules on the fly using the `data:` URL scheme:
+
+```ts
+// Import a simple JavaScript module from a data URL
+import * as module from "data:application/javascript;base64,ZXhwb3J0IGNvbnN0IG1lc3NhZ2UgPSAiSGVsbG8gZnJvbSBkYXRhIFVSTCI7";
+console.log(module.message); // Outputs: Hello from data URL
+
+// You can also use the non-base64 format
+const plainModule = await import(
+  "data:application/javascript,export function greet() { return 'Hi there!'; }"
+);
+console.log(plainModule.greet()); // Outputs: Hi there!
+
+// A simpler example with text content
+const textModule = await import(
+  "data:text/plain,export default 'This is plain text'"
+);
+console.log(textModule.default); // Outputs: This is plain text
+```
+
+The data URL format follows this pattern:
+
+```sh
+data:[<media type>][;base64],<data>
+```
+
+For JavaScript modules, use `application/javascript` as the media type.
+TypeScript is also supported with `application/typescript`. This feature is
+particularly useful for testing modules in isolation and creeating mock modules
+during tests.
+
 ## Importing third party modules and libraries
 
 When working with third-party modules in Deno, use the same `import` syntax as
