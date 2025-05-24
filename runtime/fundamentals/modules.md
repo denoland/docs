@@ -309,7 +309,8 @@ HTTPS imports are useful if you have a small, often single file, Deno project
 that doesn't require any other configuration. With HTTPS imports, you can avoid
 having a `deno.json` file at all. It is **not** advised to use this style of
 import in larger applications however, as you may end up with version conflicts
-(where different files use different version specifiers).
+(where different files use different version specifiers). HTTP imports are not
+supported by `deno add`/`deno install` commands.
 
 :::info
 
