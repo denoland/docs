@@ -401,9 +401,9 @@ Limitations:
 
 ### Overriding HTTPS imports
 
-Deno also allows overriding HTTPS imports through the `importMap` field in
-`deno.json`. This feature is particularly useful when substituting a remote
-dependency with a local patched version for debugging or temporary fixes.
+Deno also allows overriding HTTPS imports through the `importMap` or `scopes`
+fields in `deno.json`. This feature is particularly useful when substituting a
+remote dependency with a local patched version for debugging or temporary fixes.
 
 Example:
 
