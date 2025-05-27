@@ -25,7 +25,7 @@ Classic documentation? [View it here](/deploy/).
 - SvelteKit auto detection now works when using `npm` as the package manager
 - Prewarming does not trigger random POST requests to your app anymore
 - Visiting a page with a trailing slash will not 404 anymore
-- Drawers will no longer not close if you click inside, hold and drag over the
+- Drawers will no longer close if you click inside, hold and drag over the
   backdrop, and release
 
 ## May 22nd, 2025
