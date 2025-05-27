@@ -3,7 +3,7 @@ title: Pricing and Limits
 ---
 
 Please see [our pricing page](https://deno.com/deploy/pricing?subhosting) for
-the overview of the available features in all plans. If you have a use case that
+an overview of the available features in all plans. If you have a use case that
 exceeds any of these limits, [please reach out](mailto:deploy@deno.com).
 
 ## Deployment size
