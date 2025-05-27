@@ -1,11 +1,13 @@
 .refheader {
   position: sticky;
   top: calc(4rem - 1px);
-  padding: 0.5rem;
+  display: flex;
+  align-items: center;
   padding-left: 0;
   background-color: hsl(var(--background-secondary));
   border-bottom: 1px solid hsl(var(--foreground-tertiary));
   z-index: 5;
+  height: 3rem;
 }
 
 .refheader-link[data-active="true"] {

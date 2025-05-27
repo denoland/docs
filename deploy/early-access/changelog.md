@@ -1,7 +1,14 @@
 ---
 title: "Deno Deploy EA changelog"
-description: "Listing notable progress in the developement and evolution of Deno Deploy Early Access"
+description: "Listing notable progress in the development and evolution of Deno Deploy Early Access"
 ---
+
+:::info
+
+You are viewing the documentation for Deploy Early Access. Looking for Deploy
+Classic documentation? [View it here](/deploy/).
+
+:::
 
 ## May 22nd, 2025
 
