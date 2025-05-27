@@ -1,6 +1,12 @@
 ---
 title: Pricing and Limits
+description: Overview of Deno Subhosting pricing plans, resource limits, deployment restrictions, and performance constraints for your applications.
 ---
+
+You can see an
+[overview of available pricing plans and features](https://deno.com/deploy/pricing?subhosting)
+for Deno Subhosting on the Deno website. If you have a use case that exceeds any
+of these limits, [please reach out](mailto:deploy@deno.com).
 
 ## Deployment size
 
