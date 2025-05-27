@@ -10,6 +10,25 @@ Classic documentation? [View it here](/deploy/).
 
 :::
 
+## May 26th, 2025
+
+### Features
+
+- When triggering a manual build you can now choose the branch to deploy
+- You can now deploy Astro static sites without having to manually install the
+  Deno adapter
+- There are now reference docs for you to peruse:
+  https://deno-docs--wip-ea-reference-docs.deno.dev/deploy/early-access/. They
+  will be merged into docs.deno.com this week.
+
+### Bug fixes
+
+- SvelteKit auto detection now works when using `npm` as the package manager
+- Prewarming does not trigger random POST requests to your app anymore
+- Visiting a page with a trailing slash will not 404 anymore
+- Drawers will not close anymore if you click inside, hold and drag over the
+  backdrop, and release
+
 ## May 22nd, 2025
 
 ### Features
