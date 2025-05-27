@@ -100,7 +100,7 @@ excited to see what you'll ship with Deno Deploy!
 
 ### Deploy your existing project
 
-Import a project and run it on the edge it with Deno Deploy.
+Import a project and run it on the edge with Deno Deploy.
 
 1. [From the Deno Deploy dashboard](https://dash.deno.com) click the "New
    Project" button.

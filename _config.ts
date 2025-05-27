@@ -20,7 +20,6 @@ import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
 import { log } from "lume/core/utils/log.ts";
 import anchor from "npm:markdown-it-anchor@9";
-import { full as emoji } from "npm:markdown-it-emoji@3";
 import admonitionPlugin from "./markdown-it/admonition.ts";
 import codeblockCopyPlugin from "./markdown-it/codeblock-copy.ts";
 import codeblockTitlePlugin from "./markdown-it/codeblock-title.ts";
@@ -63,7 +62,6 @@ const site = lume(
     markdown: {
       plugins: [
         replacerPlugin,
-        emoji,
         admonitionPlugin,
         codeblockCopyPlugin,
         codeblockTitlePlugin,
@@ -108,6 +106,7 @@ site.copy("static", ".");
 site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
+site.copy("deploy/images");
 site.copy("deploy/kv/manual/images");
 site.copy("deploy/tutorials/images");
 site.copy("deploy/kv/tutorials/images");
@@ -117,6 +116,7 @@ site.copy("runtime/reference/images");
 site.copy("runtime/contributing/images");
 site.copy("examples/tutorials/images");
 site.copy("deploy/manual/images");
+site.copy("deploy/early-access/images");
 site.copy("deno.json");
 site.copy("go.json");
 site.copy("oldurls.json");
@@ -155,8 +155,37 @@ site.use(toc({ anchor: false }));
 site.use(title());
 site.use(sitemap());
 
-site.addEventListener("afterBuild", () => {
+site.addEventListener("afterBuild", async () => {
+  // Write GFM CSS
   Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
+
+  // Generate LLMs documentation files directly to _site directory
+  if (Deno.env.get("BUILD_TYPE") == "FULL") {
+    try {
+      const { default: generateModule } = await import(
+        "./generate_llms_files.ts"
+      );
+      const { collectFiles, generateLlmsTxt, generateLlmsFullTxt } =
+        generateModule;
+
+      log.info("Generating LLM-friendly documentation files...");
+
+      const files = await collectFiles();
+      log.info(`Collected ${files.length} documentation files for LLMs`);
+
+      // Generate llms.txt
+      const llmsTxt = generateLlmsTxt(files);
+      Deno.writeTextFileSync(site.dest("llms.txt"), llmsTxt);
+      log.info("Generated llms.txt in site root");
+
+      // Generate llms-full.txt
+      const llmsFullTxt = generateLlmsFullTxt(files);
+      Deno.writeTextFileSync(site.dest("llms-full.txt"), llmsFullTxt);
+      log.info("Generated llms-full.txt in site root");
+    } catch (error) {
+      log.error("Error generating LLMs files:", error);
+    }
+  }
 });
 
 site.copy("reference_gen/gen/deno/page.css", "/api/deno/page.css");

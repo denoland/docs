@@ -102,7 +102,7 @@ function SidebarSection(
           )
       )}{" "}
       <ul aria-labelledby={categoryTitle} class="mb-4">
-        {props.section.items.map((item) => (
+        {props.section.items?.map((item) => (
           <li class="mx-2">
             {typeof item === "object" && "items" in item
               ? (
@@ -169,7 +169,7 @@ function SidebarCategory(props: {
   search: Searcher;
   url: string;
 }) {
-  const containsCurrent = props.item.items.some((item) => {
+  const containsCurrent = props.item.items?.some((item) => {
     if (typeof item === "string") {
       return item === props.url;
     }
@@ -203,7 +203,7 @@ function SidebarCategory(props: {
         class={`ml-2 ${containsCurrent ? "" : "hidden"}`}
         data-accordion-content
       >
-        {props.item.items.map((item) => (
+        {props.item.items?.map((item) => (
           typeof item === "object" && "items" in item
             ? (
               <SidebarCategory

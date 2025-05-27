@@ -10,5 +10,9 @@ reference_gen/gen
 reference_gen/node_modules
 reference_gen/types
 
+# LLM documentation files (generated at build time)
+static/llms.txt
+static/llms-full.txt
+
 .DS_Store
 .env

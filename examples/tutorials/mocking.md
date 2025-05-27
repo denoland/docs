@@ -56,7 +56,7 @@ function saveUser(
 // Test with a mock
 Deno.test("saveUser calls database.save", async () => {
   // Create a mock database with a spy on the save method
-  const mockDatabase: Database = {
+  const mockDatabase = {
     save: spy((user: User) => Promise.resolve({ id: 1, ...user })),
   };
 
@@ -330,7 +330,7 @@ others intact:
 
 ```ts
 import { assertEquals } from "jsr:@std/assert";
-import { spy } from "jsr:@std/testing/mock";
+import { stub } from "jsr:@std/testing/mock";
 
 class UserService {
   async getUser(id: string) {
@@ -351,11 +351,11 @@ class UserService {
   }
 }
 
-Deno.test("partial mocking with spies", async () => {
+Deno.test("partial mocking with stubs", async () => {
   const service = new UserService();
 
   // Only mock the getUser method
-  const getUserSpy = spy(
+  const getUserMock = stub(
     service,
     "getUser",
     () => Promise.resolve({ id: "test-id", name: "Mocked User" }),
@@ -372,10 +372,10 @@ Deno.test("partial mocking with spies", async () => {
     });
 
     // Verify getUser was called with the right arguments
-    assertEquals(getUserSpy.calls.length, 1);
-    assertEquals(getUserSpy.calls[0].args[0], "test-id");
+    assertEquals(getUserMock.calls.length, 1);
+    assertEquals(getUserMock.calls[0].args[0], "test-id");
   } finally {
-    getUserSpy.restore();
+    getUserMock.restore();
   }
 });
 ```
