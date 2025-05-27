@@ -14,7 +14,7 @@ signing up to Deno Deploy EA, each user can either create an organization or be
 invited to an existing organization by another Deno Deploy EA user.
 
 All users must be part of an organization to be able to use Deno Deploy EA
-because all resources.
+because all resources are owned by organizations.
 
 Organizations have a name and a slug. The name is visible only to organization
 members and appears in the organization dropdown in both Deno Deploy EA and Deno
@@ -87,4 +87,3 @@ members table, and then confirming by pressing "Save".
 To remove a member from the org, find the user in the members table in the
 organization settings, press the remove button, and confirm by pressing
 "Delete".
-

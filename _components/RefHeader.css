@@ -8,7 +8,6 @@
   border-bottom: 1px solid hsl(var(--foreground-tertiary));
   z-index: 5;
   height: 3rem;
-  ;
 }
 
 .refheader-link[data-active="true"] {

@@ -27,7 +27,7 @@
     left: 1rem;
   }
 
-  .hamburger-checkbox:checked+.nav {
+  .hamburger-checkbox:checked + .nav {
     transform: translateX(0);
     box-shadow: 350px 0px 0px 0px rgba(0, 0, 0, 0.5);
   }
