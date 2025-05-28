@@ -24,7 +24,7 @@ Applications have a maximum memory allocation of 512MB
 ## Upload request limits
 
 We do not set a limit for the number of upload requests your application may
-handle as long as your application is within our
+handle as long as your application is within
 [our acceptable use policy](/deploy/manual/acceptable-use-policy).
 
 ## TLS proxying
