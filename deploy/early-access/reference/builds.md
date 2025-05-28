@@ -15,25 +15,29 @@ GitHub repository when deploying from GitHub.
 
 Builds can be triggered in two ways:
 
-- **manually**, using the "Deploy Default Branch" button on the builds page
+- **manually**, using the "Deploy Default Branch" button on the builds page. By
+  default this will trigger a build on the "default" git branch (usually
+  `main`). The dropdown menu on this button on this page can be used to select a
+  different branch to deploy from.
 - **automatically**, whenever a new commit is pushed to a GitHub repository that
   is linked to an app
 
 A revision goes through multiple stages before finally being routed and
 available to users:
 
+1. **Queuing:**: the revision is waiting to be assigned to a build.
 1. **Preparing:** a builder is assigned to process the build, the source code of
    the revision gets being downloaded to the builder, and any available build
    caches are being restored to the builder
-2. **Install:** the install command is executed if there is one. This will
+1. **Install:** the install command is executed if there is one. This will
    usually download any dependencies that are not already in the build cache,
    and check that the lockfile is up to date.
-3. **Build:** the build command is executed if there is one. Once the build
+1. **Build:** the build command is executed if there is one. Once the build
    command has executed, the build artifact is created from the build output and
    is uploaded to the distributed runtime infrastructure.
-4. **Warm up:** a `GET /` request is sent to the revision to check that it boots
+1. **Warm up:** a `GET /` request is sent to the revision to check that it boots
    correctly and listens for incoming HTTP requests.
-5. **Route:** the global infrastructure is being configured to route requests to
+1. **Route:** the global infrastructure is being configured to route requests to
    the new revision based on the timelines they are part of.
 
 If any of these steps fail, the build goes into the “Failed” state. Failed
@@ -47,6 +51,12 @@ Build caching is a way to speed up builds by reusing files that have not changed
 between builds. This is configured automatically for some framework presets, and
 for the `DENO_DIR` dependency cache. Other directories can not manually be added
 to the cache at this time.
+
+A build can be cancelled while it is running using the "Cancel" button in the
+top-right of the build page.
+
+Builds can run for at most 5 minutes. After 5 minutes a build will be cancelled
+automatically.
 
 ## Build configuration
 
