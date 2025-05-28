@@ -5,8 +5,8 @@ description: "Guide to Deno Deploy Early Access features, comparison with Deploy
 
 :::info
 
-You are viewing the documentation for Deploy Early Access. Looking for Deploy
-Classic documentation? [View it here](/deploy/).
+You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
+Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
