@@ -18,8 +18,8 @@ original Deploy, featuring:
 - Integrated build system
 - Significantly enhanced underlying infrastructure
 
-<a href="https://app.deno.com" class="docs-cta runtime-cta">Try out Deploy Early
-Access</a>
+<a href="https://app.deno.com" class="docs-cta runtime-cta">Try out Deno
+Deploy<sup>EA</sup></a>
 
 :::note
 
