@@ -121,10 +121,10 @@ Deno.test("spy cleanup example", () => {
 });
 ```
 
-Method spys are disposable, meaning that you can have them automatically restore
-themselves with the `using` keyword. Using this approach is cleaner because you
-do not need to wrap your assertions in a try statement to ensure you restore the
-methods before the tests finish.
+Method spies are disposable, they can automatically restore themselves with the
+`using` keyword. This approach means that because you do not need to wrap your
+assertions in a try statement to ensure you restore the methods before the tests
+finish.
 
 ```ts
 import { assertEquals } from "jsr:@std/assert";
