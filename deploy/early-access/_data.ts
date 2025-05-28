@@ -4,12 +4,10 @@ export const sidebar = [
   {
     title: "About Early Access",
     href: "/deploy/early-access/",
-    items: [],
   },
   {
     title: "Getting started",
     href: "/deploy/early-access/getting_started/",
-    items: [],
   },
   {
     title: "Reference",
