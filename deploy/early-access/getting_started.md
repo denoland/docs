@@ -12,27 +12,28 @@ Classic documentation? [View it here](/deploy/).
 
 :::note
 
-Deno Deploy EA is in private beta. To use Deno Deploy EA you must join the Early
-Access program from the
-[Deno Deploy Classic account settings page](https://dash.deno.com/account#early-access).
+Deno Deploy<sup>EA</sup> is in private beta. To use Deno Deploy
+<sup>**EA**</sup> you must join the Early Access program from the
+[Deploy Classic account settings page](https://dash.deno.com/account#early-access).
 
 After joining the Early Access program, you may still not immediately have
-access to Deno Deploy EA as we are rolling out access in waves.
+access to Deno Deploy<sup>EA</sup> as we are rolling out access in waves.
 
 :::
 
 ## Create an organization
 
-To get started with Deno Deploy EA, you must first create a Deno Deploy EA
-organization. You can do this by visiting [app.deno.com](http://app.deno.com).
+To get started with Deno Deploy<sup>EA</sup>, you must first create a Deno
+Deploy<sup>**EA**</sup> organization. You can do this by visiting
+[app.deno.com](http://app.deno.com).
 
-Upon first visiting the dashboard, you’ll be greeted by the Deno Deploy EA
-organization creation screen:
+Upon first visiting the dashboard, you’ll be greeted by the Deno Deploy
+<sup>**EA**</sup> organization creation screen:
 
-![The Deno Deploy EA organization creation screen.](./images/create_org.png)
+![The Deno Deploy<sup>EA</sup> organization creation screen.](./images/create_org.png)
 
 You can not currently create an organization that has the same slug as any
-project name in Deno Deploy Classic.
+project name in Deploy Classic.
 
 Currently, the organization name and organization slug can not be changed after
 organization creation.
@@ -68,10 +69,10 @@ grant the Deno Deploy GitHub app permission to deploy your repositories.
 
 ## Configure your app
 
-After selecting a GitHub repository, Deno Deploy EA will automatically attempt
-to detect the kind of application you are deploying and determine appropriate
-build configuration. You can see the detected configuration in the `App Config`
-box on the top right.
+After selecting a GitHub repository, Deno Deploy<sup>EA</sup> will automatically
+attempt to detect the kind of application you are deploying and determine
+appropriate build configuration. You can see the detected configuration in the
+`App Config` box on the top right.
 
 ![Screenshot of Deploy application configuration screen](./images/app_config.png)
 
@@ -106,13 +107,13 @@ you can leave this field empty.
 
 ### Runtime configuration
 
-For most frameworks there are no options to configure here, as Deno Deploy EA
-will figure out the ideal runtime configuration for the app based on the
-framework preset. When a framework is not configured, you can choose here
-whether the app is a `Dynamic` app that needs to execute code server side for
-every request, such as an API server, server-side rendered application, etc., or
-a `Static` app that consists only of a set of static files that need to be
-hosted.
+For most frameworks there are no options to configure here, as Deno Deploy
+<sup>**EA**</sup> will figure out the ideal runtime configuration for the app
+based on the framework preset. When a framework is not configured, you can
+choose here whether the app is a `Dynamic` app that needs to execute code server
+side for every request, such as an API server, server-side rendered application,
+etc., or a `Static` app that consists only of a set of static files that need to
+be hosted.
 
 ### Dynamic Entrypoint
 

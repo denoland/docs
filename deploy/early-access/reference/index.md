@@ -1,5 +1,5 @@
 ---
-title: Reference Guide
+title: Reference
 description: "Comprehensive reference guide for Deno Deploy Early Access covering accounts, organizations, applications, builds, observability, environments, and custom domains."
 ---
 
@@ -10,99 +10,38 @@ Classic documentation? [View it here](/deploy/).
 
 :::
 
-## Account
+Specific terminology is used in Deploy Early Access. Use this reference guide to
+understand key concepts and details about the platform.
 
-The Deno Deploy EA account is the same as your Deno Deploy Classic account. At
-this time you can only sign in through GitHub. Your primary contact email
-address is copied from GitHub. Your name is also synced from GitHub.
+## Topics
 
-Both username and email are synced from GitHub every time you log in. If you
-have changed your name in GitHub, and do not see the change reflected on the
-Deno Deploy dashboard, please sign-in again.
+### [Accounts](/deploy/early-access/reference/accounts)
 
-## Organizations
+Information about user accounts, authentication, and personal settings in Deploy
+Early Access.
 
-Organizations are groups of users that collectively own apps and domains. Upon
-signing up to Deno Deploy EA, each user can either create an organization or be
-invited to an existing organization by another Deno Deploy EA user.
+### [Organizations](/deploy/early-access/reference/organizations)
 
-Organizations have a name and a slug. The name is visible only to organization
-members and appears in the organization dropdown in both Deno Deploy EA and Deno
-Deploy Classic. The organization slug is used for the default domain of the
-organization.
+Learn about creating and managing organizations, team members, roles, and
+permissions.
 
-:::caution
+### [Applications](/deploy/early-access/reference/applications)
 
-Organizations cannot currently be renamed, nor can their slug be altered after
-creation.
+Details about application creation, configuration, and lifecycle management.
 
-:::
+### [Builds](/deploy/early-access/reference/builds)
 
-Every organization has a default domain that is used for production, git branch,
-and preview URLs for projects in that organization. For example, an org with the
-slug `acme-inc` would have a default organization domain of `acme-inc.deno.net`.
+Understanding the build process, build configurations, and deployment pipelines.
 
-At this time, organizations cannot be deleted.
+### [Observability](/deploy/early-access/reference/observability)
 
-## Further docs coming soon
+Monitoring applications, accessing logs, metrics, and performance insights.
 
-### Members
+### [Environments](/deploy/early-access/reference/environments)
 
-- inviting members
-- removing members
+Managing different deployment environments including development, staging, and
+production.
 
-## Applications
+### [Custom Domains](/deploy/early-access/reference/custom-domains)
 
-Applications are web services inside an organization that can serve traffic.
-Applications contain revisions - these are all the previous builds that have
-happened in the context of this app. Usually there is one revision per Git
-commit when using the GitHub integration.
-
-To create an app, press the “+ Create App” button on the org page
-
-- creating
-- github integration
-- limitations:
-  - deleting
-  - renaming
-  - transferring
-
-## Builds
-
-- configuration
-- default env vars
-- native framework support
-
-## Observability
-
-- logs
-- traces
-- filtering
-- time picker
-- limitations:
-  - metrics
-
-## Contexts and Environment Variables
-
-## Timelines
-
-## Runtime
-
-- deno version
-- unsupported apis
-- linux runtime environment
-- default env vars
-
-## Caching
-
-- passthrough cache behaviour
-- cache-tag
-
-## Custom domains
-
-- adding to org
-- assigning to app
-- dns setup + verification
-- certificates
-- unassigning from app
-- removing from org
+Setting up and configuring custom domains for your applications.

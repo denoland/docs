@@ -9,8 +9,9 @@ Classic documentation? [View it here](/deploy/).
 
 :::
 
-In Deno Deploy EA, environment variables can be used to configure an application
-using some static values, such as API keys or database connection strings.
+In Deno Deploy<sup>EA</sup>, environment variables can be used to configure an
+application using some static values, such as API keys or database connection
+strings.
 
 Environment variables can either be stored as a plain text value, or as a
 secret. Plain text values are visible from the UI and should be used for
@@ -95,8 +96,8 @@ const myEnvVar = Deno.env.get("MY_ENV_VAR");
 
 ## Predefined environment variables
 
-Deno Deploy EA provides a set of predefined environment variables that are
-automatically set for each application. These environment variables are
+Deno Deploy<sup>EA</sup> provides a set of predefined environment variables that
+are automatically set for each application. These environment variables are
 available in all contexts and can be used to access information about the
 application and the environment in which it is running.
 
@@ -110,5 +111,5 @@ application and the environment in which it is running.
 More predefined environment variables will be added in the future.
 
 It is not possible to manually set any environment variables that start with
-`DENO_*`. These environment variables are set by Deno Deploy EA and are
-read-only.
+`DENO_*`. These environment variables are set by Deno Deploy<sup>EA</sup> and
+are read-only.

@@ -9,14 +9,14 @@ Classic documentation? [View it here](/deploy/).
 
 :::
 
-Deno Deploy EA supports a number of JavaScript and TypeScript frameworks out of
-the box. This means that you can use these frameworks without any additional
-configuration or setup.
+Deno Deploy<sup>EA</sup> supports a number of JavaScript and TypeScript
+frameworks out of the box. This means that you can use these frameworks without
+any additional configuration or setup.
 
-Natively supported frameworks are tested to work with Deno Deploy EA and are
-automatically detected when you create a new app. Deno Deploy EA automatically
-optimizes the build and runtime configuration for these frameworks to be as
-optimal as possible.
+Natively supported frameworks are tested to work with Deno Deploy
+<sup>**EA**</sup> and are automatically detected when you create a new app. Deno
+Deploy<sup>**EA**</sup> automatically optimizes the build and runtime
+configuration for these frameworks to be as optimal as possible.
 
 Frameworks not listed here are still likely to work, but may require manually
 configuring the install and/or build command and the runtime configuration in
@@ -40,7 +40,7 @@ are supported. Caching is supported out of the box, including using the new
 
 `next/image` works out of the box.
 
-Next.js on Deno Deploy EA always builds in standalone mode.
+Next.js on Deno Deploy<sup>EA</sup> always builds in standalone mode.
 
 Tracing is supported out of the box, and Next.js automatically emits some spans
 for incoming requests, routing, rendering, and other operations.
@@ -51,8 +51,9 @@ Astro is a web framework for building content-driven websites like blogs,
 marketing, and e-commerce. Astro leverages server rendering over client-side
 rendering in the browser as much as possible.
 
-To use Astro with Deno Deploy EA, you need to install the `@deno/astro-adapter`
-package and configure your `astro.config.mjs` file to use the adapter:
+To use Astro with Deno Deploy<sup>EA</sup>, you need to install the
+`@deno/astro-adapter` package and configure your `astro.config.mjs` file to use
+the adapter:
 
 ```bash
 $ deno add npm:@deno/astro-adapter
@@ -113,5 +114,5 @@ Lume requires no additional setup.
 ### Remix
 
 > ⚠️ **Experimental**: Remix is not yet fully supported. It is in the process of
-> being integrated into Deno Deploy EA. Some features may not work as expected.
-> Please report any issues you encounter to the Deno team.
+> being integrated into Deno Deploy<sup>EA</sup>. Some features may not work as
+> expected. Please report any issues you encounter to the Deno team.

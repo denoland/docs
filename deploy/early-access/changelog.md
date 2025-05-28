@@ -1,5 +1,5 @@
 ---
-title: "Deno Deploy EA changelog"
+title: "Deno Deploy<sup>EA</sup> changelog"
 description: "Listing notable progress in the development and evolution of Deno Deploy Early Access"
 ---
 

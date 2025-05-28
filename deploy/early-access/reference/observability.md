@@ -9,12 +9,12 @@ Classic documentation? [View it here](/deploy/).
 
 :::
 
-Deno Deploy EA provides multiple observability features that can be used to
-understand application performance, debug application errors, and monitor
-application usage. These features are based on OpenTelemetry and the
+Deno Deploy<sup>EA</sup> provides multiple observability features that can be
+used to understand application performance, debug application errors, and
+monitor application usage. These features are based on OpenTelemetry and the
 [OpenTelemetry integration in Deno](/runtime/fundamentals/open_telemetry/).
 
-There are three main observability features in Deno Deploy EA:
+There are three main observability features in Deno Deploy<sup>EA</sup>:
 
 - **Logs**: unstructured debug information captured emitted by the application
   code.
@@ -26,8 +26,9 @@ There are three main observability features in Deno Deploy EA:
 
 ## Logs
 
-Logs in Deno Deploy EA are captured using the standard `console` API. The logs
-are queryable from the logs page in the Deno Deploy EA dashboard.
+Logs in Deno Deploy<sup>EA</sup> are captured using the standard `console` API.
+The logs are queryable from the logs page in the Deno Deploy
+<sup>**EA**</sup> dashboard.
 
 Logs are viewed per application. The search bar on the logs page can be used to
 filter based on the attributes below, and the log message.
@@ -39,7 +40,7 @@ overlay drawer for inspection.
 
 ## Traces
 
-Traces in Deno Deploy EA are captured in three ways:
+Traces in Deno Deploy<sup>EA</sup> are captured in three ways:
 
 - Automatically for various built-in operations, such as incoming HTTP requests
   or outbound fetch. This can not be disabled.
@@ -71,9 +72,9 @@ were emitted in the context of the entire trace.
 
 ## Metrics
 
-Metrics in Deno Deploy EA are captured automatically for various built-in
-operations, such as incoming HTTP requests or outbound fetch. This can not be
-disabled.
+Metrics in Deno Deploy<sup>EA</sup> are captured automatically for various
+built-in operations, such as incoming HTTP requests or outbound fetch. This can
+not be disabled.
 
 Metrics are viewed per application. The search bar on the metrics page can be
 used to filter based on the attributes below. Metrics are shown in a time series

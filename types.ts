@@ -44,8 +44,10 @@ export interface SidebarSectionProps {
   headerPath: string;
 }
 
+export type TitleContent = string | JSX.Element;
+
 export interface SidebarItem {
-  title: string;
+  title: TitleContent;
   label?: string;
   href?: string;
   items?: SidebarItem[];

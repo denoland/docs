@@ -10,16 +10,17 @@ Classic documentation? [View it here](/deploy/).
 :::
 
 Organizations are groups of users that collectively own apps and domains. Upon
-signing up to Deno Deploy EA, each user can either create an organization or be
-invited to an existing organization by another Deno Deploy EA user.
+signing up to Deno Deploy<sup>EA</sup>, each user can either create an
+organization or be invited to an existing organization by another Deno Deploy
+<sup>**EA**</sup> user.
 
-All users must be part of an organization to be able to use Deno Deploy EA
-because all resources are owned by organizations.
+All users must be part of an organization to be able to use Deno Deploy
+<sup>**EA**</sup> because all resources are owned by organizations.
 
 Organizations have a name and a slug. The name is visible only to organization
-members and appears in the organization dropdown in both Deno Deploy EA and Deno
-Deploy Classic. The organization slug is used for the default domain of the
-organization.
+members and appears in the organization dropdown in both Deno Deploy
+<sup>**EA**</sup> and Deploy Classic. The organization slug is used for the
+default domain of the organization.
 
 :::caution
 
@@ -39,11 +40,11 @@ delete apps, and manage domains.
 
 ## Create an organization
 
-Organizations in Deno Deploy EA are created from the Deno Deploy Classic
-dashboard. To create an organization:
+Organizations in Deno Deploy<sup>EA</sup> are created from the Deno Deploy
+Classic dashboard. To create an organization:
 
-1. Visit the [Deno Deploy Classic dashboard](https://dash.deno.com) and sign in
-   with a GitHub account.
+1. Visit the [Deploy Classic dashboard](https://dash.deno.com) and sign in with
+   a GitHub account.
 2. Click on the "+" button in the organization dropdown in the top left corner
    of the screen.
 3. Select "Try the new Deno Deploy" option.
@@ -52,8 +53,9 @@ dashboard. To create an organization:
 
 :::info
 
-Organization slugs must be unique across all organizations in Deno Deploy EA.
-They can also not be the same as any project name in Deno Deploy Classic.
+Organization slugs must be unique across all organizations in Deno Deploy
+<sup>**EA**</sup>. They can also not be the same as any project name in Deno
+Deploy Classic.
 
 :::
 

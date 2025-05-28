@@ -19,7 +19,9 @@ export default function (
               data-active={currentUrl.includes(nav.href)}
               href={nav.href}
             >
-              {nav.title}
+              {typeof nav.title === "string"
+                ? <span dangerouslySetInnerHTML={{ __html: nav.title }}></span>
+                : nav.title}
             </a>
           </li>
         ))}

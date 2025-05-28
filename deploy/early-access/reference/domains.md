@@ -15,11 +15,11 @@ the organization `acme-inc` would have a default organization domain of
 `acme-inc.deno.net`. An application named `my-app` would have a default
 production domain of `my-app.acme-inc.deno.net`.
 
-In addition to the default domains that are provided by Deno Deploy EA
-automatically, it is also possible to add custom domains to applications. Custom
-domains are domains that you own and control. To add a custom domain, you must
-have purchased the domain from a domain registrar and you must have access to
-edit the DNS records for the domain.
+In addition to the default domains that are provided by Deno Deploy
+<sup>**EA**</sup> automatically, it is also possible to add custom domains to
+applications. Custom domains are domains that you own and control. To add a
+custom domain, you must have purchased the domain from a domain registrar and
+you must have access to edit the DNS records for the domain.
 
 Custom domains are owned by an organization. Once added to an organization, the
 can be attached to any application in that organization.
@@ -34,14 +34,14 @@ one subdomain points to one application, and another subdomain points to a
 different application.
 
 Each custom domain must have a valid TLS certificate to be used in Deno Deploy
-EA. Deno Deploy EA can automatically provision a TLS certificate for you using
-Let's Encrypt.
+EA. Deno Deploy<sup>EA</sup> can automatically provision a TLS certificate for
+you using Let's Encrypt.
 
 ## Adding a custom domain
 
 To add a custom domain, go to the organization domains page. You can access this
 page by clicking on the organization name in the top left corner of the Deno
-Deploy EA dashboard, and then clicking on the "Domains" tab in the top
+Deploy<sup>EA</sup> dashboard, and then clicking on the "Domains" tab in the top
 navigation.
 
 Click on the "Add Domain" button to open the custom domain drawer. In the
@@ -57,7 +57,7 @@ You will now see the domain configuration drawer.
 
 The domain configuration drawer contains the DNS configuration for the domain
 that is needed to verify ownership of the domain, generate TLS certificates, and
-route traffic to Deno Deploy EA.
+route traffic to Deno Deploy<sup>EA</sup>.
 
 The DNS configuration section has two to three tabs, depending on the type of
 domain you are adding. You must add all of the DNS records from any of the tabs
@@ -79,11 +79,11 @@ certain DNS records:
   DNS records to be added. When using this method, you add one `A` records and
   one `CNAME` record to your DNS configuration.
 
-> Currently Deno Deploy EA does not support IPv6 yet. This is planned for the
-> future. When using `ANAME/ALIAS` or `CNAME` configuration methods your domain
-> will automatically be configured to use IPv6 when it is supported. When using
-> the `A` configuration method we will send you an email to let you know that
-> you need to add an `AAAA` record to your DNS configuration.
+> Currently Deno Deploy<sup>EA</sup> does not support IPv6 yet. This is planned
+> for the future. When using `ANAME/ALIAS` or `CNAME` configuration methods your
+> domain will automatically be configured to use IPv6 when it is supported. When
+> using the `A` configuration method we will send you an email to let you know
+> that you need to add an `AAAA` record to your DNS configuration.
 
 :::warning
 
@@ -96,11 +96,12 @@ this verification and certificate provisioning will fail.
 ### Verification
 
 Once the DNS records have been added to the domain registrar's DNS
-configuration, Deno Deploy EA will check the DNS records to verify ownership of
-the domain. This can take a few minutes depending on the DNS provider. You can
-leave the domain configuration drawer open while the verification is in
-progress, and it will automatically refresh when the verification is complete.
-Once the verification is complete, you will see a green checkmark.
+configuration, Deno Deploy<sup>EA</sup> will check the DNS records to verify
+ownership of the domain. This can take a few minutes depending on the DNS
+provider. You can leave the domain configuration drawer open while the
+verification is in progress, and it will automatically refresh when the
+verification is complete. Once the verification is complete, you will see a
+green checkmark.
 
 You can also manually trigger the verification progress by clicking on the
 "Provision Certificate" button. If verification is successful, this will also
