@@ -4,14 +4,14 @@ title: Builds
 
 :::info
 
-You are viewing the documentation for Deploy Early Access. Looking for Deploy
-Classic documentation? [View it here](/deploy/).
+You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
+Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-In Deno Deploy EA an app code can have multiple historical revisions. These
-revisions (or builds) generally map one to one to git commits in the linked
-GitHub repository when deploying from GitHub.
+In Deno Deploy<sup>EA</sup> an app code can have multiple historical revisions.
+These revisions (or builds) generally map one to one to git commits in the
+linked GitHub repository when deploying from GitHub.
 
 Builds can be triggered in two ways:
 
@@ -77,9 +77,9 @@ files in your repository, if you are using a framework or a common build setup.
 The following build configuration options are available:
 
 - **Framework preset:** a configuration preset for certain natively supported
-  frameworks and tools. When a framework preset is configured, Deno Deploy EA
-  will automatically configure the builder to build the given framework in the
-  most optimal possible way.
+  frameworks and tools. When a framework preset is configured, Deno Deploy
+  <sup>EA</sup> will automatically configure the builder to build the given
+  framework in the most optimal possible way.
   [Learn more about Framework integrations.](./frameworks/)
 - **Install command:** a shell command that is executed to install dependencies.
   In projects with a `package.json` this is often `npm install`, or
@@ -90,8 +90,8 @@ The following build configuration options are available:
   through `deno task build` or `npm run build`.
 - **Runtime configuration:** the configuration for how to run the application to
   serve traffic. If a framework preset is set, this often does not have to be
-  set, because Deno Deploy EA will automatically pick the best strategy for you.
-  Otherwise you have two options:
+  set, because Deno Deploy<sup>EA</sup> will automatically pick the best
+  strategy for you. Otherwise you have two options:
   - **Dynamic:** an application that dynamically responds to every request using
     a Node or Deno server. This is the case for API servers (Express, Hono,
     etc), or a server-side-rendered website (e.g. Fresh).

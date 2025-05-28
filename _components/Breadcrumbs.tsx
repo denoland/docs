@@ -77,7 +77,10 @@ export default function (props: {
             itemprop="item"
             href={props.sectionHref}
           >
-            <span itemprop="name">{props.sectionTitle}</span>
+            <span
+              itemprop="name"
+              dangerouslySetInnerHTML={{ __html: props.sectionTitle }}
+            />
           </a>
           <meta itemprop="position" content="1" />
         </li>

@@ -4,7 +4,6 @@ export default function (data: Lume.Data) {
   const isReference = currentUrl.startsWith("/api/");
   const isDenoAPI = currentUrl.startsWith("/api/deno/");
 
-  // Reference page nav has no heirarchy and a different data names
   if (isReference) {
     return (
       <>
@@ -42,7 +41,9 @@ export default function (data: Lume.Data) {
                 <a
                   href={nav.href}
                   className="sub-nav-heading-link"
-                  {...(nav.href === currentUrl ? { "data-active": true } : {})}
+                  {...(nav.href.replace(/\/$/, "") === currentUrl
+                    ? { "data-active": true }
+                    : {})}
                 >
                   {nav.title}
                 </a>
@@ -53,58 +54,61 @@ export default function (data: Lume.Data) {
                 </span>
               )}
           </h2>
-
-          <ul className="sub-nav">
-            {nav.items?.map((item: any) => (
-              <li key={item.href}>
-                {item.items && item.items.length > 0
-                  ? (
-                    <>
-                      <label
-                        htmlFor={`sub-nav-toggle-${
-                          item.title.replaceAll(" ", "")
-                        }`}
-                        className="sub-nav-toggle blocklink"
+          {nav.items && Array.isArray(nav.items) && nav.items.length > 0 && (
+            <ul className="sub-nav">
+              {nav.items?.map((item: any) => (
+                <li key={item.href}>
+                  {item.items && item.items.length > 0
+                    ? (
+                      <>
+                        <label
+                          htmlFor={`sub-nav-toggle-${
+                            item.title.replaceAll(" ", "")
+                          }`}
+                          className="sub-nav-toggle blocklink"
+                        >
+                          {item.title}
+                        </label>
+                        <input
+                          type="checkbox"
+                          id={`sub-nav-toggle-${
+                            item.title.replaceAll(" ", "")
+                          }`}
+                          className="sub-nav-toggle-checkbox"
+                        />
+                        <ul className="sub-nav tertiary-nav">
+                          {item.items.map((subItem: any) => (
+                            <li key={subItem.href}>
+                              <a
+                                href={subItem.href}
+                                className="sub-nav-link blocklink"
+                                {...(subItem.href.replace(/\/$/, "") ===
+                                    currentUrl
+                                  ? { "data-active": true }
+                                  : {})}
+                              >
+                                {subItem.title}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )
+                    : (
+                      <a
+                        href={item.href}
+                        className="sub-nav-link blocklink"
+                        {...(item.href.replace(/\/$/, "") === currentUrl
+                          ? { "data-active": true }
+                          : {})}
                       >
                         {item.title}
-                      </label>
-                      <input
-                        type="checkbox"
-                        id={`sub-nav-toggle-${item.title.replaceAll(" ", "")}`}
-                        className="sub-nav-toggle-checkbox"
-                      />
-                      <ul className="sub-nav tertiary-nav">
-                        {item.items.map((subItem: any) => (
-                          <li key={subItem.href}>
-                            <a
-                              href={subItem.href}
-                              className="sub-nav-link blocklink"
-                              {...(subItem.href.replace(/\/$/, "") ===
-                                  currentUrl
-                                ? { "data-active": true }
-                                : {})}
-                            >
-                              {subItem.title}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )
-                  : (
-                    <a
-                      href={item.href}
-                      className="sub-nav-link blocklink"
-                      {...(item.href.replace(/\/$/, "") === currentUrl
-                        ? { "data-active": true }
-                        : {})}
-                    >
-                      {item.title}
-                    </a>
-                  )}
-              </li>
-            ))}
-          </ul>
+                      </a>
+                    )}
+                </li>
+              ))}
+            </ul>
+          )}
         </nav>
       ))}
     </>

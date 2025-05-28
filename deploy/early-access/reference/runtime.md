@@ -4,18 +4,18 @@ title: Runtime
 
 :::info
 
-You are viewing the documentation for Deploy Early Access. Looking for Deploy
-Classic documentation? [View it here](/deploy/).
+You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
+Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-In Deno Deploy EA all applications execute using a standard Deno runtime in a
-secure, isolated Linux environment.
+In Deno Deploy<sup>EA</sup> all applications execute using a standard Deno
+runtime in a secure, isolated Linux environment.
 
-The Deno runtime used in Deno Deploy EA is the standard Deno runtime, with full
-support for all features of the Deno CLI, including JSR and NPM dependencies,
-reading and writing to the file system, making network requests, spawning
-subprocesses, and loading FFI and node native addons.
+The Deno runtime used in Deno Deploy<sup>EA</sup> is the standard Deno runtime,
+with full support for all features of the Deno CLI, including JSR and NPM
+dependencies, reading and writing to the file system, making network requests,
+spawning subprocesses, and loading FFI and node native addons.
 
 The Deno runtime runs using `--allow-all` permissions.
 
@@ -27,14 +27,14 @@ The runtime environment is a Linux-based environment running either x64 or ARM64
 architecture. The exact set of tools available in the runtime environment is
 subject to change and thus can not be relied upon.
 
-Currently Deno Deploy EA runs on Deno 2.3.2.
+Currently Deno Deploy<sup>EA</sup> runs on Deno 2.3.2.
 
 ## Lifecycle
 
-Deno Deploy EA runs applications in a serverless environment. This means that
-applications are not always running, and are only started when a request is
-received. When no incoming traffic to the application is received for a period
-of time, the application is stopped.
+Deno Deploy<sup>EA</sup> runs applications in a serverless environment. This
+means that applications are not always running, and are only started when a
+request is received. When no incoming traffic to the application is received for
+a period of time, the application is stopped.
 
 Applications can be started and stopped at any time. They thus should also start
 quickly to be able to respond to incoming requests without delay.
@@ -107,11 +107,12 @@ killed with a `SIGKILL` signal if it has not already shut down gracefully.
 ## Cold starts
 
 Because applications are not always running, they may need to be started when a
-request is received. This is called a cold start. Cold starts in Deno Deploy EA
-are highly optimized and complete within 100 milliseconds for hello world
-applications, and within a couple hundred milliseconds for larger applications.
+request is received. This is called a cold start. Cold starts in Deno Deploy
+<sup>EA</sup> are highly optimized and complete within 100 milliseconds for
+hello world applications, and within a couple hundred milliseconds for larger
+applications.
 
-Deno Deploy EA uses multiple optimizations to enable fast cold starts:
+Deno Deploy<sup>EA</sup> uses multiple optimizations to enable fast cold starts:
 
 - Sandboxes and the Deno runtime are pre-provisioned to ensure that they do not
   have to be provisioned from scratch when starting an application.
@@ -123,8 +124,9 @@ Deno Deploy EA uses multiple optimizations to enable fast cold starts:
   request.
 
 - File system access is optimized for files that are used frequently during
-  startup. Deno Deploy EA analyzes file access patterns during the warmup phase
-  of the build step and optimizes the file system to make these accesses faster.
+  startup. Deno Deploy<sup>EA</sup> analyzes file access patterns during the
+  warmup phase of the build step and optimizes the file system to make these
+  accesses faster.
 
 When cold starts are slow, they can be noticeable to users. Because of this, it
 is important to optimize applications to start up quickly. Here are some tips

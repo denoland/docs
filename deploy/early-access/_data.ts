@@ -11,10 +11,11 @@ export const sidebar = [
   },
   {
     title: "Reference",
+    href: "/deploy/early-access/reference/",
     items: [
       {
-        title: "Account",
-        href: "/deploy/early-access/reference/account/",
+        title: "Accounts",
+        href: "/deploy/early-access/reference/accounts/",
       },
       {
         title: "Organizations",
@@ -70,13 +71,17 @@ export const sidebar = [
     title: "Changelog",
     href: "/deploy/early-access/changelog/",
   },
+  {
+    title: "Support and Feedback",
+    href: "/deploy/early-access/support/",
+  },
 ] satisfies Sidebar;
 
-export const sectionTitle = "Deploy Early Access";
+export const sectionTitle = "Deno Deploy<sup>EA</sup>";
 export const sectionHref = "/deploy/early-access/";
 export const secondaryNav = [
   {
-    title: "Deploy Early Access",
+    title: "Deno Deploy<sup>EA</sup>",
     href: "/deploy/early-access/",
   },
   {

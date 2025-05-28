@@ -4,12 +4,12 @@ title: Caching
 
 :::info
 
-You are viewing the documentation for Deploy Early Access. Looking for Deploy
-Classic documentation? [View it here](/deploy/).
+You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
+Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-Deno Deploy EA has a built-in CDN that can cache responses from your
+Deno Deploy<sup>EA</sup> has a built-in CDN that can cache responses from your
 application. This is useful for static assets, such as images, CSS, and
 JavaScript files, as well as for API responses or server rendered pages that do
 not change often.
@@ -17,8 +17,8 @@ not change often.
 Caching is enabled by default for all applications. Only assets with valid
 caching headers are cached.
 
-Deno Deploy EA integrates directly with many frameworks, such as Next.js, to
-automatically integrate the cache to enable features like ISR.
+Deno Deploy<sup>EA</sup> integrates directly with many frameworks, such as
+Next.js, to automatically integrate the cache to enable features like ISR.
 
 The CDN cache is tied to the revision and context. This means that if you deploy
 a new revision, the cache will be invalidated and no existing cached responses
@@ -32,7 +32,7 @@ To cache a resource, you need to set the `Cache-Control` header on the response.
 The `Cache-Control` header is a standard HTTP header that controls how the
 response is cached by the browser and the CDN.
 
-Deno Deploy EA supports the following caching directives:
+Deno Deploy<sup>EA</sup> supports the following caching directives:
 
 - `max-age`: The maximum amount of time the response is considered fresh. After
   this time, the response is considered stale and will be revalidated with the
