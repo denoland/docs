@@ -120,7 +120,7 @@ h1 {
   }
 
   pre {
-    @apply mb-6;
+    @apply mb-6 border-foreground-tertiary;
   }
 
   h1:first-child {
