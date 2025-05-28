@@ -108,7 +108,7 @@ killed with a `SIGKILL` signal if it has not already shut down gracefully.
 
 Because applications are not always running, they may need to be started when a
 request is received. This is called a cold start. Cold starts in Deno Deploy
-<sup>**EA**</sup> are highly optimized and complete within 100 milliseconds for
+<sup>EA</sup> are highly optimized and complete within 100 milliseconds for
 hello world applications, and within a couple hundred milliseconds for larger
 applications.
 

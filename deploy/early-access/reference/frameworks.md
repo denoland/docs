@@ -14,9 +14,9 @@ frameworks out of the box. This means that you can use these frameworks without
 any additional configuration or setup.
 
 Natively supported frameworks are tested to work with Deno Deploy
-<sup>**EA**</sup> and are automatically detected when you create a new app. Deno
-Deploy<sup>**EA**</sup> automatically optimizes the build and runtime
-configuration for these frameworks to be as optimal as possible.
+<sup>EA</sup> and are automatically detected when you create a new app. Deno
+Deploy<sup>EA</sup> automatically optimizes the build and runtime configuration
+for these frameworks to be as optimal as possible.
 
 Frameworks not listed here are still likely to work, but may require manually
 configuring the install and/or build command and the runtime configuration in

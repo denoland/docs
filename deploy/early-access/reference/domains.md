@@ -16,7 +16,7 @@ the organization `acme-inc` would have a default organization domain of
 production domain of `my-app.acme-inc.deno.net`.
 
 In addition to the default domains that are provided by Deno Deploy
-<sup>**EA**</sup> automatically, it is also possible to add custom domains to
+<sup>EA</sup> automatically, it is also possible to add custom domains to
 applications. Custom domains are domains that you own and control. To add a
 custom domain, you must have purchased the domain from a domain registrar and
 you must have access to edit the DNS records for the domain.

@@ -13,7 +13,7 @@ Classic documentation? [View it here](/deploy/).
 :::note
 
 Deno Deploy<sup>EA</sup> is in private beta. To use Deno Deploy
-<sup>**EA**</sup> you must join the Early Access program from the
+<sup>EA</sup> you must join the Early Access program from the
 [Deploy Classic account settings page](https://dash.deno.com/account#early-access).
 
 After joining the Early Access program, you may still not immediately have
@@ -24,11 +24,11 @@ access to Deno Deploy<sup>EA</sup> as we are rolling out access in waves.
 ## Create an organization
 
 To get started with Deno Deploy<sup>EA</sup>, you must first create a Deno
-Deploy<sup>**EA**</sup> organization. You can do this by visiting
+Deploy<sup>EA</sup> organization. You can do this by visiting
 [app.deno.com](http://app.deno.com).
 
 Upon first visiting the dashboard, you’ll be greeted by the Deno Deploy
-<sup>**EA**</sup> organization creation screen:
+<sup>EA</sup> organization creation screen:
 
 ![The Deno Deploy<sup>EA</sup> organization creation screen.](./images/create_org.png)
 
@@ -108,12 +108,12 @@ you can leave this field empty.
 ### Runtime configuration
 
 For most frameworks there are no options to configure here, as Deno Deploy
-<sup>**EA**</sup> will figure out the ideal runtime configuration for the app
-based on the framework preset. When a framework is not configured, you can
-choose here whether the app is a `Dynamic` app that needs to execute code server
-side for every request, such as an API server, server-side rendered application,
-etc., or a `Static` app that consists only of a set of static files that need to
-be hosted.
+<sup>EA</sup> will figure out the ideal runtime configuration for the app based
+on the framework preset. When a framework is not configured, you can choose here
+whether the app is a `Dynamic` app that needs to execute code server side for
+every request, such as an API server, server-side rendered application, etc., or
+a `Static` app that consists only of a set of static files that need to be
+hosted.
 
 ### Dynamic Entrypoint
 

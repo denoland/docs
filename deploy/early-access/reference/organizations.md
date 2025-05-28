@@ -12,15 +12,15 @@ Classic documentation? [View it here](/deploy/).
 Organizations are groups of users that collectively own apps and domains. Upon
 signing up to Deno Deploy<sup>EA</sup>, each user can either create an
 organization or be invited to an existing organization by another Deno Deploy
-<sup>**EA**</sup> user.
+<sup>EA</sup> user.
 
 All users must be part of an organization to be able to use Deno Deploy
-<sup>**EA**</sup> because all resources are owned by organizations.
+<sup>EA</sup> because all resources are owned by organizations.
 
 Organizations have a name and a slug. The name is visible only to organization
 members and appears in the organization dropdown in both Deno Deploy
-<sup>**EA**</sup> and Deploy Classic. The organization slug is used for the
-default domain of the organization.
+<sup>EA</sup> and Deploy Classic. The organization slug is used for the default
+domain of the organization.
 
 :::caution
 
@@ -54,8 +54,8 @@ Classic dashboard. To create an organization:
 :::info
 
 Organization slugs must be unique across all organizations in Deno Deploy
-<sup>**EA**</sup>. They can also not be the same as any project name in Deno
-Deploy Classic.
+<sup>EA</sup>. They can also not be the same as any project name in Deno Deploy
+Classic.
 
 :::
 

@@ -68,7 +68,7 @@ The following build configuration options are available:
 
 - **Framework preset:** a configuration preset for certain natively supported
   frameworks and tools. When a framework preset is configured, Deno Deploy
-  <sup>**EA**</sup> will automatically configure the builder to build the given
+  <sup>EA</sup> will automatically configure the builder to build the given
   framework in the most optimal possible way.
   [Learn more about Framework integrations.](./frameworks/)
 - **Install command:** a shell command that is executed to install dependencies.

@@ -28,7 +28,7 @@ There are three main observability features in Deno Deploy<sup>EA</sup>:
 
 Logs in Deno Deploy<sup>EA</sup> are captured using the standard `console` API.
 The logs are queryable from the logs page in the Deno Deploy
-<sup>**EA**</sup> dashboard.
+<sup>EA</sup> dashboard.
 
 Logs are viewed per application. The search bar on the logs page can be used to
 filter based on the attributes below, and the log message.

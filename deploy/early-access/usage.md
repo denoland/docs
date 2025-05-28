@@ -7,11 +7,11 @@ As an early access product, Deno Deploy Early Access currently has a number of
 limitations you should be aware of before using it:
 
 - Deno Deploy Pro account features do not yet extend to Deno Deploy
-  <sup>**EA**</sup>
+  <sup>EA</sup>
 - CLI deployment, and deployment from GitHub Actions are not yet available in
   Deno Deploy<sup>EA</sup>
 - Database features such as Deno KV are not yet available in Deno Deploy
-  <sup>**EA**</sup>
+  <sup>EA</sup>
 - Queues, and Cron are not available in Deno Deploy<sup>EA</sup>
 
 :::info
