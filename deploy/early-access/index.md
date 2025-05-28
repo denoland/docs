@@ -1,5 +1,5 @@
 ---
-title: "Deno Deploy Early Access"
+title: "About Early Access"
 description: "Guide to Deno Deploy Early Access features, comparison with Deploy Classic, and getting started instructions for deployment."
 ---
 

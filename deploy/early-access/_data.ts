@@ -77,7 +77,7 @@ export const sidebar = [
   },
 ] satisfies Sidebar;
 
-export const sectionTitle = "Deploy Early Access";
+export const sectionTitle = "Deno Deploy<sup>EA</sup>";
 export const sectionHref = "/deploy/early-access/";
 export const secondaryNav = [
   {

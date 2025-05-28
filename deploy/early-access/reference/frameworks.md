@@ -51,9 +51,13 @@ Astro is a web framework for building content-driven websites like blogs,
 marketing, and e-commerce. Astro leverages server rendering over client-side
 rendering in the browser as much as possible.
 
-To use Astro with Deno Deploy<sup>EA</sup>, you need to install the
-`@deno/astro-adapter` package and configure your `astro.config.mjs` file to use
-the adapter:
+For static Astro sites, no additional configuration is needed to use Deno Deploy
+<sup>EA</sup>.
+
+When using SSR in Astro with Deno Deploy
+<sup>EA</sup>, you need to install the
+[`@deno/astro-adapter`](https://github.com/denoland/deno-astro-adapter) package
+and configure your `astro.config.mjs` file to use the adapter:
 
 ```bash
 $ deno add npm:@deno/astro-adapter

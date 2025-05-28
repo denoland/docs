@@ -48,7 +48,7 @@ variables with the same name that apply to the same context. It is possible to
 have multiple environment variables with the same name that apply to different
 contexts, as long as the contexts do not overlap.
 
-## Adding and removing environment variables
+## Adding, editing and removing environment variables
 
 There are multiple places to add environment variables:
 
@@ -70,6 +70,11 @@ saving.
 To add a new environment variable, click on the "Add Environment Variable"
 button and fill in the name, value, whether it is a secret, and the contexts in
 which it should be applied.
+
+It is also possible to bulk add multiple environment variable by importing a
+`.env` file. To do this, click on the "+ Add from .env file" in the environment
+variable drawer, paste in the `.env` file contents, and click "Import
+variables". Lines starting with `#` are ignored as comments.
 
 To remove an environment variable, click on the "Remove" button next to the
 environment variable you want to remove.
