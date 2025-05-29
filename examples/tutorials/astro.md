@@ -31,7 +31,7 @@ can start from scratch, and skip installing dependencies so we can install them
 with Deno later:
 
 ```jsx
-deno -A npm:create-astro@latest
+deno init --npm astro@latest
 
  astro   Launch sequence initiated.
 
