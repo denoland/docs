@@ -1713,6 +1713,15 @@
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -4138,157 +4147,40 @@
       "about": "Deno kernel for Jupyter notebooks",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
-        {
-          "name": "unstable-cron",
-          "short": null,
-          "long": "unstable-cron",
-          "required": false,
-          "help": "Enable unstable `Deno.cron` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-cron"
-        },
-        {
-          "name": "unstable-detect-cjs",
-          "short": null,
-          "long": "unstable-detect-cjs",
-          "required": false,
-          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-detect-cjs"
-        },
-        {
-          "name": "unstable-kv",
-          "short": null,
-          "long": "unstable-kv",
-          "required": false,
-          "help": "Enable unstable KV APIs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-kv"
-        },
-        {
-          "name": "unstable-lazy-dynamic-imports",
-          "short": null,
-          "long": "unstable-lazy-dynamic-imports",
-          "required": false,
-          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lazy-dynamic-imports"
-        },
-        {
-          "name": "unstable-lockfile-v5",
-          "short": null,
-          "long": "unstable-lockfile-v5",
-          "required": false,
-          "help": "Enable unstable lockfile v5",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-lockfile-v5"
-        },
-        {
-          "name": "unstable-net",
-          "short": null,
-          "long": "unstable-net",
-          "required": false,
-          "help": "enable unstable net APIs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-net"
-        },
-        {
-          "name": "unstable-no-legacy-abort",
-          "short": null,
-          "long": "unstable-no-legacy-abort",
-          "required": false,
-          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Expose Node globals everywhere",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
-        },
-        {
-          "name": "unstable-npm-lazy-caching",
-          "short": null,
-          "long": "unstable-npm-lazy-caching",
-          "required": false,
-          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-npm-lazy-caching"
-        },
-        {
-          "name": "unstable-sloppy-imports",
-          "short": null,
-          "long": "unstable-sloppy-imports",
-          "required": false,
-          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-sloppy-imports"
-        },
-        {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
-        },
-        {
-          "name": "unstable-unsafe-proto",
-          "short": null,
-          "long": "unstable-unsafe-proto",
-          "required": false,
-          "help": "Enable unsafe __proto__ support. This is a security risk.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-unsafe-proto"
-        },
-        {
-          "name": "unstable-webgpu",
-          "short": null,
-          "long": "unstable-webgpu",
-          "required": false,
-          "help": "Enable unstable WebGPU APIs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-webgpu"
-        },
-        {
-          "name": "unstable-worker-options",
-          "short": null,
-          "long": "unstable-worker-options",
-          "required": false,
-          "help": "Enable unstable Web Worker APIs",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-worker-options"
-        },
-        {
           "name": "install",
           "short": null,
           "long": "install",
           "required": false,
-          "help": "Installs kernelspec, requires 'jupyter' command to be available.",
+          "help": "Install a kernelspec",
           "help_heading": null,
           "usage": "--install"
+        },
+        {
+          "name": "name",
+          "short": "n",
+          "long": "name",
+          "required": false,
+          "help": "Set a name for the kernel (defaults to 'deno'). \u001b[38;5;245mUseful when maintaing multiple Deno kernels.\u001b[39m",
+          "help_heading": null,
+          "usage": "--name <name>"
+        },
+        {
+          "name": "display",
+          "short": "d",
+          "long": "display",
+          "required": false,
+          "help": "Set a display name for the kernel (defaults to 'Deno'). \u001b[38;5;245mUseful when maintaing multiple Deno kernels.\u001b[39m",
+          "help_heading": null,
+          "usage": "--display <display>"
+        },
+        {
+          "name": "force",
+          "short": null,
+          "long": "force",
+          "required": false,
+          "help": "Force installation of a kernel, overwriting previously existing kernelspec",
+          "help_heading": null,
+          "usage": "--force"
         },
         {
           "name": "kernel",
@@ -4307,15 +4199,6 @@
           "help": "Path to JSON file describing connection parameters, provided by Jupyter",
           "help_heading": null,
           "usage": "--conn <conn>"
-        },
-        {
-          "name": "unstable",
-          "short": null,
-          "long": "unstable",
-          "required": false,
-          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
-          "help_heading": "Unstable options",
-          "usage": "--unstable"
         }
       ],
       "subcommands": [],
