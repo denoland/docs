@@ -7,7 +7,7 @@
  * @resource {https://jsr.io/@db/sqlite} @db/sqlite on JSR
  * @group Network
  *
- * An example of a HTTP server for CRUD routes with oak middleware framework and SQLite3 database. It demonstrates the CRUD(Create, Read, Update and Delete) operations on file-based SQLite Database using HTTP methods (Get, Post, Put, Delete, Options)
+ * An example of a HTTP server for CRUD routes with oak middleware framework and SQLite3 database. It demonstrates the CRUD (Create, Read, Update and Delete) operations on file-based SQLite Database using HTTP methods (Get, Post, Put, Delete, Options)
  */
 import { Application, Router } from "jsr:@oak/oak";
 import { Database } from "jsr:@db/sqlite";
