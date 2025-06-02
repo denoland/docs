@@ -303,7 +303,8 @@ for some basic design, so we need to install those dependencies:
 deno install -D npm:tailwindcss npm:@tailwindcss/vite
 ```
 
-Then, we're going to update our `nuxt.config.ts` file by adding the `@tailwindcss/vite` plugin to our Nuxt configuration as a Vite plugin.
+Then, we're going to update our `nuxt.config.ts` file by adding the
+`@tailwindcss/vite` plugin to our Nuxt configuration as a Vite plugin.
 
 ```tsx
 // nuxt.config.ts
@@ -311,7 +312,7 @@ Then, we're going to update our `nuxt.config.ts` file by adding the `@tailwindcs
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
-  compatbilityDate: '2025-05-15',
+  compatbilityDate: "2025-05-15",
   devtools: { enabled: true },
   vite: {
     plugins: [
@@ -321,7 +322,8 @@ export default defineNuxtConfig({
 });
 ```
 
-Next, let’s create a new css file, `assets/css/main.css`, and add an import `@import` that imports tailwind, as well as the tailwind utilities.
+Next, let’s create a new css file, `assets/css/main.css`, and add an import
+`@import` that imports tailwind, as well as the tailwind utilities.
 
 ```tsx
 // assets/css/main.css
@@ -342,7 +344,7 @@ and set up Tailwind CSS.
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
-  compatbilityDate: '2025-05-15',
+  compatbilityDate: "2025-05-15",
   devtools: { enabled: true },
   nitro: {
     preset: "deno",
