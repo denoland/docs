@@ -114,7 +114,7 @@ data:[<media type>][;base64],<data>
 
 For JavaScript modules, use `application/javascript` as the media type.
 TypeScript is also supported with `application/typescript`. This feature is
-particularly useful for testing modules in isolation and creeating mock modules
+particularly useful for testing modules in isolation and creating mock modules
 during tests.
 
 ## Importing third party modules and libraries
