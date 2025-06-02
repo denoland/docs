@@ -300,46 +300,38 @@ In this project, we’re also going to use [tailwind](https://tailwindcss.com/)
 for some basic design, so we need to install those dependencies:
 
 ```bash
-deno install -D npm:tailwindcss npm:postcss npm:autoprefixer
+deno install -D npm:tailwindcss npm:@tailwindcss/vite
 ```
 
-Then initialize Tailwind:
-
-```bash
-deno -A npm:tailwindcss init
-```
-
-This will create a `tailwind.config.js` file in the root of our directory. Let’s
-open that up and update the `content` section to include key files in our
-project:
+Then, we're going to update our `nuxt.config.ts` file by adding the
+`@tailwindcss/vite` plugin to our Nuxt configuration as a Vite plugin.
 
 ```tsx
-// tailwind.config.js
+// nuxt.config.ts
 
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./components/**/*.{js,vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./app.vue",
-  ],
-  theme: {
-    extend: {},
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineNuxtConfig({
+  compatbilityDate: "2025-05-15",
+  devtools: { enabled: true },
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
   },
-  plugins: [],
-};
+});
 ```
 
-Next, let’s add the tailwind utilities to a new css file, `assets/css/main.css`:
+Next, let’s create a new css file, `assets/css/main.css`, and add an import
+`@import` that imports tailwind, as well as the tailwind utilities.
 
 ```tsx
 // assets/css/main.css
+@import "tailwindcss";
 
-base;
-components;
-utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 ```
 
 The only other thing we'll need to do is update our `nuxt.config.ts` file to
@@ -349,31 +341,25 @@ and set up Tailwind CSS.
 ```tsx
 // nuxt.config.ts
 
-import { defineNuxtConfig } from "nuxt/config";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
+  compatbilityDate: "2025-05-15",
   devtools: { enabled: true },
-
   nitro: {
     preset: "deno",
   },
-
   app: {
     head: {
       title: "Dinosaur Encyclopedia",
     },
   },
-
   css: ["~/assets/css/main.css"],
-
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
   },
-
-  compatibilityDate: "2024-11-06",
 });
 ```
 
