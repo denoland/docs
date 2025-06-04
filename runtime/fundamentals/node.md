@@ -318,8 +318,8 @@ Package exports can be
 resolution mode. The conditions satisfied by an import from a Deno ESM module
 are as follows:
 
-```ts
-["deno", "node", "import", "default"];
+```json
+["deno", "node", "import", "default"]
 ```
 
 This means that the first condition listed in a package export whose key equals
@@ -327,11 +327,11 @@ any of these strings will be matched. You can expand this list using the
 `--unstable-node-conditions` CLI flag:
 
 ```shell
-deno run --unstable-node-conditions development,react-server
+deno run --unstable-node-conditions development,react-server main.ts
 ```
 
-```ts
-["development", "react-server", "deno", "node", "import", "default"];
+```json
+["development", "react-server", "deno", "node", "import", "default"]
 ```
 
 ## Importing types
