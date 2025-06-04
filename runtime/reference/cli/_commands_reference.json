@@ -351,6 +351,15 @@
           "usage": "--v8-flags[=<V8_FLAGS>...]"
         },
         {
+          "name": "unstable-node-conditions",
+          "short": "-C",
+          "long": "unstable-node-conditions",
+          "required": false,
+          "help": "Provide custom conditions for node resolution. See:\n  https://nodejs.org/api/cli.html#-c-condition---conditionscondition",
+          "help_heading": null,
+          "usage": "--unstable-node-conditions <CONDITIONS_LIST>"
+        },
+        {
           "name": "seed",
           "short": null,
           "long": "seed",
