@@ -134,13 +134,6 @@ The `patch` field in `deno.json` allows you to override dependencies without
 modifying their source code. It also allows you to use packages stored locally
 on disk.
 
-This capability addresses several common development challenges:
-
-- Dependency bug fixes
-- Private local libraries
-- Compatibility issues
-- Security concerns
-
 ```json title="deno.json"
 {
   "patch": [
@@ -149,11 +142,18 @@ This capability addresses several common development challenges:
 }
 ```
 
+This capability addresses several common development challenges:
+
+- Dependency bug fixes
+- Private local libraries
+- Compatibility issues
+- Security concerns
+
 The package being referenced doesn't need to be published at all. It just needs
-to have the proper package metadata in `deno.json` or `package.json`, so that
-Deno knows what package it's dealing with. This provides greater flexibility and
-modularity, maintaining clean separation between your main code and external
-packages.
+to have the proper package name and metadata in `deno.json` or `package.json`,
+so that Deno knows what package it's dealing with. This provides greater
+flexibility and modularity, maintaining clean separation between your main code
+and external packages.
 
 ## Tasks
 
