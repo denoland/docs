@@ -311,7 +311,7 @@ module.exports = {
     docs: https://docs.deno.com/go/commonjs
 ```
 
-## Conditions
+## Conditional exports
 
 Package exports can be
 [conditioned](https://nodejs.org/api/packages.html#conditional-exports) on the
