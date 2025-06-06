@@ -46,6 +46,23 @@ deno task dev
 Deno will run the `dev` task from the `package.json` file which will start the
 Vite server. Click the output link to localhost to see your app in the browser.
 
+## Configure the formatter
+
+`deno fmt` supports Vue files with the
+[`--unstable-component`](https://docs.deno.com/runtime/reference/cli/fmt/#formatting-options-unstable-component)
+flag. To use it, run this command:
+
+```sh
+deno fmt --unstable-component
+```
+
+To configure `deno fmt` to always format your Vue files, add this at the top
+level of your `deno.json` file:
+
+```json
+"unstable": ["fmt-component"]
+```
+
 ## Add a backend
 
 The next step is to add a backend API. We'll create a very simple API that
