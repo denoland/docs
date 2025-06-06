@@ -311,7 +311,7 @@ your `.sublime-project` configuration like the below:
 
 The [Nova editor](https://nova.app) can integrate the Deno language server via
 the
-[Deno extension](https://extensions.panic.com/extensions/jaydenseric/jaydenseric.deno).
+[Deno extension](https://extensions.panic.com/extensions/co.gwil/co.gwil.deno/).
 
 ### GitHub Codespaces
 
