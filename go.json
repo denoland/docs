@@ -14,6 +14,7 @@
   "check": "/runtime/manual/tools/check",
   "commonjs": "/runtime/fundamentals/node/#commonjs-support",
   "compile": "/runtime/manual/tools/compile",
+  "conditional-exports": "/runtime/fundamentals/node/#conditional-exports",
   "config": "/runtime/fundamentals/configuration/",
   "coverage": "/runtime/manual/tools/coverage",
   "doc": "/runtime/manual/tools/doc",
