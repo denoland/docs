@@ -240,9 +240,8 @@ Deno.test("report generation with controlled environment", () => {
 
 Time-dependent code can be challenging to test because it may produce different
 results based on when the test runs. Deno provides a
-[`fakeTime`](https://jsr.io/@std/testing/doc/mock#faking-time) utility that
-allows you to simulate the passage of time and control date-related functions
-during tests.
+[`FakeTime`](https://jsr.io/@std/testing/doc/time) utility that allows you to
+simulate the passage of time and control date-related functions during tests.
 
 The example below demonstrates how to test time-dependent functions:
 `isWeekend()`, which returns true if the current day is Saturday or Sunday, and
@@ -250,7 +249,7 @@ The example below demonstrates how to test time-dependent functions:
 
 ```ts
 import { assertEquals } from "jsr:@std/assert";
-import { FakeTime, fakeTime } from "jsr:@std/testing/mock";
+import { FakeTime } from "jsr:@std/testing/time";
 
 // Function that depends on the current time
 function isWeekend(): boolean {
@@ -267,6 +266,8 @@ function delayedGreeting(callback: (message: string) => void): void {
 }
 
 Deno.test("time-dependent tests", () => {
+  using fakeTime = new FakeTime();
+
   // Create a fake time starting at a specific date (a Monday)
   const mockedTime: FakeTime = fakeTime(new Date("2023-05-01T12:00:00Z"));
 
@@ -447,7 +448,8 @@ output.
 
 ```ts
 import { assertEquals, assertRejects } from "jsr:@std/assert";
-import { FakeTime, fakeTime, spy, stub } from "jsr:@std/testing/mock";
+import { spy, stub } from "jsr:@std/testing/mock";
+import { FakeTime } from "jsr:@std/testing/time";
 
 // The service we want to test
 class AuthService {
@@ -542,6 +544,8 @@ Deno.test("AuthService comprehensive test", async (t) => {
   });
 
   await t.step("token expiration should work correctly", () => {
+    using fakeTime = new FakeTime();
+
     const authService = new AuthService();
     const time = fakeTime(new Date("2023-01-01T12:00:00Z"));
 
