@@ -9,9 +9,9 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-In Deno Deploy<sup>EA</sup> an app code can have multiple historical revisions.
-These revisions (or builds) generally map one to one to git commits in the
-linked GitHub repository when deploying from GitHub.
+In Deno Deploy<sup>EA</sup> an app's code can have multiple historical
+revisions. These revisions (or builds) generally map one to one to git commits
+in the linked GitHub repository when deploying from GitHub.
 
 Builds can be triggered in two ways:
 
@@ -27,8 +27,8 @@ available to users:
 
 1. **Queuing:** the revision is waiting to be assigned to a build.
 1. **Preparing:** a builder is assigned to process the build, the source code of
-   the revision gets being downloaded to the builder, and any available build
-   caches are being restored to the builder
+   the revision gets downloaded to the builder, and any available build caches
+   are being restored to the builder
 1. **Install:** the install command is executed if there is one. This will
    usually download any dependencies that are not already in the build cache,
    and check that the lockfile is up to date.

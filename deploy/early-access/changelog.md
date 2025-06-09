@@ -15,11 +15,11 @@ Deploy Classic documentation? [View it here](/deploy/).
 ### Features
 
 - Deno Deploy Early Access has a new logo!
-- Anyone can join to Early Access now by signing up at
+- Anyone can join Early Access now by signing up at
   [dash.deno.com](https://dash.deno.com/account#early-access)
 - Builds can now use up to 8 GB of storage, up from 2 GB
 - Builds can now use environment variables and secrets configured in the
-  organization or app settings (in the new “Build” context)
+  organization or app settings (in the new "Build" context)
 - Builds now have a maximum runtime of 5 minutes
 - The metrics page has had a complete overhaul, by rewriting the chart
   rendering:
