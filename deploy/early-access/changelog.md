@@ -17,10 +17,11 @@ Deploy Classic documentation? [View it here](/deploy/).
 - Deno Deploy Early Access has a new logo!
 - Anyone can join Early Access now by signing up at
   [dash.deno.com](https://dash.deno.com/account#early-access)
-- Builds can now use up to 8 GB of storage, up from 2 GB
-- Builds can now use environment variables and secrets configured in the
-  organization or app settings (in the new "Build" context)
-- Builds now have a maximum runtime of 5 minutes
+- Builds
+  - Builds can now use up to 8 GB of storage, up from 2 GB
+  - Builds can now use environment variables and secrets configured in the
+    organization or app settings (in the new "Build" context)
+  - Builds now have a maximum runtime of 5 minutes
 - The metrics page has had a complete overhaul, by rewriting the chart
   rendering:
   - Dragging on a graph now zooms in on the selected area
@@ -32,7 +33,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 ### Bug fixes
 
 - Builds should not get stuck in a pending state anymore
-- Page loads should be much faster in large parts of the dashboard
+- Dashboard pages now load significantly faster
 - Correctly show spans in traces that have parents that are not exported (yet)
 - The metrics page correctly refreshes now when switching time ranges
 - The "Clear search" button in the telemetry search bar now works correctly
