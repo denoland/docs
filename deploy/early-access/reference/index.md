@@ -25,7 +25,7 @@ Early Access.
 Learn about creating and managing organizations, team members, roles, and
 permissions.
 
-### [Applications](/deploy/early-access/reference/applications)
+### [Applications](/deploy/early-access/reference/apps)
 
 Details about application creation, configuration, and lifecycle management.
 
@@ -37,11 +37,11 @@ Understanding the build process, build configurations, and deployment pipelines.
 
 Monitoring applications, accessing logs, metrics, and performance insights.
 
-### [Environments](/deploy/early-access/reference/environments)
+### [Environments](/deploy/early-access/reference/env-vars-and-contexts/)
 
 Managing different deployment environments including development, staging, and
 production.
 
-### [Custom Domains](/deploy/early-access/reference/custom-domains)
+### [Custom Domains](/deploy/early-access/reference/domains)
 
 Setting up and configuring custom domains for your applications.

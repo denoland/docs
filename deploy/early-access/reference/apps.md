@@ -42,7 +42,7 @@ Apps can also have environment variables that are available at runtime. These
 can be added during app creation by using the "Edit Environment Variables"
 button. This will open a drawer where you can add environment variables to the
 app. For more details on environment variables, see the
-[Contexts and Timelines](/deploy/early-access/reference/contexts-and-timelines/)
+[Contexts and Timelines](/deploy/early-access/reference/timelines/)
 documentation.
 
 ## Deleting an app
