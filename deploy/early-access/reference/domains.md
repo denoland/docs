@@ -1,5 +1,6 @@
 ---
 title: Domains
+description: "Complete guide to domain management in Deno Deploy Early Access, including organization domains, custom domains, DNS configuration, TLS certificates, and domain assignments."
 ---
 
 :::info

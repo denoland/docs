@@ -79,7 +79,7 @@ Deploy.
 
 ## How to access EA
 
-To begin using Deno Deploy Early Access:
+To begin using Deno Deploy<sup>EA</sup>:
 
 1. Visit [app.deno.com](https://app.deno.com) to access the new dashboard
 2. Create a new Deno Deploy<sup>EA</sup> organization

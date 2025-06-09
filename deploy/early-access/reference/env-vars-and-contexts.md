@@ -1,5 +1,6 @@
 ---
 title: Environment Variables and Contexts
+description: "Guide to managing environment variables and contexts in Deno Deploy Early Access, including variable types, creation, editing, and accessing them in your code."
 ---
 
 :::info

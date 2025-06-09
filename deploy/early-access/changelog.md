@@ -14,7 +14,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 ### Features
 
-- Deno Deploy Early Access has a new logo!
+- Deno Deploy<sup>EA</sup> has a new logo!
 - Anyone can join Early Access now by signing up at
   [dash.deno.com](https://dash.deno.com/account#early-access)
 - Builds
