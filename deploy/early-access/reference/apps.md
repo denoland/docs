@@ -1,6 +1,6 @@
 ---
 title: Applications
-description: "Guide to managing applications in Deno Deploy Early Access, including app creation, configuration, GitHub integration, and deployment options."
+description: "Guide to managing applications in Deno DeployEA, including app creation, configuration, GitHub integration, and deployment options."
 ---
 
 :::info

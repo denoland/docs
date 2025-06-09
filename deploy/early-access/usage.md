@@ -1,6 +1,6 @@
 ---
 title: "Deno Deploy Early Access Usage Guidelines"
-description: "Important limitations, service level expectations, and terms of use for the Deno Deploy Early Access program."
+description: "Important limitations, service level expectations, and terms of use for the Deno DeployEA program."
 ---
 
 As an early access product, Deno Deploy<sup>EA</sup> currently has a number of
