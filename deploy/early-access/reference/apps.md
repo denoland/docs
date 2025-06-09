@@ -62,7 +62,7 @@ documentation.
 The GitHub integration enables automatic deployments of the app from a GitHub
 repository. Every push to the repository will trigger a new build of the app.
 Depending on the branch of the commit, the build will be deployed to different
-[timelines](/deploy/early-access/reference/contexts-and-timelines/).
+[timelines](/deploy/early-access/reference/timelines/).
 
 Apps will generally be linked to a GitHub repository on creation. However, it is
 possible to unlink the repository after creation, and optionally link it to a
