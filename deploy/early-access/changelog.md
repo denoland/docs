@@ -36,7 +36,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 - Correctly show spans in traces that have parents that are not exported (yet)
 - The metrics page correctly refreshes now when switching time ranges
 - The "Clear search" button in the telemetry search bar now works correctly
-- Older Next.js versions (such as Next.js 13) correctly build now
+- Older Next.js versions (such as Next.js 13) build correctly now
 - The environment variable drawer is now used everywhere, fixing a bug where
   multiple env vars with the same name but different contexts would conflict
 - Running `node <path>` in the builder does not fail anymore when the path is
