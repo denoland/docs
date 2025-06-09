@@ -43,7 +43,7 @@ Need more contexts? Please reach out to [support](../support).
 
 :::
 
-Additionally ther is also a **Build** context, which is used during the build
+Additionally, there is also a **Build** context, which is used during the build
 process of an application. Environment variables set in the Build context are
 not available in the Production or Development contexts, and vice versa. This
 means that you can use different environment variables for the build process
