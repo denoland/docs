@@ -1,6 +1,6 @@
 ---
 title: "Getting started"
-description: "Step-by-step guide to creating and configuring your first Deno Deploy Early Access application, including organization setup, build configuration, environment variables, and deployment monitoring."
+description: "Step-by-step guide to creating and configuring your first Deno DeployEA application, including organization setup, build configuration, environment variables, and deployment monitoring."
 ---
 
 :::info

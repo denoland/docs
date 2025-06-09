@@ -1,6 +1,6 @@
 ---
 title: "Deno Deploy<sup>EA</sup> changelog"
-description: "Listing notable progress in the development and evolution of Deno Deploy Early Access"
+description: "Listing notable progress in the development and evolution of Deno DeployEA"
 ---
 
 :::info
@@ -14,7 +14,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 ### Features
 
-- Deno Deploy Early Access has a new logo!
+- Deno Deploy<sup>EA</sup> has a new logo!
 - Anyone can join Early Access now by signing up at
   [dash.deno.com](https://dash.deno.com/account#early-access)
 - Builds
@@ -84,4 +84,5 @@ Deploy Classic documentation? [View it here](/deploy/).
 - The "Provision certificate" button does not lock up after DNS verification
   failures anymore
 - Domains that had a provisioned certificate or attached application can now be
-  deleted
+  deleted ins that had a provisioned certificate or attached application can now
+  be deleted

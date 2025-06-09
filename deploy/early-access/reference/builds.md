@@ -1,5 +1,6 @@
 ---
 title: Builds
+description: "Detailed explanation of the build process in Deno DeployEA, covering build triggers, stages, configuration options, caching, and the build environment."
 ---
 
 :::info
