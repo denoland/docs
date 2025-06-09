@@ -21,7 +21,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 - Builds can now use environment variables and secrets configured in the
   organization or app settings (in the new “Build” context)
 - Builds now have a maximum runtime of 5 minutes
-- The metrics page has gotten a complete overhaul by rewriting the chart
+- The metrics page has had a complete overhaul, by rewriting the chart
   rendering:
   - Dragging on a graph now zooms in on the selected area
   - Much more data can now be shown without the page becoming slow to load
