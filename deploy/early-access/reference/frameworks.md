@@ -1,5 +1,6 @@
 ---
 title: Frameworks
+description: "Detailed guide to supported JavaScript and TypeScript frameworks in Deno Deploy Early Access, including Next.js, Astro, Nuxt, SvelteKit, and more."
 ---
 
 :::info

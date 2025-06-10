@@ -1,5 +1,5 @@
 ---
-title: "Deno Deploy Early Access Usage Guidelines"
+title: "Deno Deployᴱᴬ Usage Guidelines"
 description: "Important limitations, service level expectations, and terms of use for the Deno Deploy Early Access program."
 ---
 

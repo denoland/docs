@@ -1,5 +1,6 @@
 ---
 title: Runtime
+description: "Details about the Deno Deploy Early Access runtime environment, including application lifecycle, startup, shutdown, and cold start optimization."
 ---
 
 :::info

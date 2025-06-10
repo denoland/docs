@@ -1,5 +1,6 @@
 ---
 title: Caching
+description: "Overview of CDN caching functionality in Deno Deploy Early Access, including cache configuration, directives, and best practices."
 ---
 
 :::info
