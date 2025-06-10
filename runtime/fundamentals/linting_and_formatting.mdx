@@ -106,6 +106,20 @@ jobs:
 This ensures that any code changes adhere to the project's formatting standards
 before being merged.
 
+### Integration in VS Code
+
+To enable Deno as your formatter in VS Code, you have to set it up as your default formatter in the settings, and then add a `.vscode/settings.json` file in the root of your project with the following configuration:
+
+```json
+{
+  "deno.enablePaths": [
+    "./deno.json"
+  ]
+}
+```
+
+If your `deno.json(c)` file is located in a subdirectory of your project, provide the correct relative path to it instead.
+
 ### Available options
 
 #### `bracePosition`
