@@ -104,6 +104,23 @@ We can start the Astro server with `deno task dev`:
 
 ![Getting the Astro app to work](./images/how-to/astro/hello-astro.png)
 
+## Configure the formatter
+
+`deno fmt` supports Astro files with the
+[`--unstable-component`](https://docs.deno.com/runtime/reference/cli/fmt/#formatting-options-unstable-component)
+flag. To use it, run this command:
+
+```sh
+deno fmt --unstable-component
+```
+
+To configure `deno fmt` to always format your Astro files, add this at the top
+level of your `deno.json` file:
+
+```json
+"unstable": ["fmt-component"]
+```
+
 ## Update index page to list all dinosaurs
 
 Our app will display facts about a variety of dinosaurs. The first page to
