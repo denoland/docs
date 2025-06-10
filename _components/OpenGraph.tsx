@@ -71,7 +71,7 @@ export default function OpenGraph(
         "N": "ᴺ",
         "O": "ᴼ",
         "P": "ᴾ",
-        "Q": "Q",
+        "Q": "ꟴ",
         "R": "ᴿ",
         "S": "ˢ",
         "T": "ᵀ",
