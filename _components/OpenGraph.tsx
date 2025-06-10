@@ -6,7 +6,12 @@ export default function OpenGraph(
     url: string;
   },
 ) {
-  const formatHtmlForMeta = (html: string): string => {
+  const formatHtmlForMeta = (html: string | undefined | null): string => {
+    // Handle undefined or null values
+    if (html === undefined || html === null) {
+      return "";
+    }
+
     // Convert <sup> content to Unicode superscript characters
     let formatted = html.replace(/<sup>(\d+)<\/sup>/g, (_, digit) => {
       const superscriptMap: Record<string, string> = {
@@ -100,7 +105,7 @@ export default function OpenGraph(
     image = `${url}index.png`;
   }
 
-  // Process both title and description
+  // Process both title and description with null safety
   const formattedTitle = formatHtmlForMeta(title);
   const formattedDescription = formatHtmlForMeta(description);
 
