@@ -212,7 +212,11 @@ export const sectionTitle = "Deploy";
 export const sectionHref = "/deploy/manual/";
 export const secondaryNav = [
   {
-    title: "Deploy",
+    title: "Deno Deploy<sup>EA</sup>",
+    href: "/deploy/early-access/",
+  },
+  {
+    title: "Deploy Classic",
     href: "/deploy/manual/",
   },
   {
