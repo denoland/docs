@@ -45,7 +45,7 @@ export default function OpenGraph(
         "n": "ⁿ",
         "o": "ᵒ",
         "p": "ᵖ",
-        "q": "ᵠ",
+        "q": "ᵠ", // Change from "Q" to lowercase "ᵠ" as the best available option
         "r": "ʳ",
         "s": "ˢ",
         "t": "ᵗ",
@@ -71,7 +71,7 @@ export default function OpenGraph(
         "N": "ᴺ",
         "O": "ᴼ",
         "P": "ᴾ",
-        "Q": "ꟴ",
+        "Q": "ᵠ",
         "R": "ᴿ",
         "S": "ˢ",
         "T": "ᵀ",
