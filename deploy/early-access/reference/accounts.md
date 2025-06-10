@@ -1,5 +1,6 @@
 ---
 title: Accounts
+description: "Information about user accounts, authentication via GitHub, and managing your profile in Deno Deploy Early Access."
 ---
 
 :::info

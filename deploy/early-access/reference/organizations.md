@@ -1,5 +1,6 @@
 ---
 title: Organizations
+description: "Guide to creating and managing organizations in Deno Deploy Early Access, including members, permissions, and organization administration."
 ---
 
 :::info

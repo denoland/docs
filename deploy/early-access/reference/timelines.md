@@ -1,5 +1,6 @@
 ---
 title: Timelines
+description: "Understanding deployment timelines in Deno Deploy Early Access, including production and development contexts, active revisions, rollbacks, and timeline locking."
 ---
 
 :::info

@@ -1,5 +1,6 @@
 ---
 title: Observability
+description: "Comprehensive overview of monitoring features in Deno Deploy Early Access, including logs, traces, metrics, and filtering options."
 ---
 
 :::info
