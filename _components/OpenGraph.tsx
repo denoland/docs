@@ -6,7 +6,7 @@ export default function OpenGraph(
     url: string;
   },
 ) {
-  const formatTitleForMeta = (html: string): string => {
+  const formatHtmlForMeta = (html: string): string => {
     // Convert <sup> content to Unicode superscript characters
     let formatted = html.replace(/<sup>(\d+)<\/sup>/g, (_, digit) => {
       const superscriptMap: Record<string, string> = {
@@ -99,18 +99,23 @@ export default function OpenGraph(
   } else {
     image = `${url}index.png`;
   }
+
+  // Process both title and description
+  const formattedTitle = formatHtmlForMeta(title);
+  const formattedDescription = formatHtmlForMeta(description);
+
   return (
     <>
-      <meta name="twitter:title" content={formatTitleForMeta(title)} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:title" content={formattedTitle} />
+      <meta name="twitter:description" content={formattedDescription} />
       <meta name="twitter:image" content={image} />
-      <meta name="twitter:image:alt" content={description} />
+      <meta name="twitter:image:alt" content={formattedDescription} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@deno_land" />
-      <meta property="og:title" content={formatTitleForMeta(title)} />
-      <meta property="og:description" content={description} />
+      <meta property="og:title" content={formattedTitle} />
+      <meta property="og:description" content={formattedDescription} />
       <meta property="og:image" content={image} />
-      <meta property="og:image:alt" content={description} />
+      <meta property="og:image:alt" content={formattedDescription} />
       <meta property="og:type" content="article" />
       <meta property="og:site_name" content="Deno" />
       <meta property="og:locale" content="en_US" />
