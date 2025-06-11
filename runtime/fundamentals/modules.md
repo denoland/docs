@@ -495,8 +495,8 @@ When using a `package.json` file, dev dependencies can be added to the separate
 ### Why does Deno not have a `devImports` field?
 
 To understand why Deno does not separate out dev dependencies in the package
-manifest it is important to understand what problem dev dependencies are
-trying to solve.
+manifest it is important to understand what problem dev dependencies are trying
+to solve.
 
 When deploying an application you frequently want to install only the
 dependencies that are actually used in the code that is being executed. This
