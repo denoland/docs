@@ -130,13 +130,12 @@ import map's URL or file path.
 
 ### Overriding packages
 
-The `patch` field in `deno.json` allows you to override dependencies without
-modifying their source code. It also allows you to use packages stored locally
-on disk.
+The `links` field in `deno.json` allows you to override dependencies with local
+packages stored on disk. This is similar to `npm link`.
 
 ```json title="deno.json"
 {
-  "patch": [
+  "links": [
     "../some-package"
   ]
 }
@@ -147,7 +146,6 @@ This capability addresses several common development challenges:
 - Dependency bug fixes
 - Private local libraries
 - Compatibility issues
-- Security concerns
 
 The package being referenced doesn't need to be published at all. It just needs
 to have the proper package name and metadata in `deno.json` or `package.json`,
