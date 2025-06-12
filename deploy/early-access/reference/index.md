@@ -33,6 +33,10 @@ Details about application creation, configuration, and lifecycle management.
 
 Understanding the build process, build configurations, and deployment pipelines.
 
+### [Playgrounds](/deploy/early-access/reference/playgrounds)
+
+Write and deploy code without needing to create a git repository.
+
 ### [Observability](/deploy/early-access/reference/observability)
 
 Monitoring applications, accessing logs, metrics, and performance insights.
