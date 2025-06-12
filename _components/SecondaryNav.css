@@ -1,11 +1,10 @@
 .sub-nav-heading {
-  margin: 0 0 0.5rem;
   font-size: 1.1em;
 }
 
 .sub-nav {
   padding: 0;
-  margin: 0 0 0.5rem;
+  margin: 0.5rem 0;
   list-style: none;
   min-width: 250px;
 }
@@ -37,9 +36,11 @@
   display: block;
 }
 
-.sub-nav-link[data-active] {
+.sub-nav-link[data-active="true"] {
   background-color: hsl(var(--background-secondary));
-  border: 1px solid hsl(var(--foreground-tertiary));
+  &:after {
+    display: none;
+  }
 }
 
 .sub-nav-toggle {

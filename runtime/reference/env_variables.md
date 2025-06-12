@@ -8,7 +8,7 @@ oldUrl:
 
 There are a few ways to use environment variables in Deno:
 
-## Built-in Deno.env
+## Built-in Deno.env method
 
 The Deno runtime offers built-in support for environment variables with
 [`Deno.env`](https://docs.deno.com/api/deno/~/Deno.env).
@@ -26,12 +26,18 @@ console.log(Deno.env.has("FIREBASE_AUTH_DOMAIN")); // true
 
 ## .env file
 
-Deno supports `.env` files. You can cause Deno to read environment variables
-from `.env` using the `--env-file` flag: `deno run --env-file <script>`. This
-will read `.env` from the current working directory or the first parent
-directory that contains one; if you want to load environment variables from a
-different file, you can specify that file as a parameter to the flag.
-Additionally, you can pass multiple `--env-file` flags (e.g.,
+Deno also supports `.env` files. You can tell Deno to read environment variables
+from `.env` with the `--env-file` flag, for example:
+
+```sh
+deno run --env-file main.ts
+```
+
+This will read the `.env` file from the current working directory or the first
+parent directory that contains one. If you want to load environment variables
+from a different file, you can specify that file as a parameter to the flag.
+
+You can pass multiple `--env-file` flags (e.g.,
 `deno run --env-file=.env.one --env-file=.env.two --allow-env <script>`) to load
 variables from multiple files.
 

@@ -570,3 +570,54 @@ This approach allows you to:
 2. Share code between packages without publishing to a registry
 3. Test and develop interdependent modules together
 4. Gradually migrate monolithic codebases to modular architecture
+
+## Using Workspace Protocol in package.json
+
+Deno supports workspace protocol specifiers in `package.json` files. These are
+useful when you have npm packages that depend on other packages within the
+workspace:
+
+```json title="package.json"
+{
+  "name": "my-npm-package",
+  "dependencies": {
+    "another-workspace-package": "workspace:*"
+  }
+}
+```
+
+The following workspace protocol specifiers are supported:
+
+- `workspace:*` - Use the latest version available in the workspace
+- `workspace:~` - Use the workspace version with only patch-level changes
+- `workspace:^` - Use the workspace version with semver-compatible changes
+
+## npm and pnpm Workspace Compatibility
+
+Deno works seamlessly with standard npm workspaces defined in `package.json`:
+
+```json title="package.json"
+{
+  "workspaces": ["packages/*"]
+}
+```
+
+For pnpm users, Deno supports typical pnpm workspace configurations. However, if
+you're using a `pnpm-workspace.yaml` file, you'll need to migrate to a
+`deno.json` workspace configuration:
+
+```yaml title="pnpm-workspace.yaml (to be replaced)"
+packages:
+  - "packages/*"
+```
+
+Should be converted to:
+
+```json title="deno.json"
+{
+  "workspace": ["packages/*"]
+}
+```
+
+This allows for smooth integration between Deno and npm/pnpm ecosystems during
+migration or in hybrid projects.

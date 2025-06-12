@@ -18,6 +18,7 @@
     transform: translateX(-100%);
     background-color: hsl(var(--background-primary));
     z-index: 11;
+    height: calc(100vh - 4rem);
   }
 
   .hamburger-label {
@@ -30,6 +31,11 @@
     transform: translateX(0);
     box-shadow: 350px 0px 0px 0px rgba(0, 0, 0, 0.5);
   }
+
+  body:has(.refheader) .nav {
+    top: 7rem;
+    height: calc(100vh - 7rem);
+  }
 }
 
 @media (min-width: 1024px) {
@@ -39,5 +45,10 @@
     height: calc(100vh - 4rem);
     overflow-y: auto;
     min-width: 330px;
+  }
+
+  body:has(.refheader) .nav {
+    top: 7rem;
+    height: calc(100vh - 7rem);
   }
 }

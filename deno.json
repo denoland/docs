@@ -44,6 +44,14 @@
     "serve:style": {
       "description": "Build, serve, and watch just the styles and styleguide",
       "command": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts"
+    },
+    "generate:llms": {
+      "description": "Generate LLM-friendly documentation files (llms.txt and llms-full.txt) in the static directory",
+      "command": "deno run -A generate_llms_files.ts"
+    },
+    "generate:llms:site": {
+      "description": "Generate LLM-friendly documentation files directly in the _site directory",
+      "command": "deno run -A generate_llms_files.ts _site"
     }
   },
   "compilerOptions": {

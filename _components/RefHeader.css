@@ -1,14 +1,21 @@
 .refheader {
   position: sticky;
   top: calc(4rem - 1px);
-  padding: 0.5rem;
+  display: flex;
+  align-items: center;
   padding-left: 0;
   background-color: hsl(var(--background-secondary));
   border-bottom: 1px solid hsl(var(--foreground-tertiary));
   z-index: 5;
+  height: 3rem;
 }
 
-.refheader-link[data-active] {
+.refheader-link {
+  white-space: nowrap;
+  font-size: clamp(0.875rem, 1vw + 0.5rem, 1rem);
+}
+
+.refheader-link[data-active="true"] {
   color: hsl(var(--primary));
 }
 

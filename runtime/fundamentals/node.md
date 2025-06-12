@@ -311,6 +311,29 @@ module.exports = {
     docs: https://docs.deno.com/go/commonjs
 ```
 
+## Conditional exports
+
+Package exports can be
+[conditioned](https://nodejs.org/api/packages.html#conditional-exports) on the
+resolution mode. The conditions satisfied by an import from a Deno ESM module
+are as follows:
+
+```json
+["deno", "node", "import", "default"]
+```
+
+This means that the first condition listed in a package export whose key equals
+any of these strings will be matched. You can expand this list using the
+`--unstable-node-conditions` CLI flag:
+
+```shell
+deno run --unstable-node-conditions development,react-server main.ts
+```
+
+```json
+["development", "react-server", "deno", "node", "import", "default"]
+```
+
 ## Importing types
 
 Many npm packages ship with types, you can import these and use them with types

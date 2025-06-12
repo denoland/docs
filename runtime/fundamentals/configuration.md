@@ -128,6 +128,31 @@ import { MyUtil } from "/util.ts";
 This causes import specifiers starting with `/` to be resolved relative to the
 import map's URL or file path.
 
+### Overriding packages
+
+The `links` field in `deno.json` allows you to override dependencies with local
+packages stored on disk. This is similar to `npm link`.
+
+```json title="deno.json"
+{
+  "links": [
+    "../some-package"
+  ]
+}
+```
+
+This capability addresses several common development challenges:
+
+- Dependency bug fixes
+- Private local libraries
+- Compatibility issues
+
+The package being referenced doesn't need to be published at all. It just needs
+to have the proper package name and metadata in `deno.json` or `package.json`,
+so that Deno knows what package it's dealing with. This provides greater
+flexibility and modularity, maintaining clean separation between your main code
+and external packages.
+
 ## Tasks
 
 The `tasks` field in your `deno.json` file is used to define custom commands
