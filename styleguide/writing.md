@@ -3,8 +3,6 @@ title: "Deno Documentation Style Guide"
 description: "Guidelines and best practices for writing clear, consistent, and helpful documentation for the Deno runtime and ecosystem."
 ---
 
-# Deno Documentation Style Guide
-
 This guide outlines the standards and best practices for writing documentation
 for Deno. Following these guidelines helps ensure our documentation remains
 consistent, clear, and helpful for all users.
@@ -88,7 +86,6 @@ console.log(greet("world"));
 ```
 ````
 
-````
 ### Best Practices for Examples
 
 - Keep examples simple and focused on demonstrating one concept
@@ -103,19 +100,21 @@ For code blocks that should be tested:
 
 - Ensure examples in documentation are correct and runnable
 - Use triple backticks with language identifiers to enable testable code blocks
-- Follow the guidelines in [Documentation Tests](/runtime/reference/documentation/)
+- Follow the guidelines in
+  [Documentation Tests](/runtime/reference/documentation/)
 
 ## Formatting Elements
 
 ### Links
 
 - Use descriptive link text that makes sense out of context
-- For internal links, use relative paths, ending in a `/`: `/runtime/fundamentals/modules/`
+- For internal links, use relative paths, ending in a `/`:
+  `/runtime/fundamentals/modules/`
 - Link to relevant documentation when introducing new concepts
 
 ```markdown
 [descriptive text](/path/to/page/)
-````
+```
 
 ### Lists
 
