@@ -19,7 +19,8 @@ original Deploy, featuring:
 - Significantly enhanced underlying infrastructure
 
 <a href="https://dash.deno.com/account#early-access" class="docs-cta runtime-cta">Join
-the Early Access program</a> <a href="https://app.deno.com" class="docs-cta deploy-cta">Go to your Deno
+the Early Access program</a>
+<a href="https://app.deno.com" class="docs-cta deploy-cta">Go to your Deno
 Deploy<sup>EA</sup> dashboard</a>
 
 :::note
