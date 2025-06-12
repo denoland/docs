@@ -234,6 +234,53 @@ folowing entries:
 - `@scope/my-package/foo`
 - `@scope/my-package/other`
 
+### Publishing workspace packages to registries
+
+Workspaces make it easy to publish packages to registries like JSR or NPM. You
+can publish individual workspace members while keeping their development
+connected in your monorepo.
+
+#### Publishing to JSR
+
+To publish a workspace package to JSR, follow these steps:
+
+1. Ensure each package has the appropriate metadata in its `deno.json`:
+
+```json title="my-package/deno.json"
+{
+  "name": "@scope/my-package",
+  "version": "1.0.0",
+  "exports": "./mod.ts",
+  "publish": {
+    "exclude": ["tests/", "*.test.ts", "examples/"]
+  }
+}
+```
+
+2. Navigate to the specific package directory and publish:
+
+```sh
+cd my-package
+deno publish
+```
+
+#### Managing interdependent packages
+
+When publishing packages from a workspace with interdependencies, use consistent
+versioning schemes across related packages. Publish dependent packages first,
+then the packages that depend on them. After publishing, verify the published
+packages work as expected:
+
+```sh
+# Test a published package
+deno add jsr:@scope/my-published-package
+deno test integration-test.ts
+```
+
+When publishing packages that depend on other workspace members, Deno will
+automatically replace workspace references with proper registry references in
+the published code.
+
 ### Migrating from `npm` workspaces
 
 Deno workspaces support using a Deno-first package from an existing npm package.
