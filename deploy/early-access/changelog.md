@@ -10,6 +10,19 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
+## June 12th, 2025
+
+### Features
+
+- Deno Deploy<sup>EA</sup> now supports playgrounds!
+  - Playgrounds can be created and accessed from the playgrounds tab in the
+    organizations overview.
+  - Playgrounds can contain multiple files, and can have a build step.
+  - The playground UI has an iframe to preview your deployed app.
+  - Three templates are available so far: hello world, Next.js, and Hono.
+- On mobile there is now a new floating navbar that doesn't pertrude into the
+  page content
+
 ## June 9th, 2025
 
 ### Features
