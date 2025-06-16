@@ -10,106 +10,110 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-Deno Deploy<sup>EA</sup> provides multiple observability features that can be
-used to understand application performance, debug application errors, and
-monitor application usage. These features are based on OpenTelemetry and the
-[OpenTelemetry integration in Deno](/runtime/fundamentals/open_telemetry/).
+Deno Deploy<sup>EA</sup> provides comprehensive observability features to help
+you understand application performance, debug errors, and monitor usage. These
+features leverage OpenTelemetry and the
+[built-in OpenTelemetry integration in Deno](/runtime/fundamentals/open_telemetry/).
 
-There are three main observability features in Deno Deploy<sup>EA</sup>:
+The three main observability features in Deno Deploy<sup>EA</sup> are:
 
-- **Logs**: unstructured debug information captured emitted by the application
-  code.
-- **Traces**: structured information about the handling of a request, including
-  time taken for each step, and automatic capturing of outbound I/O through the
-  likes of `fetch`.
-- **Metrics**: structured, high level data about application performance and
-  usage, such as request count, error count, and latency.
+- **Logs**: Unstructured debug information emitted by your application code
+- **Traces**: Structured information about request handling, including execution
+  time for each step and automatic capture of outbound I/O operations
+- **Metrics**: Structured, high-level data about application performance and
+  usage, such as request count, error count, and latency
 
 ## Logs
 
-Logs in Deno Deploy<sup>EA</sup> are captured using the standard `console` API.
-The logs are queryable from the logs page in the Deno Deploy
-<sup>EA</sup> dashboard.
+Logs in Deno Deploy<sup>EA</sup> are captured using the standard `console` API
+and can be queried from the logs page in the dashboard.
 
-Logs are viewed per application. The search bar on the logs page can be used to
-filter based on the attributes below, and the log message.
+Logs are organized by application. You can use the search bar to filter logs
+based on various attributes and message content.
 
-Logs are associated with a specific trace and span if they are emitted inside
-the context of a trace. For logs that have an associated trace, a "View trace"
-button is shown in the logs page. This will open the relevant trace in an
-overlay drawer for inspection.
+When logs are emitted inside the context of a trace, they become associated with
+that specific trace and span. For such logs, a "View trace" button appears in
+the logs interface, allowing you to open the relevant trace in an overlay drawer
+for detailed inspection.
 
 ## Traces
 
 Traces in Deno Deploy<sup>EA</sup> are captured in three ways:
 
-- Automatically for various built-in operations, such as incoming HTTP requests
-  or outbound fetch. This can not be disabled.
-- Automatically for some frameworks, such as Next.js, Fresh, and Astro. The
-  exact set of frameworks and instrumented operations is subject to change.
-- Manually when application code creates a new trace or span using the
-  OpenTelemetry API. This requires manual instrumentation of the application
-  code.
+- **Automatically for built-in operations**: Incoming HTTP requests, outbound
+  fetch calls, and other system operations are traced automatically. This cannot
+  be disabled.
+- **Automatically for supported frameworks**: Frameworks like Next.js, Fresh,
+  and Astro include built-in instrumentation. The specific frameworks and
+  operations covered may change over time.
+- **Manually through custom instrumentation**: Your application code can create
+  new traces or spans using the OpenTelemetry API.
 
-Traces are viewed per application. The search bar on the trace page can be used
-to filter based on the attributes below, and the span name.
+Traces are organized by application. The search bar lets you filter based on
+various attributes and span names.
 
-Clicking on a trace will open the trace overlay drawer, which shows all spans
-that are part of the trace. The spans are shown in a waterfall view, which shows
-the start and end time of each span, as well as the duration of each span. The
-spans are grouped by their parent span, and the root span is shown at the top of
-the waterfall view.
+Clicking a trace opens the trace overlay drawer, showing all spans within that
+trace in a waterfall view. This visualization displays the start time, end time,
+and duration of each span, grouped by parent span with the root span at the top.
 
-Clicking on any span will open the span details at the bottom of the drawer.
-Captured span attributes are shown in a table here. For outbound HTTP requests
-for example, this contains the HTTP method, URL, and status code.
+Clicking any span shows its details at the bottom of the drawer, including all
+captured attributes. For example, outbound HTTP requests include the method,
+URL, and status code.
 
-In addition to the span attributes, the span details section also has a "Logs"
-tab that shows all logs that were emitted in the context of the span.
+The span details section also includes a "Logs" tab showing all logs emitted
+within the selected span's context.
 
-Clicking on the "View logs" on the right of any trace will open the logs page
-with the trace ID pre-filled in the search bar. This will show all logs that
-were emitted in the context of the entire trace.
+You can click "View logs" on any trace to open the logs page with the trace ID
+pre-filled in the search bar, showing all logs related to that trace.
 
 ## Metrics
 
-Metrics in Deno Deploy<sup>EA</sup> are captured automatically for various
-built-in operations, such as incoming HTTP requests or outbound fetch. This can
-not be disabled.
+Metrics in Deno Deploy<sup>EA</sup> are automatically captured for various
+operations such as incoming HTTP requests and outbound fetch calls. This
+automatic capture cannot be disabled.
 
-Metrics are viewed per application. The search bar on the metrics page can be
-used to filter based on the attributes below. Metrics are shown in a time series
-graph, which shows the value of the metric over time.
+Metrics are organized by application and displayed in time-series graphs showing
+values over time. You can use the search bar to filter metrics based on various
+attributes.
 
 ## Filtering
 
-Logs, traces, and metrics can be filtered by general attributes:
+Logs, traces, and metrics can be filtered using these general attributes:
 
-- **Revision**: the ID of the application's revision that emitted the log,
-  trace, or metric.
+- **Revision**: The ID of the application revision that emitted the data
+- **Context**: The context in which the data was emitted ("Production" or
+  "Development")
 
-- **Context**: the context in which the log, trace, or metric was emitted. This
-  can be either "Production" or "Development".
+For logs and traces, this additional filter is available:
 
-For logs and traces, the following additional filter is available:
+- **Trace**: The ID of the trace containing the log or spans
 
-- **Trace**: the ID of the trace that contained the log or spans.
+For traces only, these additional filters are available:
 
-For traces only, the following additional filter is available:
-
-- **HTTP Method**: the HTTP method of the request that triggered the trace.
-
-- **HTTP Path**: the path of the request that triggered the trace.
-
-- **HTTP Status**: the HTTP status code of the response that was sent for the
-  request that triggered the trace.
+- **HTTP Method**: The HTTP method of the request that triggered the trace
+- **HTTP Path**: The path of the request that triggered the trace
+- **HTTP Status**: The HTTP status code of the response
 
 ### Time range filter
 
-By default, the logs, traces, and metrics pages show data for the last hour.
-This can be changed using the time range filter in the top right corner of the
-page. The time range filter can be set to a predefined time range, like "Last 1
-hour", "Last 24 hours", or "Last 7 days", or a custom time range.
+By default, the observability pages show data for the last hour. You can change
+this using the time range filter in the top right corner of each page.
+
+You can select predefined time ranges like "Last 1 hour," "Last 24 hours," or
+"Last 7 days," or set a custom time range by clicking the "Custom" button.
+
+Custom time ranges can be either absolute (specific start and end times) or
+relative (e.g., 3 days ago, 1 hour from now). Relative time ranges use the same
+syntax as Grafana:
+
+- `now` - the current time
+- `now-1h` - 1 hour ago
+- `now/h` - the start of the current hour
+- `now-1h/h` - the start of the previous hour
+- `now/d+3h` - 3 hours from the start of the current day
+- `now-1d/d` - the start of the previous day page. The time range filter can be
+  set to a predefined time range, like "Last 1 hour", "Last 24 hours", or "Last
+  7 days", or a custom time range.
 
 The custom time range can be set by clicking on the "Custom" button. A custom
 time range can either be absolute (a specific start and end time) or relative (3

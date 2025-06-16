@@ -10,129 +10,146 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-Every organization has a default domain that is used for production, git branch,
-and preview URLs for applications deployed in that organization. For example,
-the organization `acme-inc` would have a default organization domain of
-`acme-inc.deno.net`. An application named `my-app` would have a default
-production domain of `my-app.acme-inc.deno.net`.
+Every organization has a default domain used for all applications deployed
+within that organization. For example, an organization with the slug `acme-inc`
+would have a default domain of `acme-inc.deno.net`. An application named
+`my-app` would automatically receive the production domain
+`my-app.acme-inc.deno.net`.
 
-In addition to the default domains that are provided by Deno Deploy
-<sup>EA</sup> automatically, it is also possible to add custom domains to
-applications. Custom domains are domains that you own and control. To add a
-custom domain, you must have purchased the domain from a domain registrar and
-you must have access to edit the DNS records for the domain.
+In addition to these default domains, you can add custom domains to your
+applications. Custom domains are domains that you own and control. To use a
+custom domain, you must:
 
-Custom domains are owned by an organization. Once added to an organization, the
-can be attached to any application in that organization.
+1. Own the domain (purchased from a domain registrar)
+2. Have access to edit its DNS records
 
-A custom domain can be added either as a base domain (a single domain or
-subdomain, such as `example.com`), or as a wildcard domain (such as
-`*.example.com`). A base domain can be used for a single application. A wildcard
-domain is more flexible, and can either be entirely assigned to a single
-application so that all subdomains of the wildcard domain point to that
-application, or it can be partially assigned to multiple applications, so that
-one subdomain points to one application, and another subdomain points to a
-different application.
+Custom domains belong to an organization and can be attached to any application
+within that organization.
 
-Each custom domain must have a valid TLS certificate to be used in Deno Deploy
-EA. Deno Deploy<sup>EA</sup> can automatically provision a TLS certificate for
-you using Let's Encrypt.
+A custom domain can be added as:
+
+- A base domain (e.g., `example.com` or a specific subdomain)
+- A wildcard domain (e.g., `*.example.com`)
+
+A base domain works with a single application, while a wildcard domain offers
+more flexibility. You can either:
+
+- Assign the entire wildcard to one application (all subdomains point to the
+  same app)
+- Partially assign it to multiple applications (different subdomains point to
+  different apps)
+
+All custom domains require valid TLS certificates. Deno Deploy<sup>EA</sup> can
+automatically provision these certificates using Let's Encrypt.
 
 ## Adding a custom domain
 
-To add a custom domain, go to the organization domains page. You can access this
-page by clicking on the organization name in the top left corner of the Deno
-Deploy<sup>EA</sup> dashboard, and then clicking on the "Domains" tab in the top
-navigation.
+1. Go to the organization domains page (click your organization name in the top
+   left corner, then the "Domains" tab)
+2. Click "Add Domain"
+3. Enter your domain (e.g., `example.com`)
+4. Select whether to add just this domain or also include the wildcard subdomain
+5. Click "Add Domain"
 
-Click on the "Add Domain" button to open the custom domain drawer. In the
-drawer, enter the domain you want to add, such as `example.com`. Then, select
-whether you want to add only this domain itself, or also the wildcard subdomain
-(`*.example.com`).
-
-Click on the "Add Domain" button to confirm.
-
-You will now see the domain configuration drawer.
+This will open the domain configuration drawer.
 
 ### DNS configuration
 
-The domain configuration drawer contains the DNS configuration for the domain
-that is needed to verify ownership of the domain, generate TLS certificates, and
-route traffic to Deno Deploy<sup>EA</sup>.
+The domain configuration drawer shows the DNS records needed to:
 
-The DNS configuration section has two to three tabs, depending on the type of
-domain you are adding. You must add all of the DNS records from any of the tabs
-to your domain registrar's DNS configuration. There are multiple ways to do
-this, because different domain registrars have different levels of support for
-certain DNS records:
+- Verify domain ownership
+- Generate TLS certificates
+- Route traffic to Deno Deploy<sup>EA</sup>
 
-- The `ANAME/ALIAS` method is most prefereable if your domain registrar supports
-  `ANAME` or `ALIAS` records. When using this method, you add one `ANAME` or
-  `ALIAS` record and one `CNAME` record to your DNS configuration.
+There are three possible configuration methods, depending on your domain
+registrar's capabilities:
 
-- The `CNAME` method works well for subdomains, but is not supported for base
-  domains. When using this method, you can have no other DNS records for the
-  same domain (such as `MX` records for email), so it is only suitable for
-  subdomains that do not need any other DNS records. When using this method, you
-  add two separate `CNAME` records to your DNS configuration.
+#### ANAME/ALIAS method (preferred)
 
-- The `A` method is the most flexible and widely supported, but requires more
-  DNS records to be added. When using this method, you add one `A` records and
-  one `CNAME` record to your DNS configuration.
+If your registrar supports `ANAME` or `ALIAS` records, this is the best option:
 
-> Currently Deno Deploy<sup>EA</sup> does not support IPv6 yet. This is planned
-> for the future. When using `ANAME/ALIAS` or `CNAME` configuration methods your
-> domain will automatically be configured to use IPv6 when it is supported. When
-> using the `A` configuration method we will send you an email to let you know
-> that you need to add an `AAAA` record to your DNS configuration.
+- Add one `ANAME`/`ALIAS` record
+- Add one `CNAME` record for verification
+
+#### CNAME method
+
+Works well for subdomains but not for apex domains:
+
+- Add two `CNAME` records
+- Note: This method doesn't allow other DNS records (like `MX` records) on the
+  same domain
+
+#### A record method
+
+Most compatible but requires more configuration:
+
+- Add one `A` record
+- Add one `CNAME` record for verification
+
+> Note: Currently, Deno Deploy<sup>EA</sup> doesn't support IPv6. When using the
+> `ANAME/ALIAS` or `CNAME` methods, your domain will automatically use IPv6 when
+> supported. With the `A` method, you'll receive an email when it's time to add
+> an `AAAA` record.
 
 :::warning
 
-When using Cloudflare as the DNS provider, you **MUST** disable the proxying
-feature (orange cloud) for the `_acme-challenge` CNAME record. If you do not do
-this verification and certificate provisioning will fail.
+When using Cloudflare as your DNS provider, you **MUST** disable the proxying
+feature (orange cloud) for the `_acme-challenge` CNAME record, or verification
+and certificate provisioning will fail.
 
 :::
 
 ### Verification
 
-Once the DNS records have been added to the domain registrar's DNS
-configuration, Deno Deploy<sup>EA</sup> will check the DNS records to verify
-ownership of the domain. This can take a few minutes depending on the DNS
-provider. You can leave the domain configuration drawer open while the
-verification is in progress, and it will automatically refresh when the
-verification is complete. Once the verification is complete, you will see a
-green checkmark.
+After adding the DNS records, Deno Deploy<sup>EA</sup> will verify your domain
+ownership. This process may take a few minutes depending on your DNS provider.
+You can leave the domain configuration drawer open during verification - it will
+refresh automatically when complete.
 
-You can also manually trigger the verification progress by clicking on the
-"Provision Certificate" button. If verification is successful, this will also
-initiate provisioning of the TLS certificate.
+You can manually trigger verification by clicking the "Provision Certificate"
+button. Successful verification also initiates TLS certificate provisioning.
 
 ### TLS certificate provisioning
 
-Once the domain has been verified, you can trigger a TLS certificate to be
-provisioned by pressing the "Provision Certificate" button. This will
-automatically generate a TLS certificate for the domain using Let's Encrypt.
-This can take up to 90 seconds.
+After domain verification, click "Provision Certificate" to generate a TLS
+certificate through Let's Encrypt. This process takes up to 90 seconds.
 
-Once the TLS certificate has been provisioned, you will see information about
-the certificate, such as the expiration date and issue time.
+Once provisioned, you'll see certificate details including expiration date and
+issue time.
 
-The TLS certificate will automatically be renewed when it is close to expiry.
-You can check on the current status of the TLS certificate in the domain
-configuration drawer.
+Certificates are automatically renewed near expiry. You can check the current
+certificate status in the domain configuration drawer.
 
 ## Assigning a custom domain to an application
 
-Once a custom domain has been added to an organization, it can be assigned to
-any application in that organization. To assign a custom domain to an
-application, go to the organization domains page and click the "Assign" button
-next to any of the custom domains.
+After adding a custom domain to your organization:
 
-This will open the assign domain drawer. In the drawer, select the application
-you want to assign the domain to. If you are using a wildcard domain, you can
-also select whether you want to attach the base domain, the wildcard subdomain,
-or any specific subdomain to the application.
+1. Go to the organization domains page
+2. Click "Assign" next to the custom domain
+3. Select the target application
+4. If using a wildcard domain, choose whether to attach the base domain, the
+   wildcard, or a specific subdomain
+5. Click "Assign Domain"
+
+## Unassigning a custom domain from an application
+
+1. Go to the application settings page
+2. Find the "Custom Domains" section
+3. Click "Remove" next to the domain you want to unassign
+
+This removes the domain from the application but keeps it available in your
+organization for use with other applications.
+
+## Removing a custom domain
+
+1. Go to the organization domains page
+2. Open the domain configuration drawer
+3. Click "Delete" and confirm
+
+This removes the custom domain from your organization and deletes all domain
+assignments across all applications. also select whether you want to attach the
+base domain, the wildcard subdomain, or any specific subdomain to the
+application.
 
 Once you have selected the application and the domain, click on the "Assign
 Domain" button to confirm.
