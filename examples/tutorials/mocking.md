@@ -88,6 +88,119 @@ that:
 We were able to test the `saveUser` operation without setting up or tearing down
 any complex database state.
 
+### Clearing spies
+
+When working with multiple tests that use spies, it's important to reset or
+clear spies between tests to avoid interference. The Deno testing library
+provides a simple way to restore all spies to their original state using the
+`restore()` method.
+
+Here's how to clear a spy after you're done with it:
+
+```ts
+import { assertEquals } from "jsr:@std/assert";
+import { assertSpyCalls, spy } from "jsr:@std/testing/mock";
+
+Deno.test("spy cleanup example", () => {
+  // Create a spy on a function
+  const myFunction = spy((x: number) => x * 2);
+
+  // Use the spy
+  const result = myFunction(5);
+  assertEquals(result, 10);
+  assertSpyCalls(myFunction, 1);
+
+  // After testing, restore the spy
+  try {
+    // Test code using the spy
+    // ...
+  } finally {
+    // Always clean up spies
+    myFunction.restore();
+  }
+});
+```
+
+Method spies are disposable, they can automatically restore themselves with the
+`using` keyword. This approach means that you do not need to wrap your
+assertions in a try statement to ensure you restore the methods before the tests
+finish.
+
+```ts
+import { assertEquals } from "jsr:@std/assert";
+import { assertSpyCalls, spy } from "jsr:@std/testing/mock";
+
+Deno.test("using disposable spies", () => {
+  const calculator = {
+    add: (a: number, b: number) => a + b,
+    multiply: (a: number, b: number) => a * b,
+  };
+
+  // The spy will automatically be restored when it goes out of scope
+  using addSpy = spy(calculator, "add");
+
+  // Use the spy
+  const sum = calculator.add(3, 4);
+  assertEquals(sum, 7);
+  assertSpyCalls(addSpy, 1);
+  assertEquals(addSpy.calls[0].args, [3, 4]);
+
+  // No need for try/finally blocks - the spy will be restored automatically
+});
+
+Deno.test("using multiple disposable spies", () => {
+  const calculator = {
+    add: (a: number, b: number) => a + b,
+    multiply: (a: number, b: number) => a * b,
+  };
+
+  // Both spies will automatically be restored
+  using addSpy = spy(calculator, "add");
+  using multiplySpy = spy(calculator, "multiply");
+
+  calculator.add(5, 3);
+  calculator.multiply(4, 2);
+
+  assertSpyCalls(addSpy, 1);
+  assertSpyCalls(multiplySpy, 1);
+
+  // No cleanup code needed
+});
+```
+
+For cases where you have multiple spies that don't support the `using` keyword,
+you can track them in an array and restore them all at once:
+
+```ts
+Deno.test("multiple spies cleanup", () => {
+  const spies = [];
+
+  // Create spies
+  const functionA = spy((x: number) => x + 1);
+  spies.push(functionA);
+
+  const objectB = {
+    method: (x: number) => x * 2,
+  };
+  const spyB = spy(objectB, "method");
+  spies.push(spyB);
+
+  // Use the spies in tests
+  // ...
+
+  // Clean up all spies at the end
+  try {
+    // Test code using spies
+  } finally {
+    // Restore all spies
+    spies.forEach((spyFn) => spyFn.restore());
+  }
+});
+```
+
+By properly cleaning up spies, you ensure that each test starts with a clean
+state and avoid side effects between tests.
+
 ### Stubbing
 
 While spies track method calls without changing behavior, stubs replace the
