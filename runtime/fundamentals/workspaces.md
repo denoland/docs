@@ -148,6 +148,36 @@ Deno workspaces are flexible and can work with Node packages. To make migration
 for existing Node.js projects easier you can have both Deno-first and Node-first
 packages in a single workspace.
 
+## Workspace Path Patterns
+
+Deno supports pattern matching for workspace member folders, making it easier to
+manage workspaces with many members or with a specific directory structure. You
+can use wildcard patterns to include multiple directories at once:
+
+```json title="deno.json"
+{
+  "workspace": [
+    "some-dir/*",
+    "other-dir/*/*"
+  ]
+}
+```
+
+The pattern matching syntax follows specific rules regarding folder depth:
+
+`some-path/*` matches files and directories directly within `some-path` (first
+level of indentation only). For example, with `packages/*`, this includes
+`packages/foo` and `packages/bar` but not `packages/foo/subpackage`.
+
+`some-path/*/*` matches the files and directories located within subdirectories
+of `some-path` (second level of indentation). It does not match items directly
+within `some-path`. For example, with `examples/*/*`, this includes
+`examples/basic/demo` and `examples/advanced/sample` but not `examples/basic`.
+
+Each `/*` segment in the pattern corresponds to a specific folder depth relative
+to the base path. This allows for precise targeting of workspace members at
+different levels within your directory structure.
+
 ## How Deno Resolves Workspace Dependencies
 
 When running a project in a workspace that imports from another workspace
