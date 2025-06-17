@@ -347,7 +347,7 @@ export const sidebar = [
     items: [
       {
         title: "Basic OpenTelemetry setup",
-        href: "/examples/basic_opentelemetry/",
+        href: "/examples/basic_opentelemetry_tutorial/",
         type: "tutorial",
       },
       {
@@ -367,7 +367,7 @@ export const sidebar = [
       },
       {
         title: "Span propagation",
-        href: "/examples/otel_span_propagation/",
+        href: "/examples/otel_span_propagation_tutorial/",
         type: "tutorial",
       },
     ],
