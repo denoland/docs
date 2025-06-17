@@ -10,52 +10,44 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-Applications are web services inside of an organization that can serve traffic.
-Applications contain revisions - these are all the previous versions of the app.
-When using the GitHub integration there will usually be one revision per Git
-commit.
+Applications are web services that serve traffic within an organization. Each
+application contains a history of revisions (previous versions), typically
+corresponding to Git commits when using the GitHub integration.
 
-Apps have a slug, which acts as a name for the app and must be unique within the
-organization. The slug is used in default domains for the app, so it must be
-URL-safe.
+Applications are identified by a slug, which must be unique within the
+organization and is used in default domain names.
 
-## Creating an app
+## Creating an application
 
-To create an app, press the "+ Create App" button on the org page. This will
-open a page where you can configure the details of the new app.
+To create an application:
 
-On this page, you can select the GitHub repository that the app will be deployed
-from.
+1. Click the "+ Create App" button on the organization page
+2. Select the GitHub repository to deploy from
+3. Configure the app slug (name)
+4. Set up build configuration
+5. Add any required environment variables
 
-> ⚠️ Right now applications must be linked to a GitHub repository on creation.
+> ⚠️ Currently, applications must be linked to a GitHub repository during
+> creation.
 
-Apps require a slug, which also acts as the name of the app. The app slug must
-be unique within the context of the organization.
+The build configuration determines how the application is built during the
+deployment process. Builds are automatically triggered on each push to the
+linked repository or when manually clicking "Deploy Default Branch". For
+detailed build configuration information, see the
+[Builds documentation](/deploy/early-access/reference/builds/).
 
-Apps have an associated build configuration. The build configuration determines
-how the app is built in the build step. A build is automatically triggered for
-every push to the linked GitHub repository, and when manually clicking the
-"Deploy Default Branch" button. For more details on how to configure the build
-step, see the [Builds](/deploy/early-access/reference/builds/) documentation.
-
-Apps can also have environment variables that are available at runtime. These
-can be added during app creation by using the "Edit Environment Variables"
-button. This will open a drawer where you can add environment variables to the
-app. For more details on environment variables, see the
-[Contexts and Timelines](/deploy/early-access/reference/timelines/)
+You can add environment variables during app creation by clicking "Edit
+Environment Variables". For more details on environment variables, see the
+[Environment Variables and Contexts](/deploy/early-access/reference/env-vars-and-contexts/)
 documentation.
 
-## Deleting an app
+## Limitations
 
-> ⚠️ Apps can not currently be deleted.
+> ⚠️ Apps cannot currently be deleted.
 
-## Renaming an app
+> ⚠️ Apps cannot currently be renamed.
 
-> ⚠️ Apps can not currently be renamed.
-
-## Transferring an app
-
-> ⚠️ Apps can not currently be transferred to another organization.
+> ⚠️ Apps cannot currently be transferred to another organization.
 
 ## GitHub integration
 

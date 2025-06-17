@@ -10,54 +10,60 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-Playground applications enable creating, editing, and deploying an application
-entirely from the Deno Deploy<sup>EA</sup> web dashboard, without the need to
-create a repository on GitHub.
+Playground applications enable you to create, edit, and deploy applications
+entirely from the Deno Deploy<sup>EA</sup> web dashboard, without needing to
+create a GitHub repository.
 
-Playgrounds consist of one or more files (such as JS, TS, TSX, or JSON) that can
-each be edited from the playground page.
+Playgrounds contain one or more files (JavaScript, TypeScript, TSX, JSON, etc.)
+that you can edit directly in the playground editor.
 
 ## Creating a playground
 
-Playgrounds can be created from the "Playgrounds" page in the organization.
-Pressing the "New Playground" button will create a new "Hello World" playground.
-By pressing the dropdown on the "New Playground" button, playgrounds can be
-created from other templates, such as Next.js or Hono.
+You can create playgrounds from the "Playgrounds" page in your organization.
+Click the "New Playground" button to create a basic "Hello World" playground.
+Using the dropdown on the "New Playground" button lets you create playgrounds
+from other templates, such as Next.js or Hono.
 
 ## Editing a playground
 
-To edit a playground, open the playground from the "Playgrounds" page in the
-organization.
+To edit a playground, open it from the "Playgrounds" page in your organization.
 
 The playground editor consists of five main sections:
 
-- **Code editor**: in the center of the screen is the code editor, which shows
-  the currently selected file. Overtop the editor is a navbar that shows the
-  file name of the file that is currently open. The file name of this file can
-  be edited by clicking on the file name.
-- **File browser**: on the left of the code editor is the file browser, which
-  shows all files in the playground. Clicking on a file opens the code editor.
-  New files can be created from the file browser by clicking the "New" icon at
-  the top of the file browser. Files can also be deleted from the file browser
-  by clicking the delete button next to files.
-- **Top bar**: above the code editor is the top bar, which contains actions one
-  can take on the playground. Pressing the "Deploy" button saves the current
-  changes and triggers a build to deploy the changes. The "Build Config" and
-  "Env Variables" button open the build config, and environment variables drawer
-  respectively. On the left hand side of the top bar the playground URL is
-  shown, unless the playground has not been deployed yet.
-- **Bottom drawer**: under the code editor is the bottom drawer, which contains
-  tools used to debug the playground application. It contains the "Build Logs"
-  tab that shows the build progress during deployment, and a logs and trace tab
-  that can be used to view logs and traces.
-- **Right drawer**: to the right of the code editor is the right drawer, which
-  contains tools used to inspect the output of the application. The "Preview"
-  tab shows an `<iframe>` showing the page at the playground URL. The "HTTP
-  Explorer" tab enables sending individual HTTP requests (such as GET, POST,
-  PUT) to the playground deployment.
+- **Code editor**: The central area where you edit code for the currently
+  selected file. Above the editor is a navbar showing the current file name,
+  which you can click to edit.
+- **File browser**: Located on the left of the code editor, this panel shows all
+  files in the playground. Click any file to open it in the editor. Create new
+  files by clicking the "New" icon at the top of the file browser. Delete files
+  using the delete button next to each file name.
+- **Top bar**: Located above the code editor, this contains action buttons for
+  the playground. The "Deploy" button saves current changes and triggers a
+  build. "Build Config" and "Env Variables" buttons open their respective
+  configuration drawers. The left side of the top bar displays the playground
+  URL (unless the playground hasn't been deployed yet).
+- **Bottom drawer**: Located beneath the code editor, this contains debugging
+  tools including "Build Logs" that show build progress during deployment, and
+  tabs for viewing logs and traces.
+- **Right drawer**: Located to the right of the code editor, this contains tools
+  for inspecting application output. The "Preview" tab displays an iframe
+  showing the deployed application, while "HTTP Explorer" lets you send
+  individual HTTP requests to your deployment.
 
-The contents of the playground is automatically saved when the "Deploy" button
-is pressed or the editor gets unfocussed.
+The playground content automatically saves when you click the "Deploy" button or
+when the editor loses focus.
+
+## Deleting a playground
+
+> ⚠️ Playgrounds cannot currently be deleted.
+
+## Renaming a playground
+
+> ⚠️ Playgrounds cannot currently be renamed.
+
+## Transferring a playground
+
+> ⚠️ Playgrounds cannot currently be transferred to another organization.
 
 ## Deleting a playground
 
