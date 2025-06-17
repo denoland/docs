@@ -10,48 +10,50 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-Deno Deploy<sup>EA</sup> has a built-in CDN that can cache responses from your
-application. This is useful for static assets, such as images, CSS, and
-JavaScript files, as well as for API responses or server rendered pages that do
-not change often.
+Deno Deploy<sup>EA</sup> includes a built-in CDN that can cache responses from
+your application. This improves performance for:
 
-Caching is enabled by default for all applications. Only assets with valid
-caching headers are cached.
+- Static assets (images, CSS, JavaScript files)
+- API responses and server-rendered pages that don't change frequently
 
-Deno Deploy<sup>EA</sup> integrates directly with many frameworks, such as
-Next.js, to automatically integrate the cache to enable features like ISR.
+Caching is enabled by default for all applications, but only responses with
+appropriate caching headers are actually cached.
 
-The CDN cache is tied to the revision and context. This means that if you deploy
-a new revision, the cache will be invalidated and no existing cached responses
-will be served. This is useful for ensuring that users always see the latest
-version of your application. Do note that the browser cache may still serve
-stale responses if the `Cache-Control` header is set to a value that allows it.
+Deno Deploy<sup>EA</sup> integrates with popular frameworks like Next.js to
+automatically optimize caching for features such as Incremental Static
+Regeneration (ISR).
+
+The CDN cache is tied to both the revision and context. When you deploy a new
+revision, the cache is automatically invalidated, ensuring users always see the
+latest version of your application. Note that browser caching may still serve
+older content if the `Cache-Control` header permits it.
 
 ## Caching a resource
 
-To cache a resource, you need to set the `Cache-Control` header on the response.
-The `Cache-Control` header is a standard HTTP header that controls how the
-response is cached by the browser and the CDN.
+To cache a resource, set the `Cache-Control` header in your response. This
+standard HTTP header tells browsers and the CDN how to cache your content.
 
-Deno Deploy<sup>EA</sup> supports the following caching directives:
+### Supported caching directives
 
-- `max-age`: The maximum amount of time the response is considered fresh. After
-  this time, the response is considered stale and will be revalidated with the
-  server. This also applies to the browser cache.
-- `s-maxage`: The maximum amount of time the response is considered fresh for
-  shared caches (e.g. CDNs). After this time, the response is considered stale
-  and will be revalidated with the server. This does not apply to the browser
-  cache.
-- `stale-while-revalidate`: The maximum amount of time the response is
-  considered fresh while the response is being revalidated with the server. This
-  allows the CDN to serve stale responses while the new response is being
-  fetched.
-- `stale-if-error`: The maximum amount of time the response is considered fresh
-  if the server returns an error. This allows the CDN to serve stale responses
-  while the new response is being fetched.
-- `immutable`: The response is immutable and will not change. This allows the
-  CDN to cache the response indefinitely. This is useful for static assets that
-  do not change, such as images or CSS files.
+Deno Deploy<sup>EA</sup> supports these caching directives:
+
+| Directive                | Description                                                                                                                                                             |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `max-age`                | Maximum time (in seconds) the response is considered fresh by both CDN and browsers. After this time, the response is considered stale and revalidated with the server. |
+| `s-maxage`               | Maximum time (in seconds) the response is considered fresh by shared caches (CDNs only, not browsers). After this time, the response is revalidated with the server.    |
+| `stale-while-revalidate` | Maximum time (in seconds) a stale response can be served while a fresh one is fetched in the background.                                                                |
+| `stale-if-error`         | Maximum time (in seconds) a stale response can be served if the server returns an error.                                                                                |
+| `immutable`              | Indicates the response will never change, allowing indefinite caching. Ideal for content-hashed static assets.                                                          |
+| `no-store`               | Prevents caching of the response. Use for dynamic content that should never be cached.                                                                                  |
+| `no-cache`               | Requires revalidation with the server before serving from cache. Use for content that changes frequently but can benefit from conditional requests.                     |
+
+### Additional caching headers
+
+- `Vary`: Specifies which request headers should be included in the cache key,
+  creating separate cached versions based on those headers.
+
+- `Expires`: Sets an absolute expiration date for the response (alternative to
+  `max-age`). do not change, such as images or CSS files.
 - `no-store`: The response should not be cached. This is useful for dynamic
   responses that should not be cached, such as API responses or server rendered
   pages.

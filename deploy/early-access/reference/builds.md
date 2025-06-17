@@ -10,111 +10,88 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-In Deno Deploy<sup>EA</sup> an app's code can have multiple historical
-revisions. These revisions (or builds) generally map one to one to git commits
-in the linked GitHub repository when deploying from GitHub.
+In Deno Deploy<sup>EA</sup>, each version of your application code is
+represented as a revision (or build). When deploying from GitHub, revisions
+generally map one-to-one to git commits in your repository.
+
+## Build triggers
 
 Builds can be triggered in two ways:
 
-- **manually**, using the "Deploy Default Branch" button on the builds page. By
-  default this will trigger a build on the "default" git branch (usually
-  `main`). The dropdown menu on this button on this page can be used to select a
-  different branch to deploy from.
-- **automatically**, whenever a new commit is pushed to a GitHub repository that
-  is linked to an app
+- **Manually**: Using the "Deploy Default Branch" button on the builds page,
+  which deploys the default git branch (usually `main`). The dropdown menu lets
+  you select a different branch.
 
-A revision goes through multiple stages before finally being routed and
-available to users:
+- **Automatically**: When a new commit is pushed to a GitHub repository linked
+  to your app.
 
-1. **Queuing:** the revision is waiting to be assigned to a build.
-1. **Preparing:** a builder is assigned to process the build, the source code of
-   the revision gets downloaded to the builder, and any available build caches
-   are being restored to the builder
-1. **Install:** the install command is executed if there is one. This will
-   usually download any dependencies that are not already in the build cache,
-   and check that the lockfile is up to date.
-1. **Build:** the build command is executed if there is one. Once the build
-   command has executed, the build artifact is created from the build output and
-   is uploaded to the distributed runtime infrastructure.
-1. **Warm up:** a `GET /` request is sent to the revision to check that it boots
-   correctly and listens for incoming HTTP requests.
-1. **Route:** the global infrastructure is being configured to route requests to
-   the new revision based on the timelines they are part of.
+## Build stages
 
-If any of these steps fail, the build goes into the “Failed” state. Failed
-builds do not receive traffic.
+A revision goes through these stages before becoming available:
 
-Build logs are available in the dashboard. They are streamed live to the
-dashboard while the build is running. After the build is finished the builds are
-still available on the build page.
+1. **Queuing**: The revision waits to be assigned to a builder.
+2. **Preparing**: A builder downloads the source code and restores any available
+   build caches.
+3. **Install**: The install command executes (if specified), typically
+   downloading dependencies.
+4. **Build**: The build command executes (if specified), creating a build
+   artifact that is uploaded to the runtime infrastructure.
+5. **Warm up**: A `GET /` request tests that the application boots correctly and
+   can handle HTTP requests.
+6. **Route**: The global infrastructure is configured to route requests to the
+   new revision based on its timelines.
 
-Build caching is a way to speed up builds by reusing files that have not changed
-between builds. This is configured automatically for some framework presets, and
-for the `DENO_DIR` dependency cache. Other directories can not manually be added
-to the cache at this time.
+If any step fails, the build enters a "Failed" state and does not receive
+traffic.
 
-A build can be cancelled while it is running using the "Cancel" button in the
-top-right of the build page.
+Build logs are streamed live to the dashboard during the build process and
+remain available on the build page after completion.
 
-Builds can run for at most 5 minutes. After 5 minutes a build will be cancelled
-automatically.
+Build caching speeds up builds by reusing files that haven't changed between
+builds. This happens automatically for framework presets and the `DENO_DIR`
+dependency cache.
+
+You can cancel a running build using the "Cancel" button in the top-right corner
+of the build page. Builds automatically cancel after running for 5 minutes.
 
 ## Build configuration
 
-Builds can be configured through build configuration. The build configuration
-determines how to get from the source code (that is stored in a GitHub
-repository), to a build artifact that can be deployed.
+Build configuration defines how to convert source code into a deployable
+artifact. You can modify build configuration in three places:
 
-Build configuration can be changed in three places:
+- During app creation by clicking "Edit build config"
+- In app settings by clicking "Edit" in the build configuration section
+- In the retry drawer on a failed build's page
 
-- during app creation by pressing the "Edit build config" button
-- after creation in the app settings by pressing the “Edit” in the build
-  configuration section
-- in the retry drawer on the page of a failed build
+When creating an app, build configuration may be automatically detected from
+your repository if you're using a recognized framework or common build setup.
 
-During app creation a build configuration may be automatically detected from the
-files in your repository, if you are using a framework or a common build setup.
+### Configuration options
 
-The following build configuration options are available:
+- **Framework preset**: Optimized configuration for supported frameworks like
+  Next.js or Fresh. [Learn more about framework integrations](./frameworks/).
 
-- **Framework preset:** a configuration preset for certain natively supported
-  frameworks and tools. When a framework preset is configured, Deno Deploy
-  <sup>EA</sup> will automatically configure the builder to build the given
-  framework in the most optimal possible way.
-  [Learn more about Framework integrations.](./frameworks/)
-- **Install command:** a shell command that is executed to install dependencies.
-  In projects with a `package.json` this is often `npm install`, or
-  `deno install`. In Deno-first projects without a `package.json` this is often
-  not needed, as Deno can granularly install only used dependencies.
-- **Build command**: a shell command that is executed to build the project. This
-  is often a build task in a `package.json` or `deno.json`, which can be invoked
-  through `deno task build` or `npm run build`.
-- **Runtime configuration:** the configuration for how to run the application to
-  serve traffic. If a framework preset is set, this often does not have to be
-  set, because Deno Deploy<sup>EA</sup> will automatically pick the best
-  strategy for you. Otherwise you have two options:
-  - **Dynamic:** an application that dynamically responds to every request using
-    a Node or Deno server. This is the case for API servers (Express, Hono,
-    etc), or a server-side-rendered website (e.g. Fresh).
-    - For a dynamic application you must configure an **entrypoint**. This is
-      the JavaScript or TypeScript file you would pass to `deno run` or `node`
-      to execute.
-    - You can optionally configure **arguments** to pass to the application
-      after the entrypoint, accessible to the app using `Deno.args` or
-      `process.args`.
-  - **Static:** a static website that serves the same (pre-rendered) content to
-    all users. This is the case for static site generators (Lume, 11ty, etc),
-    and single page apps (e.g. Vite React template, create-react-app).
-    - For a static application you must configure the static **directory** that
-      contains the static assets, such as `_dist`, `.output`, or `site`.
-    - You can optionally enable **single page app** mode, which changes the
-      behaviour of the app such that all requests that do not match a static
-      file are served the root `index.html` file instead of a 404 status code.
+- **Install command**: Shell command for installing dependencies, such as
+  `npm install` or `deno install`.
+
+- **Build command**: Shell command for building the project, often a task from
+  `package.json` or `deno.json`, such as `deno task build` or `npm run build`.
+
+- **Runtime configuration**: Determines how the application serves traffic:
+  - **Dynamic**: For applications that respond to requests using a server (API
+    servers, server-rendered websites, etc.)
+    - **Entrypoint**: The JavaScript or TypeScript file to execute
+    - **Arguments** (optional): Command-line arguments to pass to the
+      application
+  - **Static**: For static websites serving pre-rendered content
+    - **Directory**: Folder containing static assets (e.g., `dist`, `.output`)
+    - **Single page app mode** (optional): Serves `index.html` for paths that
+      don't match static files instead of returning 404 errors
 
 ## Build environment
 
-The build environment is a Linux-based environment running either x64 or ARM64
-architecture. The following tools are available in the build environment:
+The build environment runs on Linux using either x64 or ARM64 architecture.
+Available tools include:
 
 - `deno` (same version as at runtime)
 - `node`
@@ -130,16 +107,14 @@ architecture. The following tools are available in the build environment:
 
 All JavaScript inside of the builder is executed using Deno.
 
-Because of this, the `node` available in the build environment is not really
-Node.js. It is a shim that translates Node.js invocations to `deno run`. `npm`,
-`npx`, `yarn`, and `pnpm` also run with Deno rather than Node.js.
+The `node` command is actually a shim that translates Node.js invocations to
+`deno run`. Similarly, `npm`, `npx`, `yarn`, and `pnpm` run through Deno rather
+than Node.js.
 
 :::
 
-Environment variables configured for the "Build" context in the organization or
-app settings are available in the build environment. Environment variables that
-are only available in the "Production" or "Development" contexts are not
-available in the build environment.
-[Learn more about environment variables.](./env-vars-and-contexts/)
+Environment variables configured for the "Build" context are available during
+builds, but variables from "Production" or "Development" contexts are not.
+[Learn more about environment variables](./env-vars-and-contexts/).
 
 Builders have 8 GB of storage available during the build process.

@@ -16,34 +16,26 @@ Deno Deploy<sup>EA</sup> is in private beta. To use Deno Deploy
 <sup>EA</sup> you must join the Early Access program from the
 [Deploy Classic account settings page](https://dash.deno.com/account#early-access).
 
-After joining the Early Access program, you may still not immediately have
-access to Deno Deploy<sup>EA</sup> as we are rolling out access in waves.
-
 :::
 
 ## Create an organization
 
-To get started with Deno Deploy<sup>EA</sup>, you must first create a Deno
-Deploy<sup>EA</sup> organization. You can do this by visiting
-[app.deno.com](http://app.deno.com).
+To get started with Deno Deploy<sup>EA</sup>:
 
-Upon first visiting the dashboard, you’ll be greeted by the Deno Deploy
-<sup>EA</sup> organization creation screen:
+1. Visit [app.deno.com](http://app.deno.com)
+2. Create an organization:
 
 ![The Deno Deploy<sup>EA</sup> organization creation screen.](./images/create_org.png)
 
-You can not currently create an organization that has the same slug as any
-project name in Deploy Classic.
-
-Currently, the organization name and organization slug can not be changed after
-organization creation.
+Note that you cannot create an organization with the same slug as any existing
+project in Deploy Classic. Organization names and slugs cannot be changed after
+creation.
 
 ## Create an app
 
-After creating an organization, you will be redirected to the organization apps
-page, where you can see the list of all organizations in the app. From here you
-can navigate to the organization settings, and the custom domains list which
-manages the custom domains attached to your organization.
+After creating an organization, you'll be directed to the organization apps
+page, which shows all your applications and provides access to organization
+settings and custom domains.
 
 To create an app, press the `+ New App` button:
 
@@ -55,55 +47,46 @@ repository, etc.
 
 ## Select a repo
 
+1. Choose the GitHub repository for your application:
+
 ![Screenshot of deploy org selection screen](./images/select_org.png)
 
-Next, you will need to select the GitHub repository to deploy your app code
-from. At time of writing, you must deploy from a GitHub repository.
+If your repository doesn't appear, use the `Add another GitHub account` or
+`Configure GitHub App permissions` buttons to grant the Deno Deploy GitHub app
+access to your repositories.
 
-If your repository does not show up, use the `Add another GitHub account` or
-`Configure GitHub App permissions` buttons in the user/org, or repo dropdowns to
-grant the Deno Deploy GitHub app permission to deploy your repositories.
-
-> ⏳ We do not yet support deploying mono-repos (for example, repos where the
-> actual application lives entirely in a subdirectory).
+> ⏳ Mono-repos (repositories where the application lives in a subdirectory) are
+> not yet supported.
 
 ## Configure your app
 
-After selecting a GitHub repository, Deno Deploy<sup>EA</sup> will automatically
-attempt to detect the kind of application you are deploying and determine
-appropriate build configuration. You can see the detected configuration in the
-`App Config` box on the top right.
+Deno Deploy<sup>EA</sup> automatically attempts to detect your application type
+and configure an appropriate build setup. You can see the detected configuration
+in the `App Config` box:
 
 ![Screenshot of Deploy application configuration screen](./images/app_config.png)
 
-If the build configuration was incorrectly detected, or you want to make changes
-to it, click the `Edit build config` button to open the build config drawer.
+To modify this configuration, click `Edit build config`.
 
 ![Screenshot of Deploy build configuration screen](./images/build_config.png)
 
 ## Configure your build
 
-In the build config drawer you can edit the framework preset. If you are not
-using a framework, or are using a framework that is not in the list, select
-`No Preset`.
+In the build config drawer, you can customize:
 
-You can then edit multiple options depending on what preset you have selected:
+### Framework preset
 
-### install command
+Select your framework or choose `No Preset` if using a custom setup.
 
-If you need to install dependencies before running the build command, such as
-`npm install`, `deno install`, or similar, enter this command here. If you are
-deploying a Deno application that does not have a `package.json`, you can
-usually leave this empty.
+### Install command
+
+Command for installing dependencies (e.g., `npm install`, `deno install`). This
+can be empty for Deno applications without a `package.json`.
 
 ### Build command
 
-The command to execute to take your source code and build/bundle/compile the
-application to be able to deploy it. This could be a framework build command
-such as `next build`, a build task in your `package.json` or `deno.json`, or a
-any other shell script. If your application does not have a build command, such
-as a server-side Deno application with a JavaScript or TypeScript entrypoint,
-you can leave this field empty.
+Command to compile/bundle your application (e.g., `next build`,
+`deno task build`). Leave empty if your application doesn't require building.
 
 ### Runtime configuration
 
@@ -143,30 +126,75 @@ Closing the drawer saves the settings.
 
 ### Environment variables
 
-On this page, you can also add environment variables by pressing the
-`Add/Edit environment variables` button:
+To add environment variables:
+
+1. Click `Add/Edit environment variables`
+2. Click `+ Add variable` in the drawer
+3. Enter the name and value
+4. Choose whether it's a plain text variable or secret
+5. Select the contexts where it should be available:
+   - **Production**: For requests to production domains
+   - **Development**: For requests to preview/branch domains
+6. Click `Save` to apply your changes
 
 ![Screenshot of the Deploy env variables config screen](./images/env_var.png)
 
-In this drawer, press the `+ Add variable` button to create a new environment
-variable for this project. You can give it a name, a value, and select whether
-this variable should be saved in plain text (you can view the value from the
-console later), or as a secret (you can not view the value from the console
-later).
+## Build and deploy your app
 
-You can also select what contexts the environment variable should be available
-in. The available contexts are:
+1. Click `Create App` to create the application and start the first build
+2. Watch the build progress through the live logs:
 
-- **Production:** requests hitting your application through one of the
-  production domains, such as `<app>.<org>.deno.net`, or a custom domain.
-- **Development:** requests hitting preview domains, or git branch domains of
-  your application.
+![Screenshot of app build logs](./images/build_logs.png)
 
-Environment variables must be added to at least one context, but can be added to
-multiple, or even all contexts.
+The build logs show these stages:
 
-To save the environment variables, press the save button. You can re-open the
-drawer to edit / remove environment variables you have added.
+- **Prepare**: Cloning the repository and restoring caches
+- **Install**: Running the install command and framework-specific setup
+- **Build**: Executing the build command and preparing the deployment artifact
+- **Warm up**: Testing the deployment with a request
+- **Route**: Deploying the build to global regions
+
+You can cancel a build with the button in the top-left corner, or restart failed
+builds from the same location.
+
+After completion, the top-right shows the preview URL, and below that, all
+timelines where the build is deployed.
+
+## Monitor your application
+
+After deploying, use the observability tools to monitor your application:
+
+### Logs
+
+View application logs with filtering options for context, revision, and text
+content:
+
+![Screenshot of the Logs page](./images/logs.png)
+
+Use the search bar to filter logs (e.g., `context:production`, `revision:<id>`).
+The time picker adjusts the displayed time range.
+
+If a log is associated with a trace, you can click "View trace" to see the
+corresponding trace information.
+
+### Traces
+
+View request traces with detailed timing information:
+
+![Screenshot of the Traces page](./images/traces.png)
+
+Click any trace to open the trace view showing all spans in a waterfall
+visualization:
+
+![Screenshot of the Trace view](./images/trace.png)
+
+The trace view shows:
+
+- Timeline of spans with duration
+- Span details including attributes
+- Logs emitted during the span To save the environment variables, press the save
+  button. You can re-open the drawer to edit / remove environment variables you
+  have added.
 
 You can also edit the app name on this page, and select which region(s) the
 application should be served from.

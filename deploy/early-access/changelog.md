@@ -16,11 +16,11 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 - Deno Deploy<sup>EA</sup> now supports playgrounds!
   - Playgrounds can be created and accessed from the playgrounds tab in the
-    organizations overview.
-  - Playgrounds can contain multiple files, and can have a build step.
-  - The playground UI has an iframe to preview your deployed app.
-  - Three templates are available so far: hello world, Next.js, and Hono.
-- On mobile there is now a new floating navbar that doesn't pertrude into the
+    organizations overview
+  - Playgrounds can contain multiple files and include build steps
+  - The playground UI features an iframe to preview your deployed app
+  - Three templates are currently available: hello world, Next.js, and Hono
+- On mobile devices, there is now a floating navbar that doesn't intrude into
   page content
 
 ## June 9th, 2025
@@ -28,7 +28,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 ### Features
 
 - Deno Deploy<sup>EA</sup> has a new logo!
-- Anyone can join Early Access now by signing up at
+- Anyone can now join Early Access by signing up at
   [dash.deno.com](https://dash.deno.com/account#early-access)
 - Builds
   - Builds can now use up to 8 GB of storage, up from 2 GB
