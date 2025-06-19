@@ -284,7 +284,7 @@ Then, we're going to update the `nuxt.config.ts`. Import the Tailwind dependency
 and configure the Nuxt application for Deno compatibility, We'll enable
 development tools, and set up Tailwind CSS:
 
-```tsx "nuxt.config.ts"
+```tsx title="nuxt.config.ts"
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
