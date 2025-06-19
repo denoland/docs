@@ -175,3 +175,31 @@ Each op should have a `Dispatch` and a `Complete` event. The time between these
 two events is the time taken to execute the op. This flag can be useful for
 performance profiling, debugging hanging programs, or understanding how Deno
 works under the hood.
+
+## OpenTelemetry integration
+
+For production applications or complex systems, OpenTelemetry provides a more
+comprehensive approach to observability and debugging. Deno includes built-in
+support for OpenTelemetry, allowing you to:
+
+- Trace requests through your application
+- Monitor application performance metrics
+- Collect structured logs
+- Export telemetry data to monitoring systems
+
+To enable OpenTelemetry, run your application with the `--unstable-otel` flag:
+
+```sh
+OTEL_DENO=true deno run --unstable-otel your_script.ts
+```
+
+This will automatically collect and export runtime observability data,
+including:
+
+- HTTP request traces
+- Runtime metrics
+- Console logs and errors
+
+For full details on Deno's OpenTelemetry integration, including custom metrics,
+traces, and configuration options, see the
+[OpenTelemetry documentation](/runtime/fundamentals/open_telemetry).
