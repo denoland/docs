@@ -351,6 +351,11 @@ export const sidebar = [
     title: "OpenTelemetry",
     items: [
       {
+        title: "Basic OpenTelemetry setup",
+        href: "/examples/basic_opentelemetry_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Export telemetry to Grafana",
         href: "/examples/grafana_tutorial/",
         type: "tutorial",
@@ -363,6 +368,11 @@ export const sidebar = [
       {
         title: "Export telemetry to Honeycomb",
         href: "/examples/honeycomb_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Span propagation",
+        href: "/examples/otel_span_propagation_tutorial/",
         type: "tutorial",
       },
     ],

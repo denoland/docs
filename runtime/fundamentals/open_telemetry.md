@@ -529,6 +529,16 @@ There are three types of observable instruments:
 Learn more about the full metrics API in the
 [OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api.MetricsAPI.html).
 
+### Practical Examples
+
+For practical examples of implementing OpenTelemetry in Deno applications, see
+our tutorials:
+
+- [Basic OpenTelemetry Tutorial](/examples/basic_opentelemetry_tutorial/) - A
+  simple HTTP server with custom metrics and traces
+- [Distributed Tracing Tutorial](/examples/otel_span_propagation_tutorial/) -
+  Advanced techniques for tracing across service boundaries
+
 ## Context propagation
 
 In OpenTelemetry, context propagation is the process of passing some context
