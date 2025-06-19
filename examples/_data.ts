@@ -309,6 +309,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Stubbing",
+        href: "/examples/stubbing_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Snapshot testing",
         href: "/examples/snapshot_tutorial/",
         type: "tutorial",
