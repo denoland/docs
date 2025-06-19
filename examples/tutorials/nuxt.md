@@ -25,7 +25,7 @@ You can find the code for this project in this
 
 ## Scaffold a Nuxt app with Deno
 
-We can create a new Nuxt project using deno like this:
+We can create a new Nuxt project using Deno like this:
 
 ```bash
 deno -A npm:nuxi@latest init
@@ -60,9 +60,7 @@ First, our
 [dinosaur data](https://github.com/denoland/examples/blob/main/with-nuxt/server/api/data.json)
 will live within the server directory as `server/api/data.json`:
 
-```json
-// server/api/data.json
-
+```json title="server/api/data.json"
 [
   {
     "name": "Aardonyx",
@@ -76,7 +74,7 @@ will live within the server directory as `server/api/data.json`:
     "name": "Abrictosaurus",
     "description": "An early relative of Heterodontosaurus."
   },
-  ...
+  ...etc
 ]
 ```
 
@@ -87,25 +85,13 @@ would come from a database.
 > to [a variety of databases](https://docs.deno.com/runtime/tutorials/connecting_to_databases/) and [even use ORMs like Prisma](https://docs.deno.com/runtime/tutorials/how_to_with_npm/prisma/) with
 > Deno.
 
-Next, let’s add type definitions for our dinosaur data. We’ll put it in a new
-folder, `types`:
-
-```tsx
-// types/index.ts
-
-export interface Dino {
-  name: string;
-  description: string;
-}
-```
-
-We’ll create two API routes to serve the following:
+This app will have two API routes. They will serve the following:
 
 - the full list of dinosaurs for an index page
 - individual dinosaur information for an individual dinosaur page
 
 Both will be `*.get.ts` files, which Nuxt automatically converts to API
-endpoints to respond to GET requests.
+endpoints to respond to `GET` requests.
 [The filename convention determines both the HTTP method and the route path](https://nuxt.com/docs/guide/directory-structure/server#matching-http-method).
 
 The initial `dinosaurs.get.ts` is fairly simple and uses
@@ -113,9 +99,7 @@ The initial `dinosaurs.get.ts` is fairly simple and uses
 endpoint for better performance. This handler simply returns our full dinosaur
 data array without any filtering:
 
-```tsx
-// server/api/dinosaurs.get.ts
-
+```tsx title="server/api/dinosaurs.get.ts"
 import data from "./data.json" with { type: "json" };
 
 export default defineCachedEventHandler(() => {
@@ -126,12 +110,10 @@ export default defineCachedEventHandler(() => {
 The `GET` route for the individual dinosaur has a little more logic. It extracts
 the name parameter from the event context, performs case-insensitive matching to
 find the requested dinosaur, and includes proper error handling for missing or
-invalid dinosaur names. To pass the name parameter, let’s name this route as
-`[name].get.ts`:
+invalid dinosaur names. We'll create a `dinosaurs` directory, then to pass the
+name parameter, we'll make a new file named `[name].get.ts`:
 
-```tsx
-// server/api/dinosaurs/[name].get.ts
-
+```tsx title="server/api/dinosaurs/[name].get.ts"
 import data from "../data.json";
 
 export default defineCachedEventHandler((event) => {
@@ -159,37 +141,38 @@ export default defineCachedEventHandler((event) => {
 });
 ```
 
-Awesome. When we run the server with `deno task dev` and point our browser to
-`localhost:3000/api/dinosaurs`, we can see the raw JSON response showing all of
-the dinosaurs:
+Run the server with `deno task dev` and visit
+[http://localhost:3000/api/dinosaurs](http://localhost:3000/api/dinosaurs) in
+your browser, you should see the raw JSON response showing all of the dinosaurs!
 
 ![Setting up API](./images/how-to/nuxt/nuxt-1.webp)
 
-You can also retrieve data for a single dinosaur by going to
-`localhost:3000/api/dinosaurs/aardonyx`.
+You can also retrieve data for a single dinosaur by visiting a particular
+dinosaur name, for example:
+[http://localhost:3000/api/dinosaurs/aardonyx](http://localhost:3000/api/dinosaurs/aardonyx).
 
 ![Setting up API](./images/how-to/nuxt/nuxt-2.webp)
 
-Next, let’s setup the frontend with Vue to display the index page and each
+Next, we'll setup the frontend with Vue to display the index page and each
 individual dinosaur page.
 
-## Setup Vue frontend
+## Setup the Vue frontend
 
-We want to set up two pages within our app:
+We want to set up two pages within the app:
 
-- An index page which will list all our dinosaurs
-- An individual dinosaur page showing more information about our selected
+- An index page which will list all of the dinosaurs
+- An individual dinosaur page showing more information about the selected
   dinosaur.
 
-Let’s first create the index page. Since Nuxt uses
-[file-system routing](https://nuxt.com/docs/getting-started/routing), let’s
-create a `pages` directory and within that, our index page at `pages/index.vue`.
+First, create the index page. Nuxt uses
+[file-system routing](https://nuxt.com/docs/getting-started/routing), so we will
+create a `pages` directory in the root, and within that an index page called
+`index.vue`.
+
 To get the data, we’ll use the `useFetch` composable to hit the API endpoint we
 created in the previous section:
 
-```tsx
-// pages/index.vue
-
+```tsx title="pages/index.vue"
 <script setup lang="ts">
 const { data: dinosaurs } = await useFetch("/api/dinosaurs");
 </script>
@@ -212,17 +195,15 @@ const { data: dinosaurs } = await useFetch("/api/dinosaurs");
 </template>
 ```
 
-For our next page that shows information for each dinosaur, let’s create a
-dynamic page: `pages/[name].vue`. This page uses Nuxt's
+For the page that shows information on each dinosaur, we'll create a new dynamic
+page called `[name].vue`. This page uses Nuxt's
 [dynamic route parameters](https://nuxt.com/docs/getting-started/routing#route-parameters),
 where the `[name]` in the filename can be accessed in JavaScript as
 `route.params.name`. We’ll use the `useRoute` composable to access the route
 parameters and `useFetch` to get the specific dinosaur's data based on the name
 parameter:
 
-```tsx
-// pages/[name].vue
-
+```tsx title="pages/[name].vue"
 <script setup lang="ts">
 const route = useRoute();
 const { data: dinosaur } = await useFetch(
@@ -248,9 +229,7 @@ root of the directory to serve our application’s root component. We’ll use
 page structure and [`NuxtPage`](https://nuxt.com/docs/api/components/nuxt-page)
 for dynamic page rendering:
 
-```tsx
-// app.vue
-
+```tsx title="app.vue"
 <template>
   <NuxtLayout>
     <div>
@@ -268,8 +247,8 @@ for dynamic page rendering:
 </template>;
 ```
 
-Let’s run our server with `deno task dev` and see how it looks at
-`localhost:3000`:
+Run the server with `deno task dev` and see how it looks at
+[http://localhost:3000](http://localhost:3000):
 
 <figure>
 
@@ -286,9 +265,7 @@ First, we'll set up a layout which will provide a consistent structure across
 all pages using Nuxt's layout system with
 [slot-based](https://vuejs.org/guide/components/slots) content injection:
 
-```tsx
-// layouts/default.vue
-
+```tsx title="layouts/default.vue"
 <template>
   <div>
     <slot />
@@ -303,48 +280,15 @@ for some basic design, so we need to install those dependencies:
 deno install -D npm:tailwindcss npm:@tailwindcss/vite
 ```
 
-Then, we're going to update our `nuxt.config.ts` file by adding the
-`@tailwindcss/vite` plugin to our Nuxt configuration as a Vite plugin.
+Then, we're going to update the `nuxt.config.ts`. Import the Tailwind dependency
+and configure the Nuxt application for Deno compatibility, We'll enable
+development tools, and set up Tailwind CSS:
 
-```tsx
-// nuxt.config.ts
-
+```tsx title="nuxt.config.ts"
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
-  compatbilityDate: "2025-05-15",
-  devtools: { enabled: true },
-  vite: {
-    plugins: [
-      tailwindcss(),
-    ],
-  },
-});
-```
-
-Next, let’s create a new css file, `assets/css/main.css`, and add an import
-`@import` that imports tailwind, as well as the tailwind utilities.
-
-```tsx
-// assets/css/main.css
-@import "tailwindcss";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-The only other thing we'll need to do is update our `nuxt.config.ts` file to
-configure our Nuxt application for Deno compatibility, enable development tools,
-and set up Tailwind CSS.
-
-```tsx
-// nuxt.config.ts
-
-import tailwindcss from "@tailwindcss/vite";
-
-export default defineNuxtConfig({
-  compatbilityDate: "2025-05-15",
+  compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
   nitro: {
     preset: "deno",
@@ -363,9 +307,20 @@ export default defineNuxtConfig({
 });
 ```
 
-## Running Our Application
+Next, create a new css file, `assets/css/main.css`, and add an import `@import`
+that imports tailwind, as well as the tailwind utilities:
 
-We can then run our application using:
+```tsx title="assets/css/main.css"
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## Running the application
+
+We can then run the application using:
 
 ```bash
 deno task dev
@@ -381,9 +336,7 @@ This will start the app at localhost:3000:
 
 And we’re done!
 
-## Next steps
-
-Next steps for a Nuxt app might be to add authentication using the
+🦕 Next steps for a Nuxt app might be to add authentication using the
 [Nuxt Auth](https://auth.nuxtjs.org/) module, implement state management with
 [Pinia](https://pinia.vuejs.org/), add server-side data persistence with
 [Prisma](https://docs.deno.com/examples/prisma_tutorial/) or
