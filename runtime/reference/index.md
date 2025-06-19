@@ -3,8 +3,8 @@ title: Reference guides
 description: "Technical references and guides for Deno. Includes detailed documentation on runtime APIs, environment setup, CLI tools, and advanced features for experienced Deno developers."
 ---
 
-Here, you’ll find detailed technical documentation and comprehensive guides to
-help you master Deno’s advanced features and tools.
+Here, you'll find detailed technical documentation and comprehensive guides to
+help you master Deno's advanced features and tools.
 
 ## Runtime APIs
 
@@ -19,17 +19,23 @@ applications to Deno.
 - [Web API support](/runtime/reference/web_platform_apis/)
 - [Node API support](/api/node/)
 
+For practical examples of Deno APIs in action, check out the
+[Introduction to Deno APIs](/examples/intro_to_deno_apis/) video tutorial.
+
 ## Setting up your environment
 
 Get step-by-step instructions on how to set up Visual Studio Code (VS Code) for
 Deno development. This guide will help you configure your development
-environment to take full advantage of Deno’s features, including TypeScript
+environment to take full advantage of Deno's features, including TypeScript
 support, debugging, and more. If you're running a different editor, you can also
 check out the Deno Language Server.
 
 - [Setting up VS Code for Deno](/runtime/reference/vscode/)
 - [Deno Language Server](/runtime/reference/cli/lsp_integration/)
 - [Continuous integration](/runtime/reference/continuous_integration/)
+
+For a quick start with Deno development environment setup, see the
+[Your Deno Dev Environment](/examples/deno_dev_environment/) tutorial.
 
 ## Deno CLI Reference Guide
 
