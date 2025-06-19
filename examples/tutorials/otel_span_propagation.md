@@ -1,6 +1,6 @@
 ---
 title: "Distributed Tracing with Context Propagation in Deno"
-description: "Learn how to implement end-to-end distributed tracing with automatic context propagation in Deno applications. This tutorial covers creating traced services, automatic propagation of trace context, and visualizing distributed traces."
+description: "Implement end-to-end distributed tracing with automatic context propagation in Deno applications. This tutorial covers creating traced services, automatic propagation of trace context, and visualizing distributed traces."
 url: /examples/otel_span_propagation_tutorial/
 ---
 

@@ -42,6 +42,14 @@ Refer to the links below for code examples for common functions.
 - [Connect to the hostname and port (`Deno.connect`)](/api/deno/~/Deno.connect)
 - [Announcing on the local transport address (`Deno.listen`)](/api/deno/~/Deno.listen)
 
+For practical examples of networking functionality:
+
+- [HTTP Server: Hello world](/examples/http_server/)
+- [HTTP Server: Routing](/examples/http_server_routing/)
+- [TCP Echo Server](/examples/tcp_echo_server/)
+- [WebSockets example](/examples/http_server_websocket/)
+- [Build a chat app with WebSockets tutorial](/examples/chat_app_tutorial/)
+
 ## Subprocesses
 
 The Deno runtime comes with
@@ -49,7 +57,8 @@ The Deno runtime comes with
 
 Refer to the links below for code samples of how to create a subprocess.
 
-- [Creating a subprocess (`Deno.Command`)](/runtime/tutorials/subprocess/)
+- [Creating a subprocess (`Deno.Command`)](/examples/subprocess_tutorial/)
+- [Collecting output from subprocesses](/examples/subprocesses_output/)
 
 ## Errors
 
@@ -103,6 +112,13 @@ passing in a port number in options bag as the first or second argument.
 
 You can
 [read more about how to use the HTTP server APIs](/runtime/fundamentals/http_server/).
+
+For practical examples of HTTP servers:
+
+- [Simple file server tutorial](/examples/file_server_tutorial/)
+- [HTTP server serving files](/examples/http_server_files/)
+- [HTTP server with streaming](/examples/http_server_streaming/)
+- [HTTP server WebSockets](/examples/http_server_websocket/)
 
 ## Permissions
 
