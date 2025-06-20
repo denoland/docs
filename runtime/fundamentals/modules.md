@@ -144,7 +144,7 @@ when importing them in multiple files. You can centralize management of remote
 modules with an `imports` field in your `deno.json` file. We call this `imports`
 field the **import map**, which is based on the [Import Maps Standard].
 
-[Import Maps Standard]: https://github.com/WICG/import-maps
+[Import Maps Standard]: https://html.spec.whatwg.org/multipage/webappapis.html#import-maps
 
 ```json title="deno.json"
 {
