@@ -15,19 +15,19 @@ Deploy Classic documentation? [View it here](/deploy/).
 ### Features
 
 - The playground now has live streaming logs and traces panels
-  - Logs and traces for the current revision are shown for the past hour
-  - Logs and traces can be filtered just like in the dedicated observability
+  - Logs and traces for the current revision are displayed for the past hour
+  - Logs and traces can be filtered, just like in the dedicated observability
     pages
 - Framework auto-detection now works for more projects out of the box, including
-  many Vite based projects
+  many Vite-based projects
 - The organization dropdown now highlights the currently selected organization
   more clearly
 
 ### Bug fixes
 
-- The sparklines in the metrics overview are now hooked up correctly
-- The error rate metric now works correctly
-- GitHub triggered builds should not run multiple times anymore
+- The sparklines in the metrics overview are now working correctly
+- The error rate metric now functions properly
+- GitHub-triggered builds no longer run multiple times
 - Next.js builds now work more reliably on older Next.js versions
 
 ## June 12th, 2025
