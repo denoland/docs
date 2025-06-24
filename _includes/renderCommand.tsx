@@ -52,56 +52,60 @@ export default function renderCommand(
 
   const toc: TableOfContentsItem_[] = [];
 
-  let about = command.about!.replaceAll(
-    SUBSEQUENT_ENCAPSULATED_ANSI_RE,
-    function (
-      _,
-      _opening1,
-      text1,
-      _closing1,
-      space,
-      opening2,
-      text2,
-      closing2,
-    ) {
-      return `${opening2}${text1}${space}${text2}${closing2}`;
-    },
-  ).replaceAll(SUBSEQUENT_ANSI_RE, "");
-  let aboutLines = about.split("\n");
-  const aboutLinesReadMoreIndex = aboutLines.findLastIndex((line) =>
-    line.toLowerCase().replaceAll(ANSI_RE, "").trim().startsWith("read more:")
-  );
-  if (aboutLinesReadMoreIndex !== -1) {
-    aboutLines = aboutLines.slice(0, aboutLinesReadMoreIndex);
-  }
+  // Add null check for command.about
+  let about = "";
+  if (command.about) {
+    about = command.about.replaceAll(
+      SUBSEQUENT_ENCAPSULATED_ANSI_RE,
+      function (
+        _,
+        _opening1,
+        text1,
+        _closing1,
+        space,
+        opening2,
+        text2,
+        closing2,
+      ) {
+        return `${opening2}${text1}${space}${text2}${closing2}`;
+      },
+    ).replaceAll(SUBSEQUENT_ANSI_RE, "");
+    let aboutLines = about.split("\n");
+    const aboutLinesReadMoreIndex = aboutLines.findLastIndex((line) =>
+      line.toLowerCase().replaceAll(ANSI_RE, "").trim().startsWith("read more:")
+    );
+    if (aboutLinesReadMoreIndex !== -1) {
+      aboutLines = aboutLines.slice(0, aboutLinesReadMoreIndex);
+    }
 
-  about = aboutLines.join("\n").replaceAll(
-    ENCAPSULATED_ANSI_RE,
-    (_, opening, text, _closing, offset, string) => {
-      if (opening === "\u001b[32m") { // green, used as heading
-        return `### ${text}`;
-      } else if (
-        opening === "\u001b[38;5;245m" || opening === "\u001b[36m" ||
-        opening === "\u001b[1m" || opening === "\u001b[22m"
-      ) { // gray and cyan used for code and snippets, and we treat yellow and bold as well as such
-        const lines = string.split("\n");
-        let line = "";
+    about = aboutLines.join("\n").replaceAll(
+      ENCAPSULATED_ANSI_RE,
+      (_, opening, text, _closing, offset, string) => {
+        if (opening === "\u001b[32m") { // green, used as heading
+          return `### ${text}`;
+        } else if (
+          opening === "\u001b[38;5;245m" || opening === "\u001b[36m" ||
+          opening === "\u001b[1m" || opening === "\u001b[22m"
+        ) { // gray and cyan used for code and snippets, and we treat yellow and bold as well as such
+          const lines = string.split("\n");
+          let line = "";
 
-        while (offset > 0) {
-          line = lines.shift();
-          offset -= line.length + 1;
-        }
+          while (offset > 0) {
+            line = lines.shift();
+            offset -= line.length + 1;
+          }
 
-        if (START_AND_END_ANSI_RE.test(line.trim())) {
-          return "\n```\n" + text + "\n```\n\n";
+          if (START_AND_END_ANSI_RE.test(line.trim())) {
+            return "\n```\n" + text + "\n```\n\n";
+          } else {
+            return "`" + text + "`";
+          }
         } else {
-          return "`" + text + "`";
+          return text;
         }
-      } else {
-        return text;
-      }
-    },
-  );
+      },
+    );
+  }
 
   const args = [];
   const options: Record<string, ArgType[]> = {};
@@ -171,16 +175,19 @@ function renderOption(group: string, arg: ArgType, helpers: Lume.Helpers) {
   const id = `${group}-${arg.name}`;
 
   let docsLink = null;
-  let help = arg.help.replaceAll(ANSI_RE, "");
-  const helpLines = help.split("\n");
-  const helpLinesDocsIndex = helpLines.findLastIndex((line) =>
-    line.toLowerCase()
-      .trim()
-      .startsWith("docs:")
-  );
-  if (helpLinesDocsIndex !== -1) {
-    help = helpLines.slice(0, helpLinesDocsIndex).join("\n");
-    docsLink = helpLines[helpLinesDocsIndex].trim().slice("docs:".length);
+  // Add null check for arg.help
+  let help = arg.help ? arg.help.replaceAll(ANSI_RE, "") : "";
+  if (help) {
+    const helpLines = help.split("\n");
+    const helpLinesDocsIndex = helpLines.findLastIndex((line) =>
+      line.toLowerCase()
+        .trim()
+        .startsWith("docs:")
+    );
+    if (helpLinesDocsIndex !== -1) {
+      help = helpLines.slice(0, helpLinesDocsIndex).join("\n");
+      docsLink = helpLines[helpLinesDocsIndex].trim().slice("docs:".length);
+    }
   }
 
   return (
