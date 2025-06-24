@@ -91,7 +91,7 @@ git push -u origin main
    - Runtime configuration: Static Site
    - Install command: `deno install`
    - Build command: `deno task build`
-   - Static Directory: `dist/index.html`
+   - Static Directory: `dist`
 
 5. Click "Create App" to start the deployment process
 
