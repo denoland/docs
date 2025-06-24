@@ -1,6 +1,6 @@
 ---
 title: "Short title example"
-description: "A description of typical length that will wrap under the title and offer some additional information about this page. Perhaps this might sometimes get a little longer. Or even a lot longer! Who knows? Not me!"
+description: "A description of typical length that will wrap under the title and offer some additional information about this page. Perhaps this might sometimes get a little longer."
 ---
 
 There are different variants of the OG image depending on what content is

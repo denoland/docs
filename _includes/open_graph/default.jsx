@@ -36,13 +36,13 @@ export default function ({ title, description, openGraphColor }) {
         fontWeight: 400,
         textWrap: "balance",
         fontFamily: "Inter",
-        background: "#fff",
+        backgroundColor: "#fff",
       }}
     >
       <h1
         style={{
           margin: "0",
-          fontSize: 60,
+          fontSize: 64,
           fontWeight: 800,
           width: "100%",
           lineHeight: "1.1",
@@ -50,28 +50,25 @@ export default function ({ title, description, openGraphColor }) {
           letterSpacing: "-0.025em",
           position: "relative",
           backgroundColor: openGraphColor || "#70ffaf",
-          padding: "90px",
-          positon: "absolute",
-          top: "0",
-          left: "0",
+          paddingLeft: "90px",
+          paddingRight: "90px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           height: "420px",
-          overflow: "hidden",
         }}
       >
         {processedTitle}
         <div
           style={{
             display: "block",
-            fontSize: "20px",
+            fontSize: "21px",
             letterSpacing: "0",
-            marginTop: "16px",
+            marginTop: "20px",
             borderTop: "2px solid #172723",
-            paddingTop: "16px",
-            width: "150px",
-            fontWeight: 600,
+            paddingTop: "12px",
+            width: "7.35em",
+            fontWeight: 500,
           }}
         >
           docs.deno.com
@@ -83,7 +80,8 @@ export default function ({ title, description, openGraphColor }) {
           alignItems: "center",
           justifyContent: "space-between",
           height: "230px",
-          padding: "90px",
+          padding: "84px",
+          border: `6px solid ${openGraphColor || "#70ffaf"}`,
         }}
       >
         <p

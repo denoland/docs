@@ -236,7 +236,7 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
             weight: 400,
             style: "normal",
             data: await Deno.readFile(
-              "./static/fonts/inter/Inter-Regular.woff"
+              "./static/fonts/inter/hacked/Inter-Regular-hacked.woff"
             ),
           },
           {
@@ -244,7 +244,7 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
             weight: 700,
             style: "normal",
             data: await Deno.readFile(
-              "./static/fonts/inter/Inter-SemiBold.woff"
+              "./static/fonts/inter/hacked/Inter-SemiBold-hacked.woff"
             ),
           },
         ],
