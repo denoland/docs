@@ -141,17 +141,6 @@ file under the `fmt` field:
 }
 ```
 
-Or at the top level of `deno.json` to tell both `deno fmt` and `deno lint` to
-ignore it. (This is a good place to put your generated files):
-
-```json
-{
-  "fmt": {
-    "ignore": ["main.ts", "*.json"]
-  }
-}
-```
-
 ### Formatting markdown
 
 `deno fmt` also works on markdown files. You can choose how to format prose with
@@ -200,7 +189,7 @@ Note that all these options also have a corresponding flags in the CLI.
     "semiColon": false,
     "singleQuote": true,
     "proseWrap": "always",
-    "ignore": ["**/logs.json"]
+    "exclude": ["**/logs.json"]
   }
 }
 ```
