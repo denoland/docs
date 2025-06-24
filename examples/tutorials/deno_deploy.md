@@ -1,6 +1,7 @@
 ---
-title: "Getting Started with a Basic Deno Project"
+title: "Deploy an app with Deno Deploy"
 description: "A step-by-step tutorial for deploying your first Deno application to Deno Deploy Early Access."
+url: /examples/deno_deploy_tutorial/
 ---
 
 Deno Deploy allows you to host your Deno applications on a global edge network,

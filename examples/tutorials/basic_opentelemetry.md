@@ -4,8 +4,6 @@ description: "Set up basic OpenTelemetry instrumentation in a Deno application. 
 url: /examples/basic_opentelemetry_tutorial/
 ---
 
-# Getting Started with OpenTelemetry in Deno
-
 OpenTelemetry provides powerful observability tools for your applications. With
 Deno's built-in OpenTelemetry support, you can easily instrument your code to
 collect metrics, traces, and logs.
