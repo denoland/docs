@@ -17,7 +17,7 @@ export default function ({ title, description, openGraphTitle }) {
         flexDirection: "column",
         justifyContent: "center",
         background:
-          `radial-gradient(circle at 95% 95%, #090909 10%, #292929 70%)`,
+          `radial-gradient(circle 450px at 300px 50%, #273a34, #172723)`,
         fontSize: 28,
         fontWeight: 400,
         padding: "0 90px",
@@ -55,7 +55,8 @@ export default function ({ title, description, openGraphTitle }) {
             fontFamily: "Courier",
             lineHeight: "1.2",
             color: "#ffffff",
-            textShadow: "0 0 8px #70ffafff",
+            textShadow:
+              "0 0 42px #70ffaf, 0 0 36px #70ffaf66, 0 0 28px #70ffaf33, 0 0 16px #70ffaf22, 0 0 8px #70ffaf11",
           }}
         >
           {openGraphTitle}

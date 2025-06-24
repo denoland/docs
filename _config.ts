@@ -50,11 +50,7 @@ const site = lume(
       page404: "/404/",
     },
     watcher: {
-      ignore: [
-        "/.git",
-        "/.github",
-        "/.vscode",
-      ],
+      ignore: ["/.git", "/.github", "/.vscode"],
       debounce: 1_000,
     },
   },
@@ -69,8 +65,7 @@ const site = lume(
           anchor,
           {
             permalink: anchor.permalink.linkInsideHeader({
-              symbol:
-                `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
+              symbol: `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
               placement: "after",
             }),
             getTokensText(tokens: { type: string; content: string }[]) {
@@ -96,7 +91,7 @@ const site = lume(
         },
       },
     },
-  },
+  }
 );
 
 // ignore some folders that have their own build tasks
@@ -128,7 +123,7 @@ site.copy(".env");
 site.use(
   redirects({
     output: toFileAndInMemory,
-  }),
+  })
 );
 
 site.use(search());
@@ -138,7 +133,7 @@ site.use(mdx());
 site.use(
   postcss({
     plugins: [tw(tailwindConfig)],
-  }),
+  })
 );
 
 site.use(
@@ -148,7 +143,7 @@ site.use(
       minify: false,
       splitting: true,
     },
-  }),
+  })
 );
 
 site.use(toc({ anchor: false }));
@@ -206,7 +201,7 @@ site.ignore(
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
-  (path) => path.includes("/lint/rules/"),
+  (path) => path.includes("/lint/rules/")
   // "deploy",
   // "runtime",
   // "subhosting",
@@ -223,50 +218,51 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
 
   // Generate Open Graph images
   site.data("openGraphLayout", "/open_graph/default.jsx");
-  site.data("openGraphColor", "#70ffaf");
-  site.use(ogImages({
-    satori: {
-      width: 1200,
-      height: 630,
-      fonts: [
-        {
-          name: "Courier",
-          style: "normal",
-          data: await Deno.readFile(
-            "./static/fonts/courier/CourierPrime-Regular.ttf",
-          ),
-        },
-        {
-          name: "Inter",
-          weight: 400,
-          style: "normal",
-          data: await Deno.readFile(
-            "./static/fonts/inter/Inter-Regular.woff",
-          ),
-        },
-        {
-          name: "Inter",
-          weight: 700,
-          style: "bold",
-          data: await Deno.readFile(
-            "./static/fonts/inter/Inter-SemiBold.woff",
-          ),
-        },
-      ],
-    },
-    cache: false,
-  }));
+  site.use(
+    ogImages({
+      satori: {
+        width: 1200,
+        height: 630,
+        fonts: [
+          {
+            name: "Courier",
+            style: "normal",
+            data: await Deno.readFile(
+              "./static/fonts/courier/CourierPrime-Regular.ttf"
+            ),
+          },
+          {
+            name: "Inter",
+            weight: 400,
+            style: "normal",
+            data: await Deno.readFile(
+              "./static/fonts/inter/Inter-Regular.woff"
+            ),
+          },
+          {
+            name: "Inter",
+            weight: 700,
+            style: "normal",
+            data: await Deno.readFile(
+              "./static/fonts/inter/Inter-SemiBold.woff"
+            ),
+          },
+        ],
+      },
+      cache: false,
+    })
+  );
 }
 
 site.scopedUpdates(
   (path) => path == "/overrides.css",
   (path) => /\.(js|ts)$/.test(path),
-  (path) => path.startsWith("/api/deno/"),
+  (path) => path.startsWith("/api/deno/")
 );
 
 site.addEventListener("afterStartServer", () => {
   log.warn(
-    `${cliNow()} Server available at <green>http://localhost:3000</green>`,
+    `${cliNow()} Server available at <green>http://localhost:3000</green>`
   );
 });
 
