@@ -1,12 +1,27 @@
 /** @jsxImportSource npm:react@18.2.0 */
 
 export default function ({ title, description, openGraphColor }) {
+  // Process text to replace superscript EA with "Early Access"
+  const processEarlyAccessText = (text) => {
+    if (!text) return text;
+
+    // Replace superscript EA with "Early Access"
+    // Using multiple approaches for reliable matching
+    return text
+      .replace(/\u1D31\u1D00/g, " Early Access") // ᴱᴬ using codepoints
+      .replace(/ᴱ\s*ᴬ/g, " Early Access"); // Direct character matching
+  };
+
   if (!title) {
     title = "Deno documentation";
   }
   if (!description) {
     description = "Learn more at docs.deno.com";
   }
+
+  // Process title and description for Early Access text
+  const processedTitle = processEarlyAccessText(title);
+  const processedDescription = processEarlyAccessText(description);
 
   const bgColor = openGraphColor || "#70ffaf";
 
@@ -48,7 +63,7 @@ export default function ({ title, description, openGraphColor }) {
           marginTop: 0,
         }}
       >
-        {title}
+        {processedTitle}
       </h1>
       <div
         style={{
@@ -66,7 +81,7 @@ export default function ({ title, description, openGraphColor }) {
           lineHeight: "1.5",
         }}
       >
-        {description}
+        {processedDescription}
       </p>
       <svg
         xmlns="http://www.w3.org/2000/svg"

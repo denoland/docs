@@ -180,6 +180,19 @@ deno install --allow-scripts=npm:sqlite3
 _Install all dependencies and allow `npm:sqlite3` package to run its lifecycle
 scripts_.
 
+## --quiet flag
+
+The `--quiet` flag suppresses diagnostic output when installing dependencies.
+When used with `deno install`, it will hide progress indicators, download
+information, and success messages.
+
+```shell
+$ deno install --quiet jsr:@std/http/file-server
+```
+
+This is useful for scripting environments or when you want cleaner output in CI
+pipelines.
+
 ## Uninstall
 
 You can uninstall dependencies or binary script with `deno uninstall` command:

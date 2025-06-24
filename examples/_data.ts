@@ -309,6 +309,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Stubbing",
+        href: "/examples/stubbing_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Snapshot testing",
         href: "/examples/snapshot_tutorial/",
         type: "tutorial",
@@ -346,6 +351,11 @@ export const sidebar = [
     title: "OpenTelemetry",
     items: [
       {
+        title: "Basic OpenTelemetry setup",
+        href: "/examples/basic_opentelemetry_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Export telemetry to Grafana",
         href: "/examples/grafana_tutorial/",
         type: "tutorial",
@@ -360,11 +370,21 @@ export const sidebar = [
         href: "/examples/honeycomb_tutorial/",
         type: "tutorial",
       },
+      {
+        title: "Span propagation",
+        href: "/examples/otel_span_propagation_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
     title: "Deploying Deno projects",
     items: [
+      {
+        title: "Deploy with Deno Deploy",
+        href: "/examples/deno_deploy_tutorial/",
+        type: "tutorial",
+      },
       {
         title: "AWS Lambda",
         href: "/examples/aws_lambda_tutorial/",

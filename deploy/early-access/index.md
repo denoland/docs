@@ -18,8 +18,10 @@ original Deploy, featuring:
 - Integrated build system
 - Significantly enhanced underlying infrastructure
 
-<a href="https://app.deno.com" class="docs-cta runtime-cta">Try out Deno
-Deploy<sup>EA</sup></a>
+<a href="https://dash.deno.com/account#early-access" class="docs-cta runtime-cta">Join
+the Early Access program</a>
+<a href="https://app.deno.com" class="docs-cta deploy-cta">Go to your Deno
+Deploy<sup>EA</sup> dashboard</a>
 
 :::note
 
@@ -27,26 +29,22 @@ Deno Deploy<sup>EA</sup> is in private beta. To use Deno Deploy
 <sup>EA</sup> you must join the Early Access program from the
 [Deploy Classic account settings page](https://dash.deno.com/account#early-access).
 
-After joining the Early Access program, you may still not immediately have
-access to Deno Deploy<sup>EA</sup> as we are rolling out access in waves.
-
 :::
 
 Deno Deploy<sup>EA</sup> comes with a new dashboard at
 [app.deno.com](https://app.deno.com). In this dashboard, you can create new Deno
 Deploy<sup>EA</sup> organizations that contain Deno Deploy<sup>EA</sup> apps.
 
-Within a single organization, you cannot mix and match Deno Deploy<sup>EA</sup>
-apps and Deploy Classic projects. You can switch between Deno
-Deploy<sup>EA</sup> organizations and Deploy Classic organizations through the
-organization picker in the top left of the dashboard.
+Within a single organization, you cannot mix Deno Deploy<sup>EA</sup> apps with
+Deploy Classic projects. You can switch between different organizations using
+the organization picker in the top left of the dashboard.
 
 ## What is Deno Deploy<sup>EA</sup>?
 
 Deno Deploy is a serverless platform for running JavaScript and TypeScript
-applications in the cloud (or self-hosted on your own infrastructure). Deno
-Deploy acts as a management plane for deploying and running applications, for
-example through a GitHub integration.
+applications in the cloud (or self-hosted on your own infrastructure). It
+provides a management plane for deploying and running applications through
+integrations like GitHub deployment.
 
 ## Comparison to Deploy Classic
 
@@ -82,12 +80,12 @@ Deploy.
 
 ## How to access EA
 
-To begin using Deno Deploy Early Access:
+To begin using Deno Deploy<sup>EA</sup>:
 
 1. Visit [app.deno.com](https://app.deno.com) to access the new dashboard
 2. Create a new Deno Deploy<sup>EA</sup> organization
-3. Create your first app within the organization
-4. Connect your GitHub repository or deploy directly from the dashboard
+3. Create your first application within this organization
+4. Deploy from your GitHub repository or directly from the dashboard
 
-For detailed documentation on deploying specific frameworks or configuring your
-application, view the reference documentation.
+For detailed configuration instructions and framework-specific guides, please
+refer to our reference documentation.

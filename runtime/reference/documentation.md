@@ -70,3 +70,9 @@ export function foo(): string {
   return "foo";
 }
 ````
+
+For more guides on testing in Deno, check out:
+
+- [Basic testing tutorial](/examples/testing_tutorial/)
+- [Mocking data in tests tutorial](/examples/mocking_tutorial/)
+- [Testing web applications tutorial](/examples/web_testing_tutorial/)

@@ -144,7 +144,7 @@ when importing them in multiple files. You can centralize management of remote
 modules with an `imports` field in your `deno.json` file. We call this `imports`
 field the **import map**, which is based on the [Import Maps Standard].
 
-[Import Maps Standard]: https://github.com/WICG/import-maps
+[Import Maps Standard]: https://html.spec.whatwg.org/multipage/webappapis.html#import-maps
 
 ```json title="deno.json"
 {
@@ -494,6 +494,69 @@ deno run --reload my_module.ts
 # Reload a specific module
 deno run --reload=jsr:@std/fs my_module.ts
 ```
+
+## Development only dependencies
+
+Sometimes dependencies are only needed during development, for example
+dependencies of test files or build tools. In Deno, the runtime does not require
+you to distinguish between development and production dependencies, as the
+[runtime will only load and install dependencies that are actually used in the
+code that is being executed](#why-does-deno-not-have-a-devimports-field).
+
+However, it can be useful to mark dev dependencies to aid people who are reading
+your package. When using `deno.json`, the convention is to add a `// dev`
+comment after any "dev only" dependency:
+
+```json title="deno.json"
+{
+  "imports": {
+    "@std/fs": "jsr:@std/fs@1",
+    "@std/testing": "jsr:@std/testing@1" // dev
+  }
+}
+```
+
+When using a `package.json` file, dev dependencies can be added to the separate
+`devDependencies` field:
+
+```json title="package.json"
+{
+  "dependencies": {
+    "pg": "npm:pg@^8.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3"
+  }
+}
+```
+
+### Why does Deno not have a `devImports` field?
+
+To understand why Deno does not separate out dev dependencies in the package
+manifest it is important to understand what problem dev dependencies are trying
+to solve.
+
+When deploying an application you frequently want to install only the
+dependencies that are actually used in the code that is being executed. This
+helps speed up startup time and reduce the size of the deployed application.
+
+Historically, this has been done by separating out dev dependencies into a
+`devDependencies` field in the `package.json`. When deploying an application,
+the `devDependencies` are not installed, and only the dependencies.
+
+This approach has shown to be problematic in practice. It is easy to forget to
+move a dependency from `dependencies` to `devDependencies` when a dependency
+moves from being a runtime to a dev dependency. Additionally, some packages that
+are semantically "development time" dependencies, like (`@types/*`), are often
+defined in `dependencies` in `package.json` files, which means they are
+installed for production even though they are not needed.
+
+Because of this, Deno uses a different approach for installing production only
+dependencies: when running `deno install`, you can pass a `--entrypoint` flag
+that causes Deno to install only the dependencies that are actually
+(transitively) imported by the specified entrypoint file. Because this is
+automatic, and works based on the actual code that is being executed, there is
+no need to specify development dependencies in a separate field.
 
 ## Using only cached modules
 
