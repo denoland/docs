@@ -46,12 +46,10 @@ export default function ({ title, description, openGraphColor }) {
           fontWeight: 800,
           width: "100%",
           lineHeight: "1.1",
-          marginTop: 0,
           letterSpacing: "-0.025em",
           position: "relative",
           backgroundColor: openGraphColor || "#70ffaf",
-          paddingLeft: "90px",
-          paddingRight: "90px",
+          padding: "20px 90px 0",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -69,6 +67,7 @@ export default function ({ title, description, openGraphColor }) {
             paddingTop: "12px",
             width: "7.35em",
             fontWeight: 500,
+            textWrap: "balance",
           }}
         >
           docs.deno.com
