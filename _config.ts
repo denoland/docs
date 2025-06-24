@@ -65,7 +65,8 @@ const site = lume(
           anchor,
           {
             permalink: anchor.permalink.linkInsideHeader({
-              symbol: `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
+              symbol:
+                `<span class="sr-only">Jump to heading</span><span aria-hidden="true" class="anchor-end">#</span>`,
               placement: "after",
             }),
             getTokensText(tokens: { type: string; content: string }[]) {
@@ -91,7 +92,7 @@ const site = lume(
         },
       },
     },
-  }
+  },
 );
 
 // ignore some folders that have their own build tasks
@@ -123,7 +124,7 @@ site.copy(".env");
 site.use(
   redirects({
     output: toFileAndInMemory,
-  })
+  }),
 );
 
 site.use(search());
@@ -133,7 +134,7 @@ site.use(mdx());
 site.use(
   postcss({
     plugins: [tw(tailwindConfig)],
-  })
+  }),
 );
 
 site.use(
@@ -143,7 +144,7 @@ site.use(
       minify: false,
       splitting: true,
     },
-  })
+  }),
 );
 
 site.use(toc({ anchor: false }));
@@ -201,7 +202,7 @@ site.ignore(
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
-  (path) => path.includes("/lint/rules/")
+  (path) => path.includes("/lint/rules/"),
   // "deploy",
   // "runtime",
   // "subhosting",
@@ -228,7 +229,7 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
             name: "Courier",
             style: "normal",
             data: await Deno.readFile(
-              "./static/fonts/courier/CourierPrime-Regular.ttf"
+              "./static/fonts/courier/CourierPrime-Regular.ttf",
             ),
           },
           {
@@ -236,7 +237,7 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
             weight: 400,
             style: "normal",
             data: await Deno.readFile(
-              "./static/fonts/inter/hacked/Inter-Regular-hacked.woff"
+              "./static/fonts/inter/hacked/Inter-Regular-hacked.woff",
             ),
           },
           {
@@ -244,25 +245,25 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
             weight: 700,
             style: "normal",
             data: await Deno.readFile(
-              "./static/fonts/inter/hacked/Inter-SemiBold-hacked.woff"
+              "./static/fonts/inter/hacked/Inter-SemiBold-hacked.woff",
             ),
           },
         ],
       },
       cache: false,
-    })
+    }),
   );
 }
 
 site.scopedUpdates(
   (path) => path == "/overrides.css",
   (path) => /\.(js|ts)$/.test(path),
-  (path) => path.startsWith("/api/deno/")
+  (path) => path.startsWith("/api/deno/"),
 );
 
 site.addEventListener("afterStartServer", () => {
   log.warn(
-    `${cliNow()} Server available at <green>http://localhost:3000</green>`
+    `${cliNow()} Server available at <green>http://localhost:3000</green>`,
   );
 });
 
