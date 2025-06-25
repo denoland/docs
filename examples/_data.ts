@@ -379,7 +379,7 @@ export const sidebar = [
         title: "OpenTelemetry with Deno Deploy",
         href: "/examples/deploy_otel_tutorial/",
         type: "tutorial",
-      }
+      },
     ],
   },
   {
