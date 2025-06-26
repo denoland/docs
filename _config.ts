@@ -50,11 +50,7 @@ const site = lume(
       page404: "/404/",
     },
     watcher: {
-      ignore: [
-        "/.git",
-        "/.github",
-        "/.vscode",
-      ],
+      ignore: ["/.git", "/.github", "/.vscode"],
       debounce: 1_000,
     },
   },
@@ -223,39 +219,40 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
 
   // Generate Open Graph images
   site.data("openGraphLayout", "/open_graph/default.jsx");
-  site.data("openGraphColor", "#70ffaf");
-  site.use(ogImages({
-    satori: {
-      width: 1200,
-      height: 630,
-      fonts: [
-        {
-          name: "Courier",
-          style: "normal",
-          data: await Deno.readFile(
-            "./static/fonts/courier/CourierPrime-Regular.ttf",
-          ),
-        },
-        {
-          name: "Inter",
-          weight: 400,
-          style: "normal",
-          data: await Deno.readFile(
-            "./static/fonts/inter/Inter-Regular.woff",
-          ),
-        },
-        {
-          name: "Inter",
-          weight: 700,
-          style: "bold",
-          data: await Deno.readFile(
-            "./static/fonts/inter/Inter-SemiBold.woff",
-          ),
-        },
-      ],
-    },
-    cache: false,
-  }));
+  site.use(
+    ogImages({
+      satori: {
+        width: 1200,
+        height: 630,
+        fonts: [
+          {
+            name: "Courier",
+            style: "normal",
+            data: await Deno.readFile(
+              "./static/fonts/courier/CourierPrime-Regular.ttf",
+            ),
+          },
+          {
+            name: "Inter",
+            weight: 400,
+            style: "normal",
+            data: await Deno.readFile(
+              "./static/fonts/inter/hacked/Inter-Regular-hacked.woff",
+            ),
+          },
+          {
+            name: "Inter",
+            weight: 700,
+            style: "normal",
+            data: await Deno.readFile(
+              "./static/fonts/inter/hacked/Inter-SemiBold-hacked.woff",
+            ),
+          },
+        ],
+      },
+      cache: false,
+    }),
+  );
 }
 
 site.scopedUpdates(
