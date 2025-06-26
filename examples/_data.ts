@@ -375,6 +375,11 @@ export const sidebar = [
         href: "/examples/otel_span_propagation_tutorial/",
         type: "tutorial",
       },
+      {
+        title: "OpenTelemetry with Deno Deploy",
+        href: "/examples/deploy_otel_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
