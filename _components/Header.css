@@ -1,33 +1,3 @@
-/* header,
-nav {
-  --background-primary: var(--runtime-200-hsl);
-  --background-secondary: var(--runtime-100-hsl);
-  --background-tertiary: var(--runtime-50-hsl);
-  --primary: var(--runtime-700-hsl);
-
-  [data-services="true"] & {
-    --background-primary: var(--deploy-200-hsl);
-    --background-secondary: var(--deploy-100-hsl);
-    --background-tertiary: var(--deploy-50-hsl);
-    --primary: var(--deploy-500-hsl);
-  }
-}
-
-header,
-.refheader {
-  --foreground-primary: 0deg, 0%, 25%;
-  --foreground-secondary: 0deg, 0%, 42%;
-  --foreground-tertiary: 0deg, 0%, 90%;
-  --foreground-quaternary: 0deg, 0%, 95%;
-
-  .dark & {
-    --foreground-primary: 0deg, 0%, 25%;
-    --foreground-secondary: 0deg, 0%, 42%;
-    --foreground-tertiary: 0deg, 0%, 90%;
-    --foreground-quaternary: 0deg, 0%, 95%;
-  }
-} */
-
 header {
   position: sticky;
   top: 0;
