@@ -68,7 +68,7 @@
 /* Light and dark theme variables */
 .light {
   --background-raw: hsl(var(--white-hsl));
-  --background-primary: var(--runtime-50-hsl);
+  --background-primary: var(--runtime-100-hsl);
   --background-secondary: var(--runtime-200-hsl);
   --background-tertiary: var(--runtime-300-hsl);
   --foreground-primary: var(--runtime-950-hsl);
@@ -118,6 +118,8 @@
     --foreground-primary: var(--deploy-50-hsl);
     --foreground-secondary: var(--deploy-100-hsl);
     --foreground-tertiary: var(--deploy-700-hsl);
+    --foreground-quaternary: var(--deploy-800-hsl);
+
     --primary: var(--deploy-300-hsl);
   }
 }
@@ -347,12 +349,12 @@ body {
 }
 
 .deploy-link {
-  @apply text-deploy-600 decoration-deploy-600/20 hover:decoration-deploy-600;
+  @apply text-deploy-500 decoration-deploy-500/20 hover:decoration-deploy-500;
 }
 
 .runtime-link {
-  @apply dark:text-runtime dark:decoration-runtime dark:hover:text-runtime-600
-    dark:hover:decoration-runtime-600 decoration-1 text-runtime-800
+  @apply dark:decoration-runtime dark:hover:text-runtime-600
+    dark:hover:decoration-runtime-600 decoration-1 text-primary
     decoration-runtime-800 hover:decoration-runtime-600 hover:text-runtime-600
     transition-colors duration-100;
 }
@@ -438,8 +440,7 @@ body {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(22 163 74)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>');
 }
 
-.markdown-body .module-info {
-}
+.markdown-body .module-info {}
 
 .markdown-body .module-info svg {
   @apply inline-block w-6 h-6 !important;
