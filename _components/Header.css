@@ -1,4 +1,4 @@
-header,
+/* header,
 nav {
   --background-primary: var(--runtime-200-hsl);
   --background-secondary: var(--runtime-100-hsl);
@@ -26,7 +26,7 @@ header,
     --foreground-tertiary: 0deg, 0%, 90%;
     --foreground-quaternary: 0deg, 0%, 95%;
   }
-}
+} */
 
 header {
   position: sticky;

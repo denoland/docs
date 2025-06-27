@@ -3,30 +3,34 @@
 @tailwind utilities;
 
 :root {
-  --runtime-50: #eefff4;
-  --runtime-50-hsl: 140deg, 100%, 96.5%;
-  --runtime-100: #d7ffe8;
-  --runtime-100-hsl: 144deg, 100%, 92.5%;
-  --runtime-200: #b2ffd3;
-  --runtime-200-hsl: 147deg, 100%, 84.5%;
+  --white-hsl: 215deg, 81%, 100%;
+
+  --runtime-50: #eefff5;
+  --runtime-50-hsl: 149deg, 100%, 96.5%;
+  --runtime-100: #d6ffe9;
+  --runtime-100-hsl: 149deg, 100%, 92.5%;
+  --runtime-200: #b0ffd4;
+  --runtime-200-hsl: 149deg, 100%, 84.5%;
   --runtime-300: #70ffaf;
   --runtime-300-hsl: 149deg, 100%, 72%;
-  --runtime-400: #33f589;
-  --runtime-400-hsl: 148deg, 89%, 58%;
-  --runtime-500: #09de68;
-  --runtime-500-hsl: 147deg, 94%, 45%;
-  --runtime-600: #01b852;
-  --runtime-600-hsl: 147deg, 99%, 36%;
-  --runtime-700: #059044;
-  --runtime-700-hsl: 147deg, 94%, 29%;
-  --runtime-800: #0a7139;
-  --runtime-800-hsl: 149deg, 84%, 24%;
-  --runtime-900: #0a5d32;
-  --runtime-900-hsl: 152deg, 79%, 20%;
-  --runtime-950: #003419;
-  --runtime-950-hsl: 150deg, 100%, 10%;
-  --runtime-1000: #002511;
-  --runtime-1000-hsl: 148deg, 100%, 7.2%;
+  --runtime-400: #29ff85;
+  --runtime-400-hsl: 149deg, 100%, 58%;
+  --runtime-500: #00e666;
+  --runtime-500-hsl: 149deg, 100%, 45%;
+  --runtime-600: #00b84d;
+  --runtime-600-hsl: 149deg, 100%, 36%;
+  --runtime-700: #008a33;
+  --runtime-700-hsl: 149deg, 100%, 29%;
+  --runtime-800: #005c1a;
+  --runtime-800-hsl: 149deg, 100%, 24%;
+  --runtime-900: #003d11;
+  --runtime-900-hsl: 149deg, 100%, 20%;
+  --runtime-950: #001f08;
+  --runtime-950-hsl: 149deg, 100%, 12%;
+  --runtime-1000: #000f04;
+  --runtime-1000-hsl: 149deg, 100%, 7%;
+  --runtime-1050: #000600;
+  --runtime-1050-hsl: 149deg, 100%, 3%;
 
   --runtime: var(--runtime-300);
 
@@ -54,47 +58,73 @@
   --deploy-900-hsl: 198deg, 100%, 5.7%;
   --deploy-950: #000a0d;
   --deploy-950-hsl: 195deg, 100%, 2.5%;
-}
 
-/* Light and dark theme variables */
-.light {
-  --background-primary: 215deg, 81%, 100%;
-  --background-secondary: 213deg, 100%, 95%;
-  --background-tertiary: 213deg, 100%, 84%;
-  --foreground-primary: 0deg, 0%, 25%;
-  --foreground-secondary: 0deg, 0%, 42%;
-  --foreground-tertiary: 0deg, 0%, 90%;
-  --foreground-quaternary: 0deg, 0%, 95%;
-  --runtime-background: 124deg, 100%, 97.1%;
-  --runtime-foreground: 184deg, 100%, 10%;
-  --primary: 217deg, 91%, 49%;
-  --primary-dark: 217deg, 91%, 49%;
   --info: 224deg, 64.3%, 32.9%;
   --note: 224deg, 64.3%, 32.9%;
   --caution: 45.4deg, 93.39%, 47.45%;
   --tip: 142deg, 76.2%, 36.3%;
 }
+
+/* Light and dark theme variables */
+.light {
+  --background-raw: hsl(var(--white-hsl));
+  --background-primary: var(--runtime-50-hsl);
+  --background-secondary: var(--runtime-200-hsl);
+  --background-tertiary: var(--runtime-300-hsl);
+  --foreground-primary: var(--runtime-950-hsl);
+  --foreground-secondary: var(--runtime-900-hsl);
+  --foreground-tertiary: var(--runtime-700-hsl);
+  --foreground-quaternary: var(--runtime-100-hsl);
+  --runtime-background: 124deg, 100%, 97.1%;
+  --runtime-foreground: 184deg, 100%, 10%;
+  --primary: var(--runtime-700-hsl);
+
+  [data-services-page="true"] {
+    --background-primary: var(--deploy-50-hsl);
+    --background-secondary: var(--deploy-100-hsl);
+    --background-tertiary: var(--deploy-300-hsl);
+    --foreground-tertiary: var(--deploy-200-hsl);
+    --primary: var(--deploy-500-hsl);
+  }
+}
+
 .dark {
-  --background-primary: 216deg, 27.8%, 7.1%;
-  --background-secondary: 216deg, 27.7%, 12%;
-  --background-tertiary: 216deg, 27.7%, 22%;
-  --foreground-primary: 215deg, 17%, 99%;
-  --foreground-secondary: 215deg, 17%, 71%;
-  --foreground-tertiary: 215deg, 17%, 20%;
-  --foreground-quaternary: 215deg, 17%, 10%;
+  --background-raw: hsl(var(--runtime-1050-hsl));
+  --background-primary: var(--runtime-1050-hsl);
+  --background-secondary: var(--runtime-1000-hsl);
+  --background-tertiary: var(--runtime-950-hsl);
+  --foreground-primary: var(--runtime-50-hsl);
+  --foreground-secondary: var(--runtime-100-hsl);
+  --foreground-tertiary: var(--runtime-950-hsl);
+  --foreground-quaternary: var(--runtime-1000-hsl);
   --runtime-background: 124deg, 100%, 3%;
   --runtime-foreground: 184deg, 100%, 90%;
   --note: 224deg, 64.3%, 82.9%;
   --info: 224deg, 64.3%, 69%;
   --caution: 45.4deg, 93.39%, 67.11%;
   /* The following are not different from light mode (yet?) */
-  --primary: 219deg, 100%, 72%;
-  --primary-dark: 217deg, 91%, 49%;
+  --primary: var(--runtime-300-hsl);
   --tip: 142deg, 76.2%, 36.3%;
   --color-fg-default: #fff;
 
   color: var(--foreground-primary);
   background-color: var(--background-primary);
+
+  [data-services-page="true"] {
+    --background-raw: hsl(var(--deploy-950-hsl));
+    --background-primary: var(--deploy-900-hsl);
+    --background-secondary: var(--deploy-800-hsl);
+    --background-tertiary: var(--deploy-700-hsl);
+    --foreground-primary: var(--deploy-50-hsl);
+    --foreground-secondary: var(--deploy-100-hsl);
+    --foreground-tertiary: var(--deploy-700-hsl);
+    --primary: var(--deploy-300-hsl);
+  }
+}
+
+#content,
+body {
+  background-color: var(--background-raw);
 }
 
 html {
