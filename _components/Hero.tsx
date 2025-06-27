@@ -1,6 +1,8 @@
-export default function (props: { children: any; bgImage: string }) {
+import { ComponentChildren } from "npm:preact";
+
+export default function (props: { children: ComponentChildren }) {
   return (
-    <div className="hero" style={{ backgroundImage: `url(${props.bgImage})` }}>
+    <div className="hero">
       {props.children}
     </div>
   );
