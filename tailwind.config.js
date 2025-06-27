@@ -32,7 +32,6 @@ export default {
         "tip": "hsla(var(--tip))",
 
         "primary": "hsla(var(--primary))",
-        "primary-dark": "hsla(var(--primary-dark))",
 
         runtime: {
           "50": "#f0fff1",

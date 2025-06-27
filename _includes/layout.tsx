@@ -6,6 +6,9 @@ export default function Layout(data: Lume.Data) {
   const section = data.url.split("/").filter(Boolean)[0];
   const description = data.description ||
     "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
+  const isServicesPage = data.url.startsWith("/deploy") ||
+    data.url.startsWith("/subhosting") ||
+    data.url.startsWith("/services");
 
   return (
     <html lang="en">
@@ -71,13 +74,7 @@ export default function Layout(data: Lume.Data) {
         <link rel="preconnect" href="https://www.googletagmanager.com"></link>
       </head>
       <body
-        data-services={data.url.startsWith(
-            "/deploy",
-          ) ||
-            data.url.startsWith("/subhosting") ||
-            data.url.startsWith("/services")
-          ? "true"
-          : "false"}
+        data-services-page={Boolean(isServicesPage)}
       >
         <data.comp.Header currentSection={section} />
         <data.comp.RefHeader currentUrl={data.url} />

@@ -6,6 +6,7 @@
   overflow-y: auto;
   scrollbar-width: thin;
   z-index: 3;
+  background-color: hsl(var(--background-primary));
 }
 
 @media (max-width: 1023px) {
