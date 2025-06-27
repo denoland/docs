@@ -4,8 +4,8 @@
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
-  background-color: hsl(var(--background-primary));
   color: hsl(var(--foreground-primary));
 }
 
