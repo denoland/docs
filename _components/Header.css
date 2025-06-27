@@ -29,7 +29,6 @@ header {
         position: absolute;
         top: -1rem;
         left: 0;
-        /* clip-path: polygon(0 0, 100% 0, 50% 100%); */
         background-color: hsl(var(--background-secondary));
         border: 1px solid hsl(var(--foreground-tertiary));
         border-block: 0;
