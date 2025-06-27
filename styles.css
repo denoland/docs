@@ -2,6 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --runtime-50: #eefff4;
+  --runtime-50-hsl: 140deg, 100%, 96.5%;
+  --runtime-100: #d7ffe8;
+  --runtime-100-hsl: 144deg, 100%, 92.5%;
+  --runtime-200: #b2ffd3;
+  --runtime-200-hsl: 147deg, 100%, 84.5%;
+  --runtime-300: #70ffaf;
+  --runtime-300-hsl: 149deg, 100%, 72%;
+  --runtime-400: #33f589;
+  --runtime-400-hsl: 148deg, 89%, 58%;
+  --runtime-500: #09de68;
+  --runtime-500-hsl: 147deg, 94%, 45%;
+  --runtime-600: #01b852;
+  --runtime-600-hsl: 147deg, 99%, 36%;
+  --runtime-700: #059044;
+  --runtime-700-hsl: 147deg, 94%, 29%;
+  --runtime-800: #0a7139;
+  --runtime-800-hsl: 149deg, 84%, 24%;
+  --runtime-900: #0a5d32;
+  --runtime-900-hsl: 152deg, 79%, 20%;
+  --runtime-950: #003419;
+  --runtime-950-hsl: 150deg, 100%, 10%;
+  --runtime-1000: #002511;
+  --runtime-1000-hsl: 148deg, 100%, 7.2%;
+
+  --runtime: var(--runtime-300);
+
+  --deploy-white: #fafcff;
+  --deploy-white-hsl: 225deg, 100%, 99.8%;
+  --deploy-50: #f0f7ff;
+  --deploy-50-hsl: 225deg, 100%, 97.1%;
+  --deploy-100: #e0f0ff;
+  --deploy-100-hsl: 225deg, 100%, 94.1%;
+  --deploy-200: #b3e0ff;
+  --deploy-200-hsl: 210deg, 100%, 85.1%;
+  --deploy-300: #66c2ff;
+  --deploy-300-hsl: 204deg, 100%, 70.2%;
+  --deploy-400: #1a9fff;
+  --deploy-400-hsl: 201deg, 100%, 55.3%;
+  --deploy-500: #0077cc;
+  --deploy-500-hsl: 201deg, 100%, 40%;
+  --deploy-600: #005c99;
+  --deploy-600-hsl: 201deg, 100%, 30%;
+  --deploy-700: #004166;
+  --deploy-700-hsl: 201deg, 100%, 20%;
+  --deploy-800: #002633;
+  --deploy-800-hsl: 198deg, 100%, 10.8%;
+  --deploy-900: #001319;
+  --deploy-900-hsl: 198deg, 100%, 5.7%;
+  --deploy-950: #000a0d;
+  --deploy-950-hsl: 195deg, 100%, 2.5%;
+}
+
 /* Light and dark theme variables */
 .light {
   --background-primary: 215deg, 81%, 100%;
@@ -354,7 +408,8 @@ body {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(22 163 74)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>');
 }
 
-.markdown-body .module-info {}
+.markdown-body .module-info {
+}
 
 .markdown-body .module-info svg {
   @apply inline-block w-6 h-6 !important;

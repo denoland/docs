@@ -1,3 +1,33 @@
+header,
+nav {
+  --background-primary: var(--runtime-200-hsl);
+  --background-secondary: var(--runtime-100-hsl);
+  --background-tertiary: var(--runtime-50-hsl);
+  --primary: var(--runtime-700-hsl);
+
+  [data-services="true"] & {
+    --background-primary: var(--deploy-200-hsl);
+    --background-secondary: var(--deploy-100-hsl);
+    --background-tertiary: var(--deploy-50-hsl);
+    --primary: var(--deploy-500-hsl);
+  }
+}
+
+header,
+.refheader {
+  --foreground-primary: 0deg, 0%, 25%;
+  --foreground-secondary: 0deg, 0%, 42%;
+  --foreground-tertiary: 0deg, 0%, 90%;
+  --foreground-quaternary: 0deg, 0%, 95%;
+
+  .dark & {
+    --foreground-primary: 0deg, 0%, 25%;
+    --foreground-secondary: 0deg, 0%, 42%;
+    --foreground-tertiary: 0deg, 0%, 90%;
+    --foreground-quaternary: 0deg, 0%, 95%;
+  }
+}
+
 header {
   position: sticky;
   top: 0;
@@ -18,6 +48,24 @@ header {
   .header-nav-link {
     font-size: clamp(0.8rem, 1.5vw, 1rem);
     white-space: nowrap;
+
+    &[aria-current] {
+      position: relative;
+
+      &::after {
+        content: "";
+        width: 100%;
+        height: calc(100% + 2rem);
+        position: absolute;
+        top: -1rem;
+        left: 0;
+        /* clip-path: polygon(0 0, 100% 0, 50% 100%); */
+        background-color: hsl(var(--background-secondary));
+        border: 1px solid hsl(var(--foreground-tertiary));
+        border-block: 0;
+        z-index: -1;
+      }
+    }
   }
 
   .external {
