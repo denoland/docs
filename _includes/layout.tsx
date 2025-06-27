@@ -70,7 +70,15 @@ export default function Layout(data: Lume.Data) {
         </script>
         <link rel="preconnect" href="https://www.googletagmanager.com"></link>
       </head>
-      <body>
+      <body
+        data-services={data.url.startsWith(
+            "/deploy",
+          ) ||
+            data.url.startsWith("/subhosting") ||
+            data.url.startsWith("/services")
+          ? "true"
+          : "false"}
+      >
         <data.comp.Header currentSection={section} />
         <data.comp.RefHeader currentUrl={data.url} />
         <data.comp.SubNav

@@ -59,7 +59,7 @@
 }
 
 body:has(.refheader) .toc-desktop {
-  top: 7rem;
+  top: 6.5rem;
 }
 
 /* Reference ToC styles */

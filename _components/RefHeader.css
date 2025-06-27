@@ -7,12 +7,12 @@
   background-color: hsl(var(--background-secondary));
   border-bottom: 1px solid hsl(var(--foreground-tertiary));
   z-index: 5;
-  height: 3rem;
+  height: 2.5rem;
 }
 
 .refheader-link {
   white-space: nowrap;
-  font-size: clamp(0.875rem, 1vw + 0.5rem, 1rem);
+  font-size: clamp(0.875rem, 1vw + 0.5rem, 0.75rem);
 }
 
 .refheader-link[data-active="true"] {
@@ -29,7 +29,7 @@
 
 .refcrumbs {
   position: sticky;
-  top: 6.5rem;
+  top: calc(6.5rem - 1px);
   width: 100%;
   padding: 1rem;
   padding-left: 0 !important;
