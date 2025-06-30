@@ -68,7 +68,7 @@
 /* Light and dark theme variables */
 .light {
   --background-raw: hsl(var(--white-hsl));
-  --background-primary: var(--runtime-100-hsl);
+  --background-primary: var(--runtime-50-hsl);
   --background-secondary: var(--runtime-200-hsl);
   --background-tertiary: var(--runtime-300-hsl);
   --foreground-primary: var(--runtime-950-hsl);
