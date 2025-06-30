@@ -2,10 +2,11 @@
   height: 100%;
   border-right: 1px solid hsl(var(--foreground-tertiary));
   font-size: 0.8rem;
-  background-color: hsl(var(--background-primary));
+  /* background-color: hsl(var(--background-primary)); */
   overflow-y: auto;
   scrollbar-width: thin;
   z-index: 3;
+  background-color: hsl(var(--background-primary));
 }
 
 @media (max-width: 1023px) {
@@ -16,7 +17,6 @@
     max-width: 650px;
     transition: transform 200ms ease-in-out;
     transform: translateX(-100%);
-    background-color: hsl(var(--background-primary));
     z-index: 11;
     height: calc(100vh - 4rem);
   }
@@ -33,22 +33,22 @@
   }
 
   body:has(.refheader) .nav {
-    top: 7rem;
-    height: calc(100vh - 7rem);
+    top: 6.5rem;
+    height: calc(100vh - 6.5rem);
   }
 }
 
 @media (min-width: 1024px) {
   .nav {
     position: sticky;
-    top: 4rem;
+    top: calc(4rem - 1px);
     height: calc(100vh - 4rem);
     overflow-y: auto;
     min-width: 330px;
   }
 
   body:has(.refheader) .nav {
-    top: 7rem;
-    height: calc(100vh - 7rem);
+    top: calc(6.5rem - 1px);
+    height: calc(100vh - 6.5rem);
   }
 }
