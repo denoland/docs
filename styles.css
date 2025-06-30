@@ -69,7 +69,7 @@
 .light {
   --background-raw: hsl(var(--white-hsl));
   --background-primary: var(--runtime-50-hsl);
-  --background-secondary: var(--runtime-200-hsl);
+  --background-secondary: var(-g-runtime-200-hsl);
   --background-tertiary: var(--runtime-300-hsl);
   --foreground-primary: var(--runtime-950-hsl);
   --foreground-secondary: var(--runtime-900-hsl);
@@ -83,7 +83,11 @@
     --background-primary: var(--deploy-50-hsl);
     --background-secondary: var(--deploy-100-hsl);
     --background-tertiary: var(--deploy-300-hsl);
+    --foreground-primary: var(--deploy-950-hsl);
+    --foreground-secondary: var(--deploy-800-hsl);
     --foreground-tertiary: var(--deploy-200-hsl);
+    --foreground-quaternary: var(--deploy-100-hsl);
+
     --primary: var(--deploy-500-hsl);
   }
 }
