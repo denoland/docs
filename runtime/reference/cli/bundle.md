@@ -1,16 +1,14 @@
 ---
-title: "Bundler (deprecated)"
+title: "Bundler"
 oldUrl: /runtime/manual/cli/bundler/
 command: bundle
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno bundle"
 ---
 
-:::caution
+:::info
 
-`deno bundle` has been deprecated and will be removed in some future release.
-Use [deno_emit](https://github.com/denoland/deno_emit),
-[esbuild](https://esbuild.github.io/) or [rollup](https://rollupjs.org) instead.
+`deno bundle` is currently an experimental subcommand and is subject to changes.
 
 :::
 
