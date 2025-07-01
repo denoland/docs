@@ -75,10 +75,50 @@ import data from "./data.json" with { type: "json" };
 console.log(data.property); // Access JSON data as an object
 ```
 
-This is the only import attribute type currently supported in Deno. Support for
-`type: text` and `type: bytes` is being considered for future updates, and
-currently waiting on the
-[Module Harmony proposal](https://github.com/whatwg/html/issues/9444).
+Starting with Deno 2.4 it's possible to import `text` and `bytes` modules too.
+
+::::::info
+
+Support for importing `text` and `bytes` modules is experimental and requires
+`--unstable-raw-imports` CLI flag or `unstable.raw-import` option in
+`deno.json`.
+
+:::
+
+```ts
+import text from "./log.txt" with { type: "text" };
+
+console.log(typeof text === "string");
+// true
+console.log(text);
+// Hello from a text file
+```
+
+```ts
+import bytes from "./image.png" with { type: "bytes" };
+
+console.log(bytes instanceof Uint8Array);
+// true
+console.log(bytes);
+Uint8Array(12) [
+//    72, 101, 108, 108, 111,
+//    44,  32,  68, 101, 110,
+//   111,  33
+// ]
+```
+
+## WebAssembly modules
+
+Deno supports importing Wasm modules directly:
+
+```ts
+import { add } from "./add.wasm";
+
+console.log(add(1, 2));
+```
+
+To learn more, visit
+[WebAssembly section](/runtime/reference/wasm/#wasm-modules)
 
 ## Data URL imports
 
