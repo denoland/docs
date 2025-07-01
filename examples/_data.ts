@@ -930,6 +930,16 @@ export const sidebar = [
         href: "/examples/temporal/",
         type: "example",
       },
+      {
+        title: "Importing text",
+        href: "/examples/importing_text/",
+        type: "example",
+      },
+      {
+        title: "Importing bytes",
+        href: "/examples/importing_bytes/",
+        type: "example",
+      },
     ],
   },
 ];
