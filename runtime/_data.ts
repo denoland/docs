@@ -258,6 +258,10 @@ export const sidebar = [
         href: "/runtime/reference/documentation/",
       },
       {
+        title: "Bundling",
+        href: "/runtime/reference/bundling/",
+      },
+      {
         title: "Lint Plugins",
         href: "/runtime/reference/lint_plugins/",
       },
