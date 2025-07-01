@@ -73,9 +73,9 @@ single ooutput file.
 
 ## Bundle a React page for the web
 
-Start with an `app.tsx` and `index.html`:
+Start with an `app.jsx` and `index.html`:
 
-```tsx, title="app.tsx"
+```jsx
 import React from "npm:react";
 import { createRoot } from "npm:react-dom/client";
 
@@ -87,7 +87,7 @@ const root = createRoot(document.getElementById("root"));
 root.render(<App />);
 ```
 
-```html, title="index.html"
+```html
 <!DOCTYPE html>
 <html lang="en">
   <body>
@@ -100,7 +100,7 @@ root.render(<App />);
 Now, let's bundle:
 
 ```bash
-$ deno bundle --platform=browser app.tsx -o bundle.js
+$ deno bundle --platform=browser app.jsx -o bundle.js
 ⚠️ deno bundle is experimental and subject to changes
 Bundled 9 modules in 99ms
   app.bundle.js 874.67KB
