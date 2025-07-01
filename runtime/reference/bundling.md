@@ -1,6 +1,6 @@
 ---
 title: "Bundling"
-description: "Guide to creating and using custom lint plugins in Deno. Learn how to write custom lint rules, use selectors for AST matching, implement fixes, and test your plugins using Deno's lint plugin API."
+description: "An overview of `deno bundle` subcommand that can be used to produce a single file application created from multiple source files for optimized execution."
 ---
 
 :::caution
@@ -22,7 +22,7 @@ optimized JS file.
 
 - Resolves and inlines all dependencies
 - Supports JSX/TSX, TypeScript, and modern JavaScript, including
-  [import attributes](/runtime/fundamentals/modules/#import-attributes)
+  [import attributes](/runtime/fundamentals/modules/#import-attributes) and CSS
 - Optional minification (`--minify`) and source maps (`--sourcemap`)
 - Code splitting
 - Platform targeting (`--platform`, supports Deno and browser)
