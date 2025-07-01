@@ -208,6 +208,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/uninstall/",
           },
           {
+            title: "deno bundle",
+            href: "/runtime/reference/cli/update/",
+          },
+          {
             title: "deno upgrade",
             href: "/runtime/reference/cli/upgrade/",
           },
