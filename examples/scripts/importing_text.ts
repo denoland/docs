@@ -16,7 +16,7 @@
 
 // Text files can be imported in JS and TS modules. When doing so, you need to
 // specify the `type: "text"` import attribute.
-import text from "./log.txt" with { type: "txt" };
+import text from "./log.txt" with { type: "text" };
 console.log(text);
 
 // Dynamic imports are also supported.
