@@ -940,6 +940,11 @@ export const sidebar = [
         href: "/examples/importing_bytes/",
         type: "example",
       },
+      {
+        label: "WebGPU",
+        id: "/examples/webgpu",
+        type: "example",
+      },
     ],
   },
 ];
