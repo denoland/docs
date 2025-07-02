@@ -33,6 +33,11 @@ Details about application creation, configuration, and lifecycle management.
 
 Understanding the build process, build configurations, and deployment pipelines.
 
+### [Timelines](/deploy/early-access/timelines)
+
+Visualizing the history of builds in your application, and how domains are
+routed to different versions of your application.
+
 ### [Playgrounds](/deploy/early-access/reference/playgrounds)
 
 Write and deploy code without needing to create a git repository.
@@ -45,6 +50,11 @@ Monitoring applications, accessing logs, metrics, and performance insights.
 
 Managing different deployment environments including development, staging, and
 production.
+
+### [Cloud Connections](/deploy/early-access/reference/cloud-connections/)
+
+Managing cloud connections for your applications, including AWS and Google
+Cloud.
 
 ### [Custom Domains](/deploy/early-access/reference/domains)
 
