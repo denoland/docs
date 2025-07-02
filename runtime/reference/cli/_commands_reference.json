@@ -297,6 +297,15 @@
           "usage": "--cert <FILE>"
         },
         {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
           "name": "inspect",
           "short": null,
           "long": "inspect",
@@ -744,6 +753,15 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
         },
         {
           "name": "inspect",
@@ -1346,6 +1364,15 @@
           "usage": "--cert <FILE>"
         },
         {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
           "name": "allow-scripts",
           "short": null,
           "long": "allow-scripts",
@@ -1705,6 +1732,15 @@
           "usage": "--cert <FILE>"
         },
         {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
           "name": "check",
           "short": null,
           "long": "check",
@@ -2046,6 +2082,15 @@
           "usage": "--cert <FILE>"
         },
         {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
           "name": "check",
           "short": null,
           "long": "check",
@@ -2376,6 +2421,15 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
         },
         {
           "name": "no-code-cache",
@@ -2779,6 +2833,15 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
         },
         {
           "name": "allow-scripts",
@@ -3584,6 +3647,15 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
         },
         {
           "name": "inspect",
@@ -4426,6 +4498,15 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
         },
         {
           "name": "inspect",
@@ -5525,6 +5606,15 @@
           "usage": "--cert <FILE>"
         },
         {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
           "name": "inspect",
           "short": null,
           "long": "inspect",
@@ -6133,6 +6223,15 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
         },
         {
           "name": "inspect",
