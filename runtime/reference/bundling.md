@@ -30,7 +30,7 @@ optimized JS file.
 
 ## Basic example
 
-```ts, title="main.ts"
+```ts title="main.ts"
 import chalk from "npm:chalk";
 
 console.log(chalk.red("Hello from `deno bundle`!"));
