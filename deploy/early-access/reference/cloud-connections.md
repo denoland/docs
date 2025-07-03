@@ -636,10 +636,10 @@ Replace `ROLE_NAME` with appropriate roles such as:
 After completing the setup, you'll need two values for your Deno
 Deploy<sup>EA</sup> configuration:
 
-1. **Service Account Email**:
-   `deno-your-org-your-app@PROJECT_ID.iam.gserviceaccount.com`
-2. **Workload Provider ID**:
+1. **Workload Provider ID**:
    `projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/oidc-deno-com/providers/oidc-deno-com`
+2. **Service Account Email**:
+   `deno-your-org-your-app@PROJECT_ID.iam.gserviceaccount.com`
 
 Use these values in your Deno Deploy<sup>EA</sup> cloud connection
 configuration.
@@ -663,7 +663,7 @@ service accounts.
 1. **Navigate to IAM & Admin** → Workload Identity Federation
 2. **Create Pool**:
    - Click "Create Pool"
-   - Pool name: `Deno Deploy Workload Identity Pool`
+   - Pool name: `Deno Deploy Workload Id Pool`
    - Pool ID: `oidc-deno-com`
    - Click "Continue"
 
@@ -705,7 +705,7 @@ service accounts.
 #### Step 6: Configure Workload Identity Binding
 
 1. **Go back to the created service account**
-2. Click on the "Permissions" tab
+2. Click on the "Principals with access" tab
 3. Click "Grant Access"
 4. Configure principals - choose one approach:
 
@@ -725,11 +725,11 @@ service accounts.
 
 You'll need two values for your Deno Deploy<sup>EA</sup> configuration:
 
-1. **Service Account Email**: Copy from the service account details page
-2. **Workload Provider ID**:
+1. **Workload Provider ID**:
    - Navigate back to Workload Identity Federation
    - Click on your pool, then your provider
    - Copy the provider resource name (full path starting with `projects/`)
+2. **Service Account Email**: Copy from the service account details page
 
 #### Step 8: Verify Configuration
 
