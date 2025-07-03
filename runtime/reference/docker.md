@@ -34,7 +34,7 @@ For smaller production images:
 
 ```dockerfile
 # Build stage
-FROM denoland/deno:latest as builder
+FROM denoland/deno:latest AS builder
 WORKDIR /app
 COPY . .
 RUN deno cache main.ts
