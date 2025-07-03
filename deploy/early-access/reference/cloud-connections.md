@@ -38,6 +38,15 @@ Deploy<sup>EA</sup> application.
 
 ## Setting up AWS
 
+This guide contains three guides for setting up these AWS resources. You can use
+any of these to set up the AWS resources.
+
+- [Using the `deno deploy setup-aws` command from your local machine](#aws%3A-easy-setup-with-deno-deploy-setup-aws)
+  (recommended)
+- [Using the `aws` CLI](#setup-aws-cli)
+- [Using the AWS Console](#setup-aws-console)
+- [Using Terraform](#setup-aws-terraform)
+
 To set up AWS with Deno Deploy<sup>EA</sup>, the following resources need to be
 created inside of your AWS account:
 
@@ -74,15 +83,6 @@ created inside of your AWS account:
     ```
   - The role should have permissions to access the AWS resources you want to
     use, such as S3 buckets or DynamoDB tables.
-
-This guide contains three guides for setting up these AWS resources. You can use
-any of these to set up the AWS resources.
-
-- [Using the `deno deploy setup-aws` command from your local machine](#aws%3A-easy-setup-with-deno-deploy-setup-aws)
-  (recommended)
-- [Using the `aws` CLI](#setup-aws-cli)
-- [Using the AWS Console](#setup-aws-console)
-- [Using Terraform](#setup-aws-terraform)
 
 After setting up the AWS resources, navigate to the AWS cloud integration setup
 page from the app settings. There you must select the context(s) in which the
@@ -467,7 +467,7 @@ output "role_arn" {
 ```hcl
 module "deno_deploy_aws" {
   source = "./path-to-terraform-module"
-  
+
   org      = "your-org"
   app      = "your-app"
   contexts = []  # Empty list allows all contexts
@@ -479,7 +479,7 @@ module "deno_deploy_aws" {
 ```hcl
 module "deno_deploy_aws" {
   source = "./path-to-terraform-module"
-  
+
   org      = "your-org"
   app      = "your-app"
   contexts = ["production", "staging"]
@@ -855,7 +855,7 @@ output "service_account_email" {
 ```hcl
 module "deno_deploy_gcp" {
   source = "./path-to-terraform-module"
-  
+
   org        = "your-org"
   app        = "your-app"
   project_id = "your-gcp-project-id"
@@ -872,7 +872,7 @@ module "deno_deploy_gcp" {
 ```hcl
 module "deno_deploy_gcp" {
   source = "./path-to-terraform-module"
-  
+
   org        = "your-org"
   app        = "your-app"
   project_id = "your-gcp-project-id"
