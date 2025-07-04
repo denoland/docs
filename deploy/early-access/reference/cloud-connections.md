@@ -788,7 +788,7 @@ data "google_project" "project" {
 # Workload Identity Pool
 resource "google_iam_workload_identity_pool" "deno_deploy" {
   workload_identity_pool_id = "oidc-deno-com"
-  display_name              = "Deno Deploy Workload Identity Pool"
+  display_name              = "Deno Deploy Workload Id Pool"
 }
 
 # Workload Identity Provider
