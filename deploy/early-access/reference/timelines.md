@@ -17,7 +17,7 @@ revision, which is the one that is currently serving traffic. The active
 revision receives traffic on all URLs that are assigned to the timeline.
 
 Each timeline is associated with a [context](./env-vars-and-contexts.md), which
-decides which environment variables are available to the code running in that
+determines which environment variables are available to the code running in that
 timeline.
 
 By default, there are multiple timelines set up for each application:
@@ -82,7 +82,7 @@ lock a timeline to a specific revision.
 
 ### Changing the active revision
 
-On the timelines page you can lock any revision on that timeline to be the
+On the timelines page, you can lock any revision on that timeline to be the
 active revision. This will lock the timeline to that revision, and new builds
 will not automatically become the active revision on this timeline anymore. You
 can then either unlock the revision from the timeline, reverting back to the
