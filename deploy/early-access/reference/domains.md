@@ -147,9 +147,8 @@ organization for use with other applications.
 3. Click "Delete" and confirm
 
 This removes the custom domain from your organization and deletes all domain
-assignments across all applications. Select whether you want to attach the
-base domain, the wildcard subdomain, or any specific subdomain to the
-application.
+assignments across all applications. Select whether you want to attach the base
+domain, the wildcard subdomain, or any specific subdomain to the application.
 
 Once you have selected the application and the domain, click on the "Assign
 Domain" button to confirm.
