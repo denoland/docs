@@ -67,7 +67,7 @@ You can also use a `"dependencies"` field in `package.json`:
 ```json title="package.json"
 {
   "dependencies": {
-    "express": "express@^1.0.0"
+    "express": "^1.0.0"
   }
 }
 ```
