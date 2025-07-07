@@ -33,7 +33,7 @@ Details about application creation, configuration, and lifecycle management.
 
 Understanding the build process, build configurations, and deployment pipelines.
 
-### [Timelines](/deploy/early-access/timelines)
+### [Timelines](/deploy/early-access/reference/timelines)
 
 Visualizing the history of builds in your application, and how domains are
 routed to different versions of your application.
