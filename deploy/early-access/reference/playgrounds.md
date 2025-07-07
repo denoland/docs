@@ -53,26 +53,10 @@ The playground editor consists of five main sections:
 The playground content automatically saves when you click the "Deploy" button or
 when the editor loses focus.
 
-## Deleting a playground
+## Current limitations
 
 > ⚠️ Playgrounds cannot currently be deleted.
 
-## Renaming a playground
-
 > ⚠️ Playgrounds cannot currently be renamed.
 
-## Transferring a playground
-
 > ⚠️ Playgrounds cannot currently be transferred to another organization.
-
-## Deleting a playground
-
-> ⚠️ Playgrounds can not currently be deleted.
-
-## Renaming a playground
-
-> ⚠️ Playgrounds can not currently be renamed.
-
-## Transferring a playground
-
-> ⚠️ Playgrounds can not currently be transferred to another organization.

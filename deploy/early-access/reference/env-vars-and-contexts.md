@@ -110,27 +110,3 @@ More predefined variables will be added in the future.
 
 Note that you cannot manually set any environment variables starting with
 `DENO_*` as these are reserved system variables.
-
-```ts
-const myEnvVar = Deno.env.get("MY_ENV_VAR");
-```
-
-## Predefined environment variables
-
-Deno Deploy<sup>EA</sup> provides a set of predefined environment variables that
-are automatically set for each application. These environment variables are
-available in all contexts and can be used to access information about the
-application and the environment in which it is running.
-
-- `DENO_DEPLOYMENT_ID` - A unique identifier that represents the entire set of
-  configuration that the application is running in. This includes the
-  application ID, the revision ID, the context, and any applicable environment
-  variables. This value changes if any of the above change.
-
-- `DENO_REVISION_ID` - The revision ID that is currently running.
-
-More predefined environment variables will be added in the future.
-
-It is not possible to manually set any environment variables that start with
-`DENO_*`. These environment variables are set by Deno Deploy<sup>EA</sup> and
-are read-only.
