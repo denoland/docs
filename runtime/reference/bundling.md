@@ -54,7 +54,7 @@ Hello from `deno bundle`!
 
 You can use JSR, npm, http(s) and local imports in the file you are bundling,
 `deno bundle` will take care of collecting all the sources and producing a
-single ooutput file.
+single output file.
 
 ## Options Overview
 
