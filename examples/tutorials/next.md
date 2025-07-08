@@ -279,9 +279,9 @@ details!
 
 ## Deploy your app
 
-Now that you have a Next.js app, you can deploy it to the edge with Deno
+Now that you have a Next.js app, you can deploy it to the web with Deno
 Deploy<sup>EA</sup>. Create a [new GitHub repository](https://github.com/new),
-then initialize and push your app to GitHub:
+then initialize and push your app to GitHub to be ready to use in a new application in Deno Deploy:
 
 ```sh
 git init -b main
