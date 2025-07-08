@@ -279,9 +279,22 @@ details!
 
 ## Deploy your app
 
-Deploy your new Next.js app to the edge with
-<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deno
-Deploy</a>
+Now that you have a Next.js app, you can deploy it to the edge with Deno
+Deploy<sup>EA</sup>. Create a [new GitHub repository](https://github.com/new),
+then initialize and push your app to GitHub:
+
+```sh
+git init -b main
+git remote add origin https://github.com/<your_github_username>/<your_repo_name>.git
+git add .
+git commit -am 'my next app'
+git push -u origin main
+```
+
+You can then deploy this new repo on the Deno Deploy<sup>EA</sup> dashboard:
+
+<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
+my app/a>
 
 🦕 Now you can build and run a Next.js app with Deno! To build on your app you
 could consider [adding a database](/runtime/tutorials/connecting_to_databases/)
