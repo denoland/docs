@@ -294,7 +294,7 @@ git push -u origin main
 You can then deploy this new repo on the Deno Deploy<sup>EA</sup> dashboard:
 
 <a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
-my app/a>
+my app</a>
 
 🦕 Now you can build and run a Next.js app with Deno! To build on your app you
 could consider [adding a database](/runtime/tutorials/connecting_to_databases/)
