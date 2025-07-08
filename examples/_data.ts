@@ -537,6 +537,18 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "Byte and text imports",
+        href: "/examples/byte_and_text_imports/",
+        externalURL: "https://www.youtube.com/watch?v=PAEI6mdlXwc",
+        type: "video",
+      },
+      {
+        title: "Image bundling with deno compile",
+        href: "/examples/image_bundling_deno_compile/",
+        externalURL: "https://www.youtube.com/watch?v=qg_M0deBlfQ",
+        type: "video",
+      },
+      {
         title: "Parsing and serializing CSV",
         href: "/examples/parsing_serializing_csv/",
         type: "example",
