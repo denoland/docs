@@ -6,11 +6,11 @@ export default function Feedback({ file }: { file: string | undefined }) {
     return (
       <section
         id="feedback-section"
-        class="flex flex-col mt-12 gap-2 p-4 border border-blue-100
-      dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary
+        class="flex flex-col mt-12 gap-2 p-4 border border-foreground-tertiary
+      bg-background-primary
       rounded mx-auto"
       >
-        <h2 class="text-xl border-b border-blue-100 dark:border-background-tertiary
+        <h2 class="text-xl border-b border-foreground-tertiary dark:border-background-tertiary
         mb-2 pb-2 font-normal">
           Did you find what you needed?
         </h2>

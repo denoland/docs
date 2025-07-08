@@ -10,11 +10,11 @@
 }
 
 .runtime-cta {
-  @apply bg-runtime-400 border-runtime-400 hover:bg-runtime-300;
+  @apply bg-runtime-400 border-0 hover:bg-runtime-300;
 }
 
 .deploy-cta {
-  @apply bg-deploy-500 border-deploy-500 hover:bg-deploy-400;
+  @apply bg-deploy-300 rounded-full border-0 hover:bg-deploy-400;
 }
 
 .jsr-cta {
@@ -26,6 +26,6 @@
   padding-left: 3rem;
   background-image: url("../deno-deploy.svg");
   background-repeat: no-repeat;
-  background-position: 1rem center;
-  background-size: 2rem;
+  background-position: 1.25rem center;
+  background-size: 1.25rem;
 }
