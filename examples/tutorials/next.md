@@ -277,6 +277,12 @@ details!
 
 ![demo of the app](./images/how-to/next/dinoapp.gif)
 
+## Deploy your app
+
+Deploy your new Next.js app to the edge with
+<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deno
+Deploy</a>
+
 🦕 Now you can build and run a Next.js app with Deno! To build on your app you
 could consider [adding a database](/runtime/tutorials/connecting_to_databases/)
 to replace your `data.json` file, or consider
