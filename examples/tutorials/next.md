@@ -280,8 +280,12 @@ details!
 ## Deploy your app
 
 Now that you have a Next.js app, you can deploy it to the web with Deno
-Deploy<sup>EA</sup>. Create a [new GitHub repository](https://github.com/new),
-then initialize and push your app to GitHub to be ready to use in a new application in Deno Deploy:
+Deploy<sup>EA</sup>. Deno Deploy requires your code to be hosted on GitHub to
+access and deploy it, so first you'll need to create a GitHub repository and
+push your app there.
+
+[Create a new GitHub repository](https://github.com/new), then initialize and
+push your app to GitHub:
 
 ```sh
 git init -b main
@@ -291,7 +295,8 @@ git commit -am 'my next app'
 git push -u origin main
 ```
 
-You can then deploy this new repo on the Deno Deploy<sup>EA</sup> dashboard:
+Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
+dashboard:
 <a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
 my app</a>
 
