@@ -21,3 +21,11 @@
   @apply bg-jsr-yellow-400 border-jsr-cyan-950 !text-jsr-cyan-950 border-2
     hover:!no-underline hover:bg-jsr-yellow-300;
 }
+
+.deploy-button {
+  padding-left: 3rem;
+  background-image: url("../deno-deploy.svg");
+  background-repeat: no-repeat;
+  background-position: 1rem center;
+  background-size: 2rem;
+}
