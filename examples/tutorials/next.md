@@ -292,7 +292,6 @@ git push -u origin main
 ```
 
 You can then deploy this new repo on the Deno Deploy<sup>EA</sup> dashboard:
-
 <a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
 my app</a>
 
