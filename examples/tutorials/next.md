@@ -10,18 +10,13 @@ oldUrl:
 server-side-rendered applications. It is built on top of React and provides a
 lot of features out of the box.
 
-In this tutorial, we'll build a simple Next.js application and run it with Deno.
-The app will display a list of dinosaurs. When you click on one, it'll take you
-to a dinosaur page with more details.
+In this tutorial, we'll build a
+[simple Next.js application](https://tutorial-with-next.deno.deno.net/) and run
+it with Deno. The app will display a list of dinosaurs. When you click on one,
+it'll take you to a dinosaur page with more details. You can see the
+[complete app on GitHub](https://github.com/denoland/tutorial-with-next/tree/main).
 
 ![demo of the app](./images/how-to/next/dinoapp.gif)
-
-Start by verifying that you have the latest version of Deno installed, you will
-need at least Deno 1.46.0:
-
-```sh
-deno --version
-```
 
 ## Create a Next.js app with Deno
 
@@ -36,29 +31,60 @@ When prompted, select the default options to create a new Next.js app with
 TypeScript.
 
 Then, `cd` into the newly created project folder and run the following command
-to install the dependencies
+to install the dependencies with script execution allowed:
 
 ```sh
-deno install
+deno install --allow-scripts
 ```
 
-Next.js has some dependencies that still rely on `Object.prototype.__proto__`,
-so you need to allow it. In a new `deno.json` file, add the following lines:
+Next.js has some dependencies that still rely on `Object.prototype.__proto__`
+and requires CommonJS module support. To configure Deno for Next.js
+compatibility, update your `deno.json` file with the following configuration:
 
 ```json deno.json
 {
-  "unstable": ["unsafe-proto"]
+  "nodeModulesDir": "auto",
+  "unstable": [
+    "unsafe-proto",
+    "sloppy-imports"
+  ],
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "strict": true,
+    "jsx": "preserve"
+  },
+  "tasks": {
+    "dev": "deno run -A --unstable-detect-cjs npm:next@latest dev",
+    "build": "deno run -A --unstable-detect-cjs npm:next@latest build",
+    "start": "deno run -A --unstable-detect-cjs npm:next@latest start"
+  }
 }
 ```
+
+This configuration includes:
+
+- `nodeModulesDir: "auto"` - Enables npm package lifecycle scripts
+- `unstable: ["unsafe-proto", "sloppy-imports"]` - Required for Next.js
+  compatibility
+- `--unstable-detect-cjs` flag - Enables CommonJS module detection for Next.js
+  dependencies
 
 Now you can serve your new Next.js app:
 
 ```sh
-deno task dev
+deno run dev
 ```
 
-This will start the Next.js server, click the output link to localhost to see
-your app in the browser.
+This will start the Next.js development server using Deno. The `deno task dev`
+command runs the Next.js development server with the necessary flags for
+CommonJS compatibility.
+
+Visit [http://localhost:3000](http://localhost:3000) to see the app in the
+browser.
 
 ## Add a backend
 
@@ -77,13 +103,13 @@ dinosaur based on the name in the URL.
 
 ### /api/
 
-In the `app` folder of your new project, create an `api` folder. In that folder,
-create a `route.ts` file, which will handle requests to `/api/.
+In the `src/app` folder of your new project, create an `api` folder. In that
+folder, create a `route.ts` file, which will handle requests to `/api/.
 
 Copy and paste the following code into the `api/route.ts` file:
 
 ```ts title="route.ts"
-export async function GET() {
+export function GET() {
   return Response.json("welcome to the dinosaur API");
 }
 ```
@@ -91,22 +117,23 @@ export async function GET() {
 This code defines a simple route handler that returns a JSON response with the
 string `welcome to the dinosaur API`.
 
-### /api/dinosaurs
+### /api/data.json
 
-In the `api` folder, create a folder called `dinosaurs`. In that folder, make a
-`data.json` file, which will contain the hard coded dinosaur data. Copy and
-paste
+In the `api` folder, create a `data.json` file, which will contain the hard
+coded dinosaur data. Copy and paste
 [this json file](https://raw.githubusercontent.com/denoland/deno-vue-example/main/api/data.json)
 into the `data.json` file.
 
-Create a `route.ts` file in the `dinosaurs` directory, which will handle
-requests to `/api/dinosaurs`. In this route we'll read the `data.json` file and
-return the dinosaurs as JSON:
+### /api/dinosaurs
+
+In the `api` folder, create a folder called `dinosaurs`, in that create a
+`route.ts` file which will handle requests to `/api/dinosaurs`. In this route
+we'll read the `data.json` file and return the dinosaurs as JSON:
 
 ```ts title="route.ts"
 import data from "./data.json" with { type: "json" };
 
-export async function GET() {
+export function GET() {
   return Response.json(data);
 }
 ```
@@ -119,12 +146,11 @@ file. In this file we'll read the `data.json` file, find the dinosaur with the
 name in the URL, and return it as JSON:
 
 ```ts title="route.ts"
-import { NextRequest } from "next/server";
-import data from "../data.json" with { type: "json" };
+import data from "../../data.json" with { type: "json" };
 
 type RouteParams = { params: Promise<{ dinosaur: string }> };
 
-export const GET = async (request: NextRequest, { params }: RouteParams) => {
+export const GET = async (_request: Request, { params }: RouteParams) => {
   const { dinosaur } = await params;
 
   if (!dinosaur) {
@@ -269,20 +295,25 @@ return (
 );
 ```
 
+### Add some styles
+
+Let's add some basic styles to make the app look nicer. Update your
+`app/globals.css` file with the
+[styles from this file](https://raw.githubusercontent.com/denoland/tutorial-with-next/refs/heads/main/src/app/globals.css).
+
 ## Run the app
 
-Now you can run the app with `deno task dev` and visit `http://localhost:3000`
-in your browser to see the list of dinosaurs. Click on a dinosaur to see more
+Now you can run the app with `deno run dev` and visit `http://localhost:3000` in
+your browser to see the list of dinosaurs. Click on a dinosaur to see more
 details!
 
-![demo of the app](./images/how-to/next/dinoapp.gif)
+## Deploy the app
 
-## Deploy your app
+Now that you have your working Next.js app, you can deploy it to the web with
+Deno Deploy<sup>EA</sup>.
 
-Now that you have a Next.js app, you can deploy it to the web with Deno
-Deploy<sup>EA</sup>. Deno Deploy requires your code to be hosted on GitHub to
-access and deploy it, so first you'll need to create a GitHub repository and
-push your app there.
+Deno Deploy requires your code to be hosted on GitHub to access and deploy it,
+so first you'll need to create a GitHub repository and push your app there.
 
 [Create a new GitHub repository](https://github.com/new), then initialize and
 push your app to GitHub:
@@ -296,9 +327,12 @@ git push -u origin main
 ```
 
 Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
-dashboard:
+dashboard.
 <a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
 my app</a>
+
+For a walkthrough of deploying your app, check out the
+[Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
 
 🦕 Now you can build and run a Next.js app with Deno! To build on your app you
 could consider [adding a database](/runtime/tutorials/connecting_to_databases/)
