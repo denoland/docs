@@ -307,14 +307,13 @@ Now you can run the app with `deno run dev` and visit `http://localhost:3000` in
 your browser to see the list of dinosaurs. Click on a dinosaur to see more
 details!
 
-![demo of the app](./images/how-to/next/dinoapp.gif)
+## Deploy the app
 
-## Deploy your app
+Now that you have your working Next.js app, you can deploy it to the web with
+Deno Deploy<sup>EA</sup>.
 
-Now that you have a Next.js app, you can deploy it to the web with Deno
-Deploy<sup>EA</sup>. Deno Deploy requires your code to be hosted on GitHub to
-access and deploy it, so first you'll need to create a GitHub repository and
-push your app there.
+Deno Deploy requires your code to be hosted on GitHub to access and deploy it,
+so first you'll need to create a GitHub repository and push your app there.
 
 [Create a new GitHub repository](https://github.com/new), then initialize and
 push your app to GitHub:
@@ -328,9 +327,12 @@ git push -u origin main
 ```
 
 Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
-dashboard:
+dashboard.
 <a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
 my app</a>
+
+For a walkthrough of deploying your app, check out the
+[Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
 
 🦕 Now you can build and run a Next.js app with Deno! To build on your app you
 could consider [adding a database](/runtime/tutorials/connecting_to_databases/)
