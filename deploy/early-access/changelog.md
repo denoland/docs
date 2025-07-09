@@ -14,14 +14,14 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 ### Features
 
-- New: Cloud Connect allows you to securely connect your Deno Deploy<sup>EA</sup> apps to AWS and
-  GCP, enabling you to use services like AWS S3, Google Cloud Storage, without
-  needing to manage credentials.
+- New: Cloud Connect allows you to securely connect your Deno
+  Deploy<sup>EA</sup> apps to AWS and GCP, enabling you to use services like AWS
+  S3, Google Cloud Storage, without needing to manage credentials.
   - This is done without storing any long lived static credentials, but rather
     using short-lived tokens and OIDC (OpenID Connect) to establish a trust
     relationship between Deno Deploy<sup>EA</sup> and your cloud provider.
-  - A setup flow in the app settings page, or a drawer in playgrounds, guides you
-    through the process of connecting your app to AWS or GCP.
+  - A setup flow in the app settings page, or a drawer in playgrounds, guides
+    you through the process of connecting your app to AWS or GCP.
   - You can use the standard AWS and GCP SDKs to access the services - no need
     to re-write any code to use a different API.
   - [Learn more in the documentation.](https://docs.deno.com/deploy/early-access/reference/cloud-connections/)
