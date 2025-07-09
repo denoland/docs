@@ -10,6 +10,50 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
+## July 9th, 2025
+
+### Features
+
+- You can now securely connect your Deno Deploy<sup>EA</sup> apps to AWS and
+  GCP, enabling you to use services like AWS S3, Google Cloud Storage, without
+  needing to manage credentials.
+  - This is done without storing any long lived static credentials, but rather
+    using short-lived tokens and OIDC (OpenID Connect) to establish a trust
+    relationship between Deno Deploy<sup>EA</sup> and your cloud provider.
+  - A setup flow in the app settings page, or a drawer in playgrouds, guide you
+    through the process of connecting your app to AWS or GCP.
+  - You can use the standard AWS and GCP SDKs to access the services - no need
+    to re-write any code to use a different API.
+  - [Learn more in the documentation.](https://docs.deno.com/deploy/early-access/reference/cloud-connections/)
+- The application metrics page now shows more metrics, including V8 memory
+  metrics such as heap size and garbage collection stats, as well as process
+  level metrics such as CPU usage and overall memory usage.
+- There is now a new "Metrics" tab in the organization overview that shows
+  overall metrics for all applications in the organization, including the number
+  of requests, CPU usage, and memory usage.
+- You can now edit the URL you are viewing in the playground preview iframe by
+  editing the "address bar" that is displayed above the preview
+- Environment variables now default to being a secret when the key contains
+  `SECRET`, `KEY`, `TOKEN`, `PRIVATE`, or `PASSWORD`. You can still manually
+  switch them to plain text if needed.
+- The maximum length limit for environment variable values has been increased to
+  4096 characters, up from 1024 characters.
+
+### Bug fixes
+
+- Playgrounds do not get stuck when attempting to deploy an empty file anymore.
+- Playground drawer resizing now works more reliably, especially when some
+  drawers are collapsed.
+- Builds now take significantly less time to complete, especially for larger
+  projects. The "Warmup" and "Routing" steps, which previously took more than 10
+  seconds respectively, now usually take less than 1 second each.
+- Builds can now be cancelled while they are in the "Queueing" and "Routing"
+  steps.
+- The organization creation page now correctly displays whether an organization
+  slug is taken or not, prior to submitting the form.
+- `npm install` can now install `esbuild` again - previously it would fail with
+  a nondescript error.
+
 ## June 24th, 2025
 
 ### Features
