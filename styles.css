@@ -2,45 +2,135 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Light and dark theme variables */
-.light {
-  --background-primary: 215deg, 81%, 100%;
-  --background-secondary: 213deg, 100%, 95%;
-  --background-tertiary: 213deg, 100%, 84%;
-  --foreground-primary: 0deg, 0%, 25%;
-  --foreground-secondary: 0deg, 0%, 42%;
-  --foreground-tertiary: 0deg, 0%, 90%;
-  --foreground-quaternary: 0deg, 0%, 95%;
-  --runtime-background: 124deg, 100%, 97.1%;
-  --runtime-foreground: 184deg, 100%, 10%;
-  --primary: 217deg, 91%, 49%;
-  --primary-dark: 217deg, 91%, 49%;
+:root {
+  --white-hsl: 215deg, 81%, 100%;
+
+  --runtime-50: #eefff5;
+  --runtime-50-hsl: 149deg, 100%, 96.5%;
+  --runtime-100: #d6ffe9;
+  --runtime-100-hsl: 149deg, 100%, 92.5%;
+  --runtime-200: #b0ffd4;
+  --runtime-200-hsl: 149deg, 100%, 84.5%;
+  --runtime-300: #70ffaf;
+  --runtime-300-hsl: 149deg, 100%, 72%;
+  --runtime-400: #29ff85;
+  --runtime-400-hsl: 149deg, 100%, 58%;
+  --runtime-500: #00e666;
+  --runtime-500-hsl: 149deg, 100%, 45%;
+  --runtime-600: #00b84d;
+  --runtime-600-hsl: 149deg, 100%, 36%;
+  --runtime-700: #008a33;
+  --runtime-700-hsl: 149deg, 100%, 29%;
+  --runtime-800: #005c1a;
+  --runtime-800-hsl: 149deg, 100%, 24%;
+  --runtime-900: #003d11;
+  --runtime-900-hsl: 149deg, 100%, 20%;
+  --runtime-950: #001f08;
+  --runtime-950-hsl: 149deg, 100%, 12%;
+  --runtime-1000: #000f04;
+  --runtime-1000-hsl: 149deg, 100%, 7%;
+  --runtime-1050: #000600;
+  --runtime-1050-hsl: 149deg, 100%, 3%;
+
+  --runtime: var(--runtime-300);
+
+  --deploy-white: #fafcff;
+  --deploy-white-hsl: 225deg, 100%, 99.8%;
+  --deploy-50: #f0f7ff;
+  --deploy-50-hsl: 225deg, 100%, 97.1%;
+  --deploy-100: #e0f0ff;
+  --deploy-100-hsl: 225deg, 100%, 94.1%;
+  --deploy-200: #b3e0ff;
+  --deploy-200-hsl: 210deg, 100%, 85.1%;
+  --deploy-300: #66c2ff;
+  --deploy-300-hsl: 204deg, 100%, 70.2%;
+  --deploy-400: #1a9fff;
+  --deploy-400-hsl: 201deg, 100%, 55.3%;
+  --deploy-500: #0077cc;
+  --deploy-500-hsl: 201deg, 100%, 40%;
+  --deploy-600: #005c99;
+  --deploy-600-hsl: 201deg, 100%, 30%;
+  --deploy-700: #004166;
+  --deploy-700-hsl: 201deg, 100%, 20%;
+  --deploy-800: #002633;
+  --deploy-800-hsl: 198deg, 100%, 10.8%;
+  --deploy-900: #001319;
+  --deploy-900-hsl: 198deg, 100%, 5.7%;
+  --deploy-950: #000a0d;
+  --deploy-950-hsl: 195deg, 100%, 2.5%;
+
   --info: 224deg, 64.3%, 32.9%;
   --note: 224deg, 64.3%, 32.9%;
   --caution: 45.4deg, 93.39%, 47.45%;
   --tip: 142deg, 76.2%, 36.3%;
 }
+
+/* Light and dark theme variables */
+.light {
+  --background-raw: hsl(var(--white-hsl));
+  --background-primary: var(--runtime-50-hsl);
+  --background-secondary: var(-g-runtime-200-hsl);
+  --background-tertiary: var(--runtime-300-hsl);
+  --foreground-primary: var(--runtime-950-hsl);
+  --foreground-secondary: var(--runtime-900-hsl);
+  --foreground-tertiary: var(--runtime-500-hsl);
+  --foreground-quaternary: var(--runtime-100-hsl);
+  --runtime-background: 124deg, 100%, 97.1%;
+  --runtime-foreground: 184deg, 100%, 10%;
+  --primary: var(--runtime-700-hsl);
+
+  [data-services-page="true"] {
+    --background-primary: var(--deploy-50-hsl);
+    --background-secondary: var(--deploy-100-hsl);
+    --background-tertiary: var(--deploy-300-hsl);
+    --foreground-primary: var(--deploy-950-hsl);
+    --foreground-secondary: var(--deploy-800-hsl);
+    --foreground-tertiary: var(--deploy-200-hsl);
+    --foreground-quaternary: var(--deploy-100-hsl);
+
+    --primary: var(--deploy-500-hsl);
+  }
+}
+
 .dark {
-  --background-primary: 216deg, 27.8%, 7.1%;
-  --background-secondary: 216deg, 27.7%, 12%;
-  --background-tertiary: 216deg, 27.7%, 22%;
-  --foreground-primary: 215deg, 17%, 99%;
-  --foreground-secondary: 215deg, 17%, 71%;
-  --foreground-tertiary: 215deg, 17%, 20%;
-  --foreground-quaternary: 215deg, 17%, 10%;
+  --background-raw: hsl(149deg, 100%, 1%);
+  --background-primary: var(--runtime-1050-hsl);
+  --background-secondary: var(--runtime-1000-hsl);
+  --background-tertiary: var(--runtime-950-hsl);
+  --foreground-primary: var(--runtime-50-hsl);
+  --foreground-secondary: var(--runtime-100-hsl);
+  --foreground-tertiary: var(--runtime-950-hsl);
+  --foreground-quaternary: var(--runtime-1000-hsl);
   --runtime-background: 124deg, 100%, 3%;
   --runtime-foreground: 184deg, 100%, 90%;
   --note: 224deg, 64.3%, 82.9%;
   --info: 224deg, 64.3%, 69%;
   --caution: 45.4deg, 93.39%, 67.11%;
   /* The following are not different from light mode (yet?) */
-  --primary: 219deg, 100%, 72%;
-  --primary-dark: 217deg, 91%, 49%;
+  --primary: var(--runtime-300-hsl);
   --tip: 142deg, 76.2%, 36.3%;
   --color-fg-default: #fff;
 
   color: var(--foreground-primary);
   background-color: var(--background-primary);
+
+  [data-services-page="true"] {
+    --background-raw: hsl(var(--deploy-950-hsl));
+    --background-primary: var(--deploy-900-hsl);
+    --background-secondary: var(--deploy-800-hsl);
+    --background-tertiary: var(--deploy-700-hsl);
+    --foreground-primary: var(--deploy-50-hsl);
+    --foreground-secondary: var(--deploy-100-hsl);
+    --foreground-tertiary: var(--deploy-700-hsl);
+    --foreground-quaternary: var(--deploy-800-hsl);
+
+    --primary: var(--deploy-300-hsl);
+  }
+}
+
+#content,
+body {
+  background-color: var(--background-raw);
 }
 
 html {
@@ -263,12 +353,12 @@ body {
 }
 
 .deploy-link {
-  @apply text-deploy-600 decoration-deploy-600/20 hover:decoration-deploy-600;
+  @apply text-deploy-500 decoration-deploy-500/20 hover:decoration-deploy-500;
 }
 
 .runtime-link {
-  @apply dark:text-runtime dark:decoration-runtime dark:hover:text-runtime-600
-    dark:hover:decoration-runtime-600 decoration-1 text-runtime-800
+  @apply dark:decoration-runtime dark:hover:text-runtime-600
+    dark:hover:decoration-runtime-600 decoration-1 text-primary
     decoration-runtime-800 hover:decoration-runtime-600 hover:text-runtime-600
     transition-colors duration-100;
 }
@@ -353,8 +443,6 @@ body {
   /* lightbulb svg */
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(22 163 74)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>');
 }
-
-.markdown-body .module-info {}
 
 .markdown-body .module-info svg {
   @apply inline-block w-6 h-6 !important;
