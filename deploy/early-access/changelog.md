@@ -20,7 +20,7 @@ Deploy Classic documentation? [View it here](/deploy/).
   - This is done without storing any long lived static credentials, but rather
     using short-lived tokens and OIDC (OpenID Connect) to establish a trust
     relationship between Deno Deploy<sup>EA</sup> and your cloud provider.
-  - A setup flow in the app settings page, or a drawer in playgrouds, guide you
+  - A setup flow in the app settings page, or a drawer in playgrounds, guides you
     through the process of connecting your app to AWS or GCP.
   - You can use the standard AWS and GCP SDKs to access the services - no need
     to re-write any code to use a different API.
