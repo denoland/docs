@@ -79,5 +79,6 @@
   "/api/web/": "/api/web/all_symbols",
   "/runtime/contributing/profiling/": "/runtime/contributing#profiling",
   "/runtime/manual/advanced/jsx_dom/jsdom": "/runtime/reference/jsx/",
-  "/examples/stubs": "/examples/stubbing_tutorial"
+  "/examples/stubs": "/examples/stubbing_tutorial",
+  "/examples/create_react_tutorial/": "/examples/react_tutorial/"
 }

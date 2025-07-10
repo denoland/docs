@@ -6,6 +6,7 @@ oldUrl:
   - /runtime/manual/examples/how_to_with_npm/react/
   - /runtime/manual/basics/react/
   - /runtime/tutorials/how_to_with_npm/react/
+  - /runtime/tutorials/create_react_tutorial/
 ---
 
 [React](https://reactjs.org) is the most widely used JavaScript frontend
@@ -15,42 +16,31 @@ In this tutorial we'll build a simple React app with Deno. The app will display
 a list of dinosaurs. When you click on one, it'll take you to a dinosaur page
 with more details. You can see the
 [finished app repo on GitHub](https://github.com/denoland/tutorial-with-react)
+and a
+[demo of the app on Deno Deploy](https://tutorial-with-react.deno.deno.net/)
 
-![demo of the app](./images/how-to/react/react-dinosaur-app-demo.gif)
+## Create a basic react app with Vite
 
 This tutorial will use [Vite](https://vitejs.dev/) to serve the app locally.
 Vite is a build tool and development server for modern web projects. It pairs
 well with React and Deno, leveraging ES modules and allowing you to import React
 components directly.
 
-## Starter app
-
-We've set up a
-[starter template for you to use](https://github.com/denoland/react-vite-ts-template).
-This will set up a basic starter app with React, Vite and a deno.json file for
-you to configure your project. Visit the GitHub repository at
-[https://github.com/denoland/react-vite-ts-template](https://github.com/denoland/react-vite-ts-template)
-and click the "Use this template" button to create a new repository.
-
-Once you have created a new repository from the template, clone it to your local
-machine and navigate to the project directory.
-
-## Clone the repository locally
+In your terminal run the following command to create a new React app with Vite
+using the typescript template:
 
 ```sh
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-```
-
-## Install the dependencies
-
-Install the project dependencies by running:
-
-```sh
-deno install
+deno run -A npm:create-vite@latest --template react-ts
 ```
 
 ## Run the dev server
+
+Change directory to your new react app and install the dependencies:
+
+```sh
+cd <your_new_react_app>
+deno install
+```
 
 Now you can serve your new react app by running:
 
@@ -61,63 +51,89 @@ deno run dev
 This will start the Vite server, click the output link to localhost to see your
 app in the browser.
 
-## About the template
+## Configure the project
 
-The template repository you cloned comes with a basic React app. The app uses
-Vite as a dev server and provides a static file server built with
-[oak](https://jsr.io/@oak/oak) which will serve the built app when deployed. The
-React app is in the `client` folder and the backend server is in the `server`
-folder.
+We're going to build a full-stack React app with a Deno backend. We'll need to
+configure both vite and Deno to work together.
 
-The `deno.json` file is used to configure the project and specify the
-permissions required to run the app, it contains the `tasks` field which defines
-the tasks that can be run with `deno run`. It has a `dev` task which runs the
-Vite server and a `build` task which builds the app with Vite, and a `serve`
-task which runs the backend server to serve the built app.
+Install the deno plugin for Vite, the React types and the Vite React plugin:
+
+```sh
+deno add npm:deno-vite-plugin@latest npm:@types/react@latest npm:@vitejs/plugin-react@latest
+```
+
+We'll also need to install the Oak web framework for Deno to handle our API
+requests, and CORS middleware to allow cross-origin requests from the React app:
+
+```sh
+deno add jsr:@oak/oak@ jsr:@tajpouria/cors
+```
+
+This will add these dependencies to a new `deno.json` file.
+
+In that file, we'll also add some tasks to make it easier to run the app in
+development and production modes and some configuration to set up Deno with
+React and Vite. Add the following to your `deno.json` file:
+
+```json
+"tasks": {
+    "dev": "deno run -A npm:vite & deno run server:start",
+    "build": "deno run -A npm:vite build",
+    "server:start": "deno run -A --watch ./api/main.ts",
+    "serve": "deno run build && deno run server:start"
+},
+"nodeModulesDir": "auto",
+"compilerOptions": {
+    "types": [
+        "react",
+        "react-dom",
+        "@types/react"
+    ],
+    "lib": [
+        "dom",
+        "dom.iterable",
+        "deno.ns"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+}
+```
+
+We can use both `package.json` and `deno.json` for dependency and configuration,
+but if you'd rather you can remove the `package.json` file and use only
+`deno.json` for your project configuration, be sure to move across the
+dependencies from `package.json` to `deno.json` imports first.
 
 ## Add a backend API
 
-We'll build an API into the server provided by the template. This will be where
-we get our dinosaur data.
+Our project will have a backend API that serves dinosaur data. This API will be
+built using Deno and Oak, and will provide endpoints to fetch a list of
+dinosaurs and details about a specific dinosaur from a JSON file. In a
+production app this data would likely come from a database, but for this
+tutorial we'll use a static JSON file.
 
-In the `server` directory of your new project, create an `api` folder. In that
-folder, create a `data.json`, which will contain the hard coded dinosaur data.
+In the root of your project, create a new directory called `api`. In this
+directory, create a file called `data.json` and copy across
+[the dinosaur data](https://github.com/denoland/tutorial-with-react/blob/main/api/data.json).
 
-Copy and paste
-[this json file](https://github.com/denoland/tutorial-with-react/blob/main/api/data.json)
-into the `api/data.json` file. (If you were building a real app, you would
-probably fetch this data from a database or an external API.)
+Next make a file called `main.ts` in the `api` directory. This file will contain
+the Oak server code to handle API requests. In this file we will set up the Oak
+server, define API routes, and serve static files for the React app. First set
+up the imports and create the Oak application and router:
 
-We're going to build out some API routes that return dinosaur information into
-the server that came with the template, we'll need the
-[`cors` middleware](https://jsr.io/@tajpouria/cors) to enable
-[CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
-
-Use the `deno install` command to add the cors dependency to your project:
-
-```shell
-deno install jsr:@tajpouria/cors
-```
-
-Next, update `server/main.ts` to import the required modules and create a new
-`Router` instance to define some routes:
-
-```ts title="main.ts"
-import { Application } from "jsr:@oak/oak/application";
-import { Router } from "jsr:@oak/oak/router";
+```ts title="api/main.ts"
+import { Application, Router } from "@oak/oak";
 import { oakCors } from "@tajpouria/cors";
 import routeStaticFilesFrom from "./util/routeStaticFilesFrom.ts";
-import data from "./api/data.json" with { type: "json" };
+import data from "./data.json" with { type: "json" };
 
 export const app = new Application();
 const router = new Router();
 ```
 
-After this, in the same file, we'll define two routes. One at `/api/dinosaurs`
-to return all the dinosaurs, and `/api/dinosaurs/:dinosaur` to return a specific
-dinosaur based on the name in the URL:
+Then we'll define the two main API routes:
 
-```ts title="main.ts"
+```ts title="api/main.ts"
 router.get("/api/dinosaurs", (context) => {
   context.response.body = data;
 });
@@ -135,17 +151,15 @@ router.get("/api/dinosaurs/:dinosaur", (context) => {
 });
 ```
 
-At the bottom of the same file, attach the routes we just defined to the
-application. We also must include the the static file server from the template,
-and finally we'll start the server listening on port 8000:
+Finally, we'll configure the server with middleware and start it listening:
 
-```ts title="main.ts"
+```ts title="api/main.ts"
 app.use(oakCors());
 app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(routeStaticFilesFrom([
-  `${Deno.cwd()}/client/dist`,
-  `${Deno.cwd()}/client/public`,
+  `${Deno.cwd()}/dist`,
+  `${Deno.cwd()}/public`,
 ]));
 
 if (import.meta.main) {
@@ -154,33 +168,56 @@ if (import.meta.main) {
 }
 ```
 
-You can run the API server with
-`deno run --allow-env --allow-net --allow-read server/main.ts`. We'll create a
-task to run this command in the background and update the dev task to run both
-the React app and the API server.
+The server handles CORS, serves the API routes, and also serves static files
+from the `dist` (built app) and `public` directories.
 
-In your `deno.json` file, update the `tasks` field to include the following:
+## Serve static files
 
-```diff title="deno.json"
-{
-  "tasks": {
-+   "dev": "deno run -A npm:vite & deno run server:start",
-    "build": "deno run -A npm:vite build",
-    "server:start": "deno run -A --node-modules-dir --watch ./server/main.ts",
-    "serve": "deno run build && deno run server:start"
-},
-+ "nodeModulesDir": "auto",
+The Oak server will also serve the built React app. To do this, we need to
+configure it to serve static files from the `dist` directory where Vite outputs
+the built app. We can use the `routeStaticFilesFrom` utility function to set
+this up. Create a new file called `util/routeStaticFilesFrom.ts` in the `api`
+directory with the following code:
+
+```ts title="api/util/routeStaticFilesFrom.ts"
+import { Context, Next } from "jsr:@oak/oak";
+
+export default function routeStaticFilesFrom(staticPaths: string[]) {
+  return async (context: Context<Record<string, object>>, next: Next) => {
+    for (const path of staticPaths) {
+      try {
+        await context.send({ root: path, index: "index.html" });
+        return;
+      } catch {
+        continue;
+      }
+    }
+
+    await next();
+  };
+}
 ```
 
-If you run `deno run dev` now and visit `localhost:8000/api/dinosaurs`, in your
-browser you should see a JSON response of all of the dinosaurs.
+This utility function attempts to serve static files from the provided paths,
+falling back to the next middleware if no file is found. It will serve the
+`index.html` file from the `dist` directory, which is the entry point for the
+React app.
 
-## Update the entrypoint
+You can test the API by running `deno run dev` and visiting
+`localhost:8000/api/dinosaurs` in your browser to see the JSON response with all
+dinosaurs.
 
-The entrypoint for the React app is in the `client/src/main.tsx` file. Ours is
-going to be very basic:
+## React app setup
 
-```tsx title="main.tsx"
+### Entry point
+
+The React app entry point is in `src/main.tsx`. We don't need to change anything
+here, but it's worth noting that this is where the React app is rendered into
+the DOM. The `createRoot` function from `react-dom/client` is used to render the
+`App` component into the `root` element in `index.html`. Here's the code in
+`src/main.tsx`:
+
+```tsx title="src/main.tsx"
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
@@ -197,23 +234,12 @@ createRoot(document.getElementById("root")!).render(
 
 The app will have two routes: `/` and `/:dinosaur`.
 
-We'll use [`react-router-dom`](https://reactrouter.com/en/main) to build out
-some routing logic, so we'll need to add the `react-router-dom` dependency to
-your project. In the project root run:
+We'll set up the routing in `src/App.tsx`:
 
-```shell
-deno install npm:react-router-dom
-```
-
-Update the `/src/App.tsx` file to import and use the
-[`BrowserRouter`](https://reactrouter.com/en/main/router-components/browser-router)
-component from `react-router-dom` and define the two routes:
-
-```tsx title="App.tsx"
+```tsx title="src/App.tsx"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Index from "./pages/index.tsx";
 import Dinosaur from "./pages/Dinosaur.tsx";
-import "./App.css";
 
 function App() {
   return (
@@ -231,67 +257,62 @@ export default App;
 
 ## Proxy to forward the api requests
 
-Vite will be serving the application on port `3000` while our api is running on
-port `8000`. Therefore, we'll need to set up a proxy to allow the `api/` paths
-to be reachable by the router. Add a proxy setting to the `vite.config.ts`:
+Vite serves the React application on port `3000` while the API runs on port
+`8000`. We'll need to set up proxy configuration in `vite.config.ts` to forward
+API requests:
 
-```diff title="vite.config.ts"
+```ts title="vite.config.ts"
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import deno from "@deno/vite-plugin";
+
 export default defineConfig({
-  root: "./client",
   server: {
     port: 3000,
-+   proxy: {
-+     "/api": {
-+       target: "http://localhost:8000",
-+       changeOrigin: true,
-+     },
-+   },
+    proxy: {
+      "/api": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+      },
+    },
+  },
+  plugins: [react(), deno()],
+  optimizeDeps: {
+    include: ["react/jsx-runtime"],
+  },
+});
 ```
 
 ## Create the pages
 
-We'll create two pages: `Index` and `Dinosaur`. The `Index` page will list all
-the dinosaurs and the `Dinosaur` page will show details of a specific dinosaur.
-
-Create a `pages` folder in the `src` directory and inside that create two files:
-`index.tsx` and `Dinosaur.tsx`.
-
-### Types
-
-Both pages will use the `Dino` type to describe the shape of data they're
-expecting from the API, so let's create a `types.ts` file in the `src`
-directory:
-
-```ts title="types.ts"
-export type Dino = { name: string; description: string };
-```
+Create a new directory called `pages`, and inside we'll make two new files
+`src/pages/index.tsx` and `src/pages/Dinosaur.tsx`. The `Index` page lists all
+dinosaurs and the `Dinosaur` page shows details of a specific dinosaur.
 
 ### index.tsx
 
-This page will fetch the list of dinosaurs from the API and render them as
-links:
+This page fetches the list of dinosaurs from the API and renders them as links:
 
-```tsx title="index.tsx"
+```tsx title="src/pages/index.tsx"
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Dino } from "../types.ts";
 
 export default function Index() {
-  const [dinosaurs, setDinosaurs] = useState<Dino[]>([]);
+  const [dinosaurs, setDinosaurs] = useState([]);
 
   useEffect(() => {
     (async () => {
       const response = await fetch(`/api/dinosaurs/`);
-      const allDinosaurs = await response.json() as Dino[];
+      const allDinosaurs = await response.json();
       setDinosaurs(allDinosaurs);
     })();
   }, []);
 
   return (
     <main>
-      <h1>Welcome to the Dinosaur app</h1>
+      <h1>🦕 Dinosaur app</h1>
       <p>Click on a dinosaur below to learn more.</p>
-      {dinosaurs.map((dinosaur: Dino) => {
+      {dinosaurs.map((dinosaur: { name: string; description: string }) => {
         return (
           <Link
             to={`/${dinosaur.name.toLowerCase()}`}
@@ -312,19 +333,18 @@ export default function Index() {
 This page will fetch the details of a specific dinosaur from the API and render
 it in a paragraph:
 
-```tsx title="Dinosaur.tsx"
+```tsx title="src/pages/Dinosaur.tsx"
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Dino } from "../types";
 
 export default function Dinosaur() {
   const { selectedDinosaur } = useParams();
-  const [dinosaur, setDino] = useState<Dino>({ name: "", description: "" });
+  const [dinosaur, setDino] = useState({ name: "", description: "" });
 
   useEffect(() => {
     (async () => {
       const resp = await fetch(`/api/dinosaurs/${selectedDinosaur}`);
-      const dino = await resp.json() as Dino;
+      const dino = await resp.json();
       setDino(dino);
     })();
   }, [selectedDinosaur]);
@@ -339,57 +359,120 @@ export default function Dinosaur() {
 }
 ```
 
-### Styling the list of dinosaurs
+### Styling your app
 
-Since we are displaying the list of dinosaurs on the main page, let's do some
-basic formatting. Add the following to the bottom of `src/App.css` to display
-our list of dinosaurs in an orderly fashion:
-
-```css title="src/App.css"
-.dinosaur {
-  display: block;
-}
-```
+We've written
+[some basic styles for you](https://raw.githubusercontent.com/denoland/tutorial-with-react/refs/heads/main/src/index.css),
+which can be copied into `src/index.css`.
 
 ## Run the app
 
-To run the app use the task you set up earlier
+To run the app, use the dev task defined in `deno.json`:
 
 ```sh
 deno run dev
 ```
 
-Navigate to the local Vite server in your browser (`localhost:3000`) and you
-should see the list of dinosaurs displayed which you can click through to find
-out about each one.
+This command will:
 
-![demo of the app](./images/how-to/react/react-dinosaur-app-demo.gif)
+1. Start the Vite development server on port 3000
+2. Start the API server on port 8000
+3. Set up the proxy to forward `/api` requests from the frontend to the backend
+
+Navigate to `localhost:3000` in your browser and you should see the dinosaur app
+with a list of dinosaurs that you can click through to learn about each one.
+
+## Understanding the project structure
+
+Let's walk through the key files and folders in this project:
+
+```text
+tutorial-with-react/
+├── api/                    # Backend API
+│   ├── data.json          # Dinosaur data (700+ dinosaurs)
+│   ├── main.ts            # Oak server with API routes
+│   └── util/
+│       └── routeStaticFilesFrom.ts
+├── src/                    # React frontend
+│   ├── main.tsx           # React app entry point
+│   ├── App.tsx            # Main app with routing
+│   ├── index.css          # Global styles
+│   └── pages/
+│       ├── index.tsx      # Homepage with dinosaur list
+│       └── Dinosaur.tsx   # Individual dinosaur page
+├── public/                 # Static assets
+├── deno.json              # Deno configuration and tasks
+├── package.json           # npm dependencies for Vite
+├── vite.config.ts         # Vite configuration with proxy
+└── index.html             # HTML template
+```
+
+### Key concepts
+
+1. **Hybrid dependency management**: The project uses both Deno and npm
+   dependencies. Deno handles server-side dependencies like Oak, while npm
+   handles frontend dependencies through Vite.
+
+2. **Development vs Production**: In development, Vite serves the React app on
+   port 3000 and proxies API requests to the Oak server on port 8000. In
+   production, the Oak server serves both the built React app and the API from
+   port 8000.
+
+3. **Modern React patterns**: The app uses React 19, functional components,
+   hooks, and React Router for navigation.
+
+4. **Type safety**: While this example doesn't use a separate types file, in a
+   larger app you'd typically create TypeScript interfaces for your data
+   structures.
+
+You can see a version of the
+[app running on Deno Deploy](https://tutorial-with-react.deno.deno.net/)
 
 ## Build and deploy
 
-The template you cloned comes with a `serve` task that builds the app and serves
-it with the backend server. Run the following command to build and serve the
-app:
+The project includes a `serve` task that builds the React app and serves it with
+the Oak backend server. Run the following command to build and serve the app in
+production mode:
 
 ```sh
+deno run build
 deno run serve
 ```
 
-If you visit `localhost:8000` in your browser you should see the app running!
+This will:
 
-You can deploy this app to your favourite cloud provider. We recommend using
+1. Build the React app using Vite (output goes to `dist/`)
+2. Start the Oak server which serves both the API and the built React app
+
+Visit `localhost:8000` in your browser to see the production version of the app!
+
+You can deploy this app to your favouite cloud provider. We recommend using
 [Deno Deploy](https://deno.com/deploy) for a simple and easy deployment
-experience.
+experience. You can deploy your app directly from GitHub, simply create a GitHub
+repository and push your code there, then connect it to Deno Deploy.
 
-To deploy to Deno Deploy, visit the
-[Deno Deploy dashboard](https://dash.deno.com) and create a new project. You can
-then deploy the app by connecting your GitHub repository and selecting the
-branch you want to deploy.
+### Create a GitHub repository
 
-Give the project a name, and make sure that the `build step` is set to
-`deno run build` and the `Entrypoint` is `server/main.ts`.
+[Create a new GitHub repository](https://github.com/new), then initialize and
+push your app to GitHub:
 
-Click the `Deploy Project` button and your app will be live!
+```sh
+git init -b main
+git remote add origin https://github.com/<your_github_username>/<your_repo_name>.git
+git add .
+git commit -am 'my next app'
+git push -u origin main
+```
+
+### Deploy to Deno Deploy
+
+Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
+dashboard.
+<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
+my app</a>
+
+For a walkthrough of deploying your app, check out the
+[Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
 
 🦕 Now you can scaffold and develop a React app with Vite and Deno! You’re ready
 to build blazing-fast web applications. We hope you enjoy exploring these
