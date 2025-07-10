@@ -205,11 +205,6 @@ export const sidebar = [
         type: "tutorial",
       },
       {
-        title: "Build a React app with create-vite",
-        href: "/examples/create_react_tutorial/",
-        type: "tutorial",
-      },
-      {
         title: "Build a Next.js app",
         href: "/examples/next_tutorial/",
         type: "tutorial",
