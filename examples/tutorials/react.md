@@ -37,7 +37,7 @@ deno run -A npm:create-vite@latest --template react-ts
 
 Change directory to your new react app and install the dependencies:
 
-```
+```sh
 cd <your_new_react_app>
 deno install
 ```
