@@ -28,7 +28,7 @@ The runtime environment is a Linux-based environment running either x64 or ARM64
 architecture. The exact set of tools available in the runtime environment is
 subject to change and thus cannot be relied upon.
 
-Currently Deno Deploy<sup>EA</sup> runs on Deno 2.3.2.
+Currently Deno Deploy<sup>EA</sup> runs on Deno 2.4.0
 
 ## Lifecycle
 
