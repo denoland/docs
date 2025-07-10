@@ -63,101 +63,162 @@ level of your `deno.json` file:
 "unstable": ["fmt-component"]
 ```
 
-## Add a backend
+## Add a backend API
 
-The next step is to add a backend API. We'll create a very simple API that
-returns information about dinosaurs.
+We'll build an API server using Deno and Oak. This will be where we get our
+dinosaur data.
 
-In the root of your new vite project, create an `api` folder. In that folder,
-create a `main.ts` file, which will run the server, and a `data.json`, which
-where we'll put the hard coded data.
+In the root directory of your project, create an `api` folder. In that folder,
+create a `data.json`, which will contain the hard coded dinosaur data.
 
 Copy and paste
-[this json file](https://raw.githubusercontent.com/denoland/tutorial-with-vue/refs/heads/main/api/data.json)
-into `api/data.json`.
+[this json file](https://github.com/denoland/tutorial-with-react/blob/main/api/data.json)
+into the `api/data.json` file. (If you were building a real app, you would
+probably fetch this data from a database or an external API.)
 
-We're going to build out a simple API server with routes that return dinosaur
-information. We'll use the [`oak` middleware framework](https://jsr.io/@oak/oak)
-and the [`cors` middleware](https://jsr.io/@tajpouria/cors) to enable
+We're going to build out some API routes that return dinosaur information. We'll
+need Oak for the HTTP server and
+[CORS middleware](https://jsr.io/@tajpouria/cors) to enable
 [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
-Use the `deno add` command to add the required dependencies to your project:
+Add the dependencies to your `deno.json` file by updating the imports section:
 
-```shell
-deno add jsr:@oak/oak jsr:@tajpouria/cors
+```json title="deno.json"
+{
+  "imports": {
+    "@oak/oak": "jsr:@oak/oak@^17.1.5",
+    "@tajpouria/cors": "jsr:@tajpouria/cors@^1.2.1",
+    "vue-router": "npm:vue-router@^4.5.1"
+  }
+}
 ```
 
-Next, update `api/main.ts` to import the required modules and create a new
+Next, create `api/main.ts` and import the required modules and create a new
 `Router` instance to define some routes:
 
-```ts title="main.ts"
+```ts title="api/main.ts"
 import { Application, Router } from "@oak/oak";
 import { oakCors } from "@tajpouria/cors";
+import routeStaticFilesFrom from "./util/routeStaticFilesFrom.ts";
 import data from "./data.json" with { type: "json" };
 
+export const app = new Application();
 const router = new Router();
 ```
 
-After this, in the same file, we'll define three routes. The first route at `/`
-will return the string `Welcome to the dinosaur API`, then we'll set up
-`/dinosaurs` to return all the dinosaurs, and finally `/dinosaurs/:dinosaur` to
-return a specific dinosaur based on the name in the URL:
+After this, in the same file, we'll define two routes. One at `/api/dinosaurs`
+to return all the dinosaurs, and `/api/dinosaurs/:dinosaur` to return a specific
+dinosaur based on the name in the URL:
 
-```ts title="main.ts"
-router
-  .get("/", (context) => {
-    context.response.body = "Welcome to dinosaur API!";
-  })
-  .get("/dinosaurs", (context) => {
-    context.response.body = data;
-  })
-  .get("/dinosaurs/:dinosaur", (context) => {
-    if (!context?.params?.dinosaur) {
-      context.response.body = "No dinosaur name provided.";
-    }
+```ts title="api/main.ts"
+router.get("/api/dinosaurs", (context) => {
+  context.response.body = data;
+});
 
-    const dinosaur = data.find((item) =>
-      item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
-    );
+router.get("/api/dinosaurs/:dinosaur", (context) => {
+  if (!context?.params?.dinosaur) {
+    context.response.body = "No dinosaur name provided.";
+  }
 
-    context.response.body = dinosaur ? dinosaur : "No dinosaur found.";
-  });
+  const dinosaur = data.find((item) =>
+    item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
+  );
+
+  context.response.body = dinosaur ?? "No dinosaur found.";
+});
 ```
 
-Finally, at the bottom of the same file, create a new `Application` instance and
-attach the routes we just defined to the application using
-`app.use(router.routes())` and start the server listening on port 8000:
+At the bottom of the same file, attach the routes we just defined to the
+application. We also must include the static file server, and finally we'll
+start the server listening on port 8000:
 
-```ts title="main.ts"
-const app = new Application();
+```ts title="api/main.ts"
 app.use(oakCors());
 app.use(router.routes());
 app.use(router.allowedMethods());
+app.use(routeStaticFilesFrom([
+  `${Deno.cwd()}/dist`,
+  `${Deno.cwd()}/public`,
+]));
 
-await app.listen({ port: 8000 });
+if (import.meta.main) {
+  console.log("Server listening on port http://localhost:8000");
+  await app.listen({ port: 8000 });
+}
 ```
 
-You can run the API server with `deno run --allow-env --allow-net api/main.ts`.
-We'll create a task to run this command and update the dev task to run both the
-Vue.js app and the API server.
+You'll also need to create the `api/util/routeStaticFilesFrom.ts` file to serve
+static files:
 
-In your `package.json` file, update the `scripts` field to include the
-following:
+```ts title="api/util/routeStaticFilesFrom.ts"
+import { Context, Next } from "@oak/oak";
 
-```jsonc
+// Configure static site routes so that we can serve
+// the Vite build output and the public folder
+export default function routeStaticFilesFrom(staticPaths: string[]) {
+  return async (context: Context<Record<string, object>>, next: Next) => {
+    for (const path of staticPaths) {
+      try {
+        await context.send({ root: path, index: "index.html" });
+        return;
+      } catch {
+        continue;
+      }
+    }
+
+    await next();
+  };
+}
+```
+
+You can run the API server with
+`deno run --allow-env --allow-net --allow-read api/main.ts`. We'll create a task
+to run this command in the background and update the dev task to run both the
+Vue app and the API server.
+
+Update your `package.json` scripts to include the following:
+
+```json title="package.json"
 {
   "scripts": {
     "dev": "deno task dev:api & deno task dev:vite",
     "dev:api": "deno run --allow-env --allow-net api/main.ts",
     "dev:vite": "deno run -A npm:vite",
-    // ...
+    "build": "deno run -A npm:vite build",
+    "server:start": "deno run -A --watch ./api/main.ts",
+    "serve": "deno run build && deno run server:start",
+    "preview": "vite preview"
+  }
 }
 ```
 
-Now, if you run `deno task dev` and visit `localhost:8000`, in your browser you
-should see the text `Welcome to dinosaur API!`, and if you visit
-`localhost:8000/dinosaurs`, you should see a JSON response of all of the
-dinosaurs.
+Make sure your `vite.config.ts` includes the Deno plugin and proxy configuration
+for development:
+
+```ts title="vite.config.ts"
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import deno from "@deno/vite-plugin";
+
+export default defineConfig({
+  server: {
+    port: 3000,
+    proxy: {
+      "/api": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+      },
+    },
+  },
+  plugins: [vue(), deno()],
+  optimizeDeps: {
+    include: ["react/jsx-runtime"],
+  },
+});
+```
+
+If you run `npm run dev` now and visit `localhost:8000/api/dinosaurs`, in your
+browser you should see a JSON response of all of the dinosaurs.
 
 ## Build the frontend
 
@@ -182,10 +243,16 @@ createApp(App)
   .mount("#app");
 ```
 
-Add the Vue Router module to the project with `deno add`:
+Add the Vue Router module to the project by updating your `deno.json` imports:
 
-```shell
-deno add npm:vue-router
+```json title="deno.json"
+{
+  "imports": {
+    "@oak/oak": "jsr:@oak/oak@^17.1.5",
+    "@tajpouria/cors": "jsr:@tajpouria/cors@^1.2.1",
+    "vue-router": "npm:vue-router@^4.5.1"
+  }
+}
 ```
 
 Next, create a `router` directory in the `src` directory. In it, create an
@@ -255,7 +322,7 @@ up earlier and render them as links using the
 
   export default defineComponent({
     async setup() {
-      const res = await fetch("http://localhost:8000/dinosaurs");
+      const res = await fetch("/api/dinosaurs");
       const dinosaurs = await res.json() as Dinosaur[];
       return { dinosaurs };
     },
@@ -263,13 +330,13 @@ up earlier and render them as links using the
 </script>
 
 <template>
-  <div v-for="dinosaur in dinosaurs" :key="dinosaur.name">
+  <span v-for="dinosaur in dinosaurs" :key="dinosaur.name">
     <RouterLink
       :to="{ name: 'Dinosaur', params: { dinosaur: `${dinosaur.name.toLowerCase()}` } }"
     >
       {{ dinosaur.name }}
     </RouterLink>
-  </div>
+  </span>
 </template>
 ```
 
@@ -341,7 +408,7 @@ Then update the `Dinosaur.vue` file:
     },
     async mounted() {
       const res = await fetch(
-        `http://localhost:8000/dinosaurs/${this.dinosaur}`,
+        `/api/dinosaurs/${this.dinosaur}`,
       );
       this.dinosaurDetails = await res.json();
     },
@@ -366,16 +433,71 @@ Now that we've set up the frontend and backend, we can run the app. In your
 terminal, run the following command:
 
 ```shell
-deno task dev
+npm run dev
 ```
 
-Visit the output localhost link in your browser to see the app. Click on a
+This will start both the Deno API server on port 8000 and the Vite development
+server on port 3000. The Vite server will proxy API requests to the Deno server.
+
+Visit `http://localhost:3000` in your browser to see the app. Click on a
 dinosaur to see more details!
 
-![The vue app in action](./images/how-to/vue/vue.gif)
+You can see a live version of the app on [Deno Deploy](https://tutorial-with-vue.deno.deno.net/).
+
+[The vue app in action](./images/how-to/vue/vue.gif)
+
+```shell
+npm run serve
+```
+
+This will build the Vue app and serve everything from the Deno server on
+port 8000.
+
+## Build and deploy
+
+We set up the project with a `serve` task that builds the React app and serves
+it with the Oak backend server. Run the following command to build and serve the
+app in production mode:
+
+```sh
+deno run build
+deno run serve
+```
+
+This will:
+
+1. Build the Vue app using Vite (output goes to `dist/`)
+2. Start the Oak server which serves both the API and the built Vue app
+
+Visit `localhost:8000` in your browser to see the production version of the app!
+
+You can deploy this app to your favorite cloud provider. We recommend using
+[Deno Deploy](https://deno.com/deploy) for a simple and easy deployment
+experience. You can deploy your app directly from GitHub, simply create a GitHub
+repository and push your code there, then connect it to Deno Deploy.
+
+### Create a GitHub repository
+
+[Create a new GitHub repository](https://github.com/new), then initialize and
+push your app to GitHub:
+
+```sh
+git init -b main
+git remote add origin https://github.com/<your_github_username>/<your_repo_name>.git
+git add .
+git commit -am 'my vue app'
+git push -u origin main
+```
+
+### Deploy to Deno Deploy
+
+Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
+dashboard.
+<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
+my app</a>
+
+For a walkthrough of deploying your app, check out the
+[Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
 
 🦕 Now that you can run a Vue app in Deno with Vite you're ready to build real
-world applications! If you'd like to expand upon this demo you could consider
-building out a backend server to serve the static app once built, then you'll be
-able to
-[deploy your dinosaur app to the cloud](https://docs.deno.com/deploy/manual/).
+world applications!
