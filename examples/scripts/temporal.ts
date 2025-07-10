@@ -9,35 +9,29 @@
  */
 
 // Get the current date
-const date = Temporal.Now.plainDateISO(); // 2025-01-31
+const date = Temporal.Now.plainDateISO();
 
-// Return the date in ISO 8601 date format
+// Return the date in ISO 8601 date format (eg "2025-01-31")
 const dateAsString = date.toString();
-// Eg "2025-01-31"
 console.log(`Temporal date as string: ${dateAsString}`);
 
-// Get current date and time in ISO 8601 format
+// Get current date and time in ISO 8601 format (eg "2025-01-31T10:51:40.269979904")
 const plainDateTimeIsoString = Temporal.Now.plainDateTimeISO().toString();
-// Eg "2025-01-31T10:51:40.269979904"
 console.log(`Temporal plainDateTimeISO as string: ${plainDateTimeIsoString}`);
 
-// Get Unix timestamp
+// Get Unix timestamp (eg 2025-01-31T18:51:59.093355008Z)
 const timeStamp = Temporal.Now.instant();
-// Eg 2025-01-31T18:51:59.093355008Z
 console.log(`Temporal timestamp as string: ${timeStamp}`);
 
-// Return timestamp in milliseconds
+// Return timestamp in milliseconds (eg 1738349519093)
 const epochMilliseconds = timeStamp.epochMilliseconds;
-// Eg 1738349519093
 console.log(`Temporal timestamp epoch milliseconds: ${epochMilliseconds}`);
 
-// Get date and time in ISO 8601 format from milliseconds
+// Get date and time in ISO 8601 format from milliseconds (eg "2025-01-31T18:51:59.093Z")
 const futureTime = Temporal.Instant.fromEpochMilliseconds(1851222399924);
-// Eg 2028-08-30T04:26:39.924Z
 console.log(`Temporal future time: ${futureTime}`);
 
 // Measure difference in hours from now.
 const now = Temporal.Now.instant();
 const differenceInHours = now.until(futureTime, { smallestUnit: "hour" });
-// Eg PT31600H
 console.log(`Temporal difference in hours: ${differenceInHours}`);
