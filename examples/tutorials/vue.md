@@ -16,7 +16,8 @@ will display a list of dinosaurs. When you click on one, it'll take you to a
 dinosaur page with more details. You can see the
 [finished app on GitHub](https://github.com/denoland/tutorial-with-vue).
 
-You can see a live version of the app on [Deno Deploy](https://tutorial-with-vue.deno.deno.net/).
+You can see a live version of the app on
+[Deno Deploy](https://tutorial-with-vue.deno.deno.net/).
 
 ## Create a Vue.js app with Vite and Deno
 
@@ -442,7 +443,8 @@ server on port 3000. The Vite server will proxy API requests to the Deno server.
 Visit `http://localhost:3000` in your browser to see the app. Click on a
 dinosaur to see more details!
 
-You can see a live version of the app on [Deno Deploy](https://tutorial-with-vue.deno.deno.net/).
+You can see a live version of the app on
+[Deno Deploy](https://tutorial-with-vue.deno.deno.net/).
 
 [The vue app in action](./images/how-to/vue/vue.gif)
 
