@@ -312,8 +312,9 @@ details!
 Now that you have your working Next.js app, you can deploy it to the web with
 Deno Deploy<sup>EA</sup>.
 
-Deno Deploy requires your code to be hosted on GitHub to access and deploy it,
-so first you'll need to create a GitHub repository and push your app there.
+For the best experience, you can deploy your app directly from GitHub, which
+will set up automated deployments. Create a GitHub repository and push your app
+there.
 
 [Create a new GitHub repository](https://github.com/new), then initialize and
 push your app to GitHub:
