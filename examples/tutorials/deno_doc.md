@@ -11,8 +11,20 @@ generator called `deno doc` that can automatically generate searchable
 documentation from your TypeScript and JavaScript code.
 
 `deno doc` works out of the box, with no setup required and can generate HTML,
-JSON or terminal output. It leverages JSDoc comments and can automatically
-extract type information from your code.
+JSON or terminal output. It leverages JSDoc comments for documentation and
+automatically extracts type information from TypeScript type annotations in your
+code.
+
+:::info Automatic documentation with JSR
+
+If you're publishing your package to
+[JSR (JavaScript Registry)](https://jsr.io), you get beautiful documentation
+automatically generated for free! JSR uses the same `deno doc` technology under
+the hood to create searchable, web-based documentation for all published
+packages. Simply publish your well-documented code with `deno publish` and JSR
+handles the rest.
+
+:::
 
 ## Setting up a sample project
 
@@ -258,9 +270,10 @@ Generate documentation in JSON format for use with other tools:
 deno doc --json math.ts > documentation.json
 ```
 
-The JSON output includes all the same information as the HTML version but in a
-structured format that can be consumed by other tools or custom documentation
-generators.
+The JSON output provides a low-level representation of your code's structure,
+including symbol definitions and basic type information. This format is
+primarily useful for building custom documentation tools or integrating with
+other systems that need programmatic access to your code's API surface.
 
 ## Best practices for JSDoc comments
 
