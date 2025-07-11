@@ -430,9 +430,9 @@ You can see a version of the
 
 ## Build and deploy
 
-The project includes a `serve` task that builds the React app and serves it with
-the Oak backend server. Run the following command to build and serve the app in
-production mode:
+We set up the project with a `serve` task that builds the React app and serves
+it with the Oak backend server. Run the following command to build and serve the
+app in production mode:
 
 ```sh
 deno run build
@@ -446,7 +446,7 @@ This will:
 
 Visit `localhost:8000` in your browser to see the production version of the app!
 
-You can deploy this app to your favouite cloud provider. We recommend using
+You can deploy this app to your favorite cloud provider. We recommend using
 [Deno Deploy](https://deno.com/deploy) for a simple and easy deployment
 experience. You can deploy your app directly from GitHub, simply create a GitHub
 repository and push your code there, then connect it to Deno Deploy.
@@ -460,7 +460,7 @@ push your app to GitHub:
 git init -b main
 git remote add origin https://github.com/<your_github_username>/<your_repo_name>.git
 git add .
-git commit -am 'my next app'
+git commit -am 'my react app'
 git push -u origin main
 ```
 
