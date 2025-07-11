@@ -449,7 +449,7 @@ You can see a live version of the app on
 [The vue app in action](./images/how-to/vue/vue.gif)
 
 ```shell
-npm run serve
+deno run serve
 ```
 
 This will build the Vue app and serve everything from the Deno server on
