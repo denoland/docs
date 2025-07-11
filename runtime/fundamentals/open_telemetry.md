@@ -3,13 +3,6 @@ title: OpenTelemetry
 description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
 
-:::caution
-
-The OpenTelemetry integration for Deno is still in development and may change.
-To use it, you must pass the `--unstable-otel` flag to Deno.
-
-:::
-
 Deno has built in support for [OpenTelemetry](https://opentelemetry.io/).
 
 > OpenTelemetry is a collection of APIs, SDKs, and tools. Use it to instrument,
@@ -33,11 +26,11 @@ Deno provides the following features:
 
 ## Quick start
 
-To enable the OpenTelemetry integration, run your Deno script with the
-`--unstable-otel` flag and set the environment variable `OTEL_DENO=true`:
+To enable the OpenTelemetry integration set the environment variable
+`OTEL_DENO=true`:
 
 ```sh
-OTEL_DENO=true deno run --unstable-otel my_script.ts
+OTEL_DENO=true deno run my_script.ts
 ```
 
 This will automatically collect and export runtime observability data to an
@@ -270,11 +263,11 @@ In addition to the automatically collected telemetry data, you can also create
 your own metrics and traces using the `npm:@opentelemetry/api` package.
 
 You do not need to configure the `npm:@opentelemetry/api` package to use it with
-Deno. Deno sets up the `npm:@opentelemetry/api` package automatically when the
-`--unstable-otel` flag is passed. There is no need to call
-`metrics.setGlobalMeterProvider()`, `trace.setGlobalTracerProvider()`, or
-`context.setGlobalContextManager()`. All configuration of resources, exporter
-settings, etc. is done via environment variables.
+Deno. Deno sets up the `npm:@opentelemetry/api` package automatically. There is
+no need to call `metrics.setGlobalMeterProvider()`,
+`trace.setGlobalTracerProvider()`, or `context.setGlobalContextManager()`. All
+configuration of resources, exporter settings, etc. is done via environment
+variables.
 
 Deno works with version `1.x` of the `npm:@opentelemetry/api` package. You can
 either import directly from `npm:@opentelemetry/api@1`, or you can install the
