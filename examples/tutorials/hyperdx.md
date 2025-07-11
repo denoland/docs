@@ -133,7 +133,7 @@ to send data to the collector:
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318 \
 OTEL_SERVICE_NAME=chat-app \
 OTEL_DENO=true \
-deno run --unstable-otel --allow-net --allow-env --env-file --allow-read main.ts
+deno run --allow-net --allow-env --env-file --allow-read main.ts
 ```
 
 This command:
