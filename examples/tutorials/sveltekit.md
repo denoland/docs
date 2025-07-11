@@ -18,8 +18,6 @@ You can see the finished app at
 We can scaffold an application easily with `npx sv create`. This is
 [SvelteKit's CLI](https://github.com/sveltejs/cli) which has a lot of utility.
 
-https://github.com/user-attachments/assets/8357d46b-b535-44e3-9191-1496e0632bd1
-
 If you have followed the video above great! If not, here are the selections:
 
 - Template
