@@ -120,7 +120,7 @@ This server:
 To run the server with OpenTelemetry, use these flags:
 
 ```sh
-OTEL_DENO=true OTEL_SERVICE_NAME=my-server deno run --unstable-otel --allow-net server.ts
+OTEL_DENO=true OTEL_SERVICE_NAME=my-server deno run --allow-net server.ts
 ```
 
 ## Step 3: Create a Test Client
@@ -218,7 +218,7 @@ trace context.
 
 If you're not seeing data in your collector:
 
-1. Check that you've set `OTEL_DENO=true` and used the `--unstable-otel` flag
+1. Check that you've set `OTEL_DENO=true`
 2. Verify the collector is running and accessible at the default endpoint
 3. Check if you need to set `OTEL_EXPORTER_OTLP_ENDPOINT` to a different URL
 4. Look for errors in your Deno console output

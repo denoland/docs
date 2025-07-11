@@ -187,10 +187,8 @@ support for OpenTelemetry, allowing you to:
 - Collect structured logs
 - Export telemetry data to monitoring systems
 
-To enable OpenTelemetry, run your application with the `--unstable-otel` flag:
-
 ```sh
-OTEL_DENO=true deno run --unstable-otel your_script.ts
+OTEL_DENO=true deno run your_script.ts
 ```
 
 This will automatically collect and export runtime observability data,

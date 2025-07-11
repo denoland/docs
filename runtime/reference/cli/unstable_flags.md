@@ -210,7 +210,7 @@ Enable unstable net APIs. These APIs include:
 - [`WebSocketStream`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocketStream)
 - [`Deno.DatagramConn`](https://docs.deno.com/api/deno/~/Deno.DatagramConn)
 
-## `--unstable-otel`
+## ``
 
 Enable the
 [OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry).
