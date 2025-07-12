@@ -89,12 +89,26 @@ settings.
 }
 ```
 
-Lastly we will need to add the `nodeModulesDir` to the `deno.json` file so our
-commands can properly find the `node_modules` directory.
+We will need to add the `nodeModulesDir` to the `deno.json` file so our commands
+can properly find the `node_modules` directory.
 
 ```json
 {
   "nodeModulesDir": "auto"
+}
+```
+
+For those running VSCode or other editors which can support a similar
+`settings.json` file some recommended settings for auto formatting on save and
+linting are here.
+
+```json
+{
+  "deno.enable": true,
+  "deno.enablePaths": [
+    "./deno.json"
+  ],
+  "editor.defaultFormatter": "denoland.vscode-deno"
 }
 ```
 
