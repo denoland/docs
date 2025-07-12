@@ -102,6 +102,11 @@ export const sidebar = [
         externalURL: "https://www.youtube.com/watch?v=IVde_GTN6TM",
         type: "video",
       },
+      {
+        title: "Generating documentation with deno doc",
+        href: "/examples/deno_doc_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
