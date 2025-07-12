@@ -25,8 +25,6 @@ If you have followed the video above great! If not, here are the selections:
 - Type Checking
   - Typescript
 - Additions to project
-  - prettier
-  - eslint
   - tailwindcss
 - Tailwind plugins
   - typography
@@ -36,6 +34,69 @@ If you have followed the video above great! If not, here are the selections:
 
 For the remainder of this, you should have `deno task dev` running in the
 background so you can see your changes and the application running locally.
+
+### Deno setup
+
+The `sv` command will generate a `package.json` file which we will need to
+update to a `deno.json` file. For this we will change `scripts` to `tasks` and
+update the `vite` based commands to use the `npm:` prefix.
+
+Example:
+
+```json
+"dev": "vite dev",
+```
+
+Becomes:
+
+```json
+"dev": "deno run -A npm:vite dev",
+```
+
+At this stage we are also wanting to integrate with Deno's formatter and linter.
+We can add these tasks as well.
+
+```json
+{
+  "tasks": {
+    "dev": "deno run -A npm:vite dev",
+    "format": "deno fmt",
+    "lint": "deno lint",
+    "lint:fix": "deno lint --fix"
+  }
+}
+```
+
+With these tasks set up we need to also set up some rules to use form the
+`format` and `lint` commands. Here we are using an `unstable` flag for
+`fmt-component`, which enables the
+[svelte component](https://docs.deno.com/runtime/reference/cli/fmt/#supported-file-types)
+formatting. We also add some rules for linting based on the recommended
+settings.
+
+```json
+{
+  "fmt": {
+    "unstable": ["fmt-component"]
+  },
+  "lint": {
+    "include": ["src/**/*.{ts,js,svelte}"],
+    "exclude": ["node_modules", ".svelte-kit", ".vite", "dist", "build"],
+    "rules": {
+      "tags": ["recommended"]
+    }
+  }
+}
+```
+
+Lastly we will need to add the `nodeModulesDir` to the `deno.json` file so our
+commands can properly find the `node_modules` directory.
+
+```json
+{
+  "nodeModulesDir": "auto"
+}
+```
 
 ### Walkthrough
 
@@ -67,9 +128,9 @@ There are a few conventions which we will use in our SvelteKit application.
   - `+error.svelte` -- A custom error page you can add to make error pages nicer
     to come across.
 
-Additional note later you will see we put the dinosaurs (aka dinos) `dino.ts`
-file within a `lib/server` directory. This will mean as stated above that this
-file is meant to **only** be accessed by other server files.
+Additional note later you will see we put the dinosaurs `dinosaurs.ts` file
+within a `lib/server` directory. This will mean as stated above that this file
+is meant to **only** be accessed by other server files.
 
 ### Setup our "database"
 
@@ -77,26 +138,26 @@ We will be using a ts file with a `Map` to access and find our items for
 simplicity. Create a file and folder:
 
 ```
-src/lib/server/dino.ts
+src/lib/server/dinosaurs.ts
 ```
 
-Within this file we will set up a type for our `Dino`s and store the array of
+Within this file we will set up a type for our Dinosaurs and store the array of
 data to be exported as a map.
 
 ```ts
-export type Dino = { name: string; description: string };
+export type Dinosaur = { name: string; description: string };
 
-const dinos = new Map<string, Dino>();
+const dinosaurs = new Map<string, Dinosaur>();
 
-const allDinos: Dino[] = [
+const allDinosaurs: Dino[] = [
   // Paste all your dino information here
 ];
 
-for (const dino of allDinos) {
-  dinos.set(dino.name.toLowerCase(), dino);
+for (const dino of allDinosaurs) {
+  dinosaurs.set(dino.name.toLowerCase(), dino);
 }
 
-export { dinos };
+export { dinosaurs };
 ```
 
 With this setup we have our "database"! Next to access it on a page.
@@ -110,14 +171,15 @@ routes directory. There should already be a `+page.svlete` there.
 src/routes/+page.server.ts
 ```
 
-With this file created, we need to initialize the function to load our dinos!
+With this file created, we need to initialize the function to load our
+dinosaurs!
 
 ```ts
 /// src/routes/+page.server.ts
-import { dinos } from '$lib/server/dino.js';
+import { dinosaurs } from '$lib/server/dino.js';
 
 export const load = async ({ url }) => {
-  return { dinos: Array.from(dinos) };
+  return { dinosaurs: Array.from(dinosaurs) };
 });
 ```
 
@@ -132,14 +194,14 @@ like or just add the following.
 </script>
 
 <section class="mb-4 grid max-h-96 grid-cols-2 gap-4 overflow-y-auto">
-  {#each data.dinos as item}
+  {#each data.dinosaurs as item}
   <a class="rounded border p-4" href="/{item.name}">{item.name}</a>
   {/each}
 </section>
 ```
 
 Notice while you are working with `data` we have type safety to know that
-`data.dinos` exists and the types that are available!
+`data.dinosaurs` exists and the types that are available!
 
 ### Adding an individual Dino page
 
@@ -162,11 +224,11 @@ dino and send it to the page!
 
 ```ts
 /// src/routes/[name]/+page.server.ts
-import { dinos } from "$lib/server/dino.js";
+import { dinosaurs } from "$lib/server/dino.js";
 import { error } from "@sveltejs/kit";
 
 export const load = async ({ params: { name } }) => {
-  const dino = dinos.get(name.toLowerCase());
+  const dino = dinosaurs.get(name.toLowerCase());
 
   if (!dino) {
     throw error(404, { message: "Dino not found" });
@@ -273,11 +335,11 @@ snippets!
 
 Lets open our main page and its server page to make a few changes.
 
-Previously we were returning an array version of our dinos, lets allow users to
-search them and add some pagination logic.
+Previously we were returning an array version of our dinosaurs, lets allow users
+to search them and add some pagination logic.
 
 ```ts
-import { dinos } from "$lib/server/dino.js";
+import { dinosaurs } from "$lib/server/dino.js";
 
 export const load = async ({ url }) => {
   //  We can access the search params by using the `url` provided
@@ -309,9 +371,9 @@ export const load = async ({ url }) => {
   }
 
   // We want to allow searching and if there is no `q` to search against
-  // allow all dinos, otherwise compare the names in lowercase against one
+  // allow all dinosaurs, otherwise compare the names in lowercase against one
   // another.
-  const filteredDinos = Array.from(dinos.values()).filter((d) => {
+  const filteredDinosaurs = Array.from(dinosaurs.values()).filter((d) => {
     if (!q) {
       return true;
     }
@@ -319,24 +381,24 @@ export const load = async ({ url }) => {
     return d.name.toLowerCase().includes(q.toLowerCase());
   });
 
-  // Here we calculate how we need to slice the array of filtered dinos to return to the user
+  // Here we calculate how we need to slice the array of filtered dinosaurs to return to the user
   const offset = Math.abs((page - 1) * limit);
-  const paginatedDinos = Array.from(filteredDinos).slice(
+  const paginatedDinosaurs = Array.from(filteredDinosaurs).slice(
     offset,
     offset + limit,
   );
-  const totalDinos = filteredDinos.length;
-  const totalPages = Math.ceil(totalDinos / limit);
+  const totalDinosaurs = filteredDinosaurs.length;
+  const totalPages = Math.ceil(totalDinosaurs / limit);
 
   // Last we are returning a lot more data so it is easier to render
-  // our pagination and dinos on the page.
+  // our pagination and dinosaurs on the page.
   return {
-    dinos: paginatedDinos,
+    dinosaurs: paginatedDinosaurs,
     q,
     page,
     limit,
     totalPages,
-    totalDinos,
+    totalDinosaurs,
   };
 };
 ```
@@ -397,12 +459,12 @@ pagination and search inputs added to the UI!
 </form>
 
 <section class="mb-4 grid max-h-96 grid-cols-2 gap-4 overflow-y-auto">
-	{#each data.dinos as item}
+	{#each data.dinosaurs as item}
 		<a class="rounded border p-4" href="/{item.name}">{item.name}</a>
 	{/each}
 
-	{#if data.dinos.length === 0}
-		<p>No dinos found</p>
+	{#if data.dinosaurs.length === 0}
+		<p>No dinosaurs found</p>
 	{/if}
 </section>
 
