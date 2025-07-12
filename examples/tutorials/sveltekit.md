@@ -76,16 +76,15 @@ settings.
 
 ```json
 {
-  "fmt": {
-    "unstable": ["fmt-component"]
-  },
+  "fmt": {},
   "lint": {
     "include": ["src/**/*.{ts,js,svelte}"],
     "exclude": ["node_modules", ".svelte-kit", ".vite", "dist", "build"],
     "rules": {
       "tags": ["recommended"]
     }
-  }
+  },
+  "unstable": ["fmt-component"]
 }
 ```
 
