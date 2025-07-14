@@ -644,7 +644,7 @@ body {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .ddoc .markdown-body p {
     max-width: 75ch;
   }

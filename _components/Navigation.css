@@ -9,7 +9,7 @@
   background-color: hsl(var(--background-primary));
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 47.9375rem) {
   .nav {
     position: fixed;
     top: 4rem;
@@ -38,7 +38,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .nav {
     position: sticky;
     top: calc(4rem - 1px);

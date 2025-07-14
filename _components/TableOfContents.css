@@ -6,7 +6,7 @@
   padding: 1rem;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .content {
     display: grid;
     grid-template-columns: minmax(0, 8fr) minmax(0, 3fr);

@@ -52,7 +52,7 @@ header {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   header {
     padding-left: 1rem;
     nav {
@@ -65,7 +65,7 @@ header {
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 47.9375rem) {
   .logo-link {
     margin-right: auto;
   }

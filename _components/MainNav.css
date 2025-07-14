@@ -25,7 +25,7 @@
   background-color: hsl(var(--background-tertiary));
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .main-nav {
     display: none;
   }

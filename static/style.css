@@ -43,7 +43,7 @@ p {
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 64rem) {
   .layout {
     display: grid;
     grid-template-areas:

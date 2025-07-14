@@ -43,7 +43,7 @@ footer {
   color: hsl(var(--foreground-secondary));
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 31.25rem) {
   footer {
     padding: 2rem 5vw;
   }

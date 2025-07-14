@@ -162,7 +162,7 @@
 }
 .ddoc .border-gray-300 {
   --tw-border-opacity: 1;
-  border-color: rgb(209 213 219/var(--tw-border-opacity));
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 .ddoc .border-new\/50 {
   border-color: #7b61ff80;
@@ -173,17 +173,20 @@
 .ddoc .border-other\/50 {
   border-color: #57534e80;
 }
-.ddoc .border-permissions\/50, .ddoc .border-private\/50 {
+.ddoc .border-permissions\/50,
+.ddoc .border-private\/50 {
   border-color: #0cafc680;
 }
-.ddoc .border-protected\/50, .ddoc .border-readonly\/50 {
+.ddoc .border-protected\/50,
+.ddoc .border-readonly\/50 {
   border-color: #7b61ff80;
 }
 .ddoc .border-stone-300 {
   --tw-border-opacity: 1;
-  border-color: rgb(214 211 209/var(--tw-border-opacity));
+  border-color: rgb(214 211 209 / var(--tw-border-opacity));
 }
-.ddoc .border-unstable\/50, .ddoc .border-writeonly\/50 {
+.ddoc .border-unstable\/50,
+.ddoc .border-writeonly\/50 {
   border-color: #7b61ff80;
 }
 .ddoc .bg-Class\/15 {
@@ -296,7 +299,7 @@
 }
 .ddoc .bg-stone-100 {
   --tw-bg-opacity: 1;
-  background-color: rgb(245 245 244/var(--tw-bg-opacity));
+  background-color: rgb(245 245 244 / var(--tw-bg-opacity));
 }
 .ddoc .bg-unstable\/15 {
   background-color: #7b61ff26;
@@ -361,82 +364,83 @@
 }
 .ddoc .text-Class {
   --tw-text-opacity: 1;
-  color: rgb(32 180 75/var(--tw-text-opacity));
+  color: rgb(32 180 75 / var(--tw-text-opacity));
 }
 .ddoc .text-Enum {
   --tw-text-opacity: 1;
-  color: rgb(34 171 176/var(--tw-text-opacity));
+  color: rgb(34 171 176 / var(--tw-text-opacity));
 }
 .ddoc .text-Function {
   --tw-text-opacity: 1;
-  color: rgb(5 108 240/var(--tw-text-opacity));
+  color: rgb(5 108 240 / var(--tw-text-opacity));
 }
 .ddoc .text-Interface {
   --tw-text-opacity: 1;
-  color: rgb(210 160 100/var(--tw-text-opacity));
+  color: rgb(210 160 100 / var(--tw-text-opacity));
 }
 .ddoc .text-Method {
   --tw-text-opacity: 1;
-  color: rgb(5 108 240/var(--tw-text-opacity));
+  color: rgb(5 108 240 / var(--tw-text-opacity));
 }
 .ddoc .text-Namespace {
   --tw-text-opacity: 1;
-  color: rgb(210 86 70/var(--tw-text-opacity));
+  color: rgb(210 86 70 / var(--tw-text-opacity));
 }
 .ddoc .text-Property {
   --tw-text-opacity: 1;
-  color: rgb(126 87 192/var(--tw-text-opacity));
+  color: rgb(126 87 192 / var(--tw-text-opacity));
 }
 .ddoc .text-TypeAlias {
   --tw-text-opacity: 1;
-  color: rgb(164 71 140/var(--tw-text-opacity));
+  color: rgb(164 71 140 / var(--tw-text-opacity));
 }
 .ddoc .text-Variable {
   --tw-text-opacity: 1;
-  color: rgb(126 87 192/var(--tw-text-opacity));
+  color: rgb(126 87 192 / var(--tw-text-opacity));
 }
 .ddoc .text-abstract {
   --tw-text-opacity: 1;
-  color: rgb(12 175 198/var(--tw-text-opacity));
+  color: rgb(12 175 198 / var(--tw-text-opacity));
 }
 .ddoc .text-deprecated {
   --tw-text-opacity: 1;
-  color: rgb(220 38 38/var(--tw-text-opacity));
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 .ddoc .text-new {
   --tw-text-opacity: 1;
-  color: rgb(123 97 255/var(--tw-text-opacity));
+  color: rgb(123 97 255 / var(--tw-text-opacity));
 }
 .ddoc .text-optional {
   --tw-text-opacity: 1;
-  color: rgb(12 175 198/var(--tw-text-opacity));
+  color: rgb(12 175 198 / var(--tw-text-opacity));
 }
 .ddoc .text-other {
   --tw-text-opacity: 1;
-  color: rgb(87 83 78/var(--tw-text-opacity));
+  color: rgb(87 83 78 / var(--tw-text-opacity));
 }
-.ddoc .text-permissions, .ddoc .text-private {
+.ddoc .text-permissions,
+.ddoc .text-private {
   --tw-text-opacity: 1;
-  color: rgb(12 175 198/var(--tw-text-opacity));
+  color: rgb(12 175 198 / var(--tw-text-opacity));
 }
-.ddoc .text-protected, .ddoc .text-readonly {
+.ddoc .text-protected,
+.ddoc .text-readonly {
   --tw-text-opacity: 1;
-  color: rgb(123 97 255/var(--tw-text-opacity));
+  color: rgb(123 97 255 / var(--tw-text-opacity));
 }
 .ddoc .text-stone-500 {
   --tw-text-opacity: 1;
-  color: rgb(120 113 108/var(--tw-text-opacity));
+  color: rgb(120 113 108 / var(--tw-text-opacity));
 }
-.ddoc .text-unstable, .ddoc .text-writeonly {
+.ddoc .text-unstable,
+.ddoc .text-writeonly {
   --tw-text-opacity: 1;
-  color: rgb(123 97 255/var(--tw-text-opacity));
+  color: rgb(123 97 255 / var(--tw-text-opacity));
 }
 .ddoc .filter {
-  filter: var(--tw-blur)var(--tw-brightness)var(--tw-contrast)var(
-    --tw-grayscale
-  )var(--tw-hue-rotate)var(--tw-invert)var(--tw-saturate)var(--tw-sepia)var(
-    --tw-drop-shadow
-  );
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast)
+    var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate)
+    var(--tw-sepia) var(--tw-drop-shadow);
 }
 .ddoc summary::-webkit-details-marker {
   display: none;
@@ -452,31 +456,20 @@
 }
 .ddoc .link {
   --tw-text-opacity: 1;
-  transition-property:
-    color,
-    background-color,
-    border-color,
-    text-decoration-color,
-    fill,
-    stroke,
-    opacity,
-    box-shadow,
-    transform,
-    filter,
-    -webkit-backdrop-filter,
-    backdrop-filter,
-    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter, backdrop-filter, -webkit-backdrop-filter;
   transition-duration: 75ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .ddoc .link:hover {
   --tw-text-opacity: 1;
-  color: rgb(96 165 250/var(--tw-text-opacity));
+  color: rgb(96 165 250 / var(--tw-text-opacity));
 }
 .anchor {
   float: none;
   --tw-text-opacity: 1;
-  color: rgb(87 83 78/var(--tw-text-opacity));
+  color: rgb(87 83 78 / var(--tw-text-opacity));
   padding: 0.25rem;
   line-height: 1;
   display: none;
@@ -484,7 +477,7 @@
 
 .ddoc .deprecated > div:first-child {
   --tw-text-opacity: 1;
-  color: rgb(239 68 68/var(--tw-text-opacity));
+  color: rgb(239 68 68 / var(--tw-text-opacity));
   align-items: center;
   gap: 0.25rem;
   padding-top: 0.25rem;
@@ -498,7 +491,7 @@
 .ddoc .deprecated > div:nth-child(2) {
   --tw-border-opacity: 1;
   border-left-width: 4px;
-  border-color: rgb(252 165 165/var(--tw-border-opacity));
+  border-color: rgb(252 165 165 / var(--tw-border-opacity));
   margin-left: 0.25rem;
   padding-left: 0.5rem;
 }
@@ -513,7 +506,7 @@
 }
 .ddoc .symbolSubtitle .type {
   --tw-text-opacity: 1;
-  color: rgb(168 162 158/var(--tw-text-opacity));
+  color: rgb(168 162 158 / var(--tw-text-opacity));
   font-style: italic;
 }
 .ddoc .docEntry {
@@ -564,12 +557,12 @@
   min-height: 0;
   display: flex;
 }
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .ddoc .namespaceSection .namespaceItem {
     min-height: 4rem;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .ddoc .namespaceSection .namespaceItem {
     padding-right: 1rem;
   }
@@ -592,7 +585,7 @@
   .namespaceItemContent
   > a {
   --tw-text-opacity: 1;
-  color: rgb(120 113 108/var(--tw-text-opacity));
+  color: rgb(120 113 108 / var(--tw-text-opacity));
   text-decoration-line: line-through;
   text-decoration-color: #78716cb3;
   text-decoration-thickness: 2px;
@@ -607,14 +600,14 @@
   text-decoration-line: underline;
 }
 :is(
-  .ddoc .namespaceSection .namespaceItem .namespaceItemContent > a,
-  .ddoc
-    .namespaceSection
-    .namespaceItem
-    .namespaceItemContent
-    .namespaceItemContentSubItems
-    a
-):hover {
+    .ddoc .namespaceSection .namespaceItem .namespaceItemContent > a,
+    .ddoc
+      .namespaceSection
+      .namespaceItem
+      .namespaceItemContent
+      .namespaceItemContentSubItems
+      a
+  ):hover {
   text-decoration-line: none;
 }
 .ddoc .namespaceSection .namespaceItem .namespaceItemContent > a {
@@ -629,7 +622,7 @@
   .namespaceItemContent
   .namespaceItemContentDoc {
   --tw-text-opacity: 1;
-  color: rgb(87 83 78/var(--tw-text-opacity));
+  color: rgb(87 83 78 / var(--tw-text-opacity));
   margin-top: 0.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -662,7 +655,7 @@ ul.namespaceItemContentSubItems {
   -webkit-user-select: none;
   user-select: none;
   --tw-text-opacity: 1;
-  color: rgb(209 213 219/var(--tw-text-opacity));
+  color: rgb(209 213 219 / var(--tw-text-opacity));
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
@@ -709,9 +702,8 @@ ul.namespaceItemContentSubItems {
   flex-shrink: 0;
   width: 1.25rem;
   height: 1.25rem;
-  font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
-    Courier New, monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    Liberation Mono, Courier New, monospace;
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.25rem;
@@ -781,7 +773,7 @@ ul.namespaceItemContentSubItems {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-@media not all and (min-width: 640px) {
+@media not all and (min-width: 40rem) {
   .ddoc .toc .documentNavigation {
     display: none;
   }
@@ -819,7 +811,7 @@ ul.namespaceItemContentSubItems {
 }
 .ddoc .toc .documentNavigation > ul ul {
   --tw-text-opacity: 1;
-  color: rgb(134 135 137/var(--tw-text-opacity));
+  color: rgb(134 135 137 / var(--tw-text-opacity));
   font-size: 0.8rem;
   line-height: 1;
 }
@@ -831,7 +823,7 @@ ul.namespaceItemContentSubItems {
 }
 .ddoc .toc .documentNavigation > ul ul li a:hover {
   --tw-text-opacity: 1;
-  color: rgb(0 0 0/var(--tw-text-opacity));
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .ddoc .toc .documentNavigation a {
   text-overflow: ellipsis;
@@ -856,13 +848,13 @@ ul.namespaceItemContentSubItems {
   user-select: none;
   --tw-border-opacity: 1;
   border-width: 1px;
-  border-color: rgb(209 213 219/var(--tw-border-opacity));
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
   border-radius: 0.25rem;
   gap: 0.25rem;
   padding: 0.5rem 0.75rem;
   display: flex;
 }
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .ddoc .usages nav details > div {
     position: relative;
   }
@@ -871,15 +863,15 @@ ul.namespaceItemContentSubItems {
   z-index: 30;
   --tw-border-opacity: 1;
   border-width: 1px;
-  border-color: rgb(209 213 219/var(--tw-border-opacity));
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   margin-top: 0.375rem;
   padding: 0.5rem;
   display: block;
   position: absolute;
 }
-@media not all and (min-width: 768px) {
+@media not all and (min-width: 48rem) {
   .ddoc .usages nav details > div > div {
     border-left-width: 0;
     border-right-width: 0;
@@ -887,7 +879,7 @@ ul.namespaceItemContentSubItems {
     right: 0;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .ddoc .usages nav details > div > div {
     border-radius: 0.25rem;
     width: 12rem;
@@ -906,7 +898,7 @@ ul.namespaceItemContentSubItems {
 }
 .ddoc .usages nav details > div > div label:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251/var(--tw-bg-opacity));
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 .ddoc .usageContent > h3 {
   margin-bottom: 0.75rem;
@@ -916,7 +908,7 @@ ul.namespaceItemContentSubItems {
 }
 .ddoc .usageContent > div {
   --tw-text-opacity: 1;
-  color: rgb(104 104 104/var(--tw-text-opacity));
+  color: rgb(104 104 104 / var(--tw-text-opacity));
   font-size: 0.75rem;
   line-height: 1rem;
 }
@@ -926,11 +918,11 @@ ul.namespaceItemContentSubItems {
 .ddoc .usageContent pre.highlight {
   --tw-border-opacity: 1;
   border-width: 1px;
-  border-color: rgb(209 213 219/var(--tw-border-opacity));
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
-@media not all and (min-width: 768px) {
+@media not all and (min-width: 48rem) {
   .ddoc .usageContent pre.highlight {
     border-left-width: 0;
     border-right-width: 0;
@@ -975,7 +967,7 @@ ul.namespaceItemContentSubItems {
   line-height: 0.9em;
   display: inline;
 }
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .ddoc .breadcrumbs li {
     font-size: 1.25rem;
     line-height: 1.75rem;
@@ -992,7 +984,7 @@ ul.namespaceItemContentSubItems {
 }
 .ddoc .context_button:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(231 229 228/var(--tw-bg-opacity));
+  background-color: rgb(231 229 228 / var(--tw-bg-opacity));
 }
 .ddoc .see {
   list-style-type: disc;
@@ -1181,14 +1173,14 @@ ul.namespaceItemContentSubItems {
 }
 .border-gray-300 {
   --tw-border-opacity: 1;
-  border-color: rgb(209 213 219/var(--tw-border-opacity));
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 .bg-transparent {
   background-color: #0000;
 }
 .bg-white {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255/var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 .px-2 {
   padding-left: 0.5rem;
@@ -1219,11 +1211,9 @@ ul.namespaceItemContentSubItems {
 }
 .blur {
   --tw-blur: blur(8px);
-  filter: var(--tw-blur)var(--tw-brightness)var(--tw-contrast)var(
-    --tw-grayscale
-  )var(--tw-hue-rotate)var(--tw-invert)var(--tw-saturate)var(--tw-sepia)var(
-    --tw-drop-shadow
-  );
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast)
+    var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate)
+    var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 #topnav {
@@ -1231,7 +1221,8 @@ ul.namespaceItemContentSubItems {
   padding-left: 1rem;
 }
 
-.toc, #searchbar {
+.toc,
+#searchbar {
   flex-shrink: 0;
   min-width: 250px;
   max-width: 300px;
@@ -1246,23 +1237,23 @@ ul.namespaceItemContentSubItems {
   position: sticky;
   top: 0;
 }
-@media not all and (min-width: 1024px) {
+@media not all and (min-width: 64rem) {
   .toc {
     grid-row-start: 1;
   }
 }
-@media not all and (min-width: 640px) {
+@media not all and (min-width: 40rem) {
   .toc {
     display: none;
   }
 }
-@media (min-width: 640px) {
+@media (min-width: 40rem) {
   .toc {
     flex-direction: column;
     display: flex;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .toc {
     grid-column: span 1/-1;
   }
@@ -1270,7 +1261,7 @@ ul.namespaceItemContentSubItems {
 .toc > div {
   max-height: 100%;
 }
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .toc > div {
     overflow-y: auto;
   }
@@ -1280,7 +1271,7 @@ ul.namespaceItemContentSubItems {
 }
 .hover\:bg-stone-100:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(245 245 244/var(--tw-bg-opacity));
+  background-color: rgb(245 245 244 / var(--tw-bg-opacity));
 }
 
 a.anchor-link {
