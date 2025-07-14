@@ -89,7 +89,6 @@ p {
   display: inline-block;
   position: relative;
   padding: 0.25rem 0.75rem;
-  margin: 0 0.5rem;
   border-radius: 0.25rem;
   border: 1px solid transparent;
   transition: all 200ms ease-in-out;

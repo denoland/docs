@@ -36,7 +36,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
     >
       <div
         class={`px-4 sm:px-5 md:px-0 w-full mx-auto ${
-          isExampleScript ? "max-w-[70rem]" : "max-w-[40rem]"
+          isExampleScript ? "max-w-6xl" : "max-w-[40rem]"
         }`}
       >
         <article class="mx-auto">

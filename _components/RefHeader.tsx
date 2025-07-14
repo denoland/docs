@@ -5,7 +5,7 @@ export default function Header({ currentUrl }: { currentUrl: string }) {
       {reference &&
         (
           <nav className="refheader">
-            <ul className="flex">
+            <ul className="flex w-full max-w-6xl mx-auto flex items-center gap-2">
               <li>
                 <a
                   className="blocklink refheader-link"

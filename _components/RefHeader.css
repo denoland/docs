@@ -14,6 +14,11 @@
   white-space: nowrap;
   font-size: clamp(0.875rem, 1vw + 0.5rem, 0.75rem);
 }
+@media (min-width: 74rem) {
+  .refheader ul li:first-child a {
+    margin-inline-start: -0.75rem;
+  }
+}
 
 .refheader-link[data-active="true"] {
   color: hsl(var(--primary));
