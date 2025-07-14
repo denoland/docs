@@ -4,20 +4,15 @@ import { HeaderAnchor } from "../_components/HeaderAnchor.tsx";
 import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
   type: "json",
 };
-import { VNode } from "npm:preact";
 
 type ArgType = {
   name: string;
-  help: string;
-  short:
-    | string
-    | number
-    | bigint
-    | boolean
-    | object
-    | VNode<any>
-    | null
-    | undefined;
+  short: string | null;
+  long: string;
+  required: boolean;
+  help: string | null;
+  help_heading: string | null;
+  usage: string;
 };
 
 const ANSI_RE = ansiRegex();
@@ -45,7 +40,7 @@ function flagsToInlineCode(text: string): string {
 export default function renderCommand(
   commandName: string,
   helpers: Lume.Helpers,
-): { rendered: any; toc: TableOfContentsItem_[] } {
+): { rendered: JSX.Element; toc: TableOfContentsItem_[] } {
   const command = CLI_REFERENCE.subcommands.find((command) =>
     command.name === commandName
   )!;
@@ -144,7 +139,7 @@ export default function renderCommand(
         const id = heading.toLowerCase().replace(/\s/g, "-");
 
         const renderedFlags = flags.toSorted((a: ArgType, b: ArgType) =>
-          a.name.localeCompare(b.name)
+          a.long.localeCompare(b.long)
         ).map((flag: ArgType) => renderOption(id, flag, helpers));
 
         toc.push({
@@ -172,7 +167,7 @@ export default function renderCommand(
 }
 
 function renderOption(group: string, arg: ArgType, helpers: Lume.Helpers) {
-  const id = `${group}-${arg.name}`;
+  const id = `${group}-${arg.long}`;
 
   let docsLink = null;
   // Add null check for arg.help
@@ -195,8 +190,8 @@ function renderOption(group: string, arg: ArgType, helpers: Lume.Helpers) {
       <h3 id={id}>
         <code>
           {docsLink
-            ? <a href={docsLink}>{"--" + arg.name}</a>
-            : ("--" + arg.name)}
+            ? <a href={docsLink}>{"--" + arg.long}</a>
+            : ("--" + arg.long)}
         </code>{" "}
         <HeaderAnchor id={id} />
       </h3>
