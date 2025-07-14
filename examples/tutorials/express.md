@@ -73,21 +73,23 @@ When you initialized the project, Deno set up a task which will run the main.ts
 file, you can see it in the `deno.json` file. Update the `dev` task to include
 the [`--allow-net`](/runtime/fundamentals/security/#network-access) flag:
 
-````jsonc
+```jsonc
 {
   "scripts": {
     "dev": "deno run --allow-net main.ts"
   }, 
   ...
 }
+```
 
-This will allow the project to make network requests. You can [read more about permissions flags](/runtime/fundamentals/security/).
+This will allow the project to make network requests. You can
+[read more about permissions flags](/runtime/fundamentals/security/).
 
 Now you can run the server with:
 
 ```sh
 deno run dev
-````
+```
 
 If you visit `localhost:8000` in your browser, you should see:
 
