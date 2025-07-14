@@ -1,15 +1,23 @@
-header {
+.header-wrapper {
+  width: 100%;
+  height: var(--header-height);
   position: sticky;
   top: 0;
+  background-color: hsl(var(--background-primary));
+  border-bottom: 1px solid hsl(var(--foreground-tertiary));
+  z-index: 100;
+}
+
+header {
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem;
-  padding-left: 3rem;
-  border-bottom: 1px solid hsl(var(--foreground-tertiary));
-  background-color: hsl(var(--background-primary));
-  z-index: 100;
+  padding-inline: 1rem;
+  height: 100%;
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
 
   nav {
     display: none;
@@ -54,7 +62,6 @@ header {
 
 @media (min-width: 64rem) {
   header {
-    padding-left: 1rem;
     nav {
       display: flex;
     }
@@ -62,6 +69,12 @@ header {
   .header-nav-link[data-active] {
     color: hsl(var(--primary));
     position: relative;
+  }
+}
+
+@media (min-width: 72rem) {
+  header {
+    padding: 0;
   }
 }
 

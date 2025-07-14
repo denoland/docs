@@ -1,6 +1,5 @@
 footer {
-  margin-top: 2rem;
-  padding: 3rem;
+  padding: 3rem 1rem 1rem;
   border-top: 1px solid hsl(var(--foreground-tertiary));
 }
 
@@ -43,18 +42,20 @@ footer {
   color: hsl(var(--foreground-secondary));
 }
 
-@media screen and (min-width: 31.25rem) {
+@media (min-width: 40rem) {
   footer {
-    padding: 2rem 5vw;
+    padding-inline: 2rem;
   }
+}
 
+@media (min-width: 48rem) {
   .footer-nav {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    max-width: 1000px;
-    column-gap: clamp(4rem, 5vw, 65px);
-    row-gap: 4rem;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 72rem;
+    row-gap: 2rem;
     margin: 0 auto;
   }
 }

@@ -3,6 +3,7 @@ export function deleteBackticks(str?: string) {
 }
 
 export default function Layout(data: Lume.Data) {
+  const isReference = data.url.startsWith("/api/");
   const section = data.url.split("/").filter(Boolean)[0];
   const description = data.description ||
     "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
@@ -69,7 +70,11 @@ export default function Layout(data: Lume.Data) {
       <body
         data-services-page={Boolean(isServicesPage)}
       >
-        <data.comp.Header currentSection={section} />
+        <data.comp.Header
+          currentSection={section}
+          currentUrl={data.url}
+          data={data}
+        />
         <data.comp.RefHeader currentUrl={data.url} />
         <data.comp.SubNav
           data={data}
@@ -82,8 +87,11 @@ export default function Layout(data: Lume.Data) {
             currentUrl={data.url}
           />
           {data.children}
-          <data.comp.Footer />
+          {!isReference && (
+            <data.comp.TableOfContents toc={data.toc} data={data} />
+          )}
         </div>
+        <data.comp.Footer />
       </body>
     </html>
   );

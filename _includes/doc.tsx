@@ -35,7 +35,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
       class={isExampleScript ? "examples-content" : "content"}
     >
       <div
-        class={`px-4 sm:px-5 md:px-6 w-full mx-auto 2xl:px-0 ${
+        class={`px-4 sm:px-5 md:px-0 w-full mx-auto ${
           isExampleScript ? "max-w-[70rem]" : "max-w-[40rem]"
         }`}
       >
@@ -77,7 +77,6 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
         </article>
         {!isReference && <data.comp.Feedback file={file} />}
       </div>
-      {!isReference && <data.comp.TableOfContents toc={data.toc} data={data} />}
 
       {(isReference && data.children.props.data.toc_ctx) && (
         <data.comp.RefToc
