@@ -13,13 +13,13 @@ export default function (
 
   return (
     <>
-      <div className="nav" data-section={currentSection} id="nav">
+      <aside className="nav" data-section={currentSection} id="nav">
         <data.comp.MainNav currentSection={currentSection} />
         <data.comp.SecondaryNav
           sectionData={sectionData}
           currentUrl={currentUrl}
         />
-      </div>
+      </aside>
     </>
   );
 }

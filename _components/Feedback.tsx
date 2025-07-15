@@ -19,7 +19,6 @@ export default function Feedback({ file }: { file: string | undefined }) {
             <form aria-live="polite" id="feedback-form">
               <div
                 id="feedback-form__content"
-                aria-labelledby="feedback-title"
                 class="grid grid-cols-1 transition-all duration-300 grid-rows-[max-content_0fr] w-full items-start gap-2 overflow-hidden"
               >
                 <div className="flex flex-wrap gap-2 items-center">

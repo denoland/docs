@@ -14,9 +14,10 @@
 .sub-nav-heading-link,
 .sub-nav-heading-text {
   display: block;
-  padding: 0.5rem 0;
+  padding: 0.625rem 0;
   color: hsl(var(--foreground-secondary));
   font-weight: bold;
+  line-height: 1;
 }
 
 .sub-nav-heading-link:hover {
@@ -42,7 +43,8 @@ li:has(.sub-nav-toggle) {
 
 .sub-nav-link[data-active="true"],
 .sub-nav-link:hover,
-.sub-nav-toggle:hover {
+.sub-nav-toggle:hover,
+li:has(.sub-nav-toggle:hover) {
   background-color: hsl(var(--background-secondary));
   border-color: hsl(var(--foreground-secondary));
 }
@@ -63,7 +65,7 @@ li:has(.sub-nav-toggle) {
     top: -0.25rem;
     background: url(./img/chevron.svg) no-repeat center;
     transform: translateY(50%);
-    transition: all 0.1s ease-in;
+    transition: transform 0.1s ease-in;
   }
 }
 
@@ -82,7 +84,7 @@ li:has(.sub-nav-toggle) {
 li:has(> .sub-nav-toggle) {
   display: grid;
   grid-template-rows: max-content 0fr;
-  transition: all 0.3s ease-in-out;
+  transition: grid 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 li:has(> .sub-nav-toggle .sub-nav-toggle-checkbox:checked),

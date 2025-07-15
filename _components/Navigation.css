@@ -11,6 +11,10 @@
   width: 100%;
   background: var(--background-raw);
   opacity: 0;
+  padding: 1rem;
+  overflow: auto;
+  font-size: 1rem;
+  font-size: 0.8125rem;
 }
 
 body:has(.refheader) .nav {
@@ -27,12 +31,13 @@ body:has(.refheader) .nav {
     overflow-y: auto;
     width: auto;
     min-width: 17rem;
-    font-size: 0.8rem;
     overflow-y: auto;
     scrollbar-width: thin;
     z-index: 3;
     transform: translateX(0) !important;
     opacity: 1 !important;
+    font-size: 0.8125rem;
+    padding: 0;
   }
 
   body:has(.refheader) .nav {

@@ -30,12 +30,12 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   }
 
   return (
-    <div
+    <main
       id="content"
       class={isExampleScript ? "examples-content" : "content"}
     >
       <div
-        class={`px-4 sm:px-6 md:px-0 md:pr-4 w-full ${
+        class={`w-full ${
           isExampleScript ? "max-w-7xl lg:px-0" : "lg:max-w-2xl"
         }`}
       >
@@ -86,6 +86,6 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             .document_navigation_str}
         />
       )}
-    </div>
+    </main>
   );
 }

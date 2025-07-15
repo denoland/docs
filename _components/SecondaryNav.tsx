@@ -8,11 +8,11 @@ export default function (data: Lume.Data) {
     return (
       <>
         {sectionData.map((nav: any) => (
-          <nav aria-labelledby="section-navigation">
+          <nav>
             <ul className="sub-nav">
               {nav.items?.map((item: any) => (
                 <li key={item.href}>
-                  {(isDenoAPI && item.name === "Uncategorized") ? <></> : (
+                  {(isDenoAPI && item.name === "Uncategorized") ? null : (
                     <a
                       href={item.href}
                       className="sub-nav-link"
@@ -34,7 +34,7 @@ export default function (data: Lume.Data) {
   return (
     <>
       {sectionData.map((nav: any) => (
-        <nav aria-labelledby="section-navigation">
+        <nav>
           <h2 className="sub-nav-heading">
             {nav.href && nav.href.length > 0
               ? (

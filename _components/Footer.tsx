@@ -1,7 +1,7 @@
 export default function Footer_new() {
   return (
     <footer>
-      <nav aria-labelledby="footer-navigation" className="footer-nav">
+      <nav className="footer-nav">
         {data.map((category) => (
           <section className="footer-section">
             <h3 class="footer-section-heading">{category.title}</h3>
