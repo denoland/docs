@@ -43,6 +43,19 @@ Before saving, use the "Test Connection" button to verify your settings work
 correctly. Fix any connection issues, give your database instance a memorable
 name, and click "Save" to create it.
 
+#### Using Connection Strings
+
+Instead of filling out individual fields, you can paste a connection string like
+`postgresql://username:password@hostname:port/database` and the form will
+automatically parse it and fill in the appropriate fields.
+
+**Common formats include:**
+
+- PostgreSQL: `postgresql://user:pass@localhost:5432/dbname` or
+  `postgres://user:pass@localhost:5432/dbname`
+- MySQL: `mysql://user:pass@localhost:3306/dbname`
+- MongoDB: `mongodb://user:pass@localhost:27017/dbname`
+
 ### Connecting an App to a Database
 
 Once you have a database instance, you can assign it to your apps. From the
@@ -125,16 +138,6 @@ different databases. The same `new Pool()` code works in production (connecting
 to `myappid-production`), git branches (connecting to `myappid--branch-name`),
 and previews (connecting to `myappid-preview`).
 
-### Development Tips
-
-Use env variables to configure the connection to your local database. This way
-the code remains the same also un your local development environment.
-
-Use connection pooling for better performance - libraries like `pg` handle this
-automatically, but you can configure pool size based on your app's needs. Always
-handle database connection errors gracefully using try/catch blocks around
-database operations, and log errors for debugging.
-
 ### Migration and Schema Management
 
 Since each environment has its own database, you can safely test migrations in a
@@ -156,21 +159,6 @@ await pool.query(`
   )
 `);
 ```
-
-## Connection Strings
-
-### Using Connection Strings
-
-Instead of filling out individual fields, you can paste a connection string like
-`postgresql://username:password@hostname:port/database` and the form will
-automatically parse it and fill in the appropriate fields.
-
-**Common formats include:**
-
-- PostgreSQL: `postgresql://user:pass@localhost:5432/dbname` or
-  `postgres://user:pass@localhost:5432/dbname`
-- MySQL: `mysql://user:pass@localhost:3306/dbname`
-- MongoDB: `mongodb://user:pass@localhost:27017/dbname`
 
 ## SSL Configuration
 
@@ -276,6 +264,16 @@ operations or checking your database server logs for more detailed information.
 
 ## Best Practices
 
+### Development Tips
+
+Use env variables to configure the connection to your local database. This way
+the code remains the same also un your local development environment.
+
+Use connection pooling for better performance - libraries like `pg` handle this
+automatically, but you can configure pool size based on your app's needs. Always
+handle database connection errors gracefully using try/catch blocks around
+database operations, and log errors for debugging.
+
 ### Database Instance Management
 
 Use descriptive names for your database instances and test connections before
@@ -306,30 +304,37 @@ releases.
 
 ## Frequently Asked Questions
 
-**Q: Can multiple apps share the same database instance?** A: Yes! Multiple apps
-can be assigned to the same database instance. Each app gets its own isolated
-databases within that instance.
+**Q: Can multiple apps share the same database instance?**
 
-**Q: What happens to my data when I remove an app assignment?** A: The databases
-remain on your database server. Only the connection between your app and the
-database instance is removed.
+Yes! Multiple apps can be assigned to the same database instance. Each app gets
+its own isolated databases within that instance.
 
-**Q: Can I use the same database for multiple environments?** A: By default,
-each environment (production, branch, preview) gets its own database to ensure
-isolation and prevent data conflicts. However, you can always use the options in
-our database library to customize the database your code connects to.
+**Q: What happens to my data when I remove an app assignment?**
 
-**Q: How do I access my databases directly?** A: You can connect directly to
-your database server using the connection details you provided. Use the database
-names shown in the Deno Deploy dashboard.
+The databases remain on your database server. Only the connection between your
+app and the database instance is removed.
 
-**Q: Can I change database connection details?** A: Yes, click "Edit" on any
-database instance to update connection details. Test the connection before
-saving to ensure it works.
+**Q: Can I use the same database for multiple environments?**
 
-**Q: How do I delete a database instance?** A: First remove all app assignments,
-then click "Delete" on the database instance. This only removes the connection
-from Deno Deploy - your actual database server is not affected.
+By default, each environment (production, branch, preview) gets its own database
+to ensure isolation and prevent data conflicts. However, you can always use the
+options in our database library to customize the database your code connects to.
+
+**Q: How do I access my databases directly?**
+
+You can connect directly to your database server using the connection details
+you provided. Use the database names shown in the Deno Deploy dashboard.
+
+**Q: Can I change database connection details?**
+
+Yes, click "Edit" on any database instance to update connection details. Test
+the connection before saving to ensure it works.
+
+**Q: How do I delete a database instance?**
+
+First remove all app assignments, then click "Delete" on the database instance.
+This only removes the connection from Deno Deploy - your actual database server
+is not affected.
 
 ## Getting Help
 
