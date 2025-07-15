@@ -1,14 +1,15 @@
-.hamburger-checkbox {
-  display: none;
-}
-
 .hamburger-label {
-  height: 100%;
-  padding-block: 1.5rem;
+  height: 2rem;
+  padding: 0.5rem;
   width: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 0.25rem;
+}
+
+.hamburger-label:focus-within {
+  outline: 2px solid currentColor;
 }
 
 .hamburger-icon {
@@ -25,16 +26,21 @@
   transition: all 0.3s ease;
 }
 
-.hamburger-label:has(+ .hamburger-checkbox:checked) {
+.hamburger-label:has(.hamburger-checkbox:checked) {
   .hamburger-bar--top {
-    transform: translate(0, 6.5px) rotate(45deg);
+    transform: translate(0, 7px) rotate(45deg);
   }
   .hamburger-bar--middle {
     opacity: 0;
   }
   .hamburger-bar--bottom {
-    transform: translate(0, -6.5px) rotate(-45deg);
+    transform: translate(0, -7px) rotate(-45deg);
   }
+}
+
+body:has(.hamburger-label .hamburger-checkbox:checked) .nav {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 @media screen and (min-width: 48rem) {

@@ -70,6 +70,12 @@ export default function Layout(data: Lume.Data) {
       <body
         data-services-page={Boolean(isServicesPage)}
       >
+        <a
+          href="#content"
+          class="opacity-0 p-2 px-4 bg-background-primary border-2 border-foreground-secondary transition-transform duration-150     ease-out absolute top-2 left-2 -translate-y-full focus:opacity-100 focus:translate-y-0 z-[500]"
+        >
+          Skip to main content
+        </a>
         <data.comp.Header
           currentSection={section}
           currentUrl={data.url}
