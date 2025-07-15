@@ -47,8 +47,6 @@ automatically parse it and fill in the appropriate fields.
 
 - PostgreSQL: `postgresql://user:pass@localhost:5432/dbname` or
   `postgres://user:pass@localhost:5432/dbname`
-- MySQL: `mysql://user:pass@localhost:3306/dbname`
-- MongoDB: `mongodb://user:pass@localhost:27017/dbname`
 
 ### Connecting an App to a Database
 
