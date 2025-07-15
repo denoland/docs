@@ -1,6 +1,6 @@
 ---
 title: Databases
-description: Connect to external database intances and integrate your applications and their environments seamlessly.
+description: Connect to external database instances and integrate your applications and their environments seamlessly.
 ---
 
 :::info
@@ -11,27 +11,27 @@ Deploy Classic documentation? [View it here](/deploy/).
 :::
 
 The databases feature allows you to connect your applications to external
-database servers. When you assign a database to your app, Deno Deploy
+database servers. When you assign a database to an app, Deno Deploy
 automatically provisions separate databases for each deployment environment -
-production, git branches, and preview timelines.
+production, Git branches, and preview timelines.
 
 Your code automatically connects to the correct database for each environment
 without requiring timeline detection or manual database name handling. Simply
-use your favorite database driver to connect, without configuring any connection
-information - it will be picked up automatically via environment variables.
+use your favorite database driver to connect - Deno Deploy handles the
+connection details automatically via environment variables.
 
 ## Getting Started
 
 ### Adding a Database
 
-Start by navigating to your organization dashboard and clicking "Databases" in
-the navigation bar. Click the "Add Database" button and choose your database
-engine - PostgreSQL is currently supported with others planned.
+Navigate to your organization dashboard and click "Databases" in the navigation
+bar. Click "Add Database" and choose your database engine - PostgreSQL is
+currently supported with others planned.
 
 You can either enter connection details manually or paste a connection string to
-automatically fill the form. The connection details include your database server
-hostname, port (usually 5432 for PostgreSQL), username, password, and optionally
-an SSL certificate if needed.
+automatically populate the form. Connection details include your database server
+hostname, port (usually 5432 for PostgreSQL), username, password, and
+optionally an SSL certificate if needed.
 
 Before saving, use the "Test Connection" button to verify your settings work
 correctly. Fix any connection issues, give your database instance a memorable
@@ -40,10 +40,10 @@ name, and click "Save" to create it.
 #### Using Connection Strings
 
 Instead of filling out individual fields, you can paste a connection string like
-`postgresql://username:password@hostname:port/database` and the form will
-automatically parse it and fill in the appropriate fields.
+`postgresql://username:password@hostname:port/database` to automatically
+populate the form fields.
 
-**Common formats include:**
+**Common formats:**
 
 - PostgreSQL: `postgresql://user:pass@localhost:5432/dbname` or
   `postgres://user:pass@localhost:5432/dbname`
@@ -51,23 +51,26 @@ automatically parse it and fill in the appropriate fields.
 ### Connecting an App to a Database
 
 Once you have a database instance, you can assign it to your apps. From the
-databases list, click "Assign" next to your database and select the app you want
-to connect from the dropdown.
+databases list, click "Assign" next to your database and select the app from
+the dropdown.
 
-Deno Deploy will automatically create separate databases for each timeline.
-Production deployments use `{app-id}-production`, git branches get
-`{app-id}--{branch-name}`, and preview deployments use `{app-id}-preview`. This
-ensures your production data stays safe while developing and testing. You can
-monitor the provisioning process and watch the status change to "Connected". If
-there are any errors, use the "Fix" button to retry.
+Deno Deploy automatically creates separate databases for each timeline:
+
+- Production deployments use `{app-id}-production`
+- Git branches get `{app-id}--{branch-name}`
+- Preview deployments use `{app-id}-preview`
+
+This ensures your production data stays safe while developing and testing. You
+can monitor the provisioning process and watch the status change to "Connected".
+If there are any errors, use the "Fix" button to retry.
 
 ## Using Databases in Your Code
 
 ### Zero Configuration Required
 
 Once you've assigned a database to your app, connecting to it from your code is
-incredibly simple. You don't need to configure connection strings, set up
-environment variables, or manage credentials - Deno Deploy handles all of this
+simple. You don't need to configure connection strings, set up environment
+variables, or manage credentials - Deno Deploy handles all of this
 automatically.
 
 Simply use your favorite database library as you normally would, and it will
@@ -76,20 +79,20 @@ automatically connect to the correct database for your current environment.
 ### Automatic Environment Variables
 
 Deno Deploy automatically injects standard database environment variables into
-your app's runtime environment. For PostgreSQL these include `PGHOST`, `PGPORT`,
-`PGDATABASE` (automatically selected for your environment), `PGUSER`,
+your app's runtime environment. For PostgreSQL, these include `PGHOST`,
+`PGPORT`, `PGDATABASE` (automatically selected for your environment), `PGUSER`,
 `PGPASSWORD`, and `PGSSLMODE`. These variables follow standard conventions, so
-most database libraries will automatically detect and use them without any
+most database libraries automatically detect and use them without any
 configuration.
 
 ### PostgreSQL Example
 
-Here's how simple it is to connect to PostgreSQL in your Deno Deploy app:
+Here's how to connect to PostgreSQL in your Deno Deploy app:
 
 ```typescript
 import { Pool } from "npm:pg";
 
-// That's it! No configuration needed
+// No configuration needed - Deno Deploy handles this automatically
 const pool = new Pool();
 
 Deno.serve(() => {
@@ -105,21 +108,20 @@ Deno.serve(() => {
 ### How It Works
 
 Deno Deploy automatically detects which environment your code is running in
-(production, git branch, or preview), then selects the appropriate database
+(production, Git branch, or preview), then selects the appropriate database
 based on that environment. The correct connection details are automatically set
 as environment variables, and your database library reads these standard
 environment variables automatically.
 
-Your code runs exactly the same way across all environments, but connects to
-different databases. The same `new Pool()` code works in production (connecting
-to `myappid-production`), git branches (connecting to `myappid--branch-name`),
-and previews (connecting to `myappid-preview`).
+Your code runs the same way across all environments but connects to different
+databases. The same `new Pool()` code works in production (connecting to
+`myappid-production`), Git branches (connecting to `myappid--branch-name`), and
+previews (connecting to `myappid-preview`).
 
 ### Migration and Schema Management
 
 Since each environment has its own database, you can safely test migrations in a
-Git branch without risking changes to the production or other branch-specific
-databases.
+Git branch without affecting production or other branch-specific databases.
 
 ```typescript
 // Run migrations for the current environment's database
@@ -127,7 +129,7 @@ import { Pool } from "npm:pg";
 
 const pool = new Pool();
 
-// This will run against the correct database for each environment
+// This runs against the correct database for each environment
 await pool.query(`
   CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -145,24 +147,23 @@ how certificates are handled depending on your database provider.
 ### Certificate Types
 
 **Trusted Root CA Certificates:** Some database providers use certificates
-signed by trusted root Certificate Authorities (like Let's Encrypt, DigiCert,
-etc.). These work automatically without any configuration.
+signed by trusted root Certificate Authorities (like Let's Encrypt or DigiCert).
+These work automatically without any configuration.
 
-**Private Root CA Certificates:** Some database providers use self-signed
-certificates or private Certificate Authorities. In these cases, you need to
-upload the CA certificate that was used to sign your database's certificate.
+**Private Root CA Certificates:** Some providers use self-signed certificates or
+private Certificate Authorities. In these cases, you need to upload the CA
+certificate that was used to sign your database's certificate.
 
 ### Certificate Configuration
 
-**For databases with certificates signed by trusted root CA:** No certificate
-upload is needed and SSL connections work automatically. Some managed database
-services fall into this category.
+**For databases with trusted root CA certificates:** No certificate upload is
+needed and SSL connections work automatically. Some managed database services
+fall into this category.
 
-**For databases with certificates signed by private root CA:** AWS RDS users can
-click the "Use AWS Certificate Bundle" button to automatically configure AWS RDS
-certificates without having to download them from AWS documentation. Other
-providers require you to upload the specific CA certificate provided by your
-database provider.
+**For databases with private root CA certificates:** AWS RDS users can click
+"Use AWS Certificate Bundle" to automatically configure AWS RDS certificates
+without downloading them from AWS documentation. Other providers require you to
+upload the specific CA certificate provided by your database provider.
 
 ### Common Providers
 
@@ -176,7 +177,7 @@ download from your Google Cloud Console.
 
 **Self-Hosted Databases** require you to upload your custom CA certificate if
 using self-signed certificates, or you can configure your database to use
-trusted root CA certificates.
+publicly trusted CA certificates.
 
 ## Database Management
 
@@ -190,10 +191,10 @@ and overall health and connection status.
 
 The dashboard shows clear status indicators:
 
-- **🟢 Connected** means all databases are ready and working
-- **🟡 Creating** means databases are being provisioned
-- **🔴 Error** means some databases failed to create
-- **⚪ Unassigned** means no apps are using this database yet.
+- **🟢 Connected** - All databases are ready and working
+- **🟡 Creating** - Databases are being provisioned
+- **🔴 Error** - Some databases failed to create
+- **⚪ Unassigned** - No apps are using this database yet
 
 ### Managing App Assignments
 
@@ -218,33 +219,51 @@ releases.
 
 ### Connection Issues
 
-**"Connection failed" errors** typically indicate incorrect hostname and port,
-wrong username and password, database server not running, or network
-connectivity issues. Verify all connection details and ensure your database
-server is accessible.
+**"Connection failed" errors** typically indicate:
+
+- Incorrect hostname and port
+- Wrong username and password
+- Database server not running
+- Network connectivity issues
+
+Verify all connection details and ensure your database server is accessible.
 
 **"Permission denied" errors** mean the database user lacks necessary
-permissions. Verify the database user has necessary permissions, can create
+permissions. Verify the database user has the required permissions, can create
 databases, and can connect from Deno Deploy's servers.
 
-**SSL connection issues** if your database instance uses a trusted root CA,
-verify that SSL connectivity is configured correctly on your database server. If
-it uses a private root CA, ensure you've uploaded the correct CA certificate.
-Also make sure your database server supports SSL connections and verify the
-certificate hasn't expired.
+**SSL connection issues** occur when:
+
+- Database instance uses a trusted root CA, but SSL connectivity is not
+  configured correctly on your database server
+- Database instance uses a private root CA, but you haven't uploaded the correct
+  CA certificate
+- Database server doesn't support SSL connections
+- Certificate has expired
+
+Check your database server's SSL configuration and certificate validity.
 
 ### Provisioning Issues
 
-**"Database creation failed"** usually means the database user lacks CREATE
-privileges, there's insufficient disk space, or there are naming conflicts with
-existing databases. Check your database user permissions and server capacity.
+**"Database creation failed"** usually indicates:
 
-**"Timeout" errors** suggest network connectivity issues between Deno Deploy and
-your database server, or your database server is slow to respond. Check server
-load and performance.
+- Database user lacks CREATE privileges
+- Insufficient disk space
+- Naming conflicts with existing databases
 
-**"Error" status** can be resolved by using the "Fix" button to retry failed
-operations or checking your database server logs for more detailed information.
+Check your database user permissions and server capacity.
+
+**"Timeout" errors** suggest:
+
+- Network connectivity issues between Deno Deploy and your database server
+- Database server is slow to respond
+
+Check server load and performance.
+
+**"Error" status** can be resolved by:
+
+- Using the "Fix" button to retry failed operations
+- Checking your database server logs for more detailed information
 
 ## Frequently Asked Questions
 
@@ -261,8 +280,8 @@ app and the database instance is removed.
 **Q: Can I use the same database for multiple environments?**
 
 By default, each environment (production, branch, preview) gets its own database
-to ensure isolation and prevent data conflicts. However, you can always use the
-options in our database library to customize the database your code connects to.
+to ensure isolation and prevent data conflicts. However, you can customize the
+database your code connects to using options in your database library.
 
 **Q: How do I access my databases directly?**
 
