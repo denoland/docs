@@ -56,7 +56,7 @@ Once you have a database instance, you can assign it to your apps. From the
 databases list, click "Assign" next to your database and select the app you want
 to connect from the dropdown.
 
-Deno Deploy will automatically create separate databases for each environment.
+Deno Deploy will automatically create separate databases for each timeline.
 Production deployments use `{app-id}-production`, git branches get
 `{app-id}--{branch-name}`, and preview deployments use `{app-id}-preview`. This
 ensures your production data stays safe while developing and testing. You can
