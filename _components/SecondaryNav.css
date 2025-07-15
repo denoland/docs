@@ -1,52 +1,58 @@
 .sub-nav-heading {
-  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-weight: bold;
 }
 
 .sub-nav {
   padding: 0;
-  margin: 0.5rem 0;
+  margin: 0 0 1.25rem;
   list-style: none;
-  min-width: 15.625rem;
+  min-width: 14rem;
 }
 
-.sub-nav-heading-link {
-  display: block;
-  padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid hsl(var(--foreground-tertiary));
-  color: hsl(var(--foreground-secondary));
-  font-weight: bold;
-  &:hover {
-    text-decoration: none;
-  }
-}
-
+.sub-nav-heading-link,
 .sub-nav-heading-text {
   display: block;
-  padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid hsl(var(--foreground-tertiary));
+  padding: 0.5rem 0;
   color: hsl(var(--foreground-secondary));
   font-weight: bold;
 }
 
-.sub-nav-heading-link[data-active], .sub-nav-heading-link:hover {
+.sub-nav-heading-link:hover {
+  text-decoration: none;
+}
+
+.sub-nav-heading-link[data-active],
+.sub-nav-heading-link:hover {
   background-color: hsl(var(--background-secondary));
+  padding-left: 0.25rem;
 }
 
 .sub-nav-link {
   display: block;
+  padding: 0.25rem 0.75rem;
+  margin: 0;
 }
 
-.sub-nav-link[data-active="true"] {
+.sub-nav-link,
+li:has(.sub-nav-toggle) {
+  border-left: 1px solid hsl(var(--foreground-tertiary));
+}
+
+.sub-nav-link[data-active="true"],
+.sub-nav-link:hover,
+.sub-nav-toggle:hover {
   background-color: hsl(var(--background-secondary));
-  &:after {
-    display: none;
-  }
+  border-color: hsl(var(--foreground-secondary));
 }
 
 .sub-nav-toggle {
   display: block;
   position: relative;
-  font-family: inherit;
+  font: inherit;
+  padding: 0.25rem 0.75rem;
+
   &::after {
     content: "";
     display: block;
@@ -61,21 +67,31 @@
   }
 }
 
-.sub-nav-toggle-checkbox {
-  display: none;
-}
-
 .tertiary-nav {
-  max-height: 0;
-  margin: 0 1rem;
-  overflow-y: clip;
+  margin: 0;
+  margin-inline-start: 1rem;
+  overflow-y: hidden;
 }
 
 .sub-nav-toggle-checkbox:checked + .tertiary-nav {
   height: auto;
   max-height: fit-content;
+  padding-block-end: 1rem;
 }
 
-.sub-nav-toggle:has(+ .sub-nav-toggle-checkbox:checked)::after {
+li:has(> .sub-nav-toggle) {
+  display: grid;
+  grid-template-rows: max-content 0fr;
+  transition: all 0.3s ease-in-out;
+}
+
+li:has(> .sub-nav-toggle .sub-nav-toggle-checkbox:checked),
+li:has(> .sub-nav-toggle + ul:focus-within) {
+  grid-template-rows: max-content 1fr;
+  padding-bottom: 1rem;
+}
+
+.sub-nav-toggle:has(.sub-nav-toggle-checkbox:checked)::after,
+.sub-nav-toggle:has(+ ul:focus-within)::after {
   transform: translateY(50%) rotate(90deg);
 }

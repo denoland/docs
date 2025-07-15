@@ -19,6 +19,9 @@ export default {
   darkMode: "selector",
   theme: {
     extend: {
+      screens: {
+        "xlplus": "82rem",
+      },
       colors: {
         transparent: "transparent",
         current: "currentColor",

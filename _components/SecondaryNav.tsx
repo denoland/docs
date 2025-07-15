@@ -15,7 +15,7 @@ export default function (data: Lume.Data) {
                   {(isDenoAPI && item.name === "Uncategorized") ? <></> : (
                     <a
                       href={item.href}
-                      className="sub-nav-link blocklink"
+                      className="sub-nav-link"
                       {...(item.active ? { "data-active": true } : {})}
                     >
                       {item.name}
@@ -65,23 +65,23 @@ export default function (data: Lume.Data) {
                           htmlFor={`sub-nav-toggle-${
                             item.title.replaceAll(" ", "")
                           }`}
-                          className="sub-nav-toggle blocklink"
+                          className="sub-nav-toggle"
                         >
                           {item.title}
+                          <input
+                            type="checkbox"
+                            id={`sub-nav-toggle-${
+                              item.title.replaceAll(" ", "")
+                            }`}
+                            className="sub-nav-toggle-checkbox sr-only"
+                          />
                         </label>
-                        <input
-                          type="checkbox"
-                          id={`sub-nav-toggle-${
-                            item.title.replaceAll(" ", "")
-                          }`}
-                          className="sub-nav-toggle-checkbox"
-                        />
                         <ul className="sub-nav tertiary-nav">
                           {item.items.map((subItem: any) => (
                             <li key={subItem.href}>
                               <a
                                 href={subItem.href}
-                                className="sub-nav-link blocklink"
+                                className="sub-nav-link"
                                 {...(subItem.href.replace(/\/$/, "") ===
                                     currentUrl
                                   ? { "data-active": true }
@@ -97,7 +97,7 @@ export default function (data: Lume.Data) {
                     : (
                       <a
                         href={item.href}
-                        className="sub-nav-link blocklink"
+                        className="sub-nav-link"
                         {...(item.href.replace(/\/$/, "") === currentUrl
                           ? { "data-active": true }
                           : {})}

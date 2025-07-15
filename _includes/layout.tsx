@@ -72,7 +72,7 @@ export default function Layout(data: Lume.Data) {
       >
         <a
           href="#content"
-          class="opacity-0 p-2 px-4 bg-background-primary border-2 border-foreground-secondary transition-transform duration-150     ease-out absolute top-2 left-2 -translate-y-full focus:opacity-100 focus:translate-y-0 z-[500]"
+          class="opacity-0 p-2 px-4 bg-background-secondary transition-transform duration-150 rounded-md ease-out absolute top-2 left-2 -translate-y-full focus:opacity-100 focus:translate-y-0 z-[500]"
         >
           Skip to main content
         </a>

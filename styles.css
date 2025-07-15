@@ -93,7 +93,9 @@ p {
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
   border: 1px solid transparent;
-  transition: all 200ms ease-in-out;
+  transition:
+    background-color 200ms ease-in-out,
+    border-color 200ms ease-in-out;
   color: hsl(var(--foreground-primary));
 
   &:hover:not([data-active="true"]) {
@@ -191,6 +193,12 @@ html {
 /* Scrollbar colors that look good on light and dark theme */
 * {
   scrollbar-color: hsla(0deg, 0%, 50%, 0.5) hsla(0deg, 0%, 50%, 0.1) !important;
+}
+
+*:focus-visible,
+label:has(input.sr-only:focus-visible) {
+  outline: 1px dashed hsl(var(--foreground-secondary));
+  outline-offset: -1px;
 }
 
 p {
@@ -334,8 +342,8 @@ h1 {
 
 pre:has(code.highlight),
 pre.highlight:has(code) {
-  @apply px-4 py-8 max-sm:-mx-4 border-x-0 sm:border sm:px-8
-    max-sm:!rounded-none border-foreground-tertiary;
+  @apply px-4 py-8 -mx-4 sm:mx-0 border-x-0 sm:border sm:px-8 rounded-none
+    sm:rounded-md border-foreground-tertiary;
   overflow-x: auto;
 }
 
@@ -836,11 +844,12 @@ main:has(#example:checked) {
   }
 
   .layout:has(.raw-container) {
-    display: contents;
-    .nav {
-      display: none;
-    }
+    grid-template-columns: 100%;
   }
+}
+
+body:has(.raw-container) :is(.hamburger-label, .nav) {
+  display: none;
 }
 
 @media (min-width: 64rem) {
