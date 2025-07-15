@@ -11,7 +11,7 @@ export default function (
 
   return (
     <nav class="refheader">
-      <ul class="flex w-full max-w-6xl mx-auto">
+      <ul class="flex w-full max-w-7xl mx-auto">
         {navData.map((nav: any) => (
           <li key={nav.href}>
             <a

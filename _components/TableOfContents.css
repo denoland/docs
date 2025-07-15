@@ -47,7 +47,7 @@
   }
 }
 
-@media (min-width: 72rem) {
+@media (min-width: 80rem) {
   .toc-desktop {
     padding-inline-end: 0;
   }

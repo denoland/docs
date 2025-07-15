@@ -11,7 +11,7 @@ export default function SnippetComponent(props: {
   const html = Prism.highlight(props.snippet.code, Prism.languages.js, "js");
 
   return (
-    <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-4 example-block">
+    <div class="grid grid-cols-1 sm:grid-cols-10 gap-x-4 md:gap-x-6 lg:gap-x-8 example-block">
       <div
         class={`select-none text-sm ${props.snippet.text ? "pb-4" : " "} ${
           props.snippet.code

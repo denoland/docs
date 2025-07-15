@@ -80,7 +80,11 @@ export default function Layout(data: Lume.Data) {
           data={data}
           currentUrl={data.url}
         />
-        <div className="layout">
+        <div
+          class={`layout ${
+            data.toc ? "layout--three-column" : "layout--two-column"
+          }`}
+        >
           <data.comp.Navigation
             data={data}
             currentSection={section}

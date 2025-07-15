@@ -1,4 +1,4 @@
-import type { PageBase, ToCCtx } from "@deno/doc";
+import type { PageBase } from "@deno/doc";
 
 export default function Base(
   { data, comp, children }: Lume.Data & { data: PageBase },

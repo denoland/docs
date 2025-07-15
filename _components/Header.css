@@ -16,12 +16,8 @@ header {
   padding-inline: 1rem;
   height: 100%;
   width: 100%;
-  max-width: 72rem;
+  max-width: 80rem;
   margin-inline: auto;
-
-  nav {
-    display: none;
-  }
 
   .header-nav-link {
     font-size: clamp(0.8rem, 1.5vw, 1rem);
@@ -61,18 +57,13 @@ header {
 }
 
 @media (min-width: 64rem) {
-  header {
-    nav {
-      display: flex;
-    }
-  }
   .header-nav-link[data-active] {
     color: hsl(var(--primary));
     position: relative;
   }
 }
 
-@media (min-width: 72rem) {
+@media (min-width: 80rem) {
   header {
     padding: 0;
   }

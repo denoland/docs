@@ -54,7 +54,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
-    max-width: 72rem;
+    max-width: 80rem;
     row-gap: 2rem;
     margin: 0 auto;
   }

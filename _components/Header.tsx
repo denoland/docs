@@ -10,7 +10,7 @@ export default function (data: Lume.Data) {
             ? <data.comp.DeployLogo />
             : <data.comp.Logo />}
         </a>
-        <nav class="flex items-center gap-2">
+        <nav class="hidden lg:flex items-center gap-2">
           {data.navigation.map((nav: NavData) => (
             <a
               href={nav.href}

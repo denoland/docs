@@ -1,3 +1,5 @@
+@config "./tailwind.config.js";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -818,12 +820,19 @@ main:has(#example:checked) {
 @media screen and (min-width: 48rem) {
   .layout {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: start;
     width: 100%;
     margin-inline: auto;
-    max-width: 72rem;
+    max-width: 80rem;
     column-gap: 1rem;
+  }
+
+  .layout--three-column {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .layout--two-column {
+    grid-template-columns: auto minmax(0, 1fr);
   }
 
   .layout:has(.raw-container) {
