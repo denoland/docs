@@ -30,8 +30,8 @@ currently supported with others planned.
 
 You can either enter connection details manually or paste a connection string to
 automatically populate the form. Connection details include your database server
-hostname, port (usually 5432 for PostgreSQL), username, password, and
-optionally an SSL certificate if needed.
+hostname, port (usually 5432 for PostgreSQL), username, password, and optionally
+an SSL certificate if needed.
 
 Before saving, use the "Test Connection" button to verify your settings work
 correctly. Fix any connection issues, give your database instance a memorable
@@ -51,8 +51,8 @@ populate the form fields.
 ### Connecting an App to a Database
 
 Once you have a database instance, you can assign it to your apps. From the
-databases list, click "Assign" next to your database and select the app from
-the dropdown.
+databases list, click "Assign" next to your database and select the app from the
+dropdown.
 
 Deno Deploy automatically creates separate databases for each timeline:
 
