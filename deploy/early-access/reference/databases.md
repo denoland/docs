@@ -1,7 +1,6 @@
 ---
 title: Databases
-description: Connect to external database intances and integrate your applications and their
-environments seamlessly.
+description: Connect to external database intances and integrate your applications and their environments seamlessly.
 ---
 
 :::info
