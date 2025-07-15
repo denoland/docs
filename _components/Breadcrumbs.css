@@ -7,6 +7,12 @@
   color: hsl(var(--foreground-secondary));
 }
 
+@media (min-width: 40rem) {
+  .crumbs {
+    margin-top: 1rem;
+  }
+}
+
 .crumb-link {
   display: flex;
   align-items: center;

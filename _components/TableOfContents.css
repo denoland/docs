@@ -16,7 +16,8 @@
     max-height: calc(100vh - 4rem);
     min-height: max-content;
     overflow-y: auto;
-    border-left: 1px solid hsl(var(--foreground-tertiary));
+    min-width: 10rem;
+    border-inline-start: 1px solid hsl(var(--foreground-tertiary));
   }
 
   .toc-mobile {

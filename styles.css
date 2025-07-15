@@ -68,9 +68,7 @@
   --note: 224deg, 64.3%, 32.9%;
   --caution: 45.4deg, 93.39%, 47.45%;
   --tip: 142deg, 76.2%, 36.3%;
-}
 
-:root {
   --max-text-width: 40rem;
 }
 
@@ -81,10 +79,6 @@ body {
   color: hsl(var(--foreground-primary));
   font-variant-alternates: character-variant(cv05, cv08, cv10)
     styleset(ss01, ss07, ss08);
-}
-
-p {
-  max-width: var(--max-text-width);
 }
 
 .blocklink {
@@ -187,6 +181,7 @@ body {
 }
 
 .content {
+  width: 100%;
   padding: 0 1rem 4rem;
 }
 
@@ -283,7 +278,7 @@ h1 {
   }
 
   h1:first-child {
-    @apply mt-0;
+    @apply mt-0 md:text-4xl;
   }
 
   h2 {

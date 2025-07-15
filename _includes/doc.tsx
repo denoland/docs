@@ -34,11 +34,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
       id="content"
       class={isExampleScript ? "examples-content" : "content"}
     >
-      <div
-        class={`w-full ${
-          isExampleScript ? "max-w-7xl lg:px-0" : "lg:max-w-2xl"
-        }`}
-      >
+      <div class="w-full">
         <article class="mx-auto">
           {hasBreadcrumbs && (
             <data.comp.Breadcrumbs
@@ -56,7 +52,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             data-color-mode="auto"
             data-light-theme="light"
             data-dark-theme="dark"
-            class="markdown-body mt-4 rounded-lg"
+            class="markdown-body mt-4 sm:mt-6"
           >
             {!isReference && (
               <h1
