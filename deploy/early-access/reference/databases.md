@@ -11,14 +11,14 @@ Deploy Classic documentation? [View it here](/deploy/).
 :::
 
 The databases feature allows you to connect your applications to external
-database servers like PostgreSQL, MySQL, and MongoDB. When you assign a database
-to your app, Deno Deploy automatically provisions separate databases for each
-deployment environment - production, git branches, and preview timelines.
+database servers. When you assign a database to your app, Deno Deploy
+automatically provisions separate databases for each deployment environment -
+production, git branches, and preview timelines.
 
 Your code automatically connects to the correct database for each environment
 without requiring timeline detection or manual database name handling. Simply
-use `new Pool()` and your app connects to the right database whether it's
-running in production, a git branch, or a preview deployment.
+use your favorite database driver to connect, without configuring any connection
+information - it will be picked up automatically via environment variables.
 
 ## Getting Started
 
