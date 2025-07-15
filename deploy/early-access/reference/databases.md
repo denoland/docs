@@ -10,12 +10,6 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-Connect your applications to external databases like PostgreSQL, MySQL, MongoDB,
-and more. Deno Deploy automatically provisions isolated databases for your
-different deployment environments.
-
-## Overview
-
 The databases feature allows you to connect your applications to external
 database servers like PostgreSQL, MySQL, and MongoDB. When you assign a database
 to your app, Deno Deploy automatically provisions separate databases for each
@@ -64,25 +58,10 @@ to connect from the dropdown.
 
 Deno Deploy will automatically create separate databases for each environment.
 Production deployments use `{app-id}-production`, git branches get
-`{app-id}--{branch-name}`, and preview deployments use `{app-id}-preview`. You
-can monitor the provisioning process and watch the status change to "Connected".
-If there are any errors, use the "Fix" button to retry.
-
-## Understanding Database Provisioning
-
-When you assign an app to a database instance, your app gets linked to the
-database instance and individual databases are created for each deployment
-environment. You can monitor this process in real-time through the dashboard.
-
-**Database Naming Convention:** Databases follow a predictable pattern based on
-your app and environment. Production uses `myappid-production`, git branches use
-`myappid--branch-name`, and previews use `myappid-preview`.
-
-**Environment Isolation:** Each deployment environment gets its own isolated
-database. Production deployments use the production database, git branch
-deployments get their own branch-specific database, and preview deployments use
-the preview database. This ensures your production data stays safe while
-developing and testing.
+`{app-id}--{branch-name}`, and preview deployments use `{app-id}-preview`. This
+ensures your production data stays safe while developing and testing. You can
+monitor the provisioning process and watch the status change to "Connected". If
+there are any errors, use the "Fix" button to retry.
 
 ## Using Databases in Your Code
 
