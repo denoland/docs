@@ -92,18 +92,7 @@ would probably fetch this data from a database or an external API.)
 We're going to build out some API routes that return dinosaur information.
 SvelteKit provides a simple way to create API endpoints using server files.
 
-Add the dependencies to your `deno.json` file by updating the imports section:
-
-```json title="deno.json"
-{
-  "imports": {
-    "@oak/oak": "jsr:@oak/oak@^17.1.5",
-    "@tajpouria/cors": "jsr:@tajpouria/cors@^1.2.1"
-  }
-}
-```
-
-Next, create `src/routes/api/dinosaurs/+server.js` to handle the
+Create `src/routes/api/dinosaurs/+server.js` to handle the
 `/api/dinosaurs` endpoint. This will return all dinosaurs:
 
 ```js title="src/routes/api/dinosaurs/+server.js"
