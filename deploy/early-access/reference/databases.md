@@ -22,7 +22,7 @@ information - it will be picked up automatically via environment variables.
 
 ## Getting Started
 
-### Adding Your First Database
+### Adding a Database
 
 Start by navigating to your organization dashboard and clicking "Databases" in
 the navigation bar. Click the "Add Database" button and choose your database
