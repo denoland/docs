@@ -47,8 +47,8 @@ export const sidebar = [
       },
       {
         title: "Databases",
-        href: "/deploy/early-access/reference/databases/"
-      }
+        href: "/deploy/early-access/reference/databases/",
+      },
       {
         title: "Cloud Connections",
         href: "/deploy/early-access/reference/cloud-connections/",

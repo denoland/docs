@@ -1,6 +1,8 @@
 # Databases
 
-Connect your applications to external databases like PostgreSQL, MySQL, MongoDB, and more. Deno Deploy automatically provisions isolated databases for your different deployment environments.
+Connect your applications to external databases like PostgreSQL, MySQL, MongoDB,
+and more. Deno Deploy automatically provisions isolated databases for your
+different deployment environments.
 
 ## Overview
 
@@ -11,7 +13,10 @@ The databases feature allows you to:
 - Get separate databases for production, git branches, and preview timelines
 - Manage database assignments across multiple apps
 
-Your code automatically connects to the correct database for each timeline without requiring timeline detection or manual database name handling. Simply use `new Pool()` and your app connects to the right database whether it's running in production, a git branch, or a preview deployment.
+Your code automatically connects to the correct database for each timeline
+without requiring timeline detection or manual database name handling. Simply
+use `new Pool()` and your app connects to the right database whether it's
+running in production, a git branch, or a preview deployment.
 
 ## Getting Started
 
@@ -108,7 +113,8 @@ Click on any database instance to see:
 When you assign an app to a database instance:
 
 1. **Link Creation**: Your app is linked to the database instance
-2. **Database Provisioning**: Individual databases are created for each deployment environment
+2. **Database Provisioning**: Individual databases are created for each
+   deployment environment
 3. **Status Updates**: You can monitor the provisioning process in real-time
 
 ### Database Naming Convention
@@ -133,13 +139,18 @@ This ensures your production data stays safe while developing and testing.
 
 ### Zero Configuration Required
 
-Once you've assigned a database to your app, connecting to it from your code is incredibly simple. You don't need to configure connection strings, set up environment variables, or manage credentials - Deno Deploy handles all of this automatically.
+Once you've assigned a database to your app, connecting to it from your code is
+incredibly simple. You don't need to configure connection strings, set up
+environment variables, or manage credentials - Deno Deploy handles all of this
+automatically.
 
-Simply use your favorite database library as you normally would, and it will automatically connect to the correct database for your current environment.
+Simply use your favorite database library as you normally would, and it will
+automatically connect to the correct database for your current environment.
 
 ### Automatic Environment Variables
 
-Deno Deploy automatically injects standard database environment variables into your app's runtime environment:
+Deno Deploy automatically injects standard database environment variables into
+your app's runtime environment:
 
 - `PGHOST` - Database hostname
 - `PGPORT` - Database port
@@ -148,7 +159,8 @@ Deno Deploy automatically injects standard database environment variables into y
 - `PGPASSWORD` - Database password
 - `PGSSLMODE` - SSL mode configuration
 
-These variables follow standard conventions, so most database libraries will automatically detect and use them without any configuration.
+These variables follow standard conventions, so most database libraries will
+automatically detect and use them without any configuration.
 
 ### PostgreSQL Example
 
@@ -172,17 +184,21 @@ export default async function handler(req: Request) {
 
 ### How It Works
 
-1. **Environment Detection**: Deno Deploy automatically detects which environment your code is running in (production, git branch, or preview)
+1. **Environment Detection**: Deno Deploy automatically detects which
+   environment your code is running in (production, git branch, or preview)
 
-2. **Database Selection**: Based on the environment, it selects the appropriate database:
+2. **Database Selection**: Based on the environment, it selects the appropriate
+   database:
 
    - Production timeline → `myapp-production`
    - Git branch timeline → `myapp--feature-branch`
    - Preview timeline → `myapp-preview`
 
-3. **Environment Variables**: The correct connection details are automatically set as environment variables
+3. **Environment Variables**: The correct connection details are automatically
+   set as environment variables
 
-4. **Library Integration**: Your database library (like `pg` for PostgreSQL) automatically reads these standard environment variables
+4. **Library Integration**: Your database library (like `pg` for PostgreSQL)
+   automatically reads these standard environment variables
 
 ### Other Database Examples
 
@@ -208,7 +224,8 @@ await client.connect();
 
 ### Environment-Specific Behavior
 
-Your code runs exactly the same way across all environments, but connects to different databases:
+Your code runs exactly the same way across all environments, but connects to
+different databases:
 
 ```typescript
 // This same code works in all environments
@@ -262,7 +279,8 @@ const pool = new Pool({
 
 ### Migration and Schema Management
 
-Since each environment gets its own database, you'll need to manage schema across environments:
+Since each environment gets its own database, you'll need to manage schema
+across environments:
 
 ```typescript
 // Run migrations for the current environment's database
@@ -280,7 +298,9 @@ await pool.query(`
 `);
 ```
 
-The beauty of this system is that your application code remains environment-agnostic while automatically connecting to the right database based on where it's deployed.
+The beauty of this system is that your application code remains
+environment-agnostic while automatically connecting to the right database based
+on where it's deployed.
 
 ## Connection Strings
 
@@ -292,7 +312,8 @@ Instead of filling out individual fields, you can paste a connection string:
 postgresql://username:password@hostname:port/database
 ```
 
-The form will automatically parse the connection string and fill in the appropriate fields.
+The form will automatically parse the connection string and fill in the
+appropriate fields.
 
 ### Common Connection String Formats
 
@@ -317,15 +338,18 @@ mongodb://user:pass@localhost:27017/dbname
 
 ## SSL Configuration
 
-All database connections use SSL encryption for security. The main difference is how certificates are handled depending on your database provider.
+All database connections use SSL encryption for security. The main difference is
+how certificates are handled depending on your database provider.
 
 ### Certificate Types
 
-**Trusted Root CA Certificates (Most Common):**
-Many database providers use certificates signed by trusted root Certificate Authorities (like Let's Encrypt, DigiCert, etc.). These work automatically without any configuration.
+**Trusted Root CA Certificates (Most Common):** Many database providers use
+certificates signed by trusted root Certificate Authorities (like Let's Encrypt,
+DigiCert, etc.). These work automatically without any configuration.
 
-**Self-Signed Certificates:**
-Some database providers use self-signed certificates or private Certificate Authorities. In these cases, you need to upload the CA certificate that was used to sign your database's certificate.
+**Self-Signed Certificates:** Some database providers use self-signed
+certificates or private Certificate Authorities. In these cases, you need to
+upload the CA certificate that was used to sign your database's certificate.
 
 ### Certificate Configuration
 
@@ -337,8 +361,11 @@ Some database providers use self-signed certificates or private Certificate Auth
 
 **For databases with certificates signed by private root CA:**
 
-1. **AWS RDS**: Click the "Use AWS Certificate Bundle" button to automatically configure AWS RDS certificates without having to download them from AWS documentation
-2. **Other Providers**: Upload the specific CA certificate provided by your database provider
+1. **AWS RDS**: Click the "Use AWS Certificate Bundle" button to automatically
+   configure AWS RDS certificates without having to download them from AWS
+   documentation
+2. **Other Providers**: Upload the specific CA certificate provided by your
+   database provider
 
 ### Common Providers
 
@@ -378,7 +405,8 @@ Some database providers use self-signed certificates or private Certificate Auth
 
 **SSL connection issues:**
 
-- **Trusted root CA databases**: Verify SSL is configured on your database server
+- **Trusted root CA databases**: Verify SSL is configured on your database
+  server
 - **Private CA certificates**: Ensure you've uploaded the correct CA certificate
 - Check that your database server supports SSL connections
 - Verify the certificate hasn't expired
@@ -441,23 +469,30 @@ Some database providers use self-signed certificates or private Certificate Auth
 
 ## Frequently Asked Questions
 
-**Q: Can multiple apps share the same database instance?**
-A: Yes! Multiple apps can be assigned to the same database instance. Each app gets its own isolated databases within that instance.
+**Q: Can multiple apps share the same database instance?** A: Yes! Multiple apps
+can be assigned to the same database instance. Each app gets its own isolated
+databases within that instance.
 
-**Q: What happens to my data when I remove an app assignment?**
-A: The databases remain on your database server. Only the connection between your app and the database instance is removed.
+**Q: What happens to my data when I remove an app assignment?** A: The databases
+remain on your database server. Only the connection between your app and the
+database instance is removed.
 
-**Q: Can I use the same database for multiple environments?**
-A: By default, each environment (production, branch, preview) gets its own database to ensure isolation and prevent data conflicts. However, you can always use the options in our database library to customize the database your code connects to.
+**Q: Can I use the same database for multiple environments?** A: By default,
+each environment (production, branch, preview) gets its own database to ensure
+isolation and prevent data conflicts. However, you can always use the options in
+our database library to customize the database your code connects to.
 
-**Q: How do I access my databases directly?**
-A: You can connect directly to your database server using the connection details you provided. Use the database names shown in the Deno Deploy dashboard.
+**Q: How do I access my databases directly?** A: You can connect directly to
+your database server using the connection details you provided. Use the database
+names shown in the Deno Deploy dashboard.
 
-**Q: Can I change database connection details?**
-A: Yes, click "Edit" on any database instance to update connection details. Test the connection before saving to ensure it works.
+**Q: Can I change database connection details?** A: Yes, click "Edit" on any
+database instance to update connection details. Test the connection before
+saving to ensure it works.
 
-**Q: How do I delete a database instance?**
-A: First remove all app assignments, then click "Delete" on the database instance. This only removes the connection from Deno Deploy - your actual database server is not affected.
+**Q: How do I delete a database instance?** A: First remove all app assignments,
+then click "Delete" on the database instance. This only removes the connection
+from Deno Deploy - your actual database server is not affected.
 
 ## Getting Help
 
@@ -467,4 +502,6 @@ If you encounter issues:
 2. Review the troubleshooting section above
 3. Contact support with specific error messages and steps to reproduce the issue
 
-Remember: The databases feature only manages connections and provisioning. Your actual database server management (backups, scaling, maintenance) is still your responsibility.
+Remember: The databases feature only manages connections and provisioning. Your
+actual database server management (backups, scaling, maintenance) is still your
+responsibility.

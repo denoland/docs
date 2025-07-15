@@ -53,7 +53,8 @@ production.
 
 ### [Databases](/deploy/early-access/reference/databases/)
 
-Connect to external database intances and integrate your applications and their environments seamlessly.
+Connect to external database intances and integrate your applications and their
+environments seamlessly.
 
 ### [Cloud Connections](/deploy/early-access/reference/cloud-connections/)
 
