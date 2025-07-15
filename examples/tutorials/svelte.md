@@ -92,10 +92,10 @@ would probably fetch this data from a database or an external API.)
 We're going to build out some API routes that return dinosaur information.
 SvelteKit provides a simple way to create API endpoints using server files.
 
-Create `src/routes/api/dinosaurs/+server.js` to handle the
+Create `src/routes/api/dinosaurs/+server.ts` to handle the
 `/api/dinosaurs` endpoint. This will return all dinosaurs:
 
-```js title="src/routes/api/dinosaurs/+server.js"
+```js title="src/routes/api/dinosaurs/+server.ts"
 import { json } from "@sveltejs/kit";
 import data from "../data.json" with { type: "json" };
 
@@ -125,8 +125,7 @@ export const GET: RequestHandler = ({ params }) => {
 };
 ```
 
-SvelteKit automatically handles routing based on the file structure. The
-`+server.js` and `+server.ts` files define API endpoints, and the `[id]` folder
+SvelteKit automatically handles routing based on the file structure. The `+server.ts` files define API endpoints, and the `[id]` folder
 creates a dynamic route parameter.
 
 ## Build the frontend
