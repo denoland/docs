@@ -220,6 +220,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Build a Svelte app",
+        href: "/examples/svelte_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Build a Vue app",
         href: "/examples/vue_tutorial/",
         type: "tutorial",
