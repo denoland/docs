@@ -209,6 +209,13 @@ table, and click "Remove" next to the app.
 Click "Edit" on any database instance to update connection details. Test the
 connection to ensure it still works before saving your changes.
 
+## Supported Database Engines
+
+**Currently Supported:** PostgreSQL is fully supported with all features.
+
+**Coming Soon:** MySQL, MongoDB, Redis, and more are planned for future
+releases.
+
 ## Troubleshooting
 
 ### Connection Issues
@@ -240,46 +247,6 @@ load and performance.
 
 **"Error" status** can be resolved by using the "Fix" button to retry failed
 operations or checking your database server logs for more detailed information.
-
-## Best Practices
-
-### Development Tips
-
-Use env variables to configure the connection to your local database. This way
-the code remains the same also un your local development environment.
-
-Use connection pooling for better performance - libraries like `pg` handle this
-automatically, but you can configure pool size based on your app's needs. Always
-handle database connection errors gracefully using try/catch blocks around
-database operations, and log errors for debugging.
-
-### Database Instance Management
-
-Use descriptive names for your database instances and test connections before
-saving configurations. Monitor status regularly to catch issues early.
-
-### App Assignment
-
-Monitor provisioning after assigning new apps and clean up unused assignments to
-keep things organized.
-
-### Security
-
-Use strong passwords for database connections, rotate credentials regularly, and
-limit database user permissions to what's necessary.
-
-### Performance
-
-Monitor database load when multiple apps share an instance, scale your database
-server as your apps grow, and use connection pooling in your applications when
-possible.
-
-## Supported Database Engines
-
-**Currently Supported:** PostgreSQL is fully supported with all features.
-
-**Coming Soon:** MySQL, MongoDB, Redis, and more are planned for future
-releases.
 
 ## Frequently Asked Questions
 
@@ -314,13 +281,3 @@ the connection before saving to ensure it works.
 First remove all app assignments, then click "Delete" on the database instance.
 This only removes the connection from Deno Deploy - your actual database server
 is not affected.
-
-## Getting Help
-
-If you encounter issues, check the status indicators and error messages in the
-dashboard, review the troubleshooting section above, or contact support with
-specific error messages and steps to reproduce the issue.
-
-Remember: The databases feature only manages connections and provisioning. Your
-actual database server management (backups, scaling, maintenance) is still your
-responsibility.
