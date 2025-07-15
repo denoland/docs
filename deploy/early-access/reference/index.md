@@ -51,6 +51,10 @@ Monitoring applications, accessing logs, metrics, and performance insights.
 Managing different deployment environments including development, staging, and
 production.
 
+### [Databases](/deploy/early-access/reference/databases/)
+
+Connect to external database intances and integrate your applications and their environments seamlessly.
+
 ### [Cloud Connections](/deploy/early-access/reference/cloud-connections/)
 
 Managing cloud connections for your applications, including AWS and Google
