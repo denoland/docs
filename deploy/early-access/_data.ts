@@ -62,6 +62,10 @@ export const sidebar = [
         href: "/deploy/early-access/reference/caching/",
       },
       {
+        title: "Deploy Button",
+        href: "/deploy/early-access/reference/button/",
+      },
+      {
         title: "Usage and Limitations",
         href: "/deploy/early-access/usage/",
       },
