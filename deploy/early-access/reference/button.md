@@ -52,13 +52,13 @@ https://app.deno.com/new?clone=REPOSITORY_URL
 
 ### Parameters
 
-The following query parameters can be used to configure a Deploy Button
+The following query parameters can be used to configure a Deploy Button:
 
 - `clone` — (required) The URL of the source repo to clone as a new repo which
-  will then be and then deploy
+  will then be deployed
 - `path` — (optional) The path within the source repo to clone from. Providing
   this will create a new repo whose root is this directory from within the
   source repository.
-- `install` — (optional) the command to execute prior to a build in order in
+- `install` — (optional) the command to execute prior to a build in order to
   install dependencies
 - `build` — (optional) the command to execute to build the application
