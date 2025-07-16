@@ -192,6 +192,8 @@ body {
   background-color: var(--background-primary);
 
   [data-services-page="true"] {
+    --header-highlight: var(--deploy-200-hsl);
+
     /* --background-raw: hsl(var(--deploy-950-hsl));
     --background-primary: var(--deploy-900-hsl);
     --background-secondary: var(--deploy-800-hsl);
@@ -484,60 +486,54 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 }
 
 .markdown-body .admonition {
-  @apply py-4 px-6 pb-2 rounded-lg border-2 bg-gray-600/5 border-gray-800;
+  @apply px-4 pt-10 pb-4 rounded-md bg-gray-100 my-8 relative overflow-clip
+    text-sm flex flex-col gap-2;
+}
+
+.markdown-body .admonition > * {
+  margin: 0;
 }
 
 .markdown-body .admonition .title {
-  @apply font-bold uppercase flex items-center;
-}
-
-.markdown-body .admonition .title::before {
-  content: "";
-  @apply inline-block size-5 mr-2;
-}
-
-.markdown-body .admonition > p {
-  @apply mb-2;
+  @apply font-bold uppercase flex items-center mb-4 absolute top-0 left-0
+    right-0 py-2 px-4 bg-gray-100 leading-none;
 }
 
 .markdown-body .admonition.info {
-  @apply bg-primary/5 border-info/50 text-info;
+  @apply bg-green-100 dark:bg-green-950/50 dark:border dark:border-green-900
+    border-green-200;
+
+  .title {
+    @apply text-green-600 bg-green-200 dark:bg-green-900 dark:text-green-200;
+  }
 }
 
 .markdown-body .admonition.note {
-  @apply bg-primary/5 border-note/50 text-note;
-}
+  @apply bg-green-100 dark:bg-green-950/50 dark:border dark:border-green-900
+    border-green-200;
 
-.markdown-body .admonition.note {
-  @apply bg-primary/5 border-note/50 text-note;
+  .title {
+    @apply text-green-600 bg-green-200 dark:bg-green-900 dark:text-green-200;
+  }
 }
 
 .markdown-body .admonition.caution {
-  @apply bg-caution/5 border-caution/50 text-caution fill-caution;
+  @apply bg-yellow-100 dark:bg-yellow-950/75 dark:border dark:border-yellow-400
+    border-yellow-200;
+
+  .title {
+    @apply text-yellow-600 bg-yellow-200 dark:bg-yellow-400
+      dark:text-yellow-800;
+  }
 }
 
 .markdown-body .admonition.tip {
-  @apply bg-tip/5 border-tip/50 text-tip;
-}
+  @apply bg-green-100 dark:bg-green-950/50 dark:border dark:border-green-900
+    border-green-200;
 
-.markdown-body .admonition.info .title::before {
-  /* circle exclamation mark */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(29 78 216)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></svg>');
-}
-
-.markdown-body .admonition.note .title::before {
-  /* circle exclamation mark */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(29 78 216)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></svg>');
-}
-
-.markdown-body .admonition.caution .title::before {
-  /* exclamation mark in a filled warning triangle */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(113 63 18)"><path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg>');
-}
-
-.markdown-body .admonition.tip .title::before {
-  /* lightbulb svg */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgb(22 163 74)" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>');
+  .title {
+    @apply text-green-600 bg-green-200 dark:bg-green-900 dark:text-green-200;
+  }
 }
 
 .markdown-body .module-info svg {
@@ -716,9 +712,8 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 
 .btn {
   @apply max-w-max px-4 py-2 text-sm font-semibold !text-foreground-primary
-    bg-background-primary dark:bg-background-tertiary border
-    border-foreground-secondary hover:shadow-[inset_0_0_0_1px]
-    focus:shadow-[inset_0_0_0_1px] dark:border-background-tertiary rounded-full
+    bg-white dark:bg-gray-950 border-2 border-foreground-primary
+    hover:bg-header-highlight dark:border-background-tertiary rounded-full
     transition inline-flex gap-2 items-center cursor-pointer !no-underline;
   & svg {
     @apply inline-block size-4;

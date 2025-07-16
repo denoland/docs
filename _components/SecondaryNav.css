@@ -2,10 +2,12 @@ li:has(.sub-nav-toggle) {
   border-left: 1px solid hsl(var(--foreground-tertiary));
 }
 
-.sub-nav-toggle:hover,
 li:has(.sub-nav-toggle:hover) {
+  border-left-color: hsl(var(--foreground-secondary));
+}
+
+.sub-nav-toggle:hover {
   background-color: hsl(var(--header-highlight));
-  border-color: hsl(var(--foreground-secondary));
 }
 
 .sub-nav-toggle {

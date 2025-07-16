@@ -3,9 +3,14 @@
   height: var(--header-height);
   position: sticky;
   top: 0;
-  background-color: var(--background-raw);
   border-bottom: 1px solid hsl(var(--foreground-tertiary));
+
+  background-color: var(--background-raw);
   z-index: 100;
+}
+
+body:has(.refheader) .header-wrapper {
+  border-bottom: 0;
 }
 
 header {

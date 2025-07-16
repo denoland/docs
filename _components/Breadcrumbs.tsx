@@ -73,7 +73,7 @@ export default function (props: {
           itemtype="https://schema.org/ListItem"
         >
           <a
-            class="crumb-link pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-background-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
+            class="crumb-link pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-quaternary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
             itemprop="item"
             href={props.sectionHref}
           >
@@ -96,7 +96,7 @@ export default function (props: {
                   <a
                     href={crumb.href}
                     itemprop="item"
-                    class="crumb-link pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-background-tertiary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
+                    class="crumb-link pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-quaternary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
                   >
                     <span itemprop="name">{crumb.title}</span>
                   </a>

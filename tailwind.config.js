@@ -44,6 +44,7 @@ export default {
 
         "primary": "hsla(var(--primary))",
         "header-highlight": "hsla(var(--header-highlight))",
+        "blue-splash": "hsla(var(--blue-splash-hsl))",
 
         runtime: {
           "50": "#f0fff1",
