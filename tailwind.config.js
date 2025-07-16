@@ -43,6 +43,7 @@ export default {
         "tip": "hsla(var(--tip))",
 
         "primary": "hsla(var(--primary))",
+        "header-highlight": "hsla(var(--header-highlight))",
 
         runtime: {
           "50": "#f0fff1",
@@ -75,14 +76,17 @@ export default {
         },
 
         gray: {
-          "000": "#e3e5e9",
-          "00": "#cfd1d6",
-          0: "#9EA0A5",
-          1: "#868789",
-          2: "#56575A",
-          3: "#25272B",
-          4: "#191B1F",
-          5: "#14161A",
+          "50": "hsl(var(--gray-50-hsl))",
+          "100": "hsl(var(--gray-100-hsl))",
+          "200": "hsl(var(--gray-200-hsl))",
+          "300": "hsl(var(--gray-300-hsl))",
+          "400": "hsl(var(--gray-400-hsl))",
+          "500": "hsl(var(--gray-500-hsl))",
+          "600": "hsl(var(--gray-600-hsl))",
+          "700": "hsl(var(--gray-700-hsl))",
+          "800": "hsl(var(--gray-800-hsl))",
+          "900": "hsl(var(--gray-900-hsl))",
+          "950": "hsl(var(--gray-950-hsl))",
         },
 
         code: {

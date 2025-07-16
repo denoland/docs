@@ -1,21 +1,42 @@
+import { SecondaryNav } from "../types.ts";
+
 export default function (
   { data, currentUrl }: {
     data: Lume.Data;
     currentUrl: string;
   },
 ) {
-  const navData = data.page?.data?.secondaryNav;
+  let navData = data.page?.data?.secondaryNav;
+  const isReference = currentUrl.startsWith("/api");
+  const apiReferenceSubnavItems = [
+    {
+      title: "Deno APIs",
+      href: "/api/deno",
+    },
+    {
+      title: "Web APIs",
+      href: "/api/web",
+    },
+    {
+      title: "Node APIs",
+      href: "/api/node",
+    },
+  ] satisfies SecondaryNav;
+
+  // We need to hard-code the API Reference subnav, since it's generated elsewhere.
+  if (isReference && !navData) navData = apiReferenceSubnavItems;
+
   if (!navData || navData.length === 0) {
     return null;
   }
 
   return (
     <nav class="refheader">
-      <ul class="flex w-full max-w-7xl mx-auto">
+      <ul class="flex w-full max-w-7xl mx-auto items-center gap-6">
         {navData.map((nav: any) => (
           <li key={nav.href}>
             <a
-              class="blocklink refheader-link"
+              className="refheader-link"
               data-active={currentUrl.includes(nav.href)}
               href={nav.href}
             >
@@ -30,4 +51,4 @@ export default function (
   );
 }
 
-export const css = "@import './_components/RefHeader.css';";
+export const css = "@import './_components/SubNav.css';";

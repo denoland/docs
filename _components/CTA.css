@@ -6,7 +6,7 @@
 
 .runtime-cta,
 .deploy-cta {
-  @apply border-gray-4 hover:!no-underline !text-gray-4;
+  @apply border-gray-900 hover:!no-underline !text-gray-900;
 }
 
 .runtime-cta {

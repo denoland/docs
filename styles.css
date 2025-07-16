@@ -6,16 +6,31 @@
 
 :root {
   --white-hsl: 215deg, 81%, 100%;
+  --blue-splash: #ecf3fd;
+  --blue-splash-hsl: 215deg, 81%, 96%;
 
-  --gray-0: #f5f5f5;
-  --gray-1: #e5eaea;
-  --gray-2: #9ea0a5;
-  --gray-3: #868789;
-  --gray-4: #56575a;
-  --gray-5: #25272b;
-  --gray-6: #191b1f;
-  --gray-7: #14161a;
-  --gray-6: #0d0e12;
+  --gray-50: #f5f5f5;
+  --gray-50-hsl: 0deg, 0%, 96%;
+  --gray-100: #e5eaea;
+  --gray-100-hsl: 180deg, 3%, 90%;
+  --gray-200: #d4d6d8;
+  --gray-200-hsl: 210deg, 6%, 83%;
+  --gray-300: #c2c4c7;
+  --gray-300-hsl: 210deg, 4%, 77%;
+  --gray-400: #b0b2b6;
+  --gray-400-hsl: 220deg, 4%, 69%;
+  --gray-500: #9ea0a5;
+  --gray-500-hsl: 220deg, 4%, 63%;
+  --gray-600: #868789;
+  --gray-600-hsl: 240deg, 2%, 53%;
+  --gray-700: #56575a;
+  --gray-700-hsl: 240deg, 3%, 35%;
+  --gray-800: #25272b;
+  --gray-800-hsl: 210deg, 8%, 16%;
+  --gray-900: #191b1f;
+  --gray-900-hsl: 210deg, 11%, 11%;
+  --gray-950: #14161a;
+  --gray-950-hsl: 210deg, 9%, 10%;
 
   --runtime-50: #eefff5;
   --runtime-50-hsl: 149deg, 100%, 96.5%;
@@ -125,19 +140,22 @@ body {
 /* Light and dark theme variables */
 .light {
   --background-raw: hsl(var(--white-hsl));
-  --background-primary: var(--runtime-50-hsl);
-  --background-secondary: var(--runtime-200-hsl);
-  --background-tertiary: var(--runtime-300-hsl);
-  --foreground-primary: var(--runtime-950-hsl);
-  --foreground-secondary: var(--runtime-900-hsl);
-  --foreground-tertiary: var(--runtime-500-hsl);
-  --foreground-quaternary: var(--runtime-100-hsl);
+  --background-primary: var(--gray-50-hsl);
+  --background-secondary: var(--gray-100-hsl);
+  --background-tertiary: var(--gray-200-hsl);
+  --foreground-primary: var(--gray-800-hsl);
+  --foreground-secondary: var(--gray-600-hsl);
+  --foreground-tertiary: var(--gray-300-hsl);
+  --foreground-quaternary: var(--gray-50-hsl);
   --runtime-background: 124deg, 100%, 97.1%;
   --runtime-foreground: 184deg, 100%, 10%;
-  --primary: var(--runtime-700-hsl);
+
+  --primary: var(--deploy-500-hsl);
+  --header-highlight: var(--runtime-300-hsl);
 
   [data-services-page="true"] {
-    --background-primary: var(--deploy-50-hsl);
+    --header-highlight: var(--deploy-200-hsl);
+    /* --background-primary: var(--deploy-50-hsl);
     --background-secondary: var(--deploy-100-hsl);
     --background-tertiary: var(--deploy-300-hsl);
     --foreground-primary: var(--deploy-950-hsl);
@@ -145,26 +163,28 @@ body {
     --foreground-tertiary: var(--deploy-200-hsl);
     --foreground-quaternary: var(--deploy-100-hsl);
 
-    --primary: var(--deploy-500-hsl);
+    --primary: var(--deploy-500-hsl); */
   }
 }
 
 .dark {
   --background-raw: hsl(149deg, 100%, 1%);
-  --background-primary: var(--runtime-1050-hsl);
-  --background-secondary: var(--runtime-1000-hsl);
-  --background-tertiary: var(--runtime-950-hsl);
-  --foreground-primary: var(--runtime-50-hsl);
-  --foreground-secondary: var(--runtime-100-hsl);
-  --foreground-tertiary: var(--runtime-950-hsl);
-  --foreground-quaternary: var(--runtime-1000-hsl);
+  --background-primary: var(--gray-950-hsl);
+  --background-secondary: var(--gray-900-hsl);
+  --background-tertiary: var(--gray-800-hsl);
+  --foreground-primary: var(--gray-50-hsl);
+  --foreground-secondary: var(--gray-400-hsl);
+  --foreground-tertiary: var(--gray-800-hsl);
+  --foreground-quaternary: var(--gray-900-hsl);
   --runtime-background: 124deg, 100%, 3%;
   --runtime-foreground: 184deg, 100%, 90%;
   --note: 224deg, 64.3%, 82.9%;
   --info: 224deg, 64.3%, 69%;
   --caution: 45.4deg, 93.39%, 67.11%;
+
   /* The following are not different from light mode (yet?) */
-  --primary: var(--runtime-300-hsl);
+  --header-highlight: var(--runtime-300-hsl);
+  --primary: var(--deploy-500-hsl);
   --tip: 142deg, 76.2%, 36.3%;
   --color-fg-default: #fff;
 
@@ -172,7 +192,7 @@ body {
   background-color: var(--background-primary);
 
   [data-services-page="true"] {
-    --background-raw: hsl(var(--deploy-950-hsl));
+    /* --background-raw: hsl(var(--deploy-950-hsl));
     --background-primary: var(--deploy-900-hsl);
     --background-secondary: var(--deploy-800-hsl);
     --background-tertiary: var(--deploy-700-hsl);
@@ -181,7 +201,7 @@ body {
     --foreground-tertiary: var(--deploy-700-hsl);
     --foreground-quaternary: var(--deploy-800-hsl);
 
-    --primary: var(--deploy-300-hsl);
+    --primary: var(--deploy-300-hsl); */
   }
 }
 
@@ -281,6 +301,9 @@ h1 {
   /* Override gfm base styles */
   a {
     color: hsl(var(--primary));
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
   }
 
   p {
@@ -329,14 +352,14 @@ h1 {
   }
 
   & details {
-    @apply rounded border border-gray-1 py-4 px-4;
+    @apply rounded border border-gray-600 py-4 px-4;
 
     &[open] summary {
-      @apply pb-4 mb-4 border-b border-gray-00;
+      @apply pb-4 mb-4 border-b border-gray-300;
     }
 
     & summary::marker {
-      @apply text-gray-2;
+      @apply text-gray-700;
     }
   }
 
@@ -461,7 +484,7 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 }
 
 .markdown-body .admonition {
-  @apply py-4 px-6 pb-2 rounded-lg border-2 bg-gray-1/5 border-gray-3;
+  @apply py-4 px-6 pb-2 rounded-lg border-2 bg-gray-600/5 border-gray-800;
 }
 
 .markdown-body .admonition .title {

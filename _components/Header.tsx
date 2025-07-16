@@ -10,11 +10,11 @@ export default function (data: Lume.Data) {
             ? <data.comp.DeployLogo />
             : <data.comp.Logo />}
         </a>
-        <nav class="hidden lg:flex items-center gap-2">
+        <nav class="hidden lg:flex h-full items-center">
           {data.navigation.map((nav: NavData) => (
             <a
               href={nav.href}
-              className={`header-nav-link blocklink ${nav.style ?? ""}`}
+              className={`header-nav-link ${nav.style ?? ""}`}
               {...(nav.href.includes(data.currentSection)
                 ? { "data-active": true, "aria-current": "location" }
                 : {})}

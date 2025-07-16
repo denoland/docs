@@ -1,51 +1,10 @@
-.sub-nav-heading {
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-  font-weight: bold;
-}
-
-.sub-nav {
-  padding: 0;
-  margin: 0 0 1.25rem;
-  list-style: none;
-  min-width: 14rem;
-}
-
-.sub-nav-heading-link,
-.sub-nav-heading-text {
-  display: block;
-  padding: 0.625rem 0;
-  color: hsl(var(--foreground-secondary));
-  font-weight: bold;
-  line-height: 1;
-}
-
-.sub-nav-heading-link:hover {
-  text-decoration: none;
-}
-
-.sub-nav-heading-link[data-active],
-.sub-nav-heading-link:hover {
-  background-color: hsl(var(--background-secondary));
-  padding-left: 0.25rem;
-}
-
-.sub-nav-link {
-  display: block;
-  padding: 0.25rem 0.75rem;
-  margin: 0;
-}
-
-.sub-nav-link,
 li:has(.sub-nav-toggle) {
   border-left: 1px solid hsl(var(--foreground-tertiary));
 }
 
-.sub-nav-link[data-active="true"],
-.sub-nav-link:hover,
 .sub-nav-toggle:hover,
 li:has(.sub-nav-toggle:hover) {
-  background-color: hsl(var(--background-secondary));
+  background-color: hsl(var(--header-highlight));
   border-color: hsl(var(--foreground-secondary));
 }
 
@@ -69,22 +28,14 @@ li:has(.sub-nav-toggle:hover) {
   }
 }
 
-.tertiary-nav {
-  margin: 0;
-  margin-inline-start: 1rem;
-  overflow-y: hidden;
-}
-
-.sub-nav-toggle-checkbox:checked + .tertiary-nav {
-  height: auto;
-  max-height: fit-content;
-  padding-block-end: 1rem;
-}
-
 li:has(> .sub-nav-toggle) {
   display: grid;
   grid-template-rows: max-content 0fr;
   transition: grid 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.sub-nav-toggle + ul {
+  margin-left: 1rem;
 }
 
 li:has(> .sub-nav-toggle .sub-nav-toggle-checkbox:checked),

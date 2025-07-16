@@ -81,7 +81,6 @@ export default function Layout(data: Lume.Data) {
           currentUrl={data.url}
           data={data}
         />
-        <data.comp.RefHeader currentUrl={data.url} />
         <data.comp.SubNav
           data={data}
           currentUrl={data.url}

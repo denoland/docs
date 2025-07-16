@@ -3,7 +3,7 @@
   height: var(--header-height);
   position: sticky;
   top: 0;
-  background-color: hsl(var(--background-primary));
+  background-color: var(--background-raw);
   border-bottom: 1px solid hsl(var(--foreground-tertiary));
   z-index: 100;
 }
@@ -22,23 +22,37 @@ header {
   .header-nav-link {
     font-size: clamp(0.8rem, 1.5vw, 1rem);
     white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    padding: 0 0.75rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: color 200ms ease-in-out;
+    color: hsl(var(--foreground-primary));
 
-    &[aria-current] {
-      position: relative;
+    &::after {
+      content: "";
+      height: 100%;
+      width: 100%;
+      background-color: hsl(var(--header-highlight));
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: transform 0.2s cubic-bezier(0.86, 0, 0.07, 1);
+      transform-origin: right;
+      transform: scaleX(0);
+      z-index: -1;
+    }
+
+    &:hover, &[data-active] {
+      color: hsl(var(--gray-800-hsl));
 
       &::after {
-        content: "";
-        width: 100%;
-        height: calc(100% + 1.75rem + 1px);
-        position: absolute;
-        top: -0.75rem;
-        left: 0;
-        background-color: var(--background-raw);
-        border: 1px solid hsl(var(--foreground-tertiary));
-        border-bottom: 0;
-        z-index: -1;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
+        transform-origin: left;
+        transform: scaleX(1);
       }
     }
   }
@@ -55,17 +69,6 @@ header {
   .logo {
     width: 100%;
     max-height: 2.5rem;
-  }
-}
-
-body:has(.refheader) header .header-nav-link[aria-current]::after {
-  background-color: hsl(var(--background-secondary));
-}
-
-@media (min-width: 64rem) {
-  .header-nav-link[data-active] {
-    color: hsl(var(--primary));
-    position: relative;
   }
 }
 

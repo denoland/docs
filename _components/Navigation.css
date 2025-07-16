@@ -9,11 +9,11 @@
   height: calc(100vh - var(--header-height));
   height: calc(100dvh - var(--header-height));
   width: 100%;
+  min-width: 14rem;
   background: var(--background-raw);
   opacity: 0;
   padding: 1rem;
   overflow: auto;
-  font-size: 1rem;
   font-size: 0.8125rem;
 }
 
@@ -38,6 +38,7 @@ body:has(.refheader) .nav {
     opacity: 1 !important;
     font-size: 0.8125rem;
     padding: 0;
+    padding-bottom: 4rem;
   }
 
   body:has(.refheader) .nav {
