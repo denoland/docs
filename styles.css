@@ -7,6 +7,16 @@
 :root {
   --white-hsl: 215deg, 81%, 100%;
 
+  --gray-0: #f5f5f5;
+  --gray-1: #e5eaea;
+  --gray-2: #9ea0a5;
+  --gray-3: #868789;
+  --gray-4: #56575a;
+  --gray-5: #25272b;
+  --gray-6: #191b1f;
+  --gray-7: #14161a;
+  --gray-6: #0d0e12;
+
   --runtime-50: #eefff5;
   --runtime-50-hsl: 149deg, 100%, 96.5%;
   --runtime-100: #d6ffe9;
