@@ -2,8 +2,8 @@ import { NavData } from "../types.ts";
 
 export default function (data: Lume.Data) {
   return (
-    <nav aria-labelledby="primary-navigation">
-      <ul className="main-nav">
+    <nav class="main-nav">
+      <ul>
         {data.navigation.map((nav: NavData) => (
           <li>
             <a

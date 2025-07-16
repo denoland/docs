@@ -309,7 +309,7 @@ export default function Index() {
   }, []);
 
   return (
-    <main>
+    <main id="content">
       <h1>🦕 Dinosaur app</h1>
       <p>Click on a dinosaur below to learn more.</p>
       {dinosaurs.map((dinosaur: { name: string; description: string }) => {

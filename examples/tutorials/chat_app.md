@@ -191,7 +191,7 @@ file and add the following code:
       <h2>Users online</h2>
       <ul id="users"></ul>
     </aside>
-    <main>
+    <main id="content">
       <div id="conversation"></div>
       <form id="form">
         <input

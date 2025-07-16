@@ -6,12 +6,7 @@
   padding: 1rem;
 }
 
-@media (min-width: 1024px) {
-  .content {
-    display: grid;
-    grid-template-columns: minmax(0, 8fr) minmax(0, 3fr);
-  }
-
+@media (min-width: 64rem) {
   .toc-desktop {
     display: block;
     position: sticky;
@@ -19,9 +14,10 @@
     top: 4rem;
     max-width: 300px;
     max-height: calc(100vh - 4rem);
-    height: max-content;
+    min-height: max-content;
     overflow-y: auto;
-    border-left: 1px solid hsl(var(--foreground-tertiary));
+    min-width: 10rem;
+    border-inline-start: 1px solid hsl(var(--foreground-tertiary));
   }
 
   .toc-mobile {
@@ -52,20 +48,20 @@
   }
 }
 
-@media (min-width: 86rem) {
-  .content {
-    grid-template-columns: minmax(0, 1fr) minmax(20rem, max-content);
+@media (min-width: 80rem) {
+  .toc-desktop {
+    padding-inline-end: 0;
   }
 }
 
 body:has(.refheader) .toc-desktop {
-  top: 6.5rem;
+  top: calc(var(--header-height) + var(--subnav-height));
 }
 
 /* Reference ToC styles */
 .documentNavigation.toc-desktop {
   position: sticky;
-  top: 6.5rem;
+  top: calc(var(--header-height) + var(--subnav-height));
   font-size: small;
   text-overflow: ellipsis;
   color: hsl(var(--foreground-secondary));

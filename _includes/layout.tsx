@@ -3,6 +3,7 @@ export function deleteBackticks(str?: string) {
 }
 
 export default function Layout(data: Lume.Data) {
+  const isReference = data.url.startsWith("/api/");
   const section = data.url.split("/").filter(Boolean)[0];
   const description = data.description ||
     "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
@@ -59,7 +60,6 @@ export default function Layout(data: Lume.Data) {
         <link rel="stylesheet" href="/gfm.css" />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/overrides.css" />
-        <link rel="stylesheet" href="/style.css" />
         <link rel="stylesheet" href="/components.css" />
         <script type="module" defer src="/components.js"></script>
         <script type="module" defer src="/lint_rules.client.js"></script>
@@ -76,21 +76,37 @@ export default function Layout(data: Lume.Data) {
       <body
         data-services-page={Boolean(isServicesPage)}
       >
-        <data.comp.Header currentSection={section} />
-        <data.comp.RefHeader currentUrl={data.url} />
+        <a
+          href="#content"
+          class="opacity-0 p-2 px-4 bg-background-secondary transition-transform duration-150 rounded-md ease-out absolute top-2 left-2 -translate-y-full focus:opacity-100 focus:translate-y-0 z-[500]"
+        >
+          Skip to main content
+        </a>
+        <data.comp.Header
+          currentSection={section}
+          currentUrl={data.url}
+          data={data}
+        />
         <data.comp.SubNav
           data={data}
           currentUrl={data.url}
         />
-        <div className="layout">
+        <div
+          class={`layout ${
+            data.toc ? "layout--three-column" : "layout--two-column"
+          }`}
+        >
           <data.comp.Navigation
             data={data}
             currentSection={section}
             currentUrl={data.url}
           />
           {data.children}
-          <data.comp.Footer />
+          {!isReference && (
+            <data.comp.TableOfContents toc={data.toc} data={data} />
+          )}
         </div>
+        <data.comp.Footer />
       </body>
     </html>
   );

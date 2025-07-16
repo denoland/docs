@@ -6,8 +6,12 @@ export default function () {
         <span className="hamburger-bar hamburger-bar--middle"></span>
         <span className="hamburger-bar hamburger-bar--bottom"></span>
         <span class="sr-only">Toggle navigation menu</span>
+        <input
+          type="checkbox"
+          id="hamburger"
+          className="hamburger-checkbox sr-only"
+        />
       </label>
-      <input type="checkbox" id="hamburger" className="hamburger-checkbox" />
     </>
   );
 }

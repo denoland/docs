@@ -39,16 +39,16 @@ NUXT-APP/
 ├── .nuxt/                   # Nuxt build directory
 ├── node_modules/           # Node.js dependencies
 ├── public/                 # Static files
-│   ├── favicon.ico        
-│   └── robots.txt         
+│   ├── favicon.ico
+│   └── robots.txt
 ├── server/                # Server-side code
-│   └── tsconfig.json     
-├── .gitignore            
+│   └── tsconfig.json
+├── .gitignore
 ├── app.vue               # Root Vue component
 ├── nuxt.config.ts        # Nuxt configuration
 ├── package-lock.json     # NPM lock file
 ├── package.json          # Project manifest
-├── README.md            
+├── README.md
 └── tsconfig.json        # TypeScript configuration
 ```
 
@@ -178,7 +178,7 @@ const { data: dinosaurs } = await useFetch("/api/dinosaurs");
 </script>
 
 <template>
-  <main>
+  <main id="content">
     <h1 class="text-2xl font-bold mb-4">Welcome to the Dinosaur app</h1>
     <p class="mb-4">Click on a dinosaur below to learn more.</p>
     <ul class="space-y-2">

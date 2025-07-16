@@ -30,7 +30,7 @@ export default function ExamplePage({ example }: Props) {
         <div class="flex flex-col gap-2">
           {example.parsed.description && (
             <p
-              className="max-w-[100%]"
+              className="max-w-full"
               dangerouslySetInnerHTML={{
                 __html: example.parsed.description,
               }}

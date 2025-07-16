@@ -9,5 +9,8 @@
   "editor.detectIndentation": true,
   "[markdown]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
   }
 }

@@ -1,38 +1,63 @@
-header {
+.header-wrapper {
+  width: 100%;
+  height: var(--header-height);
   position: sticky;
   top: 0;
+  border-bottom: 1px solid hsl(var(--foreground-tertiary));
+
+  background-color: var(--background-raw);
+  z-index: 100;
+}
+
+body:has(.refheader) .header-wrapper {
+  border-bottom: 0;
+}
+
+header {
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem;
-  padding-left: 3rem;
-  border-bottom: 1px solid hsl(var(--foreground-tertiary));
-  background-color: hsl(var(--background-primary));
-  z-index: 100;
-
-  nav {
-    display: none;
-  }
+  padding-inline: 1rem;
+  height: 100%;
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
 
   .header-nav-link {
     font-size: clamp(0.8rem, 1.5vw, 1rem);
     white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    padding: 0 0.75rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: color 200ms ease-in-out;
+    color: hsl(var(--foreground-primary));
 
-    &[aria-current] {
-      position: relative;
+    &::after {
+      content: "";
+      height: 100%;
+      width: 100%;
+      background-color: hsl(var(--header-highlight));
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: transform 0.2s cubic-bezier(0.86, 0, 0.07, 1);
+      transform-origin: right;
+      transform: scaleX(0);
+      z-index: -1;
+    }
+
+    &:hover, &[data-active] {
+      color: hsl(var(--gray-800-hsl));
 
       &::after {
-        content: "";
-        width: 100%;
-        height: calc(100% + 2rem);
-        position: absolute;
-        top: -1rem;
-        left: 0;
-        background-color: hsl(var(--background-secondary));
-        border: 1px solid hsl(var(--foreground-tertiary));
-        border-block: 0;
-        z-index: -1;
+        transform-origin: left;
+        transform: scaleX(1);
       }
     }
   }
@@ -52,20 +77,13 @@ header {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 82rem) {
   header {
-    padding-left: 1rem;
-    nav {
-      display: flex;
-    }
-  }
-  .header-nav-link[data-active] {
-    color: hsl(var(--primary));
-    position: relative;
+    padding: 0;
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 47.9375rem) {
   .logo-link {
     margin-right: auto;
   }
