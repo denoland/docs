@@ -29,14 +29,16 @@ header {
       &::after {
         content: "";
         width: 100%;
-        height: calc(100% + 2rem);
+        height: calc(100% + 1.75rem + 1px);
         position: absolute;
-        top: -1rem;
+        top: -0.75rem;
         left: 0;
-        background-color: hsl(var(--background-secondary));
+        background-color: var(--background-raw);
         border: 1px solid hsl(var(--foreground-tertiary));
-        border-block: 0;
+        border-bottom: 0;
         z-index: -1;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
       }
     }
   }
@@ -56,6 +58,10 @@ header {
   }
 }
 
+body:has(.refheader) header .header-nav-link[aria-current]::after {
+  background-color: hsl(var(--background-secondary));
+}
+
 @media (min-width: 64rem) {
   .header-nav-link[data-active] {
     color: hsl(var(--primary));
@@ -63,7 +69,7 @@ header {
   }
 }
 
-@media (min-width: 80rem) {
+@media (min-width: 82rem) {
   header {
     padding: 0;
   }

@@ -3,7 +3,9 @@ import { NavData } from "../types.ts";
 export default function (data: Lume.Data) {
   return (
     <div class="header-wrapper">
-      <header>
+      <header
+        class={data.currentSection === "examples" ? "is-examples-page" : ""}
+      >
         <data.comp.Hamburger />
         <a href="/" title="Deno docs home" className="logo-link">
           {["services", "deploy", "subhosting"].includes(data.currentSection)

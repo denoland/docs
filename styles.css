@@ -206,6 +206,10 @@ label:has(input.sr-only:focus-visible) {
   outline-offset: -1px;
 }
 
+main:focus-visible {
+  outline: none;
+}
+
 p {
   max-width: var(--max-text-width);
 }
