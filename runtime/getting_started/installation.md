@@ -67,7 +67,7 @@ asdf set -u deno latest
 asdf set deno latest
 ```
 
-Using [vfox](https://github.com/version-fox/vfox):
+Using [vfox](https://vfox.dev/):
 
 ```shell
 vfox add deno
@@ -116,7 +116,7 @@ Using [Winget](https://github.com/microsoft/winget-cli):
 winget install DenoLand.Deno
 ```
 
-Using [vfox](https://github.com/version-fox/vfox):
+Using [vfox](https://vfox.dev/):
 
 ```shell
 vfox add deno
@@ -167,7 +167,7 @@ asdf set -u deno latest
 asdf set deno latest
 ```
 
-Using [vfox](https://github.com/version-fox/vfox):
+Using [vfox](https://vfox.dev/):
 
 ```shell
 vfox add deno
