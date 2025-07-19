@@ -23,7 +23,7 @@ Deno.bench("URL parsing", () => {
 
 Secondly, run the benchmark using the `deno bench` subcommand.
 
-```sh
+```shell
 $ deno bench url_bench.ts
 cpu: Apple M1 Max
 runtime: deno 1.21.0 (aarch64-apple-darwin)
@@ -153,7 +153,7 @@ Deno.bench("performance.now()", { group: "timing" }, () => {
 });
 ```
 
-```sh
+```shell
 $ deno bench time_bench.ts
 cpu: Apple M1 Max
 runtime: deno 1.21.0 (aarch64-apple-darwin)
@@ -246,14 +246,14 @@ Deno.bench({
 This command will run all of these benches because they all contain the word
 "bench".
 
-```shell
+```bash
 deno bench --filter "bench" benchmarks/
 ```
 
 On the flip side, the following command uses a pattern and will run the second
 and third benchmarks.
 
-```shell
+```bash
 deno bench --filter "/bench-*\d/" benchmarks/
 ```
 
@@ -305,7 +305,7 @@ Deno.bench({
 
 To retrieve the output as JSON, use the `--json` flag:
 
-```sh
+```shell
 $ deno bench my_bench.ts --json
 {
   "version": 1,
