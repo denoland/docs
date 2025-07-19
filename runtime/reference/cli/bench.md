@@ -24,7 +24,7 @@ Deno.bench("URL parsing", () => {
 Secondly, run the benchmark using the `deno bench` subcommand.
 
 ```sh
-deno bench url_bench.ts
+$ deno bench url_bench.ts
 cpu: Apple M1 Max
 runtime: deno 1.21.0 (aarch64-apple-darwin)
 
@@ -153,7 +153,7 @@ Deno.bench("performance.now()", { group: "timing" }, () => {
 });
 ```
 
-```shellsesssion
+```sh
 $ deno bench time_bench.ts
 cpu: Apple M1 Max
 runtime: deno 1.21.0 (aarch64-apple-darwin)
@@ -305,27 +305,35 @@ Deno.bench({
 
 To retrieve the output as JSON, use the `--json` flag:
 
-```
-$ deno bench --json bench_me.js
+```sh
+$ deno bench -A --json
+Check file:///C:/path/to/project/benchmark/deno.ts
 {
-  "runtime": "Deno/1.31.0 x86_64-apple-darwin",
+  "version": 1,
+  "runtime": "Deno/2.4.1 x86_64-pc-windows-msvc",
   "cpu": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
   "benches": [
-    "origin": "file:///dev/bench_me.js",
-    "group": null,
-    "name": "Deno.UnsafePointerView#getUint32",
-    "baseline": false,
-    "result": {
-      "ok": {
-        "n": 49,
-        "min": 1251.9348,
-        "max": 1441.2696,
-        "avg": 1308.7523755102038,
-        "p75": 1324.1055,
-        "p99": 1441.2696,
-        "p995": 1441.2696,
-        "p999": 1441.2696
-      }
+    {
+      "origin": "file:///C:/path/to/project/benchmark/deno.ts",
+      "group": null,
+      "name": "benchmark-name",
+      "baseline": false,
+      "results": [
+        {
+          "ok": {
+            "n": 294,
+            "min": 1702100.0,
+            "max": 2478600.0,
+            "avg": 1768569.0,
+            "p75": 1791200.0,
+            "p99": 2210700.0,
+            "p995": 2322100.0,
+            "p999": 2478600.0,
+            "highPrecision": true,
+            "usedExplicitTimers": false
+          }
+        }
+      ]
     }
   ]
 }
