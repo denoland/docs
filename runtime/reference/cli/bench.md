@@ -306,30 +306,29 @@ Deno.bench({
 To retrieve the output as JSON, use the `--json` flag:
 
 ```sh
-$ deno bench -A --json
-Check file:///C:/path/to/project/benchmark/deno.ts
+$ deno bench my_bench.ts --json
 {
   "version": 1,
-  "runtime": "Deno/2.4.1 x86_64-pc-windows-msvc",
-  "cpu": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+  "runtime": "Deno/2.4.2 x86_64-unknown-linux-gnu",
+  "cpu": "12th Gen Intel(R) Core(TM) i3-12100",
   "benches": [
     {
-      "origin": "file:///C:/path/to/project/benchmark/deno.ts",
+      "origin": "file:///path/to/my_bench.ts",
       "group": null,
-      "name": "benchmark-name",
+      "name": "Test",
       "baseline": false,
       "results": [
         {
           "ok": {
-            "n": 294,
-            "min": 1702100.0,
-            "max": 2478600.0,
-            "avg": 1768569.0,
-            "p75": 1791200.0,
-            "p99": 2210700.0,
-            "p995": 2322100.0,
-            "p999": 2478600.0,
-            "highPrecision": true,
+            "n": 51,
+            "min": 946.7129,
+            "max": 3024.3281,
+            "avg": 1241.3926823529412,
+            "p75": 1174.9718,
+            "p99": 3024.3281,
+            "p995": 3024.3281,
+            "p999": 3024.3281,
+            "highPrecision": false,
             "usedExplicitTimers": false
           }
         }
