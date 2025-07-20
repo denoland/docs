@@ -59,14 +59,14 @@ configure both vite and Deno to work together.
 Install the deno plugin for Vite, the React types and the Vite React plugin:
 
 ```sh
-deno add npm:deno-vite-plugin@latest npm:@types/react@latest npm:@vitejs/plugin-react@latest
+deno add npm:@deno/vite-plugin@latest npm:@types/react@latest npm:@vitejs/plugin-react@latest
 ```
 
 We'll also need to install the Oak web framework for Deno to handle our API
 requests, and CORS middleware to allow cross-origin requests from the React app:
 
 ```sh
-deno add jsr:@oak/oak@ jsr:@tajpouria/cors
+deno add jsr:@oak/oak jsr:@tajpouria/cors
 ```
 
 This will add these dependencies to a new `deno.json` file.
