@@ -41,6 +41,39 @@ Environment Variables". For more details on environment variables, see the
 [Environment Variables and Contexts](/deploy/early-access/reference/env-vars-and-contexts/)
 documentation.
 
+## Renaming an application
+
+Applications can be renamed by editing the app slug on the app settings page.
+This will update the default domain names associated with the app, as they are
+based on the app slug. The new slug must be unique within the organization (i.e.
+must not be in use by another app or playground in the same organization).
+
+:::warning
+
+Any previous `deno.net` URLs pointing to the app will no longer work after
+renaming.
+
+Custom domains will continue to work, as they are not tied to the app slug.
+
+:::
+
+## Deleting an application
+
+Applications can be deleted from the app settings page. This will remove the app
+and all its revisions from the organization. All existing deployments will
+immediately stop serving traffic, and all custom domain associations will be
+removed.
+
+No traffic will be served from the app after deletion, and it will not be
+possible to access the app or its revisions. Deleted apps cannot be restored
+through the Deno Deploy UI.
+
+:::info
+
+Deleted an app by mistake? Contact Deno support within 30 days to restore it.
+
+:::
+
 ## Limitations
 
 > ⚠️ Apps cannot currently be transferred to another organization.

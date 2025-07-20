@@ -10,6 +10,49 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
+## July 21st, 2025
+
+### Features
+
+- New: Database support for Deno Deploy<sup>EA</sup> apps, allowing you to
+  easily connect to and use Postgres databases in your applications.
+  - Provision a Postgres database instance on AWS RDS, Neon, Supabase, or any
+    other provider and then link it to your Deno Deploy<sup>EA</sup>
+    organization.
+  - Assign the database instance to an application, making it available in the
+    application's environment.
+  - Every timeline (production, each git branch, and previews) has their own
+    isolated database with a separate schema and data, allowing you to test
+    migrations and changes without affecting production data.
+  - Use any Postgres client library to connect, including `npm:pg`,
+    `npm:drizzle`, or `npm:kysely`.
+- Applications and playgrounds can now be renamed. Note, old `deno.net` URLs
+  will no longer work after renaming, but custom domains will continue to
+  function.
+- Applications and playgrounds can now be deleted.
+- Playgrounds now have an HTTP Explorer tab that allows you to make arbitrary
+  HTTP requests to any URL served by the playground. This is useful for testing
+  APIs or other services that do not serve a web page.
+- You can now delete entire folders in the playground file explorer by pressing
+  the delete button next to the folder name.
+- You can now drag a zip file onto the playground file explorer to upload all
+  files in the zip file to the playground.
+
+### Bug fixes
+
+- `DENO_` prefixed environment variables such as `DENO_CONDITIONS`,
+  `DENO_COMPAT`, and `DENO_AUTH_TOKENS` can now be set without error.
+- The `DENO_REVISION_ID` environment variable is now correctly exposed to
+  applications and playgrounds.
+- The custom domain assignment drawer now does shows custom domains that are
+  already assigned to another application or playground as disabled.
+- The network usage graph on the metrics page now correctly shows incoming and
+  outgoing traffic. Previously, the data shown was incorrect.
+- For newly created organizations the first build now waits until the
+  `<org>.deno.net` domain is provisioned before the routing step.
+- Pressing `Ctrl-S` / `Cmd-S` in the playground now saves the current file and
+  triggers a build, instead of opening the browser's save dialog.
+
 ## July 9th, 2025
 
 ### Features
