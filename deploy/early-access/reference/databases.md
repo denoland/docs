@@ -139,6 +139,35 @@ await pool.query(`
 `);
 ```
 
+### Local Development
+
+When developing locally, you can use either a local PostgreSQL instance (install
+PostgreSQL through your package manager or download it from postgresql.org) or
+connect to a remote database server.
+
+Create a `.env` file (if one does not yet exist) in your project root and add to
+it the PostgreSQL connection details:
+
+```bash
+PGHOST=localhost        # or your remote host
+PGPORT=5432
+PGDATABASE=myapp_dev
+PGUSER=myuser
+PGPASSWORD=mypassword
+PGSSLMODE=prefer        # or require for remote connections
+```
+
+Then run your application with the `--env` flag to automatically load these
+environment variables:
+
+```bash
+deno run --env --allow-all main.ts
+```
+
+Your application code remains the same - it will automatically use these
+environment variables to connect to your chosen database during local
+development.
+
 ## SSL Configuration
 
 All database connections use SSL encryption for security. The main difference is
