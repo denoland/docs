@@ -154,7 +154,7 @@ PGPORT=5432
 PGDATABASE=myapp_dev
 PGUSER=myuser
 PGPASSWORD=mypassword
-PGSSLMODE=prefer        # or require for remote connections
+PGSSLMODE=prefer        # or `require` for remote connections
 ```
 
 Then run your application with the `--env` flag to automatically load these
