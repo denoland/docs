@@ -44,7 +44,7 @@
     top: calc(4rem - 1px);
     height: calc(100vh - 4rem);
     overflow-y: auto;
-    min-width: 330px;
+    min-width: 18rem;
   }
 
   body:has(.refheader) .nav {
