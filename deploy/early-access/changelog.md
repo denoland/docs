@@ -46,15 +46,15 @@ Deploy Classic documentation? [View it here](/deploy/).
   `DENO_COMPAT`, and `DENO_AUTH_TOKENS` can now be set without error.
 - The `DENO_REVISION_ID` environment variable is now correctly exposed to
   applications and playgrounds.
-- The custom domain assignment drawer now does shows custom domains that are
-  already assigned to another application or playground as disabled.
+- The custom domain assignment drawer now shows custom domains that are already
+  assigned to another application or playground as disabled.
 - The network usage graph on the metrics page now correctly shows incoming and
   outgoing traffic. Previously, the data shown was incorrect.
 - For newly created organizations the first build now waits until the
   `<org>.deno.net` domain is provisioned before the routing step.
 - Pressing `Ctrl-S` / `Cmd-S` in the playground now saves the current file and
   triggers a build, instead of opening the browser's save dialog.
-- View some specific traces previously hung the trace viewer. These now show
+- Viewing some specific traces previously hung the trace viewer. These now show
   correctly.
 
 ## July 9th, 2025
@@ -64,7 +64,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 - New: Cloud Connect allows you to securely connect your Deno
   Deploy<sup>EA</sup> apps to AWS and GCP, enabling you to use services like AWS
   S3, Google Cloud Storage, without needing to manage credentials.
-  - This is done without storing any long lived static credentials, but rather
+  - This is done without storing any long-lived static credentials, but rather
     using short-lived tokens and OIDC (OpenID Connect) to establish a trust
     relationship between Deno Deploy<sup>EA</sup> and your cloud provider.
   - A setup flow in the app settings page, or a drawer in playgrounds, guides
@@ -79,7 +79,7 @@ Deploy Classic documentation? [View it here](/deploy/).
   overall metrics for all applications in the organization, including the number
   of requests, CPU usage, and memory usage.
 - You can now edit the URL you are viewing in the playground preview iframe by
-  editing the "address bar" that is displayed above the preview
+  editing the "address bar" that is displayed above the preview.
 - Environment variables now default to being a secret when the key contains
   `SECRET`, `KEY`, `TOKEN`, `PRIVATE`, or `PASSWORD`. You can still manually
   switch them to plain text if needed.
@@ -99,13 +99,13 @@ Deploy Classic documentation? [View it here](/deploy/).
 - The organization creation page now correctly displays whether an organization
   slug is taken or not, prior to submitting the form.
 - `npm install` can now install `esbuild` again - previously it would fail with
-  a nondescript error.
+  a generic error.
 
 ## June 24th, 2025
 
 ### Features
 
-- The playground now has live streaming logs and traces panels
+- The playground now has live-streaming logs and traces panels
   - Logs and traces for the current revision are displayed for the past hour
   - Logs and traces can be filtered, just like in the dedicated observability
     pages
@@ -146,8 +146,7 @@ Deploy Classic documentation? [View it here](/deploy/).
   - Builds can now use environment variables and secrets configured in the
     organization or app settings (in the new "Build" context)
   - Builds now have a maximum runtime of 5 minutes
-- The metrics page has had a complete overhaul, by rewriting the chart
-  rendering:
+- The metrics page has had a complete overhaul by rewriting the chart rendering:
   - Dragging on a graph now zooms in on the selected area
   - Much more data can now be shown without the page becoming slow to load
   - The tooltip now follows the mouse cursor, together with a new crosshair that
@@ -158,7 +157,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 - Builds should not get stuck in a pending state anymore
 - Dashboard pages now load significantly faster
-- Correctly show spans in traces that have parents that are not exported (yet)
+- Correctly shows spans in traces that have parents that are not exported (yet)
 - The metrics page correctly refreshes now when switching time ranges
 - The "Clear search" button in the telemetry search bar now works correctly
 - Older Next.js versions (such as Next.js 13) build correctly now
@@ -183,7 +182,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 ### Bug fixes
 
-- SvelteKit auto detection now works when using `npm` as the package manager
+- SvelteKit auto-detection now works when using `npm` as the package manager
 - Prewarming does not trigger random POST requests to your app anymore
 - Visiting a page with a trailing slash will not 404 anymore
 - Drawers will no longer close if you click inside, hold and drag over the

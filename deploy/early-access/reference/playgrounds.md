@@ -56,7 +56,7 @@ when the editor loses focus.
 ## Uploading files
 
 You can upload a zip file containing files and directories to the playground by
-dragging into the file browser area. The contents of the zip file will be
+dragging it into the file browser area. The contents of the zip file will be
 extracted into the playground, preserving the directory structure.
 
 > ⚠️ The playground editor does not support uploading individual files or
@@ -68,9 +68,9 @@ The HTTP Explorer tab in the playground allows you to make arbitrary HTTP
 requests to any URL served by the playground. This is useful for testing APIs or
 other services that do not serve a web page.
 
-To use the HTTP Explorer enter the path and query parameters for the request you
-want to make, select the HTTP method (GET, POST, etc.), and click on the button
-labeled with the selected method.
+To use the HTTP Explorer, enter the path and query parameters for the request
+you want to make, select the HTTP method (GET, POST, etc.), and click on the
+button labeled with the selected method.
 
 Additional request headers can be added by clicking the "Set Headers" button.
 
@@ -78,7 +78,7 @@ After the response has been made, the HTTP Explorer will display the response
 status, headers, and body.
 
 To view the trace for the request, click on the "Trace" button in the response
-section. This will open the request trace for the request in a drawer overtop
+section. This will open the request trace for the request in a drawer on top of
 the playground editor. From there you can also view any `console.log` output
 that was captured during the request.
 
@@ -86,7 +86,7 @@ that was captured during the request.
 
 You can rename a playground by editing the playground slug on the playground
 settings page. This will update the default domain names associated with the
-playground, as they are based on the playground slug. The new slug must be
+playground since they are based on the playground slug. The new slug must be
 unique within the organization (i.e. must not be in use by another app or
 playground in the same organization).
 
@@ -107,9 +107,8 @@ the playground and all its revisions from the organization. All existing
 deployments will immediately stop serving traffic, and all custom domain
 associations will be removed.
 
-No traffic will be served from the playground after deletion, and it will not be
-possible to access the playground or its revisions. Deleted playgrounds cannot
-be restored through the Deno Deploy UI.
+The playground and its revisions will no longer be accessible after deletion.
+Deleted playgrounds cannot be restored through the Deno Deploy UI.
 
 :::info
 
