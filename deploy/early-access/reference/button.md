@@ -59,6 +59,8 @@ The following query parameters can be used to configure a Deploy Button:
 - `path` — (optional) The path within the source repo to clone from. Providing
   this will create a new repo whose root is this directory from within the
   source repository.
-- `install` — (optional) the command to execute prior to a build in order to
+- `install` — (optional) The command to execute prior to a build in order to
   install dependencies
-- `build` — (optional) the command to execute to build the application
+- `build` — (optional) The command to execute to build the application
+- `branch` — (optional) Specify a branch in the source repository to clone as
+  the main branch of your new repository
