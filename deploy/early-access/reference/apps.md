@@ -43,10 +43,6 @@ documentation.
 
 ## Limitations
 
-> ⚠️ Apps cannot currently be deleted.
-
-> ⚠️ Apps cannot currently be renamed.
-
 > ⚠️ Apps cannot currently be transferred to another organization.
 
 ## GitHub integration
