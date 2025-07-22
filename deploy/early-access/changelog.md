@@ -10,7 +10,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-## July 21st, 2025
+## July 22nd, 2025
 
 ### Features
 
@@ -37,6 +37,8 @@ Deploy Classic documentation? [View it here](/deploy/).
   the delete button next to the folder name.
 - You can now drag a zip file onto the playground file explorer to upload all
   files in the zip file to the playground.
+- You can now enable auto-format on save in the playground, which will
+  automatically format your code when you save a file.
 
 ### Bug fixes
 
@@ -52,6 +54,8 @@ Deploy Classic documentation? [View it here](/deploy/).
   `<org>.deno.net` domain is provisioned before the routing step.
 - Pressing `Ctrl-S` / `Cmd-S` in the playground now saves the current file and
   triggers a build, instead of opening the browser's save dialog.
+- View some specific traces previously hung the trace viewer. These now show
+  correctly.
 
 ## July 9th, 2025
 
