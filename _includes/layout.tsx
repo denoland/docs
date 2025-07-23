@@ -18,17 +18,10 @@ export default function Layout(data: Lume.Data) {
         <title>{deleteBackticks(data.title)}</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            (function() {
-              const theme = localStorage.getItem('denoDocsTheme') ||
-              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-              document.documentElement.classList.add(theme);
-            })();
-            `,
-          }}
-        >
+        <script>
+          const theme = localStorage.getItem('denoDocsTheme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' :
+          'light'); document.documentElement.classList.add(theme);
         </script>
 
         <link rel="stylesheet" href="/gfm.css" />
