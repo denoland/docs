@@ -61,8 +61,8 @@ export default function ExamplePage({ example }: Props) {
       ))}
       <div>
         {example.parsed.run && (
-          <div class="mt-8">
-            <p>
+          <div class="mt-8 -mx-4 sm:mx-0">
+            <p class="mx-4 sm:mx-0">
               Run{" "}
               <a
                 href={url}

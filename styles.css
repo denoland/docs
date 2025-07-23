@@ -322,6 +322,8 @@ h1 {
   }
 
   :where(h2, h3, h4, h5, h6) {
+    line-height: 1.1;
+
     .header-anchor:hover {
       text-decoration: underline;
       text-underline-offset: 4px;
@@ -542,12 +544,12 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 }
 
 .markdown-body > pre.snippet-code[data-example-position="only"] {
-  @apply md:border-t md:border-b md:pt-4 rounded-t h-full md:rounded
-    md:rounded-b;
+  @apply md:border-t md:border-b md:pt-4 h-full md:rounded md:rounded-b;
 }
 
 .markdown-body > pre.snippet-code[data-example-position="first"] {
-  @apply md:border-t md:border-b-0 md:pt-4 rounded-t h-full md:rounded-b-none;
+  @apply md:border-t md:border-b-0 md:pt-4 md:rounded-t md:rounded-b-none
+    h-full;
 }
 
 .markdown-body > pre.snippet-code[data-example-position="middle"] {
