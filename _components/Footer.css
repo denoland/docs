@@ -9,32 +9,6 @@ footer {
   row-gap: 3rem;
 }
 
-.footer-section {
-  min-width: 170px;
-}
-
-.footer-section-heading {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: bold;
-  color: hsl(var(--foreground-secondary));
-}
-
-.footer-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.footer-link {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: hsl(var(--foreground-secondary));
-  &:hover {
-    color: var(--primary);
-  }
-}
-
 .copyright {
   margin: 4rem auto 0;
   text-align: center;

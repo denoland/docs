@@ -1,15 +1,17 @@
 export default function Footer_new() {
   return (
-    <footer>
+    <footer class="bg-gray-50 dark:bg-gray-950">
       <nav className="footer-nav">
         {data.map((category) => (
-          <section className="footer-section">
-            <h3 class="footer-section-heading">{category.title}</h3>
-            <ul class="footer-list">
+          <section>
+            <h3 class="mb-4 text-base font-bold text-foreground-primary">
+              {category.title}
+            </h3>
+            <ul class="m-0 p-0 list-none">
               {category.items.map((item) => (
                 <li>
                   <a
-                    class="footer-link"
+                    class="block mb-2 text-foreground-secondary hover:text-primary"
                     href={item.to ?? item.href}
                   >
                     {item.label}

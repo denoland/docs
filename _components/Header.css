@@ -1,29 +1,8 @@
-.header-wrapper {
-  width: 100%;
-  height: var(--header-height);
-  position: sticky;
-  top: 0;
-  border-bottom: 1px solid hsl(var(--foreground-tertiary));
-
-  background-color: var(--background-raw);
-  z-index: 100;
-}
-
 body:has(.refheader) .header-wrapper {
   border-bottom: 0;
 }
 
 header {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: 1rem;
-  height: 100%;
-  width: 100%;
-  max-width: 80rem;
-  margin-inline: auto;
-
   .header-nav-link {
     font-size: clamp(0.8rem, 1.5vw, 1rem);
     white-space: nowrap;
@@ -74,12 +53,6 @@ header {
   .logo {
     width: 100%;
     max-height: 2.5rem;
-  }
-}
-
-@media (min-width: 82rem) {
-  header {
-    padding: 0;
   }
 }
 

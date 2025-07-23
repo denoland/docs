@@ -62,6 +62,6 @@
   padding: 1rem;
   padding-left: 0 !important;
   margin: 0;
-  background-color: var(--background-raw);
+  background-color: hsl(var(--background-raw));
   z-index: 2;
 }

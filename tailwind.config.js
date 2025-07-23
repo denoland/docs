@@ -36,6 +36,7 @@ export default {
         "foreground-quaternary": "hsla(var(--foreground-quaternary))",
         "runtime-background": "hsla(var(--runtime-background))",
         "runtime-foreground": "hsla(var(--runtime-foreground))",
+        "background-raw": "hsla(var(--background-raw))",
 
         "info": "hsla(var(--info))",
         "note": "hsla(var(--note))",

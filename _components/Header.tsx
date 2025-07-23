@@ -2,13 +2,11 @@ import { NavData } from "../types.ts";
 
 export default function (data: Lume.Data) {
   return (
-    <div class="header-wrapper">
-      <header>
+    <div class="header-wrapper w-full h-[var(--header-height)] sticky top-0 border-b border-b-foreground-tertiary z-[100] bg-background-raw">
+      <header class="flex gap-4 items-center justify-between px-4 h-full w-full max-w-7xl mx-auto xlplus:px-0">
         <data.comp.Hamburger />
         <a href="/" title="Deno docs home" className="logo-link">
-          {["services", "deploy", "subhosting"].includes(data.currentSection)
-            ? <data.comp.DeployLogo />
-            : <data.comp.Logo />}
+          <data.comp.DenoLogo />
         </a>
         <nav class="hidden lg:flex h-full items-center">
           {data.navigation.map((nav: NavData) => (
