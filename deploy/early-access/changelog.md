@@ -10,7 +10,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-## July 22nd, 2025
+## July 23rd, 2025
 
 ### Features
 
