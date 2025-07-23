@@ -13,8 +13,8 @@ export default function (
         <div className="flex items-center gap-x-4">
           <data.comp.Hamburger />
           <a
-            href="/"
-            title="Deno docs home"
+            href="https://deno.com"
+            title="Deno main website"
             className="flex h-8 md:h-10 md:mr-auto"
           >
             <data.comp.DenoLogo />
