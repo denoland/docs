@@ -3,10 +3,16 @@
   top: var(--header-height);
   display: flex;
   align-items: center;
-  padding-left: 0;
+  padding-left: 1rem;
   background-color: hsl(var(--header-highlight));
   z-index: 5;
   height: var(--subnav-height);
+}
+
+.refheader {
+  @media (min-width: 80rem) {
+    padding-left: 0;
+  }
 }
 
 .refheader-link {

@@ -1,7 +1,7 @@
 .hamburger-label {
   height: 2rem;
-  padding: 0.5rem;
   width: auto;
+  padding: 0.5rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,7 +20,7 @@
 
 .hamburger-bar {
   display: block;
-  width: 1.3rem;
+  width: 1.5rem;
   height: 2px;
   background-color: hsl(var(--foreground-primary));
   transition: all 0.3s ease;
