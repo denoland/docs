@@ -36,7 +36,7 @@ export default function (
         {navData.map((nav: any) => (
           <li key={nav.href}>
             <a
-              className="refheader-link"
+              className="refheader-link text-sm md:text-base"
               data-active={currentUrl.includes(nav.href)}
               href={nav.href}
             >

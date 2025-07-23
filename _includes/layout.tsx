@@ -81,10 +81,6 @@ export default function Layout(data: Lume.Data) {
           currentUrl={data.url}
           data={data}
         />
-        <data.comp.SubNav
-          data={data}
-          currentUrl={data.url}
-        />
         <div
           class={`layout ${
             data.toc ? "layout--three-column" : "layout--two-column"

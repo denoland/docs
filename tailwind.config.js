@@ -30,6 +30,7 @@ export default {
         "background-primary": "hsla(var(--background-primary))",
         "background-secondary": "hsla(var(--background-secondary))",
         "background-tertiary": "hsla(var(--background-tertiary))",
+        "background-quaternary": "hsla(var(--background-quaternary))",
         "foreground-primary": "hsla(var(--foreground-primary))",
         "foreground-secondary": "hsla(var(--foreground-secondary))",
         "foreground-tertiary": "hsla(var(--foreground-tertiary))",

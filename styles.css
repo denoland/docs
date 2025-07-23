@@ -86,7 +86,7 @@
   --deploy-950: #000a0d;
   --deploy-950-hsl: 195deg, 100%, 2.5%;
 
-  --header-height: 4rem;
+  --header-height: 6rem;
   --subnav-height: 2.5rem;
 
   --info: 224deg, 64.3%, 32.9%;
@@ -95,6 +95,10 @@
   --tip: 142deg, 76.2%, 36.3%;
 
   --max-text-width: 40rem;
+
+  @media (min-width: 48rem) {
+    --header-height: 4rem;
+  }
 }
 
 body {
