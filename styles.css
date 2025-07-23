@@ -297,6 +297,7 @@ h1 {
 }
 
 .markdown-body {
+  color: hsl(var(--foreground-primary));
   font-family: inherit;
   @apply bg-transparent !important;
 
@@ -486,8 +487,8 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 }
 
 .markdown-body .admonition {
-  @apply px-4 pt-10 pb-4 rounded-md bg-gray-100 my-8 relative overflow-clip
-    text-sm flex flex-col gap-2;
+  @apply px-4 lg:px-6 pt-10 lg:pt-12 pb-4 rounded-md bg-gray-100 my-8 relative
+    overflow-clip text-sm flex flex-col gap-2;
 }
 
 .markdown-body .admonition > * {
@@ -496,25 +497,22 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 
 .markdown-body .admonition .title {
   @apply font-bold uppercase flex items-center mb-4 absolute top-0 left-0
-    right-0 py-2 px-4 bg-gray-100 leading-none;
+    right-0 py-2 lg:py-3 px-4 lg:px-6 bg-gray-100 leading-none;
+}
+
+.markdown-body .admonition:where(.info, .note, .tip) .title {
+  @apply text-runtime-700 bg-runtime-300 dark:bg-runtime-950
+    dark:text-runtime-300;
 }
 
 .markdown-body .admonition.info {
-  @apply bg-green-100 dark:bg-green-950/50 dark:border dark:border-green-900
-    border-green-200;
-
-  .title {
-    @apply text-green-600 bg-green-200 dark:bg-green-900 dark:text-green-200;
-  }
+  @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
+    dark:border-runtime-950 border-runtime-200;
 }
 
 .markdown-body .admonition.note {
-  @apply bg-green-100 dark:bg-green-950/50 dark:border dark:border-green-900
-    border-green-200;
-
-  .title {
-    @apply text-green-600 bg-green-200 dark:bg-green-900 dark:text-green-200;
-  }
+  @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
+    dark:border-runtime-950 border-runtime-200;
 }
 
 .markdown-body .admonition.caution {
@@ -528,12 +526,8 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 }
 
 .markdown-body .admonition.tip {
-  @apply bg-green-100 dark:bg-green-950/50 dark:border dark:border-green-900
-    border-green-200;
-
-  .title {
-    @apply text-green-600 bg-green-200 dark:bg-green-900 dark:text-green-200;
-  }
+  @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
+    dark:border-runtime-950 border-runtime-200;
 }
 
 .markdown-body .module-info svg {
