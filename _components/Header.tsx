@@ -9,7 +9,7 @@ export default function (
 ) {
   return (
     <header class="w-full h-auto sticky top-0 border-b border-b-foreground-tertiary z-[100] bg-background-raw">
-      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_auto] h-[var(--header-height)] gap-x-4 items-center justify-between px-4 w-full max-w-7xl mx-auto xlplus:px-0">
+      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[auto_auto_1fr] h-[var(--header-height)] gap-x-4 items-center justify-between px-4 w-full max-w-7xl mx-auto xlplus:px-0">
         <a
           href="https://deno.com"
           title="Deno main website"
