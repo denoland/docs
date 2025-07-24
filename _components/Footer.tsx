@@ -1,7 +1,7 @@
 export default function Footer_new() {
   return (
-    <footer class="bg-gray-50 dark:bg-gray-950">
-      <nav className="footer-nav">
+    <footer class="text-sm bg-gray-50 dark:bg-gray-950 p-4 pt-12 sm:px-8 border-t border-t-foreground-tertiary">
+      <nav className="flex flex-col gap-y-12 max-w-7xl md:flex-row md:flex-wrap md:justify-between md:w-full md:gap-y-8 md:mx-auto">
         {data.map((category) => (
           <section>
             <h3 class="mb-4 text-base font-bold text-foreground-primary">
@@ -22,14 +22,12 @@ export default function Footer_new() {
           </section>
         ))}
       </nav>
-      <p class="copyright">
+      <p class="m-0 mt-16 mx-auto text-center text-xs text-foreground-secondary">
         Copyright © {new Date().getFullYear()} the Deno authors.
       </p>
     </footer>
   );
 }
-
-export const css = "@import './_components/Footer.css';";
 
 interface FooterCategory {
   title: string;

@@ -20,10 +20,6 @@
     border-inline-start: 1px solid hsl(var(--foreground-tertiary));
   }
 
-  .toc-mobile {
-    display: none;
-  }
-
   .toc-summary {
     display: none;
   }
