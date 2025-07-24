@@ -26,13 +26,13 @@
 
     &::before {
       content: "";
-      height: 50%;
-      width: 0.5em;
+      height: 0.5em;
+      width: 0.4em;
       background: hsl(var(--foreground-primary));
       clip-path: polygon(0 0, 100% 50%, 0 100%);
       position: absolute;
       left: -1rem;
-      top: 25%;
+      top: calc(50% - 0.25em);
     }
   }
 

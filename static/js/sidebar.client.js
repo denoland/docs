@@ -62,8 +62,8 @@ if (desktopToc) {
       });
     },
     {
-      rootMargin: "-0% 0px -80% 0px",
-      threshold: 0,
+      rootMargin: "-0% 0px -75% 0px",
+      threshold: 0.5,
     },
   );
 
