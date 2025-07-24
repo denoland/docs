@@ -7,8 +7,15 @@ export default function (
     currentUrl: string;
   },
 ) {
+  const hasSubNav = data.page?.data?.secondaryNav?.length ||
+    currentUrl.startsWith("/api");
+
   return (
-    <header class="w-full h-auto sticky top-0 border-b border-b-foreground-tertiary z-[100] bg-background-raw">
+    <header
+      class={`w-full h-auto sticky top-0 z-[100] bg-background-raw ${
+        hasSubNav ? "" : "border-b border-b-foreground-tertiary"
+      }`}
+    >
       <div class="grid grid-cols-[auto_1fr] md:grid-cols-[auto_auto_1fr] h-[var(--header-height)] gap-x-4 items-center justify-between px-4 w-full max-w-7xl mx-auto xlplus:px-0">
         <a
           href="https://deno.com"
@@ -41,22 +48,18 @@ export default function (
           ))}
         </nav>
         <div className="flex items-center gap-x-2 sm:gap-x-4 ml-auto">
-          {
-            /* <data.comp.ExternalLink href="https://deno.com">
-            deno.com
-          </data.comp.ExternalLink> */
-          }
           <data.comp.SearchInput />
           <data.comp.ThemeToggle />
           <data.comp.Hamburger />
         </div>
       </div>
-      <data.comp.SubNav
-        data={data}
-        currentUrl={currentUrl}
-      />
+      {hasSubNav &&
+        (
+          <data.comp.SubNav
+            data={data}
+            currentUrl={currentUrl}
+          />
+        )}
     </header>
   );
 }
-
-export const css = "@import './_components/Header.css';";

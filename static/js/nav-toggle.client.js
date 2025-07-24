@@ -5,7 +5,7 @@ if (sidebar) {
   const checkboxes = document.querySelectorAll(".sub-nav-toggle-checkbox");
   checkboxes.forEach((checkbox) => {
     // on change of the checkbox, update the checked state in the local storage
-    checkbox.addEventListener("change", (e) => {
+    checkbox.addEventListener("change", () => {
       console.log("updated");
       localStorage.setItem(checkbox.id, checkbox.checked);
     });
@@ -22,5 +22,12 @@ if (sidebar && button) {
     const wasOpen = button.getAttribute("aria-pressed") === "true";
     button.setAttribute("aria-pressed", String(!wasOpen));
     sidebar.focus();
+  });
+
+  globalThis.addEventListener("keyup", (e) => {
+    if (e.key === "Escape") {
+      sidebar.classList.remove("open");
+      button.setAttribute("aria-pressed", "false");
+    }
   });
 }
