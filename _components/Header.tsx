@@ -21,8 +21,10 @@ export default function (
           {data.navigation.map((nav: NavData) => (
             <a
               href={nav.href}
-              className={`header-nav-link ${
-                nav.href.includes(currentSection) ? "font-bold" : ""
+              className={`font-[clamp(0.8rem,1.5vw,1rem)] whitespace-nowrap relative py-0 px-4 h-full flex justify-center items-center transition-colors ease-in-out duration-200 text-foreground-primary after:h-full after:w-full after:bg-header-highlight after:absolute after:bottom-0 after:left-0 after:transition-transform after:duration-200 after:ease-[cubic-bezier(0.86,0,0.07,1)] after:origin-right after:scale-x-0 after:-z-10 hover:text-gray-800 hover:after:origin-left hover:after:scale-x-100 ${
+                nav.href.includes(currentSection)
+                  ? "font-bold text-gray-800 after:origin-left after:scale-x-100"
+                  : ""
               } ${nav.style ?? ""}`}
               {...(nav.href.includes(currentSection)
                 ? { "data-active": true, "aria-current": "location" }
