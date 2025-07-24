@@ -10,16 +10,13 @@ export default function (
   return (
     <header class="w-full h-auto sticky top-0 border-b border-b-foreground-tertiary z-[100] bg-background-raw">
       <div class="grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_auto] h-[var(--header-height)] gap-x-4 items-center justify-between px-4 w-full max-w-7xl mx-auto xlplus:px-0">
-        <div className="flex items-center gap-x-4">
-          <data.comp.Hamburger />
-          <a
-            href="https://deno.com"
-            title="Deno main website"
-            className="flex h-8 md:h-10 md:mr-auto"
-          >
-            <data.comp.DenoLogo />
-          </a>
-        </div>
+        <a
+          href="https://deno.com"
+          title="Deno main website"
+          className="block h-8 w-8 xs:w-auto md:h-10 md:mr-auto overflow-hidden"
+        >
+          <data.comp.DenoLogo />
+        </a>
         <nav class="flex h-full items-center row-start-2 col-span-2 md:row-auto md:col-auto -mx-4 md:mx-0 overflow-x-auto">
           {data.navigation.map((nav: NavData) => (
             <a
@@ -41,7 +38,7 @@ export default function (
             </a>
           ))}
         </nav>
-        <div className="flex items-center gap-x-4 ml-auto">
+        <div className="flex items-center gap-x-2 sm:gap-x-4 ml-auto">
           {
             /* <data.comp.ExternalLink href="https://deno.com">
             deno.com
@@ -49,6 +46,7 @@ export default function (
           }
           <data.comp.SearchInput />
           <data.comp.ThemeToggle />
+          <data.comp.Hamburger />
         </div>
       </div>
       <data.comp.SubNav

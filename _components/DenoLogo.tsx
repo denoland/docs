@@ -54,6 +54,9 @@ export default function Logo(props: LogoProps) {
           --textColor: #000;
           --eyeColor: #000;
           --outlineColor: transparent;
+
+          height: 100%;
+          width: auto;
         }
         .dark [data-component="logo"] {
           --textColor: #fff;

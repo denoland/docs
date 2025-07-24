@@ -20,6 +20,7 @@ export default {
   theme: {
     extend: {
       screens: {
+        "xs": "480px",
         "xlplus": "82rem",
       },
       colors: {

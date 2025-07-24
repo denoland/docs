@@ -13,7 +13,12 @@ export default function (
 
   return (
     <>
-      <aside className="nav" data-section={currentSection} id="nav">
+      <aside
+        className="nav"
+        data-section={currentSection}
+        id="nav"
+        tabIndex={-1}
+      >
         <data.comp.SecondaryNav
           sectionData={sectionData}
           currentUrl={currentUrl}

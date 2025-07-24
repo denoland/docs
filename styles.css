@@ -874,7 +874,7 @@ main:has(#example:checked) {
   }
 }
 
-body:has(.raw-container) :is(.hamburger-label, .nav) {
+body:has(.raw-container) :is(#hamburger-button, .nav) {
   display: none;
 }
 
