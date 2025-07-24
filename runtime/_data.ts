@@ -1,12 +1,15 @@
-import { Sidebar } from "../types.ts";
 import { walk } from "jsr:@std/fs";
 import { parse as yamlParse } from "jsr:@std/yaml";
+import { Sidebar } from "../types.ts";
 
 export const sidebar = [
   {
     title: "Getting started",
-    href: "/runtime/",
     items: [
+      {
+        title: "Welcome to Deno",
+        href: "/runtime/",
+      },
       {
         title: "Installation",
         href: "/runtime/getting_started/installation/",
@@ -27,7 +30,6 @@ export const sidebar = [
   },
   {
     title: "Fundamentals",
-    href: "/runtime/fundamentals/",
     items: [
       {
         title: "TypeScript",
@@ -93,7 +95,6 @@ export const sidebar = [
   },
   {
     title: "Reference guides",
-    href: "/runtime/reference/",
     items: [
       {
         title: "CLI",
@@ -285,11 +286,14 @@ export const sidebar = [
   },
   {
     title: "Contributing and support",
-    href: "/runtime/contributing/",
     items: [
       {
         title: "Contributing to Deno",
         items: [
+          {
+            title: "Contributing overview",
+            href: "/runtime/contributing/",
+          },
           {
             title: "Architecture",
             href: "/runtime/contributing/architecture/",
@@ -352,12 +356,10 @@ type DescriptionItem = {
 
 export async function generateDescriptions(): Promise<Descriptions> {
   const descriptions: Descriptions = {};
-  for await (
-    const dirEntry of walk(
-      new URL(import.meta.resolve("../reference_gen/node_descriptions")),
-      { exts: ["yaml"] },
-    )
-  ) {
+  for await (const dirEntry of walk(
+    new URL(import.meta.resolve("../reference_gen/node_descriptions")),
+    { exts: ["yaml"] }
+  )) {
     const file = await Deno.readTextFile(dirEntry.path);
     const parsed = yamlParse(file);
     if (!parsed) {
@@ -369,15 +371,20 @@ export async function generateDescriptions(): Promise<Descriptions> {
 
     if (parsed.symbols) {
       parsed.symbols = Object.fromEntries(
-        Object.entries(parsed.symbols).map((
-          [key, value],
-        ) => [key, handleDescription(value)]),
+        Object.entries(parsed.symbols).map(([key, value]) => [
+          key,
+          handleDescription(value),
+        ])
       );
     }
 
     if (
-      !(parsed.status === "good" || parsed.status === "partial" ||
-        parsed.status === "stubs" || parsed.status === "unsupported")
+      !(
+        parsed.status === "good" ||
+        parsed.status === "partial" ||
+        parsed.status === "stubs" ||
+        parsed.status === "unsupported"
+      )
     ) {
       throw `Invalid status provided in '${dirEntry.name}': ${parsed.status}`;
     }
@@ -405,20 +412,17 @@ export async function generateNodeCompatibility() {
   > = {
     good: {
       label: "Fully supported modules",
-      icon:
-        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#22c55e"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#22c55e"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
       items: [],
     },
     partial: {
       label: "Partially supported modules",
-      icon:
-        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#6366f1"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#6366f1"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>',
       items: [],
     },
     unsupported: {
       label: "Unsupported modules",
-      icon:
-        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#ef4444"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#ef4444"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
       items: [],
     },
   };
@@ -426,33 +430,39 @@ export async function generateNodeCompatibility() {
     grouped[item[1].status].items.push(item);
   }
 
-  return Object.entries(grouped).map(([_status, entries]) => {
-    let content =
-      `<div class="module-info">\n\n## ${entries.icon} ${entries.label} (${entries.items.length}/${
-        Object.keys(descriptions).length
-      })\n\n`;
+  return Object.entries(grouped)
+    .map(([_status, entries]) => {
+      let content = `<div class="module-info">\n\n## ${entries.icon} ${
+        entries.label
+      } (${entries.items.length}/${Object.keys(descriptions).length})\n\n`;
 
-    content += entries.items.map(([key, content]) => {
-      let out = `\n\n### <a href="/api/node/${key}">node:${
-        key.replaceAll("--", "/")
-      }</a>\n\n<div class="item-content">\n\n`;
+      content += entries.items
+        .map(([key, content]) => {
+          let out = `\n\n### <a href="/api/node/${key}">node:${key.replaceAll(
+            "--",
+            "/"
+          )}</a>\n\n<div class="item-content">\n\n`;
 
-      if (content) {
-        if (content.description) {
-          out += `${content.description.description}\n\n`;
-        }
-        if (content.symbols) {
-          for (const [symbol, description] of Object.entries(content.symbols)) {
-            out += `**${
-              symbol === "*" ? "All symbols" : symbol
-            }**: ${description.description}\n\n`;
+          if (content) {
+            if (content.description) {
+              out += `${content.description.description}\n\n`;
+            }
+            if (content.symbols) {
+              for (const [symbol, description] of Object.entries(
+                content.symbols
+              )) {
+                out += `**${symbol === "*" ? "All symbols" : symbol}**: ${
+                  description.description
+                }\n\n`;
+              }
+            }
           }
-        }
-      }
 
-      return out + "</div>";
-    }).join("\n\n");
+          return out + "</div>";
+        })
+        .join("\n\n");
 
-    return content;
-  }).join("\n\n");
+      return content;
+    })
+    .join("\n\n");
 }

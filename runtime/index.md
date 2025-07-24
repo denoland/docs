@@ -1,6 +1,6 @@
 ---
-title: "Getting Started"
-description: "A step-by-step guide to getting started with Deno. Learn how to install Deno, create your first program, and understand the basics of this secure JavaScript, TypeScript, and WebAssembly runtime."
+title: "Welcome to Deno"
+description: "Learn the basics of Deno, a secure JavaScript, TypeScript, and WebAssembly runtime."
 pagination_next: /runtime/getting_started/first_project/
 oldUrl:
   - /manual/
@@ -19,12 +19,27 @@ TypeScript, and WebAssembly runtime with secure defaults and a great developer
 experience. It's built on [V8](https://v8.dev/),
 [Rust](https://www.rust-lang.org/), and [Tokio](https://tokio.rs/).
 
-Let's create and run your first Deno program in under five minutes.
+## Why Deno?
 
-## Install Deno
+- Deno is
+  **[TypeScript-ready out of the box](/runtime/fundamentals/typescript/).** Zero
+  config or additional steps necessary.
+- Deno is **[secure by default](/runtime/fundamentals/security/).** Where other
+  runtimes give full access every script they run, Deno allows you to enforce
+  granular permissions.
+- Deno has a **robust built-in toolchain.** Unlike Node or browser JavaScript,
+  Deno includes a [standard library](/runtime/fundamentals/standard_library/),
+  along with a first-party
+  [linter/formatter](/runtime/fundamentals/linting_and_formatting/),
+  [test runner](/runtime/fundamentals/testing/), and more.
+- Deno is **fully compatible with [Node and npm](/runtime/fundamentals/node/).**
+- Deno is **fast and reliable**.
+- **[Deno is open-source](https://github.com/denoland/deno).**
+
+## Quick install
 
 Install the Deno runtime on your system using one of the terminal commands
-below.
+below:
 
 <deno-tabs group-id="operating-systems">
 <deno-tab value="mac" label="macOS" default>
@@ -60,65 +75,11 @@ system path. You can verify the installation by running:
 deno --version
 ```
 
-## Hello World
+## First steps
 
 Deno can run JavaScript and [TypeScript](https://www.typescriptlang.org/) with
-no additional tools or configuration required. Let's create a simple "hello
-world" program and run it with Deno.
-
-Create a TypeScript or JavaScript file called `main` and include the following
-code:
-
-<deno-tabs group-id="code">
-<deno-tab value="TypeScript" label="TypeScript" default>
-
-```ts title="main.ts"
-function greet(name: string): string {
-  return `Hello, ${name}!`;
-}
-
-console.log(greet("world"));
-```
-
-</deno-tab>
-<deno-tab value="JavaScript" label="JavaScript">
-
-```js title="main.js"
-function greet(name) {
-  return `Hello, ${name}!`;
-}
-
-console.log(greet("world"));
-```
-
-</deno-tab>
-</deno-tabs>
-
-Save the file and run it with Deno:
-
-<deno-tabs group-id="commands">
-<deno-tab value="ts" label="main.ts" default>
-
-```sh
-$ deno main.ts
-Hello, world!
-```
-
-</deno-tab>
-<deno-tab value="js" label="main.js">
-
-```sh
-$ deno main.js
-Hello, world!
-```
-
-</deno-tab >
-</deno-tabs>
-
-## Next Steps
-
-Congratulations! You've just run your first Deno program. Read on to learn more
-about the Deno runtime.
+no additional tools or configuration required, all in a secure,
+batteries-included runtime.
 
 - [Making a Deno project](/runtime/getting_started/first_project/)
 - [Setting up your environment](/runtime/getting_started/setup_your_environment/)
