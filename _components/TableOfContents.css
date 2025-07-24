@@ -20,6 +20,22 @@
     border-inline-start: 1px solid hsl(var(--foreground-tertiary));
   }
 
+  .active {
+    color: hsl(var(--foreground-primary));
+    position: relative;
+
+    &::before {
+      content: "";
+      height: 50%;
+      width: 0.5em;
+      background: hsl(var(--foreground-primary));
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+      position: absolute;
+      left: -1rem;
+      top: 25%;
+    }
+  }
+
   .toc-summary {
     display: none;
   }

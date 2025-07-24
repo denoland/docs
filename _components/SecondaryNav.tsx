@@ -157,4 +157,4 @@ function SidebarCategoryHeading(props: {
 
 export const css = "@import './_components/SecondaryNav.css';";
 
-export const js = `import "/js/nav-toggle.client.js";`;
+export const js = `import "/js/sidebar.client.js";`;
