@@ -36,7 +36,7 @@ if (sidebar && button) {
 // Scroll the current left sidebar item into view
 const currentSidebarItem = sidebar.querySelector("[data-active=true]");
 if (currentSidebarItem) {
-  currentSidebarItem.scrollIntoView();
+  currentSidebarItem.scrollIntoView({ block: "nearest" });
 }
 
 // Make the right sidebar follow the user's scroll position
