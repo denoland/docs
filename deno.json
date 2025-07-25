@@ -21,12 +21,13 @@
     "dev": "deno task serve",
     "build": {
       "description": "Full production build by default",
-      "command": "deno task build:prod"
+      "command": "deno task build:prod && deno task tw"
     },
     "build:prod": {
       "description": "Build the entire site including expensive operations",
       "command": "BUILD_TYPE=FULL deno run --env-file -A lume.ts"
     },
+    "tw": "tailwindcss -i styles.css -o _site/styles.css --minify",
     "build:light": {
       "description": "Build the site without expensive operations",
       "command": "deno run --env-file -A lume.ts"

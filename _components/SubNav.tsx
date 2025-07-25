@@ -27,18 +27,29 @@ export default function (
   if (isReference && !navData) navData = apiReferenceSubnavItems;
 
   return (
-    <nav class="refheader">
+    <nav
+      id="refheader"
+      class="flex items-center pl-4 bg-header-highlight z-10 h-[var(--subnav-height)] overflow-x-auto xlplus:pl-0"
+    >
       <ul class="flex w-full max-w-7xl mx-auto items-center gap-6">
         {navData.map((nav: any) => (
           <li key={nav.href}>
             <a
-              className="refheader-link text-sm md:text-base"
+              className={`whitespace-nowrap text-sm md:text-base p-0 text-gray-800 block relative after:absolute after:bottom-0 after:left-0 after:origin-right after:transition-transform after:scale-x-0 after:block after:w-full after:h-px after:bg-gray-800 hover:after:scale-x-100 hover:after:origin-left ${
+                currentUrl.includes(nav.href) ? "font-bold" : ""
+              }`}
               data-active={currentUrl.includes(nav.href)}
+              {...(currentUrl === nav.href
+                ? { "aria-current": "page" }
+                : currentUrl.includes(nav.href)
+                ? { "aria-current": "location" }
+                : {})}
               href={nav.href}
             >
               {typeof nav.title === "string"
                 ? <span dangerouslySetInnerHTML={{ __html: nav.title }}></span>
                 : nav.title}
+              <span className="sr-only">{currentUrl} {nav.href}</span>
             </a>
           </li>
         ))}
@@ -46,5 +57,3 @@ export default function (
     </nav>
   );
 }
-
-export const css = "@import './_components/SubNav.css';";

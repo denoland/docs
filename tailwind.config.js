@@ -12,6 +12,7 @@ export default {
     "./examples/**/*.{md,ts,tsx}",
     "./lint/**/*.{md,ts,tsx}",
     "*.{ts,tsx}",
+    "./_site/api/**/*.html",
   ],
   corePlugins: {
     preflight: true,
@@ -151,6 +152,17 @@ export default {
 
       spacing: {
         74: "18.5rem",
+        "header": "var(--header-height)",
+        "subnav": "var(--subnav-height)",
+        "header-plus-subnav":
+          "calc(var(--header-height) + var(--subnav-height))",
+      },
+
+      height: {
+        "header": "var(--header-height)",
+        "subnav": "var(--subnav-height)",
+        "header-plus-subnav":
+          "calc(var(--header-height) + var(--subnav-height))",
       },
 
       fontFamily: {
