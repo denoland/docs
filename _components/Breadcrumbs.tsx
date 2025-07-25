@@ -60,10 +60,13 @@ export default function (props: {
     }
   }
 
+  const chevronClasses =
+    `after:w-4 after:h-4 after:[background:url(./img/chevron.svg)_no-repeat_center] after:inline-block after:ml-2`;
+
   return (
     <nav>
       <ul
-        class="crumbs"
+        class="flex flex- items-center text-center mt-2 -ml-3 text-foreground-secondary sm:mt-4"
         itemscope
         itemtype="https://schema.org/BreadcrumbList"
       >
@@ -73,7 +76,7 @@ export default function (props: {
           itemtype="https://schema.org/ListItem"
         >
           <a
-            class="crumb-link pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-quaternary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
+            class={`flex items-center pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-quaternary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm ${chevronClasses}`}
             itemprop="item"
             href={props.sectionHref}
           >
@@ -96,7 +99,7 @@ export default function (props: {
                   <a
                     href={crumb.href}
                     itemprop="item"
-                    class="crumb-link pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-quaternary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm"
+                    class={`flex items-center pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-quaternary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm ${chevronClasses}`}
                   >
                     <span itemprop="name">{crumb.title}</span>
                   </a>
@@ -104,7 +107,9 @@ export default function (props: {
                 : (
                   <span
                     itemprop="name"
-                    class="block px-3 py-1.5 text-sm"
+                    class={`flex items-center pl-2 py-1.5 text-sm ${
+                      i < crumbs.length - 1 ? chevronClasses : ""
+                    }`}
                     dangerouslySetInnerHTML={{
                       __html: helpers.md(crumb.title, true),
                     }}
@@ -118,5 +123,3 @@ export default function (props: {
     </nav>
   );
 }
-
-export const css = `@import './_components/Breadcrumbs.css';`;
