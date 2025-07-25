@@ -875,7 +875,8 @@ main:has(#example:checked) {
   }
 }
 
-body:has(.raw-container) :is(#hamburger-button, .nav) {
+body:has(.raw-container)
+  :is(#hamburger-button, [data-component="sidebar-nav"]) {
   display: none;
 }
 
@@ -941,11 +942,6 @@ body:has(.raw-container) :is(#hamburger-button, .nav) {
     }
   }
 
-  .nav[data-section="api"] {
-    @apply top-header-plus-subnav;
-    height: calc(100vh - var(--header-height) - var(--subnav-height));
-  }
-
   .docs-cta {
     @apply border text-balance text-black font-bold inline-block py-3.5 px-6
       rounded-full w-max !no-underline transition-colors duration-200 m-4 ml-0;
@@ -995,6 +991,20 @@ body:has(.raw-container) :is(#hamburger-button, .nav) {
         text-wrap: balance;
         margin-bottom: 1rem;
       }
+    }
+  }
+
+  [data-component="sidebar-nav"] a {
+    display: none;
+  }
+
+  [data-component="sidebar-nav"][data-open="true"] a {
+    display: block;
+  }
+
+  @media (min-width: 48rem) {
+    [data-component="sidebar-nav"] a {
+      display: block;
     }
   }
 }

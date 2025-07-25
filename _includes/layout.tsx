@@ -10,6 +10,8 @@ export default function Layout(data: Lume.Data) {
   const isServicesPage = data.url.startsWith("/deploy") ||
     data.url.startsWith("/subhosting") ||
     data.url.startsWith("/services");
+  const hasSubNav = data.page?.data?.secondaryNav?.length ||
+    data.url.startsWith("/api");
 
   return (
     <html lang="en">
@@ -80,6 +82,7 @@ export default function Layout(data: Lume.Data) {
           currentSection={section}
           currentUrl={data.url}
           data={data}
+          hasSubNav={hasSubNav}
         />
         <div
           class={`layout ${
@@ -90,6 +93,7 @@ export default function Layout(data: Lume.Data) {
             data={data}
             currentSection={section}
             currentUrl={data.url}
+            hasSubNav={hasSubNav}
           />
           {data.children}
           {!isReference && (

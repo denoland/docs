@@ -1,8 +1,9 @@
 export default function (
-  { data, currentUrl, currentSection }: {
+  { data, currentUrl, currentSection, hasSubNav }: {
     data: Lume.Data;
     currentUrl: string;
     currentSection: string;
+    hasSubNav: boolean;
   },
 ) {
   const sectionData = getSectionData(data, currentUrl);
@@ -14,7 +15,13 @@ export default function (
   return (
     <>
       <aside
-        className="nav"
+        className={`fixed transition-all duration-200 easing-[cubic-bezier(0.165,0.84,0.44,1)] -translate-x-full z-50 w-full bg-background-raw opacity-0 p-4 pb-8 overflow-auto text-[0.8125rem] md:sticky md:top-header md:h-screen-minus-header md:overflow-y-auto md:[scrollbar-width:thin] md:z-10 md:!translate-x-0 md:!opacity-100 md:p-0 md:pb-16 sidebar-open:translate-x-0 sidebar-open:opacity-100
+         ${
+          hasSubNav
+            ? "top-header-plus-subnav h-screen-minus-both"
+            : "top-header h-screen-minus-header"
+        }`}
+        data-component="sidebar-nav"
         data-section={currentSection}
         id="nav"
         tabIndex={-1}
@@ -66,5 +73,3 @@ function getSectionData(data: Lume.Data, currentUrl: string) {
   const dataPath = urlSegments[0];
   return data.search.data(`/${dataPath}/`)?.sidebar;
 }
-
-export const css = "@import './_components/Navigation.css';";

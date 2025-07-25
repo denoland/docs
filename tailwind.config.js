@@ -163,6 +163,9 @@ export default {
         "subnav": "var(--subnav-height)",
         "header-plus-subnav":
           "calc(var(--header-height) + var(--subnav-height))",
+        "screen-minus-header": "calc(100dvh - var(--header-height))",
+        "screen-minus-both":
+          "calc(100dvh - var(--header-height) - var(--subnav-height))",
       },
 
       fontFamily: {

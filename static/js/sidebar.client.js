@@ -19,15 +19,15 @@ if (sidebar) {
 // Wire up the hamburger toggle button
 if (sidebar && button) {
   button.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
     const wasOpen = button.getAttribute("aria-pressed") === "true";
+    sidebar.setAttribute("data-open", String(!wasOpen));
     button.setAttribute("aria-pressed", String(!wasOpen));
     sidebar.focus();
   });
 
   globalThis.addEventListener("keyup", (e) => {
     if (e.key === "Escape") {
-      sidebar.classList.remove("open");
+      sidebar.setAttribute("data-open", "false");
       button.setAttribute("aria-pressed", "false");
     }
   });

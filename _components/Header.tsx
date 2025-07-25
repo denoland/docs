@@ -1,14 +1,13 @@
 import { NavData } from "../types.ts";
 
 export default function (
-  { data, currentSection, currentUrl }: {
+  { data, currentSection, currentUrl, hasSubNav }: {
     data: Lume.Data;
     currentSection: string;
     currentUrl: string;
+    hasSubNav: boolean;
   },
 ) {
-  const hasSubNav = data.page?.data?.secondaryNav?.length ||
-    currentUrl.startsWith("/api");
   const hrefIsInCurrentSection = (href: string, currentSection: string) => {
     return href.includes(currentSection) ||
       href === "/services/" &&
