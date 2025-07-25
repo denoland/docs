@@ -5,7 +5,7 @@ const mainNav = document.querySelector("#main-nav");
 if (mainNav) {
   const currentNavItem = mainNav?.querySelector("a[data-active]");
   const currentNavItemHighlighter = document.querySelector(
-    "#current-nav-item"
+    "#current-nav-item",
   ) as HTMLElement;
 
   mainNav.addEventListener(
@@ -21,14 +21,14 @@ if (mainNav) {
       } else {
         currentNavItemHighlighter.style.setProperty(
           "--left",
-          `${target.getBoundingClientRect().left - defaultLeft}px`
+          `${target.getBoundingClientRect().left - defaultLeft}px`,
         );
         currentNavItemHighlighter.style.setProperty(
           "--scaleX",
-          `${target.offsetWidth / defaultScaleX}`
+          `${target.offsetWidth / defaultScaleX}`,
         );
       }
-    }, 50)
+    }, 50),
   );
 
   mainNav.addEventListener("mouseout", () => {
