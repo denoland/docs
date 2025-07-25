@@ -38,7 +38,7 @@ export default function (
           {data.navigation.map((nav: NavData) => (
             <a
               href={nav.href}
-              className={`font-[clamp(0.8rem,1.5vw,1rem)] whitespace-nowrap relative py-0 px-4 h-full flex justify-center items-center text-foreground-primary ${
+              className={`font-[clamp(0.8rem,1.5vw,1rem)] whitespace-nowrap relative py-0 px-4 h-full flex justify-center items-center text-foreground-primary hover:text-gray-800 transition-colors duration-200 ${
                 hrefIsInCurrentSection(nav.href, currentSection)
                   ? "font-bold text-gray-800 bg-header-highlight"
                   : ""
