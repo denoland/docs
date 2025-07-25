@@ -44,7 +44,7 @@ export default function SnippetComponent(props: {
               class="nocopy h-full markdown-body"
             >
               <pre
-                class="highlight snippet-code language-ts max-sm:rounded-none"
+                class="highlight snippet-code language-ts rounded-none"
                 data-example-position={props.onlyOneSnippet
                   ? "only"
                   : props.firstOfFile

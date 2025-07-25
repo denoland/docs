@@ -73,6 +73,7 @@
     "npm:googleapis@144": "144.0.0",
     "npm:ico-endec@0.1.6": "0.1.6",
     "npm:jose@5.9.6": "5.9.6",
+    "npm:just-throttle@4.2.0": "4.2.0",
     "npm:markdown-it-anchor@9": "9.2.0_@types+markdown-it@14.1.2_markdown-it@14.1.0",
     "npm:markdown-it-attrs@4.2.0": "4.2.0_markdown-it@14.1.0",
     "npm:markdown-it-container@*": "4.0.0",
@@ -1701,6 +1702,9 @@
       "dependencies": [
         "bignumber.js"
       ]
+    },
+    "just-throttle@4.2.0": {
+      "integrity": "sha512-/iAZv1953JcExpvsywaPKjSzfTiCLqeguUTE6+VmK15mOcwxBx7/FHrVvS4WEErMR03TRazH8kcBSHqMagYIYg=="
     },
     "jwa@2.0.0": {
       "integrity": "sha512-jrZ2Qx916EA+fq9cEAeCROWPTfCwi1IVHqT2tapuqLEVVDKFDENFw1oL+MwrTvH6msKxsd1YTDVw6uKEcsrLEA==",

@@ -51,7 +51,7 @@ export default function (data: Lume.Data) {
                           htmlFor={`sub-nav-toggle-${
                             item.title.replaceAll(" ", "")
                           }`}
-                          className="sub-nav-toggle"
+                          className="sub-nav-toggle block relative py-1 px-3 after:right-4 [font:inherit] after:translate-y-1/2 after:transition-transfor after:duration-100 after:ease-in after:[background:url(./img/chevron.svg)_no-repeat_center] after:-top-1 after:block after:w-4 after:h-4 after:absolute"
                         >
                           {item.title}
                           <input
@@ -154,7 +154,5 @@ function SidebarCategoryHeading(props: {
     </h2>
   );
 }
-
-export const css = "@import './_components/SecondaryNav.css';";
 
 export const js = `import "/js/sidebar.client.js";`;
