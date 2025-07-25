@@ -49,7 +49,6 @@ export default function (
               {typeof nav.title === "string"
                 ? <span dangerouslySetInnerHTML={{ __html: nav.title }}></span>
                 : nav.title}
-              <span className="sr-only">{currentUrl} {nav.href}</span>
             </a>
           </li>
         ))}

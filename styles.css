@@ -1007,4 +1007,8 @@ body:has(.raw-container)
       display: block;
     }
   }
+
+  [data-component="sidebar-nav"][data-section="api"] > nav:first-child {
+    margin-top: 1rem;
+  }
 }

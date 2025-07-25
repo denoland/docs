@@ -1,5 +1,5 @@
 ---
-title: "About Early Access"
+title: "About Deno Deploy Early Access"
 description: "Guide to Deno Deploy Early Access features, comparison with Deploy Classic, and getting started instructions for deployment."
 ---
 
@@ -18,12 +18,8 @@ original Deploy, featuring:
 - Integrated build system
 - Significantly enhanced underlying infrastructure
 
-<div class="flex flex-wrap gap-x-4 gap-y-2 items-center mt-4 mb-8">
-<a href="https://dash.deno.com/account#early-access" class="docs-cta deploy-cta m-0">Join
-the Early Access program</a>
-<a href="https://app.deno.com" class="docs-cta deploy-cta m-0">Go to your Deno
+<a href="https://app.deno.com" class="docs-cta deploy-cta">Go to the Deno
 Deploy<sup>EA</sup> dashboard</a>
-</div>
 
 Deno Deploy<sup>EA</sup> comes with a new dashboard at
 [app.deno.com](https://app.deno.com). In this dashboard, you can create new Deno

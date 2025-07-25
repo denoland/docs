@@ -132,25 +132,9 @@ function SidebarCategoryHeading(props: {
   href?: string;
   isActive?: boolean;
 }) {
-  const defaultClasses =
-    "block uppercase py-2 px-0 mt-4 text-foreground-secondary font-bold leading-none tracking-wide !border-0";
   return (
-    <h2>
-      {props.href && props.href.length > 0
-        ? (
-          <a
-            href={props.href}
-            className={`${defaultClasses} hover:text-foreground-primary`}
-            data-active={props.isActive}
-          >
-            {props.title}
-          </a>
-        )
-        : (
-          <div className={defaultClasses}>
-            {props.title}
-          </div>
-        )}
+    <h2 class="block uppercase py-2 px-0 mt-4 text-foreground-secondary font-bold leading-none tracking-wide !border-0">
+      {props.title}
     </h2>
   );
 }
