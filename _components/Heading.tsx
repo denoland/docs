@@ -18,7 +18,7 @@ export default function Heading(
   } else if (props.level == 2) {
     return (
       <h2
-        className={`text-3xl md:text-4xl font-semibold underline underline-offset-8 mb-6 ${headingTypeClass}`}
+        className={`text-3xl md:text-4xl font-semibold mt-8 mb-6 ${headingTypeClass}`}
       >
         {props.children}
       </h2>
@@ -26,7 +26,7 @@ export default function Heading(
   } else if (props.level == 3) {
     return (
       <h3
-        className={`text-xl md:text-2xl font-semibold underline underline-offset-8 mb-4 ${headingTypeClass}`}
+        className={`text-xl md:text-2xl font-semibold mb-4 ${headingTypeClass}`}
       >
         {props.children}
       </h3>

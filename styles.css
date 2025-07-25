@@ -183,7 +183,7 @@ body {
 
   /* The following are not different from light mode (yet?) */
   --header-highlight: var(--runtime-300-hsl);
-  --primary: var(--deploy-500-hsl);
+  --primary: var(--runtime-300-hsl);
   --tip: 142deg, 76.2%, 36.3%;
   --color-fg-default: #fff;
 
@@ -191,6 +191,7 @@ body {
   background-color: var(--background-primary);
 
   [data-services-page="true"] {
+    --primary: var(--deploy-300-hsl);
     --header-highlight: var(--deploy-200-hsl);
   }
 }
@@ -943,5 +944,36 @@ body:has(.raw-container) :is(#hamburger-button, .nav) {
   .nav[data-section="api"] {
     @apply top-header-plus-subnav;
     height: calc(100vh - var(--header-height) - var(--subnav-height));
+  }
+
+  .docs-cta {
+    @apply border text-balance text-black font-bold inline-block py-3.5 px-6
+      rounded-full w-max !no-underline transition-colors duration-200 m-4 ml-0;
+  }
+
+  .runtime-cta,
+  .deploy-cta {
+    @apply !no-underline !text-gray-900;
+  }
+
+  .runtime-cta {
+    @apply bg-runtime-300 border-0 hover:bg-runtime-200;
+  }
+
+  .deploy-cta {
+    @apply bg-deploy-300 rounded-full border-0 hover:bg-deploy-200;
+  }
+
+  .jsr-cta {
+    @apply bg-jsr-yellow-400 border-jsr-cyan-950 !text-jsr-cyan-950 border-2
+      hover:!no-underline hover:bg-jsr-yellow-300;
+  }
+
+  .deploy-button {
+    padding-left: 3rem;
+    background-image: url("../deno-deploy.svg");
+    background-repeat: no-repeat;
+    background-position: 1.25rem center;
+    background-size: 1.25rem;
   }
 }
