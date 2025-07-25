@@ -7,7 +7,7 @@ export default function Logo() {
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlSpace="preserve"
-      style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
+      style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;max-width:12rem;"
     >
       <g
         id="background"
