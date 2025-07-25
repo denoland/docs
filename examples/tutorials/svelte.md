@@ -37,7 +37,7 @@ We'll use [SvelteKit](https://kit.svelte.dev/) to create a new SvelteKit app. In
 your terminal, run the following command to create a new SvelteKit app:
 
 ```shell
-deno run -A npm:create-svelte
+deno run -A npm:sv create my-app
 ```
 
 When prompted, give your app a name and select the "Skeleton project" template.
