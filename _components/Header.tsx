@@ -9,6 +9,13 @@ export default function (
 ) {
   const hasSubNav = data.page?.data?.secondaryNav?.length ||
     currentUrl.startsWith("/api");
+  const hrefIsInCurrentSection = (href: string, currentSection: string) => {
+    return href.includes(currentSection) ||
+      href === "/services/" &&
+        ["deploy", "subhosting", "services"].includes(
+          currentSection,
+        );
+  };
 
   return (
     <header
@@ -24,25 +31,30 @@ export default function (
         >
           <data.comp.DenoLogo />
         </a>
-        <nav class="flex h-full items-center row-start-2 col-span-2 md:row-auto md:col-auto -mx-4 md:mx-0 overflow-x-auto">
+        <nav
+          id="main-nav"
+          class="flex h-full items-center row-start-2 col-span-2 md:row-auto md:col-auto -mx-4 md:mx-0 overflow-x-auto md:overflow-clip"
+        >
           {data.navigation.map((nav: NavData) => (
             <a
               href={nav.href}
-              className={`font-[clamp(0.8rem,1.5vw,1rem)] whitespace-nowrap relative py-0 px-4 h-full flex justify-center items-center transition-colors ease-in-out duration-200 text-foreground-primary after:h-full after:w-full after:bg-header-highlight after:absolute after:bottom-0 after:left-0 after:transition-transform after:duration-200 after:ease-[cubic-bezier(0.86,0,0.07,1)] after:origin-right after:scale-x-0 after:-z-10 hover:text-gray-800 hover:after:origin-left hover:after:scale-x-100 ${
-                nav.href.includes(currentSection)
-                  ? "font-bold text-gray-800 after:origin-left after:scale-x-100"
+              className={`font-[clamp(0.8rem,1.5vw,1rem)] whitespace-nowrap relative py-0 px-4 h-full flex justify-center items-center text-foreground-primary ${
+                hrefIsInCurrentSection(nav.href, currentSection)
+                  ? "font-bold text-gray-800 bg-header-highlight"
                   : ""
               } ${nav.style ?? ""}`}
-              {...(nav.href.includes(currentSection)
-                ? { "data-active": true, "aria-current": "location" }
-                : {})}
-              {...(nav.href === "/services/" &&
-                  ["deploy", "subhosting", "services"].includes(
-                    currentSection,
-                  )
+              {...(hrefIsInCurrentSection(nav.href, currentSection)
                 ? { "data-active": true, "aria-current": "location" }
                 : {})}
             >
+              {}
+              {hrefIsInCurrentSection(nav.href, currentSection) && (
+                <div
+                  id="current-nav-item"
+                  class="absolute inset-0 bg-header-highlight -z-10 transition-transform duration-200 easing-[cubic-bezier(0.5,0,0.5,1)] origin-left"
+                  style="--left: 0px; --scaleX: 1; transform: translateX(var(--left)) scaleX(var(--scaleX));"
+                />
+              )}
               {nav.name}
             </a>
           ))}
