@@ -11,6 +11,7 @@ if (mainNav) {
   mainNav.addEventListener(
     "mouseover",
     throttle((e) => {
+      if (e.target === e.currentTarget) return;
       const target = e.target as HTMLElement;
       const defaultLeft = currentNavItem?.getBoundingClientRect().left;
       const defaultScaleX = currentNavItem?.getBoundingClientRect().width!;

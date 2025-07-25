@@ -926,3 +926,15 @@ li:has(> .sub-nav-toggle + ul:focus-within) {
 .sub-nav-toggle:has(+ ul:focus-within)::after {
   transform: translateY(50%) rotate(90deg);
 }
+
+#hamburger-button[aria-pressed="true"] {
+  .hamburger-bar--top {
+    transform: translate(0, 7px) rotate(45deg);
+  }
+  .hamburger-bar--middle {
+    opacity: 0;
+  }
+  .hamburger-bar--bottom {
+    transform: translate(0, -7px) rotate(-45deg);
+  }
+}
