@@ -8,7 +8,7 @@ export default function AllSymbols(
 ) {
   return (
     <comp.Base data={data} comp={comp}>
-      <main>
+      <main id="content">
         <comp.SymbolContent symbolContent={data.content} />
       </main>
     </comp.Base>

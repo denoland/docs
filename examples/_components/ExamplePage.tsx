@@ -30,7 +30,7 @@ export default function ExamplePage({ example }: Props) {
         <div class="flex flex-col gap-2">
           {example.parsed.description && (
             <p
-              className="max-w-[100%]"
+              className="max-w-full"
               dangerouslySetInnerHTML={{
                 __html: example.parsed.description,
               }}
@@ -61,8 +61,8 @@ export default function ExamplePage({ example }: Props) {
       ))}
       <div>
         {example.parsed.run && (
-          <div class="mt-8">
-            <p>
+          <div class="mt-8 -mx-4 sm:mx-0">
+            <p class="mx-4 sm:mx-0">
               Run{" "}
               <a
                 href={url}

@@ -8,5 +8,3 @@ export default function DeployCTA() {
     </a>
   );
 }
-
-export const css = "@import './_components/CTA.css';";

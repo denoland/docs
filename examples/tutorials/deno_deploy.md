@@ -171,6 +171,3 @@ Deno Deploy<sup>EA</sup> provides comprehensive observability tools:
 4. Set up different
    [environments](/deploy/early-access/reference/env-vars-and-contexts/) for
    development and production
-
-For more information, check out the
-[Deno Deploy<sup>EA</sup> Reference documentation](/deploy/early-access/reference/).
