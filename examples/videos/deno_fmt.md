@@ -186,7 +186,7 @@ Note that all these options also have a corresponding flags in the CLI.
     "useTabs": true,
     "lineWidth": 80,
     "indentWidth": 2,
-    "semiColon": false,
+    "semiColons": false,
     "singleQuote": true,
     "proseWrap": "always",
     "exclude": ["**/logs.json"]
