@@ -19,6 +19,17 @@ with more details. You can see the
 and a
 [demo of the app on Deno Deploy](https://tutorial-with-react.deno.deno.net/)
 
+:::info Deploy your own
+
+Want to skip the tutorial and deploy the finished app right now? Click the
+button below to instantly deploy your own copy of the complete SvelteKit
+dinosaur app to Deno Deploy. You'll get a live, working application that you can
+customize and modify as you learn!
+
+[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/tutorial-with-react&mode=dynamic&entrypoint=api/main.ts&build=deno+task+build&install=deno+install)
+
+:::
+
 ## Create a basic react app with Vite
 
 This tutorial will use [Vite](https://vitejs.dev/) to serve the app locally.
