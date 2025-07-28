@@ -7,5 +7,3 @@ export default function CTA(
     </a>
   );
 }
-
-export const css = "@import './_components/CTA.css';";

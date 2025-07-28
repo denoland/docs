@@ -1,4 +1,4 @@
-import type { PageBase, ToCCtx } from "@deno/doc";
+import type { PageBase } from "@deno/doc";
 
 export default function Base(
   { data, comp, children }: Lume.Data & { data: PageBase },
@@ -9,9 +9,9 @@ export default function Base(
       <div className="ddoc markdown-body">
         <link rel="stylesheet" href="/reference_styles.css" />
         <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
-        <div id="content">
+        <main id="content" tabindex={-1}>
           {children}
-        </div>
+        </main>
       </div>
     </>
   );

@@ -224,7 +224,7 @@ of links, each linking to the dinosaur's page:
 
 ```tsx title="page.tsx"
 return (
-  <main>
+  <main id="content">
     <h1>Welcome to the Dinosaur app</h1>
     <p>Click on a dinosaur below to learn more.</p>
     <ul>
@@ -287,7 +287,7 @@ element containing the dinosaur's name and description:
 
 ```tsx title="[dinosaur]/page.tsx"
 return (
-  <main>
+  <main id="content">
     <h1>{dinosaur.name}</h1>
     <p>{dinosaur.description}</p>
     <Link href="/">🠠 Back to all dinosaurs</Link>

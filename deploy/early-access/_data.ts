@@ -2,16 +2,17 @@ import { SecondaryNav, Sidebar } from "../../types.ts";
 
 export const sidebar = [
   {
-    title: "About Early Access",
-    href: "/deploy/early-access/",
-  },
-  {
-    title: "Getting started",
-    href: "/deploy/early-access/getting_started/",
+    title: "Deno Deploy Early Access",
+    items: [
+      { title: "About Early Access", href: "/deploy/early-access/" },
+      {
+        title: "Getting Started",
+        href: "/deploy/early-access/getting_started",
+      },
+    ],
   },
   {
     title: "Reference",
-    href: "/deploy/early-access/reference/",
     items: [
       {
         title: "Accounts",
@@ -73,19 +74,17 @@ export const sidebar = [
         title: "Usage and Limitations",
         href: "/deploy/early-access/usage/",
       },
-      {
-        title: "Support",
-        href: "/deploy/early-access/support/",
-      },
     ],
   },
   {
-    title: "Changelog",
-    href: "/deploy/early-access/changelog/",
-  },
-  {
     title: "Support and Feedback",
-    href: "/deploy/early-access/support/",
+    items: [
+      {
+        title: "Changelog",
+        href: "/deploy/early-access/changelog/",
+      },
+      { title: "Support", href: "/deploy/early-access/support/" },
+    ],
   },
 ] satisfies Sidebar;
 
