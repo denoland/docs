@@ -6,146 +6,134 @@ url: /examples/astro_tutorial/
 
 [Astro](https://astro.build/) is a modern web framework focused on
 content-centric websites, which leverages islands architecture and sends zero
-JavaScript to the client by default. And with the recent release of
-[Deno 2](https://deno.com/2), now
-[backwards compatible with Node and npm](https://deno.com/blog/v2.0#backwards-compatible-forward-thinking),
-the experience of using Astro and Deno has improved.
+JavaScript to the client by default. You can see the
+[finished app on GitHub](https://github.com/denoland/tutorial-with-astro).
 
-We’ll go over how to build a simple Astro project using Deno:
-
-- [Scaffold an Astro project](#scaffold-an-astro-project)
-- [Update index page](#update-index-page-to-list-all-dinosaurs)
-- [Add a dynamic SSR page](#add-a-dynamic-ssr-page)
-- [What’s next?](#whats-next)
-
-Feel free to skip directly to
-[the source code](https://github.com/denoland/examples/tree/main/with-astro) or
-follow along below!
+You can see a live version of the app on
+[Deno Deploy](https://tutorial-with-astro.deno.deno.net/).
 
 ## Scaffold an Astro project
 
 Astro provides a CLI tool to quickly scaffold a new Astro project. In your
-terminal, run the command `deno init --npm astro@latest` to create a new Astro
-project with Deno. For this tutorial, we’ll select the “Empty” template so we
-can start from scratch, and skip installing dependencies so we can install them
-with Deno later:
-
-```jsx
-deno init --npm astro@latest
-
- astro   Launch sequence initiated.
-
-   dir   Where should we create your new project?
-         ./dino-app
-
-  tmpl   How would you like to start your new project?
-         Empty
-
-    ts   Do you plan to write TypeScript?
-         Yes
-
-   use   How strict should TypeScript be?
-         Strict
-
-  deps   Install dependencies?
-         No
-      ◼  No problem!
-         Remember to install dependencies after setup.
-
-   git   Initialize a new git repository?
-         Yes
-
-      ✔  Project initialized!
-         ■ Template copied
-         ■ TypeScript customized
-         ■ Git initialized
-
-  next   Liftoff confirmed. Explore your project!
-
- Enter your project directory using cd ./dino-app
- Run npm run dev to start the dev server. CTRL+C to stop.
- Add frameworks like react or tailwind using astro add.
-
- Stuck? Join us at https://astro.build/chat
-
-╭─────╮  Houston:
-│ ◠ ◡ ◠  Good luck out there, astronaut! 🚀
-╰──🍫─╯
-```
-
-As of Deno 2,
-[Deno can also install packages with the new `deno install` command](https://deno.com/blog/v2.0#deno-is-now-a-package-manager-with-deno-install).
-So let’s run
-[`deno install`](https://docs.deno.com/runtime/reference/cli/install/) with the
-flag `--allow-scripts` to execute any npm lifecycle scripts:
-
-```bash
-deno install --allow-scripts
-```
-
-To see what commands we have, let’s run `deno task`:
-
-```bash
-deno task
-Available tasks:
-- dev (package.json)
-    astro dev
-- start (package.json)
-    astro dev
-- build (package.json)
-    astro check && astro build
-- preview (package.json)
-    astro preview
-- astro (package.json)
-    astro
-```
-
-We can start the Astro server with `deno task dev`:
-
-![Getting the Astro app to work](./images/how-to/astro/hello-astro.png)
-
-## Configure the formatter
-
-`deno fmt` supports Astro files with the
-[`--unstable-component`](https://docs.deno.com/runtime/reference/cli/fmt/#formatting-options-unstable-component)
-flag. To use it, run this command:
+terminal, run the following command to create a new Astro project with Deno.
 
 ```sh
-deno fmt --unstable-component
+deno init --npm astro@latest
 ```
 
-To configure `deno fmt` to always format your Astro files, add this at the top
-level of your `deno.json` file:
+For this tutorial, we’ll select the “Empty” template so we can start from
+scratch and we'll install the dependencies.
 
-```json
-"unstable": ["fmt-component"]
+this will set us up with a basic Astro project structure, including a
+`package.json` file, and a `src` directory where our application code will live.
+
+## Start the Astro server
+
+We can start the local Astro server with the `dev` task. In your terminal,
+change directory into your new project and run run
+
+```sh
+deno task dev
 ```
 
-## Update index page to list all dinosaurs
+This will start the Astro development server, which will watch for changes in
+your files and automatically reload the page in your browser. You should see a
+message indicating that the server is running on `http://localhost:4321`.
 
-Our app will display facts about a variety of dinosaurs. The first page to
-create will be the index page that lists links to all dinosaurs in our
-“database”.
+Upon visiting the output URL in your browser, you should see a very basic Astro
+welcome page.
 
-First, let’s create the data that will be used in the app. In this example,
-we’ll hardcode the data in a json file, but you can use any data storage in
-practice. We’ll create a `data` folder in the root of the project, then a
-`dinosaurs.json` file with
-[this text](https://github.com/denoland/tutorial-with-react/blob/main/api/data.json)
-in it.
+## Build out the app architecture
 
-> ⚠️️ In this tutorial we hard code the data. But you can connect to
-> [a variety of databases](https://docs.deno.com/runtime/tutorials/connecting_to_databases/)
-> and
-> [even use ORMs like Prisma](https://docs.deno.com/runtime/tutorials/how_to_with_npm/prisma/)
-> with Deno.
+Now that we have a basic Astro project set up, let's build out the architecture
+of our app. We'll create a few directories to organize our code and set up some
+basic routing. Create the following directories
 
-Once we have the data, let’s create an index page that lists all of the
-dinosaurs. In the `./src/pages/index.astro` page, let’s write the following:
+```text
+src/
+    ├── data/
+    ├── lib/
+    └── pages/
+        └── index.astro
+```
 
-```jsx
+## Add dinosaur data
+
+In the `data` directory, create a new file called `data.json` file, which will
+contain the hard coded dinosaur data.
+
+Copy and paste
+[this json file](https://github.com/denoland/tutorial-with-astro/blob/main/src/routes/api/data.json)
+into the `data.json` file. (If you were building a real app, you would probably
+fetch this data from a database or an external API.)
+
+## Set up the business logic
+
+Next, we’ll create a `lib` directory to hold our business logic. In this case,
+we’ll create a file called `dinosaur-service.ts` that will contain a function to
+fetch the dinosaur data. Create `src/lib/dinosaur-service.ts` with the following
+code:
+
+```ts title="src/lib/dinosaur-service.ts"
+// Simple utility functions for working with dinosaur data
+import dinosaursData from "../data/data.json";
+
+export interface Dinosaur {
+  name?: string;
+  description: string;
+}
+
+export class DinosaurService {
+  private static dinosaurs: Dinosaur[] = dinosaursData;
+
+  // Get all dinosaurs with names (filter out unnamed ones)
+  static getNamedDinosaurs(): Dinosaur[] {
+    return this.dinosaurs.filter((dino) => dino.name);
+  }
+
+  // Create a URL-friendly slug from dinosaur name
+  static createSlug(name: string): string {
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  // Get dinosaur by slug
+  static getDinosaurBySlug(slug: string): Dinosaur | undefined {
+    return this.dinosaurs.find((dino) => {
+      if (!dino.name) return false;
+      return this.createSlug(dino.name) === slug;
+    });
+  }
+
+  // Get all dinosaurs with their slugs for linking
+  static getDinosaursWithSlugs() {
+    return this.getNamedDinosaurs().map((dino) => ({
+      ...dino,
+      slug: this.createSlug(dino.name!),
+    }));
+  }
+}
+
+export default DinosaurService;
+```
+
+This file contains a `DinosaurService` class with methods to get all dinosaurs,
+create a URL-friendly slug from a dinosaur name, and get a dinosaur by its slug.
+
+## Update the index page to use the service
+
+Now we can update our `index.astro` page to use the `DinosaurService` to fetch
+the dinosaur data and render it as a list of links. Update the
+`src/pages/index.astro` file to look like this:
+
+```jsx title="src/pages/index.astro"
 ---
-import data from "../../data/dinosaurs.json";
+import DinosaurService from '../lib/dinosaur-service';
+
+// Get all dinosaurs with slugs for linking
+const dinosaursWithSlugs = DinosaurService.getDinosaursWithSlugs();
 ---
 
 <html lang="en">
@@ -154,81 +142,128 @@ import data from "../../data/dinosaurs.json";
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Dinosaurs</title>
+		<title>Dinosaur Directory</title>
+		<link rel="stylesheet" href="/src/styles/index.css" />
 	</head>
 	<body>
-		<h1>Dinosaurs</h1>
-		<ul>
-			{data.map((dinosaur) => (
-				<li>
-					<a href={`/${dinosaur.name.toLowerCase()}`}>{ dinosaur.name }</a>
-				</li>
+		<h1>🦕 Dinosaur Directory</h1>
+		<p>Click on any dinosaur name to learn more about it!</p>
+		
+		<div class="dinosaur-list">
+			{dinosaursWithSlugs.map((dinosaur) => (
+				<a href={`/dinosaur/${dinosaur.slug}`} class="dinosaur-link">
+					{dinosaur.name}
+				</a>
 			))}
-		</ul>
+		</div>
 	</body>
 </html>
 ```
 
-Let’s start the server with `deno task dev` and point our browser to
-`localhost:4321`:
+We import the `DinosaurService`, then map over the dinosaurs to create links to
+individual dinosaur pages.
 
-![Index page that lists all dinosaurs](./images/how-to/astro/index-page.webp)
+## Create individual dinosaur pages
 
-Awesome! But when you click on a dinosaur, it 404’s. Let’s fix that.
+Next, we’ll create individual pages for each dinosaur. In the `src/pages`
+directory, create a directory called `dinosaurs`, and inside that directory,
+create a file called `[slug].astro`. This file will be used to render the
+individual dinosaur pages:
 
-## Add a dynamic SSR page
-
-Our app will display facts about a variety of dinosaurs. In order to do that,
-we’ll create a dynamic server-side rendered (”SSR”), which
-[offers better performance for end users while improving your pages SEO](https://deno.com/blog/the-future-and-past-is-server-side-rendering).
-
-Next, let’s create a new file under `/src/pages/` called `[dinosaur].astro`. At
-the top of the file, we'll add some logic to pull data from our hardcoded data
-source and filter that against the `dinosaur` parameter set from the URL path.
-At the bottom, we’ll render the data. Your file should look like this:
-
-```jsx
+```jsx title="src/pages/dinosaurs/[slug].astro"
 ---
-import data from "../../data/dinosaurs.json";
-const { dinosaur } = Astro.params;
-const dinosaurObj = data.find((item) => item.name.toLowerCase() === dinosaur);
-if (!dinosaurObj) return Astro.redirect("/404");
-const { name, description } = dinosaurObj;
+import DinosaurService from '../../lib/dinosaur-service';
+
+export async function getStaticPaths() {
+    const dinosaursWithSlugs = DinosaurService.getDinosaursWithSlugs();
+    
+    return dinosaursWithSlugs.map((dinosaur) => ({
+        params: { slug: dinosaur.slug },
+        props: { dinosaur }
+    }));
+}
+
+const { dinosaur } = Astro.props;
 ---
 
-<h1>{ name }</h1>
-
-<p>
-    { description }
-</p>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{dinosaur.name} - Dinosaur Directory</title>
+        <meta name="description" content={dinosaur.description} />
+        <link rel="stylesheet" href="/src/styles/index.css" />
+    </head>
+    <body class="dinosaur">
+        <main>
+            <h1>🦕 {dinosaur.name}</h1>
+            
+            <div class="info-card">
+                <p>{dinosaur.description}</p>
+            </div>
+            
+            <a href="/" class="back-button">← Back to Directory</a>
+        </main>
+    </body>
+</html>
 ```
 
-> ⚠️️ The
-> [Deno language server](https://docs.deno.com/runtime/reference/lsp_integration/)
-> does not currently support `.astro` files, so you may experience false red
-> squigglies. We're working on improving this experience.
+This file uses the `getStaticPaths` function to generate static paths for each
+dinosaur based on the slugs we created earlier. The `Astro.props` object will
+contain the dinosaur data for the specific slug, which we can then render in the
+page.
 
-Let’s run it with `deno task dev`, and point our browser to
-`localhost:4321/abrictosaurus`:
+## Add some styles
 
-![Rendering a dynamic page for abrictosaurus](./images/how-to/astro/dynamic-page.webp)
+To make our app look a bit nicer, we can add some basic styles. Create a new
+directory called `styles` in the `src` directory, and inside that directory,
+create a file called `index.css`. Add
+[styles from this css file](https://raw.githubusercontent.com/denoland/tutorial-with-astro/refs/heads/main/src/styles/index.css).
 
-It works!
+## Build and deploy
 
-## What’s next
+Astro has a built-in command to build your site for production:
 
-We hope this tutorial gives you a good idea of how to get started building with
-Astro and Deno. You can learn more about Astro and
-[their progressive approach to building websites](https://docs.astro.build/en/getting-started/).
-If you’re interested in swapping out our hardcoded data store, here are some
-resources on
-[connecting to databases with Deno](https://docs.deno.com/runtime/tutorials/connecting_to_databases/),
-including
-[Planetscale](https://docs.deno.com/runtime/tutorials/how_to_with_npm/planetscale/),
-[Redis](https://docs.deno.com/runtime/tutorials/how_to_with_npm/redis/), and
-more. Or you can learn how to
-[deploy your Astro project to Deno Deploy](https://deno.com/blog/astro-on-deno),
-or follow these guides on how to self-host Deno to
-[AWS](https://docs.deno.com/runtime/tutorials/aws_lightsail/),
-[Digital Ocean](https://docs.deno.com/runtime/tutorials/digital_ocean/), and
-[Google Cloud Run](https://docs.deno.com/runtime/tutorials/google_cloud_run/).
+```sh
+deno run build
+```
+
+This will:
+
+- Generate static HTML files for each page in the `dist` directory.
+- Optimize your assets (CSS, JavaScript, images, etc.) for production.
+
+You can deploy this app to your favorite cloud provider. We recommend using
+[Deno Deploy](https://deno.com/deploy) for a simple and easy deployment
+experience. You can deploy your app directly from GitHub, simply create a GitHub
+repository and push your code there, then connect it to Deno Deploy.
+
+### Create a GitHub repository
+
+[Create a new GitHub repository](https://github.com/new), then initialize and
+push your app to GitHub:
+
+```sh
+git init -b main
+git remote add origin https://github.com/<your_github_username>/<your_repo_name>.git
+git add .
+git commit -am 'initial commit'
+git push -u origin main
+```
+
+### Deploy to Deno Deploy
+
+Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
+dashboard.
+<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
+my app</a>
+
+For a walkthrough of deploying your app, check out the
+[Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
+
+🦕 Now you can scaffold and develop an Astro app that will run on Deno! You
+could extend this app by adding more features, such as user authentication, a
+database, or even a CMS. We can’t wait to see what you build with Astro and
+Deno!
