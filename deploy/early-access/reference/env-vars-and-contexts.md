@@ -100,11 +100,26 @@ const myEnvVar = Deno.env.get("MY_ENV_VAR");
 Deno Deploy<sup>EA</sup> provides these predefined environment variables in all
 contexts:
 
-- `DENO_DEPLOYMENT_ID`: A unique identifier representing the entire
-  configuration set (application ID, revision ID, context, and environment
-  variables). Changes if any of these components change.
+- `DENO_DEPLOY`: `true` - Indicates that the code is running in Deno Deploy.
 
-- `DENO_REVISION_ID`: The ID of the currently running revision.
+- `DENO_DEPLOY_ORGANIZATION_ID`: The ID of the organization that owns the
+  application. This is a UUID.
+
+- `DENO_DEPLOY_ORGANIZATION_SLUG`: The slug of the organization that owns the
+  application. This is the human-readable identifier used in URLs that was set
+  when creating the organization.
+
+- `DENO_DEPLOY_APPLICATION_ID`: The ID of the application. This is a UUID.
+
+- `DENO_DEPLOY_APPLICATION_SLUG`: The slug of the application. This is the
+  human-readable identifier used in URLs that was set when creating the
+  application, or changed later in the application settings.
+
+- `DENO_DEPLOY_BUILD_ID`: The ID of the currently running build.
+
+- `DENO_DEPLOYMENT_ID`: A unique identifier representing the entire
+  configuration set (application ID, build ID, context, environment variables,
+  cloud connections, database). Changes if any of these components change.
 
 More predefined variables will be added in the future.
 
