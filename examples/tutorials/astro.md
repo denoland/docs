@@ -63,7 +63,7 @@ In the `data` directory, create a new file called `data.json` file, which will
 contain the hard coded dinosaur data.
 
 Copy and paste
-[this json file](https://github.com/denoland/tutorial-with-astro/blob/main/src/routes/api/data.json)
+[this json file](https://raw.githubusercontent.com/denoland/tutorial-with-astro/refs/heads/main/src/data/data.json)
 into the `data.json` file. (If you were building a real app, you would probably
 fetch this data from a database or an external API.)
 
