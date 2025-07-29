@@ -26,7 +26,7 @@ export default function (
         id="nav"
         tabIndex={-1}
       >
-        <data.comp.SecondaryNav
+        <data.comp.SidebarNav
           sectionData={sectionData}
           currentUrl={currentUrl}
         />

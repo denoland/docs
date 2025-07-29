@@ -907,6 +907,7 @@ body:has(.raw-container)
 
   .sub-nav-toggle:hover {
     background-color: hsl(var(--header-highlight));
+    color: hsl(var(--gray-800-hsl));
   }
 
   li:has(> .sub-nav-toggle) {
@@ -1010,5 +1011,38 @@ body:has(.raw-container)
 
   [data-component="sidebar-nav"][data-section="api"] > nav:first-child {
     margin-top: 1rem;
+  }
+
+  @media (min-width: 48rem) {
+    [data-component="hero"] {
+      grid-template-columns: minmax(0, 1fr) 16rem;
+    }
+
+    [data-component="hero"] img {
+      order: 2;
+    }
+  }
+
+  @media (min-width: 60rem) {
+    [data-component="hero"] {
+      grid-template-columns: minmax(0, 1fr) 24rem;
+    }
+  }
+
+  [data-component="hero"] h1 {
+    @apply text-4xl md:text-5xl mb-2 md:mb-6 font-bold;
+  }
+
+  [data-component="hero"] p {
+    margin-bottom: 2rem;
+    font-size: 1.15rem;
+    line-height: 1.75rem;
+    text-wrap: balance;
+    max-width: 600px;
+  }
+
+  [data-component="hero"] img {
+    width: 100%;
+    margin: auto;
   }
 }
