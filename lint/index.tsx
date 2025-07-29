@@ -81,10 +81,7 @@ export default function LintRulesIndex(
           duration-150 ease-in-out"
         />
 
-        <ul
-          class="flex flex-wrap gap-2 mb-8 !list-none !pl-0"
-          aria-labelledby="lint-rules-key"
-        >
+        <ul class="flex flex-wrap gap-2 mb-8 !list-none !pl-0">
           {TYPES.map((iconType) => (
             <li class="p-1.5 px-3 rounded-md bg-background-secondary/30 border border-background-secondary w-max max-w-full !m-0 whitespace-pre-wrap">
               {getLintIcon(iconType)}&ensp;{getReadableIconName(iconType)}
