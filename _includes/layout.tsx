@@ -97,7 +97,11 @@ export default function Layout(data: Lume.Data) {
           />
           {data.children}
           {!isReference && (
-            <data.comp.TableOfContents toc={data.toc} data={data} />
+            <data.comp.TableOfContents
+              toc={data.toc}
+              data={data}
+              hasSubNav={hasSubNav}
+            />
           )}
         </div>
         <data.comp.Footer />

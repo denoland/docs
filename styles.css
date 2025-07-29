@@ -1045,4 +1045,50 @@ body:has(.raw-container)
     width: 100%;
     margin: auto;
   }
+
+  .active {
+    color: hsl(var(--foreground-primary));
+    position: relative;
+
+    &::before {
+      content: "";
+      height: 0.5em;
+      width: 0.4em;
+      background: hsl(var(--foreground-primary));
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+      position: absolute;
+      left: -1rem;
+      top: calc(50% - 0.25em);
+    }
+  }
+
+  .documentNavigation #toc {
+    position: sticky;
+    top: calc(var(--header-height) + var(--subnav-height));
+    font-size: small;
+    text-overflow: ellipsis;
+    color: hsl(var(--foreground-secondary));
+
+    & ul li {
+      margin: 0.25rem 0;
+
+      & a {
+        font-weight: bold;
+        line-height: 1.2rem;
+
+        &:hover {
+          color: hsl(var(--primary));
+          text-decoration: underline;
+        }
+      }
+
+      & ul {
+        margin-bottom: 1rem;
+
+        & li a {
+          font-weight: normal;
+        }
+      }
+    }
+  }
 }
