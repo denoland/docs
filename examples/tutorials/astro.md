@@ -12,6 +12,17 @@ JavaScript to the client by default. You can see the
 You can see a live version of the app on
 [Deno Deploy](https://tutorial-with-astro.deno.deno.net/).
 
+:::info Deploy your own
+
+Want to skip the tutorial and deploy the finished app right now? Click the
+button below to instantly deploy your own copy of the complete Astro
+dinosaur app to Deno Deploy. You'll get a live, working application that you can
+customize and modify as you learn!
+
+[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/tutorial-with-astro)
+
+:::
+
 ## Scaffold an Astro project
 
 Astro provides a CLI tool to quickly scaffold a new Astro project. In your
@@ -255,10 +266,8 @@ git push -u origin main
 
 ### Deploy to Deno Deploy
 
-Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
-dashboard.
-<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
-my app</a>
+Once your app is on GitHub, you can
+[deploy to Deno Deploy<sup>EA</sup>](https://app.deno.com/) dashboard.
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
