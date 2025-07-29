@@ -131,6 +131,7 @@ the dinosaur data and render it as a list of links. Update the
 ```jsx title="src/pages/index.astro"
 ---
 import DinosaurService from '../lib/dinosaur-service';
+import '../../styles/index.css';
 
 // Get all dinosaurs with slugs for linking
 const dinosaursWithSlugs = DinosaurService.getDinosaursWithSlugs();
@@ -143,7 +144,6 @@ const dinosaursWithSlugs = DinosaurService.getDinosaursWithSlugs();
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Dinosaur Directory</title>
-		<link rel="stylesheet" href="/src/styles/index.css" />
 	</head>
 	<body>
 		<h1>🦕 Dinosaur Directory</h1>
@@ -173,6 +173,7 @@ individual dinosaur pages:
 ```jsx title="src/pages/dinosaurs/[slug].astro"
 ---
 import DinosaurService from '../../lib/dinosaur-service';
+import '../../styles/index.css';
 
 export async function getStaticPaths() {
     const dinosaursWithSlugs = DinosaurService.getDinosaursWithSlugs();
@@ -194,7 +195,7 @@ const { dinosaur } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{dinosaur.name} - Dinosaur Directory</title>
         <meta name="description" content={dinosaur.description} />
-        <link rel="stylesheet" href="/src/styles/index.css" />
+		<link rel="stylesheet" href="https://demo-styles.deno.deno.net/styles.css">
     </head>
     <body class="dinosaur">
         <main>
@@ -204,7 +205,7 @@ const { dinosaur } = Astro.props;
                 <p>{dinosaur.description}</p>
             </div>
             
-            <a href="/" class="back-button">← Back to Directory</a>
+            <a href="/" class="btn-secondary">Back to Directory</a>
         </main>
     </body>
 </html>
@@ -217,10 +218,9 @@ page.
 
 ## Add some styles
 
-To make our app look a bit nicer, we can add some basic styles. Create a new
-directory called `styles` in the `src` directory, and inside that directory,
-create a file called `index.css`. Add
-[styles from this css file](https://raw.githubusercontent.com/denoland/tutorial-with-astro/refs/heads/main/src/styles/index.css).
+You can style your app to make it your own in the `src/styles/index.css`. This
+file is imported in both the `index.astro` and `[slug].astro` files, so any
+styles you add here will apply to both pages.
 
 ## Build and deploy
 
