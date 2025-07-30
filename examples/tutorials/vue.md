@@ -19,6 +19,17 @@ dinosaur page with more details. You can see the
 You can see a live version of the app on
 [Deno Deploy](https://tutorial-with-vue.deno.deno.net/).
 
+:::info Deploy your own
+
+Want to skip the tutorial and deploy the finished app right now? Click the
+button below to instantly deploy your own copy of the complete SvelteKit
+dinosaur app to Deno Deploy. You'll get a live, working application that you can
+customize and modify as you learn!
+
+[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/tutorial-with-vue&mode=dynamic&entrypoint=api/main.ts&build=deno+task+build&install=deno+install)
+
+:::
+
 ## Create a Vue.js app with Vite and Deno
 
 We'll use [Vite](https://vitejs.dev/) to scaffold a basic Vue.js app. In your
@@ -493,10 +504,8 @@ git push -u origin main
 
 ### Deploy to Deno Deploy
 
-Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
-dashboard.
-<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
-my app</a>
+Once your app is on GitHub, you can
+[deploy it to Deno Deploy<sup>EA</sup>](https://app.deno.com/).
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
