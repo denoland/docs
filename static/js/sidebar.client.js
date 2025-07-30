@@ -40,10 +40,10 @@ if (currentSidebarItem) {
 }
 
 // Make the right sidebar follow the user's scroll position
-const desktopToc = document.querySelector(".toc-desktop");
+const desktopToc = document.querySelector("#toc");
 
 if (desktopToc) {
-  const tocItems = document.querySelectorAll(".toc-desktop a");
+  const tocItems = document.querySelectorAll("#toc a");
   const pageHeadings = document.querySelectorAll(
     ".markdown-body :where(h1, h2, h3, h4, h5, h6)",
   );
@@ -51,7 +51,7 @@ if (desktopToc) {
     (entries) => {
       entries.forEach((entry) => {
         const id = entry.target.id;
-        const tocLink = document.querySelector(`.toc-desktop a[href="#${id}"]`);
+        const tocLink = document.querySelector(`#toc a[href="#${id}"]`);
 
         if (entry.isIntersecting) {
           tocItems.forEach((item) => item.classList.remove("active"));

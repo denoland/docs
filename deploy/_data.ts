@@ -1,4 +1,4 @@
-import { SecondaryNav, Sidebar } from "../types.ts";
+import { Sidebar, SidebarNav } from "../types.ts";
 
 export const sidebar = [
   {
@@ -210,7 +210,7 @@ export const sidebar = [
 
 export const sectionTitle = "Deploy";
 export const sectionHref = "/deploy/manual/";
-export const secondaryNav = [
+export const SidebarNav = [
   {
     title: "Deno Deploy<sup>EA</sup>",
     href: "/deploy/early-access/",
@@ -223,4 +223,4 @@ export const secondaryNav = [
     title: "Subhosting",
     href: "/subhosting/manual/",
   },
-] satisfies SecondaryNav;
+] satisfies SidebarNav;

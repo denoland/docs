@@ -10,7 +10,7 @@ export default function Layout(data: Lume.Data) {
   const isServicesPage = data.url.startsWith("/deploy") ||
     data.url.startsWith("/subhosting") ||
     data.url.startsWith("/services");
-  const hasSubNav = data.page?.data?.secondaryNav?.length ||
+  const hasSubNav = data.page?.data?.SidebarNav?.length ||
     data.url.startsWith("/api");
 
   return (
@@ -97,7 +97,11 @@ export default function Layout(data: Lume.Data) {
           />
           {data.children}
           {!isReference && (
-            <data.comp.TableOfContents toc={data.toc} data={data} />
+            <data.comp.TableOfContents
+              toc={data.toc}
+              data={data}
+              hasSubNav={hasSubNav}
+            />
           )}
         </div>
         <data.comp.Footer />

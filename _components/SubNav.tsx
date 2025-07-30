@@ -1,4 +1,4 @@
-import { SecondaryNav } from "../types.ts";
+import { SidebarNav } from "../types.ts";
 
 export default function (
   { data, currentUrl }: {
@@ -6,7 +6,7 @@ export default function (
     currentUrl: string;
   },
 ) {
-  let navData = data.page?.data?.secondaryNav;
+  let navData = data.page?.data?.SidebarNav;
   const isReference = currentUrl.startsWith("/api");
   const apiReferenceSubnavItems = [
     {
@@ -21,7 +21,7 @@ export default function (
       title: "Node APIs",
       href: "/api/node",
     },
-  ] satisfies SecondaryNav;
+  ] satisfies SidebarNav;
 
   // We need to hard-code the API Reference subnav, since it's generated elsewhere.
   if (isReference && !navData) navData = apiReferenceSubnavItems;
