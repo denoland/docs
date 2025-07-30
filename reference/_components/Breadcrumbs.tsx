@@ -15,7 +15,7 @@ export default function (
   }
 
   return (
-    <ul className="breadcrumbs refcrumbs">
+    <ul className="breadcrumbs sticky top-header-plus-subnav w-full p-4 !pl-0 m-0 bg-background-raw z-10">
       {pathParts.map((part, i) => {
         const isLast =
           !(i !== (pathParts.length - 1) || symbolParts.length > 0);

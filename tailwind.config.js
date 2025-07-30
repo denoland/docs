@@ -2,8 +2,17 @@
 /** @type {import('npm:tailwindcss').Config} */
 export default {
   content: [
-    "{by-example,deploy,_components,_includes,runtime,static,subhosting,404,examples,lint}/**/*.{md,ts,tsx}",
+    "./deploy/**/*.{md,ts,tsx}",
+    "./_components/**/*.{md,ts,tsx}",
+    "./_includes/**/*.{md,ts,tsx}",
+    "./runtime/**/*.{md,ts,tsx}",
+    "./static/**/*.{md,ts,tsx}",
+    "./subhosting/**/*.{md,ts,tsx}",
+    "./404/**/*.{md,ts,tsx}",
+    "./examples/**/*.{md,ts,tsx}",
+    "./lint/**/*.{md,ts,tsx}",
     "*.{ts,tsx}",
+    "./_site/api/**/*.html",
   ],
   corePlugins: {
     preflight: true,
@@ -11,6 +20,10 @@ export default {
   darkMode: "selector",
   theme: {
     extend: {
+      screens: {
+        "xs": "30rem",
+        "xlplus": "82rem",
+      },
       colors: {
         transparent: "transparent",
         current: "currentColor",
@@ -19,12 +32,14 @@ export default {
         "background-primary": "hsla(var(--background-primary))",
         "background-secondary": "hsla(var(--background-secondary))",
         "background-tertiary": "hsla(var(--background-tertiary))",
+        "background-quaternary": "hsla(var(--background-quaternary))",
         "foreground-primary": "hsla(var(--foreground-primary))",
         "foreground-secondary": "hsla(var(--foreground-secondary))",
         "foreground-tertiary": "hsla(var(--foreground-tertiary))",
         "foreground-quaternary": "hsla(var(--foreground-quaternary))",
         "runtime-background": "hsla(var(--runtime-background))",
         "runtime-foreground": "hsla(var(--runtime-foreground))",
+        "background-raw": "hsla(var(--background-raw))",
 
         "info": "hsla(var(--info))",
         "note": "hsla(var(--note))",
@@ -32,6 +47,8 @@ export default {
         "tip": "hsla(var(--tip))",
 
         "primary": "hsla(var(--primary))",
+        "header-highlight": "hsla(var(--header-highlight))",
+        "blue-splash": "hsla(var(--blue-splash-hsl))",
 
         runtime: {
           "50": "#f0fff1",
@@ -64,14 +81,17 @@ export default {
         },
 
         gray: {
-          "000": "#e3e5e9",
-          "00": "#cfd1d6",
-          0: "#9EA0A5",
-          1: "#868789",
-          2: "#56575A",
-          3: "#25272B",
-          4: "#191B1F",
-          5: "#14161A",
+          "50": "hsl(var(--gray-50-hsl))",
+          "100": "hsl(var(--gray-100-hsl))",
+          "200": "hsl(var(--gray-200-hsl))",
+          "300": "hsl(var(--gray-300-hsl))",
+          "400": "hsl(var(--gray-400-hsl))",
+          "500": "hsl(var(--gray-500-hsl))",
+          "600": "hsl(var(--gray-600-hsl))",
+          "700": "hsl(var(--gray-700-hsl))",
+          "800": "hsl(var(--gray-800-hsl))",
+          "900": "hsl(var(--gray-900-hsl))",
+          "950": "hsl(var(--gray-950-hsl))",
         },
 
         code: {
@@ -132,6 +152,20 @@ export default {
 
       spacing: {
         74: "18.5rem",
+        "header": "var(--header-height)",
+        "subnav": "var(--subnav-height)",
+        "header-plus-subnav":
+          "calc(var(--header-height) + var(--subnav-height))",
+      },
+
+      height: {
+        "header": "var(--header-height)",
+        "subnav": "var(--subnav-height)",
+        "header-plus-subnav":
+          "calc(var(--header-height) + var(--subnav-height))",
+        "screen-minus-header": "calc(100dvh - var(--header-height))",
+        "screen-minus-both":
+          "calc(100dvh - var(--header-height) - var(--subnav-height))",
       },
 
       fontFamily: {
