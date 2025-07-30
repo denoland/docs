@@ -12,16 +12,24 @@ process by providing a structured approach to building Vue applications.
 
 In this tutorial, we'll build a simple Nuxt application with Deno that will
 display a list of dinosaurs and allow you to learn more about each one when you
-click on the name:
+click on the name.
 
-- [Scaffold a Nuxt app](#scaffold-a-nuxt-app-with-deno)
-- [Setup server API routes](#setup-server-api-routes)
-- [Setup Vue frontend](#setup-vue-frontend)
-- [Add Tailwind](#add-tailwind)
-- [Next steps](#next-steps)
+You can see the
+[finished app on GitHub](https://github.com/denoland/tutorial-with-nuxt).
 
-You can find the code for this project in this
-[repo](https://github.com/denoland/examples/tree/main/with-nuxt).
+You can see a
+[live version of the app on Deno Deploy](https://tutorial-with-nuxt.deno.deno.net/).
+
+:::info Deploy your own
+
+Want to skip the tutorial and deploy the finished app right now? Click the
+button below to instantly deploy your own copy of the complete Nuxt dinosaur app
+to Deno Deploy. You'll get a live, working application that you can customize
+and modify as you learn!
+
+[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/tutorial-with-nuxt)
+
+:::
 
 ## Scaffold a Nuxt app with Deno
 
@@ -31,59 +39,60 @@ We can create a new Nuxt project using Deno like this:
 deno -A npm:nuxi@latest init
 ```
 
-We'll use Deno to manage our package dependencies, and can grab the Nuxt package
-from npm. This will create a nuxt-app with this project structure:
+Select the directory where you want to create the project, and choose `deno` to
+manage dependencies. You can also choose to initialize a git repository if you
+want, or we can do that later.
 
+Next change directory into the newly created project, you can check which tasks
+Nuxt has available by running `deno task`.
+
+```bash
+cd nuxt-app
+deno task
 ```
+
+This will show you the available tasks, such as `dev`, `build`, and `preview`.
+The `dev` task is used to start the development server.
+
+## Start the development server
+
+Now we can start the development server with:
+
+```bash
+deno task dev
+```
+
+This will start the Nuxt development server, and you can visit
+[http://localhost:3000](http://localhost:3000) in your browser to see the
+default Nuxt welcome page.
+
+## Build out the app architecture
+
+Now that we have a basic Nuxt app set up, we can start building out the
+application architecture. We'll create a few directories to organize our code
+and prepare for the features we want to implement. Create the following
+directories in your project:
+
+```bash
 NUXT-APP/
-├── .nuxt/                   # Nuxt build directory
-├── node_modules/           # Node.js dependencies
+├── pages/                 # Vue pages
+│   └── dinosaurs/         # Dinosaur pages
 ├── public/                 # Static files
-│   ├── favicon.ico
-│   └── robots.txt
 ├── server/                # Server-side code
-│   └── tsconfig.json
-├── .gitignore
-├── app.vue               # Root Vue component
-├── nuxt.config.ts        # Nuxt configuration
-├── package-lock.json     # NPM lock file
-├── package.json          # Project manifest
-├── README.md
-└── tsconfig.json        # TypeScript configuration
+│   └── api/               # API routes
 ```
 
-## Setup server API routes
+## Add dinosaur data
 
-Let’s first start by creating the API routes that serve the dinosaur data.
+In the `api` directory, create a new file called `data.json` file, which will
+contain the hard coded dinosaur data.
 
-First, our
-[dinosaur data](https://github.com/denoland/examples/blob/main/with-nuxt/server/api/data.json)
-will live within the server directory as `server/api/data.json`:
+Copy and paste
+[this json file](https://raw.githubusercontent.com/denoland/tutorial-with-nuxt/refs/heads/main/src/data/data.json)
+into the `data.json` file. (If you were building a real app, you would probably
+fetch this data from a database or an external API.)
 
-```json title="server/api/data.json"
-[
-  {
-    "name": "Aardonyx",
-    "description": "An early stage in the evolution of sauropods."
-  },
-  {
-    "name": "Abelisaurus",
-    "description": "\"Abel's lizard\" has been reconstructed from a single skull."
-  },
-  {
-    "name": "Abrictosaurus",
-    "description": "An early relative of Heterodontosaurus."
-  },
-  ...etc
-]
-```
-
-This is where our data will be pulled from. In a full application, this data
-would come from a database.
-
-> ⚠️️ In this tutorial we hard code the data. But you can connect
-> to [a variety of databases](https://docs.deno.com/runtime/tutorials/connecting_to_databases/) and [even use ORMs like Prisma](https://docs.deno.com/runtime/tutorials/how_to_with_npm/prisma/) with
-> Deno.
+## Setup the API routes
 
 This app will have two API routes. They will serve the following:
 
@@ -250,31 +259,7 @@ for dynamic page rendering:
 Run the server with `deno task dev` and see how it looks at
 [http://localhost:3000](http://localhost:3000):
 
-<figure>
-
-<video class="w-full" alt="Build a Nuxt app with Deno." autoplay muted loop playsinline src="./images/how-to/nuxt/nuxt-3.mp4"></video>
-
-</figure>
-
 Looks great!
-
-## Add Tailwind
-
-Like we said, we're going to add a little bit of styling to this application.
-First, we'll set up a layout which will provide a consistent structure across
-all pages using Nuxt's layout system with
-[slot-based](https://vuejs.org/guide/components/slots) content injection:
-
-```tsx title="layouts/default.vue"
-<template>
-  <div>
-    <slot />
-  </div>
-</template>;
-```
-
-In this project, we’re also going to use [tailwind](https://tailwindcss.com/)
-for some basic design, so we need to install those dependencies:
 
 ```bash
 deno install -D npm:tailwindcss npm:@tailwindcss/vite
