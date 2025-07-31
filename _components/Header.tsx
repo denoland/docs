@@ -41,12 +41,15 @@ export default function (
                 hrefIsInCurrentSection(nav.href, currentSection)
                   ? "font-bold text-gray-800 bg-header-highlight"
                   : ""
+              } ${
+                nav.href === "/services/"
+                  ? "before:h-[calc(100%-3rem)] before:absolute before:w-px before:bg-foreground-secondary before:top-4 before:left-0"
+                  : ""
               } ${nav.style ?? ""}`}
               {...(hrefIsInCurrentSection(nav.href, currentSection)
                 ? { "data-active": true, "aria-current": "location" }
                 : {})}
             >
-              {}
               {hrefIsInCurrentSection(nav.href, currentSection) && (
                 <div
                   id="current-nav-item"
