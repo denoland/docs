@@ -46,7 +46,6 @@ export default function (
                 ? { "data-active": true, "aria-current": "location" }
                 : {})}
             >
-              {}
               {hrefIsInCurrentSection(nav.href, currentSection) && (
                 <div
                   id="current-nav-item"

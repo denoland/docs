@@ -1,6 +1,6 @@
 export default function () {
   const commonClasses =
-    `block w-6 h-[2px] bg-foreground-primary duration-200 ease-[cubic-bezier(0.77,0,0.175,1)]`;
+    `block w-6 h-0.5 bg-foreground-primary duration-200 ease-[cubic-bezier(0.77,0,0.175,1)]`;
   return (
     <>
       <button
