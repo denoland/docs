@@ -281,7 +281,7 @@ h1 {
   letter-spacing: -0.025em;
 }
 
-:where(h2, h3) {
+:is(h1, h2, h3) {
   letter-spacing: -0.0125em;
 }
 
@@ -307,6 +307,7 @@ h1 {
   }
 
   h1:first-child {
+    line-height: 1.1 !important;
     @apply mt-0 md:text-4xl;
   }
 
@@ -323,13 +324,11 @@ h1 {
   }
 
   :is(h1, h2, h3) {
-    letter-spacing: -0.0125em;
     padding-bottom: 0;
     border-bottom: 0;
-    line-height: 1.1;
   }
 
-  :where(h2, h3, h4, h5, h6) {
+  :is(h2, h3, h4, h5, h6) {
     line-height: 1.1;
 
     .header-anchor:hover {
