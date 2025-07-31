@@ -121,7 +121,7 @@ export default function renderCommand(
 
   const rendered = (
     <div>
-      <div class="bg-transparent border-b border-background-tertiary mt-4 mb-8 relative">
+      <div class="bg-transparent mt-4 mb-12 relative pl-2 border-l border-background-tertiary">
         <div class="text-xs font-bold mb-1">
           Command line usage:
         </div>
