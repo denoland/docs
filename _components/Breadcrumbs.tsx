@@ -60,6 +60,9 @@ export default function (props: {
     }
   }
 
+  const linkClasses =
+    `flex items-center pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-quaternary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-xs`;
+
   const chevronClasses =
     `after:w-4 after:h-4 after:[background:url(./img/chevron.svg)_no-repeat_center] after:inline-block after:ml-2`;
 
@@ -76,7 +79,7 @@ export default function (props: {
           itemtype="https://schema.org/ListItem"
         >
           <a
-            class={`flex items-center pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-quaternary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm ${chevronClasses}`}
+            class={`${linkClasses} ${chevronClasses}`}
             itemprop="item"
             href={props.sectionHref}
           >
@@ -99,7 +102,7 @@ export default function (props: {
                   <a
                     href={crumb.href}
                     itemprop="item"
-                    class={`flex items-center pl-3 py-1.5 underline underline-offset-4 decoration-foreground-tertiary hover:text-foreground-secondary hover:underline-medium hover:bg-foreground-quaternary dark:hover:bg-background-secondary dark:hover:text-foreground-primary rounded transition duration-100 text-sm ${chevronClasses}`}
+                    class={`${linkClasses} ${chevronClasses}`}
                   >
                     <span itemprop="name">{crumb.title}</span>
                   </a>
@@ -107,7 +110,7 @@ export default function (props: {
                 : (
                   <span
                     itemprop="name"
-                    class={`flex items-center pl-2 py-1.5 text-sm ${
+                    class={`flex items-center pl-2 py-1.5 text-xs ${
                       i < crumbs.length - 1 ? chevronClasses : ""
                     }`}
                     dangerouslySetInnerHTML={{

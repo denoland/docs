@@ -1,9 +1,9 @@
-import { TableOfContentsItem as TableOfContentsItem_ } from "../types.ts";
 import ansiRegex from "npm:ansi-regex";
 import { HeaderAnchor } from "../_components/HeaderAnchor.tsx";
 import CLI_REFERENCE from "../runtime/reference/cli/_commands_reference.json" with {
   type: "json",
 };
+import { TableOfContentsItem as TableOfContentsItem_ } from "../types.ts";
 
 type ArgType = {
   name: string;
@@ -121,13 +121,13 @@ export default function renderCommand(
 
   const rendered = (
     <div>
-      <div class="p-4 bg-stone-100 dark:bg-transparent rounded border border-gray-300 dark:border-background-tertiary mt-6 mb-6 relative">
-        <h3 class="!text-xs !m-0 -top-2.5 bg-background-primary border border-gray-600/25 px-2 py-0.5 rounded absolute !font-normal">
-          Command line usage
-        </h3>
+      <div class="bg-transparent border-b border-background-tertiary mt-4 mb-8 relative">
+        <div class="text-xs font-bold mb-1">
+          Command line usage:
+        </div>
         <div>
-          <pre class="!mb-0 !px-3 !py-2">
-              <code>{command.usage.replaceAll(ANSI_RE, "").slice("usage: ".length)}</code>
+          <pre class="!mb-0 !p-6">
+            <code>{command.usage.replaceAll(ANSI_RE, "").slice("usage: ".length)}</code>
           </pre>
         </div>
       </div>
