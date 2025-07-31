@@ -133,7 +133,7 @@ function SidebarCategoryHeading(props: {
   isActive?: boolean;
 }) {
   return (
-    <h2 class="block uppercase py-2 px-0 mt-4 text-foreground-secondary font-bold leading-none tracking-wide !border-0">
+    <h2 class="block uppercase py-2 pr-4 mt-4 text-foreground-secondary font-bold leading-none tracking-wide !border-0">
       {props.title}
     </h2>
   );

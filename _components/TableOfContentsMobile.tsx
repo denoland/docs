@@ -14,7 +14,7 @@ export default function TableOfContents({ data, toc }: {
         On this page
       </summary>
 
-      <ul className="toc-list">
+      <ul className="p-4 pt-2 text-foreground-primary">
         {toc.map((item: TableOfContentsItem_) => (
           <data.comp.TableOfContentsItem item={item} />
         ))}
