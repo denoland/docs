@@ -691,7 +691,6 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
 
 #nav,
 #toc {
-  width: 15rem !important;
   max-width: 15rem;
 }
 
