@@ -250,7 +250,7 @@ Documentation for it can be found
 ```ts title="server.ts"
 Deno.serve((req) => {
   if (req.headers.get("upgrade") != "websocket") {
-    return new Response(null, { status: 501 });
+    return new Response(null, { status: 426 });
   }
 
   const { socket, response } = Deno.upgradeWebSocket(req);
