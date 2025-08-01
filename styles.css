@@ -441,10 +441,6 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
   line-height: 1.8rem;
 }
 
-.learn-link {
-  @apply flex gap-2 items-center font-normal underline underline-offset-4;
-}
-
 .deploy-link {
   @apply text-deploy-500 decoration-deploy-500/20 hover:decoration-deploy-500;
 }
@@ -454,6 +450,11 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
     dark:hover:decoration-runtime-600 decoration-1 text-primary
     decoration-runtime-800 hover:decoration-runtime-600 hover:text-runtime-600
     transition-colors duration-100;
+}
+
+.learn-link {
+  @apply flex dark:text-foreground-primary gap-3 items-center font-normal
+    underline underline-offset-4;
 }
 
 .help-link {
