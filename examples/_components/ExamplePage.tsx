@@ -79,12 +79,12 @@ export default function ExamplePage({ example }: Props) {
               class="markdown-body"
             >
               <pre className="highlight">
-                        <code>
-                        {example.parsed.run.startsWith("deno")
-                            ? example.parsed.run.replace("<url>", url)
-                            : "deno run " +
-                            example.parsed.run.replace("<url>", rawUrl)}
-                        </code>
+                <code>
+                {example.parsed.run.startsWith("deno")
+                    ? example.parsed.run.replace("<url>", url)
+                    : "deno run " +
+                    example.parsed.run.replace("<url>", rawUrl)}
+                </code>
               </pre>
             </div>
           </div>

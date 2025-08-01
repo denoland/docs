@@ -1,5 +1,3 @@
-import throttle from "npm:just-throttle@4.2.0";
-
 const mainNav = document.querySelector("#main-nav");
 
 if (mainNav) {
@@ -10,25 +8,26 @@ if (mainNav) {
 
   mainNav.addEventListener(
     "mouseover",
-    throttle((e) => {
-      if (e.target === e.currentTarget) return;
-      const target = e.target as HTMLElement;
-      const defaultLeft = currentNavItem?.getBoundingClientRect().left;
-      const defaultScaleX = currentNavItem?.getBoundingClientRect().width!;
-      if (e.target === currentNavItem) {
-        currentNavItemHighlighter.style.setProperty("--left", "0px");
-        currentNavItemHighlighter.style.setProperty("--scaleX", "1");
-      } else {
-        currentNavItemHighlighter.style.setProperty(
-          "--left",
-          `${target.getBoundingClientRect().left - defaultLeft}px`,
-        );
-        currentNavItemHighlighter.style.setProperty(
-          "--scaleX",
-          `${target.offsetWidth / defaultScaleX}`,
-        );
-      }
-    }, 50),
+    (e) =>
+      requestAnimationFrame(() => {
+        if (e.target === e.currentTarget) return;
+        const target = e.target as HTMLElement;
+        const defaultLeft = currentNavItem?.getBoundingClientRect().left!;
+        const defaultScaleX = currentNavItem?.getBoundingClientRect().width!;
+        if (e.target === currentNavItem) {
+          currentNavItemHighlighter.style.setProperty("--left", "0px");
+          currentNavItemHighlighter.style.setProperty("--scaleX", "1");
+        } else {
+          currentNavItemHighlighter.style.setProperty(
+            "--left",
+            `${target.getBoundingClientRect().left - defaultLeft}px`,
+          );
+          currentNavItemHighlighter.style.setProperty(
+            "--scaleX",
+            `${target.offsetWidth / defaultScaleX}`,
+          );
+        }
+      }),
   );
 
   mainNav.addEventListener("mouseout", () => {

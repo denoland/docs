@@ -36,7 +36,7 @@ export default function LandingPage() {
             src="/examples.png"
           />
         </div>
-        <div className="flex flex-col gap-4 w-full mb-4 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded md:flex-wrap md:justify-start md:items-center md:flex-row">
+        <div className="flex flex-col gap-4 w-full mb-8 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded md:flex-wrap md:justify-start md:items-center md:flex-row">
           <h2 className="font-semibold">
             Filter by type:
           </h2>

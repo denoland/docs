@@ -3,12 +3,12 @@ title: "Foreign Function Interface (FFI)"
 description: "Learn how to use Deno's Foreign Function Interface (FFI) to call native libraries directly from JavaScript or TypeScript. Includes examples, best practices, and security considerations."
 ---
 
-Deno's Foreign Function Interface (FFI) allows JavaScript and TypeScript code
-to call functions in dynamic libraries written in languages like C, C++, or
-Rust. This enables you to integrate native code performance and capabilities
-directly into your Deno applications.
+Deno's Foreign Function Interface (FFI) allows JavaScript and TypeScript code to
+call functions in dynamic libraries written in languages like C, C++, or Rust.
+This enables you to integrate native code performance and capabilities directly
+into your Deno applications.
 
-<comp.CTA href="/api/deno/ffi" type="runtime">Deno FFI Reference Docs</comp.CTA>
+<a href="/api/deno/ffi" class="docs-cta runtime-cta">Deno FFI Reference Docs</a>
 
 ## Introduction to FFI
 
@@ -33,18 +33,20 @@ flag, as native code runs outside of Deno's security sandbox:
 deno run --allow-ffi my_ffi_script.ts
 ```
 
-<comp.Admonition type="info">
-  <strong>Important security warning</strong>: Unlike JavaScript code running in the Deno
-  sandbox, native libraries loaded via FFI have the same access level as the Deno
-  process itself. This means they can:
+:::info
 
-  - Access the filesystem
-  - Make network connections
-  - Access environment variables
-  - Execute system commands
+<strong>Important security warning</strong>: Unlike JavaScript code running in
+the Deno sandbox, native libraries loaded via FFI have the same access level as
+the Deno process itself. This means they can:
 
-  Always ensure you trust the native libraries you're loading through FFI.
-</comp.Admonition>
+- Access the filesystem
+- Make network connections
+- Access environment variables
+- Execute system commands
+
+Always ensure you trust the native libraries you're loading through FFI.
+
+:::
 
 ## Basic usage
 
@@ -94,6 +96,7 @@ As of Deno 1.25, the `pointer` type has been split into a `pointer` and a
 `buffer` type to ensure users take advantage of optimizations for Typed Arrays,
 and as of Deno 1.31 the JavaScript representation of `pointer` has become an
 opaque pointer object or `null` for null pointers.
+
 - [1] `void` type can only be used as a result type.
 - [2] `buffer` type accepts TypedArrays as parameter, but it always returns a
   pointer object or `null` when used as result type like the `pointer` type.
@@ -297,8 +300,8 @@ Before using FFI, consider these alternatives:
 
 - [WebAssembly](/runtime/reference/wasm/), for portable native code that runs
   within Deno's sandbox.
-- Use `Deno.command` to execute external binaries and subprocesses with controlled
-  permissions.
+- Use `Deno.command` to execute external binaries and subprocesses with
+  controlled permissions.
 - Check whether [Deno's native APIs](/api/deno) already provide the
   functionality you need.
 

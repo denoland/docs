@@ -17,7 +17,7 @@ building amazing applications.
 
 ## Linting
 
-<comp.CTA href="/lint/" type="runtime">Explore all the lint rules</comp.CTA>
+<a href="/lint/" type="docs-cta runtime-cta">Explore all the lint rules</a>
 
 Linting is the process of analyzing your code for potential errors, bugs, and
 stylistic issues. Deno's built-in linter,
