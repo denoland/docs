@@ -95,6 +95,30 @@ Access environment variables using the `Deno.env.get` API:
 const myEnvVar = Deno.env.get("MY_ENV_VAR");
 ```
 
+## Exposing an environment variable as a file
+
+Environment variables can be exposed as a file instead of a regular environment
+variable by toggling the "Expose as file" option.
+
+When this option is enabled, the environment variable's value is stored in a
+temporary file in the application's file system. The environment variable then
+contains the file path to this temporary file instead of the value itself.
+
+To read the value, you can use the `Deno.readTextFile` API in combination with
+`Deno.env.get`:
+
+```ts
+// Assuming MY_ENV_VAR is set to expose as a file
+const value = await Deno.readTextFile(Deno.env.get("MY_ENV_VAR"));
+```
+
+This is useful for values that are too large for environment variables or when
+you want to avoid exposing sensitive data in the environment variable list.
+
+Additionally it is useful for preexisting applications that expect certain
+environment variables to point to files, such as `PGSSLROOTCERT` for Postgres CA
+certificates.
+
 ## Predefined environment variables
 
 Deno Deploy<sup>EA</sup> provides these predefined environment variables in all
