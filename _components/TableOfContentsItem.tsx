@@ -4,10 +4,10 @@ export default function TableOfContentsItem(
   props: { item: TableOfContentsItem_ },
 ) {
   return (
-    <li class="m-2 leading-4">
+    <li class="m-2 mr-0 leading-4">
       <a
         href={`#${props.item.slug}`}
-        className="text-[0.8125rem] text-foreground-secondary hover:text-primary transition-colors duration-200 ease-in-out select-none"
+        className="text-[0.8125rem] lg:text-foreground-secondary hover:text-primary transition-colors duration-200 ease-in-out select-none"
       >
         {props.item.text.replaceAll(/ \([0-9/]+?\)/g, "")}
       </a>
