@@ -43,8 +43,9 @@ deno lint src/
 This command will lint all files in the `src/` directory.
 
 The linter can be configured in a
-[`deno.json`](/runtime/fundamentals/configuration/#linting) file. You can specify custom
-rules, plugins, and settings to tailor the linting process to your needs.
+[`deno.json`](/runtime/fundamentals/configuration/#linting) file. You can
+specify custom rules, plugins, and settings to tailor the linting process to
+your needs.
 
 ### Linting rules
 
@@ -108,7 +109,9 @@ before being merged.
 
 ### Integration in VS Code
 
-To enable Deno as your formatter in VS Code, you have to set it up as your default formatter in the settings, and then add a `.vscode/settings.json` file in the root of your project with the following configuration:
+To enable Deno as your formatter in VS Code, you have to set it up as your
+default formatter in the settings, and then add a `.vscode/settings.json` file
+in the root of your project with the following configuration:
 
 ```json
 {
@@ -118,113 +121,159 @@ To enable Deno as your formatter in VS Code, you have to set it up as your defau
 }
 ```
 
-If your `deno.json(c)` file is located in a subdirectory of your project, provide the correct relative path to it instead.
+If your `deno.json(c)` file is located in a subdirectory of your project,
+provide the correct relative path to it instead.
 
 ### Available options
 
 #### `bracePosition`
+
 Define brace position for blocks
+
 - **Default:** `sameLine`
-- **Possible values:** `maintain`, `sameLine`, `nextLine`, `sameLineUnlessHanging`
+- **Possible values:** `maintain`, `sameLine`, `nextLine`,
+  `sameLineUnlessHanging`
 
 #### `jsx.bracketPosition`
+
 Define bracket position for JSX
+
 - **Default:** `nextLine`
 - **Possible values:** `maintain`, `sameLine`, `nextLine`
 
 #### `jsx.forceNewLinesSurroundingContent`
+
 Forces newlines surrounding the content of JSX elements
+
 - **Default:** `false`
 - **Possible values:** `true`, `false`
 
 #### `jsx.multiLineParens`
-Surrounds the top-most JSX element or fragment in parentheses when it spans multiple lines
+
+Surrounds the top-most JSX element or fragment in parentheses when it spans
+multiple lines
+
 - **Default:** `prefer`
 - **Possible values:** `never`, `prefer`, `always`
 
 #### `indentWidth`
+
 Define indentation width
+
 - **Default:** `2`
 - **Possible values:** `number`
 
 #### `lineWidth`
+
 Define maximum line width
+
 - **Default:** `80`
 - **Possible values:** `number`
 
 #### `newLineKind`
+
 The newline character to use
+
 - **Default:** `lf`
 - **Possible values:** `auto`, `crlf`, `lf`, `system`
 
 #### `nextControlFlowPosition`
+
 Define position of next control flow
+
 - **Default:** `sameLine`
 - **Possible values:** `sameLine`, `nextLine`, `maintain`
 
 #### `semiColons`
+
 Whether to prefer using semicolons.
+
 - **Default:** `true`
 - **Possible values:** `true`, `false`
 
 #### `operatorPosition`
+
 Where to place the operator for expressions that span multiple lines
+
 - **Default:** `sameLine`
 - **Possible values:** `sameLine`, `nextLine`, `maintain`
 
 #### `proseWrap`
+
 Define how prose should be wrapped
+
 - **Default:** `always`
 - **Possible values:** `always`, `never`, `preserve`
 
 #### `quoteProps`
+
 Control quoting of object properties
+
 - **Default:** `asNeeded`
 - **Possible values:** `asNeeded`, `consistent`, `preserve`
 
 #### `singleBodyPosition`
+
 The position of the body in single body blocks
+
 - **Default:** `sameLineUnlessHanging`
-- **Possible values:** `sameLine`, `nextLine`, `maintain`, `sameLineUnlessHanging`
+- **Possible values:** `sameLine`, `nextLine`, `maintain`,
+  `sameLineUnlessHanging`
 
 #### `singleQuote`
+
 Use single quotes
+
 - **Default:** `false`
 - **Possible values:** `true`, `false`
 
 #### `spaceAround`
+
 Control spacing around enclosed expressions
+
 - **Default:** `false`
 - **Possible values:** `true`, `false`
 
 #### `spaceSurroundingProperties`
+
 Control spacing surrounding single line object-like nodes
+
 - **Default:** `true`
 - **Possible values:** `true`, `false`
 
 #### `trailingCommas`
+
 Control trailing commas in multi-line arrays/objects
+
 - **Default:** `always`
 - **Possible values:** `always`, `never`
 
 #### `typeLiteral.separatorKind`
+
 Define separator kind for type literals
+
 - **Default:** `semiColon`
 - **Possible values:** `comma`, `semiColon`
 
 #### unstable-component
+
 Enable formatting Svelte, Vue, Astro and Angular files
 
 #### `unstable-sql`
+
 Enable formatting SQL files
 
 #### `useTabs`
+
 Use tabs instead of spaces for indentation
+
 - **Default:** `false`
 - **Possible values:** `true`, `false`
 
 #### `useBraces`
+
 Whether to use braces for if statements, for statements, and while statements
+
 - **Default:** `whenNotSingleLine`
 - **Possible values:** `maintain`, `whenNotSingleLine`, `always`, preferNone
 

@@ -12,7 +12,7 @@ export function LearningList(
   return (
     <section className="break-inside-avoid-column">
       <h2 className="text-lg md:text-xl font-semibold mb-3">{props.title}</h2>
-      <ul className="mb-16">
+      <ul className="mb-12">
         {props.items.map((item) => (
           <li
             className="learning-list-item"
