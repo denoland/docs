@@ -100,6 +100,7 @@ export const sidebar = [
           { title: "Firebase", href: "/deploy/manual/firebase/" },
           { title: "Postgres", href: "/deploy/manual/postgres/" },
           { title: "Neon Postgres", href: "/deploy/manual/neon-postgres/" },
+          { title: "Prisma Postgres", href: "/deploy/manual/prisma-postgres/" },
         ],
       },
     ],
