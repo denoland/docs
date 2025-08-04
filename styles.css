@@ -381,12 +381,12 @@ h1 {
 pre:has(code.highlight),
 pre.highlight:has(code) {
   @apply px-4 py-8 -mx-4 sm:mx-0 border-x-0 sm:border sm:px-8 rounded-none
-    sm:rounded-md border-foreground-tertiary;
+    sm:rounded-md border-background-tertiary;
   overflow-x: auto;
 }
 
-pre:has(code.highlight):where(:hover, :focus) + .copyButton,
-pre.highlight:has(code):where(:hover, :focus) + .copyButton {
+pre:where(:hover, :focus) + .copyButton,
+pre.highlight:where(:hover, :focus) + .copyButton {
   @apply opacity-100;
 }
 
@@ -1068,7 +1068,7 @@ body:has(.raw-container)
       background: hsl(var(--foreground-primary));
       clip-path: polygon(0 0, 100% 50%, 0 100%);
       position: absolute;
-      left: -1rem;
+      left: -1em;
       top: calc(50% - 0.25em);
     }
   }
