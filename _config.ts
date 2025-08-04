@@ -212,6 +212,86 @@ site.ignore(
 // the default layout if no other layout is specified
 site.data("layout", "doc.tsx");
 
+// Load API categories data globally
+import denoCategories from "./reference_gen/deno-categories.json" with {
+  type: "json",
+};
+import webCategories from "./reference_gen/web-categories.json" with {
+  type: "json",
+};
+
+const nodeCategories = [
+  "assert",
+  "async_hooks",
+  "buffer",
+  "child_process",
+  "cluster",
+  "console",
+  "crypto",
+  "dgram",
+  "diagnostics_channel",
+  "dns",
+  "domain",
+  "events",
+  "fs",
+  "fs/promises",
+  "http",
+  "http2",
+  "https",
+  "inspector",
+  "module",
+  "net",
+  "os",
+  "path",
+  "perf_hooks",
+  "process",
+  "punycode",
+  "querystring",
+  "readline",
+  "repl",
+  "sea",
+  "sqlite",
+  "stream",
+  "string_decoder",
+  "test",
+  "timers",
+  "tls",
+  "trace_events",
+  "tty",
+  "url",
+  "util",
+  "v8",
+  "vm",
+  "wasi",
+  "worker_threads",
+  "zlib",
+];
+
+site.data("apiCategories", {
+  deno: {
+    title: "Deno APIs",
+    categories: Object.keys(denoCategories),
+    descriptions: denoCategories,
+    getCategoryHref: (categoryName: string) =>
+      `/api/deno/~/category-${
+        categoryName.toLowerCase().replace(/\s+/g, "-")
+      }/`,
+  },
+  web: {
+    title: "Web APIs",
+    categories: Object.keys(webCategories),
+    descriptions: webCategories,
+    getCategoryHref: (categoryName: string) =>
+      `/api/web/~/category-${categoryName.toLowerCase().replace(/\s+/g, "-")}/`,
+  },
+  node: {
+    title: "Node APIs",
+    categories: nodeCategories,
+    descriptions: {} as Record<string, string>,
+    getCategoryHref: (categoryName: string) => `/api/node/${categoryName}/`,
+  },
+});
+
 // Do more expensive operations if we're building the full site
 if (Deno.env.get("BUILD_TYPE") == "FULL") {
   // Use Lume's built in date function to get the last modified date of the file
