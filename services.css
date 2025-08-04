@@ -1,0 +1,59 @@
+@font-face {
+  font-family: Moranga;
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url("/fonts/services/Moranga-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Moranga;
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url("/fonts/services/Moranga-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Recursive;
+  font-style: normal;
+  font-weight: 300 1000;
+  font-display: swap;
+  src: url("/fonts/services/Recursive_Variable.woff2") format("woff2")
+    tech(variations);
+}
+
+:root {
+  /* Font families */
+  --font-sans:
+    "Recursive", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans--font-variation-settings: "MONO" 0, "CASL" 0, "CRSV" 0, "slnt" 0;
+  --font-serif: Moranga, "Georgia Pro", Georgia, serif;
+  --font-mono:
+    "Recursive", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono--font-variation-settings: "MONO" 1, "CASL" 0, "CRSV" 0, "slnt" 0;
+}
+
+[data-services-page="true"] {
+  font-family: var(--font-sans);
+  font-variation-settings: var(--font-sans--font-variation-settings);
+
+  & h1,
+  & h2,
+  & h3 {
+    font-family: var(--font-serif);
+    font-weight: normal;
+  }
+
+  & i, & em, .italic {
+    font-variation-settings: "slnt" -8, "CRSV" 1, "CASL" 1, "MONO" 0;
+    font-style: normal !important;
+  }
+
+  & pre, & code, .font-mono {
+    font-family: var(--font-mono);
+    font-variation-settings: var(--font-mono--font-variation-settings);
+  }
+}
