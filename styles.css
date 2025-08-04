@@ -94,8 +94,6 @@
   --caution: 45.4deg, 93.39%, 47.45%;
   --tip: 142deg, 76.2%, 36.3%;
 
-  --max-text-width: 40rem;
-
   @media (min-width: 48rem) {
     --header-height: 4rem;
   }
@@ -229,10 +227,6 @@ label:has(input.sr-only:focus-visible) {
 
 main:focus-visible {
   outline: none;
-}
-
-p {
-  max-width: var(--max-text-width);
 }
 
 .dark-mode-toggle-button img {
@@ -865,11 +859,6 @@ main:has(#example:checked) {
         minmax(12rem, 1fr) minmax(24rem, 3fr) minmax(12rem, 1fr);
     }
 
-    @media (min-width: 80rem) {
-      grid-template-columns:
-        minmax(12rem, 2fr) minmax(30rem, 5fr) minmax(12rem, 2fr);
-    }
-
     .content {
       margin-right: -1rem;
     }
@@ -1048,7 +1037,7 @@ body:has(.raw-container)
     font-size: 1.15rem;
     line-height: 1.75rem;
     text-wrap: balance;
-    max-width: 600px;
+    max-width: 32em;
   }
 
   [data-component="hero"] img {
