@@ -23,7 +23,10 @@ export default function (
             )
             : (
               docEntry.name && (
-                <span className="font-bold font-lg">{docEntry.name}</span>
+                <span
+                  className="font-bold font-lg"
+                  dangerouslySetInnerHTML={{ __html: docEntry.name }}
+                />
               )
             )}
           {/*typedef rendering*/}
