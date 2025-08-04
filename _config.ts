@@ -10,8 +10,7 @@ import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 
-import tw from "tailwindcss";
-import tailwindConfig from "./tailwind.config.js";
+import twPostCss from "@tailwindcss/postcss";
 
 import Prism from "./prism.ts";
 
@@ -133,7 +132,7 @@ site.use(mdx());
 
 site.use(
   postcss({
-    plugins: [tw(tailwindConfig)],
+    plugins: [twPostCss],
   }),
 );
 
