@@ -686,15 +686,6 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
   }
 }
 
-#toc {
-  scrollbar-width: thin;
-}
-
-#nav,
-#toc {
-  max-width: 15rem;
-}
-
 .copyButton[data-copied="true"] .copy-icon {
   display: none;
 }
@@ -868,6 +859,16 @@ main:has(#example:checked) {
 
   .layout--three-column {
     grid-template-columns: auto minmax(0, 1fr) auto;
+
+    @media (min-width: 64rem) {
+      grid-template-columns:
+        minmax(12rem, 1fr) minmax(24rem, 3fr) minmax(12rem, 1fr);
+    }
+
+    @media (min-width: 80rem) {
+      grid-template-columns:
+        minmax(12rem, 2fr) minmax(30rem, 5fr) minmax(12rem, 2fr);
+    }
 
     .content {
       margin-right: -1rem;
