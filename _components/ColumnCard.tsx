@@ -9,9 +9,7 @@ export default function ColumnCard(
   return (
     <div className="flex flex-col justify-between">
       <div>
-        {typeof props.headingText === "string"
-          ? <h4 class="text-lg font-bold mb-2">{props.headingText}</h4>
-          : <h4 class="text-lg font-bold mb-2" />}
+        <h4 class="text-lg font-bold mb-2">{props.headingText}</h4>
         <p>{props.text}</p>
       </div>
       <a class="homepage-link deploy-link" href={props.linkHref}>
