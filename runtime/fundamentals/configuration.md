@@ -487,6 +487,30 @@ works as well:
 }
 ```
 
+## Exports
+
+The `exports` field in the `deno.json` file allows you to define which modules
+or paths are publicly accessible from your package. This is particularly useful
+for controlling the API surface of your package and ensuring that only the
+intended parts of your code are exposed to users.
+
+```json title="deno.json"
+{
+  "exports": {
+    "./module1": "./src/module1.ts",
+    "./module2": "./src/module2.ts",
+    "./utils/*": "./src/utils/*.ts"
+  }
+}
+```
+
+This configuration will:
+
+- expose `module1` and `module2` as entry points for your package,
+- allow importing any file from the `utils` directory using a wildcard. This
+  means users can import these modules using the specified paths, while other
+  files in your package remain private.
+
 ## An example `deno.json` file
 
 ```json
