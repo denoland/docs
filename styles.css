@@ -866,6 +866,17 @@ main:has(#example:checked) {
 
   .layout--two-column {
     grid-template-columns: minmax(12rem, 1fr) minmax(24rem, 3fr);
+
+    @media (min-width: 64rem) {
+      grid-template-columns:
+        minmax(12rem, 1fr) minmax(24rem, 3fr) minmax(12rem, 1fr);
+    }
+
+    .content {
+      @media (min-width: 64rem) {
+        grid-column: 2 / 4;
+      }
+    }
   }
 
   .layout:has(.raw-container) {
