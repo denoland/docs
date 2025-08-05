@@ -74,5 +74,5 @@
     "_site",
     "reference_gen"
   ],
-  "nodeModulesDir": "auto",
+  "nodeModulesDir": "auto"
 }
