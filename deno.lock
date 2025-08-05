@@ -90,6 +90,7 @@
     "npm:path-to-regexp@^6.3.0": "6.3.0",
     "npm:postcss-import@16.1.0": "16.1.0_postcss@8.4.47",
     "npm:postcss@8.4.47": "8.4.47",
+    "npm:postcss@^8.5.6": "8.5.6",
     "npm:postgres@*": "3.4.5",
     "npm:preact-render-to-string@6.5.11": "6.5.11_preact@10.24.3",
     "npm:preact@*": "10.26.5",
@@ -885,7 +886,7 @@
         "@alloc/quick-lru",
         "@tailwindcss/node",
         "@tailwindcss/oxide",
-        "postcss",
+        "postcss@8.4.47",
         "tailwindcss"
       ]
     },
@@ -1048,7 +1049,7 @@
         "fraction.js",
         "normalize-range",
         "picocolors",
-        "postcss",
+        "postcss@8.4.47",
         "postcss-value-parser"
       ],
       "bin": true
@@ -2644,7 +2645,7 @@
     "postcss-import@16.1.0_postcss@8.4.47": {
       "integrity": "sha512-7hsAZ4xGXl4MW+OKEWCnF6T5jqBw80/EE9aXg1r2yyn1RsVEU8EtKXbijEODa+rg7iih4bKf7vlvTGYR4CnPNg==",
       "dependencies": [
-        "postcss",
+        "postcss@8.4.47",
         "postcss-value-parser",
         "read-cache",
         "resolve"
@@ -2655,6 +2656,14 @@
     },
     "postcss@8.4.47": {
       "integrity": "sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==",
+      "dependencies": [
+        "nanoid",
+        "picocolors",
+        "source-map-js"
+      ]
+    },
+    "postcss@8.5.6": {
+      "integrity": "sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==",
       "dependencies": [
         "nanoid",
         "picocolors",
@@ -3555,6 +3564,7 @@
       "npm:@tailwindcss/cli@^4.1.11",
       "npm:@tailwindcss/postcss@^4.1.11",
       "npm:googleapis@144",
+      "npm:postcss@^8.5.6",
       "npm:preact@*",
       "npm:prismjs@1.29.0",
       "npm:tailwindcss@^4.1.11"

@@ -15,5 +15,5 @@ hr.hr {
 }
 
 .anchorable-heading .context-link {
-  color: hsl(var(--foreground-primary));
+  color: var(--color-foreground-primary); /*marked*/
 }

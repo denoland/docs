@@ -132,7 +132,8 @@ site.use(mdx());
 
 site.use(
   postcss({
-    plugins: [twPostCss],
+    includes: false,
+    plugins: [twPostCss()],
   }),
 );
 

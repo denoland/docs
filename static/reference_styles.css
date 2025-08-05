@@ -463,7 +463,7 @@ ul.namespaceItemContentSubItems {
   li {
     margin: 0 !important;
     a {
-      color: hsl(var(--foreground-secondary));
+      color: var(--color-foreground-secondary); /*marked*/
     }
   }
 }
@@ -988,7 +988,7 @@ ul.namespaceItemContentSubItems {
 }
 
 a.anchor-link {
-  color: hsl(var(--primary));
+  color: var(--color-primary); /*marked*/
   display: none;
 }
 
@@ -1001,8 +1001,8 @@ a.anchor-link {
 }
 
 .ddoc .link {
-  color: hsl(var(--primary));
+  color: var(--color-primary); /*marked*/
   &:hover {
-    color: hsl(var(--primary));
+    color: var(--color-primary); /*marked*/
   }
 }
