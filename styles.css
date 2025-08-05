@@ -385,9 +385,6 @@
         padding: 0 0.2em;
       }
     }
-    :where(h1, h2, h3) {
-      letter-spacing: -0.0125em;
-    }
     & h1 {
       font-size: 2em;
       &:first-child {
@@ -867,6 +864,10 @@
       ss07: 7;
       ss08: 8;
     }
+  }
+
+  :where(h1, h2, h3) {
+    letter-spacing: -0.0125em;
   }
 
   body {
