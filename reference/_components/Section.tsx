@@ -78,5 +78,3 @@ export default function (
     </section>
   );
 }
-
-export const css = "@import './reference/_components/Section.css';";
