@@ -1,19 +1,15 @@
-h1.ref-h1 {
-  font-size: 1.6rem;
-  border: 0;
-  padding: 0;
-}
+@layer components {
+  code.inline-code-block {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
 
-code.inline-code-block {
-  display: inline-block;
-  margin-bottom: 1rem;
-  padding: 1rem;
-}
+  hr.hr {
+    height: 1px;
+  }
 
-hr.hr {
-  height: 1px;
-}
-
-.anchorable-heading .context-link {
-  color: var(--color-foreground-primary); /*marked*/
+  .anchorable-heading .context-link {
+    color: var(--color-foreground-primary); /*marked*/
+  }
 }

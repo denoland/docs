@@ -137,6 +137,9 @@
     "@deno/gfm@0.8.2": {
       "integrity": "a7528367cbd954a2d0de316bd0097ee92f06d2cb66502c8574de133ed223424f"
     },
+    "@deno/gfm@0.11.0": {
+      "integrity": "ddadbfca6c1281729783612e4b0b2166b6543c1c49cc106b80911f4dc4087abc"
+    },
     "@deno/graph@0.82.3": {
       "integrity": "5c1fe944368172a9c87588ac81b82eb027ca78002a57521567e6264be322637e"
     },
