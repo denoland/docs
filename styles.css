@@ -1629,3 +1629,151 @@
     }
   }
 }
+
+@layer overrides {
+  #content > main > section + div {
+    @apply max-w-[75ch];
+  }
+
+  .ddoc .markdown-summary {
+    @apply text-foreground-secondary;
+  }
+
+  .ddoc .namespaceSection {
+    display: block;
+  }
+
+  .ddoc .namespaceSection .namespaceItem {
+    @apply min-h-0 mb-3;
+  }
+
+  .ddoc .namespaceSection .namespaceItem .namespaceItemContent > div {
+    @apply text-foreground-secondary;
+  }
+
+  @media (max-width: 48rem) {
+    .ddoc {
+      @apply px-0;
+    }
+
+    .ddoc > div:not(.categoryPanel) {
+      @apply px-4;
+    }
+
+    .ddoc .markdown-body .highlight {
+      @apply -mx-4;
+    }
+
+    [data-content="example"] .markdown-body .highlight {
+      @apply m-0;
+    }
+
+    .ddoc .markdown-body pre > code:first-child {
+      @apply px-4;
+    }
+  }
+
+  /* Align content with the top of the TOC now that it has no header */
+
+  #topnav {
+    @apply md:mt-1;
+  }
+
+  /* Adjust spacing to account for removed header */
+
+  .ddoc .toc .documentNavigation {
+    @apply md:mt-4;
+  }
+
+  .ddoc .toc .documentNavigation > ul li {
+    @apply ml-1;
+  }
+
+  .ddoc .z-50 {
+    z-index: 49;
+  }
+
+  .ddoc .usageContent {
+    @apply bg-primary/5 border-primary/25 max-w-[75ch] py-4 mt-6 relative;
+
+    > div {
+      color: inherit;
+    }
+  }
+
+  /* Adjust spacing for ref pages that don't have a header above usage */
+  .ddoc .usageContent:first-of-type {
+    @apply mt-1;
+  }
+
+  .ddoc .usageContent > div.markdown-body > pre.highlight {
+    @apply border-primary/25;
+  }
+
+  .ddoc .usageContent > h3 {
+    @apply text-xs bg-background-primary border border-primary/25 px-2 py-0.5
+      rounded absolute;
+    top: -50px;
+    z-index: 2;
+  }
+
+  .dark .ddoc .usageContent pre {
+    background: inherit;
+    color: inherit;
+  }
+
+  .ddoc .usageContent > .markdown-body {
+    @apply max-w-full;
+  }
+
+  .ddoc .context_button:hover {
+    @apply bg-gray-100/25;
+  }
+
+  .totop {
+    @apply block fixed p-3 bg-background-secondary rounded-md border
+      border-background-tertiary bottom-4 right-4 text-transparent;
+    animation-name: showToTop;
+    animation-duration: 1ms;
+    animation-timeline: --showScrollTop;
+  }
+
+  .totop::after {
+    @apply block w-4 h-4 border-2 border-primary border-l-0 border-t-0;
+    content: "";
+    transform: translate(0, 25%) rotate(225deg);
+  }
+
+  .highlight {
+    max-width: 100%;
+  }
+
+  html {
+    scroll-timeline: --showScrollTop y;
+    scroll-timeline: --showScrollTop vertical;
+  }
+
+  @keyframes showToTop {
+    0% {
+      opacity: 0;
+      transform: translateY(300%);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+
+  .example-block:nth-child(1) .snippet-comment {
+    @apply mt-4;
+  }
+
+  .examples-content h1 {
+    padding-right: 150px; /* width of "edit on github button*/
+  }
+
+  .example-command {
+    width: 100%;
+    overflow: scroll;
+  }
+}
