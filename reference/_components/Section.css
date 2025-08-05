@@ -10,6 +10,6 @@
   }
 
   .anchorable-heading .context-link {
-    color: var(--color-foreground-primary); /*marked*/
+    color: var(--color-foreground-primary);
   }
 }

@@ -245,20 +245,18 @@
     .anchor:focus {
       outline: none;
     }
-    hr {
+    & hr {
       background-color: var(--borderColor-default, var(--color-border-default));
       border: 0;
       height: 0.25em;
       margin: 24px 0;
       padding: 0;
     }
-    blockquote {
+    & blockquote {
       color: var(--fgColor-muted, var(--color-fg-muted));
       border-left: 0.25em solid
         var(--borderColor-default, var(--color-border-default));
       padding: 0 1em;
-    }
-    blockquote {
       display: flex;
       flex-direction: column;
       row-gap: 0.5rem;
@@ -274,6 +272,18 @@
       font-weight: bold;
       line-height: 1.1;
 
+      .header-anchor:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .anchor-end {
+        opacity: 0;
+        transition: opacity 0.2s;
+        font-weight: normal;
+      }
+      &:hover .anchor-end {
+        opacity: 1;
+      }
       .octicon-link {
         color: var(--fgColor-default, var(--color-fg-default));
         vertical-align: middle;
@@ -290,66 +300,70 @@
         padding: 0 0.2em;
       }
     }
-    h1 {
+    & h1 {
       font-size: 2em;
+      &:first-child {
+        @apply md:text-4xl;
+      }
     }
-    h2 {
+    & h2 {
       margin-top: 2.5rem;
       font-size: 1.5em;
     }
-    h3 {
+    & h3 {
       margin-top: 2rem;
       font-size: 1.25em;
     }
-    h4 {
+    & h4 {
       margin-top: 1.5rem;
       font-size: 1em;
     }
-    h5 {
+    & h5 {
       margin-top: 1rem;
       font-size: 0.875em;
     }
-    h6 {
+    & h6 {
       margin-top: 0.5rem;
       color: var(--fgColor-muted, var(--color-fg-muted));
       font-size: 0.85em;
     }
-    summary :where(h1, h2, h3, h4, h5, h6) {
+    & summary :where(h1, h2, h3, h4, h5, h6) {
       margin-top: 0;
 
       .anchor {
         margin-left: -40px;
       }
     }
-    ul, ol {
+    & ul,
+    & ol {
       padding-left: 2em;
       display: flex;
       flex-direction: column;
       row-gap: 0.25rem;
     }
-    div > ol:not([type]) {
+    & div > ol:not([type]) {
       list-style-type: decimal;
     }
     :where(ul, ol) :where(ul, ol) {
       margin-top: 0;
       margin-bottom: 0;
     }
-    dl {
+    & dl {
       padding: 0;
 
-      dt {
+      & dt {
         font-size: 1em;
         font-style: italic;
         font-weight: var(--base-text-weight-semibold, 600);
         margin-top: 16px;
         padding: 0;
       }
-        dd {
+      & dd {
         margin-bottom: 16px;
         padding: 0 16px;
       }
     }
-    table {
+    & table {
       width: 100%;
       width: max-content;
       max-width: 100%;
@@ -360,7 +374,8 @@
         font-weight: var(--base-text-weight-semibold, 600);
       }
       & th, & td {
-        border: 1px solid var(--borderColor-default, var(--color-border-default));
+        border: 1px solid
+          var(--borderColor-default, var(--color-border-default));
         padding: 6px 13px;
       }
       & td > :last-child {
@@ -368,7 +383,8 @@
       }
       & tr {
         background-color: var(--bgColor-default, var(--color-canvas-default));
-        border-top: 1px solid var(--borderColor-muted, var(--color-border-muted));
+        border-top: 1px solid
+          var(--borderColor-muted, var(--color-border-muted));
 
         &:nth-child(2n) {
           background-color: var(--bgColor-muted, var(--color-canvas-subtle));
@@ -402,21 +418,22 @@
     :where(code, tt) br {
       display: none;
     }
-    del code {
+    & del code {
       -webkit-text-decoration: inherit;
       -webkit-text-decoration: inherit;
       text-decoration: inherit;
     }
-    samp {
+    & samp {
       font-size: 85%;
     }
-    pre {
+    & pre {
+      @apply mb-4 border border-foreground-tertiary;
       word-wrap: normal;
     }
-    pre code {
+    & pre code {
       font-size: 100%;
     }
-    pre > code {
+    & pre > code {
       word-break: normal;
       white-space: pre;
       background: 0 0;
@@ -473,28 +490,17 @@
       background: var(--bgColor-muted, var(--color-canvas-subtle));
       border-top: 0;
     }
-    [data-footnote-ref]:before {
-      content: "[";
-    }
-    [data-footnote-ref]:after {
-      content: "]";
-    }
-    {
-      background-color: var(--color-canvas-default);
-      color: var(--color-fg-default);
-    }
     a {
-      color: var(--color-accent-fg);
-      text-decoration: none;
-    }
-    a:hover {
+      color: var(--color-primary);
       text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+      &:hover {
+        text-decoration: underline;
+      }
     }
     img {
       display: inline;
-    }
-    img[align="center"] {
-      margin: 0 auto;
     }
     iframe {
       background-color: #fff;
@@ -585,57 +591,7 @@
       color: var(--color-prettylights-syntax-markup-inserted-text);
       background-color: var(--color-prettylights-syntax-markup-inserted-bg);
     }
-    .markdown-alert {
-      color: inherit;
-      border-left: 0.25em solid #3d444d;
-      margin-bottom: 1rem;
-      padding: 0.5rem 1rem;
-    }
-    .markdown-alert:first-child {
-      margin-top: 0;
-    }
-    .markdown-alert:last-child {
-      margin-bottom: 0;
-    }
-    .markdown-alert .markdown-alert-title {
-      align-items: center;
-      gap: 7px;
-      font-weight: 500;
-      line-height: 1;
-      display: flex;
-    }
-    .markdown-alert.markdown-alert-note {
-      border-left-color: #1f6feb;
-    }
-    .markdown-alert.markdown-alert-note .markdown-alert-title {
-      color: #4493f8;
-    }
-    .markdown-alert.markdown-alert-important {
-      border-left-color: #8957e5;
-    }
-    .markdown-body
-      .markdown-alert.markdown-alert-important
-      .markdown-alert-title {
-      color: #ab7df8;
-    }
-    .markdown-alert.markdown-alert-warning {
-      border-left-color: #9e6a03;
-    }
-    .markdown-alert.markdown-alert-warning .markdown-alert-title {
-      color: #d29922;
-    }
-    .markdown-alert.markdown-alert-tip {
-      border-left-color: #238636;
-    }
-    .markdown-alert.markdown-alert-tip .markdown-alert-title {
-      color: #3fb950;
-    }
-    .markdown-alert.markdown-alert-caution {
-      border-left-color: #da3633;
-    }
-    .markdown-alert.markdown-alert-caution .markdown-alert-title {
-      color: #f85149;
-    }
+
     .markdown-code-title {
       background-color: var(--bgColor-muted, var(--color-canvas-subtle));
       border-bottom: 1px solid
@@ -646,11 +602,100 @@
       font-weight: 700;
       display: block;
     }
+
+    & details {
+      @apply rounded-sm border border-gray-600 py-4 px-4;
+
+      &[open] summary {
+        @apply pb-4 mb-4 border-b border-gray-300;
+      }
+
+      & summary::marker {
+        @apply text-gray-700;
+      }
+    }
+    .admonition {
+      @apply px-4 lg:px-6 pt-10 lg:pt-12 pb-4 rounded-md bg-gray-100 relative
+        overflow-clip text-sm flex flex-col gap-2;
+
+      & a {
+        @apply text-primary underline underline-offset-2;
+
+        &.no-color {
+          color: inherit;
+        }
+      }
+
+      & > * {
+        margin: 0;
+      }
+
+      .title {
+        @apply font-bold uppercase flex items-center mb-4 absolute top-0 left-0
+          right-0 py-2 lg:py-3 px-4 lg:px-6 bg-gray-100 leading-none;
+      }
+      &:where(.info, .note, .tip) .title {
+        @apply text-runtime-700 bg-runtime-300 dark:bg-runtime-950
+          dark:text-runtime-300;
+      }
+      &.info,
+      &.note,
+      &.tip {
+        @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
+          dark:border-runtime-950 border-runtime-200;
+      }
+      &.caution {
+        @apply bg-yellow-100 dark:bg-yellow-950/75 dark:border
+          dark:border-yellow-400 border-yellow-200;
+
+        .title {
+          @apply text-yellow-600 bg-yellow-200 dark:bg-yellow-400
+            dark:text-yellow-800;
+        }
+      }
+    }
+    .module-info {
+      & svg {
+        @apply inline-block! w-6! h-6!;
+      }
+
+      & h2 {
+        @apply flex gap-2 items-center;
+      }
+
+      & h3 {
+        @apply my-2 text-base;
+      }
+      .item-content {
+        @apply ml-3 text-base mb-8;
+      }
+      & p {
+        @apply mb-1;
+      }
+      & ul {
+        @apply pl-6;
+      }
+    }
+    & pre.snippet-code[data-example-position="only"] {
+      @apply md:border-t md:border-b md:pt-4 h-full md:rounded-sm md:rounded-b;
+    }
+
+    & pre.snippet-code[data-example-position="first"] {
+      @apply md:border-t md:border-b-0 md:pt-4 md:rounded-t md:rounded-b-none
+        h-full;
+    }
+
+    & pre.snippet-code[data-example-position="middle"] {
+      @apply md:border-t-0 md:border-b-0 md:pt-0 md:pb-16 h-full
+        md:rounded-none;
+    }
+
+    & pre.snippet-code[data-example-position="last"] {
+      @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none
+        md:rounded-b;
+    }
   }
 }
-
-@custom-variant current (&:where([aria-current]));
-@custom-variant sidebar-open (&:where([data-open=true]));
 
 @layer components {
   .sub-nav-toggle {
@@ -887,6 +932,8 @@
 }
 
 @variant dark (&:where(.dark, .dark *));
+@custom-variant current (&:where([aria-current]));
+@custom-variant sidebar-open (&:where([data-open=true]));
 
 @layer base {
   :root,
@@ -1083,85 +1130,10 @@
     letter-spacing: -0.0125em;
   }
 
-  .markdown-body {
-    color: var(--color-foreground-primary);
-
-    /* Override gfm base styles */
-    a {
-      color: var(--color-primary);
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 2px;
-    }
-
-    pre {
-      @apply mb-4 border-foreground-tertiary;
-    }
-
-    h1:first-child {
-      @apply md:text-4xl;
-    }
-
-    :is(h1, h2, h3) {
-      padding-bottom: 0;
-      border-bottom: 0;
-    }
-
-    :is(h2, h3, h4, h5, h6) {
-      line-height: 1.1;
-
-      .header-anchor:hover {
-        text-decoration: underline;
-        text-underline-offset: 4px;
-      }
-
-      .anchor-end {
-        opacity: 0;
-        transition: opacity 0.2s;
-        font-weight: normal;
-      }
-
-      &:hover .anchor-end {
-        opacity: 1;
-      }
-    }
-
-    & details {
-      @apply rounded-sm border border-gray-600 py-4 px-4;
-
-      &[open] summary {
-        @apply pb-4 mb-4 border-b border-gray-300;
-      }
-
-      & summary::marker {
-        @apply text-gray-700;
-      }
-    }
-
-    & pre {
-      @apply border;
-    }
-  }
-
-  .markdown-body.markdown-summary {
-    font-size: 0.875rem !important;
-
-    @apply inline text-stone-600;
-
-    p {
-      @apply inline-block line-clamp-4;
-    }
-
-    :not(pre) > code {
-      @apply font-mono text-sm py-0.5 px-1.5 rounded-sm;
-    }
-  }
-
   pre:has(code.highlight),
   pre.highlight:has(code) {
     @apply px-4 py-8 -mx-4 sm:mx-0 border-x-0 sm:border sm:px-8 rounded-none
-      sm:rounded-md border-background-tertiary;
-    overflow-x: auto;
+      sm:rounded-md border-background-tertiary overflow-x-auto;
   }
 
   pre:where(:hover, :focus) + .copyButton,
@@ -1196,10 +1168,6 @@
 
   .deno-tabs .markdownBlockTitle {
     @apply left-2;
-  }
-
-  .markdown-body h2:hover .anchor-end {
-    opacity: 1;
   }
 
   @font-feature-values Inter {
@@ -1254,96 +1222,6 @@
     @apply content-[""] absolute left-0 w-[0.5em] text-center h-[1.3em]
       bg-background-secondary dark:bg-background-tertiary;
     clip-path: polygon(0% 10%, 100% 50%, 0% 90%);
-  }
-
-  .markdown-body .admonition a {
-    @apply text-primary underline underline-offset-2;
-  }
-
-  .markdown-body .admonition {
-    @apply px-4 lg:px-6 pt-10 lg:pt-12 pb-4 rounded-md bg-gray-100 relative
-      overflow-clip text-sm flex flex-col gap-2;
-  }
-
-  .markdown-body .admonition > * {
-    margin: 0;
-  }
-
-  .markdown-body .admonition .title {
-    @apply font-bold uppercase flex items-center mb-4 absolute top-0 left-0
-      right-0 py-2 lg:py-3 px-4 lg:px-6 bg-gray-100 leading-none;
-  }
-
-  .markdown-body .admonition:where(.info, .note, .tip) .title {
-    @apply text-runtime-700 bg-runtime-300 dark:bg-runtime-950
-      dark:text-runtime-300;
-  }
-
-  .markdown-body .admonition.info {
-    @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
-      dark:border-runtime-950 border-runtime-200;
-  }
-
-  .markdown-body .admonition.note {
-    @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
-      dark:border-runtime-950 border-runtime-200;
-  }
-
-  .markdown-body .admonition.caution {
-    @apply bg-yellow-100 dark:bg-yellow-950/75 dark:border
-      dark:border-yellow-400 border-yellow-200;
-
-    .title {
-      @apply text-yellow-600 bg-yellow-200 dark:bg-yellow-400
-        dark:text-yellow-800;
-    }
-  }
-
-  .markdown-body .admonition.tip {
-    @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
-      dark:border-runtime-950 border-runtime-200;
-  }
-
-  .markdown-body .module-info svg {
-    @apply inline-block! w-6! h-6!;
-  }
-
-  .markdown-body .module-info h2 {
-    @apply flex gap-2 items-center;
-  }
-
-  .markdown-body .module-info h3 {
-    @apply my-2 text-base;
-  }
-
-  .markdown-body .module-info .item-content {
-    @apply ml-3 text-base mb-8;
-  }
-
-  .markdown-body .module-info p {
-    @apply mb-1;
-  }
-
-  .markdown-body .module-info ul {
-    @apply pl-6;
-  }
-
-  .markdown-body > pre.snippet-code[data-example-position="only"] {
-    @apply md:border-t md:border-b md:pt-4 h-full md:rounded-sm md:rounded-b;
-  }
-
-  .markdown-body > pre.snippet-code[data-example-position="first"] {
-    @apply md:border-t md:border-b-0 md:pt-4 md:rounded-t md:rounded-b-none
-      h-full;
-  }
-
-  .markdown-body > pre.snippet-code[data-example-position="middle"] {
-    @apply md:border-t-0 md:border-b-0 md:pt-0 md:pb-16 h-full md:rounded-none;
-  }
-
-  .markdown-body > pre.snippet-code[data-example-position="last"] {
-    @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none
-      md:rounded-b;
   }
 
   .deno-tabs {
@@ -1437,14 +1315,16 @@
       }
     }
 
-    .markdown-body {
-      & a:not(.no-color) {
-        @apply text-primary!;
-      }
-    }
-
     .markdown-summary p {
-      @apply text-foreground-secondary;
+      @apply text-foreground-secondary text-sm inline;
+
+      & p {
+        @apply inline-block line-clamp-4;
+      }
+
+      :not(pre) > code {
+        @apply font-mono text-sm py-0.5 px-1.5 rounded-sm;
+      }
     }
 
     .usageContent .markdown-body pre:has(code.highlight) {
