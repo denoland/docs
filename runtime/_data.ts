@@ -224,7 +224,7 @@ export const sidebar = [
       },
       {
         title: "Deno APIs",
-        href: "/runtime/reference/deno_namespace_apis/",
+        href: "/api/deno/",
       },
       {
         title: "Web APIs",

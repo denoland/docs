@@ -45,6 +45,14 @@ export default function* () {
           continue;
         }
 
+        // Skip generating index pages since we have static versions
+        if (
+          (name === "Deno" || name === "Web" || name === "Node") &&
+          filepath === "./index.json"
+        ) {
+          continue;
+        }
+
         const trailingLength = filepath.endsWith("index.json")
           ? -"index.json".length
           : -".json".length;

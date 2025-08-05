@@ -18,12 +18,16 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   }
 
   const isReference = data.url.startsWith("/api/");
+  const isApiLandingPage = ["/api/deno/", "/api/web/", "/api/node/"].includes(
+    data.url,
+  );
   const isExamples = data.url.startsWith("/examples/");
   const isExampleScript = (data.page.data.content as { type?: string })?.type;
   const isLintRule = data.url.startsWith("/lint/rules/");
   const isHome = data.url === "/";
 
-  const hasBreadcrumbs = !isExamples && !isHome && !isReference;
+  const hasBreadcrumbs = !isExamples && !isHome &&
+    !(isReference && !isApiLandingPage);
 
   if (isLintRule) {
     file = `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`;
@@ -52,7 +56,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             data-dark-theme="dark"
             class="markdown-body mt-4 sm:mt-6"
           >
-            {!isReference && (
+            {!(isReference && !isApiLandingPage) && (
               <h1
                 dangerouslySetInnerHTML={{
                   __html: helpers.md(data.title!, true),
@@ -69,7 +73,9 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             {data.children}
           </div>
         </article>
-        {!isReference && <data.comp.Feedback file={file} />}
+        {!(isReference && !isApiLandingPage) && (
+          <data.comp.Feedback file={file} />
+        )}
       </div>
 
       {(isReference && data.children.props.data.toc_ctx) && (

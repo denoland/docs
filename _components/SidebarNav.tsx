@@ -32,6 +32,7 @@ export default function (data: Lume.Data) {
         isCurrentSection: currentUrl.startsWith("/api/web"),
         items: currentUrl.startsWith("/api/web") ? sectionData : undefined,
         extraItems: [
+          { href: "/api/web", title: "Web Platform Support" },
           {
             href: "/api/web/all_symbols",
             title: "All symbols",
