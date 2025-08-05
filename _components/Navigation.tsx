@@ -43,7 +43,7 @@ function getSectionData(data: Lume.Data, currentUrl: string) {
     const childItems = categoryPanel.categories;
 
     childItems.push({
-      name: `View all ${categoryPanel.total_symbols} symbols`,
+      name: `All ${categoryPanel.total_symbols} symbols`,
       href: categoryPanel.all_symbols_href,
       active: currentUrl.includes("all_symbols"),
     });

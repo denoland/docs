@@ -8,7 +8,10 @@ export default function Base(
     <>
       <div className="ddoc markdown-body">
         <link rel="stylesheet" href="/reference_styles.css" />
-        <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
+        <comp.Breadcrumbs
+          parts={data.breadcrumbs_ctx.parts}
+          hasSubNav={false}
+        />
         <main id="content" tabindex={-1}>
           {children}
         </main>
