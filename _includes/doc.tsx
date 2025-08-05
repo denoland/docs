@@ -41,8 +41,6 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               title={data.title!}
               sidebar={sidebar}
               url={data.url}
-              sectionTitle={data.sectionTitle!}
-              sectionHref={data.sectionHref!}
             />
           )}
 

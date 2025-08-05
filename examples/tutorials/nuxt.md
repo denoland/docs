@@ -15,10 +15,10 @@ display a list of dinosaurs and allow you to learn more about each one when you
 click on the name.
 
 You can see the
-[finished app on GitHub](https://github.com/denoland/tutorial-with-nuxt).
+[finished app on GitHub](https://github.com/denoland/examples/tree/main/with-nuxt).
 
 You can see a
-[live version of the app on Deno Deploy](https://tutorial-with-nuxt.deno.deno.net/).
+[live version of the app on Deno Deploy](https://example-with-nuxt.deno.deno.net/).
 
 :::info Deploy your own
 
@@ -27,7 +27,7 @@ button below to instantly deploy your own copy of the complete Nuxt dinosaur app
 to Deno Deploy. You'll get a live, working application that you can customize
 and modify as you learn!
 
-[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/tutorial-with-nuxt)
+[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/examples&path=with-nuxt)
 
 :::
 

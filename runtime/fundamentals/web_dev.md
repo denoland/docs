@@ -19,6 +19,11 @@ applications, making your web dev a delightful experience.
    that includes modules for common tasks like HTTP servers, file system
    operations, and more.
 
+For your vanilla TypeScript, or JavaScript, web applications, you can use the
+built-in Deno [HTTP server](/runtime/fundamentals/http_server/). This is a great
+way to get started with Deno and build simple web applications without any
+additional dependencies.
+
 Most likely, if you're building a more complex application, you'll be
 interacting with Deno through a web framework.
 

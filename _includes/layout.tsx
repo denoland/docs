@@ -87,7 +87,7 @@ export default function Layout(data: Lume.Data) {
         />
         <div
           class={`layout ${
-            data.toc ? "layout--three-column" : "layout--two-column"
+            data.toc?.length ? "layout--three-column" : "layout--two-column"
           }`}
         >
           <data.comp.Navigation

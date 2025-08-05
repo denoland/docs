@@ -94,8 +94,6 @@
   --caution: 45.4deg, 93.39%, 47.45%;
   --tip: 142deg, 76.2%, 36.3%;
 
-  --max-text-width: 40rem;
-
   @media (min-width: 48rem) {
     --header-height: 4rem;
   }
@@ -229,10 +227,6 @@ label:has(input.sr-only:focus-visible) {
 
 main:focus-visible {
   outline: none;
-}
-
-p {
-  max-width: var(--max-text-width);
 }
 
 .dark-mode-toggle-button img {
@@ -381,12 +375,12 @@ h1 {
 pre:has(code.highlight),
 pre.highlight:has(code) {
   @apply px-4 py-8 -mx-4 sm:mx-0 border-x-0 sm:border sm:px-8 rounded-none
-    sm:rounded-md border-foreground-tertiary;
+    sm:rounded-md border-background-tertiary;
   overflow-x: auto;
 }
 
-pre:has(code.highlight):where(:hover, :focus) + .copyButton,
-pre.highlight:has(code):where(:hover, :focus) + .copyButton {
+pre:where(:hover, :focus) + .copyButton,
+pre.highlight:where(:hover, :focus) + .copyButton {
   @apply opacity-100;
 }
 
@@ -686,15 +680,6 @@ pre.highlight:has(code):where(:hover, :focus) + .copyButton {
   }
 }
 
-#toc {
-  scrollbar-width: thin;
-}
-
-#nav,
-#toc {
-  max-width: 15rem;
-}
-
 .copyButton[data-copied="true"] .copy-icon {
   display: none;
 }
@@ -869,13 +854,29 @@ main:has(#example:checked) {
   .layout--three-column {
     grid-template-columns: auto minmax(0, 1fr) auto;
 
+    @media (min-width: 64rem) {
+      grid-template-columns:
+        minmax(12rem, 1fr) minmax(24rem, 3fr) minmax(12rem, 1fr);
+    }
+
     .content {
       margin-right: -1rem;
     }
   }
 
   .layout--two-column {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: minmax(12rem, 1fr) minmax(24rem, 3fr);
+
+    @media (min-width: 64rem) {
+      grid-template-columns:
+        minmax(12rem, 1fr) minmax(24rem, 3fr) minmax(12rem, 1fr);
+    }
+
+    .content {
+      @media (min-width: 64rem) {
+        grid-column: 2 / 4;
+      }
+    }
   }
 
   .layout:has(.raw-container) {
@@ -1047,7 +1048,7 @@ body:has(.raw-container)
     font-size: 1.15rem;
     line-height: 1.75rem;
     text-wrap: balance;
-    max-width: 600px;
+    max-width: 32em;
   }
 
   [data-component="hero"] img {
@@ -1067,7 +1068,7 @@ body:has(.raw-container)
       background: hsl(var(--foreground-primary));
       clip-path: polygon(0 0, 100% 50%, 0 100%);
       position: absolute;
-      left: -1rem;
+      left: -1em;
       top: calc(50% - 0.25em);
     }
   }
