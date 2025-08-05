@@ -1,5 +1,92 @@
 @import "tailwindcss";
 
+@theme {
+  --color-gray-50: #f5f5f5;
+  --color-gray-100: #e5eaea;
+  --color-gray-200: #d4d6d8;
+  --color-gray-300: #c2c4c7;
+  --color-gray-400: #b0b2b6;
+  --color-gray-500: #9ea0a5;
+  --color-gray-600: #868789;
+  --color-gray-700: #56575a;
+  --color-gray-800: #25272b;
+  --color-gray-900: #191b1f;
+  --color-gray-950: #14161a;
+
+  --color-runtime-50: #eefff5;
+  --color-runtime-100: #d6ffe9;
+  --color-runtime-200: #b0ffd4;
+  --color-runtime-300: #70ffaf;
+  --color-runtime-400: #29ff85;
+  --color-runtime-500: #00e666;
+  --color-runtime-600: #00b84d;
+  --color-runtime-700: #008a33;
+  --color-runtime-800: #005c1a;
+  --color-runtime-900: #003d11;
+  --color-runtime-950: #001f08;
+  --color-runtime-1000: #000f04;
+  --color-runtime-1050: #000600;
+  --color-runtime: var(--color-runtime-300);
+
+  --color-deploy-white: #fafcff;
+  --color-deploy-50: #f0f7ff;
+  --color-deploy-100: #e0f0ff;
+  --color-deploy-200: #b3e0ff;
+  --color-deploy-300: #66c2ff;
+  --color-deploy-400: #1a9fff;
+  --color-deploy-500: #0077cc;
+  --color-deploy-600: #005c99;
+  --color-deploy-700: #004166;
+  --color-deploy-800: #002633;
+  --color-deploy-900: #001319;
+  --color-deploy-950: #000a0d;
+
+  --color-code-1: #01c2ff;
+  --color-code-2: #00a341;
+  --color-code-3: #ae01ff;
+  --color-code-4: #ea8e04;
+  --color-code-5: #ffd601;
+  --color-code-6: #01ff67;
+  --color-code-7: #db01ff;
+
+  --color-jsr-yellow-300: #faee4a;
+  --color-jsr-yellow-400: #f7df1e;
+  --color-jsr-yellow: var(--color-jsr-yellow-400);
+  --color-jsr-cyan-950: #083344;
+  --color-jsr-cyan: var(--color-jsr-cyan-950);
+
+  --color-blue-splash: #ecf3fd;
+
+  --color-background-raw: var(--color-white);
+  --color-background-primary: var(--color-gray-50);
+  --color-background-secondary: var(--color-gray-100);
+  --color-background-tertiary: var(--color-gray-200);
+  --color-foreground-primary: var(--color-gray-800);
+  --color-foreground-secondary: var(--color-gray-600);
+  --color-foreground-tertiary: var(--color-gray-300);
+  --color-foreground-quaternary: var(--color-gray-50);
+  /* --color-runtime-background: 124deg, 100%, 97.1%;
+  --color-runtime-foreground: 184deg, 100%, 10%; */
+
+  --color-primary: var(--color-deploy-500);
+  --color-header-highlight: var(--color-runtime);
+
+  --breakpoint-xs: 30rem;
+  --breakpoint-xlplus: 82rem;
+
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+@variant dark (&:where(.dark, .dark *));
+@custom-variant current (&:where([aria-current]));
+@custom-variant sidebar-open (&:where([data-open=true]));
+
+/**
+ * Base markdown styles.
+ * Mostly this `base` layer block is used to replace GFM styles.
+ */
 @layer base {
   *,
   ::after,
@@ -8,9 +95,7 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
-}
 
-@layer base {
   :root,
   :root::selection,
   [data-color-mode="light"][data-light-theme="light"],
@@ -299,6 +384,9 @@
         font-size: inherit;
         padding: 0 0.2em;
       }
+    }
+    :where(h1, h2, h3) {
+      letter-spacing: -0.0125em;
     }
     & h1 {
       font-size: 2em;
@@ -697,244 +785,10 @@
   }
 }
 
-@layer components {
-  .sub-nav-toggle {
-    li:has(&) {
-      border-left: 1px solid var(--color-foreground-tertiary);
-    }
-
-    li:has(&:hover) {
-      border-left-color: var(--color-foreground-secondary);
-    }
-
-    &:hover {
-      background-color: var(--color-header-highlight);
-      color: var(--color-gray-800);
-    }
-
-    li:has(> &) {
-      display: grid;
-      grid-template-rows: max-content 0fr;
-      transition: grid 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-
-    & + ul {
-      margin-left: 1rem;
-    }
-
-    li:has(> & .sub-nav-toggle-checkbox:checked) {
-      grid-template-rows: max-content 1fr;
-      padding-bottom: 1rem;
-    }
-
-    li:has(> & + ul:focus-within) {
-      grid-template-rows: max-content 1fr;
-      padding-bottom: 1rem;
-    }
-
-    &:has(.sub-nav-toggle-checkbox:checked)::after {
-      transform: rotate(90deg);
-    }
-
-    &:has(+ ul:focus-within)::after {
-      transform: rotate(90deg);
-    }
-  }
-
-  .sub-nav-toggle-checkbox {
-    li:has(> .sub-nav-toggle &:checked) {
-      grid-template-rows: max-content 1fr;
-      padding-bottom: 1rem;
-    }
-
-    .sub-nav-toggle:has(&:checked)::after {
-      transform: rotate(90deg);
-    }
-  }
-}
-
-@utility docs-cta {
-  @apply border text-balance text-black font-bold inline-block py-3.5 px-6
-    rounded-full w-max no-underline! transition-colors duration-200 m-4 ml-0;
-}
-
-@utility runtime-cta {
-  @apply no-underline! text-gray-900! bg-runtime-300 border-0
-    hover:bg-runtime-200;
-}
-
-@utility deploy-cta {
-  @apply no-underline! text-gray-900!;
-  @apply bg-deploy-300 rounded-full border-0 hover:bg-deploy-200;
-}
-
-@utility jsr-cta {
-  @apply bg-jsr-yellow-400 border-jsr-cyan-950 text-jsr-cyan-950! border-2
-    hover:no-underline! hover:bg-jsr-yellow-300;
-}
-
-@utility deploy-button {
-  padding-left: 3rem;
-  background-image: url("../deno-deploy.svg");
-  background-repeat: no-repeat;
-  background-position: 1.25rem center;
-  background-size: 1.25rem;
-}
-
-@utility columns {
-  margin: 2rem 0;
-  div {
-    margin-bottom: 2rem;
-  }
-
-  @media (min-width: 46.875rem) {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-
-    div {
-      flex: 1;
-      text-wrap: balance;
-      margin-bottom: 1rem;
-    }
-  }
-}
-
-@utility active {
-  /* Double class saves us using an !important rule to override Tailwind responsive classes */
-  && {
-    color: var(--color-foreground-primary);
-    position: relative;
-
-    &::before {
-      content: "";
-      height: 0.5em;
-      width: 0.4em;
-      background: var(--color-foreground-primary);
-      clip-path: polygon(0 0, 100% 50%, 0 100%);
-      position: absolute;
-      left: -1em;
-      top: calc(50% - 0.25em);
-    }
-  }
-}
-
-@utility documentNavigation {
-  & #toc {
-    position: sticky;
-    top: calc(var(--header-height) + var(--subnav-height));
-    font-size: small;
-    text-overflow: ellipsis;
-    color: var(--color-foreground-secondary);
-
-    & ul li {
-      margin: 0.25rem 0;
-
-      & a {
-        font-weight: bold;
-        line-height: 1.2rem;
-
-        &:hover {
-          color: var(--color-primary);
-          text-decoration: underline;
-        }
-      }
-
-      & ul {
-        margin-bottom: 1rem;
-
-        & li a {
-          font-weight: normal;
-          transition: all 0.2s cubic-bezier(0.86, 0, 0.07, 1);
-        }
-      }
-    }
-  }
-}
-
-@theme {
-  --color-gray-50: #f5f5f5;
-  --color-gray-100: #e5eaea;
-  --color-gray-200: #d4d6d8;
-  --color-gray-300: #c2c4c7;
-  --color-gray-400: #b0b2b6;
-  --color-gray-500: #9ea0a5;
-  --color-gray-600: #868789;
-  --color-gray-700: #56575a;
-  --color-gray-800: #25272b;
-  --color-gray-900: #191b1f;
-  --color-gray-950: #14161a;
-
-  --color-runtime-50: #eefff5;
-  --color-runtime-100: #d6ffe9;
-  --color-runtime-200: #b0ffd4;
-  --color-runtime-300: #70ffaf;
-  --color-runtime-400: #29ff85;
-  --color-runtime-500: #00e666;
-  --color-runtime-600: #00b84d;
-  --color-runtime-700: #008a33;
-  --color-runtime-800: #005c1a;
-  --color-runtime-900: #003d11;
-  --color-runtime-950: #001f08;
-  --color-runtime-1000: #000f04;
-  --color-runtime-1050: #000600;
-  --color-runtime: var(--color-runtime-300);
-
-  --color-deploy-white: #fafcff;
-  --color-deploy-50: #f0f7ff;
-  --color-deploy-100: #e0f0ff;
-  --color-deploy-200: #b3e0ff;
-  --color-deploy-300: #66c2ff;
-  --color-deploy-400: #1a9fff;
-  --color-deploy-500: #0077cc;
-  --color-deploy-600: #005c99;
-  --color-deploy-700: #004166;
-  --color-deploy-800: #002633;
-  --color-deploy-900: #001319;
-  --color-deploy-950: #000a0d;
-
-  --color-code-1: #01c2ff;
-  --color-code-2: #00a341;
-  --color-code-3: #ae01ff;
-  --color-code-4: #ea8e04;
-  --color-code-5: #ffd601;
-  --color-code-6: #01ff67;
-  --color-code-7: #db01ff;
-
-  --color-jsr-yellow-300: #faee4a;
-  --color-jsr-yellow-400: #f7df1e;
-  --color-jsr-yellow: var(--color-jsr-yellow-400);
-  --color-jsr-cyan-950: #083344;
-  --color-jsr-cyan: var(--color-jsr-cyan-950);
-
-  --color-blue-splash: #ecf3fd;
-
-  --color-background-raw: var(--color-white);
-  --color-background-primary: var(--color-gray-50);
-  --color-background-secondary: var(--color-gray-100);
-  --color-background-tertiary: var(--color-gray-200);
-  --color-foreground-primary: var(--color-gray-800);
-  --color-foreground-secondary: var(--color-gray-600);
-  --color-foreground-tertiary: var(--color-gray-300);
-  --color-foreground-quaternary: var(--color-gray-50);
-  /* --color-runtime-background: 124deg, 100%, 97.1%;
-  --color-runtime-foreground: 184deg, 100%, 10%; */
-
-  --color-primary: var(--color-deploy-500);
-  --color-header-highlight: var(--color-runtime);
-
-  --breakpoint-xs: 30rem;
-  --breakpoint-xlplus: 82rem;
-
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-}
-
-@variant dark (&:where(.dark, .dark *));
-@custom-variant current (&:where([aria-current]));
-@custom-variant sidebar-open (&:where([data-open=true]));
-
+/**
+ * Basic styles for the site. Same layer as the GFM/markdown styles,
+ * but separated just for code organization purposes.
+ */
 @layer base {
   :root,
   :host {
@@ -964,6 +818,51 @@
 
       color: var(--color-foreground-primary);
       background-color: var(--color-background-primary);
+    }
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-Regular.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-Italic.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-SemiBold.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/inter/Inter-SemiBoldItalic.woff2") format("woff2");
+  }
+
+  @font-feature-values Inter {
+    @character-variant {
+      cv05: 5;
+      cv08: 8;
+      cv10: 10;
+    }
+    @styleset {
+      ss01: 1;
+      ss07: 7;
+      ss08: 8;
     }
   }
 
@@ -1055,79 +954,9 @@
   .dark-mode-toggle-button img {
     @apply fill-foreground-primary;
   }
-}
 
-@layer base {
-  @font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url("/fonts/inter/Inter-Regular.woff2") format("woff2");
-  }
-
-  @font-face {
-    font-family: "Inter";
-    font-style: italic;
-    font-weight: 400;
-    font-display: swap;
-    src: url("/fonts/inter/Inter-Italic.woff2") format("woff2");
-  }
-
-  @font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url("/fonts/inter/Inter-SemiBold.woff2") format("woff2");
-  }
-
-  @font-face {
-    font-family: "Inter";
-    font-style: italic;
-    font-weight: 700;
-    font-display: swap;
-    src: url("/fonts/inter/Inter-SemiBoldItalic.woff2") format("woff2");
-  }
-}
-
-@layer utilities {
-  .h-header {
-    height: var(--header-height);
-  }
-
-  .top-header {
-    top: var(--header-height);
-  }
-
-  .h-subnav {
-    height: var(--subnav-height);
-  }
-
-  .h-header-plus-subnav {
-    height: calc(var(--header-height) + var(--subnav-height));
-  }
-
-  .top-header-plus-subnav {
-    top: calc(var(--header-height) + var(--subnav-height));
-  }
-
-  .h-screen-minus-header {
-    height: calc(100dvh - var(--header-height));
-  }
-
-  .h-screen-minus-both {
-    height: calc(100dvh - var(--header-height) - var(--subnav-height));
-  }
-}
-
-@layer base {
   [id] {
     scroll-margin-top: var(--header-height);
-  }
-
-  :is(h1, h2, h3) {
-    letter-spacing: -0.0125em;
   }
 
   pre:has(code.highlight),
@@ -1168,19 +997,6 @@
 
   .deno-tabs .markdownBlockTitle {
     @apply left-2;
-  }
-
-  @font-feature-values Inter {
-    @character-variant {
-      cv05: 5;
-      cv08: 8;
-      cv10: 10;
-    }
-    @styleset {
-      ss01: 1;
-      ss07: 7;
-      ss08: 8;
-    }
   }
 
   .homepage-link {
@@ -1570,6 +1386,60 @@
 }
 
 @layer components {
+  .sub-nav-toggle {
+    li:has(&) {
+      border-left: 1px solid var(--color-foreground-tertiary);
+    }
+
+    li:has(&:hover) {
+      border-left-color: var(--color-foreground-secondary);
+    }
+
+    &:hover {
+      background-color: var(--color-header-highlight);
+      color: var(--color-gray-800);
+    }
+
+    li:has(> &) {
+      display: grid;
+      grid-template-rows: max-content 0fr;
+      transition: grid 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    & + ul {
+      margin-left: 1rem;
+    }
+
+    li:has(> & .sub-nav-toggle-checkbox:checked) {
+      grid-template-rows: max-content 1fr;
+      padding-bottom: 1rem;
+    }
+
+    li:has(> & + ul:focus-within) {
+      grid-template-rows: max-content 1fr;
+      padding-bottom: 1rem;
+    }
+
+    &:has(.sub-nav-toggle-checkbox:checked)::after {
+      transform: rotate(90deg);
+    }
+
+    &:has(+ ul:focus-within)::after {
+      transform: rotate(90deg);
+    }
+  }
+
+  .sub-nav-toggle-checkbox {
+    li:has(> .sub-nav-toggle &:checked) {
+      grid-template-rows: max-content 1fr;
+      padding-bottom: 1rem;
+    }
+
+    .sub-nav-toggle:has(&:checked)::after {
+      transform: rotate(90deg);
+    }
+  }
+
   #hamburger-button[aria-pressed="true"] {
     .hamburger-bar--top {
       transform: translate(0, 0.4375rem) rotate(45deg);
@@ -1631,5 +1501,131 @@
   [data-component="hero"] img {
     width: 100%;
     margin: auto;
+  }
+}
+
+@layer utilities {
+  .h-header {
+    height: var(--header-height);
+  }
+
+  .top-header {
+    top: var(--header-height);
+  }
+
+  .h-subnav {
+    height: var(--subnav-height);
+  }
+
+  .h-header-plus-subnav {
+    height: calc(var(--header-height) + var(--subnav-height));
+  }
+
+  .top-header-plus-subnav {
+    top: calc(var(--header-height) + var(--subnav-height));
+  }
+
+  .h-screen-minus-header {
+    height: calc(100dvh - var(--header-height));
+  }
+
+  .h-screen-minus-both {
+    height: calc(100dvh - var(--header-height) - var(--subnav-height));
+  }
+
+  .docs-cta {
+    @apply border text-balance text-black font-bold inline-block py-3.5 px-6
+      rounded-full w-max no-underline! transition-colors duration-200 m-4 ml-0;
+  }
+
+  .runtime-cta {
+    @apply no-underline! text-gray-900! bg-runtime-300 border-0
+      hover:bg-runtime-200;
+  }
+
+  .deploy-cta {
+    @apply no-underline! text-gray-900!;
+    @apply bg-deploy-300 rounded-full border-0 hover:bg-deploy-200;
+  }
+
+  .jsr-cta {
+    @apply bg-jsr-yellow-400 border-jsr-cyan-950 text-jsr-cyan-950! border-2
+      hover:no-underline! hover:bg-jsr-yellow-300;
+  }
+
+  .deploy-button {
+    padding-left: 3rem;
+    background-image: url("../deno-deploy.svg");
+    background-repeat: no-repeat;
+    background-position: 1.25rem center;
+    background-size: 1.25rem;
+  }
+
+  .columns {
+    margin: 2rem 0;
+    div {
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 46.875rem) {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+
+      div {
+        flex: 1;
+        text-wrap: balance;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  .active {
+    color: var(--color-foreground-primary);
+    position: relative;
+
+    &::before {
+      content: "";
+      height: 0.5em;
+      width: 0.4em;
+      background: var(--color-foreground-primary);
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
+      position: absolute;
+      left: -1em;
+      top: calc(50% - 0.25em);
+    }
+  }
+
+  .documentNavigation {
+    & #toc {
+      position: sticky;
+      top: calc(var(--header-height) + var(--subnav-height));
+      font-size: small;
+      text-overflow: ellipsis;
+      color: var(--color-foreground-secondary);
+
+      & ul li {
+        margin: 0.25rem 0;
+
+        & a {
+          font-weight: bold;
+          line-height: 1.2rem;
+
+          &:hover {
+            color: var(--color-primary);
+            text-decoration: underline;
+          }
+        }
+
+        & ul {
+          margin-bottom: 1rem;
+
+          & li a {
+            font-weight: normal;
+            transition: all 0.2s cubic-bezier(0.86, 0, 0.07, 1);
+          }
+        }
+      }
+    }
   }
 }
