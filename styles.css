@@ -1054,7 +1054,8 @@
   }
 
   .deno-tabs > ul.deno-tabs-buttons {
-    @apply flex flex-row justify-start flex-wrap list-none p-0 ml-4 sm:m-0;
+    @apply flex flex-row justify-start items-end flex-wrap list-none p-0 ml-4
+      sm:m-0;
   }
 
   .deno-tabs > ul.deno-tabs-buttons > li > button {
