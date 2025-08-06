@@ -1166,10 +1166,11 @@
   }
 
   .btn {
-    @apply max-w-max px-4 py-2 text-sm font-semibold text-foreground-primary!
+    @apply max-w-max px-4 py-2 text-sm font-semibold text-foreground-primary
       bg-white dark:bg-gray-950 border-2 border-foreground-primary
       hover:bg-header-highlight dark:border-background-tertiary rounded-full
-      transition inline-flex gap-2 items-center cursor-pointer no-underline!;
+      transition inline-flex gap-2 items-center cursor-pointer no-underline!
+      dark:hover:text-background-primary;
     & svg {
       @apply inline-block size-4;
     }
