@@ -3,6 +3,7 @@
 
 interface SearchResult {
   id: string;
+  score?: number; // Orama relevance score
   document: {
     title: string;
     content: string;
@@ -39,6 +40,7 @@ class OramaSearch {
   private searchLoading: HTMLElement | null = null;
   private searchTimeout: number | null = null;
   private isResultsOpen = false;
+  private selectedIndex = -1; // Track selected result for keyboard navigation
 
   constructor() {
     this.init();
@@ -60,7 +62,9 @@ class OramaSearch {
     this.searchInput = document.getElementById(
       "orama-search-input",
     ) as HTMLInputElement;
-    this.searchResults = document.getElementById("orama-search-results");
+    this.searchResults = document.getElementById(
+      "orama-search-results-content",
+    ); // Target the scrollable container
     this.searchLoading = document.getElementById("orama-search-loading");
 
     if (!this.searchInput) {
@@ -115,6 +119,9 @@ class OramaSearch {
       return;
     }
 
+    // Reset selection when user types
+    this.selectedIndex = -1;
+
     // Debounce search by 300ms
     this.searchTimeout = setTimeout(() => {
       this.performSearch(value);
@@ -128,10 +135,64 @@ class OramaSearch {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if (event.key === "Escape") {
-      this.hideResults();
-      this.searchInput?.blur();
+    if (!this.isResultsOpen) {
+      return;
     }
+
+    const resultsLinks = this.searchResults?.querySelectorAll(
+      ".search-result-link",
+    );
+    const totalResults = resultsLinks?.length || 0;
+
+    switch (event.key) {
+      case "Escape":
+        this.hideResults();
+        this.searchInput?.blur();
+        this.selectedIndex = -1;
+        break;
+
+      case "ArrowDown":
+        event.preventDefault();
+        this.selectedIndex = Math.min(this.selectedIndex + 1, totalResults - 1);
+        this.updateSelection();
+        break;
+
+      case "ArrowUp":
+        event.preventDefault();
+        this.selectedIndex = Math.max(this.selectedIndex - 1, -1);
+        this.updateSelection();
+        break;
+
+      case "Enter":
+        event.preventDefault();
+        if (this.selectedIndex >= 0 && resultsLinks) {
+          const selectedLink =
+            resultsLinks[this.selectedIndex] as HTMLAnchorElement;
+          if (selectedLink) {
+            this.hideResults();
+            // Navigate to the selected result
+            globalThis.location.href = selectedLink.href;
+          }
+        }
+        break;
+    }
+  }
+
+  updateSelection() {
+    const resultsLinks = this.searchResults?.querySelectorAll(
+      ".search-result-link",
+    );
+    if (!resultsLinks) return;
+
+    // Remove previous selection
+    resultsLinks.forEach((link, index) => {
+      link.classList.remove("bg-blue-50", "dark:bg-blue-900/20");
+      if (index === this.selectedIndex) {
+        link.classList.add("bg-blue-50", "dark:bg-blue-900/20");
+        // Scroll the selected item into view
+        link.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+    });
   }
 
   handleClickOutside(event: MouseEvent) {
@@ -142,7 +203,12 @@ class OramaSearch {
       return;
     }
 
-    if (!this.searchInput?.parentElement?.contains(target)) {
+    // Check if click is outside the search container
+    const searchContainer = document.getElementById("orama-search-results");
+    if (
+      !this.searchInput?.parentElement?.contains(target) &&
+      !searchContainer?.contains(target)
+    ) {
       this.hideResults();
     }
   }
@@ -177,11 +243,17 @@ class OramaSearch {
 
     if (results.hits.length === 0) {
       this.searchResults.innerHTML = `
-        <div class="p-4 text-center text-foreground-secondary">
-          <p class="text-sm">No results found for "${
-        this.escapeHtml(searchTerm)
-      }"</p>
-          <p class="text-xs mt-1">Try different keywords</p>
+        <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
+          <h3 class="text-sm font-semibold text-foreground-primary">Search Results</h3>
+        </div>
+        <div class="p-8 text-center">
+          <div class="w-16 h-16 mx-auto mb-4 text-foreground-tertiary">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-full h-full">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <p class="text-sm font-medium text-foreground-primary mb-1">No results found</p>
+          <p class="text-xs text-foreground-secondary">Try different keywords or check your spelling</p>
         </div>
       `;
       return;
@@ -210,48 +282,73 @@ class OramaSearch {
 
     // Filter out results that don't have valid URLs or paths
     const validResults = results.hits.filter((hit) => {
-      if (hit.document && (hit.document.url || hit.document.path)) {
-        return true;
+      // First check basic requirements
+      if (!hit.document) return false;
+
+      // Check if it has valid URL/path or can be constructed
+      const hasValidUrl = hit.document.url || hit.document.path ||
+        hit.document.title || hit.id;
+      if (!hasValidUrl) return false;
+
+      // Filter out navigation/menu content
+      if (this.isNavigationContent(hit)) {
+        return false;
       }
-      // Check if we can construct a URL from other fields
-      if (hit.document && (hit.document.title || hit.id)) {
-        return true;
-      }
-      return false;
-    });
+
+      return true;
+    })
+      // Sort by content quality - prefer longer, more substantial content
+      .sort((a, b) => {
+        const scoreA = this.getContentScore(a);
+        const scoreB = this.getContentScore(b);
+        return scoreB - scoreA; // Higher score first
+      });
 
     const resultsHtml = `
-      <div class="p-2 text-xs text-foreground-secondary border-b border-foreground-tertiary">
-        ${validResults.length} result${validResults.length !== 1 ? "s" : ""}
+      <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-semibold text-foreground-primary">Search Results</h3>
+          <span class="text-xs text-foreground-secondary">${validResults.length} result${
+      validResults.length !== 1 ? "s" : ""
+    }</span>
+        </div>
       </div>
-      ${
+      <div class="py-2">
+        ${
       validResults.map((hit) => `
         <a
           href="${this.escapeHtml(this.formatUrl(hit.document.url, hit))}"
-          class="block p-3 hover:bg-background-secondary transition-colors duration-150 border-b border-foreground-tertiary last:border-b-0 search-result-link"
+          class="flex flex-col px-4 py-3 hover:bg-background-secondary transition-colors duration-150 border-b border-foreground-quaternary last:border-b-0 search-result-link group"
         >
-          <div class="font-medium text-foreground-primary text-sm mb-1">
+          <div class="font-medium text-foreground-primary text-sm mb-2 group-hover:text-blue-600 transition-colors">
             ${
         this.highlightMatch(this.escapeHtml(hit.document.title), searchTerm)
       }
           </div>
-          <div class="text-xs text-foreground-secondary line-clamp-2">
+          <div class="text-sm text-foreground-secondary leading-relaxed mb-2 line-clamp-3">
             ${
         this.highlightMatch(
-          this.escapeHtml(hit.document.content.slice(0, 150)) + "...",
+          this.escapeHtml(hit.document.content.slice(0, 200)) + "...",
           searchTerm,
         )
       }
           </div>
-          <div class="text-xs text-foreground-tertiary mt-1">
+          <div class="flex items-center text-xs text-foreground-tertiary">
+            <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+            </svg>
             ${this.escapeHtml(this.formatUrl(hit.document.url, hit))}
           </div>
         </a>
       `).join("")
     }
+      </div>
     `;
 
     this.searchResults.innerHTML = resultsHtml;
+
+    // Reset selection for new results
+    this.selectedIndex = -1;
 
     // Add simple click handler to hide results on navigation
     const searchLinks = this.searchResults.querySelectorAll(
@@ -269,9 +366,17 @@ class OramaSearch {
     if (!this.searchResults) return;
 
     this.searchResults.innerHTML = `
-      <div class="p-4 text-center text-foreground-secondary">
-        <p class="text-sm">Search not configured</p>
-        <p class="text-xs mt-1">Please add your Orama credentials</p>
+      <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
+        <h3 class="text-sm font-semibold text-foreground-primary">Search</h3>
+      </div>
+      <div class="p-8 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 text-foreground-tertiary">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-full h-full">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+        </div>
+        <p class="text-sm font-medium text-foreground-primary mb-1">Search not configured</p>
+        <p class="text-xs text-foreground-secondary">Please add your Orama credentials</p>
       </div>
     `;
     this.showResults();
@@ -281,24 +386,38 @@ class OramaSearch {
     if (!this.searchResults) return;
 
     this.searchResults.innerHTML = `
-      <div class="p-4 text-center text-foreground-secondary">
-        <p class="text-sm">${this.escapeHtml(message)}</p>
+      <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
+        <h3 class="text-sm font-semibold text-foreground-primary">Search Error</h3>
+      </div>
+      <div class="p-8 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 text-red-500">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-full h-full">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <p class="text-sm font-medium text-foreground-primary mb-1">${
+      this.escapeHtml(message)
+    }</p>
+        <p class="text-xs text-foreground-secondary">Please try again or contact support</p>
       </div>
     `;
     this.showResults();
   }
 
   showResults() {
-    if (this.searchResults) {
-      this.searchResults.classList.remove("hidden");
+    const resultsContainer = document.getElementById("orama-search-results");
+    if (resultsContainer) {
+      resultsContainer.classList.remove("hidden");
       this.isResultsOpen = true;
     }
   }
 
   hideResults() {
-    if (this.searchResults) {
-      this.searchResults.classList.add("hidden");
+    const resultsContainer = document.getElementById("orama-search-results");
+    if (resultsContainer) {
+      resultsContainer.classList.add("hidden");
       this.isResultsOpen = false;
+      this.selectedIndex = -1; // Reset selection when hiding
     }
   }
 
@@ -321,7 +440,7 @@ class OramaSearch {
     );
     return text.replace(
       regex,
-      '<mark class="bg-yellow-200 dark:bg-yellow-800">$1</mark>',
+      '<mark class="bg-yellow-200 dark:bg-yellow-800 px-1 py-0.5 rounded text-yellow-900 dark:text-yellow-100 font-medium">$1</mark>',
     );
   }
 
@@ -336,7 +455,9 @@ class OramaSearch {
     // First try to use the path field if available
     if (hit && hit.document && hit.document.path) {
       console.log("Using path field:", hit.document.path);
-      return this.formatUrl(hit.document.path);
+      // Clean up the path by removing "jump to heading" text
+      const cleanPath = this.cleanUrl(hit.document.path);
+      return this.formatUrl(cleanPath);
     }
 
     // Handle undefined or null URLs
@@ -366,18 +487,149 @@ class OramaSearch {
       return "#";
     }
 
+    // Clean the URL first
+    const cleanedUrl = this.cleanUrl(url);
+
     // If it's already a full URL, return as-is
-    if (url.startsWith("http://") || url.startsWith("https://")) {
-      return url;
+    if (cleanedUrl.startsWith("http://") || cleanedUrl.startsWith("https://")) {
+      return cleanedUrl;
     }
 
     // If it starts with '/', it's a root-relative path
-    if (url.startsWith("/")) {
-      return url;
+    if (cleanedUrl.startsWith("/")) {
+      return cleanedUrl;
     }
 
     // Otherwise, make it root-relative
-    return "/" + url;
+    return "/" + cleanedUrl;
+  }
+
+  // Helper method to clean URLs by removing unwanted text
+  cleanUrl(url: string): string {
+    // Remove "jump to heading" and similar text patterns
+    let cleaned = url
+      .replace(/\s*jump\s+to\s+heading\s*/gi, "")
+      .replace(/\s*#jump-to-heading\s*/gi, "")
+      .replace(/\s*-jump-to-heading\s*/gi, "")
+      .trim();
+
+    // Remove any trailing or leading hashes that might be left
+    cleaned = cleaned.replace(/^#+|#+$/g, "");
+
+    // If the URL became empty or just whitespace, return the original
+    if (!cleaned || cleaned.trim() === "") {
+      return url;
+    }
+
+    return cleaned;
+  }
+
+  // Helper method to detect navigation/menu content
+  isNavigationContent(hit: SearchResult): boolean {
+    if (!hit.document) return false;
+
+    const title = hit.document.title?.toLowerCase() || "";
+    const content = hit.document.content?.toLowerCase() || "";
+    const section = hit.document.section?.toLowerCase() || "";
+    const category = hit.document.category?.toLowerCase() || "";
+
+    // Navigation indicators in titles
+    const navTitlePatterns = [
+      /^(home|menu|navigation|nav|sidebar|header|footer)$/,
+      /^(getting started|quick start|overview)$/,
+      /^(table of contents|toc)$/,
+      /^(breadcrumb|breadcrumbs)$/,
+    ];
+
+    // Navigation indicators in content
+    const navContentPatterns = [
+      /^(home|menu|navigation|nav|sidebar|header|footer|skip to|jump to)$/,
+      /^\s*(getting started|quick start|overview|table of contents|toc|breadcrumb)\s*$/,
+      /^\s*\|\s*$/, // Just pipe characters (common in nav separators)
+      /^(previous|next|back|continue)$/,
+    ];
+
+    // Check for very short content that's likely navigation
+    if (
+      content.length < 50 && (
+        navContentPatterns.some((pattern) => pattern.test(content)) ||
+        navTitlePatterns.some((pattern) => pattern.test(title))
+      )
+    ) {
+      return true;
+    }
+
+    // Check if section/category indicates navigation
+    const navSections = [
+      "navigation",
+      "nav",
+      "menu",
+      "sidebar",
+      "header",
+      "footer",
+      "breadcrumb",
+    ];
+    if (navSections.includes(section) || navSections.includes(category)) {
+      return true;
+    }
+
+    // Check for content that's mostly just links/navigation words
+    const navWords = [
+      "home",
+      "about",
+      "docs",
+      "api",
+      "guide",
+      "tutorial",
+      "reference",
+      "examples",
+    ];
+    const words = content.split(/\s+/).filter((w) => w.length > 2);
+    if (words.length <= 5 && words.every((word) => navWords.includes(word))) {
+      return true;
+    }
+
+    return false;
+  }
+
+  // Helper method to score content quality
+  getContentScore(hit: SearchResult): number {
+    if (!hit.document) return 0;
+
+    let score = hit.score || 0; // Start with Orama's relevance score
+
+    // Bonus for longer content (indicates substantial content)
+    const contentLength = hit.document.content?.length || 0;
+    if (contentLength > 200) score += 2;
+    if (contentLength > 500) score += 3;
+    if (contentLength > 1000) score += 5;
+
+    // Bonus for titles that seem to be real page titles
+    const title = hit.document.title || "";
+    if (title.length > 10 && title.length < 100) score += 1;
+
+    // Penalty for very short content
+    if (contentLength < 50) score -= 5;
+
+    // Bonus for certain sections that indicate main content
+    const section = hit.document.section?.toLowerCase() || "";
+    const category = hit.document.category?.toLowerCase() || "";
+
+    const contentSections = [
+      "guide",
+      "tutorial",
+      "reference",
+      "api",
+      "documentation",
+      "docs",
+    ];
+    if (
+      contentSections.some((s) => section.includes(s) || category.includes(s))
+    ) {
+      score += 3;
+    }
+
+    return score;
   }
 }
 
