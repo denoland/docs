@@ -210,14 +210,11 @@ Enable unstable net APIs. These APIs include:
 - [`WebSocketStream`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocketStream)
 - [`Deno.DatagramConn`](https://docs.deno.com/api/deno/~/Deno.DatagramConn)
 
-## ``
-
-Enable the
-[OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry).
-
 ## `--unstable`
 
-:::caution --unstable is deprecated - use granular flags instead
+:::caution
+
+**`--unstable` is deprecated - use granular flags instead.**
 
 The `--unstable` flag is no longer being used for new features, and will be
 removed in a future release. All unstable features that were available using
