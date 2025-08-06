@@ -1188,14 +1188,6 @@
     @apply bg-green-400 dark:bg-green-600;
   }
 
-  #feedback-form__content:has(input[type="radio"]:checked) {
-    grid-template-rows: max-content 1fr;
-
-    #feedback-more {
-      @apply flex flex-col gap-2;
-    }
-  }
-
   #feedback-more label {
     @apply inline-block text-sm;
   }
@@ -1903,6 +1895,14 @@
   .example-command {
     width: 100%;
     overflow: scroll;
+  }
+
+  #feedback-form__content:has(input[type="radio"]:checked) {
+    grid-template-rows: max-content 1fr;
+
+    #feedback-more {
+      @apply flex flex-col gap-2;
+    }
   }
 }
 
