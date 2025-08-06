@@ -598,6 +598,10 @@
     & ul,
     & ol {
       padding-left: 2em;
+
+      & li + li {
+        margin-top: 0.25rem;
+      }
     }
     & ol {
       list-style: decimal;
@@ -778,6 +782,10 @@
     & pre.snippet-code[data-example-position="last"] {
       @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none
         md:rounded-b;
+    }
+
+    .markdown-summary :not(pre) > code {
+      @apply font-mono text-sm py-0.5 px-1.5 rounded;
     }
   }
 }
@@ -1752,6 +1760,10 @@
   }
 
   .ddoc {
+    &.markdown-body {
+      gap: 0;
+    }
+
     .markdown-summary {
       @apply text-foreground-secondary;
     }
@@ -1835,7 +1847,7 @@
   .ddoc .usageContent > h3 {
     @apply text-xs bg-background-primary border border-primary/25 px-2 py-0.5
       rounded absolute;
-    top: -50px;
+    top: -3.5em;
     z-index: 2;
   }
 
@@ -2343,7 +2355,7 @@
   }
   .ddoc .namespaceSection .namespaceItem .namespaceItemContent > a {
     word-break: break-all;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 1.25;
     display: block;
   }
@@ -2418,7 +2430,7 @@
     margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
   }
   .ddoc .symbolGroup article > div:first-child > div:first-child {
-    font-weight: 500;
+    font-weight: bold;
   }
   .ddoc .docNodeKindIcon {
     flex-shrink: 0;
@@ -2438,7 +2450,7 @@
       ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
       Courier New, monospace;
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 1.25rem;
   }
   .ddoc .docNodeKindIcon > * + * {
