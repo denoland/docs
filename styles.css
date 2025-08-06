@@ -1017,13 +1017,6 @@
     @apply text-deploy-500 decoration-deploy-500/20 hover:decoration-deploy-500;
   }
 
-  .runtime-link {
-    @apply dark:decoration-runtime dark:hover:text-runtime-600
-      dark:hover:decoration-runtime-600 decoration-1 text-primary
-      decoration-runtime-800 hover:decoration-runtime-600 hover:text-runtime-600
-      transition-colors duration-100;
-  }
-
   .learn-link {
     @apply flex dark:text-foreground-primary gap-3 items-center font-normal
       underline underline-offset-4;

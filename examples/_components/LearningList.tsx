@@ -19,7 +19,7 @@ export function LearningList(
             data-category={item.type}
           >
             <a
-              className="learn-link runtime-link"
+              className="learn-link text-inherit decoration-primary decoration-1 hover:text-primary hover:[&_path]:stroke-primary"
               href={item.href}
             >
               {item.type === "tutorial" && <TutorialIcon />}
