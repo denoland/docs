@@ -55,6 +55,7 @@
     "npm:@mdx-js/mdx@3.1.0": "3.1.0",
     "npm:@notionhq/client@*": "2.3.0",
     "npm:@octokit/core@*": "6.1.5",
+    "npm:@octokit/core@6.1.6": "6.1.6",
     "npm:@opentelemetry/api@1": "1.9.0",
     "npm:@oramacloud/client@*": "2.1.4",
     "npm:@supabase/auth-js@2.67.3": "2.67.3",
@@ -551,6 +552,18 @@
     },
     "@octokit/core@6.1.5": {
       "integrity": "sha512-vvmsN0r7rguA+FySiCsbaTTobSftpIDIpPW81trAmsv9TGxg3YCujAxRYp/Uy8xmDgYCzzgulG62H7KYUFmeIg==",
+      "dependencies": [
+        "@octokit/auth-token",
+        "@octokit/graphql",
+        "@octokit/request",
+        "@octokit/request-error",
+        "@octokit/types",
+        "before-after-hook",
+        "universal-user-agent"
+      ]
+    },
+    "@octokit/core@6.1.6": {
+      "integrity": "sha512-kIU8SLQkYWGp3pVKiYzA5OSaNF5EE03P/R8zEmmrG6XwOg5oBjXyQVVIauQ0dgau4zYhpZEhJrvIYt6oM+zZZA==",
       "dependencies": [
         "@octokit/auth-token",
         "@octokit/graphql",
@@ -3035,7 +3048,8 @@
       "integrity": "sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w=="
     },
     "svg2png-wasm@1.4.1": {
-      "integrity": "sha512-ZFy1NtwZVAsslaTQoI+/QqX2sg0vjmgJ/jGAuLZZvYcRlndI54hLPiwLC9JzXlFBerfxN5JiS7kpEUG0mrXS3Q=="
+      "integrity": "sha512-ZFy1NtwZVAsslaTQoI+/QqX2sg0vjmgJ/jGAuLZZvYcRlndI54hLPiwLC9JzXlFBerfxN5JiS7kpEUG0mrXS3Q==",
+      "deprecated": true
     },
     "tailwindcss@3.4.17_postcss@8.5.3": {
       "integrity": "sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==",
