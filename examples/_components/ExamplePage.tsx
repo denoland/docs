@@ -40,25 +40,26 @@ export default function ExamplePage({ example }: Props) {
       </div>
       <div class="relative block mt-8">
         <CopyButton text={contentNoCommentary} />
+
+        {example.parsed.files.map((file) => (
+          <div
+            class="flex flex-col gap-4 md:gap-0 example-content"
+            key={file.name}
+          >
+            {file.snippets.map((snippet, i) => (
+              <SnippetComponent
+                key={i}
+                onlyOneSnippet={file.snippets.length === 1}
+                firstOfFile={i === 0 || !file.snippets[i - 1].code}
+                lastOfFile={i === file.snippets.length - 1 ||
+                  !file.snippets[i + 1].code}
+                filename={file.name}
+                snippet={snippet}
+              />
+            ))}
+          </div>
+        ))}
       </div>
-      {example.parsed.files.map((file) => (
-        <div
-          class="flex flex-col gap-4 md:gap-0 example-content"
-          key={file.name}
-        >
-          {file.snippets.map((snippet, i) => (
-            <SnippetComponent
-              key={i}
-              onlyOneSnippet={file.snippets.length === 1}
-              firstOfFile={i === 0 || !file.snippets[i - 1].code}
-              lastOfFile={i === file.snippets.length - 1 ||
-                !file.snippets[i + 1].code}
-              filename={file.name}
-              snippet={snippet}
-            />
-          ))}
-        </div>
-      ))}
       <div>
         {example.parsed.run && (
           <div class="mt-8 -mx-4 sm:mx-0">
