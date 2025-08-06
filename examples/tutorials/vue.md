@@ -11,7 +11,7 @@ oldUrl:
 provides tools and features for creating dynamic and interactive user
 interfaces.
 
-In this tutorial we'll build a simple Vue.js app gitwith Vite and Deno. The app
+In this tutorial we'll build a simple Vue.js app with Vite and Deno. The app
 will display a list of dinosaurs. When you click on one, it'll take you to a
 dinosaur page with more details. You can see the
 [finished app on GitHub](https://github.com/denoland/tutorial-with-vue).
