@@ -355,7 +355,7 @@
       h6
     ) {
       font-weight: bold;
-      line-height: 1.1;
+      line-height: 1.2;
 
       .header-anchor:hover {
         text-decoration: underline;
@@ -1411,7 +1411,7 @@
     }
 
     & + ul {
-      margin-left: 1rem;
+      margin-left: 1rem !important;
     }
 
     li:has(> & .sub-nav-toggle-checkbox:checked) {

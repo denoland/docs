@@ -132,7 +132,10 @@ export default function renderCommand(
         </div>
       </div>
 
-      <div dangerouslySetInnerHTML={{ __html: helpers.md(about) }} />
+      <div
+        class="flex flex-col gap-4"
+        dangerouslySetInnerHTML={{ __html: helpers.md(about) }}
+      />
       <br />
 
       {Object.entries(options).map(([heading, flags]) => {
@@ -196,12 +199,12 @@ function renderOption(group: string, arg: ArgType, helpers: Lume.Helpers) {
         <HeaderAnchor id={id} />
       </h3>
       {arg.short && (
-        <p>
+        <p class="text-sm">
           Short flag: <code>-{arg.short}</code>
         </p>
       )}
       {arg.help && (
-        <p
+        <div
           class="block !whitespace-pre-line"
           dangerouslySetInnerHTML={{
             __html: helpers.md(
