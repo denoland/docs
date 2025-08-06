@@ -28,7 +28,6 @@ export default function Layout(data: Lume.Data) {
         </script>
 
         <link rel="stylesheet" href="/styles.css" />
-        <link rel="stylesheet" href="/components.css" />
         <link
           rel="preload"
           href="/fonts/inter/Inter-Regular.woff2"
