@@ -3,7 +3,7 @@ export default function Footer_new() {
     <footer class="text-smaller bg-gray-50 dark:bg-gray-950 p-4 pt-12 sm:px-8 border-t border-t-foreground-tertiary">
       <nav className="flex flex-col gap-x-4 gap-y-12 max-w-7xl md:flex-row md:flex-wrap md:justify-between md:w-full md:gap-y-8 md:mx-auto">
         {data.map((category) => (
-          <section>
+          <section class="flex-auto">
             <h3 class="mb-2 uppercase font-bold text-foreground-primary whitespace-pre">
               {category.title}
             </h3>
