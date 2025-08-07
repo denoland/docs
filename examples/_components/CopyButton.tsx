@@ -4,7 +4,7 @@ export function CopyButton(props: { text: string }) {
       type="button"
       aria-label="Copy code to clipboard"
       title="Copy"
-      class="absolute right-2 top-2 transition-colors duration-150 hover:bg-gray-200 text-gray-900 p-2 rounded-md z-10"
+      class="text-current absolute right-2 top-2 transition-colors duration-150 hover:bg-background-secondary dark:hover:bg-foreground-tertiary p-2 rounded-md z-10"
       data-copy={props.text}
     >
       <svg class="copy-icon" viewBox="0 0 24 24" width="15" height="15">

@@ -1650,12 +1650,12 @@
   }
 
   .runtime-cta {
-    @apply no-underline! text-gray-900! bg-runtime-300 border-0
+    @apply no-underline text-gray-900! bg-runtime-300 border-0
       hover:bg-runtime-200;
   }
 
   .deploy-cta {
-    @apply no-underline! text-gray-900!;
+    @apply no-underline text-gray-900!;
     @apply bg-deploy-300 rounded-full border-0 hover:bg-deploy-200;
   }
 
