@@ -9,10 +9,12 @@ export default function () {
       <img
         src="/img/light.svg"
         class="w-full block -translate-y-full dark:translate-y-0 transition-transform duration-200 easing-[0.86,0,0.07,1]"
+        alt=""
       />
       <img
         src="/img/dark.svg"
         class="w-full block -translate-y-full dark:translate-y-0 transition-transform duration-200 easing-[0.86,0,0.07,1]"
+        alt=""
       />
       <span class="sr-only">Toggle Theme</span>
     </button>
