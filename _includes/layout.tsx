@@ -85,20 +85,25 @@ export default function Layout(data: Lume.Data) {
           class={`layout ${
             data.toc?.length ? "layout--three-column" : "layout--two-column"
           }`}
+          data-pagefind-body
         >
-          <data.comp.Navigation
-            data={data}
-            currentSection={section}
-            currentUrl={data.url}
-            hasSubNav={hasSubNav}
-          />
-          {data.children}
-          {!isReference && (
-            <data.comp.TableOfContents
-              toc={data.toc}
+          <div data-pagefind-ignore>
+            <data.comp.Navigation
               data={data}
+              currentSection={section}
+              currentUrl={data.url}
               hasSubNav={hasSubNav}
             />
+          </div>
+          {data.children}
+          {!isReference && (
+            <div data-pagefind-ignore>
+              <data.comp.TableOfContents
+                toc={data.toc}
+                data={data}
+                hasSubNav={hasSubNav}
+              />
+            </div>
           )}
         </div>
         <data.comp.Footer />

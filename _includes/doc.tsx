@@ -37,20 +37,25 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
       <div class="w-full">
         <article class="mx-auto">
           {hasBreadcrumbs && (
-            <data.comp.Breadcrumbs
-              title={data.title!}
-              sidebar={sidebar}
-              url={data.url}
-            />
+            <div data-pagefind-ignore>
+              <data.comp.Breadcrumbs
+                title={data.title!}
+                sidebar={sidebar}
+                url={data.url}
+              />
+            </div>
           )}
 
-          <data.comp.TableOfContentsMobile toc={data.toc} data={data} />
+          <div data-pagefind-ignore>
+            <data.comp.TableOfContentsMobile toc={data.toc} data={data} />
+          </div>
 
           <div
             data-color-mode="auto"
             data-light-theme="light"
             data-dark-theme="dark"
             class="markdown-body mt-4 sm:mt-6"
+            data-pagefind-meta="title[content]"
           >
             {!isReference && (
               <h1
@@ -69,16 +74,22 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             {data.children}
           </div>
         </article>
-        {!isReference && <data.comp.Feedback file={file} />}
+        {!isReference && (
+          <div data-pagefind-ignore>
+            <data.comp.Feedback file={file} />
+          </div>
+        )}
       </div>
 
       {(isReference && data.children.props.data.toc_ctx) && (
-        <data.comp.RefToc
-          documentNavigation={data.children.props.data.toc_ctx
-            .document_navigation}
-          documentNavigationStr={data.children.props.data.toc_ctx
-            .document_navigation_str}
-        />
+        <div data-pagefind-ignore>
+          <data.comp.RefToc
+            documentNavigation={data.children.props.data.toc_ctx
+              .document_navigation}
+            documentNavigationStr={data.children.props.data.toc_ctx
+              .document_navigation_str}
+          />
+        </div>
       )}
     </main>
   );
