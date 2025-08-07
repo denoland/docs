@@ -923,7 +923,7 @@
   }
 
   [data-services-page="true"] {
-    --color-primary: var(--color-deploy-300);
+    --color-primary: var(--color-deploy-500);
     --color-header-highlight: var(--color-deploy-200);
   }
 
