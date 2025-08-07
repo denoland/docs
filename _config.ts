@@ -10,14 +10,14 @@ import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 
-import tw from "tailwindcss";
-import tailwindConfig from "./tailwind.config.js";
+import tailwind from "@tailwindcss/postcss";
 
 import Prism from "./prism.ts";
 
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
-import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
+// See note below about GFM CSS
+// import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.11.0/style.ts";
 import { log } from "lume/core/utils/log.ts";
 import anchor from "npm:markdown-it-anchor@9";
 import admonitionPlugin from "./markdown-it/admonition.ts";
@@ -133,7 +133,8 @@ site.use(mdx());
 
 site.use(
   postcss({
-    plugins: [tw(tailwindConfig)],
+    includes: false,
+    plugins: [tailwind()],
   }),
 );
 
@@ -153,7 +154,8 @@ site.use(sitemap());
 
 site.addEventListener("afterBuild", async () => {
   // Write GFM CSS
-  Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
+  /* NOTE: we used to get gfm.css from the jsr.io CDN, but now we simply have a local copy. This is because it needs to be placed on a CSS layer, which isn't possible with an imported file. */
+  // Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
 
   // Generate LLMs documentation files directly to _site directory
   if (Deno.env.get("BUILD_TYPE") == "FULL") {

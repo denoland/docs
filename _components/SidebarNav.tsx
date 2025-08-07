@@ -96,7 +96,7 @@ export default function (data: Lume.Data) {
 function SidebarList(props: { children: Element; className?: string }) {
   return (
     <ul
-      className={`p-0 m-0 list-none overflow-y-hidden ${props.className ?? ""}`}
+      className={`p-0 list-none overflow-y-hidden ${props.className ?? ""}`}
     >
       {props.children}
     </ul>

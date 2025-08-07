@@ -113,7 +113,7 @@ export const sidebar = [
     title: "Modules and package management",
     items: [
       {
-        title: "Use Node.js' built-in modules",
+        title: "Use Node.js built-in modules",
         href: "/examples/node_built_in/",
         type: "example",
       },

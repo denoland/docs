@@ -27,10 +27,7 @@ export default function Layout(data: Lume.Data) {
           'light'); document.documentElement.classList.add(theme);
         </script>
 
-        <link rel="stylesheet" href="/gfm.css" />
         <link rel="stylesheet" href="/styles.css" />
-        <link rel="stylesheet" href="/components.css" />
-        <link rel="stylesheet" href="/overrides.css" />
         <link
           rel="preload"
           href="/fonts/inter/Inter-Regular.woff2"
