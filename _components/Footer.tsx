@@ -1,21 +1,20 @@
 export default function Footer_new() {
   return (
-    <footer class="text-sm bg-gray-50 dark:bg-gray-950 p-4 pt-12 sm:px-8 border-t border-t-foreground-tertiary">
-      <nav className="flex flex-col gap-y-12 max-w-7xl md:flex-row md:flex-wrap md:justify-between md:w-full md:gap-y-8 md:mx-auto">
+    <footer class="text-smaller bg-gray-50 dark:bg-gray-950 p-4 pt-12 sm:px-8 border-t border-t-foreground-tertiary">
+      <nav className="flex flex-col gap-x-4 gap-y-12 max-w-7xl md:flex-row md:flex-wrap md:justify-between md:w-full md:gap-y-8 md:mx-auto">
         {data.map((category) => (
           <section>
-            <h3 class="mb-4 text-base font-bold text-foreground-primary">
+            <h3 class="mb-2 uppercase font-bold text-foreground-primary whitespace-pre">
               {category.title}
             </h3>
-            <ul class="m-0 p-0 list-none">
+            <ul class="m-0 p-0 pl-3 border-l border-l-background-tertiary list-none">
               {category.items.map((item) => (
                 <li>
                   <a
-                    class="block mb-2 text-foreground-secondary hover:text-primary"
+                    class="block mb-2 hover:text-primary hover:underline"
                     href={item.to ?? item.href}
-                  >
-                    {item.label}
-                  </a>
+                    dangerouslySetInnerHTML={{ __html: item.label }}
+                  />
                 </li>
               ))}
             </ul>
@@ -51,20 +50,33 @@ const data = [
         to: "/runtime/",
       },
       {
-        label: "Deno Deploy",
-        to: "/deploy/manual/",
-      },
-      {
-        label: "Deno Subhosting",
-        to: "/subhosting/manual/",
-      },
-      {
         label: "Examples",
         href: "/examples/",
       },
       {
         label: "Standard Library",
         href: "https://jsr.io/@std",
+      },
+      {
+        label: "Deno API Reference",
+        href: "/api/deno/~/Deno",
+      },
+    ],
+  },
+  {
+    title: "Services Docs",
+    items: [
+      {
+        label: "Deno Deploy <sup>EA</sup>",
+        to: "/deploy/early-access/",
+      },
+      {
+        label: "Deno Deploy Classic",
+        to: "/deploy/manual/",
+      },
+      {
+        label: "Deno Subhosting",
+        to: "/subhosting/manual/",
       },
     ],
   },
@@ -80,12 +92,20 @@ const data = [
         href: "https://github.com/denoland",
       },
       {
-        label: "Twitter",
-        href: "https://twitter.com/deno_land",
-      },
-      {
         label: "YouTube",
         href: "https://youtube.com/@deno_land",
+      },
+      {
+        label: "Bluesky",
+        href: "https://bsky.app/profile/deno.land",
+      },
+      {
+        label: "Mastodon",
+        href: "https://fosstodon.org/@deno_land",
+      },
+      {
+        label: "Twitter",
+        href: "https://twitter.com/deno_land",
       },
       {
         label: "Newsletter",
@@ -117,6 +137,10 @@ const data = [
   {
     title: "Company",
     items: [
+      {
+        label: "Deno Website",
+        href: "https://deno.com/",
+      },
       {
         label: "Blog",
         href: "https://deno.com/blog",
