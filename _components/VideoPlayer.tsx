@@ -1,5 +1,3 @@
-export const css = "@import './_components/VideoPlayer.css';";
-
 /**
  * Embed a YouTube video.
  * @param props.id - The YouTube ID or URL.

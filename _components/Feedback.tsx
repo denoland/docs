@@ -103,7 +103,7 @@ export default function Feedback({ file }: { file: string | undefined }) {
                   </p>
                   <div class="space-y-1">
                     <textarea
-                      class="block w-full p-2 border border-foreground-tertiary dark:bg-background-primary rounded"
+                      class="block w-full p-2 border border-foreground-tertiary bg-white dark:bg-background-primary rounded"
                       name="feedback-comment"
                       id="feedback-comment"
                       placeholder="Your feedback will be posted as an issue in the denoland/docs GitHub repo"
@@ -116,7 +116,7 @@ export default function Feedback({ file }: { file: string | undefined }) {
                     </label>
                     <input
                       type="text"
-                      class="block w-full p-2 border border-foreground-tertiary dark:bg-background-primary rounded"
+                      class="block w-full p-2 border border-foreground-tertiary bg-white dark:bg-background-primary rounded"
                       name="feedback-contact"
                       id="feedback-contact"
                       aria-invalid="false"
@@ -130,7 +130,7 @@ export default function Feedback({ file }: { file: string | undefined }) {
                   </div>
                   <button
                     type="submit"
-                    class="btn bg-green-400 dark:bg-green-600 mt-4"
+                    class="btn  mt-4"
                   >
                     Send us feedback
                   </button>
