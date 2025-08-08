@@ -57,6 +57,30 @@
     "generate:llms:site": {
       "description": "Generate LLM-friendly documentation files directly in the _site directory",
       "command": "deno run -A generate_llms_files.ts _site"
+    },
+    "generate:orama": {
+      "description": "Generate Orama search index JSON file for uploading to Orama Cloud",
+      "command": "deno run -A orama/generate_orama_index.ts"
+    },
+    "generate:orama:site": {
+      "description": "Generate Orama search index directly in the _site directory",
+      "command": "deno run -A orama/generate_orama_index.ts _site"
+    },
+    "generate:orama:full": {
+      "description": "Generate comprehensive Orama index including API reference documentation",
+      "command": "deno run -A orama/generate_orama_index_full.ts"
+    },
+    "generate:orama:full:site": {
+      "description": "Generate comprehensive Orama index directly in the _site directory",
+      "command": "deno run -A orama/generate_orama_index_full.ts _site"
+    },
+    "upload:orama": {
+      "description": "Upload generated Orama index to Orama Cloud (requires ORAMA_INDEX_ID and ORAMA_PRIVATE_API_KEY env vars)",
+      "command": "deno run -A orama/upload_orama_index.ts"
+    },
+    "analyze:orama": {
+      "description": "Analyze the generated Orama index to check content quality and statistics",
+      "command": "deno run -A orama/analyze_orama_index.ts"
     }
   },
   "compilerOptions": {
@@ -73,7 +97,8 @@
   },
   "exclude": [
     "_site",
-    "reference_gen"
+    "reference_gen",
+    "orama"
   ],
   "nodeModulesDir": "auto"
 }
