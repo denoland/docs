@@ -1,6 +1,7 @@
 export default function SearchInput() {
   return (
-    <div className="relative w-full">
+    <div className="md:relative w-full">
+      {/* ☝️ That md:relative class is crucial for making the search bar pop up in the right place. Don't change it, or add any other positioning classes, unless you're ready to account for positioning across all breakpoints. */}
       <div className="relative">
         <input
           type="search"
@@ -27,39 +28,38 @@ export default function SearchInput() {
       {/* Enhanced Popover for Search Results */}
       <div
         id="orama-search-results"
-        className="absolute top-full left-0 right-0 mt-2 bg-background-raw border border-foreground-tertiary rounded-xl shadow-2xl z-50 max-h-[32rem] overflow-hidden hidden
-        min-w-[480px] max-w-2xl lg:left-auto lg:right-0"
+        className="absolute inset-2 left-2 right-2 h-[calc(100vh-8rem)] top-10 md:top-full md:left-auto md:right-0 mt-2 bg-background-raw border border-foreground-tertiary rounded-xl shadow-2xl z-50 md:max-h-128 overflow-hidden hidden md:min-w-160 max-w-2xl"
       >
         <div
           id="orama-search-results-content"
-          className="overflow-y-auto max-h-[28rem]"
+          className="overflow-y-auto h-full"
         >
           {/* Results will be populated via JavaScript */}
         </div>
 
         {/* Footer with search tips */}
-        <div className="border-t border-foreground-tertiary bg-background-secondary px-4 py-2">
-          <div className="flex items-center justify-between text-xs text-foreground-secondary">
+        <div className="border-t border-foreground-tertiary bg-background-secondary px-4 py-2 sticky bottom-0">
+          <div className="flex items-center gap-6 text-xs text-foreground-secondary">
             <span>
               <kbd className="px-1.5 py-0.5 text-xs font-semibold text-foreground-secondary bg-background-primary border-r-2 border-b-2 border border-foreground-tertiary rounded mr-1">
                 <span aria-hidden="true">↑↓</span>
-                <span className="sr-only">Up or down</span>
+                <span className="sr-only">Up or down to</span>
               </kbd>
-              to navigate
+              navigate
             </span>
             <span>
               <kbd className="px-1.5 py-0.5 text-xs font-semibold text-foreground-secondary bg-background-primary border-r-2 border-b-2 border border-foreground-tertiary rounded mr-1">
                 <span aria-hidden="true">↵</span>
-                <span className="sr-only">Enter</span>
+                <span className="sr-only">Enter to</span>
               </kbd>
-              to select
+              select
             </span>
             <span>
               <kbd className="px-1.5 py-0.5 text-xs font-semibold text-foreground-secondary bg-background-primary border-r-2 border-b-2 border border-foreground-tertiary rounded mr-1">
                 <span aria-hidden="true">ESC</span>
-                <span className="sr-only">Escape</span>
+                <span className="sr-only">Escape to</span>
               </kbd>
-              to close
+              close
             </span>
           </div>
         </div>

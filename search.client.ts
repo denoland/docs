@@ -330,14 +330,14 @@ class OramaSearch {
     }</span>
         </div>
       </div>
-      <div class="py-2">
+      <div>
         ${
       validResults.map((hit) => `
         <a
           href="${this.escapeHtml(this.formatUrl(hit.document.url, hit))}"
-          class="flex flex-col px-4 py-3 hover:bg-background-secondary transition-colors duration-150 border-b border-foreground-quaternary last:border-b-0 search-result-link group"
+          class="flex flex-col px-4 py-3 hover:bg-foreground-quaternary transition-colors duration-150 border-b border-foreground-quaternary last:border-b-0 search-result-link group"
         >
-          <div class="font-medium text-foreground-primary text-sm mb-2 group-hover:text-primary transition-colors">
+          <div class="font-bold text-foreground-primary text-sm mb-2 group-hover:text-primary transition-colors">
             ${
         this.highlightMatch(
           this.escapeHtml(this.cleanTitle(hit.document.title)),
