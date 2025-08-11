@@ -322,7 +322,10 @@ class OramaSearch {
         >
           <div class="font-medium text-foreground-primary text-sm mb-2 group-hover:text-blue-600 transition-colors">
             ${
-        this.highlightMatch(this.escapeHtml(hit.document.title), searchTerm)
+        this.highlightMatch(
+          this.escapeHtml(this.cleanTitle(hit.document.title)),
+          searchTerm,
+        )
       }
           </div>
           <div class="text-sm text-foreground-secondary leading-relaxed mb-2 line-clamp-3">
@@ -519,6 +522,31 @@ class OramaSearch {
     // If the URL became empty or just whitespace, return the original
     if (!cleaned || cleaned.trim() === "") {
       return url;
+    }
+
+    return cleaned;
+  }
+
+  // Helper method to clean titles by removing unwanted text
+  cleanTitle(title: string): string {
+    if (!title) return title;
+
+    // Remove "jump to heading" and similar text patterns from titles
+    let cleaned = title
+      .replace(/\s*Jump\s+to\s+heading\s*/gi, "")
+      .replace(/\s*#Jump-to-heading\s*/gi, "")
+      .replace(/\s*-Jump-to-heading\s*/gi, "")
+      .replace(/Jump\s+to\s+heading#?/gi, "")
+      .replace(/#Jump-to-heading/gi, "")
+      .replace(/-Jump-to-heading/gi, "")
+      .trim();
+
+    // Remove any trailing or leading hashes, pipes, or other separators
+    cleaned = cleaned.replace(/^[#\|\-\s]+|[#\|\-\s]+$/g, "");
+
+    // If the title became empty or just whitespace, return the original
+    if (!cleaned || cleaned.trim() === "") {
+      return title;
     }
 
     return cleaned;
