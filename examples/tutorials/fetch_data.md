@@ -70,7 +70,7 @@ We'll use the `fetch` API to retrieve a file. Then we'll use the
 the [`pipeTo`](/api/web/~/ReadableStream.pipeTo) method from the Streams API to
 send the byte stream to the created file.
 
-Next, we'll use the `readable` property on a `POST` request to send the bite
+Next, we'll use the `readable` property on a `POST` request to send the byte
 stream of the file to a server.
 
 ```ts title="stream.js"
