@@ -31,6 +31,45 @@ deno task generate:orama
 deno task generate:orama:full
 ```
 
+### 2. Upload to Orama Cloud
+
+```bash
+# Upload and deploy
+deno task upload:orama static/orama-index-full.json --deploy
+
+# Or just upload without deploying
+deno task upload:orama static/orama-index-full.json
+```
+
+### 3. Analyze Generated Index
+
+```bash
+deno task analyze:orama static/orama-index-full.json
+```
+
+## 🤖 Automated CI/CD Deployment
+
+The repository includes GitHub Actions workflow for automatic deployment:
+
+### 📋 Setup Requirements
+1. **Configure GitHub Secrets** (see `GITHUB_ACTIONS_SETUP.md`)
+   - `ORAMA_INDEX_ID` - Your Orama Cloud index ID  
+   - `ORAMA_PRIVATE_API_KEY` - Your private API key
+
+### 🚀 How It Works
+- **Automatic**: Deploys when content changes are pushed to `main` branch
+- **Smart**: Only runs when documentation files actually change
+- **Manual**: Can be triggered manually from GitHub Actions tab
+- **Fast**: Completes in ~2-3 minutes including upload and deployment
+
+### 📁 Monitored Files
+The workflow triggers when these paths change:
+- `runtime/**/*.md`, `deploy/**/*.md`, `examples/**/*.md`
+- `subhosting/**/*.md`, `lint/**/*.md`
+- `reference_gen/**`, `deno.json`, `orama/**`
+
+## 📖 Manual Usage
+
 ```bash
 # Generate index to static/orama-index.json
 deno task generate:orama
