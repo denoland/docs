@@ -77,7 +77,6 @@ class OramaSearch {
     this.searchInput.addEventListener("focus", this.handleFocus.bind(this));
     this.searchInput.addEventListener("keydown", this.handleKeyDown.bind(this));
     document.addEventListener("keydown", (event) => {
-      console.log(event);
       if ((event.metaKey || event.ctrlKey) && event.key === "k") {
         event.preventDefault();
         this.searchInput?.focus();
@@ -85,12 +84,20 @@ class OramaSearch {
     });
 
     const searchKey = document.getElementById("search-key");
-    // Switch the text in search key if a non-Mac device is detected
+    let isMac = false;
+    if (
+      navigator?.userAgentData?.platform?.toUpperCase().startsWith("MAC") ||
+      navigator.userAgent.indexOf("Mac OS X") != -1 ||
+      navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i)
+    ) {
+      isMac = true;
+    }
+
     if (searchKey) {
-      if (navigator.userAgent.indexOf("Mac OS X") != -1) {
-        searchKey.textContent = "Ctrl+K";
-      } else {
+      if (isMac) {
         searchKey.textContent = "⌘K";
+      } else {
+        searchKey.textContent = "Ctrl+K";
       }
     }
 
