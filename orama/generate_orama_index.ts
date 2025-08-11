@@ -392,10 +392,10 @@ async function main(outputDir?: string) {
   console.log("🔍 Generating Orama search index for Deno documentation...\n");
 
   const files = await collectFiles();
-  console.log(`\n📄 Collected ${files.length} documentation files`);
+  console.log(`\nCollected ${files.length} documentation files`);
 
   if (files.length === 0) {
-    console.error("❌ No files found to index");
+    console.error("No files found to index");
     Deno.exit(1);
   }
 
@@ -404,7 +404,7 @@ async function main(outputDir?: string) {
 
   // Generate statistics
   const stats = generateStats(documents);
-  console.log("\n📊 Index Statistics:");
+  console.log("\nIndex Statistics:");
   console.log(`   Total documents: ${stats.totalDocuments}`);
   console.log(`   Total characters: ${stats.totalCharacters.toLocaleString()}`);
   console.log(
@@ -446,8 +446,8 @@ async function main(outputDir?: string) {
   const outputPath = join(outDir, "orama-index.json");
   await Deno.writeTextFile(outputPath, JSON.stringify(indexData, null, 2));
 
-  console.log(`\n✅ Generated Orama index: ${outputPath}`);
-  console.log(`📁 File size: ${(await Deno.stat(outputPath)).size} bytes`);
+  console.log(`\nGenerated Orama index: ${outputPath}`);
+  console.log(`File size: ${(await Deno.stat(outputPath)).size} bytes`);
 
   // Also generate a minimal version (without full content for quick previews)
   const minimalDocuments = documents.map((doc) => ({
@@ -478,14 +478,14 @@ async function main(outputDir?: string) {
     `📁 File size: ${(await Deno.stat(minimalOutputPath)).size} bytes`,
   );
 
-  console.log("\n📋 Next steps:");
+  console.log("\nNext steps:");
   console.log("1. Upload the orama-index.json file to your Orama Cloud index");
   console.log("2. Or use the Orama REST API to bulk insert the documents");
   console.log(
     "3. Configure your search client with the proper endpoint and API key",
   );
 
-  console.log("\n🚀 Done!");
+  console.log("\nDone!");
 }
 
 // Run the main function

@@ -52,24 +52,24 @@ jobs:
             CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E '\.(md|json)$|^reference_gen/|^orama/' || echo "")
             if [ -n "$CHANGED" ]; then
               echo "content_changed=true" >> $GITHUB_OUTPUT
-              echo "📄 Content files changed:"
+              echo "Content files changed:"
               echo "$CHANGED" | sed 's/^/  /'
             else
               echo "content_changed=false" >> $GITHUB_OUTPUT
-              echo "ℹ️  No content changes detected - skipping search index update"
+              echo "  No content changes detected - skipping search index update"
             fi
           fi
 
       - name: Generate comprehensive search index
         if: steps.changes.outputs.content_changed == 'true'
         run: |
-          echo "🔍 Generating comprehensive Orama search index..."
+          echo "Generating comprehensive Orama search index..."
           deno task generate:orama:full
 
       - name: Upload and deploy to Orama Cloud
         if: steps.changes.outputs.content_changed == 'true'
         run: |
-          echo "📤 Uploading search index to Orama Cloud..."
+          echo "Uploading search index to Orama Cloud..."
           deno task upload:orama static/orama-index-full.json --deploy
         env:
           ORAMA_INDEX_ID: ${{ secrets.ORAMA_INDEX_ID }}
@@ -78,14 +78,14 @@ jobs:
       - name: Report deployment success
         if: steps.changes.outputs.content_changed == 'true'
         run: |
-          echo "✅ Search index deployment completed successfully!"
-          echo "🔍 Updated search includes:"
-          echo "  📚 Documentation pages"
-          echo "  🔧 API references (Deno, Web, Node.js)"
-          echo "  🎯 Total searchable documents: ~5,856"
+          echo "Search index deployment completed successfully!"
+          echo "Updated search includes:"
+          echo "  Documentation pages"
+          echo "  API references (Deno, Web, Node.js)"
+          echo "  Total searchable documents: ~5,856"
 
       - name: Skip deployment message
         if: steps.changes.outputs.content_changed == 'false'
         run: |
-          echo "⏭️  No content changes detected - search index deployment skipped"
-          echo "💡 To force a deployment, use the 'workflow_dispatch' trigger with force_deploy=true"
+          echo "No content changes detected - search index deployment skipped"
+          echo "To force a deployment, use the 'workflow_dispatch' trigger with force_deploy=true"

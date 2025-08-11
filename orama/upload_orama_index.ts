@@ -137,12 +137,12 @@ async function uploadDocuments(
   const { batchSize = 1000, dryRun = false } = options;
 
   if (dryRun) {
-    console.log(`🧪 DRY RUN: Would upload ${documents.length} documents`);
+    console.log(`DRY RUN: Would upload ${documents.length} documents`);
     return;
   }
 
   console.log(
-    `📤 Uploading ${documents.length} documents in batches of ${batchSize}...`,
+    `Uploading ${documents.length} documents in batches of ${batchSize}...`,
   );
 
   try {
@@ -159,7 +159,7 @@ async function uploadDocuments(
       const totalBatches = Math.ceil(documents.length / batchSize);
 
       console.log(
-        `📦 Uploading batch ${batchNumber}/${totalBatches} (${batch.length} documents)...`,
+        `Uploading batch ${batchNumber}/${totalBatches} (${batch.length} documents)...`,
       );
 
       try {
@@ -178,7 +178,7 @@ async function uploadDocuments(
       }
     }
 
-    console.log(`\n📊 Upload complete:`);
+    console.log(`\nUpload complete:`);
     console.log(`   ✅ Successful: ${successful}`);
     console.log(`   ❌ Failed: ${failed}`);
     console.log(
@@ -197,7 +197,7 @@ async function uploadDocuments(
  */
 async function deployIndex(config: OramaConfig): Promise<void> {
   try {
-    console.log("🚀 Deploying index...");
+    console.log("Deploying index...");
 
     const manager = new CloudManager({ api_key: config.privateApiKey });
     const indexManager = manager.index(config.indexId);
@@ -252,12 +252,12 @@ async function main() {
 
   // Load configuration
   const config = loadOramaConfig();
-  console.log(`🎯 Target index: ${config.indexId}`);
+  console.log(`Target index: ${config.indexId}`);
 
   // Determine input file path
   const indexFilePath = filePath ||
     join(ROOT_DIR, "static", "orama-index.json");
-  console.log(`📁 Loading index from: ${indexFilePath}`);
+  console.log(`Loading index from: ${indexFilePath}`);
 
   // Load the index file
   const indexData = await loadIndexFile(indexFilePath);
@@ -268,11 +268,11 @@ async function main() {
     Deno.exit(1);
   }
 
-  console.log(`📄 Found ${documents.length} documents to upload`);
+  console.log(`Found ${documents.length} documents to upload`);
 
   // Print some stats
   if (indexData.metadata) {
-    console.log(`📊 Index metadata:`);
+    console.log(`Index metadata:`);
     console.log(`   Generated: ${indexData.metadata.generatedAt}`);
     console.log(`   Version: ${indexData.metadata.version || "unknown"}`);
     if (indexData.metadata.stats) {
@@ -303,11 +303,11 @@ async function main() {
     await deployIndex(config);
   }
 
-  console.log("\n🚀 Upload process completed!");
+  console.log("\nUpload process completed!");
   if (shouldDeploy) {
-    console.log("🌟 Index has been deployed and is now live!");
+    console.log("Index has been deployed and is now live!");
   } else {
-    console.log("💡 Run with --deploy flag to deploy the index");
+    console.log("Run with --deploy flag to deploy the index");
   }
 }
 

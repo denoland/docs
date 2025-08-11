@@ -42,7 +42,7 @@ async function analyzeIndex(filePath: string = "static/orama-index.json") {
     const content = await Deno.readTextFile(join(ROOT_DIR, filePath));
     const data: IndexData = JSON.parse(content);
 
-    console.log("📊 General Statistics:");
+    console.log("General Statistics:");
     console.log(`   Documents: ${data.documents.length}`);
     console.log(
       `   Generated: ${new Date(data.metadata.generatedAt).toLocaleString()}`,
@@ -76,7 +76,7 @@ async function analyzeIndex(filePath: string = "static/orama-index.json") {
       b.content.length - a.content.length
     );
 
-    console.log("📏 Content Length Analysis:");
+    console.log("Content Length Analysis:");
     console.log(
       `   Longest: "${sortedByLength[0].title}" (${
         sortedByLength[0].content.length
@@ -94,7 +94,7 @@ async function analyzeIndex(filePath: string = "static/orama-index.json") {
       doc.tags.forEach((tag) => allTags.add(tag))
     );
 
-    console.log("🏷️ Tags Found:");
+    console.log("Tags Found:");
     if (allTags.size > 0) {
       console.log(`   Total unique tags: ${allTags.size}`);
       const tagCounts = new Map<string, number>();
@@ -117,7 +117,7 @@ async function analyzeIndex(filePath: string = "static/orama-index.json") {
 
     // Analyze descriptions
     const withDescriptions = data.documents.filter((doc) => doc.description);
-    console.log("📝 Descriptions:");
+    console.log("Descriptions:");
     console.log(
       `   Documents with descriptions: ${withDescriptions.length}/${data.documents.length} (${
         Math.round(withDescriptions.length / data.documents.length * 100)

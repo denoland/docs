@@ -615,7 +615,7 @@ async function main(outputDir?: string) {
   );
 
   // Process markdown files
-  console.log("📄 Processing markdown documentation...");
+  console.log("Processing markdown documentation...");
   const markdownDocs = await collectMarkdownFiles();
   console.log(`✅ Collected ${markdownDocs.length} markdown documents\n`);
 
@@ -634,7 +634,7 @@ async function main(outputDir?: string) {
 
   // Generate statistics
   const stats = generateStats(allDocuments);
-  console.log("📊 Comprehensive Index Statistics:");
+  console.log("Comprehensive Index Statistics:");
   console.log(`   Total documents: ${stats.totalDocuments}`);
   console.log(`   Markdown documents: ${stats.markdownDocuments}`);
   console.log(`   API reference documents: ${stats.apiDocuments}`);
@@ -680,7 +680,7 @@ async function main(outputDir?: string) {
   await Deno.writeTextFile(outputPath, JSON.stringify(indexData, null, 2));
 
   console.log(`\n✅ Generated comprehensive Orama index: ${outputPath}`);
-  console.log(`📁 File size: ${(await Deno.stat(outputPath)).size} bytes`);
+  console.log(`File size: ${(await Deno.stat(outputPath)).size} bytes`);
 
   // Also generate a summary version
   const summaryDocuments = allDocuments.map((doc) => ({
@@ -708,10 +708,10 @@ async function main(outputDir?: string) {
 
   console.log(`✅ Generated summary index: ${summaryOutputPath}`);
   console.log(
-    `📁 File size: ${(await Deno.stat(summaryOutputPath)).size} bytes`,
+    `File size: ${(await Deno.stat(summaryOutputPath)).size} bytes`,
   );
 
-  console.log("\n📋 Next steps:");
+  console.log("\nNext steps:");
   console.log(
     "1. Upload the orama-index-full.json file to your Orama Cloud index",
   );
@@ -721,7 +721,7 @@ async function main(outputDir?: string) {
   );
   console.log("4. Test searches for both documentation and API references");
 
-  console.log("\n🚀 Done!");
+  console.log("\nDone!");
 }
 
 // Run the main function

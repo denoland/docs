@@ -49,15 +49,15 @@ try {
 
   const content = await Deno.readTextFile("static/orama-index.json");
   const data = JSON.parse(content);
-  console.log(`📊 Contains ${data.documents?.length || 0} documents`);
+  console.log(`Contains ${data.documents?.length || 0} documents`);
 
   if (data.metadata?.stats) {
     console.log(
-      `📈 Average document length: ${data.metadata.stats.averageDocumentLength} chars`,
+      `Average document length: ${data.metadata.stats.averageDocumentLength} chars`,
     );
   }
 } catch {
-  console.log("📁 No index file found - run 'deno task generate:orama' first");
+  console.log("No index file found - run 'deno task generate:orama' first");
 }
 
-console.log("\n🚀 Ready to index your documentation!");
+console.log("\nReady to index your documentation!");
