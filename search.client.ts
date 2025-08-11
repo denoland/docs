@@ -345,7 +345,7 @@ class OramaSearch {
         )
       }
           </div>
-          <div class="text-sm text-foreground-secondary leading-relaxed mb-2 line-clamp-3">
+          <div class="pl-3 border-l border-foreground-quaternary text-sm text-foreground-secondary text-sm leading-relaxed mb-2 line-clamp-3">
             ${
         this.highlightMatch(
           this.escapeHtml(hit.document.content.slice(0, 200)) + "...",
