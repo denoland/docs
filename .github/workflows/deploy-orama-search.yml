@@ -21,7 +21,7 @@ on:
       force_deploy:
         description: 'Force deploy even without content changes'
         required: false
-        default: 'false'
+        default: false
         type: boolean
 
 jobs:
