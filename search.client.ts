@@ -76,6 +76,23 @@ class OramaSearch {
     this.searchInput.addEventListener("input", this.handleInput.bind(this));
     this.searchInput.addEventListener("focus", this.handleFocus.bind(this));
     this.searchInput.addEventListener("keydown", this.handleKeyDown.bind(this));
+    document.addEventListener("keydown", (event) => {
+      console.log(event);
+      if ((event.metaKey || event.ctrlKey) && event.key === "k") {
+        event.preventDefault();
+        this.searchInput?.focus();
+      }
+    });
+
+    const searchKey = document.getElementById("search-key");
+    // Switch the text in search key if a non-Mac device is detected
+    if (searchKey) {
+      if (navigator.userAgent.indexOf("Mac OS X") != -1) {
+        searchKey.textContent = "Ctrl+K";
+      } else {
+        searchKey.textContent = "⌘K";
+      }
+    }
 
     // Close search results when clicking outside
     document.addEventListener("mousedown", this.handleClickOutside.bind(this));
@@ -320,7 +337,7 @@ class OramaSearch {
           href="${this.escapeHtml(this.formatUrl(hit.document.url, hit))}"
           class="flex flex-col px-4 py-3 hover:bg-background-secondary transition-colors duration-150 border-b border-foreground-quaternary last:border-b-0 search-result-link group"
         >
-          <div class="font-medium text-foreground-primary text-sm mb-2 group-hover:text-blue-600 transition-colors">
+          <div class="font-medium text-foreground-primary text-sm mb-2 group-hover:text-primary transition-colors">
             ${
         this.highlightMatch(
           this.escapeHtml(this.cleanTitle(hit.document.title)),
@@ -336,7 +353,7 @@ class OramaSearch {
         )
       }
           </div>
-          <div class="flex items-center text-xs text-foreground-tertiary">
+          <div class="flex items-center text-xs text-gray-500 dark:color-gray-600">
             <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
             </svg>
@@ -443,7 +460,7 @@ class OramaSearch {
     );
     return text.replace(
       regex,
-      '<mark class="bg-yellow-200 dark:bg-yellow-800 px-1 py-0.5 rounded text-yellow-900 dark:text-yellow-100 font-medium">$1</mark>',
+      '<mark class="bg-runtime px-1 py-0.5 rounded text-black font-bold">$1</mark>',
     );
   }
 
