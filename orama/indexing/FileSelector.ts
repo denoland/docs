@@ -52,6 +52,7 @@ export class FileSelector {
                     docType: relativePath.endsWith(".md") || relativePath.endsWith(".mdx") ? "markdown" : "api-reference",
                 };
 
+                console.log("Selected file:", reference.path, reference.docType);
                 yield reference;
             }
         }

@@ -8,41 +8,35 @@ import { IndexCollection } from "./indexing/IndexCollection.ts"
 import { OramaJsonOutput } from "./indexing/OramaJsonOutput.ts";
 import { MinimalIndexJsonOutput } from "./indexing/MinimalIndexJsonOutput.ts"
 
-async function main(outputDir?: string) {
-    const inputs = [
-        new FileSelector()
-    ];
+const args = Deno.args;
+const outputDir = args.length > 0 ? args[0] : undefined;
 
-    const indexers = [
-        new MarkdownIndexer(),
-        new NullIndexer()
-    ];
+const inputs = [
+    new FileSelector()
+];
 
-    const outputs = [
-        new OramaJsonOutput(outputDir),
-        new MinimalIndexJsonOutput(outputDir)
-    ];
+const indexers = [
+    new MarkdownIndexer(),
+    new NullIndexer()
+];
 
-    const index = new IndexCollection();
+const outputs = [
+    new OramaJsonOutput(outputDir),
+    new MinimalIndexJsonOutput(outputDir)
+];
 
-    for (const input of inputs) {
-        for await (const file of input.selectInputFiles("./")) {
-            console.log("Matched Entry", file.path, file.docType);
-            const indexer = indexers.find((i) => i.isValidIndexer(file));
-            const document = await indexer?.tryIndex(file);
-            index.addDocument(document);
-        }
-    }
+const index = new IndexCollection();
 
-    console.log(index.stats);
-
-    for (const output of outputs) {
-        await output.write(index);
+for (const input of inputs) {
+    for await (const file of input.selectInputFiles("./")) {
+        const indexer = indexers.find((i) => i.isValidIndexer(file));
+        const document = await indexer?.tryIndex(file);
+        index.addDocument(document);
     }
 }
 
-if (import.meta.main) {
-  const args = Deno.args;
-  const outputDir = args.length > 0 ? args[0] : undefined;
-  await main(outputDir);
+console.log(index.stats);
+
+for (const output of outputs) {
+    await output.write(index);
 }
