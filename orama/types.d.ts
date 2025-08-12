@@ -30,3 +30,7 @@ interface InputFileReference {
     path: string;
     docType: DocType;
 }
+
+interface IOutputFormat {
+    write(index: IndexCollection): Promise<void>;
+}

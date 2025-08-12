@@ -1,5 +1,5 @@
 export class IndexCollection {
-    private documents: OramaDocument[] = [];
+    public documents: OramaDocument[] = [];
 
     public addDocument(doc: OramaDocument) {
         if (!doc) {
@@ -7,10 +7,6 @@ export class IndexCollection {
         }
         
         this.documents.push(doc);
-    }
-
-    public getDocuments(): OramaDocument[] {
-        return this.documents;
     }
     
     public get stats(): IndexStats {

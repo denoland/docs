@@ -1,26 +1,48 @@
+import type { OramaDocument, DocType, IIndexDocuments, InputFileReference } from "./types";
 import { walk } from "@std/fs";
 import { fromFileUrl, join, relative } from "@std/path";
-import type { OramaDocument, DocType, IIndexDocuments, InputFileReference } from "./types";
 import { FileSelector } from "./indexing/FileSelector.ts";
 import { MarkdownIndexer } from "./indexing/MarkdownIndexer.ts";
 import { NullIndexer } from "./indexing/NullIndexer.ts";
 import { IndexCollection } from "./indexing/IndexCollection.ts"
+import { OramaJsonOutput } from "./indexing/OramaJsonOutput.ts";
 
-const indexers = [
-    new MarkdownIndexer(),
-    new NullIndexer()
-];
+async function main(outputDir?: string) {
+    const scanner = new FileSelector();
 
-const scanner = new FileSelector();
-const index = new IndexCollection();
+    const inputs = [
+        new FileSelector()
+    ];
 
-for await (const file of scanner.selectInputFiles("./")) {
-    console.log("Matched Entry", file.path, file.docType);
+    const indexers = [
+        new MarkdownIndexer(),
+        new NullIndexer()
+    ];
 
-    const indexer = indexers.find((i) => i.isValidIndexer(file));
-    const document = await indexer?.tryIndex(file);
+    const outputs = [
+        new OramaJsonOutput(outputDir)
+    ]
 
-    index.addDocument(document);
+    const index = new IndexCollection();
+
+    for (const input of inputs) {
+        for await (const file of input.selectInputFiles("./")) {
+            console.log("Matched Entry", file.path, file.docType);
+            const indexer = indexers.find((i) => i.isValidIndexer(file));
+            const document = await indexer?.tryIndex(file);
+            index.addDocument(document);
+        }
+    }
+
+    console.log(index.stats);
+
+    for (const output of outputs) {
+        await output.write(index);
+    }
 }
 
-console.log(index.stats);
+if (import.meta.main) {
+  const args = Deno.args;
+  const outputDir = args.length > 0 ? args[0] : undefined;
+  await main(outputDir);
+}
