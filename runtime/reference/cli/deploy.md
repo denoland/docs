@@ -8,7 +8,7 @@ description: "Manage and publish your projects on the web"
 
 The `deno deploy` command provides a command line interface for managing and
 deploying applications to [Deno Deploy EA](https://deno.com/deploy), Deno's
-platform for hosting for JavaScript, TypeScript, and WebAssembly applications.
+platform for hosting JavaScript, TypeScript, and WebAssembly applications.
 
 When called without any subcommands, `deno deploy` will deploy your local
 directory to the specified application.
@@ -99,7 +99,7 @@ deno deploy env update-value API_KEY "new-api-key-value"
 #### Specifying environment variable contexts
 
 Environment variables can be made available to specific contexts such as
-Production, Preview, Local and Build context
+Production, Preview, Local, and Build.
 
 ```bash
 deno deploy env update-contexts <variable> [contexts...]
@@ -153,13 +153,14 @@ deno deploy logs --org my-org --app my-app --start "2024-01-01T00:00:00Z"
 
 ### Configure cloud connections
 
-`deploy` includes tools to assist you in configuring integrations to use as
-[Cloud Connections](/deploy/early-access/reference/cloud-connections/)
+The `deploy` command includes tools to help you configure integrations for use
+as [Cloud Connections](/deploy/early-access/reference/cloud-connections/) in
+your applications.
 
 #### AWS integration setup
 
 [Configure AWS integration](/deploy/early-access/reference/cloud-connections/#aws%3A-easy-setup-with-deno-deploy-setup-aws)
-to be used as a Cloud Connection in your application.
+for use as a Cloud Connection in your application.
 
 ```bash
 deno deploy setup-aws --org <name> --app <name>
@@ -178,7 +179,7 @@ deno deploy setup-aws --org my-org --app my-app
 ### Google Cloud Platform integration setup
 
 [Configure Google Cloud Platform integration](/deploy/early-access/reference/cloud-connections/#setting-up-gcp)
-to be used as a Cloud Connection in your application.
+for use as a Cloud Connection in your application.
 
 ```bash
 deno deploy setup-gcp --org <name> --app <name>
