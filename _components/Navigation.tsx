@@ -15,7 +15,7 @@ export default function (
   return (
     <>
       <aside
-        className={`fixed transition-all duration-200 md:duration-0 easing-[cubic-bezier(0.165,0.84,0.44,1)] -translate-x-full z-50 w-full bg-background-raw opacity-0 p-4 pb-8 overflow-auto text-[0.8125rem] md:sticky md:overflow-y-auto md:[scrollbar-width:thin] md:z-10 md:!translate-x-0 md:!opacity-100 md:p-0 md:pb-16 sidebar-open:translate-x-0 sidebar-open:opacity-100
+        className={`fixed transition-all duration-200 md:duration-0 easing-[cubic-bezier(0.165,0.84,0.44,1)] -translate-x-full z-50 w-full bg-background-raw opacity-0 p-4 pb-8 overflow-auto text-smaller md:sticky md:overflow-y-auto md:[scrollbar-width:thin] md:z-10 md:!translate-x-0 md:!opacity-100 md:p-0 md:pb-16 lg:border-r lg:border-r-foreground-tertiary lg:w-full sidebar-open:translate-x-0 sidebar-open:opacity-100
          ${
           hasSubNav
             ? "top-header-plus-subnav h-screen-minus-both"
@@ -24,6 +24,7 @@ export default function (
         data-component="sidebar-nav"
         data-section={currentSection}
         id="nav"
+        style="scrollbar-width: none;"
         tabIndex={-1}
       >
         <data.comp.SidebarNav

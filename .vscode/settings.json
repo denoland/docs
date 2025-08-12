@@ -15,5 +15,6 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
-  }
+  },
+  "css.customData": [".vscode/tailwind.json"]
 }

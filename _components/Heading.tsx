@@ -1,24 +1,16 @@
 export default function Heading(
   props: { children: Element; type: string; level: 1 | 2 | 3 | 4 | 5 | 6 },
 ) {
-  let headingTypeClass = "";
-  if (props.type === "purple") {
-    headingTypeClass = "decoration-purple-500";
-  } else if (props.type === "deploy") {
-    headingTypeClass = "decoration-deploy-500";
-  } else if (props.type === "runtime") {
-    headingTypeClass = "decoration-runtime-500";
-  }
   if (props.level == 1) {
     return (
-      <h1 className={headingTypeClass}>
+      <h1 className="text-4xl md:text-5xl font-semibold mb-4 leading-none">
         {props.children}
       </h1>
     );
   } else if (props.level == 2) {
     return (
       <h2
-        className={`text-3xl md:text-4xl font-semibold mt-8 mb-6 ${headingTypeClass}`}
+        className={`text-3xl md:text-4xl font-semibold mt-8 mb-4 leading-none`}
       >
         {props.children}
       </h2>
@@ -26,7 +18,7 @@ export default function Heading(
   } else if (props.level == 3) {
     return (
       <h3
-        className={`text-xl md:text-2xl font-semibold mb-4 ${headingTypeClass}`}
+        className={`text-2xl md:text-3xl font-semibold mb-4 leading-none`}
       >
         {props.children}
       </h3>
