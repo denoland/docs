@@ -6,10 +6,9 @@ import { MarkdownIndexer } from "./indexing/MarkdownIndexer.ts";
 import { NullIndexer } from "./indexing/NullIndexer.ts";
 import { IndexCollection } from "./indexing/IndexCollection.ts"
 import { OramaJsonOutput } from "./indexing/OramaJsonOutput.ts";
+import { MinimalIndexJsonOutput } from "./indexing/MinimalIndexJsonOutput.ts"
 
 async function main(outputDir?: string) {
-    const scanner = new FileSelector();
-
     const inputs = [
         new FileSelector()
     ];
@@ -20,8 +19,9 @@ async function main(outputDir?: string) {
     ];
 
     const outputs = [
-        new OramaJsonOutput(outputDir)
-    ]
+        new OramaJsonOutput(outputDir),
+        new MinimalIndexJsonOutput(outputDir)
+    ];
 
     const index = new IndexCollection();
 
