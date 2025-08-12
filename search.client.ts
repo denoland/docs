@@ -38,6 +38,7 @@ class OramaSearch {
   private searchInput: HTMLInputElement | null = null;
   private searchResults: HTMLElement | null = null;
   private searchLoading: HTMLElement | null = null;
+  private ariaLiveRegion: HTMLElement | null = null;
   private searchTimeout: number | null = null;
   private isResultsOpen = false;
   private selectedIndex = -1; // Track selected result for keyboard navigation
@@ -66,6 +67,7 @@ class OramaSearch {
       "orama-search-results-content",
     ); // Target the scrollable container
     this.searchLoading = document.getElementById("orama-search-loading");
+    this.ariaLiveRegion = document.getElementById("orama-results-announcer");
 
     if (!this.searchInput) {
       console.warn("Orama search input not found");
@@ -76,6 +78,9 @@ class OramaSearch {
     this.searchInput.addEventListener("input", this.handleInput.bind(this));
     this.searchInput.addEventListener("focus", this.handleFocus.bind(this));
     this.searchInput.addEventListener("keydown", this.handleKeyDown.bind(this));
+    this.searchResults?.addEventListener("keyup", (event) => {
+      if (event.key === "Escape") this.handleEscape();
+    });
     document.addEventListener("keydown", (event) => {
       if ((event.metaKey || event.ctrlKey) && event.key === "k") {
         event.preventDefault();
@@ -158,6 +163,15 @@ class OramaSearch {
     }
   }
 
+  handleEscape() {
+    this.hideResults();
+    if (this.searchInput) {
+      this.searchInput.value = ""; // Clears input when escape is triggered from within the list rather than on the input
+      this.searchInput.focus();
+    }
+    this.selectedIndex = -1;
+  }
+
   handleKeyDown(event: KeyboardEvent) {
     if (!this.isResultsOpen) {
       return;
@@ -170,9 +184,7 @@ class OramaSearch {
 
     switch (event.key) {
       case "Escape":
-        this.hideResults();
-        this.searchInput?.blur();
-        this.selectedIndex = -1;
+        this.handleEscape();
         break;
 
       case "ArrowDown":
@@ -331,45 +343,47 @@ class OramaSearch {
     const resultsHtml = `
       <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
         <div class="flex items-center justify-between">
-          <h3 class="text-sm font-semibold text-foreground-primary">Search Results</h3>
+          <h2 class="text-sm font-semibold text-foreground-primary" id="search-results__heading">Search Results</h2>
           <span class="text-xs text-foreground-secondary">${validResults.length} result${
       validResults.length !== 1 ? "s" : ""
     }</span>
         </div>
       </div>
-      <div>
+      <ul aria-labelledby="search-results__heading">
         ${
       validResults.map((hit) => `
-        <a
-          href="${this.escapeHtml(this.formatUrl(hit.document.url, hit))}"
-          class="flex flex-col px-4 py-3 hover:bg-foreground-quaternary transition-colors duration-150 border-b border-foreground-quaternary last:border-b-0 search-result-link group"
-        >
-          <div class="font-bold text-foreground-primary text-sm mb-2 group-hover:text-primary transition-colors">
-            ${
+        <li>
+          <a
+            href="${this.escapeHtml(this.formatUrl(hit.document.url, hit))}"
+            class="flex flex-col px-4 py-3 hover:bg-foreground-quaternary transition-colors duration-150 border-b border-foreground-quaternary last:border-b-0 search-result-link group"
+          >
+            <div class="font-bold text-foreground-primary text-sm mb-2 group-hover:text-primary transition-colors">
+              ${
         this.highlightMatch(
           this.escapeHtml(this.cleanTitle(hit.document.title)),
           searchTerm,
         )
       }
-          </div>
-          <div class="pl-3 border-l border-foreground-quaternary text-sm text-foreground-secondary text-sm leading-relaxed mb-2 line-clamp-3">
-            ${
+            </div>
+            <div class="pl-3 border-l border-foreground-quaternary text-sm text-foreground-secondary text-sm leading-relaxed mb-2 line-clamp-3">
+              ${
         this.highlightMatch(
           this.escapeHtml(hit.document.content.slice(0, 200)) + "...",
           searchTerm,
         )
       }
-          </div>
-          <div class="flex items-center text-xs text-gray-500 dark:color-gray-600">
-            <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
-            </svg>
-            ${this.escapeHtml(this.formatUrl(hit.document.url, hit))}
-          </div>
-        </a>
+            </div>
+            <div class="flex items-center text-xs text-gray-500 dark:color-gray-600">
+              <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+              </svg>
+              ${this.escapeHtml(this.formatUrl(hit.document.url, hit))}
+            </div>
+          </a>
+        </li>
       `).join("")
     }
-      </div>
+      </ul>
     `;
 
     this.searchResults.innerHTML = resultsHtml;
@@ -377,16 +391,10 @@ class OramaSearch {
     // Reset selection for new results
     this.selectedIndex = -1;
 
-    // Add simple click handler to hide results on navigation
-    const searchLinks = this.searchResults.querySelectorAll(
-      ".search-result-link",
-    );
-    searchLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        // Small delay to allow navigation to start
-        setTimeout(() => this.hideResults(), 150);
-      });
-    });
+    if (this.ariaLiveRegion) {
+      this.ariaLiveRegion.textContent =
+        `${validResults.length} results found for "${searchTerm}"`;
+    }
   }
 
   showNotConfiguredMessage() {
@@ -481,7 +489,6 @@ class OramaSearch {
   formatUrl(url: string | undefined, hit?: SearchResult): string {
     // First try to use the path field if available
     if (hit && hit.document && hit.document.path) {
-      console.log("Using path field:", hit.document.path);
       // Clean up the path by removing "jump to heading" text
       const cleanPath = this.cleanUrl(hit.document.path);
       return this.formatUrl(cleanPath);

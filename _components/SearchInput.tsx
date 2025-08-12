@@ -23,6 +23,13 @@ export default function SearchInput() {
         >
           <div className="animate-spin rounded-full h-4 w-4 border-2 border-transparent border-r-foreground-primary bg-background-raw" />
         </div>
+        <div
+          className="sr-only"
+          aria-live="polite"
+          id="orama-results-announcer"
+        >
+          {/* Text updated by JavaScript. */}
+        </div>
       </div>
 
       {/* Enhanced Popover for Search Results */}
