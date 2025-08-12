@@ -1,12 +1,10 @@
 ---
-title: "`deno deploy`"
+title: "deno deploy"
 command: deploy
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno deploy"
 description: "Manage and publish your projects on the web"
 ---
-
-## Overview
 
 The `deno deploy` command provides a command line interface for managing and
 deploying applications to [Deno Deploy EA](https://deno.com/deploy), Deno's
@@ -26,7 +24,7 @@ system's keyring:
 - **Token Management**: The CLI provides operations to get, set, and delete
   authentication tokens.
 
-## Global Options
+## Global options
 
 - `-h, --help` - Show help information
 - `--org <name>` - Specify the organization name
@@ -35,7 +33,7 @@ system's keyring:
 
 ## Subcommands
 
-### Create Application
+### Create application
 
 Creates a new application in Deno Deploy.
 
@@ -52,9 +50,9 @@ deno deploy create [root-path]
 deno deploy create --org my-organization
 ```
 
-### Environment Variables Management
+### Environment variables management
 
-Manage environmental variables for your deployed applications.
+Manage environment variables for your deployed applications.
 
 ```bash
 deno deploy env
@@ -66,74 +64,74 @@ deno deploy env
 - `--org <name>` - The name of the organization
 - `--app <name>` - The name of the application
 
-#### List Environment Variables
+#### List environment variables
 
 ```bash
 deno deploy env list
 ```
 
-Lists all environmental variables in an application.
+Lists all environment variables in an application.
 
-#### Add Environment Variable
+#### Add environment variable
 
 ```bash
 deno deploy env add <variable> <value>
 ```
 
-Adds an environmental variable to the application.
+Adds an environment variable to the application.
 
 ```bash
 deno deploy env add DATABASE_URL "postgresql://user:pass@localhost/db"
 ```
 
-#### Update Environment Variable Value
+#### Update environment variable value
 
 ```bash
 deno deploy env update-value <variable> <value>
 ```
 
-Updates the value of an existing environmental variable.
+Updates the value of an existing environment variable.
 
 ```bash
 deno deploy env update-value API_KEY "new-api-key-value"
 ```
 
-#### Specifying Environment Variable Contexts
+#### Specifying environment variable contexts
 
-Environmnent variables can be made avialable to specific contexts such as
+Environment variables can be made available to specific contexts such as
 Production, Preview, Local and Build context
 
 ```bash
 deno deploy env update-contexts <variable> [contexts...]
 ```
 
-Updates the contexts of an environmental variable in the application:
+Updates the contexts of an environment variable in the application:
 
-#### Delete Environment Variable
+#### Delete environment variable
 
 ```bash
 deno deploy env delete <variable>
 ```
 
-Deletes an environmental variable from the application.
+Deletes an environment variable from the application.
 
 ```bash
 deno deploy env delete OLD_API_KEY
 ```
 
-#### Load Environment Variables from File
+#### Load environment variables from file
 
 ```bash
 deno deploy env load <file>
 ```
 
-Loads environmental variables from a `.env` file into the application.
+Loads environment variables from a `.env` file into the application.
 
 ```bash
 deno deploy env load .env.production
 ```
 
-### Application Logs
+### Application logs
 
 Stream logs from a deployed application.
 
@@ -153,15 +151,15 @@ deno deploy logs
 deno deploy logs --org my-org --app my-app --start "2024-01-01T00:00:00Z"
 ```
 
-### Configure Cloud Connections
+### Configure cloud connections
 
-`deploy` includes tools to assit you in configuring integrations to use as
-[Cloud Conections](/deploy/early-access/reference/cloud-connections/)
+`deploy` includes tools to assist you in configuring integrations to use as
+[Cloud Connections](/deploy/early-access/reference/cloud-connections/)
 
-#### AWS Integration Setup
+#### AWS integration setup
 
 [Configure AWS integration](/deploy/early-access/reference/cloud-connections/#aws%3A-easy-setup-with-deno-deploy-setup-aws)
-to use be used as a Cloud Connection in your application.
+to be used as a Cloud Connection in your application.
 
 ```bash
 deno deploy setup-aws --org <name> --app <name>
@@ -177,10 +175,10 @@ deno deploy setup-aws --org <name> --app <name>
 deno deploy setup-aws --org my-org --app my-app
 ```
 
-### Google Cloud Platform Integration Setup
+### Google Cloud Platform integration setup
 
 [Configure Google Cloud Platform integration](/deploy/early-access/reference/cloud-connections/#setting-up-gcp)
-to use be used as a Cloud Connection in your application.
+to be used as a Cloud Connection in your application.
 
 ```bash
 deno deploy setup-gcp --org <name> --app <name>
@@ -196,9 +194,9 @@ deno deploy setup-gcp --org <name> --app <name>
 deno deploy setup-gcp --org my-org --app my-app
 ```
 
-## Usage Examples
+## Usage examples
 
-### Basic Deployment
+### Basic deployment
 
 ```bash
 # Deploy current directory to production
@@ -208,7 +206,7 @@ deno deploy --prod
 deno deploy --org my-company --app my-api --prod
 ```
 
-### Environment Setup
+### Environment setup
 
 ```bash
 # Create a new application
@@ -234,7 +232,7 @@ deno deploy logs --org my-company --app my-api \
   --end "2024-01-01T23:59:59Z"
 ```
 
-### Cloud Integration
+### Cloud integration
 
 ```bash
 # Set up AWS integration
@@ -244,7 +242,7 @@ deno deploy setup-aws --org my-company --app my-api
 deno deploy setup-gcp --org my-company --app my-api
 ```
 
-## Getting Help
+## Getting help
 
 - Use `deno deploy --help` for general help
 - Use `deno deploy <subcommand> --help` for specific subcommand help
