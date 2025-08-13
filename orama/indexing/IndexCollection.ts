@@ -9,14 +9,11 @@ export class IndexCollection {
         this.documents.push(doc);
     }
     
-    public get stats(): IndexStats {
-        const documents = this.documents;
+  public get stats(): IndexStats {
+      const documents = this.documents;
       const stats: IndexStats = {
         totalDocuments: documents.length,
-        totalCharacters: documents.reduce(
-          (sum, doc) => sum + doc.content.length,
-          0,
-        ),
+        totalCharacters: documents.reduce((sum, doc) => sum + doc.content.length, 0),
         averageDocumentLength: 0,
         categoryCounts: {} as Record<string, number>,
         sectionCounts: {} as Record<string, number>,
@@ -33,11 +30,9 @@ export class IndexCollection {
     
       // Count by category
       documents.forEach((doc) => {
-        stats.categoryCounts[doc.category] =
-          (stats.categoryCounts[doc.category] || 0) + 1;
+        stats.categoryCounts[doc.category] = (stats.categoryCounts[doc.category] || 0) + 1;
         const sectionKey = `${doc.category}/${doc.section}`;
-        stats.sectionCounts[sectionKey] = (stats.sectionCounts[sectionKey] || 0) +
-          1;
+        stats.sectionCounts[sectionKey] = (stats.sectionCounts[sectionKey] || 0) + 1;
       });
     
       // Find longest and shortest documents
@@ -48,9 +43,8 @@ export class IndexCollection {
         if (doc.content.length < shortest.content.length) shortest = doc;
       });
       stats.longestDocument = `${longest.title} (${longest.content.length} chars)`;
-      stats.shortestDocument =
-        `${shortest.title} (${shortest.content.length} chars)`;
-    
+      stats.shortestDocument = `${shortest.title} (${shortest.content.length} chars)`;
+
       return stats;
     }
 }

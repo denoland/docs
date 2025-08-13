@@ -47,3 +47,9 @@ console.log(index.stats);
 for (const output of outputs) {
     await output.write(index);
 }
+
+console.log("\nNext steps:");
+console.log("1. Upload the orama-index.json file to your Orama Cloud index");
+console.log("2. Or use the Orama REST API to bulk insert the documents");
+console.log("3. Configure your search client with the proper endpoint and API key");
+console.log("\nDone!");

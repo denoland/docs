@@ -60,11 +60,11 @@
     },
     "generate:orama": {
       "description": "Generate Orama search index JSON file for uploading to Orama Cloud",
-      "command": "deno run -A orama/generate_orama_index.ts"
+      "command": "deno run -A orama/generate.ts"
     },
     "generate:orama:site": {
       "description": "Generate Orama search index directly in the _site directory",
-      "command": "deno run -A orama/generate_orama_index.ts _site"
+      "command": "deno run -A orama/generate.ts _site"
     },
     "generate:orama:full": {
       "description": "Generate comprehensive Orama index including API reference documentation",
