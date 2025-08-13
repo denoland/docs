@@ -831,6 +831,22 @@ console.log(`🎭 LLM Chat server starting on http://localhost:${port}`);
 Deno.serve({ port }, handler);
 ```
 
+## Add a frontend
+
+The frontend of our app will live in the `static` directory. Create an `index.html`, `app.js` and a `style.css` file in the `static` directory.
+
+### `index.html`
+
+We'll create a very basic layout with a textarea to collect the user's scenario input and a section to show the response messages with a text input to send messages. Copy the content from [this html file](https://github.com/denoland/tutorial-with-llm/blob/main/static/index.html) into your `index.html`.
+
+### `app.js`
+
+In `app.js`, we'll add the JavaScript to handle user input and display responses. Copy the content from [this js file](https://github.com/denoland/tutorial-with-llm/blob/main/static/app.js) into your `app.js`.
+
+### `style.css`
+
+We'll add some basic styles to make our app look nicer. Copy the content from [this css file](https://github.com/denoland/tutorial-with-llm/blob/main/static/style.css) into your `style.css`.
+
 ## Run your application
 
 Start your development server:
