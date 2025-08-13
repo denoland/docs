@@ -454,7 +454,7 @@ class OramaSearch {
     );
     return text.replace(
       regex,
-      '<mark class="bg-runtime px-1 py-0.5 rounded text-black font-bold">$1</mark>',
+      '<mark class="bg-runtime px-[1px] py-0.5 rounded text-black font-bold">$1</mark>',
     );
   }
 
