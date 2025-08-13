@@ -28,9 +28,16 @@ const outputs = [
 const index = new IndexCollection();
 
 for (const input of inputs) {
+    const filePromises = [];
+    
     for await (const file of input.selectInputFiles("./")) {
         const indexer = indexers.find((i) => i.isValidIndexer(file));
-        const document = await indexer?.tryIndex(file);
+        filePromises.push(indexer.tryIndex(file));
+    }
+
+    const documents = await Promise.all(filePromises);
+
+    for (const document of documents) {
         index.addDocument(document);
     }
 }
