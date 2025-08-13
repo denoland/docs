@@ -11,7 +11,6 @@ export class FileSelector {
         "lint",
     ];
 
-    // Files to exclude (relative paths)
     private EXCLUDE_FILES = [
         "README.md",
         "deno.json",
@@ -20,7 +19,12 @@ export class FileSelector {
         "server.ts",
     ];
 
-    // Extensions to include
+    private REFERENCE_FILES = [
+        { path: "reference_gen/gen/deno.json", apiType: "deno", baseUrl: "/api/deno" },
+        { path: "reference_gen/gen/web.json", apiType: "web", baseUrl: "/api/web" },
+        { path: "reference_gen/gen/node.json", apiType: "node", baseUrl: "/api/node" },
+    ];
+
     private INCLUDE_EXTS = [".md", ".mdx"];
 
     public async *selectInputFiles(indexPath: string) {
@@ -54,6 +58,21 @@ export class FileSelector {
 
                 console.log("Selected file:", reference.path, reference.docType);
                 yield reference;
+            }
+        }
+
+        for (const refFile of this.REFERENCE_FILES) {
+            const fullPath = join(Deno.cwd(), refFile.path);
+            try {
+                await Deno.stat(fullPath);
+                const reference: InputFileReference = {
+                    path: refFile.path,
+                    fullPath,
+                    docType: "api-reference",
+                };
+                yield reference;
+            } catch {
+                console.warn("Reference file not found:", fullPath);
             }
         }
     }

@@ -1,12 +1,12 @@
 import type { OramaDocument, DocType, IIndexDocuments, InputFileReference } from "./types";
 import { walk } from "@std/fs";
 import { fromFileUrl, join, relative } from "@std/path";
-import { FileSelector } from "./indexing/FileSelector.ts";
+import { FileSelector } from "./identification/FileSelector.ts";
 import { MarkdownIndexer } from "./indexing/MarkdownIndexer.ts";
 import { NullIndexer } from "./indexing/NullIndexer.ts";
 import { IndexCollection } from "./indexing/IndexCollection.ts"
-import { OramaJsonOutput } from "./indexing/OramaJsonOutput.ts";
-import { MinimalIndexJsonOutput } from "./indexing/MinimalIndexJsonOutput.ts"
+import { OramaJsonOutput } from "./outputs/OramaJsonOutput.ts";
+import { MinimalIndexJsonOutput } from "./outputs/MinimalIndexJsonOutput.ts"
 
 const args = Deno.args;
 const outputDir = args.length > 0 ? args[0] : undefined;
