@@ -2,7 +2,7 @@ import { walk } from "@std/fs";
 import { join, relative } from "@std/path";
 import type { InputFileReference } from "../types.ts";
 
-export class FileSelector {        
+export class FileSelector {
     private INCLUDE_DIRS = [
         "runtime",
         "deploy",
@@ -20,9 +20,21 @@ export class FileSelector {
     ];
 
     private REFERENCE_FILES = [
-        { path: "reference_gen/gen/deno.json", apiType: "deno", baseUrl: "/api/deno" },
-        { path: "reference_gen/gen/web.json", apiType: "web", baseUrl: "/api/web" },
-        { path: "reference_gen/gen/node.json", apiType: "node", baseUrl: "/api/node" },
+        {
+            path: "reference_gen/gen/deno.json",
+            apiType: "deno",
+            baseUrl: "/api/deno",
+        },
+        {
+            path: "reference_gen/gen/web.json",
+            apiType: "web",
+            baseUrl: "/api/web",
+        },
+        {
+            path: "reference_gen/gen/node.json",
+            apiType: "node",
+            baseUrl: "/api/node",
+        },
     ];
 
     private INCLUDE_EXTS = [".md", ".mdx"];
@@ -37,10 +49,14 @@ export class FileSelector {
 
         for (const dir of this.INCLUDE_DIRS) {
             const dirPath = join(indexPath, dir);
-        
+
             for await (const entry of walk(dirPath, scanOpts)) {
                 const relativePath = relative(indexPath, entry.path);
-                if (this.EXCLUDE_FILES.some((exclude) => relativePath.includes(exclude))) {
+                if (
+                    this.EXCLUDE_FILES.some((exclude) =>
+                        relativePath.includes(exclude)
+                    )
+                ) {
                     continue;
                 }
 
@@ -53,10 +69,18 @@ export class FileSelector {
                 const reference: InputFileReference = {
                     path: relativePath,
                     fullPath: absolutePath,
-                    docType: relativePath.endsWith(".md") || relativePath.endsWith(".mdx") ? "markdown" : "api-reference",
+                    docType:
+                        relativePath.endsWith(".md") ||
+                            relativePath.endsWith(".mdx")
+                            ? "markdown"
+                            : "api-reference",
                 };
 
-                console.log("Selected file:", reference.path, reference.docType);
+                console.log(
+                    "Selected file:",
+                    reference.path,
+                    reference.docType,
+                );
                 yield reference;
             }
         }

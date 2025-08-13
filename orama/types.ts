@@ -1,4 +1,4 @@
-import { IndexCollection } from "./indexing/IndexCollection";
+import { IndexCollection } from "./indexing/IndexCollection.ts";
 
 export type DocType = "markdown" | "api-reference";
 
@@ -22,18 +22,18 @@ export interface OramaDocument {
 }
 
 export interface IIndexDocuments {
-    isValidIndexer(file: InputFileReference): boolean;
-    tryIndex(file: InputFileReference): Promise<OramaDocument | null>;
+  isValidIndexer(file: InputFileReference): boolean;
+  tryIndex(file: InputFileReference): Promise<OramaDocument | null>;
 }
 
 export interface InputFileReference {
-    path: string;
-    fullPath: string;
-    docType: DocType;
+  path: string;
+  fullPath: string;
+  docType: DocType;
 }
 
 export interface IOutputFormat {
-    write(index: IndexCollection): Promise<void>;
+  write(index: IndexCollection): Promise<void>;
 }
 
 export interface IndexStats {

@@ -1,12 +1,16 @@
-import { IIndexDocuments, InputFileReference, OramaDocument } from "../types.ts";
+import {
+    IIndexDocuments,
+    InputFileReference,
+    OramaDocument,
+} from "../types.ts";
 
 export class NullIndexer implements IIndexDocuments {
-    public isValidIndexer(file: InputFileReference): boolean {
+    public isValidIndexer(_file: InputFileReference): boolean {
         return true;
     }
 
-    public async tryIndex(file: InputFileReference): Promise<OramaDocument | null> {        
+    public tryIndex(file: InputFileReference): Promise<OramaDocument | null> {
         console.log("No valid indexer found for file:", file.fullPath);
-        return null;
+        return Promise.resolve(null);
     }
 }

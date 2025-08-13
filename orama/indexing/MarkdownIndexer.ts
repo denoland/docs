@@ -1,4 +1,8 @@
-import type { OramaDocument, IIndexDocuments, InputFileReference } from "../types.ts";
+import type {
+    IIndexDocuments,
+    InputFileReference,
+    OramaDocument,
+} from "../types.ts";
 
 const H1_REGEX = /^# (.+)$/m;
 const FRONTMATTER_TITLE_REGEX = /title: ["'](.+)["']/;
@@ -10,8 +14,9 @@ export class MarkdownIndexer implements IIndexDocuments {
         return file.docType === "markdown";
     }
 
-    public async tryIndex(file: InputFileReference): Promise<OramaDocument | null> {
-
+    public async tryIndex(
+        file: InputFileReference,
+    ): Promise<OramaDocument | null> {
         try {
             const document = await this.index(file);
             console.log("Indexed document:", document?.title);
@@ -22,14 +27,16 @@ export class MarkdownIndexer implements IIndexDocuments {
         }
     }
 
-    public async index(file: InputFileReference): Promise<OramaDocument | null> {
+    public async index(
+        file: InputFileReference,
+    ): Promise<OramaDocument | null> {
         const content = await Deno.readTextFile(file.fullPath);
         const stat = await Deno.stat(file.fullPath);
 
         // Split frontmatter from content
         let markdownContent = content;
         const frontmatterMatch = content.match(
-        /^---\n([\s\S]*?)\n---\n([\s\S]*)$/,
+            /^---\n([\s\S]*?)\n---\n([\s\S]*)$/,
         );
 
         let frontmatter = "";
@@ -50,11 +57,11 @@ export class MarkdownIndexer implements IIndexDocuments {
             } else {
                 // Generate title from file path as fallback
                 const pathParts = file.path.replace(/\.(md|mdx)$/, "").split(
-                "/",
+                    "/",
                 );
                 title = pathParts[pathParts.length - 1]
-                .replace(/[-_]/g, " ")
-                .replace(/\b\w/g, (l) => l.toUpperCase());
+                    .replace(/[-_]/g, " ")
+                    .replace(/\b\w/g, (l) => l.toUpperCase());
             }
         }
 
@@ -76,7 +83,9 @@ export class MarkdownIndexer implements IIndexDocuments {
         }
 
         // Get category and section
-        const { category, section, subsection } = this.getCategoryAndSection(file.path);
+        const { category, section, subsection } = this.getCategoryAndSection(
+            file.path,
+        );
 
         return {
             id: this.generateId(file.path),
@@ -134,14 +143,16 @@ export class MarkdownIndexer implements IIndexDocuments {
         const match = frontmatter.match(TAGS_REGEX);
         if (match) {
             return match[1]
-            .split(",")
-            .map((tag) => tag.trim().replace(/["']/g, ""))
-            .filter((tag) => tag.length > 0);
+                .split(",")
+                .map((tag) => tag.trim().replace(/["']/g, ""))
+                .filter((tag) => tag.length > 0);
         }
         return [];
     }
 
-    private getCategoryAndSection(relativePath: string): { category: string; section: string; subsection: string | null } {
+    private getCategoryAndSection(
+        relativePath: string,
+    ): { category: string; section: string; subsection: string | null } {
         const parts = relativePath.split("/");
         const category = parts[0] || "general";
         const section = parts[1] || "general";
@@ -170,5 +181,5 @@ export class MarkdownIndexer implements IIndexDocuments {
         const BASE_URL = "https://docs.deno.com"; // Replace with your actual base URL
 
         return `${BASE_URL}${url}`;
-    }    
+    }
 }
