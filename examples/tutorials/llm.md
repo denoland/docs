@@ -21,6 +21,9 @@ customize and modify as you learn!
 
 [![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/tutorial-with-llm&mode=dynamic&entrypoint=main.ts&install=deno+install)
 
+Once you have deployed, add your `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` in the
+project "Settings".
+
 :::
 
 ## Initialize a new project
@@ -90,7 +93,7 @@ Add the required dependencies to your `deno.json`:
 ## Configure environment variables
 
 Create a `.env` file for your API keys. The application supports both OpenAI and
-Anthropic:
+Anthropic. Comment out the config that you won't be using with a `#`.
 
 ```bash title=".env"
 # Choose one of the following LLM providers:
@@ -923,6 +926,9 @@ git push -u origin main
 
 Once your app is on GitHub, you can
 [deploy it to Deno Deploy<sup>EA</sup>](https://app.deno.com/).
+
+Don't forget to add your `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` environment
+variables in the project "Settings".
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
