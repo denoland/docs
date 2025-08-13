@@ -1,5 +1,6 @@
-import type { IOutputFormat } from "./types";
-import { fromFileUrl, join, relative } from "@std/path";
+import { IndexCollection } from "../indexing/IndexCollection.ts";
+import type { IOutputFormat } from "../types.ts";
+import { join } from "@std/path";
 
 const ROOT_DIR = Deno.cwd();
 const BASE_URL = "https://example.com"; // Replace with your actual base URL
@@ -22,8 +23,8 @@ export class OramaJsonOutput implements IOutputFormat {
             await Deno.stat(outDir);
         } catch (error) {
             if (error instanceof Deno.errors.NotFound) {
-            console.error(`❌ The output directory ${outDir} does not exist`);
-            Deno.exit(1);
+                console.error(`❌ The output directory ${outDir} does not exist`);
+                Deno.exit(1);
             }
             throw error;
         }

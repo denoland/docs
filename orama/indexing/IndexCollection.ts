@@ -1,7 +1,9 @@
+import { IndexStats, OramaDocument } from "../types.ts";
+
 export class IndexCollection {
     public documents: OramaDocument[] = [];
 
-    public addDocument(doc: OramaDocument) {
+    public addDocument(doc: OramaDocument | null) {
         if (!doc) {
             return;
         }
@@ -22,6 +24,8 @@ export class IndexCollection {
           documents.filter((doc) => doc.description).length,
         longestDocument: "",
         shortestDocument: "",
+        apiDocuments: 0,
+        markdownDocuments: 0,
       };
     
       stats.averageDocumentLength = Math.round(

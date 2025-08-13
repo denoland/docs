@@ -1,6 +1,6 @@
 import { walk } from "@std/fs";
-import { fromFileUrl, join, relative } from "@std/path";
-import type { OramaDocument, DocType, IIndexDocuments, InputFileReference } from "./types";
+import { join, relative } from "@std/path";
+import type { InputFileReference } from "../types.ts";
 
 export class FileSelector {        
     private INCLUDE_DIRS = [
@@ -50,7 +50,7 @@ export class FileSelector {
 
                 const absolutePath = join(Deno.cwd(), entry.path);
 
-                const reference = {
+                const reference: InputFileReference = {
                     path: relativePath,
                     fullPath: absolutePath,
                     docType: relativePath.endsWith(".md") || relativePath.endsWith(".mdx") ? "markdown" : "api-reference",

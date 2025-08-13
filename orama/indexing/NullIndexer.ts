@@ -1,3 +1,5 @@
+import { IIndexDocuments, InputFileReference, OramaDocument } from "../types.ts";
+
 export class NullIndexer implements IIndexDocuments {
     public isValidIndexer(file: InputFileReference): boolean {
         return true;

@@ -28,10 +28,10 @@ const outputs = [
 const index = new IndexCollection();
 
 for (const input of inputs) {
-    const filePromises = [];
+    const filePromises: Promise<OramaDocument | null>[] = [];
     
     for await (const file of input.selectInputFiles("./")) {
-        const indexer = indexers.find((i) => i.isValidIndexer(file));
+        const indexer = indexers.find((i) => i.isValidIndexer(file)) || new NullIndexer();
         filePromises.push(indexer.tryIndex(file));
     }
 

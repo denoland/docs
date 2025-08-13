@@ -1,10 +1,6 @@
-import { walk } from "@std/fs";
-import { fromFileUrl, join, relative } from "@std/path";
-import type { OramaDocument, DocType, IIndexDocuments, InputFileReference } from "./types";
+import type { OramaDocument, IIndexDocuments, InputFileReference } from "../types.ts";
 
 const H1_REGEX = /^# (.+)$/m;
-const _H2_REGEX = /^## (.+)$/gm;
-const _H3_REGEX = /^### (.+)$/gm;
 const FRONTMATTER_TITLE_REGEX = /title: ["'](.+)["']/;
 const DESCRIPTION_REGEX = /description: ["'](.+)["']/;
 const TAGS_REGEX = /tags: \[(.*?)\]/;
@@ -18,15 +14,15 @@ export class MarkdownIndexer implements IIndexDocuments {
 
         try {
             const document = await this.index(file);
-            console.log("Indexed document:", document.title);
+            console.log("Indexed document:", document?.title);
             return document;
         } catch (error) {
-            console.error("Error indexing file:", file.fullPath, error);
+            console.error("Error indexing file:", file.path, error);
             return null;
         }
     }
 
-    public async index(file: InputFileReference): Promise<OramaDocument> {
+    public async index(file: InputFileReference): Promise<OramaDocument | null> {
         const content = await Deno.readTextFile(file.fullPath);
         const stat = await Deno.stat(file.fullPath);
 
@@ -63,7 +59,7 @@ export class MarkdownIndexer implements IIndexDocuments {
         }
 
         // Extract description
-        let description = null;
+        let description: string | null = null;
         const descMatch = frontmatter.match(DESCRIPTION_REGEX);
         if (descMatch) {
             description = descMatch[1];
@@ -82,14 +78,11 @@ export class MarkdownIndexer implements IIndexDocuments {
         // Get category and section
         const { category, section, subsection } = this.getCategoryAndSection(file.path);
 
-        // Build URL
-        const url = this.buildUrl(file.path);
-
         return {
             id: this.generateId(file.path),
             title: title,
             content: cleanedContent,
-            url: url,
+            url: this.buildUrl(file.path),
             category: category,
             section: section,
             subsection: subsection || undefined,
