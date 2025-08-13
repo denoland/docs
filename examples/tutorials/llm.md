@@ -269,6 +269,10 @@ export class LLMProvider {
 }
 ```
 
+In this file we set an LLM provider, this allows us to easily switch between
+different LLM APIs or mock responses for testing. We also add a retry mechanism
+for handling API errors.
+
 ## Create AI Characters
 
 Characters are the heart of our roleplay application. Create
@@ -347,6 +351,10 @@ Respond as ${this.name} in character. Keep responses under 150 words and maintai
 }
 ```
 
+Here we define the `Character` class, which represents each player character in
+the game. This class will handle generating responses based on the character's
+personality and the current game context.
+
 ## Set up character configurations
 
 Create predefined character templates in `src/config/characters.ts`:
@@ -387,6 +395,10 @@ export const defaultCharacters: CharacterConfig[] = [
   },
 ];
 ```
+
+These templates are what the `Character` class will use to instantiate each
+character with their unique traits. The LLM will use these traits to generate
+responses that are consistent with each character's personality and backstory.
 
 ## Build the Game Manager
 
@@ -567,6 +579,11 @@ export class GameManager {
 }
 ```
 
+The game manager will handle all game-related logic, including starting new
+games, processing player messages, and managing game state. When a player sends
+a message, the game manager will route it to the appropriate character for
+response generation.
+
 ## Add WebSocket Support
 
 Real-time communication makes the roleplay experience more engaging. Create
@@ -721,6 +738,12 @@ export class WebSocketHandler {
 }
 ```
 
+Here we set up the WebSocket server to handle connections and messages.
+Websockets allow for real-time communication between the client and server,
+making them ideal for interactive applications like a chat app, or game. We send
+messages back and forth between the client and server to keep the game state in
+sync.
+
 ## Create the main server
 
 Now let's tie everything together in `main.ts`:
@@ -831,21 +854,36 @@ console.log(`🎭 LLM Chat server starting on http://localhost:${port}`);
 Deno.serve({ port }, handler);
 ```
 
+In the `main.ts` file we set up an HTTP server and a WebSocket server to handle
+real-time communication. We use the HTTP server to serve static files and
+provide API endpoints, while the WebSocket server manages real-time interactions
+between clients.
+
 ## Add a frontend
 
-The frontend of our app will live in the `static` directory. Create an `index.html`, `app.js` and a `style.css` file in the `static` directory.
+The frontend of our app will live in the `static` directory. Create an
+`index.html`, `app.js` and a `style.css` file in the `static` directory.
 
 ### `index.html`
 
-We'll create a very basic layout with a textarea to collect the user's scenario input and a section to show the response messages with a text input to send messages. Copy the content from [this html file](https://github.com/denoland/tutorial-with-llm/blob/main/static/index.html) into your `index.html`.
+We'll create a very basic layout with a textarea to collect the user's scenario
+input and a section to show the response messages with a text input to send
+messages. Copy the content from
+[this html file](https://github.com/denoland/tutorial-with-llm/blob/main/static/index.html)
+into your `index.html`.
 
 ### `app.js`
 
-In `app.js`, we'll add the JavaScript to handle user input and display responses. Copy the content from [this js file](https://github.com/denoland/tutorial-with-llm/blob/main/static/app.js) into your `app.js`.
+In `app.js`, we'll add the JavaScript to handle user input and display
+responses. Copy the content from
+[this js file](https://github.com/denoland/tutorial-with-llm/blob/main/static/app.js)
+into your `app.js`.
 
 ### `style.css`
 
-We'll add some basic styles to make our app look nicer. Copy the content from [this css file](https://github.com/denoland/tutorial-with-llm/blob/main/static/style.css) into your `style.css`.
+We'll add some basic styles to make our app look nicer. Copy the content from
+[this css file](https://github.com/denoland/tutorial-with-llm/blob/main/static/style.css)
+into your `style.css`.
 
 ## Run your application
 
