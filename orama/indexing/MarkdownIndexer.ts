@@ -86,17 +86,16 @@ export class MarkdownIndexer implements IIndexDocuments {
         const url = this.buildUrl(file.path);
 
         return {
-            path: file.fullPath,
-            relativePath: file.path,
-            url,
-            title,
-            description,
+            id: this.generateId(file.path),
+            title: title,
             content: cleanedContent,
-            category,
-            section,
-            subsection,
-            tags,
-            headings,
+            url: url,
+            category: category,
+            section: section,
+            subsection: subsection || undefined,
+            description: description || undefined,
+            tags: tags,
+            headings: headings,
             lastModified: stat.mtime?.getTime() || Date.now(),
         };
     }
@@ -175,7 +174,7 @@ export class MarkdownIndexer implements IIndexDocuments {
             url = "/" + url;
         }
 
-        const BASE_URL = "https://example.com"; // Replace with your actual base URL
+        const BASE_URL = "https://docs.deno.com"; // Replace with your actual base URL
 
         return `${BASE_URL}${url}`;
     }    
