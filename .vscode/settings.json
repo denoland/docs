@@ -1,5 +1,22 @@
 {
   "deno.enable": true,
+  "deno.enablePaths": [
+    "runtime",
+    "deploy",
+    "examples",
+    "subhosting",
+    "lint",
+    "orama",
+    "404",
+    "markdown-it",
+    "middleware",
+    "reference",
+    "reference-gen",
+    "services",
+    "static",
+    "styleguide",
+    "_components"
+  ],
   "editor.defaultFormatter": "denoland.vscode-deno",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
