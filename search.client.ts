@@ -295,27 +295,6 @@ class OramaSearch {
       return;
     }
 
-    // Debug: Log the URLs and paths to see what we're getting
-    console.log(
-      "Search results URLs:",
-      results.hits.map((hit) => hit.document.url),
-    );
-    console.log(
-      "Search results paths:",
-      results.hits.map((hit) => hit.document.path),
-    );
-    console.log("Full search results:", results.hits);
-
-    // Additional debugging to see what fields are available
-    if (results.hits.length > 0) {
-      console.log("First result structure:", results.hits[0]);
-      console.log(
-        "Document keys:",
-        Object.keys(results.hits[0].document || {}),
-      );
-      console.log("Hit keys:", Object.keys(results.hits[0]));
-    }
-
     // Filter out results that don't have valid URLs or paths
     const validResults = results.hits.filter((hit) => {
       // First check basic requirements
@@ -500,16 +479,11 @@ class OramaSearch {
       if (hit && hit.document) {
         // Check if there's an ID that might be a path
         if (hit.id && typeof hit.id === "string") {
-          console.log("Trying to use ID as URL:", hit.id);
           return this.formatUrl(hit.id);
         }
 
         // Try to construct from title (this is a fallback)
         if (hit.document.title) {
-          console.log(
-            "No URL found, using title as fallback:",
-            hit.document.title,
-          );
           // Convert title to a potential path
           const pathFromTitle = hit.document.title
             .toLowerCase()
