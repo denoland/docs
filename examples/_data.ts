@@ -882,7 +882,7 @@ export const sidebar = [
       },
       {
         title: "LLM Chat app",
-        href: "/examples/llm/",
+        href: "/examples/llm_tutorial/",
         type: "tutorial",
       },
       {
