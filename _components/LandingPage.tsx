@@ -111,7 +111,7 @@ export default function LandingPage() {
           own? Check out our{" "}
           <a
             href="https://github.com/denoland/deno-docs?tab=readme-ov-file#examples"
-            class="text-primary hover:underline focus:underline"
+            class="text-primary underline"
           >
             GitHub repository
           </a>.
@@ -119,7 +119,7 @@ export default function LandingPage() {
         <p>
           <a
             href="/runtime/contributing/examples/"
-            class="text-primary hover:underline focus:underline text-center mt-4 font-bold"
+            class="text-primary underline mt-4 font-bold"
           >
             Commit an example and we'll send you stickers!
           </a>

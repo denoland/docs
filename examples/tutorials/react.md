@@ -41,7 +41,7 @@ In your terminal run the following command to create a new React app with Vite
 using the typescript template:
 
 ```sh
-deno run -A npm:create-vite@latest --template react-ts
+$ deno init --npm vite my-react-app --template react-ts
 ```
 
 ## Run the dev server

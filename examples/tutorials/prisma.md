@@ -51,9 +51,12 @@ This will generate
 [`prisma/schema.prisma`](https://www.prisma.io/docs/orm/prisma-schema). Let's
 update it with the following:
 
-> [!TIP]
-> Don't forget to add `runtime = "deno"` to the generator block in your
-> schema.prisma file. This is required for Prisma to work correctly with Deno.
+:::tip
+
+Don't forget to add `runtime = "deno"` to the generator block in your
+schema.prisma file. This is required for Prisma to work correctly with Deno.
+
+:::
 
 ```ts
 generator client {
@@ -162,10 +165,12 @@ We can now run `seed.ts` with:
 deno run -A --env prisma/seed.ts
 ```
 
-> [!TIP]
->
-> The `--env` flag is used to tell Deno to load environment variables from the
-> `.env` file.
+:::tip
+
+The `--env` flag is used to tell Deno to load environment variables from the
+`.env` file.
+
+:::
 
 After doing so, you should be able to see your data on Prisma Studio by running
 the following command:
