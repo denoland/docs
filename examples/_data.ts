@@ -881,6 +881,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "LLM Chat app",
+        href: "/examples/llm_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Build a Realtime WebSocket Application",
         href: "/examples/realtime_websocket_app/",
         externalURL:
