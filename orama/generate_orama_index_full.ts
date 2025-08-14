@@ -101,6 +101,10 @@ interface IndexStats {
  */
 function cleanMarkdownContent(content: string): string {
   return content
+  // Remove entire navigation blocks first
+  .replace(/<nav\b[^>]*>[\s\S]*?<\/nav>/gi, "")
+  // Remove any element marked as role="navigation"
+  .replace(/<([a-zA-Z][\w:-]*)[^>]*\brole=["']navigation["'][^>]*>[\s\S]*?<\/\1>/gi, "")
     // Remove frontmatter
     .replace(/^---\n[\s\S]*?\n---\n/, "")
     // Remove code blocks (keep inline code)
@@ -125,6 +129,10 @@ function cleanMarkdownContent(content: string): string {
  */
 function cleanHtmlContent(html: string): string {
   return html
+  // Remove entire navigation blocks first
+  .replace(/<nav\b[^>]*>[\s\S]*?<\/nav>/gi, " ")
+  // Remove any element marked as role="navigation"
+  .replace(/<([a-zA-Z][\w:-]*)[^>]*\brole=["']navigation["'][^>]*>[\s\S]*?<\/\1>/gi, " ")
     // Remove HTML tags but keep content
     .replace(/<[^>]*>/g, " ")
     // Remove code blocks and examples (they're often too verbose)
@@ -510,9 +518,14 @@ async function collectMarkdownFiles(): Promise<OramaDocument[]> {
 
           // Clean content for indexing
           const cleanedContent = cleanMarkdownContent(markdownContent);
+          // Ensure title/description are part of searchable content
+          const prefixParts: string[] = [];
+          if (title) prefixParts.push(title);
+          if (description) prefixParts.push(description);
+          const prefixedContent = (prefixParts.join("\n\n") + "\n\n" + cleanedContent).trim();
 
           // Skip files with very little content
-          if (cleanedContent.length < 50) {
+          if (prefixedContent.length < 50) {
             console.log(`Skipping ${relativePath} - content too short`);
             continue;
           }
@@ -528,7 +541,7 @@ async function collectMarkdownFiles(): Promise<OramaDocument[]> {
           files.push({
             id: generateId(relativePath),
             title,
-            content: cleanedContent,
+            content: prefixedContent,
             url,
             category,
             section,

@@ -42,6 +42,7 @@ interface UploadOptions {
   batchSize?: number;
   skipExisting?: boolean;
   dryRun?: boolean;
+  useFull?: boolean; // Prefer orama-index-full.json when true
 }
 
 /**
@@ -228,6 +229,8 @@ function parseArgs(
       options.skipExisting = true;
     } else if (arg === "--dry-run") {
       options.dryRun = true;
+    } else if (arg === "--full") {
+      options.useFull = true;
     } else if (arg === "--deploy") {
       shouldDeploy = true;
     } else if (arg === "--clear-index") {
@@ -238,6 +241,45 @@ function parseArgs(
   }
 
   return { filePath, options, shouldDeploy };
+}
+
+/**
+ * Determine the index file path to upload. If a filePath is provided, use it.
+ * Otherwise try common locations in order of preference.
+ */
+async function resolveIndexFilePath(
+  rootDir: string,
+  opts: UploadOptions,
+): Promise<string> {
+  // If caller provided explicit file path, just return it.
+  // Existence will be validated by loadIndexFile.
+  // Try candidates in order. Prefer "full" variant when requested.
+  const staticDir = join(rootDir, "static");
+  const siteDir = join(rootDir, "_site");
+
+  const candidatesPreferred = opts.useFull ? [
+    join(staticDir, "orama-index-full.json"),
+    join(siteDir, "orama-index-full.json"),
+    join(staticDir, "orama-index.json"),
+    join(siteDir, "orama-index.json"),
+  ] : [
+    join(staticDir, "orama-index.json"),
+    join(siteDir, "orama-index.json"),
+    join(staticDir, "orama-index-full.json"),
+    join(siteDir, "orama-index-full.json"),
+  ];
+
+  for (const p of candidatesPreferred) {
+    try {
+      await Deno.stat(p);
+      return p;
+    } catch (_) {
+      // continue
+    }
+  }
+
+  // Default to static/orama-index.json as before; will error on load.
+  return join(staticDir, "orama-index.json");
 }
 
 /**
@@ -254,9 +296,8 @@ async function main() {
   const config = loadOramaConfig();
   console.log(`Target index: ${config.indexId}`);
 
-  // Determine input file path
-  const indexFilePath = filePath ||
-    join(ROOT_DIR, "static", "orama-index.json");
+  // Determine input file path (auto-detect full vs minimal and _site vs static)
+  const indexFilePath = filePath || await resolveIndexFilePath(ROOT_DIR, options);
   console.log(`Loading index from: ${indexFilePath}`);
 
   // Load the index file

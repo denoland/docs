@@ -7,6 +7,8 @@ export interface OramaDocument {
   title: string;
   content: string;
   url: string;
+  /** Root-relative path (e.g. /runtime/reference/cli/serve) */
+  path?: string;
   category: string;
   section: string;
   subsection?: string;
@@ -14,6 +16,10 @@ export interface OramaDocument {
   tags: string[];
   headings: string[];
   lastModified: number;
+  /** Optional kind/category of doc: e.g. "cli", "guide", "api" */
+  kind?: string;
+  /** CLI command name if applicable, e.g. "serve" */
+  command?: string;
   apiInfo?: {
     symbolType: string; // "function", "interface", "class", etc.
     symbolPath: string; // "Deno.readFile", "web.fetch", etc.

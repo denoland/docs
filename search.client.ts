@@ -11,6 +11,8 @@ interface SearchResult {
     path?: string;
     category?: string;
     section?: string;
+    kind?: string;
+    command?: string;
   };
 }
 
@@ -90,8 +92,11 @@ class OramaSearch {
 
     const searchKey = document.getElementById("search-key");
     let isMac = false;
+    const uaPlatform =
+      (navigator as Navigator & { userAgentData?: { platform?: string } })
+        .userAgentData?.platform;
     if (
-      navigator?.userAgentData?.platform?.toUpperCase().startsWith("MAC") ||
+      (uaPlatform && uaPlatform.toUpperCase().startsWith("MAC")) ||
       navigator.userAgent.indexOf("Mac OS X") != -1 ||
       navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i)
     ) {
@@ -314,8 +319,8 @@ class OramaSearch {
     })
       // Sort by content quality - prefer longer, more substantial content
       .sort((a, b) => {
-        const scoreA = this.getContentScore(a);
-        const scoreB = this.getContentScore(b);
+        const scoreA = this.getContentScore(a, searchTerm);
+        const scoreB = this.getContentScore(b, searchTerm);
         return scoreB - scoreA; // Higher score first
       });
 
@@ -344,7 +349,7 @@ class OramaSearch {
         )
       }
             </div>
-            <div class="pl-3 border-l border-foreground-quaternary text-sm text-foreground-secondary text-sm leading-relaxed mb-2 line-clamp-3">
+            <div class="pl-3 border-l border-foreground-quaternary text-sm text-foreground-secondary leading-relaxed mb-2 line-clamp-3">
               ${
         this.highlightMatch(
           this.escapeHtml(hit.document.content.slice(0, 200)) + "...",
@@ -626,7 +631,7 @@ class OramaSearch {
   }
 
   // Helper method to score content quality
-  getContentScore(hit: SearchResult): number {
+  getContentScore(hit: SearchResult, term?: string): number {
     if (!hit.document) return 0;
 
     let score = hit.score || 0; // Start with Orama's relevance score
@@ -660,6 +665,36 @@ class OramaSearch {
       contentSections.some((s) => section.includes(s) || category.includes(s))
     ) {
       score += 3;
+    }
+
+    // Boost CLI command pages when term contains a matching command
+    const t = (term || "").toLowerCase().trim();
+    const docKind = hit.document.kind?.toLowerCase();
+    const cmd = hit.document.command?.toLowerCase();
+    const titleLower = title.toLowerCase();
+    const path = (hit.document.path || hit.document.url || "").toLowerCase();
+
+    // Simple query normalization: strip leading "deno "
+    const normalized = t.replace(/^deno\s+/, "");
+
+    if (docKind === "cli") {
+      // Strong boost if command matches
+      if (
+        cmd &&
+        (normalized === cmd || t === cmd ||
+          titleLower.includes(`deno ${cmd}`) || path.endsWith(`/cli/${cmd}`))
+      ) {
+        score += 25;
+      }
+      // Moderate boost for any CLI page when the query starts with "deno"
+      if (t.startsWith("deno ")) {
+        score += 8;
+      }
+    }
+
+    // Penalize anchor/heading-only hits that contain a hash but not the page root
+    if (path.includes("#") && !/\/reference\/cli\//.test(path)) {
+      score -= 6;
     }
 
     return score;

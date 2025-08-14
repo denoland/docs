@@ -8,6 +8,7 @@ const H1_REGEX = /^# (.+)$/m;
 const FRONTMATTER_TITLE_REGEX = /title: ["'](.+)["']/;
 const DESCRIPTION_REGEX = /description: ["'](.+)["']/;
 const TAGS_REGEX = /tags: \[(.*?)\]/;
+const FRONTMATTER_COMMAND_REGEX = /\bcommand:\s*(["']?)([a-zA-Z0-9_-]+)\1/;
 
 export class MarkdownIndexer implements IIndexDocuments {
     public isValidIndexer(file: InputFileReference): boolean {
@@ -30,8 +31,11 @@ export class MarkdownIndexer implements IIndexDocuments {
     public async index(
         file: InputFileReference,
     ): Promise<OramaDocument | null> {
-        const content = await Deno.readTextFile(file.fullPath);
+    const content = await Deno.readTextFile(file.fullPath);
         const stat = await Deno.stat(file.fullPath);
+
+    // Normalize path separators to forward slashes for consistent logic
+    const relPath = file.path.replace(/\\/g, "/");
 
         // Split frontmatter from content
         let markdownContent = content;
@@ -72,26 +76,48 @@ export class MarkdownIndexer implements IIndexDocuments {
             description = descMatch[1];
         }
 
+        // Detect CLI command pages
+    const isCliPath = relPath.startsWith("runtime/reference/cli/");
+        let command: string | undefined = undefined;
+        if (isCliPath) {
+            // Prefer explicit frontmatter command field
+            const cmdMatch = frontmatter.match(FRONTMATTER_COMMAND_REGEX);
+            if (cmdMatch) {
+                command = cmdMatch[2].trim();
+            } else {
+                // Fallback: derive from filename (e.g., serve.md -> serve)
+                const fileName = relPath.split("/").pop() || "";
+                const m = fileName.match(/^([a-z0-9_-]+)\.(md|mdx)$/i);
+                if (m) command = m[1];
+            }
+        }
+
         const tags = this.extractTags(frontmatter);
         const headings = this.extractHeadings(markdownContent);
-        const cleanedContent = this.cleanMarkdownContent(markdownContent);
+    const cleanedContent = this.cleanMarkdownContent(markdownContent);
+    // Include title/description in searchable content to ensure H1/frontmatter is indexed
+    const prefixParts: string[] = [];
+    if (title) prefixParts.push(title);
+    if (description) prefixParts.push(description);
+    const prefixedContent = (prefixParts.join("\n\n") + "\n\n" + cleanedContent).trim();
 
         // Skip files with very little content
-        if (cleanedContent.length < 50) {
+    if (prefixedContent.length < 50) {
             console.log(`Skipping ${file.path} - content too short`);
             return null;
         }
 
         // Get category and section
-        const { category, section, subsection } = this.getCategoryAndSection(
-            file.path,
-        );
+        const { category, section, subsection } = this.getCategoryAndSection(relPath);
+
+        const url = this.buildUrl(relPath);
 
         return {
-            id: this.generateId(file.path),
+            id: this.generateId(relPath),
             title: title,
-            content: cleanedContent,
-            url: this.buildUrl(file.path),
+            content: prefixedContent,
+            url,
+            path: this.buildPath(relPath),
             category: category,
             section: section,
             subsection: subsection || undefined,
@@ -99,11 +125,17 @@ export class MarkdownIndexer implements IIndexDocuments {
             tags: tags,
             headings: headings,
             lastModified: stat.mtime?.getTime() || Date.now(),
+            kind: isCliPath ? "cli" : undefined,
+            command,
         };
     }
 
     private cleanMarkdownContent(content: string): string {
         return content
+            // Remove entire navigation blocks first
+            .replace(/<nav\b[^>]*>[\s\S]*?<\/nav>/gi, "")
+            // Remove any element marked as role="navigation" (keep minimal regex)
+            .replace(/<([a-zA-Z][\w:-]*)[^>]*\brole=["']navigation["'][^>]*>[\s\S]*?<\/\1>/gi, "")
             .replace(/^---\n[\s\S]*?\n---\n/, "") // Remove frontmatter
             .replace(/```[\s\S]*?```/g, "") // Remove code blocks
             .replace(/<!--[\s\S]*?-->/g, "") // Remove HTML comments
@@ -164,13 +196,13 @@ export class MarkdownIndexer implements IIndexDocuments {
     private generateId(relativePath: string): string {
         return relativePath
             .replace(/\.(md|mdx)$/, "")
-            .replace(/\//g, "-")
+            .replace(/[\/]/g, "-")
             .replace(/[^a-zA-Z0-9-_]/g, "")
             .toLowerCase();
     }
 
     private buildUrl(relativePath: string): string {
-        let url = relativePath.replace(/\.(md|mdx)$/, "");
+    let url = relativePath.replace(/\.(md|mdx)$/, "");
         if (url.endsWith("/index")) {
             url = url.replace(/\/index$/, "/");
         }
@@ -181,5 +213,16 @@ export class MarkdownIndexer implements IIndexDocuments {
         const BASE_URL = "https://docs.deno.com"; // Replace with your actual base URL
 
         return `${BASE_URL}${url}`;
+    }
+
+    private buildPath(relativePath: string): string {
+    let p = relativePath.replace(/\.(md|mdx)$/, "");
+        if (p.endsWith("/index")) {
+            p = p.replace(/\/index$/, "/");
+        }
+        if (!p.startsWith("/")) {
+            p = "/" + p;
+        }
+        return p;
     }
 }
