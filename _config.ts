@@ -9,6 +9,7 @@ import postcss from "lume/plugins/postcss.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
+import postcssNesting from "npm:@tailwindcss/nesting";
 
 import tailwind from "@tailwindcss/postcss";
 
@@ -134,7 +135,7 @@ site.use(mdx());
 site.use(
   postcss({
     includes: false,
-    plugins: [tailwind()],
+    plugins: [postcssNesting, tailwind()],
   }),
 );
 
