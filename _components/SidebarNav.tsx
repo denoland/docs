@@ -314,7 +314,7 @@ function SidebarList(
 ) {
   return (
     <ul
-      className={`p-0 m-0 list-none overflow-y-hidden ${props.className ?? ""}`}
+      className={`p-0 list-none overflow-y-hidden ${props.className ?? ""}`}
     >
       {props.children}
     </ul>
@@ -366,7 +366,7 @@ function SidebarCategoryHeading(props: {
   }
 
   return (
-    <h2 class="block uppercase py-2 pr-4 mt-4 text-foreground-secondary font-bold leading-none tracking-wide !border-0">
+    <h2 class="block uppercase py-2 pr-4 mt-4 text-foreground-secondary font-bold leading-[1.2] text-balance tracking-wide !border-0">
       {props.title}
     </h2>
   );

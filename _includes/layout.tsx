@@ -18,6 +18,8 @@ export default function Layout(data: Lume.Data) {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{deleteBackticks(data.title)}</title>
+        {data?.description &&
+          <meta name="description" content={data.description} />}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script>
@@ -26,10 +28,7 @@ export default function Layout(data: Lume.Data) {
           'light'); document.documentElement.classList.add(theme);
         </script>
 
-        <link rel="stylesheet" href="/gfm.css" />
         <link rel="stylesheet" href="/styles.css" />
-        <link rel="stylesheet" href="/components.css" />
-        <link rel="stylesheet" href="/overrides.css" />
         <link
           rel="preload"
           href="/fonts/inter/Inter-Regular.woff2"

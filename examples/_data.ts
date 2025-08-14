@@ -113,7 +113,7 @@ export const sidebar = [
     title: "Modules and package management",
     items: [
       {
-        title: "Use Node.js' built-in modules",
+        title: "Use Node.js built-in modules",
         href: "/examples/node_built_in/",
         type: "example",
       },
@@ -878,6 +878,11 @@ export const sidebar = [
       {
         title: "Build a chat app with WebSockets",
         href: "/examples/chat_app_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "LLM Chat app",
+        href: "/examples/llm_tutorial/",
         type: "tutorial",
       },
       {

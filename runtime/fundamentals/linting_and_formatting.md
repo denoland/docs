@@ -255,7 +255,7 @@ Define separator kind for type literals
 - **Default:** `semiColon`
 - **Possible values:** `comma`, `semiColon`
 
-#### unstable-component
+#### `unstable-component`
 
 Enable formatting Svelte, Vue, Astro and Angular files
 
