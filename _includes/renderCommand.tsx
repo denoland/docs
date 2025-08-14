@@ -132,11 +132,15 @@ export default function renderCommand(
         </div>
       </div>
 
-      <div
-        class="flex flex-col gap-4"
-        dangerouslySetInnerHTML={{ __html: helpers.md(about) }}
-      />
-      <br />
+      {about && (
+        <>
+          <div
+            class="flex flex-col gap-4"
+            dangerouslySetInnerHTML={{ __html: helpers.md(about) }}
+          />
+          <br />
+        </>
+      )}
 
       {Object.entries(options).map(([heading, flags]) => {
         const id = heading.toLowerCase().replace(/\s/g, "-");

@@ -43,6 +43,8 @@ below for more information on each subcommand.
 - [deno coverage](/runtime/reference/cli/coverage/) - generate test coverage
   reports
 - [deno doc](/runtime/reference/cli/doc/) - generate documentation for a module
+- [deno deploy](/runtime/reference/cli/deploy) - Manage and publish your
+  projects on the web
 - [deno fmt](/runtime/reference/cli/fmt/) - format your code
 - [deno info](/runtime/reference/cli/info/) - inspect an ES module and all of
   its dependencies
