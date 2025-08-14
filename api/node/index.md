@@ -1,7 +1,7 @@
 ---
 title: "Node.js Built-in APIs"
 description: "Complete reference for Node.js built-in modules and globals supported in Deno. Explore Node.js APIs including fs, http, crypto, process, buffer, and more with compatibility information."
-layout: layout.tsx
+layout: doc.tsx
 oldUrl:
   - /runtime/manual/node/compatibility/
   - /runtime/manual/npm_nodejs/compatibility_mode/

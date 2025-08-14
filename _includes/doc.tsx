@@ -33,6 +33,33 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
     file = `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`;
   }
 
+  function getTocCtx(
+    d: Lume.Data,
+  ): { document_navigation: unknown; document_navigation_str: string } | null {
+    const ch: unknown = (d as unknown as { children?: unknown })?.children;
+    if (ch && typeof ch === "object" && "props" in ch) {
+      const props: unknown = (ch as { props?: unknown }).props;
+      if (props && typeof props === "object" && "data" in props) {
+        const pdata: unknown = (props as { data?: unknown }).data;
+        if (pdata && typeof pdata === "object" && "toc_ctx" in pdata) {
+          const toc: unknown = (pdata as { toc_ctx?: unknown }).toc_ctx;
+          if (
+            toc && typeof toc === "object" &&
+            "document_navigation" in toc &&
+            "document_navigation_str" in toc
+          ) {
+            const t = toc as {
+              document_navigation: unknown;
+              document_navigation_str: string;
+            };
+            return t;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
   return (
     <main
       id="content"
@@ -78,14 +105,17 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
         )}
       </div>
 
-      {(isReference && data.children.props.data.toc_ctx) && (
-        <data.comp.RefToc
-          documentNavigation={data.children.props.data.toc_ctx
-            .document_navigation}
-          documentNavigationStr={data.children.props.data.toc_ctx
-            .document_navigation_str}
-        />
-      )}
+      {(() => {
+        const tocCtx = getTocCtx(data);
+        return isReference && tocCtx
+          ? (
+            <data.comp.RefToc
+              documentNavigation={tocCtx.document_navigation}
+              documentNavigationStr={tocCtx.document_navigation_str}
+            />
+          )
+          : null;
+      })()}
     </main>
   );
 }
