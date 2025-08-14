@@ -72,7 +72,9 @@ To configure `deno fmt` to always format your Vue files, add this at the top
 level of your `deno.json` file:
 
 ```json
-"unstable": ["fmt-component"]
+{
+  "unstable": ["fmt-component"]
+}
 ```
 
 ## Add a backend API
