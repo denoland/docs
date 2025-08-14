@@ -1,22 +1,22 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Dev Server",
-			"type": "shell",
-			"command": "deno task start",
-			"group": "serve",
-			"isBackground": true
-		},
-		{
-			"label": "Dev Server",
-			"type": "shell",
-			"command": "deno task start",
-			"isBackground": true,
-			"problemMatcher": [
-				"$deno"
-			],
-			"group": "serve"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Dev Server",
+      "type": "shell",
+      "command": "deno task start",
+      "group": "serve",
+      "isBackground": true
+    },
+    {
+      "label": "Dev Server",
+      "type": "shell",
+      "command": "deno task start",
+      "isBackground": true,
+      "problemMatcher": [
+        "$deno"
+      ],
+      "group": "serve"
+    }
+  ]
 }
