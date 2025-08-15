@@ -1,26 +1,17 @@
 // Orama Search Client
 // This handles the client-side search functionality for the Deno docs
 
-import type { OramaCloud } from "jsr:@orama/core@1.2.4";
+import type { Hit, OramaCloud, SearchResult } from "jsr:@orama/core@1.2.4";
 
-interface SearchResult {
-  id: string;
-  score?: number; // Orama relevance score
-  document: {
-    title: string;
-    content: string;
-    url?: string;
-    path?: string;
-    category?: string;
-    section?: string;
-    kind?: string;
-    command?: string;
-  };
-}
-
-interface SearchResults {
-  hits: SearchResult[];
-  count: number;
+interface OramaDocument {
+  title: string;
+  content: string;
+  url?: string;
+  path?: string;
+  category?: string;
+  section?: string;
+  kind?: string;
+  command?: string;
 }
 
 // Configuration - Replace these with your actual Orama Cloud credentials
@@ -257,7 +248,7 @@ class OramaSearch {
     this.showLoading(true);
 
     try {
-      const results: SearchResults = await this.client.search({
+      const results = await this.client.search({
         term,
         mode: "fulltext",
         limit: 8,
@@ -271,7 +262,10 @@ class OramaSearch {
         },
       });
 
-      this.renderResults(results, term);
+      this.renderResults(
+        results as unknown as SearchResult<OramaDocument>,
+        term,
+      );
       this.showResults();
     } catch (error) {
       console.error("Search error:", error);
@@ -281,7 +275,7 @@ class OramaSearch {
     }
   }
 
-  renderResults(results: SearchResults, searchTerm: string) {
+  renderResults(results: SearchResult<OramaDocument>, searchTerm: string) {
     if (!this.searchResults) return;
 
     if (results.hits.length === 0) {
@@ -472,7 +466,7 @@ class OramaSearch {
   }
 
   // Helper method to ensure URLs are properly formatted
-  formatUrl(url: string | undefined, hit?: SearchResult): string {
+  formatUrl(url: string | undefined, hit?: Hit<OramaDocument>): string {
     // First try to use the path field if available
     if (hit && hit.document && hit.document.path) {
       // Clean up the path by removing "jump to heading" text
@@ -565,7 +559,7 @@ class OramaSearch {
   }
 
   // Helper method to detect navigation/menu content
-  isNavigationContent(hit: SearchResult): boolean {
+  isNavigationContent(hit: Hit<OramaDocument>): boolean {
     if (!hit.document) return false;
 
     const title = hit.document.title?.toLowerCase() || "";
@@ -633,7 +627,7 @@ class OramaSearch {
   }
 
   // Helper method to score content quality
-  getContentScore(hit: SearchResult, term?: string): number {
+  getContentScore(hit: Hit<OramaDocument>, term?: string): number {
     if (!hit.document) return 0;
 
     let score = hit.score || 0; // Start with Orama's relevance score
