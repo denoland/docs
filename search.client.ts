@@ -1,7 +1,7 @@
 // Orama Search Client
 // This handles the client-side search functionality for the Deno docs
 
-import type { OramaCloud } from "jsr:@orama/core@1.2.3";
+import type { OramaCloud } from "jsr:@orama/core@1.2.4";
 
 interface SearchResult {
   id: string;
@@ -21,14 +21,6 @@ interface SearchResult {
 interface SearchResults {
   hits: SearchResult[];
   count: number;
-}
-
-interface OramaClient {
-  search: (params: {
-    term: string;
-    mode?: "vector" | "fulltext" | "hybrid";
-    limit?: number;
-  }) => Promise<SearchResults>;
 }
 
 // Configuration - Replace these with your actual Orama Cloud credentials
@@ -130,7 +122,7 @@ class OramaSearch {
         return;
       }
 
-      const { OramaCloud } = await import("jsr:@orama/core@1.2.3");
+      const { OramaCloud } = await import("jsr:@orama/core@1.2.4");
       this.client = new OramaCloud({
         projectId: ORAMA_CONFIG.projectId,
         apiKey: ORAMA_CONFIG.apiKey,
@@ -266,7 +258,7 @@ class OramaSearch {
 
     try {
       const results: SearchResults = await this.client.search({
-        term: term,
+        term,
         mode: "fulltext",
         limit: 8,
         threshold: 1,

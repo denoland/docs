@@ -26,7 +26,7 @@
 
 import { fromFileUrl, join } from "@std/path";
 import { load } from "@std/dotenv";
-import { OramaCloud } from "jsr:@orama/core@1.2.3";
+import { OramaCloud } from "jsr:@orama/core@1.2.4";
 
 const ROOT_DIR = fromFileUrl(new URL("../", import.meta.url));
 
