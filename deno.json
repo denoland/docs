@@ -16,7 +16,7 @@
     "postcss": "npm:postcss@^8.5.6",
     "prismjs": "npm:prismjs@1.29.0",
     "tailwindcss": "npm:tailwindcss@^4.1.11",
-    "@oramacloud/client": "npm:@oramacloud/client@^1.3.0"
+    "@orama/core": "jsr:@orama/core@^1.2.4"
   },
   "tasks": {
     "serve": "deno run --env-file -A lume.ts -s",
