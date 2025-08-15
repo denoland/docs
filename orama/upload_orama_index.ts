@@ -7,7 +7,7 @@
  *
  * Prerequisites:
  * 1. Set up environment variables:
- *    - ORAMA_INDEX_ID: Your Orama Cloud index ID
+ *    - ORAMA_DATASOURCE_ID: Your Orama Cloud index ID
  *    - ORAMA_PRIVATE_API_KEY: Your private API key (for uploads)
  *
  * Usage:
@@ -26,7 +26,7 @@
 
 import { fromFileUrl, join } from "@std/path";
 import { load } from "@std/dotenv";
-import { CloudManager } from "npm:@oramacloud/client";
+import { OramaCloud } from "jsr:@orama/core@1.2.3";
 
 const ROOT_DIR = fromFileUrl(new URL("../", import.meta.url));
 
@@ -34,7 +34,8 @@ const ROOT_DIR = fromFileUrl(new URL("../", import.meta.url));
 await load({ export: true });
 
 interface OramaConfig {
-  indexId: string;
+  projectId: string;
+  datasourceId: string;
   privateApiKey: string;
 }
 
@@ -49,25 +50,27 @@ interface UploadOptions {
  * Load Orama configuration from environment variables
  */
 function loadOramaConfig(): OramaConfig {
-  const indexId = Deno.env.get("ORAMA_INDEX_ID");
+  const projectId = Deno.env.get("ORAMA_PROJECT_ID");
+  const datasourceId = Deno.env.get("ORAMA_DATASOURCE_ID");
   const privateApiKey = Deno.env.get("ORAMA_PRIVATE_API_KEY");
 
-  if (!indexId || !privateApiKey) {
+  if (!datasourceId || !privateApiKey || !projectId) {
     console.error("❌ Missing required environment variables:");
-    console.error("   ORAMA_INDEX_ID - Your Orama Cloud index ID");
+    console.error("   ORAMA_DATASOURCE_ID - Your Orama Cloud index ID");
+    console.error("   ORAMA_PROJECT_ID - Your Orama Cloud project ID");
     console.error(
       "   ORAMA_PRIVATE_API_KEY - Your private API key for uploads",
     );
     console.error("");
     console.error("Example:");
     console.error(
-      '   export ORAMA_INDEX_ID="your-index-id"',
+      '   export ORAMA_DATASOURCE_ID="your-index-id"',
     );
     console.error('   export ORAMA_PRIVATE_API_KEY="your-private-api-key"');
     Deno.exit(1);
   }
 
-  return { indexId, privateApiKey };
+  return { datasourceId, privateApiKey, projectId };
 }
 
 interface IndexData {
@@ -107,27 +110,6 @@ async function loadIndexFile(filePath: string): Promise<IndexData> {
 }
 
 /**
- * Clear the existing index (optional, for full reindex)
- */
-function clearIndex(config: OramaConfig): boolean {
-  try {
-    console.log("🗑️  Preparing index for upload...");
-
-    const manager = new CloudManager({ api_key: config.privateApiKey });
-    const _indexManager = manager.index(config.indexId);
-
-    // The update method will automatically handle existing documents
-    // No need to explicitly clear - just proceed with upload
-
-    console.log("✅ Ready to update index (existing docs will be updated)");
-    return true;
-  } catch (error) {
-    console.error("❌ Error preparing index:", error);
-    return false;
-  }
-}
-
-/**
  * Upload documents using Orama Cloud client
  */
 async function uploadDocuments(
@@ -147,8 +129,16 @@ async function uploadDocuments(
   );
 
   try {
-    const manager = new CloudManager({ api_key: config.privateApiKey });
-    const indexManager = manager.index(config.indexId);
+    const orama = new OramaCloud({
+      projectId: config.projectId,
+      apiKey: config.privateApiKey
+    });
+
+    const datasourceManager = orama.dataSource(config.datasourceId);
+
+    // Open a new transaction. It forks a new temporary, empty index
+    // we can use to re-upload all documents again.
+    await datasourceManager.index.transaction.open()
 
     let successful = 0;
     let failed = 0;
@@ -165,19 +155,16 @@ async function uploadDocuments(
 
       try {
         // Use the update method to insert/update documents
-        await indexManager.update(batch);
+        await datasourceManager.index.transaction.insertDocuments(batch);
         successful += batch.length;
         console.log(`✅ Batch ${batchNumber} uploaded successfully`);
       } catch (error) {
         failed += batch.length;
         console.error(`❌ Batch ${batchNumber} failed:`, error);
       }
-
-      // Add a small delay between batches to be nice to the API
-      if (i + batchSize < documents.length) {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-      }
     }
+
+    await datasourceManager.index.transaction.commit();
 
     console.log(`\nUpload complete:`);
     console.log(`   ✅ Successful: ${successful}`);
@@ -189,25 +176,6 @@ async function uploadDocuments(
     );
   } catch (error) {
     console.error("❌ Error during upload:", error);
-    throw error;
-  }
-}
-
-/**
- * Deploy the index after upload
- */
-async function deployIndex(config: OramaConfig): Promise<void> {
-  try {
-    console.log("Deploying index...");
-
-    const manager = new CloudManager({ api_key: config.privateApiKey });
-    const indexManager = manager.index(config.indexId);
-
-    await indexManager.deploy();
-
-    console.log("✅ Index deployed successfully!");
-  } catch (error) {
-    console.error("❌ Error deploying index:", error);
     throw error;
   }
 }
@@ -294,7 +262,7 @@ async function main() {
 
   // Load configuration
   const config = loadOramaConfig();
-  console.log(`Target index: ${config.indexId}`);
+  console.log(`Target index: ${config.datasourceId}`);
 
   // Determine input file path (auto-detect full vs minimal and _site vs static)
   const indexFilePath = filePath || await resolveIndexFilePath(ROOT_DIR, options);
@@ -324,16 +292,6 @@ async function main() {
   }
 
   console.log("");
-
-  // Clear index if requested
-  if (shouldClearIndex) {
-    const cleared = clearIndex(config);
-    if (!cleared) {
-      console.error("❌ Failed to prepare index, aborting upload");
-      Deno.exit(1);
-    }
-    console.log("");
-  }
 
   // Upload documents
   await uploadDocuments(config, documents, options);
