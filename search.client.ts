@@ -1,42 +1,27 @@
 // Orama Search Client
 // This handles the client-side search functionality for the Deno docs
 
-interface SearchResult {
-  id: string;
-  score?: number; // Orama relevance score
-  document: {
-    title: string;
-    content: string;
-    url?: string;
-    path?: string;
-    category?: string;
-    section?: string;
-    kind?: string;
-    command?: string;
-  };
-}
+import type { Hit, OramaCloud, SearchResult } from "jsr:@orama/core@1.2.4";
 
-interface SearchResults {
-  hits: SearchResult[];
-  count: number;
-}
-
-interface OramaClient {
-  search: (params: {
-    term: string;
-    mode?: "vector" | "fulltext" | "hybrid";
-    limit?: number;
-  }) => Promise<SearchResults>;
+interface OramaDocument {
+  title: string;
+  content: string;
+  url?: string;
+  path?: string;
+  category?: string;
+  section?: string;
+  kind?: string;
+  command?: string;
 }
 
 // Configuration - Replace these with your actual Orama Cloud credentials
 const ORAMA_CONFIG = {
-  endpoint: "https://cloud.orama.run/v1/indexes/docs-deno-com-rczrg7",
-  apiKey: "nbsTsZmL9BZvMQQ8KExOPWQoBnQbW4Dd",
+  projectId: "c9394670-656a-4f78-a551-c2603ee119e7",
+  apiKey: "c1_E4q2kmwSiWpPYzeIzP38VyHmekjnZUJL3yB7Kprr8$YF-u_cXBSn3u0-AvX",
 };
 
 class OramaSearch {
-  private client: OramaClient | null = null;
+  private client: OramaCloud | null = null;
   private searchInput: HTMLInputElement | null = null;
   private searchResults: HTMLElement | null = null;
   private searchLoading: HTMLElement | null = null;
@@ -118,21 +103,21 @@ class OramaSearch {
   async initOramaClient() {
     try {
       if (
-        ORAMA_CONFIG.endpoint === "YOUR_ORAMA_ENDPOINT_HERE" ||
+        ORAMA_CONFIG.projectId === "YOUR_ORAMA_PROJECT_ID_HERE" ||
         ORAMA_CONFIG.apiKey === "YOUR_ORAMA_API_KEY_HERE"
       ) {
         console.warn(
-          "Orama search not configured. Please add your endpoint and API key to search.client.ts",
+          "Orama search not configured. Please add your project ID and API key to search.client.ts",
         );
         this.showNotConfiguredMessage();
         return;
       }
 
-      const { OramaClient } = await import("npm:@oramacloud/client");
-      this.client = new OramaClient({
-        endpoint: ORAMA_CONFIG.endpoint,
-        api_key: ORAMA_CONFIG.apiKey,
-      }) as unknown as OramaClient;
+      const { OramaCloud } = await import("jsr:@orama/core@1.2.4");
+      this.client = new OramaCloud({
+        projectId: ORAMA_CONFIG.projectId,
+        apiKey: ORAMA_CONFIG.apiKey,
+      });
 
       console.log("Orama search client initialized successfully");
     } catch (error) {
@@ -263,13 +248,24 @@ class OramaSearch {
     this.showLoading(true);
 
     try {
-      const results: SearchResults = await this.client.search({
-        term: term,
+      const results = await this.client.search({
+        term,
         mode: "fulltext",
         limit: 8,
+        threshold: 1,
+        properties: ["title", "content", "description"],
+        datasources: ["0fe1e86b-60c9-4715-8bba-0c4686a58e7e"],
+        boost: {
+          title: 12,
+          content: 4,
+          description: 2,
+        },
       });
 
-      this.renderResults(results, term);
+      this.renderResults(
+        results as unknown as SearchResult<OramaDocument>,
+        term,
+      );
       this.showResults();
     } catch (error) {
       console.error("Search error:", error);
@@ -279,7 +275,7 @@ class OramaSearch {
     }
   }
 
-  renderResults(results: SearchResults, searchTerm: string) {
+  renderResults(results: SearchResult<OramaDocument>, searchTerm: string) {
     if (!this.searchResults) return;
 
     if (results.hits.length === 0) {
@@ -470,7 +466,7 @@ class OramaSearch {
   }
 
   // Helper method to ensure URLs are properly formatted
-  formatUrl(url: string | undefined, hit?: SearchResult): string {
+  formatUrl(url: string | undefined, hit?: Hit<OramaDocument>): string {
     // First try to use the path field if available
     if (hit && hit.document && hit.document.path) {
       // Clean up the path by removing "jump to heading" text
@@ -563,7 +559,7 @@ class OramaSearch {
   }
 
   // Helper method to detect navigation/menu content
-  isNavigationContent(hit: SearchResult): boolean {
+  isNavigationContent(hit: Hit<OramaDocument>): boolean {
     if (!hit.document) return false;
 
     const title = hit.document.title?.toLowerCase() || "";
@@ -631,7 +627,7 @@ class OramaSearch {
   }
 
   // Helper method to score content quality
-  getContentScore(hit: SearchResult, term?: string): number {
+  getContentScore(hit: Hit<OramaDocument>, term?: string): number {
     if (!hit.document) return 0;
 
     let score = hit.score || 0; // Start with Orama's relevance score
