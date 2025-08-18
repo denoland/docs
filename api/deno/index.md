@@ -16,7 +16,13 @@ The global `Deno` namespace contains APIs that are not web standard, including
 APIs for reading from files, opening TCP sockets, serving HTTP, and executing
 subprocesses, etc.
 
-[Explore all Deno APIs](/api/deno/all_symbols){.docs-cta .runtime-cta}
+## API Documentation
+
+This section provides comprehensive documentation for all Deno-specific APIs
+available through the global `Deno` namespace. You can
+[browse all symbols](/api/deno/all_symbols) to view the complete list of
+available APIs or search by category. Click on any function or interface to see
+detailed documentation with examples
 
 Below we highlight some of the most important Deno APIs to know.
 

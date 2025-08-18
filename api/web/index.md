@@ -15,6 +15,11 @@ modern browsers. This means if you've built for the web, you're likely already
 familiar with many of Deno's APIs. Learning Deno also means investing in your
 knowledge of the web platform.
 
+This section provides comprehensive documentation for all Deno's supported Web
+APIs You can [browse all symbols](/api/web/all_symbols) to view the complete
+list or search by category. Click on any function or interface to see detailed
+documentation with examples
+
 ## Core Web APIs
 
 Deno supports a comprehensive set of web standard APIs:
