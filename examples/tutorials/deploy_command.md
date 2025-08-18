@@ -166,22 +166,16 @@ can create one through the
 
 :::
 
-## Create and deploy your application
+## Deploy your application
 
-Now let's use the `deno deploy` command to deploy your application:
-
-```bash
-deno deploy create
-```
-
-If you have multiple organizations, you can specify which one to use with the
-`--org` flag:
+Now let's use the `deno deploy` command to deploy your application! Ensure that
+you are in the root directory of your project and run:
 
 ```bash
-deno deploy create --org your-org-name
+deno deploy
 ```
 
-Replace `your-org-name` with your actual organization name.
+Select the appropriate options in the terminal when prompted.
 
 The deployment process will:
 
@@ -191,12 +185,54 @@ The deployment process will:
 4. Build and deploy to the edge network
 5. Provide you with a live URL
 
+You have now successfully deployed your application! You can visit the returned
+URL to see your app in action.
+
+If you need to make changes to your application, simply update your code and run
+the `deno deploy` command again.
+
+Our demo application had some logging built in, we can use the built in logging
+features of Deno Deploy to monitor the application.
+
+## Monitoring your application
+
+### View application logs
+
+After deploying your application, you can stream live logs to see exactly what's
+happening on the app:
+
+```bash
+deno deploy logs
+```
+
+Visit your application URL and navigate to different pages. You'll see logs
+like:
+
+- Request logs showing HTTP method, path, and user agent
+- Info logs from `console.log()` calls
+- Warning logs from `console.warn()` calls
+- Error logs from `console.error()` calls
+
+Open your app url in the browser and try visiting the `/api/error` endpoint to
+see the error logs in action.
+
+### View logs for a specific time range
+
+To view logs for a specific time range, you can use the `--start` and `--end`
+flags:
+
+```bash
+deno deploy logs \
+  --start "2024-01-01T00:00:00Z" \
+  --end "2024-01-01T23:59:59Z"
+```
+
 ## Managing environment variables
 
 Your application might need environment variables for configuration. The
 `deno deploy` command provides comprehensive environment variable management.
 
-## List environment variables
+### List environment variables
 
 You can view all environment variables for your application:
 
@@ -239,39 +275,6 @@ deployed app:
 
 ```bash
 deno deploy env load .env
-```
-
-## Monitoring your application
-
-### View application logs
-
-After deploying your application, you can stream live logs to see exactly what's
-happening:
-
-```bash
-deno deploy logs
-```
-
-Once your app is deployed, visit your application URL and navigate to different
-pages. You'll see logs like:
-
-- Request logs showing HTTP method, path, and user agent
-- Info logs from `console.log()` calls
-- Warning logs from `console.warn()` calls
-- Error logs from `console.error()` calls
-
-Open your app url in the browser and try visiting the `/api/error` endpoint to
-see error logs in action, after running `deno deploy logs`.
-
-### View logs for a specific time range
-
-To view logs for a specific time range, you can use the `--start` and `--end`
-flags:
-
-```bash
-deno deploy logs \
-  --start "2024-01-01T00:00:00Z" \
-  --end "2024-01-01T23:59:59Z"
 ```
 
 🦕 You've successfully deployed your first application with the `deno deploy`
