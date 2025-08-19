@@ -8,8 +8,8 @@ The `deno deploy` command provides a powerful CLI for deploying and managing
 applications on [Deno Deploy<sup>EA</sup>](https://deno.com/deploy).
 
 If you already have an app to deploy you can skip to
-[Deploying your application](#deploying-your-application), or read on to make
-and then deploy a simple app.
+[Deploying your application](#deploy-your-application), or read on to make and
+then deploy a simple app.
 
 ## Prerequisites
 
@@ -158,11 +158,11 @@ with the `--help` flag to see all available options:
 deno deploy --help
 ```
 
-:::note Deno Deploy<sup>EA</sup> organization requirement
+:::note Deno Deploy organization requirement
 
-If you don't already have a Deno Deploy<sup>EA</sup> organization set up, you
-can create one through the
-[Deno Deploy<sup>EA</sup> web app](https://app.deno.com).
+The `deno deploy` command requires a Deno Deploy organization. If you don't
+already have an organization set up in your account, you can create one through
+the [Deno Deploy web app](https://app.deno.com).
 
 :::
 
