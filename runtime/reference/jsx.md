@@ -61,8 +61,7 @@ To use the newer JSX runtime transform change the compiler options in your
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "jsxImportSourceTypes": "@types/react"
+    "jsxImportSource": "react"
   },
   "imports": {
     "react": "npm:react",
