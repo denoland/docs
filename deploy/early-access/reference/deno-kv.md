@@ -39,7 +39,7 @@ ensures your production data stays safe while developing and testing. You can
 monitor the provisioning process and watch the status change to "Connected". If
 there are any errors, use the "Fix" button to retry.
 
-## Using Databases in Your Code
+## Using Deno KV in Your Code
 
 ### Zero Configuration Required
 
