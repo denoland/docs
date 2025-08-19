@@ -396,6 +396,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Deploy with the deploy command",
+        href: "/examples/deploy_command_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "AWS Lambda",
         href: "/examples/aws_lambda_tutorial/",
         type: "tutorial",
