@@ -64,10 +64,18 @@ To use the newer JSX runtime transform change the compiler options in your
     "jsxImportSource": "react"
   },
   "imports": {
-    "react": "npm:react"
+    "react": "npm:react",
+    "@types/react": "npm:@types/react"
   }
 }
 ```
+
+:::note install dependencies
+
+When manually adding imports to your `deno.json` file, remember to run
+`deno install` to download and cache the dependencies.
+
+:::
 
 Behind the scenes the `jsxImportSource` setting will always append a
 `/jsx-runtime` to the import specifier.
