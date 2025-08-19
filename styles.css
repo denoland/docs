@@ -1401,14 +1401,20 @@
     li:has(> &) {
       display: grid;
       grid-template-rows: max-content 0fr;
-      transition: grid 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+      /* Only animate when user interaction class is present */
+    }
+
+    /* Apply transitions when li has user-interaction class */
+    li.user-interaction:has(> &) {
+      transition: grid-template-rows 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     + ul {
       margin-left: 1rem !important;
     }
 
-    li:has(> .sub-nav-toggle-checkbox:checked) {
+    /* Expanded state when li has the 'expanded' class */
+    li:has(> &).expanded {
       grid-template-rows: max-content 1fr;
       padding-bottom: 1rem;
     }
@@ -1418,22 +1424,16 @@
       padding-bottom: 1rem;
     }
 
-    &:has(.sub-nav-toggle-checkbox:checked)::after {
+    /* Rotate chevron when expanded - only animate on user interaction */
+    li.expanded > &::after {
       transform: rotate(90deg);
+    }
+
+    li.user-interaction > &::after {
+      transition: transform 0.1s ease-in;
     }
 
     &:has(+ ul:focus-within)::after {
-      transform: rotate(90deg);
-    }
-  }
-
-  .sub-nav-toggle-checkbox {
-    li:has(> .sub-nav-toggle &:checked) {
-      grid-template-rows: max-content 1fr;
-      padding-bottom: 1rem;
-    }
-
-    .sub-nav-toggle:has(&:checked)::after {
       transform: rotate(90deg);
     }
   }
