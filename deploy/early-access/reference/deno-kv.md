@@ -74,6 +74,10 @@ region. Cross-region replication is currently not available.
 
 ## Frequently Asked Questions
 
+**Q: How is data stored during local development?**
+
+In your local development environment, data is maintained in memory. No database needs to be created or allocated prior to using the KV APIs in local development, and your KV code can be consistent between environments.
+
 **Q: What happens to my data when I remove an app assignment?**
 
 The data in the databases remain on the servers. To recover or delete the data
