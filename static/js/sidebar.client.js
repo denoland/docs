@@ -13,8 +13,13 @@ if (sidebar) {
     // Set initial state from localStorage without animation
     const isExpanded =
       localStorage.getItem(`accordion-${accordionId}`) === "true";
-    if (isExpanded && parentLi) {
-      parentLi.classList.add("expanded");
+    if (parentLi) {
+      if (isExpanded) {
+        parentLi.classList.add("expanded");
+        toggleButton.setAttribute("aria-expanded", "true");
+      } else {
+        toggleButton.setAttribute("aria-expanded", "false");
+      }
     }
 
     // Add click event listener
@@ -27,9 +32,11 @@ if (sidebar) {
 
         if (wasExpanded) {
           parentLi.classList.remove("expanded");
+          toggleButton.setAttribute("aria-expanded", "false");
           localStorage.setItem(`accordion-${accordionId}`, "false");
         } else {
           parentLi.classList.add("expanded");
+          toggleButton.setAttribute("aria-expanded", "true");
           localStorage.setItem(`accordion-${accordionId}`, "true");
         }
       }
