@@ -2,19 +2,19 @@
 title: "Node and npm Compatibility"
 description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
-- /runtime/reference/node/
-- /runtime/manual/npm_nodejs/std_node/
-- /runtime/manual/node/
-- /runtime/manual/npm_nodejs/cdns/
-- /runtime/manual/using_deno_with_other_technologies/node/cdns/
-- /runtime/manual/node/node_specifiers
-- /runtime/manual/node/package_json
-- /runtime/manual/node/migrate/
-- /runtime/manual/references/cheatsheet/
-- /runtime/manual/node/cheatsheet/
-- /runtime/manual/node/faqs
-- /runtime/manual/node/npm_specifiers
-- /runtime/manual/node/private_registries
+  - /runtime/reference/node/
+  - /runtime/manual/npm_nodejs/std_node/
+  - /runtime/manual/node/
+  - /runtime/manual/npm_nodejs/cdns/
+  - /runtime/manual/using_deno_with_other_technologies/node/cdns/
+  - /runtime/manual/node/node_specifiers
+  - /runtime/manual/node/package_json
+  - /runtime/manual/node/migrate/
+  - /runtime/manual/references/cheatsheet/
+  - /runtime/manual/node/cheatsheet/
+  - /runtime/manual/node/faqs
+  - /runtime/manual/node/npm_specifiers
+  - /runtime/manual/node/private_registries
 ---
 
 - **Deno is Node-compatible**. Most Node projects will run in Deno with little

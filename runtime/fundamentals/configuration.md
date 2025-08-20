@@ -2,11 +2,11 @@
 title: "deno.json and package.json"
 description: "The guide to configuring your Deno projects. Learn about TypeScript settings, tasks, dependencies, formatting, linting, and how to use both deno.json and/or package.json effectively."
 oldUrl:
-- /runtime/manual/getting_started/configuration_file/
-- /runtime/manual/basics/modules/import_maps/
-- /runtime/basics/import_maps/
-- /runtime/manual/linking_to_external_code/import_maps
-- /manual/linking_to_external_code/proxies
+  - /runtime/manual/getting_started/configuration_file/
+  - /runtime/manual/basics/modules/import_maps/
+  - /runtime/basics/import_maps/
+  - /runtime/manual/linking_to_external_code/import_maps
+  - /manual/linking_to_external_code/proxies
 ---
 
 You can configure Deno using a `deno.json` file. This file can be used to
