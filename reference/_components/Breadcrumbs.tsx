@@ -1,7 +1,12 @@
 import type { BreadcrumbCtx } from "@deno/doc";
 
 export default function (
-  { comp, parts }: { comp: any; parts: BreadcrumbCtx[] },
+  // deno-lint-ignore no-explicit-any
+  { comp, parts, hasSubNav }: {
+    comp: any;
+    parts: BreadcrumbCtx[];
+    hasSubNav?: boolean;
+  },
 ) {
   const pathParts: BreadcrumbCtx[] = [];
   const symbolParts: BreadcrumbCtx[] = [];
@@ -14,8 +19,12 @@ export default function (
     }
   }
 
+  const topClass = hasSubNav ? "top-header-plus-subnav" : "top-header";
+
   return (
-    <ul className="breadcrumbs sticky top-header-plus-subnav w-full p-4 !pl-0 m-0 bg-background-raw z-10">
+    <ul
+      className={`breadcrumbs sticky ${topClass} w-full p-4 !pl-0 m-0 bg-background-raw z-10`}
+    >
       {pathParts.map((part, i) => {
         const isLast =
           !(i !== (pathParts.length - 1) || symbolParts.length > 0);
