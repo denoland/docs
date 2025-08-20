@@ -1385,11 +1385,6 @@
 
 @layer components {
   .sub-nav-toggle {
-    [data-name="accordion__accessible-status-text"] {
-      @apply sr-only;
-      display: none;
-    }
-
     li:has(&) {
       border-left: 1px solid var(--color-foreground-tertiary);
     }
