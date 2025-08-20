@@ -506,7 +506,8 @@ You can also define multiple entry points:
 {
   "exports": {
     "./module1": "./src/module1.ts",
-    "./module2": "./src/module2.ts"
+    "./module2": "./src/module2.ts",
+    ".": "./src/mod.ts" // Default entry point
   }
 }
 ```
