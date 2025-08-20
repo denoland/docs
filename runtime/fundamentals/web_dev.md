@@ -2,8 +2,8 @@
 title: "Web development"
 description: "A guide to web development with Deno. Learn about supported frameworks like Fresh, Next.js, and Astro, along with built-in features for building modern web applications."
 oldUrl:
- - /runtime/manual/getting_started/web_frameworks/
- - /runtime/fundamentals/web_frameworks/
+  - /runtime/manual/getting_started/web_frameworks/
+  - /runtime/fundamentals/web_frameworks/
 ---
 
 Deno offers a secure and developer-friendly environment for building web

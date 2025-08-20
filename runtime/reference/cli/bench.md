@@ -1,8 +1,8 @@
 ---
 title: "`deno bench`, benchmarking tool"
 oldUrl:
- - /runtime/manual/tools/benchmarker/
- - /runtime/reference/cli/benchmarker/
+  - /runtime/manual/tools/benchmarker/
+  - /runtime/reference/cli/benchmarker/
 command: bench
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno bench"

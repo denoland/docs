@@ -71,11 +71,11 @@ specification of the protocol for connecting to a remote KV database
 
 ## Data distribution
 
-Deno KV databases are replicated across at least 6 data centers, spanning 3
-regions (US, Europe, and Asia). Once a write operation is committed, its
-mutations are persistently stored in a minimum of two data centers within the
-primary region. Asynchronous replication typically transfers these mutations to
-the other two regions in under 10 seconds.
+Deno KV databases are replicated across at least 3 data centers in the primary
+region. Once a write operation is committed, its mutations are persistently
+stored in a quorum of data centers within the primary region. If cross-region
+replication is enabled, asynchronous replication typically transfers mutations
+to the destination region in under 5 seconds.
 
 The system is designed to tolerate most data center-level failures without
 experiencing downtime or data loss. Recovery Point Objectives (RPO) and Recovery
