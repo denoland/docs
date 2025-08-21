@@ -1,7 +1,7 @@
 import "@std/dotenv/load";
 
-import Server from "lume/core/server.ts";
-import NotFoundMiddleware from "lume/middlewares/not_found.ts";
+import Server from "https://deno.land/x/lume@v2.4.1/core/server.ts";
+import NotFoundMiddleware from "https://deno.land/x/lume@v2.4.1/middlewares/not_found.ts";
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
 import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware from "./middleware/redirects.ts";
