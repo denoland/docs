@@ -47,21 +47,13 @@ export default function (data: Lume.Data) {
                   {item.items && item.items.length > 0
                     ? (
                       <>
-                        <label
-                          htmlFor={`sub-nav-toggle-${
-                            item.title.replaceAll(" ", "")
-                          }`}
-                          className="sub-nav-toggle block relative py-1 px-3 after:right-4 [font:inherit] after:translate-y-1/2 after:transition-transfor after:duration-100 after:ease-in after:[background:url(./img/chevron.svg)_no-repeat_center] after:-top-0.5 after:block after:w-4 after:h-4 after:absolute"
+                        <button
+                          type="button"
+                          data-accordion-toggle={item.title.replaceAll(" ", "")}
+                          className="sub-nav-toggle block relative py-1 px-3 after:right-4 [font:inherit] after:translate-y-1/2 after:transition-transform after:duration-100 after:ease-in after:[background:url(./img/chevron.svg)_no-repeat_center] after:-top-0.5 after:block after:w-4 after:h-4 after:absolute w-full text-left"
                         >
                           {item.title}
-                          <input
-                            type="checkbox"
-                            id={`sub-nav-toggle-${
-                              item.title.replaceAll(" ", "")
-                            }`}
-                            className="sub-nav-toggle-checkbox sr-only"
-                          />
-                        </label>
+                        </button>
                         <SidebarList>
                           {item.items.map((subItem: any) => (
                             <li key={subItem.href}>
