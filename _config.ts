@@ -115,6 +115,7 @@ site.copy("examples/tutorials/images");
 site.copy("deploy/manual/images");
 site.copy("deploy/early-access/images");
 site.copy("deno.json");
+site.copy("deno.lock");
 site.copy("go.json");
 site.copy("oldurls.json");
 site.copy("server.ts");
