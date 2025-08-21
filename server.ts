@@ -1,4 +1,4 @@
-import "@std/dotenv/load";
+import "jsr:@std/dotenv/load";
 
 import Server from "https://deno.land/x/lume@v2.4.1/core/server.ts";
 import NotFoundMiddleware from "https://deno.land/x/lume@v2.4.1/middlewares/not_found.ts";
