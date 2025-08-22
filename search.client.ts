@@ -313,10 +313,10 @@ class OramaSearch {
 
       return true;
     })
-      // Sort by content quality - prefer longer, more substantial content
+      // Sort by Orama's relevance score
       .sort((a, b) => {
-        const scoreA = this.getContentScore(a, searchTerm);
-        const scoreB = this.getContentScore(b, searchTerm);
+        const scoreA = a.score || 0;
+        const scoreB = b.score || 0;
         return scoreB - scoreA; // Higher score first
       });
 
@@ -624,76 +624,6 @@ class OramaSearch {
     }
 
     return false;
-  }
-
-  // Helper method to score content quality
-  getContentScore(hit: Hit<OramaDocument>, term?: string): number {
-    if (!hit.document) return 0;
-
-    let score = hit.score || 0; // Start with Orama's relevance score
-
-    // Bonus for longer content (indicates substantial content)
-    const contentLength = hit.document.content?.length || 0;
-    if (contentLength > 200) score += 2;
-    if (contentLength > 500) score += 3;
-    if (contentLength > 1000) score += 5;
-
-    // Bonus for titles that seem to be real page titles
-    const title = hit.document.title || "";
-    if (title.length > 10 && title.length < 100) score += 1;
-
-    // Penalty for very short content
-    if (contentLength < 50) score -= 5;
-
-    // Bonus for certain sections that indicate main content
-    const section = hit.document.section?.toLowerCase() || "";
-    const category = hit.document.category?.toLowerCase() || "";
-
-    const contentSections = [
-      "guide",
-      "tutorial",
-      "reference",
-      "api",
-      "documentation",
-      "docs",
-    ];
-    if (
-      contentSections.some((s) => section.includes(s) || category.includes(s))
-    ) {
-      score += 3;
-    }
-
-    // Boost CLI command pages when term contains a matching command
-    const t = (term || "").toLowerCase().trim();
-    const docKind = hit.document.kind?.toLowerCase();
-    const cmd = hit.document.command?.toLowerCase();
-    const titleLower = title.toLowerCase();
-    const path = (hit.document.path || hit.document.url || "").toLowerCase();
-
-    // Simple query normalization: strip leading "deno "
-    const normalized = t.replace(/^deno\s+/, "");
-
-    if (docKind === "cli") {
-      // Strong boost if command matches
-      if (
-        cmd &&
-        (normalized === cmd || t === cmd ||
-          titleLower.includes(`deno ${cmd}`) || path.endsWith(`/cli/${cmd}`))
-      ) {
-        score += 25;
-      }
-      // Moderate boost for any CLI page when the query starts with "deno"
-      if (t.startsWith("deno ")) {
-        score += 8;
-      }
-    }
-
-    // Penalize anchor/heading-only hits that contain a hash but not the page root
-    if (path.includes("#") && !/\/reference\/cli\//.test(path)) {
-      score -= 6;
-    }
-
-    return score;
   }
 }
 
