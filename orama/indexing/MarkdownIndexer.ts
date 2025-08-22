@@ -6,18 +6,8 @@ import type {
 
 const H1_REGEX = /^# (.+)$/m;
 const FRONTMATTER_TITLE_REGEX = /title: ["'](.+)["']/;
-const DESCRIPTION_REGEX    private buildPath(relativePath: string): string {
-        let p = relativePath.replace(/\.(md|mdx)$/, "");
-        // Normalize path separators to forward slashes for web paths
-        p = p.replace(/\\/g, "/");
-        if (p.endsWith("/index")) {
-            p = p.replace(/\/index$/, "/");
-        }
-        if (!p.startsWith("/")) {
-            p = "/" + p;
-        }
-        return p;
-    }ption: ["'](.+)["']/;
+const DESCRIPTION_REGEX = /description: ["'](.+)["']/;
+const FRONTMATTER_URL_REGEX = /url:\s*(.+)/;
 const TAGS_REGEX = /tags: \[(.*?)\]/;
 const FRONTMATTER_COMMAND_REGEX = /\bcommand:\s*(["']?)([a-zA-Z0-9_-]+)\1/;
 
@@ -121,14 +111,14 @@ export class MarkdownIndexer implements IIndexDocuments {
         // Get category and section
         const { category, section, subsection } = this.getCategoryAndSection(relPath);
 
-        const url = this.buildUrl(relPath);
+        const url = this.buildUrl(relPath, frontmatter);
 
         return {
             id: this.generateId(relPath),
             title: title,
             content: prefixedContent,
             url,
-            path: this.buildPath(relPath),
+            path: this.buildPath(relPath, frontmatter),
             category: category,
             section: section,
             subsection: subsection || undefined,
@@ -212,10 +202,25 @@ export class MarkdownIndexer implements IIndexDocuments {
             .toLowerCase();
     }
 
-    private buildUrl(relativePath: string): string {
+    private buildUrl(relativePath: string, frontmatter?: string): string {
+        // Check for frontmatter URL first
+        if (frontmatter) {
+            const urlMatch = frontmatter.match(FRONTMATTER_URL_REGEX);
+            if (urlMatch) {
+                let frontmatterUrl = urlMatch[1].trim();
+                // Remove quotes if present
+                frontmatterUrl = frontmatterUrl.replace(/^['"`]|['"`]$/g, '');
+                // Ensure it starts with /
+                if (!frontmatterUrl.startsWith("/")) {
+                    frontmatterUrl = "/" + frontmatterUrl;
+                }
+                const BASE_URL = "https://docs.deno.com";
+                return `${BASE_URL}${frontmatterUrl}`;
+            }
+        }
+
+        // Fall back to path-based URL
         let url = relativePath.replace(/\.(md|mdx)$/, "");
-        // Normalize path separators to forward slashes for web URLs
-        url = url.replace(/\\/g, "/");
         if (url.endsWith("/index")) {
             url = url.replace(/\/index$/, "/");
         }
@@ -226,8 +231,26 @@ export class MarkdownIndexer implements IIndexDocuments {
         const BASE_URL = "https://docs.deno.com"; // Replace with your actual base URL
 
         return `${BASE_URL}${url}`;
-    }    private buildPath(relativePath: string): string {
-    let p = relativePath.replace(/\.(md|mdx)$/, "");
+    }
+
+    private buildPath(relativePath: string, frontmatter?: string): string {
+        // Check for frontmatter URL first
+        if (frontmatter) {
+            const urlMatch = frontmatter.match(FRONTMATTER_URL_REGEX);
+            if (urlMatch) {
+                let frontmatterUrl = urlMatch[1].trim();
+                // Remove quotes if present
+                frontmatterUrl = frontmatterUrl.replace(/^['"`]|['"`]$/g, '');
+                // Ensure it starts with /
+                if (!frontmatterUrl.startsWith("/")) {
+                    frontmatterUrl = "/" + frontmatterUrl;
+                }
+                return frontmatterUrl;
+            }
+        }
+
+        // Fall back to path-based URL
+        let p = relativePath.replace(/\.(md|mdx)$/, "");
         if (p.endsWith("/index")) {
             p = p.replace(/\/index$/, "/");
         }

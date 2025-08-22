@@ -567,6 +567,11 @@ class OramaSearch {
   cleanTitle(title: string): string {
     if (!title) return title;
 
+    // Handle breadcrumb-style titles with intelligent processing
+    if (title.includes("\\")) {
+      return this.processBreadcrumbTitle(title);
+    }
+
     // Remove "jump to heading" and similar text patterns from titles
     let cleaned = title
       .replace(/\s*Jump\s+to\s+heading\s*/gi, "")
@@ -586,6 +591,82 @@ class OramaSearch {
     }
 
     return cleaned;
+  }
+
+  // Process breadcrumb-style titles intelligently
+  processBreadcrumbTitle(title: string): string {
+    if (!title) return title;
+
+    // Split by common path separators
+    const parts = title.split(/[\\\/\|>]+/).map((part) => part.trim()).filter(
+      (part) => part,
+    );
+
+    if (parts.length <= 1) return title;
+
+    // Get the last meaningful part (not "Index")
+    let lastPart = parts[parts.length - 1];
+    if (lastPart.toLowerCase() === "index" && parts.length > 1) {
+      lastPart = parts[parts.length - 2];
+    }
+
+    // Handle specific known patterns where we want to preserve more context
+    const contextualMappings: Record<string, string> = {
+      "Support": "Support and Feedback", // When we see just "Support", enhance it
+    };
+
+    // Check if this last part needs enhancement
+    if (contextualMappings[lastPart]) {
+      return contextualMappings[lastPart];
+    }
+
+    // For other cases, use intelligent processing
+    return this.enhanceBreadcrumbPart(lastPart, parts);
+  }
+
+  // Enhance a breadcrumb part with context from the full path
+  enhanceBreadcrumbPart(part: string, _fullPath: string[]): string {
+    if (!part) return part;
+
+    // Handle common acronyms that shouldn't be split
+    const acronyms = [
+      "API",
+      "JWT",
+      "HTTP",
+      "HTTPS",
+      "URL",
+      "UUID",
+      "JSON",
+      "XML",
+      "HTML",
+      "CSS",
+      "JS",
+      "TS",
+    ];
+    if (acronyms.includes(part.toUpperCase())) {
+      return part.toUpperCase();
+    }
+
+    // Convert from various formats to readable text
+    let enhanced = part
+      .replace(/[_-]/g, " ") // Replace underscores and hyphens with spaces
+      .replace(/([a-z])([A-Z])/g, "$1 $2") // Add spaces between camelCase words
+      .replace(/\s+/g, " ") // Normalize whitespace
+      .trim();
+
+    // Capitalize properly
+    enhanced = enhanced.split(" ")
+      .map((word) => {
+        // Keep acronyms uppercase
+        if (acronyms.includes(word.toUpperCase())) {
+          return word.toUpperCase();
+        }
+        // Normal word capitalization
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      })
+      .join(" ");
+
+    return enhanced;
   }
 
   // Helper method to detect navigation/menu content
