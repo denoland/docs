@@ -467,11 +467,15 @@ class OramaSearch {
 
   // Helper method to ensure URLs are properly formatted
   formatUrl(url: string | undefined, hit?: Hit<OramaDocument>): string {
-    // First try to use the path field if available
+    // First try to use the path field if available (this should be a clean relative path)
     if (hit && hit.document && hit.document.path) {
-      // Clean up the path by removing "jump to heading" text
-      const cleanPath = this.cleanUrl(hit.document.path);
-      return this.formatUrl(cleanPath);
+      const path = hit.document.path;
+      // If it starts with '/', it's already a root-relative path
+      if (path.startsWith("/")) {
+        return path;
+      }
+      // Otherwise, make it root-relative
+      return "/" + path;
     }
 
     // Handle undefined or null URLs
@@ -499,9 +503,15 @@ class OramaSearch {
     // Clean the URL first
     const cleanedUrl = this.cleanUrl(url);
 
-    // If it's already a full URL, return as-is
+    // If it's already a full URL, extract just the path part
     if (cleanedUrl.startsWith("http://") || cleanedUrl.startsWith("https://")) {
-      return cleanedUrl;
+      try {
+        const urlObj = new URL(cleanedUrl);
+        return urlObj.pathname;
+      } catch {
+        // If URL parsing fails, fall back to original logic
+        return cleanedUrl;
+      }
     }
 
     // If it starts with '/', it's a root-relative path
