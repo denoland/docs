@@ -19,73 +19,20 @@
     "@orama/core": "jsr:@orama/core@^1.2.4"
   },
   "tasks": {
-    "serve": "deno run --env-file -A lume.ts -s",
-    "serve:no_logs": "LUME_LOGS=WARN deno run --env-file -A lume.ts -s",
-    "start": "deno task serve",
-    "dev": "deno task serve:no_logs",
-    "build": {
-      "description": "Full production build by default",
-      "command": "deno task build:prod && deno task tw"
-    },
-    "build:prod": {
-      "description": "Build the entire site including expensive operations",
-      "command": "BUILD_TYPE=FULL deno run --env-file -A lume.ts"
-    },
-    "tw": "tailwindcss -i styles.css -o _site/styles.css --minify",
-    "build:light": {
-      "description": "Build the site without expensive operations",
-      "command": "deno run --env-file -A lume.ts"
-    },
-    "debug": "deno task build && deno task prod",
+    "dev": "LUME_LOGS=WARN deno run --env-file -A lume.ts -s",
+    "serve": "deno task dev",
+    "start": "deno task dev",
+    "build": "BUILD_TYPE=FULL deno run --env-file -A lume.ts && tailwindcss -i styles.css -o _site/styles.css --minify",
+    "build:light": "deno run --env-file -A lume.ts",
     "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
-    "reference": "cd reference_gen && deno task types && deno task doc",
-    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "test": "deno test -A",
-    "update_lint_rules": "deno run -A update_lint_rules.ts",
-    "serve:prod": {
-      "description": "Build, serve, and watch just the APIs section of the docs",
-      "command": "BUILD_TYPE=FULL deno task serve"
-    },
-    "serve:style": {
-      "description": "Build, serve, and watch just the styles and styleguide",
-      "command": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts"
-    },
-    "generate:llms": {
-      "description": "Generate LLM-friendly documentation files (llms.txt and llms-full.txt) in the static directory",
-      "command": "deno run -A generate_llms_files.ts"
-    },
-    "generate:llms:site": {
-      "description": "Generate LLM-friendly documentation files directly in the _site directory",
-      "command": "deno run -A generate_llms_files.ts _site"
-    },
-    "generate:orama": {
-      "description": "Generate Orama search index JSON file for uploading to Orama Cloud",
-      "command": "deno run -A orama/generate.ts"
-    },
-    "generate:orama:site": {
-      "description": "Generate Orama search index directly in the _site directory",
-      "command": "deno run -A orama/generate.ts _site"
-    },
-    "generate:orama:full": {
-      "description": "Generate comprehensive Orama index including API reference documentation",
-      "command": "deno run -A orama/generate_orama_index_full.ts"
-    },
-    "generate:orama:full:site": {
-      "description": "Generate comprehensive Orama index directly in the _site directory",
-      "command": "deno run -A orama/generate_orama_index_full.ts _site"
-    },
-    "upload:orama": {
-      "description": "Upload generated Orama index to Orama Cloud (requires ORAMA_INDEX_ID and ORAMA_PRIVATE_API_KEY env vars)",
-      "command": "deno run -A orama/upload_orama_index.ts"
-    },
-    "upload:orama:full": {
-      "description": "Upload comprehensive Orama index (orama-index-full.json) to Orama Cloud",
-      "command": "deno run -A orama/upload_orama_index.ts --full"
-    },
-    "analyze:orama": {
-      "description": "Analyze the generated Orama index to check content quality and statistics",
-      "command": "deno run -A orama/analyze_orama_index.ts"
-    }
+    "lint:update": "deno run -A update_lint_rules.ts",
+    "generate:search": "deno run -A orama/generate_orama_index_full.ts",
+    "generate:search:docs-only": "deno run -A orama/generate.ts",
+    "generate:llms": "deno run -A generate_llms_files.ts",
+    "generate:reference": "cd reference_gen && deno task types && deno task doc",
+    "search:upload": "deno run -A orama/upload_orama_index.ts --full",
+    "search:analyze": "deno run -A orama/analyze_orama_index.ts"
   },
   "compilerOptions": {
     "types": [
