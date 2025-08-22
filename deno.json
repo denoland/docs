@@ -21,6 +21,7 @@
   "tasks": {
     "dev": "LUME_LOGS=WARN deno run --env-file -A lume.ts -s",
     "serve": "deno task dev",
+    "serve:style": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts",
     "start": "deno task dev",
     "build": "BUILD_TYPE=FULL deno run --env-file -A lume.ts && tailwindcss -i styles.css -o _site/styles.css --minify",
     "build:light": "deno run --env-file -A lume.ts",
