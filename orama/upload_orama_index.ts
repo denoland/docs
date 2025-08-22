@@ -19,9 +19,6 @@
  *
  *   # Upload in batches of 1000 documents
  *   deno run -A upload_orama_index.ts --batch-size=1000
- *
- *   # Deploy after upload
- *   deno run -A upload_orama_index.ts --deploy
  */
 
 import { fromFileUrl, join } from "@std/path";
@@ -296,18 +293,8 @@ async function main() {
   // Upload documents
   await uploadDocuments(config, documents, options);
 
-  // Deploy if requested
-  if (shouldDeploy) {
-    console.log("");
-    await deployIndex(config);
-  }
-
   console.log("\nUpload process completed!");
-  if (shouldDeploy) {
-    console.log("Index has been deployed and is now live!");
-  } else {
-    console.log("Run with --deploy flag to deploy the index");
-  }
+  console.log("Index has been updated and is now live!");
 }
 
 // Run the main function

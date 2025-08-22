@@ -6,7 +6,18 @@ import type {
 
 const H1_REGEX = /^# (.+)$/m;
 const FRONTMATTER_TITLE_REGEX = /title: ["'](.+)["']/;
-const DESCRIPTION_REGEX = /description: ["'](.+)["']/;
+const DESCRIPTION_REGEX    private buildPath(relativePath: string): string {
+        let p = relativePath.replace(/\.(md|mdx)$/, "");
+        // Normalize path separators to forward slashes for web paths
+        p = p.replace(/\\/g, "/");
+        if (p.endsWith("/index")) {
+            p = p.replace(/\/index$/, "/");
+        }
+        if (!p.startsWith("/")) {
+            p = "/" + p;
+        }
+        return p;
+    }ption: ["'](.+)["']/;
 const TAGS_REGEX = /tags: \[(.*?)\]/;
 const FRONTMATTER_COMMAND_REGEX = /\bcommand:\s*(["']?)([a-zA-Z0-9_-]+)\1/;
 
@@ -202,7 +213,9 @@ export class MarkdownIndexer implements IIndexDocuments {
     }
 
     private buildUrl(relativePath: string): string {
-    let url = relativePath.replace(/\.(md|mdx)$/, "");
+        let url = relativePath.replace(/\.(md|mdx)$/, "");
+        // Normalize path separators to forward slashes for web URLs
+        url = url.replace(/\\/g, "/");
         if (url.endsWith("/index")) {
             url = url.replace(/\/index$/, "/");
         }
@@ -213,9 +226,7 @@ export class MarkdownIndexer implements IIndexDocuments {
         const BASE_URL = "https://docs.deno.com"; // Replace with your actual base URL
 
         return `${BASE_URL}${url}`;
-    }
-
-    private buildPath(relativePath: string): string {
+    }    private buildPath(relativePath: string): string {
     let p = relativePath.replace(/\.(md|mdx)$/, "");
         if (p.endsWith("/index")) {
             p = p.replace(/\/index$/, "/");

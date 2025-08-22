@@ -221,6 +221,8 @@ function buildUrl(relativePath: string, baseUrl?: string): string {
   }
 
   let url = relativePath.replace(/\.(md|mdx)$/, "");
+  // Normalize path separators to forward slashes for web URLs
+  url = url.replace(/\\/g, "/");
   if (url.endsWith("/index")) {
     url = url.replace(/\/index$/, "/");
   }
@@ -240,6 +242,8 @@ function buildPath(relativePath: string, baseUrl?: string): string {
   }
 
   let path = relativePath.replace(/\.(md|mdx)$/, "");
+  // Normalize path separators to forward slashes for web paths
+  path = path.replace(/\\/g, "/");
   if (path.endsWith("/index")) {
     path = path.replace(/\/index$/, "/");
   }
