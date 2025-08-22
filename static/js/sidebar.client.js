@@ -2,17 +2,45 @@ const sidebar = document.getElementById("nav");
 const button = document.getElementById("hamburger-button");
 
 if (sidebar) {
-  const checkboxes = document.querySelectorAll(".sub-nav-toggle-checkbox");
-  checkboxes.forEach((checkbox) => {
-    // on change of the checkbox, update the checked state in the local storage
-    checkbox.addEventListener("change", () => {
-      console.log("updated");
-      localStorage.setItem(checkbox.id, checkbox.checked);
-    });
+  const toggleButtons = document.querySelectorAll(
+    ".sub-nav-toggle[data-accordion-toggle]",
+  );
 
-    // set the checked state of the checkbox based on the value in the local storage
-    const checked = localStorage.getItem(checkbox.id) === "true";
-    checkbox.checked = checked;
+  toggleButtons.forEach((toggleButton) => {
+    const accordionId = toggleButton.getAttribute("data-accordion-toggle");
+    const parentLi = toggleButton.closest("li");
+
+    // Set initial state from localStorage without animation
+    const isExpanded =
+      localStorage.getItem(`accordion-${accordionId}`) === "true";
+    if (parentLi) {
+      if (isExpanded) {
+        parentLi.classList.add("expanded");
+        toggleButton.setAttribute("aria-expanded", "true");
+      } else {
+        toggleButton.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    // Add click event listener
+    toggleButton.addEventListener("click", () => {
+      if (parentLi) {
+        // Add the user-interaction class to enable animations
+        parentLi.classList.add("user-interaction");
+
+        const wasExpanded = parentLi.classList.contains("expanded");
+
+        if (wasExpanded) {
+          parentLi.classList.remove("expanded");
+          toggleButton.setAttribute("aria-expanded", "false");
+          localStorage.setItem(`accordion-${accordionId}`, "false");
+        } else {
+          parentLi.classList.add("expanded");
+          toggleButton.setAttribute("aria-expanded", "true");
+          localStorage.setItem(`accordion-${accordionId}`, "true");
+        }
+      }
+    });
   });
 }
 

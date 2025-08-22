@@ -1,9 +1,9 @@
 ---
 title: "`deno task`"
 oldUrl:
- - /runtime/tools/task_runner/
- - /runtime/manual/tools/task_runner/
- - /runtime/reference/cli/task_runner/
+  - /runtime/tools/task_runner/
+  - /runtime/manual/tools/task_runner/
+  - /runtime/reference/cli/task_runner/
 command: task
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno task"

@@ -55,7 +55,7 @@ Deploy.
 | Environment Variables           | ✅ Different dev/prod env vars | 🟠 One set of env vars for all deployments                                                                                              |
 | CDN caching                     | ✅ Supported                   | ❌ Not supported                                                                                                                        |
 | Web Cache API                   | ✅ Supported                   | ✅ Supported                                                                                                                            |
-| Databases                       | ⏳ Coming soon                 | 🟠 Deno KV                                                                                                                              |
+| Databases                       | ✅ Supported                   | 🟠 Deno KV                                                                                                                              |
 | Queues                          | ❌ Not supported               | ✅ Supported                                                                                                                            |
 | Cron                            | ❌ Not supported               | ✅ Supported                                                                                                                            |
 | Deploy from GitHub              | ✅ Supported                   | ✅ Supported                                                                                                                            |
