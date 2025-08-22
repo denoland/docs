@@ -231,6 +231,25 @@ function buildUrl(relativePath: string, baseUrl?: string): string {
 }
 
 /**
+ * Build path from relative path (without base URL)
+ */
+function buildPath(relativePath: string, baseUrl?: string): string {
+  if (baseUrl) {
+    // For API docs, return relative path with baseUrl
+    return `${baseUrl}/${relativePath}`;
+  }
+
+  let path = relativePath.replace(/\.(md|mdx)$/, "");
+  if (path.endsWith("/index")) {
+    path = path.replace(/\/index$/, "/");
+  }
+  if (!path.startsWith("/")) {
+    path = "/" + path;
+  }
+  return path;
+}
+
+/**
  * Process a single API symbol from reference documentation
  */
 function processApiSymbol(
@@ -239,11 +258,11 @@ function processApiSymbol(
   apiType: string,
   baseUrl: string,
   packageName: string,
-): OramaDocument | null {
+): OramaDocument[] {
   try {
     // Type guard for symbolData
     if (!symbolData || typeof symbolData !== "object") {
-      return null;
+      return [];
     }
 
     const data = symbolData as Record<string, unknown>;
@@ -253,6 +272,9 @@ function processApiSymbol(
       | Record<string, unknown>
       | undefined;
     const htmlHeadCtx = data.html_head_ctx as
+      | Record<string, unknown>
+      | undefined;
+    const tocCtx = data.toc_ctx as
       | Record<string, unknown>
       | undefined;
 
@@ -315,7 +337,7 @@ function processApiSymbol(
 
     // Skip if no meaningful content
     if (content.length < 20) {
-      return null;
+      return [];
     }
 
     // Determine symbol type
@@ -348,15 +370,20 @@ function processApiSymbol(
       }
     }
 
-    // Build clean URL
-    const cleanPath = symbolPath.replace(/^\.\/~\//, "").replace(/\.json$/, "");
+    // Build clean URL - preserve the ~/ prefix for API paths
+    const cleanPath = symbolPath.replace(/^\.\//, "").replace(/\.json$/, "");
     const url = buildUrl(cleanPath, baseUrl);
+    const path = buildPath(cleanPath, baseUrl);
 
-    return {
+    const documents: OramaDocument[] = [];
+
+    // Create main document for the symbol
+    documents.push({
       id: generateId(cleanPath, apiType),
       title: title.replace(" - Deno documentation", ""),
       content: content.trim(),
       url,
+      path,
       category: `api-${apiType}`,
       section: packageName.toLowerCase(),
       subsection: symbolType,
@@ -370,10 +397,48 @@ function processApiSymbol(
         symbolPath: symbolName,
         packageName,
       },
-    };
+    });
+
+    // Process TOC entries to create anchor documents
+    const documentNavigation = tocCtx?.document_navigation as unknown[] | undefined;
+    if (documentNavigation && Array.isArray(documentNavigation)) {
+      for (const navItem of documentNavigation) {
+        if (navItem && typeof navItem === "object") {
+          const navObj = navItem as Record<string, unknown>;
+          const anchor = navObj.anchor as string | undefined;
+          const navContent = navObj.content as string | undefined;
+          
+          if (anchor && navContent) {
+            // Create a document for this anchor
+            documents.push({
+              id: generateId(`${cleanPath}-${anchor}`, apiType),
+              title: `${symbolName}.${navContent}`,
+              content: `${navContent} ${content.trim()}`,
+              url: `${url}#${anchor}`,
+              path: `${path}#${anchor}`,
+              category: `api-${apiType}`,
+              section: packageName.toLowerCase(),
+              subsection: symbolType,
+              description: `${navContent} - ${symbolType} in the ${packageName} API`,
+              tags: [...tags, "anchor"],
+              headings: [navContent],
+              lastModified: Date.now(),
+              docType: "api-reference",
+              apiInfo: {
+                symbolType,
+                symbolPath: symbolName,
+                packageName,
+              },
+            });
+          }
+        }
+      }
+    }
+
+    return documents;
   } catch (error) {
     console.error(`Error processing API symbol ${symbolPath}:`, error);
-    return null;
+    return [];
   }
 }
 
@@ -409,7 +474,7 @@ async function processReferenceDocumentation(): Promise<OramaDocument[]> {
           continue;
         }
 
-        const doc = processApiSymbol(
+        const docs = processApiSymbol(
           symbolPath,
           symbolData,
           refFile.apiType,
@@ -417,9 +482,9 @@ async function processReferenceDocumentation(): Promise<OramaDocument[]> {
           refFile.apiType.charAt(0).toUpperCase() + refFile.apiType.slice(1),
         );
 
-        if (doc) {
-          documents.push(doc);
-          processed++;
+        if (docs && docs.length > 0) {
+          documents.push(...docs);
+          processed += docs.length;
         } else {
           skipped++;
         }
@@ -535,14 +600,16 @@ async function collectMarkdownFiles(): Promise<OramaDocument[]> {
             relativePath,
           );
 
-          // Build URL
+          // Build URL and path
           const url = buildUrl(relativePath);
+          const path = buildPath(relativePath);
 
           files.push({
             id: generateId(relativePath),
             title,
             content: prefixedContent,
             url,
+            path,
             category,
             section,
             subsection: subsection || undefined,

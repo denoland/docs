@@ -469,7 +469,24 @@ class OramaSearch {
   formatUrl(url: string | undefined, hit?: Hit<OramaDocument>): string {
     // First try to use the path field if available (this should be a clean relative path)
     if (hit && hit.document && hit.document.path) {
-      const path = hit.document.path;
+      const path = this.cleanUrl(hit.document.path);
+
+      // Check if the original URL has an anchor that we should preserve
+      if (url && url.includes("#")) {
+        const anchorMatch = url.match(/#[^#]*$/);
+        if (anchorMatch) {
+          const anchor = anchorMatch[0];
+          // Only add anchor if it's not a "jump-to-heading" artifact
+          if (
+            !anchor.includes("jump-to-heading") &&
+            !anchor.includes("Jump-to-heading")
+          ) {
+            const cleanPath = path.startsWith("/") ? path : "/" + path;
+            return cleanPath + anchor;
+          }
+        }
+      }
+
       // If it starts with '/', it's already a root-relative path
       if (path.startsWith("/")) {
         return path;
@@ -503,11 +520,11 @@ class OramaSearch {
     // Clean the URL first
     const cleanedUrl = this.cleanUrl(url);
 
-    // If it's already a full URL, extract just the path part
+    // If it's already a full URL, extract just the path part (including anchor)
     if (cleanedUrl.startsWith("http://") || cleanedUrl.startsWith("https://")) {
       try {
         const urlObj = new URL(cleanedUrl);
-        return urlObj.pathname;
+        return urlObj.pathname + urlObj.hash;
       } catch {
         // If URL parsing fails, fall back to original logic
         return cleanedUrl;
@@ -530,10 +547,13 @@ class OramaSearch {
       .replace(/\s*jump\s+to\s+heading\s*/gi, "")
       .replace(/\s*#jump-to-heading\s*/gi, "")
       .replace(/\s*-jump-to-heading\s*/gi, "")
+      .replace(/#jump-to-heading/gi, "")
+      .replace(/-jump-to-heading/gi, "")
       .trim();
 
-    // Remove any trailing or leading hashes that might be left
-    cleaned = cleaned.replace(/^#+|#+$/g, "");
+    // Remove empty hash fragments or multiple hashes, but preserve legitimate anchors
+    cleaned = cleaned.replace(/#+$/, ""); // Remove trailing empty hashes
+    cleaned = cleaned.replace(/^#+/, ""); // Remove leading hashes only if they're standalone
 
     // If the URL became empty or just whitespace, return the original
     if (!cleaned || cleaned.trim() === "") {
