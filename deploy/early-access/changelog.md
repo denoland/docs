@@ -202,8 +202,8 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 - Environment variables now show up correctly on the timelines page
 - The production timeline page now correctly shows all builds
-- app.deno.com works on older versions of Firefox now
-- Page titles across app.deno.com now reflect the page you are on
+- console.deno.com works on older versions of Firefox now
+- Page titles across console.deno.com now reflect the page you are on
 - The "Provision certificate" button does not lock up after DNS verification
   failures anymore
 - Domains that had a provisioned certificate or attached application can now be

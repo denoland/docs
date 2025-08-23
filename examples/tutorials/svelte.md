@@ -27,7 +27,7 @@ button below to instantly deploy your own copy of the complete SvelteKit
 dinosaur app to Deno Deploy. You'll get a live, working application that you can
 customize and modify as you learn!
 
-[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/tutorial-with-svelte)
+[![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-svelte)
 
 :::
 
@@ -314,7 +314,7 @@ git push -u origin main
 ### Deploy to Deno Deploy
 
 Once your app is on GitHub, you can
-[deploy it to Deno Deploy<sup>EA</sup>](https://app.deno.com/).
+[deploy it to Deno Deploy<sup>EA</sup>](https://console.deno.com/).
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).

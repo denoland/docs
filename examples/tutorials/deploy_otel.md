@@ -288,7 +288,7 @@ git push -u origin main
 
 ## Deploy to Deno Deploy Early Access
 
-1. Navigate to [app.deno.com](https://app.deno.com)
+1. Navigate to [console.deno.com](https://console.deno.com)
 2. Select your organization or create a new one if needed
 3. Click "+ New App"
 4. Select the GitHub repository you created earlier
