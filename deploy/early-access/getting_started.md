@@ -22,7 +22,7 @@ Deno Deploy<sup>EA</sup> is in private beta. To use Deno Deploy
 
 To get started with Deno Deploy<sup>EA</sup>:
 
-1. Visit [app.deno.com](http://app.deno.com)
+1. Visit [console.deno.com](http://console.deno.com)
 2. Create an organization:
 
 ![The Deno Deploy<sup>EA</sup> organization creation screen.](./images/create_org.png)

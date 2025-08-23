@@ -18,11 +18,11 @@ original Deploy, featuring:
 - Integrated build system
 - Significantly enhanced underlying infrastructure
 
-<a href="https://app.deno.com" class="docs-cta deploy-cta">Go to the Deno
+<a href="https://console.deno.com" class="docs-cta deploy-cta">Go to the Deno
 Deploy<sup>EA</sup> dashboard</a>
 
 Deno Deploy<sup>EA</sup> comes with a new dashboard at
-[app.deno.com](https://app.deno.com). In this dashboard, you can create new Deno
+[console.deno.com](https://console.deno.com). In this dashboard, you can create new Deno
 Deploy<sup>EA</sup> organizations that contain Deno Deploy<sup>EA</sup> apps.
 
 Within a single organization, you cannot mix Deno Deploy<sup>EA</sup> apps with
@@ -45,7 +45,7 @@ Deploy.
 
 | Feature                         | Deno Deploy<sup>EA</sup>       | Deploy Classic                                                                                                                          |
 | ------------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Web interface                   | app.deno.com                   | dash.deno.com                                                                                                                           |
+| Web interface                   | console.deno.com                   | dash.deno.com                                                                                                                           |
 | Dark mode                       | ✅ Supported                   | ❌ Not supported                                                                                                                        |
 | Builds                          | ✅ Fully integrated            | 🟠 Runs in GitHub Actions, no live streamed logs in the dashboard, caching requires manual setup, changing config requires editing YAML |
 | Can run Deno apps               | ✅ Full support                | 🟠 Limited (no FFI, subprocesses, write permission)                                                                                     |
@@ -72,7 +72,7 @@ Deploy.
 
 To begin using Deno Deploy<sup>EA</sup>:
 
-1. Visit [app.deno.com](https://app.deno.com) to access the new dashboard
+1. Visit [console.deno.com](https://console.deno.com) to access the new dashboard
 2. Create a new Deno Deploy<sup>EA</sup> organization
 3. Create your first application within this organization
 4. Deploy from your GitHub repository or directly from the dashboard
