@@ -375,9 +375,9 @@ span.setStatus({
 ```
 
 Spans can also have
-[events](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api.Span.html#addEvent)
+[events](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api._opentelemetry_api.Span.html#addevent)
 and
-[links](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api.Span.html#addLink)
+[links](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api._opentelemetry_api.Span.html#addlink)
 added to them. Events are points in time that are associated with the span.
 Links are references to other spans.
 
@@ -422,7 +422,7 @@ also take a `context` object from the
 [context propagation API](#context-propagation).
 
 Learn more about the full tracing API in the
-[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api.TraceAPI.html).
+[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api._opentelemetry_api.TraceAPI.html).
 
 ### Metrics
 
@@ -520,7 +520,7 @@ There are three types of observable instruments:
   time, such as the current temperature.
 
 Learn more about the full metrics API in the
-[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api.MetricsAPI.html).
+[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api._opentelemetry_api.MetricsAPI.html).
 
 ### Practical Examples
 
@@ -613,7 +613,7 @@ span.end();
 ```
 
 Learn more about the full context API in the
-[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api.ContextAPI.html).
+[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api._opentelemetry_api.ContextAPI.html).
 
 ## Configuration
 
