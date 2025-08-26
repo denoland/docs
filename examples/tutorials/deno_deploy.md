@@ -74,7 +74,7 @@ git push -u origin main
 
 ## Create a Deno Deploy organization
 
-1. Navigate to [app.deno.com](https://app.deno.com)
+1. Navigate to [console.deno.com](https://console.deno.com)
 2. Click "+ New Organization"
 3. Select the 'Standard Deploy' organization type
 4. Enter an organization name and slug (this cannot be changed later)

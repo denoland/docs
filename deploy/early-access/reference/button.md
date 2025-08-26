@@ -26,7 +26,7 @@ can be set to be private if required.
 The deploy button below demonstrates the creation of a new application based on
 a simple starter project
 
-[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/examples&path=hello-world)
+[![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/examples&path=hello-world)
 
 ### Create and deploy a new application
 
@@ -35,19 +35,19 @@ Use the code below to give a button which creates and deploys a new application:
 **Markdown**
 
 ```bash
-[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=REPOSITORY_URL)
+[![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=REPOSITORY_URL)
 ```
 
 **HTML**
 
 ```bash
-<a href="https://app.deno.com/new?clone=REPOSITORY_URL"><img src="https://deno.com/button" alt="Deploy on Deno"/></a>
+<a href="https://console.deno.com/new?clone=REPOSITORY_URL"><img src="https://deno.com/button" alt="Deploy on Deno"/></a>
 ```
 
 **URL**
 
 ```bash
-https://app.deno.com/new?clone=REPOSITORY_URL
+https://console.deno.com/new?clone=REPOSITORY_URL
 ```
 
 ### Parameters

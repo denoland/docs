@@ -20,7 +20,7 @@ Deploy<sup>EA</sup>, and you will need a Deno Deploy<sup>EA</sup> organization.
    [Deno Deploy account settings](https://dash.deno.com/account#early-access)
 2. Turn on the "Enable Early Access" toggle
 3. Create a Deno Deploy<sup>EA</sup> organization in the
-   [Deno Deploy<sup>EA</sup> dashboard](https://app.deno.com/).
+   [Deno Deploy<sup>EA</sup> dashboard](https://console.deno.com/).
 
 ## Create a simple web application
 
@@ -162,7 +162,7 @@ deno deploy --help
 
 The `deno deploy` command requires a Deno Deploy organization. If you don't
 already have an organization set up in your account, you can create one through
-the [Deno Deploy web app](https://app.deno.com).
+the [Deno Deploy web app](https://console.deno.com).
 
 :::
 

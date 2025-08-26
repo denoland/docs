@@ -27,7 +27,7 @@ button below to instantly deploy your own copy of the complete Nuxt dinosaur app
 to Deno Deploy. You'll get a live, working application that you can customize
 and modify as you learn!
 
-[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/examples&path=with-nuxt)
+[![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/examples&path=with-nuxt)
 
 :::
 
