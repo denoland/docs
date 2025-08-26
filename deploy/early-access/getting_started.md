@@ -15,7 +15,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 Deno Deploy<sup>EA</sup> will eventually replace Deno Deploy Classic. Until that
 time both systems will be available simultaneously. By creating an organisation
 for use with Deploy<sup>EA</sup> it is possible to explore Deploy<sup>EA</sup>
-without disripting projects already using Deploy Classic.
+without disrupting projects already using Deploy Classic.
 
 To get started with Deno Deploy<sup>EA</sup>:
 
