@@ -131,11 +131,7 @@ async function uploadDocuments(
       apiKey: config.privateApiKey
     });
 
-    const datasourceManager = orama.dataSource(config.datasourceId);
-
-    // Open a new transaction. It forks a new temporary, empty index
-    // we can use to re-upload all documents again.
-    await datasourceManager.index.transaction.open()
+    const datasource = orama.dataSource(config.datasourceId);
 
     let successful = 0;
     let failed = 0;
@@ -151,8 +147,8 @@ async function uploadDocuments(
       );
 
       try {
-        // Use the update method to insert/update documents
-        await datasourceManager.index.transaction.insertDocuments(batch);
+        // Insert documents directly to the datasource
+        await datasource.insertDocuments(batch);
         successful += batch.length;
         console.log(`✅ Batch ${batchNumber} uploaded successfully`);
       } catch (error) {
@@ -160,8 +156,6 @@ async function uploadDocuments(
         console.error(`❌ Batch ${batchNumber} failed:`, error);
       }
     }
-
-    await datasourceManager.index.transaction.commit();
 
     console.log(`\nUpload complete:`);
     console.log(`   ✅ Successful: ${successful}`);
