@@ -73,6 +73,7 @@
     "npm:markdown-it@14.1.0": "14.1.0",
     "npm:meriyah@6.0.3": "6.0.3",
     "npm:mongodb@6.1.0": "6.1.0",
+    "npm:path-to-regexp@^6.3.0": "6.3.0",
     "npm:postcss-import@16.1.0": "16.1.0_postcss@8.4.47",
     "npm:postcss-nesting@13": "13.0.2_postcss@8.4.47_postcss-selector-parser@7.1.0",
     "npm:postcss@8.4.47": "8.4.47",
@@ -1312,7 +1313,7 @@
         "methods",
         "on-finished",
         "parseurl",
-        "path-to-regexp",
+        "path-to-regexp@0.1.7",
         "proxy-addr",
         "qs@6.11.0",
         "range-parser",
@@ -2397,6 +2398,9 @@
     },
     "path-to-regexp@0.1.7": {
       "integrity": "sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ=="
+    },
+    "path-to-regexp@6.3.0": {
+      "integrity": "sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ=="
     },
     "picocolors@1.1.1": {
       "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="
