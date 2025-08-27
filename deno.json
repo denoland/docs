@@ -25,7 +25,7 @@
     "start": "deno task dev",
     "build": "BUILD_TYPE=FULL deno run --env-file -A lume.ts && tailwindcss -i styles.css -o _site/styles.css --minify",
     "build:light": "deno run --env-file -A lume.ts",
-    "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
+    "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",
     "lint:update": "deno run -A update_lint_rules.ts",
     "generate:search": "deno run -A orama/generate_orama_index_full.ts",
