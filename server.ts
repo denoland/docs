@@ -7,10 +7,10 @@ import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware from "./middleware/redirects.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 
-export const server = new Server({ root: "." });
+export const server = new Server({ root: "_site" });
 
 server.use(redirectsMiddleware);
-server.use(NotFoundMiddleware({ root: ".", page404: "./404/" }));
+server.use(NotFoundMiddleware({ root: "_site", page404: "./404/" }));
 server.use(createRoutingMiddleware());
 server.use(createGAMiddleware(server));
 server.use(apiDocumentContentTypeMiddleware);

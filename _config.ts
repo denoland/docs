@@ -29,9 +29,8 @@ import replacerPlugin from "./markdown-it/replacer.ts";
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import createGAMiddleware from "./middleware/googleAnalytics.ts";
-import redirectsMiddleware, {
-  toFileAndInMemory,
-} from "./middleware/redirects.ts";
+import redirectsMiddleware from "./middleware/redirects.ts";
+import { toFileAndInMemory } from "./utils/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
 
 const site = lume(
