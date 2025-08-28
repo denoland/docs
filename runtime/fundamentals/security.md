@@ -93,7 +93,7 @@ deno run --allow-all script.ts
 
 By default, Deno will not generate a stack trace for permission requests as it
 comes with a hit to performance. Users can enable stack traces with the
-`DENO_TRACE_PERMISSIONS` environment variable.
+`DENO_TRACE_PERMISSIONS` environment variable to `1`.
 
 ### File system access
 
