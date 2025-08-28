@@ -14,7 +14,7 @@ export function toFileAndInMemory(redirects: Redirect[], site: Site): void {
   // The middleware will load from the generated JSON file at runtime
 
   log.warn(
-    `${cliNow()} <cyan>toFileAndInMemory</cyan> Generated <green>${redirects.length}</green> redirects for build.`,
+    `🔗 <cyan>toFileAndInMemory</cyan> Generated <green>${redirects.length}</green> redirects for build.`,
   );
 }
 

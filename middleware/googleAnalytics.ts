@@ -19,14 +19,14 @@ export default function createGAMiddleware(
 ) {
   if (GA4_MEASUREMENT_ID == null) {
     log.warn(
-      `${cliNow()} <cyan>createGAMiddleware</cyan>: GA4_MEASUREMENT_ID is not set. Google Analytics middleware will be disabled.`,
+      `⚠️ <cyan>createGAMiddleware</cyan>: GA4_MEASUREMENT_ID is not set. Google Analytics middleware will be disabled.`,
     );
     return nullMiddleware;
   }
 
   if (server == null) {
     log.warn(
-      `${cliNow()} <cyan>createGAMiddleware</cyan>: Server object is not provided. Google Analytics middleware will be disabled.`,
+      `⚠️ <cyan>createGAMiddleware</cyan>: Server object is not provided. Google Analytics middleware will be disabled.`,
     );
     return nullMiddleware;
   }

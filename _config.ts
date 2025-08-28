@@ -33,6 +33,40 @@ import redirectsMiddleware from "./middleware/redirects.ts";
 import { toFileAndInMemory } from "./utils/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
 
+// Check if reference docs are available when building
+function ensureReferenceDocsExist() {
+  const requiredFiles = [
+    "reference_gen/gen/deno.json",
+    "reference_gen/gen/web.json",
+    "reference_gen/gen/node.json",
+  ];
+
+  const missingFiles = [];
+  for (const file of requiredFiles) {
+    try {
+      Deno.statSync(file);
+    } catch {
+      missingFiles.push(file);
+    }
+  }
+
+  if (missingFiles.length > 0) {
+    console.error(
+      `❌ Missing reference documentation files: ${missingFiles.join(", ")}`,
+    );
+    console.error(
+      `   Run 'deno task generate:reference' to generate them before building`,
+    );
+    console.error(`   Or set SKIP_REFERENCE=1 to skip reference documentation`);
+    Deno.exit(1);
+  }
+}
+
+// Ensure reference docs exist at startup for full builds
+if (Deno.env.get("BUILD_TYPE") === "FULL" && !Deno.env.has("SKIP_REFERENCE")) {
+  ensureReferenceDocsExist();
+}
+
 const site = lume(
   {
     location: new URL("https://docs.deno.com"),
