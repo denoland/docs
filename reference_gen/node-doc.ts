@@ -137,6 +137,18 @@ class IncrementalNodeDocGenerator {
     const allFileNames = await this.collectNodeFiles();
     console.log(`Found ${allFileNames.length} Node.js type definition files`);
 
+    // Check if output file exists
+    const outputExists = existsSync("./gen/node.json");
+    if (!outputExists) {
+      console.log(
+        "📝 Output file node.json does not exist, forcing full regeneration",
+      );
+      await this.generateFull(allFileNames);
+      this.cache.lastFullRegen = Date.now();
+      this.saveIncrementalCache();
+      return;
+    }
+
     const modulesNeedingRegen = await this.getModulesNeedingRegeneration(
       allFileNames,
     );

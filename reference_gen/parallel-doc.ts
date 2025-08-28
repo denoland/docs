@@ -6,6 +6,7 @@
  */
 
 import { EnhancedGenerationCache } from "./cache.ts";
+import { existsSync } from "@std/fs";
 
 interface TaskConfig {
   name: string;
@@ -33,7 +34,8 @@ async function runOptimizedDocGeneration() {
         "--allow-net",
         "deno-doc.ts",
       ],
-      shouldRun: await cache.shouldRegenerate("./types/deno.d.ts"),
+      shouldRun: await cache.shouldRegenerate("./types/deno.d.ts") ||
+        !existsSync("./gen/deno.json"),
       priority: 1,
       memoryIntensive: false,
     },
@@ -47,7 +49,8 @@ async function runOptimizedDocGeneration() {
         "--allow-net",
         "web-doc.ts",
       ],
-      shouldRun: await cache.shouldRegenerate("./types/web.d.ts"),
+      shouldRun: await cache.shouldRegenerate("./types/web.d.ts") ||
+        !existsSync("./gen/web.json"),
       priority: 2,
       memoryIntensive: false,
     },
@@ -59,9 +62,10 @@ async function runOptimizedDocGeneration() {
         "--allow-write",
         "--allow-env",
         "--allow-net",
-        "node-doc-incremental.ts",
+        "node-doc.ts",
       ],
-      shouldRun: await cache.shouldRegenerate("./types/node"),
+      shouldRun: await cache.shouldRegenerate("./types/node") ||
+        !existsSync("./gen/node.json"),
       priority: 3,
       memoryIntensive: true,
     },
@@ -198,17 +202,9 @@ async function runOptimizedDocGeneration() {
     Deno.exit(1);
   } else {
     console.log(
-      `\n🎉 Documentation generation completed successfully in ${totalTime}s`,
+      `\n🎉 Documentation generation completed successfully in <green>${totalTime}s<green`,
     );
     console.log(`📊 Tasks: ${tasksRun} run, ${tasksSkipped} skipped`);
-
-    // Show performance improvement estimate
-    if (tasksSkipped > 0) {
-      const estimatedSavedTime = tasksSkipped * 80; // Rough estimate
-      console.log(
-        `⚡ Estimated time saved by caching: ~${estimatedSavedTime}s`,
-      );
-    }
   }
 }
 
