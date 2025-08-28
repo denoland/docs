@@ -234,7 +234,7 @@ export default function Index() {
   });
 
   return (
-    <main>
+    <main id="content">
       <h1>Welcome to the Dinosaur app</h1>
       <p>Click on a dinosaur below to learn more.</p>
       <For each={dinosaurs()}>

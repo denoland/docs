@@ -7,9 +7,9 @@ export type NavData = {
   style?: string;
 };
 
-export type SecondaryNav = SecondaryNavItem[];
+export type SidebarNav = SidebarNavItem[];
 
-export interface SecondaryNavItem {
+export interface SidebarNavItem {
   title: string;
   href: string;
   items?: NavData[];

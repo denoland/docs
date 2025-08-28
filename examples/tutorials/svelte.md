@@ -22,10 +22,12 @@ You can see a live version of the app on
 
 :::info Deploy your own
 
-You can deploy your own version of this svelte app to Deno Deploy immediately.
-Just click the button!
+Want to skip the tutorial and deploy the finished app right now? Click the
+button below to instantly deploy your own copy of the complete SvelteKit
+dinosaur app to Deno Deploy. You'll get a live, working application that you can
+customize and modify as you learn!
 
-[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/tutorial-with-svelte)
+[![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-svelte)
 
 :::
 
@@ -35,7 +37,7 @@ We'll use [SvelteKit](https://kit.svelte.dev/) to create a new SvelteKit app. In
 your terminal, run the following command to create a new SvelteKit app:
 
 ```shell
-deno run -A npm:create-svelte
+deno run -A npm:sv create my-app
 ```
 
 When prompted, give your app a name and select the "Skeleton project" template.
@@ -311,10 +313,8 @@ git push -u origin main
 
 ### Deploy to Deno Deploy
 
-Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
-dashboard.
-<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
-my app</a>
+Once your app is on GitHub, you can
+[deploy it to Deno Deploy<sup>EA</sup>](https://console.deno.com/).
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).

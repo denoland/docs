@@ -30,4 +30,4 @@ of the platform. However, the
 [Acceptable Use Policy](/deploy/manual/acceptable-use-policy/) and
 [Terms and Conditions](/deploy/manual/terms-and-conditions/) still apply, and we
 reserve the right to terminate any user, organization, or app that we find to be
-in violation of these terms. in violation of these.
+in violation of these terms.

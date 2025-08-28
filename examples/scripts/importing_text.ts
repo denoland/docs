@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run <url>
- * @resource {https://github.com/whatwg/html/issues/9444} HTLM specification proposal
+ * @resource {https://github.com/whatwg/html/issues/9444} HTML specification proposal
  * @group Unstable APIs
  *
  * Text files can be imported in JS and TS files using the `import` keyword.

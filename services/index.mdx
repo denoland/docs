@@ -7,7 +7,7 @@ layout: "raw.tsx"
 <comp.Hero>
    <div>
       <h1>Deno Services Docs</h1>
-      <p>Deno's cloud services provide robust platforms for deploying and running JavaScript and TypeScript applications at global scale.</p>
+      <p class="max-w-prose">Deno's cloud services provide robust platforms for deploying and running JavaScript and TypeScript applications at global scale.</p>
       <comp.CTA href="/deploy/early-access/" type="deploy">Try Deploy<sup>EA</sup> -></comp.CTA>
       <comp.CTA href="/deploy/manual/" type="deploy">Try Deploy Classic -></comp.CTA>
    </div>
@@ -15,132 +15,59 @@ layout: "raw.tsx"
 </comp.Hero>
 
 <comp.Banner type="deploy">
-<p class="text-lg"><strong>Deno Deploy Early Access</strong> is now available! Try our completely revamped platform with improved performance and framework support.</p>
+<p class="text-lg max-w-prose"><strong>Deno Deploy Early Access</strong> is now available! Try our completely revamped platform with improved performance and framework support. <a href="https://console.deno.com/" class="underline">Get started</a></p>
 </comp.Banner>
 
 <comp.Heading level="2" type="deploy">Deno Deploy<sup>EA</sup></comp.Heading>
 
-<p>Deno Deploy Early Access (Deno Deploy<sup>EA</sup>) is a complete revamp of the original Deploy Classic, featuring improved NPM compatibility, web framework support, integrated build system, and enhanced infrastructure. With a fully managed build pipeline, Deno Deploy<sup>EA</sup> handles deployment in one seamless process.</p>
+<p class="max-w-prose text-lg text-foreground-secondary mb-4">Deno Deploy Early Access (Deno Deploy<sup>EA</sup>) is a complete revamp of the original Deploy Classic, featuring improved NPM compatibility, web framework support, integrated build system, and enhanced infrastructure. With a fully managed build pipeline, Deno Deploy<sup>EA</sup> handles deployment in one seamless process.</p>
 
 <comp.Columns>
-<div>
-   <h4 class="text-lg font-semibold mb-1">Getting Started</h4>
-   <p class="mb-3">Set up your first Deno Deploy<sup>EA</sup> application with our step-by-step guide.</p>
-   <a class="homepage-link deploy-link" href="/deploy/early-access/getting_started/">Get started <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
-<div>
-   <h4 class="text-lg font-semibold mb-1">Framework Support</h4>
-   <p class="mb-3">Deploy applications built with Next.js, Astro, SvelteKit, Fresh, and more with native framework presets.</p>
-   <a class="homepage-link deploy-link" href="/deploy/early-access/reference/frameworks/">Framework docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
-<div>
-   <h4 class="text-lg font-semibold mb-1">Build System</h4>
-   <p class="mb-3">Configure your build process with our integrated build system.</p>
-   <a class="homepage-link deploy-link" href="/deploy/early-access/reference/builds/">Build docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
+   <comp.ColumnCard headingText="Getting Started" text={<span>Set up your first Deno Deploy<sup>EA</sup> application with our step-by-step guide.</span>} linkText="Get started" linkHref="/deploy/early-access/getting_started/" />
+   <comp.columnCard headingText="Framework Support" text="Deploy applications built with Next.js, Astro, SvelteKit, Fresh, and more with native framework presets." linkHref="/deploy/early-access/reference/frameworks/" linkText="Framework docs" />
+   <comp.columnCard headingText="Build System" text="Configure your build process with our integrated build system." linkHref="/deploy/early-access/reference/builds/" linkText="Build docs" />
 </comp.Columns>
 
 <comp.Heading level="2" type="deploy">Deploy Classic</comp.Heading>
 
-<p>Deploy Classic is a globally distributed serverless platform for JavaScript and TypeScript with integrated cloud services.</p>
+<p class="max-w-prose text-lg text-foreground-secondary mb-4">Deploy Classic is a globally distributed serverless platform for JavaScript and TypeScript with integrated cloud services.</p>
 
 <comp.Columns>
-<div>
-   <h4 class="text-lg font-semibold mb-1">Quick Start</h4>
-   <p class="mb-3">Deploy your first application to Deno's global edge network in minutes.</p>
-   <a class="homepage-link deploy-link" href="/deploy/manual/">Quick start <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
-<div>
-   <h4 class="text-lg font-semibold mb-1">Deno KV</h4>
-   <p class="mb-3">Key/value database built into the Deno runtime with zero configuration required.</p>
-   <a class="homepage-link deploy-link" href="/deploy/kv/manual/">KV docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
-<div>
-   <h4 class="text-lg font-semibold mb-1">Cron & Queues</h4>
-   <p class="mb-3">Schedule tasks with Cron and manage background jobs with Queues for reliable processing.</p>
-   <a class="homepage-link deploy-link" href="/deploy/kv/manual/cron">Cron docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-   <a class="homepage-link deploy-link" href="/deploy/kv/manual/queue_overview/">Queues docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
+   <comp.columnCard headingText="Quick Start" text="Deploy your first application to Deno's global edge network in minutes." linkHref="/deploy/manual/" linkText="Quick start" />
+   <comp.columnCard headingText="Deno KV" text="Key/value database built into the Deno runtime with zero configuration required." linkHref="/deploy/kv/manual/" linkText="KV docs" />
+   <comp.columnCard headingText="Cron & Queues" text="Schedule tasks with Cron and manage background jobs with Queues for reliable processing." linkHref="/deploy/kv/manual/cron" linkText="Cron docs" />
 </comp.Columns>
 
 <comp.Heading level="3" type="deploy">Deployment Options</comp.Heading>
 
 <comp.Columns>
-<div>
-   <h4 class="text-lg font-semibold mb-1">GitHub Integration</h4>
-   <p class="mb-3">Connect your GitHub repository for continuous deployment with preview builds for pull requests.</p>
-   <a class="homepage-link deploy-link" href="/deploy/manual/deployments/">Learn more <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
-<div>
-   <h4 class="text-lg font-semibold mb-1">CLI Deployment</h4>
-   <p class="mb-3">Deploy applications directly from your terminal with the deployctl command-line tool.</p>
-   <a class="homepage-link deploy-link" href="/deploy/manual/deployctl/">CLI docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
-<div>
-   <h4 class="text-lg font-semibold mb-1">Playground</h4>
-   <p class="mb-3">Build and deploy applications directly in your browser with the interactive playground.</p>
-   <a class="homepage-link deploy-link" href="/deploy/manual/playgrounds/">Playground docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
+   <comp.columnCard headingText="GitHub Integration" text="Connect your GitHub repository for continuous deployment with preview builds for pull requests." linkHref="/deploy/manual/deployments/" linkText="Learn more" />
+   <comp.columnCard headingText="CLI Deployment" text="Deploy applications directly from your terminal with the deployctl command-line tool." linkHref="/deploy/manual/deployctl/" linkText="CLI docs" />
+   <comp.columnCard headingText="Playground" text="Build and deploy applications directly in your browser with the interactive playground." linkHref="/deploy/manual/playgrounds/" linkText="Playground docs" />
 </comp.Columns>
 
 <comp.Heading level="2" type="deploy">Subhosting</comp.Heading>
 
-<p>Deno Subhosting is a robust platform designed to allow Software as a Service (SaaS) providers to securely run code written by their customers at scale.</p>
+<p class="max-w-prose text-lg text-foreground-secondary mb-4">Deno Subhosting is a robust platform designed to allow Software as a Service (SaaS) providers to securely run code written by their customers at scale.</p>
 
 <comp.Columns>
-<div>
-   <h4 class="text-lg font-semibold mb-1">Quick Start</h4>
-   <p class="mb-3">Configure your subhosting account and start hosting customer code in minutes.</p>
-   <a class="homepage-link deploy-link" href="/subhosting/manual/quick_start/">Quick start <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
-<div>
-   <h4 class="text-lg font-semibold mb-1">Resource Management</h4>
-   <p class="mb-3">Learn about organizations, projects, deployments, and domains in the Subhosting ecosystem.</p>
-   <a class="homepage-link deploy-link" href="/subhosting/api/">Resource docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
-<div>
-   <h4 class="text-lg font-semibold mb-1">REST API</h4>
-   <p class="mb-3">Use our comprehensive REST API to provision projects and manage deployments programmatically.</p>
-   <a class="homepage-link deploy-link" href="/subhosting/manual/#rest-api-reference-and-openapi-spec">API docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
+   <comp.columnCard headingText="Quick Start" text="Configure your subhosting account and start hosting customer code in minutes." linkHref="/subhosting/manual/quick_start/" linkText="Quick start" />
+   <comp.columnCard headingText="Resource Management" text="Learn about organizations, projects, deployments, and domains in the Subhosting ecosystem." linkHref="/subhosting/api/" linkText="Resource docs" />
+   <comp.columnCard headingText="REST API" text="Use our comprehensive REST API to provision projects and manage deployments programmatically." linkHref="/subhosting/manual/#rest-api-reference-and-openapi-spec" linkText="API docs" />
 </comp.Columns>
 
 <comp.Heading level="3" type="deploy">Implementation Planning</comp.Heading>
 
 <comp.Columns>
-<div>
-   <h4 class="text-lg font-semibold mb-1">Architecture Planning</h4>
-   <p class="mb-3">Design your subhosting implementation with projects, deployments, and custom domains.</p>
-   <a class="homepage-link deploy-link" href="/subhosting/manual/planning_your_implementation/">Planning guide <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
-<div>
-   <h4 class="text-lg font-semibold mb-1">SDK Support</h4>
-   <p class="mb-3">Use our JavaScript, Python, or Go SDKs to interact with the Subhosting API.</p>
-   <a class="homepage-link deploy-link" href="/subhosting/manual/#rest-api-reference-and-openapi-spec">SDK docs <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
-<div>
-   <h4 class="text-lg font-semibold mb-1">KV Integration</h4>
-   <p class="mb-3">Connect KV databases to your deployments for persistent data storage.</p>
-   <a class="homepage-link deploy-link" href="/subhosting/api/#connecting-a-kv-database">KV integration <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-</div>
+   <comp.columnCard headingText="Architecture Planning" text="Design your subhosting implementation with projects, deployments, and custom domains." linkHref="/subhosting/manual/planning_your_implementation/" linkText="Planning guide" />
+   <comp.columnCard headingText="SDK Support" text="Use our JavaScript, Python, or Go SDKs to interact with the Subhosting API." linkHref="/subhosting/manual/#rest-api-reference-and-openapi-spec" linkText="SDK docs" />
+   <comp.columnCard headingText="KV Integration" text="Connect KV databases to your deployments for persistent data storage." linkHref="/subhosting/api/#connecting-a-kv-database" linkText="KV integration" />
 </comp.Columns>
 
-<comp.Heading level="2" type="purple">Help & Support</comp.Heading>
+<comp.Heading level="2" type="deploy">Help & Support</comp.Heading>
 
 <comp.Columns>
-   <div>
-      <h4 class="text-lg font-semibold mb-1">Early Access Support</h4>
-      <p class="mb-3">Get help with Deno Deploy Early Access in our dedicated Discord channel.</p>
-      <a class="homepage-link help-link" href="/deploy/early-access/support/">Early Access support <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-   </div>
-   <div>
-      <h4 class="text-lg font-semibold mb-1">Deploy Classic Support</h4>
-      <p class="mb-3">Find help for Deploy Classic and connect with the community.</p>
-      <a class="homepage-link help-link" href="https://discord.gg/deno">Join Discord <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-   </div>
-   <div>
-      <h4 class="text-lg font-semibold mb-1">Enterprise Support</h4>
-      <p class="mb-3">Explore Deno's enterprise support options for Subhosting and Deploy.</p>
-      <a class="homepage-link help-link" href="https://deno.com/enterprise">Enterprise support <span aria-hidden="true" class="whitespace-pre">-&gt;</span></a>
-   </div>
+   <comp.columnCard headingText="Early Access Support" text="Get help with Deno Deploy Early Access in our dedicated Discord channel." linkHref="/deploy/early-access/support/" linkText="Early Access support" />
+   <comp.columnCard headingText="Deploy Classic Support" text="Find help for Deploy Classic and connect with the community." linkHref="https://discord.gg/deno" linkText="Join Discord" />
+   <comp.columnCard headingText="Enterprise Support" text="Explore Deno's enterprise support options for Subhosting and Deploy." linkHref="https://deno.com/enterprise" linkText="Enterprise support" />
 </comp.Columns>
