@@ -22,7 +22,6 @@
     "doc:deno": "mkdir -p gen && deno run --allow-read --allow-write --allow-env --allow-net deno-doc.ts",
     "doc:web": "mkdir -p gen && deno run --allow-read --allow-write --allow-env --allow-net web-doc.ts",
     "doc:node": "mkdir -p gen && deno run --allow-read --allow-write --allow-env --allow-net node-doc.ts",
-    "doc:node-fallback": "mkdir -p gen && deno run --allow-read --allow-write --allow-env --allow-net node-doc-original.ts",
     "doc": "mkdir -p gen && deno run --allow-read --allow-write --allow-env --allow-net --allow-run parallel-doc.ts",
     "doc:sequential": "deno task doc:deno && deno task doc:web && deno task doc:node"
   },

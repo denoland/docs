@@ -26,7 +26,7 @@ export default function createGAMiddleware(
 
   if (server == null) {
     log.warn(
-      `${cliNow()} <cyan>createGAMiddleware</cyan>: Server object is not provided. Google Analytics middleware will be disabled.`,
+      `⚠️ <cyan>createGAMiddleware</cyan>: Server object is not provided. Google Analytics middleware will be disabled.`,
     );
     return nullMiddleware;
   }
