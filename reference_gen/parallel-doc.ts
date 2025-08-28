@@ -1,69 +1,74 @@
 #!/usr/bin/env -S deno run --allow-read --allow-write --allow-env --allow-net --allow-run
 
 /**
- * Optimized parallel documentation generation script
+ * Super-optimized parallel documentation generation script
+ * with intelligent caching and resource management
  */
 
-import { GenerationCache } from "./cache.ts";
+import { EnhancedGenerationCache } from "./cache.ts";
 
-async function runDocGeneration() {
-  console.log("Starting parallel documentation generation...");
+interface TaskConfig {
+  name: string;
+  command: string[];
+  shouldRun: boolean;
+  priority: number; // Lower numbers = higher priority
+  memoryIntensive: boolean;
+}
+
+async function runOptimizedDocGeneration() {
+  console.log("🚀 Starting optimized parallel documentation generation...");
 
   const startTime = performance.now();
-  const cache = new GenerationCache();
+  const cache = new EnhancedGenerationCache();
 
-  // Check if files need regeneration
-  const tasks: Array<{ name: string; command: string[]; shouldRun: boolean }> =
-    [];
-
-  // Check Deno types
-  const denoShouldRegen = await cache.shouldRegenerate("./types/deno.d.ts");
-  tasks.push({
-    name: "Deno",
-    command: [
-      "run",
-      "--allow-read",
-      "--allow-write",
-      "--allow-env",
-      "--allow-net",
-      "deno-doc.ts",
-    ],
-    shouldRun: denoShouldRegen,
-  });
-
-  // Check Web types
-  const webShouldRegen = await cache.shouldRegenerate("./types/web.d.ts");
-  tasks.push({
-    name: "Web",
-    command: [
-      "run",
-      "--allow-read",
-      "--allow-write",
-      "--allow-env",
-      "--allow-net",
-      "web-doc.ts",
-    ],
-    shouldRun: webShouldRegen,
-  });
-
-  // For Node, check if directory changed
-  const nodeShouldRegen = await cache.shouldRegenerate("./types/node");
-
-  tasks.push({
-    name: "Node",
-    command: [
-      "run",
-      "--allow-read",
-      "--allow-write",
-      "--allow-env",
-      "--allow-net",
-      "node-doc.ts",
-    ],
-    shouldRun: nodeShouldRegen,
-  });
+  // Define all possible tasks with priorities and resource requirements
+  const allTasks: TaskConfig[] = [
+    {
+      name: "Deno",
+      command: [
+        "run",
+        "--allow-read",
+        "--allow-write",
+        "--allow-env",
+        "--allow-net",
+        "deno-doc.ts",
+      ],
+      shouldRun: await cache.shouldRegenerate("./types/deno.d.ts"),
+      priority: 1,
+      memoryIntensive: false,
+    },
+    {
+      name: "Web",
+      command: [
+        "run",
+        "--allow-read",
+        "--allow-write",
+        "--allow-env",
+        "--allow-net",
+        "web-doc.ts",
+      ],
+      shouldRun: await cache.shouldRegenerate("./types/web.d.ts"),
+      priority: 2,
+      memoryIntensive: false,
+    },
+    {
+      name: "Node",
+      command: [
+        "run",
+        "--allow-read",
+        "--allow-write",
+        "--allow-env",
+        "--allow-net",
+        "node-doc-incremental.ts",
+      ],
+      shouldRun: await cache.shouldRegenerate("./types/node"),
+      priority: 3,
+      memoryIntensive: true,
+    },
+  ];
 
   // Filter tasks that need to run
-  const tasksToRun = tasks.filter((task) => task.shouldRun);
+  const tasksToRun = allTasks.filter((task) => task.shouldRun);
 
   if (tasksToRun.length === 0) {
     console.log("✨ All documentation is up to date! No regeneration needed.");
@@ -71,71 +76,142 @@ async function runDocGeneration() {
   }
 
   console.log(
-    `📝 Running ${tasksToRun.length} of ${tasks.length} generation tasks...`,
+    `📝 Running ${tasksToRun.length} of ${allTasks.length} generation tasks...`,
   );
 
-  // Run tasks in parallel with better resource management
-  const promises = tasksToRun.map(async (task, index) => {
-    // Stagger start times slightly to reduce initial resource spike
-    if (index > 0) {
-      await new Promise((resolve) => setTimeout(resolve, index * 500));
+  // Sort by priority and memory requirements
+  tasksToRun.sort((a, b) => {
+    if (a.priority !== b.priority) {
+      return a.priority - b.priority;
     }
-
-    return new Deno.Command("deno", {
-      args: task.command,
-      stdout: "piped",
-      stderr: "piped",
-    }).output().then((result) => ({ task, result }));
+    // Run memory-intensive tasks last
+    return a.memoryIntensive ? 1 : -1;
   });
 
-  const results = await Promise.all(promises);
+  // Run high-priority, low-memory tasks in parallel
+  const lightTasks = tasksToRun.filter((task) => !task.memoryIntensive);
+  const heavyTasks = tasksToRun.filter((task) => task.memoryIntensive);
+
+  const allResults: Array<{ task: TaskConfig; result: Deno.CommandOutput }> =
+    [];
+
+  // Process light tasks in parallel
+  if (lightTasks.length > 0) {
+    console.log(
+      `⚡ Running ${lightTasks.length} lightweight tasks in parallel...`,
+    );
+
+    const lightPromises = lightTasks.map(async (task, index) => {
+      // Slight stagger to reduce initial resource spike
+      if (index > 0) {
+        await new Promise((resolve) => setTimeout(resolve, index * 200));
+      }
+
+      return new Deno.Command("deno", {
+        args: task.command,
+        stdout: "piped",
+        stderr: "piped",
+        env: { "DENO_V8_FLAGS": "--max-old-space-size=4096" }, // Increase memory limit
+      }).output().then((result) => ({ task, result }));
+    });
+
+    const lightResults = await Promise.all(lightPromises);
+    allResults.push(...lightResults);
+
+    // Small delay to let memory settle
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  }
+
+  // Process heavy tasks sequentially with memory management
+  if (heavyTasks.length > 0) {
+    console.log(
+      `🏋️ Running ${heavyTasks.length} memory-intensive tasks sequentially...`,
+    );
+
+    for (const task of heavyTasks) {
+      console.log(`📊 Starting ${task.name} generation...`);
+
+      const result = await new Deno.Command("deno", {
+        args: task.command,
+        stdout: "piped",
+        stderr: "piped",
+        env: {
+          "DENO_V8_FLAGS": "--max-old-space-size=8192",
+        },
+      }).output();
+
+      allResults.push({ task, result });
+
+      if (result.code === 0) {
+        console.log(`✅ ${task.name} generation completed`);
+      }
+
+      // Force garbage collection and memory cleanup
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+  }
+
   const endTime = performance.now();
 
-  // Check for errors and print outputs
+  // Process all results
   let hasErrors = false;
-  for (const { task, result } of results) {
+  for (const { task, result } of allResults) {
     if (result.code !== 0) {
       console.error(`❌ ${task.name} generation failed:`);
       console.error(new TextDecoder().decode(result.stderr));
       hasErrors = true;
     } else {
-      console.log(`✅ ${task.name} generation completed`);
       const stdout = new TextDecoder().decode(result.stdout);
       if (stdout.trim()) {
-        // Only show key progress lines, not all output
+        // Show key progress lines for completed tasks
         const lines = stdout.split("\n").filter((line) =>
-          line.includes("Generating") ||
+          line.includes("✅") ||
+          line.includes("📝") ||
+          line.includes("🎉") ||
           line.includes("completed") ||
           line.includes("Found") ||
           line.includes("Generated")
         );
         if (lines.length > 0) {
-          console.log(`  ${lines.join("\n  ")}`);
+          console.log(`  ${lines.slice(-3).join("\n  ")}`); // Show last 3 key lines
         }
       }
     }
   }
 
-  // Log skipped tasks
-  for (const task of tasks) {
+  // Show skipped tasks
+  for (const task of allTasks) {
     if (!task.shouldRun) {
-      console.log(`⏭️  ${task.name} generation skipped (no changes)`);
+      console.log(`⏭️  ${task.name} generation skipped (no changes detected)`);
     }
   }
 
   const totalTime = ((endTime - startTime) / 1000).toFixed(2);
+  const tasksRun = allResults.length;
+  const tasksSkipped = allTasks.length - tasksRun;
+
   if (hasErrors) {
     console.log(
       `\n⚠️  Documentation generation completed with errors in ${totalTime}s`,
     );
+    console.log(`📊 Tasks: ${tasksRun} run, ${tasksSkipped} skipped`);
     Deno.exit(1);
   } else {
     console.log(
       `\n🎉 Documentation generation completed successfully in ${totalTime}s`,
     );
+    console.log(`📊 Tasks: ${tasksRun} run, ${tasksSkipped} skipped`);
+
+    // Show performance improvement estimate
+    if (tasksSkipped > 0) {
+      const estimatedSavedTime = tasksSkipped * 80; // Rough estimate
+      console.log(
+        `⚡ Estimated time saved by caching: ~${estimatedSavedTime}s`,
+      );
+    }
   }
 }
 
 if (import.meta.main) {
-  await runDocGeneration();
+  await runOptimizedDocGeneration();
 }

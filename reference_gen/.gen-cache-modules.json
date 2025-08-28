@@ -1,0 +1,214 @@
+{
+  "file://D:\\docs\\reference_gen\\types\\node\\node__assert.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017065
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__async_hooks.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017096
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__buffer.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017130
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__child_process.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017163
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__cluster.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017201
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__console.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017239
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__constants.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017274
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__crypto.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017308
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__dgram.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017353
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__diagnostics_channel.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017394
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__dns--promises.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017437
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__dns.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017478
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__domain.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017527
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__events.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017581
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__fs--promises.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017625
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__fs.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017665
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__http.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017701
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__http2.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017740
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__https.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017782
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__inspector--promises.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017826
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__inspector.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017878
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__module.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017924
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__net.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385017970
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__os.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018015
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__path.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018058
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__perf_hooks.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018105
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__process.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018148
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__punycode.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018194
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__querystring.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018238
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__readline--promises.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018282
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__readline.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018323
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__repl.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018357
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__sea.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018392
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__sqlite.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018429
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__stream--consumers.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018466
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__stream--promises.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018507
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__stream--web.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018549
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__stream.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018603
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__string_decoder.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018653
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__test--reporters.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018700
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__timers--promises.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018747
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__timers.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018790
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__tls.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018834
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__trace_events.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018871
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__tty.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018910
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__url.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018948
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__util--types.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385018978
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__util.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385019012
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__v8.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385019052
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__vm.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385019096
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__wasi.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385019139
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__worker_threads.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385019178
+  },
+  "file://D:\\docs\\reference_gen\\types\\node\\node__zlib.d.ts": {
+    "hash": "",
+    "lastGenerated": 1756385019226
+  }
+}
