@@ -16,6 +16,8 @@ export interface OramaDocument {
   tags: string[];
   headings: string[];
   lastModified: number;
+  /** Document type - markdown or api reference */
+  docType?: DocType;
   /** Optional kind/category of doc: e.g. "cli", "guide", "api" */
   kind?: string;
   /** CLI command name if applicable, e.g. "serve" */
