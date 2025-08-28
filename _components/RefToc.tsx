@@ -1,5 +1,34 @@
 import type { ToCEntry } from "@deno/doc";
 
+interface ToCEntryWithChildren {
+  children: ToCEntryWithChildren[] | null;
+  content: string;
+  anchor: string;
+}
+
+function renderItems(items: ToCEntryWithChildren[]) {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li class="m-2 mr-0 leading-4 text-balance">
+          <a
+            href={`#${item.anchor}`}
+            title={item.content}
+            className="text-smaller lg:text-foreground-secondary hover:text-primary transition-colors duration-200 ease-in-out select-none"
+          >
+            {item.content}
+          </a>
+          {item.children && item.children.length > 0 && (
+            <ul class="ml-2">
+              {renderItems(item.children)}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function (
   { documentNavigation, documentNavigationStr }: {
     documentNavigation: ToCEntry[];
@@ -14,14 +43,19 @@ export default function (
   //  needs reworking since it doesnt properly work
   if (documentNavigationStr) {
     return (
-      <nav
-        className="documentNavigation toc-desktop"
-        dangerouslySetInnerHTML={{ __html: documentNavigationStr }}
-      />
+      <div
+        className="toc-list sticky p-4 pr-0 h-screen-minus-header overflow-y-auto border-l border-l-foreground-tertiary top-header"
+        id="toc"
+      >
+        <nav
+          className="documentNavigation toc-desktop"
+          dangerouslySetInnerHTML={{ __html: documentNavigationStr }}
+        />
+      </div>
     );
   }
 
-  /*
+  // Fallback: build the navigation manually with proper styling
   let currentLevel = Math.min(
     ...documentNavigation.map((entry) => entry.level),
   );
@@ -59,35 +93,11 @@ export default function (
   }
 
   return (
-    <div className="toc">
-      <div>
-        <nav className="documentNavigation">
-          {renderItems(elementsStack[0])}
-        </nav>
-      </div>
+    <div
+      className="toc-list hidden sticky p-4 pr-0 h-screen-minus-header overflow-y-auto border-l border-l-foreground-tertiary lg:block lg:w-full top-header"
+      id="toc"
+    >
+      {renderItems(elementsStack[0])}
     </div>
-  );*/
-}
-/*
-
-interface ToCEntryWithChildren {
-  children: ToCEntryWithChildren[] | null;
-  content: string;
-  anchor: string;
-}
-
-function renderItems(items: ToCEntryWithChildren[]) {
-  return (
-    <ul>
-      {items.map((item) => (
-        <li>
-          <a href={`#${item.anchor}`} title={item.content}>
-            {item.content}
-          </a>
-          {item.children ? renderItems(item.children) : null}
-        </li>
-      ))}
-    </ul>
   );
 }
-*/

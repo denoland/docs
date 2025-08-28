@@ -2579,6 +2579,41 @@
   .ddoc .toc .documentNavigation a:hover {
     text-decoration-line: underline;
   }
+
+  /* Style plain HTML from documentNavigationStr to match TableOfContentsItem */
+  .toc-list .documentNavigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .toc-list .documentNavigation li {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    line-height: 1rem;
+    text-wrap: balance;
+  }
+  .toc-list .documentNavigation a {
+    font-size: 0.8125rem;
+    color: rgb(107 114 126);
+    text-decoration: none;
+    transition: color 200ms ease-in-out;
+    user-select: none;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  @media (min-width: 64rem) {
+    .toc-list .documentNavigation a {
+      color: rgb(107 114 126);
+    }
+  }
+  .toc-list .documentNavigation a:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .toc-list .documentNavigation ul ul {
+    margin-left: 0.5rem;
+  }
   .ddoc .usages nav {
     flex-direction: row;
     align-items: center;
