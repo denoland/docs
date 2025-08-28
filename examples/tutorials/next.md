@@ -48,11 +48,51 @@ to install the dependencies with script execution allowed:
 deno install --allow-scripts
 ```
 
+Next.js has some dependencies that still rely on `Object.prototype.__proto__`
+and requires CommonJS module support. To configure Deno for Next.js
+compatibility, update your `deno.json` file with the following configuration:
+
+```json deno.json
+{
+  "nodeModulesDir": "auto",
+  "unstable": [
+    "unsafe-proto",
+    "sloppy-imports"
+  ],
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "strict": true,
+    "jsx": "preserve"
+  },
+  "tasks": {
+    "dev": "deno run -A --unstable-detect-cjs npm:next@latest dev",
+    "build": "deno run -A --unstable-detect-cjs npm:next@latest build",
+    "start": "deno run -A --unstable-detect-cjs npm:next@latest start"
+  }
+}
+```
+
+This configuration includes:
+
+- `nodeModulesDir: "auto"` - Enables npm package lifecycle scripts
+- `unstable: ["unsafe-proto", "sloppy-imports"]` - Required for Next.js
+  compatibility
+- `--unstable-detect-cjs` flag - Enables CommonJS module detection for Next.js
+  dependencies
+
 Now you can serve your new Next.js app:
 
 ```sh
 deno run dev
 ```
+
+This will start the Next.js development server using Deno. The `deno task dev`
+command runs the Next.js development server with the necessary flags for
+CommonJS compatibility.
 
 Visit [http://localhost:3000](http://localhost:3000) to see the app in the
 browser.
