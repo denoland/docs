@@ -1,0 +1,91 @@
+name: Deploy Orama Search Index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      # Only trigger when documentation content changes
+      - "runtime/**/*.md"
+      - "deploy/**/*.md"
+      - "examples/**/*.md"
+      - "subhosting/**/*.md"
+      - "lint/**/*.md"
+      - "reference_gen/**"
+      # Or when the build configuration changes
+      - "deno.json"
+      - "orama/**"
+
+  # Allow manual triggering for testing
+  workflow_dispatch:
+    inputs:
+      force_deploy:
+        description: "Force deploy even without content changes"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  deploy-search-index:
+    name: Generate and Deploy Search Index
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Fetch more history for content change detection
+          fetch-depth: 2
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Check for content changes
+        id: changes
+        run: |
+          if [ "${{ github.event.inputs.force_deploy }}" = "true" ]; then
+            echo "Force deploy requested"
+            echo "content_changed=true" >> $GITHUB_OUTPUT
+          else
+            # Check if any content files changed in the last commit
+            CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E '\.(md|json)$|^reference_gen/|^orama/' || echo "")
+            if [ -n "$CHANGED" ]; then
+              echo "content_changed=true" >> $GITHUB_OUTPUT
+              echo "Content files changed:"
+              echo "$CHANGED" | sed 's/^/  /'
+            else
+              echo "content_changed=false" >> $GITHUB_OUTPUT
+              echo "  No content changes detected - skipping search index update"
+            fi
+          fi
+
+      - name: Generate comprehensive search index
+        if: steps.changes.outputs.content_changed == 'true'
+        run: |
+          echo "Generating comprehensive Orama search index..."
+          deno task generate:orama:full
+
+      - name: Upload and deploy to Orama Cloud
+        if: steps.changes.outputs.content_changed == 'true'
+        run: |
+          echo "Uploading search index to Orama Cloud..."
+          deno task upload:orama static/orama-index-full.json --deploy
+        env:
+          ORAMA_INDEX_ID: ${{ secrets.ORAMA_INDEX_ID }}
+          ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
+
+      - name: Report deployment success
+        if: steps.changes.outputs.content_changed == 'true'
+        run: |
+          echo "Search index deployment completed successfully!"
+          echo "Updated search includes:"
+          echo "  Documentation pages"
+          echo "  API references (Deno, Web, Node.js)"
+          echo "  Total searchable documents: ~5,856"
+
+      - name: Skip deployment message
+        if: steps.changes.outputs.content_changed == 'false'
+        run: |
+          echo "No content changes detected - search index deployment skipped"
+          echo "To force a deployment, use the 'workflow_dispatch' trigger with force_deploy=true"
