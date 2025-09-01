@@ -261,7 +261,7 @@ async function main() {
 
   // Load the index file
   const indexData = await loadIndexFile(indexFilePath);
-  const documents = indexData.documents || [];
+  const documents = indexData.documents || indexData.data || [];
 
   if (documents.length === 0) {
     console.error("❌ No documents found in index file");
