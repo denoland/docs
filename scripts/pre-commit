@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Pre-commit hook to check for broken links
+# To install: cp scripts/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+
+echo "🔍 Running link checker before commit..."
+
+# Check if any markdown files were changed
+CHANGED_MD_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(md|mdx)$' || true)
+
+if [ -n "$CHANGED_MD_FILES" ]; then
+    echo "📝 Markdown files changed, running link checker..."
+    echo "Changed files:"
+    echo "$CHANGED_MD_FILES" | sed 's/^/  - /'
+    echo
+    
+    # Run the local link checker
+    if ! deno task check:links:local; then
+        echo
+        echo "❌ Link checker failed! Please fix broken links before committing."
+        echo "   You can run 'deno task check:links:local' to check links locally."
+        echo "   Or run 'deno task dev' and manually verify the problematic links."
+        echo
+        echo "   To skip this check, use: git commit --no-verify"
+        exit 1
+    fi
+    
+    echo "✅ All links are working correctly!"
+else
+    echo "ℹ️  No markdown files changed, skipping link check."
+fi
+
+echo "✅ Pre-commit checks passed!"

@@ -12,6 +12,7 @@ class PageIndexer {
   private excludedPaths: string[];
   private excludedExtensions: string[];
   private excludedProtocolPrefixes: string[];
+  private tutorialExamplePatterns: RegExp[];
 
   public anyErrors = false;
   private log = false;
@@ -23,7 +24,13 @@ class PageIndexer {
     this.failedPages = new Set<string>();
     this.parser = new DOMParser();
     this.rootUrl = rootUrl;
-    this.excludedPaths = ["/api"];
+    this.excludedPaths = [
+      "/api", // API reference docs handled separately
+    ];
+    this.tutorialExamplePatterns = [
+      /^\/ry$/, // Redis tutorial: /ry
+      /^\/api\/dinosaurs(\/.*)?$/, // Tutorial APIs: /api/dinosaurs, /api/dinosaurs/aardonyx, etc.
+    ];
     this.excludedExtensions = [
       ".ts",
       ".js",
@@ -133,6 +140,9 @@ class PageIndexer {
     ) &&
       !this.excludedPaths.some((path) => url.pathname.startsWith(path)) &&
       !this.excludedExtensions.some((ext) => url.pathname.endsWith(ext)) &&
+      !this.tutorialExamplePatterns.some((pattern) =>
+        pattern.test(url.pathname)
+      ) &&
       url.href.startsWith(this.rootUrl.href);
   }
 
