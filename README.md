@@ -166,7 +166,7 @@ If you need to force a complete regeneration (bypassing the cache), you can
 delete the cache files:
 
 ```console
-rm reference_gen/.gen-cache*.json reference_gen/.node-incremental-cache.json
+deno task cache:clear
 ```
 
 ## Contribution

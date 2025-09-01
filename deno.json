@@ -33,6 +33,7 @@
     "generate:llms": "deno run -A generate_llms_files.ts",
     "generate:llms:site": "deno run -A generate_llms_files.ts _site",
     "generate:reference": "cd reference_gen && deno task types && deno task doc",
+    "cache:clear": "rm -f reference_gen/.gen-cache*.json reference_gen/.node-incremental-cache.json",
     "search:upload": "deno run -A orama/upload_orama_index.ts --full",
     "search:analyze": "deno run -A orama/analyze_orama_index.ts"
   },
