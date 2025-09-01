@@ -37,9 +37,24 @@ jobs:
           fetch-depth: 2
 
       - name: Setup Deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.x
+          cache: true
+
+      - name: "Reference: install"
+        if: steps.changes.outputs.content_changed == 'true'
+        working-directory: "reference_gen"
+        run: deno install
+
+      - name: "Reference: generate types"
+        if: steps.changes.outputs.content_changed == 'true'
+        working-directory: "reference_gen"
+        run: deno task types
+
+      - name: "Reference: generate docs"
+        if: steps.changes.outputs.content_changed == 'true'
+        working-directory: "reference_gen"
+        run: deno task doc
 
       - name: Check for content changes
         id: changes
@@ -64,16 +79,16 @@ jobs:
         if: steps.changes.outputs.content_changed == 'true'
         run: |
           echo "Generating comprehensive Orama search index..."
-          deno task generate:orama:full
+          deno task generate:search
 
       - name: Upload and deploy to Orama Cloud
         if: steps.changes.outputs.content_changed == 'true'
         run: |
           echo "Uploading search index to Orama Cloud..."
-          deno task upload:orama static/orama-index-full.json --deploy
+          deno task search:upload
         env:
-          ORAMA_INDEX_ID: ${{ secrets.ORAMA_INDEX_ID }}
-          ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
+          ORAMA_CLOUD_INDEX_ID: ${{ vars.ORAMA_CLOUD_INDEX_ID }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
 
       - name: Report deployment success
         if: steps.changes.outputs.content_changed == 'true'
