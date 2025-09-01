@@ -1,5 +1,5 @@
 // Orama Search Client
-// This handles the client-side search functionality for the Deno docs
+// This handles the client-side search functionality for the Deno docs with AI Context Engineering
 
 import type { Hit, OramaCloud, SearchResult } from "jsr:@orama/core@1.2.4";
 
@@ -14,6 +14,13 @@ interface OramaDocument {
   command?: string;
 }
 
+interface AISession {
+  answer: (params: { query: string }) => Promise<string>;
+  answerStream: (params: { query: string }) => AsyncIterable<string>;
+  state: unknown[];
+  abort: () => void | Promise<void>;
+}
+
 // Configuration - Replace these with your actual Orama Cloud credentials
 const ORAMA_CONFIG = {
   projectId: "c9394670-656a-4f78-a551-c2603ee119e7",
@@ -23,12 +30,18 @@ const ORAMA_CONFIG = {
 class OramaSearch {
   private client: OramaCloud | null = null;
   private searchInput: HTMLInputElement | null = null;
+  private searchInputModal: HTMLInputElement | null = null;
+  private searchModal: HTMLElement | null = null;
+  private searchBackdrop: HTMLElement | null = null;
   private searchResults: HTMLElement | null = null;
   private searchLoading: HTMLElement | null = null;
   private ariaLiveRegion: HTMLElement | null = null;
   private searchTimeout: number | null = null;
-  private isResultsOpen = false;
+  private isModalOpen = false;
   private selectedIndex = -1; // Track selected result for keyboard navigation
+  private aiSession: AISession | null = null;
+  private currentAiSearch: AbortController | null = null;
+  private isAiMode = false; // Toggle between regular and AI search
 
   constructor() {
     this.init();
@@ -50,28 +63,77 @@ class OramaSearch {
     this.searchInput = document.getElementById(
       "orama-search-input",
     ) as HTMLInputElement;
+    this.searchInputModal = document.getElementById(
+      "orama-search-input-modal",
+    ) as HTMLInputElement;
+    this.searchModal = document.getElementById("orama-search-modal");
+    this.searchBackdrop = document.getElementById("search-backdrop");
     this.searchResults = document.getElementById(
       "orama-search-results-content",
-    ); // Target the scrollable container
+    );
     this.searchLoading = document.getElementById("orama-search-loading");
     this.ariaLiveRegion = document.getElementById("orama-results-announcer");
 
-    if (!this.searchInput) {
-      console.warn("Orama search input not found");
+    if (!this.searchInput || !this.searchInputModal) {
+      console.warn("Orama search inputs not found");
       return;
     }
 
-    // Bind event listeners
-    this.searchInput.addEventListener("input", this.handleInput.bind(this));
-    this.searchInput.addEventListener("focus", this.handleFocus.bind(this));
-    this.searchInput.addEventListener("keydown", this.handleKeyDown.bind(this));
-    this.searchResults?.addEventListener("keyup", (event) => {
-      if (event.key === "Escape") this.handleEscape();
+    // Initialize search mode UI
+    this.updateSearchMode();
+
+    // Make the trigger input readonly and add click handler to open modal
+    this.searchInput.setAttribute("readonly", "true");
+    this.searchInput.addEventListener("click", () => {
+      this.openSearchModal();
     });
+
+    // Set up modal input handlers
+    this.searchInputModal.addEventListener(
+      "input",
+      this.handleInput.bind(this),
+    );
+    this.searchInputModal.addEventListener(
+      "keydown",
+      this.handleKeyDown.bind(this),
+    );
+
+    // Add backdrop click handler to close modal
+    this.searchBackdrop?.addEventListener("click", () => {
+      this.hideResults();
+    });
+
+    // Add click handler to mode toggle button
+    const modeToggle = document.getElementById("search-mode-toggle");
+    modeToggle?.addEventListener("click", () => {
+      this.toggleSearchMode();
+    });
+
+    // Finish setting up global handlers
+    this.finishElementSetup();
+  }
+
+  openSearchModal() {
+    this.showResults();
+    // Focus the modal input
+    setTimeout(() => {
+      this.searchInputModal?.focus();
+    }, 100);
+  }
+
+  finishElementSetup() {
+    // Set up global keyboard handlers
     document.addEventListener("keydown", (event) => {
       if ((event.metaKey || event.ctrlKey) && event.key === "k") {
         event.preventDefault();
-        this.searchInput?.focus();
+        this.openSearchModal();
+      }
+      // Add shortcut for AI mode toggle (Ctrl+Shift+K or Cmd+Shift+K)
+      if (
+        (event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "K"
+      ) {
+        event.preventDefault();
+        this.toggleSearchMode();
       }
     });
 
@@ -119,10 +181,36 @@ class OramaSearch {
         apiKey: ORAMA_CONFIG.apiKey,
       });
 
+      // Initialize AI session for context engineering
+      await this.initAISession();
+
       console.log("Orama search client initialized successfully");
     } catch (error) {
       console.error("Failed to initialize Orama client:", error);
       this.showErrorMessage("Failed to initialize search");
+    }
+  }
+
+  async initAISession() {
+    if (!this.client) return;
+
+    try {
+      // Create AI session with context engineering capabilities
+      this.aiSession = await this.client.ai.createAISession({
+        events: {
+          onStateChange: (state) => {
+            console.log("AI Session state changed:", state);
+          },
+        },
+        LLMConfig: {
+          provider: "openai",
+          model: "gpt-4o-mini", // Use a fast, efficient model for search assistance
+        },
+      }) as AISession;
+      console.log("AI session initialized for context engineering");
+    } catch (error) {
+      console.warn("AI session initialization failed:", error);
+      // Continue without AI features if they fail to initialize
     }
   }
 
@@ -134,7 +222,10 @@ class OramaSearch {
     }
 
     if (!value.trim()) {
-      this.hideResults();
+      // Clear results but keep modal open
+      if (this.searchResults) {
+        this.searchResults.innerHTML = "";
+      }
       return;
     }
 
@@ -148,22 +239,19 @@ class OramaSearch {
   }
 
   handleFocus() {
-    if (this.searchInput?.value.trim() && this.searchResults?.children.length) {
-      this.showResults();
-    }
+    // No longer needed since we use modal
   }
 
   handleEscape() {
     this.hideResults();
-    if (this.searchInput) {
-      this.searchInput.value = ""; // Clears input when escape is triggered from within the list rather than on the input
-      this.searchInput.focus();
+    if (this.searchInputModal) {
+      this.searchInputModal.value = ""; // Clear modal input when escape is triggered
     }
     this.selectedIndex = -1;
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if (!this.isResultsOpen) {
+    if (!this.isModalOpen) {
       return;
     }
 
@@ -212,9 +300,19 @@ class OramaSearch {
 
     // Remove previous selection
     resultsLinks.forEach((link, index) => {
-      link.classList.remove("bg-blue-50", "dark:bg-blue-900/20");
+      link.classList.remove(
+        "bg-gray-50",
+        "dark:bg-gray-800",
+        "text-gray-900",
+        "dark:text-white",
+      );
       if (index === this.selectedIndex) {
-        link.classList.add("bg-blue-50", "dark:bg-blue-900/20");
+        link.classList.add(
+          "bg-gray-50",
+          "dark:bg-gray-800",
+          "text-gray-900",
+          "dark:text-white",
+        );
         // Scroll the selected item into view
         link.scrollIntoView({ block: "nearest", behavior: "smooth" });
       }
@@ -224,17 +322,16 @@ class OramaSearch {
   handleClickOutside(event: MouseEvent) {
     const target = event.target as Element;
 
-    // Don't hide results if clicking on a search result link
+    // Don't hide modal if clicking on a search result link
     if (target.closest(".search-result-link")) {
       return;
     }
 
-    // Check if click is outside the search container
-    const searchContainer = document.getElementById("orama-search-results");
-    if (
-      !this.searchInput?.parentElement?.contains(target) &&
-      !searchContainer?.contains(target)
-    ) {
+    // Check if click is outside the search modal content
+    const searchModal = document.getElementById("orama-search-modal");
+    const modalContent = searchModal?.querySelector("div"); // The inner content div
+
+    if (this.isModalOpen && modalContent && !modalContent.contains(target)) {
       this.hideResults();
     }
   }
@@ -248,25 +345,11 @@ class OramaSearch {
     this.showLoading(true);
 
     try {
-      const results = await this.client.search({
-        term,
-        mode: "fulltext",
-        limit: 8,
-        threshold: 1,
-        properties: ["title", "content", "description"],
-        datasources: ["0fe1e86b-60c9-4715-8bba-0c4686a58e7e"],
-        boost: {
-          title: 12,
-          content: 4,
-          description: 2,
-        },
-      });
-
-      this.renderResults(
-        results as unknown as SearchResult<OramaDocument>,
-        term,
-      );
-      this.showResults();
+      if (this.isAiMode && this.aiSession) {
+        await this.performAISearch(term);
+      } else {
+        await this.performRegularSearch(term);
+      }
     } catch (error) {
       console.error("Search error:", error);
       this.showErrorMessage("Search failed. Please try again.");
@@ -275,16 +358,95 @@ class OramaSearch {
     }
   }
 
+  async performRegularSearch(term: string) {
+    const results = await this.client!.search({
+      term,
+      mode: "fulltext",
+      limit: 8,
+      threshold: 1,
+      properties: ["title", "content", "description"],
+      datasources: ["0fe1e86b-60c9-4715-8bba-0c4686a58e7e"],
+      boost: {
+        title: 12,
+        content: 4,
+        description: 2,
+      },
+    });
+
+    this.renderResults(
+      results as unknown as SearchResult<OramaDocument>,
+      term,
+    );
+    this.showResults();
+  }
+
+  async performAISearch(term: string) {
+    if (!this.aiSession) {
+      await this.performRegularSearch(term);
+      return;
+    }
+
+    // Show AI loading state
+    this.renderAILoading(term);
+    this.showResults();
+
+    try {
+      // Abort any existing AI search
+      if (this.currentAiSearch) {
+        this.currentAiSearch.abort();
+      }
+      this.currentAiSearch = new AbortController();
+
+      let response = "";
+      let sources: OramaDocument[] = [];
+      let lastResponse = "";
+
+      // Stream the AI response
+      for await (const chunk of this.aiSession.answerStream({ query: term })) {
+        if (this.currentAiSearch.signal.aborted) {
+          break;
+        }
+
+        // Chunks from Orama are cumulative (contain full response so far)
+        response = String(chunk);
+
+        // Only re-render if response has actually changed
+        if (response !== lastResponse) {
+          this.renderAIResponse(term, response, sources, true);
+          lastResponse = response;
+        }
+      }
+
+      // Get the final state to extract sources
+      const sessionState = this.aiSession.state;
+      if (sessionState && sessionState.length > 0) {
+        const latestInteraction = sessionState[sessionState.length - 1] as {
+          sources?: OramaDocument[];
+        };
+        sources = latestInteraction.sources || [];
+      }
+
+      // Render final result
+      this.renderAIResponse(term, response, sources, false);
+    } catch (error) {
+      if ((error as Error).name !== "AbortError") {
+        console.error("AI search error:", error);
+        this.renderAIError(
+          term,
+          "AI search failed. Falling back to regular search.",
+        );
+        await this.performRegularSearch(term);
+      }
+    }
+  }
+
   renderResults(results: SearchResult<OramaDocument>, searchTerm: string) {
     if (!this.searchResults) return;
 
     if (results.hits.length === 0) {
       this.searchResults.innerHTML = `
-        <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
-          <h3 class="text-sm font-semibold text-foreground-primary">Search Results</h3>
-        </div>
-        <div class="p-8 text-center">
-          <div class="w-16 h-16 mx-auto mb-4 text-foreground-tertiary">
+        <div class="px-4 py-8 text-center">
+          <div class="w-12 h-12 mx-auto mb-4 text-foreground-tertiary">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-full h-full">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
@@ -321,23 +483,15 @@ class OramaSearch {
       });
 
     const resultsHtml = `
-      <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
-        <div class="flex items-center justify-between">
-          <h2 class="text-sm font-semibold text-foreground-primary" id="search-results__heading">Search Results</h2>
-          <span class="text-xs text-foreground-secondary">${validResults.length} result${
-      validResults.length !== 1 ? "s" : ""
-    }</span>
-        </div>
-      </div>
-      <ul aria-labelledby="search-results__heading">
-        ${
-      validResults.map((hit) => `
-        <li>
-          <a
-            href="${this.escapeHtml(this.formatUrl(hit.document.url, hit))}"
-            class="flex flex-col px-4 py-3 hover:bg-foreground-quaternary transition-colors duration-150 border-b border-foreground-quaternary last:border-b-0 search-result-link group"
-          >
-            <div class="font-bold text-foreground-primary text-sm mb-2 group-hover:text-primary transition-colors">
+      ${
+      validResults.map((hit, index) => `
+        <a
+          href="${this.escapeHtml(this.formatUrl(hit.document.url, hit))}"
+          class="group flex cursor-default select-none items-center rounded-md px-3 py-2 text-sm search-result-link hover:bg-gray-50 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white"
+          id="search-result-${index}"
+        >
+          <div class="flex-auto">
+            <div class="font-medium text-foreground-primary mb-1">
               ${
         this.highlightMatch(
           this.escapeHtml(this.cleanTitle(hit.document.title)),
@@ -345,25 +499,34 @@ class OramaSearch {
         )
       }
             </div>
-            <div class="pl-3 border-l border-foreground-quaternary text-sm text-foreground-secondary leading-relaxed mb-2 line-clamp-3">
+            <div class="text-xs text-foreground-secondary line-clamp-2">
               ${
         this.highlightMatch(
-          this.escapeHtml(hit.document.content.slice(0, 200)) + "...",
+          this.escapeHtml(hit.document.content.slice(0, 120)) + "...",
           searchTerm,
         )
       }
             </div>
-            <div class="flex items-center text-xs text-gray-500 dark:color-gray-600">
-              <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-center text-xs text-foreground-tertiary mt-1">
+              <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
               </svg>
-              ${this.escapeHtml(this.formatUrl(hit.document.url, hit))}
+              ${
+        this.escapeHtml(
+          this.formatUrl(hit.document.url, hit).replace(
+            /^https?:\/\/[^\/]+/,
+            "",
+          ),
+        )
+      }
             </div>
-          </a>
-        </li>
+          </div>
+          <div class="ml-3 flex-none text-xs font-semibold text-foreground-tertiary">
+            ↵
+          </div>
+        </a>
       `).join("")
     }
-      </ul>
     `;
 
     this.searchResults.innerHTML = resultsHtml;
@@ -397,6 +560,228 @@ class OramaSearch {
     this.showResults();
   }
 
+  renderAILoading(searchTerm: string) {
+    if (!this.searchResults) return;
+
+    this.searchResults.innerHTML = `
+      <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-semibold text-foreground-primary flex items-center gap-2">
+            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+            AI Search Results
+          </h2>
+        </div>
+      </div>
+      <div class="p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="animate-spin rounded-full h-5 w-5 border-2 border-transparent border-r-primary"></div>
+          <div class="text-sm text-foreground-secondary">
+            Analyzing your query with AI context engineering...
+          </div>
+        </div>
+        <div class="bg-background-secondary rounded-lg p-4 border-l-4 border-primary">
+          <p class="text-sm text-foreground-secondary mb-2">
+            <strong>Query:</strong> ${this.escapeHtml(searchTerm)}
+          </p>
+          <p class="text-xs text-foreground-tertiary">
+            Using advanced context engineering to provide the most relevant and helpful response.
+          </p>
+        </div>
+      </div>
+    `;
+  }
+
+  renderAIResponse(
+    searchTerm: string,
+    response: string,
+    sources: OramaDocument[],
+    isStreaming: boolean,
+  ) {
+    if (!this.searchResults) return;
+
+    const streamingIndicator = isStreaming
+      ? `<div class="animate-pulse inline-block w-2 h-4 bg-primary rounded ml-1"></div>`
+      : "";
+
+    const sourcesHtml = sources.length > 0
+      ? `
+      <div class="mt-6 border-t border-foreground-quaternary pt-4">
+        <h3 class="text-sm font-semibold text-foreground-primary mb-3 flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Sources (${sources.length})
+        </h3>
+        <div class="grid gap-2">
+          ${
+        sources.slice(0, 3).map((source) => `
+            <a href="${
+          this.escapeHtml(
+            this.formatUrl(
+              source.url,
+              { document: source } as Hit<OramaDocument>,
+            ),
+          )
+        }" 
+               class="block p-3 rounded-lg bg-background-secondary hover:bg-foreground-quaternary transition-colors border border-foreground-quaternary group">
+              <div class="text-sm font-medium text-foreground-primary group-hover:text-primary transition-colors">
+                ${this.escapeHtml(source.title || "Untitled")}
+              </div>
+              <div class="text-xs text-foreground-secondary mt-1 line-clamp-2">
+                ${this.escapeHtml(source.content?.slice(0, 120) || "")}...
+              </div>
+            </a>
+          `).join("")
+      }
+        </div>
+      </div>
+    `
+      : "";
+
+    this.searchResults.innerHTML = `
+      <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-semibold text-foreground-primary flex items-center gap-2">
+            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+            AI Search Results
+          </h2>
+          <span class="text-xs text-primary">Powered by Context Engineering</span>
+        </div>
+      </div>
+      <div class="p-6">
+        <div class="bg-background-secondary rounded-lg p-4 border-l-4 border-primary mb-4">
+          <p class="text-sm text-foreground-secondary mb-2">
+            <strong>Your Question:</strong> ${this.escapeHtml(searchTerm)}
+          </p>
+        </div>
+        <div class="prose prose-sm max-w-none text-foreground-primary">
+          <div class="whitespace-pre-wrap leading-relaxed">
+            ${this.escapeHtml(response)}${streamingIndicator}
+          </div>
+        </div>
+        ${sourcesHtml}
+        <div class="mt-4 pt-4 border-t border-foreground-quaternary">
+          <button onclick="oramaSearch.toggleSearchMode()" class="text-xs text-primary hover:text-primary-dark transition-colors">
+            ← Switch to regular search
+          </button>
+        </div>
+      </div>
+    `;
+
+    // Reset selection for new results
+    this.selectedIndex = -1;
+
+    if (this.ariaLiveRegion) {
+      this.ariaLiveRegion.textContent =
+        `AI response provided for "${searchTerm}"`;
+    }
+  }
+
+  renderAIError(_searchTerm: string, errorMessage: string) {
+    if (!this.searchResults) return;
+
+    this.searchResults.innerHTML = `
+      <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-semibold text-foreground-primary flex items-center gap-2">
+            <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            AI Search Error
+          </h2>
+        </div>
+      </div>
+      <div class="p-6">
+        <div class="bg-red-50 dark:bg-red-900/20 rounded-lg p-4 border-l-4 border-red-500 mb-4">
+          <p class="text-sm text-red-700 dark:text-red-300">
+            ${this.escapeHtml(errorMessage)}
+          </p>
+        </div>
+        <button onclick="oramaSearch.toggleSearchMode()" class="text-xs text-primary hover:text-primary-dark transition-colors">
+          ← Switch to regular search
+        </button>
+      </div>
+    `;
+  }
+
+  toggleSearchMode() {
+    this.isAiMode = !this.isAiMode;
+
+    // Abort any ongoing AI search
+    if (this.currentAiSearch) {
+      this.currentAiSearch.abort();
+      this.currentAiSearch = null;
+    }
+
+    // Update UI to reflect the mode change
+    this.updateSearchMode();
+
+    // If there's a current search term, re-run the search with the new mode
+    if (this.searchInput?.value.trim()) {
+      this.performSearch(this.searchInput.value.trim());
+    }
+  }
+
+  updateSearchMode() {
+    // Update trigger input
+    if (this.searchInput) {
+      if (this.isAiMode) {
+        this.searchInput.placeholder = "Ask AI about Deno docs...";
+        this.searchInput.classList.add("ai-mode");
+      } else {
+        this.searchInput.placeholder = "Search documentation...";
+        this.searchInput.classList.remove("ai-mode");
+      }
+    }
+
+    // Update modal input
+    if (this.searchInputModal) {
+      if (this.isAiMode) {
+        this.searchInputModal.placeholder = "Ask AI about Deno docs...";
+      } else {
+        this.searchInputModal.placeholder = "Search documentation...";
+      }
+    }
+
+    // Update modal UI elements
+    this.updateModalSearchMode();
+  }
+
+  updateModalSearchMode() {
+    const modal = document.getElementById("orama-search-modal");
+    const modeIcon = document.getElementById("search-mode-icon");
+    const modeText = document.getElementById("search-mode-text");
+    const toggleButton = document.getElementById("search-mode-toggle");
+
+    if (modal) {
+      if (this.isAiMode) {
+        modal.classList.add("ai-mode");
+      } else {
+        modal.classList.remove("ai-mode");
+      }
+    }
+
+    if (modeIcon && modeText) {
+      if (this.isAiMode) {
+        modeIcon.textContent = "💡";
+        modeText.textContent = "AI Search";
+      } else {
+        modeIcon.textContent = "🔍";
+        modeText.textContent = "Search";
+      }
+    }
+
+    if (toggleButton) {
+      toggleButton.title = this.isAiMode
+        ? "Switch to regular search (Ctrl+Shift+K)"
+        : "Switch to AI search (Ctrl+Shift+K)";
+    }
+  }
+
   showErrorMessage(message: string) {
     if (!this.searchResults) return;
 
@@ -420,19 +805,27 @@ class OramaSearch {
   }
 
   showResults() {
-    const resultsContainer = document.getElementById("orama-search-results");
-    if (resultsContainer) {
-      resultsContainer.classList.remove("hidden");
-      this.isResultsOpen = true;
+    const modal = document.getElementById("orama-search-modal");
+    const backdrop = document.getElementById("search-backdrop");
+    if (modal && backdrop) {
+      modal.classList.remove("hidden");
+      backdrop.classList.remove("hidden");
+      this.isModalOpen = true;
+      // Prevent body scrolling when modal is open
+      document.body.style.overflow = "hidden";
     }
   }
 
   hideResults() {
-    const resultsContainer = document.getElementById("orama-search-results");
-    if (resultsContainer) {
-      resultsContainer.classList.add("hidden");
-      this.isResultsOpen = false;
+    const modal = document.getElementById("orama-search-modal");
+    const backdrop = document.getElementById("search-backdrop");
+    if (modal && backdrop) {
+      modal.classList.add("hidden");
+      backdrop.classList.add("hidden");
+      this.isModalOpen = false;
       this.selectedIndex = -1; // Reset selection when hiding
+      // Restore body scrolling
+      document.body.style.overflow = "";
     }
   }
 
