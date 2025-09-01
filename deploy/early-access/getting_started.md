@@ -10,19 +10,16 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
-:::note
-
-Deno Deploy<sup>EA</sup> is in private beta. To use Deno Deploy
-<sup>EA</sup> you must join the Early Access program from the
-[Deploy Classic account settings page](https://dash.deno.com/account#early-access).
-
-:::
-
 ## Create an organization
+
+Deno Deploy<sup>EA</sup> will eventually replace Deno Deploy Classic. Until that
+time both systems will be available simultaneously. By creating an organisation
+for use with Deploy<sup>EA</sup> it is possible to explore Deploy<sup>EA</sup>
+without disrupting projects already using Deploy Classic.
 
 To get started with Deno Deploy<sup>EA</sup>:
 
-1. Visit [app.deno.com](http://app.deno.com)
+1. Visit [console.deno.com](http://console.deno.com)
 2. Create an organization:
 
 ![The Deno Deploy<sup>EA</sup> organization creation screen.](./images/create_org.png)

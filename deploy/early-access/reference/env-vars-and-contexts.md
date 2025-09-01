@@ -95,18 +95,74 @@ Access environment variables using the `Deno.env.get` API:
 const myEnvVar = Deno.env.get("MY_ENV_VAR");
 ```
 
+<!--
+## Exposing an environment variable as a file
+
+Environment variables can be exposed as a file instead of a regular environment
+variable by toggling the "Expose as file" option.
+
+When this option is enabled, the environment variable's value is stored in a
+temporary file in the application's file system. The environment variable then
+contains the file path to this temporary file instead of the value itself.
+
+To read the value, you can use the `Deno.readTextFile` API in combination with
+`Deno.env.get`:
+
+```ts
+// Assuming MY_ENV_VAR is set to expose as a file
+const value = await Deno.readTextFile(Deno.env.get("MY_ENV_VAR"));
+```
+
+This is useful for values that are too large for environment variables or when
+you want to avoid exposing sensitive data in the environment variable list.
+
+Additionally it is useful for preexisting applications that expect certain
+environment variables to point to files, such as `PGSSLROOTCERT` for Postgres CA
+certificates. -->
+
+## Limits
+
+Environment variables have the following limits:
+
+- Environment variable keys can be at most 128 bytes long.\
+- Environment variable keys can not start with:
+  - `DENO_`, except for `DENO_AUTH_TOKENS`, `DENO_COMPAT`, `DENO_CONDITIONS`,
+    `DENO_DEPLOY_ENDPOINT`, or `DENO_DEPLOY_TOKEN`
+  - `LD_`
+  - `OTEL_`
+- Environment variable values can be at most 16 KB (16,384 bytes) long.
+- Environment variable keys can not be any of these keys. Instead, use
+  [Cloud Connections](/deploy/early-access/reference/cloud-connections)
+  - `AWS_ROLE_ARN`
+  - `AWS_WEB_IDENTITY_TOKEN_FILE`
+  - `GCP_WORKLOAD_PROVIDER_ID`
+  - `GCP_SERVICE_ACCOUNT_EMAIL`
+  - `GCP_PROJECT_ID`
+  - `AZURE_CLIENT_ID`
+  - `AZURE_TENANT_ID`
+  - `AZURE_FEDERATED_TOKEN_FILE`
+
 ## Predefined environment variables
 
 Deno Deploy<sup>EA</sup> provides these predefined environment variables in all
 contexts:
 
+- `DENO_DEPLOY=1`: Indicates that the application is running in the Deno Deploy
+  environment.
+
 - `DENO_DEPLOYMENT_ID`: A unique identifier representing the entire
   configuration set (application ID, revision ID, context, and environment
   variables). Changes if any of these components change.
 
-- `DENO_REVISION_ID`: The ID of the currently running revision.
+- `DENO_DEPLOY_ORG_ID`: The ID of the organization the application belongs to.
 
-More predefined variables will be added in the future.
+- `DENO_DEPLOY_ORG_SLUG`: The slug of the organization the application belongs
+  to.
 
-Note that you cannot manually set any environment variables starting with
-`DENO_*` as these are reserved system variables.
+- `DENO_DEPLOY_APP_ID`: The ID of the application.
+
+- `DENO_DEPLOY_APP_SLUG`: The slug of the application.
+
+- `DENO_DEPLOY_REVISION_ID`: The ID of the currently running revision.
+
+During builds, the environment variable `CI=1` is additionally set.

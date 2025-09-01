@@ -2,8 +2,8 @@
 title: "Debugging"
 description: "Complete guide to debugging Deno applications. Learn to use Chrome DevTools, VS Code debugger, and other debugging techniques for TypeScript/JavaScript code in Deno."
 oldUrl:
-- /runtime/manual/getting_started/debugging_your_code/
-- /runtime/manual/basics/debugging_your_code/
+  - /runtime/manual/getting_started/debugging_your_code/
+  - /runtime/manual/basics/debugging_your_code/
 ---
 
 Deno supports the [V8 Inspector Protocol](https://v8.dev/docs/inspector) used by

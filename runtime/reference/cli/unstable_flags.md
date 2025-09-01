@@ -1,8 +1,8 @@
 ---
 title: "Unstable feature flags"
 oldUrl:
- - /runtime/tools/unstable_flags/
- - /runtime/manual/tools/unstable_flags/
+  - /runtime/tools/unstable_flags/
+  - /runtime/manual/tools/unstable_flags/
 ---
 
 New features of the Deno runtime are often released behind feature flags, so
@@ -210,14 +210,18 @@ Enable unstable net APIs. These APIs include:
 - [`WebSocketStream`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocketStream)
 - [`Deno.DatagramConn`](https://docs.deno.com/api/deno/~/Deno.DatagramConn)
 
-## ``
+## `--unstable-otel`
 
 Enable the
-[OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry).
+[OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry). This
+feature is now stable, so this flag is unnecessary in
+[Deno 2.4](https://deno.com/blog/v2.4)+.
 
 ## `--unstable`
 
-:::caution --unstable is deprecated - use granular flags instead
+:::caution
+
+**`--unstable` is deprecated - use granular flags instead.**
 
 The `--unstable` flag is no longer being used for new features, and will be
 removed in a future release. All unstable features that were available using

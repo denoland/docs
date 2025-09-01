@@ -13,10 +13,21 @@ lot of features out of the box.
 In this tutorial, we'll build a
 [simple Next.js application](https://tutorial-with-next.deno.deno.net/) and run
 it with Deno. The app will display a list of dinosaurs. When you click on one,
-it'll take you to a dinosaur page with more details. You can see the
+it'll take you to a dinosaur page with more details.
+
+You can see the
 [complete app on GitHub](https://github.com/denoland/tutorial-with-next/tree/main).
 
-![demo of the app](./images/how-to/next/dinoapp.gif)
+:::info Deploy your own
+
+Want to skip the tutorial and deploy the finished app right now? Click the
+button below to instantly deploy your own copy of the complete SvelteKit
+dinosaur app to Deno Deploy. You'll get a live, working application that you can
+customize and modify as you learn!
+
+[![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-next)
+
+:::
 
 ## Create a Next.js app with Deno
 
@@ -224,7 +235,7 @@ of links, each linking to the dinosaur's page:
 
 ```tsx title="page.tsx"
 return (
-  <main>
+  <main id="content">
     <h1>Welcome to the Dinosaur app</h1>
     <p>Click on a dinosaur below to learn more.</p>
     <ul>
@@ -287,7 +298,7 @@ element containing the dinosaur's name and description:
 
 ```tsx title="[dinosaur]/page.tsx"
 return (
-  <main>
+  <main id="content">
     <h1>{dinosaur.name}</h1>
     <p>{dinosaur.description}</p>
     <Link href="/">🠠 Back to all dinosaurs</Link>
@@ -327,10 +338,8 @@ git commit -am 'my next app'
 git push -u origin main
 ```
 
-Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
-dashboard.
-<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
-my app</a>
+Once your app is on GitHub, you can
+[deploy it to Deno Deploy<sup>EA</sup>](https://console.deno.com/).
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).

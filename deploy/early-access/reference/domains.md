@@ -91,7 +91,7 @@ Most compatible but requires more configuration:
 > supported. With the `A` method, you'll receive an email when it's time to add
 > an `AAAA` record.
 
-:::warning
+:::caution
 
 When using Cloudflare as your DNS provider, you **MUST** disable the proxying
 feature (orange cloud) for the `_acme-challenge` CNAME record, or verification

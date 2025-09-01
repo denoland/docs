@@ -30,55 +30,49 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   }
 
   return (
-    <div
-      id="content"
-      class={isExampleScript ? "examples-content" : "content"}
-    >
-      <div
-        class={`px-4 sm:px-5 md:px-6 w-full mx-auto 2xl:px-0 ${
-          isExampleScript ? "max-w-[70rem]" : "max-w-[40rem]"
-        }`}
+    <>
+      <main
+        id="content"
+        class={`content ${isExampleScript ? "examples-content" : ""}`}
       >
-        <article class="mx-auto">
-          {hasBreadcrumbs && (
-            <data.comp.Breadcrumbs
-              title={data.title!}
-              sidebar={sidebar}
-              url={data.url}
-              sectionTitle={data.sectionTitle!}
-              sectionHref={data.sectionHref!}
-            />
-          )}
-
-          <data.comp.TableOfContentsMobile toc={data.toc} data={data} />
-
-          <div
-            data-color-mode="auto"
-            data-light-theme="light"
-            data-dark-theme="dark"
-            class="markdown-body mt-4 rounded-lg"
-          >
-            {!isReference && (
-              <h1
-                dangerouslySetInnerHTML={{
-                  __html: helpers.md(data.title!, true),
-                }}
-              >
-              </h1>
+        <div class="w-full">
+          <article class="mx-auto">
+            {hasBreadcrumbs && (
+              <data.comp.Breadcrumbs
+                title={data.title!}
+                sidebar={sidebar}
+                url={data.url}
+              />
             )}
-            {data.available_since && (
-              <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">
-                Available since {data.available_since}
-              </div>
-            )}
-            {renderedCommand}
-            {data.children}
-          </div>
-        </article>
-        {!isReference && <data.comp.Feedback file={file} />}
-      </div>
-      {!isReference && <data.comp.TableOfContents toc={data.toc} data={data} />}
 
+            <data.comp.TableOfContentsMobile toc={data.toc} data={data} />
+
+            <div
+              data-color-mode="auto"
+              data-light-theme="light"
+              data-dark-theme="dark"
+              class="markdown-body mt-4 sm:mt-6"
+            >
+              {!isReference && (
+                <h1
+                  dangerouslySetInnerHTML={{
+                    __html: helpers.md(data.title!, true),
+                  }}
+                >
+                </h1>
+              )}
+              {data.available_since && (
+                <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">
+                  Available since {data.available_since}
+                </div>
+              )}
+              {renderedCommand}
+              {data.children}
+            </div>
+          </article>
+          {!isReference && <data.comp.Feedback file={file} />}
+        </div>
+      </main>
       {(isReference && data.children.props.data.toc_ctx) && (
         <data.comp.RefToc
           documentNavigation={data.children.props.data.toc_ctx
@@ -87,6 +81,6 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             .document_navigation_str}
         />
       )}
-    </div>
+    </>
   );
 }

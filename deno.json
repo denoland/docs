@@ -8,51 +8,33 @@
     "@std/media-types": "jsr:@std/media-types@^1.0.3",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@deno/doc": "jsr:@deno/doc@0.169.1",
+    "@tailwindcss/cli": "npm:@tailwindcss/cli@^4.1.11",
+    "@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.1.11",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
     "lume/": "https://deno.land/x/lume@v2.4.1/",
     "googleapis": "npm:googleapis@^144.0.0",
+    "postcss": "npm:postcss@^8.5.6",
     "prismjs": "npm:prismjs@1.29.0",
-    "tailwindcss": "npm:tailwindcss@^3.4.9"
+    "tailwindcss": "npm:tailwindcss@^4.1.11",
+    "@orama/core": "jsr:@orama/core@^1.2.4"
   },
   "tasks": {
-    "serve": "deno run --env-file -A lume.ts -s",
-    "serve:no_logs": "LUME_LOGS=WARN deno run --env-file -A lume.ts -s",
-    "start": "deno task serve",
-    "dev": "deno task serve",
-    "build": {
-      "description": "Full production build by default",
-      "command": "deno task build:prod"
-    },
-    "build:prod": {
-      "description": "Build the entire site including expensive operations",
-      "command": "BUILD_TYPE=FULL deno run --env-file -A lume.ts"
-    },
-    "build:light": {
-      "description": "Build the site without expensive operations",
-      "command": "deno run --env-file -A lume.ts"
-    },
-    "debug": "deno task build && deno task prod",
-    "prod": "cd _site && deno run --allow-read --allow-env --allow-net server.ts",
-    "reference": "cd reference_gen && deno task types && deno task doc",
-    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
+    "dev": "LUME_LOGS=WARN deno run --env-file -A lume.ts -s",
+    "serve": "deno task dev",
+    "serve:style": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts",
+    "start": "deno task dev",
+    "build": "deno task generate:reference && BUILD_TYPE=FULL deno run --env-file -A lume.ts && tailwindcss -i styles.css -o _site/styles.css --minify",
+    "build:light": "deno run --env-file -A lume.ts",
+    "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",
-    "update_lint_rules": "deno run -A update_lint_rules.ts",
-    "serve:prod": {
-      "description": "Build, serve, and watch just the APIs section of the docs",
-      "command": "BUILD_TYPE=FULL deno task serve"
-    },
-    "serve:style": {
-      "description": "Build, serve, and watch just the styles and styleguide",
-      "command": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts"
-    },
-    "generate:llms": {
-      "description": "Generate LLM-friendly documentation files (llms.txt and llms-full.txt) in the static directory",
-      "command": "deno run -A generate_llms_files.ts"
-    },
-    "generate:llms:site": {
-      "description": "Generate LLM-friendly documentation files directly in the _site directory",
-      "command": "deno run -A generate_llms_files.ts _site"
-    }
+    "lint:update": "deno run -A update_lint_rules.ts",
+    "generate:search": "deno run -A orama/generate_orama_index_full.ts",
+    "generate:search:docs-only": "deno run -A orama/generate.ts",
+    "generate:llms": "deno run -A generate_llms_files.ts",
+    "generate:llms:site": "deno run -A generate_llms_files.ts _site",
+    "generate:reference": "cd reference_gen && deno task types && deno task doc",
+    "search:upload": "deno run -A orama/upload_orama_index.ts --full",
+    "search:analyze": "deno run -A orama/analyze_orama_index.ts"
   },
   "compilerOptions": {
     "types": [
@@ -68,6 +50,8 @@
   },
   "exclude": [
     "_site",
-    "reference_gen"
-  ]
+    "reference_gen",
+    "orama"
+  ],
+  "nodeModulesDir": "auto"
 }

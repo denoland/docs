@@ -41,11 +41,40 @@ Environment Variables". For more details on environment variables, see the
 [Environment Variables and Contexts](/deploy/early-access/reference/env-vars-and-contexts/)
 documentation.
 
+## Renaming an application
+
+Applications can be renamed by editing the app slug on the app settings page.
+This will update the default domain names associated with the app since they are
+based on the app slug. The new slug must be unique within the organization (i.e.
+must not be in use by another app or playground in the same organization).
+
+:::warning
+
+Any previous `deno.net` URLs pointing to the app will no longer work after
+renaming.
+
+Custom domains will continue to work, as they are not tied to the app slug.
+
+:::
+
+## Deleting an application
+
+Applications can be deleted from the app settings page. This will remove the app
+and all its revisions from the organization. All existing deployments will
+immediately stop serving traffic, and all custom domain associations will be
+removed.
+
+The app and its revisions will no longer be accessible after deletion, and no
+traffic will be served from it. Deleted apps cannot be restored through the Deno
+Deploy UI.
+
+:::info
+
+Deleted an app by mistake? Contact Deno support within 30 days to restore it.
+
+:::
+
 ## Limitations
-
-> ⚠️ Apps cannot currently be deleted.
-
-> ⚠️ Apps cannot currently be renamed.
 
 > ⚠️ Apps cannot currently be transferred to another organization.
 
@@ -56,15 +85,15 @@ repository. Every push to the repository will trigger a new build of the app.
 Depending on the branch of the commit, the build will be deployed to different
 [timelines](/deploy/early-access/reference/timelines/).
 
-Apps will generally be linked to a GitHub repository on creation. However, it is
-possible to unlink the repository after creation, and optionally link it to a
-new GitHub repository. This can be done from the app settings page.
+Apps are linked to a GitHub repository during creation. However, it is possible
+to unlink the repository after creation, and optionally link it to a new GitHub
+repository. This can be done from the app settings page.
 
 Only accounts that have been authorized with the Deno Deploy GitHub app will be
-visible in the GitHub repository dropdown. You can authorize new orgs or repos
-by clicking the "+ Add another GitHub account" button in the user or
-organization dropdown, or the "Configure GitHub app permissions" button in the
-repository dropdown. This will redirect you to GitHub to authorize the Deno
-Deploy GitHub app with the selected GitHub account or organization. After
-authorizing, you will be redirected back to the app settings page, where you can
-select the new GitHub repository.
+visible in the GitHub repository dropdown. You can authorize new organizations
+or repositories by clicking the "+ Add another GitHub account" button in the
+user or organization dropdown, or the "Configure GitHub app permissions" button
+in the repository dropdown. This will redirect you to GitHub to authorize the
+Deno Deploy GitHub app with the selected GitHub account or organization. After
+authorization, you will be redirected back to the app settings page, where you
+can select the newly authorized GitHub repository.

@@ -10,6 +10,122 @@ const projectId = "PVT_kwDOAoGdk84Aj-nW";
 // Check if the API key is set
 const enableFeedbackMiddleware = !!githubToken;
 
+// Rate limiting configuration
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
+const MAX_REQUESTS_PER_IP = 5; // Max 5 feedback submissions per hour per IP
+const MAX_REQUESTS_PER_PATH = 10; // Max 10 feedback submissions per hour per path
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+// Suspicious user agent patterns
+const SUSPICIOUS_USER_AGENTS = [
+  /curl/i,
+  /wget/i,
+  /postman/i,
+  /python/i,
+  /node/i,
+  /bot/i,
+  /crawler/i,
+  /scraper/i,
+];
+
+// Allowed origins for CORS (add your actual domains)
+const ALLOWED_ORIGINS = [
+  "https://docs.deno.com",
+  "https://deno.com",
+  "http://localhost:3000", // For development
+  "http://localhost:8000", // For development
+];
+
+// Rate limiting function
+function checkRateLimit(identifier: string, maxRequests: number): boolean {
+  const now = Date.now();
+  const current = rateLimitStore.get(identifier);
+
+  if (!current || now > current.resetTime) {
+    rateLimitStore.set(identifier, {
+      count: 1,
+      resetTime: now + RATE_LIMIT_WINDOW,
+    });
+    return true;
+  }
+
+  if (current.count >= maxRequests) {
+    return false;
+  }
+
+  current.count++;
+  return true;
+}
+
+// Validate request origin and headers
+function validateRequest(req: Request): { valid: boolean; reason?: string } {
+  const userAgent = req.headers.get("user-agent") || "";
+  const origin = req.headers.get("origin");
+  const referer = req.headers.get("referer");
+
+  // Check for suspicious user agents
+  if (SUSPICIOUS_USER_AGENTS.some((pattern) => pattern.test(userAgent))) {
+    return { valid: false, reason: "Suspicious user agent detected" };
+  }
+
+  // Check origin if present (for CORS requests)
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    return { valid: false, reason: "Origin not allowed" };
+  }
+
+  // Check referer if no origin (for non-CORS requests)
+  if (!origin && referer) {
+    const isValidReferer = ALLOWED_ORIGINS.some((allowedOrigin) =>
+      referer.startsWith(allowedOrigin)
+    );
+    if (!isValidReferer) {
+      return { valid: false, reason: "Invalid referer" };
+    }
+  }
+
+  return { valid: true };
+}
+
+// Enhanced content validation
+function validateFeedbackContent(
+  submission: FeedbackSubmission,
+): { valid: boolean; reason?: string } {
+  const { path, sentiment, comment, contact } = submission;
+
+  // Basic field validation
+  if (!path || typeof path !== "string" || path.length > 500) {
+    return { valid: false, reason: "Invalid path" };
+  }
+
+  if (!sentiment || !["yes", "no"].includes(sentiment)) {
+    return { valid: false, reason: "Invalid sentiment" };
+  }
+
+  // If comment is provided, validate it
+  if (comment) {
+    if (typeof comment !== "string") {
+      return { valid: false, reason: "Invalid comment format" };
+    }
+
+    if (comment.length < 3) {
+      return { valid: false, reason: "Comment too short" };
+    }
+
+    if (comment.length > 2000) {
+      return { valid: false, reason: "Comment too long" };
+    }
+  }
+
+  // If contact is provided, validate it
+  if (contact) {
+    if (typeof contact !== "string" || contact.length > 256) {
+      return { valid: false, reason: "Invalid contact format" };
+    }
+  }
+
+  return { valid: true };
+}
+
 // Create Octokit instance with GraphQL support
 const octokit = new Octokit({
   auth: githubToken,
@@ -67,7 +183,6 @@ async function addIssueToProject(issueNodeId: string) {
 const insertData = async (
   { path, sentiment, comment, contact, id }: FeedbackSubmission,
 ) => {
-  // Clean up the GitHub username
   const cleanedContact = cleanGitHubUsername(contact);
 
   // Record basic sentiment without creating GitHub issue if no comment
@@ -88,7 +203,7 @@ ${cleanedContact ? `\n**GitHub User:** @${cleanedContact}` : ""}
 `;
 
     try {
-      const response = await octokit.request(
+      const _response = await octokit.request(
         "POST /repos/{owner}/{repo}/issues/{issue_number}/comments",
         {
           owner,
@@ -112,7 +227,7 @@ ${cleanedContact ? `\n**GitHub User:** @${cleanedContact}` : ""}
       sentiment === "yes" ? "Positive" : "Needs Improvement"
     }`;
 
-    let body = `
+    const body = `
 ## Documentation Feedback
 
 **Path:** ${path}
@@ -182,17 +297,17 @@ ${cleanedContact ? `\n**GitHub User:** @${cleanedContact}` : ""}
 
       // Let's also verify if the issue was created with labels
       if (response.data.labels && response.data.labels.length > 0) {
-        console.log(
-          `Issue created with labels: ${
-            response.data.labels.map((l: any) => l.name).join(", ")
-          }`,
-        );
+        const labelNames = response.data.labels
+          .map((l) => typeof l === "string" ? l : l.name)
+          .filter(Boolean)
+          .join(", ");
+        console.log(`Issue created with labels: ${labelNames}`);
       } else {
         console.warn("Issue created but no labels were attached");
 
         // Try adding labels in a separate request if they weren't added initially
         try {
-          await octokit.request(
+          const _labelResponse = await octokit.request(
             "POST /repos/{owner}/{repo}/issues/{issue_number}/labels",
             {
               owner,
@@ -239,17 +354,158 @@ ${cleanedContact ? `\n**GitHub User:** @${cleanedContact}` : ""}
 export default async function feedbackRequestHandler(
   req: Request,
 ): Promise<Response> {
-  if (!enableFeedbackMiddleware) {
+  // CORS headers for preflight requests
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Max-Age": "86400",
+  };
+
+  // Handle preflight requests
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders,
+    });
+  }
+
+  // Only allow POST requests
+  if (req.method !== "POST") {
     return new Response(
-      "Feedback API is not enabled - have you set the GitHub token?",
-      { status: 500 },
+      JSON.stringify({ error: "Method not allowed" }),
+      {
+        status: 405,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      },
     );
   }
 
-  const submission = await req.json() as FeedbackSubmission;
+  if (!enableFeedbackMiddleware) {
+    return new Response(
+      JSON.stringify({ error: "Feedback API is not enabled" }),
+      {
+        status: 500,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  }
+
+  // Get client IP for rate limiting
+  const clientIP = req.headers.get("cf-connecting-ip") ||
+    req.headers.get("x-forwarded-for") ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
+
+  // Validate request origin and headers
+  const requestValidation = validateRequest(req);
+  if (!requestValidation.valid) {
+    console.warn(
+      `Request blocked: ${requestValidation.reason} from IP: ${clientIP}`,
+    );
+    return new Response(
+      JSON.stringify({
+        error: "Request validation failed",
+        reason: requestValidation.reason,
+      }),
+      {
+        status: 403,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  }
+
+  // Check IP-based rate limiting
+  if (!checkRateLimit(`ip:${clientIP}`, MAX_REQUESTS_PER_IP)) {
+    console.warn(`Rate limit exceeded for IP: ${clientIP}`);
+    return new Response(
+      JSON.stringify({
+        error: "Too many requests",
+        message: "Please wait before submitting more feedback",
+      }),
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+          "Retry-After": "3600", // 1 hour
+        },
+      },
+    );
+  }
+
+  let submission: FeedbackSubmission;
+
+  try {
+    submission = await req.json() as FeedbackSubmission;
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        error: "Invalid JSON payload",
+        details: error instanceof Error ? error.message : String(error),
+      }),
+      {
+        status: 400,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  }
+
+  // Validate feedback content
+  const contentValidation = validateFeedbackContent(submission);
+  if (!contentValidation.valid) {
+    console.warn(
+      `Content validation failed: ${contentValidation.reason} from IP: ${clientIP}`,
+    );
+    return new Response(
+      JSON.stringify({
+        error: "Content validation failed",
+        reason: contentValidation.reason,
+      }),
+      {
+        status: 400,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  }
+
   const { path, sentiment, comment, contact, id } = submission;
 
-  // Cap data at sensible max lengths
+  // Check path-based rate limiting
+  if (!checkRateLimit(`path:${path}`, MAX_REQUESTS_PER_PATH)) {
+    console.warn(`Path rate limit exceeded for: ${path} from IP: ${clientIP}`);
+    return new Response(
+      JSON.stringify({
+        error: "Too many requests for this page",
+        message: "This page has received too much feedback recently",
+      }),
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+          "Retry-After": "3600", // 1 hour
+        },
+      },
+    );
+  }
+
+  // Cap data at sensible max lengths (already validated above, but extra safety)
   const contactCapped = contact && contact.length > 256
     ? contact?.slice(0, 256)
     : contact;
@@ -268,9 +524,13 @@ export default async function feedbackRequestHandler(
     });
 
     if (response.id) {
-      console.log("GitHub issue created/updated successfully");
+      console.log(
+        `GitHub issue created/updated successfully from IP: ${clientIP}`,
+      );
     } else {
-      console.log("Feedback recorded without GitHub issue");
+      console.log(
+        `Feedback recorded without GitHub issue from IP: ${clientIP}`,
+      );
     }
 
     return new Response(
@@ -278,17 +538,29 @@ export default async function feedbackRequestHandler(
         success: true,
         id: response.id,
       }),
-      { status: 200 },
+      {
+        status: 200,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      },
     );
   } catch (error) {
-    console.error("GitHub issue creation failed:", error);
+    console.error(`GitHub issue creation failed from IP: ${clientIP}:`, error);
     const errorMessage = error instanceof Error ? error.message : String(error);
     return new Response(
       JSON.stringify({
-        error: "Failed to create GitHub issue",
+        error: "Failed to process feedback",
         details: errorMessage,
       }),
-      { status: 500 },
+      {
+        status: 500,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      },
     );
   }
 }

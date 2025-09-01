@@ -3,12 +3,15 @@ export function deleteBackticks(str?: string) {
 }
 
 export default function Layout(data: Lume.Data) {
+  const isReference = data.url.startsWith("/api/");
   const section = data.url.split("/").filter(Boolean)[0];
   const description = data.description ||
     "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
   const isServicesPage = data.url.startsWith("/deploy") ||
     data.url.startsWith("/subhosting") ||
     data.url.startsWith("/services");
+  const hasSubNav = data.page?.data?.SidebarNav?.length ||
+    data.url.startsWith("/api");
 
   return (
     <html lang="en">
@@ -16,8 +19,17 @@ export default function Layout(data: Lume.Data) {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{deleteBackticks(data.title)}</title>
+        {data?.description &&
+          <meta name="description" content={data.description} />}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <script>
+          const theme = localStorage.getItem('denoDocsTheme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' :
+          'light'); document.documentElement.classList.add(theme);
+        </script>
+
+        <link rel="stylesheet" href="/styles.css" />
         <link
           rel="preload"
           href="/fonts/inter/Inter-Regular.woff2"
@@ -43,29 +55,13 @@ export default function Layout(data: Lume.Data) {
           name="keywords"
           content="Deno, JavaScript, TypeScript, reference, documentation, guide, tutorial, example"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            (function() {
-              const theme = localStorage.getItem('denoDocsTheme') ||
-                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-              document.documentElement.classList.add(theme);
-            })();
-          `,
-          }}
-        >
-        </script>
-
-        <link rel="stylesheet" href="/gfm.css" />
-        <link rel="stylesheet" href="/styles.css" />
-        <link rel="stylesheet" href="/overrides.css" />
-        <link rel="stylesheet" href="/style.css" />
-        <link rel="stylesheet" href="/components.css" />
         <script type="module" defer src="/components.js"></script>
+        <script type="module" defer src="/main.client.js"></script>
         <script type="module" defer src="/lint_rules.client.js"></script>
         <script type="module" defer src="/copy.client.js"></script>
         <script type="module" defer src="/tabs.client.js"></script>
         <script type="module" defer src="/feedback.client.js"></script>
+        <script type="module" defer src="/search.client.js"></script>
         <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"
@@ -76,21 +72,41 @@ export default function Layout(data: Lume.Data) {
       <body
         data-services-page={Boolean(isServicesPage)}
       >
-        <data.comp.Header currentSection={section} />
-        <data.comp.RefHeader currentUrl={data.url} />
-        <data.comp.SubNav
-          data={data}
+        <a
+          href="#content"
+          class="opacity-0 p-2 px-4 bg-background-secondary transition-transform duration-150 rounded-md ease-out absolute top-2 left-2 -translate-y-full focus:opacity-100 focus:translate-y-0 z-[500]"
+        >
+          Skip to main content
+        </a>
+        <data.comp.Header
+          currentSection={section}
           currentUrl={data.url}
+          data={data}
+          hasSubNav={hasSubNav}
         />
-        <div className="layout">
+        <div
+          class={`layout ${
+            data.toc?.length || isReference
+              ? "layout--three-column"
+              : "layout--two-column"
+          }`}
+        >
           <data.comp.Navigation
             data={data}
             currentSection={section}
             currentUrl={data.url}
+            hasSubNav={hasSubNav}
           />
           {data.children}
-          <data.comp.Footer />
+          {!isReference && (
+            <data.comp.TableOfContents
+              toc={data.toc}
+              data={data}
+              hasSubNav={hasSubNav}
+            />
+          )}
         </div>
+        <data.comp.Footer />
       </body>
     </html>
   );
