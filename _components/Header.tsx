@@ -57,7 +57,7 @@ export default function (
             </a>
           ))}
         </nav>
-        <div className="flex items-center gap-x-2 sm:gap-x-4 ml-auto">
+        <div className="flex items-center gap-x-2 sm:gap-x-4 ml-auto w-full max-w-80">
           <data.comp.SearchInput />
           <data.comp.ThemeToggle />
           <data.comp.Hamburger />

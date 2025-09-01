@@ -9,6 +9,7 @@ import postcss from "lume/plugins/postcss.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
+import postcssNesting from "npm:@tailwindcss/nesting";
 
 import tailwind from "@tailwindcss/postcss";
 
@@ -28,9 +29,8 @@ import replacerPlugin from "./markdown-it/replacer.ts";
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import createGAMiddleware from "./middleware/googleAnalytics.ts";
-import redirectsMiddleware, {
-  toFileAndInMemory,
-} from "./middleware/redirects.ts";
+import redirectsMiddleware from "./middleware/redirects.ts";
+import { toFileAndInMemory } from "./utils/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
 
 const site = lume(
@@ -113,13 +113,7 @@ site.copy("runtime/contributing/images");
 site.copy("examples/tutorials/images");
 site.copy("deploy/manual/images");
 site.copy("deploy/early-access/images");
-site.copy("deno.json");
-site.copy("go.json");
-site.copy("oldurls.json");
-site.copy("server.ts");
-site.copy("middleware");
 site.copy("examples/scripts");
-site.copy(".env");
 
 site.use(
   redirects({
@@ -134,7 +128,7 @@ site.use(mdx());
 site.use(
   postcss({
     includes: false,
-    plugins: [tailwind()],
+    plugins: [postcssNesting, tailwind()],
   }),
 );
 
@@ -230,25 +224,25 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
           {
             name: "Courier",
             style: "normal",
-            data: await Deno.readFile(
+            data: (await Deno.readFile(
               "./static/fonts/courier/CourierPrime-Regular.ttf",
-            ),
+            )).buffer,
           },
           {
             name: "Inter",
             weight: 400,
             style: "normal",
-            data: await Deno.readFile(
+            data: (await Deno.readFile(
               "./static/fonts/inter/hacked/Inter-Regular-hacked.woff",
-            ),
+            )).buffer,
           },
           {
             name: "Inter",
             weight: 700,
             style: "normal",
-            data: await Deno.readFile(
+            data: (await Deno.readFile(
               "./static/fonts/inter/hacked/Inter-SemiBold-hacked.woff",
-            ),
+            )).buffer,
           },
         ],
       },

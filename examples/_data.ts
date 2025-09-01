@@ -396,6 +396,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Deploy with the deploy command",
+        href: "/examples/deploy_command_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "AWS Lambda",
         href: "/examples/aws_lambda_tutorial/",
         type: "tutorial",
@@ -878,6 +883,11 @@ export const sidebar = [
       {
         title: "Build a chat app with WebSockets",
         href: "/examples/chat_app_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "LLM Chat app",
+        href: "/examples/llm_tutorial/",
         type: "tutorial",
       },
       {

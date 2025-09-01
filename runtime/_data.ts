@@ -133,6 +133,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/coverage/",
           },
           {
+            title: "deno deploy",
+            href: "/runtime/reference/cli/deploy/",
+          },
+          {
             title: "deno doc",
             href: "/runtime/reference/cli/doc/",
           },
@@ -444,12 +448,9 @@ export async function generateNodeCompatibility() {
 
       content += entries.items
         .map(([key, content]) => {
-          let out = `\n\n### <a href="/api/node/${key}">node:${
-            key.replaceAll(
-              "--",
-              "/",
-            )
-          }</a>\n\n<div class="item-content">\n\n`;
+          const link = key.replaceAll("--", "/");
+          let out =
+            `\n\n### <a href="/api/node/${link}">node:${link}</a>\n\n<div class="item-content">\n\n`;
 
           if (content) {
             if (content.description) {

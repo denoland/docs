@@ -313,13 +313,13 @@
     row-gap: 1rem;
     width: 100%;
 
-    & > div {
+    > div {
       display: flex;
       flex-direction: column;
       row-gap: 1rem;
     }
 
-    & a:not([href]) {
+    a:not([href]) {
       color: inherit;
       text-decoration: none;
     }
@@ -335,14 +335,14 @@
     .anchor:focus {
       outline: none;
     }
-    & hr {
+    hr {
       background-color: var(--borderColor-default, var(--color-border-default));
       border: 0;
       height: 0.25em;
       margin: 24px 0;
       padding: 0;
     }
-    & blockquote {
+    blockquote {
       color: var(--fgColor-muted, var(--color-fg-muted));
       border-left: 0.25em solid
         var(--borderColor-default, var(--color-border-default));
@@ -351,14 +351,15 @@
       flex-direction: column;
       row-gap: 0.5rem;
     }
-    :where(
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6
-    ) {
+    &
+      :where(
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6
+      ) {
       font-weight: bold;
       line-height: 1.2;
 
@@ -385,86 +386,86 @@
       &:hover .anchor .octicon-link {
         visibility: visible;
       }
-      & :where(tt, code) {
+      :where(tt, code) {
         font-size: inherit;
         padding: 0 0.2em;
       }
     }
-    & h1 {
+    h1 {
       font-size: 2em;
       &:first-child {
         @apply md:text-4xl;
       }
     }
-    & h2 {
+    h2 {
       margin-top: 2.5rem;
       font-size: 1.5em;
     }
-    & h3 {
+    h3 {
       margin-top: 2rem;
       font-size: 1.25em;
     }
-    & h4 {
+    h4 {
       margin-top: 1.5rem;
       font-size: 1em;
     }
-    & h5 {
+    h5 {
       margin-top: 1rem;
       font-size: 0.875em;
     }
-    & h6 {
+    h6 {
       margin-top: 0.5rem;
       color: var(--fgColor-muted, var(--color-fg-muted));
       font-size: 0.85em;
     }
-    & summary :where(h1, h2, h3, h4, h5, h6) {
+    summary :where(h1, h2, h3, h4, h5, h6) {
       margin-top: 0;
 
       .anchor {
         margin-left: -40px;
       }
     }
-    & div > ol:not([type]) {
+    div > ol:not([type]) {
       list-style-type: decimal;
     }
     :where(ul, ol) :where(ul, ol) {
       margin-top: 0;
       margin-bottom: 0;
     }
-    & dl {
+    dl {
       padding: 0;
 
-      & dt {
+      dt {
         font-size: 1em;
         font-style: italic;
         font-weight: var(--base-text-weight-semibold, 600);
         margin-top: 16px;
         padding: 0;
       }
-      & dd {
+      dd {
         margin-bottom: 16px;
         padding: 0 16px;
       }
     }
-    & table {
+    table {
       width: 100%;
       width: max-content;
       max-width: 100%;
       display: block;
       overflow: auto;
 
-      & th {
+      th {
         font-weight: var(--base-text-weight-semibold, 600);
       }
-      & th, & td {
+      th, td {
         border: 1px solid
           var(--borderColor-default, var(--color-border-default));
         padding: 6px 13px;
       }
-      & td > :last-child {
+      td > :last-child {
         margin-bottom: 0;
       }
-      & tr {
+      tr {
         background-color: var(--bgColor-default, var(--color-canvas-default));
         border-top: 1px solid
           var(--borderColor-muted, var(--color-border-muted));
@@ -473,7 +474,7 @@
           background-color: var(--bgColor-muted, var(--color-canvas-subtle));
         }
       }
-      & img {
+      img {
         background-color: transparent;
       }
     }
@@ -501,22 +502,22 @@
     :where(code, tt) br {
       display: none;
     }
-    & del code {
+    del code {
       -webkit-text-decoration: inherit;
       -webkit-text-decoration: inherit;
       text-decoration: inherit;
     }
-    & samp {
+    samp {
       font-size: 85%;
     }
-    & pre {
+    pre {
       @apply mb-4 border border-foreground-tertiary;
       word-wrap: normal;
     }
-    & pre code {
+    pre code {
       font-size: 100%;
     }
-    & pre > code {
+    pre > code {
       word-break: normal;
       white-space: pre;
       background: 0 0;
@@ -540,7 +541,8 @@
       line-height: 1.45;
       overflow: auto;
     }
-    pre code, pre tt {
+    pre code,
+    pre tt {
       max-width: auto;
       line-height: inherit;
       word-wrap: normal;
@@ -573,7 +575,7 @@
       background: var(--bgColor-muted, var(--color-canvas-subtle));
       border-top: 0;
     }
-    & a {
+    a {
       color: var(--color-primary);
       text-decoration: underline;
       text-decoration-thickness: 1px;
@@ -582,10 +584,10 @@
         text-decoration: underline;
       }
     }
-    & img {
+    img {
       display: inline;
     }
-    & iframe {
+    iframe {
       background-color: #fff;
       border: 0;
       margin-bottom: 16px;
@@ -596,25 +598,25 @@
     .anchor > .octicon {
       display: inline;
     }
-    & figcaption {
+    figcaption {
       text-align: center;
       padding-top: 2px;
     }
-    & ul,
-    & ol {
+    ul,
+    ol {
       padding-left: 2em;
 
-      & li + li {
+      li + li {
         margin-top: 0.25rem;
       }
     }
-    & ol {
+    ol {
       list-style: decimal;
     }
-    & ul {
+    ul {
       list-style: disc;
     }
-    & table {
+    table {
       width: -webkit-fit-content;
       width: -moz-fit-content;
       width: fit-content;
@@ -694,14 +696,14 @@
       display: block;
     }
 
-    & details {
+    details {
       @apply rounded-sm border border-gray-600 py-4 px-4;
 
       &[open] summary {
         @apply pb-4 mb-4 border-b border-gray-300;
       }
 
-      & summary::marker {
+      summary::marker {
         @apply text-gray-700;
       }
     }
@@ -709,7 +711,7 @@
       @apply px-4 lg:px-6 pt-10 lg:pt-12 pb-4 rounded-md bg-gray-100 relative
         overflow-clip text-sm flex flex-col gap-2;
 
-      & a {
+      a {
         @apply text-primary underline underline-offset-2;
 
         &.no-color {
@@ -717,7 +719,7 @@
         }
       }
 
-      & > * {
+      > * {
         margin: 0;
       }
 
@@ -746,45 +748,45 @@
       }
     }
     .module-info {
-      & svg {
+      svg {
         @apply inline-block! w-6! h-6!;
       }
 
-      & h2 {
+      h2 {
         @apply flex gap-2 items-center;
       }
 
-      & h3 {
+      h3 {
         @apply my-2 text-base;
       }
       .item-content {
         @apply ml-3 text-base mb-8;
       }
-      & p {
+      p {
         @apply mb-1;
       }
-      & ul {
+      ul {
         @apply pl-6;
       }
     }
-    & pre.snippet-code {
+    pre.snippet-code {
       @apply m-0;
     }
-    & pre.snippet-code[data-example-position="only"] {
+    pre.snippet-code[data-example-position="only"] {
       @apply md:border-t md:border-b md:pt-4 h-full md:rounded-sm md:rounded-b;
     }
 
-    & pre.snippet-code[data-example-position="first"] {
+    pre.snippet-code[data-example-position="first"] {
       @apply md:border-t md:border-b-0 md:pt-4 md:rounded-t md:rounded-b-none
         h-full;
     }
 
-    & pre.snippet-code[data-example-position="middle"] {
+    pre.snippet-code[data-example-position="middle"] {
       @apply md:border-t-0 md:border-b-0 md:pt-0 md:pb-16 h-full
         md:rounded-none;
     }
 
-    & pre.snippet-code[data-example-position="last"] {
+    pre.snippet-code[data-example-position="last"] {
       @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none
         md:rounded-b;
     }
@@ -1137,7 +1139,7 @@
     .markdown-summary p {
       @apply text-foreground-secondary text-sm inline;
 
-      & p {
+      p {
         @apply inline-block line-clamp-4;
       }
 
@@ -1171,7 +1173,7 @@
       hover:bg-header-highlight dark:border-background-tertiary rounded-full
       transition inline-flex gap-2 items-center cursor-pointer no-underline!
       dark:hover:text-background-primary;
-    & svg {
+    svg {
       @apply inline-block size-4;
     }
   }
@@ -1282,7 +1284,7 @@
     .unfiltered {
       display: block;
     }
-    & [data-category="tutorial"] {
+    [data-category="tutorial"] {
       display: block;
     }
   }
@@ -1294,7 +1296,7 @@
     .unfiltered {
       display: block;
     }
-    & [data-category="video"] {
+    [data-category="video"] {
       display: block;
     }
   }
@@ -1306,7 +1308,7 @@
     .unfiltered {
       display: block;
     }
-    & [data-category="example"] {
+    [data-category="example"] {
       display: block;
     }
   }
@@ -1399,25 +1401,31 @@
     li:has(> &) {
       display: grid;
       grid-template-rows: max-content 0fr;
-      transition: grid 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+      /* Only animate when user interaction class is present */
     }
 
-    & + ul {
+    /* Apply transitions when li has user-interaction class */
+    li.user-interaction:has(> &) {
+      transition: grid-template-rows 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    + ul {
       margin-left: 1rem !important;
     }
 
-    li:has(> & .sub-nav-toggle-checkbox:checked) {
+    /* Expanded state when li has the 'expanded' class */
+    li:has(> &).expanded {
       grid-template-rows: max-content 1fr;
       padding-bottom: 1rem;
     }
 
-    li:has(> & + ul:focus-within) {
-      grid-template-rows: max-content 1fr;
-      padding-bottom: 1rem;
-    }
-
-    &:has(.sub-nav-toggle-checkbox:checked)::after {
+    /* Rotate chevron when expanded - only animate on user interaction */
+    li.expanded > &::after {
       transform: rotate(90deg);
+    }
+
+    li.user-interaction > &::after {
+      transition: transform 0.1s ease-in;
     }
 
     &:has(+ ul:focus-within)::after {
@@ -1425,15 +1433,9 @@
     }
   }
 
-  .sub-nav-toggle-checkbox {
-    li:has(> .sub-nav-toggle &:checked) {
-      grid-template-rows: max-content 1fr;
-      padding-bottom: 1rem;
-    }
-
-    .sub-nav-toggle:has(&:checked)::after {
-      transform: rotate(90deg);
-    }
+  li:has(.sub-nav-toggle + ul:focus-within) {
+    grid-template-rows: max-content 1fr;
+    padding-bottom: 1rem;
   }
 
   #hamburger-button[aria-pressed="true"] {
@@ -1561,7 +1563,7 @@
       display: block;
       padding-bottom: calc(100% / (16 / 9));
     }
-    & > iframe {
+    > iframe {
       width: 100%;
       height: 100%;
       position: absolute;
@@ -1571,7 +1573,7 @@
     }
 
     /* play button */
-    & > .lyt-playbtn {
+    > .lyt-playbtn {
       display: block;
       /* Make the button element cover the whole area for a large hover/click target… */
       width: 100%;
@@ -1582,7 +1584,7 @@
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="red"/><path d="M45 24 27 14v20" fill="white"/></svg>');
       position: absolute;
       cursor: pointer;
-      z-index: 1;
+      z-index: -1;
       filter: grayscale(100%);
       transition: filter 0.1s cubic-bezier(0, 0, 0.2, 1);
       border: 0;
@@ -1708,17 +1710,17 @@
   }
 
   .documentNavigation {
-    & #toc {
+    #toc {
       position: sticky;
       top: calc(var(--header-height) + var(--subnav-height));
       font-size: small;
       text-overflow: ellipsis;
       color: var(--color-foreground-secondary);
 
-      & ul li {
+      ul li {
         margin: 0.25rem 0;
 
-        & a {
+        a {
           font-weight: bold;
           line-height: 1.2rem;
 
@@ -1728,10 +1730,10 @@
           }
         }
 
-        & ul {
+        ul {
           margin-bottom: 1rem;
 
-          & li a {
+          li a {
             font-weight: normal;
             transition: all 0.2s cubic-bezier(0.86, 0, 0.07, 1);
           }
@@ -2334,6 +2336,7 @@
     .namespaceItem
     .namespaceItemContent
     .namespaceItemContentSubItems
+    &
     a {
     text-decoration-line: underline;
   }
@@ -2377,8 +2380,10 @@
     display: flex;
     align-items: center;
     list-style: none;
+
     li {
       margin: 0 !important;
+
       a {
         color: var(--color-foreground-secondary); /*marked*/
       }
@@ -2573,6 +2578,41 @@
   }
   .ddoc .toc .documentNavigation a:hover {
     text-decoration-line: underline;
+  }
+
+  /* Style plain HTML from documentNavigationStr to match TableOfContentsItem */
+  .toc-list .documentNavigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .toc-list .documentNavigation li {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    line-height: 1rem;
+    text-wrap: balance;
+  }
+  .toc-list .documentNavigation a {
+    font-size: 0.8125rem;
+    color: rgb(107 114 126);
+    text-decoration: none;
+    transition: color 200ms ease-in-out;
+    user-select: none;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  @media (min-width: 64rem) {
+    .toc-list .documentNavigation a {
+      color: rgb(107 114 126);
+    }
+  }
+  .toc-list .documentNavigation a:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .toc-list .documentNavigation ul ul {
+    margin-left: 0.5rem;
   }
   .ddoc .usages nav {
     flex-direction: row;

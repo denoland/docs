@@ -25,8 +25,8 @@ connection details automatically via environment variables.
 ### Adding a Database
 
 Navigate to your organization dashboard and click "Databases" in the navigation
-bar. Click "Add Database" and choose your database engine - PostgreSQL is
-currently supported with others planned.
+bar. Click "Add Database" and choose your database engine - Deno KV and
+PostgreSQL are currently supported with others planned.
 
 You can either enter connection details manually or paste a connection string to
 automatically populate the form. Connection details include your database server
@@ -51,8 +51,8 @@ populate the form fields.
 ### Connecting an App to a Database
 
 Once you have a database instance, you can assign it to your apps. From the
-databases list, click "Assign" next to your database and select the app from the
-dropdown.
+database instances list, click "Assign" next to your database instance and
+select the app from the dropdown.
 
 Deno Deploy automatically creates separate databases for each timeline:
 
@@ -239,7 +239,8 @@ connection to ensure it still works before saving your changes.
 
 ## Supported Database Engines
 
-**Currently Supported:** PostgreSQL is fully supported with all features.
+**Currently Supported:** Deno KV and PostgreSQL are fully supported with all
+features.
 
 **Coming Soon:** MySQL, MongoDB, Redis, and more are planned for future
 releases.

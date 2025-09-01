@@ -2,9 +2,9 @@
 title: "Deno & Visual Studio Code"
 description: "Complete guide to using Deno with Visual Studio Code. Learn about extension setup, workspace configuration, debugging, testing, task automation, and advanced IDE features for Deno development."
 oldUrl:
-- /runtime/manual/vscode_deno/
-- /runtime/manual/references/vscode_deno/
-- /runtime/manual/references/vscode_deno/testing_api/
+  - /runtime/manual/vscode_deno/
+  - /runtime/manual/references/vscode_deno/
+  - /runtime/manual/references/vscode_deno/testing_api/
 ---
 
 This page covers developing Deno applications using
