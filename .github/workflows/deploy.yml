@@ -49,6 +49,17 @@ jobs:
         run: |
           echo "Generating search index..."
           deno task generate:search
+          echo "Checking generated files..."
+          ls -la static/ || echo "static/ directory not found"
+          ls -la _site/ || echo "_site/ directory not found"
+          if [ -f "static/orama-index-full.json" ]; then
+            echo "✅ Found static/orama-index-full.json ($(wc -c < static/orama-index-full.json) bytes)"
+            echo "First 500 characters:"
+            head -c 500 static/orama-index-full.json
+            echo ""
+          else
+            echo "❌ static/orama-index-full.json not found"
+          fi
           echo "Uploading search index to Orama Cloud..."
           deno task search:upload
 
