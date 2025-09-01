@@ -137,6 +137,38 @@ a feature or API was released in. For example - in the Node 20 docs, the
 [register function](https://nodejs.org/dist/latest-v20.x/docs/api/module.html#moduleregister)
 is marked as being added in version `20.6.0`.
 
+## Caching of the API Reference docs
+
+The generation of the API reference docs is a very time-consuming operation. To
+speed up this process, we use a caching system that tracks file changes and only
+regenerates documentation when necessary.
+
+### How the caching system works
+
+The caching system uses multiple cache files in the `reference_gen/` directory:
+
+- **`.gen-cache.json`** - Main cache tracking file modification times and
+  content hashes for source files
+- **`.gen-cache-modules.json`** - Module-specific cache for individual
+  TypeScript definition files
+- **`.node-incremental-cache.json`** - Incremental cache for Node.js API
+  documentation
+
+The cache system performs content-based hashing to detect actual changes (not
+just timestamp changes) and supports both file-level and directory-level
+tracking. It automatically invalidates and rebuilds cache entries when:
+
+- Source `.d.ts` files are modified
+- File content hashes change
+- Dependencies are updated
+
+If you need to force a complete regeneration (bypassing the cache), you can
+delete the cache files:
+
+```console
+deno task cache:clear
+```
+
 ## Contribution
 
 We are very grateful for any help you can offer to improve Deno's documentation!

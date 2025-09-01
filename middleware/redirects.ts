@@ -58,19 +58,19 @@ function loadFromJson() {
 
   if (existsSync("./_site/_redirects.json")) {
     log.debug(
-      `${cliNow()} <cyan>redirectsMiddleware</cyan>: Reading redirects from '_site/_redirects.json'...`,
+      `🔗 <cyan>redirectsMiddleware</cyan>: Reading redirects from '_site/_redirects.json'...`,
     );
     const redirectsAsBytes = Deno.readFileSync("./_site/_redirects.json");
     const redirectsAsString = new TextDecoder().decode(redirectsAsBytes);
     redirects = JSON.parse(redirectsAsString) as Record<string, string>;
   } else {
     log.warn(
-      `${cliNow()} <cyan>redirectsMiddleware</cyan>: No './_site/_redirects.json' found.`,
+      `🔗 <cyan>redirectsMiddleware</cyan>: No './_site/_redirects.json' found.`,
     );
   }
 
   log.info(
-    `${cliNow()} <cyan>redirectsMiddleware</cyan>: Total number of redirects loaded: ${
+    `🔗 <cyan>redirectsMiddleware</cyan>: Total number of redirects loaded: ${
       Object.keys(redirects).length
     }.`,
   );
@@ -80,27 +80,27 @@ function loadFromJson() {
 
 function addGoLinksAndRedirectLinks(redirects: Record<string, string>) {
   log.debug(
-    `${cliNow()} addGoLinksAndRedirectLinks: Adding additional redirects...`,
+    `🔗 addGoLinksAndRedirectLinks: Adding additional redirects...`,
   );
 
   redirects["/api/"] = "/api/deno/";
 
   log.debug(
-    `${cliNow()} <cyan>redirectsMiddleware</cyan>: Reading redirects from 'go.json'...`,
+    `🔗 <cyan>redirectsMiddleware</cyan>: Reading redirects from 'go.json'...`,
   );
   for (const [name, url] of Object.entries(GO_LINKS)) {
     redirects[`/go/${name}/`] = url;
   }
 
   log.debug(
-    `${cliNow()} <cyan>redirectsMiddleware</cyan>: Reading redirects from 'oldurls.json'...`,
+    `🔗 <cyan>redirectsMiddleware</cyan>: Reading redirects from 'oldurls.json'...`,
   );
   for (const [name, url] of Object.entries(REDIRECT_LINKS)) {
     redirects[name] = url;
   }
 
   log.warn(
-    `${cliNow()} <cyan>addGoLinksAndRedirectLinks</cyan>: Total number of redirects loaded: <green>${
+    `🔗 <cyan>addGoLinksAndRedirectLinks</cyan>: Total number of redirects loaded: <green>${
       Object.keys(redirects).length
     }</green>.`,
   );
