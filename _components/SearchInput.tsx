@@ -61,7 +61,8 @@ export default function SearchInput() {
                 className="flex items-center space-x-1 px-2 py-1 text-xs font-medium text-foreground-secondary hover:text-foreground-primary transition-colors"
                 title="Toggle AI search mode (Ctrl+Shift+K)"
               >
-                <span id="search-mode-text">Toggle search mode</span>
+                <span id="search-mode-icon">🔍</span>
+                <span id="search-mode-text">AI Off</span>
               </button>
             </div>
 
@@ -135,10 +136,6 @@ export default function SearchInput() {
         
         .ai-mode #search-mode-icon::before {
           content: "💡";
-        }
-        
-        .ai-mode #search-mode-text::before {
-          content: "AI ";
         }
 
         /* Smooth transitions */

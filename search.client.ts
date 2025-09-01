@@ -217,8 +217,15 @@ class OramaSearch {
   handleInput(event: Event) {
     const value = (event.target as HTMLInputElement).value;
 
+    // Clear any existing timeout
     if (this.searchTimeout) {
       clearTimeout(this.searchTimeout);
+    }
+
+    // Abort any ongoing AI search immediately when user types
+    if (this.currentAiSearch) {
+      this.currentAiSearch.abort();
+      this.currentAiSearch = null;
     }
 
     if (!value.trim()) {
@@ -232,10 +239,13 @@ class OramaSearch {
     // Reset selection when user types
     this.selectedIndex = -1;
 
-    // Debounce search by 300ms
+    // Use longer debounce for AI mode since it's more expensive
+    // Regular search: 300ms, AI search: 500ms to prevent flashing results
+    const debounceTime = this.isAiMode ? 500 : 300;
+
     this.searchTimeout = setTimeout(() => {
       this.performSearch(value);
-    }, 300);
+    }, debounceTime);
   }
 
   handleFocus() {
@@ -386,48 +396,52 @@ class OramaSearch {
       return;
     }
 
+    // Abort any existing AI search before starting new one
+    if (this.currentAiSearch) {
+      this.currentAiSearch.abort();
+    }
+    this.currentAiSearch = new AbortController();
+
     // Show AI loading state
     this.renderAILoading(term);
     this.showResults();
 
     try {
-      // Abort any existing AI search
-      if (this.currentAiSearch) {
-        this.currentAiSearch.abort();
-      }
-      this.currentAiSearch = new AbortController();
-
       let response = "";
       let sources: OramaDocument[] = [];
       let lastResponse = "";
 
-      // Stream the AI response
+      // Stream the AI response with abort check
       for await (const chunk of this.aiSession.answerStream({ query: term })) {
+        // Check if search was aborted
         if (this.currentAiSearch.signal.aborted) {
-          break;
+          return; // Exit early if aborted
         }
 
         // Chunks from Orama are cumulative (contain full response so far)
         response = String(chunk);
 
-        // Only re-render if response has actually changed
-        if (response !== lastResponse) {
+        // Only re-render if response has actually changed and not aborted
+        if (response !== lastResponse && !this.currentAiSearch.signal.aborted) {
           this.renderAIResponse(term, response, sources, true);
           lastResponse = response;
         }
       }
 
-      // Get the final state to extract sources
-      const sessionState = this.aiSession.state;
-      if (sessionState && sessionState.length > 0) {
-        const latestInteraction = sessionState[sessionState.length - 1] as {
-          sources?: OramaDocument[];
-        };
-        sources = latestInteraction.sources || [];
-      }
+      // Only proceed with final rendering if not aborted
+      if (!this.currentAiSearch.signal.aborted) {
+        // Get the final state to extract sources
+        const sessionState = this.aiSession.state;
+        if (sessionState && sessionState.length > 0) {
+          const latestInteraction = sessionState[sessionState.length - 1] as {
+            sources?: OramaDocument[];
+          };
+          sources = latestInteraction.sources || [];
+        }
 
-      // Render final result
-      this.renderAIResponse(term, response, sources, false);
+        // Render final result
+        this.renderAIResponse(term, response, sources, false);
+      }
     } catch (error) {
       if ((error as Error).name !== "AbortError") {
         console.error("AI search error:", error);
@@ -649,7 +663,6 @@ class OramaSearch {
             </svg>
             AI Search Results
           </h2>
-          <span class="text-xs text-primary">Powered by Context Engineering</span>
         </div>
       </div>
       <div class="p-6">
@@ -659,7 +672,7 @@ class OramaSearch {
           </p>
         </div>
         <div class="prose prose-sm max-w-none text-foreground-primary">
-          <div class="whitespace-pre-wrap leading-relaxed">
+          <div class="leading-relaxed">
             ${this.escapeHtml(response)}${streamingIndicator}
           </div>
         </div>
@@ -711,6 +724,12 @@ class OramaSearch {
   toggleSearchMode() {
     this.isAiMode = !this.isAiMode;
 
+    // Clear any pending search timeout
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+      this.searchTimeout = null;
+    }
+
     // Abort any ongoing AI search
     if (this.currentAiSearch) {
       this.currentAiSearch.abort();
@@ -721,8 +740,8 @@ class OramaSearch {
     this.updateSearchMode();
 
     // If there's a current search term, re-run the search with the new mode
-    if (this.searchInput?.value.trim()) {
-      this.performSearch(this.searchInput.value.trim());
+    if (this.searchInputModal?.value.trim()) {
+      this.performSearch(this.searchInputModal.value.trim());
     }
   }
 
@@ -768,10 +787,10 @@ class OramaSearch {
     if (modeIcon && modeText) {
       if (this.isAiMode) {
         modeIcon.textContent = "💡";
-        modeText.textContent = "AI Search";
+        modeText.textContent = "AI On";
       } else {
-        modeIcon.textContent = "🔍";
-        modeText.textContent = "Search";
+        modeIcon.textContent = "🚫";
+        modeText.textContent = "AI Off";
       }
     }
 
@@ -824,6 +843,18 @@ class OramaSearch {
       backdrop.classList.add("hidden");
       this.isModalOpen = false;
       this.selectedIndex = -1; // Reset selection when hiding
+
+      // Clean up any ongoing operations
+      if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+        this.searchTimeout = null;
+      }
+
+      if (this.currentAiSearch) {
+        this.currentAiSearch.abort();
+        this.currentAiSearch = null;
+      }
+
       // Restore body scrolling
       document.body.style.overflow = "";
     }
