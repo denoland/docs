@@ -36,8 +36,8 @@ A revision goes through these stages before becoming available:
    downloading dependencies.
 4. **Build**: The build command executes (if specified), creating a build
    artifact that is uploaded to the runtime infrastructure.
-5. **Warm up**: A `GET /` request tests that the application boots correctly and
-   can handle HTTP requests.
+5. **Warm up**: The application is booted to check that no errors occur during
+   startup.
 6. **Route**: The global infrastructure is configured to route requests to the
    new revision based on its timelines.
 
@@ -116,5 +116,21 @@ than Node.js.
 Environment variables configured for the "Build" context are available during
 builds, but variables from "Production" or "Development" contexts are not.
 [Learn more about environment variables](./env-vars-and-contexts/).
+
+The following environment variables are additionally always available during
+builds:
+
+- `CI`: `true`
+- `DENO_DEPLOY`: `true` - Indicates that the code is running in Deno Deploy.
+- `DENO_DEPLOY_ORGANIZATION_ID`: The ID of the organization that owns the
+  application. This is a UUID.
+- `DENO_DEPLOY_ORGANIZATION_SLUG`: The slug of the organization that owns the
+  application. This is the human-readable identifier used in URLs that was set
+  when creating the organization.
+- `DENO_DEPLOY_APPLICATION_ID`: The ID of the application. This is a UUID.
+- `DENO_DEPLOY_APPLICATION_SLUG`: The slug of the application. This is the
+  human-readable identifier used in URLs that was set when creating the
+  application, or changed later in the application settings.
+- `DENO_DEPLOY_BUILD_ID`: The ID of the currently running build.
 
 Builders have 8 GB of storage available during the build process.
