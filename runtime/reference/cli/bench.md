@@ -1,8 +1,8 @@
 ---
 title: "`deno bench`, benchmarking tool"
 oldUrl:
- - /runtime/manual/tools/benchmarker/
- - /runtime/reference/cli/benchmarker/
+  - /runtime/manual/tools/benchmarker/
+  - /runtime/reference/cli/benchmarker/
 command: bench
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno bench"
@@ -23,15 +23,17 @@ Deno.bench("URL parsing", () => {
 
 Secondly, run the benchmark using the `deno bench` subcommand.
 
-```sh
-deno bench url_bench.ts
-cpu: Apple M1 Max
-runtime: deno 1.21.0 (aarch64-apple-darwin)
+```shell
+$ deno bench url_bench.ts
+Check file:///path/to/url_bench.ts
+    CPU | 12th Gen Intel(R) Core(TM) i3-12100
+Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
 
-file:///dev/deno/url_bench.ts
-benchmark        time (avg)             (min … max)       p75       p99      p995
---------------------------------------------------- -----------------------------
-URL parsing   17.29 µs/iter  (16.67 µs … 153.62 µs)  17.25 µs  18.92 µs  22.25 µs
+file:///path/to/url_bench.ts
+
+| benchmark     | time/iter (avg) |        iter/s |      (min … max)      |      p75 |      p99 |     p995 |
+| ------------- | --------------- | ------------- | --------------------- | -------- | -------- | -------- |
+| URL parsing   |        345.8 ns |     2,892,000 | (325.4 ns … 497.2 ns) | 346.9 ns | 443.2 ns | 497.2 ns |
 ```
 
 ## Writing benchmarks
@@ -153,20 +155,23 @@ Deno.bench("performance.now()", { group: "timing" }, () => {
 });
 ```
 
-```shellsesssion
+```shell
 $ deno bench time_bench.ts
-cpu: Apple M1 Max
-runtime: deno 1.21.0 (aarch64-apple-darwin)
+    CPU | 12th Gen Intel(R) Core(TM) i3-12100
+Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
 
-file:///dev/deno/time_bench.ts
-benchmark              time (avg)             (min … max)       p75       p99      p995
---------------------------------------------------------- -----------------------------
-Date.now()         125.24 ns/iter (118.98 ns … 559.95 ns) 123.62 ns 150.69 ns 156.63 ns
-performance.now()    2.67 µs/iter     (2.64 µs … 2.82 µs)   2.67 µs   2.82 µs   2.82 µs
+file:///path/to/time_bench.ts
+
+| benchmark           | time/iter (avg) |        iter/s |      (min … max)      |      p75 |      p99 |     p995 |
+| ------------------- | --------------- | ------------- | --------------------- | -------- | -------- | -------- |
+
+group timing
+| Date.now()          |         44.2 ns |    22,630,000 | ( 42.3 ns …  73.4 ns) |  44.0 ns |  54.1 ns |  55.1 ns |
+| performance.now()   |         59.9 ns |    16,700,000 | ( 56.0 ns …  94.8 ns) |  60.7 ns |  76.6 ns |  79.5 ns |
 
 summary
   Date.now()
-   21.29x times faster than performance.now()
+     1.35x faster than performance.now()
 ```
 
 You can specify multiple groups in the same file.
@@ -185,7 +190,7 @@ The glob expands to:
 - or files ending with `.bench.{ts, tsx, mts, js, mjs, jsx}`,
 - or files ending with `_bench.{ts, tsx, mts, js, mjs, jsx}`
 
-```shell
+```bash
 # Run all benches in the current directory and all sub-directories
 deno bench
 
@@ -199,7 +204,7 @@ deno bench my_bench.ts
 > ⚠️ If you want to pass additional CLI arguments to the bench files use `--` to
 > inform Deno that remaining arguments are scripts arguments.
 
-```shell
+```bash
 # Pass additional arguments to the bench file
 deno bench my_bench.ts -- -e --foo --bar
 ```
@@ -211,7 +216,7 @@ benching.
 To see all runtime options with `deno bench`, you can reference the command line
 help:
 
-```shell
+```bash
 deno help bench
 ```
 
@@ -246,14 +251,14 @@ Deno.bench({
 This command will run all of these benches because they all contain the word
 "bench".
 
-```shell
+```bash
 deno bench --filter "bench" benchmarks/
 ```
 
 On the flip side, the following command uses a pattern and will run the second
 and third benchmarks.
 
-```shell
+```bash
 deno bench --filter "/bench-*\d/" benchmarks/
 ```
 
@@ -305,27 +310,34 @@ Deno.bench({
 
 To retrieve the output as JSON, use the `--json` flag:
 
-```
-$ deno bench --json bench_me.js
+```shell
+$ deno bench my_bench.ts --json
 {
-  "runtime": "Deno/1.31.0 x86_64-apple-darwin",
-  "cpu": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+  "version": 1,
+  "runtime": "Deno/2.4.2 x86_64-unknown-linux-gnu",
+  "cpu": "12th Gen Intel(R) Core(TM) i3-12100",
   "benches": [
-    "origin": "file:///dev/bench_me.js",
-    "group": null,
-    "name": "Deno.UnsafePointerView#getUint32",
-    "baseline": false,
-    "result": {
-      "ok": {
-        "n": 49,
-        "min": 1251.9348,
-        "max": 1441.2696,
-        "avg": 1308.7523755102038,
-        "p75": 1324.1055,
-        "p99": 1441.2696,
-        "p995": 1441.2696,
-        "p999": 1441.2696
-      }
+    {
+      "origin": "file:///path/to/my_bench.ts",
+      "group": null,
+      "name": "Test",
+      "baseline": false,
+      "results": [
+        {
+          "ok": {
+            "n": 51,
+            "min": 946.7129,
+            "max": 3024.3281,
+            "avg": 1241.3926823529412,
+            "p75": 1174.9718,
+            "p99": 3024.3281,
+            "p995": 3024.3281,
+            "p999": 3024.3281,
+            "highPrecision": false,
+            "usedExplicitTimers": false
+          }
+        }
+      ]
     }
   ]
 }

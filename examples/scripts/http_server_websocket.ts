@@ -13,10 +13,10 @@
 // To start the server on the default port, call `Deno.serve` with the handler.
 Deno.serve((req) => {
   // First, we verify if the client is negotiating to upgrade to websockets.
-  // If not, we can give a status of 501 to specify we don't support plain
+  // If not, we can give a status of 426 to specify we don't support plain
   // http requests.
   if (req.headers.get("upgrade") != "websocket") {
-    return new Response(null, { status: 501 });
+    return new Response(null, { status: 426 });
   }
 
   // We can then upgrade the request to a websocket

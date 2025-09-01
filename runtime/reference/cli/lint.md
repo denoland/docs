@@ -1,10 +1,10 @@
 ---
 title: "`deno lint`, linter"
 oldUrl:
- - /runtime/tools/linter/
- - /runtime/fundamentals/linting_and_formatting/lint-cli-ref
- - /runtime/manual/tools/linter/
- - /runtime/reference/cli/linter/
+  - /runtime/tools/linter/
+  - /runtime/fundamentals/linting_and_formatting/lint-cli-ref
+  - /runtime/manual/tools/linter/
+  - /runtime/reference/cli/linter/
 command: lint
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno lint"

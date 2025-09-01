@@ -113,7 +113,7 @@ export const sidebar = [
     title: "Modules and package management",
     items: [
       {
-        title: "Use Node.js' built-in modules",
+        title: "Use Node.js built-in modules",
         href: "/examples/node_built_in/",
         type: "example",
       },
@@ -393,6 +393,11 @@ export const sidebar = [
       {
         title: "Deploy with Deno Deploy",
         href: "/examples/deno_deploy_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Deploy with the deploy command",
+        href: "/examples/deploy_command_tutorial/",
         type: "tutorial",
       },
       {
@@ -878,6 +883,11 @@ export const sidebar = [
       {
         title: "Build a chat app with WebSockets",
         href: "/examples/chat_app_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "LLM Chat app",
+        href: "/examples/llm_tutorial/",
         type: "tutorial",
       },
       {

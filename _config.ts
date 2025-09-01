@@ -9,15 +9,16 @@ import postcss from "lume/plugins/postcss.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
+import postcssNesting from "npm:@tailwindcss/nesting";
 
-import tw from "tailwindcss";
-import tailwindConfig from "./tailwind.config.js";
+import tailwind from "@tailwindcss/postcss";
 
 import Prism from "./prism.ts";
 
 import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
-import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.8.2/style.ts";
+// See note below about GFM CSS
+// import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.11.0/style.ts";
 import { log } from "lume/core/utils/log.ts";
 import anchor from "npm:markdown-it-anchor@9";
 import admonitionPlugin from "./markdown-it/admonition.ts";
@@ -28,9 +29,8 @@ import replacerPlugin from "./markdown-it/replacer.ts";
 import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import createGAMiddleware from "./middleware/googleAnalytics.ts";
-import redirectsMiddleware, {
-  toFileAndInMemory,
-} from "./middleware/redirects.ts";
+import redirectsMiddleware from "./middleware/redirects.ts";
+import { toFileAndInMemory } from "./utils/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
 
 const site = lume(
@@ -113,13 +113,7 @@ site.copy("runtime/contributing/images");
 site.copy("examples/tutorials/images");
 site.copy("deploy/manual/images");
 site.copy("deploy/early-access/images");
-site.copy("deno.json");
-site.copy("go.json");
-site.copy("oldurls.json");
-site.copy("server.ts");
-site.copy("middleware");
 site.copy("examples/scripts");
-site.copy(".env");
 
 site.use(
   redirects({
@@ -133,7 +127,8 @@ site.use(mdx());
 
 site.use(
   postcss({
-    plugins: [tw(tailwindConfig)],
+    includes: false,
+    plugins: [postcssNesting, tailwind()],
   }),
 );
 
@@ -153,7 +148,8 @@ site.use(sitemap());
 
 site.addEventListener("afterBuild", async () => {
   // Write GFM CSS
-  Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
+  /* NOTE: we used to get gfm.css from the jsr.io CDN, but now we simply have a local copy. This is because it needs to be placed on a CSS layer, which isn't possible with an imported file. */
+  // Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
 
   // Generate LLMs documentation files directly to _site directory
   if (Deno.env.get("BUILD_TYPE") == "FULL") {
@@ -228,25 +224,25 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
           {
             name: "Courier",
             style: "normal",
-            data: await Deno.readFile(
+            data: (await Deno.readFile(
               "./static/fonts/courier/CourierPrime-Regular.ttf",
-            ),
+            )).buffer,
           },
           {
             name: "Inter",
             weight: 400,
             style: "normal",
-            data: await Deno.readFile(
+            data: (await Deno.readFile(
               "./static/fonts/inter/hacked/Inter-Regular-hacked.woff",
-            ),
+            )).buffer,
           },
           {
             name: "Inter",
             weight: 700,
             style: "normal",
-            data: await Deno.readFile(
+            data: (await Deno.readFile(
               "./static/fonts/inter/hacked/Inter-SemiBold-hacked.woff",
-            ),
+            )).buffer,
           },
         ],
       },

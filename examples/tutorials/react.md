@@ -19,6 +19,17 @@ with more details. You can see the
 and a
 [demo of the app on Deno Deploy](https://tutorial-with-react.deno.deno.net/)
 
+:::info Deploy your own
+
+Want to skip the tutorial and deploy the finished app right now? Click the
+button below to instantly deploy your own copy of the complete SvelteKit
+dinosaur app to Deno Deploy. You'll get a live, working application that you can
+customize and modify as you learn!
+
+[![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-react&mode=dynamic&entrypoint=api/main.ts&build=deno+task+build&install=deno+install)
+
+:::
+
 ## Create a basic react app with Vite
 
 This tutorial will use [Vite](https://vitejs.dev/) to serve the app locally.
@@ -30,7 +41,7 @@ In your terminal run the following command to create a new React app with Vite
 using the typescript template:
 
 ```sh
-deno run -A npm:create-vite@latest --template react-ts
+$ deno init --npm vite my-react-app --template react-ts
 ```
 
 ## Run the dev server
@@ -309,7 +320,7 @@ export default function Index() {
   }, []);
 
   return (
-    <main>
+    <main id="content">
       <h1>🦕 Dinosaur app</h1>
       <p>Click on a dinosaur below to learn more.</p>
       {dinosaurs.map((dinosaur: { name: string; description: string }) => {
@@ -466,10 +477,8 @@ git push -u origin main
 
 ### Deploy to Deno Deploy
 
-Once your app is on GitHub, you can deploy it on the Deno Deploy<sup>EA</sup>
-dashboard.
-<a href="https://app.deno.com/" class="docs-cta deploy-cta deploy-button">Deploy
-my app</a>
+Once your app is on GitHub, you can
+[deploy it to Deno Deploy<sup>EA</sup>](https://console.deno.com/).
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).

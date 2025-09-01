@@ -1,12 +1,15 @@
-import { Sidebar } from "../types.ts";
 import { walk } from "jsr:@std/fs";
 import { parse as yamlParse } from "jsr:@std/yaml";
+import { Sidebar } from "../types.ts";
 
 export const sidebar = [
   {
     title: "Getting started",
-    href: "/runtime/",
     items: [
+      {
+        title: "Welcome to Deno",
+        href: "/runtime/",
+      },
       {
         title: "Installation",
         href: "/runtime/getting_started/installation/",
@@ -27,7 +30,6 @@ export const sidebar = [
   },
   {
     title: "Fundamentals",
-    href: "/runtime/fundamentals/",
     items: [
       {
         title: "TypeScript",
@@ -93,7 +95,6 @@ export const sidebar = [
   },
   {
     title: "Reference guides",
-    href: "/runtime/reference/",
     items: [
       {
         title: "CLI",
@@ -130,6 +131,10 @@ export const sidebar = [
           {
             title: "deno coverage",
             href: "/runtime/reference/cli/coverage/",
+          },
+          {
+            title: "deno deploy",
+            href: "/runtime/reference/cli/deploy/",
           },
           {
             title: "deno doc",
@@ -285,11 +290,14 @@ export const sidebar = [
   },
   {
     title: "Contributing and support",
-    href: "/runtime/contributing/",
     items: [
       {
         title: "Contributing to Deno",
         items: [
+          {
+            title: "Contributing overview",
+            href: "/runtime/contributing/",
+          },
           {
             title: "Architecture",
             href: "/runtime/contributing/architecture/",
@@ -369,15 +377,20 @@ export async function generateDescriptions(): Promise<Descriptions> {
 
     if (parsed.symbols) {
       parsed.symbols = Object.fromEntries(
-        Object.entries(parsed.symbols).map((
-          [key, value],
-        ) => [key, handleDescription(value)]),
+        Object.entries(parsed.symbols).map(([key, value]) => [
+          key,
+          handleDescription(value),
+        ]),
       );
     }
 
     if (
-      !(parsed.status === "good" || parsed.status === "partial" ||
-        parsed.status === "stubs" || parsed.status === "unsupported")
+      !(
+        parsed.status === "good" ||
+        parsed.status === "partial" ||
+        parsed.status === "stubs" ||
+        parsed.status === "unsupported"
+      )
     ) {
       throw `Invalid status provided in '${dirEntry.name}': ${parsed.status}`;
     }
@@ -426,33 +439,41 @@ export async function generateNodeCompatibility() {
     grouped[item[1].status].items.push(item);
   }
 
-  return Object.entries(grouped).map(([_status, entries]) => {
-    let content =
-      `<div class="module-info">\n\n## ${entries.icon} ${entries.label} (${entries.items.length}/${
-        Object.keys(descriptions).length
-      })\n\n`;
+  return Object.entries(grouped)
+    .map(([_status, entries]) => {
+      let content =
+        `<div class="module-info">\n\n## ${entries.icon} ${entries.label} (${entries.items.length}/${
+          Object.keys(descriptions).length
+        })\n\n`;
 
-    content += entries.items.map(([key, content]) => {
-      let out = `\n\n### <a href="/api/node/${key}">node:${
-        key.replaceAll("--", "/")
-      }</a>\n\n<div class="item-content">\n\n`;
+      content += entries.items
+        .map(([key, content]) => {
+          const link = key.replaceAll("--", "/");
+          let out =
+            `\n\n### <a href="/api/node/${link}">node:${link}</a>\n\n<div class="item-content">\n\n`;
 
-      if (content) {
-        if (content.description) {
-          out += `${content.description.description}\n\n`;
-        }
-        if (content.symbols) {
-          for (const [symbol, description] of Object.entries(content.symbols)) {
-            out += `**${
-              symbol === "*" ? "All symbols" : symbol
-            }**: ${description.description}\n\n`;
+          if (content) {
+            if (content.description) {
+              out += `${content.description.description}\n\n`;
+            }
+            if (content.symbols) {
+              for (
+                const [symbol, description] of Object.entries(
+                  content.symbols,
+                )
+              ) {
+                out += `**${
+                  symbol === "*" ? "All symbols" : symbol
+                }**: ${description.description}\n\n`;
+              }
+            }
           }
-        }
-      }
 
-      return out + "</div>";
-    }).join("\n\n");
+          return out + "</div>";
+        })
+        .join("\n\n");
 
-    return content;
-  }).join("\n\n");
+      return content;
+    })
+    .join("\n\n");
 }

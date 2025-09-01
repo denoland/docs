@@ -1,11 +1,11 @@
 ---
 title: "`deno install`"
 oldUrl:
- - /runtime/manual/tools/script_installer/
- - /runtime/reference/cli/script_installer/
- - /runtime/manual/tools/script_installer/
- - /runtime/manual/tools/cache/
- - /runtime/reference/cli/cache/
+  - /runtime/manual/tools/script_installer/
+  - /runtime/reference/cli/script_installer/
+  - /runtime/manual/tools/script_installer/
+  - /runtime/manual/tools/cache/
+  - /runtime/reference/cli/cache/
 command: install
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno install"
