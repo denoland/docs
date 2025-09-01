@@ -65,6 +65,53 @@ deno task serve:style
 
 Then browse to the styleguide section of the site at `/styleguide/`
 
+## Link checking
+
+To ensure all links in the documentation work correctly, you can run the link
+checker locally before committing changes. This helps catch broken links early
+in the development process.
+
+### Running link checker locally
+
+The link checker needs to run against a live server. Here's the workflow:
+
+1. **Start the dev server** (in one terminal):
+
+   ```console
+   deno task dev
+   ```
+
+   Wait for it to fully start (may take 30-60 seconds on first run).
+
+2. **Run the link checker** (in another terminal):
+
+   ```console
+   deno task check:links:local
+   ```
+
+This will check all links on your local site and report any issues.
+
+### Pre-commit hook (optional)
+
+For automatic link checking before commits, you can install a pre-commit hook:
+
+```console
+deno task install:hooks
+```
+
+This will check links automatically whenever you commit markdown files. You can
+bypass it temporarily with:
+
+```console
+git commit --no-verify
+```
+
+**Note for Windows users**: If you're using Git Bash or WSL, the pre-commit hook
+should work normally. If you encounter issues, you can manually run
+`deno task check:links:local` before committing.
+
+The link checker also runs automatically in CI for all deployments.
+
 ## Editing content
 
 The actual content of the docs site is found mostly in these folders:
@@ -136,6 +183,38 @@ For additive changes, it should usually be sufficient to indicate which version
 a feature or API was released in. For example - in the Node 20 docs, the
 [register function](https://nodejs.org/dist/latest-v20.x/docs/api/module.html#moduleregister)
 is marked as being added in version `20.6.0`.
+
+## Caching of the API Reference docs
+
+The generation of the API reference docs is a very time-consuming operation. To
+speed up this process, we use a caching system that tracks file changes and only
+regenerates documentation when necessary.
+
+### How the caching system works
+
+The caching system uses multiple cache files in the `reference_gen/` directory:
+
+- **`.gen-cache.json`** - Main cache tracking file modification times and
+  content hashes for source files
+- **`.gen-cache-modules.json`** - Module-specific cache for individual
+  TypeScript definition files
+- **`.node-incremental-cache.json`** - Incremental cache for Node.js API
+  documentation
+
+The cache system performs content-based hashing to detect actual changes (not
+just timestamp changes) and supports both file-level and directory-level
+tracking. It automatically invalidates and rebuilds cache entries when:
+
+- Source `.d.ts` files are modified
+- File content hashes change
+- Dependencies are updated
+
+If you need to force a complete regeneration (bypassing the cache), you can
+delete the cache files:
+
+```console
+deno task cache:clear
+```
 
 ## Contribution
 
