@@ -1,9 +1,12 @@
 ---
 title: "`deno doc`, documentation generator"
 oldUrl:
- - /runtime/manual/tools/documentation_generator/
- - /runtime/reference/cli/documentation_generator/
+  - /runtime/manual/tools/documentation_generator/
+  - /runtime/reference/cli/documentation_generator/
 command: doc
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno doc"
+description: "Generate documentation from your code"
 ---
 
 ## Examples
@@ -131,7 +134,7 @@ by JSDoc, TSDoc and TypeDoc:
   available.
 - [`callback`](https://jsdoc.app/tags-callback): define a callback.
 - [`template`/`typeparam`/`typeParam`](https://tsdoc.org/pages/tags/typeparam):
-  define a callback.
+  define a generic parameter.
 - [`prop`/`property`](https://jsdoc.app/tags-property): define a property on a
   symbol.
 - [`typedef`](https://jsdoc.app/tags-typedef): define a type.

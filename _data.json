@@ -1,7 +1,7 @@
 {
   "navigation": [
     {
-      "name": "Manual",
+      "name": "Docs",
       "href": "/runtime/"
     },
     {
@@ -13,12 +13,9 @@
       "href": "/examples/"
     },
     {
-      "name": "Deploy",
-      "href": "/deploy/manual/"
-    },
-    {
-      "name": "Subhosting",
-      "href": "/subhosting/manual/"
+      "name": "Services",
+      "href": "/services/",
+      "style": "services"
     }
   ],
   "sidebar": [

@@ -2,7 +2,7 @@
  * @title Writing tests
  * @difficulty beginner
  * @tags cli
- * @run deno test --allow-read --allow-write <url>
+ * @run deno test -R -W <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.test} Doc: Deno.test
  * @resource {https://jsr.io/@std/assert/doc} Doc: @std/assert
  * @group CLI

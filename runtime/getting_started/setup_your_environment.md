@@ -1,5 +1,6 @@
 ---
 title: "Set up your environment"
+description: "A guide to setting up your development environment for Deno. Learn how to configure popular editors like VS Code, set up language server support, and enable shell completions for better productivity."
 oldUrl: /runtime/manual/getting_started/setup_your_environment/
 ---
 
@@ -165,9 +166,9 @@ if executable('deno')
     \ 'allowlist': ['typescript', 'javascript', 'javascriptreact', 'typescriptreact'],
     \ }
 
-  if exists('$DENO_ENABLE') 
-    let deno_enabled = $DENO_ENABLE == '1' 
-    let server_config['workspace_config'] = { 'deno': { 'enable': deno_enabled ? v:true : v:false } } 
+  if exists('$DENO_ENABLE')
+    let deno_enabled = $DENO_ENABLE == '1'
+    let server_config['workspace_config'] = { 'deno': { 'enable': deno_enabled ? v:true : v:false } }
   endif
 
   au User lsp_setup call lsp#register_server(server_config)
@@ -209,8 +210,27 @@ An example configuration for Deno via eglot:
 
   (cl-defmethod eglot-initialization-options ((server eglot-deno))
     "Passes through required deno initialization options"
-    (list :enable t
-    :lint t))
+    (list
+      :enable t
+      :unstable t
+      :typescript
+        (:inlayHints
+          (:variableTypes
+            (:enabled t))
+          (:parameterTypes
+            (:enabled t)))))
+```
+
+This is the equivalent of having the following settings in a VSCode
+`settings.json`:
+
+```jsonc
+{
+  "deno.enable": true,
+  "deno.unstable": true,
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.inlayHints.parameterTypes.enabled": true
+}
 ```
 
 ### Pulsar
@@ -291,7 +311,7 @@ your `.sublime-project` configuration like the below:
 
 The [Nova editor](https://nova.app) can integrate the Deno language server via
 the
-[Deno extension](https://extensions.panic.com/extensions/jaydenseric/jaydenseric.deno).
+[Deno extension](https://extensions.panic.com/extensions/co.gwil/co.gwil.deno/).
 
 ### GitHub Codespaces
 
@@ -340,12 +360,14 @@ Enabling connection to the Deno language server requires changes in the
 [[language]]
 name = "typescript"
 roots = ["deno.json", "deno.jsonc", "package.json"]
+file-types = ["ts", "tsx"]
 auto-format = true
 language-servers = ["deno-lsp"]
 
 [[language]]
 name = "javascript"
 roots = ["deno.json", "deno.jsonc", "package.json"]
+file-types = ["js", "jsx"]
 auto-format = true
 language-servers = ["deno-lsp"]
 
@@ -354,6 +376,11 @@ command = "deno"
 args = ["lsp"]
 config.deno.enable = true
 ```
+
+### Zed
+
+The [Zed editor](https://zed.dev) can integrate the Deno language server via the
+[Deno extension](https://zed.dev/extensions?query=deno&filter=language-servers).
 
 ## Shell completions
 

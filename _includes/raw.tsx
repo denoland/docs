@@ -5,10 +5,14 @@ export default function Raw(props: Lume.Data, helpers: Lume.Helpers) {
 
   return (
     <>
-      <div className="raw-container">
+      <main
+        tabIndex={-1}
+        id="content"
+        className="raw-container w-full flex flex-col px-8 xlplus:px-0 pt-6 md:pt-12 mt-4 mx-auto mb-12"
+      >
         {props.children}
         {reference && <props.comp.ToTop />}
-      </div>
+      </main>
     </>
   );
 }

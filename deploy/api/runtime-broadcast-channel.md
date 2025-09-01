@@ -59,7 +59,7 @@ a simple server that uses `BroadcastChannel` to synchornize state across all
 running instances of the server.
 
 ```ts
-import { Hono } from "https://deno.land/x/hono/mod.ts";
+import { Hono } from "jsr:@hono/hono";
 
 // in-memory cache of messages
 const messages = [];

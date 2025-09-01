@@ -1,9 +1,10 @@
 ---
 title: "Writing an HTTP Server"
+description: "A guide to creating HTTP servers in Deno. Learn about the Deno.serve API, request handling, WebSocket support, response streaming, and how to build production-ready HTTP/HTTPS servers with automatic compression."
 oldUrl:
-- /runtime/manual/runtime/http_server_apis/
-- /runtime/manual/examples/http_server/
-- /runtime/tutorials/http_server/
+  - /runtime/manual/runtime/http_server_apis/
+  - /runtime/manual/examples/http_server/
+  - /runtime/tutorials/http_server/
 ---
 
 HTTP servers are the backbone of the web, allowing you to access websites,
@@ -249,7 +250,7 @@ Documentation for it can be found
 ```ts title="server.ts"
 Deno.serve((req) => {
   if (req.headers.get("upgrade") != "websocket") {
-    return new Response(null, { status: 501 });
+    return new Response(null, { status: 426 });
   }
 
   const { socket, response } = Deno.upgradeWebSocket(req);
@@ -300,6 +301,12 @@ deno serve server.ts
 The server will start and display a message in the console. Open your browser
 and navigate to [http://localhost:8000/](http://localhost:8000/) to see the
 user-agent information.
+
+The
+[`Deno.ServeDefaultExport`](https://docs.deno.com/api/deno/~/Deno.ServeDefaultExport)
+interface defines the structure for default exports that can be used with the
+`deno serve` command. To ensure your code is type-checked properly, make sure to
+add `satisfies Deno.ServeDefaultExport` to the `export default { ... }`.
 
 ## Building on these examples
 

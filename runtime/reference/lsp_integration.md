@@ -1,11 +1,12 @@
 ---
 title: "Language Server Integration"
+description: "Technical guide to integrating Deno's Language Server Protocol (LSP). Learn about LSP implementation details, custom commands, requests, notifications, and testing API integration for editor and tool developers."
 oldUrl:
-- /runtime/manual/reference/lsp/
-- /runtime/manual/advanced/language_server/overview/
-- /runtime/manual/advanced/language_server/imports/
-- /runtime/manual/advanced/language_server/testing_api/
-- /runtime/reference/cli/lsp_integration/
+  - /runtime/manual/reference/lsp/
+  - /runtime/manual/advanced/language_server/overview/
+  - /runtime/manual/advanced/language_server/imports/
+  - /runtime/manual/advanced/language_server/testing_api/
+  - /runtime/reference/cli/lsp_integration/
 ---
 
 :::tip
@@ -105,7 +106,7 @@ client, which the client is expected to implement:
 ### .cache
 
 `deno.cache` is sent as a resolution code action when there is an un-cached
-module specifier that is being imported into a module. It will be sent with and
+module specifier that is being imported into a module. It will be sent with an
 argument that contains the resolved specifier as a string to be cached.
 
 ### showReferences

@@ -1,5 +1,6 @@
 ---
 title: "Continuous integration"
+description: "Guide to setting up continuous integration (CI) pipelines for Deno projects. Learn how to configure GitHub Actions workflows, run tests and linting in CI, handle cross-platform builds, and optimize pipeline performance with caching."
 oldUrl: /runtime/manual/advanced/continuous_integration
 ---
 
@@ -28,7 +29,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x # Run with latest stable Deno.
@@ -79,7 +80,7 @@ Note: GitHub Actions has a known
 Windows-style line endings (CRLF). This may cause issues when running `deno fmt`
 in a pipeline with jobs that run on `windows`. To prevent this, configure the
 Actions runner to use Linux-style line endings before running the
-`actions/checkout@v3` step:
+`actions/checkout@v4` step:
 
 ```sh
 git config --system core.autocrlf false
@@ -141,72 +142,59 @@ speed things up is to cache dependencies so that they do not need to be
 downloaded anew.
 
 Deno stores dependencies locally in a cache directory. In a pipeline the cache
-can be preserved between workflows by setting the `DENO_DIR` environment
-variable and adding a caching step to the workflow:
+can be preserved between workflows by turning on the `cache: true` option on
+`denoland/setup-deno`:
 
 ```yaml
-# Set DENO_DIR to an absolute or relative path on the runner.
-env:
-  DENO_DIR: my_cache_directory
-
 steps:
-  - name: Cache Deno dependencies
-    uses: actions/cache@v4
+  - uses: actions/checkout@v4
+  - uses: denoland/setup-deno@v2
     with:
-      path: ${{ env.DENO_DIR }}
-      key: my_cache_key
+      cache: true
 ```
 
 At first, when this workflow runs the cache is still empty and commands like
 `deno test` will still have to download dependencies, but when the job succeeds
-the contents of `DENO_DIR` are saved and any subsequent runs can restore them
-from cache instead of re-downloading.
-
-There is still an issue in the workflow above: at the moment the name of the
-cache key is hardcoded to `my_cache_key`, which is going to restore the same
-cache every time, even if one or more dependencies are updated. This can lead to
-older versions being used in the pipeline even though you have updated some
-dependencies. The solution is to generate a different key each time the cache
-needs to be updated, which can be achieved by using a lockfile and by using the
-`hashFiles` function provided by GitHub Actions:
-
-```yaml
-key: ${{ hashFiles('deno.lock') }}
-```
-
-To make this work you will also need a have a lockfile in your Deno project,
-which is discussed in detail
-[here](/runtime/fundamentals/modules/#integrity-checking-and-lock-files). Now,
-if the contents of `deno.lock` are changed, a new cache will be made and used in
-subsequent pipeline runs thereafter.
+the contents of cached dependencies are saved and any subsequent runs can
+restore them from cache instead of re-downloading.
 
 To demonstrate, let's say you have a project that uses the logger from
 [`@std/log`](https://jsr.io/@std/log):
 
-```ts
-import * as log from "jsr:@std/log@0.224.5";
+```json, title="deno.json"
+{
+  "imports": {
+    "@std/log": "jsr:@std/log@0.224.5"
+  }
+}
 ```
 
-In order to increment this version, you can update the `import` statement and
-then reload the cache and update the lockfile locally:
+In order to increment this version, you can update the dependency and then
+reload the cache and update the lockfile locally:
 
 ```console
-deno install --reload --lock=deno.lock --frozen=false --entrypoint deps.ts
+deno install --reload --frozen=false
 ```
 
 You should see changes in the lockfile's contents after running this. When this
-is committed and run through the pipeline, you should then see the `hashFiles`
-function saving a new cache and using it in any runs that follow.
+is committed and run through the pipeline, you should then see a new cache and
+using it in any runs that follow.
 
-#### Clearing the cache
+By default, the cache is automatically keyed by:
 
-Occasionally you may run into a cache that has been corrupted or malformed,
-which can happen for various reasons. It is possible to clear a cache from the
-GitHub Actions UI, or you can simply change the name of the cache key. A
-practical way of doing so without having to forcefully change your lockfile is
-to add a variable to the cache key name, which can be stored as a GitHub secret
-and can be changed if a new cache is needed:
+- the github
+  [job_id](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_id)
+- the runner os and architecture
+- a hash of the `deno.lock` files in the project
+
+It is possible to customize the default hash
+(`${{ hashFiles('**/deno.lock') }}`) used as part of the cache key via the
+`cache-hash` input.
 
 ```yaml
-key: ${{ secrets.CACHE_VERSION }}-${{ hashFiles('deno.lock') }}
+- uses: denoland/setup-deno@v2
+  with:
+    # setting `cache-hash` implies `cache: true` and will replace
+    # the default cache-hash of `${{ hashFiles('**/deno.lock') }}`
+    cache-hash: ${{ hashFiles('**/deno.json') }}
 ```

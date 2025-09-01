@@ -19,6 +19,8 @@ jobs:
 
       - name: Set up Deno
         uses: denoland/setup-deno@v2
+        with:
+          cache: true
 
       - name: "Reference: install"
         working-directory: "reference_gen"
@@ -39,8 +41,7 @@ jobs:
         run: deno task build
 
       - name: Run server
-        working-directory: _site
-        run: deno run --allow-read=. --allow-net --allow-env --lock=../deno.lock server.ts &
+        run: deno run --allow-read=. --allow-net --allow-env --lock=deno.lock server.ts &
 
       - name: Link checker
         env:
@@ -52,4 +53,4 @@ jobs:
         with:
           project: "deno-docs"
           entrypoint: "server.ts"
-          root: "_site"
+          root: "."

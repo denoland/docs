@@ -1,14 +1,10 @@
 import { existsSync } from "@std/fs";
-import { Page } from "lume/core/file.ts";
 import type { RequestHandler } from "lume/core/server.ts";
-import type Site from "lume/core/site.ts";
 import GO_LINKS from "../go.json" with { type: "json" };
 import REDIRECT_LINKS from "../oldurls.json" with { type: "json" };
 import { cliNow } from "../timeUtils.ts";
 import { log } from "lume/core/utils/log.ts";
 
-type Status = 301 | 302 | 307 | 308;
-type Redirect = [string, string, Status];
 let redirectsSingleton: Record<string, string> | null = null;
 
 function getRedirects() {
@@ -26,7 +22,7 @@ function getRedirects() {
 export default async function redirectsMiddleware(
   req: Request,
   next: RequestHandler,
-  info: Deno.ServeHandlerInfo,
+  _info: Deno.ServeHandlerInfo,
 ): Promise<Response> {
   const redirects = getRedirects();
 
@@ -60,16 +56,16 @@ export default async function redirectsMiddleware(
 function loadFromJson() {
   let redirects: Record<string, string> = {};
 
-  if (existsSync("./_redirects.json")) {
+  if (existsSync("./_site/_redirects.json")) {
     log.debug(
-      `${cliNow()} <cyan>redirectsMiddleware</cyan>: Reading redirects from '_redirects.json'...`,
+      `${cliNow()} <cyan>redirectsMiddleware</cyan>: Reading redirects from '_site/_redirects.json'...`,
     );
-    const redirectsAsBytes = Deno.readFileSync("./_redirects.json");
+    const redirectsAsBytes = Deno.readFileSync("./_site/_redirects.json");
     const redirectsAsString = new TextDecoder().decode(redirectsAsBytes);
     redirects = JSON.parse(redirectsAsString) as Record<string, string>;
   } else {
     log.warn(
-      `${cliNow()} <cyan>redirectsMiddleware</cyan>: No './_redirects.json' found.`,
+      `${cliNow()} <cyan>redirectsMiddleware</cyan>: No './_site/_redirects.json' found.`,
     );
   }
 
@@ -108,36 +104,4 @@ function addGoLinksAndRedirectLinks(redirects: Record<string, string>) {
       Object.keys(redirects).length
     }</green>.`,
   );
-}
-
-export function toFileAndInMemory(redirects: Redirect[], site: Site): void {
-  jsonWriter(redirects, site);
-
-  if (!redirectsSingleton) {
-    redirectsSingleton = {};
-  }
-
-  for (const [from, to] of redirects) {
-    redirectsSingleton[from] = to;
-  }
-
-  log.warn(
-    `${cliNow()} <cyan>toFileAndInMemory</cyan> Added <green>${redirects.length}</green> redirects.`,
-  );
-
-  addGoLinksAndRedirectLinks(redirectsSingleton);
-}
-
-// Copied from redirects plugin because it's not exported :'(
-function jsonWriter(redirects: Redirect[], site: Site): void {
-  const obj = Object.fromEntries(
-    redirects.map((
-      [from, to, code],
-    ) => [from, code === 301 ? to : { to, code }]),
-  );
-  const page = Page.create({
-    url: "_redirects.json",
-    content: JSON.stringify(obj, null, 2),
-  });
-  site.pages.push(page);
 }

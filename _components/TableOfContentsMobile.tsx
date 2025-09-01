@@ -9,12 +9,12 @@ export default function TableOfContents({ data, toc }: {
   }
 
   return (
-    <details class="toc-mobile block xl:hidden my-4 bg-background-secondary rounded-md group">
-      <summary class="px-4 py-2 group-open:border-b border-foreground-tertiary">
+    <details class="block lg:hidden my-4 bg-foreground-quaternary rounded-md group">
+      <summary class="px-4 py-2 group-open:border-b border-background-tertiary">
         On this page
       </summary>
 
-      <ul className="toc-list">
+      <ul className="p-4 pt-2">
         {toc.map((item: TableOfContentsItem_) => (
           <data.comp.TableOfContentsItem item={item} />
         ))}

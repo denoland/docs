@@ -1,11 +1,12 @@
 ---
 title: "deno.json and package.json"
+description: "The guide to configuring your Deno projects. Learn about TypeScript settings, tasks, dependencies, formatting, linting, and how to use both deno.json and/or package.json effectively."
 oldUrl:
-- /runtime/manual/getting_started/configuration_file/
-- /runtime/manual/basics/modules/import_maps/
-- /runtime/basics/import_maps/
-- /runtime/manual/linking_to_external_code/import_maps
-- /manual/linking_to_external_code/proxies
+  - /runtime/manual/getting_started/configuration_file/
+  - /runtime/manual/basics/modules/import_maps/
+  - /runtime/basics/import_maps/
+  - /runtime/manual/linking_to_external_code/import_maps
+  - /manual/linking_to_external_code/proxies
 ---
 
 You can configure Deno using a `deno.json` file. This file can be used to
@@ -66,7 +67,7 @@ You can also use a `"dependencies"` field in `package.json`:
 ```json title="package.json"
 {
   "dependencies": {
-    "express": "express@^1.0.0"
+    "express": "^1.0.0"
   }
 }
 ```
@@ -126,6 +127,31 @@ import { MyUtil } from "/util.ts";
 
 This causes import specifiers starting with `/` to be resolved relative to the
 import map's URL or file path.
+
+### Overriding packages
+
+The `links` field in `deno.json` allows you to override dependencies with local
+packages stored on disk. This is similar to `npm link`.
+
+```json title="deno.json"
+{
+  "links": [
+    "../some-package"
+  ]
+}
+```
+
+This capability addresses several common development challenges:
+
+- Dependency bug fixes
+- Private local libraries
+- Compatibility issues
+
+The package being referenced doesn't need to be published at all. It just needs
+to have the proper package name and metadata in `deno.json` or `package.json`,
+so that Deno knows what package it's dealing with. This provides greater
+flexibility and modularity, maintaining clean separation between your main code
+and external packages.
 
 ## Tasks
 
@@ -194,11 +220,11 @@ For example:
 This configuration will:
 
 - only lint files in the `src/` directory,
-- will not lint files in the `src/testdata/` directory or any TypeScript files
-  in the `src/fixtures/` directory.
-- specifies that the recommended linting rules should be applied,
-- adds the `ban-untagged-todo`
-- removes the `no-unused-vars` rule excluded.
+- not lint files in the `src/testdata/` directory or any TypeScript files in the
+  `src/fixtures/` directory.
+- specify that the recommended linting rules should be applied,
+- add the `ban-untagged-todo`, and
+- exclude the `no-unused-vars` rule.
 
 You can find a full list of available linting rules in the
 [List of rules](/lint/) documentation page.
@@ -461,7 +487,46 @@ works as well:
 }
 ```
 
-## Full example
+## Exports
+
+The `exports` field in the `deno.json` file allows you to define which paths of
+your package should be publicly accessible. This is particularly useful for
+controlling the API surface of your package and ensuring that only the intended
+parts of your code are exposed to users.
+
+```jsonc title="deno.json"
+{
+  "exports": "./src/mod.ts" // A default entry point
+}
+```
+
+You can also define multiple entry points:
+
+```json title="deno.json"
+{
+  "exports": {
+    "./module1": "./src/module1.ts",
+    "./module2": "./src/module2.ts",
+    ".": "./src/mod.ts" // Default entry point
+  }
+}
+```
+
+This configuration will:
+
+- expose `module1` and `module2` as entry points for your package,
+- allow importing any file from the `utils` directory using a wildcard. This
+  means users can import these modules using the specified paths, while other
+  files in your package remain private.
+
+To use the exports in your code, you can import them like this:
+
+```ts title="example.ts"
+import * as module_1 from "@example/my-package/module1";
+import * as module_2 from "@example/my-package/module2";
+```
+
+## An example `deno.json` file
 
 ```json
 {
@@ -508,11 +573,16 @@ works as well:
 }
 ```
 
+This is an example of a `deno.json` file that configures the TypeScript compiler
+options, linter, formatter, node modules directory, etc. For a full list of
+available fields and configurations, see the
+[Deno configuration file schema](#json-schema).
+
 ## JSON schema
 
 A JSON schema file is available for editors to provide autocompletion. The file
 is versioned and available at:
-https://deno.land/x/deno/cli/schemas/config-file.v1.json
+[https://github.com/denoland/deno/blob/main/cli/schemas/config-file.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/config-file.v1.json)
 
 ## Proxies
 

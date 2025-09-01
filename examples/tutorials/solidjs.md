@@ -1,5 +1,6 @@
 ---
 title: "Build a SolidJS app with Deno"
+description: "Build a SolidJS application with Deno. Learn how to set up a project, implement reactive components, handle routing, create API endpoints with Hono, and build a full-stack TypeScript application."
 url: /examples/solidjs_tutorial/
 ---
 
@@ -233,7 +234,7 @@ export default function Index() {
   });
 
   return (
-    <main>
+    <main id="content">
       <h1>Welcome to the Dinosaur app</h1>
       <p>Click on a dinosaur below to learn more.</p>
       <For each={dinosaurs()}>

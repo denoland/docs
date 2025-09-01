@@ -1,5 +1,6 @@
 ---
 title: Installation
+description: "A Guide to installing Deno on different operating systems. Includes instructions for Windows, macOS, and Linux using various package managers, manual installation methods, and Docker containers."
 oldUrl:
   - /runtime/manual/fundamentals/installation
   - /runtime/manual/getting_started/installation
@@ -66,7 +67,7 @@ asdf set -u deno latest
 asdf set deno latest
 ```
 
-Using [vfox](https://vfox.lhan.me/):
+Using [vfox](https://vfox.dev/):
 
 ```shell
 vfox add deno
@@ -115,7 +116,7 @@ Using [Winget](https://github.com/microsoft/winget-cli):
 winget install DenoLand.Deno
 ```
 
-Using [vfox](https://vfox.lhan.me/):
+Using [vfox](https://vfox.dev/):
 
 ```shell
 vfox add deno
@@ -166,7 +167,7 @@ asdf set -u deno latest
 asdf set deno latest
 ```
 
-Using [vfox](https://vfox.lhan.me/):
+Using [vfox](https://vfox.dev/):
 
 ```shell
 vfox add deno
@@ -234,4 +235,5 @@ deno upgrade --version 1.0.1
 ## Building from source
 
 Information about how to build from source can be found in the
-[`Contributing`](/runtime/contributing/building_from_source/) chapter.
+[`Building from source`](https://github.com/denoland/deno/blob/main/.github/CONTRIBUTING.md#building-from-source)
+guide.

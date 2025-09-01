@@ -1,5 +1,6 @@
 ---
 title: "Documentation Tests"
+description: "Learn how to write and run documentation tests in Deno. This guide covers how to create testable code examples in documentation comments, type-checking documentation, and running doc tests with the Deno test runner."
 oldUrl: /runtime/manual/testing/documentation/
 ---
 
@@ -69,3 +70,9 @@ export function foo(): string {
   return "foo";
 }
 ````
+
+For more guides on testing in Deno, check out:
+
+- [Basic testing tutorial](/examples/testing_tutorial/)
+- [Mocking data in tests tutorial](/examples/mocking_tutorial/)
+- [Testing web applications tutorial](/examples/web_testing_tutorial/)

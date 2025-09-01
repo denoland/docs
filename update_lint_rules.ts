@@ -63,5 +63,9 @@ const lintRulesData = await getCurrentLintRules();
 await checkIfDocsExistAndUpdate(lintRulesData);
 
 if (missingDocs.length !== 0) {
-  throw new Error(`Some rules are missing docs:\n${missingDocs.join("\n")}`);
+  throw new Error(
+    `Some rules are missing docs:\n${
+      missingDocs.join("\n")
+    }\n\nAdd Markdown files to lint/rules/ directory and write the docs.`,
+  );
 }

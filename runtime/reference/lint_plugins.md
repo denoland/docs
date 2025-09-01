@@ -1,5 +1,6 @@
 ---
 title: "Lint Plugins"
+description: "Guide to creating and using custom lint plugins in Deno. Learn how to write custom lint rules, use selectors for AST matching, implement fixes, and test your plugins using Deno's lint plugin API."
 ---
 
 :::caution
@@ -14,7 +15,7 @@ in the future.
 The built-in linter can be extended with plugins to add custom lint rules.
 
 Whilst Deno ships with [many lint rules](/lint/) out of the box, there are cases
-where you need a custom rule tailored particularily to your project - whether to
+where you need a custom rule tailored particularly to your project - whether to
 catch a context-specific problem or enforce company-wide conventions.
 
 This is where the lint plugin API comes into play.
@@ -52,7 +53,7 @@ All the typings are available under the `Deno.lint` namespace.
 :::
 
 ```ts title="my-plugin.ts"
-export default {
+const plugin: Deno.lint.Plugin = {
   // The name of your plugin. Will be shown in error output
   name: "my-plugin",
   // Object with rules. The property name is the rule name and
@@ -83,7 +84,8 @@ export default {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
+export default plugin;
 ```
 
 ## Using selectors to match nodes
@@ -94,7 +96,7 @@ express via a selector, similar to CSS selectors. By using a string as the
 property name in the returned visitor object, we can specify a custom selector.
 
 ```ts title="my-plugin.ts"
-export default {
+const plugin: Deno.lint.Plugin = {
   name: "my-plugin",
   rules: {
     "my-rule": {
@@ -112,26 +114,32 @@ export default {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
+export default plugin;
 ```
 
 Note, that we can always refine our match further in JavaScript if the matching
 logic is too complex to be expressed as a selector alone. The full list of the
 supported syntax for selectors is:
 
-| Syntax                 | Description                   |
-| ---------------------- | ----------------------------- |
-| `Foo + Foo`            | Next sibling selector         |
-| `Foo > Bar`            | Child combinator              |
-| `Foo ~ Bar`            | Subsequent sibling combinator |
-| `Foo Bar`              | Descendant combinator         |
-| `Foo[attr]`            | Attribute existance           |
-| `Foo[attr.length < 2]` | Attribute value comparison    |
-| `:first-child`         | First child pseudo-class      |
-| `:last-child`          | Last child pseudo-class       |
-| `:nth-child(2n + 1)`   | Nth-child pseudo-class        |
-| `:not(> Bar)`          | Not pseudo-class              |
-| `:is(> Bar)`           | Is pseudo-class               |
+| Syntax                    | Description                            |
+| ------------------------- | -------------------------------------- |
+| `Foo + Foo`               | Next sibling selector                  |
+| `Foo > Bar`               | Child combinator                       |
+| `Foo ~ Bar`               | Subsequent sibling combinator          |
+| `Foo Bar`                 | Descendant combinator                  |
+| `Foo[attr]`               | Attribute existence                    |
+| `Foo[attr.length < 2]`    | Attribute value comparison             |
+| `Foo[attr=/(foo\|bar)*/]` | Attribute value regex check            |
+| `:first-child`            | First child pseudo-class               |
+| `:last-child`             | Last child pseudo-class                |
+| `:nth-child(2n + 1)`      | Nth-child pseudo-class                 |
+| `:not(> Bar)`             | Not pseudo-class                       |
+| `:is(> Bar)`              | Is pseudo-class                        |
+| `:where(> Bar)`           | Where pseudo-class (same as `:is()`)   |
+| `:matches(> Bar)`         | Matches pseudo-class (same as `:is()`) |
+| `:has(> Bar)`             | Has pseudo-class                       |
+| `IfStatement.test`        | Field selector `.<field>`              |
 
 There is also the `:exit` pseudo that is only valid at the end of the whole
 selector. When it's present, Deno will call the function while going **up** the
@@ -202,7 +210,7 @@ can hook into the linter via the `destroy()` hook. It is called after a file has
 been linted and just before the plugin context is destroyed.
 
 ```ts title="my-plugin.ts"
-export default {
+const plugin: Deno.lint.Plugin = {
   name: "my-plugin",
   rules: {
     "my-rule": {
@@ -216,7 +224,8 @@ export default {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
+export default plugin;
 ```
 
 :::caution
@@ -246,6 +255,25 @@ custom lint rule is always `<plugin-name>/<rule-name>`.
 }
 ```
 
+## Ignoring custom lint reports
+
+Sometimes you want to disable a reported lint error for a particular place in
+your code. Instead of disabling the custom lint rule entirely, you can disable a
+reported location by placing a code comment before it.
+
+```ts
+// deno-lint-ignore my-custom-plugin/no-console
+console.log("hey");
+```
+
+This will disable the lint rule from a lint plugin for this particular line.
+
+The syntax for the ignore comment is:
+
+```ts
+// deno-lint-ignore <my-plugin>/<my-rule>
+```
+
 ## Testing plugins
 
 The `Deno.lint.runPlugin` API provides a convenient way to test your plugins. It
@@ -254,18 +282,22 @@ particular input.
 
 Let's use the example plugin, defined above:
 
-```ts title="my-plugin-test.ts"
-import { assert, assertEquals } from "jsr:@std/assert";
+```ts title="my-plugin_test.ts"
+import { assertEquals } from "jsr:@std/assert";
 import myPlugin from "./my-plugin.ts";
 
 Deno.test("my-plugin", () => {
-  const diagnostics = Deno.lint.runPlugin(plugin, "main.ts", "const _a = 'a';");
+  const diagnostics = Deno.lint.runPlugin(
+    myPlugin,
+    "main.ts", // Dummy filename, file doesn't need to exist.
+    "const _a = 'a';",
+  );
 
   assertEquals(diagnostics.length, 1);
   const d = diagnostics[0];
   assertEquals(d.id, "my-plugin/my-rule");
   assertEquals(d.message, "should be _b");
-  assert(typeof d.fix === "function");
+  assertEquals(d.fix, [{ range: [6, 8], text: "_b" }]);
 });
 ```
 
@@ -280,4 +312,4 @@ Trying to use it with any other subcommand will throw an error.
 
 Consult [the API reference](/api/deno/) for more information on
 [`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) and
-[`Deno.lint.Diagnostic`](/api/deno/~/Deno.lint.runPlugin).
+[`Deno.lint.Diagnostic`](/api/deno/~/Deno.lint.Diagnostic).

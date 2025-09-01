@@ -2,13 +2,13 @@
  * @title TCP Echo Server
  * @difficulty beginner
  * @tags cli
- * @run --allow-net echo_server.ts
+ * @run -N echo_server.ts
  * @resource {https://docs.deno.com/api/deno/~/Deno.listen} Deno listen API docs
  * @resource {https://docs.deno.com/api/deno/~/Deno.Conn#property_readable} Readable connection API docs
  * @resource {https://docs.deno.com/api/deno/~/Deno.Conn#property_writable} Writable connection docs
  * @group Network
  *
- * An echo server is a simple network application that listens for incoming connections and requests, and then repeats back any data it receives from clients.<br><br>To test this example, try sending data to it with <a href="https://en.wikipedia.org/wiki/Netcat">Netcat</a> (Linux/MacOS only). For example, in your terminal run: <code>echo "Hello, Deno!" | nc localhost 8080</code>
+ * An echo server is a simple network application that listens for incoming connections and requests, and then repeats back any data it receives from clients.<br><br>To test this example, try sending data to it with <a href="https://en.wikipedia.org/wiki/Netcat">Netcat</a> (Linux/MacOS only). For example, in your terminal run: <code>echo 'Hello, Deno!' | nc localhost 8080</code>
  */
 
 // Create a TCP listener that listens on port 8080. Log that it is listening.

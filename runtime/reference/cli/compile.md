@@ -1,10 +1,13 @@
 ---
 title: "`deno compile`, standalone executables"
 oldUrl:
- - /runtime/manual/tools/compile/
- - /runtime/manual/tools/compiler/
- - /runtime/reference/cli/compiler/
+  - /runtime/manual/tools/compile/
+  - /runtime/manual/tools/compiler/
+  - /runtime/reference/cli/compiler/
 command: compile
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno compile"
+description: "Compile your code into a standalone executable"
 ---
 
 ## Flags
@@ -172,3 +175,4 @@ $ signtool sign /fd SHA256 main.exe
 ## Unavailable in executables
 
 - [Web Storage API](/runtime/reference/web_platform_apis/#web-storage)
+- [Web Cache](/api/web/~/Cache)

@@ -1,8 +1,9 @@
 ---
 title: "Deno Style Guide"
+description: "Comprehensive style guide for contributing to Deno's internal runtime code and standard library. Covers coding conventions, documentation standards, testing requirements, and best practices for TypeScript and Rust development."
 oldUrl:
-- /runtime/manual/contributing/style_guide/
-- /runtime/manual/references/contributing/style_guide/
+  - /runtime/manual/contributing/style_guide/
+  - /runtime/manual/references/contributing/style_guide/
 ---
 
 :::note
@@ -361,6 +362,11 @@ export function foo(): string {
   return "bar";
 }
 ```
+
+Regular functions and arrow functions have different behavior with respect to
+hoisting, binding, arguments, and constructability. The `function` keyword
+clearly indicates the intent to define a function, improving legibility and
+tracibility while debugging.
 
 #### Error Messages
 

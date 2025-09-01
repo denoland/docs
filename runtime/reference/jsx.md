@@ -1,5 +1,6 @@
 ---
 title: "JSX"
+description: "Complete guide to using JSX in Deno. Learn about JSX configuration options, automatic runtime features, development transforms, and Deno's optimized precompile transform for server-side rendering."
 oldUrl:
   - /deploy/manual/using-jsx/
   - /runtime/manual/advanced/jsx_dom/jsx/
@@ -63,10 +64,18 @@ To use the newer JSX runtime transform change the compiler options in your
     "jsxImportSource": "react"
   },
   "imports": {
-    "react": "npm:react"
+    "react": "npm:react",
+    "@types/react": "npm:@types/react"
   }
 }
 ```
+
+:::note install dependencies
+
+When manually adding imports to your `deno.json` file, remember to run
+`deno install` to download and cache the dependencies.
+
+:::
 
 Behind the scenes the `jsxImportSource` setting will always append a
 `/jsx-runtime` to the import specifier.
@@ -301,3 +310,85 @@ const jsx = _jsxTemplate(
   }),
 );
 ```
+
+## Rendering JSX in server responses
+
+When using JSX for server-side rendering in Deno, you need to convert your JSX
+components to HTML strings that can be sent in a Response. This is particularly
+useful when building web applications with Deno.serve.
+
+### Using Preact with renderToString
+
+For Preact applications, you can use the `preact-render-to-string` package:
+
+```json title="deno.json"
+{
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "preact"
+  },
+  "imports": {
+    "preact": "npm:preact@^10.26.6",
+    "preact-render-to-string": "npm:preact-render-to-string@^6.5.13"
+  }
+}
+```
+
+Then in your server code:
+
+```tsx title="server.tsx"
+import { renderToString } from "preact-render-to-string";
+
+const App = () => {
+  return <h1>Hello world</h1>;
+};
+
+Deno.serve(() => {
+  const html = `<!DOCTYPE html>${renderToString(<App />)}`;
+  return new Response(html, {
+    headers: { "Content-Type": "text/html; charset=utf-8" },
+  });
+});
+```
+
+This approach works well with the precompile transform, providing optimal
+performance for server-side rendering.
+
+### Using React with renderToString
+
+If you're using React instead of Preact, you can use React's own server
+rendering capabilities:
+
+```json title="deno.json"
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  },
+  "imports": {
+    "react": "npm:react@^18.2.0",
+    "react-dom": "npm:react-dom@^18.2.0",
+    "react-dom/server": "npm:react-dom@^18.2.0/server"
+  }
+}
+```
+
+And in your server code:
+
+```tsx title="server.tsx"
+import { renderToString } from "react-dom/server";
+
+const App = () => {
+  return <h1>Hello from React</h1>;
+};
+
+Deno.serve(() => {
+  const html = `<!DOCTYPE html>${renderToString(<App />)}`;
+  return new Response(html, {
+    headers: { "Content-Type": "text/html; charset=utf-8" },
+  });
+});
+```
+
+With these configurations, your Deno server can efficiently render JSX
+components to HTML and serve them to clients.

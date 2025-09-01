@@ -1,5 +1,6 @@
 ---
 title: "Build an app with Tanstack and Deno"
+description: "Complete guide to building applications with Tanstack and Deno. Learn how to implement Query for data fetching, Router for navigation, manage server state, and create type-safe full-stack applications."
 url: /examples/tanstack_tutorial/
 ---
 
@@ -186,7 +187,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 
 async function fetchDinosaurs() {
-  const response = await fetch("http://localhost:8000/api/dinosaurs/");
+  const response = await fetch("http://localhost:8000/api/dinosaurs");
   if (!response.ok) {
     throw new Error("Failed to fetch dinosaurs");
   }

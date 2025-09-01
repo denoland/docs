@@ -1,5 +1,6 @@
 ---
 title: Deno and Docker
+description: "Complete guide to using Deno with Docker containers. Learn about official Deno images, writing Dockerfiles, multi-stage builds, workspace containerization, and Docker best practices for Deno applications."
 ---
 
 ## Using Deno with Docker
@@ -8,9 +9,6 @@ Deno provides [official Docker files](https://github.com/denoland/deno_docker)
 and [images](https://hub.docker.com/r/denoland/deno).
 
 To use the official image, create a `Dockerfile` in your project directory:
-
-````dockerfile
-Dockerfile:
 
 ```dockerfile
 FROM denoland/deno:latest
@@ -26,7 +24,7 @@ RUN deno cache main.ts
 
 # Run the app
 CMD ["deno", "run", "--allow-net", "main.ts"]
-````
+```
 
 ### Best Practices
 
@@ -36,7 +34,7 @@ For smaller production images:
 
 ```dockerfile
 # Build stage
-FROM denoland/deno:latest as builder
+FROM denoland/deno:latest AS builder
 WORKDIR /app
 COPY . .
 RUN deno cache main.ts
@@ -153,7 +151,7 @@ services:
 
 ```dockerfile
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD deno eval "try { await fetch('http://localhost:8000/health'); } catch { exit(1); }"
+  CMD deno eval "try { await fetch('http://localhost:8000/health'); } catch { Deno.exit(1); }"
 ```
 
 ### Common Development Workflow

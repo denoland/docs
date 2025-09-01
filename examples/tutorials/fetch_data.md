@@ -1,5 +1,6 @@
 ---
 title: "Fetch and stream data"
+description: "A tutorial on working with network requests in Deno. Learn how to use the fetch API for HTTP requests, handle responses, implement data streaming, and manage file uploads and downloads."
 url: /examples/fetch_data_tutorial/
 oldUrl:
   - /runtime/manual/examples/fetch_data/
@@ -69,7 +70,7 @@ We'll use the `fetch` API to retrieve a file. Then we'll use the
 the [`pipeTo`](/api/web/~/ReadableStream.pipeTo) method from the Streams API to
 send the byte stream to the created file.
 
-Next, we'll use the `readable` property on a `POST` request to send the bite
+Next, we'll use the `readable` property on a `POST` request to send the byte
 stream of the file to a server.
 
 ```ts title="stream.js"

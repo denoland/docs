@@ -1,8 +1,8 @@
 ---
 title: "Unstable feature flags"
 oldUrl:
- - /runtime/tools/unstable_flags/
- - /runtime/manual/tools/unstable_flags/
+  - /runtime/tools/unstable_flags/
+  - /runtime/manual/tools/unstable_flags/
 ---
 
 New features of the Deno runtime are often released behind feature flags, so
@@ -95,7 +95,7 @@ globals are:
 - `setImmediate`
 - `clearImmediate`
 
-Note, that `process` is already available as a global startin with Deno 2.0.
+Note, that `process` is already available as a global starting with Deno 2.0.
 
 Requires Deno >= 2.1.0
 
@@ -205,18 +205,23 @@ Enabling this flag makes [Deno KV](/deploy/kv/manual) APIs available in the
 
 ## `--unstable-net`
 
-Enable unstable net APIs in the `Deno` namespace. These APIs include:
+Enable unstable net APIs. These APIs include:
 
+- [`WebSocketStream`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocketStream)
 - [`Deno.DatagramConn`](https://docs.deno.com/api/deno/~/Deno.DatagramConn)
 
 ## `--unstable-otel`
 
 Enable the
-[OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry).
+[OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry). This
+feature is now stable, so this flag is unnecessary in
+[Deno 2.4](https://deno.com/blog/v2.4)+.
 
 ## `--unstable`
 
-:::caution --unstable is deprecated - use granular flags instead
+:::caution
+
+**`--unstable` is deprecated - use granular flags instead.**
 
 The `--unstable` flag is no longer being used for new features, and will be
 removed in a future release. All unstable features that were available using
@@ -240,3 +245,43 @@ deno run --unstable your_script.ts
 
 It is recommended that you use the granular unstable flags instead of this, the
 `--unstable` flag is now deprecated and will be removed in Deno 2.
+
+## `--unstable-temporal`
+
+Enable the experimental [Temporal API](https://tc39.es/proposal-temporal/docs/)
+in the global scope. The Temporal API is a modern date and time API that is
+being developed as a replacement for the legacy `Date` object in JavaScript. It
+provides better support for time zones, calendars, and more precise date/time
+calculations.
+
+To use the Temporal API in your Deno program, run it with the flag:
+
+```sh
+deno run --unstable-temporal your_script.ts
+```
+
+Or configure it in your `deno.json`:
+
+```json title="deno.json"
+{
+  "unstable": ["temporal"]
+}
+```
+
+```ts title="example.ts"
+// Example using Temporal API
+const now = Temporal.Now.plainDateTimeISO();
+console.log(`Current date and time: ${now}`);
+
+const date = Temporal.PlainDate.from("2025-07-10");
+const nextWeek = date.add({ days: 7 });
+console.log(`Next week: ${nextWeek}`);
+
+// Working with time zones
+const zonedDateTime = Temporal.Now.zonedDateTimeISO("America/New_York");
+console.log(`Time in New York: ${zonedDateTime}`);
+```
+
+Note that the Temporal API is still experimental and the specification may
+change before it becomes stable. Use this flag only for testing and
+experimentation.

@@ -1,4 +1,4 @@
-import { Sidebar } from "../types.ts";
+import { Sidebar, SidebarNav } from "../types.ts";
 
 export const sidebar = [
   {
@@ -47,3 +47,17 @@ export const sidebar = [
 
 export const sectionTitle = "Subhosting";
 export const sectionHref = "/subhosting/manual/";
+export const SidebarNav = [
+  {
+    title: "Deno Deploy<sup>EA</sup>",
+    href: "/deploy/early-access/",
+  },
+  {
+    title: "Deploy Classic",
+    href: "/deploy/manual/",
+  },
+  {
+    title: "Subhosting",
+    href: "/subhosting/manual/",
+  },
+] satisfies SidebarNav;

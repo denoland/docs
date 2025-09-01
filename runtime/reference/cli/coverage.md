@@ -2,6 +2,9 @@
 title: "deno coverage"
 oldUrl: /runtime/manual/tools/coverage/
 command: coverage
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno coverage"
+description: "Generate a coverage report for your code"
 ---
 
 ## Inclusions and Exclusions
@@ -54,11 +57,11 @@ top of the file.
 
 Ignored files will not appear in the coverage report.
 
-To ignore a single line, add a `// deno-coverage-ignore-next` comment on the
-line above the code you want to ignore.
+To ignore a single line, add a `// deno-coverage-ignore` comment on the line
+above the code you want to ignore.
 
 ```ts
-// deno-coverage-ignore-next
+// deno-coverage-ignore
 console.log("this line is ignored");
 ```
 
@@ -74,31 +77,39 @@ if (condition) {
 ```
 
 All code after a `// deno-coverage-ignore-start` comment is ignored until a
-`// deno-coverage-ignore-stop` is reached. However, if there are multiple
-consecutive start comments, each of these must be terminated by a corresponding
-stop comment.
+`// deno-coverage-ignore-stop` is reached.
+
+Each `// deno-coverage-ignore-start` comment must be terminated by a
+`// deno-coverage-ignore-stop` comment, and ignored ranges may not be nested.
+When these requirements are not met, some lines may be unintentionally included
+in the coverage report. The `deno coverage` command will log warnings for any
+invalid comments.
 
 ```ts
 // deno-coverage-ignore-start
 if (condition) {
-  // deno-coverage-ignore-start
-  console.log("this line is ignored");
+  // deno-coverage-ignore-start - A warning will be logged because the previous
+  //                              coverage range is unterminated.
+  console.log("this code is ignored");
   // deno-coverage-ignore-stop
-  console.log("this line is also ignored");
 }
 // deno-coverage-ignore-stop
 
-console.log("this line is not ignored");
+// ...
+
+// deno-coverage-ignore-start - This comment will be ignored and a warning will
+//                              be logged, because this range is unterminated.
+console.log("this code is not ignored");
 ```
 
 Only white space may precede the coverage directive in a coverage comment.
 However, any text may trail the directive.
 
 ```ts
-// deno-coverage-ignore-next Trailing text is allowed.
+// deno-coverage-ignore Trailing text is allowed.
 console.log("This line is ignored");
 
-// But leading text isn't. deno-coverage-ignore-next
+// But leading text isn't. deno-coverage-ignore
 console.log("This line is not ignored");
 ```
 
@@ -106,17 +117,19 @@ Coverage comments must start with `//`. Comments starting with `/*` are not
 valid coverage comments.
 
 ```ts
-// deno-coverage-ignore-next
+// deno-coverage-ignore
 console.log("This line is ignored");
 
-/* deno-coverage-ignore-next */
+/* deno-coverage-ignore */
 console.log("This line is not ignored");
 ```
 
 ## Output Formats
 
 By default we support Deno's own coverage format - but you can also output
-coverage reports in the lcov format, or in html.
+coverage reports in the
+[lcov format](https://github.com/linux-test-project/lcov?tab=readme-ov-file) (a
+standard file format used to describe code coverage data), or in html.
 
 ```bash
 deno coverage --lcov --output=cov.lcov
@@ -145,6 +158,14 @@ Generate a coverage report from a coverage profile with a custom name
 deno test --coverage=custom_profile_name
 deno coverage custom_profile_name
 ```
+
+> Note: You can alternatively set coverage directory by `DENO_COVERAGE_DIR` env
+> var.
+>
+> ```
+> DENO_COVERAGE_DIR=custom_profile_name deno test
+> deno coverage custom_profile_name
+> ```
 
 Only include coverage that matches a specific pattern - in this case, only
 include tests from main.ts

@@ -1,13 +1,7 @@
 ---
 title: OpenTelemetry
+description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
-
-:::caution
-
-The OpenTelemetry integration for Deno is still in development and may change.
-To use it, you must pass the `--unstable-otel` flag to Deno.
-
-:::
 
 Deno has built in support for [OpenTelemetry](https://opentelemetry.io/).
 
@@ -32,11 +26,11 @@ Deno provides the following features:
 
 ## Quick start
 
-To enable the OpenTelemetry integration, run your Deno script with the
-`--unstable-otel` flag and set the environment variable `OTEL_DENO=true`:
+To enable the OpenTelemetry integration set the environment variable
+`OTEL_DENO=true`:
 
 ```sh
-OTEL_DENO=true deno run --unstable-otel my_script.ts
+OTEL_DENO=true deno run my_script.ts
 ```
 
 This will automatically collect and export runtime observability data to an
@@ -48,7 +42,7 @@ OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 If you do not have an OpenTelemetry collector set up yet, you can get started
 with a
 [local LGTM stack in Docker](https://github.com/grafana/docker-otel-lgtm/tree/main?tab=readme-ov-file)
-(Loki (logs), Grafana (dashboard), Tempo (traces), and Mimir (metrics)) by
+(Loki (logs), Grafana (dashboard), Tempo (traces), and Prometheus (metrics)) by
 running the following command:
 
 ```sh
@@ -107,7 +101,7 @@ The following attributes are automatically added to the span on creation:
 
 After the request is handled, the following attributes are added:
 
-- `http.status_code`: The status code of the response.
+- `http.response.status_code`: The status code of the response.
 
 Deno does not automatically add a `http.route` attribute to the span as the
 route is not known by the runtime, and instead is determined by the routing
@@ -269,11 +263,11 @@ In addition to the automatically collected telemetry data, you can also create
 your own metrics and traces using the `npm:@opentelemetry/api` package.
 
 You do not need to configure the `npm:@opentelemetry/api` package to use it with
-Deno. Deno sets up the `npm:@opentelemetry/api` package automatically when the
-`--unstable-otel` flag is passed. There is no need to call
-`metrics.setGlobalMeterProvider()`, `trace.setGlobalTracerProvider()`, or
-`context.setGlobalContextManager()`. All configuration of resources, exporter
-settings, etc. is done via environment variables.
+Deno. Deno sets up the `npm:@opentelemetry/api` package automatically. There is
+no need to call `metrics.setGlobalMeterProvider()`,
+`trace.setGlobalTracerProvider()`, or `context.setGlobalContextManager()`. All
+configuration of resources, exporter settings, etc. is done via environment
+variables.
 
 Deno works with version `1.x` of the `npm:@opentelemetry/api` package. You can
 either import directly from `npm:@opentelemetry/api@1`, or you can install the
@@ -381,11 +375,26 @@ span.setStatus({
 ```
 
 Spans can also have
-[events](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api.Span.html#addEvent)
+[events](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api._opentelemetry_api.Span.html#addevent)
 and
-[links](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api.Span.html#addLink)
+[links](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api._opentelemetry_api.Span.html#addlink)
 added to them. Events are points in time that are associated with the span.
 Links are references to other spans.
+
+```ts
+// Add an event to the span
+span.addEvent("button_clicked", {
+  id: "submit-button",
+  action: "submit",
+});
+
+// Add an event with a timestamp
+span.addEvent("process_completed", { status: "success" }, Date.now());
+```
+
+Events can include optional attributes similar to spans. They are useful for
+marking significant moments within the span's lifetime without creating separate
+spans.
 
 Spans can also be created manually with `tracer.startSpan` which returns a span
 object. This method does not set the created span as the active span, so it will
@@ -413,7 +422,7 @@ also take a `context` object from the
 [context propagation API](#context-propagation).
 
 Learn more about the full tracing API in the
-[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api.TraceAPI.html).
+[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api._opentelemetry_api.TraceAPI.html).
 
 ### Metrics
 
@@ -511,7 +520,17 @@ There are three types of observable instruments:
   time, such as the current temperature.
 
 Learn more about the full metrics API in the
-[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api.MetricsAPI.html).
+[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api._opentelemetry_api.MetricsAPI.html).
+
+### Practical Examples
+
+For practical examples of implementing OpenTelemetry in Deno applications, see
+our tutorials:
+
+- [Basic OpenTelemetry Tutorial](/examples/basic_opentelemetry_tutorial/) - A
+  simple HTTP server with custom metrics and traces
+- [Distributed Tracing Tutorial](/examples/otel_span_propagation_tutorial/) -
+  Advanced techniques for tracing across service boundaries
 
 ## Context propagation
 
@@ -594,7 +613,7 @@ span.end();
 ```
 
 Learn more about the full context API in the
-[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api.ContextAPI.html).
+[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api._opentelemetry_api.ContextAPI.html).
 
 ## Configuration
 
@@ -632,6 +651,13 @@ variable, the following attributes are automatically set:
 - `telemetry.sdk.version`: The version of the Deno runtime, plus the version of
   the `opentelemetry` Rust crate being used by Deno, separated by a `-`.
 
+Propagators can be configured using the `OTEL_PROPAGATORS` environment variable.
+The default value is `tracecontext,baggage`. Multiple propagators can be
+specified by separating them with commas. Currently supported propagators are:
+
+- `tracecontext`: W3C Trace Context propagation format
+- `baggage`: W3C Baggage propagation format
+
 Metric collection frequency can be configured using the
 `OTEL_METRIC_EXPORT_INTERVAL` environment variable. The default value is `60000`
 milliseconds (60 seconds).
@@ -644,16 +670,65 @@ Log exporter batching can be configured using the batch log record processor
 environment variables described in the
 [OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#batch-log-record-processor).
 
+## Propagators
+
+Deno supports context propagators which enable automatic propagation of trace
+context across process boundaries for distributed tracing, allowing you to track
+requests as they flow through different services.
+
+Propagators are responsible for encoding and decoding context information (like
+trace and span IDs) into and from carrier formats (like HTTP headers). This
+enables the trace context to be maintained across service boundaries.
+
+By default, Deno supports the following propagators:
+
+- `tracecontext`: The W3C Trace Context propagation format, which is the
+  standard way to propagate trace context via HTTP headers.
+- `baggage`: The W3C Baggage propagation format, which allows passing key-value
+  pairs across service boundaries.
+
+:::note
+
+These propagators automatically work with Deno's `fetch` API and `Deno.serve`,
+enabling end-to-end tracing across HTTP requests without manual context
+management.
+
+:::
+
+You can access the propagation API through the `@opentelemetry/api` package:
+
+```ts
+import { context, propagation, trace } from "npm:@opentelemetry/api@1";
+
+// Extract context from incoming headers
+function extractContextFromHeaders(headers: Headers) {
+  const ctx = context.active();
+  return propagation.extract(ctx, headers);
+}
+
+// Inject context into outgoing headers
+function injectContextIntoHeaders(headers: Headers) {
+  const ctx = context.active();
+  propagation.inject(ctx, headers);
+  return headers;
+}
+
+// Example: Making a fetch request that propagates trace context
+async function tracedFetch(url: string) {
+  const headers = new Headers();
+  injectContextIntoHeaders(headers);
+
+  return await fetch(url, { headers });
+}
+```
+
 ## Limitations
 
 While the OpenTelemetry integration for Deno is in development, there are some
 limitations to be aware of:
 
 - Traces are always sampled (i.e. `OTEL_TRACE_SAMPLER=parentbased_always_on`).
-- Traces do not support events.
 - Traces only support links with no attributes.
-- Automatic propagation of the trace context in `Deno.serve` and `fetch` is not
-  supported.
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
   are not supported.

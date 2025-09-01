@@ -1,5 +1,6 @@
 ---
 title: "WebAssembly"
+description: "A guide to using WebAssembly (Wasm) in Deno. Learn about module imports, type checking, streaming APIs, optimization techniques, and how to work with various programming languages that compile to Wasm."
 oldUrl:
   - /runtime/manual/getting_started/webassembly/
   - /runtime/manual/runtime/webassembly/
@@ -281,6 +282,18 @@ the [web_sys](https://rustwasm.github.io/wasm-bindgen/web-sys/index.html) and
 Rust crates useful. `web_sys` contains bindings to most of the Web APIs that are
 available in Deno, while `js_sys` provides bindings to JavaScript's standard,
 built-in objects.
+
+## Using wasmbuild for Rust WebAssembly in Deno
+
+[wasmbuild](https://github.com/denoland/wasmbuild) is an official Deno tool that
+simplifies working with Rust and WebAssembly in Deno projects. It automates the
+process of compiling Rust code to WebAssembly and generating TypeScript
+bindings, making it easy to call Rust functions from JavaScript.
+
+wasmbuild generates TypeScript definitions for your Rust functions, providing
+full type checking. The generated JavaScript can be used with bundlers like
+esbuild. Generated files can be committed directly to source control for easy
+deployment.
 
 ## Optimization
 

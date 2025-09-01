@@ -1,5 +1,6 @@
 ---
 title: "Chat application with WebSockets"
+description: "A tutorial on building a real-time chat app using Deno WebSockets. Learn how to create a WebSocket server with Oak, handle multiple client connections, manage state, and build an interactive chat interface with HTML, CSS, and JavaScript."
 url: /examples/chat_app_tutorial/
 oldUrl:
   - /runtime/manual/examples/chat_app/
@@ -190,7 +191,7 @@ file and add the following code:
       <h2>Users online</h2>
       <ul id="users"></ul>
     </aside>
-    <main>
+    <main id="content">
       <div id="conversation"></div>
       <form id="form">
         <input

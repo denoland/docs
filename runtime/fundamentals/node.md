@@ -1,27 +1,36 @@
 ---
-title: "Node and npm support"
+title: "Node and npm Compatibility"
+description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
-- /runtime/reference/node/
-- /runtime/manual/npm_nodejs/std_node/
-- /runtime/manual/node/
-- /runtime/manual/npm_nodejs/cdns/
-- /runtime/manual/using_deno_with_other_technologies/node/cdns/
-- /runtime/manual/node/node_specifiers
-- /runtime/manual/node/package_json
-- /runtime/manual/node/migrate/
-- /runtime/manual/references/cheatsheet/
-- /runtime/manual/node/cheatsheet/
-- /runtime/manual/node/faqs
-- /runtime/manual/node/npm_specifiers
-- /runtime/manual/node/private_registries
+  - /runtime/reference/node/
+  - /runtime/manual/npm_nodejs/std_node/
+  - /runtime/manual/node/
+  - /runtime/manual/npm_nodejs/cdns/
+  - /runtime/manual/using_deno_with_other_technologies/node/cdns/
+  - /runtime/manual/node/node_specifiers
+  - /runtime/manual/node/package_json
+  - /runtime/manual/node/migrate/
+  - /runtime/manual/references/cheatsheet/
+  - /runtime/manual/node/cheatsheet/
+  - /runtime/manual/node/faqs
+  - /runtime/manual/node/npm_specifiers
+  - /runtime/manual/node/private_registries
 ---
 
-Modern Node.js projects will run in Deno with little to no reworking required.
-However, there are some key differences between the two runtimes that you can
-take advantage of to make your code simpler and smaller when migrating your
-Node.js projects to Deno.
+- **Deno is Node-compatible**. Most Node projects will run in Deno with little
+  or no change!
+- **Deno supports npm packages**. Just use the `npm:` specifier in the import,
+  and Deno takes care of the rest.
 
-<a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
+For example, here's how you'd import Hono from npm in a Deno project:
+
+```ts
+import { Hono } from "npm:hono";
+```
+
+That's all you really need to know to get started! However, there are some key
+differences between the two runtimes that you can take advantage of to make your
+code simpler and smaller when migrating your Node.js projects to Deno.
 
 ## Using Node's built-in modules
 
@@ -58,6 +67,8 @@ error: Relative import path "os" not prefixed with / or ./ or ../
 The same hints and additional quick-fixes are provided by the Deno LSP in your
 editor.
 
+<a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
+
 ## Using npm packages
 
 Deno has native support for importing npm packages by using `npm:` specifiers.
@@ -84,6 +95,17 @@ npm specifiers have the following format:
 
 ```console
 npm:<package-name>[@<version-requirement>][/<sub-path>]
+```
+
+This also allows functionality that may be familar from the `npx` command.
+
+```console
+# npx allows remote execution of a package from npm or a URL
+$ npx create-next-app@latest
+
+# deno run allows remote execution of a package from various locations,
+# and can scoped to npm via the `npm:` specifier.
+$ deno run -A npm:create-next-app@latest
 ```
 
 For examples with popular libraries, please refer to the
@@ -287,6 +309,29 @@ module.exports = {
           or add package.json next to the file with "type": "commonjs" option,
           or pass --unstable-detect-cjs flag to detect CommonJS when loading.
     docs: https://docs.deno.com/go/commonjs
+```
+
+## Conditional exports
+
+Package exports can be
+[conditioned](https://nodejs.org/api/packages.html#conditional-exports) on the
+resolution mode. The conditions satisfied by an import from a Deno ESM module
+are as follows:
+
+```json
+["deno", "node", "import", "default"]
+```
+
+This means that the first condition listed in a package export whose key equals
+any of these strings will be matched. You can expand this list using the
+`--unstable-node-conditions` CLI flag:
+
+```shell
+deno run --unstable-node-conditions development,react-server main.ts
+```
+
+```json
+["development", "react-server", "deno", "node", "import", "default"]
 ```
 
 ## Importing types
@@ -529,6 +574,18 @@ import { Buffer } from "node:buffer";
 const buf = new Buffer(5, "0");
 ```
 
+For TypeScript users needing Node.js-specific types like `BufferEncoding`, these
+are available through the `NodeJS` namespace when using `@types/node`:
+
+```ts title="buffer-types.ts"
+/// <reference types="npm:@types/node" />
+
+// Now you can use NodeJS namespace types
+function writeToBuffer(data: string, encoding: NodeJS.BufferEncoding): Buffer {
+  return Buffer.from(data, encoding);
+}
+```
+
 Prefer using
 [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)
 or other
@@ -669,7 +726,7 @@ that might look like:
 ```sh
 error[no-constant-condition]: Use of a constant expressions as conditions is not allowed.
  --> /my-project/bar.ts:1:5
-  | 
+  |
 1 | if (true) {
   |     ^^^^
   = hint: Remove the constant expression

@@ -18,10 +18,7 @@ export default function LandingPage() {
 
   return (
     <>
-      <main
-        id="content"
-        className="flex flex-col px-8 xl:px-0 pt-6 md:pt-12 mt-4 md:items-center md:justify-center max-w-[1200px] mx-auto mb-12"
-      >
+      <main id="content">
         <div className="flex flex-col md:flex-row w-full mb-8 max-w-screen-xl justify-between">
           <div className="max-w-prose mb-8">
             <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl mb-3">
@@ -39,7 +36,7 @@ export default function LandingPage() {
             src="/examples.png"
           />
         </div>
-        <div className="flex flex-col gap-4 w-full mb-4 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded md:flex-wrap md:justify-start md:items-center md:flex-row">
+        <div className="flex flex-col gap-4 w-full mb-8 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded md:flex-wrap md:justify-start md:items-center md:flex-row">
           <h2 className="font-semibold">
             Filter by type:
           </h2>
@@ -105,7 +102,7 @@ export default function LandingPage() {
           />
         </div>
       </main>
-      <aside class="px-8 xl:px-0 max-w-[1200px] mx-auto mb-24 space-y-4 border-t pt-8">
+      <aside class="px-8 xl:px-0 max-w-7xl mb-24 space-y-4 border-t pt-8">
         <h2 class="text-2xl md:text-3xl font-bold">
           We welcome contributions!
         </h2>
@@ -114,7 +111,7 @@ export default function LandingPage() {
           own? Check out our{" "}
           <a
             href="https://github.com/denoland/deno-docs?tab=readme-ov-file#examples"
-            class="text-primary hover:underline focus:underline"
+            class="text-primary underline"
           >
             GitHub repository
           </a>.
@@ -122,7 +119,7 @@ export default function LandingPage() {
         <p>
           <a
             href="/runtime/contributing/examples/"
-            class="text-primary hover:underline focus:underline text-center mt-4 font-bold"
+            class="text-primary underline mt-4 font-bold"
           >
             Commit an example and we'll send you stickers!
           </a>

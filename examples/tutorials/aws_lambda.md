@@ -1,8 +1,9 @@
 ---
 title: "How to Deploy Deno to AWS Lambda"
+description: "Step-by-step tutorial on deploying Deno applications to AWS Lambda. Learn about Docker containerization, ECR repositories, function configuration, and how to set up serverless Deno apps on AWS."
 url: /examples/aws_lambda_tutorial/
 oldUrl:
-- /runtime/tutorials/aws_lambda/
+  - /runtime/tutorials/aws_lambda/
 ---
 
 AWS Lambda is a serverless computing service provided by Amazon Web Services. It
@@ -32,7 +33,7 @@ Create a new file named `Dockerfile` with the following content:
 
 ```Dockerfile
 # Set up the base image
-FROM public.ecr.aws/awsguru/aws-lambda-adapter:0.8.4 AS aws-lambda-adapter
+FROM public.ecr.aws/awsguru/aws-lambda-adapter:0.9.0 AS aws-lambda-adapter
 FROM denoland/deno:bin-1.45.2 AS deno_bin
 FROM debian:bookworm-20230703-slim AS deno_runtime
 COPY --from=aws-lambda-adapter /lambda-adapter /opt/extensions/lambda-adapter

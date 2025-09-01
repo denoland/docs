@@ -44,7 +44,18 @@ export default function LintRulesIndex(
           <a href="/runtime/reference/cli/lint/">
             <code>deno lint</code>
           </a>{" "}
-          command.
+          command. You can enable sets of rules in <code>deno.json(c)</code>
+          {" "}
+          by adding their tags (e.g. <code>recommended</code>,{" "}
+          <code>react</code>) to the{" "}
+          <a href="/runtime/fundamentals/configuration/#linting">
+            <code>lint.rules.tags</code>
+          </a>{" "}
+          array.
+        </p>
+        <p>
+          If no tag is provided, then the <code>recommended</code>{" "}
+          set of rules will be enabled by default.
         </p>
         <input
           type="text"
@@ -70,10 +81,7 @@ export default function LintRulesIndex(
           duration-150 ease-in-out"
         />
 
-        <ul
-          class="flex flex-wrap gap-2 mb-8 !list-none !pl-0"
-          aria-labelledby="lint-rules-key"
-        >
+        <ul class="flex flex-wrap gap-2 mb-8 !list-none !pl-0">
           {TYPES.map((iconType) => (
             <li class="p-1.5 px-3 rounded-md bg-background-secondary/30 border border-background-secondary w-max max-w-full !m-0 whitespace-pre-wrap">
               {getLintIcon(iconType)}&ensp;{getReadableIconName(iconType)}
@@ -85,7 +93,7 @@ export default function LintRulesIndex(
       <ul class="flex flex-col gap-4 !list-none !pl-0">
         {data.lintRulePages.map((lintRule, idx: number) => (
           <li
-            class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4 lint-rule-box dark:border-gray-700"
+            class="border-t md:border md:rounded-md pt-8 pb-4 md:p-4 lint-rule-box dark:border-gray-700 !mt-0"
             id={lintRule.title}
           >
             <div class="flex flex-row justify-start items-center gap-4 mb-2">

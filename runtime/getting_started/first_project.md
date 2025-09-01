@@ -1,5 +1,6 @@
 ---
 title: Making a Deno project
+description: "Step-by-step guide to creating your first Deno project. Learn how to initialize a project, understand the basic file structure, run TypeScript code, and execute tests using Deno's built-in test runner."
 oldUrl: /runtime/manual/getting_started/first_steps/
 ---
 

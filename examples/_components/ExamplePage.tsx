@@ -1,6 +1,6 @@
+import { ExampleFromFileSystem } from "../types.ts";
 import { CopyButton } from "./CopyButton.tsx";
 import SnippetComponent from "./SnippetComponent.tsx";
-import { ExampleFromFileSystem } from "../types.ts";
 
 type Props = { example: ExampleFromFileSystem };
 
@@ -18,17 +18,19 @@ export default function ExamplePage({ example }: Props) {
 
   return (
     <div data-content="example">
-      <div class="flex flex-col gap-4 md:flex-row justify-between items-start md:items-center relative">
-        <a
-          href={url}
-          className="blocklink absolute top-[-4rem] right-0"
-        >
-          Edit on Github
-        </a>
+      <div class="relative">
+        <div class="absolute top-[-4rem] right-0">
+          <a
+            href={url}
+            className="blocklink "
+          >
+            Edit on Github
+          </a>
+        </div>
         <div class="flex flex-col gap-2">
           {example.parsed.description && (
             <p
-              className="max-w-prose"
+              className="max-w-full"
               dangerouslySetInnerHTML={{
                 __html: example.parsed.description,
               }}
@@ -38,26 +40,30 @@ export default function ExamplePage({ example }: Props) {
       </div>
       <div class="relative block mt-8">
         <CopyButton text={contentNoCommentary} />
+
+        {example.parsed.files.map((file) => (
+          <div
+            class="flex flex-col gap-4 md:gap-0 example-content"
+            key={file.name}
+          >
+            {file.snippets.map((snippet, i) => (
+              <SnippetComponent
+                key={i}
+                onlyOneSnippet={file.snippets.length === 1}
+                firstOfFile={i === 0 || !file.snippets[i - 1].code}
+                lastOfFile={i === file.snippets.length - 1 ||
+                  !file.snippets[i + 1].code}
+                filename={file.name}
+                snippet={snippet}
+              />
+            ))}
+          </div>
+        ))}
       </div>
-      {example.parsed.files.map((file) => (
-        <div class="flex flex-col gap-4 md:gap-0" key={file.name}>
-          {file.snippets.map((snippet, i) => (
-            <SnippetComponent
-              key={i}
-              onlyOneSnippet={file.snippets.length === 1}
-              firstOfFile={i === 0 || !file.snippets[i - 1].code}
-              lastOfFile={i === file.snippets.length - 1 ||
-                !file.snippets[i + 1].code}
-              filename={file.name}
-              snippet={snippet}
-            />
-          ))}
-        </div>
-      ))}
       <div>
         {example.parsed.run && (
-          <div class="mt-8">
-            <p>
+          <div class="mt-8 -mx-4 sm:mx-0">
+            <p class="mx-4 sm:mx-0">
               Run{" "}
               <a
                 href={url}
@@ -74,12 +80,12 @@ export default function ExamplePage({ example }: Props) {
               class="markdown-body"
             >
               <pre className="highlight">
-                        <code>
-                        {example.parsed.run.startsWith("deno")
-                            ? example.parsed.run.replace("<url>", url)
-                            : "deno run " +
-                            example.parsed.run.replace("<url>", rawUrl)}
-                        </code>
+                <code>
+                {example.parsed.run.startsWith("deno")
+                    ? example.parsed.run.replace("<url>", url)
+                    : "deno run " +
+                    example.parsed.run.replace("<url>", rawUrl)}
+                </code>
               </pre>
             </div>
           </div>
@@ -87,23 +93,20 @@ export default function ExamplePage({ example }: Props) {
         {example.parsed.playground && (
           <div class="col-span-3 mt-8">
             <p class="text-foreground-secondary">
-              Try this example in a Deno Deploy playground:
-            </p>
-            <p class="mt-3">
+              Try this example in a{" "}
               <a
-                class="py-2 px-4 bg-black inline-block text-white text-base rounded-md opacity-90 hover:opacity-100"
                 href={example.parsed.playground}
                 target="_blank"
                 rel="noreferrer"
               >
-                Deploy
+                Deno Deploy playground
               </a>
             </p>
           </div>
         )}
         {example.parsed.additionalResources.length > 0 && (
-          <div class="col-span-3 pt-6 border-t-1 border-gray-200">
-            <h2 class="font-semibold">Additional resources</h2>
+          <div class="col-span-3 pt-6 mt-8 border-t-1 border-gray-200">
+            <h2 class="mt-0">Additional resources</h2>
             <ul class="list-none mt-1">
               {example.parsed.additionalResources.map(([link, title]) => (
                 <li

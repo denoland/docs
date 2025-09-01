@@ -31,6 +31,40 @@ deno task prod
 Which will start a Deno server on [localhost:8000](http://localhost:8000) used
 in production, which handles redirects.
 
+the above commands will defauilt to performing as complete build of the site
+including all of the more expensive operations. You can also perform a lighter
+build by running:
+
+```console
+deno task build:light
+```
+
+This will build the site without generating the Open Graph images and other more
+time-consuming operations which might be desirable to skip during local
+developement work.
+
+## Developing styles and components
+
+We are increasingly making use of global components to improve consistency and
+reduce duplication. A styleguide has been created to preview and develop these
+components and is generated during the build process.
+
+You can browse to it in the site at `/styleguide/`
+
+To avoid longer build times of the entire site and all of its content while
+developing UI elements and components, a styleguide-only build is avaiable which
+performs the initial global configureation for the site, but then only generates
+and watches for changes in the `/styleguide` folder of the repo.
+
+To work on just the components and UI elements and review them within
+styleguide, run:
+
+```console
+deno task serve:style
+```
+
+Then browse to the styleguide section of the site at `/styleguide/`
+
 ## Editing content
 
 The actual content of the docs site is found mostly in these folders:
@@ -195,6 +229,69 @@ this command:
 ```bash
 git shortlog -s -n
 ```
+
+## Orama Search Configuration
+
+1. **Sign up for Orama Cloud**: Go to
+   [https://cloud.oramasearch.com/](https://cloud.oramasearch.com/) and create
+   an account.
+
+2. **Create a new index**:
+   - In the Orama dashboard, create a new index
+   - Set the data source to docs.deno.com or upload the documentation content
+     directly
+
+3. **Get your credentials**:
+   - In your Orama dashboard, you'll find your **Endpoint URL** and **Public API
+     Key**
+   - These are safe to include in frontend applications
+
+4. **Configure the search**:
+   - Open `search.client.ts`
+   - Replace `YOUR_ORAMA_ENDPOINT` with your actual endpoint URL
+   - Replace `YOUR_ORAMA_API_KEY` with your actual public API key
+
+### Data Sources
+
+For the Deno docs, we have several options:
+
+#### Option 1: Web Crawler (Recommended)
+
+- Use Orama's built-in web crawler to index your documentation site
+- Go to Data Sources → Web Crawler in your Orama dashboard
+- Add your site URL (e.g., `https://docs.deno.com`)
+- Configure crawling rules if needed
+
+#### Option 2: Static Files
+
+- Export your documentation content as JSON
+- Upload it directly to Orama
+- This gives you more control over what gets indexed
+
+#### Option 3: API Integration
+
+- Use Orama's REST API to programmatically add/update content
+- Useful to integrate with our build process
+
+### Configuration Example
+
+In `search.client.ts`, update the ORAMA_CONFIG object:
+
+```typescript
+const ORAMA_CONFIG = {
+  endpoint: "https://cloud.orama.com/v1/indexes/your-index-id",
+  apiKey: "your-public-api-key-here",
+};
+```
+
+### Customization
+
+We can customize the search experience by modifying:
+
+- **Search modes**: Change between "fulltext", "vector", or "hybrid" search
+- **Result limit**: Adjust how many results to show
+- **UI styling**: Modify the CSS classes in the search components
+- **Result formatting**: Change how search results are displayed
 
 ## Deployment
 

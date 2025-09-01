@@ -6,12 +6,9 @@ export default function Feedback({ file }: { file: string | undefined }) {
     return (
       <section
         id="feedback-section"
-        class="flex flex-col mt-12 gap-2 p-4 border border-blue-100
-      dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary
-      rounded mx-auto"
+        class="flex flex-col mt-12 gap-2 p-4 sm:p-8 bg-blue-splash dark:bg-deploy-900 rounded-md mx-auto"
       >
-        <h2 class="text-xl border-b border-blue-100 dark:border-background-tertiary
-        mb-2 pb-2 font-normal">
+        <h2 class="text-xl mb-2 pb-2 font-normal">
           Did you find what you needed?
         </h2>
         <div class="flex flex-col sm:flex-row sm:flex-wrap gap-8">
@@ -19,7 +16,6 @@ export default function Feedback({ file }: { file: string | undefined }) {
             <form aria-live="polite" id="feedback-form">
               <div
                 id="feedback-form__content"
-                aria-labelledby="feedback-title"
                 class="grid grid-cols-1 transition-all duration-300 grid-rows-[max-content_0fr] w-full items-start gap-2 overflow-hidden"
               >
                 <div className="flex flex-wrap gap-2 items-center">
@@ -102,39 +98,41 @@ export default function Feedback({ file }: { file: string | undefined }) {
                   id="feedback-more"
                   class="hidden w-full overflow-hidden"
                 >
-                  <p class="font-semibold !mt-2 !mb-4">
-                    Thank you! Feedback received.{" "}
-                    <span aria-hidden="true">✅</span>
+                  <p class="font-semibold !mt-2">
+                    What can we do to improve this page?
                   </p>
                   <div class="space-y-1">
-                    <label for="feedback-comment">
-                      Any additional comments? (<i>optional</i>)
-                    </label>
                     <textarea
-                      class="block w-full p-2 border border-foreground-tertiary dark:bg-background-primary rounded"
+                      class="block w-full p-2 border border-foreground-tertiary bg-white dark:bg-background-primary rounded"
                       name="feedback-comment"
                       id="feedback-comment"
+                      placeholder="Your feedback will be posted as an issue in the denoland/docs GitHub repo"
                     >
                     </textarea>
                   </div>
                   <div class="space-y-1">
                     <label for="feedback-contact">
-                      Email address (<i>optional</i>)
+                      GitHub username (<i>optional</i>)
                     </label>
                     <input
-                      type="email"
-                      class="block w-full p-2 border border-foreground-tertiary dark:bg-background-primary rounded"
+                      type="text"
+                      class="block w-full p-2 border border-foreground-tertiary bg-white dark:bg-background-primary rounded"
                       name="feedback-contact"
                       id="feedback-contact"
                       aria-invalid="false"
+                      placeholder="username"
                       value=""
                     />
+                    <p class="text-xs text-gray-600 dark:text-gray-400 italic mt-1">
+                      If provided, you'll be @mentioned in the created GitHub
+                      issue
+                    </p>
                   </div>
                   <button
                     type="submit"
-                    class="btn bg-green-400 dark:bg-green-600 mt-4"
+                    class="btn  mt-4"
                   >
-                    Send additional feedback
+                    Send us feedback
                   </button>
                 </div>
               </div>

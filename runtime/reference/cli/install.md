@@ -1,12 +1,15 @@
 ---
 title: "`deno install`"
 oldUrl:
- - /runtime/manual/tools/script_installer/
- - /runtime/reference/cli/script_installer/
- - /runtime/manual/tools/script_installer/
- - /runtime/manual/tools/cache/
- - /runtime/reference/cli/cache/
+  - /runtime/manual/tools/script_installer/
+  - /runtime/reference/cli/script_installer/
+  - /runtime/manual/tools/script_installer/
+  - /runtime/manual/tools/cache/
+  - /runtime/reference/cli/cache/
 command: install
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno install"
+description: "Install and cache dependencies for your project"
 ---
 
 ## Examples
@@ -40,8 +43,8 @@ to `deno.json`.
 
 ### deno install --entrypoint [FILES]
 
-Use this command to install all depenedencies that are used in the provided
-files and their dependencies.
+Use this command to install all dependencies that are used in the provided files
+and their dependencies.
 
 This is particularly useful if you use `jsr:`, `npm:`, `http:` or `https:`
 specifiers in your code and want to cache all the dependencies before deploying
@@ -176,6 +179,19 @@ deno install --allow-scripts=npm:sqlite3
 
 _Install all dependencies and allow `npm:sqlite3` package to run its lifecycle
 scripts_.
+
+## --quiet flag
+
+The `--quiet` flag suppresses diagnostic output when installing dependencies.
+When used with `deno install`, it will hide progress indicators, download
+information, and success messages.
+
+```shell
+$ deno install --quiet jsr:@std/http/file-server
+```
+
+This is useful for scripting environments or when you want cleaner output in CI
+pipelines.
 
 ## Uninstall
 
