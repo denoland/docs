@@ -38,7 +38,7 @@ export default function SearchInput() {
         aria-modal="true"
         aria-labelledby="search-title"
       >
-        <div className="mx-auto max-w-2xl transform divide-y divide-gray-200 overflow-hidden rounded-xl bg-background-raw shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+        <div className="mx-auto max-w-2xl transform divide-y divide-gray-200 overflow-hidden rounded-xl bg-background-raw shadow-2xl border border-foreground-primary transition-all">
           {/* Search Header */}
           <div className="relative">
             <input
@@ -78,7 +78,7 @@ export default function SearchInput() {
           {/* Search Results */}
           <div
             id="orama-search-results"
-            className="max-h-80 scroll-py-2 overflow-y-auto py-2 text-sm"
+            className="max-h-80 scroll-py-2 overflow-y-auto text-sm"
           >
             <div
               id="orama-search-results-content"
@@ -133,7 +133,7 @@ export default function SearchInput() {
         .ai-mode #orama-search-input-modal {
           border-left: 3px solid var(--color-primary);
         }
-        
+
         .ai-mode #search-mode-icon::before {
           content: "💡";
         }
@@ -142,12 +142,12 @@ export default function SearchInput() {
         #orama-search-modal {
           transition: opacity 150ms ease-out, transform 150ms ease-out;
         }
-        
+
         #orama-search-modal.show {
           opacity: 1;
           transform: scale(1);
         }
-        
+
         #orama-search-modal.hide {
           opacity: 0;
           transform: scale(0.95);

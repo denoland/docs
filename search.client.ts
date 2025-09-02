@@ -521,7 +521,7 @@ class OramaSearch {
         )
       }
             </div>
-            <div class="flex items-center text-xs text-foreground-tertiary mt-1">
+            <div class="flex items-center text-xs text-foreground-secondary mt-1">
               <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
               </svg>
@@ -535,7 +535,7 @@ class OramaSearch {
       }
             </div>
           </div>
-          <div class="ml-3 flex-none text-xs font-semibold text-foreground-tertiary">
+          <div class="ml-3 flex-none text-xs font-semibold text-foreground-secondary">
             ↵
           </div>
         </a>
@@ -574,20 +574,30 @@ class OramaSearch {
     this.showResults();
   }
 
+  renderAiSearchResultsHeading({ error = false }) {
+    return `<div class="p-4 py-2 border-b border-foreground-tertiary bg-background-tertiary">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-semibold text-foreground-primary flex items-center gap-2">
+          ${
+      error
+        ? `<svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>`
+        : `<svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>`
+    }
+            AI Search ${error ? "Error" : "Results"}
+          </h2>
+        </div>
+      </div>`;
+  }
+
   renderAILoading(searchTerm: string) {
     if (!this.searchResults) return;
 
     this.searchResults.innerHTML = `
-      <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
-        <div class="flex items-center justify-between">
-          <h2 class="text-sm font-semibold text-foreground-primary flex items-center gap-2">
-            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-            </svg>
-            AI Search Results
-          </h2>
-        </div>
-      </div>
+      ${this.renderAiSearchResultsHeading({ error: false })}
       <div class="p-6">
         <div class="flex items-center gap-3 mb-4">
           <div class="animate-spin rounded-full h-5 w-5 border-2 border-transparent border-r-primary"></div>
@@ -595,8 +605,8 @@ class OramaSearch {
             Analyzing your query with AI context engineering...
           </div>
         </div>
-        <div class="bg-background-secondary rounded-lg p-4 border-l-4 border-primary">
-          <p class="text-sm text-foreground-secondary mb-2">
+        <div class="p-2 border-l-4 border-primary">
+          <p class="text-sm text-foreground-secondary">
             <strong>Query:</strong> ${this.escapeHtml(searchTerm)}
           </p>
           <p class="text-xs text-foreground-tertiary">
@@ -638,7 +648,7 @@ class OramaSearch {
               { document: source } as Hit<OramaDocument>,
             ),
           )
-        }" 
+        }"
                class="block p-3 rounded-lg bg-background-secondary hover:bg-foreground-quaternary transition-colors border border-foreground-quaternary group">
               <div class="text-sm font-medium text-foreground-primary group-hover:text-primary transition-colors">
                 ${this.escapeHtml(source.title || "Untitled")}
@@ -655,20 +665,13 @@ class OramaSearch {
       : "";
 
     this.searchResults.innerHTML = `
-      <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
-        <div class="flex items-center justify-between">
-          <h2 class="text-sm font-semibold text-foreground-primary flex items-center gap-2">
-            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-            </svg>
-            AI Search Results
-          </h2>
-        </div>
-      </div>
+      ${this.renderAiSearchResultsHeading({ error: false })}
       <div class="p-6">
-        <div class="bg-background-secondary rounded-lg p-4 border-l-4 border-primary mb-4">
-          <p class="text-sm text-foreground-secondary mb-2">
-            <strong>Your Question:</strong> ${this.escapeHtml(searchTerm)}
+        <div class="p-2 border-l-4  border-primary mb-4">
+          <p class="text-sm">
+            <strong>Your Question:</strong> <i>${
+      this.escapeHtml(searchTerm)
+    }</i>
           </p>
         </div>
         <div class="prose prose-sm max-w-none text-foreground-primary">
@@ -678,7 +681,7 @@ class OramaSearch {
         </div>
         ${sourcesHtml}
         <div class="mt-4 pt-4 border-t border-foreground-quaternary">
-          <button onclick="oramaSearch.toggleSearchMode()" class="text-xs text-primary hover:text-primary-dark transition-colors">
+          <button onclick="oramaSearch.toggleSearchMode()" class="text-xs text-primary hover:text-primary-dark transition-colors cursor-pointer underline">
             ← Switch to regular search
           </button>
         </div>
@@ -698,16 +701,7 @@ class OramaSearch {
     if (!this.searchResults) return;
 
     this.searchResults.innerHTML = `
-      <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
-        <div class="flex items-center justify-between">
-          <h2 class="text-sm font-semibold text-foreground-primary flex items-center gap-2">
-            <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            AI Search Error
-          </h2>
-        </div>
-      </div>
+      ${this.renderAiSearchResultsHeading({ error: true })}
       <div class="p-6">
         <div class="bg-red-50 dark:bg-red-900/20 rounded-lg p-4 border-l-4 border-red-500 mb-4">
           <p class="text-sm text-red-700 dark:text-red-300">

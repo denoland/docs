@@ -1615,6 +1615,11 @@
       width: 1px;
     }
   }
+
+  #orama-search-results:has(#orama-search-results-content:empty),
+  #orama-search-results:has(#orama-search-results-content:empty) + div {
+    display: none !important;
+  }
 }
 
 @layer utilities {
