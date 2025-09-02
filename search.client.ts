@@ -32,7 +32,6 @@ class OramaSearch {
   private searchInput: HTMLInputElement | null = null;
   private searchInputModal: HTMLInputElement | null = null;
   private searchModal: HTMLElement | null = null;
-  private searchBackdrop: HTMLElement | null = null;
   private searchResults: HTMLElement | null = null;
   private searchLoading: HTMLElement | null = null;
   private ariaLiveRegion: HTMLElement | null = null;
@@ -67,7 +66,6 @@ class OramaSearch {
       "orama-search-input-modal",
     ) as HTMLInputElement;
     this.searchModal = document.getElementById("orama-search-modal");
-    this.searchBackdrop = document.getElementById("search-backdrop");
     this.searchResults = document.getElementById(
       "orama-search-results-content",
     );
@@ -98,11 +96,6 @@ class OramaSearch {
       this.handleKeyDown.bind(this),
     );
 
-    // Add backdrop click handler to close modal
-    this.searchBackdrop?.addEventListener("click", () => {
-      this.hideResults();
-    });
-
     // Add click handler to mode toggle button
     const modeToggle = document.getElementById("search-mode-toggle");
     modeToggle?.addEventListener("click", () => {
@@ -115,25 +108,20 @@ class OramaSearch {
 
   openSearchModal() {
     this.showResults();
-    // Focus the modal input
-    setTimeout(() => {
-      this.searchInputModal?.focus();
-    }, 100);
   }
 
   finishElementSetup() {
     // Set up global keyboard handlers
     document.addEventListener("keydown", (event) => {
       if ((event.metaKey || event.ctrlKey) && event.key === "k") {
-        event.preventDefault();
-        this.openSearchModal();
-      }
-      // Add shortcut for AI mode toggle (Ctrl+Shift+K or Cmd+Shift+K)
-      if (
-        (event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "K"
-      ) {
-        event.preventDefault();
-        this.toggleSearchMode();
+        if (event.shiftKey) {
+          console.log("TRIGGEREDDD");
+          event.preventDefault();
+          this.toggleSearchMode();
+        } else {
+          event.preventDefault();
+          this.openSearchModal();
+        }
       }
     });
 
@@ -766,8 +754,7 @@ class OramaSearch {
 
   updateModalSearchMode() {
     const modal = document.getElementById("orama-search-modal");
-    const modeIcon = document.getElementById("search-mode-icon");
-    const modeText = document.getElementById("search-mode-text");
+    const indicator = document.getElementById("search-mode-toggle__indicator");
     const toggleButton = document.getElementById("search-mode-toggle");
 
     if (modal) {
@@ -778,14 +765,11 @@ class OramaSearch {
       }
     }
 
-    if (modeIcon && modeText) {
-      if (this.isAiMode) {
-        modeIcon.textContent = "💡";
-        modeText.textContent = "AI On";
-      } else {
-        modeIcon.textContent = "🚫";
-        modeText.textContent = "AI Off";
-      }
+    if (toggleButton) {
+      toggleButton.setAttribute(
+        "aria-pressed",
+        this.isAiMode ? "true" : "false",
+      );
     }
 
     if (toggleButton) {
@@ -818,11 +802,12 @@ class OramaSearch {
   }
 
   showResults() {
-    const modal = document.getElementById("orama-search-modal");
-    const backdrop = document.getElementById("search-backdrop");
-    if (modal && backdrop) {
+    const modal = document.getElementById(
+      "orama-search-modal",
+    ) as HTMLDialogElement;
+    if (modal) {
       modal.classList.remove("hidden");
-      backdrop.classList.remove("hidden");
+      modal.showModal();
       this.isModalOpen = true;
       // Prevent body scrolling when modal is open
       document.body.style.overflow = "hidden";
@@ -830,11 +815,11 @@ class OramaSearch {
   }
 
   hideResults() {
-    const modal = document.getElementById("orama-search-modal");
-    const backdrop = document.getElementById("search-backdrop");
-    if (modal && backdrop) {
-      modal.classList.add("hidden");
-      backdrop.classList.add("hidden");
+    const modal = document.getElementById(
+      "orama-search-modal",
+    ) as HTMLDialogElement;
+    if (modal) {
+      modal.close();
       this.isModalOpen = false;
       this.selectedIndex = -1; // Reset selection when hiding
 

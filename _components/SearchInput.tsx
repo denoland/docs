@@ -8,9 +8,9 @@ export default function SearchInput() {
             type="search"
             placeholder="Search documentation..."
             id="orama-search-input"
-            className="w-full min-w-24 rounded-lg placeholder:text-sm text-base leading-normal p-1 pl-8 pr-16 border transition-all duration-150
+            className="w-full min-w-24 rounded-lg placeholder:text-sm text-base leading-normal p-1 pl-8 pr-16 border transition-colors duration-200
             text-foreground-primary border-foreground-secondary hover:bg-background-secondary focus:bg-background-secondary focus:outline-offset-1
-            ai-mode:border-primary ai-mode:bg-primary/5 cursor-pointer"
+            cursor-pointer"
             style="background: url(/img/search.svg) no-repeat 0.5em 50%; background-size: 1.25em; background-color: var(--color-background-raw);"
             readOnly
           />
@@ -23,28 +23,19 @@ export default function SearchInput() {
         </div>
       </div>
 
-      {/* Modal Backdrop */}
-      <div
-        id="search-backdrop"
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden"
-        aria-hidden="true"
-      />
-
       {/* Search Modal */}
-      <div
+      <dialog
         id="orama-search-modal"
-        className="fixed inset-0 z-50 hidden overflow-y-auto p-4 sm:p-6 md:p-20"
+        className="w-full h-full bg-black/50 backdrop-blur-sm fixed inset-0 max-w-none max-h-none z-50 overflow-y-auto p-4 sm:p-6 md:p-20"
         role="dialog"
-        aria-modal="true"
-        aria-labelledby="search-title"
       >
-        <div className="mx-auto max-w-2xl transform divide-y divide-gray-200 overflow-hidden rounded-xl bg-background-raw shadow-2xl border border-foreground-primary transition-all">
+        <div className="mx-auto max-w-2xl w-full transform divide-y divide-gray-200 overflow-hidden rounded-xl bg-background-raw shadow-2xl border border-foreground-primary transition-all">
           {/* Search Header */}
-          <div className="relative">
+          <div className="relative flex items-center justify-between px-2">
             <input
               type="search"
               id="orama-search-input-modal"
-              className="h-12 w-full border-0 bg-transparent pl-10 pr-20 text-foreground-primary placeholder:text-foreground-secondary focus:ring-0 text-base"
+              className="h-12 w-full border-0 bg-transparent text-foreground-primary placeholder:text-foreground-secondary focus:ring-0 text-base focus-visible:outline-none"
               placeholder="Search documentation..."
               autoFocus
               autoComplete="off"
@@ -54,22 +45,26 @@ export default function SearchInput() {
             />
 
             {/* Mode Toggle */}
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+            <div className="inset-y-0 right-0 flex items-center shrink-0">
               <button
                 type="button"
                 id="search-mode-toggle"
-                className="flex items-center space-x-1 px-2 py-1 text-xs font-medium text-foreground-secondary hover:text-foreground-primary transition-colors"
+                className="flex items-center space-x-1 px-2 py-1 text-xs font-medium text-foreground-secondary hover:text-foreground-primary transition-colors cursor-pointer"
                 title="Toggle AI search mode (Ctrl+Shift+K)"
+                aria-pressed="false"
               >
-                <span id="search-mode-icon">🔍</span>
-                <span id="search-mode-text">AI Off</span>
+                <div
+                  id="search-mode-toggle__indicator"
+                  className="flex items-center w-6 h-4 rounded-full bg-foreground-tertiary p-0.5 relative before:aspect-square before:h-3 before:bg-background-raw before:rounded-full before:transition-transform before:duration-200"
+                />
+                <span>Use AI</span>
               </button>
             </div>
 
             {/* Loading Indicator */}
             <div
               id="orama-search-loading"
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 hidden"
+              className="absolute left-2 px-px top-1/2 transform -translate-y-1/2 hidden bg-background-raw"
             >
               <div className="animate-spin rounded-full h-4 w-4 border-2 border-transparent border-r-foreground-primary" />
             </div>
@@ -80,10 +75,7 @@ export default function SearchInput() {
             id="orama-search-results"
             className="max-h-80 scroll-py-2 overflow-y-auto text-sm"
           >
-            <div
-              id="orama-search-results-content"
-              className="space-y-1"
-            >
+            <div id="orama-search-results-content">
               {/* Results will be populated via JavaScript */}
             </div>
           </div>
@@ -126,34 +118,7 @@ export default function SearchInput() {
         >
           {/* Text updated by JavaScript */}
         </div>
-      </div>
-
-      <style jsx>
-        {`
-        .ai-mode #orama-search-input-modal {
-          border-left: 3px solid var(--color-primary);
-        }
-
-        .ai-mode #search-mode-icon::before {
-          content: "💡";
-        }
-
-        /* Smooth transitions */
-        #orama-search-modal {
-          transition: opacity 150ms ease-out, transform 150ms ease-out;
-        }
-
-        #orama-search-modal.show {
-          opacity: 1;
-          transform: scale(1);
-        }
-
-        #orama-search-modal.hide {
-          opacity: 0;
-          transform: scale(0.95);
-        }
-      `}
-      </style>
+      </dialog>
     </>
   );
 }

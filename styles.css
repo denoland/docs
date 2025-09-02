@@ -1620,6 +1620,14 @@
   #orama-search-results:has(#orama-search-results-content:empty) + div {
     display: none !important;
   }
+
+  #search-mode-toggle[aria-pressed="true"] #search-mode-toggle__indicator {
+    background-color: var(--color-primary) !important;
+
+    &::before {
+      transform: translateX(0.5rem);
+    }
+  }
 }
 
 @layer utilities {
