@@ -249,70 +249,36 @@ import denoCategories from "./reference_gen/deno-categories.json" with {
 import webCategories from "./reference_gen/web-categories.json" with {
   type: "json",
 };
+import nodeRewriteMap from "./reference_gen/node-rewrite-map.json" with {
+  type: "json",
+};
 
-const nodeCategories = [
-  "assert",
-  "async_hooks",
-  "buffer",
-  "child_process",
-  "cluster",
-  "console",
-  "crypto",
-  "dgram",
-  "diagnostics_channel",
-  "dns",
-  "domain",
-  "events",
-  "fs",
-  "fs/promises",
-  "http",
-  "http2",
-  "https",
-  "inspector",
-  "module",
-  "net",
-  "os",
-  "path",
-  "perf_hooks",
-  "process",
-  "punycode",
-  "querystring",
-  "readline",
-  "repl",
-  "sea",
-  "sqlite",
-  "stream",
-  "string_decoder",
-  "test",
-  "timers",
-  "tls",
-  "trace_events",
-  "tty",
-  "url",
-  "util",
-  "v8",
-  "vm",
-  "wasi",
-  "worker_threads",
-  "zlib",
-];
+const nodeCategories = Object.keys(nodeRewriteMap);
 
 site.data("apiCategories", {
   deno: {
     title: "Deno APIs",
     categories: Object.keys(denoCategories),
     descriptions: denoCategories,
-    getCategoryHref: (categoryName: string) =>
-      `/api/deno/~/category-${
-        categoryName.toLowerCase().replace(/\s+/g, "-")
-      }/`,
+    getCategoryHref: (categoryName: string) => {
+      // Special case for I/O -> io
+      if (categoryName === "I/O") {
+        return `/api/deno/io`;
+      }
+      return `/api/deno/${categoryName.toLowerCase().replace(/\s+/g, "-")}`;
+    },
   },
   web: {
     title: "Web APIs",
     categories: Object.keys(webCategories),
     descriptions: webCategories,
-    getCategoryHref: (categoryName: string) =>
-      `/api/web/~/category-${categoryName.toLowerCase().replace(/\s+/g, "-")}/`,
+    getCategoryHref: (categoryName: string) => {
+      // Special case for I/O -> io
+      if (categoryName === "I/O") {
+        return `/api/web/io`;
+      }
+      return `/api/web/${categoryName.toLowerCase().replace(/\s+/g, "-")}`;
+    },
   },
   node: {
     title: "Node APIs",

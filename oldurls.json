@@ -133,5 +133,6 @@
   "/examples/tutorials/trpc": "/examples/trpc_tutorial",
   "/examples/tutorials/vue": "/examples/vue_tutorial",
   "/examples/tutorials/web_testing": "/examples/web_testing_tutorial",
-  "/examples/tutorials/word_finder": "/examples/word_finder_tutorial"
+  "/examples/tutorials/word_finder": "/examples/word_finder_tutorial",
+  "/api/node/assert/strict": "/api/node/assert/~/assert.strict"
 }

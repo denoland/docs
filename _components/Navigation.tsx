@@ -30,6 +30,7 @@ export default function (
         <data.comp.SidebarNav
           sectionData={sectionData}
           currentUrl={currentUrl}
+          apiCategories={data.apiCategories}
         />
       </aside>
     </>
