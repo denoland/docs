@@ -113,11 +113,11 @@ class OramaSearch {
         return;
       }
 
-      const { OramaCloud } = await import("jsr:@orama/core@1.2.4");
-      this.client = new OramaCloud({
-        projectId: ORAMA_CONFIG.projectId,
-        apiKey: ORAMA_CONFIG.apiKey,
-      });
+      // const { OramaCloud } = await import("jsr:@orama/core@1.2.4");
+      // this.client = new OramaCloud({
+      //   projectId: ORAMA_CONFIG.projectId,
+      //   apiKey: ORAMA_CONFIG.apiKey,
+      // });
 
       console.log("Orama search client initialized successfully");
     } catch (error) {

@@ -2,7 +2,7 @@ import "@std/dotenv/load";
 
 import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
-import jsx from "lume/plugins/jsx_preact.ts";
+import jsx from "lume/plugins/jsx.ts";
 import mdx from "lume/plugins/mdx.ts";
 import ogImages from "lume/plugins/og_images.ts";
 import postcss from "lume/plugins/postcss.ts";
@@ -175,6 +175,8 @@ site.use(
     },
   }),
 );
+
+site.add([".css", ".client.ts", ".client.js"]);
 
 site.use(toc({ anchor: false }));
 site.use(title());
