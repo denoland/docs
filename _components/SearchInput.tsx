@@ -26,7 +26,7 @@ export default function SearchInput() {
       {/* Search Modal */}
       <dialog
         id="orama-search-modal"
-        className="w-full h-dvh bg-black/30 backdrop-blur-sm fixed inset-0 max-w-none max-h-none z-50 overflow-y-auto p-4 sm:p-6 md:p-20 transition-all duration-200"
+        className="w-full h-full min-h-dvh bg-black/30 [-webkit-backdrop-filter:blur(10px)] backdrop-blur-sm fixed inset-0 max-w-none max-h-none z-50 overflow-y-auto p-4 sm:p-6 md:p-20 transition-all duration-200"
         role="dialog"
       >
         <div className="flex flex-col justify-between mx-auto max-w-2xl w-full transform overflow-hidden rounded-xl bg-background-raw shadow-2xl border border-foreground-primary dark:border-gray-700">

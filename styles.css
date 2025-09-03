@@ -1616,10 +1616,6 @@
     }
   }
 
-  #orama-search-modal ::-webkit-search-cancel-button {
-    display: none;
-  }
-
   #search-mode-toggle[aria-pressed="true"] #search-mode-toggle__indicator {
     background-color: var(--color-primary) !important;
 
@@ -1650,12 +1646,22 @@
     }
   }
 
-  /* Styles when the dialog is open */
-  #orama-search-modal[open] {
-    animation: fade_in 0.2s ease-out forwards;
+  #orama-search-modal {
+    ::-webkit-search-cancel-button {
+      display: none;
+    }
 
-    & > div {
-      animation: slide_up 0.15s cubic-bezier(0, 0, 0.2, 1) forwards;
+    &::backdrop {
+      display: none;
+    }
+
+    /* Styles when the dialog is open */
+    &[open] {
+      animation: fade_in 0.2s ease-out forwards;
+
+      & > div {
+        animation: slide_up 0.15s cubic-bezier(0, 0, 0.2, 1) forwards;
+      }
     }
   }
 }
