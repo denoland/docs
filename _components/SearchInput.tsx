@@ -8,7 +8,7 @@ export default function SearchInput() {
             type="search"
             placeholder="Search documentation..."
             id="orama-search-input"
-            className="w-full min-w-24 rounded-lg placeholder:text-sm text-base leading-normal p-1 pl-8 pr-16 border transition-colors duration-200
+            className="w-full min-w-24 rounded-lg placeholder:text-sm text-base leading-normal p-1 px-8 border transition-colors duration-200
             text-foreground-primary border-foreground-secondary hover:bg-background-secondary focus:bg-background-secondary focus:outline-offset-1
             cursor-pointer"
             style="background: url(/img/search.svg) no-repeat 0.5em 50%; background-size: 1.25em; background-color: var(--color-background-raw);"
@@ -26,10 +26,10 @@ export default function SearchInput() {
       {/* Search Modal */}
       <dialog
         id="orama-search-modal"
-        className="w-full h-full bg-black/50 backdrop-blur-sm fixed inset-0 max-w-none max-h-none z-50 overflow-y-auto p-4 sm:p-6 md:p-20"
+        className="w-full h-dvh bg-black/30 backdrop-blur-sm fixed inset-0 max-w-none max-h-none z-50 overflow-y-auto p-4 sm:p-6 md:p-20 transition-all duration-200"
         role="dialog"
       >
-        <div className="mx-auto max-w-2xl w-full transform overflow-hidden rounded-xl bg-background-raw shadow-2xl border border-foreground-primary transition-all">
+        <div className="flex flex-col justify-between mx-auto max-w-2xl w-full transform overflow-hidden rounded-xl bg-background-raw shadow-2xl border border-foreground-primary dark:border-gray-700">
           {/* Search Header */}
           <div className="relative flex items-center justify-between px-2">
             <input
@@ -49,14 +49,16 @@ export default function SearchInput() {
               <button
                 type="button"
                 id="search-mode-toggle"
-                className="flex items-center space-x-1 px-2 py-1 text-xs font-medium text-foreground-secondary hover:text-foreground-primary transition-colors cursor-pointer"
+                className="flex items-center px-2 py-1 gap-x-1 text-xs font-medium text-foreground-secondary hover:text-foreground-primary transition-colors cursor-pointer"
                 title="Toggle AI search mode (Ctrl+Shift+K)"
                 aria-pressed="false"
               >
                 <div
                   id="search-mode-toggle__indicator"
-                  className="flex items-center w-6 h-4 rounded-full bg-foreground-tertiary p-0.5 relative dark:bg-gray-600 before:aspect-square before:h-3 before:bg-background-raw before:rounded-full before:transition-transform before:duration-200"
-                />
+                  className="flex items-center w-6 h-4 rounded-full bg-foreground-tertiary p-0.5 relative dark:bg-gray-600"
+                >
+                  <div class="aspect-square h-3 bg-background-raw rounded-full transition-transform duration-200" />
+                </div>
                 <span>Ask AI</span>
               </button>
             </div>
@@ -73,7 +75,7 @@ export default function SearchInput() {
           {/* Search Results */}
           <div
             id="orama-search-results"
-            className="max-h-80 scroll-py-2 overflow-y-auto text-sm"
+            className="max-h-[calc(100vh-18rem)] lg:max-h-80 scroll-py-2 overflow-y-auto text-sm"
           >
             <div
               id="orama-search-results-content"
@@ -84,7 +86,7 @@ export default function SearchInput() {
           </div>
 
           {/* Footer with keyboard shortcuts */}
-          <footer className="flex flex-wrap gap-6 items-center bg-background-secondary px-4 py-3 text-xs text-foreground-secondary">
+          <footer className="hidden xs:flex flex-wrap gap-x-6 gap-y-2 items-center bg-background-secondary px-4 py-3 text-xs text-foreground-secondary">
             <span>
               <kbd class="font-sans px-1.5 py-0.5 text-xs font-semibold text-foreground-secondary bg-background-primary border-r-2 border-b-2 border border-foreground-tertiary rounded mr-1">
                 <span aria-hidden="true">↑↓</span>
