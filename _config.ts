@@ -5,13 +5,10 @@ import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx.ts";
 import mdx from "lume/plugins/mdx.ts";
 import ogImages from "lume/plugins/og_images.ts";
-import postcss from "lume/plugins/postcss.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
-import postcssNesting from "npm:@tailwindcss/nesting";
-
-import tailwind from "@tailwindcss/postcss";
+import tailwind from "lume/plugins/tailwindcss.ts";
 
 import Prism from "./prism.ts";
 
@@ -159,13 +156,7 @@ site.use(search());
 site.use(jsx());
 site.use(mdx());
 
-site.use(
-  postcss({
-    includes: false,
-    plugins: [postcssNesting, tailwind()],
-  }),
-);
-
+site.add("js");
 site.use(
   esbuild({
     extensions: [".ts"],
@@ -176,8 +167,8 @@ site.use(
   }),
 );
 
-site.add([".css"]);
-site.add("js");
+site.add("style.css");
+site.use(tailwind());
 
 site.use(toc({ anchor: false }));
 site.use(title());
@@ -288,7 +279,6 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
 }
 
 site.scopedUpdates(
-  (path) => path == "/overrides.css",
   (path) => /\.(js|ts)$/.test(path),
   (path) => path.startsWith("/api/deno/"),
 );
