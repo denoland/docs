@@ -168,7 +168,7 @@ site.use(
 
 site.use(
   esbuild({
-    extensions: [".client.ts", ".client.js"],
+    extensions: [".ts"],
     options: {
       minify: false,
       splitting: true,
