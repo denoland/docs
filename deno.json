@@ -19,12 +19,12 @@
     "@orama/core": "jsr:@orama/core@^1.2.4"
   },
   "tasks": {
-    "dev": "LUME_LOGS=WARN deno run --env-file -A lume.ts -s",
+    "dev": "LUME_LOGS=WARN deno run --env-file -A lume/cli.ts -s",
     "serve": "deno task dev",
     "serve:style": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts",
     "start": "deno task dev",
-    "build": "deno task generate:reference && BUILD_TYPE=FULL deno run --env-file -A lume.ts && tailwindcss -i styles.css -o _site/styles.css --minify",
-    "build:light": "deno run --env-file -A lume.ts",
+    "build": "deno task generate:reference && BUILD_TYPE=FULL deno run --env-file -A lume/cli.ts && tailwindcss -i styles.css -o _site/styles.css --minify",
+    "build:light": "deno run --env-file -A lume/cli.ts",
     "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",
     "check:links": "deno run --no-lock --allow-net --allow-env .github/workflows/better_link_checker.ts",
