@@ -3,13 +3,13 @@ title: "Deno Namespace APIs"
 description: "A guide to Deno's built-in runtime APIs. Learn about file system operations, network functionality, permissions management, and other core capabilities available through the global Deno namespace."
 layout: doc.tsx
 oldUrl:
-- /runtime/manual/runtime/
-- /runtime/manual/runtime/builtin_apis/
-- /runtime/manual/runtime/permission_apis/
-- /runtime/manual/runtime/import_meta_api/
-- /runtime/manual/runtime/ffi_api/
-- /runtime/manual/runtime/program_lifecycle/
-- /runtime/reference/deno_namespace_apis/
+  - /runtime/manual/runtime/
+  - /runtime/manual/runtime/builtin_apis/
+  - /runtime/manual/runtime/permission_apis/
+  - /runtime/manual/runtime/import_meta_api/
+  - /runtime/manual/runtime/ffi_api/
+  - /runtime/manual/runtime/program_lifecycle/
+  - /runtime/reference/deno_namespace_apis/
 ---
 
 The global `Deno` namespace contains APIs that are not web standard, including

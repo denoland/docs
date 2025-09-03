@@ -102,8 +102,8 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             </div>
           </article>
           {!(isReference && !isApiLandingPage) && (
-          <data.comp.Feedback file={file} />
-        )}
+            <data.comp.Feedback file={file} />
+          )}
         </div>
       </main>
       {(() => {
