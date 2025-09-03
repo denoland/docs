@@ -1,5 +1,3 @@
-/** @jsxImportSource npm:react@18.2.0 */
-
 export default function ({ title, description, openGraphColor }) {
   // Process text to replace superscript EA with "Early Access"
   const processEarlyAccessText = (text) => {
