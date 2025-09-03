@@ -55,7 +55,7 @@ export default function Layout(data: Lume.Data) {
           name="keywords"
           content="Deno, JavaScript, TypeScript, reference, documentation, guide, tutorial, example"
         />
-        <script type="module" defer src="/components.js"></script>
+        <script type="module" defer src="/script.js"></script>
         <script type="module" defer src="/main.client.js"></script>
         <script type="module" defer src="/lint_rules.client.js"></script>
         <script type="module" defer src="/copy.client.js"></script>

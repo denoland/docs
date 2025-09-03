@@ -130,5 +130,3 @@ function SidebarCategoryHeading(props: {
     </h2>
   );
 }
-
-export const js = `import "/js/sidebar.client.js";`;
