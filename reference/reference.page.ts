@@ -121,6 +121,7 @@ export default function* () {
           url,
           title: content.html_head_ctx.title,
           layout: `reference/${layout}.tsx`,
+          pageContent: content,
           data: content,
         };
       }

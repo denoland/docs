@@ -73,16 +73,15 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
           {!isReference && <data.comp.Feedback file={file} />}
         </div>
       </main>
-      {
-        /* {(isReference && data.children.props.data.toc_ctx) && (
+
+      {(isReference && data.pageContent?.toc_ctx) && (
         <data.comp.RefToc
-          documentNavigation={data.children.props.data.toc_ctx
+          documentNavigation={data.pageContent.toc_ctx
             .document_navigation}
-          documentNavigationStr={data.children.props.data.toc_ctx
+          documentNavigationStr={data.pageContent.toc_ctx
             .document_navigation_str}
         />
-      )} */
-      }
+      )}
     </>
   );
 }
