@@ -61,50 +61,51 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   }
 
   return (
-    <main
-      id="content"
-      class={`content ${isExampleScript ? "examples-content" : ""}`}
-    >
-      <div class="w-full">
-        <article class="mx-auto">
-          {hasBreadcrumbs && (
-            <data.comp.Breadcrumbs
-              title={data.title!}
-              sidebar={sidebar}
-              url={data.url}
-            />
-          )}
-
-          <data.comp.TableOfContentsMobile toc={data.toc} data={data} />
-
-          <div
-            data-color-mode="auto"
-            data-light-theme="light"
-            data-dark-theme="dark"
-            class="markdown-body mt-4 sm:mt-6"
-          >
-            {!(isReference && !isApiLandingPage) && (
-              <h1
-                dangerouslySetInnerHTML={{
-                  __html: helpers.md(data.title!, true),
-                }}
-              >
-              </h1>
+    <>
+      <main
+        id="content"
+        class={`content ${isExampleScript ? "examples-content" : ""}`}
+      >
+        <div class="w-full">
+          <article class="mx-auto">
+            {hasBreadcrumbs && (
+              <data.comp.Breadcrumbs
+                title={data.title!}
+                sidebar={sidebar}
+                url={data.url}
+              />
             )}
-            {data.available_since && (
-              <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">
-                Available since {data.available_since}
-              </div>
-            )}
-            {renderedCommand}
-            {data.children}
-          </div>
-        </article>
-        {!(isReference && !isApiLandingPage) && (
+
+            <data.comp.TableOfContentsMobile toc={data.toc} data={data} />
+
+            <div
+              data-color-mode="auto"
+              data-light-theme="light"
+              data-dark-theme="dark"
+              class="markdown-body mt-4 sm:mt-6"
+            >
+              {!(isReference && !isApiLandingPage) && (
+                <h1
+                  dangerouslySetInnerHTML={{
+                    __html: helpers.md(data.title!, true),
+                  }}
+                >
+                </h1>
+              )}
+              {data.available_since && (
+                <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">
+                  Available since {data.available_since}
+                </div>
+              )}
+              {renderedCommand}
+              {data.children}
+            </div>
+          </article>
+          {!(isReference && !isApiLandingPage) && (
           <data.comp.Feedback file={file} />
         )}
-      </div>
-
+        </div>
+      </main>
       {(() => {
         const tocCtx = getTocCtx(data);
         return isReference && tocCtx
@@ -116,6 +117,6 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
           )
           : null;
       })()}
-    </main>
+    </>
   );
 }

@@ -36,13 +36,24 @@ jobs:
 
       - name: Build
         env:
-          ORAMA_CLOUD_INDEX_ID: ${{ vars.ORAMA_CLOUD_INDEX_ID }}
-          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
+          ORAMA_PROJECT_ID: ${{ vars.ORAMA_PROJECT_ID }}
+          ORAMA_DATASOURCE_ID: ${{ vars.ORAMA_DATASOURCE_ID }}
+          ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
         run: deno task build
 
+      - name: Generate and upload search index
+        env:
+          ORAMA_PROJECT_ID: ${{ vars.ORAMA_PROJECT_ID }}
+          ORAMA_DATASOURCE_ID: ${{ vars.ORAMA_DATASOURCE_ID }}
+          ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
+        run: |
+          echo "Generating search index..."
+          deno task generate:search
+          echo "Uploading search index to Orama Cloud..."
+          deno task search:upload
+
       - name: Run server
-        working-directory: _site
-        run: deno run --allow-read=. --allow-net --allow-env --lock=../deno.lock server.ts &
+        run: deno run --allow-read=. --allow-net --allow-env --lock=deno.lock server.ts &
 
       - name: Link checker
         env:
@@ -54,4 +65,4 @@ jobs:
         with:
           project: "deno-docs"
           entrypoint: "server.ts"
-          root: "_site"
+          root: "."

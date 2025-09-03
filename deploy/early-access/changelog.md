@@ -10,6 +10,46 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 :::
 
+## August 27th, 2025
+
+### Features
+
+- Deno KV can now be used with the database integration:
+  - Provision a Deno KV database through the "Databases" tab, and link it to an
+    app or playground.
+  - Access the Deno KV database from your code by using `Deno.openKv()`.
+  - KV queues, read-replication, manual backups, and choosing a primary region
+    are not available at this time.
+- Playgrounds now support dragging in individual files and folders.
+- The playground file explorer now supports inline rename and delete of files.
+- New built-in environment variables have been added to enable detection of Deno
+  Deploy EA, and the app that is running, and the organization it is running in:
+  `DENO_DEPLOY=1`, `DENO_DEPLOY_ORG_ID`, `DENO_DEPLOY_ORG_SLUG`,
+  `DENO_DEPLOY_APP_ID`, `DENO_DEPLOY_APP_SLUG`, `DENO_DEPLOY_REVISION_ID`.
+- Users can now create personal access tokens from their account page.
+- The Deno Deploy EA dashboard has migrated from https://app.deno.com to
+  https://console.deno.com. All existing URLs will automatically redirect to the
+  new URL.
+
+### Bug Fixes
+
+- Check that Postgres database instances support dynamic provisioning of
+  databases before allowing them to be linked to an organization.
+- Ensure that deleted Deno Deploy apps will never trigger GitHub status checks
+  on push to the previously linked repo.
+- The playground HTTP explorer now correctly sends the set headers when making
+  requests.
+- Playgrounds do not error on top level `await` anymore.
+- You can now add environment variables named `GOOGLE_APPLICATION_CREDENTIALS`
+  to your Deno Deploy app.
+- When bulk importing environment variables in the app settings, we now
+  correctly import them into that app, rather than mistakenly importing them
+  into the organization environment variables.
+- Some versions of Next.js, that do not support `using` declarations, now
+  correctly build again.
+- `npm install` in the build step now works more reliably, and does not fail
+  with certificate related issues anymore.
+
 ## July 23rd, 2025
 
 ### Features
@@ -202,8 +242,8 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 - Environment variables now show up correctly on the timelines page
 - The production timeline page now correctly shows all builds
-- app.deno.com works on older versions of Firefox now
-- Page titles across app.deno.com now reflect the page you are on
+- console.deno.com works on older versions of Firefox now
+- Page titles across console.deno.com now reflect the page you are on
 - The "Provision certificate" button does not lock up after DNS verification
   failures anymore
 - Domains that had a provisioned certificate or attached application can now be

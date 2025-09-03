@@ -1401,25 +1401,31 @@
     li:has(> &) {
       display: grid;
       grid-template-rows: max-content 0fr;
-      transition: grid 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+      /* Only animate when user interaction class is present */
+    }
+
+    /* Apply transitions when li has user-interaction class */
+    li.user-interaction:has(> &) {
+      transition: grid-template-rows 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
     + ul {
       margin-left: 1rem !important;
     }
 
-    li:has(> .sub-nav-toggle-checkbox:checked) {
+    /* Expanded state when li has the 'expanded' class */
+    li:has(> &).expanded {
       grid-template-rows: max-content 1fr;
       padding-bottom: 1rem;
     }
 
-    li:has(> + ul:focus-within) {
-      grid-template-rows: max-content 1fr;
-      padding-bottom: 1rem;
-    }
-
-    &:has(.sub-nav-toggle-checkbox:checked)::after {
+    /* Rotate chevron when expanded - only animate on user interaction */
+    li.expanded > &::after {
       transform: rotate(90deg);
+    }
+
+    li.user-interaction > &::after {
+      transition: transform 0.1s ease-in;
     }
 
     &:has(+ ul:focus-within)::after {
@@ -1427,15 +1433,9 @@
     }
   }
 
-  .sub-nav-toggle-checkbox {
-    li:has(> .sub-nav-toggle &:checked) {
-      grid-template-rows: max-content 1fr;
-      padding-bottom: 1rem;
-    }
-
-    .sub-nav-toggle:has(&:checked)::after {
-      transform: rotate(90deg);
-    }
+  li:has(.sub-nav-toggle + ul:focus-within) {
+    grid-template-rows: max-content 1fr;
+    padding-bottom: 1rem;
   }
 
   #hamburger-button[aria-pressed="true"] {
@@ -2578,6 +2578,41 @@
   }
   .ddoc .toc .documentNavigation a:hover {
     text-decoration-line: underline;
+  }
+
+  /* Style plain HTML from documentNavigationStr to match TableOfContentsItem */
+  .toc-list .documentNavigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .toc-list .documentNavigation li {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    line-height: 1rem;
+    text-wrap: balance;
+  }
+  .toc-list .documentNavigation a {
+    font-size: 0.8125rem;
+    color: rgb(107 114 126);
+    text-decoration: none;
+    transition: color 200ms ease-in-out;
+    user-select: none;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  @media (min-width: 64rem) {
+    .toc-list .documentNavigation a {
+      color: rgb(107 114 126);
+    }
+  }
+  .toc-list .documentNavigation a:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .toc-list .documentNavigation ul ul {
+    margin-left: 0.5rem;
   }
   .ddoc .usages nav {
     flex-direction: row;

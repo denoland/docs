@@ -19,7 +19,7 @@ button below to instantly deploy your own copy of the complete LLM chat
 application to Deno Deploy. You'll get a live, working application that you can
 customize and modify as you learn!
 
-[![Deploy on Deno](https://deno.com/button)](https://app.deno.com/new?clone=https://github.com/denoland/tutorial-with-llm&mode=dynamic&entrypoint=main.ts&install=deno+install)
+[![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-llm&mode=dynamic&entrypoint=main.ts&install=deno+install)
 
 Once you have deployed, add your `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` in the
 project "Settings".
@@ -925,7 +925,7 @@ git push -u origin main
 ```
 
 Once your app is on GitHub, you can
-[deploy it to Deno Deploy<sup>EA</sup>](https://app.deno.com/).
+[deploy it to Deno Deploy<sup>EA</sup>](https://console.deno.com/).
 
 Don't forget to add your `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` environment
 variables in the project "Settings".
