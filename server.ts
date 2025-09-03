@@ -15,7 +15,12 @@ server.use(NotFoundMiddleware({ root: "_site", page404: "./404/" }));
 server.use(createRoutingMiddleware());
 server.use(createGAMiddleware(server));
 server.use(apiDocumentContentTypeMiddleware);
-server.use(expires({ "defaultDuration": 60 * 60 * 1000 }));
+server.use(expires({
+  "defaultDuration": 60 * 60 * 1000,
+  "durations": {
+    "text/css": 24 * 60 * 60 * 1000,
+  },
+}));
 
 server.start();
 
