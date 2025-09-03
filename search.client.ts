@@ -563,7 +563,7 @@ class OramaSearch {
   }
 
   renderAiSearchResultsHeading({ error = false }) {
-    return `<div class="p-4 py-2 border-b border-foreground-tertiary bg-background-tertiary">
+    return `<div class="p-4 py-2 border-b border-foreground-tertiary bg-background-secondary">
         <div class="flex items-center justify-between">
           <h2 class="text-sm font-semibold text-foreground-primary flex items-center gap-2">
           ${
@@ -597,7 +597,7 @@ class OramaSearch {
           <p class="text-sm text-foreground-secondary">
             <strong>Query:</strong> ${this.escapeHtml(searchTerm)}
           </p>
-          <p class="text-xs text-foreground-tertiary">
+          <p class="text-xs text-foreground-secondary">
             Using advanced context engineering to provide the most relevant and helpful response.
           </p>
         </div>
@@ -655,7 +655,7 @@ class OramaSearch {
     this.searchResults.innerHTML = `
       ${this.renderAiSearchResultsHeading({ error: false })}
       <div class="p-6">
-        <div class="p-2 border-l-4  border-primary mb-4">
+        <div class="p-2 border-l-4 text-foreground-secondary border-primary mb-4">
           <p class="text-sm">
             <strong>Your Question:</strong> <i>${
       this.escapeHtml(searchTerm)
@@ -821,6 +821,8 @@ class OramaSearch {
     if (modal) {
       modal.close();
       this.isModalOpen = false;
+      this.searchInputModal!.value = ""; // Clear modal input when hiding
+      this.searchResults!.innerHTML = ""; // Clear results when hiding
       this.selectedIndex = -1; // Reset selection when hiding
 
       // Clean up any ongoing operations

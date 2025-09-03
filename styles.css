@@ -1616,9 +1616,8 @@
     }
   }
 
-  #orama-search-results:has(#orama-search-results-content:empty),
-  #orama-search-results:has(#orama-search-results-content:empty) + div {
-    display: none !important;
+  #orama-search-modal ::-webkit-search-cancel-button {
+    display: none;
   }
 
   #search-mode-toggle[aria-pressed="true"] #search-mode-toggle__indicator {
