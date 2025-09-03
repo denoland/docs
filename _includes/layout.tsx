@@ -56,12 +56,12 @@ export default function Layout(data: Lume.Data) {
           content="Deno, JavaScript, TypeScript, reference, documentation, guide, tutorial, example"
         />
         <script type="module" defer src="/script.js"></script>
-        <script type="module" defer src="/main.client.js"></script>
-        <script type="module" defer src="/lint_rules.client.js"></script>
-        <script type="module" defer src="/copy.client.js"></script>
-        <script type="module" defer src="/tabs.client.js"></script>
-        <script type="module" defer src="/feedback.client.js"></script>
-        <script type="module" defer src="/search.client.js"></script>
+        <script type="module" defer src="/js/main.client.js"></script>
+        <script type="module" defer src="/js/lint_rules.client.js"></script>
+        <script type="module" defer src="/js/copy.client.js"></script>
+        <script type="module" defer src="/js/tabs.client.js"></script>
+        <script type="module" defer src="/js/feedback.client.js"></script>
+        <script type="module" defer src="/js/search.client.js"></script>
         <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"

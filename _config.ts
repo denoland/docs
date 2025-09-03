@@ -176,7 +176,8 @@ site.use(
   }),
 );
 
-site.add([".css", ".client.ts", ".client.js"]);
+site.add([".css"]);
+site.add("js");
 
 site.use(toc({ anchor: false }));
 site.use(title());
@@ -211,7 +212,7 @@ site.addEventListener("afterBuild", async () => {
       Deno.writeTextFileSync(site.dest("llms-full.txt"), llmsFullTxt);
       log.info("Generated llms-full.txt in site root");
     } catch (error) {
-      log.error("Error generating LLMs files:", error);
+      log.error("Error generating LLMs files:" + error);
     }
   }
 });
@@ -253,7 +254,7 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
   site.data("openGraphLayout", "/open_graph/default.jsx");
   site.use(
     ogImages({
-      satori: {
+      options: {
         width: 1200,
         height: 630,
         fonts: [
@@ -282,7 +283,6 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
           },
         ],
       },
-      cache: false,
     }),
   );
 }
