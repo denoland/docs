@@ -93,6 +93,112 @@ function buildApiPath(relativePath: string, baseUrl: string): string {
 }
 
 /**
+ * Process a SymbolPageCtx entry from the reference documentation
+ */
+function processSymbolPageContext(
+  symbolPath: string,
+  data: Record<string, unknown>,
+  apiType: string,
+  baseUrl: string,
+): OramaFullDocument[] {
+  const documents: OramaFullDocument[] = [];
+  
+  // Extract symbol group context
+  const symbolGroupCtx = data.symbol_group_ctx as Record<string, unknown>;
+  if (!symbolGroupCtx || typeof symbolGroupCtx.name !== "string") {
+    return documents;
+  }
+
+  const symbolName = symbolGroupCtx.name;
+  
+  // Extract HTML head context for title
+  const htmlHeadCtx = data.html_head_ctx as Record<string, unknown>;
+  const title = htmlHeadCtx?.title as string || symbolName;
+
+  // Process symbols array
+  const symbols = symbolGroupCtx.symbols as Array<Record<string, unknown>>;
+  if (!Array.isArray(symbols) || symbols.length === 0) {
+    return documents;
+  }
+
+  // Create content from the symbol documentation
+  const contentParts: string[] = [];
+  contentParts.push(symbolName); // Always include name first
+
+  for (const symbol of symbols) {
+    const symbolContent = symbol.content as Array<Record<string, unknown>>;
+    if (Array.isArray(symbolContent)) {
+      for (const content of symbolContent) {
+        if (content.kind === "other" && content.value) {
+          const value = content.value as Record<string, unknown>;
+          if (typeof value.docs === "string") {
+            // Extract text from HTML docs
+            const docText = value.docs
+              .replace(/<[^>]*>/g, '') // Remove HTML tags
+              .replace(/&[^;]+;/g, ' ') // Replace HTML entities
+              .trim();
+            if (docText) {
+              contentParts.push(docText);
+            }
+          }
+        }
+      }
+    }
+
+    // Extract kind information
+    const kind = symbol.kind as Record<string, unknown>;
+    if (kind?.kind && typeof kind.kind === "string") {
+      contentParts.push(`Type: ${kind.kind}`);
+    }
+  }
+
+  const content = contentParts.join("\n\n").trim();
+
+  // Skip if content is too short
+  if (content.length < 10) {
+    return documents;
+  }
+
+  // Build the correct URL from the symbolPath
+  // Convert "./~/Deno.ServeHandlerInfo.json" to "/api/deno/~/Deno.ServeHandlerInfo"
+  let cleanPath = symbolPath;
+  if (cleanPath.startsWith("./")) {
+    cleanPath = cleanPath.substring(2); // Remove "./"
+  }
+  if (cleanPath.endsWith(".json")) {
+    cleanPath = cleanPath.substring(0, cleanPath.length - 5); // Remove ".json"
+  }
+  
+  const url = `${BASE_URL}${baseUrl}/${cleanPath}`;
+  const path = `${baseUrl}/${cleanPath}`;
+
+  // Extract package name from symbol name
+  const parts = symbolName.split('.');
+  const packageName = parts.length > 1 ? parts[0] : "general";
+  const kind = symbols[0]?.kind as Record<string, unknown>;
+  const kindStr = kind?.kind as string || "unknown";
+
+  documents.push({
+    id: generateApiId(symbolPath, apiType),
+    title,
+    content,
+    url,
+    path,
+    category: apiType,
+    section: packageName || "general",
+    subsection: kindStr,
+    description: undefined,
+    tags: [apiType, kindStr, packageName].filter(Boolean),
+    headings: [],
+    lastModified: Date.now(),
+    docType: "api-reference",
+    packageName,
+  });
+
+  return documents;
+}
+
+/**
  * Process a single API symbol from reference documentation
  */
 function processApiSymbol(
@@ -110,7 +216,12 @@ function processApiSymbol(
 
   const data = symbolData as Record<string, unknown>;
 
-  // Skip if no name
+  // Handle the structured JSON format from reference_gen
+  if (data.kind === "SymbolPageCtx" && data.symbol_group_ctx) {
+    return processSymbolPageContext(symbolPath, data, apiType, baseUrl);
+  }
+
+  // Fallback to old format - Skip if no name
   if (typeof data.name !== "string") {
     return documents;
   }
@@ -219,31 +330,26 @@ async function processApiReference(): Promise<OramaFullDocument[]> {
       let processedCount = 0;
       let skippedCount = 0;
 
-      // Process each package/namespace
-      for (const [packageName, packageData] of Object.entries(data)) {
-        if (typeof packageData !== "object" || packageData === null) {
+      // Process each entry in the reference JSON
+      for (const [entryPath, entryData] of Object.entries(data)) {
+        // Skip index and all_symbols entries
+        if (entryPath === "./index.json" || entryPath === "./all_symbols.json") {
           continue;
         }
+        
+        const docs = processApiSymbol(
+          entryPath,
+          entryData,
+          refFile.apiType,
+          refFile.baseUrl,
+          "Deno", // Default package name for now
+        );
 
-        const packageContent = packageData as Record<string, unknown>;
-
-        // Process symbols in this package
-        for (const [symbolName, symbolData] of Object.entries(packageContent)) {
-          const symbolPath = `${packageName}.${symbolName}`;
-          const docs = processApiSymbol(
-            symbolPath,
-            symbolData,
-            refFile.apiType,
-            refFile.baseUrl,
-            packageName,
-          );
-
-          if (docs.length > 0) {
-            apiDocs.push(...docs);
-            processedCount++;
-          } else {
-            skippedCount++;
-          }
+        if (docs.length > 0) {
+          apiDocs.push(...docs);
+          processedCount++;
+        } else {
+          skippedCount++;
         }
       }
 

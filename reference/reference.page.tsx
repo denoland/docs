@@ -98,9 +98,13 @@ export default function* () {
           ? -"index.json".length
           : -".json".length;
 
-        const url = `/api/${name.toLowerCase()}/${
-          filepath.slice(0, trailingLength)
-        }`;
+        // Remove leading "./" if present
+        let normalizedPath = filepath.slice(0, trailingLength);
+        if (normalizedPath.startsWith("./")) {
+          normalizedPath = normalizedPath.slice(2);
+        }
+
+        const url = `/api/${name.toLowerCase()}/${normalizedPath}`;
 
         if ("path" in content) {
           // TODO: handle redirects in a more integrated manner
