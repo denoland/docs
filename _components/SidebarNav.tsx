@@ -1,44 +1,26 @@
+// deno-lint-ignore-file no-explicit-any
+import ReferenceSidebarNav from "../reference/_components/ReferenceSidebarNav.tsx";
+
 export default function (data: Lume.Data) {
   const sectionData = data.sectionData;
   const currentUrl = data.currentUrl.replace(/\/$/, "");
   const isReference = currentUrl.startsWith("/api/");
-  const isDenoAPI = currentUrl.startsWith("/api/deno/");
 
   if (isReference) {
-    return (
-      <>
-        {sectionData.map((nav: any) => (
-          <nav>
-            <SidebarList>
-              {nav.items?.map((item: any) => (
-                <li key={item.href}>
-                  {(isDenoAPI && item.name === "Uncategorized")
-                    ? null
-                    : (
-                      <SidebarItem
-                        href={item.href}
-                        title={item.name}
-                        isActive={item.active}
-                      />
-                    )}
-                </li>
-              ))}
-            </SidebarList>
-          </nav>
-        ))}
-      </>
-    );
+    return <ReferenceSidebarNav {...data} />;
   }
 
   // Navigation for rest of site
   return (
     <>
       {sectionData.map((nav: any) => (
-        <nav>
+        <nav key={nav.href || nav.title}>
           <SidebarCategoryHeading
             href={nav.href}
             title={nav.title}
-            isActive={nav.href && nav.href.replace(/\/$/, "") === currentUrl}
+            isActive={Boolean(
+              nav.href && nav.href.replace(/\/$/, "") === currentUrl,
+            )}
           />
           {nav.items && Array.isArray(nav.items) && nav.items.length > 0 && (
             <SidebarList>
@@ -85,7 +67,9 @@ export default function (data: Lume.Data) {
   );
 }
 
-function SidebarList(props: { children: Element; className?: string }) {
+function SidebarList(
+  props: { children: any; className?: string },
+) {
   return (
     <ul
       className={`p-0 list-none overflow-y-hidden ${props.className ?? ""}`}
@@ -124,6 +108,21 @@ function SidebarCategoryHeading(props: {
   href?: string;
   isActive?: boolean;
 }) {
+  if (props.href) {
+    return (
+      <h2 class="block uppercase py-2 pr-4 mt-4 !border-0">
+        <a
+          href={props.href}
+          className={`text-foreground-secondary font-bold leading-none tracking-wide hover:text-primary transition-colors ${
+            props.isActive ? "text-primary" : ""
+          }`}
+        >
+          {props.title}
+        </a>
+      </h2>
+    );
+  }
+
   return (
     <h2 class="block uppercase py-2 pr-4 mt-4 text-foreground-secondary font-bold leading-[1.2] text-balance tracking-wide !border-0">
       {props.title}
