@@ -18,15 +18,46 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   }
 
   const isReference = data.url.startsWith("/api/");
+  const isApiLandingPage = ["/api/deno/", "/api/web/", "/api/node/"].includes(
+    data.url,
+  );
   const isExamples = data.url.startsWith("/examples/");
   const isExampleScript = (data.page.data.content as { type?: string })?.type;
   const isLintRule = data.url.startsWith("/lint/rules/");
   const isHome = data.url === "/";
 
-  const hasBreadcrumbs = !isExamples && !isHome && !isReference;
+  const hasBreadcrumbs = !isExamples && !isHome &&
+    !(isReference && !isApiLandingPage);
 
   if (isLintRule) {
     file = `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`;
+  }
+
+  function getTocCtx(
+    d: Lume.Data,
+  ): { document_navigation: unknown; document_navigation_str: string } | null {
+    const ch: unknown = (d as unknown as { children?: unknown })?.children;
+    if (ch && typeof ch === "object" && "props" in ch) {
+      const props: unknown = (ch as { props?: unknown }).props;
+      if (props && typeof props === "object" && "data" in props) {
+        const pdata: unknown = (props as { data?: unknown }).data;
+        if (pdata && typeof pdata === "object" && "toc_ctx" in pdata) {
+          const toc: unknown = (pdata as { toc_ctx?: unknown }).toc_ctx;
+          if (
+            toc && typeof toc === "object" &&
+            "document_navigation" in toc &&
+            "document_navigation_str" in toc
+          ) {
+            const t = toc as {
+              document_navigation: unknown;
+              document_navigation_str: string;
+            };
+            return t;
+          }
+        }
+      }
+    }
+    return null;
   }
 
   return (
@@ -53,7 +84,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               data-dark-theme="dark"
               class="markdown-body mt-4 sm:mt-6"
             >
-              {!isReference && (
+              {!(isReference && !isApiLandingPage) && (
                 <h1
                   dangerouslySetInnerHTML={{
                     __html: helpers.md(data.title!, true),
@@ -70,17 +101,22 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               {data.children}
             </div>
           </article>
-          {!isReference && <data.comp.Feedback file={file} />}
+          {!(isReference && !isApiLandingPage) && (
+            <data.comp.Feedback file={file} />
+          )}
         </div>
       </main>
-      {(isReference && data.children.props.data.toc_ctx) && (
-        <data.comp.RefToc
-          documentNavigation={data.children.props.data.toc_ctx
-            .document_navigation}
-          documentNavigationStr={data.children.props.data.toc_ctx
-            .document_navigation_str}
-        />
-      )}
+      {(() => {
+        const tocCtx = getTocCtx(data);
+        return isReference && tocCtx
+          ? (
+            <data.comp.RefToc
+              documentNavigation={tocCtx.document_navigation}
+              documentNavigationStr={tocCtx.document_navigation_str}
+            />
+          )
+          : null;
+      })()}
     </>
   );
 }

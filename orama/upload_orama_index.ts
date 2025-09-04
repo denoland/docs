@@ -46,25 +46,28 @@ interface UploadOptions {
 /**
  * Load Orama configuration from environment variables
  */
-function loadOramaConfig(): OramaConfig {
+function loadOramaConfig(): OramaConfig | null {
   const projectId = Deno.env.get("ORAMA_PROJECT_ID");
   const datasourceId = Deno.env.get("ORAMA_DATASOURCE_ID");
   const privateApiKey = Deno.env.get("ORAMA_PRIVATE_API_KEY");
 
   if (!datasourceId || !privateApiKey || !projectId) {
-    console.error("❌ Missing required environment variables:");
-    console.error("   ORAMA_DATASOURCE_ID - Your Orama Cloud index ID");
-    console.error("   ORAMA_PROJECT_ID - Your Orama Cloud project ID");
-    console.error(
+    console.warn("⚠️  Missing required Orama Cloud environment variables:");
+    console.warn("   ORAMA_DATASOURCE_ID - Your Orama Cloud index ID");
+    console.warn("   ORAMA_PROJECT_ID - Your Orama Cloud project ID");
+    console.warn(
       "   ORAMA_PRIVATE_API_KEY - Your private API key for uploads",
     );
-    console.error("");
-    console.error("Example:");
-    console.error(
+    console.warn("");
+    console.warn("This is expected for external contributors and forks.");
+    console.warn("The search index upload will be skipped.");
+    console.warn("");
+    console.warn("If you need to upload the search index, set these variables:");
+    console.warn(
       '   export ORAMA_DATASOURCE_ID="your-index-id"',
     );
-    console.error('   export ORAMA_PRIVATE_API_KEY="your-private-api-key"');
-    Deno.exit(1);
+    console.warn('   export ORAMA_PRIVATE_API_KEY="your-private-api-key"');
+    return null;
   }
 
   return { datasourceId, privateApiKey, projectId };
@@ -81,6 +84,7 @@ interface IndexData {
     [key: string]: unknown;
   };
   documents: OramaDocument[];
+  data?: OramaDocument[]; // Alternative property name for documents
 }
 
 interface OramaDocument {
@@ -253,6 +257,14 @@ async function main() {
 
   // Load configuration
   const config = loadOramaConfig();
+  
+  // If config is null (missing API keys), skip upload but don't fail
+  if (!config) {
+    console.log("🔄 Skipping Orama search index upload due to missing configuration.");
+    console.log("This is normal for external contributors and forks.");
+    return;
+  }
+  
   console.log(`Target index: ${config.datasourceId}`);
 
   // Determine input file path (auto-detect full vs minimal and _site vs static)
