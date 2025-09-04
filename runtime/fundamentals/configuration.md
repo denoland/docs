@@ -526,6 +526,114 @@ import * as module_1 from "@example/my-package/module1";
 import * as module_2 from "@example/my-package/module2";
 ```
 
+## Permissions
+
+Deno 2.5+ supports storing permission sets in the config file.
+
+### Named Permissions
+
+Permissions can be defined in key value pairs under the `"permissions"` key:
+
+```jsonc
+{
+  "permissions": {
+    "read-data": {
+      "read": "./data"
+    },
+    "read-and-write": {
+      "read": true,
+      "write": ["./data"]
+    }
+  }
+}
+```
+
+Then used by specifying the `--permission-set=<name>` or `-P=<name>` flag:
+
+```sh
+$ deno run -P=read-data main.ts
+```
+
+### Default Permission
+
+A special `"default"` permission key allows excluding the name when using the
+`--permission-set`/`-P` flag:
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      "env": true
+    }
+  }
+}
+```
+
+Then run with just `-P`:
+
+```sh
+$ deno run -P main.ts
+```
+
+### Test, Bench, and Compile Permissions
+
+Permissions can be optionally specified within the `"test"`, `"bench"`, or
+`"compile"` keys.
+
+```jsonc
+{
+  "test": {
+    "permissions": {
+      "read": ["./data"]
+    }
+  }
+}
+```
+
+Or referencing a permission set:
+
+```jsonc
+{
+  "test": {
+    "permissions": "read-data"
+  },
+  "permissions": {
+    "read-data": {
+      "read": ["./data"]
+    }
+  }
+}
+```
+
+When this is defined, you must run `deno test` with `-P` or a permission flag:
+
+```
+> deno test
+error: Test permissions were found in the config file. Did you mean to run with `-P`?
+    at file:///Users/david/dev/example/deno.json
+> deno test -P
+...runs...
+> deno test --allow-read
+...runs...
+> deno test -A
+...runs...
+```
+
+This is to help prevent people using your project waste their time wondering why
+something not working when they forget to run without permissions.
+
+Note that test and bench files will use the closest deno.json for determining
+test and bench permissions. This allows giving different permissions to
+different workspace members.
+
+### Security Risk
+
+The threat model for permissions in the config file is similar to `deno task`,
+in that a script could modify the deno.json to elevate permissions. That's why
+this requires an explicit opt-in with `-P` and is not loaded by default.
+
+If you're ok with this risk, then this feature will be useful for you.
+
 ## An example `deno.json` file
 
 ```json
@@ -534,6 +642,11 @@ import * as module_2 from "@example/my-package/module2";
     "allowJs": true,
     "lib": ["deno.window"],
     "strict": true
+  },
+  "permissions": {
+    "default": {
+      "read": "./src/testdata/"
+    }
   },
   "lint": {
     "include": ["src/"],
