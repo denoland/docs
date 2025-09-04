@@ -334,7 +334,9 @@ class OramaSearch {
       validResults.map((hit) => `
         <li>
           <a
-            href="${this.escapeHtml(this.formatUrl(hit.document.url, hit))}"
+            href="${
+        this.escapeHtml(hit.document.url || hit.document.path || "#")
+      }"
             class="flex flex-col px-4 py-3 hover:bg-foreground-quaternary transition-colors duration-150 border-b border-foreground-quaternary last:border-b-0 search-result-link group"
           >
             <div class="font-bold text-foreground-primary text-sm mb-2 group-hover:text-primary transition-colors">
@@ -357,7 +359,7 @@ class OramaSearch {
               <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
               </svg>
-              ${this.escapeHtml(this.formatUrl(hit.document.url, hit))}
+              ${this.escapeHtml(hit.document.url || hit.document.path || "")}
             </div>
           </a>
         </li>
@@ -465,258 +467,26 @@ class OramaSearch {
     return div.innerHTML;
   }
 
-  // Helper method to ensure URLs are properly formatted
-  formatUrl(url: string | undefined, hit?: Hit<OramaDocument>): string {
-    // First try to use the path field if available (this should be a clean relative path)
-    if (hit && hit.document && hit.document.path) {
-      const path = this.cleanUrl(hit.document.path);
-
-      // Check if the original URL has an anchor that we should preserve
-      if (url && url.includes("#")) {
-        const anchorMatch = url.match(/#[^#]*$/);
-        if (anchorMatch) {
-          const anchor = anchorMatch[0];
-          // Only add anchor if it's not a "jump-to-heading" artifact
-          if (
-            !anchor.includes("jump-to-heading") &&
-            !anchor.includes("Jump-to-heading")
-          ) {
-            const cleanPath = path.startsWith("/") ? path : "/" + path;
-            return cleanPath + anchor;
-          }
-        }
-      }
-
-      // If it starts with '/', it's already a root-relative path
-      if (path.startsWith("/")) {
-        return path;
-      }
-      // Otherwise, make it root-relative
-      return "/" + path;
-    }
-
-    // Handle undefined or null URLs
-    if (!url) {
-      // Try to construct URL from other fields
-      if (hit && hit.document) {
-        // Check if there's an ID that might be a path
-        if (hit.id && typeof hit.id === "string") {
-          return this.formatUrl(hit.id);
-        }
-
-        // Try to construct from title (this is a fallback)
-        if (hit.document.title) {
-          // Convert title to a potential path
-          const pathFromTitle = hit.document.title
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, "-")
-            .replace(/^-+|-+$/g, "");
-          return `/${pathFromTitle}`;
-        }
-      }
-      return "#";
-    }
-
-    // Clean the URL first
-    const cleanedUrl = this.cleanUrl(url);
-
-    // If it's already a full URL, extract just the path part (including anchor)
-    if (cleanedUrl.startsWith("http://") || cleanedUrl.startsWith("https://")) {
-      try {
-        const urlObj = new URL(cleanedUrl);
-        return urlObj.pathname + urlObj.hash;
-      } catch {
-        // If URL parsing fails, fall back to original logic
-        return cleanedUrl;
-      }
-    }
-
-    // Handle API documentation URLs with relative paths and tildes
-    if (cleanedUrl.includes("~/")) {
-      // Clean up relative path patterns that may have been incorrectly processed
-      let cleanPath = cleanedUrl
-        .replace(/^\.+\/+/g, "") // Remove leading relative path indicators
-        .replace(/\/+/g, "/"); // Collapse multiple slashes to single slash
-
-      // Ensure it starts with a single slash
-      if (!cleanPath.startsWith("/")) {
-        cleanPath = "/" + cleanPath;
-      }
-
-      return cleanPath;
-    }
-
-    // If it starts with '/', it's a root-relative path
-    if (cleanedUrl.startsWith("/")) {
-      return cleanedUrl;
-    }
-
-    // Otherwise, make it root-relative
-    return "/" + cleanedUrl;
-  }
-
-  // Helper method to clean URLs by removing unwanted text
-  cleanUrl(url: string): string {
-    // Remove "jump to heading" and similar text patterns
-    let cleaned = url
-      .replace(/\s*jump\s+to\s+heading\s*/gi, "")
-      .replace(/\s*#jump-to-heading\s*/gi, "")
-      .replace(/\s*-jump-to-heading\s*/gi, "")
-      .replace(/#jump-to-heading/gi, "")
-      .replace(/-jump-to-heading/gi, "")
-      .trim();
-
-    // Clean up API documentation URLs with relative path issues and malformed patterns
-    if (cleaned.includes("~/")) {
-      // Remove problematic relative path patterns that can cause multiple slashes
-      cleaned = cleaned
-        .replace(/^\.+\/+/, "") // Remove leading ./ or ../ patterns
-        .replace(/\/+\.\//g, "/") // Replace /./ with /
-        .replace(/\/+\.\.\//g, "/") // Replace /../ with /
-        .replace(/\/+/g, "/"); // Collapse multiple slashes
-    }
-
-    // Handle malformed API paths with duplicated segments
-    // Pattern: /api/deno/~/Deno/serve/json/symbol_group_ctx
-    if (cleaned.includes("/~/")) {
-      // Clean up the tilde pattern and remove duplicated segments
-      cleaned = cleaned
-        .replace(/\/~\/([^\/]+)\/([^\/]+)\/json\/.*$/, "/~/$1.$2") // Convert /~/Deno/serve/json/... to /~/Deno.serve
-        .replace(/\/+/g, "/"); // Collapse any remaining multiple slashes
-    }
-
-    // Remove empty hash fragments or multiple hashes, but preserve legitimate anchors
-    cleaned = cleaned.replace(/#+$/, ""); // Remove trailing empty hashes
-    cleaned = cleaned.replace(/^#+/, ""); // Remove leading hashes only if they're standalone
-
-    // If the URL became empty or just whitespace, return the original
-    if (!cleaned || cleaned.trim() === "") {
-      return url;
-    }
-
-    return cleaned;
-  }
-
   // Helper method to clean titles by removing unwanted text
   cleanTitle(title: string): string {
     if (!title) return title;
 
-    // Handle malformed API titles with patterns like "./~/Deno.serve.json.Deno.serve"
-    if (title.includes("~/") && title.includes(".json.")) {
-      // Extract the clean API name from malformed patterns
-      const match = title.match(/\.\/~\/([^.]+)\.([^.]+)\.json\.\1\.\2/);
-      if (match) {
-        // Convert "./~/Deno.serve.json.Deno.serve" to "Deno.serve"
-        return `${match[1]}.${match[2]}`;
-      }
-
-      // Handle other tilde patterns
-      const tildeMatch = title.match(/\.\/~\/([^.]+\.[^.]+)/);
-      if (tildeMatch) {
-        return tildeMatch[1]; // Extract just the clean symbol name
-      }
-    }
-
-    // Handle breadcrumb-style titles with intelligent processing
-    if (title.includes("\\")) {
-      return this.processBreadcrumbTitle(title);
-    }
-
-    // Remove "jump to heading" and similar text patterns from titles
+    // Only remove basic "jump to heading" patterns
     let cleaned = title
       .replace(/\s*Jump\s+to\s+heading\s*/gi, "")
-      .replace(/\s*#Jump-to-heading\s*/gi, "")
-      .replace(/\s*-Jump-to-heading\s*/gi, "")
-      .replace(/Jump\s+to\s+heading#?/gi, "")
       .replace(/#Jump-to-heading/gi, "")
       .replace(/-Jump-to-heading/gi, "")
       .trim();
 
-    // Remove any trailing or leading hashes, pipes, or other separators
-    cleaned = cleaned.replace(/^[#\|\-\s]+|[#\|\-\s]+$/g, "");
+    // Remove any trailing or leading hashes
+    cleaned = cleaned.replace(/^#+|#+$/g, "");
 
-    // If the title became empty or just whitespace, return the original
+    // If the title became empty, return the original
     if (!cleaned || cleaned.trim() === "") {
       return title;
     }
 
     return cleaned;
-  }
-
-  // Process breadcrumb-style titles intelligently
-  processBreadcrumbTitle(title: string): string {
-    if (!title) return title;
-
-    // Split by common path separators
-    const parts = title.split(/[\\\/\|>]+/).map((part) => part.trim()).filter(
-      (part) => part,
-    );
-
-    if (parts.length <= 1) return title;
-
-    // Get the last meaningful part (not "Index")
-    let lastPart = parts[parts.length - 1];
-    if (lastPart.toLowerCase() === "index" && parts.length > 1) {
-      lastPart = parts[parts.length - 2];
-    }
-
-    // Handle specific known patterns where we want to preserve more context
-    const contextualMappings: Record<string, string> = {
-      "Support": "Support and Feedback", // When we see just "Support", enhance it
-    };
-
-    // Check if this last part needs enhancement
-    if (contextualMappings[lastPart]) {
-      return contextualMappings[lastPart];
-    }
-
-    // For other cases, use intelligent processing
-    return this.enhanceBreadcrumbPart(lastPart, parts);
-  }
-
-  // Enhance a breadcrumb part with context from the full path
-  enhanceBreadcrumbPart(part: string, _fullPath: string[]): string {
-    if (!part) return part;
-
-    // Handle common acronyms that shouldn't be split
-    const acronyms = [
-      "API",
-      "JWT",
-      "HTTP",
-      "HTTPS",
-      "URL",
-      "UUID",
-      "JSON",
-      "XML",
-      "HTML",
-      "CSS",
-      "JS",
-      "TS",
-    ];
-    if (acronyms.includes(part.toUpperCase())) {
-      return part.toUpperCase();
-    }
-
-    // Convert from various formats to readable text
-    let enhanced = part
-      .replace(/[_-]/g, " ") // Replace underscores and hyphens with spaces
-      .replace(/([a-z])([A-Z])/g, "$1 $2") // Add spaces between camelCase words
-      .replace(/\s+/g, " ") // Normalize whitespace
-      .trim();
-
-    // Capitalize properly
-    enhanced = enhanced.split(" ")
-      .map((word) => {
-        // Keep acronyms uppercase
-        if (acronyms.includes(word.toUpperCase())) {
-          return word.toUpperCase();
-        }
-        // Normal word capitalization
-        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-      })
-      .join(" ");
-
-    return enhanced;
   }
 
   // Helper method to detect navigation/menu content
