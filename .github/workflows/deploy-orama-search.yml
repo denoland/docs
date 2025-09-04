@@ -85,20 +85,35 @@ jobs:
         if: steps.changes.outputs.content_changed == 'true'
         run: |
           echo "Uploading search index to Orama Cloud..."
+          if [ -z "$ORAMA_PRIVATE_API_KEY" ] || [ -z "$ORAMA_PROJECT_ID" ] || [ -z "$ORAMA_DATASOURCE_ID" ]; then
+            echo "⚠️  Missing Orama Cloud credentials - skipping upload"
+            echo "This is expected for external contributors and forks"
+            exit 0
+          fi
           deno task search:upload
         env:
           ORAMA_PROJECT_ID: ${{ vars.ORAMA_PROJECT_ID }}
           ORAMA_DATASOURCE_ID: ${{ vars.ORAMA_DATASOURCE_ID }}
           ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
 
-      - name: Report deployment success
+      - name: Report deployment status
         if: steps.changes.outputs.content_changed == 'true'
         run: |
-          echo "Search index deployment completed successfully!"
-          echo "Updated search includes:"
-          echo "  Documentation pages"
-          echo "  API references (Deno, Web, Node.js)"
-          echo "  Total searchable documents: ~5,856"
+          if [ -n "$ORAMA_PRIVATE_API_KEY" ] && [ -n "$ORAMA_PROJECT_ID" ] && [ -n "$ORAMA_DATASOURCE_ID" ]; then
+            echo "✅ Search index deployment completed successfully!"
+            echo "Updated search includes:"
+            echo "  📄 Documentation pages"
+            echo "  🔧 API references (Deno, Web, Node.js)"
+            echo "  📊 Total searchable documents: ~5,856"
+          else
+            echo "⏭️  Search index upload was skipped (missing credentials)"
+            echo "📝 Generated search index files are available in the build artifacts"
+            echo "🔍 Search functionality will use the existing deployed index"
+          fi
+        env:
+          ORAMA_PROJECT_ID: ${{ vars.ORAMA_PROJECT_ID }}
+          ORAMA_DATASOURCE_ID: ${{ vars.ORAMA_DATASOURCE_ID }}
+          ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
 
       - name: Skip deployment message
         if: steps.changes.outputs.content_changed == 'false'
