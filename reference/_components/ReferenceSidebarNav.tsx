@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 export default function ReferenceSidebarNav(data: Lume.Data) {
-  const currentUrl = data.currentUrl.replace(/\/$/, "");
+  const currentUrl = data.currentUrl.replace(/\/$/, "").replace(/\/\.\//g, "/");
   const apiCategories = data.apiCategories;
 
   const apiSections = [
@@ -120,15 +120,18 @@ function ApiSection({ section, currentUrl, apiCategories }: {
         </li>
 
         {/* Bottom items (All symbols) */}
-        {bottomItems.map((item: any) => (
-          <li key={item.href}>
-            <SidebarItem
-              href={item.href}
-              title={item.title}
-              isActive={item.href.replace(/\/$/, "") === currentUrl}
-            />
-          </li>
-        ))}
+        {bottomItems.map((item: any) => {
+          const isActive = item.href.replace(/\/$/, "") === currentUrl;
+          return (
+            <li key={item.href}>
+              <SidebarItem
+                href={item.href}
+                title={item.title}
+                isActive={isActive}
+              />
+            </li>
+          );
+        })}
       </SidebarList>
     </nav>
   );
