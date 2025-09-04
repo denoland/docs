@@ -135,7 +135,7 @@
   "/examples/tutorials/web_testing": "/examples/web_testing_tutorial",
   "/examples/tutorials/word_finder": "/examples/word_finder_tutorial",
   "/api/node/assert/strict": "/api/node/assert/~/assert.strict",
-  "runtime/reference/deno_namespace_apis/": "/api/deno/", 
-  "runtime/reference/web_platform_apis/": "/api/web/", 
+  "runtime/reference/deno_namespace_apis/": "/api/deno/",
+  "runtime/reference/web_platform_apis/": "/api/web/",
   "runtime/reference/node_apis/": "/api/node/"
 }
