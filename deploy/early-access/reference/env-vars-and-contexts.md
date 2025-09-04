@@ -163,6 +163,6 @@ contexts:
 
 - `DENO_DEPLOY_APP_SLUG`: The slug of the application.
 
-- `DENO_DEPLOY_REVISION_ID`: The ID of the currently running revision.
+- `DENO_DEPLOY_BUILD_ID`: The ID of the currently running revision.
 
 During builds, the environment variable `CI=1` is additionally set.

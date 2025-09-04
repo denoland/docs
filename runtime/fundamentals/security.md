@@ -93,7 +93,7 @@ deno run --allow-all script.ts
 
 By default, Deno will not generate a stack trace for permission requests as it
 comes with a hit to performance. Users can enable stack traces with the
-`DENO_TRACE_PERMISSIONS` environment variable.
+`DENO_TRACE_PERMISSIONS` environment variable to `1`.
 
 ### File system access
 
@@ -240,7 +240,7 @@ dynamic imports, without requiring explicit network access:
 
 These locations are trusted "public good" registries that are not expected to
 enable data exfiltration through URL paths. You can add more trusted registries
-using the `--allow-imports` flag.
+using the `--allow-import` flag.
 
 In addition Deno allows importing any NPM package through `npm:` specifiers.
 

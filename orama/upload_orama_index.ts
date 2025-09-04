@@ -46,25 +46,28 @@ interface UploadOptions {
 /**
  * Load Orama configuration from environment variables
  */
-function loadOramaConfig(): OramaConfig {
+function loadOramaConfig(): OramaConfig | null {
   const projectId = Deno.env.get("ORAMA_PROJECT_ID");
   const datasourceId = Deno.env.get("ORAMA_DATASOURCE_ID");
   const privateApiKey = Deno.env.get("ORAMA_PRIVATE_API_KEY");
 
   if (!datasourceId || !privateApiKey || !projectId) {
-    console.error("❌ Missing required environment variables:");
-    console.error("   ORAMA_DATASOURCE_ID - Your Orama Cloud index ID");
-    console.error("   ORAMA_PROJECT_ID - Your Orama Cloud project ID");
-    console.error(
+    console.warn("⚠️  Missing required Orama Cloud environment variables:");
+    console.warn("   ORAMA_DATASOURCE_ID - Your Orama Cloud index ID");
+    console.warn("   ORAMA_PROJECT_ID - Your Orama Cloud project ID");
+    console.warn(
       "   ORAMA_PRIVATE_API_KEY - Your private API key for uploads",
     );
-    console.error("");
-    console.error("Example:");
-    console.error(
+    console.warn("");
+    console.warn("This is expected for external contributors and forks.");
+    console.warn("The search index upload will be skipped.");
+    console.warn("");
+    console.warn("If you need to upload the search index, set these variables:");
+    console.warn(
       '   export ORAMA_DATASOURCE_ID="your-index-id"',
     );
-    console.error('   export ORAMA_PRIVATE_API_KEY="your-private-api-key"');
-    Deno.exit(1);
+    console.warn('   export ORAMA_PRIVATE_API_KEY="your-private-api-key"');
+    return null;
   }
 
   return { datasourceId, privateApiKey, projectId };
@@ -81,6 +84,7 @@ interface IndexData {
     [key: string]: unknown;
   };
   documents: OramaDocument[];
+  data?: OramaDocument[]; // Alternative property name for documents
 }
 
 interface OramaDocument {
@@ -131,11 +135,7 @@ async function uploadDocuments(
       apiKey: config.privateApiKey
     });
 
-    const datasourceManager = orama.dataSource(config.datasourceId);
-
-    // Open a new transaction. It forks a new temporary, empty index
-    // we can use to re-upload all documents again.
-    await datasourceManager.index.transaction.open()
+    const datasource = orama.dataSource(config.datasourceId);
 
     let successful = 0;
     let failed = 0;
@@ -151,8 +151,8 @@ async function uploadDocuments(
       );
 
       try {
-        // Use the update method to insert/update documents
-        await datasourceManager.index.transaction.insertDocuments(batch);
+        // Insert documents directly to the datasource
+        await datasource.insertDocuments(batch);
         successful += batch.length;
         console.log(`✅ Batch ${batchNumber} uploaded successfully`);
       } catch (error) {
@@ -160,8 +160,6 @@ async function uploadDocuments(
         console.error(`❌ Batch ${batchNumber} failed:`, error);
       }
     }
-
-    await datasourceManager.index.transaction.commit();
 
     console.log(`\nUpload complete:`);
     console.log(`   ✅ Successful: ${successful}`);
@@ -259,6 +257,14 @@ async function main() {
 
   // Load configuration
   const config = loadOramaConfig();
+  
+  // If config is null (missing API keys), skip upload but don't fail
+  if (!config) {
+    console.log("🔄 Skipping Orama search index upload due to missing configuration.");
+    console.log("This is normal for external contributors and forks.");
+    return;
+  }
+  
   console.log(`Target index: ${config.datasourceId}`);
 
   // Determine input file path (auto-detect full vs minimal and _site vs static)
@@ -267,7 +273,7 @@ async function main() {
 
   // Load the index file
   const indexData = await loadIndexFile(indexFilePath);
-  const documents = indexData.documents || [];
+  const documents = indexData.documents || indexData.data || [];
 
   if (documents.length === 0) {
     console.error("❌ No documents found in index file");
