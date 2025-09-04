@@ -531,6 +531,21 @@ class OramaSearch {
       }
     }
 
+    // Handle API documentation URLs with relative paths and tildes
+    if (cleanedUrl.includes("~/")) {
+      // Clean up relative path patterns that may have been incorrectly processed
+      let cleanPath = cleanedUrl
+        .replace(/^\.+\/+/g, "") // Remove leading relative path indicators
+        .replace(/\/+/g, "/"); // Collapse multiple slashes to single slash
+
+      // Ensure it starts with a single slash
+      if (!cleanPath.startsWith("/")) {
+        cleanPath = "/" + cleanPath;
+      }
+
+      return cleanPath;
+    }
+
     // If it starts with '/', it's a root-relative path
     if (cleanedUrl.startsWith("/")) {
       return cleanedUrl;
@@ -551,6 +566,25 @@ class OramaSearch {
       .replace(/-jump-to-heading/gi, "")
       .trim();
 
+    // Clean up API documentation URLs with relative path issues and malformed patterns
+    if (cleaned.includes("~/")) {
+      // Remove problematic relative path patterns that can cause multiple slashes
+      cleaned = cleaned
+        .replace(/^\.+\/+/, "") // Remove leading ./ or ../ patterns
+        .replace(/\/+\.\//g, "/") // Replace /./ with /
+        .replace(/\/+\.\.\//g, "/") // Replace /../ with /
+        .replace(/\/+/g, "/"); // Collapse multiple slashes
+    }
+
+    // Handle malformed API paths with duplicated segments
+    // Pattern: /api/deno/~/Deno/serve/json/symbol_group_ctx
+    if (cleaned.includes("/~/")) {
+      // Clean up the tilde pattern and remove duplicated segments
+      cleaned = cleaned
+        .replace(/\/~\/([^\/]+)\/([^\/]+)\/json\/.*$/, "/~/$1.$2") // Convert /~/Deno/serve/json/... to /~/Deno.serve
+        .replace(/\/+/g, "/"); // Collapse any remaining multiple slashes
+    }
+
     // Remove empty hash fragments or multiple hashes, but preserve legitimate anchors
     cleaned = cleaned.replace(/#+$/, ""); // Remove trailing empty hashes
     cleaned = cleaned.replace(/^#+/, ""); // Remove leading hashes only if they're standalone
@@ -566,6 +600,22 @@ class OramaSearch {
   // Helper method to clean titles by removing unwanted text
   cleanTitle(title: string): string {
     if (!title) return title;
+
+    // Handle malformed API titles with patterns like "./~/Deno.serve.json.Deno.serve"
+    if (title.includes("~/") && title.includes(".json.")) {
+      // Extract the clean API name from malformed patterns
+      const match = title.match(/\.\/~\/([^.]+)\.([^.]+)\.json\.\1\.\2/);
+      if (match) {
+        // Convert "./~/Deno.serve.json.Deno.serve" to "Deno.serve"
+        return `${match[1]}.${match[2]}`;
+      }
+
+      // Handle other tilde patterns
+      const tildeMatch = title.match(/\.\/~\/([^.]+\.[^.]+)/);
+      if (tildeMatch) {
+        return tildeMatch[1]; // Extract just the clean symbol name
+      }
+    }
 
     // Handle breadcrumb-style titles with intelligent processing
     if (title.includes("\\")) {
