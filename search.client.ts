@@ -471,11 +471,9 @@ class OramaSearch {
   cleanTitle(title: string): string {
     if (!title) return title;
 
-    // Only remove basic "jump to heading" patterns
+    // Remove "jump to heading" patterns with any combination of spaces, dashes, and/or hashes
     let cleaned = title
-      .replace(/\s*Jump\s+to\s+heading\s*/gi, "")
-      .replace(/#Jump-to-heading/gi, "")
-      .replace(/-Jump-to-heading/gi, "")
+      .replace(/[\s#-]*jump to heading[\s#-]*/gi, "")
       .trim();
 
     // Remove any trailing or leading hashes
