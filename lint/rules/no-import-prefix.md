@@ -9,8 +9,8 @@ Ensure that all dependencies are declared in either `deno.json` or
 
 ```ts
 import foo from "https://deno.land/std/path/mod.ts";
-import foo from "jsr:@std/path";
-import foo from "npm:preact";
+import foo from "jsr:@std/path@1";
+import foo from "npm:preact@10";
 ```
 
 ### Valid:
