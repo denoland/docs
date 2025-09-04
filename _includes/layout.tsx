@@ -3,6 +3,10 @@ export function deleteBackticks(str?: string) {
 }
 
 export default function Layout(data: Lume.Data) {
+  const fingerprint = Deno.env.get("DENO_DEPLOY_BUILD_ID") || null;
+
+  console.log("fingerprint", fingerprint);
+
   const isReference = data.url.startsWith("/api/");
   const section = data.url.split("/").filter(Boolean)[0];
   const description = data.description ||
@@ -28,7 +32,11 @@ export default function Layout(data: Lume.Data) {
           'light'); document.documentElement.classList.add(theme);
         </script>
 
-        <link rel="stylesheet" href="/styles.css" />
+        <link
+          rel="stylesheet"
+          href={`/styles.css${fingerprint ? `?v=${fingerprint}` : ""}`}
+        />
+
         <link
           rel="preload"
           href="/fonts/inter/Inter-Regular.woff2"
