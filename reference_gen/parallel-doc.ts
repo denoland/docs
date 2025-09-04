@@ -140,8 +140,7 @@ async function runOptimizedDocGeneration() {
         stdout: "piped",
         stderr: "piped",
         env: {
-          "DENO_V8_FLAGS":
-            "--max-old-space-size=12288 --max-semi-space-size=256",
+          "DENO_V8_FLAGS": "--max-old-space-size=8192",
         },
       }).output();
 
