@@ -1,4 +1,4 @@
-import { doc, generateHtmlAsJSON } from "@deno/doc";
+import { doc, type DocNode, generateHtmlAsJSON } from "@deno/doc";
 import { expandGlob } from "@std/fs";
 import { hrefResolver, renderMarkdown, stripMarkdown } from "./common.ts";
 import { EnhancedGenerationCache } from "./cache.ts";
@@ -49,12 +49,36 @@ class NodeDocGenerator {
     }
 
     console.log("Generating doc nodes for all modules...");
-    const nodes = await doc(allFileNames);
 
-    console.log(`Generated doc nodes for ${Object.keys(nodes).length} modules`);
+    // Process files in smaller batches to reduce memory usage
+    const batchSize = 15; // Process 15 files at a time
+    const allNodes: Record<string, DocNode[]> = {};
+
+    for (let i = 0; i < allFileNames.length; i += batchSize) {
+      const batch = allFileNames.slice(i, i + batchSize);
+      console.log(
+        `Processing batch ${Math.floor(i / batchSize) + 1}/${
+          Math.ceil(allFileNames.length / batchSize)
+        } (${batch.length} files)...`,
+      );
+
+      const batchNodes = await doc(batch);
+
+      // Merge batch results into allNodes
+      for (const [key, value] of Object.entries(batchNodes)) {
+        allNodes[key] = value;
+      }
+
+      // Small delay to allow memory to settle
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
+    console.log(
+      `Generated doc nodes for ${Object.keys(allNodes).length} modules`,
+    );
     console.log("Generating JSON structure...");
 
-    const files = await generateHtmlAsJSON(nodes, {
+    const files = await generateHtmlAsJSON(allNodes, {
       packageName: "Node",
       disableSearch: true,
       symbolRedirectMap,

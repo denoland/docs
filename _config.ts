@@ -38,8 +38,12 @@ function ensureReferenceDocsExist() {
   const requiredFiles = [
     "reference_gen/gen/deno.json",
     "reference_gen/gen/web.json",
-    "reference_gen/gen/node.json",
   ];
+
+  // Only require node.json if not skipping node docs
+  if (!Deno.env.get("SKIP_NODE_DOCS")) {
+    requiredFiles.push("reference_gen/gen/node.json");
+  }
 
   const missingFiles = [];
   for (const file of requiredFiles) {
@@ -58,6 +62,9 @@ function ensureReferenceDocsExist() {
       `   Run 'deno task generate:reference' to generate them before building`,
     );
     console.error(`   Or set SKIP_REFERENCE=1 to skip reference documentation`);
+    console.error(
+      `   Or set SKIP_NODE_DOCS=1 to skip Node.js documentation only`,
+    );
     Deno.exit(1);
   }
 }

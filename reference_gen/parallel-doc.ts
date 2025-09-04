@@ -64,8 +64,9 @@ async function runOptimizedDocGeneration() {
         "--allow-net",
         "node-doc.ts",
       ],
-      shouldRun: await cache.shouldRegenerate("./types/node") ||
-        !existsSync("./gen/node.json"),
+      shouldRun: !Deno.env.get("SKIP_NODE_DOCS") &&
+        (await cache.shouldRegenerate("./types/node") ||
+          !existsSync("./gen/node.json")),
       priority: 3,
       memoryIntensive: true,
     },
@@ -73,6 +74,21 @@ async function runOptimizedDocGeneration() {
 
   // Filter tasks that need to run
   const tasksToRun = allTasks.filter((task) => task.shouldRun);
+
+  // If skipping Node docs but node.json doesn't exist, create placeholder
+  if (Deno.env.get("SKIP_NODE_DOCS") && !existsSync("./gen/node.json")) {
+    console.log("📝 Creating placeholder node.json for deployment build...");
+    const result = await new Deno.Command("deno", {
+      args: ["run", "--allow-write", "create-placeholder-node.ts"],
+      stdout: "piped",
+      stderr: "piped",
+    }).output();
+
+    if (result.code !== 0) {
+      console.error("❌ Failed to create placeholder node.json");
+      console.error(new TextDecoder().decode(result.stderr));
+    }
+  }
 
   if (tasksToRun.length === 0) {
     console.log("✨ All documentation is up to date! No regeneration needed.");
@@ -140,7 +156,8 @@ async function runOptimizedDocGeneration() {
         stdout: "piped",
         stderr: "piped",
         env: {
-          "DENO_V8_FLAGS": "--max-old-space-size=8192",
+          "DENO_V8_FLAGS":
+            "--max-old-space-size=12288 --max-semi-space-size=256",
         },
       }).output();
 
