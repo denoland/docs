@@ -183,6 +183,14 @@ export const hrefResolver: HrefResolver = {
       path = path.slice(0, -".html".length);
     }
 
+    // Normalize path to remove redundant ./. segments
+    // Replace sequences like /./ with /
+    path = path.replace(/\/\.\//g, "/");
+    // Handle ../. patterns specifically
+    path = path.replace(/\.\.\/\.\//g, "../");
+    // Remove leading ./ if present
+    path = path.replace(/^\.\//, "");
+
     return path;
   },
 };
