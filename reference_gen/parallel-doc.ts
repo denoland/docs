@@ -83,76 +83,36 @@ async function runOptimizedDocGeneration() {
     `📝 Running ${tasksToRun.length} of ${allTasks.length} generation tasks...`,
   );
 
-  // Sort by priority and memory requirements
-  tasksToRun.sort((a, b) => {
-    if (a.priority !== b.priority) {
-      return a.priority - b.priority;
-    }
-    // Run memory-intensive tasks last
-    return a.memoryIntensive ? 1 : -1;
-  });
-
-  // Run high-priority, low-memory tasks in parallel
-  const lightTasks = tasksToRun.filter((task) => !task.memoryIntensive);
-  const heavyTasks = tasksToRun.filter((task) => task.memoryIntensive);
+  // Run all tasks sequentially with aggressive memory management
+  console.log(`🔄 Running ${tasksToRun.length} tasks sequentially...`);
 
   const allResults: Array<{ task: TaskConfig; result: Deno.CommandOutput }> =
     [];
 
-  // Process light tasks in parallel
-  if (lightTasks.length > 0) {
-    console.log(
-      `⚡ Running ${lightTasks.length} lightweight tasks in parallel...`,
-    );
+  for (const task of tasksToRun) {
+    console.log(`📊 Starting ${task.name} generation...`);
 
-    const lightPromises = lightTasks.map(async (task, index) => {
-      // Slight stagger to reduce initial resource spike
-      if (index > 0) {
-        await new Promise((resolve) => setTimeout(resolve, index * 200));
-      }
+    const memoryLimit = task.memoryIntensive ? "4096" : "2048";
 
-      return new Deno.Command("deno", {
-        args: task.command,
-        stdout: "piped",
-        stderr: "piped",
-        env: { "DENO_V8_FLAGS": "--max-old-space-size=4096" }, // Increase memory limit
-      }).output().then((result) => ({ task, result }));
-    });
+    const result = await new Deno.Command("deno", {
+      args: task.command,
+      stdout: "piped",
+      stderr: "piped",
+      env: {
+        "DENO_V8_FLAGS": `--max-old-space-size=${memoryLimit}`,
+      },
+    }).output();
 
-    const lightResults = await Promise.all(lightPromises);
-    allResults.push(...lightResults);
+    allResults.push({ task, result });
 
-    // Small delay to let memory settle
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-  }
-
-  // Process heavy tasks sequentially with memory management
-  if (heavyTasks.length > 0) {
-    console.log(
-      `🏋️ Running ${heavyTasks.length} memory-intensive tasks sequentially...`,
-    );
-
-    for (const task of heavyTasks) {
-      console.log(`📊 Starting ${task.name} generation...`);
-
-      const result = await new Deno.Command("deno", {
-        args: task.command,
-        stdout: "piped",
-        stderr: "piped",
-        env: {
-          "DENO_V8_FLAGS": "--max-old-space-size=6144",
-        },
-      }).output();
-
-      allResults.push({ task, result });
-
-      if (result.code === 0) {
-        console.log(`✅ ${task.name} generation completed`);
-      }
-
-      // Force garbage collection and memory cleanup between heavy tasks
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+    if (result.code === 0) {
+      console.log(`✅ ${task.name} generation completed`);
+    } else {
+      console.error(`❌ ${task.name} generation failed`);
     }
+
+    // Longer delay between tasks for memory cleanup
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   }
 
   const endTime = performance.now();
@@ -202,7 +162,7 @@ async function runOptimizedDocGeneration() {
     Deno.exit(1);
   } else {
     console.log(
-      `\n🎉 Documentation generation completed successfully in <green>${totalTime}s<green`,
+      `\n🎉 Documentation generation completed successfully in <green>${totalTime}s</green>`,
     );
     console.log(`📊 Tasks: ${tasksRun} run, ${tasksSkipped} skipped`);
   }
