@@ -240,7 +240,7 @@ dynamic imports, without requiring explicit network access:
 
 These locations are trusted "public good" registries that are not expected to
 enable data exfiltration through URL paths. You can add more trusted registries
-using the `--allow-imports` flag.
+using the `--allow-import` flag.
 
 In addition Deno allows importing any NPM package through `npm:` specifiers.
 
