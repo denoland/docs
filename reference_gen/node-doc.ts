@@ -50,32 +50,96 @@ class NodeDocGenerator {
 
     console.log("Generating doc nodes for all modules...");
 
-    // Process files in smaller batches to reduce memory usage
-    const batchSize = 15; // Process 15 files at a time
-    const allNodes: Record<string, DocNode[]> = {};
+    // Process files in much smaller batches to reduce peak memory usage
+    const batchSize = 8; // Reduced from 15 to 8
+    const allModules: string[] = [];
+    const tempDir = "./temp_node_docs";
 
+    // Create temporary directory for intermediate results
+    try {
+      await Deno.mkdir(tempDir, { recursive: true });
+    } catch {
+      // Directory might already exist
+    }
+
+    // Process and store each batch separately
     for (let i = 0; i < allFileNames.length; i += batchSize) {
       const batch = allFileNames.slice(i, i + batchSize);
+      const batchNum = Math.floor(i / batchSize) + 1;
+      const totalBatches = Math.ceil(allFileNames.length / batchSize);
+
       console.log(
-        `Processing batch ${Math.floor(i / batchSize) + 1}/${
-          Math.ceil(allFileNames.length / batchSize)
-        } (${batch.length} files)...`,
+        `Processing batch ${batchNum}/${totalBatches} (${batch.length} files)...`,
       );
 
-      const batchNodes = await doc(batch);
+      try {
+        const batchNodes = await doc(batch);
 
-      // Merge batch results into allNodes
-      for (const [key, value] of Object.entries(batchNodes)) {
-        allNodes[key] = value;
+        // Store batch result to disk immediately and clear from memory
+        const batchFile = `${tempDir}/batch_${batchNum}.json`;
+        await Deno.writeTextFile(batchFile, JSON.stringify(batchNodes));
+
+        // Track modules for final assembly
+        allModules.push(...Object.keys(batchNodes));
+      } catch (error) {
+        console.error(`Error processing batch ${batchNum}:`, error);
+        throw error;
       }
 
-      // Small delay to allow memory to settle
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      // Delay to allow memory to settle
+      await new Promise((resolve) => setTimeout(resolve, 200));
     }
 
     console.log(
-      `Generated doc nodes for ${Object.keys(allNodes).length} modules`,
+      `Processed ${allModules.length} modules in ${
+        Math.ceil(allFileNames.length / batchSize)
+      } batches`,
     );
+    console.log("Assembling final documentation...");
+
+    // Reassemble all nodes from disk with memory management
+    const allNodes: Record<string, DocNode[]> = {};
+    const assemblyBatchSize = 3; // Process even fewer batches at once during assembly
+
+    for (
+      let i = 0;
+      i < Math.ceil(allFileNames.length / batchSize);
+      i += assemblyBatchSize
+    ) {
+      const endBatch = Math.min(
+        i + assemblyBatchSize,
+        Math.ceil(allFileNames.length / batchSize),
+      );
+
+      console.log(`Assembling batches ${i + 1}-${endBatch}...`);
+
+      for (let j = i; j < endBatch; j++) {
+        const batchFile = `${tempDir}/batch_${j + 1}.json`;
+        try {
+          const batchData = await Deno.readTextFile(batchFile);
+          const batchNodes = JSON.parse(batchData);
+
+          // Merge into allNodes
+          Object.assign(allNodes, batchNodes);
+
+          // Clean up temporary file
+          await Deno.remove(batchFile);
+        } catch (error) {
+          console.warn(`Could not load batch ${j + 1}:`, error);
+        }
+      }
+
+      // Memory management between assembly batches
+      await new Promise((resolve) => setTimeout(resolve, 300));
+    }
+
+    // Clean up temp directory
+    try {
+      await Deno.remove(tempDir, { recursive: true });
+    } catch {
+      // Ignore cleanup errors
+    }
+
     console.log("Generating JSON structure...");
 
     const files = await generateHtmlAsJSON(allNodes, {

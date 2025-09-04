@@ -140,7 +140,7 @@ async function runOptimizedDocGeneration() {
         stdout: "piped",
         stderr: "piped",
         env: {
-          "DENO_V8_FLAGS": "--max-old-space-size=8192",
+          "DENO_V8_FLAGS": "--max-old-space-size=6144",
         },
       }).output();
 
@@ -150,8 +150,8 @@ async function runOptimizedDocGeneration() {
         console.log(`✅ ${task.name} generation completed`);
       }
 
-      // Force garbage collection and memory cleanup
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Force garbage collection and memory cleanup between heavy tasks
+      await new Promise((resolve) => setTimeout(resolve, 3000));
     }
   }
 
