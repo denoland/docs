@@ -216,23 +216,6 @@ delete the cache files:
 deno task cache:clear
 ```
 
-### Memory optimization for deployment
-
-When building on resource-constrained environments (like Deno Deploy), you can
-skip the memory-intensive Node.js documentation generation:
-
-```console
-# For deployment builds with limited memory
-deno task build:deploy
-
-# Or set the environment variable directly
-SKIP_NODE_DOCS=1 deno task build
-```
-
-This will create a placeholder `node.json` file instead of generating the full
-Node.js API documentation, significantly reducing memory usage during the build
-process.
-
 ## Contribution
 
 We are very grateful for any help you can offer to improve Deno's documentation!
