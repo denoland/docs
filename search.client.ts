@@ -254,7 +254,7 @@ class OramaSearch {
         limit: 8,
         threshold: 1,
         properties: ["title", "content", "description"],
-        datasources: ["0fe1e86b-60c9-4715-8bba-0c4686a58e7e"],
+        datasources: ["b03275f5-6d98-499e-9fe5-5d704221006e"],
         boost: {
           title: 12,
           content: 4,
