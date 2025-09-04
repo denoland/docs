@@ -590,7 +590,7 @@ Permissions can be optionally specified within the `"test"`, `"bench"`, or
 }
 ```
 
-Or referencing a permission set:
+Or reference a permission set:
 
 ```jsonc
 {
@@ -619,12 +619,12 @@ error: Test permissions were found in the config file. Did you mean to run with 
 ...runs...
 ```
 
-This is to help prevent people using your project waste their time wondering why
-something not working when they forget to run without permissions.
+This is to help prevent you waste your time wondering why something is not
+working when you forget to run without permissions.
 
-Note that test and bench files will use the closest deno.json for determining
-test and bench permissions. This allows giving different permissions to
-different workspace members.
+Note that test and bench files in a workspace will use the closest deno.json for
+determining test and bench permissions. This allows giving different permissions
+to different workspace members.
 
 ### Security Risk
 
