@@ -21,7 +21,7 @@
     "serve": "deno task dev",
     "serve:style": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts",
     "start": "deno task dev",
-    "build": "deno task generate:reference && BUILD_TYPE=FULL deno task lume && tailwindcss -i styles.css -o _site/styles.css --minify",
+    "build": "deno task generate:reference && BUILD_TYPE=FULL deno task lume",
     "build:light": "deno task lume",
     "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",

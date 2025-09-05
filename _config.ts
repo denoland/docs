@@ -171,7 +171,9 @@ site.use(
 );
 
 site.add("style.css");
-site.use(tailwind());
+site.use(tailwind({
+  minify: true,
+}));
 
 site.use(toc({ anchor: false }));
 site.use(title());
