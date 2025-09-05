@@ -74,11 +74,11 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
         </div>
       </main>
 
-      {(isReference && data.pageContent?.toc_ctx) && (
+      {(isReference && data.data?.toc_ctx) && (
         <data.comp.RefToc
-          documentNavigation={data.pageContent.toc_ctx
+          documentNavigation={data.data.toc_ctx
             .document_navigation}
-          documentNavigationStr={data.pageContent.toc_ctx
+          documentNavigationStr={data.data.toc_ctx
             .document_navigation_str}
         />
       )}
