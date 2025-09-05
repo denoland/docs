@@ -126,7 +126,7 @@ export default function* () {
         } else if (content.kind === "SymbolPageCtx") {
           layout = "symbol";
         } else {
-          throw `unknown page kind: ${content.kind}`;
+          throw `unknown page kind: ${(content as { kind: string }).kind}`;
         }
 
         yield {
