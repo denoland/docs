@@ -138,7 +138,6 @@ export default function renderCommand(
             class="flex flex-col gap-4"
             dangerouslySetInnerHTML={{ __html: helpers.md(about) }}
           />
-          <br />
         </>
       )}
 

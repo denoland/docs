@@ -227,18 +227,6 @@ export const sidebar = [
         ],
       },
       {
-        title: "Deno APIs",
-        href: "/api/deno/",
-      },
-      {
-        title: "Web APIs",
-        href: "/runtime/reference/web_platform_apis/",
-      },
-      {
-        title: "Node APIs",
-        href: "/runtime/reference/node_apis/",
-      },
-      {
         title: "TS Config Migration",
         href: "/runtime/reference/ts_config_migration/",
       },
@@ -367,7 +355,10 @@ export async function generateDescriptions(): Promise<Descriptions> {
     )
   ) {
     const file = await Deno.readTextFile(dirEntry.path);
-    const parsed = yamlParse(file);
+    const parsed = yamlParse(file) as Partial<DescriptionItem> & {
+      description?: Description | string;
+      symbols?: Record<string, Description | string>;
+    };
     if (!parsed) {
       throw `Invalid or empty file: ${dirEntry.path}`;
     }
@@ -379,7 +370,7 @@ export async function generateDescriptions(): Promise<Descriptions> {
       parsed.symbols = Object.fromEntries(
         Object.entries(parsed.symbols).map(([key, value]) => [
           key,
-          handleDescription(value),
+          handleDescription(value as Description | string),
         ]),
       );
     }
@@ -395,7 +386,7 @@ export async function generateDescriptions(): Promise<Descriptions> {
       throw `Invalid status provided in '${dirEntry.name}': ${parsed.status}`;
     }
 
-    descriptions[dirEntry.name.slice(0, -5)] = parsed;
+    descriptions[dirEntry.name.slice(0, -5)] = parsed as DescriptionItem;
   }
 
   return descriptions;

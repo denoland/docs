@@ -91,6 +91,17 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
                   Available since {data.available_since}
                 </div>
               )}
+              {data.info && (
+                <div class="admonition info">
+                  <div class="title">Info</div>
+                  <div
+                    class="text-sm"
+                    dangerouslySetInnerHTML={{
+                      __html: helpers.md(data.info, true),
+                    }}
+                  />
+                </div>
+              )}
               {renderedCommand}
               {data.children}
             </div>
