@@ -163,6 +163,9 @@ site.use(
     options: {
       minify: false,
       splitting: true,
+      alias: {
+        "node:crypto": "./_node-crypto.js",
+      },
     },
   }),
 );
