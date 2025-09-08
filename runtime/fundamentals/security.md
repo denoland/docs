@@ -106,7 +106,7 @@ format, where each line is an object with the following keys:
 - `value`: the value that the permission was accessed with, or `null` if it was
   accessed with no value.
 
-In addition, this env var can be combined with the above mentioned
+In addition, this env var can be combined with the above-mentioned
 `DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
 which is an array contain all the stack trace frames.
 
