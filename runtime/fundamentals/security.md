@@ -95,6 +95,24 @@ By default, Deno will not generate a stack trace for permission requests as it
 comes with a hit to performance. Users can enable stack traces with the
 `DENO_TRACE_PERMISSIONS` environment variable to `1`.
 
+Deno can also generate an audit log of all accessed permissions; this can be
+achieved using the `DENO_AUDIT_PERMISSIONS` environment variable to a path. This
+works regardless if permissions are allowed or not. The output is in JSONL
+format, where each line is an object with the following keys:
+
+- `v`: the version of the format
+- `datetime`: when the permission was accessed, in RFC 3339 format
+- `permission`: the name of the permission
+- `value`: the value that the permission was accessed with, or `null` if it was
+  accessed with no value
+
+A schema for this can be found
+[here](https://deno.land/x/deno/cli/schemas/permission-audit.v1.json).
+
+In addition, this env var can be combined with the above-mentioned
+`DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
+which is an array contain all the stack trace frames.
+
 ### File system access
 
 By default, executing code can not read or write arbitrary files on the file
