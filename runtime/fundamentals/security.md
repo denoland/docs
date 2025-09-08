@@ -101,10 +101,10 @@ works regardless if permissions are allowed or not. The output is in JSONL
 format, where each line is an object with the following keys:
 
 - `v`: the version of the format
-- `datetime`: when the permission was accessed
+- `datetime`: when the permission was accessed, in RFC 3339 format
 - `permission`: the name of the permission
 - `value`: the value that the permission was accessed with, or `null` if it was
-  accessed with no value.
+  accessed with no value
 
 A schema for this can be found
 [here](https://deno.land/x/deno/cli/schemas/permission-audit.v1.json).
