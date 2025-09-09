@@ -113,6 +113,11 @@ In addition, this env var can be combined with the above-mentioned
 `DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
 which is an array contain all the stack trace frames.
 
+### Configuration file
+
+Deno supports storing permissions in the deno.json/deno.jsonc file. Read more
+under [configuration](/runtime/fundamentals/configuration/#Permissions).
+
 ### File system access
 
 By default, executing code can not read or write arbitrary files on the file
