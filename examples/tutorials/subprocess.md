@@ -102,3 +102,49 @@ Run it:
 ```shell
 $ deno run --allow-run=yes --allow-read=. --allow-write=. ./subprocess_piping_to_file.ts
 ```
+
+## Reading subprocess output with convenience methods
+
+When working with spawned subprocesses, you can use convenience methods on the `stdout` and `stderr` streams to easily collect and parse output. These methods are similar to those available on `Response` objects:
+
+```ts title="subprocess_convenience_methods.ts"
+const command = new Deno.Command("deno", {
+  args: ["eval", "console.log(JSON.stringify({message: 'Hello from subprocess'}))"],
+  stdout: "piped",
+  stderr: "piped",
+});
+
+const process = command.spawn();
+
+// Use convenience methods to collect output
+const stdoutText = await process.stdout.text();
+const stderrText = await process.stderr.text();
+
+console.log("stdout:", stdoutText);
+console.log("stderr:", stderrText);
+
+// Wait for the process to complete
+const status = await process.status;
+console.log("Exit code:", status.code);
+```
+
+Available convenience methods include:
+- `.text()` - Returns the output as a UTF-8 string
+- `.bytes()` - Returns the output as a `Uint8Array`
+- `.arrayBuffer()` - Returns the output as an `ArrayBuffer`
+- `.json()` - Parses the output as JSON and returns the parsed object
+
+```ts title="subprocess_json_parsing.ts"
+const command = new Deno.Command("deno", {
+  args: ["eval", "console.log(JSON.stringify({name: 'Deno', version: '2.0'}))"],
+  stdout: "piped",
+});
+
+const process = command.spawn();
+
+// Parse JSON output directly
+const jsonOutput = await process.stdout.json();
+console.log("Parsed JSON:", jsonOutput); // { name: "Deno", version: "2.0" }
+
+await process.status;
+```
