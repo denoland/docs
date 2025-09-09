@@ -487,6 +487,35 @@ Deno.test("spy example", () => {
 For more advanced mocking techniques, check our
 [dedicated guide on mocking in Deno](/examples/mocking_tutorial/).
 
+## Test hooks
+
+Deno provides test hooks for running setup and teardown code. Here's a simple
+example using `beforeEach` to ensure clean state between tests:
+
+```ts
+import { assertEquals } from "jsr:@std/assert";
+
+let testData: string[] = [];
+
+Deno.test.beforeEach(() => {
+  testData = ["initial", "data"];
+});
+
+Deno.test("first test", () => {
+  testData.push("first");
+  assertEquals(testData.length, 3);
+});
+
+Deno.test("second test", () => {
+  testData.push("second");
+  assertEquals(testData.length, 3); // Clean state from beforeEach
+});
+```
+
+For complete information on all available hooks (`beforeAll`, `beforeEach`,
+`afterEach`, `afterAll`), see the
+[Testing documentation](/runtime/fundamentals/testing/#test-hooks).
+
 ## Coverage
 
 Code coverage is a metric that helps you understand how much of your code is

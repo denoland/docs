@@ -117,6 +117,105 @@ Deno.test("database operations", async (t) => {
 });
 ```
 
+## Test Hooks
+
+Deno provides test hooks that allow you to run setup and teardown code before
+and after tests. These hooks are useful for initializing resources, cleaning up
+after tests, and ensuring consistent test environments.
+
+### Available Hooks
+
+- `Deno.test.beforeAll(fn)` - Runs once before all tests in the current scope
+- `Deno.test.beforeEach(fn)` - Runs before each individual test
+- `Deno.test.afterEach(fn)` - Runs after each individual test
+- `Deno.test.afterAll(fn)` - Runs once after all tests in the current scope
+
+### Hook Execution Order
+
+- **beforeAll/beforeEach**: Execute in FIFO (first in, first out) order
+- **afterEach/afterAll**: Execute in LIFO (last in, first out) order
+
+If an exception is raised in any hook, remaining hooks of the same type will not
+run, and the current test will be marked as failed.
+
+### Examples
+
+```ts
+import { DatabaseSync } from "node:sqlite";
+import { assertEquals } from "jsr:@std/assert";
+
+let db: DatabaseSync;
+
+Deno.test.beforeAll(() => {
+  console.log("Setting up test database...");
+  db = new DatabaseSync(":memory:");
+  db.exec(`
+    CREATE TABLE users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE
+    ) STRICT
+  `);
+});
+
+Deno.test.beforeEach(() => {
+  console.log("Clearing database for clean test state...");
+  db.exec("DELETE FROM users");
+});
+
+Deno.test.afterEach(() => {
+  console.log("Test completed, cleaning up resources...");
+  // Any additional cleanup after each test
+});
+
+Deno.test.afterAll(() => {
+  console.log("Tearing down test database...");
+  db.close();
+});
+
+Deno.test("user creation", () => {
+  const stmt = db.prepare(
+    "INSERT INTO users (name, email) VALUES (?, ?) RETURNING *",
+  );
+  const user = stmt.get("alice", "alice@example.com");
+  assertEquals(user!.name, "alice");
+});
+
+Deno.test("user deletion", () => {
+  const insertStmt = db.prepare(
+    "INSERT INTO users (name, email) VALUES (?, ?) RETURNING *",
+  );
+  const user = insertStmt.get("bob", "bob@example.com");
+
+  const deleteStmt = db.prepare("DELETE FROM users WHERE id = ?");
+  deleteStmt.run(user!.id);
+
+  const selectStmt = db.prepare("SELECT * FROM users WHERE id = ?");
+  const deletedUser = selectStmt.get(user!.id);
+  assertEquals(deletedUser, undefined);
+});
+```
+
+### Multiple Hooks
+
+You can register multiple hooks of the same type, and they will execute in the
+order specified above:
+
+```ts
+Deno.test.beforeEach(() => {
+  console.log("First beforeEach hook");
+});
+
+Deno.test.beforeEach(() => {
+  console.log("Second beforeEach hook");
+});
+
+// Output:
+// First beforeEach hook
+// Second beforeEach hook
+// (test runs)
+```
+
 ## Command line filtering
 
 Deno allows you to run specific tests or groups of tests using the `--filter`
