@@ -69,7 +69,7 @@ export default function Feedback({ file }: { file: string | undefined }) {
                       </path>
                     </svg>
                   </label>
-                 {!file.includes("[") && <EditThisPage file={file} />}
+                  {!file.includes("[") && <EditThisPage file={file} />}
                 </div>
                 <div
                   id="feedback-more"
