@@ -489,7 +489,8 @@ For more advanced mocking techniques, check our
 
 ## Test hooks
 
-Deno provides test hooks for running setup and teardown code. Here's a simple example using `beforeEach` to ensure clean state between tests:
+Deno provides test hooks for running setup and teardown code. Here's a simple
+example using `beforeEach` to ensure clean state between tests:
 
 ```ts
 import { assertEquals } from "jsr:@std/assert";
@@ -511,7 +512,9 @@ Deno.test("second test", () => {
 });
 ```
 
-For complete information on all available hooks (`beforeAll`, `beforeEach`, `afterEach`, `afterAll`), see the [Testing documentation](/runtime/fundamentals/testing/#test-hooks).
+For complete information on all available hooks (`beforeAll`, `beforeEach`,
+`afterEach`, `afterAll`), see the
+[Testing documentation](/runtime/fundamentals/testing/#test-hooks).
 
 ## Coverage
 
