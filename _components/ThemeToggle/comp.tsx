@@ -20,8 +20,3 @@ export default function () {
     </button>
   );
 }
-
-export const js = `
-import "/js/darkmode.client.js";
-import "/js/darkmode-toggle.client.js";
-`;
