@@ -216,7 +216,7 @@ export const sidebar = [
       },
       {
         title: "Build a Fresh app",
-        href: "https://fresh.deno.dev/docs/getting-started/create-a-project/",
+        href: "/examples/fresh_tutorial/",
         type: "tutorial",
       },
       {
