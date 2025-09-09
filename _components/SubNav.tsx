@@ -1,4 +1,4 @@
-import { SidebarNav } from "../types.ts";
+import { SidebarNavItem } from "../types.ts";
 
 export default function (
   { data, currentUrl }: {
@@ -6,25 +6,13 @@ export default function (
     currentUrl: string;
   },
 ) {
-  let navData = data.page?.data?.SidebarNav;
+  const navData = data.page?.data?.SidebarNav;
   const isReference = currentUrl.startsWith("/api");
-  const apiReferenceSubnavItems = [
-    {
-      title: "Deno APIs",
-      href: "/api/deno",
-    },
-    {
-      title: "Web APIs",
-      href: "/api/web",
-    },
-    {
-      title: "Node APIs",
-      href: "/api/node",
-    },
-  ] satisfies SidebarNav;
 
-  // We need to hard-code the API Reference subnav, since it's generated elsewhere.
-  if (isReference && !navData) navData = apiReferenceSubnavItems;
+  // Don't render SubNav for API reference pages - these will be handled in the sidebar
+  if (isReference) {
+    return null;
+  }
 
   return (
     <nav
@@ -32,7 +20,7 @@ export default function (
       class="flex items-center pl-4 bg-header-highlight z-10 h-[var(--subnav-height)] overflow-x-auto xlplus:pl-0"
     >
       <ul class="flex w-full max-w-7xl mx-auto items-center gap-6">
-        {navData.map((nav: any) => (
+        {navData.map((nav: SidebarNavItem) => (
           <li key={nav.href}>
             <a
               className={`whitespace-nowrap text-sm md:text-base p-0 text-gray-800 block relative after:absolute after:bottom-0 after:left-0 after:origin-right after:transition-transform after:scale-x-0 after:block after:w-full after:h-px after:bg-gray-800 hover:after:scale-x-100 hover:after:origin-left ${

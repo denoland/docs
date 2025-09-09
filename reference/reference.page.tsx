@@ -86,13 +86,25 @@ export default function* () {
           continue;
         }
 
+        // Skip generating index pages since we have static versions
+        if (
+          (name === "Deno" || name === "Web" || name === "Node") &&
+          filepath === "./index.json"
+        ) {
+          continue;
+        }
+
         const trailingLength = filepath.endsWith("index.json")
           ? -"index.json".length
           : -".json".length;
 
-        const url = `/api/${name.toLowerCase()}/${
-          filepath.slice(0, trailingLength)
-        }`;
+        // Remove leading "./" if present
+        let normalizedPath = filepath.slice(0, trailingLength);
+        if (normalizedPath.startsWith("./")) {
+          normalizedPath = normalizedPath.slice(2);
+        }
+
+        const url = `/api/${name.toLowerCase()}/${normalizedPath}`;
 
         if ("path" in content) {
           // TODO: handle redirects in a more integrated manner
@@ -114,7 +126,7 @@ export default function* () {
         } else if (content.kind === "SymbolPageCtx") {
           layout = "symbol";
         } else {
-          throw `unknown page kind: ${content.kind}`;
+          throw `unknown page kind: ${(content as { kind: string }).kind}`;
         }
 
         yield {
