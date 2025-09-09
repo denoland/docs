@@ -117,6 +117,80 @@ Deno.test("database operations", async (t) => {
 });
 ```
 
+## Test Hooks
+
+Deno provides test hooks that allow you to run setup and teardown code before and after tests. These hooks are useful for initializing resources, cleaning up after tests, and ensuring consistent test environments.
+
+### Available Hooks
+
+- `Deno.test.beforeAll(fn)` - Runs once before all tests in the current scope
+- `Deno.test.beforeEach(fn)` - Runs before each individual test
+- `Deno.test.afterEach(fn)` - Runs after each individual test
+- `Deno.test.afterAll(fn)` - Runs once after all tests in the current scope
+
+### Hook Execution Order
+
+- **beforeAll/beforeEach**: Execute in FIFO (first in, first out) order
+- **afterEach/afterAll**: Execute in LIFO (last in, first out) order
+
+If an exception is raised in any hook, remaining hooks of the same type will not run, and the current test will be marked as failed.
+
+### Examples
+
+```ts
+// Database setup and teardown example
+Deno.test.beforeAll(async () => {
+  console.log("Setting up test database...");
+  await setupTestDatabase();
+});
+
+Deno.test.beforeEach(async () => {
+  console.log("Clearing database for clean test state...");
+  await clearDatabase();
+});
+
+Deno.test.afterEach(async () => {
+  console.log("Test completed, cleaning up resources...");
+  await cleanupTestResources();
+});
+
+Deno.test.afterAll(async () => {
+  console.log("Tearing down test database...");
+  await teardownTestDatabase();
+});
+
+Deno.test("user creation", async () => {
+  const user = await createUser("alice", "alice@example.com");
+  assertEquals(user.name, "alice");
+});
+
+Deno.test("user deletion", async () => {
+  const user = await createUser("bob", "bob@example.com");
+  await deleteUser(user.id);
+  const deletedUser = await findUser(user.id);
+  assertEquals(deletedUser, null);
+});
+```
+
+### Multiple Hooks
+
+You can register multiple hooks of the same type, and they will execute in the order specified above:
+
+```ts
+Deno.test.beforeEach(() => {
+  console.log("First beforeEach hook");
+});
+
+Deno.test.beforeEach(() => {
+  console.log("Second beforeEach hook");
+});
+
+// Output:
+// First beforeEach hook
+// Second beforeEach hook
+// (test runs)
+```
+
 ## Command line filtering
 
 Deno allows you to run specific tests or groups of tests using the `--filter`
