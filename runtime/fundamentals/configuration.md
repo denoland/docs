@@ -530,7 +530,7 @@ import * as module_2 from "@example/my-package/module2";
 
 Deno 2.5+ supports storing permission sets in the config file.
 
-### Named Permissions
+### Named permissions
 
 Permissions can be defined in key value pairs under the `"permissions"` key:
 
@@ -554,7 +554,7 @@ Then used by specifying the `--permission-set=<name>` or `-P=<name>` flag:
 $ deno run -P=read-data main.ts
 ```
 
-### Default Permission
+### Default permission
 
 A special `"default"` permission key allows excluding the name when using the
 `--permission-set`/`-P` flag:
@@ -575,7 +575,7 @@ Then run with just `-P`:
 $ deno run -P main.ts
 ```
 
-### Test, Bench, and Compile Permissions
+### Test, bench, and compile permissions
 
 Permissions can be optionally specified within the `"test"`, `"bench"`, or
 `"compile"` keys.
@@ -622,14 +622,14 @@ error: Test permissions were found in the config file. Did you mean to run with 
 This is to help prevent you waste your time wondering why something is not
 working when you forget to run without permissions.
 
-Note that test and bench files in a workspace will use the closest deno.json for
-determining test and bench permissions. This allows giving different permissions
-to different workspace members.
+Note that test and bench files in a workspace will use the closest `deno.json`
+for determining `test` and `bench` permissions. This allows giving different
+permissions to different workspace members.
 
-### Security Risk
+### Security risk
 
 The threat model for permissions in the config file is similar to `deno task`,
-in that a script could modify the deno.json to elevate permissions. That's why
+in that a script could modify the `deno.json` to elevate permissions. That's why
 this requires an explicit opt-in with `-P` and is not loaded by default.
 
 If you're ok with this risk, then this feature will be useful for you.
