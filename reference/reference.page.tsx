@@ -43,8 +43,16 @@ interface ChunkManifest {
 // Process chunked files for better memory management
 async function* processChunkedFiles(
   manifestPath: string,
-  name: string
-): AsyncGenerator<{ url: string; title?: string; layout?: string; data?: Page; content?: string }> {
+  name: string,
+): AsyncGenerator<
+  {
+    url: string;
+    title?: string;
+    layout?: string;
+    data?: Page;
+    content?: string;
+  }
+> {
   console.log(`📖 Loading ${name} reference docs from chunked files...`);
 
   let manifest: ChunkManifest;
@@ -52,17 +60,19 @@ async function* processChunkedFiles(
     const manifestContent = Deno.readTextFileSync(manifestPath);
     manifest = JSON.parse(manifestContent);
     console.log(
-      `✅ Found ${name} manifest: ${manifest.totalEntries} entries in ${manifest.chunkCount} chunks`
+      `✅ Found ${name} manifest: ${manifest.totalEntries} entries in ${manifest.chunkCount} chunks`,
     );
   } catch (error) {
     throw new Error(`Failed to read manifest at ${manifestPath}: ${error}`);
   }
 
   let processedEntries = 0;
-  
+
   for (const chunkInfo of manifest.chunks) {
-    console.log(`📦 Processing chunk: ${chunkInfo.file} (${chunkInfo.entries} entries)`);
-    
+    console.log(
+      `📦 Processing chunk: ${chunkInfo.file} (${chunkInfo.entries} entries)`,
+    );
+
     let chunkData: Record<string, Page>;
     try {
       // Resolve path relative to reference_gen directory
@@ -102,7 +112,8 @@ async function* processChunkedFiles(
       if ("path" in content) {
         yield {
           url,
-          content: `<meta http-equiv="refresh" content="0; url=${content.path}">`,
+          content:
+            `<meta http-equiv="refresh" content="0; url=${content.path}">`,
         };
         continue;
       }
@@ -130,24 +141,36 @@ async function* processChunkedFiles(
 
     // Clear chunk from memory
     chunkData = null as unknown as Record<string, Page>;
-    
+
     // Log progress every few chunks
     if (manifest.chunks.indexOf(chunkInfo) % 5 === 0) {
-      console.log(`📊 Processed ${processedEntries}/${manifest.totalEntries} entries...`);
+      console.log(
+        `📊 Processed ${processedEntries}/${manifest.totalEntries} entries...`,
+      );
     }
 
     // Small pause to allow garbage collection
-    await new Promise(resolve => setTimeout(resolve, 1));
+    await new Promise((resolve) => setTimeout(resolve, 1));
   }
 
-  console.log(`✅ Completed processing ${name} reference docs (${processedEntries} entries)`);
+  console.log(
+    `✅ Completed processing ${name} reference docs (${processedEntries} entries)`,
+  );
 }
 
 // Fallback to process monolithic files (original behavior with memory optimization)
 async function* processMonolithicFile(
   path: string,
-  name: string
-): AsyncGenerator<{ url: string; title?: string; layout?: string; data?: Page; content?: string }> {
+  name: string,
+): AsyncGenerator<
+  {
+    url: string;
+    title?: string;
+    layout?: string;
+    data?: Page;
+    content?: string;
+  }
+> {
   console.log(`📖 Loading ${name} reference docs from ${path}...`);
 
   let json: Record<string, Page>;
@@ -228,7 +251,8 @@ async function* processMonolithicFile(
       if ("path" in content) {
         yield {
           url,
-          content: `<meta http-equiv="refresh" content="0; url=${content.path}">`,
+          content:
+            `<meta http-equiv="refresh" content="0; url=${content.path}">`,
         };
         continue;
       }
@@ -255,7 +279,7 @@ async function* processMonolithicFile(
     // Log progress and allow GC
     if (i > 0 && i % (BATCH_SIZE * 10) === 0) {
       console.log(`📊 Processed ${i}/${entries.length} entries for ${name}...`);
-      await new Promise(resolve => setTimeout(resolve, 1));
+      await new Promise((resolve) => setTimeout(resolve, 1));
     }
   }
 
@@ -281,7 +305,9 @@ export default async function* () {
           yield* processChunkedFiles(manifestPath, name);
           continue;
         } catch {
-          console.log(`📝 No chunked files found for ${name}, using monolithic file...`);
+          console.log(
+            `📝 No chunked files found for ${name}, using monolithic file...`,
+          );
         }
       }
 
