@@ -29,12 +29,13 @@ export default function LintRulesIndex(
   data: Lume.Data,
   helpers: Lume.Helpers,
 ) {
-  const TYPES = [
+  const TAGS = [
     "recommended",
     "fresh",
     "jsx",
     "react",
     "jsr",
+    "workspace",
   ] as LintIconType[];
   return (
     <div>
@@ -82,7 +83,7 @@ export default function LintRulesIndex(
         />
 
         <ul class="flex flex-wrap gap-2 mb-8 !list-none !pl-0">
-          {TYPES.map((iconType) => (
+          {TAGS.map((iconType) => (
             <li class="p-1.5 px-3 rounded-md bg-background-secondary/30 border border-background-secondary w-max max-w-full !m-0 whitespace-pre-wrap">
               {getLintIcon(iconType)}&ensp;{getReadableIconName(iconType)}
             </li>
