@@ -119,7 +119,9 @@ Deno.test("database operations", async (t) => {
 
 ## Test Hooks
 
-Deno provides test hooks that allow you to run setup and teardown code before and after tests. These hooks are useful for initializing resources, cleaning up after tests, and ensuring consistent test environments.
+Deno provides test hooks that allow you to run setup and teardown code before
+and after tests. These hooks are useful for initializing resources, cleaning up
+after tests, and ensuring consistent test environments.
 
 ### Available Hooks
 
@@ -133,48 +135,71 @@ Deno provides test hooks that allow you to run setup and teardown code before an
 - **beforeAll/beforeEach**: Execute in FIFO (first in, first out) order
 - **afterEach/afterAll**: Execute in LIFO (last in, first out) order
 
-If an exception is raised in any hook, remaining hooks of the same type will not run, and the current test will be marked as failed.
+If an exception is raised in any hook, remaining hooks of the same type will not
+run, and the current test will be marked as failed.
 
 ### Examples
 
 ```ts
-// Database setup and teardown example
-Deno.test.beforeAll(async () => {
+import { DatabaseSync } from "node:sqlite";
+import { assertEquals } from "jsr:@std/assert";
+
+let db: DatabaseSync;
+
+Deno.test.beforeAll(() => {
   console.log("Setting up test database...");
-  await setupTestDatabase();
+  db = new DatabaseSync(":memory:");
+  db.exec(`
+    CREATE TABLE users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE
+    ) STRICT
+  `);
 });
 
-Deno.test.beforeEach(async () => {
+Deno.test.beforeEach(() => {
   console.log("Clearing database for clean test state...");
-  await clearDatabase();
+  db.exec("DELETE FROM users");
 });
 
-Deno.test.afterEach(async () => {
+Deno.test.afterEach(() => {
   console.log("Test completed, cleaning up resources...");
-  await cleanupTestResources();
+  // Any additional cleanup after each test
 });
 
-Deno.test.afterAll(async () => {
+Deno.test.afterAll(() => {
   console.log("Tearing down test database...");
-  await teardownTestDatabase();
+  db.close();
 });
 
-Deno.test("user creation", async () => {
-  const user = await createUser("alice", "alice@example.com");
-  assertEquals(user.name, "alice");
+Deno.test("user creation", () => {
+  const stmt = db.prepare(
+    "INSERT INTO users (name, email) VALUES (?, ?) RETURNING *",
+  );
+  const user = stmt.get("alice", "alice@example.com");
+  assertEquals(user!.name, "alice");
 });
 
-Deno.test("user deletion", async () => {
-  const user = await createUser("bob", "bob@example.com");
-  await deleteUser(user.id);
-  const deletedUser = await findUser(user.id);
-  assertEquals(deletedUser, null);
+Deno.test("user deletion", () => {
+  const insertStmt = db.prepare(
+    "INSERT INTO users (name, email) VALUES (?, ?) RETURNING *",
+  );
+  const user = insertStmt.get("bob", "bob@example.com");
+
+  const deleteStmt = db.prepare("DELETE FROM users WHERE id = ?");
+  deleteStmt.run(user!.id);
+
+  const selectStmt = db.prepare("SELECT * FROM users WHERE id = ?");
+  const deletedUser = selectStmt.get(user!.id);
+  assertEquals(deletedUser, undefined);
 });
 ```
 
 ### Multiple Hooks
 
-You can register multiple hooks of the same type, and they will execute in the order specified above:
+You can register multiple hooks of the same type, and they will execute in the
+order specified above:
 
 ```ts
 Deno.test.beforeEach(() => {
