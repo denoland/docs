@@ -112,9 +112,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               {data.children}
             </div>
           </article>
-          {!(isReference && !isApiLandingPage) && (
-            <data.comp.Feedback file={file} />
-          )}
+          <data.comp.Feedback file={file} />
         </div>
       </main>
       {(() => {
