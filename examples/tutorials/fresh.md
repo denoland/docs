@@ -17,7 +17,8 @@ Fresh's islands architecture.
 
 You can see the
 [finished app repo on GitHub](https://github.com/denoland/tutorial-with-fresh)
-and a [demo of the app on Deno Deploy](https://tutorial-with-fresh.deno.dev/).
+and a
+[demo of the app on Deno Deploy](https://tutorial-with-fresh.deno.deno.net/).
 
 :::info Deploy your own
 
