@@ -32,7 +32,7 @@ cliCommandsReferenceFile.writeJsonPrettySync(
   JSON.parse(new TextDecoder().decode(jsonReference.outputSync().stdout)),
 );
 
-await $`deno task update_lint_rules`;
+await $`deno task lint:update`;
 
 if (Deno.args.includes("--create-pr")) {
   await tryCreatePr();
