@@ -1,5 +1,5 @@
 ---
-tags: ["recommended"]
+tags: [recommended]
 ---
 
 Ensure that inline dependency imports have a version specifier.
