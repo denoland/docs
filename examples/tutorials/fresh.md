@@ -56,7 +56,7 @@ cd my-fresh-app
 Start the development server:
 
 ```sh
-deno task start
+deno task dev
 ```
 
 Open your browser to `http://localhost:5173` to see your new Fresh app running!
@@ -268,7 +268,7 @@ stylesheet in the `<head>` of `routes/_app.tsx`:
 Make sure your development server is running with:
 
 ```sh
-deno task start
+deno task dev
 ```
 
 Open your browser to `http://localhost:5173` to see your dinosaur catalog app in
@@ -283,6 +283,15 @@ You can run the following command to build the app for production mode:
 ```sh
 deno run build
 ```
+
+To run the built app, you can use the `start` task
+
+```sh
+deno task start
+```
+
+Open your browser to `http://localhost:8000` to see the production version of
+your app.
 
 You can deploy this app to your favorite cloud provider. We recommend using
 [Deno Deploy](https://deno.com/deploy) for a simple and easy deployment
