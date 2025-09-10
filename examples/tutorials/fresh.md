@@ -284,7 +284,10 @@ You can run the following command to build the app for production mode:
 deno run build
 ```
 
-To run the built app, you can use the `start` task
+This will build out the optimized files to an `_fresh` directory.
+
+To run the built app, you can use the `start` task, which will automatically
+pick up the optimized assets in the `_fresh` directory:
 
 ```sh
 deno task start
