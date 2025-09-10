@@ -86,7 +86,7 @@ export default function LandingPage() {
           </label>
         </div>
 
-        <div className="unfiltered columns-1 sm:columns-2 lg:columns-3 gap-8 mb-8 w-[100%]">
+        <div className="unfiltered columns-1 sm:columns-2 lg:columns-3 gap-8 mb-8 w-[100%] markdown-body">
           {componentsPerSidebarItem}
         </div>
         <div className="fully-filtered">
