@@ -44,7 +44,7 @@ const DESCRIPTION_REGEX = /description: ["'](.+)["']/;
 
 interface FileInfo {
   path: string;
-  relativePath: string; // POSIX-style relative path (uses "/" separators)
+  relativePath: string;
   url: string;
   title: string;
   description: string | null;
