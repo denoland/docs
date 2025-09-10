@@ -47,6 +47,9 @@ To run this server, you can use the `deno run` command:
 deno run --allow-net server.ts
 ```
 
+There are many more examples of using `Deno.serve` in the
+[Examples collection](/examples/#network).
+
 ### Listening on a specific port
 
 By default `Deno.serve` will listen on port `8000`, but this can be changed by
