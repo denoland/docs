@@ -45,6 +45,15 @@
           "usage": "--unstable-broadcast-channel"
         },
         {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
           "name": "unstable-cron",
           "short": null,
           "long": "unstable-cron",
@@ -106,6 +115,15 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -304,6 +322,15 @@
           "help": "A list of files that will be executed before the main module",
           "help_heading": null,
           "usage": "--preload <FILE>"
+        },
+        {
+          "name": "permission-set",
+          "short": "P",
+          "long": "permission-set",
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "--permission-set[=<permission-set>]"
         },
         {
           "name": "inspect",
@@ -503,6 +530,15 @@
           "usage": "--unstable-broadcast-channel"
         },
         {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
           "name": "unstable-cron",
           "short": null,
           "long": "unstable-cron",
@@ -564,6 +600,15 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -762,6 +807,15 @@
           "help": "A list of files that will be executed before the main module",
           "help_heading": null,
           "usage": "--preload <FILE>"
+        },
+        {
+          "name": "permission-set",
+          "short": "P",
+          "long": "permission-set",
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "--permission-set[=<permission-set>]"
         },
         {
           "name": "inspect",
@@ -1112,6 +1166,15 @@
           "usage": "--unstable-broadcast-channel"
         },
         {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
           "name": "unstable-cron",
           "short": null,
           "long": "unstable-cron",
@@ -1173,6 +1236,15 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -1371,6 +1443,15 @@
           "help": "A list of files that will be executed before the main module",
           "help_heading": null,
           "usage": "--preload <FILE>"
+        },
+        {
+          "name": "permission-set",
+          "short": "P",
+          "long": "permission-set",
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "--permission-set[=<permission-set>]"
         },
         {
           "name": "allow-scripts",
@@ -2180,6 +2261,15 @@
           "usage": "--unstable-broadcast-channel"
         },
         {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
           "name": "unstable-cron",
           "short": null,
           "long": "unstable-cron",
@@ -2241,6 +2331,15 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -2583,6 +2682,15 @@
           "usage": "--unstable-broadcast-channel"
         },
         {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
           "name": "unstable-cron",
           "short": null,
           "long": "unstable-cron",
@@ -2644,6 +2752,15 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -2842,6 +2959,15 @@
           "help": "A list of files that will be executed before the main module",
           "help_heading": null,
           "usage": "--preload <FILE>"
+        },
+        {
+          "name": "permission-set",
+          "short": "P",
+          "long": "permission-set",
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "--permission-set[=<permission-set>]"
         },
         {
           "name": "allow-scripts",
@@ -3397,6 +3523,15 @@
           "usage": "--unstable-broadcast-channel"
         },
         {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
           "name": "unstable-cron",
           "short": null,
           "long": "unstable-cron",
@@ -3458,6 +3593,15 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -4248,6 +4392,15 @@
           "usage": "--unstable-broadcast-channel"
         },
         {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
           "name": "unstable-cron",
           "short": null,
           "long": "unstable-cron",
@@ -4309,6 +4462,15 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -4570,6 +4732,15 @@
           "help": "Set the random number generator seed",
           "help_heading": null,
           "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "permission-set",
+          "short": "P",
+          "long": "permission-set",
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "--permission-set[=<permission-set>]"
         },
         {
           "name": "check",
@@ -5345,6 +5516,15 @@
           "usage": "--unstable-broadcast-channel"
         },
         {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
           "name": "unstable-cron",
           "short": null,
           "long": "unstable-cron",
@@ -5406,6 +5586,15 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -5642,6 +5831,15 @@
           "usage": "--inspect-wait[=<HOST_AND_PORT>]"
         },
         {
+          "name": "permission-set",
+          "short": "P",
+          "long": "permission-set",
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "--permission-set[=<permission-set>]"
+        },
+        {
           "name": "cached-only",
           "short": null,
           "long": "cached-only",
@@ -5731,6 +5929,15 @@
           "usage": "--unstable-broadcast-channel"
         },
         {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
           "name": "unstable-cron",
           "short": null,
           "long": "unstable-cron",
@@ -5792,6 +5999,15 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -5973,6 +6189,15 @@
           "usage": "--unstable-broadcast-channel"
         },
         {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
           "name": "unstable-cron",
           "short": null,
           "long": "unstable-cron",
@@ -6034,6 +6259,15 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -6232,6 +6466,15 @@
           "help": "A list of files that will be executed before the main module",
           "help_heading": null,
           "usage": "--preload <FILE>"
+        },
+        {
+          "name": "permission-set",
+          "short": "P",
+          "long": "permission-set",
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "--permission-set[=<permission-set>]"
         },
         {
           "name": "inspect",
