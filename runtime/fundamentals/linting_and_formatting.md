@@ -32,6 +32,26 @@ To run the linter, use the following command in your terminal:
 deno lint
 ```
 
+By default, `deno lint` analyzes all TypeScript and JavaScript files in the
+current directory and its subdirectories. If you want to lint specific files or
+directories, you can pass them as arguments to the command. For example:
+
+```bash
+deno lint src/
+```
+
+This command will lint all files in the `src/` directory.
+
+The linter can be configured in a
+[`deno.json`](/runtime/fundamentals/configuration/#linting) file. You can
+specify custom rules, plugins, and settings to tailor the linting process to
+your needs.
+
+### Linting rules
+
+You can view and search the list of available rules and their usage on the
+[List of rules](/lint/) documentation page.
+
 ## Formatting
 
 Formatting is the process of automatically adjusting the layout of your code to
