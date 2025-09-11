@@ -9,11 +9,44 @@ oldUrl:
 It is common for applications to store and retrieve data from databases. Deno
 supports connecting to many database management systems.
 
-The Deno community has published a number of third-party modules that make it
-easy to connect to popular databases like MySQL, Postgres, and MongoDB.
+Deno supports multiple third-party modules that allow you to connect to SQL and
+NoSQL databases, including MySQL, PostgreSQL, MongoDB, SQLite, Firebase, and
+Supabase.
 
-They are hosted at Deno's third-party module site
-[deno.land/x](https://deno.land/x).
+You can find helpful database connectivity modules on [JSR](https://jsr.io/@db)
+and deno supports many npm packages with the use of
+[npm specifiers](/runtime/fundamentals/node/#using-npm-packages).
+
+## SQLite
+
+SQLite is a self-contained, serverless, zero-configuration, and transactional
+SQL database engine. It is a popular choice for local storage in applications.
+
+Use the [sqlite](https://jsr.io/@db/sqlite) module to connect to SQLite in your Deno apps:
+
+```sh
+deno add jsr:@db/sqlite
+```
+
+Then, import the `Database` class from the module and create a new database
+instance. You can then execute SQL queries against the database:
+
+```ts title="main.ts
+import { Database } from "@db/sqlite";
+
+const db = new Database("test.db");
+
+const [version] = db.prepare("select sqlite_version()").value<[string]>()!;
+console.log(version);
+
+db.close();
+```
+
+This module depends on Deno FFI, so you need to run your script with the `--allow-ffi` flag:
+
+```sh
+deno run --allow-ffi main.ts
+```
 
 ## MySQL
 
