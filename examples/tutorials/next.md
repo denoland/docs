@@ -41,13 +41,6 @@ deno run -A npm:create-next-app@latest
 When prompted, select the default options to create a new Next.js app with
 TypeScript.
 
-Then, `cd` into the newly created project folder and run the following command
-to install the dependencies with script execution allowed:
-
-```sh
-deno install --allow-scripts
-```
-
 Next.js has some dependencies that still rely on `Object.prototype.__proto__`
 and requires CommonJS module support. To configure Deno for Next.js
 compatibility, update your `deno.json` file with the following configuration:
