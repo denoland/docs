@@ -285,12 +285,11 @@ specify custom settings to tailor the formatting process to your needs.
 
 ### ESLint
 
-To use ESLint in your Deno projects, your project will need a `node_modules`
-directory in your project that VSCode extensions can pick up.
+To use the VSCode ESLint extension in your Deno projects, your project will need
+a `node_modules` directory in your project that VSCode extensions can pick up.
 
-Step-by-step:
-
-In your `deno.json` enable a Node modules directory so editors resolve packages:
+In your `deno.json` ensure a `node_modules` folder is created, so the editor can
+resolve packages:
 
 ```jsonc
 {
