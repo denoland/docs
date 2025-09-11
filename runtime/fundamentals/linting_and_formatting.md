@@ -32,26 +32,6 @@ To run the linter, use the following command in your terminal:
 deno lint
 ```
 
-By default, `deno lint` analyzes all TypeScript and JavaScript files in the
-current directory and its subdirectories. If you want to lint specific files or
-directories, you can pass them as arguments to the command. For example:
-
-```bash
-deno lint src/
-```
-
-This command will lint all files in the `src/` directory.
-
-The linter can be configured in a
-[`deno.json`](/runtime/fundamentals/configuration/#linting) file. You can
-specify custom rules, plugins, and settings to tailor the linting process to
-your needs.
-
-### Linting rules
-
-You can view and search the list of available rules and their usage on the
-[List of rules](/lint/) documentation page.
-
 ## Formatting
 
 Formatting is the process of automatically adjusting the layout of your code to
@@ -115,9 +95,7 @@ in the root of your project with the following configuration:
 
 ```json
 {
-  "deno.enablePaths": [
-    "./deno.json"
-  ]
+  "deno.enablePaths": ["./deno.json"]
 }
 ```
 
@@ -282,3 +260,83 @@ Whether to use braces for if statements, for statements, and while statements
 The formatter can be configured in a
 [`deno.json`](/runtime/fundamentals/configuration/#formatting) file. You can
 specify custom settings to tailor the formatting process to your needs.
+
+## Deno support for other linters and formatters
+
+### ESLint
+
+To use ESLint in your Deno projects, your project will need a `node_modules`
+directory in your project that VSCode extensions can pick up.
+
+Step-by-step:
+
+In your `deno.json` enable a Node modules directory so editors resolve packages:
+
+```jsonc
+{
+  "nodeModulesDir": true
+}
+```
+
+(Optional) Run an ESLint command to download it:
+
+```sh
+deno run -A npm:eslint --version
+# or
+deno run -A npm:eslint --init
+```
+
+Create an `eslint.config.js`:
+
+```js
+// eslint.config.js
+import js from "@eslint/js";
+import importPlugin from "eslint-plugin-import"; // example plugin
+
+export default [
+  js.configs.recommended,
+  {
+    files: ["**/*.ts", "**/*.js"],
+    languageOptions: { globals: { Deno: "readonly" } },
+    plugins: { import: importPlugin },
+    rules: {
+      // e.g. "import/order": "warn"
+    },
+  },
+];
+```
+
+To run ESLint run:
+
+```sh
+deno run -A npm:eslint .
+```
+
+Optionally, you can add a task in your `deno.json` to run ESLint:
+
+```json
+{
+  "tasks": { "eslint": "deno run -A npm:eslint . --ext .ts,.js" }
+}
+```
+
+And run it with:
+
+```sh
+deno task eslint
+```
+
+### Prettier
+
+To use Prettier in your Deno projects, your project will need a `node_modules`
+directory in your project that VSCode extensions can pick up.
+
+Then install the Prettier extension for VSCode and configure it to be your
+default formatter:
+
+In VSCode:
+
+1. Open the Command Palette (with <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>)
+2. Select **Format Document With...**
+3. Select **Configure Default Formatter...**
+4. Select **Prettier - Code formatter**
