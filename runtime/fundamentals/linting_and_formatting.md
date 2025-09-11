@@ -294,7 +294,7 @@ In your `deno.json` enable a Node modules directory so editors resolve packages:
 
 ```jsonc
 {
-  "nodeModulesDir": true
+  "nodeModulesDir": "auto"
 }
 ```
 
