@@ -336,7 +336,7 @@ Optionally, you can add a task in your `deno.json` to run ESLint:
 
 ```json
 {
-  "tasks": { "eslint": "deno run -A npm:eslint . --ext .ts,.js" }
+  "tasks": { "eslint": "eslint . --ext .ts,.js" }
 }
 ```
 
