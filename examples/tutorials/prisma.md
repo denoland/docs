@@ -41,11 +41,11 @@ Let's understand the key parameters:
 
 - `--generator-provider prisma-client`: Define the provides as
   "prisma-client-js" instead of the default "prisma-client-js". The
-  "prisma-client" provider is optimized for Deno and generates TypeScript
-  code compatible with the Deno runtime.
+  "prisma-client" provider is optimized for Deno and generates TypeScript code
+  compatible with the Deno runtime.
 
-- `--output`: Defines the directory where Prisma will save the generated
-  client files, including type definitions and database access utilities.
+- `--output`: Defines the directory where Prisma will save the generated client
+  files, including type definitions and database access utilities.
 
 This will generate
 [`prisma/schema.prisma`](https://www.prisma.io/docs/orm/prisma-schema). Let's
