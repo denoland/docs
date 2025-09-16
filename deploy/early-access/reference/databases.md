@@ -11,9 +11,9 @@ Deploy Classic documentation? [View it here](/deploy/).
 :::
 
 The databases feature allows you to connect your applications to external
-database servers. When you assign a database to an app, Deno Deploy
-automatically provisions separate databases for each deployment environment -
-production, Git branches, and preview timelines.
+databases and provision managed data stores. When you assign a database to an
+app, Deno Deploy automatically provisions separate databases for each deployment
+environment - production, Git branches, and preview timelines.
 
 Your code automatically connects to the correct database for each environment
 without requiring timeline detection or manual database name handling. Simply
@@ -22,22 +22,37 @@ connection details automatically via environment variables.
 
 ## Getting Started
 
+There are two ways to add data backends to your apps on the Databases page:
+
+- Link Database: Connect an existing external database (for example, a
+  PostgreSQL server you run or a managed instance from a cloud provider).
+- Provision Database: Create and attach a managed data store from Deploy (Deno
+  KV today; Prisma Postgres is coming soon).
+
 ### Adding a Database
 
 Navigate to your organization dashboard and click "Databases" in the navigation
-bar. Click "Add Database" and choose your database engine - Deno KV and
-PostgreSQL are currently supported with others planned.
+bar. From here, choose the flow that matches your use case:
 
-You can either enter connection details manually or paste a connection string to
-automatically populate the form. Connection details include your database server
-hostname, port (usually 5432 for PostgreSQL), username, password, and optionally
-an SSL certificate if needed.
+1. Link an external database
 
-Before saving, use the "Test Connection" button to verify your settings work
-correctly. Fix any connection issues, give your database instance a memorable
-name, and click "Save" to create it.
+- Click "Link Database" to connect an existing database instance.
+- Choose PostgreSQL and either enter connection details manually or paste a
+  connection string to automatically populate the form.
+- Details typically include hostname, port (usually 5432), username, password,
+  and optionally a CA certificate if required by your provider.
+- Use "Test Connection" to verify settings, then give the instance a name and
+  click "Save".
 
-#### Using Connection Strings
+1. Provision a managed database
+
+- Click "Provision Database" to create a managed data store from Deploy.
+- Available today: Deno KV — a fast, globally distributed key‑value store built
+  for the edge.
+- Coming soon: Prisma Postgres provisioning.
+- After provisioning, assign it to your app(s) just like a linked database.
+
+#### Using Connection Strings (Link Database)
 
 Instead of filling out individual fields, you can paste a connection string like
 `postgresql://username:password@hostname:port/database` to automatically
@@ -50,19 +65,21 @@ populate the form fields.
 
 ### Connecting an App to a Database
 
-Once you have a database instance, you can assign it to your apps. From the
-database instances list, click "Assign" next to your database instance and
-select the app from the dropdown.
+Once you have a database instance (linked or provisioned), you can assign it to
+your apps. From the database instances list, click "Assign" next to your
+database instance and select the app from the dropdown.
 
-Deno Deploy automatically creates separate databases for each timeline:
+Deno Deploy automatically creates isolated data scopes for each timeline. For
+PostgreSQL, this means separate databases with the following naming scheme:
 
 - Production deployments use `{app-id}-production`
 - Git branches get `{app-id}--{branch-name}`
 - Preview deployments use `{app-id}-preview`
 
-This ensures your production data stays safe while developing and testing. You
-can monitor the provisioning process and watch the status change to "Connected".
-If there are any errors, use the "Fix" button to retry.
+This ensures your production data stays safe while developing and testing. For
+provisioned Deno KV, each environment is isolated as well. You can monitor the
+provisioning process and watch the status change to "Connected". If there are
+any errors, use the "Fix" button to retry.
 
 ## Using Databases in Your Code
 
@@ -79,13 +96,13 @@ automatically connect to the correct database for your current environment.
 ### Automatic Environment Variables
 
 Deno Deploy automatically injects standard database environment variables into
-your app's runtime environment. For PostgreSQL, these include `PGHOST`,
+your app's runtime environment for linked PostgreSQL databases: `PGHOST`,
 `PGPORT`, `PGDATABASE` (automatically selected for your environment), `PGUSER`,
 `PGPASSWORD`, and `PGSSLMODE`. These variables follow standard conventions, so
 most database libraries automatically detect and use them without any
 configuration.
 
-### PostgreSQL Example
+### PostgreSQL Example (Link Database)
 
 Here's how to connect to PostgreSQL in your Deno Deploy app:
 
@@ -95,7 +112,7 @@ import { Pool } from "npm:pg";
 // No configuration needed - Deno Deploy handles this automatically
 const pool = new Pool();
 
-Deno.serve(() => {
+Deno.serve(async () => {
   // Use the database
   const result = await pool.query("SELECT * FROM users WHERE id = $1", [123]);
 
@@ -168,10 +185,11 @@ Your application code remains the same - it will automatically use these
 environment variables to connect to your chosen database during local
 development.
 
-## SSL Configuration
+## SSL Configuration (Linked databases)
 
-All database connections use SSL encryption for security. The main difference is
-how certificates are handled depending on your database provider.
+All connections to linked external databases use SSL encryption for security.
+The main difference is how certificates are handled depending on your database
+provider. This section does not apply to provisioned Deno KV.
 
 ### Certificate Types
 
@@ -239,11 +257,12 @@ connection to ensure it still works before saving your changes.
 
 ## Supported Database Engines
 
-**Currently Supported:** Deno KV and PostgreSQL are fully supported with all
-features.
+- Deno KV (Provision Database) — fast, globally distributed key‑value store
+  built for the edge.
+- PostgreSQL (Link Database) — connect an existing external instance.
 
-**Coming Soon:** MySQL, MongoDB, Redis, and more are planned for future
-releases.
+Coming soon: Prisma Postgres (Provision Database). Additional engines such as
+MySQL, MongoDB, Redis, and more are planned for future releases.
 
 ## Troubleshooting
 
