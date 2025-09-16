@@ -34,25 +34,15 @@ There are two ways to add data backends to your apps on the Databases page:
 Navigate to your organization dashboard and click "Databases" in the navigation
 bar. From here, choose the flow that matches your use case:
 
-1. Link an external database
+#### Link an external database
 
-- Click "Link Database" to connect an existing database instance.
+- Click "**Link Database**" to connect an existing database instance.
 - Choose PostgreSQL and either enter connection details manually or paste a
   connection string to automatically populate the form.
 - Details typically include hostname, port (usually 5432), username, password,
   and optionally a CA certificate if required by your provider.
 - Use "Test Connection" to verify settings, then give the instance a name and
   click "Save".
-
-1. Provision a managed database
-
-- Click "Provision Database" to create a managed data store from Deploy.
-- Available today: Deno KV — a fast, globally distributed key‑value store built
-  for the edge.
-- Coming soon: Prisma Postgres provisioning.
-- After provisioning, assign it to your app(s) just like a linked database.
-
-#### Using Connection Strings (Link Database)
 
 Instead of filling out individual fields, you can paste a connection string like
 `postgresql://username:password@hostname:port/database` to automatically
@@ -62,6 +52,13 @@ populate the form fields.
 
 - PostgreSQL: `postgresql://user:pass@localhost:5432/dbname` or
   `postgres://user:pass@localhost:5432/dbname`
+
+#### Provision a managed database
+
+- Click "Provision Database" to create a managed data store from Deploy.
+- Available today: Deno KV — a fast, globally distributed key‑value store built
+  for the edge.
+- Coming soon: Prisma Postgres provisioning.
 
 ### Connecting an App to a Database
 
@@ -76,10 +73,9 @@ PostgreSQL, this means separate databases with the following naming scheme:
 - Git branches get `{app-id}--{branch-name}`
 - Preview deployments use `{app-id}-preview`
 
-This ensures your production data stays safe while developing and testing. For
-provisioned Deno KV, each environment is isolated as well. You can monitor the
-provisioning process and watch the status change to "Connected". If there are
-any errors, use the "Fix" button to retry.
+This ensures your production data stays safe while developing and testing. You
+can monitor the provisioning process and watch the status change to "Connected".
+If there are any errors, use the "Fix" button to retry.
 
 ## Using Databases in Your Code
 
