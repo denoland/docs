@@ -219,7 +219,7 @@ Network access is granted using the `--allow-net` flag. This flag can be
 specified with a list of IP addresses or hostnames to allow access to specific
 network addresses.
 
-Hostnames does not allow subdomains, unless explicitly listed. To allow any
+Hostnames do not allow subdomains, unless explicitly listed. To allow any
 subdomain for a hostname, `*` can be used as wildcard for any subdomain.
 
 Definition: `--allow-net[=<IP_OR_HOSTNAME>...]` or `-N[=<IP_OR_HOSTNAME>...]`
