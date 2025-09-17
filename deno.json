@@ -16,7 +16,9 @@
     "postcss": "npm:postcss@^8.5.6",
     "prismjs": "npm:prismjs@1.29.0",
     "tailwindcss": "npm:tailwindcss@^4.1.11",
-    "@orama/core": "jsr:@orama/core@^1.2.4"
+    "@orama/core": "jsr:@orama/core@^1.2.4",
+    "@octokit/core": "npm:@octokit/core@^5.2.0",
+    "leo-profanity": "npm:leo-profanity@^1.7.0"
   },
   "tasks": {
     "dev": "LUME_LOGS=WARN deno run --env-file -A lume.ts -s",
