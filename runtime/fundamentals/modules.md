@@ -205,8 +205,8 @@ import { pascalCase } from "cases";
 ```
 
 The remapped name can be any valid specifier. It's a very powerful feature in
-Deno that can remap anything. Learn more about what the import map can do
-[here](/runtime/fundamentals/configuration/#dependencies).
+Deno that can remap anything. Learn more in the
+[configuration dependencies section](/runtime/fundamentals/configuration/#dependencies).
 
 ## Differentiating between `imports` or `importMap` in `deno.json` and `--import-map` option
 
@@ -370,18 +370,18 @@ custom or local versions of libraries during development or testing.
 Note: If you need to cache and modify dependencies locally for use across
 builds, consider [vendoring remote modules](#vendoring-remote-modules).
 
-### Overriding local JSR packages
+### Overriding local packages
 
 For developers familiar with `npm link` in Node.js, Deno provides a similar
-feature for local JSR packages through the `patch` field in `deno.json`. This
-allows you to override dependencies with local versions during development
+feature for local JSR and npm packages through the `links` field in `deno.json`.
+This allows you to override dependencies with local versions during development
 without needing to publish them.
 
 Example:
 
 ```json title="deno.json"
 {
-  "patch": [
+  "links": [
     "../some-package-or-workspace"
   ]
 }
@@ -389,36 +389,31 @@ Example:
 
 Key points:
 
-- The `patch` field accepts paths to directories containing JSR packages or
+- The `links` field accepts paths to directories containing packages or
   workspaces. If you reference a single package within a workspace, the entire
   workspace will be included.
-- This feature is only respected in the workspace root. Using `patch` elsewhere
+- Both JSR and npm packages are supported.
+- This feature is only respected in the workspace root. Using `links` elsewhere
   will trigger warnings.
-- Currently, `patch` is limited to JSR packages. Attempting to patch `npm`
-  packages will result in a warning with no effect.
 
 Limitations:
 
-- `npm` package overrides are not supported yet. This is planned for future
-  updates.
 - Git-based dependency overrides are unavailable.
-- The `patch` field requires proper configuration in the workspace root.
-- This feature is experimental and may change based on user feedback.
+- The `links` field requires proper configuration in the workspace root.
 
 ### Overriding NPM packages
 
-Deno supports patching npm packages with local versions, similar to how JSR
-packages can be patched. This allows you to use a local copy of an npm package
+Deno supports linking npm packages with local versions, similar to how JSR
+packages can be linked. This allows you to use a local copy of an npm package
 during development without publishing it.
 
-To use a local npm package, configure the `patch` field in your `deno.json`:
+To use a local npm package, configure the `links` field in your `deno.json`:
 
 ```json
 {
-  "patch": [
+  "links": [
     "../path/to/local_npm_package"
-  ],
-  "unstable": ["npm-patch"]
+  ]
 }
 ```
 
@@ -438,7 +433,6 @@ Limitations:
   differently.
 - The npm package name must exist in the registry, even if you're using a local
   copy.
-- This feature is currently behind the `unstable` flag.
 
 ### Overriding HTTPS imports
 
@@ -612,11 +606,12 @@ which are not yet cached.
 
 ## Integrity Checking and Lock Files
 
-Imagine your module relies on a remote module located at https://some.url/a.ts.
-When you compile your module for the first time, `a.ts` is fetched, compiled,
-and cached. This cached version will be used until you either run your module on
-a different machine (such as in a production environment) or manually reload the
-cache (using a command like `deno install --reload`).
+Imagine your module relies on a remote module located at
+<https://some.url/a.ts>. When you compile your module for the first time, `a.ts`
+is fetched, compiled, and cached. This cached version will be used until you
+either run your module on a different machine (such as in a production
+environment) or manually reload the cache (using a command like
+`deno install --reload`).
 
 But what if the content at `https://some.url/a.ts` changes? This could result in
 your production module running with different dependency code than your local
