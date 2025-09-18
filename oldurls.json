@@ -137,5 +137,6 @@
   "/api/node/assert/strict": "/api/node/assert/~/assert.strict",
   "runtime/reference/deno_namespace_apis/": "/api/deno/",
   "runtime/reference/web_platform_apis/": "/api/web/",
-  "runtime/reference/node_apis/": "/api/node/"
+  "runtime/reference/node_apis/": "/api/node/",
+  "/deploy/tutorials/vite/": "/examples/tutorials/react/"
 }
