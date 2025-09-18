@@ -16,10 +16,10 @@ NPM, and others.
 :::tip
 
 Do you want to use OIDC tokens to authenticate with AWS or Google Cloud? Use the
-[Cloud Connections](./cloud-connections) feature instead of manually
-configuring OIDC authentication. Cloud Connections handle the entire
-configuration for you, including setting up trust relationships and permissions.
-OIDC is used under the hood.
+[Cloud Connections](./cloud-connections) feature instead of manually configuring
+OIDC authentication. Cloud Connections handle the entire configuration for you,
+including setting up trust relationships and permissions. OIDC is used under the
+hood.
 
 :::
 
