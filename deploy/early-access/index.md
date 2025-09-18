@@ -60,7 +60,7 @@ Deploy.
 | Queues                          | ❌ Not supported               | ✅ Supported                                                                                                                            |
 | Cron                            | ❌ Not supported               | ✅ Supported                                                                                                                            |
 | Deploy from GitHub              | ✅ Supported                   | ✅ Supported                                                                                                                            |
-| Deploy from CLI                 | ⏳ Coming soon                 | ✅ Supported                                                                                                                            |
+| Deploy from CLI                 | ✅ Supported                 | ✅ Supported                                                                                                                            |
 | Instant Rollback                | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Logs                            | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Tracing                         | ✅ Supported                   | ❌ Not supported                                                                                                                        |
