@@ -645,7 +645,7 @@ If you're ok with this risk, then this feature will be useful for you.
   },
   "permissions": {
     "default": {
-      "read": "./src/testdata/"
+      "read": ["./src/testdata/"]
     }
   },
   "lint": {
