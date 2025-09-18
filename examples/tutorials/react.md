@@ -1,5 +1,5 @@
 ---
-title: "React app Vite"
+title: "React app with Vite"
 description: "Complete guide to building React applications with Deno and Vite. Learn how to set up a project, implement routing, add API endpoints, and deploy your full-stack TypeScript application."
 url: /examples/react_tutorial/
 oldUrl:
