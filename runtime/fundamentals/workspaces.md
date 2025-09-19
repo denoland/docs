@@ -303,7 +303,7 @@ To publish a workspace package to JSR, follow these steps:
 }
 ```
 
-1. Navigate to the specific package directory and publish:
+2. Navigate to the specific package directory and publish:
 
 ```sh
 cd my-package
@@ -503,7 +503,7 @@ cd my-directory
 deno test
 ```
 
-1. Or specify the path from the workspace root:
+2. Or specify the path from the workspace root:
 
 ```sh
 deno test my-directory/
