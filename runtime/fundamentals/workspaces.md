@@ -20,6 +20,22 @@ workspace:
 This configures a workspace with `add` and `subtract` members, which are
 directories expected to have `deno.json(c)` and/or `package.json` files.
 
+Each workspace member directory can contain:
+
+- Only a `deno.json` (Deno-first package)
+- Both a `deno.json` and a `package.json` (hybrid package – useful while
+  migrating or when you need Node metadata as well as Deno config)
+- Only a `package.json` (Node-first package that still participates in the Deno
+  workspace)
+
+When a member contains only a `package.json`, you can still import it from
+anywhere else in the workspace using the `name` field specified in that
+`package.json` (for example
+`import { something } from "@scope/my-node-only-pkg";`). Deno will resolve that
+bare specifier as long as the directory is listed in the root workspace
+configuration. This lets you gradually adopt Deno tooling without having to add
+a `deno.json` to every existing Node package up front.
+
 :::info Naming
 
 Deno uses `workspace` rather than npm's `workspaces` to represent a singular
@@ -287,7 +303,7 @@ To publish a workspace package to JSR, follow these steps:
 }
 ```
 
-2. Navigate to the specific package directory and publish:
+1. Navigate to the specific package directory and publish:
 
 ```sh
 cd my-package
@@ -487,7 +503,7 @@ cd my-directory
 deno test
 ```
 
-2. Or specify the path from the workspace root:
+1. Or specify the path from the workspace root:
 
 ```sh
 deno test my-directory/
