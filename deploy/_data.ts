@@ -26,7 +26,7 @@ export const sidebar = [
     ],
   },
   {
-    title: "Deploy platform",
+    title: "Deploy Classic",
     items: [
       {
         title: "Deployments",
