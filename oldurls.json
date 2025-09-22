@@ -4,9 +4,9 @@
   "/examples/dependency-management/": "/runtime/fundamentals/configuration/#dependencies",
   "/runtime/tutorials/tcp_echo/": "/examples/tcp_echo_server/",
   "/runtime/tutorials/tcp_server/": "/examples/tcp_echo_server/",
-  "/runtime/reference/deploying_and_embedding/": "/deploy/manual/",
-  "/runtime/manual/advanced/embedding_deno/": "/deploy/manual/",
-  "/runtime/manual/advanced/deploying_deno/": "/deploy/manual/",
+  "/runtime/reference/deploying_and_embedding/": "/deploy/classic/",
+  "/runtime/manual/advanced/embedding_deno/": "/deploy/classic/",
+  "/runtime/manual/advanced/deploying_deno/": "/deploy/classic/",
   "/runtime/reference/tcp_udp_connections/": "/examples/",
   "/runtime/getting_started/": "/runtime/",
   "/api/deno/~/Deno.TlsConn.rid/": "/runtime/reference/migration_guide/#rid",
@@ -138,5 +138,6 @@
   "runtime/reference/deno_namespace_apis/": "/api/deno/",
   "runtime/reference/web_platform_apis/": "/api/web/",
   "runtime/reference/node_apis/": "/api/node/",
-  "/deploy/tutorials/vite/": "/examples/react_tutorial/"
+  "/deploy/tutorials/vite/": "/examples/react_tutorial/",
+  "/deploy/manual/*": "/deploy/classic/*"
 }

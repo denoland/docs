@@ -57,8 +57,8 @@ used with other database tools and libraries.
 
 ## Create a project in Deno Deploy
 
-Next, let's create a project in Deno Deploy and set it up with the requisite
-environment variables:
+Next, let's create a project in Deno Deploy Classic and set it up with the
+requisite environment variables:
 
 1. Go to [https://dash.deno.com/new](https://dash.deno.com/new) (Sign in with
    GitHub if you didn't already) and click on **Create an empty project** under
@@ -182,10 +182,10 @@ npx dotenv -- deno run -A ./index.ts
 Visit `http://localhost:8000` in your browser. Each request will create a new
 log entry in your database and return the log data as JSON.
 
-## Deploy application to Deno Deploy
+## Deploy application to Deno Deploy Classic
 
 Once you have finished writing your application, you can deploy it on Deno
-Deploy.
+Deploy Classic.
 
 To do this, go back to your project page at
 `https://dash.deno.com/projects/<project-name>`.
@@ -201,5 +201,5 @@ You should see a couple of options to deploy:
 Unless you want to add a build step, we recommend that you select the GitHub
 integration.
 
-For more details on the different ways to deploy on Deno Deploy and the
+For more details on the different ways to deploy on Deno Deploy Classic and the
 different configuration options, read [here](how-to-deploy).
