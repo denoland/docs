@@ -4,6 +4,14 @@ oldUrl:
   - /deploy/docs/runtime-request/
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 The [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request)
 interface is part of the Fetch API and represents the request of fetch().
 

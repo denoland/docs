@@ -2,6 +2,14 @@
 title: "Deploy with GitHub integration"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 The simplest way to deploy more complex projects is via our Github integration.
 This allows you to link a Deno Deploy Classic project to a GitHub repository.
 Every time you push to the repository, your changes will be automatically

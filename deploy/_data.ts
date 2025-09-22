@@ -2,10 +2,10 @@ import { Sidebar, SidebarNav } from "../types.ts";
 
 export const sidebar = [
   {
-    title: "Getting started",
+    title: "Deploy Classic",
     items: [
       {
-        title: "Quick start",
+        title: "What is Deno Deploy Classic?",
         href: "/deploy/classic/",
       },
       {
@@ -26,7 +26,7 @@ export const sidebar = [
     ],
   },
   {
-    title: "Deploy Classic",
+    title: "Reference",
     items: [
       {
         title: "Deployments",
