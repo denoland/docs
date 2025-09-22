@@ -6,10 +6,10 @@ oldUrl:
   - /deploy/manual/hello-world/
 ---
 
-Deno Deploy is a globally distributed platform for serverless JavaScript
+Deno Deploy Classic is a globally distributed platform for serverless JavaScript
 applications. Your JavaScript, TypeScript, and WebAssembly code runs on managed
 servers geographically close to your users, enabling low latency and faster
-response times. Deploy applications run on fast, light-weight
+response times. Deploy Classic applications run on fast, light-weight
 [V8 isolates](https://deno.com/blog/anatomy-isolate-cloud) rather than virtual
 machines, powered by the [Deno runtime](/runtime/manual).
 
@@ -47,7 +47,7 @@ curl -fsSL https://deno.land/install.sh | sh
 
 After Deno is installed, install the [`deployctl`](./deployctl.md) utility:
 
-```
+```sh
 deno install -A jsr:@deno/deployctl --global
 ```
 
@@ -87,8 +87,8 @@ deployctl deploy
 
 You will be asked to authorize Deno Deploy in GitHub to sign up to Deno Deploy
 and/or to provision an access token for `deployctl`. A few moments after that,
-your Hello World server will be deployed in Deno Deploy infrastructure all
-around the world, ready to handle all the traffic you expect.
+your Hello World server will be deployed in Deno Deploy Classic infrastructure
+all around the world, ready to handle all the traffic you expect.
 
 ## Next Steps
 
@@ -102,8 +102,8 @@ excited to see what you'll ship with Deno Deploy!
 
 Import a project and run it on the edge with Deno Deploy.
 
-1. [From the Deno Deploy dashboard](https://dash.deno.com) click the "New
-   Project" button.
+1. [From the Deno Deploy Classic dashboard](https://dash.deno.com) click the
+   "New Project" button.
 
 2. Connect to your GitHub account and select the repository you would like to
    deploy.
@@ -130,10 +130,10 @@ A [playground](./playgrounds.md) is a browser-based editor that enables you to
 write and run JavaScript or TypeScript code right away This is a great choice
 for just kicking the tires on Deno and Deno Deploy!
 
-From the [Deno Deploy dashboard](https://dash.deno.com), click the "New
+From the [Deno Deploy Classic dashboard](https://dash.deno.com), click the "New
 Playground" button to create a playground. We also have a variety of ready built
-tutorials for you to try out Deno Deploy try them out by clicking on "Learning
-Playground" or visiting:\
+tutorials for you to try out Deno Deploy Classic try them out by clicking on
+"Learning Playground" or visiting:\
 [Simple HTTP server playground](https://dash.deno.com/tutorial/tutorial-http)\
 [Using the Deno KV database playground](https://dash.deno.com/tutorial/tutorial-http-kv)\
 [RESTful API server playground](https://dash.deno.com/tutorial/tutorial-restful)\

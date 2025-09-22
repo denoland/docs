@@ -6,7 +6,7 @@ By default a project can be reached at its preview URL, which is
 `$PROJECT_ID.deno.dev`, e.g. `dead-clam-55.deno.dev`. You can also add a custom
 domain by following the instructions below.
 
-## **Step 1:** Add your custom domain in the Deno Deploy dashboard
+## **Step 1:** Add your custom domain in the Deno Deploy Classic dashboard
 
 1. Click the "Settings" button on the project page, then select "Domains" from
    the sidebar.
@@ -31,9 +31,9 @@ setup page.
 
 ## **Step 3:** Validate that the DNS records have been updated
 
-Go back to the Deno Deploy dashboard and click the **Validate** button on the
-domain setup page. It will check if the DNS records are correctly set and if so,
-update the status to "Validated, awaiting certificate provisioning."
+Go back to the Deno Deploy Classic dashboard and click the **Validate** button
+on the domain setup page. It will check if the DNS records are correctly set and
+if so, update the status to "Validated, awaiting certificate provisioning."
 
 ![get_certificates](../docs-images/get_certificates.png)
 

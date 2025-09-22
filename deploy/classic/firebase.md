@@ -168,5 +168,5 @@ You should see a couple of options to deploy:
 Unless you want to add a build step, we recommend that you select the Github
 integration.
 
-For more details on the different ways to deploy on Deno Deploy and the
+For more details on the different ways to deploy on Deno Deploy Classic and the
 different configuration options, read [here](how-to-deploy).

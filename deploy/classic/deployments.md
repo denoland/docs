@@ -41,9 +41,10 @@ distinguishing factor is that a project's production deployment will receive
 traffic from the project URL (e.g. `myproject.deno.dev`), and from custom
 domains in addition to traffic to the deployment's preview URL.
 
-## Promoting preview deployments to production deployments via Deno Deploy UI
+## Promoting preview deployments to production deployments via Deno Deploy Classic UI
 
-Preview deployments can be "promoted" to production via the Deno Deploy UI:
+Preview deployments can be "promoted" to production via the Deno Deploy Classic
+UI:
 
 1. Navigate to the project page.
 2. Click on the **Deployments** tab.

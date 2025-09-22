@@ -247,6 +247,5 @@ deno deploy setup-gcp --org my-company --app my-api
 
 - Use `deno deploy --help` for general help
 - Use `deno deploy <subcommand> --help` for specific subcommand help
-- Check the
-  [Deno Deploy EA documentation](https://docs.deno.com/deploy/early-access/) for
+- Check the [Deno Deploy EA documentation](/deploy/early-access/) for
   platform-specific information

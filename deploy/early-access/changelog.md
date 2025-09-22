@@ -111,7 +111,7 @@ Deploy Classic documentation? [View it here](/deploy/).
     you through the process of connecting your app to AWS or GCP.
   - You can use the standard AWS and GCP SDKs to access the services - no need
     to re-write any code to use a different API.
-  - [Learn more in the documentation.](https://docs.deno.com/deploy/early-access/reference/cloud-connections/)
+  - [Learn more in the documentation.](/deploy/early-access/reference/cloud-connections/)
 - The application metrics page now shows more metrics, including V8 memory
   metrics such as heap size and garbage collection stats, as well as process
   level metrics such as CPU usage and overall memory usage.
@@ -217,8 +217,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 - When triggering a manual build you can now choose which branch to deploy
 - You can now deploy Astro static sites without having to manually install the
   Deno adapter
-- There are now
-  [reference docs for you to peruse](https://docs.deno.com/deploy/early-access/).
+- There are now [reference docs for you to peruse](/deploy/early-access/).
 
 ### Bug fixes
 

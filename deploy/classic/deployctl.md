@@ -16,8 +16,8 @@ running the following command:
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
-You don't need to setup a Deno Deploy account beforehand. It will be created
-along the way when you deploy your first project.
+You don't need to setup a Deno Deploy Classic account beforehand. It will be
+created along the way when you deploy your first project.
 
 ## Install `deployctl`
 
@@ -96,7 +96,7 @@ deployctl deploy --include=./static --entrypoint=./main.ts
 
 The entrypoint can also be a remote script. A common use case for this is to
 deploy an static site using `std/http/file_server.ts` (more details in
-[Static Site Tutorial](https://docs.deno.com/deploy/tutorials/static-site)):
+[Static Site Tutorial](/deploy/tutorials/static-site)):
 
 ```shell
 deployctl deploy --include=dist --entrypoint=jsr:@std/http/file-server
@@ -266,10 +266,10 @@ deployment.
 :::note
 
 This feature is similar to the "promote to production" button found in the Deno
-Deploy web application with the exception that the "promote to production"
-button does not create a new deployment. Instead, the "promote to production"
-button changes the domain routing in-place, however it's restricted to
-deployments already using the production database.
+Deploy Classic web application with the exception that the "promote to
+production" button does not create a new deployment. Instead, the "promote to
+production" button changes the domain routing in-place, however it's restricted
+to deployments already using the production database.
 
 :::
 
@@ -335,7 +335,7 @@ https://github.com/denoland/deploy_feedback/issues/
 
 :::note
 
-When you change the project environment variables in the Deno Deploy web
+When you change the project environment variables in the Deno Deploy Classic web
 application, the current production deployment is redeployed with the new
 environment variables, and the new deployment becomes the new production
 deployment.
@@ -542,8 +542,9 @@ deployctl logs
 
 :::note
 
-Unlike in the Deno Deploy web application, at the moment the logs subcommand
-does not automatically switch to the new production deployment when it changes.
+Unlike in the Deno Deploy Classic web application, at the moment the logs
+subcommand does not automatically switch to the new production deployment when
+it changes.
 
 :::
 

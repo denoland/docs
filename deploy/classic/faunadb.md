@@ -29,8 +29,8 @@ credential:
 
 ## Create a project in Deno Deploy
 
-Next, let's create a project on Deno Deploy and set it up with the requisite
-environment variables:
+Next, let's create a project on Deno Deploy Classic and set it up with the
+requisite environment variables:
 
 1. Go to [https://dash.deno.com/new](https://dash.deno.com/new) (Sign in with
    GitHub if you didn't already) and click on **+ Empty Project** under **Deploy
@@ -104,5 +104,5 @@ You should see a couple options to deploy:
 Unless you want to add a build step, we recommend that you select the Github
 integration.
 
-For more details on the different ways to deploy on Deno Deploy and the
+For more details on the different ways to deploy on Deno Deploy Classic and the
 different configuration options, read [here](how-to-deploy).

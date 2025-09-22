@@ -69,8 +69,8 @@ the editor. The URL to your playground will be copied to your clipboard
 automatically.
 
 You can also change the playground visibility from the playground settings page
-in the Deno Deploy dashboard. This can be used to change the visibility of a
-playground from public to private again.
+in the Deno Deploy Classic dashboard. This can be used to change the visibility
+of a playground from public to private again.
 
 ## Exporting a playground to GitHub
 
@@ -85,8 +85,8 @@ The new GitHub repository will be created in your personal account, and will be
 set to private. You can change these settings later in the GitHub repository
 settings.
 
-After exporting a playground, you can no longer use the Deno Deploy playground
-editor for this project. This is a one-way operation.
+After exporting a playground, you can no longer use the Deno Deploy Classic
+playground editor for this project. This is a one-way operation.
 
 To export the playground visit the playground settings page in the Deno Deploy
 dashboard or select **Deploy: Export to GitHub** from the command palette (press

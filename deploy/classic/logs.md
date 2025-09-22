@@ -7,8 +7,7 @@ such as `console.log`, `console.error`, etc. These logs can be viewed in real
 time by either:
 
 - Navigating to the `Logs` panel of a project or deployment.
-- Using the `logs` subcommand in
-  [deployctl](https://docs.deno.com/deploy/manual/deployctl).
+- Using the `logs` subcommand in [deployctl](/deploy/classic/deployctl).
 
 Logs will be streamed directly from the application to the log panel or
 displayed in `deployctl logs`.

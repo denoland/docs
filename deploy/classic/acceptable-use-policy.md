@@ -2,9 +2,9 @@
 title: "Acceptable use policy"
 ---
 
-The Deno Deploy service includes resources (CPU time, request counts) that are
-subject to this Acceptable Use policy. This document can give a rough estimate
-to what we consider as "Acceptable Use", and what we do not.
+The Deno Deploy Classic service includes resources (CPU time, request counts)
+that are subject to this Acceptable Use policy. This document can give a rough
+estimate to what we consider as "Acceptable Use", and what we do not.
 
 ### Examples of Acceptable Use
 

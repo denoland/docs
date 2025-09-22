@@ -2,9 +2,9 @@
 title: "Regions"
 ---
 
-Deno Deploy deploys your code throughout the world. Each new request is served
-from the closest region to your user. Deploy is presently located in the
-following regions:
+Deno Deploy Classic deploys your code throughout the world. Each new request is
+served from the closest region to your user. Deno Deploy Classic is presently
+located in the following regions:
 
 - Singapore (`asia-southeast1`)
 - London (`europe-west2`)
