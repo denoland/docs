@@ -105,7 +105,7 @@ and certificate provisioning will fail.
 
 After adding the DNS records, Deno Deploy<sup>EA</sup> will verify your domain
 ownership. This process may take a few minutes depending on your DNS provider.
-You can leave the domain configuration drawer open during verification—it will
+You can leave the domain configuration drawer open during verification — it will
 refresh automatically when complete.
 
 You can manually trigger verification by clicking the "Provision Certificate"
