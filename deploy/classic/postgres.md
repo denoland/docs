@@ -104,10 +104,10 @@ try {
 }
 ```
 
-## Deploy application to Deno Deploy
+## Deploy application to Deno Deploy Classic
 
 Once you have finished writing your application, you can deploy it on Deno
-Deploy.
+Deploy Classic.
 
 To do this, go back to your project page at
 `https://dash.deno.com/projects/<project-name>`.

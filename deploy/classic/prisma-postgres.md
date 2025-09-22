@@ -182,10 +182,10 @@ npx dotenv -- deno run -A ./index.ts
 Visit `http://localhost:8000` in your browser. Each request will create a new
 log entry in your database and return the log data as JSON.
 
-## Deploy application to Deno Deploy
+## Deploy application to Deno Deploy Classic
 
 Once you have finished writing your application, you can deploy it on Deno
-Deploy.
+Deploy Classic.
 
 To do this, go back to your project page at
 `https://dash.deno.com/projects/<project-name>`.

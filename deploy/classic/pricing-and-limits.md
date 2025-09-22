@@ -38,4 +38,4 @@ connection to port 443, please use
 
 This restriction is in place because connecting to port 443 without terminating
 TLS is frequently used in TLS-over-TLS proxies, which are prohibited on Deno
-Deploy as per [our acceptable use policy](/deploy/manual/acceptable-use-policy).
+Deploy Classic as per [our acceptable use policy](/deploy/manual/acceptable-use-policy).

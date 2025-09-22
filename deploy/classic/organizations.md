@@ -13,7 +13,7 @@ organization.
 
 ### Create an organization
 
-1. On your Deploy dashboard, click on the organization dropdown in the top left
+1. On your Classic dashboard, click on the organization dropdown in the top left
    of the screen, in the navigation bar.
    ![organizations](../docs-images/organizations.png)
 2. Select **Organization +**.
@@ -29,9 +29,9 @@ organization.
    > [this link](https://dash.deno.com/signin) before you invite them.
 4. Enter the GitHub username of the user and click on **Invite**.
 
-Deploy will send the user an invite email. They can then can either accept or
-decline your invite. Once they accept the invite, they're added to your
-organization and shown in the members panel.
+Deno Deploy Classic will send the user an invite email. They can then can either
+accept or decline your invite. Once they accept the invite, they're added to
+your organization and shown in the members panel.
 
 Pending invites are displayed in the **Invites** panel. You can revoke pending
 invites by clicking on the delete icon next to the pending invite.

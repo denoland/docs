@@ -266,7 +266,7 @@ deployment.
 :::note
 
 This feature is similar to the "promote to production" button found in the Deno
-Deploy web application with the exception that the "promote to production"
+Deploy Classic web application with the exception that the "promote to production"
 button does not create a new deployment. Instead, the "promote to production"
 button changes the domain routing in-place, however it's restricted to
 deployments already using the production database.

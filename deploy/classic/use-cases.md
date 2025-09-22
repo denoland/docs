@@ -1,5 +1,5 @@
 ---
-title: "Deno Deploy Use Cases"
+title: "Deno Deploy Classic Use Cases"
 ---
 
 Some popular use-cases for Deno currently are:
@@ -25,7 +25,7 @@ Some examples include:
 - dynamically changing the HTML on its way back from the server before it gets
   to the user.
 
-Deno Deploy is a good alternative to other platforms you might be using to host
+Deno Deploy Classic is a good alternative to other platforms you might be using to host
 your middleware right now, for example:
 
 - Cloudflare Workers
