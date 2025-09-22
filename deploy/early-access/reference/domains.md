@@ -40,7 +40,9 @@ more flexibility. You can either:
   different apps)
 
 All custom domains require valid TLS certificates. Deno Deploy<sup>EA</sup> can
-automatically provision these certificates using Let's Encrypt.
+automatically provision these certificates using
+[Let's Encrypt](https://letsencrypt.org/). Alternatively, you can bring your own
+TLS certificates, which you will then need to renew manually.
 
 ## Adding a custom domain
 
@@ -58,7 +60,7 @@ This will open the domain configuration drawer.
 The domain configuration drawer shows the DNS records needed to:
 
 - Verify domain ownership
-- Generate TLS certificates
+- Optionally provision TLS certificates
 - Route traffic to Deno Deploy<sup>EA</sup>
 
 There are three possible configuration methods, depending on your domain
@@ -86,7 +88,7 @@ Most compatible but requires more configuration:
 - Add one `A` record
 - Add one `CNAME` record for verification
 
-> Note: Currently, Deno Deploy<sup>EA</sup> doesn't support IPv6. When using the
+> Note: Deno Deploy<sup>EA</sup> does not currently support IPv6. When using the
 > `ANAME/ALIAS` or `CNAME` methods, your domain will automatically use IPv6 when
 > supported. With the `A` method, you'll receive an email when it's time to add
 > an `AAAA` record.
@@ -103,22 +105,55 @@ and certificate provisioning will fail.
 
 After adding the DNS records, Deno Deploy<sup>EA</sup> will verify your domain
 ownership. This process may take a few minutes depending on your DNS provider.
-You can leave the domain configuration drawer open during verification - it will
+You can leave the domain configuration drawer open during verification — it will
 refresh automatically when complete.
 
 You can manually trigger verification by clicking the "Provision Certificate"
 button. Successful verification also initiates TLS certificate provisioning.
 
-### TLS certificate provisioning
+### TLS certificates
+
+After domain verification, you need a valid TLS certificate to use the domain
+with Deno Deploy<sup>EA</sup>. You can either have Deno Deploy<sup>EA</sup>
+provision a certificate for you using Let's Encrypt, or you can bring your own
+certificate.
+
+#### Automatic provisioning (Let's Encrypt)
 
 After domain verification, click "Provision Certificate" to generate a TLS
-certificate through Let's Encrypt. This process takes up to 90 seconds.
+certificate through Let's Encrypt. This process can take up to 90 seconds.
 
 Once provisioned, you'll see certificate details including expiration date and
 issue time.
 
-Certificates are automatically renewed near expiry. You can check the current
-certificate status in the domain configuration drawer.
+Certificates are automatically renewed near expiration. You can check the
+current certificate status in the domain configuration drawer.
+
+If automatic renewal fails (for example, because DNS records changed), you will
+receive an email notification 14 days before the certificate expires. You then
+have a chance to fix the issue and contact support to retry the renewal. If the
+certificate is not renewed before expiration, the domain will stop working.
+
+#### Bring your own certificate
+
+If you prefer to use your own TLS certificate, you can upload it in the domain
+configuration drawer. You'll need to provide the following:
+
+- The certificate file (PEM format)
+- The private key file (PEM format)
+
+Once uploaded, the certificate will be used for the domain. You are responsible
+for renewing and updating the certificate before it expires.
+
+You will receive email notifications 14 days before the certificate expires
+reminding you to update it. If the certificate expires, the domain will stop
+working.
+
+The TLS certificate must be valid at the time of upload. It must cover the base
+domain (and, if you have a wildcard domain, the wildcard subdomain as well)
+through either the common name or the subject alternative names in the
+certificate. The private key and certificate must match, and must be either RSA
+(2048, 3072, or 4096 bits) or ECDSA (P-256, P-384, or P-521).
 
 ## Assigning a custom domain to an application
 
@@ -147,26 +182,4 @@ organization for use with other applications.
 3. Click "Delete" and confirm
 
 This removes the custom domain from your organization and deletes all domain
-assignments across all applications. Select whether you want to attach the base
-domain, the wildcard subdomain, or any specific subdomain to the application.
-
-Once you have selected the application and the domain, click on the "Assign
-Domain" button to confirm.
-
-## Un-assigning a custom domain from an application
-
-To unassign a custom domain from an application, go to the application settings
-page and remove the custom domain from the "Custom Domains" section using the
-"Remove" button.
-
-This will unassign the custom domain from the application, but will not remove
-the custom domain from the organization. The custom domain will still be
-available for use with other applications in the organization.
-
-## Removing a custom domain
-
-To remove a custom domain from an organization, go to the organization domains
-page and open the domain configuration drawer. In the drawer, click on the
-"Delete" button and confirm. This will remove the custom domain from the
-organization and delete all custom domain assignments for that domain from all
-applications in the organization.
+assignments across all applications.
