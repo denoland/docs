@@ -40,7 +40,9 @@ more flexibility. You can either:
   different apps)
 
 All custom domains require valid TLS certificates. Deno Deploy<sup>EA</sup> can
-automatically provision these certificates using Let's Encrypt.
+automatically provision these certificates using Let's Encrypt. Alternatively
+you can bring your own TLS certificates, which you will then need to renew
+manually.
 
 ## Adding a custom domain
 
@@ -58,7 +60,7 @@ This will open the domain configuration drawer.
 The domain configuration drawer shows the DNS records needed to:
 
 - Verify domain ownership
-- Generate TLS certificates
+- Optionally provision TLS certificates
 - Route traffic to Deno Deploy<sup>EA</sup>
 
 There are three possible configuration methods, depending on your domain
@@ -109,7 +111,14 @@ refresh automatically when complete.
 You can manually trigger verification by clicking the "Provision Certificate"
 button. Successful verification also initiates TLS certificate provisioning.
 
-### TLS certificate provisioning
+### TLS certificates
+
+After domain verification, you need a valid TLS certificate to use the domain
+with Deno Deploy<sup>EA</sup>. You can either have Deno Deploy<sup>EA</sup>
+provision a certificate for you using Let's Encrypt, or you can bring your own
+certificate.
+
+#### Automatic provisioning (Let's Encrypt)
 
 After domain verification, click "Provision Certificate" to generate a TLS
 certificate through Let's Encrypt. This process takes up to 90 seconds.
@@ -119,6 +128,33 @@ issue time.
 
 Certificates are automatically renewed near expiry. You can check the current
 certificate status in the domain configuration drawer.
+
+If we do not manage to renew the certificate (for example, if DNS records have
+changed), you will receive an email notification 14 days before the certificate
+expires. You then have a chance to fix the issue and contact support to retry
+the renewal. If the certificate is not renewed before expiry, the domain will
+stop working.
+
+#### Bring your own certificate
+
+If you prefer to use your own TLS certificate, you can upload it in the domain
+configuration drawer. You'll need to provide the following:
+
+- The certificate file (PEM format)
+- The private key file (PEM format)
+
+Once uploaded, the certificate will be used for the domain. You are responsible
+for renewing and updating the certificate before it expires.
+
+You will receive email notifications 14 days before the certificate expires
+reminding you to update it. If the certificate expires, the domain will stop
+working.
+
+The TLS certificate must be valid at the time of upload. It must cover the base
+domain (and if you have a wildcard domain, the wildcard subdomain as well),
+through either the common name or the subject alternative names in the
+certificate. The private key and certificate must match, and must be either RSA
+(2048, 3072, or 4096 bits), or ECDSA (P-256, P-384, or P-521).
 
 ## Assigning a custom domain to an application
 
