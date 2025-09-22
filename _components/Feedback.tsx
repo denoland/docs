@@ -117,7 +117,7 @@ export default function Feedback({ file }: { file: string | undefined }) {
                 rel=""
                 class="mt-4 !underline underline-offset-2 text-xs block"
                 target="_blank"
-                href="/deploy/manual/privacy-policy"
+                href="/deploy/classic/privacy-policy"
               >
                 Privacy policy
               </a>

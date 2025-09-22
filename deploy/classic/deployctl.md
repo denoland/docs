@@ -96,7 +96,7 @@ deployctl deploy --include=./static --entrypoint=./main.ts
 
 The entrypoint can also be a remote script. A common use case for this is to
 deploy an static site using `std/http/file_server.ts` (more details in
-[Static Site Tutorial](https://docs.deno.com/deploy/tutorials/static-site)):
+[Static Site Tutorial](/deploy/tutorials/static-site)):
 
 ```shell
 deployctl deploy --include=dist --entrypoint=jsr:@std/http/file-server

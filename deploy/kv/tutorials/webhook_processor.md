@@ -23,7 +23,7 @@ In this tutorial, we'll show you how to execute this technique when
 ✏️
 [**Check out the this playground, which implements a GitHub repo webhook handler**](https://dash.deno.com/playground/github-webhook-example).
 
-Using Deno Deploy [playgrounds](/deploy/manual/playgrounds), you can instantly
+Using Deno Deploy [playgrounds](/deploy/classic/playgrounds), you can instantly
 deploy your own GitHub webhook handler that uses both queues and Deno KV. We'll
 walk through what this code does in a moment.
 

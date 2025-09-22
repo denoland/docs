@@ -28,7 +28,7 @@ products and services constitutes your acknowledgment and/or consent to the
 practices described in this Policy.
 
 This Privacy Policy incorporates
-[Deno’s Terms and Conditions](https://docs.deno.com/deploy/manual/terms-and-conditions/)
+[Deno’s Terms and Conditions](https://docs.deno.com/deploy/classic/terms-and-conditions/)
 (the “Terms”). Capitalized terms that are not defined in the Privacy Policy have
 the meaning given to them in the Terms.
 

@@ -105,7 +105,7 @@ export const SidebarNav = [
   },
   {
     title: "Deploy Classic",
-    href: "/deploy/manual/",
+    href: "/deploy/classic/",
   },
   {
     title: "Subhosting",

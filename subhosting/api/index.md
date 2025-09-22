@@ -111,7 +111,7 @@ deployments at the same time.
 
 To use KV with Subhosting:
 
-- [Create a database using the API](https://docs.deno.com/deploy/kv/manual)
+- [Create a database using the API](/deploy/kv/manual)
 - When you create a deployment using the Subhosting API, specify the database
   you created.
 
