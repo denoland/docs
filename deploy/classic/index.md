@@ -8,7 +8,8 @@ oldUrl:
 
 ---
 
-:::warning This page documents the legacy Deno Deploy Classic platform
+::: warning 
+This page documents the legacy Deno Deploy Classic platform
 (dash.deno.com). We are no longer onboarding new users or organizations to
 Deploy Classic.
 
