@@ -85,10 +85,10 @@ From the directory of the `main.ts` file you just created, run this command:
 deployctl deploy
 ```
 
-You will be asked to authorize Deno Deploy in GitHub to sign up to Deno Deploy
-and/or to provision an access token for `deployctl`. A few moments after that,
-your Hello World server will be deployed in Deno Deploy infrastructure all
-around the world, ready to handle all the traffic you expect.
+You will be asked to authorize Deno Deploy Classic in GitHub to sign up to Deno
+Deploy and/or to provision an access token for `deployctl`. A few moments after
+that, your Hello World server will be deployed in Deno Deploy Classic
+infrastructure all around the world, ready to handle all the traffic you expect.
 
 ## Next Steps
 
@@ -102,8 +102,8 @@ excited to see what you'll ship with Deno Deploy!
 
 Import a project and run it on the edge with Deno Deploy.
 
-1. [From the Deno Deploy dashboard](https://dash.deno.com) click the "New
-   Project" button.
+1. [From the Deno Deploy Classic dashboard](https://dash.deno.com) click the
+   "New Project" button.
 
 2. Connect to your GitHub account and select the repository you would like to
    deploy.
@@ -132,8 +132,8 @@ for just kicking the tires on Deno and Deno Deploy!
 
 From the [Deno Deploy dashboard](https://dash.deno.com), click the "New
 Playground" button to create a playground. We also have a variety of ready built
-tutorials for you to try out Deno Deploy try them out by clicking on "Learning
-Playground" or visiting:\
+tutorials for you to try out Deno Deploy Classic try them out by clicking on
+"Learning Playground" or visiting:\
 [Simple HTTP server playground](https://dash.deno.com/tutorial/tutorial-http)\
 [Using the Deno KV database playground](https://dash.deno.com/tutorial/tutorial-http-kv)\
 [RESTful API server playground](https://dash.deno.com/tutorial/tutorial-restful)\

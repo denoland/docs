@@ -4,7 +4,8 @@ title: "Organizations"
 
 **Organizations** allow you to collaborate with other users. A project created
 in an organization is accessible to all members of the organization. Users
-should first signup for Deno Deploy before they can be added to an organization.
+should first signup for Deno Deploy Classic before they can be added to an
+organization.
 
 Currently, all organization members have full access to the organization. They
 can add/remove members, and create/delete/modify all projects in the
@@ -24,7 +25,7 @@ organization.
    of the screen, in the navigation bar.
 2. Click on the **Members** icon button.
 3. Under the **Members** panel, click on **+ Invite member**.
-   > **Note:** Users should first signup for Deno Deploy using
+   > **Note:** Users should first signup for Deno Deploy Classic using
    > [this link](https://dash.deno.com/signin) before you invite them.
 4. Enter the GitHub username of the user and click on **Invite**.
 

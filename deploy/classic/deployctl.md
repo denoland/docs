@@ -16,8 +16,8 @@ running the following command:
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
-You don't need to setup a Deno Deploy account beforehand. It will be created
-along the way when you deploy your first project.
+You don't need to setup a Deno Deploy Classic account beforehand. It will be
+created along the way when you deploy your first project.
 
 ## Install `deployctl`
 
@@ -335,7 +335,7 @@ https://github.com/denoland/deploy_feedback/issues/
 
 :::note
 
-When you change the project environment variables in the Deno Deploy web
+When you change the project environment variables in the Deno Deploy Classic web
 application, the current production deployment is redeployed with the new
 environment variables, and the new deployment becomes the new production
 deployment.
@@ -542,8 +542,9 @@ deployctl logs
 
 :::note
 
-Unlike in the Deno Deploy web application, at the moment the logs subcommand
-does not automatically switch to the new production deployment when it changes.
+Unlike in the Deno Deploy Classic web application, at the moment the logs
+subcommand does not automatically switch to the new production deployment when
+it changes.
 
 :::
 

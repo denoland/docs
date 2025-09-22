@@ -11,10 +11,10 @@ preview deployment.
 
 There are two modes of operation for the Git integration:
 
-- **Automatic**: Deno Deploy will automatically pull code and assets from your
-  repository source every time you push, and deploy it. This mode is very fast,
-  but does not allow for a build step. _This is the recommended mode for most
-  users._
+- **Automatic**: Deno Deploy Classic will automatically pull code and assets
+  from your repository source every time you push, and deploy it. This mode is
+  very fast, but does not allow for a build step. _This is the recommended mode
+  for most users._
 - **GitHub Actions**: In this mode, you push your code and assets to Deno Deploy
   from a GitHub Actions workflow. This allows you to perform a build step before
   deploying.
@@ -32,11 +32,11 @@ Deploy will run.
 ## GitHub Actions
 
 If you enter a command in **Install Step** and/or **Build Step** in the
-**Project Configuration**, Deno Deploy will create a necessary GitHub Actions
-workflow file and push it into your repository. In this workflow file, we
-leverage the `deployctl` [Github action][deploy-action] to deploy your project.
-You can do whatever you need to do, such as running a build command, before
-deploying it to Deno Deploy.
+**Project Configuration**, Deno Deploy Classic will create a necessary GitHub
+Actions workflow file and push it into your repository. In this workflow file,
+we leverage the `deployctl` [Github action][deploy-action] to deploy your
+project. You can do whatever you need to do, such as running a build command,
+before deploying it to Deno Deploy.
 
 To configure preprocessing commands you want to run, click **Show advanced
 options** button that appears after choosing your git repository. Then enter
@@ -52,8 +52,8 @@ Deno Deploy.
 
 :::
 
-The GitHub Actions workflow file that Deno Deploy generates and pushes to your
-repository looks like as follows.
+The GitHub Actions workflow file that Deno Deploy Classic generates and pushes
+to your repository looks like as follows.
 
 ```yml title=".github/workflows/deploy.yml"
 name: Deploy

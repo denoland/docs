@@ -13,8 +13,8 @@ Some popular use-cases for Deno currently are:
 Middleware refers to bits of code that execute before and after the request gets
 to the application server. You'll be writing middleware if you want to execute
 some JavaScript or any other code very fast, early in the request. By deploying
-your middleware code at the edge, Deno Deploy ensures the best performance for
-your app.
+your middleware code at the edge, Deno Deploy Classic ensures the best
+performance for your app.
 
 Some examples include:
 
@@ -36,9 +36,9 @@ your middleware right now, for example:
 ## API servers
 
 Deno is also a great fit for API servers. By deploying these servers "at the
-edge", closer to clients who are using them, Deno Deploy is able to offer lower
-latency, improved performance, and reduced bandwidth costs compared to
-traditional hosting platforms like Heroku or even modern centralized hosting
+edge", closer to clients who are using them, Deno Deploy Classic is able to
+offer lower latency, improved performance, and reduced bandwidth costs compared
+to traditional hosting platforms like Heroku or even modern centralized hosting
 services like DigitalOcean.
 
 ## Full websites

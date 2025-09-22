@@ -138,5 +138,6 @@
   "runtime/reference/deno_namespace_apis/": "/api/deno/",
   "runtime/reference/web_platform_apis/": "/api/web/",
   "runtime/reference/node_apis/": "/api/node/",
-  "/deploy/tutorials/vite/": "/examples/react_tutorial/"
+  "/deploy/tutorials/vite/": "/examples/react_tutorial/",
+  "/deploy/manual/*": "/deploy/classic/*"
 }
