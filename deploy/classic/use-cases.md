@@ -25,8 +25,8 @@ Some examples include:
 - dynamically changing the HTML on its way back from the server before it gets
   to the user.
 
-Deno Deploy Classic is a good alternative to other platforms you might be using to host
-your middleware right now, for example:
+Deno Deploy Classic is a good alternative to other platforms you might be using
+to host your middleware right now, for example:
 
 - Cloudflare Workers
 - AWS Lambda@Edge

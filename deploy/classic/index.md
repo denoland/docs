@@ -85,10 +85,10 @@ From the directory of the `main.ts` file you just created, run this command:
 deployctl deploy
 ```
 
-You will be asked to authorize Deno Deploy in GitHub to sign up to Deno
-Deploy  and/or to provision an access token for `deployctl`. A few moments after
-that, your Hello World server will be deployed in Deno Deploy Classic
-infrastructure all around the world, ready to handle all the traffic you expect.
+You will be asked to authorize Deno Deploy in GitHub to sign up to Deno Deploy
+and/or to provision an access token for `deployctl`. A few moments after that,
+your Hello World server will be deployed in Deno Deploy Classic infrastructure
+all around the world, ready to handle all the traffic you expect.
 
 ## Next Steps
 
