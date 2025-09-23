@@ -1,14 +1,7 @@
 ---
 title: Domains
-description: "Complete guide to domain management in Deno Deploy Early Access, including organization domains, custom domains, DNS configuration, TLS certificates, and domain assignments."
+description: "Complete guide to domain management in Deno Deploy, including organization domains, custom domains, DNS configuration, TLS certificates, and domain assignments."
 ---
-
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
 
 Every organization has a default domain used for all applications deployed
 within that organization. For example, an organization with the slug `acme-inc`
@@ -39,10 +32,10 @@ more flexibility. You can either:
 - Partially assign it to multiple applications (different subdomains point to
   different apps)
 
-All custom domains require valid TLS certificates. Deno Deploy<sup>EA</sup> can
-automatically provision these certificates using
-[Let's Encrypt](https://letsencrypt.org/). Alternatively, you can bring your own
-TLS certificates, which you will then need to renew manually.
+All custom domains require valid TLS certificates. Deno Deploy can automatically
+provision these certificates using [Let's Encrypt](https://letsencrypt.org/).
+Alternatively, you can bring your own TLS certificates, which you will then need
+to renew manually.
 
 ## Adding a custom domain
 
@@ -61,7 +54,7 @@ The domain configuration drawer shows the DNS records needed to:
 
 - Verify domain ownership
 - Optionally provision TLS certificates
-- Route traffic to Deno Deploy<sup>EA</sup>
+- Route traffic to Deno Deploy
 
 There are three possible configuration methods, depending on your domain
 registrar's capabilities:
@@ -88,7 +81,7 @@ Most compatible but requires more configuration:
 - Add one `A` record
 - Add one `CNAME` record for verification
 
-> Note: Deno Deploy<sup>EA</sup> does not currently support IPv6. When using the
+> Note: Deno Deploy does not currently support IPv6. When using the
 > `ANAME/ALIAS` or `CNAME` methods, your domain will automatically use IPv6 when
 > supported. With the `A` method, you'll receive an email when it's time to add
 > an `AAAA` record.
@@ -103,10 +96,10 @@ and certificate provisioning will fail.
 
 ### Verification
 
-After adding the DNS records, Deno Deploy<sup>EA</sup> will verify your domain
-ownership. This process may take a few minutes depending on your DNS provider.
-You can leave the domain configuration drawer open during verification — it will
-refresh automatically when complete.
+After adding the DNS records, Deno Deploy will verify your domain ownership.
+This process may take a few minutes depending on your DNS provider. You can
+leave the domain configuration drawer open during verification — it will refresh
+automatically when complete.
 
 You can manually trigger verification by clicking the "Provision Certificate"
 button. Successful verification also initiates TLS certificate provisioning.
@@ -114,9 +107,8 @@ button. Successful verification also initiates TLS certificate provisioning.
 ### TLS certificates
 
 After domain verification, you need a valid TLS certificate to use the domain
-with Deno Deploy<sup>EA</sup>. You can either have Deno Deploy<sup>EA</sup>
-provision a certificate for you using Let's Encrypt, or you can bring your own
-certificate.
+with Deno Deploy. You can either have Deno Deploy provision a certificate for
+you using Let's Encrypt, or you can bring your own certificate.
 
 #### Automatic provisioning (Let's Encrypt)
 

@@ -1,14 +1,7 @@
 ---
-title: "Deno Deployᴱᴬ changelog"
-description: "Listing notable progress in the development and evolution of Deno Deploy Early Access"
+title: "Deno Deploy changelog"
+description: "Listing notable progress in the development and evolution of Deno Deploy"
 ---
-
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
 
 ## August 27th, 2025
 
@@ -54,11 +47,10 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 ### Features
 
-- New: Database support for Deno Deploy<sup>EA</sup> apps, allowing you to
-  easily connect to and use Postgres databases in your applications.
+- New: Database support for Deno Deploy apps, allowing you to easily connect to
+  and use Postgres databases in your applications.
   - Provision a Postgres database instance on AWS RDS, Neon, Supabase, or any
-    other provider and then link it to your Deno Deploy<sup>EA</sup>
-    organization.
+    other provider and then link it to your Deno Deploy organization.
   - Assign the database instance to an application, making it available in the
     application's environment.
   - Every timeline (production, each git branch, and previews) has their own
@@ -101,17 +93,17 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 ### Features
 
-- New: Cloud Connect allows you to securely connect your Deno
-  Deploy<sup>EA</sup> apps to AWS and GCP, enabling you to use services like AWS
-  S3, Google Cloud Storage, without needing to manage credentials.
+- New: Cloud Connect allows you to securely connect your Deno Deploy apps to AWS
+  and GCP, enabling you to use services like AWS S3, Google Cloud Storage,
+  without needing to manage credentials.
   - This is done without storing any long-lived static credentials, but rather
     using short-lived tokens and OIDC (OpenID Connect) to establish a trust
-    relationship between Deno Deploy<sup>EA</sup> and your cloud provider.
+    relationship between Deno Deploy and your cloud provider.
   - A setup flow in the app settings page, or a drawer in playgrounds, guides
     you through the process of connecting your app to AWS or GCP.
   - You can use the standard AWS and GCP SDKs to access the services - no need
     to re-write any code to use a different API.
-  - [Learn more in the documentation.](/deploy/early-access/reference/cloud-connections/)
+  - [Learn more in the documentation.](/deploy/reference/cloud-connections/)
 - The application metrics page now shows more metrics, including V8 memory
   metrics such as heap size and garbage collection stats, as well as process
   level metrics such as CPU usage and overall memory usage.
@@ -165,7 +157,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 ### Features
 
-- Deno Deploy<sup>EA</sup> now supports playgrounds!
+- Deno Deploy now supports playgrounds!
   - Playgrounds can be created and accessed from the playgrounds tab in the
     organizations overview
   - Playgrounds can contain multiple files and include build steps
@@ -178,9 +170,9 @@ Deploy Classic documentation? [View it here](/deploy/).
 
 ### Features
 
-- Deno Deploy<sup>EA</sup> has a new logo!
-- Anyone can now join Early Access by signing up at
-  [dash.deno.com](https://dash.deno.com/account#early-access)
+- Deno Deploy has a new logo!
+- Anyone can now join by signing up at
+  [console.deno.com](https://console.deno.com)
 - Builds
   - Builds can now use up to 8 GB of storage, up from 2 GB
   - Builds can now use environment variables and secrets configured in the
@@ -217,7 +209,7 @@ Deploy Classic documentation? [View it here](/deploy/).
 - When triggering a manual build you can now choose which branch to deploy
 - You can now deploy Astro static sites without having to manually install the
   Deno adapter
-- There are now [reference docs for you to peruse](/deploy/early-access/).
+- There are now [reference docs for you to peruse](/deploy/).
 
 ### Bug fixes
 

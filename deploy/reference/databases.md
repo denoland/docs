@@ -3,13 +3,6 @@ title: Databases
 description: Connect to external database instances and integrate your applications and their environments seamlessly.
 ---
 
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
 The databases feature allows you to connect your applications to external
 database servers. When you assign a database to an app, Deno Deploy
 automatically provisions separate databases for each deployment environment -

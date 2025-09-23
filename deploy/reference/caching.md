@@ -1,17 +1,10 @@
 ---
 title: Caching
-description: "Overview of CDN caching functionality in Deno Deploy Early Access, including cache configuration, directives, and best practices."
+description: "Overview of CDN caching functionality in Deno Deploy, including cache configuration, directives, and best practices."
 ---
 
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
-Deno Deploy<sup>EA</sup> includes a built-in CDN that can cache responses from
-your application. This improves performance for:
+Deno Deploy includes a built-in CDN that can cache responses from your
+application. This improves performance for:
 
 - Static assets (images, CSS, JavaScript files)
 - API responses and server-rendered pages that don't change frequently
@@ -19,9 +12,8 @@ your application. This improves performance for:
 Caching is enabled by default for all applications, but only responses with
 appropriate caching headers are actually cached.
 
-Deno Deploy<sup>EA</sup> integrates with popular frameworks like Next.js to
-automatically optimize caching for features such as Incremental Static
-Regeneration (ISR).
+Deno Deploy integrates with popular frameworks like Next.js to automatically
+optimize caching for features such as Incremental Static Regeneration (ISR).
 
 The CDN cache is tied to both the revision and context. When you deploy a new
 revision, the cache is automatically invalidated, ensuring users always see the
@@ -35,7 +27,7 @@ standard HTTP header tells browsers and the CDN how to cache your content.
 
 ### Supported caching directives
 
-Deno Deploy<sup>EA</sup> supports these caching directives:
+Deno Deploy supports these caching directives:
 
 | Directive                | Description                                                                                                                                                             |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

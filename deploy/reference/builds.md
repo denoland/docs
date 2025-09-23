@@ -1,18 +1,11 @@
 ---
 title: Builds
-description: "Detailed explanation of the build process in Deno Deploy Early Access, covering build triggers, stages, configuration options, caching, and the build environment."
+description: "Detailed explanation of the build process in Deno Deploy, covering build triggers, stages, configuration options, caching, and the build environment."
 ---
 
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
-In Deno Deploy<sup>EA</sup>, each version of your application code is
-represented as a revision (or build). When deploying from GitHub, revisions
-generally map one-to-one to git commits in your repository.
+In Deno Deploy, each version of your application code is represented as a
+revision (or build). When deploying from GitHub, revisions generally map
+one-to-one to git commits in your repository.
 
 ## Build triggers
 

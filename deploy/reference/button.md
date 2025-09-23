@@ -3,13 +3,6 @@ title: Deploy Button
 description: "Help users quickly and easily clone code and deploy it to Deno Deploy with the click of a button"
 ---
 
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
 The Deploy Button offers a shortcut for users to create and deploy a new
 application on Deno Deploy based on existing code hosted in a Git repository.
 

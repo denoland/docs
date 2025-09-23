@@ -1,17 +1,10 @@
 ---
 title: Environment Variables and Contexts
-description: "Guide to managing environment variables and contexts in Deno Deploy Early Access, including variable types, creation, editing, and accessing them in your code."
+description: "Guide to managing environment variables and contexts in Deno Deploy, including variable types, creation, editing, and accessing them in your code."
 ---
 
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
-Environment variables in Deno Deploy<sup>EA</sup> allow you to configure your
-application with static values such as API keys or database connection strings.
+Environment variables in Deno Deploy allow you to configure your application
+with static values such as API keys or database connection strings.
 
 ## Types of environment variables
 
@@ -132,7 +125,7 @@ Environment variables have the following limits:
   - `OTEL_`
 - Environment variable values can be at most 16 KB (16,384 bytes) long.
 - Environment variable keys can not be any of these keys. Instead, use
-  [Cloud Connections](/deploy/early-access/reference/cloud-connections)
+  [Cloud Connections](/deploy/reference/cloud-connections)
   - `AWS_ROLE_ARN`
   - `AWS_WEB_IDENTITY_TOKEN_FILE`
   - `GCP_WORKLOAD_PROVIDER_ID`
@@ -144,8 +137,7 @@ Environment variables have the following limits:
 
 ## Predefined environment variables
 
-Deno Deploy<sup>EA</sup> provides these predefined environment variables in all
-contexts:
+Deno Deploy provides these predefined environment variables in all contexts:
 
 - `DENO_DEPLOY=1`: Indicates that the application is running in the Deno Deploy
   environment.

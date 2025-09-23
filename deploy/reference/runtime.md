@@ -1,22 +1,15 @@
 ---
 title: Runtime
-description: "Details about the Deno Deploy Early Access runtime environment, including application lifecycle, startup, shutdown, and cold start optimization."
+description: "Details about the Deno Deploy runtime environment, including application lifecycle, startup, shutdown, and cold start optimization."
 ---
 
-:::info
+In Deno Deploy, all applications execute using a standard Deno runtime in a
+secure, isolated Linux environment.
 
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
-In Deno Deploy<sup>EA</sup>, all applications execute using a standard Deno
-runtime in a secure, isolated Linux environment.
-
-The Deno runtime used in Deno Deploy<sup>EA</sup> is the standard Deno runtime,
-with full support for all features of the Deno CLI, including JSR and NPM
-dependencies, reading and writing to the file system, making network requests,
-spawning subprocesses, and loading FFI and node native addons.
+The Deno runtime used in Deno Deploy is the standard Deno runtime, with full
+support for all features of the Deno CLI, including JSR and NPM dependencies,
+reading and writing to the file system, making network requests, spawning
+subprocesses, and loading FFI and node native addons.
 
 The Deno runtime runs using `--allow-all` permissions.
 
@@ -28,14 +21,14 @@ The runtime environment is a Linux-based environment running either x64 or ARM64
 architecture. The exact set of tools available in the runtime environment is
 subject to change and thus cannot be relied upon.
 
-Currently Deno Deploy<sup>EA</sup> runs on Deno 2.4.0
+Currently Deno Deploy runs on Deno 2.4.0
 
 ## Lifecycle
 
-Deno Deploy<sup>EA</sup> runs applications in a serverless environment. This
-means that an application is not always running and is only started when a
-request is received. When no incoming traffic is received for a period of time,
-the application is stopped.
+Deno Deploy runs applications in a serverless environment. This means that an
+application is not always running and is only started when a request is
+received. When no incoming traffic is received for a period of time, the
+application is stopped.
 
 Applications can be started and stopped at any time. They should start quickly
 to respond to incoming requests without delay.
@@ -106,12 +99,11 @@ killed with a `SIGKILL` signal if it has not already shut down gracefully.
 ## Cold starts
 
 Because applications are not always running, they may need to start when a
-request is received. This is called a cold start. Cold starts in Deno Deploy
-<sup>EA</sup> are highly optimized and complete within 100 milliseconds for
-hello world applications, and within a few hundred milliseconds for larger
-applications.
+request is received. This is called a cold start. Cold starts in Deno Deploy are
+highly optimized and complete within 100 milliseconds for hello world
+applications, and within a few hundred milliseconds for larger applications.
 
-Deno Deploy<sup>EA</sup> uses multiple optimizations to enable fast cold starts:
+Deno Deploy uses multiple optimizations to enable fast cold starts:
 
 - Sandboxes and the Deno runtime are pre-provisioned to ensure they don't need
   to be created from scratch when starting an application.
@@ -121,9 +113,9 @@ Deno Deploy<sup>EA</sup> uses multiple optimizations to enable fast cold starts:
   network round trip latency, the application may already be running before the
   client sends the HTTP request.
 
-- File system access is optimized for frequently used startup files. Deno
-  Deploy<sup>EA</sup> analyzes file access patterns during the build step's
-  warmup phase and optimizes the file system for faster access.
+- File system access is optimized for frequently used startup files. Deno Deploy
+  analyzes file access patterns during the build step's warmup phase and
+  optimizes the file system for faster access.
 
 When cold starts are slow, they can negatively impact user experience. To
 optimize your application for quick startup:

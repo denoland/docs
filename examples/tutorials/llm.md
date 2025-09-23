@@ -907,7 +907,7 @@ application will:
 ## Deploy your application to the cloud
 
 Now that you have your working LLM chat application, you can deploy it to the
-cloud with Deno Deploy<sup>EA</sup>.
+cloud with Deno Deploy.
 
 For the best experience, you can deploy your app directly from GitHub, which
 will set up automated deployments. Create a GitHub repository and push your app
@@ -925,7 +925,7 @@ git push -u origin main
 ```
 
 Once your app is on GitHub, you can
-[deploy it to Deno Deploy<sup>EA</sup>](https://console.deno.com/).
+[deploy it to Deno Deploy](https://console.deno.com/).
 
 Don't forget to add your `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` environment
 variables in the project "Settings".

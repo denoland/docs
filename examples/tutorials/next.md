@@ -314,7 +314,7 @@ details!
 ## Deploy the app
 
 Now that you have your working Next.js app, you can deploy it to the web with
-Deno Deploy<sup>EA</sup>.
+Deno Deploy.
 
 For the best experience, you can deploy your app directly from GitHub, which
 will set up automated deployments. Create a GitHub repository and push your app
@@ -332,7 +332,7 @@ git push -u origin main
 ```
 
 Once your app is on GitHub, you can
-[deploy it to Deno Deploy<sup>EA</sup>](https://console.deno.com/).
+[deploy it to Deno Deploy](https://console.deno.com/).
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).

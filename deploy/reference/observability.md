@@ -1,21 +1,14 @@
 ---
 title: Observability
-description: "Comprehensive overview of monitoring features in Deno Deploy Early Access, including logs, traces, metrics, and filtering options."
+description: "Comprehensive overview of monitoring features in Deno Deploy, including logs, traces, metrics, and filtering options."
 ---
 
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
-Deno Deploy<sup>EA</sup> provides comprehensive observability features to help
-you understand application performance, debug errors, and monitor usage. These
-features leverage OpenTelemetry and the
+Deno Deploy provides comprehensive observability features to help you understand
+application performance, debug errors, and monitor usage. These features
+leverage OpenTelemetry and the
 [built-in OpenTelemetry integration in Deno](/runtime/fundamentals/open_telemetry/).
 
-The three main observability features in Deno Deploy<sup>EA</sup> are:
+The three main observability features in Deno Deploy are:
 
 - **Logs**: Unstructured debug information emitted by your application code
 - **Traces**: Structured information about request handling, including execution
@@ -25,8 +18,8 @@ The three main observability features in Deno Deploy<sup>EA</sup> are:
 
 ## Logs
 
-Logs in Deno Deploy<sup>EA</sup> are captured using the standard `console` API
-and can be queried from the logs page in the dashboard.
+Logs in Deno Deploy are captured using the standard `console` API and can be
+queried from the logs page in the dashboard.
 
 Logs are organized by application. You can use the search bar to filter logs
 based on various attributes and message content.
@@ -38,7 +31,7 @@ for detailed inspection.
 
 ## Traces
 
-Traces in Deno Deploy<sup>EA</sup> are captured in three ways:
+Traces in Deno Deploy are captured in three ways:
 
 - **Automatically for built-in operations**: Incoming HTTP requests, outbound
   fetch calls, and other system operations are traced automatically. This cannot
@@ -68,9 +61,9 @@ pre-filled in the search bar, showing all logs related to that trace.
 
 ## Metrics
 
-Metrics in Deno Deploy<sup>EA</sup> are automatically captured for various
-operations such as incoming HTTP requests and outbound fetch calls. This
-automatic capture cannot be disabled.
+Metrics in Deno Deploy are automatically captured for various operations such as
+incoming HTTP requests and outbound fetch calls. This automatic capture cannot
+be disabled.
 
 Metrics are organized by application and displayed in time-series graphs showing
 values over time. You can use the search bar to filter metrics based on various

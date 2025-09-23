@@ -327,17 +327,21 @@ Now we have an application that should serve up our APIs.
 
 Now that we have everything in place, let's deploy your new application!
 
-1. In your browser, visit [Deno Deploy](https://dash.deno.com/new_project) and
-   link your GitHub account.
-2. Select the repository which contains your new application.
-3. You can give your project a name or allow Deno to generate one for you
-4. Select `firebase.js` in the Entrypoint dropdown
-5. Click **Deploy Project**
+1. Navigate to
+   [https://console.deno.com/](https://console.deno.com/).
+2. Sign in with your GitHub account click "+ New app".
+3. Choose the repository you created in Step 2.
+4. Fill in the values on the form:
+   - Give your project a name
+   - Select `main.ts` as the entrypoint in the app configuration settings
+5. Click "Deploy Project" to kick off Deno Deploy.
+6. Once deployed, you can view your new project at url provided in your project
+   dashboard.
 
 In order for your Application to work, we will need to configure its environment
 variables.
 
-On your project's success page, or in your project dashboard, click on **Add
+In your project dashboard, click on **Add environmental variables**. Under Environment Variables, click **+ Add Variable**. Create the following variables:
 environmental variables**. Under Environment Variables, click **+ Add
 Variable**. Create the following variables:
 

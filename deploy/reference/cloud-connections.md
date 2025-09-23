@@ -1,41 +1,31 @@
 ---
 title: Cloud Connections
-description: Learn how to connect Deno Deploy Early Access to cloud providers like AWS and Google Cloud Platform without needing to manage credentials.
+description: Learn how to connect Deno Deploy to cloud providers like AWS and Google Cloud Platform without needing to manage credentials.
 ---
 
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
-Deno Deploy<sup>EA</sup> allows you to connect to cloud providers like AWS and
-Google Cloud Platform (GCP) without needing to manually manage static
-credentials. This is done through the use of OpenID Connect (OIDC) and identity
-federation.
+Deno Deploy allows you to connect to cloud providers like AWS and Google Cloud
+Platform (GCP) without needing to manually manage static credentials. This is
+done through the use of OpenID Connect (OIDC) and identity federation.
 
 ## How it works
 
-Deno Deploy<sup>EA</sup> is an OIDC provider. Every running application of Deno
-Deploy<sup>EA</sup> can be issued short-lived JWT tokens that are signed by Deno
-Deploy<sup>EA</sup>. These tokens contain information about the application,
-such as the organization and application ids and slugs, the context in which an
-application is executing, and the running revision ID. Learn more about
-[OIDC in Deno Deploy<sup>EA</sup>](./oidc).
+Deno Deploy is an OIDC provider. Every running application of Deno Deploy can be
+issued short-lived JWT tokens that are signed by Deno Deploy. These tokens
+contain information about the application, such as the organization and
+application ids and slugs, the context in which an application is executing, and
+the running revision ID. Learn more about [OIDC in Deno Deploy](./oidc).
 
 By sending these tokens to AWS or GCP, one can exchange them for short-lived AWS
 or GCP credentials that can be used to access cloud resources such as AWS S3
 buckets or Google Cloud Spanner instances. When sending the token to AWS or GCP,
 the token is verified by the cloud provider, which checks that it was issued by
-Deno Deploy<sup>EA</sup> and that it is valid for the application and context
-that should be allowed to access the cloud resources.
+Deno Deploy and that it is valid for the application and context that should be
+allowed to access the cloud resources.
 
 To enable AWS or GCP to exchange OIDC tokens for credentials, the cloud provider
-needs to be configured to trust Deno Deploy<sup>EA</sup> as an OIDC identity
-provider, and an AWS IAM role or GCP service account needs to be created that
-allows the exchange of tokens for credentials, for a specific Deno
-Deploy<sup>EA</sup> application.
+needs to be configured to trust Deno Deploy as an OIDC identity provider, and an
+AWS IAM role or GCP service account needs to be created that allows the exchange
+of tokens for credentials, for a specific Deno Deploy application.
 
 ## Setting up AWS
 
@@ -48,18 +38,17 @@ any of these to set up the AWS resources.
 - [Using the AWS Console](#setup-aws-console)
 - [Using Terraform](#setup-aws-terraform)
 
-To set up AWS with Deno Deploy<sup>EA</sup>, the following resources need to be
-created inside of your AWS account:
+To set up AWS with Deno Deploy, the following resources need to be created
+inside of your AWS account:
 
 - An
   [AWS IAM OIDC Identity Provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html)
-  that trusts Deno Deploy<sup>EA</sup> as an OIDC provider.
+  that trusts Deno Deploy as an OIDC provider.
   - The OIDC provider URL is `https://oidc.deno.com`.
   - The audience (client ID) is `sts.amazonaws.com`.
 - An
   [AWS IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html)
-  that can be "assumed" (signed into) using a Deno Deploy<sup>EA</sup> OIDC
-  token.
+  that can be "assumed" (signed into) using a Deno Deploy OIDC token.
   - The trust policy of the role should allow the OIDC provider to assume the
     role, such as:
     ```json
@@ -99,13 +88,13 @@ After testing the connection, you can save the cloud connection.
 
 ### Usage
 
-After setting up a cloud connection between AWS and Deno Deploy<sup>EA</sup> you
-can access AWS resources such as S3 directly from your application code, without
-having to configure any credentials.
+After setting up a cloud connection between AWS and Deno Deploy you can access
+AWS resources such as S3 directly from your application code, without having to
+configure any credentials.
 
 The AWS SDK v3 automatically picks up on the cloud connection configuration.
-Here is an example of accessing an S3 bucket from a Deno Deploy<sup>EA</sup>
-application with a configured AWS account.
+Here is an example of accessing an S3 bucket from a Deno Deploy application with
+a configured AWS account.
 
 ```ts
 import { ListBucketsCommand, S3Client } from "@aws-sdk/client-s3";
@@ -120,12 +109,12 @@ Deno.serve(() => {
 
 ## Setting up GCP
 
-To set up GCP with Deno Deploy<sup>EA</sup>, the following resources need to be
-created inside of your GCP account:
+To set up GCP with Deno Deploy, the following resources need to be created
+inside of your GCP account:
 
 - A
   [Workload Identity Pool and Workload Identity Provider](https://cloud.google.com/iam/docs/workload-identity-federation-with-other-providers)
-  that trusts Deno Deploy<sup>EA</sup> as an OIDC provider.
+  that trusts Deno Deploy as an OIDC provider.
   - The OIDC provider URL is `https://oidc.deno.com`.
   - The audience should be the default (starts with
     `https://iam.googleapis.com`).
@@ -169,13 +158,13 @@ After testing the connection, you can save the cloud connection.
 
 ### Usage
 
-After setting up a cloud connection between GCP and Deno Deploy<sup>EA</sup> you
-can access GCP resources such as Cloud Storage directly from your application
-code, without having to configure any credentials.
+After setting up a cloud connection between GCP and Deno Deploy you can access
+GCP resources such as Cloud Storage directly from your application code, without
+having to configure any credentials.
 
 The Google Cloud SDK automatically picks up on the cloud connection
 configuration. Here is an example of accessing a Cloud Storage bucket from a
-Deno Deploy<sup>EA</sup> application with a configured GCP account.
+Deno Deploy application with a configured GCP account.
 
 ```ts
 import { Storage } from "@google-cloud/storage";
@@ -197,7 +186,7 @@ integration section, next to a specific cloud connection.
 
 ### AWS: Easy setup with `deno deploy setup-aws`
 
-For instructions on how to set up AWS with Deno Deploy<sup>EA</sup> using the
+For instructions on how to set up AWS with Deno Deploy using the
 `deno deploy setup-aws` command, please see the instructions on the AWS cloud
 integration setup page in your app settings.
 
@@ -224,9 +213,9 @@ aws iam create-open-id-connect-provider \
 
 #### Step 2: Create IAM Role with Trust Policy
 
-Create a trust policy file that allows your Deno Deploy<sup>EA</sup> application
-to assume the role. You can choose between allowing access to all contexts or
-specific contexts only.
+Create a trust policy file that allows your Deno Deploy application to assume
+the role. You can choose between allowing access to all contexts or specific
+contexts only.
 
 **For all contexts in your app:**
 
@@ -312,8 +301,8 @@ Replace `POLICY_NAME` with the appropriate AWS policies (e.g.,
 `AmazonS3ReadOnlyAccess`, `AmazonDynamoDBReadOnlyAccess`, etc.) based on your
 requirements.
 
-After completing these steps, use the Role ARN in your Deno Deploy<sup>EA</sup>
-cloud connection configuration.
+After completing these steps, use the Role ARN in your Deno Deploy cloud
+connection configuration.
 
 ### AWS: Using the AWS Console
 
@@ -341,8 +330,8 @@ This method provides a visual way to configure the necessary IAM resources.
 
 #### Step 3: Configure Trust Policy Conditions
 
-Add a condition to restrict which Deno Deploy<sup>EA</sup> applications can
-assume this role. Choose one approach:
+Add a condition to restrict which Deno Deploy applications can assume this role.
+Choose one approach:
 
 **For all contexts in your app:**
 
@@ -383,7 +372,7 @@ After creating the role:
 1. Go to the role details page
 2. Copy the Role ARN (it looks like
    `arn:aws:iam::123456789012:role/DenoDeploy-YourOrg-YourApp`)
-3. Use this ARN in your Deno Deploy<sup>EA</sup> cloud connection configuration
+3. Use this ARN in your Deno Deploy cloud connection configuration
 
 ### AWS: Using Terraform
 
@@ -505,7 +494,7 @@ module "deno_deploy_aws" {
    ```
 
 After applying, Terraform will output the Role ARN that you can use in your Deno
-Deploy<sup>EA</sup> cloud connection configuration.
+Deploy cloud connection configuration.
 
 #### Customizing Policies
 
@@ -516,7 +505,7 @@ requirements. You can add multiple policy attachments by creating additional
 
 ### GCP: Easy setup with `deno deploy setup-gcp`
 
-For instructions on how to set up GCP with Deno Deploy<sup>EA</sup> using the
+For instructions on how to set up GCP with Deno Deploy using the
 `deno deploy setup-gcp` command, please see the instructions on the Google cloud
 integration setup page in your app settings.
 
@@ -570,8 +559,7 @@ gcloud iam workload-identity-pools providers create-oidc oidc-deno-com \
 
 #### Step 4: Create Service Account
 
-Create a service account that will be used by your Deno Deploy<sup>EA</sup>
-application:
+Create a service account that will be used by your Deno Deploy application:
 
 ```bash
 gcloud iam service-accounts create deno-your-org-your-app \
@@ -634,16 +622,15 @@ Replace `ROLE_NAME` with appropriate roles such as:
 
 #### Step 7: Get Required Values
 
-After completing the setup, you'll need two values for your Deno
-Deploy<sup>EA</sup> configuration:
+After completing the setup, you'll need two values for your Deno Deploy
+configuration:
 
 1. **Workload Provider ID**:
    `projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/oidc-deno-com/providers/oidc-deno-com`
 2. **Service Account Email**:
    `deno-your-org-your-app@PROJECT_ID.iam.gserviceaccount.com`
 
-Use these values in your Deno Deploy<sup>EA</sup> cloud connection
-configuration.
+Use these values in your Deno Deploy cloud connection configuration.
 
 ### GCP: Using the GCP Console
 
@@ -724,7 +711,7 @@ service accounts.
 
 #### Step 7: Get Required Values
 
-You'll need two values for your Deno Deploy<sup>EA</sup> configuration:
+You'll need two values for your Deno Deploy configuration:
 
 1. **Workload Provider ID**:
    - Navigate back to Workload Identity Federation
@@ -740,8 +727,8 @@ The final workload identity pool overview should show:
 - The connected service account
 - Proper bindings configured
 
-Use the Service Account Email and Workload Provider ID in your Deno
-Deploy<sup>EA</sup> cloud connection configuration.
+Use the Service Account Email and Workload Provider ID in your Deno Deploy cloud
+connection configuration.
 
 ### GCP: Using Terraform
 
@@ -903,7 +890,7 @@ module "deno_deploy_gcp" {
    ```
 
 After applying, Terraform will output the Workload Provider ID and Service
-Account Email that you can use in your Deno Deploy<sup>EA</sup> cloud connection
+Account Email that you can use in your Deno Deploy cloud connection
 configuration.
 
 #### Customizing Roles

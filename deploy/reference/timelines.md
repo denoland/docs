@@ -1,14 +1,7 @@
 ---
 title: Timelines
-description: "Understanding deployment timelines in Deno Deploy Early Access, including production and development contexts, active revisions, rollbacks, and timeline locking."
+description: "Understanding deployment timelines in Deno Deploy, including production and development contexts, active revisions, rollbacks, and timeline locking."
 ---
-
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
 
 A timeline is a representation of the history of one branch of the application.
 Each timeline has a set of revisions, which are the individual items in the

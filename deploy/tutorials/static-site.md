@@ -34,25 +34,28 @@ Make sure that there a `image.png` inside `static-site`.
 
 You have now a html page that says "Hello" and has a logo.
 
-## Step 2: Deploy the static site using `deployctl`
+## Step 2: Deploy the static site using `deno deploy`
 
 To deploy this repo on Deno Deploy, from the `static-site` repository, run:
 
 ```console
-deployctl deploy --project=<your-preferred-project-name> --entrypoint=jsr:@std/http/file-server
+deno deploy
 ```
 
-To give a little more explanation of these commands: Because this is a static
-site, there is no JavaScript to execute. Instead of giving Deno Deploy a
-particular JavaScript or TypeScript file to run as the entrypoint file, you give
-it this external `file_server.ts` program, which simply uploads all the static
-files in the `static-site` repo, including the image and the html page, to Deno
-Deploy. These static assets are then served up.
+You will be prompted to login to Deno Deploy if you haven't already, check your browser for a login prompt. 
+
+Once logged in, return to your terminal and select an organization to deploy to, then choose "Create a new project".
+
+Return to your browser to give your app a name, and set up the build configuration.
+
+Click "Edit build config" and then under the "Static Site" tab, set the "Static Directory" to `static-site` (the current directory).
+
+Close the config modal, and then click "Create App" to start the deployment process. Your site will deploy and you should see a new deployment url to visit your new static site in the browser.
 
 ## Step 3: Voila!
 
 Your static site should now be live! Its url will be output in the terminal, or
 you can manage your new static site project in your
-[Deno dashboard](https://dash.deno.com/projects/). If you click through to your
+[Deno dashboard](https://console.deno.com/). If you click through to your
 new project you will be able to view the site, configure its name, environment
 variables, custom domains and more.

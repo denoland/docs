@@ -1,28 +1,21 @@
 ---
 title: "Getting started"
-description: "Step-by-step guide to creating and configuring your first Deno Deploy Early Access application, including organization setup, build configuration, environment variables, and deployment monitoring."
+description: "Step-by-step guide to creating and configuring your first Deno Deploy application, including organization setup, build configuration, environment variables, and deployment monitoring."
 ---
-
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
 
 ## Create an organization
 
-Deno Deploy<sup>EA</sup> will eventually replace Deno Deploy Classic. Until that
-time both systems will be available simultaneously. By creating an organisation
-for use with Deploy<sup>EA</sup> it is possible to explore Deploy<sup>EA</sup>
-without disrupting projects already using Deploy Classic.
+Deno Deploy will eventually replace Deno Deploy Classic. Until that time both
+systems will be available simultaneously. By creating an organisation for use
+with Deploy it is possible to explore Deploy without disrupting projects already
+using Deploy Classic.
 
-To get started with Deno Deploy<sup>EA</sup>:
+To get started with Deno Deploy:
 
 1. Visit [console.deno.com](http://console.deno.com)
 2. Create an organization:
 
-![The Deno Deploy<sup>EA</sup> organization creation screen.](./images/create_org.png)
+![The Deno Deploy organization creation screen.](./images/create_org.png)
 
 Note that you cannot create an organization with the same slug as any existing
 project in Deploy Classic. Organization names and slugs cannot be changed after
@@ -57,9 +50,9 @@ access to your repositories.
 
 ## Configure your app
 
-Deno Deploy<sup>EA</sup> automatically attempts to detect your application type
-and configure an appropriate build setup. You can see the detected configuration
-in the `App Config` box:
+Deno Deploy automatically attempts to detect your application type and configure
+an appropriate build setup. You can see the detected configuration in the
+`App Config` box:
 
 ![Screenshot of Deploy application configuration screen](./images/app_config.png)
 
@@ -87,13 +80,12 @@ Command to compile/bundle your application (e.g., `next build`,
 
 ### Runtime configuration
 
-For most frameworks there are no options to configure here, as Deno Deploy
-<sup>EA</sup> will figure out the ideal runtime configuration for the app based
-on the framework preset. When a framework is not configured, you can choose here
-whether the app is a `Dynamic` app that needs to execute code server side for
-every request, such as an API server, server-side rendered application, etc., or
-a `Static` app that consists only of a set of static files that need to be
-hosted.
+For most frameworks there are no options to configure here, as Deno Deploy will
+figure out the ideal runtime configuration for the app based on the framework
+preset. When a framework is not configured, you can choose here whether the app
+is a `Dynamic` app that needs to execute code server side for every request,
+such as an API server, server-side rendered application, etc., or a `Static` app
+that consists only of a set of static files that need to be hosted.
 
 ### Dynamic Entrypoint
 

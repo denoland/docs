@@ -1,36 +1,20 @@
 ---
-title: "About Deno Deploy Early Access"
-description: "Guide to Deno Deploy Early Access features, comparison with Deploy Classic, and getting started instructions for deployment."
+title: "About Deno Deploy"
+description: "Guide to Deno Deploy features, comparison with Deploy Classic, and getting started instructions for deployment."
 ---
 
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
-Deno Deploy Early Access (Deno Deploy<sup>EA</sup>) is a complete revamp of the
-original Deploy, featuring:
-
-- Improved NPM compatibility and web framework support
-- Built-in OpenTelemetry integration
-- Integrated build system
-- Significantly enhanced underlying infrastructure
-
 <a href="https://console.deno.com" class="docs-cta deploy-cta">Go to the Deno
-Deploy<sup>EA</sup> dashboard</a>
+Deploy dashboard</a>
 
-Deno Deploy<sup>EA</sup> comes with a new dashboard at
+Deno Deploy comes with an easy to use dashboard at
 [console.deno.com](https://console.deno.com). In this dashboard, you can create
-new Deno Deploy<sup>EA</sup> organizations that contain Deno Deploy<sup>EA</sup>
-apps.
+new Deno Deploy organizations that contain Deno Deploy apps.
 
-Within a single organization, you cannot mix Deno Deploy<sup>EA</sup> apps with
-Deploy Classic projects. You can switch between different organizations using
-the organization picker in the top left of the dashboard.
+Within a single organization, you cannot mix Deno Deploy apps with Deploy
+Classic projects. You can switch between different organizations using the
+organization picker in the top left of the dashboard.
 
-## What is Deno Deploy<sup>EA</sup>?
+## What is Deno Deploy?
 
 Deno Deploy is a serverless platform for running JavaScript and TypeScript
 applications in the cloud (or self-hosted on your own infrastructure). It
@@ -39,12 +23,11 @@ integrations like GitHub deployment.
 
 ## Comparison to Deploy Classic
 
-Deno Deploy<sup>EA</sup> is a complete rework of Deploy Classic. It has a new
-dashboard, and a new execution environment that uses Deno 2.0 and is much more
-powerful than Deploy Classic. The below table compares the two versions of Deno
-Deploy.
+Deno Deploy is a complete rework of Deploy Classic. It has a new dashboard, and
+a new execution environment that uses Deno 2.0 and is much more powerful than
+Deploy Classic. The below table compares the two versions of Deno Deploy.
 
-| Feature                         | Deno Deploy<sup>EA</sup>       | Deploy Classic                                                                                                                          |
+| Feature                         | Deno Deploy                    | Deploy Classic                                                                                                                          |
 | ------------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
 | Web interface                   | console.deno.com               | dash.deno.com                                                                                                                           |
 | Dark mode                       | ✅ Supported                   | ❌ Not supported                                                                                                                        |
@@ -71,11 +54,11 @@ Deploy.
 
 ## How to access EA
 
-To begin using Deno Deploy<sup>EA</sup>:
+To begin using Deno Deploy:
 
 1. Visit [console.deno.com](https://console.deno.com) to access the new
    dashboard
-2. Create a new Deno Deploy<sup>EA</sup> organization
+2. Create a new Deno Deploy organization
 3. Create your first application within this organization
 4. Deploy from your GitHub repository or directly from the dashboard
 

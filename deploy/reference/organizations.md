@@ -1,27 +1,19 @@
 ---
 title: Organizations
-description: "Guide to creating and managing organizations in Deno Deploy Early Access, including members, permissions, and organization administration."
+description: "Guide to creating and managing organizations in Deno Deploy, including members, permissions, and organization administration."
 ---
 
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
 Organizations are groups of users that collectively own apps and domains. When
-signing up for Deno Deploy<sup>EA</sup>, each user can either create an
-organization or join an existing organization through invitation.
+signing up for Deno Deploy, each user can either create an organization or join
+an existing organization through invitation.
 
-All users must belong to an organization to use Deno Deploy<sup>EA</sup>, as all
-resources are owned at the organization level.
+All users must belong to an organization to use Deno Deploy, as all resources
+are owned at the organization level.
 
 Organizations have both a name and a slug. The name is visible only to
 organization members and appears in the organization dropdown in both Deno
-Deploy
-<sup>EA</sup> and Deploy Classic. The slug forms part of the default domain for
-all applications in the organization.
+Deploy and Deploy Classic. The slug forms part of the default domain for all
+applications in the organization.
 
 :::caution
 
@@ -39,28 +31,25 @@ create and delete apps, and manage domains.
 
 ## Create an organization
 
-Organizations in Deno Deploy<sup>EA</sup> are created from the Deno Deploy
-Classic dashboard:
+Organizations in Deno Deploy are created when you sign up for a Deno Deploy
+account.
 
-1. Visit the [Deploy Classic dashboard](https://dash.deno.com) and sign in with
-   your GitHub account.
-2. Click the "+" button in the organization dropdown in the top left corner of
-   the screen.
-3. Select "Try the new Deno Deploy" option.
-4. Click the "Create Early Access organization" button.
-5. Enter an organization name and slug, then click "Create".
+If you do not yet have a Deno Deploy account, you can create one by visiting the
+[Deno Deploy dashboard](https://console.deno.com) and signing in with your
+GitHub account. You will be prompted to create an organization as part of the
+sign-up process.
 
 :::info
 
-Organization slugs must be unique across all Deno Deploy<sup>EA</sup>
-organizations and cannot match any existing project name in Deno Deploy Classic.
+Organization slugs must be unique across all Deno Deploy organizations and
+cannot match any existing project name in Deno Deploy Classic.
 
 :::
 
 ## Deleting an organization
 
 Organizations cannot currently be deleted from the dashboard. Please
-[contact Deno support](../support) if you need to delete an organization.
+[contact Deno support](/deploy/support/) if you need to delete an organization.
 
 ## Inviting users to an organization
 

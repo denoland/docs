@@ -1,7 +1,6 @@
 ---
 title: "Deploy Quick Start"
 oldUrl:
-  - /deploy/
   - /deploy/docs/
   - /deploy/manual/hello-world/
 ---

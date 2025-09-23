@@ -3,11 +3,11 @@ title: OIDC
 description: The Deno Deploy runtime environment acts as an OpenID Connect (OIDC) provider, enabling you to integrate with third-party services that support OIDC authentication.
 ---
 
-Deno Deploy<sup>EA</sup> is an OIDC provider. Every running application of Deno
-Deploy<sup>EA</sup> can be issued short-lived JWT tokens that are signed by Deno
-Deploy<sup>EA</sup>. These tokens contain information about the application,
-such as the organization and application ids and slugs, the context in which an
-application is executing, and the running revision ID.
+Deno Deploy is an OIDC provider. Every running application of Deno Deploy can be
+issued short-lived JWT tokens that are signed by Deno Deploy. These tokens
+contain information about the application, such as the organization and
+application ids and slugs, the context in which an application is executing, and
+the running revision ID.
 
 The tokens can be used to authenticate with third-party services that support
 OIDC authentication, such as major cloud providers, but also HashiCorp Vault,
@@ -53,7 +53,7 @@ The `getIdToken()` function returns a promise that resolves to a JWT token as a
 string.
 
 To check whether your current environment supports OIDC (i.e. whether your
-application is running on Deno Deploy<sup>EA</sup>), you can use the
+application is running on Deno Deploy), you can use the
 `supportsIssuingIdTokens` namespaced property:
 
 ```ts
@@ -93,9 +93,8 @@ tokens `nbf` claim is set to 1 minute before the `iat` claim.
 
 ## Verifying Tokens
 
-To verify the tokens issued by Deno Deploy<sup>EA</sup>, you need to fetch the
-public keys from the OIDC provider's JWKS endpoint. The JWKS endpoint for Deno
-Deploy<sup>EA</sup> is:
+To verify the tokens issued by Deno Deploy, you need to fetch the public keys
+from the OIDC provider's JWKS endpoint. The JWKS endpoint for Deno Deploy is:
 
 ```
 https://oidc.deno.com/.well-known/jwks.json
@@ -104,19 +103,19 @@ https://oidc.deno.com/.well-known/jwks.json
 Use the `kid` (key ID) from the JWT token header to select the correct key from
 the JWKS response.
 
-Deno Deploy<sup>EA</sup> also provides a standard OIDC discovery document at:
+Deno Deploy also provides a standard OIDC discovery document at:
 
 ```
 https://oidc.deno.com/.well-known/openid-configuration
 ```
 
-Deno Deploy<sup>EA</sup> rotates its signing keys periodically. Therefore, it is
-important to fetch the JWKS keys dynamically from the JWKS endpoint rather than
-hardcoding them.
+Deno Deploy rotates its signing keys periodically. Therefore, it is important to
+fetch the JWKS keys dynamically from the JWKS endpoint rather than hardcoding
+them.
 
-Currently, Deno Deploy<sup>EA</sup> signing keys use the `ES256` algorithm. This
-may change in the future, depending on security requirements, best practices,
-and support in third-party services.
+Currently, Deno Deploy signing keys use the `ES256` algorithm. This may change
+in the future, depending on security requirements, best practices, and support
+in third-party services.
 
 To verify the tokens, you can use a JWT library that supports OIDC and JWKS. In
 TypeScript, you can use the [`jose`](https://jsr.io/@panva/jose) library.

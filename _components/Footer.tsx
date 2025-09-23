@@ -67,8 +67,8 @@ const data = [
     title: "Services Docs",
     items: [
       {
-        label: "Deno Deploy <sup>EA</sup>",
-        to: "/deploy/early-access/",
+        label: "Deno Deploy ",
+        to: "/deploy/",
       },
       {
         label: "Deno Deploy Classic",

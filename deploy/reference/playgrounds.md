@@ -3,16 +3,9 @@ title: Playgrounds
 description: "Write and deploy code completely from Deno Deploy, without the need for a git repository."
 ---
 
-:::info
-
-You are viewing the documentation for Deno Deploy<sup>EA</sup>. Looking for
-Deploy Classic documentation? [View it here](/deploy/).
-
-:::
-
 Playground applications enable you to create, edit, and deploy applications
-entirely from the Deno Deploy<sup>EA</sup> web dashboard, without needing to
-create a GitHub repository.
+entirely from the Deno Deploy web dashboard, without needing to create a GitHub
+repository.
 
 Playgrounds contain one or more files (JavaScript, TypeScript, TSX, JSON, etc.)
 that you can edit directly in the playground editor.

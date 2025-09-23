@@ -107,9 +107,9 @@ you're ready to import and run this application on Deno Deploy.
 
 ## Import and deploy your project
 
-Next, sign up for an account on [Deno Deploy](https://dash.deno.com) and
-[create a new project](https://dash.deno.com/new_project). Connect your GitHub
-account and select the repository we created a moment ago.
+Next, sign up for an account on [Deno Deploy](https://console.deno.com) and
+[create a new project](https://console.deno.com/new_project). Connect your
+GitHub account and select the repository we created a moment ago.
 
 ![Deno Deploy project selection](./images/simple_api_deploy.png)
 
