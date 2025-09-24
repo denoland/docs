@@ -10,8 +10,8 @@ of these limits, [please reach out](mailto:deploy@deno.com).
 
 No uptime guarantees are provided during the initial public beta for Deno
 Deploy. Access to the service will be controlled by
-[our acceptable use policy](/deploy/acceptable-use-policy). Any user we
-deem to be in violation of this policy, runs the risk of having their account
+[our acceptable use policy](/deploy/acceptable-use-policy). Any user we deem to
+be in violation of this policy, runs the risk of having their account
 terminated.
 
 ## Maximum size for deployments

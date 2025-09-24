@@ -316,7 +316,7 @@ the
 
 [GitHub Codespaces](https://github.com/features/codespaces) allows you to
 develop fully online or remotely on your local machine without needing to
-configure or install Deno. It is currently in early access.
+configure or install Deno.
 
 If a project is a Deno enabled project and contains the `.devcontainer`
 configuration as part of the repository, opening the project in GitHub

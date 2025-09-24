@@ -3,7 +3,7 @@ title: Deno KV
 description: Use Deno KV in your applications with a database for each timeline
 ---
 
-[Deno KV] is supported in Deno Deploy EA as a possible database engine of the
+[Deno KV] is supported in Deno Deploy as a possible database engine of the
 [databases] feature, alongside PostgreSQL, and others. Thanks to the new
 [timelines] capability of Deno Deploy EA, your apps now have full control over
 the Deno KV databases used (one for production, one for each git branch, etc)

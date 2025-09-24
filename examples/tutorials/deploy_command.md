@@ -280,4 +280,4 @@ command! Check out the [`deno deploy` docs](/runtime/reference/cli/deploy/) for
 more commands and options.
 
 For more information on Deno Deploy, check the
-[Deno Deploy EA documentation](/deploy/).
+[Deno Deploy documentation](/deploy/).
