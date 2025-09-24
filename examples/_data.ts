@@ -87,7 +87,7 @@ export const sidebar = [
       },
       {
         title: "Simple API server",
-        href: "/examples/file_server_tutorial/",
+        href: "/examples/simple_api_tutorial/",
         type: "tutorial",
       },
       {
