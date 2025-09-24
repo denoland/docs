@@ -19,7 +19,7 @@ export const sidebar = [
           { title: "Regions", href: "/deploy/classic/regions/" },
           {
             title: "Pricing and limits",
-            href: "/deploy/classic/pricing-and-limits/",
+            href: "/deploy/pricing-and-limits/",
           },
         ],
       },
@@ -105,89 +105,6 @@ export const sidebar = [
             href: "/deploy/classic/prisma-postgres/",
           },
         ],
-      },
-    ],
-  },
-  {
-    title: "Policies and Limits",
-    items: [
-      {
-        title: "Acceptable Use Policy",
-        href: "/deploy/classic/acceptable-use-policy/",
-      },
-      {
-        title: "Fulfillment Policy",
-        href: "/deploy/classic/fulfillment-policy/",
-      },
-      { title: "Privacy Policy", href: "/deploy/classic/privacy-policy/" },
-      { title: "Security", href: "/deploy/classic/security/" },
-      {
-        title: "Terms and Conditions",
-        href: "/deploy/classic/terms-and-conditions/",
-      },
-    ],
-  },
-  {
-    title: "Tutorials & Examples",
-    items: [
-      {
-        title: "Deploy Tutorials",
-        items: [
-          { title: "Overview", href: "/deploy/tutorials/" },
-          {
-            title: "Discord Slash Commands",
-            href: "/deploy/tutorials/discord-slash/",
-          },
-          { title: "Fresh Framework", href: "/deploy/tutorials/fresh/" },
-          { title: "Simple API", href: "/deploy/tutorials/simple-api/" },
-          { title: "Static Site", href: "/deploy/tutorials/static-site/" },
-          {
-            title: "Blog with Fresh",
-            href: "/deploy/tutorials/tutorial-blog-fresh/",
-          },
-          {
-            title: "DynamoDB Integration",
-            href: "/deploy/tutorials/tutorial-dynamodb/",
-          },
-          {
-            title: "FaunaDB Integration",
-            href: "/deploy/tutorials/tutorial-faunadb/",
-          },
-          {
-            title: "Firebase Integration",
-            href: "/deploy/tutorials/tutorial-firebase/",
-          },
-          {
-            title: "HTTP Server",
-            href: "/deploy/tutorials/tutorial-http-server/",
-          },
-          { title: "Hugo Blog", href: "/deploy/tutorials/tutorial-hugo-blog/" },
-          {
-            title: "Postgres Integration",
-            href: "/deploy/tutorials/tutorial-postgres/",
-          },
-          {
-            title: "WordPress Frontend",
-            href: "/deploy/tutorials/tutorial-wordpress-frontend/",
-          },
-          { title: "Vite", href: "/examples/react_tutorial/" },
-          {
-            title: "Schedule Notification",
-            href: "/deploy/kv/tutorials/schedule_notification/",
-          },
-          {
-            title: "Webhook Processor",
-            href: "/deploy/kv/tutorials/webhook_processor/",
-          },
-        ],
-      },
-      {
-        title: "KV Tutorials",
-        href: "/deploy/kv/tutorials/",
-      },
-      {
-        title: "More on Deno by Example",
-        href: "/examples/",
       },
     ],
   },

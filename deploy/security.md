@@ -1,5 +1,7 @@
 ---
 title: "Security and responsible disclosure"
+description: "How to report security vulnerabilities in Deno Deploy."
+oldUrl: /deploy/classic/security/
 ---
 
 We consider the security of our systems, and all data controlled by those

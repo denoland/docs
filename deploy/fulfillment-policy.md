@@ -1,5 +1,7 @@
 ---
 title: "Fulfillment Policy"
+description: "Our policies regarding refunds and cancellations for Deno Deploy."
+oldUrl: /deploy/classic/fulfillment-policy/
 ---
 
 ## Refund Policy
@@ -19,8 +21,8 @@ the 14-day period.
 
 ## Cancellation Policy
 
-You can cancel your Deno Deploy Classic subscription at any time under the
-following terms:
+You can cancel your Deno Deploy or Deno Deploy Classic subscription at any time
+under the following terms:
 
 Subscription cancellations are effective immediately, and the service will
 continue to run until the end of the current billing period. To cancel your

@@ -155,7 +155,7 @@ const data = [
       },
       {
         label: "Privacy Policy",
-        href: "/deploy/classic/privacy-policy",
+        href: "/deploy/privacy-policy",
       },
     ],
   },

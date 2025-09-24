@@ -139,5 +139,21 @@
   "runtime/reference/web_platform_apis/": "/api/web/",
   "runtime/reference/node_apis/": "/api/node/",
   "/deploy/tutorials/vite/": "/examples/react_tutorial/",
-  "/deploy/manual/*": "/deploy/classic/*"
+  "/deploy/manual/*": "/deploy/classic/*",
+  "/deploy/early-access/*": "/deploy/*",
+  "/deploy/tutorials/discord-slash/": "/examples/",
+  "/deploy/tutorials/": "/examples/",
+  "/deploy/tutorials/fresh": "/examples/fresh_tutorial",
+  "/deploy/tutorials/tutorial-wordpress-frontend": "/examples/",
+  "/deploy/tutorials/tutorial-postgres": "/examples/postgres/",
+  "/deploy/tutorials/tutorial-hugo-blog": "/examples/",
+  "/deploy/tutorials/tutorial-firebase": "/examples/",
+  "/deploy/tutorials/tutorial-faunadb": "/examples/",
+  "/deploy/tutorials/tutorial-dynamodb": "/examples/",
+  "/deploy/tutorials/tutorial-blog-fresh": "/examples/"
+
+
+
+
+
 }

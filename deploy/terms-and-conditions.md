@@ -1,5 +1,7 @@
 ---
 title: "Terms and Conditions"
+description: "Deno Terms and Conditions"
+oldUrl: "/deploy/classic/terms-and-conditions"
 ---
 
 **DENO TERMS AND CONDITIONS** 09 September 2024
@@ -12,8 +14,10 @@ applications or other digital properties that link to these Terms; and (iii) the
 products and services (the “Deno Offerings”) we offer to you on our proprietary
 platform (the “Platform”) via the following websites:
 
-- Deno Deploy Classic ([https://deno.com/deploy](https://deno.com/deploy)); and
-- Deno Subhosting ([https://deno.com/subhosting](https://deno.com/subhosting)).
+- Deno Deploy ([https://deno.com/deploy](https://deno.com/deploy))
+- Deno Deploy Classic
+  ([https://deno.com/deploy/classic](https://deno.com/deploy/classic))
+- Deno Subhosting ([https://deno.com/subhosting](https://deno.com/subhosting))
 
 By accessing or using the Site or any other digital property that links to these
 Terms, you may learn about Deno and our technology platform, and registered
@@ -508,4 +512,4 @@ proceedings arising out of or relating to this Agreement
     legal import. This Agreement will inure to the benefit of our successors,
     assigns, licensees, and sublicensees.
 
-**Copyright 2024 Deno Land Inc. All rights reserved.**
+**Copyright 2025 Deno Land Inc. All rights reserved.**

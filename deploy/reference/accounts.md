@@ -1,7 +1,6 @@
 ---
 title: Accounts
 description: "Information about user accounts, authentication via GitHub, and managing your profile in Deno Deploy."
-oldUrl: /reference/
 ---
 
 Deno Deploy accounts are linked to GitHub accounts. You can only sign in to Deno

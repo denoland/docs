@@ -85,6 +85,25 @@ export const sidebar = [
     ],
   },
   {
+    title: "Policies and Limits",
+    items: [
+      {
+        title: "Acceptable Use Policy",
+        href: "/deploy/acceptable-use-policy/",
+      },
+      {
+        title: "Fulfillment Policy",
+        href: "/deploy/fulfillment-policy/",
+      },
+      { title: "Privacy Policy", href: "/deploy/privacy-policy/" },
+      { title: "Security", href: "/deploy/security/" },
+      {
+        title: "Terms and Conditions",
+        href: "/deploy/terms-and-conditions/",
+      },
+    ],
+  },
+  {
     title: "Support and Feedback",
     items: [
       {

@@ -1,5 +1,7 @@
 ---
 title: "Privacy Policy"
+oldUrl: /deploy/classic/privacy-policy
+description: "Deno's Privacy Policy"
 ---
 
 **DENO PRIVACY POLICY** 09 September 2024
@@ -17,8 +19,10 @@ applications or other digital properties that link to this Privacy Policy; and
 (iii) the products and services (the “Deno Offerings”) we offer to you on our
 proprietary platform (the “Platform”) via the following websites:
 
-- Deno Deploy Classic ([https://deno.com/deploy](https://deno.com/deploy)); and
-- Deno Subhosting ([https://deno.com/subhosting](https://deno.com/subhosting)).
+- Deno Deploy ([https://deno.com/deploy](https://deno.com/deploy))
+- Deno Deploy Classic
+  ([https://deno.com/deploy/classic](https://deno.com/deploy/classic))
+- Deno Subhosting ([https://deno.com/subhosting](https://deno.com/subhosting))
 
 By accessing or using the Site or any other digital property that links to this
 Privacy Policy, you may learn about Deno and our technology platform, and
@@ -28,7 +32,7 @@ products and services constitutes your acknowledgment and/or consent to the
 practices described in this Policy.
 
 This Privacy Policy incorporates
-[Deno’s Terms and Conditions](https://docs.deno.com/deploy/classic/terms-and-conditions/)
+[Deno’s Terms and Conditions](https://docs.deno.com/deploy/terms-and-conditions/)
 (the “Terms”). Capitalized terms that are not defined in the Privacy Policy have
 the meaning given to them in the Terms.
 
@@ -44,7 +48,7 @@ This information may be collected when you contact us, fill out a form, create
 an account, subscribe to our blog, access or participate on our Sites, respond
 to surveys, or otherwise interact with us. This information may include:
 
-*Contact Information. *We collect your contact information when you voluntarily
+_Contact Information._ We collect your contact information when you voluntarily
 provide it to us. For example, you may disclose contact information to us via
 the “Contact” link on our Sites, submit information by mail, telephone, in
 person or electronically, when signing up for our newsletters and other
