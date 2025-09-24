@@ -10,7 +10,7 @@ Deploy. Check our ever expanding list of tutorials in the nav, and explore
 
 ## Code examples
 
-- [Build a simple API server](./simple-api.md)
+- [Build a simple API server](/examples/simple_api_tutorial/)
 - [Serve static assets](./static-site.md)
 
 ## App building tutorials

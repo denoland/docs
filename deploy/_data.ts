@@ -139,7 +139,7 @@ export const sidebar = [
             href: "/deploy/tutorials/discord-slash/",
           },
           { title: "Fresh Framework", href: "/deploy/tutorials/fresh/" },
-          { title: "Simple API", href: "/deploy/tutorials/simple-api/" },
+          { title: "Simple API", href: "/examples/simple_api_tutorial/" },
           { title: "Static Site", href: "/deploy/tutorials/static-site/" },
           {
             title: "Blog with Fresh",
@@ -159,7 +159,7 @@ export const sidebar = [
           },
           {
             title: "HTTP Server",
-            href: "/deploy/tutorials/tutorial-http-server/",
+            href: "/examples/http_server/",
           },
           { title: "Hugo Blog", href: "/deploy/tutorials/tutorial-hugo-blog/" },
           {
