@@ -6,20 +6,20 @@ export const sidebar = [
     items: [
       {
         title: "Quick start",
-        href: "/deploy/manual/",
+        href: "/deploy/classic/",
       },
       {
         title: "Deploy basics",
         items: [
-          { title: "Use cases", href: "/deploy/manual/use-cases/" },
-          { title: "Playgrounds", href: "/deploy/manual/playgrounds/" },
-          { title: "How to deploy", href: "/deploy/manual/how-to-deploy/" },
-          { title: "GitHub CI", href: "/deploy/manual/ci_github/" },
-          { title: "deployctl", href: "/deploy/manual/deployctl/" },
-          { title: "Regions", href: "/deploy/manual/regions/" },
+          { title: "Use cases", href: "/deploy/classic/use-cases/" },
+          { title: "Playgrounds", href: "/deploy/classic/playgrounds/" },
+          { title: "How to deploy", href: "/deploy/classic/how-to-deploy/" },
+          { title: "GitHub CI", href: "/deploy/classic/ci_github/" },
+          { title: "deployctl", href: "/deploy/classic/deployctl/" },
+          { title: "Regions", href: "/deploy/classic/regions/" },
           {
             title: "Pricing and limits",
-            href: "/deploy/manual/pricing-and-limits/",
+            href: "/deploy/classic/pricing-and-limits/",
           },
         ],
       },
@@ -30,23 +30,23 @@ export const sidebar = [
     items: [
       {
         title: "Deployments",
-        href: "/deploy/manual/deployments/",
+        href: "/deploy/classic/deployments/",
       },
       {
         title: "Custom domains",
-        href: "/deploy/manual/custom-domains/",
+        href: "/deploy/classic/custom-domains/",
       },
       {
         title: "Environment variables",
-        href: "/deploy/manual/environment-variables/",
+        href: "/deploy/classic/environment-variables/",
       },
       {
         title: "Organizations",
-        href: "/deploy/manual/organizations/",
+        href: "/deploy/classic/organizations/",
       },
       {
         title: "Logs",
-        href: "/deploy/manual/logs/",
+        href: "/deploy/classic/logs/",
       },
       {
         title: "KV",
@@ -81,7 +81,7 @@ export const sidebar = [
       },
       {
         title: "Edge cache",
-        href: "/deploy/manual/edge-cache/",
+        href: "/deploy/classic/edge-cache/",
       },
     ],
   },
@@ -95,12 +95,15 @@ export const sidebar = [
       {
         title: "Third-Party Databases",
         items: [
-          { title: "DynamoDB", href: "/deploy/manual/dynamodb/" },
-          { title: "FaunaDB", href: "/deploy/manual/faunadb/" },
-          { title: "Firebase", href: "/deploy/manual/firebase/" },
-          { title: "Postgres", href: "/deploy/manual/postgres/" },
-          { title: "Neon Postgres", href: "/deploy/manual/neon-postgres/" },
-          { title: "Prisma Postgres", href: "/deploy/manual/prisma-postgres/" },
+          { title: "DynamoDB", href: "/deploy/classic/dynamodb/" },
+          { title: "FaunaDB", href: "/deploy/classic/faunadb/" },
+          { title: "Firebase", href: "/deploy/classic/firebase/" },
+          { title: "Postgres", href: "/deploy/classic/postgres/" },
+          { title: "Neon Postgres", href: "/deploy/classic/neon-postgres/" },
+          {
+            title: "Prisma Postgres",
+            href: "/deploy/classic/prisma-postgres/",
+          },
         ],
       },
     ],
@@ -110,17 +113,17 @@ export const sidebar = [
     items: [
       {
         title: "Acceptable Use Policy",
-        href: "/deploy/manual/acceptable-use-policy/",
+        href: "/deploy/classic/acceptable-use-policy/",
       },
       {
         title: "Fulfillment Policy",
-        href: "/deploy/manual/fulfillment-policy/",
+        href: "/deploy/classic/fulfillment-policy/",
       },
-      { title: "Privacy Policy", href: "/deploy/manual/privacy-policy/" },
-      { title: "Security", href: "/deploy/manual/security/" },
+      { title: "Privacy Policy", href: "/deploy/classic/privacy-policy/" },
+      { title: "Security", href: "/deploy/classic/security/" },
       {
         title: "Terms and Conditions",
-        href: "/deploy/manual/terms-and-conditions/",
+        href: "/deploy/classic/terms-and-conditions/",
       },
     ],
   },
@@ -210,7 +213,7 @@ export const sidebar = [
 ] satisfies Sidebar;
 
 export const sectionTitle = "Deploy";
-export const sectionHref = "/deploy/manual/";
+export const sectionHref = "/deploy/classic/";
 export const SidebarNav = [
   {
     title: "Deno Deploy<sup>EA</sup>",
@@ -218,7 +221,7 @@ export const SidebarNav = [
   },
   {
     title: "Deploy Classic",
-    href: "/deploy/manual/",
+    href: "/deploy/classic/",
   },
   {
     title: "Subhosting",

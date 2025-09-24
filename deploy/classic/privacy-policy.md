@@ -17,7 +17,7 @@ applications or other digital properties that link to this Privacy Policy; and
 (iii) the products and services (the “Deno Offerings”) we offer to you on our
 proprietary platform (the “Platform”) via the following websites:
 
-- Deno Deploy ([https://deno.com/deploy](https://deno.com/deploy)); and
+- Deno Deploy Classic ([https://deno.com/deploy](https://deno.com/deploy)); and
 - Deno Subhosting ([https://deno.com/subhosting](https://deno.com/subhosting)).
 
 By accessing or using the Site or any other digital property that links to this
@@ -28,7 +28,7 @@ products and services constitutes your acknowledgment and/or consent to the
 practices described in this Policy.
 
 This Privacy Policy incorporates
-[Deno’s Terms and Conditions](https://docs.deno.com/deploy/manual/terms-and-conditions/)
+[Deno’s Terms and Conditions](https://docs.deno.com/deploy/classic/terms-and-conditions/)
 (the “Terms”). Capitalized terms that are not defined in the Privacy Policy have
 the meaning given to them in the Terms.
 

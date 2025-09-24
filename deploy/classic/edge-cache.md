@@ -22,10 +22,10 @@ Deno.serve(async (req) => {
 });
 ```
 
-Cached data is stored in the same Deno Deploy region that runs your code.
-Usually your isolate observes read-after-write (RAW) and write-after-write (WAW)
-consistency within the same region; however, in rare cases recent writes can be
-lost, out-of-order or temporarily invisible.
+Cached data is stored in the same Deno Deploy Classic region that runs your
+code. Usually your isolate observes read-after-write (RAW) and write-after-write
+(WAW) consistency within the same region; however, in rare cases recent writes
+can be lost, out-of-order or temporarily invisible.
 
 ## Expiration
 

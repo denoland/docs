@@ -72,7 +72,7 @@ const data = [
       },
       {
         label: "Deno Deploy Classic",
-        to: "/deploy/manual/",
+        to: "/deploy/classic/",
       },
       {
         label: "Deno Subhosting",
@@ -155,7 +155,7 @@ const data = [
       },
       {
         label: "Privacy Policy",
-        href: "/deploy/manual/privacy-policy",
+        href: "/deploy/classic/privacy-policy",
       },
     ],
   },

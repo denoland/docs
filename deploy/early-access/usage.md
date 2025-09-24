@@ -22,7 +22,7 @@ and is putting significant efforts into ensuring service reliability. However,
 as this is a new system, occasional service interruptions may occur.
 
 While Deno Deploy<sup>EA</sup> is still in early access, the
-[Acceptable Use Policy](/deploy/manual/acceptable-use-policy/) and
-[Terms and Conditions](/deploy/manual/terms-and-conditions/) still apply, and we
-reserve the right to terminate any user, organization, or app that we find to be
-in violation of these terms.
+[Acceptable Use Policy](/deploy/classic/acceptable-use-policy/) and
+[Terms and Conditions](/deploy/classic/terms-and-conditions/) still apply, and
+we reserve the right to terminate any user, organization, or app that we find to
+be in violation of these terms.
