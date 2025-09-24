@@ -7,6 +7,7 @@ oldUrl:
   - /runtime/manual/basics/react/
   - /runtime/tutorials/how_to_with_npm/react/
   - /runtime/tutorials/create_react_tutorial/
+  - /deploy/tutorials/vite/
 ---
 
 [React](https://reactjs.org) is the most widely used JavaScript frontend
