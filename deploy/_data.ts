@@ -75,6 +75,10 @@ export const sidebar = [
         href: "/deploy/reference/caching/",
       },
       {
+        title: "Playgrounds",
+        href: "/deploy/reference/playgrounds/",
+      },
+      {
         title: "Deploy Button",
         href: "/deploy/reference/button/",
       },
