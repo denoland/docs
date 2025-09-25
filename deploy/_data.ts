@@ -2,12 +2,27 @@ import { Sidebar, SidebarNav } from "../types.ts";
 
 export const sidebar = [
   {
-    title: "Deno Deploy",
+    title: "Deploy Classic",
     items: [
       { title: "About", href: "/deploy/" },
       {
-        title: "Getting Started",
-        href: "/deploy/getting_started",
+        title: "What is Deno Deploy Classic?",
+        href: "/deploy/classic/",
+      },
+      {
+        title: "Deploy basics",
+        items: [
+          { title: "Use cases", href: "/deploy/classic/use-cases/" },
+          { title: "Playgrounds", href: "/deploy/classic/playgrounds/" },
+          { title: "How to deploy", href: "/deploy/classic/how-to-deploy/" },
+          { title: "GitHub CI", href: "/deploy/classic/ci_github/" },
+          { title: "deployctl", href: "/deploy/classic/deployctl/" },
+          { title: "Regions", href: "/deploy/classic/regions/" },
+          {
+            title: "Pricing and limits",
+            href: "/deploy/classic/pricing-and-limits/",
+          },
+        ],
       },
     ],
   },

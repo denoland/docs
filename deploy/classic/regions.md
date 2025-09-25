@@ -2,6 +2,14 @@
 title: "Regions"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 Deno Deploy Classic deploys your code throughout the world. Each new request is
 served from the closest region to your user. Deno Deploy Classic is presently
 located in the following regions:

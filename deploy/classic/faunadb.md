@@ -2,6 +2,14 @@
 title: "Connect to FaunaDB"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 FaunaDB calls itself "the data API for modern applications." It's a database
 with a GraphQL interface that enables you to use GraphQL to interact with it.
 Since you communicate with it using HTTP requests, you don't need to manage

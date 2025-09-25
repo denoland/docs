@@ -4,7 +4,13 @@ oldUrl:
   - /kv/manual/data_modeling_typescript/
 ---
 
-<deno-admonition></deno-admonition>
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
 
 In TypeScript applications, it is usually desirable to create strongly-typed,
 well-documented objects to contain the data that your application operates on.

@@ -4,6 +4,14 @@ description: "How to report security vulnerabilities in Deno Deploy."
 oldUrl: /deploy/classic/security/
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 We consider the security of our systems, and all data controlled by those
 systems a top priority. No matter how much effort we put into system security,
 it is still possible that security vulnerabilities are present. We appreciate

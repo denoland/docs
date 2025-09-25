@@ -1,9 +1,19 @@
 ---
 title: "Dynamic import"
+oldUrl:
+  - /deploy/api/dynamic-import/
 ---
 
-Deno Deploy supports [dynamic import] but with some limitations. This page
-outlines these limitations.
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
+Deno Deploy Classic supports [dynamic import] but with some limitations. This
+page outlines these limitations.
 
 ### Specifiers must be statically determined string literals
 
@@ -28,25 +38,25 @@ const mod = rand < 0.5 ? "npm:cowsay" : "npm:node-emoji";
 await import(mod);
 ```
 
-In Deno Deploy, however, specifiers must be string literals with no string
-interpolation. So among the three examples above, only the first one works in
-Deno Deploy.
+In Deno Deploy Classic, however, specifiers must be string literals with no
+string interpolation. So among the three examples above, only the first one
+works in Deno Deploy Classic.
 
-```ts title="Only static string literals work in Deno Deploy"
-// 1. ✅ Works fine on Deno Deploy
+```ts title="Only static string literals work in Deno Deploy Classic"
+// 1. ✅ Works fine on Deno Deploy Classic
 await import("jsr:@std/assert");
 
-// 2. ❌ Doesn't work on Deno Deploy
+// 2. ❌ Doesn't work on Deno Deploy Classic
 // because what's passed to `import` is a variable
 const specifier = "jsr:@std/streams";
 await import(specifier);
 
-// 3. ❌ Doesn't work on Deno Deploy
+// 3. ❌ Doesn't work on Deno Deploy Classic
 // because this has an interpolation
 const stdModuleName = "path";
 await import(`jsr:@std/${stdModuleName}`);
 
-// 4. ❌ Doesn't work on Deno Deploy
+// 4. ❌ Doesn't work on Deno Deploy Classic
 // because it's dynamic
 const rand = Math.random();
 const mod = rand < 0.5 ? "npm:cowsay" : "npm:node-emoji";
@@ -59,10 +69,10 @@ Specifiers that are dynamically determined are supported if target files
 (modules) are included in the same project.
 
 ```ts title="Dynamic specifiers work for files in the same project"
-// ✅ Works fine on Deno Deploy
+// ✅ Works fine on Deno Deploy Classic
 await import("./my_module1.ts");
 
-// ✅ Works fine on Deno Deploy
+// ✅ Works fine on Deno Deploy Classic
 const rand = Math.random();
 const modPath = rand < 0.5 ? "dir1/moduleA.ts" : "dir2/dir3/moduleB.ts";
 await import(`./${modPath}`);
@@ -88,11 +98,12 @@ We will consider if we can relax this constraint in the future.
 
 :::tip What is eszip?
 
-When you do a new deployment on Deno Deploy, the system analyzes your code,
-constructs the module graph by recursively traversing it, and bundles all the
-dependencies into a single file. We call this
+When you do a new deployment on Deno Deploy Classic, the system analyzes your
+code, constructs the module graph by recursively traversing it, and bundles all
+the dependencies into a single file. We call this
 [eszip](https://github.com/denoland/eszip). Since its creation is done
-completely statically, dynamic import capabilities are limited on Deno Deploy.
+completely statically, dynamic import capabilities are limited on Deno Deploy
+Classic.
 
 :::
 
@@ -101,7 +112,7 @@ completely statically, dynamic import capabilities are limited on Deno Deploy.
 [Data URL] can be used as a specifier passed to dynamic imports.
 
 ```ts title="Static data URL"
-// ✅ Works fine on Deno Deploy
+// ✅ Works fine on Deno Deploy Classic
 const { val } = await import(
   "data:text/javascript,export const val = 42;"
 );
@@ -116,7 +127,7 @@ function generateDynamicDataUrl() {
   return `data:text/javascript,${moduleStr}`;
 }
 
-// ✅ Works fine on Deno Deploy
+// ✅ Works fine on Deno Deploy Classic
 const { val } = await import(generateDynamicDataUrl());
 console.log(val); // -> Random value is printed
 ```
@@ -137,7 +148,7 @@ assert(res.ok);
 const src = await res.text();
 const dataUrl = `data:application/javascript,${src}`;
 
-// ✅ Works fine on Deno Deploy
+// ✅ Works fine on Deno Deploy Classic
 const { name } = await import(dataUrl);
 console.log(`Hello from ${name}`); // -> "Hello from external.js"
 ```

@@ -4,6 +4,14 @@ oldUrl:
   - /kv/tutorials/webhook_processor/
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 In a web application, it is often desirable to offload processing of async tasks
 for which a client doesn't need an immediate response to a queue. Doing so can
 keep your web app fast and responsive, instead of taking up valuable resources

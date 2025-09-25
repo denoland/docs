@@ -5,8 +5,6 @@ oldUrl:
   - /kv/manual/operations/
 ---
 
-<deno-admonition></deno-admonition>
-
 The Deno KV API provides a set of operations that can be performed on the key
 space.
 
