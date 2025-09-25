@@ -11,7 +11,9 @@ You are viewing legacy documentation for Deno Deploy Classic. We recommend
 migrating to the new
 <a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
 
-::: Deno Deploy Classic offers a built-in serverless key-value database called
+::: 
+
+Deno Deploy Classic offers a built-in serverless key-value database called
 Deno KV.
 
 Additionally, Deno KV is available within Deno itself, utilizing SQLite as its
