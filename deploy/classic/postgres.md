@@ -5,9 +5,6 @@ title: "Connect to Postgres"
 This tutorial covers how to connect to a Postgres database from an application
 deployed on Deno Deploy.
 
-You can find a more comprehensive tutorial that builds a sample application on
-top of Postgres [here](../tutorials/tutorial-postgres).
-
 ## Setup Postgres
 
 > This tutorial will focus entirely on connecting to Postgres unencrypted. If

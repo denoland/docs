@@ -5,9 +5,6 @@ title: "Connect to Neon Postgres"
 This tutorial covers how to connect to a Neon Postgres database from an
 application deployed on Deno Deploy.
 
-You can find a more comprehensive tutorial that builds a sample application on
-top of Postgres [here](../tutorials/tutorial-postgres).
-
 ## Setup Postgres
 
 To get started, we need to create a new Postgres instance for us to connect to.

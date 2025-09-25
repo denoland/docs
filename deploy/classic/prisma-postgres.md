@@ -5,9 +5,6 @@ title: "Connect to Prisma Postgres"
 This tutorial covers how to connect to a Prisma Postgres database from an
 application deployed on Deno Deploy.
 
-You can find a more comprehensive tutorial that builds a sample application on
-top of Postgres [here](../tutorials/tutorial-postgres).
-
 ## Setup Postgres
 
 There are several ways to set up a Prisma Postgre database for your Prisma
