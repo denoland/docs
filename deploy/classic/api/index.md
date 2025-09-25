@@ -5,6 +5,7 @@ pagination_next: /deploy/api/runtime-broadcast-channel
 oldUrl:
   - /deploy/docs/runtime-api/
   - /deploy/manual/runtime-api/
+  - /deploy/api/runtime-api/
 ---
 
 :::info Legacy Documentation

@@ -2,6 +2,7 @@
 title: "HTTP Headers"
 oldUrl:
   - /deploy/docs/runtime-headers/
+  - /deploy/api/runtime-headers/
 ---
 
 :::info Legacy Documentation

@@ -2,6 +2,7 @@
 title: "TCP sockets and TLS"
 oldUrl:
   - /deploy/docs/sockets/
+  - /deploy/api/sockets/
 ---
 
 :::info Legacy Documentation

@@ -2,6 +2,7 @@
 title: "HTTP requests (fetch)"
 oldUrl:
   - /deploy/docs/runtime-fetch/
+  - /deploy/api/runtime-fetch/
 ---
 
 :::info Legacy Documentation

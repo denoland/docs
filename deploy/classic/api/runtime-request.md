@@ -2,6 +2,7 @@
 title: "HTTP Request"
 oldUrl:
   - /deploy/docs/runtime-request/
+  - /deploy/api/runtime-request/
 ---
 
 :::info Legacy Documentation

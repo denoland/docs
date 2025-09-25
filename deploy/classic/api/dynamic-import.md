@@ -1,5 +1,7 @@
 ---
 title: "Dynamic import"
+oldUrl:
+  - /deploy/api/dynamic-import/
 ---
 
 :::info Legacy Documentation

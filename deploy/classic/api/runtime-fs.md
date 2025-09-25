@@ -3,6 +3,7 @@ title: "File system APIs"
 oldUrl:
   - /deploy/docs/runtime-fs/
   - /deploy/manual/runtime-fs/
+  - /deploy/api/runtime-fs/
 ---
 
 :::info Legacy Documentation

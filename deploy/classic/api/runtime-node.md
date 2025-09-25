@@ -3,6 +3,7 @@ title: "Node.js built-in APIs"
 oldUrl:
   - /deploy/docs/runtime-node/
   - /deploy/manual/runtime-node/
+  - /deploy/api/runtime-node/
 ---
 
 :::info Legacy Documentation

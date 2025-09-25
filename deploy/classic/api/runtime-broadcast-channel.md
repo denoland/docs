@@ -3,6 +3,7 @@ title: "BroadcastChannel"
 oldUrl:
   - /deploy/docs/runtime-broadcast-channel/
   - /deploy/manual/runtime-broadcast-channel
+  - /deploy/api/runtime-broadcast-channel/
 ---
 
 :::info Legacy Documentation

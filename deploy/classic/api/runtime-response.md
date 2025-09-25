@@ -2,6 +2,7 @@
 title: "HTTP Response"
 oldUrl:
   - /deploy/docs/response/
+  - /deploy/api/response/
 ---
 
 :::info Legacy Documentation

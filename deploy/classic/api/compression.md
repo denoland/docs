@@ -2,6 +2,7 @@
 title: "Compressing response bodies"
 oldUrl:
   - /deploy/docs/compression/
+  - /deploy/api/compression/
 ---
 
 :::info Legacy Documentation
