@@ -145,5 +145,3 @@ export const SidebarNav = [
     href: "/subhosting/manual/",
   },
 ] satisfies SidebarNav;
-
-
