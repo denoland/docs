@@ -116,7 +116,7 @@ which is an array contain all the stack trace frames.
 ### Configuration file
 
 Deno supports storing permissions in the deno.json/deno.jsonc file. Read more
-under [configuration](/runtime/fundamentals/configuration/#Permissions).
+under [configuration](/runtime/fundamentals/configuration/#permissions).
 
 ### File system access
 
