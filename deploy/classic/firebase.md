@@ -9,9 +9,6 @@ NoSQL datastore, Firestore, that you can persist data to.
 This tutorial covers how to connect to Firebase from an application deployed on
 Deno Deploy.
 
-You can find a more comprehensive tutorial that builds a sample application on
-top of Firebase [here](../tutorials/tutorial-firebase).
-
 ## Get credentials from Firebase
 
 > This tutorial assumes that you've already created a project in Firebase and

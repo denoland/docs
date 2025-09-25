@@ -10,9 +10,6 @@ connections, which works well for serverless applications.
 This tutorial covers how to connect to a Fauna database from an application
 deployed on Deno Deploy.
 
-You can find a more comprehensive tutorial that builds a sample application on
-top of Fauna [here](../tutorials/tutorial-faunadb).
-
 ## Get credentials from Fauna
 
 We assume that you've already created a Fauna instance at

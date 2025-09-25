@@ -7,9 +7,6 @@ follow the steps below:
 
 The tutorial assumes that you have an AWS and Deno Deploy Classic account.
 
-You can find a more comprehensive tutorial that builds a sample application on
-top of DynamoDB [here](../tutorials/tutorial-dynamodb).
-
 ## Gather credentials from DynamoDB
 
 The first step in the process is to generate AWS credentials to programmatically
