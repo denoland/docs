@@ -90,3 +90,67 @@ in the repository dropdown. This will redirect you to GitHub to authorize the
 Deno Deploy GitHub app with the selected GitHub account or organization. After
 authorization, you will be redirected back to the app settings page, where you
 can select the newly authorized GitHub repository.
+
+### GitHub events integration
+
+Whenever Deno Deploy<sup>EA</sup> builds an app from a GitHub repository, it
+will send a
+[`repository_dispatch`](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#repository_dispatch)
+event to the repository at the start and end of the build. This allows you to
+trigger GitHub Actions workflows based on the build status.
+
+Deno Deploy will send the following events:
+
+| Event Name                    | Description                                                                |
+| ----------------------------- | -------------------------------------------------------------------------- |
+| `deno_deploy.build.enqueued`  | Sent when a build is enqueued, i.e. when a push is made to the repository. |
+| `deno_deploy.build.cancelled` | Sent when a build is cancelled, either manually or due to a timeout.       |
+| `deno_deploy.build.failed`    | Sent when a build fails.                                                   |
+| `deno_deploy.build.routed`    | Sent when a build completes successfully, and traffic is routed to it.     |
+
+The payload of the event follows the following TypeScript type definition:
+
+```ts
+interface DenoDeployBuildEventPayload {
+  app: {
+    /** The UUID of the Deno Deploy app. */
+    id: string;
+    /** The slug (name) of the Deno Deploy app. */
+    slug: string;
+  };
+  organization: {
+    /** The UUID of the Deno Deploy organization containing the app. */
+    id: string;
+    /** The slug (name) of the Deno Deploy organization containing the app. */
+    slug: string;
+  };
+  revision: {
+    /** The ID of the revision being built. */
+    id: string;
+    /** A URL to view the revision and build status in the Deno Deploy dashboard. */
+    html_url: string;
+    /** The Git commit SHA being built. */
+    git: { sha: string };
+    /** The preview URL the revision is available at, if the build succeeded. */
+    preview_url: string | null;
+  };
+}
+```
+
+You can receive these events in a GitHub Actions workflow by adding a
+`repository_dispatch` trigger. For example:
+
+```yaml
+on:
+  repository_dispatch:
+    types: [deno_deploy.build.routed] # Listen for successful builds
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test the preview_url
+        run: |
+          echo "The Deno Deploy app is available at ${{ github.event.client_payload.revision.preview_url }}"
+          curl -I ${{ github.event.client_payload.revision.preview_url }}
+```
