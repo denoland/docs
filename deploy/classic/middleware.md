@@ -2,6 +2,14 @@
 title: "Reverse proxy middleware"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 This quickstart will cover how to deploy a small piece of middleware that
 reverse proxies another server (in this case example.com). For additional
 examples of common middleware functions, see the

@@ -4,6 +4,14 @@ oldUrl:
   - /kv/tutorials/schedule_notification/
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 A common use case for [queues](../manual/queue_overview.md) is scheduling work
 to be completed at some point in the future. To help demonstrate how this works,
 we've provided a sample application (described below) that schedules

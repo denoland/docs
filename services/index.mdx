@@ -1,52 +1,36 @@
 ---
 title: "Deno Documentation"
-description: "Comprehensive guide to Deno's cloud services, including Deploy Early Access, Deploy Classic, and Subhosting for your JavaScript and TypeScript applications."
+description: "Comprehensive guide to Deno's cloud services, including Deploy, Deploy Classic, and Subhosting for your JavaScript and TypeScript applications."
 layout: "raw.tsx"
 ---
 
 <comp.Hero>
    <div>
-      <h1>Deno Services Docs</h1>
+      <h1>Deno Services Documentation</h1>
       <p class="max-w-prose">Deno's cloud services provide robust platforms for deploying and running JavaScript and TypeScript applications at global scale.</p>
-      <comp.CTA href="/deploy/early-access/" type="deploy">Try Deploy<sup>EA</sup> -></comp.CTA>
-      <comp.CTA href="/deploy/classic/" type="deploy">Try Deploy Classic -></comp.CTA>
    </div>
    <img src="/deno-deploy.svg" alt="Deno Deploy logo" style="max-width: 12rem;" />
 </comp.Hero>
 
-<comp.Banner type="deploy">
-<p class="text-lg max-w-prose"><strong>Deno Deploy Early Access</strong> is now available! Try our completely revamped platform with improved performance and framework support. <a href="https://console.deno.com/" class="underline">Get started</a></p>
-</comp.Banner>
+<comp.Heading level="2" type="deploy"><a href="/deploy/" class="no-underline underline-offset-4 text-inherit decoration-0 hover:underline hover:decoration-primary hover:decoration-1 hover:text-primary hover:[&_path]:stroke-primary hover:[&_circle]:stroke-primary hover:[&_rect]:stroke-primary">Deno Deploy</a></comp.Heading>
 
-<comp.Heading level="2" type="deploy">Deno Deploy<sup>EA</sup></comp.Heading>
-
-<p class="max-w-prose text-lg text-foreground-secondary mb-4">Deno Deploy Early Access (Deno Deploy<sup>EA</sup>) is a complete revamp of the original Deploy Classic, featuring improved NPM compatibility, web framework support, integrated build system, and enhanced infrastructure. With a fully managed build pipeline, Deno Deploy<sup>EA</sup> handles deployment in one seamless process.</p>
+<p class="max-w-prose text-lg text-foreground-secondary mb-4">Deno Deploy is a serverless platform for running JavaScript and TypeScript applications, featuring NPM compatibility, web framework support, integrated build system, and enhanced infrastructure. With a fully managed build pipeline, Deno Deploy handles deployment in one seamless process.</p>
 
 <comp.Columns>
-   <comp.ColumnCard headingText="Getting Started" text={<span>Set up your first Deno Deploy<sup>EA</sup> application with our step-by-step guide.</span>} linkText="Get started" linkHref="/deploy/early-access/getting_started/" />
-   <comp.columnCard headingText="Framework Support" text="Deploy applications built with Next.js, Astro, SvelteKit, Fresh, and more with native framework presets." linkHref="/deploy/early-access/reference/frameworks/" linkText="Framework docs" />
-   <comp.columnCard headingText="Build System" text="Configure your build process with our integrated build system." linkHref="/deploy/early-access/reference/builds/" linkText="Build docs" />
-</comp.Columns>
-
-<comp.Heading level="2" type="deploy">Deploy Classic</comp.Heading>
-
-<p class="max-w-prose text-lg text-foreground-secondary mb-4">Deploy Classic is a globally distributed serverless platform for JavaScript and TypeScript with integrated cloud services.</p>
-
-<comp.Columns>
-   <comp.columnCard headingText="Quick Start" text="Deploy your first application to Deno's global edge network in minutes." linkHref="/deploy/classic/" linkText="Quick start" />
-   <comp.columnCard headingText="Deno KV" text="Key/value database built into the Deno runtime with zero configuration required." linkHref="/deploy/kv/manual/" linkText="KV docs" />
-   <comp.columnCard headingText="Cron & Queues" text="Schedule tasks with Cron and manage background jobs with Queues for reliable processing." linkHref="/deploy/kv/manual/cron" linkText="Cron docs" />
+   <comp.ColumnCard headingText="Getting Started" text={<span>Set up your first Deno Deploy application with our step-by-step guide.</span>} linkText="Get started" linkHref="/deploy/getting_started/" />
+   <comp.columnCard headingText="Framework Support" text="Deploy applications built with Next.js, Astro, SvelteKit, Fresh, and more with native framework presets." linkHref="/deploy/reference/frameworks/" linkText="Framework docs" />
+   <comp.columnCard headingText="Build System" text="Configure your build process with our integrated build system." linkHref="/deploy/reference/builds/" linkText="Build docs" />
 </comp.Columns>
 
 <comp.Heading level="3" type="deploy">Deployment Options</comp.Heading>
 
 <comp.Columns>
-   <comp.columnCard headingText="GitHub Integration" text="Connect your GitHub repository for continuous deployment with preview builds for pull requests." linkHref="/deploy/classic/deployments/" linkText="Learn more" />
-   <comp.columnCard headingText="CLI Deployment" text="Deploy applications directly from your terminal with the deployctl command-line tool." linkHref="/deploy/classic/deployctl/" linkText="CLI docs" />
+   <comp.columnCard headingText="GitHub Integration" text="Connect your GitHub repository for continuous deployment with preview builds for pull requests." linkHref="/deploy/reference/builds/" linkText="Learn more" />
+   <comp.columnCard headingText="CLI Deployment" text="Deploy applications directly from your terminal with the `deno deploy` command-line tool." linkHref="/runtime/reference/cli/deploy/" linkText="deploy command documentation" />
    <comp.columnCard headingText="Playground" text="Build and deploy applications directly in your browser with the interactive playground." linkHref="/deploy/classic/playgrounds/" linkText="Playground docs" />
 </comp.Columns>
 
-<comp.Heading level="2" type="deploy">Subhosting</comp.Heading>
+<comp.Heading level="2" type="deploy"><a href="/subhosting/" class="no-underline underline-offset-4 text-inherit decoration-0 hover:underline hover:decoration-primary hover:decoration-1 hover:text-primary hover:[&_path]:stroke-primary hover:[&_circle]:stroke-primary hover:[&_rect]:stroke-primary">Subhosting</a></comp.Heading>
 
 <p class="max-w-prose text-lg text-foreground-secondary mb-4">Deno Subhosting is a robust platform designed to allow Software as a Service (SaaS) providers to securely run code written by their customers at scale.</p>
 
@@ -64,10 +48,14 @@ layout: "raw.tsx"
    <comp.columnCard headingText="KV Integration" text="Connect KV databases to your deployments for persistent data storage." linkHref="/subhosting/api/#connecting-a-kv-database" linkText="KV integration" />
 </comp.Columns>
 
+
+<comp.Heading level="2" type="deploy"><a href="/deploy/classic/" class="no-underline underline-offset-4 text-inherit decoration-0 hover:underline hover:decoration-primary hover:decoration-1 hover:text-primary hover:[&_path]:stroke-primary hover:[&_circle]:stroke-primary hover:[&_rect]:stroke-primary">Deploy Classic</a></comp.Heading>
+
+<p class="max-w-prose text-lg text-foreground-secondary mb-4">Deploy Classic is our legacy serverless platform for JavaScript and TypeScript. We are no longer onboarding new users to this platform.</p>
+
 <comp.Heading level="2" type="deploy">Help & Support</comp.Heading>
 
 <comp.Columns>
-   <comp.columnCard headingText="Early Access Support" text="Get help with Deno Deploy Early Access in our dedicated Discord channel." linkHref="/deploy/early-access/support/" linkText="Early Access support" />
-   <comp.columnCard headingText="Deploy Classic Support" text="Find help for Deploy Classic and connect with the community." linkHref="https://discord.gg/deno" linkText="Join Discord" />
+   <comp.columnCard headingText="Deno Deploy support" text="Get help with Deno Deploy in our dedicated Discord channel." linkHref="https://discord.gg/deno" linkText="Join Discord" />
    <comp.columnCard headingText="Enterprise Support" text="Explore Deno's enterprise support options for Subhosting and Deploy." linkHref="https://deno.com/enterprise" linkText="Enterprise support" />
 </comp.Columns>

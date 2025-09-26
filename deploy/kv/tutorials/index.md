@@ -4,6 +4,14 @@ oldUrl:
   - /kv/tutorials/
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 Check out these examples showing real-world usage of Deno KV.
 
 ## Use queues to process incoming webhooks

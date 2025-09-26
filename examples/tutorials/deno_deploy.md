@@ -1,6 +1,6 @@
 ---
 title: "Deploy an app with Deno Deploy"
-description: "A step-by-step tutorial for deploying your first Deno application to Deno Deploy Early Access."
+description: "A step-by-step tutorial for deploying your first Deno application to Deno Deploy."
 url: /examples/deno_deploy_tutorial/
 ---
 
@@ -8,15 +8,14 @@ Deno Deploy allows you to host your Deno applications on a global edge network,
 with built in telemetry and CI/CD tooling.
 
 This tutorial guides you through creating and deploying a simple Deno
-application using Deno Deploy<sup>EA</sup>.
+application using Deno Deploy.
 
 ## Prerequisites
 
 1. A [GitHub](https://github.com) account
 2. [Deno installed](https://docs.deno.com/runtime/manual/getting_started/installation)
    on your local machine
-3. Access to the
-   [Deno Deploy Early Access program](https://dash.deno.com/account#early-access)
+3. A [Deno Deploy](https://console.deno.com/account) account
 
 ## Create a simple Deno application with Vite
 
@@ -63,15 +62,6 @@ git branch -M main
 git push -u origin main
 ```
 
-## Sign up for Deno Deploy Early Access
-
-1. Visit the
-   [Deno Deploy account settings](https://dash.deno.com/account#early-access)
-2. Click "Join the Early Access program"
-3. Once approved, you'll receive an email with access instructions
-
-![Early access joining screenshot](./images/join.png)
-
 ## Create a Deno Deploy organization
 
 1. Navigate to [console.deno.com](https://console.deno.com)
@@ -82,18 +72,17 @@ git push -u origin main
 
 ## Create and deploy your application
 
-1. From your organization's dashboard, click "Try new Deno Deploy Early Access​"
-2. Then click "+ New App"
-3. Select the GitHub repository you created earlier
-4. The app configuration should be automatically detected, but you can verify
-   these settings blu clicking the "Edit build config" button:
+1. Click "+ New App"
+2. Select the GitHub repository you created earlier
+3. The app configuration should be automatically detected, but you can verify
+   these settings by clicking the "Edit build config" button:
    - Framework preset: No preset
    - Runtime configuration: Static Site
    - Install command: `deno install`
    - Build command: `deno task build`
    - Static Directory: `dist`
 
-5. Click "Create App" to start the deployment process
+4. Click "Create App" to start the deployment process
 
 ## Monitor your deployment
 
@@ -147,7 +136,7 @@ Once the build completes, visit your application URL to see the update.
 
 ## Explore observability features
 
-Deno Deploy<sup>EA</sup> provides comprehensive observability tools:
+Deno Deploy provides comprehensive observability tools:
 
 1. From your application dashboard, click "Logs" in the sidebar
    - You'll see console output from your application
@@ -162,12 +151,10 @@ Deno Deploy<sup>EA</sup> provides comprehensive observability tools:
 
 🦕 Now that you've deployed your first application, you might want to:
 
-1. [Add a custom domain](/deploy/early-access/reference/domains/) to your
-   application
-2. Explore [framework support](/deploy/early-access/reference/frameworks/) for
-   Next.js, Astro, and other frameworks
-3. Learn about [caching strategies](/deploy/early-access/reference/caching/) to
-   improve performance
-4. Set up different
-   [environments](/deploy/early-access/reference/env-vars-and-contexts/) for
+1. [Add a custom domain](/deploy/reference/domains/) to your application
+2. Explore [framework support](/deploy/reference/frameworks/) for Next.js,
+   Astro, and other frameworks
+3. Learn about [caching strategies](/deploy/reference/caching/) to improve
+   performance
+4. Set up different [environments](/deploy/reference/env-vars-and-contexts/) for
    development and production

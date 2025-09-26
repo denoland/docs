@@ -4,8 +4,8 @@ export const sectionTitle = "Deploy";
 export const sectionHref = "/deploy/classic/";
 export const SidebarNav = [
   {
-    title: "Deno Deploy<sup>EA</sup>",
-    href: "/deploy/early-access/",
+    title: "Deno Deploy",
+    href: "/deploy/",
   },
   {
     title: "Deploy Classic",

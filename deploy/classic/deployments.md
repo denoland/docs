@@ -2,6 +2,14 @@
 title: "Deployments"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 A deployment is a snapshot of the code and environment variables required to run
 an application. A new deployment can be created
 [via `deployctl`](./deployctl.md#deploy) or automatically via Deploy's Github

@@ -317,7 +317,7 @@ git push -u origin main
 ### Deploy to Deno Deploy
 
 Once your app is on GitHub, you can
-[deploy it to Deno Deploy<sup>EA</sup>](https://console.deno.com/).
+[deploy it to Deno Deploy](https://console.deno.com/).
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
