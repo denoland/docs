@@ -5,8 +5,6 @@ oldUrl:
   - /kv/manual/secondary_indexes
 ---
 
-<deno-admonition></deno-admonition>
-
 Key-value stores like Deno KV organize data as collections of key-value pairs,
 where each unique key is associated with a single value. This structure enables
 easy retrieval of values based on their keys but does not allow for querying

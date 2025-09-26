@@ -2,10 +2,19 @@
 title: "TCP sockets and TLS"
 oldUrl:
   - /deploy/docs/sockets/
+  - /deploy/api/sockets/
 ---
 
-Deno Deploy supports outbound TCP and TLS connections. These APIs allow you to
-use databases like PostgreSQL, SQLite, MongoDB, etc., with Deploy.
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
+Deno Deploy Classic supports outbound TCP and TLS connections. These APIs allow
+you to use databases like PostgreSQL, SQLite, MongoDB, etc., with Deploy.
 
 Looking for information on _serving_ TCP? Take a look at the documentation for
 [`Deno.serve`](/api/deno/~/Deno.serve) including its support for

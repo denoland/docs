@@ -3,11 +3,20 @@ title: "BroadcastChannel"
 oldUrl:
   - /deploy/docs/runtime-broadcast-channel/
   - /deploy/manual/runtime-broadcast-channel
+  - /deploy/api/runtime-broadcast-channel/
 ---
 
-In Deno Deploy, code is run in different data centers around the world in order
-to reduce latency by servicing requests at the data center nearest to the
-client. In the browser, the
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
+In Deno Deploy Classic, code is run in different data centers around the world
+in order to reduce latency by servicing requests at the data center nearest to
+the client. In the browser, the
 [`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API)
 API allows different tabs with the same origin to exchange messages. In Deno
 Deploy, the BroadcastChannel API provides a communication mechanism between the
@@ -95,7 +104,7 @@ app.get("/", (c) => {
 Deno.serve(app.fetch);
 ```
 
-You can test this example yourself on Deno Deploy using
+You can test this example yourself on Deno Deploy Classic using
 [this playground](https://dash.deno.com/playground/broadcast-channel-example).
 
 [eventtarget]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget

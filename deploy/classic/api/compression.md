@@ -2,13 +2,22 @@
 title: "Compressing response bodies"
 oldUrl:
   - /deploy/docs/compression/
+  - /deploy/api/compression/
 ---
+
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
 
 Compressing the response body to save bandwidth is a common practice. To take
 some work off your shoulder, we built the capabilities directly into Deploy.
 
-Deno Deploy supports brotli and gzip compression. Compression is applied when
-the following conditions are met.
+Deno Deploy Classic supports brotli and gzip compression. Compression is applied
+when the following conditions are met.
 
 1. The request to your deployment has [`Accept-Encoding`][accept-encoding]
    header set to either `br` (brotli) or `gzip`.
@@ -25,7 +34,7 @@ algorithm used.
 
 ### When is compression skipped?
 
-Deno Deploy skips the compression if:
+Deno Deploy Classic skips the compression if:
 
 - The response has [`Content-Encoding`][content-encoding] header.
 - The response has [`Content-Range`][content-range] header.

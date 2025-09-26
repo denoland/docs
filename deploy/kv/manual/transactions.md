@@ -5,8 +5,6 @@ oldUrl:
   - /kv/manual/transactions/
 ---
 
-<deno-admonition></deno-admonition>
-
 The Deno KV store utilizes _optimistic concurrency control transactions_ rather
 than _interactive transactions_ like many SQL systems like PostgreSQL or MySQL.
 This approach employs versionstamps, which represent the current version of a

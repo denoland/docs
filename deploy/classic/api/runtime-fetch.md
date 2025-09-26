@@ -2,11 +2,20 @@
 title: "HTTP requests (fetch)"
 oldUrl:
   - /deploy/docs/runtime-fetch/
+  - /deploy/api/runtime-fetch/
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-allows you to make outbound HTTP requests in Deno Deploy. It is a web standard
-and has the following interfaces:
+allows you to make outbound HTTP requests in Deno Deploy Classic. It is a web
+standard and has the following interfaces:
 
 - `fetch()` - The method that allows you to make outbound HTTP requests
 - [`Request`](./runtime-request) - represents a request resource of fetch()
@@ -44,8 +53,9 @@ The return type of `fetch()` is a promise that resolves to a
 
 ## Examples
 
-The Deno Deploy script below makes a `fetch()` request to the GitHub API for
-each incoming request, and then returns that response from the handler function.
+The Deno Deploy Classic script below makes a `fetch()` request to the GitHub API
+for each incoming request, and then returns that response from the handler
+function.
 
 ```ts
 async function handler(req: Request): Promise<Response> {

@@ -2,6 +2,14 @@
 title: "Connect to Firebase"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 Firebase is a platform developed by Google for creating mobile and web
 applications. Its features include authentication primitives for log in and a
 NoSQL datastore, Firestore, that you can persist data to.

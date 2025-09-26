@@ -3,13 +3,22 @@ title: "Node.js built-in APIs"
 oldUrl:
   - /deploy/docs/runtime-node/
   - /deploy/manual/runtime-node/
+  - /deploy/api/runtime-node/
 ---
 
-Deno Deploy natively supports importing built-in Node.js modules like `fs`,
-`path`, and `http` through `node:` specifiers. This allows running code
-originally written for Node.js without changes in Deno Deploy.
+:::info Legacy Documentation
 
-Here is an example of a Node.js HTTP server running on Deno Deploy:
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
+Deno Deploy Classic natively supports importing built-in Node.js modules like
+`fs`, `path`, and `http` through `node:` specifiers. This allows running code
+originally written for Node.js without changes in Deno Deploy Classic.
+
+Here is an example of a Node.js HTTP server running on Deno Deploy Classic:
 
 ```js
 import { createServer } from "node:http";
@@ -26,10 +35,10 @@ server.listen(8080);
 _You can see this example live here:
 https://dash.deno.com/playground/node-specifiers_
 
-When using `node:` specifiers, all other features of Deno Deploy are still
-available. For example, you can use `Deno.env` to access environment variables
-even when using Node.js modules. You can also import other ESM modules from
-external URLs as usual.
+When using `node:` specifiers, all other features of Deno Deploy Classic are
+still available. For example, you can use `Deno.env` to access environment
+variables even when using Node.js modules. You can also import other ESM modules
+from external URLs as usual.
 
 The following Node.js modules are available:
 
@@ -83,7 +92,8 @@ The following Node.js modules are available:
 - `zlib`
 
 The behavior of these modules should be identical to Node.js in most cases. Due
-to the sandboxing behaviour of Deno Deploy, some features are not available:
+to the sandboxing behaviour of Deno Deploy Classic, some features are not
+available:
 
 - Executing binaries with `child_process`
 - Spawning workers using `worker_threads`

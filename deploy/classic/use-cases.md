@@ -2,6 +2,14 @@
 title: "Deno Deploy Classic Use Cases"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 Some popular use-cases for Deno currently are:
 
 - [Middleware](#middleware)

@@ -3,11 +3,20 @@ title: "File system APIs"
 oldUrl:
   - /deploy/docs/runtime-fs/
   - /deploy/manual/runtime-fs/
+  - /deploy/api/runtime-fs/
 ---
 
-Deno Deploy supports a limited set of the file system APIs available in Deno.
-These file system APIs can access static files from your deployments. Static
-files are for example:
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
+Deno Deploy Classic supports a limited set of the file system APIs available in
+Deno. These file system APIs can access static files from your deployments.
+Static files are for example:
 
 - The files in your GitHub repository, if you deploy via the GitHub integration.
 - The entrypoint file in a playground deployment.
@@ -114,9 +123,10 @@ Deno.serve(handler);
 
 > Note: to use this feature, you must link a GitHub repository to your project.
 
-Deno Deploy supports the `Deno.readFile` API to read static assets from the file
-system. This is useful for serving static assets such as images, stylesheets,
-and JavaScript files. This guide demonstrates how to use this feature.
+Deno Deploy Classic supports the `Deno.readFile` API to read static assets from
+the file system. This is useful for serving static assets such as images,
+stylesheets, and JavaScript files. This guide demonstrates how to use this
+feature.
 
 Imagine the following file structure on a GitHub repository:
 
@@ -334,8 +344,8 @@ metadata. It is returned by the [`Deno.stat()`](#deno.stat) and
 [`Deno.lstat()`](#deno.lstat) functions. It can represent either a file, a
 directory, or a symlink.
 
-In Deno Deploy, only the file type, and size properties are available. The size
-property behaves the same way it does on Linux.
+In Deno Deploy Classic, only the file type, and size properties are available.
+The size property behaves the same way it does on Linux.
 
 ```ts
 interface FileInfo {

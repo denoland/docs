@@ -2,7 +2,16 @@
 title: "HTTP Headers"
 oldUrl:
   - /deploy/docs/runtime-headers/
+  - /deploy/api/runtime-headers/
 ---
+
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
 
 The [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers)
 interface is part of the Fetch API. It allows you create and manipulate the HTTP
@@ -50,7 +59,7 @@ const myHeaders = new Headers({
 });
 
 // Append a header to the headers object.
-myHeaders.append("user-agent", "Deno Deploy");
+myHeaders.append("user-agent", "Deno Deploy Classic");
 
 // Print the headers of the headers object.
 for (const [key, value] of myHeaders.entries()) {

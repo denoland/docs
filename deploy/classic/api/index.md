@@ -5,12 +5,21 @@ pagination_next: /deploy/api/runtime-broadcast-channel
 oldUrl:
   - /deploy/docs/runtime-api/
   - /deploy/manual/runtime-api/
+  - /deploy/api/runtime-api/
 ---
 
-This is a reference for runtime APIs available on Deno Deploy. This API is very
-similar to the standard [runtime API](/runtime/manual/runtime), but some APIs
-are not available in the same way, given that Deno Deploy is a serverless
-environment.
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
+This is a reference for runtime APIs available on Deno Deploy Classic. This API
+is very similar to the standard [runtime API](/runtime/manual/runtime), but some
+APIs are not available in the same way, given that Deno Deploy Classic is a
+serverless environment.
 
 Please use this section of the documentation to explore available APIs on Deno
 Deploy.

@@ -671,6 +671,138 @@ following in a Deno configuration file:
 }
 ```
 
+## Supply chain management
+
+Modern JavaScript projects pull code from many sources (JSR, npm, HTTPS URLs,
+local workspaces). Good supply chain management helps you achieve four goals:
+
+- Determinism: everyone (and your CI) runs the exact same code.
+- Security: unexpected upstream changes or compromises are detected early.
+- Velocity: you can update dependencies intentionally when you choose.
+- Resilience: builds keep working offline or when registries have outages.
+
+### Core practices
+
+1. Pin versions deliberately
+   - For applications, prefer exact versions (for example
+     `jsr:@luca/cases@1.2.3`).
+   - For libraries, a caret range (`^1.2.3`) lets consumers get
+     backwards‑compatible fixes.
+   - Avoid unbounded (`*`) or overly broad ranges in production applications.
+2. Commit your `deno.lock` file.
+3. Enable a frozen lockfile in CI / production (`--frozen` or
+   `"lock": { "frozen": true }`) so new, unseen dependencies fail the build
+   instead of silently appearing.
+4. Vendor when you need hermetic/offline builds (`"vendor": true`) or when you
+   must patch third‑party code locally. Vendoring does not remove the need for a
+   lockfile—it complements it.
+5. Prefer import map (`imports`) entries over raw HTTPS imports in larger
+   codebases to centralize version changes.
+6. Periodically unfreeze and update consciously (for example on a weekly or
+   sprint cadence) instead of ad‑hoc updates during feature work.
+
+### Typical CI pattern
+
+```sh
+# Install (resolve) dependencies exactly as locked; fail if drift or new deps
+deno install --frozen --entrypoint main.ts
+
+# (optional) Run with only cached modules to guarantee no network access
+deno run --cached-only main.ts
+```
+
+If you rely on `npm` packages (`package.json` present), include `deno install`
+in CI before running tests so the `node_modules` directory is materialized
+deterministically.
+
+### Updating dependencies intentionally
+
+When you decide to update:
+
+1. Temporarily allow lockfile writes: add `--frozen=false` or set
+   `"lock": { "frozen": false }`.
+2. Change versions (edit `deno.json`, use `deno add <specifier>@<newVersion>`,
+   or remove with `deno remove`).
+3. Re-run `deno install --entrypoint main.ts` (optionally `--reload`) to update
+   resolutions and integrity hashes.
+4. Review the diff in `deno.lock` (and `vendor/` if used) in your pull request.
+5. Re-enable the frozen lockfile.
+
+### Troubleshooting a frozen lockfile
+
+You may encounter errors like:
+
+```text
+error: The lockfile is frozen. Cannot add new entry for "jsr:@scope/pkg@1.3.0".
+```
+
+or:
+
+```text
+error: Module not found in frozen lockfile: https://example.com/dependency/mod.ts
+```
+
+Common causes and fixes:
+
+| Symptom                                                    | Cause                                          | Fix                                                                                                                         |
+| ---------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Need to bump a version but command fails with frozen error | Lockfile is in frozen mode                     | Re-run with `--frozen=false` (one-off) or temporarily set `"lock": { "frozen": false }`, then update and re-freeze          |
+| New transitive dependency appears after editing code       | Code now imports something not in lockfile     | Unfreeze (`--frozen=false`) and run `deno install --entrypoint <entry>.ts` to record it                                     |
+| Removed imports but lockfile still contains old entries    | Lockfile is additive; entries persist          | (Optional) regenerate: move `deno.lock` aside (`mv deno.lock deno.lock.old`), run install to recreate, compare, then commit |
+| Lockfile corruption / merge conflict                       | Manual edit or conflict left inconsistent JSON | Delete conflicting sections and re-run install, or regenerate entirely                                                      |
+| Using vendored deps but lockfile complains                 | Vendor dir out of sync with lockfile           | Re-run `deno install --entrypoint <entry>` (unfrozen) to sync both, then commit                                             |
+
+### Safe regeneration checklist
+
+Only regenerate the entire `deno.lock` when necessary (corruption, massive
+pruning). When you do:
+
+1. Back it up: `cp deno.lock deno.lock.bak`.
+2. Remove it: `rm deno.lock`.
+3. (If vendoring) remove or move the `vendor/` directory.
+4. Run `deno install --entrypoint main.ts` to recreate.
+5. Inspect the diff between old and new to catch unexpected additions.
+
+### Vendor vs lockfile
+
+These are complementary:
+
+- Lockfile: records exact resolved versions + integrity hashes for remote and
+  npm/JSR deps.
+- Vendor directory: stores the actual source locally for hermetic, offline, and
+  patchable builds.
+
+Use both for maximum reproducibility. A frozen lockfile alone does not make your
+build fully hermetic if the remote source disappears; vendoring closes that gap.
+
+### Quick decision guide
+
+| Need                       | Use                                            |
+| -------------------------- | ---------------------------------------------- |
+| Detect upstream tampering  | Lockfile (commit & freeze)                     |
+| Offline / air-gapped build | `vendor: true` + lockfile                      |
+| Patch third-party code     | Vendoring or `scopes` overrides (short-term)   |
+| Fast CI with integrity     | `deno install --frozen`                        |
+| Intentionally upgrade      | Temporarily unfreeze, run install, review diff |
+
+### Minimum supply chain baseline (recommended)
+
+```json title="deno.json"
+{
+  "imports": {/* centralize versions */},
+  "vendor": true,
+  "lock": { "frozen": true }
+}
+```
+
+Commit `deno.json`, `deno.lock`, and (if using vendor) the entire `vendor/`
+directory.
+
+:::tip Automate a weekly dependency refresh: a scheduled CI job that unfreezes,
+runs `deno add --latest` (or manually bumps key packages), executes tests, and
+opens a pull request with the updated `deno.lock` (and `vendor/`). This keeps
+security patches flowing while keeping day-to-day builds deterministic. :::
+
 ## Private repositories
 
 :::note

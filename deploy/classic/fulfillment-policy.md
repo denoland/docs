@@ -2,6 +2,14 @@
 title: "Fulfillment Policy"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+
+:::
+
 ## Refund Policy
 
 At Deno Deploy, we strive to provide exceptional service. If you are not
