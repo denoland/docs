@@ -3,6 +3,7 @@ title: "`deno lint`, linter"
 oldUrl:
   - /runtime/tools/linter/
   - /runtime/fundamentals/linting_and_formatting/lint-cli-ref
+  - /runtime/manual/tools/lint/
   - /runtime/manual/tools/linter/
   - /runtime/reference/cli/linter/
 command: lint
