@@ -2,6 +2,14 @@
 title: "Local development"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 For local development you can use the `deno` CLI. To install `deno`, follow the
 instructions in the
 [Deno manual](https://deno.land/manual/getting_started/installation).

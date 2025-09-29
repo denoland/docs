@@ -41,7 +41,7 @@ jobs:
           ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
         run: deno task build
 
-      - name: Generate and upload search index
+      - name: Generate search index (Orama upload disabled)
         env:
           ORAMA_PROJECT_ID: ${{ vars.ORAMA_PROJECT_ID }}
           ORAMA_DATASOURCE_ID: ${{ vars.ORAMA_DATASOURCE_ID }}
@@ -49,8 +49,10 @@ jobs:
         run: |
           echo "Generating search index..."
           deno task generate:search
-          echo "Uploading search index to Orama Cloud..."
-          deno task search:upload
+          echo "Skipping upload of search index to Orama Cloud (temporarily disabled)."
+          # NOTE: Temporarily disabling Orama upload.
+          # To re-enable, uncomment the next line:
+          # deno task search:upload
 
       - name: Run server
         run: deno run --allow-read=. --allow-net --allow-env --lock=deno.lock server.ts &

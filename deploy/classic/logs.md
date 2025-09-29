@@ -2,6 +2,14 @@
 title: "Application logging"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 Applications can generate logs at runtime using the console API, with methods
 such as `console.log`, `console.error`, etc. These logs can be viewed in real
 time by either:

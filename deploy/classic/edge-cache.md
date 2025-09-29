@@ -2,6 +2,14 @@
 title: "Edge Cache"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 The [Web Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache) is
 supported on Deno Deploy. The cache is designed to provide microsecond-level
 read latency, multi-GB/s write throughput and unbounded storage, with the

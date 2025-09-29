@@ -4,6 +4,14 @@ oldUrl:
   - /kv/manual/node/
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 Connecting to a Deno KV database in Node.js is supported via our
 [official client library on npm](https://www.npmjs.com/package/@deno/kv). You
 can find usage instructions for this option below.

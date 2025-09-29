@@ -4,7 +4,16 @@ oldUrl:
   - /deploy/docs/project/
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 Deno Deploy's Git integration enables deployment of code changes that are pushed
+
 to a GitHub repository. Commits on the production branch will be deployed as a
 production deployment. Commits on all other branches will be deployed as a
 preview deployment.

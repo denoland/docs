@@ -2,6 +2,14 @@
 title: "Connect to FaunaDB"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 FaunaDB calls itself "the data API for modern applications." It's a database
 with a GraphQL interface that enables you to use GraphQL to interact with it.
 Since you communicate with it using HTTP requests, you don't need to manage
@@ -9,9 +17,6 @@ connections, which works well for serverless applications.
 
 This tutorial covers how to connect to a Fauna database from an application
 deployed on Deno Deploy.
-
-You can find a more comprehensive tutorial that builds a sample application on
-top of Fauna [here](../tutorials/tutorial-faunadb).
 
 ## Get credentials from Fauna
 

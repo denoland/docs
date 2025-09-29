@@ -2,109 +2,85 @@ import { Sidebar, SidebarNav } from "../types.ts";
 
 export const sidebar = [
   {
-    title: "Getting started",
+    title: "Deno Deploy",
     items: [
+      { title: "About", href: "/deploy/" },
       {
-        title: "Quick start",
-        href: "/deploy/classic/",
-      },
-      {
-        title: "Deploy basics",
-        items: [
-          { title: "Use cases", href: "/deploy/classic/use-cases/" },
-          { title: "Playgrounds", href: "/deploy/classic/playgrounds/" },
-          { title: "How to deploy", href: "/deploy/classic/how-to-deploy/" },
-          { title: "GitHub CI", href: "/deploy/classic/ci_github/" },
-          { title: "deployctl", href: "/deploy/classic/deployctl/" },
-          { title: "Regions", href: "/deploy/classic/regions/" },
-          {
-            title: "Pricing and limits",
-            href: "/deploy/classic/pricing-and-limits/",
-          },
-        ],
+        title: "Getting started",
+        href: "/deploy/getting_started/",
       },
     ],
   },
   {
-    title: "Deploy platform",
+    title: "Reference",
     items: [
       {
-        title: "Deployments",
-        href: "/deploy/classic/deployments/",
-      },
-      {
-        title: "Custom domains",
-        href: "/deploy/classic/custom-domains/",
-      },
-      {
-        title: "Environment variables",
-        href: "/deploy/classic/environment-variables/",
+        title: "Accounts",
+        href: "/deploy/reference/accounts/",
       },
       {
         title: "Organizations",
-        href: "/deploy/classic/organizations/",
+        href: "/deploy/reference/organizations/",
       },
       {
-        title: "Logs",
-        href: "/deploy/classic/logs/",
+        title: "Apps",
+        href: "/deploy/reference/apps/",
       },
       {
-        title: "KV",
-        items: [
-          { title: "Overview", href: "/deploy/kv/manual/" },
-          { title: "Key space", href: "/deploy/kv/manual/key_space/" },
-          { title: "Operations", href: "/deploy/kv/manual/operations/" },
-          {
-            title: "Key expiration",
-            href: "/deploy/kv/manual/key_expiration/",
-          },
-          {
-            title: "Secondary indexes",
-            href: "/deploy/kv/manual/secondary_indexes/",
-          },
-          { title: "Transactions", href: "/deploy/kv/manual/transactions/" },
-          { title: "Node", href: "/deploy/kv/manual/node/" },
-          {
-            title: "Data modeling",
-            href: "/deploy/kv/manual/data_modeling_typescript/",
-          },
-          { title: "Backup", href: "/deploy/kv/manual/backup/" },
-        ],
+        title: "Builds",
+        href: "/deploy/reference/builds/",
       },
       {
-        title: "Queues",
-        href: "/deploy/kv/manual/queue_overview/",
+        title: "Environment Variables and Contexts",
+        href: "/deploy/reference/env-vars-and-contexts/",
       },
       {
-        title: "Cron",
-        href: "/deploy/kv/manual/cron/",
+        title: "Timelines",
+        href: "/deploy/reference/timelines/",
       },
       {
-        title: "Edge cache",
-        href: "/deploy/classic/edge-cache/",
+        title: "Observability",
+        href: "/deploy/reference/observability/",
       },
-    ],
-  },
-  {
-    title: "Connecting to databases",
-    items: [
+      {
+        title: "Domains",
+        href: "/deploy/reference/domains/",
+      },
       {
         title: "Deno KV",
-        href: "/deploy/kv/manual/on_deploy/",
+        href: "/deploy/reference/deno-kv/",
       },
       {
-        title: "Third-Party Databases",
-        items: [
-          { title: "DynamoDB", href: "/deploy/classic/dynamodb/" },
-          { title: "FaunaDB", href: "/deploy/classic/faunadb/" },
-          { title: "Firebase", href: "/deploy/classic/firebase/" },
-          { title: "Postgres", href: "/deploy/classic/postgres/" },
-          { title: "Neon Postgres", href: "/deploy/classic/neon-postgres/" },
-          {
-            title: "Prisma Postgres",
-            href: "/deploy/classic/prisma-postgres/",
-          },
-        ],
+        title: "Databases",
+        href: "/deploy/reference/databases/",
+      },
+      {
+        title: "Cloud Connections",
+        href: "/deploy/reference/cloud-connections/",
+      },
+      {
+        title: "OIDC",
+        href: "/deploy/reference/oidc/",
+      },
+      {
+        title: "Runtime",
+        href: "/deploy/reference/runtime/",
+      },
+      {
+        title: "Framework support",
+        href: "/deploy/reference/frameworks/",
+      },
+      {
+        title: "CDN and caching",
+        href: "/deploy/reference/caching/",
+      },
+      {
+        title: "Playgrounds",
+        href: "/deploy/reference/playgrounds/",
+      },
+      {
+        title: "Deploy Button",
+        href: "/deploy/reference/button/",
       },
     ],
   },
@@ -112,112 +88,43 @@ export const sidebar = [
     title: "Policies and Limits",
     items: [
       {
+        title: "Usage and Limitations",
+        href: "/deploy/usage/",
+      },
+      {
         title: "Acceptable Use Policy",
-        href: "/deploy/classic/acceptable-use-policy/",
+        href: "/deploy/acceptable-use-policy/",
       },
       {
         title: "Fulfillment Policy",
-        href: "/deploy/classic/fulfillment-policy/",
+        href: "/deploy/fulfillment-policy/",
       },
-      { title: "Privacy Policy", href: "/deploy/classic/privacy-policy/" },
-      { title: "Security", href: "/deploy/classic/security/" },
+      { title: "Privacy Policy", href: "/deploy/privacy-policy/" },
+      { title: "Security", href: "/deploy/security/" },
       {
         title: "Terms and Conditions",
-        href: "/deploy/classic/terms-and-conditions/",
+        href: "/deploy/terms-and-conditions/",
       },
     ],
   },
   {
-    title: "Tutorials & Examples",
+    title: "Support and Feedback",
     items: [
       {
-        title: "Deploy Tutorials",
-        items: [
-          { title: "Overview", href: "/deploy/tutorials/" },
-          {
-            title: "Discord Slash Commands",
-            href: "/deploy/tutorials/discord-slash/",
-          },
-          { title: "Fresh Framework", href: "/deploy/tutorials/fresh/" },
-          { title: "Simple API", href: "/examples/simple_api_tutorial/" },
-          { title: "Static Site", href: "/deploy/tutorials/static-site/" },
-          {
-            title: "Blog with Fresh",
-            href: "/deploy/tutorials/tutorial-blog-fresh/",
-          },
-          {
-            title: "DynamoDB Integration",
-            href: "/deploy/tutorials/tutorial-dynamodb/",
-          },
-          {
-            title: "FaunaDB Integration",
-            href: "/deploy/tutorials/tutorial-faunadb/",
-          },
-          {
-            title: "Firebase Integration",
-            href: "/deploy/tutorials/tutorial-firebase/",
-          },
-          {
-            title: "HTTP Server",
-            href: "/examples/http_server/",
-          },
-          { title: "Hugo Blog", href: "/deploy/tutorials/tutorial-hugo-blog/" },
-          {
-            title: "Postgres Integration",
-            href: "/deploy/tutorials/tutorial-postgres/",
-          },
-          {
-            title: "WordPress Frontend",
-            href: "/deploy/tutorials/tutorial-wordpress-frontend/",
-          },
-          { title: "Vite", href: "/examples/react_tutorial/" },
-          {
-            title: "Schedule Notification",
-            href: "/deploy/kv/tutorials/schedule_notification/",
-          },
-          {
-            title: "Webhook Processor",
-            href: "/deploy/kv/tutorials/webhook_processor/",
-          },
-        ],
+        title: "Changelog",
+        href: "/deploy/changelog/",
       },
-      {
-        title: "KV Tutorials",
-        href: "/deploy/kv/tutorials/",
-      },
-      {
-        title: "More on Deno by Example",
-        href: "/examples/",
-      },
-    ],
-  },
-  {
-    title: "Reference",
-    items: [
-      { title: "Runtime API", href: "/deploy/api" },
-      { title: "Runtime FS", href: "/deploy/api/runtime-fs/" },
-      { title: "Runtime Node", href: "/deploy/api/runtime-node/" },
-      { title: "Compression", href: "/deploy/api/compression/" },
-      { title: "Runtime Sockets", href: "/deploy/api/runtime-sockets/" },
-      {
-        title: "Runtime Broadcast Channel",
-        href: "/deploy/api/runtime-broadcast-channel/",
-      },
-      { title: "Runtime Fetch", href: "/deploy/api/runtime-fetch/" },
-      { title: "Runtime Request", href: "/deploy/api/runtime-request/" },
-      { title: "Runtime Response", href: "/deploy/api/runtime-response/" },
-      { title: "Runtime Headers", href: "/deploy/api/runtime-headers/" },
-      { title: "Dynamic Import", href: "/deploy/api/dynamic-import/" },
+      { title: "Support", href: "/deploy/support/" },
     ],
   },
 ] satisfies Sidebar;
 
-export const sectionTitle = "Deploy";
-export const sectionHref = "/deploy/classic/";
+export const sectionTitle = "Deno Deploy";
+export const sectionHref = "/deploy/";
 export const SidebarNav = [
   {
-    title: "Deno Deploy<sup>EA</sup>",
-    href: "/deploy/early-access/",
+    title: "Deno Deploy",
+    href: "/deploy/",
   },
   {
     title: "Deploy Classic",

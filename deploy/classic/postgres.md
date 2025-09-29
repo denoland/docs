@@ -2,11 +2,16 @@
 title: "Connect to Postgres"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 This tutorial covers how to connect to a Postgres database from an application
 deployed on Deno Deploy.
-
-You can find a more comprehensive tutorial that builds a sample application on
-top of Postgres [here](../tutorials/tutorial-postgres).
 
 ## Setup Postgres
 

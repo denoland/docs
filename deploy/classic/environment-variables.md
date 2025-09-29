@@ -2,6 +2,14 @@
 title: "Environment variables"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 Environment variables are useful to store values like access tokens of web
 services. Each deployment has a set of environment variables defined at the
 moment of creation and accessible from the code via the `Deno.env` API. There

@@ -2,6 +2,14 @@
 title: "Playgrounds"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 **Playgrounds** are an easy way to play around with Deno Deploy, and to create
 small projects. Using playgrounds you can write code, run it, and see the output
 fully inside the browser.

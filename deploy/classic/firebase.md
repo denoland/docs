@@ -2,15 +2,20 @@
 title: "Connect to Firebase"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 Firebase is a platform developed by Google for creating mobile and web
 applications. Its features include authentication primitives for log in and a
 NoSQL datastore, Firestore, that you can persist data to.
 
 This tutorial covers how to connect to Firebase from an application deployed on
 Deno Deploy.
-
-You can find a more comprehensive tutorial that builds a sample application on
-top of Firebase [here](../tutorials/tutorial-firebase).
 
 ## Get credentials from Firebase
 

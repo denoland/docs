@@ -4,7 +4,13 @@ oldUrl:
   - /kv/manual/cron/
 ---
 
-<deno-admonition></deno-admonition>
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
 
 The [`Deno.cron`](https://docs.deno.com/api/deno/~/Deno.cron) interface enables
 you to configure JavaScript or TypeScript code that executes on a configurable

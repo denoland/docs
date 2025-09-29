@@ -1,10 +1,41 @@
 ---
-title: "Deploy Quick Start"
+title: "Deploy Classic"
 oldUrl:
-  - /deploy/
   - /deploy/docs/
   - /deploy/manual/hello-world/
 ---
+
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new <a href="/deploy/early-access/">Deno
+Deploy<sup>EA</sup></a> platform.
+
+:::
+
+This section documents the legacy Deno Deploy Classic platform (dash.deno.com).
+We are no longer onboarding new users or organizations to Deploy Classic.
+
+If you already have existing Deploy Classic projects, you may continue to
+operate them for now, but we strongly encourage you to begin migrating to the
+new Deno Deploy<sup>EA</sup> platform at
+[console.deno.com](https://console.deno.com).
+
+Key differences:
+
+- Deploy Classic is in maintenance mode (no new features, limited updates).
+- New capabilities (enhanced Node/NPM support, integrated builds, metrics,
+  tracing, framework presets, static assets, improved infra) are only available
+  in Deno Deploy<sup>EA</sup>.
+
+Get started with the new platform here:
+[About Deno Deploy Early Access](/deploy/early-access/).
+
+Migration guidance is coming soon. In the meantime, you can set up a new Deno
+Deploy<sup>EA</sup> org and redeploy your apps there. Reach out to
+<a href="mailto:support@deno.com">support</a> if you need assistance.
+
+## What is Deno Deploy Classic?
 
 Deno Deploy Classic is a globally distributed platform for serverless JavaScript
 applications. Your JavaScript, TypeScript, and WebAssembly code runs on managed
@@ -22,7 +53,7 @@ If you haven't already, you can
 the commands below:
 
 <deno-tabs group-id="operating-systems">
-<deno-tab mac" label="macOS" default>
+<deno-tab value="mac" label="macOS" default>
 
 ```sh
 curl -fsSL https://deno.land/install.sh | sh
@@ -70,7 +101,7 @@ Deno.serve(() => new Response("Hello, world!"));
 
 You can test that it works by running it with the command below:
 
-```
+```sh
 deno run --allow-net main.ts
 ```
 

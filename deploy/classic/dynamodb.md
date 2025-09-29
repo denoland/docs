@@ -2,13 +2,18 @@
 title: "Connect to DynamoDB"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 Amazon DynamoDB is a fully managed NoSQL database. To persist data to DynamoDB,
 follow the steps below:
 
 The tutorial assumes that you have an AWS and Deno Deploy Classic account.
-
-You can find a more comprehensive tutorial that builds a sample application on
-top of DynamoDB [here](../tutorials/tutorial-dynamodb).
 
 ## Gather credentials from DynamoDB
 

@@ -138,6 +138,12 @@
   "runtime/reference/deno_namespace_apis/": "/api/deno/",
   "runtime/reference/web_platform_apis/": "/api/web/",
   "runtime/reference/node_apis/": "/api/node/",
-  "/deploy/tutorials/tutorial-http-server/": "/examples/http_server/",
-  "/deploy/manual/*": "/deploy/classic/*"
+  "/deploy/tutorials/vite/": "/examples/react_tutorial/",
+  "/deploy/manual/*": "/deploy/classic/*",
+  "/deploy/early-access/*": "/deploy/*",
+  "/deploy/tutorials/": "/examples/",
+  "/deploy/tutorials/*": "/examples/",
+  "/deploy/kv/tutorials/": "/examples/kv/",
+  "/deploy/kv/tutorials/schedule_notification/": "/examples/",
+  "/deploy/kv/tutorials/webhook_processor/": "/examples/"
 }

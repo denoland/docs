@@ -2,6 +2,14 @@
 title: "Organizations"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 **Organizations** allow you to collaborate with other users. A project created
 in an organization is accessible to all members of the organization. Users
 should first signup for Deno Deploy Classic before they can be added to an

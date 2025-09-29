@@ -2,6 +2,14 @@
 title: "Using deployctl on the command line"
 ---
 
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
+
 `deployctl` is a command line tool (CLI) that lets you operate the Deno Deploy
 platform without leaving your terminal. With it you can deploy your code, create
 and manage your projects and their deployments, and monitor their usage and
@@ -95,8 +103,7 @@ deployctl deploy --include=./static --entrypoint=./main.ts
 ```
 
 The entrypoint can also be a remote script. A common use case for this is to
-deploy an static site using `std/http/file_server.ts` (more details in
-[Static Site Tutorial](/deploy/tutorials/static-site)):
+deploy an static site using `std/http/file_server.ts`.
 
 ```shell
 deployctl deploy --include=dist --entrypoint=jsr:@std/http/file-server

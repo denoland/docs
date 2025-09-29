@@ -154,12 +154,12 @@ deno deploy logs --org my-org --app my-app --start "2024-01-01T00:00:00Z"
 ### Configure cloud connections
 
 The `deploy` command includes tools to help you configure integrations for use
-as [Cloud Connections](/deploy/early-access/reference/cloud-connections/) in
-your applications.
+as [Cloud Connections](/deploy/reference/cloud-connections/) in your
+applications.
 
 #### AWS integration setup
 
-[Configure AWS integration](/deploy/early-access/reference/cloud-connections/#aws%3A-easy-setup-with-deno-deploy-setup-aws)
+[Configure AWS integration](/deploy/reference/cloud-connections/#aws%3A-easy-setup-with-deno-deploy-setup-aws)
 for use as a Cloud Connection in your application.
 
 ```bash
@@ -178,7 +178,7 @@ deno deploy setup-aws --org my-org --app my-app
 
 ### Google Cloud Platform integration setup
 
-[Configure Google Cloud Platform integration](/deploy/early-access/reference/cloud-connections/#setting-up-gcp)
+[Configure Google Cloud Platform integration](/deploy/reference/cloud-connections/#setting-up-gcp)
 for use as a Cloud Connection in your application.
 
 ```bash
@@ -247,5 +247,5 @@ deno deploy setup-gcp --org my-company --app my-api
 
 - Use `deno deploy --help` for general help
 - Use `deno deploy <subcommand> --help` for specific subcommand help
-- Check the [Deno Deploy EA documentation](/deploy/early-access/) for
-  platform-specific information
+- Check the [Deno Deploy documentation](/deploy/) for platform-specific
+  information
