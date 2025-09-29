@@ -140,6 +140,7 @@
   "runtime/reference/node_apis/": "/api/node/",
   "/deploy/tutorials/vite/": "/examples/react_tutorial/",
   "/deploy/manual/*": "/deploy/classic/*",
+  "/deploy/early-access": "/deploy/",
   "/deploy/early-access/*": "/deploy/*",
   "/deploy/tutorials/": "/examples/",
   "/deploy/tutorials/*": "/examples/",
