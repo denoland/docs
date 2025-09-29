@@ -4,14 +4,6 @@ description: "Important limitations, service level expectations, and terms of us
 oldUrl: /deploy/classic/pricing-and-limits/
 ---
 
-:::info Legacy Documentation
-
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
-
-:::
-
 Please see [our pricing page](https://deno.com/deploy/pricing) for the overview
 of the available features in all plans. If you have a use case that exceeds any
 of these limits, [please reach out](mailto:deploy@deno.com).

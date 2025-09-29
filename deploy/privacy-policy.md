@@ -4,14 +4,6 @@ oldUrl: /deploy/classic/privacy-policy
 description: "Deno's Privacy Policy"
 ---
 
-:::info Legacy Documentation
-
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
-
-:::
-
 **DENO PRIVACY POLICY** 09 September 2024
 
 Deno Land Inc. (“Deno,” “we,” “us,” or “our”) collects and uses personal
