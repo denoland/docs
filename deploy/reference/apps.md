@@ -93,8 +93,7 @@ can select the newly authorized GitHub repository.
 
 ### GitHub events integration
 
-Whenever Deno Deploy<sup>EA</sup> builds an app from a GitHub repository, it
-will send a
+Whenever Deno Deploy builds an app from a GitHub repository, it will send a
 [`repository_dispatch`](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#repository_dispatch)
 event to the repository at the start and end of the build. This allows you to
 trigger GitHub Actions workflows based on the build status.
