@@ -111,20 +111,32 @@ export const sidebar = [
   {
     title: "Reference",
     items: [
-      { title: "Runtime API", href: "/deploy/api" },
-      { title: "Runtime FS", href: "/deploy/api/runtime-fs/" },
-      { title: "Runtime Node", href: "/deploy/api/runtime-node/" },
-      { title: "Compression", href: "/deploy/api/compression/" },
-      { title: "Runtime Sockets", href: "/deploy/api/runtime-sockets/" },
+      { title: "Runtime API", href: "/deploy/classic/api/" },
+      { title: "Runtime FS", href: "/deploy/classic/api/runtime-fs/" },
+      { title: "Runtime Node", href: "/deploy/classic/api/runtime-node/" },
+      { title: "Compression", href: "/deploy/classic/api/compression/" },
+      {
+        title: "Runtime Sockets",
+        href: "/deploy/classic/api/runtime-sockets/",
+      },
       {
         title: "Runtime Broadcast Channel",
-        href: "/deploy/api/runtime-broadcast-channel/",
+        href: "/deploy/classic/api/runtime-broadcast-channel/",
       },
-      { title: "Runtime Fetch", href: "/deploy/api/runtime-fetch/" },
-      { title: "Runtime Request", href: "/deploy/api/runtime-request/" },
-      { title: "Runtime Response", href: "/deploy/api/runtime-response/" },
-      { title: "Runtime Headers", href: "/deploy/api/runtime-headers/" },
-      { title: "Dynamic Import", href: "/deploy/api/dynamic-import/" },
+      { title: "Runtime Fetch", href: "/deploy/classic/api/runtime-fetch/" },
+      {
+        title: "Runtime Request",
+        href: "/deploy/classic/api/runtime-request/",
+      },
+      {
+        title: "Runtime Response",
+        href: "/deploy/classic/api/runtime-response/",
+      },
+      {
+        title: "Runtime Headers",
+        href: "/deploy/classic/api/runtime-headers/",
+      },
+      { title: "Dynamic Import", href: "/deploy/classic/api/dynamic-import/" },
     ],
   },
 ] satisfies Sidebar;
