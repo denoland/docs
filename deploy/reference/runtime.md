@@ -6,10 +6,10 @@ description: "Details about the Deno Deploy runtime environment, including appli
 In Deno Deploy, all applications execute using a standard Deno runtime in a
 secure, isolated Linux environment.
 
-The Deno runtime used in Deno Deploy is the standard Deno runtime, with full
-support for all features of the Deno CLI, including JSR and NPM dependencies,
-reading and writing to the file system, making network requests, spawning
-subprocesses, and loading FFI and node native addons.
+The Deno runtime used in Deno Deploy is [the standard Deno runtime](/runtime/),
+with full support for all features of the Deno CLI, including JSR and NPM
+dependencies, reading and writing to the file system, making network requests,
+spawning subprocesses, and loading FFI and node native addons.
 
 The Deno runtime runs using `--allow-all` permissions.
 
@@ -21,7 +21,7 @@ The runtime environment is a Linux-based environment running either x64 or ARM64
 architecture. The exact set of tools available in the runtime environment is
 subject to change and thus cannot be relied upon.
 
-Currently Deno Deploy runs on Deno 2.4.0
+Currently Deno Deploy runs on Deno 2.5.0
 
 ## Lifecycle
 
