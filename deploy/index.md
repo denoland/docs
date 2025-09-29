@@ -18,8 +18,8 @@ organization picker in the top left of the dashboard.
 
 Deno Deploy is a serverless platform for running JavaScript and TypeScript
 applications in the cloud (or self-hosted on your own infrastructure). It
-provides a management plane for deploying and running applications through
-integrations like GitHub deployment.
+provides a management plane for deploying and running applications with the
+built-in CI or through integrations such as GitHub actions.
 
 ## Comparison to Deploy Classic
 

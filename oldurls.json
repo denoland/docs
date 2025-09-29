@@ -142,5 +142,8 @@
   "/deploy/manual/*": "/deploy/classic/*",
   "/deploy/early-access/*": "/deploy/*",
   "/deploy/tutorials/": "/examples/",
-  "/deploy/tutorials/*": "/examples/"
+  "/deploy/tutorials/*": "/examples/", 
+  "/deploy/kv/tutorials/": "/examples/kv/",
+  "/deploy/kv/tutorials/schedule_notification/": "/examples/",
+  "/deploy/kv/tutorials/webhook_processor/": "/examples/"
 }
