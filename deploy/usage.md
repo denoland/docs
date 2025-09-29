@@ -25,7 +25,8 @@ You’ll be able to review and control these in the
 The Deno company is now using Deno Deploy to host our own websites and is
 putting significant efforts into ensuring service reliability.
 
-[Deno Deploy Acceptable Use Policy](/deploy/acceptable-use-policy/)
-[Deno Deploy Terms and Conditions](/deploy/terms-and-conditions/). Deno reserves
-the right to terminate any user, organization, or app that we find to be in
-violation of the terms and conditions.
+- [Deno Deploy Acceptable Use Policy](/deploy/acceptable-use-policy/)
+- [Deno Deploy Terms and Conditions](/deploy/terms-and-conditions/)
+
+Deno reserves the right to terminate any user, organization, or app that we find
+to be in violation of the terms and conditions.

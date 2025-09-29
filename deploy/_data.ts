@@ -2,27 +2,12 @@ import { Sidebar, SidebarNav } from "../types.ts";
 
 export const sidebar = [
   {
-    title: "Deploy Classic",
+    title: "Deno Deploy",
     items: [
       { title: "About", href: "/deploy/" },
       {
-        title: "What is Deno Deploy Classic?",
-        href: "/deploy/classic/",
-      },
-      {
-        title: "Deploy basics",
-        items: [
-          { title: "Use cases", href: "/deploy/classic/use-cases/" },
-          { title: "Playgrounds", href: "/deploy/classic/playgrounds/" },
-          { title: "How to deploy", href: "/deploy/classic/how-to-deploy/" },
-          { title: "GitHub CI", href: "/deploy/classic/ci_github/" },
-          { title: "deployctl", href: "/deploy/classic/deployctl/" },
-          { title: "Regions", href: "/deploy/classic/regions/" },
-          {
-            title: "Pricing and limits",
-            href: "/deploy/classic/pricing-and-limits/",
-          },
-        ],
+        title: "Getting started",
+        href: "/deploy/getting_started/",
       },
     ],
   },
@@ -97,15 +82,15 @@ export const sidebar = [
         title: "Deploy Button",
         href: "/deploy/reference/button/",
       },
-      {
-        title: "Usage and Limitations",
-        href: "/deploy/usage/",
-      },
     ],
   },
   {
     title: "Policies and Limits",
     items: [
+      {
+        title: "Usage and Limitations",
+        href: "/deploy/usage/",
+      },
       {
         title: "Acceptable Use Policy",
         href: "/deploy/acceptable-use-policy/",

@@ -3,6 +3,8 @@ title: Playgrounds
 description: "Write and deploy code completely from Deno Deploy, without the need for a git repository."
 ---
 
+![Deno Deploy Playground](https://deno.com/video/playground-1-720.mp4)
+
 Playground applications enable you to create, edit, and deploy applications
 entirely from the Deno Deploy web dashboard, without needing to create a GitHub
 repository.
@@ -83,7 +85,7 @@ playground since they are based on the playground slug. The new slug must be
 unique within the organization (i.e. must not be in use by another app or
 playground in the same organization).
 
-:::warning
+:::info
 
 Any previous `deno.net` URLs pointing to the playground will no longer work
 after renaming.

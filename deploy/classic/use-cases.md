@@ -6,7 +6,7 @@ title: "Deno Deploy Classic Use Cases"
 
 You are viewing legacy documentation for Deno Deploy Classic. We recommend
 migrating to the new
-<a href="/deploy/early-access/">Deno Deploy<sup>EA</sup></a> platform.
+<a href="/deploy/">Deno Deploy</a> platform.
 
 :::
 
