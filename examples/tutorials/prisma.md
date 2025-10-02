@@ -126,7 +126,7 @@ And in `./prisma/seed.ts`:
 import { Prisma, PrismaClient } from "./generated/client.ts";
 
 const prisma = new PrismaClient({
-  datasourceUrl: Deno.env.get("DATABASE_URL"),
+  datasourceUrl: process.env.DATABASE_URL,
 });
 
 const dinosaurData: Prisma.DinosaurCreateInput[] = [
@@ -207,7 +207,7 @@ import { Application, Router } from "jsr:@oak/oak";
 const prisma = new PrismaClient({
   datasources: {
     db: {
-      url: Deno.env.get("DATABASE_URL")!,
+      url: process.env.DATABASE_URL,
     },
   },
 });
