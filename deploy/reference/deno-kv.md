@@ -84,5 +84,5 @@ database engines, this action deletes all existing Deno KV databases and their
 data. Be sure to back up your data before proceeding.
 
 [Deno KV]: /deploy/kv/
-[databases]: /deploy/databases/
-[timelines]: /deploy/timelines/
+[databases]: /deploy/reference/databases/
+[timelines]: /deploy/reference/timelines/
