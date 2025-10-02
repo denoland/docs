@@ -49,6 +49,7 @@ compatibility, update your `deno.json` file with the following configuration:
 {
   "nodeModulesDir": "auto",
   "unstable": [
+    "detect-cjs",
     "unsafe-proto",
     "sloppy-imports"
   ],
@@ -62,9 +63,9 @@ compatibility, update your `deno.json` file with the following configuration:
     "jsx": "preserve"
   },
   "tasks": {
-    "dev": "deno run -A --unstable-detect-cjs npm:next@latest dev",
-    "build": "deno run -A --unstable-detect-cjs npm:next@latest build",
-    "start": "deno run -A --unstable-detect-cjs npm:next@latest start"
+    "dev": "deno run -A npm:next@latest dev",
+    "build": "deno run -A npm:next@latest build",
+    "start": "deno run -A npm:next@latest start"
   }
 }
 ```
@@ -72,10 +73,8 @@ compatibility, update your `deno.json` file with the following configuration:
 This configuration includes:
 
 - `nodeModulesDir: "auto"` - Enables npm package lifecycle scripts
-- `unstable: ["unsafe-proto", "sloppy-imports"]` - Required for Next.js
-  compatibility
-- `--unstable-detect-cjs` flag - Enables CommonJS module detection for Next.js
-  dependencies
+- `unstable: ["detect-cjs", "unsafe-proto", "sloppy-imports"]` - Required for
+  Next.js compatibility
 
 Now you can serve your new Next.js app:
 
