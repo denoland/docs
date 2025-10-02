@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli, deploy
  * @run --unstable-kv <url>
- * @resource {https://docs.deno.com/deploy/kv/manual/queue_overview} Deno Queues user guide
+ * @resource {https://docs.deno.com/deploy/class9c/queues/} Deno Queues user guide
  * @resource {https://docs.deno.com/api/deno/~/Deno.Kv} Deno Queues Runtime API docs
  * @group Unstable APIs
  *
