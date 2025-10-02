@@ -49,35 +49,12 @@ export const sidebar = [
         href: "/deploy/classic/logs/",
       },
       {
-        title: "KV",
-        items: [
-          { title: "Overview", href: "/deploy/kv/manual/" },
-          { title: "Key space", href: "/deploy/kv/manual/key_space/" },
-          { title: "Operations", href: "/deploy/kv/manual/operations/" },
-          {
-            title: "Key expiration",
-            href: "/deploy/kv/manual/key_expiration/",
-          },
-          {
-            title: "Secondary indexes",
-            href: "/deploy/kv/manual/secondary_indexes/",
-          },
-          { title: "Transactions", href: "/deploy/kv/manual/transactions/" },
-          { title: "Node", href: "/deploy/kv/manual/node/" },
-          {
-            title: "Data modeling",
-            href: "/deploy/kv/manual/data_modeling_typescript/",
-          },
-          { title: "Backup", href: "/deploy/kv/manual/backup/" },
-        ],
-      },
-      {
         title: "Queues",
-        href: "/deploy/kv/manual/queue_overview/",
+        href: "/deploy/classic/queues/",
       },
       {
         title: "Cron",
-        href: "/deploy/kv/manual/cron/",
+        href: "/deploy/classic/cron/",
       },
       {
         title: "Edge cache",

@@ -2,7 +2,16 @@
 title: "Using Queues"
 oldUrl:
   - /kv/manual/queue_overview/
+  - /deploy/kv/manual/queue_overview/
 ---
+
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
 
 <deno-admonition></deno-admonition>
 

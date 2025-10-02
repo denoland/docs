@@ -1,44 +1,42 @@
 ---
 title: Deno KV
-description: Use Deno KV in your applications with a database for each timeline
+description: Use Deno KV in your applications with a dedicated database per timeline
 ---
 
-[Deno KV] is supported in Deno Deploy as a possible database engine of the
-[databases] feature, alongside PostgreSQL, and others. Thanks to the new
-[timelines] capability of Deno Deploy EA, your apps now have full control over
-the Deno KV databases used (one for production, one for each git branch, etc)
-ensuring data isolation and security across all their environments.
+[Deno KV] is a Key Value database supported in Deno Deploy as a database engine
+option in the [databases] feature. Thanks to the new [timelines] capability in
+Deno Deploy Early Access (EA), your apps have full control over the Deno KV
+databases they use (for example, one for production and one for each Git
+branch), ensuring data isolation and security across environments.
 
-Like with the rest of the database engines, your code automatically connects to
-the correct database for each environment without requiring timeline detection
-or manual database name handling.
+As with other database engines, your code automatically connects to the correct
+database for each environment—no timeline detection or manual database naming
+required.
 
 ## Getting Started
 
-### Adding a Database
+### Add a KV database
 
 Navigate to your organization dashboard and click "Databases" in the navigation
 bar. Click "Add Database", choose Deno KV as the database engine, provide a
-memorable name and save.
+memorable name, and save.
 
-### Connecting an App to a Database
+### Connect an app to a KV database
 
-Just like with any other [databases] engine, once you have a database instance
-you can assign it to your apps. From the database instances list, click "Assign"
-next to your database instance and select the app from the dropdown.
+Once you have a database instance you can assign it to an app. From the database
+instances list, click "Assign" next to the database you wish to use and select
+the app from the dropdown.
 
-Deno Deploy automatically creates separate databases for each timeline. This
-ensures your production data stays safe while developing and testing. You can
-monitor the provisioning process and watch the status change to "Connected". If
-there are any errors, use the "Fix" button to retry.
+Deno Deploy automatically creates a separate database for each timeline. This
+keeps your production data safe while you develop and test. You can monitor
+provisioning and watch the status change to "Connected." If any errors occur,
+click "Fix" to retry.
 
 ## Using Deno KV in Your Code
 
-### Zero Configuration Required
-
-Once you've assigned a database to your app, connecting to it from your code is
-simple. Deno Deploy takes care of setting up the connection to the right
-database according to environment being queried.
+Once you've assigned a database to your app, connecting from code is simple.
+Deno Deploy sets up the connection to the correct database based on the current
+environment.
 
 ### Example
 
@@ -58,38 +56,33 @@ Deno.serve(async () => {
 For detailed information about Deno KV and its features, see the
 [Deno KV documentation][Deno KV].
 
-## Data distribution
+## Un-assigning a KV database
 
-Deno KV databases are replicated across at least 3 data centers in the primary
-region, North Virginia (us-east4). Once a write operation is committed, its
-mutations are persistently stored in a quorum of data centers within the primary
-region. Cross-region replication is currently not available.
+If you remove a database assignment from an app, the app will no longer be able
+to access that database. However, the database itself and its data will remain
+intact and can be reassigned to another app or the same app at a later time.
+Hover over the name of the assigned app in the databases list and click the
+'remove app assignment' icon to un-assign it.
 
-## Frequently Asked Questions
+## Data Distribution
 
-**Q: How is data stored during local development?**
+Deno KV databases are replicated across at least three data centers in the
+primary region, Northern Virginia (us-east4). Once a write operation is
+committed, its mutations are durably stored in a quorum of data centers within
+the primary region. Cross-region replication is not currently available.
 
-In your local development environment, data is maintained in memory. No database
-needs to be created or allocated prior to using the KV APIs in local
-development, and your KV code can be consistent between environments.
+## Data storage
 
-**Q: What happens to my data when I remove an app assignment?**
+In local development, data is kept in memory. You do not need to create or
+allocate a database before using the KV APIs locally, and your KV code remains
+consistent across environments.
 
-The data in the databases remain on the servers. To recover or delete the data
-in these databases, please [contact Deno support](../support).
+## Deleting a database instance
 
-**Q: Can I use the same database for multiple environments?**
+Click "Delete" on the Deno KV entry in the database instances list. Unlike other
+database engines, this action deletes all existing Deno KV databases and their
+data. Be sure to back up your data before proceeding.
 
-This is currently not supported. If you are interested in this use case, please
-[contact Deno support](../support).
-
-**Q: How do I delete a database instance?**
-
-Click "Delete" on the Deno KV entry in the database instances list. Unlike with
-the rest of database engines, this action will delete all the existing Deno KV
-databases and their data. Please make sure to backup your data before
-proceeding.
-
-[Deno KV]: /kv/
-[databases]: ./databases.md
-[timelines]: ./timelines.md
+[Deno KV]: /deploy/kv/
+[databases]: /deploy/databases/
+[timelines]: /deploy/timelines/

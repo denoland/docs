@@ -2,6 +2,7 @@
 title: "Scheduling cron tasks"
 oldUrl:
   - /kv/manual/cron/
+  - /deploy/kv/manual/cron/
 ---
 
 :::info Legacy Documentation

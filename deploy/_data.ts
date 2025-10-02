@@ -85,6 +85,29 @@ export const sidebar = [
     ],
   },
   {
+    title: "KV",
+    items: [
+      { title: "Overview", href: "/deploy/kv/" },
+      { title: "Key space", href: "/deploy/kv/key_space/" },
+      { title: "Operations", href: "/deploy/kv/operations/" },
+      {
+        title: "Key expiration",
+        href: "/deploy/kv/key_expiration/",
+      },
+      {
+        title: "Secondary indexes",
+        href: "/deploy/kv/secondary_indexes/",
+      },
+      { title: "Transactions", href: "/deploy/kv/transactions/" },
+      { title: "Node", href: "/deploy/kv/node/" },
+      {
+        title: "Data modeling",
+        href: "/deploy/kv/data_modeling_typescript/",
+      },
+      { title: "Backup", href: "/deploy/kv/backup/" },
+    ],
+  },
+  {
     title: "Policies and Limits",
     items: [
       {

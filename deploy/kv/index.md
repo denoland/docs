@@ -6,7 +6,7 @@ oldUrl:
   - /runtime/manual/runtime/kv/
 ---
 
-**Deno KV** is a
+Deno KV is a
 [key-value database](https://en.wikipedia.org/wiki/Key%E2%80%93value_database)
 built directly into the Deno runtime, available in the
 [`Deno.Kv` namespace](https://docs.deno.com/api/deno/~/Deno.Kv). It can be used
