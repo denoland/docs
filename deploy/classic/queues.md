@@ -117,8 +117,9 @@ kv.listenQueue((msg: unknown) => {
 
 ## Queue API with KV atomic transactions
 
-You can combine the queue API with [KV atomic transactions](/deploy/kv/transactions/) to
-atomically enqueue messages and modify keys in the same transaction.
+You can combine the queue API with
+[KV atomic transactions](/deploy/kv/transactions/) to atomically enqueue
+messages and modify keys in the same transaction.
 
 ```ts title="kv_transaction_example.ts"
 const kv = await Deno.openKv();
