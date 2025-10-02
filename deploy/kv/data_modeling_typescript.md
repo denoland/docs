@@ -2,6 +2,7 @@
 title: "Data Modeling in TypeScript"
 oldUrl:
   - /kv/manual/data_modeling_typescript/
+  - /deploy/kv/manual/data_modeling_typescript/
 ---
 
 In TypeScript applications, it is usually desirable to create strongly-typed,

@@ -4,6 +4,7 @@ oldUrl:
   - /kv/
   - /kv/manual/
   - /runtime/manual/runtime/kv/
+  - /deploy/kv/manual/
 ---
 
 Deno KV is a

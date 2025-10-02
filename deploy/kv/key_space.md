@@ -3,6 +3,7 @@ title: "Key Space"
 oldUrl:
   - /runtime/manual/runtime/kv/key_space/
   - /kv/manual/key_space/
+  - /deploy/kv/manual/key_space/
 ---
 
 <deno-admonition></deno-admonition>

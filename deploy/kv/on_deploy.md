@@ -3,6 +3,7 @@ title: "KV on Deno Deploy"
 oldUrl:
   - /deploy/manual/kv/
   - /kv/manual/on_deploy/
+  - /deploy/kv/manual/on_deploy/
 ---
 
 :::info Legacy Documentation
