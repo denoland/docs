@@ -3,6 +3,7 @@ title: "Operations"
 oldUrl:
   - /runtime/manual/runtime/kv/operations/
   - /kv/manual/operations/
+  - /deploy/kv/manual/operations/
 ---
 
 The Deno KV API provides a set of operations that can be performed on the key

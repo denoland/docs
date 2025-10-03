@@ -3,6 +3,7 @@ title: "Secondary Indexes"
 oldUrl:
   - /runtime/manual/runtime/kv/secondary_indexes
   - /kv/manual/secondary_indexes
+  - /deploy/kv/manual/secondary_indexes/
 ---
 
 Key-value stores like Deno KV organize data as collections of key-value pairs,

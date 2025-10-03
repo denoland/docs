@@ -2,6 +2,7 @@
 title: "Scheduling cron tasks"
 oldUrl:
   - /kv/manual/cron/
+  - /deploy/kv/manual/cron/
 ---
 
 :::info Legacy Documentation
@@ -76,7 +77,7 @@ Any nested `Deno.cron` definitions (e.g. inside
 in an error or will be ignored.
 
 If you need to schedule tasks dynamically during your Deno program execution,
-you can use the [Deno Queues](./queue_overview) APIs.
+you can use the [Deno Queues](/deploy/classic/queues/) APIs.
 
 ### Time zone
 

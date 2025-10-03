@@ -2,15 +2,8 @@
 title: "Data Modeling in TypeScript"
 oldUrl:
   - /kv/manual/data_modeling_typescript/
+  - /deploy/kv/manual/data_modeling_typescript/
 ---
-
-:::info Legacy Documentation
-
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-<a href="/deploy/">Deno Deploy</a> platform.
-
-:::
 
 In TypeScript applications, it is usually desirable to create strongly-typed,
 well-documented objects to contain the data that your application operates on.
