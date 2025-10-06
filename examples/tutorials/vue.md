@@ -22,7 +22,7 @@ You can see a live version of the app on
 :::info Deploy your own
 
 Want to skip the tutorial and deploy the finished app right now? Click the
-button below to instantly deploy your own copy of the complete SvelteKit
+button below to instantly deploy your own copy of the complete Vue.js
 dinosaur app to Deno Deploy. You'll get a live, working application that you can
 customize and modify as you learn!
 
