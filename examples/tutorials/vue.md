@@ -22,8 +22,8 @@ You can see a live version of the app on
 :::info Deploy your own
 
 Want to skip the tutorial and deploy the finished app right now? Click the
-button below to instantly deploy your own copy of the complete SvelteKit
-dinosaur app to Deno Deploy. You'll get a live, working application that you can
+button below to instantly deploy your own copy of the complete Vue.js dinosaur
+app to Deno Deploy. You'll get a live, working application that you can
 customize and modify as you learn!
 
 [![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-vue&mode=dynamic&entrypoint=api/main.ts&build=deno+task+build&install=deno+install)
