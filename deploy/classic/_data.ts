@@ -19,7 +19,7 @@ export const sidebar = [
           { title: "Regions", href: "/deploy/classic/regions/" },
           {
             title: "Pricing and limits",
-            href: "/deploy/pricing-and-limits/",
+            href: "/deploy/pricing_and_limits/",
           },
         ],
       },

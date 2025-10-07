@@ -116,17 +116,17 @@ export const sidebar = [
       },
       {
         title: "Acceptable Use Policy",
-        href: "/deploy/acceptable-use-policy/",
+        href: "/deploy/acceptable_use_policy/",
       },
       {
         title: "Fulfillment Policy",
-        href: "/deploy/fulfillment-policy/",
+        href: "/deploy/fulfillment_policy/",
       },
-      { title: "Privacy Policy", href: "/deploy/privacy-policy/" },
+      { title: "Privacy Policy", href: "/deploy/privacy_policy/" },
       { title: "Security", href: "/deploy/security/" },
       {
         title: "Terms and Conditions",
-        href: "/deploy/terms-and-conditions/",
+        href: "/deploy/terms_and_conditions/",
       },
     ],
   },

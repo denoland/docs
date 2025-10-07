@@ -10,7 +10,7 @@ of these limits, [please reach out](mailto:deploy@deno.com).
 
 No uptime guarantees are provided during the initial public beta for Deno
 Deploy. Access to the service will be controlled by
-[our acceptable use policy](/deploy/acceptable-use-policy). Any user we deem to
+[our acceptable use policy](/deploy/acceptable_use_policy). Any user we deem to
 be in violation of this policy, runs the risk of having their account
 terminated.
 
@@ -27,7 +27,7 @@ Applications have a maximum memory allocation of 512MB
 
 We do not set a limit for the number of upload requests your application may
 handle as long as your application is within
-[our acceptable use policy](/deploy/acceptable-use-policy).
+[our acceptable use policy](/deploy/acceptable_use_policy).
 
 ## TLS proxying
 
@@ -41,4 +41,4 @@ connection to port 443, please use
 This restriction is in place because connecting to port 443 without terminating
 TLS is frequently used in TLS-over-TLS proxies, which are prohibited on Deno
 Deploy Classic as per
-[our acceptable use policy](/deploy/acceptable-use-policy).
+[our acceptable use policy](/deploy/acceptable_use_policy).
