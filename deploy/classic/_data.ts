@@ -67,7 +67,7 @@ export const sidebar = [
     items: [
       {
         title: "Deno KV",
-        href: "/deploy/kv/manual/on_deploy/",
+        href: "/deploy/classic/kv_on_deploy/",
       },
       {
         title: "Third-Party Databases",
