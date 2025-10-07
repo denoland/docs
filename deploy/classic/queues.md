@@ -2,7 +2,16 @@
 title: "Using Queues"
 oldUrl:
   - /kv/manual/queue_overview/
+  - /deploy/kv/manual/queue_overview/
 ---
+
+:::info Legacy Documentation
+
+You are viewing legacy documentation for Deno Deploy Classic. We recommend
+migrating to the new
+<a href="/deploy/">Deno Deploy</a> platform.
+
+:::
 
 <deno-admonition></deno-admonition>
 
@@ -108,8 +117,9 @@ kv.listenQueue((msg: unknown) => {
 
 ## Queue API with KV atomic transactions
 
-You can combine the queue API with [KV atomic transactions](./transactions) to
-atomically enqueue messages and modify keys in the same transaction.
+You can combine the queue API with
+[KV atomic transactions](/deploy/kv/transactions/) to atomically enqueue
+messages and modify keys in the same transaction.
 
 ```ts title="kv_transaction_example.ts"
 const kv = await Deno.openKv();
@@ -160,8 +170,8 @@ It's important to design your applications such that duplicate messages are
 handled correctly.
 
 You may use queues in combination with
-[KV atomic transactions](/deploy/kv/manual/transactions) primitives to ensure
-that your queue handler KV updates are performed exactly once per message. See
+[KV atomic transactions](/deploy/kv/transactions) primitives to ensure that your
+queue handler KV updates are performed exactly once per message. See
 [Queue API with KV atomic transactions](#queue-api-with-kv-atomic-transactions).
 
 ### Automatic retries
@@ -230,9 +240,7 @@ there's no need to wait for the underlying task to be completed before returning
 a response.
 
 In these cases, you can offload work to a queue to keep your web application
-responsive and send immediate feedback to clients. To see an example of this use
-case in action, check out our
-[webhook processing example](../tutorials/webhook_processor.md).
+responsive and send immediate feedback to clients.
 
 ### Scheduling work for the future
 
@@ -242,6 +250,3 @@ to send a notification to a new customer a day after they have placed an order
 to send them a satisfaction survey. You can schedule a queue message to be
 delivered 24 hours into the future, and set up a listener to send out the
 notification at that time.
-
-To see an example of scheduling a notification to go out in the future, check
-out our [notification example](../tutorials/schedule_notification.md).

@@ -9,9 +9,9 @@ timeline. One of the revisions (usually the most recent one) is the "active"
 revision, which is the one that is currently serving traffic. The active
 revision receives traffic on all URLs that are assigned to the timeline.
 
-Each timeline is associated with a [context](./env-vars-and-contexts.md), which
-determines which environment variables are available to the code running in that
-timeline.
+Each timeline is associated with a
+[context](/deploy/reference/env_vars_and_contexts/), which determines which
+environment variables are available to the code running in that timeline.
 
 By default, there are multiple timelines set up for each application:
 

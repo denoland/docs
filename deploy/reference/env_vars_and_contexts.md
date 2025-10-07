@@ -1,6 +1,7 @@
 ---
 title: Environment Variables and Contexts
 description: "Guide to managing environment variables and contexts in Deno Deploy, including variable types, creation, editing, and accessing them in your code."
+oldUrl: /deploy/reference/env-vars-and-contexts/
 ---
 
 Environment variables in Deno Deploy allow you to configure your application
@@ -125,7 +126,7 @@ Environment variables have the following limits:
   - `OTEL_`
 - Environment variable values can be at most 16 KB (16,384 bytes) long.
 - Environment variable keys can not be any of these keys. Instead, use
-  [Cloud Connections](/deploy/reference/cloud-connections)
+  [Cloud Connections](/deploy/reference/cloud_connections)
   - `AWS_ROLE_ARN`
   - `AWS_WEB_IDENTITY_TOKEN_FILE`
   - `GCP_WORKLOAD_PROVIDER_ID`

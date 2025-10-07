@@ -2,18 +2,11 @@
 title: "Backups"
 oldUrl:
   - /kv/manual/backup/
+  - /deploy/kv/manual/backup/
 ---
 
-:::info Legacy Documentation
-
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-<a href="/deploy/">Deno Deploy</a> platform.
-
-:::
-
-KV databases hosted on Deno Deploy Classic can be continuously backed up to your
-own S3-compatible storage buckets. This is in addition to the replication and
+KV databases hosted on Deno Deploy can be continuously backed up to your own
+S3-compatible storage buckets. This is in addition to the replication and
 backups that we internally perform for all data stored in hosted Deno KV
 databases to ensure high availability and data durability.
 

@@ -103,7 +103,7 @@ description: "Listing notable progress in the development and evolution of Deno 
     you through the process of connecting your app to AWS or GCP.
   - You can use the standard AWS and GCP SDKs to access the services - no need
     to re-write any code to use a different API.
-  - [Learn more in the documentation.](/deploy/reference/cloud-connections/)
+  - [Learn more in the documentation.](/deploy/reference/cloud_connections/)
 - The application metrics page now shows more metrics, including V8 memory
   metrics such as heap size and garbage collection stats, as well as process
   level metrics such as CPU usage and overall memory usage.

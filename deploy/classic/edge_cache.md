@@ -1,5 +1,7 @@
 ---
 title: "Edge Cache"
+oldUrl:
+  - /deploy/classic/edge-cache/
 ---
 
 :::info Legacy Documentation

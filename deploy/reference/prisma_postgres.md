@@ -1,6 +1,7 @@
 ---
 title: Prisma Postgres
 description: Provision and manage Prisma Postgres databases for your Deno Deploy applications.
+oldUrl: /deploy/reference/prisma-postgres/
 ---
 
 Prisma Postgres is a serverless PostgreSQL database that is instantly responsive

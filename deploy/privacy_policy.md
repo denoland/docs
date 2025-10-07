@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
-oldUrl: /deploy/classic/privacy-policy
 description: "Deno's Privacy Policy"
+oldUrl: /deploy/classic/privacy-policy
 ---
 
 **DENO PRIVACY POLICY** 09 September 2024
@@ -32,7 +32,7 @@ products and services constitutes your acknowledgment and/or consent to the
 practices described in this Policy.
 
 This Privacy Policy incorporates
-[Deno’s Terms and Conditions](https://docs.deno.com/deploy/terms-and-conditions/)
+[Deno’s Terms and Conditions](https://docs.deno.com/deploy/terms_and_conditions/)
 (the “Terms”). Capitalized terms that are not defined in the Privacy Policy have
 the meaning given to them in the Terms.
 

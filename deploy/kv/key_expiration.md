@@ -2,6 +2,7 @@
 title: "Key Expiration (TTL for keys)"
 oldUrl:
   - /kv/manual/key_expiration/
+  - /deploy/kv/manual/key_expiration/
 ---
 
 <deno-admonition></deno-admonition>

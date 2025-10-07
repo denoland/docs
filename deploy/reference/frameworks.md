@@ -18,7 +18,7 @@ the build settings.
 
 Feel like a framework is missing? Let us know in the
 [Deno Deploy Discord channel](https://discord.gg/deno) or
-[contact Deno support](../support).
+[contact Deno support](/deploy/support/).
 
 ## Supported frameworks
 

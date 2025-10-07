@@ -4,15 +4,16 @@ oldUrl:
   - /kv/
   - /kv/manual/
   - /runtime/manual/runtime/kv/
+  - /deploy/kv/manual/
 ---
 
-**Deno KV** is a
+Deno KV is a
 [key-value database](https://en.wikipedia.org/wiki/Key%E2%80%93value_database)
 built directly into the Deno runtime, available in the
 [`Deno.Kv` namespace](https://docs.deno.com/api/deno/~/Deno.Kv). It can be used
 for many kinds of data storage use cases, but excels at storing simple data
 structures that benefit from very fast reads and writes. Deno KV is available in
-the Deno CLI and on [Deno Deploy](./on_deploy).
+the Deno CLI and on [Deno Deploy](/deploy/reference/deno_kv/).
 
 :::caution
 
@@ -237,14 +238,10 @@ Learn more about [using Deno KV watch here](./operations#watch).
 
 ## Production usage
 
-Deno KV is available for use in live applications on [Deno Deploy](./on_deploy).
-In production, Deno KV is backed by
+Deno KV is available for use in live applications on
+[Deno Deploy](/deploy/reference/deno_kv/). In production, Deno KV is backed by
 [FoundationDB](https://www.foundationdb.org/), the open source key-value store
 created by Apple.
-
-**No additional configuration is necessary** to run your Deno programs that use
-KV on Deploy - a new Deploy database will be provisioned for you when required
-by your code. Learn more about Deno KV on Deno Deploy [here](./on_deploy).
 
 ## Testing
 
