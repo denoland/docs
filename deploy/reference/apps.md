@@ -31,7 +31,7 @@ detailed build configuration information, see the
 
 You can add environment variables during app creation by clicking "Edit
 Environment Variables". For more details on environment variables, see the
-[Environment Variables and Contexts](/deploy/reference/env-vars-and-contexts/)
+[Environment Variables and Contexts](/deploy/reference/env_vars_and_contexts/)
 documentation.
 
 ## Renaming an application

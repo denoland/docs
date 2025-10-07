@@ -32,7 +32,7 @@ export const sidebar = [
       },
       {
         title: "Environment Variables and Contexts",
-        href: "/deploy/reference/env-vars-and-contexts/",
+        href: "/deploy/reference/env_vars_and_contexts/",
       },
       {
         title: "Timelines",
@@ -48,7 +48,7 @@ export const sidebar = [
       },
       {
         title: "Deno KV",
-        href: "/deploy/reference/deno-kv/",
+        href: "/deploy/reference/deno_kv/",
       },
       {
         title: "Databases",
@@ -56,7 +56,7 @@ export const sidebar = [
       },
       {
         title: "Cloud Connections",
-        href: "/deploy/reference/cloud-connections/",
+        href: "/deploy/reference/cloud_connections/",
       },
       {
         title: "OIDC",
@@ -85,6 +85,29 @@ export const sidebar = [
     ],
   },
   {
+    title: "KV",
+    items: [
+      { title: "Overview", href: "/deploy/kv/" },
+      { title: "Key space", href: "/deploy/kv/key_space/" },
+      { title: "Operations", href: "/deploy/kv/operations/" },
+      {
+        title: "Key expiration",
+        href: "/deploy/kv/key_expiration/",
+      },
+      {
+        title: "Secondary indexes",
+        href: "/deploy/kv/secondary_indexes/",
+      },
+      { title: "Transactions", href: "/deploy/kv/transactions/" },
+      { title: "Node", href: "/deploy/kv/node/" },
+      {
+        title: "Data modeling",
+        href: "/deploy/kv/data_modeling_typescript/",
+      },
+      { title: "Backup", href: "/deploy/kv/backup/" },
+    ],
+  },
+  {
     title: "Policies and Limits",
     items: [
       {
@@ -93,17 +116,17 @@ export const sidebar = [
       },
       {
         title: "Acceptable Use Policy",
-        href: "/deploy/acceptable-use-policy/",
+        href: "/deploy/acceptable_use_policy/",
       },
       {
         title: "Fulfillment Policy",
-        href: "/deploy/fulfillment-policy/",
+        href: "/deploy/fulfillment_policy/",
       },
-      { title: "Privacy Policy", href: "/deploy/privacy-policy/" },
+      { title: "Privacy Policy", href: "/deploy/privacy_policy/" },
       { title: "Security", href: "/deploy/security/" },
       {
         title: "Terms and Conditions",
-        href: "/deploy/terms-and-conditions/",
+        href: "/deploy/terms_and_conditions/",
       },
     ],
   },

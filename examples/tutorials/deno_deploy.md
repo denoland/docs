@@ -156,5 +156,5 @@ Deno Deploy provides comprehensive observability tools:
    Astro, and other frameworks
 3. Learn about [caching strategies](/deploy/reference/caching/) to improve
    performance
-4. Set up different [environments](/deploy/reference/env-vars-and-contexts/) for
+4. Set up different [environments](/deploy/reference/env_vars_and_contexts/) for
    development and production

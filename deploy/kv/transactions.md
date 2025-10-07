@@ -3,6 +3,7 @@ title: "Transactions"
 oldUrl:
   - /runtime/manual/runtime/kv/transactions/
   - /kv/manual/transactions/
+  - /deploy/kv/manual/transactions/
 ---
 
 The Deno KV store utilizes _optimistic concurrency control transactions_ rather

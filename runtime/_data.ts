@@ -227,11 +227,11 @@ export const sidebar = [
         ],
       },
       {
-        title: "TS Config Migration",
+        title: "Configuring TypeScript",
         href: "/runtime/reference/ts_config_migration/",
       },
       {
-        title: "Continuous Integration",
+        title: "Continuous integration",
         href: "/runtime/reference/continuous_integration/",
       },
       {
@@ -255,7 +255,7 @@ export const sidebar = [
         href: "/runtime/reference/bundling/",
       },
       {
-        title: "Lint Plugins",
+        title: "Lint plugins",
         href: "/runtime/reference/lint_plugins/",
       },
       {
@@ -263,7 +263,7 @@ export const sidebar = [
         href: "/runtime/reference/wasm/",
       },
       {
-        title: "Migration Guide",
+        title: "Migration guide",
         href: "/runtime/reference/migration_guide/",
       },
       {

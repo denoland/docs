@@ -108,6 +108,6 @@ than Node.js.
 
 Environment variables configured for the "Build" context are available during
 builds, but variables from "Production" or "Development" contexts are not.
-[Learn more about environment variables](./env-vars-and-contexts/).
+[Learn more about environment variables](/deploy/reference/env_vars_and_contexts/).
 
 Builders have 8 GB of storage available during the build process.
