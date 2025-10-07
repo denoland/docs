@@ -18,8 +18,8 @@ required.
 ### Add a KV database
 
 Navigate to your organization dashboard and click "Databases" in the navigation
-bar. Click "Provision Database", choose Deno KV as the database engine, provide a
-memorable name, and save.
+bar. Click "Provision Database", choose Deno KV as the database engine, provide
+a memorable name, and save.
 
 ### Connect an app to a KV database
 
