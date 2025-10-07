@@ -1,6 +1,7 @@
 ---
 title: Deno KV
 description: Use Deno KV in your applications with a dedicated database per timeline
+oldUrl: /deploy/reference/deno-kv/
 ---
 
 [Deno KV] is a Key Value database supported in Deno Deploy as a database engine

@@ -32,7 +32,7 @@ export const sidebar = [
       },
       {
         title: "Environment Variables and Contexts",
-        href: "/deploy/reference/env-vars-and-contexts/",
+        href: "/deploy/reference/env_vars_and_contexts/",
       },
       {
         title: "Timelines",
@@ -48,7 +48,7 @@ export const sidebar = [
       },
       {
         title: "Deno KV",
-        href: "/deploy/reference/deno-kv/",
+        href: "/deploy/reference/deno_kv/",
       },
       {
         title: "Databases",
@@ -56,7 +56,7 @@ export const sidebar = [
       },
       {
         title: "Cloud Connections",
-        href: "/deploy/reference/cloud-connections/",
+        href: "/deploy/reference/cloud_connections/",
       },
       {
         title: "OIDC",

@@ -13,7 +13,7 @@ built directly into the Deno runtime, available in the
 [`Deno.Kv` namespace](https://docs.deno.com/api/deno/~/Deno.Kv). It can be used
 for many kinds of data storage use cases, but excels at storing simple data
 structures that benefit from very fast reads and writes. Deno KV is available in
-the Deno CLI and on [Deno Deploy](/deploy/reference/deno-kv/).
+the Deno CLI and on [Deno Deploy](/deploy/reference/deno_kv/).
 
 :::caution
 
@@ -239,7 +239,7 @@ Learn more about [using Deno KV watch here](./operations#watch).
 ## Production usage
 
 Deno KV is available for use in live applications on
-[Deno Deploy](/deploy/reference/deno-kv/). In production, Deno KV is backed by
+[Deno Deploy](/deploy/reference/deno_kv/). In production, Deno KV is backed by
 [FoundationDB](https://www.foundationdb.org/), the open source key-value store
 created by Apple.
 
