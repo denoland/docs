@@ -14,7 +14,8 @@ Deno Deploy is an OIDC provider. Every running application of Deno Deploy can be
 issued short-lived JWT tokens that are signed by Deno Deploy. These tokens
 contain information about the application, such as the organization and
 application ids and slugs, the context in which an application is executing, and
-the running revision ID. Learn more about [OIDC in Deno Deploy](/deploy/reference/oidc).
+the running revision ID. Learn more about
+[OIDC in Deno Deploy](/deploy/reference/oidc).
 
 By sending these tokens to AWS or GCP, one can exchange them for short-lived AWS
 or GCP credentials that can be used to access cloud resources such as AWS S3
