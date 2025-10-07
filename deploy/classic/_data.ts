@@ -58,7 +58,7 @@ export const sidebar = [
       },
       {
         title: "Edge cache",
-        href: "/deploy/classic/edge-cache/",
+        href: "/deploy/classic/edge_cache.md/",
       },
     ],
   },

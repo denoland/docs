@@ -1,7 +1,7 @@
 ---
 title: "Terms and Conditions"
 description: "Deno Terms and Conditions"
-oldUrl: "/deploy/classic/terms-and-conditions"
+oldUrl: /deploy/classic/terms-and-conditions
 ---
 
 **DENO TERMS AND CONDITIONS** 09 September 2024
