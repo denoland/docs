@@ -58,7 +58,7 @@ export const sidebar = [
       },
       {
         title: "Edge cache",
-        href: "/deploy/classic/edge_cache.md/",
+        href: "/deploy/classic/edge-cache/",
       },
     ],
   },
@@ -79,7 +79,7 @@ export const sidebar = [
           { title: "Neon Postgres", href: "/deploy/classic/neon-postgres/" },
           {
             title: "Prisma Postgres",
-            href: "/deploy/classic/prisma_postgres/",
+            href: "/deploy/classic/prisma-postgres/",
           },
         ],
       },
