@@ -68,21 +68,13 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
       >
         <div class="w-full">
           <article class="mx-auto">
-            {hasBreadcrumbs && (
-              <data.comp.Breadcrumbs
-                title={data.title!}
-                sidebar={sidebar}
-                url={data.url}
-              />
-            )}
-
             <data.comp.TableOfContentsMobile toc={data.toc} data={data} />
 
             <div
               data-color-mode="auto"
               data-light-theme="light"
               data-dark-theme="dark"
-              class="markdown-body mt-4 sm:mt-6"
+              class="markdown-body mt-6 sm:mt-6"
             >
               {!(isReference && !isApiLandingPage) && (
                 <h1
