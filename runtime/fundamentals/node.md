@@ -623,7 +623,7 @@ As of Deno 2.0, npm packages using Node-API addons **are only supported when a
 In case of misconfiguration Deno will provide hints how the situation can be
 resolved.
 
-Like with all native FFI, you must also pass the `--allow-ffi` flag to grant Node-API addons explicit permission to run outside of the runtime sandbox. Review the [Security and permissions](</runtime/fundamentals/security/#ffi-(foreign-function-interface)>) documentation for more information.
+Like with all native FFI, you must also pass the `--allow-ffi` flag to grant Node-API addons explicit permission to run outside of the runtime sandbox. Review the [Security and permissions](/runtime/fundamentals/security/#ffi-(foreign-function-interface)) documentation for more information.
 
 ## Migrating from Node to Deno
 
