@@ -52,7 +52,7 @@ Deploy Classic. The below table compares the two versions of Deno Deploy.
 | Regions                         | 2                              | 6                                                                                                                                       |
 | Self hostable regions           | ✅ Supported                   | ❌ Not supported                                                                                                                        |
 
-## How to access EA
+## How to access Deno Deploy
 
 To begin using Deno Deploy:
 

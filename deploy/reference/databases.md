@@ -20,7 +20,7 @@ There are two ways to add data backends to your apps on the Databases page:
 - Link Database: Connect an existing external database (for example, a
   PostgreSQL server you run or a managed instance from a cloud provider).
 - Provision Database: Create and attach a managed data store from Deploy (Deno
-  KV today; Prisma Postgres is coming soon).
+  KV or Prisma Postgres).
 
 ### Adding a Database
 
@@ -49,9 +49,10 @@ populate the form fields.
 #### Provision a managed database
 
 - Click "Provision Database" to create a managed data store from Deploy.
-- Available today: Deno KV — a fast, globally distributed key‑value store built
-  for the edge.
-- Coming soon: Prisma Postgres provisioning.
+- Available today:
+  - Deno KV — a fast, globally distributed key‑value store built for the edge.
+  - Prisma Postgres - the world's most advanced open source relational database,
+    hosted by Prisma.
 
 ### Connecting an App to a Database
 
@@ -84,14 +85,14 @@ automatically connect to the correct database for your current environment.
 
 ### Automatic Environment Variables
 
-Deno Deploy automatically injects standard database environment variables into
-your app's runtime environment for linked PostgreSQL databases: `PGHOST`,
-`PGPORT`, `PGDATABASE` (automatically selected for your environment), `PGUSER`,
-`PGPASSWORD`, and `PGSSLMODE`. These variables follow standard conventions, so
-most database libraries automatically detect and use them without any
-configuration.
+For PostgreSQL databases (both linked and provisioned), Deno Deploy
+automatically injects standard database environment variables into your app's
+runtime environment: `PGHOST`, `PGPORT`, `PGDATABASE` (automatically selected
+for your environment), `PGUSER`, `PGPASSWORD`, `PGSSLMODE`, and `DATABASE_URL`.
+These variables follow standard conventions, so most database libraries
+automatically detect and use them without any configuration.
 
-### PostgreSQL Example (Link Database)
+### PostgreSQL Example
 
 Here's how to connect to PostgreSQL in your Deno Deploy app:
 
@@ -248,10 +249,12 @@ connection to ensure it still works before saving your changes.
 
 - Deno KV (Provision Database) — fast, globally distributed key‑value store
   built for the edge.
+- Prisma Postgres (Provision Database) — the world's most advanced open source
+  relational database, hosted by Prisma.
 - PostgreSQL (Link Database) — connect an existing external instance.
 
-Coming soon: Prisma Postgres (Provision Database). Additional engines such as
-MySQL, MongoDB, Redis, and more are planned for future releases.
+Coming soon: additional engines such as MySQL, MongoDB, Redis, and more are
+planned for future releases.
 
 ## Troubleshooting
 
