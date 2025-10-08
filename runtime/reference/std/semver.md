@@ -344,3 +344,8 @@ which is higher), nor less than the range (since <code>1.2.8</code> satisfies, w
 lower), and it also does not satisfy the range.</p>
 <p>If you want to know if a version satisfies or does not satisfy a range, use the
 <a href="/@std/semver@1.0.6/doc/~/satisfies" rel="nofollow"><code>satisfies</code></a> function.</p>
+
+<!-- custom:start -->
+<!-- Add persistent custom content below. This section is preserved across generations. -->
+
+<!-- custom:end -->

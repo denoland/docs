@@ -22,3 +22,8 @@ interfaces for building custom loggers.</p>
   <path d="M12 14v.01"></path>
 </svg>
 Important
+
+<!-- custom:start -->
+<!-- Add persistent custom content below. This section is preserved across generations. -->
+
+<!-- custom:end -->

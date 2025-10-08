@@ -385,3 +385,8 @@ assertEquals(fromFileUrl(&quot;file:///home/foo&quot;), &quot;\\home\\foo&quot;)
 </button><code></code></pre>
 <p>Functions for working with URLs can be found in
 <a href="https://github.com/denoland/std/blob/HEAD/./doc/posix/~" rel="nofollow">@std/path/posix</a>.</p>
+
+<!-- custom:start -->
+<!-- Add persistent custom content below. This section is preserved across generations. -->
+
+<!-- custom:end -->

@@ -17,8 +17,8 @@
  * Additionally generates an index page `runtime/reference/std/index.md` listing
  * all discovered packages with short description from the API list.
  *
- * Existing handcrafted pages (e.g. assert.md) are left untouched. If an override
- * exists with the same package name, it's appended after the overview.
+ * All pages are generated in place. To add persistent custom content, use
+ * the <!-- custom:start --> ... <!-- custom:end --> block or an override file.
  */
 
 // Using JSR std modules (available via deno.json imports mapping)
@@ -79,15 +79,7 @@ function deriveTitle(pkg: string): string {
 
 async function generatePackagePage(pkg: PackageSummary) {
   const { name, latestVersion } = pkg;
-  // Skip if a handcrafted page exists at std/<name>.md to avoid overwriting.
-  const handcraftedPath = join(STD_ROOT, `${name}.md`);
-  let handcraftedExists = false;
-  try {
-    const stat = await Deno.stat(handcraftedPath);
-    handcraftedExists = stat.isFile;
-  } catch (_) {
-    handcraftedExists = false;
-  }
+  // (Legacy skip logic removed; we always regenerate the page.)
 
   const docsUrl =
     `https://jsr.io/api/scopes/std/packages/${name}/versions/${latestVersion}/docs`;
@@ -129,19 +121,7 @@ async function generatePackagePage(pkg: PackageSummary) {
     // ignore
   }
 
-  if (handcraftedExists) {
-    // Append override content to handcrafted page if override exists & not already appended marker.
-    if (overrideContent) {
-      const original = await Deno.readTextFile(handcraftedPath);
-      if (!original.includes("<!-- std-override -->")) {
-        const merged =
-          `${original}\n\n<!-- std-override -->\n\n${overrideContent}\n`;
-        await Deno.writeTextFile(handcraftedPath, merged);
-        console.log(`➕ Appended override to handcrafted ${name}.md`);
-      }
-    }
-    return; // do not create generated file
-  }
+  // (Legacy handcrafted append removed.)
 
   if (!overviewHtml) {
     console.warn(`Skipping ${name} (no overview HTML)`);

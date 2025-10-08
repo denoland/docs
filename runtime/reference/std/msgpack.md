@@ -72,3 +72,8 @@ assertEquals(decoded, obj);
 <li>arrays of values of these types</li>
 <li>objects with string or number keys, and values of these types</li>
 </ul>
+
+<!-- custom:start -->
+<!-- Add persistent custom content below. This section is preserved across generations. -->
+
+<!-- custom:end -->

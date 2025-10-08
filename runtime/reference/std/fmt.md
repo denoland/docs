@@ -44,3 +44,8 @@ Runtime compatibility</h1>
 <a href="https://jsr.io/@std/fmt/doc/printf/~" rel="nofollow">printf</a> is mostly compatible with major
 runtimes, however some of features, such as <code>%v</code>, <code>%i</code> and <code>%I</code> format
 specifiers, are only available in Deno. See the API docs for details.</p>
+
+<!-- custom:start -->
+<!-- Add persistent custom content below. This section is preserved across generations. -->
+
+<!-- custom:end -->

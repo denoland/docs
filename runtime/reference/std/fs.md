@@ -40,3 +40,8 @@ await move(&quot;example_copy.txt&quot;, &quot;subdir/example_copy.txt&quot;);
   <path d="M5 12l5 5l10 -10"></path>
 </svg>
 </button><code></code></pre>
+
+<!-- custom:start -->
+<!-- Add persistent custom content below. This section is preserved across generations. -->
+
+<!-- custom:end -->

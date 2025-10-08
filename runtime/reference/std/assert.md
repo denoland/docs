@@ -34,3 +34,9 @@ assert(false); // Throws `AssertionError`
   <path d="M5 12l5 5l10 -10"></path>
 </svg>
 </button><code></code></pre>
+
+<!-- custom:start -->
+## Extra Notes
+
+Your persistent content goes here.
+<!-- custom:end -->

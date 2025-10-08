@@ -79,3 +79,8 @@ Limitations</h2>
 <ul>
 <li><code>binary</code> type is currently not stable.</li>
 </ul>
+
+<!-- custom:start -->
+<!-- Add persistent custom content below. This section is preserved across generations. -->
+
+<!-- custom:end -->

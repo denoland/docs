@@ -52,3 +52,8 @@ assertEquals([...tree], [1, 3, 4, 6, 10, 13, 14]);
   <path d="M5 12l5 5l10 -10"></path>
 </svg>
 </button><code></code></pre>
+
+<!-- custom:start -->
+<!-- Add persistent custom content below. This section is preserved across generations. -->
+
+<!-- custom:end -->
