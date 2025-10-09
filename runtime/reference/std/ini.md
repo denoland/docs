@@ -62,57 +62,7 @@ White space padding and lines starting with '#', ';', or '//' will be treated as
 <span class="pl-s">[Section #1]</span>
 <span class="pl-s">Section Value=42</span>
 <span class="pl-s">Section Date=1977-05-25`</span>);
-</code><button class="copyButton" data-copy="import * as ini from &quot;@std/ini&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-const iniFile = `# Example configuration file
-Global Key=Some data here
-
-[Section #1]
-Section Value=42
-Section Date=1977-05-25`;
-
-const parsed = ini.parse(iniFile, {
-  reviver(key, value, section) {
-    if (section === &quot;Section #1&quot;) {
-      if (key === &quot;Section Value&quot;) return Number(value);
-      if (key === &quot;Section Date&quot;) return new Date(value);
-    }
-    return value;
-  },
-});
-
-assertEquals(parsed, {
-  &quot;Global Key&quot;: &quot;Some data here&quot;,
-  &quot;Section #1&quot;: {
-    &quot;Section Value&quot;: 42,
-    &quot;Section Date&quot;: new Date(&quot;1977-05-25T00:00:00.000Z&quot;),
-  },
-});
-
-const text = ini.stringify(parsed, {
-  replacer(key, value, section) {
-    if (section === &quot;Section #1&quot; &amp;&amp; key === &quot;Section Date&quot;) {
-      return (value as Date).toISOString().split(&quot;T&quot;)[0];
-    }
-    return value;
-  },
-});
-
-assertEquals(text, `Global Key=Some data here
-[Section #1]
-Section Value=42
-Section Date=1977-05-25`);
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>Optionally, <a href="/@std/ini@0.225.2/doc/~/IniMap" rel="nofollow"><code>IniMap</code></a> may be used for finer INI handling. Using this class will permit preserving
 comments, accessing values like a map, iterating over key/value/section entries, and more.</p>
 <pre class="highlight"><code><span class="pl-k">import</span> { <span class="pl-smi">IniMap</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/ini/ini-map"</span>;
@@ -130,31 +80,7 @@ ini.<span class="pl-en">set</span>(<span class="pl-s">'keyA'</span>, <span class
     <span class="pl-c1">keyA</span>: <span class="pl-c1">100</span>
   }
 });
-</code><button class="copyButton" data-copy="import { IniMap } from &quot;@std/ini/ini-map&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-const ini = new IniMap();
-ini.set(&quot;section1&quot;, &quot;keyA&quot;, 100);
-assertEquals(ini.toString(), `[section1]
-keyA=100`);
-
-ini.set('keyA', 25)
-assertEquals(ini.toObject(), {
-  keyA: 25,
-  section1: {
-    keyA: 100
-  }
-});
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>The reviver and replacer APIs can be used to extend the behavior of IniMap, such as adding support
 for duplicate keys as if they were arrays of values.</p>
 <pre class="highlight"><code><span class="pl-k">import</span> { <span class="pl-smi">IniMap</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/ini/ini-map"</span>;
@@ -197,58 +123,8 @@ ini.<span class="pl-en">parse</span>(iniFile, (key, value, section) <span class=
 });
 
 <span class="pl-en">assertEquals</span>(result, iniFile);
-</code><button class="copyButton" data-copy="import { IniMap } from &quot;@std/ini/ini-map&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-const iniFile = `# Example of key/value arrays
-[section1]
-key1=This key
-key1=is non-standard
-key1=but can be captured!`;
-
-const ini = new IniMap({ assignment: &quot;=&quot;, deduplicate: true });
-ini.parse(iniFile, (key, value, section) => {
-  if (section) {
-    if (ini.has(section, key)) {
-      const exists = ini.get(section, key);
-      if (Array.isArray(exists)) {
-        exists.push(value);
-        return exists;
-      } else {
-        return [exists, value];
-      }
-    }
-  }
-  return value;
-});
-
-assertEquals(
-  ini.get(&quot;section1&quot;, &quot;key1&quot;),
-  [&quot;This key&quot;, &quot;is non-standard&quot;, &quot;but can be captured!&quot;]
-);
-
-const result = ini.toString((key, value) => {
-  if (Array.isArray(value)) {
-    return value.join(
-      `${ini.formatting.lineBreak}${key}${ini.formatting.assignment}`,
-    );
-  }
-  return value;
-});
-
-assertEquals(result, iniFile);
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 
 <!-- custom:start -->
 <!-- Add persistent custom content below. This section is preserved across generations. -->
-
 <!-- custom:end -->

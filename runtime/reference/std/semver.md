@@ -40,43 +40,7 @@ stability: stable
 
 <span class="pl-en">assertEquals</span>(<span class="pl-en">greaterThan</span>(s0, s1), <span class="pl-c1">false</span>);
 <span class="pl-en">assertEquals</span>(<span class="pl-en">lessThan</span>(s0, s1), <span class="pl-c1">true</span>);
-</code><button class="copyButton" data-copy="import {
-  parse,
-  parseRange,
-  greaterThan,
-  lessThan,
-  format
-} from &quot;@std/semver&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-const semver = parse(&quot;1.2.3&quot;);
-assertEquals(semver, {
-  major: 1,
-  minor: 2,
-  patch: 3,
-  prerelease: [],
-  build: []
-});
-
-assertEquals(format(semver), &quot;1.2.3&quot;);
-
-const range = parseRange(&quot;1.x || >=2.5.0 || 5.0.0 - 7.2.3&quot;);
-
-const s0 = parse(&quot;1.2.3&quot;);
-const s1 = parse(&quot;9.8.7&quot;);
-
-assertEquals(greaterThan(s0, s1), false);
-assertEquals(lessThan(s0, s1), true);
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h2 id="versions">
 Versions</h2>
 <p>A "version" is described by the <code>v2.0.0</code> specification found at
@@ -100,29 +64,7 @@ primary    │   │
  │ │ └─────────── patch
  │ └───────────── minor
  └─────────────── major
-</code><button class="copyButton" data-copy="          full
-       ┌───┴───┐
-    release    │
-   ┌───┴───┐   │
-primary    │   │
- ┌─┴─┐     │   │
- 1.2.3-pre.1+b.1
- │ │ │ └─┬─┘ └┬┘
- │ │ │   │    └── build
- │ │ │   └─────── pre
- │ │ └─────────── patch
- │ └───────────── minor
- └─────────────── major
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h2 id="ranges">
 Ranges</h2>
 <p>A version <a href="/@std/semver@1.0.6/doc/~/Range" rel="nofollow"><code>Range</code></a> is a set of <a href="/@std/semver@1.0.6/doc/~/Comparator" rel="nofollow"><code>Comparator</code></a>s which specify
@@ -176,20 +118,7 @@ argument that will append the value of the string as a prerelease identifier:</p
 <span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
 <span class="pl-en">assertEquals</span>(<span class="pl-en">increment</span>(<span class="pl-en">parse</span>(<span class="pl-s">"1.2.3"</span>), <span class="pl-s">"prerelease"</span>, { <span class="pl-c1">prerelease</span>: <span class="pl-s">"alpha"</span> }), <span class="pl-en">parse</span>(<span class="pl-s">"1.2.4-alpha.0"</span>));
-</code><button class="copyButton" data-copy="import { increment, parse } from &quot;@std/semver&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-assertEquals(increment(parse(&quot;1.2.3&quot;), &quot;prerelease&quot;, { prerelease: &quot;alpha&quot; }), parse(&quot;1.2.4-alpha.0&quot;));
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h3 id="build-metadata">
 Build Metadata</h3>
 <p>Build metadata is <code>.</code> delimited alpha-numeric string.
@@ -310,32 +239,7 @@ pre        ::= parts
 build      ::= parts
 parts      ::= part ( "." part ) *
 part       ::= nr | [-0-9A-Za-z]+
-</code><button class="copyButton" data-copy="range-set  ::= range ( logical-or range ) *
-logical-or ::= ( &quot; &quot; ) * &quot;||&quot; ( &quot; &quot; ) *
-range      ::= hyphen | simple ( &quot; &quot; simple ) * | &quot;&quot;
-hyphen     ::= partial &quot; - &quot; partial
-simple     ::= primitive | partial | tilde | caret
-primitive  ::= ( &quot;<&quot; | &quot;>&quot; | &quot;>=&quot; | &quot;<=&quot; | &quot;=&quot; ) partial
-partial    ::= xr ( &quot;.&quot; xr ( &quot;.&quot; xr qualifier ? )? )?
-xr         ::= &quot;x&quot; | &quot;X&quot; | &quot;*&quot; | nr
-nr         ::= &quot;0&quot; | [&quot;1&quot;-&quot;9&quot;] ( [&quot;0&quot;-&quot;9&quot;] ) *
-tilde      ::= &quot;~&quot; partial
-caret      ::= &quot;^&quot; partial
-qualifier  ::= ( &quot;-&quot; pre )? ( &quot;+&quot; build )?
-pre        ::= parts
-build      ::= parts
-parts      ::= part ( &quot;.&quot; part ) *
-part       ::= nr | [-0-9A-Za-z]+
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>Note that, since ranges may be non-contiguous, a version might not be greater
 than a range, less than a range, <em>or</em> satisfy a range! For example, the range
 <code>1.2 &lt;1.2.9 || &gt;2.0.0</code> would have a hole from <code>1.2.9</code> until <code>2.0.0</code>, so the
@@ -347,5 +251,4 @@ lower), and it also does not satisfy the range.</p>
 
 <!-- custom:start -->
 <!-- Add persistent custom content below. This section is preserved across generations. -->
-
 <!-- custom:end -->

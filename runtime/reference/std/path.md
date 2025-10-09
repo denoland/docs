@@ -66,63 +66,7 @@ Basic Path Operations</h2>
   <span class="pl-en">assertEquals</span>(path.<span class="pl-en">relative</span>(<span class="pl-s">"/home/user"</span>, <span class="pl-s">"/home/user/docs/file.txt"</span>), <span class="pl-s">"docs/file.txt"</span>);
   <span class="pl-en">assertEquals</span>(path.<span class="pl-en">relative</span>(<span class="pl-s">"/home/user"</span>, <span class="pl-s">"/var/data"</span>), <span class="pl-s">"../../var/data"</span>);
 }
-</code><button class="copyButton" data-copy="import * as path from &quot;@std/path&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-// Get components of a path
-if (Deno.build.os === &quot;windows&quot;) {
-  assertEquals(path.basename(&quot;C:\\Users\\user\\file.txt&quot;), &quot;file.txt&quot;);
-  assertEquals(path.dirname(&quot;C:\\Users\\user\\file.txt&quot;), &quot;C:\\Users\\user&quot;);
-  assertEquals(path.extname(&quot;C:\\Users\\user\\file.txt&quot;), &quot;.txt&quot;);
-} else {
-  assertEquals(path.basename(&quot;/home/user/file.txt&quot;), &quot;file.txt&quot;);
-  assertEquals(path.dirname(&quot;/home/user/file.txt&quot;), &quot;/home/user&quot;);
-  assertEquals(path.extname(&quot;/home/user/file.txt&quot;), &quot;.txt&quot;);
-}
-
-// Join path segments
-if (Deno.build.os === &quot;windows&quot;) {
-  assertEquals(path.join(&quot;C:\\&quot;, &quot;Users&quot;, &quot;docs&quot;, &quot;file.txt&quot;), &quot;C:\\Users\\docs\\file.txt&quot;);
-} else {
-  assertEquals(path.join(&quot;/home&quot;, &quot;user&quot;, &quot;docs&quot;, &quot;file.txt&quot;), &quot;/home/user/docs/file.txt&quot;);
-}
-
-// Normalize a path
-if (Deno.build.os === &quot;windows&quot;) {
-  assertEquals(path.normalize(&quot;C:\\Users\\user\\..\\temp\\.\\file.txt&quot;), &quot;C:\\Users\\temp\\file.txt&quot;);
-} else {
-  assertEquals(path.normalize(&quot;/home/user/../temp/./file.txt&quot;), &quot;/home/temp/file.txt&quot;);
-}
-
-// Resolve absolute path
-if (Deno.build.os === &quot;windows&quot;) {
-  const resolved = path.resolve(&quot;C:\\foo&quot;, &quot;docs&quot;, &quot;file.txt&quot;);
-  assertEquals(resolved, &quot;C:\\foo\\docs\\file.txt&quot;);
-  assertEquals(path.isAbsolute(resolved), true);
-} else {
-  const resolved = path.resolve(&quot;/foo&quot;, &quot;docs&quot;, &quot;file.txt&quot;);
-  assertEquals(resolved, &quot;/foo/docs/file.txt&quot;);
-  assertEquals(path.isAbsolute(resolved), true);
-}
-
-// Get relative path
-if (Deno.build.os === &quot;windows&quot;) {
-  assertEquals(path.relative(&quot;C:\\Users&quot;, &quot;C:\\Users\\docs\\file.txt&quot;), &quot;docs\\file.txt&quot;);
-  assertEquals(path.relative(&quot;C:\\Users&quot;, &quot;D:\\Programs&quot;), &quot;D:\\Programs&quot;);
-} else {
-  assertEquals(path.relative(&quot;/home/user&quot;, &quot;/home/user/docs/file.txt&quot;), &quot;docs/file.txt&quot;);
-  assertEquals(path.relative(&quot;/home/user&quot;, &quot;/var/data&quot;), &quot;../../var/data&quot;);
-}
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h2 id="path-parsing-and-formatting">
 Path Parsing and Formatting</h2>
 <pre class="highlight"><code><span class="pl-k">import</span> <span class="pl-c1">*</span> <span class="pl-k">as</span> path <span class="pl-k">from</span> <span class="pl-s">"@std/path"</span>;
@@ -155,46 +99,7 @@ Path Parsing and Formatting</h2>
     <span class="pl-s">"/home/user/file.txt"</span>
   );
 }
-</code><button class="copyButton" data-copy="import * as path from &quot;@std/path&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-if (Deno.build.os === &quot;windows&quot;) {
-  const parsedWindows = path.parse(&quot;C:\\Users\\user\\file.txt&quot;);
-  assertEquals(parsedWindows.root, &quot;C:\\&quot;);
-  assertEquals(parsedWindows.dir, &quot;C:\\Users\\user&quot;);
-  assertEquals(parsedWindows.base, &quot;file.txt&quot;);
-  assertEquals(parsedWindows.ext, &quot;.txt&quot;);
-  assertEquals(parsedWindows.name, &quot;file&quot;);
-
-  // Format path from components (Windows)
-  assertEquals(
-    path.format({ dir: &quot;C:\\Users\\user&quot;, base: &quot;file.txt&quot; }),
-    &quot;C:\\Users\\user\\file.txt&quot;
-  );
-} else {
-  const parsedPosix = path.parse(&quot;/home/user/file.txt&quot;);
-  assertEquals(parsedPosix.root, &quot;/&quot;);
-  assertEquals(parsedPosix.dir, &quot;/home/user&quot;);
-  assertEquals(parsedPosix.base, &quot;file.txt&quot;);
-  assertEquals(parsedPosix.ext, &quot;.txt&quot;);
-  assertEquals(parsedPosix.name, &quot;file&quot;);
-
-  // Format path from components (POSIX)
-  assertEquals(
-    path.format({ dir: &quot;/home/user&quot;, base: &quot;file.txt&quot; }),
-    &quot;/home/user/file.txt&quot;
-  );
-}
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h2 id="url-conversion">
 URL Conversion</h2>
 <pre class="highlight"><code><span class="pl-k">import</span> <span class="pl-c1">*</span> <span class="pl-k">as</span> path <span class="pl-k">from</span> <span class="pl-s">"@std/path"</span>;
@@ -208,27 +113,7 @@ URL Conversion</h2>
   <span class="pl-en">assertEquals</span>(path.<span class="pl-en">fromFileUrl</span>(<span class="pl-s">"file:///home/user/file.txt"</span>), <span class="pl-s">"/home/user/file.txt"</span>);
   <span class="pl-en">assertEquals</span>(path.<span class="pl-en">toFileUrl</span>(<span class="pl-s">"/home/user/file.txt"</span>).<span class="pl-c1">href</span>, <span class="pl-s">"file:///home/user/file.txt"</span>);
 }
-</code><button class="copyButton" data-copy="import * as path from &quot;@std/path&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-// Convert between file URLs and paths
-if (Deno.build.os === &quot;windows&quot;) {
-  assertEquals(path.fromFileUrl(&quot;file:///C:/Users/user/file.txt&quot;), &quot;C:\\Users\\user\\file.txt&quot;);
-  assertEquals(path.toFileUrl(&quot;C:\\Users\\user\\file.txt&quot;).href, &quot;file:///C:/Users/user/file.txt&quot;);
-} else {
-  assertEquals(path.fromFileUrl(&quot;file:///home/user/file.txt&quot;), &quot;/home/user/file.txt&quot;);
-  assertEquals(path.toFileUrl(&quot;/home/user/file.txt&quot;).href, &quot;file:///home/user/file.txt&quot;);
-}
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h2 id="path-properties">
 Path Properties</h2>
 <pre class="highlight"><code><span class="pl-k">import</span> <span class="pl-c1">*</span> <span class="pl-k">as</span> path <span class="pl-k">from</span> <span class="pl-s">"@std/path"</span>;
@@ -254,39 +139,7 @@ Path Properties</h2>
   <span class="pl-c">// On POSIX, toNamespacedPath returns the path unchanged</span>
   <span class="pl-en">assertEquals</span>(path.<span class="pl-en">toNamespacedPath</span>(<span class="pl-s">"/home/user/file.txt"</span>), <span class="pl-s">"/home/user/file.txt"</span>);
 }
-</code><button class="copyButton" data-copy="import * as path from &quot;@std/path&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-// Check if path is absolute
-if (Deno.build.os === &quot;windows&quot;) {
-  assertEquals(path.isAbsolute(&quot;C:\\Users&quot;), true);
-  assertEquals(path.isAbsolute(&quot;\\\\Server\\share&quot;), true);
-  assertEquals(path.isAbsolute(&quot;C:relative\\path&quot;), false);
-  assertEquals(path.isAbsolute(&quot;..\\relative\\path&quot;), false);
-} else {
-  assertEquals(path.isAbsolute(&quot;/home/user&quot;), true);
-  assertEquals(path.isAbsolute(&quot;./relative/path&quot;), false);
-  assertEquals(path.isAbsolute(&quot;../relative/path&quot;), false);
-}
-
-// Convert to namespaced path (Windows-specific)
-if (Deno.build.os === &quot;windows&quot;) {
-  assertEquals(path.toNamespacedPath(&quot;C:\\Users\\file.txt&quot;), &quot;\\\\?\\C:\\Users\\file.txt&quot;);
-  assertEquals(path.toNamespacedPath(&quot;\\\\server\\share\\file.txt&quot;), &quot;\\\\?\\UNC\\server\\share\\file.txt&quot;);
-} else {
-  // On POSIX, toNamespacedPath returns the path unchanged
-  assertEquals(path.toNamespacedPath(&quot;/home/user/file.txt&quot;), &quot;/home/user/file.txt&quot;);
-}
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h2 id="glob-pattern-utilities">
 Glob Pattern Utilities</h2>
 <pre class="highlight"><code><span class="pl-k">import</span> <span class="pl-c1">*</span> <span class="pl-k">as</span> path <span class="pl-k">from</span> <span class="pl-s">"@std/path"</span>;
@@ -312,81 +165,22 @@ Glob Pattern Utilities</h2>
 } <span class="pl-k">else</span> {
   <span class="pl-en">assertEquals</span>(path.<span class="pl-en">normalizeGlob</span>(<span class="pl-s">"src/../**\/*.ts"</span>), <span class="pl-s">"**\/*.ts"</span>);
 }
-</code><button class="copyButton" data-copy="import * as path from &quot;@std/path&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-// Check if a string is a glob pattern
-assertEquals(path.isGlob(&quot;*.txt&quot;), true);
-
-// Convert glob pattern to RegExp
-const pattern = path.globToRegExp(&quot;*.txt&quot;);
-assertEquals(pattern.test(&quot;file.txt&quot;), true);
-
-// Join multiple glob patterns
-if (Deno.build.os === &quot;windows&quot;) {
-  assertEquals(path.joinGlobs([&quot;src&quot;, &quot;**\\*.ts&quot;]), &quot;src\\**\\*.ts&quot;);
-} else {
-  assertEquals(path.joinGlobs([&quot;src&quot;, &quot;**\/*.ts&quot;]), &quot;src/**\/*.ts&quot;);
-}
-
-// Normalize a glob pattern
-if (Deno.build.os === &quot;windows&quot;) {
-  assertEquals(path.normalizeGlob(&quot;src\\..\\**\\*.ts&quot;), &quot;**\\*.ts&quot;);
-} else {
-  assertEquals(path.normalizeGlob(&quot;src/../**\/*.ts&quot;), &quot;**\/*.ts&quot;);
-}
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>For POSIX-specific functions:</p>
 <pre class="highlight"><code><span class="pl-k">import</span> { fromFileUrl } <span class="pl-k">from</span> <span class="pl-s">"@std/path/posix/from-file-url"</span>;
 <span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
 <span class="pl-en">assertEquals</span>(<span class="pl-en">fromFileUrl</span>(<span class="pl-s">"file:///home/foo"</span>), <span class="pl-s">"/home/foo"</span>);
-</code><button class="copyButton" data-copy="import { fromFileUrl } from &quot;@std/path/posix/from-file-url&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-assertEquals(fromFileUrl(&quot;file:///home/foo&quot;), &quot;/home/foo&quot;);
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>For Windows-specific functions:</p>
 <pre class="highlight"><code><span class="pl-k">import</span> { fromFileUrl } <span class="pl-k">from</span> <span class="pl-s">"@std/path/windows/from-file-url"</span>;
 <span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
 <span class="pl-en">assertEquals</span>(<span class="pl-en">fromFileUrl</span>(<span class="pl-s">"file:///home/foo"</span>), <span class="pl-s">"\\home\\foo"</span>);
-</code><button class="copyButton" data-copy="import { fromFileUrl } from &quot;@std/path/windows/from-file-url&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-assertEquals(fromFileUrl(&quot;file:///home/foo&quot;), &quot;\\home\\foo&quot;);
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>Functions for working with URLs can be found in
 <a href="https://github.com/denoland/std/blob/HEAD/./doc/posix/~" rel="nofollow">@std/path/posix</a>.</p>
 
 <!-- custom:start -->
 <!-- Add persistent custom content below. This section is preserved across generations. -->
-
 <!-- custom:end -->

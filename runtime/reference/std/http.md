@@ -19,19 +19,7 @@ File Server</h2>
 <pre class="highlight"><code><span class="pl-en">deno</span> run <span class="pl-c1">--allow-net</span> <span class="pl-c1">--allow-read</span> jsr:@std/http/file-server
 <span class="pl-en">Listening</span> on:
 <span class="pl-c1">-</span> Local: http://localhost:8000
-</code><button class="copyButton" data-copy="deno run --allow-net --allow-read jsr:@std/http/file-server
-Listening on:
-- Local: http://localhost:8000
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>When the <code>--allow-sys=networkInterfaces</code> permission is provided, the file
 server will also display the local area network addresses that can be used to
 access the server.</p>
@@ -68,23 +56,7 @@ in an http request would look like this:</p>
   <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">Response</span>(<span class="pl-s">`Hello, <span class="pl-s1">${userAgent.<span class="pl-c1">browser</span>.<span class="pl-c1">name</span>}</span></span>
 <span class="pl-s">    on <span class="pl-s1">${userAgent.<span class="pl-c1">os</span>.<span class="pl-c1">name</span>}</span> <span class="pl-s1">${userAgent.<span class="pl-c1">os</span>.<span class="pl-c1">version</span>}</span>!`</span>);
 });
-</code><button class="copyButton" data-copy="import { UserAgent } from &quot;@std/http/user-agent&quot;;
-
-Deno.serve((req) => {
-  const userAgent = new UserAgent(req.headers.get(&quot;user-agent&quot;) ?? &quot;&quot;);
-  return new Response(`Hello, ${userAgent.browser.name}
-    on ${userAgent.os.name} ${userAgent.os.version}!`);
-});
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h3 id="routing">
 Routing</h3>
 <p><code>route</code> provides an easy way to route requests to different
@@ -117,46 +89,8 @@ handlers based on the request path and method.</p>
 }
 
 <span class="pl-smi">Deno</span>.<span class="pl-en">serve</span>(<span class="pl-en">route</span>(routes, defaultHandler));
-</code><button class="copyButton" data-copy="import { route, type Route } from &quot;@std/http/unstable-route&quot;;
-import { serveDir } from &quot;@std/http/file-server&quot;;
-
-const routes: Route[] = [
-  {
-    pattern: new URLPattern({ pathname: &quot;/about&quot; }),
-    handler: () => new Response(&quot;About page&quot;),
-  },
-  {
-    pattern: new URLPattern({ pathname: &quot;/users/:id&quot; }),
-    handler: (_req, _info, params) => new Response(params?.pathname.groups.id),
-  },
-  {
-    pattern: new URLPattern({ pathname: &quot;/static/*&quot; }),
-    handler: (req: Request) => serveDir(req)
-  },
-  {
-    method: [&quot;GET&quot;, &quot;HEAD&quot;],
-    pattern: new URLPattern({ pathname: &quot;/api&quot; }),
-    handler: (req: Request) => new Response(req.method === 'HEAD' ? null : 'ok'),
-  },
-];
-
-function defaultHandler(_req: Request) {
-  return new Response(&quot;Not found&quot;, { status: 404 });
-}
-
-Deno.serve(route(routes, defaultHandler));
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 
 <!-- custom:start -->
 <!-- Add persistent custom content below. This section is preserved across generations. -->
-
 <!-- custom:end -->

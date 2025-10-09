@@ -15,15 +15,9 @@ stability: unstable
 
 <p>Logging library with support for terminal and file outputs. Also provides
 interfaces for building custom loggers.</p>
-<div class="alert alert-important"><div><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"></path>
-  <path d="M12 8v3"></path>
-  <path d="M12 14v.01"></path>
-</svg>
+<div class="alert alert-important"><div>
 Important
 
 <!-- custom:start -->
 <!-- Add persistent custom content below. This section is preserved across generations. -->
-
 <!-- custom:end -->

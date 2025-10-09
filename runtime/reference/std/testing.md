@@ -43,42 +43,8 @@ stability: stable
   time.<span class="pl-en">tick</span>(<span class="pl-c1">1000</span>);
   <span class="pl-en">assertSpyCalls</span>(cb, <span class="pl-c1">4</span>);
 });
-</code><button class="copyButton" data-copy="import { assertSpyCalls, spy } from &quot;@std/testing/mock&quot;;
-import { FakeTime } from &quot;@std/testing/time&quot;;
-
-function secondInterval(cb: () => void): number {
-  return setInterval(cb, 1000);
-}
-
-Deno.test(&quot;secondInterval calls callback every second and stops after being cleared&quot;, () => {
-  using time = new FakeTime();
-
-  const cb = spy();
-  const intervalId = secondInterval(cb);
-  assertSpyCalls(cb, 0);
-  time.tick(500);
-  assertSpyCalls(cb, 0);
-  time.tick(500);
-  assertSpyCalls(cb, 1);
-  time.tick(3500);
-  assertSpyCalls(cb, 4);
-
-  clearInterval(intervalId);
-  time.tick(1000);
-  assertSpyCalls(cb, 4);
-});
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 
 <!-- custom:start -->
 <!-- Add persistent custom content below. This section is preserved across generations. -->
-
 <!-- custom:end -->

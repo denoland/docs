@@ -67,6 +67,23 @@ function extractFirstMarkdownDiv(html: string): string | null {
   return fragment;
 }
 
+// Remove UI-only markup (copy buttons, inline SVG icons) and stray empty <code> tags
+function sanitizeOverviewHtml(html: string): string {
+  let out = html;
+  // 1) Remove copy buttons injected by JSR docs (match on class copyButton)
+  out = out.replace(
+    /<button[^>]*class=(?:"|')?[^"'>]*copyButton[^"'>]*(?:"|')?[^>]*>[\s\S]*?<\/button>/gi,
+    "",
+  );
+  // 2) Remove any remaining inline SVGs (commonly the copy/check icons)
+  out = out.replace(/<svg[^>]*>[\s\S]*?<\/svg>/gi, "");
+  // 3) Remove empty code tags (sometimes left behind after removing button)
+  out = out.replace(/<code\b[^>]*>\s*<\/code>/gi, "");
+  // 4) Tidy up excessive blank lines
+  out = out.replace(/\n{3,}/g, "\n\n");
+  return out.trim();
+}
+
 function deriveTitle(pkg: string): string {
   // e.g., "assert" -> "@std/assert"
   switch (pkg) {
@@ -184,7 +201,8 @@ async function generatePackagePage(pkg: PackageSummary) {
       `> ⛔ **Internal**: This @std package is for internal use and not intended for public consumption. APIs may change or be removed.\n\n`;
   }
   body += `## Overview\n\n`;
-  body += overviewHtml + "\n"; // keep HTML fragment
+  // Sanitize UI-only elements from the overview HTML before writing
+  body += sanitizeOverviewHtml(overviewHtml) + "\n"; // keep HTML fragment
   if (overrideContent) {
     body += `\n## Additional Examples\n\n${overrideContent}\n`;
   }

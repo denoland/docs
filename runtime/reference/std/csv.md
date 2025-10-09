@@ -44,46 +44,7 @@ Parsing CSV</h2>
   { <span class="pl-c1">name</span>: <span class="pl-s">"john"</span>, <span class="pl-c1">age</span>: <span class="pl-s">"30"</span>, <span class="pl-c1">city</span>: <span class="pl-s">"new york"</span> },
   { <span class="pl-c1">name</span>: <span class="pl-s">"mary"</span>, <span class="pl-c1">age</span>: <span class="pl-s">"25"</span>, <span class="pl-c1">city</span>: <span class="pl-s">"los angeles"</span> }
 ]);
-</code><button class="copyButton" data-copy="import { parse } from &quot;@std/csv/parse&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-const string = &quot;a,b,c\nd,e,f&quot;;
-
-// Parse as array of arrays (default)
-assertEquals(parse(string, { skipFirstRow: false }), [[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;], [&quot;d&quot;, &quot;e&quot;, &quot;f&quot;]]);
-
-// Parse csv file with headers into array of objects
-assertEquals(parse(string, { skipFirstRow: true }), [{ a: &quot;d&quot;, b: &quot;e&quot;, c: &quot;f&quot; }]);
-
-// Parse with custom column names
-assertEquals(parse(string, { columns: [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] }), [
-  { x: &quot;a&quot;, y: &quot;b&quot;, z: &quot;c&quot; },
-  { x: &quot;d&quot;, y: &quot;e&quot;, z: &quot;f&quot; }
-]);
-
-// Parse tab-separated values
-const tsvString = &quot;name\tage\tcity\njohn\t30\tnew york\nmary\t25\tlos angeles&quot;;
-assertEquals(parse(tsvString, { separator: &quot;\t&quot;, skipFirstRow: true }), [
-  { name: &quot;john&quot;, age: &quot;30&quot;, city: &quot;new york&quot; },
-  { name: &quot;mary&quot;, age: &quot;25&quot;, city: &quot;los angeles&quot; }
-]);
-
-// Parse a CSV file which has comments
-const csvWithComments = &quot;# This is a comment\nname,age,city\n# Another comment\njohn,30,new york\nmary,25,los angeles&quot;;
-assertEquals(parse(csvWithComments, { comment: &quot;#&quot;, skipFirstRow: true }), [
-  { name: &quot;john&quot;, age: &quot;30&quot;, city: &quot;new york&quot; },
-  { name: &quot;mary&quot;, age: &quot;25&quot;, city: &quot;los angeles&quot; }
-]);
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h2 id="parsing-csv-from-a-stream">
 Parsing CSV from a Stream</h2>
 <pre class="highlight"><code><span class="pl-k">import</span> { <span class="pl-smi">CsvParseStream</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/csv/parse-stream"</span>;
@@ -109,39 +70,7 @@ Parsing CSV from a Stream</h2>
 <span class="pl-c">// for await (const record of csvStream) {</span>
 <span class="pl-c">//   console.log(record);</span>
 <span class="pl-c">// }</span>
-</code><button class="copyButton" data-copy="import { CsvParseStream } from &quot;@std/csv/parse-stream&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-// Parse from a stream (useful for large files)
-const source = ReadableStream.from([
-  &quot;name,age,city\n&quot;,
-  &quot;john,30,new york\n&quot;,
-  &quot;mary,25,los angeles\n&quot;
-]);
-
-const csvStream = source
-  .pipeThrough(new CsvParseStream({ skipFirstRow: true }));
-
-const records = await Array.fromAsync(csvStream);
-assertEquals(records, [
-  { name: &quot;john&quot;, age: &quot;30&quot;, city: &quot;new york&quot; },
-  { name: &quot;mary&quot;, age: &quot;25&quot;, city: &quot;los angeles&quot; }
-]);
-
-// Or process records one by one
-// for await (const record of csvStream) {
-//   console.log(record);
-// }
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h2 id="stringifying-data-to-csv">
 Stringifying Data to CSV</h2>
 <pre class="highlight"><code><span class="pl-k">import</span> { stringify } <span class="pl-k">from</span> <span class="pl-s">"@std/csv/stringify"</span>;
@@ -161,33 +90,7 @@ Stringifying Data to CSV</h2>
 <span class="pl-c">// When using an array of objects, you must specify columns to use</span>
 <span class="pl-k">const</span> customColumns <span class="pl-c1">=</span> <span class="pl-en">stringify</span>(objectData, { <span class="pl-c1">columns</span>: [<span class="pl-s">"city"</span>, <span class="pl-s">"name"</span>, <span class="pl-s">"age"</span>] });
 <span class="pl-en">assertEquals</span>(customColumns, <span class="pl-s">"city,name,age\r\nnew york,john,30\r\nlos angeles,mary,25\r\n"</span>);
-</code><button class="copyButton" data-copy="import { stringify } from &quot;@std/csv/stringify&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-// Convert array of arrays to CSV
-const arrayData = [[&quot;name&quot;, &quot;age&quot;, &quot;city&quot;], [&quot;john&quot;, &quot;30&quot;, &quot;new york&quot;], [&quot;mary&quot;, &quot;25&quot;, &quot;los angeles&quot;]];
-const csvString = stringify(arrayData);
-assertEquals(csvString, &quot;name,age,city\r\njohn,30,new york\r\nmary,25,los angeles\r\n&quot;);
-
-// Convert array of objects to CSV
-const objectData = [
-  { name: &quot;john&quot;, age: &quot;30&quot;, city: &quot;new york&quot; },
-  { name: &quot;mary&quot;, age: &quot;25&quot;, city: &quot;los angeles&quot; }
-];
-
-// When using an array of objects, you must specify columns to use
-const customColumns = stringify(objectData, { columns: [&quot;city&quot;, &quot;name&quot;, &quot;age&quot;] });
-assertEquals(customColumns, &quot;city,name,age\r\nnew york,john,30\r\nlos angeles,mary,25\r\n&quot;);
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h2 id="streaming-stringify-data-to-csv">
 Streaming Stringify Data to CSV</h2>
 <pre class="highlight"><code><span class="pl-k">import</span> { <span class="pl-smi">CsvStringifyStream</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/csv/stringify-stream"</span>;
@@ -214,40 +117,7 @@ Streaming Stringify Data to CSV</h2>
 <span class="pl-k">const</span> path <span class="pl-c1">=</span> <span class="pl-k">await</span> <span class="pl-en">writeCsvToTempFile</span>();
 <span class="pl-k">const</span> content <span class="pl-c1">=</span> <span class="pl-k">await</span> <span class="pl-smi">Deno</span>.<span class="pl-en">readTextFile</span>(path);
 <span class="pl-en">assertEquals</span>(content, <span class="pl-s">"id,name\r\n1,one\r\n2,two\r\n3,three\r\n"</span>);
-</code><button class="copyButton" data-copy="import { CsvStringifyStream } from &quot;@std/csv/stringify-stream&quot;;
-import { assertEquals } from &quot;@std/assert&quot;;
-
-async function writeCsvToTempFile(): Promise<string> {
-  const path = await Deno.makeTempFile();
-  using file = await Deno.open(path, { write: true });
-
-  const readable = ReadableStream.from([
-    { id: 1, name: &quot;one&quot; },
-    { id: 2, name: &quot;two&quot; },
-    { id: 3, name: &quot;three&quot; },
-  ]);
-
-  await readable
-    .pipeThrough(new CsvStringifyStream({ columns: [&quot;id&quot;, &quot;name&quot;] }))
-    .pipeThrough(new TextEncoderStream())
-    .pipeTo(file.writable);
-
-  return path;
-}
-
-const path = await writeCsvToTempFile();
-const content = await Deno.readTextFile(path);
-assertEquals(content, &quot;id,name\r\n1,one\r\n2,two\r\n3,three\r\n&quot;);
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <h2 id="csv-format-information">
 CSV Format Information</h2>
 <p>There are many kinds of CSV files; this module supports the format described
@@ -256,17 +126,7 @@ in <a href="https://www.rfc-editor.org/rfc/rfc4180.html" rel="nofollow">RFC 4180
 Each record is separated by the newline character. The final record may
 optionally be followed by a newline character.</p>
 <pre class="highlight"><code>field1,field2,field3
-</code><button class="copyButton" data-copy="field1,field2,field3
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>White space is considered part of a field.</p>
 <p>Carriage returns before newline characters are silently removed.</p>
 <p>Blank lines are ignored. A line with only whitespace characters (excluding
@@ -275,88 +135,25 @@ the ending newline character) is not considered a blank line.</p>
 quoted-fields. The beginning and ending quote are not part of the field.</p>
 <p>The source:</p>
 <pre class="highlight"><code>normal string,"quoted-field"
-</code><button class="copyButton" data-copy="normal string,&quot;quoted-field&quot;
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>results in the fields</p>
 <pre class="highlight"><code>[<span class="pl-s">`normal string`</span>, <span class="pl-s">`quoted-field`</span>]
-</code><button class="copyButton" data-copy="[`normal string`, `quoted-field`]
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>Within a quoted-field a quote character followed by a second quote character is considered a single quote.</p>
 <pre class="highlight"><code>"the ""word"" is true","a ""quoted-field"""
-</code><button class="copyButton" data-copy="&quot;the &quot;&quot;word&quot;&quot; is true&quot;,&quot;a &quot;&quot;quoted-field&quot;&quot;&quot;
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>results in</p>
 <pre class="highlight"><code>[<span class="pl-s">`the "word" is true`</span>, <span class="pl-s">`a "quoted-field"`</span>]
-</code><button class="copyButton" data-copy="[`the &quot;word&quot; is true`, `a &quot;quoted-field&quot;`]
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>Newlines and commas may be included in a quoted-field</p>
 <pre class="highlight"><code>"Multi-line
 field","comma is ,"
-</code><button class="copyButton" data-copy="&quot;Multi-line
-field&quot;,&quot;comma is ,&quot;
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 <p>results in</p>
 <pre class="highlight"><code>[<span class="pl-s">`Multi-line</span>
 <span class="pl-s">field`</span>, <span class="pl-s">`comma is ,`</span>]
-</code><button class="copyButton" data-copy="[`Multi-line
-field`, `comma is ,`]
-"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="7" height="7" fill="none"></rect>
-  <rect x="6" y="6" width="7" height="7" fill="none"></rect>
-  <path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="currentColor"></path>
-</svg>
-<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-  <path d="M5 12l5 5l10 -10"></path>
-</svg>
-</button><code></code></pre>
+</code></pre>
 
 <!-- custom:start -->
 <!-- Add persistent custom content below. This section is preserved across generations. -->
-
 <!-- custom:end -->

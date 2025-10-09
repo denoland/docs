@@ -62,5 +62,5 @@ This will rebuild all pages and keep both overrides and custom block content.
 
 ## Skipping generation for a page (future option)
 
-Currently every page is regenerated. If you later want a skip/manual mode, we
-can add a frontmatter flag (e.g. `generated: false`).
+Currently every page is regenerated. If we later want a skip/manual mode, we can
+add a frontmatter flag (e.g. `generated: false`).
