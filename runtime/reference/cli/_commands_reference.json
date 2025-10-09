@@ -324,15 +324,6 @@
           "usage": "--preload <FILE>"
         },
         {
-          "name": "permission-set",
-          "short": "P",
-          "long": "permission-set",
-          "required": false,
-          "help": null,
-          "help_heading": null,
-          "usage": "--permission-set[=<permission-set>]"
-        },
-        {
           "name": "inspect",
           "short": null,
           "long": "inspect",
@@ -807,15 +798,6 @@
           "help": "A list of files that will be executed before the main module",
           "help_heading": null,
           "usage": "--preload <FILE>"
-        },
-        {
-          "name": "permission-set",
-          "short": "P",
-          "long": "permission-set",
-          "required": false,
-          "help": null,
-          "help_heading": null,
-          "usage": "--permission-set[=<permission-set>]"
         },
         {
           "name": "inspect",
@@ -1443,15 +1425,6 @@
           "help": "A list of files that will be executed before the main module",
           "help_heading": null,
           "usage": "--preload <FILE>"
-        },
-        {
-          "name": "permission-set",
-          "short": "P",
-          "long": "permission-set",
-          "required": false,
-          "help": null,
-          "help_heading": null,
-          "usage": "--permission-set[=<permission-set>]"
         },
         {
           "name": "allow-scripts",
@@ -2594,6 +2567,15 @@
           "usage": "--deny-import[=<IP_OR_HOSTNAME>...]"
         },
         {
+          "name": "v8-flags",
+          "short": null,
+          "long": "v8-flags",
+          "required": false,
+          "help": "To see a list of all available flags use --v8-flags=--help\n  \u001b[38;5;245mFlags can also be set via the DENO_V8_FLAGS environment variable.\n  Any flags set with this flag are appended after the DENO_V8_FLAGS environment variable\u001b[39m",
+          "help_heading": null,
+          "usage": "--v8-flags[=<V8_FLAGS>...]"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -2959,15 +2941,6 @@
           "help": "A list of files that will be executed before the main module",
           "help_heading": null,
           "usage": "--preload <FILE>"
-        },
-        {
-          "name": "permission-set",
-          "short": "P",
-          "long": "permission-set",
-          "required": false,
-          "help": null,
-          "help_heading": null,
-          "usage": "--permission-set[=<permission-set>]"
         },
         {
           "name": "allow-scripts",
@@ -4734,15 +4707,6 @@
           "usage": "--seed <NUMBER>"
         },
         {
-          "name": "permission-set",
-          "short": "P",
-          "long": "permission-set",
-          "required": false,
-          "help": null,
-          "help_heading": null,
-          "usage": "--permission-set[=<permission-set>]"
-        },
-        {
           "name": "check",
           "short": null,
           "long": "check",
@@ -5831,15 +5795,6 @@
           "usage": "--inspect-wait[=<HOST_AND_PORT>]"
         },
         {
-          "name": "permission-set",
-          "short": "P",
-          "long": "permission-set",
-          "required": false,
-          "help": null,
-          "help_heading": null,
-          "usage": "--permission-set[=<permission-set>]"
-        },
-        {
           "name": "cached-only",
           "short": null,
           "long": "cached-only",
@@ -6466,15 +6421,6 @@
           "help": "A list of files that will be executed before the main module",
           "help_heading": null,
           "usage": "--preload <FILE>"
-        },
-        {
-          "name": "permission-set",
-          "short": "P",
-          "long": "permission-set",
-          "required": false,
-          "help": null,
-          "help_heading": null,
-          "usage": "--permission-set[=<permission-set>]"
         },
         {
           "name": "inspect",
