@@ -171,8 +171,7 @@ import { pascalCase } from "https://deno.land/x/case/mod.ts";
 
 Deno recommends [JSR](https://jsr.io), the modern JavaScript registry, for third
 party modules. There, you'll find plenty of well documented ES modules for your
-projects, including the
-[Deno Standard Library](/runtime/fundamentals/standard_library/).
+projects, including the [Deno Standard Library](/runtime/reference/std/).
 
 You can
 [read more about Deno's support for npm packages here](/runtime/fundamentals/node/#using-npm-modules).

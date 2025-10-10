@@ -28,9 +28,8 @@ experience. It's built on [V8](https://v8.dev/),
   runtimes give full access every script they run, Deno allows you to enforce
   granular permissions.
 - Deno has a **robust built-in toolchain.** Unlike Node or browser JavaScript,
-  Deno includes a [standard library](/runtime/fundamentals/standard_library/),
-  along with a first-party
-  [linter/formatter](/runtime/fundamentals/linting_and_formatting/),
+  Deno includes a [standard library](/runtime/reference/std/), along with a
+  first-party [linter/formatter](/runtime/fundamentals/linting_and_formatting/),
   [test runner](/runtime/fundamentals/testing/), and more.
 - Deno is **fully compatible with [Node and npm](/runtime/fundamentals/node/).**
 - Deno is **fast and reliable**.
