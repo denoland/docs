@@ -1662,8 +1662,8 @@
   }
 
   .jsr-cta {
-    @apply bg-jsr-yellow-400 border-jsr-cyan-950 text-jsr-cyan-950! border-2
-      hover:no-underline! hover:bg-jsr-yellow-300;
+    @apply bg-jsr-yellow-400 border-0 text-jsr-cyan-950! hover:no-underline!
+      hover:bg-jsr-yellow-400;
   }
 
   .deploy-button {
