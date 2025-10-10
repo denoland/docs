@@ -253,6 +253,7 @@ async function generatePackagePage(pkg: PackageSummary) {
   body += sanitizeOverviewHtml(overviewHtml) + "\n"; // keep HTML fragment
   // Insert install instructions and JSR docs CTA after the overview
   body += [
+    "",
     "### Add to your project",
     "",
     "```sh",

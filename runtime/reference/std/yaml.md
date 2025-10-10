@@ -60,6 +60,7 @@ Limitations</h2>
 <ul>
 <li><code>binary</code> type is currently not stable.</li>
 </ul>
+
 ### Add to your project
 
 ```sh
