@@ -98,6 +98,15 @@ vim.lsp.config('ts_ls', {
 For Deno, the example above assumes a `deno.json` or `deno.jsonc` file exists at
 the root of the project.
 
+If you're using `nvim-lspconfig`, you'll have to set `root_dir` for `ts_ls`. This is because `nvim-lspconfig` creates a [`root_dir`](https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ts_ls.lua#L56-L68) entry and `root_markers` is [unused if root_dir is specified](https://neovim.io/doc/user/lsp.html).
+```lua
+vim.lsp.config('ts_ls', {
+    on_attach = on_attach,
+    root_dir = {"package.json"},
+    single_file_support = false,
+})
+```
+
 ##### Kickstart.nvim and Mason LSP
 
 If you are using [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)
