@@ -35,13 +35,14 @@ Runtime compatibility</h1>
 <a href="https://jsr.io/@std/fmt/doc/printf/~" rel="nofollow">printf</a> is mostly compatible with major
 runtimes, however some of features, such as <code>%v</code>, <code>%i</code> and <code>%I</code> format
 specifiers, are only available in Deno. See the API docs for details.</p>
+
 ### Add to your project
 
 ```sh
 deno add jsr:@std/fmt
 ```
 
-<a href="https://jsr.io/@std/fmt/docs" class="docs-cta jsr-cta">See all symbols
+<a href="https://jsr.io/@std/fmt/doc" class="docs-cta jsr-cta">See all symbols
 in @std/fmt on
 <svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 

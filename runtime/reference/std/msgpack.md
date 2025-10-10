@@ -49,13 +49,14 @@ assertEquals(decoded, obj);
 <li>arrays of values of these types</li>
 <li>objects with string or number keys, and values of these types</li>
 </ul>
+
 ### Add to your project
 
 ```sh
 deno add jsr:@std/msgpack
 ```
 
-<a href="https://jsr.io/@std/msgpack/docs" class="docs-cta jsr-cta">See all
+<a href="https://jsr.io/@std/msgpack/doc" class="docs-cta jsr-cta">See all
 symbols in @std/msgpack on
 <svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 

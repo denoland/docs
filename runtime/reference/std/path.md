@@ -241,13 +241,14 @@ assertEquals(fromFileUrl("file:///home/foo"), "\\home\\foo");
 
 <p>Functions for working with URLs can be found in
 <a href="https://github.com/denoland/std/blob/HEAD/./doc/posix/~" rel="nofollow">@std/path/posix</a>.</p>
+
 ### Add to your project
 
 ```sh
 deno add jsr:@std/path
 ```
 
-<a href="https://jsr.io/@std/path/docs" class="docs-cta jsr-cta">See all symbols
+<a href="https://jsr.io/@std/path/doc" class="docs-cta jsr-cta">See all symbols
 in @std/path on
 <svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
