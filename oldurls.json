@@ -146,5 +146,6 @@
   "/deploy/tutorials/*": "/examples/",
   "/deploy/kv/tutorials/": "/examples/kv/",
   "/deploy/kv/tutorials/schedule_notification/": "/examples/",
-  "/deploy/kv/tutorials/webhook_processor/": "/examples/"
+  "/deploy/kv/tutorials/webhook_processor/": "/examples/",
+  "/runtime/fundamentals/standard_library/": "/runtime/reference/std/"
 }
