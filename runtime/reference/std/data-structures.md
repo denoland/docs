@@ -12,23 +12,94 @@ stability: stable
 ## Overview
 
 <p>Data structures for use in algorithms and other data manipulation.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { <span class="pl-smi">BinarySearchTree</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/data-structures"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> values <span class="pl-c1">=</span> [<span class="pl-c1">3</span>, <span class="pl-c1">10</span>, <span class="pl-c1">13</span>, <span class="pl-c1">4</span>, <span class="pl-c1">6</span>, <span class="pl-c1">7</span>, <span class="pl-c1">1</span>, <span class="pl-c1">14</span>];
-<span class="pl-k">const</span> tree <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-smi">BinarySearchTree</span>&lt;<span class="pl-smi">number</span>&gt;();
-values.<span class="pl-en">forEach</span>((value) <span class="pl-c1">=&gt;</span> tree.<span class="pl-en">insert</span>(value));
+```js
+import { BinarySearchTree } from "@std/data-structures";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-en">assertEquals</span>([...tree], [<span class="pl-c1">1</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">6</span>, <span class="pl-c1">7</span>, <span class="pl-c1">10</span>, <span class="pl-c1">13</span>, <span class="pl-c1">14</span>]);
-<span class="pl-en">assertEquals</span>(tree.<span class="pl-en">min</span>(), <span class="pl-c1">1</span>);
-<span class="pl-en">assertEquals</span>(tree.<span class="pl-en">max</span>(), <span class="pl-c1">14</span>);
-<span class="pl-en">assertEquals</span>(tree.<span class="pl-en">find</span>(<span class="pl-c1">42</span>), <span class="pl-c1">null</span>);
-<span class="pl-en">assertEquals</span>(tree.<span class="pl-en">find</span>(<span class="pl-c1">7</span>), <span class="pl-c1">7</span>);
-<span class="pl-en">assertEquals</span>(tree.<span class="pl-en">remove</span>(<span class="pl-c1">42</span>), <span class="pl-c1">false</span>);
-<span class="pl-en">assertEquals</span>(tree.<span class="pl-en">remove</span>(<span class="pl-c1">7</span>), <span class="pl-c1">true</span>);
-<span class="pl-en">assertEquals</span>([...tree], [<span class="pl-c1">1</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">6</span>, <span class="pl-c1">10</span>, <span class="pl-c1">13</span>, <span class="pl-c1">14</span>]);
-</code></pre>
+const values = [3, 10, 13, 4, 6, 7, 1, 14];
+const tree = new BinarySearchTree<number>();
+values.forEach((value) => tree.insert(value));
+
+assertEquals([...tree], [1, 3, 4, 6, 7, 10, 13, 14]);
+assertEquals(tree.min(), 1);
+assertEquals(tree.max(), 14);
+assertEquals(tree.find(42), null);
+assertEquals(tree.find(7), 7);
+assertEquals(tree.remove(42), false);
+assertEquals(tree.remove(7), true);
+assertEquals([...tree], [1, 3, 4, 6, 10, 13, 14]);
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/data-structures
+```
+
+<a href="https://jsr.io/@std/data-structures/docs" class="docs-cta jsr-cta">See all symbols in @std/data-structures on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What “data structures” means here
+
+In this package, “data structures” are purpose-built containers with clear
+invariants and predictable performance characteristics that go beyond
+JavaScript’s built-ins (Array, Map, Set). They provide capabilities like
+priority ordering (heaps), ordered search and iteration (trees), reversible
+lookups (bidirectional maps), and fixed-shape storage (2D arrays).
+
+- Most structures implement `Iterable`, so you can spread or `for..of` them.
+- Many accept a comparator (for example, `ascend`/`descend`) to control order.
+
+### When to use what
+
+- BinaryHeap (priority queue): schedule work, pick top-k items,
+  Dijkstra/Best‑First search. Default is a max‑heap; supply a custom comparator
+  to change priority.
+- RedBlackTree (self‑balancing BST): maintain a sorted set of values with fast
+  min/max and in‑order iteration even under adversarial input.
+- BinarySearchTree (unbalanced): simpler tree for mostly random inputs or
+  educational use; supports traversal orders and min/max.
+- BidirectionalMap (unstable): two‑way lookups when both keys and values are
+  unique (for example, ID ↔ code).
+- D2Array (unstable): fixed‑size 2D grid (boards, matrices) with O(1) access.
+
+### Examples
+
+```ts
+import { BinaryHeap } from "@std/data-structures";
+
+// Priority queue (max-heap by default)
+const pq = BinaryHeap.from([5, 1, 3]);
+pq.pop(); // 5
+
+// Custom priority: shortest string first
+const shortestFirst = new BinaryHeap<string>((a, b) => b.length - a.length);
+shortestFirst.push("bbb", "a", "cc");
+shortestFirst.pop(); // "a"
+```
+
+```ts
+import { ascend, RedBlackTree } from "@std/data-structures";
+
+const t = RedBlackTree.from([5, 1, 9], ascend<number>);
+[...t]; // [1, 5, 9]
+t.min(); // 1
+t.max(); // 9
+```
+
+```ts
+// Unstable submodules
+import { BidirectionalMap } from "@std/data-structures/unstable-bidirectional-map";
+import { D2Array } from "@std/data-structures/unstable-2d-array";
+
+const bimap = new BidirectionalMap<string, number>();
+bimap.set("alice", 1);
+bimap.getReverse(1); // "alice"
+
+const grid = new D2Array<number>(3, 2, 0); // width=3, height=2, initial=0
+grid.resize(4, 2);
+grid.insert(1, 1, 42);
+grid.get(1, 1); // 42
+```
 <!-- custom:end -->

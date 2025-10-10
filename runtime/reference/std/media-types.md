@@ -19,16 +19,112 @@ and is designed to integrate and improve the APIs from
 <p>The <code>vendor</code> folder contains copy of the
 <a href="https://github.com/jshttp/mime-types" rel="nofollow">jshttp/mime-db</a> <code>db.json</code> file,
 along with its license.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { contentType, allExtensions, getCharset } <span class="pl-k">from</span> <span class="pl-s">"@std/media-types"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">allExtensions</span>(<span class="pl-s">"application/json"</span>), [<span class="pl-s">"json"</span>, <span class="pl-s">"map"</span>]);
+```js
+import { contentType, allExtensions, getCharset } from "@std/media-types";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">contentType</span>(<span class="pl-s">".json"</span>), <span class="pl-s">"application/json; charset=UTF-8"</span>);
+assertEquals(allExtensions("application/json"), ["json", "map"]);
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">getCharset</span>(<span class="pl-s">"text/plain"</span>), <span class="pl-s">"UTF-8"</span>);
-</code></pre>
+assertEquals(contentType(".json"), "application/json; charset=UTF-8");
+
+assertEquals(getCharset("text/plain"), "UTF-8");
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/media-types
+```
+
+<a href="https://jsr.io/@std/media-types/docs" class="docs-cta jsr-cta">See all symbols in @std/media-types on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What are media types?
+
+Media types, also known as MIME types, are standardized identifiers used to
+indicate the nature and format of a file or piece of data. They are commonly
+used in HTTP headers to specify the type of content being sent or received.
+
+## Why use @std/media-types?
+
+You may need to determine the correct MIME type for a file based on its
+extension, or vice versa, when handling file uploads, downloads, or serving web
+content. This package provides utility functions to easily map between
+extensions and MIME types and obtain charset hints.
+
+## Examples
+
+### Quick lookups
+
+```ts
+import { allExtensions, extension, typeByExtension } from "@std/media-types";
+
+console.log(typeByExtension(".png")); // "image/png"
+console.log(extension("text/html")); // "html"
+console.log(allExtensions("application/json")); // ["json", "map"]
+```
+
+### Build headers for responses
+
+```ts
+import { contentType } from "@std/media-types";
+
+// Produces a full header value with charset when appropriate
+const ct = contentType(".css"); // "text/css; charset=UTF-8"
+
+return new Response("body", {
+  headers: {
+    "Content-Type": ct ?? "application/octet-stream",
+  },
+});
+```
+
+### Parse and normalize a Content-Type header
+
+```ts
+import { formatMediaType, parseMediaType } from "@std/media-types";
+
+const header = "text/HTML; charset=UTF-8";
+const [type, params] = parseMediaType(header)!; // ["text/html", { charset: "UTF-8" }]
+
+// Re-serialize with normalized type and params (lowercased keys)
+const normalized = formatMediaType(type, params);
+// "text/html; charset=UTF-8"
+```
+
+### Extract multipart/form-data boundary from a request
+
+```ts
+import { parseMediaType } from "@std/media-types";
+
+function getBoundary(headers: Headers): string | undefined {
+  const value = headers.get("content-type");
+  if (!value) return undefined;
+  const parsed = parseMediaType(value);
+  return parsed?.[1]?.boundary;
+}
+```
+
+### Detect charset from an incoming request
+
+```ts
+import { getCharset } from "@std/media-types";
+
+async function readText(req: Request): Promise<string> {
+  const charset = getCharset(req.headers.get("content-type") ?? "") ?? "UTF-8";
+  const bytes = new Uint8Array(await req.arrayBuffer());
+  const decoder = new TextDecoder(charset);
+  return decoder.decode(bytes);
+}
+```
+
+## Tips
+
+- Prefer `contentType(extOrType)` when constructing HTTP responses.
+- Use `allExtensions(type)` to support multiple possible extensions.
+- `parseMediaType` throws on invalid input; wrap in try/catch if parsing user
+  input.
+- When `contentType()` returns `undefined` for an unknown extension/type, fall
+  back to `application/octet-stream`.
 <!-- custom:end -->

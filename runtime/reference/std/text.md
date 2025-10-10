@@ -12,17 +12,101 @@ stability: stable
 ## Overview
 
 <p>Utility functions for working with text.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { toCamelCase, compareSimilarity } <span class="pl-k">from</span> <span class="pl-s">"@std/text"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">toCamelCase</span>(<span class="pl-s">"snake_case"</span>), <span class="pl-s">"snakeCase"</span>);
+```js
+import { toCamelCase, compareSimilarity } from "@std/text";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-k">const</span> words <span class="pl-c1">=</span> [<span class="pl-s">"hi"</span>, <span class="pl-s">"help"</span>, <span class="pl-s">"hello"</span>];
+assertEquals(toCamelCase("snake_case"), "snakeCase");
 
-<span class="pl-c">// Words most similar to "hep" will be at the front</span>
-<span class="pl-en">assertEquals</span>(words.<span class="pl-en">sort</span>(<span class="pl-en">compareSimilarity</span>(<span class="pl-s">"hep"</span>)), [<span class="pl-s">"help"</span>, <span class="pl-s">"hi"</span>, <span class="pl-s">"hello"</span>]);
-</code></pre>
+const words = ["hi", "help", "hello"];
+
+// Words most similar to "hep" will be at the front
+assertEquals(words.sort(compareSimilarity("hep")), ["help", "hi", "hello"]);
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/text
+```
+
+<a href="https://jsr.io/@std/text/docs" class="docs-cta jsr-cta">See all symbols in @std/text on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## Why use @std/text?
+
+Reach for it when you need reliable, well-tested text manipulation utilities
+such as case conversions, string similarity, and common text ops.
+
+## Examples
+
+```ts
+import { compareSimilarity, toKebabCase } from "@std/text";
+
+console.log(toKebabCase("HelloWorld"));
+
+const candidates = ["install", "init", "info"];
+console.log(candidates.sort(compareSimilarity("in")));
+```
+
+### Find the closest suggestion
+
+```ts
+import { closestString } from "@std/text/closest-string";
+
+const options = ["length", "size", "help"];
+console.log(closestString("hep", options)); // "help"
+```
+
+### Compute edit distance
+
+```ts
+import { levenshteinDistance } from "@std/text";
+
+console.log(levenshteinDistance("kitten", "sitting")); // 3
+```
+
+### Sort a list by similarity
+
+```ts
+import { wordSimilaritySort } from "@std/text";
+
+const cmds = ["install", "init", "info", "inspect"];
+console.log(wordSimilaritySort("in", cmds));
+// e.g., ["init", "info", "install", "inspect"]
+```
+
+### Dedent a multiline string (unstable)
+
+```ts
+import { dedent } from "@std/text/unstable-dedent";
+
+const msg = dedent`
+  Line one
+    Line two
+  Line three
+`;
+console.log(msg);
+// "Line one\n  Line two\nLine three\n"
+```
+
+### Unicode-aware reverse (unstable)
+
+```ts
+import { reverse } from "@std/text/unstable-reverse";
+
+console.log(reverse("mañana")); // "anañam"
+// Preserve grapheme clusters like emoji sequences
+console.log(reverse("👩‍❤️‍💋‍👨", { handleUnicode: true }));
+```
+
+## Tips
+
+- Use similarity comparisons for CLI fuzzy matching and suggestions.
+- Prefer these utils over ad-hoc regex when readability matters.
+- Use `closestString()` when you need one best suggestion; use
+  `wordSimilaritySort()` to rank many.
+- Some utilities are marked unstable; import them via `@std/text/unstable-*` and
+  expect potential API changes.
 <!-- custom:end -->

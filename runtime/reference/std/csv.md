@@ -14,110 +14,122 @@ stability: stable
 <p>Reads and writes comma-separated values (CSV) files.</p>
 <h2 id="parsing-csv">
 Parsing CSV</h2>
-<pre class="highlight"><code><span class="pl-k">import</span> { parse } <span class="pl-k">from</span> <span class="pl-s">"@std/csv/parse"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> string <span class="pl-c1">=</span> <span class="pl-s">"a,b,c\nd,e,f"</span>;
+```js
+import { parse } from "@std/csv/parse";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-c">// Parse as array of arrays (default)</span>
-<span class="pl-en">assertEquals</span>(<span class="pl-en">parse</span>(string, { <span class="pl-c1">skipFirstRow</span>: <span class="pl-c1">false</span> }), [[<span class="pl-s">"a"</span>, <span class="pl-s">"b"</span>, <span class="pl-s">"c"</span>], [<span class="pl-s">"d"</span>, <span class="pl-s">"e"</span>, <span class="pl-s">"f"</span>]]);
+const string = "a,b,c\nd,e,f";
 
-<span class="pl-c">// Parse csv file with headers into array of objects</span>
-<span class="pl-en">assertEquals</span>(<span class="pl-en">parse</span>(string, { <span class="pl-c1">skipFirstRow</span>: <span class="pl-c1">true</span> }), [{ <span class="pl-c1">a</span>: <span class="pl-s">"d"</span>, <span class="pl-c1">b</span>: <span class="pl-s">"e"</span>, <span class="pl-c1">c</span>: <span class="pl-s">"f"</span> }]);
+// Parse as array of arrays (default)
+assertEquals(parse(string, { skipFirstRow: false }), [["a", "b", "c"], ["d", "e", "f"]]);
 
-<span class="pl-c">// Parse with custom column names</span>
-<span class="pl-en">assertEquals</span>(<span class="pl-en">parse</span>(string, { <span class="pl-c1">columns</span>: [<span class="pl-s">"x"</span>, <span class="pl-s">"y"</span>, <span class="pl-s">"z"</span>] }), [
-  { <span class="pl-c1">x</span>: <span class="pl-s">"a"</span>, <span class="pl-c1">y</span>: <span class="pl-s">"b"</span>, <span class="pl-c1">z</span>: <span class="pl-s">"c"</span> },
-  { <span class="pl-c1">x</span>: <span class="pl-s">"d"</span>, <span class="pl-c1">y</span>: <span class="pl-s">"e"</span>, <span class="pl-c1">z</span>: <span class="pl-s">"f"</span> }
+// Parse csv file with headers into array of objects
+assertEquals(parse(string, { skipFirstRow: true }), [{ a: "d", b: "e", c: "f" }]);
+
+// Parse with custom column names
+assertEquals(parse(string, { columns: ["x", "y", "z"] }), [
+  { x: "a", y: "b", z: "c" },
+  { x: "d", y: "e", z: "f" }
 ]);
 
-<span class="pl-c">// Parse tab-separated values</span>
-<span class="pl-k">const</span> tsvString <span class="pl-c1">=</span> <span class="pl-s">"name\tage\tcity\njohn\t30\tnew york\nmary\t25\tlos angeles"</span>;
-<span class="pl-en">assertEquals</span>(<span class="pl-en">parse</span>(tsvString, { <span class="pl-c1">separator</span>: <span class="pl-s">"\t"</span>, <span class="pl-c1">skipFirstRow</span>: <span class="pl-c1">true</span> }), [
-  { <span class="pl-c1">name</span>: <span class="pl-s">"john"</span>, <span class="pl-c1">age</span>: <span class="pl-s">"30"</span>, <span class="pl-c1">city</span>: <span class="pl-s">"new york"</span> },
-  { <span class="pl-c1">name</span>: <span class="pl-s">"mary"</span>, <span class="pl-c1">age</span>: <span class="pl-s">"25"</span>, <span class="pl-c1">city</span>: <span class="pl-s">"los angeles"</span> }
+// Parse tab-separated values
+const tsvString = "name\tage\tcity\njohn\t30\tnew york\nmary\t25\tlos angeles";
+assertEquals(parse(tsvString, { separator: "\t", skipFirstRow: true }), [
+  { name: "john", age: "30", city: "new york" },
+  { name: "mary", age: "25", city: "los angeles" }
 ]);
 
-<span class="pl-c">// Parse a CSV file which has comments</span>
-<span class="pl-k">const</span> csvWithComments <span class="pl-c1">=</span> <span class="pl-s">"# This is a comment\nname,age,city\n# Another comment\njohn,30,new york\nmary,25,los angeles"</span>;
-<span class="pl-en">assertEquals</span>(<span class="pl-en">parse</span>(csvWithComments, { <span class="pl-c1">comment</span>: <span class="pl-s">"#"</span>, <span class="pl-c1">skipFirstRow</span>: <span class="pl-c1">true</span> }), [
-  { <span class="pl-c1">name</span>: <span class="pl-s">"john"</span>, <span class="pl-c1">age</span>: <span class="pl-s">"30"</span>, <span class="pl-c1">city</span>: <span class="pl-s">"new york"</span> },
-  { <span class="pl-c1">name</span>: <span class="pl-s">"mary"</span>, <span class="pl-c1">age</span>: <span class="pl-s">"25"</span>, <span class="pl-c1">city</span>: <span class="pl-s">"los angeles"</span> }
+// Parse a CSV file which has comments
+const csvWithComments = "# This is a comment\nname,age,city\n# Another comment\njohn,30,new york\nmary,25,los angeles";
+assertEquals(parse(csvWithComments, { comment: "#", skipFirstRow: true }), [
+  { name: "john", age: "30", city: "new york" },
+  { name: "mary", age: "25", city: "los angeles" }
 ]);
-</code></pre>
+```
+
 <h2 id="parsing-csv-from-a-stream">
 Parsing CSV from a Stream</h2>
-<pre class="highlight"><code><span class="pl-k">import</span> { <span class="pl-smi">CsvParseStream</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/csv/parse-stream"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-c">// Parse from a stream (useful for large files)</span>
-<span class="pl-k">const</span> source <span class="pl-c1">=</span> <span class="pl-smi">ReadableStream</span>.<span class="pl-en">from</span>([
-  <span class="pl-s">"name,age,city\n"</span>,
-  <span class="pl-s">"john,30,new york\n"</span>,
-  <span class="pl-s">"mary,25,los angeles\n"</span>
+```js
+import { CsvParseStream } from "@std/csv/parse-stream";
+import { assertEquals } from "@std/assert";
+
+// Parse from a stream (useful for large files)
+const source = ReadableStream.from([
+  "name,age,city\n",
+  "john,30,new york\n",
+  "mary,25,los angeles\n"
 ]);
 
-<span class="pl-k">const</span> csvStream <span class="pl-c1">=</span> source
-  .<span class="pl-en">pipeThrough</span>(<span class="pl-k">new</span> <span class="pl-smi">CsvParseStream</span>({ <span class="pl-c1">skipFirstRow</span>: <span class="pl-c1">true</span> }));
+const csvStream = source
+  .pipeThrough(new CsvParseStream({ skipFirstRow: true }));
 
-<span class="pl-k">const</span> records <span class="pl-c1">=</span> <span class="pl-k">await</span> <span class="pl-smi">Array</span>.<span class="pl-en">fromAsync</span>(csvStream);
-<span class="pl-en">assertEquals</span>(records, [
-  { <span class="pl-c1">name</span>: <span class="pl-s">"john"</span>, <span class="pl-c1">age</span>: <span class="pl-s">"30"</span>, <span class="pl-c1">city</span>: <span class="pl-s">"new york"</span> },
-  { <span class="pl-c1">name</span>: <span class="pl-s">"mary"</span>, <span class="pl-c1">age</span>: <span class="pl-s">"25"</span>, <span class="pl-c1">city</span>: <span class="pl-s">"los angeles"</span> }
+const records = await Array.fromAsync(csvStream);
+assertEquals(records, [
+  { name: "john", age: "30", city: "new york" },
+  { name: "mary", age: "25", city: "los angeles" }
 ]);
 
-<span class="pl-c">// Or process records one by one</span>
-<span class="pl-c">// for await (const record of csvStream) {</span>
-<span class="pl-c">//   console.log(record);</span>
-<span class="pl-c">// }</span>
-</code></pre>
+// Or process records one by one
+// for await (const record of csvStream) {
+//   console.log(record);
+// }
+```
+
 <h2 id="stringifying-data-to-csv">
 Stringifying Data to CSV</h2>
-<pre class="highlight"><code><span class="pl-k">import</span> { stringify } <span class="pl-k">from</span> <span class="pl-s">"@std/csv/stringify"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-c">// Convert array of arrays to CSV</span>
-<span class="pl-k">const</span> arrayData <span class="pl-c1">=</span> [[<span class="pl-s">"name"</span>, <span class="pl-s">"age"</span>, <span class="pl-s">"city"</span>], [<span class="pl-s">"john"</span>, <span class="pl-s">"30"</span>, <span class="pl-s">"new york"</span>], [<span class="pl-s">"mary"</span>, <span class="pl-s">"25"</span>, <span class="pl-s">"los angeles"</span>]];
-<span class="pl-k">const</span> csvString <span class="pl-c1">=</span> <span class="pl-en">stringify</span>(arrayData);
-<span class="pl-en">assertEquals</span>(csvString, <span class="pl-s">"name,age,city\r\njohn,30,new york\r\nmary,25,los angeles\r\n"</span>);
+```js
+import { stringify } from "@std/csv/stringify";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-c">// Convert array of objects to CSV</span>
-<span class="pl-k">const</span> objectData <span class="pl-c1">=</span> [
-  { <span class="pl-c1">name</span>: <span class="pl-s">"john"</span>, <span class="pl-c1">age</span>: <span class="pl-s">"30"</span>, <span class="pl-c1">city</span>: <span class="pl-s">"new york"</span> },
-  { <span class="pl-c1">name</span>: <span class="pl-s">"mary"</span>, <span class="pl-c1">age</span>: <span class="pl-s">"25"</span>, <span class="pl-c1">city</span>: <span class="pl-s">"los angeles"</span> }
+// Convert array of arrays to CSV
+const arrayData = [["name", "age", "city"], ["john", "30", "new york"], ["mary", "25", "los angeles"]];
+const csvString = stringify(arrayData);
+assertEquals(csvString, "name,age,city\r\njohn,30,new york\r\nmary,25,los angeles\r\n");
+
+// Convert array of objects to CSV
+const objectData = [
+  { name: "john", age: "30", city: "new york" },
+  { name: "mary", age: "25", city: "los angeles" }
 ];
 
-<span class="pl-c">// When using an array of objects, you must specify columns to use</span>
-<span class="pl-k">const</span> customColumns <span class="pl-c1">=</span> <span class="pl-en">stringify</span>(objectData, { <span class="pl-c1">columns</span>: [<span class="pl-s">"city"</span>, <span class="pl-s">"name"</span>, <span class="pl-s">"age"</span>] });
-<span class="pl-en">assertEquals</span>(customColumns, <span class="pl-s">"city,name,age\r\nnew york,john,30\r\nlos angeles,mary,25\r\n"</span>);
-</code></pre>
+// When using an array of objects, you must specify columns to use
+const customColumns = stringify(objectData, { columns: ["city", "name", "age"] });
+assertEquals(customColumns, "city,name,age\r\nnew york,john,30\r\nlos angeles,mary,25\r\n");
+```
+
 <h2 id="streaming-stringify-data-to-csv">
 Streaming Stringify Data to CSV</h2>
-<pre class="highlight"><code><span class="pl-k">import</span> { <span class="pl-smi">CsvStringifyStream</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/csv/stringify-stream"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">async</span> <span class="pl-k">function</span> <span class="pl-en">writeCsvToTempFile</span>(): <span class="pl-smi">Promise</span>&lt;<span class="pl-smi">string</span>&gt; {
-  <span class="pl-k">const</span> path <span class="pl-c1">=</span> <span class="pl-k">await</span> <span class="pl-smi">Deno</span>.<span class="pl-en">makeTempFile</span>();
-  using file <span class="pl-c1">=</span> <span class="pl-k">await</span> <span class="pl-smi">Deno</span>.<span class="pl-en">open</span>(path, { <span class="pl-c1">write</span>: <span class="pl-c1">true</span> });
+```js
+import { CsvStringifyStream } from "@std/csv/stringify-stream";
+import { assertEquals } from "@std/assert";
 
-  <span class="pl-k">const</span> readable <span class="pl-c1">=</span> <span class="pl-smi">ReadableStream</span>.<span class="pl-en">from</span>([
-    { <span class="pl-c1">id</span>: <span class="pl-c1">1</span>, <span class="pl-c1">name</span>: <span class="pl-s">"one"</span> },
-    { <span class="pl-c1">id</span>: <span class="pl-c1">2</span>, <span class="pl-c1">name</span>: <span class="pl-s">"two"</span> },
-    { <span class="pl-c1">id</span>: <span class="pl-c1">3</span>, <span class="pl-c1">name</span>: <span class="pl-s">"three"</span> },
+async function writeCsvToTempFile(): Promise<string> {
+  const path = await Deno.makeTempFile();
+  using file = await Deno.open(path, { write: true });
+
+  const readable = ReadableStream.from([
+    { id: 1, name: "one" },
+    { id: 2, name: "two" },
+    { id: 3, name: "three" },
   ]);
 
-  <span class="pl-k">await</span> readable
-    .<span class="pl-en">pipeThrough</span>(<span class="pl-k">new</span> <span class="pl-smi">CsvStringifyStream</span>({ <span class="pl-c1">columns</span>: [<span class="pl-s">"id"</span>, <span class="pl-s">"name"</span>] }))
-    .<span class="pl-en">pipeThrough</span>(<span class="pl-k">new</span> <span class="pl-smi">TextEncoderStream</span>())
-    .<span class="pl-en">pipeTo</span>(file.<span class="pl-c1">writable</span>);
+  await readable
+    .pipeThrough(new CsvStringifyStream({ columns: ["id", "name"] }))
+    .pipeThrough(new TextEncoderStream())
+    .pipeTo(file.writable);
 
-  <span class="pl-k">return</span> path;
+  return path;
 }
 
-<span class="pl-k">const</span> path <span class="pl-c1">=</span> <span class="pl-k">await</span> <span class="pl-en">writeCsvToTempFile</span>();
-<span class="pl-k">const</span> content <span class="pl-c1">=</span> <span class="pl-k">await</span> <span class="pl-smi">Deno</span>.<span class="pl-en">readTextFile</span>(path);
-<span class="pl-en">assertEquals</span>(content, <span class="pl-s">"id,name\r\n1,one\r\n2,two\r\n3,three\r\n"</span>);
-</code></pre>
+const path = await writeCsvToTempFile();
+const content = await Deno.readTextFile(path);
+assertEquals(content, "id,name\r\n1,one\r\n2,two\r\n3,three\r\n");
+```
+
 <h2 id="csv-format-information">
 CSV Format Information</h2>
 <p>There are many kinds of CSV files; this module supports the format described
@@ -125,8 +137,11 @@ in <a href="https://www.rfc-editor.org/rfc/rfc4180.html" rel="nofollow">RFC 4180
 <p>A csv file contains zero or more records of one or more fields per record.
 Each record is separated by the newline character. The final record may
 optionally be followed by a newline character.</p>
-<pre class="highlight"><code>field1,field2,field3
-</code></pre>
+
+```js
+field1,field2,field3
+```
+
 <p>White space is considered part of a field.</p>
 <p>Carriage returns before newline characters are silently removed.</p>
 <p>Blank lines are ignored. A line with only whitespace characters (excluding
@@ -134,26 +149,68 @@ the ending newline character) is not considered a blank line.</p>
 <p>Fields which start and stop with the quote character " are called
 quoted-fields. The beginning and ending quote are not part of the field.</p>
 <p>The source:</p>
-<pre class="highlight"><code>normal string,"quoted-field"
-</code></pre>
+
+```js
+normal string,"quoted-field"
+```
+
 <p>results in the fields</p>
-<pre class="highlight"><code>[<span class="pl-s">`normal string`</span>, <span class="pl-s">`quoted-field`</span>]
-</code></pre>
+
+```js
+[`normal string`, `quoted-field`]
+```
+
 <p>Within a quoted-field a quote character followed by a second quote character is considered a single quote.</p>
-<pre class="highlight"><code>"the ""word"" is true","a ""quoted-field"""
-</code></pre>
+
+```js
+"the ""word"" is true","a ""quoted-field"""
+```
+
 <p>results in</p>
-<pre class="highlight"><code>[<span class="pl-s">`the "word" is true`</span>, <span class="pl-s">`a "quoted-field"`</span>]
-</code></pre>
+
+```js
+[`the "word" is true`, `a "quoted-field"`]
+```
+
 <p>Newlines and commas may be included in a quoted-field</p>
-<pre class="highlight"><code>"Multi-line
+
+```js
+"Multi-line
 field","comma is ,"
-</code></pre>
+```
+
 <p>results in</p>
-<pre class="highlight"><code>[<span class="pl-s">`Multi-line</span>
-<span class="pl-s">field`</span>, <span class="pl-s">`comma is ,`</span>]
-</code></pre>
+
+```js
+[`Multi-line
+field`, `comma is ,`]
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/csv
+```
+
+<a href="https://jsr.io/@std/csv/docs" class="docs-cta jsr-cta">See all symbols in @std/csv on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is a CSV?
+
+CSV (Comma-Separated Values) is a simple text format for storing tabular data,
+where each line represents a row and each value within the row is separated by a
+comma. It’s widely used for data exchange between applications, especially
+spreadsheets and databases.
+
+## When to use @std/csv
+
+This package is great for reading and writing CSV files in your applications. It
+supports parsing CSV into arrays or objects, stringifying data back to CSV, and
+streaming for large files.
+
+## Tips
+
+- Use `skipFirstRow: true` to treat the first row as headers.
+- For objects, specify `columns` when stringifying.
+- Prefer streaming parsers for multi-GB datasets.
 <!-- custom:end -->

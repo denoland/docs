@@ -16,10 +16,13 @@ and other utilities for creating HTTP servers and clients.</p>
 <h2 id="file-server">
 File Server</h2>
 <p>A small program for serving local files over HTTP.</p>
-<pre class="highlight"><code><span class="pl-en">deno</span> run <span class="pl-c1">--allow-net</span> <span class="pl-c1">--allow-read</span> jsr:@std/http/file-server
-<span class="pl-en">Listening</span> on:
-<span class="pl-c1">-</span> Local: http://localhost:8000
-</code></pre>
+
+```js
+deno run --allow-net --allow-read jsr:@std/http/file-server
+Listening on:
+- Local: http://localhost:8000
+```
+
 <p>When the <code>--allow-sys=networkInterfaces</code> permission is provided, the file
 server will also display the local area network addresses that can be used to
 access the server.</p>
@@ -45,52 +48,226 @@ therefore is not provided.</p>
 </blockquote>
 <h2 id="user-agent-handling">
 User agent handling</h2>
-<p>The <a href="/@std/http@1.0.21/doc/~/UserAgent" rel="nofollow"><code>UserAgent</code></a> class provides user agent string parsing, allowing
+<p>The <a href="https://jsr.io/@std/http@1.0.21/doc/~/UserAgent" rel="nofollow"><code>UserAgent</code></a> class provides user agent string parsing, allowing
 a user agent flag to be semantically understood.</p>
 <p>For example to integrate the user agent provided in the header <code>User-Agent</code>
 in an http request would look like this:</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { <span class="pl-smi">UserAgent</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/http/user-agent"</span>;
 
-<span class="pl-smi">Deno</span>.<span class="pl-en">serve</span>((req) <span class="pl-c1">=&gt;</span> {
-  <span class="pl-k">const</span> userAgent <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-smi">UserAgent</span>(req.<span class="pl-c1">headers</span>.<span class="pl-en">get</span>(<span class="pl-s">"user-agent"</span>) <span class="pl-c1">??</span> <span class="pl-s">""</span>);
-  <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">Response</span>(<span class="pl-s">`Hello, <span class="pl-s1">${userAgent.<span class="pl-c1">browser</span>.<span class="pl-c1">name</span>}</span></span>
-<span class="pl-s">    on <span class="pl-s1">${userAgent.<span class="pl-c1">os</span>.<span class="pl-c1">name</span>}</span> <span class="pl-s1">${userAgent.<span class="pl-c1">os</span>.<span class="pl-c1">version</span>}</span>!`</span>);
+```js
+import { UserAgent } from "@std/http/user-agent";
+
+Deno.serve((req) => {
+  const userAgent = new UserAgent(req.headers.get("user-agent") ?? "");
+  return new Response(`Hello, ${userAgent.browser.name}
+    on ${userAgent.os.name} ${userAgent.os.version}!`);
 });
-</code></pre>
+```
+
 <h3 id="routing">
 Routing</h3>
 <p><code>route</code> provides an easy way to route requests to different
 handlers based on the request path and method.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { route, <span class="pl-k">type</span> <span class="pl-smi">Route</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/http/unstable-route"</span>;
-<span class="pl-k">import</span> { serveDir } <span class="pl-k">from</span> <span class="pl-s">"@std/http/file-server"</span>;
 
-<span class="pl-k">const</span> routes: <span class="pl-smi">Route</span>[] <span class="pl-c1">=</span> [
+```js
+import { route, type Route } from "@std/http/unstable-route";
+import { serveDir } from "@std/http/file-server";
+
+const routes: Route[] = [
   {
-    <span class="pl-c1">pattern</span>: <span class="pl-k">new</span> <span class="pl-smi">URLPattern</span>({ <span class="pl-c1">pathname</span>: <span class="pl-s">"/about"</span> }),
-    <span class="pl-en">handler</span>: () <span class="pl-c1">=&gt;</span> <span class="pl-k">new</span> <span class="pl-smi">Response</span>(<span class="pl-s">"About page"</span>),
+    pattern: new URLPattern({ pathname: "/about" }),
+    handler: () => new Response("About page"),
   },
   {
-    <span class="pl-c1">pattern</span>: <span class="pl-k">new</span> <span class="pl-smi">URLPattern</span>({ <span class="pl-c1">pathname</span>: <span class="pl-s">"/users/:id"</span> }),
-    <span class="pl-en">handler</span>: (_req, _info, params) <span class="pl-c1">=&gt;</span> <span class="pl-k">new</span> <span class="pl-smi">Response</span>(params?.<span class="pl-c1">pathname</span>.<span class="pl-c1">groups</span>.<span class="pl-c1">id</span>),
+    pattern: new URLPattern({ pathname: "/users/:id" }),
+    handler: (_req, _info, params) => new Response(params?.pathname.groups.id),
   },
   {
-    <span class="pl-c1">pattern</span>: <span class="pl-k">new</span> <span class="pl-smi">URLPattern</span>({ <span class="pl-c1">pathname</span>: <span class="pl-s">"/static/*"</span> }),
-    <span class="pl-en">handler</span>: (req: <span class="pl-smi">Request</span>) <span class="pl-c1">=&gt;</span> <span class="pl-en">serveDir</span>(req)
+    pattern: new URLPattern({ pathname: "/static/*" }),
+    handler: (req: Request) => serveDir(req)
   },
   {
-    <span class="pl-c1">method</span>: [<span class="pl-s">"GET"</span>, <span class="pl-s">"HEAD"</span>],
-    <span class="pl-c1">pattern</span>: <span class="pl-k">new</span> <span class="pl-smi">URLPattern</span>({ <span class="pl-c1">pathname</span>: <span class="pl-s">"/api"</span> }),
-    <span class="pl-en">handler</span>: (req: <span class="pl-smi">Request</span>) <span class="pl-c1">=&gt;</span> <span class="pl-k">new</span> <span class="pl-smi">Response</span>(req.<span class="pl-c1">method</span> <span class="pl-c1">===</span> <span class="pl-s">'HEAD'</span> ? <span class="pl-c1">null</span> : <span class="pl-s">'ok'</span>),
+    method: ["GET", "HEAD"],
+    pattern: new URLPattern({ pathname: "/api" }),
+    handler: (req: Request) => new Response(req.method === 'HEAD' ? null : 'ok'),
   },
 ];
 
-<span class="pl-k">function</span> <span class="pl-en">defaultHandler</span>(_req: <span class="pl-smi">Request</span>) {
-  <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">Response</span>(<span class="pl-s">"Not found"</span>, { <span class="pl-c1">status</span>: <span class="pl-c1">404</span> });
+function defaultHandler(_req: Request) {
+  return new Response("Not found", { status: 404 });
 }
 
-<span class="pl-smi">Deno</span>.<span class="pl-en">serve</span>(<span class="pl-en">route</span>(routes, defaultHandler));
-</code></pre>
+Deno.serve(route(routes, defaultHandler));
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/http
+```
+
+<a href="https://jsr.io/@std/http/docs" class="docs-cta jsr-cta">See all symbols in @std/http on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## Why use @std/http?
+
+Great for small, fast HTTP servers and handlers using the Web Fetch API style.
+
+## Examples
+
+A minimal server
+
+```ts
+import { serve } from "@std/http";
+
+serve((_req) => new Response("Hello"), { port: 8000 });
+```
+
+Conditional GET with ETag (304 Not Modified)
+
+```ts
+import { serve } from "@std/http";
+import { eTag, ifNoneMatch } from "@std/http/etag";
+
+const body = JSON.stringify({ message: "Hello, cached world" });
+const etag = eTag(body);
+
+serve((req) => {
+  const inm = req.headers.get("if-none-match");
+  // ifNoneMatch returns false when the tag matches -> respond 304
+  if (!ifNoneMatch(inm, etag)) {
+    return new Response(null, { status: 304, headers: { ETag: etag } });
+  }
+  return new Response(body, {
+    headers: { "content-type": "application/json; charset=utf-8", ETag: etag },
+  });
+});
+```
+
+Content negotiation (HTML vs JSON)
+
+```ts
+import { serve } from "@std/http";
+import { accepts } from "@std/http/negotiation";
+
+serve((req) => {
+  const preferred = accepts(req) ?? ["*/*"];
+  if (preferred.includes("application/json") || preferred.includes("*/*")) {
+    return Response.json({ ok: true });
+  }
+  return new Response("<h1>ok</h1>", {
+    headers: { "content-type": "text/html; charset=utf-8" },
+  });
+});
+```
+
+Cookies: set, read, and delete
+
+```ts
+import { serve } from "@std/http";
+import { deleteCookie, getCookies, setCookie } from "@std/http/cookie";
+
+serve(async (req) => {
+  const url = new URL(req.url);
+  const headers = new Headers();
+
+  if (url.pathname === "/login" && req.method === "POST") {
+    // In practice, validate credentials first
+    setCookie(headers, {
+      name: "sid",
+      value: crypto.randomUUID(),
+      httpOnly: true,
+      secure: true,
+      sameSite: "Lax",
+      path: "/",
+      maxAge: 60 * 60, // 1 hour
+    });
+    return new Response("ok", { headers });
+  }
+
+  if (url.pathname === "/me") {
+    const cookies = getCookies(req.headers);
+    const sid = cookies["sid"] ?? "(none)";
+    return Response.json({ sid });
+  }
+
+  if (url.pathname === "/logout") {
+    deleteCookie(headers, "sid", { path: "/" });
+    return new Response("bye", { headers });
+  }
+
+  return new Response("not found", { status: 404 });
+});
+```
+
+Static files and CORS with `serveDir`
+
+```ts
+import { serve } from "@std/http";
+import { serveDir } from "@std/http/file-server";
+
+// Requires --allow-read for your public directory
+serve((req) =>
+  serveDir(req, {
+    fsRoot: "public",
+    showDirListing: true,
+    enableCors: true, // Adds basic Access-Control-* headers
+    urlRoot: "/static",
+  })
+);
+```
+
+Stream updates with Server-Sent Events (SSE)
+
+```ts
+import { serve } from "@std/http";
+import { ServerSentEventStream } from "@std/http/server-sent-event-stream";
+
+serve((_req) => {
+  const { readable, writable } = new TransformStream();
+  const sse = new ServerSentEventStream(writable);
+
+  let i = 0;
+  const timer = setInterval(() => {
+    sse.dispatchMessage({
+      event: "tick",
+      id: String(i),
+      data: new Date().toISOString(),
+    });
+    i++;
+    if (i === 5) { // stop after 5 messages
+      clearInterval(timer);
+      sse.close();
+    }
+  }, 1000);
+
+  return new Response(readable, {
+    headers: {
+      "content-type": "text/event-stream",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+    },
+  });
+});
+```
+
+Serve a single file (Range requests supported)
+
+```ts
+import { serve } from "@std/http";
+import { serveFile } from "@std/http/file-server";
+
+serve((req) => {
+  const url = new URL(req.url);
+  if (url.pathname === "/video") {
+    return serveFile(req, "static/video.mp4");
+  }
+  return new Response("not found", { status: 404 });
+});
+```
+
+## Tips
+
+- Handlers are `(req: Request) => Response | Promise<Response>`.
+- Compose with standard `URL`, `Headers`, and `Request` for parsing and
+  responses.
 <!-- custom:end -->

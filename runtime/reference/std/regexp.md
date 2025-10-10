@@ -14,16 +14,58 @@ stability: stable
 <p>Functions for tasks related to
 <a href="https://en.wikipedia.org/wiki/Regular_expression" rel="nofollow">regular expression</a> (regexp),
 such as escaping text for interpolation into a regexp.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { escape } <span class="pl-k">from</span> <span class="pl-s">"@std/regexp/escape"</span>;
-<span class="pl-k">import</span> { assertEquals, assertMatch, assertNotMatch } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> re <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-smi">RegExp</span>(<span class="pl-s">`^<span class="pl-s1">${<span class="pl-en">escape</span>(<span class="pl-s">"."</span>)}</span>$`</span>, <span class="pl-s">"u"</span>);
+```js
+import { escape } from "@std/regexp/escape";
+import { assertEquals, assertMatch, assertNotMatch } from "@std/assert";
 
-<span class="pl-en">assertEquals</span>(<span class="pl-s">"^\\.$"</span>, re.<span class="pl-c1">source</span>);
-<span class="pl-en">assertMatch</span>(<span class="pl-s">"."</span>, re);
-<span class="pl-en">assertNotMatch</span>(<span class="pl-s">"a"</span>, re);
-</code></pre>
+const re = new RegExp(`^${escape(".")}$`, "u");
+
+assertEquals("^\\.$", re.source);
+assertMatch(".", re);
+assertNotMatch("a", re);
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/regexp
+```
+
+<a href="https://jsr.io/@std/regexp/docs" class="docs-cta jsr-cta">See all symbols in @std/regexp on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is RegExp?
+
+RegExp (regular expressions) are patterns used to match character combinations
+in strings. In JavaScript, they are implemented via the `RegExp` object and
+literal syntax (e.g., `/pattern/flags`).
+
+### Why use @std/regexp?
+
+This package provides small utilities to make working with regexps safer and
+easier:
+
+- Use `escape()` when interpolating user input into a RegExp to avoid unintended
+  meta-characters.
+- Prefer the `u` (unicode) flag for correctness; it changes how escapes and
+  character classes behave.
+- Anchors: `^` and `$` match start/end of string; use `m` flag to make them
+  line-based.
+- When performance matters, precompile your regex once and reuse it.
+
+## Examples
+
+```ts
+import { escape } from "@std/regexp/escape";
+
+const user = "hello.+(world)";
+const safe = new RegExp(`^${escape(user)}$`, "u");
+safe.test("hello.+(world)"); // true
+safe.test("helloX(world)"); // false
+
+// Multiline anchors
+const re = /^error:.+$/mu;
+re.test("ok\nerror: bad\nnext"); // true
+```
 <!-- custom:end -->

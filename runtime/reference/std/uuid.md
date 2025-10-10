@@ -18,16 +18,52 @@ versions v1, v3, v4, v5, v6 and v7.</p>
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID" rel="nofollow"><code>crypto.randomUUID()</code></a>
 function instead of this package, if you only need to generate v4 UUIDs.</p>
 <p>Based on <a href="https://www.npmjs.com/package/uuid" rel="nofollow"><code>npm:uuid</code></a>.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { v5, <span class="pl-smi">NAMESPACE_DNS</span>, <span class="pl-smi">NIL_UUID</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/uuid"</span>;
-<span class="pl-k">import</span> { assert, assertFalse } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> data <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-smi">TextEncoder</span>().<span class="pl-en">encode</span>(<span class="pl-s">"deno.land"</span>);
-<span class="pl-k">const</span> uuid <span class="pl-c1">=</span> <span class="pl-k">await</span> v5.<span class="pl-en">generate</span>(<span class="pl-smi">NAMESPACE_DNS</span>, data);
+```js
+import { v5, NAMESPACE_DNS, NIL_UUID } from "@std/uuid";
+import { assert, assertFalse } from "@std/assert";
 
-<span class="pl-en">assert</span>(v5.<span class="pl-en">validate</span>(uuid));
-<span class="pl-en">assertFalse</span>(v5.<span class="pl-en">validate</span>(<span class="pl-smi">NIL_UUID</span>));
-</code></pre>
+const data = new TextEncoder().encode("deno.land");
+const uuid = await v5.generate(NAMESPACE_DNS, data);
+
+assert(v5.validate(uuid));
+assertFalse(v5.validate(NIL_UUID));
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/uuid
+```
+
+<a href="https://jsr.io/@std/uuid/docs" class="docs-cta jsr-cta">See all symbols in @std/uuid on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is a UUID?
+
+A UUID (Universally Unique Identifier) is a 128-bit identifier used to uniquely
+identify information in computer systems. UUIDs are designed to be globally
+unique, meaning that the probability of two UUIDs being the same is extremely
+low, even if they are generated independently in different systems. This makes
+UUIDs useful for a variety of applications, such as database keys, session
+identifiers, and distributed computing, where unique identification is crucial.
+
+### Why use @std/uuid?
+
+To generate or validate UUIDs across versions (v1, v3, v4, v5, v6, v7). Prefer
+built-in `crypto.randomUUID()` if you only need v4.
+
+### Examples
+
+```ts
+import { v4 } from "@std/uuid";
+
+const id = v4.generate();
+console.log(v4.validate(id)); // true
+```
+
+### Tips
+
+- Namespaced IDs: use v3/v5 for deterministic IDs based on a name + namespace.
+- Time-ordered IDs: consider v6/v7 for better index locality.
 <!-- custom:end -->

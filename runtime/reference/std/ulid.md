@@ -13,32 +13,65 @@ stability: stable
 
 <p>Utilities for generating and working with
 <a href="https://github.com/ulid/spec" rel="nofollow">Universally Unique Lexicographically Sortable Identifiers (ULIDs)</a>.</p>
-<p>To generate a ULID use the <a href="/@std/ulid@1.0.0/doc/~/ulid" rel="nofollow"><code>ulid</code></a> function. This will generate a
+<p>To generate a ULID use the <a href="https://jsr.io/@std/ulid@1.0.0/doc/~/ulid" rel="nofollow"><code>ulid</code></a> function. This will generate a
 ULID based on the current time.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { ulid } <span class="pl-k">from</span> <span class="pl-s">"@std/ulid"</span>;
 
-<span class="pl-en">ulid</span>(); <span class="pl-c">// 01HYFKMDF3HVJ4J3JZW8KXPVTY</span>
-</code></pre>
-<p><a href="/@std/ulid@1.0.0/doc/~/ulid" rel="nofollow"><code>ulid</code></a> does not guarantee that the ULIDs will be strictly
+```js
+import { ulid } from "@std/ulid";
+
+ulid(); // 01HYFKMDF3HVJ4J3JZW8KXPVTY
+```
+
+<p><a href="https://jsr.io/@std/ulid@1.0.0/doc/~/ulid" rel="nofollow"><code>ulid</code></a> does not guarantee that the ULIDs will be strictly
 increasing for the same current time. If you need to guarantee that the ULIDs
 will be strictly increasing, even for the same current time, use the
-<a href="/@std/ulid@1.0.0/doc/~/monotonicUlid" rel="nofollow"><code>monotonicUlid</code></a> function.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { monotonicUlid } <span class="pl-k">from</span> <span class="pl-s">"@std/ulid"</span>;
+<a href="https://jsr.io/@std/ulid@1.0.0/doc/~/monotonicUlid" rel="nofollow"><code>monotonicUlid</code></a> function.</p>
 
-<span class="pl-en">monotonicUlid</span>(); <span class="pl-c">// 01HYFKHG5F8RHM2PM3D7NSTDAS</span>
-<span class="pl-en">monotonicUlid</span>(); <span class="pl-c">// 01HYFKHG5F8RHM2PM3D7NSTDAT</span>
-</code></pre>
+```js
+import { monotonicUlid } from "@std/ulid";
+
+monotonicUlid(); // 01HYFKHG5F8RHM2PM3D7NSTDAS
+monotonicUlid(); // 01HYFKHG5F8RHM2PM3D7NSTDAT
+```
+
 <p>Because each ULID encodes the time it was generated, you can extract the
-timestamp from a ULID using the <a href="/@std/ulid@1.0.0/doc/~/decodeTime" rel="nofollow"><code>decodeTime</code></a> function.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { decodeTime, ulid } <span class="pl-k">from</span> <span class="pl-s">"@std/ulid"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
+timestamp from a ULID using the <a href="https://jsr.io/@std/ulid@1.0.0/doc/~/decodeTime" rel="nofollow"><code>decodeTime</code></a> function.</p>
 
-<span class="pl-k">const</span> timestamp <span class="pl-c1">=</span> <span class="pl-c1">150_000</span>;
-<span class="pl-k">const</span> ulidString <span class="pl-c1">=</span> <span class="pl-en">ulid</span>(timestamp);
+```js
+import { decodeTime, ulid } from "@std/ulid";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">decodeTime</span>(ulidString), timestamp);
-</code></pre>
+const timestamp = 150_000;
+const ulidString = ulid(timestamp);
+
+assertEquals(decodeTime(ulidString), timestamp);
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/ulid
+```
+
+<a href="https://jsr.io/@std/ulid/docs" class="docs-cta jsr-cta">See all symbols in @std/ulid on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is a ULID?
+
+A ULID (Universally Unique Lexicographically Sortable Identifier) is a
+26-character string that serves as a unique identifier. It combines a timestamp
+with random data, making it both unique and sortable based on the time of
+creation. ULIDs are designed to be URL-safe and can be used in various
+applications, such as databases and distributed systems.
+
+## Why use @std/ulid?
+
+Use when you need unique, time-sortable IDs that are easy to generate and share.
+Great for databases, distributed systems, and user-facing tokens.
+
+## Tips
+
+- Use `monotonicUlid()` when you need strictly increasing values within the same
+  millisecond.
+- You can extract the timestamp with `decodeTime(ulid)` to aid debugging.
 <!-- custom:end -->

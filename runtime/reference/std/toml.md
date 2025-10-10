@@ -11,7 +11,7 @@ stability: stable
 
 ## Overview
 
-<p><a href="/@std/toml@1.0.11/doc/~/parse" rel="nofollow"><code>parse</code></a> and <a href="/@std/toml@1.0.11/doc/~/stringify" rel="nofollow"><code>stringify</code></a> for handling
+<p><a href="https://jsr.io/@std/toml@1.0.11/doc/~/parse" rel="nofollow"><code>parse</code></a> and <a href="https://jsr.io/@std/toml@1.0.11/doc/~/stringify" rel="nofollow"><code>stringify</code></a> for handling
 <a href="https://toml.io" rel="nofollow">TOML</a> encoded data.</p>
 <p>Be sure to read the supported types as not every spec is supported at the
 moment and the handling in TypeScript side is a bit different.</p>
@@ -51,7 +51,9 @@ string.</p>
 <h4 id="array-of-tables">
 Array of Tables</h4>
 <p>At the moment only simple declarations like below are supported:</p>
-<pre class="highlight"><code>[[bin]]
+
+```js
+[[bin]]
 name = "deno"
 path = "cli/main.rs"
 
@@ -62,46 +64,77 @@ path = "src/foo.rs"
 [[nib]]
 name = "node"
 path = "not_found"
-</code></pre>
-<p>will output:</p>
-<pre class="highlight"><code>{
-  <span class="pl-s">"bin"</span>: [
-    { <span class="pl-s">"name"</span>: <span class="pl-s">"deno"</span>, <span class="pl-s">"path"</span>: <span class="pl-s">"cli/main.rs"</span> },
-    { <span class="pl-s">"name"</span>: <span class="pl-s">"deno_core"</span>, <span class="pl-s">"path"</span>: <span class="pl-s">"src/foo.rs"</span> }
-  ],
-  <span class="pl-s">"nib"</span>: [{ <span class="pl-s">"name"</span>: <span class="pl-s">"node"</span>, <span class="pl-s">"path"</span>: <span class="pl-s">"not_found"</span> }]
-}
-</code></pre>
-<pre class="highlight"><code><span class="pl-k">import</span> { parse, stringify } <span class="pl-k">from</span> <span class="pl-s">"@std/toml"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
+```
 
-<span class="pl-k">const</span> obj <span class="pl-c1">=</span> {
-  <span class="pl-c1">bin</span>: [
-    { <span class="pl-c1">name</span>: <span class="pl-s">"deno"</span>, <span class="pl-c1">path</span>: <span class="pl-s">"cli/main.rs"</span> },
-    { <span class="pl-c1">name</span>: <span class="pl-s">"deno_core"</span>, <span class="pl-c1">path</span>: <span class="pl-s">"src/foo.rs"</span> },
+<p>will output:</p>
+
+```js
+{
+  "bin": [
+    { "name": "deno", "path": "cli/main.rs" },
+    { "name": "deno_core", "path": "src/foo.rs" }
   ],
-  <span class="pl-c1">nib</span>: [{ <span class="pl-c1">name</span>: <span class="pl-s">"node"</span>, <span class="pl-c1">path</span>: <span class="pl-s">"not_found"</span> }],
+  "nib": [{ "name": "node", "path": "not_found" }]
+}
+```
+
+```js
+import { parse, stringify } from "@std/toml";
+import { assertEquals } from "@std/assert";
+
+const obj = {
+  bin: [
+    { name: "deno", path: "cli/main.rs" },
+    { name: "deno_core", path: "src/foo.rs" },
+  ],
+  nib: [{ name: "node", path: "not_found" }],
 };
 
-<span class="pl-k">const</span> tomlString <span class="pl-c1">=</span> <span class="pl-en">stringify</span>(obj);
-<span class="pl-en">assertEquals</span>(tomlString, <span class="pl-s">`</span>
-<span class="pl-s">[[bin]]</span>
-<span class="pl-s">name = "deno"</span>
-<span class="pl-s">path = "cli/main.rs"</span>
-<span class="pl-s"></span>
-<span class="pl-s">[[bin]]</span>
-<span class="pl-s">name = "deno_core"</span>
-<span class="pl-s">path = "src/foo.rs"</span>
-<span class="pl-s"></span>
-<span class="pl-s">[[nib]]</span>
-<span class="pl-s">name = "node"</span>
-<span class="pl-s">path = "not_found"</span>
-<span class="pl-s">`</span>);
+const tomlString = stringify(obj);
+assertEquals(tomlString, `
+[[bin]]
+name = "deno"
+path = "cli/main.rs"
 
-<span class="pl-k">const</span> tomlObject <span class="pl-c1">=</span> <span class="pl-en">parse</span>(tomlString);
-<span class="pl-en">assertEquals</span>(tomlObject, obj);
-</code></pre>
+[[bin]]
+name = "deno_core"
+path = "src/foo.rs"
+
+[[nib]]
+name = "node"
+path = "not_found"
+`);
+
+const tomlObject = parse(tomlString);
+assertEquals(tomlObject, obj);
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/toml
+```
+
+<a href="https://jsr.io/@std/toml/docs" class="docs-cta jsr-cta">See all symbols in @std/toml on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is TOML?
+
+TOML (Tom's Obvious, Minimal Language) is a configuration file format that is
+easy to read due to its simple syntax. It supports various data types like
+strings, numbers, booleans, dates, arrays, and tables, making it versatile for
+configurations.
+
+## Why use @std/toml?
+
+This module provides a simple and efficient way to parse and stringify TOML data
+in JavaScript. Use it to read configuration files or generate TOML content
+programmatically.
+
+## Tips
+
+- Mind the supported types: some TOML constructs are represented as strings in
+  JS.
+- Use arrays-of-tables for repeated sections; keep structures simple for
+  clarity.
 <!-- custom:end -->

@@ -11,11 +11,11 @@ stability: stable
 
 ## Overview
 
-<p><a href="/@std/yaml@1.0.10/doc/~/parse" rel="nofollow"><code>parse</code></a> and <a href="/@std/yaml@1.0.10/doc/~/stringify" rel="nofollow"><code>stringify</code></a> for handling
+<p><a href="https://jsr.io/@std/yaml@1.0.10/doc/~/parse" rel="nofollow"><code>parse</code></a> and <a href="https://jsr.io/@std/yaml@1.0.10/doc/~/stringify" rel="nofollow"><code>stringify</code></a> for handling
 <a href="https://yaml.org/" rel="nofollow">YAML</a> encoded data.</p>
 <p>Ported from
 <a href="https://github.com/nodeca/js-yaml/commit/665aadda42349dcae869f12040d9b10ef18d12da" rel="nofollow">js-yaml v3.13.1</a>.</p>
-<p>Use <a href="/@std/yaml@1.0.10/doc/~/parseAll" rel="nofollow"><code>parseAll</code></a> for parsing multiple documents in a single YAML
+<p>Use <a href="https://jsr.io/@std/yaml@1.0.10/doc/~/parseAll" rel="nofollow"><code>parseAll</code></a> for parsing multiple documents in a single YAML
 string.</p>
 <p>This package generally supports
 <a href="https://yaml.org/spec/1.2.2/" rel="nofollow">YAML 1.2.x</a> (latest) and some
@@ -30,30 +30,165 @@ commonly used in the wild.</p>
 <li>Yes, No, On, Off literals for bool type</li>
 <li>Sexagesimal numbers (e.g. <code>3:25:45</code>)</li>
 </ul>
-<pre class="highlight"><code><span class="pl-k">import</span> { parse, stringify } <span class="pl-k">from</span> <span class="pl-s">"@std/yaml"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> data <span class="pl-c1">=</span> <span class="pl-en">parse</span>(<span class="pl-s">`</span>
-<span class="pl-s">foo: bar</span>
-<span class="pl-s">baz:</span>
-<span class="pl-s">  - qux</span>
-<span class="pl-s">  - quux</span>
-<span class="pl-s">`</span>);
-<span class="pl-en">assertEquals</span>(data, { <span class="pl-c1">foo</span>: <span class="pl-s">"bar"</span>, <span class="pl-c1">baz</span>: [ <span class="pl-s">"qux"</span>, <span class="pl-s">"quux"</span> ] });
+```js
+import { parse, stringify } from "@std/yaml";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-k">const</span> yaml <span class="pl-c1">=</span> <span class="pl-en">stringify</span>({ <span class="pl-c1">foo</span>: <span class="pl-s">"bar"</span>, <span class="pl-c1">baz</span>: [<span class="pl-s">"qux"</span>, <span class="pl-s">"quux"</span>] });
-<span class="pl-en">assertEquals</span>(yaml, <span class="pl-s">`foo: bar</span>
-<span class="pl-s">baz:</span>
-<span class="pl-s">  - qux</span>
-<span class="pl-s">  - quux</span>
-<span class="pl-s">`</span>);
-</code></pre>
+const data = parse(`
+foo: bar
+baz:
+  - qux
+  - quux
+`);
+assertEquals(data, { foo: "bar", baz: [ "qux", "quux" ] });
+
+const yaml = stringify({ foo: "bar", baz: ["qux", "quux"] });
+assertEquals(yaml, `foo: bar
+baz:
+  - qux
+  - quux
+`);
+```
+
 <h2 id="limitations">
 Limitations</h2>
 <ul>
 <li><code>binary</code> type is currently not stable.</li>
 </ul>
+### Add to your project
+
+```sh
+deno add jsr:@std/yaml
+```
+
+<a href="https://jsr.io/@std/yaml/docs" class="docs-cta jsr-cta">See all symbols in @std/yaml on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is YAML?
+
+YAML (YAML Ain't Markup Language) is a human-readable data serialization format
+commonly used for configuration files and data exchange between languages with
+different data structures. It emphasizes simplicity and readability, making it
+easy for humans to write and understand.
+
+### Why use @std/yaml?
+
+YAML is great for configuration files and data exchange where human readability
+is a priority. Use it when you need to represent complex data structures in a
+way that is easy to read and edit by humans. This module provides simple
+functions to parse and serialize YAML data.
+
+## Examples
+
+### Read a config file (with errors handled)
+
+```js
+import { parse } from "@std/yaml";
+
+const raw = await Deno.readTextFile("config.yaml");
+let config;
+try {
+  config = parse(raw);
+} catch (err) {
+  if (err instanceof SyntaxError) {
+    console.error("Invalid YAML:", err.message);
+  }
+  throw err;
+}
+
+// Narrow/validate as needed before using
+if (
+  typeof config === "object" && config !== null &&
+  "port" in config && typeof config.port === "number"
+) {
+  console.log("Listening on", config.port);
+}
+```
+
+### Multiple documents in one file
+
+```js
+import { parseAll } from "@std/yaml";
+
+const docs = parseAll(`
+---
+name: dev
+port: 3000
+---
+name: prod
+port: 80
+`);
+
+// e.g. map env name to port
+const envToPort = Object.fromEntries(docs.map((d) => [d.name, d.port]));
+console.log(envToPort.dev, envToPort.prod);
+```
+
+### Stringify with stable diffs (sorted keys, wrapped lines)
+
+```js
+import { stringify } from "@std/yaml";
+
+const data = {
+  name: "service",
+  description: "An example that demonstrates how long lines can be wrapped.",
+  tags: ["alpha", "beta", "gamma"],
+  nested: { z: 1, a: 2, m: 3 },
+};
+
+const yaml = stringify(data, { sortKeys: true, lineWidth: 60, indent: 2 });
+console.log(yaml);
+```
+
+### YAML anchors and merge keys (YAML 1.1)
+
+```js
+import { parse } from "@std/yaml";
+
+const cfg = parse(`
+defaults: &base
+  retries: 3
+  timeout: 5s
+
+serviceA:
+  <<: *base
+  timeout: 10s
+
+serviceB:
+  <<: *base
+`);
+
+console.log(cfg.serviceA.timeout); // "10s"
+console.log(cfg.serviceB.retries); // 3
+```
+
+### Skip unsupported values when stringifying
+
+```js
+import { stringify } from "@std/yaml";
+
+const obj = { ok: 1, skipMe: () => {} };
+// By default, functions cause a TypeError. Use skipInvalid to omit them.
+const yaml = stringify(obj, { skipInvalid: true });
+console.log(yaml);
+```
+
+### Write YAML back to disk
+
+```js
+import { stringify } from "@std/yaml";
+
+const settings = { port: 8080, features: { a: true, b: false } };
+await Deno.writeTextFile("settings.yaml", stringify(settings, { indent: 2 }));
+```
+
+## Tips
+
+- Use `parseAll` when you expect multiple YAML documents in one string.
+- Prefer JSON for machine↔machine interchange; YAML is great for hand-edited
+  config.
+- For stable diffs in VCS, set `sortKeys: true` and a fixed `indent`/`lineWidth`
+  when using `stringify`.
 <!-- custom:end -->

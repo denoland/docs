@@ -52,10 +52,6 @@ export const sidebar = [
         href: "/runtime/fundamentals/configuration/",
       },
       {
-        title: "Standard library",
-        href: "/runtime/fundamentals/standard_library/",
-      },
-      {
         title: "Web development",
         href: "/runtime/fundamentals/web_dev/",
       },

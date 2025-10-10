@@ -12,17 +12,55 @@ stability: stable
 ## Overview
 
 <p>Helpers for working with the filesystem.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { ensureFile, copy, ensureDir, move } <span class="pl-k">from</span> <span class="pl-s">"@std/fs"</span>;
 
-<span class="pl-k">await</span> <span class="pl-en">ensureFile</span>(<span class="pl-s">"example.txt"</span>);
+```js
+import { ensureFile, copy, ensureDir, move } from "@std/fs";
 
-<span class="pl-k">await</span> <span class="pl-en">copy</span>(<span class="pl-s">"example.txt"</span>, <span class="pl-s">"example_copy.txt"</span>);
+await ensureFile("example.txt");
 
-<span class="pl-k">await</span> <span class="pl-en">ensureDir</span>(<span class="pl-s">"subdir"</span>);
+await copy("example.txt", "example_copy.txt");
 
-<span class="pl-k">await</span> <span class="pl-en">move</span>(<span class="pl-s">"example_copy.txt"</span>, <span class="pl-s">"subdir/example_copy.txt"</span>);
-</code></pre>
+await ensureDir("subdir");
+
+await move("example_copy.txt", "subdir/example_copy.txt");
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/fs
+```
+
+<a href="https://jsr.io/@std/fs/docs" class="docs-cta jsr-cta">See all symbols in @std/fs on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## Why use @std/fs?
+
+Reach for it when you want higher-level filesystem operations (such as ensuring
+files/dirs, copying, moving, walking directories) than the bare
+[Deno APIs](/examples/#filesystem).
+
+## Examples
+
+```ts
+import { ensureDir, expandGlob, walk } from "@std/fs";
+
+await ensureDir("./out/assets");
+
+for await (const entry of expandGlob("src/**/*.{ts,tsx}")) {
+  console.log(entry.path);
+}
+
+for await (
+  const f of walk("./content", { includeDirs: false, exts: [".md"] })
+) {
+  console.log(f.path);
+}
+```
+
+## Tips
+
+- Most helpers are async, don’t forget the `await`!
+- Combine with `@std/path` to build cross-platform paths.
+- Use `copy` with `overwrite: true` explicitly when replacing files.
 <!-- custom:end -->

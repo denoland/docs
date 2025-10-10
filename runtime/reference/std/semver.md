@@ -13,34 +13,37 @@ stability: stable
 
 <p>The Semantic Version parser.</p>
 <p>Adapted directly from <a href="https://github.com/npm/node-semver" rel="nofollow">semver</a>.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> {
+
+```js
+import {
   parse,
   parseRange,
   greaterThan,
   lessThan,
   format
-} <span class="pl-k">from</span> <span class="pl-s">"@std/semver"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
+} from "@std/semver";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-k">const</span> semver <span class="pl-c1">=</span> <span class="pl-en">parse</span>(<span class="pl-s">"1.2.3"</span>);
-<span class="pl-en">assertEquals</span>(semver, {
-  <span class="pl-c1">major</span>: <span class="pl-c1">1</span>,
-  <span class="pl-c1">minor</span>: <span class="pl-c1">2</span>,
-  <span class="pl-c1">patch</span>: <span class="pl-c1">3</span>,
-  <span class="pl-c1">prerelease</span>: [],
-  <span class="pl-c1">build</span>: []
+const semver = parse("1.2.3");
+assertEquals(semver, {
+  major: 1,
+  minor: 2,
+  patch: 3,
+  prerelease: [],
+  build: []
 });
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">format</span>(semver), <span class="pl-s">"1.2.3"</span>);
+assertEquals(format(semver), "1.2.3");
 
-<span class="pl-k">const</span> range <span class="pl-c1">=</span> <span class="pl-en">parseRange</span>(<span class="pl-s">"1.x || &gt;=2.5.0 || 5.0.0 - 7.2.3"</span>);
+const range = parseRange("1.x || >=2.5.0 || 5.0.0 - 7.2.3");
 
-<span class="pl-k">const</span> s0 <span class="pl-c1">=</span> <span class="pl-en">parse</span>(<span class="pl-s">"1.2.3"</span>);
-<span class="pl-k">const</span> s1 <span class="pl-c1">=</span> <span class="pl-en">parse</span>(<span class="pl-s">"9.8.7"</span>);
+const s0 = parse("1.2.3");
+const s1 = parse("9.8.7");
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">greaterThan</span>(s0, s1), <span class="pl-c1">false</span>);
-<span class="pl-en">assertEquals</span>(<span class="pl-en">lessThan</span>(s0, s1), <span class="pl-c1">true</span>);
-</code></pre>
+assertEquals(greaterThan(s0, s1), false);
+assertEquals(lessThan(s0, s1), true);
+```
+
 <h2 id="versions">
 Versions</h2>
 <p>A "version" is described by the <code>v2.0.0</code> specification found at
@@ -51,7 +54,9 @@ Format</h2>
 <p>Semantic versions can be formatted as strings, by default they
 are formatted as <code>full</code>. Below is a diagram showing the various
 formatting options.</p>
-<pre class="highlight"><code>          full
+
+```js
+          full
        ┌───┴───┐
     release    │
    ┌───┴───┐   │
@@ -64,13 +69,14 @@ primary    │   │
  │ │ └─────────── patch
  │ └───────────── minor
  └─────────────── major
-</code></pre>
+```
+
 <h2 id="ranges">
 Ranges</h2>
-<p>A version <a href="/@std/semver@1.0.6/doc/~/Range" rel="nofollow"><code>Range</code></a> is a set of <a href="/@std/semver@1.0.6/doc/~/Comparator" rel="nofollow"><code>Comparator</code></a>s which specify
+<p>A version <a href="https://jsr.io/@std/semver@1.0.6/doc/~/Range" rel="nofollow"><code>Range</code></a> is a set of <a href="https://jsr.io/@std/semver@1.0.6/doc/~/Comparator" rel="nofollow"><code>Comparator</code></a>s which specify
 versions that satisfy the range.</p>
-<p>A <a href="/@std/semver@1.0.6/doc/~/Comparator" rel="nofollow"><code>Comparator</code></a> is composed of an <a href="/@std/semver@1.0.6/doc/~/Operator" rel="nofollow"><code>Operator</code></a> and a
-<a href="/@std/semver@1.0.6/doc/~/SemVer" rel="nofollow">SemVer</a>. The set of primitive <code>operators</code> is:</p>
+<p>A <a href="https://jsr.io/@std/semver@1.0.6/doc/~/Comparator" rel="nofollow"><code>Comparator</code></a> is composed of an <a href="https://jsr.io/@std/semver@1.0.6/doc/~/Operator" rel="nofollow"><code>Operator</code></a> and a
+<a href="https://jsr.io/@std/semver@1.0.6/doc/~/SemVer" rel="nofollow">SemVer</a>. The set of primitive <code>operators</code> is:</p>
 <ul>
 <li><code>&lt;</code> Less than</li>
 <li><code>&lt;=</code> Less than or equal to</li>
@@ -112,13 +118,16 @@ aware of the risk. However, it is still not appropriate to assume that they have
 opted into taking a similar risk on the <em>next</em> set of prerelease versions.</p>
 <h4 id="prerelease-identifiers">
 Prerelease Identifiers</h4>
-<p>The method <a href="/@std/semver@1.0.6/doc/~/increment" rel="nofollow"><code>increment</code></a> takes an additional <code>identifier</code> string
+<p>The method <a href="https://jsr.io/@std/semver@1.0.6/doc/~/increment" rel="nofollow"><code>increment</code></a> takes an additional <code>identifier</code> string
 argument that will append the value of the string as a prerelease identifier:</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { increment, parse } <span class="pl-k">from</span> <span class="pl-s">"@std/semver"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">increment</span>(<span class="pl-en">parse</span>(<span class="pl-s">"1.2.3"</span>), <span class="pl-s">"prerelease"</span>, { <span class="pl-c1">prerelease</span>: <span class="pl-s">"alpha"</span> }), <span class="pl-en">parse</span>(<span class="pl-s">"1.2.4-alpha.0"</span>));
-</code></pre>
+```js
+import { increment, parse } from "@std/semver";
+import { assertEquals } from "@std/assert";
+
+assertEquals(increment(parse("1.2.3"), "prerelease", { prerelease: "alpha" }), parse("1.2.4-alpha.0"));
+```
+
 <h3 id="build-metadata">
 Build Metadata</h3>
 <p>Build metadata is <code>.</code> delimited alpha-numeric string.
@@ -223,12 +232,14 @@ flexibility within those values, even if the major version is zero.</p>
 Range Grammar</h3>
 <p>Putting all this together, here is a Backus-Naur grammar for ranges, for the
 benefit of parser authors:</p>
-<pre class="highlight"><code>range-set  ::= range ( logical-or range ) *
+
+```js
+range-set  ::= range ( logical-or range ) *
 logical-or ::= ( " " ) * "||" ( " " ) *
 range      ::= hyphen | simple ( " " simple ) * | ""
 hyphen     ::= partial " - " partial
 simple     ::= primitive | partial | tilde | caret
-primitive  ::= ( "&lt;" | "&gt;" | "&gt;=" | "&lt;=" | "=" ) partial
+primitive  ::= ( "<" | ">" | ">=" | "<=" | "=" ) partial
 partial    ::= xr ( "." xr ( "." xr qualifier ? )? )?
 xr         ::= "x" | "X" | "*" | nr
 nr         ::= "0" | ["1"-"9"] ( ["0"-"9"] ) *
@@ -239,7 +250,8 @@ pre        ::= parts
 build      ::= parts
 parts      ::= part ( "." part ) *
 part       ::= nr | [-0-9A-Za-z]+
-</code></pre>
+```
+
 <p>Note that, since ranges may be non-contiguous, a version might not be greater
 than a range, less than a range, <em>or</em> satisfy a range! For example, the range
 <code>1.2 &lt;1.2.9 || &gt;2.0.0</code> would have a hole from <code>1.2.9</code> until <code>2.0.0</code>, so the
@@ -247,8 +259,33 @@ version <code>1.2.10</code> would not be greater than the range (because <code>2
 which is higher), nor less than the range (since <code>1.2.8</code> satisfies, which is
 lower), and it also does not satisfy the range.</p>
 <p>If you want to know if a version satisfies or does not satisfy a range, use the
-<a href="/@std/semver@1.0.6/doc/~/satisfies" rel="nofollow"><code>satisfies</code></a> function.</p>
+<a href="https://jsr.io/@std/semver@1.0.6/doc/~/satisfies" rel="nofollow"><code>satisfies</code></a> function.</p>
+### Add to your project
+
+```sh
+deno add jsr:@std/semver
+```
+
+<a href="https://jsr.io/@std/semver/docs" class="docs-cta jsr-cta">See all symbols in @std/semver on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## Why use @std/semver?
+
+Compare, sort, and test version ranges correctly—avoid ad-hoc string compares.
+
+## Examples
+
+```ts
+import { parse, parseRange, satisfies } from "@std/semver";
+
+const v = parse("1.2.3");
+const r = parseRange("^1.2.0");
+console.log(satisfies(v, r)); // true
+```
+
+## Tips
+
+- Use ranges (`^`, `~`, `x`, hyphen) to express compatibility windows.
+- Be explicit with prereleases; range matching excludes them unless included.
 <!-- custom:end -->

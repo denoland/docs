@@ -19,168 +19,218 @@ every other operating system, eg. Linux, MacOS, BSD etc.</p>
 import the modules from the platform sub directory instead.</p>
 <h2 id="basic-path-operations">
 Basic Path Operations</h2>
-<pre class="highlight"><code><span class="pl-k">import</span> <span class="pl-c1">*</span> <span class="pl-k">as</span> path <span class="pl-k">from</span> <span class="pl-s">"@std/path"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-c">// Get components of a path</span>
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">basename</span>(<span class="pl-s">"C:\\Users\\user\\file.txt"</span>), <span class="pl-s">"file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">dirname</span>(<span class="pl-s">"C:\\Users\\user\\file.txt"</span>), <span class="pl-s">"C:\\Users\\user"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">extname</span>(<span class="pl-s">"C:\\Users\\user\\file.txt"</span>), <span class="pl-s">".txt"</span>);
-} <span class="pl-k">else</span> {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">basename</span>(<span class="pl-s">"/home/user/file.txt"</span>), <span class="pl-s">"file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">dirname</span>(<span class="pl-s">"/home/user/file.txt"</span>), <span class="pl-s">"/home/user"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">extname</span>(<span class="pl-s">"/home/user/file.txt"</span>), <span class="pl-s">".txt"</span>);
+```js
+import * as path from "@std/path";
+import { assertEquals } from "@std/assert";
+
+// Get components of a path
+if (Deno.build.os === "windows") {
+  assertEquals(path.basename("C:\\Users\\user\\file.txt"), "file.txt");
+  assertEquals(path.dirname("C:\\Users\\user\\file.txt"), "C:\\Users\\user");
+  assertEquals(path.extname("C:\\Users\\user\\file.txt"), ".txt");
+} else {
+  assertEquals(path.basename("/home/user/file.txt"), "file.txt");
+  assertEquals(path.dirname("/home/user/file.txt"), "/home/user");
+  assertEquals(path.extname("/home/user/file.txt"), ".txt");
 }
 
-<span class="pl-c">// Join path segments</span>
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">join</span>(<span class="pl-s">"C:\\"</span>, <span class="pl-s">"Users"</span>, <span class="pl-s">"docs"</span>, <span class="pl-s">"file.txt"</span>), <span class="pl-s">"C:\\Users\\docs\\file.txt"</span>);
-} <span class="pl-k">else</span> {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">join</span>(<span class="pl-s">"/home"</span>, <span class="pl-s">"user"</span>, <span class="pl-s">"docs"</span>, <span class="pl-s">"file.txt"</span>), <span class="pl-s">"/home/user/docs/file.txt"</span>);
+// Join path segments
+if (Deno.build.os === "windows") {
+  assertEquals(path.join("C:\\", "Users", "docs", "file.txt"), "C:\\Users\\docs\\file.txt");
+} else {
+  assertEquals(path.join("/home", "user", "docs", "file.txt"), "/home/user/docs/file.txt");
 }
 
-<span class="pl-c">// Normalize a path</span>
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">normalize</span>(<span class="pl-s">"C:\\Users\\user\\..\\temp\\.\\file.txt"</span>), <span class="pl-s">"C:\\Users\\temp\\file.txt"</span>);
-} <span class="pl-k">else</span> {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">normalize</span>(<span class="pl-s">"/home/user/../temp/./file.txt"</span>), <span class="pl-s">"/home/temp/file.txt"</span>);
+// Normalize a path
+if (Deno.build.os === "windows") {
+  assertEquals(path.normalize("C:\\Users\\user\\..\\temp\\.\\file.txt"), "C:\\Users\\temp\\file.txt");
+} else {
+  assertEquals(path.normalize("/home/user/../temp/./file.txt"), "/home/temp/file.txt");
 }
 
-<span class="pl-c">// Resolve absolute path</span>
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-k">const</span> resolved <span class="pl-c1">=</span> path.<span class="pl-en">resolve</span>(<span class="pl-s">"C:\\foo"</span>, <span class="pl-s">"docs"</span>, <span class="pl-s">"file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(resolved, <span class="pl-s">"C:\\foo\\docs\\file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">isAbsolute</span>(resolved), <span class="pl-c1">true</span>);
-} <span class="pl-k">else</span> {
-  <span class="pl-k">const</span> resolved <span class="pl-c1">=</span> path.<span class="pl-en">resolve</span>(<span class="pl-s">"/foo"</span>, <span class="pl-s">"docs"</span>, <span class="pl-s">"file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(resolved, <span class="pl-s">"/foo/docs/file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">isAbsolute</span>(resolved), <span class="pl-c1">true</span>);
+// Resolve absolute path
+if (Deno.build.os === "windows") {
+  const resolved = path.resolve("C:\\foo", "docs", "file.txt");
+  assertEquals(resolved, "C:\\foo\\docs\\file.txt");
+  assertEquals(path.isAbsolute(resolved), true);
+} else {
+  const resolved = path.resolve("/foo", "docs", "file.txt");
+  assertEquals(resolved, "/foo/docs/file.txt");
+  assertEquals(path.isAbsolute(resolved), true);
 }
 
-<span class="pl-c">// Get relative path</span>
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">relative</span>(<span class="pl-s">"C:\\Users"</span>, <span class="pl-s">"C:\\Users\\docs\\file.txt"</span>), <span class="pl-s">"docs\\file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">relative</span>(<span class="pl-s">"C:\\Users"</span>, <span class="pl-s">"D:\\Programs"</span>), <span class="pl-s">"D:\\Programs"</span>);
-} <span class="pl-k">else</span> {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">relative</span>(<span class="pl-s">"/home/user"</span>, <span class="pl-s">"/home/user/docs/file.txt"</span>), <span class="pl-s">"docs/file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">relative</span>(<span class="pl-s">"/home/user"</span>, <span class="pl-s">"/var/data"</span>), <span class="pl-s">"../../var/data"</span>);
+// Get relative path
+if (Deno.build.os === "windows") {
+  assertEquals(path.relative("C:\\Users", "C:\\Users\\docs\\file.txt"), "docs\\file.txt");
+  assertEquals(path.relative("C:\\Users", "D:\\Programs"), "D:\\Programs");
+} else {
+  assertEquals(path.relative("/home/user", "/home/user/docs/file.txt"), "docs/file.txt");
+  assertEquals(path.relative("/home/user", "/var/data"), "../../var/data");
 }
-</code></pre>
+```
+
 <h2 id="path-parsing-and-formatting">
 Path Parsing and Formatting</h2>
-<pre class="highlight"><code><span class="pl-k">import</span> <span class="pl-c1">*</span> <span class="pl-k">as</span> path <span class="pl-k">from</span> <span class="pl-s">"@std/path"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-k">const</span> parsedWindows <span class="pl-c1">=</span> path.<span class="pl-en">parse</span>(<span class="pl-s">"C:\\Users\\user\\file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(parsedWindows.<span class="pl-c1">root</span>, <span class="pl-s">"C:\\"</span>);
-  <span class="pl-en">assertEquals</span>(parsedWindows.<span class="pl-c1">dir</span>, <span class="pl-s">"C:\\Users\\user"</span>);
-  <span class="pl-en">assertEquals</span>(parsedWindows.<span class="pl-c1">base</span>, <span class="pl-s">"file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(parsedWindows.<span class="pl-c1">ext</span>, <span class="pl-s">".txt"</span>);
-  <span class="pl-en">assertEquals</span>(parsedWindows.<span class="pl-c1">name</span>, <span class="pl-s">"file"</span>);
+```js
+import * as path from "@std/path";
+import { assertEquals } from "@std/assert";
 
-  <span class="pl-c">// Format path from components (Windows)</span>
-  <span class="pl-en">assertEquals</span>(
-    path.<span class="pl-en">format</span>({ <span class="pl-c1">dir</span>: <span class="pl-s">"C:\\Users\\user"</span>, <span class="pl-c1">base</span>: <span class="pl-s">"file.txt"</span> }),
-    <span class="pl-s">"C:\\Users\\user\\file.txt"</span>
+if (Deno.build.os === "windows") {
+  const parsedWindows = path.parse("C:\\Users\\user\\file.txt");
+  assertEquals(parsedWindows.root, "C:\\");
+  assertEquals(parsedWindows.dir, "C:\\Users\\user");
+  assertEquals(parsedWindows.base, "file.txt");
+  assertEquals(parsedWindows.ext, ".txt");
+  assertEquals(parsedWindows.name, "file");
+
+  // Format path from components (Windows)
+  assertEquals(
+    path.format({ dir: "C:\\Users\\user", base: "file.txt" }),
+    "C:\\Users\\user\\file.txt"
   );
-} <span class="pl-k">else</span> {
-  <span class="pl-k">const</span> parsedPosix <span class="pl-c1">=</span> path.<span class="pl-en">parse</span>(<span class="pl-s">"/home/user/file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(parsedPosix.<span class="pl-c1">root</span>, <span class="pl-s">"/"</span>);
-  <span class="pl-en">assertEquals</span>(parsedPosix.<span class="pl-c1">dir</span>, <span class="pl-s">"/home/user"</span>);
-  <span class="pl-en">assertEquals</span>(parsedPosix.<span class="pl-c1">base</span>, <span class="pl-s">"file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(parsedPosix.<span class="pl-c1">ext</span>, <span class="pl-s">".txt"</span>);
-  <span class="pl-en">assertEquals</span>(parsedPosix.<span class="pl-c1">name</span>, <span class="pl-s">"file"</span>);
+} else {
+  const parsedPosix = path.parse("/home/user/file.txt");
+  assertEquals(parsedPosix.root, "/");
+  assertEquals(parsedPosix.dir, "/home/user");
+  assertEquals(parsedPosix.base, "file.txt");
+  assertEquals(parsedPosix.ext, ".txt");
+  assertEquals(parsedPosix.name, "file");
 
-  <span class="pl-c">// Format path from components (POSIX)</span>
-  <span class="pl-en">assertEquals</span>(
-    path.<span class="pl-en">format</span>({ <span class="pl-c1">dir</span>: <span class="pl-s">"/home/user"</span>, <span class="pl-c1">base</span>: <span class="pl-s">"file.txt"</span> }),
-    <span class="pl-s">"/home/user/file.txt"</span>
+  // Format path from components (POSIX)
+  assertEquals(
+    path.format({ dir: "/home/user", base: "file.txt" }),
+    "/home/user/file.txt"
   );
 }
-</code></pre>
+```
+
 <h2 id="url-conversion">
 URL Conversion</h2>
-<pre class="highlight"><code><span class="pl-k">import</span> <span class="pl-c1">*</span> <span class="pl-k">as</span> path <span class="pl-k">from</span> <span class="pl-s">"@std/path"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-c">// Convert between file URLs and paths</span>
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">fromFileUrl</span>(<span class="pl-s">"file:///C:/Users/user/file.txt"</span>), <span class="pl-s">"C:\\Users\\user\\file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">toFileUrl</span>(<span class="pl-s">"C:\\Users\\user\\file.txt"</span>).<span class="pl-c1">href</span>, <span class="pl-s">"file:///C:/Users/user/file.txt"</span>);
-} <span class="pl-k">else</span> {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">fromFileUrl</span>(<span class="pl-s">"file:///home/user/file.txt"</span>), <span class="pl-s">"/home/user/file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">toFileUrl</span>(<span class="pl-s">"/home/user/file.txt"</span>).<span class="pl-c1">href</span>, <span class="pl-s">"file:///home/user/file.txt"</span>);
+```js
+import * as path from "@std/path";
+import { assertEquals } from "@std/assert";
+
+// Convert between file URLs and paths
+if (Deno.build.os === "windows") {
+  assertEquals(path.fromFileUrl("file:///C:/Users/user/file.txt"), "C:\\Users\\user\\file.txt");
+  assertEquals(path.toFileUrl("C:\\Users\\user\\file.txt").href, "file:///C:/Users/user/file.txt");
+} else {
+  assertEquals(path.fromFileUrl("file:///home/user/file.txt"), "/home/user/file.txt");
+  assertEquals(path.toFileUrl("/home/user/file.txt").href, "file:///home/user/file.txt");
 }
-</code></pre>
+```
+
 <h2 id="path-properties">
 Path Properties</h2>
-<pre class="highlight"><code><span class="pl-k">import</span> <span class="pl-c1">*</span> <span class="pl-k">as</span> path <span class="pl-k">from</span> <span class="pl-s">"@std/path"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-c">// Check if path is absolute</span>
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">isAbsolute</span>(<span class="pl-s">"C:\\Users"</span>), <span class="pl-c1">true</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">isAbsolute</span>(<span class="pl-s">"\\\\Server\\share"</span>), <span class="pl-c1">true</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">isAbsolute</span>(<span class="pl-s">"C:relative\\path"</span>), <span class="pl-c1">false</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">isAbsolute</span>(<span class="pl-s">"..\\relative\\path"</span>), <span class="pl-c1">false</span>);
-} <span class="pl-k">else</span> {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">isAbsolute</span>(<span class="pl-s">"/home/user"</span>), <span class="pl-c1">true</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">isAbsolute</span>(<span class="pl-s">"./relative/path"</span>), <span class="pl-c1">false</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">isAbsolute</span>(<span class="pl-s">"../relative/path"</span>), <span class="pl-c1">false</span>);
+```js
+import * as path from "@std/path";
+import { assertEquals } from "@std/assert";
+
+// Check if path is absolute
+if (Deno.build.os === "windows") {
+  assertEquals(path.isAbsolute("C:\\Users"), true);
+  assertEquals(path.isAbsolute("\\\\Server\\share"), true);
+  assertEquals(path.isAbsolute("C:relative\\path"), false);
+  assertEquals(path.isAbsolute("..\\relative\\path"), false);
+} else {
+  assertEquals(path.isAbsolute("/home/user"), true);
+  assertEquals(path.isAbsolute("./relative/path"), false);
+  assertEquals(path.isAbsolute("../relative/path"), false);
 }
 
-<span class="pl-c">// Convert to namespaced path (Windows-specific)</span>
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">toNamespacedPath</span>(<span class="pl-s">"C:\\Users\\file.txt"</span>), <span class="pl-s">"\\\\?\\C:\\Users\\file.txt"</span>);
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">toNamespacedPath</span>(<span class="pl-s">"\\\\server\\share\\file.txt"</span>), <span class="pl-s">"\\\\?\\UNC\\server\\share\\file.txt"</span>);
-} <span class="pl-k">else</span> {
-  <span class="pl-c">// On POSIX, toNamespacedPath returns the path unchanged</span>
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">toNamespacedPath</span>(<span class="pl-s">"/home/user/file.txt"</span>), <span class="pl-s">"/home/user/file.txt"</span>);
+// Convert to namespaced path (Windows-specific)
+if (Deno.build.os === "windows") {
+  assertEquals(path.toNamespacedPath("C:\\Users\\file.txt"), "\\\\?\\C:\\Users\\file.txt");
+  assertEquals(path.toNamespacedPath("\\\\server\\share\\file.txt"), "\\\\?\\UNC\\server\\share\\file.txt");
+} else {
+  // On POSIX, toNamespacedPath returns the path unchanged
+  assertEquals(path.toNamespacedPath("/home/user/file.txt"), "/home/user/file.txt");
 }
-</code></pre>
+```
+
 <h2 id="glob-pattern-utilities">
 Glob Pattern Utilities</h2>
-<pre class="highlight"><code><span class="pl-k">import</span> <span class="pl-c1">*</span> <span class="pl-k">as</span> path <span class="pl-k">from</span> <span class="pl-s">"@std/path"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-c">// Check if a string is a glob pattern</span>
-<span class="pl-en">assertEquals</span>(path.<span class="pl-en">isGlob</span>(<span class="pl-s">"*.txt"</span>), <span class="pl-c1">true</span>);
+```js
+import * as path from "@std/path";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-c">// Convert glob pattern to RegExp</span>
-<span class="pl-k">const</span> pattern <span class="pl-c1">=</span> path.<span class="pl-en">globToRegExp</span>(<span class="pl-s">"*.txt"</span>);
-<span class="pl-en">assertEquals</span>(pattern.<span class="pl-en">test</span>(<span class="pl-s">"file.txt"</span>), <span class="pl-c1">true</span>);
+// Check if a string is a glob pattern
+assertEquals(path.isGlob("*.txt"), true);
 
-<span class="pl-c">// Join multiple glob patterns</span>
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">joinGlobs</span>([<span class="pl-s">"src"</span>, <span class="pl-s">"**\\*.ts"</span>]), <span class="pl-s">"src\\**\\*.ts"</span>);
-} <span class="pl-k">else</span> {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">joinGlobs</span>([<span class="pl-s">"src"</span>, <span class="pl-s">"**\/*.ts"</span>]), <span class="pl-s">"src/**\/*.ts"</span>);
+// Convert glob pattern to RegExp
+const pattern = path.globToRegExp("*.txt");
+assertEquals(pattern.test("file.txt"), true);
+
+// Join multiple glob patterns
+if (Deno.build.os === "windows") {
+  assertEquals(path.joinGlobs(["src", "**\\*.ts"]), "src\\**\\*.ts");
+} else {
+  assertEquals(path.joinGlobs(["src", "**\/*.ts"]), "src/**\/*.ts");
 }
 
-<span class="pl-c">// Normalize a glob pattern</span>
-<span class="pl-k">if</span> (<span class="pl-smi">Deno</span>.<span class="pl-c1">build</span>.<span class="pl-c1">os</span> <span class="pl-c1">===</span> <span class="pl-s">"windows"</span>) {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">normalizeGlob</span>(<span class="pl-s">"src\\..\\**\\*.ts"</span>), <span class="pl-s">"**\\*.ts"</span>);
-} <span class="pl-k">else</span> {
-  <span class="pl-en">assertEquals</span>(path.<span class="pl-en">normalizeGlob</span>(<span class="pl-s">"src/../**\/*.ts"</span>), <span class="pl-s">"**\/*.ts"</span>);
+// Normalize a glob pattern
+if (Deno.build.os === "windows") {
+  assertEquals(path.normalizeGlob("src\\..\\**\\*.ts"), "**\\*.ts");
+} else {
+  assertEquals(path.normalizeGlob("src/../**\/*.ts"), "**\/*.ts");
 }
-</code></pre>
+```
+
 <p>For POSIX-specific functions:</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { fromFileUrl } <span class="pl-k">from</span> <span class="pl-s">"@std/path/posix/from-file-url"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">fromFileUrl</span>(<span class="pl-s">"file:///home/foo"</span>), <span class="pl-s">"/home/foo"</span>);
-</code></pre>
+```js
+import { fromFileUrl } from "@std/path/posix/from-file-url";
+import { assertEquals } from "@std/assert";
+
+assertEquals(fromFileUrl("file:///home/foo"), "/home/foo");
+```
+
 <p>For Windows-specific functions:</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { fromFileUrl } <span class="pl-k">from</span> <span class="pl-s">"@std/path/windows/from-file-url"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">fromFileUrl</span>(<span class="pl-s">"file:///home/foo"</span>), <span class="pl-s">"\\home\\foo"</span>);
-</code></pre>
+```js
+import { fromFileUrl } from "@std/path/windows/from-file-url";
+import { assertEquals } from "@std/assert";
+
+assertEquals(fromFileUrl("file:///home/foo"), "\\home\\foo");
+```
+
 <p>Functions for working with URLs can be found in
 <a href="https://github.com/denoland/std/blob/HEAD/./doc/posix/~" rel="nofollow">@std/path/posix</a>.</p>
+### Add to your project
+
+```sh
+deno add jsr:@std/path
+```
+
+<a href="https://jsr.io/@std/path/docs" class="docs-cta jsr-cta">See all symbols in @std/path on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## When to use @std/path
+
+Use it anywhere you build, normalize, or inspect file paths. It handles POSIX
+and Windows differences so your code stays portable.
+
+## Examples
+
+```ts
+import { basename, dirname, extname, join, resolve } from "@std/path";
+
+const file = join("content", "posts", "hello.md");
+console.log(dirname(file)); // content/posts
+console.log(basename(file)); // hello.md
+console.log(extname(file)); // .md
+console.log(resolve(".", "assets")); // absolute path
+```
+
+## Tips
+
+- Prefer `join` over string concatenation.
+- Use `fromFileUrl`/`toFileUrl` when moving between file URLs and paths.
+- For OS-specific logic, import from `@std/path/posix` or `@std/path/windows`.
 <!-- custom:end -->

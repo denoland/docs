@@ -12,13 +12,48 @@ stability: stable
 ## Overview
 
 <p>Functions for HTML tasks such as escaping or unescaping HTML entities.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { unescape } <span class="pl-k">from</span> <span class="pl-s">"@std/html/entities"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">unescape</span>(<span class="pl-s">"&amp;lt;&amp;gt;&amp;#39;&amp;amp;AA"</span>), <span class="pl-s">"&lt;&gt;'&amp;AA"</span>);
-<span class="pl-en">assertEquals</span>(<span class="pl-en">unescape</span>(<span class="pl-s">"&amp;thorn;&amp;eth;"</span>), <span class="pl-s">"&amp;thorn;&amp;eth;"</span>);
-</code></pre>
+```js
+import { unescape } from "@std/html/entities";
+import { assertEquals } from "@std/assert";
+
+assertEquals(unescape("&lt;&gt;'&amp;AA"), "<>'&AA");
+assertEquals(unescape("&thorn;&eth;"), "&thorn;&eth;");
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/html
+```
+
+<a href="https://jsr.io/@std/html/docs" class="docs-cta jsr-cta">See all symbols in @std/html on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is this package?
+
+A utility library for safely escaping and unescaping HTML entities to prevent
+XSS vulnerabilities when inserting user-provided content into HTML.
+
+## Why use @std/html?
+
+Your application may need to display user-generated content within HTML. To
+prevent cross-site scripting (XSS) attacks, it is crucial to escape special
+characters like `<`, `>`, `&`, `"`, and `'` before embedding user input into
+HTML.
+
+## Examples
+
+```ts
+import { escape, unescape } from "@std/html/entities";
+
+const safe = escape(`<img src=x onerror=alert(1)>`); // &lt;img src=x onerror=alert(1)&gt;
+const back = unescape("&amp;lt;b&amp;gt;ok&amp;lt;/b&amp;gt;"); // <b>ok</b>
+```
+
+## Tips
+
+- Escaping and unescaping targets entities is not full HTML sanitization. Use a
+  sanitizer for removing tags/attributes.
+- Escaping is idempotent when run once; avoid double-escaping (`&amp;amp;`).
 <!-- custom:end -->

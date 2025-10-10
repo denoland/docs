@@ -19,89 +19,179 @@ from strings. Adapted from
 Supported formats</h2>
 <h3 id="json">
 JSON</h3>
-<pre class="highlight"><code><span class="pl-k">import</span> { test, extractJson } <span class="pl-k">from</span> <span class="pl-s">"@std/front-matter"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> str <span class="pl-c1">=</span> <span class="pl-s">"---json\n{\"and\": \"this\"}\n---\ndeno is awesome"</span>;
+```js
+import { test, extractJson } from "@std/front-matter";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">test</span>(str), <span class="pl-c1">true</span>);
-<span class="pl-en">assertEquals</span>(<span class="pl-en">extractJson</span>(str), {
-  <span class="pl-c1">frontMatter</span>: <span class="pl-s">"{\"and\": \"this\"}"</span>,
-  <span class="pl-c1">body</span>: <span class="pl-s">"deno is awesome"</span>,
-  <span class="pl-c1">attrs</span>: { <span class="pl-c1">and</span>: <span class="pl-s">"this"</span> }
+const str = "---json\n{\"and\": \"this\"}\n---\ndeno is awesome";
+
+assertEquals(test(str), true);
+assertEquals(extractJson(str), {
+  frontMatter: "{\"and\": \"this\"}",
+  body: "deno is awesome",
+  attrs: { and: "this" }
 });
-</code></pre>
-<p><a href="/@std/front-matter@1.0.9/doc/~/extractJson" rel="nofollow"><code>extract</code></a> and <a href="/@std/front-matter@1.0.9/doc/~/test" rel="nofollow"><code>test</code></a> support the following
+```
+
+<p><a href="https://jsr.io/@std/front-matter@1.0.9/doc/~/extractJson" rel="nofollow"><code>extract</code></a> and <a href="https://jsr.io/@std/front-matter@1.0.9/doc/~/test" rel="nofollow"><code>test</code></a> support the following
 delimiters.</p>
-<pre class="highlight"><code>---json
+
+```js
+---json
 {
   "and": "this"
 }
 ---
-</code></pre>
-<pre class="highlight"><code>{
+```
+
+```js
+{
   "is": "JSON"
 }
-</code></pre>
+```
+
 <h3 id="toml">
 TOML</h3>
-<pre class="highlight"><code><span class="pl-k">import</span> { test, extractToml } <span class="pl-k">from</span> <span class="pl-s">"@std/front-matter"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> str <span class="pl-c1">=</span> <span class="pl-s">"---toml\nmodule = 'front_matter'\n---\ndeno is awesome"</span>;
+```js
+import { test, extractToml } from "@std/front-matter";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">test</span>(str), <span class="pl-c1">true</span>);
-<span class="pl-en">assertEquals</span>(<span class="pl-en">extractToml</span>(str), {
-  <span class="pl-c1">frontMatter</span>: <span class="pl-s">"module = 'front_matter'"</span>,
-  <span class="pl-c1">body</span>: <span class="pl-s">"deno is awesome"</span>,
-  <span class="pl-c1">attrs</span>: { <span class="pl-c1">module</span>: <span class="pl-s">"front_matter"</span> }
+const str = "---toml\nmodule = 'front_matter'\n---\ndeno is awesome";
+
+assertEquals(test(str), true);
+assertEquals(extractToml(str), {
+  frontMatter: "module = 'front_matter'",
+  body: "deno is awesome",
+  attrs: { module: "front_matter" }
 });
-</code></pre>
-<p><a href="/@std/front-matter@1.0.9/doc/~/extractToml" rel="nofollow"><code>extract</code></a> and <a href="/@std/front-matter@1.0.9/doc/~/test" rel="nofollow"><code>test</code></a> support the following
+```
+
+<p><a href="https://jsr.io/@std/front-matter@1.0.9/doc/~/extractToml" rel="nofollow"><code>extract</code></a> and <a href="https://jsr.io/@std/front-matter@1.0.9/doc/~/test" rel="nofollow"><code>test</code></a> support the following
 delimiters.</p>
-<pre class="highlight"><code>---toml
+
+```js
+---toml
 this = 'is'
 ---
-</code></pre>
-<pre class="highlight"><code>= toml =
+```
+
+```js
+= toml =
 parsed = 'as'
 toml = 'data'
 = toml =
-</code></pre>
-<pre class="highlight"><code>+++
+```
+
+```js
++++
 is = 'that'
 not = 'cool?'
 +++
-</code></pre>
+```
+
 <h3 id="yaml">
 YAML</h3>
-<pre class="highlight"><code><span class="pl-k">import</span> { test, extractYaml } <span class="pl-k">from</span> <span class="pl-s">"@std/front-matter"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> str <span class="pl-c1">=</span> <span class="pl-s">"---yaml\nmodule: front_matter\n---\ndeno is awesome"</span>;
+```js
+import { test, extractYaml } from "@std/front-matter";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">test</span>(str), <span class="pl-c1">true</span>);
-<span class="pl-en">assertEquals</span>(<span class="pl-en">extractYaml</span>(str), {
-  <span class="pl-c1">frontMatter</span>: <span class="pl-s">"module: front_matter"</span>,
-  <span class="pl-c1">body</span>: <span class="pl-s">"deno is awesome"</span>,
-  <span class="pl-c1">attrs</span>: { <span class="pl-c1">module</span>: <span class="pl-s">"front_matter"</span> }
+const str = "---yaml\nmodule: front_matter\n---\ndeno is awesome";
+
+assertEquals(test(str), true);
+assertEquals(extractYaml(str), {
+  frontMatter: "module: front_matter",
+  body: "deno is awesome",
+  attrs: { module: "front_matter" }
 });
-</code></pre>
-<p><a href="/@std/front-matter@1.0.9/doc/~/extractYaml" rel="nofollow"><code>extract</code></a> and <a href="/@std/front-matter@1.0.9/doc/~/test" rel="nofollow"><code>test</code></a> support the following
+```
+
+<p><a href="https://jsr.io/@std/front-matter@1.0.9/doc/~/extractYaml" rel="nofollow"><code>extract</code></a> and <a href="https://jsr.io/@std/front-matter@1.0.9/doc/~/test" rel="nofollow"><code>test</code></a> support the following
 delimiters.</p>
-<pre class="highlight"><code>---
+
+```js
+---
 these: are
 ---
-</code></pre>
-<pre class="highlight"><code>---yaml
+```
+
+```js
+---yaml
 all: recognized
 ---
-</code></pre>
-<pre class="highlight"><code>= yaml =
+```
+
+```js
+= yaml =
 as: yaml
 = yaml =
-</code></pre>
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/front-matter
+```
+
+<a href="https://jsr.io/@std/front-matter/docs" class="docs-cta jsr-cta">See all symbols in @std/front-matter on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is front matter?
+
+Front matter is metadata placed at the top of a file, typically used in Markdown
+or other text files to provide information about the document. It is usually
+enclosed within specific delimiters, such as `---` for YAML, `+++` for TOML, or
+`---json` for JSON. The metadata can include details like the title, author,
+date, tags, and other attributes that describe the content of the file.
+
+## Why use @std/front-matter?
+
+Use this package to easily parse and extract front matter from your content
+files, allowing you to separate metadata from the main content. This is
+especially useful in static site generators, blogging platforms, and content
+management systems where front matter is commonly used to manage document
+metadata.
+
+## Examples
+
+```ts
+// Detect and extract YAML front matter
+import { extractYaml, test } from "@std/front-matter";
+
+const source = `---yaml\ntitle: Hello\nauthor: Ada\n---\nContent starts here.`;
+
+if (test(source)) {
+  const { attrs, body, frontMatter } = extractYaml(source);
+  // attrs: { title: "Hello", author: "Ada" }
+  // body: "Content starts here."
+  // frontMatter: "title: Hello\nauthor: Ada"
+}
+```
+
+```ts
+// JSON front matter
+import { extractJson } from "@std/front-matter";
+
+const jsonSource = `---json\n{ "tags": ["news", "deno"] }\n---\nPost body`;
+const { attrs } = extractJson(jsonSource);
+// attrs: { tags: ["news", "deno"] }
+```
+
+```ts
+// TOML front matter
+import { extractToml } from "@std/front-matter";
+
+const tomlSource = `+++\ncategory = 'release'\n+++\nNotes...`;
+const { attrs, body } = extractToml(tomlSource);
+// attrs: { category: "release" }
+// body: "Notes..."
+```
+
+## Tips
+
+- Supports JSON, TOML, and YAML delimiters—pick one and stick with it for
+  consistency.
+- Returned `attrs` are already parsed for you; `body` is the remaining content.
 <!-- custom:end -->

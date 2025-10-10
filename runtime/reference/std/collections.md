@@ -16,21 +16,137 @@ objects.</p>
 <p>Inspired by
 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/" rel="nofollow">Kotlin's Collections</a>
 package and <a href="https://lodash.com/" rel="nofollow">Lodash</a>.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { intersect, sample, pick } <span class="pl-k">from</span> <span class="pl-s">"@std/collections"</span>;
-<span class="pl-k">import</span> { assertEquals, assertArrayIncludes } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> lisaInterests <span class="pl-c1">=</span> [<span class="pl-s">"Cooking"</span>, <span class="pl-s">"Music"</span>, <span class="pl-s">"Hiking"</span>];
-<span class="pl-k">const</span> kimInterests <span class="pl-c1">=</span> [<span class="pl-s">"Music"</span>, <span class="pl-s">"Tennis"</span>, <span class="pl-s">"Cooking"</span>];
+```js
+import { intersect, sample, pick } from "@std/collections";
+import { assertEquals, assertArrayIncludes } from "@std/assert";
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">intersect</span>(lisaInterests, kimInterests), [<span class="pl-s">"Cooking"</span>, <span class="pl-s">"Music"</span>]);
+const lisaInterests = ["Cooking", "Music", "Hiking"];
+const kimInterests = ["Music", "Tennis", "Cooking"];
 
-<span class="pl-en">assertArrayIncludes</span>(lisaInterests, [<span class="pl-en">sample</span>(lisaInterests)]);
+assertEquals(intersect(lisaInterests, kimInterests), ["Cooking", "Music"]);
 
-<span class="pl-k">const</span> cat <span class="pl-c1">=</span> { <span class="pl-c1">name</span>: <span class="pl-s">"Lulu"</span>, <span class="pl-c1">age</span>: <span class="pl-c1">3</span>, <span class="pl-c1">breed</span>: <span class="pl-s">"Ragdoll"</span> };
+assertArrayIncludes(lisaInterests, [sample(lisaInterests)]);
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">pick</span>(cat, [<span class="pl-s">"name"</span>, <span class="pl-s">"breed"</span>]), { <span class="pl-c1">name</span>: <span class="pl-s">"Lulu"</span>, <span class="pl-c1">breed</span>: <span class="pl-s">"Ragdoll"</span>});
-</code></pre>
+const cat = { name: "Lulu", age: 3, breed: "Ragdoll" };
+
+assertEquals(pick(cat, ["name", "breed"]), { name: "Lulu", breed: "Ragdoll"});
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/collections
+```
+
+<a href="https://jsr.io/@std/collections/docs" class="docs-cta jsr-cta">See all symbols in @std/collections on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What are collection types?
+
+Collection types are data structures that hold multiple values, such as arrays
+and objects. They allow you to group related data together and perform
+operations on them, like filtering, transforming, and aggregating.
+
+This package provides small, focused functions to work with these types,
+allowing you to compose complex operations from simple building blocks.
+
+## Why use @std/collections?
+
+The collections package provides small, pure helpers (intersect, pick, groupBy,
+partition) to use instead of pulling a large utility library.
+
+## Examples
+
+### Distinct and distinctBy
+
+```ts
+import { distinct, distinctBy } from "@std/collections";
+
+const tags = ["a", "b", "a", "c"];
+console.log(distinct(tags)); // ["a", "b", "c"]
+
+const people = [
+  { id: 1, name: "Alice" },
+  { id: 1, name: "Alice v2" },
+  { id: 2, name: "Bob" },
+];
+console.log(distinctBy(people, (p) => p.id));
+// [{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }]
+```
+
+### Map records: mapValues, mapKeys
+
+```ts
+import { mapKeys, mapValues } from "@std/collections";
+
+const rec = { a: 1, b: 2 };
+console.log(mapValues(rec, (v) => v * 2)); // { a: 2, b: 4 }
+console.log(mapKeys(rec, (k) => k.toUpperCase())); // { A: 1, B: 2 }
+```
+
+### Deep merge nested objects
+
+```ts
+import { deepMerge } from "@std/collections/deep-merge";
+
+const a = { cfg: { retries: 2, mode: "fast" } };
+const b = { cfg: { retries: 3 } };
+console.log(deepMerge(a, b));
+// { cfg: { retries: 3, mode: "fast" } }
+```
+
+### Sliding windows (with options)
+
+```ts
+import { slidingWindows } from "@std/collections";
+
+console.log(slidingWindows([1, 2, 3, 4], 3));
+// [[1,2,3],[2,3,4]]
+
+console.log(slidingWindows([1, 2, 3, 4, 5], 3, { step: 2, partial: true }));
+// [[1,2,3],[3,4,5],[5]]
+```
+
+### Sort by derived keys
+
+```ts
+import { sortBy } from "@std/collections";
+
+const items = [{ v: 2 }, { v: 5 }, { v: 1 }];
+console.log(sortBy(items, (i) => i.v));
+// [{ v: 1 }, { v: 2 }, { v: 5 }]
+console.log(sortBy(items, (i) => i.v, { order: "desc" }));
+// [{ v: 5 }, { v: 2 }, { v: 1 }]
+```
+
+### Partition entries of an object
+
+```ts
+import { partitionEntries } from "@std/collections";
+
+const user = { id: 1, name: "Sam", active: true, score: 42 };
+const [numbers, rest] = partitionEntries(
+  user,
+  ([, v]) => typeof v === "number",
+);
+// numbers: { id: 1, score: 42 }
+// rest: { name: "Sam", active: true }
+```
+
+### Produce joined strings
+
+```ts
+import { joinToString } from "@std/collections";
+
+console.log(
+  joinToString([1, 2, 3], { prefix: "[", separator: ", ", suffix: "]" }),
+);
+// "[1, 2, 3]"
+```
+
+## Tips
+
+- Functions are pure and data-first; they don’t mutate your inputs.
+- Prefer these primitives to keep dependencies light and code clear.
 <!-- custom:end -->

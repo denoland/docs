@@ -15,25 +15,28 @@ stability: stable
 <p>MessagePack is an efficient binary serialization format that is language
 agnostic. It is like JSON, but generally produces much smaller payloads.
 <a href="https://msgpack.org/" rel="nofollow">Learn more about MessagePack</a>.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { decode, encode } <span class="pl-k">from</span> <span class="pl-s">"@std/msgpack"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> obj <span class="pl-c1">=</span> {
-  <span class="pl-c1">str</span>: <span class="pl-s">"deno"</span>,
-  <span class="pl-c1">arr</span>: [<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>],
-  <span class="pl-c1">bool</span>: <span class="pl-c1">true</span>,
-  <span class="pl-c1">nil</span>: <span class="pl-c1">null</span>,
-  <span class="pl-c1">map</span>: {
-    <span class="pl-c1">foo</span>: <span class="pl-s">"bar"</span>
+```js
+import { decode, encode } from "@std/msgpack";
+import { assertEquals } from "@std/assert";
+
+const obj = {
+  str: "deno",
+  arr: [1, 2, 3],
+  bool: true,
+  nil: null,
+  map: {
+    foo: "bar"
   }
 };
 
-<span class="pl-k">const</span> encoded <span class="pl-c1">=</span> <span class="pl-en">encode</span>(obj);
-<span class="pl-en">assertEquals</span>(encoded.<span class="pl-c1">length</span>, <span class="pl-c1">42</span>);
+const encoded = encode(obj);
+assertEquals(encoded.length, 42);
 
-<span class="pl-k">const</span> decoded <span class="pl-c1">=</span> <span class="pl-en">decode</span>(encoded);
-<span class="pl-en">assertEquals</span>(decoded, obj);
-</code></pre>
+const decoded = decode(encoded);
+assertEquals(decoded, obj);
+```
+
 <p>MessagePack supports encoding and decoding the following types:</p>
 <ul>
 <li><code>number</code></li>
@@ -45,7 +48,72 @@ agnostic. It is like JSON, but generally produces much smaller payloads.
 <li>arrays of values of these types</li>
 <li>objects with string or number keys, and values of these types</li>
 </ul>
+### Add to your project
+
+```sh
+deno add jsr:@std/msgpack
+```
+
+<a href="https://jsr.io/@std/msgpack/docs" class="docs-cta jsr-cta">See all symbols in @std/msgpack on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is MessagePack?
+
+MessagePack is a binary serialization format that is compact, fast, and
+schema-less. It is designed to be efficient in both size and speed, making it
+suitable for high-performance applications and data exchange between different
+programming languages.
+
+## Why use @std/msgpack?
+
+- MessagePack is great for compact, fast, schema-less payloads between trusted
+  services. Useful if you need a more efficient alternative to JSON.
+- Binary-safe: `Uint8Array` round-trips without base64 overhead.
+
+## Examples
+
+```ts
+import { decode, encode } from "@std/msgpack";
+
+const payload = { id: 1, items: ["a", "b"], data: new Uint8Array([1, 2, 3]) };
+const bin = encode(payload);
+const back = decode(bin);
+```
+
+Custom extension types
+
+```ts
+import { Decoder, Encoder, ExtData } from "@std/msgpack";
+
+// tag 1 for Date
+const enc = new Encoder({
+  extensionCodec: {
+    tryToEncode(object) {
+      if (object instanceof Date) {
+        return new ExtData(
+          1,
+          new Uint8Array(new BigInt64Array([BigInt(object.getTime())]).buffer),
+        );
+      }
+    },
+  },
+});
+
+const dec = new Decoder({
+  extensionCodec: {
+    decode(data) {
+      if (data.type === 1) {
+        return new Date(Number(new BigInt64Array(data.data.buffer)[0]));
+      }
+    },
+  },
+});
+```
+
+## Tips
+
+- Beware of bigint vs number: very large integers decode to `bigint`.
+- For interop with other languages, stick to common types (number, string,
+  boolean, null, arrays, maps, bytes).
 <!-- custom:end -->

@@ -14,21 +14,60 @@ stability: stable
 <p>Helper functions for working with
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array" rel="nofollow"><code>Uint8Array</code></a>
 byte slices.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { concat, indexOfNeedle, endsWith } <span class="pl-k">from</span> <span class="pl-s">"@std/bytes"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> a <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-smi">Uint8Array</span>([<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>]);
-<span class="pl-k">const</span> b <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-smi">Uint8Array</span>([<span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">5</span>]);
+```js
+import { concat, indexOfNeedle, endsWith } from "@std/bytes";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-k">const</span> c <span class="pl-c1">=</span> <span class="pl-en">concat</span>([a, b]);
+const a = new Uint8Array([0, 1, 2]);
+const b = new Uint8Array([3, 4, 5]);
 
-<span class="pl-en">assertEquals</span>(c, <span class="pl-k">new</span> <span class="pl-smi">Uint8Array</span>([<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">5</span>]));
+const c = concat([a, b]);
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">indexOfNeedle</span>(c, <span class="pl-k">new</span> <span class="pl-smi">Uint8Array</span>([<span class="pl-c1">2</span>, <span class="pl-c1">3</span>])), <span class="pl-c1">2</span>);
+assertEquals(c, new Uint8Array([0, 1, 2, 3, 4, 5]));
 
-<span class="pl-en">assertEquals</span>(<span class="pl-en">endsWith</span>(c, b), <span class="pl-c1">true</span>);
-</code></pre>
+assertEquals(indexOfNeedle(c, new Uint8Array([2, 3])), 2);
+
+assertEquals(endsWith(c, b), true);
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/bytes
+```
+
+<a href="https://jsr.io/@std/bytes/docs" class="docs-cta jsr-cta">See all symbols in @std/bytes on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+### What is a Uint8Array?
+
+`Uint8Array` is a typed array view over an `ArrayBuffer` that represents raw
+bytes. Each element is an unsigned 8‑bit integer (0–255). Typed arrays are
+fixed‑length, efficient, and ideal for working with binary data from files,
+networks, crypto, images, WASM memory, and more.
+
+## When to use @std/bytes
+
+If you are working with raw binary data (`Uint8Array`), for example searching,
+slicing, comparing or concatenating. This package provides helpful utility
+functions that are not built-in to JavaScript.
+
+## Examples
+
+```ts
+import { concat, equals, indexOfNeedle } from "@std/bytes";
+
+const a = new Uint8Array([1, 2]);
+const b = new Uint8Array([3, 4]);
+const all = concat([a, b]); // Uint8Array [1,2,3,4]
+
+console.log(equals(all, new Uint8Array([1, 2, 3, 4])));
+console.log(indexOfNeedle(all, new Uint8Array([2, 3]))); // 1
+```
+
+## Tips
+
+- Prefer these helpers over manual loops for clarity and correctness.
+- Convert text ↔ bytes using `TextEncoder`/`TextDecoder`.
 <!-- custom:end -->

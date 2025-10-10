@@ -12,14 +12,17 @@ stability: stable
 ## Overview
 
 <p>This module provides Jest compatible expect assertion functionality.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { expect } <span class="pl-k">from</span> <span class="pl-s">"@std/expect"</span>;
 
-<span class="pl-k">const</span> x <span class="pl-c1">=</span> <span class="pl-c1">6</span> <span class="pl-c1">*</span> <span class="pl-c1">7</span>;
-<span class="pl-en">expect</span>(x).<span class="pl-en">toEqual</span>(<span class="pl-c1">42</span>);
-<span class="pl-en">expect</span>(x).<span class="pl-c1">not</span>.<span class="pl-en">toEqual</span>(<span class="pl-c1">0</span>);
+```js
+import { expect } from "@std/expect";
 
-<span class="pl-k">await</span> <span class="pl-en">expect</span>(<span class="pl-smi">Promise</span>.<span class="pl-en">resolve</span>(x)).<span class="pl-c1">resolves</span>.<span class="pl-en">toEqual</span>(<span class="pl-c1">42</span>);
-</code></pre>
+const x = 6 * 7;
+expect(x).toEqual(42);
+expect(x).not.toEqual(0);
+
+await expect(Promise.resolve(x)).resolves.toEqual(42);
+```
+
 <p>Currently this module supports the following functions:</p>
 <ul>
 <li>Common matchers:
@@ -64,26 +67,26 @@ stability: stable
 </li>
 <li>Asymmetric matchers:
 <ul>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.anything" rel="nofollow"><code>expect.anything</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.any" rel="nofollow"><code>expect.any</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.arrayContaining" rel="nofollow"><code>expect.arrayContaining</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.not.arrayContaining" rel="nofollow"><code>expect.not.arrayContaining</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.objectContaining" rel="nofollow"><code>expect.objectContaining</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.not.objectContaining" rel="nofollow"><code>expect.not.objectContaining</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.closeTo" rel="nofollow"><code>expect.closeTo</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.stringContaining" rel="nofollow"><code>expect.stringContaining</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.not.stringContaining" rel="nofollow"><code>expect.not.stringContaining</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.stringMatching" rel="nofollow"><code>expect.stringMatching</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.not.stringMatching" rel="nofollow"><code>expect.not.stringMatching</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.anything" rel="nofollow"><code>expect.anything</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.any" rel="nofollow"><code>expect.any</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.arrayContaining" rel="nofollow"><code>expect.arrayContaining</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.not.arrayContaining" rel="nofollow"><code>expect.not.arrayContaining</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.objectContaining" rel="nofollow"><code>expect.objectContaining</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.not.objectContaining" rel="nofollow"><code>expect.not.objectContaining</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.closeTo" rel="nofollow"><code>expect.closeTo</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.stringContaining" rel="nofollow"><code>expect.stringContaining</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.not.stringContaining" rel="nofollow"><code>expect.not.stringContaining</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.stringMatching" rel="nofollow"><code>expect.stringMatching</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.not.stringMatching" rel="nofollow"><code>expect.not.stringMatching</code></a></li>
 </ul>
 </li>
 <li>Utilities:
 <ul>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.addSnapshotSerializer" rel="nofollow"><code>expect.addSnapshotSerializer</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.assertions" rel="nofollow"><code>expect.assertions</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.addSnapshotSerializer" rel="nofollow"><code>expect.addSnapshotSerializer</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.assertions" rel="nofollow"><code>expect.assertions</code></a></li>
 <li><code>expect.addEqualityTester</code></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.extend" rel="nofollow"><code>expect.extend</code></a></li>
-<li><a href="/@std/expect@1.0.17/doc/~/expect.hasAssertions" rel="nofollow"><code>expect.hasAssertions</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.extend" rel="nofollow"><code>expect.extend</code></a></li>
+<li><a href="https://jsr.io/@std/expect@1.0.17/doc/~/expect.hasAssertions" rel="nofollow"><code>expect.hasAssertions</code></a></li>
 </ul>
 </li>
 </ul>
@@ -103,49 +106,69 @@ stability: stable
 <p>This module is largely inspired by
 <a href="https://github.com/allain/expect" rel="nofollow">x/expect</a> module by
 <a href="https://github.com/allain" rel="nofollow">Allain Lalonde</a>.</p>
+### Add to your project
 
-## Additional Examples
-
-<!-- Extra examples for @std/expect -->
-
-# Additional @std/expect Examples
-
-## Example: mixing expect and assert
-
-```ts
-import { expect } from "jsr:@std/expect";
-import { assertEquals } from "jsr:@std/assert";
-
-deno.test("mix styles", () => {
-  const value = { a: 1 };
-  expect(value).toHaveProperty("a");
-  assertEquals(value.a, 1);
-});
+```sh
+deno add jsr:@std/expect
 ```
 
-## Example: extending expect
-
-```ts
-import { expect } from "jsr:@std/expect";
-import type { Matcher } from "jsr:@std/expect";
-
-// simple custom matcher
-const toBeWithin: Matcher<[min: number, max: number]> = {
-  name: "toBeWithin",
-  test(actual, min, max) {
-    const pass = typeof actual === "number" && actual >= min && actual <= max;
-    return { pass, expected: `${min}..${max}` };
-  },
-};
-
-expect.extend({ toBeWithin });
-
-Deno.test("within range", () => {
-  expect(5).toBeWithin(1, 10);
-});
-```
-
+<a href="https://jsr.io/@std/expect/docs" class="docs-cta jsr-cta">See all symbols in @std/expect on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is expect?
+
+A Jest‑compatible fluent assertion API. Instead of standalone assert functions,
+you write expectations like `expect(value).toBe(1)` and can chain modifiers like
+`.not`, `.resolves`, and `.rejects`.
+
+## When to use @std/expect
+
+If you prefer a Jest-like API for fluent, readable assertions with rich
+matchers, especially when migrating from Jest.
+
+## Examples
+
+```ts
+import { expect } from "@std/expect";
+
+expect({ a: 1, b: 2 }).toMatchObject({ a: 1 });
+await expect(Promise.resolve(42)).resolves.toBe(42);
+expect([1, 2, 3]).toContain(2);
+
+// Throwing and async rejections
+expect(() => JSON.parse("{"))
+  .toThrow(SyntaxError);
+await expect(Promise.reject(new Error("boom")))
+  .rejects.toThrow("boom");
+
+// Close-to for floating point, regex matching
+expect(0.1 + 0.2).toBeCloseTo(0.3, 15);
+expect("hello world").toMatch(/world/);
+
+// Using asymmetric matchers
+expect({ id: 1, name: "Ada" })
+  .toEqual(expect.objectContaining({ name: expect.stringMatching(/^A/) }));
+```
+
+## Use with Deno.test
+
+```ts
+import { expect } from "@std/expect";
+Deno.test("basic expect", () => {
+  const value = 2 + 2;
+  expect(value).toBe(4);
+});
+```
+
+For more information on testing in Deno, see the
+[testing docs](/runtime/fundamentals/testing/).
+
+## Tips
+
+- Use `toEqual` for deep data comparisons and `toBe` for identity.
+- Prefer `.resolves` / `.rejects` helpers for promises.
+- Prefer `.resolves` / `.rejects` helpers for promises.
+- Use `toStrictEqual` for stricter deep checks (no extra props, etc.).
+- Extend with custom matchers via `expect.extend` when needed.
 <!-- custom:end -->

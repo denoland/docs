@@ -19,32 +19,138 @@ stability: stable
 <li><a href="https://jsr.io/@std/testing/doc/snapshot/~" rel="nofollow">Snapshot testing</a></li>
 <li><a href="https://jsr.io/@std/testing/doc/types/~" rel="nofollow">Type assertions</a></li>
 </ul>
-<pre class="highlight"><code><span class="pl-k">import</span> { assertSpyCalls, spy } <span class="pl-k">from</span> <span class="pl-s">"@std/testing/mock"</span>;
-<span class="pl-k">import</span> { <span class="pl-smi">FakeTime</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/testing/time"</span>;
 
-<span class="pl-k">function</span> <span class="pl-en">secondInterval</span>(cb: () <span class="pl-c1">=&gt;</span> <span class="pl-smi"><span class="pl-k">void</span></span>): <span class="pl-smi">number</span> {
-  <span class="pl-k">return</span> <span class="pl-en">setInterval</span>(cb, <span class="pl-c1">1000</span>);
+```js
+import { assertSpyCalls, spy } from "@std/testing/mock";
+import { FakeTime } from "@std/testing/time";
+
+function secondInterval(cb: () => void): number {
+  return setInterval(cb, 1000);
 }
 
-<span class="pl-smi">Deno</span>.<span class="pl-en">test</span>(<span class="pl-s">"secondInterval calls callback every second and stops after being cleared"</span>, () <span class="pl-c1">=&gt;</span> {
-  using time <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-smi">FakeTime</span>();
+Deno.test("secondInterval calls callback every second and stops after being cleared", () => {
+  using time = new FakeTime();
 
-  <span class="pl-k">const</span> cb <span class="pl-c1">=</span> <span class="pl-en">spy</span>();
-  <span class="pl-k">const</span> intervalId <span class="pl-c1">=</span> <span class="pl-en">secondInterval</span>(cb);
-  <span class="pl-en">assertSpyCalls</span>(cb, <span class="pl-c1">0</span>);
-  time.<span class="pl-en">tick</span>(<span class="pl-c1">500</span>);
-  <span class="pl-en">assertSpyCalls</span>(cb, <span class="pl-c1">0</span>);
-  time.<span class="pl-en">tick</span>(<span class="pl-c1">500</span>);
-  <span class="pl-en">assertSpyCalls</span>(cb, <span class="pl-c1">1</span>);
-  time.<span class="pl-en">tick</span>(<span class="pl-c1">3500</span>);
-  <span class="pl-en">assertSpyCalls</span>(cb, <span class="pl-c1">4</span>);
+  const cb = spy();
+  const intervalId = secondInterval(cb);
+  assertSpyCalls(cb, 0);
+  time.tick(500);
+  assertSpyCalls(cb, 0);
+  time.tick(500);
+  assertSpyCalls(cb, 1);
+  time.tick(3500);
+  assertSpyCalls(cb, 4);
 
-  <span class="pl-en">clearInterval</span>(intervalId);
-  time.<span class="pl-en">tick</span>(<span class="pl-c1">1000</span>);
-  <span class="pl-en">assertSpyCalls</span>(cb, <span class="pl-c1">4</span>);
+  clearInterval(intervalId);
+  time.tick(1000);
+  assertSpyCalls(cb, 4);
 });
-</code></pre>
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/testing
+```
+
+<a href="https://jsr.io/@std/testing/docs" class="docs-cta jsr-cta">See all symbols in @std/testing on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## Testing
+
+Testing is the practice of verifying that your code behaves as expected. It
+helps catch bugs early, ensures code quality, and provides confidence when
+making changes.
+
+Check out the [Deno testing examples](/examples/#testing) for practical usage.
+
+## Why use @std/testing
+
+Use these utilities alongside Deno’s built-in `Deno.test` to write clearer
+specs, mock dependencies, fake timers, and create snapshots.
+
+## Examples
+
+```ts
+import { afterEach, beforeEach, describe, it } from "@std/testing/bdd";
+import { assertSpyCalls, spy } from "@std/testing/mock";
+import { FakeTime } from "@std/testing/time";
+
+describe("interval", () => {
+  let time: FakeTime;
+  beforeEach(() => (time = new FakeTime()));
+  afterEach(() => time.restore());
+
+  it("ticks", () => {
+    const cb = spy();
+    const id = setInterval(cb, 1000);
+    time.tick(3000);
+    assertSpyCalls(cb, 3);
+    clearInterval(id);
+  });
+});
+```
+
+### Snapshot testing
+
+```ts
+import { assertSnapshot } from "@std/testing/snapshot";
+
+Deno.test("user json snapshot", async (t) => {
+  const user = { id: 1, name: "Ada", tags: ["admin", "ops"] };
+  await assertSnapshot(t, user);
+});
+```
+
+### Stub a global method
+
+```ts
+import { stub } from "@std/testing/mock";
+import { assertEquals } from "@std/assert";
+
+Deno.test("stub Math.random", () => {
+  const s = stub(Math, "random", () => 0.5);
+  try {
+    assertEquals(Math.random(), 0.5);
+  } finally {
+    s.restore();
+  }
+});
+```
+
+### Program a sequence with returnsNext
+
+```ts
+import { returnsNext } from "@std/testing/mock";
+import { assertEquals, assertThrows } from "@std/assert";
+
+Deno.test("returnsNext sequences values and errors", () => {
+  const next = returnsNext([1, 2, new Error("boom"), 3]);
+  assertEquals(next(), 1);
+  assertEquals(next(), 2);
+  assertThrows(() => next(), Error, "boom");
+  assertEquals(next(), 3);
+});
+```
+
+### Spy and assert call arguments
+
+```ts
+import { assertSpyCallArgs, assertSpyCalls, spy } from "@std/testing/mock";
+
+Deno.test("spy captures calls and args", () => {
+  const sum = spy((a: number, b: number) => a + b);
+  sum(3, 4);
+  sum(5, 6);
+  assertSpyCalls(sum, 2);
+  assertSpyCallArgs(sum, 0, [3, 4]);
+});
+```
+
+## Tips
+
+- Combine with `@std/assert` or `@std/expect` for assertions.
+- Use `FakeTime` to deterministically test timers and `Date.now()`.
+- Restore stubs/spies in `afterEach` or `finally` blocks to avoid leaking state.
+- Commit snapshot files to version control to catch unintentional changes.
 <!-- custom:end -->

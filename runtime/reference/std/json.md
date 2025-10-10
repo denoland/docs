@@ -12,18 +12,143 @@ stability: stable
 ## Overview
 
 <p>Utilities for parsing streaming JSON data.</p>
-<pre class="highlight"><code><span class="pl-k">import</span> { <span class="pl-smi">JsonStringifyStream</span> } <span class="pl-k">from</span> <span class="pl-s">"@std/json"</span>;
-<span class="pl-k">import</span> { assertEquals } <span class="pl-k">from</span> <span class="pl-s">"@std/assert"</span>;
 
-<span class="pl-k">const</span> stream <span class="pl-c1">=</span> <span class="pl-smi">ReadableStream</span>.<span class="pl-en">from</span>([{ <span class="pl-c1">foo</span>: <span class="pl-s">"bar"</span> }, { <span class="pl-c1">baz</span>: <span class="pl-c1">100</span> }])
-  .<span class="pl-en">pipeThrough</span>(<span class="pl-k">new</span> <span class="pl-smi">JsonStringifyStream</span>());
+```js
+import { JsonStringifyStream } from "@std/json";
+import { assertEquals } from "@std/assert";
 
-<span class="pl-en">assertEquals</span>(<span class="pl-k">await</span> <span class="pl-smi">Array</span>.<span class="pl-en">fromAsync</span>(stream), [
-  <span class="pl-s">`{"foo":"bar"}\n`</span>,
-  <span class="pl-s">`{"baz":100}\n`</span>
+const stream = ReadableStream.from([{ foo: "bar" }, { baz: 100 }])
+  .pipeThrough(new JsonStringifyStream());
+
+assertEquals(await Array.fromAsync(stream), [
+  `{"foo":"bar"}\n`,
+  `{"baz":100}\n`
 ]);
-</code></pre>
+```
+### Add to your project
+
+```sh
+deno add jsr:@std/json
+```
+
+<a href="https://jsr.io/@std/json/docs" class="docs-cta jsr-cta">See all symbols in @std/json on
+<svg class="inline ml-1" viewBox="0 0 13 7" aria-hidden="true" height="20"><path d="M0,2h2v-2h7v1h4v4h-2v2h-7v-1h-4" fill="#083344"></path><g fill="#f7df1e"><path d="M1,3h1v1h1v-3h1v4h-3"></path><path d="M5,1h3v1h-2v1h2v3h-3v-1h2v-1h-2"></path><path d="M9,2h3v2h-1v-1h-1v3h-1"></path></g></svg></a>
 
 <!-- custom:start -->
-<!-- Add persistent custom content below. This section is preserved across generations. -->
+## What is JSON streaming?
+
+JSON streaming is a technique for processing JSON data in a continuous flow,
+rather than loading the entire dataset into memory at once. This is particularly
+useful for handling large JSON files or real-time data feeds.
+
+## Why use @std/json?
+
+To stream JSON in and out to handle large datasets without loading everything in
+memory.
+
+## Examples
+
+Parse concatenated JSON (multiple JSON values back-to-back)
+
+```ts
+import {
+  ConcatenatedJsonParseStream,
+} from "@std/json/concatenated-json-parse-stream";
+
+// Stream contains two JSON documents back-to-back without delimiters.
+const input = ReadableStream.from([
+  '{"a":1}{',
+  '"b":2}',
+]);
+
+const parsed = input.pipeThrough(new ConcatenatedJsonParseStream());
+console.log(await Array.fromAsync(parsed)); // [{ a: 1 }, { b: 2 }]
+```
+
+Produce NDJSON (JSON Lines) from objects
+
+```ts
+import { JsonStringifyStream } from "@std/json/stringify-stream";
+
+const data = [{ id: 1 }, { id: 2 }, { id: 3 }];
+
+// Add a trailing newline after each JSON value for NDJSON
+const ndjson = ReadableStream
+  .from(data)
+  .pipeThrough(new JsonStringifyStream({ suffix: "\n" }));
+
+// Post to a server that accepts application/x-ndjson
+await fetch("/ingest", {
+  method: "POST",
+  headers: { "content-type": "application/x-ndjson" },
+  body: ndjson,
+});
+```
+
+Consume NDJSON safely (split lines across chunk boundaries)
+
+```ts
+import { JsonParseStream } from "@std/json/parse-stream";
+
+// Split by newlines, even if a line is split across chunks
+function lineSplitter() {
+  let buffer = "";
+  return new TransformStream<string, string>({
+    transform(chunk, controller) {
+      buffer += chunk;
+      const lines = buffer.split(/\r?\n/);
+      buffer = lines.pop() ?? ""; // keep last partial line
+      for (const line of lines) if (line) controller.enqueue(line);
+    },
+    flush(controller) {
+      if (buffer) controller.enqueue(buffer);
+    },
+  });
+}
+
+const res = await fetch("/stream.ndjson");
+const values = res.body!
+  .pipeThrough(new TextDecoderStream())
+  .pipeThrough(lineSplitter())
+  .pipeThrough(new JsonParseStream());
+
+for await (const obj of values) {
+  // Handle each JSON object as it arrives
+  console.log(obj);
+}
+```
+
+Transform a JSON stream on the fly
+
+```ts
+import { JsonParseStream } from "@std/json/parse-stream";
+import { JsonStringifyStream } from "@std/json/stringify-stream";
+
+// Incoming objects -> map -> outgoing NDJSON
+function mapStream<T, U>(map: (t: T) => U) {
+  return new TransformStream<T, U>({ transform: (t, c) => c.enqueue(map(t)) });
+}
+
+const response = await fetch("/objects.jsonl");
+const uppercased = response.body!
+  .pipeThrough(new TextDecoderStream())
+  .pipeThrough(lineSplitter()) // from previous example
+  .pipeThrough(new JsonParseStream<{ name: string }>())
+  .pipeThrough(mapStream((o) => ({ name: o.name.toUpperCase() })))
+  .pipeThrough(new JsonStringifyStream({ suffix: "\n" }));
+
+// Pipe to another request, a file, or process further
+await fetch("/store", { method: "POST", body: uppercased });
+```
+
+## Tips
+
+- Use `JsonStringifyStream`/`JsonParseStream` to compose pipelines with
+  `fetch()` and file streams.
+- Be explicit about encoding boundaries—prefer UTF-8 and
+  `TextEncoder`/`TextDecoder` when bridging.
+- For NDJSON, use `JsonStringifyStream({ suffix: "\n" })` when producing, and
+  split lines before `JsonParseStream` when consuming.
+- Use `ConcatenatedJsonParseStream` when your input is a stream of back-to-back
+  JSON values with no separators.
 <!-- custom:end -->
