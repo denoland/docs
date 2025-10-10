@@ -9,7 +9,7 @@ and compares it against a stored reference version. Rather than manually writing
 assertions for each property, you let the test runner record the entire output
 structure, making it easier to detect any unexpected changes.
 
-The [Deno Standard Library](/runtime/fundamentals/standard_library/) has a
+The [Deno Standard Library](/runtime/reference/std/) has a
 [snapshot module](https://jsr.io/@std/testing/doc/snapshot), which enables
 developers to write tests which assert a value against a reference snapshot.
 This reference snapshot is a serialized representation of the original value and
