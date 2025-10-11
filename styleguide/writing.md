@@ -130,9 +130,13 @@ Use admonitions sparingly to highlight important information:
 ```markdown
 :::note Important supplementary information. :::
 
+:::info Informational content (styled like note). :::
+
 :::tip Helpful advice for better usage. :::
 
 :::caution Warn about potential issues or gotchas. :::
+
+:::warning Critical warnings that require immediate attention. :::
 ```
 
 ### Tables
