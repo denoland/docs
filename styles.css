@@ -737,7 +737,8 @@
         @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
           dark:border-runtime-950 border-runtime-200;
       }
-      &.caution {
+      &.caution,
+      &.warning {
         @apply bg-yellow-100 dark:bg-yellow-950/75 dark:border
           dark:border-yellow-400 border-yellow-200;
 
