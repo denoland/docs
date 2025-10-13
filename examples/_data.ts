@@ -406,6 +406,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Migrating a custom domain to Deno Deploy",
+        href: "/examples/migrate_custom_domain_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "AWS Lambda",
         href: "/examples/aws_lambda_tutorial/",
         type: "tutorial",
