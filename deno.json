@@ -26,7 +26,7 @@
     "serve": "deno task dev",
     "serve:style": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts",
     "start": "deno task dev",
-    "build": "deno task generate:reference && deno task generate:std-docs && BUILD_TYPE=FULL deno run --env-file -A lume.ts && tailwindcss -i styles.css -o _site/styles.css --minify",
+    "build": "deno task generate:reference && deno task generate:std-docs && BUILD_TYPE=FULL deno run --env-file -A --v8-flags=--max-old-space-size=4096 lume.ts && tailwindcss -i styles.css -o _site/styles.css --minify",
     "build:light": "deno run --env-file -A lume.ts",
     "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",
