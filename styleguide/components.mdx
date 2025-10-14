@@ -151,6 +151,167 @@ A component for displaying content in equal width columns
         <a class="homepage-link deploy-link" href="/deploy/classic/queues/">Queues docs</a>
     </div>
 </comp.Columns>
+
+## API reference components
+
+These components are used to render the generated API reference pages and are now available globally.
+
+### Breadcrumbs
+
+```tsx
+<comp.Breadcrumbs
+    parts={[
+        { name: "API", href: "/api/", is_symbol: false },
+        { name: "deno", href: "/api/deno/", is_symbol: false },
+        { name: "Deno", href: "/api/deno/~/Deno", is_symbol: false },
+        { name: "readTextFile", href: "#", is_symbol: true },
+    ]}
+    hasSubNav={false}
+/>
+```
+<comp.Breadcrumbs
+    parts={[
+        { name: "API", href: "/api/", is_symbol: false },
+        { name: "deno", href: "/api/deno/", is_symbol: false },
+        { name: "Deno", href: "/api/deno/~/Deno", is_symbol: false },
+        { name: "readTextFile", href: "#", is_symbol: true },
+    ]}
+    hasSubNav={false}
+/> 
+
+### Tags
+
+```tsx
+<div class="space-x-2">
+    <comp.Tag tag={{ kind: "permissions", value: ["net", "read"] }} large />
+    <comp.Tag tag={{ kind: "unstable" }} />
+    <comp.Tag tag={{ kind: "since", value: "1.45" }} />
+</div>
+```
+<div class="space-x-2">
+    <comp.Tag tag={{ kind: "permissions", value: ["net", "read"] }} large />
+    <comp.Tag tag={{ kind: "unstable" }} />
+    <comp.Tag tag={{ kind: "since", value: "1.45" }} />
+</div>
+
+### Deprecated
+
+```tsx
+<comp.Deprecated markdownContent="<p>This API is deprecated. Use <code>Deno.readFile</code> instead.</p>" />
+```
+<comp.Deprecated markdownContent="<p>This API is deprecated. Use <code>Deno.readFile</code> instead.</p>" />
+
+### Anchor
+
+```tsx
+<h4 id="demo-anchor">Heading with anchor <comp.Anchor anchor={{ id: "demo-anchor" }} /></h4>
+```
+<h4 id="demo-anchor">Heading with anchor <comp.Anchor anchor={{ id: "demo-anchor" }} /></h4>
+
+### Usage block
+
+```tsx
+<comp.UsageLarge usages={{ usages: [{ content: "<pre><code>deno run -A main.ts</code></pre>" }] }} />
+```
+<comp.UsageLarge usages={{ usages: [{ content: "<pre><code>deno run -A main.ts</code></pre>" }] }} />
+
+### Doc node kind icons
+
+```tsx
+<comp.DocNodeKindIcon kinds={[
+    { kind: "class", title: "Class", char: "C" },
+    { kind: "function", title: "Function", char: "ƒ" },
+    { kind: "interface", title: "Interface", char: "I" },
+]} />
+```
+<comp.DocNodeKindIcon kinds={[
+    { kind: "class", title: "Class", char: "C" },
+    { kind: "function", title: "Function", char: "ƒ" },
+    { kind: "interface", title: "Interface", char: "I" },
+]} />
+
+### Symbol content (basic)
+
+```tsx
+<comp.SymbolContent symbolContent={{ id: "demo-symbol", docs: "<p>Some introductory docs for a symbol.</p>", sections: [] }} />
+```
+<comp.SymbolContent symbolContent={{ id: "demo-symbol", docs: "<p>Some introductory docs for a symbol.</p>", sections: [] }} />
+
+### Section header
+
+```tsx
+<comp.Section section={{
+    header: {
+        title: "Methods",
+        anchor: { id: "methods" },
+        doc: "<p>Methods available on this type.</p>",
+    },
+    content: { kind: "empty" },
+}} />
+```
+<comp.Section section={{
+    header: {
+        title: "Methods",
+        anchor: { id: "methods" },
+        doc: "<p>Methods available on this type.</p>",
+    },
+    content: { kind: "empty" },
+}} />
+
+### Doc entry (inline)
+
+```tsx
+<comp.DocEntry docEntry={{
+    id: "demo-entry",
+    name: "myValue",
+    anchor: { id: "demo-entry" },
+    content: ": <code>number</code> = <code>42</code>",
+    js_doc: "<p>This is a demo doc entry.</p>",
+}} />
+```
+<comp.DocEntry docEntry={{
+    id: "demo-entry",
+    name: "myValue",
+    anchor: { id: "demo-entry" },
+    content: ": <code>number</code> = <code>42</code>",
+    js_doc: "<p>This is a demo doc entry.</p>",
+}} />
+
+### Index signature
+
+```tsx
+<comp.IndexSignature indexSignature={{
+    id: "idx",
+    anchor: { id: "idx" },
+    readonly: true,
+    params: "key: <code>string</code>",
+    ts_type: ": <code>number</code>",
+}} />
+```
+<comp.IndexSignature indexSignature={{
+    id: "idx",
+    anchor: { id: "idx" },
+    readonly: true,
+    params: "key: <code>string</code>",
+    ts_type: ": <code>number</code>",
+}} />
+
+### Icons
+
+```tsx
+<div class="flex gap-4 items-center">
+    <comp.Arrow />
+    <comp.Check />
+    <comp.Copy />
+    <comp.Link />
+</div>
+```
+<div class="flex gap-4 items-center">
+    <comp.Arrow />
+    <comp.Check />
+    <comp.Copy />
+    <comp.Link />
+</div>
 ```
 <comp.Columns>
     <div>
