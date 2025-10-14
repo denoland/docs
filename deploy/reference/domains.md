@@ -176,7 +176,7 @@ organization for use with other applications.
 This removes the custom domain from your organization and deletes all domain
 assignments across all applications.
 
-## Migrating a custom domain from Deploy Classic top Deno Deploy
+## Migrating a custom domain from Deploy Classic to Deno Deploy
 
 If you have previously set up a custom domain on Deploy Classic and want to
 migrate it to Deno Deploy, we've created a
