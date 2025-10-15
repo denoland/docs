@@ -51,8 +51,10 @@ that the first occurrence found in the last `.env` file listed will be applied.
 
 :::
 
-Alternately, the `dotenv` package in the standard library will load environment
-variables from `.env` as well.
+## `@std/dotenv`
+
+The `dotenv` package in the standard library can be used to load environment
+variables from `.env`.
 
 Let's say you have an `.env` file that looks like this:
 
@@ -64,10 +66,20 @@ Import the `load` module to auto-import from the `.env` file and into the
 process environment.
 
 ```ts
-import "jsr:@std/dotenv/load";
+import { load } from "jsr:@std/dotenv";
 
-console.log(Deno.env.get("GREETING")); // "Hello, world."
+const env = await load({
+  // optional: choose a specific path (defaults to ".env")
+  envPath: ".env.local",
+  // optional: also export to the process environment (so Deno.env can read it)
+  export: true,
+});
+
+console.log(env.GREETING);
+console.log(Deno.env.get("GREETING"));
 ```
+
+Run this with `deno run --allow-read --allow-env app.ts`.
 
 Further documentation for `.env` handling can be found in the
 [@std/dotenv](https://jsr.io/@std/dotenv/doc) documentation.
