@@ -1,4 +1,4 @@
-name: Lint site and link check
+name: Lint
 on:
   push:
     branches: main
@@ -6,8 +6,8 @@ on:
     branches: main
 
 jobs:
-  deploy:
-    name: Deploy
+  lint:
+    name: lint and link check
     runs-on: ubuntu-22.04-xl
     permissions:
       id-token: write # Needed for auth with Deno Deploy
