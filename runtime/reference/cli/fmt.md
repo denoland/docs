@@ -29,13 +29,13 @@ files:
 | JSONC                | `.jsonc`                                               |                                                                                        |
 | CSS                  | `.css`                                                 |                                                                                        |
 | HTML                 | `.html`                                                |                                                                                        |
-| [Nunjucks][Nunjucks] | `.njk`                                                 |                                                                                        |
-| [Vento][Vento]       | `.vto`                                                 |                                                                                        |
 | YAML                 | `.yml`, `.yaml`                                        |                                                                                        |
 | Sass                 | `.sass`                                                |                                                                                        |
 | SCSS                 | `.scss`                                                |                                                                                        |
 | LESS                 | `.less`                                                |                                                                                        |
 | Jupyter Notebook     | `.ipynb`                                               |                                                                                        |
+| [Nunjucks][Nunjucks] | `.njk`                                                 | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
+| [Vento][Vento]       | `.vto`                                                 | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
 | Astro                | `.astro`                                               | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
 | Svelte               | `.svelte`                                              | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |
 | Vue                  | `.vue`                                                 | Requires `--unstable-component` flag or `"unstable": ["fmt-component"]` config option. |

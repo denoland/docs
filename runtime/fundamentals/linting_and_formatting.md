@@ -255,7 +255,7 @@ Define separator kind for type literals
 
 #### `unstable-component`
 
-Enable formatting Svelte, Vue, Astro and Angular files
+Enable formatting Nunjucks, Vento, Svelte, Vue, Astro and Angular files
 
 #### `unstable-sql`
 
