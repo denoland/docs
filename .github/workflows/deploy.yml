@@ -61,10 +61,3 @@ jobs:
         env:
           DOCS_ROOT: "http://localhost:8000"
         run: deno run --no-lock --allow-net --allow-env .github/workflows/better_link_checker.ts
-
-      - name: Upload to Deno Deploy
-        uses: denoland/deployctl@v1
-        with:
-          project: "deno-docs"
-          entrypoint: "server.ts"
-          root: "."
