@@ -1,5 +1,3 @@
-/** @jsxImportSource npm:react@18.2.0 */
-
 export default function ({ title, description, openGraphTitle }) {
   if (!openGraphTitle) {
     title = "deno help";
