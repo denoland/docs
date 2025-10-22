@@ -93,8 +93,8 @@ Deno aims to simplify TypeScript configuration based on the following design
 choices:
 
 - Strict and modern defaults for type-checking rules.
-- Allowing the omission of settings indicating the target runtime or relating to
-  compatiblity, leveraging direct integration with the execution environment.
+- Allowing the omission of settings relating to the target runtime or
+  compatibility, leveraging direct integration with the execution environment.
 - Project references using `deno.json` directory scopes.
 
 The last point presents an simpler format than `tsconfig.json`'s
