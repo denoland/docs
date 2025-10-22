@@ -507,6 +507,7 @@ example:
 ```
 
 Files in the `web` subdirectory will be configured with the following options:
+
 ```json
 {
   "compilerOptions": {
