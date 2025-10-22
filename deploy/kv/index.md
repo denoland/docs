@@ -212,6 +212,12 @@ async function getByEmail(email) {
 }
 ```
 
+:::tip Secondary index values as pointers In secondary indexes, prefer storing
+the primary key (or a reference to it) as the value. This avoids duplicating
+data and keeps writes simple; the trade‑off is a second read (index → primary)
+when resolving values. See the manual section on
+[secondary indexes](./secondary_indexes) for pros/cons and more examples. :::
+
 Learn more about [secondary indexes in the manual here](./secondary_indexes).
 
 ## Watching for updates in Deno KV
