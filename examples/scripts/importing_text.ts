@@ -2,7 +2,7 @@
  * @title Importing text files
  * @difficulty beginner
  * @tags cli
- * @run <url>
+ * @run --unstable-raw-imports https://docs.deno.com/examples/scripts/importing_text.ts
  * @resource {https://github.com/whatwg/html/issues/9444} HTML specification proposal
  * @group Unstable APIs
  *
@@ -16,14 +16,16 @@
 
 // Text files can be imported in JS and TS modules. When doing so, you need to
 // specify the `type: "text"` import attribute.
-import text from "./log.txt" with { type: "text" };
-console.log(text);
+import text1 from "./log.txt" with { type: "text" };
+
+console.log(text1);
 
 // Dynamic imports are also supported.
-const text = await import("./log.txt", {
+const text2 = (await import("./log.txt", {
   with: { type: "text" },
-});
-console.log(text);
+})).default;
+
+console.log(text2);
 
 /* File: ./log.txt
 2025-07-01 08:15:12 - Program started

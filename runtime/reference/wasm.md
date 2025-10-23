@@ -215,7 +215,7 @@ As an example, a Rust program that compiles to the aforementioned bytes would
 look something like this:
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub fn main() -> u32 { // u32 stands for an unsigned integer using 32 bits of memory.
   42
 }

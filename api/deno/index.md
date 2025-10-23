@@ -486,7 +486,7 @@ Here's an example showing how to call a Rust function from Deno:
 
 ```rust
 // add.rs
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn add(a: isize, b: isize) -> isize {
     a + b
 }
