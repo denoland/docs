@@ -104,6 +104,13 @@ Let's [tag](https://docs.docker.com/engine/reference/commandline/tag/) it with
 docker tag deno-image registry.digitalocean.com/deno-on-digital-ocean/deno-image:new
 ```
 
+Before pushing, authenticate your Docker client with Digital Ocean Container
+Registry:
+
+```shell
+doctl registry login
+```
+
 Now we can push it to the registry.
 
 ```shell
