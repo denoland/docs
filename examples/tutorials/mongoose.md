@@ -31,26 +31,51 @@ touch main.ts && mkdir model && touch model/Dinosaur.ts
 In `/model/Dinosaur.ts`, we'll import `npm:mongoose`, define the [schema], and
 export it:
 
-```ts
-import { model, Schema } from "npm:mongoose@^6.7";
+```ts title="model/Dinosaur.ts"
+import mongoose, {
+  type HydratedDocument,
+  type Model,
+  model,
+  models,
+  Schema,
+} from "npm:mongoose@latest";
 
-// Define schema.
-const dinosaurSchema = new Schema({
-  name: { type: String, unique: true },
-  description: String,
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-});
+interface Dinosaur {
+  name: string;
+  description: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
-// Validations
-dinosaurSchema.path("name").required(true, "Dinosaur name cannot be blank.");
-dinosaurSchema.path("description").required(
-  true,
-  "Dinosaur description cannot be blank.",
+interface DinosaurMethods {
+  updateDescription(
+    this: HydratedDocument<Dinosaur>,
+    description: string,
+  ): Promise<
+    HydratedDocument<Dinosaur>
+  >;
+}
+
+type DinosaurModel = Model<Dinosaur, {}, DinosaurMethods>;
+
+const dinosaurSchema = new Schema<Dinosaur, DinosaurModel, DinosaurMethods>(
+  {
+    name: { type: String, unique: true, required: true },
+    description: { type: String, required: true },
+  },
+  { timestamps: true },
 );
 
-// Export model.
-export default model("Dinosaur", dinosaurSchema);
+dinosaurSchema.methods.updateDescription = async function (
+  this: HydratedDocument<Dinosaur>,
+  description: string,
+) {
+  this.description = description;
+  return await this.save();
+};
+
+export default (models.Dinosaur as DinosaurModel) ||
+  model<Dinosaur, DinosaurModel>("Dinosaur", dinosaurSchema);
 ```
 
 ## Connecting to MongoDB
@@ -59,42 +84,41 @@ Now, in our `main.ts` file, we'll import mongoose and the `Dinosaur` schema, and
 connect to MongoDB:
 
 ```ts
-import mongoose from "npm:mongoose@^6.7";
+import mongoose from "npm:mongoose@latest";
 import Dinosaur from "./model/Dinosaur.ts";
 
-await mongoose.connect("mongodb://localhost:27017");
+const MONGODB_URI = Deno.env.get("MONGODB_URI") ??
+  "mongodb://localhost:27017/deno_mongoose_tutorial";
 
-// Check to see connection status.
+await mongoose.connect(MONGODB_URI);
+
 console.log(mongoose.connection.readyState);
 ```
 
 Because Deno supports top-level `await`, we're able to simply
 `await mongoose.connect()`.
 
-Running this, we should expect a log of `1`:
+Running the code with this command:
 
 ```shell
-$ deno run --allow-read --allow-sys --allow-env --allow-net main.ts
-1
+deno run --allow-env --allow-net main.ts
 ```
 
-It worked!
+We expect a log of `1`.
 
 ## Manipulating Data
 
-Let's add an instance [method](https://mongoosejs.com/docs/guide.html#methods)
-to our `Dinosaur` schema in `/model/Dinosaur.ts`:
+Let's add a typed instance
+[method](https://mongoosejs.com/docs/guide.html#methods) to our `Dinosaur`
+schema in `/model/Dinosaur.ts`:
 
-```ts
-// ./model/Dinosaur.ts
-
-// Methods.
-dinosaurSchema.methods = {
-  // Update description.
-  updateDescription: async function (description: string) {
-    this.description = description;
-    return await this.save();
-  },
+```ts title="model/Dinosaur.ts"
+dinosaurSchema.methods.updateDescription = async function (
+  this: HydratedDocument<Dinosaur>,
+  description: string,
+) {
+  this.description = description;
+  return await this.save();
 };
 
 // ...
@@ -105,31 +129,26 @@ description.
 
 Back in `main.ts`, let's start adding and manipulating data in MongoDB.
 
-```ts
-// main.ts
-
-// Create a new Dinosaur.
+```ts title="main.ts"
 const deno = new Dinosaur({
   name: "Deno",
-  description: "The fastest dinosaur ever lived.",
+  description: "The fastest dinosaur that ever lived.",
 });
 
-// // Insert deno.
 await deno.save();
 
-// Find Deno by name.
-const denoFromMongoDb = await Dinosaur.findOne({ name: "Deno" });
+const denoFromMongoDb = await Dinosaur.findOne({ name: "Deno" }).exec();
+if (!denoFromMongoDb) throw new Error("Deno not found");
 console.log(
   `Finding Deno in MongoDB -- \n  ${denoFromMongoDb.name}: ${denoFromMongoDb.description}`,
 );
 
-// Update description for Deno and save it.
 await denoFromMongoDb.updateDescription(
-  "The fastest and most secure dinosaur ever lived.",
+  "The fastest and most secure dinosaur that ever lived.",
 );
 
-// Check MongoDB to see Deno's updated description.
-const newDenoFromMongoDb = await Dinosaur.findOne({ name: "Deno" });
+const newDenoFromMongoDb = await Dinosaur.findOne({ name: "Deno" }).exec();
+if (!newDenoFromMongoDb) throw new Error("Deno not found after update");
 console.log(
   `Finding Deno (again) -- \n  ${newDenoFromMongoDb.name}: ${newDenoFromMongoDb.description}`,
 );
@@ -139,12 +158,13 @@ Running the code, we get:
 
 ```console
 Finding Deno in MongoDB --
-  Deno: The fastest dinosaur ever lived.
+  Deno: The fastest dinosaur that ever lived.
 Finding Deno (again) --
-  Deno: The fastest and most secure dinosaur ever lived.
+  Deno: The fastest and most secure dinosaur that ever lived.
 ```
 
-Boom!
+🦕 Now you have a fully functional Deno application using Mongoose to interact
+with MongoDB!
 
 For more info on using Mongoose, please refer to
 [their documentation](https://mongoosejs.com/docs/guide.html).
