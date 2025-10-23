@@ -58,7 +58,9 @@ populate the form fields.
 
 Once you have a database instance (linked or provisioned), you can assign it to
 your apps. From the database instances list, click "Assign" next to your
-database instance and select the app from the dropdown.
+database instance and select the app from the dropdown. Optionally, you can
+configure a migration command that will run automatically after each build (see
+[Automated Migration Commands](#automated-migration-commands) for details).
 
 Deno Deploy automatically creates isolated data scopes for each timeline. For
 PostgreSQL, this means separate databases with the following naming scheme:
@@ -130,21 +132,62 @@ previews (connecting to `myappid-preview`).
 Since each environment has its own database, you can safely test migrations in a
 Git branch without affecting production or other branch-specific databases.
 
-```typescript
-// Run migrations for the current environment's database
-import { Pool } from "npm:pg";
+#### Automated Migration Commands
 
-const pool = new Pool();
+When assigning a database to an app, you can configure a migration command that
+automatically runs after each successful build. This ensures your database
+schema stays synchronized with your application code across all environments.
 
-// This runs against the correct database for each environment
-await pool.query(`
-  CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100),
-    email VARCHAR(100)
-  )
-`);
+**Setting Up a Migration Command:**
+
+1. When assigning a database to an app (or editing an existing assignment),
+   enter a migration command in the "Migration Command" field (e.g.,
+   `deno task migrate` or `npm run migrate`).
+2. This command executes automatically after every successful build of a new
+   revision.
+3. The command runs once for each database that the revision can connect to -
+   meaning it executes separately for production, each Git branch database, and
+   preview databases.
+4. The migration command runs with the same environment variables available to
+   your application, including `PGHOST`, `PGPORT`, `PGDATABASE`, etc.
+
+**Example migration setup using node-pg-migrate:**
+
+Add a task to your `deno.json`:
+
+```json
+{
+  "tasks": {
+    "migrate": "deno run --allow-net --allow-env --allow-read --allow-write npm:node-pg-migrate up"
+  }
+}
 ```
+
+Create a migrations directory and add migration files. For example,
+`migrations/1234567890_create-users-table.js`:
+
+```javascript
+exports.up = (pgm) => {
+  pgm.createTable("users", {
+    id: "id",
+    name: { type: "varchar(100)", notNull: true },
+    email: { type: "varchar(100)", notNull: true },
+    created_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("current_timestamp"),
+    },
+  });
+};
+
+exports.down = (pgm) => {
+  pgm.dropTable("users");
+};
+```
+
+Then set your migration command to `deno task migrate` when assigning the
+database to your app. Deno Deploy will automatically run this command after each
+build, ensuring all your environment-specific databases stay up to date.
 
 ### Local Development
 
@@ -236,9 +279,16 @@ The dashboard shows clear status indicators:
 ### Managing App Assignments
 
 To assign a database to an app, click "Assign" on the database instance, select
-the app from the dropdown, and confirm the assignment. To remove an app from a
-database, go to the database detail page, find the app in the "Assigned Apps"
-table, and click "Remove" next to the app.
+the app from the dropdown, optionally configure a migration command (see
+[Automated Migration Commands](#automated-migration-commands)), and confirm the
+assignment.
+
+To edit an existing app-database assignment (including updating the migration
+command), go to the database detail page, find the app in the "Assigned Apps"
+table, and click "Edit" next to the app.
+
+To remove an app from a database, go to the database detail page, find the app
+in the "Assigned Apps" table, and click "Remove" next to the app.
 
 ### Editing Database Settings
 

@@ -41,9 +41,11 @@ Once your Prisma Postgres instance is provisioned:
 1. From the database instances list, click "Assign" next to your Prisma Postgres
    instance.
 2. Select the app from the dropdown.
-3. Deno Deploy will automatically provision separate databases for production,
+3. Optionally, configure a migration command that will run automatically after
+   each build (see [Automated Migrations](#automated-migrations) for details).
+4. Deno Deploy will automatically provision separate databases for production,
    Git branches, and preview environments.
-4. Monitor the provisioning status as it changes to "Connected".
+5. Monitor the provisioning status as it changes to "Connected".
 
 ## Using Prisma Postgres in Your Code
 
@@ -115,12 +117,48 @@ This isolation ensures production data stays safe while developing and testing.
 Since each environment has its own database, you can safely test schema changes
 and migrations without affecting production data.
 
-### Using Prisma Tooling
+### Automated Migrations
 
-To manage your database schema with Prisma, you'll need the connection string
-for the specific environment database you want to work with. You can find the
-connection string in the database table on your database instance detail page in
-the Deno Deploy dashboard.
+When assigning a Prisma Postgres database to an app, you can configure a
+migration command that automatically runs after each successful build. This
+ensures your database schema stays synchronized with your application code
+across all environments.
+
+**Setting Up Automated Migrations:**
+
+1. When assigning a database to an app (or editing an existing assignment),
+   enter a migration command in the "Migration Command" field.
+2. This command executes automatically after every successful build of a new
+   revision.
+3. The command runs once for each database that the revision can connect to -
+   meaning it executes separately for production, each Git branch database, and
+   preview databases.
+4. The migration command runs with the same environment variables available to
+   your application, including `DATABASE_URL`.
+
+**Example using Prisma Migrate:**
+
+Add a task to your `deno.json`:
+
+```json
+{
+  "tasks": {
+    "migrate": "deno run --allow-net --allow-env --allow-read npm:prisma migrate deploy"
+  }
+}
+```
+
+Then set your migration command to `deno task migrate` when assigning the
+database to your app. Deno Deploy will automatically run this command after each
+build, applying your migrations to all environment-specific databases.
+
+### Using Prisma Tooling Locally
+
+To manage your database schema with Prisma from your local machine, you'll need
+the connection string for the specific environment database you want to work
+with. You can obtain the `DATABASE_URL` by clicking the URL button found in the
+database table on your database instance detail page in the Deno Deploy
+dashboard.
 
 #### Generate Prisma Client
 
@@ -134,8 +172,8 @@ This creates the type-safe database client based on your schema.
 
 #### Run Migrations
 
-To apply migrations to a specific environment database, use the connection
-string for that environment:
+To apply migrations to a specific environment database from your local machine,
+use the connection string for that environment:
 
 ```bash
 # Apply migrations to production database
@@ -169,7 +207,9 @@ DATABASE_URL="postgresql://user:pass@db.prisma.io:5432/3ba03b--feature-branch" n
 ## Local Development
 
 When developing locally with a Prisma Postgres database from Deploy, create a
-`.env` file in your project root with the connection details:
+`.env` file in your project root with the connection details. You can obtain the
+`DATABASE_URL` by clicking the URL button found in the database table on your
+database instance detail page in the Deno Deploy dashboard.
 
 ```bash
 PGHOST=db.prisma.io
@@ -223,7 +263,14 @@ access additional features.
 - **🔴 Error** - Some databases failed to create
 - **⚪ Unassigned** - No apps are using this database yet
 
-### Removing App Assignments
+### Managing App Assignments
+
+To edit an existing app-database assignment (including updating the migration
+command):
+
+1. Go to the database detail page
+2. Find the app in the "Assigned Apps" table
+3. Click "Edit" next to the app
 
 To disconnect an app from your Prisma Postgres instance:
 
