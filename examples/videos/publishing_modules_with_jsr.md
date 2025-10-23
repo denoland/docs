@@ -79,7 +79,7 @@ to publish to. I can create that here.
 
 Then I'll create the package name and follow the instructions.
 
-Let's try using our new packaga in a project using Vite. The following command
+Let's try using our new package in a project using Vite. The following command
 will walk us through setting up a new Vite project.
 
 ```shell
