@@ -11,7 +11,7 @@
     "@tailwindcss/cli": "npm:@tailwindcss/cli@^4.1.11",
     "@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.1.11",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
-    "lume/": "https://deno.land/x/lume@v2.4.1/",
+    "lume/": "https://deno.land/x/lume@v2.5.4/",
     "googleapis": "npm:googleapis@^144.0.0",
     "postcss": "npm:postcss@^8.5.6",
     "prismjs": "npm:prismjs@1.29.0",
