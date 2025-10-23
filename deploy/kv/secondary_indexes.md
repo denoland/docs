@@ -10,8 +10,31 @@ Key-value stores like Deno KV organize data as collections of key-value pairs,
 where each unique key is associated with a single value. This structure enables
 easy retrieval of values based on their keys but does not allow for querying
 based on the values themselves. To overcome this constraint, you can create
-secondary indexes, which store the same value under additional keys that include
-(part of) that value.
+secondary indexes, which store an additional key that lets you look up related
+data by an alternate attribute (for example, email → user). A best practice is
+to store a pointer to the primary key in the secondary index, rather than
+duplicating the full value.
+
+:::tip Recommended approach for Pointer indexes
+
+Prefer storing the primary key (or a compact reference to it) as the value in a
+secondary index. This reduces storage usage and avoids keeping multiple copies
+of the same data in sync. The trade‑off is a double read when querying through
+the index (index → primary).
+
+Pros
+
+- Lower storage and write amplification
+- Fewer updates when non‑indexed fields change
+- Clearer transactional updates: update primary + index together
+
+Cons
+
+- Requires a second read to resolve the primary value
+- You must maintain referential integrity atomically (create/update/delete in a
+  single transaction)
+
+:::
 
 Maintaining consistency between primary and secondary keys is crucial when using
 secondary indexes. If a value is updated at the primary key without updating the
@@ -26,11 +49,11 @@ single unit, and either all succeed or all fail, preventing inconsistencies.
 Unique indexes have each key in the index associated with exactly one primary
 key. For example, when storing user data and looking up users by both their
 unique IDs and email addresses, store user data under two separate keys: one for
-the primary key (user ID) and another for the secondary index (email). This
-setup allows querying users based on either their ID or their email. The
+the primary key (user ID) and another for the secondary index (email → user ID).
+This setup allows querying users based on either their ID or their email. The
 secondary index can also enforce uniqueness constraints on values in the store.
 In the case of user data, use the index to ensure that each email address is
-associated with only one user - in other words that emails are unique.
+associated with only one user.
 
 To implement a unique secondary index for this example, follow these steps:
 
@@ -44,18 +67,19 @@ To implement a unique secondary index for this example, follow these steps:
    }
    ```
 
-2. Define an `insertUser` function that stores user data at both the primary and
-   secondary keys:
+2. Define an `insertUser` function that stores user data at the primary key and
+   stores a pointer (the primary key) at the secondary key:
 
    ```ts
    async function insertUser(user: User) {
-     const primaryKey = ["users", user.id];
-     const byEmailKey = ["users_by_email", user.email];
+     const primaryKey = ["users", user.id] as const;
+     const byEmailKey = ["users_by_email", user.email.toLowerCase()] as const;
      const res = await kv.atomic()
        .check({ key: primaryKey, versionstamp: null })
        .check({ key: byEmailKey, versionstamp: null })
        .set(primaryKey, user)
-       .set(byEmailKey, user)
+       // store pointer, not full user
+       .set(byEmailKey, user.id)
        .commit();
      if (!res.ok) {
        throw new TypeError("User with ID or email already exists");
@@ -76,11 +100,17 @@ To implement a unique secondary index for this example, follow these steps:
    }
    ```
 
-4. Define a `getUserByEmail` function to retrieve a user by their email address:
+4. Define a `getUserByEmail` function to retrieve a user by their email address
+   using a double lookup (email → user ID → user):
 
    ```ts
    async function getUserByEmail(email: string): Promise<User | null> {
-     const res = await kv.get<User>(["users_by_email", email]);
+     const idRes = await kv.get<string>([
+       "users_by_email",
+       email.toLowerCase(),
+     ]);
+     if (!idRes.value) return null;
+     const res = await kv.get<User>(["users", idRes.value]);
      return res.value;
    }
    ```
@@ -88,18 +118,19 @@ To implement a unique secondary index for this example, follow these steps:
    This function queries the store using the secondary key
    (`["users_by_email", email]`).
 
-5. Define a deleteUser function to delete users by their ID:
+5. Define a `deleteUser` function to delete users by their ID, removing the
+   index entry too:
 
    ```ts
    async function deleteUser(id: string) {
-     let res = { ok: false };
+     let res = { ok: false } as { ok: boolean };
      while (!res.ok) {
-       const getRes = await kv.get<User>(["users", id]);
-       if (getRes.value === null) return;
+       const cur = await kv.get<User>(["users", id]);
+       if (cur.value === null) return;
        res = await kv.atomic()
-         .check(getRes)
+         .check(cur)
          .delete(["users", id])
-         .delete(["users_by_email", getRes.value.email])
+         .delete(["users_by_email", cur.value.email.toLowerCase()])
          .commit();
      }
    }
@@ -138,47 +169,82 @@ To implement a non-unique secondary index for this example, follow these steps:
    }
    ```
 
-2. Define the `insertUser` function:
+2. Define the `insertUser` function (store the primary key as the value in the
+   non‑unique index; note the composite key includes the user ID to avoid
+   collisions):
 
    ```ts
    async function insertUser(user: User) {
-     const primaryKey = ["users", user.id];
+     const primaryKey = ["users", user.id] as const;
      const byColorKey = [
        "users_by_favorite_color",
        user.favoriteColor,
        user.id,
-     ];
+     ] as const;
      await kv.atomic()
        .check({ key: primaryKey, versionstamp: null })
        .set(primaryKey, user)
-       .set(byColorKey, user)
+       // store pointer, not full user
+       .set(byColorKey, user.id)
        .commit();
    }
    ```
 
-3. Define a function to retrieve users by their favorite color:
+3. Define a function to retrieve users by their favorite color. This performs a
+   double lookup per result (index → primary):
 
    ```ts
    async function getUsersByFavoriteColor(color: string): Promise<User[]> {
-     const iter = kv.list<User>({ prefix: ["users_by_favorite_color", color] });
-     const users = [];
-     for await (const { value } of iter) {
-       users.push(value);
+     const iter = kv.list<string>({
+       prefix: ["users_by_favorite_color", color],
+     });
+     const ids: string[] = [];
+     for await (const { value: id } of iter) {
+       ids.push(id);
      }
-     return users;
+     if (ids.length === 0) return [];
+     const results = await kv.getMany<User>(
+       ids.map((id) => ["users", id] as const),
+     );
+     return results.map((r) => r.value!).filter(Boolean);
    }
    ```
 
 This example demonstrates the use of a non-unique secondary index,
 `users_by_favorite_color`, which allows querying users based on their favorite
-color. The primary key remains the user `id`.
+color. The index stores pointers (user IDs) and requires resolving to the
+primary key to read full values.
 
-The primary difference between the implementation of unique and non-unique
-indexes lies in the structure and organization of the secondary keys. In unique
-indexes, each secondary key is associated with exactly one primary key, ensuring
-that the indexed attribute is unique across all records. In the case of
-non-unique indexes, a single secondary key can be associated with multiple
-primary keys, as the indexed attribute may be shared among multiple records. To
-achieve this, non-unique secondary keys are typically structured with an
-additional unique identifier (e.g., primary key) as part of the key, allowing
-multiple records with the same attribute to coexist without conflicts.
+The primary difference between unique and non‑unique indexes lies in the
+structure and organization of secondary keys. In unique indexes, each secondary
+key is associated with exactly one primary key, ensuring that the indexed
+attribute is unique across all records. In non‑unique indexes, a single
+secondary key can be associated with multiple primary keys, as the indexed
+attribute may be shared among multiple records. To achieve this, non‑unique
+secondary keys are typically structured with an additional unique identifier
+(e.g., primary key) as part of the key, allowing multiple records with the same
+attribute to coexist without conflicts.
+
+### When duplicating values may be acceptable
+
+While pointer indexes are recommended, duplicating the full value in a secondary
+index can be acceptable when:
+
+- The value is small and reads occur almost exclusively via the secondary index
+- You want to avoid a second read and can tolerate the extra storage
+- You can reliably keep the primary and secondary in sync via atomic
+  transactions
+
+If duplicating, ensure inserts/updates/deletes modify both keys in the same
+atomic transaction.
+
+### Migration from duplicated-value indexes
+
+To migrate existing duplicated-value indexes to pointer indexes:
+
+1. Backfill: scan primary keys and set secondary index values to the primary key
+   (e.g., user ID).
+2. Cutover: update write paths to maintain pointer indexes; keep the old index
+   temporarily for reads.
+3. Cleanup: switch readers to the pointer index, then remove the duplicated
+   index entries.
