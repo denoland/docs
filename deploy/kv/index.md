@@ -212,7 +212,7 @@ async function getByEmail(email) {
 }
 ```
 
-Learn more about [secondary indexes in the manual here](./secondary_indexes).
+Learn more about [secondary indexes in the manual here](./secondary_indexes/).
 
 ## Watching for updates in Deno KV
 
