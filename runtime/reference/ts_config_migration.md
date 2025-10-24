@@ -80,15 +80,6 @@ TypeScript wasn't able to detect before.
 
 ## Configuring TypeScript in Deno
 
-```json title="deno.json"
-{
-  "compilerOptions": {
-    "checkJs": true,
-    "...": "..."
-  }
-}
-```
-
 Deno aims to simplify TypeScript configuration based on the following design
 choices:
 
@@ -97,17 +88,18 @@ choices:
   compatibility, leveraging direct integration with the execution environment.
 - Project references using `deno.json` directory scopes.
 
-The last point presents an simpler format than `tsconfig.json`'s
+The last point presents a simpler format than `tsconfig.json`'s
 [`references`](https://www.typescriptlang.org/tsconfig/#references) and
 [`extends`](https://www.typescriptlang.org/tsconfig/#extends) fields, replacing
 them with `deno.json` workspaces and root-member inheritance. See the section on
 [type checking in workspaces](/runtime/fundamentals/workspaces/#type-checking).
 
-## TSConfig compatibility
+## `tsconfig.json` compatibility
 
-While TSConfigs are not recommended for Deno-first projects, existing Node.js +
-TypeScript workspaces using them should work out-of-the-box under Deno's type
-checker and LSP.
+While using [`tsconfig.json`](https://www.typescriptlang.org/tsconfig/) files is
+not recommended for Deno-first projects, existing Node.js + TypeScript
+workspaces using them will work out-of-the-box under Deno's type checker and
+LSP.
 
 Each workspace directory containing a `deno.json` or `package.json` is probed
 for a `tsconfig.json`. If it exists, it is added as a 'root' project reference

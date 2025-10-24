@@ -517,7 +517,7 @@ Files in the `web` subdirectory will be configured with the following options:
 }
 ```
 
-These scopes will be partitioned and checked separately from one another. Just
+Each member will be partitioned and checked separately from one another. Just
 run `deno check` from the workspace root:
 
 ```sh
