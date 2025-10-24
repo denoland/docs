@@ -73,7 +73,6 @@ export const sidebar = [
         title: "Third-Party Databases",
         items: [
           { title: "DynamoDB", href: "/deploy/classic/dynamodb/" },
-          { title: "FaunaDB", href: "/deploy/classic/faunadb/" },
           { title: "Firebase", href: "/deploy/classic/firebase/" },
           { title: "Postgres", href: "/deploy/classic/postgres/" },
           { title: "Neon Postgres", href: "/deploy/classic/neon-postgres/" },
