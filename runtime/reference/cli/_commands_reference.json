@@ -36,15 +36,6 @@
           "usage": "--unstable-bare-node-builtins"
         },
         {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
-        {
           "name": "unstable-bundle",
           "short": null,
           "long": "unstable-bundle",
@@ -511,15 +502,7 @@
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
         },
-        {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
+
         {
           "name": "unstable-bundle",
           "short": null,
@@ -1138,15 +1121,7 @@
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
         },
-        {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
+
         {
           "name": "unstable-bundle",
           "short": null,
@@ -2224,15 +2199,7 @@
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
         },
-        {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
+
         {
           "name": "unstable-bundle",
           "short": null,
@@ -2654,15 +2621,7 @@
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
         },
-        {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
+
         {
           "name": "unstable-bundle",
           "short": null,
@@ -3486,15 +3445,7 @@
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
         },
-        {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
+
         {
           "name": "unstable-bundle",
           "short": null,
@@ -4355,15 +4306,7 @@
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
         },
-        {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
+
         {
           "name": "unstable-bundle",
           "short": null,
@@ -5470,15 +5413,7 @@
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
         },
-        {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
+
         {
           "name": "unstable-bundle",
           "short": null,
@@ -5874,15 +5809,7 @@
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
         },
-        {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
+
         {
           "name": "unstable-bundle",
           "short": null,
@@ -6134,15 +6061,7 @@
           "help_heading": "Unstable options",
           "usage": "--unstable-bare-node-builtins"
         },
-        {
-          "name": "unstable-broadcast-channel",
-          "short": null,
-          "long": "unstable-broadcast-channel",
-          "required": false,
-          "help": "Enable unstable `BroadcastChannel` API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-broadcast-channel"
-        },
+
         {
           "name": "unstable-bundle",
           "short": null,
