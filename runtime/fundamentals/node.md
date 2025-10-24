@@ -638,9 +638,13 @@ popular npm packages like [`esbuild`](https://www.npmjs.com/package/esbuild),
 [`npm:duckdb`](https://www.npmjs.com/package/duckdb). You can expect packages
 that use public Node-APIs to work.
 
-:::info Many addons rely on npm lifecycle scripts (for example, `postinstall`).
-Deno supports them, but they are not run by default for security reasons. See
-the [`deno install` docs](/runtime/reference/cli/install/). :::
+:::note
+
+Many addons rely on npm lifecycle scripts (for example, `postinstall`). Deno
+supports them, but they are not run by default for security reasons. See the
+[`deno install` docs](/runtime/reference/cli/install/).
+
+:::
 
 As of Deno 2.0, npm packages using Node-API addons are supported when a local
 `node_modules/` directory is present. Configure
