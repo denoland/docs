@@ -14,14 +14,14 @@ that you can edit directly in the playground editor.
 
 ## Creating a playground
 
-You can create playgrounds from the "Playgrounds" page in your organization.
+You can create playgrounds from the "Applications" page in your organization.
 Click the "New Playground" button to create a basic "Hello World" playground.
 Using the dropdown on the "New Playground" button lets you create playgrounds
 from other templates, such as Next.js or Hono.
 
 ## Editing a playground
 
-To edit a playground, open it from the "Playgrounds" page in your organization.
+To edit a playground, open it from the "Applications" page in your organization.
 
 The playground editor consists of five main sections:
 
