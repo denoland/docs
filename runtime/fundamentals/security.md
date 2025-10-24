@@ -107,7 +107,7 @@ format, where each line is an object with the following keys:
   accessed with no value
 
 A schema for this can be found
-[here](https://deno.land/x/deno/cli/schemas/permission-audit.v1.json).
+[here](https://github.com/denoland/deno/blob/main/cli/schemas/permission-audit.v1.json).
 
 In addition, this env var can be combined with the above-mentioned
 `DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
@@ -116,7 +116,7 @@ which is an array contain all the stack trace frames.
 ### Configuration file
 
 Deno supports storing permissions in the deno.json/deno.jsonc file. Read more
-under [configuration](/runtime/fundamentals/configuration/#Permissions).
+under [configuration](/runtime/fundamentals/configuration/#permissions).
 
 ### File system access
 

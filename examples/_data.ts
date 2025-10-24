@@ -86,6 +86,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Simple API server",
+        href: "/examples/simple_api_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Simple file server",
         href: "/examples/file_server_tutorial/",
         type: "tutorial",
@@ -398,6 +403,11 @@ export const sidebar = [
       {
         title: "Deploy with the deploy command",
         href: "/examples/deploy_command_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Migrating a custom domain to Deno Deploy",
+        href: "/examples/migrate_custom_domain_tutorial/",
         type: "tutorial",
       },
       {

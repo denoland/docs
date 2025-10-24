@@ -67,12 +67,12 @@ const data = [
     title: "Services Docs",
     items: [
       {
-        label: "Deno Deploy <sup>EA</sup>",
-        to: "/deploy/early-access/",
+        label: "Deno Deploy ",
+        to: "/deploy/",
       },
       {
         label: "Deno Deploy Classic",
-        to: "/deploy/manual/",
+        to: "/deploy/classic/",
       },
       {
         label: "Deno Subhosting",
@@ -146,16 +146,12 @@ const data = [
         href: "https://deno.com/blog",
       },
       {
-        label: "Careers",
-        href: "https://deno.com/jobs",
-      },
-      {
         label: "Merch",
         href: "https://merch.deno.com/",
       },
       {
         label: "Privacy Policy",
-        href: "/deploy/manual/privacy-policy",
+        href: "/deploy/privacy_policy",
       },
     ],
   },

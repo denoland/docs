@@ -1,11 +1,11 @@
 ---
 title: "Deploy an app with the deno deploy command"
-description: "Step-by-step tutorial for using the deno deploy CLI command to create and deploy your first application to Deno Deploy Early Access."
+description: "Step-by-step tutorial for using the deno deploy CLI command to create and deploy your first application to Deno Deploy."
 url: /examples/deploy_command_tutorial/
 ---
 
 The `deno deploy` command provides a powerful CLI for deploying and managing
-applications on [Deno Deploy<sup>EA</sup>](https://deno.com/deploy).
+applications on [Deno Deploy](https://deno.com/deploy).
 
 If you already have an app to deploy you can skip to
 [Deploying your application](#deploy-your-application), or read on to make and
@@ -13,14 +13,12 @@ then deploy a simple app.
 
 ## Prerequisites
 
-Before using the deploy command, you will need access to Deno
-Deploy<sup>EA</sup>, and you will need a Deno Deploy<sup>EA</sup> organization.
+Before using the deploy command, you will need a Deno Deploy account, and a Deno
+Deploy organization set up on that account.
 
-1. Visit the
-   [Deno Deploy account settings](https://dash.deno.com/account#early-access)
-2. Turn on the "Enable Early Access" toggle
-3. Create a Deno Deploy<sup>EA</sup> organization in the
-   [Deno Deploy<sup>EA</sup> dashboard](https://console.deno.com/).
+To create an account visit
+[the Deno Deploy dashboard](https://console.deno.com/). To create an
+organization, follow the steps in the
 
 ## Create a simple web application
 
@@ -281,5 +279,5 @@ deno deploy env load .env
 command! Check out the [`deno deploy` docs](/runtime/reference/cli/deploy/) for
 more commands and options.
 
-For more information on Deno Deploy<sup>EA</sup>, check the
-[Deno Deploy EA documentation](/deploy/early-access/).
+For more information on Deno Deploy, check the
+[Deno Deploy documentation](/deploy/).

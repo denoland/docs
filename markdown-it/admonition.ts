@@ -6,10 +6,10 @@ export default function admonitionPlugin(md: any) {
     for (let i = 0; i < tokens.length; i++) {
       if (
         tokens[i].type === "inline" &&
-        tokens[i].content.match(/^:::(note|info|tip|caution)(\s+(.*))?/)
+        tokens[i].content.match(/^:::(note|info|tip|caution|warning)(\s+(.*))?/)
       ) {
         const match = tokens[i].content.match(
-          /^:::(note|info|tip|caution)(\s+(.*))?/,
+          /^:::(note|info|tip|caution|warning)(\s+(.*))?/,
         );
         const type = match[1];
         const title = match[3] || type.charAt(0).toUpperCase() + type.slice(1);

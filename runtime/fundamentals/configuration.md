@@ -110,22 +110,21 @@ import * as bar from "bar/file.ts";
 Path mapping of import specifies is commonly used in larger code bases for
 brevity.
 
-To use your project root for absolute imports:
+For example:
 
 ```json title="deno.json"
 {
   "imports": {
-    "/": "./",
-    "./": "./"
+    "@/": "./"
   }
 }
 ```
 
 ```ts title="main.ts"
-import { MyUtil } from "/util.ts";
+import { MyUtil } from "@/util.ts";
 ```
 
-This causes import specifiers starting with `/` to be resolved relative to the
+This causes import specifiers starting with `@/` to be resolved relative to the
 import map's URL or file path.
 
 ### Overriding packages
@@ -645,7 +644,7 @@ If you're ok with this risk, then this feature will be useful for you.
   },
   "permissions": {
     "default": {
-      "read": "./src/testdata/"
+      "read": ["./src/testdata/"]
     }
   },
   "lint": {

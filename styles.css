@@ -737,7 +737,8 @@
         @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
           dark:border-runtime-950 border-runtime-200;
       }
-      &.caution {
+      &.caution,
+      &.warning {
         @apply bg-yellow-100 dark:bg-yellow-950/75 dark:border
           dark:border-yellow-400 border-yellow-200;
 
@@ -972,7 +973,7 @@
   }
 
   [id] {
-    scroll-margin-top: var(--header-height);
+    scroll-margin-top: calc(var(--header-height) + var(--subnav-height) + 1rem);
   }
 
   pre:has(code.highlight),
@@ -1662,8 +1663,8 @@
   }
 
   .jsr-cta {
-    @apply bg-jsr-yellow-400 border-jsr-cyan-950 text-jsr-cyan-950! border-2
-      hover:no-underline! hover:bg-jsr-yellow-300;
+    @apply bg-jsr-yellow-400 border-0 text-jsr-cyan-950! hover:no-underline!
+      hover:bg-jsr-yellow-400;
   }
 
   .deploy-button {

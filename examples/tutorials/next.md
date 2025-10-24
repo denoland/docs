@@ -47,45 +47,31 @@ compatibility, update your `deno.json` file with the following configuration:
 
 ```json deno.json
 {
-  "nodeModulesDir": "auto",
   "unstable": [
+    "bare-node-builtins",
+    "detect-cjs",
+    "node-globals",
     "unsafe-proto",
     "sloppy-imports"
-  ],
-  "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "strict": true,
-    "jsx": "preserve"
-  },
-  "tasks": {
-    "dev": "deno run -A --unstable-detect-cjs npm:next@latest dev",
-    "build": "deno run -A --unstable-detect-cjs npm:next@latest build",
-    "start": "deno run -A --unstable-detect-cjs npm:next@latest start"
-  }
+  ]
 }
 ```
 
-This configuration includes:
+Now install the dependencies found in the package.json:
 
-- `nodeModulesDir: "auto"` - Enables npm package lifecycle scripts
-- `unstable: ["unsafe-proto", "sloppy-imports"]` - Required for Next.js
-  compatibility
-- `--unstable-detect-cjs` flag - Enables CommonJS module detection for Next.js
-  dependencies
+```sh
+deno install --allow-scripts
+```
 
 Now you can serve your new Next.js app:
 
 ```sh
-deno run dev
+deno task dev
 ```
 
 This will start the Next.js development server using Deno. The `deno task dev`
-command runs the Next.js development server with the necessary flags for
-CommonJS compatibility.
+command runs `dev` task in the package.json, which starts the Next.js
+development server with the necessary flags for CommonJS compatibility.
 
 Visit [http://localhost:3000](http://localhost:3000) to see the app in the
 browser.
@@ -314,7 +300,7 @@ details!
 ## Deploy the app
 
 Now that you have your working Next.js app, you can deploy it to the web with
-Deno Deploy<sup>EA</sup>.
+Deno Deploy.
 
 For the best experience, you can deploy your app directly from GitHub, which
 will set up automated deployments. Create a GitHub repository and push your app
@@ -332,7 +318,7 @@ git push -u origin main
 ```
 
 Once your app is on GitHub, you can
-[deploy it to Deno Deploy<sup>EA</sup>](https://console.deno.com/).
+[deploy it to Deno Deploy](https://console.deno.com/).
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).
