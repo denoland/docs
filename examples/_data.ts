@@ -756,6 +756,11 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "Subprocesses: Introspecting commands",
+        href: "/examples/subprocesses_introspect/",
+        type: "example",
+      },
+      {
         title: "Handle OS signals",
         href: "/examples/os_signals_tutorial/",
         type: "tutorial",
