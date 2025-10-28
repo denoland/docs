@@ -22,12 +22,10 @@ domain by following the instructions below.
    that you must own the domain that you want to add to a project. If you do not
    own a domain yet, you can register one at a domain registrar like Google
    Domains, Namecheap, or gandi.net.
-   ![add_custom_domain](../docs-images/add_custom_domain.png)
 
 3. The domain is added to the domains list and will have a "setup" badge.
 4. Click on the "setup" badge to visit the domain setup page, which will display
    the list of DNS records that need to be created/updated for your domain.
-   ![dns_records_modal](../docs-images/dns_records_modal.png)
 
 ## **Step 2:** Update your custom domain's DNS records
 
@@ -35,15 +33,11 @@ Go to the DNS configuration panel of your domain registrar (or the service
 you're using to manage DNS) and enter the records as described on the domain
 setup page.
 
-![change_dns_records](../docs-images/change_dns_records.png)
-
 ## **Step 3:** Validate that the DNS records have been updated
 
 Go back to the Deno Deploy Classic dashboard and click the **Validate** button
 on the domain setup page. It will check if the DNS records are correctly set and
 if so, update the status to "Validated, awaiting certificate provisioning."
-
-![get_certificates](../docs-images/get_certificates.png)
 
 ## **Step 4:** Provision a certificate for your custom domain
 
@@ -58,9 +52,7 @@ option.
    [Let's Encrypt](https://letsencrypt.org/) from provisioning certificates.
    Certificates will be automatically renewed around 30 days before the
    certificate expires. When you have been issued certificates successfully, you
-   will see a green checkmark like this:
-
-   ![green_check](../docs-images/green_check.png)
+   will see a green checkmark.
 
 2. Manually upload a certificate and private key.
 
