@@ -482,6 +482,48 @@ root and its members:
 Deno provides several ways to run commands across all or specific workspace
 members:
 
+### Type checking
+
+Workspace members can have different sets of compiler options. They are also
+inherited between root and member, much like
+[TSConfig `extends`](https://www.typescriptlang.org/tsconfig/#extends). For
+example:
+
+```json title="deno.json"
+{
+  "workspace": ["./web"],
+  "compilerOptions": {
+    "checkJs": true
+  }
+}
+```
+
+```json title="web/deno.json"
+{
+  "compilerOptions": {
+    "lib": ["esnext", "dom"]
+  }
+}
+```
+
+Files in the `web` subdirectory will be configured with the following options:
+
+```json
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "lib": ["esnext", "dom"]
+  }
+}
+```
+
+Each member will be partitioned and checked separately from one another. Just
+run `deno check` from the workspace root:
+
+```sh
+deno check
+```
+
 ### Running tests
 
 To run tests across all workspace members, simply execute `deno test` from the
