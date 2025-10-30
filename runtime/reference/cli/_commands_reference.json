@@ -486,6 +486,15 @@
           "usage": "--coverage[=<DIR>]"
         },
         {
+          "name": "tunnel",
+          "short": "t",
+          "long": "tunnel",
+          "required": false,
+          "help": "Execute tasks with a tunnel to Deno Deploy.\n\n    Create a secure connection between your local machine and Deno Deploy,\n    providing access to centralised environment variables, logging,\n    and serving from your local environment to the public internet",
+          "help_heading": null,
+          "usage": "--tunnel[=<tunnel>]"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -987,6 +996,15 @@
           "help": "Disable V8 code cache feature",
           "help_heading": null,
           "usage": "--no-code-cache"
+        },
+        {
+          "name": "tunnel",
+          "short": "t",
+          "long": "tunnel",
+          "required": false,
+          "help": "Execute tasks with a tunnel to Deno Deploy.\n\n    Create a secure connection between your local machine and Deno Deploy,\n    providing access to centralised environment variables, logging,\n    and serving from your local environment to the public internet",
+          "help_heading": null,
+          "usage": "--tunnel[=<tunnel>]"
         },
         {
           "name": "unstable",
@@ -6107,6 +6125,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "tunnel",
+          "short": "t",
+          "long": "tunnel",
+          "required": false,
+          "help": "Execute tasks with a tunnel to Deno Deploy.\n\n    Create a secure connection between your local machine and Deno Deploy,\n    providing access to centralised environment variables, logging,\n    and serving from your local environment to the public internet",
+          "help_heading": null,
+          "usage": "--tunnel[=<tunnel>]"
         },
         {
           "name": "unstable",
