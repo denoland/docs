@@ -1,6 +1,6 @@
 ---
 title: "Stability and releases"
-description: "Guide to Deno's stability guarantees and release process. Covering release channels, long-term support (LTS), unstable features, versioning policy, and how Deno maintains backward compatibility."
+description: "Guide to Deno's stability guarantees and release process. Covering release channels, unstable features, versioning policy, and how Deno maintains backward compatibility."
 oldUrl:
   - /runtime/manual/runtime/stability/
   - /runtime/fundamentals/stability/
@@ -20,42 +20,14 @@ released.
 
 ### Release channels
 
-Deno offers 4 release channels
+Deno offers 3 release channels
 
 - `stable` - a semver minor/patch release, as described above. This is **the
   default** distribution channel that is recommended for most users.
-- `lts` - long term support for a particular stable release, recommended for
-  enterprise users who prefer not to upgrade so often. See below for details.
 - `rc` - a release candidate for the upcoming semver minor release.
 - `canary` - an unstable release that changes multiple times per day, allows to
   try out latest bug fixes and new features that might end up in the `stable`
   channel.
-
-### Long Term Support (LTS)
-
-Starting with Deno v2.1.0 (released in November 2024), Deno offers an LTS
-(long-term support) channel.
-
-An LTS channel is a minor semver version that we maintain with only
-backwards-compatible bug fixes.
-
-| LTS release version | LTS maintenance start | LTS maintenance end |
-| ------------------- | --------------------- | ------------------- |
-| v2.1                | Feb 1st, 2025         | Apr 30th, 2025      |
-| v2.2                | May 1st, 2025         | Oct 31st, 2025      |
-| v2.4                | Nov 1st, 2025         | Apr 30th, 2026      |
-
-We are initially keeping the LTS support window short while we refine the
-process. **LTS releases occur every six months**, with patch releases as needed
-for bug fixes. We plan to extend this support window to one year in the future.
-
-LTS backports include:
-
-- Security patches
-- Critical bug fixes (e.g., crashes, incorrect computations)
-- **Critical** performance improvements _may_ be backported based on severity.
-
-**API changes and major new features will not be backported.**
 
 ## Unstable APIs
 

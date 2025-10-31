@@ -39,16 +39,6 @@ deno.json:
 
 [Read more on `Node.js support` page](/runtime/fundamentals/node/)
 
-### Long Term Support releases
-
-Starting with Deno v2.1.0 (to be released in November 2024) Deno will offer a
-LTS (long-term support) channel.
-
-An LTS version is supported for 6 months, receiving bug fixes and critical
-performance fixes before a new version is promoted to LTS.
-
-[Read more on `Stability and releases` page](/runtime/fundamentals/stability_and_releases/#long-term-support-(lts))
-
 ## Managing dependencies
 
 Deno 2 greatly improves dependency management for npm and JSR packages with
