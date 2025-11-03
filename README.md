@@ -174,10 +174,10 @@ number of versions they need to think about), improve search indexing, and help
 us maintain the docs by keeping our build times faster.
 
 In general, we should only version the documentation **when we want to
-concurrently maintain several versions of the docs**, like for major/LTS
-versions. For example - the [Node.js docs](https://nodejs.org/en/docs) are only
-versioned for major releases, like `20.x` and `19.x`. We will adopt this pattern
-as well, and won't have versioned docs for patch or feature releases.
+concurrently maintain several versions of the docs**, like for major versions.
+For example - the [Node.js docs](https://nodejs.org/en/docs) are only versioned
+for major releases, like `20.x` and `19.x`. We will adopt this pattern as well,
+and won't have versioned docs for patch or feature releases.
 
 For additive changes, it should usually be sufficient to indicate which version
 a feature or API was released in. For example - in the Node 20 docs, the
