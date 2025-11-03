@@ -33,21 +33,21 @@ Deno offers 4 release channels
 
 ### Long Term Support (LTS)
 
-Starting with Deno v2.1.0 (released in November 2024), Deno offers an LTS
-(long-term support) channel.
+:::warning
 
-An LTS channel is a minor semver version that we maintain with only
-backwards-compatible bug fixes.
+LTS support will be discontinued after April 30, 2026; there will be no LTS
+releases or maintenance beyond that date.
+
+:::
+
+Deno offers an LTS (long-term support) channel. This is a minor semver version
+that we maintain with only backwards-compatible bug fixes.
 
 | LTS release version | LTS maintenance start | LTS maintenance end |
 | ------------------- | --------------------- | ------------------- |
 | v2.1                | Feb 1st, 2025         | Apr 30th, 2025      |
 | v2.2                | May 1st, 2025         | Oct 31st, 2025      |
 | v2.4                | Nov 1st, 2025         | Apr 30th, 2026      |
-
-We are initially keeping the LTS support window short while we refine the
-process. **LTS releases occur every six months**, with patch releases as needed
-for bug fixes. We plan to extend this support window to one year in the future.
 
 LTS backports include:
 
@@ -71,9 +71,10 @@ specifying file extensions.
 
 ## Standard library
 
-The Deno Standard Library (https://jsr.io/@std) is mostly stable. All standard
-library modules that are version 1.0.0 or higher are considered stable. All
-other modules (0.x) are considered unstable, and may change in the future.
+The Deno Standard Library ([jsr.io/@std](https://jsr.io/@std)) is mostly stable.
+All standard library modules that are version 1.0.0 or higher are considered
+stable. All other modules (0.x) are considered unstable, and may change in the
+future.
 
 Using unstable standard library modules is not recommended for production code,
 but it is a great way to experiment with new features and provide feedback to
