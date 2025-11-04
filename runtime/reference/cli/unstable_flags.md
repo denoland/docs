@@ -234,18 +234,6 @@ Please use these feature flags instead moving forward.
 
 :::
 
-Before more recent Deno versions (1.38+), unstable APIs were made available all
-at once using the `--unstable` flag. Notably, [Deno KV](/deploy/kv/manual) and
-other cloud primitive APIs are available behind this flag. To run a program with
-access to these unstable features, you would run your script with:
-
-```sh
-deno run --unstable your_script.ts
-```
-
-It is recommended that you use the granular unstable flags instead of this, the
-`--unstable` flag is now deprecated and will be removed in Deno 2.
-
 ## `--unstable-temporal`
 
 Enable the experimental [Temporal API](https://tc39.es/proposal-temporal/docs/)
