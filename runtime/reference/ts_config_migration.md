@@ -80,27 +80,63 @@ TypeScript wasn't able to detect before.
 
 ## Configuring TypeScript in Deno
 
-TypeScript offers many configuration options, which can be daunting if you're
-just starting out with TS. Deno aims to simplify using TypeScript, instead of
-drowning you in countless settings. Deno configures TypeScript to **just work**
-out of the box. No extra configuration headaches required!
+Deno aims to simplify TypeScript configuration based on the following design
+choices:
 
-However, if you do want to change the TypeScript compiler options, Deno allows
-you to do so in your `deno.json` file. Provide a path on the command line, or
-use the default. For example:
+- Strict and modern defaults for type-checking rules.
+- Allowing the omission of settings relating to the target runtime or
+  compatibility, leveraging direct integration with the execution environment.
+- Project references using `deno.json` directory scopes.
 
-```console
-deno run --config ./deno.json main.ts
+The last point presents a simpler format than `tsconfig.json`'s
+[`references`](https://www.typescriptlang.org/tsconfig/#references) and
+[`extends`](https://www.typescriptlang.org/tsconfig/#extends) fields, replacing
+them with `deno.json` workspaces and root-member inheritance. See the section on
+[type checking in workspaces](/runtime/fundamentals/workspaces/#type-checking).
+
+## `tsconfig.json` compatibility
+
+While using [`tsconfig.json`](https://www.typescriptlang.org/tsconfig/) files is
+not recommended for Deno-first projects, existing Node.js + TypeScript
+workspaces using them will work out-of-the-box under Deno's type checker and
+LSP.
+
+Each workspace directory containing a `deno.json` or `package.json` is probed
+for a `tsconfig.json`. If it exists, it is added as a 'root' project reference
+and contained references are included recursively.
+
+As with `tsc`, the scope of a TSConfig is determined by its
+[root fields](https://www.typescriptlang.org/tsconfig/#root-fields). In case of
+overlap:
+
+- A reference takes precedence over its referrer.
+- For root references, `foo/bar/tsconfig.json` takes precedence over
+  `foo/tsconfig.json`.
+- If a parent `deno.json` contains `compilerOptions`, that will take precedence
+  over any TSConfig.
+
+The following fields are supported:
+
+```json title="tsconfig.json"
+{
+  "extends": "...",
+  "files": ["..."],
+  "include": ["..."],
+  "exclude": ["..."],
+  "references": [
+    { "path": "..." }
+  ],
+  "compilerOptions": {
+    "...": "..."
+  }
+}
 ```
 
-:::note
+Except for `compilerOptions`, these fields cannot be specified in `deno.json`.
 
-If you are creating libraries that require a configuration file, remember that
-all of the consumers of your TS modules will require that configuration file
-too. In addition, there could be settings in the configuration file that make
-other TypeScript modules incompatible.
-
-:::
+You may be forced to use a `tsconfig.json` file when, for example, the required
+granularity for [`include`](https://www.typescriptlang.org/tsconfig/#include)
+cannot be represented with `deno.json` workspaces and directory scopes.
 
 ## TS Compiler Options
 
@@ -109,15 +145,17 @@ and any other notes about that option:
 
 | Option                           | Default                 | Notes                                                                                                                                     |
 | -------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `allowJs`                        | `true`                  | This almost never needs to be changed                                                                                                     |
 | `allowUnreachableCode`           | `false`                 |                                                                                                                                           |
 | `allowUnusedLabels`              | `false`                 |                                                                                                                                           |
-| `checkJs`                        | `false`                 | If `true` causes TypeScript to type check JavaScript                                                                                      |
+| `baseUrl`                        | `"./"`                  | This is used for resolving bare specifier entries in `paths` and `rootDirs`, but never for bare specifiers in module imports.             |
+| `checkJs`                        | `false`                 |                                                                                                                                           |
 | `jsx`                            | `"react"`               |                                                                                                                                           |
 | `jsxFactory`                     | `"React.createElement"` |                                                                                                                                           |
 | `jsxFragmentFactory`             | `"React.Fragment"`      |                                                                                                                                           |
 | `keyofStringsOnly`               | `false`                 |                                                                                                                                           |
 | `lib`                            | `[ "deno.window" ]`     | The default for this varies based on other settings in Deno. If it is supplied, it overrides the default. See below for more information. |
+| `module`                         | `"nodenext"`            | Supported values: `["nodenext", "esnext", "preserve"]`.                                                                                   |
+| `moduleResolution`               | `"nodenext"`            | Supported values: `["nodenext", "bundler"]`.                                                                                              |
 | `noErrorTruncation`              | `false`                 |                                                                                                                                           |
 | `noFallthroughCasesInSwitch`     | `false`                 |                                                                                                                                           |
 | `noImplicitAny`                  | `true`                  |                                                                                                                                           |
@@ -129,7 +167,9 @@ and any other notes about that option:
 | `noUnusedLocals`                 | `false`                 |                                                                                                                                           |
 | `noUnusedParameters`             | `false`                 |                                                                                                                                           |
 | `noUncheckedIndexedAccess`       | `false`                 |                                                                                                                                           |
-| `reactNamespace`                 | `React`                 |                                                                                                                                           |
+| `paths`                          | `{}`                    |                                                                                                                                           |
+| `rootDirs`                       | `null`                  |                                                                                                                                           |
+| `strict`                         | `true`                  |                                                                                                                                           |
 | `strict`                         | `true`                  |                                                                                                                                           |
 | `strictBindCallApply`            | `true`                  |                                                                                                                                           |
 | `strictFunctionTypes`            | `true`                  |                                                                                                                                           |
@@ -154,8 +194,6 @@ The built-in libraries that are of interest to users:
 - `"deno.ns"` - This includes all the custom `Deno` global namespace APIs plus
   the Deno additions to `import.meta`. This should generally not conflict with
   other libraries or global types.
-- `"deno.unstable"` - This includes the addition unstable `Deno` global
-  namespace APIs.
 - `"deno.window"` - This is the "default" library used when checking Deno main
   runtime scripts. It includes the `"deno.ns"` as well as other type libraries
   for the extensions that are built into Deno. This library will conflict with
