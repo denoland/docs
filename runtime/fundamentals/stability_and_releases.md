@@ -47,7 +47,7 @@ that we maintain with only backwards-compatible bug fixes.
 | ------------------- | --------------------- | ------------------- |
 | v2.1                | Feb 1st, 2025         | Apr 30th, 2025      |
 | v2.2                | May 1st, 2025         | Oct 31st, 2025      |
-| v2.4                | Nov 1st, 2025         | Apr 30th, 2026      |
+| v2.5                | Nov 1st, 2025         | Apr 30th, 2026      |
 
 LTS backports include:
 
