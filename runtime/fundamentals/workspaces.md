@@ -483,7 +483,7 @@ Deno provides several ways to run commands across all or specific workspace
 members:
 
 ### Type checking
-
+  
 Workspace members can have different sets of compiler options. They are also
 inherited between root and member, much like
 [TSConfig `extends`](https://www.typescriptlang.org/tsconfig/#extends). For
