@@ -12,7 +12,7 @@ export function Admonition({ type, children }) {
 // program, as shown below:
 
 // ```sh
-// deno run -A --unstable my_kv_code.ts
+// deno run -A --unstable-kv my_kv_code.ts
 // ```
 
 // :::

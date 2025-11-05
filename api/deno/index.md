@@ -555,7 +555,7 @@ console.log(`Result from external addition of 35 and 34: ${result}`);
 Run with `--allow-ffi` and `--unstable` flag:
 
 ```sh
-deno run --allow-ffi --unstable ffi.ts
+deno run --allow-ffi ffi.ts
 ```
 
 ### Non-blocking FFI
@@ -611,7 +611,7 @@ console.log("Before");
 Result:
 
 ```sh
-$ deno run --allow-ffi --unstable unblocking_ffi.ts
+$ deno run --allow-ffi unblocking_ffi.ts
 Before
 After
 ```
