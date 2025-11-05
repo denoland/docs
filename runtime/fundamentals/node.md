@@ -137,8 +137,7 @@ Deno understands `package.json` in your project. You can:
 
 By default, dependencies are stored in Deno's global cache without creating a
 local `node_modules` directory. If your tools expect `node_modules`, opt-in
-using `nodeModulesDir` in `deno.json` or the `--node-modules-dir` flag (see the
-node_modules section below).
+using `nodeModulesDir` in `deno.json`.
 
 npm specifiers have the following format:
 
