@@ -45,7 +45,7 @@ console.log(chalk.green("Hello from npm in Deno"));
 deno run main.ts
 ```
 
-### Run a .cjs file
+### Execute CommonJS
 
 ```js title="main.cjs"
 const chalk = require("chalk");
