@@ -807,12 +807,40 @@
   :host {
     --header-height: 6rem;
     --subnav-height: 2.5rem;
+    /* Advertise support to the UA and extensions; enables form controls/scrollbar theming */
+    color-scheme: light dark;
 
     @media (min-width: 48rem) {
       --header-height: 4rem;
     }
 
     @variant dark {
+      --color-background-raw: var(--color-black);
+      --color-background-primary: var(--color-gray-950);
+      --color-background-secondary: var(--color-gray-900);
+      --color-background-tertiary: var(--color-gray-800);
+      --color-foreground-primary: var(--color-gray-50);
+      --color-foreground-secondary: var(--color-gray-300);
+      --color-foreground-tertiary: var(--color-gray-800);
+      --color-foreground-quaternary: var(--color-gray-900);
+      --color-runtime-background: 124deg, 100%, 3%;
+      --color-runtime-foreground: 184deg, 100%, 90%;
+      --color-note: 224deg, 64.3%, 82.9%;
+      --color-info: 224deg, 64.3%, 69%;
+      --color-caution: 45.4deg, 93.39%, 67.11%;
+      --color-primary: var(--color-runtime);
+      --color-header-highlight: var(--color-runtime);
+
+      color: var(--color-foreground-primary);
+      background-color: var(--color-background-primary);
+    }
+  }
+
+  /* No-JS fallback: respect user's system preference for dark mode */
+  @media (prefers-color-scheme: dark) {
+    /* Apply only when no explicit theme class is set */
+    :root:not(.light):not(.dark),
+    :host(:not(.light):not(.dark)) {
       --color-background-raw: var(--color-black);
       --color-background-primary: var(--color-gray-950);
       --color-background-secondary: var(--color-gray-900);

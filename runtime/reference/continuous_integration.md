@@ -13,6 +13,17 @@ results with `deno coverage` in pipelines.
 
 ## Setting up a basic pipeline
 
+:::tip
+
+Looking for a ready-made GitHub Actions workflow? GitHub provides an official
+starter workflow for Deno that you can add to your repository:
+<https://github.com/actions/starter-workflows/blob/main/ci/deno.yml>.
+
+In GitHub, open the Actions tab, choose "New workflow", and search for "Deno" to
+use the template.
+
+:::
+
 You can set up basic pipelines for Deno projects in GitHub Actions. The concepts
 explained on this page largely apply to other CI providers as well, such as
 Azure Pipelines, CircleCI or GitLab.
