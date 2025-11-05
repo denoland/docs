@@ -48,9 +48,8 @@ deno run main.ts
 ### Run a .cjs file
 
 ```js title="main.cjs"
-// CommonJS works out of the box
-module.exports = { ok: true };
-console.log("CJS runs in Deno");
+const chalk = require("chalk");
+console.log(chalk.green("Hello from npm in Deno"));
 ```
 
 ```sh
