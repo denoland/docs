@@ -47,7 +47,6 @@ deno run main.ts
 
 ### Execute CommonJS
 
-
 Use `.cjs` extension to inform Deno that module is using CommonJS system.
 
 ```js title="main.cjs"
