@@ -61,13 +61,9 @@ deno run main.cjs
 
 ### Use a Node API
 
-```js title="process.mjs"
-import process from "node:process";
-console.log(process.platform);
-```
-
-```sh
-deno run process.mjs
+```js title="process.js"
+import path from "node:path";
+console.log(path.join("./foo", "../bar"));
 ```
 
 ## Using Node's built-in modules
