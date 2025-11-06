@@ -32,9 +32,6 @@ const server = createServer((req, res) => {
 server.listen(8080);
 ```
 
-_You can see this example live here:
-https://dash.deno.com/playground/node-specifiers_
-
 When using `node:` specifiers, all other features of Deno Deploy Classic are
 still available. For example, you can use `Deno.env` to access environment
 variables even when using Node.js modules. You can also import other ESM modules
