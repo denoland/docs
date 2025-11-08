@@ -61,7 +61,7 @@ This flag enables you to
 [import Node.js built-in modules](/runtime/fundamentals/node/#node-built-in-modules)
 without a `node:` specifier, as in the example below. You can also use this flag
 to enable npm packages without an `npm:` specifier if you are manually managing
-your Node.js dependencies ([see `byonm` flag](#--unstable-byonm)).
+your Node.js dependencies.
 
 ```ts title="example.ts"
 import { readFileSync } from "fs";
