@@ -5,10 +5,10 @@ oldUrl:
   - /runtime/manual/tools/unstable_flags/
 ---
 
-New features of the Deno runtime are often released behind feature flags, so
-users can try out new APIs and features before they are finalized. Current
-unstable feature flags are listed on this page, and can also be found in the CLI
-help text by running:
+New Deno runtime features are often released behind feature flags, so that users
+can try out new APIs and features before they are finalized. Current unstable
+feature flags are listed on this page, and can also be found in the CLI help
+text by running:
 
 ```sh
 deno --help
@@ -61,7 +61,7 @@ This flag enables you to
 [import Node.js built-in modules](/runtime/fundamentals/node/#node-built-in-modules)
 without a `node:` specifier, as in the example below. You can also use this flag
 to enable npm packages without an `npm:` specifier if you are manually managing
-your Node.js dependencies ([see `byonm` flag](#--unstable-byonm)).
+your Node.js dependencies.
 
 ```ts title="example.ts"
 import { readFileSync } from "fs";
