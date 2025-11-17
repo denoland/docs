@@ -11,6 +11,12 @@ openGraphTitle: "deno fmt"
 description: "Format your code with Deno's built-in formatter"
 ---
 
+To see a list of the available CLI options for `deno fmt`, run:
+
+```sh
+deno fmt --help
+```
+
 ## Supported File Types
 
 Deno ships with a built-in code formatter that will auto-format the following
