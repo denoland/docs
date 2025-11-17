@@ -32,6 +32,9 @@ That's all you really need to know to get started! However, there are some key
 differences between the two runtimes that you can take advantage of to make your
 code simpler and smaller when migrating your Node.js projects to Deno.
 
+We provide a (list of supported Node.js APIs)[/runtime/reference/node_apis/]
+that you can use in Deno.
+
 ## Quick start
 
 ### Import an npm package
