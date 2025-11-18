@@ -167,12 +167,6 @@ if (adapter) {
 Check out [this repository](https://github.com/denoland/webgpu-examples) for
 more examples using WebGPU.
 
-## `--unstable-broadcast-channel`
-
-Enabling this flag makes the
-[`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
-web API available for use in the global scope, as in the browser.
-
 ## `--unstable-worker-options`
 
 Enable unstable
