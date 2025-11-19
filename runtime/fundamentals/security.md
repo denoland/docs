@@ -550,20 +550,20 @@ The request/response message shapes are versioned and defined by JSON Schemas:
 Each request contains a version (`v`), the Deno process ID (`pid`), a unique
 monotonic request `id`, a timestamp (`datetime`, RFC 3339), the `permission`
 name, and an optional `value` depending on permission type. The response must
-echo the `id` and include a `result` of either `"grant"` or `"deny"`. When
+echo the `id` and include a `result` of either `"allow"` or `"deny"`. When
 denied, a human-readable `reason` may be included.
 
 Example message flow:
 
 ```text
 -> req {"v":1,"pid":10234,"id":1,"datetime":"2025-01-01T00:00:00.000Z","permission":"read","value":"./run/permission_broker/scratch.txt"}
-<- res {"id":1,"result":"grant"}
+<- res {"id":1,"result":"allow"}
 -> req {"v":1,"pid":10234,"id":2,"datetime":"2025-01-01T00:00:01.000Z","permission":"read","value":"./run/permission_broker/scratch.txt"}
-<- res {"id":2,"result":"grant"}
+<- res {"id":2,"result":"allow"}
 -> req {"v":1,"pid":10234,"id":3,"datetime":"2025-01-01T00:00:02.000Z","permission":"read","value":"./run/permission_broker/log.txt"}
-<- res {"id":3,"result":"grant"}
+<- res {"id":3,"result":"allow"}
 -> req {"v":1,"pid":10234,"id":4,"datetime":"2025-01-01T00:00:03.000Z","permission":"write","value":"./run/permission_broker/log.txt"}
-<- res {"id":4,"result":"grant"}
+<- res {"id":4,"result":"allow"}
 -> req {"v":1,"pid":10234,"id":5,"datetime":"2025-01-01T00:00:04.000Z","permission":"env","value":null}
 <- res {"id":5,"result":"deny","reason":"Environment access is denied."}
 ```
