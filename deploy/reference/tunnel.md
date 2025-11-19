@@ -46,7 +46,7 @@ You can also specify `--tunnel` for `deno task` commands defined in your
 
 Then run the task with:
 
-```sh
+```bash
 deno task --tunnel dev
 ```
 
