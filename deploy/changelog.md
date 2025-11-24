@@ -3,6 +3,138 @@ title: "Deno Deploy changelog"
 description: "Listing notable progress in the development and evolution of Deno Deploy"
 ---
 
+## November 25th, 2025
+
+### Features
+
+- Deno Deploy can now securely expose locally running applications on a public
+  domain using the `deno run --tunnel` / `deno task --tunnel`.
+  - This is particularly useful for testing webhooks from third-party services,
+    or sharing work-in-progress applications with colleagues or clients.
+  - The tunnel creates a secure connection from your local machine to Deno
+    Deploy's infrastructure, and provisions a temporary public domain that
+    routes traffic to your local application.
+  - In addition, `--tunnel` automatically pulls down "Local" environment
+    variables from the Deno Deploy dashboard, making configuration and secrets
+    management much easier.
+  - Open Telemetry metrics, logs, and traces are also collected from local
+    applications and can be viewed in the Deno Deploy dashboard, the same way as
+    deployed applications.
+  - [Learn more in the documentation.](/deploy/reference/tunnel/)
+- Postgres databases can now be directly provisioned from the Deno Deploy
+  dashboard, hosted by our friends at Prisma.
+  - Like other externally linked databases, each timeline (production, git
+    branches, and previews) in every app, gets its own isolated database schema
+    and data.
+  - You can manage your database directly from the Deno Deploy dashboard, with
+    options to export your database to your own Prisma account for further
+    management.
+  - [Learn more in the documentation.](/deploy/reference/databases/)
+- Builds have been improved further with:
+  - Customizable timoeouts (default 5 minutes, max 15 minutes on pro)
+  - Customizable build memory (default 3GB, max 4GB on pro)
+  - New options to set
+- Builds have been improved further with:
+  - Customizable build timeouts (defaulting to 5 minutes, up to 15 minutes on
+    Pro plan)
+  - Customizable memory allocation for the builder (defaulting to 3GB, up to 4GB
+    on Pro plan)
+  - The directory that builds run in can now be customized, enabling deployment
+    of applications inside of a monorepo
+  - Applications can now set the runtime working directory that is used when
+    booting up the application after a successful build
+- Users can now sign in to Deno Deploy using Google, in addition to GitHub.
+  - From the account settings page, you can link both Google and GitHub to your
+    account, allowing you to sign in with either provider.
+- The playgrounds list on the organization overview page has been merged into
+  the apps list, allowing you to see and manage all your deployed code from a
+  single place.
+  - Playgrounds now have an overview page, similar to apps, showing metrics,
+    builds, logs, and traces.
+  - Playgrounds can now be assigned custom domains through the settings.
+- The domain and database dropdowns in the assignment drawers now support
+  searching, making it easier to find the domain or database you want to assign
+  when you have many.
+- Billing and metering has moved to a new dedicated page per organization,
+  showing detailed usage breakdowns, invoice history, and payment methods, plan
+  details, and more.
+- Applications now have a dedicated databases page, showing all linked
+  databases, their status, and options to manage them.
+- The .env import field in the environment variable drawer is now more visible,
+  and now supports drag-and-drop of .env files
+
+### Bug fixes
+
+- Fixed a bug where the percentage in usage alert emails was off by 100x (e.g.
+  showing 100% instead of 1%). This was caused by a decimal vs percentage mixup.
+- The package managers `npm`, `yarn`, and `pnpm` now more reliably install
+  dependencies during the build step.
+- The environment variable value input field now handles multiline values
+  correctly, and does not strip out newlines anymore.
+- Fix some organizations not being unsuspended immediately after verifying with
+  a credit card.
+- Fix some builds hanging when a user provided install or build command does not
+  terminate quickly on SIGTERM.
+- Changing the slug of a database instance now correctly updates the slug in the
+  URL bar, ensuring that the page can be refreshed without error.
+- Build timeouts are now displayed as timeouts, rather than generic
+  cancellations, in the build logs, and build history.
+- A timeline does not have to be unlocked anymore before being able to be locked
+  to a new revision, if already locked to a revision.
+
+## September 26th, 2025
+
+### Features
+
+- Metering and billing is now enabled for all organizations on Deno Deploy.
+  - After creation, all organizations default to the Free plan, which includes
+    generous free usage limits each month. To learn more about the Free and Pro
+    plans, [see the pricing page](https://deno.com/deploy/pricing).
+  - Free organizations that exceed their usage on requests, bandwidth, or CPU or
+    memory time will have their applications paused until the next billing
+    cycle, while Pro organizations will be billed for the overage at the end of
+    the month.
+  - Organizations can only make use of restricted Free plan limits until they
+    verify their organization by linking a credit card.
+  - The Pro plan enables features such as wildcard custom domains, priority
+    support, and increased included limits.
+  - Spend limits are available to Pro organizations, allowing you to cap your
+    monthly spend to avoid unexpected charges.
+- Deno Deploy now supports issuing OIDC tokens for all applications at runtime,
+  allowing you to securely authenticate to third-party services and APIs without
+  needing to manage long-lived static credentials.
+  - OIDC tokens can be retrieved with the
+    [`@deno/oidc` module on JSR](https://jsr.io/@deno/oidc).
+  - When authenticating to AWS or GCP, you can make use of the Cloud Connections
+    feature instead, which will guide you through set up and automatically
+    handle token retrieval and rotation for you.
+    [Learn more about Cloud Connections](https://docs.deno.com/deploy/reference/cloud_connections/).
+  - [Learn more about OIDC on Deno Deploy in the documentation](/deploy/reference/oidc/).
+- In addition to TLS certificates provisioned automatically through Let's
+  Encrypt by Deno Deploy, you can now upload and manage custom TLS certificates
+  for your domains. This is useful for organizations that use EV or OV
+  certificates, or have specific compliance requirements.
+  - If a certificate nears expiration, we'll send email reminders to the
+    organization owners to renew the certificate.
+  - This feature is only available to organizations on the Pro plan.
+- Applications that are linked to GitHub repositories now dispatch GitHub
+  `repository_dispatch` events every time a build is started, or completed
+  (successfully or failed). These events can be picked up by GitHub Actions
+  workflows to trigger additional actions, such as notifying a Slack channel, or
+  running additional tests.
+  [See the documentation for more details.](https://docs.deno.com/deploy/reference/apps/#github-events-integration)
+- Domains can now be unassigned from an application through the organization
+  domains page, without needing to go to the application settings.
+
+### Bug fixes
+
+- When bulk importing environment variables, the heuristic to detect whether a
+  variable is a secret or plain text has been improved. Now, variables with keys
+  containing `PUBLIC_` are always treated as plain text.
+- Some metrics on the organization and app metrics pages were displaying second
+  values as milliseconds, causing them to appear 1000x too low. This has been
+  fixed.
+
 ## August 27th, 2025
 
 ### Features
@@ -24,7 +156,7 @@ description: "Listing notable progress in the development and evolution of Deno 
   https://console.deno.com. All existing URLs will automatically redirect to the
   new URL.
 
-### Bug Fixes
+### Bug fixes
 
 - Check that Postgres database instances support dynamic provisioning of
   databases before allowing them to be linked to an organization.
