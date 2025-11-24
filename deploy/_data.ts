@@ -39,6 +39,10 @@ export const sidebar = [
         href: "/deploy/reference/timelines/",
       },
       {
+        title: "Tunnel",
+        href: "/deploy/reference/tunnel/",
+      },
+      {
         title: "Observability",
         href: "/deploy/reference/observability/",
       },
