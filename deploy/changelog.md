@@ -31,10 +31,6 @@ description: "Listing notable progress in the development and evolution of Deno 
     management.
   - [Learn more in the documentation.](/deploy/reference/databases/)
 - Builds have been improved further with:
-  - Customizable timoeouts (default 5 minutes, max 15 minutes on pro)
-  - Customizable build memory (default 3GB, max 4GB on pro)
-  - New options to set
-- Builds have been improved further with:
   - Customizable build timeouts (defaulting to 5 minutes, up to 15 minutes on
     Pro plan)
   - Customizable memory allocation for the builder (defaulting to 3GB, up to 4GB
