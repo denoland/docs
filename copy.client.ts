@@ -3,7 +3,9 @@
 // Uses the compact 3-line "copy" icon and shows a check icon briefly on success.
 
 function cleanShellPrompts(text: string) {
-  return text.split(/\r?\n/).map((line) => line.replace(/^\s*(?:[$>❯#%]|\u203A|>>)\s?/, "")).join("\n");
+  return text.split(/\r?\n/).map((line) =>
+    line.replace(/^\s*(?:[$>❯#%]|\u203A|>>)\s?/, "")
+  ).join("\n");
 }
 
 function findScrollableAncestor(el: Element | null): Element | null {
@@ -11,7 +13,10 @@ function findScrollableAncestor(el: Element | null): Element | null {
     const cs = window.getComputedStyle(el as Element);
     const overflowX = cs.overflowX;
     const overflow = cs.overflow;
-    if (overflowX === "auto" || overflowX === "scroll" || overflow === "auto" || overflow === "scroll") {
+    if (
+      overflowX === "auto" || overflowX === "scroll" || overflow === "auto" ||
+      overflow === "scroll"
+    ) {
       return el;
     }
     el = el.parentElement;
@@ -59,7 +64,10 @@ function hideThemePlaceholders(pre: HTMLElement) {
   // Hide any small dashed boxes heuristically inside the pre
   Array.from(pre.querySelectorAll<HTMLElement>("div,span")).forEach((el) => {
     const cs = window.getComputedStyle(el);
-    if ((cs.borderStyle && cs.borderStyle.includes("dashed")) || (cs.border && cs.border.includes("dashed"))) {
+    if (
+      (cs.borderStyle && cs.borderStyle.includes("dashed")) ||
+      (cs.border && cs.border.includes("dashed"))
+    ) {
       el.style.display = "none";
     }
   });
@@ -83,7 +91,10 @@ function attachButtons() {
     // We want to attach to a container that is NOT the scrollable element.
     // If the scrollable ancestor is the `pre` itself (common), attach to pre.parentElement instead.
     let attachTarget: HTMLElement | null = null;
-    if (scrollAncestor && scrollAncestor !== pre && scrollAncestor instanceof HTMLElement) {
+    if (
+      scrollAncestor && scrollAncestor !== pre &&
+      scrollAncestor instanceof HTMLElement
+    ) {
       // Found some scrolling ancestor above pre -> attach to that ancestor
       attachTarget = scrollAncestor as HTMLElement;
     } else {
@@ -99,7 +110,8 @@ function attachButtons() {
 
     // Ensure code has enough right padding so that content doesn't sit under the button
     const codeEl = code as HTMLElement;
-    const currentPRight = parseFloat(window.getComputedStyle(codeEl).paddingRight || "0") || 0;
+    const currentPRight =
+      parseFloat(window.getComputedStyle(codeEl).paddingRight || "0") || 0;
     if (currentPRight < 56) {
       codeEl.style.paddingRight = "56px";
     }
@@ -114,7 +126,9 @@ function attachButtons() {
 
 // Delegate click handling (single listener)
 document.addEventListener("click", (e) => {
-  const wrapper = (e.target as HTMLElement).closest(".copy-wrapper") as HTMLElement | null;
+  const wrapper = (e.target as HTMLElement).closest(".copy-wrapper") as
+    | HTMLElement
+    | null;
   if (!wrapper) return;
 
   const raw = wrapper.getAttribute("data-copy") || "";

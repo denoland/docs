@@ -343,7 +343,6 @@
       padding: 0;
     }
 
-    
     blockquote {
       color: var(--fgColor-muted, var(--color-fg-muted));
       border-left: 0.25em solid
@@ -393,82 +392,89 @@
         padding: 0 0.2em;
       }
     }
-    
+
     /* COPY BUTTON  */
-.copy-wrapper {
-  position: absolute !important;
-  top: 10px !important;
-  right: 10px !important;
-  z-index: 40 !important;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-}
+    .copy-wrapper {
+      position: absolute !important;
+      top: 10px !important;
+      right: 10px !important;
+      z-index: 40 !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto;
+    }
 
-/* The button */
-.copy-wrapper .copy-button {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 8px;
-  width: 40px;
-  height: 36px;
-  padding: 6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  outline: none;
-  box-shadow: none;
-  transition: background 120ms ease, transform 120ms ease;
-}
+    /* The button */
+    .copy-wrapper .copy-button {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+      width: 40px;
+      height: 36px;
+      padding: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      outline: none;
+      box-shadow: none;
+      transition: background 120ms ease, transform 120ms ease;
+    }
 
-/* Hover & focus */
-.copy-wrapper .copy-button:hover,
-.copy-wrapper .copy-button:focus {
-  background: rgba(255,255,255,0.04);
-  transform: translateY(-1px);
-}
+    /* Hover & focus */
+    .copy-wrapper .copy-button:hover,
+    .copy-wrapper .copy-button:focus {
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-1px);
+    }
 
-/* icon sizing */
-.copy-wrapper svg {
-  width: 18px;
-  height: 18px;
-  display: block;
-  color: rgba(255,255,255,0.86);
-}
+    /* icon sizing */
+    .copy-wrapper svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+      color: rgba(255, 255, 255, 0.86);
+    }
 
-/* hide theme controls inside pre (aggressive) */
-pre .code-actions,
-pre .code-toolbar,
-pre .copy-area,
-pre .placeholder,
-pre .controls,
-pre .actions,
-pre .code-block__actions,
-pre .pre-actions {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
+    /* hide theme controls inside pre (aggressive) */
+    pre .code-actions,
+    pre .code-toolbar,
+    pre .copy-area,
+    pre .placeholder,
+    pre .controls,
+    pre .actions,
+    pre .code-block__actions,
+    pre .pre-actions {
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
 
-.copy-wrapper,
-.copy-wrapper * {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  background-clip: padding-box !important;
-}
+    .copy-wrapper,
+    .copy-wrapper * {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      background-clip: padding-box !important;
+    }
 
-/* mobile adjustments */
-@media (max-width: 560px) {
-  .copy-wrapper { top: 8px !important; right: 8px !important; }
-  .copy-wrapper .copy-button { width: 34px; height: 30px; padding: 5px; }
-  pre > code { padding-right: 48px !important; }
-}
+    /* mobile adjustments */
+    @media (max-width: 560px) {
+      .copy-wrapper {
+        top: 8px !important;
+        right: 8px !important;
+      }
+      .copy-wrapper .copy-button {
+        width: 34px;
+        height: 30px;
+        padding: 5px;
+      }
+      pre > code {
+        padding-right: 48px !important;
+      }
+    }
 
- 
-    
     h1 {
       font-size: 2em;
       &:first-child {
