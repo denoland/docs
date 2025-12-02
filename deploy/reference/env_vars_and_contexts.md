@@ -118,7 +118,7 @@ certificates. -->
 
 Environment variables have the following limits:
 
-- Environment variable keys can be at most 128 bytes long.\
+- Environment variable keys can be at most 128 bytes long.
 - Environment variable keys can not start with:
   - `DENO_`, except for `DENO_AUTH_TOKENS`, `DENO_COMPAT`, `DENO_CONDITIONS`,
     `DENO_DEPLOY_ENDPOINT`, or `DENO_DEPLOY_TOKEN`

@@ -9,7 +9,7 @@
  * running anywhere.
  */
 
-// Import the Postgres package from
+// Import the Postgres package from npm
 import postgres from "npm:postgres";
 
 // Initialize the client with connection information for your database, and
