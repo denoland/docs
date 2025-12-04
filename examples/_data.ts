@@ -301,6 +301,21 @@ export const sidebar = [
     ],
   },
   {
+    title: "Sandboxes",
+    items: [
+      {
+        title: "Evaluating JavaScript",
+        href: "/examples/sandboxes_evaluating_javascript/",
+        type: "example",
+      },
+      {
+        title: "Spawn a subprocess",
+        href: "/examples/sandboxes_spawn_subprocess/",
+        type: "example",
+      },
+    ],
+  },
+  {
     title: "Testing",
     items: [
       {
