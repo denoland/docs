@@ -15,8 +15,12 @@ export const sidebar = [
     title: "Reference",
     items: [
       {
-        title: "TODO",
-        href: "/sandboxes/reference/TODO/",
+        title: "API Reference",
+        href: "https://jsr.io/@deno/sandbox/doc/~/Sandbox",
+      },
+      {
+        title: "Examples",
+        href: "/examples/#sandboxes",
       },
     ],
   },
