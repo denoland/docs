@@ -76,7 +76,8 @@ const sandbox = await Sandbox.create({
 - Keep `allowNet` as narrow as possible to block exfiltration attempts.
 - Use metadata keys such as `agentId` or `customerId` to trace sandboxes in the
   Deploy dashboard.
-- Remember to call `await sandbox.kill()` (or rely on `await using`) when the
-  sandbox is no longer needed; resources are billed until it shuts down.
+- Let `await using` (or dropping the last reference) dispose of the sandbox
+  automatically. Call `sandbox.kill()` only when you need to terminate it prior
+  to that automatic cleanup.
 - For long-lived services, migrate from sandboxes to a Deploy app once the code
   stabilizes.

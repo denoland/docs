@@ -133,27 +133,17 @@ echo $ANTHROPIC_API_KEY
 # <placeholder>
 ```
 
-confirms that user code cannot read your real credentials. Combine this with
-narrow `allowNet` rules, per-command timeouts, or `KillController` cancellation
-for a defense-in-depth posture.
+confirms that user code cannot read your real credentials.
 
 ## 9. Tuning lifetime, cleanup, and reconnect
 
 - `lifetime: "session"` (default) destroys the VM once your script finishes.
 - Provide durations such as `"5m"` to keep the sandbox alive even after the
   client disconnects. You can later `Sandbox.connect({ id })` to resume work.
-- Call `await sandbox.kill()` when you are finished to free resources
-  immediately.
+- Cleanup happens automatically when your code drops the last reference (or the
+  `await using` block ends). Call `sandbox.kill()` only if you need to tear the
+  VM down ahead of that schedule.
 
 Observability is shared with Deploy: every sandbox logs, trace, and metric is
-visible in the dashboard so you can debug agent runs the same way you debug
-production apps.
-
-## Next steps
-
-- Browse the [JSR docs for `@deno/sandbox`](https://jsr.io/@deno/sandbox) to see
-  the full API surface, including SSH access and file uploads.
-- Explore the [Deploy reference](../deploy/index.md) to understand how sandboxes
-  graduate into always-on apps.
-- Invite teammates to your organization so they can create their own sandboxes
-  with role-based access.
+visible in the Deno Deploy dashboard so you can debug agent runs the same way
+you debug production apps.

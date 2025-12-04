@@ -19,8 +19,10 @@ console.log(`ssh ${username}@${hostname}`);
 await new Promise((resolve) => setTimeout(resolve, 10 * 60 * 1000));
 ```
 
-The sandbox remains reachable for the configured lifetime. Once the script exits
-(or you call `sandbox.kill()`), the SSH endpoint disappears.
+The sandbox remains reachable for the configured lifetime. Once your script
+releases its references (for example, the `await using` block ends) the sandbox
+shuts down and the SSH endpoint disappears; you can also call `sandbox.kill()`
+if you need to tear it down immediately.
 
 ## When to use SSH access
 
@@ -73,8 +75,9 @@ The SSH tunnel closes if the sandbox shuts down. Keep it running by:
   persists after the script exits, then reconnecting later with
   `Sandbox.connect({ id })`
 
-Remember to call `await sandbox.kill()` (or `exit` inside the SSH session) when
-you are done to free resources.
+Cleanup is automatic when your code stops referencing the sandbox, but you can
+run `sandbox.kill()` (or simply `exit` inside the SSH session) if you want to
+end it on demand.
 
 ## Example workflow
 

@@ -3,11 +3,11 @@ title: "About Sandboxes"
 description: "Overview of the Sandboxes microVM platform on Deploy, including capabilities, security model, and ideal use cases."
 ---
 
-Sandboxes bring real Linux microVMs directly to the Deploy global edge. Each
-sandbox boots in under a second, is API driven from the `@deno/sandbox` SDK, and
-is torn down as soon as you are done. The result is on-demand compute that feels
-like opening a terminal, yet ships with production-grade isolation and
-observability.
+Sandboxes bring real Linux microVMs directly to the Deno Deploy global edge.
+Each sandbox boots in under a second, is API driven from the `@deno/sandbox`
+SDK, and is torn down as soon as you are done. The result is on-demand compute
+that feels like opening a terminal, yet ships with production-grade isolation
+and observability.
 
 ## What are Sandboxes?
 
@@ -31,20 +31,6 @@ or safely executed on behalf of a user or another service. They are ideal for:
 
 This is compute built not just for developers, but for software that builds
 software.
-
-## Create a sandbox in code
-
-```tsx
-import { Sandbox } from "@deno/sandbox";
-
-const sb = await Sandbox.create({
-  allowNet: ["api.stripe.com", "api.openai.com"],
-});
-```
-
-Every sandbox launches with a strict outbound allow list. `allowNet` constrains
-the VM at the hypervisor boundary, so even if user code attempts to exfiltrate
-data it can only talk to the hosts you approve.
 
 ## Run real workloads
 
@@ -101,10 +87,16 @@ You can use Sandboxes from any environment that can import the `@deno/sandbox`
 package and make outbound HTTPS requests to the Deploy API, meaning you can use
 Sandboxes in your Node projects, Deno Deploy apps, or even browser-based tools.
 
+In your Deno projects you can use either the [jsr](https://jsr.io/@deno/sandbox)
+or [npm](https://www.npmjs.com/package/@deno/sandbox) package, however the jsr
+package has been optimized for Deno usage and APIs and is recommended.
+
 :::note await using support
 
-The `await using` syntax requires Node.js 24+. If your project uses earlier
-Node.js versions, use try/finally blocks instead:
+The
+[`await using`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/await_using)
+syntax requires Node.js 24+. If your project uses earlier Node.js versions, use
+try/finally blocks instead:
 
 ```ts
 import { Sandbox } from "@deno/sandbox";
@@ -125,8 +117,7 @@ Sandboxes have the following limits:
 
 - **Memory:** 768 MB to 4096 MB, configurable per sandbox
 - **CPU:** 2 vCPU, subject to noisy neighbor effects
-- **Network:** Outbound only, restricted to `allowNet` hosts
-- **Lifetime:** Configurable per sandbox, up to 15 minutes by default
+- **Lifetime:** Configurable per sandbox, up to 30 minutes by default
 - **Disk**: 10 GB of ephemeral storage
 
 Exceeding these limits may result in throttling or termination of your sandbox.

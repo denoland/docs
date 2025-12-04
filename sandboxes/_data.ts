@@ -15,16 +15,24 @@ export const sidebar = [
     title: "Reference",
     items: [
       {
+        title: "Create a sandbox",
+        href: "/sandboxes/reference/create/",
+      },
+      {
+        title: "Manage sandboxes",
+        href: "/sandboxes/reference/manage/",
+      },
+      {
+        title: "Promoting sandboxes",
+        href: "/sandboxes/reference/promote/",
+      },
+      {
         title: "Expose HTTP",
         href: "/sandboxes/reference/expose_http/",
       },
       {
         title: "Expose SSH",
         href: "/sandboxes/reference/expose_ssh/",
-      },
-      {
-        title: "Volumes",
-        href: "/sandboxes/reference/volumes/",
       },
       {
         title: "Lifetimes",
