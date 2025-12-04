@@ -1,4 +1,10 @@
-## title: "Getting started" description: "Step-by-step walkthrough for enabling Sandboxes, creating your first microVM, running commands, exposing services, and managing secrets."
+---
+title: "Getting started"
+description: "Step-by-step walkthrough for enabling Sandboxes, creating your first microVM, running commands, exposing services, and managing secrets."
+---
+
+To use Sandboxes, you need a Deno Deploy account. If you do not have one yet you
+can sign up for a free account at [app.deno.com](https://app.deno.com).
 
 ## 1. Access the Sandboxes dashboard
 
@@ -21,7 +27,7 @@ and store it securely. Then export it in your local shell or CI job:
 export DENO_DEPLOY_TOKEN=<your-token>
 ```
 
-::: Tip Token security
+:::tip Token security
 
 Treat this token like any other production secret. Rotate it from the dashboard
 if it is ever exposed.
@@ -33,15 +39,18 @@ if it is ever exposed.
 The SDK works in both Deno and Node.js environments.
 
 ```bash
-# Deno
+# Using Deno
 deno add jsr:@deno/sandbox
 
-# npm
+# Using npm
 npm install @deno/sandbox
-```
 
-For Node.js 22 or earlier, replace `await using` with a `try`/`finally` block
-when the docs use explicit resource management.
+# Using pnpm
+pnpm install jsr:@deno/sandbox
+
+# Using yarn
+yarn add jsr:@deno/sandbox
+```
 
 ## 4. Create your first sandbox
 
@@ -61,13 +70,18 @@ from that VM.
 
 ## 5. Run commands and scripts
 
-Sandboxes expose familiar filesystem and process APIs.
+Sandboxes expose familiar filesystem and process APIs to run commands, upload files,
+and spawn long-running services.
 
-```tsx
-// List files, just like a normal server
+You can for example list files in the root directory:
+
+```ts
 await sandbox.sh`ls -lh /`;
+```
 
-// Upload source and run it
+Or upload a script and run it:
+
+```ts
 await sandbox.writeTextFile("hello.ts", "console.log('Hello from a sandbox')");
 const proc = await sandbox.spawn("deno", {
   args: ["run", "hello.ts"],
@@ -81,24 +95,6 @@ await proc.status;
 
 You can keep state between commands, stream stdout and stderr, or open an
 interactive REPL with `sandbox.repl()` for agent-style workflows.
-
-## 6. Expose HTTP services (optional)
-
-Run dev servers, preview apps, or framework CLIs on any port and publish them
-instantly:
-
-```tsx
-await sandbox.writeTextFile(
-  "server.js",
-  "Deno.serve(() => new Response('Hello from Sandboxes'));",
-);
-const runtime = await sandbox.createJsRuntime({ entrypoint: "server.js" });
-const publicUrl = await sandbox.exposeHttp({ port: 8080 });
-console.log(publicUrl); // https://<random>.sandbox.deno.net
-```
-
-The URL stays live for the sandbox lifetime, making it perfect for short-lived
-QA links or agent generated previews.
 
 ## 7. Keep secrets and policies tight
 
