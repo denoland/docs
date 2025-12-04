@@ -89,8 +89,8 @@ accessible. Sandboxes deliver:
 - Region selection, memory sizing, and lifetime controls per sandbox
 - Seamless hand-off to Deploy apps when code is production ready
 
-Together, Deploy plus Sandboxes form a single workflow: code is created, proved
-safe in a sandbox, and deployed globally without new infrastructure or
+Together, Deno Deploy and Sandboxes form a single workflow: code is created,
+proved safe in a sandbox, and deployed globally without new infrastructure or
 orchestration layers.
 
 ## Learn more

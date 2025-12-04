@@ -21,8 +21,12 @@ and store it securely. Then export it in your local shell or CI job:
 export DENO_DEPLOY_TOKEN=<your-token>
 ```
 
-> Tip: treat this token like any other production secret. Rotate it from the
-> dashboard if it is ever exposed.
+::: Tip Token security
+
+Treat this token like any other production secret. Rotate it from the dashboard
+if it is ever exposed.
+
+:::
 
 ## 3. Install the SDK
 
