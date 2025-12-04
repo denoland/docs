@@ -5,7 +5,7 @@ url: /examples/sandboxes_evaluating_javascript/
 layout: sandbox-example.tsx
 ---
 
-To evaluate JavaScript code in a sandbox, you can use the `eval` function.
+You can evaluate JavaScript code in a sandbox using the `eval` function.
 
 ```ts
 import { Sandbox } from "@deno/sandbox";
