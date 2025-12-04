@@ -15,8 +15,16 @@ export const sidebar = [
     title: "Reference",
     items: [
       {
-        title: "TODO",
-        href: "/sandboxes/reference/TODO/",
+        title: "Expose HTTP",
+        href: "/sandboxes/reference/expose_http/",
+      },
+      {
+        title: "Expose SSH",
+        href: "/sandboxes/reference/expose_ssh/",
+      },
+      {
+        title: "Volumes",
+        href: "/sandboxes/reference/volumes/",
       },
     ],
   },
