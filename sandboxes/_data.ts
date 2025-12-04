@@ -27,6 +27,10 @@ export const sidebar = [
         href: "/sandboxes/reference/volumes/",
       },
       {
+        title: "Lifetimes",
+        href: "/sandboxes/reference/lifetimes/",
+      },
+      {
         title: "API Reference",
         href: "https://jsr.io/@deno/sandbox/doc/~/Sandbox",
       },
