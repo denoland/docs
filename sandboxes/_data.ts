@@ -26,6 +26,14 @@ export const sidebar = [
         title: "Volumes",
         href: "/sandboxes/reference/volumes/",
       },
+      {
+        title: "API Reference",
+        href: "https://jsr.io/@deno/sandbox/doc/~/Sandbox",
+      },
+      {
+        title: "Examples",
+        href: "/examples/#sandboxes",
+      },
     ],
   },
 ] satisfies Sidebar;

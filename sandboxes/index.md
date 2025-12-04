@@ -146,6 +146,5 @@ If not specified, the sandbox will be created in the default region.
 
 ## Learn more
 
-Ready to try it? Follow the [`Getting started` guide](./getting_started.md) to
-create your first sandbox, obtain an access token, and run code on the Deploy
-edge.
+Ready to try it? Follow the [Getting started](./getting_started) guide to create
+your first sandbox, obtain an access token, and run code on the Deploy edge.
