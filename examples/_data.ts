@@ -375,7 +375,7 @@ export const sidebar = [
       },
       {
         title: "Control sandbox lifetime",
-        href: "/examples/sandboxes_lifetime/",
+        href: "/examples/sandboxes_lifetime_control/",
         type: "example",
       },
       {
