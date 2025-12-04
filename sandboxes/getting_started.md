@@ -70,8 +70,8 @@ from that VM.
 
 ## 5. Run commands and scripts
 
-Sandboxes expose familiar filesystem and process APIs to run commands, upload files,
-and spawn long-running services.
+Sandboxes expose familiar filesystem and process APIs to run commands, upload
+files, and spawn long-running services.
 
 You can for example list files in the root directory:
 

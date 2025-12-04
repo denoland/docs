@@ -133,7 +133,8 @@ Exceeding these limits may result in throttling or termination of your sandbox.
 
 ## Regions
 
-You can specify the region where the sandbox will be created when creating a new sandbox:
+You can specify the region where the sandbox will be created when creating a new
+sandbox:
 
 ```tsx
 import { Sandbox } from "@deno/sandbox";

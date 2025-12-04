@@ -46,7 +46,7 @@ ssh -i ./sandbox-key ${username}@${hostname}
 4. Use regular terminal workflows: copy files, run top, tail logs, or attach to
    running processes.
 
-:::tip 
+:::tip
 
 Tip: combine SSH with
 [port forwarding](https://man.openbsd.org/ssh#LOCAL_FORWARDING) to view dev

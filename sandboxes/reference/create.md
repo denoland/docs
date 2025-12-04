@@ -30,7 +30,6 @@ process. You can tailor the sandbox by passing an options object.
 | `metadata` | `Record<string, string>` | Attach arbitrary key/value tags to help identify sandboxes in logs or telemetry.                                        |
 | `env`      | `Record<string, string>` | Set initial environment variables inside the sandbox. Secrets should still be managed via Deploy’s secret substitution. |
 
-
 ## Example configurations
 
 ### Allow outbound traffic to specific APIs
