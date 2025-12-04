@@ -67,10 +67,8 @@ traces. Use the dashboard to:
 ## Cleanup and limits
 
 - An exposed URL stops accepting traffic when the sandbox lifetime ends. You can
-  still call `sandbox.kill()` to terminate the sandbox (and URL) ahead of
-  schedule if needed.
-- Call `exposeHttp({ port, keepAlive: true })` (coming soon) to opt into longer
-  previews once available.
+  call `sandbox.kill()` to terminate the sandbox (and URL) ahead of schedule if
+  needed.
 - For persistent services, graduate the code into a Deploy app rather than
   relying on a long-running sandbox.
 
