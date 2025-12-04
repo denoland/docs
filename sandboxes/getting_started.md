@@ -4,12 +4,12 @@ description: "Step-by-step walkthrough for enabling Sandboxes, creating your fir
 ---
 
 To use Sandboxes, you need a Deno Deploy account. If you do not have one yet you
-can sign up for a free account at [app.deno.com](https://app.deno.com).
+can sign up for a free account at [console.deno.com](https://console.deno.com).
 
 ## 1. Access the Sandboxes dashboard
 
-1. Visit [app.deno.com](https://app.deno.com/) and sign in with your Deploy
-   account.
+1. Visit [console.deno.com](https://console.deno.com/) and sign in with your
+   Deploy account.
 2. Choose or create the organization where you want to run sandboxes.
 3. Open the **Sandboxes** tab to view existing sandboxes, lifetime usage, and
    access tokens.
