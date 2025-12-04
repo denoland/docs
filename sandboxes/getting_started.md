@@ -54,9 +54,35 @@ yarn add jsr:@deno/sandbox
 
 ## 4. Create your first sandbox
 
-```tsx
+```tsx title="main.ts"
 import { Sandbox } from "@deno/sandbox";
+await using sandbox = await Sandbox.create();
+await sandbox.sh`echo "Hello, world!"`;
+```
 
+## 5. Run your sandbox code
+
+This code will require access to the network to reach the Deploy edge where the
+sandbox will be created, and also access to the environment variables to
+authenticate with the Deploy API, so we'll pass in the `--allow-net` and
+`--allow-env` flags to the `deno run` command (or use the shorthand `-EN`).
+
+```bash
+deno run -EN main.ts
+```
+
+## 6. Configuring your sandbox
+
+When creating a sandbox witb `Sandbox.create()`, you can configure it with the
+following options:
+
+- `allowNet`: List of hosts that can receive outbound traffic from the sandbox.
+- `region`: Deploy region where the sandbox will be created.
+- `memoryMb`: Amount of memory allocated to the sandbox.
+- `lifetime`: Lifetime of the sandbox.
+- `id`: ID of the sandbox.
+
+```tsx
 await using sandbox = await Sandbox.create({
   allowNet: ["api.stripe.com", "api.openai.com"],
   region: "sjc", // optional: choose the Deploy region
@@ -64,11 +90,11 @@ await using sandbox = await Sandbox.create({
 });
 ```
 
-This call provisions an isolated Linux microVM on the Deploy edge. By providing
-an `allowNet` list, you define the only hosts that can receive outbound traffic
-from that VM.
+Once again, this call provisions an isolated Linux microVM on the Deploy edge,
+but now by providing an `allowNet` list, you define the only hosts that can
+receive outbound traffic from that VM.
 
-## 5. Run commands and scripts
+## 7. Running commands and scripts
 
 Sandboxes expose familiar filesystem and process APIs to run commands, upload
 files, and spawn long-running services.
@@ -96,7 +122,7 @@ await proc.status;
 You can keep state between commands, stream stdout and stderr, or open an
 interactive REPL with `sandbox.repl()` for agent-style workflows.
 
-## 7. Keep secrets and policies tight
+## 8. Keeping secrets and policies tight
 
 Secrets never appear inside `/proc` or the sandbox environment variables.
 Instead, Deploy injects them only when the sandbox makes an outbound request to
@@ -111,7 +137,7 @@ confirms that user code cannot read your real credentials. Combine this with
 narrow `allowNet` rules, per-command timeouts, or `KillController` cancellation
 for a defense-in-depth posture.
 
-## 8. Tune lifetime, cleanup, and reconnect
+## 9. Tuning lifetime, cleanup, and reconnect
 
 - `lifetime: "session"` (default) destroys the VM once your script finishes.
 - Provide durations such as `"5m"` to keep the sandbox alive even after the
