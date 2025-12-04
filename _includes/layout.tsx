@@ -10,7 +10,8 @@ export default function Layout(data: Lume.Data) {
     "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
   const isServicesPage = data.url.startsWith("/deploy") ||
     data.url.startsWith("/subhosting") ||
-    data.url.startsWith("/services");
+    data.url.startsWith("/services") ||
+    data.url.startsWith("/sandboxes");
   const hasSubNav = isServicesPage;
 
   return (

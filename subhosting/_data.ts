@@ -60,4 +60,8 @@ export const SidebarNav = [
     title: "Subhosting",
     href: "/subhosting/manual/",
   },
+  {
+    title: "Sandboxes",
+    href: "/sandboxes/",
+  },
 ] satisfies SidebarNav;
