@@ -41,25 +41,32 @@ package managers, and background services:
 await sb.sh`ls -lh /`;
 ```
 
-Need more than shell commands? Upload source files, spawn `deno` or `node`,
-start framework dev servers, or expose HTTPS endpoints with
-`sandbox.exposeHttp()`. Sandboxes stay alive as long as your session or
-configured lifetime requires, then disappear automatically.
+## Security Policies
 
-## Secrets stay secret
+Coming soon: Environment variables marked as Secrets never enter the sandbox.
 
-Secrets never enter the sandbox environment variables. Instead, Deno Deploy
-substitutes them only when the sandbox makes outbound requests to an approved
-host. A command such as:
-
-```bash
-echo $ANTHROPIC_API_KEY
-# <placeholder>
+```tsx
+await Sandbox.create({
+  env: {
+    OPENAI_API_KEY: Sandbox.secret(
+      "api.openai.com",
+      process.env.OPENAI_API_KEY,
+    ),
+  },
+});
 ```
 
-confirms that user code cannot read the real secret. This blocks the most common
-AI attack path of prompt injection followed by secret exfiltration while
-allowing your automation to freely call third-party APIs.
+This means, `OPENAI_API_KEY` is never visibile to code inside the sandbox and
+only can ever be sent to `api.openai.com`.
+
+Additionally you can provision a Sandbox so that it can only talk to approved
+hosts:
+
+```tsx
+await Sandbox.create({
+  allowNet: ["google.com"],
+});
+```
 
 ## Built for instant, safe compute
 
