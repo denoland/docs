@@ -22,7 +22,6 @@ process. You can tailor the sandbox by passing an options object.
 
 | Option     | Type                     | Description                                                                                                             |
 | ---------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| `allowNet` | `string[]`               | Outbound allow list enforced at the hypervisor level. Hosts not listed are unreachable, blocking data exfiltration.     |
 | `region`   | `"sjc"                   | "ams"                                                                                                                   |
 | `memoryMb` | `number`                 | Allocate between 768 and 4096 MB of RAM for memory-heavy tasks or tighter budgets.                                      |
 | `lifetime` | `"session"               | "5m"                                                                                                                    |
@@ -31,14 +30,6 @@ process. You can tailor the sandbox by passing an options object.
 | `env`      | `Record<string, string>` | Set initial environment variables inside the sandbox. Secrets should still be managed via Deploy’s secret substitution. |
 
 ## Example configurations
-
-### Allow outbound traffic to specific APIs
-
-```tsx
-const sandbox = await Sandbox.create({
-  allowNet: ["api.openai.com", "api.stripe.com"],
-});
-```
 
 ### Run in a specific region with more memory
 
@@ -73,7 +64,6 @@ const sandbox = await Sandbox.create({
 
 ## Tips
 
-- Keep `allowNet` as narrow as possible to block exfiltration attempts.
 - Use metadata keys such as `agentId` or `customerId` to trace sandboxes in the
   Deploy dashboard.
 - Let `await using` (or dropping the last reference) dispose of the sandbox

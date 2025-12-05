@@ -59,10 +59,6 @@ traces. Use the dashboard to:
 
 - Exposed URLs are long, random subdomains that are hard to guess.
 - TLS termination happens at the Deploy edge; traffic is encrypted end-to-end.
-- Combine `exposeHttp()` with `allowNet` so your sandbox can only reach the API
-  hosts it truly needs.
-- Secrets are substituted only when the sandbox reaches an approved host, so
-  dumping environment variables from inside the VM will never reveal them.
 
 ## Cleanup and limits
 

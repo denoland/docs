@@ -60,10 +60,6 @@ servers that are bound to `localhost` inside the sandbox.
 
 - Credentials are single-use and bound to the sandbox lifetime.
 - You control how long the sandbox runs; destroy it to revoke access instantly.
-- Network egress rules (`allowNet`) still apply, so even an SSH session cannot
-  talk to unapproved hosts.
-- Secrets remain protected—the SSH session only sees placeholders when reading
-  environment variables.
 
 ## Keeping the sandbox alive
 
