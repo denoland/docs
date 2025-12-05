@@ -87,7 +87,6 @@ Details about the sandbox will be shown in its **Event log**.
 When creating a sandbox witb `Sandbox.create()`, you can configure it with the
 following options:
 
-- `allowNet`: List of hosts that can receive outbound traffic from the sandbox.
 - `region`: Deploy region where the sandbox will be created.
 - `memoryMb`: Amount of memory allocated to the sandbox.
 - `lifetime`: Lifetime of the sandbox.
@@ -95,15 +94,10 @@ following options:
 
 ```tsx
 await using sandbox = await Sandbox.create({
-  allowNet: ["api.stripe.com", "api.openai.com"],
   region: "sjc", // optional: choose the Deploy region
   memoryMb: 1024, // optional: pick the RAM size (768-4096)
 });
 ```
-
-Once again, this call provisions an isolated Linux microVM on the Deploy edge,
-but now by providing an `allowNet` list, you define the only hosts that can
-receive outbound traffic from that VM.
 
 ## Running commands and scripts
 
@@ -168,19 +162,6 @@ for await (const log of build.logs()) {
   console.log(log.message);
 }
 ```
-
-## Keeping secrets and policies tight
-
-Secrets never appear inside `/proc` or the sandbox environment variables.
-Instead, Deploy injects them only when the sandbox makes an outbound request to
-an allowed host. A check like:
-
-```bash
-echo $ANTHROPIC_API_KEY
-# <placeholder>
-```
-
-confirms that user code cannot read your real credentials.
 
 ## Tuning lifetime, cleanup, and reconnect
 
