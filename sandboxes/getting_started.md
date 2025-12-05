@@ -27,6 +27,8 @@ and store it securely. Then export it in your local shell or CI job:
 export DENO_DEPLOY_TOKEN=<your-token>
 ```
 
+![The Deno Deploy organization tokens screen.](/sandboxes/images/org-tokens.webp)
+
 :::tip Token security
 
 Treat this token like any other production secret. Rotate it from the dashboard
@@ -70,6 +72,15 @@ authenticate with the Deploy API, so we'll pass in the `--allow-net` and
 ```bash
 deno -EN main.ts
 ```
+
+Any sandbox you create will be listed in the **Sandboxes** tab of your Deno
+Deploy organization.
+
+![The list of sandboxes created in the Deno Deploy console.](/sandboxes/images/sandbox-list.webp)
+
+Details about the sandbox will be shown in its **Event log**.
+
+![The sandbox event log details in the Deno Deploy console.](/sandboxes/images/sandbox-event-log.webp)
 
 ## Configuring your sandbox
 

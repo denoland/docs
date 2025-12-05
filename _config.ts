@@ -140,6 +140,7 @@ site.copy("deploy/images");
 site.copy("deploy/classic/images");
 site.copy("deploy/kv/images");
 site.copy("deploy/tutorials/images");
+site.copy("sandboxes/images");
 site.copy("runtime/fundamentals/images");
 site.copy("runtime/getting_started/images");
 site.copy("runtime/reference/images");
