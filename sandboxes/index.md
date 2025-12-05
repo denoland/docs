@@ -115,14 +115,20 @@ try {
 
 Sandboxes have the following limits:
 
-- **Memory:** 768 MB to 4096 MB, configurable per sandbox
-- **CPU:** 2 vCPU, subject to noisy neighbor effects
-- **Lifetime:** Configurable per sandbox, up to 30 minutes by default
+- **Memory:** 768 MB to 4096 MB (1GB default) configurable per sandbox
+- **CPU:** 2 vCPU
+- **Lifetime:** Configurable per sandbox and bound to a session, up to 30
+  minutes
 - **Disk**: 10 GB of ephemeral storage
 
 Exceeding these limits may result in throttling or termination of your sandbox.
 
 ## Regions
+
+Regions currently supported are:
+
+- `ams` - Amsterdam, Netherlands
+- `ord` - Chicago, USA
 
 You can specify the region where the sandbox will be created when creating a new
 sandbox:
