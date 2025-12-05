@@ -6,7 +6,7 @@ description: "Step-by-step walkthrough for enabling Sandboxes, creating your fir
 To use Sandboxes, you need a Deno Deploy account. If you do not have one yet you
 can sign up for a free account at [console.deno.com](https://console.deno.com).
 
-## 1. Access the Sandboxes dashboard
+## Access the Sandboxes dashboard
 
 1. Visit [console.deno.com](https://console.deno.com/) and sign in with your
    Deploy account.
@@ -17,7 +17,7 @@ can sign up for a free account at [console.deno.com](https://console.deno.com).
 Sandboxes and Deploy apps share the same organization boundary, so you can reuse
 members, tokens, and observability settings across both products.
 
-## 2. Create an organization token
+## Create an organization token
 
 The `@deno/sandbox` SDK authenticates using the `DENO_DEPLOY_TOKEN` environment
 variable. Generate it from **Settings → Organization tokens**, copy the value,
@@ -34,7 +34,7 @@ if it is ever exposed.
 
 :::
 
-## 3. Install the SDK
+## Install the SDK
 
 The SDK works in both Deno and Node.js environments.
 
@@ -52,15 +52,15 @@ pnpm install jsr:@deno/sandbox
 yarn add jsr:@deno/sandbox
 ```
 
-## 4. Create your first sandbox
+## Create your first sandbox
 
 ```tsx title="main.ts"
 import { Sandbox } from "@deno/sandbox";
 await using sandbox = await Sandbox.create();
-await sandbox.sh`echo "Hello, world!"`;
+await sandbox.sh`ls -lh /`;
 ```
 
-## 5. Run your sandbox code
+## Run your sandbox code
 
 This code will require access to the network to reach the Deploy edge where the
 sandbox will be created, and also access to the environment variables to
@@ -71,7 +71,7 @@ authenticate with the Deploy API, so we'll pass in the `--allow-net` and
 deno run -EN main.ts
 ```
 
-## 6. Configuring your sandbox
+## Configuring your sandbox
 
 When creating a sandbox witb `Sandbox.create()`, you can configure it with the
 following options:
@@ -94,7 +94,7 @@ Once again, this call provisions an isolated Linux microVM on the Deploy edge,
 but now by providing an `allowNet` list, you define the only hosts that can
 receive outbound traffic from that VM.
 
-## 7. Running commands and scripts
+## Running commands and scripts
 
 Sandboxes expose familiar filesystem and process APIs to run commands, upload
 files, and spawn long-running services.
@@ -122,7 +122,42 @@ await proc.status;
 You can keep state between commands, stream stdout and stderr, or open an
 interactive REPL with `sandbox.repl()` for agent-style workflows.
 
-## 8. Keeping secrets and policies tight
+## Deploying from a sandbox
+
+The snippet below walks through an end-to-end workflow: it creates a Deploy app
+via the `Client`, boots a high-memory sandbox for heavier builds, scaffolds and
+builds a Next.js project inside that VM, then calls `sandbox.deploy()` to push
+the compiled artifacts while streaming build logs back to your terminal.
+
+```tsx
+import { Client, Sandbox } from "@deno/sandbox";
+
+const client = new Client();
+const app = await client.apps.create();
+
+await using sandbox = await Sandbox.create({ memoryMb: 4096 });
+console.log("Created sandbox", sandbox);
+
+await sandbox
+  .sh`deno -A npm:create-next-app@latest --yes --skip-install my-app`;
+await sandbox.sh`cd my-app && deno install`;
+await sandbox.sh`cd my-app && deno task build`;
+await sandbox.sh`cd my-app && du -sh .`;
+const build = await sandbox.deploy(app.slug, {
+  path: "my-app",
+  production: true,
+  build: {
+    entrypoint: "node_modules/.bin/next",
+    args: ["start"],
+  },
+});
+
+for await (const log of build.logs()) {
+  console.log(log.message);
+}
+```
+
+## Keeping secrets and policies tight
 
 Secrets never appear inside `/proc` or the sandbox environment variables.
 Instead, Deploy injects them only when the sandbox makes an outbound request to
@@ -135,7 +170,7 @@ echo $ANTHROPIC_API_KEY
 
 confirms that user code cannot read your real credentials.
 
-## 9. Tuning lifetime, cleanup, and reconnect
+## Tuning lifetime, cleanup, and reconnect
 
 - `lifetime: "session"` (default) destroys the VM once your script finishes.
 - Provide durations such as `"5m"` to keep the sandbox alive even after the
