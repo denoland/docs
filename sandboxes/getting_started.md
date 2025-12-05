@@ -108,7 +108,8 @@ await sandbox.sh`ls -lh /`;
 Or upload a script and run it:
 
 ```ts
-await sandbox.writeTextFile("hello.ts", "console.log('Hello from a sandbox')");
+// Upload a single file to a specific path in the sandbox
+await sandbox.upload("./local-hello.ts", "./hello.ts");
 const proc = await sandbox.spawn("deno", {
   args: ["run", "hello.ts"],
   stdout: "piped",
