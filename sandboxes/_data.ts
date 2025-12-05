@@ -57,7 +57,7 @@ export const sidebar = [
       },
       {
         title: "CLI subcommand",
-        href: "/runtime/cli/deploy/#sandbox-management",
+        href: "/runtime/reference/cli/deploy/#sandbox-management",
       },
       {
         title: "Examples",
