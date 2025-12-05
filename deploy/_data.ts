@@ -154,12 +154,12 @@ export const SidebarNav = [
     href: "/deploy/",
   },
   {
-    title: "Deploy Classic",
-    href: "/deploy/classic/",
-  },
-  {
     title: "Sandboxes",
     href: "/sandboxes/",
+  },
+  {
+    title: "Deploy Classic",
+    href: "/deploy/classic/",
   },
   {
     title: "Subhosting",
