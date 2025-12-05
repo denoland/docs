@@ -46,6 +46,10 @@ sandbox to a Deno Deploy app using [`sandbox.deploy()`](./promote.md).
   attached volumes, but this also happens automatically when your code drops the
   last reference to the sandbox or the configured duration elapses.
 
+## Extending the lifetime of a sandbox
+
+Coming soon.
+
 ## Related APIs
 
 - [`Sandbox.create()`](./create.md) – pass the `lifetime` option when
