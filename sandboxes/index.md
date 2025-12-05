@@ -38,7 +38,9 @@ Once the sandbox exists, you get a full Linux environment with files, processes,
 package managers, and background services:
 
 ```tsx
-await sb.sh`ls -lh /`;
+import { Sandbox } from "@deno/sandbox";
+await using sandbox = await Sandbox.create();
+await sandbox.sh`ls -lh /`;
 ```
 
 ## Security Policies
