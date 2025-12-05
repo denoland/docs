@@ -68,7 +68,7 @@ authenticate with the Deploy API, so we'll pass in the `--allow-net` and
 `--allow-env` flags to the `deno run` command (or use the shorthand `-EN`).
 
 ```bash
-deno run -EN main.ts
+deno -EN main.ts
 ```
 
 ## Configuring your sandbox
