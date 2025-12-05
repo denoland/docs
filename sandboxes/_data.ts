@@ -31,12 +31,12 @@ export const sidebar = [
         href: "/sandboxes/reference/expose_ssh/",
       },
       {
-        title: "Lifetimes",
-        href: "/sandboxes/reference/lifetimes/",
-      },
-      {
         title: "Manage Deploy apps",
         href: "/sandboxes/reference/manage_apps/",
+      },
+      {
+        title: "Lifetimes",
+        href: "/sandboxes/reference/lifetimes/",
       },
     ],
   },
