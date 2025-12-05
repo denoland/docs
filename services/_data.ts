@@ -12,11 +12,11 @@ export const SidebarNav = [
     href: "/deploy/classic/",
   },
   {
-    title: "Subhosting",
-    href: "/subhosting/manual/",
-  },
-  {
     title: "Sandboxes",
     href: "/sandboxes/",
+  },
+  {
+    title: "Subhosting",
+    href: "/subhosting/manual/",
   },
 ] satisfies SidebarNav;
