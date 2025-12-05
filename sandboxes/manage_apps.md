@@ -85,6 +85,31 @@ await client.apps.delete("bec265c1-ed8e-4a7e-ad24-e2465b93be88");
 Deleting accepts either identifier. Once removed, associated builds and routes
 are cleaned up automatically.
 
+## Publish to a Deploy app from a sandbox
+
+The `sandbox.deploy()` method can be used to publish resources from a sandbox to
+an existing Deno Deploy app. This allows you to use a sandbox as a deployment
+pipeline for an application hosted on Deno Deploy.
+
+```tsx
+await using sandbox = await Sandbox.create();
+
+// ... build your application ...
+
+const app = await sandbox.deploy({
+  name: "my-app",
+  options: {
+    path: "build-output", // optional: path to the directory containing the application to deploy
+    production: true, // optional: deploy to production
+    build: {
+      entrypoint: "server.ts", // optional: entrypoint to deploy
+    },
+  },
+});
+
+console.log(`${app.slug} deployed.`);
+```
+
 ## Tips
 
 - Maintain a dedicated automation token with least privilege for management
