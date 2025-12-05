@@ -49,7 +49,7 @@ export const sidebar = [
       },
       {
         title: "CLI subcommand",
-        href: "/runtime/reference/cli/deploy/#sandbox",
+        href: "/runtime/reference/cli/deploy/#sandbox-management",
       },
       {
         title: "Examples",
