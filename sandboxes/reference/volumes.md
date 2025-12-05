@@ -6,7 +6,7 @@ description: "Mount block storage into sandboxes to keep state between sessions"
 Persistent volumes let you attach regional block storage to a sandbox so data
 survives process restarts and new connections. They are ideal for package
 caches, build artifacts, SQLite databases, or any workflow that needs a small
-amount of durable storage without promoting code to a full Deploy app.
+amount of durable storage without promoting code to a full Deno Deploy app.
 
 ## Provision storage with `Client.volumes`
 
@@ -160,8 +160,3 @@ curl "https://console.deno.com/api/v2/volumes?limit=50&search=cache" \
   between concurrent sandboxes to avoid application-level races.
 - Snapshot important data elsewhere—volumes are redundant but not a substitute
   for backups.
-
----
-title: "Persistent Volumes"
-description: "Mount block storage into sandboxes to keep state between sessions"
----
