@@ -151,6 +151,45 @@ deno deploy logs
 deno deploy logs --org my-org --app my-app --start "2024-01-01T00:00:00Z"
 ```
 
+### Sandbox management
+
+Interact with running sandboxes directly from the Deploy CLI.
+
+```bash
+deno deploy sandbox --help
+```
+
+**Options:**
+
+- `-h, --help` - Show help information
+- `--token <token>` - Override the auth token used for sandbox operations
+- `--config <path>` - Custom path to a Deploy CLI config file
+- `--org <name>` - Organization that owns the sandboxes
+
+#### List sandboxes
+
+```bash
+deno deploy sandbox list --org my-org
+```
+
+Lists every sandbox in the organization along with status details.
+
+#### Kill a sandbox
+
+```bash
+deno deploy sandbox kill <sandbox-id> --org my-org
+```
+
+Immediately terminates the specified sandbox when you no longer need it.
+
+#### SSH into a sandbox
+
+```bash
+deno deploy sandbox ssh <sandbox-id> --org my-org
+```
+
+Starts an SSH session against a running sandbox for interactive debugging.
+
 ### Configure cloud connections
 
 The `deploy` command includes tools to help you configure integrations for use
