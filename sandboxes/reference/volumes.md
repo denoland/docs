@@ -1,86 +1,167 @@
 ---
 title: "Persistent Volumes"
-description: "Mount shared block storage into sandboxes to keep state between sessions or collaborate across microVMs."
+description: "Mount block storage into sandboxes to keep state between sessions"
 ---
 
-Volumes act like detachable drives that can be mounted into one or more
-sandboxes. Use them to persist build artifacts, cache packages, or pass files
-between agent runs without uploading from scratch.
+Persistent volumes let you attach regional block storage to a sandbox so data
+survives process restarts and new connections. They are ideal for package
+caches, build artifacts, SQLite databases, or any workflow that needs a small
+amount of durable storage without promoting code to a full Deploy app.
 
-## Create and attach a volume
+## Provision storage with `Client.volumes`
+
+Use the same `Client` class that manages Deploy apps. The SDK targets the
+`/api/v2/volumes` endpoints, so all calls authenticate with `DENO_DEPLOY_TOKEN`.
 
 ```tsx
-import { Sandbox } from "@deno/sandbox";
+import { Client } from "@deno/sandbox";
 
-const volume = await Sandbox.createVolume({
-  name: "agent-cache",
-  sizeGb: 5,
+const client = new Client();
+
+const volume = await client.volumes.create({
+  slug: "training-cache",
+  region: "ord", // ord (Chicago) or ams (Amsterdam)
+  capacity: "2GB", // accepts bytes or "1GB"/"512MB" style strings
 });
 
-await using sandbox = await Sandbox.create({
-  volumes: [
-    {
-      id: volume.id,
-      mountPath: "/mnt/cache",
-      accessMode: "rw",
+console.log(volume);
+// {
+//   id: "8a0f...",
+//   slug: "training-cache",
+//   region: "ord",
+//   capacity: 2147483648,
+//   used: 0
+// }
+```
+
+| Field      | Required | Details                                                                                                                    |
+| ---------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `slug`     | ✅       | Unique per organization. Slugs become part of the mount metadata, so pick something descriptive.                           |
+| `region`   | ✅       | Must match an available sandbox region (`"ord"` or `"ams"` today). Only sandboxes in the same region can mount the volume. |
+| `capacity` | ✅       | Between 300 MB and 20 GB. Pass a number of bytes or a string with `GB/MB/KB` (decimal) or `GiB/MiB/KiB` (binary) units.    |
+
+## Inspect and search volumes
+
+`client.volumes.list()` returns paginated results plus a helper iterator, while
+`client.volumes.get()` fetches a single record by slug or UUID.
+
+```tsx
+const page = await client.volumes.list({ search: "training" });
+for (const info of page.items) {
+  console.log(
+    info.slug,
+    formatBytes(info.used),
+    "of",
+    formatBytes(info.capacity),
+  );
+}
+
+const latest = await client.volumes.get("training-cache");
+```
+
+The `used` field reports the most recent estimate the control plane received
+from the underlying cluster. It can lag a few seconds behind reality, so always
+size volumes with headroom.
+
+## Mount volumes inside a sandbox
+
+Pass a `volumes` map when calling `Sandbox.create()`. Keys are mount paths and
+values are either the volume slug or ID. The sandbox and volume **must live in
+the same region**—the SDK simply forwards volume IDs to that region’s sandbox
+API endpoint.
+
+```tsx
+import { Client, Sandbox } from "@deno/sandbox";
+
+const client = new Client();
+const volume = await client.volumes.create({
+  slug: "dataset",
+  region: "ord",
+  capacity: "1GB",
+});
+
+// First run writes a file to the volume
+{
+  await using sandbox = await Sandbox.create({
+    region: "ord",
+    volumes: {
+      "/data/dataset": volume.slug,
     },
-  ],
-});
+    labels: { job: "prepare" },
+  });
 
-await sandbox.sh`ls /mnt/cache`;
+  await sandbox.writeTextFile("/data/dataset/hello.txt", "Persist me!\n");
+}
+
+// A new sandbox—possibly started hours later—can read the same file
+{
+  await using sandbox = await Sandbox.create({
+    region: "ord",
+    volumes: {
+      "/data/dataset": volume.id, // IDs work too
+    },
+  });
+
+  const contents = await sandbox.readTextFile("/data/dataset/hello.txt");
+  console.log(contents); // "Persist me!"
+}
 ```
 
-### Options
+Mounts behave like regular directories. You can create subfolders, write binary
+files, or execute programs directly from the volume. Keep paths consistent so
+automation can find them reliably.
 
-| Field        | Description                                                          |
-| ------------ | -------------------------------------------------------------------- |
-| `name`       | Friendly identifier for the volume.                                  |
-| `sizeGb`     | Allocated storage in gigabytes. Useful for large models or caches.   |
-| `mountPath`  | Absolute path inside the sandbox where the volume becomes available. |
-| `accessMode` | `"rw"` for read/write or `"ro"` for read-only sharing.               |
-
-## Share between sandboxes
-
-Volumes are independent resources. Mount the same volume into multiple sandboxes
-to coordinate work:
+## Delete volumes safely
 
 ```tsx
-const shared = await Sandbox.createVolume({
-  name: "team-workspace",
-  sizeGb: 2,
-});
-
-await using sb1 = await Sandbox.create({
-  volumes: [{ id: shared.id, mountPath: "/workspace" }],
-});
-await using sb2 = await Sandbox.create({
-  volumes: [{ id: shared.id, mountPath: "/workspace", accessMode: "ro" }],
-});
-
-await sb1.sh`echo "artifact" > /workspace/build.txt`;
-await sb2.sh`cat /workspace/build.txt`;
+await client.volumes.delete("training-cache");
 ```
 
-This pattern makes it easy for agents to hand off work, or for a CI sandbox to
-produce files that a second sandbox inspects.
+Deletion is a two-step process:
 
-## Lifecycle and cleanup
+1. The API marks the volume as deleted immediately, which detaches it from new
+   sandbox requests and frees the slug for future reuse.
+2. A background job waits 24 hours before removing the underlying block storage
+   from the cluster. This grace period allows you to contact support if a volume
+   was removed accidentally.
 
-- Volumes remain until you explicitly delete them via
-  `await Sandbox.deleteVolume(id)`.
-- Detach volumes from a sandbox by omitting them in the `volumes` array or
-  calling `sandbox.detachVolume(id)` (coming soon).
-- Keep mounts organized by using consistent `mountPath` conventions, such as
-  `/mnt/data` or `/workspace/<team>`.
+During the grace period you cannot mount or read the volume.
 
-## Best practices
+## REST examples
 
-- Use read-only mounts when a sandbox should consume but not modify shared
-  assets.
-- Pair volumes with `allowNet` rules to ensure data written to disk cannot be
-  exfiltrated to untrusted hosts.
-- Monitor volume usage in the Sandboxes dashboard; stale volumes can be removed
-  to reclaim capacity.
+All SDK calls map to documented REST endpoints. You can interact with them
+directly from CI scripts or tools that cannot install the SDK.
 
-Volumes bring statefulness to an otherwise ephemeral environment, letting you
-mix fast-booting compute with durable storage when the workflow demands it.
+```bash
+curl -X POST https://console.deno.com/api/v2/volumes \
+  -H "Authorization: Bearer $DENO_DEPLOY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "slug": "ml-cache",
+    "region": "ams",
+    "capacity": "4GB"
+  }'
+```
+
+List and search volumes:
+
+```bash
+curl "https://console.deno.com/api/v2/volumes?limit=50&search=cache" \
+  -H "Authorization: Bearer $DENO_DEPLOY_TOKEN"
+```
+
+## Operational tips
+
+- Keep separate volumes for unrelated data so you can delete them independently.
+- Always create sandboxes in the same region as the volume to avoid connection
+  errors during boot.
+- Treat `used` as informational. Alert on capacity before it approaches 100 %.
+- Mount volumes read-only by convention (never writing) when sharing data
+  between concurrent sandboxes to avoid application-level races.
+- Snapshot important data elsewhere—volumes are redundant but not a substitute
+  for backups.
+
+---
+title: "Persistent Volumes"
+description: "Mount block storage into sandboxes to keep state between sessions"
+---
