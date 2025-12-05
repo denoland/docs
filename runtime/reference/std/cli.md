@@ -3,7 +3,7 @@ title: "@std/cli"
 description: "Tools for creating interactive command line tools"
 jsr: jsr:@std/cli
 pkg: cli
-version: 1.0.23
+version: 1.0.24
 generated: true
 stability: stable
 ---

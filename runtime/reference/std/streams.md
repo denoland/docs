@@ -3,7 +3,7 @@ title: "@std/streams"
 description: "Utilities for working with the Web Streams API"
 jsr: jsr:@std/streams
 pkg: streams
-version: 1.0.13
+version: 1.0.14
 generated: true
 stability: stable
 ---

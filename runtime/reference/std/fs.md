@@ -3,7 +3,7 @@ title: "@std/fs"
 description: "Helpers for working with the file system"
 jsr: jsr:@std/fs
 pkg: fs
-version: 1.0.19
+version: 1.0.20
 generated: true
 stability: stable
 ---

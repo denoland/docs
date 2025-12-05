@@ -3,7 +3,7 @@ title: "@std/semver"
 description: "Parsing and comparing of semantic versions (SemVer)"
 jsr: jsr:@std/semver
 pkg: semver
-version: 1.0.6
+version: 1.0.7
 generated: true
 stability: stable
 ---
@@ -68,10 +68,10 @@ primary    │   │
 
 <h2 id="ranges">
 Ranges</h2>
-<p>A version <a href="https://jsr.io/@std/semver@1.0.6/doc/~/Range" rel="nofollow"><code>Range</code></a> is a set of <a href="https://jsr.io/@std/semver@1.0.6/doc/~/Comparator" rel="nofollow"><code>Comparator</code></a>s which specify
+<p>A version <a href="https://jsr.io/@std/semver@1.0.7/doc/~/Range" rel="nofollow"><code>Range</code></a> is a set of <a href="https://jsr.io/@std/semver@1.0.7/doc/~/Comparator" rel="nofollow"><code>Comparator</code></a>s which specify
 versions that satisfy the range.</p>
-<p>A <a href="https://jsr.io/@std/semver@1.0.6/doc/~/Comparator" rel="nofollow"><code>Comparator</code></a> is composed of an <a href="https://jsr.io/@std/semver@1.0.6/doc/~/Operator" rel="nofollow"><code>Operator</code></a> and a
-<a href="https://jsr.io/@std/semver@1.0.6/doc/~/SemVer" rel="nofollow">SemVer</a>. The set of primitive <code>operators</code> is:</p>
+<p>A <a href="https://jsr.io/@std/semver@1.0.7/doc/~/Comparator" rel="nofollow"><code>Comparator</code></a> is composed of an <a href="https://jsr.io/@std/semver@1.0.7/doc/~/Operator" rel="nofollow"><code>Operator</code></a> and a
+<a href="https://jsr.io/@std/semver@1.0.7/doc/~/SemVer" rel="nofollow">SemVer</a>. The set of primitive <code>operators</code> is:</p>
 <ul>
 <li><code>&lt;</code> Less than</li>
 <li><code>&lt;=</code> Less than or equal to</li>
@@ -113,7 +113,7 @@ aware of the risk. However, it is still not appropriate to assume that they have
 opted into taking a similar risk on the <em>next</em> set of prerelease versions.</p>
 <h4 id="prerelease-identifiers">
 Prerelease Identifiers</h4>
-<p>The method <a href="https://jsr.io/@std/semver@1.0.6/doc/~/increment" rel="nofollow"><code>increment</code></a> takes an additional <code>identifier</code> string
+<p>The method <a href="https://jsr.io/@std/semver@1.0.7/doc/~/increment" rel="nofollow"><code>increment</code></a> takes an additional <code>identifier</code> string
 argument that will append the value of the string as a prerelease identifier:</p>
 
 ```js
@@ -257,7 +257,7 @@ version <code>1.2.10</code> would not be greater than the range (because <code>2
 which is higher), nor less than the range (since <code>1.2.8</code> satisfies, which is
 lower), and it also does not satisfy the range.</p>
 <p>If you want to know if a version satisfies or does not satisfy a range, use the
-<a href="https://jsr.io/@std/semver@1.0.6/doc/~/satisfies" rel="nofollow"><code>satisfies</code></a> function.</p>
+<a href="https://jsr.io/@std/semver@1.0.7/doc/~/satisfies" rel="nofollow"><code>satisfies</code></a> function.</p>
 
 ### Add to your project
 

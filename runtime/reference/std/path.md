@@ -3,7 +3,7 @@ title: "@std/path"
 description: "Utilities for working with file system paths"
 jsr: jsr:@std/path
 pkg: path
-version: 1.1.2
+version: 1.1.3
 generated: true
 stability: stable
 ---

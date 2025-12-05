@@ -62,6 +62,7 @@ include usage examples.
 - [@std/json](./json/) – (Streaming) parsing and serializing of JSON files
 - [@std/jsonc](./jsonc/) – Parsing and serializing of JSONC files
 - [@std/log](./log/) – UNSTABLE: A customizable logger framework
+- [@std/math](./math/) – Basic math utilities
 - [@std/media-types](./media-types/) – Utility functions for media types (MIME
   types)
 - [@std/msgpack](./msgpack/) – Encoding and decoding for the msgpack format
