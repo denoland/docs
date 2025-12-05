@@ -11,11 +11,11 @@ export const sidebar = [
       },
       {
         title: "Create a sandbox",
-        href: "/sandboxes/reference/create/",
+        href: "/sandboxes/create/",
       },
       {
         title: "Promoting sandboxes",
-        href: "/sandboxes/reference/promote/",
+        href: "/sandboxes/promote/",
       },
     ],
   },
@@ -24,19 +24,23 @@ export const sidebar = [
     items: [
       {
         title: "Expose HTTP",
-        href: "/sandboxes/reference/expose_http/",
+        href: "/sandboxes/expose_http/",
       },
       {
         title: "Expose SSH",
-        href: "/sandboxes/reference/expose_ssh/",
+        href: "/sandboxes/expose_ssh/",
       },
       {
         title: "Manage Deploy apps",
-        href: "/sandboxes/reference/manage_apps/",
+        href: "/sandboxes/manage_apps/",
+      },
+      {
+        title: "Volumes",
+        href: "/sandboxes/volumes/",
       },
       {
         title: "Lifetimes",
-        href: "/sandboxes/reference/lifetimes/",
+        href: "/sandboxes/lifetimes/",
       },
     ],
   },
@@ -49,7 +53,7 @@ export const sidebar = [
       },
       {
         title: "CLI subcommand",
-        href: "/runtime/reference/cli/deploy/#sandbox-management",
+        href: "/runtime/cli/deploy/#sandbox-management",
       },
       {
         title: "Examples",
