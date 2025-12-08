@@ -3,24 +3,23 @@ title: "About Sandboxes"
 description: "Overview of the Sandboxes microVM platform on Deploy, including capabilities, security model, and ideal use cases."
 ---
 
-Sandboxes bring real Linux microVMs directly to the Deno Deploy global edge.
-Each sandbox boots in under a second, is API driven from the `@deno/sandbox`
-SDK, and is torn down as soon as you are done. The result is on-demand compute
-that feels like opening a terminal, yet ships with production-grade isolation
-and observability.
+Sandboxes bring instant Linux microVMs to Deno Deploy. Each sandbox boots in
+under a second, is API driven from the `@deno/sandbox` SDK, and is torn down as
+soon as you are done. The result is on-demand compute that feels like opening a
+terminal, yet ships with production-grade isolation and observability.
 
 ## What are Sandboxes?
 
-- Real Linux microVMs orchestrated by Deno Deploy
-- Boot times measured in milliseconds, so sandboxes feel instant
-- Ephemeral by default, removing the need to patch, drain, or recycle hosts
+- Linux microVMs orchestrated by Deno Deploy
+- Designed for running untrusted code
+- Instantly available; boot times measured in milliseconds
+- Ephemeral by default
 - Fully API driven: create, run commands, and tear down from code
-- Available in Deploy regions worldwide for low-latency edge execution
 
 ## Ideal use cases
 
 Sandboxes specialize in workloads where code needs to be generated, evaluated,
-or safely executed on behalf of a user or another service. They are ideal for:
+or safely executed on behalf of an untrusted user. They are ideal for:
 
 - AI agents and copilots that need to run code as they reason
 - Secure plugin or extension systems
@@ -43,9 +42,19 @@ await using sandbox = await Sandbox.create();
 await sandbox.sh`ls -lh /`;
 ```
 
-## Security Policies
+## Security Policies (**Coming soon**)
 
-Coming soon: Environment variables marked as Secrets never enter the sandbox.
+Povision a Sandbox so that it can only talk to approved hosts:
+
+```tsx
+await Sandbox.create({
+  allowNet: ["google.com"],
+});
+```
+
+Environment variables marked as Secrets never enter the sandbox. Below,
+`OPENAI_API_KEY` is never visibile to code inside the sandbox and only can ever
+be sent to `api.openai.com`.
 
 ```tsx
 await Sandbox.create({
@@ -55,18 +64,6 @@ await Sandbox.create({
       process.env.OPENAI_API_KEY,
     ),
   },
-});
-```
-
-This means, `OPENAI_API_KEY` is never visibile to code inside the sandbox and
-only can ever be sent to `api.openai.com`.
-
-Additionally you can provision a Sandbox so that it can only talk to approved
-hosts:
-
-```tsx
-await Sandbox.create({
-  allowNet: ["google.com"],
 });
 ```
 
