@@ -176,6 +176,30 @@ organization for use with other applications.
 This removes the custom domain from your organization and deletes all domain
 assignments across all applications.
 
+## Redirecting between apex and www domains
+
+If you want your site to be available on both `www.example.com` and
+`example.com`, we recommend serving your primary site on one of the domains and
+setting up a simple redirect on the other. A common pattern is to host your site
+on `www.example.com` and redirect all traffic from `example.com` to the `www`
+domain.
+
+To do this:
+
+1. Map `www.example.com` to your primary application.
+2. Create a second application and map `example.com` (the apex domain) to it.
+3. Deploy the following minimal program to the apex application to perform a
+   permanent redirect (HTTP 301) to the `www` domain:
+
+```ts
+Deno.serve(() => Response.redirect("https://www.example.com/", 301));
+```
+
+This ensures visitors to `example.com` are permanently redirected to
+`https://www.example.com/`. If you prefer the opposite (redirect `www` to the
+apex), deploy the redirect app on `www.example.com` and point it to
+`https://example.com/`.
+
 ## Migrating a custom domain from Deploy Classic to Deno Deploy
 
 If you have previously set up a custom domain on Deploy Classic and want to
