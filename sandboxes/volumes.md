@@ -8,6 +8,13 @@ survives process restarts and new connections. They are ideal for package
 caches, build artifacts, SQLite databases, or any workflow that needs a small
 amount of durable storage without promoting code to a full Deno Deploy app.
 
+:::note
+
+Persistent volumes are currently in private beta. Contact
+[support](mailto:support@deno.com) to request access to this feature
+
+:::
+
 ## Provision storage with `Client.volumes`
 
 Use the same `Client` class that manages Deploy apps.
@@ -123,7 +130,6 @@ Deletion is a two-step process:
    was removed accidentally.
 
 During the grace period you cannot mount or read the volume.
-
 
 ## Operational tips
 
