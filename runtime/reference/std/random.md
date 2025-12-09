@@ -3,7 +3,7 @@ title: "@std/random"
 description: "Various utilities using random number generators. The package also provides seeded pseudo-random number generator."
 jsr: jsr:@std/random
 pkg: random
-version: 0.1.3
+version: 0.1.4
 generated: true
 stability: unstable
 ---
@@ -20,6 +20,7 @@ bump.
 ## Overview
 
 <p>Utilities for generating random numbers.</p>
+<p>Example of generating a random integer with fixed seed number:</p>
 
 ```js
 import { randomIntegerBetween } from "@std/random";
@@ -29,6 +30,17 @@ import { assertEquals } from "@std/assert";
 const prng = randomSeeded(1n);
 
 assertEquals(randomIntegerBetween(1, 10, { prng }), 3);
+```
+
+<p>Example of generating a random integer between two values:</p>
+
+```js
+import { randomIntegerBetween } from "@std/random";
+import { randomSeeded } from "@std/random";
+
+const prng = randomSeeded(BigInt(crypto.getRandomValues(new Uint32Array(1))[0]!));
+
+const randomInteger = randomIntegerBetween(1, 10, { prng });
 ```
 
 ### Add to your project
