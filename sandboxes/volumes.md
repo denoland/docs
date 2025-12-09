@@ -124,28 +124,6 @@ Deletion is a two-step process:
 
 During the grace period you cannot mount or read the volume.
 
-## REST examples
-
-All SDK calls map to documented REST endpoints. You can interact with them
-directly from CI scripts or tools that cannot install the SDK.
-
-```bash
-curl -X POST https://console.deno.com/api/v2/volumes \
-  -H "Authorization: Bearer $DENO_DEPLOY_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "slug": "ml-cache",
-    "region": "ams",
-    "capacity": "4GB"
-  }'
-```
-
-List and search volumes:
-
-```bash
-curl "https://console.deno.com/api/v2/volumes?limit=50&search=cache" \
-  -H "Authorization: Bearer $DENO_DEPLOY_TOKEN"
-```
 
 ## Operational tips
 
