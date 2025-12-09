@@ -13,7 +13,8 @@ terminal, yet ships with production-grade isolation and observability.
 - Linux microVMs orchestrated by Deno Deploy
 - Designed for running untrusted code
 - Instantly available; boot times measured in milliseconds
-- Ephemeral by default
+- Ephemeral by default but able to persist beyond the current connection
+  lifetime
 - Able to access durable storage via [volumes](./volumes/)
 - Fully API driven: create, run commands, and tear down from code
 
