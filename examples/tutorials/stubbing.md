@@ -32,21 +32,23 @@ Here's a simple example demonstrating how to stub a function:
 import { assertEquals } from "jsr:@std/assert";
 import { stub } from "jsr:@std/testing/mock";
 
-// Original function
-function getUserName(id: number): string {
-  // In a real app, this might call a database
-  return "Original User";
-}
+// Wrap dependencies so they can be stubbed safely from tests.
+const deps = {
+  getUserName(id: number): string {
+    // In a real app, this might call a database
+    return "Original User";
+  },
+};
 
 // Function under test
 function greetUser(id: number): string {
-  const name = getUserName(id);
+  const name = deps.getUserName(id);
   return `Hello, ${name}!`;
 }
 
 Deno.test("greetUser with stubbed getUserName", () => {
   // Create a stub that returns a controlled value
-  const getUserNameStub = stub(globalThis, "getUserName", () => "Test User");
+  const getUserNameStub = stub(deps, "getUserName", () => "Test User");
 
   try {
     // Test with the stubbed function
