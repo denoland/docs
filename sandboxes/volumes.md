@@ -130,14 +130,3 @@ Deletion is a two-step process:
    was removed accidentally.
 
 During the grace period you cannot mount or read the volume.
-
-## Operational tips
-
-- Keep separate volumes for unrelated data so you can delete them independently.
-- Always create sandboxes in the same region as the volume to avoid connection
-  errors during boot.
-- Treat `used` as informational. Alert on capacity before it approaches 100 %.
-- Mount volumes read-only by convention (never writing) when sharing data
-  between concurrent sandboxes to avoid application-level races.
-- Snapshot important data elsewhere—volumes are redundant but not a substitute
-  for backups.
