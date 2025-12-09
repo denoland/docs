@@ -60,7 +60,7 @@ const latest = await client.volumes.get("training-cache");
 ```
 
 The `used` field reports the most recent estimate the control plane received
-from the underlying cluster. It can lag a few seconds behind reality, so always
+from the underlying cluster. It can lag a few minutes behind reality, so always
 size volumes with headroom.
 
 ## Mount volumes inside a sandbox
