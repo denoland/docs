@@ -66,8 +66,7 @@ size volumes with headroom.
 
 Pass a `volumes` map when calling `Sandbox.create()`. Keys are mount paths and
 values are either the volume slug or ID. The sandbox and volume **must live in
-the same region**—the SDK simply forwards volume IDs to that region’s sandbox
-API endpoint.
+the same region**.
 
 ```tsx
 import { Client, Sandbox } from "@deno/sandbox";
