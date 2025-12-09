@@ -8,7 +8,7 @@ layout: sandbox-example.tsx
 You can cancel commands in a sandbox using the `KillController` class.
 
 ```ts
-mport { KillController, Sandbox } from "@deno/sandbox";
+import { KillController, Sandbox } from "@deno/sandbox";
 
 await using sandbox = await Sandbox.create();
 
