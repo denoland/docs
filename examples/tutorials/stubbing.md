@@ -34,15 +34,15 @@ import { stub } from "jsr:@std/testing/mock";
 
 // Wrap dependencies so they can be stubbed safely from tests.
 const deps = {
-  getUserName(id: number): string {
+  getUserName(_id: number): string {
     // In a real app, this might call a database
     return "Original User";
   },
 };
 
 // Function under test
-function greetUser(_id: number): string {
-  const name = deps.getUserName(_id);
+function greetUser(id: number): string {
+  const name = deps.getUserName(id);
   return `Hello, ${name}!`;
 }
 
@@ -138,21 +138,26 @@ import { returnsNext, stub } from "jsr:@std/testing/mock";
 import { assertEquals } from "jsr:@std/assert";
 
 Deno.test("stub with multiple return values", () => {
+  const dataService = {
+    fetchData: () => "original data",
+  };
+
   const fetchDataStub = stub(
-    globalThis,
+    dataService,
     "fetchData",
     // Return these values in sequence
     returnsNext(["first result", "second result", "third result"]),
   );
 
   try {
-    assertEquals(fetchData(), "first result");
-    assertEquals(fetchData(), "second result");
-    assertEquals(fetchData(), "third result");
+    assertEquals(dataService.fetchData(), "first result");
+    assertEquals(dataService.fetchData(), "second result");
+    assertEquals(dataService.fetchData(), "third result");
   } finally {
     fetchDataStub.restore();
   }
 });
+
 ```
 
 ### Stubbing with implementation logic
@@ -167,8 +172,12 @@ Deno.test("stub with custom implementation", () => {
   // Create a counter to track how many times the stub is called
   let callCount = 0;
 
+  const mathService = {
+    calculate: (a: number, b: number) => a + b,
+  };
+
   const calculateStub = stub(
-    globalThis,
+    mathService,
     "calculate",
     (a: number, b: number) => {
       callCount++;
@@ -177,7 +186,7 @@ Deno.test("stub with custom implementation", () => {
   );
 
   try {
-    const result = calculate(5, 10);
+    const result = mathService.calculate(5, 10);
     assertEquals(result, 25); // 5 + (10 * 2)
     assertEquals(callCount, 1);
   } finally {
@@ -194,8 +203,12 @@ One of the most common uses of stubs is to replace API calls during testing:
 import { assertEquals } from "jsr:@std/assert";
 import { stub } from "jsr:@std/testing/mock";
 
+const apiClient = {
+  fetch: globalThis.fetch,
+};
+
 async function fetchUserData(id: string) {
-  const response = await fetch(`https://api.example.com/users/${id}`);
+  const response = await apiClient.fetch(`https://api.example.com/users/${id}`);
   if (!response.ok) {
     throw new Error(`Failed to fetch user: ${response.status}`);
   }
@@ -208,9 +221,9 @@ Deno.test("fetchUserData with stubbed fetch", async () => {
     { status: 200, headers: { "Content-Type": "application/json" } },
   );
 
-  // Replace global fetch with a stubbed version
+  // Replace apiClient.fetch with a stubbed version
   const fetchStub = stub(
-    globalThis,
+    apiClient,
     "fetch",
     () => Promise.resolve(mockResponse),
   );
