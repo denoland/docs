@@ -34,6 +34,8 @@ Because sandboxes are ephemeral, you do not need to manage DNS or certificates.
 Each call to `exposeHttp()` returns a unique hostname under `*.sandbox.deno.net`
 with TLS automatically configured.
 
+All requests to a sandbox's URL will send HTTP traffic to the sandbox.
+
 ## Step-by-step
 
 1. **Start a server inside the sandbox.** Listen on any unprivileged port (e.g.,
