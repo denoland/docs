@@ -157,7 +157,6 @@ Deno.test("stub with multiple return values", () => {
     fetchDataStub.restore();
   }
 });
-
 ```
 
 ### Stubbing with implementation logic
