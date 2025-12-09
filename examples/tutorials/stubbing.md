@@ -41,8 +41,8 @@ const deps = {
 };
 
 // Function under test
-function greetUser(id: number): string {
-  const name = deps.getUserName(id);
+function greetUser(_id: number): string {
+  const name = deps.getUserName(_id);
   return `Hello, ${name}!`;
 }
 
