@@ -10,8 +10,7 @@ amount of durable storage without promoting code to a full Deno Deploy app.
 
 ## Provision storage with `Client.volumes`
 
-Use the same `Client` class that manages Deploy apps. The SDK targets the
-`/api/v2/volumes` endpoints, so all calls authenticate with `DENO_DEPLOY_TOKEN`.
+Use the same `Client` class that manages Deploy apps.
 
 ```tsx
 import { Client } from "@deno/sandbox";
