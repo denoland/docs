@@ -106,8 +106,7 @@ const volume = await client.volumes.create({
 ```
 
 Mounts behave like regular directories. You can create subfolders, write binary
-files, or execute programs directly from the volume. Keep paths consistent so
-automation can find them reliably.
+files, or execute programs directly from the volume.
 
 ## Delete volumes safely
 
