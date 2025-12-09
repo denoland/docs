@@ -90,7 +90,7 @@ following options:
 - `region`: Deploy region where the sandbox will be created.
 - `memoryMb`: Amount of memory allocated to the sandbox.
 - `lifetime`: Lifetime of the sandbox.
-- `id`: ID of the sandbox.
+- `labels`: Arbitrary key/value tags to help identify and manage sandboxes
 
 ```tsx
 await using sandbox = await Sandbox.create({
