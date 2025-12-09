@@ -14,6 +14,7 @@ terminal, yet ships with production-grade isolation and observability.
 - Designed for running untrusted code
 - Instantly available; boot times measured in milliseconds
 - Ephemeral by default
+- Able to access durable storage via [volumes](./volumes/)
 - Fully API driven: create, run commands, and tear down from code
 
 ## Ideal use cases
