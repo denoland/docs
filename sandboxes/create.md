@@ -20,14 +20,13 @@ process. You can tailor the sandbox by passing an options object.
 
 ## Available options
 
-| Option     | Type                     | Description                                                                                                             |
-| ---------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| `region`   | `"sjc"                   | "ams"                                                                                                                   |
-| `memoryMb` | `number`                 | Allocate between 768 and 4096 MB of RAM for memory-heavy tasks or tighter budgets.                                      |
-| `lifetime` | `"session"               | "5m"                                                                                                                    |
-| `id`       | `string`                 | Reconnect to an existing sandbox instead of creating a new one (used with `Sandbox.connect`).                           |
-| `metadata` | `Record<string, string>` | Attach arbitrary key/value tags to help identify sandboxes in logs or telemetry.                                        |
-| `env`      | `Record<string, string>` | Set initial environment variables inside the sandbox. Secrets should still be managed via Deploy’s secret substitution. |
+| Option     | Description                                                                                                             |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `region`   | Eg `ams` or `ord`                                                                                                       |
+| `memoryMb` | Allocate between 768 and 4096 MB of RAM for memory-heavy tasks or tighter budgets.                                      |
+| `lifetime` | How long the sandbox stays alive in (m) or (s) such as `5m`                                                             |
+| `metadata` | Attach arbitrary key/value tags to help identify sandboxes in logs or telemetry.                                        |
+| `env`      | Set initial environment variables inside the sandbox. Secrets should still be managed via Deploy’s secret substitution. |
 
 ## Example configurations
 
