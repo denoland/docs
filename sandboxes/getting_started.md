@@ -110,10 +110,10 @@ You can for example list files in the root directory:
 await sandbox.sh`ls -lh /`;
 ```
 
-Or upload a script and run it:
+Or upload a script from the local filesystem and run it:
 
 ```ts
-// Upload a single file to a specific path in the sandbox
+// Upload a file to a specific path in the sandbox
 await sandbox.upload("./local-hello.ts", "./hello.ts");
 const proc = await sandbox.spawn("deno", {
   args: ["run", "hello.ts"],
