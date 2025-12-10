@@ -101,6 +101,14 @@ export const sidebar = [
             href: "/runtime/reference/cli/add/",
           },
           {
+            title: "deno approve-scripts",
+            href: "/runtime/reference/cli/approve-scripts/",
+          },
+          {
+            title: "deno audit",
+            href: "/runtime/reference/cli/audit/",
+          },
+          {
             title: "deno bench",
             href: "/runtime/reference/cli/bench/",
           },
@@ -219,6 +227,10 @@ export const sidebar = [
           {
             title: "deno unstable flags",
             href: "/runtime/reference/cli/unstable_flags/",
+          },
+          {
+            title: "deno x",
+            href: "/runtime/reference/cli/x/",
           },
         ],
       },
