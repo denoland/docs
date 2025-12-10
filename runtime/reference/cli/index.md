@@ -21,7 +21,7 @@ below for more information on each subcommand.
 ## Dependency management
 
 - [deno add](/runtime/reference/cli/add) - add dependencies
-- [deno approve-scripts](/runtime/reference/cli/approve-scripts) - manage
+- [deno approve-scripts](/runtime/reference/cli/approve_scripts) - manage
   lifecycle scripts of npm packages
 - [deno audit](/runtime/reference/cli/audit) - audit dependencies
 - deno cache - _(Deprecated. Please use
