@@ -27,6 +27,7 @@
   "lint-ignore": "/runtime/reference/cli/lint/#ignore-directives",
   "lint": "/runtime/reference/cli/lint/",
   "lsp": "/runtime/reference/cli/lsp/",
+  "permission-broker": "/runtime/fundamentals/security/#permission-broker",
   "permission-sets": "/runtime/fundamentals/configuration/#permissions",
   "permissions": "/runtime/fundamentals/security/",
   "run": "/runtime/reference/cli/run/",
