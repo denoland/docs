@@ -21,6 +21,7 @@ below for more information on each subcommand.
 ## Dependency management
 
 - [deno add](/runtime/reference/cli/add) - add dependencies
+- [deno audit](/runtime/reference/cli/audit) - audit dependencies
 - deno cache - _(Deprecated. Please use
   [deno install](/runtime/reference/cli/install/))_
 - [deno install](/runtime/reference/cli/install/) - install a dependency or a
@@ -57,6 +58,7 @@ below for more information on each subcommand.
 - [deno types](/runtime/reference/cli/types/) - print runtime types
 - [deno upgrade](/runtime/reference/cli/upgrade/) - upgrade Deno to the latest
   version
+- [deno x](/runtime/reference/cli/x/) - run an npm or JSR package
 
 ## Other
 
