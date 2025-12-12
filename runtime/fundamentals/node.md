@@ -409,10 +409,10 @@ are as follows:
 
 This means that the first condition listed in a package export whose key equals
 any of these strings will be matched. You can expand this list using the
-`--unstable-node-conditions` CLI flag:
+`--conditions` CLI flag:
 
 ```shell
-deno run --unstable-node-conditions development,react-server main.ts
+deno run --conditions development,react-server main.ts
 ```
 
 ```json
