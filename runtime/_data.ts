@@ -102,7 +102,7 @@ export const sidebar = [
           },
           {
             title: "deno approve-scripts",
-            href: "/runtime/reference/cli/approve-scripts/",
+            href: "/runtime/reference/cli/approve_scripts/",
           },
           {
             title: "deno audit",
