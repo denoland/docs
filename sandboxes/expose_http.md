@@ -12,7 +12,7 @@ await sandbox.writeTextFile(
   "Deno.serve(() => new Response('Hello from Sandboxes'));",
 );
 const runtime = await sandbox.createJsRuntime({ entrypoint: "server.js" });
-const publicUrl = await sandbox.exposeHttp({ port: 8080 });
+const publicUrl = await sandbox.exposeHttp({ port: 8000 });
 console.log(publicUrl); // https://<random>.sandbox.deno.net
 ```
 
