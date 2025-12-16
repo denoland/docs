@@ -1,5 +1,5 @@
 ---
-title: "About Sandboxes"
+title: "Deno Sandboxes"
 description: "Overview of the Sandboxes microVM platform on Deploy, including capabilities, security model, and ideal use cases."
 ---
 
