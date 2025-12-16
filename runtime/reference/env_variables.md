@@ -115,6 +115,17 @@ variable, and can be helpfully combined with
 }
 ```
 
+:::note Variables with spaces
+
+When setting environment variables that contain space characters in a `.env`
+file, ensure you enclose the value in quotes. For example:
+
+```shell
+MY_VAR="my value with spaces"
+```
+
+:::
+
 ## `std/cli`
 
 The Deno Standard Library has a [`std/cli` module](https://jsr.io/@std/cli) for
