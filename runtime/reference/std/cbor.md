@@ -3,7 +3,7 @@ title: "@std/cbor"
 description: "Utilities for parsing and serializing Concise Binary Object Representation (CBOR)"
 jsr: jsr:@std/cbor
 pkg: cbor
-version: 0.1.8
+version: 0.1.9
 generated: true
 stability: unstable
 ---
@@ -19,16 +19,14 @@ bump.
 
 ## Overview
 
-<h2 id="overview">
-Overview</h2>
-<p>Concise Binary Object Representation (CBOR) is a binary data serialisation
-format optimised for compactness and efficiency. It is designed to encode a
+<p>Concise Binary Object Representation (CBOR) is a binary data serialization
+format optimized for compactness and efficiency. It is designed to encode a
 wide range of data types, including integers, strings, arrays, and maps, in a
 space-efficient manner.
 <a href="https://datatracker.ietf.org/doc/html/rfc8949" rel="nofollow">RFC 8949 - Concise Binary Object Representation (CBOR)</a>
 spec.</p>
-<h2 id="limitations">
-Limitations</h2>
+<h3 id="limitations">
+Limitations</h3>
 <ul>
 <li>This implementation only supports the encoding and decoding of
 "Text String" keys.</li>

@@ -1,9 +1,5 @@
 import { doc, generateHtmlAsJSON } from "@deno/doc";
-import {
-  hrefResolver,
-  renderMarkdown,
-  stripMarkdown,
-} from "./common.ts";
+import { hrefResolver, renderMarkdown, stripMarkdown } from "./common.ts";
 import categoryDocs from "./deno-categories.json" with { type: "json" };
 
 const url = import.meta.resolve("./types/deno.d.ts");

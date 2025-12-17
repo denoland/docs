@@ -39,6 +39,10 @@ export const sidebar = [
         href: "/deploy/reference/timelines/",
       },
       {
+        title: "Tunnel",
+        href: "/deploy/reference/tunnel/",
+      },
+      {
         title: "Observability",
         href: "/deploy/reference/observability/",
       },
@@ -148,6 +152,10 @@ export const SidebarNav = [
   {
     title: "Deno Deploy",
     href: "/deploy/",
+  },
+  {
+    title: "Sandboxes",
+    href: "/sandboxes/",
   },
   {
     title: "Deploy Classic",

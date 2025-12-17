@@ -273,7 +273,7 @@ Use tabs instead of spaces for indentation
 Whether to use braces for if statements, for statements, and while statements
 
 - **Default:** `whenNotSingleLine`
-- **Possible values:** `maintain`, `whenNotSingleLine`, `always`, preferNone
+- **Possible values:** `maintain`, `whenNotSingleLine`, `always`, `preferNone`
 
 ### Configuration
 
