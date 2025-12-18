@@ -87,6 +87,7 @@ Details about the sandbox will be shown in its **Event log**.
 When creating a sandbox witb `Sandbox.create()`, you can configure it with the
 following options:
 
+- `allowNet`: List of hosts that can receive outbound traffic from the sandbox.
 - `region`: Deploy region where the sandbox will be created.
 - `memoryMb`: Amount of memory allocated to the sandbox.
 - `lifetime`: Lifetime of the sandbox.
@@ -94,6 +95,7 @@ following options:
 
 ```tsx
 await using sandbox = await Sandbox.create({
+  allowNet: ["api.stripe.com", "api.openai.com"], // optional: list of hosts that this sandbox can communicate with
   region: "sjc", // optional: choose the Deploy region
   memoryMb: 1024, // optional: pick the RAM size (768-4096)
 });
