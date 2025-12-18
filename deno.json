@@ -23,7 +23,7 @@
     "dev": "LUME_LOGS=WARN deno task lume -s",
     "serve": "deno task dev",
     "start": "deno task dev",
-    "build": "deno task generate:reference && deno task generate:std-docs && BUILD_TYPE=FULL --v8-flags=--max-old-space-size=4096 deno task lume",
+    "build": "deno task generate:reference && deno task generate:std-docs && BUILD_TYPE=FULL deno task lume",
     "build:light": "deno task lume",
     "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",
