@@ -210,7 +210,7 @@ First, create a Rust library:
 
 ```rust
 // lib.rs
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn fibonacci(n: u32) -> u32 {
   if n <= 1 {
     return n;

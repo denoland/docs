@@ -110,22 +110,21 @@ import * as bar from "bar/file.ts";
 Path mapping of import specifies is commonly used in larger code bases for
 brevity.
 
-To use your project root for absolute imports:
+For example:
 
 ```json title="deno.json"
 {
   "imports": {
-    "/": "./",
-    "./": "./"
+    "@/": "./"
   }
 }
 ```
 
 ```ts title="main.ts"
-import { MyUtil } from "/util.ts";
+import { MyUtil } from "@/util.ts";
 ```
 
-This causes import specifiers starting with `/` to be resolved relative to the
+This causes import specifiers starting with `@/` to be resolved relative to the
 import map's URL or file path.
 
 ### Overriding packages
@@ -526,6 +525,114 @@ import * as module_1 from "@example/my-package/module1";
 import * as module_2 from "@example/my-package/module2";
 ```
 
+## Permissions
+
+Deno 2.5+ supports storing permission sets in the config file.
+
+### Named permissions
+
+Permissions can be defined in key value pairs under the `"permissions"` key:
+
+```jsonc
+{
+  "permissions": {
+    "read-data": {
+      "read": "./data"
+    },
+    "read-and-write": {
+      "read": true,
+      "write": ["./data"]
+    }
+  }
+}
+```
+
+Then used by specifying the `--permission-set=<name>` or `-P=<name>` flag:
+
+```sh
+$ deno run -P=read-data main.ts
+```
+
+### Default permission
+
+A special `"default"` permission key allows excluding the name when using the
+`--permission-set`/`-P` flag:
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      "env": true
+    }
+  }
+}
+```
+
+Then run with just `-P`:
+
+```sh
+$ deno run -P main.ts
+```
+
+### Test, bench, and compile permissions
+
+Permissions can be optionally specified within the `"test"`, `"bench"`, or
+`"compile"` keys.
+
+```jsonc
+{
+  "test": {
+    "permissions": {
+      "read": ["./data"]
+    }
+  }
+}
+```
+
+Or reference a permission set:
+
+```jsonc
+{
+  "test": {
+    "permissions": "read-data"
+  },
+  "permissions": {
+    "read-data": {
+      "read": ["./data"]
+    }
+  }
+}
+```
+
+When this is defined, you must run `deno test` with `-P` or a permission flag:
+
+```
+> deno test
+error: Test permissions were found in the config file. Did you mean to run with `-P`?
+    at file:///Users/david/dev/example/deno.json
+> deno test -P
+...runs...
+> deno test --allow-read
+...runs...
+> deno test -A
+...runs...
+```
+
+This is to help prevent you waste your time wondering why something is not
+working when you forget to run without permissions.
+
+Note that test and bench files in a workspace will use the closest `deno.json`
+for determining `test` and `bench` permissions. This allows giving different
+permissions to different workspace members.
+
+### Security risk
+
+The threat model for permissions in the config file is similar to `deno task`,
+in that a script could modify the `deno.json` to elevate permissions. That's why
+this requires an explicit opt-in with `-P` and is not loaded by default.
+
+If you're ok with this risk, then this feature will be useful for you.
+
 ## An example `deno.json` file
 
 ```json
@@ -534,6 +641,11 @@ import * as module_2 from "@example/my-package/module2";
     "allowJs": true,
     "lib": ["deno.window"],
     "strict": true
+  },
+  "permissions": {
+    "default": {
+      "read": ["./src/testdata/"]
+    }
   },
   "lint": {
     "include": ["src/"],

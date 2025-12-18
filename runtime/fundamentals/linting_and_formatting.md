@@ -115,9 +115,7 @@ in the root of your project with the following configuration:
 
 ```json
 {
-  "deno.enablePaths": [
-    "./deno.json"
-  ]
+  "deno.enablePaths": ["./deno.json"]
 }
 ```
 
@@ -275,10 +273,89 @@ Use tabs instead of spaces for indentation
 Whether to use braces for if statements, for statements, and while statements
 
 - **Default:** `whenNotSingleLine`
-- **Possible values:** `maintain`, `whenNotSingleLine`, `always`, preferNone
+- **Possible values:** `maintain`, `whenNotSingleLine`, `always`, `preferNone`
 
 ### Configuration
 
 The formatter can be configured in a
 [`deno.json`](/runtime/fundamentals/configuration/#formatting) file. You can
 specify custom settings to tailor the formatting process to your needs.
+
+## Deno support for other linters and formatters
+
+### ESLint
+
+To use the VSCode ESLint extension in your Deno projects, your project will need
+a `node_modules` directory in your project that VSCode extensions can pick up.
+
+In your `deno.json` ensure a `node_modules` folder is created, so the editor can
+resolve packages:
+
+```jsonc
+{
+  "nodeModulesDir": "auto"
+}
+```
+
+(Optional) Run an ESLint command to download it:
+
+```sh
+deno run -A npm:eslint --version
+# or
+deno run -A npm:eslint --init
+```
+
+Create an `eslint.config.js`:
+
+```js
+// eslint.config.js
+import js from "@eslint/js";
+import importPlugin from "eslint-plugin-import"; // example plugin
+
+export default [
+  js.configs.recommended,
+  {
+    files: ["**/*.ts", "**/*.js"],
+    languageOptions: { globals: { Deno: "readonly" } },
+    plugins: { import: importPlugin },
+    rules: {
+      // e.g. "import/order": "warn"
+    },
+  },
+];
+```
+
+To run ESLint run:
+
+```sh
+deno run -A npm:eslint .
+```
+
+Optionally, you can add a task in your `deno.json` to run ESLint:
+
+```json
+{
+  "tasks": { "eslint": "eslint . --ext .ts,.js" }
+}
+```
+
+And run it with:
+
+```sh
+deno task eslint
+```
+
+### Prettier
+
+To use Prettier in your Deno projects, your project will need a `node_modules`
+directory in your project that VSCode extensions can pick up.
+
+Then install the Prettier extension for VSCode and configure it to be your
+default formatter:
+
+In VSCode:
+
+1. Open the Command Palette (with <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>)
+2. Select **Format Document With...**
+3. Select **Configure Default Formatter...**
+4. Select **Prettier - Code formatter**

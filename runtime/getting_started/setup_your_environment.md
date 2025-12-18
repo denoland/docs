@@ -83,17 +83,16 @@ may also need to set `single_file_support` to `false` for `ts_ls` to prevent it
 from running in `single file mode`. Here is an example of such a configuration:
 
 ```lua
-local nvim_lsp = require('lspconfig')
-nvim_lsp.denols.setup {
-  on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
-}
+vim.lsp.config('denols', {
+    on_attach = on_attach,
+    root_markers = {"deno.json", "deno.jsonc"},
+})
 
-nvim_lsp.ts_ls.setup {
-  on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern("package.json"),
-  single_file_support = false
-}
+vim.lsp.config('ts_ls', {
+    on_attach = on_attach,
+    root_markers = {"package.json"},
+    single_file_support = false,
+})
 ```
 
 For Deno, the example above assumes a `deno.json` or `deno.jsonc` file exists at
@@ -317,7 +316,7 @@ the
 
 [GitHub Codespaces](https://github.com/features/codespaces) allows you to
 develop fully online or remotely on your local machine without needing to
-configure or install Deno. It is currently in early access.
+configure or install Deno.
 
 If a project is a Deno enabled project and contains the `.devcontainer`
 configuration as part of the repository, opening the project in GitHub

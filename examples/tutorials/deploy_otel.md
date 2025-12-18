@@ -4,18 +4,17 @@ description: "A step-by-step tutorial for adding custom OpenTelemetry instrument
 url: /examples/deploy_otel_tutorial/
 ---
 
-Deno Deploy<sup>EA</sup> includes built-in OpenTelemetry support that
-automatically captures traces for HTTP requests, database queries, and other
-operations. This tutorial shows how to add custom OpenTelemetry instrumentation
-to your applications for more detailed observability.
+Deno Deploy includes built-in OpenTelemetry support that automatically captures
+traces for HTTP requests, database queries, and other operations. This tutorial
+shows how to add custom OpenTelemetry instrumentation to your applications for
+more detailed observability.
 
 ## Prerequisites
 
 1. A [GitHub](https://github.com) account
 2. [Deno installed](https://docs.deno.com/runtime/manual/getting_started/installation)
    on your local machine
-3. Access to the
-   [Deno Deploy Early Access program](https://dash.deno.com/account#early-access)
+3. Access to the [Deno Deploy account](https://console.deno.com/)
 4. Basic familiarity with
    [OpenTelemetry concepts](https://opentelemetry.io/docs/concepts/)
 
@@ -286,7 +285,7 @@ git branch -M main
 git push -u origin main
 ```
 
-## Deploy to Deno Deploy Early Access
+## Deploy to Deno Deploy
 
 1. Navigate to [console.deno.com](https://console.deno.com)
 2. Select your organization or create a new one if needed
@@ -343,7 +342,7 @@ Now let's explore the observability data collected by Deno Deploy:
    - Child spans for database operations
    - The span for parsing the request body
 
-   ![Trace waterfall view](./images/early-access/otel_trace.png)
+   ![Trace waterfall view](./images/otel_trace.png)
 
 3. Click on individual spans to see their details:
    - Duration and timing information
@@ -360,12 +359,12 @@ Now let's explore the observability data collected by Deno Deploy:
    - Error rates
    - Response time distributions
 
-🦕 The automatic instrumentation in Deno Deploy<sup>EA</sup> combined with your
-custom instrumentation provides comprehensive visibility into your application's
+🦕 The automatic instrumentation in Deno Deploy combined with your custom
+instrumentation provides comprehensive visibility into your application's
 performance and behavior.
 
 For more information about OpenTelemetry in Deno, check out these resources:
 
 - [OpenTelemetry in Deno documentation](/runtime/fundamentals/open_telemetry/)
-- [Deno Deploy<sup>EA</sup> Observability reference](/deploy/early-access/reference/observability/)
+- [Deno Deploy Observability reference](/deploy/reference/observability/)
 - [OpenTelemetry official documentation](https://opentelemetry.io/docs/)

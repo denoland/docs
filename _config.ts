@@ -134,16 +134,17 @@ site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
 site.copy("deploy/images");
-site.copy("deploy/kv/manual/images");
+site.copy("deploy/classic/images");
+site.copy("deploy/kv/images");
 site.copy("deploy/tutorials/images");
-site.copy("deploy/kv/tutorials/images");
+site.copy("sandboxes/images");
 site.copy("runtime/fundamentals/images");
 site.copy("runtime/getting_started/images");
 site.copy("runtime/reference/images");
 site.copy("runtime/contributing/images");
 site.copy("examples/tutorials/images");
 site.copy("deploy/manual/images");
-site.copy("deploy/early-access/images");
+site.copy("deploy/images");
 site.copy("examples/scripts");
 
 site.use(

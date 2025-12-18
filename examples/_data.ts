@@ -86,6 +86,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Simple API server",
+        href: "/examples/simple_api_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Simple file server",
         href: "/examples/file_server_tutorial/",
         type: "tutorial",
@@ -216,7 +221,7 @@ export const sidebar = [
       },
       {
         title: "Build a Fresh app",
-        href: "https://fresh.deno.dev/docs/getting-started/create-a-project/",
+        href: "/examples/fresh_tutorial/",
         type: "tutorial",
       },
       {
@@ -291,6 +296,91 @@ export const sidebar = [
       {
         title: "HTTP server file upload",
         href: "/examples/http_server_file_upload/",
+        type: "example",
+      },
+    ],
+  },
+  {
+    title: "Sandboxes",
+    items: [
+      {
+        title: "Evaluating JavaScript",
+        href: "/examples/sandboxes_evaluating_javascript/",
+        type: "example",
+      },
+      {
+        title: "Spawn a subprocess",
+        href: "/examples/sandboxes_spawn_subprocess/",
+        type: "example",
+      },
+      {
+        title: "Serve a web framework",
+        href: "/examples/sandboxes_web_framework/",
+        type: "example",
+      },
+      {
+        title: "Privide SSH access to a sandbox",
+        href: "/examples/sandboxes_ssh_access/",
+        type: "example",
+      },
+      {
+        title: "Intereactive JavaScript REPL",
+        href: "/examples/sandboxes_javascript_repl/",
+        type: "example",
+      },
+      {
+        title: "Provide a VSCode instance in a sandbox",
+        href: "/examples/sandboxes_vscode_instance/",
+        type: "example",
+      },
+      {
+        title: "Use template literals with variable interpolation",
+        href: "/examples/sandboxes_template_literals/",
+        type: "example",
+      },
+      {
+        title: "Error handling",
+        href: "/examples/sandboxes_error_handling/",
+        type: "example",
+      },
+      {
+        title: "Error handling with custom error classes",
+        href: "/examples/sandboxes_custom_error_classes/",
+        type: "example",
+      },
+      {
+        title: "Command cancellation",
+        href: "/examples/sandboxes_command_cancellation/",
+        type: "example",
+      },
+      {
+        title: "Access string and binary output",
+        href: "/examples/sandboxes_access_output/",
+        type: "example",
+      },
+      {
+        title: "Set and get environment variables",
+        href: "/examples/sandboxes_environment_variables/",
+        type: "example",
+      },
+      {
+        title: "Stream output to a local file",
+        href: "/examples/sandboxes_stream_output/",
+        type: "example",
+      },
+      {
+        title: "Upload files and directories to a sandbox",
+        href: "/examples/sandboxes_upload_files/",
+        type: "example",
+      },
+      {
+        title: "Control sandbox lifetime",
+        href: "/examples/sandboxes_lifetime_control/",
+        type: "example",
+      },
+      {
+        title: "Configure sandbox memory",
+        href: "/examples/sandboxes_memory/",
         type: "example",
       },
     ],
@@ -398,6 +488,11 @@ export const sidebar = [
       {
         title: "Deploy with the deploy command",
         href: "/examples/deploy_command_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Migrating a custom domain to Deno Deploy",
+        href: "/examples/migrate_custom_domain_tutorial/",
         type: "tutorial",
       },
       {

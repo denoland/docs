@@ -2,57 +2,55 @@ import renderCommand from "./renderCommand.tsx";
 
 export const layout = "layout.tsx";
 
-export const ogImage = (data: Lume.Data) => {
-  return data.url + "/index.png";
-};
+export const ogImage = (data: Lume.Data) => `${data.url}/index.png`;
 
 export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
-  let file = data.page.sourcePath;
-  const sidebar = data.sidebar;
-  let renderedCommand = null;
+  // Flags and simple derivations
+  const API_LANDING = new Set(["/api/deno/", "/api/web/", "/api/node/"]);
+  const isReference = data.url.startsWith("/api/");
+  const isApiLandingPage = API_LANDING.has(data.url);
+  const isExampleScript = Boolean(
+    (data.page.data.content as { type?: string })?.type,
+  );
+  const isLintRule = data.url.startsWith("/lint/rules/");
 
+  // Compute file path used by Feedback component
+  const file = isLintRule
+    ? `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`
+    : data.page.sourcePath;
+
+  // Render command block and merge its TOC if present
+  let renderedCommand: unknown = null;
   if (data.command) {
     const { rendered, toc } = renderCommand(data.command, helpers);
     renderedCommand = rendered;
     data.toc = toc.concat(...data.toc);
   }
 
-  const isReference = data.url.startsWith("/api/");
-  const isApiLandingPage = ["/api/deno/", "/api/web/", "/api/node/"].includes(
-    data.url,
-  );
-  const isExamples = data.url.startsWith("/examples/");
-  const isExampleScript = (data.page.data.content as { type?: string })?.type;
-  const isLintRule = data.url.startsWith("/lint/rules/");
-  const isHome = data.url === "/";
-
-  const hasBreadcrumbs = !isExamples && !isHome &&
-    !(isReference && !isApiLandingPage);
-
-  if (isLintRule) {
-    file = `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`;
-  }
-
   function getTocCtx(
     d: Lume.Data,
   ): { document_navigation: unknown; document_navigation_str: string } | null {
-    const pdata = d.data;
-    if (pdata && typeof pdata === "object" && "toc_ctx" in pdata) {
-      const toc: unknown = (pdata as { toc_ctx?: unknown }).toc_ctx;
-      if (
-        toc && typeof toc === "object" &&
-        "document_navigation" in toc &&
-        "document_navigation_str" in toc
-      ) {
-        const t = toc as {
-          document_navigation: unknown;
-          document_navigation_str: string;
-        };
-        return t;
-      }
+    const tocCandidate =
+      (d.data as { toc_ctx?: unknown } | undefined)?.toc_ctx ??
+        (d as {
+          children?: { props?: { data?: { toc_ctx?: unknown } } };
+        })?.children?.props?.data?.toc_ctx;
+
+    if (
+      tocCandidate &&
+      typeof tocCandidate === "object" &&
+      "document_navigation" in tocCandidate &&
+      "document_navigation_str" in tocCandidate
+    ) {
+      return tocCandidate as {
+        document_navigation: unknown;
+        document_navigation_str: string;
+      };
     }
     return null;
   }
+
+  const tocCtx = getTocCtx(data);
 
   return (
     <>
@@ -62,21 +60,13 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
       >
         <div class="w-full">
           <article class="mx-auto">
-            {hasBreadcrumbs && (
-              <data.comp.Breadcrumbs
-                title={data.title!}
-                sidebar={sidebar}
-                url={data.url}
-              />
-            )}
-
             <data.comp.TableOfContentsMobile toc={data.toc} data={data} />
 
             <div
               data-color-mode="auto"
               data-light-theme="light"
               data-dark-theme="dark"
-              class="markdown-body mt-4 sm:mt-6"
+              class="markdown-body mt-6 sm:mt-6"
             >
               {!(isReference && !isApiLandingPage) && (
                 <h1
@@ -106,22 +96,15 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               {data.children}
             </div>
           </article>
-          {!(isReference && !isApiLandingPage) && (
-            <data.comp.Feedback file={file} />
-          )}
+          <data.comp.Feedback file={file} />
         </div>
       </main>
-      {(() => {
-        const tocCtx = getTocCtx(data);
-        return isReference && tocCtx
-          ? (
-            <data.comp.RefToc
-              documentNavigation={tocCtx.document_navigation}
-              documentNavigationStr={tocCtx.document_navigation_str}
-            />
-          )
-          : null;
-      })()}
+      {isReference && tocCtx && (
+        <data.comp.RefToc
+          documentNavigation={tocCtx.document_navigation}
+          documentNavigationStr={tocCtx.document_navigation_str}
+        />
+      )}
     </>
   );
 }

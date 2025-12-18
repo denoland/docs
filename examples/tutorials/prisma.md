@@ -39,13 +39,13 @@ npx prisma@latest init --generator-provider prisma-client --output ./generated
 
 Let's understand the key parameters:
 
-- `--generator-provider prisma-client`: Define o provedor "prisma-client" ao
-  invés do padrão "prisma-client-js". O provedor "prisma-client" é otimizado
-  para Deno e gera código TypeScript compatível com o runtime do Deno.
+- `--generator-provider prisma-client`: Define the provides as
+  "prisma-client-js" instead of the default "prisma-client-js". The
+  "prisma-client" provider is optimized for Deno and generates TypeScript code
+  compatible with the Deno runtime.
 
-- `--output`: Define o diretório onde o Prisma salvará os arquivos do cliente
-  gerado, incluindo definições de tipos e utilitários de acesso ao banco de
-  dados.
+- `--output`: Defines the directory where Prisma will save the generated client
+  files, including type definitions and database access utilities.
 
 This will generate
 [`prisma/schema.prisma`](https://www.prisma.io/docs/orm/prisma-schema). Let's
@@ -126,7 +126,7 @@ And in `./prisma/seed.ts`:
 import { Prisma, PrismaClient } from "./generated/client.ts";
 
 const prisma = new PrismaClient({
-  datasourceUrl: Deno.env.get("DATABASE_URL"),
+  datasourceUrl: process.env.DATABASE_URL,
 });
 
 const dinosaurData: Prisma.DinosaurCreateInput[] = [
@@ -207,7 +207,7 @@ import { Application, Router } from "jsr:@oak/oak";
 const prisma = new PrismaClient({
   datasources: {
     db: {
-      url: Deno.env.get("DATABASE_URL")!,
+      url: process.env.DATABASE_URL,
     },
   },
 });

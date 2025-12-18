@@ -10,7 +10,8 @@ export default function Layout(data: Lume.Data) {
     "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
   const isServicesPage = data.url.startsWith("/deploy") ||
     data.url.startsWith("/subhosting") ||
-    data.url.startsWith("/services");
+    data.url.startsWith("/services") ||
+    data.url.startsWith("/sandboxes");
   const hasSubNav = isServicesPage;
 
   return (
@@ -18,6 +19,7 @@ export default function Layout(data: Lume.Data) {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content="light dark" />
         <title>{deleteBackticks(data.title)}</title>
         {data?.description &&
           <meta name="description" content={data.description} />}
@@ -39,14 +41,14 @@ export default function Layout(data: Lume.Data) {
           href="/fonts/inter/Inter-Regular.woff2"
           as="font"
           type="font/woff2"
-          crossOrigin="true"
+          crossOrigin="anonymous"
         />
         <link
           rel="preload"
           href="/fonts/inter/Inter-SemiBold.woff2"
           as="font"
           type="font/woff2"
-          crossOrigin="true"
+          crossOrigin="anonymous"
         />
         <link rel="me" href="https://fosstodon.org/@deno_land" />
         <data.comp.OpenGraph

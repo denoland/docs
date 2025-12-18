@@ -49,12 +49,16 @@ export const sectionTitle = "Subhosting";
 export const sectionHref = "/subhosting/manual/";
 export const SidebarNav = [
   {
-    title: "Deno Deploy<sup>EA</sup>",
-    href: "/deploy/early-access/",
+    title: "Deno Deploy",
+    href: "/deploy/",
+  },
+  {
+    title: "Sandboxes",
+    href: "/sandboxes/",
   },
   {
     title: "Deploy Classic",
-    href: "/deploy/manual/",
+    href: "/deploy/classic/",
   },
   {
     title: "Subhosting",

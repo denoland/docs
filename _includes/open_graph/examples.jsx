@@ -1,18 +1,10 @@
 export default function ({ title, description }) {
-  // Process text to replace superscript EA with "Early Access"
-  const processEarlyAccessText = (text) => {
-    if (!text) return text;
-
-    // Replace superscript EA with "Early Access"
-    // Using multiple approaches for reliable matching
-    return text
-      .replace(/\u1D31\u1D00/g, " Early Access") // ᴱᴬ using codepoints
-      .replace(/ᴱ\s*ᴬ/g, " Early Access"); // Direct character matching
-  };
-
-  // Process title and description for Early Access text
-  const processedTitle = processEarlyAccessText(title);
-  const processedDescription = processEarlyAccessText(description);
+  if (!title) {
+    title = "Deno documentation";
+  }
+  if (!description) {
+    description = "Learn more at docs.deno.com";
+  }
 
   return (
     <div
@@ -50,9 +42,9 @@ export default function ({ title, description }) {
           fontWeight: 800,
         }}
       >
-        {processedTitle}
+        {title}
       </div>
-      <div>{processedDescription}</div>
+      <div>{description}</div>
       <p>Examples</p>
     </div>
   );

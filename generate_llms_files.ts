@@ -9,10 +9,11 @@
  */
 
 import { walk } from "@std/fs";
-import { join, relative } from "@std/path";
+import { fromFileUrl, join, relative } from "@std/path";
 
 const BASE_URL = "https://docs.deno.com";
-const ROOT_DIR = new URL(".", import.meta.url).pathname;
+// Convert file URL to a proper filesystem path (fixes Windows leading slash issue)
+const ROOT_DIR = fromFileUrl(new URL(".", import.meta.url));
 
 // Directories to include in the documentation
 const INCLUDE_DIRS = [
@@ -65,7 +66,9 @@ async function collectFiles(): Promise<FileInfo[]> {
         exts: INCLUDE_EXTS,
       })
     ) {
-      const relativePath = relative(ROOT_DIR, entry.path);
+      const relativePathFs = relative(ROOT_DIR, entry.path);
+      // Normalize to POSIX separators for consistent downstream logic and URL building
+      const relativePath = relativePathFs.replaceAll("\\", "/");
 
       // Skip excluded files
       if (EXCLUDE_FILES.some((exclude) => relativePath.includes(exclude))) {
