@@ -3,6 +3,67 @@ title: "Deno Deploy changelog"
 description: "Listing notable progress in the development and evolution of Deno Deploy"
 ---
 
+## December 18th, 2025
+
+- Deno Deploy can now detect Deno and NPM workspace / monorepo configurations,
+  allowing you to deploy applications located in subdirectories of a larger
+  repository.
+  - During app creation, we'll now scan the repository for workspace
+    configurations, and allow you to select which workspace member to deploy.
+  - During builds, the working directory is set to the workspace member's
+    directory.
+  - The app directory can be customized after app creation in the app config
+    settings.
+- The build logs now have a dedicated "Deploy" section that replaces the
+  previous "Warmup" and "Routing" steps, providing more clarity on what is
+  happening during deployment.
+  - Inside of the "Deploy" section, you'll find sub-sections for each timeline
+    that the revision is being deployed to, including production, git branches,
+    and preview deployments.
+  - The "Warmup" sub-section shows logs related to prewarming the application.
+  - The "Pre-deploy" sub-section shows logs related to running the user-defined
+    pre-deploy command, for example to run migrations.
+  - The "Database creation" sub-section shows logs related to creating any
+    linked databases for the timeline.
+- The top navigation bar has been redesigned to include a breadcrumb dropdown
+  for the current section of the dashboard. This allows you to quickly navigate
+  between, for example, apps and domains.
+- You can now skip deploying a specific commit using the GitHub integration by
+  including the string `[skip ci]` or `[skip deploy]` in the commit message.
+- Revisions that have not received traffic for more than 30 days are now
+  automatically disabled, and deleting after a further 7 days of inactivity.
+  - Disabled revisions can be re-enabled before deletion from the revisions
+    page.
+- The `deno deploy` CLI and `--tunnel` flag for `deno run` and `deno task` now
+  support using organization tokens for authentication, in addition to user
+  tokens.
+  - To use an organization token, pass it as usual in the `DENO_DEPLOY_TOKEN`
+    environment variable.
+- We have rolled out several runtime security patches to address recently
+  disclosed vulnerabilities in React and Next.js:
+  [CVE-2025-55182](https://deno.com/blog/react-server-functions-rce) (Remote
+  Code Execution) and
+  [CVE-2025-55184/CVE-2025-67779](https://deno.com/blog/cve-2025-55184) (Denial
+  of Service).
+- And one more thing at the end: we've quietly enabled our new sandboxes
+  infrastructure for all Deno Deploy users to try.
+  - Sandboxes provide fully isolated Linux microVMs for you to run untrusted
+    code in.
+  - This is particularly useful for running third-party code, such as plugins,
+    extensions, or user-generated or LLM-generated code, without risking the
+    security of your application.
+  - We'll announce more details about sandboxes in the new year, so stay tuned!
+  - Try it out from the "Sandboxes" tab in the organization overview.
+  - [Learn more about sandboxes.](https://deno.com/deploy/sandboxes)
+
+### Bug fixes
+
+- Fixed an issue where some Next.js and Astro builds would fail when installing
+  dependencies with a frozen lockfile.
+- Fixed an issue the `_acme-challenge` CNAME DNS records was displayed without a
+  trailing dot, causing confusion when copying the record value for DNS
+  verification.
+
 ## November 25th, 2025
 
 ### Features
