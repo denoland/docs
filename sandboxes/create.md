@@ -31,7 +31,7 @@ process. You can tailor the sandbox by passing an options object.
 
 ## Example configurations
 
-### Allow outbound traffic to specific APIs Jump to heading#
+### Allow outbound traffic to specific APIs
 
 ```tsx
 const sandbox = await Sandbox.create({
