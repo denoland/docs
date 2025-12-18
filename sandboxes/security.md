@@ -38,3 +38,33 @@ allowing your automation to call third-party APIs securely.
   dashboard, giving you a paper trail for agent behavior.
 - Attach metadata when creating sandboxes (e.g., `metadata: { owner: "agent" }`)
   so logs and traces clearly show who initiated activity.
+
+## Network access
+
+The `allowNet` option is optionally available for use with `Sandbox.create()`.
+It allows users to control which external hosts a sandbox can communicate with.
+When specified, only requests to the listed destinations are permitted; all
+other outbound network requests return a 403 Forbidden response. This applies to
+all outbound HTTP(S) requests, including ones made by Deno, curl, and so on.
+
+```ts
+await using sandbox = await Sandbox.create({
+  allowNet: [
+    "example.com",
+    "*.example.net",
+    "203.0.113.110",
+    "[2001:db8::1]:80",
+  ],
+});
+```
+
+### Supported formats:
+
+- Hostnames: `example.com`
+- Wildcards: `*.example.com`
+- IPv4 addresses: `203.0.113.110`
+- IPv6 addresses: `[2001:db8::1]`
+- Port numbers are also supported
+
+When allowNet is not specified, no network restrictions are applied (default
+behavior).
