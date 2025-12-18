@@ -44,8 +44,10 @@ allowing your automation to call third-party APIs securely.
 The `allowNet` option is optionally available for use with `Sandbox.create()`.
 It allows users to control which external hosts a sandbox can communicate with.
 When specified, only requests to the listed destinations are permitted; all
-other outbound network requests return a 403 Forbidden response. This applies to
-all outbound HTTP(S) requests, including ones made by Deno, curl, and so on.
+other outbound network requests return a 403 Forbidden response.
+
+This applies to all outbound HTTP(S) requests, including ones made by Deno,
+curl, and so on.
 
 ```ts
 await using sandbox = await Sandbox.create({
@@ -66,5 +68,5 @@ await using sandbox = await Sandbox.create({
 - IPv6 addresses: `[2001:db8::1]`
 - Port numbers are also supported
 
-When allowNet is not specified, no network restrictions are applied (default
+When `allowNet` is not specified, no network restrictions are applied (default
 behavior).
