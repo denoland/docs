@@ -5,6 +5,8 @@ description: "Listing notable progress in the development and evolution of Deno 
 
 ## December 18th, 2025
 
+### Features
+
 - Deno Deploy can now detect Deno and NPM workspace / monorepo configurations,
   allowing you to deploy applications located in subdirectories of a larger
   repository.
