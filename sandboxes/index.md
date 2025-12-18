@@ -128,6 +128,9 @@ Sandboxes have the following limits:
 - **Lifetime:** Configurable per sandbox and bound to a session, up to 30
   minutes
 - **Disk**: 10 GB of ephemeral storage
+- **Concurrency**: 5 concurrent sandboxes per organization (This is the default
+  concurrency limit during the pre-release phase of Sandboxes. Contact
+  [deploy@deno.com](mailto:deploy@deno.com) to request a higher limit.)
 
 Exceeding these limits may result in throttling or termination of your sandbox.
 

@@ -59,6 +59,10 @@ export const sidebar = [
         title: "Examples",
         href: "/examples/#sandboxes",
       },
+      {
+        title: "Pricing",
+        href: "https://deno.com/deploy/pricing/",
+      },
     ],
   },
 ] satisfies Sidebar;
