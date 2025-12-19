@@ -8,12 +8,10 @@
     "@std/media-types": "jsr:@std/media-types@^1.0.3",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@deno/doc": "jsr:@deno/doc@0.187.0",
-    "@tailwindcss/cli": "npm:@tailwindcss/cli@^4.1.11",
-    "@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.1.11",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
-    "lume/": "https://deno.land/x/lume@v2.5.4/",
+    "lume/": "https://deno.land/x/lume@v3.0.9/",
+    "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.12/jsx-runtime.ts",
     "googleapis": "npm:googleapis@^144.0.0",
-    "postcss": "npm:postcss@^8.5.6",
     "prismjs": "npm:prismjs@1.29.0",
     "tailwindcss": "npm:tailwindcss@^4.1.11",
     "@orama/core": "jsr:@orama/core@^1.2.4",
@@ -21,10 +19,12 @@
     "leo-profanity": "npm:leo-profanity@^1.7.0"
   },
   "tasks": {
-    "dev": "LUME_LOGS=WARN deno run --env-file -A lume.ts -s",
+    "lume": "deno run --env-file -A lume/cli.ts",
+    "dev": "LUME_LOGS=WARN deno task lume -s",
     "serve": "deno task dev",
     "start": "deno task dev",
-    "build": "deno task generate:reference && deno task generate:std-docs && BUILD_TYPE=FULL deno run --env-file -A --v8-flags=--max-old-space-size=4096 lume.ts && tailwindcss -i styles.css -o _site/styles.css --minify",
+    "build": "deno task generate:reference && deno task generate:std-docs && BUILD_TYPE=FULL deno task lume",
+    "build:light": "deno task lume",
     "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",
     "check:links": "deno run --no-lock --allow-net --allow-env .github/workflows/better_link_checker.ts",
@@ -43,8 +43,8 @@
     "types": [
       "lume/types.ts"
     ],
-    "jsx": "react-jsx",
-    "jsxImportSource": "npm:preact"
+    "jsx": "precompile",
+    "jsxImportSource": "lume"
   },
   "test": {
     "exclude": [
@@ -56,5 +56,19 @@
     "reference_gen",
     "orama"
   ],
+  "unstable": [
+    "temporal",
+    "fmt-component"
+  ],
+  "lint": {
+    "plugins": [
+      "https://deno.land/x/lume@v3.0.9/lint.ts"
+    ],
+    "rules": {
+      "exclude": [
+        "no-import-prefix"
+      ]
+    }
+  },
   "nodeModulesDir": "auto"
 }
