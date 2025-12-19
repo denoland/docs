@@ -23,12 +23,21 @@ process. You can tailor the sandbox by passing an options object.
 | Option     | Description                                                                                                             |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `region`   | Eg `ams` or `ord`                                                                                                       |
+| `allowNet` | Array of hosts that can receive requests from the sandbox. If specified, any hosts not listed are unreachable.          |
 | `memoryMb` | Allocate between 768 and 4096 MB of RAM for memory-heavy tasks or tighter budgets.                                      |
 | `lifetime` | [How long the sandbox stays alive](./lifetimes) in (m) or (s) such as `5m`                                              |
 | `labels`   | Attach arbitrary key/value labels to help identify and manage sandboxes                                                 |
 | `env`      | Set initial environment variables inside the sandbox. Secrets should still be managed via Deploy’s secret substitution. |
 
 ## Example configurations
+
+### Allow outbound traffic to specific APIs
+
+```tsx
+const sandbox = await Sandbox.create({
+  allowNet: ["api.openai.com", "api.stripe.com"],
+});
+```
 
 ### Run in a specific region with more memory
 
@@ -63,6 +72,7 @@ const sandbox = await Sandbox.create({
 
 ## Tips
 
+- Keep `allowNet` as narrow as possible to block exfiltration attempts.
 - Use metadata keys such as `agentId` or `customerId` to trace sandboxes in the
   Deploy dashboard.
 - Let `await using` (or dropping the last reference) dispose of the sandbox
