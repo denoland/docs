@@ -152,7 +152,11 @@ import { sing } from "jsr:@eveporcello/sing";
 console.log(sing("sun", 3));
 ```
 
-What this rule does is prevent you from silencing TypeScript errors by dropping a // @ts-ignore or similar comment at the top of a file. In other words, you can’t just tell TypeScript to ignore type checking in a file without explicitly justifying it. That’s the intended behavior: if you’re bypassing the type system, you should have to explain why.
+What this rule does is prevent you from silencing TypeScript errors by dropping
+a // @ts-ignore or similar comment at the top of a file. In other words, you
+can’t just tell TypeScript to ignore type checking in a file without explicitly
+justifying it. That’s the intended behavior: if you’re bypassing the type
+system, you should have to explain why.
 
 However, when you run
 
@@ -160,7 +164,10 @@ However, when you run
 deno task format
 ```
 
-Deno will enforce this rule and complain if it finds ignored TypeScript checks without an accompanying comment. If you really do want to allow this behavior anyway, you can opt out of the rule entirely by disabling it in your configuration. We’ll say `”exclude”: [“ban-ts-comment”]`.
+Deno will enforce this rule and complain if it finds ignored TypeScript checks
+without an accompanying comment. If you really do want to allow this behavior
+anyway, you can opt out of the rule entirely by disabling it in your
+configuration. We’ll say `”exclude”: [“ban-ts-comment”]`.
 
 ```json title="deno.json"
 {
