@@ -2,16 +2,13 @@ import "@std/dotenv/load";
 
 import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
-import jsx from "lume/plugins/jsx_preact.ts";
+import jsx from "lume/plugins/jsx.ts";
 import mdx from "lume/plugins/mdx.ts";
 import ogImages from "lume/plugins/og_images.ts";
-import postcss from "lume/plugins/postcss.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
-import postcssNesting from "npm:@tailwindcss/nesting";
-
-import tailwind from "@tailwindcss/postcss";
+import tailwind from "lume/plugins/tailwindcss.ts";
 
 import Prism from "./prism.ts";
 
@@ -160,22 +157,24 @@ site.use(search());
 site.use(jsx());
 site.use(mdx());
 
-site.use(
-  postcss({
-    includes: false,
-    plugins: [postcssNesting, tailwind()],
-  }),
-);
-
+site.add("js");
 site.use(
   esbuild({
-    extensions: [".client.ts", ".client.js"],
+    extensions: [".ts"],
     options: {
       minify: false,
       splitting: true,
+      alias: {
+        "node:crypto": "./_node-crypto.js",
+      },
     },
   }),
 );
+
+site.add("style.css");
+site.use(tailwind({
+  minify: true,
+}));
 
 site.use(toc({ anchor: false }));
 site.use(title());
@@ -210,7 +209,7 @@ site.addEventListener("afterBuild", async () => {
       Deno.writeTextFileSync(site.dest("llms-full.txt"), llmsFullTxt);
       log.info("Generated llms-full.txt in site root");
     } catch (error) {
-      log.error("Error generating LLMs files:", error);
+      log.error("Error generating LLMs files:" + error);
     }
   }
 });
@@ -298,7 +297,7 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
   site.data("openGraphLayout", "/open_graph/default.jsx");
   site.use(
     ogImages({
-      satori: {
+      options: {
         width: 1200,
         height: 630,
         fonts: [
@@ -327,13 +326,11 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
           },
         ],
       },
-      cache: false,
     }),
   );
 }
 
 site.scopedUpdates(
-  (path) => path == "/overrides.css",
   (path) => /\.(js|ts)$/.test(path),
   (path) => path.startsWith("/api/deno/"),
 );
