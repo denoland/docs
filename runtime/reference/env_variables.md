@@ -150,6 +150,7 @@ The Deno runtime has these special environment variables.
 | DENO_NO_UPDATE_CHECK | Set to disable checking if a newer Deno version is available                                                                                                                      |
 | DENO_V8_FLAGS        | Set V8 command line options                                                                                                                                                       |
 | DENO_JOBS            | Number of parallel workers used for the `--parallel` flag with the test subcommand.<br />Defaults to number of available CPUs.                                                    |
+| DENO_KV_ACCESS_TOKEN | Personal access token used when connecting to Deno KV databases (for example via `Deno.openKv` or `@deno/kv` with a KV Connect URL).                                              |
 | DENO_WEBGPU_TRACE    | Path to a directory to output a [WGPU trace](https://github.com/gfx-rs/wgpu/pull/619) to when using the WebGPU API                                                                |
 | DENO_WEBGPU_BACKEND  | Select the backend WebGPU will use, or a comma separated list of backends in order of preference. Possible values are `vulkan`, `dx12`, `metal`, or `opengl`                      |
 | HTTP_PROXY           | Proxy address for HTTP requests (module downloads, fetch)                                                                                                                         |
