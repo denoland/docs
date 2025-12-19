@@ -152,19 +152,22 @@ import { sing } from "jsr:@eveporcello/sing";
 console.log(sing("sun", 3));
 ```
 
-This is a rule that’s going to, if I add this to the top of any file, the
-intended behavior in a project, it’s going to make sure that Typescript just
-ignores any of the types that are in this file, so it doesn’t matter if it
-adheres to the rules. But, if I run
+What this rule does is prevent you from silencing TypeScript errors by dropping
+a // @ts-ignore or similar comment at the top of a file. In other words, you
+can’t just tell TypeScript to ignore type checking in a file without explicitly
+justifying it. That’s the intended behavior: if you’re bypassing the type
+system, you should have to explain why.
+
+However, when you run
 
 ```sh
 deno task format
 ```
 
-again, this is going to tell me, “Hey, you can’t do that. You can’t ignore these
-files without comment.” This is one of those rules. But, we know where to find a
-way out of that trap, which, maybe you don’t want to find a way out, but I’ll
-show you how anyway. We’ll say `”exclude”: [“ban-ts-comment”]`.
+Deno will enforce this rule and complain if it finds ignored TypeScript checks
+without an accompanying comment. If you really do want to allow this behavior
+anyway, you can opt out of the rule entirely by disabling it in your
+configuration. We’ll say `”exclude”: [“ban-ts-comment”]`.
 
 ```json title="deno.json"
 {
