@@ -315,24 +315,6 @@
           "usage": "--cert <FILE>"
         },
         {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
-        },
-        {
           "name": "minimum-dependency-age",
           "short": null,
           "long": "minimum-dependency-age",
@@ -412,6 +394,24 @@
           "help": "Set the random number generator seed",
           "help_heading": null,
           "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
         },
         {
           "name": "check",
@@ -818,24 +818,6 @@
           "usage": "--cert <FILE>"
         },
         {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
-        },
-        {
           "name": "minimum-dependency-age",
           "short": null,
           "long": "minimum-dependency-age",
@@ -915,6 +897,24 @@
           "help": "Set the random number generator seed",
           "help_heading": null,
           "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
         },
         {
           "name": "port",
@@ -1561,24 +1561,6 @@
           "usage": "--cert <FILE>"
         },
         {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
-        },
-        {
           "name": "minimum-dependency-age",
           "short": null,
           "long": "minimum-dependency-age",
@@ -1631,6 +1613,24 @@
           "help": "Set the random number generator seed",
           "help_heading": null,
           "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
         },
         {
           "name": "check",
@@ -1954,24 +1954,6 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
-        },
-        {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
         },
         {
           "name": "minimum-dependency-age",
@@ -2333,24 +2315,6 @@
           "usage": "--cert <FILE>"
         },
         {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
-        },
-        {
           "name": "minimum-dependency-age",
           "short": null,
           "long": "minimum-dependency-age",
@@ -2708,24 +2672,6 @@
           "help": "Load certificate authority from PEM encoded file",
           "help_heading": null,
           "usage": "--cert <FILE>"
-        },
-        {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
         },
         {
           "name": "minimum-dependency-age",
@@ -3167,24 +3113,6 @@
           "usage": "--cert <FILE>"
         },
         {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
-        },
-        {
           "name": "minimum-dependency-age",
           "short": null,
           "long": "minimum-dependency-age",
@@ -3237,6 +3165,24 @@
           "help": "Set the random number generator seed",
           "help_heading": null,
           "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
         },
         {
           "name": "check",
@@ -4035,24 +3981,6 @@
           "usage": "--cert <FILE>"
         },
         {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
-        },
-        {
           "name": "minimum-dependency-age",
           "short": null,
           "long": "minimum-dependency-age",
@@ -4132,6 +4060,24 @@
           "help": "Set the random number generator seed",
           "help_heading": null,
           "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
         },
         {
           "name": "check",
@@ -4949,24 +4895,6 @@
           "usage": "--cert <FILE>"
         },
         {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
-        },
-        {
           "name": "minimum-dependency-age",
           "short": null,
           "long": "minimum-dependency-age",
@@ -5037,6 +4965,24 @@
           "help": "Set the random number generator seed",
           "help_heading": null,
           "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
         },
         {
           "name": "check",
@@ -6180,24 +6126,6 @@
           "usage": "--cert <FILE>"
         },
         {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
-        },
-        {
           "name": "minimum-dependency-age",
           "short": null,
           "long": "minimum-dependency-age",
@@ -6268,6 +6196,24 @@
           "help": "Set the random number generator seed",
           "help_heading": null,
           "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
         },
         {
           "name": "eval-file",
@@ -6862,24 +6808,6 @@
           "usage": "--cert <FILE>"
         },
         {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
-        },
-        {
           "name": "minimum-dependency-age",
           "short": null,
           "long": "minimum-dependency-age",
@@ -6959,6 +6887,24 @@
           "help": "Set the random number generator seed",
           "help_heading": null,
           "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
         },
         {
           "name": "check",
@@ -7711,24 +7657,6 @@
           "usage": "--cert <FILE>"
         },
         {
-          "name": "preload",
-          "short": null,
-          "long": "preload",
-          "required": false,
-          "help": "A list of files that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--preload <FILE>"
-        },
-        {
-          "name": "require",
-          "short": null,
-          "long": "require",
-          "required": false,
-          "help": "A list of CommonJS modules that will be executed before the main module",
-          "help_heading": null,
-          "usage": "--require <FILE>"
-        },
-        {
           "name": "minimum-dependency-age",
           "short": null,
           "long": "minimum-dependency-age",
@@ -7808,6 +7736,24 @@
           "help": "Set the random number generator seed",
           "help_heading": null,
           "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
         },
         {
           "name": "script_arg",
