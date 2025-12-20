@@ -83,14 +83,13 @@
   "permissions": {
     "lume": {
       "read": true,
-      "write": [
-        "./"
-      ],
+      "write": true,
       "import": [
         "cdn.jsdelivr.net:443",
         "jsr.io:443",
         "deno.land:443",
-        "esm.sh:443"
+        "esm.sh:443",
+        "raw.githubusercontent.com:443"
       ],
       "net": [
         "0.0.0.0",
