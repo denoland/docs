@@ -11,13 +11,16 @@ workflow.
 
 ## Creating Your First Sandbox
 
-The simplest way to get started is with `deno sandbox create` (or the shorter
-`deno sandbox new`). By default, this creates an interactive session-based
-sandbox that automatically opens an SSH connection when ready:
+The simplest way to get started is with `deno sandbox create`. By default, this
+creates an interactive session-based sandbox that automatically opens an SSH
+connection when ready:
 
 ```bash
 deno sandbox create
 ```
+
+If SSH isn't available on your system, it will display connection information
+instead. The sandbox cleans itself up when you exit the session.
 
 For development work, you'll often want to copy your project files into the
 sandbox. The `--copy` option uploads files to the `/app` directory inside the
@@ -39,11 +42,6 @@ with `--lifetime`:
 ```bash
 deno sandbox create --lifetime 2m
 ```
-
-When you create a session-based sandbox (the default), Deno automatically
-attempts to open an SSH connection. If SSH isn't available on your system, it
-will display connection information instead. The sandbox cleans itself up when
-you exit the SSH session.
 
 ## Viewing Your Sandboxes
 
@@ -100,7 +98,7 @@ deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 'ls -lh /' | wc -l
 Or pipe local data into sandbox processes for processing:
 
 ```bash
-cat large-dataset.csv | deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 --cwd /app python analyze.py
+cat large-dataset.csv | deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 --cwd /app "deno run -A main.ts"
 ```
 
 This makes it easy to integrate sandbox processing into larger Unix workflows
@@ -151,12 +149,6 @@ The target path can be customized to organize files within the sandbox:
 deno sandbox copy ./frontend 550e8400-e29b-41d4-a716-446655440000:/app/web/
 ```
 
-You can also rename files during the copy process:
-
-```bash
-deno sandbox copy ./config.dev.json 550e8400-e29b-41d4-a716-446655440000:/app/config.json
-```
-
 ## One-Shot Execution
 
 For quick tasks where you want to create a sandbox, run a command, and clean up
@@ -171,20 +163,20 @@ This is especially useful for building and testing projects. You can copy files
 and run your build process in one command:
 
 ```bash
-deno sandbox run --copy ./app --cwd /app npm start
+deno sandbox run --copy ./app --cwd /app "npm i && npm start"
 ```
 
 For web applications, you can expose ports to access running services:
 
 ```bash
-deno sandbox run --expose-http 3000 --copy ./web-app --cwd /app npm run dev
+deno sandbox run --expose-http 3000 --copy ./web-app --cwd /app "npm i && npm run dev"
 ```
 
 When working with tasks that take significant time, specify a lifetime to
 prevent premature shutdown:
 
 ```bash
-deno sandbox run --lifetime 2m --copy ./project --cwd /app python process.py
+deno sandbox run --lifetime 2m --copy ./project --cwd /app "deno run -A main.ts"
 ```
 
 Complex workflows can be expressed as quoted command chains:
@@ -195,8 +187,8 @@ deno sandbox run --copy ./app --cwd /app "npm install && npm test && npm run bui
 
 ## Interactive Access
 
-When you need to work interactively within a sandbox—editing files, debugging
-issues, or exploring the environment—use `deno sandbox ssh`:
+When you need to work interactively within a sandbox; be it editing files,
+debugging issues, or exploring the environment, you can use `deno sandbox ssh`:
 
 ```bash
 deno sandbox ssh 550e8400-e29b-41d4-a716-446655440000
@@ -220,7 +212,7 @@ sandbox without interrupting ongoing processes:
 deno sandbox extend 550e8400-e29b-41d4-a716-446655440000 30m
 ```
 
-The extend command works seamlessly with any sandbox state—whether you're SSH'd
+The extend command works seamlessly with any sandbox state; whether you're SSH'd
 into it, running remote commands, or have background processes running. All
 active connections and processes continue uninterrupted while the sandbox's
 expiration time is updated.
@@ -265,30 +257,6 @@ deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/build/ ./dist/
 deno sandbox kill 550e8400-e29b-41d4-a716-446655440000
 ```
 
-### Quick Script Execution
-
-For one-time scripts or deployment tasks, the run command handles everything
-automatically:
-
-```bash
-deno sandbox run --copy ./scripts --cwd /app ./deploy.sh
-```
-
-### Interactive Development
-
-When you need to work interactively for extended periods, create a long-lived
-sandbox:
-
-```bash
-deno sandbox create --lifetime 5m --copy ./project
-```
-
-Then drop into an interactive shell using the returned ID:
-
-```bash
-deno sandbox ssh 550e8400-e29b-41d4-a716-446655440000
-```
-
 ### Data Processing
 
 For data processing workflows where you need to retrieve results, use a
@@ -296,7 +264,7 @@ combination of remote execution and SSH access:
 
 ```bash
 SANDBOX_ID=$(deno sandbox create --lifetime 20m --copy ./data)
-deno sandbox exec $SANDBOX_ID --cwd /app python process.py
+deno sandbox exec $SANDBOX_ID --cwd /app "deno run -A main.ts"
 ```
 
 You can also stream data directly into sandbox processes using pipes, which is
@@ -310,7 +278,7 @@ curl -s https://api.example.com/data.json | deno sandbox exec $SANDBOX_ID --cwd 
 Or combine local and remote processing in a pipeline:
 
 ```bash
-grep "ERROR" /var/log/app.log | deno sandbox exec $SANDBOX_ID --cwd /app python classify-errors.py | sort | uniq -c
+grep "ERROR" /var/log/app.log | deno sandbox exec $SANDBOX_ID --cwd /app "deno run -A main.ts" | sort | uniq -c
 ```
 
 To retrieve results, copy the generated files back to your local machine, then
