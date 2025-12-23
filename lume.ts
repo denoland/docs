@@ -1,0 +1,1 @@
+import "lume/cli.ts";

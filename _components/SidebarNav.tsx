@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import ReferenceSidebarNav from "../../reference/_components/ReferenceSidebarNav.tsx";
+import ReferenceSidebarNav from "../reference/_components/ReferenceSidebarNav.tsx";
 
 export default function (data: Lume.Data) {
   const sectionData = data.sectionData;
@@ -129,3 +129,5 @@ function SidebarCategoryHeading(props: {
     </h2>
   );
 }
+
+export const js = `import "/js/sidebar.client.js";`;
