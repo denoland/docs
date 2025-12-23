@@ -9,8 +9,8 @@
     "@std/path": "jsr:@std/path@^1.0.8",
     "@deno/doc": "jsr:@deno/doc@0.187.0",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
-    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/",
-    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.13/jsx-runtime.ts",
+    "lume/": "https://deno.land/x/lume@v3.0.9/",
+    "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.12/jsx-runtime.ts",
     "googleapis": "npm:googleapis@^144.0.0",
     "prismjs": "npm:prismjs@1.29.0",
     "tailwindcss": "npm:tailwindcss@^4.1.11",
@@ -19,20 +19,11 @@
     "leo-profanity": "npm:leo-profanity@^1.7.0"
   },
   "tasks": {
-    "lume": {
-      "description": "Run Lume command",
-      "command": "deno run --env-file -P=lume lume/cli.ts"
-    },
+    "lume": "deno run --env-file -A lume/cli.ts",
     "dev": "LUME_LOGS=WARN deno task lume -s",
-    "serve": {
-      "description": "Run and serve the site for development",
-      "command": "deno task dev"
-    },
+    "serve": "deno task dev",
     "start": "deno task dev",
-    "build": {
-      "description": "Build the site for production",
-      "command": "deno task generate:reference && deno task generate:std-docs && BUILD_TYPE=FULL deno task lume"
-    },
+    "build": "deno task generate:reference && deno task generate:std-docs && BUILD_TYPE=FULL deno task lume",
     "build:light": "deno task lume",
     "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",
@@ -71,7 +62,7 @@
   ],
   "lint": {
     "plugins": [
-      "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/lint.ts"
+      "https://deno.land/x/lume@v3.0.9/lint.ts"
     ],
     "rules": {
       "exclude": [
@@ -79,32 +70,5 @@
       ]
     }
   },
-  "nodeModulesDir": "auto",
-  "permissions": {
-    "lume": {
-      "read": true,
-      "write": true,
-      "import": [
-        "cdn.jsdelivr.net:443",
-        "jsr.io:443",
-        "deno.land:443",
-        "esm.sh:443",
-        "raw.githubusercontent.com:443"
-      ],
-      "net": [
-        "0.0.0.0",
-        "cdn.jsdelivr.net:443",
-        "data.jsdelivr.com:443",
-        "jsr.io:443",
-        "deno.land:443",
-        "esm.sh:443",
-        "registry.npmjs.org:443"
-      ],
-      "env": true,
-      "run": true,
-      "ffi": true,
-      "sys": true
-    }
-  },
-  "lock": false
+  "nodeModulesDir": "auto"
 }
