@@ -1,6 +1,6 @@
 // This runs in the browser
 // deno-lint-ignore-file no-window
-import type { FeedbackSubmission } from "../types.ts";
+import type { FeedbackSubmission } from "./types.ts";
 
 let lastFeedbackItemId: string | null = null;
 const feedbackYes = document.getElementById("feedback-yes");

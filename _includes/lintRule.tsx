@@ -97,7 +97,7 @@ export default function LintRule(props: Lume.Data, _helpers: Lume.Helpers) {
 
   return (
     <>
-      <LintRuleTags tags={tags} ruleName={props.title!} />
+      <LintRuleTags tags={tags} ruleName={props.title} />
       {props.children}
     </>
   );
