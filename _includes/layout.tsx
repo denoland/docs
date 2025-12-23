@@ -33,7 +33,7 @@ export default function Layout(data: Lume.Data) {
 
         <link
           rel="stylesheet"
-          href={`/style.css${fingerprint ? `?v=${fingerprint}` : ""}`}
+          href={`/styles.css${fingerprint ? `?v=${fingerprint}` : ""}`}
         />
 
         <link
@@ -61,13 +61,13 @@ export default function Layout(data: Lume.Data) {
           name="keywords"
           content="Deno, JavaScript, TypeScript, reference, documentation, guide, tutorial, example"
         />
-        <script type="module" defer src="/script.js"></script>
-        <script type="module" defer src="/js/main.js"></script>
-        <script type="module" defer src="/js/lint_rules.js"></script>
-        <script type="module" defer src="/js/copy.js"></script>
-        <script type="module" defer src="/js/tabs.js"></script>
-        <script type="module" defer src="/js/feedback.js"></script>
-        <script type="module" defer src="/js/search.js"></script>
+        <script type="module" defer src="/components.js"></script>
+        <script type="module" defer src="/main.client.js"></script>
+        <script type="module" defer src="/lint_rules.client.js"></script>
+        <script type="module" defer src="/copy.client.js"></script>
+        <script type="module" defer src="/tabs.client.js"></script>
+        <script type="module" defer src="/feedback.client.js"></script>
+        <script type="module" defer src="/search.client.js"></script>
         <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"

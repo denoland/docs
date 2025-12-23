@@ -28,24 +28,22 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   }
 
   function getTocCtx(
-    d: Lume.Data,
+    d: unknown,
   ): { document_navigation: unknown; document_navigation_str: string } | null {
-    const tocCandidate =
-      (d.data as { toc_ctx?: unknown } | undefined)?.toc_ctx ??
-        (d as {
-          children?: { props?: { data?: { toc_ctx?: unknown } } };
-        })?.children?.props?.data?.toc_ctx;
-
+    type Toc = {
+      document_navigation: unknown;
+      document_navigation_str: string;
+    };
+    const tocCtx: unknown = (d as {
+      children?: { props?: { data?: { toc_ctx?: unknown } } };
+    })?.children?.props?.data?.toc_ctx;
     if (
-      tocCandidate &&
-      typeof tocCandidate === "object" &&
-      "document_navigation" in tocCandidate &&
-      "document_navigation_str" in tocCandidate
+      tocCtx &&
+      typeof tocCtx === "object" &&
+      "document_navigation" in tocCtx &&
+      "document_navigation_str" in tocCtx
     ) {
-      return tocCandidate as {
-        document_navigation: unknown;
-        document_navigation_str: string;
-      };
+      return tocCtx as Toc;
     }
     return null;
   }
