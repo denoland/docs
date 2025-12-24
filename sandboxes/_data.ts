@@ -13,6 +13,10 @@ export const sidebar = [
         title: "Create a sandbox",
         href: "/sandboxes/create/",
       },
+      {
+        title: "Management via CLI",
+        href: "/sandboxes/cli/",
+      },
     ],
   },
   {
