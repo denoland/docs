@@ -147,7 +147,8 @@ deno serve: Listening on http://0.0.0.0:8000/
 
 ## Initialize an empty project
 
-Running `deno init --empty` bootstraps an empty project with a basic console log.
+Running `deno init --empty` bootstraps an empty project with a basic console
+log.
 
 ```sh
 $ deno init --empty
