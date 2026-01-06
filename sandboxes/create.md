@@ -15,7 +15,7 @@ await using sandbox = await Sandbox.create();
 ```
 
 By default, this creates an ephemeral sandbox in the closest Deploy region with
-768 MB of RAM, no outbound network access, and a lifetime bound to the current
+1280 MB of RAM, no outbound network access, and a lifetime bound to the current
 process. You can tailor the sandbox by passing an options object.
 
 ## Available options
