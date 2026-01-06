@@ -74,13 +74,6 @@ For web applications, you can expose ports to access running services:
 deno sandbox create --expose-http 3000 --copy ./web-app --cwd /app "npm i && npm run dev"
 ```
 
-When working with tasks that take significant time, specify a lifetime to
-prevent premature shutdown:
-
-```bash
-deno sandbox create --lifetime 2m --copy ./project --cwd /app "deno run -A main.ts"
-```
-
 Complex workflows can be expressed as quoted command chains:
 
 ```bash
