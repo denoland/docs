@@ -43,6 +43,43 @@ with `--lifetime`:
 deno sandbox create --lifetime 2m
 ```
 
+You can also create a sandbox with a custom memory limit:
+
+```bash
+deno sandbox create --memory 2gb
+```
+
+To expose HTTP ports for web applications:
+
+```bash
+deno sandbox create --expose-http 3000
+```
+
+To create a sandbox and run a command immediately:
+
+```bash
+deno sandbox create ls /
+```
+
+This is especially useful for building and testing projects. You can copy files
+and run your build process in one command:
+
+```bash
+deno sandbox create --copy ./app --cwd /app "npm i && npm start"
+```
+
+For web applications, you can expose ports to access running services:
+
+```bash
+deno sandbox create --expose-http 3000 --copy ./web-app --cwd /app "npm i && npm run dev"
+```
+
+Complex workflows can be expressed as quoted command chains:
+
+```bash
+deno sandbox create --copy ./app --cwd /app "npm install && npm test && npm run build"
+```
+
 ## Viewing Your Sandboxes
 
 Use `deno sandbox list` (or `deno sandbox ls`) to see all sandboxes in your
@@ -149,40 +186,67 @@ The target path can be customized to organize files within the sandbox:
 deno sandbox copy ./frontend 550e8400-e29b-41d4-a716-446655440000:/app/web/
 ```
 
-## One-Shot Execution
+## Deploying Sandboxes
 
-For quick tasks where you want to create a sandbox, run a command, and clean up
-automatically, use `deno sandbox run`. This combines sandbox creation and
-command execution into a single step:
+You can deploy a running sandbox to a Deno Deploy app using the
+`deno sandbox deploy` command:
 
 ```bash
-deno sandbox run ls /
+deno sandbox deploy 550e8400-e29b-41d4-a716-446655440000 my-app
 ```
 
-This is especially useful for building and testing projects. You can copy files
-and run your build process in one command:
+By default, this deploys to a preview deployment. To deploy directly to
+production:
 
 ```bash
-deno sandbox run --copy ./app --cwd /app "npm i && npm start"
+deno sandbox deploy --prod 550e8400-e29b-41d4-a716-446655440000 my-app
 ```
 
-For web applications, you can expose ports to access running services:
+You can specify a custom working directory and entrypoint:
 
 ```bash
-deno sandbox run --expose-http 3000 --copy ./web-app --cwd /app "npm i && npm run dev"
+deno sandbox deploy --cwd /app --entrypoint main.ts 550e8400-e29b-41d4-a716-446655440000 my-app
 ```
 
-When working with tasks that take significant time, specify a lifetime to
-prevent premature shutdown:
+To pass arguments to the entrypoint script:
 
 ```bash
-deno sandbox run --lifetime 2m --copy ./project --cwd /app "deno run -A main.ts"
+deno sandbox deploy --args --port 8080 550e8400-e29b-41d4-a716-446655440000 my-app
 ```
 
-Complex workflows can be expressed as quoted command chains:
+## Managing Volumes
+
+The sandbox system supports persistent volumes for data that needs to survive
+across sandbox instances. Use the `deno sandbox volumes` command to manage them.
+
+### Creating Volumes
+
+Create a new volume with a specific name, capacity, and region:
 
 ```bash
-deno sandbox run --copy ./app --cwd /app "npm install && npm test && npm run build"
+deno sandbox volumes create --name my-data --capacity 10gb --region ord
+```
+
+### Listing Volumes
+
+List all volumes in your organization:
+
+```bash
+deno sandbox volumes list
+```
+
+You can also search for specific volumes:
+
+```bash
+deno sandbox volumes list my-data
+```
+
+### Deleting Volumes
+
+Remove a volume when you no longer need it:
+
+```bash
+deno sandbox volumes delete my-data
 ```
 
 ## Interactive Access
