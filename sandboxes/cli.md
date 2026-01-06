@@ -224,7 +224,7 @@ across sandbox instances. Use the `deno sandbox volumes` command to manage them.
 Create a new volume with a specific name, capacity, and region:
 
 ```bash
-deno sandbox volumes create --name my-data --capacity 10gb --region us-east1
+deno sandbox volumes create --name my-data --capacity 10gb --region ord
 ```
 
 ### Listing Volumes
