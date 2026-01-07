@@ -3689,6 +3689,23 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno deploy\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[args]...\u001b[0m"
     },
     {
+      "name": "sandbox",
+      "about": null,
+      "args": [
+        {
+          "name": "args",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "[args]..."
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno sandbox\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[args]...\u001b[0m"
+    },
+    {
       "name": "eval",
       "about": "Evaluate JavaScript from the command line.\n  \u001b[38;5;245mdeno eval \"console.log('hello world')\"\u001b[39m\n\nTo evaluate as TypeScript:\n  \u001b[38;5;245mdeno eval --ext=ts \"const v: string = 'hello'; console.log(v)\"\u001b[39m\n\nThis command has implicit access to all permissions.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/eval\u001b[39m",
       "args": [
@@ -7798,7 +7815,7 @@
           "required": false,
           "help": null,
           "help_heading": null,
-          "usage": "--install-alias[=<install-alias>]"
+          "usage": "--install-alias [<install-alias>]"
         },
         {
           "name": "unstable",
@@ -7922,6 +7939,13 @@
           "args": [],
           "subcommands": [],
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help deploy\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
+          "name": "sandbox",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help sandbox\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
           "name": "eval",
