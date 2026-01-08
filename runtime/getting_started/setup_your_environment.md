@@ -52,8 +52,7 @@ Navigate to **Plugins** and search for `Deno`. Install the official Deno plugin.
 ![The WebStorm plugins settings](./images/webstorm_setup.png)
 
 To configure the Plugin, go to **File** > **Settings** again. Navigate to
-**Languages & Frameworks** > **Deno**. Check **Enable Deno for your project**
-and specify the path to the Deno executable (if it has not been auto-detected).
+**Languages & Frameworks** > **JavaScript Runtime**. Switch **Preferred Runtime** to **Deno**. Under **Deno**, specify the path to the Deno executable (if it has not been auto-detected). 
 
 Check out
 [this blog post](https://blog.jetbrains.com/webstorm/2020/06/deno-support-in-jetbrains-ides/)
