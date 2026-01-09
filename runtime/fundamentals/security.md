@@ -327,9 +327,7 @@ operating system release, system uptime, load average, network interfaces, and
 system memory information.
 
 Access to system information is granted using the `--allow-sys` flag. This flag
-can be specified with a list of allowed interfaces from the following list:
-`hostname`, `osRelease`, `osUptime`, `loadavg`, `networkInterfaces`,
-`systemMemoryInfo`, `uid`, and `gid`. These strings map to functions in the
+can be specified with a list of allowed interfaces from the list defined in [Deno.SysPermissionDescriptor](/api/deno/~/Deno.SysPermissionDescriptor). These strings map to functions in the
 `Deno` namespace that provide OS info, like
 [Deno.systemMemoryInfo](https://docs.deno.com/api/deno/~/Deno.SystemMemoryInfo).
 
