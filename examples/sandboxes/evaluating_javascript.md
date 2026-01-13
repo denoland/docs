@@ -12,7 +12,7 @@ import { Sandbox } from "@deno/sandbox";
 
 await using sandbox = await Sandbox.create();
 
-const result = await sandbox.eval(`
+const result = await sandbox.deno.eval(`
   const a = 1;
   const b = 2;
   a + b;

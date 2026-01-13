@@ -5,8 +5,8 @@ url: /examples/sandboxes_javascript_repl/
 layout: sandbox-example.tsx
 ---
 
-The `sandbox.repl()` method can be used to provide an interactive JavaScript
-REPL in a sandbox.
+The `sandbox.deno.repl()` method can be used to provide an interactive
+JavaScript REPL in a sandbox.
 
 This example shows how to start a JavaScript REPL in a sandbox and execute code
 interactively.

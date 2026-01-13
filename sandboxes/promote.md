@@ -5,7 +5,7 @@ description: "Learn how to promote a sandbox to a full Deno Deploy app for produ
 
 There may be times when a sandbox proves a concept or prototype that should live
 on as a first-class Deno Deploy app. Instead of rebuilding the codebase
-elsewhere, you can promote the sandbox directly using `sandbox.deploy()`.
+elsewhere, you can promote the sandbox directly using `sandbox.deno.deploy()`.
 
 ## Ephemeral compute vs Deploy apps
 
@@ -21,19 +21,18 @@ Start in a sandbox to iterate quickly. Once the codebase stabilizes and needs
 24/7 availability, promote it to a Deploy app where builds, rollouts, and
 observability are managed for you.
 
-## Promote with `sandbox.deploy()`
+## Promote with `sandbox.deno.deploy()`
 
 When a sandbox proves the concept, you can turn it into an always-on Deploy app
-without rebuilding elsewhere. `sandbox.deploy()` snapshots the current file
+without rebuilding elsewhere. `sandbox.deno.deploy()` snapshots the current file
 system, carries over `allowNet`, and provisions an app with a durable URL,
 observability, and team access.
 
 ```tsx
-await using sandbox = await Sandbox.create({ lifetime: "10m" });
+await using sandbox = await Sandbox.create({ timeout: "10m" });
 // ...build or scaffold your service...
 
-const app = await sandbox.deploy({
-  name: "ai-preview",
+const app = await sandbox.deno.deploy("ai-preview", {
   entrypoint: "server.ts",
 });
 console.log(`Promoted to Deploy app ${app.slug}`);
@@ -47,5 +46,5 @@ Reasons to promote:
 - Replace brittle hand-offs; the exact sandbox state becomes the deployed
   revision.
 
-Use sandboxes for rapid, ephemeral work, then call `sandbox.deploy()` when the
-code should live as a managed service.
+Use sandboxes for rapid, ephemeral work, then call `sandbox.deno.deploy()` when
+the code should live as a managed service.

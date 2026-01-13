@@ -6,7 +6,7 @@ layout: sandbox-example.tsx
 ---
 
 Copy files from your machine into the sandbox using
-`sandbox.upload(localPath, sandboxPath)`.
+`sandbox.fs.upload(localPath, sandboxPath)`.
 
 ```ts
 import { Sandbox } from "@deno/sandbox";

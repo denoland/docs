@@ -96,8 +96,7 @@ await using sandbox = await Sandbox.create();
 
 // ... build your application ...
 
-const app = await sandbox.deno.deploy({
-  name: "my-app",
+const app = await sandbox.deno.deploy("my-app", {
   options: {
     path: "build-output", // optional: path to the directory containing the application to deploy
     production: true, // optional: deploy to production
