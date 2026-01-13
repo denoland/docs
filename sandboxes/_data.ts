@@ -39,8 +39,8 @@ export const sidebar = [
         href: "/sandboxes/volumes/",
       },
       {
-        title: "Lifetimes",
-        href: "/sandboxes/lifetimes/",
+        title: "Timeouts",
+        href: "/sandboxes/timeouts/",
       },
       {
         title: "Security",

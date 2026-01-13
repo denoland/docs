@@ -46,7 +46,7 @@ deno sandbox create --lifetime 2m
 You can also create a sandbox with a custom memory limit:
 
 ```bash
-deno sandbox create --memory 2gb
+deno sandbox create --memory 2gib
 ```
 
 To expose HTTP ports for web applications:
@@ -224,7 +224,7 @@ across sandbox instances. Use the `deno sandbox volumes` command to manage them.
 Create a new volume with a specific name, capacity, and region:
 
 ```bash
-deno sandbox volumes create --name my-data --capacity 10gb --region ord
+deno sandbox volumes create my-data --capacity 10gb --region ord
 ```
 
 ### Listing Volumes
@@ -264,12 +264,12 @@ additional software as needed. The sandbox continues running after you
 disconnect, so you can reconnect later or use other commands to interact with it
 remotely.
 
-## Managing Sandbox Lifetime
+## Managing Sandbox Timeout
 
 ### Extending Sandbox Duration
 
 Sometimes you'll need more time to complete your work in a running sandbox. The
-`deno sandbox extend` command allows you to extend the lifetime of any running
+`deno sandbox extend` command allows you to extend the timeout of any running
 sandbox without interrupting ongoing processes:
 
 ```bash

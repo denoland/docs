@@ -17,7 +17,7 @@ import { Sandbox } from "@deno/sandbox";
 await using sandbox = await Sandbox.create();
 
 // Start a JavaScript REPL
-const repl = await sandbox.repl();
+const repl = await sandbox.deno.repl();
 
 // Execute code interactively, maintaining state
 await repl.eval("const x = 42;");

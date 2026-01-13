@@ -60,11 +60,11 @@ be sent to `api.openai.com`.
 
 ```tsx
 await Sandbox.create({
-  env: {
-    OPENAI_API_KEY: Sandbox.secret(
-      "api.openai.com",
-      process.env.OPENAI_API_KEY,
-    ),
+  secrets: {
+    OPENAI_API_KEY: {
+      hosts: ["api.openai.com"],
+      value: process.env.OPENAI_API_KEY,
+    },
   },
 });
 ```

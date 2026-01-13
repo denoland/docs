@@ -17,7 +17,7 @@ import { Sandbox } from "@deno/sandbox";
 await using sandbox = await Sandbox.create();
 
 // Start a VSCode instance
-const vscode = await sandbox.vscode();
+const vscode = await sandbox.exposeVscode();
 
 console.log(vscode.url); // print the url of the running instance
 await vscode.status; // wait until it exits

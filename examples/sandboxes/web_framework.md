@@ -23,12 +23,12 @@ const PACKAGE_JSON = {
   type: "module",
   dependencies: { express: "^4.19.2" },
 };
-await sandbox.writeTextFile(
+await sandbox.fs.writeTextFile(
   "package.json",
   JSON.stringify(PACKAGE_JSON, null, 2),
 );
 
-await sandbox.writeTextFile(
+await sandbox.fs.writeTextFile(
   "server.js",
   `import express from 'express';
 const app = express();
@@ -42,7 +42,7 @@ app.listen(3000, () => console.log('listening on :3000'));
 await sandbox.sh`deno install`;
 
 // 3) Start the server
-const server = await sandbox.createJsRuntime({ entrypoint: "server.js" });
+const server = await sandbox.deno.run({ entrypoint: "server.js" });
 
 // 4) Publish to the internet
 const publicUrl = await sandbox.exposeHttp({ port: 3000 });

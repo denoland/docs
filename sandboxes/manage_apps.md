@@ -87,16 +87,16 @@ are cleaned up automatically.
 
 ## Publish to a Deploy app from a sandbox
 
-The `sandbox.deploy()` method can be used to publish resources from a sandbox to
-an existing Deno Deploy app. This allows you to use a sandbox as a deployment
-pipeline for an application hosted on Deno Deploy.
+The `sandbox.deno.deploy()` method can be used to publish resources from a
+sandbox to an existing Deno Deploy app. This allows you to use a sandbox as a
+deployment pipeline for an application hosted on Deno Deploy.
 
 ```tsx
 await using sandbox = await Sandbox.create();
 
 // ... build your application ...
 
-const app = await sandbox.deploy({
+const app = await sandbox.deno.deploy({
   name: "my-app",
   options: {
     path: "build-output", // optional: path to the directory containing the application to deploy
@@ -114,7 +114,7 @@ console.log(`${app.slug} deployed.`);
 
 - Maintain a dedicated automation token with least privilege for management
   scripts.
-- Pair these APIs with `sandbox.deploy()` to seed apps from sandbox experiments
-  and then continue managing them over time.
+- Pair these APIs with `sandbox.deno.deploy()` to seed apps from sandbox
+  experiments and then continue managing them over time.
 - Log every change (slug renames, deletions) so you have an audit trail outside
   of the dashboard.

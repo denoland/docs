@@ -1,5 +1,5 @@
 ---
-title: "Sandbox Lifetimes"
+title: "Sandbox Timeouts"
 description: "Understand how long sandboxes stay alive, how to extend or reconnect to them, and when to promote work to a Deploy app."
 ---
 
@@ -8,7 +8,7 @@ purpose, and disappear—reducing the blast radius of untrusted code and removin
 infrastructure chores. Still, you can control exactly how long a sandbox stays
 alive and even reconnect later when debugging is required.
 
-## Default lifetime: `"session"`
+## Default timeout: `"session"`
 
 ```tsx
 await using sandbox = await Sandbox.create();
@@ -18,12 +18,12 @@ With no options set, the sandbox lives for the duration of your script. Once the
 `Sandbox` instance is closed, the microVM shuts down and frees all resources.
 This keeps costs predictable and prevents orphaned infrastructure.
 
-## Duration-based lifetimes
+## Duration-based timeouts
 
 Provide a duration string to keep a sandbox alive after the client disconnects:
 
 ```tsx
-const sandbox = await Sandbox.create({ lifetime: "5m" });
+const sandbox = await Sandbox.create({ timeout: "5m" });
 const id = sandbox.id;
 await sandbox.close(); // process can exit now
 
@@ -35,8 +35,8 @@ Supported suffixes: `s` (seconds) and `m` (minutes). Examples: `"30s"`, `"5m"`,
 `"90s"`. Use this mode for manual inspection, SSH debugging, or when a bot needs
 to resume work mid-way.
 
-If you require a longer lifetime, it is possible to promote a duration-based
-sandbox to a Deno Deploy app using [`sandbox.deploy()`](./promote.md).
+If you require a longer timeout, it is possible to promote a duration-based
+sandbox to a Deno Deploy app using [`sandbox.deno.deploy()`](./promote.md).
 
 ## Forcefully ending a sandbox
 
@@ -46,13 +46,13 @@ sandbox to a Deno Deploy app using [`sandbox.deploy()`](./promote.md).
   attached volumes, but this also happens automatically when your code drops the
   last reference to the sandbox or the configured duration elapses.
 
-## Extending the lifetime of a sandbox
+## Extending the timeout of a sandbox
 
 Coming soon.
 
 ## Related APIs
 
-- [`Sandbox.create()`](./create.md) – pass the `lifetime` option when
+- [`Sandbox.create()`](./create.md) – pass the `timeout` option when
   provisioning.
 - `Sandbox.connect({ id })` – resume control of a duration-based sandbox.
 - `Sandbox.kill()` – terminate early.

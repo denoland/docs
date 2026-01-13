@@ -23,7 +23,7 @@ import { Sandbox } from "@deno/sandbox";
 await using sandbox = await Sandbox.create({ memoryMb: 4096 });
 
 // Check available memory
-const memInfo = await sandbox.eval<{ total: number }>(
+const memInfo = await sandbox.deno.eval<{ total: number }>(
   "Deno.systemMemoryInfo()",
 );
 console.log("Total memory:", memInfo.total);

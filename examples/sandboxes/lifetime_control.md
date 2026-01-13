@@ -5,13 +5,13 @@ url: /examples/sandboxes_lifetime_control/
 layout: sandbox-example.tsx
 ---
 
-You can control how long your sandbox stays alive using the lifetime option:
+You can control how long your sandbox stays alive using the timeout option:
 
 ```ts
 import { Sandbox } from "@deno/sandbox";
 
 // Default: "session" - sandbox shuts down when you close/dispose the client
-await using sandbox = await Sandbox.create({ lifetime: "session" });
+await using sandbox = await Sandbox.create({ timeout: "session" });
 ```
 
 Supported duration suffixes: `s` (seconds), `m` (minutes).
@@ -23,7 +23,7 @@ import { Sandbox } from "@deno/sandbox";
 
 // Duration-based: keep sandbox alive for a specific time period
 // Useful when you want the sandbox to persist after the script exits
-const sandbox = await Sandbox.create({ lifetime: "5m" }); // 5 minutes
+const sandbox = await Sandbox.create({ timeout: "5m" }); // 5 minutes
 const id = sandbox.id;
 // Close the *connection* to the sandbox; the sandbox keeps running
 await sandbox.close();
