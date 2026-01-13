@@ -1,14 +1,14 @@
 ---
 title: "Intereactive JavaScript REPL"
-description: "Learn how to provide an interactive JavaScript REPL in a sandbox."
+description: "Learn how to provide an interactive Deno REPL in a sandbox."
 url: /examples/sandboxes_javascript_repl/
 layout: sandbox-example.tsx
 ---
 
-The `sandbox.deno.repl()` method can be used to provide an interactive
-JavaScript REPL in a sandbox.
+The `sandbox.deno.repl()` method can be used to provide an interactive Deno REPL
+in a sandbox.
 
-This example shows how to start a JavaScript REPL in a sandbox and execute code
+This example shows how to start a Deno REPL in a sandbox and execute code
 interactively.
 
 ```ts
@@ -16,7 +16,7 @@ import { Sandbox } from "@deno/sandbox";
 
 await using sandbox = await Sandbox.create();
 
-// Start a JavaScript REPL
+// Start a Deno REPL
 const repl = await sandbox.deno.repl();
 
 // Execute code interactively, maintaining state
