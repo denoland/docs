@@ -32,7 +32,7 @@ await sandbox.close();
 const reconnected = await Sandbox.connect({ id });
 await reconnected.sh`echo 'Still alive!'`;
 
-// You can still forcibly terminate it before its lifetime expires
+// You can still forcibly terminate it before its timeout elapses
 await reconnected.kill();
 // At this point, the sandbox is no longer reconnectable
 ```
