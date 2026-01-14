@@ -44,9 +44,9 @@ await using sandbox = await Sandbox.create();
 await sandbox.sh`ls -lh /`;
 ```
 
-## Security Policies (**Coming soon**)
+## Security Policies
 
-Povision a Sandbox so that it can only talk to approved hosts:
+Provision a sandbox so that it can only talk to approved hosts:
 
 ```tsx
 await Sandbox.create({
@@ -54,12 +54,12 @@ await Sandbox.create({
 });
 ```
 
-Environment variables marked as Secrets never enter the sandbox. Below,
-`OPENAI_API_KEY` is never visibile to code inside the sandbox and only can ever
-be sent to `api.openai.com`.
+Secrets never enter the sandbox environment. The real value is substituted only
+when the sandbox makes outbound requests to approved hosts.
 
 ```tsx
 await Sandbox.create({
+  allowNet: ["api.openai.com"],
   secrets: {
     OPENAI_API_KEY: {
       hosts: ["api.openai.com"],

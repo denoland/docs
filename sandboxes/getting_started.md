@@ -84,10 +84,13 @@ Details about the sandbox will be shown in its **Event log**.
 
 ## Configuring your sandbox
 
-When creating a sandbox witb `Sandbox.create()`, you can configure it with the
+When creating a sandbox with `Sandbox.create()`, you can configure it with the
 following options:
 
-- `allowNet`: List of hosts that can receive outbound traffic from the sandbox.
+- `allowNet`: Optional list of allowed outbound hosts. See
+  [Outbound network control](./security#outbound-network-control).
+- `secrets`: Secret substitution rules for outbound requests. See
+  [Secret redaction and substitution](./security#secret-redaction-and-substitution).
 - `region`: Deploy region where the sandbox will be created.
 - `memoryMb`: Amount of memory allocated to the sandbox.
 - `timeout`: Timeout of the sandbox.

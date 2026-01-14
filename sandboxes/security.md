@@ -12,16 +12,61 @@ infrastructure safe.
 
 Secrets never enter the sandbox environment variables. Instead, Deploy
 substitutes them only when the sandbox makes outbound requests to an approved
-host. A command such as:
+host. Configure secrets when creating a sandbox:
+
+```ts
+await using sandbox = await Sandbox.create({
+  secrets: {
+    OPENAI_API_KEY: {
+      hosts: ["api.openai.com"],
+      value: process.env.OPENAI_API_KEY,
+    },
+    ANTHROPIC_API_KEY: {
+      hosts: ["api.anthropic.com"],
+      value: process.env.ANTHROPIC_API_KEY,
+    },
+  },
+});
+```
+
+Inside the sandbox, the environment variable holds a placeholder:
 
 ```bash
 echo $ANTHROPIC_API_KEY
 # <placeholder>
 ```
 
-confirms that user code cannot read the real secret. This blocks the most common
-AI attack path of prompt injection followed by secret exfiltration while
+This confirms that user code cannot read the real secret. This blocks the most
+common AI attack path of prompt injection followed by secret exfiltration while
 allowing your automation to call third-party APIs securely.
+
+## Outbound network control
+
+By default, sandboxes have unrestricted outbound network access. Use the
+`allowNet` option to restrict traffic to specific hosts:
+
+```ts
+await using sandbox = await Sandbox.create({
+  allowNet: ["api.openai.com", "*.anthropic.com"],
+});
+```
+
+Supported patterns include:
+
+| Pattern           | Matches                         |
+| ----------------- | ------------------------------- |
+| `example.com`     | Exact hostname, any port        |
+| `example.com:443` | Exact hostname on port 443 only |
+| `*.example.com`   | Any subdomain of example.com    |
+| `192.0.2.1`       | Exact IPv4 address              |
+| `[2001:db8::1]`   | Exact IPv6 address              |
+
+Any outbound request to a host not in the allow list will be blocked when
+`allowNet` is provided. When `allowNet` is omitted, all outbound requests are
+allowed. Combine this with
+[the `secrets` option](#secret-redaction-and-substitution) to ensure that even
+if code is tricked into calling an unexpected endpoint, credentials are never
+sent.
 
 ## Filesystem isolation and cleanup
 
