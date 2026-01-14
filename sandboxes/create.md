@@ -15,15 +15,16 @@ await using sandbox = await Sandbox.create();
 ```
 
 By default, this creates an ephemeral sandbox in the closest Deploy region with
-1280 MB of RAM, no outbound network access, and a lifetime bound to the current
-process. You can tailor the sandbox by passing an options object.
+1280 MB of RAM, unrestricted outbound network access, and a lifetime bound to
+the current process. You can tailor the sandbox by passing an options object.
 
 ## Available options
 
 | Option     | Description                                                                                                             |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `region`   | Eg `ams` or `ord`                                                                                                       |
-| `allowNet` | Array of hosts that can receive requests from the sandbox. If specified, any hosts not listed are unreachable.          |
+| `allowNet` | Optional list of allowed outbound hosts. See [Outbound network control](./security#outbound-network-control). |
+| `secrets`  | Secrets to substitute on outbound requests to approved hosts. See [Secret redaction and substitution](./security#secret-redaction-and-substitution). |
 | `memoryMb` | Allocate between 768 and 4096 MB of RAM for memory-heavy tasks or tighter budgets.                                      |
 | `lifetime` | [How long the sandbox stays alive](./lifetimes) in (m) or (s) such as `5m`                                              |
 | `labels`   | Attach arbitrary key/value labels to help identify and manage sandboxes                                                 |
@@ -36,6 +37,20 @@ process. You can tailor the sandbox by passing an options object.
 ```tsx
 const sandbox = await Sandbox.create({
   allowNet: ["api.openai.com", "api.stripe.com"],
+});
+```
+
+### Configure secret substitution for approved hosts
+
+```tsx
+const sandbox = await Sandbox.create({
+  allowNet: ["api.openai.com"],
+  secrets: {
+    OPENAI_API_KEY: {
+      hosts: ["api.openai.com"],
+      value: process.env.OPENAI_API_KEY,
+    },
+  },
 });
 ```
 
