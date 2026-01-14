@@ -95,7 +95,7 @@ const volume = await client.volumes.create({
     labels: { job: "prepare" },
   });
 
-  await sandbox.writeTextFile("/data/dataset/hello.txt", "Persist me!\n");
+  await sandbox.fs.writeTextFile("/data/dataset/hello.txt", "Persist me!\n");
 }
 
 // A new sandbox—possibly started hours later—can read the same file
@@ -107,7 +107,7 @@ const volume = await client.volumes.create({
     },
   });
 
-  const contents = await sandbox.readTextFile("/data/dataset/hello.txt");
+  const contents = await sandbox.fs.readTextFile("/data/dataset/hello.txt");
   console.log(contents); // "Persist me!"
 }
 ```

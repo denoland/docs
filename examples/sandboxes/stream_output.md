@@ -20,7 +20,7 @@ import { Writable } from "node:stream";
 await using sandbox = await Sandbox.create();
 
 // Create a large file in the sandbox
-await sandbox.writeTextFile("big.txt", "#".repeat(5_000_000));
+await sandbox.fs.writeTextFile("big.txt", "#".repeat(5_000_000));
 
 // Stream it out to a local file
 const child = await sandbox.spawn("cat", {

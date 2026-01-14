@@ -12,17 +12,17 @@ import { Sandbox } from "@deno/sandbox";
 
 await using sandbox = await Sandbox.create();
 
-const { hostname, username, privateKey } = await sandbox.exposeSsh();
+const { hostname, username } = await sandbox.exposeSsh();
 console.log(`ssh ${username}@${hostname}`);
 
 // keep process alive or interact via SSH until done...
 await new Promise((resolve) => setTimeout(resolve, 10 * 60 * 1000));
 ```
 
-The sandbox remains reachable for the configured lifetime. Once your script
-releases its references (for example, the `await using` block ends) the sandbox
-shuts down and the SSH endpoint disappears; you can also call `sandbox.kill()`
-if you need to tear it down immediately.
+The sandbox remains reachable until the configured timeout expires. Once your
+script releases its references (for example, the `await using` block ends) the
+sandbox shuts down and the SSH endpoint disappears; you can also call
+`sandbox.kill()` if you need to tear it down immediately.
 
 ## When to use SSH access
 
@@ -37,15 +37,13 @@ projects or organizations.
 ## Connecting from your machine
 
 1. Request credentials via `sandbox.exposeSsh()`.
-2. Store the returned `privateKey` (or `identityFile`) to a temporary file with
-   `chmod 600` permissions.
-3. Connect using the provided username and hostname:
+2. Connect using the provided username and hostname:
 
 ```bash
-ssh -i ./sandbox-key ${username}@${hostname}
+ssh ${username}@${hostname}
 ```
 
-4. Use regular terminal workflows: copy files, run top, tail logs, or attach to
+3. Use regular terminal workflows: copy files, run top, tail logs, or attach to
    running processes.
 
 :::tip
@@ -65,9 +63,8 @@ servers that are bound to `localhost` inside the sandbox.
 
 The SSH tunnel closes if the sandbox shuts down. Keep it running by:
 
-- Setting `lifetime: "session"` (default) and keeping your managing script
-  active
-- Passing `lifetime: "5m"` (or another duration) when creating the sandbox so it
+- Setting `timeout: "session"` (default) and keeping your managing script active
+- Passing `timeout: "5m"` (or another duration) when creating the sandbox so it
   persists after the script exits, then reconnecting later with
   `Sandbox.connect({ id })`
 
@@ -79,21 +76,17 @@ end it on demand.
 
 ```tsx
 import { Sandbox } from "@deno/sandbox";
-import { writeTextFile } from "node:fs/promises";
 
-await using sandbox = await Sandbox.create({ lifetime: "10m" });
+await using sandbox = await Sandbox.create({ timeout: "10m" });
 
 // Prepare the app
-await sandbox.upload("./app", ".");
+await sandbox.fs.upload("./app", ".");
 await sandbox.sh`deno task dev`
   .noThrow(); // start server; leave running for inspection
 
-// Get SSH details and write key to disk
+// Get SSH details
 const ssh = await sandbox.exposeSsh();
-await writeTextFile("./sandbox-key", ssh.privateKey);
-await sandbox.sh`chmod 600 sandbox-key`;
-
-console.log(`Connect with: ssh -i sandbox-key ${ssh.username}@${ssh.hostname}`);
+console.log(`Connect with: ssh ${ssh.username}@${ssh.hostname}`);
 
 // Block until you're done debugging manually
 await new Promise((resolve) => setTimeout(resolve, 10 * 60 * 1000));
