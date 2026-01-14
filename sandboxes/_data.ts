@@ -27,8 +27,8 @@ export const sidebar = [
         href: "/sandboxes/expose_http/",
       },
       {
-        title: "Expose SSH",
-        href: "/sandboxes/expose_ssh/",
+        title: "SSH",
+        href: "/sandboxes/ssh/",
       },
       {
         title: "Manage Deploy apps",
