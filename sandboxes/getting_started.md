@@ -93,13 +93,13 @@ following options:
   [Secret redaction and substitution](./security#secret-redaction-and-substitution).
 - `region`: Deploy region where the sandbox will be created.
 - `memoryMb`: Amount of memory allocated to the sandbox.
-- `lifetime`: Lifetime of the sandbox.
+- `timeout`: Timeout of the sandbox.
 - `labels`: Arbitrary key/value tags to help identify and manage sandboxes
 
 ```tsx
 await using sandbox = await Sandbox.create({
-  allowNet: ["api.stripe.com", "api.openai.com"], // optional: restrict outbound hosts
-  region: "sjc", // optional: choose the Deploy region
+  allowNet: ["api.stripe.com", "api.openai.com"], // optional: list of hosts that this sandbox can communicate with
+  region: "ams", // optional: choose the Deploy region
   memoryMb: 1024, // optional: pick the RAM size (768-4096)
 });
 ```
@@ -119,7 +119,7 @@ Or upload a script from the local filesystem and run it:
 
 ```ts
 // Upload a file to a specific path in the sandbox
-await sandbox.upload("./local-hello.ts", "./hello.ts");
+await sandbox.fs.upload("./local-hello.ts", "./hello.ts");
 const proc = await sandbox.spawn("deno", {
   args: ["run", "hello.ts"],
   stdout: "piped",
@@ -131,14 +131,14 @@ await proc.status;
 ```
 
 You can keep state between commands, stream stdout and stderr, or open an
-interactive REPL with `sandbox.repl()` for agent-style workflows.
+interactive REPL with `sandbox.deno.repl()` for agent-style workflows.
 
 ## Deploying from a sandbox
 
 The snippet below walks through an end-to-end workflow: it creates a Deploy app
 via the `Client`, boots a high-memory sandbox for heavier builds, scaffolds and
-builds a Next.js project inside that VM, then calls `sandbox.deploy()` to push
-the compiled artifacts while streaming build logs back to your terminal.
+builds a Next.js project inside that VM, then calls `sandbox.deno.deploy()` to
+push the compiled artifacts while streaming build logs back to your terminal.
 
 ```tsx
 import { Client, Sandbox } from "@deno/sandbox";
@@ -154,7 +154,7 @@ await sandbox
 await sandbox.sh`cd my-app && deno install`;
 await sandbox.sh`cd my-app && deno task build`;
 await sandbox.sh`cd my-app && du -sh .`;
-const build = await sandbox.deploy(app.slug, {
+const build = await sandbox.deno.deploy(app.slug, {
   path: "my-app",
   production: true,
   build: {
@@ -168,9 +168,9 @@ for await (const log of build.logs()) {
 }
 ```
 
-## Tuning lifetime, cleanup, and reconnect
+## Tuning timeout, cleanup, and reconnect
 
-- `lifetime: "session"` (default) destroys the VM once your script finishes.
+- `timeout: "session"` (default) destroys the VM once your script finishes.
 - Provide durations such as `"5m"` to keep the sandbox alive even after the
   client disconnects. You can later `Sandbox.connect({ id })` to resume work.
 - Cleanup happens automatically when your code drops the last reference (or the

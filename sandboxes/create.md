@@ -15,8 +15,8 @@ await using sandbox = await Sandbox.create();
 ```
 
 By default, this creates an ephemeral sandbox in the closest Deploy region with
-1280 MB of RAM, unrestricted outbound network access, and a lifetime bound to
-the current process. You can tailor the sandbox by passing an options object.
+1280 MB of RAM, no outbound network access, and a timeout bound to the current
+process. You can tailor the sandbox by passing an options object.
 
 ## Available options
 
@@ -26,9 +26,9 @@ the current process. You can tailor the sandbox by passing an options object.
 | `allowNet` | Optional list of allowed outbound hosts. See [Outbound network control](./security#outbound-network-control).                                        |
 | `secrets`  | Secrets to substitute on outbound requests to approved hosts. See [Secret redaction and substitution](./security#secret-redaction-and-substitution). |
 | `memoryMb` | Allocate between 768 and 4096 MB of RAM for memory-heavy tasks or tighter budgets.                                                                   |
-| `lifetime` | [How long the sandbox stays alive](./lifetimes) in (m) or (s) such as `5m`                                                                           |
+| `timeout`  | [How long the sandbox stays alive](./timeouts) in (m) or (s) such as `5m`                                                                            |
 | `labels`   | Attach arbitrary key/value labels to help identify and manage sandboxes                                                                              |
-| `env`      | Set initial environment variables inside the sandbox. Secrets should still be managed via Deploy’s secret substitution.                              |
+| `env`      | Environment variables to start the sandbox with.                                                                                                     |
 
 ## Example configurations
 
@@ -66,7 +66,7 @@ const sandbox = await Sandbox.create({
 ### Keep the sandbox alive for later inspection
 
 ```tsx
-const sandbox = await Sandbox.create({ lifetime: "10m" });
+const sandbox = await Sandbox.create({ timeout: "10m" });
 const id = sandbox.id;
 await sandbox.close(); // disconnect but leave VM running
 

@@ -7,11 +7,11 @@ You can run dev servers, preview apps, webhook receivers, or framework CLIs on
 any port and publish them instantly to a secure, random HTTPS URL.
 
 ```tsx
-await sandbox.writeTextFile(
+await sandbox.fs.writeTextFile(
   "server.js",
   "Deno.serve(() => new Response('Hello from Sandboxes'));",
 );
-const runtime = await sandbox.createJsRuntime({ entrypoint: "server.js" });
+const runtime = await sandbox.deno.run({ entrypoint: "server.js" });
 const publicUrl = await sandbox.exposeHttp({ port: 8000 });
 console.log(publicUrl); // https://<random>.sandbox.deno.net
 ```
@@ -78,7 +78,7 @@ import { Sandbox } from "@deno/sandbox";
 await using sandbox = await Sandbox.create();
 
 // Install dependencies
-await sandbox.writeTextFile(
+await sandbox.fs.writeTextFile(
   "package.json",
   JSON.stringify(
     {
