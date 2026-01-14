@@ -8,8 +8,8 @@ export const SidebarNav = [
     href: "/deploy/",
   },
   {
-    title: "Sandboxes",
-    href: "/sandboxes/",
+    title: "Sandbox",
+    href: "/sandbox/",
   },
   {
     title: "Deploy Classic",

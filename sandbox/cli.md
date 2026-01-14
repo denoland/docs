@@ -1,15 +1,16 @@
 ---
 title: "Management via CLI"
-description: "Overview of how to manage sandboxes using the Deno CLI."
+description: "How to manage Deno Sandbox with the Deno CLI."
 ---
 
-The Deno CLI includes built-in commands for managing sandboxes, allowing you to
-create, control, and interact with them from your terminal.
+The Deno CLI includes built-in commands for managing your Deno Sandbox
+instances, allowing you to create, control, and interact with them from your
+terminal.
 
-This integration makes sandbox management feel natural within your existing Deno
+This integration makes Deno Sandbox management feel natural within your existing Deno
 workflow.
 
-## Creating Your First Sandbox
+## Creating your first Deno Sandbox
 
 The simplest way to get started is with `deno sandbox create`. By default, this
 creates an interactive session-based sandbox that automatically opens an SSH
@@ -80,7 +81,7 @@ Complex workflows can be expressed as quoted command chains:
 deno sandbox create --copy ./app --cwd /app "npm install && npm test && npm run build"
 ```
 
-## Viewing Your Sandboxes
+## Viewing your Deno Sandbox
 
 Use `deno sandbox list` (or `deno sandbox ls`) to see all sandboxes in your
 organization:
@@ -96,7 +97,7 @@ This shows each sandbox's unique ID (which you'll use with other commands), when
 it was created, whether it's currently running, and how long it's been active.
 The sandbox ID is a UUID that uniquely identifies each instance.
 
-## Running Commands Remotely
+## Running commands remotely
 
 The `deno sandbox exec` command lets you run individual commands in any running
 sandbox without opening an interactive session. This is perfect for automation,
@@ -141,13 +142,13 @@ cat large-dataset.csv | deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 -
 This makes it easy to integrate sandbox processing into larger Unix workflows
 and data pipelines.
 
-## Transferring Files
+## Transferring files
 
-While you can copy files during sandbox creation, you might need to update or
-retrieve files later. The `deno sandbox copy` command (also available as
+While you can copy files during Deno Sandbox creation, you might need to update
+or retrieve files later. The `deno sandbox copy` command (also available as
 `deno sandbox cp`) transfers files in any direction: from your local machine to
-sandboxes, from sandboxes back to your machine, or even between different
-sandboxes.
+a Deno Sandbox, from a Deno Sandbox back to your machine, or even between
+different sandboxes.
 
 Copy files from your local machine to a sandbox:
 
@@ -167,7 +168,7 @@ Copy files between different sandboxes:
 deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/data.csv 6ba7b810-9dad-11d1-80b4-00c04fd430c8:/app/input/
 ```
 
-You can use glob patterns to copy multiple files from sandboxes:
+You can use glob patterns to copy multiple files from Deno Sandbox:
 
 ```bash
 deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/*.json ./config/
@@ -186,7 +187,7 @@ The target path can be customized to organize files within the sandbox:
 deno sandbox copy ./frontend 550e8400-e29b-41d4-a716-446655440000:/app/web/
 ```
 
-## Deploying Sandboxes
+## Deploying Deno Sandbox
 
 You can deploy a running sandbox to a Deno Deploy app using the
 `deno sandbox deploy` command:
@@ -214,12 +215,12 @@ To pass arguments to the entrypoint script:
 deno sandbox deploy --args --port 8080 550e8400-e29b-41d4-a716-446655440000 my-app
 ```
 
-## Managing Volumes
+## Managing volumes
 
 The sandbox system supports persistent volumes for data that needs to survive
 across sandbox instances. Use the `deno sandbox volumes` command to manage them.
 
-### Creating Volumes
+### Creating volumes
 
 Create a new volume with a specific name, capacity, and region:
 
@@ -227,7 +228,7 @@ Create a new volume with a specific name, capacity, and region:
 deno sandbox volumes create my-data --capacity 10gb --region ord
 ```
 
-### Listing Volumes
+### Listing volumes
 
 List all volumes in your organization:
 
@@ -241,7 +242,7 @@ You can also search for specific volumes:
 deno sandbox volumes list my-data
 ```
 
-### Deleting Volumes
+### Deleting volumes
 
 Remove a volume when you no longer need it:
 
@@ -249,7 +250,7 @@ Remove a volume when you no longer need it:
 deno sandbox volumes delete my-data
 ```
 
-## Interactive Access
+## Interactive access
 
 When you need to work interactively within a sandbox; be it editing files,
 debugging issues, or exploring the environment, you can use `deno sandbox ssh`:
@@ -264,9 +265,9 @@ additional software as needed. The sandbox continues running after you
 disconnect, so you can reconnect later or use other commands to interact with it
 remotely.
 
-## Managing Sandbox Timeout
+## Managing Deno Sandbox timeout
 
-### Extending Sandbox Duration
+### Extending Deno Sandbox duration
 
 Sometimes you'll need more time to complete your work in a running sandbox. The
 `deno sandbox extend` command allows you to extend the timeout of any running
@@ -281,7 +282,7 @@ into it, running remote commands, or have background processes running. All
 active connections and processes continue uninterrupted while the sandbox's
 expiration time is updated.
 
-### Cleanup and Termination
+### Cleanup and termination
 
 When you're finished with a sandbox, use `deno sandbox kill` (or
 `deno sandbox rm`) to terminate it and free up resources:
@@ -294,9 +295,9 @@ This immediately stops all processes in the sandbox and releases its resources.
 Be sure to save any important work before terminating a sandbox, as all data
 inside will be lost.
 
-## Common Workflows
+## Common workflows
 
-### Development and Testing
+### Development and testing
 
 A typical development workflow involves creating a sandbox with your code,
 setting up dependencies, and running tests:
@@ -321,7 +322,7 @@ deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/build/ ./dist/
 deno sandbox kill 550e8400-e29b-41d4-a716-446655440000
 ```
 
-### Data Processing
+### Data processing
 
 For data processing workflows where you need to retrieve results, use a
 combination of remote execution and SSH access:

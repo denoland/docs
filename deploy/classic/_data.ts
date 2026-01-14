@@ -125,8 +125,8 @@ export const SidebarNav = [
     href: "/deploy/",
   },
   {
-    title: "Sandboxes",
-    href: "/sandboxes/",
+    title: "Deno Sandbox",
+    href: "/sandbox/",
   },
   {
     title: "Deploy Classic",

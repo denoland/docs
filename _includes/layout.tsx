@@ -11,13 +11,13 @@ export default function Layout(data: Lume.Data) {
   const isServicesPage = data.url.startsWith("/deploy") ||
     data.url.startsWith("/subhosting") ||
     data.url.startsWith("/services") ||
-    data.url.startsWith("/sandboxes");
+    data.url.startsWith("/sandbox");
   const hasSubNav = isServicesPage;
 
   return (
     <html lang="en">
       <head>
-        <meta charset="utf-8" />
+        <meta charet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light dark" />
         <title>{deleteBackticks(data.title)}</title>

@@ -1,7 +1,7 @@
 ---
 title: "Upload files and directories"
 description: "Learn how to upload files and directories to a sandbox."
-url: /examples/sandboxes_upload_files/
+url: /examples/sandbox_upload_files/
 layout: sandbox-example.tsx
 ---
 

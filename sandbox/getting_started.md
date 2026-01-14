@@ -1,21 +1,22 @@
 ---
 title: "Getting started"
-description: "Step-by-step walkthrough for enabling Sandboxes, creating your first microVM, running commands, exposing services, and managing secrets."
+description: "Step-by-step walkthrough for enabling Deno Sandbox, creating your first microVM, running commands, exposing services, and managing secrets."
 ---
 
-To use Sandboxes, you need a Deno Deploy account. If you do not have one yet you
-can sign up for a free account at [console.deno.com](https://console.deno.com).
+To use Deno Sandbox, you need a Deno Deploy account. If you do not have one yet
+you can sign up for a free account at
+[console.deno.com](https://console.deno.com).
 
-## Access the Sandboxes dashboard
+## Access the Deno Sandbox dashboard
 
 1. Visit [console.deno.com](https://console.deno.com/) and sign in with your
    Deploy account.
-2. Choose or create the organization where you want to run sandboxes.
+2. Choose or create the organization where you want to run Deno Sandbox.
 3. Open the **Sandboxes** tab to view existing sandboxes, lifetime usage, and
    access tokens.
 
-Sandboxes and Deploy apps share the same organization boundary, so you can reuse
-members, tokens, and observability settings across both products.
+Deno Sandbox and Deno Deploy apps share the same organization boundary, so you
+can reuse members, tokens, and observability settings across both products.
 
 ## Create an organization token
 
@@ -27,7 +28,7 @@ and store it securely. Then export it in your local shell or CI job:
 export DENO_DEPLOY_TOKEN=<your-token>
 ```
 
-![The Deno Deploy organization tokens screen.](/sandboxes/images/org-tokens.webp)
+![The Deno Deploy organization tokens screen.](/sandbox/images/org-tokens.webp)
 
 :::tip Token security
 
@@ -76,11 +77,11 @@ deno -EN main.ts
 Any sandbox you create will be listed in the **Sandboxes** tab of your Deno
 Deploy organization.
 
-![The list of sandboxes created in the Deno Deploy console.](/sandboxes/images/sandbox-list.webp)
+![The list of sandboxes created in the Deno Deploy console.](/sandbox/images/sandbox-list.webp)
 
 Details about the sandbox will be shown in its **Event log**.
 
-![The sandbox event log details in the Deno Deploy console.](/sandboxes/images/sandbox-event-log.webp)
+![The sandbox event log details in the Deno Deploy console.](/sandbox/images/sandbox-event-log.webp)
 
 ## Configuring your sandbox
 
@@ -106,8 +107,8 @@ await using sandbox = await Sandbox.create({
 
 ## Running commands and scripts
 
-Sandboxes expose familiar filesystem and process APIs to run commands, upload
-files, and spawn long-running services.
+Deno Sandbox exposes familiar filesystem and process APIs to run commands,
+upload files, and spawn long-running services.
 
 You can for example list files in the root directory:
 
@@ -133,7 +134,7 @@ await proc.status;
 You can keep state between commands, stream stdout and stderr, or open an
 interactive REPL with `sandbox.deno.repl()` for agent-style workflows.
 
-## Deploying from a sandbox
+## Deploying from a Deno Sandbox
 
 The snippet below walks through an end-to-end workflow: it creates a Deploy app
 via the `Client`, boots a high-memory sandbox for heavier builds, scaffolds and
@@ -177,6 +178,6 @@ for await (const log of build.logs()) {
   `await using` block ends). Call `sandbox.kill()` only if you need to tear the
   VM down ahead of that schedule.
 
-Observability is shared with Deploy: every sandbox logs, trace, and metric is
-visible in the Deno Deploy dashboard so you can debug agent runs the same way
+Observability is shared with Deno Deploy: every sandbox logs, trace, and metric
+is visible in the Deno Deploy dashboard so you can debug agent runs the same way
 you debug production apps.

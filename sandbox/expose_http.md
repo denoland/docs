@@ -1,6 +1,6 @@
 ---
 title: "Expose HTTP"
-description: "Learn how to expose HTTP endpoints from Deno Sandboxes, enabling you to run web servers, APIs, and preview environments at the edge."
+description: "Learn how to expose HTTP endpoints from Deno Sandbox, enabling you to run web servers, APIs, and preview environments at the edge."
 ---
 
 You can run dev servers, preview apps, webhook receivers, or framework CLIs on
@@ -9,7 +9,7 @@ any port and publish them instantly to a secure, random HTTPS URL.
 ```tsx
 await sandbox.fs.writeTextFile(
   "server.js",
-  "Deno.serve(() => new Response('Hello from Sandboxes'));",
+  "Deno.serve(() => new Response('Hello from Deno Sandbox'));",
 );
 const runtime = await sandbox.deno.run({ entrypoint: "server.js" });
 const publicUrl = await sandbox.exposeHttp({ port: 8000 });

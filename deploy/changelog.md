@@ -47,16 +47,16 @@ description: "Listing notable progress in the development and evolution of Deno 
   Code Execution) and
   [CVE-2025-55184/CVE-2025-67779](https://deno.com/blog/cve-2025-55184) (Denial
   of Service).
-- And one more thing at the end: we've quietly enabled our new sandboxes
+- And one more thing at the end: we've quietly enabled our new Deno Sandbox
   infrastructure for all Deno Deploy users to try.
-  - Sandboxes provide fully isolated Linux microVMs for you to run untrusted
+  - Deno Sandbox provides fully isolated Linux microVMs for you to run untrusted
     code in.
   - This is particularly useful for running third-party code, such as plugins,
     extensions, or user-generated or LLM-generated code, without risking the
     security of your application.
-  - We'll announce more details about sandboxes in the new year, so stay tuned!
-  - Try it out from the "Sandboxes" tab in the organization overview.
-  - [Learn more about sandboxes.](https://deno.com/deploy/sandboxes)
+  - We'll announce more details about Deno Sandbox in the new year, so stay tuned!
+  - Try it out from the "Sandbox" tab in the organization overview.
+  - [Learn more about Deno Sandbox.](https://deno.com/deploy/sandbox)
 
 ### Bug fixes
 

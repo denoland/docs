@@ -3,8 +3,8 @@ title: "SSH"
 description: "How to open secure SSH access into a sandbox for interactive debugging, editor sessions, or long-running processes."
 ---
 
-Sandboxes can hand out SSH credentials so you can inspect the filesystem, tail
-logs, run editors, or forward ports. SSH access is available both in your
+Deno Sandbox can hand out SSH credentials so you can inspect the filesystem,
+tail logs, run editors, or forward ports. SSH access is available both in your
 terminal as a command and in the Deno Deploy Sandbox UI.
 
 ```tsx
@@ -52,7 +52,7 @@ deno sandbox create -ssh
 After creating a sandbox, you can SSH into it in the Deno Deploy web app.
 
 1. Log in to [console.deno.com](https://console.deno.com/) and navigate to the
-   "Sandboxes" section.
+   **Sandboxes** section.
 2. Either create a new sandbox or select an existing one from the list.
 3. Click **Start SSH terminal** to open an interactive terminal session in your
    browser.

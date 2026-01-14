@@ -1,7 +1,7 @@
 ---
 title: "Spawn a subprocess, and get buffered output"
 description: "Learn how to spawn a subprocess, and get buffered output in a sandbox."
-url: /examples/sandboxes_spawn_subprocess/
+url: /examples/sandbox_spawn_subprocess/
 layout: sandbox-example.tsx
 ---
 

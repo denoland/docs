@@ -1,16 +1,16 @@
 ---
-title: "Deno Sandboxes"
-description: "Overview of the Sandboxes microVM platform on Deploy, including capabilities, security model, and ideal use cases."
+title: "Deno Sandbox"
+description: "Overview of the Deno Sandbox microVM platform on Deploy, including capabilities, security model, and ideal use cases."
 ---
 
-Sandboxes bring instant Linux microVMs to Deno Deploy. Each sandbox boots in
+Deno Sandbox brings instant Linux microVMs to Deno Deploy. Each sandbox boots in
 under a second, is API driven from the `@deno/sandbox` SDK, and is torn down as
 soon as you are done. The result is on-demand compute that feels like opening a
 terminal, yet ships with production-grade isolation and observability.
 
-## What are Sandboxes?
+## What is a Deno Sandbox?
 
-- Linux microVMs orchestrated by Deno Deploy
+- Individual Linux microVMs orchestrated by Deno Deploy
 - Designed for running untrusted code
 - Instantly available; boot times measured in milliseconds
 - Ephemeral by default but able to persist beyond the current connection
@@ -20,7 +20,7 @@ terminal, yet ships with production-grade isolation and observability.
 
 ## Ideal use cases
 
-Sandboxes specialize in workloads where code needs to be generated, evaluated,
+Deno Sandbox specializes in workloads where code needs to be generated, evaluated,
 or safely executed on behalf of an untrusted user. They are ideal for:
 
 - AI agents and copilots that need to run code as they reason
@@ -35,7 +35,7 @@ software.
 
 ## Run real workloads
 
-Once the sandbox exists, you get a full Linux environment with files, processes,
+Once the Deno Sandbox exists, you get a full Linux environment with files, processes,
 package managers, and background services:
 
 ```tsx
@@ -44,7 +44,7 @@ await using sandbox = await Sandbox.create();
 await sandbox.sh`ls -lh /`;
 ```
 
-## Security Policies
+## Security policies
 
 Provision a sandbox so that it can only talk to approved hosts:
 
@@ -72,28 +72,28 @@ await Sandbox.create({
 ## Built for instant, safe compute
 
 Developers and AI systems now expect compute that is instant, safe, and globally
-accessible. Sandboxes deliver:
+accessible. Deno Sandbox delivers:
 
 - Instant spin-up with no warm pool to manage
 - Dedicated isolation with strict network egress policies
-- Full observability alongside Deploy logs and traces
+- Full observability alongside Deno Deploy logs and traces
 - Region selection, memory sizing, and lifetime controls per sandbox
-- Seamless hand-off to Deploy apps when code is production ready
+- Seamless hand-off to Deno Deploy apps when code is production ready
 
-Together, Deno Deploy and Sandboxes form a single workflow: code is created,
+Together, Deno Deploy and Deno Sandbox form a single workflow: code is created,
 proved safe in a sandbox, and deployed globally without new infrastructure or
 orchestration layers.
 
 ## Runtime support
 
-The Sandboxes SDK is tested and supported on:
+The Deno Sandbox SDK is tested and supported on:
 
 - **Deno:** Latest stable version
 - **Node.js:** Version 24+
 
-You can use Sandboxes from any environment that can import the `@deno/sandbox`
-package and make outbound HTTPS requests to the Deploy API, meaning you can use
-Sandboxes in your Node projects, Deno Deploy apps, or even browser-based tools.
+You can use Deno Sandbox from any environment that can import the `@deno/sandbox`
+package and make outbound HTTPS requests to the Deno Deploy API, meaning you can use
+Deno Sandbox in your Node projects, Deno Deploy apps, or even browser-based tools.
 
 In your Deno projects you can use either the [jsr](https://jsr.io/@deno/sandbox)
 or [npm](https://www.npmjs.com/package/@deno/sandbox) package, however the jsr
@@ -121,7 +121,7 @@ try {
 
 ## Limits
 
-Sandboxes have the following limits:
+Deno Sandbox has the following limits:
 
 - **Memory:** 768 MB to 4096 MB (1GB default) configurable per sandbox
 - **CPU:** 2 vCPU
@@ -129,7 +129,7 @@ Sandboxes have the following limits:
   minutes
 - **Disk**: 10 GB of ephemeral storage
 - **Concurrency**: 5 concurrent sandboxes per organization (This is the default
-  concurrency limit during the pre-release phase of Sandboxes. Contact
+  concurrency limit during the pre-release phase of Deno Sandbox. Contact
   [deploy@deno.com](mailto:deploy@deno.com) to request a higher limit.)
 
 Exceeding these limits may result in throttling or termination of your sandbox.
