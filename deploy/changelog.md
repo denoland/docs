@@ -54,7 +54,8 @@ description: "Listing notable progress in the development and evolution of Deno 
   - This is particularly useful for running third-party code, such as plugins,
     extensions, or user-generated or LLM-generated code, without risking the
     security of your application.
-  - We'll announce more details about Deno Sandbox in the new year, so stay tuned!
+  - We'll announce more details about Deno Sandbox in the new year, so stay
+    tuned!
   - Try it out from the "Sandbox" tab in the organization overview.
   - [Learn more about Deno Sandbox.](https://deno.com/deploy/sandbox)
 

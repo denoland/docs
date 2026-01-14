@@ -20,8 +20,9 @@ terminal, yet ships with production-grade isolation and observability.
 
 ## Ideal use cases
 
-Deno Sandbox specializes in workloads where code needs to be generated, evaluated,
-or safely executed on behalf of an untrusted user. They are ideal for:
+Deno Sandbox specializes in workloads where code needs to be generated,
+evaluated, or safely executed on behalf of an untrusted user. They are ideal
+for:
 
 - AI agents and copilots that need to run code as they reason
 - Secure plugin or extension systems
@@ -35,8 +36,8 @@ software.
 
 ## Run real workloads
 
-Once the Deno Sandbox exists, you get a full Linux environment with files, processes,
-package managers, and background services:
+Once the Deno Sandbox exists, you get a full Linux environment with files,
+processes, package managers, and background services:
 
 ```tsx
 import { Sandbox } from "@deno/sandbox";
@@ -91,9 +92,10 @@ The Deno Sandbox SDK is tested and supported on:
 - **Deno:** Latest stable version
 - **Node.js:** Version 24+
 
-You can use Deno Sandbox from any environment that can import the `@deno/sandbox`
-package and make outbound HTTPS requests to the Deno Deploy API, meaning you can use
-Deno Sandbox in your Node projects, Deno Deploy apps, or even browser-based tools.
+You can use Deno Sandbox from any environment that can import the
+`@deno/sandbox` package and make outbound HTTPS requests to the Deno Deploy API,
+meaning you can use Deno Sandbox in your Node projects, Deno Deploy apps, or
+even browser-based tools.
 
 In your Deno projects you can use either the [jsr](https://jsr.io/@deno/sandbox)
 or [npm](https://www.npmjs.com/package/@deno/sandbox) package, however the jsr

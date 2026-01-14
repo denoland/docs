@@ -7,8 +7,8 @@ The Deno CLI includes built-in commands for managing your Deno Sandbox
 instances, allowing you to create, control, and interact with them from your
 terminal.
 
-This integration makes Deno Sandbox management feel natural within your existing Deno
-workflow.
+This integration makes Deno Sandbox management feel natural within your existing
+Deno workflow.
 
 ## Creating your first Deno Sandbox
 
