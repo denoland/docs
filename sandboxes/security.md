@@ -53,19 +53,20 @@ await using sandbox = await Sandbox.create({
 
 Supported patterns include:
 
-| Pattern                 | Matches                                         |
-| ----------------------- | ----------------------------------------------- |
-| `example.com`           | Exact hostname, any port                        |
-| `example.com:443`       | Exact hostname on port 443 only                 |
-| `*.example.com`         | Any subdomain of example.com                    |
-| `192.0.2.1`             | Exact IPv4 address                              |
-| `[2001:db8::1]`         | Exact IPv6 address                              |
+| Pattern           | Matches                         |
+| ----------------- | ------------------------------- |
+| `example.com`     | Exact hostname, any port        |
+| `example.com:443` | Exact hostname on port 443 only |
+| `*.example.com`   | Any subdomain of example.com    |
+| `192.0.2.1`       | Exact IPv4 address              |
+| `[2001:db8::1]`   | Exact IPv6 address              |
 
 Any outbound request to a host not in the allow list will be blocked when
 `allowNet` is provided. When `allowNet` is omitted, all outbound requests are
-allowed. Combine this with [the `secrets` option](#secret-redaction-and-substitution)
-to ensure that even if code is tricked into calling an unexpected endpoint,
-credentials are never sent.
+allowed. Combine this with
+[the `secrets` option](#secret-redaction-and-substitution) to ensure that even
+if code is tricked into calling an unexpected endpoint, credentials are never
+sent.
 
 ## Filesystem isolation and cleanup
 

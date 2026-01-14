@@ -20,15 +20,15 @@ the current process. You can tailor the sandbox by passing an options object.
 
 ## Available options
 
-| Option     | Description                                                                                                             |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `region`   | Eg `ams` or `ord`                                                                                                       |
-| `allowNet` | Optional list of allowed outbound hosts. See [Outbound network control](./security#outbound-network-control). |
+| Option     | Description                                                                                                                                          |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `region`   | Eg `ams` or `ord`                                                                                                                                    |
+| `allowNet` | Optional list of allowed outbound hosts. See [Outbound network control](./security#outbound-network-control).                                        |
 | `secrets`  | Secrets to substitute on outbound requests to approved hosts. See [Secret redaction and substitution](./security#secret-redaction-and-substitution). |
-| `memoryMb` | Allocate between 768 and 4096 MB of RAM for memory-heavy tasks or tighter budgets.                                      |
-| `lifetime` | [How long the sandbox stays alive](./lifetimes) in (m) or (s) such as `5m`                                              |
-| `labels`   | Attach arbitrary key/value labels to help identify and manage sandboxes                                                 |
-| `env`      | Set initial environment variables inside the sandbox. Secrets should still be managed via Deploy’s secret substitution. |
+| `memoryMb` | Allocate between 768 and 4096 MB of RAM for memory-heavy tasks or tighter budgets.                                                                   |
+| `lifetime` | [How long the sandbox stays alive](./lifetimes) in (m) or (s) such as `5m`                                                                           |
+| `labels`   | Attach arbitrary key/value labels to help identify and manage sandboxes                                                                              |
+| `env`      | Set initial environment variables inside the sandbox. Secrets should still be managed via Deploy’s secret substitution.                              |
 
 ## Example configurations
 
