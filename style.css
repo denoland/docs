@@ -1044,6 +1044,10 @@
     @apply left-2;
   }
 
+  div.deno-tabs {
+    row-gap: 0;
+  }
+
   .homepage-link {
     @apply block font-normal underline underline-offset-4;
     line-height: 1.8rem;
