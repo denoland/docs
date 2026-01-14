@@ -84,7 +84,7 @@ Details about the sandbox will be shown in its **Event log**.
 
 ## Configuring your sandbox
 
-When creating a sandbox witb `Sandbox.create()`, you can configure it with the
+When creating a sandbox with `Sandbox.create()`, you can configure it with the
 following options:
 
 - `allowNet`: Optional list of allowed outbound hosts. See [Outbound network control](./security#outbound-network-control).
