@@ -37,5 +37,5 @@ await reconnected.kill();
 // At this point, the sandbox is no longer reconnectable
 ```
 
-> Need other lifetime modes? Contact
+> Need other timeout modes? Contact
 > <a href="mailto:deploy@deno.com">deploy@deno.com</a>.
