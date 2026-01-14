@@ -56,5 +56,5 @@ Coming soon.
   provisioning.
 - `Sandbox.connect({ id })` – resume control of a duration-based sandbox.
 - `Sandbox.kill()` – terminate early.
-- [`Expose HTTP`](./expose_http.md) and [`SSH`](./ssh.md) – note
-  that their URLs/credentials die with the sandbox lifetime.
+- [`Expose HTTP`](./expose_http.md) and [`SSH`](./ssh.md) – note that their
+  URLs/credentials die with the sandbox lifetime.
