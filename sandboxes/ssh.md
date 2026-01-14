@@ -1,11 +1,11 @@
 ---
-title: "Expose SSH"
+title: "SSH"
 description: "How to open secure SSH access into a sandbox for interactive debugging, editor sessions, or long-running processes."
 ---
 
 Sandboxes can hand out SSH credentials so you can inspect the filesystem, tail
-logs, run editors, or forward ports while the microVM stays isolated on the
-Deploy edge.
+logs, run editors, or forward ports. SSH access is available both in your
+terminal as a command and in the Deno Deploy Sandbox UI.
 
 ```tsx
 import { Sandbox } from "@deno/sandbox";
@@ -24,17 +24,9 @@ script releases its references (for example, the `await using` block ends) the
 sandbox shuts down and the SSH endpoint disappears; you can also call
 `sandbox.kill()` if you need to tear it down immediately.
 
-## When to use SSH access
-
-- Debugging agent-generated code that only fails in the sandbox
-- Editing files with a full-screen terminal editor or remote VS Code
-- Streaming logs in real time without instrumenting application code
-- Running profiling or inspection tools that are easier to use manually
-
-Because each sandbox is already isolated, opening SSH does not compromise other
-projects or organizations.
-
 ## Connecting from your machine
+
+### exposeSsh method
 
 1. Request credentials via `sandbox.exposeSsh()`.
 2. Connect using the provided username and hostname:
@@ -46,13 +38,34 @@ ssh ${username}@${hostname}
 3. Use regular terminal workflows: copy files, run top, tail logs, or attach to
    running processes.
 
-:::tip
+## In the terminal
 
-Tip: combine SSH with
-[port forwarding](https://man.openbsd.org/ssh#LOCAL_FORWARDING) to view dev
-servers that are bound to `localhost` inside the sandbox.
+You can SSH into your sandbox from the terminal using the `--ssh` flag when
+running your script:
 
-:::
+```bash
+deno sandbox create -ssh
+```
+
+## In the Deno Deploy console
+
+After creating a sandbox, you can SSH into it in the Deno Deploy web app.
+
+1. Log in to [console.deno.com](https://console.deno.com/) and navigate to the
+   "Sandboxes" section.
+2. Either create a new sandbox or select an existing one from the list.
+3. Click **Start SSH terminal** to open an interactive terminal session in your
+   browser.
+
+## When to use SSH access
+
+- Debugging agent-generated code that only fails in the sandbox
+- Editing files with a full-screen terminal editor or remote VS Code
+- Streaming logs in real time without instrumenting application code
+- Running profiling or inspection tools that are easier to use manually
+
+Because each sandbox is already isolated, opening SSH does not compromise other
+projects or organizations.
 
 ## Security considerations
 
