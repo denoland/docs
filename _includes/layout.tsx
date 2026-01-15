@@ -17,7 +17,7 @@ export default function Layout(data: Lume.Data) {
   return (
     <html lang="en">
       <head>
-        <meta charet="utf-8" />
+        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light dark" />
         <title>{deleteBackticks(data.title)}</title>
