@@ -13,8 +13,8 @@ export default function Raw(data: Lume.Data) {
       {data.children}
 
       <p className="my-8 block">
-        For more information about Sandbox, see the{" "}
-        <a href="/sandbox/">Sandbox documentation</a>.
+        For more information, see the{" "}
+        <a href="/sandbox/">Deno Sandbox documentation</a>.
       </p>
     </>
   );
