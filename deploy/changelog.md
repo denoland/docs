@@ -56,7 +56,7 @@ description: "Listing notable progress in the development and evolution of Deno 
     security of your application.
   - We'll announce more details about Deno Sandbox in the new year, so stay
     tuned!
-  - Try it out from the "Sandbox" tab in the organization overview.
+  - Try it out from the "Sandboxes" tab in the Deno Deploy console
   - [Learn more about Deno Sandbox.](https://deno.com/deploy/sandbox)
 
 ### Bug fixes
