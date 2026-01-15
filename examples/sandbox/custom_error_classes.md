@@ -1,7 +1,7 @@
 ---
 title: "Error handling with custom error classes"
 description: "Learn how to handle errors with custom error classes in a sandbox."
-url: /examples/sandboxes_custom_error_classes/
+url: /examples/sandbox_custom_error_classes/
 layout: sandbox-example.tsx
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Configure sandbox memory"
 description: "Learn how to configure the memory allocated to a sandbox"
-url: /examples/sandboxes_memory/
+url: /examples/sandbox_memory/
 layout: sandbox-example.tsx
 ---
 

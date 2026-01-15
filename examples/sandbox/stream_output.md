@@ -1,7 +1,7 @@
 ---
 title: "Stream output to a local file"
 description: "Learn how to stream output to a local file in a sandbox."
-url: /examples/sandboxes_stream_output/
+url: /examples/sandbox_stream_output/
 layout: sandbox-example.tsx
 ---
 

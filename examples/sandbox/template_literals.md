@@ -1,7 +1,7 @@
 ---
 title: "Template literal commands with variable interpolation"
 description: "Learn how to use template literal commands with variable interpolation in a sandbox."
-url: /examples/sandboxes_template_literals/
+url: /examples/sandbox_template_literals/
 layout: sandbox-example.tsx
 ---
 

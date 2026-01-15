@@ -1,7 +1,7 @@
 ---
 title: "Command cancellation"
 description: "Learn how to cancel commands in a sandbox."
-url: /examples/sandboxes_command_cancellation/
+url: /examples/sandbox_command_cancellation/
 layout: sandbox-example.tsx
 ---
 

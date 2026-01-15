@@ -1,7 +1,7 @@
 ---
 title: "Evaluating JavaScript"
 description: "Learn how to evaluate JavaScript code in a sandbox."
-url: /examples/sandboxes_evaluating_javascript/
+url: /examples/sandbox_evaluating_javascript/
 layout: sandbox-example.tsx
 ---
 

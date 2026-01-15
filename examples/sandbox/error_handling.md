@@ -1,7 +1,7 @@
 ---
 title: "Error handling"
 description: "Learn how to handle errors in a sandbox."
-url: /examples/sandboxes_error_handling/
+url: /examples/sandbox_error_handling/
 layout: sandbox-example.tsx
 ---
 

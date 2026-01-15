@@ -1,5 +1,5 @@
 ---
-title: "Create a Sandbox"
+title: "Create a Deno Sandbox"
 description: "Learn how to provision a sandbox with the static Sandbox.create() method and configure runtime, network, and lifecycle options."
 ---
 
@@ -93,5 +93,5 @@ const sandbox = await Sandbox.create({
 - Let `await using` (or dropping the last reference) dispose of the sandbox
   automatically. Call `sandbox.kill()` only when you need to terminate it prior
   to that automatic cleanup.
-- For long-lived services, migrate from sandboxes to a Deploy app once the code
-  stabilizes.
+- For long-lived services, migrate from a Deno Sandbox to a Deploy app once the
+  code stabilizes.

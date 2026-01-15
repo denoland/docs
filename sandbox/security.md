@@ -1,16 +1,16 @@
 ---
 title: Security
-description: "Understand the defense-in-depth model behind Deno Sandboxes: isolation, secrets, network controls, and auditing."
+description: "Understand the defense-in-depth model behind Deno Sandbox: isolation, secrets, network controls, and auditing."
 ---
 
-Sandboxes are designed for untrusted or AI-generated workloads. Every VM is
+Deno Sandbox is designed for untrusted or AI-generated workloads. Every VM is
 ephemeral, isolated at the hypervisor level, and governed by strict outbound
 policies. This lets you run arbitrary code while keeping organization data and
 infrastructure safe.
 
 ## Secret redaction and substitution
 
-Secrets never enter the sandbox environment variables. Instead, Deploy
+Secrets never enter the sandbox environment variables. Instead, Deno Deploy
 substitutes them only when the sandbox makes outbound requests to an approved
 host. Configure secrets when creating a sandbox:
 
@@ -42,7 +42,7 @@ allowing your automation to call third-party APIs securely.
 
 ## Outbound network control
 
-By default, sandboxes have unrestricted outbound network access. Use the
+By default, Deno Sandbox has unrestricted outbound network access. Use the
 `allowNet` option to restrict traffic to specific hosts:
 
 ```ts

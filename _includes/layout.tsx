@@ -11,7 +11,7 @@ export default function Layout(data: Lume.Data) {
   const isServicesPage = data.url.startsWith("/deploy") ||
     data.url.startsWith("/subhosting") ||
     data.url.startsWith("/services") ||
-    data.url.startsWith("/sandboxes");
+    data.url.startsWith("/sandbox");
   const hasSubNav = isServicesPage;
 
   return (

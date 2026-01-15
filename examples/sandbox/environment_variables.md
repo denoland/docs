@@ -1,7 +1,7 @@
 ---
 title: "Set and get environment variables"
 description: "Learn how to set and get environment variables in a sandbox."
-url: /examples/sandboxes_environment_variables/
+url: /examples/sandbox_environment_variables/
 layout: sandbox-example.tsx
 ---
 
