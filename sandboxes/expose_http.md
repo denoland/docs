@@ -103,10 +103,6 @@ traces. Use the dashboard to:
 ```tsx
 import { Sandbox } from "@deno/sandbox";
 
-export function add(a: number, b: number): number {
-  return a + b;
-}
-
 await using sandbox = await Sandbox.create();
 
 // Install dependencies
