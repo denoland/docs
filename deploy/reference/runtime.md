@@ -105,7 +105,7 @@ applications, and within a few hundred milliseconds for larger applications.
 
 Deno Deploy uses multiple optimizations to enable fast cold starts:
 
-- Deno Sandbox and the Deno runtime are pre-provisioned to ensure they don't
+- Linux microVMs and the Deno runtime are pre-provisioned to ensure they don't
   need to be created from scratch when starting an application.
 
 - Applications start immediately when the client sends the first TCP packet to
