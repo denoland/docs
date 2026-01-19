@@ -58,7 +58,7 @@ deno sandbox create --expose-http 3000
 You can mount persistent volumes to your sandbox using the `--volume` flag:
 
 ```bash
-deno sandbox create --volume my-data:/data
+deno sandbox create --volume my-volume:/data
 ```
 
 To create a sandbox and run a command immediately:
@@ -230,7 +230,7 @@ across sandbox instances. Use the `deno sandbox volumes` command to manage them.
 Create a new volume with a specific name, capacity, and region:
 
 ```bash
-deno sandbox volumes create my-data --capacity 10gb --region ord
+deno sandbox volumes create my-volume --capacity 10gb --region ord
 ```
 
 ### Listing Volumes
@@ -244,7 +244,7 @@ deno sandbox volumes list
 You can also search for specific volumes:
 
 ```bash
-deno sandbox volumes list my-data
+deno sandbox volumes list my-volume
 ```
 
 ### Deleting Volumes
@@ -252,7 +252,7 @@ deno sandbox volumes list my-data
 Remove a volume when you no longer need it:
 
 ```bash
-deno sandbox volumes delete my-data
+deno sandbox volumes delete my-volume
 ```
 
 ## Managing Snapshots
@@ -265,13 +265,13 @@ copy.
 Create a new snapshot from an existing volume:
 
 ```bash
-deno sandbox snapshots create my-data my-snapshot
+deno sandbox snapshots create my-volume my-snapshot
 ```
 
 You can also use the `volumes snapshot` command:
 
 ```bash
-deno sandbox volumes snapshot my-data my-snapshot
+deno sandbox volumes snapshot my-volume my-snapshot
 ```
 
 ### Listing Snapshots
