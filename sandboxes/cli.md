@@ -36,11 +36,11 @@ You can copy multiple directories during creation:
 deno sandbox create --copy ./src --copy ./config
 ```
 
-If you need the sandbox to run longer than a single session, specify a lifetime
-with `--lifetime`:
+If you need the sandbox to run longer than a single session, specify a timeout
+with `--timeout`:
 
 ```bash
-deno sandbox create --lifetime 2m
+deno sandbox create --timeout 2m
 ```
 
 You can also create a sandbox with a custom memory limit:
@@ -53,6 +53,12 @@ To expose HTTP ports for web applications:
 
 ```bash
 deno sandbox create --expose-http 3000
+```
+
+You can mount persistent volumes to your sandbox using the `--volume` flag:
+
+```bash
+deno sandbox create --volume my-data:/data
 ```
 
 To create a sandbox and run a command immediately:
@@ -249,6 +255,58 @@ Remove a volume when you no longer need it:
 deno sandbox volumes delete my-data
 ```
 
+## Managing Snapshots
+
+Snapshots allow you to preserve the current state of a volume as a point-in-time
+copy.
+
+### Creating Snapshots
+
+Create a new snapshot from an existing volume:
+
+```bash
+deno sandbox snapshots create my-data my-snapshot
+```
+
+You can also use the `volumes snapshot` command:
+
+```bash
+deno sandbox volumes snapshot my-data my-snapshot
+```
+
+### Listing Snapshots
+
+List all snapshots in your organization:
+
+```bash
+deno sandbox snapshots list
+```
+
+You can also search for specific snapshots:
+
+```bash
+deno sandbox snapshots list my-snapshot
+```
+
+### Deleting Snapshots
+
+Remove a snapshot when you no longer need it:
+
+```bash
+deno sandbox snapshots delete my-snapshot
+```
+
+## Switching Organizations
+
+The `deno sandbox switch` command allows you to switch between different
+organizations in your configuration:
+
+```bash
+deno sandbox switch
+```
+
+This is useful when working with multiple organizations.
+
 ## Interactive Access
 
 When you need to work interactively within a sandbox; be it editing files,
@@ -327,7 +385,7 @@ For data processing workflows where you need to retrieve results, use a
 combination of remote execution and SSH access:
 
 ```bash
-SANDBOX_ID=$(deno sandbox create --lifetime 20m --copy ./data)
+SANDBOX_ID=$(deno sandbox create --timeout 20m --copy ./data)
 deno sandbox exec $SANDBOX_ID --cwd /app "deno run -A main.ts"
 ```
 
@@ -335,7 +393,7 @@ You can also stream data directly into sandbox processes using pipes, which is
 particularly useful for large datasets or real-time processing:
 
 ```bash
-SANDBOX_ID=$(deno sandbox create --lifetime 20m --copy ./processing-scripts)
+SANDBOX_ID=$(deno sandbox create --timeout 20m --copy ./processing-scripts)
 curl -s https://api.example.com/data.json | deno sandbox exec $SANDBOX_ID --cwd /app jq '.items[] | select(.active)'
 ```
 
