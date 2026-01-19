@@ -6,15 +6,35 @@ description: "Learn how to expose HTTP endpoints from Deno Sandboxes, enabling y
 You can run dev servers, preview apps, webhook receivers, or framework CLIs on
 any port and publish them instantly to a secure, random HTTPS URL.
 
-```tsx
+Import the `Sandbox` class from the `@deno/sandbox` module and pass a port to
+the Sandbox.create() method:
+
+```tsx title="main.ts"
+import { Sandbox } from "@deno/sandbox";
+
+await using sandbox = await Sandbox.create({ port: 8000 });
+console.log(sandbox.id);
+
 await sandbox.fs.writeTextFile(
-  "server.js",
-  "Deno.serve(() => new Response('Hello from Sandboxes'));",
+  "main.ts",
+  "export default { fetch: () => new Response('hi') }",
 );
-const runtime = await sandbox.deno.run({ entrypoint: "server.js" });
-const publicUrl = await sandbox.exposeHttp({ port: 8000 });
-console.log(publicUrl); // https://<random>.sandbox.deno.net
+
+const p = await sandbox.sh`deno serve --watch main.ts`.spawn();
+
+console.log("deno now listening on", sandbox.url);
+
+await p.output();
 ```
+
+This can then be run by setting your Deploy token and executing:
+
+```sh
+deno run -A --watch main.ts
+```
+
+Setting the `--watch` flag allows the sandbox to restart automatically when code
+changes are detected, for a low-fi hot-reload experience.
 
 The URL stays live for the sandbox lifetime, making it perfect for short-lived
 QA links or agent generated previews.
@@ -36,17 +56,25 @@ with TLS automatically configured.
 
 All requests to a sandbox's URL will send HTTP traffic to the sandbox.
 
-## Step-by-step
+## exposeHttp() usage
 
-1. **Start a server inside the sandbox.** Listen on any unprivileged port (e.g.,
-   `3000`, `8080`).
-2. **Expose the port:** `const url = await sandbox.exposeHttp({ port: 3000 });`
-3. **Share or fetch from the URL.** Requests enter through Deploy’s global edge
-   and are tunneled directly to your sandbox.
+Sandboxes also support exposing HTTP on-demand via the `exposeHttp()` method:
 
-Multiple ports can be exposed simultaneously by calling `exposeHttp()` for each
-port. You can also re-use the same exposed URL after restarting your server, as
-long as the sandbox itself remains alive.
+```ts
+const previewUrl = await sandbox.exposeHttp({ port: 8000 });
+console.log(`Preview ready at ${previewUrl}`);
+```
+
+This is useful when you want to start a sandbox without HTTP exposure, then
+expose it later (for example, after some initialization or build steps).
+
+:::info Security
+
+When you call this API, the target HTTP service will be PUBLICLY EXPOSED WITHOUT
+AUTHENTICATION. Anyone with knowledge of the public domain will be able to send
+requests to the exposed service.
+
+:::
 
 ## Observing traffic
 
@@ -94,6 +122,19 @@ await sandbox.fs.writeTextFile(
     2,
   ),
 );
+await sandbox.fs.mkdir("pages", { recursive: true });
+await sandbox.fs.writeTextFile(
+  "pages/index.js",
+  `export default function Home() {
+  return (
+    <main style={{ fontFamily: "system-ui", padding: "2rem" }}>
+      <h1>Next.js sandbox</h1>
+      <p>Edit pages/index.js to get started.</p>
+    </main>
+  );
+}
+`,
+);
 await sandbox.sh`npm install`;
 
 // Start the dev server
@@ -110,5 +151,7 @@ console.log(`Preview ready at ${previewUrl}`);
 await server.status; // keep running until the process exits
 ```
 
-This pattern lets agents or developers spin up high-fidelity previews, share
-them for feedback, and tear everything down with a single `Ctrl+C`.
+Using Deno Sandbox in this way allows you to spin up full-featured framework
+development servers with minimal code, useful for agents or developers who need
+to spin up high-fidelity previews, share them for feedback, and tear everything
+down with a single `Ctrl+C`.
