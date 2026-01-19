@@ -151,7 +151,7 @@ deno deploy logs
 deno deploy logs --org my-org --app my-app --start "2024-01-01T00:00:00Z"
 ```
 
-### Deno Sandbox management
+### Sandbox management
 
 Interact with running sandboxes directly from the Deploy CLI.
 
