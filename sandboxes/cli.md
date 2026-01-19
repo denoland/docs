@@ -9,7 +9,7 @@ create, control, and interact with them from your terminal.
 This integration makes sandbox management feel natural within your existing Deno
 workflow.
 
-## Creating Your First Sandbox
+## Creating your first sandbox
 
 The simplest way to get started is with `deno sandbox create`. By default, this
 creates an interactive session-based sandbox that automatically opens an SSH
@@ -102,7 +102,7 @@ This shows each sandbox's unique ID (which you'll use with other commands), when
 it was created, whether it's currently running, and how long it's been active.
 The sandbox ID is a UUID that uniquely identifies each instance.
 
-## Running Commands Remotely
+## Running commands remotely
 
 The `deno sandbox exec` command lets you run individual commands in any running
 sandbox without opening an interactive session. This is perfect for automation,
@@ -147,7 +147,7 @@ cat large-dataset.csv | deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 -
 This makes it easy to integrate sandbox processing into larger Unix workflows
 and data pipelines.
 
-## Transferring Files
+## Transferring files
 
 While you can copy files during sandbox creation, you might need to update or
 retrieve files later. The `deno sandbox copy` command (also available as
@@ -192,7 +192,7 @@ The target path can be customized to organize files within the sandbox:
 deno sandbox copy ./frontend 550e8400-e29b-41d4-a716-446655440000:/app/web/
 ```
 
-## Deploying Sandboxes
+## Deploying sandboxes
 
 You can deploy a running sandbox to a Deno Deploy app using the
 `deno sandbox deploy` command:
@@ -220,12 +220,12 @@ To pass arguments to the entrypoint script:
 deno sandbox deploy --args --port 8080 550e8400-e29b-41d4-a716-446655440000 my-app
 ```
 
-## Managing Volumes
+## Managing volumes
 
 The sandbox system supports persistent volumes for data that needs to survive
 across sandbox instances. Use the `deno sandbox volumes` command to manage them.
 
-### Creating Volumes
+### Creating volumes
 
 Create a new volume with a specific name, capacity, and region:
 
@@ -233,7 +233,7 @@ Create a new volume with a specific name, capacity, and region:
 deno sandbox volumes create my-volume --capacity 10gb --region ord
 ```
 
-### Listing Volumes
+### Listing volumes
 
 List all volumes in your organization:
 
@@ -247,7 +247,7 @@ You can also search for specific volumes:
 deno sandbox volumes list my-volume
 ```
 
-### Deleting Volumes
+### Deleting volumes
 
 Remove a volume when you no longer need it:
 
@@ -255,12 +255,12 @@ Remove a volume when you no longer need it:
 deno sandbox volumes delete my-volume
 ```
 
-## Managing Snapshots
+## Managing snapshots
 
 Snapshots allow you to preserve the current state of a volume as a point-in-time
 copy.
 
-### Creating Snapshots
+### Creating snapshots
 
 Create a new snapshot from an existing volume:
 
@@ -274,7 +274,7 @@ You can also use the `volumes snapshot` command:
 deno sandbox volumes snapshot my-volume my-snapshot
 ```
 
-### Listing Snapshots
+### Listing snapshots
 
 List all snapshots in your organization:
 
@@ -288,7 +288,7 @@ You can also search for specific snapshots:
 deno sandbox snapshots list my-snapshot
 ```
 
-### Deleting Snapshots
+### Deleting snapshots
 
 Remove a snapshot when you no longer need it:
 
@@ -296,7 +296,7 @@ Remove a snapshot when you no longer need it:
 deno sandbox snapshots delete my-snapshot
 ```
 
-## Switching Organizations
+## Switching organizations
 
 The `deno sandbox switch` command allows you to switch between different
 organizations in your configuration:
@@ -307,7 +307,7 @@ deno sandbox switch
 
 This is useful when working with multiple organizations.
 
-## Interactive Access
+## Interactive access
 
 When you need to work interactively within a sandbox; be it editing files,
 debugging issues, or exploring the environment, you can use `deno sandbox ssh`:
@@ -322,9 +322,9 @@ additional software as needed. The sandbox continues running after you
 disconnect, so you can reconnect later or use other commands to interact with it
 remotely.
 
-## Managing Sandbox Timeout
+## Managing sandbox timeout
 
-### Extending Sandbox Duration
+### Extending sandbox duration
 
 Sometimes you'll need more time to complete your work in a running sandbox. The
 `deno sandbox extend` command allows you to extend the timeout of any running
@@ -339,7 +339,7 @@ into it, running remote commands, or have background processes running. All
 active connections and processes continue uninterrupted while the sandbox's
 expiration time is updated.
 
-### Cleanup and Termination
+### Cleanup and termination
 
 When you're finished with a sandbox, use `deno sandbox kill` (or
 `deno sandbox rm`) to terminate it and free up resources:
@@ -352,9 +352,9 @@ This immediately stops all processes in the sandbox and releases its resources.
 Be sure to save any important work before terminating a sandbox, as all data
 inside will be lost.
 
-## Common Workflows
+## Common workflows
 
-### Development and Testing
+### Development and testing
 
 A typical development workflow involves creating a sandbox with your code,
 setting up dependencies, and running tests:
@@ -379,7 +379,7 @@ deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/build/ ./dist/
 deno sandbox kill 550e8400-e29b-41d4-a716-446655440000
 ```
 
-### Data Processing
+### Data processing
 
 For data processing workflows where you need to retrieve results, use a
 combination of remote execution and SSH access:
