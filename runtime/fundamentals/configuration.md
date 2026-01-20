@@ -588,8 +588,8 @@ Instead of specifying a permission as a boolean or array:
 {
   "permissions": {
     "default": {
-      "read": true,  // Simple boolean form
-      "write": ["./data"]  // Simple array form
+      "read": true, // Simple boolean form
+      "write": ["./data"] // Simple array form
     }
   }
 }
@@ -629,12 +629,14 @@ permission type:
 - **`allow`**: Explicitly grant access to specific resources. Can be `true` (to
   allow all), `false` (to allow none), or an array of specific paths/values to
   allow.
-- **`deny`**: Explicitly deny access (throw [PermissionDenied](https://docs.deno.com/api/deno/~/Deno.errors.PermissionDenied)) to specific resources, even if they would
-  otherwise be allowed. Can be `true` (to deny all), `false` (to deny none), or
-  an array of specific paths/values to deny.
+- **`deny`**: Explicitly deny access (throw
+  [PermissionDenied](https://docs.deno.com/api/deno/~/Deno.errors.PermissionDenied))
+  to specific resources, even if they would otherwise be allowed. Can be `true`
+  (to deny all), `false` (to deny none), or an array of specific paths/values to
+  deny.
 - **`ignore`**: (Only for `read` and `env` permissions) Silently ignore access
-  attempts to specific resources without throwing errors. Can be `true`, `false`,
-  or an array of specific paths/values to ignore.
+  attempts to specific resources without throwing errors. Can be `true`,
+  `false`, or an array of specific paths/values to ignore.
 
 #### Example
 
