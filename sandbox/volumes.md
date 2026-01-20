@@ -1,6 +1,6 @@
 ---
 title: "Persistent Volumes"
-description: "Mount block storage into sandboxes to keep state between sessions"
+description: "Mount block storage into Deno Sandbox to keep state between sessions"
 ---
 
 Persistent volumes let you attach regional block storage to a sandbox so data

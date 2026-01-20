@@ -1,12 +1,13 @@
 ---
 title: "Sandbox Timeouts"
-description: "Understand how long sandboxes stay alive, how to extend or reconnect to them, and when to promote work to a Deploy app."
+description: "Understand how long Deno Sandbox stays alive, how to extend or reconnect to them, and when to promote work to a Deno Deploy app."
 ---
 
-Sandboxes are intentionally ephemeral. They boot in milliseconds, serve their
-purpose, and disappear—reducing the blast radius of untrusted code and removing
-infrastructure chores. Still, you can control exactly how long a sandbox stays
-alive and even reconnect later when debugging is required.
+Sandboxes created by Deno Sandbox are intentionally ephemeral. They boot in
+milliseconds, serve their purpose, and disappear—reducing the blast radius of
+untrusted code and removing infrastructure chores. Still, you can control
+exactly how long a sandbox stays alive and even reconnect later when debugging
+is required.
 
 ## Default timeout: `"session"`
 

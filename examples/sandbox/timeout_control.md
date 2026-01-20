@@ -1,7 +1,7 @@
 ---
 title: "Control sandbox timeout"
 description: "Learn how to control how long your sandbox stays alive using the timeout option."
-url: /examples/sandboxes_timeout_control/
+url: /examples/sandbox_timeout_control/
 layout: sandbox-example.tsx
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Provide a VSCode instance in a sandbox"
 description: "Learn how to provide a VSCode instance in a sandbox."
-url: /examples/sandboxes_vscode_instance/
+url: /examples/sandbox_vscode_instance/
 layout: sandbox-example.tsx
 ---
 

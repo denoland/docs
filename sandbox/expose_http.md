@@ -1,6 +1,6 @@
 ---
 title: "Expose HTTP"
-description: "Learn how to expose HTTP endpoints from Deno Sandboxes, enabling you to run web servers, APIs, and preview environments at the edge."
+description: "Learn how to expose HTTP endpoints from Deno Sandbox, enabling you to run web servers, APIs, and preview environments at the edge."
 ---
 
 You can run dev servers, preview apps, webhook receivers, or framework CLIs on
@@ -17,7 +17,7 @@ console.log(sandbox.id);
 
 await sandbox.fs.writeTextFile(
   "main.ts",
-  "export default { fetch: () => new Response('hi') }",
+  "export default { fetch: () => new Response('hello from a sandbox!') }",
 );
 
 const p = await sandbox.sh`deno serve --watch main.ts`.spawn();

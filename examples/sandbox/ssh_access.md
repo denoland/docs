@@ -1,7 +1,7 @@
 ---
 title: "Provide SSH access to a sandbox"
 description: "Learn how to provide SSH access to a sandbox."
-url: /examples/sandboxes_ssh_access/
+url: /examples/sandbox_ssh_access/
 layout: sandbox-example.tsx
 ---
 

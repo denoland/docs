@@ -1,13 +1,14 @@
 ---
 title: "Management via CLI"
-description: "Overview of how to manage sandboxes using the Deno CLI."
+description: "How to manage Deno Sandbox with the Deno CLI."
 ---
 
-The Deno CLI includes built-in commands for managing sandboxes, allowing you to
-create, control, and interact with them from your terminal.
+The Deno CLI includes built-in commands for managing your Deno Sandbox
+instances, allowing you to create, control, and interact with them from your
+terminal.
 
-This integration makes sandbox management feel natural within your existing Deno
-workflow.
+This integration makes Deno Sandbox management feel natural within your existing
+Deno workflow.
 
 ## Creating your first sandbox
 
@@ -86,7 +87,7 @@ Complex workflows can be expressed as quoted command chains:
 deno sandbox create --copy ./app --cwd /app "npm install && npm test && npm run build"
 ```
 
-## Viewing Your Sandboxes
+## Viewing your Deno Sandbox
 
 Use `deno sandbox list` (or `deno sandbox ls`) to see all sandboxes in your
 organization:
@@ -149,11 +150,11 @@ and data pipelines.
 
 ## Transferring files
 
-While you can copy files during sandbox creation, you might need to update or
-retrieve files later. The `deno sandbox copy` command (also available as
+While you can copy files during Deno Sandbox creation, you might need to update
+or retrieve files later. The `deno sandbox copy` command (also available as
 `deno sandbox cp`) transfers files in any direction: from your local machine to
-sandboxes, from sandboxes back to your machine, or even between different
-sandboxes.
+a Deno Sandbox, from a Deno Sandbox back to your machine, or even between
+different sandboxes.
 
 Copy files from your local machine to a sandbox:
 
@@ -173,7 +174,7 @@ Copy files between different sandboxes:
 deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/data.csv 6ba7b810-9dad-11d1-80b4-00c04fd430c8:/app/input/
 ```
 
-You can use glob patterns to copy multiple files from sandboxes:
+You can use glob patterns to copy multiple files from Deno Sandbox:
 
 ```bash
 deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/*.json ./config/
@@ -192,7 +193,15 @@ The target path can be customized to organize files within the sandbox:
 deno sandbox copy ./frontend 550e8400-e29b-41d4-a716-446655440000:/app/web/
 ```
 
+<<<<<<< HEAD:sandbox/cli.md
+
+## Deploying Deno Sandbox
+
+=======
+
 ## Deploying sandboxes
+
+>>>>>>> a7ce3b4ea8afd545c6b37457877b60bd995cb879:sandboxes/cli.md
 
 You can deploy a running sandbox to a Deno Deploy app using the
 `deno sandbox deploy` command:

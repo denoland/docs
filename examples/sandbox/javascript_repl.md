@@ -1,7 +1,7 @@
 ---
 title: "Intereactive JavaScript REPL"
 description: "Learn how to provide an interactive Deno REPL in a sandbox."
-url: /examples/sandboxes_javascript_repl/
+url: /examples/sandbox_javascript_repl/
 layout: sandbox-example.tsx
 ---
 
