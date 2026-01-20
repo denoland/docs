@@ -31,8 +31,8 @@ export const sidebar = [
         href: "/sandboxes/ssh/",
       },
       {
-        title: "Manage Deploy apps",
-        href: "/sandboxes/manage_apps/",
+        title: "Deno Deploy apps",
+        href: "/sandboxes/apps/",
       },
       {
         title: "Volumes",
