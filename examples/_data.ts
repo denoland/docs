@@ -501,6 +501,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Connecting to a database both locally and on Deno Deploy",
+        href: "/examples/tunnel_database_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "AWS Lambda",
         href: "/examples/aws_lambda_tutorial/",
         type: "tutorial",

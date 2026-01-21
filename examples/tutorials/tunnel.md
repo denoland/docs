@@ -37,6 +37,24 @@ deno run dev
 You should now have a Svelte app running locally at `http://localhost:5173` (or
 another port if 5173 is already in use).
 
+## Set up vite, to allow tunneling
+
+To allow the tunnel to work correctly with our Svelte app, we need to make a
+small change to our `vite.config.js` file. Open `vite.config.js` and add a
+`server` section to set `allowedHosts: "true"`:
+
+```js title="vite.config.js"
+import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [sveltekit()],
+  server: {
+    allowedHosts: "true",
+  },
+});
+```
+
 ## Deploy your app with the Deno Deploy subcommand
 
 We're going to deploy this project with Deno Deploy using the `deno deploy`
@@ -56,24 +74,6 @@ you belong to more than one.
 Deploy will automatically recognize that this is a Svelte project and set the
 appropriate settings, so all we need to do is click **Create App** in the Deno
 Deploy console.
-
-## Set up vite, to allow tunneling
-
-To allow the tunnel to work correctly with our Svelte app, we need to make a
-small change to our `vite.config.js` file. Open `vite.config.js` and add a
-`server` section to set `allowedHosts: "true"`:
-
-```js title="vite.config.js"
-import { sveltekit } from "@sveltejs/kit/vite";
-import { defineConfig } from "vite";
-
-export default defineConfig({
-  plugins: [sveltekit()],
-  server: {
-    allowedHosts: "true",
-  },
-});
-```
 
 ## Tunnel to your local server
 
@@ -190,3 +190,9 @@ Production and local.
 
 Try creating different values for the `local` context, then run your app with
 the `---tunnel` flag to see the local context values in action.
+
+🦕 Now that you know how to use the '--tunnel' flag, you can securely expose
+your local development server to the internet and test environment-specific
+configurations with ease. Why not try adding a database connection next? Check
+out the [tunnel database tutorial](./tunnel_database.md) to see how to connect
+your local app to a database using the tunnel feature.
