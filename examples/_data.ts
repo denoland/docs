@@ -108,6 +108,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Sharing your local server with tunnel",
+        href: "/examples/tunnel_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Generating documentation with deno doc",
         href: "/examples/deno_doc_tutorial/",
         type: "tutorial",
