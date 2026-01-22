@@ -12,7 +12,7 @@ devices - for example testing your app on mobile devices.
 Because Deno's Tunnel feature creates a secure tunnel to your local server, you
 don't need to worry about configuring firewalls or port forwarding.
 
-We'll set up a simple Svelte App and show how to expose it publicly using the
+We'll set up a simple app and show how to expose it publicly using the
 tunnel feature.
 
 ## Set up an app
