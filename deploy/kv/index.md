@@ -24,7 +24,7 @@ Deno KV is still in development and may change. To use it, you must pass the
 
 Let's walk through the key features of Deno KV.
 
-## Opening a database
+## Opening and closing a database
 
 In your Deno program, you can get a reference to a KV database using
 [`Deno.openKv()`](https://docs.deno.com/api/deno/~/Deno.openKv). You may pass in
@@ -32,8 +32,12 @@ an optional file system path to where you'd like to store your database,
 otherwise one will be created for you based on the current working directory of
 your script.
 
+To close the database connection, use the [`.close()`](https://docs.deno.com/api/deno/~/Deno.Kv#method_close_0) method.
+
 ```ts
 const kv = await Deno.openKv();
+// Execute some queries ...
+await kv.close();
 ```
 
 ## Creating, updating, and reading a key-value pair
