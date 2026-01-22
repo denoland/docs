@@ -583,18 +583,19 @@ enabled.
 
 Examples:
 
-```sh
-# disable failglob
-shopt -u failglob && rm -rf *.ts
-
-# disable failglob and enable nullglob
-shopt -u failglob && shopt -s nullglob && rm -rf *.ts
-
-# disable globstar
-shopt -u globstar && echo **/*.ts
-
-# enable pipefail
-set -o pipefail && cat missing.txt | echo "hello"
+```jsonc title="deno.jsonc"
+{
+  "tasks": {
+    // disable failglob
+    "task1": "shopt -u failglob && rm -rf *.ts",
+    // disable failglob and enable nullglob
+    "task2": "shopt -u failglob && shopt -s nullglob && rm -rf *.ts",
+    // disable globstar
+    "task3": "shopt -u globstar && echo **/*.ts",
+    // enable pipefail
+    "task4": "set -o pipefail && cat missing.txt | echo 'hello'"
+  }
+}
 ```
 
 :::note
