@@ -1,7 +1,7 @@
 ---
 title: "Share your local server with Tunnel"
 description: "Expose a public URL instantly with the --tunnel option"
-url: /examples/tunnel/
+url: /examples/tunnel_tutorial/
 ---
 
 The `--tunnel` flag in Deno allows you to expose your local server to the
