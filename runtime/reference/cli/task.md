@@ -565,6 +565,45 @@ echo data[0-9].csv
 
 The supported glob characters are `*`, `?`, and `[`/`]`.
 
+### Shell options
+
+`deno task` supports shell options in Deno 2.6.6 and above to control glob
+expansion and pipeline behavior. By default, `failglob` and `globstar` are
+enabled.
+
+- **failglob** - When enabled, globs that don't match any files will cause an
+  error. Disable with `shopt -u failglob`.
+- **globstar** - When enabled, `**` matches zero or more directories. Disable
+  with `shopt -u globstar`.
+- **nullglob** - When enabled, globs that don't match any files expand to
+  nothing instead of the literal glob pattern. Enable with `shopt -s nullglob`.
+- **pipefail** - When enabled, the exit code of a pipeline is the exit code of
+  the last command to exit with a non-zero status, or zero if all commands exit
+  successfully. Enable with `set -o pipefail`.
+
+Examples:
+
+```sh
+# disable failglob
+shopt -u failglob && rm -rf *.ts
+
+# disable failglob and enable nullglob
+shopt -u failglob && shopt -s nullglob && rm -rf *.ts
+
+# disable globstar
+shopt -u globstar && echo **/*.ts
+
+# enable pipefail
+set -o pipefail && cat missing.txt | echo "hello"
+```
+
+:::note
+
+Shell options do not propagate to `deno task` subprocesses. Each `deno task`
+invocation starts with the default options.
+
+:::
+
 ## Built-in commands
 
 `deno task` ships with several built-in commands that work the same out of the
