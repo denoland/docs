@@ -39,7 +39,7 @@ another port if 5173 is already in use).
 
 ## Set up vite, to allow tunneling
 
-To allow the tunnel to work correctly with our Svelte app, we need to make a
+The Vite server used by Svelte is restricted to localhost by default, so to make it more widely available we'll make a  
 small change to our `vite.config.js` file. Open `vite.config.js` and add a
 `server` section to set `allowedHosts: "true"`:
 
