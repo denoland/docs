@@ -32,7 +32,8 @@ an optional file system path to where you'd like to store your database,
 otherwise one will be created for you based on the current working directory of
 your script.
 
-To close the database connection, use the [`.close()`](https://docs.deno.com/api/deno/~/Deno.Kv#method_close_0) method.
+To close the database connection, use the 
+[`.close()`](https://docs.deno.com/api/deno/~/Deno.Kv#method_close_0) method.
 
 ```ts
 const kv = await Deno.openKv();
