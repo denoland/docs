@@ -12,8 +12,8 @@ devices - for example testing your app on mobile devices.
 Because Deno's Tunnel feature creates a secure tunnel to your local server, you
 don't need to worry about configuring firewalls or port forwarding.
 
-We'll set up a simple app and show how to expose it publicly using the
-tunnel feature.
+We'll set up a simple app and show how to expose it publicly using the tunnel
+feature.
 
 ## Set up an app
 
@@ -39,7 +39,8 @@ another port if 5173 is already in use).
 
 ## Set up vite, to allow tunneling
 
-The Vite server used by Svelte is restricted to localhost by default, so to make it more widely available we'll make a  
+The Vite server used by Svelte is restricted to localhost by default, so to make
+it more widely available we'll make a\
 small change to our `vite.config.js` file. Open `vite.config.js` and add a
 `server` section to set `allowedHosts: "true"`:
 
