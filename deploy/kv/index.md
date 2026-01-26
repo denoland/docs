@@ -27,7 +27,7 @@ Let's walk through the key features of Deno KV.
 ## Opening and closing a database
 
 In your Deno program, you can get a reference to a KV database using
-[`Deno.openKv()`](https://docs.deno.com/api/deno/~/Deno.openKv). You may pass in
+[`Deno.openKv()`](/api/deno/~/Deno.openKv). You may pass in
 an optional file system path to where you'd like to store your database,
 otherwise one will be created for you based on the current working directory of
 your script.
