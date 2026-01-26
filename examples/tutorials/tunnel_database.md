@@ -159,7 +159,7 @@ Then, update the HTML to display the notes:
 </ul>
 ```
 
-## Run your app with the tunnel
+## Run your app with tunnel
 
 Now, you can use the `--tunnel` flag to run your Svelte app locally and see the
 data from the local database context:
