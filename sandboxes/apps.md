@@ -1,32 +1,38 @@
 ---
-title: "Deno Deploy Apps"
-description: "Use the @deno/sandbox Client to create, list, update, and delete Deploy apps programmatically."
+title: "Programmatic management of Deno Deploy Apps"
+description: "Use @deno/sandbox to create, list, update, and delete Deno Deploy apps programmatically."
 ---
 
-Deno Deploy apps can be created and managed programmatically using the
+Deno Deploy apps can be created and managed programmatically with the
 `@deno/sandbox` SDK. Automating these workflows helps when you need to
 
 - spin up isolated apps for previews or QA
 - keep multiple environments in sync
 - integrate Deploy provisioning directly into your CI/CD
+- clean up stale or unused apps on a schedule
 
-The `Client` class exposes create, list, retrieve, update, and delete methods
-for every app that belongs to the organization the token is scoped to.
+Pass the `DENO_DEPLOY_TOKEN` environment variable, scoped to your organization,
+when instantiating the client or creating a sandbox to manage apps. The `Client`
+class exposes create, list, retrieve, update, and delete methods for every app
+that belongs to the organization the token is scoped to.
+
+You can find your token in the Deno Deploy console under **Sandboxes** >
+**Integrate into your app**.
+
+Click the **+ Create Token** button to generate a new token if you don't have
+one yet.
 
 ## Initialize the client
 
 Set the `DENO_DEPLOY_TOKEN` in your environment (or pass it explicitly through
-the constructor options) before instantiating the client.
+the constructor options) before instantiating the client, then import and create
+a new `Client` instance:
 
 ```tsx
 import { Client } from "@deno/sandbox";
 
 const client = new Client();
 ```
-
-The client uses the same `DENO_DEPLOY_TOKEN` environment variable as
-`Sandbox.create()`. Provide tokens scoped to the organization you want to
-manage.
 
 ## Create an app
 
