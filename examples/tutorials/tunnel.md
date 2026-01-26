@@ -195,5 +195,5 @@ the `---tunnel` flag to see the local context values in action.
 🦕 Now that you know how to use the '--tunnel' flag, you can securely expose
 your local development server to the internet and test environment-specific
 configurations with ease. Why not try adding a database connection next? Check
-out the [tunnel database tutorial](./tunnel_database.md) to see how to connect
-your local app to a database using the tunnel feature.
+out the [tunnel database tutorial](/examples/tunnel_database_tutorial/) to see
+how to connect your local app to a database using the tunnel feature.
