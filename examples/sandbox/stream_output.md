@@ -5,12 +5,12 @@ url: /examples/sandbox_stream_output/
 layout: sandbox-example.tsx
 ---
 
-You can stream output to a local file in a sandbox.
+You can stream output to a local file in a sandbox. This avoids buffering entire
+large artifacts in memory.
 
-`child.stdout` is a Web `ReadableStream`.
-
-In Node, convert a Node `fs.WriteStream` to a Web `WritableStream` to pipe
-efficiently.
+If you generate something sizable inside the sandbox (like `big.txt` below), you
+can pipe it out chunk-by-chunk over a `ReadableStream`, converting Node’s
+`fs.WriteStream` to a Web `WritableStream` for efficient transfer.
 
 ```ts
 import { Sandbox } from "@deno/sandbox";
@@ -33,3 +33,7 @@ await child.stdout.pipeTo(Writable.toWeb(file));
 const status = await child.status;
 console.log("done:", status);
 ```
+
+This pattern keeps memory usage flat, works well for logs or big binaries, and
+lets you persist sandbox results on the host without temporary files or stdout
+truncation.

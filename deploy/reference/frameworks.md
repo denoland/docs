@@ -22,7 +22,7 @@ Feel like a framework is missing? Let us know in the
 
 ## Supported frameworks
 
-### Next.js
+### Next.js (`nextjs`)
 
 Next.js is a React framework for building full-stack web applications. You use
 React Components to build user interfaces, and Next.js for additional features
@@ -39,7 +39,7 @@ Next.js on Deno Deploy always builds in standalone mode.
 Tracing is supported out of the box, and Next.js automatically emits some spans
 for incoming requests, routing, rendering, and other operations.
 
-### Astro
+### Astro (`astro`)
 
 Astro is a web framework for building content-driven websites like blogs,
 marketing, and e-commerce. Astro leverages server rendering over client-side
@@ -73,42 +73,42 @@ Sharp image optimization is supported.
 
 The `astro:env` API is supported.
 
-### Nuxt
+### Nuxt (`nuxt`)
 
 Create high-quality web applications with Nuxt, the open source framework that
 makes full-stack development with Vue.js intuitive.
 
 Nuxt requires no additional setup.
 
-### SolidStart
+### SolidStart (`solidstart`)
 
 SolidStart is an open source meta-framework designed to unify components that
 make up a web application. It is built on top of Solid.
 
 SolidStart requires no additional setup.
 
-### SvelteKit
+### SvelteKit (`sveltekit`)
 
 SvelteKit is a framework for rapidly developing robust, performant web
 applications using Svelte.
 
 SvelteKit requires no additional setup.
 
-### Fresh
+### Fresh (`fresh`)
 
 Fresh is a full stack modern web framework for JavaScript and TypeScript
 developers. Fresh uses Preact as the JSX rendering engine.
 
 Fresh requires no additional setup.
 
-### Lume
+### Lume (`lume`)
 
 Lume is a static site generator for building fast and modern websites using
 Deno.
 
 Lume requires no additional setup.
 
-### Remix
+### Remix (`remix`)
 
 > ⚠️ **Experimental**: Remix is not yet fully supported. It is in the process of
 > being integrated into Deno Deploy. Some features may not work as expected.
