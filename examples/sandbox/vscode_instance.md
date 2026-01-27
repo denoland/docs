@@ -5,11 +5,12 @@ url: /examples/sandbox_vscode_instance/
 layout: sandbox-example.tsx
 ---
 
-The `sandbox.exposeVscode()` method can be used to provide a VSCode instance in
-a sandbox.
-
-This example shows how to start a VSCode instance in a sandbox and print the url
-of the running instance which you can then open in your browser.
+Running `sandbox.exposeVscode()` spins up a full VS Code instance inside an
+isolated sandboxed environment and exposes its URL so you can open it in a
+browser. This is handy when you need a lightweight, disposable editor for demos,
+workshops, or remote debugging: you can provision VS Code on demand without
+installing anything locally, safely experiment with code inside a contained
+workspace, and tear it down automatically once you’re done.
 
 ```ts
 import { Sandbox } from "@deno/sandbox";

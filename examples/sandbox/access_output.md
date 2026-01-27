@@ -5,7 +5,8 @@ url: /examples/sandbox_access_output/
 layout: sandbox-example.tsx
 ---
 
-You can access string and binary output from commands in a sandbox.
+You can access string and binary output from commands in a sandbox. This example
+shows how to capture command output in whichever form your workflow needs:
 
 ```ts
 import { Sandbox } from "@deno/sandbox";
@@ -22,3 +23,14 @@ console.log("Text length:", result.stdoutText!.length);
 import fs from "node:fs";
 fs.writeFileSync("output.png", result.stdout!);
 ```
+
+Piping stdout lets you retrieve both the raw binary buffer and a decoded text
+view from the same command, so you can handle files that mix binary and textual
+data without re-running the command.
+
+Once you have the binary result, you can pass it directly to APIs such as
+`fs.writeFileSync` to persist artifacts generated inside the sandbox, making it
+easy to move data between the sandbox and your host environment
+
+This is useful when sandbox commands produce files (images, archives, etc.) that
+you need to consume programmatically rather than just printing to the console.

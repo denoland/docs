@@ -21,3 +21,10 @@ await sandbox.env.set("NODE_ENV", "production");
 const apiKey = await sandbox.sh`echo $API_KEY`.text();
 console.log("API_KEY:", apiKey.trim());
 ```
+
+Setting environment variables through `sandbox.env.set()` keeps configuration
+and secrets inside the sandbox, so scripts run with the expected context without
+hardcoding values in source files. That’s helpful when you need per-run
+configuration (API keys, modes like NODE_ENV) or want to propagate credentials
+to multiple commands securely. The variables stay scoped to the sandbox session
+and are available to any command you execute there.

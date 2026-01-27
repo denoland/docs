@@ -5,7 +5,9 @@ url: /examples/sandbox_ssh_access/
 layout: sandbox-example.tsx
 ---
 
-The `sandbox.exposeSsh()` method can be used to provide SSH access to a sandbox.
+SSH access allows you to connect to a sandboxed environment securely over the
+SSH protocol. The `sandbox.exposeSsh()` method can be used to provide SSH access
+to a sandbox.
 
 ```ts
 import { Sandbox } from "@deno/sandbox";
