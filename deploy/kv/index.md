@@ -27,10 +27,9 @@ Let's walk through the key features of Deno KV.
 ## Opening and closing a database
 
 In your Deno program, you can get a reference to a KV database using
-[`Deno.openKv()`](/api/deno/~/Deno.openKv). You may pass in
-an optional file system path to where you'd like to store your database,
-otherwise one will be created for you based on the current working directory of
-your script.
+[`Deno.openKv()`](/api/deno/~/Deno.openKv). You may pass in an optional file
+system path to where you'd like to store your database, otherwise one will be
+created for you based on the current working directory of your script.
 
 To close the database connection, use the
 [`.close()`](https://docs.deno.com/api/deno/~/Deno.Kv#method_close_0) method.
@@ -299,5 +298,6 @@ special database addressing modes, see
 ## Next steps
 
 At this point, you're just beginning to scratch the surface with Deno KV. Be
-sure to check out our guide on the [Deno KV key space](./key_space), and a
-collection of [tutorials and example applications](../tutorials/index.md) here.
+sure to check out our guide on the [Deno KV key space](/deploy/kv/key_space/),
+and a collection of
+[tutorials and example applications](/examples/#unstable-apis) here.
