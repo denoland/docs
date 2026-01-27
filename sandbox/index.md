@@ -198,8 +198,8 @@ The Deno Sandbox SDK is tested and supported on:
 You can use Deno Sandbox from any environment that can make outbound HTTPS
 requests to the Deno Deploy API. The JavaScript SDK is available as
 `@deno/sandbox` on both [jsr](https://jsr.io/@deno/sandbox) and
-[npm](https://www.npmjs.com/package/@deno/sandbox) (the JSR package is
-optimized for Deno usage). The Python SDK is available as `deno-sandbox` on
+[npm](https://www.npmjs.com/package/@deno/sandbox) (the JSR package is optimized
+for Deno usage). The Python SDK is available as `deno-sandbox` on
 [PyPI](https://pypi.org/project/deno-sandbox/).
 
 :::note await using support

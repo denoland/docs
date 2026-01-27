@@ -46,8 +46,8 @@ async with sdk.sandbox.create() as sandbox:
 </deno-tabs>
 
 With no options set, the sandbox lives for the duration of your script. Once the
-sandbox instance is closed, the microVM shuts down and frees all resources.
-This keeps costs predictable and prevents orphaned infrastructure.
+sandbox instance is closed, the microVM shuts down and frees all resources. This
+keeps costs predictable and prevents orphaned infrastructure.
 
 ## Duration-based timeouts
 

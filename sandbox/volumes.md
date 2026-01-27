@@ -152,8 +152,8 @@ size volumes with headroom.
 ## Mount volumes inside a sandbox
 
 Pass a volumes mapping when creating a sandbox. Keys are mount paths and values
-are either the volume slug or ID. The sandbox and volume **must live in the
-same region**.
+are either the volume slug or ID. The sandbox and volume **must live in the same
+region**.
 
 <deno-tabs group-id="sandbox-sdk">
 <deno-tab value="js" label="JavaScript" default>
