@@ -23,9 +23,15 @@ observability are managed for you.
 
 ## Promote with `sandbox.deno.deploy()`
 
+:::note
+
+This feature is currently available in the JavaScript SDK only.
+
+:::
+
 When a sandbox proves the concept, you can turn it into an always-on Deploy app
 without rebuilding elsewhere. `sandbox.deno.deploy()` snapshots the current file
-system, carries over `allowNet`, and provisions an app with a durable URL,
+system, carries over network policies, and provisions an app with a durable URL,
 observability, and team access.
 
 ```tsx

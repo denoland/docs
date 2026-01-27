@@ -39,15 +39,52 @@ software.
 Once the Deno Sandbox exists, you get a full Linux environment with files,
 processes, package managers, and background services:
 
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
+
 ```tsx
 import { Sandbox } from "@deno/sandbox";
 await using sandbox = await Sandbox.create();
 await sandbox.sh`ls -lh /`;
 ```
 
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+from deno_sandbox import DenoDeploy
+
+def main():
+  sdk = DenoDeploy()
+
+  with sdk.sandbox.create() as sandbox:
+    process = sandbox.spawn("ls", args=["-lh"])
+    process.wait()
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+from deno_sandbox import AsyncDenoDeploy
+
+async def main():
+  sdk = AsyncDenoDeploy()
+
+  async with sdk.sandbox.create() as sandbox:
+    process = await sandbox.spawn("ls", args=["-lh"])
+    await process.wait()
+```
+
+</deno-tab>
+</deno-tabs>
+
 ## Security policies
 
 Provision a sandbox so that it can only talk to approved hosts:
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
 
 ```tsx
 await Sandbox.create({
@@ -55,8 +92,34 @@ await Sandbox.create({
 });
 ```
 
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+sdk = AsyncDenoDeploy()
+
+async with sdk.sandboxes.create(allowNet=["google.com"]) as sandbox:
+  print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+sdk = DenoDeploy()
+
+with sdk.sandboxes.create(allowNet=["google.com"]) as sandbox:
+  print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+</deno-tabs>
+
 Secrets never enter the sandbox environment. The real value is substituted only
 when the sandbox makes outbound requests to approved hosts.
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
 
 ```tsx
 await Sandbox.create({
@@ -69,6 +132,45 @@ await Sandbox.create({
   },
 });
 ```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```python
+sdk = AsyncDenoDeploy()
+
+async with sdk.sandboxes.create(
+  allowNet=["api.openai.com"],
+  secrets={
+    "OPENAI_API_KEY": {
+      "hosts": ["api.openai.com"],
+      "value": os.environ.get("OPENAI_API_KEY"),
+    }
+  },
+) as sandbox:
+  print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```python
+sdk = DenoDeploy()
+
+with sdk.sandboxes.create(
+  allowNet=["api.openai.com"],
+  secrets={
+    "OPENAI_API_KEY": {
+      "hosts": ["api.openai.com"],
+      "value": os.environ.get("OPENAI_API_KEY"),
+    }
+  },
+) as sandbox:
+  print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+</deno-tabs>
 
 ## Built for instant, safe compute
 
@@ -91,15 +193,14 @@ The Deno Sandbox SDK is tested and supported on:
 
 - **Deno:** Latest stable version
 - **Node.js:** Version 24+
+- **Python:** >=3.10
 
-You can use Deno Sandbox from any environment that can import the
-`@deno/sandbox` package and make outbound HTTPS requests to the Deno Deploy API,
-meaning you can use Deno Sandbox in your Node projects, Deno Deploy apps, or
-even browser-based tools.
-
-In your Deno projects you can use either the [jsr](https://jsr.io/@deno/sandbox)
-or [npm](https://www.npmjs.com/package/@deno/sandbox) package, however the jsr
-package has been optimized for Deno usage and APIs and is recommended.
+You can use Deno Sandbox from any environment that can make outbound HTTPS
+requests to the Deno Deploy API. The JavaScript SDK is available as
+`@deno/sandbox` on both [jsr](https://jsr.io/@deno/sandbox) and
+[npm](https://www.npmjs.com/package/@deno/sandbox) (the JSR package is
+optimized for Deno usage). The Python SDK is available as `deno-sandbox` on
+[PyPI](https://pypi.org/project/deno-sandbox/).
 
 :::note await using support
 
@@ -146,11 +247,43 @@ Regions currently supported are:
 You can specify the region where the sandbox will be created when creating a new
 sandbox:
 
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
+
 ```tsx
 import { Sandbox } from "@deno/sandbox";
 
 await using sandbox = await Sandbox.create({ region: "ams" });
 ```
+
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+from deno_sandbox import DenoDeploy
+
+def main():
+  sdk = DenoDeploy()
+
+  with sdk.sandboxes.create(region="ams") as sandbox:
+    print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+from deno_sandbox import AsyncDenoDeploy
+
+async def main():
+  sdk = AsyncDenoDeploy()
+
+  async with sdk.sandboxes.create(region="ams") as sandbox:
+    print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+</deno-tabs>
 
 If not specified, the sandbox will be created in the default region.
 

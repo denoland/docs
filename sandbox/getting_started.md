@@ -39,6 +39,9 @@ if it is ever exposed.
 
 ## Install the SDK
 
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
+
 The SDK works in both Deno and Node.js environments.
 
 ```bash
@@ -55,7 +58,26 @@ pnpm install jsr:@deno/sandbox
 yarn add jsr:@deno/sandbox
 ```
 
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+The SDK works in Python versions `>=3.10`.
+
+```bash
+# Install with uv
+uv add deno-sandbox
+
+# or with pip
+pip install deno-sandbox
+```
+
+</deno-tab>
+</deno-tabs>
+
 ## Create your first sandbox
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
 
 ```tsx title="main.ts"
 import { Sandbox } from "@deno/sandbox";
@@ -63,7 +85,48 @@ await using sandbox = await Sandbox.create();
 await sandbox.sh`ls -lh /`;
 ```
 
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py title="main.py"
+from deno_sandbox import DenoDeploy
+
+def main():
+  sdk = DenoDeploy()
+
+  with sdk.sandbox.create() as sandbox:
+    process = sandbox.spawn("ls", args=["-lh"])
+    process.wait()
+
+if __name__ == '__main__':
+  main()
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py title="main.py"
+import asyncio
+from deno_sandbox import DenoDeploy
+
+async def main():
+  sdk = DenoDeploy()
+
+  async with sdk.sandbox.create() as sandbox:
+    process = await sandbox.spawn("ls", args=["-lh"])
+    await process.wait()
+
+if __name__ == '__main__':
+  asyncio.run(main())
+```
+
+</deno-tab>
+</deno-tabs>
+
 ## Run your sandbox code
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
 
 This code will require access to the network to reach the Deploy edge where the
 sandbox will be created, and also access to the environment variables to
@@ -73,6 +136,18 @@ authenticate with the Deploy API, so we'll pass in the `--allow-net` and
 ```bash
 deno -EN main.ts
 ```
+
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+To run the script we just created, execute:
+
+```bash
+uv run main.py
+```
+
+</deno-tab>
+</deno-tabs>
 
 Any sandbox you create will be listed in the **Sandboxes** tab of your Deno
 Deploy organization.
@@ -88,14 +163,19 @@ Details about the sandbox will be shown in its **Event log**.
 When creating a sandbox with `Sandbox.create()`, you can configure it with the
 following options:
 
-- `allowNet`: Optional list of allowed outbound hosts. See
+- <code class="js-only">allowNet</code><code class="py-only">allow_net</code>:
+  Optional list of allowed outbound hosts. See
   [Outbound network control](./security#outbound-network-control).
 - `secrets`: Secret substitution rules for outbound requests. See
   [Secret redaction and substitution](./security#secret-redaction-and-substitution).
 - `region`: Deploy region where the sandbox will be created.
-- `memoryMb`: Amount of memory allocated to the sandbox.
+- <code class="js-only">memoryMb</code><code class="py-only">memory_mb</code>:
+  Amount of memory allocated to the sandbox.
 - `timeout`: Timeout of the sandbox.
 - `labels`: Arbitrary key/value tags to help identify and manage sandboxes
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
 
 ```tsx
 await using sandbox = await Sandbox.create({
@@ -105,6 +185,41 @@ await using sandbox = await Sandbox.create({
 });
 ```
 
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+from deno_sandbox import DenoDeploy
+
+sdk = DenoDeploy()
+
+with sdk.sandbox.create(
+  allow_net=["api.stripe.com", "api.openai.com"],  # optional: list of hosts that this sandbox can communicate with
+  region="ams",  # optional: choose the Deploy region
+  memory_mb=1024,  # optional: pick the RAM size (768-4096)
+) as sandbox:
+  print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+from deno_sandbox import AsyncDenoDeploy
+
+sdk = AsyncDenoDeploy()
+
+async with sdk.sandbox.create(
+  allow_net=["api.stripe.com", "api.openai.com"],  # optional: list of hosts that this sandbox can communicate with
+  region="ams",  # optional: choose the Deploy region
+  memory_mb=1024,  # optional: pick the RAM size (768-4096)
+) as sandbox:
+  print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+</deno-tabs>
+
 ## Running commands and scripts
 
 Deno Sandbox exposes familiar filesystem and process APIs to run commands,
@@ -112,11 +227,36 @@ upload files, and spawn long-running services.
 
 You can for example list files in the root directory:
 
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
+
 ```ts
 await sandbox.sh`ls -lh /`;
 ```
 
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+process = sandbox.spawn("ls", args=["-lh", "/"])
+process.wait()
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+process = await sandbox.spawn("ls", args=["-lh", "/"])
+await process.wait()
+```
+
+</deno-tab>
+</deno-tabs>
+
 Or upload a script from the local filesystem and run it:
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
 
 ```ts
 // Upload a file to a specific path in the sandbox
@@ -131,10 +271,43 @@ for await (const chunk of proc.stdout) {
 await proc.status;
 ```
 
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+# Upload a file to a specific path in the sandbox
+sandbox.fs.upload("./local-hello.py", "./hello.py")
+proc = sandbox.spawn("python", args=["hello.py"], stdout="piped")
+for chunk in proc.stdout:
+  print(chunk.decode())
+proc.wait()
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+# Upload a file to a specific path in the sandbox
+await sandbox.fs.upload("./local-hello.py", "./hello.py")
+proc = await sandbox.spawn("python", args=["hello.py"], stdout="piped")
+async for chunk in proc.stdout:
+  print(chunk.decode())
+await proc.wait()
+```
+
+</deno-tab>
+</deno-tabs>
+
 You can keep state between commands, stream stdout and stderr, or open an
-interactive REPL with `sandbox.deno.repl()` for agent-style workflows.
+interactive REPL for agent-style workflows.
 
 ## Deploying from a Deno Sandbox
+
+:::note
+
+This feature is currently available in the JavaScript SDK only.
+
+:::
 
 The snippet below walks through an end-to-end workflow: it creates a Deploy app
 via the `Client`, boots a high-memory sandbox for heavier builds, scaffolds and
