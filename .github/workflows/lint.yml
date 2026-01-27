@@ -21,6 +21,7 @@ jobs:
         uses: denoland/setup-deno@v2
         with:
           cache: true
+          deno-version: canary
 
       - run: deno fmt --check
       - run: deno task test
