@@ -246,15 +246,12 @@ are cleaned up automatically.
 
 ## Publish to a Deploy app from a sandbox
 
-:::note
-
-This feature is currently available in the JavaScript SDK only.
-
-:::
-
 The `sandbox.deno.deploy()` method can be used to publish resources from a
 sandbox to an existing Deno Deploy app. This allows you to use a sandbox as a
 deployment pipeline for an application hosted on Deno Deploy.
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
 
 ```tsx
 await using sandbox = await Sandbox.create();
@@ -271,8 +268,49 @@ const app = await sandbox.deno.deploy("my-app", {
   },
 });
 
-console.log(`${app.slug} deployed.`);
+console.log(`Deployed to ${app.slug}`);
 ```
+
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+sdk = DenoDeploy()
+
+with sdk.sandbox.create() as sandbox:
+  # ... build your application ...
+
+  build = sandbox.deno.deploy(
+    "my-app",
+    path="build-output",  # optional: path to the directory containing the application to deploy
+    production=True,  # optional: deploy to production
+    entrypoint="server.ts",  # optional: entrypoint to deploy
+  )
+
+  print(f"Deployed revision ID: {build.id}")
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+sdk = AsyncDenoDeploy()
+
+async with sdk.sandbox.create() as sandbox:
+  # ... build your application ...
+
+  build = await sandbox.deno.deploy(
+    "my-app",
+    path="build-output",  # optional: path to the directory containing the application to deploy
+    production=True,  # optional: deploy to production
+    entrypoint="server.ts",  # optional: entrypoint to deploy
+  )
+
+  print(f"Deployed revision ID: {build.id}")
+```
+
+</deno-tab>
+</deno-tabs>
 
 ## Tips
 

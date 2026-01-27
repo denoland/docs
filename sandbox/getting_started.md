@@ -303,16 +303,13 @@ interactive REPL for agent-style workflows.
 
 ## Deploying from a Deno Sandbox
 
-:::note
+The snippet below walks through an end-to-end workflow: it creates a Deploy app,
+boots a high-memory sandbox for heavier builds, scaffolds and builds a Next.js
+project inside that VM, then calls `sandbox.deno.deploy()` to push the compiled
+artifacts while streaming build logs back to your terminal.
 
-This feature is currently available in the JavaScript SDK only.
-
-:::
-
-The snippet below walks through an end-to-end workflow: it creates a Deploy app
-via the `Client`, boots a high-memory sandbox for heavier builds, scaffolds and
-builds a Next.js project inside that VM, then calls `sandbox.deno.deploy()` to
-push the compiled artifacts while streaming build logs back to your terminal.
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
 
 ```tsx
 import { Client, Sandbox } from "@deno/sandbox";
@@ -341,6 +338,70 @@ for await (const log of build.logs()) {
   console.log(log.message);
 }
 ```
+
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+from deno_sandbox import DenoDeploy
+
+sdk = DenoDeploy()
+
+app = sdk.apps.create(slug="my-next-app")
+
+with sdk.sandbox.create(memory_mb=4096) as sandbox:
+  print(f"Created sandbox {sandbox.id}")
+
+  sandbox.spawn("deno", args=["-A", "npm:create-next-app@latest", "--yes", "--skip-install", "my-app"]).wait()
+  sandbox.spawn("sh", args=["-c", "cd my-app && deno install"]).wait()
+  sandbox.spawn("sh", args=["-c", "cd my-app && deno task build"]).wait()
+
+  build = sandbox.deno.deploy(
+    app["slug"],
+    path="my-app",
+    production=True,
+    entrypoint="node_modules/.bin/next",
+    args=["start"],
+  )
+
+  for log in build.logs():
+    print(log["message"])
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+from deno_sandbox import AsyncDenoDeploy
+
+sdk = AsyncDenoDeploy()
+
+app = await sdk.apps.create(slug="my-next-app")
+
+async with sdk.sandbox.create(memory_mb=4096) as sandbox:
+  print(f"Created sandbox {sandbox.id}")
+
+  proc = await sandbox.spawn("deno", args=["-A", "npm:create-next-app@latest", "--yes", "--skip-install", "my-app"])
+  await proc.wait()
+  proc = await sandbox.spawn("sh", args=["-c", "cd my-app && deno install"])
+  await proc.wait()
+  proc = await sandbox.spawn("sh", args=["-c", "cd my-app && deno task build"])
+  await proc.wait()
+
+  build = await sandbox.deno.deploy(
+    app["slug"],
+    path="my-app",
+    production=True,
+    entrypoint="node_modules/.bin/next",
+    args=["start"],
+  )
+
+  async for log in build.logs():
+    print(log["message"])
+```
+
+</deno-tab>
+</deno-tabs>
 
 ## Tuning timeout, cleanup, and reconnect
 
