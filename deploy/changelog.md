@@ -13,8 +13,8 @@ description: "Listing notable progress in the development and evolution of Deno 
     in the `deno.json` file under the `deploy` section. This includes install
     and build command, runtime configuration, and framework presets.
   - When both dashboard and `deno.json` configuration are present, the
-    `deno.json` configuration takes precedence and overrides the dashboard
-    configuration entirely.
+    `deno.json` configuration takes precedence and overrides the app
+    configuration in the dashboard entirely.
   - This makes it easier to manage app configuration as code, and keep it in
     version control alongside your application code.
   - [Learn more in the documentation.](/deploy/reference/builds/#editing-app-configuration-from-source-code)

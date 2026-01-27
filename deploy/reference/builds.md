@@ -68,8 +68,9 @@ There are two places you can set app configuration:
 - **In the Deno Deploy dashboard**: Using the app configuration settings.
 
 If you specify both options, settings in the source code take precedence over
-those in the dashboard. You will be unable to edit any settings in the dashboard
-if the most recent successful build used configuration from source code.
+those in the dashboard. You will be unable to edit any of the app configuration
+values in the dashboard if the most recent successful build used configuration
+from source code.
 
 The application directory must be configured through the dashboard. This setting
 is not configurable from source code, as it determines where to find the source
@@ -134,8 +135,8 @@ the entire configuration will be sourced from the file instead of the dashboard
 
 - `deploy.framework` (required unless `deploy.runtime` is set): The framework
   preset to use, such as `nextjs` or `fresh`. Setting this option automatically
-  configures defaults for the framework.
-  [Learn more about framework integrations](./frameworks/).
+  configures defaults for the framework. Available presets are listed in the
+  [framework integrations docs](./frameworks/).
 - `deploy.install` (optional): Shell command to install dependencies.
 - `deploy.build` (optional): Shell command to build the project.
 - `deploy.predeploy` (optional): Shell command to run after the build is
