@@ -47,6 +47,24 @@ while the sandbox keeps state alive, so you can reconnect later (e.g., to
 inspect logs, rerun commands, or share the sandbox ID with another process)
 before the timeout expires.
 
+## Extend the timeout whenever you need
+
+You are not locked into the original duration. As long as you still hold a
+`Sandbox` instance (either the original handle or one reconnected via
+`Sandbox.connect()`), call `sandbox.extendTimeout()` with another duration
+string to push the expiry further out. Each call can add up to 30 minutes and
+returns a `Date` indicating the new shutdown time.
+
+```ts
+import { Sandbox } from "@deno/sandbox";
+
+const sandbox = await Sandbox.create({ timeout: "5m" });
+
+// Need more time later on? Extend in-place without disrupting running work.
+const newExpiry = await sandbox.extendTimeout("30m");
+console.log(`Sandbox now lives until ${newExpiry.toISOString()}`);
+```
+
 You still control lifecycle explicitly with a call to `kill()` to end the
 sandbox early if you no longer need it, useful if your job finishes sooner than
 expected.
