@@ -466,6 +466,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "View telemetry data for your local application",
+        href: "/examples/tunnel_telemetry_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Export telemetry to Honeycomb",
         href: "/examples/honeycomb_tutorial/",
         type: "tutorial",
