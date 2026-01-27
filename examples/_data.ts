@@ -108,6 +108,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Sharing your local server with tunnel",
+        href: "/examples/tunnel_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Generating documentation with deno doc",
         href: "/examples/deno_doc_tutorial/",
         type: "tutorial",
@@ -493,6 +498,11 @@ export const sidebar = [
       {
         title: "Migrating a custom domain to Deno Deploy",
         href: "/examples/migrate_custom_domain_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Connecting to a database both locally and on Deno Deploy",
+        href: "/examples/tunnel_database_tutorial/",
         type: "tutorial",
       },
       {
