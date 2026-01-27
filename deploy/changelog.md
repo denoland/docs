@@ -3,7 +3,7 @@ title: "Deno Deploy changelog"
 description: "Listing notable progress in the development and evolution of Deno Deploy"
 ---
 
-## January 26th, 2026
+## January 27th, 2026
 
 ### Features
 
