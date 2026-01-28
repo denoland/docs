@@ -3,7 +3,7 @@ title: "Standard Assertions (@std/assert)"
 description: "Common assertion functions, especially useful for testing"
 jsr: jsr:@std/assert
 pkg: assert
-version: 1.0.16
+version: 1.0.17
 generated: true
 stability: stable
 ---

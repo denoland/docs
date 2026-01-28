@@ -3,7 +3,7 @@ title: "@std/http"
 description: "Utilities for building HTTP servers"
 jsr: jsr:@std/http
 pkg: http
-version: 1.0.22
+version: 1.0.23
 generated: true
 stability: stable
 ---
@@ -49,7 +49,7 @@ therefore is not provided.</p>
 </blockquote>
 <h2 id="user-agent-handling">
 User agent handling</h2>
-<p>The <a href="https://jsr.io/@std/http@1.0.22/doc/~/UserAgent" rel="nofollow"><code>UserAgent</code></a> class provides user agent string parsing, allowing
+<p>The <a href="https://jsr.io/@std/http@1.0.23/doc/~/UserAgent" rel="nofollow"><code>UserAgent</code></a> class provides user agent string parsing, allowing
 a user agent flag to be semantically understood.</p>
 <p>For example to integrate the user agent provided in the header <code>User-Agent</code>
 in an http request would look like this:</p>

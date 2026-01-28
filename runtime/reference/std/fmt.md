@@ -3,7 +3,7 @@ title: "@std/fmt"
 description: "Utilities for formatting values, such as adding colors to text, formatting durations, printf utils, formatting byte numbers."
 jsr: jsr:@std/fmt
 pkg: fmt
-version: 1.0.8
+version: 1.0.9
 generated: true
 stability: stable
 ---

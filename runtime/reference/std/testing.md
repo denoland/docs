@@ -3,7 +3,7 @@ title: "@std/testing"
 description: "Tools for testing Deno code like snapshot testing, bdd testing, and time mocking"
 jsr: jsr:@std/testing
 pkg: testing
-version: 1.0.16
+version: 1.0.17
 generated: true
 stability: stable
 ---
