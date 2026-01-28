@@ -3,7 +3,7 @@ title: "@std/text"
 description: "Utilities for working with text"
 jsr: jsr:@std/text
 pkg: text
-version: 1.0.16
+version: 1.0.17
 generated: true
 stability: stable
 ---

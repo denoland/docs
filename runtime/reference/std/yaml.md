@@ -3,7 +3,7 @@ title: "@std/yaml"
 description: "Parsing and serializing of YAML files"
 jsr: jsr:@std/yaml
 pkg: yaml
-version: 1.0.10
+version: 1.0.11
 generated: true
 stability: stable
 ---
@@ -12,11 +12,11 @@ stability: stable
 
 ## Overview
 
-<p><a href="https://jsr.io/@std/yaml@1.0.10/doc/~/parse" rel="nofollow"><code>parse</code></a> and <a href="https://jsr.io/@std/yaml@1.0.10/doc/~/stringify" rel="nofollow"><code>stringify</code></a> for handling
+<p><a href="https://jsr.io/@std/yaml@1.0.11/doc/~/parse" rel="nofollow"><code>parse</code></a> and <a href="https://jsr.io/@std/yaml@1.0.11/doc/~/stringify" rel="nofollow"><code>stringify</code></a> for handling
 <a href="https://yaml.org/" rel="nofollow">YAML</a> encoded data.</p>
 <p>Ported from
 <a href="https://github.com/nodeca/js-yaml/commit/665aadda42349dcae869f12040d9b10ef18d12da" rel="nofollow">js-yaml v3.13.1</a>.</p>
-<p>Use <a href="https://jsr.io/@std/yaml@1.0.10/doc/~/parseAll" rel="nofollow"><code>parseAll</code></a> for parsing multiple documents in a single YAML
+<p>Use <a href="https://jsr.io/@std/yaml@1.0.11/doc/~/parseAll" rel="nofollow"><code>parseAll</code></a> for parsing multiple documents in a single YAML
 string.</p>
 <p>This package generally supports
 <a href="https://yaml.org/spec/1.2.2/" rel="nofollow">YAML 1.2.x</a> (latest) and some
