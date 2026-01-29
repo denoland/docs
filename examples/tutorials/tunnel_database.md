@@ -56,11 +56,11 @@ await client.query(
 await client.end();
 ```
 
-### Update vite.config.ts
+### Set up Vite to allow tunneling
 
-The Svelte app will need to make a small configuration update in the
-`vite.config.js` to allow tunneling to the local server to work correctly. Add a
-`server` section to set `allowedHosts: "true"`:
+The Vite server used by Svelte is restricted to localhost by default, so to make
+it more widely available we'll make a small change to our `vite.config.js` file.
+Open `vite.config.js` and add a `server` section to set `allowedHosts: true`:
 
 ```js title="vite.config.js"
 import { sveltekit } from "@sveltejs/kit/vite";
@@ -69,7 +69,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [sveltekit()],
   server: {
-    allowedHosts: "true",
+    allowedHosts: true,
   },
 });
 ```
