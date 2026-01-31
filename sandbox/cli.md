@@ -192,15 +192,7 @@ The target path can be customized to organize files within the sandbox:
 deno sandbox copy ./frontend sbx_ord_abc123def456:/app/web/
 ```
 
-<<<<<<< HEAD:sandbox/cli.md
-
-## Deploying Deno Sandbox
-
-=======
-
 ## Deploying sandboxes
-
->>>>>>> a7ce3b4ea8afd545c6b37457877b60bd995cb879:sandboxes/cli.md
 
 You can deploy a running sandbox to a Deno Deploy app using the
 `deno sandbox deploy` command:
