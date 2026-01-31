@@ -16,7 +16,8 @@
     "tailwindcss": "npm:tailwindcss@^4.1.11",
     "@orama/core": "jsr:@orama/core@^1.2.4",
     "@octokit/core": "npm:@octokit/core@^5.2.0",
-    "leo-profanity": "npm:leo-profanity@^1.7.0"
+    "leo-profanity": "npm:leo-profanity@^1.7.0",
+    "https://cdn.jsdelivr.net/gh/esbuild/deno-esbuild@0.27.0/mod.js": "https://cdn.jsdelivr.net/gh/esbuild/deno-esbuild@0.27.0/wasm.js"
   },
   "tasks": {
     "lume": {
