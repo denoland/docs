@@ -94,14 +94,13 @@ organization:
 
 ```bash
 $ deno sandbox list
-ID                                    CREATED                 STATUS   UPTIME
-550e8400-e29b-41d4-a716-446655440000  2024-01-15 10:30:00.00  running  5m
-6ba7b810-9dad-11d1-80b4-00c04fd430c8  2024-01-15 09:45:00.00  stopped  15m
+ID                             CREATED                  REGION   STATUS    UPTIME
+sbx_ord_1at5nn58e77rtd11e3k3   2026-01-30 18:33:40.79   ord      running   26.9s
+sbx_ord_fwnygdsnszfe5ghafyx8   2026-01-30 18:31:40.90   ord      stopped   5.1s
+sbx_ord_4xqcyahb8ye2r5a643de   2026-01-30 18:29:59.10   ord      stopped   9.4s
 ```
 
-This shows each sandbox's unique ID (which you'll use with other commands), when
-it was created, whether it's currently running, and how long it's been active.
-The sandbox ID is a UUID that uniquely identifies each instance.
+This shows each sandbox's ID, creation time, region, status, and uptime.
 
 ## Running commands remotely
 
@@ -110,39 +109,39 @@ sandbox without opening an interactive session. This is perfect for automation,
 CI/CD pipelines, or quick one-off tasks:
 
 ```bash
-deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 ls -la
+deno sandbox exec sbx_ord_abc123def456 ls -la
 ```
 
 Most of the time, you'll want to work in the `/app` directory where your copied
 files live. Use `--cwd` to set the working directory:
 
 ```bash
-deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 --cwd /app npm install
+deno sandbox exec sbx_ord_abc123def456 --cwd /app npm install
 ```
 
 For scripting or automation, use `--quiet` to suppress command output:
 
 ```bash
-deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 --quiet --cwd /app npm test
+deno sandbox exec sbx_ord_abc123def456 --quiet --cwd /app npm test
 ```
 
 You can also run complex command chains by quoting the entire command:
 
 ```bash
-deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 --cwd /app "npm install && npm test"
+deno sandbox exec sbx_ord_abc123def456 --cwd /app "npm install && npm test"
 ```
 
 The exec command works naturally with Unix pipes and standard input/output. You
 can pipe the output of sandbox commands to local tools:
 
 ```bash
-deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 'ls -lh /' | wc -l
+deno sandbox exec sbx_ord_abc123def456 'ls -lh /' | wc -l
 ```
 
 Or pipe local data into sandbox processes for processing:
 
 ```bash
-cat large-dataset.csv | deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 --cwd /app "deno run -A main.ts"
+cat large-dataset.csv | deno sandbox exec sbx_ord_abc123def456 --cwd /app "deno run -A main.ts"
 ```
 
 This makes it easy to integrate sandbox processing into larger Unix workflows
@@ -159,38 +158,38 @@ different sandboxes.
 Copy files from your local machine to a sandbox:
 
 ```bash
-deno sandbox copy ./app.js 550e8400-e29b-41d4-a716-446655440000:/app/
+deno sandbox copy ./app.js sbx_ord_abc123def456:/app/
 ```
 
 Retrieve files from a sandbox to your local machine:
 
 ```bash
-deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/results.json ./output/
+deno sandbox copy sbx_ord_abc123def456:/app/results.json ./output/
 ```
 
 Copy files between different sandboxes:
 
 ```bash
-deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/data.csv 6ba7b810-9dad-11d1-80b4-00c04fd430c8:/app/input/
+deno sandbox copy sbx_ord_abc123def456:/app/data.csv sbx_ord_xyz789uvw012:/app/input/
 ```
 
 You can use glob patterns to copy multiple files from Deno Sandbox:
 
 ```bash
-deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/*.json ./config/
-deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/logs/*.log ./logs/
+deno sandbox copy sbx_ord_abc123def456:/app/*.json ./config/
+deno sandbox copy sbx_ord_abc123def456:/app/logs/*.log ./logs/
 ```
 
 You can copy multiple files and directories at once:
 
 ```bash
-deno sandbox copy ./src/ ./package.json 550e8400-e29b-41d4-a716-446655440000:/app/
+deno sandbox copy ./src/ ./package.json sbx_ord_abc123def456:/app/
 ```
 
 The target path can be customized to organize files within the sandbox:
 
 ```bash
-deno sandbox copy ./frontend 550e8400-e29b-41d4-a716-446655440000:/app/web/
+deno sandbox copy ./frontend sbx_ord_abc123def456:/app/web/
 ```
 
 ## Deploying sandboxes
@@ -199,26 +198,26 @@ You can deploy a running sandbox to a Deno Deploy app using the
 `deno sandbox deploy` command:
 
 ```bash
-deno sandbox deploy 550e8400-e29b-41d4-a716-446655440000 my-app
+deno sandbox deploy sbx_ord_abc123def456 my-app
 ```
 
 By default, this deploys to a preview deployment. To deploy directly to
 production:
 
 ```bash
-deno sandbox deploy --prod 550e8400-e29b-41d4-a716-446655440000 my-app
+deno sandbox deploy --prod sbx_ord_abc123def456 my-app
 ```
 
 You can specify a custom working directory and entrypoint:
 
 ```bash
-deno sandbox deploy --cwd /app --entrypoint main.ts 550e8400-e29b-41d4-a716-446655440000 my-app
+deno sandbox deploy --cwd /app --entrypoint main.ts sbx_ord_abc123def456 my-app
 ```
 
 To pass arguments to the entrypoint script:
 
 ```bash
-deno sandbox deploy --args --port 8080 550e8400-e29b-41d4-a716-446655440000 my-app
+deno sandbox deploy --args --port 8080 sbx_ord_abc123def456 my-app
 ```
 
 ## Managing volumes
@@ -314,7 +313,7 @@ When you need to work interactively within a sandbox; be it editing files,
 debugging issues, or exploring the environment, you can use `deno sandbox ssh`:
 
 ```bash
-deno sandbox ssh 550e8400-e29b-41d4-a716-446655440000
+deno sandbox ssh sbx_ord_abc123def456
 ```
 
 This gives you a full Linux shell inside the sandbox where you can use any
@@ -332,7 +331,7 @@ Sometimes you'll need more time to complete your work in a running sandbox. The
 sandbox without interrupting ongoing processes:
 
 ```bash
-deno sandbox extend 550e8400-e29b-41d4-a716-446655440000 30m
+deno sandbox extend sbx_ord_abc123def456 30m
 ```
 
 The extend command works seamlessly with any sandbox state; whether you're SSH'd
@@ -346,7 +345,7 @@ When you're finished with a sandbox, use `deno sandbox kill` (or
 `deno sandbox rm`) to terminate it and free up resources:
 
 ```bash
-deno sandbox kill 550e8400-e29b-41d4-a716-446655440000
+deno sandbox kill sbx_ord_abc123def456
 ```
 
 This immediately stops all processes in the sandbox and releases its resources.
@@ -367,17 +366,17 @@ deno sandbox create --copy ./my-app
 Once created, use the returned sandbox ID to set up and test your project:
 
 ```bash
-deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 --cwd /app npm install
-deno sandbox exec 550e8400-e29b-41d4-a716-446655440000 --cwd /app npm test
+deno sandbox exec sbx_ord_abc123def456 --cwd /app npm install
+deno sandbox exec sbx_ord_abc123def456 --cwd /app npm test
 ```
 
 As you make changes locally, you can update the sandbox, and retrieve any
 generated files when done:
 
 ```bash
-deno sandbox copy ./src/ 550e8400-e29b-41d4-a716-446655440000:/app/src/
-deno sandbox copy 550e8400-e29b-41d4-a716-446655440000:/app/build/ ./dist/
-deno sandbox kill 550e8400-e29b-41d4-a716-446655440000
+deno sandbox copy ./src/ sbx_ord_abc123def456:/app/src/
+deno sandbox copy sbx_ord_abc123def456:/app/build/ ./dist/
+deno sandbox kill sbx_ord_abc123def456
 ```
 
 ### Data processing
