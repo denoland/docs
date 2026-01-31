@@ -200,7 +200,8 @@ requests to the Deno Deploy API. The JavaScript SDK is available as
 `@deno/sandbox` on both [jsr](https://jsr.io/@deno/sandbox) and
 [npm](https://www.npmjs.com/package/@deno/sandbox) (the JSR package is optimized
 for Deno usage). The Python SDK is available as `deno-sandbox` on
-[PyPI](https://pypi.org/project/deno-sandbox/).
+[PyPI](https://pypi.org/project/deno-sandbox/). For direct API access, see the
+[REST API documentation](https://console.deno.com/api/v2/docs).
 
 :::note await using support
 

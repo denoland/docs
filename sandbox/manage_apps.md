@@ -6,7 +6,8 @@ description: "Use the @deno/sandbox Client to create, list, update, and delete D
 Beyond provisioning microVMs, the SDK provides APIs for managing Deploy apps
 inside your organization. This is useful when you need automation around
 onboarding teams, cloning environments, or cleaning up unused apps without
-visiting the dashboard.
+visiting the dashboard. The SDK wraps the
+[Deno Deploy REST API](https://console.deno.com/api/v2/docs).
 
 ## Getting started
 

@@ -15,6 +15,10 @@ export const sidebar = [
     title: "Reference",
     items: [
       {
+        title: "REST API",
+        href: "https://console.deno.com/api/v2/docs",
+      },
+      {
         title: "Accounts",
         href: "/deploy/reference/accounts/",
       },

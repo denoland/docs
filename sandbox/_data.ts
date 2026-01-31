@@ -52,8 +52,12 @@ export const sidebar = [
     title: "Reference",
     items: [
       {
-        title: "API Reference",
+        title: "SDK Reference",
         href: "https://jsr.io/@deno/sandbox/doc/~/Sandbox",
+      },
+      {
+        title: "REST API",
+        href: "https://console.deno.com/api/v2/docs",
       },
       {
         title: "CLI subcommand",
