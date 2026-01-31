@@ -324,7 +324,7 @@ export const sidebar = [
         type: "example",
       },
       {
-        title: "Privide SSH access to a sandbox",
+        title: "Provide SSH access to a sandbox",
         href: "/examples/sandbox_ssh_access/",
         type: "example",
       },
