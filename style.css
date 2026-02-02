@@ -1124,6 +1124,21 @@
     @apply mb-0;
   }
 
+  /* Inline code language switching for sandbox SDK tabs */
+  code.py-only {
+    display: none;
+  }
+
+  [data-sandbox-lang="python"] code.js-only,
+  [data-sandbox-lang="python-async"] code.js-only {
+    display: none;
+  }
+
+  [data-sandbox-lang="python"] code.py-only,
+  [data-sandbox-lang="python-async"] code.py-only {
+    display: inline;
+  }
+
   /* Custom DDOC styles for the Deno documentation */
   .ddoc {
     @apply pt-0!;

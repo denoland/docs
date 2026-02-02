@@ -328,9 +328,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -339,7 +339,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -348,7 +348,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -831,9 +831,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -842,7 +842,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -851,7 +851,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -4011,9 +4011,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -4022,7 +4022,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -4031,7 +4031,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -4925,9 +4925,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -4936,7 +4936,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -4945,7 +4945,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "cached-only",
@@ -6156,9 +6156,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -6167,7 +6167,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -6176,7 +6176,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "cached-only",
@@ -6838,9 +6838,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -6849,7 +6849,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -6858,7 +6858,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -7687,9 +7687,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -7698,7 +7698,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -7707,7 +7707,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -7813,7 +7813,7 @@
           "short": null,
           "long": "install-alias",
           "required": false,
-          "help": null,
+          "help": "Creates a dx alias so you can run dx <command> instead of deno x <command>",
           "help_heading": null,
           "usage": "--install-alias [<install-alias>]"
         },
