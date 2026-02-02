@@ -82,6 +82,10 @@ vfox use --global deno
 </deno-tab>
 <deno-tab value="windows" label="Windows">
 
+**NOTE:** Deno requires Windows 10 version 1709, or Windows Server 2016 version
+1709 and up, due to requiring
+[IsWow64Process2](https://learn.microsoft.com/en-us/windows/win32/api/wow64apiset/nf-wow64apiset-iswow64process2).
+
 Using PowerShell (Windows):
 
 ```powershell

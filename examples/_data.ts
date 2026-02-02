@@ -108,6 +108,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Sharing your local server with tunnel",
+        href: "/examples/tunnel_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Generating documentation with deno doc",
         href: "/examples/deno_doc_tutorial/",
         type: "tutorial",
@@ -301,86 +306,86 @@ export const sidebar = [
     ],
   },
   {
-    title: "Sandboxes",
+    title: "Deno Sandbox",
     items: [
       {
         title: "Evaluating JavaScript",
-        href: "/examples/sandboxes_evaluating_javascript/",
+        href: "/examples/sandbox_evaluating_javascript/",
         type: "example",
       },
       {
         title: "Spawn a subprocess",
-        href: "/examples/sandboxes_spawn_subprocess/",
+        href: "/examples/sandbox_spawn_subprocess/",
         type: "example",
       },
       {
         title: "Serve a web framework",
-        href: "/examples/sandboxes_web_framework/",
+        href: "/examples/sandbox_web_framework/",
         type: "example",
       },
       {
-        title: "Privide SSH access to a sandbox",
-        href: "/examples/sandboxes_ssh_access/",
+        title: "Provide SSH access to a sandbox",
+        href: "/examples/sandbox_ssh_access/",
         type: "example",
       },
       {
         title: "Intereactive JavaScript REPL",
-        href: "/examples/sandboxes_javascript_repl/",
+        href: "/examples/sandbox_javascript_repl/",
         type: "example",
       },
       {
         title: "Provide a VSCode instance in a sandbox",
-        href: "/examples/sandboxes_vscode_instance/",
+        href: "/examples/sandbox_vscode_instance/",
         type: "example",
       },
       {
         title: "Use template literals with variable interpolation",
-        href: "/examples/sandboxes_template_literals/",
+        href: "/examples/sandbox_template_literals/",
         type: "example",
       },
       {
         title: "Error handling",
-        href: "/examples/sandboxes_error_handling/",
+        href: "/examples/sandbox_error_handling/",
         type: "example",
       },
       {
         title: "Error handling with custom error classes",
-        href: "/examples/sandboxes_custom_error_classes/",
+        href: "/examples/sandbox_custom_error_classes/",
         type: "example",
       },
       {
         title: "Command cancellation",
-        href: "/examples/sandboxes_command_cancellation/",
+        href: "/examples/sandbox_command_cancellation/",
         type: "example",
       },
       {
         title: "Access string and binary output",
-        href: "/examples/sandboxes_access_output/",
+        href: "/examples/sandbox_access_output/",
         type: "example",
       },
       {
         title: "Set and get environment variables",
-        href: "/examples/sandboxes_environment_variables/",
+        href: "/examples/sandbox_environment_variables/",
         type: "example",
       },
       {
         title: "Stream output to a local file",
-        href: "/examples/sandboxes_stream_output/",
+        href: "/examples/sandbox_stream_output/",
         type: "example",
       },
       {
         title: "Upload files and directories to a sandbox",
-        href: "/examples/sandboxes_upload_files/",
+        href: "/examples/sandbox_upload_files/",
         type: "example",
       },
       {
         title: "Control sandbox timeout",
-        href: "/examples/sandboxes_timeout_control/",
+        href: "/examples/sandbox_timeout_control/",
         type: "example",
       },
       {
         title: "Configure sandbox memory",
-        href: "/examples/sandboxes_memory/",
+        href: "/examples/sandbox_memory/",
         type: "example",
       },
     ],
@@ -461,6 +466,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "View telemetry data for your local application",
+        href: "/examples/tunnel_telemetry_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Export telemetry to Honeycomb",
         href: "/examples/honeycomb_tutorial/",
         type: "tutorial",
@@ -493,6 +503,11 @@ export const sidebar = [
       {
         title: "Migrating a custom domain to Deno Deploy",
         href: "/examples/migrate_custom_domain_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Connecting to a database both locally and on Deno Deploy",
+        href: "/examples/tunnel_database_tutorial/",
         type: "tutorial",
       },
       {

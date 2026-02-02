@@ -2,20 +2,20 @@ import { Sidebar, SidebarNav } from "../types.ts";
 
 export const sidebar = [
   {
-    title: "Sandboxes",
+    title: "Sandbox",
     items: [
-      { title: "About", href: "/sandboxes/" },
+      { title: "About", href: "/sandbox/" },
       {
         title: "Getting started",
-        href: "/sandboxes/getting_started/",
+        href: "/sandbox/getting_started/",
       },
       {
         title: "Create a sandbox",
-        href: "/sandboxes/create/",
+        href: "/sandbox/create/",
       },
       {
         title: "Management via CLI",
-        href: "/sandboxes/cli/",
+        href: "/sandbox/cli/",
       },
     ],
   },
@@ -24,27 +24,27 @@ export const sidebar = [
     items: [
       {
         title: "Expose HTTP",
-        href: "/sandboxes/expose_http/",
+        href: "/sandbox/expose_http/",
       },
       {
         title: "SSH",
-        href: "/sandboxes/ssh/",
+        href: "/sandbox/ssh/",
       },
       {
         title: "Manage Deploy apps",
-        href: "/sandboxes/manage_apps/",
+        href: "/sandbox/manage_apps/",
       },
       {
         title: "Volumes",
-        href: "/sandboxes/volumes/",
+        href: "/sandbox/volumes/",
       },
       {
         title: "Timeouts",
-        href: "/sandboxes/timeouts/",
+        href: "/sandbox/timeouts/",
       },
       {
         title: "Security",
-        href: "/sandboxes/security/",
+        href: "/sandbox/security/",
       },
     ],
   },
@@ -52,8 +52,12 @@ export const sidebar = [
     title: "Reference",
     items: [
       {
-        title: "API Reference",
+        title: "SDK Reference",
         href: "https://jsr.io/@deno/sandbox/doc/~/Sandbox",
+      },
+      {
+        title: "REST API",
+        href: "https://console.deno.com/api/v2/docs",
       },
       {
         title: "CLI subcommand",
@@ -61,7 +65,7 @@ export const sidebar = [
       },
       {
         title: "Examples",
-        href: "/examples/#sandboxes",
+        href: "/examples/#sandbox",
       },
       {
         title: "Pricing",
@@ -71,16 +75,16 @@ export const sidebar = [
   },
 ] satisfies Sidebar;
 
-export const sectionTitle = "Sandboxes";
-export const sectionHref = "/sandboxes/";
+export const sectionTitle = "Sandbox";
+export const sectionHref = "/sandbox/";
 export const SidebarNav = [
   {
     title: "Deno Deploy",
     href: "/deploy/",
   },
   {
-    title: "Sandboxes",
-    href: "/sandboxes/",
+    title: "Sandbox",
+    href: "/sandbox/",
   },
   {
     title: "Deploy Classic",

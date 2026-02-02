@@ -1,15 +1,16 @@
 ---
-title: "Intereactive JavaScript REPL"
+title: "Interactive JavaScript REPL"
 description: "Learn how to provide an interactive Deno REPL in a sandbox."
-url: /examples/sandboxes_javascript_repl/
+url: /examples/sandbox_javascript_repl/
 layout: sandbox-example.tsx
 ---
 
-The `sandbox.deno.repl()` method can be used to provide an interactive Deno REPL
-in a sandbox.
+A REPL (Read–Eval–Print Loop) is an interactive execution session where you type
+code, the environment reads it, evaluates it, prints the result, and then keeps
+the session alive so you can continue running more code while preserving state.
 
-This example shows how to start a Deno REPL in a sandbox and execute code
-interactively.
+The `repl()` method can be used to provide an interactive JavaScript REPL in a
+sandbox.
 
 ```ts
 import { Sandbox } from "@deno/sandbox";

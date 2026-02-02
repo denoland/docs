@@ -1,7 +1,7 @@
 ---
 title: "Configure sandbox memory"
 description: "Learn how to configure the memory allocated to a sandbox"
-url: /examples/sandboxes_memory/
+url: /examples/sandbox_memory/
 layout: sandbox-example.tsx
 ---
 
@@ -28,6 +28,16 @@ const memInfo = await sandbox.deno.eval<{ total: number }>(
 );
 console.log("Total memory:", memInfo.total);
 ```
+
+Configuring memoryMb when creating the sandbox lets you tune resource usage per
+workload. Lightweight tasks can run in smaller sandboxes to conserve resources,
+while data-heavy scripts or compilations can request up to 4 GB to avoid
+out-of-memory failures.
+
+Since you can programmatically inspect the sandbox’s memory via
+`Deno.systemMemoryInfo()`, you can verify allocations or adapt behavior based on
+the measured limits. This control helps match sandbox capacity to your needs,
+keeping performance predictable while managing costs.
 
 Memory limits (may change in the future):
 

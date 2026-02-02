@@ -3,6 +3,47 @@ title: "Deno Deploy changelog"
 description: "Listing notable progress in the development and evolution of Deno Deploy"
 ---
 
+## January 27th, 2026
+
+### Features
+
+- Deno Deploy apps can now be configured through `deno.json` / `deno.jsonc`
+  files in addition to the dashboard settings.
+  - All app configuration options available in the dashboard are also available
+    in the `deno.json` file under the `deploy` section. This includes install
+    and build command, runtime configuration, and framework presets.
+  - When both dashboard and `deno.json` configuration are present, the
+    `deno.json` configuration takes precedence and overrides the app
+    configuration in the dashboard entirely.
+  - This makes it easier to manage app configuration as code, and keep it in
+    version control alongside your application code.
+  - [Learn more in the documentation.](/deploy/reference/builds/#editing-app-configuration-from-source-code)
+- You can now rename organizations and change their slugs from the organization
+  settings page.
+  - [Renaming an organization](/deploy/reference/organizations/#rename-an-organization)
+    updates its display name in the dashboard and invitation emails.
+  - [Changing the organization slug](/deploy/reference/organizations/#update-the-organization-slug)
+    updates the default domain for all apps in the organization. Note that this
+    will remove the old default domain.
+  - Learn more in the documentation.
+- Deno Deploy support tickets can now be viewed from the Deno Deploy dashboard.
+  - After submitting a support request via email to support@deno.com, you will
+    receive an automated reply with a link to claim your ticket.
+  - Claiming the ticket links it to your Deno Deploy account, allowing you to
+    track the status of your support request from the
+    [tickets dashboard](https://console.deno.com/tickets).
+- The
+  [`DENO_TIMELINE` environment variable](/deploy/reference/env-vars-and-contexts/#built-in-environment-variables)
+  is now available to applications at runtime, showing the timeline the
+  application is currently running in.
+
+### Bug fixes
+
+- Fixed an issue where the database explorer for linked Postgres databases
+  sometimes failed to load.
+- Fixed an issue where some builds would get stuck with an invalid build cache,
+  requiring manual intervention via support to resolve.
+
 ## December 18th, 2025
 
 ### Features
@@ -47,16 +88,17 @@ description: "Listing notable progress in the development and evolution of Deno 
   Code Execution) and
   [CVE-2025-55184/CVE-2025-67779](https://deno.com/blog/cve-2025-55184) (Denial
   of Service).
-- And one more thing at the end: we've quietly enabled our new sandboxes
+- And one more thing at the end: we've quietly enabled our new Deno Sandbox
   infrastructure for all Deno Deploy users to try.
-  - Sandboxes provide fully isolated Linux microVMs for you to run untrusted
+  - Deno Sandbox provides fully isolated Linux microVMs for you to run untrusted
     code in.
   - This is particularly useful for running third-party code, such as plugins,
     extensions, or user-generated or LLM-generated code, without risking the
     security of your application.
-  - We'll announce more details about sandboxes in the new year, so stay tuned!
-  - Try it out from the "Sandboxes" tab in the organization overview.
-  - [Learn more about sandboxes.](https://deno.com/deploy/sandboxes)
+  - We'll announce more details about Deno Sandbox in the new year, so stay
+    tuned!
+  - Try it out from the "Sandboxes" tab in the Deno Deploy console
+  - [Learn more about Deno Sandbox.](https://deno.com/deploy/sandbox)
 
 ### Bug fixes
 

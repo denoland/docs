@@ -328,9 +328,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -339,7 +339,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -348,7 +348,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -831,9 +831,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -842,7 +842,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -851,7 +851,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -4011,9 +4011,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -4022,7 +4022,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -4031,7 +4031,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -4925,9 +4925,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -4936,7 +4936,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -4945,7 +4945,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "cached-only",
@@ -6156,9 +6156,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -6167,7 +6167,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -6176,7 +6176,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "cached-only",
@@ -6838,9 +6838,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -6849,7 +6849,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -6858,7 +6858,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -7250,7 +7250,7 @@
     },
     {
       "name": "upgrade",
-      "about": "Upgrade deno executable to the given version.\n\n\u001b[32mLatest\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m\n\n\u001b[32mSpecific version\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.45.0\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.46.0-rc.1\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m9bc2dd29ad6ba334fd57a20114e367d3c04763d4\u001b[39m\n\n\u001b[32mChannel\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mstable\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mrc\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mcanary\u001b[39m\n\nThe version is downloaded from \u001b[38;5;245mhttps://dl.deno.land\u001b[39m and is used to replace the current executable.\n\nIf you want to not replace the current Deno executable but instead download an update to a\ndifferent location, use the \u001b[36m--output\u001b[39m flag:\n  \u001b[38;5;245mdeno upgrade --output $HOME/my_deno\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/upgrade\u001b[39m",
+      "about": "Upgrade deno executable to the given version.\n\n\u001b[32mLatest\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m\n\n\u001b[32mSpecific version\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.45.0\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.46.0-rc.1\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m9bc2dd29ad6ba334fd57a20114e367d3c04763d4\u001b[39m\n\n\u001b[32mChannel\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mstable\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mrc\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mcanary\u001b[39m\n\nThe version is resolved via \u001b[38;5;245mhttps://dl.deno.land\u001b[39m and then downloaded\nfrom either there or GitHub releases, replacing the current executable.\n\nIf you want to not replace the current Deno executable but instead download an\nupdate to a different location, use the \u001b[36m--output\u001b[39m flag:\n  \u001b[38;5;245mdeno upgrade --output $HOME/my_deno\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/upgrade\u001b[39m",
       "args": [
         {
           "name": "output",
@@ -7687,9 +7687,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -7698,7 +7698,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -7707,7 +7707,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -7813,7 +7813,7 @@
           "short": null,
           "long": "install-alias",
           "required": false,
-          "help": null,
+          "help": "Creates a dx alias so you can run dx <command> instead of deno x <command>",
           "help_heading": null,
           "usage": "--install-alias [<install-alias>]"
         },
@@ -8133,6 +8133,16 @@
     {
       "name": "DENO_KV_DB_MODE",
       "description": "Controls whether Deno.openKv() API should use disk based or in-memory\ndatabase.",
+      "example": null
+    },
+    {
+      "name": "DENO_KV_DEFAULT_PATH",
+      "description": "Set the default path for Deno.openKv() when no path is provided.",
+      "example": null
+    },
+    {
+      "name": "DENO_KV_PATH_PREFIX",
+      "description": "Set a prefix to be added to all Deno.openKv() paths.",
       "example": null
     },
     {

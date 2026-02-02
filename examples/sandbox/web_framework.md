@@ -1,15 +1,15 @@
 ---
 title: "Serve a web framework"
 description: "Create a package.json, install deps, run a web framework (Express), and expose it publicly from a sandbox"
-url: /examples/sandboxes_web_framework/
+url: /examples/sandbox_web_framework/
 layout: sandbox-example.tsx
 ---
 
-In sandboxes, you can create a `package.json`, install dependencies, run a web
-framework (Express), and expose it publicly over HTTP.
+With Deno Sandbox you can create a `package.json`, install dependencies, run a
+web framework (such as Express), and expose it publicly over HTTP.
 
-This example shows how to create a minimal Express app inside the sandbox, runs
-it on port 3000, and exposes it publicly using `sandbox.exposeHttp()`.
+This example shows how to create a minimal Express app inside the sandbox, run
+it on port 3000, and expose it publicly using `sandbox.exposeHttp()`.
 
 ```ts
 import { Sandbox } from "@deno/sandbox";

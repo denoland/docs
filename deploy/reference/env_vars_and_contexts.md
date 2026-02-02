@@ -158,4 +158,9 @@ Deno Deploy provides these predefined environment variables in all contexts:
 
 - `DENO_DEPLOY_BUILD_ID`: The ID of the currently running revision.
 
+- `DENO_TIMELINE`: The timeline the application is currently running in.
+  Possible values are `production`, `git-branch/<branch-name>`, and
+  `preview/<revision-id>`. This is not set during builds, as builds are not
+  specific to any timeline.
+
 During builds, the environment variable `CI=1` is additionally set.

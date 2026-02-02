@@ -1,15 +1,15 @@
 ---
-title: "Promote Sandboxes to Deploy Apps"
+title: "Promote Deno Sandbox to Deploy Apps"
 description: "Learn how to promote a sandbox to a full Deno Deploy app for production use."
 ---
 
-There may be times when a sandbox proves a concept or prototype that should live
-on as a first-class Deno Deploy app. Instead of rebuilding the codebase
+There may be times when a Deno Sandbox proves a concept or prototype that should
+live on as a first-class Deno Deploy app. Instead of rebuilding the codebase
 elsewhere, you can promote the sandbox directly using `sandbox.deno.deploy()`.
 
 ## Ephemeral compute vs Deploy apps
 
-| Aspect        | Sandboxes                                | Deploy Apps                            |
+| Aspect        | Deno Sandbox                             | Deno Deploy Apps                       |
 | ------------- | ---------------------------------------- | -------------------------------------- |
 | Lifetime      | Seconds to minutes                       | Always-on, managed rollouts            |
 | Control plane | Programmatic via SDK                     | Dashboard + CI/CD                      |
@@ -25,8 +25,11 @@ observability are managed for you.
 
 When a sandbox proves the concept, you can turn it into an always-on Deploy app
 without rebuilding elsewhere. `sandbox.deno.deploy()` snapshots the current file
-system, carries over `allowNet`, and provisions an app with a durable URL,
+system, carries over network policies, and provisions an app with a durable URL,
 observability, and team access.
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
 
 ```tsx
 await using sandbox = await Sandbox.create({ timeout: "10m" });
@@ -37,6 +40,39 @@ const app = await sandbox.deno.deploy("ai-preview", {
 });
 console.log(`Promoted to Deploy app ${app.slug}`);
 ```
+
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+from deno_sandbox import DenoDeploy
+
+sdk = DenoDeploy()
+
+with sdk.sandbox.create(timeout="10m") as sandbox:
+  # ...build or scaffold your service...
+
+  build = sandbox.deno.deploy("ai-preview", entrypoint="server.ts")
+  print(f"Promoted to Deploy app, revision ID: {build.id}")
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+from deno_sandbox import AsyncDenoDeploy
+
+sdk = AsyncDenoDeploy()
+
+async with sdk.sandbox.create(timeout="10m") as sandbox:
+  # ...build or scaffold your service...
+
+  build = await sandbox.deno.deploy("ai-preview", entrypoint="server.ts")
+  print(f"Promoted to Deploy app, revision ID: {build.id}")
+```
+
+</deno-tab>
+</deno-tabs>
 
 Reasons to promote:
 
