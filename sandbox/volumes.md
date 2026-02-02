@@ -148,9 +148,9 @@ size volumes with headroom.
 
 ### Mount volumes inside a sandbox
 
-Pass a `volumes` mapping when creating a sandbox. Keys are mount paths and values
-are either the volume slug or ID. The sandbox and volume **must be in the same
-region**.
+Pass a `volumes` mapping when creating a sandbox. Keys are mount paths and
+values are either the volume slug or ID. The sandbox and volume **must be in the
+same region**.
 
 :::note
 
@@ -447,11 +447,11 @@ deno sandbox snapshots delete my-toolchain-snapshot
 
 ### Volumes vs Snapshots
 
-| Feature        | Volumes                              | Snapshots                          |
-| -------------- | ------------------------------------ | ---------------------------------- |
-| Access         | Read-write                           | Read-only                          |
-| Mount point    | Any path, or root if bootable        | Root filesystem only               |
-| Use case       | Caches, databases, install software  | Pre-installed software, toolchains |
-| Boot speed     | Normal                               | Fast (no install step needed)      |
-| Concurrent use | One sandbox at a time                | Many sandboxes simultaneously      |
-| Region         | Must match sandbox region            | Must match sandbox region          |
+| Feature        | Volumes                             | Snapshots                          |
+| -------------- | ----------------------------------- | ---------------------------------- |
+| Access         | Read-write                          | Read-only                          |
+| Mount point    | Any path, or root if bootable       | Root filesystem only               |
+| Use case       | Caches, databases, install software | Pre-installed software, toolchains |
+| Boot speed     | Normal                              | Fast (no install step needed)      |
+| Concurrent use | One sandbox at a time               | Many sandboxes simultaneously      |
+| Region         | Must match sandbox region           | Must match sandbox region          |
