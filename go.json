@@ -39,5 +39,5 @@
   "pre-deploy": "/deploy/reference/builds/",
   "otel": "/deploy/reference/observability/",
   "tunnel": "/deploy/reference/tunnel",
-  "deploy": "/runtime/reference/cli/deploy",
+  "deploy": "/runtime/reference/cli/deploy"
 }
