@@ -257,21 +257,16 @@ deno sandbox volumes delete my-volume
 
 ## Managing snapshots
 
-Snapshots allow you to preserve the current state of a volume as a point-in-time
-copy.
+Snapshots are read-only images created from volumes. Use them to pre-install
+software once, then boot new sandboxes instantly with everything ready. See
+[Volumes & Snapshots](./volumes/) for the full workflow.
 
 ### Creating snapshots
 
-Create a new snapshot from an existing volume:
+Create a snapshot from an existing volume:
 
 ```bash
 deno sandbox snapshots create my-volume my-snapshot
-```
-
-You can also use the `volumes snapshot` command:
-
-```bash
-deno sandbox volumes snapshot my-volume my-snapshot
 ```
 
 ### Listing snapshots
@@ -279,13 +274,9 @@ deno sandbox volumes snapshot my-volume my-snapshot
 List all snapshots in your organization:
 
 ```bash
-deno sandbox snapshots list
-```
-
-You can also search for specific snapshots:
-
-```bash
-deno sandbox snapshots list my-snapshot
+$ deno sandbox snapshots list
+ID                             SLUG          REGION   ALLOCATED    BOOTABLE
+snp_ord_spmbe47dysccpy277ma6   my-snapshot   ord      217.05 MiB   TRUE
 ```
 
 ### Deleting snapshots
