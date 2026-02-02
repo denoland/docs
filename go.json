@@ -37,7 +37,7 @@
   "sandbox": "/runtime/reference/cli/sandbox/",
   "databases": "/deploy/reference/databases/",
   "pre-deploy": "/deploy/reference/builds/",
-  "otel": "/deploy/reference/observability/".
+  "otel": "/deploy/reference/observability/",
   "tunnel": "/deploy/reference/tunnel",
   "deploy": "/runtime/reference/cli/deploy",
 }
