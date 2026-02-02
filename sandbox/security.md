@@ -14,6 +14,9 @@ Secrets never enter the sandbox environment variables. Instead, Deno Deploy
 substitutes them only when the sandbox makes outbound requests to an approved
 host. Configure secrets when creating a sandbox:
 
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
+
 ```ts
 await using sandbox = await Sandbox.create({
   secrets: {
@@ -29,6 +32,57 @@ await using sandbox = await Sandbox.create({
 });
 ```
 
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+import os
+from deno_sandbox import DenoDeploy
+
+sdk = DenoDeploy()
+
+with sdk.sandbox.create(
+  secrets={
+    "OPENAI_API_KEY": {
+      "hosts": ["api.openai.com"],
+      "value": os.environ.get("OPENAI_API_KEY"),
+    },
+    "ANTHROPIC_API_KEY": {
+      "hosts": ["api.anthropic.com"],
+      "value": os.environ.get("ANTHROPIC_API_KEY"),
+    },
+  }
+) as sandbox:
+  print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+import os
+from deno_sandbox import AsyncDenoDeploy
+
+sdk = AsyncDenoDeploy()
+
+async with sdk.sandbox.create(
+  secrets={
+    "OPENAI_API_KEY": {
+      "hosts": ["api.openai.com"],
+      "value": os.environ.get("OPENAI_API_KEY"),
+    },
+    "ANTHROPIC_API_KEY": {
+      "hosts": ["api.anthropic.com"],
+      "value": os.environ.get("ANTHROPIC_API_KEY"),
+    },
+  }
+) as sandbox:
+  print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+</deno-tabs>
+
 Inside the sandbox, the environment variable holds a placeholder:
 
 ```bash
@@ -43,13 +97,43 @@ allowing your automation to call third-party APIs securely.
 ## Outbound network control
 
 By default, Deno Sandbox has unrestricted outbound network access. Use the
-`allowNet` option to restrict traffic to specific hosts:
+network allowlist option to restrict traffic to specific hosts:
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
 
 ```ts
 await using sandbox = await Sandbox.create({
   allowNet: ["api.openai.com", "*.anthropic.com"],
 });
 ```
+
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+sdk = DenoDeploy()
+
+with sdk.sandbox.create(
+  allow_net=["api.openai.com", "*.anthropic.com"]
+) as sandbox:
+  print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+sdk = AsyncDenoDeploy()
+
+async with sdk.sandbox.create(
+  allow_net=["api.openai.com", "*.anthropic.com"]
+) as sandbox:
+  print(f"Sandbox {sandbox.id} is ready.")
+```
+
+</deno-tab>
+</deno-tabs>
 
 Supported patterns include:
 
