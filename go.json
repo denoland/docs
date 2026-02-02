@@ -33,5 +33,9 @@
   "run": "/runtime/reference/cli/run/",
   "serve": "/runtime/reference/cli/serve/",
   "test": "/runtime/reference/cli/test/",
-  "upgrade": "/runtime/reference/cli/upgrade/"
+  "upgrade": "/runtime/reference/cli/upgrade/",
+  "sandbox": "/runtime/reference/cli/sandbox/",
+  "databases": "/deploy/reference/databases/",
+  "pre-deploy": "/deploy/reference/builds/",
+  "otel": "/deploy/reference/observability/"
 }
