@@ -35,7 +35,7 @@ export const sidebar = [
         href: "/sandbox/manage_apps/",
       },
       {
-        title: "Volumes",
+        title: "Volumes & Snapshots",
         href: "/sandbox/volumes/",
       },
       {
