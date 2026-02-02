@@ -425,6 +425,28 @@ snp_ord_spmbe47dysccpy277ma6   my-toolchain-snapshot   ord      217.05 MiB   TRU
 </deno-tab>
 </deno-tabs>
 
+### Creating a volume from a snapshot
+
+Create a new writable volume from a snapshot:
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
+
+```tsx
+const volume = await client.volumes.create({
+  region: "ord",
+  slug: "my-toolchain-fork",
+  capacity: "10GiB",
+  from: "my-toolchain-snapshot",
+});
+```
+
+</deno-tab>
+</deno-tabs>
+
+The new volume contains the snapshot's contents and is fully writable. Use this
+to modify a snapshot's contents, then snapshot again.
+
 ### Deleting snapshots
 
 <deno-tabs group-id="sandbox-sdk">
