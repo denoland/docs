@@ -115,7 +115,28 @@ sandbox to a Deno Deploy app using [`sandbox.deno.deploy()`](./promote.md).
 
 ## Extending the timeout of a sandbox
 
-Coming soon.
+Add more time to a running sandbox without interrupting ongoing processes.
+
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
+
+```tsx
+const newTimeout = await sandbox.extendTimeout("30m");
+console.log(`Sandbox now expires at ${newTimeout}`);
+```
+
+</deno-tab>
+<deno-tab value="cli" label="CLI">
+
+```bash
+deno sandbox extend sbx_ord_abc123def456 30m
+```
+
+</deno-tab>
+</deno-tabs>
+
+All active connections and processes continue uninterrupted while the sandbox's
+expiration time is updated.
 
 ## Related APIs
 
