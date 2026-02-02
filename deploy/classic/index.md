@@ -121,8 +121,7 @@ all around the world, ready to handle all the traffic you expect.
 
 ## Next Steps
 
-Now that you've created your first deployment, you can
-[learn what kinds of apps](./use-cases.md) you can run on Deno Deploy, check out
+Now that you've created your first deployment, check out
 [what else you can do with deployctl](./deployctl.md), or keep reading to find
 out what other options you have to deploy your code to Deno Deploy. We're so
 excited to see what you'll ship with Deno Deploy!
