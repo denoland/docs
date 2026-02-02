@@ -5,10 +5,11 @@ description: "Persistent storage and bootable images for Deno Sandbox"
 
 Deno Sandbox provides two storage primitives:
 
-- **Volumes** – read-write block storage mounted at a path you choose. Ideal for
-  caches, databases, and artifacts that need to persist across sessions.
-- **Snapshots** – read-only images mounted at the root filesystem. Ideal for
-  pre-installing software so sandboxes boot instantly with everything ready.
+- **Volumes** – read-write block storage. Use for caches, databases, and
+  artifacts that persist across sessions.
+- **Snapshots** – read-only images created from volumes. Use for pre-installing
+  software so sandboxes boot instantly with everything ready. You can also
+  create new volumes from snapshots.
 
 ## Volumes
 
@@ -315,9 +316,8 @@ During the grace period you cannot mount or read the volume.
 
 Snapshots are read-only images created from volumes. When a sandbox boots with a
 snapshot as its root, the entire filesystem is replaced with the snapshot
-contents. This is ideal for pre-installing software—run `apt-get install` or
-`npm install` once, snapshot the result, and every future sandbox starts
-instantly with everything already installed.
+contents. Run `apt-get install` or `npm install` once, snapshot the result, and
+every future sandbox starts instantly with everything already installed.
 
 ### Creating a snapshot
 
@@ -452,6 +452,5 @@ deno sandbox snapshots delete my-toolchain-snapshot
 | Access         | Read-write                          | Read-only                          |
 | Mount point    | Any path, or root if bootable       | Root filesystem only               |
 | Use case       | Caches, databases, install software | Pre-installed software, toolchains |
-| Boot speed     | Normal                              | Fast (no install step needed)      |
 | Concurrent use | One sandbox at a time               | Many sandboxes simultaneously      |
 | Region         | Must match sandbox region           | Must match sandbox region          |
