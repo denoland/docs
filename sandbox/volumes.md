@@ -325,7 +325,7 @@ The workflow is:
 
 1. Create a **bootable volume** from a base image
 2. Boot a sandbox with that volume as `root` (writable)
-3. Install software, then `sync` to flush writes
+3. Install software
 4. Snapshot the volume
 
 Sandboxes booted from the snapshot start instantly with everything installed.
@@ -358,7 +358,6 @@ await using sandbox = await client.sandboxes.create({
 // 3. Install software
 await sandbox.sh`apt-get update && apt-get install -y nodejs npm`;
 await sandbox.sh`npm install -g typescript`;
-await sandbox.sh`sync`;
 
 // 4. Snapshot the volume
 const snapshot = await client.volumes.snapshot(volume.id, {
