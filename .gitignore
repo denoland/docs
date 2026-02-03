@@ -18,6 +18,9 @@ reference_gen/.node-incremental-cache.json
 static/llms.txt
 static/llms-full.txt
 
+# other generated content
+runtime/reference/std
+
 # Orama search index files (generated at build time)
 static/orama-index.json
 static/orama-index-*.json
