@@ -123,7 +123,7 @@
   "/examples/tutorials/react": "/examples/react_tutorial",
   "/examples/tutorials/redis": "/examples/redis_tutorial",
   "/examples/tutorials/run_script": "/examples/run_script_tutorial",
-  "/examples/tutorials/snapshot": "/examples/snapshot_tutorial",
+  "/examples/tutorials/snapshot": "/examples/snapshot_test_tutorial",
   "/examples/tutorials/solidjs": "/examples/solidjs_tutorial",
   "/examples/tutorials/stubbing": "/examples/stubbing_tutorial",
   "/examples/tutorials/subprocess": "/examples/subprocess_tutorial",
