@@ -390,12 +390,12 @@ export const sidebar = [
       },
       {
         title: "Add read-write block storage to your Sandbox",
-        href: "/examples/volumes/",
+        href: "/examples/volumes_tutorial/",
         type: "example",
       },
       {
         title: "Boot instantly with read-only images",
-        href: "/examples/snapshots/",
+        href: "/examples/snapshots_tutorial/",
         type: "example",
       },
     ],
