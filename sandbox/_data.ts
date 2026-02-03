@@ -69,7 +69,7 @@ export const sidebar = [
       },
       {
         title: "Pricing",
-        href: "https://deno.com/deploy/pricing/",
+        href: "https://deno.com/deploy/sandbox#sandbox-pricing",
       },
     ],
   },
