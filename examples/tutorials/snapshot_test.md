@@ -1,7 +1,8 @@
 ---
 title: "Snapshot testing"
+oldurl: /examples/snapshot_tutorial/
 description: "Learn how to use snapshot testing in Deno to compare outputs against recorded references, making it easier to detect unintended changes in your code"
-url: "/examples/snapshot_tutorial/"
+url: "/examples/snapshot_test_tutorial/"
 ---
 
 Snapshot testing is a testing technique that captures the output of your code

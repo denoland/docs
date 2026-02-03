@@ -112,7 +112,7 @@ or UUID.
 ```tsx
 const page = await client.volumes.list({ search: "training" });
 for (const vol of page.items) {
-  console.log(vol.slug, vol.used, vol.capacity);
+  console.log(vol.slug, vol.estimatedFlattenedSize, vol.capacity);
 }
 
 const vol = await client.volumes.get("training-cache");
@@ -124,7 +124,7 @@ const vol = await client.volumes.get("training-cache");
 ```py
 page = sdk.volumes.list(search="training")
 for vol in page.items:
-  print(f"{vol['slug']} {vol['used']} {vol['capacity']}")
+  print(f"{vol['slug']} {vol['estimatedFlattenedSize']} {vol['capacity']}")
 
 vol = sdk.volumes.get("training-cache")
 ```
@@ -135,7 +135,7 @@ vol = sdk.volumes.get("training-cache")
 ```py
 page = await sdk.volumes.list(search="training")
 async for vol in page:
-  print(f"{vol['slug']} {vol['used']} {vol['capacity']}")
+  print(f"{vol['slug']} {vol['estimatedFlattenedSize']} {vol['capacity']}")
 
 vol = await sdk.volumes.get("training-cache")
 ```

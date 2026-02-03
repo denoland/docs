@@ -388,6 +388,16 @@ export const sidebar = [
         href: "/examples/sandbox_memory/",
         type: "example",
       },
+      {
+        title: "Add read-write block storage to your Sandbox",
+        href: "/examples/volumes/",
+        type: "example",
+      },
+      {
+        title: "Boot instantly with read-only images",
+        href: "/examples/snapshots/",
+        type: "example",
+      },
     ],
   },
   {
@@ -415,7 +425,7 @@ export const sidebar = [
       },
       {
         title: "Snapshot testing",
-        href: "/examples/snapshot_tutorial/",
+        href: "/examples/snapshot_test_tutorial/",
         type: "tutorial",
       },
       {
