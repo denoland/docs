@@ -1036,7 +1036,7 @@
   .markdownBlockTitle {
     background: var(--bgColor-muted, var(--color-canvas-subtle));
     @apply px-2 py-1 leading-none rounded-sm border text-xs font-semibold z-10
-      relative w-max -mb-4! text-foreground-primary sm:left-2 -top-1
+      relative w-max -mb-4! text-foreground-primary sm:left-2 top-2
       border-foreground-tertiary;
   }
 
