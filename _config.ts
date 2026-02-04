@@ -292,43 +292,44 @@ site.data("apiCategories", {
 if (Deno.env.get("BUILD_TYPE") == "FULL") {
   // Use Lume's built in date function to get the last modified date of the file
   // site.data("date", "Git Last Modified");;
-
-  // Generate Open Graph images
-  site.data("openGraphLayout", "/open_graph/default.jsx");
-  site.use(
-    ogImages({
-      options: {
-        width: 1200,
-        height: 630,
-        fonts: [
-          {
-            name: "Courier",
-            style: "normal",
-            data: (await Deno.readFile(
-              "./static/fonts/courier/CourierPrime-Regular.ttf",
-            )).buffer,
-          },
-          {
-            name: "Inter",
-            weight: 400,
-            style: "normal",
-            data: (await Deno.readFile(
-              "./static/fonts/inter/hacked/Inter-Regular-hacked.woff",
-            )).buffer,
-          },
-          {
-            name: "Inter",
-            weight: 700,
-            style: "normal",
-            data: (await Deno.readFile(
-              "./static/fonts/inter/hacked/Inter-SemiBold-hacked.woff",
-            )).buffer,
-          },
-        ],
-      },
-    }),
-  );
 }
+
+// Generate Open Graph images for every build so styleguide examples and local
+// previews always have fresh assets.
+site.data("openGraphLayout", "/open_graph/default.jsx");
+site.use(
+  ogImages({
+    options: {
+      width: 1200,
+      height: 630,
+      fonts: [
+        {
+          name: "Courier",
+          style: "normal",
+          data: (await Deno.readFile(
+            "./static/fonts/courier/CourierPrime-Regular.ttf",
+          )).buffer,
+        },
+        {
+          name: "Inter",
+          weight: 400,
+          style: "normal",
+          data: (await Deno.readFile(
+            "./static/fonts/inter/hacked/Inter-Regular-hacked.woff",
+          )).buffer,
+        },
+        {
+          name: "Inter",
+          weight: 700,
+          style: "normal",
+          data: (await Deno.readFile(
+            "./static/fonts/inter/hacked/Inter-SemiBold-hacked.woff",
+          )).buffer,
+        },
+      ],
+    },
+  }),
+);
 
 site.scopedUpdates(
   (path) => /\.(js|ts)$/.test(path),

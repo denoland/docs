@@ -1,6 +1,6 @@
 export default function ({ title, description, openGraphTitle }) {
   if (!openGraphTitle) {
-    title = "deno help";
+    openGraphTitle = title || "deno help";
   }
   if (!description) {
     description = "Learn more at docs.deno.com";
