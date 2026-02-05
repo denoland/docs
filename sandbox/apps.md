@@ -1,15 +1,36 @@
 ---
-title: "Manage Deploy Apps"
-description: "Use the @deno/sandbox Client to create, list, update, and delete Deploy apps programmatically."
+title: "Programmatic management of Deno Deploy Apps"
+description: "Use the @deno/sandbox Client to create, list, update, and delete Deno Deploy apps programmatically."
 ---
 
-Beyond provisioning microVMs, the SDK provides APIs for managing Deploy apps
-inside your organization. This is useful when you need automation around
-onboarding teams, cloning environments, or cleaning up unused apps without
-visiting the dashboard. The SDK wraps the
-[Deno Deploy REST API](https://console.deno.com/api/v2/docs).
+Beyond provisioning microVMs, the SDK provides APIs for creating and managing
+Deploy apps inside your organization. Automating these workflows can help when
+you need to:
+
+- spin up isolated apps for previews or QA
+- keep multiple environments in sync
+- integrate Deploy provisioning directly into your CI/CD
+- clean up stale or unused apps on a schedule
+
+The SDK wraps the [Deno Deploy REST API](https://console.deno.com/api/v2/docs).
 
 ## Getting started
+
+### Authentication
+
+You will need a Deno Deploy API token with appropriate permissions to manage
+apps. You can find your token in the Deno Deploy console under **Sandboxes** >
+**Integrate into your app**.
+
+Click the **+ Create Token** button to generate a new token if you don't have
+one yet.
+
+Pass the `DENO_DEPLOY_TOKEN` environment variable, scoped to your organization,
+when instantiating the client or creating a sandbox to manage apps. The `Client`
+class exposes create, list, retrieve, update, and delete methods for every app
+that belongs to the organization the token is scoped to.
+
+### Initialize the client
 
 <deno-tabs group-id="sandbox-sdk">
 <deno-tab value="js" label="JavaScript" default>
@@ -96,7 +117,9 @@ print(app)
 </deno-tab>
 </deno-tabs>
 
-Provide additional fields (e.g., `name`, `description`) as the API evolves.
+The `slug` is required and must be unique inside the organization. You will also
+be able to provide optional metadata such as `name` and `description` as the API
+evolves.
 
 ## List apps
 
@@ -312,12 +335,3 @@ async with sdk.sandbox.create() as sandbox:
 
 </deno-tab>
 </deno-tabs>
-
-## Tips
-
-- Maintain a dedicated automation token with least privilege for management
-  scripts.
-- Pair these APIs with `sandbox.deno.deploy()` to seed apps from sandbox
-  experiments and then continue managing them over time.
-- Log every change (slug renames, deletions) so you have an audit trail outside
-  of the dashboard.

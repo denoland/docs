@@ -197,6 +197,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/run/",
           },
           {
+            title: "deno sandbox",
+            href: "/runtime/reference/cli/sandbox/",
+          },
+          {
             title: "deno serve",
             href: "/runtime/reference/cli/serve/",
           },

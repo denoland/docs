@@ -388,6 +388,16 @@ export const sidebar = [
         href: "/examples/sandbox_memory/",
         type: "example",
       },
+      {
+        title: "Add read-write block storage to your Sandbox",
+        href: "/examples/volumes_tutorial/",
+        type: "example",
+      },
+      {
+        title: "Boot instantly with read-only images",
+        href: "/examples/snapshots_tutorial/",
+        type: "example",
+      },
     ],
   },
   {
@@ -415,7 +425,7 @@ export const sidebar = [
       },
       {
         title: "Snapshot testing",
-        href: "/examples/snapshot_tutorial/",
+        href: "/examples/snapshot_test_tutorial/",
         type: "tutorial",
       },
       {
@@ -463,6 +473,11 @@ export const sidebar = [
       {
         title: "Export telemetry to Hyperdx",
         href: "/examples/hyperdx_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "View telemetry data for your local application",
+        href: "/examples/tunnel_telemetry_tutorial/",
         type: "tutorial",
       },
       {

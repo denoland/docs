@@ -227,7 +227,7 @@ try {
 
 Deno Sandbox has the following limits:
 
-- **Memory:** 768 MB to 4096 MB (1GB default) configurable per sandbox
+- **Memory:** 768 MB to 4096 MB (1.2GB default) configurable per sandbox
 - **CPU:** 2 vCPU
 - **Lifetime:** Configurable per sandbox and bound to a session, up to 30
   minutes

@@ -31,11 +31,11 @@ export const sidebar = [
         href: "/sandbox/ssh/",
       },
       {
-        title: "Manage Deploy apps",
-        href: "/sandbox/manage_apps/",
+        title: "Manage Deno Deploy apps",
+        href: "/sandbox/apps/",
       },
       {
-        title: "Volumes",
+        title: "Volumes & Snapshots",
         href: "/sandbox/volumes/",
       },
       {
@@ -69,7 +69,7 @@ export const sidebar = [
       },
       {
         title: "Pricing",
-        href: "https://deno.com/deploy/pricing/",
+        href: "https://deno.com/deploy/sandbox#sandbox-pricing",
       },
     ],
   },
@@ -83,7 +83,7 @@ export const SidebarNav = [
     href: "/deploy/",
   },
   {
-    title: "Sandbox",
+    title: "Deno Sandbox",
     href: "/sandbox/",
   },
   {
