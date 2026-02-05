@@ -131,6 +131,9 @@ directories and any subdirectories in them.
 
 Definition: `--allow-read[=<PATH>...]` or `-R[=<PATH>...]`
 
+PATHs may be separated by comma (`,`) characters. To include a comma character
+in the PATH, it must be doubled. (Example: `this file,, contains a comma.txt`)
+
 ```sh
 # Allow all reads from file system
 deno run -R script.ts
