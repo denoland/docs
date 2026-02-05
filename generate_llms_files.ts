@@ -514,7 +514,7 @@ function generateLlmsJson(summary: OramaSummaryIndex): string {
     data: summary.data,
   };
 
-  return JSON.stringify(payload);
+  return JSON.stringify(payload, null, 2);
 }
 
 function getSectionDescription(section: string): string {
