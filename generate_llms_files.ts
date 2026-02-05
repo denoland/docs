@@ -344,7 +344,7 @@ function generateLlmsTxt(files: FileInfo[]): string {
   content +=
     `- [Release Schedule](${BASE_URL}/runtime/contributing/release_schedule): Deno's release cadence and versioning\n`;
   content +=
-    "- [Deno LLM Skills](https://github.com/donjo/denoland): Skills and playbooks for LLMs and AI agents working with Deno\n";
+    "- [Deno LLM Skills](https://github.com/denoland/skills): Skills and playbooks for LLMs and AI agents working with Deno\n";
 
   return content;
 }
