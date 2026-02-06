@@ -7,10 +7,12 @@ import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware from "./middleware/redirects.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import expires from "lume/middlewares/expires.ts";
+import createLlmsFilesMiddleware from "./middleware/llmsFiles.ts";
 
 export const server = new Server({ root: "_site" });
 
 server.use(redirectsMiddleware);
+server.use(createLlmsFilesMiddleware({ root: "_site" }));
 server.use(NotFoundMiddleware({ root: "_site", page404: "./404/" }));
 server.use(createRoutingMiddleware());
 server.use(createGAMiddleware(server));
