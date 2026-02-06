@@ -3,7 +3,7 @@ title: "@std/data-structures"
 description: "Common data structures like red-black trees and binary heaps"
 jsr: jsr:@std/data-structures
 pkg: data-structures
-version: 1.0.9
+version: 1.0.10
 generated: true
 stability: stable
 ---

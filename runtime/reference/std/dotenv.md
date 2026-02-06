@@ -3,7 +3,7 @@ title: "@std/dotenv"
 description: "Parsing and loading environment variables from a `.env` file"
 jsr: jsr:@std/dotenv
 pkg: dotenv
-version: 0.225.5
+version: 0.225.6
 generated: true
 stability: unstable
 ---

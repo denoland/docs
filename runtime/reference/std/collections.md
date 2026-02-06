@@ -3,7 +3,7 @@ title: "@std/collections"
 description: "Pure functions for common tasks related to collection types like arrays and objects"
 jsr: jsr:@std/collections
 pkg: collections
-version: 1.1.3
+version: 1.1.4
 generated: true
 stability: stable
 ---

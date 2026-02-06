@@ -3,7 +3,7 @@ title: "@std/random"
 description: "Various utilities using random number generators. The package also provides seeded pseudo-random number generator."
 jsr: jsr:@std/random
 pkg: random
-version: 0.1.4
+version: 0.1.5
 generated: true
 stability: unstable
 ---

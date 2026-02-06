@@ -3,7 +3,7 @@ title: "@std/cache"
 description: "Cache utilities"
 jsr: jsr:@std/cache
 pkg: cache
-version: 0.2.1
+version: 0.2.2
 generated: true
 stability: unstable
 ---
