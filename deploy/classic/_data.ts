@@ -68,19 +68,6 @@ export const sidebar = [
         title: "Deno KV",
         href: "/deploy/classic/kv_on_deploy/",
       },
-      {
-        title: "Third-Party Databases",
-        items: [
-          { title: "DynamoDB", href: "/deploy/classic/dynamodb/" },
-          { title: "Firebase", href: "/deploy/classic/firebase/" },
-          { title: "Postgres", href: "/deploy/classic/postgres/" },
-          { title: "Neon Postgres", href: "/deploy/classic/neon-postgres/" },
-          {
-            title: "Prisma Postgres",
-            href: "/deploy/classic/prisma-postgres/",
-          },
-        ],
-      },
     ],
   },
   {

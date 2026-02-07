@@ -148,5 +148,10 @@
   "/deploy/kv/tutorials/schedule_notification/": "/examples/",
   "/deploy/kv/tutorials/webhook_processor/": "/examples/",
   "/runtime/fundamentals/standard_library/": "/runtime/reference/std/",
-  "/deploy/classic/faunadb/": "/examples/#connecting-to-databases"
+  "/deploy/classic/faunadb/": "/deploy/reference/databases/",
+  "/deploy/classic/dynamodb/": "/deploy/reference/databases/",
+  "/deploy/classic/firebase/": "/deploy/reference/databases/",
+  "/deploy/classic/postgres/": "/deploy/reference/databases/",
+  "/deploy/classic/prisma-postgres/": "/deploy/reference/databases/",
+  "/deploy/classic/neon-postgres/": "/deploy/reference/databases/"
 }
