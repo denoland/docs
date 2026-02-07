@@ -574,6 +574,98 @@ Then run with just `-P`:
 $ deno run -P main.ts
 ```
 
+### Allow, deny, and ignore
+
+For finer control over permissions, you can use the object form with `allow`,
+`deny`, and `ignore` keys. This is especially useful when you need more granular
+permission control than simple boolean or array values provide.
+
+#### Object form syntax
+
+Instead of specifying a permission as a boolean or array:
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      "read": true, // Simple boolean form
+      "write": ["./data"] // Simple array form
+    }
+  }
+}
+```
+
+You can use the object form:
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      "read": {
+        "allow": ["./data", "./config"],
+        "deny": ["./data/secrets"],
+        "ignore": ["./data/cache"]
+      },
+      "write": {
+        "allow": ["./output"],
+        "deny": ["./output/system"]
+      }
+    }
+  }
+}
+```
+
+#### Available permissions
+
+The `allow`, `deny`, and `ignore` keys work differently depending on the
+permission type:
+
+- **`read` and `env`**: Support `allow`, `deny`, and `ignore`
+- **`write`, `net`, `run`, `ffi`, `sys`, and `import`**: Support `allow` and
+  `deny` (but not `ignore`)
+
+#### Behavior
+
+- **`allow`**: Explicitly grant access to specific resources. Can be `true` (to
+  allow all), `false` (to allow none), or an array of specific paths/values to
+  allow.
+- **`deny`**: Explicitly deny access (throw
+  [PermissionDenied](https://docs.deno.com/api/deno/~/Deno.errors.PermissionDenied))
+  to specific resources, even if they would otherwise be allowed. Can be `true`
+  (to deny all), `false` (to deny none), or an array of specific paths/values to
+  deny.
+- **`ignore`**: (Only for `read` and `env` permissions) Silently ignore access
+  attempts to specific resources without throwing errors. Can be `true`,
+  `false`, or an array of specific paths/values to ignore.
+
+#### Example
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      // Allow reading from data directory, but deny access to secrets
+      // and silently ignore cache files
+      "read": {
+        "allow": ["./data"],
+        "deny": ["./data/secrets"],
+        "ignore": ["./data/cache"]
+      },
+      // Allow all environment variables except API keys
+      "env": {
+        "allow": true,
+        "ignore": ["API_KEY", "SECRET_TOKEN"]
+      },
+      // Allow all, but deny 'rm', 'sudo'
+      "run": {
+        "allow": true,
+        "deny": ["rm", "sudo"]
+      }
+    }
+  }
+}
+```
+
 ### Test, bench, and compile permissions
 
 Permissions can be optionally specified within the `"test"`, `"bench"`, or
@@ -644,7 +736,14 @@ If you're ok with this risk, then this feature will be useful for you.
   },
   "permissions": {
     "default": {
-      "read": ["./src/testdata/"]
+      "read": {
+        "allow": ["./src/"],
+        "deny": ["./src/secrets/"]
+      },
+      "env": {
+        "allow": true,
+        "ignore": ["TEMP_*"]
+      }
     }
   },
   "lint": {
