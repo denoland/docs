@@ -7,7 +7,8 @@ description: "Spin up a secure Linux microVM"
 ---
 
 The `deno sandbox` command allows you to spin up a secure Linux microVM,
-designed for running untrusted code in a sandboxed environment.
+designed for running untrusted code in a sandboxed environment. See the
+[Sandbox documentation](/sandbox/cli/) for more detailed examples of usage.
 
 ## Authentication
 
