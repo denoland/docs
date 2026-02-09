@@ -349,17 +349,12 @@ export const sidebar = [
         type: "example",
       },
       {
-        title: "Error handling with custom error classes",
-        href: "/examples/sandbox_custom_error_classes/",
-        type: "example",
-      },
-      {
         title: "Command cancellation",
         href: "/examples/sandbox_command_cancellation/",
         type: "example",
       },
       {
-        title: "Access string and binary output",
+        title: "Streaming access string and binary output",
         href: "/examples/sandbox_access_output/",
         type: "example",
       },
@@ -389,12 +384,12 @@ export const sidebar = [
         type: "example",
       },
       {
-        title: "Add read-write block storage to your Sandbox",
+        title: "Add read-write volumes to your Sandbox",
         href: "/examples/volumes_tutorial/",
         type: "example",
       },
       {
-        title: "Boot instantly with read-only images",
+        title: "Boot instantly with snapshots",
         href: "/examples/snapshots_tutorial/",
         type: "example",
       },
