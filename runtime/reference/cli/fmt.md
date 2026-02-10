@@ -107,7 +107,7 @@ Ignore formatting next item by preceding it with `# deno-fmt-ignore` comment:
 
 ## More about linting and formatting
 
-For more information about linting and formating in Deno, and the differences
+For more information about linting and formatting in Deno, and the differences
 between these two utilities, visit the
 [Linting and Formatting](/runtime/fundamentals/linting_and_formatting/) page in
 our Fundamentals section.

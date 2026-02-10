@@ -128,7 +128,7 @@ assertEquals(
 
 <h3 id="build-metadata">
 Build Metadata</h3>
-<p>Build metadata is <code>.</code> delimited alpha-numeric string.
+<p>Build metadata is <code>.</code> delimited alphanumeric string.
 When parsing a version it is retained on the <code>build: string[]</code> field
 of the SemVer instance. When incrementing there is an additional parameter that
 can set the build metadata on the SemVer instance.</p>

@@ -157,7 +157,7 @@ assertAlmostEquals(0.1 + 0.2, 0.3, 1e-15); // ✅
 ## Writing good failure messages
 
 All assertions accept an optional message as the last argument. Write messages
-to help developers understand where the failure occured and how to fix it. Keep
+to help developers understand where the failure occurred and how to fix it. Keep
 messages concise and user-focused:
 
 ```ts
