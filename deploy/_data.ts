@@ -63,6 +63,10 @@ export const sidebar = [
         href: "/deploy/reference/databases/",
       },
       {
+        title: "Prisma Postgres",
+        href: "/deploy/reference/prisma_postgres/",
+      },
+      {
         title: "Cloud Connections",
         href: "/deploy/reference/cloud_connections/",
       },
