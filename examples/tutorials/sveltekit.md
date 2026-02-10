@@ -529,7 +529,7 @@ pagination and search inputs added to the UI!
 Notice for the input we use `defaultValue={data.q ?? ''}` so that when it is
 rendered in the UI we don't get `undefined` or `null` showing.
 
-With snippets you can create re-useable parts of Svelte code for easier
+With snippets you can create reusable parts of Svelte code for easier
 rendering. `{#snippet pageButton(...)}` allows us to define the section to be
 rendered. We can then use it and pass the required type safe parameters using
 `{@render pageButton(...)}`. You can see this for all of the pagination buttons.
