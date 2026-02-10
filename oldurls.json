@@ -148,5 +148,6 @@
   "/deploy/kv/tutorials/schedule_notification/": "/examples/",
   "/deploy/kv/tutorials/webhook_processor/": "/examples/",
   "/runtime/fundamentals/standard_library/": "/runtime/reference/std/",
-  "/deploy/classic/faunadb/": "/examples/#connecting-to-databases"
+  "/deploy/classic/faunadb/": "/examples/#connecting-to-databases",
+  "/hello_world.ts": "/examples/scripts/hello_world.ts"
 }
