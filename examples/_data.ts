@@ -329,7 +329,7 @@ export const sidebar = [
         type: "example",
       },
       {
-        title: "Intereactive JavaScript REPL",
+        title: "Interactive JavaScript REPL",
         href: "/examples/sandbox_javascript_repl/",
         type: "example",
       },
