@@ -112,10 +112,18 @@ repository if you're using a recognized framework or common build setup.
       application
     - **Runtime working directory** (optional): The working directory for the
       application at runtime
+    - **Runtime memory limit** (optional): The maximum amount of memory the
+      application can use at runtime. Defaults to 768 MB, can be increased to 4
+      GB on the Pro plan.
   - **Static**: For static websites serving pre-rendered content
     - **Directory**: Folder containing static assets (e.g., `dist`, `.output`)
     - **Single page app mode** (optional): Serves `index.html` for paths that
       don't match static files instead of returning 404 errors
+  - **Automatic**: When using a framework preset, the runtime configuration is
+    set automatically.
+    - **Runtime memory limit** (optional): The maximum amount of memory the
+      application can use at runtime. Defaults to 768 MB, can be increased to 4
+      GB on the Pro plan.
 
 - **Build timeout**: Maximum time allowed for the build process. Defaults to 5
   minutes, can be increased to 15 minutes on the Pro plan.
@@ -152,12 +160,19 @@ the entire configuration will be sourced from the file instead of the dashboard
       application.
     - `deploy.runtime.cwd` (optional): The working directory for the application
       at runtime.
+    - `deploy.runtime.memory_limit` (optional): The maximum amount of memory the
+      application can use at runtime. Defaults to 768 MB, can be increased to 4
+      GB on the Pro plan.
   - For static apps:
     - `deploy.runtime.type`: Must be set to `"static"`.
     - `deploy.runtime.cwd`: Folder containing static assets (e.g., `dist`,
       `.output`).
     - `deploy.runtime.spa` (optional): If `true`, serves `index.html` for paths
       that don't match static files instead of returning 404 errors.
+  - For apps using a framework preset:
+    - `deploy.runtime.memory_limit` (optional): The maximum amount of memory the
+      application can use at runtime. Defaults to 768 MB, can be increased to 4
+      GB on the Pro plan.
 
 #### Examples
 

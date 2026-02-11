@@ -237,7 +237,7 @@ Deno.serve(async () => {
 ## Running migrations and seeding data
 
 Since each environment has its own isolated database, you will often have many
-seperate databases to manage in every app. It is not practical to manually run
+separate databases to manage in every app. It is not practical to manually run
 migrations or insert seed data into each database individually every time you
 deploy a new revision.
 

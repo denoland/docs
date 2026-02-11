@@ -5165,7 +5165,7 @@
           "short": "n",
           "long": "name",
           "required": false,
-          "help": "Set a name for the kernel (defaults to 'deno'). \u001b[38;5;245mUseful when maintaing multiple Deno kernels.\u001b[39m",
+          "help": "Set a name for the kernel (defaults to 'deno'). \u001b[38;5;245mUseful when maintaining multiple Deno kernels.\u001b[39m",
           "help_heading": null,
           "usage": "--name <name>"
         },
@@ -5174,7 +5174,7 @@
           "short": "d",
           "long": "display",
           "required": false,
-          "help": "Set a display name for the kernel (defaults to 'Deno'). \u001b[38;5;245mUseful when maintaing multiple Deno kernels.\u001b[39m",
+          "help": "Set a display name for the kernel (defaults to 'Deno'). \u001b[38;5;245mUseful when maintaining multiple Deno kernels.\u001b[39m",
           "help_heading": null,
           "usage": "--display <display>"
         },
