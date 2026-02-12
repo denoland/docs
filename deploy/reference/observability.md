@@ -29,15 +29,6 @@ that specific trace and span. For such logs, a "View trace" button appears in
 the logs interface, allowing you to open the relevant trace in an overlay drawer
 for detailed inspection.
 
-You can also stream logs from the command line:
-
-```bash
-deno deploy logs --org my-org --app my-api
-```
-
-For more options, see the
-[`deno deploy logs` CLI reference](/runtime/reference/cli/deploy/#application-logs).
-
 ## Traces
 
 Traces in Deno Deploy are captured in three ways:

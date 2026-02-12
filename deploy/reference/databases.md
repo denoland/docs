@@ -34,8 +34,6 @@ There are two ways to add a database instance to your Deno Deploy organization:
 
 ### Linking an external database
 
-#### Using the dashboard
-
 To link an existing external database instance you can either:
 
 - go to the "Databases" page in your organization dashboard and click the "Link
@@ -96,37 +94,7 @@ to upload the specific CA certificate that was used to sign your database's
 certificate. You can usually obtain this from your database provider's
 documentation or console.
 
-#### Using the CLI
-
-You can also link an external PostgreSQL database using the CLI:
-
-```bash
-deno deploy database link my-db "postgres://user:pass@host:5432/mydb" --org my-org
-```
-
-Or use individual flags instead of a connection string:
-
-```bash
-deno deploy database link my-db \
-  --hostname db.example.com \
-  --username admin \
-  --password secret \
-  --port 5432 \
-  --org my-org
-```
-
-Use `--dry-run` to test the connection without actually linking:
-
-```bash
-deno deploy database link my-db "postgres://user:pass@host:5432/mydb" --dry-run
-```
-
-For the full list of options, see the
-[`deno deploy database link` CLI reference](/runtime/reference/cli/deploy/#link-an-external-database).
-
 ### Provisioning a managed database
-
-#### Using the dashboard
 
 To create and attach a managed database instance from Deno Deploy, you can
 either:
@@ -155,21 +123,6 @@ database queries.
 Once you're ready, click "Provision" to create the database instance. Deno
 Deploy will handle the provisioning process and set up the necessary
 infrastructure on your behalf.
-
-#### Using the CLI
-
-You can also provision a managed database from the CLI:
-
-```bash
-# Provision a Deno KV database
-deno deploy database provision my-kv-db --kind denokv --org my-org
-
-# Provision a Prisma Postgres database (region is required)
-deno deploy database provision my-pg-db --kind prisma --region us-east-1 --org my-org
-```
-
-For the full list of options, see the
-[`deno deploy database provision` CLI reference](/runtime/reference/cli/deploy/#provision-a-database).
 
 ## Linking databases to your apps
 
@@ -208,17 +161,6 @@ To assign a database to an app you can either:
   dropdown.
 - Go to the "Databases" tab in your app settings, click on "Attach Database",
   then select the database instance from the dropdown.
-- Use the CLI:
-
-```bash
-deno deploy database assign my-db --app my-api --org my-org
-```
-
-To detach a database from an app:
-
-```bash
-deno deploy database detach my-db --app my-api --org my-org
-```
 
 Once assigned, Deno Deploy will automatically create the necessary isolated
 databases for each environment within that app.
@@ -455,24 +397,6 @@ instance instead.
 :::
 
 ## Database management
-
-### Using the CLI
-
-You can manage databases entirely from the command line:
-
-```bash
-# List all databases in your organization
-deno deploy database list --org my-org
-
-# Query a database
-deno deploy database query my-db mydb "SELECT * FROM users LIMIT 10"
-
-# Delete a database
-deno deploy database delete my-old-db --org my-org
-```
-
-For the full list of database commands, see the
-[`deno deploy database` CLI reference](/runtime/reference/cli/deploy/#database-management).
 
 ### Organization level
 

@@ -12,11 +12,15 @@ organization and is used in default domain names.
 
 ## Creating an application
 
+Applications can be created from the
+[Deno Deploy dashboard](https://dash.deno.com) or from the command line using
+the [`deno deploy` CLI](/runtime/reference/cli/deploy/).
+
 ### Using the dashboard
 
 To create an application from the web dashboard:
 
-1. Click the "+ Create App" button on the organization page
+1. Click the "+ New App" button on the Application overview page
 2. Select the GitHub repository to deploy from
 3. Configure the app slug (name)
 4. Set up build configuration
