@@ -455,9 +455,6 @@ async function main(outputDir?: string) {
     throw error;
   }
 
-  // Note: llms.txt and llms-full-guide.txt are hand-written files that live in
-  // static/ and are copied to _site/ by Lume's site.copy("static", ".")
-
   // Generate llms-summary.txt
   const llmsSummaryTxt = generateLlmsSummaryTxt(files);
   await Deno.writeTextFile(join(outDir, "llms-summary.txt"), llmsSummaryTxt);
