@@ -43,8 +43,8 @@ command runs in non-interactive mode (useful for CI/CD pipelines and scripting).
 deno deploy create [root-path]
 ```
 
-The optional `[root-path]` argument sets the local project directory. Defaults to
-the current working directory.
+The optional `[root-path]` argument sets the local project directory. Defaults
+to the current working directory.
 
 #### General options
 
@@ -106,8 +106,8 @@ These flags control where the app code comes from:
 
 #### Interactive wizard
 
-When you run `deno deploy create` without flags, an interactive wizard guides you
-through each configuration step:
+When you run `deno deploy create` without flags, an interactive wizard guides
+you through each configuration step:
 
 1. **Organization** - Select which org to create the app in
 2. **App name** - Choose a name for your app
@@ -315,7 +315,8 @@ Creates a new database instance.
 **Options:**
 
 - `--kind <denokv|prisma>` - The type of database to provision (required)
-- `--region <region>` - The primary region for the database (required for Prisma)
+- `--region <region>` - The primary region for the database (required for
+  Prisma)
 
 ```bash
 # Provision a Deno KV database

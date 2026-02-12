@@ -35,9 +35,9 @@ documentation.
 
 ### Using the CLI
 
-You can also create applications from the command line with `deno deploy create`.
-Running without flags starts an interactive wizard that walks you through each
-step:
+You can also create applications from the command line with
+`deno deploy create`. Running without flags starts an interactive wizard that
+walks you through each step:
 
 ```bash
 deno deploy create
