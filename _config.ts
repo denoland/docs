@@ -195,11 +195,11 @@ site.addEventListener("afterBuild", async () => {
       );
       const {
         collectFiles,
-        generateLlmsTxt,
         generateLlmsSummaryTxt,
         generateLlmsFullTxt,
         generateLlmsJson,
         loadOramaSummaryIndex,
+        copyHandwrittenFile,
       } = generateModule;
 
       log.info("Generating LLM-friendly documentation files...");
@@ -207,10 +207,27 @@ site.addEventListener("afterBuild", async () => {
       const files = await collectFiles();
       log.info(`Collected ${files.length} documentation files for LLMs`);
 
-      // Generate llms.txt
-      const llmsTxt = generateLlmsTxt(files);
-      Deno.writeTextFileSync(site.dest("llms.txt"), llmsTxt);
-      log.info("Generated llms.txt in site root");
+      // Copy hand-written llms.txt (curated index)
+      const copiedLlmsTxt = await copyHandwrittenFile(
+        "llms.txt",
+        site.dest("llms.txt"),
+      );
+      if (copiedLlmsTxt) {
+        log.info("Copied llms.txt to site root");
+      } else {
+        log.warn("llms.txt not found in repo root, skipping");
+      }
+
+      // Copy hand-written llms-full-guide.txt (agent-oriented quick reference)
+      const copiedGuide = await copyHandwrittenFile(
+        "llms-full-guide.txt",
+        site.dest("llms-full-guide.txt"),
+      );
+      if (copiedGuide) {
+        log.info("Copied llms-full-guide.txt to site root");
+      } else {
+        log.warn("llms-full-guide.txt not found in repo root, skipping");
+      }
 
       // Generate llms-summary.txt
       const llmsSummaryTxt = generateLlmsSummaryTxt(files);

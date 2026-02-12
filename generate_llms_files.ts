@@ -517,6 +517,23 @@ function generateLlmsJson(summary: OramaSummaryIndex): string {
   return JSON.stringify(payload, null, 2);
 }
 
+async function copyHandwrittenFile(
+  filename: string,
+  destPath: string,
+): Promise<boolean> {
+  const srcPath = join(ROOT_DIR, filename);
+  try {
+    const content = await Deno.readTextFile(srcPath);
+    await Deno.writeTextFile(destPath, content);
+    return true;
+  } catch (error) {
+    if (error instanceof Deno.errors.NotFound) {
+      return false;
+    }
+    throw error;
+  }
+}
+
 function getSectionDescription(section: string): string {
   const descriptions: Record<string, string> = {
     runtime:
@@ -555,10 +572,30 @@ async function main(outputDir?: string) {
     throw error;
   }
 
-  // Generate llms.txt
-  const llmsTxt = generateLlmsTxt(files);
-  await Deno.writeTextFile(join(outDir, "llms.txt"), llmsTxt);
-  console.log(`Generated llms.txt in ${outDir}`);
+  // Copy hand-written llms.txt (curated index following llmstxt.org standard)
+  const copiedLlmsTxt = await copyHandwrittenFile(
+    "llms.txt",
+    join(outDir, "llms.txt"),
+  );
+  if (copiedLlmsTxt) {
+    console.log(`Copied llms.txt to ${outDir}`);
+  } else {
+    // Fall back to auto-generated version if hand-written file doesn't exist
+    const llmsTxt = generateLlmsTxt(files);
+    await Deno.writeTextFile(join(outDir, "llms.txt"), llmsTxt);
+    console.log(`Generated llms.txt in ${outDir} (fallback)`);
+  }
+
+  // Copy hand-written llms-full-guide.txt (agent-oriented quick reference)
+  const copiedGuide = await copyHandwrittenFile(
+    "llms-full-guide.txt",
+    join(outDir, "llms-full-guide.txt"),
+  );
+  if (copiedGuide) {
+    console.log(`Copied llms-full-guide.txt to ${outDir}`);
+  } else {
+    console.warn("Skipped llms-full-guide.txt (file not found in repo root)");
+  }
 
   // Generate llms-summary.txt
   const llmsSummaryTxt = generateLlmsSummaryTxt(files);
@@ -601,4 +638,5 @@ export default {
   generateLlmsFullTxt,
   generateLlmsJson,
   loadOramaSummaryIndex,
+  copyHandwrittenFile,
 };

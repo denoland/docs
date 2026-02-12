@@ -13,6 +13,7 @@ const LLMS_CONTENT_TYPES = new Map<string, string>([
   ["/llms.txt", "text/plain; charset=utf-8"],
   ["/llms-summary.txt", "text/plain; charset=utf-8"],
   ["/llms-full.txt", "text/plain; charset=utf-8"],
+  ["/llms-full-guide.txt", "text/plain; charset=utf-8"],
   ["/llms.json", "application/json; charset=utf-8"],
 ]);
 
