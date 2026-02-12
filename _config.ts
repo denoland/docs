@@ -132,8 +132,6 @@ const site = lume(
 // site.ignore("styleguide");
 
 site.copy("static", ".");
-site.copy("llms.txt");
-site.copy("llms-full-guide.txt");
 site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");

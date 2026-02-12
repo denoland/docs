@@ -1,11 +1,14 @@
 #!/usr/bin/env -S deno run --allow-read --allow-write
 /**
- * This script generates llms.txt and llms-full.txt files for the Deno documentation,
- * following the llmstxt.org standard to create LLM-friendly documentation.
+ * This script generates llms-summary.txt, llms-full.txt, and llms.json for the
+ * Deno documentation, following the llmstxt.org standard.
  *
- * By default, files are generated in the same directory as the generation script. When running
- * during the build process, files are generated in the _site directory so they can be served
- * at the site's root.
+ * The hand-written llms.txt and llms-full-guide.txt live in static/ and are
+ * copied to _site/ by Lume's site.copy("static", ".").
+ *
+ * By default, generated files are written to the static directory. When running
+ * during the build process, files are generated in the _site directory so they
+ * can be served at the site's root.
  */
 
 import { walk } from "@std/fs";
@@ -20,6 +23,7 @@ const ROOT_DIR = fromFileUrl(new URL(".", import.meta.url));
 const INCLUDE_DIRS = [
   "runtime",
   "deploy",
+  "sandbox",
   "examples",
   "subhosting",
   "lint",
@@ -243,112 +247,6 @@ async function collectFiles(): Promise<FileInfo[]> {
   return files;
 }
 
-function generateLlmsTxt(files: FileInfo[]): string {
-  // Extract information about the main sections
-  const sections = INCLUDE_DIRS.map((dir) => {
-    const sectionFiles = files.filter((file) =>
-      file.relativePath.startsWith(dir)
-    );
-    const sectionName = dir.charAt(0).toUpperCase() + dir.slice(1);
-
-    return {
-      name: sectionName,
-      files: sectionFiles,
-      description: getSectionDescription(dir),
-    };
-  });
-
-  // Build the llms.txt content
-  let content = "# Deno Documentation\n\n";
-  content +=
-    "> Deno is an open source JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great developer experience. It's built on V8, Rust, and Tokio.\n\n";
-  content +=
-    "Deno is a modern, secure-by-default runtime for JavaScript, TypeScript, and WebAssembly. This documentation covers the Deno runtime, Deno Deploy cloud service, and related tools and services.\n\n";
-
-  // Add sections
-  for (const section of sections) {
-    content += `## ${section.name} Documentation\n\n`;
-    if (section.description) {
-      content += `${section.description}\n\n`;
-    }
-
-    // Get section index page
-    const indexPage = section.files.find((file) =>
-      file.relativePath === `${section.name.toLowerCase()}/index.md` ||
-      file.relativePath === `${section.name.toLowerCase()}/index.mdx`
-    );
-
-    if (indexPage) {
-      content += `- [${indexPage.title}](${indexPage.url})`;
-      if (indexPage.description ?? indexPage.summary) {
-        content += `: ${indexPage.description ?? indexPage.summary}`;
-      }
-      content += "\n";
-    }
-
-    // Group files by directories (if needed)
-    const filesByDirectory = new Map<string, FileInfo[]>();
-    for (const file of section.files) {
-      // Skip the index page as it's already included
-      if (file === indexPage) continue;
-
-      const parts = file.relativePath.split("/");
-      if (parts.length > 2) {
-        // This is a subdirectory
-        const subdir = parts.slice(0, 2).join("/");
-        if (!filesByDirectory.has(subdir)) {
-          filesByDirectory.set(subdir, []);
-        }
-        filesByDirectory.get(subdir)?.push(file);
-      } else {
-        // This is a direct child of the section
-        if (!filesByDirectory.has(section.name.toLowerCase())) {
-          filesByDirectory.set(section.name.toLowerCase(), []);
-        }
-        filesByDirectory.get(section.name.toLowerCase())?.push(file);
-      }
-    }
-
-    // Add links to important files
-    for (const [_, dirFiles] of filesByDirectory) {
-      // Sort files to ensure consistent output
-      dirFiles.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
-
-      for (const file of dirFiles) {
-        // Skip files with no title
-        if (!file.title) continue;
-
-        // Format for llms.txt - use the pattern: [Title](url): Description
-        const descriptionOrSummary = file.description ?? file.summary;
-        content += `- [${file.title}](${file.url})`;
-        if (descriptionOrSummary) {
-          content += `: ${descriptionOrSummary}`;
-        }
-        content += "\n";
-      }
-    }
-
-    content += "\n";
-  }
-
-  // Add Optional section with additional resources
-  content += "## Optional\n\n";
-  content +=
-    `- [AI Entrypoint](${BASE_URL}/ai/): Overview and key links for LLMs and AI agents\n`;
-  content +=
-    `- [LLM Index (JSON)](${BASE_URL}/llms.json): Structured index built from the Orama summary\n`;
-  content +=
-    `- [Contribution Guidelines](${BASE_URL}/runtime/contributing): How to contribute to Deno\n`;
-  content +=
-    `- [Style Guide](${BASE_URL}/runtime/contributing/style_guide): Coding style guidelines for Deno\n`;
-  content +=
-    `- [Release Schedule](${BASE_URL}/runtime/contributing/release_schedule): Deno's release cadence and versioning\n`;
-  content +=
-    "- [Deno LLM Skills](https://github.com/denoland/skills): Skills and playbooks for LLMs and AI agents working with Deno\n";
-
-  return content;
-}
-
 function scoreSummaryCandidate(file: FileInfo): number {
   let score = 0;
   const depth = file.relativePath.split("/").length;
@@ -517,29 +415,14 @@ function generateLlmsJson(summary: OramaSummaryIndex): string {
   return JSON.stringify(payload, null, 2);
 }
 
-async function copyHandwrittenFile(
-  filename: string,
-  destPath: string,
-): Promise<boolean> {
-  const srcPath = join(ROOT_DIR, filename);
-  try {
-    const content = await Deno.readTextFile(srcPath);
-    await Deno.writeTextFile(destPath, content);
-    return true;
-  } catch (error) {
-    if (error instanceof Deno.errors.NotFound) {
-      return false;
-    }
-    throw error;
-  }
-}
-
 function getSectionDescription(section: string): string {
   const descriptions: Record<string, string> = {
     runtime:
       "Documentation for the Deno CLI and runtime environment, including installation, configuration, and core concepts.",
     deploy:
       "Documentation for Deno Deploy, a serverless platform for deploying JavaScript to a global edge network.",
+    sandbox:
+      "Documentation for Deno Sandbox, ephemeral Linux microVMs for running untrusted code safely.",
     examples:
       "Code examples and tutorials demonstrating how to build applications with Deno.",
     subhosting:
@@ -572,30 +455,8 @@ async function main(outputDir?: string) {
     throw error;
   }
 
-  // Copy hand-written llms.txt (curated index following llmstxt.org standard)
-  const copiedLlmsTxt = await copyHandwrittenFile(
-    "llms.txt",
-    join(outDir, "llms.txt"),
-  );
-  if (copiedLlmsTxt) {
-    console.log(`Copied llms.txt to ${outDir}`);
-  } else {
-    // Fall back to auto-generated version if hand-written file doesn't exist
-    const llmsTxt = generateLlmsTxt(files);
-    await Deno.writeTextFile(join(outDir, "llms.txt"), llmsTxt);
-    console.log(`Generated llms.txt in ${outDir} (fallback)`);
-  }
-
-  // Copy hand-written llms-full-guide.txt (agent-oriented quick reference)
-  const copiedGuide = await copyHandwrittenFile(
-    "llms-full-guide.txt",
-    join(outDir, "llms-full-guide.txt"),
-  );
-  if (copiedGuide) {
-    console.log(`Copied llms-full-guide.txt to ${outDir}`);
-  } else {
-    console.warn("Skipped llms-full-guide.txt (file not found in repo root)");
-  }
+  // Note: llms.txt and llms-full-guide.txt are hand-written files that live in
+  // static/ and are copied to _site/ by Lume's site.copy("static", ".")
 
   // Generate llms-summary.txt
   const llmsSummaryTxt = generateLlmsSummaryTxt(files);
@@ -633,7 +494,6 @@ if (import.meta.main) {
 // Export functions for use in the site build process
 export default {
   collectFiles,
-  generateLlmsTxt,
   generateLlmsSummaryTxt,
   generateLlmsFullTxt,
   generateLlmsJson,
