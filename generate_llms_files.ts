@@ -638,5 +638,4 @@ export default {
   generateLlmsFullTxt,
   generateLlmsJson,
   loadOramaSummaryIndex,
-  copyHandwrittenFile,
 };
