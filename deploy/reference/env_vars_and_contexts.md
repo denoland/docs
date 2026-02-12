@@ -81,6 +81,53 @@ To remove a variable, click the "Remove" button next to it.
 To edit a variable, click the "Edit" button next to it to modify its name,
 value, secret status, or applicable contexts.
 
+### Using the CLI
+
+You can also manage environment variables from the command line with
+`deno deploy env`:
+
+```bash
+# List all environment variables
+deno deploy env list --org my-org --app my-api
+
+# Add a plain text variable
+deno deploy env add SITE_NAME "My App" --org my-org --app my-api
+
+# Add a secret variable
+deno deploy env add API_KEY "sk-secret-value" --secret --org my-org --app my-api
+
+# Update a variable's value
+deno deploy env update-value API_KEY "new-value" --org my-org --app my-api
+
+# Update which contexts a variable applies to
+deno deploy env update-contexts API_KEY Production Build --org my-org --app my-api
+
+# Delete a variable
+deno deploy env delete OLD_API_KEY --org my-org --app my-api
+
+# Load variables from a .env file
+deno deploy env load .env.production --org my-org --app my-api
+```
+
+:::info
+
+You can use `deno deploy switch --org my-org --app my-api` to set a default
+organization and application, so you don't need to pass `--org` and `--app` on
+every command.
+
+:::
+
+When loading from a `.env` file, the CLI automatically detects which variables
+are likely secrets based on their names (e.g. keys containing `SECRET`, `TOKEN`,
+`PASSWORD`). Use `--non-secrets` to override this for specific keys:
+
+```bash
+deno deploy env load .env.production --non-secrets PUBLIC_URL SITE_NAME
+```
+
+For the full list of options, see the
+[`deno deploy env` CLI reference](/runtime/reference/cli/deploy/#environment-variables-management).
+
 ## Using environment variables in your code
 
 Access environment variables using the `Deno.env.get` API:
