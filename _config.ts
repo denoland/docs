@@ -208,8 +208,6 @@ site.addEventListener("afterBuild", async () => {
       const files = await collectFiles();
       log.info(`Collected ${files.length} documentation files for LLMs`);
 
-      // Note: llms.txt and llms-full-guide.txt are copied via site.copy() above
-
       // Generate llms-summary.txt
       const llmsSummaryTxt = generateLlmsSummaryTxt(files);
       Deno.writeTextFileSync(site.dest("llms-summary.txt"), llmsSummaryTxt);
