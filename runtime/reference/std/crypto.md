@@ -104,7 +104,7 @@ const a = new Uint8Array(
   await crypto.subtle.digest("BLAKE3", enc.encode("abc")),
 );
 const b = new Uint8Array(
-  await crypto.subtle.digest("BLAKE3", enc.encode("abd")),
+  await crypto.subtle.digest("BLAKE3", enc.encode("abz")),
 );
 
 console.log(timingSafeEqual(a, b)); // false

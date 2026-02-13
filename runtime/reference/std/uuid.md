@@ -3,7 +3,7 @@ title: "@std/uuid"
 description: "Generators and validators for UUIDs"
 jsr: jsr:@std/uuid
 pkg: uuid
-version: 1.0.9
+version: 1.1.0
 generated: true
 stability: stable
 ---

@@ -9,6 +9,7 @@
     "@std/media-types": "jsr:@std/media-types@^1.0.3",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@deno/doc": "jsr:@deno/doc@0.187.0",
+    "@std/yaml": "jsr:@std/yaml@^1.0.11",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
     "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/",
     "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts",
@@ -54,7 +55,7 @@
     "types": [
       "lume/types.ts"
     ],
-    "jsx": "precompile",
+    "jsx": "react-jsx",
     "jsxImportSource": "lume"
   },
   "test": {

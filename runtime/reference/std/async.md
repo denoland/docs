@@ -3,7 +3,7 @@ title: "@std/async"
 description: "Utilities for asynchronous operations, like delays, debouncing, or pooling"
 jsr: jsr:@std/async
 pkg: async
-version: 1.0.15
+version: 1.1.0
 generated: true
 stability: stable
 ---
@@ -12,9 +12,9 @@ stability: stable
 
 ## Overview
 
-<p>Provide helpers with asynchronous tasks like <a href="https://jsr.io/@std/async@1.0.15/doc/~/delay" rel="nofollow"><code>delays</code></a>,
-<a href="https://jsr.io/@std/async@1.0.15/doc/~/debounce" rel="nofollow"><code>debouncing</code></a>, <a href="https://jsr.io/@std/async@1.0.15/doc/~/retry" rel="nofollow"><code>retrying</code></a>, or
-<a href="https://jsr.io/@std/async@1.0.15/doc/~/pooledMap" rel="nofollow"><code>pooling</code></a>.</p>
+<p>Provide helpers with asynchronous tasks, like <a href="https://jsr.io/@std/async@1.1.0/doc/~/delay" rel="nofollow"><code>delay</code></a>,
+<a href="https://jsr.io/@std/async@1.1.0/doc/~/debounce" rel="nofollow"><code>debounce</code></a>, <a href="https://jsr.io/@std/async@1.1.0/doc/~/retry" rel="nofollow"><code>retry</code></a>, or
+<a href="https://jsr.io/@std/async@1.1.0/doc/~/pooledMap" rel="nofollow"><code>pooledMap</code></a>.</p>
 
 ```js
 import { delay } from "@std/async/delay";

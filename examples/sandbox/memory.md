@@ -13,14 +13,14 @@ workloads or reduce memory for lighter tasks.
 import { Sandbox } from "@deno/sandbox";
 
 // Create a sandbox with 1GB of memory
-await using sandbox = await Sandbox.create({ memoryMb: 1024 });
+await using sandbox = await Sandbox.create({ memory: 1024 });
 ```
 
 ```ts
 import { Sandbox } from "@deno/sandbox";
 
 // Create a sandbox with 4GB of memory for memory-intensive workloads
-await using sandbox = await Sandbox.create({ memoryMb: 4096 });
+await using sandbox = await Sandbox.create({ memory: 4096 });
 
 // Check available memory
 const memInfo = await sandbox.deno.eval<{ total: number }>(
@@ -29,7 +29,7 @@ const memInfo = await sandbox.deno.eval<{ total: number }>(
 console.log("Total memory:", memInfo.total);
 ```
 
-Configuring memoryMb when creating the sandbox lets you tune resource usage per
+Configuring memory when creating the sandbox lets you tune resource usage per
 workload. Lightweight tasks can run in smaller sandboxes to conserve resources,
 while data-heavy scripts or compilations can request up to 4 GB to avoid
 out-of-memory failures.

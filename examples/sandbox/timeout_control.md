@@ -13,12 +13,14 @@ your script finishes or keep running for a set duration:
 import { Sandbox } from "@deno/sandbox";
 
 // Default: "session" - sandbox shuts down when you close/dispose the client
-await using sandbox = await Sandbox.create({ timeout: "session" });
+await using sandbox = await Sandbox.create({ timeout: "10m" });
 ```
 
 Supported duration suffixes: `s` (seconds), `m` (minutes).
 
-Examples: `"30s"`, `"5m"`, `"90s"` .
+Examples: `"30s"`, `"5m"`, `"90s"`. The default is `"session"`, which means the
+sandbox will automatically shut down when the client connection is closed or
+disposed.
 
 ```ts
 import { Sandbox } from "@deno/sandbox";
