@@ -29,17 +29,17 @@ directives:
 
 ### Response Directives
 
-| Directive                    | Description                                                   |
-| ---------------------------- | ------------------------------------------------------------- |
-| `public`                     | Response can be cached by shared caches                       |
-| `private`                    | Response is user-specific and cannot be cached (bypasses CDN) |
-| `no-store`                   | Response must not be cached                                   |
-| `no-cache`                   | Response must be revalidated before use                       |
-| `max-age=N`                  | Response is fresh for N seconds                               |
-| `s-maxage=N`                 | Like `max-age`, but only for shared caches (takes precedence) |
-| `stale-while-revalidate=N`   | Serve stale content while revalidating in background          |
-| `stale-if-error=N`           | Serve stale content if origin returns an error                |
-| `must-revalidate`            | Stale responses must not be used without revalidation         |
+| Directive                  | Description                                                   |
+| -------------------------- | ------------------------------------------------------------- |
+| `public`                   | Response can be cached by shared caches                       |
+| `private`                  | Response is user-specific and cannot be cached (bypasses CDN) |
+| `no-store`                 | Response must not be cached                                   |
+| `no-cache`                 | Response must be revalidated before use                       |
+| `max-age=N`                | Response is fresh for N seconds                               |
+| `s-maxage=N`               | Like `max-age`, but only for shared caches (takes precedence) |
+| `stale-while-revalidate=N` | Serve stale content while revalidating in background          |
+| `stale-if-error=N`         | Serve stale content if origin returns an error                |
+| `must-revalidate`          | Stale responses must not be used without revalidation         |
 
 ### Example: Cache for 1 hour at the edge
 
@@ -150,8 +150,8 @@ Deno.serve(() => {
 
 **Use cases for `Deno-Cache-Id`:**
 
-- Content that should remain cached across deployments (e.g., static assets
-  with content-based hashes)
+- Content that should remain cached across deployments (e.g., static assets with
+  content-based hashes)
 - Long-lived cached responses where you want explicit control over invalidation
 - Sharing cached responses between deployment revisions
 
