@@ -195,7 +195,6 @@ site.addEventListener("afterBuild", async () => {
       );
       const {
         collectFiles,
-        generateLlmsTxt,
         generateLlmsSummaryTxt,
         generateLlmsFullTxt,
         generateLlmsJson,
@@ -206,11 +205,6 @@ site.addEventListener("afterBuild", async () => {
 
       const files = await collectFiles();
       log.info(`Collected ${files.length} documentation files for LLMs`);
-
-      // Generate llms.txt
-      const llmsTxt = generateLlmsTxt(files);
-      Deno.writeTextFileSync(site.dest("llms.txt"), llmsTxt);
-      log.info("Generated llms.txt in site root");
 
       // Generate llms-summary.txt
       const llmsSummaryTxt = generateLlmsSummaryTxt(files);
