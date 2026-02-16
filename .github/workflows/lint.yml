@@ -37,12 +37,31 @@ jobs:
         working-directory: "reference_gen"
         run: deno task doc
 
+      - name: Restore OG image cache
+        uses: actions/cache@v4
+        id: og-cache
+        with:
+          path: .og-cache
+          key: og-images-${{ hashFiles('open_graph/**') }}
+          restore-keys: og-images-
+
       - name: Build
         env:
           ORAMA_PROJECT_ID: ${{ vars.ORAMA_PROJECT_ID }}
           ORAMA_DATASOURCE_ID: ${{ vars.ORAMA_DATASOURCE_ID }}
           ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
+          SKIP_OG: ${{ steps.og-cache.outputs.cache-hit == 'true' && '1' || '' }}
         run: deno task build
+
+      - name: Restore cached OG images
+        if: steps.og-cache.outputs.cache-hit == 'true'
+        run: cp -r .og-cache/_site/* _site/ 2>/dev/null || true
+
+      - name: Save OG images to cache
+        if: steps.og-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .og-cache/_site
+          cd _site && find . -name "index.png" -exec cp --parents {} ../.og-cache/_site/ \;
 
       - name: Run server
         run: deno run --allow-read=. --allow-net --allow-env --lock=deno.lock server.ts &

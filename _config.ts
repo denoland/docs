@@ -146,7 +146,6 @@ site.copy("runtime/reference/images");
 site.copy("runtime/contributing/images");
 site.copy("examples/tutorials/images");
 site.copy("deploy/manual/images");
-site.copy("deploy/images");
 site.copy("examples/scripts");
 
 site.use(
@@ -308,7 +307,7 @@ site.data("apiCategories", {
 });
 
 // Do more expensive operations if we're building the full site
-if (Deno.env.get("BUILD_TYPE") == "FULL") {
+if (Deno.env.get("BUILD_TYPE") == "FULL" && !Deno.env.has("SKIP_OG")) {
   // Use Lume's built in date function to get the last modified date of the file
   // site.data("date", "Git Last Modified");;
 
