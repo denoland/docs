@@ -2095,7 +2095,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -2355,7 +2355,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -2732,7 +2732,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -3537,7 +3537,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -4458,7 +4458,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -5165,7 +5165,7 @@
           "short": "n",
           "long": "name",
           "required": false,
-          "help": "Set a name for the kernel (defaults to 'deno'). \u001b[38;5;245mUseful when maintaining multiple Deno kernels.\u001b[39m",
+          "help": "Set a name for the kernel (defaults to 'deno'). \u001b[38;5;245mUseful when maintaing multiple Deno kernels.\u001b[39m",
           "help_heading": null,
           "usage": "--name <name>"
         },
@@ -5174,7 +5174,7 @@
           "short": "d",
           "long": "display",
           "required": false,
-          "help": "Set a display name for the kernel (defaults to 'Deno'). \u001b[38;5;245mUseful when maintaining multiple Deno kernels.\u001b[39m",
+          "help": "Set a display name for the kernel (defaults to 'Deno'). \u001b[38;5;245mUseful when maintaing multiple Deno kernels.\u001b[39m",
           "help_heading": null,
           "usage": "--display <display>"
         },
@@ -5645,7 +5645,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -7287,6 +7287,15 @@
           "help": "Version \u001b[38;5;245m(v1.46.0)\u001b[39m, channel \u001b[38;5;245m(rc, canary)\u001b[39m or commit hash \u001b[38;5;245m(9bc2dd29ad6ba334fd57a20114e367d3c04763d4)\u001b[39m",
           "help_heading": null,
           "usage": "[VERSION]..."
+        },
+        {
+          "name": "checksum",
+          "short": null,
+          "long": "checksum",
+          "required": false,
+          "help": "Verify the downloaded archive against the provided SHA256 checksum",
+          "help_heading": "Upgrade options",
+          "usage": "--checksum <checksum>"
         },
         {
           "name": "cert",
