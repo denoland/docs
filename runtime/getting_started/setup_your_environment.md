@@ -13,6 +13,7 @@ Deno while you are developing.
 We'll cover:
 
 - How to use Deno with your favorite editor/IDE
+- How to use Deno with AI coding assistants
 - How to generate shell completions
 
 ## Setting up your editor/IDE
@@ -43,6 +44,34 @@ following configuration:
 That’s it! You’ve successfully set up your developer environment for Deno using
 VSCode. You will now get all the benefits of Deno’s LSP, including IntelliSense,
 code formatting, linting, and more.
+
+### Skills for AI assistants
+
+Deno provides official **skills** — specialized knowledge packs that give AI
+coding assistants (such as Claude, GitHub Copilot, Cursor, and others) accurate,
+up-to-date knowledge of Deno's APIs, conventions, and best practices.
+
+Without these skills, AI assistants may suggest Node.js-specific patterns or
+outdated Deno APIs. Loading the relevant skill ensures the assistant understands
+Deno's module system, standard library, `deno.json` configuration, Deno Deploy,
+Fresh, and more.
+
+Skills are available at
+[github.com/denoland/skills](https://github.com/denoland/skills). Each skill is
+a plain text or markdown file you can paste into your AI assistant's context,
+add to a project-level instructions file (e.g. `CLAUDE.md`,
+`.github/copilot-instructions.md`), or configure as a persistent system prompt —
+depending on your tool.
+
+Available skills include:
+
+- **deno-guidance** — foundational Deno knowledge: module imports, `deno.json`,
+  CLI commands, and package selection
+- **deno-deploy** — deploying to Deno Deploy, KV, environment variables, and the
+  `deno deploy` CLI
+- **deno-frontend** — building web UIs with the Fresh framework and Preact
+- **deno-expert** — advanced Deno patterns for code review and debugging
+- **deno-sandbox** — executing untrusted code safely with `@deno/sandbox`
 
 ### JetBrains IDEs
 
