@@ -50,7 +50,7 @@ Create a new volume based on the `builtin:debian-13` image:
 const volume = await client.volumes.create({
   region: "ord",
   slug: "my-toolchain",
-  capacity: "10GB"
+  capacity: "10GB",
 });
 
 console.log(`Bootable volume ready: ${volume.slug}`);
