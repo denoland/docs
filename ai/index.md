@@ -153,7 +153,6 @@ deno init --serve
 - [llms-full-guide.txt](/llms-full-guide.txt): agent-oriented quick reference
   with CLI commands, code examples, and usage patterns
 - [llms-summary.txt](/llms-summary.txt): compact, high-signal index
-- [llms.json](/llms.json): structured index (Orama summary)
 - [llms-full.txt](/llms-full.txt): full content dump (large)
 - [Site search](/): use the on-site search UI for human browsing
 - [Skills](https://github.com/denoland/skills): AI skills for coding assistants
@@ -165,7 +164,5 @@ deno init --serve
   commands, permissions, configuration, and code examples.
 - Use `llms-summary.txt` for a compact, scored selection of the most important
   pages.
-- Use `llms.json` when you need structured metadata (category, section,
-  docType).
 - `llms-full.txt` is large; only fetch it when you need full-text extraction.
 - When possible, follow canonical URLs for stable citations.
