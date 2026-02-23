@@ -47,8 +47,8 @@ export const sidebar = [
         href: "/deploy/reference/domains/",
       },
       {
-        title: "Cron Jobs",
-        href: "/deploy/reference/cron_jobs/",
+        title: "Cron",
+        href: "/deploy/reference/cron/",
       },
       {
         title: "Deno KV",
