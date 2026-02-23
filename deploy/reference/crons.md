@@ -47,7 +47,7 @@ Deno.cron(
 | Every Wednesday at midnight    | `0 0 * * WED`  |
 | First of the month at midnight | `0 0 1 * *`    |
 
-### Top-level registration
+### Organizing cron declarations
 
 You must register crons at the module top level, before `Deno.serve()` starts.
 The platform extracts `Deno.cron()` definitions at deployment time by evaluating
@@ -55,7 +55,52 @@ your module's top-level code — this is how it discovers which crons exist and
 what their schedules are. Crons registered inside request handlers,
 conditionals, or after the server starts will not be picked up.
 
+As the number of crons grows, keeping them all in your main entrypoint can get
+noisy. A common convention is to define cron handlers in a dedicated file and
+import it at the top of your entrypoint.
+
+```typescript title="crons.ts"
+Deno.cron("cleanup-old-data", "0 * * * *", async () => {
+  await deleteExpiredRecords();
+});
+
+Deno.cron("sync-data", "*/15 * * * *", async () => {
+  await syncExternalData();
+});
+```
+
+```typescript title="main.ts"
+import "./crons.ts";
+
+Deno.serve(handler);
+```
+
+Because `Deno.cron()` calls execute at the module top level, the import alone is
+enough to register them — no need to call or re-export anything.
+
+For projects with many crons, you can use a `crons/` directory with one file per
+cron or group of related crons, and a barrel file that re-exports them:
+
+```typescript title="crons/mod.ts"
+import "./cleanup.ts";
+import "./sync.ts";
+```
+
+```typescript title="main.ts"
+import "./crons/mod.ts";
+
+Deno.serve(handler);
+```
+
 ## Execution lifecycle & status
+
+When a cron is due, it fires independently on each timeline where it's
+registered. Each execution runs the handler from that timeline's active
+revision. For example, if a `cleanup-old-data` cron is registered in both the
+production timeline and a `staging` branch timeline, the production execution
+runs the handler from the production revision, and the staging execution runs
+the handler from the staging revision. Each execution will be billed as one
+inbound HTTP request.
 
 Cron executions progress through these statuses:
 
@@ -128,11 +173,3 @@ remove, or modify crons, update your code and deploy a new revision. Rolling
 back to a previous deployment re-registers the crons from that deployment. You
 can see which crons are currently registered in a given timeline from its page
 in the dashboard.
-
-## Limitations
-
-- Crons must be registered at the module top level (before `Deno.serve()`)
-- No concurrent executions of the same cron
-- Maximum **5 retries** per execution
-- Maximum backoff delay: **1 hour** (3,600,000 ms)
-- Cron executions are billed as inbound HTTP requests
