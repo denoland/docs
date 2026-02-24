@@ -64,6 +64,7 @@ include usage examples.
 - [@std/ulid](./ulid/) – Generation of Universally Unique Lexicographically Sortable Identifiers (ULIDs)
 - [@std/uuid](./uuid/) – Generators and validators for UUIDs
 - [@std/webgpu](./webgpu/) – UNSTABLE: Utilities for working with the Web GPU API
+- [@std/xml](./xml/) – XML parsing and serialization for Deno.
 - [@std/yaml](./yaml/) – Parsing and serializing of YAML files
 <!-- packages:end -->
 
