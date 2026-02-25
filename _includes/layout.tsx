@@ -51,6 +51,13 @@ export default function Layout(data: Lume.Data) {
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        {data.page?.sourcePath?.endsWith(".md") && (
+          <link
+            rel="alternate"
+            type="text/markdown"
+            href={`${data.url.replace(/\/$/, "")}.md`}
+          />
+        )}
         <link rel="me" href="https://fosstodon.org/@deno_land" />
         <data.comp.OpenGraph
           title={data.title}

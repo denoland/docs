@@ -16,6 +16,8 @@ import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 // See note below about GFM CSS
 // import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.11.0/style.ts";
+import { walk } from "@std/fs";
+import { dirname } from "@std/path";
 import { log } from "lume/core/utils/log.ts";
 import anchor from "npm:markdown-it-anchor@9";
 import admonitionPlugin from "./markdown-it/admonition.ts";
@@ -28,6 +30,7 @@ import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware from "./middleware/redirects.ts";
 import createLlmsFilesMiddleware from "./middleware/llmsFiles.ts";
+import createMarkdownSourceMiddleware from "./middleware/markdownSource.ts";
 import { toFileAndInMemory } from "./utils/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
 
@@ -73,6 +76,7 @@ const site = lume(
     server: {
       middlewares: [
         redirectsMiddleware,
+        createMarkdownSourceMiddleware({ root: "_site" }),
         createRoutingMiddleware(),
         createGAMiddleware({
           addr: { transport: "tcp", hostname: "localhost", port: 3000 },
@@ -230,6 +234,27 @@ site.addEventListener("afterBuild", async () => {
       log.error("Error generating LLMs files:" + error);
     }
   }
+
+  // Copy source .md files to _site so AI agents can request them directly
+  const contentDirs = ["runtime", "deploy", "sandbox", "subhosting", "examples"];
+  let mdCopied = 0;
+  for (const dir of contentDirs) {
+    try {
+      for await (
+        const entry of walk(dir, { exts: [".md"], includeDirs: false })
+      ) {
+        const destPath = site.dest(entry.path);
+        await Deno.mkdir(dirname(destPath), { recursive: true });
+        await Deno.copyFile(entry.path, destPath);
+        mdCopied++;
+      }
+    } catch (error) {
+      if (!(error instanceof Deno.errors.NotFound)) {
+        log.error(`Error copying markdown files from ${dir}: ${error}`);
+      }
+    }
+  }
+  log.info(`Copied ${mdCopied} source markdown files to _site`);
 });
 
 site.copy("reference_gen/gen/deno/page.css", "/api/deno/page.css");
