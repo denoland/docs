@@ -51,7 +51,7 @@ export default function Layout(data: Lume.Data) {
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        {data.page?.sourcePath?.endsWith(".md") && (
+        {data.page?.sourcePath?.endsWith(".md") && data.url !== "/" && (
           <link
             rel="alternate"
             type="text/markdown"

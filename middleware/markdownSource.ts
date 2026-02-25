@@ -1,8 +1,14 @@
 import { join } from "@std/path";
+import { log } from "lume/core/utils/log.ts";
 import type { RequestHandler } from "lume/core/server.ts";
 
+interface MarkdownSourceMiddlewareOptions {
+  /** Directory where the built static assets live. */
+  root?: string;
+}
+
 export default function createMarkdownSourceMiddleware(
-  { root = "_site" }: { root?: string } = {},
+  { root = "_site" }: MarkdownSourceMiddlewareOptions = {},
 ): RequestHandler {
   const absoluteRoot = root.startsWith("/") ? root : join(Deno.cwd(), root);
 
@@ -12,6 +18,10 @@ export default function createMarkdownSourceMiddleware(
     // Case A: Direct .md URL request (e.g. /runtime/getting_started/installation.md)
     if (pathname.endsWith(".md")) {
       const filePath = join(absoluteRoot, pathname.slice(1));
+      // Prevent path traversal attacks (e.g. /../../etc/passwd.md)
+      if (!filePath.startsWith(absoluteRoot + "/")) {
+        return new Response("Forbidden", { status: 403 });
+      }
       try {
         const file = await Deno.readFile(filePath);
         const headers = new Headers({
@@ -21,9 +31,9 @@ export default function createMarkdownSourceMiddleware(
         return new Response(file, { headers });
       } catch (error) {
         if (error instanceof Deno.errors.NotFound) {
-          return new Response("Not Found", { status: 404 });
+          return next(req);
         }
-        console.error(`Failed serving ${pathname} from ${filePath}`, error);
+        log.error(`Failed serving ${pathname} from ${filePath}: ${error}`);
         return new Response("Internal Server Error", { status: 500 });
       }
     }
@@ -31,11 +41,18 @@ export default function createMarkdownSourceMiddleware(
     // Case B: Accept: text/markdown header — content negotiation
     // Tools like Claude Code send this header when they prefer markdown over HTML
     const acceptHeader = req.headers.get("accept") ?? "";
-    if (acceptHeader.includes("text/markdown")) {
+    if (
+      acceptHeader.includes("text/markdown") &&
+      !acceptHeader.includes("text/html")
+    ) {
       // Convert the HTML path to its .md equivalent
-      // e.g. /runtime/getting_started/installation/ -> runtime/getting_started/installation.md
+      // e.g. /runtime/getting_started/installation/ -> /runtime/getting_started/installation.md
       const mdPath = pathname.replace(/\/$/, "") + ".md";
       const filePath = join(absoluteRoot, mdPath.slice(1));
+      // Prevent path traversal attacks
+      if (!filePath.startsWith(absoluteRoot + "/")) {
+        return new Response("Forbidden", { status: 403 });
+      }
       try {
         const file = await Deno.readFile(filePath);
         const headers = new Headers({
@@ -45,10 +62,18 @@ export default function createMarkdownSourceMiddleware(
         return new Response(file, { headers });
       } catch (error) {
         if (error instanceof Deno.errors.NotFound) {
-          // No .md source for this page (e.g. generated API reference) — serve HTML normally
-          return next(req);
+          // No .md source for this page (e.g. generated API reference) — serve HTML normally.
+          // Add Vary: Accept so HTTP caches don't serve this HTML to markdown-only requests.
+          const response = await next(req);
+          const headers = new Headers(response.headers);
+          headers.set("vary", "Accept");
+          return new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers,
+          });
         }
-        console.error(`Failed serving markdown for ${pathname}`, error);
+        log.error(`Failed serving markdown for ${pathname}: ${error}`);
         return new Response("Internal Server Error", { status: 500 });
       }
     }

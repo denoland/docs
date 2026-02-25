@@ -235,7 +235,8 @@ site.addEventListener("afterBuild", async () => {
     }
   }
 
-  // Copy source .md files to _site so AI agents can request them directly
+  // Copy source .md files to _site so AI agents can request them directly.
+  // Excludes "reference/" (dynamically generated, no static .md source files).
   const contentDirs = [
     "runtime",
     "deploy",
@@ -244,7 +245,18 @@ site.addEventListener("afterBuild", async () => {
     "examples",
   ];
   let mdCopied = 0;
+  let mdErrors = false;
   for (const dir of contentDirs) {
+    // Skip directories that don't exist in this build
+    try {
+      await Deno.stat(dir);
+    } catch (error) {
+      if (error instanceof Deno.errors.NotFound) {
+        continue;
+      }
+      log.error(`Error accessing content directory ${dir}: ${error}`);
+      continue;
+    }
     try {
       for await (
         const entry of walk(dir, { exts: [".md"], includeDirs: false })
@@ -255,12 +267,17 @@ site.addEventListener("afterBuild", async () => {
         mdCopied++;
       }
     } catch (error) {
-      if (!(error instanceof Deno.errors.NotFound)) {
-        log.error(`Error copying markdown files from ${dir}: ${error}`);
-      }
+      log.error(`Error copying markdown files from ${dir}: ${error}`);
+      mdErrors = true;
     }
   }
-  log.info(`Copied ${mdCopied} source markdown files to _site`);
+  if (mdErrors) {
+    log.warn(
+      `Copied ${mdCopied} source markdown files to _site (some directories had errors, see above)`,
+    );
+  } else {
+    log.info(`Copied ${mdCopied} source markdown files to _site`);
+  }
 });
 
 site.copy("reference_gen/gen/deno/page.css", "/api/deno/page.css");
