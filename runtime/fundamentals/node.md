@@ -32,7 +32,7 @@ That's all you really need to know to get started! However, there are some key
 differences between the two runtimes that you can take advantage of to make your
 code simpler and smaller when migrating your Node.js projects to Deno.
 
-We provide a (list of supported Node.js APIs)[/runtime/reference/node_apis/]
+We provide a [list of supported Node.js APIs](/runtime/reference/node_apis/)
 that you can use in Deno.
 
 ## Quick start
@@ -147,7 +147,7 @@ npm specifiers have the following format:
 npm:<package-name>[@<version-requirement>][/<sub-path>]
 ```
 
-This also allows functionality that may be familar from the `npx` command.
+This also allows functionality that may be familiar from the `npx` command.
 
 ```console
 # npx allows remote execution of a package from npm or a URL
@@ -409,10 +409,10 @@ are as follows:
 
 This means that the first condition listed in a package export whose key equals
 any of these strings will be matched. You can expand this list using the
-`--unstable-node-conditions` CLI flag:
+`--conditions` CLI flag:
 
 ```shell
-deno run --unstable-node-conditions development,react-server main.ts
+deno run --conditions development,react-server main.ts
 ```
 
 ```json

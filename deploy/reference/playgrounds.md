@@ -3,8 +3,6 @@ title: Playgrounds
 description: "Write and deploy code completely from Deno Deploy, without the need for a git repository."
 ---
 
-![Deno Deploy Playground](https://deno.com/video/playground-1-720.mp4)
-
 Playground applications enable you to create, edit, and deploy applications
 entirely from the Deno Deploy web dashboard, without needing to create a GitHub
 repository.

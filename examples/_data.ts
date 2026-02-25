@@ -108,6 +108,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Sharing your local server with tunnel",
+        href: "/examples/tunnel_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Generating documentation with deno doc",
         href: "/examples/deno_doc_tutorial/",
         type: "tutorial",
@@ -301,6 +306,101 @@ export const sidebar = [
     ],
   },
   {
+    title: "Deno Sandbox",
+    items: [
+      {
+        title: "Evaluating JavaScript",
+        href: "/examples/sandbox_evaluating_javascript/",
+        type: "example",
+      },
+      {
+        title: "Spawn a subprocess",
+        href: "/examples/sandbox_spawn_subprocess/",
+        type: "example",
+      },
+      {
+        title: "Serve a web framework",
+        href: "/examples/sandbox_web_framework/",
+        type: "example",
+      },
+      {
+        title: "Provide SSH access to a sandbox",
+        href: "/examples/sandbox_ssh_access/",
+        type: "example",
+      },
+      {
+        title: "Interactive JavaScript REPL",
+        href: "/examples/sandbox_javascript_repl/",
+        type: "example",
+      },
+      {
+        title: "Provide a VSCode instance in a sandbox",
+        href: "/examples/sandbox_vscode_instance/",
+        type: "example",
+      },
+      {
+        title: "Use template literals with variable interpolation",
+        href: "/examples/sandbox_template_literals/",
+        type: "example",
+      },
+      {
+        title: "Error handling",
+        href: "/examples/sandbox_error_handling/",
+        type: "example",
+      },
+      {
+        title: "Command cancellation",
+        href: "/examples/sandbox_command_cancellation/",
+        type: "example",
+      },
+      {
+        title: "Streaming access string and binary output",
+        href: "/examples/sandbox_access_output/",
+        type: "example",
+      },
+      {
+        title: "Set and get environment variables",
+        href: "/examples/sandbox_environment_variables/",
+        type: "example",
+      },
+      {
+        title: "Stream output to a local file",
+        href: "/examples/sandbox_stream_output/",
+        type: "example",
+      },
+      {
+        title: "Upload files and directories to a sandbox",
+        href: "/examples/sandbox_upload_files/",
+        type: "example",
+      },
+      {
+        title: "Control sandbox timeout",
+        href: "/examples/sandbox_timeout_control/",
+        type: "example",
+      },
+      {
+        title: "Configure sandbox memory",
+        href: "/examples/sandbox_memory/",
+        type: "example",
+      },
+      {
+        title: "Add read-write volumes to your Sandbox",
+        href: "/examples/volumes_tutorial/",
+        type: "example",
+      },
+      {
+        title: "Boot instantly with snapshots",
+        href: "/examples/snapshots_tutorial/",
+        type: "example",
+      },
+      {
+        title: "Boot a Python environment with snapshots",
+        href: "/examples/snapshot_python_tutorial/",
+        type: "tutorial",
+      },
+    ],
+  },
+  {
     title: "Testing",
     items: [
       {
@@ -325,7 +425,7 @@ export const sidebar = [
       },
       {
         title: "Snapshot testing",
-        href: "/examples/snapshot_tutorial/",
+        href: "/examples/snapshot_test_tutorial/",
         type: "tutorial",
       },
       {
@@ -376,6 +476,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "View telemetry data for your local application",
+        href: "/examples/tunnel_telemetry_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Export telemetry to Honeycomb",
         href: "/examples/honeycomb_tutorial/",
         type: "tutorial",
@@ -408,6 +513,11 @@ export const sidebar = [
       {
         title: "Migrating a custom domain to Deno Deploy",
         href: "/examples/migrate_custom_domain_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Connecting to a database both locally and on Deno Deploy",
+        href: "/examples/tunnel_database_tutorial/",
         type: "tutorial",
       },
       {

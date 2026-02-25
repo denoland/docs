@@ -172,7 +172,7 @@ restore them from cache instead of re-downloading.
 To demonstrate, let's say you have a project that uses the logger from
 [`@std/log`](https://jsr.io/@std/log):
 
-```json, title="deno.json"
+```json title="deno.json"
 {
   "imports": {
     "@std/log": "jsr:@std/log@0.224.5"

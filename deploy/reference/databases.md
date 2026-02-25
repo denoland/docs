@@ -3,105 +3,225 @@ title: Databases
 description: Connect to external database instances and integrate your applications and their environments seamlessly.
 ---
 
-The databases feature allows you to connect your applications to external
-databases and provision managed data stores. When you assign a database to an
-app, Deno Deploy automatically provisions separate databases for each deployment
-environment - production, Git branches, and preview timelines.
+Deno Deploy's databases feature enables your applications to easily connect to a
+variety of databases, enabling seamless state management in your apps.
+Currently, PostgreSQL and Deno KV are supported.
 
-Your code automatically connects to the correct database for each environment
-without requiring timeline detection or manual database name handling. Simply
-use your favorite database driver to connect - Deno Deploy handles the
-connection details automatically via environment variables.
+After creating or linking a database instance, Deno Deploy automatically creates
+isolated (logical) databases inside of that instance for each deployment
+environment, including production, Git branches, and preview timelines. Your
+application code connects to the appropriate database based on the current
+environment, using automatically injected environment variables. This ensures
+that your data remains consistent and isolated across different stages of
+development and deployment.
 
-## Getting Started
+Deno Deploy currently supports two database engines:
 
-There are two ways to add data backends to your apps on the Databases page:
+- **PostgreSQL** — Connect an existing externally hosted PostgreSQL instance, or
+  provision a managed PostgreSQL database through Deno Deploy, hosted by Prisma.
+- **Deno KV** — Provision a fast, globally distributed key‑value store built for
+  the edge.
 
-- Link Database: Connect an existing external database (for example, a
-  PostgreSQL server you run or a managed instance from a cloud provider).
-- Provision Database: Create and attach a managed data store from Deploy (Deno
-  KV or Prisma Postgres).
+## Creating a database instance
 
-### Adding a Database
+There are two ways to add a database instance to your Deno Deploy organization:
 
-Navigate to your organization dashboard and click "Databases" in the navigation
-bar. From here, choose the flow that matches your use case:
+- **Link Database**: Connect an existing external database instance (for
+  example, a PostgreSQL server you run or a managed instance from a cloud
+  provider).
+- **Provision Database**: Create and attach a managed data store from Deno
+  Deploy (Deno KV or Prisma Postgres).
 
-#### Link an external database
+### Linking an external database
 
-- Click "**Link Database**" to connect an existing database instance.
-- Choose PostgreSQL and either enter connection details manually or paste a
-  connection string to automatically populate the form.
-- Details typically include hostname, port (usually 5432), username, password,
-  and optionally a CA certificate if required by your provider.
-- Use "Test Connection" to verify settings, then give the instance a name and
-  click "Save".
+To link an existing external database instance you can either:
 
-Instead of filling out individual fields, you can paste a connection string like
-`postgresql://username:password@hostname:port/database` to automatically
-populate the form fields.
+- go to the "Databases" page in your organization dashboard and click the "Link
+  Database" button,
+- go to the "Databases" tab in your app settings, click on "Attach Database",
+  then select "Link Database" in database instance selection dropdown.
 
-**Common formats:**
+From here, enter the connection details for your external database instance. You
+will need to provide:
 
-- PostgreSQL: `postgresql://user:pass@localhost:5432/dbname` or
-  `postgres://user:pass@localhost:5432/dbname`
+- **Engine**: Select the database engine (currently only PostgreSQL is
+  supported).
+- **Connection Details**: Enter the hostname, port, username, password, and
+  optionally a CA certificate if required by your provider. You can also paste a
+  connection string to automatically populate these fields.
+- **Slug**: Give your database instance a descriptive name to identify it in the
+  dashboard. This name is only used within Deno Deploy and does not affect your
+  actual database server.
 
-#### Provision a managed database
+Once you've filled out the form, click "Test Connection" to verify your
+settings. If the connection is successful, click "Save" to add the database
+instance to your organization.
 
-- Click "Provision Database" to create a managed data store from Deploy.
-- Available today:
-  - Deno KV — a fast, globally distributed key‑value store built for the edge.
-  - Prisma Postgres - the world's most advanced open source relational database,
-    hosted by Prisma.
+If the connection fails, double-check your connection details and ensure that
+your database server is accessible from Deno Deploy's network. We are unable to
+provide a list of IP addresses for Deno Deploy at this time, so please ensure
+your database server allows connections from all IPs. If you continue to have
+trouble, you can [contact support](/deploy/support/) for assistance.
 
-### Connecting an App to a Database
+:::info
 
-Once you have a database instance (linked or provisioned), you can assign it to
-your apps. From the database instances list, click "Assign" next to your
-database instance and select the app from the dropdown. Optionally, you can
-configure a migration command that will run automatically after each build (see
-[Automated Migration Commands](#automated-migration-commands) for details).
+Because Deno Deploy creates isolated databases for each environment (production,
+Git branches, and previews), ensure that the database user you provide has
+sufficient privileges to create new databases on the server.
 
-Deno Deploy automatically creates isolated data scopes for each timeline. For
-PostgreSQL, this means separate databases with the following naming scheme:
+:::
 
-- Production deployments use `{app-id}-production`
-- Git branches get `{app-id}--{branch-name}`
-- Preview deployments use `{app-id}-preview`
+#### TLS/SSL configuration
 
-This ensures your production data stays safe while developing and testing. You
-can monitor the provisioning process and watch the status change to "Connected".
-If there are any errors, use the "Fix" button to retry.
+When linking an external database, Deno Deploy supports secure SSL/TLS
+connections. Depending on your database provider, you may need to upload a CA
+certificate to verify the server's identity.
 
-## Using Databases in Your Code
-
-### Zero Configuration Required
-
-Once you've assigned a database to your app, connecting to it from your code is
-simple. You don't need to configure connection strings, set up environment
-variables, or manage credentials - Deno Deploy handles all of this
+If your database provider uses a trusted root Certificate Authority (CA), such
+as Let's Encrypt, no certificate upload is needed and SSL connections work
 automatically.
 
-Simply use your favorite database library as you normally would, and it will
-automatically connect to the correct database for your current environment.
+For users of AWS RDS, we will automatically detect RDS instances and provide an
+option to "Use AWS Certificate Bundle" to configure the necessary certificates
+without manual downloads.
 
-### Automatic Environment Variables
+For Google Cloud SQL users, you will need to download the Google Cloud SQL CA
+certificate from your Google Cloud Console and upload it when linking your
+database.
 
-For PostgreSQL databases (both linked and provisioned), Deno Deploy
+For other providers using self-signed certificates or private CAs, you will need
+to upload the specific CA certificate that was used to sign your database's
+certificate. You can usually obtain this from your database provider's
+documentation or console.
+
+### Provisioning a managed database
+
+To create and attach a managed database instance from Deno Deploy, you can
+either:
+
+- go to the "Databases" page in your organization dashboard and click the
+  "Provision Database" button,
+- go to the "Databases" tab in your app settings, click on "Attach Database",
+  then select "Provision Database" in database instance selection dropdown.
+
+From here, select the database engine you want to provision. Available today:
+
+- **Deno KV** — a fast, globally distributed key‑value store built for the edge,
+  hosted by Deno on your behalf.
+- **Prisma Postgres** — the world's most advanced open source relational
+  database, hosted by [Prisma](https://www.prisma.io/).
+
+You will have to provide a **Slug** to identify the database instance in the
+dashboard. This name is only used within Deno Deploy and does not affect your
+actual database server.
+
+Depending on the engine you select, there may be additional configuration
+options, such as choosing a region. Choosing a region close to your
+application's users can help reduce latency and improve performance of your
+database queries.
+
+Once you're ready, click "Provision" to create the database instance. Deno
+Deploy will handle the provisioning process and set up the necessary
+infrastructure on your behalf.
+
+## Linking databases to your apps
+
+After creating or linking a database instance, you can assign it to your apps.
+Each database instance can be assigned to multiple apps. Each app gets its own
+isolated databases within the instance for each deployment environment
+(production, Git branches, and preview timelines).
+
+:::info
+
+It is not currently possible to link multiple database instances to a single
+app. It is thus not possible to link both a Deno KV and a PostgreSQL database to
+the same app at this time.
+
+:::
+
+Once assigned, Deno Deploy automatically creates an isolated database for each
+timeline within that app. The naming scheme for these databases is as follows:
+
+- The single production database uses the format `{app-id}-production`
+- Each Git branch database uses the format `{app-id}--{branch-name}`
+- A singular preview database exists, with the format `{app-id}-preview`
+
+:::info
+
+Currently only one preview database is created per app, shared across all
+preview deployments. In future releases, each preview deployment will get its
+own isolated database.
+
+:::
+
+To assign a database to an app you can either:
+
+- Go to the "Databases" page in your organization dashboard, find the database
+  instance you want to assign, click "Assign", then select the app from the
+  dropdown.
+- Go to the "Databases" tab in your app settings, click on "Attach Database",
+  then select the database instance from the dropdown.
+
+Once assigned, Deno Deploy will automatically create the necessary isolated
+databases for each environment within that app.
+
+## Connecting to databases from your code
+
+Once you've assigned a database to your app, connecting to it from your code is
+simple. Deno Deploy automatically handles connection details, credentials, and
+environment variables for you.
+
+### Deno KV
+
+For Deno KV, you can use the built-in `Deno.openKv()` API to connect to your
+assigned Deno KV instance. No additional configuration is needed - Deno Deploy
+automatically connects your app to the correct Deno KV instance based on the
+current environment.
+
+```typescript
+// No arguments needed - Deno Deploy handles this automatically
+const kv = await Deno.openKv();
+
+Deno.serve(async () => {
+  // Use the Deno KV instance
+  await kv.set(["user", "123"], { name: "Alice", age: 30 });
+  const user = await kv.get(["user", "123"]);
+
+  return new Response(JSON.stringify(user.value), {
+    headers: { "content-type": "application/json" },
+  });
+});
+```
+
+### PostgreSQL
+
+For PostgreSQL databases (both external and provisioned), Deno Deploy
 automatically injects standard database environment variables into your app's
-runtime environment: `PGHOST`, `PGPORT`, `PGDATABASE` (automatically selected
-for your environment), `PGUSER`, `PGPASSWORD`, `PGSSLMODE`, and `DATABASE_URL`.
-These variables follow standard conventions, so most database libraries
-automatically detect and use them without any configuration.
+runtime environment:
 
-### PostgreSQL Example
+- `DATABASE_URL`: A full connection string for the current environment, in the
+  format `postgresql://username:password@hostname:port/database`.
+- `PGHOST`: The database server hostname.
+- `PGPORT`: The database server port.
+- `PGDATABASE`: The database name for the current environment.
+- `PGUSER`: The database username.
+- `PGPASSWORD`: The database password.
 
-Here's how to connect to PostgreSQL in your Deno Deploy app:
+If your database requires a custom SSL/TLS certificate, Deno Deploy also injects
+that certificate into the default certificate store, so that all SSL connections
+work automatically.
+
+You can use your favorite PostgreSQL client library (such as `pg` from npm) to
+connect to your database using these environment variables. Most libraries
+automatically detect and use these standard environment variables without any
+configuration.
+
+As an example, here's how to connect to PostgreSQL in your Deno Deploy app:
 
 ```typescript
 import { Pool } from "npm:pg";
 
-// No configuration needed - Deno Deploy handles this automatically
+// No arguments needed - the library reads connection details from environment variables automatically
 const pool = new Pool();
 
 Deno.serve(async () => {
@@ -114,247 +234,269 @@ Deno.serve(async () => {
 });
 ```
 
-### How It Works
+## Running migrations and seeding data
 
-Deno Deploy automatically detects which environment your code is running in
-(production, Git branch, or preview), then selects the appropriate database
-based on that environment. The correct connection details are automatically set
-as environment variables, and your database library reads these standard
-environment variables automatically.
+Since each environment has its own isolated database, you will often have many
+separate databases to manage in every app. It is not practical to manually run
+migrations or insert seed data into each database individually every time you
+deploy a new revision.
 
-Your code runs the same way across all environments but connects to different
-databases. The same `new Pool()` code works in production (connecting to
-`myappid-production`), Git branches (connecting to `myappid--branch-name`), and
-previews (connecting to `myappid-preview`).
+To streamline this process, Deno Deploy allows you to configure an automated
+pre-deploy command that runs every time a revision is rolled out to a timeline,
+before the deployment starts serving traffic.
 
-### Migration and Schema Management
+This command runs with the same environment variables available to your
+application, including `PGHOST`, `PGPORT`, `PGDATABASE`, etc., so you can use it
+to run migrations or seed data using your existing migration tools.
 
-Since each environment has its own database, you can safely test migrations in a
-Git branch without affecting production or other branch-specific databases.
+To set up an automated migration command, head to the Settings page of your app,
+and go to the App Config section. There you can edit the app configuration to
+set a pre-deploy command in the "Pre-Deploy Command" field (for example,
+`deno task migrate` or `npm run migrate`).
 
-#### Automated Migration Commands
+You can see the detailed logs of the pre-deploy command execution in the
+revision build logs, in the "Deployment" section.
 
-When assigning a database to an app, you can configure a migration command that
-automatically runs after each successful build. This ensures your database
-schema stays synchronized with your application code across all environments.
+As an example, you could set up a migration script using
+[`node-pg-migrate`](https://github.com/salsita/node-pg-migrate):
 
-**Setting Up a Migration Command:**
+1. Add a task to your `deno.json`:
+   ```json
+   {
+     "tasks": {
+       "migrate": "deno run --allow-net --allow-env --allow-read --allow-write npm:node-pg-migrate up"
+     }
+   }
+   ```
+2. Create a migrations directory and add migration files. For example,
+   `migrations/1234567890_create-users-table.js`:
+   ```javascript
+   exports.up = (pgm) => {
+     pgm.createTable("users", {
+       id: "id",
+       name: { type: "varchar(100)", notNull: true },
+       email: { type: "varchar(100)", notNull: true },
+       created_at: {
+         type: "timestamp",
+         notNull: true,
+         default: pgm.func("current_timestamp"),
+       },
+     });
+   };
+   exports.down = (pgm) => {
+     pgm.dropTable("users");
+   };
+   ```
+3. Set your pre-deploy command to `deno task migrate` in the app settings.
 
-1. When assigning a database to an app (or editing an existing assignment),
-   enter a migration command in the "Migration Command" field (e.g.,
-   `deno task migrate` or `npm run migrate`).
-2. This command executes automatically after every successful build of a new
-   revision.
-3. The command runs once for each database that the revision can connect to -
-   meaning it executes separately for production, each Git branch database, and
-   preview databases.
-4. The migration command runs with the same environment variables available to
-   your application, including `PGHOST`, `PGPORT`, `PGDATABASE`, etc.
+Deno Deploy will automatically run this command before each deployment, ensuring
+all your environment-specific databases stay up to date.
 
-**Example migration setup using node-pg-migrate:**
+Other migration tools such as Prisma Migrate, Drizzle, or Kysely can also be
+used in a similar way.
 
-Add a task to your `deno.json`:
+## Local Development
 
-```json
-{
-  "tasks": {
-    "migrate": "deno run --allow-net --allow-env --allow-read --allow-write npm:node-pg-migrate up"
-  }
-}
-```
+When developing locally, you have two options for your database setup:
 
-Create a migrations directory and add migration files. For example,
-`migrations/1234567890_create-users-table.js`:
+- Use a local database instance running on your machine, for example a local
+  PostgreSQL server or the built-in Deno KV backend in Deno.
+- Connect to a hosted isolated local development instance provisioned on Deno
+  Deploy, through `--tunnel`.
 
-```javascript
-exports.up = (pgm) => {
-  pgm.createTable("users", {
-    id: "id",
-    name: { type: "varchar(100)", notNull: true },
-    email: { type: "varchar(100)", notNull: true },
-    created_at: {
-      type: "timestamp",
-      notNull: true,
-      default: pgm.func("current_timestamp"),
-    },
+### Using a local database instance
+
+#### Deno KV
+
+For Deno KV, you can use the built-in `Deno.openKv()` API to connect to a local
+Deno KV instance. By default, this uses a local file-based backend stored in
+your home directory.
+
+```typescript
+const kv = await Deno.openKv(); // connects to local Deno KV instance
+
+Deno.serve(async () => {
+  // Use the Deno KV instance
+  await kv.set(["user", "123"], { name: "Alice", age: 30 });
+  const user = await kv.get(["user", "123"]);
+
+  return new Response(JSON.stringify(user.value), {
+    headers: { "content-type": "application/json" },
   });
-};
-
-exports.down = (pgm) => {
-  pgm.dropTable("users");
-};
+});
 ```
 
-Then set your migration command to `deno task migrate` when assigning the
-database to your app. Deno Deploy will automatically run this command after each
-build, ensuring all your environment-specific databases stay up to date.
+#### PostgreSQL
 
-### Local Development
+To install PostgreSQL locally, follow the instructions for your operating system
+on [postgresql.org](https://www.postgresql.org/download/). On macOS, you can use
+`brew install postgresql`, while many Linux distributions provide PostgreSQL
+packages through their package managers.
 
-When developing locally, you can use either a local PostgreSQL instance (install
-PostgreSQL through your package manager or download it from postgresql.org) or
-connect to a remote database server.
-
-Create a `.env` file (if one does not yet exist) in your project root and add to
-it the PostgreSQL connection details:
+After installing PostgreSQL, create a new database and user for your local
+development:
 
 ```bash
-PGHOST=localhost        # or your remote host
-PGPORT=5432
-PGDATABASE=myapp_dev
-PGUSER=myuser
-PGPASSWORD=mypassword
-PGSSLMODE=prefer        # or `require` for remote connections
+createdb myapp_dev
+createuser myuser --pwprompt
 ```
 
-Then run your application with the `--env` flag to automatically load these
-environment variables:
+Set up a `.env` file in your project root with the connection details for your
+local PostgreSQL instance:
 
 ```bash
-deno run --env --allow-all main.ts
+DATABASE_URL=postgresql://myuser:mypassword@localhost:5432/myapp_dev
 ```
 
-Your application code remains the same - it will automatically use these
-environment variables to connect to your chosen database during local
-development.
+You can then use your favorite PostgreSQL client library (such as `pg` from npm)
+to connect to your local database using the `DATABASE_URL` environment variable.
 
-## SSL Configuration (Linked databases)
+If you are using Deno for local development, you can pass the `--env-file` flag
+to automatically load environment variables from your `.env` file on startup:
 
-All connections to linked external databases use SSL encryption for security.
-The main difference is how certificates are handled depending on your database
-provider. This section does not apply to provisioned Deno KV.
+```bash
+deno run -A --env-file main.ts
+```
 
-### Certificate Types
+### Using a hosted isolated local development instance
 
-**Trusted Root CA Certificates:** Some database providers use certificates
-signed by trusted root Certificate Authorities (like Let's Encrypt or DigiCert).
-These work automatically without any configuration.
+Deno Deploy allows you to connect to a hosted isolated local development
+database when using the
+[`--tunnel` flag in Deno](https://docs.deno.com/deploy/reference/tunnel).
 
-**Private Root CA Certificates:** Some providers use self-signed certificates or
-private Certificate Authorities. In these cases, you need to upload the CA
-certificate that was used to sign your database's certificate.
+To set this up, first provision a database instance in your Deno Deploy
+organization, and assign it to your app as usual.
 
-### Certificate Configuration
+Next, start your local development server with the `--tunnel` flag:
 
-**For databases with trusted root CA certificates:** No certificate upload is
-needed and SSL connections work automatically. Some managed database services
-fall into this category.
+```bash
+deno task --tunnel dev
+# or
+deno run -A --tunnel main.ts
+```
 
-**For databases with private root CA certificates:** AWS RDS users can click
-"Use AWS Certificate Bundle" to automatically configure AWS RDS certificates
-without downloading them from AWS documentation. Other providers require you to
-upload the specific CA certificate provided by your database provider.
+Deno Deploy will automatically inject the appropriate database environment
+variables into your local environment, allowing your code to connect to the
+hosted isolated database instance. Please note that this database instance is
+shared across all developers using the same app, so be cautious when modifying
+data.
 
-### Common Providers
+:::info
 
-**AWS RDS** uses AWS's own Certificate Authority (not publicly trusted). Click
-"Use AWS Certificate Bundle" for automatic configuration without needing to
-manually download certificates from AWS docs.
+When using the `--tunnel` flag, Deno Deploy also enables other features such as:
 
-**Google Cloud SQL** uses Google's own Certificate Authority (not publicly
-trusted). You need to upload the Google Cloud SQL CA certificate, which you can
-download from your Google Cloud Console.
+- exporting your logs, traces, and metrics from your local environment to the
+  Deno Deploy dashboard
+- pulling environment variables from the "Local" context to your local
+  environment
+- exposing your local server to a public URL for easy sharing and testing
 
-**Self-Hosted Databases** require you to upload your custom CA certificate if
-using self-signed certificates, or you can configure your database to use
-publicly trusted CA certificates.
+If you do not want to use these features, consider using a local database
+instance instead.
 
-## Database Management
+:::
 
-### Viewing Database Details
+## Database management
 
-Click on any database instance to see connection information (hostname, port,
-engine type), assigned apps, individual databases created within the instance,
-and overall health and connection status.
+### Organization level
 
-### Database Status Indicators
+You can view and manage your database instances from the "Databases" page in
+your organization dashboard. Here you will find all your linked and provisioned
+database instances, along with their status, assigned apps, and connection
+details (if applicable).
 
-The dashboard shows clear status indicators:
+Clicking on a database instance takes you to the database detail page, where you
+can view more information about the instance, including assigned apps,
+individual databases created within the instance. For each database provisioned
+in the instance, you can see its name, status, and associated app and timeline.
 
-- **🟢 Connected** - All databases are ready and working
-- **🟡 Creating** - Databases are being provisioned
-- **🔴 Error** - Some databases failed to create
-- **⚪ Unassigned** - No apps are using this database yet
+If a database fails to create, you'll see an error status with a "Fix" button
+that you can use to retry the operation and view more detailed error
+information.
 
-### Managing App Assignments
+From this page, you can also detach database instances from an app, or delete
+the instance entirely.
 
-To assign a database to an app, click "Assign" on the database instance, select
-the app from the dropdown, optionally configure a migration command (see
-[Automated Migration Commands](#automated-migration-commands)), and confirm the
-assignment.
+Next to each database in the instance, you can open the database explorer (for
+PostgreSQL databases), or copy the connection string (`DATABASE_URL`), allowing
+you to easily connect to your databases from your local machine for debugging.
 
-To edit an existing app-database assignment (including updating the migration
-command), go to the database detail page, find the app in the "Assigned Apps"
-table, and click "Edit" next to the app.
+### App level
 
-To remove an app from a database, go to the database detail page, find the app
-in the "Assigned Apps" table, and click "Remove" next to the app.
+You can also manage database instances from the "Databases" tab in your app
+settings. Here you can see the database instance assigned to your app, along
+with its status and connection details.
 
-### Editing Database Settings
+You can see all databases created for your app within the assigned instance,
+including those for production, Git branches, and preview timelines. For each
+database, you can see its name and status.
 
-Click "Edit" on any database instance to update connection details. Test the
-connection to ensure it still works before saving your changes.
+You can open the database explorer (for PostgreSQL databases), and copy the
+connection string (`DATABASE_URL`) for each database directly from this page,
+allowing you to easily connect to your databases from your local machine for
+debugging.
 
-## Supported Database Engines
+## Database explorer
 
-- Deno KV (Provision Database) — fast, globally distributed key‑value store
-  built for the edge.
-- Prisma Postgres (Provision Database) — the world's most advanced open source
-  relational database, hosted by Prisma.
-- PostgreSQL (Link Database) — connect an existing external instance.
+Deno Deploy provides a built-in database explorer for PostgreSQL databases,
+allowing you to browse and manage your data directly from the Deno Deploy
+dashboard.
 
-Coming soon: additional engines such as MySQL, MongoDB, Redis, and more are
-planned for future releases.
+To access the database explorer, go to the "Databases" tab in your app settings,
+find the assigned PostgreSQL database instance, and click "Explore Database".
+This opens the database explorer interface, where you can view tables, run
+queries, and manage your data.
 
-## Troubleshooting
+:::info
 
-### Connection Issues
+The database explorer is not available for Deno KV databases at this time.
 
-**"Connection failed" errors** typically indicate:
+:::
 
-- Incorrect hostname and port
-- Wrong username and password
-- Database server not running
-- Network connectivity issues
+## Prisma Postgres instances and claiming
 
-Verify all connection details and ensure your database server is accessible.
+When you provision a managed Prisma Postgres database instance through Deno
+Deploy, the instance is initially "unclaimed". This means that the instance is
+managed by Deno Deploy on your behalf, but you do not have direct access to the
+Prisma account that owns the instance. Unclaimed instances have default limits
+on the number of databases and size based on Deno Deploy's plans.
 
-**"Permission denied" errors** mean the database user lacks necessary
-permissions. Verify the database user has the required permissions, can create
-databases, and can connect from Deno Deploy's servers.
+If you want to have full control over the Prisma Postgres instance, including to
+upgrade to a higher Prisma plan, you can "claim" the instance into your own
+Prisma account. To do this, go to the database instance detail page in the Deno
+Deploy dashboard, and click the "Claim Instance" button. You will be guided
+through the process of linking the instance to your Prisma account.
 
-**SSL connection issues** occur when:
+:::warning
 
-- Database instance uses a trusted root CA, but SSL connectivity is not
-  configured correctly on your database server
-- Database instance uses a private root CA, but you haven't uploaded the correct
-  CA certificate
-- Database server doesn't support SSL connections
-- Certificate has expired
+Claiming a Prisma Postgres instance is a permanent action and cannot be undone.
+Once claimed, the instance is managed through your Prisma account and will make
+use of your Prisma account limits (based on plan). The Deno Deploy integration
+to automatically create isolated databases for each app will continue to work as
+before.
 
-Check your database server's SSL configuration and certificate validity.
+:::
 
-### Provisioning Issues
+## Limits
 
-**"Database creation failed"** usually indicates:
+There is no limit on the number of linked database instances, or Deno KV
+instances you can create in your organization.
 
-- Database user lacks CREATE privileges
-- Insufficient disk space
-- Naming conflicts with existing databases
+For managed Prisma Postgres instances, only a couple of instances can be created
+per organization. In each Prisma Postgres instance, there is a limit to the
+number of databases that can be created, which directly affects the number of
+apps that can be assigned to that instance. Once a Prisma Postgres instance
+reaches its database limit, no more databases can be created in that instance.
 
-Check your database user permissions and server capacity.
+If a Prisma Postgres instance is "claimed" through your own Prisma account, the
+database limit is determined by your Prisma plan. For unclaimed Prisma Postgres
+instances, a default limit applies.
 
-**"Timeout" errors** suggest:
-
-- Network connectivity issues between Deno Deploy and your database server
-- Database server is slow to respond
-
-Check server load and performance.
-
-**"Error" status** can be resolved by:
-
-- Using the "Fix" button to retry failed operations
-- Checking your database server logs for more detailed information
+For managed Prisma Postgres instances, each database has a size limit and
+operation count limit based on the plan you are on. The usage is shown at the
+bottom of the database instance detail page. If you are on a claimed Prisma
+Postgres instance, the limits are determined by your Prisma plan. For unclaimed
+Prisma Postgres instances, a default limit applies.
 
 ## Frequently Asked Questions
 

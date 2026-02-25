@@ -118,7 +118,7 @@ certificates. -->
 
 Environment variables have the following limits:
 
-- Environment variable keys can be at most 128 bytes long.\
+- Environment variable keys can be at most 128 bytes long.
 - Environment variable keys can not start with:
   - `DENO_`, except for `DENO_AUTH_TOKENS`, `DENO_COMPAT`, `DENO_CONDITIONS`,
     `DENO_DEPLOY_ENDPOINT`, or `DENO_DEPLOY_TOKEN`
@@ -157,5 +157,10 @@ Deno Deploy provides these predefined environment variables in all contexts:
 - `DENO_DEPLOY_APP_SLUG`: The slug of the application.
 
 - `DENO_DEPLOY_BUILD_ID`: The ID of the currently running revision.
+
+- `DENO_TIMELINE`: The timeline the application is currently running in.
+  Possible values are `production`, `git-branch/<branch-name>`, and
+  `preview/<revision-id>`. This is not set during builds, as builds are not
+  specific to any timeline.
 
 During builds, the environment variable `CI=1` is additionally set.

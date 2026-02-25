@@ -65,12 +65,23 @@ intact and can be reassigned to another app or the same app at a later time.
 Hover over the name of the assigned app in the databases list and click the
 'remove app assignment' icon to un-assign it.
 
-## Data Distribution
+## Data Distribution and GDPR
 
 Deno KV databases are replicated across at least three data centers in the
 primary region, Northern Virginia (us-east4). Once a write operation is
 committed, its mutations are durably stored in a quorum of data centers within
-the primary region. Cross-region replication is not currently available.
+the primary region with _read_ replicas in Europe and Asia.
+
+Data written to KV is therefore stored in, and transits through the US. For
+workloads that require EU-only data residency or strict GDPR guarantees, Deno KV
+is not suitable in its current form. Data is encrypted in transit and at rest,
+and KV is isolated per project, but we do not currently provide formal GDPR or
+compliance documentation specific to KV.
+
+For projects with strict GDPR compliance requirements, we recommend one of our
+[Postgres database solutions](https://docs.deno.com/deploy/reference/databases/)
+such as our
+[Prisma integration](/deploy/reference/databases/#prisma-postgres-instances-and-claiming)
 
 ## Data storage
 

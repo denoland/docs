@@ -1,11 +1,15 @@
 import { SidebarNav } from "../types.ts";
 
-export const sectionTitle = "Deploy";
-export const sectionHref = "/deploy/classic/";
+export const sectionTitle = "Services";
+export const sectionHref = "/services/";
 export const SidebarNav = [
   {
     title: "Deno Deploy",
     href: "/deploy/",
+  },
+  {
+    title: "Deno Sandbox",
+    href: "/sandbox/",
   },
   {
     title: "Deploy Classic",

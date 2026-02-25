@@ -17,6 +17,7 @@
   "conditional-exports": "/runtime/fundamentals/node/#conditional-exports",
   "config": "/runtime/fundamentals/configuration/",
   "coverage": "/runtime/reference/cli/coverage/",
+  "deploy": "/runtime/reference/cli/deploy",
   "doc": "/runtime/reference/cli/doc/",
   "env-vars": "/runtime/reference/env_variables",
   "eval": "/runtime/reference/cli/eval/",
@@ -27,10 +28,16 @@
   "lint-ignore": "/runtime/reference/cli/lint/#ignore-directives",
   "lint": "/runtime/reference/cli/lint/",
   "lsp": "/runtime/reference/cli/lsp/",
+  "permission-broker": "/runtime/fundamentals/security/#permission-broker",
   "permission-sets": "/runtime/fundamentals/configuration/#permissions",
   "permissions": "/runtime/fundamentals/security/",
   "run": "/runtime/reference/cli/run/",
+  "sandbox": "/runtime/reference/cli/sandbox/",
   "serve": "/runtime/reference/cli/serve/",
   "test": "/runtime/reference/cli/test/",
-  "upgrade": "/runtime/reference/cli/upgrade/"
+  "upgrade": "/runtime/reference/cli/upgrade/",
+  "databases": "/deploy/reference/databases/",
+  "pre-deploy": "/deploy/reference/builds/",
+  "otel": "/deploy/reference/observability/",
+  "tunnel": "/deploy/reference/tunnel"
 }
