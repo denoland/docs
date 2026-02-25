@@ -236,7 +236,13 @@ site.addEventListener("afterBuild", async () => {
   }
 
   // Copy source .md files to _site so AI agents can request them directly
-  const contentDirs = ["runtime", "deploy", "sandbox", "subhosting", "examples"];
+  const contentDirs = [
+    "runtime",
+    "deploy",
+    "sandbox",
+    "subhosting",
+    "examples",
+  ];
   let mdCopied = 0;
   for (const dir of contentDirs) {
     try {
