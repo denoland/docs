@@ -21,6 +21,8 @@ static/llms.json
 
 # other generated content
 runtime/reference/std
+!runtime/reference/std/_overrides
+!runtime/reference/std/_overrides/**
 
 # Orama search index files (generated at build time)
 static/orama-index.json

@@ -24,7 +24,7 @@
   "subcommands": [
     {
       "name": "run",
-      "about": "Run a JavaScript or TypeScript program, or a task or script.\n\nBy default all programs are run in sandbox without access to disk, network or ability to spawn subprocesses.\n  \u001b[38;5;245mdeno run https://examples.deno.land/hello-world.ts\u001b[39m\n\nGrant permission to read from disk and listen to network:\n  \u001b[38;5;245mdeno run --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n\nGrant permission to read allow-listed files from disk:\n  \u001b[38;5;245mdeno run --allow-read=/etc jsr:@std/http/file-server\u001b[39m\n\nGrant all permissions:\n  \u001b[38;5;245mdeno run -A jsr:@std/http/file-server\u001b[39m\n\nSpecifying the filename '-' to read the file from stdin.\n  \u001b[38;5;245mcurl https://examples.deno.land/hello-world.ts | deno run -\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/run\u001b[39m",
+      "about": "Run a JavaScript or TypeScript program, or a task or script.\n\nBy default all programs are run in sandbox without access to disk, network or ability to spawn subprocesses.\n  \u001b[38;5;245mdeno run https://docs.deno.com/hello_world.ts\u001b[39m\n\nGrant permission to read from disk and listen to network:\n  \u001b[38;5;245mdeno run --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n\nGrant permission to read allow-listed files from disk:\n  \u001b[38;5;245mdeno run --allow-read=/etc jsr:@std/http/file-server\u001b[39m\n\nGrant all permissions:\n  \u001b[38;5;245mdeno run -A jsr:@std/http/file-server\u001b[39m\n\nSpecifying the filename '-' to read the file from stdin.\n  \u001b[38;5;245mcurl https://docs.deno.com/hello_world.ts | deno run -\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/run\u001b[39m",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -5065,6 +5065,15 @@
           "usage": "--force"
         },
         {
+          "name": "compile",
+          "short": null,
+          "long": "compile",
+          "required": false,
+          "help": "Install the script as a compiled executable",
+          "help_heading": null,
+          "usage": "--compile"
+        },
+        {
           "name": "global",
           "short": "g",
           "long": "global",
@@ -8222,6 +8231,11 @@
     {
       "name": "NPM_CONFIG_REGISTRY",
       "description": "URL to use for the npm registry.",
+      "example": null
+    },
+    {
+      "name": "SSLKEYLOGFILE",
+      "description": "Write TLS session keys to the specified file in NSS Key Log format\nfor debugging encrypted traffic with tools like Wireshark.",
       "example": null
     },
     {
