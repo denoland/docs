@@ -2,6 +2,7 @@ _site
 _cache
 _broken_links.json
 
+.claude
 .idea
 
 node_modules
