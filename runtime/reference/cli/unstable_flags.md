@@ -5,10 +5,10 @@ oldUrl:
   - /runtime/manual/tools/unstable_flags/
 ---
 
-New features of the Deno runtime are often released behind feature flags, so
-users can try out new APIs and features before they are finalized. Current
-unstable feature flags are listed on this page, and can also be found in the CLI
-help text by running:
+New Deno runtime features are often released behind feature flags, so that users
+can try out new APIs and features before they are finalized. Current unstable
+feature flags are listed on this page, and can also be found in the CLI help
+text by running:
 
 ```sh
 deno --help
@@ -61,7 +61,7 @@ This flag enables you to
 [import Node.js built-in modules](/runtime/fundamentals/node/#node-built-in-modules)
 without a `node:` specifier, as in the example below. You can also use this flag
 to enable npm packages without an `npm:` specifier if you are manually managing
-your Node.js dependencies ([see `byonm` flag](#--unstable-byonm)).
+your Node.js dependencies.
 
 ```ts title="example.ts"
 import { readFileSync } from "fs";
@@ -233,18 +233,6 @@ this flag are now available as granular unstable flags, notably:
 Please use these feature flags instead moving forward.
 
 :::
-
-Before more recent Deno versions (1.38+), unstable APIs were made available all
-at once using the `--unstable` flag. Notably, [Deno KV](/deploy/kv/manual) and
-other cloud primitive APIs are available behind this flag. To run a program with
-access to these unstable features, you would run your script with:
-
-```sh
-deno run --unstable your_script.ts
-```
-
-It is recommended that you use the granular unstable flags instead of this, the
-`--unstable` flag is now deprecated and will be removed in Deno 2.
 
 ## `--unstable-temporal`
 

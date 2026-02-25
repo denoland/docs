@@ -1,27 +1,10 @@
-/** @jsxImportSource npm:react@18.2.0 */
-
 export default function ({ title, description, openGraphColor }) {
-  // Process text to replace superscript EA with "Early Access"
-  const processEarlyAccessText = (text) => {
-    if (!text) return text;
-
-    // Replace superscript EA with "Early Access"
-    // Using multiple approaches for reliable matching
-    return text
-      .replace(/\u1D31\u1D00/g, " Early Access") // ᴱᴬ using codepoints
-      .replace(/ᴱ\s*ᴬ/g, " Early Access"); // Direct character matching
-  };
-
   if (!title) {
     title = "Deno documentation";
   }
   if (!description) {
     description = "Learn more at docs.deno.com";
   }
-
-  // Process title and description for Early Access text
-  const processedTitle = processEarlyAccessText(title);
-  const processedDescription = processEarlyAccessText(description);
 
   return (
     <div
@@ -56,7 +39,7 @@ export default function ({ title, description, openGraphColor }) {
           height: "420px",
         }}
       >
-        {processedTitle}
+        {title}
         <div
           style={{
             display: "block",
@@ -93,7 +76,7 @@ export default function ({ title, description, openGraphColor }) {
             justifyContent: "center",
           }}
         >
-          {processedDescription}
+          {description}
         </p>
 
         <svg

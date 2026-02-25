@@ -1,0 +1,72 @@
+name: Lint
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  lint:
+    name: lint and link check
+    runs-on: ubuntu-22.04-xl
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          cache: true
+
+      - run: deno fmt --check
+      - run: deno task test
+
+      - name: "Reference: install"
+        working-directory: "reference_gen"
+        run: deno install
+
+      - name: "Reference: generate types"
+        working-directory: "reference_gen"
+        run: deno task types
+
+      - name: "Reference: generate docs"
+        working-directory: "reference_gen"
+        run: deno task doc
+
+      - name: Restore OG image cache
+        uses: actions/cache@v4
+        id: og-cache
+        with:
+          path: .og-cache
+          key: og-images-${{ hashFiles('open_graph/**') }}
+          restore-keys: og-images-
+
+      - name: Build
+        env:
+          ORAMA_PROJECT_ID: ${{ vars.ORAMA_PROJECT_ID }}
+          ORAMA_DATASOURCE_ID: ${{ vars.ORAMA_DATASOURCE_ID }}
+          ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
+          SKIP_OG: ${{ steps.og-cache.outputs.cache-hit == 'true' && '1' || '' }}
+        run: deno task build
+
+      - name: Restore cached OG images
+        if: steps.og-cache.outputs.cache-hit == 'true'
+        run: cp -r .og-cache/_site/* _site/ 2>/dev/null || true
+
+      - name: Save OG images to cache
+        if: steps.og-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .og-cache/_site
+          cd _site && find . -name "index.png" -exec cp --parents {} ../.og-cache/_site/ \;
+
+      - name: Run server
+        run: deno run --allow-read=. --allow-net --allow-env --lock=deno.lock server.ts &
+
+      - name: Link checker
+        env:
+          DOCS_ROOT: "http://localhost:8000"
+        run: deno run --no-lock --allow-net --allow-env .github/workflows/better_link_checker.ts

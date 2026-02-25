@@ -20,8 +20,8 @@ CLI tools.
 ### An introduction to Deno's Standard Library
 
 If you want to create a command line tool you can do so with
-[Deno's standard Library](https://docs.deno.com/runtime/fundamentals/standard_library/).
-It contains dozens of stable libraries with helpful utility functions that can
+[Deno's standard Library](https://docs.deno.com/runtime/reference/std/). It
+contains dozens of stable libraries with helpful utility functions that can
 cover a lot of the basics when working with JavaScript in the web. The standard
 Library also works in multiple runtimes and environments like Node.js and the
 browser.

@@ -93,7 +93,30 @@ deno run --allow-all script.ts
 
 By default, Deno will not generate a stack trace for permission requests as it
 comes with a hit to performance. Users can enable stack traces with the
-`DENO_TRACE_PERMISSIONS` environment variable.
+`DENO_TRACE_PERMISSIONS` environment variable to `1`.
+
+Deno can also generate an audit log of all accessed permissions; this can be
+achieved using the `DENO_AUDIT_PERMISSIONS` environment variable to a path. This
+works regardless if permissions are allowed or not. The output is in JSONL
+format, where each line is an object with the following keys:
+
+- `v`: the version of the format
+- `datetime`: when the permission was accessed, in RFC 3339 format
+- `permission`: the name of the permission
+- `value`: the value that the permission was accessed with, or `null` if it was
+  accessed with no value
+
+A schema for this can be found in
+[permission-audit.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/permission-audit.v1.json).
+
+In addition, this env var can be combined with the above-mentioned
+`DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
+which is an array contain all the stack trace frames.
+
+### Configuration file
+
+Deno supports storing permissions in the deno.json/deno.jsonc file. Read more
+under [configuration](/runtime/fundamentals/configuration/#permissions).
 
 ### File system access
 
@@ -240,7 +263,7 @@ dynamic imports, without requiring explicit network access:
 
 These locations are trusted "public good" registries that are not expected to
 enable data exfiltration through URL paths. You can add more trusted registries
-using the `--allow-imports` flag.
+using the `--allow-import` flag.
 
 In addition Deno allows importing any NPM package through `npm:` specifiers.
 
@@ -435,11 +458,11 @@ code from. This is true for both static and dynamic imports.
 
 If you want to dynamically import code, either using the `import()` or the
 `new Worker()` APIs, additional permissions need to be granted. Importing from
-the local file system [requires `--allow-read`](#file-system-read-access), but
-Deno also allows to import from `http:` and `https:` URLs. In such case you will
-need to specify an explicit `--allow-import` flag:
+the local file system [requires `--allow-read`](#file-system-access), but Deno
+also allows to import from `http:` and `https:` URLs. In such case you will need
+to specify an explicit `--allow-import` flag:
 
-```
+```sh
 # allow importing code from `https://example.com`
 $ deno run --allow-import=example.com main.ts
 ```
@@ -453,12 +476,12 @@ By default Deno allows importing sources from following hosts:
 - `raw.githubusercontent.com`
 - `gist.githubusercontent.com`
 
-**Imports are only allowed using HTTPS**
+Imports are only allowed using HTTPS.
 
 This allow list is applied by default for static imports, and by default to
 dynamic imports if the `--allow-import` flag is specified.
 
-```
+```sh
 # allow dynamically importing code from `https://deno.land`
 $ deno run --allow-import main.ts
 ```
@@ -492,3 +515,63 @@ using all of these when executing arbitrary untrusted code:
 - Use OS provided sandboxing mechanisms like `chroot`, `cgroups`, `seccomp`,
   etc.
 - Use a sandboxed environment like a VM or MicroVM (gVisor, Firecracker, etc).
+
+## Permission broker
+
+For centralized and policy-driven permission decisions, Deno can delegate all
+permission checks to an external broker process. Enable this by setting the
+`DENO_PERMISSION_BROKER_PATH` environment variable to a path that Deno will use
+to connect to the broker:
+
+- On Unix-like systems: a Unix domain socket path (for example,
+  `/tmp/deno-perm.sock`).
+- On Windows: a named pipe (for example, `\\.\pipe\deno-perm-broker`).
+
+When a permission broker is active:
+
+- All `--allow-*` and `--deny-*` flags are ignored.
+- Interactive permission prompts are not shown (equivalent to non-interactive
+  mode).
+- Every permission check is sent to the broker; the broker must reply with a
+  decision for each request.
+
+If anything goes wrong during brokering (for example: Deno cannot connect to the
+socket/pipe, messages are malformed, arrive out of order, IDs do not match, or
+the connection closes unexpectedly), Deno immediately terminates the process to
+preserve integrity and prevent permission escalation.
+
+The request/response message shapes are versioned and defined by JSON Schemas:
+
+- Request schema:
+  [permission-broker-request.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/permission-broker-request.v1.json)
+- Response schema:
+  [permission-broker-response.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/permission-broker-response.v1.json)
+
+Each request contains a version (`v`), the Deno process ID (`pid`), a unique
+monotonic request `id`, a timestamp (`datetime`, RFC 3339), the `permission`
+name, and an optional `value` depending on permission type. The response must
+echo the `id` and include a `result` of either `"allow"` or `"deny"`. When
+denied, a human-readable `reason` may be included.
+
+Example message flow:
+
+```text
+-> req {"v":1,"pid":10234,"id":1,"datetime":"2025-01-01T00:00:00.000Z","permission":"read","value":"./run/permission_broker/scratch.txt"}
+<- res {"id":1,"result":"allow"}
+-> req {"v":1,"pid":10234,"id":2,"datetime":"2025-01-01T00:00:01.000Z","permission":"read","value":"./run/permission_broker/scratch.txt"}
+<- res {"id":2,"result":"allow"}
+-> req {"v":1,"pid":10234,"id":3,"datetime":"2025-01-01T00:00:02.000Z","permission":"read","value":"./run/permission_broker/log.txt"}
+<- res {"id":3,"result":"allow"}
+-> req {"v":1,"pid":10234,"id":4,"datetime":"2025-01-01T00:00:03.000Z","permission":"write","value":"./run/permission_broker/log.txt"}
+<- res {"id":4,"result":"allow"}
+-> req {"v":1,"pid":10234,"id":5,"datetime":"2025-01-01T00:00:04.000Z","permission":"env","value":null}
+<- res {"id":5,"result":"deny","reason":"Environment access is denied."}
+```
+
+:::caution Advanced use only
+
+Using a permission broker changes Deno’s decision authority: CLI flags and
+prompts no longer apply. Ensure your broker process is resilient, audited, and
+available before enabling `DENO_PERMISSION_BROKER_PATH`.
+
+:::

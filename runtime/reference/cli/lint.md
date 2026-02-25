@@ -3,6 +3,7 @@ title: "`deno lint`, linter"
 oldUrl:
   - /runtime/tools/linter/
   - /runtime/fundamentals/linting_and_formatting/lint-cli-ref
+  - /runtime/manual/tools/lint/
   - /runtime/manual/tools/linter/
   - /runtime/reference/cli/linter/
 command: lint
@@ -143,7 +144,7 @@ file-level ignore directive.
 
 ## More about linting and formatting
 
-For more information about linting and formating in Deno, and the differences
+For more information about linting and formatting in Deno, and the differences
 between these two utilities, visit the
 [Linting and Formatting](/runtime/fundamentals/linting_and_formatting/) page in
 our Fundamentals section.

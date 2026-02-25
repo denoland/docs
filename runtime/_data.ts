@@ -52,10 +52,6 @@ export const sidebar = [
         href: "/runtime/fundamentals/configuration/",
       },
       {
-        title: "Standard library",
-        href: "/runtime/fundamentals/standard_library/",
-      },
-      {
         title: "Web development",
         href: "/runtime/fundamentals/web_dev/",
       },
@@ -103,6 +99,14 @@ export const sidebar = [
           {
             title: "deno add",
             href: "/runtime/reference/cli/add/",
+          },
+          {
+            title: "deno approve-scripts",
+            href: "/runtime/reference/cli/approve_scripts/",
+          },
+          {
+            title: "deno audit",
+            href: "/runtime/reference/cli/audit/",
           },
           {
             title: "deno bench",
@@ -193,6 +197,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/run/",
           },
           {
+            title: "deno sandbox",
+            href: "/runtime/reference/cli/sandbox/",
+          },
+          {
             title: "deno serve",
             href: "/runtime/reference/cli/serve/",
           },
@@ -224,26 +232,70 @@ export const sidebar = [
             title: "deno unstable flags",
             href: "/runtime/reference/cli/unstable_flags/",
           },
+          {
+            title: "deno x",
+            href: "/runtime/reference/cli/x/",
+          },
         ],
       },
       {
-        title: "Deno APIs",
-        href: "/runtime/reference/deno_namespace_apis/",
+        title: "Standard library",
+        items: [
+          { title: "Overview", href: "/runtime/reference/std/" },
+          ...[
+            "assert",
+            "async",
+            "bytes",
+            "cache",
+            "cbor",
+            "cli",
+            "collections",
+            "crypto",
+            "csv",
+            "data-structures",
+            "datetime",
+            "dotenv",
+            "encoding",
+            "expect",
+            "fmt",
+            "front-matter",
+            "fs",
+            "html",
+            "http",
+            "ini",
+            "internal",
+            "io",
+            "json",
+            "jsonc",
+            "log",
+            "media-types",
+            "msgpack",
+            "net",
+            "path",
+            "random",
+            "regexp",
+            "semver",
+            "streams",
+            "tar",
+            "testing",
+            "text",
+            "toml",
+            "ulid",
+            "uuid",
+            "webgpu",
+            "yaml",
+          ].map((name) => ({
+            title: name,
+            href: `/runtime/reference/std/${name}/`,
+          })),
+        ],
       },
       {
-        title: "Web APIs",
-        href: "/runtime/reference/web_platform_apis/",
-      },
-      {
-        title: "Node APIs",
-        href: "/runtime/reference/node_apis/",
-      },
-      {
-        title: "TS Config Migration",
+        title: "Configuring TypeScript",
         href: "/runtime/reference/ts_config_migration/",
       },
       {
-        title: "Continuous Integration",
+        title: "Continuous integration",
         href: "/runtime/reference/continuous_integration/",
       },
       {
@@ -267,7 +319,7 @@ export const sidebar = [
         href: "/runtime/reference/bundling/",
       },
       {
-        title: "Lint Plugins",
+        title: "Lint plugins",
         href: "/runtime/reference/lint_plugins/",
       },
       {
@@ -275,7 +327,7 @@ export const sidebar = [
         href: "/runtime/reference/wasm/",
       },
       {
-        title: "Migration Guide",
+        title: "Migration guide",
         href: "/runtime/reference/migration_guide/",
       },
       {
@@ -367,7 +419,10 @@ export async function generateDescriptions(): Promise<Descriptions> {
     )
   ) {
     const file = await Deno.readTextFile(dirEntry.path);
-    const parsed = yamlParse(file);
+    const parsed = yamlParse(file) as Partial<DescriptionItem> & {
+      description?: Description | string;
+      symbols?: Record<string, Description | string>;
+    };
     if (!parsed) {
       throw `Invalid or empty file: ${dirEntry.path}`;
     }
@@ -379,7 +434,7 @@ export async function generateDescriptions(): Promise<Descriptions> {
       parsed.symbols = Object.fromEntries(
         Object.entries(parsed.symbols).map(([key, value]) => [
           key,
-          handleDescription(value),
+          handleDescription(value as Description | string),
         ]),
       );
     }
@@ -395,7 +450,7 @@ export async function generateDescriptions(): Promise<Descriptions> {
       throw `Invalid status provided in '${dirEntry.name}': ${parsed.status}`;
     }
 
-    descriptions[dirEntry.name.slice(0, -5)] = parsed;
+    descriptions[dirEntry.name.slice(0, -5)] = parsed as DescriptionItem;
   }
 
   return descriptions;

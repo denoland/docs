@@ -23,6 +23,7 @@ optimized JS file.
 - Resolves and inlines all dependencies
 - Supports JSX/TSX, TypeScript, and modern JavaScript, including
   [import attributes](/runtime/fundamentals/modules/#import-attributes) and CSS
+- HTML entrypoint support (Deno 2.5+)
 - Optional minification (`--minify`) and source maps (`--sourcemap`)
 - Code splitting
 - Platform targeting (`--platform`, supports Deno and browser)
@@ -61,6 +62,7 @@ single output file.
 | Flag                    | Description                                          |
 | ----------------------- | ---------------------------------------------------- |
 | `-o`, `--output <file>` | Write bundled output to a file                       |
+| `--outdir <dir>`        | Write bundled output to a directory                  |
 | `--minify`              | Minify the output for production                     |
 | `--format <format>`     | Output format (`esm` by default)                     |
 | `--code-splitting`      | Enable code splitting                                |
@@ -68,6 +70,134 @@ single output file.
 | `--sourcemap`           | Include source maps (`linked`, `inline`, `external`) |
 | `--watch`               | Automatically rebuild on file changes                |
 | `--inline-imports`      | Inline imported modules (`true` or `false`)          |
+
+---
+
+## Runtime API
+
+In addition to the CLI, you can use `Deno.bundle()` to programmatically bundle
+your JavaScript or TypeScript files. This allows you to integrate bundling into
+your build processes and workflows.
+
+:::note
+
+This API was added in Deno v2.5. The `Deno.bundle()` API is experimental and
+must be used with the `--unstable-bundle` flag.
+
+:::
+
+### Basic usage
+
+```ts
+const result = await Deno.bundle({
+  entrypoints: ["./index.tsx"],
+  outputDir: "dist",
+  platform: "browser",
+  minify: true,
+});
+console.log(result);
+```
+
+### Processing outputs in memory
+
+You can also process the bundled outputs in memory instead of writing them to
+disk:
+
+```ts
+const result = await Deno.bundle({
+  entrypoints: ["./index.tsx"],
+  output: "dist",
+  platform: "browser",
+  minify: true,
+  write: false,
+});
+
+for (const file of result.outputFiles!) {
+  console.log(file.text());
+}
+```
+
+This approach offers greater flexibility for integrating bundling into various
+workflows, such as serving bundled files directly from memory or performing
+additional processing on the output.
+
+---
+
+## HTML entrypoint support
+
+Starting with Deno 2.5, `deno bundle` supports HTML files as entrypoints.
+Previously, only `.js`/`.ts`/`.jsx`/`.tsx` files could be used as entrypoints.
+
+```bash
+deno bundle --outdir dist index.html
+```
+
+When you use an HTML file as an entrypoint, `deno bundle` will:
+
+1. Find all script references in the HTML file
+2. Bundle those scripts and their dependencies
+3. Update the paths in the HTML file to point to the bundled scripts
+4. Bundle and inject any imported CSS files into the HTML output
+
+### Example
+
+Given an `index.tsx` file:
+
+```tsx title="index.tsx"
+import { render } from "npm:preact";
+import "./styles.css";
+
+const app = (
+  <div>
+    <p>Hello World!</p>
+  </div>
+);
+
+render(app, document.body);
+```
+
+And an HTML file that references it:
+
+```html title="index.html"
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <script src="./index.tsx" type="module"></script>
+  </head>
+</html>
+```
+
+Running `deno bundle --outdir dist index.html` produces:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <script src="./index-2TFDJWLF.js" type="module" crossorigin></script>
+    <link rel="stylesheet" crossorigin href="./index-EWSJYQGA.css">
+  </head>
+</html>
+```
+
+The bundled output includes content-based hashes for cache-busting and
+fingerprinting.
+
+HTML entrypoints are fully supported in both the CLI and the runtime API
+mentioned above.
+
+### When to use HTML bundling
+
+- **`deno bundle index.html`** - Great for small, static apps where you want a
+  quick packaged build
+- **Vite** - Better for complex projects that benefit from the wider Vite
+  ecosystem
+
+Both approaches work seamlessly on Deno, so you can choose whichever fits your
+workflow best.
 
 ---
 

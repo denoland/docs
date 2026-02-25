@@ -2,16 +2,13 @@ import "@std/dotenv/load";
 
 import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
-import jsx from "lume/plugins/jsx_preact.ts";
+import jsx from "lume/plugins/jsx.ts";
 import mdx from "lume/plugins/mdx.ts";
 import ogImages from "lume/plugins/og_images.ts";
-import postcss from "lume/plugins/postcss.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
 import sitemap from "lume/plugins/sitemap.ts";
-import postcssNesting from "npm:@tailwindcss/nesting";
-
-import tailwind from "@tailwindcss/postcss";
+import tailwind from "lume/plugins/tailwindcss.ts";
 
 import Prism from "./prism.ts";
 
@@ -30,8 +27,43 @@ import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts"
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware from "./middleware/redirects.ts";
+import createLlmsFilesMiddleware from "./middleware/llmsFiles.ts";
 import { toFileAndInMemory } from "./utils/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
+
+// Check if reference docs are available when building
+function ensureReferenceDocsExist() {
+  const requiredFiles = [
+    "reference_gen/gen/deno.json",
+    "reference_gen/gen/web.json",
+    "reference_gen/gen/node.json",
+  ];
+
+  const missingFiles = [];
+  for (const file of requiredFiles) {
+    try {
+      Deno.statSync(file);
+    } catch {
+      missingFiles.push(file);
+    }
+  }
+
+  if (missingFiles.length > 0) {
+    console.error(
+      `❌ Missing reference documentation files: ${missingFiles.join(", ")}`,
+    );
+    console.error(
+      `   Run 'deno task generate:reference' to generate them before building`,
+    );
+    console.error(`   Or set SKIP_REFERENCE=1 to skip reference documentation`);
+    Deno.exit(1);
+  }
+}
+
+// Ensure reference docs exist at startup for full builds
+if (Deno.env.get("BUILD_TYPE") === "FULL" && !Deno.env.has("SKIP_REFERENCE")) {
+  ensureReferenceDocsExist();
+}
 
 const site = lume(
   {
@@ -45,6 +77,7 @@ const site = lume(
         createGAMiddleware({
           addr: { transport: "tcp", hostname: "localhost", port: 3000 },
         }),
+        createLlmsFilesMiddleware({ root: "_site" }),
         apiDocumentContentTypeMiddleware,
       ],
       page404: "/404/",
@@ -103,16 +136,16 @@ site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
 site.copy("deploy/images");
-site.copy("deploy/kv/manual/images");
+site.copy("deploy/classic/images");
+site.copy("deploy/kv/images");
 site.copy("deploy/tutorials/images");
-site.copy("deploy/kv/tutorials/images");
+site.copy("sandbox/images");
 site.copy("runtime/fundamentals/images");
 site.copy("runtime/getting_started/images");
 site.copy("runtime/reference/images");
 site.copy("runtime/contributing/images");
 site.copy("examples/tutorials/images");
 site.copy("deploy/manual/images");
-site.copy("deploy/early-access/images");
 site.copy("examples/scripts");
 
 site.use(
@@ -125,22 +158,24 @@ site.use(search());
 site.use(jsx());
 site.use(mdx());
 
-site.use(
-  postcss({
-    includes: false,
-    plugins: [postcssNesting, tailwind()],
-  }),
-);
-
+site.add("js");
 site.use(
   esbuild({
-    extensions: [".client.ts", ".client.js"],
+    extensions: [".ts"],
     options: {
       minify: false,
       splitting: true,
+      alias: {
+        "node:crypto": "./_node-crypto.js",
+      },
     },
   }),
 );
+
+site.add("style.css");
+site.use(tailwind({
+  minify: true,
+}));
 
 site.use(toc({ anchor: false }));
 site.use(title());
@@ -157,25 +192,42 @@ site.addEventListener("afterBuild", async () => {
       const { default: generateModule } = await import(
         "./generate_llms_files.ts"
       );
-      const { collectFiles, generateLlmsTxt, generateLlmsFullTxt } =
-        generateModule;
+      const {
+        collectFiles,
+        generateLlmsSummaryTxt,
+        generateLlmsFullTxt,
+        generateLlmsJson,
+        loadOramaSummaryIndex,
+      } = generateModule;
 
       log.info("Generating LLM-friendly documentation files...");
 
       const files = await collectFiles();
       log.info(`Collected ${files.length} documentation files for LLMs`);
 
-      // Generate llms.txt
-      const llmsTxt = generateLlmsTxt(files);
-      Deno.writeTextFileSync(site.dest("llms.txt"), llmsTxt);
-      log.info("Generated llms.txt in site root");
+      // Generate llms-summary.txt
+      const llmsSummaryTxt = generateLlmsSummaryTxt(files);
+      Deno.writeTextFileSync(site.dest("llms-summary.txt"), llmsSummaryTxt);
+      log.info("Generated llms-summary.txt in site root");
 
       // Generate llms-full.txt
       const llmsFullTxt = generateLlmsFullTxt(files);
       Deno.writeTextFileSync(site.dest("llms-full.txt"), llmsFullTxt);
       log.info("Generated llms-full.txt in site root");
+
+      // Generate llms.json
+      const oramaSummary = await loadOramaSummaryIndex();
+      if (oramaSummary) {
+        const llmsJson = generateLlmsJson(oramaSummary);
+        Deno.writeTextFileSync(site.dest("llms.json"), llmsJson);
+        log.info("Generated llms.json in site root");
+      } else {
+        log.warn(
+          "Skipped llms.json generation (orama-index-summary.json not found)",
+        );
+      }
     } catch (error) {
-      log.error("Error generating LLMs files:", error);
+      log.error("Error generating LLMs files:" + error);
     }
   }
 });
@@ -208,8 +260,54 @@ site.ignore(
 // the default layout if no other layout is specified
 site.data("layout", "doc.tsx");
 
+// Load API categories data globally
+import denoCategories from "./reference_gen/deno-categories.json" with {
+  type: "json",
+};
+import webCategories from "./reference_gen/web-categories.json" with {
+  type: "json",
+};
+import nodeRewriteMap from "./reference_gen/node-rewrite-map.json" with {
+  type: "json",
+};
+
+const nodeCategories = Object.keys(nodeRewriteMap);
+
+site.data("apiCategories", {
+  deno: {
+    title: "Deno APIs",
+    categories: Object.keys(denoCategories),
+    descriptions: denoCategories,
+    getCategoryHref: (categoryName: string) => {
+      // Special case for I/O -> io
+      if (categoryName === "I/O") {
+        return `/api/deno/io`;
+      }
+      return `/api/deno/${categoryName.toLowerCase().replace(/\s+/g, "-")}`;
+    },
+  },
+  web: {
+    title: "Web APIs",
+    categories: Object.keys(webCategories),
+    descriptions: webCategories,
+    getCategoryHref: (categoryName: string) => {
+      // Special case for I/O -> io
+      if (categoryName === "I/O") {
+        return `/api/web/io`;
+      }
+      return `/api/web/${categoryName.toLowerCase().replace(/\s+/g, "-")}`;
+    },
+  },
+  node: {
+    title: "Node APIs",
+    categories: nodeCategories,
+    descriptions: {} as Record<string, string>,
+    getCategoryHref: (categoryName: string) => `/api/node/${categoryName}/`,
+  },
+});
+
 // Do more expensive operations if we're building the full site
-if (Deno.env.get("BUILD_TYPE") == "FULL") {
+if (Deno.env.get("BUILD_TYPE") == "FULL" && !Deno.env.has("SKIP_OG")) {
   // Use Lume's built in date function to get the last modified date of the file
   // site.data("date", "Git Last Modified");;
 
@@ -217,7 +315,7 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
   site.data("openGraphLayout", "/open_graph/default.jsx");
   site.use(
     ogImages({
-      satori: {
+      options: {
         width: 1200,
         height: 630,
         fonts: [
@@ -246,13 +344,11 @@ if (Deno.env.get("BUILD_TYPE") == "FULL") {
           },
         ],
       },
-      cache: false,
     }),
   );
 }
 
 site.scopedUpdates(
-  (path) => path == "/overrides.css",
   (path) => /\.(js|ts)$/.test(path),
   (path) => path.startsWith("/api/deno/"),
 );

@@ -7,7 +7,10 @@ export default function Base(
   return (
     <>
       <div className="ddoc markdown-body">
-        <comp.Breadcrumbs parts={data.breadcrumbs_ctx.parts} />
+        <comp.Breadcrumbs
+          parts={data.breadcrumbs_ctx.parts}
+          hasSubNav={false}
+        />
         <main id="content" tabindex={-1}>
           {children}
         </main>

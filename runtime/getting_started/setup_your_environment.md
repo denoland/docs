@@ -13,6 +13,7 @@ Deno while you are developing.
 We'll cover:
 
 - How to use Deno with your favorite editor/IDE
+- How to use Deno with AI coding assistants
 - How to generate shell completions
 
 ## Setting up your editor/IDE
@@ -44,6 +45,34 @@ That’s it! You’ve successfully set up your developer environment for Deno us
 VSCode. You will now get all the benefits of Deno’s LSP, including IntelliSense,
 code formatting, linting, and more.
 
+### Skills for AI assistants
+
+Deno provides official **skills** — specialized knowledge packs that give AI
+coding assistants (such as Claude, GitHub Copilot, Cursor, and others) accurate,
+up-to-date knowledge of Deno's APIs, conventions, and best practices.
+
+Without these skills, AI assistants may suggest Node.js-specific patterns or
+outdated Deno APIs. Loading the relevant skill ensures the assistant understands
+Deno's module system, standard library, `deno.json` configuration, Deno Deploy,
+Fresh, and more.
+
+Skills are available at
+[github.com/denoland/skills](https://github.com/denoland/skills). Each skill is
+a plain text or markdown file you can paste into your AI assistant's context,
+add to a project-level instructions file (e.g. `CLAUDE.md`,
+`.github/copilot-instructions.md`), or configure as a persistent system prompt —
+depending on your tool.
+
+Available skills include:
+
+- **deno-guidance** — foundational Deno knowledge: module imports, `deno.json`,
+  CLI commands, and package selection
+- **deno-deploy** — deploying to Deno Deploy, KV, environment variables, and the
+  `deno deploy` CLI
+- **deno-frontend** — building web UIs with the Fresh framework and Preact
+- **deno-expert** — advanced Deno patterns for code review and debugging
+- **deno-sandbox** — executing untrusted code safely with `@deno/sandbox`
+
 ### JetBrains IDEs
 
 To install the Deno Plugin, open your IDE and go to **File** > **Settings**.
@@ -52,8 +81,9 @@ Navigate to **Plugins** and search for `Deno`. Install the official Deno plugin.
 ![The WebStorm plugins settings](./images/webstorm_setup.png)
 
 To configure the Plugin, go to **File** > **Settings** again. Navigate to
-**Languages & Frameworks** > **Deno**. Check **Enable Deno for your project**
-and specify the path to the Deno executable (if it has not been auto-detected).
+**Languages & Frameworks** > **JavaScript Runtime**. Switch **Preferred
+Runtime** to **Deno**. Under **Deno**, specify the path to the Deno executable
+(if it has not been auto-detected).
 
 Check out
 [this blog post](https://blog.jetbrains.com/webstorm/2020/06/deno-support-in-jetbrains-ides/)
@@ -83,17 +113,16 @@ may also need to set `single_file_support` to `false` for `ts_ls` to prevent it
 from running in `single file mode`. Here is an example of such a configuration:
 
 ```lua
-local nvim_lsp = require('lspconfig')
-nvim_lsp.denols.setup {
-  on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
-}
+vim.lsp.config('denols', {
+    on_attach = on_attach,
+    root_markers = {"deno.json", "deno.jsonc"},
+})
 
-nvim_lsp.ts_ls.setup {
-  on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern("package.json"),
-  single_file_support = false
-}
+vim.lsp.config('ts_ls', {
+    on_attach = on_attach,
+    root_markers = {"package.json"},
+    single_file_support = false,
+})
 ```
 
 For Deno, the example above assumes a `deno.json` or `deno.jsonc` file exists at
@@ -317,7 +346,7 @@ the
 
 [GitHub Codespaces](https://github.com/features/codespaces) allows you to
 develop fully online or remotely on your local machine without needing to
-configure or install Deno. It is currently in early access.
+configure or install Deno.
 
 If a project is a Deno enabled project and contains the `.devcontainer`
 configuration as part of the repository, opening the project in GitHub

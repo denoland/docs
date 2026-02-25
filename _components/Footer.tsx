@@ -1,17 +1,17 @@
 export default function Footer_new() {
   return (
-    <footer class="text-smaller bg-gray-50 dark:bg-gray-950 p-4 pt-12 sm:px-8 border-t border-t-foreground-tertiary">
+    <footer className="text-smaller bg-gray-50 dark:bg-gray-950 p-4 pt-12 sm:px-8 border-t border-t-foreground-tertiary">
       <nav className="flex flex-col gap-x-4 gap-y-12 max-w-7xl md:flex-row md:flex-wrap md:justify-between md:w-full md:gap-y-8 md:mx-auto">
         {data.map((category) => (
-          <section class="flex-auto">
-            <h3 class="mb-2 uppercase font-bold text-foreground-primary whitespace-pre">
+          <section className="flex-auto">
+            <h3 className="mb-2 uppercase font-bold text-foreground-primary whitespace-pre">
               {category.title}
             </h3>
-            <ul class="m-0 p-0 pl-3 border-l border-l-background-tertiary list-none">
+            <ul className="m-0 p-0 pl-3 border-l border-l-background-tertiary list-none">
               {category.items.map((item) => (
                 <li>
                   <a
-                    class="block mb-2 hover:text-primary hover:underline"
+                    className="block mb-2 hover:text-primary hover:underline"
                     href={item.to ?? item.href}
                     dangerouslySetInnerHTML={{ __html: item.label }}
                   />
@@ -21,7 +21,7 @@ export default function Footer_new() {
           </section>
         ))}
       </nav>
-      <p class="m-0 mt-16 mx-auto text-center text-xs text-foreground-secondary">
+      <p className="m-0 mt-16 mx-auto text-center text-xs text-foreground-secondary">
         Copyright © {new Date().getFullYear()} the Deno authors.
       </p>
     </footer>
@@ -67,12 +67,12 @@ const data = [
     title: "Services Docs",
     items: [
       {
-        label: "Deno Deploy <sup>EA</sup>",
-        to: "/deploy/early-access/",
+        label: "Deno Deploy ",
+        to: "/deploy/",
       },
       {
         label: "Deno Deploy Classic",
-        to: "/deploy/manual/",
+        to: "/deploy/classic/",
       },
       {
         label: "Deno Subhosting",
@@ -146,16 +146,16 @@ const data = [
         href: "https://deno.com/blog",
       },
       {
-        label: "Careers",
-        href: "https://deno.com/jobs",
-      },
-      {
         label: "Merch",
         href: "https://merch.deno.com/",
       },
       {
         label: "Privacy Policy",
-        href: "/deploy/manual/privacy-policy",
+        href: "/deploy/privacy_policy",
+      },
+      {
+        label: "LLMs",
+        href: "/llms.txt",
       },
     ],
   },

@@ -171,8 +171,7 @@ import { pascalCase } from "https://deno.land/x/case/mod.ts";
 
 Deno recommends [JSR](https://jsr.io), the modern JavaScript registry, for third
 party modules. There, you'll find plenty of well documented ES modules for your
-projects, including the
-[Deno Standard Library](/runtime/fundamentals/standard_library/).
+projects, including the [Deno Standard Library](/runtime/reference/std/).
 
 You can
 [read more about Deno's support for npm packages here](/runtime/fundamentals/node/#using-npm-modules).
@@ -205,8 +204,8 @@ import { pascalCase } from "cases";
 ```
 
 The remapped name can be any valid specifier. It's a very powerful feature in
-Deno that can remap anything. Learn more about what the import map can do
-[here](/runtime/fundamentals/configuration/#dependencies).
+Deno that can remap anything. Learn more in the
+[configuration dependencies section](/runtime/fundamentals/configuration/#dependencies).
 
 ## Differentiating between `imports` or `importMap` in `deno.json` and `--import-map` option
 
@@ -370,18 +369,18 @@ custom or local versions of libraries during development or testing.
 Note: If you need to cache and modify dependencies locally for use across
 builds, consider [vendoring remote modules](#vendoring-remote-modules).
 
-### Overriding local JSR packages
+### Overriding local packages
 
 For developers familiar with `npm link` in Node.js, Deno provides a similar
-feature for local JSR packages through the `patch` field in `deno.json`. This
-allows you to override dependencies with local versions during development
+feature for local JSR and npm packages through the `links` field in `deno.json`.
+This allows you to override dependencies with local versions during development
 without needing to publish them.
 
 Example:
 
 ```json title="deno.json"
 {
-  "patch": [
+  "links": [
     "../some-package-or-workspace"
   ]
 }
@@ -389,36 +388,31 @@ Example:
 
 Key points:
 
-- The `patch` field accepts paths to directories containing JSR packages or
+- The `links` field accepts paths to directories containing packages or
   workspaces. If you reference a single package within a workspace, the entire
   workspace will be included.
-- This feature is only respected in the workspace root. Using `patch` elsewhere
+- Both JSR and npm packages are supported.
+- This feature is only respected in the workspace root. Using `links` elsewhere
   will trigger warnings.
-- Currently, `patch` is limited to JSR packages. Attempting to patch `npm`
-  packages will result in a warning with no effect.
 
 Limitations:
 
-- `npm` package overrides are not supported yet. This is planned for future
-  updates.
 - Git-based dependency overrides are unavailable.
-- The `patch` field requires proper configuration in the workspace root.
-- This feature is experimental and may change based on user feedback.
+- The `links` field requires proper configuration in the workspace root.
 
 ### Overriding NPM packages
 
-Deno supports patching npm packages with local versions, similar to how JSR
-packages can be patched. This allows you to use a local copy of an npm package
+Deno supports linking npm packages with local versions, similar to how JSR
+packages can be linked. This allows you to use a local copy of an npm package
 during development without publishing it.
 
-To use a local npm package, configure the `patch` field in your `deno.json`:
+To use a local npm package, configure the `links` field in your `deno.json`:
 
 ```json
 {
-  "patch": [
+  "links": [
     "../path/to/local_npm_package"
-  ],
-  "unstable": ["npm-patch"]
+  ]
 }
 ```
 
@@ -438,7 +432,6 @@ Limitations:
   differently.
 - The npm package name must exist in the registry, even if you're using a local
   copy.
-- This feature is currently behind the `unstable` flag.
 
 ### Overriding HTTPS imports
 
@@ -612,11 +605,12 @@ which are not yet cached.
 
 ## Integrity Checking and Lock Files
 
-Imagine your module relies on a remote module located at https://some.url/a.ts.
-When you compile your module for the first time, `a.ts` is fetched, compiled,
-and cached. This cached version will be used until you either run your module on
-a different machine (such as in a production environment) or manually reload the
-cache (using a command like `deno install --reload`).
+Imagine your module relies on a remote module located at
+<https://some.url/a.ts>. When you compile your module for the first time, `a.ts`
+is fetched, compiled, and cached. This cached version will be used until you
+either run your module on a different machine (such as in a production
+environment) or manually reload the cache (using a command like
+`deno install --reload`).
 
 But what if the content at `https://some.url/a.ts` changes? This could result in
 your production module running with different dependency code than your local
@@ -675,6 +669,138 @@ following in a Deno configuration file:
   }
 }
 ```
+
+## Supply chain management
+
+Modern JavaScript projects pull code from many sources (JSR, npm, HTTPS URLs,
+local workspaces). Good supply chain management helps you achieve four goals:
+
+- Determinism: everyone (and your CI) runs the exact same code.
+- Security: unexpected upstream changes or compromises are detected early.
+- Velocity: you can update dependencies intentionally when you choose.
+- Resilience: builds keep working offline or when registries have outages.
+
+### Core practices
+
+1. Pin versions deliberately
+   - For applications, prefer exact versions (for example
+     `jsr:@luca/cases@1.2.3`).
+   - For libraries, a caret range (`^1.2.3`) lets consumers get
+     backwards‑compatible fixes.
+   - Avoid unbounded (`*`) or overly broad ranges in production applications.
+2. Commit your `deno.lock` file.
+3. Enable a frozen lockfile in CI / production (`--frozen` or
+   `"lock": { "frozen": true }`) so new, unseen dependencies fail the build
+   instead of silently appearing.
+4. Vendor when you need hermetic/offline builds (`"vendor": true`) or when you
+   must patch third‑party code locally. Vendoring does not remove the need for a
+   lockfile—it complements it.
+5. Prefer import map (`imports`) entries over raw HTTPS imports in larger
+   codebases to centralize version changes.
+6. Periodically unfreeze and update consciously (for example on a weekly or
+   sprint cadence) instead of ad‑hoc updates during feature work.
+
+### Typical CI pattern
+
+```sh
+# Install (resolve) dependencies exactly as locked; fail if drift or new deps
+deno install --frozen --entrypoint main.ts
+
+# (optional) Run with only cached modules to guarantee no network access
+deno run --cached-only main.ts
+```
+
+If you rely on `npm` packages (`package.json` present), include `deno install`
+in CI before running tests so the `node_modules` directory is materialized
+deterministically.
+
+### Updating dependencies intentionally
+
+When you decide to update:
+
+1. Temporarily allow lockfile writes: add `--frozen=false` or set
+   `"lock": { "frozen": false }`.
+2. Change versions (edit `deno.json`, use `deno add <specifier>@<newVersion>`,
+   or remove with `deno remove`).
+3. Re-run `deno install --entrypoint main.ts` (optionally `--reload`) to update
+   resolutions and integrity hashes.
+4. Review the diff in `deno.lock` (and `vendor/` if used) in your pull request.
+5. Re-enable the frozen lockfile.
+
+### Troubleshooting a frozen lockfile
+
+You may encounter errors like:
+
+```text
+error: The lockfile is frozen. Cannot add new entry for "jsr:@scope/pkg@1.3.0".
+```
+
+or:
+
+```text
+error: Module not found in frozen lockfile: https://example.com/dependency/mod.ts
+```
+
+Common causes and fixes:
+
+| Symptom                                                    | Cause                                          | Fix                                                                                                                         |
+| ---------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Need to bump a version but command fails with frozen error | Lockfile is in frozen mode                     | Re-run with `--frozen=false` (one-off) or temporarily set `"lock": { "frozen": false }`, then update and re-freeze          |
+| New transitive dependency appears after editing code       | Code now imports something not in lockfile     | Unfreeze (`--frozen=false`) and run `deno install --entrypoint <entry>.ts` to record it                                     |
+| Removed imports but lockfile still contains old entries    | Lockfile is additive; entries persist          | (Optional) regenerate: move `deno.lock` aside (`mv deno.lock deno.lock.old`), run install to recreate, compare, then commit |
+| Lockfile corruption / merge conflict                       | Manual edit or conflict left inconsistent JSON | Delete conflicting sections and re-run install, or regenerate entirely                                                      |
+| Using vendored deps but lockfile complains                 | Vendor dir out of sync with lockfile           | Re-run `deno install --entrypoint <entry>` (unfrozen) to sync both, then commit                                             |
+
+### Safe regeneration checklist
+
+Only regenerate the entire `deno.lock` when necessary (corruption, massive
+pruning). When you do:
+
+1. Back it up: `cp deno.lock deno.lock.bak`.
+2. Remove it: `rm deno.lock`.
+3. (If vendoring) remove or move the `vendor/` directory.
+4. Run `deno install --entrypoint main.ts` to recreate.
+5. Inspect the diff between old and new to catch unexpected additions.
+
+### Vendor vs lockfile
+
+These are complementary:
+
+- Lockfile: records exact resolved versions + integrity hashes for remote and
+  npm/JSR deps.
+- Vendor directory: stores the actual source locally for hermetic, offline, and
+  patchable builds.
+
+Use both for maximum reproducibility. A frozen lockfile alone does not make your
+build fully hermetic if the remote source disappears; vendoring closes that gap.
+
+### Quick decision guide
+
+| Need                       | Use                                            |
+| -------------------------- | ---------------------------------------------- |
+| Detect upstream tampering  | Lockfile (commit & freeze)                     |
+| Offline / air-gapped build | `vendor: true` + lockfile                      |
+| Patch third-party code     | Vendoring or `scopes` overrides (short-term)   |
+| Fast CI with integrity     | `deno install --frozen`                        |
+| Intentionally upgrade      | Temporarily unfreeze, run install, review diff |
+
+### Minimum supply chain baseline (recommended)
+
+```json title="deno.json"
+{
+  "imports": {/* centralize versions */},
+  "vendor": true,
+  "lock": { "frozen": true }
+}
+```
+
+Commit `deno.json`, `deno.lock`, and (if using vendor) the entire `vendor/`
+directory.
+
+:::tip Automate a weekly dependency refresh: a scheduled CI job that unfreezes,
+runs `deno add --latest` (or manually bumps key packages), executes tests, and
+opens a pull request with the updated `deno.lock` (and `vendor/`). This keeps
+security patches flowing while keeping day-to-day builds deterministic. :::
 
 ## Private repositories
 

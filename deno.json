@@ -1,38 +1,53 @@
 {
   "imports": {
     "@std/assert": "jsr:@std/assert@^1.0.6",
+    "@std/cli": "jsr:@std/cli@^1.0.27",
     "@std/dotenv": "jsr:@std/dotenv@^0.225.2",
     "@std/fs": "jsr:@std/fs@^1.0.16",
     "@std/front-matter": "jsr:@std/front-matter@1.0.9",
     "@std/html": "jsr:@std/html@^1.0.3",
     "@std/media-types": "jsr:@std/media-types@^1.0.3",
     "@std/path": "jsr:@std/path@^1.0.8",
-    "@deno/doc": "jsr:@deno/doc@0.169.1",
-    "@tailwindcss/cli": "npm:@tailwindcss/cli@^4.1.11",
-    "@tailwindcss/postcss": "npm:@tailwindcss/postcss@^4.1.11",
+    "@deno/doc": "jsr:@deno/doc@0.187.0",
+    "@std/yaml": "jsr:@std/yaml@^1.0.11",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
-    "lume/": "https://deno.land/x/lume@v2.4.1/",
+    "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/",
+    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts",
     "googleapis": "npm:googleapis@^144.0.0",
-    "postcss": "npm:postcss@^8.5.6",
     "prismjs": "npm:prismjs@1.29.0",
     "tailwindcss": "npm:tailwindcss@^4.1.11",
-    "@orama/core": "jsr:@orama/core@^1.2.4"
+    "@orama/core": "jsr:@orama/core@^1.2.4",
+    "@octokit/core": "npm:@octokit/core@^5.2.0",
+    "leo-profanity": "npm:leo-profanity@^1.7.0",
+    "https://cdn.jsdelivr.net/gh/esbuild/deno-esbuild@0.27.0/mod.js": "https://cdn.jsdelivr.net/gh/esbuild/deno-esbuild@0.27.0/wasm.js"
   },
   "tasks": {
-    "dev": "LUME_LOGS=WARN deno run --env-file -A lume.ts -s",
-    "serve": "deno task dev",
-    "serve:style": "BUILD_TYPE=FULL deno task lume -s --config=_config-styleguide.ts",
+    "lume": {
+      "description": "Run Lume command",
+      "command": "deno run --env-file -P=lume lume/cli.ts"
+    },
+    "dev": "LUME_LOGS=WARN deno task lume -s",
+    "serve": {
+      "description": "Run and serve the site for development",
+      "command": "deno task dev"
+    },
     "start": "deno task dev",
-    "build": "deno task generate:reference && BUILD_TYPE=FULL deno run --env-file -A lume.ts && tailwindcss -i styles.css -o _site/styles.css --minify",
-    "build:light": "deno run --env-file -A lume.ts",
+    "build": {
+      "description": "Build the site for production",
+      "command": "deno task generate:reference && deno task generate:std-docs && BUILD_TYPE=FULL deno task lume"
+    },
+    "build:light": "deno task lume",
     "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",
+    "check:links": "deno run --no-lock --allow-net --allow-env .github/workflows/better_link_checker.ts",
     "lint:update": "deno run -A update_lint_rules.ts",
     "generate:search": "deno run -A orama/generate_orama_index_full.ts",
     "generate:search:docs-only": "deno run -A orama/generate.ts",
     "generate:llms": "deno run -A generate_llms_files.ts",
     "generate:llms:site": "deno run -A generate_llms_files.ts _site",
     "generate:reference": "cd reference_gen && deno task types && deno task doc",
+    "generate:std-docs": "deno run -A scripts/generate_std_docs.ts",
+    "cache:clear": "rm -f reference_gen/.gen-cache*.json reference_gen/.node-incremental-cache.json",
     "search:upload": "deno run -A orama/upload_orama_index.ts --full",
     "search:analyze": "deno run -A orama/analyze_orama_index.ts"
   },
@@ -41,7 +56,7 @@
       "lume/types.ts"
     ],
     "jsx": "react-jsx",
-    "jsxImportSource": "npm:preact"
+    "jsxImportSource": "lume"
   },
   "test": {
     "exclude": [
@@ -53,5 +68,46 @@
     "reference_gen",
     "orama"
   ],
-  "nodeModulesDir": "auto"
+  "unstable": [
+    "temporal",
+    "fmt-component"
+  ],
+  "lint": {
+    "plugins": [
+      "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/lint.ts"
+    ],
+    "rules": {
+      "exclude": [
+        "no-import-prefix"
+      ]
+    }
+  },
+  "nodeModulesDir": "auto",
+  "permissions": {
+    "lume": {
+      "read": true,
+      "write": true,
+      "import": [
+        "cdn.jsdelivr.net:443",
+        "jsr.io:443",
+        "deno.land:443",
+        "esm.sh:443",
+        "raw.githubusercontent.com:443"
+      ],
+      "net": [
+        "0.0.0.0",
+        "cdn.jsdelivr.net:443",
+        "data.jsdelivr.com:443",
+        "jsr.io:443",
+        "deno.land:443",
+        "esm.sh:443",
+        "registry.npmjs.org:443"
+      ],
+      "env": true,
+      "run": true,
+      "ffi": true,
+      "sys": true
+    }
+  },
+  "lock": false
 }

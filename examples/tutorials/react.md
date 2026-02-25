@@ -1,12 +1,13 @@
 ---
-title: "Build a React app with a starter template"
-description: "Complete guide to building React applications with Deno and Vite. Learn how to set up a project from a template, implement routing, add API endpoints, and deploy your full-stack TypeScript application."
+title: "React app with Vite"
+description: "Complete guide to building React applications with Deno and Vite. Learn how to set up a project, implement routing, add API endpoints, and deploy your full-stack TypeScript application."
 url: /examples/react_tutorial/
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/react/
   - /runtime/manual/basics/react/
   - /runtime/tutorials/how_to_with_npm/react/
   - /runtime/tutorials/create_react_tutorial/
+  - /deploy/tutorials/vite/
 ---
 
 [React](https://reactjs.org) is the most widely used JavaScript frontend
@@ -478,7 +479,7 @@ git push -u origin main
 ### Deploy to Deno Deploy
 
 Once your app is on GitHub, you can
-[deploy it to Deno Deploy<sup>EA</sup>](https://console.deno.com/).
+[deploy it to Deno Deploy](https://console.deno.com/).
 
 For a walkthrough of deploying your app, check out the
 [Deno Deploy tutorial](/examples/deno_deploy_tutorial/).

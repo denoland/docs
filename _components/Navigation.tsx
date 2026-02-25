@@ -30,6 +30,7 @@ export default function (
         <data.comp.SidebarNav
           sectionData={sectionData}
           currentUrl={currentUrl}
+          apiCategories={data.apiCategories}
         />
       </aside>
     </>
@@ -43,7 +44,7 @@ function getSectionData(data: Lume.Data, currentUrl: string) {
     const childItems = categoryPanel.categories;
 
     childItems.push({
-      name: `View all ${categoryPanel.total_symbols} symbols`,
+      name: `All ${categoryPanel.total_symbols} symbols`,
       href: categoryPanel.all_symbols_href,
       active: currentUrl.includes("all_symbols"),
     });
@@ -60,7 +61,7 @@ function getSectionData(data: Lume.Data, currentUrl: string) {
   // Extract path segments from the URL
   const urlSegments = currentUrl.split("/").filter(Boolean);
 
-  // Check for more specific sidebar data first (like /deploy/early-access/)
+  // Check for more specific sidebar data first (like /deploy/)
   if (urlSegments.length > 1) {
     const specificPath = `/${urlSegments[0]}/${urlSegments[1]}/`;
     const specificSidebar = data.search.data(specificPath)?.sidebar;

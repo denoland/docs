@@ -11,19 +11,16 @@ oldUrl:
   - /runtime/fundamentals/
 ---
 
-TypeScript is a first class language in Deno, just like JavaScript or
-WebAssembly. You can run or import TypeScript without installing anything more
-than the Deno CLI. With its built-in TypeScript compiler, Deno will compile your
-TypeScript code to JavaScript with no extra config needed. Deno can also type
-check your TypeScript code, without requiring a separate type checking tool like
-`tsc`.
+TypeScript is a first class language in Deno. You can run or import TypeScript
+without installing anything more than the Deno CLI. With its built-in TypeScript
+compiler, Deno will compile your TypeScript code to JavaScript with no extra
+config needed. Deno can also type check your TypeScript code, without requiring
+a separate type checking tool like `tsc`.
 
 ## Type Checking
 
 One of the main advantages of TypeScript is that it can make your code type
-safe, catching errors during development rather than runtime. TypeScript is a
-superset of JavaScript meaning that syntactically valid JavaScript becomes
-TypeScript with warnings about being "unsafe".
+safe, catching errors during development rather than runtime.
 
 :::note
 
@@ -169,7 +166,7 @@ the TypeScript module that imports the JavaScript module.
 import { add } from "./add.js";
 ```
 
-This is also useful for NPM packages that don't provide type information:
+This is also useful for npm packages that don't provide type information:
 
 ```ts title="main.ts"
 // @ts-types="npm:@types/lodash"
