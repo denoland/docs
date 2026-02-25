@@ -11,7 +11,7 @@ export default function Layout(data: Lume.Data) {
   const isServicesPage = data.url.startsWith("/deploy") ||
     data.url.startsWith("/subhosting") ||
     data.url.startsWith("/services") ||
-    data.url.startsWith("/sandboxes");
+    data.url.startsWith("/sandbox");
   const hasSubNav = isServicesPage;
 
   return (
@@ -25,11 +25,12 @@ export default function Layout(data: Lume.Data) {
           <meta name="description" content={data.description} />}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <script>
-          const theme = localStorage.getItem('denoDocsTheme') ||
-          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' :
-          'light'); document.documentElement.classList.add(theme);
-        </script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              `const theme = localStorage.getItem('denoDocsTheme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); document.documentElement.classList.add(theme);`,
+          }}
+        />
 
         <link
           rel="stylesheet"

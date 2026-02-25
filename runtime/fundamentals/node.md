@@ -147,7 +147,7 @@ npm specifiers have the following format:
 npm:<package-name>[@<version-requirement>][/<sub-path>]
 ```
 
-This also allows functionality that may be familar from the `npx` command.
+This also allows functionality that may be familiar from the `npx` command.
 
 ```console
 # npx allows remote execution of a package from npm or a URL

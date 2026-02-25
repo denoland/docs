@@ -689,7 +689,7 @@ is particularly helpful in situations where it is difficult to precisely express
 what should be asserted, without requiring a prohibitive amount of code, or
 where the assertions a test makes are expected to change often.
 
-- [Snapshot testing tutorial](/examples/snapshot_tutorial/)
+- [Snapshot testing tutorial](/examples/snapshot_test_tutorial/)
 
 ## Tests and Permissions
 

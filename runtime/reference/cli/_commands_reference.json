@@ -24,7 +24,7 @@
   "subcommands": [
     {
       "name": "run",
-      "about": "Run a JavaScript or TypeScript program, or a task or script.\n\nBy default all programs are run in sandbox without access to disk, network or ability to spawn subprocesses.\n  \u001b[38;5;245mdeno run https://examples.deno.land/hello-world.ts\u001b[39m\n\nGrant permission to read from disk and listen to network:\n  \u001b[38;5;245mdeno run --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n\nGrant permission to read allow-listed files from disk:\n  \u001b[38;5;245mdeno run --allow-read=/etc jsr:@std/http/file-server\u001b[39m\n\nGrant all permissions:\n  \u001b[38;5;245mdeno run -A jsr:@std/http/file-server\u001b[39m\n\nSpecifying the filename '-' to read the file from stdin.\n  \u001b[38;5;245mcurl https://examples.deno.land/hello-world.ts | deno run -\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/run\u001b[39m",
+      "about": "Run a JavaScript or TypeScript program, or a task or script.\n\nBy default all programs are run in sandbox without access to disk, network or ability to spawn subprocesses.\n  \u001b[38;5;245mdeno run https://docs.deno.com/hello_world.ts\u001b[39m\n\nGrant permission to read from disk and listen to network:\n  \u001b[38;5;245mdeno run --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n\nGrant permission to read allow-listed files from disk:\n  \u001b[38;5;245mdeno run --allow-read=/etc jsr:@std/http/file-server\u001b[39m\n\nGrant all permissions:\n  \u001b[38;5;245mdeno run -A jsr:@std/http/file-server\u001b[39m\n\nSpecifying the filename '-' to read the file from stdin.\n  \u001b[38;5;245mcurl https://docs.deno.com/hello_world.ts | deno run -\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/run\u001b[39m",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -328,9 +328,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -339,7 +339,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -348,7 +348,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -831,9 +831,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -842,7 +842,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -851,7 +851,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -2095,7 +2095,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -2355,7 +2355,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -2732,7 +2732,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -3537,7 +3537,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -3687,6 +3687,23 @@
       ],
       "subcommands": [],
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno deploy\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[args]...\u001b[0m"
+    },
+    {
+      "name": "sandbox",
+      "about": null,
+      "args": [
+        {
+          "name": "args",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "[args]..."
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno sandbox\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[args]...\u001b[0m"
     },
     {
       "name": "eval",
@@ -3994,9 +4011,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -4005,7 +4022,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -4014,7 +4031,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -4441,7 +4458,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -4908,9 +4925,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -4919,7 +4936,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -4928,7 +4945,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "cached-only",
@@ -5046,6 +5063,15 @@
           "help": "Forcefully overwrite existing installation",
           "help_heading": null,
           "usage": "--force"
+        },
+        {
+          "name": "compile",
+          "short": null,
+          "long": "compile",
+          "required": false,
+          "help": "Install the script as a compiled executable",
+          "help_heading": null,
+          "usage": "--compile"
         },
         {
           "name": "global",
@@ -5628,7 +5654,7 @@
           "short": "I",
           "long": "allow-import",
           "required": false,
-          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
           "help_heading": null,
           "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
         },
@@ -6139,9 +6165,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -6150,7 +6176,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -6159,7 +6185,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "cached-only",
@@ -6821,9 +6847,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -6832,7 +6858,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -6841,7 +6867,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -7233,7 +7259,7 @@
     },
     {
       "name": "upgrade",
-      "about": "Upgrade deno executable to the given version.\n\n\u001b[32mLatest\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m\n\n\u001b[32mSpecific version\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.45.0\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.46.0-rc.1\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m9bc2dd29ad6ba334fd57a20114e367d3c04763d4\u001b[39m\n\n\u001b[32mChannel\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mstable\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mrc\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mcanary\u001b[39m\n\nThe version is downloaded from \u001b[38;5;245mhttps://dl.deno.land\u001b[39m and is used to replace the current executable.\n\nIf you want to not replace the current Deno executable but instead download an update to a\ndifferent location, use the \u001b[36m--output\u001b[39m flag:\n  \u001b[38;5;245mdeno upgrade --output $HOME/my_deno\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/upgrade\u001b[39m",
+      "about": "Upgrade deno executable to the given version.\n\n\u001b[32mLatest\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m\n\n\u001b[32mSpecific version\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.45.0\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.46.0-rc.1\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m9bc2dd29ad6ba334fd57a20114e367d3c04763d4\u001b[39m\n\n\u001b[32mChannel\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mstable\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mrc\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mcanary\u001b[39m\n\nThe version is resolved via \u001b[38;5;245mhttps://dl.deno.land\u001b[39m and then downloaded\nfrom either there or GitHub releases, replacing the current executable.\n\nIf you want to not replace the current Deno executable but instead download an\nupdate to a different location, use the \u001b[36m--output\u001b[39m flag:\n  \u001b[38;5;245mdeno upgrade --output $HOME/my_deno\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/upgrade\u001b[39m",
       "args": [
         {
           "name": "output",
@@ -7270,6 +7296,15 @@
           "help": "Version \u001b[38;5;245m(v1.46.0)\u001b[39m, channel \u001b[38;5;245m(rc, canary)\u001b[39m or commit hash \u001b[38;5;245m(9bc2dd29ad6ba334fd57a20114e367d3c04763d4)\u001b[39m",
           "help_heading": null,
           "usage": "[VERSION]..."
+        },
+        {
+          "name": "checksum",
+          "short": null,
+          "long": "checksum",
+          "required": false,
+          "help": "Verify the downloaded archive against the provided SHA256 checksum",
+          "help_heading": "Upgrade options",
+          "usage": "--checksum <checksum>"
         },
         {
           "name": "cert",
@@ -7670,9 +7705,9 @@
           "short": null,
           "long": "inspect",
           "required": false,
-          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m",
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
           "help_heading": "Debugging options",
-          "usage": "--inspect[=<HOST_AND_PORT>]"
+          "usage": "--inspect[=<HOST_PORT>]"
         },
         {
           "name": "inspect-brk",
@@ -7681,7 +7716,7 @@
           "required": false,
           "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
           "help_heading": "Debugging options",
-          "usage": "--inspect-brk[=<HOST_AND_PORT>]"
+          "usage": "--inspect-brk[=<HOST_PORT>]"
         },
         {
           "name": "inspect-wait",
@@ -7690,7 +7725,7 @@
           "required": false,
           "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
           "help_heading": "Debugging options",
-          "usage": "--inspect-wait[=<HOST_AND_PORT>]"
+          "usage": "--inspect-wait[=<HOST_PORT>]"
         },
         {
           "name": "allow-scripts",
@@ -7796,9 +7831,9 @@
           "short": null,
           "long": "install-alias",
           "required": false,
-          "help": null,
+          "help": "Creates a dx alias so you can run dx <command> instead of deno x <command>",
           "help_heading": null,
-          "usage": "--install-alias[=<install-alias>]"
+          "usage": "--install-alias [<install-alias>]"
         },
         {
           "name": "unstable",
@@ -7922,6 +7957,13 @@
           "args": [],
           "subcommands": [],
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help deploy\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
+          "name": "sandbox",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help sandbox\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
           "name": "eval",
@@ -8112,6 +8154,16 @@
       "example": null
     },
     {
+      "name": "DENO_KV_DEFAULT_PATH",
+      "description": "Set the default path for Deno.openKv() when no path is provided.",
+      "example": null
+    },
+    {
+      "name": "DENO_KV_PATH_PREFIX",
+      "description": "Set a prefix to be added to all Deno.openKv() paths.",
+      "example": null
+    },
+    {
       "name": "DENO_EMIT_CACHE_MODE",
       "description": "Control if the transpiled sources should be cached.",
       "example": null
@@ -8179,6 +8231,11 @@
     {
       "name": "NPM_CONFIG_REGISTRY",
       "description": "URL to use for the npm registry.",
+      "example": null
+    },
+    {
+      "name": "SSLKEYLOGFILE",
+      "description": "Write TLS session keys to the specified file in NSS Key Log format\nfor debugging encrypted traffic with tools like Wireshark.",
       "example": null
     },
     {
