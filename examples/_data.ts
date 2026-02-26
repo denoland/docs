@@ -393,6 +393,16 @@ export const sidebar = [
         href: "/examples/snapshots_tutorial/",
         type: "example",
       },
+      {
+        title: "Boot a Python environment with snapshots",
+        href: "/examples/snapshot_python_video/",
+        type: "video",
+      },
+      {
+        title: "Boot a Python environment with snapshots",
+        href: "/examples/snapshot_python_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
