@@ -3,16 +3,12 @@ title: "About Deno Deploy"
 description: "Guide to Deno Deploy features, comparison with Deploy Classic, and getting started instructions for deployment."
 ---
 
-<a href="https://console.deno.com" class="docs-cta deploy-cta">Go to the Deno
-Deploy dashboard</a>
+<div class="lg:flex lg:flex-row lg:gap-8">
+   <img src="/deno-deploy.svg" alt="Deno Deploy logo" style="max-width: 160px" />
+      <p class="text-lg text-foreground-secondary mt-6">Deno's cloud services provide robust platforms for deploying and running JavaScript and TypeScript applications at global scale.<a href="https://console.deno.com" class="docs-cta deploy-cta mt-2">Go to the Deno
+Deploy dashboard</a></p>
 
-Deno Deploy comes with an easy to use dashboard at
-[console.deno.com](https://console.deno.com). In this dashboard, you can create
-new Deno Deploy organizations that contain Deno Deploy apps.
-
-Within a single organization, you cannot mix Deno Deploy apps with Deploy
-Classic projects. You can switch between different organizations using the
-organization picker in the top left of the dashboard.
+</div>
 
 ## What is Deno Deploy?
 
@@ -20,6 +16,11 @@ Deno Deploy is a serverless platform for running JavaScript and TypeScript
 applications in the cloud (or self-hosted on your own infrastructure). It
 provides a management plane for deploying and running applications with the
 built-in CI or through integrations such as GitHub actions.
+
+Deno Deploy comes with an easy to use dashboard at
+[console.deno.com](https://console.deno.com). Here, you can create and host new
+apps, create and manage Deno Deploy organizations and manage and view your
+databases and app telemetry.
 
 ## Comparison to Deploy Classic
 
