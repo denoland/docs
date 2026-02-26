@@ -7,6 +7,30 @@ interface MarkdownSourceMiddlewareOptions {
   root?: string;
 }
 
+/** Reads a markdown file and returns a Response, or null if not found. Throws on other errors. */
+async function serveMarkdownFile(
+  filePath: string,
+  absoluteRoot: string,
+): Promise<Response | null> {
+  if (!filePath.startsWith(absoluteRoot + "/")) {
+    return new Response("Forbidden", { status: 403 });
+  }
+  try {
+    const file = await Deno.readFile(filePath);
+    return new Response(file, {
+      headers: new Headers({
+        "content-type": "text/markdown; charset=utf-8",
+        "cache-control": "public, max-age=300",
+      }),
+    });
+  } catch (error) {
+    if (error instanceof Deno.errors.NotFound) {
+      return null;
+    }
+    throw error;
+  }
+}
+
 export default function createMarkdownSourceMiddleware(
   { root = "_site" }: MarkdownSourceMiddlewareOptions = {},
 ): RequestHandler {
@@ -18,21 +42,10 @@ export default function createMarkdownSourceMiddleware(
     // Case A: Direct .md URL request (e.g. /runtime/getting_started/installation.md)
     if (pathname.endsWith(".md")) {
       const filePath = join(absoluteRoot, pathname.slice(1));
-      // Prevent path traversal attacks (e.g. /../../etc/passwd.md)
-      if (!filePath.startsWith(absoluteRoot + "/")) {
-        return new Response("Forbidden", { status: 403 });
-      }
       try {
-        const file = await Deno.readFile(filePath);
-        const headers = new Headers({
-          "content-type": "text/markdown; charset=utf-8",
-          "cache-control": "public, max-age=300",
-        });
-        return new Response(file, { headers });
+        const response = await serveMarkdownFile(filePath, absoluteRoot);
+        return response ?? next(req);
       } catch (error) {
-        if (error instanceof Deno.errors.NotFound) {
-          return next(req);
-        }
         log.error(`Failed serving ${pathname} from ${filePath}: ${error}`);
         return new Response("Internal Server Error", { status: 500 });
       }
@@ -49,30 +62,24 @@ export default function createMarkdownSourceMiddleware(
       // e.g. /runtime/getting_started/installation/ -> /runtime/getting_started/installation.md
       const mdPath = pathname.replace(/\/$/, "") + ".md";
       const filePath = join(absoluteRoot, mdPath.slice(1));
-      // Prevent path traversal attacks
-      if (!filePath.startsWith(absoluteRoot + "/")) {
-        return new Response("Forbidden", { status: 403 });
-      }
       try {
-        const file = await Deno.readFile(filePath);
-        const headers = new Headers({
-          "content-type": "text/markdown; charset=utf-8",
-          "cache-control": "public, max-age=300",
-        });
-        return new Response(file, { headers });
-      } catch (error) {
-        if (error instanceof Deno.errors.NotFound) {
-          // No .md source for this page (e.g. generated API reference) — serve HTML normally.
-          // Add Vary: Accept so HTTP caches don't serve this HTML to markdown-only requests.
-          const response = await next(req);
-          const headers = new Headers(response.headers);
-          headers.set("vary", "Accept");
-          return new Response(response.body, {
-            status: response.status,
-            statusText: response.statusText,
-            headers,
-          });
+        const response = await serveMarkdownFile(filePath, absoluteRoot);
+        if (response) {
+          // Add Vary: Accept so caches don't serve this markdown to requests that want HTML
+          response.headers.set("vary", "Accept");
+          return response;
         }
+        // No .md source for this page (e.g. generated API reference) — serve HTML normally.
+        // Add Vary: Accept so HTTP caches don't serve this HTML to markdown-only requests.
+        const htmlResponse = await next(req);
+        const headers = new Headers(htmlResponse.headers);
+        headers.set("vary", "Accept");
+        return new Response(htmlResponse.body, {
+          status: htmlResponse.status,
+          statusText: htmlResponse.statusText,
+          headers,
+        });
+      } catch (error) {
         log.error(`Failed serving markdown for ${pathname}: ${error}`);
         return new Response("Internal Server Error", { status: 500 });
       }

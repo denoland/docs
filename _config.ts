@@ -251,10 +251,9 @@ site.addEventListener("afterBuild", async () => {
     try {
       await Deno.stat(dir);
     } catch (error) {
-      if (error instanceof Deno.errors.NotFound) {
-        continue;
+      if (!(error instanceof Deno.errors.NotFound)) {
+        log.error(`Error accessing content directory ${dir}: ${error}`);
       }
-      log.error(`Error accessing content directory ${dir}: ${error}`);
       continue;
     }
     try {
