@@ -136,6 +136,43 @@ import "./worker.ts";
 deno compile main.ts
 ```
 
+## Self-Extracting Executables
+
+By default, compiled executables serve embedded files from an in-memory virtual
+file system. The `--self-extracting` flag changes this behavior so that the
+binary extracts all embedded files to disk on first run and uses real file
+system operations at runtime.
+
+```shell
+deno compile --self-extracting main.ts
+```
+
+This is useful for scenarios where code needs real files on disk, such as native
+addons or native code that reads relative files.
+
+The extraction directory is chosen in order of preference:
+
+1. `<exe_dir>/<exe_name>.fs/<hash>/` (next to the compiled binary)
+2. Platform data directory fallback:
+   - Linux: `$XDG_DATA_HOME/<exe_name>/<hash>` or
+     `~/.local/share/<exe_name>/<hash>`
+   - macOS: `~/Library/Application Support/<exe_name>/<hash>`
+   - Windows: `%LOCALAPPDATA%\<exe_name>\<hash>`
+
+Files are only extracted once — subsequent runs reuse the extracted directory if
+it already exists and the hash matches.
+
+### Trade-offs
+
+Self-extracting mode enables broader compatibility, but comes with some
+trade-offs:
+
+- **Initial startup cost**: The first run takes longer due to file extraction.
+- **Disk usage**: Extracted files take up additional space on disk.
+- **Memory usage**: Higher memory usage since embedded content can no longer be
+  referenced as static data.
+- **Tamper risk**: Users or other code can modify the extracted files on disk.
+
 ## Code Signing
 
 ### macOS
