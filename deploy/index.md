@@ -4,7 +4,7 @@ description: "Guide to Deno Deploy features, comparison with Deploy Classic, and
 ---
 
 <div class="lg:flex lg:flex-row lg:gap-8">
-   <img src="/deno-deploy.svg" alt="Deno Deploy logo" style="max-width: 160px" />
+   <img src="/deno-deploy.svg" alt="Deno Deploy logo" style="max-width: 120px" />
       <p class="text-lg text-foreground-secondary mt-6">Deno's cloud services provide robust platforms for deploying and running JavaScript and TypeScript applications at global scale.<a href="https://console.deno.com" class="docs-cta deploy-cta mt-2">Go to the Deno
 Deploy dashboard</a></p>
 
