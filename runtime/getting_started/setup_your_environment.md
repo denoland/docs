@@ -109,7 +109,7 @@ instructions to enable the
 Note that if you also have `ts_ls` as an LSP client, you may run into issues
 where both `ts_ls` and `denols` are attached to your current buffer. To resolve
 this, make sure to set some unique `root_dir` for both `ts_ls` and `denols`. You
-may also need to set `single_file_support` to `false` for `ts_ls` to prevent it
+may also need to set `workspace_required` to `true` for `ts_ls` to prevent it
 from running in `single file mode`. Here is an example of such a configuration:
 
 ```lua
@@ -121,12 +121,26 @@ vim.lsp.config('denols', {
 vim.lsp.config('ts_ls', {
     on_attach = on_attach,
     root_markers = {"package.json"},
-    single_file_support = false,
+    workspace_required = true,
 })
 ```
 
 For Deno, the example above assumes a `deno.json` or `deno.jsonc` file exists at
 the root of the project.
+
+If you're using `nvim-lspconfig`, you'll have to set `root_dir` for `ts_ls`.
+This is because `nvim-lspconfig` creates a
+[`root_dir`](https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ts_ls.lua#L56-L68)
+entry and `root_markers` is
+[unused if root_dir is specified](https://neovim.io/doc/user/lsp.html).
+
+```lua
+vim.lsp.config('ts_ls', {
+    on_attach = on_attach,
+    root_dir = {"package.json"},
+    workspace_required = true,
+})
+```
 
 ##### Kickstart.nvim and Mason LSP
 
