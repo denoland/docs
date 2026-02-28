@@ -101,9 +101,9 @@ done:
 
 Examples of good PR title:
 
-- fix(std/http): Fix race condition in server
-- docs(console): Update docstrings
-- feat(doc): Handle nested re-exports
+- fix(std/http): fix race condition in server
+- docs(console): update docstrings
+- feat(doc): handle nested re-exports
 
 Examples of bad PR title:
 
