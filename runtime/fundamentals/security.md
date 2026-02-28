@@ -219,6 +219,9 @@ Network access is granted using the `--allow-net` flag. This flag can be
 specified with a list of IP addresses or hostnames to allow access to specific
 network addresses.
 
+Hostnames do not allow subdomains, unless explicitly listed. To allow any
+subdomain for a hostname, `*` can be used as wildcard for any subdomain.
+
 Definition: `--allow-net[=<IP_OR_HOSTNAME>...]` or `-N[=<IP_OR_HOSTNAME>...]`
 
 ```sh
@@ -229,6 +232,9 @@ deno run --allow-net script.ts
 
 # Allow network access to github.com and jsr.io
 deno run --allow-net=github.com,jsr.io script.ts
+
+# Allow all subdomains for example.com
+deno run --allow-net="*.example.com" script.ts
 
 # A hostname at port 80:
 deno run --allow-net=example.com:80 script.ts
