@@ -11,6 +11,15 @@ document.querySelectorAll<HTMLButtonElement>(".copy-page-main-btn").forEach(
             label.textContent = original;
           }, 2000);
         }
+      }).catch(() => {
+        const label = btn.querySelector<HTMLElement>(".copy-page-main-label");
+        if (label) {
+          const original = label.textContent;
+          label.textContent = "Copy failed";
+          setTimeout(() => {
+            label.textContent = original;
+          }, 2000);
+        }
       });
     });
   },
@@ -30,8 +39,8 @@ panel?.addEventListener("toggle", (event) => {
     const rect = toggleBtn.getBoundingClientRect();
     panel.style.top = `${rect.bottom + 4}px`;
     panel.style.right = `${window.innerWidth - rect.right}px`;
-    if (chevron) chevron.style.transform = "rotate(180deg)";
-  } else {
-    if (chevron) chevron.style.transform = "";
+  }
+  if (chevron) {
+    chevron.style.transform = e.newState === "open" ? "rotate(180deg)" : "";
   }
 });
