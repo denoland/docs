@@ -1,4 +1,5 @@
 import EditThisPage from "./EditThisPage.tsx";
+import ViewMarkdown from "./ViewMarkdown.tsx";
 
 export default function Feedback({ file }: { file: string | undefined }) {
   if (!file) {
@@ -70,6 +71,7 @@ export default function Feedback({ file }: { file: string | undefined }) {
                     </svg>
                   </label>
                   {!file.includes("[") && <EditThisPage file={file} />}
+                  {!file.includes("[") && <ViewMarkdown file={file} />}
                 </div>
                 <div
                   id="feedback-more"
