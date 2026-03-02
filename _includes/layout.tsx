@@ -120,7 +120,6 @@ export default function Layout(data: Lume.Data) {
               toc={data.toc}
               data={data}
               hasSubNav={hasSubNav}
-              file={data.page?.sourcePath}
             />
           )}
         </div>

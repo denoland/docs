@@ -9,7 +9,7 @@ export default function CopyPage({ file }: { file: string | undefined }) {
   }`;
 
   return (
-    <details class="copy-page-dropdown">
+    <details class="copy-page-dropdown relative">
       <summary class="btn list-none [&::-webkit-details-marker]:hidden flex items-center gap-2 cursor-pointer select-none">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ export default function CopyPage({ file }: { file: string | undefined }) {
         </svg>
       </summary>
 
-      <div class="mt-2 border border-foreground-tertiary rounded-md overflow-hidden bg-white dark:bg-gray-900">
+      <div class="absolute right-0 z-50 mt-1 w-72 border border-foreground-tertiary rounded-md overflow-hidden bg-white dark:bg-gray-900 shadow-lg">
         <button class="copy-page-link-btn flex items-start gap-3 w-full px-4 py-3 text-left hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@ export default function CopyPage({ file }: { file: string | undefined }) {
         <a
           href={file}
           target="_blank"
-          class="flex items-start gap-3 px-4 py-3 border-t border-foreground-tertiary hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
+          class="no-underline flex items-start gap-3 px-4 py-3 border-t border-foreground-tertiary hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ export default function CopyPage({ file }: { file: string | undefined }) {
         <a
           href={claudeUrl}
           target="_blank"
-          class="flex items-start gap-3 px-4 py-3 border-t border-foreground-tertiary hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
+          class="no-underline flex items-start gap-3 px-4 py-3 border-t border-foreground-tertiary hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
