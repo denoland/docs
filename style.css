@@ -1233,8 +1233,8 @@
     padding: 0;
     border: none;
     /* Styled via Tailwind */
-    @apply w-72 rounded-md overflow-hidden bg-white dark:bg-gray-900
-      border border-foreground-tertiary shadow-lg;
+    @apply w-72 rounded-md overflow-hidden bg-white dark:bg-gray-900 border
+      border-foreground-tertiary shadow-lg;
   }
 
   #feedback-no:focus + label,
