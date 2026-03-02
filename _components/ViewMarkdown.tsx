@@ -1,5 +1,5 @@
 export default function ViewMarkdown({ file }: { file: string | undefined }) {
-  if (!file) return null;
+  if (!file || !file.endsWith(".md")) return null;
 
   return (
     <a class="btn" target="_blank" href={file}>
