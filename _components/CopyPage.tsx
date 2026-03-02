@@ -37,9 +37,7 @@ export default function CopyPage({ file }: { file: string | undefined }) {
       </summary>
 
       <div class="mt-2 border border-foreground-tertiary rounded-md overflow-hidden bg-white dark:bg-gray-900">
-        <button
-          class="copy-page-link-btn flex items-start gap-3 w-full px-4 py-3 text-left hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
-        >
+        <button class="copy-page-link-btn flex items-start gap-3 w-full px-4 py-3 text-left hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
