@@ -8,10 +8,12 @@ import redirectsMiddleware from "./middleware/redirects.ts";
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import expires from "lume/middlewares/expires.ts";
 import createLlmsFilesMiddleware from "./middleware/llmsFiles.ts";
+import createMarkdownSourceMiddleware from "./middleware/markdownSource.ts";
 
 export const server = new Server({ root: "_site" });
 
 server.use(redirectsMiddleware);
+server.use(createMarkdownSourceMiddleware({ root: "_site" }));
 server.use(createLlmsFilesMiddleware({ root: "_site" }));
 server.use(NotFoundMiddleware({ root: "_site", page404: "./404/" }));
 server.use(createRoutingMiddleware());
