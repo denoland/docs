@@ -150,5 +150,6 @@
   "/runtime/fundamentals/standard_library/": "/runtime/reference/std/",
   "/deploy/classic/faunadb/": "/examples/#connecting-to-databases",
   "/hello_world.ts": "/examples/scripts/hello_world.ts",
-  "/services/": "/deploy/"
+  "/services/": "/deploy/",
+  "/deploy/cron/": "/deploy/reference/cron/"
 }
