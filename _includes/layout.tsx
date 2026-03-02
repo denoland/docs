@@ -77,6 +77,7 @@ export default function Layout(data: Lume.Data) {
         <script type="module" defer src="/js/copy.js"></script>
         <script type="module" defer src="/js/tabs.js"></script>
         <script type="module" defer src="/js/feedback.js"></script>
+        <script type="module" defer src="/js/copy-page.js"></script>
         <script type="module" defer src="/js/search.js"></script>
         <script
           async
@@ -119,6 +120,7 @@ export default function Layout(data: Lume.Data) {
               toc={data.toc}
               data={data}
               hasSubNav={hasSubNav}
+              file={data.page?.sourcePath}
             />
           )}
         </div>
