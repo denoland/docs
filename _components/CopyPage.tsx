@@ -9,7 +9,7 @@ export default function CopyPage({ file }: { file: string | undefined }) {
   }`;
 
   return (
-    <details class="copy-page-dropdown mb-4">
+    <details class="copy-page-dropdown">
       <summary class="btn list-none [&::-webkit-details-marker]:hidden flex items-center gap-2 cursor-pointer select-none">
         <svg
           xmlns="http://www.w3.org/2000/svg"
