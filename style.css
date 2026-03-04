@@ -1226,6 +1226,15 @@
     }
   }
 
+  .copy-page-panel {
+    /* Reset browser popover defaults */
+    inset: unset;
+    margin: 0;
+    padding: 0;
+    @apply w-72 rounded-md overflow-hidden bg-white dark:bg-gray-900 border
+      border-foreground-tertiary shadow-lg;
+  }
+
   #feedback-no:focus + label,
   #feedback-yes:focus + label {
     @apply shadow-[inset_0_0_0_1px];
