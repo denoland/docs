@@ -236,28 +236,20 @@ Please use these feature flags instead moving forward.
 
 ## `--unstable-temporal`
 
-Enable the experimental [Temporal API](https://tc39.es/proposal-temporal/docs/)
-in the global scope. The Temporal API is a modern date and time API that is
-being developed as a replacement for the legacy `Date` object in JavaScript. It
-provides better support for time zones, calendars, and more precise date/time
-calculations.
+:::note
 
-To use the Temporal API in your Deno program, run it with the flag:
+As of Deno 2.7, the Temporal API is **stable** and available by default. The
+`--unstable-temporal` flag is no longer required.
 
-```sh
-deno run --unstable-temporal your_script.ts
-```
+:::
 
-Or configure it in your `deno.json`:
-
-```json title="deno.json"
-{
-  "unstable": ["temporal"]
-}
-```
+The [Temporal API](https://tc39.es/proposal-temporal/docs/) is a modern date and
+time API available in the global scope. It provides better support for time
+zones, calendars, and more precise date/time calculations than the legacy `Date`
+object.
 
 ```ts title="example.ts"
-// Example using Temporal API
+// Get the current date and time
 const now = Temporal.Now.plainDateTimeISO();
 console.log(`Current date and time: ${now}`);
 
@@ -269,7 +261,3 @@ console.log(`Next week: ${nextWeek}`);
 const zonedDateTime = Temporal.Now.zonedDateTimeISO("America/New_York");
 console.log(`Time in New York: ${zonedDateTime}`);
 ```
-
-Note that the Temporal API is still experimental and the specification may
-change before it becomes stable. Use this flag only for testing and
-experimentation.
