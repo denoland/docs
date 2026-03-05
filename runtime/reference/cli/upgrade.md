@@ -63,6 +63,30 @@ $ deno upgrade --quiet
 This is useful for scripting environments or when you want cleaner output in CI
 pipelines.
 
+## Cached downloads
+
+Downloaded Deno binaries are cached in `$DENO_DIR/dl/`. If you reinstall the
+same version later, the cached archive is reused instead of re-downloading. For
+canary builds, old entries are automatically removed, keeping only the 10 most
+recent versions.
+
+## Checksum verification
+
+Use the `--checksum` flag to verify a downloaded binary against a known SHA-256
+hash. This protects against tampering in CI environments and security-sensitive
+setups:
+
+```shell
+$ deno upgrade --checksum=<sha256-hash> 2.7.0
+```
+
+SHA-256 checksums are published as `.sha256sum` files alongside release archives
+on GitHub:
+
+```shell
+$ curl -sL https://github.com/denoland/deno/releases/download/v2.7.0/deno-x86_64-unknown-linux-gnu.zip.sha256sum
+```
+
 ## Canary build
 
 By default, Deno will upgrade from the official GitHub releases. You can specify
