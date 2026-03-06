@@ -209,6 +209,33 @@ to JavaScript, Deno uses the file system as a cache. This means that file system
 resources like storage space can be consumed by Deno even if the user has not
 explicitly granted read/write permissions.
 
+#### Symbolic links
+
+When reading or writing through a symbolic link, Deno checks permissions based
+on the symlink's location, not the target it points to. This means if you have
+`--allow-read=/app`, you can read through a symlink at `/app/link` even if it
+points to a file outside `/app`.
+
+However, Deno prevents privilege escalation through symlinks. If a symlink
+resolves to a sensitive system path, additional permissions are required:
+
+- **`/proc`, `/dev`, `/sys` (Linux)**: Reading or writing through symlinks that
+  resolve to these paths requires `--allow-all`, as these paths can expose
+  sensitive system information.
+- **`/proc/**/environ`**: Requires `--allow-env` since it exposes environment
+  variables.
+- **`/dev/null`, `/dev/zero`, `/dev/random`, `/dev/urandom`**: These safe
+  device files are always accessible without additional permissions.
+
+Creating symlinks with `Deno.symlink()` requires both `--allow-read` and
+`--allow-write` with full access (not path-specific), because symlinks can
+point to arbitrary locations.
+
+> **Note**: Pre-existing symlinks created before your Deno program runs are not
+> subject to symlink creation restrictions. The permission model only governs
+> what your code can create and access, not what already exists on the
+> filesystem.
+
 ### Network access
 
 By default, executing code can not make network requests, open network listeners
