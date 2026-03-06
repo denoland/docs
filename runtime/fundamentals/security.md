@@ -231,10 +231,10 @@ Creating symlinks with `Deno.symlink()` requires both `--allow-read` and
 `--allow-write` with full access (not path-specific), because symlinks can point
 to arbitrary locations.
 
-> **Note**: Pre-existing symlinks created before your Deno program runs are not
-> subject to symlink creation restrictions. The permission model only governs
-> what your code can create and access, not what already exists on the
-> filesystem.
+> **Note**: Symlinks that already exist on the filesystem can be read through
+> using the permissions for the symlink's location. The full read/write
+> permission requirement only applies to _creating_ new symlinks with
+> `Deno.symlink()`.
 
 ### Network access
 
