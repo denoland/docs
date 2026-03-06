@@ -224,12 +224,12 @@ resolves to a sensitive system path, additional permissions are required:
   sensitive system information.
 - **`/proc/**/environ`**: Requires `--allow-env` since it exposes environment
   variables.
-- **`/dev/null`, `/dev/zero`, `/dev/random`, `/dev/urandom`**: These safe
-  device files are always accessible without additional permissions.
+- **`/dev/null`, `/dev/zero`, `/dev/random`, `/dev/urandom`**: These safe device
+  files are always accessible without additional permissions.
 
 Creating symlinks with `Deno.symlink()` requires both `--allow-read` and
-`--allow-write` with full access (not path-specific), because symlinks can
-point to arbitrary locations.
+`--allow-write` with full access (not path-specific), because symlinks can point
+to arbitrary locations.
 
 > **Note**: Pre-existing symlinks created before your Deno program runs are not
 > subject to symlink creation restrictions. The permission model only governs
