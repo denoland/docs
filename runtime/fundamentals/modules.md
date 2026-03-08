@@ -563,6 +563,45 @@ When using a `package.json` file, dev dependencies can be added to the separate
 }
 ```
 
+### JSR packages in package.json
+
+You can depend on JSR packages directly from `package.json` using the `jsr:`
+scheme, without needing a separate `deno.json`:
+
+```json title="package.json"
+{
+  "dependencies": {
+    "@std/path": "jsr:^1.0.9"
+  }
+}
+```
+
+This works with `deno install` and brings JSR packages to any project that uses
+`package.json` for dependency management.
+
+### Dependency overrides
+
+The `overrides` field in `package.json` lets you control transitive dependency
+versions throughout your dependency tree. This is useful for applying security
+patches, fixing version compatibility issues, or replacing packages:
+
+```json title="package.json"
+{
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "overrides": {
+    "cookie": "0.7.0",
+    "express": {
+      "qs": "6.13.0"
+    }
+  }
+}
+```
+
+In this example, `cookie` is pinned globally to `0.7.0`, while `qs` is
+overridden only when required by `express`.
+
 ### Why does Deno not have a `devImports` field?
 
 To understand why Deno does not separate out dev dependencies in the package
