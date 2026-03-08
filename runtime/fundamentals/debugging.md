@@ -187,18 +187,30 @@ deno run --cpu-prof your_script.ts
 ```
 
 When your program exits, Deno will write a `.cpuprofile` file to the current
-directory. This file can be loaded into Chrome DevTools (Performance tab) or
-other V8 profile viewers for analysis.
+directory (e.g., `CPU.1769017882255.25986.cpuprofile`). This file can be loaded
+into Chrome DevTools (Performance tab) or other V8 profile viewers for analysis.
 
 ### CPU profiling flags
 
 | Flag | Description |
 | --- | --- |
 | `--cpu-prof` | Enable CPU profiling. Profile is written to disk on exit. |
-| `--cpu-prof-dir=<DIR>` | Directory where the CPU profile will be written. Defaults to current directory. |
+| `--cpu-prof-dir=<DIR>` | Directory where the CPU profile will be written. Defaults to current directory. Implicitly enables `--cpu-prof`. |
 | `--cpu-prof-name=<NAME>` | Filename for the CPU profile. Defaults to `CPU.<timestamp>.<pid>.cpuprofile`. |
 | `--cpu-prof-interval=<MICROSECONDS>` | Sampling interval in microseconds. Default is `1000` (1ms). Lower values give more detail but larger files. |
 | `--cpu-prof-md` | Generate a human-readable Markdown report alongside the `.cpuprofile` file. |
+
+### Analyzing profiles in Chrome DevTools
+
+To analyze the `.cpuprofile` file:
+
+1. Open Chrome DevTools (F12)
+2. Go to the **Performance** tab
+3. Click the **Load profile** button (up arrow icon)
+4. Select your `.cpuprofile` file
+
+The DevTools will display a flame chart and detailed breakdown of where time was
+spent in your application.
 
 ### Example: Markdown report
 
@@ -206,19 +218,19 @@ The `--cpu-prof-md` flag generates a Markdown summary that's easy to read
 without loading the profile into DevTools:
 
 ```sh
-deno run --cpu-prof --cpu-prof-md server.js
+deno run -A --cpu-prof --cpu-prof-md server.js
 ```
 
 This creates both a `.cpuprofile` file and a `.md` file with a report like:
 
-```md
+````md
 # CPU Profile
 
 | Duration | Samples | Interval | Functions |
 | --- | --- | --- | --- |
 | 833.06ms | 641 | 1000us | 10 |
 
-**Top 10:** `op_crypto_get_random_values` 98.5%, `(garbage collector)` 0.7%, ...
+**Top 10:** `op_crypto_get_random_values` 98.5%, `(garbage collector)` 0.7%, `getRandomValues` 0.6%, `assertBranded` 0.2%
 
 ## Hot Functions (Self Time)
 
@@ -226,11 +238,29 @@ This creates both a `.cpuprofile` file and a `.md` file with a report like:
 | ---: | ---: | ---: | ---: | --- | --- |
 | 98.5% | 533.00ms | 98.5% | 533.00ms | `op_crypto_get_random_values` | [native code] |
 | 0.7% | 4.00ms | 0.7% | 4.00ms | `(garbage collector)` | [native code] |
-...
-```
+| 0.6% | 3.00ms | 0.6% | 3.00ms | `getRandomValues` | 00_crypto.js:5274 |
+| 0.2% | 1.00ms | 0.2% | 1.00ms | `assertBranded` | 00_webidl.js:1149 |
+
+## Call Tree (Total Time)
+
+| Total% | Total | Self% | Self | Function | Location |
+| ---: | ---: | ---: | ---: | --- | --- |
+| 16.8% | 91.00ms | 16.8% | 91.00ms | `(anonymous)` | server.js:1 |
+| 0.6% | 3.00ms | 0.6% | 3.00ms |   `getRandomValues` | 00_crypto.js:5274 |
+| 98.5% | 533.00ms | 98.5% | 533.00ms |     `op_crypto_get_random_values` | [native code] |
+
+## Function Details
+
+### `op_crypto_get_random_values`
+[native code] | Self: 98.5% (533.00ms) | Total: 98.5% (533.00ms) | Samples: 533
+````
 
 The report includes:
-- **Hot Functions**: Functions sorted by self time (time spent in the function itself)
+
+- **Summary**: Total duration, sample count, sampling interval, and function count
+- **Top 10**: Quick overview of the most expensive functions
+- **Hot Functions**: Functions sorted by self time (time spent in the function
+  itself, excluding callees)
 - **Call Tree**: Hierarchical view showing the call stack and time distribution
 - **Function Details**: Per-function breakdown with sample counts
 
