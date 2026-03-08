@@ -1,5 +1,5 @@
 ---
-title: "`deno create`, scaffold a new project"
+title: "deno create, scaffold a new project"
 command: create
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno create"
