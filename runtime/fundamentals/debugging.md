@@ -176,6 +176,64 @@ two events is the time taken to execute the op. This flag can be useful for
 performance profiling, debugging hanging programs, or understanding how Deno
 works under the hood.
 
+## CPU Profiling
+
+Deno includes built-in support for V8 CPU profiling, which helps you identify
+performance bottlenecks in your code. Use the `--cpu-prof` flag to capture a CPU
+profile during program execution:
+
+```sh
+deno run --cpu-prof your_script.ts
+```
+
+When your program exits, Deno will write a `.cpuprofile` file to the current
+directory. This file can be loaded into Chrome DevTools (Performance tab) or
+other V8 profile viewers for analysis.
+
+### CPU profiling flags
+
+| Flag | Description |
+| --- | --- |
+| `--cpu-prof` | Enable CPU profiling. Profile is written to disk on exit. |
+| `--cpu-prof-dir=<DIR>` | Directory where the CPU profile will be written. Defaults to current directory. |
+| `--cpu-prof-name=<NAME>` | Filename for the CPU profile. Defaults to `CPU.<timestamp>.<pid>.cpuprofile`. |
+| `--cpu-prof-interval=<MICROSECONDS>` | Sampling interval in microseconds. Default is `1000` (1ms). Lower values give more detail but larger files. |
+| `--cpu-prof-md` | Generate a human-readable Markdown report alongside the `.cpuprofile` file. |
+
+### Example: Markdown report
+
+The `--cpu-prof-md` flag generates a Markdown summary that's easy to read
+without loading the profile into DevTools:
+
+```sh
+deno run --cpu-prof --cpu-prof-md server.js
+```
+
+This creates both a `.cpuprofile` file and a `.md` file with a report like:
+
+```md
+# CPU Profile
+
+| Duration | Samples | Interval | Functions |
+| --- | --- | --- | --- |
+| 833.06ms | 641 | 1000us | 10 |
+
+**Top 10:** `op_crypto_get_random_values` 98.5%, `(garbage collector)` 0.7%, ...
+
+## Hot Functions (Self Time)
+
+| Self% | Self | Total% | Total | Function | Location |
+| ---: | ---: | ---: | ---: | --- | --- |
+| 98.5% | 533.00ms | 98.5% | 533.00ms | `op_crypto_get_random_values` | [native code] |
+| 0.7% | 4.00ms | 0.7% | 4.00ms | `(garbage collector)` | [native code] |
+...
+```
+
+The report includes:
+- **Hot Functions**: Functions sorted by self time (time spent in the function itself)
+- **Call Tree**: Hierarchical view showing the call stack and time distribution
+- **Function Details**: Per-function breakdown with sample counts
+
 ## OpenTelemetry integration
 
 For production applications or complex systems, OpenTelemetry provides a more
