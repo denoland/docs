@@ -1,5 +1,5 @@
 ---
-title: "`deno audit`, audit dependencies for vulnerabilities"
+title: "deno audit, audit dependencies for vulnerabilities"
 command: audit
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno audit"
@@ -47,4 +47,3 @@ Don't error if the audit data can't be retrieved from the registry:
 ```sh
 deno audit --ignore-registry-errors
 ```
-

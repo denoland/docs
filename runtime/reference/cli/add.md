@@ -1,5 +1,5 @@
 ---
-title: "`deno add`, add dependencies"
+title: "deno add, add dependencies"
 command: add
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno add"
@@ -39,4 +39,3 @@ deno add --npm express
 If your project has a `package.json`, npm packages will be added to
 `dependencies` in `package.json`. Otherwise, all packages are added to the
 `imports` field in `deno.json`.
-
