@@ -160,18 +160,17 @@ $ deno install -n awesome_cli https://example.com/awesome/cli.ts
 
 ### deno install --global --compile [PACKAGE_OR_URL]
 
-Use this command to compile a package or script into a standalone, self-contained
-binary. The resulting executable can be distributed and run without requiring
-Deno to be installed on the target system.
+Use this command to compile a package or script into a standalone,
+self-contained binary. The resulting executable can be distributed and run
+without requiring Deno to be installed on the target system.
 
 ```shell
 $ deno install --global --compile -A npm:@anthropic-ai/claude-code
 ```
 
-This combines the behavior of
-[`deno compile`](/runtime/reference/cli/compile/) with global installation —
-producing a native binary placed in the installation root (same as
-`--global` without `--compile`).
+This combines the behavior of [`deno compile`](/runtime/reference/cli/compile/)
+with global installation — producing a native binary placed in the installation
+root (same as `--global` without `--compile`).
 
 ## Native Node.js addons
 
