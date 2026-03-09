@@ -37,12 +37,11 @@ deno run dev
 You should now have a Svelte app running locally at `http://localhost:5173` (or
 another port if 5173 is already in use).
 
-## Set up vite, to allow tunneling
+## Set up Vite to allow tunneling
 
 The Vite server used by Svelte is restricted to localhost by default, so to make
-it more widely available we'll make a\
-small change to our `vite.config.js` file. Open `vite.config.js` and add a
-`server` section to set `allowedHosts: "true"`:
+it more widely available we'll make a small change to our `vite.config.js` file.
+Open `vite.config.js` and add a `server` section to set `allowedHosts: true`:
 
 ```js title="vite.config.js"
 import { sveltekit } from "@sveltejs/kit/vite";
@@ -51,7 +50,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [sveltekit()],
   server: {
-    allowedHosts: "true",
+    allowedHosts: true,
   },
 });
 ```

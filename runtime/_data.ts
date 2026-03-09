@@ -129,6 +129,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/compile/",
           },
           {
+            title: "deno create",
+            href: "/runtime/reference/cli/create/",
+          },
+          {
             title: "deno completions",
             href: "/runtime/reference/cli/completions/",
           },
@@ -195,6 +199,10 @@ export const sidebar = [
           {
             title: "deno run",
             href: "/runtime/reference/cli/run/",
+          },
+          {
+            title: "deno sandbox",
+            href: "/runtime/reference/cli/sandbox/",
           },
           {
             title: "deno serve",

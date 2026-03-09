@@ -403,7 +403,7 @@ hello
 Deno: undefined
 ```
 
-Shell variables can be useful when we want to re-use a value, but don't want it
+Shell variables can be useful when we want to reuse a value, but don't want it
 available in any spawned processes.
 
 ### Exit status variable

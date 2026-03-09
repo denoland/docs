@@ -7,6 +7,9 @@ Deno Sandbox can hand out SSH credentials so you can inspect the filesystem,
 tail logs, run editors, or forward ports. SSH access is available both in your
 terminal as a command and in the Deno Deploy Sandbox UI.
 
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
+
 ```tsx
 import { Sandbox } from "@deno/sandbox";
 
@@ -18,6 +21,43 @@ console.log(`ssh ${username}@${hostname}`);
 // keep process alive or interact via SSH until done...
 await new Promise((resolve) => setTimeout(resolve, 10 * 60 * 1000));
 ```
+
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+import time
+from deno_sandbox import DenoDeploy
+
+sdk = DenoDeploy()
+
+with sdk.sandbox.create() as sandbox:
+  ssh = sandbox.expose_ssh()
+  print(f"ssh {ssh['username']}@{ssh['hostname']}")
+
+  # keep process alive or interact via SSH until done...
+  time.sleep(10 * 60)
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+import asyncio
+from deno_sandbox import AsyncDenoDeploy
+
+sdk = AsyncDenoDeploy()
+
+async with sdk.sandbox.create() as sandbox:
+  ssh = await sandbox.expose_ssh()
+  print(f"ssh {ssh['username']}@{ssh['hostname']}")
+
+  # keep process alive or interact via SSH until done...
+  await asyncio.sleep(10 * 60)
+```
+
+</deno-tab>
+</deno-tabs>
 
 The sandbox remains reachable until the configured timeout expires. Once your
 script releases its references (for example, the `await using` block ends) the
@@ -87,6 +127,9 @@ end it on demand.
 
 ## Example workflow
 
+<deno-tabs group-id="sandbox-sdk">
+<deno-tab value="js" label="JavaScript" default>
+
 ```tsx
 import { Sandbox } from "@deno/sandbox";
 
@@ -104,6 +147,55 @@ console.log(`Connect with: ssh ${ssh.username}@${ssh.hostname}`);
 // Block until you're done debugging manually
 await new Promise((resolve) => setTimeout(resolve, 10 * 60 * 1000));
 ```
+
+</deno-tab>
+<deno-tab value="python" label="Python">
+
+```py
+import time
+from deno_sandbox import DenoDeploy
+
+sdk = DenoDeploy()
+
+with sdk.sandbox.create(timeout="10m") as sandbox:
+  # Prepare the app
+  sandbox.fs.upload("./app", ".")
+  proc = sandbox.spawn("deno", args=["task", "dev"])
+  # start server; leave running for inspection
+
+  # Get SSH details
+  ssh = sandbox.expose_ssh()
+  print(f"Connect with: ssh {ssh['username']}@{ssh['hostname']}")
+
+  # Block until you're done debugging manually
+  time.sleep(10 * 60)
+```
+
+</deno-tab>
+<deno-tab value="python-async" label="Python (Async)">
+
+```py
+import asyncio
+from deno_sandbox import AsyncDenoDeploy
+
+sdk = AsyncDenoDeploy()
+
+async with sdk.sandbox.create(timeout="10m") as sandbox:
+  # Prepare the app
+  await sandbox.fs.upload("./app", ".")
+  proc = await sandbox.spawn("deno", args=["task", "dev"])
+  # start server; leave running for inspection
+
+  # Get SSH details
+  ssh = await sandbox.expose_ssh()
+  print(f"Connect with: ssh {ssh['username']}@{ssh['hostname']}")
+
+  # Block until you're done debugging manually
+  await asyncio.sleep(10 * 60)
+```
+
+</deno-tab>
+</deno-tabs>
 
 Use this pattern to investigate flaky builds, run interactive REPLs, or pair
 with teammates without promoting the code to a full Deploy app.

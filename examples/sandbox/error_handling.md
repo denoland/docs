@@ -35,3 +35,31 @@ full status object, so you can branch on `status.code` or `status.success`, log
 diagnostics, or retry specific commands without losing context. This pattern is
 essential for robust automation where commands might fail due to user input,
 transient network issues, or missing dependencies.
+
+## Custom error classes
+
+You can handle errors with custom error classes in a sandbox.
+
+Catching `SandboxCommandError` lets you differentiate sandbox command failures
+from other exceptions. When the error is the `SandboxCommandError` class, you
+can read structured fields such as `error.code` or format `error.message` to
+decide whether to retry, escalate, or map exit codes to your own domain-specific
+errors:
+
+```ts
+import { Sandbox, SandboxCommandError } from "@deno/sandbox";
+
+await using sandbox = await Sandbox.create();
+
+try {
+  await sandbox.sh`exit 42`;
+} catch (error) {
+  if (error instanceof SandboxCommandError) {
+    console.log("Exit code:", error.code); // → 42
+    console.log("Error message:", error.message);
+  }
+}
+```
+
+This makes it easier to build higher-level automation that reacts intelligently
+to known failure modes instead of treating every thrown error the same.

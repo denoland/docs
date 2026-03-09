@@ -35,6 +35,14 @@ An application is a single deployed web service with one build configuration,
 build history, environment variables, attached custom domains, a linked GitHub
 repository, etc.
 
+:::info
+
+You can also create and configure apps from the command line with
+`deno deploy create`. See the
+[Apps reference](/deploy/reference/apps/#using-the-cli) for details.
+
+:::
+
 ## Select a repo
 
 1. Choose the GitHub repository for your application:
