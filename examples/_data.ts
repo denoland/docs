@@ -167,6 +167,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Temporal API",
+        href: "/examples/temporal/",
+        type: "example",
+      },
+      {
         title: "Better debugging with the console API",
         href: "/examples/debugging_with_console_tutorial/",
         type: "tutorial",
@@ -329,7 +334,7 @@ export const sidebar = [
         type: "example",
       },
       {
-        title: "Intereactive JavaScript REPL",
+        title: "Interactive JavaScript REPL",
         href: "/examples/sandbox_javascript_repl/",
         type: "example",
       },
@@ -349,17 +354,12 @@ export const sidebar = [
         type: "example",
       },
       {
-        title: "Error handling with custom error classes",
-        href: "/examples/sandbox_custom_error_classes/",
-        type: "example",
-      },
-      {
         title: "Command cancellation",
         href: "/examples/sandbox_command_cancellation/",
         type: "example",
       },
       {
-        title: "Access string and binary output",
+        title: "Streaming access string and binary output",
         href: "/examples/sandbox_access_output/",
         type: "example",
       },
@@ -389,14 +389,24 @@ export const sidebar = [
         type: "example",
       },
       {
-        title: "Add read-write block storage to your Sandbox",
+        title: "Add read-write volumes to your Sandbox",
         href: "/examples/volumes_tutorial/",
         type: "example",
       },
       {
-        title: "Boot instantly with read-only images",
+        title: "Boot instantly with snapshots",
         href: "/examples/snapshots_tutorial/",
         type: "example",
+      },
+      {
+        title: "Boot a Python environment with snapshots",
+        href: "/examples/snapshot_python_video/",
+        type: "video",
+      },
+      {
+        title: "Boot a Python environment with snapshots",
+        href: "/examples/snapshot_python_tutorial/",
+        type: "tutorial",
       },
     ],
   },
@@ -1070,11 +1080,6 @@ export const sidebar = [
       {
         title: "UDP connector: Ping",
         href: "/examples/udp_connector/",
-        type: "example",
-      },
-      {
-        title: "Temporal API",
-        href: "/examples/temporal/",
         type: "example",
       },
       {

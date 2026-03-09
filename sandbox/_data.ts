@@ -60,8 +60,8 @@ export const sidebar = [
         href: "https://console.deno.com/api/v2/docs",
       },
       {
-        title: "CLI subcommand",
-        href: "/runtime/reference/cli/deploy/#sandbox-management",
+        title: "Sandbox CLI commands",
+        href: "/runtime/reference/cli/sandbox/",
       },
       {
         title: "Examples",

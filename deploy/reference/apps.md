@@ -12,16 +12,19 @@ organization and is used in default domain names.
 
 ## Creating an application
 
-To create an application:
+Applications can be created from the
+[Deno Deploy dashboard](https://dash.deno.com) or from the command line using
+the [`deno deploy` CLI](/runtime/reference/cli/deploy/).
 
-1. Click the "+ Create App" button on the organization page
+### Using the dashboard
+
+To create an application from the web dashboard:
+
+1. Click the "+ New App" button on the Application overview page
 2. Select the GitHub repository to deploy from
 3. Configure the app slug (name)
 4. Set up build configuration
 5. Add any required environment variables
-
-> ⚠️ Currently, applications must be linked to a GitHub repository during
-> creation.
 
 The build configuration determines how the application is built during the
 deployment process. Builds are automatically triggered on each push to the
@@ -33,6 +36,47 @@ You can add environment variables during app creation by clicking "Edit
 Environment Variables". For more details on environment variables, see the
 [Environment Variables and Contexts](/deploy/reference/env_vars_and_contexts/)
 documentation.
+
+### Using the CLI
+
+You can also create applications from the command line with
+`deno deploy create`. Running without flags starts an interactive wizard that
+walks you through each step:
+
+```bash
+deno deploy create
+```
+
+For CI/CD pipelines or scripting, provide flags to skip the wizard entirely:
+
+```bash
+deno deploy create \
+  --org my-org \
+  --app my-api \
+  --source local \
+  --framework-preset fresh \
+  --build-timeout 5 \
+  --build-memory-limit 1024 \
+  --region us
+```
+
+You can also create apps that deploy from a GitHub repository:
+
+```bash
+deno deploy create \
+  --org my-org \
+  --app my-app \
+  --source github \
+  --owner my-github-org \
+  --repo my-repo \
+  --framework-preset astro \
+  --build-timeout 10 \
+  --build-memory-limit 2048 \
+  --region global
+```
+
+For the full list of flags and options, see the
+[`deno deploy create` CLI reference](/runtime/reference/cli/deploy/#create-application).
 
 ## Renaming an application
 

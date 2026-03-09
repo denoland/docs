@@ -78,14 +78,48 @@ The `astro:env` API is supported.
 Create high-quality web applications with Nuxt, the open source framework that
 makes full-stack development with Vue.js intuitive.
 
-Nuxt requires no additional setup.
+Nuxt requires no additional setup. Deno Deploy automatically configures Nitro,
+so no additional preset configuration is needed.
 
 ### SolidStart (`solidstart`)
 
 SolidStart is an open source meta-framework designed to unify components that
 make up a web application. It is built on top of Solid.
 
-SolidStart requires no additional setup.
+SolidStart requires no additional setup. Deno Deploy automatically configures
+Nitro, so no additional preset configuration is needed.
+
+### TanStack Start (`tanstackstart`)
+
+TanStack Start is a full-stack React or Solid framework powered by TanStack
+Router. It uses Nitro as its server layer, which enables deployment to Deno
+Deploy.
+
+To deploy TanStack Start on Deno Deploy, you need to install `nitro` and
+configure the Nitro Vite plugin:
+
+1. Add `nitro` to your dependencies:
+
+```bash
+deno add npm:nitro-nightly@latest
+# or npm install nitro-nightly@latest
+```
+
+2. Configure your `vite.config.ts` to use the Nitro plugin:
+
+```ts title="vite.config.ts"
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { defineConfig } from "vite";
+import { nitro } from "nitro/vite";
+import viteReact from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [tanstackStart(), nitro(), viteReact()],
+});
+```
+
+Deno Deploy automatically configures Nitro, so no additional preset
+configuration is needed.
 
 ### SvelteKit (`sveltekit`)
 

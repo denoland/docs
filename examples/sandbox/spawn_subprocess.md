@@ -14,8 +14,7 @@ import { Sandbox } from "@deno/sandbox";
 
 await using sandbox = await Sandbox.create();
 
-const text = await sandbox.sh`pwd`.text();
-console.log("result:", text); // → "/home/sandbox\n"
+const cwd = await sandbox.sh`pwd`;
 ```
 
 For long‑running processes or large output, stream the stdout/stderr instead of

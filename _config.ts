@@ -16,6 +16,8 @@ import title from "https://deno.land/x/lume_markdown_plugins@v0.7.0/title.ts";
 import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.0/toc.ts";
 // See note below about GFM CSS
 // import { CSS as GFM_CSS } from "https://jsr.io/@deno/gfm/0.11.0/style.ts";
+import { walk } from "@std/fs";
+import { dirname } from "@std/path";
 import { log } from "lume/core/utils/log.ts";
 import anchor from "npm:markdown-it-anchor@9";
 import admonitionPlugin from "./markdown-it/admonition.ts";
@@ -27,6 +29,8 @@ import apiDocumentContentTypeMiddleware from "./middleware/apiDocContentType.ts"
 import createRoutingMiddleware from "./middleware/functionRoutes.ts";
 import createGAMiddleware from "./middleware/googleAnalytics.ts";
 import redirectsMiddleware from "./middleware/redirects.ts";
+import createLlmsFilesMiddleware from "./middleware/llmsFiles.ts";
+import createMarkdownSourceMiddleware from "./middleware/markdownSource.ts";
 import { toFileAndInMemory } from "./utils/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
 
@@ -72,10 +76,12 @@ const site = lume(
     server: {
       middlewares: [
         redirectsMiddleware,
+        createMarkdownSourceMiddleware({ root: "_site" }),
         createRoutingMiddleware(),
         createGAMiddleware({
           addr: { transport: "tcp", hostname: "localhost", port: 3000 },
         }),
+        createLlmsFilesMiddleware({ root: "_site" }),
         apiDocumentContentTypeMiddleware,
       ],
       page404: "/404/",
@@ -144,7 +150,6 @@ site.copy("runtime/reference/images");
 site.copy("runtime/contributing/images");
 site.copy("examples/tutorials/images");
 site.copy("deploy/manual/images");
-site.copy("deploy/images");
 site.copy("examples/scripts");
 
 site.use(
@@ -185,32 +190,110 @@ site.addEventListener("afterBuild", async () => {
   /* NOTE: we used to get gfm.css from the jsr.io CDN, but now we simply have a local copy. This is because it needs to be placed on a CSS layer, which isn't possible with an imported file. */
   // Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
 
+  // Copy lint rule markdown source files to _site so they're served at /lint/rules/*.md.
+  // These files are excluded from Lume's processing pipeline (site.ignore) because
+  // lint_rule.page.tsx handles page generation, but we still want the raw .md accessible.
+  try {
+    await Deno.mkdir(site.dest("lint/rules"), { recursive: true });
+    for await (const entry of Deno.readDir("lint/rules")) {
+      if (entry.isFile && entry.name.endsWith(".md")) {
+        await Deno.copyFile(
+          `lint/rules/${entry.name}`,
+          site.dest(`lint/rules/${entry.name}`),
+        );
+      }
+    }
+    log.info("Copied lint rule markdown files to _site/lint/rules/");
+  } catch (error) {
+    log.error("Error copying lint rule markdown files: " + error);
+  }
+
   // Generate LLMs documentation files directly to _site directory
   if (Deno.env.get("BUILD_TYPE") == "FULL") {
     try {
       const { default: generateModule } = await import(
         "./generate_llms_files.ts"
       );
-      const { collectFiles, generateLlmsTxt, generateLlmsFullTxt } =
-        generateModule;
+      const {
+        collectFiles,
+        generateLlmsSummaryTxt,
+        generateLlmsFullTxt,
+        generateLlmsJson,
+        loadOramaSummaryIndex,
+      } = generateModule;
 
       log.info("Generating LLM-friendly documentation files...");
 
       const files = await collectFiles();
       log.info(`Collected ${files.length} documentation files for LLMs`);
 
-      // Generate llms.txt
-      const llmsTxt = generateLlmsTxt(files);
-      Deno.writeTextFileSync(site.dest("llms.txt"), llmsTxt);
-      log.info("Generated llms.txt in site root");
+      // Generate llms-summary.txt
+      const llmsSummaryTxt = generateLlmsSummaryTxt(files);
+      Deno.writeTextFileSync(site.dest("llms-summary.txt"), llmsSummaryTxt);
+      log.info("Generated llms-summary.txt in site root");
 
       // Generate llms-full.txt
       const llmsFullTxt = generateLlmsFullTxt(files);
       Deno.writeTextFileSync(site.dest("llms-full.txt"), llmsFullTxt);
       log.info("Generated llms-full.txt in site root");
+
+      // Generate llms.json
+      const oramaSummary = await loadOramaSummaryIndex();
+      if (oramaSummary) {
+        const llmsJson = generateLlmsJson(oramaSummary);
+        Deno.writeTextFileSync(site.dest("llms.json"), llmsJson);
+        log.info("Generated llms.json in site root");
+      } else {
+        log.warn(
+          "Skipped llms.json generation (orama-index-summary.json not found)",
+        );
+      }
     } catch (error) {
       log.error("Error generating LLMs files:" + error);
     }
+  }
+
+  // Copy source .md files to _site so AI agents can request them directly.
+  // Excludes "reference/" (dynamically generated, no static .md source files).
+  const contentDirs = [
+    "runtime",
+    "deploy",
+    "sandbox",
+    "subhosting",
+    "examples",
+  ];
+  let mdCopied = 0;
+  let mdErrors = false;
+  for (const dir of contentDirs) {
+    // Skip directories that don't exist in this build
+    try {
+      await Deno.stat(dir);
+    } catch (error) {
+      if (!(error instanceof Deno.errors.NotFound)) {
+        log.error(`Error accessing content directory ${dir}: ${error}`);
+      }
+      continue;
+    }
+    try {
+      for await (
+        const entry of walk(dir, { exts: [".md"], includeDirs: false })
+      ) {
+        const destPath = site.dest(entry.path);
+        await Deno.mkdir(dirname(destPath), { recursive: true });
+        await Deno.copyFile(entry.path, destPath);
+        mdCopied++;
+      }
+    } catch (error) {
+      log.error(`Error copying markdown files from ${dir}: ${error}`);
+      mdErrors = true;
+    }
+  }
+  if (mdErrors) {
+    log.warn(
+      `Copied ${mdCopied} source markdown files to _site (some directories had errors, see above)`,
+    );
+  } else {
+    log.info(`Copied ${mdCopied} source markdown files to _site`);
   }
 });
 
@@ -289,7 +372,7 @@ site.data("apiCategories", {
 });
 
 // Do more expensive operations if we're building the full site
-if (Deno.env.get("BUILD_TYPE") == "FULL") {
+if (Deno.env.get("BUILD_TYPE") == "FULL" && !Deno.env.has("SKIP_OG")) {
   // Use Lume's built in date function to get the last modified date of the file
   // site.data("date", "Git Last Modified");;
 

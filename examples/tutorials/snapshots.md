@@ -15,7 +15,7 @@ inherit the same environment without running installers again.
 
 We will:
 
-1. Start from the `builtin:debian-13` base image.
+1. Start a shapshot
 2. Install Node.js and some global tooling exactly once.
 3. Snapshot the prepared volume into `my-toolchain-snapshot`.
 4. Boot new sandboxes from that snapshot and verify the tools are ready the
@@ -50,8 +50,7 @@ Create a new volume based on the `builtin:debian-13` image:
 const volume = await client.volumes.create({
   region: "ord",
   slug: "my-toolchain",
-  capacity: "10GiB",
-  from: "builtin:debian-13",
+  capacity: "10GB",
 });
 
 console.log(`Bootable volume ready: ${volume.slug}`);

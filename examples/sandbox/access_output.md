@@ -1,6 +1,6 @@
 ---
-title: "Access string and binary output"
-description: "Learn how to access string and binary output from commands in a sandbox."
+title: "Streaming access string and binary output"
+description: "Learn how to stream string and binary output from commands in a sandbox."
 url: /examples/sandbox_access_output/
 layout: sandbox-example.tsx
 ---
