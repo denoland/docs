@@ -57,6 +57,16 @@ enclosed in triple backticks and have a language attribute.
 
 :::
 
+## Checking formatting in CI
+
+Use `--check` to verify files are formatted without modifying them. Add
+`--fail-fast` to stop on the first unformatted file instead of reporting all of
+them, which is useful in large codebases:
+
+```sh
+deno fmt --check --fail-fast
+```
+
 ## Ignoring Code
 
 ### JavaScript / TypeScript / JSONC

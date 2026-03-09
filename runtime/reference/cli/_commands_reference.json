@@ -144,15 +144,6 @@
           "usage": "--unstable-sloppy-imports"
         },
         {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
-        },
-        {
           "name": "unstable-tsgo",
           "short": null,
           "long": "unstable-tsgo",
@@ -647,15 +638,6 @@
           "usage": "--unstable-sloppy-imports"
         },
         {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
-        },
-        {
           "name": "unstable-tsgo",
           "short": null,
           "long": "unstable-tsgo",
@@ -1139,6 +1121,15 @@
           "help": "assume unprefixed package names are jsr packages",
           "help_heading": null,
           "usage": "--jsr"
+        },
+        {
+          "name": "save-exact",
+          "short": null,
+          "long": "save-exact",
+          "required": false,
+          "help": "Save exact version without the caret (^)",
+          "help_heading": null,
+          "usage": "--save-exact"
         }
       ],
       "subcommands": [],
@@ -1210,6 +1201,15 @@
           "help": "Return exit code 0 if remote service(s) responds with an error.",
           "help_heading": null,
           "usage": "--ignore-registry-errors"
+        },
+        {
+          "name": "ignore",
+          "short": null,
+          "long": "ignore",
+          "required": false,
+          "help": "Ignore advisories matching the given CVE IDs",
+          "help_heading": null,
+          "usage": "--ignore <CVE>"
         }
       ],
       "subcommands": [],
@@ -1388,15 +1388,6 @@
           "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
           "help_heading": "Unstable options",
           "usage": "--unstable-sloppy-imports"
-        },
-        {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
         },
         {
           "name": "unstable-tsgo",
@@ -2037,6 +2028,15 @@
           "usage": "--minify"
         },
         {
+          "name": "keep-names",
+          "short": null,
+          "long": "keep-names",
+          "required": false,
+          "help": "Keep function and class names",
+          "help_heading": null,
+          "usage": "--keep-names"
+        },
+        {
           "name": "code-splitting",
           "short": null,
           "long": "code-splitting",
@@ -2512,15 +2512,6 @@
           "usage": "--unstable-sloppy-imports"
         },
         {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
-        },
-        {
           "name": "unstable-tsgo",
           "short": null,
           "long": "unstable-tsgo",
@@ -2717,6 +2708,15 @@
           "help": "Type-check code blocks in JSDoc and Markdown only",
           "help_heading": null,
           "usage": "--doc-only"
+        },
+        {
+          "name": "check-js",
+          "short": null,
+          "long": "check-js",
+          "required": false,
+          "help": "Enable type-checking of JavaScript files (equivalent to `compilerOptions.checkJs: true`)",
+          "help_heading": null,
+          "usage": "--check-js"
         },
         {
           "name": "file",
@@ -2940,15 +2940,6 @@
           "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
           "help_heading": "Unstable options",
           "usage": "--unstable-sloppy-imports"
-        },
-        {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
         },
         {
           "name": "unstable-tsgo",
@@ -3257,6 +3248,15 @@
           "usage": "--icon <icon>"
         },
         {
+          "name": "self-extracting",
+          "short": null,
+          "long": "self-extracting",
+          "required": false,
+          "help": "Create a self-extracting binary that extracts the embedded file system to disk on first run and then runs from there",
+          "help_heading": "Compile options",
+          "usage": "--self-extracting"
+        },
+        {
           "name": "ext",
           "short": null,
           "long": "ext",
@@ -3295,6 +3295,59 @@
       ],
       "subcommands": [],
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno compile\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[SCRIPT_ARG]...\u001b[0m"
+    },
+    {
+      "name": "create",
+      "about": "scaffolds a project from a package",
+      "args": [
+        {
+          "name": "package",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "[PACKAGE]"
+        },
+        {
+          "name": "package_args",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "[ARGS]..."
+        },
+        {
+          "name": "npm",
+          "short": null,
+          "long": "npm",
+          "required": false,
+          "help": "Treat unprefixed package names as npm packages",
+          "help_heading": null,
+          "usage": "--npm"
+        },
+        {
+          "name": "jsr",
+          "short": null,
+          "long": "jsr",
+          "required": false,
+          "help": "Treat unprefixed package names as JSR packages",
+          "help_heading": null,
+          "usage": "--jsr"
+        },
+        {
+          "name": "yes",
+          "short": "y",
+          "long": "yes",
+          "required": false,
+          "help": "Bypass the prompt and run with full permissions",
+          "help_heading": null,
+          "usage": "--yes"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno create\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[PACKAGE]\u001b[0m \u001b[32m[--\u001b[0m \u001b[32m[ARGS]...\u001b[0m\u001b[32m]\u001b[0m"
     },
     {
       "name": "completions",
@@ -3827,15 +3880,6 @@
           "usage": "--unstable-sloppy-imports"
         },
         {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
-        },
-        {
           "name": "unstable-tsgo",
           "short": null,
           "long": "unstable-tsgo",
@@ -4186,6 +4230,15 @@
           "usage": "--check"
         },
         {
+          "name": "fail-fast",
+          "short": null,
+          "long": "fail-fast",
+          "required": false,
+          "help": "Stop checking files on first format error",
+          "help_heading": "Formatting options",
+          "usage": "--fail-fast"
+        },
+        {
           "name": "ext",
           "short": null,
           "long": "ext",
@@ -4345,6 +4398,15 @@
           "help": "Generate a npm create-* project",
           "help_heading": null,
           "usage": "--npm"
+        },
+        {
+          "name": "jsr",
+          "short": null,
+          "long": "jsr",
+          "required": false,
+          "help": "Generate a project from a JSR package",
+          "help_heading": null,
+          "usage": "--jsr"
         },
         {
           "name": "lib",
@@ -4741,15 +4803,6 @@
           "usage": "--unstable-sloppy-imports"
         },
         {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
-        },
-        {
           "name": "unstable-tsgo",
           "short": null,
           "long": "unstable-tsgo",
@@ -5126,6 +5179,15 @@
           "help": "assume unprefixed package names are jsr packages",
           "help_heading": null,
           "usage": "--jsr"
+        },
+        {
+          "name": "save-exact",
+          "short": null,
+          "long": "save-exact",
+          "required": false,
+          "help": "Save exact version without the caret (^)",
+          "help_heading": null,
+          "usage": "--save-exact"
         },
         {
           "name": "lockfile-only",
@@ -5972,15 +6034,6 @@
           "usage": "--unstable-sloppy-imports"
         },
         {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
-        },
-        {
           "name": "unstable-tsgo",
           "short": null,
           "long": "unstable-tsgo",
@@ -6394,15 +6447,6 @@
           "usage": "--unstable-sloppy-imports"
         },
         {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
-        },
-        {
           "name": "unstable-tsgo",
           "short": null,
           "long": "unstable-tsgo",
@@ -6661,15 +6705,6 @@
           "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
           "help_heading": "Unstable options",
           "usage": "--unstable-sloppy-imports"
-        },
-        {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
         },
         {
           "name": "unstable-tsgo",
@@ -7521,15 +7556,6 @@
           "usage": "--unstable-sloppy-imports"
         },
         {
-          "name": "unstable-temporal",
-          "short": null,
-          "long": "unstable-temporal",
-          "required": false,
-          "help": "Enable unstable Temporal API",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-temporal"
-        },
-        {
           "name": "unstable-tsgo",
           "short": null,
           "long": "unstable-tsgo",
@@ -7931,6 +7957,13 @@
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help compile\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
+          "name": "create",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help create\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
           "name": "completions",
           "about": null,
           "args": [],
@@ -8136,6 +8169,11 @@
     {
       "name": "DENO_COMPAT",
       "description": "Enable Node.js compatibility mode - extensionless imports, built-in\nNode.js modules, CommonJS detection and more.",
+      "example": null
+    },
+    {
+      "name": "DENO_COVERAGE_DIR",
+      "description": "Set the directory for collecting code coverage profiles.\nEquivalent to using the --coverage flag.",
       "example": null
     },
     {

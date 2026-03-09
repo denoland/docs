@@ -251,6 +251,22 @@ Environment variables configured for the "Build" context are available during
 builds, but variables from "Production" or "Development" contexts are not.
 [Learn more about environment variables](/deploy/reference/env_vars_and_contexts/).
 
+The following environment variables are additionally always available during
+builds:
+
+- `CI`: `true`
+- `DENO_DEPLOY`: `true` - Indicates that the code is running in Deno Deploy.
+- `DENO_DEPLOY_ORGANIZATION_ID`: The ID of the organization that owns the
+  application. This is a UUID.
+- `DENO_DEPLOY_ORGANIZATION_SLUG`: The slug of the organization that owns the
+  application. This is the human-readable identifier used in URLs that was set
+  when creating the organization.
+- `DENO_DEPLOY_APPLICATION_ID`: The ID of the application. This is a UUID.
+- `DENO_DEPLOY_APPLICATION_SLUG`: The slug of the application. This is the
+  human-readable identifier used in URLs that was set when creating the
+  application, or changed later in the application settings.
+- `DENO_DEPLOY_BUILD_ID`: The ID of the currently running build.
+
 Builders have the following resources available during the build process:
 
 - 2 vCPUs
