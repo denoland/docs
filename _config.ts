@@ -190,6 +190,24 @@ site.addEventListener("afterBuild", async () => {
   /* NOTE: we used to get gfm.css from the jsr.io CDN, but now we simply have a local copy. This is because it needs to be placed on a CSS layer, which isn't possible with an imported file. */
   // Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
 
+  // Copy lint rule markdown source files to _site so they're served at /lint/rules/*.md.
+  // These files are excluded from Lume's processing pipeline (site.ignore) because
+  // lint_rule.page.tsx handles page generation, but we still want the raw .md accessible.
+  try {
+    await Deno.mkdir(site.dest("lint/rules"), { recursive: true });
+    for await (const entry of Deno.readDir("lint/rules")) {
+      if (entry.isFile && entry.name.endsWith(".md")) {
+        await Deno.copyFile(
+          `lint/rules/${entry.name}`,
+          site.dest(`lint/rules/${entry.name}`),
+        );
+      }
+    }
+    log.info("Copied lint rule markdown files to _site/lint/rules/");
+  } catch (error) {
+    log.error("Error copying lint rule markdown files: " + error);
+  }
+
   // Generate LLMs documentation files directly to _site directory
   if (Deno.env.get("BUILD_TYPE") == "FULL") {
     try {

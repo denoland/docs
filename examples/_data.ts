@@ -167,6 +167,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Temporal API",
+        href: "/examples/temporal/",
+        type: "example",
+      },
+      {
         title: "Better debugging with the console API",
         href: "/examples/debugging_with_console_tutorial/",
         type: "tutorial",
@@ -1075,11 +1080,6 @@ export const sidebar = [
       {
         title: "UDP connector: Ping",
         href: "/examples/udp_connector/",
-        type: "example",
-      },
-      {
-        title: "Temporal API",
-        href: "/examples/temporal/",
         type: "example",
       },
       {
