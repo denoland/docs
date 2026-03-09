@@ -201,3 +201,16 @@ including:
 For full details on Deno's OpenTelemetry integration, including custom metrics,
 traces, and configuration options, see the
 [OpenTelemetry documentation](/runtime/fundamentals/open_telemetry).
+
+## TLS session debugging
+
+Set the `SSLKEYLOGFILE` environment variable to log TLS session keys to a file.
+This enables you to decrypt and inspect encrypted network traffic with tools
+like [Wireshark](https://www.wireshark.org/):
+
+```sh
+SSLKEYLOGFILE=./keys.log deno run -N main.ts
+```
+
+Then load `keys.log` in Wireshark (Edit > Preferences > Protocols > TLS >
+(Pre)-Master-Secret log filename) to decrypt captured TLS traffic.
