@@ -153,18 +153,38 @@ async function generatePackagePage(pkg: PackageSummary) {
     } catch (_) {
       // Not JSON (unexpected) fallback treat as HTML
     }
-    if (
-      parsed && typeof parsed === "object" && typeof parsed["main"] === "string"
-    ) {
-      const mainHtml = String(parsed["main"]);
-      // In main section look for first markdown div.
-      overviewHtml = extractFirstMarkdownDiv(mainHtml) ?? null;
-      if (!overviewHtml) {
-        // Some packages may have the overview inside toc usage content; fallback search entire raw
-        overviewHtml = extractFirstMarkdownDiv(raw) ?? null;
+    if (parsed && typeof parsed === "object") {
+      const main = parsed["main"];
+      if (typeof main === "string") {
+        // Legacy format: main is an HTML string
+        overviewHtml = extractFirstMarkdownDiv(main) ?? null;
+        if (!overviewHtml) {
+          overviewHtml = extractFirstMarkdownDiv(raw) ?? null;
+        }
+      } else if (main && typeof main === "object") {
+        // Current format: main is { kind, value: { sections: [{ id, docs }] } }
+        const value = (main as Record<string, unknown>)["value"];
+        if (value && typeof value === "object") {
+          const sections = (value as Record<string, unknown>)["sections"];
+          const sectionList = Array.isArray(sections)
+            ? sections
+            : sections
+            ? [sections]
+            : [];
+          for (const section of sectionList) {
+            if (section && typeof section === "object") {
+              const docs = (section as Record<string, unknown>)["docs"];
+              if (typeof docs === "string" && docs.trim()) {
+                overviewHtml = (extractFirstMarkdownDiv(docs) ?? docs.trim()) ||
+                  null;
+                if (overviewHtml) break;
+              }
+            }
+          }
+        }
       }
     } else {
-      // Fallback to legacy pattern
+      // Fallback for non-JSON responses
       overviewHtml = extractFirstMarkdownDiv(raw);
     }
   } catch (err) {

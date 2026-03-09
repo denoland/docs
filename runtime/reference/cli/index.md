@@ -45,6 +45,8 @@ below for more information on each subcommand.
   completions
 - [deno coverage](/runtime/reference/cli/coverage/) - generate test coverage
   reports
+- [deno create](/runtime/reference/cli/create/) - scaffold a new project from a
+  template
 - [deno doc](/runtime/reference/cli/doc/) - generate documentation for a module
 - [deno deploy](/runtime/reference/cli/deploy) - Manage and publish your
   projects on the web

@@ -90,3 +90,16 @@ for (const tabGroup of document.querySelectorAll<HTMLElement>(".deno-tabs")) {
     document.dispatchEvent(new GroupSelectEvent(groupId, firstTabId));
   }
 }
+
+// Handle sandbox-sdk tab selections for inline code switching
+document.addEventListener("deno-tab-select", (event) => {
+  if (event instanceof GroupSelectEvent && event.groupId === "sandbox-sdk") {
+    document.documentElement.dataset.sandboxLang = event.tabId;
+  }
+});
+
+// Set initial value from localStorage on page load
+const storedSandboxLang = localStorage.getItem("deno-tab-sandbox-sdk");
+if (storedSandboxLang) {
+  document.documentElement.dataset.sandboxLang = storedSandboxLang;
+}

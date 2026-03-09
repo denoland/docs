@@ -57,6 +57,16 @@ enclosed in triple backticks and have a language attribute.
 
 :::
 
+## Checking formatting in CI
+
+Use `--check` to verify files are formatted without modifying them. Add
+`--fail-fast` to stop on the first unformatted file instead of reporting all of
+them, which is useful in large codebases:
+
+```sh
+deno fmt --check --fail-fast
+```
+
 ## Ignoring Code
 
 ### JavaScript / TypeScript / JSONC
@@ -107,7 +117,7 @@ Ignore formatting next item by preceding it with `# deno-fmt-ignore` comment:
 
 ## More about linting and formatting
 
-For more information about linting and formating in Deno, and the differences
+For more information about linting and formatting in Deno, and the differences
 between these two utilities, visit the
 [Linting and Formatting](/runtime/fundamentals/linting_and_formatting/) page in
 our Fundamentals section.

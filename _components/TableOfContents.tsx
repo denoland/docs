@@ -12,7 +12,7 @@ export default function TableOfContents({ data, toc, hasSubNav }: {
 
   return (
     <ul
-      className={`toc-list hidden sticky p-4 pr-0 h-screen-minus-header overflow-y-auto border-l border-l-foreground-tertiary lg:block lg:w-full ${topClasses}`}
+      className={`toc-list hidden sticky ${topClasses} h-screen-minus-header overflow-y-auto border-l border-l-foreground-tertiary p-4 pr-0 lg:flex lg:flex-col lg:w-full`}
       id="toc"
     >
       {toc.map((item: TableOfContentsItem_) => (

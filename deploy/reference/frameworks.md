@@ -22,7 +22,7 @@ Feel like a framework is missing? Let us know in the
 
 ## Supported frameworks
 
-### Next.js
+### Next.js (`nextjs`)
 
 Next.js is a React framework for building full-stack web applications. You use
 React Components to build user interfaces, and Next.js for additional features
@@ -39,7 +39,7 @@ Next.js on Deno Deploy always builds in standalone mode.
 Tracing is supported out of the box, and Next.js automatically emits some spans
 for incoming requests, routing, rendering, and other operations.
 
-### Astro
+### Astro (`astro`)
 
 Astro is a web framework for building content-driven websites like blogs,
 marketing, and e-commerce. Astro leverages server rendering over client-side
@@ -73,42 +73,76 @@ Sharp image optimization is supported.
 
 The `astro:env` API is supported.
 
-### Nuxt
+### Nuxt (`nuxt`)
 
 Create high-quality web applications with Nuxt, the open source framework that
 makes full-stack development with Vue.js intuitive.
 
-Nuxt requires no additional setup.
+Nuxt requires no additional setup. Deno Deploy automatically configures Nitro,
+so no additional preset configuration is needed.
 
-### SolidStart
+### SolidStart (`solidstart`)
 
 SolidStart is an open source meta-framework designed to unify components that
 make up a web application. It is built on top of Solid.
 
-SolidStart requires no additional setup.
+SolidStart requires no additional setup. Deno Deploy automatically configures
+Nitro, so no additional preset configuration is needed.
 
-### SvelteKit
+### TanStack Start (`tanstackstart`)
+
+TanStack Start is a full-stack React or Solid framework powered by TanStack
+Router. It uses Nitro as its server layer, which enables deployment to Deno
+Deploy.
+
+To deploy TanStack Start on Deno Deploy, you need to install `nitro` and
+configure the Nitro Vite plugin:
+
+1. Add `nitro` to your dependencies:
+
+```bash
+deno add npm:nitro-nightly@latest
+# or npm install nitro-nightly@latest
+```
+
+2. Configure your `vite.config.ts` to use the Nitro plugin:
+
+```ts title="vite.config.ts"
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { defineConfig } from "vite";
+import { nitro } from "nitro/vite";
+import viteReact from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [tanstackStart(), nitro(), viteReact()],
+});
+```
+
+Deno Deploy automatically configures Nitro, so no additional preset
+configuration is needed.
+
+### SvelteKit (`sveltekit`)
 
 SvelteKit is a framework for rapidly developing robust, performant web
 applications using Svelte.
 
 SvelteKit requires no additional setup.
 
-### Fresh
+### Fresh (`fresh`)
 
 Fresh is a full stack modern web framework for JavaScript and TypeScript
 developers. Fresh uses Preact as the JSX rendering engine.
 
 Fresh requires no additional setup.
 
-### Lume
+### Lume (`lume`)
 
 Lume is a static site generator for building fast and modern websites using
 Deno.
 
 Lume requires no additional setup.
 
-### Remix
+### Remix (`remix`)
 
 > ⚠️ **Experimental**: Remix is not yet fully supported. It is in the process of
 > being integrated into Deno Deploy. Some features may not work as expected.

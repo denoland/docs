@@ -1,6 +1,7 @@
 {
   "imports": {
     "@std/assert": "jsr:@std/assert@^1.0.6",
+    "@std/cli": "jsr:@std/cli@^1.0.27",
     "@std/dotenv": "jsr:@std/dotenv@^0.225.2",
     "@std/fs": "jsr:@std/fs@^1.0.16",
     "@std/front-matter": "jsr:@std/front-matter@1.0.9",
@@ -8,6 +9,7 @@
     "@std/media-types": "jsr:@std/media-types@^1.0.3",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@deno/doc": "jsr:@deno/doc@0.187.0",
+    "@std/yaml": "jsr:@std/yaml@^1.0.11",
     "ga4": "https://raw.githubusercontent.com/denoland/ga4/04a1ce209116f158b5ef1658b957bdb109db68ed/mod.ts",
     "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/",
     "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts",
@@ -16,7 +18,8 @@
     "tailwindcss": "npm:tailwindcss@^4.1.11",
     "@orama/core": "jsr:@orama/core@^1.2.4",
     "@octokit/core": "npm:@octokit/core@^5.2.0",
-    "leo-profanity": "npm:leo-profanity@^1.7.0"
+    "leo-profanity": "npm:leo-profanity@^1.7.0",
+    "https://cdn.jsdelivr.net/gh/esbuild/deno-esbuild@0.27.0/mod.js": "https://cdn.jsdelivr.net/gh/esbuild/deno-esbuild@0.27.0/wasm.js"
   },
   "tasks": {
     "lume": {
@@ -52,7 +55,7 @@
     "types": [
       "lume/types.ts"
     ],
-    "jsx": "precompile",
+    "jsx": "react-jsx",
     "jsxImportSource": "lume"
   },
   "test": {

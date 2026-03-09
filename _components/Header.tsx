@@ -10,8 +10,8 @@ export default function (
 ) {
   const hrefIsInCurrentSection = (href: string, currentSection: string) => {
     return href.includes(currentSection) ||
-      href === "/services/" &&
-        ["deploy", "subhosting", "services", "sandboxes"].includes(
+      href === "/deploy/" &&
+        ["deploy", "subhosting", "services", "sandbox"].includes(
           currentSection,
         );
   };

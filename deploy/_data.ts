@@ -15,6 +15,10 @@ export const sidebar = [
     title: "Reference",
     items: [
       {
+        title: "REST API",
+        href: "https://console.deno.com/api/v2/docs",
+      },
+      {
         title: "Accounts",
         href: "/deploy/reference/accounts/",
       },
@@ -49,6 +53,10 @@ export const sidebar = [
       {
         title: "Domains",
         href: "/deploy/reference/domains/",
+      },
+      {
+        title: "Cron",
+        href: "/deploy/reference/cron/",
       },
       {
         title: "Deno KV",
@@ -154,8 +162,8 @@ export const SidebarNav = [
     href: "/deploy/",
   },
   {
-    title: "Sandboxes",
-    href: "/sandboxes/",
+    title: "Deno Sandbox",
+    href: "/sandbox/",
   },
   {
     title: "Deploy Classic",

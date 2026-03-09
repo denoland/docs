@@ -15,12 +15,6 @@ organization members and appears in the organization dropdown in both Deno
 Deploy and Deploy Classic. The slug forms part of the default domain for all
 applications in the organization.
 
-:::caution
-
-Organizations cannot be renamed, nor can their slug be changed after creation.
-
-:::
-
 Every organization has a default domain used for production, git branch, and
 preview URLs for projects in that organization. For example, an organization
 with the slug `acme-inc` would have a default domain of `acme-inc.deno.net`.
@@ -45,6 +39,41 @@ Organization slugs must be unique across all Deno Deploy organizations and
 cannot match any existing project name in Deno Deploy Classic.
 
 :::
+
+## Update the organization name
+
+The organization name can be updated from the organization settings page in the
+Deno Deploy dashboard. The organization name is only cosmetic, and changing it
+does not affect any apps or domains. It is the display name of your
+organization, on the dashboard and in invitation emails.
+
+## Update the organization slug
+
+The organization slug can be updated from the organization settings page in the
+Deno Deploy dashboard. Changing the organization slug will update the default
+domain for all apps in the organization. For example, changing the slug from
+`acme-inc` to `acme-corp` will change the default domain from
+`acme-inc.deno.net` to `acme-corp.deno.net`.
+
+:::warning
+
+Changing the organization slug will immediately affect all apps in the
+organization that use the default domain. Any existing URLs using the old domain
+will stop working. You will need to update any bookmarks or links that use the
+old domain.
+
+After changing the organization slug, it can take multiple minutes for the new
+default domain to start working, due to TLS certificate provisioning. In this
+time, apps will be unreachable via the new default domain.
+
+Custom domains are not affected by changing the organization slug.
+
+:::
+
+This will also affect the URLs of resources inside of the organization on the
+Deno Deploy dashboard. For example, the URL for an app will change from
+`https://console.deno.com/acme-inc/my-app` to
+`https://console.deno.com/acme-corp/my-app`.
 
 ## Deleting an organization
 

@@ -11,7 +11,6 @@ export const sidebar = [
       {
         title: "Deploy basics",
         items: [
-          { title: "Use cases", href: "/deploy/classic/use-cases/" },
           { title: "Playgrounds", href: "/deploy/classic/playgrounds/" },
           { title: "How to deploy", href: "/deploy/classic/how-to-deploy/" },
           { title: "GitHub CI", href: "/deploy/classic/ci_github/" },
@@ -125,8 +124,8 @@ export const SidebarNav = [
     href: "/deploy/",
   },
   {
-    title: "Sandboxes",
-    href: "/sandboxes/",
+    title: "Deno Sandbox",
+    href: "/sandbox/",
   },
   {
     title: "Deploy Classic",
