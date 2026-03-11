@@ -1,5 +1,5 @@
 ---
-title: "`deno compile`, standalone executables"
+title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
   - /runtime/manual/tools/compiler/

@@ -1,5 +1,5 @@
 ---
-title: "`deno lint`, linter"
+title: "deno lint"
 oldUrl:
   - /runtime/tools/linter/
   - /runtime/fundamentals/linting_and_formatting/lint-cli-ref
