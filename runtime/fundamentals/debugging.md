@@ -192,19 +192,20 @@ into Chrome DevTools (Performance tab) or other V8 profile viewers for analysis.
 
 ### CPU profiling flags
 
-| Flag | Description |
-| --- | --- |
-| `--cpu-prof` | Enable CPU profiling. Profile is written to disk on exit. |
-| `--cpu-prof-dir=<DIR>` | Directory where the CPU profile will be written. Defaults to current directory. Implicitly enables `--cpu-prof`. |
-| `--cpu-prof-name=<NAME>` | Filename for the CPU profile. Defaults to `CPU.<timestamp>.<pid>.cpuprofile`. |
-| `--cpu-prof-interval=<MICROSECONDS>` | Sampling interval in microseconds. Default is `1000` (1ms). Lower values give more detail but larger files. |
-| `--cpu-prof-md` | Generate a human-readable Markdown report alongside the `.cpuprofile` file. |
+| Flag                                 | Description                                                                                                      |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `--cpu-prof`                         | Enable CPU profiling. Profile is written to disk on exit.                                                        |
+| `--cpu-prof-dir=<DIR>`               | Directory where the CPU profile will be written. Defaults to current directory. Implicitly enables `--cpu-prof`. |
+| `--cpu-prof-name=<NAME>`             | Filename for the CPU profile. Defaults to `CPU.<timestamp>.<pid>.cpuprofile`.                                    |
+| `--cpu-prof-interval=<MICROSECONDS>` | Sampling interval in microseconds. Default is `1000` (1ms). Lower values give more detail but larger files.      |
+| `--cpu-prof-md`                      | Generate a human-readable Markdown report alongside the `.cpuprofile` file.                                      |
 
 :::note
 
 CPU profiles report line numbers from the transpiled JavaScript code, not the
-original TypeScript source. This is a limitation of V8's profiler. For TypeScript
-files, the reported line numbers may not match your source code directly.
+original TypeScript source. This is a limitation of V8's profiler. For
+TypeScript files, the reported line numbers may not match your source code
+directly.
 
 :::
 
@@ -231,41 +232,44 @@ deno run -A --cpu-prof --cpu-prof-md server.js
 
 This creates both a `.cpuprofile` file and a `.md` file with a report like:
 
-````md
+```md
 # CPU Profile
 
 | Duration | Samples | Interval | Functions |
-| --- | --- | --- | --- |
-| 833.06ms | 641 | 1000us | 10 |
+| -------- | ------- | -------- | --------- |
+| 833.06ms | 641     | 1000us   | 10        |
 
-**Top 10:** `op_crypto_get_random_values` 98.5%, `(garbage collector)` 0.7%, `getRandomValues` 0.6%, `assertBranded` 0.2%
+**Top 10:** `op_crypto_get_random_values` 98.5%, `(garbage collector)` 0.7%,
+`getRandomValues` 0.6%, `assertBranded` 0.2%
 
 ## Hot Functions (Self Time)
 
-| Self% | Self | Total% | Total | Function | Location |
-| ---: | ---: | ---: | ---: | --- | --- |
-| 98.5% | 533.00ms | 98.5% | 533.00ms | `op_crypto_get_random_values` | [native code] |
-| 0.7% | 4.00ms | 0.7% | 4.00ms | `(garbage collector)` | [native code] |
-| 0.6% | 3.00ms | 0.6% | 3.00ms | `getRandomValues` | 00_crypto.js:5274 |
-| 0.2% | 1.00ms | 0.2% | 1.00ms | `assertBranded` | 00_webidl.js:1149 |
+| Self% |     Self | Total% |    Total | Function                      | Location          |
+| ----: | -------: | -----: | -------: | ----------------------------- | ----------------- |
+| 98.5% | 533.00ms |  98.5% | 533.00ms | `op_crypto_get_random_values` | [native code]     |
+|  0.7% |   4.00ms |   0.7% |   4.00ms | `(garbage collector)`         | [native code]     |
+|  0.6% |   3.00ms |   0.6% |   3.00ms | `getRandomValues`             | 00_crypto.js:5274 |
+|  0.2% |   1.00ms |   0.2% |   1.00ms | `assertBranded`               | 00_webidl.js:1149 |
 
 ## Call Tree (Total Time)
 
-| Total% | Total | Self% | Self | Function | Location |
-| ---: | ---: | ---: | ---: | --- | --- |
-| 16.8% | 91.00ms | 16.8% | 91.00ms | `(anonymous)` | server.js:1 |
-| 0.6% | 3.00ms | 0.6% | 3.00ms |   `getRandomValues` | 00_crypto.js:5274 |
-| 98.5% | 533.00ms | 98.5% | 533.00ms |     `op_crypto_get_random_values` | [native code] |
+| Total% |    Total | Self% |     Self | Function                      | Location          |
+| -----: | -------: | ----: | -------: | ----------------------------- | ----------------- |
+|  16.8% |  91.00ms | 16.8% |  91.00ms | `(anonymous)`                 | server.js:1       |
+|   0.6% |   3.00ms |  0.6% |   3.00ms | `getRandomValues`             | 00_crypto.js:5274 |
+|  98.5% | 533.00ms | 98.5% | 533.00ms | `op_crypto_get_random_values` | [native code]     |
 
 ## Function Details
 
 ### `op_crypto_get_random_values`
+
 [native code] | Self: 98.5% (533.00ms) | Total: 98.5% (533.00ms) | Samples: 533
-````
+```
 
 The report includes:
 
-- **Summary**: Total duration, sample count, sampling interval, and function count
+- **Summary**: Total duration, sample count, sampling interval, and function
+  count
 - **Top 10**: Quick overview of the most expensive functions
 - **Hot Functions**: Functions sorted by self time (time spent in the function
   itself, excluding callees)
