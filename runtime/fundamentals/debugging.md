@@ -200,6 +200,14 @@ into Chrome DevTools (Performance tab) or other V8 profile viewers for analysis.
 | `--cpu-prof-interval=<MICROSECONDS>` | Sampling interval in microseconds. Default is `1000` (1ms). Lower values give more detail but larger files. |
 | `--cpu-prof-md` | Generate a human-readable Markdown report alongside the `.cpuprofile` file. |
 
+:::note
+
+CPU profiles report line numbers from the transpiled JavaScript code, not the
+original TypeScript source. This is a limitation of V8's profiler. For TypeScript
+files, the reported line numbers may not match your source code directly.
+
+:::
+
 ### Analyzing profiles in Chrome DevTools
 
 To analyze the `.cpuprofile` file:
