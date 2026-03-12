@@ -3,6 +3,49 @@ title: "Deno Deploy changelog"
 description: "Listing notable progress in the development and evolution of Deno Deploy"
 ---
 
+## March 12th, 2026
+
+### Features
+
+- Deno Deploy now supports scheduling cron jobs using the `Deno.cron()` API.
+  - Cron jobs are defined in your application code and are automatically
+    discovered and managed by the platform when you deploy.
+  - You can monitor cron execution history and status from the new "Cron" tab in
+    the app dashboard.
+  - [Learn more in the documentation.](/deploy/reference/cron/)
+- You can now change the deployment region of an existing app from the app
+  settings page.
+  - Previously, the deployment region could only be set at app creation time.
+  - The new region selector is available under "Deployment Region" in the app
+    settings.
+- Organizations can now be deleted directly from the organization settings page.
+  - Previously, deleting an organization required contacting Deno support.
+  - To delete an organization, go to the organization settings page and scroll
+    to the danger zone section.
+- TanStack Start is now a natively supported framework on Deno Deploy.
+  - Deno Deploy automatically detects TanStack Start projects and configures the
+    build and runtime settings optimally.
+  - [Learn more about TanStack Start support.](/deploy/reference/frameworks/#tanstack-start-tanstackstart)
+- You can now configure an external OpenTelemetry collector to export
+  observability data from your Deno Deploy organization.
+  - Set a custom OTLP endpoint and headers from the organization settings page
+    under "OpenTelemetry".
+  - All traces, metrics, and logs from your applications will be forwarded to
+    your configured collector in addition to being available in the Deno Deploy
+    dashboard.
+- The runtime memory limit for applications can now be configured per app.
+  - Available memory limits range from 512 MB to 4096 MB, depending on your
+    plan.
+  - The memory limit can be set in the app build configuration settings, or via
+    the `deploy.runtime.memory_limit` field in your `deno.json` file.
+  - [Learn more in the build documentation.](/deploy/reference/builds/)
+- A new Builder plan is now available for organizations that need higher limits
+  and more compute.
+  - The Builder plan is priced at $200/month and includes 20 million included
+    HTTP requests, 400 CPU hours, up to 4 GB runtime and build memory, and up to
+    200 deployments per hour.
+  - [See the pricing page for full details.](https://deno.com/deploy/pricing)
+
 ## January 27th, 2026
 
 ### Features
