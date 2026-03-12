@@ -19,7 +19,7 @@ guide for users of Deno.
 Most modules in the repository should have the following copyright header:
 
 ```ts
-// Copyright 2018-2024 the Deno authors. All rights reserved. MIT license.
+// Copyright 2018-2026 the Deno authors. All rights reserved. MIT license.
 ```
 
 If the code originates elsewhere, ensure that the file has the proper copyright
@@ -366,7 +366,7 @@ export function foo(): string {
 Regular functions and arrow functions have different behavior with respect to
 hoisting, binding, arguments, and constructability. The `function` keyword
 clearly indicates the intent to define a function, improving legibility and
-tracibility while debugging.
+traceability while debugging.
 
 #### Error Messages
 
@@ -405,7 +405,7 @@ Bad: Cannot parse input hello, world
 Good: Cannot parse input "hello, world"
 ```
 
-4. Message should state the action that lead to the error:
+4. Message should state the action that led to the error:
 
 ```sh
 Bad: Invalid input x
