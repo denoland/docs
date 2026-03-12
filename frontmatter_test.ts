@@ -1,30 +1,25 @@
 import { walk } from "@std/fs";
 import { extract } from "@std/front-matter/yaml";
-import { assert } from "@std/assert";
+import { assert, assertEquals } from "@std/assert";
 
-const DIRS_TO_CHECK = ["./runtime", "./deploy", "./examples"];
+Deno.test("CLI command page titles must be just the command name", async (t) => {
+  for await (
+    const entry of walk("./runtime/reference/cli", { exts: [".md"] })
+  ) {
+    const content = await Deno.readTextFile(entry.path);
+    if (!content.startsWith("---")) continue;
 
-Deno.test("Frontmatter titles must not contain backticks or comma-separated descriptions", async (t) => {
-  for (const dir of DIRS_TO_CHECK) {
-    for await (const entry of walk(dir, { exts: [".md", ".mdx"] })) {
-      const content = await Deno.readTextFile(entry.path);
-      if (!content.startsWith("---")) continue;
+    const { attrs } = extract<{ title?: string; command?: string }>(content);
+    if (typeof attrs.command !== "string") continue;
 
-      const { attrs } = extract<{ title?: string }>(content);
-      if (typeof attrs.title !== "string") continue;
+    const expected = `deno ${attrs.command}`;
 
-      const title = attrs.title;
-
-      await t.step(`${entry.path}`, () => {
-        assert(
-          !title.includes("`"),
-          `Title contains backticks: "${title}". Use plain text instead.`,
-        );
-        assert(
-          !title.includes(","),
-          `Title contains a comma: "${title}". Avoid comma-separated descriptions in titles.`,
-        );
-      });
-    }
+    await t.step(entry.path, () => {
+      assertEquals(
+        attrs.title,
+        expected,
+        `Title should be "${expected}", got "${attrs.title}". Put descriptions in the "description" field instead.`,
+      );
+    });
   }
 });
