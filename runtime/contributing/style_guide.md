@@ -257,15 +257,15 @@ For example:
 /** Import something from the `deno` module. */
 ```
 
-Do not document function arguments unless they are non-obvious of their intent
-(though if they are non-obvious intent, the API should be considered anyways).
-Therefore `@param` should generally not be used. If `@param` is used, it should
-not include the `type` as TypeScript is already strongly-typed.
+Every exported function should have a `@param` tag for each parameter with a
+description. The `@param` tag should not include the `type` as TypeScript is
+already strongly-typed.
 
 ```ts
 /**
- * Function with non-obvious param.
- * @param foo Description of non-obvious parameter.
+ * Resolves a path to a file.
+ * @param path The path to resolve.
+ * @param base The base directory to resolve from.
  */
 ```
 
