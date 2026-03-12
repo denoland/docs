@@ -1,5 +1,5 @@
 ---
-title: "deno audit, audit dependencies for vulnerabilities"
+title: "deno audit"
 command: audit
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno audit"
