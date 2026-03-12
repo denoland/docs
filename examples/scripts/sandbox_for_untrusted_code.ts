@@ -39,7 +39,7 @@ if (firstBlock.type !== "text") {
 }
 const generatedCode = extractCode(firstBlock.text);
 
-// Create a sandbox .
+// Create a sandbox.
 await using sandbox = await Sandbox.create();
 
 // Write the AI-generated code into the sandbox filesystem.
