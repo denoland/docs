@@ -44,7 +44,7 @@ description: "Listing notable progress in the development and evolution of Deno 
   - The Builder plan is priced at $200/month and includes 20 million included
     HTTP requests, 400 CPU hours, up to 4 GB runtime and build memory, and up to
     200 deployments per hour.
-  - [See the pricing page for full details.](https://deno.com/deploy/pricing)
+  - [See the pricing page for full details](https://deno.com/deploy/pricing).
 
 ## January 27th, 2026
 
