@@ -12,7 +12,7 @@ description: "Listing notable progress in the development and evolution of Deno 
     discovered and managed by the platform when you deploy.
   - You can monitor cron execution history and status from the new "Cron" tab in
     the app dashboard.
-  - [Learn more in the documentation.](/deploy/reference/cron/)
+  - [Learn more in the cron documentation](/deploy/reference/cron/).
 - You can now change the deployment region of an existing app from the app
   settings page.
   - Previously, the deployment region could only be set at app creation time.
