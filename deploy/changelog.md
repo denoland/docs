@@ -25,7 +25,7 @@ description: "Listing notable progress in the development and evolution of Deno 
 - TanStack Start is now a natively supported framework on Deno Deploy.
   - Deno Deploy automatically detects TanStack Start projects and configures the
     build and runtime settings optimally.
-  - [Learn more about TanStack Start support.](/deploy/reference/frameworks/#tanstack-start-tanstackstart)
+  - [Learn more about TanStack Start support](/deploy/reference/frameworks/#tanstack-start-tanstackstart).
 - You can now configure an external OpenTelemetry collector to export
   observability data from your Deno Deploy organization.
   - Set a custom OTLP endpoint and headers from the organization settings page
