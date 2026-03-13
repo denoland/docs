@@ -38,7 +38,7 @@ description: "Listing notable progress in the development and evolution of Deno 
     plan.
   - The memory limit can be set in the app build configuration settings, or via
     the `deploy.runtime.memory_limit` field in your `deno.json` file.
-  - [Learn more in the build documentation.](/deploy/reference/builds/)
+  - [Learn more in the build documentation](/deploy/reference/builds/).
 - A new Builder plan is now available for organizations that need higher limits
   and more compute.
   - The Builder plan is priced at $200/month and includes 20 million included
