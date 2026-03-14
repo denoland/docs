@@ -92,17 +92,6 @@ jobs:
         if: steps.std-cache.outputs.cache-hit != 'true'
         run: deno task generate:std-docs
 
-      # Cache rendered reference HTML pages in _site/api/ to skip expensive
-      # Lume rendering of hundreds of API pages from JSON on every build.
-      # Key covers: the generated JSON data + rendering templates + components.
-      - name: Restore reference HTML cache
-        uses: actions/cache@v4
-        id: ref-html-cache
-        with:
-          path: _site/api
-          key: ref-html-${{ hashFiles('reference_gen/gen/**', 'reference/**', '_includes/reference/**') }}
-          restore-keys: ref-html-
-
       - name: Restore OG image cache
         uses: actions/cache@v4
         id: og-cache
@@ -111,15 +100,25 @@ jobs:
           key: og-images-${{ hashFiles('open_graph/**') }}
           restore-keys: og-images-
 
-      - name: Build
+      # Run main build (content, no reference) and reference build in parallel.
+      # Main build skips reference pages (SKIP_REFERENCE=1), reference build
+      # uses a minimal config that only renders API pages. Outputs merge via
+      # emptyDest:false on main and a cp from _site_ref/.
+      - name: "Build: main + reference (parallel)"
         env:
           ORAMA_PROJECT_ID: ${{ vars.ORAMA_PROJECT_ID }}
           ORAMA_DATASOURCE_ID: ${{ vars.ORAMA_DATASOURCE_ID }}
           ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
           SKIP_OG: ${{ steps.og-cache.outputs.cache-hit == 'true' && '1' || '' }}
-          SKIP_REFERENCE: ${{ steps.ref-html-cache.outputs.cache-hit == 'true' && '1' || '' }}
           BUILD_TYPE: FULL
-        run: deno task lume
+        run: |
+          SKIP_REFERENCE=1 deno task lume &
+          PID_MAIN=$!
+          deno task lume:reference &
+          PID_REF=$!
+          wait $PID_MAIN $PID_REF
+          # Merge reference output into main _site/
+          cp -r _site_ref/* _site/
 
       - name: Restore cached OG images
         if: steps.og-cache.outputs.cache-hit == 'true'
