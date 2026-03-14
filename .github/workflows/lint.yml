@@ -45,15 +45,17 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
-      # Try to restore cached reference docs when reference_gen/ hasn't changed
-      - name: Restore reference docs cache
+      # Try to restore cached reference types + docs when reference_gen/ hasn't changed
+      - name: Restore reference cache
         if: steps.ref-changes.outputs.changed == 'false'
         uses: actions/cache/restore@v4
         id: ref-cache
         with:
-          path: reference_gen/gen
-          key: reference-gen-${{ hashFiles('reference_gen/**') }}
-          restore-keys: reference-gen-
+          path: |
+            reference_gen/types
+            reference_gen/gen
+          key: reference-${{ hashFiles('reference_gen/**') }}
+          restore-keys: reference-
 
       # Only run reference generation if files changed OR cache missed
       - name: "Reference: install"
@@ -71,13 +73,15 @@ jobs:
         working-directory: "reference_gen"
         run: deno task doc
 
-      # Save reference docs to cache after generation
-      - name: Save reference docs cache
+      # Save reference types + docs to cache after generation
+      - name: Save reference cache
         if: steps.ref-changes.outputs.changed == 'true' || steps.ref-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
-          path: reference_gen/gen
-          key: reference-gen-${{ hashFiles('reference_gen/**') }}
+          path: |
+            reference_gen/types
+            reference_gen/gen
+          key: reference-${{ hashFiles('reference_gen/**') }}
 
       # Cache std-docs to avoid 43+ network requests to JSR API on every build
       - name: Restore std-docs cache
