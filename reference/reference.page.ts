@@ -29,7 +29,7 @@ const kinds = [
 
 export default function* () {
   try {
-    if (Deno.env.has("SKIP_REFERENCE")) {
+    if (Deno.env.get("SKIP_REFERENCE") === "1") {
       console.warn("⏭️ Reference docs generation skipped (SKIP_REFERENCE set)");
       return;
     }

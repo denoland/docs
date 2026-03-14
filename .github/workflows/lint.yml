@@ -92,6 +92,17 @@ jobs:
         if: steps.std-cache.outputs.cache-hit != 'true'
         run: deno task generate:std-docs
 
+      # Cache rendered reference HTML pages in _site/api/ to skip expensive
+      # Lume rendering of hundreds of API pages from JSON on every build.
+      # Key covers: the generated JSON data + rendering templates + components.
+      - name: Restore reference HTML cache
+        uses: actions/cache@v4
+        id: ref-html-cache
+        with:
+          path: _site/api
+          key: ref-html-${{ hashFiles('reference_gen/gen/**', 'reference/**', '_includes/reference/**') }}
+          restore-keys: ref-html-
+
       - name: Restore OG image cache
         uses: actions/cache@v4
         id: og-cache
@@ -106,6 +117,7 @@ jobs:
           ORAMA_DATASOURCE_ID: ${{ vars.ORAMA_DATASOURCE_ID }}
           ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
           SKIP_OG: ${{ steps.og-cache.outputs.cache-hit == 'true' && '1' || '' }}
+          SKIP_REFERENCE: ${{ steps.ref-html-cache.outputs.cache-hit == 'true' && '1' || '' }}
           BUILD_TYPE: FULL
         run: deno task lume
 
