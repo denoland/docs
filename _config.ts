@@ -34,6 +34,15 @@ import createMarkdownSourceMiddleware from "./middleware/markdownSource.ts";
 import { toFileAndInMemory } from "./utils/redirects.ts";
 import { cliNow } from "./timeUtils.ts";
 
+// Build profiling — set LUME_PROFILE=1 to enable timing output
+const PROFILE = Deno.env.has("LUME_PROFILE");
+
+function profileLog(message: string) {
+  if (PROFILE) {
+    console.log(`[profile] ${message}`);
+  }
+}
+
 // Check if reference docs are available when building
 function ensureReferenceDocsExist() {
   const requiredFiles = [
@@ -131,6 +140,102 @@ const site = lume(
     },
   },
 );
+
+// Build phase profiling
+if (PROFILE) {
+  const phases = [
+    "beforeBuild",
+    "afterLoad",
+    "beforeRender",
+    "afterRender",
+    "beforeSave",
+    "afterBuild",
+  ] as const;
+
+  for (const phase of phases) {
+    site.addEventListener(phase, () => {
+      performance.mark(`lume-${phase}`);
+      profileLog(`phase: ${phase}`);
+    });
+  }
+
+  // Wrap site.process() to time each processor
+  const processorTimings: { name: string; duration: number }[] = [];
+  const originalProcess = site.process.bind(site);
+  // deno-lint-ignore no-explicit-any
+  site.process = function (extOrFn: any, fn?: any) {
+    // site.process(extensions, fn) or site.process(fn)
+    const actualFn = fn ?? extOrFn;
+    const extensions = fn ? extOrFn : "*";
+    const name = actualFn.name || `processor(${extensions})`;
+
+    // deno-lint-ignore no-explicit-any
+    const wrappedFn = async function (...args: any[]) {
+      const start = performance.now();
+      const result = await actualFn(...args);
+      processorTimings.push({
+        name,
+        duration: performance.now() - start,
+      });
+      return result;
+    };
+    Object.defineProperty(wrappedFn, "name", { value: name });
+
+    if (fn) {
+      return originalProcess(extOrFn, wrappedFn);
+    }
+    return originalProcess(wrappedFn);
+  };
+
+  // Print timing summary at idle (after all build work is done)
+  site.addEventListener("idle", () => {
+    console.log("\n[profile] === Build Phase Timings ===");
+    const pairs: [string, string, string][] = [
+      ["scan+load", "lume-beforeBuild", "lume-afterLoad"],
+      ["render", "lume-beforeRender", "lume-afterRender"],
+      ["process+save", "lume-afterRender", "lume-beforeSave"],
+      ["write", "lume-beforeSave", "lume-afterBuild"],
+      ["afterBuild hooks", "lume-afterBuild", "lume-idle"],
+      ["total", "lume-beforeBuild", "lume-idle"],
+    ];
+
+    // Mark idle so we can measure afterBuild→idle
+    performance.mark("lume-idle");
+
+    for (const [label, start, end] of pairs) {
+      try {
+        const measure = performance.measure(label, start, end);
+        console.log(
+          `[profile]   ${label.padEnd(20)} ${(measure.duration / 1000).toFixed(2)}s`,
+        );
+      } catch {
+        console.log(`[profile]   ${label.padEnd(20)} (no data)`);
+      }
+    }
+
+    // Aggregate processor timings by name
+    if (processorTimings.length > 0) {
+      const aggregated = new Map<string, { total: number; calls: number }>();
+      for (const { name, duration } of processorTimings) {
+        const existing = aggregated.get(name) ?? { total: 0, calls: 0 };
+        existing.total += duration;
+        existing.calls++;
+        aggregated.set(name, existing);
+      }
+
+      console.log("\n[profile] === Processor Timings ===");
+      const sorted = [...aggregated.entries()].sort((a, b) =>
+        b[1].total - a[1].total
+      );
+      for (const [name, { total, calls }] of sorted) {
+        console.log(
+          `[profile]   ${name.padEnd(30)} ${(total / 1000).toFixed(2)}s (${calls} calls)`,
+        );
+      }
+    }
+    console.log("");
+  });
+}
 
 // ignore some folders that have their own build tasks
 // site.ignore("styleguide");
