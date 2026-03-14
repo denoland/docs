@@ -73,7 +73,10 @@ function ensureReferenceDocsExist() {
 }
 
 // Ensure reference docs exist at startup for full builds
-if (Deno.env.get("BUILD_TYPE") === "FULL" && Deno.env.get("SKIP_REFERENCE") !== "1") {
+if (
+  Deno.env.get("BUILD_TYPE") === "FULL" &&
+  Deno.env.get("SKIP_REFERENCE") !== "1"
+) {
   ensureReferenceDocsExist();
 }
 
