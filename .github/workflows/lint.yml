@@ -16,8 +16,6 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
       - name: Set up Deno
         uses: denoland/setup-deno@v2
@@ -27,28 +25,9 @@ jobs:
       - run: deno fmt --check
       - run: deno task test
 
-      # Detect whether reference_gen/ files changed in this PR/push
-      - name: Check for reference_gen changes
-        id: ref-changes
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            # Compare the entire PR diff against the base branch
-            git fetch origin ${{ github.base_ref }} --depth=1
-            CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- reference_gen/ | head -1)
-          else
-            # Push to main: compare against previous commit
-            CHANGED=$(git diff --name-only HEAD~1 HEAD -- reference_gen/ | head -1)
-          fi
-          if [ -n "$CHANGED" ]; then
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      # Try to restore cached reference types + docs when reference_gen/ hasn't changed
+      # Cache reference types + generated docs (types: 86s, docs: 162s)
       - name: Restore reference cache
-        if: steps.ref-changes.outputs.changed == 'false'
-        uses: actions/cache/restore@v4
+        uses: actions/cache@v4
         id: ref-cache
         with:
           path: |
@@ -57,31 +36,20 @@ jobs:
           key: reference-${{ hashFiles('reference_gen/**') }}
           restore-keys: reference-
 
-      # Only run reference generation if files changed OR cache missed
       - name: "Reference: install"
-        if: steps.ref-changes.outputs.changed == 'true' || steps.ref-cache.outputs.cache-hit != 'true'
+        if: steps.ref-cache.outputs.cache-hit != 'true'
         working-directory: "reference_gen"
         run: deno install
 
       - name: "Reference: generate types"
-        if: steps.ref-changes.outputs.changed == 'true' || steps.ref-cache.outputs.cache-hit != 'true'
+        if: steps.ref-cache.outputs.cache-hit != 'true'
         working-directory: "reference_gen"
         run: deno task types
 
       - name: "Reference: generate docs"
-        if: steps.ref-changes.outputs.changed == 'true' || steps.ref-cache.outputs.cache-hit != 'true'
+        if: steps.ref-cache.outputs.cache-hit != 'true'
         working-directory: "reference_gen"
         run: deno task doc
-
-      # Save reference types + docs to cache after generation
-      - name: Save reference cache
-        if: steps.ref-changes.outputs.changed == 'true' || steps.ref-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            reference_gen/types
-            reference_gen/gen
-          key: reference-${{ hashFiles('reference_gen/**') }}
 
       # Cache std-docs to avoid 43+ network requests to JSR API on every build
       - name: Restore std-docs cache
