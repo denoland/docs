@@ -37,7 +37,7 @@
       "command": "deno task generate:reference && deno task generate:std-docs && BUILD_TYPE=FULL deno task lume"
     },
     "build:light": "deno task lume",
-    "build:parallel": "deno task generate:reference && deno task generate:std-docs && (SKIP_REFERENCE=1 BUILD_TYPE=FULL deno task lume & deno task lume:reference & wait)",
+    "build:split": "deno task generate:reference && deno task generate:std-docs && deno task lume:reference && SKIP_REFERENCE=1 BUILD_TYPE=FULL deno task lume",
     "lume:reference": "deno run --env-file -P=lume lume/cli.ts --config=_config-reference.ts",
     "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",

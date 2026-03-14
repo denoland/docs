@@ -23,7 +23,6 @@ const site = lume({
   location: new URL("https://docs.deno.com"),
   caseSensitiveUrls: true,
   emptyDest: false,
-  dest: "_site_ref",
 });
 
 // Only need JSX for rendering reference components
