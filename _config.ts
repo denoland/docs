@@ -206,7 +206,9 @@ if (PROFILE) {
       try {
         const measure = performance.measure(label, start, end);
         console.log(
-          `[profile]   ${label.padEnd(20)} ${(measure.duration / 1000).toFixed(2)}s`,
+          `[profile]   ${label.padEnd(20)} ${
+            (measure.duration / 1000).toFixed(2)
+          }s`,
         );
       } catch {
         console.log(`[profile]   ${label.padEnd(20)} (no data)`);
@@ -229,7 +231,9 @@ if (PROFILE) {
       );
       for (const [name, { total, calls }] of sorted) {
         console.log(
-          `[profile]   ${name.padEnd(30)} ${(total / 1000).toFixed(2)}s (${calls} calls)`,
+          `[profile]   ${name.padEnd(30)} ${
+            (total / 1000).toFixed(2)
+          }s (${calls} calls)`,
         );
       }
     }
