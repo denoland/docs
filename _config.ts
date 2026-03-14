@@ -186,115 +186,129 @@ site.use(title());
 site.use(sitemap());
 
 site.addEventListener("afterBuild", async () => {
-  // Write GFM CSS
-  /* NOTE: we used to get gfm.css from the jsr.io CDN, but now we simply have a local copy. This is because it needs to be placed on a CSS layer, which isn't possible with an imported file. */
-  // Deno.writeTextFileSync(site.dest("gfm.css"), GFM_CSS);
-
-  // Copy lint rule markdown source files to _site so they're served at /lint/rules/*.md.
-  // These files are excluded from Lume's processing pipeline (site.ignore) because
-  // lint_rule.page.tsx handles page generation, but we still want the raw .md accessible.
-  try {
-    await Deno.mkdir(site.dest("lint/rules"), { recursive: true });
-    for await (const entry of Deno.readDir("lint/rules")) {
-      if (entry.isFile && entry.name.endsWith(".md")) {
-        await Deno.copyFile(
-          `lint/rules/${entry.name}`,
-          site.dest(`lint/rules/${entry.name}`),
-        );
+  // Run all post-build tasks in parallel since they're independent
+  await Promise.all([
+    // 1. Copy lint rule markdown source files to _site
+    (async () => {
+      try {
+        await Deno.mkdir(site.dest("lint/rules"), { recursive: true });
+        const copies: Promise<void>[] = [];
+        for await (const entry of Deno.readDir("lint/rules")) {
+          if (entry.isFile && entry.name.endsWith(".md")) {
+            copies.push(Deno.copyFile(
+              `lint/rules/${entry.name}`,
+              site.dest(`lint/rules/${entry.name}`),
+            ));
+          }
+        }
+        await Promise.all(copies);
+        log.info("Copied lint rule markdown files to _site/lint/rules/");
+      } catch (error) {
+        log.error("Error copying lint rule markdown files: " + error);
       }
-    }
-    log.info("Copied lint rule markdown files to _site/lint/rules/");
-  } catch (error) {
-    log.error("Error copying lint rule markdown files: " + error);
-  }
+    })(),
 
-  // Generate LLMs documentation files directly to _site directory
-  if (Deno.env.get("BUILD_TYPE") == "FULL") {
-    try {
-      const { default: generateModule } = await import(
-        "./generate_llms_files.ts"
-      );
-      const {
-        collectFiles,
-        generateLlmsSummaryTxt,
-        generateLlmsFullTxt,
-        generateLlmsJson,
-        loadOramaSummaryIndex,
-      } = generateModule;
+    // 2. Generate LLMs documentation files
+    (async () => {
+      if (Deno.env.get("BUILD_TYPE") != "FULL") return;
+      try {
+        const { default: generateModule } = await import(
+          "./generate_llms_files.ts"
+        );
+        const {
+          collectFiles,
+          generateLlmsSummaryTxt,
+          generateLlmsFullTxt,
+          generateLlmsJson,
+          loadOramaSummaryIndex,
+        } = generateModule;
 
-      log.info("Generating LLM-friendly documentation files...");
+        log.info("Generating LLM-friendly documentation files...");
 
-      const files = await collectFiles();
-      log.info(`Collected ${files.length} documentation files for LLMs`);
+        const [files, oramaSummary] = await Promise.all([
+          collectFiles(),
+          loadOramaSummaryIndex(),
+        ]);
+        log.info(`Collected ${files.length} documentation files for LLMs`);
 
-      // Generate llms-summary.txt
-      const llmsSummaryTxt = generateLlmsSummaryTxt(files);
-      Deno.writeTextFileSync(site.dest("llms-summary.txt"), llmsSummaryTxt);
-      log.info("Generated llms-summary.txt in site root");
+        // Generate all LLM files in parallel
+        const writes: Promise<void>[] = [];
 
-      // Generate llms-full.txt
-      const llmsFullTxt = generateLlmsFullTxt(files);
-      Deno.writeTextFileSync(site.dest("llms-full.txt"), llmsFullTxt);
-      log.info("Generated llms-full.txt in site root");
+        const llmsSummaryTxt = generateLlmsSummaryTxt(files);
+        writes.push(
+          Deno.writeTextFile(site.dest("llms-summary.txt"), llmsSummaryTxt),
+        );
 
-      // Generate llms.json
-      const oramaSummary = await loadOramaSummaryIndex();
-      if (oramaSummary) {
-        const llmsJson = generateLlmsJson(oramaSummary);
-        Deno.writeTextFileSync(site.dest("llms.json"), llmsJson);
-        log.info("Generated llms.json in site root");
-      } else {
+        const llmsFullTxt = generateLlmsFullTxt(files);
+        writes.push(
+          Deno.writeTextFile(site.dest("llms-full.txt"), llmsFullTxt),
+        );
+
+        if (oramaSummary) {
+          const llmsJson = generateLlmsJson(oramaSummary);
+          writes.push(
+            Deno.writeTextFile(site.dest("llms.json"), llmsJson),
+          );
+        } else {
+          log.warn(
+            "Skipped llms.json generation (orama-index-summary.json not found)",
+          );
+        }
+
+        await Promise.all(writes);
+        log.info("Generated LLM documentation files");
+      } catch (error) {
+        log.error("Error generating LLMs files:" + error);
+      }
+    })(),
+
+    // 3. Copy source .md files to _site for AI agents
+    (async () => {
+      const contentDirs = [
+        "runtime",
+        "deploy",
+        "sandbox",
+        "subhosting",
+        "examples",
+      ];
+      let mdCopied = 0;
+      let mdErrors = false;
+      for (const dir of contentDirs) {
+        try {
+          await Deno.stat(dir);
+        } catch (error) {
+          if (!(error instanceof Deno.errors.NotFound)) {
+            log.error(`Error accessing content directory ${dir}: ${error}`);
+          }
+          continue;
+        }
+        try {
+          const copies: Promise<void>[] = [];
+          for await (
+            const entry of walk(dir, { exts: [".md"], includeDirs: false })
+          ) {
+            const destPath = site.dest(entry.path);
+            copies.push(
+              Deno.mkdir(dirname(destPath), { recursive: true })
+                .then(() => Deno.copyFile(entry.path, destPath)),
+            );
+            mdCopied++;
+          }
+          await Promise.all(copies);
+        } catch (error) {
+          log.error(`Error copying markdown files from ${dir}: ${error}`);
+          mdErrors = true;
+        }
+      }
+      if (mdErrors) {
         log.warn(
-          "Skipped llms.json generation (orama-index-summary.json not found)",
+          `Copied ${mdCopied} source markdown files to _site (some directories had errors, see above)`,
         );
+      } else {
+        log.info(`Copied ${mdCopied} source markdown files to _site`);
       }
-    } catch (error) {
-      log.error("Error generating LLMs files:" + error);
-    }
-  }
-
-  // Copy source .md files to _site so AI agents can request them directly.
-  // Excludes "reference/" (dynamically generated, no static .md source files).
-  const contentDirs = [
-    "runtime",
-    "deploy",
-    "sandbox",
-    "subhosting",
-    "examples",
-  ];
-  let mdCopied = 0;
-  let mdErrors = false;
-  for (const dir of contentDirs) {
-    // Skip directories that don't exist in this build
-    try {
-      await Deno.stat(dir);
-    } catch (error) {
-      if (!(error instanceof Deno.errors.NotFound)) {
-        log.error(`Error accessing content directory ${dir}: ${error}`);
-      }
-      continue;
-    }
-    try {
-      for await (
-        const entry of walk(dir, { exts: [".md"], includeDirs: false })
-      ) {
-        const destPath = site.dest(entry.path);
-        await Deno.mkdir(dirname(destPath), { recursive: true });
-        await Deno.copyFile(entry.path, destPath);
-        mdCopied++;
-      }
-    } catch (error) {
-      log.error(`Error copying markdown files from ${dir}: ${error}`);
-      mdErrors = true;
-    }
-  }
-  if (mdErrors) {
-    log.warn(
-      `Copied ${mdCopied} source markdown files to _site (some directories had errors, see above)`,
-    );
-  } else {
-    log.info(`Copied ${mdCopied} source markdown files to _site`);
-  }
+    })(),
+  ]);
 });
 
 site.copy("reference_gen/gen/deno/page.css", "/api/deno/page.css");
