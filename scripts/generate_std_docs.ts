@@ -363,9 +363,11 @@ async function main() {
     latestVersion: p.latestVersion.replace(/^v/, ""),
   }));
 
-  // Generate each package page sequentially (can parallelize later)
-  for (const pkg of summaries) {
-    await generatePackagePage(pkg);
+  // Generate package pages in parallel (batched to avoid overwhelming JSR API)
+  const BATCH_SIZE = 10;
+  for (let i = 0; i < summaries.length; i += BATCH_SIZE) {
+    const batch = summaries.slice(i, i + BATCH_SIZE);
+    await Promise.all(batch.map((pkg) => generatePackagePage(pkg)));
   }
   await generateIndex(summaries);
 }
