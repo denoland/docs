@@ -136,9 +136,9 @@ To add environment variables:
 
 ![Screenshot of the Deploy env variables config screen](./images/env_var.png)
 
-You can re-open the drawer to edit / remove environment variables you have added.
-You can also edit the app name on this page, and select which region(s) the
-application should be served from.
+You can re-open the drawer to edit / remove environment variables you have
+added. You can also edit the app name on this page, and select which region(s)
+the application should be served from.
 
 ## Build and deploy your app
 
