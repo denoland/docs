@@ -9,7 +9,7 @@ oldUrl:
 
 The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
 <a href="https://api.deno.com/v2/docs">v2 API</a>. See the
-<a href="/deploy/api_migration_guide/">API migration guide</a> for details.
+<a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for details.
 
 :::
 
@@ -78,7 +78,7 @@ execute that code on a Deno-provisioned URL or a
 ## REST API reference
 
 The subhosting v1 API is being replaced by the v2 API. See the
-[API migration guide](/deploy/api_migration_guide/) for detailed
+[API migration guide](/subhosting/manual/api_migration_guide/) for detailed
 endpoint mappings and migration instructions.
 
 - **v2 API reference** (recommended):

@@ -100,7 +100,7 @@ Deploy Classic on July 20, 2026. Migrate your integrations to the
 The v2 API has significant architectural changes — projects become apps,
 deployments become revisions, and each app should represent a single
 function. See the
-[subhosting API migration guide](/deploy/api_migration_guide/) for
+[subhosting API migration guide](/subhosting/manual/api_migration_guide/) for
 detailed endpoint mappings, request/response changes, and new features
 like labels and layers.
 

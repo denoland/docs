@@ -13,10 +13,6 @@ export const sidebar = [
         title: "Migrating from Deploy Classic",
         href: "/deploy/migration_guide/",
       },
-      {
-        title: "Subhosting API v1 to v2",
-        href: "/deploy/api_migration_guide/",
-      },
     ],
   },
   {

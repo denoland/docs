@@ -47,7 +47,7 @@ export const sidebar = [
       },
       {
         title: "Migration guide (v1 to v2)",
-        href: "/deploy/api_migration_guide/",
+        href: "/subhosting/manual/api_migration_guide/",
       },
     ],
   },
