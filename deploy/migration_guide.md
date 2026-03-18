@@ -6,7 +6,9 @@ description: "Guide to migrating your applications from Deno Deploy Classic (das
 Deno Deploy Classic (dash.deno.com) and the subhosting v1 API
 (apidocs.deno.com) will be shut down on **July 20, 2026**. This guide covers
 migrating your applications and API integrations to the new
-[Deno Deploy](https://console.deno.com) platform.
+[Deno Deploy](https://console.deno.com) platform. If you are migrating
+from the subhosting v1 API, see the
+[subhosting API migration guide](/subhosting/manual/api_migration_guide/).
 
 ## Create a new organization
 
@@ -133,12 +135,5 @@ The new Deploy includes several features not available in Deploy Classic:
 - **Separate dev/prod environments** — different environment variables and
   databases per context
 
-## Timeline
-
-| Date | Event |
-| --- | --- |
-| Now | Create your organization at [console.deno.com](https://console.deno.com) and begin migration |
-| July 20, 2026 | Deploy Classic (dash.deno.com) and subhosting v1 API shut down |
-
-Start your migration early to allow time for testing. If you have questions
-or need help, contact [support@deno.com](mailto:support@deno.com).
+If you have questions or need help, contact
+[support@deno.com](mailto:support@deno.com).
