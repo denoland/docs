@@ -16,23 +16,11 @@ migrating to the new <a href="/deploy/">Deno Deploy</a> platform. See the
 This section documents the legacy Deno Deploy Classic platform (dash.deno.com).
 We are no longer onboarding new users or organizations to Deploy Classic.
 
-If you already have existing Deploy Classic projects, you may continue to
-operate them for now, but we strongly encourage you to begin migrating to the
-new Deno Deploy platform at [console.deno.com](https://console.deno.com).
-
-Key differences:
-
-- Deploy Classic is in maintenance mode (no new features, limited updates).
-- New capabilities (enhanced Node/NPM support, integrated builds, metrics,
-  tracing, framework presets, static assets, improved infra) are available in
-  Deno Deploy.
-
-Get started with the new platform here:
-[About Deno Deploy Early Access](/deploy/).
-
-Migration guidance is coming soon. In the meantime, you can set up a new Deno
-Deploy org and redeploy your apps there. Reach out to
-<a href="mailto:support@deno.com">support</a> if you need assistance.
+If you already have existing Deploy Classic projects, you must migrate them
+to the new Deno Deploy platform at
+[console.deno.com](https://console.deno.com) before the shutdown date. See
+the [migration guide](/deploy/migration_guide/) for step-by-step
+instructions.
 
 ## What is Deno Deploy Classic?
 

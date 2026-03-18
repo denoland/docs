@@ -24,7 +24,7 @@ export const sidebar = [
     items: [
       {
         title: "REST API",
-        href: "https://console.deno.com/api/v2/docs",
+        href: "https://api.deno.com/v2/docs",
       },
       {
         title: "Accounts",

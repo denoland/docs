@@ -111,6 +111,13 @@ Official SDKs for the v2 API:
 - **Python**:
   [sandbox-py](https://github.com/denoland/sandbox-py)
 
+## Regions
+
+Deploy Classic serves from 6 regions. The new Deploy currently has 2
+regions, with the ability to self-host additional regions on your own
+infrastructure. If your application is latency-sensitive and depends on
+specific regions, plan accordingly.
+
 ## What's new
 
 The new Deploy includes several features not available in Deploy Classic:

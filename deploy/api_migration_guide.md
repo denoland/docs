@@ -5,7 +5,9 @@ description: "Detailed guide for migrating from the Deno Deploy subhosting API v
 
 This guide covers migrating from the Deno Deploy subhosting API v1
 (`api.deno.com/v1`) to v2 (`api.deno.com/v2`). The v1 API will be shut
-down on **July 20, 2026**.
+down on **July 20, 2026**. For general platform migration (apps,
+domains, environment variables), see the
+[Deploy Classic migration guide](/deploy/migration_guide/).
 
 Full v2 API reference:
 [api.deno.com/v2/docs](https://api.deno.com/v2/docs)
