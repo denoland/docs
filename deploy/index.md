@@ -42,7 +42,7 @@ Deploy Classic. The below table compares the two versions of Deno Deploy.
 | Web Cache API                   | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Databases                       | ✅ Supported                   | 🟠 Deno KV                                                                                                                              |
 | Queues                          | ❌ Not supported               | ✅ Supported                                                                                                                            |
-| Cron                            | ❌ Not supported               | ✅ Supported                                                                                                                            |
+| Cron                            | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Deploy from GitHub              | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Deploy from CLI                 | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Instant Rollback                | ✅ Supported                   | ✅ Supported                                                                                                                            |

@@ -3,6 +3,14 @@ title: Pricing and Limits
 description: Overview of Deno Subhosting pricing plans, resource limits, deployment restrictions, and performance constraints for your applications.
 ---
 
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
+<a href="https://api.deno.com/v2/docs">v2 API</a>. See the
+<a href="/deploy/api_migration_guide/">API migration guide</a> for details.
+
+:::
+
 You can see an
 [overview of available pricing plans and features](https://deno.com/deploy/pricing?subhosting)
 for Deno Subhosting on the Deno website. If you have a use case that exceeds any

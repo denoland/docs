@@ -2,6 +2,14 @@
 title: Planning your implementation
 ---
 
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
+<a href="https://api.deno.com/v2/docs">v2 API</a>. See the
+<a href="/deploy/api_migration_guide/">API migration guide</a> for details.
+
+:::
+
 Let's say, for example, that you are building a SaaS CRM platform like
 Salesforce. You want to empower your customers to write JavaScript code that
 would be executed every time a new lead was captured.

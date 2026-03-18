@@ -2,6 +2,14 @@
 title: Authentication
 ---
 
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
+<a href="https://api.deno.com/v2/docs">v2 API</a>. See the
+<a href="/deploy/api_migration_guide/">API migration guide</a> for details.
+
+:::
+
 Developers can provision projects, domains, KV databases, and other resources
 using the Subhosting REST API.
 

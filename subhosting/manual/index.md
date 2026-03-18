@@ -5,6 +5,14 @@ oldUrl:
   - /deploy/manual/subhosting/
 ---
 
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
+<a href="https://api.deno.com/v2/docs">v2 API</a>. See the
+<a href="/deploy/api_migration_guide/">API migration guide</a> for details.
+
+:::
+
 Deno Subhosting is a robust platform designed to allow Software as a Service
 (SaaS) providers to securely run code written by their customers. The Subhosting
 API allows you to deploy untrusted code programmatically and at scale.
