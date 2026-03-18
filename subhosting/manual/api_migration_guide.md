@@ -16,7 +16,8 @@ Official SDKs:
 
 - **TypeScript/JavaScript**:
   [@deno/sandbox](https://www.npmjs.com/package/@deno/sandbox)
-- **Python**: [sandbox-py](https://github.com/denoland/sandbox-py)
+- **Python**: [deno-sandbox](https://pypi.org/project/deno-sandbox/) on PyPI
+  ([source](https://github.com/denoland/sandbox-py))
 
 These SDKs are branded as "sandbox" but work for subhosting use cases.
 
@@ -232,6 +233,7 @@ Key differences:
 | Build config     | None (import caching only)        | `config.install` and `config.build`                                          |
 | Response status  | `200`                             | `202 Accepted` (build is async)                                              |
 | Databases/KV     | `databases` field                 | Not available                                                                |
+| Request timeout  | `requestTimeout` field            | Not available                                                                |
 | Permissions      | `permissions` field               | Not available                                                                |
 
 **Build configuration:** In v1, the "build" step only cached imports. The
@@ -251,6 +253,7 @@ in subsequent deploys.
 | _(none)_  | `building`  | Build in progress     |
 | `success` | `succeeded` | Deployed and live     |
 | `failed`  | `failed`    | Build failed          |
+| _(none)_  | `skipped`   | Build was skipped     |
 
 ### Get deployment / revision status
 
@@ -348,14 +351,27 @@ curl -H "Authorization: Bearer $TOKEN" \
 
 Parameter mapping:
 
-| v1      | v2       | Notes                          |
-| ------- | -------- | ------------------------------ |
-| `since` | `start`  | Required in v2                 |
-| `until` | `end`    | Optional                       |
-| `limit` | `limit`  | v1: max 10000. v2: max 1000    |
-| `order` | _(none)_ | v2 returns chronological order |
-| `q`     | `query`  | Text search                    |
-| `level` | `level`  | v1: `warning`. v2: `warn`      |
+| v1       | v2       | Notes                                |
+| -------- | -------- | ------------------------------------ |
+| `since`  | `start`  | Required in v2                       |
+| `until`  | `end`    | Optional                             |
+| `limit`  | `limit`  | v1: max 10000. v2: max 1000          |
+| `order`  | _(none)_ | v2 returns chronological order       |
+| `q`      | `query`  | Text search                          |
+| `level`  | `level`  | v1: `warning`. v2: `warn`            |
+| `region` | _(none)_ | Region filtering not available in v2 |
+
+Response field mapping:
+
+| v1 field  | v2 field      |
+| --------- | ------------- |
+| `time`    | `timestamp`   |
+| `level`   | `level`       |
+| `message` | `message`     |
+| `region`  | `region`      |
+| —         | `revision_id` |
+| —         | `trace_id`    |
+| —         | `span_id`     |
 
 V2 wraps logs in an object with `next_cursor` for pagination:
 
@@ -375,7 +391,9 @@ V2 wraps logs in an object with `next_cursor` for pagination:
 ```
 
 **Streaming:** In v1, omitting `since` and `until` enables real-time streaming.
-In v2, set `stream=true` for real-time streaming via SSE or NDJSON.
+In v2, omit the `end` parameter to stream. Set the `Accept` header to
+`text/event-stream` for SSE format or `application/x-ndjson` for NDJSON.
+Requesting `application/json` without `end` returns an error.
 
 ## Using labels to group apps
 
@@ -463,6 +481,7 @@ changes immediately.
 6. **Update log queries:**
    - `since`/`until` → `start`/`end`
    - `warning` → `warn`
+   - `time` → `timestamp` in log response body
    - Handle `{logs: [...], next_cursor: ...}` response wrapper
 7. **Update pagination** from page-based to cursor-based.
 8. **Update status values**: `pending` → `queued`, `success` → `succeeded`.

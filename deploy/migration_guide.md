@@ -15,12 +15,12 @@ subhosting v1 API, see the
 The new Deno Deploy uses a separate account system. To get started:
 
 1. Go to [console.deno.com](https://console.deno.com) and sign in
-2. Create a new organization — this is required before you can deploy any
-   applications
+2. Create a new organization (if you don't have one already) — this is required
+   before you can deploy any applications
 3. Invite team members to your organization as needed
 
-Your Deploy Classic projects at dash.deno.com are not automatically transferred.
-You will need to create new apps and redeploy.
+**Your Deploy Classic projects at dash.deno.com are not automatically
+transferred.** You will need to create new apps and redeploy.
 
 ## Create and deploy your app
 
@@ -49,7 +49,7 @@ instructions.
 
 Deploy Classic used a single set of environment variables for all deployments.
 The new Deploy supports separate **production**, **development**, and **build**
-contexts.
+timelines.
 
 Review your environment variables and set them up in the new dashboard under
 your app's settings. See
@@ -99,8 +99,8 @@ Classic on July 20, 2026. Migrate your integrations to the
 [v2 API](https://api.deno.com/v2/docs).
 
 The v2 API has significant architectural changes — projects become apps,
-deployments become revisions, and each app should represent a single function.
-See the
+deployments become revisions, and each app represents a single deployable
+service. See the
 [subhosting API migration guide](/subhosting/manual/api_migration_guide/) for
 detailed endpoint mappings, request/response changes, and new features like
 labels and layers.
@@ -109,21 +109,23 @@ Official SDKs for the v2 API:
 
 - **TypeScript/JavaScript**:
   [@deno/sandbox](https://www.npmjs.com/package/@deno/sandbox)
-- **Python**: [sandbox-py](https://github.com/denoland/sandbox-py)
+- **Python**: [deno-sandbox](https://pypi.org/project/deno-sandbox/)
 
 ## Regions
 
 Deploy Classic serves from 6 regions. The new Deploy currently has 2 regions,
 with the ability to self-host additional regions on your own infrastructure. If
-your application is latency-sensitive and depends on specific regions, plan
-accordingly.
+your application is latency-sensitive and depends on specific regions, please
+plan accordingly.
 
 ## What's new
 
 The new Deploy includes several features not available in Deploy Classic:
 
 - **Full Deno 2.0 runtime** — FFI, subprocesses, file system write access, and
-  improved NPM compatibility
+  improved npm compatibility
+- **Integrated builds** — build steps run on Deno Deploy with live-streamed
+  logs, no GitHub Actions YAML required
 - **First-class framework support** — Next.js, Astro, SvelteKit, Fresh, and more
   work out of the box
 - **CDN caching** — built-in edge caching with `Cache-Control` headers and
