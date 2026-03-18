@@ -9,7 +9,8 @@ oldUrl:
 
 The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
 <a href="https://api.deno.com/v2/docs">v2 API</a>. See the
-<a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for details.
+<a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
+details.
 
 :::
 
@@ -92,10 +93,8 @@ endpoint mappings and migration instructions.
 
 - **TypeScript/JavaScript**:
   [@deno/sandbox](https://www.npmjs.com/package/@deno/sandbox)
-- **Python**:
-  [sandbox-py](https://github.com/denoland/sandbox-py)
+- **Python**: [sandbox-py](https://github.com/denoland/sandbox-py)
 
-**v1 SDKs** (legacy):
-[JavaScript](https://www.npmjs.com/package/subhosting),
+**v1 SDKs** (legacy): [JavaScript](https://www.npmjs.com/package/subhosting),
 [Python](https://pypi.org/project/subhosting/0.0.1a0/),
 [Go](https://github.com/denoland/subhosting-go)

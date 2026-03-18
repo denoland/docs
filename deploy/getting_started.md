@@ -6,8 +6,8 @@ description: "Step-by-step guide to creating and configuring your first Deno Dep
 ## Create an organization
 
 Deno Deploy Classic will be shut down on July 20, 2026. If you are migrating
-from Deploy Classic, see the
-[migration guide](/deploy/migration_guide/) for details on what has changed.
+from Deploy Classic, see the [migration guide](/deploy/migration_guide/) for
+details on what has changed.
 
 To get started with Deno Deploy:
 

@@ -4,8 +4,8 @@ title: "Connect to Firebase"
 
 :::warning Sunsetting on July 20, 2026
 
-Deno Deploy Classic will be shut down on July 20, 2026. We recommend
-migrating to the new <a href="/deploy/">Deno Deploy</a> platform. See the
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new <a href="/deploy/">Deno Deploy</a> platform. See the
 <a href="/deploy/migration_guide/">migration guide</a> for details.
 
 :::

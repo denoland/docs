@@ -74,8 +74,7 @@ URL. A KV Connect URL for a database hosted on Deno Deploy will be in this
 format: `https://api.deno.com/databases/<database-id>/connect`.
 
 The `database-id` for your project can be found in the
-[Deno Deploy dashboard](https://console.deno.com), under the app's
-"KV" tab.
+[Deno Deploy dashboard](https://console.deno.com), under the app's "KV" tab.
 
 ![Connection string locations in Deploy](./images/kv-connect.png)
 
