@@ -540,6 +540,15 @@
           "usage": "--cpu-prof-md"
         },
         {
+          "name": "cpu-prof-flamegraph",
+          "short": null,
+          "long": "cpu-prof-flamegraph",
+          "required": false,
+          "help": "Generate an SVG flamegraph alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-flamegraph"
+        },
+        {
           "name": "tunnel",
           "short": "t",
           "long": "tunnel",
@@ -1104,6 +1113,15 @@
           "help": "Generate a human-readable markdown report alongside the CPU profile",
           "help_heading": null,
           "usage": "--cpu-prof-md"
+        },
+        {
+          "name": "cpu-prof-flamegraph",
+          "short": null,
+          "long": "cpu-prof-flamegraph",
+          "required": false,
+          "help": "Generate an SVG flamegraph alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-flamegraph"
         },
         {
           "name": "tunnel",
@@ -4319,6 +4337,15 @@
           "help": "Generate a human-readable markdown report alongside the CPU profile",
           "help_heading": null,
           "usage": "--cpu-prof-md"
+        },
+        {
+          "name": "cpu-prof-flamegraph",
+          "short": null,
+          "long": "cpu-prof-flamegraph",
+          "required": false,
+          "help": "Generate an SVG flamegraph alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-flamegraph"
         },
         {
           "name": "unstable",
