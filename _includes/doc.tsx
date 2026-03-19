@@ -101,6 +101,18 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               {data.children}
             </div>
           </article>
+          {data.lastModified && !isReference && !isLintRule && (
+            <p class="text-sm text-foreground-secondary mt-8">
+              Last updated on{" "}
+              <time dateTime={data.lastModified.toISOString()}>
+                {data.lastModified.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            </p>
+          )}
           <data.comp.Feedback file={file} />
         </div>
       </main>

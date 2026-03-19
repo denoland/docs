@@ -325,6 +325,37 @@ site.ignore(
 // the default layout if no other layout is specified
 site.data("layout", "doc.tsx");
 
+// Populate lastModified from git history using a single git command
+site.preprocess([".md", ".mdx"], (filteredPages) => {
+  const result = Deno.spawnAndWaitSync("git", [
+    "log",
+    "--pretty=format:%aI",
+    "--name-only",
+    "--diff-filter=ACMR",
+    "HEAD",
+  ]);
+
+  const output = new TextDecoder().decode(result.stdout);
+  const lastModified = new Map<string, string>();
+  let currentDate = "";
+
+  for (const line of output.split("\n")) {
+    if (!line) continue;
+    if (line.match(/^\d{4}-/)) {
+      currentDate = line;
+    } else if (!lastModified.has(line)) {
+      lastModified.set(line, currentDate);
+    }
+  }
+
+  for (const page of filteredPages) {
+    const src = page.sourcePath?.replace(/^\//, "");
+    if (src && lastModified.has(src)) {
+      page.data.lastModified = new Date(lastModified.get(src)!);
+    }
+  }
+});
+
 // Load API categories data globally
 import denoCategories from "./reference_gen/deno-categories.json" with {
   type: "json",
@@ -373,9 +404,6 @@ site.data("apiCategories", {
 
 // Do more expensive operations if we're building the full site
 if (Deno.env.get("BUILD_TYPE") == "FULL" && !Deno.env.has("SKIP_OG")) {
-  // Use Lume's built in date function to get the last modified date of the file
-  // site.data("date", "Git Last Modified");;
-
   // Generate Open Graph images
   site.data("openGraphLayout", "/open_graph/default.jsx");
   site.use(
