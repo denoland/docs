@@ -9,8 +9,8 @@ migrate it to Deno Deploy, follow these steps:
 
 ## Add your domain to Deno Deploy
 
-1. Visit the [Deno Deploy dashboard](https://dash.deno.com) and navigate to the
-   project you want to associate with your custom domain.
+1. Visit the [Deno Deploy dashboard](https://console.deno.com) and navigate to
+   the app you want to associate with your custom domain.
 
 2. Click the **"Settings"** tab.
 
