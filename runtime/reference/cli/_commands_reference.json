@@ -495,6 +495,60 @@
           "usage": "--coverage[=<DIR>]"
         },
         {
+          "name": "cpu-prof",
+          "short": null,
+          "long": "cpu-prof",
+          "required": false,
+          "help": "Start the V8 CPU profiler on startup and write the profile to disk on exit. Profiles are written to the current directory by default",
+          "help_heading": null,
+          "usage": "--cpu-prof"
+        },
+        {
+          "name": "cpu-prof-dir",
+          "short": null,
+          "long": "cpu-prof-dir",
+          "required": false,
+          "help": "Directory where the V8 CPU profiles will be written. Implicitly enables --cpu-prof",
+          "help_heading": null,
+          "usage": "--cpu-prof-dir <DIR>"
+        },
+        {
+          "name": "cpu-prof-name",
+          "short": null,
+          "long": "cpu-prof-name",
+          "required": false,
+          "help": "Filename for the CPU profile (defaults to CPU.<timestamp>.<pid>.cpuprofile)",
+          "help_heading": null,
+          "usage": "--cpu-prof-name <NAME>"
+        },
+        {
+          "name": "cpu-prof-interval",
+          "short": null,
+          "long": "cpu-prof-interval",
+          "required": false,
+          "help": "Sampling interval in microseconds for CPU profiling (default: 1000)",
+          "help_heading": null,
+          "usage": "--cpu-prof-interval <MICROSECONDS>"
+        },
+        {
+          "name": "cpu-prof-md",
+          "short": null,
+          "long": "cpu-prof-md",
+          "required": false,
+          "help": "Generate a human-readable markdown report alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-md"
+        },
+        {
+          "name": "cpu-prof-flamegraph",
+          "short": null,
+          "long": "cpu-prof-flamegraph",
+          "required": false,
+          "help": "Generate an SVG flamegraph alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-flamegraph"
+        },
+        {
           "name": "tunnel",
           "short": "t",
           "long": "tunnel",
@@ -1014,6 +1068,60 @@
           "help": "Disable V8 code cache feature",
           "help_heading": null,
           "usage": "--no-code-cache"
+        },
+        {
+          "name": "cpu-prof",
+          "short": null,
+          "long": "cpu-prof",
+          "required": false,
+          "help": "Start the V8 CPU profiler on startup and write the profile to disk on exit. Profiles are written to the current directory by default",
+          "help_heading": null,
+          "usage": "--cpu-prof"
+        },
+        {
+          "name": "cpu-prof-dir",
+          "short": null,
+          "long": "cpu-prof-dir",
+          "required": false,
+          "help": "Directory where the V8 CPU profiles will be written. Implicitly enables --cpu-prof",
+          "help_heading": null,
+          "usage": "--cpu-prof-dir <DIR>"
+        },
+        {
+          "name": "cpu-prof-name",
+          "short": null,
+          "long": "cpu-prof-name",
+          "required": false,
+          "help": "Filename for the CPU profile (defaults to CPU.<timestamp>.<pid>.cpuprofile)",
+          "help_heading": null,
+          "usage": "--cpu-prof-name <NAME>"
+        },
+        {
+          "name": "cpu-prof-interval",
+          "short": null,
+          "long": "cpu-prof-interval",
+          "required": false,
+          "help": "Sampling interval in microseconds for CPU profiling (default: 1000)",
+          "help_heading": null,
+          "usage": "--cpu-prof-interval <MICROSECONDS>"
+        },
+        {
+          "name": "cpu-prof-md",
+          "short": null,
+          "long": "cpu-prof-md",
+          "required": false,
+          "help": "Generate a human-readable markdown report alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-md"
+        },
+        {
+          "name": "cpu-prof-flamegraph",
+          "short": null,
+          "long": "cpu-prof-flamegraph",
+          "required": false,
+          "help": "Generate an SVG flamegraph alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-flamegraph"
         },
         {
           "name": "tunnel",
@@ -4184,6 +4292,60 @@
           "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
           "help_heading": null,
           "usage": "--env-file[=<FILE>]"
+        },
+        {
+          "name": "cpu-prof",
+          "short": null,
+          "long": "cpu-prof",
+          "required": false,
+          "help": "Start the V8 CPU profiler on startup and write the profile to disk on exit. Profiles are written to the current directory by default",
+          "help_heading": null,
+          "usage": "--cpu-prof"
+        },
+        {
+          "name": "cpu-prof-dir",
+          "short": null,
+          "long": "cpu-prof-dir",
+          "required": false,
+          "help": "Directory where the V8 CPU profiles will be written. Implicitly enables --cpu-prof",
+          "help_heading": null,
+          "usage": "--cpu-prof-dir <DIR>"
+        },
+        {
+          "name": "cpu-prof-name",
+          "short": null,
+          "long": "cpu-prof-name",
+          "required": false,
+          "help": "Filename for the CPU profile (defaults to CPU.<timestamp>.<pid>.cpuprofile)",
+          "help_heading": null,
+          "usage": "--cpu-prof-name <NAME>"
+        },
+        {
+          "name": "cpu-prof-interval",
+          "short": null,
+          "long": "cpu-prof-interval",
+          "required": false,
+          "help": "Sampling interval in microseconds for CPU profiling (default: 1000)",
+          "help_heading": null,
+          "usage": "--cpu-prof-interval <MICROSECONDS>"
+        },
+        {
+          "name": "cpu-prof-md",
+          "short": null,
+          "long": "cpu-prof-md",
+          "required": false,
+          "help": "Generate a human-readable markdown report alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-md"
+        },
+        {
+          "name": "cpu-prof-flamegraph",
+          "short": null,
+          "long": "cpu-prof-flamegraph",
+          "required": false,
+          "help": "Generate an SVG flamegraph alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-flamegraph"
         },
         {
           "name": "unstable",

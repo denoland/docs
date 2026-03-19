@@ -1,5 +1,5 @@
 ---
-title: "`deno init`, start a new project"
+title: "deno init"
 oldUrl: /runtime/manual/tools/init/
 command: init
 openGraphLayout: "/open_graph/cli-commands.jsx"

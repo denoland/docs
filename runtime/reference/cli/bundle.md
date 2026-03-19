@@ -1,5 +1,5 @@
 ---
-title: "Bundler"
+title: "deno bundle"
 oldUrl: /runtime/manual/cli/bundler/
 command: bundle
 openGraphLayout: "/open_graph/cli-commands.jsx"

@@ -1,5 +1,5 @@
 ---
-title: "`deno fmt`, code formatting"
+title: "deno fmt"
 oldUrl:
   - /runtime/tools/formatter/
   - /runtime/manual/tools/formatter/

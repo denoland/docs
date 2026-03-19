@@ -1,5 +1,5 @@
 ---
-title: "`deno install`"
+title: "deno install"
 oldUrl:
   - /runtime/manual/tools/script_installer/
   - /runtime/reference/cli/script_installer/
