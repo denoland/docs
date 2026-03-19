@@ -12,7 +12,7 @@ you need to:
 - integrate Deploy provisioning directly into your CI/CD
 - clean up stale or unused apps on a schedule
 
-The SDK wraps the [Deno Deploy REST API](https://console.deno.com/api/v2/docs).
+The SDK wraps the [Deno Deploy REST API](https://api.deno.com/v2/docs).
 
 ## Getting started
 
