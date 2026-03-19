@@ -5,10 +5,9 @@ description: "Step-by-step guide to creating and configuring your first Deno Dep
 
 ## Create an organization
 
-Deno Deploy will eventually replace Deno Deploy Classic. Until that time both
-systems will be available simultaneously. By creating an organisation for use
-with Deploy it is possible to explore Deploy without disrupting projects already
-using Deploy Classic.
+Deno Deploy Classic will be shut down on July 20, 2026. If you are migrating
+from Deploy Classic, see the [migration guide](/deploy/migration_guide/) for
+details on what has changed.
 
 To get started with Deno Deploy:
 
