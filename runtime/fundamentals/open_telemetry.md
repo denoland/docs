@@ -39,8 +39,32 @@ OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 
 :::tip
 
-If you do not have an OpenTelemetry collector set up yet, you can get started
-with a
+If you want to quickly see OpenTelemetry output without setting up a collector,
+you can use the built-in console exporter to print spans, logs, and metrics
+directly to stderr in a human-readable format:
+
+```sh
+OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console deno run my_script.ts
+```
+
+Example output:
+
+```
+SPAN inner span [00000000000000000000000000000001/0000000000000002] Internal 0.495ms
+  parent: 0000000000000001
+  scope: example-tracer
+  key: value
+LOG [INFO] 2025-03-14T13:47:07.235Z "hello from inner"
+  scope: deno@2.7.5
+  trace: 00000000000000000000000000000001/0000000000000002
+```
+
+:::
+
+:::tip
+
+If you want to visualize telemetry data in a dashboard, you can get started with
+a
 [local LGTM stack in Docker](https://github.com/grafana/docker-otel-lgtm/tree/main?tab=readme-ov-file)
 (Loki (logs), Grafana (dashboard), Tempo (traces), and Prometheus (metrics)) by
 running the following command:
@@ -622,7 +646,15 @@ environment variable.
 
 The endpoint and protocol for the OTLP exporter can be configured using the
 `OTEL_EXPORTER_OTLP_ENDPOINT` and `OTEL_EXPORTER_OTLP_PROTOCOL` environment
-variables.
+variables. Supported values for `OTEL_EXPORTER_OTLP_PROTOCOL` are:
+
+- `http/protobuf` (default): Export using Protobuf over HTTP to the configured
+  endpoint.
+- `http/json`: Export using JSON over HTTP to the configured endpoint.
+- `console`: Print spans, logs, and metrics to stderr in a human-readable text
+  format. This is useful for debugging and testing instrumentation without
+  running an OTLP collector. When using `console`, no endpoint configuration is
+  needed.
 
 If the endpoint requires authentication, headers can be configured using the
 `OTEL_EXPORTER_OTLP_HEADERS` environment variable.
@@ -732,9 +764,8 @@ limitations to be aware of:
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
   are not supported.
-- The only supported exporter is OTLP - other exporters are not supported.
-- Only `http/protobuf` and `http/json` protocols are supported for OTLP. Other
-  protocols such as `grpc` are not supported.
+- The supported exporters are OTLP (`http/protobuf`, `http/json`) and `console`.
+  Other exporters and protocols such as `grpc` are not supported.
 - Metrics from observable (asynchronous) meters are not collected on process
   exit/crash, so the last value of metrics may not be exported. Synchronous
   metrics are exported on process exit/crash.
