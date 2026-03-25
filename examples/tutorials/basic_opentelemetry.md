@@ -123,6 +123,18 @@ To run the server with OpenTelemetry, use these flags:
 OTEL_DENO=true OTEL_SERVICE_NAME=my-server deno run --allow-net server.ts
 ```
 
+:::tip
+
+To quickly see telemetry output without setting up a collector, you can use the
+built-in console exporter which prints spans, logs, and metrics directly to
+stderr:
+
+```sh
+OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console OTEL_SERVICE_NAME=my-server deno run --allow-net server.ts
+```
+
+:::
+
 ## Step 3: Create a Test Client
 
 Let's create a simple client to send requests to our server:
