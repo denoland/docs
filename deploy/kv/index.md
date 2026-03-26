@@ -37,7 +37,7 @@ To close the database connection, use the
 ```ts
 const kv = await Deno.openKv();
 // Execute some queries ...
-await kv.close();
+kv.close();
 ```
 
 ## Creating, updating, and reading a key-value pair
