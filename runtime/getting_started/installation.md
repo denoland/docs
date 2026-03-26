@@ -9,7 +9,8 @@ oldUrl:
 
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
 has no external dependencies. On macOS, both M1 (arm64) and Intel (x64)
-executables are provided. On Linux and Windows, only x64 is supported.
+executables are provided. On Windows, both ARM64 and x64 are supported. On
+Linux, only x64 is supported.
 
 ## Download and install
 

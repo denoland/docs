@@ -69,7 +69,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               class="markdown-body mt-6 sm:mt-6"
             >
               {!(isReference && !isApiLandingPage) && (
-                <header class="flex items-start justify-between gap-4">
+                <header class="flex flex-col md:flex-row items-start justify-between gap-4">
                   <h1
                     dangerouslySetInnerHTML={{
                       __html: helpers.md(data.title!, true),

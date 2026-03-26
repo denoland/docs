@@ -133,6 +133,48 @@ const status = await process.status;
 console.log("Exit code:", status.code);
 ```
 
+## Convenience spawn functions
+
+:::caution
+
+`Deno.spawn()`, `Deno.spawnAndWait()`, and `Deno.spawnAndWaitSync()` are
+unstable APIs introduced in Deno 2.7. They may evolve before being stabilized.
+
+:::
+
+As of Deno 2.7, three shorthand functions provide a more concise alternative to
+`Deno.Command`:
+
+- **`Deno.spawn(command, args, options?)`** — spawns a subprocess and returns a
+  `ChildProcess` (equivalent to `new Deno.Command(cmd, { args }).spawn()`)
+- **`Deno.spawnAndWait(command, args, options?)`** — spawns a subprocess and
+  returns a promise resolving to `CommandOutput` (equivalent to
+  `new Deno.Command(cmd, { args }).output()`)
+- **`Deno.spawnAndWaitSync(command, args, options?)`** — synchronous variant
+  that blocks until the subprocess completes
+
+```ts title="spawn_examples.ts"
+// Spawn a child process
+const child = Deno.spawn("echo", ["hello"]);
+
+// Spawn and wait for output
+const output = await Deno.spawnAndWait("git", ["status"]);
+console.log(new TextDecoder().decode(output.stdout));
+
+// Spawn with options
+const formatted = Deno.spawn("deno", ["fmt", "--check"], {
+  stdout: "inherit",
+});
+
+// Synchronous execution
+const result = Deno.spawnAndWaitSync("echo", ["done"]);
+```
+
+These functions accept the command and arguments as separate parameters, which
+can be more readable than the `Deno.Command` constructor options pattern.
+
+## Convenience methods on output streams
+
 Available convenience methods include:
 
 - `.text()` - Returns the output as a UTF-8 string

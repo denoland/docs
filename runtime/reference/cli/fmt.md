@@ -1,5 +1,5 @@
 ---
-title: "`deno fmt`, code formatting"
+title: "deno fmt"
 oldUrl:
   - /runtime/tools/formatter/
   - /runtime/manual/tools/formatter/
@@ -56,6 +56,16 @@ files:
 enclosed in triple backticks and have a language attribute.
 
 :::
+
+## Checking formatting in CI
+
+Use `--check` to verify files are formatted without modifying them. Add
+`--fail-fast` to stop on the first unformatted file instead of reporting all of
+them, which is useful in large codebases:
+
+```sh
+deno fmt --check --fail-fast
+```
 
 ## Ignoring Code
 
