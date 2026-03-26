@@ -167,6 +167,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Temporal API",
+        href: "/examples/temporal/",
+        type: "example",
+      },
+      {
         title: "Better debugging with the console API",
         href: "/examples/debugging_with_console_tutorial/",
         type: "tutorial",
@@ -316,87 +321,97 @@ export const sidebar = [
       {
         title: "Spawn a subprocess",
         href: "/examples/sandbox_spawn_subprocess/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Serve a web framework",
         href: "/examples/sandbox_web_framework/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Provide SSH access to a sandbox",
         href: "/examples/sandbox_ssh_access/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Interactive JavaScript REPL",
         href: "/examples/sandbox_javascript_repl/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Provide a VSCode instance in a sandbox",
         href: "/examples/sandbox_vscode_instance/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Use template literals with variable interpolation",
         href: "/examples/sandbox_template_literals/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Error handling",
         href: "/examples/sandbox_error_handling/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Command cancellation",
         href: "/examples/sandbox_command_cancellation/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Streaming access string and binary output",
         href: "/examples/sandbox_access_output/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Set and get environment variables",
         href: "/examples/sandbox_environment_variables/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Stream output to a local file",
         href: "/examples/sandbox_stream_output/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Upload files and directories to a sandbox",
         href: "/examples/sandbox_upload_files/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Control sandbox timeout",
         href: "/examples/sandbox_timeout_control/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Configure sandbox memory",
         href: "/examples/sandbox_memory/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Add read-write volumes to your Sandbox",
         href: "/examples/volumes_tutorial/",
-        type: "example",
+        type: "tutorial",
       },
       {
         title: "Boot instantly with snapshots",
         href: "/examples/snapshots_tutorial/",
-        type: "example",
+        type: "tutorial",
+      },
+      {
+        title: "Boot a Python environment with snapshots",
+        href: "/examples/snapshot_python_video/",
+        type: "video",
       },
       {
         title: "Boot a Python environment with snapshots",
         href: "/examples/snapshot_python_tutorial/",
         type: "tutorial",
+      },
+      {
+        title: "Run AI generated code",
+        href: "/examples/sandbox_for_untrusted_code/",
+        type: "example",
       },
     ],
   },
@@ -1070,11 +1085,6 @@ export const sidebar = [
       {
         title: "UDP connector: Ping",
         href: "/examples/udp_connector/",
-        type: "example",
-      },
-      {
-        title: "Temporal API",
-        href: "/examples/temporal/",
         type: "example",
       },
       {

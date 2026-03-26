@@ -1,5 +1,5 @@
 ---
-title: "`deno compile`, standalone executables"
+title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
   - /runtime/manual/tools/compiler/
@@ -152,7 +152,7 @@ addons or native code that reads relative files.
 
 The extraction directory is chosen in order of preference:
 
-1. `<exe_dir>/<exe_name>.fs/<hash>/` (next to the compiled binary)
+1. `<exe_dir>/.<exe_name>/<hash>/` (next to the compiled binary)
 2. Platform data directory fallback:
    - Linux: `$XDG_DATA_HOME/<exe_name>/<hash>` or
      `~/.local/share/<exe_name>/<hash>`

@@ -3,16 +3,12 @@ title: "About Deno Deploy"
 description: "Guide to Deno Deploy features, comparison with Deploy Classic, and getting started instructions for deployment."
 ---
 
-<a href="https://console.deno.com" class="docs-cta deploy-cta">Go to the Deno
-Deploy dashboard</a>
+<div class="sm:flex sm:flex-row md:flex-col lg:flex-row xl:fle sm:gap-6 md:gap-0 lg:gap-8">
+   <img src="/deno-deploy.svg" alt="Deno Deploy logo" class="max-w-20 md:max-w-32" />
+      <p class="text-lg text-foreground-secondary mt-6">Deno's cloud services provide robust platforms for deploying and running JavaScript and TypeScript applications at global scale.<br /><a href="https://console.deno.com" class="docs-cta deploy-cta mt-2">Deno
+Deploy dashboard</a></p>
 
-Deno Deploy comes with an easy to use dashboard at
-[console.deno.com](https://console.deno.com). In this dashboard, you can create
-new Deno Deploy organizations that contain Deno Deploy apps.
-
-Within a single organization, you cannot mix Deno Deploy apps with Deploy
-Classic projects. You can switch between different organizations using the
-organization picker in the top left of the dashboard.
+</div>
 
 ## What is Deno Deploy?
 
@@ -20,6 +16,11 @@ Deno Deploy is a serverless platform for running JavaScript and TypeScript
 applications in the cloud (or self-hosted on your own infrastructure). It
 provides a management plane for deploying and running applications with the
 built-in CI or through integrations such as GitHub actions.
+
+Deno Deploy comes with an easy to use dashboard at
+[console.deno.com](https://console.deno.com). Here, you can create and host new
+apps, create and manage Deno Deploy organizations and manage and view your
+databases and app telemetry.
 
 ## Comparison to Deploy Classic
 
@@ -41,7 +42,7 @@ Deploy Classic. The below table compares the two versions of Deno Deploy.
 | Web Cache API                   | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Databases                       | ✅ Supported                   | 🟠 Deno KV                                                                                                                              |
 | Queues                          | ❌ Not supported               | ✅ Supported                                                                                                                            |
-| Cron                            | ❌ Not supported               | ✅ Supported                                                                                                                            |
+| Cron                            | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Deploy from GitHub              | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Deploy from CLI                 | ✅ Supported                   | ✅ Supported                                                                                                                            |
 | Instant Rollback                | ✅ Supported                   | ✅ Supported                                                                                                                            |
@@ -51,6 +52,14 @@ Deploy Classic. The below table compares the two versions of Deno Deploy.
 | OpenTelemetry export            | ⏳ Work in progress            | ❌ Not supported                                                                                                                        |
 | Regions                         | 2                              | 6                                                                                                                                       |
 | Self hostable regions           | ✅ Supported                   | ❌ Not supported                                                                                                                        |
+
+:::warning Deploy Classic sunsetting July 20, 2026
+
+Deno Deploy Classic (dash.deno.com) and the subhosting v1 API will be shut down
+on July 20, 2026. See the
+<a href="/deploy/migration_guide/">migration guide</a> for details.
+
+:::
 
 ## How to access Deno Deploy
 

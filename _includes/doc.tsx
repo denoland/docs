@@ -69,12 +69,17 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               class="markdown-body mt-6 sm:mt-6"
             >
               {!(isReference && !isApiLandingPage) && (
-                <h1
-                  dangerouslySetInnerHTML={{
-                    __html: helpers.md(data.title!, true),
-                  }}
-                >
-                </h1>
+                <header class="flex flex-col md:flex-row items-start justify-between gap-4">
+                  <h1
+                    dangerouslySetInnerHTML={{
+                      __html: helpers.md(data.title!, true),
+                    }}
+                  >
+                  </h1>
+                  {file && !file.includes("[") && file.endsWith(".md") && (
+                    <data.comp.CopyPage file={file} />
+                  )}
+                </header>
               )}
               {data.available_since && (
                 <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">

@@ -5,10 +5,9 @@ description: "Step-by-step guide to creating and configuring your first Deno Dep
 
 ## Create an organization
 
-Deno Deploy will eventually replace Deno Deploy Classic. Until that time both
-systems will be available simultaneously. By creating an organisation for use
-with Deploy it is possible to explore Deploy without disrupting projects already
-using Deploy Classic.
+Deno Deploy Classic will be shut down on July 20, 2026. If you are migrating
+from Deploy Classic, see the [migration guide](/deploy/migration_guide/) for
+details on what has changed.
 
 To get started with Deno Deploy:
 
@@ -136,70 +135,14 @@ To add environment variables:
 
 ![Screenshot of the Deploy env variables config screen](./images/env_var.png)
 
+You can re-open the drawer to edit / remove environment variables you have
+added. You can also edit the app name on this page, and select which region(s)
+the application should be served from.
+
 ## Build and deploy your app
 
 1. Click `Create App` to create the application and start the first build
 2. Watch the build progress through the live logs:
-
-![Screenshot of app build logs](./images/build_logs.png)
-
-The build logs show these stages:
-
-- **Prepare**: Cloning the repository and restoring caches
-- **Install**: Running the install command and framework-specific setup
-- **Build**: Executing the build command and preparing the deployment artifact
-- **Warm up**: Testing the deployment with a request
-- **Route**: Deploying the build to global regions
-
-You can cancel a build with the button in the top-left corner, or restart failed
-builds from the same location.
-
-After completion, the top-right shows the preview URL, and below that, all
-timelines where the build is deployed.
-
-## Monitor your application
-
-After deploying, use the observability tools to monitor your application:
-
-### Logs
-
-View application logs with filtering options for context, revision, and text
-content:
-
-![Screenshot of the Logs page](./images/logs.png)
-
-Use the search bar to filter logs (e.g., `context:production`, `revision:<id>`).
-The time picker adjusts the displayed time range.
-
-If a log is associated with a trace, you can click "View trace" to see the
-corresponding trace information.
-
-### Traces
-
-View request traces with detailed timing information:
-
-![Screenshot of the Traces page](./images/traces.png)
-
-Click any trace to open the trace view showing all spans in a waterfall
-visualization:
-
-![Screenshot of the Trace view](./images/trace.png)
-
-The trace view shows:
-
-- Timeline of spans with duration
-- Span details including attributes
-- Logs emitted during the span To save the environment variables, press the save
-  button. You can re-open the drawer to edit / remove environment variables you
-  have added.
-
-You can also edit the app name on this page, and select which region(s) the
-application should be served from.
-
-## Build and deploy your app
-
-Finally, you can press the `Create App` button to create the app. This will
-create the app and immediately trigger the first build:
 
 ![Screenshot of app build logs](./images/build_logs.png)
 
@@ -220,9 +163,9 @@ sections:
 In the top left of this build is a button to cancel the build. For failed
 builds, there is also a button to restart the build.
 
-For completed builds, the top right shows the preview URL of the build. Further
-down all timelines that this build is deployed to are shown, such as
-`Production`, or `Git Branch` timelines.
+For completed builds, the top right shows the preview URL. Further down all
+timelines that this build is deployed to are shown, such as `Production`, or
+`Git Branch` timelines.
 
 You can also see how the build was triggered on this page. This can either be
 `manual action`, for builds triggered through the UI, or `GitHub repo` for
@@ -233,11 +176,14 @@ URLs shown in the timelines list.
 
 ## Monitor your application
 
-After visiting your application, you can view telemetry about your application
-in the form of the logs and traces available in our observability panels. You
-can visit these pages by clicking the respective buttons in the left sidebar.
+After deploying, you can view telemetry about your application in the form of
+the logs and traces available in our observability panels. You can visit these
+pages by clicking the respective buttons in the left sidebar.
 
 ### Logs
+
+View application logs with filtering options for context, revision, and text
+content:
 
 ![Screenshot of the Logs page](./images/logs.png)
 
@@ -247,7 +193,7 @@ search bar at the top, the shown logs can be restricted. For example, to filter
 to only production logs, add `context:production` to the search bar. To only
 show logs from a certain revision, use `revision:<id>` etc.
 
-You can also use full text search in the search bar. The full text search fill
+You can also use full text search in the search bar. The full text search will
 filter down the log entries to only those containing the text written,
 case-insensitively.
 
@@ -260,6 +206,8 @@ correlated with a trace. This happens when a log line occurs within an active
 trace. Clicking this button will open the respective trace as an overlay.
 
 ### Traces
+
+View request traces with detailed timing information:
 
 ![Screenshot of the Traces page](./images/traces.png)
 

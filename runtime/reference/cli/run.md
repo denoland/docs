@@ -1,5 +1,5 @@
 ---
-title: "`deno run`, run a file"
+title: "deno run"
 oldUrl: /runtime/manual/tools/run/
 command: run
 openGraphLayout: "/open_graph/cli-commands.jsx"

@@ -1,5 +1,5 @@
 ---
-title: "`deno doc`, documentation generator"
+title: "deno doc"
 oldUrl:
   - /runtime/manual/tools/doc/
   - /runtime/manual/tools/documentation_generator/

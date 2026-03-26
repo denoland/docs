@@ -1,5 +1,5 @@
 ---
-title: "`deno info`, dependency inspector"
+title: "deno info"
 oldUrl:
   - /runtime/manual/tools/dependency_inspector/
   - /runtime/manual/tools/info/
