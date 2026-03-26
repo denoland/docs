@@ -1,5 +1,5 @@
 ---
-title: "`deno bench`, benchmarking tool"
+title: "deno bench"
 oldUrl:
   - /runtime/manual/tools/benchmarker/
   - /runtime/reference/cli/benchmarker/

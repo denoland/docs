@@ -134,14 +134,12 @@ the `src/routes/+page.svelte` file and update it to fetch the notes from the
 database.
 
 ```svelte title="src/routes/+page.svelte"
-import { Client } from "pg";
-
-export const load = async () => {
+import {Client} from "pg"; export const load = async () => {
   const client = new Client();
   await client.connect();
   const res = await client.query(` SELECT note from notes; `);
   await client.end();
-  return { notes: res.rows };
+  return { notes: res.rows }
 };
 ```
 

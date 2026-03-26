@@ -1,5 +1,5 @@
 ---
-title: "`deno repl`, interactive scripting prompt"
+title: "deno repl"
 oldUrl: /runtime/manual/tools/repl/
 command: repl
 openGraphLayout: "/open_graph/cli-commands.jsx"
