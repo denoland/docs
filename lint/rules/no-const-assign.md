@@ -1,5 +1,5 @@
 ---
-tags: []
+tags: [recommended]
 ---
 
 Disallows modifying a variable declared as `const`.

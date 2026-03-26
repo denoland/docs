@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Allow: /ai/
+Allow: /llms.txt
+Allow: /llms-summary.txt
+Allow: /llms.json
+Allow: /llms-full.txt
 
 Sitemap: https://docs.deno.com/sitemap.xml

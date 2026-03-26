@@ -1,12 +1,15 @@
-import { Sidebar } from "../types.ts";
 import { walk } from "jsr:@std/fs";
 import { parse as yamlParse } from "jsr:@std/yaml";
+import { Sidebar } from "../types.ts";
 
 export const sidebar = [
   {
     title: "Getting started",
-    href: "/runtime/",
     items: [
+      {
+        title: "Welcome to Deno",
+        href: "/runtime/",
+      },
       {
         title: "Installation",
         href: "/runtime/getting_started/installation/",
@@ -27,7 +30,6 @@ export const sidebar = [
   },
   {
     title: "Fundamentals",
-    href: "/runtime/fundamentals/",
     items: [
       {
         title: "TypeScript",
@@ -48,10 +50,6 @@ export const sidebar = [
       {
         title: "Configuration",
         href: "/runtime/fundamentals/configuration/",
-      },
-      {
-        title: "Standard library",
-        href: "/runtime/fundamentals/standard_library/",
       },
       {
         title: "Web development",
@@ -93,7 +91,6 @@ export const sidebar = [
   },
   {
     title: "Reference guides",
-    href: "/runtime/reference/",
     items: [
       {
         title: "CLI",
@@ -104,8 +101,20 @@ export const sidebar = [
             href: "/runtime/reference/cli/add/",
           },
           {
+            title: "deno approve-scripts",
+            href: "/runtime/reference/cli/approve_scripts/",
+          },
+          {
+            title: "deno audit",
+            href: "/runtime/reference/cli/audit/",
+          },
+          {
             title: "deno bench",
             href: "/runtime/reference/cli/bench/",
+          },
+          {
+            title: "deno bundle",
+            href: "/runtime/reference/cli/bundle/",
           },
           {
             title: "deno check",
@@ -120,12 +129,20 @@ export const sidebar = [
             href: "/runtime/reference/cli/compile/",
           },
           {
+            title: "deno create",
+            href: "/runtime/reference/cli/create/",
+          },
+          {
             title: "deno completions",
             href: "/runtime/reference/cli/completions/",
           },
           {
             title: "deno coverage",
             href: "/runtime/reference/cli/coverage/",
+          },
+          {
+            title: "deno deploy",
+            href: "/runtime/reference/cli/deploy/",
           },
           {
             title: "deno doc",
@@ -184,6 +201,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/run/",
           },
           {
+            title: "deno sandbox",
+            href: "/runtime/reference/cli/sandbox/",
+          },
+          {
             title: "deno serve",
             href: "/runtime/reference/cli/serve/",
           },
@@ -204,6 +225,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/uninstall/",
           },
           {
+            title: "deno update",
+            href: "/runtime/reference/cli/update/",
+          },
+          {
             title: "deno upgrade",
             href: "/runtime/reference/cli/upgrade/",
           },
@@ -211,26 +236,70 @@ export const sidebar = [
             title: "deno unstable flags",
             href: "/runtime/reference/cli/unstable_flags/",
           },
+          {
+            title: "deno x",
+            href: "/runtime/reference/cli/x/",
+          },
         ],
       },
       {
-        title: "Deno APIs",
-        href: "/runtime/reference/deno_namespace_apis/",
+        title: "Standard library",
+        items: [
+          { title: "Overview", href: "/runtime/reference/std/" },
+          ...[
+            "assert",
+            "async",
+            "bytes",
+            "cache",
+            "cbor",
+            "cli",
+            "collections",
+            "crypto",
+            "csv",
+            "data-structures",
+            "datetime",
+            "dotenv",
+            "encoding",
+            "expect",
+            "fmt",
+            "front-matter",
+            "fs",
+            "html",
+            "http",
+            "ini",
+            "internal",
+            "io",
+            "json",
+            "jsonc",
+            "log",
+            "media-types",
+            "msgpack",
+            "net",
+            "path",
+            "random",
+            "regexp",
+            "semver",
+            "streams",
+            "tar",
+            "testing",
+            "text",
+            "toml",
+            "ulid",
+            "uuid",
+            "webgpu",
+            "yaml",
+          ].map((name) => ({
+            title: name,
+            href: `/runtime/reference/std/${name}/`,
+          })),
+        ],
       },
       {
-        title: "Web APIs",
-        href: "/runtime/reference/web_platform_apis/",
-      },
-      {
-        title: "Node APIs",
-        href: "/runtime/reference/node_apis/",
-      },
-      {
-        title: "TS Config Migration",
+        title: "Configuring TypeScript",
         href: "/runtime/reference/ts_config_migration/",
       },
       {
-        title: "Continuous Integration",
+        title: "Continuous integration",
         href: "/runtime/reference/continuous_integration/",
       },
       {
@@ -250,7 +319,11 @@ export const sidebar = [
         href: "/runtime/reference/documentation/",
       },
       {
-        title: "Lint Plugins",
+        title: "Bundling",
+        href: "/runtime/reference/bundling/",
+      },
+      {
+        title: "Lint plugins",
         href: "/runtime/reference/lint_plugins/",
       },
       {
@@ -258,7 +331,7 @@ export const sidebar = [
         href: "/runtime/reference/wasm/",
       },
       {
-        title: "Migration Guide",
+        title: "Migration guide",
         href: "/runtime/reference/migration_guide/",
       },
       {
@@ -273,18 +346,17 @@ export const sidebar = [
   },
   {
     title: "Contributing and support",
-    href: "/runtime/contributing/",
     items: [
       {
         title: "Contributing to Deno",
         items: [
           {
-            title: "Architecture",
-            href: "/runtime/contributing/architecture/",
+            title: "Contributing overview",
+            href: "/runtime/contributing/",
           },
           {
-            title: "Building from source",
-            href: "/runtime/contributing/building_from_source/",
+            title: "Architecture",
+            href: "/runtime/contributing/architecture/",
           },
           {
             title: "Profiling",
@@ -351,7 +423,10 @@ export async function generateDescriptions(): Promise<Descriptions> {
     )
   ) {
     const file = await Deno.readTextFile(dirEntry.path);
-    const parsed = yamlParse(file);
+    const parsed = yamlParse(file) as Partial<DescriptionItem> & {
+      description?: Description | string;
+      symbols?: Record<string, Description | string>;
+    };
     if (!parsed) {
       throw `Invalid or empty file: ${dirEntry.path}`;
     }
@@ -361,20 +436,25 @@ export async function generateDescriptions(): Promise<Descriptions> {
 
     if (parsed.symbols) {
       parsed.symbols = Object.fromEntries(
-        Object.entries(parsed.symbols).map((
-          [key, value],
-        ) => [key, handleDescription(value)]),
+        Object.entries(parsed.symbols).map(([key, value]) => [
+          key,
+          handleDescription(value as Description | string),
+        ]),
       );
     }
 
     if (
-      !(parsed.status === "good" || parsed.status === "partial" ||
-        parsed.status === "stubs" || parsed.status === "unsupported")
+      !(
+        parsed.status === "good" ||
+        parsed.status === "partial" ||
+        parsed.status === "stubs" ||
+        parsed.status === "unsupported"
+      )
     ) {
       throw `Invalid status provided in '${dirEntry.name}': ${parsed.status}`;
     }
 
-    descriptions[dirEntry.name.slice(0, -5)] = parsed;
+    descriptions[dirEntry.name.slice(0, -5)] = parsed as DescriptionItem;
   }
 
   return descriptions;
@@ -418,33 +498,41 @@ export async function generateNodeCompatibility() {
     grouped[item[1].status].items.push(item);
   }
 
-  return Object.entries(grouped).map(([_status, entries]) => {
-    let content =
-      `<div class="module-info">\n\n## ${entries.icon} ${entries.label} (${entries.items.length}/${
-        Object.keys(descriptions).length
-      })\n\n`;
+  return Object.entries(grouped)
+    .map(([_status, entries]) => {
+      let content =
+        `<div class="module-info">\n\n## ${entries.icon} ${entries.label} (${entries.items.length}/${
+          Object.keys(descriptions).length
+        })\n\n`;
 
-    content += entries.items.map(([key, content]) => {
-      let out = `\n\n### <a href="/api/node/${key}">node:${
-        key.replaceAll("--", "/")
-      }</a>\n\n<div class="item-content">\n\n`;
+      content += entries.items
+        .map(([key, content]) => {
+          const link = key.replaceAll("--", "/");
+          let out =
+            `\n\n### <a href="/api/node/${link}">node:${link}</a>\n\n<div class="item-content">\n\n`;
 
-      if (content) {
-        if (content.description) {
-          out += `${content.description.description}\n\n`;
-        }
-        if (content.symbols) {
-          for (const [symbol, description] of Object.entries(content.symbols)) {
-            out += `**${
-              symbol === "*" ? "All symbols" : symbol
-            }**: ${description.description}\n\n`;
+          if (content) {
+            if (content.description) {
+              out += `${content.description.description}\n\n`;
+            }
+            if (content.symbols) {
+              for (
+                const [symbol, description] of Object.entries(
+                  content.symbols,
+                )
+              ) {
+                out += `**${
+                  symbol === "*" ? "All symbols" : symbol
+                }**: ${description.description}\n\n`;
+              }
+            }
           }
-        }
-      }
 
-      return out + "</div>";
-    }).join("\n\n");
+          return out + "</div>";
+        })
+        .join("\n\n");
 
-    return content;
-  }).join("\n\n");
+      return content;
+    })
+    .join("\n\n");
 }

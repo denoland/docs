@@ -20,6 +20,22 @@ workspace:
 This configures a workspace with `add` and `subtract` members, which are
 directories expected to have `deno.json(c)` and/or `package.json` files.
 
+Each workspace member directory can contain:
+
+- Only a `deno.json` (Deno-first package)
+- Both a `deno.json` and a `package.json` (hybrid package – useful while
+  migrating or when you need Node metadata as well as Deno config)
+- Only a `package.json` (Node-first package that still participates in the Deno
+  workspace)
+
+When a member contains only a `package.json`, you can still import it from
+anywhere else in the workspace using the `name` field specified in that
+`package.json` (for example
+`import { something } from "@scope/my-node-only-pkg";`). Deno will resolve that
+bare specifier as long as the directory is listed in the root workspace
+configuration. This lets you gradually adopt Deno tooling without having to add
+a `deno.json` to every existing Node package up front.
+
 :::info Naming
 
 Deno uses `workspace` rather than npm's `workspaces` to represent a singular
@@ -148,7 +164,37 @@ Deno workspaces are flexible and can work with Node packages. To make migration
 for existing Node.js projects easier you can have both Deno-first and Node-first
 packages in a single workspace.
 
-## How Deno Resolves Workspace Dependencies
+## Workspace path patterns
+
+Deno supports pattern matching for workspace member folders, making it easier to
+manage workspaces with many members or with a specific directory structure. You
+can use wildcard patterns to include multiple directories at once:
+
+```json title="deno.json"
+{
+  "workspace": [
+    "some-dir/*",
+    "other-dir/*/*"
+  ]
+}
+```
+
+The pattern matching syntax follows specific rules regarding folder depth:
+
+`some-path/*` matches files and directories directly within `some-path` (first
+level of indentation only). For example, with `packages/*`, this includes
+`packages/foo` and `packages/bar` but not `packages/foo/subpackage`.
+
+`some-path/*/*` matches the files and directories located within subdirectories
+of `some-path` (second level of indentation). It does not match items directly
+within `some-path`. For example, with `examples/*/*`, this includes
+`examples/basic/demo` and `examples/advanced/sample` but not `examples/basic`.
+
+Each `/*` segment in the pattern corresponds to a specific folder depth relative
+to the base path. This allows for precise targeting of workspace members at
+different levels within your directory structure.
+
+## How Deno resolves workspace dependencies
 
 When running a project in a workspace that imports from another workspace
 member, Deno follows these steps to resolve the dependencies:
@@ -184,7 +230,7 @@ When `project-a/mod.ts` imports from `"@scope/project-b"`, Deno:
 4. Verifies `project-b/deno.json` exists and has matching package name
 5. Resolves the import using `project-b`'s exports
 
-### Important Note for Containerization
+### Important note for containerization
 
 When containerizing a workspace member that depends on other workspace members,
 you must include:
@@ -228,11 +274,58 @@ your package. This can be done by passing an `object` instead of a `string` to
 
 The `"."` entry is the default entry that's picked when importing
 `@scope/my-package`. Therefore, the above `deno.json` example provides the
-folowing entries:
+following entries:
 
 - `@scope/my-package`
 - `@scope/my-package/foo`
 - `@scope/my-package/other`
+
+### Publishing workspace packages to registries
+
+Workspaces make it easy to publish packages to registries like JSR or NPM. You
+can publish individual workspace members while keeping their development
+connected in your monorepo.
+
+#### Publishing to JSR
+
+To publish a workspace package to JSR, follow these steps:
+
+1. Ensure each package has the appropriate metadata in its `deno.json`:
+
+```json title="my-package/deno.json"
+{
+  "name": "@scope/my-package",
+  "version": "1.0.0",
+  "exports": "./mod.ts",
+  "publish": {
+    "exclude": ["tests/", "*.test.ts", "examples/"]
+  }
+}
+```
+
+2. Navigate to the specific package directory and publish:
+
+```sh
+cd my-package
+deno publish
+```
+
+#### Managing interdependent packages
+
+When publishing packages from a workspace with interdependencies, use consistent
+versioning schemes across related packages. Publish dependent packages first,
+then the packages that depend on them. After publishing, verify the published
+packages work as expected:
+
+```sh
+# Test a published package
+deno add jsr:@scope/my-published-package
+deno test integration-test.ts
+```
+
+When publishing packages that depend on other workspace members, Deno will
+automatically replace workspace references with proper registry references in
+the published code.
 
 ### Migrating from `npm` workspaces
 
@@ -384,12 +477,54 @@ root and its members:
 | exports            | ❌        | ✅      |                                                                                                                                                                                                                 |
 | workspace          | ✅        | ❌      | Nested workspaces are not supported.                                                                                                                                                                            |
 
-## Running Commands Across Workspaces
+## Running commands across workspaces
 
 Deno provides several ways to run commands across all or specific workspace
 members:
 
-### Running Tests
+### Type checking
+
+Workspace members can have different sets of compiler options. They are also
+inherited between root and member, much like
+[TSConfig `extends`](https://www.typescriptlang.org/tsconfig/#extends). For
+example:
+
+```json title="deno.json"
+{
+  "workspace": ["./web"],
+  "compilerOptions": {
+    "checkJs": true
+  }
+}
+```
+
+```json title="web/deno.json"
+{
+  "compilerOptions": {
+    "lib": ["esnext", "dom"]
+  }
+}
+```
+
+Files in the `web` subdirectory will be configured with the following options:
+
+```json
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "lib": ["esnext", "dom"]
+  }
+}
+```
+
+Each member will be partitioned and checked separately from one another. Just
+run `deno check` from the workspace root:
+
+```sh
+deno check
+```
+
+### Running tests
 
 To run tests across all workspace members, simply execute `deno test` from the
 workspace root:
@@ -416,7 +551,7 @@ deno test
 deno test my-directory/
 ```
 
-### Formatting and Linting
+### Formatting and linting
 
 Similar to testing, formatting and linting commands run across all workspace
 members by default:
@@ -430,7 +565,7 @@ Each workspace member follows its own formatting and linting rules as defined in
 its `deno.json` file, with some settings inherited from the root configuration
 as shown in the table above.
 
-### Using Workspace Tasks
+### Using workspace tasks
 
 You can define tasks at both the workspace root and in individual workspace
 members:
@@ -463,12 +598,12 @@ To run a task defined in a specific package:
 deno task --cwd=add build
 ```
 
-## Sharing and Managing Dependencies
+## Sharing and managing dependencies
 
 Workspaces provide powerful ways to share and manage dependencies across
 projects:
 
-### Sharing Development Dependencies
+### Sharing development dependencies
 
 Common development dependencies like testing libraries can be defined at the
 workspace root:
@@ -486,7 +621,7 @@ workspace root:
 This makes these dependencies available to all workspace members without needing
 to redefine them.
 
-### Managing Version Conflicts
+### Managing version conflicts
 
 When resolving dependencies, workspace members can override dependencies defined
 in the root. If both the root and a member specify different versions of the
@@ -499,7 +634,7 @@ Outside of member folders, or when working with files at the workspace root
 level, the workspace root's import map will be used for resolving dependencies
 (including JSR and HTTPS dependencies).
 
-### Interdependent Workspace Members
+### Interdependent workspace members
 
 As shown in the earlier example with the `add` and `subtract` modules, workspace
 members can depend on each other. This enables a clean separation of concerns
@@ -523,3 +658,58 @@ This approach allows you to:
 2. Share code between packages without publishing to a registry
 3. Test and develop interdependent modules together
 4. Gradually migrate monolithic codebases to modular architecture
+
+## Using workspace protocol in package.json
+
+Deno supports workspace protocol specifiers in `package.json` files. These are
+useful when you have npm packages that depend on other packages within the
+workspace:
+
+```json title="package.json"
+{
+  "name": "my-npm-package",
+  "dependencies": {
+    "another-workspace-package": "workspace:*"
+  }
+}
+```
+
+The following workspace protocol specifiers are supported:
+
+- `workspace:*` - Use the latest version available in the workspace
+- `workspace:~` - Use the workspace version with only patch-level changes
+- `workspace:^` - Use the workspace version with semver-compatible changes
+
+## npm and pnpm workspace compatibility
+
+Deno works seamlessly with standard npm workspaces defined in `package.json`:
+
+```json title="package.json"
+{
+  "workspaces": ["packages/*"]
+}
+```
+
+For pnpm users, Deno supports typical pnpm workspace configurations. However, if
+you're using a `pnpm-workspace.yaml` file, you'll need to migrate to a
+`deno.json` workspace configuration:
+
+```yaml title="pnpm-workspace.yaml (to be replaced)"
+packages:
+  - "packages/*"
+```
+
+Should be converted to:
+
+```json title="deno.json"
+{
+  "workspace": ["packages/*"]
+}
+```
+
+This allows for smooth integration between Deno and npm/pnpm ecosystems during
+migration or in hybrid projects.
+
+For more information on configuring your project, check out the
+[Configuration with deno.json](/examples/configuration_with_deno_json/)
+tutorial.

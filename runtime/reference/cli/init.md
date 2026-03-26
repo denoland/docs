@@ -1,5 +1,5 @@
 ---
-title: "`deno init`, start a new project"
+title: "deno init"
 oldUrl: /runtime/manual/tools/init/
 command: init
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -143,6 +143,46 @@ $ deno task dev
 Task dev deno serve --watch -R main.ts
 Watcher Process started.
 deno serve: Listening on http://0.0.0.0:8000/
+```
+
+## Initialize an empty project
+
+Running `deno init --empty` bootstraps an empty project with a basic console
+log.
+
+```sh
+$ deno init --empty
+✅ Project initialized
+
+Run these commands to get started
+
+  # Run the program
+  deno run main.ts
+
+  # Run the program and watch for file changes
+  deno task dev
+```
+
+Your [`deno.json`](/runtime/fundamentals/configuration/) file will look like
+this:
+
+```json
+{
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  }
+}
+```
+
+Now, you can run the project, which
+[watches for changes](/runtime/getting_started/command_line_interface/#watch-mode),
+by running `deno task dev`.
+
+```sh
+$ deno task dev
+Task dev deno run --watch main.ts
+Watcher Process started.
+Hello world!
 ```
 
 ## Generate a library project

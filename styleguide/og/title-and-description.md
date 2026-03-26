@@ -1,5 +1,5 @@
 ---
-title: "An example OG image with a title that is long enough to wrap to three lines"
+title: "An example OG image with a title that is long enough to wrap onto three whole lines"
 description: "A description of typical length that will wrap under the title and offer some additional information about this page"
 ---
 

@@ -7,7 +7,7 @@ export default function VideoPage({ video }: Props) {
   return (
     <>
       <EmbedVideo id={video.externalURL} />
-      <div className="my-12">
+      <div className="my-12 block">
         Find more videos in the <a href="/examples/">Examples page</a>{" "}
         and on our{"  "}
         <a href="https://www.youtube.com/@deno_land">YouTube channel</a>.

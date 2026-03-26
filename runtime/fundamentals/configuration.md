@@ -2,11 +2,11 @@
 title: "deno.json and package.json"
 description: "The guide to configuring your Deno projects. Learn about TypeScript settings, tasks, dependencies, formatting, linting, and how to use both deno.json and/or package.json effectively."
 oldUrl:
-- /runtime/manual/getting_started/configuration_file/
-- /runtime/manual/basics/modules/import_maps/
-- /runtime/basics/import_maps/
-- /runtime/manual/linking_to_external_code/import_maps
-- /manual/linking_to_external_code/proxies
+  - /runtime/manual/getting_started/configuration_file/
+  - /runtime/manual/basics/modules/import_maps/
+  - /runtime/basics/import_maps/
+  - /runtime/manual/linking_to_external_code/import_maps
+  - /manual/linking_to_external_code/proxies
 ---
 
 You can configure Deno using a `deno.json` file. This file can be used to
@@ -67,7 +67,7 @@ You can also use a `"dependencies"` field in `package.json`:
 ```json title="package.json"
 {
   "dependencies": {
-    "express": "express@^1.0.0"
+    "express": "^1.0.0"
   }
 }
 ```
@@ -110,23 +110,47 @@ import * as bar from "bar/file.ts";
 Path mapping of import specifies is commonly used in larger code bases for
 brevity.
 
-To use your project root for absolute imports:
+For example:
 
 ```json title="deno.json"
 {
   "imports": {
-    "/": "./",
-    "./": "./"
+    "@/": "./"
   }
 }
 ```
 
 ```ts title="main.ts"
-import { MyUtil } from "/util.ts";
+import { MyUtil } from "@/util.ts";
 ```
 
-This causes import specifiers starting with `/` to be resolved relative to the
+This causes import specifiers starting with `@/` to be resolved relative to the
 import map's URL or file path.
+
+### Overriding packages
+
+The `links` field in `deno.json` allows you to override dependencies with local
+packages stored on disk. This is similar to `npm link`.
+
+```json title="deno.json"
+{
+  "links": [
+    "../some-package"
+  ]
+}
+```
+
+This capability addresses several common development challenges:
+
+- Dependency bug fixes
+- Private local libraries
+- Compatibility issues
+
+The package being referenced doesn't need to be published at all. It just needs
+to have the proper package name and metadata in `deno.json` or `package.json`,
+so that Deno knows what package it's dealing with. This provides greater
+flexibility and modularity, maintaining clean separation between your main code
+and external packages.
 
 ## Tasks
 
@@ -462,6 +486,257 @@ works as well:
 }
 ```
 
+## Exports
+
+The `exports` field in the `deno.json` file allows you to define which paths of
+your package should be publicly accessible. This is particularly useful for
+controlling the API surface of your package and ensuring that only the intended
+parts of your code are exposed to users.
+
+```jsonc title="deno.json"
+{
+  "exports": "./src/mod.ts" // A default entry point
+}
+```
+
+You can also define multiple entry points:
+
+```json title="deno.json"
+{
+  "exports": {
+    "./module1": "./src/module1.ts",
+    "./module2": "./src/module2.ts",
+    ".": "./src/mod.ts" // Default entry point
+  }
+}
+```
+
+This configuration will:
+
+- expose `module1` and `module2` as entry points for your package,
+- allow importing any file from the `utils` directory using a wildcard. This
+  means users can import these modules using the specified paths, while other
+  files in your package remain private.
+
+To use the exports in your code, you can import them like this:
+
+```ts title="example.ts"
+import * as module_1 from "@example/my-package/module1";
+import * as module_2 from "@example/my-package/module2";
+```
+
+## Permissions
+
+Deno 2.5+ supports storing
+[permission](/runtime/fundamentals/security/#permissions) sets in the config
+file.
+
+### Named permissions
+
+Permissions can be defined as key-value pairs under arbitrarily-named permission
+sets under the `"permissions"` key. Within each set,
+
+- the key is the name of a
+  [permission](/runtime/fundamentals/security/#permissions) that would follow
+  `--allow-` or `--deny-` in the CLI invocation (i.e. `read`, `write`, `net`,
+  `env`, `sys`, `run`, `ffi`, `import`)
+- the value is a boolean (`true` / `false` correspond to allow / deny), an array
+  of strings representing paths, domains etc., or an object with `allow`,
+  `deny`, and/or `ignore` boolean key-value pairs.
+
+```jsonc
+{
+  "permissions": {
+    "read-data": {
+      "read": "./data"
+    },
+    "read-and-write": {
+      "read": true,
+      "write": ["./data"]
+    }
+  }
+}
+```
+
+Permission sets can be used by specifying the `--permission-set=<name>` or
+`-P=<name>` flag:
+
+```sh
+$ deno run -P=read-data main.ts
+```
+
+### Default permission
+
+A special `"default"` permission key allows excluding the name when using the
+`--permission-set`/`-P` flag:
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      "env": true
+    }
+  }
+}
+```
+
+Then run with just `-P`:
+
+```sh
+$ deno run -P main.ts
+```
+
+### Allow, deny, and ignore
+
+For finer control over permissions, you can use the object form with `allow`,
+`deny`, and `ignore` keys. This is especially useful when you need more granular
+permission control than simple boolean or array values provide.
+
+#### Object form syntax
+
+Instead of specifying a permission as a boolean or array:
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      "read": true, // Simple boolean form
+      "write": ["./data"] // Simple array form
+    }
+  }
+}
+```
+
+You can use the object form:
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      "read": {
+        "allow": ["./data", "./config"],
+        "deny": ["./data/secrets"],
+        "ignore": ["./data/cache"]
+      },
+      "write": {
+        "allow": ["./output"],
+        "deny": ["./output/system"]
+      }
+    }
+  }
+}
+```
+
+#### Available permissions
+
+The `allow`, `deny`, and `ignore` keys work differently depending on the
+permission type:
+
+- **`read` and `env`**: Support `allow`, `deny`, and `ignore`
+- **`write`, `net`, `run`, `ffi`, `sys`, and `import`**: Support `allow` and
+  `deny` (but not `ignore`)
+
+#### Behavior
+
+- **`allow`**: Explicitly grant access to specific resources. Can be `true` (to
+  allow all), `false` (to allow none), or an array of specific paths/values to
+  allow.
+- **`deny`**: Explicitly deny access (throw
+  [PermissionDenied](https://docs.deno.com/api/deno/~/Deno.errors.PermissionDenied))
+  to specific resources, even if they would otherwise be allowed. Can be `true`
+  (to deny all), `false` (to deny none), or an array of specific paths/values to
+  deny.
+- **`ignore`**: (Only for `read` and `env` permissions) Silently ignore access
+  attempts to specific resources without throwing errors. Can be `true`,
+  `false`, or an array of specific paths/values to ignore.
+
+#### Example
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      // Allow reading from data directory, but deny access to secrets
+      // and silently ignore cache files
+      "read": {
+        "allow": ["./data"],
+        "deny": ["./data/secrets"],
+        "ignore": ["./data/cache"]
+      },
+      // Allow all environment variables except API keys
+      "env": {
+        "allow": true,
+        "ignore": ["API_KEY", "SECRET_TOKEN"]
+      },
+      // Allow all, but deny 'rm', 'sudo'
+      "run": {
+        "allow": true,
+        "deny": ["rm", "sudo"]
+      }
+    }
+  }
+}
+```
+
+### Test, bench, and compile permissions
+
+Permissions can be optionally specified within the `"test"`, `"bench"`, or
+`"compile"` keys.
+
+```jsonc
+{
+  "test": {
+    "permissions": {
+      "read": ["./data"]
+    }
+  }
+}
+```
+
+Or reference a permission set:
+
+```jsonc
+{
+  "test": {
+    "permissions": "read-data"
+  },
+  "permissions": {
+    "read-data": {
+      "read": ["./data"]
+    }
+  }
+}
+```
+
+When this is defined, you must run `deno test` with `-P` or a permission flag:
+
+```
+> deno test
+error: Test permissions were found in the config file. Did you mean to run with `-P`?
+    at file:///Users/david/dev/example/deno.json
+> deno test -P
+...runs...
+> deno test --allow-read
+...runs...
+> deno test -A
+...runs...
+```
+
+This is to help prevent you waste your time wondering why something is not
+working when you forget to run without permissions.
+
+Note that test and bench files in a workspace will use the closest `deno.json`
+for determining `test` and `bench` permissions. This allows giving different
+permissions to different workspace members.
+
+### Security risk
+
+The threat model for permissions in the config file is similar to `deno task`,
+in that a script could modify the `deno.json` to elevate permissions. That's why
+this requires an explicit opt-in with `-P` and is not loaded by default.
+
+If you're ok with this risk, then this feature will be useful for you.
+
 ## An example `deno.json` file
 
 ```json
@@ -470,6 +745,18 @@ works as well:
     "allowJs": true,
     "lib": ["deno.window"],
     "strict": true
+  },
+  "permissions": {
+    "default": {
+      "read": {
+        "allow": ["./src/"],
+        "deny": ["./src/secrets/"]
+      },
+      "env": {
+        "allow": true,
+        "ignore": ["TEMP_*"]
+      }
+    }
   },
   "lint": {
     "include": ["src/"],

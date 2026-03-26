@@ -2,13 +2,13 @@
 title: "Environment variables"
 description: "A guide to working with environment variables in Deno. Learn about Deno.env API, .env file support, CLI configuration, and special environment variables that control Deno's behavior."
 oldUrl:
-- /runtime/manual/basics/env_variables/
-- /runtime/reference/cli/env_variables/
+  - /runtime/manual/basics/env_variables/
+  - /runtime/reference/cli/env_variables/
 ---
 
 There are a few ways to use environment variables in Deno:
 
-## Built-in Deno.env
+## Built-in Deno.env method
 
 The Deno runtime offers built-in support for environment variables with
 [`Deno.env`](https://docs.deno.com/api/deno/~/Deno.env).
@@ -26,12 +26,18 @@ console.log(Deno.env.has("FIREBASE_AUTH_DOMAIN")); // true
 
 ## .env file
 
-Deno supports `.env` files. You can cause Deno to read environment variables
-from `.env` using the `--env-file` flag: `deno run --env-file <script>`. This
-will read `.env` from the current working directory or the first parent
-directory that contains one; if you want to load environment variables from a
-different file, you can specify that file as a parameter to the flag.
-Additionally, you can pass multiple `--env-file` flags (e.g.,
+Deno also supports `.env` files. You can tell Deno to read environment variables
+from `.env` with the `--env-file` flag, for example:
+
+```sh
+deno run --env-file main.ts
+```
+
+This will read the `.env` file from the current working directory or the first
+parent directory that contains one. If you want to load environment variables
+from a different file, you can specify that file as a parameter to the flag.
+
+You can pass multiple `--env-file` flags (e.g.,
 `deno run --env-file=.env.one --env-file=.env.two --allow-env <script>`) to load
 variables from multiple files.
 
@@ -45,8 +51,10 @@ that the first occurrence found in the last `.env` file listed will be applied.
 
 :::
 
-Alternately, the `dotenv` package in the standard library will load environment
-variables from `.env` as well.
+## `@std/dotenv`
+
+The `dotenv` package in the standard library can be used to load environment
+variables from `.env`.
 
 Let's say you have an `.env` file that looks like this:
 
@@ -58,10 +66,20 @@ Import the `load` module to auto-import from the `.env` file and into the
 process environment.
 
 ```ts
-import "jsr:@std/dotenv/load";
+import { load } from "jsr:@std/dotenv";
 
-console.log(Deno.env.get("GREETING")); // "Hello, world."
+const env = await load({
+  // optional: choose a specific path (defaults to ".env")
+  envPath: ".env.local",
+  // optional: also export to the process environment (so Deno.env can read it)
+  export: true,
+});
+
+console.log(env.GREETING);
+console.log(Deno.env.get("GREETING"));
 ```
+
+Run this with `deno run --allow-read --allow-env app.ts`.
 
 Further documentation for `.env` handling can be found in the
 [@std/dotenv](https://jsr.io/@std/dotenv/doc) documentation.
@@ -97,6 +115,17 @@ variable, and can be helpfully combined with
 }
 ```
 
+:::note Variables with spaces
+
+When setting environment variables that contain space characters in a `.env`
+file, ensure you enclose the value in quotes. For example:
+
+```shell
+MY_VAR="my value with spaces"
+```
+
+:::
+
 ## `std/cli`
 
 The Deno Standard Library has a [`std/cli` module](https://jsr.io/@std/cli) for
@@ -121,6 +150,7 @@ The Deno runtime has these special environment variables.
 | DENO_NO_UPDATE_CHECK | Set to disable checking if a newer Deno version is available                                                                                                                      |
 | DENO_V8_FLAGS        | Set V8 command line options                                                                                                                                                       |
 | DENO_JOBS            | Number of parallel workers used for the `--parallel` flag with the test subcommand.<br />Defaults to number of available CPUs.                                                    |
+| DENO_KV_ACCESS_TOKEN | Personal access token used when connecting to Deno KV databases (for example via `Deno.openKv` or `@deno/kv` with a KV Connect URL).                                              |
 | DENO_WEBGPU_TRACE    | Path to a directory to output a [WGPU trace](https://github.com/gfx-rs/wgpu/pull/619) to when using the WebGPU API                                                                |
 | DENO_WEBGPU_BACKEND  | Select the backend WebGPU will use, or a comma separated list of backends in order of preference. Possible values are `vulkan`, `dx12`, `metal`, or `opengl`                      |
 | HTTP_PROXY           | Proxy address for HTTP requests (module downloads, fetch)                                                                                                                         |

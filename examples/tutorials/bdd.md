@@ -222,7 +222,7 @@ Calculator
 ok | 11 passed | 0 failed (234ms)
 ```
 
-## Organizing tests with dested describe blocks
+## Organizing tests with nested describe blocks
 
 One of the powerful features of BDD is the ability to nest `describe` blocks,
 which helps organize tests hierarchically. In the calculator example, we grouped
@@ -438,7 +438,7 @@ it("should fetch user data asynchronously", async () => {
 ```
 
 🦕 By following the BDD principles and practices outlined in this tutorial, you
-can build more reliable software and solidify your resoning about the 'business
+can build more reliable software and solidify your reasoning about the 'business
 logic' of your code.
 
 Remember that BDD is not just about the syntax or tools but about the
@@ -448,4 +448,4 @@ conversations between developers, testers, product and business stakeholders.
 
 To continue learning about testing in Deno, explore other modules in the
 Standard Library's testing suite, such as [mocking](/examples/mocking_tutorial/)
-and [snapshot testing](/examples/snapshot_tutorial/).
+and [snapshot testing](/examples/snapshot_test_tutorial/).

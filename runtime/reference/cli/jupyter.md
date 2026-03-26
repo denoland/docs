@@ -19,10 +19,10 @@ This is a temporary limitation and will be addressed in the future.
 
 ## Quickstart
 
-Run `deno jupyter --unstable` and follow the instructions.
+Run `deno jupyter` and follow the instructions.
 
-You can run `deno jupyter --unstable --install` to force installation of the
-kernel. Deno assumes that `jupyter` command is available in your `PATH`.
+You can run `deno jupyter --install` to force installation of the kernel. Deno
+assumes that `jupyter` command is available in your `PATH`.
 
 After completing the installation process, the Deno kernel will be available in
 the notebook creation dialog in JupyterLab and the classic notebook:

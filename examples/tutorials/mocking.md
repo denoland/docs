@@ -56,7 +56,7 @@ function saveUser(
 // Test with a mock
 Deno.test("saveUser calls database.save", async () => {
   // Create a mock database with a spy on the save method
-  const mockDatabase: Database = {
+  const mockDatabase = {
     save: spy((user: User) => Promise.resolve({ id: 1, ...user })),
   };
 
@@ -87,6 +87,119 @@ that:
 
 We were able to test the `saveUser` operation without setting up or tearing down
 any complex database state.
+
+### Clearing spies
+
+When working with multiple tests that use spies, it's important to reset or
+clear spies between tests to avoid interference. The Deno testing library
+provides a simple way to restore all spies to their original state using the
+`restore()` method.
+
+Here's how to clear a spy after you're done with it:
+
+```ts
+import { assertEquals } from "jsr:@std/assert";
+import { assertSpyCalls, spy } from "jsr:@std/testing/mock";
+
+Deno.test("spy cleanup example", () => {
+  // Create a spy on a function
+  const myFunction = spy((x: number) => x * 2);
+
+  // Use the spy
+  const result = myFunction(5);
+  assertEquals(result, 10);
+  assertSpyCalls(myFunction, 1);
+
+  // After testing, restore the spy
+  try {
+    // Test code using the spy
+    // ...
+  } finally {
+    // Always clean up spies
+    myFunction.restore();
+  }
+});
+```
+
+Method spies are disposable, they can automatically restore themselves with the
+`using` keyword. This approach means that you do not need to wrap your
+assertions in a try statement to ensure you restore the methods before the tests
+finish.
+
+```ts
+import { assertEquals } from "jsr:@std/assert";
+import { assertSpyCalls, spy } from "jsr:@std/testing/mock";
+
+Deno.test("using disposable spies", () => {
+  const calculator = {
+    add: (a: number, b: number) => a + b,
+    multiply: (a: number, b: number) => a * b,
+  };
+
+  // The spy will automatically be restored when it goes out of scope
+  using addSpy = spy(calculator, "add");
+
+  // Use the spy
+  const sum = calculator.add(3, 4);
+  assertEquals(sum, 7);
+  assertSpyCalls(addSpy, 1);
+  assertEquals(addSpy.calls[0].args, [3, 4]);
+
+  // No need for try/finally blocks - the spy will be restored automatically
+});
+
+Deno.test("using multiple disposable spies", () => {
+  const calculator = {
+    add: (a: number, b: number) => a + b,
+    multiply: (a: number, b: number) => a * b,
+  };
+
+  // Both spies will automatically be restored
+  using addSpy = spy(calculator, "add");
+  using multiplySpy = spy(calculator, "multiply");
+
+  calculator.add(5, 3);
+  calculator.multiply(4, 2);
+
+  assertSpyCalls(addSpy, 1);
+  assertSpyCalls(multiplySpy, 1);
+
+  // No cleanup code needed
+});
+```
+
+For cases where you have multiple spies that don't support the `using` keyword,
+you can track them in an array and restore them all at once:
+
+```ts
+Deno.test("multiple spies cleanup", () => {
+  const spies = [];
+
+  // Create spies
+  const functionA = spy((x: number) => x + 1);
+  spies.push(functionA);
+
+  const objectB = {
+    method: (x: number) => x * 2,
+  };
+  const spyB = spy(objectB, "method");
+  spies.push(spyB);
+
+  // Use the spies in tests
+  // ...
+
+  // Clean up all spies at the end
+  try {
+    // Test code using spies
+  } finally {
+    // Restore all spies
+    spies.forEach((spyFn) => spyFn.restore());
+  }
+});
+```
+
+By properly cleaning up spies, you ensure that each test starts with a clean
+state and avoid side effects between tests.
 
 ### Stubbing
 
@@ -240,9 +353,8 @@ Deno.test("report generation with controlled environment", () => {
 
 Time-dependent code can be challenging to test because it may produce different
 results based on when the test runs. Deno provides a
-[`fakeTime`](https://jsr.io/@std/testing/doc/mock#faking-time) utility that
-allows you to simulate the passage of time and control date-related functions
-during tests.
+[`FakeTime`](https://jsr.io/@std/testing/doc/time) utility that allows you to
+simulate the passage of time and control date-related functions during tests.
 
 The example below demonstrates how to test time-dependent functions:
 `isWeekend()`, which returns true if the current day is Saturday or Sunday, and
@@ -250,7 +362,7 @@ The example below demonstrates how to test time-dependent functions:
 
 ```ts
 import { assertEquals } from "jsr:@std/assert";
-import { FakeTime, fakeTime } from "jsr:@std/testing/mock";
+import { FakeTime } from "jsr:@std/testing/time";
 
 // Function that depends on the current time
 function isWeekend(): boolean {
@@ -267,6 +379,8 @@ function delayedGreeting(callback: (message: string) => void): void {
 }
 
 Deno.test("time-dependent tests", () => {
+  using fakeTime = new FakeTime();
+
   // Create a fake time starting at a specific date (a Monday)
   const mockedTime: FakeTime = fakeTime(new Date("2023-05-01T12:00:00Z"));
 
@@ -330,7 +444,7 @@ others intact:
 
 ```ts
 import { assertEquals } from "jsr:@std/assert";
-import { spy } from "jsr:@std/testing/mock";
+import { stub } from "jsr:@std/testing/mock";
 
 class UserService {
   async getUser(id: string) {
@@ -351,11 +465,11 @@ class UserService {
   }
 }
 
-Deno.test("partial mocking with spies", async () => {
+Deno.test("partial mocking with stubs", async () => {
   const service = new UserService();
 
   // Only mock the getUser method
-  const getUserSpy = spy(
+  const getUserMock = stub(
     service,
     "getUser",
     () => Promise.resolve({ id: "test-id", name: "Mocked User" }),
@@ -372,10 +486,10 @@ Deno.test("partial mocking with spies", async () => {
     });
 
     // Verify getUser was called with the right arguments
-    assertEquals(getUserSpy.calls.length, 1);
-    assertEquals(getUserSpy.calls[0].args[0], "test-id");
+    assertEquals(getUserMock.calls.length, 1);
+    assertEquals(getUserMock.calls[0].args[0], "test-id");
   } finally {
-    getUserSpy.restore();
+    getUserMock.restore();
   }
 });
 ```
@@ -447,7 +561,8 @@ output.
 
 ```ts
 import { assertEquals, assertRejects } from "jsr:@std/assert";
-import { FakeTime, fakeTime, spy, stub } from "jsr:@std/testing/mock";
+import { spy, stub } from "jsr:@std/testing/mock";
+import { FakeTime } from "jsr:@std/testing/time";
 
 // The service we want to test
 class AuthService {
@@ -542,6 +657,8 @@ Deno.test("AuthService comprehensive test", async (t) => {
   });
 
   await t.step("token expiration should work correctly", () => {
+    using fakeTime = new FakeTime();
+
     const authService = new AuthService();
     const time = fakeTime(new Date("2023-01-01T12:00:00Z"));
 

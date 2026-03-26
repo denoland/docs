@@ -2,8 +2,8 @@
 title: "Web development"
 description: "A guide to web development with Deno. Learn about supported frameworks like Fresh, Next.js, and Astro, along with built-in features for building modern web applications."
 oldUrl:
- - /runtime/manual/getting_started/web_frameworks/
- - /runtime/fundamentals/web_frameworks/
+  - /runtime/manual/getting_started/web_frameworks/
+  - /runtime/fundamentals/web_frameworks/
 ---
 
 Deno offers a secure and developer-friendly environment for building web
@@ -15,9 +15,13 @@ applications, making your web dev a delightful experience.
 2. Deno has [built-in TypeScript support](/runtime/fundamentals/typescript/),
    allowing you to write TypeScript code without additional configuration or
    tooling.
-3. Deno comes with a [standard library](/runtime/fundamentals/standard_library/)
-   that includes modules for common tasks like HTTP servers, file system
-   operations, and more.
+3. Deno comes with a [standard library](/runtime/reference/std/) that includes
+   modules for common tasks like HTTP servers, file system operations, and more.
+
+For your vanilla TypeScript, or JavaScript, web applications, you can use the
+built-in Deno [HTTP server](/runtime/fundamentals/http_server/). This is a great
+way to get started with Deno and build simple web applications without any
+additional dependencies.
 
 Most likely, if you're building a more complex application, you'll be
 interacting with Deno through a web framework.

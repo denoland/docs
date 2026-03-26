@@ -1,11 +1,11 @@
 ---
-title: "`deno install`"
+title: "deno install"
 oldUrl:
- - /runtime/manual/tools/script_installer/
- - /runtime/reference/cli/script_installer/
- - /runtime/manual/tools/script_installer/
- - /runtime/manual/tools/cache/
- - /runtime/reference/cli/cache/
+  - /runtime/manual/tools/script_installer/
+  - /runtime/reference/cli/script_installer/
+  - /runtime/manual/tools/script_installer/
+  - /runtime/manual/tools/cache/
+  - /runtime/reference/cli/cache/
 command: install
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno install"
@@ -158,6 +158,20 @@ example installation command to your repository:
 $ deno install -n awesome_cli https://example.com/awesome/cli.ts
 ```
 
+### deno install --global --compile [PACKAGE_OR_URL]
+
+Use this command to compile a package or script into a standalone,
+self-contained binary. The resulting executable can be distributed and run
+without requiring Deno to be installed on the target system.
+
+```shell
+$ deno install --global --compile -A npm:@anthropic-ai/claude-code
+```
+
+This combines the behavior of [`deno compile`](/runtime/reference/cli/compile/)
+with global installation — producing a native binary placed in the installation
+root (same as `--global` without `--compile`).
+
 ## Native Node.js addons
 
 A lot of popular packages npm packages like
@@ -179,6 +193,19 @@ deno install --allow-scripts=npm:sqlite3
 
 _Install all dependencies and allow `npm:sqlite3` package to run its lifecycle
 scripts_.
+
+## --quiet flag
+
+The `--quiet` flag suppresses diagnostic output when installing dependencies.
+When used with `deno install`, it will hide progress indicators, download
+information, and success messages.
+
+```shell
+$ deno install --quiet jsr:@std/http/file-server
+```
+
+This is useful for scripting environments or when you want cleaner output in CI
+pipelines.
 
 ## Uninstall
 

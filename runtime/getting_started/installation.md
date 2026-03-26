@@ -9,7 +9,8 @@ oldUrl:
 
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
 has no external dependencies. On macOS, both M1 (arm64) and Intel (x64)
-executables are provided. On Linux and Windows, only x64 is supported.
+executables are provided. On Windows, both ARM64 and x64 are supported. On
+Linux, only x64 is supported.
 
 ## Download and install
 
@@ -67,7 +68,7 @@ asdf set -u deno latest
 asdf set deno latest
 ```
 
-Using [vfox](https://vfox.lhan.me/):
+Using [vfox](https://vfox.dev/):
 
 ```shell
 vfox add deno
@@ -81,6 +82,10 @@ vfox use --global deno
 
 </deno-tab>
 <deno-tab value="windows" label="Windows">
+
+**NOTE:** Deno requires Windows 10 version 1709, or Windows Server 2016 version
+1709 and up, due to requiring
+[IsWow64Process2](https://learn.microsoft.com/en-us/windows/win32/api/wow64apiset/nf-wow64apiset-iswow64process2).
 
 Using PowerShell (Windows):
 
@@ -116,7 +121,7 @@ Using [Winget](https://github.com/microsoft/winget-cli):
 winget install DenoLand.Deno
 ```
 
-Using [vfox](https://vfox.lhan.me/):
+Using [vfox](https://vfox.dev/):
 
 ```shell
 vfox add deno
@@ -167,7 +172,7 @@ asdf set -u deno latest
 asdf set deno latest
 ```
 
-Using [vfox](https://vfox.lhan.me/):
+Using [vfox](https://vfox.dev/):
 
 ```shell
 vfox add deno
@@ -235,4 +240,5 @@ deno upgrade --version 1.0.1
 ## Building from source
 
 Information about how to build from source can be found in the
-[`Contributing`](/runtime/contributing/building_from_source/) chapter.
+[`Building from source`](https://github.com/denoland/deno/blob/main/.github/CONTRIBUTING.md#building-from-source)
+guide.

@@ -3,13 +3,6 @@ title: OpenTelemetry
 description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
 
-:::caution
-
-The OpenTelemetry integration for Deno is still in development and may change.
-To use it, you must pass the `--unstable-otel` flag to Deno.
-
-:::
-
 Deno has built in support for [OpenTelemetry](https://opentelemetry.io/).
 
 > OpenTelemetry is a collection of APIs, SDKs, and tools. Use it to instrument,
@@ -33,11 +26,11 @@ Deno provides the following features:
 
 ## Quick start
 
-To enable the OpenTelemetry integration, run your Deno script with the
-`--unstable-otel` flag and set the environment variable `OTEL_DENO=true`:
+To enable the OpenTelemetry integration set the environment variable
+`OTEL_DENO=true`:
 
 ```sh
-OTEL_DENO=true deno run --unstable-otel my_script.ts
+OTEL_DENO=true deno run my_script.ts
 ```
 
 This will automatically collect and export runtime observability data to an
@@ -46,8 +39,32 @@ OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 
 :::tip
 
-If you do not have an OpenTelemetry collector set up yet, you can get started
-with a
+If you want to quickly see OpenTelemetry output without setting up a collector,
+you can use the built-in console exporter to print spans, logs, and metrics
+directly to stderr in a human-readable format:
+
+```sh
+OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console deno run my_script.ts
+```
+
+Example output:
+
+```
+SPAN inner span [00000000000000000000000000000001/0000000000000002] Internal 0.495ms
+  parent: 0000000000000001
+  scope: example-tracer
+  key: value
+LOG [INFO] 2025-03-14T13:47:07.235Z "hello from inner"
+  scope: deno@2.7.5
+  trace: 00000000000000000000000000000001/0000000000000002
+```
+
+:::
+
+:::tip
+
+If you want to visualize telemetry data in a dashboard, you can get started with
+a
 [local LGTM stack in Docker](https://github.com/grafana/docker-otel-lgtm/tree/main?tab=readme-ov-file)
 (Loki (logs), Grafana (dashboard), Tempo (traces), and Prometheus (metrics)) by
 running the following command:
@@ -270,11 +287,11 @@ In addition to the automatically collected telemetry data, you can also create
 your own metrics and traces using the `npm:@opentelemetry/api` package.
 
 You do not need to configure the `npm:@opentelemetry/api` package to use it with
-Deno. Deno sets up the `npm:@opentelemetry/api` package automatically when the
-`--unstable-otel` flag is passed. There is no need to call
-`metrics.setGlobalMeterProvider()`, `trace.setGlobalTracerProvider()`, or
-`context.setGlobalContextManager()`. All configuration of resources, exporter
-settings, etc. is done via environment variables.
+Deno. Deno sets up the `npm:@opentelemetry/api` package automatically. There is
+no need to call `metrics.setGlobalMeterProvider()`,
+`trace.setGlobalTracerProvider()`, or `context.setGlobalContextManager()`. All
+configuration of resources, exporter settings, etc. is done via environment
+variables.
 
 Deno works with version `1.x` of the `npm:@opentelemetry/api` package. You can
 either import directly from `npm:@opentelemetry/api@1`, or you can install the
@@ -382,9 +399,9 @@ span.setStatus({
 ```
 
 Spans can also have
-[events](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api.Span.html#addEvent)
+[events](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api._opentelemetry_api.Span.html#addevent)
 and
-[links](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api.Span.html#addLink)
+[links](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api._opentelemetry_api.Span.html#addlink)
 added to them. Events are points in time that are associated with the span.
 Links are references to other spans.
 
@@ -429,7 +446,7 @@ also take a `context` object from the
 [context propagation API](#context-propagation).
 
 Learn more about the full tracing API in the
-[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api.TraceAPI.html).
+[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api._opentelemetry_api.TraceAPI.html).
 
 ### Metrics
 
@@ -527,7 +544,17 @@ There are three types of observable instruments:
   time, such as the current temperature.
 
 Learn more about the full metrics API in the
-[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api.MetricsAPI.html).
+[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api._opentelemetry_api.MetricsAPI.html).
+
+### Practical Examples
+
+For practical examples of implementing OpenTelemetry in Deno applications, see
+our tutorials:
+
+- [Basic OpenTelemetry Tutorial](/examples/basic_opentelemetry_tutorial/) - A
+  simple HTTP server with custom metrics and traces
+- [Distributed Tracing Tutorial](/examples/otel_span_propagation_tutorial/) -
+  Advanced techniques for tracing across service boundaries
 
 ## Context propagation
 
@@ -610,7 +637,7 @@ span.end();
 ```
 
 Learn more about the full context API in the
-[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api.ContextAPI.html).
+[OpenTelemetry JS API docs](https://open-telemetry.github.io/opentelemetry-js/classes/_opentelemetry_api._opentelemetry_api.ContextAPI.html).
 
 ## Configuration
 
@@ -619,7 +646,15 @@ environment variable.
 
 The endpoint and protocol for the OTLP exporter can be configured using the
 `OTEL_EXPORTER_OTLP_ENDPOINT` and `OTEL_EXPORTER_OTLP_PROTOCOL` environment
-variables.
+variables. Supported values for `OTEL_EXPORTER_OTLP_PROTOCOL` are:
+
+- `http/protobuf` (default): Export using Protobuf over HTTP to the configured
+  endpoint.
+- `http/json`: Export using JSON over HTTP to the configured endpoint.
+- `console`: Print spans, logs, and metrics to stderr in a human-readable text
+  format. This is useful for debugging and testing instrumentation without
+  running an OTLP collector. When using `console`, no endpoint configuration is
+  needed.
 
 If the endpoint requires authentication, headers can be configured using the
 `OTEL_EXPORTER_OTLP_HEADERS` environment variable.
@@ -729,9 +764,8 @@ limitations to be aware of:
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
   are not supported.
-- The only supported exporter is OTLP - other exporters are not supported.
-- Only `http/protobuf` and `http/json` protocols are supported for OTLP. Other
-  protocols such as `grpc` are not supported.
+- The supported exporters are OTLP (`http/protobuf`, `http/json`) and `console`.
+  Other exporters and protocols such as `grpc` are not supported.
 - Metrics from observable (asynchronous) meters are not collected on process
   exit/crash, so the last value of metrics may not be exported. Synchronous
   metrics are exported on process exit/crash.

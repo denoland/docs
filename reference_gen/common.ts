@@ -1,6 +1,7 @@
 import type { HrefResolver, ShortPath } from "@deno/doc";
 import { dirname, join } from "@std/path";
 import markdownit from "markdown-it";
+import type { MarkdownIt, StateCore, Token } from "markdown-it";
 import Prism from "../prism.ts";
 
 import admonitionPlugin from "../markdown-it/admonition.ts";
@@ -31,7 +32,7 @@ const titleOnlyAllowedTypes = new Set([
   "underline_close",
 ]);
 
-function walkTitleTokens(tokens) {
+function walkTitleTokens(tokens: Token[]): void {
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
 
@@ -45,11 +46,11 @@ function walkTitleTokens(tokens) {
   }
 }
 
-function titleOnlyPlugin(md) {
-  md.core.ruler.push("titleOnly", function titleOnly(state) {
+function titleOnlyPlugin(md: MarkdownIt) {
+  md.core.ruler.push("titleOnly", function titleOnly(state: StateCore) {
     walkTitleTokens(state.tokens);
 
-    const paragraphEnd = state.tokens.findIndex((token) =>
+    const paragraphEnd = state.tokens.findIndex((token: Token) =>
       token.type === "paragraph_close"
     );
 
@@ -68,8 +69,8 @@ function titleOnlyPlugin(md) {
 function createAnchorizePlugin(
   anchorizer: (content: string, depthLevel: number) => string,
 ) {
-  return function anchorizePlugin(md) {
-    md.core.ruler.push("anchorize", function anchorize(state) {
+  return function anchorizePlugin(md: MarkdownIt) {
+    md.core.ruler.push("anchorize", function anchorize(state: StateCore) {
       const tokens = state.tokens;
 
       for (let i = 0; i < tokens.length; i++) {
@@ -82,12 +83,16 @@ function createAnchorizePlugin(
 
           if (nextToken && nextToken.type === "inline") {
             const content = nextToken.children
-              .filter((t) => t.type === "text" || t.type === "code_inline")
-              .map((t) => t.content)
+              ?.filter((t: Token) =>
+                t.type === "text" || t.type === "code_inline"
+              )
+              .map((t: Token) => t.content)
               .join("");
 
-            const id = anchorizer(content, level);
-            token.attrSet("id", id);
+            if (content) {
+              const id = anchorizer(content, level);
+              token.attrSet("id", id);
+            }
           }
         }
       }
@@ -140,7 +145,7 @@ export function renderMarkdown(
   }
 }
 
-function strip(tokens) {
+function strip(tokens: Token[]): string {
   let out = "";
 
   for (const token of tokens) {

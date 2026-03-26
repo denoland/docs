@@ -1,7 +1,7 @@
 ---
 title: "Override the color of the OG image"
 description: "Showing how a custom color can be used to override the default color of the OG image"
-openGraphColor: "#6FD1FF"
+openGraphColor: "#b3e0ff"
 ---
 
 There are different variants of the OG image depending on what content is

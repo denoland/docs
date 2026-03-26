@@ -3,8 +3,8 @@ title: "How to deploy Deno to Digital Ocean"
 description: "A step-by-step guide to deploying Deno applications on Digital Ocean. Learn about Docker containerization, GitHub Actions automation, container registries, and how to set up continuous deployment workflows."
 url: /examples/digital_ocean_tutorial/
 oldUrl:
-- /runtime/manual/advanced/deploying_deno/digital_ocean/
-- /runtime/tutorials/digital_ocean/
+  - /runtime/manual/advanced/deploying_deno/digital_ocean/
+  - /runtime/tutorials/digital_ocean/
 ---
 
 Digital Ocean is a popular cloud infrastructure provider offering a variety of
@@ -102,6 +102,13 @@ Let's [tag](https://docs.docker.com/engine/reference/commandline/tag/) it with
 
 ```shell
 docker tag deno-image registry.digitalocean.com/deno-on-digital-ocean/deno-image:new
+```
+
+Before pushing, authenticate your Docker client with Digital Ocean Container
+Registry:
+
+```shell
+doctl registry login
 ```
 
 Now we can push it to the registry.
@@ -239,7 +246,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set $TAG from shortened sha
         run: echo "TAG=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV

@@ -86,6 +86,11 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Simple API server",
+        href: "/examples/simple_api_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Simple file server",
         href: "/examples/file_server_tutorial/",
         type: "tutorial",
@@ -102,13 +107,23 @@ export const sidebar = [
         externalURL: "https://www.youtube.com/watch?v=IVde_GTN6TM",
         type: "video",
       },
+      {
+        title: "Sharing your local server with tunnel",
+        href: "/examples/tunnel_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Generating documentation with deno doc",
+        href: "/examples/deno_doc_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
     title: "Modules and package management",
     items: [
       {
-        title: "Use Node.js' built-in modules",
+        title: "Use Node.js built-in modules",
         href: "/examples/node_built_in/",
         type: "example",
       },
@@ -150,6 +165,11 @@ export const sidebar = [
         externalURL:
           "https://www.youtube.com/watch?v=oxVwTT-rZRo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=6",
         type: "video",
+      },
+      {
+        title: "Temporal API",
+        href: "/examples/temporal/",
+        type: "example",
       },
       {
         title: "Better debugging with the console API",
@@ -205,18 +225,18 @@ export const sidebar = [
         type: "tutorial",
       },
       {
-        title: "Build a React app with create-vite",
-        href: "/examples/create_react_tutorial/",
-        type: "tutorial",
-      },
-      {
         title: "Build a Next.js app",
         href: "/examples/next_tutorial/",
         type: "tutorial",
       },
       {
         title: "Build a Fresh app",
-        href: "https://fresh.deno.dev/docs/getting-started/create-a-project/",
+        href: "/examples/fresh_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a Svelte app",
+        href: "/examples/svelte_tutorial/",
         type: "tutorial",
       },
       {
@@ -283,6 +303,116 @@ export const sidebar = [
         href: "/examples/tanstack_tutorial/",
         type: "tutorial",
       },
+      {
+        title: "HTTP server file upload",
+        href: "/examples/http_server_file_upload/",
+        type: "example",
+      },
+    ],
+  },
+  {
+    title: "Deno Sandbox",
+    items: [
+      {
+        title: "Evaluating JavaScript",
+        href: "/examples/sandbox_evaluating_javascript/",
+        type: "example",
+      },
+      {
+        title: "Spawn a subprocess",
+        href: "/examples/sandbox_spawn_subprocess/",
+        type: "tutorial",
+      },
+      {
+        title: "Serve a web framework",
+        href: "/examples/sandbox_web_framework/",
+        type: "tutorial",
+      },
+      {
+        title: "Provide SSH access to a sandbox",
+        href: "/examples/sandbox_ssh_access/",
+        type: "tutorial",
+      },
+      {
+        title: "Interactive JavaScript REPL",
+        href: "/examples/sandbox_javascript_repl/",
+        type: "tutorial",
+      },
+      {
+        title: "Provide a VSCode instance in a sandbox",
+        href: "/examples/sandbox_vscode_instance/",
+        type: "tutorial",
+      },
+      {
+        title: "Use template literals with variable interpolation",
+        href: "/examples/sandbox_template_literals/",
+        type: "tutorial",
+      },
+      {
+        title: "Error handling",
+        href: "/examples/sandbox_error_handling/",
+        type: "tutorial",
+      },
+      {
+        title: "Command cancellation",
+        href: "/examples/sandbox_command_cancellation/",
+        type: "tutorial",
+      },
+      {
+        title: "Streaming access string and binary output",
+        href: "/examples/sandbox_access_output/",
+        type: "tutorial",
+      },
+      {
+        title: "Set and get environment variables",
+        href: "/examples/sandbox_environment_variables/",
+        type: "tutorial",
+      },
+      {
+        title: "Stream output to a local file",
+        href: "/examples/sandbox_stream_output/",
+        type: "tutorial",
+      },
+      {
+        title: "Upload files and directories to a sandbox",
+        href: "/examples/sandbox_upload_files/",
+        type: "tutorial",
+      },
+      {
+        title: "Control sandbox timeout",
+        href: "/examples/sandbox_timeout_control/",
+        type: "tutorial",
+      },
+      {
+        title: "Configure sandbox memory",
+        href: "/examples/sandbox_memory/",
+        type: "tutorial",
+      },
+      {
+        title: "Add read-write volumes to your Sandbox",
+        href: "/examples/volumes_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Boot instantly with snapshots",
+        href: "/examples/snapshots_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Boot a Python environment with snapshots",
+        href: "/examples/snapshot_python_video/",
+        type: "video",
+      },
+      {
+        title: "Boot a Python environment with snapshots",
+        href: "/examples/snapshot_python_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Run AI generated code",
+        href: "/examples/sandbox_for_untrusted_code/",
+        type: "example",
+      },
     ],
   },
   {
@@ -304,8 +434,13 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Stubbing",
+        href: "/examples/stubbing_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Snapshot testing",
-        href: "/examples/snapshot_tutorial/",
+        href: "/examples/snapshot_test_tutorial/",
         type: "tutorial",
       },
       {
@@ -341,6 +476,11 @@ export const sidebar = [
     title: "OpenTelemetry",
     items: [
       {
+        title: "Basic OpenTelemetry setup",
+        href: "/examples/basic_opentelemetry_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Export telemetry to Grafana",
         href: "/examples/grafana_tutorial/",
         type: "tutorial",
@@ -351,8 +491,23 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "View telemetry data for your local application",
+        href: "/examples/tunnel_telemetry_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Export telemetry to Honeycomb",
         href: "/examples/honeycomb_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Span propagation",
+        href: "/examples/otel_span_propagation_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "OpenTelemetry with Deno Deploy",
+        href: "/examples/deploy_otel_tutorial/",
         type: "tutorial",
       },
     ],
@@ -360,6 +515,26 @@ export const sidebar = [
   {
     title: "Deploying Deno projects",
     items: [
+      {
+        title: "Deploy with Deno Deploy",
+        href: "/examples/deno_deploy_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Deploy with the deploy command",
+        href: "/examples/deploy_command_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Migrating a custom domain to Deno Deploy",
+        href: "/examples/migrate_custom_domain_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Connecting to a database both locally and on Deno Deploy",
+        href: "/examples/tunnel_database_tutorial/",
+        type: "tutorial",
+      },
       {
         title: "AWS Lambda",
         href: "/examples/aws_lambda_tutorial/",
@@ -505,6 +680,18 @@ export const sidebar = [
         title: "Importing JSON",
         href: "/examples/importing_json/",
         type: "example",
+      },
+      {
+        title: "Byte and text imports",
+        href: "/examples/byte_and_text_imports/",
+        externalURL: "https://www.youtube.com/watch?v=PAEI6mdlXwc",
+        type: "video",
+      },
+      {
+        title: "Image bundling with deno compile",
+        href: "/examples/image_bundling_deno_compile/",
+        externalURL: "https://www.youtube.com/watch?v=qg_M0deBlfQ",
+        type: "video",
       },
       {
         title: "Parsing and serializing CSV",
@@ -834,6 +1021,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "LLM Chat app",
+        href: "/examples/llm_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Build a Realtime WebSocket Application",
         href: "/examples/realtime_websocket_app/",
         externalURL:
@@ -896,8 +1088,13 @@ export const sidebar = [
         type: "example",
       },
       {
-        title: "Temporal API",
-        href: "/examples/temporal/",
+        title: "Importing text",
+        href: "/examples/importing_text/",
+        type: "example",
+      },
+      {
+        title: "Importing bytes",
+        href: "/examples/importing_bytes/",
         type: "example",
       },
     ],

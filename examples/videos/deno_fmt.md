@@ -39,7 +39,7 @@ deno fmt
 You could even pipe in a string or file:
 
 ```sh
-echo ' console.log(    5  );' | deno fmt
+echo ' console.log(    5  );' | deno fmt -
 ## console.log(5);
 ```
 
@@ -48,8 +48,8 @@ formatted by `deno fmt`. If it's not formatted, it will return a nonzero exit
 code:
 
 ```sh
-echo 'deno fmt --check
-## error: Found 1 not formatted file in 1 files
+echo ' console.log(    5  );' | deno fmt --check -
+## Not formatted stdin
 ```
 
 This is useful in CI where you want to check if the code is formatted properly.
@@ -105,9 +105,11 @@ const foo = [
 `deno fmt` can also reduce the escaped characters in your strings. For example,
 if you have a string with escaped quotes, `deno fmt` will remove them:
 
+<!-- deno-fmt-ignore-start -->
 ```typescript
-console.log('hello "world"');
+console.log("hello \"world\"");
 ```
+<!-- deno-fmt-ignore-end -->
 
 will be formatted to:
 
@@ -135,17 +137,6 @@ file under the `fmt` field:
 {
   "fmt": {
     "exclude": ["main.ts", "*.json"]
-  }
-}
-```
-
-Or at the top level of `deno.json` to tell both `deno fmt` and `deno lint` to
-ignore it. (This is a good place to put your generated files):
-
-```json
-{
-  "fmt": {
-    "ignore": ["main.ts", "*.json"]
   }
 }
 ```
@@ -195,10 +186,10 @@ Note that all these options also have a corresponding flags in the CLI.
     "useTabs": true,
     "lineWidth": 80,
     "indentWidth": 2,
-    "semiColon": false,
+    "semiColons": false,
     "singleQuote": true,
     "proseWrap": "always",
-    "ignore": ["**/logs.json"]
+    "exclude": ["**/logs.json"]
   }
 }
 ```

@@ -1,6 +1,6 @@
 ---
 title: "Distributed Tracing with Context Propagation in Deno"
-description: "Learn how to implement end-to-end distributed tracing with automatic context propagation in Deno applications. This tutorial covers creating traced services, automatic propagation of trace context, and visualizing distributed traces."
+description: "Implement end-to-end distributed tracing with automatic context propagation in Deno applications. This tutorial covers creating traced services, automatic propagation of trace context, and visualizing distributed traces."
 url: /examples/otel_span_propagation_tutorial/
 ---
 
@@ -137,14 +137,14 @@ request headers and establishes the server span as a child of the client's span.
 To run this example, first, start the server, giving your otel service a name:
 
 ```sh
-OTEL_DENO=true OTEL_SERVICE_NAME=server deno run --unstable-otel --allow-net server.ts
+OTEL_DENO=true OTEL_SERVICE_NAME=server deno run --allow-net server.ts
 ```
 
 Then, in another terminal, run the client, giving the client a different service
 name to make observing the propagation clearer:
 
 ```sh
-OTEL_DENO=true OTEL_SERVICE_NAME=client deno run --unstable-otel --allow-net client.ts
+OTEL_DENO=true OTEL_SERVICE_NAME=client deno run --allow-net client.ts
 ```
 
 You should see:

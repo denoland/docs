@@ -102,3 +102,97 @@ Run it:
 ```shell
 $ deno run --allow-run=yes --allow-read=. --allow-write=. ./subprocess_piping_to_file.ts
 ```
+
+## Reading subprocess output with convenience methods
+
+When working with spawned subprocesses, you can use convenience methods on the
+`stdout` and `stderr` streams to easily collect and parse output. These methods
+are similar to those available on `Response` objects:
+
+```ts title="subprocess_convenience_methods.ts"
+const command = new Deno.Command("deno", {
+  args: [
+    "eval",
+    "console.log(JSON.stringify({message: 'Hello from subprocess'}))",
+  ],
+  stdout: "piped",
+  stderr: "piped",
+});
+
+const process = command.spawn();
+
+// Use convenience methods to collect output
+const stdoutText = await process.stdout.text();
+const stderrText = await process.stderr.text();
+
+console.log("stdout:", stdoutText);
+console.log("stderr:", stderrText);
+
+// Wait for the process to complete
+const status = await process.status;
+console.log("Exit code:", status.code);
+```
+
+## Convenience spawn functions
+
+:::caution
+
+`Deno.spawn()`, `Deno.spawnAndWait()`, and `Deno.spawnAndWaitSync()` are
+unstable APIs introduced in Deno 2.7. They may evolve before being stabilized.
+
+:::
+
+As of Deno 2.7, three shorthand functions provide a more concise alternative to
+`Deno.Command`:
+
+- **`Deno.spawn(command, args, options?)`** — spawns a subprocess and returns a
+  `ChildProcess` (equivalent to `new Deno.Command(cmd, { args }).spawn()`)
+- **`Deno.spawnAndWait(command, args, options?)`** — spawns a subprocess and
+  returns a promise resolving to `CommandOutput` (equivalent to
+  `new Deno.Command(cmd, { args }).output()`)
+- **`Deno.spawnAndWaitSync(command, args, options?)`** — synchronous variant
+  that blocks until the subprocess completes
+
+```ts title="spawn_examples.ts"
+// Spawn a child process
+const child = Deno.spawn("echo", ["hello"]);
+
+// Spawn and wait for output
+const output = await Deno.spawnAndWait("git", ["status"]);
+console.log(new TextDecoder().decode(output.stdout));
+
+// Spawn with options
+const formatted = Deno.spawn("deno", ["fmt", "--check"], {
+  stdout: "inherit",
+});
+
+// Synchronous execution
+const result = Deno.spawnAndWaitSync("echo", ["done"]);
+```
+
+These functions accept the command and arguments as separate parameters, which
+can be more readable than the `Deno.Command` constructor options pattern.
+
+## Convenience methods on output streams
+
+Available convenience methods include:
+
+- `.text()` - Returns the output as a UTF-8 string
+- `.bytes()` - Returns the output as a `Uint8Array`
+- `.arrayBuffer()` - Returns the output as an `ArrayBuffer`
+- `.json()` - Parses the output as JSON and returns the parsed object
+
+```ts title="subprocess_json_parsing.ts"
+const command = new Deno.Command("deno", {
+  args: ["eval", "console.log(JSON.stringify({name: 'Deno', version: '2.0'}))"],
+  stdout: "piped",
+});
+
+const process = command.spawn();
+
+// Parse JSON output directly
+const jsonOutput = await process.stdout.json();
+console.log("Parsed JSON:", jsonOutput); // { name: "Deno", version: "2.0" }
+
+await process.status;
+```

@@ -34,18 +34,35 @@ cd rest-api-with-prisma-oak
 Then, let's run `prisma init` with Deno:
 
 ```shell
-deno run --allow-read --allow-env --allow-write npm:prisma@latest init
+npx prisma@latest init --generator-provider prisma-client --output ./generated
 ```
 
+Let's understand the key parameters:
+
+- `--generator-provider prisma-client`: Define the provides as
+  "prisma-client-js" instead of the default "prisma-client-js". The
+  "prisma-client" provider is optimized for Deno and generates TypeScript code
+  compatible with the Deno runtime.
+
+- `--output`: Defines the directory where Prisma will save the generated client
+  files, including type definitions and database access utilities.
+
 This will generate
-[`prisma/schema.prisma`](https://www.prisma.io/docs/concepts/components/prisma-schema).
-Let's update it with the following:
+[`prisma/schema.prisma`](https://www.prisma.io/docs/orm/prisma-schema). Let's
+update it with the following:
+
+:::tip
+
+Don't forget to add `runtime = "deno"` to the generator block in your
+schema.prisma file. This is required for Prisma to work correctly with Deno.
+
+:::
 
 ```ts
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["deno"]
-  output = "../generated/client"
+  provider = "prisma-client"
+  output   = "./generated"
+  runtime = "deno"
 }
 
 datasource db {
@@ -74,10 +91,13 @@ deno run -A npm:prisma@latest db push
 After that's complete, we'll need to generate a Prisma Client:
 
 ```shell
-deno run -A --unstable-detect-cjs npm:prisma@latest generate --no-engine
+deno run -A npm:prisma@latest generate
 ```
 
 ## Setup Accelerate in the Prisma Data Platform
+
+> Note: This is an optional step. Prisma Accelerate is not required for the
+> basic functionality.
 
 To get started with the Prisma Data Platform:
 
@@ -103,10 +123,10 @@ touch prisma/seed.ts
 And in `./prisma/seed.ts`:
 
 ```ts
-import { Prisma, PrismaClient } from "../generated/client/deno/edge.ts";
+import { Prisma, PrismaClient } from "./generated/client.ts";
 
 const prisma = new PrismaClient({
-  datasourceUrl: envVars.DATABASE_URL,
+  datasourceUrl: process.env.DATABASE_URL,
 });
 
 const dinosaurData: Prisma.DinosaurCreateInput[] = [
@@ -145,10 +165,12 @@ We can now run `seed.ts` with:
 deno run -A --env prisma/seed.ts
 ```
 
-> [!TIP]
->
-> The `--env` flag is used to tell Deno to load environment variables from the
-> `.env` file.
+:::tip
+
+The `--env` flag is used to tell Deno to load environment variables from the
+`.env` file.
+
+:::
 
 After doing so, you should be able to see your data on Prisma Studio by running
 the following command:
@@ -175,7 +197,7 @@ touch main.ts
 Then, in your `main.ts` file:
 
 ```ts
-import { PrismaClient } from "./generated/client/deno/edge.ts";
+import { PrismaClient } from "./prisma/generated/client.ts";
 import { Application, Router } from "jsr:@oak/oak";
 
 /**
@@ -185,7 +207,7 @@ import { Application, Router } from "jsr:@oak/oak";
 const prisma = new PrismaClient({
   datasources: {
     db: {
-      url: envVars.DATABASE_URL,
+      url: process.env.DATABASE_URL,
     },
   },
 });
@@ -217,7 +239,7 @@ router
   })
   .post("/dinosaur", async (context) => {
     // Create a new dinosaur.
-    const { name, description } = await context.request.body("json").value;
+    const { name, description } = await context.request.body.json();
     const result = await prisma.dinosaur.create({
       data: {
         name,

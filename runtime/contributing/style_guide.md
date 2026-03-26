@@ -2,8 +2,8 @@
 title: "Deno Style Guide"
 description: "Comprehensive style guide for contributing to Deno's internal runtime code and standard library. Covers coding conventions, documentation standards, testing requirements, and best practices for TypeScript and Rust development."
 oldUrl:
-- /runtime/manual/contributing/style_guide/
-- /runtime/manual/references/contributing/style_guide/
+  - /runtime/manual/contributing/style_guide/
+  - /runtime/manual/references/contributing/style_guide/
 ---
 
 :::note
@@ -19,7 +19,7 @@ guide for users of Deno.
 Most modules in the repository should have the following copyright header:
 
 ```ts
-// Copyright 2018-2024 the Deno authors. All rights reserved. MIT license.
+// Copyright 2018-2026 the Deno authors. All rights reserved. MIT license.
 ```
 
 If the code originates elsewhere, ensure that the file has the proper copyright
@@ -257,15 +257,15 @@ For example:
 /** Import something from the `deno` module. */
 ```
 
-Do not document function arguments unless they are non-obvious of their intent
-(though if they are non-obvious intent, the API should be considered anyways).
-Therefore `@param` should generally not be used. If `@param` is used, it should
-not include the `type` as TypeScript is already strongly-typed.
+Every exported function should have a `@param` tag for each parameter with a
+description. The `@param` tag should not include the `type` as TypeScript is
+already strongly-typed.
 
 ```ts
 /**
- * Function with non-obvious param.
- * @param foo Description of non-obvious parameter.
+ * Resolves a path to a file.
+ * @param path The path to resolve.
+ * @param base The base directory to resolve from.
  */
 ```
 
@@ -363,6 +363,11 @@ export function foo(): string {
 }
 ```
 
+Regular functions and arrow functions have different behavior with respect to
+hoisting, binding, arguments, and constructability. The `function` keyword
+clearly indicates the intent to define a function, improving legibility and
+traceability while debugging.
+
 #### Error Messages
 
 User-facing error messages raised from JavaScript / TypeScript should be clear,
@@ -400,7 +405,7 @@ Bad: Cannot parse input hello, world
 Good: Cannot parse input "hello, world"
 ```
 
-4. Message should state the action that lead to the error:
+4. Message should state the action that led to the error:
 
 ```sh
 Bad: Invalid input x

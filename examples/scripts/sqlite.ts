@@ -8,7 +8,7 @@
  * Using the `node:sqlite` module, you can connect to an SQLite3 database
  * stored locally and perform basic database operations.
  *
- * _`node:sqlite` module has been added in Deno v2.2._
+ * The `node:sqlite` module was added in Deno v2.2.
  */
 
 // Import the DatabaseSync class from node:sqlite

@@ -1,14 +1,14 @@
 ---
 title: "Unstable feature flags"
 oldUrl:
- - /runtime/tools/unstable_flags/
- - /runtime/manual/tools/unstable_flags/
+  - /runtime/tools/unstable_flags/
+  - /runtime/manual/tools/unstable_flags/
 ---
 
-New features of the Deno runtime are often released behind feature flags, so
-users can try out new APIs and features before they are finalized. Current
-unstable feature flags are listed on this page, and can also be found in the CLI
-help text by running:
+New Deno runtime features are often released behind feature flags, so that users
+can try out new APIs and features before they are finalized. Current unstable
+feature flags are listed on this page, and can also be found in the CLI help
+text by running:
 
 ```sh
 deno --help
@@ -61,7 +61,7 @@ This flag enables you to
 [import Node.js built-in modules](/runtime/fundamentals/node/#node-built-in-modules)
 without a `node:` specifier, as in the example below. You can also use this flag
 to enable npm packages without an `npm:` specifier if you are manually managing
-your Node.js dependencies ([see `byonm` flag](#--unstable-byonm)).
+your Node.js dependencies.
 
 ```ts title="example.ts"
 import { readFileSync } from "fs";
@@ -213,11 +213,15 @@ Enable unstable net APIs. These APIs include:
 ## `--unstable-otel`
 
 Enable the
-[OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry).
+[OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry). This
+feature is now stable, so this flag is unnecessary in
+[Deno 2.4](https://deno.com/blog/v2.4)+.
 
 ## `--unstable`
 
-:::caution --unstable is deprecated - use granular flags instead
+:::caution
+
+**`--unstable` is deprecated - use granular flags instead.**
 
 The `--unstable` flag is no longer being used for new features, and will be
 removed in a future release. All unstable features that were available using
@@ -230,14 +234,30 @@ Please use these feature flags instead moving forward.
 
 :::
 
-Before more recent Deno versions (1.38+), unstable APIs were made available all
-at once using the `--unstable` flag. Notably, [Deno KV](/deploy/kv/manual) and
-other cloud primitive APIs are available behind this flag. To run a program with
-access to these unstable features, you would run your script with:
+## `--unstable-temporal`
 
-```sh
-deno run --unstable your_script.ts
+:::note
+
+As of Deno 2.7, the Temporal API is **stable** and available by default. The
+`--unstable-temporal` flag is no longer required.
+
+:::
+
+The [Temporal API](https://tc39.es/proposal-temporal/docs/) is a modern date and
+time API available in the global scope. It provides better support for time
+zones, calendars, and more precise date/time calculations than the legacy `Date`
+object.
+
+```ts title="example.ts"
+// Get the current date and time
+const now = Temporal.Now.plainDateTimeISO();
+console.log(`Current date and time: ${now}`);
+
+const date = Temporal.PlainDate.from("2025-07-10");
+const nextWeek = date.add({ days: 7 });
+console.log(`Next week: ${nextWeek}`);
+
+// Working with time zones
+const zonedDateTime = Temporal.Now.zonedDateTimeISO("America/New_York");
+console.log(`Time in New York: ${zonedDateTime}`);
 ```
-
-It is recommended that you use the granular unstable flags instead of this, the
-`--unstable` flag is now deprecated and will be removed in Deno 2.

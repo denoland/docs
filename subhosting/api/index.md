@@ -4,6 +4,15 @@ oldUrl:
   - /deploy/api/rest/
 ---
 
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
+<a href="https://api.deno.com/v2/docs">v2 API</a>. See the
+<a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
+details.
+
+:::
+
 To build Subhosting with Deno Deploy, it helps to understand some key resources
 within the system. These resources are also represented in the
 [REST API](../api/index.md).
@@ -111,7 +120,7 @@ deployments at the same time.
 
 To use KV with Subhosting:
 
-- [Create a database using the API](https://docs.deno.com/deploy/kv/manual)
+- [Create a database using the API](/deploy/kv/manual)
 - When you create a deployment using the Subhosting API, specify the database
   you created.
 

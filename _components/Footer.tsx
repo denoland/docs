@@ -1,33 +1,32 @@
 export default function Footer_new() {
   return (
-    <footer>
-      <nav aria-labelledby="footer-navigation" className="footer-nav">
+    <footer className="text-smaller bg-gray-50 dark:bg-gray-950 p-4 pt-12 sm:px-8 border-t border-t-foreground-tertiary">
+      <nav className="flex flex-col gap-x-4 gap-y-12 max-w-7xl md:flex-row md:flex-wrap md:justify-between md:w-full md:gap-y-8 md:mx-auto">
         {data.map((category) => (
-          <section className="footer-section">
-            <h3 class="footer-section-heading">{category.title}</h3>
-            <ul class="footer-list">
+          <section className="flex-auto">
+            <h3 className="mb-2 uppercase font-bold text-foreground-primary whitespace-pre">
+              {category.title}
+            </h3>
+            <ul className="m-0 p-0 pl-3 border-l border-l-background-tertiary list-none">
               {category.items.map((item) => (
                 <li>
                   <a
-                    class="footer-link"
+                    className="block mb-2 hover:text-primary hover:underline"
                     href={item.to ?? item.href}
-                  >
-                    {item.label}
-                  </a>
+                    dangerouslySetInnerHTML={{ __html: item.label }}
+                  />
                 </li>
               ))}
             </ul>
           </section>
         ))}
       </nav>
-      <p class="copyright">
+      <p className="m-0 mt-16 mx-auto text-center text-xs text-foreground-secondary">
         Copyright © {new Date().getFullYear()} the Deno authors.
       </p>
     </footer>
   );
 }
-
-export const css = "@import './_components/Footer.css';";
 
 interface FooterCategory {
   title: string;
@@ -51,20 +50,33 @@ const data = [
         to: "/runtime/",
       },
       {
-        label: "Deno Deploy",
-        to: "/deploy/manual/",
-      },
-      {
-        label: "Deno Subhosting",
-        to: "/subhosting/manual/",
-      },
-      {
         label: "Examples",
         href: "/examples/",
       },
       {
         label: "Standard Library",
         href: "https://jsr.io/@std",
+      },
+      {
+        label: "Deno API Reference",
+        href: "/api/deno/~/Deno",
+      },
+    ],
+  },
+  {
+    title: "Services Docs",
+    items: [
+      {
+        label: "Deno Deploy ",
+        to: "/deploy/",
+      },
+      {
+        label: "Deno Deploy Classic",
+        to: "/deploy/classic/",
+      },
+      {
+        label: "Deno Subhosting",
+        to: "/subhosting/manual/",
       },
     ],
   },
@@ -80,12 +92,20 @@ const data = [
         href: "https://github.com/denoland",
       },
       {
-        label: "Twitter",
-        href: "https://twitter.com/deno_land",
-      },
-      {
         label: "YouTube",
         href: "https://youtube.com/@deno_land",
+      },
+      {
+        label: "Bluesky",
+        href: "https://bsky.app/profile/deno.land",
+      },
+      {
+        label: "Mastodon",
+        href: "https://fosstodon.org/@deno_land",
+      },
+      {
+        label: "Twitter",
+        href: "https://twitter.com/deno_land",
       },
       {
         label: "Newsletter",
@@ -118,12 +138,12 @@ const data = [
     title: "Company",
     items: [
       {
-        label: "Blog",
-        href: "https://deno.com/blog",
+        label: "Deno Website",
+        href: "https://deno.com/",
       },
       {
-        label: "Careers",
-        href: "https://deno.com/jobs",
+        label: "Blog",
+        href: "https://deno.com/blog",
       },
       {
         label: "Merch",
@@ -131,7 +151,11 @@ const data = [
       },
       {
         label: "Privacy Policy",
-        href: "/deploy/manual/privacy-policy",
+        href: "/deploy/privacy_policy",
+      },
+      {
+        label: "LLMs",
+        href: "/llms.txt",
       },
     ],
   },

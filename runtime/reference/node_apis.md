@@ -3,8 +3,8 @@ title: Node APIs
 description: "A guide to Node.js compatibility in Deno. Learn about supported Node.js built-in modules, global objects, and how to use Node.js packages in Deno projects."
 templateEngine: [vto, md]
 oldUrl:
-- /runtime/manual/node/compatibility/
-- /runtime/manual/npm_nodejs/compatibility_mode/
+  - /runtime/manual/node/compatibility/
+  - /runtime/manual/npm_nodejs/compatibility_mode/
 ---
 
 Deno provides polyfills for a number of built-in Node.js modules and globals.

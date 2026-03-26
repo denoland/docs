@@ -284,9 +284,6 @@ for await (const file of Deno.readDir("types/node")) {
   Deno.removeSync(`types/node/${file.name}`);
 }
 
-// temporary, to work around swc bug
-delete modules["node__test"];
-
 // weird, investigate how to handle, or just ignore as assert references it
 delete modules["assert--strict"];
 delete modules["node__assert--strict"];

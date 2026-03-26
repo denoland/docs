@@ -1,4 +1,4 @@
-import { Sidebar } from "../types.ts";
+import { Sidebar, SidebarNav } from "../types.ts";
 
 export const sidebar = [
   {
@@ -38,8 +38,16 @@ export const sidebar = [
         href: "/subhosting/manual/events/",
       },
       {
-        title: "API Reference Docs",
+        title: "v1 API Reference (legacy)",
         href: "https://apidocs.deno.com",
+      },
+      {
+        title: "v2 API Reference",
+        href: "https://api.deno.com/v2/docs",
+      },
+      {
+        title: "Migration guide (v1 to v2)",
+        href: "/subhosting/manual/api_migration_guide/",
       },
     ],
   },
@@ -47,3 +55,21 @@ export const sidebar = [
 
 export const sectionTitle = "Subhosting";
 export const sectionHref = "/subhosting/manual/";
+export const SidebarNav = [
+  {
+    title: "Deno Deploy",
+    href: "/deploy/",
+  },
+  {
+    title: "Deno Sandbox",
+    href: "/sandbox/",
+  },
+  {
+    title: "Deploy Classic",
+    href: "/deploy/classic/",
+  },
+  {
+    title: "Subhosting",
+    href: "/subhosting/manual/",
+  },
+] satisfies SidebarNav;

@@ -8,7 +8,7 @@
  *
  * For more complex usecases, we don't simply want the output of some
  * command. In this case, we can spawn a subprocess and interact with
- * it.
+ * it using convenience methods for reading output streams.
  */
 
 // The Deno namespace has a unified api for interacting with the outside system
@@ -36,6 +36,9 @@ writer.releaseLock();
 // We must then close stdin
 await process.stdin.close();
 
-// We can now wait for the process to output the results
-const result = await process.output();
-console.log(new TextDecoder().decode(result.stdout));
+// We can now wait for the process to output the results using convenience methods
+const stdout = await process.stdout.text();
+console.log(stdout);
+
+// Wait for the process to complete
+await process.status;

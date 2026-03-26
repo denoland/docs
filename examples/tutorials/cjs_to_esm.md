@@ -3,8 +3,8 @@ title: "Updating from CommonJS to ESM"
 description: "Step-by-step guide to migrating Node.js projects from CommonJS to ESM modules. Learn about import/export syntax changes, module resolution differences, and how to use modern JavaScript features in Deno."
 url: /examples/cjs_to_esm_tutorial/
 oldUrl:
-- /runtime/manual/node/cjs_to_esm
-- /runtime/tutorials/cjs_to_esm/
+  - /runtime/manual/node/cjs_to_esm
+  - /runtime/tutorials/cjs_to_esm/
 ---
 
 If your Node.js project uses CommonJS modules (e.g. it uses `require`), you'll

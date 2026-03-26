@@ -1,6 +1,11 @@
-/** @jsxImportSource npm:react@18.2.0 */
-
 export default function ({ title, description }) {
+  if (!title) {
+    title = "Deno documentation";
+  }
+  if (!description) {
+    description = "Learn more at docs.deno.com";
+  }
+
   return (
     <div
       style={{

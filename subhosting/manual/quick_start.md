@@ -1,8 +1,17 @@
 ---
 title: Subhosting Quick Start
 oldUrl:
-- /deploy/manual/subhosting/projects_and_deployments/
+  - /deploy/manual/subhosting/projects_and_deployments/
 ---
+
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
+<a href="https://api.deno.com/v2/docs">v2 API</a>. See the
+<a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
+details.
+
+:::
 
 Looking for the smallest possible example that shows how to deploy code to
 Deno's isolate cloud? We've got you covered below, or you can skip to the

@@ -8,7 +8,6 @@ symbols:
       - from
       - symmetricKeySize
       - equals
-      - export
   publicDecrypt: This symbol is a non-functional stub.
   secureHeapUsed: This symbol is a non-functional stub.
   setEngine: This symbol is a non-functional stub.

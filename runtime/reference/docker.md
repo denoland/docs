@@ -19,8 +19,8 @@ WORKDIR /app
 # Copy source
 COPY . .
 
-# Compile the main app
-RUN deno cache main.ts
+# Install dependencies (use just `deno install` if deno.json has imports)
+RUN deno install --entrypoint main.ts
 
 # Run the app
 CMD ["deno", "run", "--allow-net", "main.ts"]
@@ -34,10 +34,11 @@ For smaller production images:
 
 ```dockerfile
 # Build stage
-FROM denoland/deno:latest as builder
+FROM denoland/deno:latest AS builder
 WORKDIR /app
 COPY . .
-RUN deno cache main.ts
+# Install dependencies (use just `deno install` if deno.json has imports)
+RUN deno install --entrypoint main.ts
 
 # Production stage
 FROM denoland/deno:latest
