@@ -783,40 +783,46 @@ Deno supports browser compatible lifecycle events:
   fired when a promise that has no rejection handler is rejected, ie. a promise
   that has no `.catch()` handler or a second argument to `.then()`.
 - [`rejectionhandled`](https://developer.mozilla.org/en-US/docs/Web/API/Window/rejectionhandled_event):
-  fired when a `.catch()` handler is added to a a promise that has already
+  fired when a `.catch()` handler is added to a promise that has already been
   rejected. This event is fired only if there's `unhandledrejection` listener
   installed that prevents propagation of the event (which would result in the
   program terminating with an error).
 - [`error`](https://developer.mozilla.org/en-US/docs/Web/API/Window/error_event):
-  TODO(bartlomieju)
+  fired when an uncaught exception occurs. If a listener is registered, it
+  prevents the default behavior of printing the error to the console and
+  terminating the program.
 
-Deno also support Node.js compatible lifecycle events:
+Deno also supports Node.js compatible lifecycle events:
 
 - [`process.on("beforeExit")`](https://nodejs.org/api/process.html#event-beforeexit):
   fired when the event loop has no more work to do and is about to exit.
   Scheduling more asynchronous work (like timers or network requests) will cause
   the program to continue. Counterpart to `beforeunload` Web event. Fires
-  immediatelly after `beforeunload` event.
+  immediately after `beforeunload` event.
 - [`process.on("exit")`](https://nodejs.org/api/process.html#event-exit): fired
   when the program has no more work to do. Scheduling more asynchronous work
   (like timers or network requests) **does not** keep the program alive.
   Counterpart to `unload` Web event. Fired immediately after `unload` event.
 - [`process.on("rejectionHandled")`](https://nodejs.org/api/process.html#event-rejectionhandled):
-  TODO(bartlomieju)
+  fired when a `.catch()` handler is added to a promise that has already been
+  rejected. Counterpart to `rejectionhandled` Web event. Fired immediately after
+  `rejectionhandled` event.
 - [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#event-uncaughtexception):
-  TODO(bartlomieju) Counterpart to `error` Web event. Fires immediatelly after
-  `error` event.
+  fired when an uncaught exception bubbles up. If a listener is registered, it
+  prevents the default behavior of printing the stack trace and exiting.
+  Counterpart to `error` Web event. Fired immediately after `error` event.
 - [`process.on("unhandledRejection")`](https://nodejs.org/api/process.html#event-unhandledrejection):
-  TODO(bartlomieju) Counterpart to `unhandledrejection` Web event. Fires
-  immediatelly after `unhandledrejection` event.
+  fired when a promise is rejected and no rejection handler is attached.
+  Counterpart to `unhandledrejection` Web event. Fired immediately after
+  `unhandledrejection` event.
 
 You can use these events to provide setup and cleanup code in your program.
 
-// TODO(bartlomieju): what about Node.js listeners? Are they awaited? Listeners
-for `load` events can be asynchronous and will be awaited, this event cannot be
-canceled. Listeners for `beforeunload` need to be synchronous and can be
-cancelled to keep the program running. Listeners for `unload` events need to be
-synchronous and cannot be cancelled.
+Listeners for `load` events can be asynchronous and will be awaited. This event
+cannot be canceled. Listeners for `beforeunload` need to be synchronous and can
+be cancelled to keep the program running. Listeners for `unload` events need to
+be synchronous and cannot be cancelled. The same rules apply to their Node.js
+counterparts (`beforeExit` and `exit`).
 
 ## main.ts
 
