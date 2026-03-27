@@ -91,7 +91,11 @@ const site = lume(
         createMarkdownSourceMiddleware({ root: "_site" }),
         createRoutingMiddleware(),
         createGAMiddleware({
-          addr: { transport: "tcp", hostname: "localhost", port: 3000 },
+          addr: {
+            transport: "tcp",
+            hostname: "localhost",
+            port: parseInt(Deno.env.get("PORT") || "3000"),
+          },
         }),
         createLlmsFilesMiddleware({ root: "_site" }),
         apiDocumentContentTypeMiddleware,
@@ -574,7 +578,7 @@ site.scopedUpdates(
 
 site.addEventListener("afterStartServer", () => {
   log.warn(
-    `${cliNow()} Server available at <green>http://localhost:3000</green>`,
+    `${cliNow()} Server available at <green>http://localhost:${site.server.options.port}</green>`,
   );
 });
 
