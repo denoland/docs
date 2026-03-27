@@ -1014,18 +1014,15 @@
       sm:rounded-md border-background-tertiary overflow-x-auto;
   }
 
-  pre:where(:hover, :focus) + .copyButton,
-  pre.highlight:where(:hover, :focus) + .copyButton {
-    @apply opacity-100;
-  }
-
   .copyButton {
-    @apply opacity-0 text-foreground-secondary transition-all duration-100
-      absolute top-2 right-2 p-1 rounded-sm;
+    background: var(--bgColor-muted, var(--color-canvas-subtle));
+    @apply text-foreground-secondary transition-all duration-100
+      absolute z-10 px-2 py-1 rounded-sm border
+      -top-4 sm:right-2 right-0 border-foreground-tertiary cursor-pointer;
 
     &:hover,
     &:focus {
-      @apply opacity-100 bg-foreground-quaternary;
+      @apply text-foreground-primary bg-foreground-quaternary;
     }
 
     &:active {
@@ -1039,7 +1036,7 @@
 
   .markdownBlockTitle {
     background: var(--bgColor-muted, var(--color-canvas-subtle));
-    @apply px-2 py-1 leading-none rounded-sm border text-xs font-semibold z-10
+    @apply px-2 py-1.5 leading-none rounded-sm border text-xs font-semibold z-10
       relative w-max -mb-4! text-foreground-primary sm:left-2 top-2
       border-foreground-tertiary;
   }
