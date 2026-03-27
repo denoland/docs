@@ -230,13 +230,13 @@ function renderOption(group: string, arg: ArgType, helpers: Lume.Helpers) {
       <div class="flex items-baseline justify-between gap-4 flex-wrap">
         <div class="flex items-baseline gap-2">
           <code class="text-sm font-semibold">
-            {docsLink
-              ? <a href={docsLink}>{flagDisplay}</a>
-              : flagDisplay}
+            {docsLink ? <a href={docsLink}>{flagDisplay}</a> : flagDisplay}
           </code>
           {valueType && (
             <span class="text-xs text-foreground-secondary">
-              {"<"}{valueType}{">"}
+              {"<"}
+              {valueType}
+              {">"}
               {optional && (
                 <span class="text-foreground-tertiary ml-1">optional</span>
               )}
