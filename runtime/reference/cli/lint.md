@@ -20,22 +20,22 @@ bugs, and stylistic issues. For a broader overview, see
 
 Lint all TypeScript and JavaScript files in the current directory:
 
-```sh
-deno lint
+```sh title="Terminal"
+$ deno lint
 ```
 
 Lint specific files or directories:
 
-```sh
-deno lint src/ main.ts
+```sh title="Terminal"
+$ deno lint src/ main.ts
 ```
 
 ## Watch mode
 
 Automatically re-lint files when they change:
 
-```sh
-deno lint --watch
+```sh title="Terminal"
+$ deno lint --watch
 ```
 
 ## Using in CI
@@ -43,18 +43,18 @@ deno lint --watch
 `deno lint` exits with a non-zero status code when it finds violations, making
 it suitable for CI pipelines:
 
-```sh
-deno lint
-deno fmt --check
-deno test
+```sh title="Terminal"
+$ deno lint
+$ deno fmt --check
+$ deno test
 ```
 
 ## Available rules
 
 Deno's linter includes over 100 rules. View all available rules:
 
-```sh
-deno lint --rules
+```sh title="Terminal"
+$ deno lint --rules
 ```
 
 For a full list with documentation, visit the [lint rules](/lint/) reference.
@@ -97,8 +97,8 @@ Specify which files to lint in `deno.json`:
 
 You can also exclude files from the command line:
 
-```sh
-deno lint --ignore=dist/,build/
+```sh title="Terminal"
+$ deno lint --ignore=dist/,build/
 ```
 
 ## Lint plugins

@@ -10,24 +10,24 @@ description: "Remove cached dependencies for a clean start"
 
 ## Basic usage
 
-```bash
-deno clean
+```sh title="Terminal"
+$ deno clean
 ```
 
 ## Dry run
 
 Preview what would be deleted without actually removing anything:
 
-```bash
-deno clean --dry-run
+```sh title="Terminal"
+$ deno clean --dry-run
 ```
 
 ## Keeping specific caches
 
 Use `--except` to preserve certain cache types while cleaning the rest:
 
-```bash
-deno clean --except=npm,jsr
+```sh title="Terminal"
+$ deno clean --except=npm,jsr
 ```
 
 ## When to use this

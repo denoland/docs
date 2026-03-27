@@ -13,22 +13,22 @@ enabled by default**.
 
 ## Basic usage
 
-```bash
-deno eval "console.log('Hello from Deno')"
+```sh title="Terminal"
+$ deno eval "console.log('Hello from Deno')"
 ```
 
 TypeScript works out of the box:
 
-```bash
-deno eval "const greeting: string = 'Hello'; console.log(greeting)"
+```sh title="Terminal"
+$ deno eval "const greeting: string = 'Hello'; console.log(greeting)"
 ```
 
 ## CommonJS support
 
 CommonJS modules are automatically recognized and supported:
 
-```bash
-deno eval "const path = require('path'); console.log(path.join('a', 'b'))"
+```sh title="Terminal"
+$ deno eval "const path = require('path'); console.log(path.join('a', 'b'))"
 ```
 
 ## Printing expression results
@@ -36,11 +36,11 @@ deno eval "const path = require('path'); console.log(path.join('a', 'b'))"
 Use `--print` (or `-p`) to evaluate an expression and print its result, similar
 to `node -e`:
 
-```bash
-deno eval -p "1 + 2"
+```sh title="Terminal"
+$ deno eval -p "1 + 2"
 # 3
 
-deno eval -p "Deno.version"
+$ deno eval -p "Deno.version"
 # { deno: "2.x.x", v8: "...", typescript: "..." }
 ```
 
@@ -48,8 +48,8 @@ deno eval -p "Deno.version"
 
 Combine with piped input for quick data processing:
 
-```bash
-echo '{"name":"deno"}' | deno eval -p "
+```sh title="Terminal"
+$ echo '{"name":"deno"}' | deno eval -p "
   const text = await new Response(Deno.stdin.readable).text();
   JSON.parse(text).name
 "

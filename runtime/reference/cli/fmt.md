@@ -19,22 +19,22 @@ that auto-formats your code to a consistent style. For a broader overview, see
 
 Format all supported files in the current directory:
 
-```sh
-deno fmt
+```sh title="Terminal"
+$ deno fmt
 ```
 
 Format specific files or directories:
 
-```sh
-deno fmt main.ts src/
+```sh title="Terminal"
+$ deno fmt main.ts src/
 ```
 
 ## Watch mode
 
 Automatically re-format files when they change:
 
-```sh
-deno fmt --watch
+```sh title="Terminal"
+$ deno fmt --watch
 ```
 
 ## Checking formatting in CI
@@ -42,23 +42,23 @@ deno fmt --watch
 Use `--check` to verify files are formatted without modifying them. The command
 exits with a non-zero status code if any files are unformatted:
 
-```sh
-deno fmt --check
+```sh title="Terminal"
+$ deno fmt --check
 ```
 
 Add `--fail-fast` to stop on the first unformatted file instead of reporting all
 of them, which is useful in large codebases:
 
-```sh
-deno fmt --check --fail-fast
+```sh title="Terminal"
+$ deno fmt --check --fail-fast
 ```
 
 ## Formatting stdin
 
 Format code piped through stdin — useful for editor integrations:
 
-```sh
-cat main.ts | deno fmt -
+```sh title="Terminal"
+$ cat main.ts | deno fmt -
 ```
 
 ## Configuring the formatter
@@ -96,8 +96,8 @@ Specify which files to format in `deno.json`:
 
 You can also exclude files from the command line:
 
-```sh
-deno fmt --ignore=dist/,build/
+```sh title="Terminal"
+$ deno fmt --ignore=dist/,build/
 ```
 
 ## Supported file types

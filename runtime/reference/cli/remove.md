@@ -13,14 +13,14 @@ the inverse of [`deno add`](/runtime/reference/cli/add/).
 
 Remove a package:
 
-```bash
-deno remove @std/path
+```sh title="Terminal"
+$ deno remove @std/path
 ```
 
 Remove multiple packages at once:
 
-```bash
-deno remove @std/path @std/assert npm:express
+```sh title="Terminal"
+$ deno remove @std/path @std/assert npm:express
 ```
 
 ## Where dependencies are removed from

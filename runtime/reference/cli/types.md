@@ -14,14 +14,14 @@ This is useful for editors and tools that need Deno's type information.
 
 Print type declarations to stdout:
 
-```bash
-deno types
+```sh title="Terminal"
+$ deno types
 ```
 
 Save to a file for use with an editor or type checker:
 
-```bash
-deno types > deno.d.ts
+```sh title="Terminal"
+$ deno types > deno.d.ts
 ```
 
 ## When to use this

@@ -21,14 +21,14 @@ export default {
 } satisfies Deno.ServeDefaultExport;
 ```
 
-```bash
-deno serve server.ts
+```sh title="Terminal"
+$ deno serve server.ts
 ```
 
 By default, the server listens on port **8000**. Override it with `--port`:
 
-```bash
-deno serve --port=3000 server.ts
+```sh title="Terminal"
+$ deno serve --port=3000 server.ts
 ```
 
 ## Routing requests
@@ -56,24 +56,24 @@ export default {
 By default, `deno serve` listens on `0.0.0.0`. Use `--host` to bind to a
 specific interface:
 
-```bash
-deno serve --host=127.0.0.1 server.ts
+```sh title="Terminal"
+$ deno serve --host=127.0.0.1 server.ts
 ```
 
 ## Horizontal scaling
 
 Run multiple server instances across CPU cores for better throughput:
 
-```bash
-deno serve --parallel server.ts
+```sh title="Terminal"
+$ deno serve --parallel server.ts
 ```
 
 ## Watch mode
 
 Restart the server automatically when files change:
 
-```bash
-deno serve --watch server.ts
+```sh title="Terminal"
+$ deno serve --watch server.ts
 ```
 
 ## Permissions
@@ -81,6 +81,6 @@ deno serve --watch server.ts
 `deno serve` automatically grants network permissions needed to listen.
 Additional permissions (like file reads) must be granted explicitly:
 
-```bash
-deno serve --allow-read server.ts
+```sh title="Terminal"
+$ deno serve --allow-read server.ts
 ```

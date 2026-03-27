@@ -14,34 +14,34 @@ It is similar to `npx` in the npm ecosystem.
 For convenience, you can install `deno x` as a standalone `dx` binary that runs
 with all permissions by default:
 
-```bash
-deno x --install-alias
+```sh title="Terminal"
+$ deno x --install-alias
 ```
 
 Then use it directly:
 
-```bash
-dx npm:create-vite my-app
+```sh title="Terminal"
+$ dx npm:create-vite my-app
 ```
 
 You can customize the alias name:
 
-```bash
-deno x --install-alias=denox
+```sh title="Terminal"
+$ deno x --install-alias=denox
 ```
 
 ## Basic usage
 
 Run an npm package:
 
-```bash
-deno x npm:create-vite my-app
+```sh title="Terminal"
+$ deno x npm:create-vite my-app
 ```
 
 Run a JSR package:
 
-```bash
-deno x jsr:@std/http/file-server
+```sh title="Terminal"
+$ deno x jsr:@std/http/file-server
 ```
 
 ## How it works
@@ -54,12 +54,12 @@ added to your project's `deno.json` or `package.json`.
 
 The executed package runs with the permissions you specify:
 
-```bash
-deno x --allow-read --allow-net npm:serve .
+```sh title="Terminal"
+$ deno x --allow-read --allow-net npm:serve .
 ```
 
 Or grant all permissions:
 
-```bash
-deno x -A npm:create-vite my-app
+```sh title="Terminal"
+$ deno x -A npm:create-vite my-app
 ```

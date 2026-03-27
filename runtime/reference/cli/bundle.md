@@ -12,14 +12,14 @@ JavaScript file.
 
 ## Basic usage
 
-```bash
-deno bundle main.ts output.js
+```sh title="Terminal"
+$ deno bundle main.ts output.js
 ```
 
 The output file can then be run with Deno or in other JavaScript runtimes:
 
-```bash
-deno run output.js
+```sh title="Terminal"
+$ deno run output.js
 ```
 
 For more on bundling strategies with Deno, see the

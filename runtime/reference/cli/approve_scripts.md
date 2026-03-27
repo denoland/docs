@@ -14,8 +14,8 @@ these scripts by default for security reasons.
 
 Review and approve pending scripts interactively:
 
-```bash
-deno approve-scripts
+```sh title="Terminal"
+$ deno approve-scripts
 ```
 
 This will show you which packages have lifecycle scripts that haven't been

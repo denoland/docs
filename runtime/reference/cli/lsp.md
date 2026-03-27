@@ -15,8 +15,8 @@ provide features like intellisense, code formatting, and more.
 
 ## Usage
 
-```bash
-deno lsp
+```sh title="Terminal"
+$ deno lsp
 ```
 
 The language server communicates over stdin/stdout using the
