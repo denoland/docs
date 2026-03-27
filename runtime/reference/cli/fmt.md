@@ -37,7 +37,7 @@ Automatically re-format files when they change:
 $ deno fmt --watch
 ```
 
-## Checking formatting in CI
+## Check formatting in CI
 
 Use `--check` to verify files are formatted without modifying them. The command
 exits with a non-zero status code if any files are unformatted:
