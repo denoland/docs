@@ -14,7 +14,7 @@ description: "Upgrade Deno to the latest, or any specific version"
 Use this command without any options to upgrade Deno to the latest available
 version:
 
-```sh title=">_"
+```sh
 deno upgrade
 Checking for latest version
 Version has been found
@@ -28,7 +28,7 @@ Upgrade done successfully
 
 You can specify a particular version to upgrade to:
 
-```sh title=">_"
+```sh
 deno upgrade --version 1.37.0
 Checking for version 1.37.0
 Version has been found
@@ -43,7 +43,7 @@ Upgrade done successfully
 Use the `--dry-run` flag to see what would be upgraded without actually
 performing the upgrade:
 
-```sh title=">_"
+```sh
 deno upgrade --dry-run
 Checking for latest version
 Version has been found
@@ -56,7 +56,7 @@ The `--quiet` flag suppresses diagnostic output during the upgrade process. When
 used with `deno upgrade`, it will hide progress indicators, download
 information, and success messages.
 
-```sh title=">_"
+```sh
 deno upgrade --quiet
 ```
 
@@ -76,14 +76,14 @@ Use the `--checksum` flag to verify a downloaded binary against a known SHA-256
 hash. This protects against tampering in CI environments and security-sensitive
 setups:
 
-```sh title=">_"
+```sh
 deno upgrade --checksum=<sha256-hash> 2.7.0
 ```
 
 SHA-256 checksums are published as `.sha256sum` files alongside release archives
 on GitHub:
 
-```sh title=">_"
+```sh
 curl -sL https://github.com/denoland/deno/releases/download/v2.7.0/deno-x86_64-unknown-linux-gnu.zip.sha256sum
 ```
 
@@ -92,7 +92,7 @@ curl -sL https://github.com/denoland/deno/releases/download/v2.7.0/deno-x86_64-u
 By default, Deno will upgrade from the official GitHub releases. You can specify
 the `--canary` build flag for the latest canary build:
 
-```sh title=">_"
+```sh
 # Upgrade to the latest canary build
 deno upgrade --canary
 ```

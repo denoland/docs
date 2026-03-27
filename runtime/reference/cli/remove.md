@@ -13,13 +13,13 @@ the inverse of [`deno add`](/runtime/reference/cli/add/).
 
 Remove a package:
 
-```sh title=">_"
+```sh
 deno remove @std/path
 ```
 
 Remove multiple packages at once:
 
-```sh title=">_"
+```sh
 deno remove @std/path @std/assert npm:express
 ```
 

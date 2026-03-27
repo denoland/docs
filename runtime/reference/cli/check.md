@@ -14,13 +14,13 @@ early. For more on TypeScript in Deno, see the
 
 ## Basic usage
 
-```sh title=">_"
+```sh
 deno check main.ts
 ```
 
 Check multiple files:
 
-```sh title=">_"
+```sh
 deno check src/server.ts src/utils.ts
 ```
 
@@ -29,7 +29,7 @@ deno check src/server.ts src/utils.ts
 By default, only local modules are type-checked. Use `--all` to also type-check
 remote dependencies:
 
-```sh title=">_"
+```sh
 deno check --all main.ts
 ```
 
@@ -38,7 +38,7 @@ deno check --all main.ts
 If you have a JavaScript project and want to type-check it without adding
 `// @ts-check` to every file, use the `--check-js` flag:
 
-```sh title=">_"
+```sh
 deno check --check-js main.js
 ```
 
@@ -47,7 +47,7 @@ deno check --check-js main.js
 `deno check` exits with a non-zero status code if there are type errors, making
 it suitable for CI pipelines:
 
-```sh title=">_"
+```sh
 deno check main.ts && echo "Types OK"
 ```
 
@@ -57,7 +57,7 @@ default, so you don't need a separate `deno check` step if you're already
 running tests. Use `deno check` when you want to type-check without running
 anything — for example, as a fast early step in CI:
 
-```sh title=">_"
+```sh
 deno check main.ts
 deno lint
 deno test

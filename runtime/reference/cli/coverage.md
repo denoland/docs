@@ -21,7 +21,7 @@ You can customize the inclusions and exclusions by using the `--include` and
 You can expand the coverage to include files that are not on the local file
 system by using the `--include` option and customizing the regex pattern.
 
-```sh title=">_"
+```sh
 deno coverage --include="^file:|https:"
 ```
 
@@ -34,7 +34,7 @@ are excluded by default.
 
 This is equivalent to:
 
-```sh title=">_"
+```sh
 deno coverage --exclude="test\.(js|mjs|ts|jsx|tsx)$"
 ```
 
@@ -134,13 +134,13 @@ coverage reports in the
 [lcov format](https://github.com/linux-test-project/lcov?tab=readme-ov-file) (a
 standard file format used to describe code coverage data), or in html.
 
-```sh title=">_"
+```sh
 deno coverage --lcov --output=cov.lcov
 ```
 
 This lcov file can be used with other tools that support the lcov format.
 
-```sh title=">_"
+```sh
 deno coverage --html
 ```
 
@@ -150,14 +150,14 @@ This will output a coverage report as a html file
 
 Generate a coverage report from the default coverage profile in your workspace
 
-```sh title=">_"
+```sh
 deno test --coverage
 deno coverage
 ```
 
 Generate a coverage report from a coverage profile with a custom name
 
-```sh title=">_"
+```sh
 deno test --coverage=custom_profile_name
 deno coverage custom_profile_name
 ```
@@ -173,13 +173,13 @@ deno coverage custom_profile_name
 Only include coverage that matches a specific pattern - in this case, only
 include tests from main.ts
 
-```sh title=">_"
+```sh
 deno coverage --include="main.ts"
 ```
 
 Export test coverage from the default coverage profile to an lcov file
 
-```sh title=">_"
+```sh
 deno test --coverage
 deno coverage --lcov --output=cov.lcov
 ```

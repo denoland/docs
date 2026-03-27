@@ -23,7 +23,7 @@ Deno.bench("URL parsing", () => {
 
 Secondly, run the benchmark using the `deno bench` subcommand.
 
-```sh title=">_"
+```sh
 deno bench url_bench.ts
 Check file:///path/to/url_bench.ts
     CPU | 12th Gen Intel(R) Core(TM) i3-12100
@@ -155,7 +155,7 @@ Deno.bench("performance.now()", { group: "timing" }, () => {
 });
 ```
 
-```sh title=">_"
+```sh
 deno bench time_bench.ts
     CPU | 12th Gen Intel(R) Core(TM) i3-12100
 Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
@@ -190,7 +190,7 @@ The glob expands to:
 - or files ending with `.bench.{ts, tsx, mts, js, mjs, jsx}`,
 - or files ending with `_bench.{ts, tsx, mts, js, mjs, jsx}`
 
-```sh title=">_"
+```sh
 # Run all benches in the current directory and all sub-directories
 deno bench
 
@@ -204,7 +204,7 @@ deno bench my_bench.ts
 > ⚠️ If you want to pass additional CLI arguments to the bench files use `--` to
 > inform Deno that remaining arguments are scripts arguments.
 
-```sh title=">_"
+```sh
 # Pass additional arguments to the bench file
 deno bench my_bench.ts -- -e --foo --bar
 ```
@@ -216,7 +216,7 @@ benching.
 To see all runtime options with `deno bench`, you can reference the command line
 help:
 
-```sh title=">_"
+```sh
 deno help bench
 ```
 
@@ -251,14 +251,14 @@ Deno.bench({
 This command will run all of these benches because they all contain the word
 "bench".
 
-```sh title=">_"
+```sh
 deno bench --filter "bench" benchmarks/
 ```
 
 On the flip side, the following command uses a pattern and will run the second
 and third benchmarks.
 
-```sh title=">_"
+```sh
 deno bench --filter "/bench-*\d/" benchmarks/
 ```
 
@@ -310,7 +310,7 @@ Deno.bench({
 
 To retrieve the output as JSON, use the `--json` flag:
 
-```sh title=">_"
+```sh
 deno bench my_bench.ts --json
 {
   "version": 1,

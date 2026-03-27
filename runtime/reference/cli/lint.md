@@ -20,13 +20,13 @@ bugs, and stylistic issues. For a broader overview, see
 
 Lint all TypeScript and JavaScript files in the current directory:
 
-```sh title=">_"
+```sh
 deno lint
 ```
 
 Lint specific files or directories:
 
-```sh title=">_"
+```sh
 deno lint src/ main.ts
 ```
 
@@ -34,7 +34,7 @@ deno lint src/ main.ts
 
 Automatically re-lint files when they change:
 
-```sh title=">_"
+```sh
 deno lint --watch
 ```
 
@@ -43,7 +43,7 @@ deno lint --watch
 `deno lint` exits with a non-zero status code when it finds violations, making
 it suitable for CI pipelines:
 
-```sh title=">_"
+```sh
 deno lint
 deno fmt --check
 deno test
@@ -53,7 +53,7 @@ deno test
 
 Deno's linter includes over 100 rules. View all available rules:
 
-```sh title=">_"
+```sh
 deno lint --rules
 ```
 
@@ -97,7 +97,7 @@ Specify which files to lint in `deno.json`:
 
 You can also exclude files from the command line:
 
-```sh title=">_"
+```sh
 deno lint --ignore=dist/,build/
 ```
 

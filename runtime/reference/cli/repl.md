@@ -16,7 +16,7 @@ The REPL provides a couple of special variables, that are always available:
 | _          | Yields the last evaluated expression |
 | _error     | Yields the last thrown error         |
 
-```sh title=">_"
+```sh
 Deno 1.14.3
 exit using ctrl+d or close()
 > "hello world!"
@@ -44,7 +44,7 @@ The REPL provides several functions in the global scope:
 into the REPL. This is useful for importing some code you commonly use in the
 REPL, or modifying the runtime in some way:
 
-```sh title=">_"
+```sh
 deno repl --allow-net --eval 'import { assert } from "jsr:@std/assert@1"'
 Deno 1.45.3
 exit using ctrl+d, ctrl+c, or close()
@@ -68,7 +68,7 @@ reloaded via the `--reload` flag.
 If `--eval` is also specified, then `--eval-file` files are run before the
 `--eval` code.
 
-```sh title=">_"
+```sh
 deno repl --eval-file=https://docs.deno.com/examples/welcome.ts,https://docs.deno.com/examples/local.ts
 Download https://docs.deno.com/examples/welcome.ts
 Welcome to Deno!
@@ -87,7 +87,7 @@ directory. It will not try to resolve them relative to the code file's location.
 This can cause "Module not found" errors when `--eval-file` is used with module
 files:
 
-```sh title=">_"
+```sh
 deno repl --eval-file=https://jsr.io/@std/encoding/1.0.0/ascii85.ts
 error in --eval-file file https://jsr.io/@std/encoding/1.0.0/ascii85.ts. Uncaught TypeError: Module not found "file:///home/_validate_binary_like.ts".
     at async <anonymous>:2:13
@@ -101,7 +101,7 @@ exit using ctrl+d or close()
 Tab completions are a crucial feature for quick navigation in the REPL. After
 hitting `tab` key, Deno will now show a list of all possible completions.
 
-```sh title=">_"
+```sh
 deno repl
 Deno 1.45.3
 exit using ctrl+d or close()

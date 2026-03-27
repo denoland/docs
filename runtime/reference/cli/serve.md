@@ -22,13 +22,13 @@ export default {
 } satisfies Deno.ServeDefaultExport;
 ```
 
-```sh title=">_"
+```sh
 deno serve server.ts
 ```
 
 By default, the server listens on port **8000**. Override it with `--port`:
 
-```sh title=">_"
+```sh
 deno serve --port=3000 server.ts
 ```
 
@@ -57,7 +57,7 @@ export default {
 By default, `deno serve` listens on `0.0.0.0`. Use `--host` to bind to a
 specific interface:
 
-```sh title=">_"
+```sh
 deno serve --host=127.0.0.1 server.ts
 ```
 
@@ -65,7 +65,7 @@ deno serve --host=127.0.0.1 server.ts
 
 Run multiple server instances across CPU cores for better throughput:
 
-```sh title=">_"
+```sh
 deno serve --parallel server.ts
 ```
 
@@ -73,7 +73,7 @@ deno serve --parallel server.ts
 
 Restart the server automatically when files change:
 
-```sh title=">_"
+```sh
 deno serve --watch server.ts
 ```
 
@@ -83,6 +83,6 @@ deno serve --watch server.ts
 `--allow-net`. Additional permissions (like file reads) must be granted
 explicitly:
 
-```sh title=">_"
+```sh
 deno serve --allow-read server.ts
 ```

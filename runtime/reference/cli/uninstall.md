@@ -11,7 +11,7 @@ description: "Remove a dependency from your project or from your global cache"
 
 Remove dependencies specified in `deno.json` or `package.json`:
 
-```sh title=">_"
+```sh
 deno add npm:express
 Add npm:express@5.0.0
 
@@ -23,7 +23,7 @@ cat deno.json
 }
 ```
 
-```sh title=">_"
+```sh
 deno uninstall express
 Removed express
 
@@ -41,7 +41,7 @@ You can also use `deno remove` which is an alias to `deno uninstall [PACKAGES]`
 
 You can remove multiple dependencies at once:
 
-```sh title=">_"
+```sh
 deno add npm:express jsr:@std/http
 Added npm:express@5.0.0
 Added jsr:@std/http@1.0.7
@@ -55,7 +55,7 @@ cat deno.json
 }
 ```
 
-```sh title=">_"
+```sh
 deno remove express @std/http
 Removed express
 Removed @std/http
@@ -75,7 +75,7 @@ still persist in the global cache for future use.
 
 If your project contains `package.json`, `deno uninstall` can work with it too:
 
-```sh title=">_"
+```sh
 cat package.json
 {
   "dependencies": {
@@ -96,12 +96,12 @@ cat package.json
 
 Uninstall `serve`
 
-```sh title=">_"
+```sh
 deno uninstall --global serve
 ```
 
 Uninstall `serve` from a specific installation root
 
-```sh title=">_"
+```sh
 deno uninstall -g --root /usr/local/bin serve
 ```

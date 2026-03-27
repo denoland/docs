@@ -9,7 +9,7 @@ description: "Scaffold a new Deno project with tests and configuration"
 
 ## Examples
 
-```sh title=">_"
+```sh
 deno init
 ✅ Project initialized
 Run these commands to get started
@@ -42,7 +42,7 @@ numbers together and the `main_test.ts` file contains a test for this function.
 You can also specify an argument to `deno init` to initialize a project in a
 specific directory:
 
-```sh title=">_"
+```sh
 deno init my_deno_project
 ✅ Project initialized
 
@@ -65,7 +65,7 @@ Run these commands to get started
 By running `deno init --lib` Deno will bootstrap a project that is ready to be
 published on [JSR](https://jsr.io/).
 
-```sh title=">_"
+```sh
 deno init --lib
 ✅ Project initialized
 
@@ -103,7 +103,7 @@ Inside `deno.json` you'll see that the entries for `name`, `exports` and
 Running `deno init --serve` bootstraps a web server that works with
 [`deno serve`](./serve).
 
-```sh title=">_"
+```sh
 deno init --serve
 ✅ Project initialized
 
@@ -138,7 +138,7 @@ Now, you can start your web server, which
 [watches for changes](/runtime/getting_started/command_line_interface/#watch-mode),
 by running `deno task dev`.
 
-```sh title=">_"
+```sh
 deno task dev
 Task dev deno serve --watch -R main.ts
 Watcher Process started.
@@ -150,7 +150,7 @@ deno serve: Listening on http://0.0.0.0:8000/
 Running `deno init --empty` bootstraps an empty project with a basic console
 log.
 
-```sh title=">_"
+```sh
 deno init --empty
 ✅ Project initialized
 
@@ -178,7 +178,7 @@ Now, you can run the project, which
 [watches for changes](/runtime/getting_started/command_line_interface/#watch-mode),
 by running `deno task dev`.
 
-```sh title=">_"
+```sh
 deno task dev
 Task dev deno run --watch main.ts
 Watcher Process started.
@@ -190,7 +190,7 @@ Hello world!
 You can append a `--lib` flag to add extra parameters to your `deno.json`, such
 as "name", "version" and an "exports" fields.
 
-```sh title=">_"
+```sh
 deno init my_deno_project --lib
 ✅ Project initialized
 ```

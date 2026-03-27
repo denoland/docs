@@ -14,7 +14,7 @@ these scripts by default for security reasons.
 
 Review and approve pending scripts interactively:
 
-```sh title=">_"
+```sh
 deno approve-scripts
 ```
 

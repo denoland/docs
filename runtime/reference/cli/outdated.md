@@ -27,7 +27,7 @@ For example, take a project with a `deno.json` file:
 
 and a lockfile that has `@std/fmt` at version `1.0.0`.
 
-```sh title=">_"
+```sh
 deno outdated
 ┌────────────────┬─────────┬────────┬────────┐
 │ Package        │ Current │ Update │ Latest │
@@ -47,7 +47,7 @@ Notice that `jsr:@std/async` is listed, even though there is no
 semver-compatible version to update to. If you would prefer to only show
 packages that have new compatible versions you can pass the `--compatible` flag.
 
-```sh title=">_"
+```sh
 deno outdated --compatible
 ┌────────────────┬─────────┬────────┬────────┐
 │ Package        │ Current │ Update │ Latest │
@@ -65,7 +65,7 @@ The `outdated` subcommand can also update dependencies with the `--update` flag.
 By default, it will only update dependencies to semver-compatible versions (i.e.
 it won't update to a breaking version).
 
-```sh title=">_"
+```sh
 deno outdated --update
 Updated 1 dependency:
  - jsr:@std/fmt 1.0.0 -> 1.0.3
@@ -74,7 +74,7 @@ Updated 1 dependency:
 To update to the latest versions (regardless of whether it's semver compatible),
 pass the `--latest` flag.
 
-```sh title=">_"
+```sh
 deno outdated --update --latest
 Updated 3 dependencies:
  - jsr:@std/async 1.0.1 -> 1.0.8
@@ -87,7 +87,7 @@ Updated 3 dependencies:
 The `outdated` subcommand also supports selecting which packages to operate on.
 This works with or without the `--update` flag.
 
-```sh title=">_"
+```sh
 deno outdated --update --latest chalk
 Updated 1 dependency:
  - npm:chalk 4.1.2 -> 5.3.0
@@ -99,7 +99,7 @@ also supported.
 For instance, to update all packages with the `@std` scope, except for
 `@std/fmt`:
 
-```sh title=">_"
+```sh
 deno outdated --update --latest "@std/*" "!@std/fmt"
 Updated 1 dependency:
  - jsr:@std/async 1.0.1 -> 1.0.8
@@ -112,7 +112,7 @@ in quotes to prevent the shell from trying to expand them.
 
 You can also select a specific version to update to by appending it after `@`.
 
-```sh title=">_"
+```sh
 deno outdated --update chalk@5.2 @std/async@1.0.6
 Updated 2 dependencies:
  - jsr:@std/async 1.0.1 -> 1.0.6
@@ -134,7 +134,7 @@ For instance, given a workspace:
 
 Running
 
-```sh title=">_"
+```sh
 deno outdated
 ```
 
@@ -144,7 +144,7 @@ in `./member-a/deno.json` or `./member-a/package.json`.
 To include all workspace members, pass the `--recursive` flag (the `-r`
 shorthand is also accepted).
 
-```sh title=">_"
+```sh
 deno outdated --recursive
 deno outdated --update --latest -r
 ```

@@ -10,7 +10,7 @@ can try out new APIs and features before they are finalized. Current unstable
 feature flags are listed on this page, and can also be found in the CLI help
 text by running:
 
-```sh title=">_"
+```sh
 deno --help
 ```
 
@@ -20,7 +20,7 @@ You can enable a feature flag when you run a Deno program from the command line
 by passing in the flag as an option to the CLI. Here's an example of running a
 program with the `--unstable-node-globals` flag enabled:
 
-```sh title=">_"
+```sh
 deno run --unstable-node-globals main.ts
 ```
 
@@ -49,7 +49,7 @@ noted below.
 Here's an example of setting the `--unstable-bare-node-builtins` flag via
 environment variable:
 
-```sh title=">_"
+```sh
 export DENO_UNSTABLE_BARE_NODE_BUILTINS=true
 ```
 

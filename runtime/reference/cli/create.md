@@ -12,7 +12,7 @@ packages that provide project templates.
 
 ## Usage
 
-```sh title=">_"
+```sh
 deno create [OPTIONS] [PACKAGE] [-- [ARGS]...]
 ```
 
@@ -47,25 +47,25 @@ export and runs it as the scaffolding script.
 
 Create a project from a JSR package:
 
-```sh title=">_"
+```sh
 deno create @fresh/init
 ```
 
 Create a project from an npm package:
 
-```sh title=">_"
+```sh
 deno create npm:vite my-app
 ```
 
 Using the `--npm` flag to treat unprefixed names as npm packages:
 
-```sh title=">_"
+```sh
 deno create --npm create-vite my-app
 ```
 
 Pass arguments to the template package:
 
-```sh title=">_"
+```sh
 deno create @fresh/init -- --force
 ```
 

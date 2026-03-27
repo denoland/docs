@@ -31,7 +31,7 @@ a `package.json` file, a local `node_modules` directory will be set up as well.
 Use this command to install particular packages and add them to `deno.json` or
 `package.json`.
 
-```sh title=">_"
+```sh
 deno install jsr:@std/testing npm:express
 ```
 
@@ -59,7 +59,7 @@ import * as colors from "jsr:@std/fmt/colors";
 import express from "npm:express";
 ```
 
-```sh title=">_"
+```sh
 deno install -e main.js
 Download jsr:@std/fmt
 Download npm:express
@@ -85,7 +85,7 @@ the specified CLI flags and main module. It is placed in the installation root.
 
 Example:
 
-```sh title=">_"
+```sh
 deno install --global --allow-net --allow-read jsr:@std/http/file-server
 Download jsr:@std/http/file-server...
 
@@ -95,7 +95,7 @@ Download jsr:@std/http/file-server...
 
 To change the executable name, use `-n`/`--name`:
 
-```sh title=">_"
+```sh
 deno install -g -N -R -n serve jsr:@std/http/file-server
 ```
 
@@ -110,7 +110,7 @@ The executable name is inferred by default:
 
 To change the installation root, use `--root`:
 
-```sh title=">_"
+```sh
 deno install -g -N -R --root /usr/local/bin jsr:@std/http/file-server
 ```
 
@@ -122,14 +122,14 @@ The installation root is determined, in order of precedence:
 
 These must be added to the path manually if required.
 
-```sh title=">_"
+```sh
 echo 'export PATH="$HOME/.deno/bin:$PATH"' >> ~/.bashrc
 ```
 
 You must specify permissions that will be used to run the script at installation
 time.
 
-```sh title=">_"
+```sh
 deno install -g -N -R jsr:@std/http/file-server -- -p 8080
 ```
 
@@ -156,7 +156,7 @@ if (import.meta.main) {
 When you create an executable script make sure to let users know by adding an
 example installation command to your repository:
 
-```sh title=">_"
+```sh
 # Install using deno install
 
 deno install -n awesome_cli https://example.com/awesome/cli.ts
@@ -168,7 +168,7 @@ Use this command to compile a package or script into a standalone,
 self-contained binary. The resulting executable can be distributed and run
 without requiring Deno to be installed on the target system.
 
-```sh title=">_"
+```sh
 deno install --global --compile -A npm:@anthropic-ai/claude-code
 ```
 
@@ -191,7 +191,7 @@ security vulnerability.
 You can still run these scripts by passing the `--allow-scripts=<packages>` flag
 when running `deno install`:
 
-```sh title=">_"
+```sh
 deno install --allow-scripts=npm:sqlite3
 ```
 
@@ -204,7 +204,7 @@ The `--quiet` flag suppresses diagnostic output when installing dependencies.
 When used with `deno install`, it will hide progress indicators, download
 information, and success messages.
 
-```sh title=">_"
+```sh
 deno install --quiet jsr:@std/http/file-server
 ```
 
@@ -215,12 +215,12 @@ pipelines.
 
 You can uninstall dependencies or binary script with `deno uninstall` command:
 
-```sh title=">_"
+```sh
 deno uninstall express
 Removed express
 ```
 
-```sh title=">_"
+```sh
 deno uninstall -g file-server
 deleted /Users/deno/.deno/bin/file-server
 ✅ Successfully uninstalled file-server

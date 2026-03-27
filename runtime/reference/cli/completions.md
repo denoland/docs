@@ -14,7 +14,7 @@ For example: `deno un` -> <kbd>Tab</kbd> -> `deno uninstall`.
 
 ### Configure Bash shell completion
 
-```sh title=">_"
+```sh
 deno completions bash > deno.bash
 
 if [ -d "/usr/local/etc/bash_completion.d/" ]; then
@@ -30,7 +30,7 @@ fi
 
 ### Configure PowerShell shell completion
 
-```sh title=">_"
+```sh
 deno completions powershell | Out-String | Invoke-Expression
 ```
 
@@ -38,7 +38,7 @@ deno completions powershell | Out-String | Invoke-Expression
 
 First add the following to your `.zshrc` file:
 
-```sh title=">_"
+```sh
 fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit
@@ -46,7 +46,7 @@ compinit
 
 Then run the following commands:
 
-```sh title=">_"
+```sh
 deno completions zsh > _deno
 mv _deno ~/.zsh/completion/_deno
 autoload -U compinit && compinit
@@ -54,7 +54,7 @@ autoload -U compinit && compinit
 
 ### Configure fish shell completion
 
-```sh title=">_"
+```sh
 deno completions fish > completions.fish
 chmod +x ./completions.fish
 ```
