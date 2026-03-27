@@ -12,19 +12,13 @@ description: "Run a JavaScript or TypeScript program from a file or URL with Den
 Run a local file:
 
 ```console
-deno run hello-world.ts
+deno run main.ts
 ```
 
 The `run` subcommand is optional — you can also just use `deno <file>`:
 
 ```console
-deno hello-world.ts
-```
-
-Run a remote module directly by URL:
-
-```console
-deno run https://docs.deno.com/examples/scripts/hello_world.ts
+deno main.ts
 ```
 
 By default, Deno runs programs in a sandbox without access to disk, network or
@@ -79,10 +73,10 @@ console if there are errors while you work.
 
 ## Running code from stdin
 
-You can pipe code from stdin and run it immediately with:
+You can pipe code from stdin and run it immediately:
 
 ```console
-curl https://docs.deno.com/examples/scripts/hello_world.ts | deno run -
+echo "console.log('hello')" | deno run -
 ```
 
 ## Terminate run

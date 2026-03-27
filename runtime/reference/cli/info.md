@@ -13,9 +13,8 @@ description: "Inspect the dependencies of your project"
 ## Example
 
 ```shell
-$ deno info jsr:@std/http@1.0.0-rc.5/file-server
-local: /home/lucacasonato/.cache/deno/deps/https/jsr.io/3a0e5ef03d2090c75c81daf771ed9a73009518adfe688c333dc11d8006dc3598
-emit: /home/lucacasonato/.cache/deno/gen/https/jsr.io/3a0e5ef03d2090c75c81daf771ed9a73009518adfe688c333dc11d8006dc3598.js
+$ deno info jsr:@std/http/file-server
+local: /home/user/.cache/deno/deps/https/jsr.io/...
 type: TypeScript
 dependencies: 40 unique
 size: 326.42KB
