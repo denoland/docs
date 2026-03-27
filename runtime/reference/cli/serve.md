@@ -60,7 +60,7 @@ specific interface:
 deno serve --host=127.0.0.1 server.ts
 ```
 
-## Parallel serving
+## Horizontal scaling
 
 Run multiple server instances across CPU cores for better throughput:
 

@@ -8,7 +8,8 @@ description: "Evaluate JavaScript and TypeScript code in the command line"
 ---
 
 `deno eval` executes a string of code directly from the command line without
-needing a file.
+needing a file. Unlike `deno run`, **`deno eval` runs with all permissions
+enabled by default**.
 
 ## Basic usage
 
@@ -20,6 +21,14 @@ TypeScript works out of the box:
 
 ```bash
 deno eval "const greeting: string = 'Hello'; console.log(greeting)"
+```
+
+## CommonJS support
+
+CommonJS modules are automatically recognized and supported:
+
+```bash
+deno eval "const path = require('path'); console.log(path.join('a', 'b'))"
 ```
 
 ## Printing expression results
@@ -44,21 +53,4 @@ echo '{"name":"deno"}' | deno eval -p "
   const text = await new Response(Deno.stdin.readable).text();
   JSON.parse(text).name
 "
-```
-
-## Permissions
-
-By default, eval runs in a sandbox. Grant permissions as needed:
-
-```bash
-deno eval --allow-net "
-  const resp = await fetch('https://api.github.com');
-  console.log(resp.status);
-"
-```
-
-Or grant all permissions with `-A`:
-
-```bash
-deno eval -A "console.log(Deno.cwd())"
 ```

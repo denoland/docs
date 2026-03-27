@@ -19,7 +19,7 @@ deno approve-scripts
 ```
 
 This will show you which packages have lifecycle scripts that haven't been
-approved yet and let you approve them.
+approved yet.
 
 ## Why lifecycle scripts are blocked by default
 
@@ -28,6 +28,4 @@ supply chain attack vector — malicious packages can execute code on your machi
 just by being installed.
 
 Deno takes a safer approach: lifecycle scripts must be explicitly approved
-before they run. See the
-[Native Node.js addons](/runtime/reference/cli/install/#native-nodejs-addons)
-section for more on how this works with `deno install --allow-scripts`.
+before they run.

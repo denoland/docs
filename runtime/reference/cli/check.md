@@ -50,8 +50,11 @@ it suitable for CI pipelines:
 deno check main.ts && echo "Types OK"
 ```
 
-Pair it with [`deno test`](/runtime/reference/cli/test/) and
-[`deno lint`](/runtime/reference/cli/lint/) for a full pre-merge check:
+Note that [`deno test`](/runtime/reference/cli/test/) and
+[`deno bench`](/runtime/reference/cli/bench/) already perform type-checking by
+default, so you don't need a separate `deno check` step if you're already
+running tests. Use `deno check` when you want to type-check without running
+anything — for example, as a fast early step in CI:
 
 ```bash
 deno check main.ts

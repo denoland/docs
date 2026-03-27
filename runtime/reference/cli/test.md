@@ -43,6 +43,15 @@ Skip type-checking:
 deno test --no-check
 ```
 
+## Permissions
+
+Tests run with the same [permission model](/runtime/fundamentals/security/) as
+`deno run`. Grant permissions for your test suite:
+
+```bash
+deno test --allow-read --allow-net
+```
+
 ## Watch mode
 
 Re-run tests automatically when files change:
@@ -128,12 +137,3 @@ deno test --doc
 ```
 
 See [Testing code in docs](/runtime/reference/documentation/) for details.
-
-## Permissions
-
-Tests run with the same [permission model](/runtime/fundamentals/security/) as
-`deno run`. Grant permissions for your test suite:
-
-```bash
-deno test --allow-read --allow-net
-```

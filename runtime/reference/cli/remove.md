@@ -25,6 +25,5 @@ deno remove @std/path @std/assert npm:express
 
 ## Where dependencies are removed from
 
-If your project has a `package.json`, npm packages will be removed from
-`dependencies` in `package.json`. Otherwise, packages are removed from the
-`imports` field in `deno.json`.
+`deno remove` will look at both `deno.json` and `package.json` (if present) and
+remove the matching dependency from whichever file it is found in.

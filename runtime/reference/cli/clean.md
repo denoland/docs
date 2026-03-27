@@ -6,13 +6,28 @@ openGraphTitle: "deno clean"
 description: "Remove cached dependencies for a clean start"
 ---
 
-`deno clean` removes Deno's global module cache directory. This forces all
-dependencies to be re-downloaded on the next run.
+`deno clean` removes Deno's global module cache directory.
 
 ## Basic usage
 
 ```bash
 deno clean
+```
+
+## Dry run
+
+Preview what would be deleted without actually removing anything:
+
+```bash
+deno clean --dry-run
+```
+
+## Keeping specific caches
+
+Use `--except` to preserve certain cache types while cleaning the rest:
+
+```bash
+deno clean --except=npm,jsr
 ```
 
 ## When to use this
@@ -21,4 +36,3 @@ Use `deno clean` when you need to:
 
 - Resolve issues caused by corrupted or stale cached modules
 - Free disk space used by cached dependencies
-- Start fresh after switching between Deno versions
