@@ -131,6 +131,9 @@ directories and any subdirectories in them.
 
 Definition: `--allow-read[=<PATH>...]` or `-R[=<PATH>...]`
 
+PATHs may be separated by comma (`,`) characters. To include a comma character
+in the PATH, it must be doubled. (Example: `this file,, contains a comma.txt`)
+
 ```sh
 # Allow all reads from file system
 deno run -R script.ts
@@ -246,6 +249,9 @@ Network access is granted using the `--allow-net` flag. This flag can be
 specified with a list of IP addresses or hostnames to allow access to specific
 network addresses.
 
+Hostnames do not allow subdomains, unless explicitly listed. To allow any
+subdomain for a hostname, `*` can be used as wildcard for any subdomain.
+
 Definition: `--allow-net[=<IP_OR_HOSTNAME>...]` or `-N[=<IP_OR_HOSTNAME>...]`
 
 ```sh
@@ -256,6 +262,9 @@ deno run --allow-net script.ts
 
 # Allow network access to github.com and jsr.io
 deno run --allow-net=github.com,jsr.io script.ts
+
+# Allow all subdomains for example.com
+deno run --allow-net="*.example.com" script.ts
 
 # A hostname at port 80:
 deno run --allow-net=example.com:80 script.ts
@@ -354,10 +363,9 @@ operating system release, system uptime, load average, network interfaces, and
 system memory information.
 
 Access to system information is granted using the `--allow-sys` flag. This flag
-can be specified with a list of allowed interfaces from the following list:
-`hostname`, `osRelease`, `osUptime`, `loadavg`, `networkInterfaces`,
-`systemMemoryInfo`, `uid`, and `gid`. These strings map to functions in the
-`Deno` namespace that provide OS info, like
+can be specified with a list of allowed interfaces from the list defined in
+[Deno.SysPermissionDescriptor](/api/deno/~/Deno.SysPermissionDescriptor). These
+strings map to functions in the `Deno` namespace that provide OS info, like
 [Deno.systemMemoryInfo](https://docs.deno.com/api/deno/~/Deno.SystemMemoryInfo).
 
 Definition: `--allow-sys[=<API_NAME>...]` or `-S[=<API_NAME>...]`

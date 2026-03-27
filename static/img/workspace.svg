@@ -11,14 +11,14 @@
   style="enable-background: new 0 0 100 100"
   xml:space="preserve"
 >
-  <style type="text/css">
-  .st0 {
+  <style
+    type="text/css"
+  >.st0 {
     fill: #f6b74e;
   }
   .st1 {
     fill: #d79b45;
-  }
-  </style>
+  }</style>
   <g>
     <path
       class="st0"

@@ -79,8 +79,17 @@
   --text-smaller: 0.8125rem;
 
   --font-sans:
-    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    "Inter",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    sans-serif;
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -351,8 +360,7 @@
       flex-direction: column;
       row-gap: 0.5rem;
     }
-    &
-      :where(
+    & :where(
         h1,
         h2,
         h3,
@@ -708,8 +716,8 @@
       }
     }
     .admonition {
-      @apply px-4 lg:px-6 pt-10 lg:pt-12 pb-4 rounded-md bg-gray-100 relative
-        overflow-clip text-sm flex flex-col gap-2;
+      @apply p-6 py-4 rounded-md relative bg-background-raw my-4
+        text-sm flex flex-col gap-2 border-2 dark:border leading-relaxed;
 
       a {
         @apply text-primary underline underline-offset-2;
@@ -724,27 +732,23 @@
       }
 
       .title {
-        @apply font-bold uppercase flex items-center mb-4 absolute top-0 left-0
-          right-0 py-2 lg:py-3 px-4 lg:px-6 bg-gray-100 leading-none;
+        @apply font-bold uppercase w-max max-w-full leading-none absolute -top-2 bg-background-raw z-10 px-2 left-4;
       }
       &:where(.info, .note, .tip) .title {
-        @apply text-runtime-700 bg-runtime-300 dark:bg-runtime-950
-          dark:text-runtime-300;
+        @apply text-runtime-700 dark:text-runtime-300;
       }
       &.info,
       &.note,
       &.tip {
-        @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
-          dark:border-runtime-950 border-runtime-200;
+        @apply border-runtime-500 dark:border-runtime;
       }
       &.caution,
       &.warning {
-        @apply bg-yellow-100 dark:bg-yellow-950/75 dark:border
-          dark:border-yellow-400 border-yellow-200;
+        @apply dark:border-orange-400 border-orange-300;
 
         .title {
-          @apply text-yellow-600 bg-yellow-200 dark:bg-yellow-400
-            dark:text-yellow-800;
+          @apply text-orange-400
+            dark:text-orange-400;
         }
       }
     }
@@ -815,11 +819,11 @@
     }
 
     @variant dark {
-      --color-background-raw: var(--color-black);
+      --color-background-raw: var(--color-gray-950);
       --color-background-primary: var(--color-gray-950);
       --color-background-secondary: var(--color-gray-900);
       --color-background-tertiary: var(--color-gray-800);
-      --color-foreground-primary: var(--color-gray-50);
+      --color-foreground-primary: var(--color-gray-100);
       --color-foreground-secondary: var(--color-gray-300);
       --color-foreground-tertiary: var(--color-gray-800);
       --color-foreground-quaternary: var(--color-gray-900);
@@ -841,11 +845,11 @@
     /* Apply only when no explicit theme class is set */
     :root:not(.light):not(.dark),
     :host(:not(.light):not(.dark)) {
-      --color-background-raw: var(--color-black);
+      --color-background-raw: var(--color-gray-950);
       --color-background-primary: var(--color-gray-950);
       --color-background-secondary: var(--color-gray-900);
       --color-background-tertiary: var(--color-gray-800);
-      --color-foreground-primary: var(--color-gray-50);
+      --color-foreground-primary: var(--color-gray-100);
       --color-foreground-secondary: var(--color-gray-300);
       --color-foreground-tertiary: var(--color-gray-800);
       --color-foreground-quaternary: var(--color-gray-900);
@@ -1010,18 +1014,15 @@
       sm:rounded-md border-background-tertiary overflow-x-auto;
   }
 
-  pre:where(:hover, :focus) + .copyButton,
-  pre.highlight:where(:hover, :focus) + .copyButton {
-    @apply opacity-100;
-  }
-
   .copyButton {
-    @apply opacity-0 text-foreground-secondary transition-all duration-100
-      absolute top-2 right-2 p-1 rounded-sm;
+    background: var(--bgColor-muted, var(--color-canvas-subtle));
+    @apply text-foreground-secondary transition-all duration-100
+      absolute z-10 px-2 py-1 rounded-xs border
+      top-1 -right-3 sm:right-1 border-foreground-tertiary cursor-pointer;
 
     &:hover,
     &:focus {
-      @apply opacity-100 bg-foreground-quaternary;
+      @apply text-foreground-primary bg-foreground-quaternary;
     }
 
     &:active {
@@ -1035,8 +1036,8 @@
 
   .markdownBlockTitle {
     background: var(--bgColor-muted, var(--color-canvas-subtle));
-    @apply px-2 py-1 leading-none rounded-sm border text-xs font-semibold z-10
-      relative w-max -mb-4! text-foreground-primary sm:left-2 top-2
+    @apply px-2 py-1.5 leading-none rounded-sm border text-xs font-semibold z-10
+      relative w-max -mb-4! text-foreground-primary sm:left-2 top-3.5
       border-foreground-tertiary;
   }
 
@@ -1387,9 +1388,9 @@
       @media (min-width: 64rem) {
         grid-template-columns:
           minmax(12rem, 1fr) minmax(24rem, 3fr) minmax(
-          12rem,
-          1fr
-        );
+            12rem,
+            1fr
+          );
       }
 
       .content {
@@ -2393,8 +2394,7 @@
     .namespaceItem
     .namespaceItemContent
     .namespaceItemContentSubItems
-    &
-    a {
+    & a {
     text-decoration-line: underline;
   }
   :is(
@@ -2477,8 +2477,7 @@
   }
   .ddoc
     .symbolGroup
-    article
-    > div:first-child
+    article > div:first-child
     > div:first-child
     > :not([hidden])
     ~ :not([hidden]) {

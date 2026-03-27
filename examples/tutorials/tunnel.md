@@ -139,22 +139,23 @@ Then we'll modify our Svelte page to display these values:
 
 ```svelte title="src/routes/+page.svelte"
 <script lang="ts">
-	export let data: {
-		message: string;
-		username: string;
-		accent: string;
-	};
+  export let data: {
+    message: string;
+    username: string;
+    accent: string;
+  };
 
-	const { message, username, accent } = data;
+  const { message, username, accent } = data;
 </script>
 
 <h1>Environment variable demo</h1>
 <p>
-    This message is read from <code>PUBLIC_TUTORIAL_MESSAGE</code>:<br />
-    <strong style="color: {accent}">{message}</strong>
+  This message is read from <code>PUBLIC_TUTORIAL_MESSAGE</code>:<br />
+  <strong style="color: {accent}">{message}</strong>
 </p>
 <p>
-    Hi <strong style="color: {accent}">{username}</strong>! Try editing your env variables and refresh the page to see the value change at build-time.
+  Hi <strong style="color: {accent}">{username}</strong>! Try editing your env
+  variables and refresh the page to see the value change at build-time.
 </p>
 ```
 
