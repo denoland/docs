@@ -29,7 +29,7 @@ export function add(x: number, y: number): number {
 }
 ```
 
-Running the Deno `doc` command, prints the function's JSDoc comment to `stdout`:
+Running the Deno `doc` command prints the function's JSDoc comment to `stdout`:
 
 ```sh title=">_"
 deno doc add.ts

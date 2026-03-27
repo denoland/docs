@@ -195,7 +195,7 @@ deno init my_deno_project --lib
 ✅ Project initialized
 ```
 
-The resulting `deno.json will be as follows:
+The resulting `deno.json` will be as follows:
 
 ```jsonc title="deno.json"
 {

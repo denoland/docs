@@ -55,11 +55,10 @@ in quotes to prevent the shell from trying to expand them.
 
 ### Updating to specific versions
 
-In addition to selecting packages to update, the `--update` flag also supports
-selecting the new _version_ specifying the version after `@`.
+You can also select a specific version to update to by appending it after `@`.
 
 ```sh title=">_"
-❯ deno update chalk@5.2 @std/async@1.0.6
+deno update chalk@5.2 @std/async@1.0.6
 Updated 2 dependencies:
  - jsr:@std/async 1.0.1 -> 1.0.6
  - npm:chalk      4.1.2 -> 5.2.0
@@ -88,7 +87,7 @@ from the `./member-a` directory will only update dependencies listed in
 `./member-a/deno.json` or `./member-a/package.json`.
 
 To include all workspace members, pass the `--recursive` flag (the `-r`
-shorthand is also accepted)
+shorthand is also accepted).
 
 ```sh title=">_"
 deno update --recursive

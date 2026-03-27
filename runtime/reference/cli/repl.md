@@ -98,8 +98,8 @@ exit using ctrl+d or close()
 
 ## Tab completions
 
-Tab completions are crucial feature for quick navigation in REPL. After hitting
-`tab` key, Deno will now show a list of all possible completions.
+Tab completions are a crucial feature for quick navigation in the REPL. After
+hitting `tab` key, Deno will now show a list of all possible completions.
 
 ```sh title=">_"
 deno repl

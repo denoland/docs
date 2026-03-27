@@ -122,7 +122,7 @@ deno test --shuffle
 
 ## Leak detection
 
-Detect tests that leak async operations, timers, or resources:
+Trace the source of leaked async operations, timers, or resources:
 
 ```sh title=">_"
 deno test --trace-leaks

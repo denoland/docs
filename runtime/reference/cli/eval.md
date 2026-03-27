@@ -34,7 +34,7 @@ deno eval "const path = require('path'); console.log(path.join('a', 'b'))"
 ## Printing expression results
 
 Use `--print` (or `-p`) to evaluate an expression and print its result, similar
-to `node -e`:
+to `node -p`:
 
 ```sh title=">_"
 deno eval -p "1 + 2"

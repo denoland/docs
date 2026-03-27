@@ -78,8 +78,9 @@ deno serve --watch server.ts
 
 ## Permissions
 
-`deno serve` automatically grants network permissions needed to listen.
-Additional permissions (like file reads) must be granted explicitly:
+`deno serve` automatically allows the server to listen without requiring
+`--allow-net`. Additional permissions (like file reads) must be granted
+explicitly:
 
 ```sh title=">_"
 deno serve --allow-read server.ts
