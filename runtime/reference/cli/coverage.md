@@ -18,8 +18,8 @@ You can customize the inclusions and exclusions by using the `--include` and
 You can expand the coverage to include files that are not on the local file
 system by using the `--include` option and customizing the regex pattern.
 
-```bash
-deno coverage --include="^file:|https:"
+```sh title=">_"
+$ deno coverage --include="^file:|https:"
 ```
 
 The default inclusion pattern should be sufficient for most use cases, but you
@@ -31,8 +31,8 @@ are excluded by default.
 
 This is equivalent to:
 
-```bash
-deno coverage --exclude="test\.(js|mjs|ts|jsx|tsx)$"
+```sh title=">_"
+$ deno coverage --exclude="test\.(js|mjs|ts|jsx|tsx)$"
 ```
 
 This default setting prevents your test code from contributing to your coverage
@@ -131,14 +131,14 @@ coverage reports in the
 [lcov format](https://github.com/linux-test-project/lcov?tab=readme-ov-file) (a
 standard file format used to describe code coverage data), or in html.
 
-```bash
-deno coverage --lcov --output=cov.lcov
+```sh title=">_"
+$ deno coverage --lcov --output=cov.lcov
 ```
 
 This lcov file can be used with other tools that support the lcov format.
 
-```bash
-deno coverage --html
+```sh title=">_"
+$ deno coverage --html
 ```
 
 This will output a coverage report as a html file
@@ -147,16 +147,16 @@ This will output a coverage report as a html file
 
 Generate a coverage report from the default coverage profile in your workspace
 
-```bash
-deno test --coverage
-deno coverage
+```sh title=">_"
+$ deno test --coverage
+$ deno coverage
 ```
 
 Generate a coverage report from a coverage profile with a custom name
 
-```bash
-deno test --coverage=custom_profile_name
-deno coverage custom_profile_name
+```sh title=">_"
+$ deno test --coverage=custom_profile_name
+$ deno coverage custom_profile_name
 ```
 
 > Note: You can alternatively set coverage directory by `DENO_COVERAGE_DIR` env
@@ -170,13 +170,13 @@ deno coverage custom_profile_name
 Only include coverage that matches a specific pattern - in this case, only
 include tests from main.ts
 
-```bash
-deno coverage --include="main.ts"
+```sh title=">_"
+$ deno coverage --include="main.ts"
 ```
 
 Export test coverage from the default coverage profile to an lcov file
 
-```bash
-deno test --coverage
-deno coverage --lcov --output=cov.lcov
+```sh title=">_"
+$ deno test --coverage
+$ deno coverage --lcov --output=cov.lcov
 ```

@@ -12,8 +12,8 @@ packages that provide project templates.
 
 ## Usage
 
-```sh
-deno create [OPTIONS] [PACKAGE] [-- [ARGS]...]
+```sh title=">_"
+$ deno create [OPTIONS] [PACKAGE] [-- [ARGS]...]
 ```
 
 By default, unprefixed package names are resolved from JSR. You can use the
@@ -47,26 +47,26 @@ export and runs it as the scaffolding script.
 
 Create a project from a JSR package:
 
-```sh
-deno create @fresh/init
+```sh title=">_"
+$ deno create @fresh/init
 ```
 
 Create a project from an npm package:
 
-```sh
-deno create npm:vite my-app
+```sh title=">_"
+$ deno create npm:vite my-app
 ```
 
 Using the `--npm` flag to treat unprefixed names as npm packages:
 
-```sh
-deno create --npm create-vite my-app
+```sh title=">_"
+$ deno create --npm create-vite my-app
 ```
 
 Pass arguments to the template package:
 
-```sh
-deno create @fresh/init -- --force
+```sh title=">_"
+$ deno create @fresh/init -- --force
 ```
 
 ## Flags

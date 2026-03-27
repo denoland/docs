@@ -36,31 +36,31 @@ Before you publish your package, you must create it in the registry by visiting
 
 Publish your current workspace
 
-```bash
-deno publish
+```sh title=">_"
+$ deno publish
 ```
 
 Publish your current workspace with a specific token, bypassing interactive
 authentication
 
-```bash
-deno publish --token c00921b1-0d4f-4d18-b8c8-ac98227f9275
+```sh title=">_"
+$ deno publish --token c00921b1-0d4f-4d18-b8c8-ac98227f9275
 ```
 
 Publish and check for errors in remote modules
 
-```bash
-deno publish --check=all
+```sh title=">_"
+$ deno publish --check=all
 ```
 
 Perform a dry run to simulate publishing.
 
-```bash
-deno publish --dry-run
+```sh title=">_"
+$ deno publish --dry-run
 ```
 
 Publish using settings from a specific configuration file
 
-```bash
-deno publish --config custom-config.json
+```sh title=">_"
+$ deno publish --config custom-config.json
 ```

@@ -14,7 +14,7 @@ these scripts by default for security reasons.
 
 Review and approve pending scripts interactively:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno approve-scripts
 ```
 

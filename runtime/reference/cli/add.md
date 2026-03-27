@@ -14,15 +14,15 @@ It is an alias for
 
 Add packages from JSR and npm:
 
-```sh
-deno add @std/path npm:express
+```sh title=">_"
+$ deno add @std/path npm:express
 ```
 
 By default, dependencies are added with a caret (`^`) version range. Use
 `--save-exact` to pin to an exact version:
 
-```sh
-deno add --save-exact @std/path
+```sh title=">_"
+$ deno add --save-exact @std/path
 ```
 
 This saves the dependency without the `^` prefix (e.g., `1.0.0` instead of
@@ -30,8 +30,8 @@ This saves the dependency without the `^` prefix (e.g., `1.0.0` instead of
 
 Treat unprefixed package names as npm packages:
 
-```sh
-deno add --npm express
+```sh title=">_"
+$ deno add --npm express
 ```
 
 ## Where dependencies are stored

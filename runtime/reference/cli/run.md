@@ -11,13 +11,13 @@ description: "Run a JavaScript or TypeScript program from a file or URL with Den
 
 Run a local file:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno run main.ts
 ```
 
 The `run` subcommand is optional — you can also just use `deno <file>`:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno main.ts
 ```
 
@@ -31,20 +31,20 @@ required permissions using the
 
 Grant permission to read from disk and listen to network:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno run --allow-read --allow-net server.ts
 ```
 
 Grant permission to read allow-listed files from disk:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno run --allow-read=/etc server.ts
 ```
 
 Grant all permissions _this is not recommended and should only be used for
 testing_:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno run -A server.ts
 ```
 
@@ -59,7 +59,7 @@ as files are changed.
 
 _Be sure to put the flag before the file name_ eg:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno run --allow-net --watch server.ts
 ```
 
@@ -75,7 +75,7 @@ console if there are errors while you work.
 
 You can pipe code from stdin and run it immediately:
 
-```sh title="Terminal"
+```sh title=">_"
 $ echo "console.log('hello')" | deno run -
 ```
 

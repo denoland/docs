@@ -10,7 +10,7 @@ description: "Remove cached dependencies for a clean start"
 
 ## Basic usage
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno clean
 ```
 
@@ -18,7 +18,7 @@ $ deno clean
 
 Preview what would be deleted without actually removing anything:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno clean --dry-run
 ```
 
@@ -26,7 +26,7 @@ $ deno clean --dry-run
 
 Use `--except` to preserve certain cache types while cleaning the rest:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno clean --except=npm,jsr
 ```
 

@@ -14,32 +14,32 @@ Deno ships with a built-in test runner. To learn how to write tests, see the
 
 Run all tests in the current directory and subdirectories:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test
 ```
 
 Run tests in specific files:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test src/fetch_test.ts src/signal_test.ts
 ```
 
 Run tests matching a glob pattern:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test src/*.test.ts
 ```
 
 Run tests whose name matches a string or pattern:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --filter "database"
 $ deno test --filter "/^connect.*/"
 ```
 
 Skip type-checking:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --no-check
 ```
 
@@ -48,7 +48,7 @@ $ deno test --no-check
 Tests run with the same [permission model](/runtime/fundamentals/security/) as
 `deno run`. Grant permissions for your test suite:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --allow-read --allow-net
 ```
 
@@ -56,7 +56,7 @@ $ deno test --allow-read --allow-net
 
 Re-run tests automatically when files change:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --watch
 ```
 
@@ -64,14 +64,14 @@ $ deno test --watch
 
 Run test files across multiple worker threads:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --parallel
 ```
 
 By default, `--parallel` uses the number of available CPUs. Use `DENO_JOBS=<N>`
 to control the number of threads:
 
-```sh title="Terminal"
+```sh title=">_"
 $ DENO_JOBS=4 deno test --parallel
 ```
 
@@ -79,7 +79,7 @@ $ DENO_JOBS=4 deno test --parallel
 
 Collect coverage data and generate a report:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --coverage
 ```
 
@@ -87,13 +87,13 @@ This writes raw coverage data to a `coverage/` directory. To generate a summary
 from existing coverage data, use
 [`deno coverage`](/runtime/reference/cli/coverage/):
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno coverage coverage/
 ```
 
 You can also output an `lcov` report for use with external tools:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno coverage --lcov coverage/ > coverage.lcov
 ```
 
@@ -101,14 +101,14 @@ $ deno coverage --lcov coverage/ > coverage.lcov
 
 Choose an output format with `--reporter`:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --reporter=dot
 $ deno test --reporter=tap
 ```
 
 Write a JUnit XML report for CI systems:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --junit-path=report.xml
 ```
 
@@ -116,7 +116,7 @@ $ deno test --junit-path=report.xml
 
 Shuffle the order tests run in to catch hidden dependencies between tests:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --shuffle
 ```
 
@@ -124,7 +124,7 @@ $ deno test --shuffle
 
 Detect tests that leak async operations, timers, or resources:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --trace-leaks
 ```
 
@@ -132,7 +132,7 @@ $ deno test --trace-leaks
 
 Evaluate code blocks in JSDoc and Markdown files as tests:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno test --doc
 ```
 

@@ -39,8 +39,8 @@ Creates a new application in Deno Deploy. When run without flags, an interactive
 wizard walks you through each step. When any configuration flag is provided, the
 command runs in non-interactive mode (useful for CI/CD pipelines and scripting).
 
-```bash
-deno deploy create [root-path]
+```sh title=">_"
+$ deno deploy create [root-path]
 ```
 
 The optional `[root-path]` argument sets the local project directory. Defaults
@@ -127,14 +127,14 @@ you through each configuration step:
 
 Create an app interactively:
 
-```bash
-deno deploy create
+```sh title=">_"
+$ deno deploy create
 ```
 
 Create a local dynamic app with all flags (non-interactive):
 
-```bash
-deno deploy create \
+```sh title=">_"
+$ deno deploy create \
   --org my-org \
   --app my-api \
   --source local \
@@ -149,8 +149,8 @@ deno deploy create \
 
 Create a static site:
 
-```bash
-deno deploy create \
+```sh title=">_"
+$ deno deploy create \
   --org my-org \
   --app my-site \
   --source local \
@@ -165,8 +165,8 @@ deno deploy create \
 
 Use a framework preset (fewer flags needed since the preset provides defaults):
 
-```bash
-deno deploy create \
+```sh title=">_"
+$ deno deploy create \
   --org my-org \
   --app my-fresh-app \
   --source local \
@@ -178,8 +178,8 @@ deno deploy create \
 
 Deploy from a GitHub repo:
 
-```bash
-deno deploy create \
+```sh title=">_"
+$ deno deploy create \
   --org my-org \
   --app my-app \
   --source github \
@@ -195,8 +195,8 @@ deno deploy create \
 
 Manage environment variables for your deployed applications.
 
-```bash
-deno deploy env
+```sh title=">_"
+$ deno deploy env
 ```
 
 **Options:**
@@ -207,16 +207,16 @@ deno deploy env
 
 #### List environment variables
 
-```bash
-deno deploy env list
+```sh title=">_"
+$ deno deploy env list
 ```
 
 Lists all environment variables in an application.
 
 #### Add environment variable
 
-```bash
-deno deploy env add <variable> <value>
+```sh title=">_"
+$ deno deploy env add <variable> <value>
 ```
 
 Adds an environment variable to the application.
@@ -226,23 +226,23 @@ Adds an environment variable to the application.
 - `--secret` - Mark the variable as a secret. Secret values are hidden in the
   dashboard and in `env list` output.
 
-```bash
-deno deploy env add DATABASE_URL "postgresql://user:pass@localhost/db"
+```sh title=">_"
+$ deno deploy env add DATABASE_URL "postgresql://user:pass@localhost/db"
 
 # Add a secret environment variable
-deno deploy env add API_KEY "sk-secret-value" --secret
+$ deno deploy env add API_KEY "sk-secret-value" --secret
 ```
 
 #### Update environment variable value
 
-```bash
-deno deploy env update-value <variable> <value>
+```sh title=">_"
+$ deno deploy env update-value <variable> <value>
 ```
 
 Updates the value of an existing environment variable.
 
-```bash
-deno deploy env update-value API_KEY "new-api-key-value"
+```sh title=">_"
+$ deno deploy env update-value API_KEY "new-api-key-value"
 ```
 
 #### Specifying environment variable contexts
@@ -250,28 +250,28 @@ deno deploy env update-value API_KEY "new-api-key-value"
 Environment variables can be made available to specific contexts such as
 Production, Preview, Local, and Build.
 
-```bash
-deno deploy env update-contexts <variable> [contexts...]
+```sh title=">_"
+$ deno deploy env update-contexts <variable> [contexts...]
 ```
 
 Updates the contexts of an environment variable in the application:
 
 #### Delete environment variable
 
-```bash
-deno deploy env delete <variable>
+```sh title=">_"
+$ deno deploy env delete <variable>
 ```
 
 Deletes an environment variable from the application.
 
-```bash
-deno deploy env delete OLD_API_KEY
+```sh title=">_"
+$ deno deploy env delete OLD_API_KEY
 ```
 
 #### Load environment variables from file
 
-```bash
-deno deploy env load <file>
+```sh title=">_"
+$ deno deploy env load <file>
 ```
 
 Loads environment variables from a `.env` file into the application. The CLI
@@ -284,19 +284,19 @@ accordingly.
 - `--non-secrets <keys...>` - Keys from the `.env` file that should be treated
   as non-secrets, overriding the auto-detection
 
-```bash
-deno deploy env load .env.production
+```sh title=">_"
+$ deno deploy env load .env.production
 
 # Load and treat specific keys as non-secrets
-deno deploy env load .env.production --non-secrets PUBLIC_URL SITE_NAME
+$ deno deploy env load .env.production --non-secrets PUBLIC_URL SITE_NAME
 ```
 
 ### Database management
 
 Manage database instances for your organization.
 
-```bash
-deno deploy database
+```sh title=">_"
+$ deno deploy database
 ```
 
 **Options:**
@@ -306,8 +306,8 @@ deno deploy database
 
 #### Provision a database
 
-```bash
-deno deploy database provision <name> --kind <denokv|prisma> [--region <region>]
+```sh title=">_"
+$ deno deploy database provision <name> --kind <denokv|prisma> [--region <region>]
 ```
 
 Creates a new database instance.
@@ -318,18 +318,18 @@ Creates a new database instance.
 - `--region <region>` - The primary region for the database (required for
   Prisma)
 
-```bash
+```sh title=">_"
 # Provision a Deno KV database
-deno deploy database provision my-kv-db --kind denokv
+$ deno deploy database provision my-kv-db --kind denokv
 
 # Provision a Prisma Postgres database
-deno deploy database provision my-pg-db --kind prisma --region us-east-1
+$ deno deploy database provision my-pg-db --kind prisma --region us-east-1
 ```
 
 #### Link an external database
 
-```bash
-deno deploy database link <name> [connectionString]
+```sh title=">_"
+$ deno deploy database link <name> [connectionString]
 ```
 
 Links an external PostgreSQL database to your organization. You can provide a
@@ -344,86 +344,86 @@ connection string or use individual flags.
 - `--cert <cert>` - SSL certificate for the connection
 - `--dry-run` - Test the connection without actually linking
 
-```bash
+```sh title=">_"
 # Link using a connection string
-deno deploy database link my-db "postgres://user:pass@host:5432/mydb"
+$ deno deploy database link my-db "postgres://user:pass@host:5432/mydb"
 
 # Link using individual flags
-deno deploy database link my-db \
+$ deno deploy database link my-db \
   --hostname db.example.com \
   --username admin \
   --password secret \
   --port 5432
 
 # Test the connection first
-deno deploy database link my-db "postgres://user:pass@host:5432/mydb" --dry-run
+$ deno deploy database link my-db "postgres://user:pass@host:5432/mydb" --dry-run
 ```
 
 #### Assign a database to an app
 
-```bash
-deno deploy database assign <name> [--app <name>]
+```sh title=">_"
+$ deno deploy database assign <name> [--app <name>]
 ```
 
 Assigns a database instance to an application. If `--app` is not provided, you
 will be prompted to select one interactively.
 
-```bash
-deno deploy database assign my-db --app my-api
+```sh title=">_"
+$ deno deploy database assign my-db --app my-api
 ```
 
 #### Detach a database from an app
 
-```bash
-deno deploy database detach <name> [--app <name>]
+```sh title=">_"
+$ deno deploy database detach <name> [--app <name>]
 ```
 
 Removes the connection between a database instance and an application.
 
-```bash
-deno deploy database detach my-db --app my-api
+```sh title=">_"
+$ deno deploy database detach my-db --app my-api
 ```
 
 #### Query a database
 
-```bash
-deno deploy database query <name> <database> [query...]
+```sh title=">_"
+$ deno deploy database query <name> <database> [query...]
 ```
 
 Executes a SQL query against a database.
 
-```bash
-deno deploy database query my-db mydb "SELECT * FROM users LIMIT 10"
+```sh title=">_"
+$ deno deploy database query my-db mydb "SELECT * FROM users LIMIT 10"
 ```
 
 #### List databases
 
-```bash
-deno deploy database list [search]
+```sh title=">_"
+$ deno deploy database list [search]
 ```
 
 Lists all database instances in the organization. Also available as
 `database ls`.
 
-```bash
+```sh title=">_"
 # List all databases
-deno deploy database list
+$ deno deploy database list
 
 # Filter by name
-deno deploy database list my-db
+$ deno deploy database list my-db
 ```
 
 #### Delete a database
 
-```bash
-deno deploy database delete <name>
+```sh title=">_"
+$ deno deploy database delete <name>
 ```
 
 Permanently deletes a database instance. Also available as `database remove` or
 `database rm`.
 
-```bash
-deno deploy database delete my-old-db
+```sh title=">_"
+$ deno deploy database delete my-old-db
 ```
 
 ### Switch organization and application
@@ -431,8 +431,8 @@ deno deploy database delete my-old-db
 Sets the default organization and application for subsequent commands, so you
 don't have to pass `--org` and `--app` every time.
 
-```bash
-deno deploy switch [--org <name>] [--app <name>]
+```sh title=">_"
+$ deno deploy switch [--org <name>] [--app <name>]
 ```
 
 When run without flags, an interactive prompt lets you select the org and app.
@@ -442,28 +442,28 @@ When run without flags, an interactive prompt lets you select the org and app.
 - `--org <name>` - The organization to switch to
 - `--app <name>` - The application to switch to
 
-```bash
+```sh title=">_"
 # Switch interactively
-deno deploy switch
+$ deno deploy switch
 
 # Switch to a specific org and app
-deno deploy switch --org my-company --app my-api
+$ deno deploy switch --org my-company --app my-api
 ```
 
 ### Logout
 
 Removes the stored authentication token.
 
-```bash
-deno deploy logout
+```sh title=">_"
+$ deno deploy logout
 ```
 
 ### Application logs
 
 Stream logs from a deployed application.
 
-```bash
-deno deploy logs
+```sh title=">_"
+$ deno deploy logs
 ```
 
 **Options:**
@@ -474,16 +474,16 @@ deno deploy logs
 - `--start <date>` - The starting timestamp of the logs
 - `--end <date>` - The ending timestamp of the logs (requires --start)
 
-```bash
-deno deploy logs --org my-org --app my-app --start "2024-01-01T00:00:00Z"
+```sh title=">_"
+$ deno deploy logs --org my-org --app my-app --start "2024-01-01T00:00:00Z"
 ```
 
 ### Sandbox management
 
 Interact with running sandboxes directly from the Deploy CLI.
 
-```bash
-deno deploy sandbox --help
+```sh title=">_"
+$ deno deploy sandbox --help
 ```
 
 **Options:**
@@ -495,24 +495,24 @@ deno deploy sandbox --help
 
 #### List sandboxes
 
-```bash
-deno deploy sandbox list --org my-org
+```sh title=">_"
+$ deno deploy sandbox list --org my-org
 ```
 
 Lists every sandbox in the organization along with status details.
 
 #### Kill a sandbox
 
-```bash
-deno deploy sandbox kill <sandbox-id> --org my-org
+```sh title=">_"
+$ deno deploy sandbox kill <sandbox-id> --org my-org
 ```
 
 Immediately terminates the specified sandbox when you no longer need it.
 
 #### SSH into a sandbox
 
-```bash
-deno deploy sandbox ssh <sandbox-id> --org my-org
+```sh title=">_"
+$ deno deploy sandbox ssh <sandbox-id> --org my-org
 ```
 
 Starts an SSH session against a running sandbox for interactive debugging.
@@ -528,8 +528,8 @@ applications.
 [Configure AWS integration](/deploy/reference/cloud_connections/#aws%3A-easy-setup-with-deno-deploy-setup-aws)
 for use as a Cloud Connection in your application.
 
-```bash
-deno deploy setup-aws --org <name> --app <name>
+```sh title=">_"
+$ deno deploy setup-aws --org <name> --app <name>
 ```
 
 **Options:**
@@ -538,8 +538,8 @@ deno deploy setup-aws --org <name> --app <name>
 - `--org <name>` - The name of the organization (required)
 - `--app <name>` - The name of the application (required)
 
-```bash
-deno deploy setup-aws --org my-org --app my-app
+```sh title=">_"
+$ deno deploy setup-aws --org my-org --app my-app
 ```
 
 ### Google Cloud Platform integration setup
@@ -547,8 +547,8 @@ deno deploy setup-aws --org my-org --app my-app
 [Configure Google Cloud Platform integration](/deploy/reference/cloud_connections/#setting-up-gcp)
 for use as a Cloud Connection in your application.
 
-```bash
-deno deploy setup-gcp --org <name> --app <name>
+```sh title=">_"
+$ deno deploy setup-gcp --org <name> --app <name>
 ```
 
 **Options:**
@@ -557,35 +557,35 @@ deno deploy setup-gcp --org <name> --app <name>
 - `--org <name>` - The name of the organization (required)
 - `--app <name>` - The name of the application (required)
 
-```bash
-deno deploy setup-gcp --org my-org --app my-app
+```sh title=">_"
+$ deno deploy setup-gcp --org my-org --app my-app
 ```
 
 ## Usage examples
 
 ### Basic deployment
 
-```bash
+```sh title=">_"
 # Deploy current directory to production
-deno deploy --prod
+$ deno deploy --prod
 
 # Deploy with specific org and app
-deno deploy --org my-company --app my-api --prod
+$ deno deploy --org my-company --app my-api --prod
 ```
 
 ### Creating applications
 
-```bash
+```sh title=">_"
 # Start the interactive creation wizard
-deno deploy create
+$ deno deploy create
 
 # Create with a framework preset
-deno deploy create --org my-company --app my-site \
+$ deno deploy create --org my-company --app my-site \
   --source local --framework-preset fresh \
   --build-timeout 5 --build-memory-limit 1024 --region us
 
 # Create a static site from a GitHub repo
-deno deploy create --org my-company --app my-docs \
+$ deno deploy create --org my-company --app my-docs \
   --source github --owner my-github-org --repo my-docs-repo \
   --runtime-mode static --static-dir dist --single-page-app \
   --build-command "npm run build" \
@@ -594,62 +594,62 @@ deno deploy create --org my-company --app my-docs \
 
 ### Switching context
 
-```bash
+```sh title=">_"
 # Set a default org and app so you don't have to pass --org/--app every time
-deno deploy switch --org my-company --app my-api
+$ deno deploy switch --org my-company --app my-api
 
 # Now these commands use the saved org and app automatically
-deno deploy env list
-deno deploy logs
+$ deno deploy env list
+$ deno deploy logs
 ```
 
 ### Database management
 
-```bash
+```sh title=">_"
 # Provision a Deno KV database
-deno deploy database provision my-kv --kind denokv --org my-company
+$ deno deploy database provision my-kv --kind denokv --org my-company
 
 # Link an external PostgreSQL database
-deno deploy database link my-pg "postgres://user:pass@host:5432/db" --org my-company
+$ deno deploy database link my-pg "postgres://user:pass@host:5432/db" --org my-company
 
 # Assign a database to an app
-deno deploy database assign my-kv --app my-api
+$ deno deploy database assign my-kv --app my-api
 
 # Query a database
-deno deploy database query my-pg mydb "SELECT count(*) FROM users"
+$ deno deploy database query my-pg mydb "SELECT count(*) FROM users"
 ```
 
 ### Environment setup
 
-```bash
+```sh title=">_"
 # Set up environment variables
-deno deploy env add DATABASE_URL "postgresql://..." --secret
-deno deploy env add SITE_NAME "My App"
+$ deno deploy env add DATABASE_URL "postgresql://..." --secret
+$ deno deploy env add SITE_NAME "My App"
 
 # Load from .env file
-deno deploy env load .env.production
+$ deno deploy env load .env.production
 ```
 
 ### Monitoring
 
-```bash
+```sh title=">_"
 # View recent logs
-deno deploy logs --org my-company --app my-api
+$ deno deploy logs --org my-company --app my-api
 
 # View logs for specific time range
-deno deploy logs --org my-company --app my-api \
+$ deno deploy logs --org my-company --app my-api \
   --start "2024-01-01T00:00:00Z" \
   --end "2024-01-01T23:59:59Z"
 ```
 
 ### Cloud integration
 
-```bash
+```sh title=">_"
 # Set up AWS integration
-deno deploy setup-aws --org my-company --app my-api
+$ deno deploy setup-aws --org my-company --app my-api
 
 # Set up GCP integration
-deno deploy setup-gcp --org my-company --app my-api
+$ deno deploy setup-gcp --org my-company --app my-api
 ```
 
 ## Getting help

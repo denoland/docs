@@ -13,13 +13,13 @@ enabled by default**.
 
 ## Basic usage
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno eval "console.log('Hello from Deno')"
 ```
 
 TypeScript works out of the box:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno eval "const greeting: string = 'Hello'; console.log(greeting)"
 ```
 
@@ -27,7 +27,7 @@ $ deno eval "const greeting: string = 'Hello'; console.log(greeting)"
 
 CommonJS modules are automatically recognized and supported:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno eval "const path = require('path'); console.log(path.join('a', 'b'))"
 ```
 
@@ -36,7 +36,7 @@ $ deno eval "const path = require('path'); console.log(path.join('a', 'b'))"
 Use `--print` (or `-p`) to evaluate an expression and print its result, similar
 to `node -e`:
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno eval -p "1 + 2"
 # 3
 
@@ -48,7 +48,7 @@ $ deno eval -p "Deno.version"
 
 Combine with piped input for quick data processing:
 
-```sh title="Terminal"
+```sh title=">_"
 $ echo '{"name":"deno"}' | deno eval -p "
   const text = await new Response(Deno.stdin.readable).text();
   JSON.parse(text).name

@@ -15,7 +15,7 @@ provide features like intellisense, code formatting, and more.
 
 ## Usage
 
-```sh title="Terminal"
+```sh title=">_"
 $ deno lsp
 ```
 
