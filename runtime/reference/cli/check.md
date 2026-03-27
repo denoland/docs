@@ -7,24 +7,54 @@ openGraphTitle: "deno check"
 description: "Download and type-check code without execution"
 ---
 
-## Examples
+`deno check` type-checks your TypeScript (or JavaScript) code without running
+it. This is useful in CI pipelines or before deploying to catch type errors
+early.
 
-Type-check a TypeScript file without execution:
-
-```ts title="example.ts"
-const x: string = 1 + 1n;
-```
+## Basic usage
 
 ```bash
-deno check example.ts
+deno check main.ts
+```
+
+Check multiple files:
+
+```bash
+deno check src/server.ts src/utils.ts
+```
+
+## Type-checking remote modules
+
+By default, only local modules are type-checked. Use `--all` to also type-check
+remote dependencies:
+
+```bash
+deno check --all main.ts
 ```
 
 ## Type-checking JavaScript files
 
-If you have a JavaScript-only project and want to type-check it with Deno, you
-can use the `--check-js` flag instead of adding `// @ts-check` to every file or
-setting `compilerOptions.checkJs` in your `deno.json`:
+If you have a JavaScript project and want to type-check it without adding
+`// @ts-check` to every file, use the `--check-js` flag:
 
 ```bash
 deno check --check-js main.js
+```
+
+## Using in CI
+
+`deno check` exits with a non-zero status code if there are type errors, making
+it suitable for CI pipelines:
+
+```bash
+deno check main.ts && echo "Types OK"
+```
+
+Pair it with [`deno test`](/runtime/reference/cli/test/) and
+[`deno lint`](/runtime/reference/cli/lint/) for a full pre-merge check:
+
+```bash
+deno check main.ts
+deno lint
+deno test
 ```

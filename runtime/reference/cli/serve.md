@@ -7,41 +7,80 @@ openGraphTitle: "deno serve"
 description: "A flexible and configurable HTTP server for Deno"
 ---
 
-## Example
+`deno serve` runs a file as an HTTP server. The file must export a default
+object with a `fetch` handler. For a full guide on building HTTP servers, see
+[Writing an HTTP Server](/runtime/fundamentals/http_server/).
 
-Here's an example of how you can create a simple HTTP server with declarative
-fetch:
+## Basic usage
 
 ```typescript title="server.ts"
 export default {
-  async fetch(_req) {
+  fetch(_req: Request) {
     return new Response("Hello world!");
   },
 } satisfies Deno.ServeDefaultExport;
 ```
-
-The `satisfies Deno.ServeDefaultExport` type assertion ensures that your
-exported object conforms to the expected interface for Deno's HTTP server. This
-provides type safety and better editor autocomplete while allowing you to
-maintain the inferred types of your implementation.
-
-You can then run the server using the `deno serve` command:
 
 ```bash
 deno serve server.ts
 ```
 
-The logic inside the `fetch` function can be customized to handle different
-types of requests and serve content accordingly:
+By default, the server listens on port **8000**. Override it with `--port`:
+
+```bash
+deno serve --port=3000 server.ts
+```
+
+## Routing requests
+
+The `fetch` handler receives a standard
+[`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) object.
+Use the URL to route:
 
 ```typescript title="server.ts"
 export default {
-  async fetch(request) {
-    if (request.url.endsWith("/json")) {
-      return Response.json({ hello: "world" });
+  fetch(request: Request) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/api/health") {
+      return Response.json({ status: "ok" });
     }
 
-    return new Response("Hello world!");
+    return new Response("Not found", { status: 404 });
   },
 } satisfies Deno.ServeDefaultExport;
+```
+
+## Binding to a hostname
+
+By default, `deno serve` listens on `0.0.0.0`. Use `--host` to bind to a
+specific interface:
+
+```bash
+deno serve --host=127.0.0.1 server.ts
+```
+
+## Parallel serving
+
+Run multiple server instances across CPU cores for better throughput:
+
+```bash
+deno serve --parallel server.ts
+```
+
+## Watch mode
+
+Restart the server automatically when files change:
+
+```bash
+deno serve --watch server.ts
+```
+
+## Permissions
+
+`deno serve` automatically grants network permissions needed to listen.
+Additional permissions (like file reads) must be granted explicitly:
+
+```bash
+deno serve --allow-read server.ts
 ```
