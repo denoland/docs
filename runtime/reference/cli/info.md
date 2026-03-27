@@ -104,6 +104,14 @@ https://jsr.io/@std/http/1.0.0-rc.5/file_server.ts (24.74KB)
 
 Dependency inspector works with any local or remote ES modules.
 
+## JSON output
+
+Use `--json` to get machine-readable output, useful for tooling and CI:
+
+```shell
+deno info --json main.ts
+```
+
 ## Cache location
 
 `deno info` can be used to display information about cache location:

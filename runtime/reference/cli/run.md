@@ -9,17 +9,22 @@ description: "Run a JavaScript or TypeScript program from a file or URL with Den
 
 ## Usage
 
-To run [this file](https://docs.deno.com/examples/scripts/hello_world.ts) use:
-
-```console
-deno run https://docs.deno.com/examples/scripts/hello_world.ts
-```
-
-You can also run files locally. Ensure that you are in the correct directory and
-use:
+Run a local file:
 
 ```console
 deno run hello-world.ts
+```
+
+The `run` subcommand is optional — you can also just use `deno <file>`:
+
+```console
+deno hello-world.ts
+```
+
+Run a remote module directly by URL:
+
+```console
+deno run https://docs.deno.com/examples/scripts/hello_world.ts
 ```
 
 By default, Deno runs programs in a sandbox without access to disk, network or
