@@ -19,7 +19,7 @@ You can expand the coverage to include files that are not on the local file
 system by using the `--include` option and customizing the regex pattern.
 
 ```sh title=">_"
-$ deno coverage --include="^file:|https:"
+deno coverage --include="^file:|https:"
 ```
 
 The default inclusion pattern should be sufficient for most use cases, but you
@@ -32,7 +32,7 @@ are excluded by default.
 This is equivalent to:
 
 ```sh title=">_"
-$ deno coverage --exclude="test\.(js|mjs|ts|jsx|tsx)$"
+deno coverage --exclude="test\.(js|mjs|ts|jsx|tsx)$"
 ```
 
 This default setting prevents your test code from contributing to your coverage
@@ -132,13 +132,13 @@ coverage reports in the
 standard file format used to describe code coverage data), or in html.
 
 ```sh title=">_"
-$ deno coverage --lcov --output=cov.lcov
+deno coverage --lcov --output=cov.lcov
 ```
 
 This lcov file can be used with other tools that support the lcov format.
 
 ```sh title=">_"
-$ deno coverage --html
+deno coverage --html
 ```
 
 This will output a coverage report as a html file
@@ -148,15 +148,15 @@ This will output a coverage report as a html file
 Generate a coverage report from the default coverage profile in your workspace
 
 ```sh title=">_"
-$ deno test --coverage
-$ deno coverage
+deno test --coverage
+deno coverage
 ```
 
 Generate a coverage report from a coverage profile with a custom name
 
 ```sh title=">_"
-$ deno test --coverage=custom_profile_name
-$ deno coverage custom_profile_name
+deno test --coverage=custom_profile_name
+deno coverage custom_profile_name
 ```
 
 > Note: You can alternatively set coverage directory by `DENO_COVERAGE_DIR` env
@@ -171,12 +171,12 @@ Only include coverage that matches a specific pattern - in this case, only
 include tests from main.ts
 
 ```sh title=">_"
-$ deno coverage --include="main.ts"
+deno coverage --include="main.ts"
 ```
 
 Export test coverage from the default coverage profile to an lcov file
 
 ```sh title=">_"
-$ deno test --coverage
-$ deno coverage --lcov --output=cov.lcov
+deno test --coverage
+deno coverage --lcov --output=cov.lcov
 ```

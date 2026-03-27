@@ -15,19 +15,19 @@ For convenience, you can install `deno x` as a standalone `dx` binary that runs
 with all permissions by default:
 
 ```sh title=">_"
-$ deno x --install-alias
+deno x --install-alias
 ```
 
 Then use it directly:
 
 ```sh title=">_"
-$ dx npm:create-vite my-app
+dx npm:create-vite my-app
 ```
 
 You can customize the alias name:
 
 ```sh title=">_"
-$ deno x --install-alias=denox
+deno x --install-alias=denox
 ```
 
 ## Basic usage
@@ -35,13 +35,13 @@ $ deno x --install-alias=denox
 Run an npm package:
 
 ```sh title=">_"
-$ deno x npm:create-vite my-app
+deno x npm:create-vite my-app
 ```
 
 Run a JSR package:
 
 ```sh title=">_"
-$ deno x jsr:@std/http/file-server
+deno x jsr:@std/http/file-server
 ```
 
 ## How it works
@@ -55,11 +55,11 @@ added to your project's `deno.json` or `package.json`.
 The executed package runs with the permissions you specify:
 
 ```sh title=">_"
-$ deno x --allow-read --allow-net npm:serve .
+deno x --allow-read --allow-net npm:serve .
 ```
 
 Or grant all permissions:
 
 ```sh title=">_"
-$ deno x -A npm:create-vite my-app
+deno x -A npm:create-vite my-app
 ```

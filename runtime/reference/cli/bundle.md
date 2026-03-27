@@ -13,13 +13,13 @@ JavaScript file.
 ## Basic usage
 
 ```sh title=">_"
-$ deno bundle main.ts output.js
+deno bundle main.ts output.js
 ```
 
 The output file can then be run with Deno or in other JavaScript runtimes:
 
 ```sh title=">_"
-$ deno run output.js
+deno run output.js
 ```
 
 For more on bundling strategies with Deno, see the

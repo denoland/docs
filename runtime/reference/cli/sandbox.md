@@ -31,7 +31,7 @@ Creates a new sandbox in an organization. Accepts the aliases `create` and
 `new`.
 
 ```sh title=">_"
-$ deno sandbox create
+deno sandbox create
 ```
 
 ### List your sandboxes
@@ -39,7 +39,7 @@ $ deno sandbox create
 Lists all sandboxes in an organization. Accepts the aliases `list` and `ls`.
 
 ```sh title=">_"
-$ deno sandbox list
+deno sandbox list
 ```
 
 ### Kill a sandbox
@@ -48,7 +48,7 @@ Terminates a running sandbox immediately. Accepts the aliases `kill`, `remove`,
 and `rm`.
 
 ```sh title=">_"
-$ deno sandbox kill <sandbox-id>
+deno sandbox kill <sandbox-id>
 ```
 
 ### Copy files
@@ -57,7 +57,7 @@ Copies files between your local machine and a running sandbox. Use `copy` or its
 shorter alias `cp`.
 
 ```sh title=">_"
-$ deno sandbox copy <paths...>
+deno sandbox copy <paths...>
 ```
 
 ### Execute a command
@@ -65,13 +65,13 @@ $ deno sandbox copy <paths...>
 Runs an arbitrary command inside an existing sandbox.
 
 ```sh title=">_"
-$ deno sandbox exec <sandbox-id> <command...>
+deno sandbox exec <sandbox-id> <command...>
 ```
 
 Example:
 
 ```sh title=">_"
-$ deno sandbox exec sbx-1234 uptime
+deno sandbox exec sbx-1234 uptime
 ```
 
 ### Extend timeout
@@ -79,7 +79,7 @@ $ deno sandbox exec sbx-1234 uptime
 Extends how long a sandbox stays active before timing out.
 
 ```sh title=">_"
-$ deno sandbox extend <sandbox-id> <timeout>
+deno sandbox extend <sandbox-id> <timeout>
 ```
 
 Accepts time durations in the format of a number followed by a unit, where the
@@ -88,7 +88,7 @@ unit can be `s` for seconds, `m` for minutes, or `h` for hours.
 Example:
 
 ```sh title=">_"
-$ deno sandbox extend <sandbox-id> 30m
+deno sandbox extend <sandbox-id> 30m
 ```
 
 ### SSH into a sandbox
@@ -96,7 +96,7 @@ $ deno sandbox extend <sandbox-id> 30m
 Opens an interactive SSH session to the sandbox.
 
 ```sh title=">_"
-$ deno sandbox ssh <sandbox-id>
+deno sandbox ssh <sandbox-id>
 ```
 
 ### Deploy a sandbox
@@ -104,7 +104,7 @@ $ deno sandbox ssh <sandbox-id>
 Turns the state of a running sandbox into a Deno Deploy application.
 
 ```sh title=">_"
-$ deno sandbox deploy <sandbox-id> <app>
+deno sandbox deploy <sandbox-id> <app>
 ```
 
 ### Manage volumes
@@ -112,7 +112,7 @@ $ deno sandbox deploy <sandbox-id> <app>
 Creates, lists, and attaches persistent block volumes.
 
 ```sh title=">_"
-$ deno sandbox volumes --help
+deno sandbox volumes --help
 ```
 
 #### Create a volume
@@ -120,7 +120,7 @@ $ deno sandbox volumes --help
 Creates a new volume. Accepts the alias `volumes create` or `volumes new`.
 
 ```sh title=">_"
-$ deno sandbox volumes create <name>
+deno sandbox volumes create <name>
 ```
 
 #### List volumes
@@ -129,7 +129,7 @@ Lists all volumes in an organization. Accepts the alias `volumes list` or
 `volumes ls`.
 
 ```sh title=">_"
-$ deno sandbox volumes list
+deno sandbox volumes list
 ```
 
 #### Delete a volume
@@ -138,13 +138,13 @@ Deletes a volume. Accepts the alias `volumes delete`, `volumes rm` or
 `volumes remove`.
 
 ```sh title=">_"
-$ deno sandbox volumes delete <volume-id-or-slug>
+deno sandbox volumes delete <volume-id-or-slug>
 ```
 
 or
 
 ```sh title=">_"
-$ deno sandbox volumes delete <volume-slug>
+deno sandbox volumes delete <volume-slug>
 ```
 
 #### Snapshot a volume
@@ -152,13 +152,13 @@ $ deno sandbox volumes delete <volume-slug>
 Creates a snapshot of a volume. Accepts a volume ID or slug and a snapshot slug
 
 ```sh title=">_"
-$ deno sandbox volumes snapshot <volume-id-or-slug> <snapshot-slug>
+deno sandbox volumes snapshot <volume-id-or-slug> <snapshot-slug>
 ```
 
 or
 
 ```sh title=">_"
-$ deno sandbox volumes snapshot <volume-slug> <snapshot-slug>
+deno sandbox volumes snapshot <volume-slug> <snapshot-slug>
 ```
 
 ### Manage snapshots
@@ -166,7 +166,7 @@ $ deno sandbox volumes snapshot <volume-slug> <snapshot-slug>
 Creates and restores filesystem snapshots for sandboxes.
 
 ```sh title=">_"
-$ deno sandbox snapshots --help
+deno sandbox snapshots --help
 ```
 
 #### Create a snapshot
@@ -175,7 +175,7 @@ Creates a new snapshot of a sandbox. Accepts the alias `snapshots create` or
 `snapshots new`. It requires a volume ID or volume slug and a snapshot slug.
 
 ```sh title=">_"
-$ deno sandbox snapshots create <volume-id-or-slug> <snapshot-slug>
+deno sandbox snapshots create <volume-id-or-slug> <snapshot-slug>
 ```
 
 #### List snapshots
@@ -184,7 +184,7 @@ Lists all snapshots in an organization. Accepts the alias `snapshots list` or
 `snapshots ls`.
 
 ```sh title=">_"
-$ deno sandbox snapshots list
+deno sandbox snapshots list
 ```
 
 #### Delete a snapshot
@@ -193,7 +193,7 @@ Deletes a snapshot. Accepts the alias `snapshots delete`, `snapshots rm` or
 `snapshots remove`. It requires a snapshot ID or snapshot slug.
 
 ```sh title=">_"
-$ deno sandbox snapshots delete <id-or-slug>
+deno sandbox snapshots delete <id-or-slug>
 ```
 
 ### Switch organizations or apps
@@ -202,5 +202,5 @@ Switches your current Deploy organization or application context, which the
 sandbox command uses for authentication.
 
 ```sh title=">_"
-$ deno sandbox switch
+deno sandbox switch
 ```

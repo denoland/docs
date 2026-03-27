@@ -20,13 +20,13 @@ that auto-formats your code to a consistent style. For a broader overview, see
 Format all supported files in the current directory:
 
 ```sh title=">_"
-$ deno fmt
+deno fmt
 ```
 
 Format specific files or directories:
 
 ```sh title=">_"
-$ deno fmt main.ts src/
+deno fmt main.ts src/
 ```
 
 ## Watch mode
@@ -34,7 +34,7 @@ $ deno fmt main.ts src/
 Automatically re-format files when they change:
 
 ```sh title=">_"
-$ deno fmt --watch
+deno fmt --watch
 ```
 
 ## Check formatting in CI
@@ -43,14 +43,14 @@ Use `--check` to verify files are formatted without modifying them. The command
 exits with a non-zero status code if any files are unformatted:
 
 ```sh title=">_"
-$ deno fmt --check
+deno fmt --check
 ```
 
 Add `--fail-fast` to stop on the first unformatted file instead of reporting all
 of them, which is useful in large codebases:
 
 ```sh title=">_"
-$ deno fmt --check --fail-fast
+deno fmt --check --fail-fast
 ```
 
 ## Formatting stdin
@@ -58,7 +58,7 @@ $ deno fmt --check --fail-fast
 Format code piped through stdin — useful for editor integrations:
 
 ```sh title=">_"
-$ cat main.ts | deno fmt -
+cat main.ts | deno fmt -
 ```
 
 ## Configuring the formatter
@@ -97,7 +97,7 @@ Specify which files to format in `deno.json`:
 You can also exclude files from the command line:
 
 ```sh title=">_"
-$ deno fmt --ignore=dist/,build/
+deno fmt --ignore=dist/,build/
 ```
 
 ## Supported file types

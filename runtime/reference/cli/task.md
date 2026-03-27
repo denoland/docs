@@ -126,14 +126,14 @@ In the above example, running `deno task serve` will first execute `build` and
 `serve` task will be executed:
 
 ```sh title=">_"
-$ deno task serve
-$ Task build deno run -RW build.ts
-$ Task generate deno run -RW generate.ts
-$ Generating data...
-$ Starting the build...
-$ Build finished
-$ Data generated
-$ Task serve deno run -RN server.ts
+deno task serve
+Task build deno run -RW build.ts
+Task generate deno run -RW generate.ts
+Generating data...
+Starting the build...
+Build finished
+Data generated
+Task serve deno run -RN server.ts
 Listening on http://localhost:8000/
 ```
 
@@ -170,14 +170,14 @@ task will only be run once:
 ```
 
 ```sh title=">_"
-$ deno task a
-$ Task d deno run d.js
+deno task a
+Task d deno run d.js
 Running d
-$ Task c deno run c.js
+Task c deno run c.js
 Running c
-$ Task b deno run b.js
+Task b deno run b.js
 Running b
-$ Task a deno run a.js
+Task a deno run a.js
 Running a
 ```
 
@@ -199,8 +199,8 @@ If a cycle between dependencies is discovered, an error will be returned:
 ```
 
 ```sh title=">_"
-$ deno task a
-$ Task cycle detected: a -> b -> a
+deno task a
+Task cycle detected: a -> b -> a
 ```
 
 You can also specify a task that has `dependencies` but no `command`. This is
@@ -268,21 +268,21 @@ directories in parallel. To execute `dev` tasks from all workspace members use
 ```
 
 ```sh title=">_"
-$ deno task --recursive dev
-$ Task dev deno run -RN build.ts
-$ Task dev deno run -RN server.ts
-$ Bundling project...
+deno task --recursive dev
+Task dev deno run -RN build.ts
+Task dev deno run -RN server.ts
+Bundling project...
 Listening on http://localhost:8000/
-$ Project bundled
+Project bundled
 ```
 
 Tasks to run can be filtered based on the workspace members:
 
 ```sh title=">_"
-$ deno task --filter "client" dev
-$ Task dev deno run -RN build.ts
-$ Bundling project...
-$ Project bundled
+deno task --filter "client" dev
+Task dev deno run -RN build.ts
+Bundling project...
+Project bundled
 ```
 
 Note that the filter matches against the workspace member names as specified in
@@ -303,14 +303,14 @@ The `&&` operator provides a way to execute a command and if it _succeeds_ (has
 an exit code of `0`) it will execute the next command:
 
 ```sh title=">_"
-$ deno run --allow-read=. --allow-write=. collect.ts && deno run --allow-read=. analyze.ts
+deno run --allow-read=. --allow-write=. collect.ts && deno run --allow-read=. analyze.ts
 ```
 
 The `||` operator is the opposite. It provides a way to execute a command and
 only if it _fails_ (has a non-zero exit code) it will execute the next command:
 
 ```sh title=">_"
-$ deno run --allow-read=. --allow-write=. collect.ts || deno run play_sad_music.ts
+deno run --allow-read=. --allow-write=. collect.ts || deno run play_sad_music.ts
 ```
 
 ### Sequential lists
@@ -320,7 +320,7 @@ the previous command in the list passed or failed. Commands are separated with a
 semi-colon (`;`).
 
 ```sh title=">_"
-$ deno run output_data.ts ; deno run --allow-net server.ts
+deno run output_data.ts ; deno run --allow-net server.ts
 ```
 
 ### Async commands
@@ -332,7 +332,7 @@ an `&` to the end of it. For example the following would execute
 at the same time:
 
 ```sh title=">_"
-$ sleep 1 && deno run --allow-net server.ts & deno run --allow-net client.ts
+sleep 1 && deno run --allow-net server.ts & deno run --allow-net client.ts
 ```
 
 Unlike in most shells, the first async command to fail will cause all the other
@@ -342,7 +342,7 @@ opt out of this behavior by adding `|| true` to the end of a command, which will
 force a `0` exit code. For example:
 
 ```sh title=">_"
-$ deno run --allow-net server.ts || true & deno run --allow-net client.ts || true
+deno run --allow-net server.ts || true & deno run --allow-net client.ts || true
 ```
 
 ### Environment variables
@@ -350,7 +350,7 @@ $ deno run --allow-net server.ts || true & deno run --allow-net client.ts || tru
 Environment variables are defined like the following:
 
 ```sh title=">_"
-$ export VAR_NAME=value
+export VAR_NAME=value
 ```
 
 Here's an example of using one in a task with shell variable substitution and
@@ -359,14 +359,14 @@ process (note that in the JSON configuration file the double quotes would need
 to be escaped with backslashes):
 
 ```sh title=">_"
-$ export VAR=hello && echo $VAR && deno eval "console.log('Deno: ' + Deno.env.get('VAR'))"
+export VAR=hello && echo $VAR && deno eval "console.log('Deno: ' + Deno.env.get('VAR'))"
 ```
 
 Would output:
 
 ```sh title=">_"
-$ hello
-$ Deno: hello
+hello
+Deno: hello
 ```
 
 #### Setting environment variables for a command
@@ -374,7 +374,7 @@ $ Deno: hello
 To specify environment variable(s) before a command, list them like so:
 
 ```sh title=">_"
-$ VAR=hello VAR2=bye deno run main.ts
+VAR=hello VAR2=bye deno run main.ts
 ```
 
 This will use those environment variables specifically for the following
@@ -386,21 +386,21 @@ Shell variables are similar to environment variables, but won't be exported to
 spawned commands. They are defined with the following syntax:
 
 ```sh title=">_"
-$ VAR_NAME=value
+VAR_NAME=value
 ```
 
 If we use a shell variable instead of an environment variable in a similar
 example to what's shown in the previous "Environment variables" section:
 
 ```sh title=">_"
-$ VAR=hello && echo $VAR && deno eval "console.log('Deno: ' + Deno.env.get('VAR'))"
+VAR=hello && echo $VAR && deno eval "console.log('Deno: ' + Deno.env.get('VAR'))"
 ```
 
 We will get the following output:
 
 ```sh title=">_"
-$ hello
-$ Deno: undefined
+hello
+Deno: undefined
 ```
 
 Shell variables can be useful when we want to reuse a value, but don't want it
@@ -412,7 +412,7 @@ The exit code of the previously run command is available in the `$?` variable.
 
 ```sh title=">_"
 # outputs 10
-$ deno eval 'Deno.exit(10)' || echo $?
+deno eval 'Deno.exit(10)' || echo $?
 ```
 
 ### Pipelines
@@ -423,13 +423,13 @@ The following command pipes the stdout output "Hello" to the stdin of the
 spawned Deno process:
 
 ```sh title=">_"
-$ echo Hello | deno run main.ts
+echo Hello | deno run main.ts
 ```
 
 To pipe stdout and stderr, use `|&` instead:
 
 ```sh title=">_"
-$ deno eval 'console.log(1); console.error(2);' |& deno run main.ts
+deno eval 'console.log(1); console.error(2);' |& deno run main.ts
 ```
 
 ### Command substitution
@@ -441,13 +441,13 @@ For example, to provide the output of getting the latest git revision to another
 command you could do the following:
 
 ```sh title=">_"
-$ deno run main.ts $(git rev-parse HEAD)
+deno run main.ts $(git rev-parse HEAD)
 ```
 
 Another example using a shell variable:
 
 ```sh title=">_"
-$ REV=$(git rev-parse HEAD) && deno run main.ts $REV && echo $REV
+REV=$(git rev-parse HEAD) && deno run main.ts $REV && echo $REV
 ```
 
 ### Negate exit code
@@ -456,7 +456,7 @@ To negate the exit code, add an exclamation point and space before a command:
 
 ```sh title=">_"
 # change the exit code from 1 to 0
-$ ! deno eval 'Deno.exit(1);'
+! deno eval 'Deno.exit(1);'
 ```
 
 ### Redirects
@@ -467,26 +467,26 @@ For example, the following redirects _stdout_ of `deno run main.ts` to a file
 called `file.txt` on the file system:
 
 ```sh title=">_"
-$ deno run main.ts > file.txt
+deno run main.ts > file.txt
 ```
 
 To instead redirect _stderr_, use `2>`:
 
 ```sh title=">_"
-$ deno run main.ts 2> file.txt
+deno run main.ts 2> file.txt
 ```
 
 To redirect both stdout _and_ stderr, use `&>`:
 
 ```sh title=">_"
-$ deno run main.ts &> file.txt
+deno run main.ts &> file.txt
 ```
 
 To append to a file, instead of overwriting an existing one, use two right angle
 brackets instead of one:
 
 ```sh title=">_"
-$ deno run main.ts >> file.txt
+deno run main.ts >> file.txt
 ```
 
 Suppressing either stdout, stderr, or both of a command is possible by
@@ -495,27 +495,27 @@ Windows.
 
 ```sh title=">_"
 # suppress stdout
-$ deno run main.ts > /dev/null
+deno run main.ts > /dev/null
 # suppress stderr
-$ deno run main.ts 2> /dev/null
+deno run main.ts 2> /dev/null
 # suppress both stdout and stderr
-$ deno run main.ts &> /dev/null
+deno run main.ts &> /dev/null
 ```
 
 Or redirecting stdout to stderr and vice-versa:
 
 ```sh title=">_"
 # redirect stdout to stderr
-$ deno run main.ts >&2
+deno run main.ts >&2
 # redirect stderr to stdout
-$ deno run main.ts 2>&1
+deno run main.ts 2>&1
 ```
 
 Input redirects are also supported:
 
 ```sh title=">_"
 # redirect file.txt to the stdin of gzip
-$ gzip < file.txt
+gzip < file.txt
 ```
 
 Note that redirecting multiple redirects is currently not supported.
@@ -543,9 +543,9 @@ console.log("Hello there!");
 Then on a Windows machine:
 
 ```sh title=">_"
-$ > pwd
-$ C:\Users\david\dev\my_project
-$ > deno task hi
+> pwd
+C:\Users\david\dev\my_project
+> deno task hi
 Hello there!
 ```
 
@@ -556,11 +556,11 @@ globs to match files in a cross-platform way.
 
 ```sh title=">_"
 # match .ts files in the current and descendant directories
-$ echo **/*.ts
+echo **/*.ts
 # match .ts files in the current directory
-$ echo *.ts
+echo *.ts
 # match files that start with "data", have a single number, then end with .csv
-$ echo data[0-9].csv
+echo data[0-9].csv
 ```
 
 The supported glob characters are `*`, `?`, and `[`/`]`.

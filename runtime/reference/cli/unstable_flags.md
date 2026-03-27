@@ -11,7 +11,7 @@ feature flags are listed on this page, and can also be found in the CLI help
 text by running:
 
 ```sh title=">_"
-$ deno --help
+deno --help
 ```
 
 ## Using flags at the command line
@@ -21,7 +21,7 @@ by passing in the flag as an option to the CLI. Here's an example of running a
 program with the `--unstable-node-globals` flag enabled:
 
 ```sh title=">_"
-$ deno run --unstable-node-globals main.ts
+deno run --unstable-node-globals main.ts
 ```
 
 ## Configuring flags in `deno.json`
@@ -50,7 +50,7 @@ Here's an example of setting the `--unstable-bare-node-builtins` flag via
 environment variable:
 
 ```sh title=">_"
-$ export DENO_UNSTABLE_BARE_NODE_BUILTINS=true
+export DENO_UNSTABLE_BARE_NODE_BUILTINS=true
 ```
 
 ## `--unstable-bare-node-builtins`

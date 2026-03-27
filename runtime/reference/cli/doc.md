@@ -32,8 +32,8 @@ export function add(x: number, y: number): number {
 Running the Deno `doc` command, prints the function's JSDoc comment to `stdout`:
 
 ```sh title=">_"
-$ deno doc add.ts
-$ function add(x: number, y: number): number
+deno doc add.ts
+function add(x: number, y: number): number
   Adds x and y. @param {number} x @param {number} y @returns {number} Sum of x and y
 ```
 
@@ -71,10 +71,10 @@ export function getName(person: Person) {
 ```
 
 ```sh title=">_"
-$ deno doc --lint mod.ts
-$ Type 'getName' references type 'Person' which is not exported from a root module.
-$ Missing JS documentation comment.
-$ Missing return type.
+deno doc --lint mod.ts
+Type 'getName' references type 'Person' which is not exported from a root module.
+Missing JS documentation comment.
+Missing return type.
     at file:///mod.ts:6:1
 ```
 
@@ -183,11 +183,11 @@ syntax. You can also link to symbols in a different module via
 Use the `--html` flag to generate a static site with documentation.
 
 ```sh title=">_"
-$ deno doc --html --name="My library" ./mod.ts
+deno doc --html --name="My library" ./mod.ts
 
-$ deno doc --html --name="My library" --output=./documentation/ ./mod.ts
+deno doc --html --name="My library" --output=./documentation/ ./mod.ts
 
-$ deno doc --html --name="My library" ./sub1/mod.ts ./sub2/mod.ts
+deno doc --html --name="My library" ./sub1/mod.ts ./sub2/mod.ts
 ```
 
 The generated documentation is a static site with multiple pages that can be

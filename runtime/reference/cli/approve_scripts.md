@@ -15,7 +15,7 @@ these scripts by default for security reasons.
 Review and approve pending scripts interactively:
 
 ```sh title=">_"
-$ deno approve-scripts
+deno approve-scripts
 ```
 
 This will show you which packages have lifecycle scripts that haven't been

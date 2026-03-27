@@ -22,13 +22,13 @@ export default {
 ```
 
 ```sh title=">_"
-$ deno serve server.ts
+deno serve server.ts
 ```
 
 By default, the server listens on port **8000**. Override it with `--port`:
 
 ```sh title=">_"
-$ deno serve --port=3000 server.ts
+deno serve --port=3000 server.ts
 ```
 
 ## Routing requests
@@ -57,7 +57,7 @@ By default, `deno serve` listens on `0.0.0.0`. Use `--host` to bind to a
 specific interface:
 
 ```sh title=">_"
-$ deno serve --host=127.0.0.1 server.ts
+deno serve --host=127.0.0.1 server.ts
 ```
 
 ## Horizontal scaling
@@ -65,7 +65,7 @@ $ deno serve --host=127.0.0.1 server.ts
 Run multiple server instances across CPU cores for better throughput:
 
 ```sh title=">_"
-$ deno serve --parallel server.ts
+deno serve --parallel server.ts
 ```
 
 ## Watch mode
@@ -73,7 +73,7 @@ $ deno serve --parallel server.ts
 Restart the server automatically when files change:
 
 ```sh title=">_"
-$ deno serve --watch server.ts
+deno serve --watch server.ts
 ```
 
 ## Permissions
@@ -82,5 +82,5 @@ $ deno serve --watch server.ts
 Additional permissions (like file reads) must be granted explicitly:
 
 ```sh title=">_"
-$ deno serve --allow-read server.ts
+deno serve --allow-read server.ts
 ```

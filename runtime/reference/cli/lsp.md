@@ -16,7 +16,7 @@ provide features like intellisense, code formatting, and more.
 ## Usage
 
 ```sh title=">_"
-$ deno lsp
+deno lsp
 ```
 
 The language server communicates over stdin/stdout using the

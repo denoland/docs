@@ -11,7 +11,7 @@ description: "Remove cached dependencies for a clean start"
 ## Basic usage
 
 ```sh title=">_"
-$ deno clean
+deno clean
 ```
 
 ## Dry run
@@ -19,7 +19,7 @@ $ deno clean
 Preview what would be deleted without actually removing anything:
 
 ```sh title=">_"
-$ deno clean --dry-run
+deno clean --dry-run
 ```
 
 ## Keeping specific caches
@@ -27,7 +27,7 @@ $ deno clean --dry-run
 Use `--except` to preserve certain cache types while cleaning the rest:
 
 ```sh title=">_"
-$ deno clean --except=npm,jsr
+deno clean --except=npm,jsr
 ```
 
 ## When to use this

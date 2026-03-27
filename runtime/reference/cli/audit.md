@@ -15,35 +15,35 @@ vulnerability databases.
 Audit all dependencies:
 
 ```sh title=">_"
-$ deno audit
+deno audit
 ```
 
 Show only high and critical severity vulnerabilities:
 
 ```sh title=">_"
-$ deno audit --level=high
+deno audit --level=high
 ```
 
 Check against the [socket.dev](https://socket.dev/) vulnerability database:
 
 ```sh title=">_"
-$ deno audit --socket
+deno audit --socket
 ```
 
 Ignore specific CVEs (useful for suppressing false positives or accepted risks):
 
 ```sh title=">_"
-$ deno audit --ignore=CVE-2024-12345,CVE-2024-67890
+deno audit --ignore=CVE-2024-12345,CVE-2024-67890
 ```
 
 Ignore advisories that have no available fix:
 
 ```sh title=">_"
-$ deno audit --ignore-unfixable
+deno audit --ignore-unfixable
 ```
 
 Don't error if the audit data can't be retrieved from the registry:
 
 ```sh title=">_"
-$ deno audit --ignore-registry-errors
+deno audit --ignore-registry-errors
 ```

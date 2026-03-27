@@ -684,11 +684,6 @@
     .gfm-highlight .token.property {
       color: var(--color-prettylights-syntax-entity-tag);
     }
-    .highlight .token.shell-prompt,
-    .gfm-highlight .token.shell-prompt {
-      color: var(--color-prettylights-syntax-comment);
-      user-select: none;
-    }
     .highlight .token.deleted, .gfm-highlight .token.deleted {
       color: var(--color-prettylights-syntax-markup-deleted-text);
       background-color: var(--color-prettylights-syntax-markup-deleted-bg);

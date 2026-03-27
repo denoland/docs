@@ -12,10 +12,10 @@ description: "Remove a dependency from your project or from your global cache"
 Remove dependencies specified in `deno.json` or `package.json`:
 
 ```sh title=">_"
-$ deno add npm:express
+deno add npm:express
 Add npm:express@5.0.0
 
-$ cat deno.json
+cat deno.json
 {
   "imports": {
     "express": "npm:express@5.0.0"
@@ -24,10 +24,10 @@ $ cat deno.json
 ```
 
 ```sh title=">_"
-$ deno uninstall express
+deno uninstall express
 Removed express
 
-$ cat deno.json
+cat deno.json
 {
   "imports": {}
 }
@@ -42,11 +42,11 @@ You can also use `deno remove` which is an alias to `deno uninstall [PACKAGES]`
 You can remove multiple dependencies at once:
 
 ```sh title=">_"
-$ deno add npm:express jsr:@std/http
+deno add npm:express jsr:@std/http
 Added npm:express@5.0.0
 Added jsr:@std/http@1.0.7
 
-$ cat deno.json
+cat deno.json
 {
   "imports": {
     "@std/http": "jsr:@std/http@^1.0.7",
@@ -56,11 +56,11 @@ $ cat deno.json
 ```
 
 ```sh title=">_"
-$ deno remove express @std/http
+deno remove express @std/http
 Removed express
 Removed @std/http
 
-$ cat deno.json
+cat deno.json
 {
   "imports": {}
 }
@@ -76,17 +76,17 @@ still persist in the global cache for future use.
 If your project contains `package.json`, `deno uninstall` can work with it too:
 
 ```sh title=">_"
-$ cat package.json
+cat package.json
 {
   "dependencies": {
     "express": "^5.0.0"
   }
 }
 
-$ deno remove express
+deno remove express
 Removed express
 
-$ cat package.json
+cat package.json
 {
   "dependencies": {}
 }
@@ -97,11 +97,11 @@ $ cat package.json
 Uninstall `serve`
 
 ```sh title=">_"
-$ deno uninstall --global serve
+deno uninstall --global serve
 ```
 
 Uninstall `serve` from a specific installation root
 
 ```sh title=">_"
-$ deno uninstall -g --root /usr/local/bin serve
+deno uninstall -g --root /usr/local/bin serve
 ```

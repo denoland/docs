@@ -10,9 +10,9 @@ description: "Scaffold a new Deno project with tests and configuration"
 ## Examples
 
 ```sh title=">_"
-$ deno init
+deno init
 ✅ Project initialized
-$ Run these commands to get started
+Run these commands to get started
 
   // Run the program
   deno run main.ts
@@ -23,15 +23,15 @@ $ Run these commands to get started
   // Run the tests
   deno test
 
-$ deno run main.ts
+deno run main.ts
 Add 2 + 3 = 5
 
-$ deno test
+deno test
 Check file:///dev/main_test.ts
-$ running 1 test from main_test.ts
-$ addTest ... ok (6ms)
+running 1 test from main_test.ts
+addTest ... ok (6ms)
 
-$ ok | 1 passed | 0 failed (29ms)
+ok | 1 passed | 0 failed (29ms)
 ```
 
 The `init` subcommand will create two files (`main.ts` and `main_test.ts`).
@@ -43,10 +43,10 @@ You can also specify an argument to `deno init` to initialize a project in a
 specific directory:
 
 ```sh title=">_"
-$ deno init my_deno_project
+deno init my_deno_project
 ✅ Project initialized
 
-$ Run these commands to get started
+Run these commands to get started
 
   cd my_deno_project
 
@@ -66,10 +66,10 @@ By running `deno init --lib` Deno will bootstrap a project that is ready to be
 published on [JSR](https://jsr.io/).
 
 ```sh title=">_"
-$ deno init --lib
+deno init --lib
 ✅ Project initialized
 
-$ Run these commands to get started
+Run these commands to get started
 
   # Run the tests
   deno test
@@ -104,10 +104,10 @@ Running `deno init --serve` bootstraps a web server that works with
 [`deno serve`](./serve).
 
 ```sh title=">_"
-$ deno init --serve
+deno init --serve
 ✅ Project initialized
 
-$ Run these commands to get started
+Run these commands to get started
 
   # Run the server
   deno serve -R main.ts
@@ -139,10 +139,10 @@ Now, you can start your web server, which
 by running `deno task dev`.
 
 ```sh title=">_"
-$ deno task dev
-$ Task dev deno serve --watch -R main.ts
-$ Watcher Process started.
-$ deno serve: Listening on http://0.0.0.0:8000/
+deno task dev
+Task dev deno serve --watch -R main.ts
+Watcher Process started.
+deno serve: Listening on http://0.0.0.0:8000/
 ```
 
 ## Initialize an empty project
@@ -151,10 +151,10 @@ Running `deno init --empty` bootstraps an empty project with a basic console
 log.
 
 ```sh title=">_"
-$ deno init --empty
+deno init --empty
 ✅ Project initialized
 
-$ Run these commands to get started
+Run these commands to get started
 
   # Run the program
   deno run main.ts
@@ -179,9 +179,9 @@ Now, you can run the project, which
 by running `deno task dev`.
 
 ```sh title=">_"
-$ deno task dev
-$ Task dev deno run --watch main.ts
-$ Watcher Process started.
+deno task dev
+Task dev deno run --watch main.ts
+Watcher Process started.
 Hello world!
 ```
 
@@ -191,7 +191,7 @@ You can append a `--lib` flag to add extra parameters to your `deno.json`, such
 as "name", "version" and an "exports" fields.
 
 ```sh title=">_"
-$ deno init my_deno_project --lib
+deno init my_deno_project --lib
 ✅ Project initialized
 ```
 

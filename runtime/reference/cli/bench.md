@@ -24,16 +24,16 @@ Deno.bench("URL parsing", () => {
 Secondly, run the benchmark using the `deno bench` subcommand.
 
 ```sh title=">_"
-$ deno bench url_bench.ts
+deno bench url_bench.ts
 Check file:///path/to/url_bench.ts
     CPU | 12th Gen Intel(R) Core(TM) i3-12100
-$ Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
+Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
 
-$ file:///path/to/url_bench.ts
+file:///path/to/url_bench.ts
 
-$ | benchmark     | time/iter (avg) |        iter/s |      (min … max)      |      p75 |      p99 |     p995 |
-$ | ------------- | --------------- | ------------- | --------------------- | -------- | -------- | -------- |
-$ | URL parsing   |        345.8 ns |     2,892,000 | (325.4 ns … 497.2 ns) | 346.9 ns | 443.2 ns | 497.2 ns |
+| benchmark     | time/iter (avg) |        iter/s |      (min … max)      |      p75 |      p99 |     p995 |
+| ------------- | --------------- | ------------- | --------------------- | -------- | -------- | -------- |
+| URL parsing   |        345.8 ns |     2,892,000 | (325.4 ns … 497.2 ns) | 346.9 ns | 443.2 ns | 497.2 ns |
 ```
 
 ## Writing benchmarks
@@ -156,20 +156,20 @@ Deno.bench("performance.now()", { group: "timing" }, () => {
 ```
 
 ```sh title=">_"
-$ deno bench time_bench.ts
+deno bench time_bench.ts
     CPU | 12th Gen Intel(R) Core(TM) i3-12100
-$ Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
+Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
 
-$ file:///path/to/time_bench.ts
+file:///path/to/time_bench.ts
 
-$ | benchmark           | time/iter (avg) |        iter/s |      (min … max)      |      p75 |      p99 |     p995 |
-$ | ------------------- | --------------- | ------------- | --------------------- | -------- | -------- | -------- |
+| benchmark           | time/iter (avg) |        iter/s |      (min … max)      |      p75 |      p99 |     p995 |
+| ------------------- | --------------- | ------------- | --------------------- | -------- | -------- | -------- |
 
-$ group timing
-$ | Date.now()          |         44.2 ns |    22,630,000 | ( 42.3 ns …  73.4 ns) |  44.0 ns |  54.1 ns |  55.1 ns |
-$ | performance.now()   |         59.9 ns |    16,700,000 | ( 56.0 ns …  94.8 ns) |  60.7 ns |  76.6 ns |  79.5 ns |
+group timing
+| Date.now()          |         44.2 ns |    22,630,000 | ( 42.3 ns …  73.4 ns) |  44.0 ns |  54.1 ns |  55.1 ns |
+| performance.now()   |         59.9 ns |    16,700,000 | ( 56.0 ns …  94.8 ns) |  60.7 ns |  76.6 ns |  79.5 ns |
 
-$ summary
+summary
   Date.now()
      1.35x faster than performance.now()
 ```
@@ -192,13 +192,13 @@ The glob expands to:
 
 ```sh title=">_"
 # Run all benches in the current directory and all sub-directories
-$ deno bench
+deno bench
 
 # Run all benches in the util directory
-$ deno bench util/
+deno bench util/
 
 # Run just my_bench.ts
-$ deno bench my_bench.ts
+deno bench my_bench.ts
 ```
 
 > ⚠️ If you want to pass additional CLI arguments to the bench files use `--` to
@@ -206,7 +206,7 @@ $ deno bench my_bench.ts
 
 ```sh title=">_"
 # Pass additional arguments to the bench file
-$ deno bench my_bench.ts -- -e --foo --bar
+deno bench my_bench.ts -- -e --foo --bar
 ```
 
 `deno bench` uses the same permission model as `deno run` and therefore will
@@ -217,7 +217,7 @@ To see all runtime options with `deno bench`, you can reference the command line
 help:
 
 ```sh title=">_"
-$ deno help bench
+deno help bench
 ```
 
 ## Filtering
@@ -252,14 +252,14 @@ This command will run all of these benches because they all contain the word
 "bench".
 
 ```sh title=">_"
-$ deno bench --filter "bench" benchmarks/
+deno bench --filter "bench" benchmarks/
 ```
 
 On the flip side, the following command uses a pattern and will run the second
 and third benchmarks.
 
 ```sh title=">_"
-$ deno bench --filter "/bench-*\d/" benchmarks/
+deno bench --filter "/bench-*\d/" benchmarks/
 ```
 
 _To let Deno know that you want to use a pattern, wrap your filter with
@@ -311,7 +311,7 @@ Deno.bench({
 To retrieve the output as JSON, use the `--json` flag:
 
 ```sh title=">_"
-$ deno bench my_bench.ts --json
+deno bench my_bench.ts --json
 {
   "version": 1,
   "runtime": "Deno/2.4.2 x86_64-unknown-linux-gnu",

@@ -136,13 +136,7 @@ const site = lume(
           if (!lang || !Prism.languages[lang]) {
             return code;
           }
-          let result = Prism.highlight(code, Prism.languages[lang], lang);
-          if (lang === "sh" || lang === "bash" || lang === "shell") {
-            result = result.replaceAll(
-              /^(\$ )/gm,
-              '<span class="token shell-prompt">$1</span>',
-            );
-          }
+          const result = Prism.highlight(code, Prism.languages[lang], lang);
           return result || code;
         },
       },

@@ -17,16 +17,16 @@ The REPL provides a couple of special variables, that are always available:
 | _error     | Yields the last thrown error         |
 
 ```sh title=">_"
-$ Deno 1.14.3
-$ exit using ctrl+d or close()
-$ > "hello world!"
+Deno 1.14.3
+exit using ctrl+d or close()
+> "hello world!"
 "hello world!"
-$ > _
+> _
 "hello world!"
-$ > const foo = "bar";
-$ undefined
-$ > _
-$ undefined
+> const foo = "bar";
+undefined
+> _
+undefined
 ```
 
 ## Special functions
@@ -45,13 +45,13 @@ into the REPL. This is useful for importing some code you commonly use in the
 REPL, or modifying the runtime in some way:
 
 ```sh title=">_"
-$ deno repl --allow-net --eval 'import { assert } from "jsr:@std/assert@1"'
-$ Deno 1.45.3
-$ exit using ctrl+d, ctrl+c, or close()
-$ > assert(true)
-$ undefined
-$ > assert(false)
-$ Uncaught AssertionError
+deno repl --allow-net --eval 'import { assert } from "jsr:@std/assert@1"'
+Deno 1.45.3
+exit using ctrl+d, ctrl+c, or close()
+> assert(true)
+undefined
+> assert(false)
+Uncaught AssertionError
     at assert (https://jsr.io/@std/assert/1.0.0/assert.ts:21:11)
     at <anonymous>:1:22
 ```
@@ -69,13 +69,13 @@ If `--eval` is also specified, then `--eval-file` files are run before the
 `--eval` code.
 
 ```sh title=">_"
-$ deno repl --eval-file=https://docs.deno.com/examples/welcome.ts,https://docs.deno.com/examples/local.ts
+deno repl --eval-file=https://docs.deno.com/examples/welcome.ts,https://docs.deno.com/examples/local.ts
 Download https://docs.deno.com/examples/welcome.ts
-$ Welcome to Deno!
+Welcome to Deno!
 Download https://docs.deno.com/examples/local.ts
-$ Deno 1.45.3
-$ exit using ctrl+d or close()
-$ > local // this variable is defined locally in local.ts, but not exported
+Deno 1.45.3
+exit using ctrl+d or close()
+> local // this variable is defined locally in local.ts, but not exported
 "This is a local variable inside of local.ts"
 ```
 
@@ -88,12 +88,12 @@ This can cause "Module not found" errors when `--eval-file` is used with module
 files:
 
 ```sh title=">_"
-$ deno repl --eval-file=https://jsr.io/@std/encoding/1.0.0/ascii85.ts
+deno repl --eval-file=https://jsr.io/@std/encoding/1.0.0/ascii85.ts
 error in --eval-file file https://jsr.io/@std/encoding/1.0.0/ascii85.ts. Uncaught TypeError: Module not found "file:///home/_validate_binary_like.ts".
     at async <anonymous>:2:13
-$ Deno 1.45.3
-$ exit using ctrl+d or close()
-$ >
+Deno 1.45.3
+exit using ctrl+d or close()
+>
 ```
 
 ## Tab completions
@@ -102,12 +102,12 @@ Tab completions are crucial feature for quick navigation in REPL. After hitting
 `tab` key, Deno will now show a list of all possible completions.
 
 ```sh title=">_"
-$ deno repl
-$ Deno 1.45.3
-$ exit using ctrl+d or close()
-$ > Deno.read
-$ readTextFile      readFile          readDirSync       readLinkSync      readAll           read
-$ readTextFileSync  readFileSync      readDir           readLink          readAllSync       readSync
+deno repl
+Deno 1.45.3
+exit using ctrl+d or close()
+> Deno.read
+readTextFile      readFile          readDirSync       readLinkSync      readAll           read
+readTextFileSync  readFileSync      readDir           readLink          readAllSync       readSync
 ```
 
 ## Keyboard shortcuts

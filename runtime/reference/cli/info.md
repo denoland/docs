@@ -13,7 +13,7 @@ description: "Inspect the dependencies of your project"
 ## Example
 
 ```sh title=">_"
-$ deno info jsr:@std/http/file-server
+deno info jsr:@std/http/file-server
 local: /home/user/.cache/deno/deps/https/jsr.io/...
 type: TypeScript
 dependencies: 40 unique
@@ -108,7 +108,7 @@ Dependency inspector works with any local or remote ES modules.
 Use `--json` to get machine-readable output, useful for tooling and CI:
 
 ```sh title=">_"
-$ deno info --json main.ts
+deno info --json main.ts
 ```
 
 ## Cache location
@@ -116,7 +116,7 @@ $ deno info --json main.ts
 `deno info` can be used to display information about cache location:
 
 ```sh title=">_"
-$ deno info
+deno info
 DENO_DIR location: "/Users/deno/Library/Caches/deno"
 Remote modules cache: "/Users/deno/Library/Caches/deno/deps"
 TypeScript compiler cache: "/Users/deno/Library/Caches/deno/gen"

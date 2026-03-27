@@ -17,16 +17,16 @@ used to execute the script must be specified at compilation time. This includes
 permission flags.
 
 ```sh title=">_"
-$ deno compile --allow-read --allow-net jsr:@std/http/file-server
+deno compile --allow-read --allow-net jsr:@std/http/file-server
 ```
 
 [Script arguments](/runtime/getting_started/command_line_interface/#passing-script-arguments)
 can be partially embedded.
 
 ```sh title=">_"
-$ deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
+deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
 
-$ ./file_server --help
+./file_server --help
 ```
 
 ## Cross Compilation
@@ -87,7 +87,7 @@ To include non-statically analyzable dynamic imports, specify an
 `--include <path>` flag.
 
 ```sh title=">_"
-$ deno compile --include calc.ts --include better_calc.ts main.ts
+deno compile --include calc.ts --include better_calc.ts main.ts
 ```
 
 ## Including Data Files or Directories
@@ -96,7 +96,7 @@ Starting in Deno 2.1, you can include files or directories in the executable by
 specifying them via the `--include <path>` flag.
 
 ```sh title=">_"
-$ deno compile --include names.csv --include data main.ts
+deno compile --include names.csv --include data main.ts
 ```
 
 Then read the file relative to the directory path of the current module via
@@ -122,7 +122,7 @@ executable by default. There are two ways to include workers:
 1. Use the `--include <path>` flag to include the worker code.
 
 ```sh title=">_"
-$ deno compile --include worker.ts main.ts
+deno compile --include worker.ts main.ts
 ```
 
 2. Import worker module using a statically analyzable import.
@@ -133,7 +133,7 @@ import "./worker.ts";
 ```
 
 ```sh title=">_"
-$ deno compile main.ts
+deno compile main.ts
 ```
 
 ## Self-Extracting Executables
@@ -144,7 +144,7 @@ binary extracts all embedded files to disk on first run and uses real file
 system operations at runtime.
 
 ```sh title=">_"
-$ deno compile --self-extracting main.ts
+deno compile --self-extracting main.ts
 ```
 
 This is useful for scenarios where code needs real files on disk, such as native
@@ -181,18 +181,18 @@ By default, on macOS, the compiled executable will be signed using an ad-hoc
 signature which is the equivalent of running `codesign -s -`:
 
 ```sh title=">_"
-$ deno compile -o main main.ts
-$ codesign --verify -vv ./main
+deno compile -o main main.ts
+codesign --verify -vv ./main
 
-$ ./main: valid on disk
-$ ./main: satisfies its Designated Requirement
+./main: valid on disk
+./main: satisfies its Designated Requirement
 ```
 
 You can specify a signing identity when code signing the executable just like
 you would do with any other macOS executable:
 
 ```sh title=">_"
-$ codesign -s "Developer ID Application: Your Name" ./main
+codesign -s "Developer ID Application: Your Name" ./main
 ```
 
 Refer to the
@@ -205,8 +205,8 @@ On Windows, the compiled executable can be signed using the `SignTool.exe`
 utility.
 
 ```sh title=">_"
-$ deno compile -o main.exe main.ts
-$ signtool sign /fd SHA256 main.exe
+deno compile -o main.exe main.ts
+signtool sign /fd SHA256 main.exe
 ```
 
 ## Unavailable in executables

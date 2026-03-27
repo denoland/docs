@@ -15,13 +15,13 @@ This is useful for editors and tools that need Deno's type information.
 Print type declarations to stdout:
 
 ```sh title=">_"
-$ deno types
+deno types
 ```
 
 Save to a file for use with an editor or type checker:
 
 ```sh title=">_"
-$ deno types > deno.d.ts
+deno types > deno.d.ts
 ```
 
 ## When to use this
