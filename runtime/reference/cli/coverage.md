@@ -7,10 +7,13 @@ openGraphTitle: "deno coverage"
 description: "Generate a coverage report for your code"
 ---
 
+`deno coverage` generates coverage reports from data collected by
+[`deno test --coverage`](/runtime/reference/cli/test/#code-coverage).
+
 ## Inclusions and Exclusions
 
 By default coverage includes any of your code that exists on the local file
-system, and it's imports.
+system, and its imports.
 
 You can customize the inclusions and exclusions by using the `--include` and
 `--exclude` options.

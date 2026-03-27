@@ -7,6 +7,8 @@ openGraphTitle: "deno publish"
 description: "Publish your package or workspace to the JSR registry"
 ---
 
+`deno publish` publishes your package to the [JSR](https://jsr.io/) registry.
+
 ## Package Requirements
 
 Your package must have a `name` and `version` and an `exports` field in its

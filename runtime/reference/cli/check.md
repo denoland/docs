@@ -9,7 +9,8 @@ description: "Download and type-check code without execution"
 
 `deno check` type-checks your TypeScript (or JavaScript) code without running
 it. This is useful in CI pipelines or before deploying to catch type errors
-early.
+early. For more on TypeScript in Deno, see the
+[TypeScript](/runtime/fundamentals/typescript/) guide.
 
 ## Basic usage
 

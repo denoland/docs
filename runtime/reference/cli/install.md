@@ -12,6 +12,10 @@ openGraphTitle: "deno install"
 description: "Install and cache dependencies for your project"
 ---
 
+`deno install` installs dependencies and caches them for your project. For more
+on how Deno handles modules, see
+[Modules and dependencies](/runtime/fundamentals/modules/).
+
 ## Examples
 
 ### deno install

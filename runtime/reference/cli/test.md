@@ -7,8 +7,11 @@ openGraphTitle: "deno test"
 description: "Run tests for your project with Deno's built-in test runner"
 ---
 
-Deno ships with a built-in test runner. To learn how to write tests, see the
-[Testing fundamentals](/runtime/fundamentals/testing/) guide.
+Deno ships with a built-in test runner using the
+[`Deno.test()`](/api/deno/~/Deno.test) API. To learn how to write tests, see the
+[Testing fundamentals](/runtime/fundamentals/testing/) guide. For assertions,
+see [`@std/assert`](/runtime/reference/std/assert/) and
+[`@std/expect`](/runtime/reference/std/expect/).
 
 ## Running tests
 

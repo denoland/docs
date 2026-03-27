@@ -12,7 +12,7 @@ description: "Run benchmarks using Deno's built-in bench tool."
 ## Quickstart
 
 Firstly, let's create a file `url_bench.ts` and register a bench using the
-`Deno.bench()` function.
+[`Deno.bench()`](/api/deno/~/Deno.bench) function.
 
 ```ts
 // url_bench.ts

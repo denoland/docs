@@ -7,8 +7,9 @@ openGraphTitle: "deno serve"
 description: "A flexible and configurable HTTP server for Deno"
 ---
 
-`deno serve` runs a file as an HTTP server. The file must export a default
-object with a `fetch` handler. For a full guide on building HTTP servers, see
+`deno serve` runs a file as an HTTP server using
+[`Deno.serve()`](/api/deno/~/Deno.serve). The file must export a default object
+with a `fetch` handler. For a full guide on building HTTP servers, see
 [Writing an HTTP Server](/runtime/fundamentals/http_server/).
 
 ## Basic usage
