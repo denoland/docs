@@ -75,9 +75,6 @@ jobs:
           key: og-images-${{ hashFiles('open_graph/**') }}
           restore-keys: og-images-
 
-      - name: Generate last-modified data
-        run: deno task generate:last-modified
-
       # Build reference pages first with a minimal Lume config (JSX only,
       # no markdown/esbuild/tailwind/sitemap), then build the main site
       # skipping reference pages. Outputs merge since both use emptyDest:false.
