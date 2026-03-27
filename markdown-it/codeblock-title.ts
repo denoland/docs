@@ -12,7 +12,7 @@ export default function codeblockTitlePlugin(md: any) {
   ) {
     const render = defaultRender(tokens, idx, options, env, self);
 
-    const info = (tokens[idx].info ?? "");
+    const info = tokens[idx].info ?? "";
     let maybeTitle = info.match(/title="(.+?)"/)?.[1];
 
     if (!maybeTitle) {
