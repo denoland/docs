@@ -7,6 +7,8 @@ openGraphTitle: "deno publish"
 description: "Publish your package or workspace to the JSR registry"
 ---
 
+`deno publish` publishes your package to the [JSR](https://jsr.io/) registry.
+
 ## Package Requirements
 
 Your package must have a `name` and `version` and an `exports` field in its
@@ -36,31 +38,31 @@ Before you publish your package, you must create it in the registry by visiting
 
 Publish your current workspace
 
-```bash
+```sh
 deno publish
 ```
 
 Publish your current workspace with a specific token, bypassing interactive
 authentication
 
-```bash
+```sh
 deno publish --token c00921b1-0d4f-4d18-b8c8-ac98227f9275
 ```
 
 Publish and check for errors in remote modules
 
-```bash
+```sh
 deno publish --check=all
 ```
 
 Perform a dry run to simulate publishing.
 
-```bash
+```sh
 deno publish --dry-run
 ```
 
 Publish using settings from a specific configuration file
 
-```bash
+```sh
 deno publish --config custom-config.json
 ```

@@ -12,7 +12,7 @@ description: "Run benchmarks using Deno's built-in bench tool."
 ## Quickstart
 
 Firstly, let's create a file `url_bench.ts` and register a bench using the
-`Deno.bench()` function.
+[`Deno.bench()`](/api/deno/~/Deno.bench) function.
 
 ```ts
 // url_bench.ts
@@ -23,8 +23,8 @@ Deno.bench("URL parsing", () => {
 
 Secondly, run the benchmark using the `deno bench` subcommand.
 
-```shell
-$ deno bench url_bench.ts
+```sh
+deno bench url_bench.ts
 Check file:///path/to/url_bench.ts
     CPU | 12th Gen Intel(R) Core(TM) i3-12100
 Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
@@ -155,8 +155,8 @@ Deno.bench("performance.now()", { group: "timing" }, () => {
 });
 ```
 
-```shell
-$ deno bench time_bench.ts
+```sh
+deno bench time_bench.ts
     CPU | 12th Gen Intel(R) Core(TM) i3-12100
 Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
 
@@ -190,7 +190,7 @@ The glob expands to:
 - or files ending with `.bench.{ts, tsx, mts, js, mjs, jsx}`,
 - or files ending with `_bench.{ts, tsx, mts, js, mjs, jsx}`
 
-```bash
+```sh
 # Run all benches in the current directory and all sub-directories
 deno bench
 
@@ -204,7 +204,7 @@ deno bench my_bench.ts
 > ⚠️ If you want to pass additional CLI arguments to the bench files use `--` to
 > inform Deno that remaining arguments are scripts arguments.
 
-```bash
+```sh
 # Pass additional arguments to the bench file
 deno bench my_bench.ts -- -e --foo --bar
 ```
@@ -216,7 +216,7 @@ benching.
 To see all runtime options with `deno bench`, you can reference the command line
 help:
 
-```bash
+```sh
 deno help bench
 ```
 
@@ -251,14 +251,14 @@ Deno.bench({
 This command will run all of these benches because they all contain the word
 "bench".
 
-```bash
+```sh
 deno bench --filter "bench" benchmarks/
 ```
 
 On the flip side, the following command uses a pattern and will run the second
 and third benchmarks.
 
-```bash
+```sh
 deno bench --filter "/bench-*\d/" benchmarks/
 ```
 
@@ -310,8 +310,8 @@ Deno.bench({
 
 To retrieve the output as JSON, use the `--json` flag:
 
-```shell
-$ deno bench my_bench.ts --json
+```sh
+deno bench my_bench.ts --json
 {
   "version": 1,
   "runtime": "Deno/2.4.2 x86_64-unknown-linux-gnu",

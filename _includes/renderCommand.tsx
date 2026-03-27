@@ -121,26 +121,6 @@ export default function renderCommand(
 
   const rendered = (
     <div>
-      <div class="bg-transparent mt-4 mb-12 relative pl-2 border-l border-background-tertiary">
-        <div class="text-xs font-bold mb-1">
-          Command line usage:
-        </div>
-        <div>
-          <pre class="!mb-0 !p-6">
-            <code>{command.usage.replaceAll(ANSI_RE, "").slice("usage: ".length)}</code>
-          </pre>
-        </div>
-      </div>
-
-      {about && (
-        <>
-          <div
-            class="flex flex-col gap-4"
-            dangerouslySetInnerHTML={{ __html: helpers.md(about) }}
-          />
-        </>
-      )}
-
       {Object.entries(options).map(([heading, flags]) => {
         const id = heading.toLowerCase().replace(/\s/g, "-");
 

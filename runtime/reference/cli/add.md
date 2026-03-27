@@ -9,6 +9,8 @@ description: "Add and manage project dependencies with Deno"
 The `deno add` command adds dependencies to your project's configuration file.
 It is an alias for
 [`deno install [PACKAGES]`](/runtime/reference/cli/install/#deno-install-packages).
+For more on how Deno handles dependencies, see
+[Modules and dependencies](/runtime/fundamentals/modules/).
 
 ## Examples
 
