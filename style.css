@@ -9,9 +9,9 @@
   --color-gray-500: #9ea0a5;
   --color-gray-600: #868789;
   --color-gray-700: #56575a;
-  --color-gray-800: #2e3039;
-  --color-gray-900: #22242b;
-  --color-gray-950: #1b1d24;
+  --color-gray-800: #25272b;
+  --color-gray-900: #191b1f;
+  --color-gray-950: #14161a;
 
   --color-runtime-50: #eefff5;
   --color-runtime-100: #d6ffe9;
@@ -38,7 +38,7 @@
   --color-deploy-600: #005c99;
   --color-deploy-700: #004166;
   --color-deploy-800: #002633;
-  --color-deploy-900: #192028;
+  --color-deploy-900: #001319;
   --color-deploy-950: #000a0d;
 }
 
@@ -716,8 +716,8 @@
       }
     }
     .admonition {
-      @apply px-4 lg:px-6 pt-10 lg:pt-12 pb-4 rounded-md bg-gray-100 relative
-        overflow-clip text-sm flex flex-col gap-2;
+      @apply p-6 py-4 rounded-md relative bg-background-raw my-4
+        text-sm flex flex-col gap-2 border-2 dark:border leading-relaxed;
 
       a {
         @apply text-primary underline underline-offset-2;
@@ -732,27 +732,23 @@
       }
 
       .title {
-        @apply font-bold uppercase flex items-center mb-4 absolute top-0 left-0
-          right-0 py-2 lg:py-3 px-4 lg:px-6 bg-gray-100 leading-none;
+        @apply font-bold uppercase w-max max-w-full leading-none absolute -top-2 bg-background-raw z-10 px-2 left-4;
       }
       &:where(.info, .note, .tip) .title {
-        @apply text-runtime-700 bg-runtime-300 dark:bg-runtime-950
-          dark:text-runtime-300;
+        @apply text-runtime-700 dark:text-runtime-300;
       }
       &.info,
       &.note,
       &.tip {
-        @apply bg-runtime-50 dark:bg-runtime-950/30 dark:border
-          dark:border-runtime-950 border-runtime-200;
+        @apply border-runtime-500 dark:border-runtime;
       }
       &.caution,
       &.warning {
-        @apply bg-yellow-100 dark:bg-yellow-950/75 dark:border
-          dark:border-yellow-400 border-yellow-200;
+        @apply dark:border-orange-400 border-orange-300;
 
         .title {
-          @apply text-yellow-600 bg-yellow-200 dark:bg-yellow-400
-            dark:text-yellow-800;
+          @apply text-orange-400
+            dark:text-orange-400;
         }
       }
     }
@@ -827,12 +823,11 @@
       --color-background-primary: var(--color-gray-950);
       --color-background-secondary: var(--color-gray-900);
       --color-background-tertiary: var(--color-gray-800);
-      --color-foreground-primary: var(--color-gray-50);
+      --color-foreground-primary: var(--color-gray-100);
       --color-foreground-secondary: var(--color-gray-300);
       --color-foreground-tertiary: var(--color-gray-800);
       --color-foreground-quaternary: var(--color-gray-900);
-      --color-runtime: #56d990;
-      --color-runtime-background: 124deg, 100%, 5%;
+      --color-runtime-background: 124deg, 100%, 3%;
       --color-runtime-foreground: 184deg, 100%, 90%;
       --color-note: 224deg, 64.3%, 82.9%;
       --color-info: 224deg, 64.3%, 69%;
@@ -854,12 +849,11 @@
       --color-background-primary: var(--color-gray-950);
       --color-background-secondary: var(--color-gray-900);
       --color-background-tertiary: var(--color-gray-800);
-      --color-foreground-primary: var(--color-gray-50);
+      --color-foreground-primary: var(--color-gray-100);
       --color-foreground-secondary: var(--color-gray-300);
       --color-foreground-tertiary: var(--color-gray-800);
       --color-foreground-quaternary: var(--color-gray-900);
-      --color-runtime: #56d990;
-      --color-runtime-background: 124deg, 100%, 5%;
+      --color-runtime-background: 124deg, 100%, 3%;
       --color-runtime-foreground: 184deg, 100%, 90%;
       --color-note: 224deg, 64.3%, 82.9%;
       --color-info: 224deg, 64.3%, 69%;
