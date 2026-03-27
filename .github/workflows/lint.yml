@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-22.04-xl
     permissions:
       id-token: write # Needed for auth with Deno Deploy
-      contents: read # Needed to clone the repository
+      contents: write # Needed to clone the repository and push lastModified.json
 
     steps:
       - name: Clone repository
@@ -75,6 +75,9 @@ jobs:
           key: og-images-${{ hashFiles('open_graph/**') }}
           restore-keys: og-images-
 
+      - name: Generate last-modified data
+        run: deno task generate:last-modified
+
       # Build reference pages first with a minimal Lume config (JSX only,
       # no markdown/esbuild/tailwind/sitemap), then build the main site
       # skipping reference pages. Outputs merge since both use emptyDest:false.
@@ -108,3 +111,13 @@ jobs:
         env:
           DOCS_ROOT: "http://localhost:8000"
         run: deno run --no-lock --allow-net --allow-env .github/workflows/better_link_checker.ts
+
+      - name: Update lastModified.json
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git diff --quiet lastModified.json && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add lastModified.json
+          git commit -m "chore: update lastModified.json [skip ci]"
+          git push

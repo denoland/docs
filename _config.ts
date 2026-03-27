@@ -451,33 +451,23 @@ site.ignore(
 // the default layout if no other layout is specified
 site.data("layout", "doc.tsx");
 
-// Populate lastModified from git history using a single git command
+// Populate lastModified from pre-generated JSON (see scripts/generate_last_modified.ts)
 site.preprocess([".md", ".mdx"], (filteredPages) => {
-  const result = Deno.spawnAndWaitSync("git", [
-    "log",
-    "--pretty=format:%aI",
-    "--name-only",
-    "--diff-filter=ACMR",
-    "HEAD",
-  ]);
-
-  const output = new TextDecoder().decode(result.stdout);
-  const lastModified = new Map<string, string>();
-  let currentDate = "";
-
-  for (const line of output.split("\n")) {
-    if (!line) continue;
-    if (line.match(/^\d{4}-/)) {
-      currentDate = line;
-    } else if (!lastModified.has(line)) {
-      lastModified.set(line, currentDate);
-    }
+  let lastModified: Record<string, string>;
+  try {
+    lastModified = JSON.parse(Deno.readTextFileSync("lastModified.json"));
+  } catch {
+    console.warn(
+      "Warning: lastModified.json not found — skipping last-modified dates.",
+      "Run `deno task generate:last-modified` to generate it.",
+    );
+    return;
   }
 
   for (const page of filteredPages) {
     const src = page.sourcePath?.replace(/^\//, "");
-    if (src && lastModified.has(src)) {
-      page.data.lastModified = new Date(lastModified.get(src)!);
+    if (src && src in lastModified) {
+      page.data.lastModified = new Date(lastModified[src]);
     }
   }
 });
