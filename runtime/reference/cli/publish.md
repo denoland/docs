@@ -12,7 +12,7 @@ description: "Publish your package or workspace to the JSR registry"
 ## Package Requirements
 
 Your package must have a `name` and `version` and an `exports` field in its
-`deno.json` or `jsr.json` file.
+[`deno.json`](/runtime/fundamentals/configuration/) or `jsr.json` file.
 
 - The `name` field must be unique and follow the `@<scope_name>/<package_name>`
   convention.

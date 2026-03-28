@@ -81,7 +81,7 @@ Starting with Deno 2.4 it's possible to import `text` and `bytes` modules too.
 
 Support for importing `text` and `bytes` modules is experimental and requires
 `--unstable-raw-imports` CLI flag or `unstable.raw-import` option in
-`deno.json`.
+[`deno.json`](/runtime/fundamentals/configuration/).
 
 :::
 

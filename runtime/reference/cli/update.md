@@ -6,6 +6,10 @@ openGraphTitle: "deno update"
 description: "Update outdated dependencies with an interactive CLI"
 ---
 
+`deno update` updates dependencies in your
+[`deno.json`](/runtime/fundamentals/configuration/) or `package.json`. See
+[Modules](/runtime/fundamentals/modules/) for more about managing dependencies.
+
 ## Updating dependencies
 
 By default, the `update` subcommand will only update dependencies to

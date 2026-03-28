@@ -20,8 +20,8 @@ on how Deno handles modules, see
 
 ### deno install
 
-Use this command to install all dependencies defined in `deno.json` and/or
-`package.json`.
+Use this command to install all dependencies defined in
+[`deno.json`](/runtime/fundamentals/configuration/) and/or `package.json`.
 
 The dependencies will be installed in the global cache, but if your project has
 a `package.json` file, a local `node_modules` directory will be set up as well.

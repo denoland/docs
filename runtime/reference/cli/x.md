@@ -48,7 +48,8 @@ deno x jsr:@std/http/file-server
 
 `deno x` downloads the package to the global cache (if not already cached),
 resolves the package's binary entry point, and executes it. The package is not
-added to your project's `deno.json` or `package.json`.
+added to your project's [`deno.json`](/runtime/fundamentals/configuration/) or
+`package.json`.
 
 ## Permissions
 

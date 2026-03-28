@@ -6,7 +6,9 @@ openGraphTitle: "deno clean"
 description: "Remove cached dependencies for a clean start"
 ---
 
-`deno clean` removes Deno's global module cache directory.
+`deno clean` removes Deno's global module cache directory. See
+[Modules](/runtime/fundamentals/modules/) for more information about how Deno
+caches dependencies.
 
 ## Basic usage
 

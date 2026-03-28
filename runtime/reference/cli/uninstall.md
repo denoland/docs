@@ -9,7 +9,8 @@ description: "Remove a dependency from your project or from your global cache"
 
 ## `deno uninstall [PACKAGES]`
 
-Remove dependencies specified in `deno.json` or `package.json`:
+Remove dependencies specified in
+[`deno.json`](/runtime/fundamentals/configuration/) or `package.json`:
 
 ```sh
 deno add npm:express

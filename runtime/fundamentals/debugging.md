@@ -67,8 +67,7 @@ deno run --inspect-brk your_script.ts
 ## Example with Chrome DevTools
 
 Let's try debugging a program using Chrome Devtools. For this, we'll use
-[@std/http/file-server](https://jsr.io/@std/http#file-server), a static file
-server.
+[`@std/http/file-server`](/runtime/reference/std/http/), a static file server.
 
 Use the `--inspect-brk` flag to break execution on the first line:
 

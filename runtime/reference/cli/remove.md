@@ -25,5 +25,6 @@ deno remove @std/path @std/assert npm:express
 
 ## Where dependencies are removed from
 
-`deno remove` will look at both `deno.json` and `package.json` (if present) and
-remove the matching dependency from whichever file it is found in.
+`deno remove` will look at both
+[`deno.json`](/runtime/fundamentals/configuration/) and `package.json` (if
+present) and remove the matching dependency from whichever file it is found in.

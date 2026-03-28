@@ -9,9 +9,10 @@ description: "Check for outdated dependencies in your project and safely update 
 ## Checking for outdated dependencies
 
 The `outdated` subcommand checks for new versions of NPM and JSR dependencies
-listed in `deno.json` or `package.json` files, and displays dependencies that
-could be updated. Workspaces are fully supported, including workspaces where
-some members use `package.json` and others use `deno.json`.
+listed in [`deno.json`](/runtime/fundamentals/configuration/) or `package.json`
+files, and displays dependencies that could be updated. Workspaces are fully
+supported, including workspaces where some members use `package.json` and others
+use `deno.json`.
 
 For example, take a project with a `deno.json` file:
 

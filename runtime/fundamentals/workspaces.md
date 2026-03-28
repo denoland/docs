@@ -7,9 +7,9 @@ oldUrl: /runtime/manual/basics/workspaces
 Deno supports workspaces, also known as "monorepos", which allow you to manage
 multiple related and interdependent packages simultaneously.
 
-A "workspace" is a collection of folders containing `deno.json` or
-`package.json` configuration files. The root `deno.json` file defines the
-workspace:
+A "workspace" is a collection of folders containing
+[`deno.json`](/runtime/fundamentals/configuration/) or `package.json`
+configuration files. The root `deno.json` file defines the workspace:
 
 ```json title="deno.json"
 {
