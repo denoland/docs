@@ -11,16 +11,96 @@ openGraphTitle: "deno fmt"
 description: "Format your code with Deno's built-in formatter"
 ---
 
-To see a list of the available CLI options for `deno fmt`, run:
+Deno ships with a built-in code formatter based on [dprint](https://dprint.dev/)
+that auto-formats your code to a consistent style. For a broader overview, see
+[Linting and Formatting](/runtime/fundamentals/linting_and_formatting/).
+
+## Basic usage
+
+Format all supported files in the current directory:
 
 ```sh
-deno fmt --help
+deno fmt
 ```
 
-## Supported File Types
+Format specific files or directories:
 
-Deno ships with a built-in code formatter that will auto-format the following
-files:
+```sh
+deno fmt main.ts src/
+```
+
+## Watch mode
+
+Automatically re-format files when they change:
+
+```sh
+deno fmt --watch
+```
+
+## Check formatting in CI
+
+Use `--check` to verify files are formatted without modifying them. The command
+exits with a non-zero status code if any files are unformatted:
+
+```sh
+deno fmt --check
+```
+
+Add `--fail-fast` to stop on the first unformatted file instead of reporting all
+of them, which is useful in large codebases:
+
+```sh
+deno fmt --check --fail-fast
+```
+
+## Formatting stdin
+
+Format code piped through stdin — useful for editor integrations:
+
+```sh
+cat main.ts | deno fmt -
+```
+
+## Configuring the formatter
+
+Customize formatting options in your `deno.json`:
+
+```json title="deno.json"
+{
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 80,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false,
+    "proseWrap": "preserve"
+  }
+}
+```
+
+See the [Configuration](/runtime/fundamentals/configuration/#formatting) page
+for all available options.
+
+## Including and excluding files
+
+Specify which files to format in `deno.json`:
+
+```json title="deno.json"
+{
+  "fmt": {
+    "include": ["src/"],
+    "exclude": ["src/testdata/", "src/generated/**/*.ts"]
+  }
+}
+```
+
+You can also exclude files from the command line:
+
+```sh
+deno fmt --ignore=dist/,build/
+```
+
+## Supported file types
 
 <!-- This list needs to be updated along with https://github.com/denoland/deno/blob/main/cli/tools/fmt.rs -->
 
@@ -57,17 +137,7 @@ enclosed in triple backticks and have a language attribute.
 
 :::
 
-## Checking formatting in CI
-
-Use `--check` to verify files are formatted without modifying them. Add
-`--fail-fast` to stop on the first unformatted file instead of reporting all of
-them, which is useful in large codebases:
-
-```sh
-deno fmt --check --fail-fast
-```
-
-## Ignoring Code
+## Ignoring code
 
 ### JavaScript / TypeScript / JSONC
 
@@ -90,7 +160,7 @@ top of the file.
 Ignore formatting next item by preceding it with `<!--- deno-fmt-ignore -->`
 comment:
 
-```html
+```html title="HTML"
 <html>
   <body>
     <p>
@@ -111,13 +181,6 @@ the top of the file.
 
 Ignore formatting next item by preceding it with `# deno-fmt-ignore` comment:
 
-```html
+```html title="HTML"
 # deno-fmt-ignore aaaaaa: bbbbbbb
 ```
-
-## More about linting and formatting
-
-For more information about linting and formatting in Deno, and the differences
-between these two utilities, visit the
-[Linting and Formatting](/runtime/fundamentals/linting_and_formatting/) page in
-our Fundamentals section.

@@ -24,7 +24,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   if (data.command) {
     const { rendered, toc } = renderCommand(data.command, helpers);
     renderedCommand = rendered;
-    data.toc = toc.concat(...data.toc);
+    data.toc = [...data.toc, ...toc];
   }
 
   function getTocCtx(
@@ -97,8 +97,8 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
                   />
                 </div>
               )}
-              {renderedCommand}
               {data.children}
+              {renderedCommand}
             </div>
           </article>
           {data.lastModified && !isReference && !isLintRule && (
