@@ -170,7 +170,7 @@ the contents of cached dependencies are saved and any subsequent runs can
 restore them from cache instead of re-downloading.
 
 To demonstrate, let's say you have a project that uses the logger from
-[`@std/log`](https://jsr.io/@std/log):
+[`@std/log`](/runtime/reference/std/log/):
 
 ```json title="deno.json"
 {

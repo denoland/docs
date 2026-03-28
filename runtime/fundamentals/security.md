@@ -230,14 +230,14 @@ resolves to a sensitive system path, additional permissions are required:
 - **`/dev/null`, `/dev/zero`, `/dev/random`, `/dev/urandom`**: These safe device
   files are always accessible without additional permissions.
 
-Creating symlinks with `Deno.symlink()` requires both `--allow-read` and
-`--allow-write` with full access (not path-specific), because symlinks can point
-to arbitrary locations.
+Creating symlinks with [`Deno.symlink()`](/api/deno/~/Deno.symlink) requires
+both `--allow-read` and `--allow-write` with full access (not path-specific),
+because symlinks can point to arbitrary locations.
 
 > **Note**: Symlinks that already exist on the filesystem can be read through
 > using the permissions for the symlink's location. The full read/write
 > permission requirement only applies to _creating_ new symlinks with
-> `Deno.symlink()`.
+> [`Deno.symlink()`](/api/deno/~/Deno.symlink).
 
 ### Network access
 
@@ -449,18 +449,21 @@ scripts for npm packages will be executed as a subprocess.
 Deno provides an
 [FFI mechanism for executing code written in other languages](/runtime/fundamentals/ffi/),
 such as Rust, C, or C++, from within a Deno runtime. This is done using the
-`Deno.dlopen` API, which can load shared libraries and call functions from them.
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, which can load shared libraries
+and call functions from them.
 
-By default, executing code can not use the `Deno.dlopen` API, as this would
-constitute a violation of the principle that code can not escalate it's
-privileges without user consent.
+By default, executing code can not use the
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, as this would constitute a
+violation of the principle that code can not escalate it's privileges without
+user consent.
 
-In addition to `Deno.dlopen`, FFI can also be used via Node-API (NAPI) native
-addons. These are also not allowed by default.
+In addition to [`Deno.dlopen`](/api/deno/~/Deno.dlopen), FFI can also be used
+via Node-API (NAPI) native addons. These are also not allowed by default.
 
-Both `Deno.dlopen` and NAPI native addons require explicit permission using the
-`--allow-ffi` flag. This flag can be specified with a list of files or
-directories to allow access to specific dynamic libraries.
+Both [`Deno.dlopen`](/api/deno/~/Deno.dlopen) and NAPI native addons require
+explicit permission using the `--allow-ffi` flag. This flag can be specified
+with a list of files or directories to allow access to specific dynamic
+libraries.
 
 _Like subprocesses, dynamic libraries are not run in a sandbox and therefore do
 not have the same security restrictions as the Deno process they are being

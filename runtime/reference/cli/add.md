@@ -40,4 +40,4 @@ deno add --npm express
 
 If your project has a `package.json`, npm packages will be added to
 `dependencies` in `package.json`. Otherwise, all packages are added to the
-`imports` field in `deno.json`.
+`imports` field in [`deno.json`](/runtime/fundamentals/configuration/).

@@ -42,9 +42,9 @@ The possible values in the `unstable` array are the flag names with the
 ## Configuration via environment variables
 
 Some flags can be enabled by setting a value (any value) for an environment
-variable of a given name, rather than being passed as a flag or `deno.json`
-configuration option. Flags that are settable via environment variables will be
-noted below.
+variable of a given name, rather than being passed as a flag or
+[`deno.json`](/runtime/fundamentals/configuration/) configuration option. Flags
+that are settable via environment variables will be noted below.
 
 Here's an example of setting the `--unstable-bare-node-builtins` flag via
 environment variable:

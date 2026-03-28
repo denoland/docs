@@ -38,10 +38,11 @@ file:///path/to/url_bench.ts
 
 ## Writing benchmarks
 
-To define a benchmark you need to register it with a call to the `Deno.bench`
-API. There are multiple overloads of this API to allow for the greatest
-flexibility and easy switching between the forms (eg. when you need to quickly
-focus a single bench for debugging, using the `only: true` option):
+To define a benchmark you need to register it with a call to the
+[`Deno.bench`](/api/deno/~/Deno.bench) API. There are multiple overloads of this
+API to allow for the greatest flexibility and easy switching between the forms
+(eg. when you need to quickly focus a single bench for debugging, using the
+`only: true` option):
 
 ```ts
 // Compact form: name and function
@@ -100,10 +101,12 @@ takes to read a small file, you need to open the file, read it, and then close
 it. If the file is small enough the time it takes to open and close the file
 might outweigh the time it takes to read the file itself.
 
-To help with such situations you can `Deno.BenchContext.start` and
-`Deno.BenchContext.end` to tell the benchmarking tool about the critical section
-you want to measure. Everything outside of the section between these two calls
-will be excluded from the measurement.
+To help with such situations you can
+[`Deno.BenchContext.start`](/api/deno/~/Deno.BenchContext.start) and
+[`Deno.BenchContext.end`](/api/deno/~/Deno.BenchContext.end) to tell the
+benchmarking tool about the critical section you want to measure. Everything
+outside of the section between these two calls will be excluded from the
+measurement.
 
 ```ts
 Deno.bench("foo", async (b) => {
@@ -128,7 +131,7 @@ The above example requires the `--allow-read` flag to run the benchmark:
 ## Grouping and baselines
 
 When registering a bench case, it can be assigned to a group, using
-`Deno.BenchDefinition.group` option:
+[`Deno.BenchDefinition.group`](/api/deno/~/Deno.BenchDefinition.group) option:
 
 ```ts
 // url_bench.ts
@@ -142,7 +145,8 @@ perform against a "baseline" case.
 
 In this example we'll check how performant is `Date.now()` compared to
 `performance.now()`, to do that we'll mark the first case as a "baseline" using
-`Deno.BenchDefinition.baseline` option:
+[`Deno.BenchDefinition.baseline`](/api/deno/~/Deno.BenchDefinition.baseline)
+option:
 
 ```ts
 // time_bench.ts

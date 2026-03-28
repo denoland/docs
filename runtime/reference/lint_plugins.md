@@ -48,7 +48,8 @@ object.
 
 Deno provides type declarations for the lint plugins API.
 
-All the typings are available under the `Deno.lint` namespace.
+All the typings are available under the [`Deno.lint`](/api/deno/~/Deno.lint)
+namespace.
 
 :::
 
@@ -276,9 +277,9 @@ The syntax for the ignore comment is:
 
 ## Testing plugins
 
-The `Deno.lint.runPlugin` API provides a convenient way to test your plugins. It
-allows you to assert that the plugin produces expected diagnostics given the
-particular input.
+The [`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) API provides a
+convenient way to test your plugins. It allows you to assert that the plugin
+produces expected diagnostics given the particular input.
 
 Let's use the example plugin, defined above:
 
@@ -303,8 +304,8 @@ Deno.test("my-plugin", () => {
 
 :::info
 
-The `Deno.lint.runPlugin` API is only available in the `deno test` and
-`deno bench` subcommands.
+The [`Deno.lint.runPlugin`](/api/deno/~/Deno.lint.runPlugin) API is only
+available in the `deno test` and `deno bench` subcommands.
 
 Trying to use it with any other subcommand will throw an error.
 

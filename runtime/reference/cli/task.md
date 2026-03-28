@@ -286,7 +286,8 @@ Project bundled
 ```
 
 Note that the filter matches against the workspace member names as specified in
-the `name` field of each member's `deno.json` file.
+the `name` field of each member's
+[`deno.json`](/runtime/fundamentals/configuration/) file.
 
 ## Syntax
 

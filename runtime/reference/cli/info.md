@@ -10,6 +10,10 @@ openGraphTitle: "deno info"
 description: "Inspect the dependencies of your project"
 ---
 
+`deno info` displays information about a module's dependency tree. See
+[Modules](/runtime/fundamentals/modules/) for more about how Deno resolves and
+caches dependencies.
+
 ## Example
 
 ```sh
