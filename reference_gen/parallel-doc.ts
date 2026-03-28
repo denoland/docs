@@ -202,7 +202,7 @@ async function runOptimizedDocGeneration() {
     Deno.exit(1);
   } else {
     console.log(
-      `\n🎉 Documentation generation completed successfully in <green>${totalTime}s<green`,
+      `\n🎉 Documentation generation completed successfully in <green>${totalTime}s</green>`,
     );
     console.log(`📊 Tasks: ${tasksRun} run, ${tasksSkipped} skipped`);
   }

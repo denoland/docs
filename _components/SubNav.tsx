@@ -19,6 +19,16 @@ export default function (
 
     const urlNoQuery = currentUrl.split("?")[0].split("#")[0];
 
+    // If the section provides a URL→tab mapping (e.g. runtime), use it
+    const sidebarUrlMap = data.page?.data?.sidebarUrlMap as
+      | Record<string, string>
+      | undefined;
+    if (sidebarUrlMap) {
+      const tabHref = sidebarUrlMap[urlNoQuery.replace(/\/$/, "")];
+      if (tabHref) return tabHref;
+    }
+
+    // Otherwise fall back to longest URL prefix match
     const isSegmentPrefix = (href: string, url: string): boolean => {
       if (!url.startsWith(href)) return false;
       if (url.length === href.length) return true; // exact match

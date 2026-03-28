@@ -12,7 +12,7 @@ export default function Layout(data: Lume.Data) {
     data.url.startsWith("/subhosting") ||
     data.url.startsWith("/services") ||
     data.url.startsWith("/sandbox");
-  const hasSubNav = isServicesPage;
+  const hasSubNav = isServicesPage || data.url.startsWith("/runtime");
 
   return (
     <html lang="en">
