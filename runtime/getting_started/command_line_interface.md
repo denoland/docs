@@ -36,13 +36,6 @@ relative to the current working directory:
 deno run main.ts
 ```
 
-Deno supports running scripts directly from URLs. This is particularly useful
-for quickly testing or running code without downloading it first:
-
-```shell
-deno run https://docs.deno.com/examples/scripts/hello_world.ts
-```
-
 You can also run a script by piping it through standard input. This is useful
 for integrating with other command-line tools or dynamically generating scripts:
 

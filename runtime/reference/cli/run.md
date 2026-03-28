@@ -4,19 +4,12 @@ oldUrl: /runtime/manual/tools/run/
 command: run
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno run"
-description: "Run a JavaScript or TypeScript program from a file or URL with Deno's runtime"
+description: "Run a JavaScript or TypeScript program with Deno's runtime"
 ---
 
 ## Usage
 
-To run [this file](https://docs.deno.com/examples/scripts/hello_world.ts) use:
-
-```console
-deno run https://docs.deno.com/examples/scripts/hello_world.ts
-```
-
-You can also run files locally. Ensure that you are in the correct directory and
-use:
+Run a local file:
 
 ```console
 deno run hello-world.ts
@@ -77,7 +70,7 @@ console if there are errors while you work.
 You can pipe code from stdin and run it immediately with:
 
 ```console
-curl https://docs.deno.com/examples/scripts/hello_world.ts | deno run -
+cat main.ts | deno run -
 ```
 
 ## Terminate run

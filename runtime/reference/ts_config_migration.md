@@ -394,7 +394,7 @@ means it requires an extension, and is relative to the module referencing it. It
 can be a fully qualified URL as well:
 
 ```ts
-/// <reference types="https://deno.land/x/pkg@1.0.0/types.d.ts" />
+/// <reference types="./types.d.ts" />
 ```
 
 ### Supplying "types" in deno.json
@@ -407,7 +407,6 @@ your `deno.json`. For example:
   "compilerOptions": {
     "types": [
       "./types.d.ts",
-      "https://deno.land/x/pkg@1.0.0/types.d.ts",
       "/Users/me/pkg/types.d.ts"
     ]
   }
@@ -485,13 +484,10 @@ file, its resolution follow the normal import rules of Deno. For a lot of the
 `.d.ts` files that are generated and available on the web, they may not be
 compatible with Deno.
 
-[esm.sh](https://esm.sh) is a CDN which provides type declarations by default
-(via the `X-TypeScript-Types` header). It can be disabled by appending `?no-dts`
-to the import URL:
-
-```ts
-import React from "https://esm.sh/react?no-dts";
-```
+When using HTTPS imports from CDNs like [esm.sh](https://esm.sh), type
+declarations are provided by default (via the `X-TypeScript-Types` header). This
+can be disabled by appending `?no-dts` to the import URL. Note that for most
+use cases, `npm:` specifiers are the recommended way to import npm packages.
 
 ## Behavior of JavaScript when type checking
 

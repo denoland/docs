@@ -161,12 +161,11 @@ during tests.
 
 When working with third-party modules in Deno, use the same `import` syntax as
 you do for local code. Third party modules are typically imported from a remote
-registry and start with `jsr:` , `npm:` or `https://`.
+registry and start with `jsr:` or `npm:`.
 
 ```ts title="main.ts"
 import { camelCase } from "jsr:@luca/cases@1.0.0";
 import { say } from "npm:cowsay@1.6.0";
-import { pascalCase } from "https://deno.land/x/case/mod.ts";
 ```
 
 Deno recommends [JSR](https://jsr.io), the modern JavaScript registry, for third
@@ -189,8 +188,7 @@ field the **import map**, which is based on the [Import Maps Standard].
 {
   "imports": {
     "@luca/cases": "jsr:@luca/cases@^1.0.0",
-    "cowsay": "npm:cowsay@^1.6.0",
-    "cases": "https://deno.land/x/case/mod.ts"
+    "cowsay": "npm:cowsay@^1.6.0"
   }
 }
 ```
@@ -200,7 +198,6 @@ With remapped specifiers, the code looks cleaner:
 ```ts title="main.ts"
 import { camelCase } from "@luca/cases";
 import { say } from "cowsay";
-import { pascalCase } from "cases";
 ```
 
 The remapped name can be any valid specifier. It's a very powerful feature in
@@ -320,44 +317,23 @@ Here is an overview of all the ways you can specify a version or a range:
 
 ## HTTPS imports
 
-Deno also supports import statements that reference HTTP/HTTPS URLs, either
-directly:
+Deno supports import statements that reference HTTP/HTTPS URLs:
 
 ```js
 import { Application } from "https://deno.land/x/oak/mod.ts";
 ```
 
-or part of your `deno.json` import map:
+This can be convenient for small, single-file scripts that don't need a
+`deno.json` file. However, for most projects **we recommend using `jsr:` or
+`npm:` specifiers instead**, which provide better versioning, dependency
+management, and tooling support (including `deno add` and `deno install`).
 
-```json
-{
-  "imports": {
-    "oak": "https://deno.land/x/oak/mod.ts"
-  }
-}
-```
+:::caution
 
-Supporting HTTPS imports enables us to support the following JavaScript CDNs, as
-they provide URL access to JavaScript modules:
-
-- [deno.land/x](https://deno.land/x)
-- [esm.sh](https://esm.sh)
-- [unpkg.com](https://unpkg.com)
-
-HTTPS imports are useful if you have a small, often single file, Deno project
-that doesn't require any other configuration. With HTTPS imports, you can avoid
-having a `deno.json` file at all. It is **not** advised to use this style of
-import in larger applications however, as you may end up with version conflicts
-(where different files use different version specifiers). HTTP imports are not
-supported by `deno add`/`deno install` commands.
-
-:::info
-
-Use HTTPS imports with caution, and only **from trusted sources**. If the server
-is compromised, it could serve malicious code to your application. They can also
-cause versioning issues if you import different versions in different files.
-HTTPS imports remain supported, **but we recommend using a package registry for
-the best experience.**
+HTTPS imports do not support version resolution, are not managed by
+`deno add`/`deno install`, and can cause versioning issues if different files
+reference different URLs. Only use them from **trusted sources** — if the server
+is compromised, it could serve malicious code to your application.
 
 :::
 
@@ -433,36 +409,6 @@ Limitations:
 - The npm package name must exist in the registry, even if you're using a local
   copy.
 
-### Overriding HTTPS imports
-
-Deno also allows overriding HTTPS imports through the `scopes` field in
-`deno.json`. This feature is particularly useful when substituting a remote
-dependency with a local patched version for debugging or temporary fixes.
-
-Example:
-
-```json title="deno.json"
-{
-  "imports": {
-    "example/": "https://deno.land/x/example/"
-  },
-  "scopes": {
-    "https://deno.land/x/example/": {
-      "https://deno.land/x/my-library@1.0.0/mod.ts": "./patched/mod.ts"
-    }
-  }
-}
-```
-
-Key points:
-
-- The `scopes` field in the import map allows you to redirect specific imports
-  to alternative paths.
-- This is commonly used to override remote dependencies with local files for
-  testing or development purposes.
-- Scopes apply only to the root of your project. Nested scopes within
-  dependencies are ignored.
-
 ## Vendoring remote modules
 
 If your project has external dependencies, you may want to store them locally to
@@ -509,8 +455,6 @@ Modules can be published to:
   auto-generates documentation for you
 - [npm](https://www.npmjs.com/) - use [dnt](https://github.com/denoland/dnt) to
   create the npm package
-- [deno.land/x](https://deno.com/add_module) - for HTTPS imports, use JSR
-  instead if possible
 
 ## Reloading modules
 
@@ -711,8 +655,8 @@ following in a Deno configuration file:
 
 ## Supply chain management
 
-Modern JavaScript projects pull code from many sources (JSR, npm, HTTPS URLs,
-local workspaces). Good supply chain management helps you achieve four goals:
+Modern JavaScript projects pull code from many sources (JSR, npm, local
+workspaces). Good supply chain management helps you achieve four goals:
 
 - Determinism: everyone (and your CI) runs the exact same code.
 - Security: unexpected upstream changes or compromises are detected early.
@@ -734,8 +678,8 @@ local workspaces). Good supply chain management helps you achieve four goals:
 4. Vendor when you need hermetic/offline builds (`"vendor": true`) or when you
    must patch third‑party code locally. Vendoring does not remove the need for a
    lockfile—it complements it.
-5. Prefer import map (`imports`) entries over raw HTTPS imports in larger
-   codebases to centralize version changes.
+5. Use `jsr:` and `npm:` specifiers with import map (`imports`) entries to
+   centralize version management.
 6. Periodically unfreeze and update consciously (for example on a weekly or
    sprint cadence) instead of ad‑hoc updates during feature work.
 

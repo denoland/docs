@@ -194,10 +194,10 @@ using the default "legacy" configuration, you can add the JSX import source
 pragma to a `.jsx` or `.tsx` module, and Deno will respect it.
 
 The `@jsxImportSource` pragma needs to be in the leading comments of the module.
-For example to use Preact from esm.sh, you would do something like this:
+For example to use Preact, you would do something like this:
 
 ```jsx
-/** @jsxImportSource https://esm.sh/preact */
+/** @jsxImportSource preact */
 
 export function App() {
   return (
@@ -207,6 +207,9 @@ export function App() {
   );
 }
 ```
+
+This requires `preact` to be mapped in your `deno.json` import map (e.g.
+`"preact": "npm:preact@^10"`).
 
 ### `jsxImportSourceTypes`
 
