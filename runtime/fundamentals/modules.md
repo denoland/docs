@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-06-19
 title: "Modules"
 description: "Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
 oldUrl:
@@ -246,12 +246,11 @@ during tests.
 
 When working with third-party modules in Deno, use the same `import` syntax as
 you do for local code. Third party modules are typically imported from a remote
-registry and start with `jsr:` , `npm:` or `https://`.
+registry and start with `jsr:` or `npm:`.
 
 ```ts title="main.ts"
 import { camelCase } from "jsr:@luca/cases@1.0.0";
 import { say } from "npm:cowsay@1.6.0";
-import { pascalCase } from "https://deno.land/x/case/mod.ts";
 ```
 
 Deno recommends [JSR](https://jsr.io), the modern JavaScript registry, for third
@@ -274,8 +273,7 @@ field the **import map**, which is based on the [Import Maps Standard].
 {
   "imports": {
     "@luca/cases": "jsr:@luca/cases@^1.0.0",
-    "cowsay": "npm:cowsay@^1.6.0",
-    "cases": "https://deno.land/x/case/mod.ts"
+    "cowsay": "npm:cowsay@^1.6.0"
   }
 }
 ```
@@ -285,7 +283,6 @@ With remapped specifiers, the code looks cleaner:
 ```ts title="main.ts"
 import { camelCase } from "@luca/cases";
 import { say } from "cowsay";
-import { pascalCase } from "cases";
 ```
 
 The remapped name can be any valid specifier. It's a very powerful feature in

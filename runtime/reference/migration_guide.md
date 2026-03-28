@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-06-19
 title: "Deno 1.x to 2.x Migration Guide"
 description: "Comprehensive guide to migrating from Deno 1.x to 2.x. Learn about breaking changes, API updates, Node.js compatibility features, and how to update your codebase to work with Deno 2.x."
 oldUrl:
@@ -173,7 +173,7 @@ import { denoPlugins } from "jsr:@luca/esbuild-deno-loader";
 
 const result = await esbuild.build({
   plugins: [...denoPlugins()],
-  entryPoints: ["https://deno.land/std@0.185.0/bytes/mod.ts"],
+  entryPoints: ["./main.ts"],
   outfile: "./dist/bytes.esm.js",
   bundle: true,
   format: "esm",
