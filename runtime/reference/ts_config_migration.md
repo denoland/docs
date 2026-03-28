@@ -13,70 +13,10 @@ oldUrl:
   - /runtime/fundamentals/types/
 ---
 
-Deno’s flexibility shines in its equal treatment of TypeScript and JavaScript.
-Whether you’re transitioning from JavaScript to TypeScript or vice versa, Deno
-has features to ease the journey.
-
-## Type Checking JavaScript
-
-You may wish to make your JavaScript more type-sound without adding type
-annotations everywhere. Deno supports using the TypeScript type checker to type
-check JavaScript. You can mark individual files by adding the check JavaScript
-pragma to the file:
-
-```js
-// @ts-check
-```
-
-This will cause the type checker to infer type information about the JavaScript
-code and raise any issues as diagnostic issues.
-
-These can be turned on for all JavaScript files in a program by providing a
-configuration file with the check JS option set to `true`, as below. Then use
-the `--config` option when running on the command line.
-
-```json
-{
-  "compilerOptions": {
-    "checkJs": true
-  }
-}
-```
-
-## Using JSDoc in JavaScript
-
-When type-checking JavaScript or importing JavaScript into TypeScript, JSDoc
-annotations can provide additional type information beyond what can just be
-inferred from the code itself. Deno supports this seamlessly if you annotate
-your code inline with the supported
-[TypeScript JSDoc](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html).
-
-For example to set the type of an array use the following JSDoc comment:
-
-```js
-/** @type {string[]} */
-const a = [];
-```
-
-## Skipping type checking
-
-You might have TypeScript code that you are experimenting with, where the syntax
-is valid but not fully type safe. You can bypass type checking for a whole
-program by passing the `--no-check` flag.
-
-You can also skip whole files being type checked, including JavaScript if you
-have check JS enabled, by using the `nocheck` pragma:
-
-```js
-// @ts-nocheck
-```
-
-## Renaming JS files to TS files
-
-TypeScript files benefit from the TypeScript compiler being able to do more
-thorough safety checks of your code. This is often referred to as _strict mode_.
-When you rename a `.js` file to `.ts` you'll might see new type errors that you
-TypeScript wasn't able to detect before.
+This page covers advanced TypeScript configuration in Deno, including compiler
+options, `tsconfig.json` compatibility, and library targeting. For an
+introduction to using TypeScript with Deno, see
+[TypeScript support](/runtime/fundamentals/typescript/).
 
 ## Configuring TypeScript in Deno
 
@@ -273,151 +213,15 @@ code.
 
 ## Types and Type Declarations
 
-Deno applies a design principle of _no non-standard module resolution_. When
-TypeScript checks a file, it focuses solely on its types. In contrast, the `tsc`
-compiler employs intricate logic to resolve those types. By default, `tsc`
-expects ambiguous module specifiers with extensions (e.g., `.ts`, `.d.ts` or
-`.js`). Deno, however, deals with explicit specifiers.
+For information on providing type declarations for JavaScript modules (using
+`@ts-types`, `@ts-self-types`, `X-TypeScript-Types` headers, and `.d.ts` files),
+see
+[Providing declaration files](/runtime/fundamentals/typescript/#providing-declaration-files)
+in the TypeScript fundamentals guide.
 
-Here’s where it gets interesting: Imagine you want to consume a TypeScript file
-that’s already transpiled to JavaScript, along with its type definition file
-(`mod.js` and `mod.d.ts`). If you import `mod.js` into Deno, it strictly follows
-your request and imports the JavaScript file. But here’s the catch: Your code
-won’t be as thoroughly type-checked as if TypeScript considered the `mod.d.ts`
-file alongside the `mod.js` file.
-
-To address this, Deno offers two solutions, each catering to specific scenarios:
-
-**As the Importer:** If you know what types should apply to a JavaScript module,
-you can enhance type checking by explicitly specifying the types.
-
-**As the Supplier:** If you’re the provider or host of the module, everyone
-consuming it benefits without worrying about type resolution.
-
-## Providing types when importing
-
-If you are consuming a JavaScript module and you have either created types (a
-`.d.ts` file) or have otherwise obtained the types you want to use, you can
-instruct Deno to use that file when type checking, instead of the JavaScript
-file, using the `@ts-types` compiler hint.
-
-For example if you have a JavaScript module, `coolLib.js`, and a separate
-`coolLib.d.ts` file, you would import it like this:
-
-```ts
-// @ts-types="./coolLib.d.ts"
-import * as coolLib from "./coolLib.js";
-```
-
-When you’re performing type checking on `coolLib` and using it in your file, the
-TypeScript type definitions from `coolLib.d.ts` will take precedence over
-examining the JavaScript file.
-
-:::note
-
-In the past the `@ts-types` directive was called `@deno-types`. This alias still
-works, but is not recommended anymore. Use `@ts-types`.
-
-:::
-
-## Providing types when hosting
-
-If you have control over the module’s source code or how the file is hosted on a
-web server, there are two ways to let Deno know about the types for a specific
-module (which won’t require any special action from the importer).
-
-### @ts-self-types
-
-If you are providing a JavaScript file, and want to provide a declaration file
-that contains the types for this file, you can specify a `@ts-self-types`
-directive in the JS file, pointing to the declaration file.
-
-For example, if you make a `coolLib.js` library, and write its type definitions
-in `coolLib.d.ts` the `ts-self-types` directive would look like this:
-
-```js title="coolLib.js"
-// @ts-self-types="./coolLib.d.ts"
-
-// ... the rest of the JavaScript ...
-```
-
-### X-TypeScript-Types
-
-Deno supports a header for remote modules that instructs Deno where to locate
-the types for a given module. For example, a response for
-`https://example.com/coolLib.js` might look something like this:
-
-```console
-HTTP/1.1 200 OK
-Content-Type: application/javascript; charset=UTF-8
-Content-Length: 648
-X-TypeScript-Types: ./coolLib.d.ts
-```
-
-When seeing this header, Deno would attempt to retrieve
-`https://example.com/coolLib.d.ts` and use that when type checking the original
-module.
-
-## Using ambient or global types
-
-Overall it is better to use module/UMD type definitions with Deno, where a
-module expressly imports the types it depends upon. Modular type definitions can
-express
-[augmentation of the global scope](https://www.typescriptlang.org/docs/handbook/declaration-files/templates/global-modifying-module-d-ts.html)
-via the `declare global` in the type definition. For example:
-
-```ts
-declare global {
-  var AGlobalString: string;
-}
-```
-
-This would make `AGlobalString` available in the global namespace when importing
-the type definition.
-
-In some cases though, when leveraging other existing type libraries, it may not
-be possible to leverage modular type definitions. Therefore there are ways to
-include arbitrary type definitions when type checking programmes.
-
-### Triple-slash directive
-
-This option couples the type definitions to the code itself. By adding a
-triple-slash `types` directive in a TS file (not a JS file!), near the type of a
-module, type checking the file will include the type definition. For example:
-
-```ts
-/// <reference types="./types.d.ts" />
-```
-
-The specifier provided is resolved just like any other specifier in Deno, which
-means it requires an extension, and is relative to the module referencing it. It
-can be a fully qualified URL as well:
-
-```ts
-/// <reference types="https://deno.land/x/pkg@1.0.0/types.d.ts" />
-```
-
-### Supplying "types" in deno.json
-
-Another option is to provide a `"types"` value to the `"compilerOptions"` in
-your `deno.json`. For example:
-
-```json title="deno.json"
-{
-  "compilerOptions": {
-    "types": [
-      "./types.d.ts",
-      "https://deno.land/x/pkg@1.0.0/types.d.ts",
-      "/Users/me/pkg/types.d.ts"
-    ]
-  }
-}
-```
-
-Like the triple-slash reference above, the specifier supplied in the `"types"`
-array will be resolved like other specifiers in Deno. In the case of relative
-specifiers, it will be resolved relative to the path to the config file. Make
-sure to tell Deno to use this file by specifying `--config=path/to/file` flag.
+For information on augmenting global types using `declare global` or `.d.ts`
+files, see
+[Augmenting global types](/runtime/fundamentals/typescript/#augmenting-global-types).
 
 ## Type Checking Web Workers
 
@@ -463,13 +267,9 @@ library files. For example:
 }
 ```
 
-Then when running deno subcommand, you would need to pass the
-`--config path/to/file` argument, or if you are using an IDE which leverages the
-Deno language server, set the `deno.config` setting.
-
-If you also have non-worker scripts, you will either need to omit the `--config`
-argument, or have one that is configured to meet the needs of your non-worker
-scripts.
+If you also have non-worker scripts, consider using
+[workspaces](/runtime/fundamentals/workspaces/) so each workspace member can
+have its own `compilerOptions`.
 
 ## Important points
 
