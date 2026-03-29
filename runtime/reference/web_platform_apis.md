@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-05-09
 title: "Web Platform APIs"
 description: "A guide to the Web Platform APIs available in Deno. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
 oldUrl:

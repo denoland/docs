@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-12
 title: "deno info"
 oldUrl:
   - /runtime/manual/tools/dependency_inspector/

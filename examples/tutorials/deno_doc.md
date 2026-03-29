@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-07-11
 title: "Generating documentation with deno doc"
 description: "Learn how to generate professional documentation for your Deno projects using the built-in deno doc command. This tutorial covers JSDoc comments, HTML output, linting, and best practices for documenting your code."
 url: /examples/deno_doc_tutorial/

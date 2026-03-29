@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-05
 title: "deno check"
 oldUrl: /runtime/manual/tools/check/
 command: check

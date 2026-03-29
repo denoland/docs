@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-27
 title: "TypeScript support"
 description: "Learn how to use TypeScript with Deno. Covers configuration options, type checking, and best practices for writing type-safe Deno applications."
 oldUrl:

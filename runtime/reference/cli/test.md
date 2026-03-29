@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "deno test"
 oldUrl: /runtime/manual/tools/test/
 command: test

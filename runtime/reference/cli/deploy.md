@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-12
 title: "deno deploy"
 command: deploy
 openGraphLayout: "/open_graph/cli-commands.jsx"

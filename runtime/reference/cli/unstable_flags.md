@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-05
 title: "Unstable feature flags"
 oldUrl:
   - /runtime/tools/unstable_flags/

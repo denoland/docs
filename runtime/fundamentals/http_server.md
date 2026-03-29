@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-10
 title: "Writing an HTTP Server"
 description: "A guide to creating HTTP servers in Deno. Learn about the Deno.serve API, request handling, WebSocket support, response streaming, and how to build production-ready HTTP/HTTPS servers with automatic compression."
 oldUrl:

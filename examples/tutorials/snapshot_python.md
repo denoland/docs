@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-24
 title: "Boot a Python environment with snapshots"
 description: "Create a sandbox, preload Python + scientific packages, snapshot it, and boot zero-setup sandboxes that run a Mandelbrot explorer."
 url: /examples/snapshot_python_tutorial/

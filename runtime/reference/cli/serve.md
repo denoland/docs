@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-05-01
 title: "deno serve"
 oldUrl: /runtime/manual/tools/serve/
 command: serve

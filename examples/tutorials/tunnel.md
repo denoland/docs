@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-24
 title: "Share your local server with Tunnel"
 description: "Expose a public URL instantly with the --tunnel option"
 url: /examples/tunnel_tutorial/

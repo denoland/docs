@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-11-03
 title: "Deno 1.x to 2.x Migration Guide"
 description: "Comprehensive guide to migrating from Deno 1.x to 2.x. Learn about breaking changes, API updates, Node.js compatibility features, and how to update your codebase to work with Deno 2.x."
 oldUrl:

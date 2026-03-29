@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "CI and GitHub Actions"
 oldUrl:
   - /deploy/docs/project/

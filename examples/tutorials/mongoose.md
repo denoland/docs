@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-28
 title: "How to use Mongoose with Deno"
 description: "Step-by-step guide to using Mongoose with Deno. Learn how to set up MongoDB connectivity, create schemas, implement data models, and perform CRUD operations using Mongoose's schema-based modeling."
 url: /examples/mongoose_tutorial/

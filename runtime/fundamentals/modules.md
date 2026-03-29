@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-05
 title: "Modules and dependencies"
 description: "A guide to managing modules and dependencies in Deno. Learn about ECMAScript modules, third-party packages, import maps, dependency management, versioning, and how to publish your own modules."
 oldUrl:

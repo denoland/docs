@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "How to use MySQL2 with Deno"
 description: "Step-by-step guide to using MySQL2 with Deno. Learn how to set up database connections, execute queries, handle transactions, and build data-driven applications using MySQL's Node.js driver."
 url: /examples/mysql2_tutorial/

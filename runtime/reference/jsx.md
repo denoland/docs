@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-08-19
 title: "JSX"
 description: "Complete guide to using JSX in Deno. Learn about JSX configuration options, automatic runtime features, development transforms, and Deno's optimized precompile transform for server-side rendering."
 oldUrl:

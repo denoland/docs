@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "Edge Cache"
 oldUrl:
   - /deploy/classic/edge-cache/

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-25
 title: "Configuring TypeScript"
 description: "A guide to TypeScript configuration in Deno. Learn about compiler options, type checking JavaScript, JSDoc support, type declarations, and configuring TypeScript for cross-platform compatibility."
 oldUrl:

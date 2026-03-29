@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-10
 title: Databases
 description: Connect to external database instances and integrate your applications and their environments seamlessly.
 ---

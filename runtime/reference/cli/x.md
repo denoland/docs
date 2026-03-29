@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-12-10
 title: "deno x"
 command: x
 openGraphLayout: "/open_graph/cli-commands.jsx"

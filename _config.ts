@@ -451,58 +451,11 @@ site.ignore(
 // the default layout if no other layout is specified
 site.data("layout", "doc.tsx");
 
-// Populate lastModified: try git log first, fall back to committed lastModified.json
+// Populate lastModified from frontmatter `last_modified` field
 site.preprocess([".md", ".mdx"], (filteredPages) => {
-  let lastModified: Record<string, string> = {};
-
-  // Try generating from git history (works with full clone)
-  try {
-    const result = Deno.spawnAndWaitSync("git", [
-      "log",
-      "--pretty=format:%aI",
-      "--name-only",
-      "--diff-filter=ACMR",
-      "HEAD",
-    ]);
-
-    if (result.success) {
-      const output = new TextDecoder().decode(result.stdout);
-      let currentDate = "";
-      for (const line of output.split("\n")) {
-        if (!line) continue;
-        if (line.match(/^\d{4}-/)) {
-          currentDate = line;
-        } else if (!(line in lastModified)) {
-          lastModified[line] = currentDate;
-        }
-      }
-
-      // If we got meaningful data, persist it for shallow-clone environments
-      if (Object.keys(lastModified).length > 100) {
-        try {
-          Deno.writeTextFileSync(
-            "lastModified.json",
-            JSON.stringify(lastModified, null, 2) + "\n",
-          );
-        } catch { /* ignore write errors */ }
-      }
-    }
-  } catch { /* git not available */ }
-
-  // Fall back to committed JSON if git produced little/no data
-  if (Object.keys(lastModified).length <= 100) {
-    try {
-      lastModified = JSON.parse(Deno.readTextFileSync("lastModified.json"));
-    } catch {
-      console.warn("Warning: could not determine last-modified dates.");
-      return;
-    }
-  }
-
   for (const page of filteredPages) {
-    const src = page.sourcePath?.replace(/^\//, "");
-    if (src && src in lastModified) {
-      page.data.lastModified = new Date(lastModified[src]);
+    if (page.data.last_modified) {
+      page.data.lastModified = new Date(page.data.last_modified);
     }
   }
 });

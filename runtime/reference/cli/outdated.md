@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "deno outdated"
 command: outdated
 openGraphLayout: "/open_graph/cli-commands.jsx"

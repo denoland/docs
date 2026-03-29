@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "File system events"
 description: "Tutorial on monitoring file system changes with Deno. Learn how to watch directories for file modifications, handle change events, and understand platform-specific behaviors across Linux, macOS, and Windows."
 url: /examples/file_system_events_tutorial/

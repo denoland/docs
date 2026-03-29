@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-10
 title: "Writing tests"
 description: "Learn key concepts like test setup and structure, assertions, async testing, mocking, test fixtures, and code coverage"
 url: /examples/testing_tutorial/

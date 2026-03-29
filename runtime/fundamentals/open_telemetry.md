@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-25
 title: OpenTelemetry
 description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---

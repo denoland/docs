@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-05
 title: Installation
 description: "A Guide to installing Deno on different operating systems. Includes instructions for Windows, macOS, and Linux using various package managers, manual installation methods, and Docker containers."
 oldUrl:

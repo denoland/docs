@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-11-05
 title: Command line interface
 description: "A comprehensive guide to using Deno's command-line interface (CLI). Learn about running scripts, managing permissions, using watch mode, and configuring Deno's runtime behavior through command-line flags and options."
 oldUrl:

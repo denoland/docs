@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-11-21
 title: "Continuous integration"
 description: "Guide to setting up continuous integration (CI) pipelines for Deno projects. Learn how to configure GitHub Actions workflows, run tests and linting in CI, handle cross-platform builds, and optimize pipeline performance with caching."
 oldUrl: /runtime/manual/advanced/continuous_integration

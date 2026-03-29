@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-04-23
 title: "deno coverage"
 oldUrl: /runtime/manual/tools/coverage/
 command: coverage

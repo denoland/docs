@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-10
 title: "Welcome to Deno"
 description: "Learn the basics of Deno, a secure JavaScript, TypeScript, and WebAssembly runtime."
 pagination_next: /runtime/getting_started/first_project/

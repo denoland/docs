@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-12
 title: "deno add"
 command: add
 openGraphLayout: "/open_graph/cli-commands.jsx"
