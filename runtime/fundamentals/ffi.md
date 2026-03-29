@@ -20,8 +20,9 @@ allows you to:
 - Access operating system APIs and hardware features not directly available in
   JavaScript
 
-Deno's FFI implementation is based on the `Deno.dlopen` API, which loads dynamic
-libraries and creates JavaScript bindings to the functions they export.
+Deno's FFI implementation is based on the
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, which loads dynamic libraries and
+creates JavaScript bindings to the functions they export.
 
 ## Security considerations
 
@@ -53,7 +54,7 @@ Always ensure you trust the native libraries you're loading through FFI.
 The basic pattern for using FFI in Deno involves:
 
 1. Defining the interface for the native functions you want to call
-2. Loading the dynamic library using `Deno.dlopen()`
+2. Loading the dynamic library using [`Deno.dlopen()`](/api/deno/~/Deno.dlopen)
 3. Calling the loaded functions
 
 Here's a simple example loading a C library:
@@ -300,8 +301,8 @@ Before using FFI, consider these alternatives:
 
 - [WebAssembly](/runtime/reference/wasm/), for portable native code that runs
   within Deno's sandbox.
-- Use `Deno.command` to execute external binaries and subprocesses with
-  controlled permissions.
+- Use [`Deno.command`](/api/deno/~/Deno.command) to execute external binaries
+  and subprocesses with controlled permissions.
 - Check whether [Deno's native APIs](/api/deno) already provide the
   functionality you need.
 

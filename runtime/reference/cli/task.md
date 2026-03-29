@@ -21,7 +21,7 @@ To get started, define your commands in your codebase's
 
 For example:
 
-```jsonc
+```jsonc title="deno.json"
 {
   "tasks": {
     "data": "deno task collect && deno task analyze",
@@ -51,7 +51,7 @@ task to be in the same directory the user ran the task from and then output the
 current working directory which is now that directory (remember, this works on
 Windows too because `deno task` is cross-platform).
 
-```json
+```json title="deno.json"
 {
   "tasks": {
     "my_task": "cd $INIT_CWD && pwd"
@@ -71,7 +71,7 @@ For example, to provide this directory to a script in a task, do the following
 (note the directory is surrounded in double quotes to keep it as a single
 argument in case it contains spaces):
 
-```json
+```json title="deno.json"
 {
   "tasks": {
     "start": "deno run main.ts \"$INIT_CWD\""
@@ -125,8 +125,8 @@ In the above example, running `deno task serve` will first execute `build` and
 `generate` tasks in parallel, and once both of them finish successfully the
 `serve` task will be executed:
 
-```bash
-$ deno task serve
+```sh
+deno task serve
 Task build deno run -RW build.ts
 Task generate deno run -RW generate.ts
 Generating data...
@@ -169,8 +169,8 @@ task will only be run once:
 }
 ```
 
-```bash
-$ deno task a
+```sh
+deno task a
 Task d deno run d.js
 Running d
 Task c deno run c.js
@@ -198,8 +198,8 @@ If a cycle between dependencies is discovered, an error will be returned:
 }
 ```
 
-```bash
-$ deno task a
+```sh
+deno task a
 Task cycle detected: a -> b -> a
 ```
 
@@ -226,7 +226,7 @@ By default, `deno task` will execute commands with the `deno` binary. If you
 need to ensure that a command is run with the `npm` or `npx` binary, you can do
 so by invoking the `npm` or `npx` `run` command respectively. For example:
 
-```json
+```json title="deno.json"
 {
   "tasks": {
     "test:node": "npm run test"
@@ -267,8 +267,8 @@ directories in parallel. To execute `dev` tasks from all workspace members use
 }
 ```
 
-```bash
-$ deno task --recursive dev
+```sh
+deno task --recursive dev
 Task dev deno run -RN build.ts
 Task dev deno run -RN server.ts
 Bundling project...
@@ -278,15 +278,16 @@ Project bundled
 
 Tasks to run can be filtered based on the workspace members:
 
-```bash
-$ deno task --filter "client" dev
+```sh
+deno task --filter "client" dev
 Task dev deno run -RN build.ts
 Bundling project...
 Project bundled
 ```
 
 Note that the filter matches against the workspace member names as specified in
-the `name` field of each member's `deno.json` file.
+the `name` field of each member's
+[`deno.json`](/runtime/fundamentals/configuration/) file.
 
 ## Syntax
 
@@ -364,7 +365,7 @@ export VAR=hello && echo $VAR && deno eval "console.log('Deno: ' + Deno.env.get(
 
 Would output:
 
-```console
+```sh
 hello
 Deno: hello
 ```
@@ -373,7 +374,7 @@ Deno: hello
 
 To specify environment variable(s) before a command, list them like so:
 
-```console
+```sh
 VAR=hello VAR2=bye deno run main.ts
 ```
 
@@ -398,7 +399,7 @@ VAR=hello && echo $VAR && deno eval "console.log('Deno: ' + Deno.env.get('VAR'))
 
 We will get the following output:
 
-```console
+```sh
 hello
 Deno: undefined
 ```
@@ -554,7 +555,7 @@ Hello there!
 Glob expansion is supported in Deno 1.34 and above. This allows for specifying
 globs to match files in a cross-platform way.
 
-```console
+```sh
 # match .ts files in the current and descendant directories
 echo **/*.ts
 # match .ts files in the current directory

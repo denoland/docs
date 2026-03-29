@@ -12,7 +12,7 @@ description: "Run benchmarks using Deno's built-in bench tool."
 ## Quickstart
 
 Firstly, let's create a file `url_bench.ts` and register a bench using the
-`Deno.bench()` function.
+[`Deno.bench()`](/api/deno/~/Deno.bench) function.
 
 ```ts
 // url_bench.ts
@@ -23,8 +23,8 @@ Deno.bench("URL parsing", () => {
 
 Secondly, run the benchmark using the `deno bench` subcommand.
 
-```shell
-$ deno bench url_bench.ts
+```sh
+deno bench url_bench.ts
 Check file:///path/to/url_bench.ts
     CPU | 12th Gen Intel(R) Core(TM) i3-12100
 Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
@@ -38,10 +38,11 @@ file:///path/to/url_bench.ts
 
 ## Writing benchmarks
 
-To define a benchmark you need to register it with a call to the `Deno.bench`
-API. There are multiple overloads of this API to allow for the greatest
-flexibility and easy switching between the forms (eg. when you need to quickly
-focus a single bench for debugging, using the `only: true` option):
+To define a benchmark you need to register it with a call to the
+[`Deno.bench`](/api/deno/~/Deno.bench) API. There are multiple overloads of this
+API to allow for the greatest flexibility and easy switching between the forms
+(eg. when you need to quickly focus a single bench for debugging, using the
+`only: true` option):
 
 ```ts
 // Compact form: name and function
@@ -100,10 +101,12 @@ takes to read a small file, you need to open the file, read it, and then close
 it. If the file is small enough the time it takes to open and close the file
 might outweigh the time it takes to read the file itself.
 
-To help with such situations you can `Deno.BenchContext.start` and
-`Deno.BenchContext.end` to tell the benchmarking tool about the critical section
-you want to measure. Everything outside of the section between these two calls
-will be excluded from the measurement.
+To help with such situations you can
+[`Deno.BenchContext.start`](/api/deno/~/Deno.BenchContext.start) and
+[`Deno.BenchContext.end`](/api/deno/~/Deno.BenchContext.end) to tell the
+benchmarking tool about the critical section you want to measure. Everything
+outside of the section between these two calls will be excluded from the
+measurement.
 
 ```ts
 Deno.bench("foo", async (b) => {
@@ -128,7 +131,7 @@ The above example requires the `--allow-read` flag to run the benchmark:
 ## Grouping and baselines
 
 When registering a bench case, it can be assigned to a group, using
-`Deno.BenchDefinition.group` option:
+[`Deno.BenchDefinition.group`](/api/deno/~/Deno.BenchDefinition.group) option:
 
 ```ts
 // url_bench.ts
@@ -142,7 +145,8 @@ perform against a "baseline" case.
 
 In this example we'll check how performant is `Date.now()` compared to
 `performance.now()`, to do that we'll mark the first case as a "baseline" using
-`Deno.BenchDefinition.baseline` option:
+[`Deno.BenchDefinition.baseline`](/api/deno/~/Deno.BenchDefinition.baseline)
+option:
 
 ```ts
 // time_bench.ts
@@ -155,8 +159,8 @@ Deno.bench("performance.now()", { group: "timing" }, () => {
 });
 ```
 
-```shell
-$ deno bench time_bench.ts
+```sh
+deno bench time_bench.ts
     CPU | 12th Gen Intel(R) Core(TM) i3-12100
 Runtime | Deno 2.4.2 (x86_64-unknown-linux-gnu)
 
@@ -190,7 +194,7 @@ The glob expands to:
 - or files ending with `.bench.{ts, tsx, mts, js, mjs, jsx}`,
 - or files ending with `_bench.{ts, tsx, mts, js, mjs, jsx}`
 
-```bash
+```sh
 # Run all benches in the current directory and all sub-directories
 deno bench
 
@@ -204,7 +208,7 @@ deno bench my_bench.ts
 > ⚠️ If you want to pass additional CLI arguments to the bench files use `--` to
 > inform Deno that remaining arguments are scripts arguments.
 
-```bash
+```sh
 # Pass additional arguments to the bench file
 deno bench my_bench.ts -- -e --foo --bar
 ```
@@ -216,7 +220,7 @@ benching.
 To see all runtime options with `deno bench`, you can reference the command line
 help:
 
-```bash
+```sh
 deno help bench
 ```
 
@@ -251,14 +255,14 @@ Deno.bench({
 This command will run all of these benches because they all contain the word
 "bench".
 
-```bash
+```sh
 deno bench --filter "bench" benchmarks/
 ```
 
 On the flip side, the following command uses a pattern and will run the second
 and third benchmarks.
 
-```bash
+```sh
 deno bench --filter "/bench-*\d/" benchmarks/
 ```
 
@@ -310,8 +314,8 @@ Deno.bench({
 
 To retrieve the output as JSON, use the `--json` flag:
 
-```shell
-$ deno bench my_bench.ts --json
+```sh
+deno bench my_bench.ts --json
 {
   "version": 1,
   "runtime": "Deno/2.4.2 x86_64-unknown-linux-gnu",

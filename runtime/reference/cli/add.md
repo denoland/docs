@@ -9,6 +9,8 @@ description: "Add and manage project dependencies with Deno"
 The `deno add` command adds dependencies to your project's configuration file.
 It is an alias for
 [`deno install [PACKAGES]`](/runtime/reference/cli/install/#deno-install-packages).
+For more on how Deno handles dependencies, see
+[Modules and dependencies](/runtime/fundamentals/modules/).
 
 ## Examples
 
@@ -38,4 +40,4 @@ deno add --npm express
 
 If your project has a `package.json`, npm packages will be added to
 `dependencies` in `package.json`. Otherwise, all packages are added to the
-`imports` field in `deno.json`.
+`imports` field in [`deno.json`](/runtime/fundamentals/configuration/).

@@ -78,7 +78,7 @@ writing to stdout and stderr. See the website
 [https://no-color.org](https://no-color.org/) for more information on this _de
 facto_ standard. The value of this flag can be accessed at runtime without
 permission to read the environment variables by checking the value of
-`Deno.noColor`.
+[`Deno.noColor`](/api/deno/~/Deno.noColor).
 
 ### NO_PROXY
 

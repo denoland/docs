@@ -23,7 +23,7 @@ deno compile --allow-read --allow-net jsr:@std/http/file-server
 [Script arguments](/runtime/getting_started/command_line_interface/#passing-script-arguments)
 can be partially embedded.
 
-```console
+```sh
 deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
 
 ./file_server --help
@@ -86,7 +86,7 @@ const calculator = await import(specifier);
 To include non-statically analyzable dynamic imports, specify an
 `--include <path>` flag.
 
-```shell
+```sh
 deno compile --include calc.ts --include better_calc.ts main.ts
 ```
 
@@ -95,7 +95,7 @@ deno compile --include calc.ts --include better_calc.ts main.ts
 Starting in Deno 2.1, you can include files or directories in the executable by
 specifying them via the `--include <path>` flag.
 
-```shell
+```sh
 deno compile --include names.csv --include data main.ts
 ```
 
@@ -121,7 +121,7 @@ executable by default. There are two ways to include workers:
 
 1. Use the `--include <path>` flag to include the worker code.
 
-```shell
+```sh
 deno compile --include worker.ts main.ts
 ```
 
@@ -132,7 +132,7 @@ deno compile --include worker.ts main.ts
 import "./worker.ts";
 ```
 
-```shell
+```sh
 deno compile main.ts
 ```
 
@@ -143,7 +143,7 @@ file system. The `--self-extracting` flag changes this behavior so that the
 binary extracts all embedded files to disk on first run and uses real file
 system operations at runtime.
 
-```shell
+```sh
 deno compile --self-extracting main.ts
 ```
 
@@ -180,9 +180,9 @@ trade-offs:
 By default, on macOS, the compiled executable will be signed using an ad-hoc
 signature which is the equivalent of running `codesign -s -`:
 
-```shell
-$ deno compile -o main main.ts
-$ codesign --verify -vv ./main
+```sh
+deno compile -o main main.ts
+codesign --verify -vv ./main
 
 ./main: valid on disk
 ./main: satisfies its Designated Requirement
@@ -191,7 +191,7 @@ $ codesign --verify -vv ./main
 You can specify a signing identity when code signing the executable just like
 you would do with any other macOS executable:
 
-```shell
+```sh
 codesign -s "Developer ID Application: Your Name" ./main
 ```
 
@@ -204,9 +204,9 @@ for more information on codesigning and notarization on macOS.
 On Windows, the compiled executable can be signed using the `SignTool.exe`
 utility.
 
-```shell
-$ deno compile -o main.exe main.ts
-$ signtool sign /fd SHA256 main.exe
+```sh
+deno compile -o main.exe main.ts
+signtool sign /fd SHA256 main.exe
 ```
 
 ## Unavailable in executables
