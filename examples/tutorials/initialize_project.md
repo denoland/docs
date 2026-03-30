@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "Initialize a project"
 description: "Guide to creating and structuring new Deno projects. Learn about starting a new project, task configuration, dependency management, and best practices for growing applications."
 url: /examples/initialize_project_tutorial/

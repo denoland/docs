@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-18
 title: "Building a word finder app with Deno"
 description: "A tutorial on creating a word search application with Deno. Learn how to build a web server, implement pattern matching, handle HTTP requests, and create an interactive web interface using Oak framework."
 url: /examples/word_finder_tutorial/

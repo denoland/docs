@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-12-16
 title: "Stubbing in tests"
 description: "Learn how to use stubs in Deno to isolate code during testing by replacing function implementations with controlled behavior"
 url: /examples/stubbing_tutorial/

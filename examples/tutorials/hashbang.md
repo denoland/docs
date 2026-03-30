@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "Executable scripts"
 description: "Guide to creating executable scripts with Deno. Learn about hashbangs, file permissions, cross-platform compatibility, and how to create command-line tools that can run directly from the terminal."
 url: /examples/hashbang_tutorial/

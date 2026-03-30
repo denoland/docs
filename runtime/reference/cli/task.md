@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-12
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/

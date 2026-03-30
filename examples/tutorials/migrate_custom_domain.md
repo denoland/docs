@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "Migrating a custom domain from Deploy Classic to Deno Deploy"
 description: "Learn how to migrate your custom domain from Deploy Classic to Deno Deploy"
 url: /examples/migrate_custom_domain_tutorial/

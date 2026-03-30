@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-11
 title: "Bundling"
 description: "An overview of `deno bundle` subcommand that can be used to produce a single file application created from multiple source files for optimized execution."
 ---

@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-04-24
 title: "deno completions"
 oldUrl: /runtime/manual/tools/completions/
 command: completions

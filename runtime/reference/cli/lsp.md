@@ -1,4 +1,5 @@
 ---
+last_modified: 2024-10-07
 title: "deno lsp"
 oldUrl: /runtime/manual/tools/lsp/
 ---

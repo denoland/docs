@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-29
 title: "Build a Fresh App"
 description: "Complete guide to building Full-stack applications with Fresh and Deno. Learn how to set up a project, implement server-side rendering with islands architecture, add API routes, and deploy your TypeScript application."
 url: /examples/fresh_tutorial/

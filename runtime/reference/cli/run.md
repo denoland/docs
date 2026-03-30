@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-12
 title: "deno run"
 oldUrl: /runtime/manual/tools/run/
 command: run

@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-07-01
 title: "deno update"
 command: update
 openGraphLayout: "/open_graph/cli-commands.jsx"

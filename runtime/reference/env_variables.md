@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-12-19
 title: "Environment variables"
 description: "A guide to working with environment variables in Deno. Learn about Deno.env API, .env file support, CLI configuration, and special environment variables that control Deno's behavior."
 oldUrl:

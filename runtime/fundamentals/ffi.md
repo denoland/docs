@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-15
 title: "Foreign Function Interface (FFI)"
 description: "Learn how to use Deno's Foreign Function Interface (FFI) to call native libraries directly from JavaScript or TypeScript. Includes examples, best practices, and security considerations."
 ---

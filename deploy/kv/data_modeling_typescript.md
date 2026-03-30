@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-07
 title: "Data Modeling in TypeScript"
 oldUrl:
   - /kv/manual/data_modeling_typescript/

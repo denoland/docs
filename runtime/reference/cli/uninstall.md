@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "deno uninstall"
 oldUrl: /runtime/manual/tools/uninstall/
 command: uninstall

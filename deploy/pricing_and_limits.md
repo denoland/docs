@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-07
 title: "Pricing and limitations"
 description: "Important limitations, service level expectations, and terms of use for Deno Deploy."
 oldUrl: /deploy/classic/pricing-and-limits/

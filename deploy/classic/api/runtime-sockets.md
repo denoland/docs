@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "TCP sockets and TLS"
 oldUrl:
   - /deploy/docs/sockets/

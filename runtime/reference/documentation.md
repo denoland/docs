@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-06-19
 title: "Documentation Tests"
 description: "Learn how to write and run documentation tests in Deno. This guide covers how to create testable code examples in documentation comments, type-checking documentation, and running doc tests with the Deno test runner."
 oldUrl: /runtime/manual/testing/documentation/

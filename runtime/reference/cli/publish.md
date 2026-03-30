@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-04-11
 title: "deno publish"
 oldUrl: /runtime/manual/tools/publish/
 command: publish

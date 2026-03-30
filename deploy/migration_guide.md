@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "Migrating from Deploy Classic to Deno Deploy"
 description: "Guide to migrating your applications from Deno Deploy Classic (dash.deno.com) to the new Deno Deploy (console.deno.com), including subhosting API migration."
 ---

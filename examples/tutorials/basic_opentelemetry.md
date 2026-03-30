@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-25
 title: "Getting Started with OpenTelemetry in Deno"
 description: "Set up basic OpenTelemetry instrumentation in a Deno application. This tutorial covers creating a simple HTTP server with custom metrics and traces, and viewing the telemetry data."
 url: /examples/basic_opentelemetry_tutorial/

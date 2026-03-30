@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-12-16
 title: Deno and Docker
 description: "Complete guide to using Deno with Docker containers. Learn about official Deno images, writing Dockerfiles, multi-stage builds, workspace containerization, and Docker best practices for Deno applications."
 ---

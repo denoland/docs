@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-09
 title: "deno.json and package.json"
 description: "The guide to configuring your Deno projects. Learn about TypeScript settings, tasks, dependencies, formatting, linting, and how to use both deno.json and/or package.json effectively."
 oldUrl:

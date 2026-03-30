@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "Handle OS signals"
 description: "Tutorial on handling operating system signals in Deno. Learn how to capture SIGINT and SIGBREAK events, manage signal listeners, and implement graceful shutdown handlers in your applications."
 url: /examples/os_signals_tutorial/

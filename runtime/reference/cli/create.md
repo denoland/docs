@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-12
 title: "deno create"
 command: create
 openGraphLayout: "/open_graph/cli-commands.jsx"

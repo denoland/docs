@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-29
 title: "Build Astro with Deno"
 description: "Step-by-step tutorial on building web applications with Astro and Deno. Learn how to scaffold projects, create dynamic pages, implement SSR, and deploy your Astro sites using Deno's Node.js compatibility."
 url: /examples/astro_tutorial/

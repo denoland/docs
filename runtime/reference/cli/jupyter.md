@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-11-05
 title: "Jupyter Kernel for Deno"
 oldUrl: /runtime/manual/tools/jupyter/
 openGraphLayout: "/open_graph/cli-commands.jsx"

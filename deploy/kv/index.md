@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-26
 title: "Deno KV Quick Start"
 oldUrl:
   - /kv/
