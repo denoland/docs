@@ -8,14 +8,13 @@ oldUrl:
   - /runtime/tutorials/cjs_to_esm/
 ---
 
-If your Node.js project uses CommonJS modules (e.g. it uses `require`), you'll
-need to update your code to use
-[ECMAScript modules (ESM)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
-to run it in Deno. This guide will help you update your code to use ESM syntax.
+If your Node.js project uses CommonJS modules (e.g. it uses `require`), you
+should consider updating your code to use
+[ECMAScript modules (ESM)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+This guide will help you update your code to use ESM syntax.
 
 ## Module imports and exports
 
-Deno supports [ECMAScript modules](/runtime/fundamentals/modules/) exclusively.
 If your Node.js code uses
 [`require`](https://nodejs.org/api/modules.html#modules-commonjs-modules), you
 should update it to use `import` statements instead. If your internal code uses
