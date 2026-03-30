@@ -181,7 +181,7 @@ export default function renderCommand(
             <h2 id={id}>
               {heading} <HeaderAnchor id={id} />
             </h2>
-            <div class="flex flex-col gap-5 mt-4">
+            <div class="flex flex-col gap-8 mt-4">
               {flags
                 .toSorted((a: ArgType, b: ArgType) =>
                   a.long.localeCompare(b.long)
@@ -226,7 +226,7 @@ function renderOption(group: string, arg: ArgType, helpers: Lume.Helpers) {
   const flagDisplay = arg.short ? `${longFlag}, -${arg.short}` : longFlag;
 
   return (
-    <div id={id} class="p-4 rounded-md border border-foreground-secondary/20">
+    <div id={id}>
       <div class="flex items-baseline justify-between gap-4 flex-wrap">
         <div class="flex items-baseline gap-2">
           <code class="text-sm font-semibold">
