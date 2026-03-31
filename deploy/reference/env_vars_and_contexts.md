@@ -148,7 +148,7 @@ Deno Deploy provides these predefined environment variables in all contexts:
   application. This is the human-readable identifier used in URLs that was set
   when creating the organization.
 - `DENO_DEPLOY_APPLICATION_ID`: The ID of the application. This is a UUID.
-- `DENO_DEPLOY_APPLICATION_SLUG`: The slug of the application. This is the
+- `DENO_DEPLOY_APP_SLUG`: The slug of the application. This is the
   human-readable identifier used in URLs that was set when creating the
   application, or changed later in the application settings.
 - `DENO_DEPLOY_BUILD_ID`: The ID of the currently running build.
