@@ -142,8 +142,8 @@ Environment variables have the following limits:
 Deno Deploy provides these predefined environment variables in all contexts:
 
 - `DENO_DEPLOY`: `true` - Indicates that the code is running in Deno Deploy.
-- `DENO_DEPLOY_ORG_ID`: The ID of the organization that owns the
-  application. This is a UUID.
+- `DENO_DEPLOY_ORG_ID`: The ID of the organization that owns the application.
+- This is a UUID.
 - `DENO_DEPLOY_ORG_SLUG`: The slug of the organization that owns the
   application. This is the human-readable identifier used in URLs that was set
   when creating the organization.
