@@ -1227,6 +1227,10 @@
     }
   }
 
+  .copy-page-split {
+    anchor-name: --copy-page-anchor;
+  }
+
   .copy-page-panel {
     /* Reset browser popover defaults */
     inset: unset;
@@ -1234,6 +1238,12 @@
     padding: 0;
     @apply w-72 rounded-md overflow-hidden bg-white dark:bg-gray-900 border
       border-foreground-tertiary shadow-lg;
+
+    /* CSS anchor positioning (supported browsers) */
+    position-anchor: --copy-page-anchor;
+    position-area: bottom span-left;
+    margin-top: 4px;
+    position-try-fallbacks: flip-inline;
   }
 
   #feedback-no:focus + label,

@@ -57,7 +57,7 @@ export default function CopyPage({ file }: { file: string | undefined }) {
         </svg>
       </button>
 
-      {/* Popover panel — lives in top layer, positioned via JS */}
+      {/* Popover panel — positioned via CSS anchor positioning, JS fallback */}
       <div id="copy-page-menu" popover="auto" class="copy-page-panel">
         <a
           href={file}
