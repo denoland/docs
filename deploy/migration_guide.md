@@ -71,6 +71,33 @@ See the
 [custom domain migration tutorial](/examples/migrate_custom_domain_tutorial/)
 for a step-by-step walkthrough.
 
+## HTTP server API
+
+Deploy Classic supported the `serve()` function from the `deno.land/std` HTTP
+module (e.g. `https://deno.land/std@0.170.0/http/server.ts`). The new Deploy
+does **not** support this legacy `serve()` function.
+
+Update your code to use the built-in
+[`Deno.serve()`](https://docs.deno.com/api/deno/~/Deno.serve) API instead:
+
+```diff
+- import { serve } from "https://deno.land/std@0.170.0/http/server.ts";
+-
+- serve(() => new Response("hello, world"));
++ Deno.serve(() => new Response("hello, world"));
+```
+
+`Deno.serve()` has been the recommended HTTP server API since Deno 1.35 and is
+more performant. If your application uses the old standard library `serve()`,
+update it before migrating to the new Deploy.
+
+If you deploy code that uses the old `serve()` function to the new Deploy, it
+will fail with a **timeout error during the warmup phase** of deployment. If you
+encounter this error, check whether your entrypoint or any of your dependencies
+is using the standard library `serve()`. Some older versions of third-party
+libraries may internally depend on the legacy `serve()` function — in that case,
+upgrade the library to a version that uses `Deno.serve()` instead.
+
 ## Cron jobs
 
 The `Deno.cron()` API works the same way on the new Deploy. Your existing cron
