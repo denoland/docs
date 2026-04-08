@@ -21,25 +21,20 @@ Deno will automatically detect a `deno.json` or `deno.jsonc` configuration file
 if it's in your current working directory or parent directories. The `--config`
 flag can be used to specify a different configuration file.
 
-## package.json support
+:::note `package.json` support
 
-Deno also supports a `package.json` file for compatibility with Node.js
-projects. If you have a Node.js project, it is not necessary to create a
-`deno.json` file. Deno will use the `package.json` file to configure the
-project.
-
-If both a `deno.json` and `package.json` file are present in the same directory,
-Deno will understand dependencies specified in both `deno.json` and
-`package.json`; and use the `deno.json` file for Deno-specific configurations.
-Read more about
+Node.js projects with a `package.json` generally work out-of-the-box — you don't
+need to create a `deno.json`. If both files are present, Deno reads dependencies
+from both and uses `deno.json` for Deno-specific settings. Read more about
 [Node compatibility in Deno](/runtime/fundamentals/node/#node-compatibility).
 
-## Dependencies
+:::
 
-The `"imports"` field in your `deno.json` allows you to specify dependencies
-used in your project. You can use it to map bare specifiers to URLs or file
-paths making it easier to manage dependencies and module resolution in your
-applications.
+## `"imports"`
+
+The `"imports"` field in `deno.json` allows you to specify dependencies used in
+your project. You can use it to map bare specifiers to URLs or file paths making
+it easier to manage dependencies and module resolution in your applications.
 
 For example, if you want to use the `assert` module from the standard library in
 your project, you could use this import map:
@@ -153,9 +148,9 @@ so that Deno knows what package it's dealing with. This provides greater
 flexibility and modularity, maintaining clean separation between your main code
 and external packages.
 
-## Tasks
+## `"tasks"`
 
-The `tasks` field in your `deno.json` file is used to define custom commands
+The `"tasks"` field in your `deno.json` file is used to define custom commands
 that can be executed with the `deno task` command and allows you to tailor
 commands and permissions to the specific needs of your project.
 
@@ -194,9 +189,9 @@ deno task build
 
 Read more about [`deno task`](/runtime/reference/cli/task_runner/).
 
-## Linting
+## `"lint"`
 
-The `lint` field in the `deno.json` file is used to configure the behavior of
+The `"lint"` field in the `deno.json` file is used to configure the behavior of
 Deno’s built-in linter. This allows you to specify which files to include or
 exclude from linting, as well as customize the linting rules to suit your
 project’s needs.
@@ -231,9 +226,9 @@ You can find a full list of available linting rules in the
 
 Read more about [linting with Deno](/runtime/reference/cli/linter/).
 
-## Formatting
+## `"fmt"`
 
-The `fmt` field in the `deno.json` file is used to configure the behavior of
+The `"fmt"` field in the `deno.json` file is used to configure the behavior of
 Deno’s built-in code formatter. This allows you to customize how your code is
 formatted, ensuring consistency across your project, making it easier to read
 and collaborate on. Here are the key options you can configure:
@@ -268,10 +263,10 @@ This configuration will:
 Read more about
 [formatting your code with Deno](/runtime/fundamentals/linting_and_formatting/).
 
-## Lockfile
+## `"lock"`
 
-The `lock` field in the `deno.json` file is used to specify configuration of the
-lock file that Deno uses to
+The `"lock"` field in the `deno.json` file is used to specify configuration of
+the lock file that Deno uses to
 [ensure the integrity of your dependencies](/runtime/fundamentals/modules/#integrity-checking-and-lock-files).
 A lock file records the exact versions and integrity hashes of the modules your
 project depends on, ensuring that the same versions are used every time the
@@ -300,7 +295,7 @@ Deno uses lockfile by default, you can disable it with following configuration:
 }
 ```
 
-## Node modules directory
+## `"nodeModulesDir"`
 
 By default Deno uses a local `node_modules` directory if you have a
 `package.json` file in your project directory.
@@ -332,9 +327,9 @@ Specifying it in any of the members will result in warnings. The `"manual"`
 setting will only be applied automatically if there's a `package.json` file in
 the workspace root.
 
-## TypeScript compiler options
+## `"compilerOptions"`
 
-The `compilerOptions` field in the `deno.json` file is used to configure
+The `"compilerOptions"` field in the `deno.json` file is used to configure
 [TypeScript compiler settings](https://www.typescriptlang.org/tsconfig) for your
 Deno project. This allows you to customize how TypeScript code is compiled,
 ensuring it aligns with your project’s requirements and coding standards.
@@ -349,9 +344,9 @@ sharing code.
 See also
 [Configuring TypeScript in Deno](/runtime/reference/ts_config_migration/).
 
-## Unstable features
+## `"unstable"`
 
-The `unstable` field in a `deno.json` file is used to enable specific unstable
+The `"unstable"` field in a `deno.json` file is used to enable specific unstable
 features for your Deno project.
 
 These features are still in development and not yet part of the stable API. By
@@ -487,10 +482,10 @@ works as well:
 }
 ```
 
-## Exports
+## `"exports"`
 
-The `exports` field in the `deno.json` file allows you to define which paths of
-your package should be publicly accessible. This is particularly useful for
+The `"exports"` field in the `deno.json` file allows you to define which paths
+of your package should be publicly accessible. This is particularly useful for
 controlling the API surface of your package and ensuring that only the intended
 parts of your code are exposed to users.
 
@@ -526,7 +521,7 @@ import * as module_1 from "@example/my-package/module1";
 import * as module_2 from "@example/my-package/module2";
 ```
 
-## Permissions
+## `"permissions"`
 
 Deno 2.5+ supports storing
 [permission](/runtime/fundamentals/security/#permissions) sets in the config
@@ -810,10 +805,7 @@ is versioned and available at:
 
 ## Proxies
 
-Deno supports proxies for module downloads and the fetch API. Proxy
-configuration is read from
-[environment variables](https://docs.deno.com/runtime/reference/env_variables/#special-environment-variables):
-HTTP_PROXY, HTTPS_PROXY and NO_PROXY.
-
-If you are using Windows - if environment variables are not found Deno falls
-back to reading proxies from the registry.
+Deno supports proxies for module downloads and the fetch API via the
+`HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`
+[environment variables](/runtime/reference/env_variables/#special-environment-variables).
+On Windows, Deno falls back to reading proxy settings from the registry.
