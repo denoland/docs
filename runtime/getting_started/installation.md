@@ -205,6 +205,24 @@ executable bit on macOS and Linux.
 For more information and instructions on the official Docker images:
 [https://github.com/denoland/deno_docker](https://github.com/denoland/deno_docker)
 
+## Installation location
+
+When installed using the shell script or PowerShell script, Deno is placed in
+the following default location:
+
+| Platform      | Default path                       |
+| ------------- | ---------------------------------- |
+| macOS / Linux | `$HOME/.deno/bin/deno`             |
+| Windows       | `%USERPROFILE%\.deno\bin\deno.exe` |
+
+You can customize the install directory by setting the `DENO_INSTALL`
+environment variable before running the install script. The Deno cache directory
+(where downloaded dependencies are stored) defaults to `$DENO_DIR` or
+`$HOME/.cache/deno` on macOS/Linux and `%LOCALAPPDATA%/deno` on Windows.
+
+When installed via a package manager (Homebrew, Scoop, etc.), the binary
+location is managed by that package manager.
+
 ## Testing your installation
 
 To test your installation, run `deno --version`. If this prints the Deno version
