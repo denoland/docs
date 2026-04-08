@@ -33,11 +33,70 @@ By default, the server listens on port **8000**. Override it with `--port`:
 deno serve --port=3000 server.ts
 ```
 
-## Routing requests
+## Default export shape
+
+The file must export a default object that satisfies
+[`Deno.ServeDefaultExport`](/api/deno/~/Deno.ServeDefaultExport). The object has
+two properties:
+
+```typescript
+export interface ServeDefaultExport {
+  fetch: ServeHandler;
+  onListen?: (localAddr: Deno.Addr) => void;
+}
+```
+
+### `fetch` (required)
 
 The `fetch` handler receives a standard
-[`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) object.
-Use the URL to route:
+[`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) and a
+[`ServeHandlerInfo`](/api/deno/~/Deno.ServeHandlerInfo) object with connection
+metadata:
+
+```typescript
+type ServeHandler = (
+  request: Request,
+  info: ServeHandlerInfo,
+) => Response | Promise<Response>;
+
+interface ServeHandlerInfo {
+  remoteAddr: Deno.Addr; // remote address of the connection
+  completed: Promise<void>; // resolves when the request completes
+}
+```
+
+If the handler throws, the error is isolated to that request — the server
+continues serving.
+
+### `onListen` (optional)
+
+Called once when the server starts listening. If omitted, a default message is
+logged to the console.
+
+```typescript title="server.ts"
+export default {
+  fetch(request, info) {
+    const { hostname, port } = info.remoteAddr as Deno.NetAddr;
+    console.log(`${request.method} ${request.url} from ${hostname}:${port}`);
+
+    return new Response("Hello, World!", {
+      headers: { "content-type": "text/plain" },
+    });
+  },
+
+  onListen({ hostname, port }) {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  },
+} satisfies Deno.ServeDefaultExport;
+```
+
+Any other properties on the default export are silently ignored. If `fetch` is
+missing, no server starts. If `fetch` or `onListen` exist but are not functions,
+a `TypeError` is thrown.
+
+## Routing requests
+
+Use the request URL to route to different handlers:
 
 ```typescript title="server.ts"
 export default {
