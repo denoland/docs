@@ -45,11 +45,11 @@ the key principles of Deno's security model:
 - **Code can not escalate its privileges without user consent**: Code executing
   in a Deno runtime can not escalate its privileges without the user agreeing
   explicitly to an escalation via interactive prompt or a invocation time flag.
-- **The initial static module graph can import local files without
-  restrictions**: All files that are imported in the initial static module graph
-  can be imported without restrictions, so even if an explicit read permission
-  is not granted for that file. This does not apply to any dynamic module
-  imports.
+- **The initial static module graph can import modules without restrictions**:
+  All modules that are imported in the initial static module graph (local files,
+  npm packages, jsr packages, and remote URLs) can be loaded without
+  restrictions, even if explicit permissions are not granted. This does not
+  apply to dynamic module imports.
 
 These key principles are designed to provide an environment where a user can
 execute code with minimal risk of harm to the host machine or network. The
