@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-29
 title: "Build a Real-time LLM Chat App with Deno"
 description: "Learn how to integrate Large Language Models (LLM) with Deno to create an interactive roleplay chat application with AI characters using OpenAI or Anthropic APIs."
 url: /examples/llm_tutorial/

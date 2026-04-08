@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-24
 title: "Connect a Database to your local dev"
 description: "Connect a Postgres database to your local development server with Deno Deploy and Deno's tunnel feature"
 url: /examples/tunnel_database_tutorial/
@@ -134,14 +135,12 @@ the `src/routes/+page.svelte` file and update it to fetch the notes from the
 database.
 
 ```svelte title="src/routes/+page.svelte"
-import { Client } from "pg";
-
-export const load = async () => {
+import {Client} from "pg"; export const load = async () => {
   const client = new Client();
   await client.connect();
   const res = await client.query(` SELECT note from notes; `);
   await client.end();
-  return { notes: res.rows };
+  return { notes: res.rows }
 };
 ```
 

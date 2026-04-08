@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-25
 title: "Getting Started with OpenTelemetry in Deno"
 description: "Set up basic OpenTelemetry instrumentation in a Deno application. This tutorial covers creating a simple HTTP server with custom metrics and traces, and viewing the telemetry data."
 url: /examples/basic_opentelemetry_tutorial/
@@ -122,6 +123,18 @@ To run the server with OpenTelemetry, use these flags:
 ```sh
 OTEL_DENO=true OTEL_SERVICE_NAME=my-server deno run --allow-net server.ts
 ```
+
+:::tip
+
+To quickly see telemetry output without setting up a collector, you can use the
+built-in console exporter which prints spans, logs, and metrics directly to
+stderr:
+
+```sh
+OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console OTEL_SERVICE_NAME=my-server deno run --allow-net server.ts
+```
+
+:::
 
 ## Step 3: Create a Test Client
 

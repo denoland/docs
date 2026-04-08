@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-03
 title: "Behavior-Driven Development (BDD)"
 description: "Implementing Behavior-Driven Development with Deno's Standard Library's BDD module. Create readable, well organised tests with effective assertions."
 url: /examples/bdd_tutorial/

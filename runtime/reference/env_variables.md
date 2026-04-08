@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-12-19
 title: "Environment variables"
 description: "A guide to working with environment variables in Deno. Learn about Deno.env API, .env file support, CLI configuration, and special environment variables that control Deno's behavior."
 oldUrl:
@@ -13,7 +14,8 @@ There are a few ways to use environment variables in Deno:
 The Deno runtime offers built-in support for environment variables with
 [`Deno.env`](https://docs.deno.com/api/deno/~/Deno.env).
 
-`Deno.env` has getter and setter methods. Here is example usage:
+[`Deno.env`](/api/deno/~/Deno.env) has getter and setter methods. Here is
+example usage:
 
 ```ts
 Deno.env.set("FIREBASE_API_KEY", "examplekey123");
@@ -51,7 +53,7 @@ that the first occurrence found in the last `.env` file listed will be applied.
 
 :::
 
-## `@std/dotenv`
+## [`@std/dotenv`](/runtime/reference/std/dotenv/)
 
 The `dotenv` package in the standard library can be used to load environment
 variables from `.env`.
@@ -150,7 +152,7 @@ The Deno runtime has these special environment variables.
 | DENO_NO_UPDATE_CHECK | Set to disable checking if a newer Deno version is available                                                                                                                      |
 | DENO_V8_FLAGS        | Set V8 command line options                                                                                                                                                       |
 | DENO_JOBS            | Number of parallel workers used for the `--parallel` flag with the test subcommand.<br />Defaults to number of available CPUs.                                                    |
-| DENO_KV_ACCESS_TOKEN | Personal access token used when connecting to Deno KV databases (for example via `Deno.openKv` or `@deno/kv` with a KV Connect URL).                                              |
+| DENO_KV_ACCESS_TOKEN | Personal access token used when connecting to Deno KV databases (for example via [`Deno.openKv`](/api/deno/~/Deno.openKv) or `@deno/kv` with a KV Connect URL).                   |
 | DENO_WEBGPU_TRACE    | Path to a directory to output a [WGPU trace](https://github.com/gfx-rs/wgpu/pull/619) to when using the WebGPU API                                                                |
 | DENO_WEBGPU_BACKEND  | Select the backend WebGPU will use, or a comma separated list of backends in order of preference. Possible values are `vulkan`, `dx12`, `metal`, or `opengl`                      |
 | HTTP_PROXY           | Proxy address for HTTP requests (module downloads, fetch)                                                                                                                         |

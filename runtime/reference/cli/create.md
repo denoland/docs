@@ -1,5 +1,6 @@
 ---
-title: "deno create, scaffold a new project"
+last_modified: 2026-03-12
+title: "deno create"
 command: create
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno create"
@@ -27,7 +28,8 @@ Package resolution differs between npm and JSR:
   `deno create npm:vite` resolves to the `create-vite` package on npm and
   executes its main entry point.
 - **JSR packages** use the `./create` export. Any JSR package can act as a
-  template by defining a `./create` entry point in its `deno.json`:
+  template by defining a `./create` entry point in its
+  [`deno.json`](/runtime/fundamentals/configuration/):
 
 ```json title="deno.json"
 {

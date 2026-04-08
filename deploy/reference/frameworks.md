@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-11
 title: Frameworks
 description: "Detailed guide to supported JavaScript and TypeScript frameworks in Deno Deploy, including Next.js, Astro, Nuxt, SvelteKit, and more."
 ---

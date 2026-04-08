@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-15
 title: Domains
 description: "Complete guide to domain management in Deno Deploy, including organization domains, custom domains, DNS configuration, TLS certificates, and domain assignments."
 ---

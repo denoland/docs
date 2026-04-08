@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-07
 title: "Acceptable use policy"
 description: "What constitutes acceptable use of Deno Deploy Classic."
 oldUrl: /deploy/classic/acceptable-use-policy/

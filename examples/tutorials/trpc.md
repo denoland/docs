@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "Build a Typesafe API with tRPC and Deno"
 description: "A guide to building type-safe APIs with tRPC and Deno. Learn how to set up endpoints, implement RPC procedures, handle data validation, and create efficient client-server applications."
 url: /examples/trpc_tutorial/

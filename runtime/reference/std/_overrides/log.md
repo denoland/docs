@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-10
 title: "@std/log"
 description: "A customizable logger framework"
 jsr: jsr:@std/log

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-13
 title: "Contributing and support"
 description: "Guide to contributing to the Deno project and ecosystem. Learn about different Deno repositories, contribution guidelines, and how to submit effective pull requests."
 oldUrl:
@@ -101,9 +102,9 @@ done:
 
 Examples of good PR title:
 
-- fix(std/http): Fix race condition in server
-- docs(console): Update docstrings
-- feat(doc): Handle nested re-exports
+- fix(std/http): fix race condition in server
+- docs(console): update docstrings
+- feat(doc): handle nested re-exports
 
 Examples of bad PR title:
 

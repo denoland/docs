@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-02
 title: "Build a Next.js App"
 description: "Walkthrough guide to building a Next.js application with Deno. Learn how to set up a project, create API routes, implement server-side rendering, and build a full-stack TypeScript application."
 url: /examples/next_tutorial/

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-02
 title: "Local Telemetry with tunnel"
 description: "Send telemetry from your local development server using Deno's tunnel feature"
 url: /examples/tunnel_telemetry_tutorial/

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "Debugging"
 description: "Complete guide to debugging Deno applications. Learn to use Chrome DevTools, VS Code debugger, and other debugging techniques for TypeScript/JavaScript code in Deno."
 oldUrl:
@@ -67,8 +68,7 @@ deno run --inspect-brk your_script.ts
 ## Example with Chrome DevTools
 
 Let's try debugging a program using Chrome Devtools. For this, we'll use
-[@std/http/file-server](https://jsr.io/@std/http#file-server), a static file
-server.
+[`@std/http/file-server`](/runtime/reference/std/http/), a static file server.
 
 Use the `--inspect-brk` flag to break execution on the first line:
 
@@ -184,6 +184,8 @@ profile during program execution:
 
 ```sh
 deno run --cpu-prof your_script.ts
+# or with deno eval
+deno eval --cpu-prof "for (let i = 0; i < 1e8; i++) {}"
 ```
 
 When your program exits, Deno will write a `.cpuprofile` file to the current
@@ -199,6 +201,7 @@ into Chrome DevTools (Performance tab) or other V8 profile viewers for analysis.
 | `--cpu-prof-name=<NAME>`             | Filename for the CPU profile. Defaults to `CPU.<timestamp>.<pid>.cpuprofile`.                                    |
 | `--cpu-prof-interval=<MICROSECONDS>` | Sampling interval in microseconds. Default is `1000` (1ms). Lower values give more detail but larger files.      |
 | `--cpu-prof-md`                      | Generate a human-readable Markdown report alongside the `.cpuprofile` file.                                      |
+| `--cpu-prof-flamegraph`              | Generate an interactive SVG flamegraph alongside the `.cpuprofile` file.                                         |
 
 :::note
 
@@ -275,6 +278,31 @@ The report includes:
   itself, excluding callees)
 - **Call Tree**: Hierarchical view showing the call stack and time distribution
 - **Function Details**: Per-function breakdown with sample counts
+
+### Example: Interactive flamegraph
+
+The `--cpu-prof-flamegraph` flag generates a self-contained, interactive SVG
+flamegraph that you can open directly in a browser — no external tools required:
+
+```sh
+deno run --cpu-prof --cpu-prof-flamegraph your_script.ts
+```
+
+This creates both a `.cpuprofile` file and an `.svg` file. Open the SVG in any
+browser to explore the profile interactively:
+
+- **Click** any frame to zoom into that subtree
+- **Reset Zoom** button to restore the full view
+- **Ctrl+F** or the **Search** button for regex-based function search with
+  highlighting and matched percentage
+- **Invert** checkbox to flip into an icicle graph (root at top)
+- **Hover** any frame to see the function name and sample count
+
+The flamegraph also works with `deno eval`:
+
+```sh
+deno eval --cpu-prof --cpu-prof-flamegraph "for (let i = 0; i < 1e8; i++) {}"
+```
 
 ## OpenTelemetry integration
 

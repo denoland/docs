@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-05-09
 title: "Web Platform APIs"
 description: "A guide to the Web Platform APIs available in Deno. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
 oldUrl:
@@ -58,7 +59,7 @@ implemented as specified in the
 - The `referrer`, `referrerPolicy`, `mode`, `credentials`, `cache`, `integrity`,
   `keepalive`, and `window` properties and their relevant behaviours in
   `RequestInit` are not implemented. The relevant fields are not present on the
-  `Request` object.
+  [`Request`](/api/web/~/Request) object.
 - Request body upload streaming is supported (on HTTP/1.1 and HTTP/2). Unlike
   the current fetch proposal, the implementation supports duplex streaming.
 - The `set-cookie` header is not concatenated when iterated over in the
@@ -189,8 +190,8 @@ const worker = new Worker("./workers/hello.ts", { type: "module" });
 :::note
 
 For the above use cases, it is preferable to pass URLs in full rather than
-relying on `--location`. You can manually base a relative URL using the `URL`
-constructor if needed.
+relying on `--location`. You can manually base a relative URL using the
+[`URL`](/api/web/~/URL) constructor if needed.
 
 :::
 
@@ -254,9 +255,9 @@ the `type: "module"` option when creating a new worker.
 
 Use of relative module specifiers in the main worker are only supported with
 `--location <href>` passed on the CLI. This is not recommended for portability.
-You can instead use the `URL` constructor and `import.meta.url` to easily create
-a specifier for some nearby script. Dedicated workers, however, have a location
-and this capability by default.
+You can instead use the [`URL`](/api/web/~/URL) constructor and
+`import.meta.url` to easily create a specifier for some nearby script. Dedicated
+workers, however, have a location and this capability by default.
 
 ```ts
 // Good

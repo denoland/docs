@@ -16,26 +16,56 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Deno
         uses: denoland/setup-deno@v2
         with:
           cache: true
+          deno-version: canary
 
       - run: deno fmt --check
       - run: deno task test
 
+      # Cache reference types + generated docs (types: 86s, docs: 162s)
+      - name: Restore reference cache
+        uses: actions/cache@v4
+        id: ref-cache
+        with:
+          path: |
+            reference_gen/types
+            reference_gen/gen
+          key: reference-${{ hashFiles('reference_gen/**') }}
+          restore-keys: reference-
+
       - name: "Reference: install"
+        if: steps.ref-cache.outputs.cache-hit != 'true'
         working-directory: "reference_gen"
         run: deno install
 
       - name: "Reference: generate types"
+        if: steps.ref-cache.outputs.cache-hit != 'true'
         working-directory: "reference_gen"
         run: deno task types
 
       - name: "Reference: generate docs"
+        if: steps.ref-cache.outputs.cache-hit != 'true'
         working-directory: "reference_gen"
         run: deno task doc
+
+      # Cache std-docs to avoid 43+ network requests to JSR API on every build
+      - name: Restore std-docs cache
+        uses: actions/cache@v4
+        id: std-cache
+        with:
+          path: runtime/reference/std
+          key: std-docs-${{ hashFiles('scripts/generate_std_docs.ts') }}
+          restore-keys: std-docs-
+
+      - name: Generate std-docs
+        if: steps.std-cache.outputs.cache-hit != 'true'
+        run: deno task generate:std-docs
 
       - name: Restore OG image cache
         uses: actions/cache@v4
@@ -45,13 +75,21 @@ jobs:
           key: og-images-${{ hashFiles('open_graph/**') }}
           restore-keys: og-images-
 
-      - name: Build
+      # Build reference pages first with a minimal Lume config (JSX only,
+      # no markdown/esbuild/tailwind/sitemap), then build the main site
+      # skipping reference pages. Outputs merge since both use emptyDest:false.
+      - name: "Build: reference pages"
+        run: deno task lume:reference
+
+      - name: "Build: main site"
         env:
           ORAMA_PROJECT_ID: ${{ vars.ORAMA_PROJECT_ID }}
           ORAMA_DATASOURCE_ID: ${{ vars.ORAMA_DATASOURCE_ID }}
           ORAMA_PRIVATE_API_KEY: ${{ secrets.ORAMA_PRIVATE_API_KEY }}
           SKIP_OG: ${{ steps.og-cache.outputs.cache-hit == 'true' && '1' || '' }}
-        run: deno task build
+          SKIP_REFERENCE: "1"
+          BUILD_TYPE: FULL
+        run: deno task lume
 
       - name: Restore cached OG images
         if: steps.og-cache.outputs.cache-hit == 'true'

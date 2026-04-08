@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-26
 title: "Security and permissions"
 description: "A guide to Deno's security model and permissions system. Learn about secure defaults, permission flags, runtime prompts, and how to safely execute code with granular access controls."
 oldUrl:
@@ -131,6 +132,9 @@ directories and any subdirectories in them.
 
 Definition: `--allow-read[=<PATH>...]` or `-R[=<PATH>...]`
 
+PATHs may be separated by comma (`,`) characters. To include a comma character
+in the PATH, it must be doubled. (Example: `this file,, contains a comma.txt`)
+
 ```sh
 # Allow all reads from file system
 deno run -R script.ts
@@ -227,14 +231,14 @@ resolves to a sensitive system path, additional permissions are required:
 - **`/dev/null`, `/dev/zero`, `/dev/random`, `/dev/urandom`**: These safe device
   files are always accessible without additional permissions.
 
-Creating symlinks with `Deno.symlink()` requires both `--allow-read` and
-`--allow-write` with full access (not path-specific), because symlinks can point
-to arbitrary locations.
+Creating symlinks with [`Deno.symlink()`](/api/deno/~/Deno.symlink) requires
+both `--allow-read` and `--allow-write` with full access (not path-specific),
+because symlinks can point to arbitrary locations.
 
 > **Note**: Symlinks that already exist on the filesystem can be read through
 > using the permissions for the symlink's location. The full read/write
 > permission requirement only applies to _creating_ new symlinks with
-> `Deno.symlink()`.
+> [`Deno.symlink()`](/api/deno/~/Deno.symlink).
 
 ### Network access
 
@@ -246,6 +250,9 @@ Network access is granted using the `--allow-net` flag. This flag can be
 specified with a list of IP addresses or hostnames to allow access to specific
 network addresses.
 
+Hostnames do not allow subdomains, unless explicitly listed. To allow any
+subdomain for a hostname, `*` can be used as wildcard for any subdomain.
+
 Definition: `--allow-net[=<IP_OR_HOSTNAME>...]` or `-N[=<IP_OR_HOSTNAME>...]`
 
 ```sh
@@ -256,6 +263,9 @@ deno run --allow-net script.ts
 
 # Allow network access to github.com and jsr.io
 deno run --allow-net=github.com,jsr.io script.ts
+
+# Allow all subdomains for example.com
+deno run --allow-net="*.example.com" script.ts
 
 # A hostname at port 80:
 deno run --allow-net=example.com:80 script.ts
@@ -354,10 +364,9 @@ operating system release, system uptime, load average, network interfaces, and
 system memory information.
 
 Access to system information is granted using the `--allow-sys` flag. This flag
-can be specified with a list of allowed interfaces from the following list:
-`hostname`, `osRelease`, `osUptime`, `loadavg`, `networkInterfaces`,
-`systemMemoryInfo`, `uid`, and `gid`. These strings map to functions in the
-`Deno` namespace that provide OS info, like
+can be specified with a list of allowed interfaces from the list defined in
+[Deno.SysPermissionDescriptor](/api/deno/~/Deno.SysPermissionDescriptor). These
+strings map to functions in the `Deno` namespace that provide OS info, like
 [Deno.systemMemoryInfo](https://docs.deno.com/api/deno/~/Deno.SystemMemoryInfo).
 
 Definition: `--allow-sys[=<API_NAME>...]` or `-S[=<API_NAME>...]`
@@ -441,18 +450,21 @@ scripts for npm packages will be executed as a subprocess.
 Deno provides an
 [FFI mechanism for executing code written in other languages](/runtime/fundamentals/ffi/),
 such as Rust, C, or C++, from within a Deno runtime. This is done using the
-`Deno.dlopen` API, which can load shared libraries and call functions from them.
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, which can load shared libraries
+and call functions from them.
 
-By default, executing code can not use the `Deno.dlopen` API, as this would
-constitute a violation of the principle that code can not escalate it's
-privileges without user consent.
+By default, executing code can not use the
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, as this would constitute a
+violation of the principle that code can not escalate it's privileges without
+user consent.
 
-In addition to `Deno.dlopen`, FFI can also be used via Node-API (NAPI) native
-addons. These are also not allowed by default.
+In addition to [`Deno.dlopen`](/api/deno/~/Deno.dlopen), FFI can also be used
+via Node-API (NAPI) native addons. These are also not allowed by default.
 
-Both `Deno.dlopen` and NAPI native addons require explicit permission using the
-`--allow-ffi` flag. This flag can be specified with a list of files or
-directories to allow access to specific dynamic libraries.
+Both [`Deno.dlopen`](/api/deno/~/Deno.dlopen) and NAPI native addons require
+explicit permission using the `--allow-ffi` flag. This flag can be specified
+with a list of files or directories to allow access to specific dynamic
+libraries.
 
 _Like subprocesses, dynamic libraries are not run in a sandbox and therefore do
 not have the same security restrictions as the Deno process they are being

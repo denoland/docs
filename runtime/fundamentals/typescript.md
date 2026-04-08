@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-27
 title: "TypeScript support"
 description: "Learn how to use TypeScript with Deno. Covers configuration options, type checking, and best practices for writing type-safe Deno applications."
 oldUrl:
@@ -90,7 +91,8 @@ deno test --no-check
 Deno runs JavaScript and TypeScript code. During type checking, Deno will only
 type check TypeScript files by default though. If you want to type check
 JavaScript files too, you can either add a `// @ts-check` pragma at the top of
-the file, or add `compilerOptions.checkJs` to your `deno.json` file.
+the file, or add `compilerOptions.checkJs` to your
+[`deno.json`](/runtime/fundamentals/configuration/) file.
 
 ```ts title="main.js"
 // @ts-check
@@ -222,7 +224,8 @@ file:
 
 This will enable type checking for a browser environment, providing type
 information for global objects like `document`. This will however disable type
-information for Deno-specific APIs like `Deno.readFile`.
+information for Deno-specific APIs like
+[`Deno.readFile`](/api/deno/~/Deno.readFile).
 
 To enable type checking for combined **browser and Deno environments**, like
 using SSR with Deno, you can specify both the `dom` and `deno.ns` (Deno
@@ -239,7 +242,7 @@ configuration file:
 
 This will enable type checking for both browser and Deno environments, providing
 type information for global objects like `document` and Deno-specific APIs like
-`Deno.readFile`.
+[`Deno.readFile`](/api/deno/~/Deno.readFile).
 
 To enable type checking for a **web worker environment in Deno**, (ie code that
 is run with `new Worker`), you can specify the `deno.worker` library file in the

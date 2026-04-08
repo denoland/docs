@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-12-16
 title: "Linting and formatting"
 description: "A guide to Deno's built-in code quality tools. Learn how to use deno lint and deno fmt commands, configure rules, integrate with CI/CD pipelines, and maintain consistent code style across your projects."
 ---
@@ -288,8 +289,8 @@ specify custom settings to tailor the formatting process to your needs.
 To use the VSCode ESLint extension in your Deno projects, your project will need
 a `node_modules` directory in your project that VSCode extensions can pick up.
 
-In your `deno.json` ensure a `node_modules` folder is created, so the editor can
-resolve packages:
+In your [`deno.json`](/runtime/fundamentals/configuration/) ensure a
+`node_modules` folder is created, so the editor can resolve packages:
 
 ```jsonc
 {

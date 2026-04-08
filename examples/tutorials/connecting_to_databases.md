@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-11
 title: "Connecting to databases"
 description: "A guide to database connectivity in Deno. Learn how to use MySQL, PostgreSQL, MongoDB, SQLite, Firebase, Supabase, and popular ORMs to build data-driven applications with TypeScript."
 url: /examples/connecting_to_databases_tutorial/

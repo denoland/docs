@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-10
 title: "Writing an HTTP Server"
 description: "A guide to creating HTTP servers in Deno. Learn about the Deno.serve API, request handling, WebSocket support, response streaming, and how to build production-ready HTTP/HTTPS servers with automatic compression."
 oldUrl:
@@ -25,9 +26,9 @@ HTTP/1.1 and HTTP/2.
 
 ### A "Hello World" server
 
-The `Deno.serve` function takes a handler function that will be called for each
-incoming request, and is expected to return a response (or a promise resolving
-to a response).
+The [`Deno.serve`](/api/deno/~/Deno.serve) function takes a handler function
+that will be called for each incoming request, and is expected to return a
+response (or a promise resolving to a response).
 
 Here is an example of a server that returns a "Hello, World!" response for each
 request:
@@ -47,13 +48,14 @@ To run this server, you can use the `deno run` command:
 deno run --allow-net server.ts
 ```
 
-There are many more examples of using `Deno.serve` in the
-[Examples collection](/examples/#network).
+There are many more examples of using [`Deno.serve`](/api/deno/~/Deno.serve) in
+the [Examples collection](/examples/#network).
 
 ### Listening on a specific port
 
-By default `Deno.serve` will listen on port `8000`, but this can be changed by
-passing in a port number in options bag as the first or second argument:
+By default [`Deno.serve`](/api/deno/~/Deno.serve) will listen on port `8000`,
+but this can be changed by passing in a port number in options bag as the first
+or second argument:
 
 ```js title="server.ts"
 // To listen on port 4242.
@@ -159,8 +161,10 @@ memory.
 
 Be aware that the response body stream is "cancelled" when the client hangs up
 the connection. Make sure to handle this case. This can surface itself as an
-error in a `write()` call on a `WritableStream` object that is attached to the
-response body `ReadableStream` object (for example through a `TransformStream`).
+error in a `write()` call on a [`WritableStream`](/api/web/~/WritableStream)
+object that is attached to the response body
+[`ReadableStream`](/api/web/~/ReadableStream) object (for example through a
+[`TransformStream`](/api/web/~/TransformStream)).
 
 ### HTTPS support
 
@@ -240,10 +244,11 @@ be compressed automatically:
 Deno can upgrade incoming HTTP requests to a WebSocket. This allows you to
 handle WebSocket endpoints on your HTTP servers.
 
-To upgrade an incoming `Request` to a WebSocket you use the
-`Deno.upgradeWebSocket` function. This returns an object consisting of a
-`Response` and a web standard `WebSocket` object. The returned response should
-be used to respond to the incoming request.
+To upgrade an incoming [`Request`](/api/web/~/Request) to a WebSocket you use
+the [`Deno.upgradeWebSocket`](/api/deno/~/Deno.upgradeWebSocket) function. This
+returns an object consisting of a [`Response`](/api/web/~/Response) and a web
+standard [`WebSocket`](/api/web/~/WebSocket) object. The returned response
+should be used to respond to the incoming request.
 
 Because the WebSocket protocol is symmetrical, the `WebSocket` object is
 identical to the one that can be used for client side communication.

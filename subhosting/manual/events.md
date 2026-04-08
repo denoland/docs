@@ -2,6 +2,15 @@
 title: Deployment events
 ---
 
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
+<a href="https://api.deno.com/v2/docs">v2 API</a>. See the
+<a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
+details.
+
+:::
+
 During the lifetime of a deployment execution, several events are recorded into
 its execution logs. Using the
 [deployment logs API](https://apidocs.deno.com/#get-/deployments/-deploymentId-/app_logs),

@@ -1,14 +1,15 @@
 ---
+last_modified: 2026-03-19
 title: "Edge Cache"
 oldUrl:
   - /deploy/classic/edge-cache/
 ---
 
-:::info Legacy Documentation
+:::warning Sunsetting on July 20, 2026
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-<a href="/deploy/">Deno Deploy</a> platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new <a href="/deploy/">Deno Deploy</a> platform. See the
+<a href="/deploy/migration_guide/">migration guide</a> for details.
 
 :::
 

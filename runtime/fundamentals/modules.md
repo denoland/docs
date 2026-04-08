@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-05
 title: "Modules and dependencies"
 description: "A guide to managing modules and dependencies in Deno. Learn about ECMAScript modules, third-party packages, import maps, dependency management, versioning, and how to publish your own modules."
 oldUrl:
@@ -81,7 +82,7 @@ Starting with Deno 2.4 it's possible to import `text` and `bytes` modules too.
 
 Support for importing `text` and `bytes` modules is experimental and requires
 `--unstable-raw-imports` CLI flag or `unstable.raw-import` option in
-`deno.json`.
+[`deno.json`](/runtime/fundamentals/configuration/).
 
 :::
 

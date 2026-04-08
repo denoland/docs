@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-25
 title: OpenTelemetry
 description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
@@ -39,8 +40,32 @@ OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 
 :::tip
 
-If you do not have an OpenTelemetry collector set up yet, you can get started
-with a
+If you want to quickly see OpenTelemetry output without setting up a collector,
+you can use the built-in console exporter to print spans, logs, and metrics
+directly to stderr in a human-readable format:
+
+```sh
+OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console deno run my_script.ts
+```
+
+Example output:
+
+```
+SPAN inner span [00000000000000000000000000000001/0000000000000002] Internal 0.495ms
+  parent: 0000000000000001
+  scope: example-tracer
+  key: value
+LOG [INFO] 2025-03-14T13:47:07.235Z "hello from inner"
+  scope: deno@2.7.5
+  trace: 00000000000000000000000000000001/0000000000000002
+```
+
+:::
+
+:::tip
+
+If you want to visualize telemetry data in a dashboard, you can get started with
+a
 [local LGTM stack in Docker](https://github.com/grafana/docker-otel-lgtm/tree/main?tab=readme-ov-file)
 (Loki (logs), Grafana (dashboard), Tempo (traces), and Prometheus (metrics)) by
 running the following command:
@@ -80,14 +105,14 @@ of the `deno` instrumentation scope. (e.g. `deno:2.1.4`).
 
 Deno automatically creates spans for various operations, such as:
 
-- Incoming HTTP requests served with `Deno.serve`.
-- Outgoing HTTP requests made with `fetch`.
+- Incoming HTTP requests served with [`Deno.serve`](/api/deno/~/Deno.serve).
+- Outgoing HTTP requests made with [`fetch`](/api/web/~/fetch).
 
-#### `Deno.serve`
+#### [`Deno.serve`](/api/deno/~/Deno.serve)
 
-When you use `Deno.serve` to create an HTTP server, a span is created for each
-incoming request. The span automatically ends when response headers are sent
-(not when the response body is done sending).
+When you use [`Deno.serve`](/api/deno/~/Deno.serve) to create an HTTP server, a
+span is created for each incoming request. The span automatically ends when
+response headers are sent (not when the response body is done sending).
 
 The name of the created span is `${method}`. The span kind is `server`.
 
@@ -134,10 +159,11 @@ Deno.serve(async (req) => {
 });
 ```
 
-#### `fetch`
+#### [`fetch`](/api/web/~/fetch)
 
-When you use `fetch` to make an HTTP request, a span is created for the request.
-The span automatically ends when the response headers are received.
+When you use [`fetch`](/api/web/~/fetch) to make an HTTP request, a span is
+created for the request. The span automatically ends when the response headers
+are received.
 
 The name of the created span is `${method}`. The span kind is `client`.
 
@@ -157,15 +183,16 @@ After the response is received, the following attributes are added:
 
 The following metrics are automatically collected and exported:
 
-#### `Deno.serve` / `Deno.serveHttp`
+#### [`Deno.serve`](/api/deno/~/Deno.serve) / [`Deno.serveHttp`](/api/deno/~/Deno.serveHttp)
 
 ##### `http.server.request.duration`
 
-A histogram of the duration of incoming HTTP requests served with `Deno.serve`
-or `Deno.serveHttp`. The time that is measured is from when the request is
-received to when the response headers are sent. This does not include the time
-to send the response body. The unit of this metric is seconds. The histogram
-buckets are
+A histogram of the duration of incoming HTTP requests served with
+[`Deno.serve`](/api/deno/~/Deno.serve) or
+[`Deno.serveHttp`](/api/deno/~/Deno.serveHttp). The time that is measured is
+from when the request is received to when the response headers are sent. This
+does not include the time to send the response body. The unit of this metric is
+seconds. The histogram buckets are
 `[0.005, 0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1.0, 2.5, 5.0, 7.5, 10.0]`.
 
 This metric is recorded with the following attributes:
@@ -183,10 +210,12 @@ This metric is recorded with the following attributes:
 
 ##### `http.server.active_requests`
 
-A gauge of the number of active requests being handled by `Deno.serve` or
-`Deno.serveHttp` at any given time. This is the number of requests that have
-been received but not yet responded to (where the response headers have not yet
-been sent). This metric is recorded with the following attributes:
+A gauge of the number of active requests being handled by
+[`Deno.serve`](/api/deno/~/Deno.serve) or
+[`Deno.serveHttp`](/api/deno/~/Deno.serveHttp) at any given time. This is the
+number of requests that have been received but not yet responded to (where the
+response headers have not yet been sent). This metric is recorded with the
+following attributes:
 
 - `http.request.method`: The HTTP method of the request.
 - `url.scheme`: The scheme of the request URL.
@@ -196,8 +225,9 @@ been sent). This metric is recorded with the following attributes:
 ##### `http.server.request.body.size`
 
 A histogram of the size of the request body of incoming HTTP requests served
-with `Deno.serve` or `Deno.serveHttp`. The unit of this metric is bytes. The
-histogram buckets are
+with [`Deno.serve`](/api/deno/~/Deno.serve) or
+[`Deno.serveHttp`](/api/deno/~/Deno.serveHttp). The unit of this metric is
+bytes. The histogram buckets are
 `[0, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000]`.
 
 This metric is recorded with the following attributes:
@@ -216,8 +246,9 @@ This metric is recorded with the following attributes:
 ##### `http.server.response.body.size`
 
 A histogram of the size of the response body of incoming HTTP requests served
-with `Deno.serve` or `Deno.serveHttp`. The unit of this metric is bytes. The
-histogram buckets are
+with [`Deno.serve`](/api/deno/~/Deno.serve) or
+[`Deno.serveHttp`](/api/deno/~/Deno.serveHttp). The unit of this metric is
+bytes. The histogram buckets are
 `[0, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000]`.
 
 This metric is recorded with the following attributes:
@@ -622,7 +653,15 @@ environment variable.
 
 The endpoint and protocol for the OTLP exporter can be configured using the
 `OTEL_EXPORTER_OTLP_ENDPOINT` and `OTEL_EXPORTER_OTLP_PROTOCOL` environment
-variables.
+variables. Supported values for `OTEL_EXPORTER_OTLP_PROTOCOL` are:
+
+- `http/protobuf` (default): Export using Protobuf over HTTP to the configured
+  endpoint.
+- `http/json`: Export using JSON over HTTP to the configured endpoint.
+- `console`: Print spans, logs, and metrics to stderr in a human-readable text
+  format. This is useful for debugging and testing instrumentation without
+  running an OTLP collector. When using `console`, no endpoint configuration is
+  needed.
 
 If the endpoint requires authentication, headers can be configured using the
 `OTEL_EXPORTER_OTLP_HEADERS` environment variable.
@@ -689,9 +728,9 @@ By default, Deno supports the following propagators:
 
 :::note
 
-These propagators automatically work with Deno's `fetch` API and `Deno.serve`,
-enabling end-to-end tracing across HTTP requests without manual context
-management.
+These propagators automatically work with Deno's [`fetch`](/api/web/~/fetch) API
+and [`Deno.serve`](/api/deno/~/Deno.serve), enabling end-to-end tracing across
+HTTP requests without manual context management.
 
 :::
 
@@ -732,9 +771,8 @@ limitations to be aware of:
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
   are not supported.
-- The only supported exporter is OTLP - other exporters are not supported.
-- Only `http/protobuf` and `http/json` protocols are supported for OTLP. Other
-  protocols such as `grpc` are not supported.
+- The supported exporters are OTLP (`http/protobuf`, `http/json`) and `console`.
+  Other exporters and protocols such as `grpc` are not supported.
 - Metrics from observable (asynchronous) meters are not collected on process
   exit/crash, so the last value of metrics may not be exported. Synchronous
   metrics are exported on process exit/crash.
@@ -747,9 +785,10 @@ limitations to be aware of:
 - HTTP methods are that are not known are not normalized to `_OTHER` in the
   `http.request.method` span attribute as per the OpenTelemetry semantic
   conventions.
-- The HTTP server span for `Deno.serve` does not have an OpenTelemetry status
-  set, and if the handler throws (ie `onError` is invoked), the span will not
-  have an error status set and the error will not be attached to the span via
-  event.
+- The HTTP server span for [`Deno.serve`](/api/deno/~/Deno.serve) does not have
+  an OpenTelemetry status set, and if the handler throws (ie `onError` is
+  invoked), the span will not have an error status set and the error will not be
+  attached to the span via event.
 - There is no mechanism to add a `http.route` attribute to the HTTP client span
-  for `fetch`, or to update the span name to include the route.
+  for [`fetch`](/api/web/~/fetch), or to update the span name to include the
+  route.

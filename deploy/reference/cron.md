@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-02
 title: Cron
 description: "Scheduling and managing cron jobs in Deno Deploy, including defining cron jobs in code, execution lifecycle, retries, and observability."
 ---

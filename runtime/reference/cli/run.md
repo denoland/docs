@@ -1,5 +1,6 @@
 ---
-title: "`deno run`, run a file"
+last_modified: 2026-03-12
+title: "deno run"
 oldUrl: /runtime/manual/tools/run/
 command: run
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -9,17 +10,16 @@ description: "Run a JavaScript or TypeScript program from a file or URL with Den
 
 ## Usage
 
-To run [this file](https://docs.deno.com/examples/scripts/hello_world.ts) use:
+Run a local file:
 
-```console
-deno run https://docs.deno.com/examples/scripts/hello_world.ts
+```sh
+deno run main.ts
 ```
 
-You can also run files locally. Ensure that you are in the correct directory and
-use:
+The `run` subcommand is optional — you can also just use `deno <file>`:
 
-```console
-deno run hello-world.ts
+```sh
+deno main.ts
 ```
 
 By default, Deno runs programs in a sandbox without access to disk, network or
@@ -32,20 +32,20 @@ required permissions using the
 
 Grant permission to read from disk and listen to network:
 
-```console
+```sh
 deno run --allow-read --allow-net server.ts
 ```
 
 Grant permission to read allow-listed files from disk:
 
-```console
+```sh
 deno run --allow-read=/etc server.ts
 ```
 
 Grant all permissions _this is not recommended and should only be used for
 testing_:
 
-```console
+```sh
 deno run -A server.ts
 ```
 
@@ -60,7 +60,7 @@ as files are changed.
 
 _Be sure to put the flag before the file name_ eg:
 
-```console
+```sh
 deno run --allow-net --watch server.ts
 ```
 
@@ -74,10 +74,10 @@ console if there are errors while you work.
 
 ## Running code from stdin
 
-You can pipe code from stdin and run it immediately with:
+You can pipe code from stdin and run it immediately:
 
-```console
-curl https://docs.deno.com/examples/scripts/hello_world.ts | deno run -
+```sh
+echo "console.log('hello')" | deno run -
 ```
 
 ## Terminate run

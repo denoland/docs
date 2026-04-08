@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-07
 title: "Privacy Policy"
 description: "Deno's Privacy Policy"
 oldUrl: /deploy/classic/privacy-policy

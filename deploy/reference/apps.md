@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: Applications
 description: "Guide to managing applications in Deno Deploy, including app creation, configuration, GitHub integration, and deployment options."
 ---
@@ -13,7 +14,7 @@ organization and is used in default domain names.
 ## Creating an application
 
 Applications can be created from the
-[Deno Deploy dashboard](https://dash.deno.com) or from the command line using
+[Deno Deploy dashboard](https://console.deno.com) or from the command line using
 the [`deno deploy` CLI](/runtime/reference/cli/deploy/).
 
 ### Using the dashboard

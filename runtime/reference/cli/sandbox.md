@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-10
 title: "deno sandbox"
 command: sandbox
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -30,7 +31,7 @@ account and a valid authentication token. Follow the instructions in the
 Creates a new sandbox in an organization. Accepts the aliases `create` and
 `new`.
 
-```bash
+```sh
 deno sandbox create
 ```
 
@@ -38,7 +39,7 @@ deno sandbox create
 
 Lists all sandboxes in an organization. Accepts the aliases `list` and `ls`.
 
-```bash
+```sh
 deno sandbox list
 ```
 
@@ -47,7 +48,7 @@ deno sandbox list
 Terminates a running sandbox immediately. Accepts the aliases `kill`, `remove`,
 and `rm`.
 
-```bash
+```sh
 deno sandbox kill <sandbox-id>
 ```
 
@@ -56,7 +57,7 @@ deno sandbox kill <sandbox-id>
 Copies files between your local machine and a running sandbox. Use `copy` or its
 shorter alias `cp`.
 
-```bash
+```sh
 deno sandbox copy <paths...>
 ```
 
@@ -64,13 +65,13 @@ deno sandbox copy <paths...>
 
 Runs an arbitrary command inside an existing sandbox.
 
-```bash
+```sh
 deno sandbox exec <sandbox-id> <command...>
 ```
 
 Example:
 
-```bash
+```sh
 deno sandbox exec sbx-1234 uptime
 ```
 
@@ -78,7 +79,7 @@ deno sandbox exec sbx-1234 uptime
 
 Extends how long a sandbox stays active before timing out.
 
-```bash
+```sh
 deno sandbox extend <sandbox-id> <timeout>
 ```
 
@@ -87,7 +88,7 @@ unit can be `s` for seconds, `m` for minutes, or `h` for hours.
 
 Example:
 
-```bash
+```sh
 deno sandbox extend <sandbox-id> 30m
 ```
 
@@ -95,7 +96,7 @@ deno sandbox extend <sandbox-id> 30m
 
 Opens an interactive SSH session to the sandbox.
 
-```bash
+```sh
 deno sandbox ssh <sandbox-id>
 ```
 
@@ -103,7 +104,7 @@ deno sandbox ssh <sandbox-id>
 
 Turns the state of a running sandbox into a Deno Deploy application.
 
-```bash
+```sh
 deno sandbox deploy <sandbox-id> <app>
 ```
 
@@ -111,7 +112,7 @@ deno sandbox deploy <sandbox-id> <app>
 
 Creates, lists, and attaches persistent block volumes.
 
-```bash
+```sh
 deno sandbox volumes --help
 ```
 
@@ -119,7 +120,7 @@ deno sandbox volumes --help
 
 Creates a new volume. Accepts the alias `volumes create` or `volumes new`.
 
-```bash
+```sh
 deno sandbox volumes create <name>
 ```
 
@@ -128,7 +129,7 @@ deno sandbox volumes create <name>
 Lists all volumes in an organization. Accepts the alias `volumes list` or
 `volumes ls`.
 
-```bash
+```sh
 deno sandbox volumes list
 ```
 
@@ -137,13 +138,13 @@ deno sandbox volumes list
 Deletes a volume. Accepts the alias `volumes delete`, `volumes rm` or
 `volumes remove`.
 
-```bash
+```sh
 deno sandbox volumes delete <volume-id-or-slug>
 ```
 
 or
 
-```bash
+```sh
 deno sandbox volumes delete <volume-slug>
 ```
 
@@ -151,13 +152,13 @@ deno sandbox volumes delete <volume-slug>
 
 Creates a snapshot of a volume. Accepts a volume ID or slug and a snapshot slug
 
-```bash
+```sh
 deno sandbox volumes snapshot <volume-id-or-slug> <snapshot-slug>
 ```
 
 or
 
-```bash
+```sh
 deno sandbox volumes snapshot <volume-slug> <snapshot-slug>
 ```
 
@@ -165,7 +166,7 @@ deno sandbox volumes snapshot <volume-slug> <snapshot-slug>
 
 Creates and restores filesystem snapshots for sandboxes.
 
-```bash
+```sh
 deno sandbox snapshots --help
 ```
 
@@ -174,7 +175,7 @@ deno sandbox snapshots --help
 Creates a new snapshot of a sandbox. Accepts the alias `snapshots create` or
 `snapshots new`. It requires a volume ID or volume slug and a snapshot slug.
 
-```bash
+```sh
 deno sandbox snapshots create <volume-id-or-slug> <snapshot-slug>
 ```
 
@@ -183,7 +184,7 @@ deno sandbox snapshots create <volume-id-or-slug> <snapshot-slug>
 Lists all snapshots in an organization. Accepts the alias `snapshots list` or
 `snapshots ls`.
 
-```bash
+```sh
 deno sandbox snapshots list
 ```
 
@@ -192,7 +193,7 @@ deno sandbox snapshots list
 Deletes a snapshot. Accepts the alias `snapshots delete`, `snapshots rm` or
 `snapshots remove`. It requires a snapshot ID or snapshot slug.
 
-```bash
+```sh
 deno sandbox snapshots delete <id-or-slug>
 ```
 
@@ -201,6 +202,6 @@ deno sandbox snapshots delete <id-or-slug>
 Switches your current Deploy organization or application context, which the
 sandbox command uses for authentication.
 
-```bash
+```sh
 deno sandbox switch
 ```

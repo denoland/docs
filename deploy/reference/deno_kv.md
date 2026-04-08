@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-13
 title: Deno KV
 description: Use Deno KV in your applications with a dedicated database per timeline
 oldUrl: /deploy/reference/deno-kv/

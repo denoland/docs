@@ -1,5 +1,6 @@
 ---
-title: "`deno init`, start a new project"
+last_modified: 2026-03-12
+title: "deno init"
 oldUrl: /runtime/manual/tools/init/
 command: init
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -10,7 +11,7 @@ description: "Scaffold a new Deno project with tests and configuration"
 ## Examples
 
 ```sh
-$ deno init
+deno init
 ✅ Project initialized
 Run these commands to get started
 
@@ -23,10 +24,10 @@ Run these commands to get started
   // Run the tests
   deno test
 
-$ deno run main.ts
+deno run main.ts
 Add 2 + 3 = 5
 
-$ deno test
+deno test
 Check file:///dev/main_test.ts
 running 1 test from main_test.ts
 addTest ... ok (6ms)
@@ -43,7 +44,7 @@ You can also specify an argument to `deno init` to initialize a project in a
 specific directory:
 
 ```sh
-$ deno init my_deno_project
+deno init my_deno_project
 ✅ Project initialized
 
 Run these commands to get started
@@ -66,7 +67,7 @@ By running `deno init --lib` Deno will bootstrap a project that is ready to be
 published on [JSR](https://jsr.io/).
 
 ```sh
-$ deno init --lib
+deno init --lib
 ✅ Project initialized
 
 Run these commands to get started
@@ -84,7 +85,7 @@ Run these commands to get started
 Inside `deno.json` you'll see that the entries for `name`, `exports` and
 `version` are prefilled.
 
-```json
+```json title="deno.json"
 {
   "name": "my-lib",
   "version": "0.1.0",
@@ -104,7 +105,7 @@ Running `deno init --serve` bootstraps a web server that works with
 [`deno serve`](./serve).
 
 ```sh
-$ deno init --serve
+deno init --serve
 ✅ Project initialized
 
 Run these commands to get started
@@ -122,7 +123,7 @@ Run these commands to get started
 Your [`deno.json`](/runtime/fundamentals/configuration/) file will look like
 this:
 
-```json
+```json title="deno.json"
 {
   "tasks": {
     "dev": "deno serve --watch -R main.ts"
@@ -139,7 +140,7 @@ Now, you can start your web server, which
 by running `deno task dev`.
 
 ```sh
-$ deno task dev
+deno task dev
 Task dev deno serve --watch -R main.ts
 Watcher Process started.
 deno serve: Listening on http://0.0.0.0:8000/
@@ -151,7 +152,7 @@ Running `deno init --empty` bootstraps an empty project with a basic console
 log.
 
 ```sh
-$ deno init --empty
+deno init --empty
 ✅ Project initialized
 
 Run these commands to get started
@@ -166,7 +167,7 @@ Run these commands to get started
 Your [`deno.json`](/runtime/fundamentals/configuration/) file will look like
 this:
 
-```json
+```json title="deno.json"
 {
   "tasks": {
     "dev": "deno run --watch main.ts"
@@ -179,7 +180,7 @@ Now, you can run the project, which
 by running `deno task dev`.
 
 ```sh
-$ deno task dev
+deno task dev
 Task dev deno run --watch main.ts
 Watcher Process started.
 Hello world!
@@ -191,13 +192,13 @@ You can append a `--lib` flag to add extra parameters to your `deno.json`, such
 as "name", "version" and an "exports" fields.
 
 ```sh
-$ deno init my_deno_project --lib
+deno init my_deno_project --lib
 ✅ Project initialized
 ```
 
-The resulting `deno.json will be as follows:
+The resulting `deno.json` will be as follows:
 
-```jsonc
+```jsonc title="deno.json"
 {
   "name": "my_deno_project",
   "version": "0.1.0",

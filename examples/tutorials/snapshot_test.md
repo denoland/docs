@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-26
 title: "Snapshot testing"
 oldurl: /examples/snapshot_tutorial/
 description: "Learn how to use snapshot testing in Deno to compare outputs against recorded references, making it easier to detect unintended changes in your code"
@@ -50,7 +51,7 @@ Deno.test("isSnapshotMatch", async (t) => {
 
 You will need to grant read and write file permissions in order for Deno to
 write a snapshot file and then read it to test the assertion. If it is the first
-time you are running the test a do not already have a snapshot, add the
+time you are running the test and you do not already have a snapshot, add the
 `--update` flag:
 
 ```bash
@@ -143,7 +144,7 @@ Deno.test("isSnapshotMatch", async (t) => {
 When you run a test with `assertSnapshot`, the data you're testing needs to be
 converted to a string format that can be written to the snapshot file (when
 creating or updating snapshots) and compared with the existing snapshot (when
-validating), this is called serialization.
+validating). This is called serialization.
 
 The `serializer` option allows you to provide a custom serializer function. This
 custom function will be called by `assertSnapshot` and be passed the value being

@@ -1,5 +1,6 @@
 ---
-title: "`deno lint`, linter"
+last_modified: 2026-03-12
+title: "deno lint"
 oldUrl:
   - /runtime/tools/linter/
   - /runtime/fundamentals/linting_and_formatting/lint-cli-ref
@@ -12,10 +13,99 @@ openGraphTitle: "deno lint"
 description: "Run the Deno linter to check your code for errors and apply automated fixes"
 ---
 
+Deno ships with a built-in linter that analyzes your code for potential errors,
+bugs, and stylistic issues. For a broader overview, see
+[Linting and Formatting](/runtime/fundamentals/linting_and_formatting/).
+
+## Basic usage
+
+Lint all TypeScript and JavaScript files in the current directory:
+
+```sh
+deno lint
+```
+
+Lint specific files or directories:
+
+```sh
+deno lint src/ main.ts
+```
+
+## Watch mode
+
+Automatically re-lint files when they change:
+
+```sh
+deno lint --watch
+```
+
+## Using in CI
+
+`deno lint` exits with a non-zero status code when it finds violations, making
+it suitable for CI pipelines:
+
+```sh
+deno lint
+deno fmt --check
+deno test
+```
+
 ## Available rules
 
-For a complete list of supported rules, visit [List of rules](/lint/)
-documentation page.
+Deno's linter includes over 100 rules. View all available rules:
+
+```sh
+deno lint --rules
+```
+
+For a full list with documentation, visit the [lint rules](/lint/) reference.
+
+## Configuring rules in `deno.json`
+
+Customize which rules are active in your `deno.json`:
+
+```json title="deno.json"
+{
+  "lint": {
+    "rules": {
+      "tags": ["recommended"],
+      "include": ["ban-untagged-todo"],
+      "exclude": ["no-unused-vars"]
+    }
+  }
+}
+```
+
+- **`tags`** — rule sets to enable. Available tags: `recommended`, `fresh`
+- **`include`** — additional individual rules to enable
+- **`exclude`** — rules to disable even if included by a tag
+
+See the [Configuration](/runtime/fundamentals/configuration/#linting) page for
+all available options.
+
+## Including and excluding files
+
+Specify which files to lint in `deno.json`:
+
+```json title="deno.json"
+{
+  "lint": {
+    "include": ["src/"],
+    "exclude": ["src/testdata/", "src/generated/**/*.ts"]
+  }
+}
+```
+
+You can also exclude files from the command line:
+
+```sh
+deno lint --ignore=dist/,build/
+```
+
+## Lint plugins
+
+You can extend the linter with custom rules using
+[lint plugins](/runtime/reference/lint_plugins/).
 
 ## Ignore directives
 
@@ -141,10 +231,3 @@ ignore directives. This means that per line directives, like
 `// deno-lint-ignore ban-unused-ignore`, don't work at all. If you want to
 ignore `ban-unused-ignore` for some special reasons, make sure to add it as a
 file-level ignore directive.
-
-## More about linting and formatting
-
-For more information about linting and formatting in Deno, and the differences
-between these two utilities, visit the
-[Linting and Formatting](/runtime/fundamentals/linting_and_formatting/) page in
-our Fundamentals section.

@@ -24,7 +24,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   if (data.command) {
     const { rendered, toc } = renderCommand(data.command, helpers);
     renderedCommand = rendered;
-    data.toc = toc.concat(...data.toc);
+    data.toc = [...data.toc, ...toc];
   }
 
   function getTocCtx(
@@ -69,7 +69,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               class="markdown-body mt-6 sm:mt-6"
             >
               {!(isReference && !isApiLandingPage) && (
-                <header class="flex items-start justify-between gap-4">
+                <header class="flex flex-col md:flex-row items-start justify-between gap-4">
                   <h1
                     dangerouslySetInnerHTML={{
                       __html: helpers.md(data.title!, true),
@@ -97,10 +97,22 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
                   />
                 </div>
               )}
-              {renderedCommand}
               {data.children}
+              {renderedCommand}
             </div>
           </article>
+          {data.lastModified && !isReference && !isLintRule && (
+            <p class="text-sm text-foreground-secondary mt-8">
+              Last updated on{" "}
+              <time dateTime={data.lastModified.toISOString()}>
+                {data.lastModified.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            </p>
+          )}
           <data.comp.Feedback file={file} />
         </div>
       </main>

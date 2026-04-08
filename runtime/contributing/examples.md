@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "Contributing an example"
 description: "Learn how to create and contribute meaningful examples to the Deno docs."
 ---
