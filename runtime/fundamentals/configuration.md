@@ -309,8 +309,8 @@ can be configured directly in `deno.json`.
 
 :::
 
-The `minimumDependencyAge` field specifies the minimum age a dependency must have
-before Deno will install it. This is a supply chain security measure that
+The `minimumDependencyAge` field specifies the minimum age a dependency must
+have before Deno will install it. This is a supply chain security measure that
 protects against recently published malicious packages by ensuring only
 dependencies that have existed for a specified period are allowed.
 
