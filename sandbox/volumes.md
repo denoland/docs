@@ -95,11 +95,11 @@ print(volume)
 </deno-tab>
 </deno-tabs>
 
-| Field      | Required | Details                                                                                                                    |
-| ---------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `slug`     | ✅       | Unique per organization. Slugs become part of the mount metadata, so pick something descriptive.                           |
-| `region`   | ✅       | Currently only `"ord"` (Chicago) is supported. Only sandboxes in the same region can mount the volume. |
-| `capacity` | ✅       | Between 300 MB and 20 GB. Pass a number of bytes or a string with `GB/MB/KB` (decimal) or `GiB/MiB/KiB` (binary) units.    |
+| Field      | Required | Details                                                                                                                 |
+| ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `slug`     | ✅       | Unique per organization. Slugs become part of the mount metadata, so pick something descriptive.                        |
+| `region`   | ✅       | Currently only `"ord"` (Chicago) is supported. Only sandboxes in the same region can mount the volume.                  |
+| `capacity` | ✅       | Between 300 MB and 20 GB. Pass a number of bytes or a string with `GB/MB/KB` (decimal) or `GiB/MiB/KiB` (binary) units. |
 
 ### Inspect and search volumes
 
