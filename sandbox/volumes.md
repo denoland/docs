@@ -30,7 +30,7 @@ const client = new Client();
 
 const volume = await client.volumes.create({
   slug: "training-cache",
-  region: "ord", // ord (Chicago) or ams (Amsterdam)
+  region: "ord", // only "ord" (Chicago) is supported today
   capacity: "2GB", // accepts bytes or "1GB"/"512MB" style strings
 });
 
@@ -54,7 +54,7 @@ sdk = DenoDeploy()
 
 volume = sdk.volumes.create(
   slug="training-cache",
-  region="ord",  # ord (Chicago) or ams (Amsterdam)
+  region="ord",  # only "ord" (Chicago) is supported today
   capacity="2GB"  # accepts bytes or "1GB"/"512MB" style strings
 )
 
@@ -78,7 +78,7 @@ sdk = AsyncDenoDeploy()
 
 volume = await sdk.volumes.create(
   slug="training-cache",
-  region="ord",  # ord (Chicago) or ams (Amsterdam)
+  region="ord",  # only "ord" (Chicago) is supported today
   capacity="2GB"  # accepts bytes or "1GB"/"512MB" style strings
 )
 
@@ -95,11 +95,11 @@ print(volume)
 </deno-tab>
 </deno-tabs>
 
-| Field      | Required | Details                                                                                                                    |
-| ---------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `slug`     | ✅       | Unique per organization. Slugs become part of the mount metadata, so pick something descriptive.                           |
-| `region`   | ✅       | Must match an available sandbox region (`"ord"` or `"ams"` today). Only sandboxes in the same region can mount the volume. |
-| `capacity` | ✅       | Between 300 MB and 20 GB. Pass a number of bytes or a string with `GB/MB/KB` (decimal) or `GiB/MiB/KiB` (binary) units.    |
+| Field      | Required | Details                                                                                                                 |
+| ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `slug`     | ✅       | Unique per organization. Slugs become part of the mount metadata, so pick something descriptive.                        |
+| `region`   | ✅       | Currently only `"ord"` (Chicago) is supported. Only sandboxes in the same region can mount the volume.                  |
+| `capacity` | ✅       | Between 300 MB and 20 GB. Pass a number of bytes or a string with `GB/MB/KB` (decimal) or `GiB/MiB/KiB` (binary) units. |
 
 ### Inspect and search volumes
 

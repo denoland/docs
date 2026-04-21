@@ -42,7 +42,8 @@ const client = new Client();
 
 ## Provision storage for the cache
 
-Pick a region (`ord` or `ams`) that matches the sandboxes you plan to run.
+Pick a region that matches the sandboxes you plan to run. Currently only `ord`
+(Chicago) supports volumes.
 
 We're going to provide 2 GB of storage for our training cache volume:
 
