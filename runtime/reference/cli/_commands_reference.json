@@ -7456,7 +7456,7 @@
     },
     {
       "name": "upgrade",
-      "about": "Upgrade deno executable to the given version.\n\n\u001b[32mLatest\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m\n\n\u001b[32mSpecific version\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.45.0\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.46.0-rc.1\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m9bc2dd29ad6ba334fd57a20114e367d3c04763d4\u001b[39m\n\n\u001b[32mChannel\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mstable\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245malpha\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mbeta\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mrc\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mcanary\u001b[39m\n\nThe version is resolved via \u001b[38;5;245mhttps://dl.deno.land\u001b[39m and then downloaded\nfrom either there or GitHub releases, replacing the current executable.\n\nIf you want to not replace the current Deno executable but instead download an\nupdate to a different location, use the \u001b[36m--output\u001b[39m flag:\n  \u001b[38;5;245mdeno upgrade --output $HOME/my_deno\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/upgrade\u001b[39m",
+      "about": "Upgrade deno executable to the given version.\n\n\u001b[32mLatest\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m\n\n\u001b[32mSpecific version\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.45.0\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m1.46.0-rc.1\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245m9bc2dd29ad6ba334fd57a20114e367d3c04763d4\u001b[39m\n\n\u001b[32mChannel\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mstable\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245malpha\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mbeta\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mrc\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mcanary\u001b[39m\n\n\u001b[32mFrom a pull request\u001b[39m \u001b[38;5;245m(requires gh CLI)\u001b[39m\n  \u001b[1mdeno upgrade\u001b[22m \u001b[38;5;245mpr 12345\u001b[39m\n\nThe version is resolved via \u001b[38;5;245mhttps://dl.deno.land\u001b[39m and then downloaded\nfrom either there or GitHub releases, replacing the current executable.\n\nIf you want to not replace the current Deno executable but instead download an\nupdate to a different location, use the \u001b[36m--output\u001b[39m flag:\n  \u001b[38;5;245mdeno upgrade --output $HOME/my_deno\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/upgrade\u001b[39m",
       "args": [
         {
           "name": "output",
@@ -7490,7 +7490,7 @@
           "short": null,
           "long": null,
           "required": false,
-          "help": "Version \u001b[38;5;245m(v1.46.0)\u001b[39m, channel \u001b[38;5;245m(alpha, beta, rc, canary)\u001b[39m or commit hash \u001b[38;5;245m(9bc2dd29ad6ba334fd57a20114e367d3c04763d4)\u001b[39m",
+          "help": "Version \u001b[38;5;245m(v1.46.0)\u001b[39m, channel \u001b[38;5;245m(alpha, beta, rc, canary)\u001b[39m, commit hash \u001b[38;5;245m(9bc2dd29ad6ba334fd57a20114e367d3c04763d4)\u001b[39m, or \u001b[38;5;245mpr 12345\u001b[39m to install from a PR",
           "help_heading": null,
           "usage": "[VERSION]..."
         },
