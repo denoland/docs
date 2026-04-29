@@ -489,6 +489,34 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
 });
 ```
 
+## OffscreenCanvas
+
+Starting in Deno 2.8, the
+[`OffscreenCanvas`](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
+API is available. `OffscreenCanvas` is a canvas that lives outside any DOM and
+can be used in any context — including Web Workers — for off-thread rendering
+and image generation.
+
+```ts
+const canvas = new OffscreenCanvas(256, 256);
+const ctx = canvas.getContext("2d");
+ctx.fillStyle = "tomato";
+ctx.fillRect(0, 0, 256, 256);
+
+// Encode to PNG / JPEG / WebP via convertToBlob()
+const blob = await canvas.convertToBlob({ type: "image/png" });
+await Deno.writeFile("./tile.png", new Uint8Array(await blob.arrayBuffer()));
+```
+
+Typical uses:
+
+- generating images server-side without spinning up a headless browser,
+- running 2D drawing code originally written for the browser inside a Web
+  Worker,
+- producing thumbnails or social-card images at request time.
+
+WebGL / WebGPU rendering contexts on `OffscreenCanvas` are not yet supported.
+
 ## Deviations of other APIs from spec
 
 ### Cache API
