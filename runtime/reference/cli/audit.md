@@ -48,3 +48,37 @@ Don't error if the audit data can't be retrieved from the registry:
 ```sh
 deno audit --ignore-registry-errors
 ```
+
+## Auto-fixing vulnerabilities
+
+Starting in Deno 2.8, pass `--fix` to automatically upgrade vulnerable direct
+dependencies to a patched, semver-compatible version:
+
+```sh
+deno audit --fix
+```
+
+`deno audit --fix` updates `package.json` / `deno.json` and regenerates the
+lockfile. To keep changes safe, it deliberately **skips**:
+
+- Major-version upgrades (reported as unfixable so you can bump them
+  intentionally).
+- Unsupported version specifier styles such as `>=1 <2`, `1.x`, dist-tags, or
+  aliases — rather than silently rewriting them to a caret range.
+- Transitive dependencies that don't have a clean direct-dependency upgrade
+  path. These are surfaced as "could not be fixed automatically".
+
+Example output:
+
+```
+╭ @denotest/with-vuln1 is susceptible to prototype pollution
+│ ...
+Found 2 vulnerabilities
+Severity: 0 low, 0 moderate, 1 high, 1 critical
+
+Fixed 1 vulnerability:
+  @denotest/with-vuln1 1.0.0 -> 1.1.0
+
+1 vulnerability could not be fixed automatically:
+  @denotest/with-vuln2 (major upgrade to 2.0.0)
+```
