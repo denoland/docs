@@ -145,6 +145,7 @@ The Deno runtime has these special environment variables.
 | DENO_CERT            | Load certificate authority from PEM encoded file                                                                                                                                  |
 | DENO_COVERAGE_DIR    | Set the directory for collecting coverage profile data. This option only works for [`deno test` subcommand](/runtime/reference/cli/test/).                                        |
 | DENO_DIR             | Set the cache directory                                                                                                                                                           |
+| DENO_CACHE_MAX_SIZE  | Trim oldest cache entries (by mtime) after cache writes whenever the Deno cache exceeds this size. Accepts size suffixes — `B`, `K`/`KB`, `M`/`MB`, `G`/`GB`, `T`/`TB` (case-insensitive, fractional values allowed, e.g. `1.5G`). Available in Deno 2.8+. |
 | DENO_INSTALL_ROOT    | Set deno install's output directory (defaults to `$HOME/.deno/bin`)                                                                                                               |
 | DENO_REPL_HISTORY    | Set REPL history file path History file is disabled when the value is empty <br />(defaults to `$DENO_DIR/deno_history.txt`)                                                      |
 | DENO_NO_PACKAGE_JSON | Disables auto-resolution of `package.json`                                                                                                                                        |
