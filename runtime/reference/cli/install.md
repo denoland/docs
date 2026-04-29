@@ -46,6 +46,30 @@ If your project has a `package.json` file, the packages coming from npm will be
 added to `dependencies` in `package.json`. Otherwise all packages will be added
 to `deno.json`.
 
+### deno install --os and --arch
+
+Starting in Deno 2.8, `deno install` accepts `--os` and `--arch` flags so you
+can install npm packages targeting a different platform than the one you're
+running on. This is most useful for pre-installing packages with native
+binaries — for example, building a deployment artifact on a macOS dev machine
+that will eventually run on Linux/arm64.
+
+The flags accept Node.js-compatible values, the same strings that
+`process.platform` and `process.arch` produce.
+
+```sh
+# Install npm packages for linux/arm64
+deno install --os linux --arch arm64
+
+# Install for windows/x64
+deno install --os win32 --arch x64
+
+# Override just the architecture; --os defaults to the current system
+deno install --arch x64
+```
+
+`--os` and `--arch` are local-install-only and conflict with `--global`.
+
 ### deno install --entrypoint [FILES]
 
 Use this command to install all dependencies that are used in the provided files
