@@ -35,11 +35,12 @@ my_project
 
 A `deno.json` file is created to
 [configure your project](/runtime/fundamentals/configuration/), and two
-TypeScript files are created; `main.ts` and `main_test.ts`. The `main.ts` file
-is where you'll write your application code, on initial creation it will contain
-a simple program which adds two numbers together. The `main_test.ts` file is
-where you can write tests, initially it will contain a test for your addition
-program.
+TypeScript files are created; `main.ts` and `main_test.ts`. As of Deno 2.8 the
+`main.ts` file contains a small HTTP server built on
+[`Deno.serve`](/api/deno/~/Deno.serve) — it shows off Deno's built-in HTTP
+server, `Response.json()`, and TypeScript working out of the box. The handler
+is exported and guarded by `import.meta.main`, so `main_test.ts` can import
+and call it directly without binding to a port.
 
 ## Run your project
 
@@ -47,8 +48,10 @@ You can run this program with the following command:
 
 ```bash
 $ deno main.ts
-Add 2 + 3 = 5
+Listening on http://localhost:8000/
 ```
+
+Open the URL in your browser to see the response.
 
 ## Run your tests
 
@@ -58,10 +61,11 @@ your new project with:
 
 ```bash
 $ deno test
-running 1 test from ./main_test.ts     
-addTest ... ok (1ms)
+running 2 tests from ./main_test.ts
+handler returns hello ... ok (1ms)
+handler returns 404 for unknown route ... ok (1ms)
 
-ok | 1 passed | 0 failed (3ms)
+ok | 2 passed | 0 failed (3ms)
 ```
 
 Now that you have a basic project set up you can start building your
