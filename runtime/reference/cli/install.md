@@ -36,6 +36,15 @@ Use this command to install particular packages and add them to `deno.json` or
 deno install jsr:@std/testing npm:express
 ```
 
+Starting in Deno 2.8, unprefixed names default to npm:
+
+```sh
+deno install express react jsr:@std/async
+```
+
+Use `--jsr` to resolve unprefixed names from JSR instead. Explicit `npm:` and
+`jsr:` prefixes always win.
+
 :::tip
 
 You can also use `deno add` which is an alias to `deno install [PACKAGES]`

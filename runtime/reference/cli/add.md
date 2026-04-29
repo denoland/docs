@@ -21,6 +21,24 @@ Add packages from JSR and npm:
 deno add @std/path npm:express
 ```
 
+Starting in Deno 2.8, **unprefixed names default to the npm registry**, since
+npm is by far the most common source. Explicit `npm:` and `jsr:` prefixes
+always take precedence:
+
+```sh
+# Resolves from npm by default
+deno add express react
+
+# Mixed sources still work with explicit prefixes
+deno add express jsr:@std/async
+```
+
+To resolve unprefixed names from JSR instead, pass `--jsr`:
+
+```sh
+deno add --jsr @std/path
+```
+
 By default, dependencies are added with a caret (`^`) version range. Use
 `--save-exact` to pin to an exact version:
 
@@ -30,12 +48,6 @@ deno add --save-exact @std/path
 
 This saves the dependency without the `^` prefix (e.g., `1.0.0` instead of
 `^1.0.0`).
-
-Treat unprefixed package names as npm packages:
-
-```sh
-deno add --npm express
-```
 
 ## Where dependencies are stored
 
