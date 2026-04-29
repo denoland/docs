@@ -8,7 +8,9 @@ oldUrl:
   - /runtime/tutorials/os_signals/
 ---
 
-> ⚠️ Windows only supports listening for SIGINT and SIGBREAK as of Deno v1.23.
+> ⚠️ Windows supports listening for SIGINT and SIGBREAK starting in Deno 1.23,
+> and additionally SIGTERM and SIGQUIT starting in Deno 2.8 (via libuv's
+> Windows signal emulation).
 
 ## Concepts
 
@@ -75,3 +77,18 @@ Run with:
 ```shell
 deno run signal_listeners.ts
 ```
+
+## Windows support
+
+The supported signal set differs between platforms. As of Deno 2.8 the
+Windows-specific behavior is:
+
+| Use case                         | Supported signals on Windows                              |
+| -------------------------------- | --------------------------------------------------------- |
+| `Deno.addSignalListener(sig, …)` | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`                |
+| `Deno.kill(pid, sig)`            | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`, `SIGKILL`, `SIGABRT`, plus signal `0` for a process-health check |
+
+`SIGKILL` and `SIGABRT` are deliberately **not** registerable via
+`addSignalListener` — they're uncatchable / fatal, matching Unix semantics. On
+Windows the catchable signals all forward to libuv's emulation layer; signals
+sent via `Deno.kill` ultimately invoke `TerminateProcess`.
