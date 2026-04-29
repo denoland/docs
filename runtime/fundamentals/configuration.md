@@ -738,6 +738,28 @@ this requires an explicit opt-in with `-P` and is not loaded by default.
 
 If you're ok with this risk, then this feature will be useful for you.
 
+## Compile config
+
+The `"compile"` block configures
+[`deno compile`](/runtime/reference/cli/compile/) without requiring you to
+repeat flags on every invocation. Starting in Deno 2.8 you can declare which
+extra files or directories to bundle into the executable, and which paths to
+exclude:
+
+```jsonc title="deno.json"
+{
+  "compile": {
+    "include": ["names.csv", "data", "worker.ts"],
+    "exclude": ["data/secrets", "**/*.test.ts"]
+  }
+}
+```
+
+`--include` and `--exclude` flags on the command line are merged with these
+lists rather than replacing them. The `"compile"` block can also carry
+`permissions` (see
+[Test, bench, and compile permissions](#test-bench-and-compile-permissions)).
+
 ## An example `deno.json` file
 
 ```json
