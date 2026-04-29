@@ -38,6 +38,22 @@ function add(x: number, y: number): number
   Adds x and y. @param {number} x @param {number} y @returns {number} Sum of x and y
 ```
 
+### Documenting an npm or JSR package
+
+Starting in Deno 2.8, `deno doc` accepts `npm:` and `jsr:` specifiers and will
+fetch the package's published types before generating documentation. This is
+useful for exploring a third-party API from the terminal without cloning the
+repository:
+
+```sh
+deno doc npm:code-block-writer
+deno doc jsr:@std/path
+```
+
+You can pin to a specific version like any other Deno specifier
+(`npm:zod@4`), and combine the specifier with `--html` or `--json` to render
+the same output formats as for local files.
+
 ## Linting
 
 You can use `--lint` flag to check for problems in your documentation while it's
