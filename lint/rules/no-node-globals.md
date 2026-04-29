@@ -1,5 +1,5 @@
 ---
-tags: [recommended]
+tags: []
 ---
 
 Disallows the use of NodeJS global objects.
@@ -7,6 +7,19 @@ Disallows the use of NodeJS global objects.
 NodeJS exposes a set of global objects that differs from deno (and the web), so
 code should not assume they are available. Instead, import the objects from
 their defining modules as needed.
+
+This rule is **off by default** as of Deno 2.8. To opt in, add it to your
+`deno.json`:
+
+```json
+{
+  "lint": {
+    "rules": {
+      "include": ["no-node-globals"]
+    }
+  }
+}
+```
 
 **Invalid:**
 
