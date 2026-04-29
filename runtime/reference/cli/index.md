@@ -34,6 +34,8 @@ below for more information on each subcommand.
 - [deno remove](/runtime/reference/cli/remove) - Remove dependencies
 - [deno outdated](/runtime/reference/cli/outdated) - view or update outdated
   dependencies
+- [deno why](/runtime/reference/cli/why/) - explain why a package is in the
+  dependency tree
 
 ## Tooling
 
