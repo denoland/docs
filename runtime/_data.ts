@@ -217,6 +217,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/test/",
           },
           {
+            title: "deno transpile",
+            href: "/runtime/reference/cli/transpile/",
+          },
+          {
             title: "deno types",
             href: "/runtime/reference/cli/types/",
           },
