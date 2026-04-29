@@ -145,6 +145,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/deploy/",
           },
           {
+            title: "deno desktop",
+            href: "/runtime/reference/cli/desktop/",
+          },
+          {
             title: "deno doc",
             href: "/runtime/reference/cli/doc/",
           },
