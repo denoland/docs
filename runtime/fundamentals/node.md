@@ -231,6 +231,21 @@ subclasses instead.
 
 - `__dirname` - use `import.meta.dirname` instead.
 
+- `setTimeout` / `setInterval` - starting in Deno 2.8, the global timer
+  functions return a Node.js
+  [`Timeout`](https://nodejs.org/api/timers.html#class-timeout) object instead
+  of a number, matching Node.js semantics. The returned object exposes methods
+  like `.ref()`, `.unref()`, `.refresh()`, and `.hasRef()`. It still coerces to
+  a number (via `Symbol.toPrimitive`), so existing code that stores the timer
+  ID as a number or passes it to `clearTimeout`/`clearInterval` continues to
+  work unchanged.
+
+  ```ts
+  const t = setTimeout(() => {}, 1000);
+  t.unref(); // don't keep the event loop alive for this timer
+  clearTimeout(t);
+  ```
+
 ## CommonJS support
 
 Deno supports CommonJS modules by default.
