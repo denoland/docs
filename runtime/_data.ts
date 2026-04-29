@@ -113,6 +113,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/bench/",
           },
           {
+            title: "deno bump-version",
+            href: "/runtime/reference/cli/bump_version/",
+          },
+          {
             title: "deno bundle",
             href: "/runtime/reference/cli/bundle/",
           },
