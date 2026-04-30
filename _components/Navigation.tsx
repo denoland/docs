@@ -73,5 +73,22 @@ function getSectionData(data: Lume.Data, currentUrl: string) {
 
   // Fall back to the default behavior using just the first segment
   const dataPath = urlSegments[0];
-  return data.search.data(`/${dataPath}/`)?.sidebar;
+  const sectionData = data.search.data(`/${dataPath}/`);
+
+  // If the section has multi-sidebar routing (e.g. runtime), pick the right one
+  const sidebarUrlMap = sectionData?.sidebarUrlMap as
+    | Record<string, string>
+    | undefined;
+  const sidebars = sectionData?.sidebars as
+    | Record<string, unknown[]>
+    | undefined;
+  if (sidebarUrlMap && sidebars) {
+    const normalizedUrl = currentUrl.replace(/\/$/, "");
+    const tabHref = sidebarUrlMap[normalizedUrl];
+    if (tabHref && sidebars[tabHref]) {
+      return sidebars[tabHref];
+    }
+  }
+
+  return sectionData?.sidebar;
 }

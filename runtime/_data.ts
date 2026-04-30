@@ -1,19 +1,27 @@
 import { walk } from "jsr:@std/fs";
 import { parse as yamlParse } from "jsr:@std/yaml";
-import { Sidebar } from "../types.ts";
+import {
+  Sidebar,
+  SidebarItem,
+  SidebarNav as SidebarNavType,
+  SidebarSection,
+} from "../types.ts";
 
-export const sidebar = [
+// ─── Sub-navigation tabs ────────────────────────────────────
+export const SidebarNav = [
+  { title: "Basics", href: "/runtime/" },
+  { title: "Code Quality", href: "/runtime/fundamentals/testing/" },
+  { title: "Build & Publish", href: "/runtime/fundamentals/workspaces/" },
+  { title: "Tools", href: "/runtime/reference/vscode/" },
+] satisfies SidebarNavType;
+
+// ─── Per-tab sidebars ───────────────────────────────────────
+const basicsSidebar = [
   {
-    title: "Getting started",
+    title: "Getting Started",
     items: [
-      {
-        title: "Welcome to Deno",
-        href: "/runtime/",
-      },
-      {
-        title: "Installation",
-        href: "/runtime/getting_started/installation/",
-      },
+      { title: "Welcome to Deno", href: "/runtime/" },
+      { title: "Installation", href: "/runtime/getting_started/installation/" },
       {
         title: "First project",
         href: "/runtime/getting_started/first_project/",
@@ -26,62 +34,28 @@ export const sidebar = [
         title: "Command line interface",
         href: "/runtime/getting_started/command_line_interface/",
       },
+      {
+        title: "Migrating to Deno",
+        href: "/runtime/reference/migration_guide/",
+      },
     ],
   },
   {
-    title: "Fundamentals",
+    title: "Core Concepts",
     items: [
-      {
-        title: "TypeScript",
-        href: "/runtime/fundamentals/typescript/",
-      },
-      {
-        title: "Node",
-        href: "/runtime/fundamentals/node/",
-      },
-      {
-        title: "Security",
-        href: "/runtime/fundamentals/security/",
-      },
+      { title: "TypeScript", href: "/runtime/fundamentals/typescript/" },
       {
         title: "Modules and dependencies",
         href: "/runtime/fundamentals/modules/",
       },
+      { title: "Configuration", href: "/runtime/fundamentals/configuration/" },
       {
-        title: "Configuration",
-        href: "/runtime/fundamentals/configuration/",
+        title: "Security and permissions",
+        href: "/runtime/fundamentals/security/",
       },
       {
-        title: "Web development",
-        href: "/runtime/fundamentals/web_dev/",
-      },
-      {
-        title: "Testing",
-        href: "/runtime/fundamentals/testing/",
-      },
-      {
-        title: "Debugging",
-        href: "/runtime/fundamentals/debugging/",
-      },
-      {
-        title: "Workspaces",
-        href: "/runtime/fundamentals/workspaces/",
-      },
-      {
-        title: "Linting and formatting",
-        href: "/runtime/fundamentals/linting_and_formatting/",
-      },
-      {
-        title: "HTTP Server",
-        href: "/runtime/fundamentals/http_server/",
-      },
-      {
-        title: "FFI",
-        href: "/runtime/fundamentals/ffi/",
-      },
-      {
-        title: "OpenTelemetry",
-        href: "/runtime/fundamentals/open_telemetry/",
+        title: "Node.js compatibility",
+        href: "/runtime/fundamentals/node/",
       },
       {
         title: "Stability and releases",
@@ -90,278 +64,43 @@ export const sidebar = [
     ],
   },
   {
-    title: "Reference guides",
+    title: "Running Code",
     items: [
-      {
-        title: "CLI",
-        href: "/runtime/reference/cli/",
-        items: [
-          {
-            title: "deno add",
-            href: "/runtime/reference/cli/add/",
-          },
-          {
-            title: "deno approve-scripts",
-            href: "/runtime/reference/cli/approve_scripts/",
-          },
-          {
-            title: "deno audit",
-            href: "/runtime/reference/cli/audit/",
-          },
-          {
-            title: "deno bench",
-            href: "/runtime/reference/cli/bench/",
-          },
-          {
-            title: "deno bundle",
-            href: "/runtime/reference/cli/bundle/",
-          },
-          {
-            title: "deno check",
-            href: "/runtime/reference/cli/check/",
-          },
-          {
-            title: "deno clean",
-            href: "/runtime/reference/cli/clean/",
-          },
-          {
-            title: "deno compile",
-            href: "/runtime/reference/cli/compile/",
-          },
-          {
-            title: "deno create",
-            href: "/runtime/reference/cli/create/",
-          },
-          {
-            title: "deno completions",
-            href: "/runtime/reference/cli/completions/",
-          },
-          {
-            title: "deno coverage",
-            href: "/runtime/reference/cli/coverage/",
-          },
-          {
-            title: "deno deploy",
-            href: "/runtime/reference/cli/deploy/",
-          },
-          {
-            title: "deno doc",
-            href: "/runtime/reference/cli/doc/",
-          },
-          {
-            title: "deno eval",
-            href: "/runtime/reference/cli/eval/",
-          },
-          {
-            title: "deno fmt",
-            href: "/runtime/reference/cli/fmt/",
-          },
-          {
-            title: "deno info",
-            href: "/runtime/reference/cli/info/",
-          },
-          {
-            title: "deno init",
-            href: "/runtime/reference/cli/init/",
-          },
-          {
-            title: "deno install",
-            href: "/runtime/reference/cli/install/",
-          },
-          {
-            title: "deno jupyter",
-            href: "/runtime/reference/cli/jupyter/",
-          },
-          {
-            title: "deno lint",
-            href: "/runtime/reference/cli/lint/",
-          },
-          {
-            title: "deno outdated",
-            href: "/runtime/reference/cli/outdated/",
-          },
-          {
-            title: "deno publish",
-            href: "/runtime/reference/cli/publish/",
-          },
-          {
-            title: "deno lsp",
-            href: "/runtime/reference/cli/lsp/",
-          },
-          {
-            title: "deno remove",
-            href: "/runtime/reference/cli/remove/",
-          },
-          {
-            title: "deno repl",
-            href: "/runtime/reference/cli/repl/",
-          },
-          {
-            title: "deno run",
-            href: "/runtime/reference/cli/run/",
-          },
-          {
-            title: "deno sandbox",
-            href: "/runtime/reference/cli/sandbox/",
-          },
-          {
-            title: "deno serve",
-            href: "/runtime/reference/cli/serve/",
-          },
-          {
-            title: "deno task",
-            href: "/runtime/reference/cli/task/",
-          },
-          {
-            title: "deno test",
-            href: "/runtime/reference/cli/test/",
-          },
-          {
-            title: "deno types",
-            href: "/runtime/reference/cli/types/",
-          },
-          {
-            title: "deno uninstall",
-            href: "/runtime/reference/cli/uninstall/",
-          },
-          {
-            title: "deno update",
-            href: "/runtime/reference/cli/update/",
-          },
-          {
-            title: "deno upgrade",
-            href: "/runtime/reference/cli/upgrade/",
-          },
-          {
-            title: "deno unstable flags",
-            href: "/runtime/reference/cli/unstable_flags/",
-          },
-          {
-            title: "deno x",
-            href: "/runtime/reference/cli/x/",
-          },
-        ],
-      },
-      {
-        title: "Standard library",
-        items: [
-          { title: "Overview", href: "/runtime/reference/std/" },
-          ...[
-            "assert",
-            "async",
-            "bytes",
-            "cache",
-            "cbor",
-            "cli",
-            "collections",
-            "crypto",
-            "csv",
-            "data-structures",
-            "datetime",
-            "dotenv",
-            "encoding",
-            "expect",
-            "fmt",
-            "front-matter",
-            "fs",
-            "html",
-            "http",
-            "ini",
-            "internal",
-            "io",
-            "json",
-            "jsonc",
-            "log",
-            "media-types",
-            "msgpack",
-            "net",
-            "path",
-            "random",
-            "regexp",
-            "semver",
-            "streams",
-            "tar",
-            "testing",
-            "text",
-            "toml",
-            "ulid",
-            "uuid",
-            "webgpu",
-            "yaml",
-          ].map((name) => ({
-            title: name,
-            href: `/runtime/reference/std/${name}/`,
-          })),
-        ],
-      },
-      {
-        title: "Configuring TypeScript",
-        href: "/runtime/reference/ts_config_migration/",
-      },
-      {
-        title: "Continuous integration",
-        href: "/runtime/reference/continuous_integration/",
-      },
-      {
-        title: "Environment variables",
-        href: "/runtime/reference/env_variables/",
-      },
-      {
-        title: "Deno & VS Code",
-        href: "/runtime/reference/vscode/",
-      },
-      {
-        title: "Using JSX and React",
-        href: "/runtime/reference/jsx/",
-      },
-      {
-        title: "Testing code in docs",
-        href: "/runtime/reference/documentation/",
-      },
-      {
-        title: "Bundling",
-        href: "/runtime/reference/bundling/",
-      },
-      {
-        title: "Lint plugins",
-        href: "/runtime/reference/lint_plugins/",
-      },
-      {
-        title: "WebAssembly",
-        href: "/runtime/reference/wasm/",
-      },
-      {
-        title: "Migration guide",
-        href: "/runtime/reference/migration_guide/",
-      },
-      {
-        title: "LSP integration",
-        href: "/runtime/reference/lsp_integration/",
-      },
-      {
-        title: "Docker",
-        href: "/runtime/reference/docker/",
-      },
+      { title: "deno run", href: "/runtime/reference/cli/run/" },
+      { title: "deno serve", href: "/runtime/reference/cli/serve/" },
+      { title: "deno task", href: "/runtime/reference/cli/task/" },
+      { title: "deno eval", href: "/runtime/reference/cli/eval/" },
+      { title: "deno repl", href: "/runtime/reference/cli/repl/" },
+      { title: "deno sandbox", href: "/runtime/reference/cli/sandbox/" },
     ],
   },
   {
-    title: "Contributing and support",
+    title: "Serving HTTP",
+    items: [
+      { title: "HTTP Server", href: "/runtime/fundamentals/http_server/" },
+      { title: "Web development", href: "/runtime/fundamentals/web_dev/" },
+      { title: "Using JSX and React", href: "/runtime/reference/jsx/" },
+    ],
+  },
+  {
+    title: "Native & Wasm",
+    items: [
+      { title: "FFI", href: "/runtime/fundamentals/ffi/" },
+      { title: "WebAssembly", href: "/runtime/reference/wasm/" },
+    ],
+  },
+  {
+    title: "Contributing and Support",
     items: [
       {
         title: "Contributing to Deno",
         items: [
-          {
-            title: "Contributing overview",
-            href: "/runtime/contributing/",
-          },
+          { title: "Contributing overview", href: "/runtime/contributing/" },
           {
             title: "Architecture",
             href: "/runtime/contributing/architecture/",
           },
-          {
-            title: "Profiling",
-            href: "/runtime/contributing/profiling/",
-          },
+          { title: "Profiling", href: "/runtime/contributing/profiling/" },
           {
             title: "Release schedule",
             href: "/runtime/contributing/release_schedule/",
@@ -370,23 +109,168 @@ export const sidebar = [
             title: "Style guide",
             href: "/runtime/contributing/style_guide/",
           },
-          {
-            title: "Documentation",
-            href: "/runtime/contributing/docs/",
-          },
-          {
-            title: "Examples",
-            href: "/runtime/contributing/examples/",
-          },
+          { title: "Documentation", href: "/runtime/contributing/docs/" },
+          { title: "Examples", href: "/runtime/contributing/examples/" },
         ],
       },
+      { title: "Help", href: "/runtime/help/" },
+    ],
+  },
+] satisfies Sidebar;
+
+const qualitySidebar = [
+  {
+    title: "Testing & Code Quality",
+    items: [
       {
-        title: "Help",
-        href: "/runtime/help/",
+        title: "Writing and running tests",
+        href: "/runtime/fundamentals/testing/",
+      },
+      {
+        title: "Linting and formatting",
+        href: "/runtime/fundamentals/linting_and_formatting/",
+      },
+      { title: "Lint plugins", href: "/runtime/reference/lint_plugins/" },
+      { title: "deno test", href: "/runtime/reference/cli/test/" },
+      { title: "deno bench", href: "/runtime/reference/cli/bench/" },
+      { title: "deno coverage", href: "/runtime/reference/cli/coverage/" },
+      { title: "deno fmt", href: "/runtime/reference/cli/fmt/" },
+      { title: "deno lint", href: "/runtime/reference/cli/lint/" },
+      { title: "deno check", href: "/runtime/reference/cli/check/" },
+      { title: "deno doc", href: "/runtime/reference/cli/doc/" },
+      {
+        title: "Testing code in docs",
+        href: "/runtime/reference/documentation/",
       },
     ],
   },
 ] satisfies Sidebar;
+
+const packagesSidebar = [
+  {
+    title: "Package Management",
+    items: [
+      { title: "Workspaces", href: "/runtime/fundamentals/workspaces/" },
+      { title: "deno add", href: "/runtime/reference/cli/add/" },
+      { title: "deno remove", href: "/runtime/reference/cli/remove/" },
+      { title: "deno install", href: "/runtime/reference/cli/install/" },
+      { title: "deno uninstall", href: "/runtime/reference/cli/uninstall/" },
+      { title: "deno outdated", href: "/runtime/reference/cli/outdated/" },
+      { title: "deno update", href: "/runtime/reference/cli/update/" },
+      { title: "deno audit", href: "/runtime/reference/cli/audit/" },
+      {
+        title: "deno approve-scripts",
+        href: "/runtime/reference/cli/approve_scripts/",
+      },
+      { title: "Standard Library", href: "/runtime/reference/std/" },
+    ],
+  },
+  {
+    title: "Building & Deploying",
+    items: [
+      { title: "deno init", href: "/runtime/reference/cli/init/" },
+      { title: "deno create", href: "/runtime/reference/cli/create/" },
+      { title: "Bundling", href: "/runtime/reference/bundling/" },
+      { title: "deno compile", href: "/runtime/reference/cli/compile/" },
+      { title: "deno bundle", href: "/runtime/reference/cli/bundle/" },
+      { title: "deno publish", href: "/runtime/reference/cli/publish/" },
+      { title: "deno deploy", href: "/runtime/reference/cli/deploy/" },
+      { title: "Docker", href: "/runtime/reference/docker/" },
+      {
+        title: "Continuous integration",
+        href: "/runtime/reference/continuous_integration/",
+      },
+    ],
+  },
+] satisfies Sidebar;
+
+const toolsSidebar = [
+  {
+    title: "Development",
+    items: [
+      { title: "Deno & VS Code", href: "/runtime/reference/vscode/" },
+      {
+        title: "LSP integration",
+        href: "/runtime/reference/lsp_integration/",
+      },
+      { title: "deno lsp", href: "/runtime/reference/cli/lsp/" },
+      {
+        title: "Jupyter notebooks",
+        href: "/runtime/reference/cli/jupyter/",
+      },
+      { title: "Debugging", href: "/runtime/fundamentals/debugging/" },
+      { title: "OpenTelemetry", href: "/runtime/fundamentals/open_telemetry/" },
+    ],
+  },
+  {
+    title: "Configuration",
+    items: [
+      {
+        title: "Environment variables",
+        href: "/runtime/reference/env_variables/",
+      },
+      {
+        title: "Configuring TypeScript",
+        href: "/runtime/reference/ts_config_migration/",
+      },
+    ],
+  },
+  {
+    title: "CLI Utilities",
+    items: [
+      { title: "CLI overview", href: "/runtime/reference/cli/" },
+      { title: "deno info", href: "/runtime/reference/cli/info/" },
+      { title: "deno types", href: "/runtime/reference/cli/types/" },
+      {
+        title: "deno completions",
+        href: "/runtime/reference/cli/completions/",
+      },
+      { title: "deno upgrade", href: "/runtime/reference/cli/upgrade/" },
+      { title: "deno clean", href: "/runtime/reference/cli/clean/" },
+      {
+        title: "deno unstable flags",
+        href: "/runtime/reference/cli/unstable_flags/",
+      },
+      { title: "deno x", href: "/runtime/reference/cli/x/" },
+    ],
+  },
+] satisfies Sidebar;
+
+// ─── Sidebar routing ────────────────────────────────────────
+// Maps SubNav tab hrefs to their sidebar data
+export const sidebars: Record<string, Sidebar> = {
+  "/runtime/": basicsSidebar,
+  "/runtime/fundamentals/testing/": qualitySidebar,
+  "/runtime/fundamentals/workspaces/": packagesSidebar,
+  "/runtime/reference/vscode/": toolsSidebar,
+};
+
+// Auto-generate a URL → tab-href mapping from the sidebar data
+function collectHrefs(items: SidebarItem[]): string[] {
+  const hrefs: string[] = [];
+  for (const item of items) {
+    if (item.href) hrefs.push(item.href.replace(/\/$/, ""));
+    if (item.items) hrefs.push(...collectHrefs(item.items));
+  }
+  return hrefs;
+}
+
+export const sidebarUrlMap: Record<string, string> = {};
+for (const [tabHref, sidebarData] of Object.entries(sidebars)) {
+  for (const section of sidebarData as SidebarSection[]) {
+    if (section.href) {
+      sidebarUrlMap[section.href.replace(/\/$/, "")] = tabHref;
+    }
+    if (section.items) {
+      for (const href of collectHrefs(section.items)) {
+        sidebarUrlMap[href] = tabHref;
+      }
+    }
+  }
+}
+
+// Default sidebar (fallback for pages not in the URL map)
+export const sidebar = basicsSidebar;
 
 export const sectionTitle = "Runtime";
 export const sectionHref = "/runtime/";
