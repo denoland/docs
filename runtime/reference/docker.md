@@ -14,13 +14,14 @@ To use the official image, create a `Dockerfile` in your project directory:
 ```dockerfile
 FROM denoland/deno:latest
 
-# Create working directory
 WORKDIR /app
 
-# Copy source
-COPY . .
+# Cache dependencies by copying config files first
+COPY deno.json deno.lock ./
+RUN deno install
 
-# Install dependencies (use just `deno install` if deno.json has imports)
+# Copy source and install entrypoint
+COPY . .
 RUN deno install --entrypoint main.ts
 
 # Run the app
@@ -37,16 +38,26 @@ For smaller production images:
 # Build stage
 FROM denoland/deno:latest AS builder
 WORKDIR /app
+
+# Cache dependencies by copying config files first
+COPY deno.json deno.lock ./
+RUN deno install
+
+# Then copy source and install entrypoint
 COPY . .
-# Install dependencies (use just `deno install` if deno.json has imports)
 RUN deno install --entrypoint main.ts
 
 # Production stage
 FROM denoland/deno:latest
 WORKDIR /app
 COPY --from=builder /app .
+COPY --from=builder /deno-dir /deno-dir
 CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
+
+The `DENO_DIR` (which defaults to `/deno-dir/` in the official Docker image)
+contains cached dependencies from `deno install`. Copying it to the production
+stage ensures dependencies don't need to be re-downloaded at runtime.
 
 #### Permission Flags
 
