@@ -294,6 +294,16 @@ This will:
 The built app will be ready for deployment on platforms that support Deno, such
 as Deno Deploy.
 
+:::tip Other deployment targets
+
+If you're not planning to deploy to Deno Deploy, you can use a different
+SvelteKit adapter for your target platform. Visit the
+[SvelteKit adapters documentation](https://svelte.dev/docs/kit/adapters) to
+learn about available adapters for platforms like Node.js, Cloudflare, Netlify,
+and self-hosting options.
+
+:::
+
 You can deploy this app to your favorite cloud provider. We recommend using
 [Deno Deploy](https://deno.com/deploy) for a simple and easy deployment
 experience. You can deploy your app directly from GitHub, simply create a GitHub
