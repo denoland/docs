@@ -238,6 +238,45 @@ You can also use this utility to install a specific version of Deno:
 deno upgrade --version 1.0.1
 ```
 
+## Uninstalling
+
+If you installed Deno using the shell or PowerShell install script, you can
+uninstall it by removing the Deno installation directory and its cache:
+
+<deno-tabs group-id="operating-systems">
+<deno-tab value="mac" label="macOS / Linux" default>
+
+```shell
+rm -rf ~/.deno
+```
+
+You should also remove the Deno cache directory if it exists:
+
+```shell
+rm -rf ~/.cache/deno
+```
+
+Finally, remove the `DENO_INSTALL` export and `PATH` entry from your shell
+config file (`~/.bashrc`, `~/.zshrc`, `~/.config/fish/config.fish`, etc.).
+
+</deno-tab>
+<deno-tab value="windows" label="Windows">
+
+```powershell
+Remove-Item -Recurse -Force "$env:USERPROFILE\.deno"
+Remove-Item -Recurse -Force "$env:LOCALAPPDATA\deno"
+```
+
+You should also remove the Deno `bin` directory from your `PATH` environment
+variable via System Settings.
+
+</deno-tab>
+</deno-tabs>
+
+If you installed Deno via a package manager (Homebrew, Scoop, Chocolatey, etc.),
+use that package manager's uninstall command instead (e.g.
+`brew uninstall deno`, `scoop uninstall deno`).
+
 ## Building from source
 
 Information about how to build from source can be found in the
