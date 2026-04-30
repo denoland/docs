@@ -134,9 +134,9 @@ CMD ["deno", "test", "--allow-none"]
 
 ### Using Docker Compose
 
-```yaml
-// filepath: docker-compose.yml
-version: "3.8"
+A basic Compose file for development with hot-reload:
+
+```yaml title="docker-compose.yml"
 services:
   deno-app:
     build: .
@@ -148,6 +148,45 @@ services:
       - DENO_ENV=development
     command: ["deno", "run", "--watch", "--allow-net", "main.ts"]
 ```
+
+For a more realistic setup with a database:
+
+```yaml title="docker-compose.yml"
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgres://deno:password@db:5432/app
+    depends_on:
+      db:
+        condition: service_healthy
+    command:
+      ["deno", "run", "--allow-net", "--allow-env=DATABASE_URL", "main.ts"]
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: deno
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U deno"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  pgdata:
+```
+
+Start the services with `docker compose up`, or run in the background with
+`docker compose up -d`.
 
 ### Health Checks
 
@@ -237,7 +276,7 @@ project-root/
 2. Create a `.dockerignore`:
 
 ```text
-// filepath: docker/project-a/.dockerignore
+# filepath:docker/project-a/.dockerignore
 *
 !deno.json
 !project-a/**
@@ -247,7 +286,7 @@ project-root/
 3. Create a build context script:
 
 ```bash
-// filepath: docker/project-a/build-context.sh
+# filepath:docker/project-a/build-context.sh
 #!/bin/bash
 
 # Create temporary build context
@@ -269,7 +308,7 @@ fi
 4. Create a minimal Dockerfile:
 
 ```dockerfile
-// filepath: docker/project-a/Dockerfile
+# filepath:docker/project-a/Dockerfile
 FROM denoland/deno:latest
 
 WORKDIR /app
