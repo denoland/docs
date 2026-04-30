@@ -319,3 +319,67 @@ file, in the `compilerOptions.types` array:
 ```
 
 This will also augment the global scope with the `polyfilledAPI` function.
+
+## Configuring TypeScript compiler options
+
+Deno uses strict and modern TypeScript defaults out of the box, so most projects
+don't need any configuration. When you do need to customize compiler behavior,
+use the `compilerOptions` field in
+[`deno.json`](/runtime/fundamentals/configuration/):
+
+```json title="deno.json"
+{
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true
+  }
+}
+```
+
+See the
+[full list of supported compiler options](/runtime/reference/ts_config_migration/#ts-compiler-options).
+
+## Using `tsconfig.json` with Deno
+
+If you're migrating a Node.js + TypeScript project, your existing
+`tsconfig.json` files will work with Deno's type checker and LSP out of the box.
+Deno automatically discovers `tsconfig.json` files in workspace directories that
+contain a `deno.json` or `package.json`.
+
+```
+my-project/
+├── deno.json
+├── tsconfig.json       # ← discovered automatically
+├── src/
+│   └── main.ts
+└── packages/
+    └── lib/
+        ├── package.json
+        └── tsconfig.json  # ← also discovered
+```
+
+Deno supports the standard `tsconfig.json` fields: `extends`, `files`,
+`include`, `exclude`, `references`, and `compilerOptions`.
+
+:::note
+
+For Deno-first projects, prefer using `compilerOptions` in `deno.json` instead
+of a separate `tsconfig.json`. The `tsconfig.json` compatibility is primarily
+for migrating existing Node.js projects.
+
+:::
+
+### Precedence rules
+
+When both `deno.json` and `tsconfig.json` exist:
+
+1. `compilerOptions` in a parent `deno.json` take precedence over any
+   `tsconfig.json`.
+2. A `tsconfig.json` reference takes precedence over its referrer.
+3. For root references, a more deeply nested `tsconfig.json` takes precedence
+   (e.g. `foo/bar/tsconfig.json` over `foo/tsconfig.json`).
+
+For the full details on `tsconfig.json` compatibility, compiler options, and
+library configuration, see the
+[Configuring TypeScript](/runtime/reference/ts_config_migration/) reference.
