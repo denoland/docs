@@ -624,12 +624,17 @@ are semantically "development time" dependencies, like (`@types/*`), are often
 defined in `dependencies` in `package.json` files, which means they are
 installed for production even though they are not needed.
 
-Because of this, Deno uses a different approach for installing production only
-dependencies: when running `deno install`, you can pass a `--entrypoint` flag
-that causes Deno to install only the dependencies that are actually
-(transitively) imported by the specified entrypoint file. Because this is
-automatic, and works based on the actual code that is being executed, there is
-no need to specify development dependencies in a separate field.
+Deno offers two approaches for installing production-only dependencies:
+
+- **`deno install --prod`** — skips `devDependencies` from `package.json`. You
+  can also pass `--skip-types` to additionally exclude `@types/*` packages.
+- **`deno install --entrypoint`** — installs only the dependencies that are
+  actually (transitively) imported by the specified entrypoint file. When
+  combined with `--prod`, type-only dependencies are also excluded from the
+  module graph.
+
+See the [`deno install` reference](/runtime/reference/cli/install/) for more
+details.
 
 ## Using only cached modules
 

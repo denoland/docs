@@ -177,6 +177,50 @@ This combines the behavior of [`deno compile`](/runtime/reference/cli/compile/)
 with global installation — producing a native binary placed in the installation
 root (same as `--global` without `--compile`).
 
+### deno install --prod
+
+Use this command to install only production dependencies, skipping
+`devDependencies` from `package.json`.
+
+```sh
+deno install --prod
+```
+
+This is useful when deploying an application where development dependencies like
+test frameworks or build tools are not needed.
+
+The `--prod` flag conflicts with `--global` and `--dev`.
+
+#### --skip-types
+
+When combined with `--prod`, the `--skip-types` flag additionally skips
+`@types/*` packages from both `package.json` dependencies and `deno.json`
+imports:
+
+```sh
+deno install --prod --skip-types
+```
+
+:::caution
+
+The `--skip-types` flag identifies type packages by checking if the package name
+starts with `@types/`. This heuristic may not cover all type-only packages.
+
+:::
+
+#### --prod with --entrypoint
+
+When `--prod` is combined with `--entrypoint`, the module graph is built as
+"code only", which excludes type-only dependencies:
+
+```sh
+deno install --prod --entrypoint main.ts
+```
+
+This provides the most precise production install — only dependencies that are
+actually imported at runtime by the specified entrypoint (and its transitive
+imports) will be installed.
+
 ## Native Node.js addons
 
 A lot of popular packages npm packages like
