@@ -1,40 +1,25 @@
 ---
 last_modified: 2026-02-19
 title: "Set up your environment"
-description: "A guide to setting up your development environment for Deno. Learn how to configure popular editors like VS Code, set up language server support, and enable shell completions for better productivity."
+description: "A guide to setting up your development environment for Deno. Learn how to configure VS Code, JetBrains, and other editors with Deno's built-in language server."
 oldUrl: /runtime/manual/getting_started/setup_your_environment/
 ---
 
-Deno comes with many of the tools that are commonly needed for developing
-applications, including a full
-[language server (LSP)](/runtime/reference/cli/lsp/) to help power your IDE of
-choice. This page will help you set up your environment to get the most out of
-Deno while you are developing.
+Deno includes a full
+[language server (LSP)](/runtime/reference/cli/lsp/) that provides autocomplete,
+go-to-definition, diagnostics, formatting, and more in your editor.
 
-We'll cover:
+## Visual Studio Code
 
-- How to use Deno with your favorite editor/IDE
-- How to use Deno with AI coding assistants
-- How to generate shell completions
-
-## Setting up your editor/IDE
-
-### Visual Studio Code
-
-If you haven’t already, download and install Visual Studio Code from the
-[official website](https://code.visualstudio.com/).
-
-In the Extensions tab, search for "Deno" and install the
-[extension by Denoland](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno).
-
-Next, open the Command Palette by pressing `Ctrl+Shift+P` and type
-`Deno: Initialize Workspace Configuration`. Select this option to configure Deno
-for your workspace.
+1. Install the
+   [Deno extension](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
+   from the Extensions panel.
+2. Open the Command Palette (`Ctrl+Shift+P`) and run
+   **Deno: Initialize Workspace Configuration**.
 
 ![The VSCode command palette with the Deno: Initialize Workspace Configuration option selected.](./images/vscode-setup.png)
 
-A file called `.vscode/settings.json` will be created in your workspace with the
-following configuration:
+This creates a `.vscode/settings.json` with:
 
 ```json
 {
@@ -42,11 +27,21 @@ following configuration:
 }
 ```
 
-That’s it! You’ve successfully set up your developer environment for Deno using
-VSCode. You will now get all the benefits of Deno’s LSP, including IntelliSense,
-code formatting, linting, and more.
+You now have IntelliSense, formatting, linting, and more powered by Deno's LSP.
 
-### Skills for AI assistants
+## JetBrains IDEs
+
+Install the official Deno plugin: **File > Settings > Plugins**, search for
+"Deno".
+
+Then enable it: **File > Settings > Languages & Frameworks > JavaScript
+Runtime**, set **Preferred Runtime** to **Deno**.
+
+See the
+[JetBrains blog post](https://blog.jetbrains.com/webstorm/2020/06/deno-support-in-jetbrains-ides/)
+for more details.
+
+## Skills for AI assistants
 
 Deno provides official **skills** — specialized knowledge packs that give AI
 coding assistants (such as Claude, GitHub Copilot, Cursor, and others) accurate,
@@ -74,44 +69,18 @@ Available skills include:
 - **deno-expert** — advanced Deno patterns for code review and debugging
 - **deno-sandbox** — executing untrusted code safely with `@deno/sandbox`
 
-### JetBrains IDEs
+## Other editors
 
-To install the Deno Plugin, open your IDE and go to **File** > **Settings**.
-Navigate to **Plugins** and search for `Deno`. Install the official Deno plugin.
+<details>
+<summary>Vim / Neovim</summary>
 
-![The WebStorm plugins settings](./images/webstorm_setup.png)
+### Neovim 0.6+ (built-in LSP)
 
-To configure the Plugin, go to **File** > **Settings** again. Navigate to
-**Languages & Frameworks** > **JavaScript Runtime**. Switch **Preferred
-Runtime** to **Deno**. Under **Deno**, specify the path to the Deno executable
-(if it has not been auto-detected).
+Install [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) and enable
+the
+[Deno configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols).
 
-Check out
-[this blog post](https://blog.jetbrains.com/webstorm/2020/06/deno-support-in-jetbrains-ides/)
-to learn more about how to get started with Deno in Jetbrains IDEs.
-
-### Vim/Neovim via plugins
-
-Deno is well-supported on both [Vim](https://www.vim.org/) and
-[Neovim](https://neovim.io/) via
-[coc.nvim](https://github.com/neoclide/coc.nvim),
-[vim-easycomplete](https://github.com/jayli/vim-easycomplete),
-[ALE](https://github.com/dense-analysis/ale) and
-[vim-lsp](https://github.com/prabirshrestha/vim-lsp). coc.nvim offers plugins to
-integrate to the Deno language server while ALE supports it _out of the box_.
-
-### Neovim 0.6+ using the built-in language server
-
-To use the Deno language server install
-[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/) and follow the
-instructions to enable the
-[supplied Deno configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols).
-
-Note that if you also have `ts_ls` as an LSP client, you may run into issues
-where both `ts_ls` and `denols` are attached to your current buffer. To resolve
-this, make sure to set some unique `root_dir` for both `ts_ls` and `denols`. You
-may also need to set `single_file_support` to `false` for `ts_ls` to prevent it
-from running in `single file mode`. Here is an example of such a configuration:
+If you also use `ts_ls`, set separate `root_markers` to avoid conflicts:
 
 ```lua
 vim.lsp.config('denols', {
@@ -126,14 +95,10 @@ vim.lsp.config('ts_ls', {
 })
 ```
 
-For Deno, the example above assumes a `deno.json` or `deno.jsonc` file exists at
-the root of the project.
-
-##### Kickstart.nvim and Mason LSP
+#### Kickstart.nvim and Mason LSP
 
 If you are using [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)
-add the above configuration like this inside the servers table in your
-configuration `init.lua`.
+add the configuration inside the servers table in your `init.lua`:
 
 ```lua
 local servers = {
@@ -151,42 +116,26 @@ local servers = {
     }
 ```
 
-#### coc.nvim
+### coc.nvim
 
-Once you have
-[coc.nvim](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim)
-installed, you need to install the required
-[coc-deno](https://github.com/fannheyward/coc-deno) via `:CocInstall coc-deno`.
+Install [coc.nvim](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim),
+then run `:CocInstall coc-deno` and `:CocCommand deno.initializeWorkspace`.
 
-Once the plugin is installed, and you want to enable Deno for a workspace, run
-the command `:CocCommand deno.initializeWorkspace` and you should be able to
-utilize commands like `gd` (goto definition) and `gr` (go/find references).
+### ALE
 
-#### ALE
+[ALE](https://github.com/dense-analysis/ale) supports Deno out of the box. Run
+`:help ale-typescript-deno` for configuration options.
 
-ALE supports Deno via the Deno language server out of the box and in many uses
-cases doesn't require additional configuration. Once you have
-[ALE installed](https://github.com/dense-analysis/ale#installation) you can
-perform the command
-[`:help ale-typescript-deno`](https://github.com/dense-analysis/ale/blob/master/doc/ale-typescript.txt)
-to get information on the configuration options available.
+### Vim-EasyComplete
 
-For more information on how to setup ALE (like key bindings) refer to the
-[official documentation](https://github.com/dense-analysis/ale#usage).
+Install
+[vim-easycomplete](https://github.com/jayli/vim-easycomplete#installation), then
+run `:InstallLspServer deno`.
 
-#### Vim-EasyComplete
+### Vim-Lsp
 
-Vim-EasyComplete supports Deno without any other configuration. Once you have
-[vim-easycomplete installed](https://github.com/jayli/vim-easycomplete#installation),
-you need install deno via `:InstallLspServer deno` if you haven't installed
-deno. You can get more information from
-[official documentation](https://github.com/jayli/vim-easycomplete).
-
-#### Vim-Lsp
-
-After installing Vim-Lsp through
-[vim-plug](https://github.com/prabirshrestha/vim-lsp?tab=readme-ov-file#installing)
-or vim packages. Add this code to your `.vimrc` configuration:
+After installing [vim-lsp](https://github.com/prabirshrestha/vim-lsp), add to
+your `.vimrc`:
 
 ```vim
 if executable('deno')
@@ -205,32 +154,28 @@ if executable('deno')
 endif
 ```
 
-You will have two ways to enable the LSP Server. One is to have a `deno.json` or
-`deno.jsonc` in your current working directory, or force it with
-`DENO_ENABLE=1`. Also if you want to highlight syntax in the intellisense
-tooltip, you can add this code to your `.vimrc` configuration too:
+You can enable the LSP by having a `deno.json`/`deno.jsonc` in your working
+directory, or by setting `DENO_ENABLE=1`. For syntax highlighting in tooltips,
+add:
 
 ```vim
 let g:markdown_fenced_languages = ["ts=typescript"]
 ```
 
-### Emacs
+</details>
 
-#### lsp-mode
+<details>
+<summary>Emacs</summary>
 
-Emacs supports Deno via the Deno language server using
-[lsp-mode](https://emacs-lsp.github.io/lsp-mode/). Once
-[lsp-mode is installed](https://emacs-lsp.github.io/lsp-mode/page/installation/)
-it should support Deno, which can be
-[configured](https://emacs-lsp.github.io/lsp-mode/page/lsp-deno/) to support
-various settings.
+### lsp-mode
 
-#### eglot
+Install [lsp-mode](https://emacs-lsp.github.io/lsp-mode/page/installation/) —
+it supports Deno out of the box.
+[Configuration options](https://emacs-lsp.github.io/lsp-mode/page/lsp-deno/).
 
-You can also use built-in Deno language server by using
-[`eglot`](https://github.com/joaotavora/eglot).
+### eglot
 
-An example configuration for Deno via eglot:
+Use the built-in [`eglot`](https://github.com/joaotavora/eglot):
 
 ```elisp
 (add-to-list 'eglot-server-programs '((js-mode typescript-mode) . (eglot-deno "deno" "lsp")))
@@ -251,37 +196,17 @@ An example configuration for Deno via eglot:
             (:enabled t)))))
 ```
 
-This is the equivalent of having the following settings in a VSCode
-`settings.json`:
+</details>
 
-```jsonc
-{
-  "deno.enable": true,
-  "deno.unstable": true,
-  "typescript.inlayHints.variableTypes.enabled": true,
-  "typescript.inlayHints.parameterTypes.enabled": true
-}
-```
-
-### Pulsar
-
-The [Pulsar editor, formerly known as Atom](https://pulsar-edit.dev/) supports
-integrating with the Deno language server via the
-[atom-ide-deno](https://web.pulsar-edit.dev/packages/atom-ide-deno) package.
-`atom-ide-deno` requires that the Deno CLI be installed and the
-[atom-ide-base](https://web.pulsar-edit.dev/packages/atom-ide-base) package to
-be installed as well.
+<details>
+<summary>Sublime Text, Zed, Helix, Kakoune, Pulsar, Nova</summary>
 
 ### Sublime Text
 
-[Sublime Text](https://www.sublimetext.com/) supports connecting to the Deno
-language server via the [LSP package](https://packagecontrol.io/packages/LSP).
-You may also want to install the
-[TypeScript package](https://packagecontrol.io/packages/TypeScript) to get full
-syntax highlighting.
-
-Once you have the LSP package installed, you will want to add configuration to
-your `.sublime-project` configuration like the below:
+Install the [LSP package](https://packagecontrol.io/packages/LSP) and
+optionally the
+[TypeScript package](https://packagecontrol.io/packages/TypeScript). Add to your
+`.sublime-project`:
 
 ```jsonc
 {
@@ -290,9 +215,7 @@ your `.sublime-project` configuration like the below:
       "deno": {
         "command": ["deno", "lsp"],
         "initializationOptions": {
-          // "config": "", // Sets the path for the config file in your project
           "enable": true,
-          // "importMap": "", // Sets the path for the import-map in your project
           "lint": true,
           "unstable": false
         },
@@ -337,54 +260,15 @@ your `.sublime-project` configuration like the below:
 }
 ```
 
-### Nova
+### Zed
 
-The [Nova editor](https://nova.app) can integrate the Deno language server via
-the
-[Deno extension](https://extensions.panic.com/extensions/co.gwil/co.gwil.deno/).
-
-### GitHub Codespaces
-
-[GitHub Codespaces](https://github.com/features/codespaces) allows you to
-develop fully online or remotely on your local machine without needing to
-configure or install Deno.
-
-If a project is a Deno enabled project and contains the `.devcontainer`
-configuration as part of the repository, opening the project in GitHub
-Codespaces should just "work". If you are starting a new project, or you want to
-add Deno support to an existing code space, it can be added by selecting the
-`Codespaces: Add Development Container Configuration Files...` from the command
-pallet and then selecting `Show All Definitions...` and then searching for the
-`Deno` definition.
-
-Once selected, you will need to rebuild your container so that the Deno CLI is
-added to the container. After the container is rebuilt, the code space will
-support Deno.
-
-### Kakoune
-
-[Kakoune](https://kakoune.org/) supports connecting to the Deno language server
-via the [kak-lsp](https://github.com/kak-lsp/kak-lsp) client. Once
-[kak-lsp is installed](https://github.com/kak-lsp/kak-lsp#installation) an
-example of configuring it up to connect to the Deno language server is by adding
-the following to your `kak-lsp.toml`:
-
-```toml
-[language.typescript]
-filetypes = ["typescript", "javascript"]
-roots = [".git"]
-command = "deno"
-args = ["lsp"]
-[language.typescript.settings.deno]
-enable = true
-lint = true
-```
+Install the
+[Deno extension](https://zed.dev/extensions?query=deno&filter=language-servers)
+from the extensions panel.
 
 ### Helix
 
-[Helix](https://helix-editor.com) comes with built-in language server support.
-Enabling connection to the Deno language server requires changes in the
-`languages.toml` configuration file.
+Add to your `languages.toml`:
 
 ```toml
 [[language]]
@@ -407,60 +291,58 @@ args = ["lsp"]
 config.deno.enable = true
 ```
 
-### Zed
+### Kakoune
 
-The [Zed editor](https://zed.dev) can integrate the Deno language server via the
-[Deno extension](https://zed.dev/extensions?query=deno&filter=language-servers).
+Install [kak-lsp](https://github.com/kak-lsp/kak-lsp) and add to your
+`kak-lsp.toml`:
+
+```toml
+[language.typescript]
+filetypes = ["typescript", "javascript"]
+roots = [".git"]
+command = "deno"
+args = ["lsp"]
+[language.typescript.settings.deno]
+enable = true
+lint = true
+```
+
+### Pulsar
+
+Install
+[atom-ide-deno](https://web.pulsar-edit.dev/packages/atom-ide-deno) and
+[atom-ide-base](https://web.pulsar-edit.dev/packages/atom-ide-base).
+
+### Nova
+
+Install the
+[Deno extension](https://extensions.panic.com/extensions/co.gwil/co.gwil.deno/).
+
+</details>
+
+<details>
+<summary>GitHub Codespaces</summary>
+
+If the repository contains `.devcontainer` configuration, Deno will work
+automatically. Otherwise, add the Deno dev container by selecting
+**Codespaces: Add Development Container Configuration Files...** from the
+command palette, then **Show All Definitions...**, and search for **Deno**.
+Rebuild the container after selecting it.
+
+</details>
 
 ## Shell completions
 
-Built into the Deno CLI is support to generate shell completion information for
-the CLI itself. By using `deno completions <shell>`, the Deno CLI will output to
-stdout the completions. Current shells that are supported:
-
-- bash
-- elvish
-- fish
-- powershell
-- zsh
-
-### bash example
-
-Output the completions and add them to the environment:
+Generate shell completions for the Deno CLI:
 
 ```shell
-> deno completions bash > /usr/local/etc/bash_completion.d/deno.bash
-> source /usr/local/etc/bash_completion.d/deno.bash
+deno completions bash > /usr/local/etc/bash_completion.d/deno.bash
+deno completions zsh > ~/.zsh/_deno
+deno completions fish > ~/.config/fish/completions/deno.fish
+deno completions powershell >> $profile
 ```
 
-### PowerShell example
-
-Output the completions:
-
-```shell
-> deno completions powershell >> $profile
-> .$profile
-```
-
-This will create a Powershell profile at
-`$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`, and it
-will be run whenever you launch the PowerShell.
-
-### zsh example
-
-You should have a directory where the completions can be saved:
-
-```shell
-> mkdir ~/.zsh
-```
-
-Then output the completions:
-
-```shell
-> deno completions zsh > ~/.zsh/_deno
-```
-
-And ensure the completions get loaded in your `~/.zshrc`:
+For zsh, ensure the completions directory is in your `fpath` in `~/.zshrc`:
 
 ```shell
 fpath=(~/.zsh $fpath)
@@ -468,47 +350,17 @@ autoload -Uz compinit
 compinit -u
 ```
 
-If after reloading your shell and completions are still not loading, you may
-need to remove `~/.zcompdump/` to remove previously generated completions and
-then `compinit` to generate them again.
+### Dynamic completions
 
-### zsh example with ohmyzsh and antigen
-
-[ohmyzsh](https://github.com/ohmyzsh/ohmyzsh) is a configuration framework for
-zsh and can make it easier to manage your shell configuration.
-[antigen](https://github.com/zsh-users/antigen) is a plugin manager for zsh.
-
-Create the directory to store the completions and output the completions:
+Use the `--dynamic` flag to enable completions that are context-aware, such as
+listing available tasks for `deno task`:
 
 ```shell
-> mkdir ~/.oh-my-zsh/custom/plugins/deno
-> deno completions zsh > ~/.oh-my-zsh/custom/plugins/deno/_deno
+deno completions --dynamic bash > /usr/local/etc/bash_completion.d/deno.bash
+deno completions --dynamic zsh > ~/.zsh/_deno
+deno completions --dynamic fish > ~/.config/fish/completions/deno.fish
+deno completions --dynamic powershell >> $profile
 ```
 
-Then your `.zshrc` might look something like this:
-
-```shell
-source /path-to-antigen/antigen.zsh
-
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
-
-antigen bundle deno
-```
-
-### fish example
-
-Output the completions to a `deno.fish` file into the completions directory in
-the fish config folder:
-
-```shell
-> deno completions fish > ~/.config/fish/completions/deno.fish
-```
-
-## Other tools
-
-If you are writing or supporting a community integration using the Deno language
-server, read more about
-[integrating with the Deno LSP](/runtime/reference/lsp_integration/), but also
-feel free to join our [Discord community](https://discord.gg/deno) in the
-`#dev-lsp` channel.
+With dynamic completions, typing `deno task <TAB>` will suggest the task names
+from your project's `deno.json`.
