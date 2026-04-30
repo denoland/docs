@@ -1,9 +1,6 @@
 ---
 last_modified: 2026-04-24
 title: "deno desktop"
-command: desktop
-openGraphLayout: "/open_graph/cli-commands.jsx"
-openGraphTitle: "deno desktop"
 description: "Build self-contained desktop applications from a Deno project"
 ---
 
