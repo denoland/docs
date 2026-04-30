@@ -76,8 +76,8 @@ Rust and want a unified codebase, Dioxus is a good pick.
 
 ## What `deno desktop` doesn't have yet
 
-These are documented in [`notion.md`](https://github.com/denoland/deno) and on
-the relevant pages of this section, but worth listing in one place:
+These are documented on the relevant pages of this section, but worth listing in
+one place:
 
 - **Code-signing and notarization** as a flag (`--sign`).
 - **Windows MSI** and **Linux `.deb` / `.rpm`** installer outputs.
