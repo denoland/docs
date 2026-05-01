@@ -494,28 +494,49 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
 Starting in Deno 2.8, the
 [`OffscreenCanvas`](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
 API is available. `OffscreenCanvas` is a canvas that lives outside any DOM and
-can be used in any context — including Web Workers — for off-thread rendering
-and image generation.
+can be used anywhere — including Web Workers — for off-thread rendering and
+image generation.
+
+### Supported rendering contexts
+
+`OffscreenCanvas#getContext` accepts two of the spec-defined context ids:
+
+- `"bitmaprenderer"` — returns an
+  [`ImageBitmapRenderingContext`](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext)
+  for displaying an `ImageBitmap` produced via `createImageBitmap`.
+- `"webgpu"` — returns a
+  [`GPUCanvasContext`](https://developer.mozilla.org/en-US/docs/Web/API/GPUCanvasContext)
+  for rendering with WebGPU.
+
+Calling `getContext` with `"2d"`, `"webgl"`, or `"webgl2"` returns `null` —
+these contexts are not implemented in Deno.
+
+### Example: encoding an image to PNG
+
+Decode an image into an `ImageBitmap`, place it on an `OffscreenCanvas` via
+the `bitmaprenderer` context, and write the result to disk:
 
 ```ts
-const canvas = new OffscreenCanvas(256, 256);
-const ctx = canvas.getContext("2d");
-ctx.fillStyle = "tomato";
-ctx.fillRect(0, 0, 256, 256);
+const data = await Deno.readFile("./input.jpg");
+const bitmap = await createImageBitmap(new Blob([data]));
 
-// Encode to PNG / JPEG / WebP via convertToBlob()
+const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+const ctx = canvas.getContext("bitmaprenderer")!;
+ctx.transferFromImageBitmap(bitmap);
+
 const blob = await canvas.convertToBlob({ type: "image/png" });
-await Deno.writeFile("./tile.png", new Uint8Array(await blob.arrayBuffer()));
+await Deno.writeFile(
+  "./output.png",
+  new Uint8Array(await blob.arrayBuffer()),
+);
 ```
 
 Typical uses:
 
-- generating images server-side without spinning up a headless browser,
-- running 2D drawing code originally written for the browser inside a Web
-  Worker,
-- producing thumbnails or social-card images at request time.
-
-WebGL / WebGPU rendering contexts on `OffscreenCanvas` are not yet supported.
+- producing thumbnails, format conversions, or social-card images at request
+  time without spinning up a headless browser,
+- running off-thread image work inside a Web Worker,
+- driving WebGPU rendering targets that don't need a window.
 
 ## Deviations of other APIs from spec
 
