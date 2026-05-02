@@ -99,8 +99,8 @@ comes with a hit to performance. Users can enable stack traces with the
 Deno can also generate an audit log of all accessed permissions, regardless of
 whether the access was allowed or denied.
 
-Set `DENO_AUDIT_PERMISSIONS` to a **file path** to write JSONL — each line is
-an object with the following keys:
+Set `DENO_AUDIT_PERMISSIONS` to a **file path** to write JSONL — each line is an
+object with the following keys:
 
 - `v`: the version of the format
 - `datetime`: when the permission was accessed, in RFC 3339 format
@@ -115,11 +115,10 @@ In addition, this env var can be combined with the above-mentioned
 `DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
 which is an array containing all the stack trace frames.
 
-You can also set `DENO_AUDIT_PERMISSIONS=otel` to emit
-each access as an OpenTelemetry **log record** instead of writing to a file.
-The records are sent to whichever exporter you have configured via
-[`OTEL_DENO`](/runtime/fundamentals/open_telemetry/) and carry these
-attributes:
+You can also set `DENO_AUDIT_PERMISSIONS=otel` to emit each access as an
+OpenTelemetry **log record** instead of writing to a file. The records are sent
+to whichever exporter you have configured via
+[`OTEL_DENO`](/runtime/fundamentals/open_telemetry/) and carry these attributes:
 
 - `deno.permission.type`
 - `deno.permission.value`
