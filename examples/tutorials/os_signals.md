@@ -82,9 +82,9 @@ deno run signal_listeners.ts
 The supported signal set differs between platforms. The Windows-specific
 behavior is:
 
-| Use case                         | Supported signals on Windows                              |
-| -------------------------------- | --------------------------------------------------------- |
-| `Deno.addSignalListener(sig, …)` | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`                |
+| Use case                         | Supported signals on Windows                                                                                 |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Deno.addSignalListener(sig, …)` | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`                                                                   |
 | `Deno.kill(pid, sig)`            | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`, `SIGKILL`, `SIGABRT`, plus signal `0` for a process-health check |
 
 `SIGKILL` and `SIGABRT` are deliberately **not** registerable via
