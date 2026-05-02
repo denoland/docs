@@ -627,6 +627,56 @@ Running the above command, with a `--node-modules-dir` flag, will create a
 `node_modules` folder in the current directory with a similar folder structure
 to npm.
 
+### node_modules layout: isolated vs hoisted
+
+When a local `node_modules` directory exists, Deno can lay it out in two ways.
+The default — **isolated** — installs each package into a content-addressed
+`.deno/` directory and exposes it through a symlink, so every package only sees
+its declared dependencies. This is similar to pnpm's layout.
+
+```text
+node_modules/
+├── .deno/chalk@5.6.2/node_modules/chalk/   ← real files
+└── chalk -> .deno/chalk@5.6.2/node_modules/chalk
+```
+
+Some npm tooling — and any package that walks `node_modules` looking for
+flat-resolved siblings — assumes the **hoisted** layout that npm and Yarn
+classic use. Deno 2.8 adds a hoisted mode
+([denoland/deno#32788](https://github.com/denoland/deno/pull/32788)) you can opt
+into with `nodeModulesLinker` in `deno.json`:
+
+```json title="deno.json"
+{
+  "nodeModulesDir": "auto",
+  "nodeModulesLinker": "hoisted"
+}
+```
+
+Or as a one-off CLI flag:
+
+```sh
+deno install --node-modules-linker=hoisted
+```
+
+In hoisted mode the most-depended-upon version of each package is placed at the
+top of `node_modules/`; conflicting versions are nested under the dependent that
+needs them, just like npm:
+
+```text
+node_modules/
+├── chalk/         ← real files
+├── express/
+├── ms/            ← hoisted: most commonly needed version
+└── debug/
+    └── node_modules/
+        └── ms/    ← nested: a different version
+```
+
+Stick with the default isolated mode unless a tool you depend on requires the
+hoisted layout — isolated mode catches phantom dependencies that hoisted layouts
+hide.
+
 ## Node-API addons
 
 Summary: Node-API addons work in Deno when a local `node_modules/` is present
