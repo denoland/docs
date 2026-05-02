@@ -513,8 +513,8 @@ these contexts are not implemented in Deno.
 
 ### Example: encoding an image to PNG
 
-Decode an image into an `ImageBitmap`, place it on an `OffscreenCanvas` via
-the `bitmaprenderer` context, and write the result to disk:
+Decode an image into an `ImageBitmap`, place it on an `OffscreenCanvas` via the
+`bitmaprenderer` context, and write the result to disk:
 
 ```ts
 const data = await Deno.readFile("./input.jpg");
