@@ -116,9 +116,8 @@ files.
 
 ### Configuring `include` / `exclude` in `deno.json`
 
-Starting in Deno 2.8, the `--include` and `--exclude` paths can be set
-declaratively in `deno.json` so you don't have to repeat them on every
-`deno compile` invocation:
+The `--include` and `--exclude` paths can be set declaratively in `deno.json`
+so you don't have to repeat them on every `deno compile` invocation:
 
 ```jsonc title="deno.json"
 {

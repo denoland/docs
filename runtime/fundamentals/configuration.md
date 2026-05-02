@@ -742,9 +742,8 @@ If you're ok with this risk, then this feature will be useful for you.
 
 The `"compile"` block configures
 [`deno compile`](/runtime/reference/cli/compile/) without requiring you to
-repeat flags on every invocation. Starting in Deno 2.8 you can declare which
-extra files or directories to bundle into the executable, and which paths to
-exclude:
+repeat flags on every invocation. You can declare which extra files or
+directories to bundle into the executable, and which paths to exclude:
 
 ```jsonc title="deno.json"
 {
