@@ -144,9 +144,9 @@ all files    |   80.0   |  90.5  |    83.3
 ----------------------------------
 ```
 
-Function coverage measures the percentage of declared functions that were
-called at least once during the test run. The same data is also available in
-the `lcov` output.
+Function coverage measures the percentage of declared functions that were called
+at least once during the test run. The same data is also available in the `lcov`
+output.
 
 ## Output Formats
 
