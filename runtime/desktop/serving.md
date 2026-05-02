@@ -5,8 +5,9 @@ description: "How Deno.serve() works inside a desktop app — automatic port bin
 
 A `deno desktop` app serves its UI over local HTTP and points the embedded
 webview at it. This keeps the app structure identical to a normal Deno website —
-`Deno.serve()` is the entry point, every request flows through your handler —
-but with no port to manage and no remote network exposure.
+[`Deno.serve()`](/api/deno/~/Deno.serve) is the entry point, every request flows
+through your handler — but with no port to manage and no remote network
+exposure.
 
 ## How it works
 
@@ -81,8 +82,9 @@ through tokio channels.
 ## Network exposure
 
 The bound address is **always** `127.0.0.1` (or `[::1]`). The compiled binary
-never binds to a public interface, even if you pass `0.0.0.0` to `Deno.serve()`.
-Other apps and other users on the same machine cannot reach your server.
+never binds to a public interface, even if you pass `0.0.0.0` to
+[`Deno.serve()`](/api/deno/~/Deno.serve). Other apps and other users on the same
+machine cannot reach your server.
 
 If you need to serve users on other machines (a self-hosted local server), do
 not use `deno desktop` for that part of your stack — use `deno run` with an
@@ -90,9 +92,10 @@ explicit address, or build a separate service.
 
 ## Custom port behavior
 
-You cannot override the port `Deno.serve()` binds to inside `deno desktop`. This
-is intentional — the webview needs to navigate to the same port the runtime is
-listening on, and the runtime is the source of truth for that value.
+You cannot override the port [`Deno.serve()`](/api/deno/~/Deno.serve) binds to
+inside `deno desktop`. This is intentional — the webview needs to navigate to
+the same port the runtime is listening on, and the runtime is the source of
+truth for that value.
 
 If you need to know the URL inside your handler:
 

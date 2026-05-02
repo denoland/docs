@@ -34,8 +34,8 @@ match wins.
 | Vite (SSR mode) | `vite.config.*` plus a `server.{js,ts,mjs}` entry        |
 
 If none match, `deno desktop` falls back to treating the path as a script — the
-same as `deno desktop main.ts`. You write a `Deno.serve()` handler and serve
-your own UI.
+same as `deno desktop main.ts`. You write a
+[`Deno.serve()`](/api/deno/~/Deno.serve) handler and serve your own UI.
 
 ## What detection does
 
@@ -48,8 +48,9 @@ When a framework is detected, the CLI:
 3. **Self-extracts the VFS at runtime** so framework code finds its build output
    relative to its own working directory — Next.js looks under `.next/`, Astro
    under `dist/`, and so on.
-4. **Runs the framework server** as your `Deno.serve()` handler. The webview
-   navigates to the bound port like any other desktop app.
+4. **Runs the framework server** as your
+   [`Deno.serve()`](/api/deno/~/Deno.serve) handler. The webview navigates to
+   the bound port like any other desktop app.
 
 You should still build your project before running `deno desktop` —
 `deno
@@ -127,7 +128,8 @@ falling back to `.output/server/index.{ts,mjs}` (the Node adapter's output).
 Dev: Vite dev server.
 
 If you use a different adapter (`@sveltejs/adapter-static`, etc.), serve the
-output directory yourself with `Deno.serve()` instead of relying on detection.
+output directory yourself with [`Deno.serve()`](/api/deno/~/Deno.serve) instead
+of relying on detection.
 
 ### SolidStart and TanStack Start
 

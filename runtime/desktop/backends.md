@@ -53,8 +53,9 @@ deno desktop --backend raw main.ts
 ```
 
 **Winit-based, no web engine.** Provides window management, input events,
-clipboard, and the native API surface — but no webview, no `Deno.serve()`
-auto-binding, no `bindings.<name>()` proxy.
+clipboard, and the native API surface — but no webview, no
+[`Deno.serve()`](/api/deno/~/Deno.serve) auto-binding, no `bindings.<name>()`
+proxy.
 
 Useful for apps that draw their own UI (WebGPU, Skia, custom rendering) or as a
 foundation for non-web desktop programs.

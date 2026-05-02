@@ -9,8 +9,9 @@ binary bundles your code, the Deno runtime, and a rendering backend (Chromium,
 the OS webview, or a raw windowing system) into one redistributable executable.
 
 For an in-depth guide — backends, framework auto-detection, the
-`Deno.BrowserWindow` API, auto-update, DevTools, distribution, and more — see
-the [Desktop apps section](/runtime/desktop/).
+[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) API, auto-update,
+DevTools, distribution, and more — see the
+[Desktop apps section](/runtime/desktop/).
 
 ```sh
 deno desktop main.ts

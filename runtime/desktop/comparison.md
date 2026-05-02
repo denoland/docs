@@ -82,8 +82,10 @@ one place:
 - **Code-signing and notarization** as a flag (`--sign`).
 - **Windows MSI** and **Linux `.deb` / `.rpm`** installer outputs.
 - **iOS / Android** targets.
-- **Native `Deno.notifications`, `Deno.clipboard`, `Deno.secureStorage`** APIs
-  (use the Web equivalents from the webview side until they land).
+- **Native [`Deno.notifications`](/api/deno/~/Deno.notifications),
+  [`Deno.clipboard`](/api/deno/~/Deno.clipboard),
+  [`Deno.secureStorage`](/api/deno/~/Deno.secureStorage)** APIs (use the Web
+  equivalents from the webview side until they land).
 - **Runtime permissions for desktop apps** (a permission prompt on every
   filesystem / network access — Deno's permission system applied to desktop
   sandboxing).

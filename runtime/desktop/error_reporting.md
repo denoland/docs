@@ -47,15 +47,15 @@ sent.
 }
 ```
 
-| Field        | Type                               | Notes                                              |
-| ------------ | ---------------------------------- | -------------------------------------------------- |
-| `version`    | `1`                                | Schema version. Check this on the server side.     |
-| `message`    | `string`                           | The error's `message`.                             |
-| `stack`      | `string`                           | The error's `stack`. Source-mapped where possible. |
-| `appVersion` | `string \| null`                   | `Deno.desktopVersion` at the time of the error.    |
-| `timestamp`  | ISO 8601 string                    | UTC timestamp of when the error was caught.        |
-| `platform`   | `"darwin" \| "windows" \| "linux"` | `Deno.build.os`.                                   |
-| `arch`       | string                             | `Deno.build.arch`.                                 |
+| Field        | Type                               | Notes                                                                              |
+| ------------ | ---------------------------------- | ---------------------------------------------------------------------------------- |
+| `version`    | `1`                                | Schema version. Check this on the server side.                                     |
+| `message`    | `string`                           | The error's `message`.                                                             |
+| `stack`      | `string`                           | The error's `stack`. Source-mapped where possible.                                 |
+| `appVersion` | `string \| null`                   | [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion) at the time of the error. |
+| `timestamp`  | ISO 8601 string                    | UTC timestamp of when the error was caught.                                        |
+| `platform`   | `"darwin" \| "windows" \| "linux"` | [`Deno.build.os`](/api/deno/~/Deno.build.os).                                      |
+| `arch`       | string                             | [`Deno.build.arch`](/api/deno/~/Deno.build.arch).                                  |
 
 The `Content-Type` header is `application/json`. Reports are sent as a single
 POST with no retry — if your server is down, the report is lost. For
@@ -129,7 +129,8 @@ in error messages (filenames, URLs, query parameters, serialized object fields).
 If your app handles sensitive data, consider:
 
 - Stripping arguments from stack frames before sending.
-- Redacting URLs of `Deno.readTextFile` calls and similar.
+- Redacting URLs of [`Deno.readTextFile`](/api/deno/~/Deno.readTextFile) calls
+  and similar.
 - Asking the user before sending the first report (a one-time consent prompt).
 
 These are app-level decisions; the runtime sends what it has. To filter,

@@ -120,9 +120,9 @@ Removes the binding. Subsequent `bindings.readSettings()` calls reject.
 ## Permissions
 
 Bindings run inside the Deno runtime, so they inherit the process's permissions.
-A binding that calls `Deno.readTextFile` requires `--allow-read` to have been
-granted at startup. The webview cannot escalate the runtime's permissions
-through bindings.
+A binding that calls [`Deno.readTextFile`](/api/deno/~/Deno.readTextFile)
+requires `--allow-read` to have been granted at startup. The webview cannot
+escalate the runtime's permissions through bindings.
 
 For desktop apps you typically run with broad permissions baked into the
 compiled binary (`deno desktop` does not currently enforce a separate permission

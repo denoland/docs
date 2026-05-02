@@ -10,10 +10,10 @@ deno desktop --hmr .
 `--hmr` enables hot module replacement during development. The mode is selected
 automatically based on what your project looks like:
 
-| Project type                      | HMR mechanism                              |
-| --------------------------------- | ------------------------------------------ |
-| Detected framework (Next.js etc.) | The framework's own dev server.            |
-| Plain `Deno.serve()` script       | File watcher + `Debugger.setScriptSource`. |
+| Project type                                          | HMR mechanism                              |
+| ----------------------------------------------------- | ------------------------------------------ |
+| Detected framework (Next.js etc.)                     | The framework's own dev server.            |
+| Plain [`Deno.serve()`](/api/deno/~/Deno.serve) script | File watcher + `Debugger.setScriptSource`. |
 
 In both modes the Deno runtime and the rendering backend (CEF, WebView, …) stay
 alive across changes. There is no full restart, no webview teardown, no
@@ -107,8 +107,8 @@ two coexist:
 
 - A change to a React component file → browser HMR applies it inside the
   webview.
-- A change to your `Deno.serve()` handler or a binding implementation →
-  Deno-side HMR applies it inside the runtime.
+- A change to your [`Deno.serve()`](/api/deno/~/Deno.serve) handler or a binding
+  implementation → Deno-side HMR applies it inside the runtime.
 
 You almost never need to think about the split — both happen on save.
 
