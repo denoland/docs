@@ -8,9 +8,8 @@ oldUrl:
   - /runtime/tutorials/os_signals/
 ---
 
-> ⚠️ Windows supports listening for SIGINT and SIGBREAK starting in Deno 1.23,
-> and additionally SIGTERM and SIGQUIT starting in Deno 2.8 (via libuv's
-> Windows signal emulation).
+> ⚠️ Windows supports listening for `SIGINT`, `SIGBREAK`, `SIGTERM`, and
+> `SIGQUIT` (the latter two via libuv's Windows signal emulation).
 
 ## Concepts
 
@@ -80,8 +79,8 @@ deno run signal_listeners.ts
 
 ## Windows support
 
-The supported signal set differs between platforms. As of Deno 2.8 the
-Windows-specific behavior is:
+The supported signal set differs between platforms. The Windows-specific
+behavior is:
 
 | Use case                         | Supported signals on Windows                              |
 | -------------------------------- | --------------------------------------------------------- |
