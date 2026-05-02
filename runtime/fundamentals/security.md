@@ -115,7 +115,7 @@ In addition, this env var can be combined with the above-mentioned
 `DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
 which is an array containing all the stack trace frames.
 
-Starting in Deno 2.8 you can also set `DENO_AUDIT_PERMISSIONS=otel` to emit
+You can also set `DENO_AUDIT_PERMISSIONS=otel` to emit
 each access as an OpenTelemetry **log record** instead of writing to a file.
 The records are sent to whichever exporter you have configured via
 [`OTEL_DENO`](/runtime/fundamentals/open_telemetry/) and carry these
