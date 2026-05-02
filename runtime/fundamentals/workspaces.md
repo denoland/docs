@@ -660,6 +660,113 @@ This approach allows you to:
 3. Test and develop interdependent modules together
 4. Gradually migrate monolithic codebases to modular architecture
 
+## Centralized dependency versions with `catalog:`
+
+When several workspace members depend on the same npm package, keeping their
+versions in sync usually means editing every `package.json` (or `deno.json`)
+whenever you bump a version. The `catalog:` protocol — added in Deno 2.8 and
+compatible with the equivalent feature in pnpm, Bun, and Yarn — lets the
+workspace root declare a single version requirement, and members reference it by
+name.
+
+Define a catalog in the root `deno.json`:
+
+```jsonc title="deno.json"
+{
+  "workspace": ["./packages/a", "./packages/b"],
+  "catalog": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "chalk": "^5.3.0"
+  }
+}
+```
+
+A member references the entry with `catalog:` (the default catalog):
+
+```json title="packages/a/package.json"
+{
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  }
+}
+```
+
+To bump everyone to a new React version, edit the catalog once.
+
+### Named catalogs
+
+Use the plural `catalogs` field when different members need different versions
+of the same package — for example, while migrating between major versions:
+
+```jsonc title="deno.json"
+{
+  "workspace": ["./packages/a", "./packages/b"],
+  "catalogs": {
+    "react18": {
+      "react": "^18.3.0",
+      "react-dom": "^18.3.0"
+    },
+    "react19": {
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    }
+  }
+}
+```
+
+Members select a catalog by name:
+
+```json title="packages/a/package.json"
+{
+  "dependencies": {
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18"
+  }
+}
+```
+
+```json title="packages/b/package.json"
+{
+  "dependencies": {
+    "react": "catalog:react19",
+    "react-dom": "catalog:react19"
+  }
+}
+```
+
+`catalog:` (with no name) and `catalog:default` are equivalent and resolve to
+the singular `catalog` field.
+
+### Catalogs in `package.json`
+
+Catalogs can also live in the root `package.json`, which keeps configuration
+together for projects that haven't moved to `deno.json`:
+
+```json title="package.json"
+{
+  "catalog": {
+    "react": "^19.0.0"
+  },
+  "catalogs": {
+    "testing": {
+      "vitest": "^2.0.0"
+    }
+  }
+}
+```
+
+If both `deno.json` and `package.json` define catalogs at the workspace root,
+`package.json` wins entirely — the two are not merged.
+
+### Restrictions
+
+- Catalogs are root-only. Defining `catalog` or `catalogs` inside a workspace
+  member emits a diagnostic.
+- Members must reference a catalog name that exists. A missing entry produces a
+  resolution error during install or run.
+
 ## Using workspace protocol in package.json
 
 Deno supports workspace protocol specifiers in `package.json` files. These are
