@@ -130,8 +130,8 @@ console.log("This line is not ignored");
 
 ## Function coverage
 
-Starting in Deno 2.8, the summary table and the HTML report include a
-**function coverage** column alongside the existing branch and line columns:
+The summary table and the HTML report include a **function coverage** column
+alongside the branch and line columns:
 
 ```
 ----------------------------------
@@ -145,8 +145,8 @@ all files    |   80.0   |  90.5  |    83.3
 ```
 
 Function coverage measures the percentage of declared functions that were
-called at least once during the test run. The same data was already written
-to `lcov` output — Deno 2.8 just surfaces it in the human-readable reporters.
+called at least once during the test run. The same data is also available in
+the `lcov` output.
 
 ## Output Formats
 
