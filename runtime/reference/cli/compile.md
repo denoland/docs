@@ -114,6 +114,23 @@ const dataFiles = Deno.readDirSync(import.meta.dirname + "/data");
 Note this currently only works for files on the file system and not remote
 files.
 
+### Configuring `include` / `exclude` in `deno.json`
+
+The `--include` and `--exclude` paths can be set declaratively in `deno.json` so
+you don't have to repeat them on every `deno compile` invocation:
+
+```jsonc title="deno.json"
+{
+  "compile": {
+    "include": ["names.csv", "data", "worker.ts"],
+    "exclude": ["data/secrets", "**/*.test.ts"]
+  }
+}
+```
+
+CLI flags are merged with the config: `--include` and `--exclude` add to the
+lists in `deno.json` rather than replacing them.
+
 ## Workers
 
 Similarly to non-statically analyzable dynamic imports, code for
