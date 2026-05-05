@@ -494,8 +494,8 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
 Starting in Deno 2.8, the
 [`OffscreenCanvas`](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
 API is available. `OffscreenCanvas` is a canvas that lives outside any DOM and
-can be used anywhere (including Web Workers) for off-thread rendering and
-image generation.
+can be used anywhere (including Web Workers) for off-thread rendering and image
+generation.
 
 ### Supported rendering contexts
 
@@ -508,8 +508,8 @@ image generation.
   [`GPUCanvasContext`](https://developer.mozilla.org/en-US/docs/Web/API/GPUCanvasContext)
   for rendering with WebGPU.
 
-Calling `getContext` with `"2d"`, `"webgl"`, or `"webgl2"` returns `null`;
-these contexts are not implemented in Deno.
+Calling `getContext` with `"2d"`, `"webgl"`, or `"webgl2"` returns `null`; these
+contexts are not implemented in Deno.
 
 ### Example: encoding an image to PNG
 
