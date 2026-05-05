@@ -181,6 +181,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/outdated/",
           },
           {
+            title: "deno pack",
+            href: "/runtime/reference/cli/pack/",
+          },
+          {
             title: "deno publish",
             href: "/runtime/reference/cli/publish/",
           },
