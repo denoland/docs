@@ -96,10 +96,11 @@ By default, Deno will not generate a stack trace for permission requests as it
 comes with a hit to performance. Users can enable stack traces with the
 `DENO_TRACE_PERMISSIONS` environment variable to `1`.
 
-Deno can also generate an audit log of all accessed permissions; this can be
-achieved using the `DENO_AUDIT_PERMISSIONS` environment variable to a path. This
-works regardless if permissions are allowed or not. The output is in JSONL
-format, where each line is an object with the following keys:
+Deno can also generate an audit log of all accessed permissions, regardless of
+whether the access was allowed or denied.
+
+Set `DENO_AUDIT_PERMISSIONS` to a **file path** to write JSONL — each line is an
+object with the following keys:
 
 - `v`: the version of the format
 - `datetime`: when the permission was accessed, in RFC 3339 format
@@ -112,7 +113,24 @@ A schema for this can be found in
 
 In addition, this env var can be combined with the above-mentioned
 `DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
-which is an array contain all the stack trace frames.
+which is an array containing all the stack trace frames.
+
+You can also set `DENO_AUDIT_PERMISSIONS=otel` to emit each access as an
+OpenTelemetry **log record** instead of writing to a file. The records are sent
+to whichever exporter you have configured via
+[`OTEL_DENO`](/runtime/fundamentals/open_telemetry/) and carry these attributes:
+
+- `deno.permission.type`
+- `deno.permission.value`
+- `deno.permission.stack` (if `DENO_TRACE_PERMISSIONS` is also set)
+
+This is the recommended setup if you already collect OpenTelemetry data — the
+permission audit lands next to your traces and metrics so you can correlate it
+with request handling.
+
+```sh
+OTEL_DENO=true DENO_AUDIT_PERMISSIONS=otel deno run -A main.ts
+```
 
 ### Configuration file
 
