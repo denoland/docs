@@ -569,6 +569,16 @@ export async function sendEmail(to: string) {
 The test runner offers several sanitizers to ensure that the test behaves in a
 reasonable and expected way.
 
+:::info Default change in Deno 2.8
+
+Starting in Deno 2.8, the **resource** and **async operation** sanitizers are
+**off by default**. Most users found that leaked-resource and leaked-op errors
+fired more often than they were useful. The exit sanitizer is still on by
+default. See [Enabling sanitizers globally](#enabling-sanitizers-globally)
+below for how to opt back in.
+
+:::
+
 ### Resource sanitizer
 
 The resource sanitizer ensures that all I/O resources created during a test are
@@ -603,16 +613,18 @@ const response = await fetch("https://example.com");
 await response.body?.cancel(); // <- Always cancel the body when you are done with it, if you didn't consume it otherwise
 ```
 
-This sanitizer is enabled by default, but can be disabled in this test with
-`sanitizeResources: false`:
+As of Deno 2.8 this sanitizer is **off by default**. Opt in with
+`sanitizeResources: true`, or with one of the global mechanisms described in
+[Enabling sanitizers globally](#enabling-sanitizers-globally).
 
 ```ts
 Deno.test({
-  name: "leaky resource test",
+  name: "no leaks allowed",
   async fn() {
-    await Deno.open("hello.txt");
+    using file = await Deno.open("hello.txt");
+    // ...
   },
-  sanitizeResources: false,
+  sanitizeResources: true,
 });
 ```
 
@@ -635,21 +647,59 @@ Deno.test({
 });
 ```
 
-This sanitizer is enabled by default, but can be disabled with
-`sanitizeOps: false`:
+As of Deno 2.8 this sanitizer is **off by default**. Opt in with
+`sanitizeOps: true`, or with one of the global mechanisms described below.
 
 ```ts
 Deno.test({
-  name: "leaky operation test",
-  fn() {
-    crypto.subtle.digest(
-      "SHA-256",
-      new TextEncoder().encode("a".repeat(100000000)),
-    );
+  name: "no leaked ops allowed",
+  async fn() {
+    await someAsyncWork();
   },
-  sanitizeOps: false,
+  sanitizeOps: true,
 });
 ```
+
+### Enabling sanitizers globally
+
+If you want the pre-2.8 behavior — resource and op sanitizers on for every test
+— you can re-enable them at any of four scopes. Higher-precedence settings
+override lower ones.
+
+1. **Per-test** (highest precedence):
+
+   ```ts
+   Deno.test({
+     name: "strict",
+     sanitizeOps: true,
+     sanitizeResources: true,
+     fn() {/* … */},
+   });
+   ```
+
+2. **Per-module** with `Deno.test.sanitizer()`:
+
+   ```ts
+   Deno.test.sanitizer({ ops: true, resources: true });
+
+   Deno.test("uses module-level sanitizers", () => {/* … */});
+   ```
+
+3. **CLI flags**: `--sanitize-ops` and `--sanitize-resources`.
+
+4. **Environment variables**: `DENO_TEST_SANITIZE_OPS=1` and
+   `DENO_TEST_SANITIZE_RESOURCES=1`.
+
+5. **`deno.json`** (lowest precedence):
+
+   ```jsonc
+   {
+     "test": {
+       "sanitizeOps": true,
+       "sanitizeResources": true
+     }
+   }
+   ```
 
 ### Exit sanitizer
 
