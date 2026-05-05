@@ -88,6 +88,27 @@ on GitHub:
 curl -sL https://github.com/denoland/deno/releases/download/v2.7.0/deno-x86_64-unknown-linux-gnu.zip.sha256sum
 ```
 
+## Delta updates
+
+Starting in Deno 2.8, `deno upgrade` downloads small binary patches (deltas)
+instead of the full release archive when upgrading between recent stable
+versions. This typically reduces the download from tens of megabytes to a few
+megabytes.
+
+Deltas are applied automatically when available — there is nothing to opt into.
+If a patch is missing or fails verification, `deno upgrade` transparently falls
+back to downloading the full archive, so the upgrade always succeeds.
+
+To force a full download — for example, in environments that cache release
+archives — pass `--no-delta`:
+
+```sh
+deno upgrade --no-delta
+```
+
+Each delta patch and the resulting binary are verified against the SHA-256
+checksums published with the release before being installed.
+
 ## Canary build
 
 By default, Deno will upgrade from the official GitHub releases. You can specify
