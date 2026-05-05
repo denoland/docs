@@ -128,7 +128,7 @@ you don't have to repeat them on every `deno compile` invocation:
 }
 ```
 
-CLI flags are merged with the config — `--include` and `--exclude` add to the
+CLI flags are merged with the config: `--include` and `--exclude` add to the
 lists in `deno.json` rather than replacing them.
 
 ## Workers
