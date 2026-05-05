@@ -34,8 +34,8 @@ deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
 
 Starting in Deno 2.8, `deno compile .` (or `deno compile <directory>`) detects
 common web frameworks and produces an entrypoint that knows how to start them.
-The detected build script is run via `deno task build` first, so the compiled
-binary always contains a fresh build.
+The detected build script is run first, so the compiled binary always contains a
+fresh build.
 
 Supported frameworks:
 
@@ -57,13 +57,12 @@ deno compile .
 deno compile ./apps/web
 ```
 
-Generated entrypoints use `import.meta.dirname` so framework asset paths
-resolve correctly against the
-[virtual filesystem](#including-data-files-or-directories) inside the compiled
-binary.
+Generated entrypoints use `import.meta.dirname` so framework asset paths resolve
+correctly against the [virtual filesystem](#including-data-files-or-directories)
+inside the compiled binary.
 
-If the project doesn't match any supported framework, `deno compile` errors
-out — pass an explicit entrypoint file in that case.
+If the project doesn't match any supported framework, `deno compile` will error
+out.
 
 ## Cross Compilation
 
