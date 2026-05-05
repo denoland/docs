@@ -60,6 +60,8 @@ below for more information on each subcommand.
 - [deno lsp](/runtime/reference/cli/lsp/) - language server protocol integration
 - [deno publish](/runtime/reference/cli/publish/) - publish a module to JSR
 - [deno test](/runtime/reference/cli/test/) - run your tests
+- [deno transpile](/runtime/reference/cli/transpile/) - transpile TypeScript,
+  JSX, or TSX to JavaScript
 - [deno types](/runtime/reference/cli/types/) - print runtime types
 - [deno upgrade](/runtime/reference/cli/upgrade/) - upgrade Deno to the latest
   version
