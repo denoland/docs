@@ -30,6 +30,40 @@ deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
 ./file_server --help
 ```
 
+## Framework detection
+
+Starting in Deno 2.8, `deno compile .` (or `deno compile <directory>`) detects
+common web frameworks and produces an entrypoint that knows how to start them.
+The detected build script is run first, so the compiled binary always contains a
+fresh build.
+
+Supported frameworks:
+
+- Next.js
+- Astro
+- Fresh (1.x and 2.x)
+- Remix
+- SvelteKit
+- Nuxt
+- SolidStart
+- TanStack Start
+- Vite (SSR mode)
+
+```sh
+# In a Next.js / Astro / Fresh / etc. project
+deno compile .
+
+# Or pointing at a specific app directory
+deno compile ./apps/web
+```
+
+Generated entrypoints use `import.meta.dirname` so framework asset paths resolve
+correctly against the [virtual filesystem](#including-data-files-or-directories)
+inside the compiled binary.
+
+If the project doesn't match any supported framework, `deno compile` will error
+out.
+
 ## Cross Compilation
 
 You can cross-compile binaries for other platforms by using the `--target` flag.
