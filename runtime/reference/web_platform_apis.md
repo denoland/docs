@@ -496,15 +496,15 @@ Starting in Deno 2.8, the
 are available as globals. These are the same types you'd find in a browser:
 
 - [`DOMMatrix`](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix) /
-  [`DOMMatrixReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly)
-  — 4×4 transform matrices for 2D and 3D operations.
+  [`DOMMatrixReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly):
+  4×4 transform matrices for 2D and 3D operations.
 - [`DOMPoint`](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint) /
-  [`DOMPointReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly)
-  — points in 2D / 3D space.
+  [`DOMPointReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly):
+  points in 2D / 3D space.
 - [`DOMRect`](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect) /
-  [`DOMRectReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly)
-  — axis-aligned rectangles.
-- [`DOMQuad`](https://developer.mozilla.org/en-US/docs/Web/API/DOMQuad) — a
+  [`DOMRectReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly):
+  axis-aligned rectangles.
+- [`DOMQuad`](https://developer.mozilla.org/en-US/docs/Web/API/DOMQuad): a
   quadrilateral defined by four points.
 
 ```ts
@@ -513,7 +513,7 @@ const p = new DOMPoint(1, 1).matrixTransform(m);
 console.log(p.x, p.y); // 12 22
 ```
 
-These types are useful for graphics work — applying transforms to canvas
+These types are useful for graphics work; applying transforms to canvas
 drawings, computing layout math, or porting browser code that depends on
 geometry types.
 
