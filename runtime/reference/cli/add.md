@@ -42,3 +42,16 @@ deno add --npm express
 If your project has a `package.json`, npm packages will be added to
 `dependencies` in `package.json`. Otherwise, all packages are added to the
 `imports` field in [`deno.json`](/runtime/fundamentals/configuration/).
+
+To force every dependency to be written to `package.json` (creating one if
+needed), pass `--package-json` (Deno 2.8+):
+
+```sh
+deno add --package-json npm:express jsr:@std/path
+```
+
+JSR packages added with `--package-json` are written in their npm-compatible
+form (`npm:@jsr/...`). The same flag works on
+[`deno install`](/runtime/reference/cli/install/),
+[`deno remove`](/runtime/reference/cli/remove/), and
+[`deno uninstall`](/runtime/reference/cli/uninstall/).
