@@ -97,3 +97,30 @@ the `--canary` build flag for the latest canary build:
 # Upgrade to the latest canary build
 deno upgrade --canary
 ```
+
+## Install a build from a pull request
+
+Starting in Deno 2.8, `deno upgrade pr <number>` downloads the binary built by
+CI for a specific deno PR and installs it. This is handy when you need to
+verify a fix before it has shipped in a release.
+
+```sh
+# Install the binary built by CI for PR #12345
+deno upgrade pr 12345
+
+# Numeric prefix is also accepted
+deno upgrade pr '#12345'
+
+# Write to a path instead of replacing the current binary
+deno upgrade --output ./deno-test pr 12345
+
+# See what would be downloaded without replacing
+deno upgrade --dry-run pr 12345
+```
+
+This subcommand requires the [`gh` CLI](https://cli.github.com/) to be
+installed and authenticated. `deno upgrade` uses `gh` to look up the PR's CI
+run and download the matching `{profile}-{os}-{arch}-deno` artifact (for
+example `release-linux-x86_64-deno`), preferring release builds and falling
+back to debug. The downloaded binary is verified to run before it replaces
+the current executable.
