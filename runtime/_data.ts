@@ -90,6 +90,75 @@ export const sidebar = [
     ],
   },
   {
+    title: "Desktop apps",
+    items: [
+      {
+        title: "Overview",
+        href: "/runtime/desktop/",
+      },
+      {
+        title: "Configuration",
+        href: "/runtime/desktop/configuration/",
+      },
+      {
+        title: "Backends",
+        href: "/runtime/desktop/backends/",
+      },
+      {
+        title: "HTTP serving",
+        href: "/runtime/desktop/serving/",
+      },
+      {
+        title: "Frameworks",
+        href: "/runtime/desktop/frameworks/",
+      },
+      {
+        title: "Windows",
+        href: "/runtime/desktop/windows/",
+      },
+      {
+        title: "Bindings",
+        href: "/runtime/desktop/bindings/",
+      },
+      {
+        title: "Menus",
+        href: "/runtime/desktop/menus/",
+      },
+      {
+        title: "Tray and dock",
+        href: "/runtime/desktop/tray_and_dock/",
+      },
+      {
+        title: "Dialogs",
+        href: "/runtime/desktop/dialogs/",
+      },
+      {
+        title: "Hot module replacement",
+        href: "/runtime/desktop/hmr/",
+      },
+      {
+        title: "DevTools",
+        href: "/runtime/desktop/devtools/",
+      },
+      {
+        title: "Auto-update",
+        href: "/runtime/desktop/auto_update/",
+      },
+      {
+        title: "Error reporting",
+        href: "/runtime/desktop/error_reporting/",
+      },
+      {
+        title: "Distribution",
+        href: "/runtime/desktop/distribution/",
+      },
+      {
+        title: "Comparison",
+        href: "/runtime/desktop/comparison/",
+      },
+    ],
+  },
+  {
     title: "Reference guides",
     items: [
       {
@@ -143,6 +212,10 @@ export const sidebar = [
           {
             title: "deno deploy",
             href: "/runtime/reference/cli/deploy/",
+          },
+          {
+            title: "deno desktop",
+            href: "/runtime/reference/cli/desktop/",
           },
           {
             title: "deno doc",
