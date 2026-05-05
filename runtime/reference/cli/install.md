@@ -46,6 +46,31 @@ If your project has a `package.json` file, the packages coming from npm will be
 added to `dependencies` in `package.json`. Otherwise all packages will be added
 to `deno.json`.
 
+### deno install --prod
+
+Starting in Deno 2.8, the `--prod` flag installs only production dependencies —
+it skips anything listed under `devDependencies` in `package.json`.
+
+```sh
+deno install --prod
+```
+
+Pair it with `--skip-types` to additionally skip `@types/*` packages from both
+`package.json` and `deno.json` imports — useful for slimming down container
+images that won't run type-checking:
+
+```sh
+deno install --prod --skip-types
+```
+
+When combined with `--entrypoint`, the module graph is built as **code-only**,
+which means type-only dependencies are excluded.
+
+`--prod` cannot be combined with `--global` or `--dev`. The `--skip-types` flag
+is only valid alongside `--prod`. Note that `--skip-types` matches packages by
+the `@types/` name prefix; if a package starts with `@types/` but exports
+runtime code, it will still be skipped.
+
 ### deno install --entrypoint [FILES]
 
 Use this command to install all dependencies that are used in the provided files
