@@ -17,8 +17,9 @@ packages that provide project templates.
 deno create [OPTIONS] [PACKAGE] [-- [ARGS]...]
 ```
 
-By default, unprefixed package names are resolved from JSR. You can use the
-`npm:` or `jsr:` prefix to be explicit, or use the `--npm` / `--jsr` flags.
+The `[PACKAGE]` argument requires either a `jsr:` or `npm:` prefix, or one of
+the `--jsr` / `--npm` flags. Unprefixed package names error out with
+`Missing 'jsr:' or 'npm:' prefix.`
 
 ## How it works
 
@@ -42,15 +43,15 @@ Package resolution differs between npm and JSR:
 }
 ```
 
-When you run `deno create @my-scope/my-template`, Deno looks for the `./create`
-export and runs it as the scaffolding script.
+When you run `deno create jsr:@my-scope/my-template`, Deno looks for the
+`./create` export and runs it as the scaffolding script.
 
 ## Examples
 
 Create a project from a JSR package:
 
 ```sh
-deno create @fresh/init
+deno create jsr:@fresh/init
 ```
 
 Create a project from an npm package:
@@ -68,11 +69,11 @@ deno create --npm create-vite my-app
 Pass arguments to the template package:
 
 ```sh
-deno create @fresh/init -- --force
+deno create jsr:@fresh/init -- --force
 ```
 
 ## Flags
 
 - `--npm` - Treat unprefixed package names as npm packages
-- `--jsr` - Treat unprefixed package names as JSR packages (default)
+- `--jsr` - Treat unprefixed package names as JSR packages
 - `-y, --yes` - Bypass the prompt and run with full permissions
