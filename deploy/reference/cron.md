@@ -9,13 +9,10 @@ define cron jobs in your code using the `Deno.cron()` API, deploy your
 application, and the platform discovers and runs them on schedule.
 
 [`Deno.cron()`](https://docs.deno.com/api/deno/~/Deno.cron) is a Deno runtime
-API — it ships with Deno itself and is currently unstable, so running cron jobs
-locally with `deno run` requires the
-[`--unstable-cron`](/runtime/reference/cli/unstable_flags/#--unstable-cron)
-flag. Deno Deploy builds on top of that runtime API: it discovers your
-`Deno.cron()` definitions at deployment time, schedules and invokes them,
-handles retries, and surfaces runs in the dashboard and logs, so you don't need
-to keep a long-running process up yourself.
+API — it ships with Deno itself. Deno Deploy builds on top of that runtime API:
+it discovers your `Deno.cron()` definitions at deployment time, schedules and
+invokes them, handles retries, and surfaces runs in the dashboard and logs, so
+you don't need to keep a long-running process up yourself.
 
 ## Defining cron jobs in code
 
