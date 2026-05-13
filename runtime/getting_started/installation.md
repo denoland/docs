@@ -214,6 +214,22 @@ Use `deno help` to see help text documenting Deno's flags and usage. Get a
 detailed guide on the CLI
 [here](/runtime/getting_started/command_line_interface/).
 
+### If you see "command not found"
+
+If `deno --version` reports `command not found`, the install directory isn't on
+your `PATH` yet. To fix this:
+
+- Open a new terminal window or restart your shell so the updated `PATH` is
+  picked up. This is the most common cause — the install script updates your
+  shell rc file, but existing shell sessions don't see the change until they
+  reload.
+- Confirm the install directory is on your `PATH`. The shell install script
+  defaults to `~/.deno/bin` on macOS and Linux; for npm-based installs, run
+  `npm config get prefix` to find the directory containing the global `bin`.
+- If you customised the install location, the shell install script's install
+  root can be overridden with the `DENO_INSTALL` environment variable, in which
+  case the binary lives at `$DENO_INSTALL/bin/deno`.
+
 ## Updating
 
 To update a previously installed version of Deno, you can run:
