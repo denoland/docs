@@ -7,15 +7,17 @@ oldUrl:
 
 :::warning Sunsetting on July 20, 2026
 
-This page covers connecting to a Deno KV database hosted on **Deno Deploy
-Classic** ([dash.deno.com](https://dash.deno.com)). Deploy Classic will be shut
+This page covers connecting to a Deno KV database hosted on
+<strong>Deno Deploy Classic</strong>
+(<a href="https://dash.deno.com">dash.deno.com</a>). Deploy Classic will be shut
 down on July 20, 2026 — see the
 <a href="/deploy/migration_guide/">migration guide</a> for details.
 
-On the new [Deno Deploy](/deploy/) platform, KV databases are provisioned per
-app through the
+On the new <a href="/deploy/">Deno Deploy</a> platform, KV databases are
+provisioned per app through the
 <a href="/deploy/reference/databases/">Databases</a> feature and accessed from
-your app code via [`Deno.openKv()`](/api/deno/~/Deno.openKv) without a
+your app code via
+<a href="/api/deno/~/Deno.openKv"><code>Deno.openKv()</code></a> without a
 connection URL — see
 <a href="/deploy/reference/deno_kv/">Deno KV on Deno Deploy</a>. External KV
 Connect access to new‑Deploy KV databases is not currently exposed.
