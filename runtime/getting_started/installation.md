@@ -16,7 +16,11 @@ Linux, only x64 is supported.
 ## Download and install
 
 [deno_install](https://github.com/denoland/deno_install) provides convenience
-scripts to download and install the binary.
+scripts to download and install the binary. The shell and PowerShell install
+scripts place the `deno` executable in `$HOME/.deno/bin` (or `$Home\.deno\bin`
+on Windows) by default — see
+[Customizing the install directory](#customizing-the-install-directory) below to
+install Deno somewhere else.
 
 <deno-tabs group-id="operating-systems">
 <deno-tab value="mac" label="macOS" default>
@@ -187,6 +191,32 @@ vfox use --global deno
 
 </deno-tab>
 </deno-tabs>
+
+### Customizing the install directory
+
+By default the shell and PowerShell install scripts install Deno to
+`$HOME/.deno/bin`. Set the `DENO_INSTALL` environment variable before running
+the script to install to a different location — the binary is then placed in
+`$DENO_INSTALL/bin`.
+
+On macOS and Linux, set `DENO_INSTALL` when invoking the piped shell so the
+installer (not just `curl`) sees the variable:
+
+```shell
+curl -fsSL https://deno.land/install.sh | DENO_INSTALL=/opt/deno sh
+```
+
+On Windows, set `$env:DENO_INSTALL` before running the PowerShell installer:
+
+```powershell
+$env:DENO_INSTALL = "C:\deno"
+irm https://deno.land/install.ps1 | iex
+```
+
+Remember to add the new `bin` directory to your `PATH` so the `deno` command is
+available in your shell. See the
+[`deno_install` README](https://github.com/denoland/deno_install) for the
+canonical behavior and other supported options.
 
 You can also build and install from source using
 [Cargo](https://crates.io/crates/deno):
