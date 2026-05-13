@@ -84,6 +84,10 @@ export const sidebar = [
         href: "/runtime/fundamentals/open_telemetry/",
       },
       {
+        title: "Cron",
+        href: "/runtime/fundamentals/cron/",
+      },
+      {
         title: "Stability and releases",
         href: "/runtime/fundamentals/stability_and_releases/",
       },

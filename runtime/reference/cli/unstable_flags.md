@@ -196,8 +196,8 @@ new Worker(`data:application/javascript;base64,${btoa(`postMessage("ok");`)}`, {
 
 ## `--unstable-cron`
 
-Enabling this flag makes the [`Deno.cron`](/deploy/kv/manual/cron) API available
-on the `Deno` namespace.
+Enabling this flag makes the [`Deno.cron`](/runtime/fundamentals/cron/) API
+available on the `Deno` namespace.
 
 ## `--unstable-kv`
 
