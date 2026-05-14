@@ -47,6 +47,6 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 const PORT = 8369; // Any available port number can be defined here
 console.log(
-  `Server is running on http://localhost:${PORT} — try GET /people`,
+  `Server is running on http://localhost:${PORT} - try GET /people`,
 );
 await app.listen({ port: PORT });
