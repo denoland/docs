@@ -81,10 +81,10 @@ Deploy console.
 The `--tunnel` flag is built into the Deno CLI. It opens a secure HTTPS tunnel
 from a public Deno Deploy URL to the server running on your local machine, so
 requests arrive at your local process as if it were the deployed application.
-The public URL is the one tied to the Deploy project you created in the previous
-step — it stays the same every time you restart the tunnel, which makes it safe
-to paste into a webhook config or share with a teammate without having to hand
-out a new URL each session.
+The public URL is tied to the Deploy project you created in the previous step;
+it stays the same every time you restart the tunnel, which makes it safe to
+paste into a webhook config or share with a teammate without having to hand out
+a new URL each session.
 
 `--tunnel` is available on any subcommand that runs a long-running server, so
 you can pair it with `deno run`, `deno task`, or `deno serve`. In this tutorial
@@ -106,14 +106,14 @@ You are connected to https://my-app-name.myusername.deno.net
 ```
 
 That public URL (`https://my-app-name.myusername.deno.net` in this example) is
-now accessible from anywhere on the internet — share it with a colleague, point
-a webhook at it, or open it from your phone on a different network to test
-mobile layouts. Changes you make to your local code are reflected at the public
-URL in real time, just like local development.
+now accessible from anywhere on the internet: share it with a colleague, point a
+webhook at it, or open it from your phone on a different network to test mobile
+layouts. Changes you make to your local code are reflected at the public URL in
+real time, just like local development.
 
 To stop the tunnel, press `Ctrl+C` in the terminal. The public URL goes offline
 until you start the tunnel again. The deployed version of the project on Deno
-Deploy is not affected — `--tunnel` only redirects traffic for as long as the
+Deploy is not affected, `--tunnel` only redirects traffic for as long as the
 local command is running.
 
 :::tip
