@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-29
+last_modified: 2026-05-14
 title: "React app with Vite"
 description: "Complete guide to building React applications with Deno and Vite. Learn how to set up a project, implement routing, add API endpoints, and deploy your full-stack TypeScript application."
 url: /examples/react_tutorial/
@@ -245,9 +245,16 @@ createRoot(document.getElementById("root")!).render(
 
 ## Add a router
 
-The app will have two routes: `/` and `/:dinosaur`.
+The app will have two routes: `/` (the list of dinosaurs) and `/:dinosaur` (the
+detail page for one dinosaur). The Vite React template ships as a single page,
+so we need a client-side router to swap which component renders based on the
+URL. We'll use `react-router-dom` for that — install it with:
 
-We'll set up the routing in `src/App.tsx`:
+```sh
+deno add npm:react-router-dom
+```
+
+Then set up the routing in `src/App.tsx`:
 
 ```tsx title="src/App.tsx"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -267,6 +274,17 @@ function App() {
 
 export default App;
 ```
+
+Three pieces are doing the work here:
+
+- `<BrowserRouter>` wraps the app so the rest of the tree can read the current
+  URL and trigger navigations without a full page reload.
+- `<Routes>` picks the first matching `<Route>` for the current path and renders
+  its `element`.
+- `<Route path="/:selectedDinosaur" ...>` declares a path parameter. When the
+  URL is `/triceratops`, React Router exposes `selectedDinosaur: "triceratops"`
+  to the matched component — that's what `Dinosaur.tsx` reads later via
+  `useParams()` to know which dinosaur to fetch.
 
 ## Proxy to forward the api requests
 
