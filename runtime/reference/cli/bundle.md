@@ -14,7 +14,7 @@ JavaScript file.
 ## Basic usage
 
 ```sh
-deno bundle main.ts output.js
+deno bundle -o output.js main.ts
 ```
 
 The output file can then be run with Deno or in other JavaScript runtimes:
