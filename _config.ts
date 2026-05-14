@@ -3,7 +3,7 @@ import "@std/dotenv/load";
 import lume from "lume/mod.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import jsx from "lume/plugins/jsx.ts";
-import mdx from "lume/plugins/mdx.ts";
+import mdx from "./_plugins/mdx.ts";
 import ogImages from "lume/plugins/og_images.ts";
 import redirects from "lume/plugins/redirects.ts";
 import search from "lume/plugins/search.ts";
