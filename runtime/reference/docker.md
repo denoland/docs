@@ -53,10 +53,10 @@ COPY --from=builder /deno-dir /deno-dir
 CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
 
-Without copying `$DENO_DIR`, `deno install` only writes to Deno's global
-cache inside the builder stage — those files do not travel with
-`COPY --from=builder /app .`, so the container re-downloads dependencies
-on first run.
+Without copying `$DENO_DIR`, `deno install` only writes to Deno's global cache
+inside the builder stage — those files do not travel with
+`COPY --from=builder /app .`, so the container re-downloads dependencies on
+first run.
 
 #### Permission Flags
 
