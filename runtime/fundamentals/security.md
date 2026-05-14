@@ -247,13 +247,13 @@ or perform DNS resolution. This includes making HTTP requests, opening TCP/UDP
 sockets, and listening for incoming connections on TCP or UDP.
 
 Network access is granted using the `--allow-net` flag. This flag can be
-specified with a list of IP addresses or hostnames to allow access to specific
-network addresses.
+specified with a list of hosts to allow access to specific network addresses. A
+host can be a hostname or IP address, optionally with a port.
 
 Hostnames do not allow subdomains, unless explicitly listed. To allow any
 subdomain for a hostname, `*` can be used as wildcard for any subdomain.
 
-Definition: `--allow-net[=<IP_OR_HOSTNAME>...]` or `-N[=<IP_OR_HOSTNAME>...]`
+Definition: `--allow-net[=<HOST>...]` or `-N[=<HOST>...]`
 
 ```sh
 # Allow network access
@@ -277,7 +277,7 @@ deno run --allow-net=1.1.1.1:443 script.ts
 deno run --allow-net=[2606:4700:4700::1111] script.ts
 ```
 
-Definition: `--deny-net[=<IP_OR_HOSTNAME>...]`
+Definition: `--deny-net[=<HOST>...]`
 
 ```sh
 # Allow access to network, but deny access 
