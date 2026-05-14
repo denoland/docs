@@ -3,6 +3,8 @@
  * @difficulty beginner
  * @tags cli, deploy
  * @run -R -W <url>
+ * @resource {https://jsr.io/@std/fs/doc/exists/~} Doc: @std/fs/exists
+ * @resource {https://docs.deno.com/api/deno/~/Deno.lstat} Doc: Deno.lstat
  * @group File System
  *
  * When creating files it can be useful to first ensure that
