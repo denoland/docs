@@ -17,13 +17,13 @@
 // Binary files can be imported in JS and TS modules. When doing so, you need to
 // specify the `type: "bytes"` import attribute.
 import bytes from "./image.png" with { type: "bytes" };
-console.log(text);
+console.log(bytes);
 
 // Dynamic imports are also supported.
 const text = await import("./image.png", {
   with: { type: "bytes" },
 });
-console.log(bytes);
+console.log(text);
 
 /* File: ./image.png
 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52
