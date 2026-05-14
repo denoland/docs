@@ -291,6 +291,78 @@ describe("Database operations", () => {
 });
 ```
 
+### Aborting a suite when a precondition isn't met
+
+Sometimes a whole suite depends on something external — a database connection, a
+service running on a known port, a file on disk. If that precondition isn't
+satisfied, you usually don't want the rest of the suite to run and produce
+dozens of confusing failures. There are two patterns that work well with
+`@std/testing/bdd`.
+
+**Throw from `beforeAll`.** If you want the suite to fail loudly when the
+precondition is missing (so CI surfaces it as a real error), throw from the
+hook. Every `it` inside the same `describe` will then be reported as failed
+because setup never completed:
+
+```ts
+describe("Database operations", () => {
+  let db: Database;
+
+  beforeAll(async () => {
+    db = await Database.connect(TEST_CONNECTION_STRING);
+    if (!(await db.ping())) {
+      throw new Error("Database is not reachable — aborting suite");
+    }
+  });
+
+  afterAll(async () => {
+    await db?.close();
+  });
+
+  it("should insert a record", async () => {
+    const result = await db.insert({ name: "Test" });
+    assertEquals(result.success, true);
+  });
+});
+```
+
+**Skip the suite with the `ignore` option.** If the precondition being unmet is
+expected (for example, the integration database isn't available in a
+contributor's local environment), it's nicer to skip the suite cleanly rather
+than fail it. Both `describe` and `it` accept an `ignore` option that takes a
+boolean — compute it once at the top of the file and pass it in:
+
+```ts
+import { describe, it } from "jsr:@std/testing/bdd";
+import { assertEquals } from "jsr:@std/assert";
+
+async function isDatabaseReachable(): Promise<boolean> {
+  try {
+    const db = await Database.connect(TEST_CONNECTION_STRING);
+    await db.close();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+const dbReachable = await isDatabaseReachable();
+
+describe("Database operations", { ignore: !dbReachable }, () => {
+  it("should insert a record", async () => {
+    const db = await Database.connect(TEST_CONNECTION_STRING);
+    const result = await db.insert({ name: "Test" });
+    assertEquals(result.success, true);
+    await db.close();
+  });
+});
+```
+
+When `dbReachable` is `false`, the entire `describe` block — and every `it`
+inside it — is reported as ignored, and the rest of your test file still runs
+normally. The same `ignore` option works on individual `it` cases if you only
+need to skip part of a suite.
+
 ## Gherkin vs. JavaScript-style BDD
 
 If you're familiar with Cucumber or other BDD frameworks, you might be expecting
