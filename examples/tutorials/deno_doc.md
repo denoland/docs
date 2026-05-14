@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-07-11
+last_modified: 2026-05-14
 title: "Generating documentation with deno doc"
 description: "Learn how to generate professional documentation for your Deno projects using the built-in deno doc command. This tutorial covers JSDoc comments, HTML output, linting, and best practices for documenting your code."
 url: /examples/deno_doc_tutorial/
@@ -200,11 +200,14 @@ Use the `--lint` flag to check for documentation issues:
 deno doc --lint math.ts
 ```
 
-This will report several types of problems:
+The linter reports three categories of problems, each with a named error code so
+you can grep for them or filter them in tooling:
 
-1. Missing JSDoc comments on exported functions, classes, or interfaces
-2. Missing return types on functions
-3. Unexported types referenced by exported symbols
+- `missing-jsdoc` — an exported symbol has no JSDoc comment.
+- `missing-return-type` — an exported function has no explicit return type
+  annotation.
+- `private-type-ref` — a public export references a type that is not itself
+  exported, so consumers can't name it.
 
 Let's create a file with some documentation issues to see the linter in action:
 
@@ -224,7 +227,45 @@ export function anotherFunction(param: InternalType) {
 }
 ```
 
-Running `deno doc --lint bad_example.ts` will show errors for these issues.
+Running `deno doc --lint bad_example.ts` produces output like this:
+
+```console
+error[missing-jsdoc]: exported symbol is missing JSDoc documentation
+ --> /work/bad_example.ts:2:1
+  |
+2 | export function badFunction(x) {
+  | ^
+
+
+error[missing-return-type]: exported function is missing an explicit return type annotation
+ --> /work/bad_example.ts:2:1
+  |
+2 | export function badFunction(x) {
+  | ^
+
+
+error[private-type-ref]: public type 'anotherFunction' references private type 'InternalType'
+  --> /work/bad_example.ts:11:1
+   |
+11 | export function anotherFunction(param: InternalType) {
+   | ^
+   = hint: make the referenced type public or remove the reference
+   |
+ 6 | interface InternalType {
+   | - this is the referenced type
+   |
+
+  info: to ensure documentation is complete all types that are exposed in the public API must be public
+
+
+error: Found 5 documentation lint errors.
+```
+
+Each diagnostic points at the exact line that triggered it, and the
+`private-type-ref` error additionally underlines the offending type definition.
+When `--lint` finds any errors, the command exits with a non-zero status code,
+which makes it safe to drop into a CI step or a `deno task doc:lint` entry — the
+build will fail loudly if a future change adds an undocumented export.
 
 ## Working with multiple files
 
