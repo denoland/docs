@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-05-14
 title: Making a Deno project
 description: "Step-by-step guide to creating your first Deno project. Learn how to initialize a project, understand the basic file structure, run TypeScript code, and execute tests using Deno's built-in test runner."
 oldUrl: /runtime/manual/getting_started/first_steps/
@@ -35,19 +35,70 @@ my_project
 
 A `deno.json` file is created to
 [configure your project](/runtime/fundamentals/configuration/), and two
-TypeScript files are created; `main.ts` and `main_test.ts`. The `main.ts` file
-is where you'll write your application code, on initial creation it will contain
-a simple program which adds two numbers together. The `main_test.ts` file is
-where you can write tests, initially it will contain a test for your addition
-program.
+TypeScript files are created: `main.ts` and `main_test.ts`. Let's look at what
+`deno init` put in each of them, so the rest of this guide makes sense.
+
+`main.ts` exports an `add` function and, when run as the entry point, prints the
+result of calling it. The `import.meta.main` guard means this top-level call
+only runs when you execute the file directly — not when another module imports
+the `add` function from it:
+
+```ts title="main.ts"
+export function add(a: number, b: number): number {
+  return a + b;
+}
+
+// Learn more at https://docs.deno.com/runtime/manual/examples/module_metadata#concepts
+if (import.meta.main) {
+  console.log("Add 2 + 3 =", add(2, 3));
+}
+```
+
+`main_test.ts` imports the `add` function and asserts it returns the expected
+result. `Deno.test` is built into the runtime, so there's no test framework to
+install:
+
+```ts title="main_test.ts"
+import { assertEquals } from "@std/assert";
+import { add } from "./main.ts";
+
+Deno.test(function addTest() {
+  assertEquals(add(2, 3), 5);
+});
+```
+
+`deno.json` is the project's
+[configuration file](/runtime/fundamentals/configuration/). The generated one
+declares a `dev` task that re-runs `main.ts` whenever a file changes, and pins
+`@std/assert` from [JSR](https://jsr.io/@std/assert) so the test above can
+resolve it:
+
+```json title="deno.json"
+{
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1"
+  }
+}
+```
 
 ## Run your project
 
-You can run this program with the following command:
+`cd` into the new directory and run `main.ts` with `deno run`:
 
 ```bash
-$ deno main.ts
+$ cd my_project
+$ deno run main.ts
 Add 2 + 3 = 5
+```
+
+For an iterative workflow, use the generated `dev` task instead. It runs the
+program in watch mode, restarting it every time you save a file:
+
+```bash
+deno task dev
 ```
 
 ## Run your tests
