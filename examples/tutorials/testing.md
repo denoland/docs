@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-10
+last_modified: 2026-05-14
 title: "Writing tests"
 description: "Learn key concepts like test setup and structure, assertions, async testing, mocking, test fixtures, and code coverage"
 url: /examples/testing_tutorial/
@@ -375,10 +375,15 @@ Deno.test("async test example", async () => {
 
 ### Testing async functions
 
-When testing functions that return promises, you should always await the result:
+When testing functions that return promises, always `await` the result. When the
+function calls a global like `fetch` or `Deno.readTextFile`, replace it with a
+stub from [`@std/testing/mock`](https://jsr.io/@std/testing/doc/mock/~) rather
+than reassigning the global directly. The stub matches the real signature (so
+the test file still type-checks), and combined with a `using` declaration it
+restores the original when the test scope exits — so one test can't poison the
+next.
 
-```ts
-// async-function.ts
+```ts title="async_function.ts"
 export async function fetchUserData(userId: string) {
   const response = await fetch(`https://api.example.com/users/${userId}`);
   if (!response.ok) {
@@ -386,17 +391,25 @@ export async function fetchUserData(userId: string) {
   }
   return await response.json();
 }
+```
 
-// async-function_test.ts
+```ts title="async_function_test.ts"
 import { assertEquals, assertRejects } from "jsr:@std/assert";
-import { fetchUserData } from "./async-function.ts";
+import { stub } from "jsr:@std/testing/mock";
+import { fetchUserData } from "./async_function.ts";
 
 Deno.test("fetchUserData success", async () => {
-  // Mock the fetch function for testing
-  globalThis.fetch = async (url: string) => {
-    const data = JSON.stringify({ id: "123", name: "Test User" });
-    return new Response(data, { status: 200 });
-  };
+  using _fetchStub = stub(
+    globalThis,
+    "fetch",
+    () =>
+      Promise.resolve(
+        new Response(
+          JSON.stringify({ id: "123", name: "Test User" }),
+          { status: 200 },
+        ),
+      ),
+  );
 
   const userData = await fetchUserData("123");
   assertEquals(userData.id, "123");
@@ -404,18 +417,42 @@ Deno.test("fetchUserData success", async () => {
 });
 
 Deno.test("fetchUserData failure", async () => {
-  // Mock the fetch function to simulate an error
-  globalThis.fetch = async (url: string) => {
-    return new Response("Not Found", { status: 404 });
-  };
+  using _fetchStub = stub(
+    globalThis,
+    "fetch",
+    () => Promise.resolve(new Response("Not Found", { status: 404 })),
+  );
 
   await assertRejects(
-    async () => await fetchUserData("nonexistent"),
+    () => fetchUserData("nonexistent"),
     Error,
     "Failed to fetch user: 404",
   );
 });
 ```
+
+Run the file with `deno test async_function_test.ts`:
+
+```console
+running 2 tests from ./async_function_test.ts
+fetchUserData success ... ok (1ms)
+fetchUserData failure ... ok (0ms)
+
+ok | 2 passed | 0 failed (5ms)
+```
+
+:::tip
+
+Why not just write `globalThis.fetch = async (url: string) => …`? Two reasons.
+First, the real `fetch` accepts `URL | RequestInfo`, not just `string`, so the
+assignment fails type-checking. Second, a plain assignment is never undone: any
+later test in the same file (or any code your test imports transitively) will
+keep seeing the mock. The `using` + `stub` pattern fixes both.
+
+:::
+
+For spies, fake timers, and more advanced mocking, see
+[Mocking data for tests](/examples/mocking_tutorial/).
 
 ## Mocking in tests
 
