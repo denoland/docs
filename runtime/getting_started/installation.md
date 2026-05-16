@@ -114,6 +114,9 @@ winget install DenoLand.Deno
 > via npm. We recommend the official install script (shell or PowerShell) for
 > better performance.</small>
 
+Deno does not publish an official apt repository. On Debian or Ubuntu, use the
+shell installer above for the recommended installation path.
+
 ### Cross-platform package managers
 
 These version managers work on macOS, Linux, and Windows.
