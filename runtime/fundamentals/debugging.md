@@ -212,6 +212,27 @@ directly.
 
 :::
 
+### Customizing profile output
+
+By default, profiles are written to the current directory with an auto-generated
+filename. You can control where and how profiles are saved:
+
+```sh
+# Save profiles to a specific directory
+deno run --cpu-prof --cpu-prof-dir=./profiles your_script.ts
+
+# Use a custom filename
+deno run --cpu-prof --cpu-prof-name=my-profile.cpuprofile your_script.ts
+
+# Increase sampling frequency for more detail (default: 1000μs)
+deno run --cpu-prof --cpu-prof-interval=100 your_script.ts
+```
+
+A lower `--cpu-prof-interval` captures more samples per second, giving finer
+granularity at the cost of larger profile files. The default of `1000`
+microseconds (1ms) is a good balance for most use cases. For short-lived
+functions you want to capture in detail, try `100` (0.1ms).
+
 ### Analyzing profiles in Chrome DevTools
 
 To analyze the `.cpuprofile` file:
@@ -303,6 +324,29 @@ The flamegraph also works with `deno eval`:
 ```sh
 deno eval --cpu-prof --cpu-prof-flamegraph "for (let i = 0; i < 1e8; i++) {}"
 ```
+
+### Profiling tips
+
+- **Profile representative workloads**: For HTTP servers, send realistic
+  traffic to the server before stopping it — the profile only captures what
+  happens while the program is running.
+- **Use self time vs. total time**: In profile reports, _self time_ is time
+  spent in a function's own code, while _total time_ includes time in functions
+  it calls. High self time points to the actual bottleneck; high total time with
+  low self time means the function delegates to something expensive.
+- **Compare before and after**: Save profiles with descriptive
+  `--cpu-prof-name` values (e.g., `before-optimization.cpuprofile`) so you can
+  compare profiles side-by-side in DevTools after making changes.
+- **Combine output formats**: You can use `--cpu-prof-md` and
+  `--cpu-prof-flamegraph` together to get all three outputs (`.cpuprofile`,
+  `.md`, and `.svg`) in a single run:
+  ```sh
+  deno run --cpu-prof --cpu-prof-md --cpu-prof-flamegraph your_script.ts
+  ```
+- **Filter out noise**: Short-lived programs may show startup overhead
+  (module loading, JIT compilation) dominating the profile. For more accurate
+  results, ensure the code you want to profile runs long enough to collect
+  meaningful samples.
 
 ## OpenTelemetry integration
 
