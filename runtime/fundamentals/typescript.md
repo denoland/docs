@@ -264,6 +264,87 @@ To specify the library files to use in a TypeScript file, you can use
 /// <reference lib="dom" />
 ```
 
+## Configuring TypeScript with `tsconfig.json` {#tsconfig}
+
+While Deno uses `deno.json` for TypeScript configuration by default, it also
+supports `tsconfig.json` files for compatibility with existing Node.js and
+TypeScript projects. This makes it easier to adopt Deno incrementally without
+rewriting your TypeScript configuration.
+
+### Auto-detection
+
+Each workspace directory containing a `deno.json` or `package.json` is probed
+for a `tsconfig.json`. If one exists, Deno will automatically use it for type
+checking and the language server — no extra flags needed.
+
+Since Deno 2.1, `jsconfig.json` files are also auto-detected when a
+`package.json` is present. This is useful for JavaScript-only projects that rely
+on `jsconfig.json` for editor and type-checking configuration.
+
+### Supported fields
+
+Deno supports the following `tsconfig.json` fields:
+
+```json title="tsconfig.json"
+{
+  "extends": "...",
+  "files": ["..."],
+  "include": ["..."],
+  "exclude": ["..."],
+  "references": [
+    { "path": "..." }
+  ],
+  "compilerOptions": {
+    "...": "..."
+  }
+}
+```
+
+Except for `compilerOptions`, these fields (`files`, `include`, `exclude`,
+`references`, `extends`) cannot be specified in `deno.json`, so you may need a
+`tsconfig.json` when you require that level of granularity.
+
+### Precedence rules
+
+When both `deno.json` and `tsconfig.json` are present, the following precedence
+rules apply:
+
+- A parent `deno.json` with `compilerOptions` takes precedence over any
+  `tsconfig.json`.
+- Among tsconfig references, a more specific path (e.g., `foo/bar/tsconfig.json`)
+  takes precedence over a less specific one (e.g., `foo/tsconfig.json`).
+
+### Example: Using an existing `tsconfig.json`
+
+If you have a Node.js project with a `tsconfig.json`:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-jsx",
+    "lib": ["dom", "esnext"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
+```
+
+Deno will automatically pick up this configuration when running `deno check` or
+using the Deno language server — no `deno.json` needed. If you later add a
+`deno.json` with its own `compilerOptions`, those will take precedence.
+
+:::tip
+
+For Deno-first projects, it's recommended to use the `compilerOptions` field in
+`deno.json` instead of a separate `tsconfig.json`. See the
+[configuring TypeScript](/runtime/reference/ts_config_migration/) reference for a
+full list of supported compiler options and their defaults.
+
+:::
+
 ## Augmenting global types
 
 Deno supports ambient or global types in TypeScript. This is useful when
