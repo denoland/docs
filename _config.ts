@@ -554,6 +554,42 @@ site.scopedUpdates(
   (path) => path.startsWith("/api/deno/"),
 );
 
+// During dev, auto-update last_modified frontmatter when a page is edited
+site.addEventListener("beforeUpdate", (event) => {
+  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+
+  for (const file of event.files ?? []) {
+    if (!/\.(md|mdx)$/.test(file)) continue;
+
+    const path = `./${file}`;
+    let content: string;
+    try {
+      content = Deno.readTextFileSync(path);
+    } catch {
+      continue;
+    }
+
+    if (!content.startsWith("---")) continue;
+
+    const endOfFrontmatter = content.indexOf("\n---", 3);
+    if (endOfFrontmatter === -1) continue;
+
+    const frontmatter = content.slice(0, endOfFrontmatter);
+    const rest = content.slice(endOfFrontmatter);
+
+    const lastModifiedMatch = frontmatter.match(/^last_modified:\s*.+$/m);
+    if (lastModifiedMatch) {
+      const updated = frontmatter.replace(
+        /^last_modified:\s*.+$/m,
+        `last_modified: ${today}`,
+      );
+      if (updated !== frontmatter) {
+        Deno.writeTextFileSync(path, updated + rest);
+      }
+    }
+  }
+});
+
 site.addEventListener("afterStartServer", () => {
   log.warn(
     `${cliNow()} Server available at <green>http://localhost:${site.server.options.port}</green>`,
