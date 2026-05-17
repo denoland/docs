@@ -548,25 +548,20 @@ authentication service that:
 2. Calls an API to authenticate
 3. Stores tokens with expiration times
 
-In the example below, we'll create a full `AuthService` class that handles user
-login, token management, and authentication. We'll test it thoroughly using
-various mocking techniques covered earlier: stubbing fetch requests, spying on
-methods, and manipulating time to test token expiration - all within organized
-test steps.
+In the example below, we'll create a full `AuthService` class in an application
+module that handles user login, token management, and authentication. Then we'll
+import it from a test module and test it thoroughly using various mocking
+techniques covered earlier: stubbing fetch requests, spying on methods, and
+manipulating time to test token expiration, all within organized test steps.
 
 Deno's testing API provides a useful `t.step()` function that allows you to
 organize your tests into logical steps or sub-tests. This makes complex tests
 more readable and helps pinpoint exactly which part of a test is failing. Each
 step can have its own assertions and will be reported separately in the test
-output.
+output. First, define the service in its own module:
 
-```ts
-import { assertEquals, assertRejects } from "jsr:@std/assert";
-import { spy, stub } from "jsr:@std/testing/mock";
-import { FakeTime } from "jsr:@std/testing/time";
-
-// The service we want to test
-class AuthService {
+```ts title="auth_service.ts"
+export class AuthService {
   private token: string | null = null;
   private expiresAt: Date | null = null;
 
@@ -587,13 +582,13 @@ class AuthService {
       throw new Error(`Authentication failed: ${response.status}`);
     }
 
-    const data = await response.json();
+    const data: { token: string } = await response.json();
 
     // Store token with expiration (1 hour)
     this.token = data.token;
     this.expiresAt = new Date(Date.now() + 60 * 60 * 1000);
 
-    return this.token;
+    return data.token;
   }
 
   getToken(): string {
@@ -615,6 +610,15 @@ class AuthService {
     this.expiresAt = null;
   }
 }
+```
+
+Then import the service from your test file:
+
+```ts title="auth_service_test.ts"
+import { assertEquals, assertRejects, assertThrows } from "jsr:@std/assert";
+import { assertSpyCalls, spy, stub } from "jsr:@std/testing/mock";
+import { FakeTime } from "jsr:@std/testing/time";
+import { AuthService } from "./auth_service.ts";
 
 Deno.test("AuthService comprehensive test", async (t) => {
   await t.step("login should validate credentials", async () => {
@@ -657,52 +661,49 @@ Deno.test("AuthService comprehensive test", async (t) => {
     }
   });
 
-  await t.step("token expiration should work correctly", () => {
-    using fakeTime = new FakeTime();
-
+  await t.step("token expiration should work correctly", async () => {
+    using time = new FakeTime(new Date("2023-01-01T12:00:00Z"));
     const authService = new AuthService();
-    const time = fakeTime(new Date("2023-01-01T12:00:00Z"));
+
+    const fetchStub = stub(
+      globalThis,
+      "fetch",
+      () =>
+        Promise.resolve(
+          new Response(JSON.stringify({ token: "fake-token" }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          }),
+        ),
+    );
+
+    const getTokenSpy = spy(authService, "getToken");
 
     try {
-      // Mock the login process to set token directly
-      authService.login = spy(
-        authService,
-        "login",
-        async () => {
-          (authService as any).token = "fake-token";
-          (authService as any).expiresAt = new Date(
-            Date.now() + 60 * 60 * 1000,
-          );
-          return "fake-token";
-        },
+      await authService.login("user", "pass");
+      assertEquals(authService.getToken(), "fake-token");
+      assertSpyCalls(getTokenSpy, 1);
+
+      // Advance time past expiration
+      time.tick(61 * 60 * 1000);
+
+      // Token should now be expired
+      assertThrows(
+        () => authService.getToken(),
+        Error,
+        "Token expired",
       );
-
-      // Login and verify token
-      authService.login("user", "pass").then(() => {
-        const token = authService.getToken();
-        assertEquals(token, "fake-token");
-
-        // Advance time past expiration
-        time.tick(61 * 60 * 1000);
-
-        // Token should now be expired
-        assertRejects(
-          () => {
-            authService.getToken();
-          },
-          Error,
-          "Token expired",
-        );
-      });
+      assertSpyCalls(getTokenSpy, 2);
     } finally {
-      time.restore();
-      (authService.login as any).restore();
+      fetchStub.restore();
+      getTokenSpy.restore();
     }
   });
 });
 ```
 
-This code defines `AuthService` class with three main functionalities:
+The `auth_service.ts` module defines an `AuthService` class with three main
+functionalities:
 
 - Login - Validates credentials, calls an API, and stores a token with an
   expiration time
@@ -711,7 +712,7 @@ This code defines `AuthService` class with three main functionalities:
 
 The testing structure is organized as a single main test with three logical
 **steps**, each testing a different aspect of the service; credential
-validation, API call handling and token expiration.
+validation, API call handling, and token expiration.
 
 🦕 Effective mocking is essential for writing reliable, maintainable unit tests.
 Deno provides several powerful tools to help you isolate your code during
