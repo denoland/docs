@@ -2,7 +2,7 @@
  * @title Parsing and serializing CSV
  * @difficulty beginner
  * @tags cli, deploy, web
- * @run <url>
+ * @run -R <url>
  * @resource {/examples/import_export} Example: Importing & Exporting
  * @resource {https://datatracker.ietf.org/doc/html/rfc4180} Spec: CSV
  * @group Encoding
@@ -11,8 +11,13 @@
  */
 import { parse, stringify } from "jsr:@std/csv";
 
-// To parse a CSV string, you can use the the standard library's CSV
-// parse function. The value is returned as a JavaScript object.
+// To parse a CSV file, read its contents and pass them to the parse function.
+const fileContent = await Deno.readTextFile("data.csv");
+const fileData = parse(fileContent, { skipFirstRow: true });
+console.log(fileData);
+
+// You can also parse CSV strings directly. The value is returned as an
+// array of objects when skipFirstRow is true.
 let text = `
 url,views,likes
 https://deno.land,10,7
