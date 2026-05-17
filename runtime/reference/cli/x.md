@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-12-10
+last_modified: 2026-05-17
 title: "deno x"
 command: x
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -51,6 +51,37 @@ deno x jsr:@std/http/file-server
 resolves the package's binary entry point, and executes it. The package is not
 added to your project's [`deno.json`](/runtime/fundamentals/configuration/) or
 `package.json`.
+
+### JSR executable entry points
+
+JSR packages do not use the `package.json` `bin` field. When you run
+`deno x jsr:<package>`, Deno resolves the JSR specifier through the package's
+`exports` field in [`deno.json`](/runtime/fundamentals/configuration/) or
+`jsr.json`, then runs the resolved module.
+
+To make a JSR package runnable with `deno x`, publish a module that can run as a
+script and expose it from `exports`:
+
+```json title="deno.json"
+{
+  "name": "@scope/tool",
+  "version": "1.0.0",
+  "exports": {
+    ".": "./mod.ts",
+    "./cli": "./cli.ts"
+  }
+}
+```
+
+With this configuration, users run the CLI entry point with:
+
+```sh
+deno x jsr:@scope/tool/cli
+```
+
+If the package is only meant to be used as a command, point the root export at
+the CLI module instead, for example `"exports": "./cli.ts"`, so
+`deno x jsr:@scope/tool` runs that module.
 
 ## Permissions
 
