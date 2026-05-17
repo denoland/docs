@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-05-14
 title: "How to use MySQL2 with Deno"
 description: "Step-by-step guide to using MySQL2 with Deno. Learn how to set up database connections, execute queries, handle transactions, and build data-driven applications using MySQL's Node.js driver."
 url: /examples/mysql2_tutorial/
@@ -71,48 +71,60 @@ We now have all the data ready to start querying.
 
 ## Querying MySQL
 
-We can use the same connection.query() method to write our queries. First we try
-and get all the data in our `dinosaurs` table:
+We can use the same `connection.query()` method to read data back. The
+`mysql2/promise` driver resolves to a `[rows, fields]` tuple, so destructure to
+pull out the rows directly:
 
 ```tsx
-const results = await connection.query("SELECT * FROM `dinosaurs`");
-console.log(results);
+const [rows] = await connection.query("SELECT * FROM `dinosaurs`");
+console.log(rows);
 ```
 
-The result from this query is all the data in our database:
+This prints every row in the table:
 
 ```tsx
 [
-  [
-    {
-      id: 1,
-      name: "Aardonyx",
-      description: "An early stage in the evolution of sauropods."
-    },
-    {
-      id: 2,
-      name: "Abelisaurus",
-      description: `Abel's lizard" has been reconstructed from a single skull.`
-    },
-    { id: 3, name: "Deno", description: "The fastest dinosaur that ever lived." }
-  ],
+  {
+    id: 1,
+    name: "Aardonyx",
+    description: "An early stage in the evolution of sauropods.",
+  },
+  {
+    id: 2,
+    name: "Abelisaurus",
+    description: "Abels lizard has been reconstructed from a single skull.",
+  },
+  { id: 3, name: "Deno", description: "The fastest dinosaur that ever lived." },
+];
 ```
 
-If we want to just get a single element from the database, we can change our
-query:
+### Parameterized queries
+
+To filter by a value, do not paste it directly into the SQL string — that's how
+SQL injection bugs get shipped. Use `connection.execute()` with `?`
+placeholders. The driver prepares the statement on the server and binds the
+values separately, so anything you pass in the values array is treated strictly
+as data, never parsed as SQL:
 
 ```tsx
-const [results, fields] = await connection.query(
-  "SELECT * FROM `dinosaurs` WHERE `name` = 'Deno'",
+const name = "Deno"; // imagine this came from a user request
+const [rows] = await connection.execute(
+  "SELECT * FROM `dinosaurs` WHERE `name` = ?",
+  [name],
 );
-console.log(results);
+console.log(rows);
 ```
 
-Which gives us a single row result:
+Which gives us a single matching row:
 
 ```tsx
 [{ id: 3, name: "Deno", description: "The fastest dinosaur that ever lived." }];
 ```
+
+`?` placeholders are positional, so the values must appear in the same order as
+the placeholders in the SQL. The same pattern works for `INSERT`, `UPDATE`, and
+`DELETE`; `mysql2` also caches each prepared statement, so repeated calls with
+different values skip the parse step on subsequent runs.
 
 Finally, we can close the connection:
 
