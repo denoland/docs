@@ -88,18 +88,18 @@ pattern. A wildcard pattern is specified with the `*` character.
 ```json title="deno.json"
 {
   "tasks": {
-    "build-client": "deno run -RW client/build.ts",
-    "build-server": "deno run -RW server/build.ts"
+    "build:client": "deno run -RW client/build.ts",
+    "build:server": "deno run -RW server/build.ts"
   }
 }
 ```
 
-Running `deno task "build-*"` will run both `build-client` and `build-server`
+Running `deno task "build:*"` will run both `build:client` and `build:server`
 tasks.
 
 :::note
 
-**When using a wildcard** make sure to quote the task name (eg. `"build-*"`),
+**When using a wildcard** make sure to quote the task name (eg. `"build:*"`),
 otherwise your shell might try to expand the wildcard character, leading to
 surprising errors.
 
@@ -210,16 +210,16 @@ useful to logically group several tasks together:
 ```json title="deno.json"
 {
   "tasks": {
-    "dev-client": "deno run --watch client/mod.ts",
-    "dev-server": "deno run --watch sever/mod.ts",
+    "dev:client": "deno run --watch client/mod.ts",
+    "dev:server": "deno run --watch sever/mod.ts",
     "dev": {
-      "dependencies": ["dev-client", "dev-server"]
+      "dependencies": ["dev:client", "dev:server"]
     }
   }
 }
 ```
 
-Running `deno task dev` will run both `dev-client` and `dev-server` in parallel.
+Running `deno task dev` will run both `dev:client` and `dev:server` in parallel.
 
 ## Node and npx binary support
 
