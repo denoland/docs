@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-14
+last_modified: 2026-05-16
 title: Installation
 description: "A Guide to installing Deno on different operating systems. Includes instructions for Windows, macOS, and Linux using various package managers, manual installation methods, and Docker containers."
 oldUrl:
@@ -151,6 +151,9 @@ npm install -g deno
 
 > <small>The startup time of the Deno command gets affected if it's installed
 > via npm. We recommend the shell install script for better performance.</small>
+
+Deno does not publish an official apt repository. On Debian or Ubuntu, use the
+shell installer above for the recommended installation path.
 
 Using [Nix](https://nixos.org/download.html):
 
