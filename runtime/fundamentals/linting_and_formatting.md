@@ -176,6 +176,10 @@ The newline character to use
 - **Default:** `lf`
 - **Possible values:** `auto`, `crlf`, `lf`, `system`
 
+Use `auto` to preserve the file's existing newline style when Deno can detect
+one. Use `system` to use the current operating system's default newline style,
+which is `crlf` on Windows and `lf` on Unix-like systems.
+
 #### `nextControlFlowPosition`
 
 Define position of next control flow
