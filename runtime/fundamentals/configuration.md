@@ -300,6 +300,49 @@ Deno uses lockfile by default, you can disable it with following configuration:
 }
 ```
 
+## Minimum dependency age
+
+:::caution Unstable feature
+
+This feature is unstable and requires the `--unstable-npm-lazy-caching` flag or
+can be configured directly in `deno.json`.
+
+:::
+
+The `minimumDependencyAge` field specifies the minimum age a dependency must
+have before Deno will install it. This is a supply chain security measure that
+protects against recently published malicious packages by ensuring only
+dependencies that have existed for a specified period are allowed.
+
+The value can be specified as a number of minutes, an
+[ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations), or an
+[RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) timestamp:
+
+```json title="deno.json"
+{
+  // Number of minutes (e.g. 120 = 2 hours)
+  "minimumDependencyAge": 120
+}
+```
+
+```json title="deno.json"
+{
+  // ISO 8601 duration (e.g. P2D = 2 days)
+  "minimumDependencyAge": "P2D"
+}
+```
+
+```json title="deno.json"
+{
+  // RFC 3339 absolute cutoff date
+  "minimumDependencyAge": "2025-09-16"
+}
+```
+
+This setting can be overridden on the command line with
+`--minimum-dependency-age=<value>`, or disabled with
+`--minimum-dependency-age=0`.
+
 ## Node modules directory
 
 By default Deno uses a local `node_modules` directory if you have a
