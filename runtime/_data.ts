@@ -331,6 +331,10 @@ export const sidebar = [
         href: "/runtime/reference/lint_plugins/",
       },
       {
+        title: "Module customization hooks",
+        href: "/runtime/reference/module_hooks/",
+      },
+      {
         title: "WebAssembly",
         href: "/runtime/reference/wasm/",
       },
