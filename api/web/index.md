@@ -72,6 +72,54 @@ Deno supports a comprehensive set of web standard APIs:
 - **[Timers](/api/web/~/setTimeout)** - setTimeout, setInterval, and
   setImmediate
 
+### Structured Clone & Transferable Objects
+
+Deno supports [`structuredClone()`](/api/web/~/structuredClone) and
+[`postMessage()`](/api/web/~/Worker) for cloning and transferring objects across
+contexts (e.g. between the main thread and Web Workers).
+
+#### Serializable types
+
+These types can be cloned with `structuredClone()` and sent via `postMessage()`:
+
+| Type | Notes |
+| --- | --- |
+| Primitives | `string`, `number`, `boolean`, `null`, `undefined`, `bigint` |
+| `Array`, `Object`, `Map`, `Set` | Including nested structures and circular references |
+| `Date`, `RegExp` | |
+| `ArrayBuffer`, `TypedArray`, `DataView` | Copied by default, or transferred (see below) |
+| `Error` types | `Error`, `EvalError`, `RangeError`, `ReferenceError`, `SyntaxError`, `TypeError`, `URIError` |
+| [`Blob`](/api/web/~/Blob) | |
+| [`File`](/api/web/~/File) | |
+| [`DOMException`](/api/web/~/DOMException) | |
+| [`CryptoKey`](/api/web/~/CryptoKey) | |
+
+#### Transferable types
+
+These types can be _transferred_ (not copied) via the `transfer` option in
+`structuredClone()` or the `transfer` list in `postMessage()`. After transfer,
+the original object becomes unusable:
+
+| Type | Notes |
+| --- | --- |
+| [`ArrayBuffer`](/api/web/~/ArrayBuffer) | Moves the backing memory to the receiver |
+| [`MessagePort`](/api/web/~/MessagePort) | Transfers the port to another context |
+| [`ReadableStream`](/api/web/~/ReadableStream) | Transfers the stream to another context |
+| [`WritableStream`](/api/web/~/WritableStream) | Transfers the stream to another context |
+| [`TransformStream`](/api/web/~/TransformStream) | Transfers the stream to another context |
+
+```ts
+// Clone a Blob
+const blob = new Blob(["hello"], { type: "text/plain" });
+const cloned = structuredClone(blob);
+console.log(await cloned.text()); // "hello"
+
+// Transfer an ArrayBuffer to a worker
+const buffer = new ArrayBuffer(1024);
+worker.postMessage(buffer, [buffer]);
+// buffer.byteLength is now 0 (transferred)
+```
+
 ## Key Benefits
 
 - **Standards Compliance**: APIs follow WHATWG and W3C specifications
