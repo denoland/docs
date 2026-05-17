@@ -291,6 +291,7 @@ export const sidebar = [
             "ulid",
             "uuid",
             "webgpu",
+            "xml",
             "yaml",
           ].map((name) => ({
             title: name,
