@@ -106,14 +106,6 @@ deno ci --prod --skip-types
 dependencies — useful in deployment artifacts where types add weight and aren't
 needed at runtime.
 
-## Flags
-
-| Flag            | Description                                                                                                                                                                      |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--prod`        | Skip `devDependencies` from `package.json`. Conflicts with `--global` / `--dev`. Same semantics as [`deno install --prod`](/runtime/reference/cli/install/#deno-install---prod). |
-| `--skip-types`  | Skip `@types/*` packages. Identification is name-based, so type-only packages that don't follow the `@types/` convention are still installed.                                    |
-| `-q`, `--quiet` | Suppress diagnostic output. The exit code still indicates success or failure.                                                                                                    |
-
 ## Common failure modes
 
 | Error                                       | Likely cause                                                                                        | Fix                                                                                                                   |

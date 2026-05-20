@@ -94,15 +94,6 @@ For example, to assert that `left-pad` never enters your tree:
 ! deno why left-pad
 ```
 
-## Flags
-
-| Flag                | Description                                                                                             |
-| ------------------- | ------------------------------------------------------------------------------------------------------- |
-| `-q`, `--quiet`     | Suppress diagnostic output.                                                                             |
-| `--frozen[=<bool>]` | Error out if the lockfile is out of date. Defaults to the `lock.frozen` setting in `deno.json`.         |
-| `--lock [<FILE>]`   | Path to the lockfile to read (defaults to `./deno.lock`).                                               |
-| `--no-lock`         | Disable lockfile discovery. With no lockfile, `deno why` cannot resolve a tree and exits with an error. |
-
 ## Common pitfalls
 
 - **"Package not found" but you _know_ it's used at runtime.** `deno why`

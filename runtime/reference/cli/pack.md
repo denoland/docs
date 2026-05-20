@@ -198,22 +198,6 @@ By default, source maps are inlined in the emitted `.js` files. Use
 `--no-source-maps` to strip them — smaller tarballs, but harder to debug
 upstream.
 
-## Flags
-
-| Flag                      | Description                                                                                  |
-| ------------------------- | -------------------------------------------------------------------------------------------- |
-| `-o`, `--output <FILE>`   | Output tarball path. Defaults to `<name>-<version>.tgz` in the current directory.            |
-| `--set-version <VERSION>` | Override the version from `deno.json` for this build.                                        |
-| `--dry-run`               | Show what would be packed without creating the tarball.                                      |
-| `--ignore=<pattern>...`   | Glob patterns to exclude. May be repeated.                                                   |
-| `--allow-dirty`           | Allow packing despite uncommitted changes in the working tree.                               |
-| `--allow-slow-types`      | Skip `.d.ts` generation when [slow types](https://jsr.io/docs/about-slow-types) are present. |
-| `--no-deno-shim`          | Don't add `@deno/shim-deno` or inject the shim for `Deno.*` usage.                           |
-| `--no-source-maps`        | Don't inline source maps in emitted `.js` files.                                             |
-| `-c`, `--config <FILE>`   | Path to `deno.json` / `deno.jsonc`. Normally auto-detected.                                  |
-| `--no-config`             | Disable automatic loading of the configuration file.                                         |
-| `-q`, `--quiet`           | Suppress diagnostic output.                                                                  |
-
 ## Limitations
 
 - **No `bin` entries.** `deno pack` does not synthesize the `package.json` `bin`

@@ -100,49 +100,6 @@ JavaScript output is going to stdout or a single `-o` file.
 deno transpile src/*.ts --outdir dist --declaration
 ```
 
-## Flags
-
-### Emit options
-
-| Flag                    | Description                                                       |
-| ----------------------- | ----------------------------------------------------------------- |
-| `-o`, `--output <FILE>` | Output to a single file. Conflicts with `--outdir`.               |
-| `--outdir <DIR>`        | Output directory for transpiled files. Mirrors the source layout. |
-| `--source-map <MODE>`   | `none` (default), `inline`, or `separate`.                        |
-| `--declaration`         | Emit `.d.ts` declaration files via `tsc`.                         |
-
-### Configuration
-
-| Flag                    | Description                                                                                                                                       |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-c`, `--config <FILE>` | Path to `deno.json` / `deno.jsonc`. Normally auto-detected.                                                                                       |
-| `--no-config`           | Disable automatic loading of the configuration file.                                                                                              |
-| `--conditions <COND>`   | Comma-separated [import conditions](https://docs.deno.com/go/conditional-exports) for npm package exports. Can also be set via `DENO_CONDITIONS`. |
-
-### Dependency management
-
-| Flag                             | Description                                                                                                                          |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `--import-map <FILE>`            | Load an import map from a local file or remote URL.                                                                                  |
-| `--lock [<FILE>]`                | Check the specified lock file (defaults to `./deno.lock`).                                                                           |
-| `--no-lock`                      | Disable lockfile discovery.                                                                                                          |
-| `--frozen[=<BOOLEAN>]`           | Error out if the lockfile is out of date.                                                                                            |
-| `--no-npm`                       | Do not resolve npm modules.                                                                                                          |
-| `--no-remote`                    | Do not resolve remote modules.                                                                                                       |
-| `--node-modules-dir[=<MODE>]`    | Sets the node_modules management mode (`auto`, `manual`, `none`).                                                                    |
-| `--node-modules-linker=<MODE>`   | Sets the linker mode (`isolated` or `hoisted`).                                                                                      |
-| `-r`, `--reload[=<BLOCKLIST>]`   | Reload cached source. Optional comma-separated list of specifiers to selectively reload (e.g. `npm:`, `npm:chalk`).                  |
-| `--vendor[=<BOOLEAN>]`           | Toggle the local `vendor/` folder for remote modules and `node_modules/` for npm.                                                    |
-| `--cert <FILE>`                  | Load a certificate authority from a PEM file.                                                                                        |
-| `--minimum-dependency-age <AGE>` | (Unstable) Refuse to resolve dependencies younger than the given age. Accepts `120` (minutes), `P2D` (ISO-8601), or an RFC3339 date. |
-
-### Misc
-
-| Flag            | Description                 |
-| --------------- | --------------------------- |
-| `-q`, `--quiet` | Suppress diagnostic output. |
-| `-h`, `--help`  | Show help.                  |
-
 ## How it differs from `tsc`
 
 `deno transpile` and TypeScript's `tsc` overlap, but they aren't drop-in
