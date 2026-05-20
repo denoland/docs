@@ -682,6 +682,10 @@ variables. Supported values for `OTEL_EXPORTER_OTLP_PROTOCOL` are:
 - `http/protobuf` (default): Export using Protobuf over HTTP to the configured
   endpoint.
 - `http/json`: Export using JSON over HTTP to the configured endpoint.
+- `grpc`: Export using gRPC (Protobuf over HTTP/2). Available in Deno 2.8+.
+  Useful for collectors that only accept gRPC, such as Azure Container Apps'
+  managed OpenTelemetry agent. The default OTLP gRPC port is `4317`, so you
+  typically also set `OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317`.
 - `console`: Print spans, logs, and metrics to stderr in a human-readable text
   format. This is useful for debugging and testing instrumentation without
   running an OTLP collector. When using `console`, no endpoint configuration is
@@ -795,8 +799,8 @@ limitations to be aware of:
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
   are not supported.
-- The supported exporters are OTLP (`http/protobuf`, `http/json`) and `console`.
-  Other exporters and protocols such as `grpc` are not supported.
+- The supported exporters are OTLP (`http/protobuf`, `http/json`, `grpc`) and
+  `console`. Other exporter formats are not supported.
 - Metrics from observable (asynchronous) meters are not collected on process
   exit/crash, so the last value of metrics may not be exported. Synchronous
   metrics are exported on process exit/crash.
