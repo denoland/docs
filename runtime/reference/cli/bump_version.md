@@ -25,21 +25,21 @@ deno bump-version [increment]
 
 The `increment` argument selects how the version is bumped:
 
-| Increment    | Example                |
-| ------------ | ---------------------- |
-| `patch`      | `1.4.6` → `1.4.7`      |
-| `minor`      | `1.4.6` → `1.5.0`      |
-| `major`      | `1.4.6` → `2.0.0`      |
-| `prepatch`   | `1.4.6` → `1.4.7-0`    |
-| `preminor`   | `1.4.6` → `1.5.0-0`    |
-| `premajor`   | `1.4.6` → `2.0.0-0`    |
-| `prerelease` | `1.4.7-0` → `1.4.7-1`  |
+| Increment    | Example               |
+| ------------ | --------------------- |
+| `patch`      | `1.4.6` → `1.4.7`     |
+| `minor`      | `1.4.6` → `1.5.0`     |
+| `major`      | `1.4.6` → `2.0.0`     |
+| `prepatch`   | `1.4.6` → `1.4.7-0`   |
+| `preminor`   | `1.4.6` → `1.5.0-0`   |
+| `premajor`   | `1.4.6` → `2.0.0-0`   |
+| `prerelease` | `1.4.7-0` → `1.4.7-1` |
 
 If `increment` is omitted, the current version is printed and the configuration
 file is left unchanged.
 
-If the configuration file has no `version` field and an increment is given,
-the version defaults to `0.1.0`.
+If the configuration file has no `version` field and an increment is given, the
+version defaults to `0.1.0`.
 
 The command exits with an error if neither `deno.json` nor `package.json` is
 found in the current directory.
