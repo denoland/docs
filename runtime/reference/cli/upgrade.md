@@ -95,12 +95,12 @@ instead of the full release archive when upgrading between recent stable
 versions. This typically reduces the download from tens of megabytes to a few
 megabytes.
 
-Deltas are applied automatically when available — there is nothing to opt into.
+Deltas are applied automatically when available, there is nothing to opt into.
 If a patch is missing or fails verification, `deno upgrade` transparently falls
 back to downloading the full archive, so the upgrade always succeeds.
 
-To force a full download — for example, in environments that cache release
-archives — pass `--no-delta`:
+To force a full download (for example, in environments that cache release
+archives) pass `--no-delta`:
 
 ```sh
 deno upgrade --no-delta
