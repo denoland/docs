@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-24
+last_modified: 2026-05-14
 title: "Share your local server with Tunnel"
 description: "Expose a public URL instantly with the --tunnel option"
 url: /examples/tunnel_tutorial/
@@ -78,34 +78,52 @@ Deploy console.
 
 ## Tunnel to your local server
 
-The tunnel feature is built into the Deno CLI. It unlocks some of the powerful
-features of Deno deploy, but for your local server!
+The `--tunnel` flag is built into the Deno CLI. It opens a secure HTTPS tunnel
+from a public Deno Deploy URL to the server running on your local machine, so
+requests arrive at your local process as if it were the deployed application.
+The public URL is tied to the Deploy project you created in the previous step;
+it stays the same every time you restart the tunnel, which makes it safe to
+paste into a webhook config or share with a teammate without having to hand out
+a new URL each session.
 
-To start a tunnel to your local server, run the following command in your
-project directory:
+`--tunnel` is available on any subcommand that runs a long-running server, so
+you can pair it with `deno run`, `deno task`, or `deno serve`. In this tutorial
+we're tunneling the Svelte `dev` task:
 
 ```sh
 deno run --tunnel dev
 ```
 
-If redirected to the browser, authenticate with your Deno Deploy account.
+The first time you run this, your browser will open so you can authenticate with
+your Deno Deploy account; subsequent runs reuse the cached credentials. After a
+few moments you should see output similar to this:
 
-This command will start your local server and create a secure tunnel to it.
-After a few moments, you should see output similar to this:
-
-```sh
+```console
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
 You are connected to https://my-app-name.myusername.deno.net
 ```
 
-That public url (`https://my-app-name.myusername.deno.net` in this example) is
-now accessible from anywhere on the internet! You can share this URL with others
-to access your local Svelte app, (much like ngrok or other tunneling services).
+That public URL (`https://my-app-name.myusername.deno.net` in this example) is
+now accessible from anywhere on the internet: share it with a colleague, point a
+webhook at it, or open it from your phone on a different network to test mobile
+layouts. Changes you make to your local code are reflected at the public URL in
+real time, just like local development.
 
-You can make changes to your local code as normal, and the changes will be
-reflected at the public URL in real-time.
+To stop the tunnel, press `Ctrl+C` in the terminal. The public URL goes offline
+until you start the tunnel again. The deployed version of the project on Deno
+Deploy is not affected, `--tunnel` only redirects traffic for as long as the
+local command is running.
+
+:::tip
+
+If you want to expose a different local port (for example a backend on
+`localhost:8000` rather than the Vite dev server), run `deno serve --tunnel`
+against the file that listens on that port. The tunnel always forwards to the
+server the Deno command starts.
+
+:::
 
 ## Configuring environment variables
 

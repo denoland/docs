@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-03
+last_modified: 2026-05-13
 title: "Behavior-Driven Development (BDD)"
 description: "Implementing Behavior-Driven Development with Deno's Standard Library's BDD module. Create readable, well organised tests with effective assertions."
 url: /examples/bdd_tutorial/
@@ -262,34 +262,79 @@ These hooks are useful for:
 - Setting up and tearing down database connections
 - Creating and cleaning up shared resources
 
-Here's an example of how you might use `beforeAll` and `afterAll`:
+Here's a runnable example that tests a small HTTP service. Spinning a server up
+and down for every single test would be wasteful — and slow, once you have a
+handful of cases — so the server starts once in `beforeAll` and shuts down once
+in `afterAll`:
 
-```ts
-describe("Database operations", () => {
-  let db: Database;
+```ts title="user_api_test.ts"
+import { afterAll, beforeAll, describe, it } from "jsr:@std/testing/bdd";
+import { assertEquals } from "jsr:@std/assert";
 
-  beforeAll(async () => {
-    // Connect to the database once before all tests
-    db = await Database.connect(TEST_CONNECTION_STRING);
-    await db.migrate();
+describe("User API", () => {
+  let server: Deno.HttpServer;
+  let baseUrl: string;
+
+  beforeAll(() => {
+    // Start the test server once before any test runs. Port 0 asks the
+    // OS for a free port, so parallel test files don't collide.
+    server = Deno.serve({ port: 0, onListen() {} }, (req) => {
+      const { pathname } = new URL(req.url);
+      if (pathname === "/users/1") {
+        return Response.json({ id: 1, name: "Ada" });
+      }
+      return new Response("Not Found", { status: 404 });
+    });
+    const { port } = server.addr as Deno.NetAddr;
+    baseUrl = `http://localhost:${port}`;
   });
 
   afterAll(async () => {
-    // Disconnect after all tests are complete
-    await db.close();
+    // Shut the server down once, after every test has run. Without
+    // this, `deno test` would report a resource leak.
+    await server.shutdown();
   });
 
-  it("should insert a record", async () => {
-    const result = await db.insert({ name: "Test" });
-    assertEquals(result.success, true);
+  it("returns a known user", async () => {
+    const res = await fetch(`${baseUrl}/users/1`);
+    assertEquals(res.status, 200);
+    assertEquals(await res.json(), { id: 1, name: "Ada" });
   });
 
-  it("should retrieve a record", async () => {
-    const record = await db.findById(1);
-    assertEquals(record.name, "Test");
+  it("returns 404 for unknown users", async () => {
+    const res = await fetch(`${baseUrl}/users/999`);
+    assertEquals(res.status, 404);
+    await res.body?.cancel();
   });
 });
 ```
+
+The server binds to a local port, so the test needs network permission to reach
+itself:
+
+```sh
+deno test --allow-net=0.0.0.0,localhost user_api_test.ts
+```
+
+```console
+running 1 test from ./user_api_test.ts
+User API ...
+  returns a known user ... ok (4ms)
+  returns 404 for unknown users ... ok (1ms)
+User API ... ok (6ms)
+
+ok | 1 passed (2 steps) | 0 failed (11ms)
+```
+
+:::caution
+
+Anything you create in `beforeAll` is shared by every test in the block. If one
+test mutates that shared state — adds a row, changes a field, leaves a handler
+registered — the next test starts from the changed state, not the original. When
+tests need a clean slate, set up the cheap, per-test state in `beforeEach` and
+leave only the expensive, read-mostly setup in `beforeAll`.
+
+:::
 
 ## Gherkin vs. JavaScript-style BDD
 

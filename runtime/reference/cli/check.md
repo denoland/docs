@@ -25,6 +25,31 @@ Check multiple files:
 deno check src/server.ts src/utils.ts
 ```
 
+## Scoping and excluding files
+
+You can pass directories or globs as positional arguments to type-check a whole
+tree at once:
+
+```sh
+deno check src/
+deno check "src/**/*.ts"
+```
+
+To skip files or directories, use the top-level `exclude` field in `deno.json`.
+It applies to `deno check` along with other subcommands like `deno fmt` and
+`deno lint`:
+
+```jsonc title="deno.json"
+{
+  "exclude": ["dist/", "vendor/", "**/*.generated.ts"]
+}
+```
+
+See
+[include and exclude](/runtime/fundamentals/configuration/#include-and-exclude)
+in the configuration reference for the full glob syntax, including how to
+un-exclude a sub-path.
+
 ## Type-checking remote modules
 
 By default, only local modules are type-checked. Use `--all` to also type-check

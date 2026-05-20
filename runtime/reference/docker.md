@@ -36,6 +36,8 @@ For smaller production images:
 ```dockerfile
 # Build stage
 FROM denoland/deno:latest AS builder
+# Point Deno's cache at a known location so it can be copied to the next stage
+ENV DENO_DIR=/deno-dir
 WORKDIR /app
 COPY . .
 # Install dependencies (use just `deno install` if deno.json has imports)
@@ -43,10 +45,18 @@ RUN deno install --entrypoint main.ts
 
 # Production stage
 FROM denoland/deno:latest
+ENV DENO_DIR=/deno-dir
 WORKDIR /app
 COPY --from=builder /app .
+# Copy the populated Deno cache so the runtime stage has the dependencies
+COPY --from=builder /deno-dir /deno-dir
 CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
+
+Without copying `$DENO_DIR`, `deno install` only writes to Deno's global cache
+inside the builder stage — those files do not travel with
+`COPY --from=builder /app .`, so the container re-downloads dependencies on
+first run.
 
 #### Permission Flags
 
