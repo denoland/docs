@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-05-20
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/
@@ -141,6 +141,15 @@ Listening on http://localhost:8000/
 Dependency tasks are executed in parallel, with the default parallel limit being
 equal to number of cores on your machine. To change this limit, use the
 `DENO_JOBS` environmental variable.
+
+:::info Deno 2.8
+
+When tasks run in parallel, each output line is prefixed with the task name that
+produced it (color-coded per task). Prefixes stay attached even when a task
+forks subprocesses, so a parallel `build` + `test` + `lint` run stays legible
+without an external multiplexer.
+
+:::
 
 Dependencies are tracked and if multiple tasks depend on the same task, that
 task will only be run once:

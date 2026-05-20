@@ -33,6 +33,11 @@ That's all you really need to know to get started! However, there are some key
 differences between the two runtimes that you can take advantage of to make your
 code simpler and smaller when migrating your Node.js projects to Deno.
 
+Compatibility against Node's own test suite jumped from ~42% at the start of
+2026 to **over 75% in Deno 2.8**, covering nearly every `node:` module. You can
+track the current state at
+[node-test-viewer.deno.dev](https://node-test-viewer.deno.dev/).
+
 We provide a [list of supported Node.js APIs](/runtime/reference/node_apis/)
 that you can use in Deno.
 
@@ -487,17 +492,35 @@ resolution, you can:
 
 ## Including Node types
 
-Node ships with many built-in types like `Buffer` that might be referenced in an
-npm package's types. To load these you must add a types reference directive to
-the `@types/node` package:
+Starting in Deno 2.8, `deno check` and the LSP include `lib.node` in every
+type-check by default, so Node ambient types like `Buffer`, `NodeJS.Timeout`,
+and `process` resolve without any configuration:
+
+```ts
+// 2.8+: type-checks with no extra setup
+const buf: Buffer = Buffer.from("hello");
+const t: NodeJS.Timeout = setTimeout(() => {}, 0);
+```
+
+The bundled `lib.node` tracks the major version of `@types/node` that matches
+the Node release Deno reports in `process.versions.node`. If you need to pin a
+specific `@types/node` version (for example to match the Node version your
+project standardises on), add it as an explicit dependency:
+
+```jsonc title="deno.json"
+{
+  "imports": {
+    "@types/node": "npm:@types/node@^22"
+  }
+}
+```
+
+On versions before 2.8 — or if you've opted out of `lib.node` — you can still
+load the types with a reference directive:
 
 ```ts
 /// <reference types="npm:@types/node" />
 ```
-
-Note that it is fine to not specify a version for this in most cases because
-Deno will try to keep it in sync with its internal Node code, but you can always
-override the version used if necessary.
 
 ## Run npm binaries
 
