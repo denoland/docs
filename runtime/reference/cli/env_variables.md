@@ -98,9 +98,9 @@ variables. See the [Proxies](#proxies) section for more information.
 
 Path to a PEM file with extra certificate authorities. Loaded at the root
 certificate store level, so the certs are honored by `fetch()`,
-`Deno.connectTls()`, and the Node compat APIs (`node:https`, `node:tls`).
-Available in Deno 2.8+. Missing or invalid files emit a warning rather than
-failing, matching Node.js semantics.
+[`Deno.connectTls()`](/api/deno/~/Deno.connectTls), and the Node compat APIs
+(`node:https`, `node:tls`). Available in Deno 2.8+. Missing or invalid files
+emit a warning rather than failing, matching Node.js semantics.
 
 ### NPM_CONFIG_REGISTRY
 

@@ -144,9 +144,9 @@ The following built-in APIs are wired into the Network tab:
 - `WebSocket` — client connections appear alongside HTTP requests, with
   handshake status and headers from the upgrade response, message frames, and a
   close event when the socket is closed
-- `Deno.upgradeWebSocket()` — server-side WebSocket upgrades are instrumented
-  too, so you can inspect both sides of a connection from a Deno-to-Deno
-  handshake
+- [`Deno.upgradeWebSocket()`](/api/deno/~/Deno.upgradeWebSocket) — server-side
+  WebSocket upgrades are instrumented too, so you can inspect both sides of a
+  connection from a Deno-to-Deno handshake
 
 For each request you can see the URL, method, status code, request and response
 headers, request and response bodies, and timing information.
@@ -216,7 +216,8 @@ close event surfaced as the connection progresses:
 
 ![WebSocket connection in the Network tab](./images/debugger-network-websocket.png)
 
-Server-side WebSockets created with `Deno.upgradeWebSocket()` are also
+Server-side WebSockets created with
+[`Deno.upgradeWebSocket()`](/api/deno/~/Deno.upgradeWebSocket) are also
 instrumented, so you can inspect both sides of a connection — the outgoing
 client `WebSocket` and the server upgrade that accepts it. For example, a small
 echo server:

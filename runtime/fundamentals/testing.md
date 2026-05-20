@@ -689,7 +689,8 @@ override lower ones.
    });
    ```
 
-2. **Per-module** with `Deno.test.sanitizer()`:
+2. **Per-module** with
+   [`Deno.test.sanitizer()`](/api/deno/~/Deno.test.sanitizer):
 
    ```ts
    Deno.test.sanitizer({ ops: true, resources: true });
