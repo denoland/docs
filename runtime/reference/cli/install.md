@@ -30,19 +30,20 @@ a `package.json` file, a local `node_modules` directory will be set up as well.
 ### deno install [PACKAGES]
 
 Use this command to install particular packages and add them to `deno.json` or
-`package.json`. Starting in Deno 2.8, unprefixed package names are treated as
-npm packages by default, so the `npm:` prefix is no longer required at the CLI:
+`package.json`.
 
 ```sh
-# Deno 2.8+ — unprefixed names install from npm
-deno install hono zod
-
-# JSR packages still need the jsr: prefix
-deno install jsr:@std/testing
-
-# The npm: prefix still works and remains required in `import` specifiers
-deno install npm:express
+deno install jsr:@std/testing npm:express
 ```
+
+:::info Deno 2.8
+
+Unprefixed package names are treated as npm packages by default, so the `npm:`
+prefix is no longer required at the CLI — `deno install express` is equivalent
+to `deno install npm:express`. JSR packages still need the `jsr:` prefix to stay
+unambiguous. The `npm:` prefix remains required in `import` specifiers.
+
+:::
 
 :::tip
 
