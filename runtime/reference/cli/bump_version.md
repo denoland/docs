@@ -71,3 +71,6 @@ deno bump-version
 ```
 
 After bumping, commit the updated configuration file as part of your release.
+For publishing the bumped version to JSR, see
+[`deno publish`](/runtime/reference/cli/publish/); for an npm tarball, see
+[`deno pack`](/runtime/reference/cli/pack/).

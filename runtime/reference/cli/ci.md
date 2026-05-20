@@ -59,5 +59,10 @@ COPY . .
 CMD ["deno", "run", "-A", "main.ts"]
 ```
 
-See also [`deno install`](/runtime/reference/cli/install/) for the everyday
-install command.
+See also:
+
+- [`deno install`](/runtime/reference/cli/install/) — everyday install
+- [Continuous integration](/runtime/reference/continuous_integration/) — full
+  guide to running Deno in GitHub Actions and other CI providers
+- [`deno audit`](/runtime/reference/cli/audit/) — scan dependencies for known
+  vulnerabilities as part of CI

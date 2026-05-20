@@ -82,3 +82,7 @@ Fixed 1 vulnerability:
 1 vulnerability could not be fixed automatically:
   @denotest/with-vuln2 (major upgrade to 2.0.0)
 ```
+
+For a typical CI workflow, run `deno audit` after
+[`deno ci`](/runtime/reference/cli/ci/) so the install and the security check
+share the same reproducible state.

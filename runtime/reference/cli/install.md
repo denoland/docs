@@ -240,6 +240,10 @@ test frameworks or build tools are not needed.
 
 The `--prod` flag conflicts with `--global` and `--dev`.
 
+In CI environments, prefer [`deno ci --prod`](/runtime/reference/cli/ci/), which
+also enforces a frozen lockfile and removes any pre-existing `node_modules`
+before installing.
+
 #### --skip-types
 
 When combined with `--prod`, the `--skip-types` flag additionally skips

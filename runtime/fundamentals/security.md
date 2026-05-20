@@ -17,6 +17,10 @@ major difference from Node, where dependencies are automatically granted full
 access to all system I/O, potentially introducing hidden vulnerabilities into
 your project.
 
+To complement the runtime sandbox, Deno also ships
+[`deno audit`](/runtime/reference/cli/audit/) for scanning your dependencies
+against vulnerability databases — useful as a CI gate.
+
 Before using Deno to run completely untrusted code, read the
 [section on executing untrusted code](#executing-untrusted-code) below.
 

@@ -331,7 +331,9 @@ Read more in [`deno remove` reference](/runtime/reference/cli/remove/).
 
 It is possible to specify a version range for the package you are importing.
 This is done using the `@` symbol followed by a version range specifier, and
-follows the [semver](https://semver.org/) versioning scheme.
+follows the [semver](https://semver.org/) versioning scheme. If you need to
+share a single version range across multiple workspace members, see
+[`catalog:` for centralized dependency versions](/runtime/fundamentals/workspaces/#centralized-dependency-versions-with-catalog).
 
 For example:
 
@@ -547,8 +549,10 @@ Modules can be published to:
 
 - [JSR](https://jsr.io) - recommended, supports TypeScript natively and
   auto-generates documentation for you
-- [npm](https://www.npmjs.com/) - use [dnt](https://github.com/denoland/dnt) to
-  create the npm package
+- [npm](https://www.npmjs.com/) - use
+  [`deno pack`](/runtime/reference/cli/pack/) (Deno 2.8+) to build an
+  npm-compatible tarball from a Deno project, or
+  [dnt](https://github.com/denoland/dnt) for a more configurable build pipeline
 - [deno.land/x](https://deno.com/add_module) - for HTTPS imports, use JSR
   instead if possible
 
@@ -825,6 +829,16 @@ the other npm-registry options Deno reads.
 
 ### Typical CI pattern
 
+In Deno 2.8+, the single command [`deno ci`](/runtime/reference/cli/ci/)
+encapsulates the recommended CI install flow (frozen lockfile + lifecycle
+scripts):
+
+```sh
+deno ci
+```
+
+For older Deno versions, or to compose the steps manually:
+
 ```sh
 # Install (resolve) dependencies exactly as locked; fail if drift or new deps
 deno install --frozen --entrypoint main.ts
@@ -834,8 +848,8 @@ deno run --cached-only main.ts
 ```
 
 If you rely on `npm` packages (`package.json` present), include `deno install`
-in CI before running tests so the `node_modules` directory is materialized
-deterministically.
+(or `deno ci`) in CI before running tests so the `node_modules` directory is
+materialized deterministically.
 
 ### Updating dependencies intentionally
 

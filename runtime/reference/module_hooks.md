@@ -8,7 +8,8 @@ Deno supports the Node.js
 [`module.registerHooks()`](https://nodejs.org/api/module.html#moduleregisterhooksoptions)
 API, which lets you intercept and customize how modules are resolved and loaded.
 This enables virtual modules, custom transpilation, module aliasing, and similar
-use cases without modifying the importing code.
+use cases without modifying the importing code. The `node:module` API is part of
+Deno's broader [Node.js compatibility](/runtime/fundamentals/node/) layer.
 
 The hooks are **synchronous** and run **in the same thread** as your
 application. They work for both ES modules (`import`) and CommonJS
@@ -96,7 +97,11 @@ deno run --import ./loader.mjs main.mjs
 `--import` accepts multiple values, so you can compose loaders (e.g.
 `--import ./aliases.mjs --import ./transpile.mjs`). They register in the order
 given, which is the reverse of the order in which they run — see
-[Hook chaining](#hook-chaining).
+[Hook chaining](#hook-chaining). The flag is available on
+[`deno run`](/runtime/reference/cli/run/),
+[`deno test`](/runtime/reference/cli/test/),
+[`deno bench`](/runtime/reference/cli/bench/), and
+[`deno serve`](/runtime/reference/cli/serve/).
 
 ## Use cases
 

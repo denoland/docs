@@ -59,7 +59,9 @@ deno transpile src/*.ts --outdir dist
 
 JSX transform, decorators, and other emit settings come from `compilerOptions`
 in your `deno.json` (or `tsconfig.json`), so the output matches what `deno run`
-would execute.
+would execute. See
+[TypeScript compiler options](/runtime/fundamentals/typescript/#configuring-typescript-compiler-options)
+for the full list.
 
 ### Source maps
 

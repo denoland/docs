@@ -163,7 +163,10 @@ you don't have to repeat them on every `deno compile` invocation:
 ```
 
 CLI flags are merged with the config: `--include` and `--exclude` add to the
-lists in `deno.json` rather than replacing them.
+lists in `deno.json` rather than replacing them. See the
+[Compile config](/runtime/fundamentals/configuration/#compile-config) section in
+the configuration guide for more details, including how to declare `permissions`
+on the same block.
 
 ## Workers
 

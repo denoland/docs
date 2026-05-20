@@ -133,6 +133,11 @@ deno pack --ignore=tests/
   registry. For example, to reach Node.js consumers who can't yet use JSR.
 
 `deno pack` is not equivalent to `npm pack`: it is a build step that converts a
-Deno/JSR project into an npm-publishable package, closer to `tsc` plus
-`npm pack` combined. It does not read an existing `package.json`, does not honor
-`.npmignore`, and does not run `prepublishOnly`/`prepare` lifecycle scripts.
+Deno/JSR project into an npm-publishable package, closer to
+[`deno transpile`](/runtime/reference/cli/transpile/) plus `npm pack` combined.
+It does not read an existing `package.json`, does not honor `.npmignore`, and
+does not run `prepublishOnly`/`prepare` lifecycle scripts.
+
+Before packing, bump the `version` field with
+[`deno bump-version`](/runtime/reference/cli/bump_version/) so the generated
+tarball name and `package.json` carry the new version.
