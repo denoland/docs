@@ -295,10 +295,14 @@ $ deno add jsr:@luca/cases@1.0.0
 Add @luca/cases - jsr:@luca/cases@1.0.0
 ```
 
-Starting in Deno 2.8, unprefixed package names passed to `deno add` /
-`deno install` are treated as npm packages by default — `deno add express` is
-now equivalent to `deno add npm:express`. JSR packages still need the `jsr:`
-prefix to stay unambiguous.
+:::info Deno 2.8
+
+Unprefixed package names passed to `deno add` / `deno install` are treated as
+npm packages by default — `deno add express` is now equivalent to
+`deno add npm:express`. JSR packages still need the `jsr:` prefix to stay
+unambiguous.
+
+:::
 
 Read more in [`deno add` reference](/runtime/reference/cli/add/).
 
