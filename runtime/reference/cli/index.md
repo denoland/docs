@@ -25,6 +25,8 @@ below for more information on each subcommand.
 - [deno approve-scripts](/runtime/reference/cli/approve_scripts) - manage
   lifecycle scripts of npm packages
 - [deno audit](/runtime/reference/cli/audit) - audit dependencies
+- [deno bump-version](/runtime/reference/cli/bump_version/) - bump the project
+  version in `deno.json` or `package.json`
 - deno cache - _(Deprecated. Please use
   [deno install](/runtime/reference/cli/install/))_
 - [deno install](/runtime/reference/cli/install/) - install a dependency or a
@@ -34,6 +36,8 @@ below for more information on each subcommand.
 - [deno remove](/runtime/reference/cli/remove) - Remove dependencies
 - [deno outdated](/runtime/reference/cli/outdated) - view or update outdated
   dependencies
+- [deno why](/runtime/reference/cli/why/) - explain why a package is in the
+  dependency tree
 
 ## Tooling
 
@@ -58,6 +62,8 @@ below for more information on each subcommand.
 - [deno jupyter](/runtime/reference/cli/jupyter/) - run a Jupyter notebook
 - [deno lint](/runtime/reference/cli/lint/) - lint your code
 - [deno lsp](/runtime/reference/cli/lsp/) - language server protocol integration
+- [deno pack](/runtime/reference/cli/pack/) - create an npm tarball from the
+  current Deno project
 - [deno publish](/runtime/reference/cli/publish/) - publish a module to JSR
 - [deno test](/runtime/reference/cli/test/) - run your tests
 - [deno types](/runtime/reference/cli/types/) - print runtime types

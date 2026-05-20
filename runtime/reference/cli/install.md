@@ -50,9 +50,9 @@ to `deno.json`.
 
 Starting in Deno 2.8, `deno install` accepts `--os` and `--arch` flags so you
 can install npm packages targeting a different platform than the one you're
-running on. This is most useful for pre-installing packages with native
-binaries — for example, building a deployment artifact on a macOS dev machine
-that will eventually run on Linux/arm64.
+running on. This is most useful for pre-installing packages with native binaries
+— for example, building a deployment artifact on a macOS dev machine that will
+eventually run on Linux/arm64.
 
 The flags accept Node.js-compatible values, the same strings that
 `process.platform` and `process.arch` produce.
@@ -69,6 +69,22 @@ deno install --arch x64
 ```
 
 `--os` and `--arch` are local-install-only and conflict with `--global`.
+
+### deno install --package-json
+
+By default, Deno picks the configuration file to write to (`deno.json` or
+`package.json`) based on which one is closest to the current working directory.
+Starting in Deno 2.8, `--package-json` forces dependencies to be written to
+`package.json`, regardless of any nearby `deno.json`. If no `package.json`
+exists yet, one is created.
+
+```sh
+deno install --package-json npm:express jsr:@std/path
+```
+
+JSR packages added with `--package-json` are written in their npm-compatible
+form (`npm:@jsr/...`). The same flag works on `deno add`, `deno remove`, and
+`deno uninstall`.
 
 ### deno install --entrypoint [FILES]
 

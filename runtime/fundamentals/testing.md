@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-03
+last_modified: 2026-05-20
 title: "Testing"
 description: "A guide to Deno's testing capabilities. Learn about the built-in test runner, assertions, mocking, coverage reporting, snapshot testing, and how to write effective tests for your Deno applications."
 oldUrl:
@@ -117,6 +117,28 @@ Deno.test("database operations", async (t) => {
   });
 });
 ```
+
+## Timeouts
+
+You can set a maximum duration for individual tests using the `timeout` option.
+If a test exceeds its deadline it is marked as failed. Both asynchronous hangs
+(a promise that never resolves) and synchronous hot loops (`while (true) {}`)
+are caught.
+
+```ts
+Deno.test({
+  name: "completes within deadline",
+  timeout: 5000, // 5 seconds
+  async fn() {
+    const response = await fetch("https://example.com");
+    await response.body?.cancel();
+  },
+});
+```
+
+If a test times out the next test in the same file still runs normally.
+
+Setting `timeout` to `0` or omitting it means the test runs without a deadline.
 
 ## Test Hooks
 
@@ -603,16 +625,18 @@ const response = await fetch("https://example.com");
 await response.body?.cancel(); // <- Always cancel the body when you are done with it, if you didn't consume it otherwise
 ```
 
-This sanitizer is enabled by default, but can be disabled in this test with
-`sanitizeResources: false`:
+As of Deno 2.8 this sanitizer is **off by default**. Opt in with
+`sanitizeResources: true`, or with one of the global mechanisms described in
+[Enabling sanitizers globally](#enabling-sanitizers-globally).
 
 ```ts
 Deno.test({
-  name: "leaky resource test",
+  name: "no leaks allowed",
   async fn() {
-    await Deno.open("hello.txt");
+    using file = await Deno.open("hello.txt");
+    // ...
   },
-  sanitizeResources: false,
+  sanitizeResources: true,
 });
 ```
 
@@ -635,21 +659,59 @@ Deno.test({
 });
 ```
 
-This sanitizer is enabled by default, but can be disabled with
-`sanitizeOps: false`:
+As of Deno 2.8 this sanitizer is **off by default**. Opt in with
+`sanitizeOps: true`, or with one of the global mechanisms described below.
 
 ```ts
 Deno.test({
-  name: "leaky operation test",
-  fn() {
-    crypto.subtle.digest(
-      "SHA-256",
-      new TextEncoder().encode("a".repeat(100000000)),
-    );
+  name: "no leaked ops allowed",
+  async fn() {
+    await someAsyncWork();
   },
-  sanitizeOps: false,
+  sanitizeOps: true,
 });
 ```
+
+### Enabling sanitizers globally
+
+If you want the pre-2.8 behavior — resource and op sanitizers on for every test
+— you can re-enable them at any of four scopes. Higher-precedence settings
+override lower ones.
+
+1. **Per-test** (highest precedence):
+
+   ```ts
+   Deno.test({
+     name: "strict",
+     sanitizeOps: true,
+     sanitizeResources: true,
+     fn() {/* … */},
+   });
+   ```
+
+2. **Per-module** with `Deno.test.sanitizer()`:
+
+   ```ts
+   Deno.test.sanitizer({ ops: true, resources: true });
+
+   Deno.test("uses module-level sanitizers", () => {/* … */});
+   ```
+
+3. **CLI flags**: `--sanitize-ops` and `--sanitize-resources`.
+
+4. **Environment variables**: `DENO_TEST_SANITIZE_OPS=1` and
+   `DENO_TEST_SANITIZE_RESOURCES=1`.
+
+5. **`deno.json`** (lowest precedence):
+
+   ```jsonc
+   {
+     "test": {
+       "sanitizeOps": true,
+       "sanitizeResources": true
+     }
+   }
+   ```
 
 ### Exit sanitizer
 

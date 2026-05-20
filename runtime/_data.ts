@@ -113,12 +113,20 @@ export const sidebar = [
             href: "/runtime/reference/cli/bench/",
           },
           {
+            title: "deno bump-version",
+            href: "/runtime/reference/cli/bump_version/",
+          },
+          {
             title: "deno bundle",
             href: "/runtime/reference/cli/bundle/",
           },
           {
             title: "deno check",
             href: "/runtime/reference/cli/check/",
+          },
+          {
+            title: "deno ci",
+            href: "/runtime/reference/cli/ci/",
           },
           {
             title: "deno clean",
@@ -181,6 +189,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/outdated/",
           },
           {
+            title: "deno pack",
+            href: "/runtime/reference/cli/pack/",
+          },
+          {
             title: "deno publish",
             href: "/runtime/reference/cli/publish/",
           },
@@ -235,6 +247,10 @@ export const sidebar = [
           {
             title: "deno unstable flags",
             href: "/runtime/reference/cli/unstable_flags/",
+          },
+          {
+            title: "deno why",
+            href: "/runtime/reference/cli/why/",
           },
           {
             title: "deno x",

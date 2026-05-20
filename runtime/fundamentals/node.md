@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-10
+last_modified: 2026-05-20
 title: "Node and npm Compatibility"
 description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
@@ -172,9 +172,10 @@ Here are a few globals that you might encounter in the wild and how to use them
 in Deno:
 
 - `process` - Deno provides the `process` global, which is by far the most
-  popular global used in popular npm packages. It is available to all code.
-  However, Deno will guide you towards importing it explicitly from
-  `node:process` module by providing lint warnings and quick-fixes:
+  popular global used in popular npm packages. It is available to all code. Deno
+  can also guide you towards importing it explicitly from `node:process`. Opt in
+  by enabling the [`no-process-global`](/lint/rules/no-process-global/) lint
+  rule (off by default since Deno 2.8):
 
 ```js title="process.js"
 console.log(process.versions.deno);
@@ -626,6 +627,57 @@ deno run --node-modules-dir main.ts
 Running the above command, with a `--node-modules-dir` flag, will create a
 `node_modules` folder in the current directory with a similar folder structure
 to npm.
+
+### node_modules layout: isolated vs hoisted
+
+When a local `node_modules` directory exists, Deno can lay it out in two ways.
+The default (**isolated**) installs each package into a content-addressed
+`.deno/` directory and exposes it through a symlink, so every package only sees
+its declared dependencies. This is similar to pnpm's layout.
+
+```text
+node_modules/
+├── .deno/chalk@5.6.2/node_modules/chalk/   ← real files
+└── chalk -> .deno/chalk@5.6.2/node_modules/chalk
+```
+
+Some npm tooling, and any package that walks `node_modules` looking for
+flat-resolved siblings, assumes the **hoisted** layout that npm and Yarn classic
+use. Deno 2.8 adds a hoisted mode
+([denoland/deno#32788](https://github.com/denoland/deno/pull/32788)) you can opt
+into with `nodeModulesLinker` in `deno.json`. The hoisted linker requires a
+manually-managed `node_modules` directory, so set `nodeModulesDir` to `manual`:
+
+```json title="deno.json"
+{
+  "nodeModulesDir": "manual",
+  "nodeModulesLinker": "hoisted"
+}
+```
+
+Or as a one-off CLI flag (also requiring `--node-modules-dir=manual`):
+
+```sh
+deno install --node-modules-dir=manual --node-modules-linker=hoisted
+```
+
+In hoisted mode the most-depended-upon version of each package is placed at the
+top of `node_modules/`, and conflicting versions are nested under the dependent
+that needs them, just like npm:
+
+```text
+node_modules/
+├── chalk/         ← real files
+├── express/
+├── ms/            ← hoisted: most commonly needed version
+└── debug/
+    └── node_modules/
+        └── ms/    ← nested: a different version
+```
+
+Stick with the default isolated mode unless a tool you depend on requires the
+hoisted layout. Isolated mode catches phantom dependencies that hoisted layouts
+hide.
 
 ## Node-API addons
 
