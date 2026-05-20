@@ -97,7 +97,7 @@ megabytes.
 
 Deltas are applied automatically when available, there is nothing to opt into.
 If a patch is missing or fails verification, `deno upgrade` transparently falls
-back to downloading the full archive, so the upgrade always succeeds.
+back to downloading the full archive.
 
 To force a full download (for example, in environments that cache release
 archives) pass `--no-delta`:
