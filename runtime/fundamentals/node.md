@@ -172,9 +172,10 @@ Here are a few globals that you might encounter in the wild and how to use them
 in Deno:
 
 - `process` - Deno provides the `process` global, which is by far the most
-  popular global used in popular npm packages. It is available to all code.
-  However, Deno will guide you towards importing it explicitly from
-  `node:process` module by providing lint warnings and quick-fixes:
+  popular global used in popular npm packages. It is available to all code. Deno
+  can also guide you towards importing it explicitly from `node:process`. Opt in
+  by enabling the [`no-process-global`](/lint/rules/no-process-global/) lint
+  rule (off by default since Deno 2.8):
 
 ```js title="process.js"
 console.log(process.versions.deno);
