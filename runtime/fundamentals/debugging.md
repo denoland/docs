@@ -140,9 +140,12 @@ The following built-in APIs are wired into the Network tab:
 - `node:http` and `node:https` client requests (`http.request`, `http.get`,
   `https.request`, `https.get`) — requests appear with `type: Other`, so any npm
   library that issues HTTP requests through `node:http` shows up too
-- `WebSocket` — connections appear alongside HTTP requests, with handshake
-  status and headers from the upgrade response, and a close event when the
-  socket is closed
+- `WebSocket` — client connections appear alongside HTTP requests, with
+  handshake status and headers from the upgrade response, message frames, and a
+  close event when the socket is closed
+- `Deno.upgradeWebSocket()` — server-side WebSocket upgrades are instrumented
+  too, so you can inspect both sides of a connection from a Deno-to-Deno
+  handshake
 
 For each request you can see the URL, method, status code, request and response
 headers, request and response bodies, and timing information.
