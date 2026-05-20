@@ -78,14 +78,6 @@ console.log(data.property); // Access JSON data as an object
 
 Starting with Deno 2.4 it's possible to import `text` and `bytes` modules too.
 
-:::info
-
-Support for importing `text` and `bytes` modules is experimental and requires
-`--unstable-raw-imports` CLI flag or `unstable.raw-import` option in
-[`deno.json`](/runtime/fundamentals/configuration/).
-
-:::
-
 ```ts
 import text from "./log.txt" with { type: "text" };
 
@@ -94,6 +86,16 @@ console.log(typeof text === "string");
 console.log(text);
 // Hello from a text file
 ```
+
+:::info Deno 2.8
+
+`text` imports are stable in Deno 2.8 and no longer require a flag.
+
+`bytes` imports are still experimental and require the `--unstable-raw-imports`
+CLI flag or the `unstable.raw-import` option in
+[`deno.json`](/runtime/fundamentals/configuration/).
+
+:::
 
 ```ts
 import bytes from "./image.png" with { type: "bytes" };
