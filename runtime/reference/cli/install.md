@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-05-20
 title: "deno install"
 oldUrl:
   - /runtime/manual/tools/script_installer/
@@ -45,6 +45,22 @@ You can also use `deno add` which is an alias to `deno install [PACKAGES]`
 If your project has a `package.json` file, the packages coming from npm will be
 added to `dependencies` in `package.json`. Otherwise all packages will be added
 to `deno.json`.
+
+### deno install --package-json
+
+By default, Deno picks the configuration file to write to (`deno.json` or
+`package.json`) based on which one is closest to the current working directory.
+Starting in Deno 2.8, `--package-json` forces dependencies to be written to
+`package.json`, regardless of any nearby `deno.json`. If no `package.json`
+exists yet, one is created.
+
+```sh
+deno install --package-json npm:express jsr:@std/path
+```
+
+JSR packages added with `--package-json` are written in their npm-compatible
+form (`npm:@jsr/...`). The same flag works on `deno add`, `deno remove`, and
+`deno uninstall`.
 
 ### deno install --entrypoint [FILES]
 
