@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-03
+last_modified: 2026-05-20
 title: "Testing"
 description: "A guide to Deno's testing capabilities. Learn about the built-in test runner, assertions, mocking, coverage reporting, snapshot testing, and how to write effective tests for your Deno applications."
 oldUrl:
@@ -117,6 +117,28 @@ Deno.test("database operations", async (t) => {
   });
 });
 ```
+
+## Timeouts
+
+You can set a maximum duration for individual tests using the `timeout` option.
+If a test exceeds its deadline it is marked as failed. Both asynchronous hangs
+(a promise that never resolves) and synchronous hot loops (`while (true) {}`)
+are caught.
+
+```ts
+Deno.test({
+  name: "completes within deadline",
+  timeout: 5000, // 5 seconds
+  async fn() {
+    const response = await fetch("https://example.com");
+    await response.body?.cancel();
+  },
+});
+```
+
+If a test times out the next test in the same file still runs normally.
+
+Setting `timeout` to `0` or omitting it means the test runs without a deadline.
 
 ## Test Hooks
 
@@ -568,16 +590,6 @@ export async function sendEmail(to: string) {
 
 The test runner offers several sanitizers to ensure that the test behaves in a
 reasonable and expected way.
-
-:::info Default change in Deno 2.8
-
-Starting in Deno 2.8, the **resource** and **async operation** sanitizers are
-**off by default**. Most users found that leaked-resource and leaked-op errors
-fired more often than they were useful. The exit sanitizer is still on by
-default. See [Enabling sanitizers globally](#enabling-sanitizers-globally)
-below for how to opt back in.
-
-:::
 
 ### Resource sanitizer
 
