@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-05-09
+last_modified: 2026-05-20
 title: "Web Platform APIs"
 description: "A guide to the Web Platform APIs available in Deno. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
 oldUrl:
@@ -98,6 +98,55 @@ Notes on fetching local files:
   determine things like the content type or content length.
 - Response bodies are streamed from the Rust side, so large files are available
   in chunks, and can be cancelled.
+
+## Structured Clone & Transferable Objects
+
+Deno supports [`structuredClone()`](/api/web/~/structuredClone) and
+[`postMessage()`](/api/web/~/Worker) for cloning and transferring objects across
+contexts (e.g. between the main thread and Web Workers).
+
+### Serializable types
+
+These types can be cloned with `structuredClone()` and sent via `postMessage()`:
+
+| Type                                      | Notes                                                                                        |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Primitives                                | `string`, `number`, `boolean`, `null`, `undefined`, `bigint`                                 |
+| `Array`, `Object`, `Map`, `Set`           | Including nested structures and circular references                                          |
+| `Date`, `RegExp`                          |                                                                                              |
+| `ArrayBuffer`, `TypedArray`, `DataView`   | Copied by default, or transferred (see below)                                                |
+| `Error` types                             | `Error`, `EvalError`, `RangeError`, `ReferenceError`, `SyntaxError`, `TypeError`, `URIError` |
+| [`Blob`](/api/web/~/Blob)                 | Requires Deno 2.8+                                                                           |
+| [`File`](/api/web/~/File)                 | Requires Deno 2.8+                                                                           |
+| [`DOMException`](/api/web/~/DOMException) |                                                                                              |
+| [`CryptoKey`](/api/web/~/CryptoKey)       |                                                                                              |
+
+### Transferable types
+
+These types can be _transferred_ (not copied) via the `transfer` option in
+`structuredClone()` or the `transfer` list in `postMessage()`. After transfer,
+the original object becomes unusable:
+
+| Type                                            | Notes                                    |
+| ----------------------------------------------- | ---------------------------------------- |
+| [`ArrayBuffer`](/api/web/~/ArrayBuffer)         | Moves the backing memory to the receiver |
+| [`MessagePort`](/api/web/~/MessagePort)         | Transfers the port to another context    |
+| [`ReadableStream`](/api/web/~/ReadableStream)   | Transfers the stream to another context  |
+| [`WritableStream`](/api/web/~/WritableStream)   | Transfers the stream to another context  |
+| [`TransformStream`](/api/web/~/TransformStream) | Transfers the stream to another context  |
+
+```ts
+// Clone a Blob
+const blob = new Blob(["hello"], { type: "text/plain" });
+const cloned = structuredClone(blob);
+console.log(await cloned.text()); // "hello"
+
+// Transfer an ArrayBuffer through a MessageChannel
+const buffer = new ArrayBuffer(1024);
+const ch = new MessageChannel();
+ch.port1.postMessage(buffer, [buffer]);
+// buffer.byteLength is now 0 (transferred)
+```
 
 ## CustomEvent and EventTarget
 
