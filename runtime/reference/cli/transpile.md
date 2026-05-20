@@ -8,12 +8,21 @@ description: "Transpile TypeScript, JSX, or TSX to JavaScript"
 ---
 
 The `deno transpile` command emits JavaScript from TypeScript, JSX, or TSX
-sources. It is useful when you need plain `.js` output to ship to a runtime that
-does not understand TypeScript, or to feed into a build step that expects
+sources. It's useful when you need plain `.js` output to ship to a runtime that
+doesn't understand TypeScript, or to feed into a build step that expects
 JavaScript.
 
 For most workflows you do **not** need `deno transpile` — `deno run`,
-`deno test`, and `deno serve` already accept `.ts`/`.tsx` files directly.
+`deno test`, and `deno serve` already accept `.ts` / `.tsx` files directly.
+Reach for it when:
+
+- You're shipping a library to consumers that run `node` or a browser bundler
+  directly. (For npm tarballs, prefer
+  [`deno pack`](/runtime/reference/cli/pack/), which wraps `deno transpile` with
+  packaging logic.)
+- A downstream tool only understands `.js`.
+- You want pre-compiled `.js` checked into a build artifact rather than
+  transpiled on the fly.
 
 ## Usage
 
@@ -27,11 +36,11 @@ transpiled, optionally via a shell glob.
 
 ### Output modes
 
-- **stdout** (default): write the transpiled output to standard out.
-- **single file** with `-o <path>`: write the output to `<path>`. Conflicts with
-  `--outdir`.
-- **directory** with `--outdir <dir>`: write the output of each input file into
-  `<dir>`, mirroring the source layout.
+| Mode                           | Effect                                                           |
+| ------------------------------ | ---------------------------------------------------------------- |
+| _no output flag_               | Write the transpiled output to standard out.                     |
+| `-o <path>`, `--output <path>` | Write the output to a single file. Conflicts with `--outdir`.    |
+| `--outdir <dir>`               | Write each input file into `<dir>`, mirroring the source layout. |
 
 ```sh
 # Print to stdout
@@ -47,7 +56,7 @@ deno transpile src/main.ts src/helpers.ts --outdir dist
 deno transpile src/*.ts --outdir dist
 ```
 
-### Input/output extension mapping
+### Input / output extension mapping
 
 | Input  | Output | Source map |
 | ------ | ------ | ---------- |
@@ -57,9 +66,9 @@ deno transpile src/*.ts --outdir dist
 | `.mts` | `.mjs` | `.mjs.map` |
 | `.cts` | `.cjs` | `.cjs.map` |
 
-JSX transform, decorators, and other emit settings come from `compilerOptions`
-in your `deno.json` (or `tsconfig.json`), so the output matches what `deno run`
-would execute. See
+JSX transform, decorators, target, and other emit settings come from
+`compilerOptions` in your `deno.json` (or `tsconfig.json`), so the output
+matches what `deno run` would execute. See
 [TypeScript compiler options](/runtime/fundamentals/typescript/#configuring-typescript-compiler-options)
 for the full list.
 
@@ -80,8 +89,8 @@ deno transpile main.ts -o dist/main.js --source-map separate
 ### Type declarations
 
 Use `--declaration` to emit `.d.ts` declaration files. Declarations are produced
-by `tsc`, so this flag honors the `compilerOptions` from your `deno.json` /
-`tsconfig.json`.
+by `tsc` (using the bundled TypeScript), so this flag honors the
+`compilerOptions` from your `deno.json` / `tsconfig.json`.
 
 `.d.ts` files are always written to disk — next to the source when no output
 location is set, or into `--outdir` when one is supplied — even if the
@@ -90,3 +99,84 @@ JavaScript output is going to stdout or a single `-o` file.
 ```sh
 deno transpile src/*.ts --outdir dist --declaration
 ```
+
+## Flags
+
+### Emit options
+
+| Flag                    | Description                                                       |
+| ----------------------- | ----------------------------------------------------------------- |
+| `-o`, `--output <FILE>` | Output to a single file. Conflicts with `--outdir`.               |
+| `--outdir <DIR>`        | Output directory for transpiled files. Mirrors the source layout. |
+| `--source-map <MODE>`   | `none` (default), `inline`, or `separate`.                        |
+| `--declaration`         | Emit `.d.ts` declaration files via `tsc`.                         |
+
+### Configuration
+
+| Flag                    | Description                                                                                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-c`, `--config <FILE>` | Path to `deno.json` / `deno.jsonc`. Normally auto-detected.                                                                                       |
+| `--no-config`           | Disable automatic loading of the configuration file.                                                                                              |
+| `--conditions <COND>`   | Comma-separated [import conditions](https://docs.deno.com/go/conditional-exports) for npm package exports. Can also be set via `DENO_CONDITIONS`. |
+
+### Dependency management
+
+| Flag                             | Description                                                                                                                          |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `--import-map <FILE>`            | Load an import map from a local file or remote URL.                                                                                  |
+| `--lock [<FILE>]`                | Check the specified lock file (defaults to `./deno.lock`).                                                                           |
+| `--no-lock`                      | Disable lockfile discovery.                                                                                                          |
+| `--frozen[=<BOOLEAN>]`           | Error out if the lockfile is out of date.                                                                                            |
+| `--no-npm`                       | Do not resolve npm modules.                                                                                                          |
+| `--no-remote`                    | Do not resolve remote modules.                                                                                                       |
+| `--node-modules-dir[=<MODE>]`    | Sets the node_modules management mode (`auto`, `manual`, `none`).                                                                    |
+| `--node-modules-linker=<MODE>`   | Sets the linker mode (`isolated` or `hoisted`).                                                                                      |
+| `-r`, `--reload[=<BLOCKLIST>]`   | Reload cached source. Optional comma-separated list of specifiers to selectively reload (e.g. `npm:`, `npm:chalk`).                  |
+| `--vendor[=<BOOLEAN>]`           | Toggle the local `vendor/` folder for remote modules and `node_modules/` for npm.                                                    |
+| `--cert <FILE>`                  | Load a certificate authority from a PEM file.                                                                                        |
+| `--minimum-dependency-age <AGE>` | (Unstable) Refuse to resolve dependencies younger than the given age. Accepts `120` (minutes), `P2D` (ISO-8601), or an RFC3339 date. |
+
+### Misc
+
+| Flag            | Description                 |
+| --------------- | --------------------------- |
+| `-q`, `--quiet` | Suppress diagnostic output. |
+| `-h`, `--help`  | Show help.                  |
+
+## How it differs from `tsc`
+
+`deno transpile` and TypeScript's `tsc` overlap, but they aren't drop-in
+replacements for each other:
+
+| Concern                        | `deno transpile`                                       | `tsc`                            |
+| ------------------------------ | ------------------------------------------------------ | -------------------------------- |
+| **Type checking**              | None — emit only. Use `deno check` separately.         | Full type checking by default.   |
+| **`.d.ts` generation**         | Yes, with `--declaration`. Delegates to bundled `tsc`. | Yes.                             |
+| **JSR / npm / remote imports** | Resolves them.                                         | Doesn't resolve them.            |
+| **Config source**              | `deno.json` (or `tsconfig.json`).                      | `tsconfig.json` only.            |
+| **Speed**                      | Fast SWC-based emit.                                   | Slower (type-checking included). |
+
+If you want type errors to surface, run
+[`deno check`](/runtime/reference/cli/check/) before or after transpilation.
+`deno transpile` will happily emit code that fails to type-check.
+
+## Caveats
+
+- **No bundling.** Each input file produces one output file. Imports are
+  rewritten extension-only (`./foo.ts` → `./foo.js`) but the resulting graph
+  still requires a runtime that resolves the imports. For a single-file output,
+  use [`deno bundle`](/runtime/reference/cli/bundle/).
+- **No directory crawl.** Passing a directory does nothing — pass the files
+  explicitly (`src/**/*.ts`) or via a glob.
+- **Source maps and stdout.** `--source-map inline` works when writing to
+  stdout; `separate` requires an output path it can write the map next to.
+
+## See also
+
+- [`deno bundle`](/runtime/reference/cli/bundle/) — produce a single bundled
+  JavaScript file
+- [`deno pack`](/runtime/reference/cli/pack/) — build an npm-publishable tarball
+  (uses `deno transpile` internally)
+- [`deno check`](/runtime/reference/cli/check/) — type-check without emitting
+- [TypeScript support](/runtime/fundamentals/typescript/) — overview of how
+  TypeScript works in Deno

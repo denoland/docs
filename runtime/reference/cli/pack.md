@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-04-29
+last_modified: 2026-05-20
 title: "deno pack"
 command: pack
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -7,20 +7,27 @@ openGraphTitle: "deno pack"
 description: "Create an npm tarball from a Deno project for publishing to npm"
 ---
 
-The `deno pack` command builds an npm-compatible tarball from your Deno project.
-It transpiles TypeScript to JavaScript, generates `.d.ts` declaration files,
-rewrites import specifiers, and synthesizes the `package.json` that npm needs:
-so you can publish a Deno-authored library straight to the npm registry.
+The `deno pack` command builds an npm-compatible tarball (`.tgz`) from a Deno
+project, so you can publish a Deno-authored library straight to the npm
+registry. It transpiles TypeScript to JavaScript, generates `.d.ts` declaration
+files, rewrites import specifiers, and synthesizes a `package.json` that
+npm-only consumers can understand.
 
-## Usage
+`deno pack` is **not** equivalent to `npm pack`. It's a build step that converts
+a Deno/JSR project into an npm-publishable package — closer to
+[`deno transpile`](/runtime/reference/cli/transpile/) plus `npm pack` combined.
+It does not read an existing `package.json`, does not honor `.npmignore`, and
+does not run `prepublishOnly` / `prepare` lifecycle scripts.
+
+## Quick start
 
 ```sh
 deno pack
 ```
 
 `deno pack` reads the package metadata from `deno.json` (the `name`, `version`,
-and `exports` you'd normally use to publish to JSR) and emits a gzipped tarball
-in the current directory.
+and `exports` you'd use to publish to JSR) and writes a gzipped tarball to the
+current directory.
 
 Given a `deno.json` like:
 
@@ -32,112 +39,211 @@ Given a `deno.json` like:
 }
 ```
 
-`deno pack` produces `scope-my-lib-1.0.0.tgz` containing:
+`deno pack` produces `scope-my-lib-1.0.0.tgz` (the `@` is stripped and `/`
+becomes `-`, matching `npm pack`'s naming convention).
 
-- A generated `package.json` with `name`, `version`, `type: "module"`,
-  conditional `exports` (`types`/`import`/`default`), and a `dependencies` field
-  extracted from your `jsr:`/`npm:` imports.
-- Transpiled `.js` files (with inline source maps by default).
-- Generated `.d.ts` declaration files (produced the same way as
-  [`deno publish`](/runtime/reference/cli/publish/)).
-- `README` and `LICENSE` files from the project root, if present.
+## What's in the tarball
+
+| Contents                                                                                                                                                                                           |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A generated `package.json` with `name`, `version`, `type: "module"`, conditional `exports` (`types` / `import` / `default`), and a `dependencies` field derived from your `jsr:` / `npm:` imports. |
+| Transpiled `.js` files (with inline source maps by default; pass `--no-source-maps` to omit).                                                                                                      |
+| Generated `.d.ts` declaration files (produced via the same fast-check pipeline as [`deno publish`](/runtime/reference/cli/publish/)).                                                              |
+| `README` and `LICENSE` files from the project root, if present.                                                                                                                                    |
 
 Only files reachable through the module graph from `exports` are included.
-Non-JS assets such as data files or WASM are only included if they are imported.
+Non-JS assets such as data files or WASM are only included if they're imported
+from JS/TS. If you need to ship arbitrary files, list them as positional
+arguments:
+
+```sh
+deno pack assets/icon.svg locales/*.json
+```
 
 ## Specifier rewriting
 
-So the generated package works on Node and other npm consumers, `deno pack`
+For the generated package to work on Node and other npm consumers, `deno pack`
 rewrites imports as it transpiles:
 
-- `jsr:@std/path` → `@jsr/std__path`
-- `npm:express@4` → `express`
-- `./utils.ts` → `./utils.js`
-- `node:fs` → unchanged
+| In your source  | In the tarball   | Notes                                                |
+| --------------- | ---------------- | ---------------------------------------------------- |
+| `jsr:@std/path` | `@jsr/std__path` | Consumers need the JSR npm registry configured.      |
+| `npm:express@4` | `express`        | Version moves into `dependencies` in `package.json`. |
+| `./utils.ts`    | `./utils.js`     | Extension only — no path restructuring.              |
+| `node:fs`       | `node:fs`        | Unchanged.                                           |
 
-The `@jsr/` scope means consumers of the published tarball need the JSR npm
-registry configured (for example via `npx jsr add`) to install JSR dependencies.
+Because JSR imports turn into `@jsr/...` specifiers, anyone installing the
+published tarball needs the JSR npm registry configured. The simplest way is to
+run [`npx jsr add`](https://jsr.io/docs/npm-compatibility) once in the consumer
+project; that sets up the `.npmrc` entries for the `@jsr` scope.
 
 ## Deno API shimming
 
-If `deno pack` detects use of the `Deno.*` global, it adds
-[`@deno/shim-deno`](https://www.npmjs.com/package/@deno/shim-deno) as a
-dependency and injects the shim so the package can run under Node.js. Pass
-`--no-deno-shim` to opt out.
+If your code uses the `Deno.*` global, `deno pack` adds
+[`@deno/shim-deno`](https://www.npmjs.com/package/@deno/shim-deno) as a runtime
+dependency and injects the shim so the package can run under Node.js. The shim
+covers the subset of `Deno.*` that maps cleanly onto Node APIs — review the
+shim's docs to see what's polyfilled.
+
+Pass `--no-deno-shim` to opt out, e.g. if you've already provided your own
+abstraction or only intend the package to run under Deno-on-npm.
 
 ## Publishing to npm
-
-Hand the tarball to `npm publish`:
 
 ```sh
 deno pack
 npm publish ./scope-my-lib-1.0.0.tgz
 ```
 
-## Examples
-
-Pack the current project:
+A typical release flow:
 
 ```sh
+# 1. Bump the version
+deno bump-version patch
+
+# 2. Build the tarball
+deno pack
+
+# 3. Verify the contents (extracted view)
+tar -tzf scope-my-lib-1.0.0.tgz
+
+# 4. Push to npm
+npm publish ./scope-my-lib-1.0.0.tgz
+```
+
+For JSR releases, use [`deno publish`](/runtime/reference/cli/publish/) instead
+— `deno pack` is specifically for the npm registry.
+
+## Workspace support
+
+In a [workspace](/runtime/fundamentals/workspaces/), `deno pack` runs against
+the current working directory's member. To pack a specific member from the root:
+
+```sh
+cd packages/my-lib
 deno pack
 ```
 
-Override the version from `deno.json`:
+Cross-workspace `npm:` / `jsr:` dependencies are rewritten in the generated
+`package.json` to point at their published versions, not to other workspace
+members — make sure those dependencies have been released independently before
+publishing your tarball.
+
+## Examples
+
+### Override the version
+
+Useful when releasing a one-off prerelease without editing `deno.json`:
 
 ```sh
-deno pack --set-version 2.0.0
+deno pack --set-version 2.0.0-rc.1
 ```
 
-Write the tarball to a specific path:
+### Pick the output path
 
 ```sh
-deno pack --output my-package.tgz
+deno pack --output dist/my-package.tgz
 ```
 
-Preview tarball contents without writing the file:
+### Preview without writing
 
 ```sh
 deno pack --dry-run
 ```
 
-Allow packing when [slow types](https://jsr.io/docs/about-slow-types) are
-present (skips `.d.ts` generation):
+`--dry-run` prints what _would_ be in the tarball without producing one — handy
+in CI to verify file inclusion rules.
+
+### Allow slow types
+
+[Slow types](https://jsr.io/docs/about-slow-types) prevent `.d.ts` generation.
+Pass `--allow-slow-types` to pack anyway; the tarball will not include
+declaration files.
 
 ```sh
 deno pack --allow-slow-types
 ```
 
-Don't inject the `@deno/shim-deno` polyfill:
+### Skip the Deno shim
 
 ```sh
 deno pack --no-deno-shim
 ```
 
-Pack even though the git working tree has uncommitted changes:
+### Pack despite a dirty working tree
 
 ```sh
 deno pack --allow-dirty
 ```
 
-Exclude paths from the tarball:
+By default `deno pack` refuses to pack when the git working tree has uncommitted
+changes, to make releases reproducible from the commit hash.
+
+### Exclude files
 
 ```sh
-deno pack --ignore=tests/
+deno pack --ignore=tests/ --ignore='**/*.test.ts'
 ```
+
+`--ignore` accepts glob patterns. Combine multiple `--ignore` flags to add
+patterns.
+
+### Omit source maps
+
+```sh
+deno pack --no-source-maps
+```
+
+By default, source maps are inlined in the emitted `.js` files. Use
+`--no-source-maps` to strip them — smaller tarballs, but harder to debug
+upstream.
+
+## Flags
+
+| Flag                      | Description                                                                                  |
+| ------------------------- | -------------------------------------------------------------------------------------------- |
+| `-o`, `--output <FILE>`   | Output tarball path. Defaults to `<name>-<version>.tgz` in the current directory.            |
+| `--set-version <VERSION>` | Override the version from `deno.json` for this build.                                        |
+| `--dry-run`               | Show what would be packed without creating the tarball.                                      |
+| `--ignore=<pattern>...`   | Glob patterns to exclude. May be repeated.                                                   |
+| `--allow-dirty`           | Allow packing despite uncommitted changes in the working tree.                               |
+| `--allow-slow-types`      | Skip `.d.ts` generation when [slow types](https://jsr.io/docs/about-slow-types) are present. |
+| `--no-deno-shim`          | Don't add `@deno/shim-deno` or inject the shim for `Deno.*` usage.                           |
+| `--no-source-maps`        | Don't inline source maps in emitted `.js` files.                                             |
+| `-c`, `--config <FILE>`   | Path to `deno.json` / `deno.jsonc`. Normally auto-detected.                                  |
+| `--no-config`             | Disable automatic loading of the configuration file.                                         |
+| `-q`, `--quiet`           | Suppress diagnostic output.                                                                  |
+
+## Limitations
+
+- **No `bin` entries.** `deno pack` does not synthesize the `package.json` `bin`
+  field. Library publishing is supported; CLI tools that need a `node`-shebanged
+  executable still need a hand-rolled npm package.
+- **No native addons.** Packages that link against native code or ship a
+  `node-gyp` build step are out of scope.
+- **No `.npmignore`.** Use `--ignore` for excludes; `.gitignore` is honored for
+  what's considered part of the project.
+- **No lifecycle scripts.** `prepublishOnly` / `prepare` / `postinstall` hooks
+  from a hand-written `package.json` are not run because the `package.json` is
+  generated, not read.
 
 ## When to use `deno pack` vs `deno publish`
 
-- Use [`deno publish`](/runtime/reference/cli/publish/) when releasing a package
-  to [JSR](https://jsr.io).
-- Use `deno pack` when you also want to ship the same library to the npm
-  registry. For example, to reach Node.js consumers who can't yet use JSR.
+| Need                                                | Use                                               |
+| --------------------------------------------------- | ------------------------------------------------- |
+| Release to [JSR](https://jsr.io)                    | [`deno publish`](/runtime/reference/cli/publish/) |
+| Release the same library to npm                     | `deno pack` → `npm publish ./*.tgz`               |
+| Reach Node-only consumers without forcing JSR setup | `deno pack` (rewrites JSR imports for them)       |
 
-`deno pack` is not equivalent to `npm pack`: it is a build step that converts a
-Deno/JSR project into an npm-publishable package, closer to
-[`deno transpile`](/runtime/reference/cli/transpile/) plus `npm pack` combined.
-It does not read an existing `package.json`, does not honor `.npmignore`, and
-does not run `prepublishOnly`/`prepare` lifecycle scripts.
+A library can ship to both — release to JSR with `deno publish`, then build and
+push a tarball to npm with `deno pack` for users who haven't adopted JSR yet.
 
-Before packing, bump the `version` field with
-[`deno bump-version`](/runtime/reference/cli/bump_version/) so the generated
-tarball name and `package.json` carry the new version.
+## See also
+
+- [`deno publish`](/runtime/reference/cli/publish/) — release to JSR
+- [`deno transpile`](/runtime/reference/cli/transpile/) — the emit step that
+  `deno pack` uses internally
+- [`deno bump-version`](/runtime/reference/cli/bump_version/) — bump `version`
+  in `deno.json` / `package.json` before packing
+- [Publishing modules](/runtime/fundamentals/modules/#publishing-modules) —
+  overview of where Deno-authored libraries can be published
