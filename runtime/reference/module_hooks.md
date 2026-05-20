@@ -1,6 +1,6 @@
 ---
 last_modified: 2026-05-20
-title: "Module Customization Hooks"
+title: "Module customization hooks"
 description: "Customize module resolution and loading in Deno using the Node.js-compatible module.registerHooks() API. Create virtual modules, transpile custom formats, and intercept imports."
 ---
 
