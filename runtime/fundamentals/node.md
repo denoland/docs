@@ -33,9 +33,8 @@ That's all you really need to know to get started! However, there are some key
 differences between the two runtimes that you can take advantage of to make your
 code simpler and smaller when migrating your Node.js projects to Deno.
 
-Compatibility against Node's own test suite jumped from ~42% at the start of
-2026 to **over 75% in Deno 2.8**, covering nearly every `node:` module. You can
-track the current state at
+As of Deno 2.8, **over 75% of Node's own test suite passes** in Deno, covering
+nearly every `node:` module. You can track the current state at
 [node-test-viewer.deno.dev](https://node-test-viewer.deno.dev/).
 
 We provide a [list of supported Node.js APIs](/runtime/reference/node_apis/)
