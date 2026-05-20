@@ -130,16 +130,16 @@ to debug the code.
 
 Starting with Deno 2.8, Chrome DevTools can inspect network traffic made by your
 program in the same way it inspects traffic in a browser tab. Run your program
-with `--inspect-wait` (or `--inspect` / `--inspect-brk`), open `chrome://inspect`
-in a Chromium derived browser, click **Inspect** on the Deno target, and switch
-to the **Network** tab.
+with `--inspect-wait` (or `--inspect` / `--inspect-brk`), open
+`chrome://inspect` in a Chromium derived browser, click **Inspect** on the Deno
+target, and switch to the **Network** tab.
 
 The following built-in APIs are wired into the Network tab:
 
 - `fetch()` — requests appear with `type: Fetch`
 - `node:http` and `node:https` client requests (`http.request`, `http.get`,
-  `https.request`, `https.get`) — requests appear with `type: Other`, so any
-  npm library that issues HTTP requests through `node:http` shows up too
+  `https.request`, `https.get`) — requests appear with `type: Other`, so any npm
+  library that issues HTTP requests through `node:http` shows up too
 - `WebSocket` — connections appear alongside HTTP requests, with handshake
   status and headers from the upgrade response, and a close event when the
   socket is closed
@@ -163,9 +163,9 @@ Visit chrome://inspect to connect to the debugger.
 Deno is waiting for debugger to connect.
 ```
 
-Open `chrome://inspect`, click **Inspect** on the Deno target, and switch to
-the **Network** tab. The `fetch()` request shows up as a regular network entry,
-with the request and response panes populated:
+Open `chrome://inspect`, click **Inspect** on the Deno target, and switch to the
+**Network** tab. The `fetch()` request shows up as a regular network entry, with
+the request and response panes populated:
 
 ![fetch() request in the Network tab](./images/debugger-network-fetch.png)
 
@@ -174,17 +174,26 @@ breakdown:
 
 ![Inspecting response headers and body](./images/debugger-network-response.png)
 
-The same applies to `node:http` and `node:https`, so npm libraries that
-issue HTTP requests through Node's built-in client (rather than `fetch()`)
-also show up in the Network tab. For example:
+The same applies to `node:http` and `node:https`, so npm libraries that issue
+HTTP requests through Node's built-in client (rather than `fetch()`) also show
+up in the Network tab. For example:
 
 ```ts title="node-http.ts"
 import https from "node:https";
 
-https.get("https://api.github.com/repos/denoland/deno", (res) => {
+const options = {
+  hostname: "api.github.com",
+  path: "/repos/denoland/deno",
+  headers: { "User-Agent": "deno-docs-example" },
+};
+
+https.get(options, (res) => {
   let body = "";
   res.on("data", (chunk) => body += chunk);
-  res.on("end", () => console.log(res.statusCode, JSON.parse(body).stargazers_count));
+  res.on(
+    "end",
+    () => console.log(res.statusCode, JSON.parse(body).stargazers_count),
+  );
 });
 ```
 
@@ -192,9 +201,9 @@ https.get("https://api.github.com/repos/denoland/deno", (res) => {
 $ deno run --inspect-wait --allow-net node-http.ts
 ```
 
-The request appears in the Network tab with `type: Other` (to distinguish
-it from `type: Fetch` entries), but with the same headers, body, and
-timing information as a `fetch()` request:
+The request appears in the Network tab with `type: Other` (to distinguish it
+from `type: Fetch` entries), but with the same headers, body, and timing
+information as a `fetch()` request:
 
 ![node:https request in the Network tab](./images/debugger-network-node-http.png)
 
