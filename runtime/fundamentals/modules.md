@@ -112,9 +112,9 @@ Uint8Array(12) [
 
 Starting in Deno 2.8, the
 [TC39 Deferred Module Evaluation proposal](https://github.com/tc39/proposal-defer-import-eval)
-is supported. The `import defer` syntax loads a module — including its
-dependencies — but does **not** execute its top-level code until you first read
-a property from the namespace:
+is supported. The `import defer` syntax loads a module (including its
+dependencies) but does **not** execute its top-level code until you first read a
+property from the namespace:
 
 ```ts title="main.ts"
 import defer * as expensive from "./expensive.ts";
@@ -125,7 +125,7 @@ console.log("startup is fast — expensive.ts has not run yet");
 console.log(expensive.value);
 ```
 
-Use it to defer the cost of modules that are only needed conditionally — for
+Use it to defer the cost of modules that are only needed conditionally; for
 example, error-path code in a CLI tool or feature flags whose implementation is
 heavy to initialize.
 
