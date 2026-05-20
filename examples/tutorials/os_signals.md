@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-05-20
 title: "Handle OS signals"
 description: "Tutorial on handling operating system signals in Deno. Learn how to capture SIGINT and SIGBREAK events, manage signal listeners, and implement graceful shutdown handlers in your applications."
 url: /examples/os_signals_tutorial/
@@ -8,8 +8,9 @@ oldUrl:
   - /runtime/tutorials/os_signals/
 ---
 
-> ⚠️ Windows supports listening for `SIGINT`, `SIGBREAK`, `SIGTERM`, and
-> `SIGQUIT` (the latter two via libuv's Windows signal emulation).
+> ⚠️ Windows supports listening for `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`,
+> `SIGHUP`, and `SIGWINCH` (all except `SIGINT`/`SIGBREAK` go through libuv's
+> Windows signal emulation).
 
 ## Concepts
 
@@ -82,10 +83,10 @@ deno run signal_listeners.ts
 The supported signal set differs between platforms. The Windows-specific
 behavior is:
 
-| Use case                         | Supported signals on Windows                                                                                 |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `Deno.addSignalListener(sig, …)` | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`                                                                   |
-| `Deno.kill(pid, sig)`            | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`, `SIGKILL`, `SIGABRT`, plus signal `0` for a process-health check |
+| Use case                         | Supported signals on Windows                                                                                                       |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `Deno.addSignalListener(sig, …)` | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`, `SIGHUP`, `SIGWINCH`                                                                   |
+| `Deno.kill(pid, sig)`            | `SIGINT`, `SIGBREAK`, `SIGTERM`, `SIGQUIT`, `SIGHUP`, `SIGWINCH`, `SIGKILL`, `SIGABRT`, plus signal `0` for a process-health check |
 
 `SIGKILL` and `SIGABRT` are deliberately **not** registerable via
 `addSignalListener` — they're uncatchable / fatal, matching Unix semantics. On
