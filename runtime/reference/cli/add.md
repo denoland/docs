@@ -18,8 +18,18 @@ For more on how Deno handles dependencies, see
 Add packages from JSR and npm:
 
 ```sh
-deno add @std/path npm:express
+deno add npm:express hono zod
+deno add jsr:@std/path
 ```
+
+:::info Deno 2.8
+
+Unprefixed package names are treated as npm packages by default, so the `npm:`
+prefix is no longer required at the CLI. `deno add express` is equivalent to
+`deno add npm:express`. JSR packages still need the `jsr:` prefix to stay
+unambiguous. The `npm:` prefix remains required in `import` specifiers.
+
+:::
 
 By default, dependencies are added with a caret (`^`) version range. Use
 `--save-exact` to pin to an exact version:
@@ -30,12 +40,6 @@ deno add --save-exact @std/path
 
 This saves the dependency without the `^` prefix (e.g., `1.0.0` instead of
 `^1.0.0`).
-
-Treat unprefixed package names as npm packages:
-
-```sh
-deno add --npm express
-```
 
 ## Where dependencies are stored
 

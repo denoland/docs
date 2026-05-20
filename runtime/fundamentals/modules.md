@@ -295,6 +295,15 @@ $ deno add jsr:@luca/cases@1.0.0
 Add @luca/cases - jsr:@luca/cases@1.0.0
 ```
 
+:::info Deno 2.8
+
+Unprefixed package names passed to `deno add` / `deno install` are treated as
+npm packages by default. `deno add express` is now equivalent to
+`deno add npm:express`. JSR packages still need the `jsr:` prefix to stay
+unambiguous.
+
+:::
+
 Read more in [`deno add` reference](/runtime/reference/cli/add/).
 
 You can also remove dependencies using `deno remove`:
@@ -768,6 +777,45 @@ local workspaces). Good supply chain management helps you achieve four goals:
    codebases to centralize version changes.
 6. Periodically unfreeze and update consciously (for example on a weekly or
    sprint cadence) instead of ad‑hoc updates during feature work.
+7. Set a [minimum dependency age](#minimum-dependency-age) so freshly published
+   versions can't slip into an install before the ecosystem has had time to spot
+   a compromised release.
+
+### Minimum dependency age
+
+Deno can refuse to install any package version that is younger than a configured
+age. This is a cheap, broad defence against npm supply-chain attacks: malicious
+versions are usually detected and yanked within days, so delaying installs by a
+similar window catches the bulk of them.
+
+You can configure the same control in three places; pick whichever fits the
+project:
+
+- **`deno.json`**, apply project-wide:
+
+  ```jsonc title="deno.json"
+  {
+    "minimumDependencyAge": "72h"
+  }
+  ```
+
+- **CLI flag**, apply ad-hoc, e.g. for a one-off install or in a CI step:
+
+  ```sh
+  deno install --minimum-dependency-age=72h
+  ```
+
+- **`.npmrc`** (Deno 2.8+), matches the npm convention, useful when sharing the
+  same `.npmrc` across npm and Deno tooling:
+
+  ```ini title=".npmrc"
+  min-release-age=72h
+  ```
+
+Values accept human-friendly durations (`72h`, `P2D`), absolute cutoff dates
+(`2025-09-16`), or `0` to disable. See
+[`.npmrc` configuration](/runtime/fundamentals/node/#npmrc-configuration) for
+the other npm-registry options Deno reads.
 
 ### Typical CI pattern
 

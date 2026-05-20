@@ -237,9 +237,9 @@ subclasses instead.
   [`Timeout`](https://nodejs.org/api/timers.html#class-timeout) object instead
   of a number, matching Node.js semantics. The returned object exposes methods
   like `.ref()`, `.unref()`, `.refresh()`, and `.hasRef()`. It still coerces to
-  a number (via `Symbol.toPrimitive`), so existing code that stores the timer
-  ID as a number or passes it to `clearTimeout`/`clearInterval` continues to
-  work unchanged.
+  a number (via `Symbol.toPrimitive`), so existing code that stores the timer ID
+  as a number or passes it to `clearTimeout`/`clearInterval` continues to work
+  unchanged.
 
   ```ts
   const t = setTimeout(() => {}, 1000);
@@ -839,6 +839,62 @@ and run it using the `deno run` command:
 ```sh
 deno run main.ts
 ```
+
+### `.npmrc` configuration
+
+Beyond the basic registry / token setup above, Deno reads several other `.npmrc`
+fields. The ones most likely to matter:
+
+- **Mutual-TLS authentication** (Deno 2.8+): `certfile` and `keyfile` point at
+  PEM files used to authenticate the client when the registry requires mTLS.
+
+  ```ini title=".npmrc"
+  //registry.mycompany.com/:certfile=/etc/deno/client.crt
+  //registry.mycompany.com/:keyfile=/etc/deno/client.key
+  ```
+
+- **`email` on `_auth` entries** (Deno 2.8+): some legacy on-prem registries
+  require an `email` alongside the auth token.
+
+  ```ini title=".npmrc"
+  //registry.mycompany.com/:_auth=secretToken
+  //registry.mycompany.com/:email=ci@mycompany.com
+  ```
+
+- **`min-release-age`** (Deno 2.8+): refuses to install package versions younger
+  than the configured age. Useful as a default supply-chain guard for all
+  installs. The same control is also available as the CLI flag
+  `--minimum-dependency-age` and the `minimumDependencyAge` field in
+  `deno.json`. See
+  [Minimum dependency age](/runtime/fundamentals/modules/#minimum-dependency-age)
+  for the full picture.
+
+  ```ini title=".npmrc"
+  min-release-age=72h
+  ```
+
+- **`NPM_CONFIG_REGISTRY` env var**: overrides the registry set in `.npmrc`,
+  matching npm's precedence (handy in CI when you want to redirect installs
+  without editing the checked-in `.npmrc`).
+
+### `file:` and `link:` dependencies in published packages
+
+Some published npm packages accidentally ship a `file:` or `link:` specifier in
+their `package.json` that points at a path on the publisher's machine:
+
+```jsonc title="some-package/package.json"
+{
+  "dependencies": {
+    "lodash": "^4.17.0",
+    "local-helpers": "file:../local-helpers"
+  }
+}
+```
+
+Starting in Deno 2.8, those `file:` and `link:` entries are silently skipped
+while resolving npm metadata, so packages that carry a stray local-path
+dependency install cleanly instead of failing with an "Invalid version
+requirement" error.
 
 ## Node to Deno Cheatsheet
 

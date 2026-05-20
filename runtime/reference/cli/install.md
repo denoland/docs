@@ -36,6 +36,15 @@ Use this command to install particular packages and add them to `deno.json` or
 deno install jsr:@std/testing npm:express
 ```
 
+:::info Deno 2.8
+
+Unprefixed package names are treated as npm packages by default, so the `npm:`
+prefix is no longer required at the CLI. `deno install express` is equivalent to
+`deno install npm:express`. JSR packages still need the `jsr:` prefix to stay
+unambiguous. The `npm:` prefix remains required in `import` specifiers.
+
+:::
+
 :::tip
 
 You can also use `deno add` which is an alias to `deno install [PACKAGES]`
