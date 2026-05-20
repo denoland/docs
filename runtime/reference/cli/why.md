@@ -45,5 +45,5 @@ deno why ms@2.0.0
 ```
 
 If the package is not part of the resolved dependency tree, `deno why` reports
-that and exits non-zero — useful in CI scripts that assert a package is _not_
+that and exits non-zero: useful in CI scripts that assert a package is _not_
 pulled in.
