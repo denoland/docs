@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-05-20
 title: "deno eval"
 oldUrl: /runtime/manual/tools/eval/
 command: eval
@@ -26,22 +26,27 @@ deno eval "const greeting: string = 'Hello'; console.log(greeting)"
 
 ## CommonJS and ESM auto-detection
 
-Starting in Deno 2.8, `deno eval` inspects the snippet for `import` /
-`export` declarations and treats it as ESM if it finds any. Otherwise the
-snippet runs as CommonJS — meaning `require`, `module.exports`, and friends
-work without any flag.
+Starting in Deno 2.8, `deno eval` defaults to ESM but switches to CommonJS when
+the snippet looks like a CJS script. A snippet is treated as CJS only when it
+has no `import` / `export` declarations **and** it references one of the
+CommonJS-specific bindings: `require(`, `module.exports`, `exports.`,
+`__dirname`, or `__filename`. Anything else — including plain expressions — runs
+as ESM, matching the longstanding `deno eval` default.
 
 ```sh
-# Detected as CommonJS — no --ext=cjs needed
+# Detected as CommonJS — uses require()
 deno eval "const path = require('path'); console.log(path.join('a', 'b'))"
 
-# Detected as ESM because of the static import
+# Runs as ESM (the default) — no CJS-specific patterns
+deno eval "console.log(1 + 2)"
+
+# Runs as ESM because of the static import
 deno eval "import { ok } from 'node:assert'; ok(true); console.log('ok')"
 ```
 
-If you need to override the heuristic — for example when a snippet has no
-imports but you still want it parsed as ESM — pass `--ext=mjs` (or
-`--ext=cjs` to force CommonJS).
+If the heuristic gets it wrong — for example when a snippet mentions `require`
+only inside a string — pass `--ext=mjs` to force ESM or `--ext=cjs` to force
+CommonJS.
 
 ## Printing expression results
 
