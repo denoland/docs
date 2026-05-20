@@ -1,24 +1,23 @@
 ---
-last_modified: 2026-05-05
+last_modified: 2026-05-20
 title: "Module Customization Hooks"
-description: "Customize module resolution and loading in Deno using Node.js-compatible module.register() and module.registerHooks() APIs. Create virtual modules, transpile custom formats, and intercept imports."
+description: "Customize module resolution and loading in Deno using the Node.js-compatible module.registerHooks() API. Create virtual modules, transpile custom formats, and intercept imports."
 ---
 
-Deno supports Node.js module customization hooks, allowing you to intercept and
-customize how modules are resolved and loaded. This enables powerful use cases
-like virtual modules, custom transpilation, module aliasing, and more.
+Deno supports the Node.js
+[`module.registerHooks()`](https://nodejs.org/api/module.html#moduleregisterhooksoptions)
+API, which lets you intercept and customize how modules are resolved and loaded.
+This enables virtual modules, custom transpilation, module aliasing, and similar
+use cases without modifying the importing code.
 
-Two APIs are available:
+The hooks are **synchronous** and run **in the same thread** as your
+application. They work for both ES modules (`import`) and CommonJS
+(`require()`).
 
-- **`module.registerHooks()`** - Synchronous, in-thread hooks for both CommonJS
-  and ESM
-- **`module.register()`** - Asynchronous hook modules for ESM
+> Deno does not implement the asynchronous `module.register()` API. Use
+> `registerHooks()` for both CommonJS and ESM customization.
 
-## module.registerHooks()
-
-The `registerHooks()` API lets you register synchronous hooks that run in the
-same thread as your application code. It works with both CommonJS (`require()`)
-and ES modules (`import`).
+## Basic example
 
 ```js title="main.mjs"
 import { registerHooks } from "node:module";
@@ -53,95 +52,90 @@ hooks.deregister();
 deno run --allow-all main.mjs
 ```
 
-### resolve hook
+## The `resolve` hook
 
-The `resolve` hook intercepts module resolution, allowing you to map specifiers
-to URLs.
+The `resolve` hook intercepts module resolution, mapping specifiers to URLs.
 
 ```js
-resolve(specifier, context, nextResolve)
+resolve(specifier, context, nextResolve);
 ```
 
 **Parameters:**
 
-| Parameter     | Type     | Description                                       |
-| ------------- | -------- | ------------------------------------------------- |
-| `specifier`   | `string` | The module specifier being resolved                |
-| `context`     | `object` | Resolution context (see below)                     |
-| `nextResolve` | `function` | Call to delegate to the next hook or default resolver |
+| Parameter     | Type       | Description                                        |
+| ------------- | ---------- | -------------------------------------------------- |
+| `specifier`   | `string`   | The module specifier being resolved                |
+| `context`     | `object`   | Resolution context (see below)                     |
+| `nextResolve` | `function` | Delegates to the next hook or the default resolver |
 
 **Context object:**
 
-| Property           | Type       | Description                                                 |
-| ------------------ | ---------- | ----------------------------------------------------------- |
-| `conditions`       | `string[]` | Import conditions (e.g., `["node", "import"]` for ESM)      |
-| `parentURL`        | `string`   | URL of the importing module                                  |
-| `importAttributes` | `object`   | Import attributes from the import statement                  |
+| Property           | Type       | Description                                            |
+| ------------------ | ---------- | ------------------------------------------------------ |
+| `conditions`       | `string[]` | Import conditions (e.g., `["node", "import"]` for ESM) |
+| `parentURL`        | `string`   | URL of the importing module                            |
+| `importAttributes` | `object`   | Import attributes from the import statement            |
 
 **Return value:**
 
-Must return an object with:
+| Property       | Type      | Description                                  |
+| -------------- | --------- | -------------------------------------------- |
+| `url`          | `string`  | The resolved URL for the module              |
+| `shortCircuit` | `boolean` | If `true`, skip remaining hooks in the chain |
 
-| Property       | Type      | Description                                     |
-| -------------- | --------- | ----------------------------------------------- |
-| `url`          | `string`  | The resolved URL for the module                  |
-| `shortCircuit` | `boolean` | If `true`, skip remaining hooks in the chain     |
+Either call `nextResolve()` to delegate, or return a result with
+`shortCircuit: true`. You must do one or the other.
 
-Either call `nextResolve()` to delegate, or return with `shortCircuit: true` to
-provide the final result. You must do one or the other.
+## The `load` hook
 
-### load hook
-
-The `load` hook intercepts module loading, allowing you to provide custom source
-code.
+The `load` hook intercepts module loading, providing the source code for a
+resolved URL.
 
 ```js
-load(url, context, nextLoad)
+load(url, context, nextLoad);
 ```
 
 **Parameters:**
 
-| Parameter  | Type     | Description                                       |
-| ---------- | -------- | ------------------------------------------------- |
-| `url`      | `string` | The resolved module URL                            |
-| `context`  | `object` | Load context (see below)                           |
-| `nextLoad` | `function` | Call to delegate to the next hook or default loader |
+| Parameter  | Type       | Description                                      |
+| ---------- | ---------- | ------------------------------------------------ |
+| `url`      | `string`   | The resolved module URL                          |
+| `context`  | `object`   | Load context (see below)                         |
+| `nextLoad` | `function` | Delegates to the next hook or the default loader |
 
 **Context object:**
 
-| Property           | Type       | Description                                       |
-| ------------------ | ---------- | ------------------------------------------------- |
+| Property           | Type       | Description                                         |
+| ------------------ | ---------- | --------------------------------------------------- |
 | `format`           | `string`   | Module format hint (e.g., `"module"`, `"commonjs"`) |
-| `conditions`       | `string[]` | Import conditions                                  |
-| `importAttributes` | `object`   | Import attributes                                  |
+| `conditions`       | `string[]` | Import conditions                                   |
+| `importAttributes` | `object`   | Import attributes                                   |
 
 **Return value:**
 
-Must return an object with:
-
-| Property       | Type                       | Description                                |
-| -------------- | -------------------------- | ------------------------------------------ |
-| `source`       | `string \| Buffer \| null` | The module source code                      |
+| Property       | Type                       | Description                                       |
+| -------------- | -------------------------- | ------------------------------------------------- |
+| `source`       | `string \| Buffer \| null` | The module source code                            |
 | `format`       | `string`                   | Module format: `"module"`, `"commonjs"`, `"json"` |
-| `shortCircuit` | `boolean`                  | If `true`, skip remaining hooks in the chain |
+| `shortCircuit` | `boolean`                  | If `true`, skip remaining hooks in the chain      |
 
-### Deregistering hooks
+## Deregistering hooks
 
 `registerHooks()` returns an object with a `deregister()` method to remove the
 hooks:
 
 ```js
-const hooks = registerHooks({ /* ... */ });
+const hooks = registerHooks({/* ... */});
 
 // Later, remove hooks
 hooks.deregister();
 ```
 
-### Hook chaining
+## Hook chaining
 
-Multiple hooks can be registered and form a chain. Hooks run in LIFO (last
-registered, first called) order. Each hook can call `nextResolve()`/`nextLoad()`
-to pass control to the previous hook in the chain:
+You can register multiple hooks; they form a chain. Hooks run in LIFO (last
+registered, first called) order, and each hook can call `nextResolve()` /
+`nextLoad()` to pass control to the previous hook in the chain:
 
 ```js
 import { registerHooks } from "node:module";
@@ -151,7 +145,11 @@ const hook1 = registerHooks({
   load(url, context, nextLoad) {
     const result = nextLoad(url, context);
     if (url.includes("target.js")) {
-      return { source: 'export default "from hook1"', format: "module", shortCircuit: true };
+      return {
+        source: 'export default "from hook1"',
+        format: "module",
+        shortCircuit: true,
+      };
     }
     return result;
   },
@@ -162,7 +160,11 @@ const hook2 = registerHooks({
   load(url, context, nextLoad) {
     const result = nextLoad(url, context); // Calls hook1
     if (url.includes("target.js")) {
-      return { source: 'export default "from hook2"', format: "module", shortCircuit: true };
+      return {
+        source: 'export default "from hook2"',
+        format: "module",
+        shortCircuit: true,
+      };
     }
     return result;
   },
@@ -171,9 +173,9 @@ const hook2 = registerHooks({
 // Result comes from hook2 since it runs first (LIFO)
 ```
 
-### CommonJS example
+## CommonJS
 
-Hooks also work with `require()`:
+Hooks also intercept `require()`:
 
 ```js title="main.cjs"
 const { registerHooks } = require("module");
@@ -188,7 +190,7 @@ const hooks = registerHooks({
   load(url, context, nextLoad) {
     if (url === "file:///virtual.js") {
       return {
-        source: 'module.exports = { value: 42 }',
+        source: "module.exports = { value: 42 }",
         format: "commonjs",
         shortCircuit: true,
       };
@@ -202,100 +204,6 @@ console.log(mod.value); // 42
 
 hooks.deregister();
 ```
-
-## module.register()
-
-The `register()` API loads a hook module that exports async `resolve` and `load`
-functions. This follows the Node.js customization hooks specification and is
-suitable for ESM.
-
-```js title="main.mjs"
-import { register } from "node:module";
-
-register("./hooks.mjs", import.meta.url);
-
-// Allow the hook module to initialize
-await new Promise((resolve) => setTimeout(resolve, 50));
-
-const { greeting } = await import("virtual:hello");
-console.log(greeting); // "hello from register hooks"
-```
-
-```js title="hooks.mjs"
-export async function resolve(specifier, context, nextResolve) {
-  if (specifier === "virtual:hello") {
-    return { url: "file:///virtual_hello.js", shortCircuit: true };
-  }
-  return nextResolve(specifier, context);
-}
-
-export async function load(url, context, nextLoad) {
-  if (url === "file:///virtual_hello.js") {
-    return {
-      source: 'export const greeting = "hello from register hooks";',
-      format: "module",
-      shortCircuit: true,
-    };
-  }
-  return nextLoad(url, context);
-}
-```
-
-### Passing data to hooks
-
-You can pass initialization data to hook modules using the `data` option and an
-`initialize` export:
-
-```js title="main.mjs"
-import { register } from "node:module";
-import { MessageChannel } from "node:worker_threads";
-
-const { port1, port2 } = new MessageChannel();
-
-register("./hooks.mjs", {
-  parentURL: import.meta.url,
-  data: { port: port2 },
-  transferList: [port2],
-});
-```
-
-```js title="hooks.mjs"
-let port;
-
-export async function initialize(data) {
-  port = data.port;
-  port.postMessage("hooks initialized");
-}
-
-export async function resolve(specifier, context, nextResolve) {
-  port.postMessage(`resolving: ${specifier}`);
-  return nextResolve(specifier, context);
-}
-
-export async function load(url, context, nextLoad) {
-  return nextLoad(url, context);
-}
-```
-
-### Options
-
-```js
-register(specifier, parentURL)
-register(specifier, options)
-register(specifier, parentURL, options)
-```
-
-| Option         | Type     | Description                                       |
-| -------------- | -------- | ------------------------------------------------- |
-| `parentURL`    | `string \| URL` | Base URL for resolving relative hook module specifiers |
-| `data`         | `any`    | Data passed to the hook module's `initialize()` function |
-| `transferList` | `any[]`  | Objects to transfer to the hook module             |
-
-### Hook execution order
-
-When both `registerHooks()` and `register()` are used, synchronous hooks
-(`registerHooks`) always run before async hooks (`register`). Within each
-category, hooks run in LIFO order (last registered runs first).
 
 ## Use cases
 
@@ -396,14 +304,3 @@ const hooks = registerHooks({
 
 hooks.deregister(); // Clean up after tests
 ```
-
-## Compatibility with Node.js
-
-Deno's implementation follows the Node.js module customization hooks
-specification. Key implementation details:
-
-- Both sync and async hooks run in the same thread (Node.js runs `register()`
-  hooks in a separate loader thread)
-- `registerHooks()` works with both CommonJS and ESM
-- `register()` works with ESM only
-- The `transferList` option passes items by reference (same-thread model)
