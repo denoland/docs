@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-25
+last_modified: 2026-05-20
 title: OpenTelemetry
 description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
@@ -287,6 +287,30 @@ environment variable:
   stdout/stderr.
 - `ignore`: Logs are emitted only to stdout/stderr, and will not be exported
   with OpenTelemetry.
+
+### Permission audit
+
+Deno can route the permission audit log into the OpenTelemetry exporter
+alongside the rest of your traces, metrics, and logs. Set
+`DENO_AUDIT_PERMISSIONS=otel` (instead of a file path) and each permission
+access — allowed or denied — is emitted as an OpenTelemetry log record with
+these attributes:
+
+- `deno.permission.type` — the permission name (`read`, `net`, `env`, …).
+- `deno.permission.value` — the specific value being checked (a path, host,
+  variable name, etc.).
+- `deno.permission.stack` — the JavaScript stack frames at the access site, only
+  present when `DENO_TRACE_PERMISSIONS` is also set.
+
+```sh
+OTEL_DENO=true DENO_AUDIT_PERMISSIONS=otel deno run -A main.ts
+```
+
+This is useful when you already collect OpenTelemetry data: the audit lands in
+the same backend as your request traces, so you can correlate which request
+triggered which permission access. See
+[permission audit](/runtime/fundamentals/security/#permission-flags) for the
+full attribute set and the JSONL file-path mode.
 
 ## User metrics
 
