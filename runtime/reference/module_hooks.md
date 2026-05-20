@@ -52,6 +52,152 @@ hooks.deregister();
 deno run --allow-all main.mjs
 ```
 
+## Loading hooks with `--import`
+
+To keep your application code clean — and to make sure the hooks are installed
+before anything in your program imports the modules they affect — put the
+`registerHooks()` call in its own loader file and preload it with `--import` (an
+alias for `--preload`).
+
+```js title="loader.mjs"
+import { registerHooks } from "node:module";
+
+registerHooks({
+  resolve(specifier, context, nextResolve) {
+    if (specifier === "virtual:greet") {
+      return { url: "file:///virtual_greet.js", shortCircuit: true };
+    }
+    return nextResolve(specifier, context);
+  },
+  load(url, context, nextLoad) {
+    if (url === "file:///virtual_greet.js") {
+      return {
+        source: 'export const msg = "hello from loader";',
+        format: "module",
+        shortCircuit: true,
+      };
+    }
+    return nextLoad(url, context);
+  },
+});
+```
+
+```js title="main.mjs"
+const { msg } = await import("virtual:greet");
+console.log(msg); // "hello from loader"
+```
+
+Run with `--import` pointing at the loader:
+
+```sh
+deno run --import ./loader.mjs main.mjs
+```
+
+`--import` accepts multiple values, so you can compose loaders (e.g.
+`--import ./aliases.mjs --import ./transpile.mjs`). They register in the order
+given, which is the reverse of the order in which they run — see
+[Hook chaining](#hook-chaining).
+
+## Use cases
+
+### Custom transpilation
+
+Transform non-standard file formats on the fly:
+
+```js
+import { registerHooks } from "node:module";
+
+registerHooks({
+  load(url, context, nextLoad) {
+    if (url.endsWith(".coffee")) {
+      const result = nextLoad(url, context);
+      const compiled = compileCoffeeScript(result.source);
+      return { source: compiled, format: "module", shortCircuit: true };
+    }
+    return nextLoad(url, context);
+  },
+});
+```
+
+### Module aliasing
+
+Redirect imports to different modules:
+
+```js
+import { registerHooks } from "node:module";
+
+registerHooks({
+  resolve(specifier, context, nextResolve) {
+    // Redirect lodash to lodash-es
+    if (specifier === "lodash") {
+      return nextResolve("lodash-es", context);
+    }
+    return nextResolve(specifier, context);
+  },
+});
+```
+
+### Virtual modules
+
+Create modules that exist only in memory:
+
+```js
+import { registerHooks } from "node:module";
+
+const virtualModules = new Map([
+  ["virtual:config", 'export default { debug: true, version: "1.0.0" };'],
+  ["virtual:env", `export const NODE_ENV = "${process.env.NODE_ENV}";`],
+]);
+
+registerHooks({
+  resolve(specifier, context, nextResolve) {
+    if (virtualModules.has(specifier)) {
+      return { url: `file:///virtual/${specifier}`, shortCircuit: true };
+    }
+    return nextResolve(specifier, context);
+  },
+  load(url, context, nextLoad) {
+    for (const [name, source] of virtualModules) {
+      if (url === `file:///virtual/${name}`) {
+        return { source, format: "module", shortCircuit: true };
+      }
+    }
+    return nextLoad(url, context);
+  },
+});
+```
+
+### Mocking for tests
+
+Replace modules with mocks during testing:
+
+```js
+import { registerHooks } from "node:module";
+
+const hooks = registerHooks({
+  resolve(specifier, context, nextResolve) {
+    if (specifier === "./database.js") {
+      return { url: "file:///mock_database.js", shortCircuit: true };
+    }
+    return nextResolve(specifier, context);
+  },
+  load(url, context, nextLoad) {
+    if (url === "file:///mock_database.js") {
+      return {
+        source: 'export const query = () => [{ id: 1, name: "mock" }];',
+        format: "module",
+        shortCircuit: true,
+      };
+    }
+    return nextLoad(url, context);
+  },
+});
+
+// Run tests...
+
+hooks.deregister(); // Clean up after tests
+```
+
 ## The `resolve` hook
 
 The `resolve` hook intercepts module resolution, mapping specifiers to URLs.
@@ -203,104 +349,4 @@ const mod = require("virtual-module");
 console.log(mod.value); // 42
 
 hooks.deregister();
-```
-
-## Use cases
-
-### Custom transpilation
-
-Transform non-standard file formats on the fly:
-
-```js
-import { registerHooks } from "node:module";
-
-registerHooks({
-  load(url, context, nextLoad) {
-    if (url.endsWith(".coffee")) {
-      const result = nextLoad(url, context);
-      const compiled = compileCoffeeScript(result.source);
-      return { source: compiled, format: "module", shortCircuit: true };
-    }
-    return nextLoad(url, context);
-  },
-});
-```
-
-### Module aliasing
-
-Redirect imports to different modules:
-
-```js
-import { registerHooks } from "node:module";
-
-registerHooks({
-  resolve(specifier, context, nextResolve) {
-    // Redirect lodash to lodash-es
-    if (specifier === "lodash") {
-      return nextResolve("lodash-es", context);
-    }
-    return nextResolve(specifier, context);
-  },
-});
-```
-
-### Virtual modules
-
-Create modules that exist only in memory:
-
-```js
-import { registerHooks } from "node:module";
-
-const virtualModules = new Map([
-  ["virtual:config", 'export default { debug: true, version: "1.0.0" };'],
-  ["virtual:env", `export const NODE_ENV = "${process.env.NODE_ENV}";`],
-]);
-
-registerHooks({
-  resolve(specifier, context, nextResolve) {
-    if (virtualModules.has(specifier)) {
-      return { url: `file:///virtual/${specifier}`, shortCircuit: true };
-    }
-    return nextResolve(specifier, context);
-  },
-  load(url, context, nextLoad) {
-    for (const [name, source] of virtualModules) {
-      if (url === `file:///virtual/${name}`) {
-        return { source, format: "module", shortCircuit: true };
-      }
-    }
-    return nextLoad(url, context);
-  },
-});
-```
-
-### Mocking for tests
-
-Replace modules with mocks during testing:
-
-```js
-import { registerHooks } from "node:module";
-
-const hooks = registerHooks({
-  resolve(specifier, context, nextResolve) {
-    if (specifier === "./database.js") {
-      return { url: "file:///mock_database.js", shortCircuit: true };
-    }
-    return nextResolve(specifier, context);
-  },
-  load(url, context, nextLoad) {
-    if (url === "file:///mock_database.js") {
-      return {
-        source: 'export const query = () => [{ id: 1, name: "mock" }];',
-        format: "module",
-        shortCircuit: true,
-      };
-    }
-    return nextLoad(url, context);
-  },
-});
-
-// Run tests...
-
-hooks.deregister(); // Clean up after tests
 ```
