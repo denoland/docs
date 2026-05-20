@@ -137,8 +137,6 @@ Deno.test({
 ```
 
 If a test times out the next test in the same file still runs normally.
-Sanitizers are skipped for the timed-out test since a forcibly terminated test
-will naturally have leaked resources or operations.
 
 Setting `timeout` to `0` or omitting it means the test runs without a deadline.
 
