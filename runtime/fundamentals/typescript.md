@@ -339,9 +339,9 @@ See the
 
 ## Using `tsconfig.json` with Deno
 
-If you're migrating a Node.js + TypeScript project, your existing
-`tsconfig.json` files will work with Deno's type checker and LSP out of the box.
-Deno automatically discovers `tsconfig.json` files in workspace directories that
+If you're migrating a TypeScript project from Node.js, your existing
+`tsconfig.json` files work with Deno's type checker and LSP out of the box.
+Deno automatically discovers `tsconfig.json` files in directories that also
 contain a `deno.json` or `package.json`.
 
 ```
@@ -361,9 +361,9 @@ Deno supports the standard `tsconfig.json` fields: `extends`, `files`,
 
 :::note
 
-For Deno-first projects, prefer using `compilerOptions` in `deno.json` instead
-of a separate `tsconfig.json`. The `tsconfig.json` compatibility is primarily
-for migrating existing Node.js projects.
+For Deno-first projects, prefer `compilerOptions` in `deno.json` over a
+separate `tsconfig.json`. The `tsconfig.json` compatibility exists primarily
+to ease migration of existing Node.js projects.
 
 :::
 
