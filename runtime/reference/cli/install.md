@@ -46,6 +46,42 @@ If your project has a `package.json` file, the packages coming from npm will be
 added to `dependencies` in `package.json`. Otherwise all packages will be added
 to `deno.json`.
 
+### Installing from npm tarballs
+
+Starting in Deno 2.8, `deno install` accepts npm tarballs directly — both local
+files and any `http(s):` URL — matching how `npm`, `pnpm`, and `bun` resolve
+tarball dependencies:
+
+```sh
+# Local tarball
+deno install ./my-package-1.0.0.tgz
+
+# Remote tarball from the npm registry
+deno install https://registry.npmjs.org/is-odd/-/is-odd-3.0.1.tgz
+
+# GitHub-hosted tarball
+deno install https://github.com/user/repo/tarball/v1.0
+```
+
+Detection rules:
+
+- **Local**: paths ending in `.tgz` or `.tar.gz`.
+- **Remote**: any `http:` / `https:` URL (unless it's a `git+` URL) is treated
+  as a tarball.
+
+The tarball's `package.json` is read to determine the package name, version,
+and dependency list — transitive dependencies are then resolved through the
+normal npm resolver. The integrity hash and tarball source are recorded in
+`deno.lock`. Remote tarballs are cached locally under `.deno_tarball_cache/`.
+
+:::info Limitation
+
+Tarball installs only work in `package.json` mode — Deno's import map
+resolver in `deno.json` does not currently support `npm:name@file:path`
+specifiers.
+
+:::
+
 ### deno install --entrypoint [FILES]
 
 Use this command to install all dependencies that are used in the provided files
