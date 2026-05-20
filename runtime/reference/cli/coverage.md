@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-04-23
+last_modified: 2026-05-20
 title: "deno coverage"
 oldUrl: /runtime/manual/tools/coverage/
 command: coverage
@@ -133,15 +133,15 @@ console.log("This line is not ignored");
 The summary table and the HTML report include a **function coverage** column
 alongside the branch and line columns:
 
-```
-----------------------------------
+```console
+---------------------------------------------
 File         | Branch % | Line % | Function %
-----------------------------------
-main.ts      |   85.7   |  92.3  |   100.0
-util.ts      |   75.0   |  88.5  |    66.7
-----------------------------------
-all files    |   80.0   |  90.5  |    83.3
-----------------------------------
+---------------------------------------------
+main.ts      |   85.7   |  92.3  |    100.0
+util.ts      |   75.0   |  88.5  |     66.7
+---------------------------------------------
+all files    |   80.0   |  90.5  |     83.3
+---------------------------------------------
 ```
 
 Function coverage measures the percentage of declared functions that were called
