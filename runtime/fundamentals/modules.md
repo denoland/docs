@@ -87,13 +87,9 @@ console.log(text);
 // Hello from a text file
 ```
 
-:::info Deno 2.8
+:::info `text` imports
 
-`text` imports are stable in Deno 2.8 and no longer require a flag.
-
-`bytes` imports are still experimental and require the `--unstable-raw-imports`
-CLI flag or the `unstable.raw-import` option in
-[`deno.json`](/runtime/fundamentals/configuration/).
+Stable in Deno 2.8 and no longer require a flag.
 
 :::
 
@@ -109,6 +105,14 @@ Uint8Array(12) [
 //   111,  33
 // ]
 ```
+
+:::info `bytes` imports
+
+Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
+`unstable.raw-import` option in
+[`deno.json`](/runtime/fundamentals/configuration/).
+
+:::
 
 ## Deferred module evaluation
 
