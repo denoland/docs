@@ -624,9 +624,13 @@ Only the following APIs are implemented:
 - [CacheStorage::open()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/open)
 - [CacheStorage::has()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/has)
 - [CacheStorage::delete()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/delete)
+- [CacheStorage::keys()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/keys)
+  (Deno 2.8+)
 - [Cache::match()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/match)
 - [Cache::put()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/put)
 - [Cache::delete()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/delete)
+- [Cache::keys()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/keys)
+  (Deno 2.8+)
 
 A few things that are different compared to browsers:
 
