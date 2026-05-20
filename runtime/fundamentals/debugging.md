@@ -212,6 +212,40 @@ close event surfaced as the connection progresses:
 
 ![WebSocket connection in the Network tab](./images/debugger-network-websocket.png)
 
+Server-side WebSockets created with `Deno.upgradeWebSocket()` are also
+instrumented, so you can inspect both sides of a connection — the outgoing
+client `WebSocket` and the server upgrade that accepts it. For example, a small
+echo server:
+
+```ts title="ws-server.ts"
+Deno.serve({ port: 8000 }, (req) => {
+  if (req.headers.get("upgrade") !== "websocket") {
+    return new Response("send a WebSocket request", { status: 426 });
+  }
+  const { socket, response } = Deno.upgradeWebSocket(req);
+  socket.onmessage = (e) => socket.send(`echo: ${e.data}`);
+  return response;
+});
+```
+
+```sh
+$ deno run --inspect-wait --allow-net ws-server.ts
+```
+
+After connecting DevTools and resuming execution, connect to the server from
+another terminal (for example with `deno eval`):
+
+```sh
+deno eval 'const ws = new WebSocket("ws://localhost:8000");
+  ws.onopen = () => ws.send("hello");
+  ws.onmessage = (e) => { console.log(e.data); ws.close(); };'
+```
+
+The upgrade and the message frames show up in the Network tab of the server's
+DevTools session:
+
+![Deno.upgradeWebSocket() in the Network tab](./images/debugger-network-upgrade-websocket.png)
+
 The same events are also exposed through `node:inspector` for programmatic
 clients, so tooling that already speaks the Chrome DevTools Protocol against
 Node can attach to Deno and observe the same network traffic without any
