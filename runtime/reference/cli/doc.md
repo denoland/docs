@@ -50,9 +50,9 @@ deno doc npm:code-block-writer
 deno doc jsr:@std/path
 ```
 
-You can pin to a specific version like any other Deno specifier
-(`npm:zod@4`), and combine the specifier with `--html` or `--json` to render
-the same output formats as for local files.
+You can pin to a specific version like any other Deno specifier (`npm:zod@4`),
+and combine the specifier with `--html` or `--json` to render the same output
+formats as for local files.
 
 ## Linting
 
