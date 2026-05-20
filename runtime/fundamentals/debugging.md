@@ -126,6 +126,72 @@ curl http://0.0.0.0:4507/
 At this point we can introspect the contents of the request and go step-by-step
 to debug the code.
 
+## Inspecting network traffic
+
+Starting with Deno 2.8, Chrome DevTools can inspect network traffic made by your
+program in the same way it inspects traffic in a browser tab. Run your program
+with `--inspect-wait` (or `--inspect` / `--inspect-brk`), open `chrome://inspect`
+in a Chromium derived browser, click **Inspect** on the Deno target, and switch
+to the **Network** tab.
+
+The following built-in APIs are wired into the Network tab:
+
+- `fetch()` — requests appear with `type: Fetch`
+- `node:http` and `node:https` client requests (`http.request`, `http.get`,
+  `https.request`, `https.get`) — requests appear with `type: Other`, so any
+  npm library that issues HTTP requests through `node:http` shows up too
+- `WebSocket` — connections appear alongside HTTP requests, with handshake
+  status and headers from the upgrade response, and a close event when the
+  socket is closed
+
+For each request you can see the URL, method, status code, request and response
+headers, request and response bodies, and timing information.
+
+Let's try it with a small program that uses `fetch()`:
+
+```ts title="net.ts"
+const res = await fetch("https://api.github.com/repos/denoland/deno");
+console.log(res.status, (await res.json()).stargazers_count);
+```
+
+Run it with `--inspect-wait` so the program pauses until DevTools connects:
+
+```sh
+$ deno run --inspect-wait --allow-net net.ts
+Debugger listening on ws://127.0.0.1:9229/...
+Visit chrome://inspect to connect to the debugger.
+Deno is waiting for debugger to connect.
+```
+
+Open `chrome://inspect`, click **Inspect** on the Deno target, and switch to
+the **Network** tab. The `fetch()` request shows up as a regular network entry,
+with the request and response panes populated:
+
+![fetch() request in the Network tab](./images/debugger-network-fetch.png)
+
+Click a request to see its headers, payload, response body, and timing
+breakdown:
+
+![Inspecting response headers and body](./images/debugger-network-response.png)
+
+`WebSocket` connections appear in the same Network tab, with messages and the
+close event surfaced as the connection progresses:
+
+![WebSocket connection in the Network tab](./images/debugger-network-websocket.png)
+
+The same events are also exposed through `node:inspector` for programmatic
+clients, so tooling that already speaks the Chrome DevTools Protocol against
+Node can attach to Deno and observe the same network traffic without any
+changes.
+
+:::note
+
+When no debugger is attached, the network instrumentation has effectively no
+overhead — the events are only emitted while a session has opted in via
+`Network.enable`.
+
+:::
+
 ## VSCode
 
 Deno can be debugged using VSCode. This is best done with help from the official
