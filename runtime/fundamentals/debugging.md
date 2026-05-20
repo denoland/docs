@@ -136,10 +136,11 @@ target, and switch to the **Network** tab.
 
 The following built-in APIs are wired into the Network tab:
 
-- `fetch()` — requests appear with `type: Fetch`
+- `fetch()` — requests appear with `Type: fetch`
 - `node:http` and `node:https` client requests (`http.request`, `http.get`,
-  `https.request`, `https.get`) — requests appear with `type: Other`, so any npm
-  library that issues HTTP requests through `node:http` shows up too
+  `https.request`, `https.get`) — the **Type** column reflects the response
+  content-type (e.g. `json`, `document`), so any npm library that issues HTTP
+  requests through `node:http` shows up alongside `fetch()` traffic
 - `WebSocket` — client connections appear alongside HTTP requests, with
   handshake status and headers from the upgrade response, message frames, and a
   close event when the socket is closed
@@ -204,9 +205,9 @@ https.get(options, (res) => {
 $ deno run --inspect-wait --allow-net node-http.ts
 ```
 
-The request appears in the Network tab with `type: Other` (to distinguish it
-from `type: Fetch` entries), but with the same headers, body, and timing
-information as a `fetch()` request:
+The request appears in the Network tab with the same headers, body, and timing
+information as a `fetch()` request — the **Type** column reflects the response
+content-type (`json` for this example):
 
 ![node:https request in the Network tab](./images/debugger-network-node-http.png)
 
