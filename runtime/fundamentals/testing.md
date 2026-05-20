@@ -118,6 +118,28 @@ Deno.test("database operations", async (t) => {
 });
 ```
 
+## Timeouts
+
+You can set a maximum duration for individual tests using the `timeout` option.
+If a test exceeds its deadline it is marked as failed. Both asynchronous hangs
+(a promise that never resolves) and synchronous hot loops (`while (true) {}`)
+are caught.
+
+```ts
+Deno.test({
+  name: "completes within deadline",
+  timeout: 5000, // 5 seconds
+  async fn() {
+    const response = await fetch("https://example.com");
+    await response.body?.cancel();
+  },
+});
+```
+
+If a test times out the next test in the same file still runs normally.
+
+Setting `timeout` to `0` or omitting it means the test runs without a deadline.
+
 ## Test Hooks
 
 Deno provides test hooks that allow you to run setup and teardown code before

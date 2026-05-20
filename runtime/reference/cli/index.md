@@ -25,6 +25,8 @@ below for more information on each subcommand.
 - [deno approve-scripts](/runtime/reference/cli/approve_scripts) - manage
   lifecycle scripts of npm packages
 - [deno audit](/runtime/reference/cli/audit) - audit dependencies
+- [deno bump-version](/runtime/reference/cli/bump_version/) - bump the project
+  version in `deno.json` or `package.json`
 - deno cache - _(Deprecated. Please use
   [deno install](/runtime/reference/cli/install/))_
 - [deno install](/runtime/reference/cli/install/) - install a dependency or a
