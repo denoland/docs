@@ -298,7 +298,7 @@ Add @luca/cases - jsr:@luca/cases@1.0.0
 :::info Deno 2.8
 
 Unprefixed package names passed to `deno add` / `deno install` are treated as
-npm packages by default — `deno add express` is now equivalent to
+npm packages by default. `deno add express` is now equivalent to
 `deno add npm:express`. JSR packages still need the `jsr:` prefix to stay
 unambiguous.
 
@@ -788,10 +788,10 @@ age. This is a cheap, broad defence against npm supply-chain attacks: malicious
 versions are usually detected and yanked within days, so delaying installs by a
 similar window catches the bulk of them.
 
-You can configure the same control in three places — pick whichever fits the
+You can configure the same control in three places; pick whichever fits the
 project:
 
-- **`deno.json`** — apply project-wide:
+- **`deno.json`**, apply project-wide:
 
   ```jsonc title="deno.json"
   {
@@ -799,13 +799,13 @@ project:
   }
   ```
 
-- **CLI flag** — apply ad-hoc, e.g. for a one-off install or in a CI step:
+- **CLI flag**, apply ad-hoc, e.g. for a one-off install or in a CI step:
 
   ```sh
   deno install --minimum-dependency-age=72h
   ```
 
-- **`.npmrc`** (Deno 2.8+) — matches the npm convention, useful when sharing the
+- **`.npmrc`** (Deno 2.8+), matches the npm convention, useful when sharing the
   same `.npmrc` across npm and Deno tooling:
 
   ```ini title=".npmrc"

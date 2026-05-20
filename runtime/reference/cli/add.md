@@ -25,7 +25,7 @@ deno add jsr:@std/path
 :::info Deno 2.8
 
 Unprefixed package names are treated as npm packages by default, so the `npm:`
-prefix is no longer required at the CLI — `deno add express` is equivalent to
+prefix is no longer required at the CLI. `deno add express` is equivalent to
 `deno add npm:express`. JSR packages still need the `jsr:` prefix to stay
 unambiguous. The `npm:` prefix remains required in `import` specifiers.
 
