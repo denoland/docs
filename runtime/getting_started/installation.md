@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-14
+last_modified: 2026-05-17
 title: Installation
 description: "A Guide to installing Deno on different operating systems. Includes instructions for Windows, macOS, and Linux using various package managers, manual installation methods, and Docker containers."
 oldUrl:
@@ -201,6 +201,11 @@ Deno binaries can also be installed manually, by downloading a zip file at
 [github.com/denoland/deno/releases](https://github.com/denoland/deno/releases).
 These packages contain just a single executable file. You will have to set the
 executable bit on macOS and Linux.
+
+On Linux, move the extracted `deno` binary to a directory on your `PATH`, such
+as `~/.local/bin` for your user account or `/usr/local/bin` for a system-wide
+install. Alternatively, add the directory that contains the binary to your
+`PATH`.
 
 ## Docker
 
