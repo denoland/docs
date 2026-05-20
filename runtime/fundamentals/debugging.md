@@ -174,6 +174,30 @@ breakdown:
 
 ![Inspecting response headers and body](./images/debugger-network-response.png)
 
+The same applies to `node:http` and `node:https`, so npm libraries that
+issue HTTP requests through Node's built-in client (rather than `fetch()`)
+also show up in the Network tab. For example:
+
+```ts title="node-http.ts"
+import https from "node:https";
+
+https.get("https://api.github.com/repos/denoland/deno", (res) => {
+  let body = "";
+  res.on("data", (chunk) => body += chunk);
+  res.on("end", () => console.log(res.statusCode, JSON.parse(body).stargazers_count));
+});
+```
+
+```sh
+$ deno run --inspect-wait --allow-net node-http.ts
+```
+
+The request appears in the Network tab with `type: Other` (to distinguish
+it from `type: Fetch` entries), but with the same headers, body, and
+timing information as a `fetch()` request:
+
+![node:https request in the Network tab](./images/debugger-network-node-http.png)
+
 `WebSocket` connections appear in the same Network tab, with messages and the
 close event surfaced as the connection progresses:
 
