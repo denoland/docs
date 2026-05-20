@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-25
+last_modified: 2026-05-20
 title: OpenTelemetry
 description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
@@ -775,8 +775,8 @@ limitations to be aware of:
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
   are not supported.
-- The supported exporters are OTLP (`http/protobuf`, `http/json`) and `console`.
-  Other exporters and protocols such as `grpc` are not supported.
+- The supported exporters are OTLP (`http/protobuf`, `http/json`, `grpc`) and
+  `console`. Other exporter formats are not supported.
 - Metrics from observable (asynchronous) meters are not collected on process
   exit/crash, so the last value of metrics may not be exported. Synchronous
   metrics are exported on process exit/crash.
