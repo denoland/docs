@@ -38,9 +38,9 @@ A `deno.json` file is created to
 TypeScript files are created; `main.ts` and `main_test.ts`. As of Deno 2.8 the
 `main.ts` file contains a small HTTP server built on
 [`Deno.serve`](/api/deno/~/Deno.serve) — it shows off Deno's built-in HTTP
-server, `Response.json()`, and TypeScript working out of the box. The handler
-is exported and guarded by `import.meta.main`, so `main_test.ts` can import
-and call it directly without binding to a port.
+server, `Response.json()`, and TypeScript working out of the box. The handler is
+exported and guarded by `import.meta.main`, so `main_test.ts` can import and
+call it directly without binding to a port.
 
 ## Run your project
 
