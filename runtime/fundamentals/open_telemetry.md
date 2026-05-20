@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-25
+last_modified: 2026-05-20
 title: OpenTelemetry
 description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
@@ -40,30 +40,6 @@ OpenTelemetry endpoint at `localhost:4318` using Protobuf over HTTP
 
 :::tip
 
-If you want to quickly see OpenTelemetry output without setting up a collector,
-you can use the built-in console exporter to print spans, logs, and metrics
-directly to stderr in a human-readable format:
-
-```sh
-OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console deno run my_script.ts
-```
-
-Example output:
-
-```
-SPAN inner span [00000000000000000000000000000001/0000000000000002] Internal 0.495ms
-  parent: 0000000000000001
-  scope: example-tracer
-  key: value
-LOG [INFO] 2025-03-14T13:47:07.235Z "hello from inner"
-  scope: deno@2.7.5
-  trace: 00000000000000000000000000000001/0000000000000002
-```
-
-:::
-
-:::tip
-
 If you want to visualize telemetry data in a dashboard, you can get started with
 a
 [local LGTM stack in Docker](https://github.com/grafana/docker-otel-lgtm/tree/main?tab=readme-ov-file)
@@ -96,8 +72,8 @@ You can also create your own metrics, traces, and logs using the
 
 For local development and writing instrumentation, set
 `OTEL_EXPORTER_OTLP_PROTOCOL=console` to make Deno write spans, logs, and
-metrics directly to stderr in a human-readable text format. No OTLP collector
-is needed and no endpoint configuration is required.
+metrics directly to stderr in a human-readable text format. No OTLP collector is
+needed and no endpoint configuration is required.
 
 ```sh
 OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console deno run my_script.ts
@@ -105,7 +81,7 @@ OTEL_DENO=true OTEL_EXPORTER_OTLP_PROTOCOL=console deno run my_script.ts
 
 Example output:
 
-```
+```console
 SPAN inner span [00000000000000000000000000000001/0000000000000002] Internal 0.495ms
   parent: 0000000000000001
   scope: example-tracer
@@ -119,13 +95,12 @@ METRIC http.server.request.duration histogram
 
 The console exporter is the recommended way to:
 
-- iterate on custom traces / metrics without round-tripping through a
-  collector,
+- iterate on custom traces / metrics without round-tripping through a collector,
 - verify that auto-instrumentation is firing as expected, and
 - include OTel output in CI logs for ad-hoc debugging.
 
-For production, switch to `http/protobuf`, `http/json`, or `grpc` — see
-[Configuration](#configuration).
+For production, switch to one of the OTLP exporters — see
+[Configuration](#configuration) for the supported protocols.
 
 ## Auto instrumentation
 
