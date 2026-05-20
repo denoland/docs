@@ -125,6 +125,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/check/",
           },
           {
+            title: "deno ci",
+            href: "/runtime/reference/cli/ci/",
+          },
+          {
             title: "deno clean",
             href: "/runtime/reference/cli/clean/",
           },
