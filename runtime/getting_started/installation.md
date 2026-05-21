@@ -256,9 +256,9 @@ your `PATH` yet. To fix this:
 - Confirm the install directory is on your `PATH`. The shell install script
   defaults to `~/.deno/bin` on macOS and Linux; for npm-based installs, run
   `npm config get prefix` to find the directory containing the global `bin`.
-- If you customised the install location, the shell install script's install
-  root can be overridden with the `DENO_INSTALL` environment variable, in which
-  case the binary lives at `$DENO_INSTALL/bin/deno`.
+- If you customised the install location, the binary lives at
+  `$DENO_INSTALL/bin/deno` — see
+  [Customizing the install directory](#customizing-the-install-directory).
 
 ## Updating
 
