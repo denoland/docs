@@ -112,6 +112,17 @@ The `node:module` built-in includes the
 [`registerHooks()`](/runtime/reference/module_hooks/) API, which you can use to
 customize module resolution and loading from inside your program.
 
+### WebSocket upgrades from `node:http`
+
+Starting in Deno 2.8,
+[`Deno.upgradeWebSocket()`](/api/deno/~/Deno.upgradeWebSocket) wires up cleanly
+to `node:http` upgrade events. Node-style servers that listen for the `upgrade`
+event on a `node:http` server can hand the upgraded request off to Deno's
+native WebSocket implementation, instead of pulling in a third-party library
+like `ws`. This is useful when porting an Express, Fastify, or other
+`node:http`-based app that exposes its own WebSocket endpoint, since the
+surrounding HTTP server can stay unchanged.
+
 <a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
 
 ## Using npm packages
