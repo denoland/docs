@@ -18,6 +18,18 @@ compiler, Deno will compile your TypeScript code to JavaScript with no extra
 config needed. Deno can also type check your TypeScript code, without requiring
 a separate type checking tool like `tsc`.
 
+:::info
+
+Deno 2.8 bundles **TypeScript 6.0.3**. 6.0 is the transition release the
+TypeScript team uses to land breaking changes and deprecations before the
+native-port 7.0 ships — see Microsoft's
+[Announcing TypeScript 6.0](https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/)
+post for the full list of changes. `deno check`, `deno bundle`, `deno compile`,
+and the LSP all pick up the new version automatically; no flag or config change
+is required.
+
+:::
+
 ## Type Checking
 
 One of the main advantages of TypeScript is that it can make your code type
