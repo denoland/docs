@@ -130,6 +130,10 @@ from expanding the glob:
 deno run --watch --watch-exclude='*.js' main.ts
 ```
 
+Starting in Deno 2.8, `--watch-exclude` patterns are applied to every file
+change event, not just the initial scan, so excluded paths stay excluded as the
+watched tree changes during the run.
+
 ### Hot Module Replacement mode
 
 You can use `--watch-hmr` flag with `deno run` to enable the hot module

@@ -77,7 +77,12 @@ The same `--watch` flag is also accepted by
 When the watcher restarts the process, Deno sends `SIGTERM` first so `unload`
 event listeners and `process.exit` hooks run, then waits 500ms before the hard
 kill. This gives graceful-shutdown code time to flush resources between
-restarts.
+restarts — previously the grace period was 5 seconds, which made restarts feel
+sluggish.
+
+`--watch-exclude` patterns are also now applied to every file change event, not
+just the initial scan, so excluded paths stay excluded as the watched tree
+changes during the run.
 
 :::
 
