@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-10
+last_modified: 2026-05-13
 title: "Writing an HTTP Server"
 description: "A guide to creating HTTP servers in Deno. Learn about the Deno.serve API, request handling, WebSocket support, response streaming, and how to build production-ready HTTP/HTTPS servers with automatic compression."
 oldUrl:
@@ -168,21 +168,46 @@ object that is attached to the response body
 
 ### HTTPS support
 
-To use HTTPS, pass two extra arguments in the options: `cert` and `key`. These
-are contents of the certificate and key files, respectively.
+To serve HTTPS, pass `cert` and `key` in the options. Both values are the
+PEM-encoded contents of the certificate and private key — not file paths.
 
-```js
+```ts title="server.ts"
 Deno.serve({
-  port: 443,
+  port: 8443,
   cert: Deno.readTextFileSync("./cert.pem"),
   key: Deno.readTextFileSync("./key.pem"),
-}, handler);
+}, (_req) => new Response("Hello over HTTPS!"));
+```
+
+Run it with network access plus read access to the two files:
+
+```sh
+deno run --allow-net --allow-read=cert.pem,key.pem server.ts
+```
+
+For local development you can generate a short-lived self-signed certificate
+with [OpenSSL](https://www.openssl.org/):
+
+```sh
+openssl req -x509 -newkey rsa:2048 -nodes -days 1 \
+  -keyout key.pem -out cert.pem \
+  -subj "/CN=localhost" \
+  -addext "subjectAltName=DNS:localhost"
+```
+
+Then check the server responds. The `-k` flag tells curl to accept a self-signed
+certificate — only use it for local testing:
+
+```console
+$ curl -k https://localhost:8443/
+Hello over HTTPS!
 ```
 
 :::note
 
-To use HTTPS, you will need a valid TLS certificate and a private key for your
-server.
+In production, use a certificate issued by a trusted authority such as
+[Let's Encrypt](https://letsencrypt.org/) instead of a self-signed one. The
+runtime API is the same; only the source of `cert` and `key` changes.
 
 :::
 
