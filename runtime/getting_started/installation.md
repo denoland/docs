@@ -240,20 +240,20 @@ deno upgrade --version 1.0.1
 
 ## Uninstalling
 
-If you installed Deno using the shell or PowerShell install script, you can
-uninstall it by removing the Deno installation directory and its cache:
+If you installed Deno using the shell or PowerShell install script, first clear
+the Deno cache directory (`$DENO_DIR`):
+
+```shell
+deno clean
+```
+
+Then remove the Deno installation directory:
 
 <deno-tabs group-id="operating-systems">
 <deno-tab value="mac" label="macOS / Linux" default>
 
 ```shell
 rm -rf ~/.deno
-```
-
-You should also remove the Deno cache directory if it exists:
-
-```shell
-rm -rf ~/.cache/deno
 ```
 
 Finally, remove the `DENO_INSTALL` export and `PATH` entry from your shell
@@ -264,11 +264,10 @@ config file (`~/.bashrc`, `~/.zshrc`, `~/.config/fish/config.fish`, etc.).
 
 ```powershell
 Remove-Item -Recurse -Force "$env:USERPROFILE\.deno"
-Remove-Item -Recurse -Force "$env:LOCALAPPDATA\deno"
 ```
 
-You should also remove the Deno `bin` directory from your `PATH` environment
-variable via System Settings.
+Then remove the Deno `bin` directory from your `PATH` environment variable via
+System Settings.
 
 </deno-tab>
 </deno-tabs>
