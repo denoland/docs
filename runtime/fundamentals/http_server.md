@@ -179,9 +179,6 @@ Deno.serve({
 }, (_req) => new Response("Hello over HTTPS!"));
 ```
 
-Port `8443` avoids needing root, which binding to the standard HTTPS port `443`
-would require on macOS and Linux.
-
 Run it with network access plus read access to the two files:
 
 ```sh
