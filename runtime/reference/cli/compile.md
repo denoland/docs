@@ -228,6 +228,30 @@ trade-offs:
   referenced as static data.
 - **Tamper risk**: Users or other code can modify the extracted files on disk.
 
+## Re-launching from a compiled binary
+
+Many npm CLIs spawn themselves as a child process — for example to apply a
+different `NODE_OPTIONS` or to swap stdio. Deno 2.8 includes a batch of fixes
+so this pattern keeps working inside a binary produced by `deno compile`:
+
+- `child_process.spawn()` and `child_process.fork()` no longer apply the
+  Node-to-Deno CLI argument translation when running inside a standalone
+  binary. The arguments you pass are the arguments the child receives.
+- When a standalone binary re-launches itself, the duplicate executable path
+  is stripped from `argv`, so the child sees the same `argv` shape it would
+  see under `node`.
+- `process.argv[1]` resolves to `Deno.execPath()` (the binary's own path)
+  instead of the entrypoint URL inside the virtual filesystem, matching what
+  scripts that compute paths relative to `argv[1]` expect.
+
+These changes also make tools like
+[`@google/gemini-cli`](https://www.npmjs.com/package/@google/gemini-cli) — which
+re-execs itself with extra flags — work when shipped as a compiled binary.
+
+The self-extracting directory used by `--self-extracting` mode now sits in a
+hidden directory next to the executable (`<exe_dir>/.<exe_name>/<hash>/`), so
+it no longer clutters the binary's parent directory.
+
 ## Code Signing
 
 ### macOS
