@@ -213,6 +213,12 @@ deployed to any static site hosting service.
 A client-side search is included in the generated site, but is not available if
 user's browser has JavaScript disabled.
 
+Starting in Deno 2.8 the HTML renderer ships two visual improvements:
+[Prism](https://prismjs.com/) syntax highlighting now covers JSX and TSX code
+blocks in examples (previously they fell back to plain text), and operators
+inside type signatures render with the right foreground color when the site is
+viewed in dark mode.
+
 ## JSON output
 
 Use the `--json` flag to output the documentation in JSON format. This JSON
