@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-10-15
+last_modified: 2026-05-13
 title: "Foreign Function Interface (FFI)"
 description: "Learn how to use Deno's Foreign Function Interface (FFI) to call native libraries directly from JavaScript or TypeScript. Includes examples, best practices, and security considerations."
 ---
@@ -112,46 +112,121 @@ opaque pointer object or `null` for null pointers.
 
 ## Working with structs
 
-You can define and use C structures in your FFI code:
+To pass or return a C struct by value, describe its layout with
+`{ struct: [...] }` — an array that lists each field's FFI type in declaration
+order. Struct values are passed as a `TypedArray` whose bytes match the C
+layout, and structs returned by value come back as a `Uint8Array` of the right
+length. The `struct` array in the type table earlier on this page is the
+authoritative shape.
 
-```ts
-// Define a struct type for a Point
-const pointStruct = {
-  fields: {
-    x: "f64",
-    y: "f64",
-  },
-} as const;
+Suppose you have this small C library that operates on a 2D `Point`:
 
-// Define the library interface
-const signatures = {
-  distance: {
-    parameters: [
-      { struct: pointStruct },
-      { struct: pointStruct },
-    ],
-    result: "f64",
-  },
-} as const;
+```c title="point.c"
+typedef struct {
+  double x;
+  double y;
+} Point;
 
-// Create struct instances
-const point1 = new Deno.UnsafePointer(
-  new BigUint64Array([
-    BigInt(Float64Array.of(1.0).buffer),
-    BigInt(Float64Array.of(2.0).buffer),
-  ]).buffer,
-);
+double distance(Point a, Point b) {
+  double dx = a.x - b.x;
+  double dy = a.y - b.y;
+  return __builtin_sqrt(dx * dx + dy * dy);
+}
 
-const point2 = new Deno.UnsafePointer(
-  new BigUint64Array([
-    BigInt(Float64Array.of(4.0).buffer),
-    BigInt(Float64Array.of(6.0).buffer),
-  ]).buffer,
-);
-
-// Call the function with structs
-const dist = dylib.symbols.distance(point1, point2);
+Point midpoint(Point a, Point b) {
+  Point m;
+  m.x = (a.x + b.x) / 2.0;
+  m.y = (a.y + b.y) / 2.0;
+  return m;
+}
 ```
+
+Build it as a shared library. The compiler flags and output filename vary by
+platform:
+
+<deno-tabs group-id="operating-systems">
+<deno-tab value="linux" label="Linux" default>
+
+```sh
+cc -shared -fPIC -O2 -o libpoint.so point.c
+```
+
+</deno-tab>
+<deno-tab value="mac" label="macOS">
+
+```sh
+cc -dynamiclib -O2 -o libpoint.dylib point.c
+```
+
+</deno-tab>
+<deno-tab value="windows" label="Windows">
+
+```sh
+cl /LD /O2 point.c /Fe:point.dll
+```
+
+</deno-tab>
+</deno-tabs>
+
+Then call into it from Deno, using the filename for your platform in
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen). Note that the `struct` definition is
+an _array of field types_ in declaration order, not an object with named fields:
+
+```ts title="point.ts"
+// `Point` mirrors the C `struct Point { double x; double y; }`.
+const Point = { struct: ["f64", "f64"] } as const;
+
+const lib = Deno.dlopen(
+  "./libpoint.so",
+  {
+    distance: { parameters: [Point, Point], result: "f64" },
+    midpoint: { parameters: [Point, Point], result: Point },
+  } as const,
+);
+
+// Build struct values as a TypedArray whose bytes match the C layout.
+// Two f64 fields → two slots in a Float64Array.
+const a = new Float64Array([1.0, 2.0]); // Point { x: 1.0, y: 2.0 }
+const b = new Float64Array([4.0, 6.0]); // Point { x: 4.0, y: 6.0 }
+
+// FFI reads the underlying bytes, so pass the buffer as a Uint8Array view.
+const aBytes = new Uint8Array(a.buffer);
+const bBytes = new Uint8Array(b.buffer);
+
+console.log("distance =", lib.symbols.distance(aBytes, bBytes));
+
+// A struct returned by value comes back as a Uint8Array sized to the struct.
+// Wrap it in a Float64Array to read the fields back out.
+const midBytes = lib.symbols.midpoint(aBytes, bBytes);
+const mid = new Float64Array(midBytes.buffer);
+console.log("midpoint =", { x: mid[0], y: mid[1] });
+
+lib.close();
+```
+
+Run it with the `--allow-ffi` permission:
+
+```sh
+deno run --allow-ffi point.ts
+```
+
+You should see:
+
+```console
+distance = 5
+midpoint = { x: 2.5, y: 4 }
+```
+
+A few things to keep in mind when working with structs:
+
+- **Layout matches the C compiler.** Deno pads struct fields the same way your C
+  compiler does. If you need a packed struct, pad it explicitly with `u8`
+  fields, as noted in the type table above.
+- **Field order is positional.** The `struct` array is just types, in
+  declaration order — there are no field names on the JavaScript side. The
+  TypedArray you pass must lay the fields out in the same order.
+- **Returned structs are bytes.** A struct result is always a `Uint8Array`; view
+  it through the appropriate `TypedArray` (or a `DataView`) to read the fields.
 
 ## Working with callbacks
 
