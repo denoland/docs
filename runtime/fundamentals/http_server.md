@@ -173,11 +173,14 @@ PEM-encoded contents of the certificate and private key — not file paths.
 
 ```ts title="server.ts"
 Deno.serve({
-  port: 443,
+  port: 8443,
   cert: Deno.readTextFileSync("./cert.pem"),
   key: Deno.readTextFileSync("./key.pem"),
 }, (_req) => new Response("Hello over HTTPS!"));
 ```
+
+Port `8443` avoids needing root, which binding to the standard HTTPS port `443`
+would require on macOS and Linux.
 
 Run it with network access plus read access to the two files:
 
@@ -199,9 +202,8 @@ Then check the server responds. The `-k` flag tells curl to accept a self-signed
 certificate — only use it for local testing:
 
 ```console
-$ curl -kI https://localhost/
-HTTP/2 200
-content-length: 17
+$ curl -k https://localhost:8443/
+Hello over HTTPS!
 ```
 
 :::note
