@@ -17,6 +17,36 @@ description: "Install and cache dependencies for your project"
 on how Deno handles modules, see
 [Modules and dependencies](/runtime/fundamentals/modules/).
 
+## Drop-in replacement for `npm install`, `yarn`, and `pnpm install`
+
+Starting in Deno 2.8, `deno install` is a drop-in replacement for
+`npm install`, `yarn`, or `pnpm install` in an existing Node project. Point it
+at a directory that already contains a `package.json` and Deno will:
+
+- Read `dependencies`, `devDependencies`, `peerDependencies`, and
+  `optionalDependencies` from `package.json` (plus a `package-lock.json`,
+  `yarn.lock`, or `pnpm-lock.yaml` if present).
+- Write a compatible `node_modules` layout — `isolated` by default, or
+  `hoisted` if you set
+  [`"nodeModulesLinker": "hoisted"`](/runtime/fundamentals/node/#node_modules-layout-isolated-vs-hoisted)
+  in `deno.json`.
+- Respect `.npmrc` for registry configuration, scoped auth, and
+  [`min-release-age`](/runtime/fundamentals/node/#npmrc-configuration).
+
+```sh
+# In an existing Node project
+deno install
+```
+
+You can keep running `node`, `npm run <script>`, or any other Node tooling
+against the resulting `node_modules` afterward — using Deno as the package
+manager doesn't lock you into using Deno as the runtime.
+
+The npm-side ergonomics also align with the Node CLIs in 2.8: the `npm:`
+prefix is optional at the command line (`deno install express` works), and
+[`deno install --prod`](#deno-install---prod) skips `devDependencies` and
+`@types/*` for production deploys.
+
 ## Examples
 
 ### deno install
