@@ -13,7 +13,7 @@ import { parse, stringify } from "jsr:@std/csv";
 
 // To parse a CSV file, read its contents and pass them to the parse function.
 const fileContent = await Deno.readTextFile("data.csv");
-const fileData = parse(fileContent, { skipFirstRow: true });
+const fileData = parse(fileContent, { skipFirstRow: true, strip: true });
 console.log(fileData);
 
 // You can also parse CSV strings directly. The value is returned as an
