@@ -170,8 +170,7 @@ cl /LD /O2 point.c /Fe:point.dll
 
 Then call into it from Deno, using the filename for your platform in
 [`Deno.dlopen`](/api/deno/~/Deno.dlopen). Note that the `struct` definition is
-an _array of field types_ in declaration order, not an object with named
-fields:
+an _array of field types_ in declaration order, not an object with named fields:
 
 ```ts title="point.ts"
 // `Point` mirrors the C `struct Point { double x; double y; }`.
