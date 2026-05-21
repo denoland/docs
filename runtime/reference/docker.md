@@ -144,9 +144,9 @@ CMD ["deno", "test", "--allow-none"]
 
 ### Using Docker Compose
 
-```yaml
-// filepath: docker-compose.yml
-version: "3.8"
+A basic Compose file for development with hot-reload:
+
+```yaml title="docker-compose.yml"
 services:
   deno-app:
     build: .
@@ -158,6 +158,54 @@ services:
       - DENO_ENV=development
     command: ["deno", "run", "--watch", "--allow-net", "main.ts"]
 ```
+
+For a more realistic setup with a database:
+
+```yaml title="docker-compose.yml"
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgres://deno:${POSTGRES_PASSWORD}@db:5432/app
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    command:
+      [
+        "deno",
+        "run",
+        "--allow-net=db:5432",
+        "--allow-env=DATABASE_URL",
+        "main.ts",
+      ]
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: deno
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U deno"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+```
+
+Put secrets like `POSTGRES_PASSWORD` in a `.env` file next to
+`docker-compose.yml`. Compose loads it automatically. Don't commit it.
+
+Start the services with `docker compose up`, or run in the background with
+`docker compose up -d`.
 
 ### Health Checks
 
@@ -246,8 +294,7 @@ project-root/
 
 2. Create a `.dockerignore`:
 
-```text
-// filepath: docker/project-a/.dockerignore
+```text title="docker/project-a/.dockerignore"
 *
 !deno.json
 !project-a/**
@@ -256,8 +303,7 @@ project-root/
 
 3. Create a build context script:
 
-```bash
-// filepath: docker/project-a/build-context.sh
+```bash title="docker/project-a/build-context.sh"
 #!/bin/bash
 
 # Create temporary build context
@@ -278,8 +324,7 @@ fi
 
 4. Create a minimal Dockerfile:
 
-```dockerfile
-// filepath: docker/project-a/Dockerfile
+```dockerfile title="docker/project-a/Dockerfile"
 FROM denoland/deno:latest
 
 WORKDIR /app
