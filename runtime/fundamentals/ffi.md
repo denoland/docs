@@ -141,15 +141,36 @@ Point midpoint(Point a, Point b) {
 }
 ```
 
-Build it as a shared library (the filename varies by platform — `libpoint.so` on
-Linux, `libpoint.dylib` on macOS, `point.dll` on Windows):
+Build it as a shared library. The compiler flags and output filename vary by
+platform:
+
+<deno-tabs group-id="operating-systems">
+<deno-tab value="linux" label="Linux" default>
 
 ```sh
 cc -shared -fPIC -O2 -o libpoint.so point.c
 ```
 
-Then call into it from Deno. Note that the `struct` definition is an _array of
-field types_ in declaration order, not an object with named fields:
+</deno-tab>
+<deno-tab value="mac" label="macOS">
+
+```sh
+cc -dynamiclib -O2 -o libpoint.dylib point.c
+```
+
+</deno-tab>
+<deno-tab value="windows" label="Windows">
+
+```sh
+cl /LD /O2 point.c /Fe:point.dll
+```
+
+</deno-tab>
+</deno-tabs>
+
+Then call into it from Deno, using the filename for your platform in
+`Deno.dlopen`. Note that the `struct` definition is an _array of field types_ in
+declaration order, not an object with named fields:
 
 ```ts title="point.ts"
 // `Point` mirrors the C `struct Point { double x; double y; }`.
