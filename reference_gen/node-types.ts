@@ -1,4 +1,4 @@
-import { Node, Project, ts } from "ts-morph";
+import { Node, Project, SourceFile, ts } from "ts-morph";
 import EXCLUDE_MAP from "./node-exclude-map.json" with { type: "json" };
 import { Description, generateDescriptions } from "../runtime/_data.ts";
 
@@ -216,6 +216,15 @@ function getNote(description: Description) {
   return `:::${description.kind} Deno compatibility\n\n${description.description}\n\n:::\n`;
 }
 
+function annotateHttpClientRequestArgs(file: SourceFile) {
+  const clientRequestArgs = file.getInterface("ClientRequestArgs");
+  const timeout = clientRequestArgs?.getProperty("timeout");
+
+  if (timeout && timeout.getJsDocs().length === 0) {
+    timeout.addJsDoc("Timeout in milliseconds.");
+  }
+}
+
 for (const file of importRewriteProject.getSourceFiles()) {
   const moduleName = file.getFilePath().slice(Deno.cwd().length + 1, -5);
 
@@ -275,6 +284,10 @@ for (const file of importRewriteProject.getSourceFiles()) {
         }
       }
     }
+  }
+
+  if (moduleName === "node__http") {
+    annotateHttpClientRequestArgs(file);
   }
 
   modules[moduleName] = file.getFullText();
