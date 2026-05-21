@@ -27,6 +27,18 @@ Use this command to install all dependencies defined in
 The dependencies will be installed in the global cache, but if your project has
 a `package.json` file, a local `node_modules` directory will be set up as well.
 
+:::info Faster cold installs in 2.8
+
+Cold `npm` installs are roughly **3.66x faster** in Deno 2.8 than in 2.7 — an
+entrypoint importing React, Vite, Babel parser, and ESLint goes from `3,319ms`
+to `906ms` on a fresh `DENO_DIR`. The change comes from abbreviated packument
+metadata, parallel resolution across the dependency tree, decompression moved
+off the async event loop, and a faster (`libdeflater`-backed) tarball
+extraction pipeline. Warm installs benefit from Deno's shared global cache
+across projects.
+
+:::
+
 ### deno install [PACKAGES]
 
 Use this command to install particular packages and add them to `deno.json` or
