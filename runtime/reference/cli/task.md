@@ -98,8 +98,8 @@ Running `deno task "build:*"` will run both `build:client` and `build:server`
 tasks.
 
 For multi-word task names, we recommend using `:` as the separator (e.g.
-`build:client`, `test:unit`, `lint:fix`) to match the convention used in the
-npm ecosystem and to group related tasks for wildcard matching.
+`build:client`, `test:unit`, `lint:fix`) to match the convention used in the npm
+ecosystem and to group related tasks for wildcard matching.
 
 :::note
 
@@ -146,8 +146,8 @@ Dependency tasks are executed in parallel, with the default parallel limit being
 equal to number of cores on your machine. To change this limit, use the
 `DENO_JOBS` environmental variable.
 
-Dependencies are tracked and if multiple tasks depend on the same task, tha
-task will only be run once:
+Dependencies are tracked and if multiple tasks depend on the same task, tha task
+will only be run once:
 
 ```jsonc title="deno.json"
 {
@@ -301,8 +301,8 @@ defined tasks.
 
 ### Boolean lists
 
-Boolean lists provide a way to execute additional commands based on the exi
-code of the initial command. They separate commands using the `&&` and `||`
+Boolean lists provide a way to execute additional commands based on the exi code
+of the initial command. They separate commands using the `&&` and `||`
 operators.
 
 The `&&` operator provides a way to execute a command and if it _succeeds_ (has
@@ -665,21 +665,20 @@ script entries you want to run (ex.
 
 ## Command Resolution
 
-When a task command references a binary (e.g., `ohm`, `tsc`, `eslint`),
-Deno resolves it using the following order:
+When a task command references a binary (e.g., `ohm`, `tsc`, `eslint`), Deno
+resolves it using the following order:
 
-1. **Workspace `node_modules/.bin/`** - If a `node_modules` directory
-   exists (from `deno install` or `deno add`), Deno will look for the
-   binary in `node_modules/.bin/`. This is compatible with how `npx`
-   works in the Node.js ecosystem.
+1. **Workspace `node_modules/.bin/`** - If a `node_modules` directory exists
+   (from `deno install` or `deno add`), Deno will look for the binary in
+   `node_modules/.bin/`. This is compatible with how `npx` works in the Node.js
+   ecosystem.
 
-2. **Package.json `bin` field** - When a dependency defines a `bin`
-   field in its `package.json`, Deno automatically makes those commands
-   available within task scripts. This is resolved through Deno's npm
-   compatibility layer.
+2. **Package.json `bin` field** - When a dependency defines a `bin` field in its
+   `package.json`, Deno automatically makes those commands available within task
+   scripts. This is resolved through Deno's npm compatibility layer.
 
-3. **System PATH** - If the command is not found in `node_modules/.bin/`,
-   Deno falls back to searching the system PATH.
+3. **System PATH** - If the command is not found in `node_modules/.bin/`, Deno
+   falls back to searching the system PATH.
 
 ### Example
 
@@ -723,5 +722,5 @@ For example:
 - `npx create-react-app my-app` ->
   `deno run -A npm:create-react-app@latest my-app`
 
-You can also use `deno add npm:<package>` to add an npm dependency and
-then reference its binaries in `deno task` scripts.
+You can also use `deno add npm:<package>` to add an npm dependency and then
+reference its binaries in `deno task` scripts.
