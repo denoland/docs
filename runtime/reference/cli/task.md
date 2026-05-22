@@ -98,8 +98,8 @@ Running `deno task "build:*"` will run both `build:client` and `build:server`
 tasks.
 
 For multi-word task names, we recommend using `:` as the separator (e.g.
-`build:client`, `test:unit`, `lint:fix`) to match the convention used in the
-npm ecosystem and to group related tasks for wildcard matching.
+`build:client`, `test:unit`, `lint:fix`) to match the convention used in the npm
+ecosystem and to group related tasks for wildcard matching.
 
 :::note
 
