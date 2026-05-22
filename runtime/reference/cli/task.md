@@ -595,6 +595,10 @@ enabled.
 - **pipefail** - When enabled, the exit code of a pipeline is the exit code of
   the last command to exit with a non-zero status, or zero if all commands exit
   successfully. Enable with `set -o pipefail`.
+- **errexit** (Deno 2.8+) - When enabled, a sequential list aborts on the first
+  command that exits non-zero. Enable with `set -e` or `set -o errexit`;
+  disable again with `set +e` or `set +o errexit`. Useful when porting a shell
+  script that relies on `set -e` semantics into a `tasks` block.
 
 Examples:
 
@@ -608,7 +612,9 @@ Examples:
     // disable globstar
     "task3": "shopt -u globstar && echo **/*.ts",
     // enable pipefail
-    "task4": "set -o pipefail && cat missing.txt | echo 'hello'"
+    "task4": "set -o pipefail && cat missing.txt | echo 'hello'",
+    // abort the sequential list on the first failing command
+    "task5": "set -e; build_step_one; build_step_two; build_step_three"
   }
 }
 ```
@@ -654,6 +660,10 @@ box on Windows, Mac, and Linux.
   environment variables.
 - [`xargs`](https://man7.org/linux/man-pages/man1/xargs.1p.html) - Builds
   arguments from stdin and executes a command.
+- [`:`](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/colon.html) -
+  The POSIX null command. Does nothing and always exits with status `0`
+  (Deno 2.8+). Handy as a no-op placeholder in conditionals or for
+  parameter-expansion side effects.
 
 If you find a useful flag missing on a command or have any suggestions for
 additional commands that should be supported out of the box, then please
