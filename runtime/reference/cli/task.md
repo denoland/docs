@@ -663,22 +663,23 @@ life cycle events like `preinstall` or `postinstall`—you must explicitly run t
 script entries you want to run (ex.
 `deno install --entrypoint main.ts && deno task postinstall`).
 
-
 ## Command Resolution
 
-When a task command references a binary (e.g., `ohm`, `tsc`, `eslint`), Deno resolves i
-using the following order:
+When a task command references a binary (e.g., `ohm`, `tsc`, `eslint`),
+Deno resolves it using the following order:
 
-1. **Workspace `node_modules/.bin/`** - If a `node_modules` directory exists (from `deno install`
-   or `deno add`), Deno will look for the binary in `node_modules/.bin/`. This is compatible
-   with how `npx` works in the Node.js ecosystem.
+1. **Workspace `node_modules/.bin/`** - If a `node_modules` directory
+   exists (from `deno install` or `deno add`), Deno will look for the
+   binary in `node_modules/.bin/`. This is compatible with how `npx`
+   works in the Node.js ecosystem.
 
-2. **Package.json `bin` field** - When a dependency defines a `bin` field in its
-   `package.json`, Deno automatically makes those commands available within task scripts.
-   This is resolved through Deno's npm compatibility layer.
+2. **Package.json `bin` field** - When a dependency defines a `bin`
+   field in its `package.json`, Deno automatically makes those commands
+   available within task scripts. This is resolved through Deno's npm
+   compatibility layer.
 
-3. **System PATH** - If the command is not found in `node_modules/.bin/`, Deno falls back
-   to searching the system PATH.
+3. **System PATH** - If the command is not found in `node_modules/.bin/`,
+   Deno falls back to searching the system PATH.
 
 ### Example
 
@@ -706,19 +707,21 @@ Running `deno task generate` will:
 
 1. Look for `ohm` in `node_modules/.bin/ohm`
 2. If found, execute it using Deno's Node.js compatibility layer
-3. The command runs under Deno's runtime, not Node.js
+3. The command runs under Deno's runtime, not Node.js.
 
 ### Deno's Equivalent to `npx`
 
 The equivalent of `npx <command>` in Deno is:
 
 ```bash
-deno run -A npm:<command>@lates
+deno run -A npm:<command>@latest
 ```
 
 For example:
-- `npx cowsay hello` → `deno run -A npm:cowsay@latest hello`
-- `npx create-react-app my-app` → `deno run -A npm:create-react-app@latest my-app`
 
-You can also use `deno add npm:<package>` to add an npm dependency and then reference
-its binaries in `deno task` scripts.
+- `npx cowsay hello` -> `deno run -A npm:cowsay@latest hello`
+- `npx create-react-app my-app` ->
+  `deno run -A npm:create-react-app@latest my-app`
+
+You can also use `deno add npm:<package>` to add an npm dependency and
+then reference its binaries in `deno task` scripts.
