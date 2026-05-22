@@ -427,7 +427,7 @@
           "short": null,
           "long": "watch-hmr",
           "required": false,
-          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
+          "help": "Watch for file changes and hot-replace modules. The process restarts if hot replacement fails.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
           "help_heading": "File watching options",
           "usage": "--watch-hmr[=<FILES>...]"
         },
@@ -1011,7 +1011,7 @@
           "short": null,
           "long": "watch-hmr",
           "required": false,
-          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
+          "help": "Watch for file changes and hot-replace modules. The process restarts if hot replacement fails.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
           "help_heading": "File watching options",
           "usage": "--watch-hmr[=<FILES>...]"
         },
@@ -7502,6 +7502,15 @@
           "help": "Verify the downloaded archive against the provided SHA256 checksum",
           "help_heading": "Upgrade options",
           "usage": "--checksum <checksum>"
+        },
+        {
+          "name": "no-delta",
+          "short": null,
+          "long": "no-delta",
+          "required": false,
+          "help": "Disable delta updates and always download the full archive",
+          "help_heading": "Upgrade options",
+          "usage": "--no-delta"
         },
         {
           "name": "cert",
