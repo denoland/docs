@@ -78,8 +78,8 @@ For publishing the bumped version to JSR, see
 ## Workspace mode
 
 When run at the root of a [workspace](/runtime/fundamentals/workspaces/),
-`deno bump-version` operates on every member package in a single pass instead
-of just the root config:
+`deno bump-version` operates on every member package in a single pass instead of
+just the root config:
 
 - The same increment is applied to each member's `version` field.
 - `jsr:` version constraints in the workspace root config and in any
@@ -102,9 +102,9 @@ Inside a workspace, running `deno bump-version` with no `increment` argument
 switches to deriving per-package bumps from
 [Conventional Commits](https://www.conventionalcommits.org/) between a base ref
 and the current branch. Each member's bump is computed independently from the
-commits that touched files inside it (honoring scoped commits and wildcard
-`*` scopes), and the bumped versions are written back to the member configs
-and any import-map constraints.
+commits that touched files inside it (honoring scoped commits and wildcard `*`
+scopes), and the bumped versions are written back to the member configs and any
+import-map constraints.
 
 The derivation rules:
 

@@ -29,8 +29,8 @@ CMD ["deno", "run", "--allow-net", "main.ts"]
 
 [`deno ci`](/runtime/reference/cli/ci/) performs a reproducible install from
 `deno.lock`. `--prod` skips `devDependencies`, and `--skip-types` drops
-`@types/*` packages — both shrink the resulting image without affecting
-runtime behavior.
+`@types/*` packages — both shrink the resulting image without affecting runtime
+behavior.
 
 ### Best Practices
 
@@ -63,10 +63,9 @@ COPY --from=builder /deno-dir /deno-dir
 CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
 
-Without copying `$DENO_DIR`, `deno ci` only writes to Deno's global cache
-inside the builder stage — those files do not travel with
-`COPY --from=builder /app .`, so the container re-downloads dependencies on
-first run.
+Without copying `$DENO_DIR`, `deno ci` only writes to Deno's global cache inside
+the builder stage — those files do not travel with `COPY --from=builder /app .`,
+so the container re-downloads dependencies on first run.
 
 #### Permission Flags
 
