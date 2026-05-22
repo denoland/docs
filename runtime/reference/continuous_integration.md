@@ -50,6 +50,11 @@ jobs:
 To expand the workflow, add any of the `deno` subcommands that you might need:
 
 ```yaml
+# Install the locked dependencies as a single reproducible step
+# (Deno 2.8+). Equivalent to `deno install --frozen` plus npm
+# lifecycle-script handling — see the deno ci reference page.
+- run: deno ci
+
 # Check if the code is formatted according to Deno's default
 # formatting conventions.
 - run: deno fmt --check
