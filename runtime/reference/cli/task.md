@@ -146,7 +146,7 @@ Dependency tasks are executed in parallel, with the default parallel limit being
 equal to number of cores on your machine. To change this limit, use the
 `DENO_JOBS` environmental variable.
 
-Dependencies are tracked and if multiple tasks depend on the same task, tha task
+Dependencies are tracked and if multiple tasks depend on the same task, the task
 will only be run once:
 
 ```jsonc title="deno.json"
@@ -225,7 +225,7 @@ useful to logically group several tasks together:
 
 Running `deno task dev` will run both `dev:client` and `dev:server` in parallel.
 
-## Node and npx binary suppor
+## Node and npx binary support
 
 By default, `deno task` will execute commands with the `deno` binary. If you
 need to ensure that a command is run with the `npm` or `npx` binary, you can do
@@ -239,7 +239,7 @@ so by invoking the `npm` or `npx` `run` command respectively. For example:
 }
 ```
 
-## Workspace suppor
+## Workspace support
 
 `deno task` can be used in workspaces, to run tasks from multiple member
 directories in parallel. To execute `dev` tasks from all workspace members use
@@ -301,7 +301,7 @@ defined tasks.
 
 ### Boolean lists
 
-Boolean lists provide a way to execute additional commands based on the exi code
+Boolean lists provide a way to execute additional commands based on the exit code
 of the initial command. They separate commands using the `&&` and `||`
 operators.
 
@@ -409,7 +409,7 @@ hello
 Deno: undefined
 ```
 
-Shell variables can be useful when we want to reuse a value, but don't want i
+Shell variables can be useful when we want to reuse a value, but don't want it
 available in any spawned processes.
 
 ### Exit status variable
@@ -473,26 +473,26 @@ For example, the following redirects _stdout_ of `deno run main.ts` to a file
 called `file.txt` on the file system:
 
 ```sh
-deno run main.ts > file.tx
+deno run main.ts > file.txt
 ```
 
 To instead redirect _stderr_, use `2>`:
 
 ```sh
-deno run main.ts 2> file.tx
+deno run main.ts 2> file.txt
 ```
 
 To redirect both stdout _and_ stderr, use `&>`:
 
 ```sh
-deno run main.ts &> file.tx
+deno run main.ts &> file.txt
 ```
 
 To append to a file, instead of overwriting an existing one, use two right angle
 brackets instead of one:
 
 ```sh
-deno run main.ts >> file.tx
+deno run main.ts >> file.txt
 ```
 
 Suppressing either stdout, stderr, or both of a command is possible by
@@ -500,7 +500,7 @@ redirecting to `/dev/null`. This works in a cross-platform way including on
 Windows.
 
 ```sh
-# suppress stdou
+# suppress stdout
 deno run main.ts > /dev/null
 # suppress stderr
 deno run main.ts 2> /dev/null
@@ -513,7 +513,7 @@ Or redirecting stdout to stderr and vice-versa:
 ```sh
 # redirect stdout to stderr
 deno run main.ts >&2
-# redirect stderr to stdou
+# redirect stderr to stdout
 deno run main.ts 2>&1
 ```
 
@@ -521,7 +521,7 @@ Input redirects are also supported:
 
 ```sh
 # redirect file.txt to the stdin of gzip
-gzip < file.tx
+gzip < file.txt
 ```
 
 Note that redirecting multiple redirects is currently not supported.
@@ -550,7 +550,7 @@ Then on a Windows machine:
 
 ```sh
 > pwd
-C:\Users\david\dev\my_projec
+C:\Users\david\dev\my_project
 > deno task hi
 Hello there!
 ```
@@ -584,7 +584,7 @@ enabled.
 - **nullglob** - When enabled, globs that don't match any files expand to
   nothing instead of the literal glob pattern. Enable with `shopt -s nullglob`.
 - **pipefail** - When enabled, the exit code of a pipeline is the exit code of
-  the last command to exit with a non-zero status, or zero if all commands exi
+  the last command to exit with a non-zero status, or zero if all commands exit
   successfully. Enable with `set -o pipefail`.
 
 Examples:
@@ -639,7 +639,7 @@ box on Windows, Mac, and Linux.
   outputs stdin.
 - [`exit`](https://man7.org/linux/man-pages/man1/exit.1p.html) - Causes the
   shell to exit.
-- [`head`](https://man7.org/linux/man-pages/man1/head.1.html) - Output the firs
+- [`head`](https://man7.org/linux/man-pages/man1/head.1.html) - Output the first
   part of a file.
 - [`unset`](https://man7.org/linux/man-pages/man1/unset.1p.html) - Unsets
   environment variables.
@@ -655,7 +655,7 @@ Note that if you wish to execute any of these commands in a non-cross-platform
 way on Mac or Linux, then you may do so by running it through `sh`:
 `sh -c <command>` (ex. `sh -c cp source destination`).
 
-## package.json suppor
+## package.json support
 
 `deno task` falls back to reading from the `"scripts"` entries in a package.json
 file if it is discovered. Note that Deno does not respect or support any npm
@@ -668,17 +668,18 @@ script entries you want to run (ex.
 When a task command references a binary (e.g., `ohm`, `tsc`, `eslint`), Deno
 resolves it using the following order:
 
-1. **Workspace `node_modules/.bin/`** - If a `node_modules` directory exists
-   (from `deno install` or `deno add`), Deno will look for the binary in
-   `node_modules/.bin/`. This is compatible with how `npx` works in the Node.js
-   ecosystem.
+1. **`node_modules/.bin/`** - If the task's directory or a parent directory has
+   a `node_modules/.bin/` folder, Deno looks there first. Note that `deno add
+   npm:<pkg>` updates `deno.json` imports and `deno.lock` but does **not**
+   create a `node_modules` directory. The `node_modules` directory is only
+   created when using `deno install` or other npm-compatible tooling.
 
 2. **Package.json `bin` field** - When a dependency defines a `bin` field in its
    `package.json`, Deno automatically makes those commands available within task
-   scripts. This is resolved through Deno's npm compatibility layer.
+   scripts through its npm compatibility layer.
 
-3. **System PATH** - If the command is not found in `node_modules/.bin/`, Deno
-   falls back to searching the system PATH.
+3. **System PATH** - If the command is not found above, Deno falls back to
+   searching the system PATH.
 
 ### Example
 
