@@ -74,3 +74,84 @@ After bumping, commit the updated configuration file as part of your release.
 For publishing the bumped version to JSR, see
 [`deno publish`](/runtime/reference/cli/publish/); for an npm tarball, see
 [`deno pack`](/runtime/reference/cli/pack/).
+
+## Workspace mode
+
+When run at the root of a [workspace](/runtime/fundamentals/workspaces/),
+`deno bump-version` operates on every member package in a single pass instead
+of just the root config:
+
+- The same increment is applied to each member's `version` field.
+- `jsr:` version constraints in the workspace root config and in any
+  [import map](/runtime/fundamentals/configuration/#imports) are rewritten in
+  place so cross-package references keep matching the bumped versions.
+- Members without a `version` field are left alone.
+
+```sh
+# At the workspace root: patch every member from 1.4.6 to 1.4.7
+deno bump-version patch
+```
+
+This avoids the manual coordination step where a workspace release used to
+require updating each member's `deno.json`/`package.json` and the root import
+map one at a time.
+
+## Deriving bumps from Conventional Commits
+
+Inside a workspace, running `deno bump-version` with no `increment` argument
+switches to deriving per-package bumps from
+[Conventional Commits](https://www.conventionalcommits.org/) between a base ref
+and the current branch. Each member's bump is computed independently from the
+commits that touched files inside it (honoring scoped commits and wildcard
+`*` scopes), and the bumped versions are written back to the member configs
+and any import-map constraints.
+
+The derivation rules:
+
+- `fix:` and other patch-level types → `patch`.
+- `feat:` → `minor`.
+- A commit marked `BREAKING CHANGE:` in the body or with a `!` after the type
+  (e.g. `feat!:`) → `major`.
+- For packages still on `0.x.y`, semver rules are applied conservatively: a
+  breaking change yields a `minor` bump rather than `major`, and a `feat:`
+  yields `patch`.
+- Prereleases (`-0`, `-1`, …) get a `prerelease` increment.
+- Any manual edits to a package's version since the base ref are treated as
+  authoritative and skipped — the tool won't overwrite a deliberate version
+  pick.
+
+```sh
+# Derive the bumps from commits between `main` and the current branch
+deno bump-version --base=main
+```
+
+### Selecting the range
+
+Two flags pin the comparison range when the default (the current branch since
+the latest tag) isn't what you want:
+
+- `--base=<ref>` — the ref to compare against. Usually a release branch or tag
+  (`--base=main`, `--base=v1.4.7`).
+- `--start=<ref>` — the ref where the changeset begins. Defaults to the merge
+  base between `--base` and `HEAD`.
+
+```sh
+# Bump based on commits between v1.4.7 and the current branch
+deno bump-version --base=v1.4.7
+
+# Bump based on commits between two explicit refs
+deno bump-version --base=v1.4.7 --start=release/1.5
+```
+
+### `--dry-run`
+
+Pass `--dry-run` to print the planned changes — which packages would bump, the
+old/new version pairs, and the rewritten `jsr:` constraints — without writing
+anything to disk:
+
+```sh
+deno bump-version --base=main --dry-run
+```
+
+This is a good fit for CI checks ("does this branch produce the bumps we
+expect?") and for previewing a release locally before committing.
