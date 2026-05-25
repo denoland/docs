@@ -100,14 +100,14 @@ the root of the project.
 
 If you're using `nvim-lspconfig`, you'll have to set `root_dir` for `ts_ls`.
 This is because `nvim-lspconfig` creates a
-[`root_dir`](https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ts_ls.lua#L56-L68)
+[`root_dir`](https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ts_ls.lua)
 entry and `root_markers` is
 [unused if root_dir is specified](https://neovim.io/doc/user/lsp.html).
 
 ```lua
 vim.lsp.config('ts_ls', {
     on_attach = on_attach,
-    root_dir = {"package.json"},
+    root_dir = require("lspconfig").util.root_pattern("package.json"),
     workspace_required = true,
 })
 ```
@@ -123,12 +123,12 @@ local servers = {
         -- ... some configuration
         ts_ls = {
             root_dir = require("lspconfig").util.root_pattern({ "package.json", "tsconfig.json" }),
-            single_file_support = false,
+            workspace_required = true,
             settings = {},
         },
         denols = {
             root_dir = require("lspconfig").util.root_pattern({"deno.json", "deno.jsonc"}),
-            single_file_support = false,
+            workspace_required = true,
             settings = {},
         },
     }
