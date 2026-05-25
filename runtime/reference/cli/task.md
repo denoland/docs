@@ -687,18 +687,18 @@ script entries you want to run (ex.
 When a task command references a binary (e.g., `ohm`, `tsc`, `eslint`), Deno
 resolves it using the following order:
 
-1. **`node_modules/.bin/`** - If the task's directory or a parent directory has
-   a `node_modules/.bin/` folder, Deno looks there first. Note that
-   `deno add npm:<pkg>` updates `deno.json` imports and `deno.lock` but does
-   **not** create a `node_modules` directory. The `node_modules` directory is
-   only created when using `deno install` or other npm-compatible tooling.
+1. `node_modules/.bin/` - if the task's directory or a parent directory has a
+   `node_modules/.bin/` folder, Deno looks there first. Note that
+   `deno add npm:<pkg>` updates `deno.json` imports and `deno.lock` but does not
+   create a `node_modules` directory. The `node_modules` directory is only
+   created when using `deno install` or other npm-compatible tooling.
 
-2. **Package.json `bin` field** - When a dependency defines a `bin` field in its
+2. `package.json` `bin` field - when a dependency defines a `bin` field in its
    `package.json`, Deno automatically makes those commands available within task
    scripts through its npm compatibility layer.
 
-3. **System PATH** - If the command is not found above, Deno falls back to
-   searching the system PATH.
+3. System `PATH` - if the command is not found above, Deno falls back to
+   searching the system `PATH`.
 
 ### Example
 
