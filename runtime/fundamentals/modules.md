@@ -826,9 +826,9 @@ project:
 `deno.json` and `--minimum-dependency-age` accept an
 [ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) such as
 `P3D` (3 days) or `PT72H` (72 hours), an integer (interpreted as minutes), an
-absolute cutoff date (`2025-09-16`) or RFC3339 timestamp, or `0` to disable.
-See [`.npmrc` configuration](/runtime/fundamentals/node/#npmrc-configuration)
-for the other npm-registry options Deno reads.
+absolute cutoff date (`2025-09-16`) or RFC3339 timestamp, or `0` to disable. See
+[`.npmrc` configuration](/runtime/fundamentals/node/#npmrc-configuration) for
+the other npm-registry options Deno reads.
 
 ### Typical CI pattern
 
