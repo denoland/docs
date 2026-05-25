@@ -805,25 +805,28 @@ project:
 
   ```jsonc title="deno.json"
   {
-    "minimumDependencyAge": "72h"
+    "minimumDependencyAge": "P3D"
   }
   ```
 
 - **CLI flag**, apply ad-hoc, e.g. for a one-off install or in a CI step:
 
   ```sh
-  deno install --minimum-dependency-age=72h
+  deno install --minimum-dependency-age=P3D
   ```
 
 - **`.npmrc`** (Deno 2.8+), matches the npm convention, useful when sharing the
-  same `.npmrc` across npm and Deno tooling:
+  same `.npmrc` across npm and Deno tooling. The npm setting accepts a whole
+  number of days only:
 
   ```ini title=".npmrc"
-  min-release-age=72h
+  min-release-age=3
   ```
 
-Values accept human-friendly durations (`72h`, `P2D`), absolute cutoff dates
-(`2025-09-16`), or `0` to disable. See
+`deno.json` and `--minimum-dependency-age` accept an
+[ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) such as
+`P3D` (3 days) or `PT72H` (72 hours), an integer (interpreted as minutes), an
+absolute cutoff date (`2025-09-16`) or RFC3339 timestamp, or `0` to disable. See
 [`.npmrc` configuration](/runtime/fundamentals/node/#npmrc-configuration) for
 the other npm-registry options Deno reads.
 
