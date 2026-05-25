@@ -681,3 +681,49 @@ file if it is discovered. Note that Deno does not respect or support any npm
 life cycle events like `preinstall` or `postinstall`—you must explicitly run the
 script entries you want to run (ex.
 `deno install --entrypoint main.ts && deno task postinstall`).
+
+## Command Resolution
+
+When a task command references a binary (e.g., `ohm`, `tsc`, `eslint`), Deno
+resolves it using the following order:
+
+1. `node_modules/.bin/` - if the task's directory or a parent directory has a
+   `node_modules/.bin/` folder, Deno looks there first. Note that
+   `deno add npm:<pkg>` updates `deno.json` imports and `deno.lock` but does not
+   create a `node_modules` directory. The `node_modules` directory is only
+   created when using `deno install` or other npm-compatible tooling.
+
+2. `package.json` `bin` field - when a dependency defines a `bin` field in its
+   `package.json`, Deno automatically makes those commands available within task
+   scripts through its npm compatibility layer.
+
+3. System `PATH` - if the command is not found above, Deno falls back to
+   searching the system `PATH`.
+
+### Example
+
+Given a `package.json` with:
+
+```json
+{
+  "dependencies": {
+    "@ohm-js/cli": "^2.0.0"
+  }
+}
+```
+
+And a `deno.json` with:
+
+```json
+{
+  "tasks": {
+    "generate": "ohm src/grammar.ohm -o src/grammar.js"
+  }
+}
+```
+
+Running `deno task generate` will:
+
+1. Look for `ohm` in `node_modules/.bin/ohm`
+2. If found, execute it using Deno's Node.js compatibility layer
+3. The command runs under Deno's runtime, not Node.js.
