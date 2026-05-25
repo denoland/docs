@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-07
 title: "Terms and Conditions"
 description: "Deno Terms and Conditions"
 oldUrl: /deploy/classic/terms-and-conditions

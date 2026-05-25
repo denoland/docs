@@ -37,16 +37,8 @@ const messageData = encoder.encode(message);
 // Generate the HMAC signature for the message
 const signature = await crypto.subtle.sign("HMAC", key, messageData);
 
-// Function to convert ArrayBuffer to hex string for readability only. This isn't part of the generation or verification
-function bufferToHex(buffer: ArrayBuffer): string {
-  const byteArray = new Uint8Array(buffer);
-  return Array.from(byteArray)
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
-}
-
 // Output the generated HMAC signature in hexadecimal format
-console.log("Generated HMAC:", bufferToHex(signature));
+console.log("Generated HMAC:", new Uint8Array(signature).toHex());
 
 // Verify the HMAC signature
 const isValid = await crypto.subtle.verify("HMAC", key, signature, messageData);

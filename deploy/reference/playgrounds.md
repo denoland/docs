@@ -1,9 +1,8 @@
 ---
+last_modified: 2025-12-08
 title: Playgrounds
 description: "Write and deploy code completely from Deno Deploy, without the need for a git repository."
 ---
-
-![Deno Deploy Playground](https://deno.com/video/playground-1-720.mp4)
 
 Playground applications enable you to create, edit, and deploy applications
 entirely from the Deno Deploy web dashboard, without needing to create a GitHub
@@ -14,14 +13,14 @@ that you can edit directly in the playground editor.
 
 ## Creating a playground
 
-You can create playgrounds from the "Playgrounds" page in your organization.
+You can create playgrounds from the "Applications" page in your organization.
 Click the "New Playground" button to create a basic "Hello World" playground.
 Using the dropdown on the "New Playground" button lets you create playgrounds
 from other templates, such as Next.js or Hono.
 
 ## Editing a playground
 
-To edit a playground, open it from the "Playgrounds" page in your organization.
+To edit a playground, open it from the "Applications" page in your organization.
 
 The playground editor consists of five main sections:
 

@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-12-16
 title: Deno and Docker
 description: "Complete guide to using Deno with Docker containers. Learn about official Deno images, writing Dockerfiles, multi-stage builds, workspace containerization, and Docker best practices for Deno applications."
 ---
@@ -13,18 +14,23 @@ To use the official image, create a `Dockerfile` in your project directory:
 ```dockerfile
 FROM denoland/deno:latest
 
-# Create working directory
 WORKDIR /app
 
-# Copy source
+# Copy manifests first so the dependency install layer caches across
+# source-only edits
+COPY deno.json deno.lock package.json* ./
+RUN deno ci --prod --skip-types
+
+# Then copy the rest of the source
 COPY . .
 
-# Compile the main app
-RUN deno cache main.ts
-
-# Run the app
 CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
+
+[`deno ci`](/runtime/reference/cli/ci/) performs a reproducible install from
+`deno.lock`. `--prod` skips `devDependencies`, and `--skip-types` drops
+`@types/*` packages — both shrink the resulting image without affecting runtime
+behavior.
 
 ### Best Practices
 
@@ -35,16 +41,31 @@ For smaller production images:
 ```dockerfile
 # Build stage
 FROM denoland/deno:latest AS builder
+# Point Deno's cache at a known location so it can be copied to the next stage
+ENV DENO_DIR=/deno-dir
 WORKDIR /app
+
+# Copy manifests first so the dependency install layer caches across
+# source-only edits
+COPY deno.json deno.lock package.json* ./
+RUN deno ci --prod --skip-types
+
+# Then copy the rest of the source
 COPY . .
-RUN deno cache main.ts
 
 # Production stage
 FROM denoland/deno:latest
+ENV DENO_DIR=/deno-dir
 WORKDIR /app
 COPY --from=builder /app .
+# Copy the populated Deno cache so the runtime stage has the dependencies
+COPY --from=builder /deno-dir /deno-dir
 CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
+
+Without copying `$DENO_DIR`, `deno ci` only writes to Deno's global cache inside
+the builder stage — those files do not travel with `COPY --from=builder /app .`,
+so the container re-downloads dependencies on first run.
 
 #### Permission Flags
 
@@ -132,9 +153,9 @@ CMD ["deno", "test", "--allow-none"]
 
 ### Using Docker Compose
 
-```yaml
-// filepath: docker-compose.yml
-version: "3.8"
+A basic Compose file for development with hot-reload:
+
+```yaml title="docker-compose.yml"
 services:
   deno-app:
     build: .
@@ -146,6 +167,54 @@ services:
       - DENO_ENV=development
     command: ["deno", "run", "--watch", "--allow-net", "main.ts"]
 ```
+
+For a more realistic setup with a database:
+
+```yaml title="docker-compose.yml"
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgres://deno:${POSTGRES_PASSWORD}@db:5432/app
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    command:
+      [
+        "deno",
+        "run",
+        "--allow-net=db:5432",
+        "--allow-env=DATABASE_URL",
+        "main.ts",
+      ]
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: deno
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U deno"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+```
+
+Put secrets like `POSTGRES_PASSWORD` in a `.env` file next to
+`docker-compose.yml`. Compose loads it automatically. Don't commit it.
+
+Start the services with `docker compose up`, or run in the background with
+`docker compose up -d`.
 
 ### Health Checks
 
@@ -234,8 +303,7 @@ project-root/
 
 2. Create a `.dockerignore`:
 
-```text
-// filepath: docker/project-a/.dockerignore
+```text title="docker/project-a/.dockerignore"
 *
 !deno.json
 !project-a/**
@@ -244,8 +312,7 @@ project-root/
 
 3. Create a build context script:
 
-```bash
-// filepath: docker/project-a/build-context.sh
+```bash title="docker/project-a/build-context.sh"
 #!/bin/bash
 
 # Create temporary build context
@@ -266,8 +333,7 @@ fi
 
 4. Create a minimal Dockerfile:
 
-```dockerfile
-// filepath: docker/project-a/Dockerfile
+```dockerfile title="docker/project-a/Dockerfile"
 FROM denoland/deno:latest
 
 WORKDIR /app

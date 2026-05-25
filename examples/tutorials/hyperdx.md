@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-07-11
 title: "How to export telemetry data to HyperDX"
 description: "Complete guide to exporting telemetry data with OpenTelemetry and HyperDX. Learn how to configure collectors, visualize traces, logs, metrics, and debug distributed applications effectively."
 url: /examples/hyperdx_tutorial/

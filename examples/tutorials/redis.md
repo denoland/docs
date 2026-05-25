@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "How to use Redis with Deno"
 description: "Step-by-step guide to using Redis with Deno. Learn how to set up caching, implement message brokers, handle data streaming, and optimize your applications with Redis's in-memory data store."
 url: /examples/redis_tutorial/

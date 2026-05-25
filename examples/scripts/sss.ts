@@ -56,7 +56,7 @@ async function generateShares(
   return { shares, coefficients };
 }
 
-// Secret Reconstuction from a subset of shares using Lagrange interpolation
+// Secret Reconstruction from a subset of shares using Lagrange interpolation
 function reconstructSecret(shares: Array<{ x: number; y: number }>): number {
   const secret = shares.reduce((sum, share, i) => {
     let product = share.y;

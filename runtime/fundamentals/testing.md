@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-05-20
 title: "Testing"
 description: "A guide to Deno's testing capabilities. Learn about the built-in test runner, assertions, mocking, coverage reporting, snapshot testing, and how to write effective tests for your Deno applications."
 oldUrl:
@@ -27,8 +28,8 @@ these in this document however.
 
 ## Writing Tests
 
-To define a test in Deno, you use the `Deno.test()` function. Here are some
-examples:
+To define a test in Deno, you use the [`Deno.test()`](/api/deno/~/Deno.test)
+function. Here are some examples:
 
 ```ts title="my_test.ts"
 import { assertEquals } from "jsr:@std/assert";
@@ -116,6 +117,28 @@ Deno.test("database operations", async (t) => {
   });
 });
 ```
+
+## Timeouts
+
+You can set a maximum duration for individual tests using the `timeout` option.
+If a test exceeds its deadline it is marked as failed. Both asynchronous hangs
+(a promise that never resolves) and synchronous hot loops (`while (true) {}`)
+are caught.
+
+```ts
+Deno.test({
+  name: "completes within deadline",
+  timeout: 5000, // 5 seconds
+  async fn() {
+    const response = await fetch("https://example.com");
+    await response.body?.cancel();
+  },
+});
+```
+
+If a test times out the next test in the same file still runs normally.
+
+Setting `timeout` to `0` or omitting it means the test runs without a deadline.
 
 ## Test Hooks
 
@@ -308,7 +331,7 @@ Deno.test({
 ```
 
 If you want to ignore a test without passing any conditions, you can use the
-`ignore()` function from the `Deno.test` object:
+`ignore()` function from the [`Deno.test`](/api/deno/~/Deno.test) object:
 
 ```ts
 Deno.test.ignore("my test", () => {
@@ -386,7 +409,7 @@ deno test --junit-path=./report.xml
 
 The [Deno Standard Library](/runtime/reference/std/) provides a set of functions
 to help you write tests that involve spying, mocking, and stubbing. Check out
-the [@std/testing documentation on JSR](https://jsr.io/@std/testing) for more
+the [`@std/testing` documentation](/runtime/reference/std/testing/) for more
 information on each of these utilities or our
 [tutorial on mocking and spying in tests with deno](/examples/mocking_tutorial/).
 
@@ -402,8 +425,8 @@ tool.
 
 ## Behavior-Driven Development
 
-With the [@std/testing/bdd](https://jsr.io/@std/testing/doc/bdd/~) module you
-can write your tests in a familiar format for grouping tests and adding
+With the [`@std/testing/bdd`](/runtime/reference/std/testing/) module you can
+write your tests in a familiar format for grouping tests and adding
 setup/teardown hooks used by other JavaScript testing frameworks like Jasmine,
 Jest, and Mocha.
 
@@ -428,8 +451,8 @@ describe("add function", () => {
 });
 ```
 
-Check out the [documentation on JSR](https://jsr.io/@std/testing/doc/bdd/~) for
-more information on these functions and hooks.
+Check out the [`@std/testing` documentation](/runtime/reference/std/testing/)
+for more information on these functions and hooks.
 
 - [BDD testing tutorial](/examples/bdd_tutorial/)
 
@@ -573,9 +596,9 @@ reasonable and expected way.
 The resource sanitizer ensures that all I/O resources created during a test are
 closed, to prevent leaks.
 
-I/O resources are things like `Deno.FsFile` handles, network connections,
-`fetch` bodies, timers, and other resources that are not automatically garbage
-collected.
+I/O resources are things like [`Deno.FsFile`](/api/deno/~/Deno.FsFile) handles,
+network connections, [`fetch`](/api/web/~/fetch) bodies, timers, and other
+resources that are not automatically garbage collected.
 
 You should always close resources when you are done with them. For example, to
 close a file:
@@ -594,7 +617,7 @@ const conn = await Deno.connect({ hostname: "example.com", port: 80 });
 conn.close(); // <- Always close the connection when you are done with it
 ```
 
-To close a `fetch` body:
+To close a [`fetch`](/api/web/~/fetch) body:
 
 ```ts
 const response = await fetch("https://example.com");
@@ -602,16 +625,18 @@ const response = await fetch("https://example.com");
 await response.body?.cancel(); // <- Always cancel the body when you are done with it, if you didn't consume it otherwise
 ```
 
-This sanitizer is enabled by default, but can be disabled in this test with
-`sanitizeResources: false`:
+As of Deno 2.8 this sanitizer is **off by default**. Opt in with
+`sanitizeResources: true`, or with one of the global mechanisms described in
+[Enabling sanitizers globally](#enabling-sanitizers-globally).
 
 ```ts
 Deno.test({
-  name: "leaky resource test",
+  name: "no leaks allowed",
   async fn() {
-    await Deno.open("hello.txt");
+    using file = await Deno.open("hello.txt");
+    // ...
   },
-  sanitizeResources: false,
+  sanitizeResources: true,
 });
 ```
 
@@ -634,26 +659,65 @@ Deno.test({
 });
 ```
 
-This sanitizer is enabled by default, but can be disabled with
-`sanitizeOps: false`:
+As of Deno 2.8 this sanitizer is **off by default**. Opt in with
+`sanitizeOps: true`, or with one of the global mechanisms described below.
 
 ```ts
 Deno.test({
-  name: "leaky operation test",
-  fn() {
-    crypto.subtle.digest(
-      "SHA-256",
-      new TextEncoder().encode("a".repeat(100000000)),
-    );
+  name: "no leaked ops allowed",
+  async fn() {
+    await someAsyncWork();
   },
-  sanitizeOps: false,
+  sanitizeOps: true,
 });
 ```
 
+### Enabling sanitizers globally
+
+If you want the pre-2.8 behavior — resource and op sanitizers on for every test
+— you can re-enable them at any of four scopes. Higher-precedence settings
+override lower ones.
+
+1. **Per-test** (highest precedence):
+
+   ```ts
+   Deno.test({
+     name: "strict",
+     sanitizeOps: true,
+     sanitizeResources: true,
+     fn() {/* … */},
+   });
+   ```
+
+2. **Per-module** with
+   [`Deno.test.sanitizer()`](/api/deno/~/Deno.test.sanitizer):
+
+   ```ts
+   Deno.test.sanitizer({ ops: true, resources: true });
+
+   Deno.test("uses module-level sanitizers", () => {/* … */});
+   ```
+
+3. **CLI flags**: `--sanitize-ops` and `--sanitize-resources`.
+
+4. **Environment variables**: `DENO_TEST_SANITIZE_OPS=1` and
+   `DENO_TEST_SANITIZE_RESOURCES=1`.
+
+5. **`deno.json`** (lowest precedence):
+
+   ```jsonc
+   {
+     "test": {
+       "sanitizeOps": true,
+       "sanitizeResources": true
+     }
+   }
+   ```
+
 ### Exit sanitizer
 
-The exit sanitizer ensures that tested code doesn’t call `Deno.exit()`, which
-could signal a false test success.
+The exit sanitizer ensures that tested code doesn’t call
+[`Deno.exit()`](/api/deno/~/Deno.exit), which could signal a false test success.
 
 This sanitizer is enabled by default, but can be disabled with
 `sanitizeExit: false`.
@@ -679,25 +743,26 @@ Deno.test({
 ## Snapshot testing
 
 The [Deno Standard Library](/runtime/reference/std/) includes a
-[snapshot module](https://jsr.io/@std/testing/doc/snapshot/~) that allows
-developers to write tests by comparing values against reference snapshots. These
-snapshots are serialized representations of the original values and are stored
-alongside the test files.
+[snapshot module](/runtime/reference/std/testing/) that allows developers to
+write tests by comparing values against reference snapshots. These snapshots are
+serialized representations of the original values and are stored alongside the
+test files.
 
 Snapshot testing enables catching a wide array of bugs with very little code. It
 is particularly helpful in situations where it is difficult to precisely express
 what should be asserted, without requiring a prohibitive amount of code, or
 where the assertions a test makes are expected to change often.
 
-- [Snapshot testing tutorial](/examples/snapshot_tutorial/)
+- [Snapshot testing tutorial](/examples/snapshot_test_tutorial/)
 
 ## Tests and Permissions
 
-The `permissions` property in the `Deno.test` configuration allows you to
-specifically deny permissions, but does not grant them. Permissions must be
-provided when running the test command. When building robust applications, you
-often need to handle cases where permissions are denied, (for example you may
-want to write tests to check whether fallbacks have been set up correctly).
+The `permissions` property in the [`Deno.test`](/api/deno/~/Deno.test)
+configuration allows you to specifically deny permissions, but does not grant
+them. Permissions must be provided when running the test command. When building
+robust applications, you often need to handle cases where permissions are
+denied, (for example you may want to write tests to check whether fallbacks have
+been set up correctly).
 
 Consider a situation where you are reading from a file, you may want to offer a
 fallback value in the case that the function does not have read permission:

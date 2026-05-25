@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "Architecture Overview"
 description: "Deep dive into Deno's internal architecture, explaining core components like the runtime, compiler, and security sandbox. Learn how Deno processes requests and executes JavaScript/TypeScript code."
 oldUrl: /runtime/manual/references/contributing/architecture/

@@ -1,15 +1,19 @@
 #!/usr/bin/env -S deno run --allow-read --allow-write
 /**
- * This script generates llms.txt and llms-full.txt files for the Deno documentation,
- * following the llmstxt.org standard to create LLM-friendly documentation.
+ * This script generates llms-summary.txt, llms-full.txt, and llms.json for the
+ * Deno documentation, following the llmstxt.org standard.
  *
- * By default, files are generated in the same directory as the generation script. When running
- * during the build process, files are generated in the _site directory so they can be served
- * at the site's root.
+ * The hand-written llms.txt and llms-full-guide.txt live in static/ and are
+ * copied to _site/ by Lume's site.copy("static", ".").
+ *
+ * By default, generated files are written to the static directory. When running
+ * during the build process, files are generated in the _site directory so they
+ * can be served at the site's root.
  */
 
 import { walk } from "@std/fs";
 import { fromFileUrl, join, relative } from "@std/path";
+import { parse as parseYaml } from "@std/yaml";
 
 const BASE_URL = "https://docs.deno.com";
 // Convert file URL to a proper filesystem path (fixes Windows leading slash issue)
@@ -19,6 +23,7 @@ const ROOT_DIR = fromFileUrl(new URL(".", import.meta.url));
 const INCLUDE_DIRS = [
   "runtime",
   "deploy",
+  "sandbox",
   "examples",
   "subhosting",
   "lint",
@@ -35,12 +40,11 @@ const EXCLUDE_FILES = [
 
 // Extensions to include
 const INCLUDE_EXTS = [".md", ".mdx"];
+const SUMMARY_LIMIT_PER_SECTION = 25;
 
 // Regex patterns for extracting headers and content
 const H1_REGEX = /^# (.+)$/m;
 const H2_REGEX = /^## (.+)$/gm;
-const FRONTMATTER_TITLE_REGEX = /title: ["'](.+)["']/;
-const DESCRIPTION_REGEX = /description: ["'](.+)["']/;
 
 interface FileInfo {
   path: string;
@@ -48,8 +52,96 @@ interface FileInfo {
   url: string;
   title: string;
   description: string | null;
+  summary: string | null;
   content: string;
   h2Sections: string[];
+}
+
+interface OramaSummaryMetadata {
+  generatedAt: string;
+  version: string;
+  baseUrl: string;
+  totalDocuments: number;
+  includesApiReference: boolean;
+  stats: Record<string, unknown>;
+}
+
+interface OramaSummaryEntry {
+  id: string;
+  title: string;
+  url: string;
+  path: string;
+  category: string;
+  section: string;
+  subsection: string;
+  description?: string;
+  tags?: string[];
+  docType?: string;
+}
+
+interface OramaSummaryIndex {
+  metadata: OramaSummaryMetadata;
+  data: OramaSummaryEntry[];
+}
+
+function asRecord(value: unknown): Record<string, unknown> {
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    return value as Record<string, unknown>;
+  }
+  return {};
+}
+
+function getString(
+  obj: Record<string, unknown>,
+  keys: string[],
+): string | null {
+  for (const key of keys) {
+    const value = obj[key];
+    if (typeof value === "string" && value.trim().length > 0) {
+      return value.trim();
+    }
+  }
+  return null;
+}
+
+function normalizeTitle(title: string): string {
+  return title.replace(/^title:\s*/i, "").trim();
+}
+
+function extractSummary(markdownContent: string): string | null {
+  const withoutCode = markdownContent.replace(/```[\s\S]*?```/g, "");
+  const withoutHtml = withoutCode.replace(/<[^>]+>/g, "");
+  const blocks = withoutHtml
+    .split(/\n\n+/)
+    .map((block) => block.replace(/^#+\s+/gm, "").trim())
+    .filter((block) => block.length > 0);
+
+  return blocks.length > 0 ? blocks[0] : null;
+}
+
+function resolveUrl(
+  relativePath: string,
+  frontmatter: Record<string, unknown>,
+) {
+  const frontmatterUrl = getString(frontmatter, ["url", "href"]);
+  if (frontmatterUrl) {
+    if (
+      frontmatterUrl.startsWith("http://") ||
+      frontmatterUrl.startsWith("https://")
+    ) {
+      return frontmatterUrl;
+    }
+    if (frontmatterUrl.startsWith("/")) {
+      return `${BASE_URL}${frontmatterUrl}`;
+    }
+    return `${BASE_URL}/${frontmatterUrl}`;
+  }
+
+  let url = relativePath.replace(/\.(md|mdx)$/, "");
+  if (url.endsWith("/index")) {
+    url = url.replace(/\/index$/, "/");
+  }
+  return `${BASE_URL}/${url}`;
 }
 
 async function collectFiles(): Promise<FileInfo[]> {
@@ -89,17 +181,26 @@ async function collectFiles(): Promise<FileInfo[]> {
           /^---\n([\s\S]*?)\n---\n([\s\S]*)$/,
         );
 
-        let frontmatter = "";
+        let frontmatter = {} as Record<string, unknown>;
         if (frontmatterMatch) {
-          frontmatter = frontmatterMatch[1];
+          try {
+            frontmatter = asRecord(parseYaml(frontmatterMatch[1]));
+          } catch (_error) {
+            frontmatter = {};
+          }
           markdownContent = frontmatterMatch[2];
         }
 
         // Extract title from frontmatter or first h1
         let title = "";
-        const titleMatch = frontmatter.match(FRONTMATTER_TITLE_REGEX);
-        if (titleMatch) {
-          title = titleMatch[1];
+        const frontmatterTitle = getString(frontmatter, [
+          "title",
+          "sidebar_title",
+          "sidebarTitle",
+          "heading",
+        ]);
+        if (frontmatterTitle) {
+          title = normalizeTitle(frontmatterTitle);
         } else {
           const h1Match = markdownContent.match(H1_REGEX);
           if (h1Match) {
@@ -110,11 +211,13 @@ async function collectFiles(): Promise<FileInfo[]> {
         }
 
         // Extract description
-        let description = null;
-        const descMatch = frontmatter.match(DESCRIPTION_REGEX);
-        if (descMatch) {
-          description = descMatch[1];
-        }
+        const description = getString(frontmatter, [
+          "description",
+          "summary",
+          "excerpt",
+        ]);
+
+        const summary = extractSummary(markdownContent);
 
         // Extract h2 sections
         const h2Sections: string[] = [];
@@ -123,18 +226,15 @@ async function collectFiles(): Promise<FileInfo[]> {
           h2Sections.push(match[1]);
         }
 
-        // Build URL (strip extension and handle index files)
-        let url = relativePath.replace(/\.(md|mdx)$/, "");
-        if (url.endsWith("/index")) {
-          url = url.replace(/\/index$/, "/");
-        }
+        const url = resolveUrl(relativePath, frontmatter);
 
         files.push({
           path: entry.path,
           relativePath,
-          url: `${BASE_URL}/${url}`,
+          url,
           title,
           description,
+          summary,
           content: markdownContent,
           h2Sections,
         });
@@ -147,8 +247,47 @@ async function collectFiles(): Promise<FileInfo[]> {
   return files;
 }
 
-function generateLlmsTxt(files: FileInfo[]): string {
-  // Extract information about the main sections
+function scoreSummaryCandidate(file: FileInfo): number {
+  let score = 0;
+  const depth = file.relativePath.split("/").length;
+
+  if (
+    file.relativePath.endsWith("/index.md") ||
+    file.relativePath.endsWith("/index.mdx")
+  ) {
+    score += 10;
+  }
+
+  if (file.description || file.summary) {
+    score += 5;
+  }
+
+  if (file.relativePath.includes("/getting_started/")) {
+    score += 4;
+  }
+
+  if (file.relativePath.includes("/fundamentals/")) {
+    score += 3;
+  }
+
+  if (file.relativePath.includes("/manual/")) {
+    score += 2;
+  }
+
+  if (file.relativePath.includes("/tutorials/")) {
+    score += 2;
+  }
+
+  if (file.relativePath.includes("/reference/")) {
+    score -= 2;
+  }
+
+  score += Math.max(0, 6 - depth);
+
+  return score;
+}
+
+function generateLlmsSummaryTxt(files: FileInfo[]): string {
   const sections = INCLUDE_DIRS.map((dir) => {
     const sectionFiles = files.filter((file) =>
       file.relativePath.startsWith(dir)
@@ -159,81 +298,67 @@ function generateLlmsTxt(files: FileInfo[]): string {
       name: sectionName,
       files: sectionFiles,
       description: getSectionDescription(dir),
+      dir,
     };
   });
 
-  // Build the llms.txt content
-  let content = "# Deno Documentation\n\n";
+  let content = "# Deno Documentation - Summary\n\n";
   content +=
-    "> Deno is an open source JavaScript, TypeScript, and WebAssembly runtime with secure defaults and a great developer experience. It's built on V8, Rust, and Tokio.\n\n";
-  content +=
-    "Deno is a modern, secure-by-default runtime for JavaScript, TypeScript, and WebAssembly. This documentation covers the Deno runtime, Deno Deploy cloud service, and related tools and services.\n\n";
+    "> A compact, LLM-friendly overview of the Deno docs. For a full index, use llms.txt. For full content, use llms-full.txt.\n\n";
 
-  // Add sections
   for (const section of sections) {
     content += `## ${section.name} Documentation\n\n`;
     if (section.description) {
       content += `${section.description}\n\n`;
     }
 
-    // Get section index page
     const indexPage = section.files.find((file) =>
-      file.relativePath === `${section.name.toLowerCase()}/index.md` ||
-      file.relativePath === `${section.name.toLowerCase()}/index.mdx`
+      file.relativePath === `${section.dir}/index.md` ||
+      file.relativePath === `${section.dir}/index.mdx`
     );
 
-    // Group files by directories (if needed)
-    const filesByDirectory = new Map<string, FileInfo[]>();
-    for (const file of section.files) {
-      // Skip the index page as it's already included
-      if (file === indexPage) continue;
-
-      const parts = file.relativePath.split("/");
-      if (parts.length > 2) {
-        // This is a subdirectory
-        const subdir = parts.slice(0, 2).join("/");
-        if (!filesByDirectory.has(subdir)) {
-          filesByDirectory.set(subdir, []);
-        }
-        filesByDirectory.get(subdir)?.push(file);
-      } else {
-        // This is a direct child of the section
-        if (!filesByDirectory.has(section.name.toLowerCase())) {
-          filesByDirectory.set(section.name.toLowerCase(), []);
-        }
-        filesByDirectory.get(section.name.toLowerCase())?.push(file);
+    if (indexPage) {
+      content += `- [${indexPage.title}](${indexPage.url})`;
+      if (indexPage.description ?? indexPage.summary) {
+        content += `: ${indexPage.description ?? indexPage.summary}`;
       }
+      content += "\n";
     }
 
-    // Add links to important files
-    for (const [_, dirFiles] of filesByDirectory) {
-      // Sort files to ensure consistent output
-      dirFiles.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
+    const candidates = section.files
+      .filter((file) => file !== indexPage)
+      .map((file) => ({
+        file,
+        score: scoreSummaryCandidate(file),
+      }))
+      .sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return a.file.title.localeCompare(b.file.title);
+      })
+      .slice(0, SUMMARY_LIMIT_PER_SECTION)
+      .map((entry) => entry.file);
 
-      for (const file of dirFiles) {
-        // Skip files with no title
-        if (!file.title) continue;
-
-        // Format for llms.txt - use the pattern: [Title](url): Description
-        content += `- [${file.title}](${file.url})`;
-        if (file.description) {
-          content += `: ${file.description}`;
-        }
-        content += "\n";
+    for (const file of candidates) {
+      const descriptionOrSummary = file.description ?? file.summary;
+      content += `- [${file.title}](${file.url})`;
+      if (descriptionOrSummary) {
+        content += `: ${descriptionOrSummary}`;
       }
+      content += "\n";
     }
 
     content += "\n";
   }
 
-  // Add Optional section with additional resources
   content += "## Optional\n\n";
   content +=
-    "- [Contribution Guidelines](/runtime/contributing): How to contribute to Deno\n";
+    `- [Contribution Guidelines](${BASE_URL}/runtime/contributing): How to contribute to Deno\n`;
   content +=
-    "- [Style Guide](/runtime/contributing/style_guide): Coding style guidelines for Deno\n";
+    `- [Style Guide](${BASE_URL}/runtime/contributing/style_guide): Coding style guidelines for Deno\n`;
   content +=
-    "- [Release Schedule](/runtime/contributing/release_schedule): Deno's release cadence and versioning\n";
+    `- [Release Schedule](${BASE_URL}/runtime/contributing/release_schedule): Deno's release cadence and versioning\n`;
+  content +=
+    "- [Deno LLM Skills](https://github.com/denoland/skills): Skills and playbooks for LLMs and AI agents working with Deno\n";
 
   return content;
 }
@@ -260,12 +385,44 @@ function generateLlmsFullTxt(files: FileInfo[]): string {
   return content;
 }
 
+async function loadOramaSummaryIndex(): Promise<OramaSummaryIndex | null> {
+  const summaryPath = join(ROOT_DIR, "static", "orama-index-summary.json");
+  try {
+    const raw = await Deno.readTextFile(summaryPath);
+    const parsed = JSON.parse(raw) as OramaSummaryIndex;
+    if (!parsed?.metadata || !Array.isArray(parsed?.data)) {
+      return null;
+    }
+    return parsed;
+  } catch (error) {
+    if (error instanceof Deno.errors.NotFound) {
+      return null;
+    }
+    throw error;
+  }
+}
+
+function generateLlmsJson(summary: OramaSummaryIndex): string {
+  const payload = {
+    metadata: {
+      generatedAt: new Date().toISOString(),
+      source: "orama-index-summary.json",
+      orama: summary.metadata,
+    },
+    data: summary.data,
+  };
+
+  return JSON.stringify(payload, null, 2);
+}
+
 function getSectionDescription(section: string): string {
   const descriptions: Record<string, string> = {
     runtime:
       "Documentation for the Deno CLI and runtime environment, including installation, configuration, and core concepts.",
     deploy:
       "Documentation for Deno Deploy, a serverless platform for deploying JavaScript to a global edge network.",
+    sandbox:
+      "Documentation for Deno Sandbox, ephemeral Linux microVMs for running untrusted code safely.",
     examples:
       "Code examples and tutorials demonstrating how to build applications with Deno.",
     subhosting:
@@ -298,10 +455,22 @@ async function main(outputDir?: string) {
     throw error;
   }
 
-  // Generate llms.txt
-  const llmsTxt = generateLlmsTxt(files);
-  await Deno.writeTextFile(join(outDir, "llms.txt"), llmsTxt);
-  console.log(`Generated llms.txt in ${outDir}`);
+  // Generate llms-summary.txt
+  const llmsSummaryTxt = generateLlmsSummaryTxt(files);
+  await Deno.writeTextFile(join(outDir, "llms-summary.txt"), llmsSummaryTxt);
+  console.log(`Generated llms-summary.txt in ${outDir}`);
+
+  // Generate llms.json (structured index from Orama summary)
+  const oramaSummary = await loadOramaSummaryIndex();
+  if (oramaSummary) {
+    const llmsJson = generateLlmsJson(oramaSummary);
+    await Deno.writeTextFile(join(outDir, "llms.json"), llmsJson);
+    console.log(`Generated llms.json in ${outDir}`);
+  } else {
+    console.warn(
+      "Skipped llms.json generation (orama-index-summary.json not found)",
+    );
+  }
 
   // Generate llms-full.txt
   const llmsFullTxt = generateLlmsFullTxt(files);
@@ -322,6 +491,8 @@ if (import.meta.main) {
 // Export functions for use in the site build process
 export default {
   collectFiles,
-  generateLlmsTxt,
+  generateLlmsSummaryTxt,
   generateLlmsFullTxt,
+  generateLlmsJson,
+  loadOramaSummaryIndex,
 };

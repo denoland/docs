@@ -7,7 +7,7 @@
     "@std/media-types": "jsr:@std/media-types@^1.1.0",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@std/yaml": "jsr:@std/yaml@^1.0.3",
-    "@deno/doc": "jsr:@deno/doc@0.169.1",
+    "@deno/doc": "jsr:@deno/doc@0.188.0",
     "@types/node": "npm:@types/node@22.14.1",
     "browserslist": "npm:browserslist@4.24.4",
     "dax": "jsr:@david/dax@^0.42.0",

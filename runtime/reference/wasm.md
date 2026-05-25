@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-15
 title: "WebAssembly"
 description: "A guide to using WebAssembly (Wasm) in Deno. Learn about module imports, type checking, streaming APIs, optimization techniques, and how to work with various programming languages that compile to Wasm."
 oldUrl:
@@ -215,7 +216,7 @@ As an example, a Rust program that compiles to the aforementioned bytes would
 look something like this:
 
 ```rust
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub fn main() -> u32 { // u32 stands for an unsigned integer using 32 bits of memory.
   42
 }

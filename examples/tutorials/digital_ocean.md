@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-23
 title: "How to deploy Deno to Digital Ocean"
 description: "A step-by-step guide to deploying Deno applications on Digital Ocean. Learn about Docker containerization, GitHub Actions automation, container registries, and how to set up continuous deployment workflows."
 url: /examples/digital_ocean_tutorial/
@@ -102,6 +103,13 @@ Let's [tag](https://docs.docker.com/engine/reference/commandline/tag/) it with
 
 ```shell
 docker tag deno-image registry.digitalocean.com/deno-on-digital-ocean/deno-image:new
+```
+
+Before pushing, authenticate your Docker client with Digital Ocean Container
+Registry:
+
+```shell
+doctl registry login
 ```
 
 Now we can push it to the registry.

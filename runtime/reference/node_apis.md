@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-08-20
 title: Node APIs
 description: "A guide to Node.js compatibility in Deno. Learn about supported Node.js built-in modules, global objects, and how to use Node.js packages in Deno projects."
 templateEngine: [vto, md]

@@ -1,14 +1,15 @@
 ---
+last_modified: 2026-03-05
 title: "Unstable feature flags"
 oldUrl:
   - /runtime/tools/unstable_flags/
   - /runtime/manual/tools/unstable_flags/
 ---
 
-New features of the Deno runtime are often released behind feature flags, so
-users can try out new APIs and features before they are finalized. Current
-unstable feature flags are listed on this page, and can also be found in the CLI
-help text by running:
+New Deno runtime features are often released behind feature flags, so that users
+can try out new APIs and features before they are finalized. Current unstable
+feature flags are listed on this page, and can also be found in the CLI help
+text by running:
 
 ```sh
 deno --help
@@ -42,9 +43,9 @@ The possible values in the `unstable` array are the flag names with the
 ## Configuration via environment variables
 
 Some flags can be enabled by setting a value (any value) for an environment
-variable of a given name, rather than being passed as a flag or `deno.json`
-configuration option. Flags that are settable via environment variables will be
-noted below.
+variable of a given name, rather than being passed as a flag or
+[`deno.json`](/runtime/fundamentals/configuration/) configuration option. Flags
+that are settable via environment variables will be noted below.
 
 Here's an example of setting the `--unstable-bare-node-builtins` flag via
 environment variable:
@@ -61,7 +62,7 @@ This flag enables you to
 [import Node.js built-in modules](/runtime/fundamentals/node/#node-built-in-modules)
 without a `node:` specifier, as in the example below. You can also use this flag
 to enable npm packages without an `npm:` specifier if you are manually managing
-your Node.js dependencies ([see `byonm` flag](#--unstable-byonm)).
+your Node.js dependencies.
 
 ```ts title="example.ts"
 import { readFileSync } from "fs";
@@ -195,8 +196,8 @@ new Worker(`data:application/javascript;base64,${btoa(`postMessage("ok");`)}`, {
 
 ## `--unstable-cron`
 
-Enabling this flag makes the [`Deno.cron`](/deploy/kv/manual/cron) API available
-on the `Deno` namespace.
+Enabling this flag makes the [`Deno.cron`](/runtime/fundamentals/cron/) API
+available on the `Deno` namespace.
 
 ## `--unstable-kv`
 
@@ -234,42 +235,22 @@ Please use these feature flags instead moving forward.
 
 :::
 
-Before more recent Deno versions (1.38+), unstable APIs were made available all
-at once using the `--unstable` flag. Notably, [Deno KV](/deploy/kv/manual) and
-other cloud primitive APIs are available behind this flag. To run a program with
-access to these unstable features, you would run your script with:
-
-```sh
-deno run --unstable your_script.ts
-```
-
-It is recommended that you use the granular unstable flags instead of this, the
-`--unstable` flag is now deprecated and will be removed in Deno 2.
-
 ## `--unstable-temporal`
 
-Enable the experimental [Temporal API](https://tc39.es/proposal-temporal/docs/)
-in the global scope. The Temporal API is a modern date and time API that is
-being developed as a replacement for the legacy `Date` object in JavaScript. It
-provides better support for time zones, calendars, and more precise date/time
-calculations.
+:::note
 
-To use the Temporal API in your Deno program, run it with the flag:
+As of Deno 2.7, the Temporal API is **stable** and available by default. The
+`--unstable-temporal` flag is no longer required.
 
-```sh
-deno run --unstable-temporal your_script.ts
-```
+:::
 
-Or configure it in your `deno.json`:
-
-```json title="deno.json"
-{
-  "unstable": ["temporal"]
-}
-```
+The [Temporal API](https://tc39.es/proposal-temporal/docs/) is a modern date and
+time API available in the global scope. It provides better support for time
+zones, calendars, and more precise date/time calculations than the legacy `Date`
+object.
 
 ```ts title="example.ts"
-// Example using Temporal API
+// Get the current date and time
 const now = Temporal.Now.plainDateTimeISO();
 console.log(`Current date and time: ${now}`);
 
@@ -281,7 +262,3 @@ console.log(`Next week: ${nextWeek}`);
 const zonedDateTime = Temporal.Now.zonedDateTimeISO("America/New_York");
 console.log(`Time in New York: ${zonedDateTime}`);
 ```
-
-Note that the Temporal API is still experimental and the specification may
-change before it becomes stable. Use this flag only for testing and
-experimentation.

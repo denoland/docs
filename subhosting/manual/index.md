@@ -5,6 +5,15 @@ oldUrl:
   - /deploy/manual/subhosting/
 ---
 
+:::warning Sunsetting on July 20, 2026
+
+The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
+<a href="https://api.deno.com/v2/docs">v2 API</a>. See the
+<a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
+details.
+
+:::
+
 Deno Subhosting is a robust platform designed to allow Software as a Service
 (SaaS) providers to securely run code written by their customers. The Subhosting
 API allows you to deploy untrusted code programmatically and at scale.
@@ -67,14 +76,25 @@ Using these techniques, you can package up user code as "deployments", and
 execute that code on a Deno-provisioned URL or a
 [custom URL](../api/#custom-domains) you can configure yourself.
 
-## REST API reference and OpenAPI spec
+## REST API reference
 
-For a complete reference for the REST API used to implement subhosting, you can
-[check out the docs here](https://apidocs.deno.com). The Deno Deploy REST API
-also provides an [OpenAPI specification](https://api.deno.com/v1/openapi.json)
-which can be used with
-[a number of OpenAPI-compatible tools](https://openapi.tools/).
+The subhosting v1 API is being replaced by the v2 API. See the
+[API migration guide](/subhosting/manual/api_migration_guide/) for detailed
+endpoint mappings and migration instructions.
 
-We also offer SDKs in [JavaScript](https://www.npmjs.com/package/subhosting),
-[Python](https://pypi.org/project/subhosting/0.0.1a0/), and
-[Go](https://github.com/denoland/subhosting-go).
+- **v2 API reference** (recommended):
+  [api.deno.com/v2/docs](https://api.deno.com/v2/docs)
+- **v1 API reference** (legacy, sunsetting July 20, 2026):
+  [apidocs.deno.com](https://apidocs.deno.com)
+
+### SDKs
+
+**v2 SDKs:**
+
+- **TypeScript/JavaScript**:
+  [@deno/sandbox](https://www.npmjs.com/package/@deno/sandbox)
+- **Python**: [sandbox-py](https://github.com/denoland/sandbox-py)
+
+**v1 SDKs** (legacy): [JavaScript](https://www.npmjs.com/package/subhosting),
+[Python](https://pypi.org/project/subhosting/0.0.1a0/),
+[Go](https://github.com/denoland/subhosting-go)

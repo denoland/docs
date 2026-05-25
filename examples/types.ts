@@ -11,6 +11,10 @@ export const TAGS = {
     title: "web",
     description: "Works in on the Web",
   },
+  sandbox: {
+    title: "sandbox",
+    description: "Uses Deno Deploy Sandbox",
+  },
 };
 
 export const DIFFICULTIES = {

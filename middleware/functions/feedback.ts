@@ -300,7 +300,7 @@ ${cleanedContact ? `\n**GitHub User:** @${cleanedContact}` : ""}
     const body = `
 ## Documentation Feedback
 
-**Path:** ${path}
+**Path:** [${path}](https://docs.deno.com${path})
 **Helpful:** ${sentiment === "yes" ? "Yes ✅" : "No ❌"}
 
 ${comment ? `**Feedback:**\n> ${comment}` : "No additional comment provided"}

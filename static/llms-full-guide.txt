@@ -1,0 +1,204 @@
+# Deno
+
+Deno is a secure JavaScript/TypeScript runtime built on V8 and Rust, distributed
+as a single `deno` binary. TypeScript, formatting, linting, testing, and a
+standard library work with zero configuration. Programs are sandboxed by
+default; capabilities are granted explicitly via `--allow-*` flags.
+
+## CLI quick reference
+
+```
+deno run main.ts          # run a script (sandboxed by default)
+deno run -A main.ts       # run with all permissions
+deno test                 # run tests (*_test.ts, *.test.ts)
+deno fmt                  # format code
+deno lint                 # lint code
+deno task <name>          # run a task defined in deno.json
+deno add <package>        # add a dependency to deno.json
+deno init my_project      # scaffold a new project
+deno init --lib           # scaffold a library
+deno init --serve         # scaffold an HTTP server
+deno compile main.ts      # compile to standalone binary
+deno install --global -A jsr:@std/http/file-server  # install a CLI globally
+deno deploy               # deploy to Deno Deploy
+```
+
+## Permissions
+
+By default `deno run` blocks network, filesystem, and environment access. Grant
+specific capabilities with flags:
+
+- `--allow-net` — all network access
+- `--allow-net=example.com` — network access to specific hosts
+- `--allow-read` — all filesystem reads
+- `--allow-read=./data` — reads scoped to a path
+- `--allow-write` — all filesystem writes
+- `--allow-env` — environment variable access
+- `--allow-run` — subprocess execution
+- `-A` — all permissions (shorthand for all flags)
+
+Typical server invocation:
+
+```
+deno run --allow-net --allow-read server.ts
+```
+
+## Project configuration (deno.json)
+
+Deno auto-detects `deno.json` (or `deno.jsonc`) up the directory tree. Key
+fields:
+
+```jsonc
+{
+  // Tasks (run via `deno task <name>`)
+  "tasks": {
+    "dev": "deno run --watch --allow-net main.ts",
+    "test": "deno test"
+  },
+
+  // Import map — bare specifier aliases for dependencies
+  "imports": {
+    "@std/assert": "jsr:@std/assert@^1.0.0",
+    "chalk": "npm:chalk@5"
+  }
+}
+```
+
+Dependencies are added manually or via `deno add`:
+
+```
+deno add jsr:@std/http    # from JSR (Deno-native registry)
+deno add npm:express      # from npm
+```
+
+## Module resolution and imports
+
+Deno supports three specifier types:
+
+```ts
+// JSR — Deno's native registry (preferred for Deno-first packages)
+import { assertEquals } from "jsr:@std/assert@^1.0.0";
+
+// npm — use any npm package without an install step
+import chalk from "npm:chalk@5";
+
+// node: — Node.js built-in modules
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+```
+
+When an import map is configured in `deno.json`, use bare specifiers instead:
+
+```ts
+import { assertEquals } from "@std/assert";
+import chalk from "chalk";
+```
+
+## Node.js compatibility
+
+Deno implements Node.js built-in modules and supports `package.json`. Most
+Node.js projects run without modification. Key differences:
+
+- Node built-ins require the `node:` prefix (`import fs from "node:fs"`)
+- npm packages can be imported via `npm:` specifiers without `node_modules`
+- Deno respects `package.json` if present, but prefers `deno.json`
+
+## Testing
+
+Deno has a built-in test runner. Tests are functions registered with
+`Deno.test()` and discovered by file name convention (*_test.ts, *.test.ts).
+
+```ts
+import { assertEquals } from "jsr:@std/assert";
+
+Deno.test("addition works", () => {
+  assertEquals(1 + 1, 2);
+});
+
+Deno.test("async test", async () => {
+  const data = await Promise.resolve("hello");
+  assertEquals(data, "hello");
+});
+```
+
+Run tests:
+
+```
+deno test                    # run all tests
+deno test src/               # run tests in a directory
+deno test --filter "add"     # filter by test name
+deno test --coverage         # collect coverage
+```
+
+## HTTP server
+
+Deno provides `Deno.serve()` for HTTP servers:
+
+```ts
+Deno.serve({ port: 8000 }, (req: Request) => {
+  return new Response("Hello, World!");
+});
+```
+
+## Deno Deploy
+
+Deno Deploy is a managed edge platform for JavaScript/TypeScript apps.
+
+Deploy from the CLI:
+
+```
+deno deploy
+```
+
+Or connect a GitHub repo via https://console.deno.com/ for automatic deploys on
+push, with preview deploys per branch/PR.
+
+Framework apps (e.g., Fresh) typically use a build step: `deno task build`.
+
+Deno Deploy includes Deno KV, a built-in key-value database:
+
+```ts
+const kv = await Deno.openKv();
+await kv.set(["users", "alice"], { name: "Alice", age: 30 });
+const result = await kv.get(["users", "alice"]);
+```
+
+## Deno Sandbox
+
+Deno Sandbox provides ephemeral Linux microVMs (sub-second startup) via API.
+Designed for executing untrusted code safely — particularly useful for AI agent
+workflows (generate code, execute, inspect output, iterate).
+
+SDKs: `@deno/sandbox` (JavaScript — works in Deno and Node), plus a Python SDK.
+
+Basic usage (JS):
+
+```ts
+import { Sandbox } from "@deno/sandbox";
+
+const sandbox = await Sandbox.create();
+const result = await sandbox.runCommand("echo hello");
+console.log(result.output); // "hello"
+await sandbox.close();
+```
+
+Capabilities:
+
+- Full Linux environment (filesystem, processes, package managers)
+- Configurable region, memory, and lifetime
+- HTTP port exposure and SSH access
+- Persistent storage via volumes and snapshots
+- Network allowlisting (`allowNet: ["example.com"]`)
+
+Security model: Secrets never enter the sandbox. The platform substitutes secret
+values only on outbound requests to approved hosts, preventing exfiltration by
+generated code.
+
+## Key documentation links
+
+- Runtime docs: https://docs.deno.com/runtime/
+- Deploy docs: https://docs.deno.com/deploy/
+- Sandbox docs: https://docs.deno.com/sandbox/
+- Standard library: https://jsr.io/@std
+- Examples: https://docs.deno.com/examples/
+- AI skills: https://github.com/denoland/skills

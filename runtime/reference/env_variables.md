@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-05-20
 title: "Environment variables"
 description: "A guide to working with environment variables in Deno. Learn about Deno.env API, .env file support, CLI configuration, and special environment variables that control Deno's behavior."
 oldUrl:
@@ -13,7 +14,8 @@ There are a few ways to use environment variables in Deno:
 The Deno runtime offers built-in support for environment variables with
 [`Deno.env`](https://docs.deno.com/api/deno/~/Deno.env).
 
-`Deno.env` has getter and setter methods. Here is example usage:
+[`Deno.env`](/api/deno/~/Deno.env) has getter and setter methods. Here is
+example usage:
 
 ```ts
 Deno.env.set("FIREBASE_API_KEY", "examplekey123");
@@ -51,8 +53,10 @@ that the first occurrence found in the last `.env` file listed will be applied.
 
 :::
 
-Alternately, the `dotenv` package in the standard library will load environment
-variables from `.env` as well.
+## [`@std/dotenv`](/runtime/reference/std/dotenv/)
+
+The `dotenv` package in the standard library can be used to load environment
+variables from `.env`.
 
 Let's say you have an `.env` file that looks like this:
 
@@ -64,10 +68,20 @@ Import the `load` module to auto-import from the `.env` file and into the
 process environment.
 
 ```ts
-import "jsr:@std/dotenv/load";
+import { load } from "jsr:@std/dotenv";
 
-console.log(Deno.env.get("GREETING")); // "Hello, world."
+const env = await load({
+  // optional: choose a specific path (defaults to ".env")
+  envPath: ".env.local",
+  // optional: also export to the process environment (so Deno.env can read it)
+  export: true,
+});
+
+console.log(env.GREETING);
+console.log(Deno.env.get("GREETING"));
 ```
+
+Run this with `deno run --allow-read --allow-env app.ts`.
 
 Further documentation for `.env` handling can be found in the
 [@std/dotenv](https://jsr.io/@std/dotenv/doc) documentation.
@@ -103,6 +117,17 @@ variable, and can be helpfully combined with
 }
 ```
 
+:::note Variables with spaces
+
+When setting environment variables that contain space characters in a `.env`
+file, ensure you enclose the value in quotes. For example:
+
+```shell
+MY_VAR="my value with spaces"
+```
+
+:::
+
 ## `std/cli`
 
 The Deno Standard Library has a [`std/cli` module](https://jsr.io/@std/cli) for
@@ -113,24 +138,27 @@ examples.
 
 The Deno runtime has these special environment variables.
 
-| name                 | description                                                                                                                                                                       |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DENO_AUTH_TOKENS     | A semi-colon separated list of bearer tokens and hostnames to use when fetching remote modules from private repositories<br />(e.g. `abcde12345@deno.land;54321edcba@github.com`) |
-| DENO_TLS_CA_STORE    | Comma-separated list of order dependent certificate stores.<br />Possible values: `system`, `mozilla`. Defaults to `mozilla`.                                                     |
-| DENO_CERT            | Load certificate authority from PEM encoded file                                                                                                                                  |
-| DENO_COVERAGE_DIR    | Set the directory for collecting coverage profile data. This option only works for [`deno test` subcommand](/runtime/reference/cli/test/).                                        |
-| DENO_DIR             | Set the cache directory                                                                                                                                                           |
-| DENO_INSTALL_ROOT    | Set deno install's output directory (defaults to `$HOME/.deno/bin`)                                                                                                               |
-| DENO_REPL_HISTORY    | Set REPL history file path History file is disabled when the value is empty <br />(defaults to `$DENO_DIR/deno_history.txt`)                                                      |
-| DENO_NO_PACKAGE_JSON | Disables auto-resolution of `package.json`                                                                                                                                        |
-| DENO_NO_PROMPT       | Set to disable permission prompts on access<br />(alternative to passing `--no-prompt` on invocation)                                                                             |
-| DENO_NO_UPDATE_CHECK | Set to disable checking if a newer Deno version is available                                                                                                                      |
-| DENO_V8_FLAGS        | Set V8 command line options                                                                                                                                                       |
-| DENO_JOBS            | Number of parallel workers used for the `--parallel` flag with the test subcommand.<br />Defaults to number of available CPUs.                                                    |
-| DENO_WEBGPU_TRACE    | Path to a directory to output a [WGPU trace](https://github.com/gfx-rs/wgpu/pull/619) to when using the WebGPU API                                                                |
-| DENO_WEBGPU_BACKEND  | Select the backend WebGPU will use, or a comma separated list of backends in order of preference. Possible values are `vulkan`, `dx12`, `metal`, or `opengl`                      |
-| HTTP_PROXY           | Proxy address for HTTP requests (module downloads, fetch)                                                                                                                         |
-| HTTPS_PROXY          | Proxy address for HTTPS requests (module downloads, fetch)                                                                                                                        |
-| NPM_CONFIG_REGISTRY  | URL to use for the npm registry.                                                                                                                                                  |
-| NO_COLOR             | Set to disable color                                                                                                                                                              |
-| NO_PROXY             | Comma-separated list of hosts which do not use a proxy (module downloads, fetch)                                                                                                  |
+| name                   | description                                                                                                                                                                                                                                                                                                                                           |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DENO_AUTH_TOKENS       | A semi-colon separated list of bearer tokens and hostnames to use when fetching remote modules from private repositories<br />(e.g. `abcde12345@deno.land;54321edcba@github.com`)                                                                                                                                                                     |
+| DENO_TLS_CA_STORE      | Comma-separated list of order dependent certificate stores.<br />Possible values: `system`, `mozilla`. Defaults to `mozilla`.                                                                                                                                                                                                                         |
+| DENO_CERT              | Load certificate authority from PEM encoded file                                                                                                                                                                                                                                                                                                      |
+| NODE_EXTRA_CA_CERTS    | Path to a PEM file with extra certificate authorities. Loaded at the root certificate store level, so the certs are honored by `fetch()`, [`Deno.connectTls()`](/api/deno/~/Deno.connectTls), and Node compat APIs (`node:https`, `node:tls`). Available in Deno 2.8+. Missing or invalid files emit a warning rather than failing, matching Node.js. |
+| DENO_COVERAGE_DIR      | Set the directory for collecting coverage profile data. This option only works for [`deno test` subcommand](/runtime/reference/cli/test/).                                                                                                                                                                                                            |
+| DENO_DIR               | Set the cache directory                                                                                                                                                                                                                                                                                                                               |
+| DENO_INSTALL_ROOT      | Set deno install's output directory (defaults to `$HOME/.deno/bin`)                                                                                                                                                                                                                                                                                   |
+| DENO_REPL_HISTORY      | Set REPL history file path History file is disabled when the value is empty <br />(defaults to `$DENO_DIR/deno_history.txt`)                                                                                                                                                                                                                          |
+| DENO_NO_PACKAGE_JSON   | Disables auto-resolution of `package.json`                                                                                                                                                                                                                                                                                                            |
+| DENO_NO_PROMPT         | Set to disable permission prompts on access<br />(alternative to passing `--no-prompt` on invocation)                                                                                                                                                                                                                                                 |
+| DENO_NO_UPDATE_CHECK   | Set to disable checking if a newer Deno version is available                                                                                                                                                                                                                                                                                          |
+| DENO_V8_FLAGS          | Set V8 command line options                                                                                                                                                                                                                                                                                                                           |
+| DENO_JOBS              | Number of parallel workers used for the `--parallel` flag with the test subcommand.<br />Defaults to number of available CPUs.                                                                                                                                                                                                                        |
+| DENO_KV_ACCESS_TOKEN   | Personal access token used when connecting to Deno KV databases (for example via [`Deno.openKv`](/api/deno/~/Deno.openKv) or `@deno/kv` with a KV Connect URL).                                                                                                                                                                                       |
+| DENO_AUDIT_PERMISSIONS | Audit every permission access. Set to a file path to write JSONL, or to the literal value `otel` to emit OpenTelemetry log records via the configured OTel exporter. See [permissions audit](/runtime/fundamentals/security/#permission-flags) for the field set.                                                                                     |
+| DENO_WEBGPU_TRACE      | Path to a directory to output a [WGPU trace](https://github.com/gfx-rs/wgpu/pull/619) to when using the WebGPU API                                                                                                                                                                                                                                    |
+| DENO_WEBGPU_BACKEND    | Select the backend WebGPU will use, or a comma separated list of backends in order of preference. Possible values are `vulkan`, `dx12`, `metal`, or `opengl`                                                                                                                                                                                          |
+| HTTP_PROXY             | Proxy address for HTTP requests (module downloads, fetch)                                                                                                                                                                                                                                                                                             |
+| HTTPS_PROXY            | Proxy address for HTTPS requests (module downloads, fetch)                                                                                                                                                                                                                                                                                            |
+| NPM_CONFIG_REGISTRY    | URL to use for the npm registry.                                                                                                                                                                                                                                                                                                                      |
+| NO_COLOR               | Set to disable color                                                                                                                                                                                                                                                                                                                                  |
+| NO_PROXY               | Comma-separated list of hosts which do not use a proxy (module downloads, fetch)                                                                                                                                                                                                                                                                      |

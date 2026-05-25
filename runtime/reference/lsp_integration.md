@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-02
 title: "Language Server Integration"
 description: "Technical guide to integrating Deno's Language Server Protocol (LSP). Learn about LSP implementation details, custom commands, requests, notifications, and testing API integration for editor and tool developers."
 oldUrl:
@@ -160,8 +161,8 @@ registries. It does not expect any parameters.
 is a read only document that can be displayed in the client. This allows clients
 to access documents in the Deno cache, like remote modules and TypeScript
 library files built into Deno. The Deno language server will encode all internal
-files under the custom schema `deno:`, so clients should route all requests for
-the `deno:` schema back to the `deno/virtualTextDocument` API.
+files under the custom scheme `deno:`, so clients should route all requests for
+the `deno:` scheme back to the `deno/virtualTextDocument` API.
 
 It also supports a special URL of `deno:/status.md` which provides a markdown
 formatted text document that contains details about the status of the LSP for

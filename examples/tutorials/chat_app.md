@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-07-28
 title: "Chat application with WebSockets"
 description: "A tutorial on building a real-time chat app using Deno WebSockets. Learn how to create a WebSocket server with Oak, handle multiple client connections, manage state, and build an interactive chat interface with HTML, CSS, and JavaScript."
 url: /examples/chat_app_tutorial/

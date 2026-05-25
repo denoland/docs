@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-10
 title: "Web development"
 description: "A guide to web development with Deno. Learn about supported frameworks like Fresh, Next.js, and Astro, along with built-in features for building modern web applications."
 oldUrl:

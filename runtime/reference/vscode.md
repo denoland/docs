@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-08-20
 title: "Deno & Visual Studio Code"
 description: "Complete guide to using Deno with Visual Studio Code. Learn about extension setup, workspace configuration, debugging, testing, task automation, and advanced IDE features for Deno development."
 oldUrl:
@@ -220,8 +221,9 @@ _References_ setting mentioned above.
 
 The Deno CLI includes a
 [built-in testing API](/runtime/reference/lsp_integration/#testing) available
-under `Deno.test`. The extension and language server have a code lens enabled by
-default which provides the ability to run a test from within the editor.
+under [`Deno.test`](/api/deno/~/Deno.test). The extension and language server
+have a code lens enabled by default which provides the ability to run a test
+from within the editor.
 
 When you have a block of code that provides a test:
 
@@ -250,8 +252,8 @@ adjust the arguments provided when doing `deno test`, you can do so by setting
 the `deno.codeLens.testArgs` setting.
 
 The extension will also try to track if in the same module you destructure the
-`Deno.test` function or assign it to a variable. So you can do something like
-this and still have the code lens work:
+[`Deno.test`](/api/deno/~/Deno.test) function or assign it to a variable. So you
+can do something like this and still have the code lens work:
 
 ```ts
 const { test: denoTest } = Deno;

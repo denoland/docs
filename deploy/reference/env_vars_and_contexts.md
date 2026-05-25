@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-25
 title: Environment Variables and Contexts
 description: "Guide to managing environment variables and contexts in Deno Deploy, including variable types, creation, editing, and accessing them in your code."
 oldUrl: /deploy/reference/env-vars-and-contexts/
@@ -118,7 +119,7 @@ certificates. -->
 
 Environment variables have the following limits:
 
-- Environment variable keys can be at most 128 bytes long.\
+- Environment variable keys can be at most 128 bytes long.
 - Environment variable keys can not start with:
   - `DENO_`, except for `DENO_AUTH_TOKENS`, `DENO_COMPAT`, `DENO_CONDITIONS`,
     `DENO_DEPLOY_ENDPOINT`, or `DENO_DEPLOY_TOKEN`
@@ -140,22 +141,24 @@ Environment variables have the following limits:
 
 Deno Deploy provides these predefined environment variables in all contexts:
 
-- `DENO_DEPLOY=1`: Indicates that the application is running in the Deno Deploy
-  environment.
-
+- `DENO_DEPLOY`: `true` - Indicates that the code is running in Deno Deploy.
+- `DENO_DEPLOY_ORG_ID`: The ID of the organization that owns the application.
+- This is a UUID.
+- `DENO_DEPLOY_ORG_SLUG`: The slug of the organization that owns the
+  application. This is the human-readable identifier used in URLs that was set
+  when creating the organization.
+- `DENO_DEPLOY_APP_ID`: The ID of the application. This is a UUID.
+- `DENO_DEPLOY_APP_SLUG`: The slug of the application. This is the
+  human-readable identifier used in URLs that was set when creating the
+  application, or changed later in the application settings.
+- `DENO_DEPLOY_BUILD_ID`: The ID of the currently running build.
 - `DENO_DEPLOYMENT_ID`: A unique identifier representing the entire
-  configuration set (application ID, revision ID, context, and environment
-  variables). Changes if any of these components change.
-
-- `DENO_DEPLOY_ORG_ID`: The ID of the organization the application belongs to.
-
-- `DENO_DEPLOY_ORG_SLUG`: The slug of the organization the application belongs
-  to.
-
-- `DENO_DEPLOY_APP_ID`: The ID of the application.
-
-- `DENO_DEPLOY_APP_SLUG`: The slug of the application.
-
+  configuration set (application ID, build ID, context, environment variables,
+  cloud connections, database). Changes if any of these components change.
 - `DENO_DEPLOY_BUILD_ID`: The ID of the currently running revision.
+- `DENO_TIMELINE`: The timeline the application is currently running in.
+  Possible values are `production`, `git-branch/<branch-name>`, and
+  `preview/<revision-id>`. This is not set during builds, as builds are not
+  specific to any timeline.
 
 During builds, the environment variable `CI=1` is additionally set.

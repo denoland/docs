@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "How to use Apollo with Deno"
 description: "Step-by-step tutorial on integrating Apollo GraphQL with Deno. Learn how to set up an Apollo Server, define schemas, implement resolvers, and build a complete GraphQL API using TypeScript."
 url: /examples/apollo_tutorial/

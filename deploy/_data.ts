@@ -9,11 +9,19 @@ export const sidebar = [
         title: "Getting started",
         href: "/deploy/getting_started/",
       },
+      {
+        title: "Migrating from Deploy Classic",
+        href: "/deploy/migration_guide/",
+      },
     ],
   },
   {
     title: "Reference",
     items: [
+      {
+        title: "REST API",
+        href: "https://api.deno.com/v2/docs",
+      },
       {
         title: "Accounts",
         href: "/deploy/reference/accounts/",
@@ -39,12 +47,20 @@ export const sidebar = [
         href: "/deploy/reference/timelines/",
       },
       {
+        title: "Tunnel",
+        href: "/deploy/reference/tunnel/",
+      },
+      {
         title: "Observability",
         href: "/deploy/reference/observability/",
       },
       {
         title: "Domains",
         href: "/deploy/reference/domains/",
+      },
+      {
+        title: "Cron",
+        href: "/deploy/reference/cron/",
       },
       {
         title: "Deno KV",
@@ -148,6 +164,10 @@ export const SidebarNav = [
   {
     title: "Deno Deploy",
     href: "/deploy/",
+  },
+  {
+    title: "Deno Sandbox",
+    href: "/sandbox/",
   },
   {
     title: "Deploy Classic",

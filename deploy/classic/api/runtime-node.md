@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "Node.js built-in APIs"
 oldUrl:
   - /deploy/docs/runtime-node/
@@ -6,11 +7,11 @@ oldUrl:
   - /deploy/api/runtime-node/
 ---
 
-:::info Legacy Documentation
+:::warning Sunsetting on July 20, 2026
 
-You are viewing legacy documentation for Deno Deploy Classic. We recommend
-migrating to the new
-<a href="/deploy/">Deno Deploy</a> platform.
+Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
+to the new <a href="/deploy/">Deno Deploy</a> platform. See the
+<a href="/deploy/migration_guide/">migration guide</a> for details.
 
 :::
 
@@ -31,9 +32,6 @@ const server = createServer((req, res) => {
 
 server.listen(8080);
 ```
-
-_You can see this example live here:
-https://dash.deno.com/playground/node-specifiers_
 
 When using `node:` specifiers, all other features of Deno Deploy Classic are
 still available. For example, you can use `Deno.env` to access environment

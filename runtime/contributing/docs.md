@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-12
 title: "Documentation guidelines"
 description: "Guide for contributing to Deno's documentation. Learn our documentation standards, writing style, and how to submit documentation changes."
 ---

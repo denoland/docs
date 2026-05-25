@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-05-21
 title: "Security and permissions"
 description: "A guide to Deno's security model and permissions system. Learn about secure defaults, permission flags, runtime prompts, and how to safely execute code with granular access controls."
 oldUrl:
@@ -15,6 +16,10 @@ resources with command line flags or with a runtime permission prompt. This is a
 major difference from Node, where dependencies are automatically granted full
 access to all system I/O, potentially introducing hidden vulnerabilities into
 your project.
+
+To complement the runtime sandbox, Deno also ships
+[`deno audit`](/runtime/reference/cli/audit/) for scanning your dependencies
+against vulnerability databases — useful as a CI gate.
 
 Before using Deno to run completely untrusted code, read the
 [section on executing untrusted code](#executing-untrusted-code) below.
@@ -44,11 +49,14 @@ the key principles of Deno's security model:
 - **Code can not escalate its privileges without user consent**: Code executing
   in a Deno runtime can not escalate its privileges without the user agreeing
   explicitly to an escalation via interactive prompt or a invocation time flag.
-- **The initial static module graph can import local files without
-  restrictions**: All files that are imported in the initial static module graph
-  can be imported without restrictions, so even if an explicit read permission
-  is not granted for that file. This does not apply to any dynamic module
-  imports.
+- **The initial static module graph can import modules without restrictions**:
+  All modules that are imported in the initial static module graph (local files,
+  npm packages, jsr packages, and remote URLs) are loaded by the runtime without
+  consulting the permission system. No `--allow-read` is required to load local
+  files, and no `--allow-net` is required to fetch remote modules. This
+  exemption applies only to loading. Once code runs, anything it does still goes
+  through the permission system, and dynamic imports are not covered by the
+  exemption.
 
 These key principles are designed to provide an environment where a user can
 execute code with minimal risk of harm to the host machine or network. The
@@ -95,10 +103,11 @@ By default, Deno will not generate a stack trace for permission requests as it
 comes with a hit to performance. Users can enable stack traces with the
 `DENO_TRACE_PERMISSIONS` environment variable to `1`.
 
-Deno can also generate an audit log of all accessed permissions; this can be
-achieved using the `DENO_AUDIT_PERMISSIONS` environment variable to a path. This
-works regardless if permissions are allowed or not. The output is in JSONL
-format, where each line is an object with the following keys:
+Deno can also generate an audit log of all accessed permissions, regardless of
+whether the access was allowed or denied.
+
+Set `DENO_AUDIT_PERMISSIONS` to a **file path** to write JSONL — each line is an
+object with the following keys:
 
 - `v`: the version of the format
 - `datetime`: when the permission was accessed, in RFC 3339 format
@@ -106,12 +115,29 @@ format, where each line is an object with the following keys:
 - `value`: the value that the permission was accessed with, or `null` if it was
   accessed with no value
 
-A schema for this can be found
-[here](https://deno.land/x/deno/cli/schemas/permission-audit.v1.json).
+A schema for this can be found in
+[permission-audit.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/permission-audit.v1.json).
 
 In addition, this env var can be combined with the above-mentioned
 `DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
-which is an array contain all the stack trace frames.
+which is an array containing all the stack trace frames.
+
+You can also set `DENO_AUDIT_PERMISSIONS=otel` to emit each access as an
+OpenTelemetry **log record** instead of writing to a file. The records are sent
+to whichever exporter you have configured via
+[`OTEL_DENO`](/runtime/fundamentals/open_telemetry/) and carry these attributes:
+
+- `deno.permission.type`
+- `deno.permission.value`
+- `deno.permission.stack` (if `DENO_TRACE_PERMISSIONS` is also set)
+
+This is the recommended setup if you already collect OpenTelemetry data — the
+permission audit lands next to your traces and metrics so you can correlate it
+with request handling.
+
+```sh
+OTEL_DENO=true DENO_AUDIT_PERMISSIONS=otel deno run -A main.ts
+```
 
 ### Configuration file
 
@@ -130,6 +156,9 @@ flags can be specified with a list of paths to allow access to specific files or
 directories and any subdirectories in them.
 
 Definition: `--allow-read[=<PATH>...]` or `-R[=<PATH>...]`
+
+PATHs may be separated by comma (`,`) characters. To include a comma character
+in the PATH, it must be doubled. (Example: `this file,, contains a comma.txt`)
 
 ```sh
 # Allow all reads from file system
@@ -209,6 +238,33 @@ to JavaScript, Deno uses the file system as a cache. This means that file system
 resources like storage space can be consumed by Deno even if the user has not
 explicitly granted read/write permissions.
 
+#### Symbolic links
+
+When reading or writing through a symbolic link, Deno checks permissions based
+on the symlink's location, not the target it points to. This means if you have
+`--allow-read=/app`, you can read through a symlink at `/app/link` even if it
+points to a file outside `/app`.
+
+However, Deno prevents privilege escalation through symlinks. If a symlink
+resolves to a sensitive system path, additional permissions are required:
+
+- **`/proc`, `/dev`, `/sys` (Linux)**: Reading or writing through symlinks that
+  resolve to these paths requires `--allow-all`, as these paths can expose
+  sensitive system information.
+- **`/proc/**/environ`**: Requires `--allow-env` since it exposes environment
+  variables.
+- **`/dev/null`, `/dev/zero`, `/dev/random`, `/dev/urandom`**: These safe device
+  files are always accessible without additional permissions.
+
+Creating symlinks with [`Deno.symlink()`](/api/deno/~/Deno.symlink) requires
+both `--allow-read` and `--allow-write` with full access (not path-specific),
+because symlinks can point to arbitrary locations.
+
+> **Note**: Symlinks that already exist on the filesystem can be read through
+> using the permissions for the symlink's location. The full read/write
+> permission requirement only applies to _creating_ new symlinks with
+> [`Deno.symlink()`](/api/deno/~/Deno.symlink).
+
 ### Network access
 
 By default, executing code can not make network requests, open network listeners
@@ -216,10 +272,13 @@ or perform DNS resolution. This includes making HTTP requests, opening TCP/UDP
 sockets, and listening for incoming connections on TCP or UDP.
 
 Network access is granted using the `--allow-net` flag. This flag can be
-specified with a list of IP addresses or hostnames to allow access to specific
-network addresses.
+specified with a list of hosts to allow access to specific network addresses. A
+host can be a hostname or IP address, optionally with a port.
 
-Definition: `--allow-net[=<IP_OR_HOSTNAME>...]` or `-N[=<IP_OR_HOSTNAME>...]`
+Hostnames do not allow subdomains, unless explicitly listed. To allow any
+subdomain for a hostname, `*` can be used as wildcard for any subdomain.
+
+Definition: `--allow-net[=<HOST>...]` or `-N[=<HOST>...]`
 
 ```sh
 # Allow network access
@@ -229,6 +288,9 @@ deno run --allow-net script.ts
 
 # Allow network access to github.com and jsr.io
 deno run --allow-net=github.com,jsr.io script.ts
+
+# Allow all subdomains for example.com
+deno run --allow-net="*.example.com" script.ts
 
 # A hostname at port 80:
 deno run --allow-net=example.com:80 script.ts
@@ -240,7 +302,7 @@ deno run --allow-net=1.1.1.1:443 script.ts
 deno run --allow-net=[2606:4700:4700::1111] script.ts
 ```
 
-Definition: `--deny-net[=<IP_OR_HOSTNAME>...]`
+Definition: `--deny-net[=<HOST>...]`
 
 ```sh
 # Allow access to network, but deny access 
@@ -327,10 +389,9 @@ operating system release, system uptime, load average, network interfaces, and
 system memory information.
 
 Access to system information is granted using the `--allow-sys` flag. This flag
-can be specified with a list of allowed interfaces from the following list:
-`hostname`, `osRelease`, `osUptime`, `loadavg`, `networkInterfaces`,
-`systemMemoryInfo`, `uid`, and `gid`. These strings map to functions in the
-`Deno` namespace that provide OS info, like
+can be specified with a list of allowed interfaces from the list defined in
+[Deno.SysPermissionDescriptor](/api/deno/~/Deno.SysPermissionDescriptor). These
+strings map to functions in the `Deno` namespace that provide OS info, like
 [Deno.systemMemoryInfo](https://docs.deno.com/api/deno/~/Deno.SystemMemoryInfo).
 
 Definition: `--allow-sys[=<API_NAME>...]` or `-S[=<API_NAME>...]`
@@ -414,18 +475,21 @@ scripts for npm packages will be executed as a subprocess.
 Deno provides an
 [FFI mechanism for executing code written in other languages](/runtime/fundamentals/ffi/),
 such as Rust, C, or C++, from within a Deno runtime. This is done using the
-`Deno.dlopen` API, which can load shared libraries and call functions from them.
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, which can load shared libraries
+and call functions from them.
 
-By default, executing code can not use the `Deno.dlopen` API, as this would
-constitute a violation of the principle that code can not escalate it's
-privileges without user consent.
+By default, executing code can not use the
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, as this would constitute a
+violation of the principle that code can not escalate it's privileges without
+user consent.
 
-In addition to `Deno.dlopen`, FFI can also be used via Node-API (NAPI) native
-addons. These are also not allowed by default.
+In addition to [`Deno.dlopen`](/api/deno/~/Deno.dlopen), FFI can also be used
+via Node-API (NAPI) native addons. These are also not allowed by default.
 
-Both `Deno.dlopen` and NAPI native addons require explicit permission using the
-`--allow-ffi` flag. This flag can be specified with a list of files or
-directories to allow access to specific dynamic libraries.
+Both [`Deno.dlopen`](/api/deno/~/Deno.dlopen) and NAPI native addons require
+explicit permission using the `--allow-ffi` flag. This flag can be specified
+with a list of files or directories to allow access to specific dynamic
+libraries.
 
 _Like subprocesses, dynamic libraries are not run in a sandbox and therefore do
 not have the same security restrictions as the Deno process they are being
@@ -458,11 +522,11 @@ code from. This is true for both static and dynamic imports.
 
 If you want to dynamically import code, either using the `import()` or the
 `new Worker()` APIs, additional permissions need to be granted. Importing from
-the local file system [requires `--allow-read`](#file-system-read-access), but
-Deno also allows to import from `http:` and `https:` URLs. In such case you will
-need to specify an explicit `--allow-import` flag:
+the local file system [requires `--allow-read`](#file-system-access), but Deno
+also allows to import from `http:` and `https:` URLs. In such case you will need
+to specify an explicit `--allow-import` flag:
 
-```
+```sh
 # allow importing code from `https://example.com`
 $ deno run --allow-import=example.com main.ts
 ```
@@ -476,12 +540,12 @@ By default Deno allows importing sources from following hosts:
 - `raw.githubusercontent.com`
 - `gist.githubusercontent.com`
 
-**Imports are only allowed using HTTPS**
+Imports are only allowed using HTTPS.
 
 This allow list is applied by default for static imports, and by default to
 dynamic imports if the `--allow-import` flag is specified.
 
-```
+```sh
 # allow dynamically importing code from `https://deno.land`
 $ deno run --allow-import main.ts
 ```
@@ -515,3 +579,63 @@ using all of these when executing arbitrary untrusted code:
 - Use OS provided sandboxing mechanisms like `chroot`, `cgroups`, `seccomp`,
   etc.
 - Use a sandboxed environment like a VM or MicroVM (gVisor, Firecracker, etc).
+
+## Permission broker
+
+For centralized and policy-driven permission decisions, Deno can delegate all
+permission checks to an external broker process. Enable this by setting the
+`DENO_PERMISSION_BROKER_PATH` environment variable to a path that Deno will use
+to connect to the broker:
+
+- On Unix-like systems: a Unix domain socket path (for example,
+  `/tmp/deno-perm.sock`).
+- On Windows: a named pipe (for example, `\\.\pipe\deno-perm-broker`).
+
+When a permission broker is active:
+
+- All `--allow-*` and `--deny-*` flags are ignored.
+- Interactive permission prompts are not shown (equivalent to non-interactive
+  mode).
+- Every permission check is sent to the broker; the broker must reply with a
+  decision for each request.
+
+If anything goes wrong during brokering (for example: Deno cannot connect to the
+socket/pipe, messages are malformed, arrive out of order, IDs do not match, or
+the connection closes unexpectedly), Deno immediately terminates the process to
+preserve integrity and prevent permission escalation.
+
+The request/response message shapes are versioned and defined by JSON Schemas:
+
+- Request schema:
+  [permission-broker-request.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/permission-broker-request.v1.json)
+- Response schema:
+  [permission-broker-response.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/permission-broker-response.v1.json)
+
+Each request contains a version (`v`), the Deno process ID (`pid`), a unique
+monotonic request `id`, a timestamp (`datetime`, RFC 3339), the `permission`
+name, and an optional `value` depending on permission type. The response must
+echo the `id` and include a `result` of either `"allow"` or `"deny"`. When
+denied, a human-readable `reason` may be included.
+
+Example message flow:
+
+```text
+-> req {"v":1,"pid":10234,"id":1,"datetime":"2025-01-01T00:00:00.000Z","permission":"read","value":"./run/permission_broker/scratch.txt"}
+<- res {"id":1,"result":"allow"}
+-> req {"v":1,"pid":10234,"id":2,"datetime":"2025-01-01T00:00:01.000Z","permission":"read","value":"./run/permission_broker/scratch.txt"}
+<- res {"id":2,"result":"allow"}
+-> req {"v":1,"pid":10234,"id":3,"datetime":"2025-01-01T00:00:02.000Z","permission":"read","value":"./run/permission_broker/log.txt"}
+<- res {"id":3,"result":"allow"}
+-> req {"v":1,"pid":10234,"id":4,"datetime":"2025-01-01T00:00:03.000Z","permission":"write","value":"./run/permission_broker/log.txt"}
+<- res {"id":4,"result":"allow"}
+-> req {"v":1,"pid":10234,"id":5,"datetime":"2025-01-01T00:00:04.000Z","permission":"env","value":null}
+<- res {"id":5,"result":"deny","reason":"Environment access is denied."}
+```
+
+:::caution Advanced use only
+
+Using a permission broker changes Deno’s decision authority: CLI flags and
+prompts no longer apply. Ensure your broker process is resilient, audited, and
+available before enabling `DENO_PERMISSION_BROKER_PATH`.
+
+:::

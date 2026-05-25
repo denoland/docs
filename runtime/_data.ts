@@ -84,6 +84,10 @@ export const sidebar = [
         href: "/runtime/fundamentals/open_telemetry/",
       },
       {
+        title: "Cron",
+        href: "/runtime/fundamentals/cron/",
+      },
+      {
         title: "Stability and releases",
         href: "/runtime/fundamentals/stability_and_releases/",
       },
@@ -101,8 +105,20 @@ export const sidebar = [
             href: "/runtime/reference/cli/add/",
           },
           {
+            title: "deno approve-scripts",
+            href: "/runtime/reference/cli/approve_scripts/",
+          },
+          {
+            title: "deno audit",
+            href: "/runtime/reference/cli/audit/",
+          },
+          {
             title: "deno bench",
             href: "/runtime/reference/cli/bench/",
+          },
+          {
+            title: "deno bump-version",
+            href: "/runtime/reference/cli/bump_version/",
           },
           {
             title: "deno bundle",
@@ -113,12 +129,20 @@ export const sidebar = [
             href: "/runtime/reference/cli/check/",
           },
           {
+            title: "deno ci",
+            href: "/runtime/reference/cli/ci/",
+          },
+          {
             title: "deno clean",
             href: "/runtime/reference/cli/clean/",
           },
           {
             title: "deno compile",
             href: "/runtime/reference/cli/compile/",
+          },
+          {
+            title: "deno create",
+            href: "/runtime/reference/cli/create/",
           },
           {
             title: "deno completions",
@@ -169,6 +193,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/outdated/",
           },
           {
+            title: "deno pack",
+            href: "/runtime/reference/cli/pack/",
+          },
+          {
             title: "deno publish",
             href: "/runtime/reference/cli/publish/",
           },
@@ -189,6 +217,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/run/",
           },
           {
+            title: "deno sandbox",
+            href: "/runtime/reference/cli/sandbox/",
+          },
+          {
             title: "deno serve",
             href: "/runtime/reference/cli/serve/",
           },
@@ -199,6 +231,10 @@ export const sidebar = [
           {
             title: "deno test",
             href: "/runtime/reference/cli/test/",
+          },
+          {
+            title: "deno transpile",
+            href: "/runtime/reference/cli/transpile/",
           },
           {
             title: "deno types",
@@ -219,6 +255,14 @@ export const sidebar = [
           {
             title: "deno unstable flags",
             href: "/runtime/reference/cli/unstable_flags/",
+          },
+          {
+            title: "deno why",
+            href: "/runtime/reference/cli/why/",
+          },
+          {
+            title: "deno x",
+            href: "/runtime/reference/cli/x/",
           },
         ],
       },
@@ -305,6 +349,10 @@ export const sidebar = [
       {
         title: "Lint plugins",
         href: "/runtime/reference/lint_plugins/",
+      },
+      {
+        title: "Module customization hooks",
+        href: "/runtime/reference/module_hooks/",
       },
       {
         title: "WebAssembly",

@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-07
 title: Cloud Connections
 description: Learn how to connect Deno Deploy to cloud providers like AWS and Google Cloud Platform without needing to manage credentials.
 oldUrl: /deploy/reference/cloud-connections

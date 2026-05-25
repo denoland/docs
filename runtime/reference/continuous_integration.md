@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-11-21
 title: "Continuous integration"
 description: "Guide to setting up continuous integration (CI) pipelines for Deno projects. Learn how to configure GitHub Actions workflows, run tests and linting in CI, handle cross-platform builds, and optimize pipeline performance with caching."
 oldUrl: /runtime/manual/advanced/continuous_integration
@@ -12,6 +13,17 @@ and `deno fmt`. In addition, you can generate code coverage reports from test
 results with `deno coverage` in pipelines.
 
 ## Setting up a basic pipeline
+
+:::tip
+
+Looking for a ready-made GitHub Actions workflow? GitHub provides an official
+starter workflow for Deno that you can add to your repository:
+<https://github.com/actions/starter-workflows/blob/main/ci/deno.yml>.
+
+In GitHub, open the Actions tab, choose "New workflow", and search for "Deno" to
+use the template.
+
+:::
 
 You can set up basic pipelines for Deno projects in GitHub Actions. The concepts
 explained on this page largely apply to other CI providers as well, such as
@@ -38,6 +50,11 @@ jobs:
 To expand the workflow, add any of the `deno` subcommands that you might need:
 
 ```yaml
+# Install the locked dependencies as a single reproducible step
+# (Deno 2.8+). Equivalent to `deno install --frozen` plus npm
+# lifecycle-script handling — see the deno ci reference page.
+- run: deno ci
+
 # Check if the code is formatted according to Deno's default
 # formatting conventions.
 - run: deno fmt --check
@@ -159,9 +176,9 @@ the contents of cached dependencies are saved and any subsequent runs can
 restore them from cache instead of re-downloading.
 
 To demonstrate, let's say you have a project that uses the logger from
-[`@std/log`](https://jsr.io/@std/log):
+[`@std/log`](/runtime/reference/std/log/):
 
-```json, title="deno.json"
+```json title="deno.json"
 {
   "imports": {
     "@std/log": "jsr:@std/log@0.224.5"

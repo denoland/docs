@@ -11,8 +11,9 @@
   style="enable-background: new 0 0 670 503"
   xml:space="preserve"
 >
-  <style type="text/css">
-  .st0 {
+  <style
+    type="text/css"
+  >.st0 {
     fill: #ffffff;
     stroke: #000000;
     stroke-width: 7.8628;
@@ -21,8 +22,7 @@
   }
   .st1 {
     fill: #c4c4c4;
-  }
-  </style>
+  }</style>
   <path d="M363.5,462.5l-3.58-59.81l41.28-8.63L394.5,460L363.5,462.5z" />
   <path
     class="st0"

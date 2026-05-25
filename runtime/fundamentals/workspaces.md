@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-05-20
 title: "Workspaces and monorepos"
 description: "A guide to managing workspaces and monorepos in Deno. Learn about workspace configuration, package management, dependency resolution, and how to structure multi-package projects effectively."
 oldUrl: /runtime/manual/basics/workspaces
@@ -7,9 +8,9 @@ oldUrl: /runtime/manual/basics/workspaces
 Deno supports workspaces, also known as "monorepos", which allow you to manage
 multiple related and interdependent packages simultaneously.
 
-A "workspace" is a collection of folders containing `deno.json` or
-`package.json` configuration files. The root `deno.json` file defines the
-workspace:
+A "workspace" is a collection of folders containing
+[`deno.json`](/runtime/fundamentals/configuration/) or `package.json`
+configuration files. The root `deno.json` file defines the workspace:
 
 ```json title="deno.json"
 {
@@ -436,51 +437,96 @@ Deno will warn if an option needs to be applied at the workspace root.
 Here's a full matrix of various `deno.json` options available at the workspace
 root and its members:
 
-| Option             | Workspace | Package | Notes                                                                                                                                                                                                           |
-| ------------------ | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| compilerOptions    | ✅        | ✅      |                                                                                                                                                                                                                 |
-| importMap          | ✅        | ❌      | Exclusive with imports and scopes per config file. Additionally, it is not supported to have importMap in the workspace config, and imports in the package config.                                              |
-| imports            | ✅        | ✅      | Exclusive with importMap per config file.                                                                                                                                                                       |
-| scopes             | ✅        | ❌      | Exclusive with importMap per config file.                                                                                                                                                                       |
-| exclude            | ✅        | ✅      |                                                                                                                                                                                                                 |
-| lint.include       | ✅        | ✅      |                                                                                                                                                                                                                 |
-| lint.exclude       | ✅        | ✅      |                                                                                                                                                                                                                 |
-| lint.files         | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
-| lint.rules.tags    | ✅        | ✅      | Tags are merged by appending package to workspace list. Duplicates are ignored.                                                                                                                                 |
-| lint.rules.include |           |         |                                                                                                                                                                                                                 |
-| lint.rules.exclude | ✅        | ✅      | Rules are merged per package, with package taking priority over workspace (package include is stronger than workspace exclude).                                                                                 |
-| lint.report        | ✅        | ❌      | Only one reporter can be active at a time, so allowing different reporters per workspace would not work in the case where you lint files spanning multiple packages.                                            |
-| fmt.include        | ✅        | ✅      |                                                                                                                                                                                                                 |
-| fmt.exclude        | ✅        | ✅      |                                                                                                                                                                                                                 |
-| fmt.files          | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
-| fmt.useTabs        | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                          |
-| fmt.indentWidth    | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                          |
-| fmt.singleQuote    | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                          |
-| fmt.proseWrap      | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                          |
-| fmt.semiColons     | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                          |
-| fmt.options.\*     | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
-| nodeModulesDir     | ✅        | ❌      | Resolution behaviour must be the same in the entire workspace.                                                                                                                                                  |
-| vendor             | ✅        | ❌      | Resolution behaviour must be the same in the entire workspace.                                                                                                                                                  |
-| tasks              | ✅        | ✅      | Package tasks take priority over workspace. cwd used is the cwd of the config file that the task was inside of.                                                                                                 |
-| test.include       | ✅        | ✅      |                                                                                                                                                                                                                 |
-| test.exclude       | ✅        | ✅      |                                                                                                                                                                                                                 |
-| test.files         | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
-| publish.include    | ✅        | ✅      |                                                                                                                                                                                                                 |
-| publish.exclude    | ✅        | ✅      |                                                                                                                                                                                                                 |
-| bench.include      | ✅        | ✅      |                                                                                                                                                                                                                 |
-| bench.exclude      | ✅        | ✅      |                                                                                                                                                                                                                 |
-| bench.files        | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
-| lock               | ✅        | ❌      | Only a single lock file may exist per resolver, and only resolver may exist per workspace, so conditional enablement of the lockfile per package does not make sense.                                           |
-| unstable           | ✅        | ❌      | For simplicities sake, we do not allow unstable flags, because a lot of the CLI assumes that unstable flags are immutable and global to the entire process. Also weird interaction with DENO_UNSTABLE_\* flags. |
-| name               | ❌        | ✅      |                                                                                                                                                                                                                 |
-| version            | ❌        | ✅      |                                                                                                                                                                                                                 |
-| exports            | ❌        | ✅      |                                                                                                                                                                                                                 |
-| workspace          | ✅        | ❌      | Nested workspaces are not supported.                                                                                                                                                                            |
+| Option               | Workspace | Package | Notes                                                                                                                                                                                                           |
+| -------------------- | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| compilerOptions      | ✅        | ✅      |                                                                                                                                                                                                                 |
+| importMap            | ✅        | ❌      | Exclusive with imports and scopes per config file. Additionally, it is not supported to have importMap in the workspace config, and imports in the package config.                                              |
+| imports              | ✅        | ✅      | Exclusive with importMap per config file.                                                                                                                                                                       |
+| scopes               | ✅        | ❌      | Exclusive with importMap per config file.                                                                                                                                                                       |
+| exclude              | ✅        | ✅      |                                                                                                                                                                                                                 |
+| lint.include         | ✅        | ✅      |                                                                                                                                                                                                                 |
+| lint.exclude         | ✅        | ✅      |                                                                                                                                                                                                                 |
+| lint.files           | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
+| lint.rules.tags      | ✅        | ✅      | Tags are merged by appending package to workspace list. Duplicates are ignored.                                                                                                                                 |
+| lint.rules.include   | ✅        | ✅      | Rules are merged per package, with package taking priority over workspace (package include is stronger than workspace exclude).                                                                                 |
+| lint.rules.exclude   | ✅        | ✅      | Rules are merged per package, with package taking priority over workspace (package include is stronger than workspace exclude).                                                                                 |
+| lint.report          | ✅        | ❌      | Only one reporter can be active at a time, so allowing different reporters per workspace would not work in the case where you lint files spanning multiple packages.                                            |
+| fmt.include          | ✅        | ✅      |                                                                                                                                                                                                                 |
+| fmt.exclude          | ✅        | ✅      |                                                                                                                                                                                                                 |
+| fmt.files            | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
+| fmt.useTabs          | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                          |
+| fmt.indentWidth      | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                          |
+| fmt.singleQuote      | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                          |
+| fmt.proseWrap        | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                          |
+| fmt.semiColons       | ✅        | ✅      | Package takes priority over workspace.                                                                                                                                                                          |
+| fmt.options.\*       | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
+| minimumDependencyAge | ✅        | ❌      | Resolution behaviour must be the same in the entire workspace.                                                                                                                                                  |
+| nodeModulesDir       | ✅        | ❌      | Resolution behaviour must be the same in the entire workspace.                                                                                                                                                  |
+| vendor               | ✅        | ❌      | Resolution behaviour must be the same in the entire workspace.                                                                                                                                                  |
+| allowScripts         | ✅        | ❌      | Must be defined at the workspace root to ensure consistent security policy across all packages.                                                                                                                 |
+| links                | ✅        | ❌      | Only respected in the workspace root.                                                                                                                                                                           |
+| tasks                | ✅        | ✅      | Package tasks take priority over workspace. cwd used is the cwd of the config file that the task was inside of.                                                                                                 |
+| test.include         | ✅        | ✅      |                                                                                                                                                                                                                 |
+| test.exclude         | ✅        | ✅      |                                                                                                                                                                                                                 |
+| test.files           | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
+| publish.include      | ✅        | ✅      |                                                                                                                                                                                                                 |
+| publish.exclude      | ✅        | ✅      |                                                                                                                                                                                                                 |
+| bench.include        | ✅        | ✅      |                                                                                                                                                                                                                 |
+| bench.exclude        | ✅        | ✅      |                                                                                                                                                                                                                 |
+| bench.files          | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
+| lock                 | ✅        | ❌      | Only a single lock file may exist per resolver, and only resolver may exist per workspace, so conditional enablement of the lockfile per package does not make sense.                                           |
+| unstable             | ✅        | ❌      | For simplicities sake, we do not allow unstable flags, because a lot of the CLI assumes that unstable flags are immutable and global to the entire process. Also weird interaction with DENO_UNSTABLE_\* flags. |
+| name                 | ❌        | ✅      |                                                                                                                                                                                                                 |
+| version              | ❌        | ✅      |                                                                                                                                                                                                                 |
+| exports              | ❌        | ✅      |                                                                                                                                                                                                                 |
+| workspace            | ✅        | ❌      | Nested workspaces are not supported.                                                                                                                                                                            |
 
 ## Running commands across workspaces
 
 Deno provides several ways to run commands across all or specific workspace
 members:
+
+### Type checking
+
+Workspace members can have different sets of compiler options. They are also
+inherited between root and member, much like
+[TSConfig `extends`](https://www.typescriptlang.org/tsconfig/#extends). For
+example:
+
+```json title="deno.json"
+{
+  "workspace": ["./web"],
+  "compilerOptions": {
+    "checkJs": true
+  }
+}
+```
+
+```json title="web/deno.json"
+{
+  "compilerOptions": {
+    "lib": ["esnext", "dom"]
+  }
+}
+```
+
+Files in the `web` subdirectory will be configured with the following options:
+
+```json
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "lib": ["esnext", "dom"]
+  }
+}
+```
+
+Each member will be partitioned and checked separately from one another. Just
+run `deno check` from the workspace root:
+
+```sh
+deno check
+```
 
 ### Running tests
 
@@ -616,6 +662,115 @@ This approach allows you to:
 2. Share code between packages without publishing to a registry
 3. Test and develop interdependent modules together
 4. Gradually migrate monolithic codebases to modular architecture
+
+## Centralized dependency versions with `catalog:`
+
+When several workspace members depend on the same npm package, keeping their
+versions in sync usually means editing every member's `package.json` whenever
+you bump a version. The `catalog:` protocol — added in Deno 2.8 and compatible
+with the equivalent feature in pnpm, Bun, and Yarn — lets the workspace root
+declare a single version requirement, and each member references it by name from
+its `package.json` dependencies. (The `catalog:` specifier itself is only read
+from `package.json` files; the catalog definition can live in either `deno.json`
+or `package.json` at the workspace root.)
+
+Define a catalog in the root `deno.json`:
+
+```jsonc title="deno.json"
+{
+  "workspace": ["./packages/a", "./packages/b"],
+  "catalog": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "chalk": "^5.3.0"
+  }
+}
+```
+
+A member references the entry with `catalog:` (the default catalog):
+
+```json title="packages/a/package.json"
+{
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  }
+}
+```
+
+To bump everyone to a new React version, edit the catalog once.
+
+### Named catalogs
+
+Use the plural `catalogs` field when different members need different versions
+of the same package — for example, while migrating between major versions:
+
+```jsonc title="deno.json"
+{
+  "workspace": ["./packages/a", "./packages/b"],
+  "catalogs": {
+    "react18": {
+      "react": "^18.3.0",
+      "react-dom": "^18.3.0"
+    },
+    "react19": {
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    }
+  }
+}
+```
+
+Members select a catalog by name:
+
+```json title="packages/a/package.json"
+{
+  "dependencies": {
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18"
+  }
+}
+```
+
+```json title="packages/b/package.json"
+{
+  "dependencies": {
+    "react": "catalog:react19",
+    "react-dom": "catalog:react19"
+  }
+}
+```
+
+`catalog:` (with no name) and `catalog:default` are equivalent and resolve to
+the singular `catalog` field.
+
+### Catalogs in `package.json`
+
+Catalogs can also live in the root `package.json`, which keeps configuration
+together for projects that haven't moved to `deno.json`:
+
+```json title="package.json"
+{
+  "catalog": {
+    "react": "^19.0.0"
+  },
+  "catalogs": {
+    "testing": {
+      "vitest": "^2.0.0"
+    }
+  }
+}
+```
+
+If both `deno.json` and `package.json` define catalogs at the workspace root,
+`package.json` wins entirely — the two are not merged.
+
+### Restrictions
+
+- Catalogs are root-only. Defining `catalog` or `catalogs` inside a workspace
+  member emits a diagnostic.
+- Members must reference a catalog name that exists. A missing entry produces a
+  resolution error during install or run.
 
 ## Using workspace protocol in package.json
 

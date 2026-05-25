@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-24
 title: "Simple API server"
 url: /examples/simple_api_tutorial/
 oldUrl:

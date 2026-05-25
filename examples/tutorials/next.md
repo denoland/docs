@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-02
 title: "Build a Next.js App"
 description: "Walkthrough guide to building a Next.js application with Deno. Learn how to set up a project, create API routes, implement server-side rendering, and build a full-stack TypeScript application."
 url: /examples/next_tutorial/
@@ -21,8 +22,8 @@ You can see the
 :::info Deploy your own
 
 Want to skip the tutorial and deploy the finished app right now? Click the
-button below to instantly deploy your own copy of the complete SvelteKit
-dinosaur app to Deno Deploy. You'll get a live, working application that you can
+button below to instantly deploy your own copy of the complete Next.js dinosaur
+app to Deno Deploy. You'll get a live, working application that you can
 customize and modify as you learn!
 
 [![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-next)

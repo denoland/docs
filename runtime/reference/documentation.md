@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-06-19
 title: "Documentation Tests"
 description: "Learn how to write and run documentation tests in Deno. This guide covers how to create testable code examples in documentation comments, type-checking documentation, and running doc tests with the Deno test runner."
 oldUrl: /runtime/manual/testing/documentation/
@@ -40,7 +41,7 @@ If no language identifier is specified then the language is inferred from media
 type of the source document that the code block is extracted from.
 
 Another attribute supported is `ignore`, which tells the test runner to skip
-type-checking the code block.
+evaluation and type-checking of the code block.
 
 ````ts
 /**

@@ -2,10 +2,10 @@
  * @title Temporal API
  * @difficulty beginner
  * @tags cli
- * @run --unstable-temporal <url>
+ * @run <url>
  * @resource {https://docs.deno.com/api/web/~/Temporal} Temporal API reference documentation
  * @resource {https://tc39.es/proposal-temporal/docs} Temporal API proposal documentation
- * @group Unstable APIs
+ * @group Web APIs
  */
 
 // Get the current date

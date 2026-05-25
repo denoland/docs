@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-08
 title: "Build a Vue.js App"
 description: "A tutorial on building Vue.js applications with Deno. Learn how to set up a Vite project, implement component architecture, add routing, manage state, and create a full-stack TypeScript application."
 url: /examples/vue_tutorial/

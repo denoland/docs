@@ -2,63 +2,55 @@ import renderCommand from "./renderCommand.tsx";
 
 export const layout = "layout.tsx";
 
-export const ogImage = (data: Lume.Data) => {
-  return data.url + "/index.png";
-};
+export const ogImage = (data: Lume.Data) => `${data.url}/index.png`;
 
 export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
-  let file = data.page.sourcePath;
-  const sidebar = data.sidebar;
-  let renderedCommand = null;
+  // Flags and simple derivations
+  const API_LANDING = new Set(["/api/deno/", "/api/web/", "/api/node/"]);
+  const isReference = data.url.startsWith("/api/");
+  const isApiLandingPage = API_LANDING.has(data.url);
+  const isExampleScript = Boolean(
+    (data.page.data.content as { type?: string })?.type,
+  );
+  const isLintRule = data.url.startsWith("/lint/rules/");
 
+  // Compute file path used by Feedback component
+  const file = isLintRule
+    ? `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`
+    : data.page.sourcePath;
+
+  // Render command block and merge its TOC if present
+  let renderedCommand: unknown = null;
   if (data.command) {
     const { rendered, toc } = renderCommand(data.command, helpers);
     renderedCommand = rendered;
-    data.toc = toc.concat(...data.toc);
-  }
-
-  const isReference = data.url.startsWith("/api/");
-  const isApiLandingPage = ["/api/deno/", "/api/web/", "/api/node/"].includes(
-    data.url,
-  );
-  const isExamples = data.url.startsWith("/examples/");
-  const isExampleScript = (data.page.data.content as { type?: string })?.type;
-  const isLintRule = data.url.startsWith("/lint/rules/");
-  const isHome = data.url === "/";
-
-  const hasBreadcrumbs = !isExamples && !isHome &&
-    !(isReference && !isApiLandingPage);
-
-  if (isLintRule) {
-    file = `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`;
+    data.toc = [...data.toc, ...toc];
   }
 
   function getTocCtx(
     d: Lume.Data,
   ): { document_navigation: unknown; document_navigation_str: string } | null {
-    const ch: unknown = (d as unknown as { children?: unknown })?.children;
-    if (ch && typeof ch === "object" && "props" in ch) {
-      const props: unknown = (ch as { props?: unknown }).props;
-      if (props && typeof props === "object" && "data" in props) {
-        const pdata: unknown = (props as { data?: unknown }).data;
-        if (pdata && typeof pdata === "object" && "toc_ctx" in pdata) {
-          const toc: unknown = (pdata as { toc_ctx?: unknown }).toc_ctx;
-          if (
-            toc && typeof toc === "object" &&
-            "document_navigation" in toc &&
-            "document_navigation_str" in toc
-          ) {
-            const t = toc as {
-              document_navigation: unknown;
-              document_navigation_str: string;
-            };
-            return t;
-          }
-        }
-      }
+    const tocCandidate =
+      (d.data as { toc_ctx?: unknown } | undefined)?.toc_ctx ??
+        (d as {
+          children?: { props?: { data?: { toc_ctx?: unknown } } };
+        })?.children?.props?.data?.toc_ctx;
+
+    if (
+      tocCandidate &&
+      typeof tocCandidate === "object" &&
+      "document_navigation" in tocCandidate &&
+      "document_navigation_str" in tocCandidate
+    ) {
+      return tocCandidate as {
+        document_navigation: unknown;
+        document_navigation_str: string;
+      };
     }
     return null;
   }
+
+  const tocCtx = getTocCtx(data);
 
   return (
     <>
@@ -77,12 +69,17 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               class="markdown-body mt-6 sm:mt-6"
             >
               {!(isReference && !isApiLandingPage) && (
-                <h1
-                  dangerouslySetInnerHTML={{
-                    __html: helpers.md(data.title!, true),
-                  }}
-                >
-                </h1>
+                <header class="flex flex-col md:flex-row items-start justify-between gap-4">
+                  <h1
+                    dangerouslySetInnerHTML={{
+                      __html: helpers.md(data.title!, true),
+                    }}
+                  >
+                  </h1>
+                  {file && !file.includes("[") && file.endsWith(".md") && (
+                    <data.comp.CopyPage file={file} />
+                  )}
+                </header>
               )}
               {data.available_since && (
                 <div class="bg-gray-200 rounded-md text-sm py-3 px-4 mb-4 font-semibold">
@@ -100,24 +97,31 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
                   />
                 </div>
               )}
-              {renderedCommand}
               {data.children}
+              {renderedCommand}
             </div>
           </article>
+          {data.lastModified && !isReference && !isLintRule && (
+            <p class="text-sm text-foreground-secondary mt-8">
+              Last updated on{" "}
+              <time dateTime={data.lastModified.toISOString()}>
+                {data.lastModified.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            </p>
+          )}
           <data.comp.Feedback file={file} />
         </div>
       </main>
-      {(() => {
-        const tocCtx = getTocCtx(data);
-        return isReference && tocCtx
-          ? (
-            <data.comp.RefToc
-              documentNavigation={tocCtx.document_navigation}
-              documentNavigationStr={tocCtx.document_navigation_str}
-            />
-          )
-          : null;
-      })()}
+      {isReference && tocCtx && (
+        <data.comp.RefToc
+          documentNavigation={tocCtx.document_navigation}
+          documentNavigationStr={tocCtx.document_navigation_str}
+        />
+      )}
     </>
   );
 }

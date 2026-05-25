@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-11
 title: "Bundling"
 description: "An overview of `deno bundle` subcommand that can be used to produce a single file application created from multiple source files for optimized execution."
 ---
@@ -75,14 +76,14 @@ single output file.
 
 ## Runtime API
 
-In addition to the CLI, you can use `Deno.bundle()` to programmatically bundle
-your JavaScript or TypeScript files. This allows you to integrate bundling into
-your build processes and workflows.
+In addition to the CLI, you can use [`Deno.bundle()`](/api/deno/~/Deno.bundle)
+to programmatically bundle your JavaScript or TypeScript files. This allows you
+to integrate bundling into your build processes and workflows.
 
 :::note
 
-This API was added in Deno v2.5. The `Deno.bundle()` API is experimental and
-must be used with the `--unstable-bundle` flag.
+This API was added in Deno v2.5. The [`Deno.bundle()`](/api/deno/~/Deno.bundle)
+API is experimental and must be used with the `--unstable-bundle` flag.
 
 :::
 
@@ -237,8 +238,7 @@ Bundled 9 modules in 99ms
 ```
 
 At this point, we're ready to serve our page, let's use
-[`@std/http/file-server` from JSR](https://jsr.io/@std/http/file-server) to
-serve our app:
+[`@std/http/file-server`](/runtime/reference/std/http/) to serve our app:
 
 ```bash
 $ deno run -ENR jsr:@std/http/file-server

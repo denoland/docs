@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-29
 title: "Monitor your app with OpenTelemetry and Deno Deploy"
 description: "A step-by-step tutorial for adding custom OpenTelemetry instrumentation to your Deno Deploy application."
 url: /examples/deploy_otel_tutorial/

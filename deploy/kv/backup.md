@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "Backups"
 oldUrl:
   - /kv/manual/backup/
@@ -115,10 +116,10 @@ an IAM user, and create access keys for that user:
 </deno-tab>
 </deno-tabs>
 
-Now visit the [Deno Deploy dashboard](https://dash.deno.com), and click on the
-"KV" tab in your project. Scroll to the "Backup" section, and click on "AWS S3".
-Enter the bucket name, access key ID, and secret access key you created earlier,
-and the region the bucket is in. Then click "Save".
+Now visit the [Deno Deploy dashboard](https://console.deno.com), and click on
+the "KV" tab in your project. Scroll to the "Backup" section, and click on "AWS
+S3". Enter the bucket name, access key ID, and secret access key you created
+earlier, and the region the bucket is in. Then click "Save".
 
 <img
   src="./images/backup-add-bucket-to-dash.png"
@@ -208,10 +209,10 @@ and create an HMAC access key for the service account:
 </deno-tab>
 </deno-tabs>
 
-Now visit the [Deno Deploy dashboard](https://dash.deno.com), and click on the
-"KV" tab in your project. Scroll to the "Backup" section, and click on "Google
-Cloud Storage". Enter the bucket name, access key ID, and secret access key you
-created earlier, and the region the bucket is in. Then click "Save".
+Now visit the [Deno Deploy dashboard](https://console.deno.com), and click on
+the "KV" tab in your project. Scroll to the "Backup" section, and click on
+"Google Cloud Storage". Enter the bucket name, access key ID, and secret access
+key you created earlier, and the region the bucket is in. Then click "Save".
 
 The backup will start immediately. Once the data has been backed up, and
 continuous backup is active, you will see the status change to "Active".

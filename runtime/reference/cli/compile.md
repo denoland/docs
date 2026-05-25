@@ -1,5 +1,6 @@
 ---
-title: "`deno compile`, standalone executables"
+last_modified: 2026-03-12
+title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
   - /runtime/manual/tools/compiler/
@@ -23,11 +24,45 @@ deno compile --allow-read --allow-net jsr:@std/http/file-server
 [Script arguments](/runtime/getting_started/command_line_interface/#passing-script-arguments)
 can be partially embedded.
 
-```console
+```sh
 deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
 
 ./file_server --help
 ```
+
+## Framework detection
+
+Starting in Deno 2.8, `deno compile .` (or `deno compile <directory>`) detects
+common web frameworks and produces an entrypoint that knows how to start them.
+The detected build script is run first, so the compiled binary always contains a
+fresh build.
+
+Supported frameworks:
+
+- Next.js
+- Astro
+- Fresh (1.x and 2.x)
+- Remix
+- SvelteKit
+- Nuxt
+- SolidStart
+- TanStack Start
+- Vite (SSR mode)
+
+```sh
+# In a Next.js / Astro / Fresh / etc. project
+deno compile .
+
+# Or pointing at a specific app directory
+deno compile ./apps/web
+```
+
+Generated entrypoints use `import.meta.dirname` so framework asset paths resolve
+correctly against the [virtual filesystem](#including-data-files-or-directories)
+inside the compiled binary.
+
+If the project doesn't match any supported framework, `deno compile` will error
+out.
 
 ## Cross Compilation
 
@@ -86,7 +121,7 @@ const calculator = await import(specifier);
 To include non-statically analyzable dynamic imports, specify an
 `--include <path>` flag.
 
-```shell
+```sh
 deno compile --include calc.ts --include better_calc.ts main.ts
 ```
 
@@ -95,7 +130,7 @@ deno compile --include calc.ts --include better_calc.ts main.ts
 Starting in Deno 2.1, you can include files or directories in the executable by
 specifying them via the `--include <path>` flag.
 
-```shell
+```sh
 deno compile --include names.csv --include data main.ts
 ```
 
@@ -113,6 +148,26 @@ const dataFiles = Deno.readDirSync(import.meta.dirname + "/data");
 Note this currently only works for files on the file system and not remote
 files.
 
+### Configuring `include` / `exclude` in `deno.json`
+
+The `--include` and `--exclude` paths can be set declaratively in `deno.json` so
+you don't have to repeat them on every `deno compile` invocation:
+
+```jsonc title="deno.json"
+{
+  "compile": {
+    "include": ["names.csv", "data", "worker.ts"],
+    "exclude": ["data/secrets", "**/*.test.ts"]
+  }
+}
+```
+
+CLI flags are merged with the config: `--include` and `--exclude` add to the
+lists in `deno.json` rather than replacing them. See the
+[Compile config](/runtime/fundamentals/configuration/#compile-config) section in
+the configuration guide for more details, including how to declare `permissions`
+on the same block.
+
 ## Workers
 
 Similarly to non-statically analyzable dynamic imports, code for
@@ -121,7 +176,7 @@ executable by default. There are two ways to include workers:
 
 1. Use the `--include <path>` flag to include the worker code.
 
-```shell
+```sh
 deno compile --include worker.ts main.ts
 ```
 
@@ -132,9 +187,46 @@ deno compile --include worker.ts main.ts
 import "./worker.ts";
 ```
 
-```shell
+```sh
 deno compile main.ts
 ```
+
+## Self-Extracting Executables
+
+By default, compiled executables serve embedded files from an in-memory virtual
+file system. The `--self-extracting` flag changes this behavior so that the
+binary extracts all embedded files to disk on first run and uses real file
+system operations at runtime.
+
+```sh
+deno compile --self-extracting main.ts
+```
+
+This is useful for scenarios where code needs real files on disk, such as native
+addons or native code that reads relative files.
+
+The extraction directory is chosen in order of preference:
+
+1. `<exe_dir>/.<exe_name>/<hash>/` (next to the compiled binary)
+2. Platform data directory fallback:
+   - Linux: `$XDG_DATA_HOME/<exe_name>/<hash>` or
+     `~/.local/share/<exe_name>/<hash>`
+   - macOS: `~/Library/Application Support/<exe_name>/<hash>`
+   - Windows: `%LOCALAPPDATA%\<exe_name>\<hash>`
+
+Files are only extracted once — subsequent runs reuse the extracted directory if
+it already exists and the hash matches.
+
+### Trade-offs
+
+Self-extracting mode enables broader compatibility, but comes with some
+trade-offs:
+
+- **Initial startup cost**: The first run takes longer due to file extraction.
+- **Disk usage**: Extracted files take up additional space on disk.
+- **Memory usage**: Higher memory usage since embedded content can no longer be
+  referenced as static data.
+- **Tamper risk**: Users or other code can modify the extracted files on disk.
 
 ## Code Signing
 
@@ -143,9 +235,9 @@ deno compile main.ts
 By default, on macOS, the compiled executable will be signed using an ad-hoc
 signature which is the equivalent of running `codesign -s -`:
 
-```shell
-$ deno compile -o main main.ts
-$ codesign --verify -vv ./main
+```sh
+deno compile -o main main.ts
+codesign --verify -vv ./main
 
 ./main: valid on disk
 ./main: satisfies its Designated Requirement
@@ -154,7 +246,7 @@ $ codesign --verify -vv ./main
 You can specify a signing identity when code signing the executable just like
 you would do with any other macOS executable:
 
-```shell
+```sh
 codesign -s "Developer ID Application: Your Name" ./main
 ```
 
@@ -167,9 +259,9 @@ for more information on codesigning and notarization on macOS.
 On Windows, the compiled executable can be signed using the `SignTool.exe`
 utility.
 
-```shell
-$ deno compile -o main.exe main.ts
-$ signtool sign /fd SHA256 main.exe
+```sh
+deno compile -o main.exe main.ts
+signtool sign /fd SHA256 main.exe
 ```
 
 ## Unavailable in executables

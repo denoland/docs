@@ -114,8 +114,8 @@ benchmark reading just the first word? If we use the `bench`
 const FILENAME = "./Releases.md";
 
 Deno.bench("get first word", (b) => {
-  b.start();
   const file = Deno.readTextFileSync(FILENAME);
+  b.start();
   const firstWord = file.split(" ")[0];
   b.end();
 });

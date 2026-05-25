@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-08-19
 title: "JSX"
 description: "Complete guide to using JSX in Deno. Learn about JSX configuration options, automatic runtime features, development transforms, and Deno's optimized precompile transform for server-side rendering."
 oldUrl:
@@ -27,6 +28,17 @@ options by default:
   }
 }
 ```
+
+:::note
+
+When using the default `"react"` mode with React, you'll need to add
+`@types/react` for type checking to work (e.g.,
+`"@types/react": "npm:@types/react"` in your `deno.json` imports). Without it
+you'll get errors like `JSX element implicitly has type 'any'`. Consider using
+the [automatic runtime](#jsx-automatic-runtime-recommended) instead, which is
+the recommended approach.
+
+:::
 
 Using the `"react"` option will convert JSX into the following JavaScript code:
 

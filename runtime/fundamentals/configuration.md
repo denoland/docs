@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-09
 title: "deno.json and package.json"
 description: "The guide to configuring your Deno projects. Learn about TypeScript settings, tasks, dependencies, formatting, linting, and how to use both deno.json and/or package.json effectively."
 oldUrl:
@@ -345,8 +346,14 @@ sharing code.
 
 :::
 
-See also
-[Configuring TypeScript in Deno](/runtime/reference/ts_config_migration/).
+If you’re migrating from Node.js, your existing `tsconfig.json` files work out
+of the box with Deno. See
+[Using tsconfig.json with Deno](/runtime/fundamentals/typescript/#using-tsconfigjson-with-deno)
+for details.
+
+For the full list of supported compiler options, library configuration, and
+advanced settings, see
+[Configuring TypeScript](/runtime/reference/ts_config_migration/).
 
 ## Unstable features
 
@@ -527,11 +534,22 @@ import * as module_2 from "@example/my-package/module2";
 
 ## Permissions
 
-Deno 2.5+ supports storing permission sets in the config file.
+Deno 2.5+ supports storing
+[permission](/runtime/fundamentals/security/#permissions) sets in the config
+file.
 
 ### Named permissions
 
-Permissions can be defined in key value pairs under the `"permissions"` key:
+Permissions can be defined as key-value pairs under arbitrarily-named permission
+sets under the `"permissions"` key. Within each set,
+
+- the key is the name of a
+  [permission](/runtime/fundamentals/security/#permissions) that would follow
+  `--allow-` or `--deny-` in the CLI invocation (i.e. `read`, `write`, `net`,
+  `env`, `sys`, `run`, `ffi`, `import`)
+- the value is a boolean (`true` / `false` correspond to allow / deny), an array
+  of strings representing paths, domains etc., or an object with `allow`,
+  `deny`, and/or `ignore` boolean key-value pairs.
 
 ```jsonc
 {
@@ -547,7 +565,8 @@ Permissions can be defined in key value pairs under the `"permissions"` key:
 }
 ```
 
-Then used by specifying the `--permission-set=<name>` or `-P=<name>` flag:
+Permission sets can be used by specifying the `--permission-set=<name>` or
+`-P=<name>` flag:
 
 ```sh
 $ deno run -P=read-data main.ts
@@ -572,6 +591,98 @@ Then run with just `-P`:
 
 ```sh
 $ deno run -P main.ts
+```
+
+### Allow, deny, and ignore
+
+For finer control over permissions, you can use the object form with `allow`,
+`deny`, and `ignore` keys. This is especially useful when you need more granular
+permission control than simple boolean or array values provide.
+
+#### Object form syntax
+
+Instead of specifying a permission as a boolean or array:
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      "read": true, // Simple boolean form
+      "write": ["./data"] // Simple array form
+    }
+  }
+}
+```
+
+You can use the object form:
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      "read": {
+        "allow": ["./data", "./config"],
+        "deny": ["./data/secrets"],
+        "ignore": ["./data/cache"]
+      },
+      "write": {
+        "allow": ["./output"],
+        "deny": ["./output/system"]
+      }
+    }
+  }
+}
+```
+
+#### Available permissions
+
+The `allow`, `deny`, and `ignore` keys work differently depending on the
+permission type:
+
+- **`read` and `env`**: Support `allow`, `deny`, and `ignore`
+- **`write`, `net`, `run`, `ffi`, `sys`, and `import`**: Support `allow` and
+  `deny` (but not `ignore`)
+
+#### Behavior
+
+- **`allow`**: Explicitly grant access to specific resources. Can be `true` (to
+  allow all), `false` (to allow none), or an array of specific paths/values to
+  allow.
+- **`deny`**: Explicitly deny access (throw
+  [PermissionDenied](https://docs.deno.com/api/deno/~/Deno.errors.PermissionDenied))
+  to specific resources, even if they would otherwise be allowed. Can be `true`
+  (to deny all), `false` (to deny none), or an array of specific paths/values to
+  deny.
+- **`ignore`**: (Only for `read` and `env` permissions) Silently ignore access
+  attempts to specific resources without throwing errors. Can be `true`,
+  `false`, or an array of specific paths/values to ignore.
+
+#### Example
+
+```jsonc
+{
+  "permissions": {
+    "default": {
+      // Allow reading from data directory, but deny access to secrets
+      // and silently ignore cache files
+      "read": {
+        "allow": ["./data"],
+        "deny": ["./data/secrets"],
+        "ignore": ["./data/cache"]
+      },
+      // Allow all environment variables except API keys
+      "env": {
+        "allow": true,
+        "ignore": ["API_KEY", "SECRET_TOKEN"]
+      },
+      // Allow all, but deny 'rm', 'sudo'
+      "run": {
+        "allow": true,
+        "deny": ["rm", "sudo"]
+      }
+    }
+  }
+}
 ```
 
 ### Test, bench, and compile permissions
@@ -633,6 +744,27 @@ this requires an explicit opt-in with `-P` and is not loaded by default.
 
 If you're ok with this risk, then this feature will be useful for you.
 
+## Compile config
+
+The `"compile"` block configures
+[`deno compile`](/runtime/reference/cli/compile/) without requiring you to
+repeat flags on every invocation. You can declare which extra files or
+directories to bundle into the executable, and which paths to exclude:
+
+```jsonc title="deno.json"
+{
+  "compile": {
+    "include": ["names.csv", "data", "worker.ts"],
+    "exclude": ["data/secrets", "**/*.test.ts"]
+  }
+}
+```
+
+`--include` and `--exclude` flags on the command line are merged with these
+lists rather than replacing them. The `"compile"` block can also carry
+`permissions` (see
+[Test, bench, and compile permissions](#test-bench-and-compile-permissions)).
+
 ## An example `deno.json` file
 
 ```json
@@ -644,7 +776,14 @@ If you're ok with this risk, then this feature will be useful for you.
   },
   "permissions": {
     "default": {
-      "read": ["./src/testdata/"]
+      "read": {
+        "allow": ["./src/"],
+        "deny": ["./src/secrets/"]
+      },
+      "env": {
+        "allow": true,
+        "ignore": ["TEMP_*"]
+      }
     }
   },
   "lint": {

@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-11-03
 title: "Deno 1.x to 2.x Migration Guide"
 description: "Comprehensive guide to migrating from Deno 1.x to 2.x. Learn about breaking changes, API updates, Node.js compatibility features, and how to update your codebase to work with Deno 2.x."
 oldUrl:
@@ -37,17 +38,7 @@ deno.json:
 }
 ```
 
-[Read more on `Node.js support` page](/runtime/fundamentals/node/)
-
-### Long Term Support releases
-
-Starting with Deno v2.1.0 (to be released in November 2024) Deno will offer a
-LTS (long-term support) channel.
-
-An LTS version is supported for 6 months, receiving bug fixes and critical
-performance fixes before a new version is promoted to LTS.
-
-[Read more on `Stability and releases` page](/runtime/fundamentals/stability_and_releases/#long-term-support-(lts))
+[Read more on `Node.js support` page](/runtime/fundamentals/node/).
 
 ## Managing dependencies
 

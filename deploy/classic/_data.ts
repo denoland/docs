@@ -11,7 +11,6 @@ export const sidebar = [
       {
         title: "Deploy basics",
         items: [
-          { title: "Use cases", href: "/deploy/classic/use-cases/" },
           { title: "Playgrounds", href: "/deploy/classic/playgrounds/" },
           { title: "How to deploy", href: "/deploy/classic/how-to-deploy/" },
           { title: "GitHub CI", href: "/deploy/classic/ci_github/" },
@@ -73,7 +72,6 @@ export const sidebar = [
         title: "Third-Party Databases",
         items: [
           { title: "DynamoDB", href: "/deploy/classic/dynamodb/" },
-          { title: "FaunaDB", href: "/deploy/classic/faunadb/" },
           { title: "Firebase", href: "/deploy/classic/firebase/" },
           { title: "Postgres", href: "/deploy/classic/postgres/" },
           { title: "Neon Postgres", href: "/deploy/classic/neon-postgres/" },
@@ -124,6 +122,10 @@ export const SidebarNav = [
   {
     title: "Deno Deploy",
     href: "/deploy/",
+  },
+  {
+    title: "Deno Sandbox",
+    href: "/sandbox/",
   },
   {
     title: "Deploy Classic",

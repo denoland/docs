@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-29
 title: Observability
 description: "Comprehensive overview of monitoring features in Deno Deploy, including logs, traces, metrics, and filtering options."
 ---
