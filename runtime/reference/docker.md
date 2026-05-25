@@ -14,18 +14,23 @@ To use the official image, create a `Dockerfile` in your project directory:
 ```dockerfile
 FROM denoland/deno:latest
 
-# Create working directory
 WORKDIR /app
 
-# Copy source
+# Copy manifests first so the dependency install layer caches across
+# source-only edits
+COPY deno.json deno.lock package.json* ./
+RUN deno ci --prod --skip-types
+
+# Then copy the rest of the source
 COPY . .
 
-# Install dependencies (use just `deno install` if deno.json has imports)
-RUN deno install --entrypoint main.ts
-
-# Run the app
 CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
+
+[`deno ci`](/runtime/reference/cli/ci/) performs a reproducible install from
+`deno.lock`. `--prod` skips `devDependencies`, and `--skip-types` drops
+`@types/*` packages — both shrink the resulting image without affecting runtime
+behavior.
 
 ### Best Practices
 
@@ -39,9 +44,14 @@ FROM denoland/deno:latest AS builder
 # Point Deno's cache at a known location so it can be copied to the next stage
 ENV DENO_DIR=/deno-dir
 WORKDIR /app
+
+# Copy manifests first so the dependency install layer caches across
+# source-only edits
+COPY deno.json deno.lock package.json* ./
+RUN deno ci --prod --skip-types
+
+# Then copy the rest of the source
 COPY . .
-# Install dependencies (use just `deno install` if deno.json has imports)
-RUN deno install --entrypoint main.ts
 
 # Production stage
 FROM denoland/deno:latest
@@ -53,10 +63,9 @@ COPY --from=builder /deno-dir /deno-dir
 CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
 
-Without copying `$DENO_DIR`, `deno install` only writes to Deno's global cache
-inside the builder stage — those files do not travel with
-`COPY --from=builder /app .`, so the container re-downloads dependencies on
-first run.
+Without copying `$DENO_DIR`, `deno ci` only writes to Deno's global cache inside
+the builder stage — those files do not travel with `COPY --from=builder /app .`,
+so the container re-downloads dependencies on first run.
 
 #### Permission Flags
 

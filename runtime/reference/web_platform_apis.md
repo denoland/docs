@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-05-09
+last_modified: 2026-05-20
 title: "Web Platform APIs"
 description: "A guide to the Web Platform APIs available in Deno. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
 oldUrl:
@@ -98,6 +98,55 @@ Notes on fetching local files:
   determine things like the content type or content length.
 - Response bodies are streamed from the Rust side, so large files are available
   in chunks, and can be cancelled.
+
+## Structured Clone & Transferable Objects
+
+Deno supports [`structuredClone()`](/api/web/~/structuredClone) and
+[`postMessage()`](/api/web/~/Worker) for cloning and transferring objects across
+contexts (e.g. between the main thread and Web Workers).
+
+### Serializable types
+
+These types can be cloned with `structuredClone()` and sent via `postMessage()`:
+
+| Type                                      | Notes                                                                                        |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Primitives                                | `string`, `number`, `boolean`, `null`, `undefined`, `bigint`                                 |
+| `Array`, `Object`, `Map`, `Set`           | Including nested structures and circular references                                          |
+| `Date`, `RegExp`                          |                                                                                              |
+| `ArrayBuffer`, `TypedArray`, `DataView`   | Copied by default, or transferred (see below)                                                |
+| `Error` types                             | `Error`, `EvalError`, `RangeError`, `ReferenceError`, `SyntaxError`, `TypeError`, `URIError` |
+| [`Blob`](/api/web/~/Blob)                 | Requires Deno 2.8+                                                                           |
+| [`File`](/api/web/~/File)                 | Requires Deno 2.8+                                                                           |
+| [`DOMException`](/api/web/~/DOMException) |                                                                                              |
+| [`CryptoKey`](/api/web/~/CryptoKey)       |                                                                                              |
+
+### Transferable types
+
+These types can be _transferred_ (not copied) via the `transfer` option in
+`structuredClone()` or the `transfer` list in `postMessage()`. After transfer,
+the original object becomes unusable:
+
+| Type                                            | Notes                                    |
+| ----------------------------------------------- | ---------------------------------------- |
+| [`ArrayBuffer`](/api/web/~/ArrayBuffer)         | Moves the backing memory to the receiver |
+| [`MessagePort`](/api/web/~/MessagePort)         | Transfers the port to another context    |
+| [`ReadableStream`](/api/web/~/ReadableStream)   | Transfers the stream to another context  |
+| [`WritableStream`](/api/web/~/WritableStream)   | Transfers the stream to another context  |
+| [`TransformStream`](/api/web/~/TransformStream) | Transfers the stream to another context  |
+
+```ts
+// Clone a Blob
+const blob = new Blob(["hello"], { type: "text/plain" });
+const cloned = structuredClone(blob);
+console.log(await cloned.text()); // "hello"
+
+// Transfer an ArrayBuffer through a MessageChannel
+const buffer = new ArrayBuffer(1024);
+const ch = new MessageChannel();
+ch.port1.postMessage(buffer, [buffer]);
+// buffer.byteLength is now 0 (transferred)
+```
 
 ## CustomEvent and EventTarget
 
@@ -489,6 +538,83 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
 });
 ```
 
+## OffscreenCanvas
+
+Starting in Deno 2.8, the
+[`OffscreenCanvas`](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
+API is available. `OffscreenCanvas` is a canvas that lives outside any DOM and
+can be used anywhere (including Web Workers) for off-thread rendering and image
+generation.
+
+### Supported rendering contexts
+
+`OffscreenCanvas#getContext` accepts two of the spec-defined context ids:
+
+- `"bitmaprenderer"`: returns an
+  [`ImageBitmapRenderingContext`](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext)
+  for displaying an `ImageBitmap` produced via `createImageBitmap`.
+- `"webgpu"`: returns a
+  [`GPUCanvasContext`](https://developer.mozilla.org/en-US/docs/Web/API/GPUCanvasContext)
+  for rendering with WebGPU.
+
+Calling `getContext` with `"2d"`, `"webgl"`, or `"webgl2"` returns `null`; these
+contexts are not implemented in Deno.
+
+### Example: encoding an image to PNG
+
+Decode an image into an `ImageBitmap`, place it on an `OffscreenCanvas` via the
+`bitmaprenderer` context, and write the result to disk:
+
+```ts
+const data = await Deno.readFile("./input.jpg");
+const bitmap = await createImageBitmap(new Blob([data]));
+
+const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+const ctx = canvas.getContext("bitmaprenderer")!;
+ctx.transferFromImageBitmap(bitmap);
+
+const blob = await canvas.convertToBlob({ type: "image/png" });
+await Deno.writeFile(
+  "./output.png",
+  new Uint8Array(await blob.arrayBuffer()),
+);
+```
+
+Typical uses:
+
+- producing thumbnails, format conversions, or social-card images at request
+  time without spinning up a headless browser,
+- running off-thread image work inside a Web Worker,
+- driving WebGPU rendering targets that don't need a window.
+
+## Geometry Interfaces
+
+Starting in Deno 2.8, the
+[Geometry Interfaces Module Level 1](https://drafts.fxtf.org/geometry/) types
+are available as globals. These are the same types you'd find in a browser:
+
+- [`DOMMatrix`](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix) /
+  [`DOMMatrixReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly):
+  4×4 transform matrices for 2D and 3D operations.
+- [`DOMPoint`](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint) /
+  [`DOMPointReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly):
+  points in 2D / 3D space.
+- [`DOMRect`](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect) /
+  [`DOMRectReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly):
+  axis-aligned rectangles.
+- [`DOMQuad`](https://developer.mozilla.org/en-US/docs/Web/API/DOMQuad): a
+  quadrilateral defined by four points.
+
+```ts
+const m = new DOMMatrix().translateSelf(10, 20).scaleSelf(2);
+const p = new DOMPoint(1, 1).matrixTransform(m);
+console.log(p.x, p.y); // 12 22
+```
+
+These types are useful for graphics work; applying transforms to canvas
+drawings, computing layout math, or porting browser code that depends on
+geometry types.
+
 ## Deviations of other APIs from spec
 
 ### Cache API
@@ -498,9 +624,13 @@ Only the following APIs are implemented:
 - [CacheStorage::open()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/open)
 - [CacheStorage::has()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/has)
 - [CacheStorage::delete()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/delete)
+- [CacheStorage::keys()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/keys)
+  (Deno 2.8+)
 - [Cache::match()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/match)
 - [Cache::put()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/put)
 - [Cache::delete()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/delete)
+- [Cache::keys()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/keys)
+  (Deno 2.8+)
 
 A few things that are different compared to browsers:
 

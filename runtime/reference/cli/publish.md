@@ -17,7 +17,8 @@ Your package must have a `name` and `version` and an `exports` field in its
 
 - The `name` field must be unique and follow the `@<scope_name>/<package_name>`
   convention.
-- The `version` field must be a valid semver version.
+- The `version` field must be a valid semver version. To bump it as part of your
+  release flow, see [`deno bump-version`](/runtime/reference/cli/bump_version/).
 - The `exports` field must point to the main entry point of the package. The
   exports field can either be specified as a single string, or as an object
   mapping entrypoint names to paths in your package.

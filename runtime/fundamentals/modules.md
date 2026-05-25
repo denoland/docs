@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-05
+last_modified: 2026-05-20
 title: "Modules and dependencies"
 description: "A guide to managing modules and dependencies in Deno. Learn about ECMAScript modules, third-party packages, import maps, dependency management, versioning, and how to publish your own modules."
 oldUrl:
@@ -78,14 +78,6 @@ console.log(data.property); // Access JSON data as an object
 
 Starting with Deno 2.4 it's possible to import `text` and `bytes` modules too.
 
-:::info
-
-Support for importing `text` and `bytes` modules is experimental and requires
-`--unstable-raw-imports` CLI flag or `unstable.raw-import` option in
-[`deno.json`](/runtime/fundamentals/configuration/).
-
-:::
-
 ```ts
 import text from "./log.txt" with { type: "text" };
 
@@ -94,6 +86,12 @@ console.log(typeof text === "string");
 console.log(text);
 // Hello from a text file
 ```
+
+:::info `text` imports
+
+Stable in Deno 2.8 and no longer require a flag.
+
+:::
 
 ```ts
 import bytes from "./image.png" with { type: "bytes" };
@@ -107,6 +105,38 @@ Uint8Array(12) [
 //   111,  33
 // ]
 ```
+
+:::info `bytes` imports
+
+Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
+`unstable.raw-import` option in
+[`deno.json`](/runtime/fundamentals/configuration/).
+
+:::
+
+## Deferred module evaluation
+
+Starting in Deno 2.8, the
+[TC39 Deferred Module Evaluation proposal](https://github.com/tc39/proposal-defer-import-eval)
+is supported. The `import defer` syntax loads a module (including its
+dependencies) but does **not** execute its top-level code until you first read a
+property from the namespace:
+
+```ts title="main.ts"
+import defer * as expensive from "./expensive.ts";
+
+console.log("startup is fast — expensive.ts has not run yet");
+
+// Touching any property triggers synchronous evaluation
+console.log(expensive.value);
+```
+
+Use it to defer the cost of modules that are only needed conditionally; for
+example, error-path code in a CLI tool or feature flags whose implementation is
+heavy to initialize.
+
+The proposal is still at TC39 Stage 3, so the syntax is considered experimental
+and may change. Standard `import` remains the right default.
 
 ## WebAssembly modules
 
@@ -271,6 +301,15 @@ $ deno add jsr:@luca/cases@1.0.0
 Add @luca/cases - jsr:@luca/cases@1.0.0
 ```
 
+:::info Deno 2.8
+
+Unprefixed package names passed to `deno add` / `deno install` are treated as
+npm packages by default. `deno add express` is now equivalent to
+`deno add npm:express`. JSR packages still need the `jsr:` prefix to stay
+unambiguous.
+
+:::
+
 Read more in [`deno add` reference](/runtime/reference/cli/add/).
 
 You can also remove dependencies using `deno remove`:
@@ -292,7 +331,9 @@ Read more in [`deno remove` reference](/runtime/reference/cli/remove/).
 
 It is possible to specify a version range for the package you are importing.
 This is done using the `@` symbol followed by a version range specifier, and
-follows the [semver](https://semver.org/) versioning scheme.
+follows the [semver](https://semver.org/) versioning scheme. If you need to
+share a single version range across multiple workspace members, see
+[`catalog:` for centralized dependency versions](/runtime/fundamentals/workspaces/#centralized-dependency-versions-with-catalog).
 
 For example:
 
@@ -508,8 +549,10 @@ Modules can be published to:
 
 - [JSR](https://jsr.io) - recommended, supports TypeScript natively and
   auto-generates documentation for you
-- [npm](https://www.npmjs.com/) - use [dnt](https://github.com/denoland/dnt) to
-  create the npm package
+- [npm](https://www.npmjs.com/) - use
+  [`deno pack`](/runtime/reference/cli/pack/) (Deno 2.8+) to build an
+  npm-compatible tarball from a Deno project, or
+  [dnt](https://github.com/denoland/dnt) for a more configurable build pipeline
 - [deno.land/x](https://deno.com/add_module) - for HTTPS imports, use JSR
   instead if possible
 
@@ -624,12 +667,17 @@ are semantically "development time" dependencies, like (`@types/*`), are often
 defined in `dependencies` in `package.json` files, which means they are
 installed for production even though they are not needed.
 
-Because of this, Deno uses a different approach for installing production only
-dependencies: when running `deno install`, you can pass a `--entrypoint` flag
-that causes Deno to install only the dependencies that are actually
-(transitively) imported by the specified entrypoint file. Because this is
-automatic, and works based on the actual code that is being executed, there is
-no need to specify development dependencies in a separate field.
+Deno offers two approaches for installing production-only dependencies:
+
+- **`deno install --prod`** — skips `devDependencies` from `package.json`. You
+  can also pass `--skip-types` to additionally exclude `@types/*` packages.
+- **`deno install --entrypoint`** — installs only the dependencies that are
+  actually (transitively) imported by the specified entrypoint file. When
+  combined with `--prod`, type-only dependencies are also excluded from the
+  module graph.
+
+See the [`deno install` reference](/runtime/reference/cli/install/) for more
+details.
 
 ## Using only cached modules
 
@@ -739,8 +787,60 @@ local workspaces). Good supply chain management helps you achieve four goals:
    codebases to centralize version changes.
 6. Periodically unfreeze and update consciously (for example on a weekly or
    sprint cadence) instead of ad‑hoc updates during feature work.
+7. Set a [minimum dependency age](#minimum-dependency-age) so freshly published
+   versions can't slip into an install before the ecosystem has had time to spot
+   a compromised release.
+
+### Minimum dependency age
+
+Deno can refuse to install any package version that is younger than a configured
+age. This is a cheap, broad defence against npm supply-chain attacks: malicious
+versions are usually detected and yanked within days, so delaying installs by a
+similar window catches the bulk of them.
+
+You can configure the same control in three places; pick whichever fits the
+project:
+
+- **`deno.json`**, apply project-wide:
+
+  ```jsonc title="deno.json"
+  {
+    "minimumDependencyAge": "P3D"
+  }
+  ```
+
+- **CLI flag**, apply ad-hoc, e.g. for a one-off install or in a CI step:
+
+  ```sh
+  deno install --minimum-dependency-age=P3D
+  ```
+
+- **`.npmrc`** (Deno 2.8+), matches the npm convention, useful when sharing the
+  same `.npmrc` across npm and Deno tooling. The npm setting accepts a whole
+  number of days only:
+
+  ```ini title=".npmrc"
+  min-release-age=3
+  ```
+
+`deno.json` and `--minimum-dependency-age` accept an
+[ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) such as
+`P3D` (3 days) or `PT72H` (72 hours), an integer (interpreted as minutes), an
+absolute cutoff date (`2025-09-16`) or RFC3339 timestamp, or `0` to disable. See
+[`.npmrc` configuration](/runtime/fundamentals/node/#npmrc-configuration) for
+the other npm-registry options Deno reads.
 
 ### Typical CI pattern
+
+In Deno 2.8+, the single command [`deno ci`](/runtime/reference/cli/ci/)
+encapsulates the recommended CI install flow (frozen lockfile + lifecycle
+scripts):
+
+```sh
+deno ci
+```
+
+For older Deno versions, or to compose the steps manually:
 
 ```sh
 # Install (resolve) dependencies exactly as locked; fail if drift or new deps
@@ -751,8 +851,8 @@ deno run --cached-only main.ts
 ```
 
 If you rely on `npm` packages (`package.json` present), include `deno install`
-in CI before running tests so the `node_modules` directory is materialized
-deterministically.
+(or `deno ci`) in CI before running tests so the `node_modules` directory is
+materialized deterministically.
 
 ### Updating dependencies intentionally
 

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-05-20
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/
@@ -146,13 +146,22 @@ Dependency tasks are executed in parallel, with the default parallel limit being
 equal to number of cores on your machine. To change this limit, use the
 `DENO_JOBS` environmental variable.
 
-Dependencies are tracked and if multiple tasks depend on the same task, the task
-will only be run once:
+:::info Deno 2.8
+
+When tasks run in parallel, each output line is prefixed with the task name that
+produced it (color-coded per task). Prefixes stay attached even when a task
+forks subprocesses, so a parallel `build` + `test` + `lint` run stays legible
+without an external multiplexer.
+
+:::
+
+Dependencies are tracked and if multiple tasks depend on the same task, that
+task will only be run once:
 
 ```jsonc title="deno.json"
 {
   //   a
-  //  /
+  //  / \
   // b   c
   //  \ /
   //   d
@@ -301,8 +310,8 @@ defined tasks.
 
 ### Boolean lists
 
-Boolean lists provide a way to execute additional commands based on the exit code
-of the initial command. They separate commands using the `&&` and `||`
+Boolean lists provide a way to execute additional commands based on the exit
+code of the initial command. They separate commands using the `&&` and `||`
 operators.
 
 The `&&` operator provides a way to execute a command and if it _succeeds_ (has
@@ -586,6 +595,10 @@ enabled.
 - **pipefail** - When enabled, the exit code of a pipeline is the exit code of
   the last command to exit with a non-zero status, or zero if all commands exit
   successfully. Enable with `set -o pipefail`.
+- **errexit** (Deno 2.8+) - When enabled, a sequential list aborts on the first
+  command that exits non-zero. Enable with `set -e` or `set -o errexit`; disable
+  again with `set +e` or `set +o errexit`. Useful when porting a shell script
+  that relies on `set -e` semantics into a `tasks` block.
 
 Examples:
 
@@ -599,7 +612,9 @@ Examples:
     // disable globstar
     "task3": "shopt -u globstar && echo **/*.ts",
     // enable pipefail
-    "task4": "set -o pipefail && cat missing.txt | echo 'hello'"
+    "task4": "set -o pipefail && cat missing.txt | echo 'hello'",
+    // abort the sequential list on the first failing command
+    "task5": "set -e; build_step_one; build_step_two; build_step_three"
   }
 }
 ```
@@ -645,6 +660,10 @@ box on Windows, Mac, and Linux.
   environment variables.
 - [`xargs`](https://man7.org/linux/man-pages/man1/xargs.1p.html) - Builds
   arguments from stdin and executes a command.
+- [`:`](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/colon.html) -
+  The POSIX null command. Does nothing and always exits with status `0` (Deno
+  2.8+). Handy as a no-op placeholder in conditionals or for parameter-expansion
+  side effects.
 
 If you find a useful flag missing on a command or have any suggestions for
 additional commands that should be supported out of the box, then please
@@ -669,10 +688,10 @@ When a task command references a binary (e.g., `ohm`, `tsc`, `eslint`), Deno
 resolves it using the following order:
 
 1. **`node_modules/.bin/`** - If the task's directory or a parent directory has
-   a `node_modules/.bin/` folder, Deno looks there first. Note that `deno add
-   npm:<pkg>` updates `deno.json` imports and `deno.lock` but does **not**
-   create a `node_modules` directory. The `node_modules` directory is only
-   created when using `deno install` or other npm-compatible tooling.
+   a `node_modules/.bin/` folder, Deno looks there first. Note that
+   `deno add npm:<pkg>` updates `deno.json` imports and `deno.lock` but does
+   **not** create a `node_modules` directory. The `node_modules` directory is
+   only created when using `deno install` or other npm-compatible tooling.
 
 2. **Package.json `bin` field** - When a dependency defines a `bin` field in its
    `package.json`, Deno automatically makes those commands available within task
