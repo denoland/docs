@@ -727,20 +727,3 @@ Running `deno task generate` will:
 1. Look for `ohm` in `node_modules/.bin/ohm`
 2. If found, execute it using Deno's Node.js compatibility layer
 3. The command runs under Deno's runtime, not Node.js.
-
-### Deno's Equivalent to `npx`
-
-The equivalent of `npx <command>` in Deno is:
-
-```bash
-deno run -A npm:<command>@latest
-```
-
-For example:
-
-- `npx cowsay hello` -> `deno run -A npm:cowsay@latest hello`
-- `npx create-react-app my-app` ->
-  `deno run -A npm:create-react-app@latest my-app`
-
-You can also use `deno add npm:<package>` to add an npm dependency and then
-reference its binaries in `deno task` scripts.
