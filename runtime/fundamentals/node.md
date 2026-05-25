@@ -896,7 +896,7 @@ fields. The ones most likely to matter:
   for the full picture.
 
   ```ini title=".npmrc"
-  min-release-age=72h
+  min-release-age=3
   ```
 
 - **`NPM_CONFIG_REGISTRY` env var**: overrides the registry set in `.npmrc`,
