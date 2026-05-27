@@ -166,8 +166,8 @@ db.setAuthorizer((_action, _table) => {
   which prevents potentially dangerous database operations such as schema
   modifications at runtime.
 
-- `DatabaseSync.createTagStore()` — creates a prepared-statement cache that
-  maps SQL strings to compiled statements for efficient repeated execution.
+- `DatabaseSync.createTagStore()` — creates a prepared-statement cache that maps
+  SQL strings to compiled statements for efficient repeated execution.
 
 ## Node test results
 

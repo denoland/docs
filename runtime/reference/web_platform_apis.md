@@ -664,12 +664,12 @@ for streaming compression and decompression.
 
 ### Supported formats
 
-| Format       | String          | Notes              |
-| ------------ | --------------- | ------------------ |
-| gzip         | `"gzip"`        | RFC 1952           |
-| deflate      | `"deflate"`     | zlib (RFC 1950)    |
-| deflate-raw  | `"deflate-raw"` | raw DEFLATE (1951) |
-| Brotli       | `"brotli"`      | Added in Deno 2.7  |
+| Format      | String          | Notes              |
+| ----------- | --------------- | ------------------ |
+| gzip        | `"gzip"`        | RFC 1952           |
+| deflate     | `"deflate"`     | zlib (RFC 1950)    |
+| deflate-raw | `"deflate-raw"` | raw DEFLATE (1951) |
+| Brotli      | `"brotli"`      | Added in Deno 2.7  |
 
 ```ts
 // Compress with Brotli
