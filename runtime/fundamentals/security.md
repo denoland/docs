@@ -372,6 +372,21 @@ deno run \
 deno run --deny-env script.ts
 ```
 
+The `--ignore-env` flag is similar to `--deny-env`, but instead of denying
+access outright, it silently returns `undefined` for any env variable reads.
+This is useful when you want code to run without failing on missing permissions,
+treating restricted variables as simply unset.
+
+Definition: `--ignore-env[=<VARIABLE_NAME>...]`
+
+```sh
+# Ignore all environment variable reads (returns undefined).
+deno run --ignore-env script.ts
+
+# Ignore specific environment variables.
+deno run --ignore-env=PORT,HOME script.ts
+```
+
 > Note for Windows users: environment variables are case insensitive on Windows,
 > so Deno also matches them case insensitively (on Windows only).
 
