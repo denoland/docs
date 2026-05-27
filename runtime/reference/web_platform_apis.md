@@ -615,6 +615,149 @@ These types are useful for graphics work; applying transforms to canvas
 drawings, computing layout math, or porting browser code that depends on
 geometry types.
 
+## navigator
+
+Deno implements a subset of the
+[`navigator`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)
+global. The following properties are available:
+
+- `navigator.userAgent` — always `"Deno/<version>"`
+- `navigator.platform` — the underlying OS platform (e.g. `"Linux x86_64"`,
+  `"MacIntel"`, `"Win32"`). Added in Deno 2.7.
+- `navigator.hardwareConcurrency` — number of logical CPU cores
+
+```ts
+console.log(navigator.userAgent); // "Deno/2.7.0"
+console.log(navigator.platform); // e.g. "Linux x86_64", "MacIntel", "Win32"
+console.log(navigator.hardwareConcurrency); // e.g. 8
+```
+
+## Temporal
+
+The [Temporal API](https://tc39.es/proposal-temporal/docs/) is a modern
+date/time library that replaces `Date` for most use cases. It was stabilized in
+Deno 2.7 and is available as a global without any flags.
+
+```ts
+// Current date/time in local timezone
+const now = Temporal.Now.plainDateTimeISO();
+console.log(now.toString()); // e.g. "2025-03-12T10:30:00"
+
+// Parse a date
+const date = Temporal.PlainDate.from("2025-03-12");
+console.log(date.month); // 3
+
+// Timezone-aware
+const zonedNow = Temporal.Now.zonedDateTimeISO("America/New_York");
+console.log(zonedNow.timeZoneId); // "America/New_York"
+```
+
+Prior to Deno 2.7, Temporal required the `--unstable-temporal` flag.
+
+## CompressionStream and DecompressionStream
+
+Deno supports
+[`CompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/CompressionStream)
+and
+[`DecompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/DecompressionStream)
+for streaming compression and decompression.
+
+### Supported formats
+
+| Format      | String          | Notes              |
+| ----------- | --------------- | ------------------ |
+| gzip        | `"gzip"`        | RFC 1952           |
+| deflate     | `"deflate"`     | zlib (RFC 1950)    |
+| deflate-raw | `"deflate-raw"` | raw DEFLATE (1951) |
+| Brotli      | `"brotli"`      | Added in Deno 2.7  |
+
+```ts
+// Compress with Brotli
+const input = new TextEncoder().encode("Hello, Deno!");
+const cs = new CompressionStream("brotli");
+const writer = cs.writable.getWriter();
+writer.write(input);
+writer.close();
+const compressed = await new Response(cs.readable).arrayBuffer();
+
+// Decompress
+const ds = new DecompressionStream("brotli");
+const writer2 = ds.writable.getWriter();
+writer2.write(new Uint8Array(compressed));
+writer2.close();
+const result = await new Response(ds.readable).text();
+console.log(result); // "Hello, Deno!"
+```
+
+## Web Crypto
+
+Deno supports the
+[Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
+via `crypto.subtle`. Starting with Deno 2.7, SHA-3 hash algorithms are
+supported:
+
+- `SHA3-256`
+- `SHA3-384`
+- `SHA3-512`
+
+```ts
+const data = new TextEncoder().encode("Hello, Deno!");
+const hash = await crypto.subtle.digest("SHA3-256", data);
+console.log(new Uint8Array(hash));
+```
+
+## createImageBitmap
+
+Deno supports
+[`createImageBitmap()`](https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap)
+for decoding images into `ImageBitmap` objects that can be used with
+[`OffscreenCanvas`](#offscreencanvas).
+
+### Supported input formats
+
+| Format | Notes             |
+| ------ | ----------------- |
+| PNG    |                   |
+| JPEG   |                   |
+| BMP    |                   |
+| GIF    | Added in Deno 2.7 |
+| WebP   | Added in Deno 2.7 |
+
+```ts
+const data = await Deno.readFile("./image.gif");
+const bitmap = await createImageBitmap(new Blob([data]));
+console.log(bitmap.width, bitmap.height);
+```
+
+## File locking
+
+[`Deno.FsFile`](/api/deno/~/Deno.FsFile) supports advisory file locking to
+coordinate access between processes:
+
+- [`lock(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.lock) — acquires a
+  lock. Shared (read) by default; pass `true` for exclusive (write). Blocks if
+  an incompatible lock is held.
+- [`lockSync(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.lockSync) —
+  synchronous variant of `lock()`.
+- [`tryLock(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.tryLock) —
+  non-blocking. Returns `true` if the lock was acquired, `false` otherwise.
+  Added in Deno 2.7.
+- [`tryLockSync(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.tryLockSync) —
+  synchronous variant of `tryLock()`.
+
+```ts
+const file = await Deno.open("./data.txt", { read: true, write: true });
+
+const locked = await file.tryLock(true); // exclusive
+if (locked) {
+  await file.write(new TextEncoder().encode("hello"));
+  await file.unlock();
+} else {
+  console.log("File is locked by another process, skipping.");
+}
+file.close();
+```
+
 ## Deviations of other APIs from spec
 
 ### Cache API

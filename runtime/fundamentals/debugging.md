@@ -31,6 +31,34 @@ step through your code.
 deno run --inspect your_script.ts
 ```
 
+You can optionally specify a host and port for the inspector server. Both the
+full address and a bare port number are accepted:
+
+```sh
+# Default: listen on 127.0.0.1:9229
+deno run --inspect your_script.ts
+
+# Custom port
+deno run --inspect=9230 your_script.ts
+
+# Custom host and port
+deno run --inspect=0.0.0.0:9229 your_script.ts
+```
+
+### --inspect-publish-uid
+
+By default, Deno prints the inspector WebSocket URL to stderr when it starts
+listening. You can control this with `--inspect-publish-uid`:
+
+- `stderr` (default) — prints the URL to stderr on startup
+- `http` — exposes the URL via the `/json/list` HTTP endpoint on the inspector
+  port, instead of printing it; useful for programmatic tooling that polls for
+  available targets
+
+```sh
+deno run --inspect --inspect-publish-uid=http your_script.ts
+```
+
 :::note
 
 If you use the `--inspect` flag, the code will start executing immediately. If
@@ -511,6 +539,39 @@ including:
 For full details on Deno's OpenTelemetry integration, including custom metrics,
 traces, and configuration options, see the
 [OpenTelemetry documentation](/runtime/fundamentals/open_telemetry).
+
+## Debugging Web Workers
+
+Starting with Deno 2.7, Web Workers can be debugged through Chrome DevTools and
+VS Code. When you run your program with any `--inspect` flag, each spawned
+worker appears as a separate target in `chrome://inspect` alongside the main
+thread.
+
+```ts title="main.ts"
+const worker = new Worker(import.meta.resolve("./worker.ts"), {
+  type: "module",
+});
+worker.postMessage("start");
+```
+
+```ts title="worker.ts"
+self.onmessage = (e) => {
+  console.log("Worker received:", e.data);
+  // Set breakpoints here in DevTools
+};
+```
+
+```sh
+deno run --inspect-brk --allow-read main.ts
+```
+
+Open `chrome://inspect`, and you will see both `main.ts` and `worker.ts` listed
+as separate inspectable targets. Click **Inspect** on the worker target to open
+a dedicated DevTools panel for that worker where you can set breakpoints, step
+through code, and inspect variables independently of the main thread.
+
+In VS Code with the Deno extension, workers appear as separate threads in the
+**Call Stack** panel of the debugger.
 
 ## TLS session debugging
 
