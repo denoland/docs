@@ -76,9 +76,9 @@ up yourself.
 ## OpenTelemetry
 
 When [OpenTelemetry](/runtime/fundamentals/open_telemetry/) is enabled
-(`OTEL_DENO=true`), each `Deno.cron()` invocation automatically produces an
-OpenTelemetry span. This lets you trace cron execution alongside your other
-instrumented code:
+(`OTEL_DENO=true`), each [`Deno.cron()`](/api/deno/~/Deno.cron) invocation
+automatically produces an OpenTelemetry span. This lets you trace cron execution
+alongside your other instrumented code:
 
 ```sh
 OTEL_DENO=true deno run --unstable-cron main.ts
