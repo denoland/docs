@@ -2944,6 +2944,33 @@
           "usage": "--v8-flags[=<V8_FLAGS>...]"
         },
         {
+          "name": "watch",
+          "short": null,
+          "long": "watch",
+          "required": false,
+          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mOnly local files from entry point module graph are watched.\u001b[39m",
+          "help_heading": "File watching options",
+          "usage": "--watch"
+        },
+        {
+          "name": "watch-exclude",
+          "short": null,
+          "long": "watch-exclude",
+          "required": false,
+          "help": "Exclude provided files/patterns from watch mode",
+          "help_heading": "File watching options",
+          "usage": "--watch-exclude[=<FILES>...]"
+        },
+        {
+          "name": "no-clear-screen",
+          "short": null,
+          "long": "no-clear-screen",
+          "required": false,
+          "help": "Do not clear terminal screen when under watch mode",
+          "help_heading": "File watching options",
+          "usage": "--no-clear-screen"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
