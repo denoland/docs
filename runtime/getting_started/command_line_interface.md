@@ -74,9 +74,15 @@ $ deno run main.ts arg1 arg2 arg3
 
 ## Argument and flag ordering
 
-_Note that anything passed after the script name will be passed as a script
-argument and not consumed as a Deno runtime flag._ This leads to the following
-pitfall:
+:::caution
+
+Anything passed after the script name will be passed as a script argument and
+not consumed as a Deno runtime flag. This is a common source of confusion, so
+double-check that runtime flags appear **before** the script name.
+
+:::
+
+This leads to the following pitfall:
 
 ```shell
 # Good. We grant net permission to net_client.ts.
@@ -153,15 +159,20 @@ addEventListener("hmr", (e) => {
 });
 ```
 
+Note that this is a server-side runtime feature for Deno processes (for example,
+reloading server state when a module changes). It is not a browser-style HMR
+mechanism like the one provided by Vite, and it does not push updates into a
+running browser page on its own.
+
 ### Integrity flags (lock files)
 
 Affect commands which can download resources to the cache: `deno install`,
 `deno run`, `deno test`, `deno doc`, and `deno compile`.
 
-```sh
---lock <FILE>    Check the specified lock file
---frozen[=<BOOLEAN>] Error out if lockfile is out of date
-```
+| Flag                   | Description                          |
+| ---------------------- | ------------------------------------ |
+| `--lock <FILE>`        | Check the specified lock file        |
+| `--frozen[=<BOOLEAN>]` | Error out if lockfile is out of date |
 
 Find out more about these
 [here](/runtime/fundamentals/modules/#integrity-checking-and-lock-files).
@@ -172,17 +183,18 @@ Affect commands which can populate the cache: `deno install`, `deno run`,
 `deno test`, `deno doc`, and `deno compile`. As well as the flags above, this
 includes those which affect module resolution, compilation configuration etc.
 
-```sh
---config <FILE>               Load configuration file
---import-map <FILE>           Load import map file
---no-remote                   Do not resolve remote modules
---reload=<CACHE_BLOCKLIST>    Reload source code cache (recompile TypeScript)
-```
+| Flag                         | Description                                     |
+| ---------------------------- | ----------------------------------------------- |
+| `--config <FILE>`            | Load configuration file                         |
+| `--import-map <FILE>`        | Load import map file                            |
+| `--no-remote`                | Do not resolve remote modules                   |
+| `--reload=<CACHE_BLOCKLIST>` | Reload source code cache (recompile TypeScript) |
 
 ### Runtime flags
 
-Affect commands which execute user code: `deno run` and `deno test`. These
-include all of the above as well as the following.
+The flags in the sections below affect commands which execute user code, namely
+`deno run` and `deno test`. They include all of the flags listed above, plus
+type-checking, permission, and execution-environment flags.
 
 ### Type checking flags
 
@@ -223,13 +235,17 @@ These are listed [here](/runtime/fundamentals/security/).
 
 More flags which affect the execution environment.
 
-```sh
---cached-only                Require that remote dependencies are already cached
---inspect=<HOST:PORT>        activate inspector on host:port ...
---inspect-brk=<HOST:PORT>    activate inspector on host:port and break at ...
---inspect-wait=<HOST:PORT>   activate inspector on host:port and wait for ...
---location <HREF>            Value of 'globalThis.location' used by some web APIs
---prompt                     Fallback to prompt if required permission wasn't passed
---seed <NUMBER>              Seed Math.random()
---v8-flags=<v8-flags>        Set V8 command line options. For help: ...
-```
+| Flag                         | Description                                             |
+| ---------------------------- | ------------------------------------------------------- |
+| `--cached-only`              | Require that remote dependencies are already cached     |
+| `--inspect=<HOST:PORT>`      | Activate inspector on host:port                         |
+| `--inspect-brk=<HOST:PORT>`  | Activate inspector on host:port and break at start      |
+| `--inspect-wait=<HOST:PORT>` | Activate inspector on host:port and wait for debugger   |
+| `--location <HREF>`          | Value of `globalThis.location` used by some web APIs    |
+| `--prompt`                   | Fallback to prompt if required permission wasn't passed |
+| `--seed <NUMBER>`            | Seed `Math.random()`                                    |
+| `--v8-flags=<v8-flags>`      | Set V8 command line options                             |
+
+Deno also exposes opt-in features behind `--unstable-*` flags. See the
+[unstable feature flags reference](/runtime/reference/cli/unstable_flags/) for
+the full list and for how to enable them in `deno.json`.
