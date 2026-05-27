@@ -11,7 +11,7 @@ oldUrl:
 Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
 has no external dependencies. On macOS, both M1 (arm64) and Intel (x64)
 executables are provided. On Windows, both ARM64 and x64 are supported. On
-Linux, only x64 is supported.
+Linux, both x64 and aarch64 (arm64) are supported.
 
 ## Download and install
 
@@ -33,9 +33,6 @@ Using [npm](https://npmjs.com/package/deno):
 npm install -g deno
 ```
 
-> <small>The startup time of the Deno command gets affected if it's installed
-> via npm. We recommend the shell install script for better performance.</small>
-
 Using [Homebrew](https://formulae.brew.sh/formula/deno):
 
 ```shell
@@ -52,33 +49,6 @@ Using [Nix](https://nixos.org/download.html):
 
 ```shell
 nix-shell -p deno
-```
-
-Using [asdf](https://asdf-vm.com/):
-
-```shell
-asdf plugin add deno https://github.com/asdf-community/asdf-deno.git
-
-# Download and install the latest version of Deno
-asdf install deno latest
-
-# To set as the default version of Deno globally
-asdf set -u deno latest
-
-# To set as the default version of Deno locally (current project only)
-asdf set deno latest
-```
-
-Using [vfox](https://vfox.dev/):
-
-```shell
-vfox add deno
-
-# Download and install the latest version of Deno
-vfox install deno@latest
-
-# To set the version of Deno globally
-vfox use --global deno
 ```
 
 </deno-tab>
@@ -100,10 +70,6 @@ Using [npm](https://npmjs.com/package/deno):
 npm install -g deno
 ```
 
-> <small>The startup time of the Deno command gets affected if it's installed
-> via npm. We recommend the PowerShell install script for better
-> performance.</small>
-
 Using [Scoop](https://scoop.sh/):
 
 ```shell
@@ -122,18 +88,6 @@ Using [Winget](https://github.com/microsoft/winget-cli):
 winget install DenoLand.Deno
 ```
 
-Using [vfox](https://vfox.dev/):
-
-```shell
-vfox add deno
-
-# Download and install the latest version of Deno
-vfox install deno@latest
-
-# To set the version of Deno globally
-vfox use --global deno
-```
-
 </deno-tab>
 <deno-tab value="linux" label="Linux">
 
@@ -149,14 +103,22 @@ Using [npm](https://npmjs.com/package/deno):
 npm install -g deno
 ```
 
-> <small>The startup time of the Deno command gets affected if it's installed
-> via npm. We recommend the shell install script for better performance.</small>
-
 Using [Nix](https://nixos.org/download.html):
 
 ```shell
 nix-shell -p deno
 ```
+
+</deno-tab>
+</deno-tabs>
+
+> <small>The startup time of the Deno command gets affected if it's installed
+> via npm. We recommend the official install script (shell or PowerShell) for
+> better performance.</small>
+
+### Cross-platform package managers
+
+These version managers work on macOS, Linux, and Windows.
 
 Using [asdf](https://asdf-vm.com/):
 
@@ -184,9 +146,6 @@ vfox install deno@latest
 # To set the version of Deno globally
 vfox use --global deno
 ```
-
-</deno-tab>
-</deno-tabs>
 
 You can also build and install from source using
 [Cargo](https://crates.io/crates/deno):
@@ -273,6 +232,24 @@ To update a previously installed version of Deno, you can run:
 deno upgrade
 ```
 
+Or using [Homebrew](https://formulae.brew.sh/formula/deno) (macOS):
+
+```shell
+brew upgrade deno
+```
+
+Or using [Scoop](https://scoop.sh/) (Windows):
+
+```shell
+scoop update deno
+```
+
+Or using [Chocolatey](https://chocolatey.org/packages/deno) (Windows):
+
+```shell
+choco upgrade deno
+```
+
 Or using [Winget](https://github.com/microsoft/winget-cli) (Windows):
 
 ```shell
@@ -286,7 +263,7 @@ unzip it, and replace your current executable with it.
 You can also use this utility to install a specific version of Deno:
 
 ```shell
-deno upgrade --version 1.0.1
+deno upgrade --version 2.7.0
 ```
 
 ## Uninstalling
@@ -307,8 +284,10 @@ Then remove the Deno installation directory:
 rm -rf ~/.deno
 ```
 
-Finally, remove the `DENO_INSTALL` export and `PATH` entry from your shell
-config file (`~/.bashrc`, `~/.zshrc`, `~/.config/fish/config.fish`, etc.).
+Finally, remove the line that sources Deno's env file from your shell config
+(`~/.bashrc`, `~/.zshrc`, `~/.profile`, etc.). The shell install script appends
+a line like `. "$HOME/.deno/env"` — delete that line. Fish users should
+additionally remove `~/.config/fish/conf.d/deno.fish`.
 
 </deno-tab>
 <deno-tab value="windows" label="Windows">
