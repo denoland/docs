@@ -72,3 +72,18 @@ of this runtime API: it discovers your [`Deno.cron()`](/api/deno/~/Deno.cron)
 definitions at deployment time, schedules and invokes them, handles retries, and
 surfaces runs in a dashboard — so you don't need to keep a long-running process
 up yourself.
+
+## OpenTelemetry
+
+When [OpenTelemetry](/runtime/fundamentals/open_telemetry/) is enabled
+(`OTEL_DENO=true`), each `Deno.cron()` invocation automatically produces an
+OpenTelemetry span. This lets you trace cron execution alongside your other
+instrumented code:
+
+```sh
+OTEL_DENO=true deno run --unstable-cron main.ts
+```
+
+Each cron invocation creates a span named after the cron job. The span covers
+the duration of the handler function, and any spans created inside the handler
+are nested under it as children.

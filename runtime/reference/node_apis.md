@@ -98,6 +98,77 @@ importing them from the relevant `node:` module.
 | [`WritableStreamDefaultController`](https://nodejs.org/api/globals.html#class-writablestreamdefaultcontroller)   | ✅                                 |
 | [`WritableStreamDefaultWriter`](https://nodejs.org/api/globals.html#class-writablestreamdefaultwriter)           | ✅                                 |
 
+## Module notes
+
+### node:worker_threads
+
+Deno 2.7 significantly improved `node:worker_threads` compatibility:
+
+- `stdout` and `stderr` streams are forwarded correctly from workers to the
+  parent process.
+- `worker.terminate()` now resolves with the correct exit code.
+- `workerData`, `execArgv`, and `threadName` options are supported.
+- `worker.performance.eventLoopUtilization()` and `worker.cpuUsage()` are
+  implemented.
+- `BroadcastChannel` from worker threads is properly ref'd/unref'd.
+
+### node:child_process
+
+Deno 2.7 improved `node:child_process` compatibility:
+
+- `stdio` streams (`stdin`, `stdout`, `stderr`) are exposed as `Socket`
+  instances, matching Node.js behavior.
+- Shell redirection (`>`, `<`, `>>`) works in `exec()` and `execSync()`.
+- `fork()` accepts a `URL` as the module path.
+- `timeout` and `killSignal` options are supported in `exec()` and `spawn()`.
+- `NODE_OPTIONS` environment variable is respected for `fork()`'d processes.
+
+### node:zlib
+
+Deno 2.7 added Zstd compression support to `node:zlib`:
+
+```ts
+import zlib from "node:zlib";
+import { promisify } from "node:util";
+
+const compress = promisify(zlib.zstdCompress);
+const decompress = promisify(zlib.zstdDecompress);
+
+const compressed = await compress(Buffer.from("Hello, Deno!"));
+const result = await decompress(compressed);
+console.log(result.toString()); // "Hello, Deno!"
+```
+
+The synchronous variants `zlib.zstdCompressSync()` and
+`zlib.zstdDecompressSync()` are also available.
+
+### node:sqlite
+
+Deno 2.7 added several new APIs to `node:sqlite`:
+
+- `DatabaseSync.setAuthorizer(callback)` — registers a callback invoked for
+  every SQL operation, enabling fine-grained access control over which tables
+  and operations are permitted:
+
+```ts
+import { constants, DatabaseSync } from "node:sqlite";
+
+const db = new DatabaseSync(":memory:");
+db.exec("CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT)");
+
+// Allow reads, deny everything else
+db.setAuthorizer((_action, _table) => {
+  return constants.SQLITE_OK;
+});
+```
+
+- `DatabaseSync.enableDefensive(enabled)` — enables or disables defensive mode,
+  which prevents potentially dangerous database operations such as schema
+  modifications at runtime.
+
+- `DatabaseSync.createTagStore()` — creates a prepared-statement cache that
+  maps SQL strings to compiled statements for efficient repeated execution.
+
 ## Node test results
 
 If you're interested in a more detailed view of compatibility on a per-test-case

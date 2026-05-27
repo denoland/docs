@@ -107,6 +107,7 @@ Deno automatically creates spans for various operations, such as:
 
 - Incoming HTTP requests served with [`Deno.serve`](/api/deno/~/Deno.serve).
 - Outgoing HTTP requests made with [`fetch`](/api/web/~/fetch).
+- [`Deno.cron()`](/api/deno/~/Deno.cron) job invocations (added in Deno 2.7).
 
 #### [`Deno.serve`](/api/deno/~/Deno.serve)
 
