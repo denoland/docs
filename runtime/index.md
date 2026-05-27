@@ -26,14 +26,13 @@ experience. It's built on [V8](https://v8.dev/),
   **[TypeScript-ready out of the box](/runtime/fundamentals/typescript/).** Zero
   config or additional steps necessary.
 - Deno is **[secure by default](/runtime/fundamentals/security/).** Where other
-  runtimes give full access every script they run, Deno allows you to enforce
+  runtimes give full access to every script they run, Deno allows you to enforce
   granular permissions.
 - Deno has a **robust built-in toolchain.** Unlike Node or browser JavaScript,
   Deno includes a [standard library](/runtime/reference/std/), along with a
   first-party [linter/formatter](/runtime/fundamentals/linting_and_formatting/),
   [test runner](/runtime/fundamentals/testing/), and more.
 - Deno is **fully compatible with [Node and npm](/runtime/fundamentals/node/).**
-- Deno is **fast and reliable**.
 - **[Deno is open-source](https://github.com/denoland/deno).**
 
 ## Quick install
@@ -60,6 +59,9 @@ irm https://deno.land/install.ps1 | iex
 </deno-tab>
 <deno-tab value="linux" label="Linux">
 
+The installer requires `unzip` (or `7z` on Alpine) to be available on your
+system:
+
 ```sh
 curl -fsSL https://deno.land/install.sh | sh
 ```
@@ -81,6 +83,7 @@ Deno can run JavaScript and [TypeScript](https://www.typescriptlang.org/) with
 no additional tools or configuration required, all in a secure,
 batteries-included runtime.
 
+- [Installing Deno](/runtime/getting_started/installation/)
 - [Making a Deno project](/runtime/getting_started/first_project/)
 - [Setting up your environment](/runtime/getting_started/setup_your_environment/)
-- [Using the CLI](/runtime/getting_started/command_line_interface)
+- [Using the CLI](/runtime/getting_started/command_line_interface/)
