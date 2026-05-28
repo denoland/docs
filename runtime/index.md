@@ -21,13 +21,13 @@ experience.
 
 ## Why Deno?
 
-- **[TypeScript-first](/runtime/fundamentals/typescript/).** Run `.ts` files
-  directly. No `tsc`, no build step, no config.
 - **Works with your existing [Node.js projects](/runtime/fundamentals/node/).**
   Drop Deno into a repo with `package.json` and `node_modules` and it just runs;
   mix `npm:` imports with native ES modules as you migrate.
 - **Modern module system.** ES modules with URL imports, [JSR](https://jsr.io)
   for typed packages, and [workspaces](/runtime/fundamentals/workspaces/).
+- **[TypeScript-first](/runtime/fundamentals/typescript/).** Run `.ts` files
+  directly. No `tsc`, no build step, no config.
 - **[Secure by default](/runtime/fundamentals/security/).** Code runs in a
   sandbox with no file, network, or environment access until you grant it.
 - **A full toolchain, no plumbing.** Built-in
@@ -73,13 +73,13 @@ system path. You can verify the installation by running:
 deno --version
 ```
 
-## First steps
+## Next steps
 
-Deno can run JavaScript and [TypeScript](https://www.typescriptlang.org/) with
-no additional tools or configuration required, all in a secure,
-batteries-included runtime.
+With Deno installed, dive into the rest of the Getting Started guide:
 
-- [Installing Deno](/runtime/getting_started/installation/)
 - [Making a Deno project](/runtime/getting_started/first_project/)
 - [Setting up your environment](/runtime/getting_started/setup_your_environment/)
 - [Using the CLI](/runtime/getting_started/command_line_interface/)
+
+For more installation options (package managers, Docker, building from source),
+see the full [installation guide](/runtime/getting_started/installation/).
