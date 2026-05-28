@@ -50,9 +50,7 @@ curl -fsSL https://deno.land/install.sh | sh
 </deno-tab>
 <deno-tab value="windows" label="Windows">
 
-In Windows PowerShell:
-
-```powershell
+```powershell title="pwsh"
 irm https://deno.land/install.ps1 | iex
 ```
 
