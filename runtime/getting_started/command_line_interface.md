@@ -16,8 +16,8 @@ standalone binaries, and a lot more. Each subcommand (`run`, `test`, `fmt`,
 `deno <subcommand> --help` to see them.
 
 For the complete list of subcommands and flags, see the
-[CLI reference](/runtime/reference/cli/). The rest of this page walks through
-the most useful flags in more detail.
+[CLI reference](/runtime/reference/cli/). This page covers the patterns you'll
+hit early on: how to run code, how to pass arguments, and how to use watch mode.
 
 ## Running scripts
 
@@ -88,12 +88,7 @@ deno run --allow-net net_client.ts
 deno run net_client.ts --allow-net
 ```
 
-## Common flags
-
-Some flags can be used with multiple related subcommands. We discuss these
-below.
-
-### Watch mode
+## Watch mode
 
 You can supply the `--watch` flag to `deno run`, `deno test`, and `deno fmt` to
 enable the built-in file watcher. The watcher enables automatic reloading of
@@ -132,116 +127,16 @@ from expanding the glob:
 deno run --watch --watch-exclude='*.js' main.ts
 ```
 
-### Hot Module Replacement mode
+## Where to go next
 
-You can use `--watch-hmr` flag with `deno run` to enable the hot module
-replacement mode. Instead of restarting the program, the runtime will try to
-update the program in-place. If updating in-place fails, the program will still
-be restarted.
+For deeper coverage of the topics this page only hints at:
 
-```sh
-deno run --watch-hmr main.ts
-```
-
-When a hot module replacement is triggered, the runtime will dispatch a
-`CustomEvent` of type `hmr` that will include `path` property in its `detail`
-object. You can listen for this event and perform any additional logic that you
-need to do when a module is updated (eg. notify a browser over a WebSocket
-connection).
-
-```ts
-addEventListener("hmr", (e) => {
-  console.log("HMR triggered", e.detail.path);
-});
-```
-
-Note that this is a server-side runtime feature for Deno processes (for example,
-reloading server state when a module changes). It is not a browser-style HMR
-mechanism like the one provided by Vite, and it does not push updates into a
-running browser page on its own.
-
-### Integrity flags (lock files)
-
-These flags apply to commands that download resources to the cache
-(`deno install`, `deno run`, `deno test`, `deno doc`, `deno compile`):
-
-| Flag                   | Description                          |
-| ---------------------- | ------------------------------------ |
-| `--lock <FILE>`        | Check the specified lock file        |
-| `--frozen[=<BOOLEAN>]` | Error out if lockfile is out of date |
-
-See
-[lockfiles and integrity checking](/runtime/fundamentals/modules/#integrity-checking-and-lock-files)
-for the full picture.
-
-### Cache and compilation flags
-
-These flags apply to commands that populate the cache (`deno install`,
-`deno run`, `deno test`, `deno doc`, `deno compile`) and influence module
-resolution and compilation:
-
-| Flag                         | Description                                     |
-| ---------------------------- | ----------------------------------------------- |
-| `--config <FILE>`            | Load configuration file                         |
-| `--import-map <FILE>`        | Load import map file                            |
-| `--no-remote`                | Do not resolve remote modules                   |
-| `--reload=<CACHE_BLOCKLIST>` | Reload source code cache (recompile TypeScript) |
-
-### Type checking flags
-
-You can type-check your code without executing it:
-
-```shell
-deno check main.ts
-```
-
-You can also type-check before execution by passing `--check` to `deno run`:
-
-```shell
-deno run --check main.ts
-```
-
-This flag affects `deno run` and `deno eval`. The following table describes the
-type-checking behavior of various subcommands. Here "Local" means that only
-errors from local code will induce type-errors, modules imported from https URLs
-(remote) may have type errors that are not reported. (To turn on type-checking
-for all modules, use `--check=all`.)
-
-| Subcommand     | Type checking mode |
-| -------------- | ------------------ |
-| `deno bench`   | 📁 Local           |
-| `deno check`   | 📁 Local           |
-| `deno compile` | 📁 Local           |
-| `deno eval`    | ❌ None            |
-| `deno repl`    | ❌ None            |
-| `deno run`     | ❌ None            |
-| `deno test`    | 📁 Local           |
-
-### Permission flags
-
-Deno runs in a sandbox by default. To grant access to OS resources, pass
-permission flags such as `--allow-read`, `--allow-write`, `--allow-net`, and
-`--allow-env`. Most have short forms (`-R`, `-W`, `-N`, `-E`); `-A` grants all
-permissions. Each `--allow-*` flag also accepts a comma-separated allowlist (for
-example `--allow-net=example.com,deno.land`), and a matching `--deny-*` flag
-overrides allows. See [security](/runtime/fundamentals/security/) for the full
-list.
-
-### Inspector and environment flags
-
-Miscellaneous flags that adjust the execution environment:
-
-| Flag                         | Description                                             |
-| ---------------------------- | ------------------------------------------------------- |
-| `--cached-only`              | Require that remote dependencies are already cached     |
-| `--inspect=<HOST:PORT>`      | Activate inspector on host:port                         |
-| `--inspect-brk=<HOST:PORT>`  | Activate inspector on host:port and break at start      |
-| `--inspect-wait=<HOST:PORT>` | Activate inspector on host:port and wait for debugger   |
-| `--location <HREF>`          | Value of `globalThis.location` used by some web APIs    |
-| `--prompt`                   | Fallback to prompt if required permission wasn't passed |
-| `--seed <NUMBER>`            | Seed `Math.random()`                                    |
-| `--v8-flags=<v8-flags>`      | Set V8 command line options                             |
-
-Deno also exposes opt-in features behind `--unstable-*` flags. See the
-[unstable feature flags reference](/runtime/reference/cli/unstable_flags/) for
-the full list and for how to enable them in `deno.json`.
+- [CLI reference](/runtime/reference/cli/): every subcommand and flag.
+- [Security and permissions](/runtime/fundamentals/security/): the `--allow-*`
+  and `--deny-*` flags in full.
+- [Modules and dependencies](/runtime/fundamentals/modules/): lockfiles,
+  imports, and integrity checking.
+- [TypeScript](/runtime/fundamentals/typescript/): when Deno type-checks and how
+  to control it.
+- [Debugging](/runtime/fundamentals/debugging/): the `--inspect` family of flags
+  and how to attach a debugger.
