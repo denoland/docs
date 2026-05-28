@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-11-05
+last_modified: 2026-05-28
 title: Command line interface
 description: "A comprehensive guide to using Deno's command-line interface (CLI). Learn about running scripts, managing permissions, using watch mode, and configuring Deno's runtime behavior through command-line flags and options."
 oldUrl:
@@ -9,26 +9,15 @@ oldUrl:
   - /runtime/manual/tools/
 ---
 
-Deno is a command line program. The Deno command line interface (CLI) can be
-used to run scripts, manage dependencies, and even compile your code into
-standalone executables. You may be familiar with some simple commands having
-followed the examples thus far. This page will provide a more detailed overview
-of the Deno CLI.
+The Deno CLI runs scripts, manages dependencies, and compiles code into
+standalone executables. Each subcommand (`run`, `test`, `compile`, etc.) has its
+own flags; run `deno help` or `deno <subcommand> --help` to see them.
 
-The Deno CLI has a number of subcommands (like `run`, `init` and `test`, etc.).
-They are used to perform different tasks within the Deno runtime environment.
-Each subcommand has its own set of flags and options (eg --version) that can be
-used to customize its behavior.
+For the complete list of subcommands and flags, see the
+[CLI reference](/runtime/reference/cli/). The rest of this page walks through
+the most useful flags in more detail.
 
-You can view all of the available commands and flags by running the `deno help`
-subcommand in your terminal, or using the `-h` or `--help` flags.
-
-Check out the [CLI reference guide](/runtime/reference/cli/) for a further
-documentation on all the subcommands and flags available. We'll take a look at a
-few commands in a bit more detail below to see how they can be used and
-configured.
-
-## An example subcommand - `deno run`
+## Running scripts
 
 You can run a local TypeScript or JavaScript file by specifying its path
 relative to the current working directory:
@@ -166,22 +155,23 @@ running browser page on its own.
 
 ### Integrity flags (lock files)
 
-Affect commands which can download resources to the cache: `deno install`,
-`deno run`, `deno test`, `deno doc`, and `deno compile`.
+These flags apply to commands that download resources to the cache
+(`deno install`, `deno run`, `deno test`, `deno doc`, `deno compile`):
 
 | Flag                   | Description                          |
 | ---------------------- | ------------------------------------ |
 | `--lock <FILE>`        | Check the specified lock file        |
 | `--frozen[=<BOOLEAN>]` | Error out if lockfile is out of date |
 
-Find out more about these
-[here](/runtime/fundamentals/modules/#integrity-checking-and-lock-files).
+See
+[lockfiles and integrity checking](/runtime/fundamentals/modules/#integrity-checking-and-lock-files)
+for the full picture.
 
 ### Cache and compilation flags
 
-Affect commands which can populate the cache: `deno install`, `deno run`,
-`deno test`, `deno doc`, and `deno compile`. As well as the flags above, this
-includes those which affect module resolution, compilation configuration etc.
+These flags apply to commands that populate the cache (`deno install`,
+`deno run`, `deno test`, `deno doc`, `deno compile`) and influence module
+resolution and compilation:
 
 | Flag                         | Description                                     |
 | ---------------------------- | ----------------------------------------------- |
@@ -190,25 +180,18 @@ includes those which affect module resolution, compilation configuration etc.
 | `--no-remote`                | Do not resolve remote modules                   |
 | `--reload=<CACHE_BLOCKLIST>` | Reload source code cache (recompile TypeScript) |
 
-### Runtime flags
-
-The flags in the sections below affect commands which execute user code, namely
-`deno run` and `deno test`. They include all of the flags listed above, plus
-type-checking, permission, and execution-environment flags.
-
 ### Type checking flags
 
-You can type-check your code (without executing it) using the command:
+You can type-check your code without executing it:
 
 ```shell
-> deno check main.ts
+deno check main.ts
 ```
 
-You can also type-check your code before execution by using the `--check`
-argument to deno run:
+You can also type-check before execution by passing `--check` to `deno run`:
 
 ```shell
-> deno run --check main.ts
+deno run --check main.ts
 ```
 
 This flag affects `deno run` and `deno eval`. The following table describes the
@@ -229,11 +212,17 @@ for all modules, use `--check=all`.)
 
 ### Permission flags
 
-These are listed [here](/runtime/fundamentals/security/).
+Deno runs in a sandbox by default. To grant access to OS resources, pass
+permission flags such as `--allow-read`, `--allow-write`, `--allow-net`, and
+`--allow-env`. Most have short forms (`-R`, `-W`, `-N`, `-E`); `-A` grants all
+permissions. Each `--allow-*` flag also accepts a comma-separated allowlist (for
+example `--allow-net=example.com,deno.land`), and a matching `--deny-*` flag
+overrides allows. See [security](/runtime/fundamentals/security/) for the full
+list.
 
-### Other runtime flags
+### Inspector and environment flags
 
-More flags which affect the execution environment.
+Miscellaneous flags that adjust the execution environment:
 
 | Flag                         | Description                                             |
 | ---------------------------- | ------------------------------------------------------- |
