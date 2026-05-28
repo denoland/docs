@@ -67,5 +67,3 @@ ok | 2 passed | 0 failed (3ms)
 
 You're set. Browse our [examples and tutorials](/examples/) for ideas on what to
 build next.
-
-To go deeper, see [Using TypeScript in Deno](/runtime/fundamentals/typescript/).
