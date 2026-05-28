@@ -17,23 +17,26 @@ oldUrl:
 `dee-no`) is an
 [open source](https://github.com/denoland/deno/blob/main/LICENSE.md) JavaScript,
 TypeScript, and WebAssembly runtime with secure defaults and a great developer
-experience. It's built on [V8](https://v8.dev/),
-[Rust](https://www.rust-lang.org/), and [Tokio](https://tokio.rs/).
+experience.
 
 ## Why Deno?
 
-- Deno is
-  **[TypeScript-ready out of the box](/runtime/fundamentals/typescript/).** Zero
-  config or additional steps necessary.
-- Deno is **[secure by default](/runtime/fundamentals/security/).** Where other
-  runtimes give full access to every script they run, Deno allows you to enforce
-  granular permissions.
-- Deno has a **robust built-in toolchain.** Unlike Node or browser JavaScript,
-  Deno includes a [standard library](/runtime/reference/std/), along with a
-  first-party [linter/formatter](/runtime/fundamentals/linting_and_formatting/),
-  [test runner](/runtime/fundamentals/testing/), and more.
-- Deno is **fully compatible with [Node and npm](/runtime/fundamentals/node/).**
-- **[Deno is open-source](https://github.com/denoland/deno).**
+- **[TypeScript-first](/runtime/fundamentals/typescript/).** Run `.ts` files
+  directly — no `tsc`, no build step, no config.
+- **[Secure by default](/runtime/fundamentals/security/).** Code runs in a
+  sandbox with no file, network, or environment access until you grant it.
+- **A full toolchain, no plumbing.** Built-in
+  [formatter](/runtime/fundamentals/linting_and_formatting/),
+  [linter](/runtime/fundamentals/linting_and_formatting/),
+  [test runner](/runtime/fundamentals/testing/), benchmarking, and
+  [`deno compile`](/runtime/reference/cli/compile/) for standalone binaries — no
+  devDependencies to wire up.
+- **Works with your existing [Node.js projects](/runtime/fundamentals/node/).**
+  Drop Deno into a repo with `package.json` and `node_modules` and it just runs;
+  mix `npm:` imports with native ES modules as you migrate.
+- **Modern module system.** ES modules with URL imports, [JSR](https://jsr.io)
+  for typed packages, and [workspaces](/runtime/fundamentals/workspaces/) — no
+  `node_modules` required for new code.
 
 ## Quick install
 
