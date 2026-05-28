@@ -29,11 +29,8 @@ my_project
 ```
 
 [`deno.json`](/runtime/fundamentals/configuration/) holds your project
-configuration. `main.ts` contains a small HTTP server built on
-[`Deno.serve`](/api/deno/~/Deno.serve), showing off the built-in HTTP server,
-`Response.json()`, and TypeScript working out of the box. The handler is
-exported and guarded by `import.meta.main`, so `main_test.ts` can import and
-call it directly without binding to a port.
+configuration. `main.ts` is a small HTTP server built on
+[`Deno.serve`](/api/deno/~/Deno.serve), and `main_test.ts` has the tests for it.
 
 ## Run your project
 
@@ -46,7 +43,7 @@ cd my_project
 You can run this program with the following command:
 
 ```bash
-$ deno main.ts
+$ deno -N main.ts
 Listening on http://localhost:8000/
 ```
 
