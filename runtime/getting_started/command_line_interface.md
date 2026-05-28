@@ -9,9 +9,11 @@ oldUrl:
   - /runtime/manual/tools/
 ---
 
-The Deno CLI runs scripts, manages dependencies, and compiles code into
-standalone executables. Each subcommand (`run`, `test`, `compile`, etc.) has its
-own flags; run `deno help` or `deno <subcommand> --help` to see them.
+The Deno CLI is an all-in-one toolchain for JavaScript and TypeScript projects:
+it runs and tests code, formats and lints, manages dependencies, compiles to
+standalone binaries, and a lot more. Each subcommand (`run`, `test`, `fmt`,
+`compile`, etc.) has its own flags; run `deno help` or
+`deno <subcommand> --help` to see them.
 
 For the complete list of subcommands and flags, see the
 [CLI reference](/runtime/reference/cli/). The rest of this page walks through
