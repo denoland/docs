@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-19
+last_modified: 2026-05-28
 title: "Set up your environment"
 description: "A guide to setting up your development environment for Deno. Learn how to configure popular editors like VS Code, set up language server support, and enable shell completions for better productivity."
 oldUrl: /runtime/manual/getting_started/setup_your_environment/
@@ -113,18 +113,18 @@ local servers = {
 
 If you prefer a different plugin ecosystem, Deno also works with the following:
 
-- **[coc.nvim](https://github.com/neoclide/coc.nvim)** — install
+- **[coc.nvim](https://github.com/neoclide/coc.nvim):** install
   [coc-deno](https://github.com/fannheyward/coc-deno) with
   `:CocInstall coc-deno`, then run `:CocCommand deno.initializeWorkspace` in
   your project.
-- **[ALE](https://github.com/dense-analysis/ale)** — supports the Deno language
+- **[ALE](https://github.com/dense-analysis/ale):** supports the Deno language
   server out of the box. See
   [`:help ale-typescript-deno`](https://github.com/dense-analysis/ale/blob/master/doc/ale-typescript.txt)
   for configuration options.
-- **[vim-easycomplete](https://github.com/jayli/vim-easycomplete)** — once
+- **[vim-easycomplete](https://github.com/jayli/vim-easycomplete):** once
   installed, run `:InstallLspServer deno`. See the
   [project README](https://github.com/jayli/vim-easycomplete) for details.
-- **[vim-lsp](https://github.com/prabirshrestha/vim-lsp)** — register the Deno
+- **[vim-lsp](https://github.com/prabirshrestha/vim-lsp):** register the Deno
   language server in your `.vimrc`:
 
   ```vim
@@ -322,7 +322,7 @@ be installed as well.
 
 ## AI assistant integration
 
-Deno provides official **skills** — specialized knowledge packs that give AI
+Deno provides official **skills**: specialized knowledge packs that give AI
 coding assistants (such as Claude, GitHub Copilot, Cursor, and others) accurate,
 up-to-date knowledge of Deno's APIs, conventions, and best practices.
 
@@ -335,18 +335,18 @@ Skills are available at
 [github.com/denoland/skills](https://github.com/denoland/skills). Each skill is
 a plain text or markdown file you can paste into your AI assistant's context,
 add to a project-level instructions file (e.g. `CLAUDE.md`,
-`.github/copilot-instructions.md`), or configure as a persistent system prompt —
+`.github/copilot-instructions.md`), or configure as a persistent system prompt,
 depending on your tool.
 
 Available skills include:
 
-- **deno-guidance** — foundational Deno knowledge: module imports, `deno.json`,
+- **deno-guidance:** foundational Deno knowledge: module imports, `deno.json`,
   CLI commands, and package selection
-- **deno-deploy** — deploying to Deno Deploy, KV, environment variables, and the
+- **deno-deploy:** deploying to Deno Deploy, KV, environment variables, and the
   `deno deploy` CLI
-- **deno-frontend** — building web UIs with the Fresh framework and Preact
-- **deno-expert** — advanced Deno patterns for code review and debugging
-- **deno-sandbox** — executing untrusted code safely with `@deno/sandbox`
+- **deno-frontend:** building web UIs with the Fresh framework and Preact
+- **deno-expert:** advanced Deno patterns for code review and debugging
+- **deno-sandbox:** executing untrusted code safely with `@deno/sandbox`
 
 ## Shell completions
 
