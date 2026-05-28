@@ -19,6 +19,27 @@ Linux, both x64 and aarch64 (arm64) are supported.
 scripts to download and install the binary.
 
 <deno-tabs group-id="operating-systems">
+<deno-tab value="linux" label="Linux">
+
+Using Shell:
+
+```shell
+curl -fsSL https://deno.land/install.sh | sh
+```
+
+Using [npm](https://npmjs.com/package/deno):
+
+```shell
+npm install -g deno
+```
+
+Using [Nix](https://nixos.org/download.html):
+
+```shell
+nix-shell -p deno
+```
+
+</deno-tab>
 <deno-tab value="mac" label="macOS" default>
 
 Using Shell:
@@ -86,27 +107,6 @@ Using [Winget](https://github.com/microsoft/winget-cli):
 
 ```shell
 winget install DenoLand.Deno
-```
-
-</deno-tab>
-<deno-tab value="linux" label="Linux">
-
-Using Shell:
-
-```shell
-curl -fsSL https://deno.land/install.sh | sh
-```
-
-Using [npm](https://npmjs.com/package/deno):
-
-```shell
-npm install -g deno
-```
-
-Using [Nix](https://nixos.org/download.html):
-
-```shell
-nix-shell -p deno
 ```
 
 </deno-tab>
