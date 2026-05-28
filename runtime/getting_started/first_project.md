@@ -5,15 +5,10 @@ description: "Step-by-step guide to creating your first Deno project. Learn how 
 oldUrl: /runtime/manual/getting_started/first_steps/
 ---
 
-Deno has many [built in tools](/runtime/reference/cli/) to make your development
-experience as smooth as possible. One of these tools is the
-[project initializer](/runtime/reference/cli/init), which creates a new Deno
-project with a basic file structure and configuration.
-
-While you are welcome to use JavaScript, Deno has built-in support for
-[TypeScript](https://www.typescriptlang.org/) as well, so we'll be using
-TypeScript in this guide. If you'd prefer to use JavaScript, you can rename the
-files to `.js` and remove the type annotations.
+In this guide, you'll create your first Deno project, run it, and execute its
+tests. We'll use [TypeScript](https://www.typescriptlang.org/) throughout. To
+follow along in JavaScript instead, rename the files to `.js` and remove the
+type annotations.
 
 ## Initialize a new project
 
@@ -36,11 +31,10 @@ my_project
 A `deno.json` file is created to
 [configure your project](/runtime/fundamentals/configuration/), and two
 TypeScript files are created; `main.ts` and `main_test.ts`. The `main.ts` file
-contains a small HTTP server built on [`Deno.serve`](/api/deno/~/Deno.serve) —
-it shows off Deno's built-in HTTP server, `Response.json()`, and TypeScript
-working out of the box. The handler is exported and guarded by
-`import.meta.main`, so `main_test.ts` can import and call it directly without
-binding to a port.
+contains a small HTTP server built on [`Deno.serve`](/api/deno/~/Deno.serve). It
+shows off Deno's built-in HTTP server, `Response.json()`, and TypeScript working
+out of the box. The handler is exported and guarded by `import.meta.main`, so
+`main_test.ts` can import and call it directly without binding to a port.
 
 ## Run your project
 
