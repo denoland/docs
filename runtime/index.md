@@ -59,9 +59,6 @@ irm https://deno.land/install.ps1 | iex
 </deno-tab>
 <deno-tab value="linux" label="Linux">
 
-The installer requires `unzip` (or `7z` on Alpine) to be available on your
-system:
-
 ```sh
 curl -fsSL https://deno.land/install.sh | sh
 ```
