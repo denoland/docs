@@ -47,16 +47,14 @@ $ deno -N main.ts
 Listening on http://localhost:8000/
 ```
 
-When you pass a file path directly, Deno infers the `run` subcommand, so
-`deno main.ts` is equivalent to `deno run main.ts`.
+The server needs network permission, granted here via `-N` (short for
+`--allow-net`). See [security](/runtime/fundamentals/security/) for more.
 
 Open the URL in your browser to see the response.
 
 ## Run your tests
 
-Deno has a [built in test runner](/runtime/fundamentals/testing/). You can write
-tests for your code and run them with the `deno test` command. Run the tests in
-your new project with:
+Run the tests with [`deno test`](/runtime/fundamentals/testing/):
 
 ```bash
 $ deno test
@@ -67,9 +65,7 @@ handler returns 404 for unknown route ... ok (1ms)
 ok | 2 passed | 0 failed (3ms)
 ```
 
-Now that you have a basic project set up you can start building your
-application. Check out our [examples and tutorials](/examples/) for more ideas
-on what to build with Deno.
+You're set. Browse our [examples and tutorials](/examples/) for ideas on what to
+build next.
 
-You can
-[learn more about using TypeScript in Deno here](/runtime/fundamentals/typescript).
+To go deeper, see [Using TypeScript in Deno](/runtime/fundamentals/typescript/).
