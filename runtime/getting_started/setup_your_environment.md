@@ -87,10 +87,9 @@ vim.lsp.config('ts_ls', {
 This assumes a `deno.json` or `deno.jsonc` lives at the root of your Deno
 project.
 
-#### Kickstart.nvim and Mason LSP
-
-If you use [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), add the
-equivalent configuration to the `servers` table in your `init.lua`:
+**Kickstart.nvim and Mason LSP.** If you use
+[kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), add the equivalent
+configuration to the `servers` table in your `init.lua`:
 
 ```lua
 local servers = {
@@ -108,9 +107,8 @@ local servers = {
     }
 ```
 
-#### Other Vim/Neovim plugins
-
-If you prefer a different plugin ecosystem, Deno also works with the following:
+**Other Vim/Neovim plugins.** If you prefer a different plugin ecosystem, Deno
+also works with the following:
 
 - **[ALE](https://github.com/dense-analysis/ale):** supports the Deno language
   server out of the box. See
@@ -185,21 +183,15 @@ config.deno.enable = true
 
 ### Emacs
 
-#### lsp-mode
-
-Emacs supports Deno via the Deno language server using
+**lsp-mode.** Emacs supports Deno via the Deno language server using
 [lsp-mode](https://emacs-lsp.github.io/lsp-mode/). Once
 [lsp-mode is installed](https://emacs-lsp.github.io/lsp-mode/page/installation/)
 it should support Deno, which can be
 [configured](https://emacs-lsp.github.io/lsp-mode/page/lsp-deno/) to support
 various settings.
 
-#### eglot
-
-You can also use built-in Deno language server by using
-[`eglot`](https://github.com/joaotavora/eglot).
-
-An example configuration for Deno via eglot:
+**eglot.** You can also use the built-in Deno language server via
+[`eglot`](https://github.com/joaotavora/eglot). An example configuration:
 
 ```elisp
 (add-to-list 'eglot-server-programs '((js-mode typescript-mode) . (eglot-deno "deno" "lsp")))
