@@ -28,13 +28,12 @@ my_project
 └── main.ts
 ```
 
-A `deno.json` file is created to
-[configure your project](/runtime/fundamentals/configuration/), and two
-TypeScript files are created; `main.ts` and `main_test.ts`. The `main.ts` file
-contains a small HTTP server built on [`Deno.serve`](/api/deno/~/Deno.serve). It
-shows off Deno's built-in HTTP server, `Response.json()`, and TypeScript working
-out of the box. The handler is exported and guarded by `import.meta.main`, so
-`main_test.ts` can import and call it directly without binding to a port.
+[`deno.json`](/runtime/fundamentals/configuration/) holds your project
+configuration. `main.ts` contains a small HTTP server built on
+[`Deno.serve`](/api/deno/~/Deno.serve), showing off the built-in HTTP server,
+`Response.json()`, and TypeScript working out of the box. The handler is
+exported and guarded by `import.meta.main`, so `main_test.ts` can import and
+call it directly without binding to a port.
 
 ## Run your project
 
