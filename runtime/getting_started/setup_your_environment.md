@@ -112,14 +112,14 @@ local servers = {
 
 If you prefer a different plugin ecosystem, Deno also works with the following:
 
-- **[coc.nvim](https://github.com/neoclide/coc.nvim):** install
-  [coc-deno](https://github.com/fannheyward/coc-deno) with
-  `:CocInstall coc-deno`, then run `:CocCommand deno.initializeWorkspace` in
-  your project.
 - **[ALE](https://github.com/dense-analysis/ale):** supports the Deno language
   server out of the box. See
   [`:help ale-typescript-deno`](https://github.com/dense-analysis/ale/blob/master/doc/ale-typescript.txt)
   for configuration options.
+- **[coc.nvim](https://github.com/neoclide/coc.nvim):** install
+  [coc-deno](https://github.com/fannheyward/coc-deno) with
+  `:CocInstall coc-deno`, then run `:CocCommand deno.initializeWorkspace` in
+  your project.
 - **[vim-easycomplete](https://github.com/jayli/vim-easycomplete):** once
   installed, run `:InstallLspServer deno`. See the
   [project README](https://github.com/jayli/vim-easycomplete) for details.
@@ -236,12 +236,7 @@ This is the equivalent of having the following settings in a VSCode
 
 [Sublime Text](https://www.sublimetext.com/) supports connecting to the Deno
 language server via the [LSP package](https://packagecontrol.io/packages/LSP).
-You may also want to install the
-[TypeScript package](https://packagecontrol.io/packages/TypeScript) to get full
-syntax highlighting.
-
-Once you have the LSP package installed, add a minimal Deno client to your
-`.sublime-project`:
+Once it's installed, add a minimal Deno client to your `.sublime-project`:
 
 ```jsonc
 {
@@ -266,24 +261,6 @@ For the full set of supported `initializationOptions` keys (such as `config`,
 [Settings section of the LSP integration reference](/runtime/reference/lsp_integration/#settings)
 and the
 [LSP package documentation](https://lsp.sublimetext.io/language_servers/).
-
-### GitHub Codespaces
-
-[GitHub Codespaces](https://github.com/features/codespaces) allows you to
-develop fully online or remotely on your local machine without needing to
-configure or install Deno.
-
-If a project is a Deno enabled project and contains the `.devcontainer`
-configuration as part of the repository, opening the project in GitHub
-Codespaces should just "work". If you are starting a new project, or you want to
-add Deno support to an existing code space, it can be added by selecting the
-`Codespaces: Add Development Container Configuration Files...` from the command
-pallet and then selecting `Show All Definitions...` and then searching for the
-`Deno` definition.
-
-Once selected, you will need to rebuild your container so that the Deno CLI is
-added to the container. After the container is rebuilt, the code space will
-support Deno.
 
 ### Kakoune
 
@@ -318,6 +295,21 @@ integrating with the Deno language server via the
 `atom-ide-deno` requires that the Deno CLI be installed and the
 [atom-ide-base](https://web.pulsar-edit.dev/packages/atom-ide-base) package to
 be installed as well.
+
+## Remote development
+
+### GitHub Codespaces
+
+[GitHub Codespaces](https://github.com/features/codespaces) lets you develop in
+a hosted environment with no local Deno install.
+
+If the repository already includes a `.devcontainer` configuration with Deno,
+opening it in Codespaces just works. To add Deno to a Codespace that doesn't:
+
+1. Open the command palette (`Cmd/Ctrl+Shift+P`).
+2. Run `Codespaces: Add Development Container Configuration Files...`.
+3. Choose `Show All Definitions...` and search for `Deno`.
+4. Rebuild the container so the Deno CLI is available.
 
 ## Shell completions
 
@@ -412,10 +404,8 @@ the fish config folder:
 > deno completions fish > ~/.config/fish/completions/deno.fish
 ```
 
-## Other tools
+## Building your own LSP integration
 
-If you are writing or supporting a community integration using the Deno language
-server, read more about
-[integrating with the Deno LSP](/runtime/reference/lsp_integration/), but also
-feel free to join our [Discord community](https://discord.gg/deno) in the
-`#dev-lsp` channel.
+If you're building or maintaining a community integration with the Deno language
+server, see the [LSP integration reference](/runtime/reference/lsp_integration/)
+and join the `#dev-lsp` channel on the [Deno Discord](https://discord.gg/deno).
