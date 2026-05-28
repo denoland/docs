@@ -63,6 +63,11 @@ $ deno run main.ts arg1 arg2 arg3
 [ "arg1", "arg2", "arg3" ]
 ```
 
+For anything beyond a flat list, parse the arguments with
+[`parseArgs` from `jsr:@std/cli`](https://jsr.io/@std/cli/doc/parse-args/~/parseArgs)
+or
+[`parseArgs` from `node:util`](https://nodejs.org/api/util.html#utilparseargsconfig).
+
 ## Argument and flag ordering
 
 :::caution
