@@ -41,6 +41,13 @@ Install the Deno runtime on your system using one of the terminal commands
 below:
 
 <deno-tabs group-id="operating-systems">
+<deno-tab value="linux" label="Linux">
+
+```sh
+curl -fsSL https://deno.land/install.sh | sh
+```
+
+</deno-tab>
 <deno-tab value="mac" label="macOS" default>
 
 ```sh
@@ -52,13 +59,6 @@ curl -fsSL https://deno.land/install.sh | sh
 
 ```powershell title="pwsh"
 irm https://deno.land/install.ps1 | iex
-```
-
-</deno-tab>
-<deno-tab value="linux" label="Linux">
-
-```sh
-curl -fsSL https://deno.land/install.sh | sh
 ```
 
 </deno-tab>

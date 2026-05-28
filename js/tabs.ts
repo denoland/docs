@@ -79,6 +79,15 @@ for (const tabGroup of document.querySelectorAll<HTMLElement>(".deno-tabs")) {
   const storedTabId = localStorage.getItem(`deno-tab-${groupId}`);
   if (storedTabId) {
     document.dispatchEvent(new GroupSelectEvent(groupId, storedTabId));
+  } else if (groupId === "operating-systems") {
+    const ua = navigator.userAgent;
+    let detected: string | null = null;
+    if (/Mac/i.test(ua)) detected = "mac";
+    else if (/Win/i.test(ua)) detected = "windows";
+    else if (/Linux/i.test(ua)) detected = "linux";
+    if (detected) {
+      document.dispatchEvent(new GroupSelectEvent(groupId, detected));
+    }
   }
 
   const anyTabActive = Array.from(tabs).some((tab) =>
