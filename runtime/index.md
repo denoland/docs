@@ -23,20 +23,18 @@ experience.
 
 - **[TypeScript-first](/runtime/fundamentals/typescript/).** Run `.ts` files
   directly. No `tsc`, no build step, no config.
+- **Works with your existing [Node.js projects](/runtime/fundamentals/node/).**
+  Drop Deno into a repo with `package.json` and `node_modules` and it just runs;
+  mix `npm:` imports with native ES modules as you migrate.
+- **Modern module system.** ES modules with URL imports, [JSR](https://jsr.io)
+  for typed packages, and [workspaces](/runtime/fundamentals/workspaces/).
 - **[Secure by default](/runtime/fundamentals/security/).** Code runs in a
   sandbox with no file, network, or environment access until you grant it.
 - **A full toolchain, no plumbing.** Built-in
   [formatter](/runtime/fundamentals/linting_and_formatting/),
   [linter](/runtime/fundamentals/linting_and_formatting/),
   [test runner](/runtime/fundamentals/testing/), benchmarking, and
-  [`deno compile`](/runtime/reference/cli/compile/) for standalone binaries. No
-  devDependencies to wire up.
-- **Works with your existing [Node.js projects](/runtime/fundamentals/node/).**
-  Drop Deno into a repo with `package.json` and `node_modules` and it just runs;
-  mix `npm:` imports with native ES modules as you migrate.
-- **Modern module system.** ES modules with URL imports, [JSR](https://jsr.io)
-  for typed packages, and [workspaces](/runtime/fundamentals/workspaces/). No
-  `node_modules` required for new code.
+  [a lot more](/runtime/reference/cli/). No `devDependencies` to wire up.
 
 ## Quick install
 
