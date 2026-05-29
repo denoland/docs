@@ -36,6 +36,25 @@ Example:
 Before you publish your package, you must create it in the registry by visiting
 [JSR - Publish a package](https://jsr.io/new).
 
+## Excluding a workspace member
+
+When run inside a [workspace](/runtime/fundamentals/workspaces/), `deno publish`
+tries to publish every member that has a `name` and `exports`, and errors if any
+of them is missing a `version`. To opt a member out, for example an internal
+helper package that only exists to host shared `tasks`, set `"publish": false`
+in that member's `deno.json`:
+
+```jsonc title="internal-helpers/deno.json"
+{
+  "name": "@scope/internal-helpers",
+  "publish": false
+}
+```
+
+The member stays part of the workspace but is skipped by `deno publish`. See
+[Excluding a workspace member from publish](/runtime/fundamentals/workspaces/#excluding-a-workspace-member-from-publish)
+for the full discussion.
+
 ## Examples
 
 Publish your current workspace
