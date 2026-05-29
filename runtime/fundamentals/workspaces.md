@@ -311,6 +311,35 @@ cd my-package
 deno publish
 ```
 
+#### Excluding a workspace member from publish
+
+Workspaces often contain members that are not meant to be published — internal
+helpers, examples, or packages that only exist to host shared `tasks`. By
+default `deno publish` will try to publish every workspace member that has a
+`name` and `exports`, and will error if any of them is missing a `version`.
+
+To opt a member out of `deno publish`, set `"publish": false` in that member's
+`deno.json`:
+
+```jsonc title="internal-helpers/deno.json"
+{
+  "name": "@scope/internal-helpers",
+  "tasks": {
+    "build": "deno run -A scripts/build.ts"
+  },
+  "publish": false
+}
+```
+
+The member is still part of the workspace — its `tasks` run, its `imports` are
+resolved, and other members can depend on it — but `deno publish` skips it
+entirely and won't complain about a missing `version`.
+
+This applies to `deno.json` members only. Workspace members defined solely by a
+`package.json` are npm packages and are never candidates for `deno publish`
+(which targets JSR), so no opt-out is needed for them. `package.json`'s
+`"private": true` field is not read by Deno.
+
 #### Managing interdependent packages
 
 When publishing packages from a workspace with interdependencies, use consistent
@@ -469,6 +498,7 @@ root and its members:
 | test.include         | ✅        | ✅      |                                                                                                                                                                                                                 |
 | test.exclude         | ✅        | ✅      |                                                                                                                                                                                                                 |
 | test.files           | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
+| publish              | ❌        | ✅      | Set to `false` to exclude a member from `deno publish`. See [Excluding a workspace member from publish](#excluding-a-workspace-member-from-publish).                                                            |
 | publish.include      | ✅        | ✅      |                                                                                                                                                                                                                 |
 | publish.exclude      | ✅        | ✅      |                                                                                                                                                                                                                 |
 | bench.include        | ✅        | ✅      |                                                                                                                                                                                                                 |
