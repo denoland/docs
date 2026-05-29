@@ -40,8 +40,8 @@ Before you publish your package, you must create it in the registry by visiting
 
 When run inside a [workspace](/runtime/fundamentals/workspaces/), `deno publish`
 tries to publish every member that has a `name` and `exports`, and errors if any
-of them is missing a `version`. To opt a member out — for example an internal
-helper package that only exists to host shared `tasks` — set `"publish": false`
+of them is missing a `version`. To opt a member out, for example an internal
+helper package that only exists to host shared `tasks`, set `"publish": false`
 in that member's `deno.json`:
 
 ```jsonc title="internal-helpers/deno.json"

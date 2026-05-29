@@ -313,9 +313,9 @@ deno publish
 
 #### Excluding a workspace member from publish
 
-Workspaces often contain members that are not meant to be published — internal
-helpers, examples, or packages that only exist to host shared `tasks`. By
-default `deno publish` will try to publish every workspace member that has a
+Workspaces often contain members that are not meant to be published, such as
+internal helpers, examples, or packages that only exist to host shared `tasks`.
+By default `deno publish` will try to publish every workspace member that has a
 `name` and `exports`, and will error if any of them is missing a `version`.
 
 To opt a member out of `deno publish`, set `"publish": false` in that member's
@@ -331,8 +331,8 @@ To opt a member out of `deno publish`, set `"publish": false` in that member's
 }
 ```
 
-The member is still part of the workspace — its `tasks` run, its `imports` are
-resolved, and other members can depend on it — but `deno publish` skips it
+The member is still part of the workspace. Its `tasks` run, its `imports` are
+resolved, and other members can depend on it, but `deno publish` skips it
 entirely and won't complain about a missing `version`.
 
 This applies to `deno.json` members only. Workspace members defined solely by a
