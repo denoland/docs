@@ -53,10 +53,13 @@ the key principles of Deno's security model:
   All modules that are imported in the initial static module graph (local files,
   npm packages, jsr packages, and remote URLs) are loaded by the runtime without
   consulting the permission system. No `--allow-read` is required to load local
-  files, and no `--allow-net` is required to fetch remote modules. This
+  files, and no `--allow-net` is required to fetch remote modules. The static
+  graph includes static `import` statements and `import()` calls whose specifier
+  is a string literal — anything that can be resolved without running code. This
   exemption applies only to loading. Once code runs, anything it does still goes
-  through the permission system, and dynamic imports are not covered by the
-  exemption.
+  through the permission system, and `import()` calls with non-literal
+  specifiers (e.g. `import(someVariable)`) are checked against `--allow-read` /
+  `--allow-import` at runtime.
 
 These key principles are designed to provide an environment where a user can
 execute code with minimal risk of harm to the host machine or network. The
