@@ -36,11 +36,11 @@ discovery order is identical to `deno deploy`; see
 The standalone `deno sandbox` command does not currently expose the global
 `--json` / `--non-interactive` flags that `deno deploy` does, and sandbox
 subcommands emit human-formatted output. Structured output and fail-fast
-prompting for sandbox operations are tracked as future work; until then,
-use `--token` for headless auth and parse stdout as plain text.
+prompting for sandbox operations are tracked as future work; until then, use
+`--token` for headless auth and parse stdout as plain text.
 
-For background on the exit-code taxonomy and structured error envelope
-shared with `deno deploy`, see
+For background on the exit-code taxonomy and structured error envelope shared
+with `deno deploy`, see
 [deno deploy → Agent / CI usage](/runtime/reference/cli/deploy/#agent--ci-usage).
 
 ## Subcommands

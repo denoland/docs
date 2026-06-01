@@ -14,15 +14,13 @@ platform for hosting JavaScript, TypeScript, and WebAssembly applications.
 When called without any subcommands, `deno deploy` will deploy your local
 directory to the specified application.
 
-If you are scripting `deno deploy` from CI or driving it from an AI agent
-rather than running it interactively, jump to
-[Agent / CI usage](#agent--ci-usage) for non-interactive auth, structured
-output, and exit-code conventions.
+If you are scripting `deno deploy` from CI or driving it from an AI agent rather
+than running it interactively, jump to [Agent / CI usage](#agent--ci-usage) for
+non-interactive auth, structured output, and exit-code conventions.
 
 ## Authentication
 
-The deploy command supports three ways to authenticate, checked in this
-order:
+The deploy command supports three ways to authenticate, checked in this order:
 
 1. **`--token <token>` flag** - Useful for one-off scripted calls.
 2. **`DENO_DEPLOY_TOKEN` environment variable** - The recommended way to
@@ -602,20 +600,21 @@ prompting, structured output, exit codes, and per-command JSON shapes.
 
 For the global flags themselves, see [Global options](#global-options).
 `--non-interactive` and `--json` are independent. The recommended agent
-invocation combines both: `deno deploy <subcommand> --json --non-interactive
+invocation combines both:
+`deno deploy <subcommand> --json --non-interactive
 <...>`.
 
 ### Exit codes
 
-| Code | Name        | Meaning                                                                                |
-| ---- | ----------- | -------------------------------------------------------------------------------------- |
-| `0`  | `OK`        | Success.                                                                               |
-| `1`  | `GENERIC`   | Unclassified failure.                                                                  |
-| `2`  | `USAGE`     | Bad flag, missing required value, or `--non-interactive` short-circuit.                |
-| `3`  | `AUTH`      | Token missing, invalid, expired, or rejected by the backend.                           |
-| `4`  | `NOT_FOUND` | The targeted org / app / database / revision doesn't exist or isn't reachable.         |
-| `5`  | `CONFLICT`  | A resource with the supplied name already exists (idempotent re-runs return this).     |
-| `6`  | `NETWORK`   | Backend 5xx, transport failure, or unreachable endpoint.                               |
+| Code | Name        | Meaning                                                                            |
+| ---- | ----------- | ---------------------------------------------------------------------------------- |
+| `0`  | `OK`        | Success.                                                                           |
+| `1`  | `GENERIC`   | Unclassified failure.                                                              |
+| `2`  | `USAGE`     | Bad flag, missing required value, or `--non-interactive` short-circuit.            |
+| `3`  | `AUTH`      | Token missing, invalid, expired, or rejected by the backend.                       |
+| `4`  | `NOT_FOUND` | The targeted org / app / database / revision doesn't exist or isn't reachable.     |
+| `5`  | `CONFLICT`  | A resource with the supplied name already exists (idempotent re-runs return this). |
+| `6`  | `NETWORK`   | Backend 5xx, transport failure, or unreachable endpoint.                           |
 
 Agents should pattern-match on the exit code first, then parse stderr if
 non-zero.
@@ -642,8 +641,8 @@ Fields:
   `POSTGRES_ERROR`. Agents should treat unknown codes as opaque.
 - `message` - Human-readable description.
 - `hint` - Optional. Suggests a concrete next step.
-- `traceId` - Optional. Server-side trace identifier from the
-  `x-deno-trace-id` response header. Useful for bug reports.
+- `traceId` - Optional. Server-side trace identifier from the `x-deno-trace-id`
+  response header. Useful for bug reports.
 
 Human-mode errors go to stderr too but without the JSON envelope.
 
@@ -652,9 +651,8 @@ Human-mode errors go to stderr too but without the JSON envelope.
 - **stdout** carries the result of the command. In `--json` mode this is a
   single object or array (NDJSON for streaming commands like `logs`). In human
   mode it is the formatted table / URL / etc.
-- **stderr** carries human progress, prompts, and the structured error
-  envelope. `--quiet` suppresses progress but keeps the final result on
-  stdout.
+- **stderr** carries human progress, prompts, and the structured error envelope.
+  `--quiet` suppresses progress but keeps the final result on stdout.
 
 This lets you pipe cleanly:
 
@@ -666,8 +664,8 @@ deno deploy env list --json | jq '.[] | select(.isSecret == false)'
 
 ### Required flags under `--non-interactive`
 
-When a required flag is missing in `--non-interactive` mode, the CLI exits
-`2` (`USAGE`) with an error envelope naming the missing flag.
+When a required flag is missing in `--non-interactive` mode, the CLI exits `2`
+(`USAGE`) with an error envelope naming the missing flag.
 
 | Subcommand                     | Required flags                                                                                                                            |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -685,8 +683,8 @@ When a required flag is missing in `--non-interactive` mode, the CLI exits
 
 ### JSON output schemas
 
-These shapes are stable; new fields may be added but existing fields will not
-be removed without a version bump.
+These shapes are stable; new fields may be added but existing fields will not be
+removed without a version bump.
 
 #### `deno deploy whoami --json`
 
@@ -855,10 +853,10 @@ envelope instead.
 
 #### `deno deploy logs --json`
 
-NDJSON, one record per line on stdout:
+NDJSON, one record per line on stdout (shown here line-wrapped for readability):
 
-```json
-{"timestamp":"2026-05-12T14:40:00.000Z","traceId":"...","spanId":"...","severity":"INFO","severityNumber":9,"body":"hello","scope":"app","revision":"rev_...","attributes":{}}
+```text
+{"timestamp":"...","traceId":"...","spanId":"...","severity":"INFO","severityNumber":9,"body":"hello","scope":"app","revision":"rev_...","attributes":{}}
 ```
 
 ### Examples
@@ -923,14 +921,14 @@ deno deploy setup-aws --json --non-interactive \
   --role-name DenoDeploy-myorg-my-app
 ```
 
-The fixed `--role-name` makes the operation idempotent: re-running with the
-same name surfaces `SLUG_ALREADY_IN_USE` (exit `5`, `CONFLICT`) rather than
-silently creating a second resource with a random suffix.
+The fixed `--role-name` makes the operation idempotent: re-running with the same
+name surfaces `SLUG_ALREADY_IN_USE` (exit `5`, `CONFLICT`) rather than silently
+creating a second resource with a random suffix.
 
 ### Compatibility
 
-- JSON shapes are additive: new fields may be added but existing fields will
-  not be removed without a version bump. Agents should ignore unknown fields.
+- JSON shapes are additive: new fields may be added but existing fields will not
+  be removed without a version bump. Agents should ignore unknown fields.
 - Exit-code values and `error.code` strings are stable; new values may be
   introduced.
 - The flag set is stable; new flags may be added but existing ones will not be
