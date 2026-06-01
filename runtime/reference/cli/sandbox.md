@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-10
+last_modified: 2026-06-01
 title: "deno sandbox"
 command: sandbox
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -17,12 +17,28 @@ In order to use the `deno sandbox` command, you need to have a Deno Deploy
 account and a valid authentication token. Follow the instructions in the
 [Getting started with Deno Sandbox](/sandbox/getting_started/) documentation.
 
+For CI / agent contexts, set the `DENO_DEPLOY_TOKEN` environment variable (or
+pass `--token <token>`) to authenticate without opening a browser. The token
+discovery order is identical to `deno deploy`; see
+[deno deploy → Authentication](/runtime/reference/cli/deploy/#authentication).
+
 ## Global options
 
-- `-h`, `--help` - Show this help.
-- `--token` <token> - Auth token to use
-- `--config` <config> - Path for the config file
-- `--org` <name> - The name of the organization
+- `-h, --help` - Show this help.
+- `-j, --json` - Emit JSON on stdout instead of human-readable output
+- `-y, --non-interactive` - Fail fast instead of prompting; required input must
+  be supplied via flags or env vars
+- `-q, --quiet` - Suppress non-essential output
+- `--debug` - Print stack traces and verbose diagnostics on stderr
+- `--token <token>` - Auth token to use
+- `--endpoint <url>` - Override the API endpoint (also reads
+  `DENO_DEPLOY_ENDPOINT`)
+- `--config <path>` - Path for the config file
+- `--org <name>` - The name of the organization
+
+For exit codes, the structured error envelope, and stdio conventions, see
+[deno deploy → Agent / CI usage](/runtime/reference/cli/deploy/#agent--ci-usage).
+The same taxonomy applies to every `deno sandbox` subcommand.
 
 ## Subcommands
 
