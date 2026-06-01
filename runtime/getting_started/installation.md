@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-21
+last_modified: 2026-06-01
 title: Installation
 description: "A Guide to installing Deno on different operating systems. Includes instructions for Windows, macOS, and Linux using various package managers, manual installation methods, and Docker containers."
 oldUrl:
@@ -113,6 +113,9 @@ winget install DenoLand.Deno
 > <small>The startup time of the Deno command gets affected if it's installed
 > via npm. We recommend the official install script (shell or PowerShell) for
 > better performance.</small>
+
+Deno does not publish an official apt repository. On Debian or Ubuntu, use the
+shell installer above for the recommended installation path.
 
 ### Cross-platform package managers
 
