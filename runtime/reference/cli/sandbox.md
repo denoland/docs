@@ -25,9 +25,6 @@ discovery order is identical to `deno deploy`; see
 ## Global options
 
 - `-h, --help` - Show this help.
-- `-j, --json` - Emit JSON on stdout instead of human-readable output
-- `-y, --non-interactive` - Fail fast instead of prompting; required input must
-  be supplied via flags or env vars
 - `-q, --quiet` - Suppress non-essential output
 - `--debug` - Print stack traces and verbose diagnostics on stderr
 - `--token <token>` - Auth token to use
@@ -36,9 +33,15 @@ discovery order is identical to `deno deploy`; see
 - `--config <path>` - Path for the config file
 - `--org <name>` - The name of the organization
 
-For exit codes, the structured error envelope, and stdio conventions, see
+The standalone `deno sandbox` command does not currently expose the global
+`--json` / `--non-interactive` flags that `deno deploy` does, and sandbox
+subcommands emit human-formatted output. Structured output and fail-fast
+prompting for sandbox operations are tracked as future work; until then,
+use `--token` for headless auth and parse stdout as plain text.
+
+For background on the exit-code taxonomy and structured error envelope
+shared with `deno deploy`, see
 [deno deploy → Agent / CI usage](/runtime/reference/cli/deploy/#agent--ci-usage).
-The same taxonomy applies to every `deno sandbox` subcommand.
 
 ## Subcommands
 
