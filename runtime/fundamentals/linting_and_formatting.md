@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-12-16
+last_modified: 2026-05-17
 title: "Linting and formatting"
 description: "A guide to Deno's built-in code quality tools. Learn how to use deno lint and deno fmt commands, configure rules, integrate with CI/CD pipelines, and maintain consistent code style across your projects."
 ---
@@ -175,6 +175,10 @@ The newline character to use
 
 - **Default:** `lf`
 - **Possible values:** `auto`, `crlf`, `lf`, `system`
+
+Use `auto` to preserve the file's existing newline style when Deno can detect
+one. Use `system` to use the current operating system's default newline style,
+which is `crlf` on Windows and `lf` on Unix-like systems.
 
 #### `nextControlFlowPosition`
 
