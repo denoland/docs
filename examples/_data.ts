@@ -558,6 +558,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Cloudflare workers with wrangler",
+        href: "/examples/cloudflare_workers_wrangler_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Digital Ocean",
         href: "/examples/digital_ocean_tutorial/",
         type: "tutorial",
