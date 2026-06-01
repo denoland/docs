@@ -639,7 +639,7 @@ Deno.test("AuthService comprehensive test", async (t) => {
       { status: 200, headers: { "Content-Type": "application/json" } },
     );
 
-    const fetchStub = stub(
+    using fetchStub = stub(
       globalThis,
       "fetch",
       (_url: string | URL | Request, options?: RequestInit) => {
@@ -653,19 +653,16 @@ Deno.test("AuthService comprehensive test", async (t) => {
       },
     );
 
-    try {
-      const token = await authService.login("testuser", "password123");
-      assertEquals(token, "fake-jwt-token");
-    } finally {
-      fetchStub.restore();
-    }
+    const token = await authService.login("testuser", "password123");
+    assertEquals(token, "fake-jwt-token");
+    assertSpyCalls(fetchStub, 1);
   });
 
   await t.step("token expiration should work correctly", async () => {
     using time = new FakeTime(new Date("2023-01-01T12:00:00Z"));
     const authService = new AuthService();
 
-    const fetchStub = stub(
+    using fetchStub = stub(
       globalThis,
       "fetch",
       () =>
@@ -677,27 +674,23 @@ Deno.test("AuthService comprehensive test", async (t) => {
         ),
     );
 
-    const getTokenSpy = spy(authService, "getToken");
+    using getTokenSpy = spy(authService, "getToken");
 
-    try {
-      await authService.login("user", "pass");
-      assertEquals(authService.getToken(), "fake-token");
-      assertSpyCalls(getTokenSpy, 1);
+    await authService.login("user", "pass");
+    assertEquals(authService.getToken(), "fake-token");
+    assertSpyCalls(getTokenSpy, 1);
 
-      // Advance time past expiration
-      time.tick(61 * 60 * 1000);
+    // Advance time past expiration
+    time.tick(61 * 60 * 1000);
 
-      // Token should now be expired
-      assertThrows(
-        () => authService.getToken(),
-        Error,
-        "Token expired",
-      );
-      assertSpyCalls(getTokenSpy, 2);
-    } finally {
-      fetchStub.restore();
-      getTokenSpy.restore();
-    }
+    // Token should now be expired
+    assertThrows(
+      () => authService.getToken(),
+      Error,
+      "Token expired",
+    );
+    assertSpyCalls(getTokenSpy, 2);
+    assertSpyCalls(fetchStub, 1);
   });
 });
 ```
@@ -711,7 +704,7 @@ functionalities:
 - Logout - Clears the token and expiration
 
 The testing structure is organized as a single main test with three logical
-**steps**, each testing a different aspect of the service; credential
+**steps**, each testing a different aspect of the service: credential
 validation, API call handling, and token expiration.
 
 🦕 Effective mocking is essential for writing reliable, maintainable unit tests.
