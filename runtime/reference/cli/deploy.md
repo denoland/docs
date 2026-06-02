@@ -691,16 +691,25 @@ removed without a version bump.
 ```json
 {
   "authenticated": true,
-  "user": null,
+  "user": {
+    "id": "...",
+    "name": "Ada Lovelace",
+    "email": "[email protected]",
+    "avatarUrl": "https://...",
+    "githubLogin": "ada"
+  },
+  "tokenType": "user",
   "orgs": [
     { "id": "...", "slug": "myorg", "name": "My Org", "plan": "pro" }
   ]
 }
 ```
 
-`user` is currently `null`; future backend support will populate it with
-`{ id, name, email, ... }`. Agents reading `authenticated` / `orgs[]` will keep
-working.
+For user-backed tokens (web sessions, `dop_` device tokens) `user` is
+populated with `id`, `name`, `email`, `avatarUrl`, `githubLogin`. For
+organization-scoped (`ddo_`) tokens, `user` is `null` and `tokenType`
+identifies the token kind so the caller can fall back to `orgs[]`. Any
+of the inner string fields may be `null` if the backend has no value.
 
 #### `deno deploy orgs list --json`
 
