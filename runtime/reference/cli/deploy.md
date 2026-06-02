@@ -705,11 +705,11 @@ removed without a version bump.
 }
 ```
 
-For user-backed tokens (web sessions, `dop_` device tokens) `user` is
-populated with `id`, `name`, `email`, `avatarUrl`, `githubLogin`. For
-organization-scoped (`ddo_`) tokens, `user` is `null` and `tokenType`
-identifies the token kind so the caller can fall back to `orgs[]`. Any
-of the inner string fields may be `null` if the backend has no value.
+For user-backed tokens (web sessions, `dop_` device tokens) `user` is populated
+with `id`, `name`, `email`, `avatarUrl`, `githubLogin`. For organization-scoped
+(`ddo_`) tokens, `user` is `null` and `tokenType` identifies the token kind so
+the caller can fall back to `orgs[]`. Any of the inner string fields may be
+`null` if the backend has no value.
 
 #### `deno deploy orgs list --json`
 
