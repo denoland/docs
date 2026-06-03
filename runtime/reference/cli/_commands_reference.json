@@ -6600,15 +6600,6 @@
           "usage": "--set-version <VERSION>"
         },
         {
-          "name": "no-deno-shim",
-          "short": null,
-          "long": "no-deno-shim",
-          "required": false,
-          "help": "Don't automatically add @deno/shim-deno dependency",
-          "help_heading": null,
-          "usage": "--no-deno-shim"
-        },
-        {
           "name": "no-source-maps",
           "short": null,
           "long": "no-source-maps",
