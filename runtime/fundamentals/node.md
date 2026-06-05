@@ -429,19 +429,36 @@ resolution mode. The conditions satisfied by an import from a Deno ESM module
 are as follows:
 
 ```json
-["deno", "node", "import", "default"]
+["deno", "node", "import", "module-sync", "default"]
 ```
 
 This means that the first condition listed in a package export whose key equals
-any of these strings will be matched. You can expand this list using the
-`--conditions` CLI flag:
+any of these strings will be matched. For `require()` resolution, including
+`createRequire()`, the conditions are:
+
+```json
+["require", "node", "module-sync", "default"]
+```
+
+Deno also applies `module-sync` when analyzing CommonJS modules that re-export
+through `require()`.
+
+You can expand the import conditions list using the `--conditions` CLI flag:
 
 ```shell
 deno run --conditions development,react-server main.ts
 ```
 
 ```json
-["development", "react-server", "deno", "node", "import", "default"]
+[
+  "development",
+  "react-server",
+  "deno",
+  "node",
+  "import",
+  "module-sync",
+  "default"
+]
 ```
 
 ## Importing types
