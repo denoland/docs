@@ -127,6 +127,34 @@ from expanding the glob:
 deno run --watch --watch-exclude='*.js' main.ts
 ```
 
+### Hot module replacement
+
+`deno run` also supports the `--watch-hmr` flag, which hot-replaces changed
+modules in the running process instead of restarting it. This keeps your
+application's state across edits. If hot replacement fails, the process falls
+back to a full restart.
+
+```shell
+deno run --watch-hmr main.ts
+```
+
+#### Editors with atomic save
+
+Some editors use "atomic save" (also called safe write), where the editor writes
+your changes to a temporary file and then renames it over the original on each
+save. On Linux this replaces the file with a new one on disk, which can detach
+the file watcher used by `--watch-hmr` after the first change. The symptom is
+that hot replacement works once and then stops detecting further edits to that
+module.
+
+If you hit this, disable atomic save in your editor:
+
+- **Helix**: set `[editor] atomic-save = false` (it is enabled by default).
+- **Neovim/Vim**: set `:set backupcopy=yes`.
+
+Plain `--watch` is not affected, because each change triggers a full restart
+that re-establishes the watchers.
+
 ## Where to go next
 
 For deeper coverage of the topics this page only hints at:
