@@ -69,9 +69,9 @@ const kv = await Deno.openKv(
 );
 ```
 
-Replace `<Database ID>` with the ID of the database you want to connect to.
-Each database's ID is shown in the Databases table on the database instance
-page in the Deno Deploy console.
+Replace `<Database ID>` with the ID of the database you want to connect to. Each
+database's ID is shown in the Databases table on the database instance page in
+the Deno Deploy console.
 
 Authenticate the connection by setting either a personal or an organization
 access token as the `DENO_KV_ACCESS_TOKEN` environment variable:
@@ -80,8 +80,8 @@ access token as the `DENO_KV_ACCESS_TOKEN` environment variable:
 export DENO_KV_ACCESS_TOKEN=ddo_...
 ```
 
-Organization access tokens can be created from your organization's settings
-page in the Deno Deploy console.
+Organization access tokens can be created from your organization's settings page
+in the Deno Deploy console.
 
 ## Un-assigning a KV database
 
@@ -112,9 +112,9 @@ such as our
 ## Data storage
 
 By default, in local development data is kept in memory. You do not need to
-create or allocate a database before using the KV APIs locally, and your KV
-code remains consistent across environments. To develop against a managed Deno
-KV database from a local Deno program instead, see
+create or allocate a database before using the KV APIs locally, and your KV code
+remains consistent across environments. To develop against a managed Deno KV
+database from a local Deno program instead, see
 [Connect from outside Deno Deploy](#connect-from-outside-deno-deploy).
 
 ## Deleting a database instance
