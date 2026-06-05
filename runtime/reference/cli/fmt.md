@@ -116,6 +116,8 @@ deno fmt --ignore=dist/,build/
 | JSONC                | `.jsonc`                                               |                                                                                        |
 | CSS                  | `.css`                                                 |                                                                                        |
 | HTML                 | `.html`                                                |                                                                                        |
+| XML                  | `.xml`                                                 |                                                                                        |
+| SVG                  | `.svg`                                                 |                                                                                        |
 | [Nunjucks][Nunjucks] | `.njk`                                                 |                                                                                        |
 | [Vento][Vento]       | `.vto`                                                 |                                                                                        |
 | YAML                 | `.yml`, `.yaml`                                        |                                                                                        |
