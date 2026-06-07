@@ -44,64 +44,12 @@ export const sidebar = [
         href: "/runtime/fundamentals/testing/",
       },
       {
-        title: "Testing code in docs",
-        href: "/runtime/reference/documentation/",
-      },
-      {
-        title: "Debugging",
-        href: "/runtime/fundamentals/debugging/",
-      },
-      {
         title: "Linting and formatting",
         href: "/runtime/fundamentals/linting_and_formatting/",
       },
       {
-        title: "Continuous integration",
-        href: "/runtime/reference/continuous_integration/",
-      },
-      {
-        title: "Docker",
-        href: "/runtime/reference/docker/",
-      },
-      {
-        title: "Bundling",
-        href: "/runtime/reference/bundling/",
-      },
-      {
-        title: "Using JSX and React",
-        href: "/runtime/reference/jsx/",
-      },
-      {
-        title: "WebAssembly",
-        href: "/runtime/reference/wasm/",
-      },
-      {
-        title: "FFI",
-        href: "/runtime/fundamentals/ffi/",
-      },
-      {
-        title: "Cron",
-        href: "/runtime/fundamentals/cron/",
-      },
-      {
-        title: "OpenTelemetry",
-        href: "/runtime/fundamentals/open_telemetry/",
-      },
-      {
-        title: "Module customization hooks",
-        href: "/runtime/reference/module_hooks/",
-      },
-      {
-        title: "Lint plugins",
-        href: "/runtime/reference/lint_plugins/",
-      },
-      {
-        title: "Deno & VS Code",
-        href: "/runtime/reference/vscode/",
-      },
-      {
-        title: "Migration guide",
-        href: "/runtime/reference/migration_guide/",
+        title: "Debugging",
+        href: "/runtime/fundamentals/debugging/",
       },
     ],
   },
@@ -135,6 +83,63 @@ export const sidebar = [
       {
         title: "Stability and releases",
         href: "/runtime/fundamentals/stability_and_releases/",
+      },
+    ],
+  },
+  {
+    title: "Advanced",
+    items: [
+      {
+        title: "FFI",
+        href: "/runtime/fundamentals/ffi/",
+      },
+      {
+        title: "WebAssembly",
+        href: "/runtime/reference/wasm/",
+      },
+      {
+        title: "Cron",
+        href: "/runtime/fundamentals/cron/",
+      },
+      {
+        title: "OpenTelemetry",
+        href: "/runtime/fundamentals/open_telemetry/",
+      },
+      {
+        title: "Module customization hooks",
+        href: "/runtime/reference/module_hooks/",
+      },
+      {
+        title: "Lint plugins",
+        href: "/runtime/reference/lint_plugins/",
+      },
+      {
+        title: "Bundling",
+        href: "/runtime/reference/bundling/",
+      },
+      {
+        title: "Docker",
+        href: "/runtime/reference/docker/",
+      },
+      {
+        title: "Continuous integration",
+        href: "/runtime/reference/continuous_integration/",
+      },
+      {
+        title: "Using JSX and React",
+        href: "/runtime/reference/jsx/",
+      },
+      {
+        title: "Testing code in docs",
+        href: "/runtime/reference/documentation/",
+      },
+      {
+        title: "Deno & VS Code",
+        href: "/runtime/reference/vscode/",
+      },
+      {
+        title: "Migration guide",
+        href: "/runtime/reference/migration_guide/",
       },
     ],
   },
