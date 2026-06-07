@@ -32,6 +32,10 @@ export const sidebar = [
     title: "Guides",
     items: [
       {
+        title: "Dependency management",
+        href: "/runtime/fundamentals/dependency_management/",
+      },
+      {
         title: "Web development",
         href: "/runtime/fundamentals/web_dev/",
       },
@@ -69,7 +73,7 @@ export const sidebar = [
         href: "/runtime/fundamentals/security/",
       },
       {
-        title: "Modules and dependencies",
+        title: "Modules",
         href: "/runtime/fundamentals/modules/",
       },
       {
