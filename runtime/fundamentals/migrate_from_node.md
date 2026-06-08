@@ -9,10 +9,9 @@ oldUrl:
 ---
 
 Most Node.js projects run in Deno **with no changes at all**. Deno reads your
-`package.json`, installs and resolves the same npm dependencies, runs both
-CommonJS and ES modules, and exposes Node's built-in modules through `node:`
-specifiers — so in most cases you point Deno at your existing project and it
-just works.
+`package.json`, installs and resolves the same npm dependencies, and runs both
+CommonJS and ES modules — so in most cases you point Deno at your existing
+project and it just works.
 
 You can also adopt Deno incrementally: use it purely as a faster, drop-in
 package manager for an app you still run with Node, run your existing
