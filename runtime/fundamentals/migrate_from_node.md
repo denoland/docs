@@ -25,10 +25,6 @@ well-defined compatibility points rather than a real porting effort:
 - **Bare built-in imports need the `node:` prefix** — `import os from "node:os"`
   rather than `import os from "os"`. Modern Node code already uses the prefix,
   and Deno's error messages tell you exactly which import to update.
-- **A few Node globals must be imported explicitly** — for example `Buffer` is
-  imported from `node:buffer` (see
-  [Node.js global objects](/runtime/fundamentals/node/#nodejs-global-objects)).
-  The most common one, `process`, is available globally.
 - **CommonJS-only APIs** such as `require()` are available in `.cjs` files or
   via `createRequire` (see
   [CommonJS support](/runtime/fundamentals/node/#commonjs-support)).
