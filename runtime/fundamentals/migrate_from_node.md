@@ -19,15 +19,11 @@ deno run main.js
 deno task start
 ```
 
-If something doesn't run immediately, it's almost always one of a few
-well-defined compatibility points rather than a real porting effort:
-
-- **Bare built-in imports need the `node:` prefix** — `import os from "node:os"`
-  rather than `import os from "os"`. Modern Node code already uses the prefix,
-  and Deno's error messages tell you exactly which import to update.
-- **CommonJS-only APIs** such as `require()` are available in `.cjs` files or
-  via `createRequire` (see
-  [CommonJS support](/runtime/fundamentals/node/#commonjs-support)).
+The main thing to be aware of is CommonJS interop: it's well supported but
+doesn't cover every situation. `require()` is available in `.cjs` files or via
+`createRequire`, and you can mix CommonJS and ES modules — see
+[CommonJS support](/runtime/fundamentals/node/#commonjs-support) for the cases
+that need attention.
 
 For the complete picture of what's supported, see
 [Node and npm compatibility](/runtime/fundamentals/node/).
@@ -54,16 +50,6 @@ You can execute this script with Deno by running:
 ```sh
 deno task start
 ```
-
-## Optional improvements
-
-Deno ships a unified toolchain (configuration, linter, formatter, test runner)
-that can simplify your setup when migrating:
-
-- [Configuration](/runtime/fundamentals/configuration/)
-- [Linter](/runtime/reference/cli/lint/)
-- [Formatter](/runtime/reference/cli/fmt/)
-- [Test runner](/runtime/reference/cli/test/)
 
 ## Node to Deno Cheatsheet
 
