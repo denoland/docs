@@ -10,7 +10,7 @@ oldUrl:
 
 Most Node.js projects run in Deno **with no changes at all**. Deno reads your
 `package.json`, installs and resolves the same npm dependencies, and runs both
-CommonJS and ES modules — so in most cases you point Deno at your existing
+CommonJS and ES modules, so in most cases you point Deno at your existing
 project and it just works.
 
 You can also adopt Deno incrementally: use it purely as a faster, drop-in
@@ -21,7 +21,7 @@ pick up its built-in toolchain. This guide walks through each step.
 ## Use Deno as your package manager
 
 Deno is fully compatible with npm and `package.json`, so the easiest place to
-start is dependency management — without changing how you run your code at all.
+start is dependency management, without changing how you run your code at all.
 `deno install` reads your existing `package.json`, resolves the same npm
 packages, and writes a `node_modules` directory, just like `npm install`:
 
@@ -30,8 +30,8 @@ cd my-node-app
 deno install
 ```
 
-You can keep running the app with Node from here — using Deno only as a faster
-package manager — or manage dependencies with Deno's built-in commands:
+You can keep running the app with Node from here, using Deno only as a faster
+package manager, or manage dependencies with Deno's built-in commands:
 
 ```sh
 deno add    npm:express   # add a dependency
@@ -56,7 +56,7 @@ deno run main.js
 ```
 
 If your `package.json` defines scripts, run them with
-[`deno task`](/runtime/reference/cli/task/) — the equivalent of `npm run`:
+[`deno task`](/runtime/reference/cli/task/), the equivalent of `npm run`:
 
 ```json title="package.json"
 {
@@ -72,8 +72,8 @@ deno task start
 ```
 
 Most code runs unchanged. The main thing to understand is how Deno decides
-whether a file is CommonJS or an ES module, which follows your `package.json` —
-covered next.
+whether a file is CommonJS or an ES module, which follows your `package.json`.
+That is covered next.
 
 ## CommonJS and ES modules
 
@@ -81,7 +81,7 @@ Deno runs both ES modules and CommonJS, and decides how to treat a file using
 the same rules as Node.js:
 
 - A `.cjs` file is **always** CommonJS, and a `.mjs` file is **always** an ES
-  module — the extension is enough.
+  module. The extension is enough.
 - A `.js`, `.ts`, `.jsx`, or `.tsx` file is loaded as **CommonJS** when the
   nearest `package.json` sets `"type": "commonjs"`, and as an **ES module**
   otherwise. Deno walks up the directory tree to find that `package.json`, just
@@ -107,10 +107,10 @@ and edge cases.
 
 ## Node to Deno Cheatsheet
 
-In a Node project, many of these are separate packages you install and configure
-— eslint, prettier, jest, ts-node, nodemon, nyc, tsc. In Deno they're the same
-binary, with no extra dependencies and no config files to maintain. You can keep
-your existing `package.json`, or move configuration into `deno.json`.
+In a Node project, many of these are separate packages you install and
+configure: eslint, prettier, jest, ts-node, nodemon, nyc, tsc. In Deno they're
+the same binary, with no extra dependencies and no config files to maintain. You
+can keep your existing `package.json`, or move configuration into `deno.json`.
 
 ### Run and watch
 
@@ -130,7 +130,7 @@ your existing `package.json`, or move configuration into `deno.json`.
 | `npm run <script>`      | `deno task <script>`    |
 | `npm explain <pkg>`     | `deno why <pkg>`        |
 
-### Quality and testing — built in, no install or config
+### Quality and testing (built in, no install or config)
 
 | Node.js                          | Deno            |
 | -------------------------------- | --------------- |
@@ -148,7 +148,7 @@ your existing `package.json`, or move configuration into `deno.json`.
 | `typedoc`      | `deno doc`     |
 | `nexe` / `pkg` | `deno compile` |
 
-¹ TypeScript runs directly — there's no build step. `deno check` type-checks
+¹ TypeScript runs directly: there's no build step. `deno check` type-checks
 without emitting, and the compiler is built into the `deno` binary.
 
 ### Toolchain
