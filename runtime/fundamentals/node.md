@@ -10,9 +10,6 @@ oldUrl:
   - /runtime/manual/using_deno_with_other_technologies/node/cdns/
   - /runtime/manual/node/node_specifiers
   - /runtime/manual/node/package_json
-  - /runtime/manual/node/migrate/
-  - /runtime/manual/references/cheatsheet/
-  - /runtime/manual/node/cheatsheet/
   - /runtime/manual/node/faqs
   - /runtime/manual/node/npm_specifiers
   - /runtime/manual/node/private_registries
@@ -749,51 +746,11 @@ Like all native FFI, pass `--allow-ffi` to grant explicit permission. Review
 
 ## Migrating from Node to Deno
 
-Running your Node.js project with Deno is a straightforward process. In most
-cases you can expect little to no changes to be required, if your project is
-written using ES modules.
-
-Main points to be aware of:
-
-1. Use the `node:` specifier for built-in modules (see Using Node's built-in
-   modules above).
-2. Some Node globals like `Buffer` must be imported from `node:buffer` (see
-   Node.js global objects).
-3. `require()` is available in `.cjs` files or via `createRequire` (see CommonJS
-   support).
-
-### Running scripts
-
-Deno supports running npm scripts natively with the
-[`deno task`](/runtime/reference/cli/task_runner/) subcommand (If you're
-migrating from Node.js, this is similar to the `npm run script` command).
-Consider the following Node.js project with a script called `start` inside its
-`package.json`:
-
-```json title="package.json"
-{
-  "name": "my-project",
-  "scripts": {
-    "start": "eslint"
-  }
-}
-```
-
-You can execute this script with Deno by running:
-
-```sh
-deno task start
-```
-
-### Optional improvements
-
-Deno ships a unified toolchain (configuration, linter, formatter, test runner)
-that can simplify your setup when migrating:
-
-- Configuration: /runtime/fundamentals/configuration/
-- Linter: /runtime/reference/cli/linter/
-- Formatter: /runtime/reference/cli/formatter/
-- Test runner: /runtime/reference/cli/test/
+Running a Node.js project with Deno usually requires little to no change. See
+the
+[Migrating from Node.js to Deno guide](/runtime/fundamentals/migrate_from_node/)
+for the details, optional toolchain improvements, and a Node-to-Deno command
+cheatsheet.
 
 ## Private registries
 
@@ -921,30 +878,3 @@ Starting in Deno 2.8, those `file:` and `link:` entries are silently skipped
 while resolving npm metadata, so packages that carry a stray local-path
 dependency install cleanly instead of failing with an "Invalid version
 requirement" error.
-
-## Node to Deno Cheatsheet
-
-| Node.js                                | Deno                          |
-| -------------------------------------- | ----------------------------- |
-| `node file.js`                         | `deno file.js`                |
-| `ts-node file.ts`                      | `deno file.ts`                |
-| `nodemon`                              | `deno run --watch`            |
-| `node -e`                              | `deno eval`                   |
-| `npm i` / `npm install`                | `deno install`                |
-| `npm install -g`                       | `deno install -g`             |
-| `npm run`                              | `deno task`                   |
-| `eslint`                               | `deno lint`                   |
-| `prettier`                             | `deno fmt`                    |
-| `package.json`                         | `deno.json` or `package.json` |
-| `tsc`                                  | `deno check` ¹                |
-| `typedoc`                              | `deno doc`                    |
-| `jest` / `ava` / `mocha` / `tap` / etc | `deno test`                   |
-| `nexe` / `pkg`                         | `deno compile`                |
-| `npm explain`                          | `deno info`                   |
-| `nvm` / `n` / `fnm`                    | `deno upgrade`                |
-| `tsserver`                             | `deno lsp`                    |
-| `nyc` / `c8` / `istanbul`              | `deno coverage`               |
-| benchmarks                             | `deno bench`                  |
-
-¹ Type checking happens automatically, TypeScript compiler is built into the
-`deno` binary.
