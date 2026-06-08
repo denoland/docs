@@ -55,6 +55,10 @@ export const sidebar = [
         title: "Debugging",
         href: "/runtime/fundamentals/debugging/",
       },
+      {
+        title: "Migrating from Node",
+        href: "/runtime/fundamentals/migrate_from_node/",
+      },
     ],
   },
   {
@@ -67,10 +71,6 @@ export const sidebar = [
       {
         title: "Node",
         href: "/runtime/fundamentals/node/",
-      },
-      {
-        title: "Migrating from Node",
-        href: "/runtime/fundamentals/migrate_from_node/",
       },
       {
         title: "Security",
@@ -146,7 +146,7 @@ export const sidebar = [
         href: "/runtime/reference/vscode/",
       },
       {
-        title: "Migration guide",
+        title: "Deno 1.x to 2.x migration",
         href: "/runtime/reference/migration_guide/",
       },
     ],
