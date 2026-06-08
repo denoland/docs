@@ -53,27 +53,53 @@ deno task start
 
 ## Node to Deno Cheatsheet
 
-| Node.js                                | Deno                          |
-| -------------------------------------- | ----------------------------- |
-| `node file.js`                         | `deno file.js`                |
-| `ts-node file.ts`                      | `deno file.ts`                |
-| `nodemon`                              | `deno run --watch`            |
-| `node -e`                              | `deno eval`                   |
-| `npm i` / `npm install`                | `deno install`                |
-| `npm install -g`                       | `deno install -g`             |
-| `npm run`                              | `deno task`                   |
-| `eslint`                               | `deno lint`                   |
-| `prettier`                             | `deno fmt`                    |
-| `package.json`                         | `deno.json` or `package.json` |
-| `tsc`                                  | `deno check` ¹                |
-| `typedoc`                              | `deno doc`                    |
-| `jest` / `ava` / `mocha` / `tap` / etc | `deno test`                   |
-| `nexe` / `pkg`                         | `deno compile`                |
-| `npm explain`                          | `deno info`                   |
-| `nvm` / `n` / `fnm`                    | `deno upgrade`                |
-| `tsserver`                             | `deno lsp`                    |
-| `nyc` / `c8` / `istanbul`              | `deno coverage`               |
-| benchmarks                             | `deno bench`                  |
+In a Node project, many of these are separate packages you install and configure
+— eslint, prettier, jest, ts-node, nodemon, nyc, tsc. In Deno they're the same
+binary, with no extra dependencies and no config files to maintain. You can keep
+your existing `package.json`, or move configuration into `deno.json`.
 
-¹ Type checking happens automatically, TypeScript compiler is built into the
-`deno` binary.
+### Run and watch
+
+| Node.js           | Deno               |
+| ----------------- | ------------------ |
+| `node file.js`    | `deno file.js`     |
+| `ts-node file.ts` | `deno file.ts`     |
+| `node -e "…"`     | `deno eval "…"`    |
+| `nodemon`         | `deno run --watch` |
+
+### Dependencies and scripts
+
+| Node.js                 | Deno                    |
+| ----------------------- | ----------------------- |
+| `npm install` / `npm i` | `deno install`          |
+| `npm install -g <pkg>`  | `deno install -g <pkg>` |
+| `npm run <script>`      | `deno task <script>`    |
+| `npm explain <pkg>`     | `deno why <pkg>`        |
+
+### Quality and testing — built in, no install or config
+
+| Node.js                          | Deno            |
+| -------------------------------- | --------------- |
+| `eslint`                         | `deno lint`     |
+| `prettier`                       | `deno fmt`      |
+| `jest` / `mocha` / `ava` / `tap` | `deno test`     |
+| `nyc` / `c8` / `istanbul`        | `deno coverage` |
+| benchmark libraries              | `deno bench`    |
+
+### TypeScript, docs, and builds
+
+| Node.js        | Deno           |
+| -------------- | -------------- |
+| `tsc`          | `deno check` ¹ |
+| `typedoc`      | `deno doc`     |
+| `nexe` / `pkg` | `deno compile` |
+
+¹ TypeScript runs directly — there's no build step. `deno check` type-checks
+without emitting, and the compiler is built into the `deno` binary.
+
+### Toolchain
+
+| Node.js             | Deno           |
+| ------------------- | -------------- |
+| `tsserver`          | `deno lsp`     |
+| `nvm` / `n` / `fnm` | `deno upgrade` |
