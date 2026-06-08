@@ -112,6 +112,8 @@ configure: eslint, prettier, jest, ts-node, nodemon, nyc, tsc. In Deno they're
 the same binary, with no extra dependencies and no config files to maintain. You
 can keep your existing `package.json`, or move configuration into `deno.json`.
 
+<div class="cheatsheet">
+
 ### Run and watch
 
 | Node.js           | Deno               |
@@ -157,3 +159,5 @@ without emitting, and the compiler is built into the `deno` binary.
 | ------------------- | -------------- |
 | `tsserver`          | `deno lsp`     |
 | `nvm` / `n` / `fnm` | `deno upgrade` |
+
+</div>

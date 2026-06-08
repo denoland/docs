@@ -486,6 +486,9 @@
         background-color: transparent;
       }
     }
+    .cheatsheet table {
+      width: 100%;
+    }
     img {
       box-sizing: content-box;
       background-color: var(--bgColor-default, var(--color-canvas-default));
