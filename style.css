@@ -489,6 +489,7 @@
     .cheatsheet table {
       width: 100%;
       display: table;
+      table-layout: fixed;
     }
     img {
       box-sizing: content-box;
