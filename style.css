@@ -488,6 +488,7 @@
     }
     .cheatsheet table {
       width: 100%;
+      display: table;
     }
     img {
       box-sizing: content-box;
