@@ -1,55 +1,110 @@
 ---
 last_modified: 2026-06-08
 title: "Migrating from Node.js to Deno"
-description: "How to migrate an existing Node.js project to Deno: most projects run unchanged. Covers the rare compatibility points, running npm scripts with deno task, adopting Deno's toolchain, and a Node-to-Deno command cheatsheet."
+description: "How to move a Node.js project to Deno: use Deno as a drop-in package manager, run your existing project and package.json scripts, understand how CommonJS and ES modules are resolved, and map your Node commands to Deno."
 oldUrl:
   - /runtime/manual/node/migrate/
   - /runtime/manual/references/cheatsheet/
   - /runtime/manual/node/cheatsheet/
 ---
 
-Most Node.js projects run in Deno **with no changes at all**. Point Deno at your
-entry file or your `package.json` scripts and it just works: Deno reads
-`package.json`, resolves your npm and `node:` dependencies, and runs both ES
-modules and CommonJS out of the box.
+Most Node.js projects run in Deno **with no changes at all**. Deno reads your
+`package.json`, installs and resolves the same npm dependencies, runs both
+CommonJS and ES modules, and exposes Node's built-in modules through `node:`
+specifiers — so in most cases you point Deno at your existing project and it
+just works.
+
+You can also adopt Deno incrementally: use it purely as a faster, drop-in
+package manager for an app you still run with Node, run your existing
+`package.json` scripts with `deno task`, or switch to Deno as the runtime and
+pick up its built-in toolchain. This guide walks through each step.
+
+## Use Deno as your package manager
+
+Deno is fully compatible with npm and `package.json`, so the easiest place to
+start is dependency management — without changing how you run your code at all.
+`deno install` reads your existing `package.json`, resolves the same npm
+packages, and writes a `node_modules` directory, just like `npm install`:
 
 ```sh
-# An existing Node project — no migration step required
-deno run main.js
-deno task start
+cd my-node-app
+deno install
 ```
 
-The main thing to be aware of is CommonJS interop: it's well supported but
-doesn't cover every situation. `require()` is available in `.cjs` files or via
-`createRequire`, and you can mix CommonJS and ES modules — see
-[CommonJS support](/runtime/fundamentals/node/#commonjs-support) for the cases
-that need attention.
+You can keep running the app with Node from here — using Deno only as a faster
+package manager — or manage dependencies with Deno's built-in commands:
 
-For the complete picture of what's supported, see
-[Node and npm compatibility](/runtime/fundamentals/node/).
+```sh
+deno add    npm:express   # add a dependency
+deno remove express       # remove one
+deno outdated             # see what has newer versions
+```
 
-## Running scripts
+Deno understands dependencies declared in both `package.json` and `deno.json`,
+and individual npm packages can also be imported inline with `npm:` specifiers.
+See [Modules and dependencies](/runtime/fundamentals/modules/) for the full
+picture.
 
-Deno supports running npm scripts natively with the
-[`deno task`](/runtime/reference/cli/task/) subcommand (If you're migrating from
-Node.js, this is similar to the `npm run script` command). Consider the
-following Node.js project with a script called `start` inside its
-`package.json`:
+## Run your project with Deno
+
+To run an existing Node project with Deno, install its dependencies and run the
+entrypoint:
+
+```sh
+cd my-node-app
+deno install
+deno run main.js
+```
+
+If your `package.json` defines scripts, run them with
+[`deno task`](/runtime/reference/cli/task/) — the equivalent of `npm run`:
 
 ```json title="package.json"
 {
   "name": "my-project",
   "scripts": {
-    "start": "eslint"
+    "start": "node server.js"
   }
 }
 ```
 
-You can execute this script with Deno by running:
-
 ```sh
 deno task start
 ```
+
+Most code runs unchanged. The main thing to understand is how Deno decides
+whether a file is CommonJS or an ES module, which follows your `package.json` —
+covered next.
+
+## CommonJS and ES modules
+
+Deno runs both ES modules and CommonJS, and decides how to treat a file using
+the same rules as Node.js:
+
+- A `.cjs` file is **always** CommonJS, and a `.mjs` file is **always** an ES
+  module — the extension is enough.
+- A `.js`, `.ts`, `.jsx`, or `.tsx` file is loaded as **CommonJS** when the
+  nearest `package.json` sets `"type": "commonjs"`, and as an **ES module**
+  otherwise. Deno walks up the directory tree to find that `package.json`, just
+  like Node.
+
+```json title="package.json"
+{
+  "type": "commonjs"
+}
+```
+
+So an existing CommonJS project keeps working: with `"type": "commonjs"` in
+`package.json`, your `require()`-based `.js` files run under both Node and Deno.
+CommonJS code needs its dependencies present in `node_modules` (set
+`"nodeModulesDir": "auto"` in `deno.json`) and the usual
+[permission flags](/runtime/fundamentals/security/).
+
+You can also mix the two module systems: `require()` is available in `.cjs`
+files or via `createRequire`, Deno's `require()` can load synchronous ES
+modules, and you can `import` CommonJS files from ES modules. See
+[CommonJS support](/runtime/fundamentals/node/#commonjs-support) for the details
+and edge cases.
 
 ## Node to Deno Cheatsheet
 
