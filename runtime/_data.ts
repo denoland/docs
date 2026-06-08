@@ -69,6 +69,10 @@ export const sidebar = [
         href: "/runtime/fundamentals/node/",
       },
       {
+        title: "Migrating from Node",
+        href: "/runtime/fundamentals/migrate_from_node/",
+      },
+      {
         title: "Security",
         href: "/runtime/fundamentals/security/",
       },
