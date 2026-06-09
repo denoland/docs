@@ -138,10 +138,6 @@ export const sidebar = [
         href: "/runtime/reference/jsx/",
       },
       {
-        title: "Testing code in docs",
-        href: "/runtime/reference/documentation/",
-      },
-      {
         title: "Deno & VS Code",
         href: "/runtime/reference/vscode/",
       },
