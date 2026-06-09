@@ -14,7 +14,7 @@ exposure.
 When the binary starts:
 
 1. The runtime picks an unused local port and sets the `DENO_SERVE_ADDRESS`
-   environment variable to `http://127.0.0.1:<port>`.
+   environment variable to `tcp:127.0.0.1:<port>`.
 2. Your code calls `Deno.serve(...)`. The serve API reads `DENO_SERVE_ADDRESS`
    (set by Deno itself in this mode, not by the user) and binds to that port —
    ignoring whatever port you pass.
@@ -97,10 +97,14 @@ inside `deno desktop`. This is intentional — the webview needs to navigate to
 the same port the runtime is listening on, and the runtime is the source of
 truth for that value.
 
-If you need to know the URL inside your handler:
+If you need to know where the server is bound, read `DENO_SERVE_ADDRESS`. It is
+in `tcp:127.0.0.1:<port>` form, so split off the port when you need an `http://`
+URL:
 
 ```ts
-console.log("Serving on:", Deno.env.get("DENO_SERVE_ADDRESS"));
+const addr = Deno.env.get("DENO_SERVE_ADDRESS"); // "tcp:127.0.0.1:54321"
+const port = addr.split(":").pop();
+console.log("Serving on:", `http://127.0.0.1:${port}`);
 ```
 
 ## Serving multiple windows
@@ -110,8 +114,7 @@ from the same local HTTP server by default. Use different paths per window to
 differentiate:
 
 ```ts
+const port = Deno.env.get("DENO_SERVE_ADDRESS").split(":").pop();
 const settings = new Deno.BrowserWindow();
-settings.navigate("http://127.0.0.1:" + port + "/settings");
+settings.navigate(`http://127.0.0.1:${port}/settings`);
 ```
-
-The `port` is available via `Deno.env.get("DENO_SERVE_ADDRESS")`.

@@ -7,25 +7,38 @@ description: "Build native application menu bars and right-click context menus, 
 (macOS menu bar, Windows / Linux window menu) and **context menus** (right-click
 popups).
 
-Both use the same `MenuItem` shape.
+Both use the same [`Deno.MenuItem`](/api/deno/~/Deno.MenuItem) type.
 
 ## `MenuItem` shape
 
+`MenuItem` is a tagged union — each entry is one of four shapes:
+
 ```ts
-interface MenuItem {
-  id?: string; // returned in the click event
-  label: string;
-  type?: "normal" | "separator" | "checkbox" | "submenu";
-  enabled?: boolean;
-  checked?: boolean; // for type: "checkbox"
-  accelerator?: string; // e.g. "CmdOrCtrl+S", "F11"
-  submenu?: MenuItem[]; // for type: "submenu"
-}
+type MenuItem =
+  // A clickable item.
+  | {
+    item: {
+      label: string;
+      id?: string; // returned in the click event
+      accelerator?: string; // e.g. "CmdOrCtrl+S", "F11"
+      enabled: boolean;
+    };
+  }
+  // A nested submenu.
+  | {
+    submenu: {
+      label: string;
+      items: MenuItem[];
+    };
+  }
+  // A divider line.
+  | "separator"
+  // A standard OS role (see below).
+  | { role: { role: string } };
 ```
 
-Set `type: "separator"` for a divider; the `label` is ignored.
-
-Set `type: "submenu"` and `submenu: [...]` for nested menus.
+A top-level menu is an array of these. Items nest by putting more `MenuItem`s
+inside a `submenu`'s `items`.
 
 ## Application menu
 
@@ -35,28 +48,50 @@ for a window:
 ```ts
 win.setApplicationMenu([
   {
-    label: "File",
-    type: "submenu",
-    submenu: [
-      { id: "new", label: "New", accelerator: "CmdOrCtrl+N" },
-      { id: "open", label: "Open…", accelerator: "CmdOrCtrl+O" },
-      { type: "separator", label: "" },
-      { id: "save", label: "Save", accelerator: "CmdOrCtrl+S" },
-      { id: "quit", label: "Quit", accelerator: "CmdOrCtrl+Q" },
-    ],
+    submenu: {
+      label: "File",
+      items: [
+        {
+          item: {
+            label: "New",
+            id: "new",
+            accelerator: "CmdOrCtrl+N",
+            enabled: true,
+          },
+        },
+        {
+          item: {
+            label: "Open…",
+            id: "open",
+            accelerator: "CmdOrCtrl+O",
+            enabled: true,
+          },
+        },
+        "separator",
+        {
+          item: {
+            label: "Save",
+            id: "save",
+            accelerator: "CmdOrCtrl+S",
+            enabled: true,
+          },
+        },
+        { role: { role: "quit" } },
+      ],
+    },
   },
   {
-    label: "View",
-    type: "submenu",
-    submenu: [
-      {
-        id: "fullscreen",
-        label: "Full Screen",
-        accelerator: "F11",
-        type: "checkbox",
-        checked: false,
-      },
-    ],
+    submenu: {
+      label: "Edit",
+      items: [
+        { role: { role: "undo" } },
+        { role: { role: "redo" } },
+        "separator",
+        { role: { role: "cut" } },
+        { role: { role: "copy" } },
+        { role: { role: "paste" } },
+      ],
+    },
   },
 ]);
 ```
@@ -75,15 +110,12 @@ win.addEventListener("menuclick", (e) => {
     case "save":
       saveDocument();
       break;
-    case "quit":
-      Deno.exit(0);
-      break;
   }
 });
 ```
 
-`e.detail.id` is the `id` field you set on the item. Items without an `id` do
-not produce events.
+`e.detail.id` is the `id` you set on an `item`. Items without an `id`, and
+`role` items (which the OS handles directly), do not produce `menuclick` events.
 
 ### Accelerators
 
@@ -106,49 +138,61 @@ named keys (`Enter`, `Esc`, `Up`, `Down`, `Left`, `Right`, `Tab`, `Space`,
 Use `CmdOrCtrl` rather than `Cmd` or `Ctrl` directly so you do not need to
 branch on platform for the most common shortcuts.
 
+### Roles
+
+A `{ role: { role } }` item maps to a standard OS menu command — the platform
+provides the label, accelerator, and behavior. Use roles for the conventional
+commands so they behave natively (and so macOS wires up the standard Edit-menu
+keyboard shortcuts):
+
+```ts
+const quit: Deno.MenuItem = { role: { role: "quit" } };
+const copy: Deno.MenuItem = { role: { role: "copy" } };
+const paste: Deno.MenuItem = { role: { role: "paste" } };
+```
+
+Common roles include `quit`, `undo`, `redo`, `cut`, `copy`, `paste`,
+`selectAll`, `minimize`, and `close`. A role item needs no `id` and never fires
+a `menuclick` event — the OS handles it directly.
+
 ### macOS menu bar peculiarities
 
-On macOS, the **first** top-level menu item is the application menu (the one
-with your app's name). If you do not provide one, it is generated automatically
-with sensible defaults: About, Hide, Show All, Quit.
+On macOS, the **first** top-level submenu is the application menu (the one with
+your app's name) — its label is replaced with the app name. Put the standard app
+roles (such as `quit`) there. If you do not provide one, a default is generated.
 
-The "Edit" menu's standard items (Cut, Copy, Paste, Select All, Undo, Redo) are
-wired automatically when you include an item with the matching `role`. (Roles
-are not yet exposed in the API; users get default Cut / Copy / Paste behavior in
-editable webview content for free, but native menu items pointing at them
-require manual `executeJs` for now.)
+The Edit menu's standard items (Cut, Copy, Paste, Select All, Undo, Redo) work
+natively when you include them as `role` items.
 
 ## Context menus
 
-Show a context menu on right-click:
+Show a context menu at a screen position with `showContextMenu(x, y, menu)`:
 
 ```ts
-win.addEventListener("contextmenu", (e) => {
-  e.preventDefault();
-  win.showContextMenu([
-    { id: "copy", label: "Copy" },
-    { id: "paste", label: "Paste" },
-    { type: "separator", label: "" },
-    { id: "props", label: "Properties…" },
-  ]);
+const contextMenu: Deno.MenuItem[] = [
+  { item: { label: "Copy", id: "copy", enabled: true } },
+  { item: { label: "Paste", id: "paste", enabled: true } },
+  "separator",
+  { item: { label: "Properties…", id: "props", enabled: true } },
+];
+
+// Trigger from a right-click. The webview may not forward the browser
+// `contextmenu` event, so handle the secondary mouse button on the window.
+win.addEventListener("mousedown", (e) => {
+  if (e.button === 2) {
+    win.showContextMenu(e.clientX, e.clientY, contextMenu);
+  }
 });
 
-win.addEventListener("menuclick", (e) => {
+win.addEventListener("contextmenuclick", (e) => {
   if (e.detail.id === "copy") { /* ... */ }
   if (e.detail.id === "paste") { /* ... */ }
 });
 ```
 
-`showContextMenu` opens at the current pointer position. To open at a specific
-point, pass coordinates:
-
-```ts
-win.showContextMenu(items, { x: 100, y: 200 });
-```
-
-The same `menuclick` event handles both application and context menu clicks. If
-you need to distinguish them, namespace the IDs (e.g. `"file:save"` vs
-`"ctx:copy"`) or set state before opening the context menu.
+Context-menu clicks arrive as `contextmenuclick` events, while application-menu
+clicks arrive as `menuclick` — so you don't need to namespace ids to tell them
+apart.
 
 ## Dynamic menus
 
@@ -160,16 +204,19 @@ rebuild the array and call `setApplicationMenu` when state changes:
 function rebuildEditMenu(canUndo: boolean) {
   win.setApplicationMenu([
     {
-      label: "Edit",
-      type: "submenu",
-      submenu: [
-        {
-          id: "undo",
-          label: "Undo",
-          accelerator: "CmdOrCtrl+Z",
-          enabled: canUndo,
-        },
-      ],
+      submenu: {
+        label: "Edit",
+        items: [
+          {
+            item: {
+              label: "Undo",
+              id: "undo",
+              accelerator: "CmdOrCtrl+Z",
+              enabled: canUndo,
+            },
+          },
+        ],
+      },
     },
   ]);
 }
@@ -180,18 +227,13 @@ calling on every change.
 
 ## Disabled and hidden items
 
-```ts
-{ id: "save", label: "Save", enabled: false }
-```
-
-There is no `visible: false` flag. To hide an item, exclude it from the array.
-
-## Checkbox items
+Set `enabled: false` to gray out an item:
 
 ```ts
-{ id: "fullscreen", type: "checkbox", label: "Full Screen", checked: true }
+const save: Deno.MenuItem = {
+  item: { label: "Save", id: "save", enabled: false },
+};
 ```
 
-The check state is **not** toggled automatically when the user clicks. You must
-update `checked` and call `setApplicationMenu` again, or manage your own state
-and rebuild on the next click.
+There is no `visible` flag. To hide an item, exclude it from the array and call
+`setApplicationMenu` again.

@@ -60,36 +60,70 @@ Or pass a URL string for a single one-shot check on startup:
 Deno.autoUpdate("https://releases.example.com/my-app");
 ```
 
-| Option          | Type                        | Notes                                                           |
-| --------------- | --------------------------- | --------------------------------------------------------------- |
-| `url`           | `string`                    | Required if no `desktop.release.baseUrl` is set in `deno.json`. |
-| `interval`      | `number` (milliseconds)     | Poll interval. If omitted, only a single check is performed.    |
-| `onUpdateReady` | `(version: string) => void` | Called once a patch is applied and staged for next launch.      |
-| `onRollback`    | `(reason: string) => void`  | Called shortly after this call if the previous launch failed.   |
+| Option          | Type                        | Notes                                                                                                         |
+| --------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `url`           | `string`                    | Required if no `desktop.release.baseUrl` is set in `deno.json`.                                               |
+| `interval`      | `number` (milliseconds)     | Poll interval. If omitted, only a single check is performed.                                                  |
+| `onUpdateReady` | `(version: string) => void` | Called once a patch is applied and staged for next launch.                                                    |
+| `onRollback`    | `(reason: string) => void`  | Called shortly after this call if the previous launch failed.                                                 |
+| `publicKey`     | `string`                    | Base64 Ed25519 public key. When set, the manifest must be signed (see [Signed manifests](#signed-manifests)). |
 
 ## Manifest format
 
-The runtime fetches `<url>/latest.json` and parses it as JSON:
+The runtime fetches `<url>/latest.json` and parses it as JSON. Each patch entry
+is an object carrying the patch filename and its **SHA-256 hash**:
 
 ```json
 {
   "version": "1.5.0",
   "patches": {
-    "1.4.0": "patch-1.4.0-to-1.5.0.bin",
-    "1.4.1": "patch-1.4.1-to-1.5.0.bin",
-    "1.3.9": "patch-1.3.9-to-1.5.0.bin"
+    "1.4.0": { "name": "patch-1.4.0-to-1.5.0.bin", "sha256": "<64-hex-chars>" },
+    "1.4.1": { "name": "patch-1.4.1-to-1.5.0.bin", "sha256": "<64-hex-chars>" },
+    "1.3.9": { "name": "patch-1.3.9-to-1.5.0.bin", "sha256": "<64-hex-chars>" }
   }
 }
 ```
 
-| Field     | Meaning                                                                                               |
-| --------- | ----------------------------------------------------------------------------------------------------- |
-| `version` | The latest available version. Compared with [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion). |
-| `patches` | Map of from-version → patch filename relative to the manifest's URL.                                  |
+| Field     | Meaning                                                                                                                                                          |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `version` | The latest available version. Compared with [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion).                                                            |
+| `patches` | Map of from-version → `{ name, sha256 }`. `name` is the patch filename relative to the manifest's URL; `sha256` is the lowercase hex SHA-256 of the patch bytes. |
+
+The `sha256` is **required** — the runtime refuses to apply a patch whose bytes
+don't hash to the declared value, so a tampered or truncated download can never
+be applied.
 
 Old versions you no longer want to support can be omitted from `patches`. Users
 on those versions log a "no patch available for X" message and stay on their
 current version.
+
+The update URL **must** be `https://` — the runtime refuses to poll a plaintext
+endpoint.
+
+### Signed manifests
+
+For tamper protection beyond TLS, sign the manifest with an Ed25519 key and pass
+the public key to [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate). When a
+`publicKey` is configured, the manifest must be an envelope:
+
+```json
+{
+  "signed": "{\"version\":\"1.5.0\",\"patches\":{ … }}",
+  "signature": "<base64 Ed25519 signature over the `signed` string>"
+}
+```
+
+The runtime verifies `signature` over the exact bytes of the `signed` string
+using your `publicKey`, then parses `signed` as the trusted manifest. To avoid
+depending on a canonical-JSON implementation, the real manifest is embedded
+verbatim as the `signed` string and only its contents are trusted.
+
+```ts
+Deno.autoUpdate({
+  url: "https://releases.example.com/my-app",
+  publicKey: "<base64-encoded 32-byte Ed25519 public key>",
+});
+```
 
 ## Update flow
 
@@ -97,13 +131,16 @@ current version.
    silently returns and waits for the next interval.
 2. **Compare versions.** If `manifest.version === Deno.desktopVersion`, nothing
    to do.
-3. **Look up a patch.** `manifest.patches[Deno.desktopVersion]` → patch
-   filename.
-4. **Download the patch.** `GET <url>/<filename>`. The whole patch is buffered
-   into memory; for typical bsdiff outputs (a few MB) this is fine.
-5. **Apply with `bspatch`.** The runtime applies the binary diff to the current
-   executable / dylib using the [`qbsdiff`](https://crates.io/crates/qbsdiff)
-   crate.
+3. **Look up a patch.** `manifest.patches[Deno.desktopVersion]` →
+   `{ name,
+   sha256 }`.
+4. **Download the patch.** `GET <url>/<name>`. The whole patch is buffered into
+   memory; for typical bsdiff outputs (a few MB) this is fine.
+5. **Verify and apply.** The runtime checks the downloaded bytes against the
+   manifest's `sha256` and refuses to continue on a mismatch, then applies the
+   binary diff to the current executable / dylib using the
+   [`qbsdiff`](https://crates.io/crates/qbsdiff) crate. The patched bytes are
+   sanity-checked to look like a native binary before staging.
 6. **Stage the result.** Write the patched binary as `<binary>.update` next to
    the original. Do not overwrite the running binary in place.
 7. **Fire `onUpdateReady`.**
@@ -143,10 +180,11 @@ works; the simplest is the `bsdiff` CLI:
 
 ```sh
 bsdiff old-binary new-binary patch-1.4.0-to-1.5.0.bin
+shasum -a 256 patch-1.4.0-to-1.5.0.bin # the sha256 for the manifest entry
 ```
 
-Then upload `patch-1.4.0-to-1.5.0.bin` and the new `latest.json` to your release
-server.
+Then add the patch's `name` and `sha256` to `latest.json` and upload both the
+patch and the manifest to your release server.
 
 For shipping multiple architectures (macOS arm64, x86_64; Windows x86_64; Linux
 arm64, x86_64), generate patches per-architecture. Either serve the right
@@ -155,7 +193,12 @@ keys and pick on the client:
 
 ```jsonc
 // release/macos-arm64/latest.json
-{ "version": "1.5.0", "patches": { "1.4.0": "patch-1.4.0-to-1.5.0.bin" } }
+{
+  "version": "1.5.0",
+  "patches": {
+    "1.4.0": { "name": "patch-1.4.0-to-1.5.0.bin", "sha256": "<64-hex-chars>" }
+  }
+}
 ```
 
 ```ts
@@ -188,11 +231,12 @@ fits your code better.
 
 ## Best practices
 
-- **Sign your manifests.** The runtime does not currently verify a signature on
-  `latest.json` — anyone able to MITM the connection (or serve from your URL)
-  could push an arbitrary patch. Use HTTPS with certificate pinning at the
-  network level, host the manifest on a domain you control, and consider adding
-  a signature field once the runtime supports verification.
+- **Sign your manifests.** TLS plus the required per-patch `sha256` already stop
+  a tampered patch from being applied, but anyone able to serve from your URL
+  could still push a validly-hashed malicious patch. For defense in depth, sign
+  the manifest with an Ed25519 key and configure `publicKey` (see
+  [Signed manifests](#signed-manifests)). Keep the private key off the release
+  host.
 - **Test patches against a real install.** A patch that applies cleanly but
   produces a non-bootable binary triggers rollback, but only after a failed
   launch — your users see a brief startup failure once. Run the patched binary

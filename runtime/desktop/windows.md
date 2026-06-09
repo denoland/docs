@@ -4,26 +4,51 @@ description: "Create and manage native windows with Deno.BrowserWindow — lifec
 ---
 
 The [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) class controls native
-windows. The first window opens automatically when your binary starts; create
-more by constructing `new Deno.BrowserWindow()`. All windows share the same Deno
-runtime — there is one tokio runtime per process, regardless of how many windows
-are open.
+windows. A window opens automatically when your binary starts and is navigated
+to your local [HTTP server](/runtime/desktop/serving/). The **first**
+`new Deno.BrowserWindow()` you construct adopts that initial window; every
+construction after that opens a new one. All windows share the same Deno runtime
+— there is one tokio runtime per process, regardless of how many windows are
+open.
 
 ## Creating windows
 
 ```ts
-const main = Deno.BrowserWindow.main; // the implicit main window
+// The first construction adopts the implicit startup window.
+const win = new Deno.BrowserWindow({ title: "My App" });
 
-const settings = new Deno.BrowserWindow();
-settings.setTitle("Settings");
-settings.setSize(420, 320);
-settings.navigate(
-  "http://127.0.0.1:" + Deno.env.get("DENO_SERVE_ADDRESS") + "/settings",
-);
+// Subsequent constructions open additional windows.
+const base = Deno.env.get("DENO_SERVE_ADDRESS")!; // "tcp:127.0.0.1:<port>"
+const port = base.split(":").pop();
+
+const settings = new Deno.BrowserWindow({
+  title: "Settings",
+  width: 420,
+  height: 320,
+});
+settings.navigate(`http://127.0.0.1:${port}/settings`);
 ```
 
-`new Deno.BrowserWindow()` opens a window immediately. The window is alive until
-`close()` is called or the user closes it from the OS.
+The constructor accepts a `BrowserWindowOptions` object:
+
+| Option                | Type      | Default | Notes                                                                   |
+| --------------------- | --------- | ------- | ----------------------------------------------------------------------- |
+| `title`               | `string`  | —       | Window title.                                                           |
+| `width`               | `number`  | `800`   | Initial width in logical pixels.                                        |
+| `height`              | `number`  | `600`   | Initial height in logical pixels.                                       |
+| `x`, `y`              | `number`  | —       | Initial position; centered if omitted.                                  |
+| `resizable`           | `boolean` | `true`  | Whether the user can resize the window.                                 |
+| `alwaysOnTop`         | `boolean` | `false` | Keep the window above others.                                           |
+| `frameless`           | `boolean` | `false` | Remove the title bar and window chrome. Creation-only.                  |
+| `noActivate`          | `boolean` | `false` | Floating, non-activating panel that doesn't steal focus. Creation-only. |
+| `transparentTitlebar` | `boolean` | `false` | Blend the title bar into the content. Creation-only.                    |
+
+`new Deno.BrowserWindow()` opens (or adopts) a window immediately. The window is
+alive until `close()` is called or the user closes it from the OS.
+
+`frameless`, `noActivate`, and `transparentTitlebar` can only be set at creation
+time. `frameless` + `noActivate` together are the building blocks for tray /
+menu-bar popovers — see [`Tray.attachPanel`](/runtime/desktop/tray_and_dock/).
 
 Multiple windows are independent: each has its own size, position, focus state,
 and webview. They can navigate to different paths or different origins, set
@@ -38,8 +63,14 @@ win.focus();
 win.close(); // sends close request, fires "close" event
 win.reload(); // reload the webview's current document
 
-if (win.isClosed) { /* … */ }
-if (win.isVisible) { /* … */ }
+if (win.isClosed()) { /* … */ }
+if (win.isVisible()) { /* … */ }
+```
+
+Each window has a stable numeric id:
+
+```ts
+console.log(win.windowId);
 ```
 
 Closing a window does not stop the runtime — the process keeps running until all
@@ -54,10 +85,10 @@ win.setSize(800, 600);
 const [x, y] = win.getPosition();
 win.setPosition(100, 100);
 
-if (win.isResizable) { /* … */ }
+if (win.isResizable()) { /* … */ }
 win.setResizable(false);
 
-if (win.isAlwaysOnTop) { /* … */ }
+if (win.isAlwaysOnTop()) { /* … */ }
 win.setAlwaysOnTop(true);
 ```
 
@@ -75,7 +106,8 @@ window switchers, the dock, and the taskbar.
 ## Navigation
 
 ```ts
-win.navigate("http://127.0.0.1:" + port);
+const port = Deno.env.get("DENO_SERVE_ADDRESS")!.split(":").pop();
+win.navigate(`http://127.0.0.1:${port}`);
 ```
 
 Navigation works with any URL the embedded webview can load — most commonly the
@@ -99,23 +131,30 @@ win.onfocus = () => console.log("focused");
 win.onblur = () => console.log("blurred");
 ```
 
-| Event       | When it fires                                   |
-| ----------- | ----------------------------------------------- |
-| `resize`    | The window's size changed.                      |
-| `move`      | The window's position changed.                  |
-| `focus`     | The window gained focus.                        |
-| `blur`      | The window lost focus.                          |
-| `close`     | The user requested the window close.            |
-| `keydown`   | A key was pressed while the window was focused. |
-| `keyup`     | A key was released.                             |
-| `mousemove` | The pointer moved over the window.              |
-| `mousedown` | A mouse button was pressed.                     |
-| `mouseup`   | A mouse button was released.                    |
-| `click`     | A mouse click landed on the window chrome.      |
-| `wheel`     | A scroll wheel / trackpad scroll happened.      |
+| Event              | When it fires                                   |
+| ------------------ | ----------------------------------------------- |
+| `resize`           | The window's size changed.                      |
+| `move`             | The window's position changed.                  |
+| `focus`            | The window gained focus.                        |
+| `blur`             | The window lost focus.                          |
+| `close`            | The user requested the window close.            |
+| `keydown`          | A key was pressed while the window was focused. |
+| `keyup`            | A key was released.                             |
+| `mousemove`        | The pointer moved over the window.              |
+| `mouseenter`       | The pointer entered the window.                 |
+| `mouseleave`       | The pointer left the window.                    |
+| `mousedown`        | A mouse button was pressed.                     |
+| `mouseup`          | A mouse button was released.                    |
+| `click`            | A mouse click landed on the window.             |
+| `dblclick`         | A double-click landed on the window.            |
+| `wheel`            | A scroll wheel / trackpad scroll happened.      |
+| `menuclick`        | An application-menu item was clicked.           |
+| `contextmenuclick` | A context-menu item was clicked.                |
 
-The event objects mirror the browser equivalents (`KeyboardEvent`, `MouseEvent`,
-`WheelEvent`) where applicable.
+The pointer and keyboard events mirror their browser equivalents
+(`KeyboardEvent`, `MouseEvent`, `WheelEvent`). `resize`, `move`, `menuclick`,
+and `contextmenuclick` are `CustomEvent`s carrying a `detail` payload — see
+[Menus](/runtime/desktop/menus/) for the menu events.
 
 ```ts
 win.addEventListener("keydown", (e) => {
@@ -126,14 +165,15 @@ win.addEventListener("keydown", (e) => {
 ## Running JavaScript in the webview
 
 ```ts
-const result = await win.executeJs<number>(
+const result = await win.executeJs(
   "document.querySelectorAll('li').length",
 );
 console.log(result); // number of <li> on the current page
 ```
 
-`executeJs` runs the code in the webview's main world and returns the result.
-The result must be JSON-serializable.
+`executeJs` runs the code in the webview's main world and resolves with the
+result. The value crosses a realm boundary, so it must be JSON-serializable; if
+the script throws, the returned promise rejects with the thrown value.
 
 For richer Deno ↔ webview communication, use
 [bindings](/runtime/desktop/bindings/) instead.
@@ -141,18 +181,24 @@ For richer Deno ↔ webview communication, use
 ## Native window handle
 
 ```ts
-const handle = win.getNativeWindow();
+const surface = win.getNativeWindow();
 ```
 
-Returns the platform-native handle (`NSWindow*` on macOS, `HWND` on Windows, the
-X11 / Wayland handle on Linux). Use this to integrate with platform APIs that
-need a window handle — for example, native graphics overlays, drag sources, or
-accessibility APIs.
+`getNativeWindow()` wraps the window's native surface as a
+[`Deno.UnsafeWindowSurface`](/api/deno/~/Deno.UnsafeWindowSurface) so you can
+render to it with WebGPU. Request a GPU adapter first — the call throws if there
+is no active WebGPU context:
 
-`getNativeWindow()` returns a
-[`Deno.UnsafePointer`](/api/deno/~/Deno.UnsafePointer). You are responsible for
-calling the right platform APIs and not retaining the handle past the window's
-lifetime.
+```ts
+const adapter = await navigator.gpu.requestAdapter();
+const device = await adapter!.requestDevice();
+const surface = win.getNativeWindow();
+const context = surface.getContext("webgpu");
+// configure `context` with `device` and draw…
+```
+
+Once a surface has been taken, `close()` is downgraded to `hide()` so the native
+handles backing the surface are not destroyed out from under WebGPU.
 
 ## DevTools
 
@@ -180,7 +226,7 @@ and call `event.preventDefault()`:
 win.addEventListener("close", async (e) => {
   if (hasUnsavedChanges) {
     e.preventDefault();
-    const ok = await win.executeJs<boolean>("confirm('Discard changes?')");
+    const ok = await win.executeJs("confirm('Discard changes?')");
     if (ok) win.close();
   }
 });

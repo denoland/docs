@@ -102,16 +102,13 @@ first-class API. Until they are, two workarounds exist:
 
 A native file-picker API is on the roadmap.
 
-## Notification API
+## Notifications
 
-Notifications are not yet a Deno desktop API. Use the Web `Notification` API
-from the webview side — it works in the embedded webview and looks native:
-
-```js
-new Notification("Build complete", { body: "Your binary is ready." });
-```
+System notifications have a dedicated API — the standard Web `Notification`
+constructor, callable from your Deno-side code. See
+[Notifications](/runtime/desktop/notifications/).
 
 ## Clipboard
 
-Same situation as notifications: use the Web `Clipboard` API
+A dedicated clipboard API is not yet exposed. Use the Web `Clipboard` API
 (`navigator.clipboard.readText()`, `writeText()`) from the webview side for now.

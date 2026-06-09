@@ -5,8 +5,10 @@ description: "Add icons to the OS status area and the macOS dock — tooltips, d
 
 [`Deno.Tray`](/api/deno/~/Deno.Tray) puts an icon in the system status area
 (macOS menu bar extras, Windows system tray, Linux AppIndicator).
-[`Deno.dock`](/api/deno/~/Deno.dock) controls the macOS dock icon — badge,
-bounce, hide, and show.
+[`Deno.dock`](/api/deno/~/Deno.dock) is a singleton that controls the app's dock
+/ taskbar presence — badge, bounce, visibility, and a custom menu.
+
+Menus on both use the [`Deno.MenuItem`](/runtime/desktop/menus/) type.
 
 ## [`Deno.Tray`](/api/deno/~/Deno.Tray)
 
@@ -18,12 +20,12 @@ tray.setIcon(icon);
 tray.setTooltip("My App");
 
 tray.setMenu([
-  { id: "open", label: "Open" },
-  { id: "quit", label: "Quit" },
+  { item: { label: "Open", id: "open", enabled: true } },
+  { item: { label: "Quit", id: "quit", enabled: true } },
 ]);
 
 tray.addEventListener("menuclick", (e) => {
-  if (e.detail.id === "open") Deno.BrowserWindow.main.show();
+  if (e.detail.id === "open") win.show();
   if (e.detail.id === "quit") Deno.exit(0);
 });
 ```
@@ -79,23 +81,37 @@ tray.setTooltip(null); // remove tooltip
 
 ### Context menu
 
-Right-click on the tray icon opens the menu set by `setMenu`. The shape is the
-same `MenuItem[]` used by
-[application and context menus](/runtime/desktop/menus/):
+Right-click on the tray icon opens the menu set by `setMenu`. The items are the
+same [`Deno.MenuItem`](/runtime/desktop/menus/) shape used by application and
+context menus:
 
 ```ts
 tray.setMenu([
-  { id: "open", label: "Open" },
-  { type: "separator", label: "" },
-  { id: "settings", label: "Settings…", accelerator: "CmdOrCtrl+," },
-  { type: "separator", label: "" },
-  { id: "quit", label: "Quit", accelerator: "CmdOrCtrl+Q" },
+  { item: { label: "Open", id: "open", enabled: true } },
+  "separator",
+  {
+    item: {
+      label: "Settings…",
+      id: "settings",
+      accelerator: "CmdOrCtrl+,",
+      enabled: true,
+    },
+  },
+  "separator",
+  {
+    item: {
+      label: "Quit",
+      id: "quit",
+      accelerator: "CmdOrCtrl+Q",
+      enabled: true,
+    },
+  },
 ]);
 
 tray.addEventListener("menuclick", (e) => {
   switch (e.detail.id) {
     case "open":
-      showMain();
+      win.show();
       break;
     case "settings":
       showSettings();
@@ -106,21 +122,70 @@ tray.addEventListener("menuclick", (e) => {
   }
 });
 
-tray.clearMenu(); // remove the menu without destroying the tray
+tray.setMenu(null); // remove the menu without destroying the tray
 ```
 
-Submenus and checkboxes work the same as in the application menu.
+Submenus work the same as in the application menu.
 
 ### Click events
 
 ```ts
-tray.addEventListener("click", () => Deno.BrowserWindow.main.show());
+tray.addEventListener("click", () => win.show());
 tray.addEventListener("dblclick", () => openSettings());
 ```
 
 `click` fires on a primary-button click. `dblclick` fires on a double-click. On
 platforms where right-click is reserved for the context menu (everywhere), only
 left-click produces these events.
+
+### Popover panels
+
+For the classic menu-bar-app pattern — click the tray icon to toggle a small
+floating window anchored under it — use `attachPanel()`:
+
+```ts
+const tray = new Deno.Tray();
+tray.setIcon(await Deno.readFile("./icons/tray.png"));
+
+const panel = tray.attachPanel({
+  url: `http://127.0.0.1:${port}/panel`,
+  width: 360,
+  height: 480,
+});
+
+panel.window.bind("doThing", async () => {/* … */});
+```
+
+The returned [`Deno.TrayPanel`](/api/deno/~/Deno.TrayPanel) toggles on tray
+click, is positioned under the icon, and hides when it loses focus. Pass a
+string as shorthand for `{ url }`. `TrayPanelOptions` also accepts `hideOnBlur`
+(default `true`) and a `position` callback to override placement (e.g. for a
+bottom-edge taskbar).
+
+```ts
+panel.show();
+panel.hide();
+panel.toggle();
+console.log(panel.visible);
+panel.destroy(); // detach and close the panel window
+panel.window; // the underlying BrowserWindow — bind(), executeJs(), etc.
+```
+
+The panel is a convenience built on the primitives. For full control, create a
+`frameless` + `noActivate` [`BrowserWindow`](/runtime/desktop/windows/) yourself
+and position it with `Tray.getBounds()`:
+
+```ts
+const bounds = tray.getBounds(); // { x, y, width, height } | null
+if (bounds) {
+  popover.setPosition(bounds.x, bounds.y + bounds.height);
+  popover.show();
+}
+```
+
+`getBounds()` returns the icon's screen rectangle, or `null` when the platform
+can't report it. On Linux the icon position can't be queried, so an attached
+panel shows at its last position rather than anchored to the icon.
 
 ### Platform support
 
@@ -137,53 +202,74 @@ If the backend cannot create a tray icon, the constructor's underlying `trayId`
 is `0` and subsequent calls are no-ops (silently). Check `tray.trayId !== 0` if
 you need to fall back gracefully.
 
-## [`Deno.dock`](/api/deno/~/Deno.dock) (macOS)
+## [`Deno.dock`](/api/deno/~/Deno.dock)
 
-[`Deno.dock`](/api/deno/~/Deno.dock) is a single object exposing macOS dock
-controls. On Windows and Linux, the same APIs exist but most are no-ops — they
-fail gracefully rather than throwing.
+[`Deno.dock`](/api/deno/~/Deno.dock) is a singleton exposing the app's dock /
+taskbar controls. The methods are cross-platform but their effect varies:
+macOS-only operations are no-ops on Windows and Linux (they fail gracefully
+rather than throwing).
 
 ### Badge
 
 ```ts
-Deno.dock.setBadge("3"); // small label on the dock icon
-Deno.dock.setBadge(null); // clear
+Deno.dock.setBadge("3"); // short text on the dock / taskbar icon
+Deno.dock.setBadge(null); // clear (null or empty string)
 ```
 
-Badges are short strings — typically a count. The OS truncates long strings.
+Sets a text badge on the dock icon (macOS) or taskbar icon (Windows); on Linux
+it prefixes the focused window's title. Badges are short — typically a count;
+the OS truncates long strings.
 
 ### Bounce
 
 ```ts
-Deno.dock.bounce("informational"); // gentle bounce
-Deno.dock.bounce("critical"); // bounces until the app gains focus
-
-Deno.dock.cancelBounce();
+Deno.dock.bounce(); // single bounce / flash
+Deno.dock.bounce(true); // bounce continuously until the app is focused
 ```
 
-`"informational"` bounces once. `"critical"` bounces until cancelled or the app
-gains focus.
+Bounces the dock icon (macOS), flashes the taskbar button (Windows), or sets the
+urgency hint on the focused window (Linux). The optional `critical` argument
+(default `false`) controls whether it bounces once or continuously.
 
 ### Visibility
 
 ```ts
-Deno.dock.hide(); // remove the icon from the dock
-Deno.dock.show(); // restore it
+Deno.dock.setVisible(false); // remove the app from the dock
+Deno.dock.setVisible(true); // restore it
 ```
 
-A hidden dock icon does not show the app in the dock or the Cmd-Tab switcher.
-Use this for menu-bar-only apps that should not appear in the dock.
+macOS only — controls the app's activation policy. A hidden app does not appear
+in the dock or the Cmd-Tab switcher, which is what you want for a menu-bar-only
+app. The application keeps running and can still show windows; users reach it
+via Spotlight or the tray icon. No-op on Windows and Linux.
 
-When hidden, the application still runs and can show windows; users can reach it
-via Spotlight or the tray icon.
-
-### Setting the dock image
+### Menu
 
 ```ts
-const png = await Deno.readFile("./icons/dock.png");
-Deno.dock.setIcon(png);
+Deno.dock.setMenu([
+  { item: { label: "New Window", id: "new", enabled: true } },
+  { item: { label: "Quit", id: "quit", enabled: true } },
+]);
+Deno.dock.setMenu(null); // remove the menu
 
-Deno.dock.setIcon(null); // restore the bundled icon
+Deno.dock.addEventListener("menuclick", (e) => {
+  if (e.detail.id === "quit") Deno.exit(0);
+});
+```
+
+macOS only — a custom right-click menu on the dock icon. Clicks are delivered as
+`menuclick` events on `Deno.dock`.
+
+### Reopen event
+
+On macOS, clicking the dock icon while the app has no visible windows fires a
+`reopen` event. The default "show the last hidden window" behavior is swallowed,
+so you decide what to do:
+
+```ts
+Deno.dock.addEventListener("reopen", (e) => {
+  if (!e.detail.hasVisibleWindows) win.show();
+});
 ```
 
 ## Pattern: tray-only background app
@@ -191,22 +277,22 @@ Deno.dock.setIcon(null); // restore the bundled icon
 To run as a status-bar-only background process (no dock, no main window):
 
 ```ts
-Deno.dock.hide(); // macOS: hide the dock icon
-Deno.BrowserWindow.main.hide(); // hide the implicit main window
+Deno.dock.setVisible(false); // macOS: hide the app from the dock
+win.hide(); // hide the implicit startup window
 
 const tray = new Deno.Tray();
 tray.setIcon(await Deno.readFile("./icons/tray.png"));
 tray.setTooltip("My App");
 tray.setMenu([
-  { id: "show", label: "Show window" },
-  { id: "quit", label: "Quit" },
+  { item: { label: "Show window", id: "show", enabled: true } },
+  { item: { label: "Quit", id: "quit", enabled: true } },
 ]);
 
 tray.addEventListener("menuclick", (e) => {
-  if (e.detail.id === "show") Deno.BrowserWindow.main.show();
+  if (e.detail.id === "show") win.show();
   if (e.detail.id === "quit") Deno.exit(0);
 });
 ```
 
-The implicit main window is created when your binary starts; hiding it keeps it
+The startup window is created when your binary launches; hiding it keeps it
 ready to be shown without a startup delay later.

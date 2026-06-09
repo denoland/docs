@@ -16,6 +16,7 @@ still compiles, using sensible defaults.
   "desktop": {
     "app": {
       "name": "My App",
+      "identifier": "com.example.myapp",
       "icons": {
         "macos": "./icons/app.icns",
         "windows": "./icons/app.ico",
@@ -27,6 +28,9 @@ still compiles, using sensible defaults.
       "macos": "./dist/MyApp.app",
       "windows": "./dist/MyApp",
       "linux": "./dist/my-app"
+    },
+    "macos": {
+      "codesignIdentity": "Developer ID Application: Acme, Inc. (TEAMID)"
     },
     "release": {
       "baseUrl": "https://releases.example.com/my-app"
@@ -47,6 +51,15 @@ Metadata baked into the compiled binary.
 Display name of the application. Used as the window title default, the macOS
 menu bar app name, the Windows taskbar tooltip, and the Linux `.desktop` entry
 name. Falls back to the `name` field at the root of `deno.json`.
+
+### `app.identifier`
+
+Reverse-DNS bundle / application identifier (e.g. `com.example.myapp`). Used for
+the macOS `CFBundleIdentifier`, the Linux `.desktop` file identifier, and the
+Windows AppUserModelID. When unset, a synthetic `com.deno.desktop.<app-slug>` is
+generated. macOS needs a stable identifier to grant notification permission, so
+set a real one for any app that uses
+[notifications](/runtime/desktop/notifications/).
 
 ### `app.icons`
 
@@ -121,6 +134,20 @@ The path's extension determines what is produced:
 | `.AppImage`        | `.AppImage` (built via `appimagetool`) |
 
 The CLI flag `--output` overrides this for one build.
+
+## `macos`
+
+macOS-specific build options.
+
+### `macos.codesignIdentity`
+
+The code-signing identity used to sign the macOS bundle, e.g.
+`"Developer ID Application: Acme, Inc. (TEAMID)"`, or `"-"` for an explicit
+ad-hoc signature. When unset, `deno desktop` still ad-hoc-signs the bundle so it
+has a stable code identity (required for notification permission), but the
+result is not distributable without further signing. Set a real Developer ID
+identity to produce a notarizable bundle. See
+[Distribution](/runtime/desktop/distribution/#code-signing).
 
 ## `release`
 

@@ -90,6 +90,8 @@ webview navigates to — you do not need to pass a port or hostname. See
   macOS dock.
 - [Dialogs](/runtime/desktop/dialogs/) — `prompt()`, `alert()`, `confirm()` as
   native popups.
+- [Notifications](/runtime/desktop/notifications/) — native OS notifications via
+  the Web `Notification` API.
 - [Hot module replacement](/runtime/desktop/hmr/) — `--hmr` for framework and
   non-framework apps.
 - [DevTools](/runtime/desktop/devtools/) — unified DevTools attached to both the

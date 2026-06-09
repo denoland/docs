@@ -191,6 +191,10 @@ export const sidebar = [
         href: "/runtime/desktop/dialogs/",
       },
       {
+        title: "Notifications",
+        href: "/runtime/desktop/notifications/",
+      },
+      {
         title: "Hot module replacement",
         href: "/runtime/desktop/hmr/",
       },

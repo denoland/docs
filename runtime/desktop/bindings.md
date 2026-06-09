@@ -140,7 +140,7 @@ function bindShared(win: Deno.BrowserWindow) {
   win.bind("readSettings", readSettings);
 }
 
-const main = Deno.BrowserWindow.main;
+const main = new Deno.BrowserWindow(); // adopts the startup window
 bindShared(main);
 
 const settings = new Deno.BrowserWindow();

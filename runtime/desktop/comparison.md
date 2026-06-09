@@ -79,13 +79,16 @@ Rust and want a unified codebase, Dioxus is a good pick.
 These are documented on the relevant pages of this section, but worth listing in
 one place:
 
-- **Code-signing and notarization** as a flag (`--sign`).
+- **One-step notarization.** macOS bundles are code-signed (ad-hoc by default,
+  or with a configured Developer ID identity), but notarization is still a
+  separate `notarytool` step. See
+  [Distribution](/runtime/desktop/distribution/#code-signing).
 - **Windows MSI** and **Linux `.deb` / `.rpm`** installer outputs.
 - **iOS / Android** targets.
-- **Native [`Deno.notifications`](/api/deno/~/Deno.notifications),
-  [`Deno.clipboard`](/api/deno/~/Deno.clipboard),
-  [`Deno.secureStorage`](/api/deno/~/Deno.secureStorage)** APIs (use the Web
-  equivalents from the webview side until they land).
+- **Native clipboard and secure-storage APIs** (use the Web `Clipboard` API from
+  the webview side until they land). Native
+  [notifications](/runtime/desktop/notifications/) and
+  [system tray / dock](/runtime/desktop/tray_and_dock/) APIs _are_ available.
 - **Runtime permissions for desktop apps** (a permission prompt on every
   filesystem / network access — Deno's permission system applied to desktop
   sandboxing).

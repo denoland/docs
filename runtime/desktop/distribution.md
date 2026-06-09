@@ -191,16 +191,34 @@ Cross-compiling from a single host (e.g. only running on `ubuntu-latest` with
 
 ## Code signing
 
-Code-signing and notarization (a `--sign` flag) are not yet implemented. For
-now, sign the produced bundle externally:
+On macOS, `deno desktop` code-signs the bundle for you. By default it applies an
+**ad-hoc** signature (`-`), which gives the app a stable code identity — enough
+for the OS to grant [notification](/runtime/desktop/notifications/) permission,
+but not enough to distribute without Gatekeeper warnings. The CEF helper
+processes' bundle identifiers are harmonized with the main bundle id
+automatically.
 
-- macOS: `codesign --deep --sign "Developer ID Application: …" MyApp.app`
-  followed by `xcrun notarytool submit`.
-- Windows: `signtool sign /f cert.pfx /tr <timestamp> MyApp.exe`.
+To produce a distributable, notarizable bundle, set a real signing identity in
+`deno.json` (signing must run on a macOS host, since it shells out to
+`codesign(1)`):
 
-A unified `--sign` story (with hardened runtime, helper-process entitlements,
-and `notarytool` integration) is on the roadmap. Until then, treat signing as a
-post-build CI step.
+```jsonc title="deno.json"
+{
+  "desktop": {
+    "app": { "identifier": "com.example.myapp" },
+    "macos": {
+      "codesignIdentity": "Developer ID Application: Acme, Inc. (TEAMID)"
+    }
+  }
+}
+```
+
+With a real identity, the bundle is signed with Hardened Runtime and a secure
+timestamp. **Notarization is still a separate step** — submit the signed bundle
+with `xcrun notarytool submit` and staple the ticket.
+
+On Windows, sign the produced `.exe` externally for now, e.g.
+`signtool sign /f cert.pfx /tr <timestamp> MyApp.exe`.
 
 ## Distributing updates after release
 
