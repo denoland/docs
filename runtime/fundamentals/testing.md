@@ -14,6 +14,7 @@ oldUrl:
   - /runtime/manual/basics/testing/snapshot_testing/
   - /runtime/manual/testing
   - /runtime/manual/basics/testing/documentation/
+  - /runtime/reference/documentation/
 ---
 
 Deno provides a built-in test runner for writing and running tests in both
@@ -821,3 +822,11 @@ Deno.test({
 
 Remember that any permission not explicitly granted at the command line will be
 denied, regardless of what's specified in the test configuration.
+
+## Related tutorials
+
+For more hands-on testing guides, check out:
+
+- [Basic testing tutorial](/examples/testing_tutorial/)
+- [Mocking data in tests tutorial](/examples/mocking_tutorial/)
+- [Testing web applications tutorial](/examples/web_testing_tutorial/)

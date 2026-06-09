@@ -140,4 +140,5 @@ Evaluate code blocks in JSDoc and Markdown files as tests:
 deno test --doc
 ```
 
-See [Testing code in docs](/runtime/reference/documentation/) for details.
+See [documentation tests](/runtime/fundamentals/testing/#documentation-tests)
+for details.
