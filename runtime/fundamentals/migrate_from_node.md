@@ -41,8 +41,8 @@ deno outdated             # see what has newer versions
 
 Deno understands dependencies declared in both `package.json` and `deno.json`,
 and individual npm packages can also be imported inline with `npm:` specifiers.
-See [Modules and dependencies](/runtime/fundamentals/modules/) for the full
-picture.
+See [Dependency management](/runtime/fundamentals/dependency_management/) for
+the full picture.
 
 ## Run your project with Deno
 
