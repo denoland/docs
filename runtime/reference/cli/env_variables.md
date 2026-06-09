@@ -1,9 +1,17 @@
 ---
-last_modified: 2024-10-07
+last_modified: 2026-05-20
 title: "Configuring Deno behavior"
 ---
 
 There are several environment variables which can impact the behavior of Deno:
+
+### DENO_AUDIT_PERMISSIONS
+
+Audit every permission access (allowed or denied). Set to a file path to write a
+JSONL audit log, or to the literal value `otel` to emit each access as an
+OpenTelemetry log record via the configured exporter. See
+[permissions](/runtime/fundamentals/security/#permission-flags) for the field
+set and the OTel attribute names.
 
 ### DENO_AUTH_TOKENS
 
@@ -85,6 +93,14 @@ permission to read the environment variables by checking the value of
 
 Indicates hosts which should bypass the proxy set in the other environment
 variables. See the [Proxies](#proxies) section for more information.
+
+### NODE_EXTRA_CA_CERTS
+
+Path to a PEM file with extra certificate authorities. Loaded at the root
+certificate store level, so the certs are honored by `fetch()`,
+[`Deno.connectTls()`](/api/deno/~/Deno.connectTls), and the Node compat APIs
+(`node:https`, `node:tls`). Available in Deno 2.8+. Missing or invalid files
+emit a warning rather than failing, matching Node.js semantics.
 
 ### NPM_CONFIG_REGISTRY
 

@@ -264,6 +264,46 @@ To specify the library files to use in a TypeScript file, you can use
 /// <reference lib="dom" />
 ```
 
+## Configuring TypeScript with `tsconfig.json` {#tsconfig}
+
+While Deno uses `deno.json` for TypeScript configuration by default, it also
+supports `tsconfig.json` for compatibility with existing Node.js and TypeScript
+projects, making it easier to adopt Deno incrementally. Each workspace directory
+containing a `deno.json` or `package.json` is probed for a `tsconfig.json` — if
+one exists, Deno will automatically use it for type checking and the language
+server, no extra flags needed. Since Deno 2.1, `jsconfig.json` is also
+auto-detected when a `package.json` is present, which is useful for
+JavaScript-only projects.
+
+For example, an existing Node.js project with this `tsconfig.json`:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-jsx",
+    "lib": ["dom", "esnext"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
+```
+
+will be picked up automatically when running `deno check` or using the Deno
+language server. If a `deno.json` with its own `compilerOptions` is added later,
+those take precedence.
+
+:::tip
+
+For Deno-first projects, prefer `compilerOptions` in `deno.json` over a separate
+`tsconfig.json`. See
+[Configuring TypeScript](/runtime/reference/ts_config_migration/) for the full
+list of supported fields, precedence rules, and compiler option defaults.
+
+:::
+
 ## Augmenting global types
 
 Deno supports ambient or global types in TypeScript. This is useful when
@@ -319,3 +359,67 @@ file, in the `compilerOptions.types` array:
 ```
 
 This will also augment the global scope with the `polyfilledAPI` function.
+
+## Configuring TypeScript compiler options
+
+Deno uses strict and modern TypeScript defaults out of the box, so most projects
+don't need any configuration. When you do need to customize compiler behavior,
+use the `compilerOptions` field in
+[`deno.json`](/runtime/fundamentals/configuration/):
+
+```json title="deno.json"
+{
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true
+  }
+}
+```
+
+See the
+[full list of supported compiler options](/runtime/reference/ts_config_migration/#ts-compiler-options).
+
+## Using `tsconfig.json` with Deno
+
+If you're migrating a TypeScript project from Node.js, your existing
+`tsconfig.json` files work with Deno's type checker and LSP out of the box. Deno
+automatically discovers `tsconfig.json` files in directories that also contain a
+`deno.json` or `package.json`.
+
+```
+my-project/
+├── deno.json
+├── tsconfig.json       # ← discovered automatically
+├── src/
+│   └── main.ts
+└── packages/
+    └── lib/
+        ├── package.json
+        └── tsconfig.json  # ← also discovered
+```
+
+Deno supports the standard `tsconfig.json` fields: `extends`, `files`,
+`include`, `exclude`, `references`, and `compilerOptions`.
+
+:::note
+
+For Deno-first projects, prefer `compilerOptions` in `deno.json` over a separate
+`tsconfig.json`. The `tsconfig.json` compatibility exists primarily to ease
+migration of existing Node.js projects.
+
+:::
+
+### Precedence rules
+
+When both `deno.json` and `tsconfig.json` exist:
+
+1. `compilerOptions` in a parent `deno.json` take precedence over any
+   `tsconfig.json`.
+2. A `tsconfig.json` reference takes precedence over its referrer.
+3. For root references, a more deeply nested `tsconfig.json` takes precedence
+   (e.g. `foo/bar/tsconfig.json` over `foo/tsconfig.json`).
+
+For the full details on `tsconfig.json` compatibility, compiler options, and
+library configuration, see the
+[Configuring TypeScript](/runtime/reference/ts_config_migration/) reference.

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-10
+last_modified: 2026-05-20
 title: "Node and npm Compatibility"
 description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
@@ -10,9 +10,6 @@ oldUrl:
   - /runtime/manual/using_deno_with_other_technologies/node/cdns/
   - /runtime/manual/node/node_specifiers
   - /runtime/manual/node/package_json
-  - /runtime/manual/node/migrate/
-  - /runtime/manual/references/cheatsheet/
-  - /runtime/manual/node/cheatsheet/
   - /runtime/manual/node/faqs
   - /runtime/manual/node/npm_specifiers
   - /runtime/manual/node/private_registries
@@ -32,6 +29,10 @@ import { Hono } from "npm:hono";
 That's all you really need to know to get started! However, there are some key
 differences between the two runtimes that you can take advantage of to make your
 code simpler and smaller when migrating your Node.js projects to Deno.
+
+As of Deno 2.8, **over 75% of Node's own test suite passes** in Deno, covering
+nearly every `node:` module. You can track the current state at
+[node-test-viewer.deno.dev](https://node-test-viewer.deno.dev/).
 
 We provide a [list of supported Node.js APIs](/runtime/reference/node_apis/)
 that you can use in Deno.
@@ -104,6 +105,10 @@ error: Relative import path "os" not prefixed with / or ./ or ../
 The same hints and additional quick-fixes are provided by the Deno LSP in your
 editor.
 
+The `node:module` built-in includes the
+[`registerHooks()`](/runtime/reference/module_hooks/) API, which you can use to
+customize module resolution and loading from inside your program.
+
 <a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
 
 ## Using npm packages
@@ -172,9 +177,10 @@ Here are a few globals that you might encounter in the wild and how to use them
 in Deno:
 
 - `process` - Deno provides the `process` global, which is by far the most
-  popular global used in popular npm packages. It is available to all code.
-  However, Deno will guide you towards importing it explicitly from
-  `node:process` module by providing lint warnings and quick-fixes:
+  popular global used in popular npm packages. It is available to all code. Deno
+  can also guide you towards importing it explicitly from `node:process`. Opt in
+  by enabling the [`no-process-global`](/lint/rules/no-process-global/) lint
+  rule (off by default since Deno 2.8):
 
 ```js title="process.js"
 console.log(process.versions.deno);
@@ -230,6 +236,21 @@ subclasses instead.
 - `__filename` - use `import.meta.filename` instead.
 
 - `__dirname` - use `import.meta.dirname` instead.
+
+- `setTimeout` / `setInterval` - starting in Deno 2.8, the global timer
+  functions return a Node.js
+  [`Timeout`](https://nodejs.org/api/timers.html#class-timeout) object instead
+  of a number, matching Node.js semantics. The returned object exposes methods
+  like `.ref()`, `.unref()`, `.refresh()`, and `.hasRef()`. It still coerces to
+  a number (via `Symbol.toPrimitive`), so existing code that stores the timer ID
+  as a number or passes it to `clearTimeout`/`clearInterval` continues to work
+  unchanged.
+
+  ```ts
+  const t = setTimeout(() => {}, 1000);
+  t.unref(); // don't keep the event loop alive for this timer
+  clearTimeout(t);
+  ```
 
 ## CommonJS support
 
@@ -405,19 +426,36 @@ resolution mode. The conditions satisfied by an import from a Deno ESM module
 are as follows:
 
 ```json
-["deno", "node", "import", "default"]
+["deno", "node", "import", "module-sync", "default"]
 ```
 
 This means that the first condition listed in a package export whose key equals
-any of these strings will be matched. You can expand this list using the
-`--conditions` CLI flag:
+any of these strings will be matched. For `require()` resolution, including
+`createRequire()`, the conditions are:
+
+```json
+["require", "node", "module-sync", "default"]
+```
+
+Deno also applies `module-sync` when analyzing CommonJS modules that re-export
+through `require()`.
+
+You can expand the import conditions list using the `--conditions` CLI flag:
 
 ```shell
 deno run --conditions development,react-server main.ts
 ```
 
 ```json
-["development", "react-server", "deno", "node", "import", "default"]
+[
+  "development",
+  "react-server",
+  "deno",
+  "node",
+  "import",
+  "module-sync",
+  "default"
+]
 ```
 
 ## Importing types
@@ -471,17 +509,35 @@ resolution, you can:
 
 ## Including Node types
 
-Node ships with many built-in types like `Buffer` that might be referenced in an
-npm package's types. To load these you must add a types reference directive to
-the `@types/node` package:
+Starting in Deno 2.8, `deno check` and the LSP include `lib.node` in every
+type-check by default, so Node ambient types like `Buffer`, `NodeJS.Timeout`,
+and `process` resolve without any configuration:
+
+```ts
+// 2.8+: type-checks with no extra setup
+const buf: Buffer = Buffer.from("hello");
+const t: NodeJS.Timeout = setTimeout(() => {}, 0);
+```
+
+The bundled `lib.node` tracks the major version of `@types/node` that matches
+the Node release Deno reports in `process.versions.node`. If you need to pin a
+specific `@types/node` version (for example to match the Node version your
+project standardises on), add it as an explicit dependency:
+
+```jsonc title="deno.json"
+{
+  "imports": {
+    "@types/node": "npm:@types/node@^22"
+  }
+}
+```
+
+On versions before 2.8 — or if you've opted out of `lib.node` — you can still
+load the types with a reference directive:
 
 ```ts
 /// <reference types="npm:@types/node" />
 ```
-
-Note that it is fine to not specify a version for this in most cases because
-Deno will try to keep it in sync with its internal Node code, but you can always
-override the version used if necessary.
 
 ## Run npm binaries
 
@@ -627,6 +683,57 @@ Running the above command, with a `--node-modules-dir` flag, will create a
 `node_modules` folder in the current directory with a similar folder structure
 to npm.
 
+### node_modules layout: isolated vs hoisted
+
+When a local `node_modules` directory exists, Deno can lay it out in two ways.
+The default (**isolated**) installs each package into a content-addressed
+`.deno/` directory and exposes it through a symlink, so every package only sees
+its declared dependencies. This is similar to pnpm's layout.
+
+```text
+node_modules/
+├── .deno/chalk@5.6.2/node_modules/chalk/   ← real files
+└── chalk -> .deno/chalk@5.6.2/node_modules/chalk
+```
+
+Some npm tooling, and any package that walks `node_modules` looking for
+flat-resolved siblings, assumes the **hoisted** layout that npm and Yarn classic
+use. Deno 2.8 adds a hoisted mode
+([denoland/deno#32788](https://github.com/denoland/deno/pull/32788)) you can opt
+into with `nodeModulesLinker` in `deno.json`. The hoisted linker requires a
+manually-managed `node_modules` directory, so set `nodeModulesDir` to `manual`:
+
+```json title="deno.json"
+{
+  "nodeModulesDir": "manual",
+  "nodeModulesLinker": "hoisted"
+}
+```
+
+Or as a one-off CLI flag (also requiring `--node-modules-dir=manual`):
+
+```sh
+deno install --node-modules-dir=manual --node-modules-linker=hoisted
+```
+
+In hoisted mode the most-depended-upon version of each package is placed at the
+top of `node_modules/`, and conflicting versions are nested under the dependent
+that needs them, just like npm:
+
+```text
+node_modules/
+├── chalk/         ← real files
+├── express/
+├── ms/            ← hoisted: most commonly needed version
+└── debug/
+    └── node_modules/
+        └── ms/    ← nested: a different version
+```
+
+Stick with the default isolated mode unless a tool you depend on requires the
+hoisted layout. Isolated mode catches phantom dependencies that hoisted layouts
+hide.
+
 ## Node-API addons
 
 Summary: Node-API addons work in Deno when a local `node_modules/` is present
@@ -656,58 +763,18 @@ Like all native FFI, pass `--allow-ffi` to grant explicit permission. Review
 
 ## Migrating from Node to Deno
 
-Running your Node.js project with Deno is a straightforward process. In most
-cases you can expect little to no changes to be required, if your project is
-written using ES modules.
-
-Main points to be aware of:
-
-1. Use the `node:` specifier for built-in modules (see Using Node's built-in
-   modules above).
-2. Some Node globals like `Buffer` must be imported from `node:buffer` (see
-   Node.js global objects).
-3. `require()` is available in `.cjs` files or via `createRequire` (see CommonJS
-   support).
-
-### Running scripts
-
-Deno supports running npm scripts natively with the
-[`deno task`](/runtime/reference/cli/task_runner/) subcommand (If you're
-migrating from Node.js, this is similar to the `npm run script` command).
-Consider the following Node.js project with a script called `start` inside its
-`package.json`:
-
-```json title="package.json"
-{
-  "name": "my-project",
-  "scripts": {
-    "start": "eslint"
-  }
-}
-```
-
-You can execute this script with Deno by running:
-
-```sh
-deno task start
-```
-
-### Optional improvements
-
-Deno ships a unified toolchain (configuration, linter, formatter, test runner)
-that can simplify your setup when migrating:
-
-- Configuration: /runtime/fundamentals/configuration/
-- Linter: /runtime/reference/cli/linter/
-- Formatter: /runtime/reference/cli/formatter/
-- Test runner: /runtime/reference/cli/test/
+Running a Node.js project with Deno usually requires little to no change. See
+the
+[Migrating from Node.js to Deno guide](/runtime/fundamentals/migrate_from_node/)
+for the details, optional toolchain improvements, and a Node-to-Deno command
+cheatsheet.
 
 ## Private registries
 
 :::caution
 
 Not to be confused with
-[private repositories and modules](/runtime/fundamentals/modules/#private-repositories).
+[private repositories and modules](/runtime/fundamentals/dependency_management/#private-repositories).
 
 :::
 
@@ -773,29 +840,58 @@ and run it using the `deno run` command:
 deno run main.ts
 ```
 
-## Node to Deno Cheatsheet
+### `.npmrc` configuration
 
-| Node.js                                | Deno                          |
-| -------------------------------------- | ----------------------------- |
-| `node file.js`                         | `deno file.js`                |
-| `ts-node file.ts`                      | `deno file.ts`                |
-| `nodemon`                              | `deno run --watch`            |
-| `node -e`                              | `deno eval`                   |
-| `npm i` / `npm install`                | `deno install`                |
-| `npm install -g`                       | `deno install -g`             |
-| `npm run`                              | `deno task`                   |
-| `eslint`                               | `deno lint`                   |
-| `prettier`                             | `deno fmt`                    |
-| `package.json`                         | `deno.json` or `package.json` |
-| `tsc`                                  | `deno check` ¹                |
-| `typedoc`                              | `deno doc`                    |
-| `jest` / `ava` / `mocha` / `tap` / etc | `deno test`                   |
-| `nexe` / `pkg`                         | `deno compile`                |
-| `npm explain`                          | `deno info`                   |
-| `nvm` / `n` / `fnm`                    | `deno upgrade`                |
-| `tsserver`                             | `deno lsp`                    |
-| `nyc` / `c8` / `istanbul`              | `deno coverage`               |
-| benchmarks                             | `deno bench`                  |
+Beyond the basic registry / token setup above, Deno reads several other `.npmrc`
+fields. The ones most likely to matter:
 
-¹ Type checking happens automatically, TypeScript compiler is built into the
-`deno` binary.
+- **Mutual-TLS authentication** (Deno 2.8+): `certfile` and `keyfile` point at
+  PEM files used to authenticate the client when the registry requires mTLS.
+
+  ```ini title=".npmrc"
+  //registry.mycompany.com/:certfile=/etc/deno/client.crt
+  //registry.mycompany.com/:keyfile=/etc/deno/client.key
+  ```
+
+- **`email` on `_auth` entries** (Deno 2.8+): some legacy on-prem registries
+  require an `email` alongside the auth token.
+
+  ```ini title=".npmrc"
+  //registry.mycompany.com/:_auth=secretToken
+  //registry.mycompany.com/:email=ci@mycompany.com
+  ```
+
+- **`min-release-age`** (Deno 2.8+): refuses to install package versions younger
+  than the configured age. Useful as a default supply-chain guard for all
+  installs. The same control is also available as the CLI flag
+  `--minimum-dependency-age` and the `minimumDependencyAge` field in
+  `deno.json`. See
+  [Minimum dependency age](/runtime/fundamentals/dependency_management/#minimum-dependency-age)
+  for the full picture.
+
+  ```ini title=".npmrc"
+  min-release-age=3
+  ```
+
+- **`NPM_CONFIG_REGISTRY` env var**: overrides the registry set in `.npmrc`,
+  matching npm's precedence (handy in CI when you want to redirect installs
+  without editing the checked-in `.npmrc`).
+
+### `file:` and `link:` dependencies in published packages
+
+Some published npm packages accidentally ship a `file:` or `link:` specifier in
+their `package.json` that points at a path on the publisher's machine:
+
+```jsonc title="some-package/package.json"
+{
+  "dependencies": {
+    "lodash": "^4.17.0",
+    "local-helpers": "file:../local-helpers"
+  }
+}
+```
+
+Starting in Deno 2.8, those `file:` and `link:` entries are silently skipped
+while resolving npm metadata, so packages that carry a stray local-path
+dependency install cleanly instead of failing with an "Invalid version
+requirement" error.

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-26
+last_modified: 2026-05-21
 title: "Security and permissions"
 description: "A guide to Deno's security model and permissions system. Learn about secure defaults, permission flags, runtime prompts, and how to safely execute code with granular access controls."
 oldUrl:
@@ -16,6 +16,10 @@ resources with command line flags or with a runtime permission prompt. This is a
 major difference from Node, where dependencies are automatically granted full
 access to all system I/O, potentially introducing hidden vulnerabilities into
 your project.
+
+To complement the runtime sandbox, Deno also ships
+[`deno audit`](/runtime/reference/cli/audit/) for scanning your dependencies
+against vulnerability databases — useful as a CI gate.
 
 Before using Deno to run completely untrusted code, read the
 [section on executing untrusted code](#executing-untrusted-code) below.
@@ -45,11 +49,17 @@ the key principles of Deno's security model:
 - **Code can not escalate its privileges without user consent**: Code executing
   in a Deno runtime can not escalate its privileges without the user agreeing
   explicitly to an escalation via interactive prompt or a invocation time flag.
-- **The initial static module graph can import local files without
-  restrictions**: All files that are imported in the initial static module graph
-  can be imported without restrictions, so even if an explicit read permission
-  is not granted for that file. This does not apply to any dynamic module
-  imports.
+- **The initial static module graph can import modules without restrictions**:
+  All modules that are imported in the initial static module graph (local files,
+  npm packages, jsr packages, and remote URLs) are loaded by the runtime without
+  consulting the permission system. No `--allow-read` is required to load local
+  files, and no `--allow-net` is required to fetch remote modules. The static
+  graph includes static `import` statements and `import()` calls whose specifier
+  is a string literal — anything that can be resolved without running code. This
+  exemption applies only to loading. Once code runs, anything it does still goes
+  through the permission system, and `import()` calls with non-literal
+  specifiers (e.g. `import(someVariable)`) are checked against `--allow-read` /
+  `--allow-import` at runtime.
 
 These key principles are designed to provide an environment where a user can
 execute code with minimal risk of harm to the host machine or network. The
@@ -96,10 +106,11 @@ By default, Deno will not generate a stack trace for permission requests as it
 comes with a hit to performance. Users can enable stack traces with the
 `DENO_TRACE_PERMISSIONS` environment variable to `1`.
 
-Deno can also generate an audit log of all accessed permissions; this can be
-achieved using the `DENO_AUDIT_PERMISSIONS` environment variable to a path. This
-works regardless if permissions are allowed or not. The output is in JSONL
-format, where each line is an object with the following keys:
+Deno can also generate an audit log of all accessed permissions, regardless of
+whether the access was allowed or denied.
+
+Set `DENO_AUDIT_PERMISSIONS` to a **file path** to write JSONL — each line is an
+object with the following keys:
 
 - `v`: the version of the format
 - `datetime`: when the permission was accessed, in RFC 3339 format
@@ -112,7 +123,24 @@ A schema for this can be found in
 
 In addition, this env var can be combined with the above-mentioned
 `DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
-which is an array contain all the stack trace frames.
+which is an array containing all the stack trace frames.
+
+You can also set `DENO_AUDIT_PERMISSIONS=otel` to emit each access as an
+OpenTelemetry **log record** instead of writing to a file. The records are sent
+to whichever exporter you have configured via
+[`OTEL_DENO`](/runtime/fundamentals/open_telemetry/) and carry these attributes:
+
+- `deno.permission.type`
+- `deno.permission.value`
+- `deno.permission.stack` (if `DENO_TRACE_PERMISSIONS` is also set)
+
+This is the recommended setup if you already collect OpenTelemetry data — the
+permission audit lands next to your traces and metrics so you can correlate it
+with request handling.
+
+```sh
+OTEL_DENO=true DENO_AUDIT_PERMISSIONS=otel deno run -A main.ts
+```
 
 ### Configuration file
 
@@ -247,13 +275,13 @@ or perform DNS resolution. This includes making HTTP requests, opening TCP/UDP
 sockets, and listening for incoming connections on TCP or UDP.
 
 Network access is granted using the `--allow-net` flag. This flag can be
-specified with a list of IP addresses or hostnames to allow access to specific
-network addresses.
+specified with a list of hosts to allow access to specific network addresses. A
+host can be a hostname or IP address, optionally with a port.
 
 Hostnames do not allow subdomains, unless explicitly listed. To allow any
 subdomain for a hostname, `*` can be used as wildcard for any subdomain.
 
-Definition: `--allow-net[=<IP_OR_HOSTNAME>...]` or `-N[=<IP_OR_HOSTNAME>...]`
+Definition: `--allow-net[=<HOST>...]` or `-N[=<HOST>...]`
 
 ```sh
 # Allow network access
@@ -277,7 +305,7 @@ deno run --allow-net=1.1.1.1:443 script.ts
 deno run --allow-net=[2606:4700:4700::1111] script.ts
 ```
 
-Definition: `--deny-net[=<IP_OR_HOSTNAME>...]`
+Definition: `--deny-net[=<HOST>...]`
 
 ```sh
 # Allow access to network, but deny access 
@@ -345,6 +373,21 @@ deno run \
 
 # Deny all access to env variables, disabling permission prompts.
 deno run --deny-env script.ts
+```
+
+The `--ignore-env` flag is similar to `--deny-env`, but instead of denying
+access outright, it silently returns `undefined` for any env variable reads.
+This is useful when you want code to run without failing on missing permissions,
+treating restricted variables as simply unset.
+
+Definition: `--ignore-env[=<VARIABLE_NAME>...]`
+
+```sh
+# Ignore all environment variable reads (returns undefined).
+deno run --ignore-env script.ts
+
+# Ignore specific environment variables.
+deno run --ignore-env=PORT,HOME script.ts
 ```
 
 > Note for Windows users: environment variables are case insensitive on Windows,

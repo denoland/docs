@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-05-16
 title: "deno info"
 oldUrl:
   - /runtime/manual/tools/dependency_inspector/
@@ -14,6 +14,11 @@ description: "Inspect the dependencies of your project"
 `deno info` displays information about a module's dependency tree. See
 [Modules](/runtime/fundamentals/modules/) for more about how Deno resolves and
 caches dependencies.
+
+When you pass a local file, `deno info <file>` automatically discovers a
+`deno.json` or `deno.jsonc` configuration file in the current directory or a
+parent directory. Use `--config <file>` to specify a different configuration
+file, or `--no-config` to disable automatic config discovery.
 
 ## Example
 

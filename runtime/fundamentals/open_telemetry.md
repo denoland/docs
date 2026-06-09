@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-25
+last_modified: 2026-05-20
 title: OpenTelemetry
 description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
@@ -107,6 +107,7 @@ Deno automatically creates spans for various operations, such as:
 
 - Incoming HTTP requests served with [`Deno.serve`](/api/deno/~/Deno.serve).
 - Outgoing HTTP requests made with [`fetch`](/api/web/~/fetch).
+- [`Deno.cron()`](/api/deno/~/Deno.cron) job invocations (added in Deno 2.7).
 
 #### [`Deno.serve`](/api/deno/~/Deno.serve)
 
@@ -287,6 +288,30 @@ environment variable:
   stdout/stderr.
 - `ignore`: Logs are emitted only to stdout/stderr, and will not be exported
   with OpenTelemetry.
+
+### Permission audit
+
+Deno can route the permission audit log into the OpenTelemetry exporter
+alongside the rest of your traces, metrics, and logs. Set
+`DENO_AUDIT_PERMISSIONS=otel` (instead of a file path) and each permission
+access — allowed or denied — is emitted as an OpenTelemetry log record with
+these attributes:
+
+- `deno.permission.type` — the permission name (`read`, `net`, `env`, …).
+- `deno.permission.value` — the specific value being checked (a path, host,
+  variable name, etc.).
+- `deno.permission.stack` — the JavaScript stack frames at the access site, only
+  present when `DENO_TRACE_PERMISSIONS` is also set.
+
+```sh
+OTEL_DENO=true DENO_AUDIT_PERMISSIONS=otel deno run -A main.ts
+```
+
+This is useful when you already collect OpenTelemetry data: the audit lands in
+the same backend as your request traces, so you can correlate which request
+triggered which permission access. See
+[permission audit](/runtime/fundamentals/security/#permission-flags) for the
+full attribute set and the JSONL file-path mode.
 
 ## User metrics
 
@@ -658,6 +683,10 @@ variables. Supported values for `OTEL_EXPORTER_OTLP_PROTOCOL` are:
 - `http/protobuf` (default): Export using Protobuf over HTTP to the configured
   endpoint.
 - `http/json`: Export using JSON over HTTP to the configured endpoint.
+- `grpc`: Export using gRPC (Protobuf over HTTP/2). Available in Deno 2.8+.
+  Useful for collectors that only accept gRPC, such as Azure Container Apps'
+  managed OpenTelemetry agent. The default OTLP gRPC port is `4317`, so you
+  typically also set `OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317`.
 - `console`: Print spans, logs, and metrics to stderr in a human-readable text
   format. This is useful for debugging and testing instrumentation without
   running an OTLP collector. When using `console`, no endpoint configuration is
@@ -771,8 +800,8 @@ limitations to be aware of:
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
   are not supported.
-- The supported exporters are OTLP (`http/protobuf`, `http/json`) and `console`.
-  Other exporters and protocols such as `grpc` are not supported.
+- The supported exporters are OTLP (`http/protobuf`, `http/json`, `grpc`) and
+  `console`. Other exporter formats are not supported.
 - Metrics from observable (asynchronous) meters are not collected on process
   exit/crash, so the last value of metrics may not be exported. Synchronous
   metrics are exported on process exit/crash.

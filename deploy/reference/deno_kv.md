@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-13
+last_modified: 2026-06-05
 title: Deno KV
 description: Use Deno KV in your applications with a dedicated database per timeline
 oldUrl: /deploy/reference/deno-kv/
@@ -34,11 +34,11 @@ keeps your production data safe while you develop and test. You can monitor
 provisioning and watch the status change to "Connected." If any errors occur,
 click "Fix" to retry.
 
-## Using Deno KV in Your Code
+## Connect from Deno Deploy
 
 Once you've assigned a database to your app, connecting from code is simple.
 Deno Deploy sets up the connection to the correct database based on the current
-environment.
+environment — no database ID or access token required.
 
 ### Example
 
@@ -57,6 +57,31 @@ Deno.serve(async () => {
 
 For detailed information about Deno KV and its features, see the
 [Deno KV documentation][Deno KV].
+
+## Connect from outside Deno Deploy
+
+You can also open a managed Deno KV database from local Deno CLI apps using the
+URL connector:
+
+```typescript
+const kv = await Deno.openKv(
+  "https://api.deno.com/v2/databases/<Database ID>/connect",
+);
+```
+
+Replace `<Database ID>` with the ID of the database you want to connect to. Each
+database's ID is shown in the Databases table on the database instance page in
+the Deno Deploy console.
+
+Authenticate the connection by setting either a personal or an organization
+access token as the `DENO_KV_ACCESS_TOKEN` environment variable:
+
+```bash
+export DENO_KV_ACCESS_TOKEN=ddo_...
+```
+
+Organization access tokens can be created from your organization's settings page
+in the Deno Deploy console.
 
 ## Un-assigning a KV database
 
@@ -86,9 +111,11 @@ such as our
 
 ## Data storage
 
-In local development, data is kept in memory. You do not need to create or
-allocate a database before using the KV APIs locally, and your KV code remains
-consistent across environments.
+By default, in local development data is kept in memory. You do not need to
+create or allocate a database before using the KV APIs locally, and your KV code
+remains consistent across environments. To develop against a managed Deno KV
+database from a local Deno program instead, see
+[Connect from outside Deno Deploy](#connect-from-outside-deno-deploy).
 
 ## Deleting a database instance
 

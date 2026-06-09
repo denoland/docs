@@ -272,7 +272,7 @@ Read more about
 
 The `lock` field in the `deno.json` file is used to specify configuration of the
 lock file that Deno uses to
-[ensure the integrity of your dependencies](/runtime/fundamentals/modules/#integrity-checking-and-lock-files).
+[ensure the integrity of your dependencies](/runtime/fundamentals/dependency_management/#integrity-checking-and-lock-files).
 A lock file records the exact versions and integrity hashes of the modules your
 project depends on, ensuring that the same versions are used every time the
 project is run, even if the dependencies are updated or changed remotely.
@@ -346,8 +346,14 @@ sharing code.
 
 :::
 
-See also
-[Configuring TypeScript in Deno](/runtime/reference/ts_config_migration/).
+If you’re migrating from Node.js, your existing `tsconfig.json` files work out
+of the box with Deno. See
+[Using tsconfig.json with Deno](/runtime/fundamentals/typescript/#using-tsconfigjson-with-deno)
+for details.
+
+For the full list of supported compiler options, library configuration, and
+advanced settings, see
+[Configuring TypeScript](/runtime/reference/ts_config_migration/).
 
 ## Unstable features
 
@@ -737,6 +743,27 @@ in that a script could modify the `deno.json` to elevate permissions. That's why
 this requires an explicit opt-in with `-P` and is not loaded by default.
 
 If you're ok with this risk, then this feature will be useful for you.
+
+## Compile config
+
+The `"compile"` block configures
+[`deno compile`](/runtime/reference/cli/compile/) without requiring you to
+repeat flags on every invocation. You can declare which extra files or
+directories to bundle into the executable, and which paths to exclude:
+
+```jsonc title="deno.json"
+{
+  "compile": {
+    "include": ["names.csv", "data", "worker.ts"],
+    "exclude": ["data/secrets", "**/*.test.ts"]
+  }
+}
+```
+
+`--include` and `--exclude` flags on the command line are merged with these
+lists rather than replacing them. The `"compile"` block can also carry
+`permissions` (see
+[Test, bench, and compile permissions](#test-bench-and-compile-permissions)).
 
 ## An example `deno.json` file
 

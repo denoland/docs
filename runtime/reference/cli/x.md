@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-12-10
+last_modified: 2026-05-20
 title: "deno x"
 command: x
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -44,6 +44,23 @@ Run a JSR package:
 ```sh
 deno x jsr:@std/http/file-server
 ```
+
+## Specifying the package separately from the binary
+
+Some npm packages expose multiple binaries — `typescript` ships both `tsc` and
+`tsserver`, for example. Starting in Deno 2.8, `--package` (`-p`) lets you
+choose the package and the binary independently, matching the
+`npx -p <package> <binary>` convention:
+
+```sh
+# Run `tsc` from the typescript package
+deno x -p typescript tsc
+
+# Pin the package version
+deno x -p typescript@5 tsc
+```
+
+The previous form `deno x typescript/tsc` still works.
 
 ## How it works
 

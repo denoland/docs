@@ -4,7 +4,7 @@ import { Sidebar } from "../types.ts";
 
 export const sidebar = [
   {
-    title: "Getting started",
+    title: "Get started",
     items: [
       {
         title: "Welcome to Deno",
@@ -29,7 +29,40 @@ export const sidebar = [
     ],
   },
   {
-    title: "Fundamentals",
+    title: "Guides",
+    items: [
+      {
+        title: "Dependency management",
+        href: "/runtime/fundamentals/dependency_management/",
+      },
+      {
+        title: "Web development",
+        href: "/runtime/fundamentals/web_dev/",
+      },
+      {
+        title: "HTTP Server",
+        href: "/runtime/fundamentals/http_server/",
+      },
+      {
+        title: "Testing",
+        href: "/runtime/fundamentals/testing/",
+      },
+      {
+        title: "Linting and formatting",
+        href: "/runtime/fundamentals/linting_and_formatting/",
+      },
+      {
+        title: "Debugging",
+        href: "/runtime/fundamentals/debugging/",
+      },
+      {
+        title: "Migrating from Node",
+        href: "/runtime/fundamentals/migrate_from_node/",
+      },
+    ],
+  },
+  {
+    title: "Concepts",
     items: [
       {
         title: "TypeScript",
@@ -44,7 +77,7 @@ export const sidebar = [
         href: "/runtime/fundamentals/security/",
       },
       {
-        title: "Modules and dependencies",
+        title: "Modules",
         href: "/runtime/fundamentals/modules/",
       },
       {
@@ -52,40 +85,65 @@ export const sidebar = [
         href: "/runtime/fundamentals/configuration/",
       },
       {
-        title: "Web development",
-        href: "/runtime/fundamentals/web_dev/",
-      },
-      {
-        title: "Testing",
-        href: "/runtime/fundamentals/testing/",
-      },
-      {
-        title: "Debugging",
-        href: "/runtime/fundamentals/debugging/",
-      },
-      {
         title: "Workspaces",
         href: "/runtime/fundamentals/workspaces/",
       },
       {
-        title: "Linting and formatting",
-        href: "/runtime/fundamentals/linting_and_formatting/",
+        title: "Stability and releases",
+        href: "/runtime/fundamentals/stability_and_releases/",
       },
-      {
-        title: "HTTP Server",
-        href: "/runtime/fundamentals/http_server/",
-      },
+    ],
+  },
+  {
+    title: "Advanced",
+    items: [
       {
         title: "FFI",
         href: "/runtime/fundamentals/ffi/",
+      },
+      {
+        title: "WebAssembly",
+        href: "/runtime/reference/wasm/",
+      },
+      {
+        title: "Cron",
+        href: "/runtime/fundamentals/cron/",
       },
       {
         title: "OpenTelemetry",
         href: "/runtime/fundamentals/open_telemetry/",
       },
       {
-        title: "Stability and releases",
-        href: "/runtime/fundamentals/stability_and_releases/",
+        title: "Module customization hooks",
+        href: "/runtime/reference/module_hooks/",
+      },
+      {
+        title: "Lint plugins",
+        href: "/runtime/reference/lint_plugins/",
+      },
+      {
+        title: "Bundling",
+        href: "/runtime/reference/bundling/",
+      },
+      {
+        title: "Docker",
+        href: "/runtime/reference/docker/",
+      },
+      {
+        title: "Continuous integration",
+        href: "/runtime/reference/continuous_integration/",
+      },
+      {
+        title: "Using JSX and React",
+        href: "/runtime/reference/jsx/",
+      },
+      {
+        title: "Deno & VS Code",
+        href: "/runtime/reference/vscode/",
+      },
+      {
+        title: "Deno 1.x to 2.x migration",
+        href: "/runtime/reference/migration_guide/",
       },
     ],
   },
@@ -159,7 +217,7 @@ export const sidebar = [
     ],
   },
   {
-    title: "Reference guides",
+    title: "Reference",
     items: [
       {
         title: "CLI",
@@ -182,12 +240,20 @@ export const sidebar = [
             href: "/runtime/reference/cli/bench/",
           },
           {
+            title: "deno bump-version",
+            href: "/runtime/reference/cli/bump_version/",
+          },
+          {
             title: "deno bundle",
             href: "/runtime/reference/cli/bundle/",
           },
           {
             title: "deno check",
             href: "/runtime/reference/cli/check/",
+          },
+          {
+            title: "deno ci",
+            href: "/runtime/reference/cli/ci/",
           },
           {
             title: "deno clean",
@@ -254,6 +320,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/outdated/",
           },
           {
+            title: "deno pack",
+            href: "/runtime/reference/cli/pack/",
+          },
+          {
             title: "deno publish",
             href: "/runtime/reference/cli/publish/",
           },
@@ -290,6 +360,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/test/",
           },
           {
+            title: "deno transpile",
+            href: "/runtime/reference/cli/transpile/",
+          },
+          {
             title: "deno types",
             href: "/runtime/reference/cli/types/",
           },
@@ -308,6 +382,10 @@ export const sidebar = [
           {
             title: "deno unstable flags",
             href: "/runtime/reference/cli/unstable_flags/",
+          },
+          {
+            title: "deno why",
+            href: "/runtime/reference/cli/why/",
           },
           {
             title: "deno x",
@@ -360,6 +438,7 @@ export const sidebar = [
             "ulid",
             "uuid",
             "webgpu",
+            "xml",
             "yaml",
           ].map((name) => ({
             title: name,
@@ -372,48 +451,16 @@ export const sidebar = [
         href: "/runtime/reference/ts_config_migration/",
       },
       {
-        title: "Continuous integration",
-        href: "/runtime/reference/continuous_integration/",
-      },
-      {
         title: "Environment variables",
         href: "/runtime/reference/env_variables/",
-      },
-      {
-        title: "Deno & VS Code",
-        href: "/runtime/reference/vscode/",
-      },
-      {
-        title: "Using JSX and React",
-        href: "/runtime/reference/jsx/",
-      },
-      {
-        title: "Testing code in docs",
-        href: "/runtime/reference/documentation/",
-      },
-      {
-        title: "Bundling",
-        href: "/runtime/reference/bundling/",
-      },
-      {
-        title: "Lint plugins",
-        href: "/runtime/reference/lint_plugins/",
-      },
-      {
-        title: "WebAssembly",
-        href: "/runtime/reference/wasm/",
-      },
-      {
-        title: "Migration guide",
-        href: "/runtime/reference/migration_guide/",
       },
       {
         title: "LSP integration",
         href: "/runtime/reference/lsp_integration/",
       },
       {
-        title: "Docker",
-        href: "/runtime/reference/docker/",
+        title: "Lint rules",
+        href: "/lint/",
       },
     ],
   },
