@@ -57,7 +57,9 @@ original source if the bundler emits maps.
 ## Renderer-only or Deno-only sessions
 
 If you only want to debug one side, use the per-target endpoints in the DevTools
-target list, or use `Deno.BrowserWindow.openDevtools()` from your own code:
+target list, or use
+[`Deno.BrowserWindow.openDevtools()`](/api/deno/~/Deno.BrowserWindow.openDevtools)
+from your own code:
 
 ```ts
 win.openDevtools(); // both isolates (default)

@@ -3,11 +3,12 @@ title: "Tray and dock"
 description: "Add icons to the OS status area and the macOS dock — tooltips, dark-mode variants, click events, and right-click context menus."
 ---
 
-`Deno.Tray` puts an icon in the system status area (macOS menu bar extras,
-Windows system tray, Linux AppIndicator). `Deno.dock` controls the macOS dock
-icon — badge, bounce, hide, and show.
+[`Deno.Tray`](/api/deno/~/Deno.Tray) puts an icon in the system status area
+(macOS menu bar extras, Windows system tray, Linux AppIndicator).
+[`Deno.dock`](/api/deno/~/Deno.dock) controls the macOS dock icon — badge,
+bounce, hide, and show.
 
-## `Deno.Tray`
+## [`Deno.Tray`](/api/deno/~/Deno.Tray)
 
 ```ts
 const icon = await Deno.readFile("./icons/tray.png");
@@ -136,11 +137,11 @@ If the backend cannot create a tray icon, the constructor's underlying `trayId`
 is `0` and subsequent calls are no-ops (silently). Check `tray.trayId !== 0` if
 you need to fall back gracefully.
 
-## `Deno.dock` (macOS)
+## [`Deno.dock`](/api/deno/~/Deno.dock) (macOS)
 
-`Deno.dock` is a single object exposing macOS dock controls. On Windows and
-Linux, the same APIs exist but most are no-ops — they fail gracefully rather
-than throwing.
+[`Deno.dock`](/api/deno/~/Deno.dock) is a single object exposing macOS dock
+controls. On Windows and Linux, the same APIs exist but most are no-ops — they
+fail gracefully rather than throwing.
 
 ### Badge
 

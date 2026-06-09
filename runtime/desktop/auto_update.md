@@ -3,10 +3,10 @@ title: "Auto-update"
 description: "Ship binary-diff updates to deno desktop apps with Deno.autoUpdate() — bsdiff patches, manifest polling, automatic rollback on failed launch."
 ---
 
-`Deno.autoUpdate()` polls a release server for new versions, downloads
-binary-diff patches, applies them to the runtime dylib, and stages the result
-for the next launch. If the next launch fails, the runtime rolls back to the
-previous version automatically.
+[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) polls a release server for
+new versions, downloads binary-diff patches, applies them to the runtime dylib,
+and stages the result for the next launch. If the next launch fails, the runtime
+rolls back to the previous version automatically.
 
 The update mechanism is inspired by Electrobun: small `bsdiff` patches instead
 of full binary downloads, and rollback baked into the launcher.
@@ -29,13 +29,14 @@ Two pieces of configuration are required:
    ```
 
 Both are baked into the compiled binary. The version is exposed at runtime as
-`Deno.desktopVersion`:
+[`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion):
 
 ```ts
 console.log(Deno.desktopVersion); // "1.4.0", or null if no version was set
 ```
 
-If `Deno.desktopVersion` is `null`, `Deno.autoUpdate()` is a no-op — the runtime
+If [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion) is `null`,
+[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) is a no-op — the runtime
 warns once and returns.
 
 ## Calling `autoUpdate()`
@@ -81,10 +82,10 @@ The runtime fetches `<url>/latest.json` and parses it as JSON:
 }
 ```
 
-| Field     | Meaning                                                              |
-| --------- | -------------------------------------------------------------------- |
-| `version` | The latest available version. Compared with `Deno.desktopVersion`.   |
-| `patches` | Map of from-version → patch filename relative to the manifest's URL. |
+| Field     | Meaning                                                                                               |
+| --------- | ----------------------------------------------------------------------------------------------------- |
+| `version` | The latest available version. Compared with [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion). |
+| `patches` | Map of from-version → patch filename relative to the manifest's URL.                                  |
 
 Old versions you no longer want to support can be omitted from `patches`. Users
 on those versions log a "no patch available for X" message and stay on their
@@ -128,8 +129,9 @@ exit before confirming, or never confirms — the launcher:
 
 1. Restores `<binary>.previous` as the current binary.
 2. Deletes the failed `<binary>.update`.
-3. Records the rollback so the next launch's `Deno.autoUpdate()` call fires
-   `onRollback` with the reason.
+3. Records the rollback so the next launch's
+   [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) call fires `onRollback`
+   with the reason.
 
 This makes broken updates self-healing. Users do not need to know anything
 happened beyond seeing the same version they had before.

@@ -3,10 +3,11 @@ title: "Windows"
 description: "Create and manage native windows with Deno.BrowserWindow — lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
 
-The `Deno.BrowserWindow` class controls native windows. The first window opens
-automatically when your binary starts; create more by constructing
-`new Deno.BrowserWindow()`. All windows share the same Deno runtime — there is
-one tokio runtime per process, regardless of how many windows are open.
+The [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) class controls native
+windows. The first window opens automatically when your binary starts; create
+more by constructing `new Deno.BrowserWindow()`. All windows share the same Deno
+runtime — there is one tokio runtime per process, regardless of how many windows
+are open.
 
 ## Creating windows
 
@@ -42,7 +43,7 @@ if (win.isVisible) { /* … */ }
 ```
 
 Closing a window does not stop the runtime — the process keeps running until all
-windows are closed (or you call `Deno.exit()`).
+windows are closed (or you call [`Deno.exit()`](/api/deno/~/Deno.exit)).
 
 ## Size and position
 
@@ -86,8 +87,8 @@ windows. For modal dialogs, prefer creating a child window over navigating away.
 
 ## Events
 
-`Deno.BrowserWindow` is an `EventTarget`. Listen with `addEventListener` or
-assign to the matching `on<event>` property.
+[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) is an `EventTarget`.
+Listen with `addEventListener` or assign to the matching `on<event>` property.
 
 ```ts
 win.addEventListener("resize", (e) => {
@@ -148,7 +149,8 @@ X11 / Wayland handle on Linux). Use this to integrate with platform APIs that
 need a window handle — for example, native graphics overlays, drag sources, or
 accessibility APIs.
 
-`getNativeWindow()` returns a `Deno.UnsafePointer`. You are responsible for
+`getNativeWindow()` returns a
+[`Deno.UnsafePointer`](/api/deno/~/Deno.UnsafePointer). You are responsible for
 calling the right platform APIs and not retaining the handle past the window's
 lifetime.
 

@@ -140,7 +140,8 @@ patch flow.
 ```
 
 This is the **only** server URL the runtime polls automatically.
-`Deno.autoUpdate()` defaults to this URL, but can override it per call.
+[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) defaults to this URL, but can
+override it per call.
 
 ## `errorReporting`
 
@@ -165,7 +166,8 @@ See [Error reporting](/runtime/desktop/error_reporting/) for the report schema.
 The compiled binary runs with the current working directory set to the user's
 `cwd`, not the directory containing the binary. If your app needs to find files
 relative to itself — framework build outputs, static assets — use `import.meta`
-or the framework's own resolution; do not assume `Deno.cwd()`.
+or the framework's own resolution; do not assume
+[`Deno.cwd()`](/api/deno/~/Deno.cwd).
 
 For framework projects this is handled automatically: detected build outputs
 (`.next/`, `dist/`, `_fresh/`, `.output/`, etc.) are embedded in the binary's

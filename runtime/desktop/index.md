@@ -60,15 +60,15 @@ deno desktop main.ts
 ```
 
 The compiled binary opens a window pointed at a local HTTP server bound to your
-`Deno.serve()` handler. Run it directly:
+[`Deno.serve()`](/api/deno/~/Deno.serve) handler. Run it directly:
 
 ```sh
 ./main      # macOS / Linux
 .\main.exe  # Windows
 ```
 
-`Deno.serve()` automatically binds to the address the webview navigates to — you
-do not need to pass a port or hostname. See
+[`Deno.serve()`](/api/deno/~/Deno.serve) automatically binds to the address the
+webview navigates to — you do not need to pass a port or hostname. See
 [HTTP serving](/runtime/desktop/serving/) for details.
 
 ## What's in this section
@@ -76,12 +76,13 @@ do not need to pass a port or hostname. See
 - [Configuration](/runtime/desktop/configuration/) — the `desktop` block in
   `deno.json`.
 - [Backends](/runtime/desktop/backends/) — CEF, webview, raw; how to choose.
-- [HTTP serving](/runtime/desktop/serving/) — `Deno.serve()` integration and the
-  serving model.
+- [HTTP serving](/runtime/desktop/serving/) —
+  [`Deno.serve()`](/api/deno/~/Deno.serve) integration and the serving model.
 - [Frameworks](/runtime/desktop/frameworks/) — Next.js, Astro, Fresh, Remix,
   Nuxt, SvelteKit, and friends.
-- [Windows](/runtime/desktop/windows/) — `Deno.BrowserWindow` lifecycle,
-  multiple windows, events.
+- [Windows](/runtime/desktop/windows/) —
+  [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) lifecycle, multiple
+  windows, events.
 - [Bindings](/runtime/desktop/bindings/) — calling Deno code from the webview
   via `bindings.<name>()`.
 - [Menus](/runtime/desktop/menus/) — application and context menus.
@@ -93,8 +94,9 @@ do not need to pass a port or hostname. See
   non-framework apps.
 - [DevTools](/runtime/desktop/devtools/) — unified DevTools attached to both the
   Deno runtime and the webview.
-- [Auto-update](/runtime/desktop/auto_update/) — `Deno.autoUpdate()`, manifests,
-  bsdiff, rollback.
+- [Auto-update](/runtime/desktop/auto_update/) —
+  [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate), manifests, bsdiff,
+  rollback.
 - [Error reporting](/runtime/desktop/error_reporting/) — capturing uncaught
   exceptions and panics.
 - [Distribution](/runtime/desktop/distribution/) — cross-compilation, output
