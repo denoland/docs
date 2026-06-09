@@ -374,6 +374,10 @@ export const sidebar = [
         ],
       },
       {
+        title: "Configuration file (deno.json)",
+        href: "/runtime/reference/deno_json/",
+      },
+      {
         title: "Configuring TypeScript",
         href: "/runtime/reference/ts_config_migration/",
       },

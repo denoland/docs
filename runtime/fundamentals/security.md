@@ -145,7 +145,7 @@ OTEL_DENO=true DENO_AUDIT_PERMISSIONS=otel deno run -A main.ts
 ### Configuration file
 
 Deno supports storing permissions in the deno.json/deno.jsonc file. Read more
-under [configuration](/runtime/fundamentals/configuration/#permissions).
+under [configuration](/runtime/reference/deno_json/#permissions).
 
 ### File system access
 

@@ -49,7 +49,7 @@ export default function LintRulesIndex(
           {" "}
           by adding their tags (e.g. <code>recommended</code>,{" "}
           <code>react</code>) to the{" "}
-          <a href="/runtime/fundamentals/configuration/#linting">
+          <a href="/runtime/reference/deno_json/#linting">
             <code>lint.rules.tags</code>
           </a>{" "}
           array.

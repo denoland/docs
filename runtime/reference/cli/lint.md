@@ -80,8 +80,8 @@ Customize which rules are active in your `deno.json`:
 - **`include`** — additional individual rules to enable
 - **`exclude`** — rules to disable even if included by a tag
 
-See the [Configuration](/runtime/fundamentals/configuration/#linting) page for
-all available options.
+See the [Configuration](/runtime/reference/deno_json/#linting) page for all
+available options.
 
 ## Including and excluding files
 

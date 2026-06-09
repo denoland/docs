@@ -88,10 +88,10 @@ and then this will run everything for us.
 
 You can also use this file to set configurations for these types of commands. So
 we can say `"fmt"` and then use a couple different rules, so the Formatting in
-the documentation [here](/runtime/fundamentals/configuration/#formatting) will
-walk you through it. There’s several different options that you can take
-advantage of, let’s go ahead and say, `"useTabs"`, and we’ll say `true` here,
-and then we’ll use `”lineWidth”: 80`.
+the documentation [here](/runtime/reference/deno_json/#formatting) will walk you
+through it. There’s several different options that you can take advantage of,
+let’s go ahead and say, `"useTabs"`, and we’ll say `true` here, and then we’ll
+use `”lineWidth”: 80`.
 
 ```json title="deno.json"
 {
@@ -119,10 +119,10 @@ This will run everything with those rules.
 
 Linting, you could set up as well. So we’ll say `"lint"`. This is also in the
 documentation, right above this, so Linting
-[here](/runtime/fundamentals/configuration/#linting) will take you on the
-journey of all the different configuration options depending on your project’s
-needs, but in this case let’s add a key for `"rules"` here, and you can include
-them, you can exclude them.
+[here](/runtime/reference/deno_json/#linting) will take you on the journey of
+all the different configuration options depending on your project’s needs, but
+in this case let’s add a key for `"rules"` here, and you can include them, you
+can exclude them.
 
 ```json title="deno.json"
 {

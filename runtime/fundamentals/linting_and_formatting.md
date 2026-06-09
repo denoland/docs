@@ -44,9 +44,8 @@ deno lint src/
 This command will lint all files in the `src/` directory.
 
 The linter can be configured in a
-[`deno.json`](/runtime/fundamentals/configuration/#linting) file. You can
-specify custom rules, plugins, and settings to tailor the linting process to
-your needs.
+[`deno.json`](/runtime/reference/deno_json/#linting) file. You can specify
+custom rules, plugins, and settings to tailor the linting process to your needs.
 
 ### Linting rules
 
@@ -283,8 +282,8 @@ Whether to use braces for if statements, for statements, and while statements
 ### Configuration
 
 The formatter can be configured in a
-[`deno.json`](/runtime/fundamentals/configuration/#formatting) file. You can
-specify custom settings to tailor the formatting process to your needs.
+[`deno.json`](/runtime/reference/deno_json/#formatting) file. You can specify
+custom settings to tailor the formatting process to your needs.
 
 ## Deno support for other linters and formatters
 

@@ -300,7 +300,7 @@ that's ok.)
 While the extension communicates directly with the language server, there are
 times when you might prefer to run Deno commands via the CLI. You can define
 tasks in a `deno.json` file in the root of your workspace in a
-[`tasks` field](/runtime/fundamentals/configuration/#tasks).
+[`tasks` field](/runtime/reference/deno_json/#tasks).
 
 ## Using a development container
 
