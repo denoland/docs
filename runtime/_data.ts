@@ -41,11 +41,11 @@ export const sidebar = [
       },
       {
         title: "Testing",
-        href: "/runtime/fundamentals/testing/",
+        href: "/runtime/test/",
       },
       {
         title: "Linting and formatting",
-        href: "/runtime/fundamentals/linting_and_formatting/",
+        href: "/runtime/lint_and_format/",
       },
       {
         title: "Debugging",

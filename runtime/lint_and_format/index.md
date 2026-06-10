@@ -1,20 +1,226 @@
 ---
-title: "Lint and format"
-description: "Keep your code clean with Deno's built-in linter and formatter — zero config, with optional custom rules and plugins."
+last_modified: 2026-05-17
+title: "Linting and formatting"
+description: "A guide to Deno's built-in code quality tools. Learn how to use deno lint and deno fmt commands, configure rules, integrate with CI/CD pipelines, and maintain consistent code style across your projects."
+oldUrl:
+  - /runtime/fundamentals/linting_and_formatting/
 ---
 
-Deno includes a fast linter and formatter that work out of the box, with no
-configuration. Catch problems with `deno lint`, format with `deno fmt`, and
-extend both with rules and plugins when you need to.
+In an ideal world, your code is always clean, consistent, and free of pesky
+errors. That's the promise of Deno's built-in linting and formatting tools. By
+integrating these features directly into the runtime, Deno eliminates the need
+for external dependencies and complex configurations in your projects. These
+inbuilt tools are fast and performant, not only saving time but also ensuring
+that every line of code adheres to best practices.
 
-## Guides
+With `deno fmt` and `deno lint`, you can focus on writing great code, knowing
+that Deno has your back. It's like having a vigilant assistant who keeps your
+codebase in top shape, allowing you to concentrate on what truly matters:
+building amazing applications.
 
-- **[Linting and formatting](/runtime/fundamentals/linting_and_formatting/)** —
-  set up `deno lint` and `deno fmt`, configure rules, and integrate other tools.
+## Linting
 
-## Reference
+<a href="/lint/" type="docs-cta runtime-cta">Explore all the lint rules</a>
 
-- **[deno lint](/runtime/reference/cli/lint/)** — lint your code.
-- **[deno fmt](/runtime/reference/cli/fmt/)** — format your code.
-- **[Lint rules](/lint/)** — the full catalog of built-in lint rules.
-- **[Lint plugins](/runtime/reference/lint_plugins/)** — write custom lint rules.
+Linting is the process of analyzing your code for potential errors, bugs, and
+stylistic issues. Deno's built-in linter,
+[`deno lint`](/runtime/reference/cli/lint/), supports recommended set of rules
+from [ESLint](https://eslint.org/) to provide comprehensive feedback on your
+code. This includes identifying syntax errors, enforcing coding conventions, and
+highlighting potential issues that could lead to bugs.
+
+To run the linter, use the following command in your terminal:
+
+```bash
+deno lint
+```
+
+By default, `deno lint` analyzes all TypeScript and JavaScript files in the
+current directory and its subdirectories. If you want to lint specific files or
+directories, you can pass them as arguments to the command. For example:
+
+```bash
+deno lint src/
+```
+
+This command will lint all files in the `src/` directory.
+
+The linter can be configured in a
+[`deno.json`](/runtime/reference/deno_json/#linting) file. You can specify
+custom rules, plugins, and settings to tailor the linting process to your needs.
+
+### Linting rules
+
+You can view and search the list of available rules and their usage on the
+[List of rules](/lint/) documentation page.
+
+## Formatting
+
+Formatting is the process of automatically adjusting the layout of your code to
+adhere to a consistent style. Deno's built-in formatter, `deno fmt`, uses the
+powerful [dprint](https://dprint.dev/) engine to ensure that your code is always
+clean, readable, and consistent.
+
+To format your code, simply execute the following command in your terminal:
+
+```bash
+deno fmt
+```
+
+By default, `deno fmt` formats all TypeScript and JavaScript files in the
+current directory and its subdirectories. If you want to format specific files
+or directories, you can pass them as arguments to the command. For example:
+
+```bash
+deno fmt src/
+```
+
+This command will format all files in the `src/` directory.
+
+### Checking your formatting
+
+The `deno fmt --check` command is used to verify if your code is properly
+formatted according to Deno's default formatting rules. Instead of modifying the
+files, it checks them and reports any formatting issues. This is particularly
+useful for integrating into continuous integration (CI) pipelines or pre-commit
+hooks to ensure code consistency across your project.
+
+If there are formatting issues, `deno fmt --check` will list the files that need
+formatting. If all files are correctly formatted, it will simply exit without
+any output.
+
+### Integration in CI
+
+You can add `deno fmt --check` to your CI pipeline to automatically check for
+formatting issues. For example, in a GitHub Actions workflow:
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: deno fmt --check
+```
+
+This ensures that any code changes adhere to the project's formatting standards
+before being merged.
+
+### Integration in VS Code
+
+To enable Deno as your formatter in VS Code, you have to set it up as your
+default formatter in the settings, and then add a `.vscode/settings.json` file
+in the root of your project with the following configuration:
+
+```json
+{
+  "deno.enablePaths": ["./deno.json"]
+}
+```
+
+If your `deno.json(c)` file is located in a subdirectory of your project,
+provide the correct relative path to it instead.
+
+### Configuration
+
+The formatter is configured with the `fmt` field in your
+[`deno.json`](/runtime/reference/deno_json/#formatting) file. See
+[all formatting options](/runtime/reference/deno_json/#formatting) for the full
+list of settings and their defaults.
+
+## Using other linters and formatters
+
+Deno's built-in [`deno lint`](#linting) and [`deno fmt`](#formatting) cover most
+projects, but you can also run popular third-party tools without installing them
+globally. Because Deno runs npm packages directly, `deno run -A npm:<tool>` runs
+any of them with no separate `npm install` step. To save typing, add the command
+as a [task](/runtime/reference/deno_json/#tasks) in your `deno.json` and run it
+with `deno task`.
+
+### ESLint
+
+[ESLint](https://eslint.org/) needs a flat config file, `eslint.config.js`.
+Reference its packages with `npm:` specifiers so Deno can resolve them:
+
+```js title="eslint.config.js"
+import js from "npm:@eslint/js";
+import globals from "npm:globals";
+
+export default [
+  js.configs.recommended,
+  {
+    files: ["**/*.ts", "**/*.js"],
+    languageOptions: {
+      globals: { ...globals.node, Deno: "readonly" },
+    },
+  },
+];
+```
+
+Then run it over your project:
+
+```sh
+deno run -A npm:eslint .
+```
+
+Declaring the Node and `Deno` globals prevents false `no-undef` errors for
+globals such as `console`. For type-aware linting of TypeScript, add
+[typescript-eslint](https://typescript-eslint.io/) to the config.
+
+:::note
+
+The VS Code ESLint extension needs a real `node_modules` directory to resolve
+ESLint and its plugins. Set `"nodeModulesDir": "auto"` in your `deno.json` and
+run `deno install` so the packages are materialized on disk.
+
+:::
+
+### oxlint
+
+[oxlint](https://oxc.rs) is a fast Rust-based linter that runs with no
+configuration:
+
+```sh
+deno run -A npm:oxlint@latest
+```
+
+It lints the current directory and prints any problems it finds:
+
+```console
+sample.ts:3:5: warning eslint(no-unused-vars): Variable 'unused' is declared but never used.
+```
+
+### Prettier
+
+[Prettier](https://prettier.io/) formats your code with no configuration
+required:
+
+```sh
+# report files that need formatting
+deno run -A npm:prettier --check .
+
+# format files in place
+deno run -A npm:prettier --write .
+```
+
+### Biome
+
+[Biome](https://biomejs.dev/) is a fast Rust-based linter and formatter in one,
+and also works with zero configuration:
+
+```sh
+# lint and check formatting
+deno run -A npm:@biomejs/biome check .
+
+# format files in place
+deno run -A npm:@biomejs/biome format --write .
+
+# lint only
+deno run -A npm:@biomejs/biome lint .
+```
+
+To customize Biome, generate a `biome.json` with
+`deno run -A npm:@biomejs/biome init`.

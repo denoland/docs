@@ -7,7 +7,7 @@ oldUrl: /runtime/manual/advanced/continuous_integration
 
 Deno's built-in tools make it easy to set up Continuous Integration (CI)
 pipelines for your projects. [Testing](/runtime/fundamentals/testing),
-[linting and formatting](/runtime/fundamentals/linting_and_formatting/) your
+[linting and formatting](/runtime/lint_and_format/) your
 code can all be done with the corresponding commands `deno test`, `deno lint`
 and `deno fmt`. In addition, you can generate code coverage reports from test
 results with `deno coverage` in pipelines.

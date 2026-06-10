@@ -35,9 +35,9 @@ few minutes.
 - **[Secure by default](/runtime/fundamentals/security/).** Code runs in a
   sandbox with no file, network, or environment access until you grant it.
 - **A full toolchain, no plumbing.** Built-in
-  [formatter](/runtime/fundamentals/linting_and_formatting/),
-  [linter](/runtime/fundamentals/linting_and_formatting/),
-  [test runner](/runtime/fundamentals/testing/), benchmarking, and
+  [formatter](/runtime/lint_and_format/),
+  [linter](/runtime/lint_and_format/),
+  [test runner](/runtime/test/), benchmarking, and
   [a lot more](/runtime/reference/cli/). No `devDependencies` to wire up.
 
 ## Install Deno
@@ -116,7 +116,7 @@ also built on the web-standard [`Deno.serve`](/api/deno/~/Deno.serve) with
 ## Test it
 
 The project ships with tests. Run them with
-[`deno test`](/runtime/fundamentals/testing/) — the test runner is built in, no
+[`deno test`](/runtime/test/) — the test runner is built in, no
 dependencies to add:
 
 ```sh

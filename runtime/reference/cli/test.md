@@ -10,7 +10,7 @@ description: "Run tests for your project with Deno's built-in test runner"
 
 Deno ships with a built-in test runner using the
 [`Deno.test()`](/api/deno/~/Deno.test) API. To learn how to write tests, see the
-[Testing fundamentals](/runtime/fundamentals/testing/) guide. For assertions,
+[Testing fundamentals](/runtime/test/) guide. For assertions,
 see [`@std/assert`](/runtime/reference/std/assert/) and
 [`@std/expect`](/runtime/reference/std/expect/).
 
@@ -140,5 +140,5 @@ Evaluate code blocks in JSDoc and Markdown files as tests:
 deno test --doc
 ```
 
-See [documentation tests](/runtime/fundamentals/testing/#documentation-tests)
+See [documentation tests](/runtime/test/#documentation-tests)
 for details.
