@@ -1,3 +1,5 @@
+import "lume/jsx-runtime";
+
 export type Sidebar = SidebarSection[];
 export type Path = string;
 
@@ -44,7 +46,11 @@ export interface SidebarSectionProps {
   headerPath: string;
 }
 
-export type TitleContent = string | JSX.Element;
+// `JSX.Children` is the renderable-content type from Lume's JSX runtime (ssx),
+// which — unlike React — does not expose a `JSX.Element` type. The import pulls
+// in ssx's global `JSX` namespace so this resolves under `deno check`/`deno test`
+// (the site itself builds with --no-check).
+export type TitleContent = string | JSX.Children;
 
 export interface SidebarItem {
   title: TitleContent;

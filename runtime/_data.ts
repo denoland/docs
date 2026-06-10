@@ -114,8 +114,8 @@ export const sidebar = [
         href: "/runtime/fundamentals/open_telemetry/",
       },
       {
-        title: "Module customization hooks",
-        href: "/runtime/reference/module_hooks/",
+        title: "Loader hooks",
+        href: "/runtime/reference/loader_hooks/",
       },
       {
         title: "Lint plugins",
@@ -134,16 +134,12 @@ export const sidebar = [
         href: "/runtime/reference/continuous_integration/",
       },
       {
-        title: "Using JSX and React",
+        title: "JSX and React",
         href: "/runtime/reference/jsx/",
       },
       {
         title: "Deno & VS Code",
         href: "/runtime/reference/vscode/",
-      },
-      {
-        title: "Deno 1.x to 2.x migration",
-        href: "/runtime/reference/migration_guide/",
       },
     ],
   },
@@ -374,11 +370,11 @@ export const sidebar = [
         ],
       },
       {
-        title: "Configuration file (deno.json)",
+        title: "deno.json",
         href: "/runtime/reference/deno_json/",
       },
       {
-        title: "Configuring TypeScript",
+        title: "TypeScript",
         href: "/runtime/reference/ts_config_migration/",
       },
       {
@@ -400,40 +396,19 @@ export const sidebar = [
     ],
   },
   {
-    title: "Contributing and support",
+    title: "Contributing",
     items: [
       {
-        title: "Contributing to Deno",
-        items: [
-          {
-            title: "Contributing overview",
-            href: "/runtime/contributing/",
-          },
-          {
-            title: "Architecture",
-            href: "/runtime/contributing/architecture/",
-          },
-          {
-            title: "Profiling",
-            href: "/runtime/contributing/profiling/",
-          },
-          {
-            title: "Release schedule",
-            href: "/runtime/contributing/release_schedule/",
-          },
-          {
-            title: "Style guide",
-            href: "/runtime/contributing/style_guide/",
-          },
-          {
-            title: "Documentation",
-            href: "/runtime/contributing/docs/",
-          },
-          {
-            title: "Examples",
-            href: "/runtime/contributing/examples/",
-          },
-        ],
+        title: "Overview",
+        href: "/runtime/contributing/",
+      },
+      {
+        title: "Architecture",
+        href: "/runtime/contributing/architecture/",
+      },
+      {
+        title: "Style guide",
+        href: "/runtime/contributing/style_guide/",
       },
       {
         title: "Help",

@@ -163,31 +163,63 @@ if (currentSidebarItem) {
 const desktopToc = document.querySelector("#toc");
 
 if (desktopToc) {
-  const tocItems = document.querySelectorAll("#toc a");
-  const pageHeadings = document.querySelectorAll(
-    ".markdown-body :where(h1, h2, h3, h4, h5, h6)",
+  const tocItems = Array.from(document.querySelectorAll("#toc a"));
+  // Only track headings that actually have an entry in the TOC — otherwise a
+  // heading without a TOC link would clear the active item and leave nothing
+  // highlighted.
+  const headings = Array.from(
+    document.querySelectorAll(
+      ".markdown-body :where(h1, h2, h3, h4, h5, h6)",
+    ),
+  ).filter(
+    (h) => h.id && document.querySelector(`#toc a[href="#${h.id}"]`),
   );
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const id = entry.target.id;
-        const tocLink = document.querySelector(`#toc a[href="#${id}"]`);
 
-        if (entry.isIntersecting) {
-          tocItems.forEach((item) => item.classList.remove("active"));
-          if (tocLink) {
-            tocLink.classList.add("active");
-          }
+  if (headings.length > 0) {
+    const updateActive = () => {
+      const header = document.querySelector("header");
+      const line = (header ? header.getBoundingClientRect().height : 64) + 24;
+
+      // The active section is the last heading whose top has scrolled past the
+      // line just below the sticky header.
+      let current = headings[0];
+      for (const h of headings) {
+        if (h.getBoundingClientRect().top - line <= 0) {
+          current = h;
+        } else {
+          break;
         }
-      });
-    },
-    {
-      rootMargin: "-0% 0px -75% 0px",
-      threshold: 0.5,
-    },
-  );
+      }
 
-  pageHeadings.forEach((heading) => {
-    observer.observe(heading);
-  });
+      // When scrolled to the very bottom, pin to the last heading so short
+      // trailing sections still register.
+      const atBottom = window.innerHeight + Math.ceil(window.scrollY) >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom) {
+        current = headings[headings.length - 1];
+      }
+
+      const activeHref = `#${current.id}`;
+      tocItems.forEach((item) => {
+        item.classList.toggle(
+          "active",
+          item.getAttribute("href") === activeHref,
+        );
+      });
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateActive();
+        ticking = false;
+      });
+    };
+
+    document.addEventListener("scroll", onScroll, { passive: true });
+    globalThis.addEventListener("resize", onScroll, { passive: true });
+    updateActive();
+  }
 }

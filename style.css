@@ -456,31 +456,39 @@
       }
     }
     table {
-      width: 100%;
       width: max-content;
       max-width: 100%;
       display: block;
-      overflow: auto;
+      overflow-x: auto;
+      border: 1px solid var(--color-background-tertiary);
+      border-radius: 0.5rem;
+      border-spacing: 0;
+      font-size: 0.9em;
+      line-height: 1.45;
 
+      th, td {
+        /* Cap cell width so a single long cell wraps instead of stretching the
+           whole table off-screen (e.g. the deploy comparison table). */
+        max-width: 22rem;
+        padding: 0.5rem 0.85rem;
+        border-bottom: 1px solid var(--color-background-tertiary);
+        text-align: left;
+        vertical-align: top;
+      }
       th {
         font-weight: var(--base-text-weight-semibold, 600);
+        color: var(--color-foreground-primary);
+        background-color: var(--color-background-secondary);
+        white-space: nowrap;
       }
-      th, td {
-        border: 1px solid
-          var(--borderColor-default, var(--color-border-default));
-        padding: 6px 13px;
+      tbody tr:nth-child(2n) {
+        background-color: var(--color-background-secondary);
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
       }
       td > :last-child {
         margin-bottom: 0;
-      }
-      tr {
-        background-color: var(--bgColor-default, var(--color-canvas-default));
-        border-top: 1px solid
-          var(--borderColor-muted, var(--color-border-muted));
-
-        &:nth-child(2n) {
-          background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-        }
       }
       img {
         background-color: transparent;
@@ -498,6 +506,20 @@
     }
     .fmt-options td {
       overflow-wrap: anywhere;
+    }
+    /* These tables size their columns explicitly via table-layout: fixed, so the
+       global cell max-width must not clamp them (it would stop the wide column
+       from filling its track). */
+    .cheatsheet th,
+    .cheatsheet td,
+    .fmt-options th,
+    .fmt-options td {
+      max-width: none;
+    }
+    /* Option / Default columns are narrow; "Possible values" takes the rest. */
+    .fmt-options th:nth-child(1),
+    .fmt-options td:nth-child(1) {
+      width: 12rem;
     }
     .fmt-options th:nth-child(2),
     .fmt-options td:nth-child(2) {
@@ -561,7 +583,7 @@
       color: var(--fgColor-default, var(--color-fg-default));
       background-color: var(--bgColor-muted, var(--color-canvas-subtle));
       border-radius: 6px;
-      padding: 1rem;
+      padding: 0.6rem 1rem;
       font-size: 85%;
       line-height: 1.45;
       overflow: auto;
@@ -828,6 +850,7 @@
   :host {
     --header-height: 6rem;
     --subnav-height: 2.5rem;
+    --layout-max-width: 90rem;
     /* Advertise support to the UA and extensions; enables form controls/scrollbar theming */
     color-scheme: light dark;
 
@@ -1404,7 +1427,7 @@
       align-items: start;
       width: 100%;
       margin-inline: auto;
-      max-width: 80rem;
+      max-width: var(--layout-max-width);
       column-gap: 1rem;
       padding-inline: 1rem;
     }
@@ -1413,11 +1436,7 @@
       grid-template-columns: auto minmax(0, 1fr) auto;
 
       @media (min-width: 64rem) {
-        grid-template-columns:
-          minmax(12rem, 1fr) minmax(24rem, 3fr) minmax(
-            12rem,
-            1fr
-          );
+        grid-template-columns: minmax(13rem, 14rem) minmax(0, 1fr) 16rem;
       }
 
       .content {
@@ -1502,6 +1521,13 @@
     li:has(> &).expanded {
       grid-template-rows: max-content 1fr;
       padding-bottom: 1rem;
+      border-left-color: var(--color-header-highlight);
+    }
+
+    /* Keep the open parent toggle highlighted */
+    li.expanded > & {
+      color: var(--color-foreground-primary);
+      font-weight: 600;
     }
 
     /* Rotate chevron when expanded - only animate on user interaction */
@@ -1784,13 +1810,13 @@
 
     &::before {
       content: "";
-      height: 0.5em;
-      width: 0.4em;
-      background: var(--color-foreground-primary);
-      clip-path: polygon(0 0, 100% 50%, 0 100%);
+      width: 0.3rem;
+      height: 1.4em;
+      border-radius: 2px;
+      background: var(--color-header-highlight);
       position: absolute;
-      left: -1em;
-      top: calc(50% - 0.25em);
+      left: -0.6rem;
+      top: 0;
     }
   }
 

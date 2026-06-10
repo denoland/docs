@@ -106,7 +106,7 @@ The same hints and additional quick-fixes are provided by the Deno LSP in your
 editor.
 
 The `node:module` built-in includes the
-[`registerHooks()`](/runtime/reference/module_hooks/) API, which you can use to
+[`registerHooks()`](/runtime/reference/loader_hooks/) API, which you can use to
 customize module resolution and loading from inside your program.
 
 <a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
