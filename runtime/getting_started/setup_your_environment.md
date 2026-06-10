@@ -1,4 +1,5 @@
 ---
+navSection: /runtime/run/
 last_modified: 2026-05-28
 title: "Set up your environment"
 description: "A guide to setting up your development environment for Deno. Learn how to configure popular editors like VS Code, set up language server support, and enable shell completions for better productivity."

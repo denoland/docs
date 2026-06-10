@@ -421,8 +421,7 @@ export const sectionHref = "/runtime/";
 // analytics-driven (GA4 90d intent volume — see NAVIGATION_REDESIGN.md §8).
 // Each points at a hub page that curates the relevant guides + reference.
 export const SidebarNav = [
-  { title: "Get started", href: "/runtime/", exact: true },
-  { title: "Run code", href: "/runtime/run/" },
+  { title: "Run code", href: "/runtime/", exact: true },
   { title: "Package manager", href: "/runtime/packages/" },
   { title: "Migrate from Node.js", href: "/runtime/migrate/" },
   { title: "Test", href: "/runtime/test/" },

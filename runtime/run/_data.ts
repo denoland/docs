@@ -1,14 +1,33 @@
 import type { Sidebar } from "../../types.ts";
 
-// Scoped sidebar for the Run section. The guide pages live under
-// /runtime/fundamentals/ for now and opt in via `navSection: /runtime/run/`
-// frontmatter (URLs get aligned later). Commands stay in the central CLI
+// Scoped sidebar for the combined "Run code" section — it absorbs the old
+// "Get started" section (getting your code running IS getting started). The
+// landing is /runtime/ (the quickstart); the get-started and run guide pages
+// opt in via `navSection: /runtime/run/`. Commands stay in the central CLI
 // reference and are linked here.
 export const sidebar = [
   {
+    title: "Get started",
+    items: [
+      { title: "Overview", href: "/runtime/" },
+      {
+        title: "Installation",
+        href: "/runtime/getting_started/installation/",
+      },
+      {
+        title: "Set up your environment",
+        href: "/runtime/getting_started/setup_your_environment/",
+      },
+      {
+        title: "Command line interface",
+        href: "/runtime/getting_started/command_line_interface/",
+      },
+    ],
+  },
+  {
     title: "Run code",
     items: [
-      { title: "Overview", href: "/runtime/run/" },
+      { title: "Running code", href: "/runtime/run/" },
       { title: "Web development", href: "/runtime/fundamentals/web_dev/" },
       { title: "HTTP server", href: "/runtime/fundamentals/http_server/" },
       { title: "Debugging", href: "/runtime/fundamentals/debugging/" },
@@ -25,7 +44,7 @@ export const sidebar = [
     ],
   },
   {
-    title: "Related",
+    title: "Reference",
     items: [
       {
         title: "Web platform APIs",

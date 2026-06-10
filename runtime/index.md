@@ -2,7 +2,7 @@
 last_modified: 2026-05-28
 title: "Get started with Deno"
 description: "Install Deno and build your first project: why Deno, install, create, run, test, add a dependency, and use the built-in toolchain — no build step, no config."
-navSection: /runtime/getting_started/installation/
+navSection: /runtime/run/
 pagination_next: /runtime/getting_started/installation/
 oldUrl:
   - /manual/
