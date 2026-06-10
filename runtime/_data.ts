@@ -1,6 +1,6 @@
 import { walk } from "jsr:@std/fs";
 import { parse as yamlParse } from "jsr:@std/yaml";
-import { Sidebar } from "../types.ts";
+import type { Sidebar, SidebarNavItem } from "../types.ts";
 
 export const sidebar = [
   {
@@ -420,6 +420,21 @@ export const sidebar = [
 
 export const sectionTitle = "Runtime";
 export const sectionHref = "/runtime/";
+
+// Second-level navbar: task/tooling categories for discovery. Order is
+// analytics-driven (GA4 90d intent volume — see NAVIGATION_REDESIGN.md §8).
+// Each points at a hub page that curates the relevant guides + reference.
+export const SidebarNav = [
+  { title: "Get started", href: "/runtime/getting_started/" },
+  { title: "Run", href: "/runtime/run/" },
+  { title: "Packages", href: "/runtime/packages/" },
+  { title: "Migrate", href: "/runtime/migrate/" },
+  { title: "Test", href: "/runtime/test/" },
+  { title: "Lint & format", href: "/runtime/lint_and_format/" },
+  { title: "CLI apps", href: "/runtime/cli_apps/" },
+  { title: "Desktop apps", href: "/runtime/desktop_apps/" },
+  { title: "Reference", href: "/runtime/reference/" },
+] satisfies SidebarNavItem[];
 
 export interface Description {
   kind: "note" | "tip" | "info" | "caution";

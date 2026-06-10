@@ -12,7 +12,9 @@ export default function Layout(data: Lume.Data) {
     data.url.startsWith("/subhosting") ||
     data.url.startsWith("/services") ||
     data.url.startsWith("/sandbox");
-  const hasSubNav = isServicesPage;
+  // Render the second-level navbar for any section that defines a SidebarNav
+  // (the deploy family, and now Runtime — see runtime/_data.ts).
+  const hasSubNav = isServicesPage || Boolean(data.page?.data?.SidebarNav);
 
   return (
     <html lang="en">
