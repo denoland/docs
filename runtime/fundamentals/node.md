@@ -775,7 +775,7 @@ cheatsheet.
 :::caution
 
 Not to be confused with
-[private repositories and modules](/runtime/fundamentals/dependency_management/#private-repositories).
+[private repositories and modules](/runtime/packages/#private-repositories).
 
 :::
 
@@ -867,7 +867,7 @@ fields. The ones most likely to matter:
   installs. The same control is also available as the CLI flag
   `--minimum-dependency-age` and the `minimumDependencyAge` field in
   `deno.json`. See
-  [Minimum dependency age](/runtime/fundamentals/dependency_management/#minimum-dependency-age)
+  [Minimum dependency age](/runtime/packages/#minimum-dependency-age)
   for the full picture.
 
   ```ini title=".npmrc"

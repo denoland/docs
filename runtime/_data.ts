@@ -29,7 +29,7 @@ export const sidebar = [
     items: [
       {
         title: "Dependency management",
-        href: "/runtime/fundamentals/dependency_management/",
+        href: "/runtime/packages/",
       },
       {
         title: "Web development",
@@ -427,7 +427,8 @@ export const SidebarNav = [
   { title: "Test", href: "/runtime/test/" },
   { title: "Lint & format", href: "/runtime/lint_and_format/" },
   { title: "CLI apps", href: "/runtime/cli_apps/" },
-  { title: "Desktop apps", href: "/runtime/desktop_apps/" },
+  // Desktop apps hidden until its dedicated content lands (page kept at
+  // /runtime/desktop_apps/).
   { title: "Reference", href: "/runtime/reference/" },
 ] satisfies SidebarNavItem[];
 
