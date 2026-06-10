@@ -514,19 +514,17 @@ import * as module_2 from "@example/my-package/module2";
 
 ## Permissions
 
-Deno 2.5+ supports storing
-[permission](/runtime/fundamentals/security/#permissions) sets in the config
-file.
+Deno 2.5+ supports storing [permission](/runtime/reference/permissions/) sets in
+the config file.
 
 ### Named permissions
 
 Permissions can be defined as key-value pairs under arbitrarily-named permission
 sets under the `"permissions"` key. Within each set,
 
-- the key is the name of a
-  [permission](/runtime/fundamentals/security/#permissions) that would follow
-  `--allow-` or `--deny-` in the CLI invocation (i.e. `read`, `write`, `net`,
-  `env`, `sys`, `run`, `ffi`, `import`)
+- the key is the name of a [permission](/runtime/reference/permissions/) that
+  would follow `--allow-` or `--deny-` in the CLI invocation (i.e. `read`,
+  `write`, `net`, `env`, `sys`, `run`, `ffi`, `import`)
 - the value is a boolean (`true` / `false` correspond to allow / deny), an array
   of strings representing paths, domains etc., or an object with `allow`,
   `deny`, and/or `ignore` boolean key-value pairs.

@@ -386,6 +386,10 @@ export const sidebar = [
         href: "/runtime/reference/env_variables/",
       },
       {
+        title: "Permissions",
+        href: "/runtime/reference/permissions/",
+      },
+      {
         title: "LSP integration",
         href: "/runtime/reference/lsp_integration/",
       },
