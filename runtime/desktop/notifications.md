@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Notifications"
 description: "Show native OS notifications from deno desktop apps with the standard Web Notifications API — permission flow, options, and events."
 ---
@@ -89,7 +90,7 @@ new Notification("New message", {
 | `badge`              | `string`                   | Badge URL (platform-dependent).                                           |
 | `dir`                | `"auto" \| "ltr" \| "rtl"` | Text direction.                                                           |
 | `lang`               | `string`                   | BCP 47 language tag.                                                      |
-| `data`               | `any`                      | Arbitrary structured-cloneable data attached to the notification.         |
+| `data`               | `any`                      | Arbitrary data attached to the notification; read it back from `data`.    |
 
 ### Icons
 

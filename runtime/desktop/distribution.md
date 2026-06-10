@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Distribution"
 description: "Cross-compile a deno desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats — .app, .dmg, .exe directory, AppImage."
 ---
@@ -30,9 +31,8 @@ Supported triples:
 | `aarch64-unknown-linux-gnu` | Linux   | arm64        |
 | `x86_64-unknown-linux-gnu`  | Linux   | x86_64       |
 
-The CLI fetches the matching prebuilt `denort` and the matching prebuilt Laufey
-backend archive from `github.com/denoland/laufey/releases`. No platform-specific
-toolchain is needed on the host.
+The CLI fetches the matching prebuilt `denort` and the matching prebuilt backend
+archive automatically. No platform-specific toolchain is needed on the host.
 
 ## Output formats
 
@@ -66,19 +66,19 @@ run so frameworks like Next.js find their build output relative to CWD.
 
 ### Windows
 
-| Output   | Produced by                                         |
-| -------- | --------------------------------------------------- |
-| `MyApp/` | Default — directory containing `.exe` and CEF DLLs. |
+| Output   | Produced by                                            |
+| -------- | ------------------------------------------------------ |
+| `MyApp/` | Default — directory with a launcher and support files. |
 
 The `MyApp/` directory contains:
 
 ```
 MyApp/
-  MyApp.exe
-  *.dll                   # CEF runtime DLLs
-  resources.pak           # CEF resources
-  locales/                # CEF locales
-  …
+  MyApp.bat               # launcher
+  denort.dll              # Deno runtime + your code
+  *.dll                   # rendering backend and CEF libraries
+  resources.pak, locales/ # CEF support files
+  AppIcon.ico             # icon (optional)
 ```
 
 Zip the directory or feed it into an installer toolchain. Windows MSI output is
@@ -90,23 +90,25 @@ Setup, NSIS, or WiX with the directory as input.
 | Output            | Produced by                                   |
 | ----------------- | --------------------------------------------- |
 | `my-app/`         | Default — app directory with launcher script. |
-| `my-app.AppImage` | `appimagetool` — single-file portable bundle. |
+| `my-app.AppImage` | Single-file portable bundle.                  |
 
 The app directory layout:
 
 ```
 my-app/
-  AppRun                  # launcher script
-  my-app                  # the binary
-  *.so                    # CEF shared libraries
-  resources.pak
-  locales/
-  …
+  my-app                  # launcher shell script
+  libdenort.so            # Deno runtime + your code
+  *.so                    # rendering backend and CEF libraries
+  resources.pak, locales/ # CEF support files
+  AppIcon.png             # icon (optional)
 ```
 
 `AppImage` is the most portable Linux format — one file, no install step, runs
-on any modern distro. It is built by passing `appimagetool` (which must be on
-`PATH`) the staged directory plus a `.desktop` entry and an icon.
+on any modern distro. `deno desktop` builds it directly: it packs the app
+directory into a SquashFS image and prepends the AppImage Type-2 runtime, adding
+the required `AppRun`, `.desktop`, and icon entries. There is no external tool
+to install — no `appimagetool` — and it works from any build host, so you can
+produce a Linux `.AppImage` while cross-compiling from macOS or Windows.
 
 `.deb` / `.rpm` packaging is not yet implemented. For now, use `fpm` or
 `dpkg-deb` against the app directory.
@@ -142,8 +144,8 @@ Cross-compiling from one OS to another requires:
 
 - The right `denort` binary for the target. Downloaded automatically from
   `github.com/denoland/deno/releases`, matching your local Deno version.
-- The right Laufey backend archive for the target. Downloaded automatically from
-  `github.com/denoland/laufey/releases`, pinned via `Cargo.lock`.
+- The right backend archive for the target. Downloaded automatically, pinned to
+  your Deno version.
 
 Both downloads are SHA-256 verified and cached under `<deno_dir>/`.
 
@@ -152,11 +154,10 @@ are not compiling Rust on the host — you are downloading prebuilt artifacts fo
 the target and packaging them with your code. This is the same model as
 `deno compile --target`.
 
-The only thing the host can affect is the **icon assembly**: `.icns` generation
-works on any host, `.ico` generation works on any host, but making installers
-(`.dmg`, `.AppImage`) requires the matching tool — `hdiutil` for `.dmg` (macOS
-only), `appimagetool` for `.AppImage`. To produce installers for a platform you
-cannot run the tool on, build the bundle on a CI machine that can.
+Icon assembly (`.icns`, `.ico`) and the Linux `.AppImage` are produced on any
+host. The one exception is the macOS `.dmg`, which shells out to `hdiutil` and
+therefore must be built on a macOS host. To produce a `.dmg` from another
+platform, build it on a macOS CI machine.
 
 ## CI
 
@@ -186,8 +187,8 @@ jobs:
 ```
 
 Cross-compiling from a single host (e.g. only running on `ubuntu-latest` with
-`--all-targets`) works for the bundles themselves. Producing `.dmg` /
-`.AppImage` installers needs the matching native host.
+`--all-targets`) works for the bundles and the Linux `.AppImage`. Only the macOS
+`.dmg` needs a macOS host.
 
 ## Code signing
 
@@ -217,8 +218,9 @@ With a real identity, the bundle is signed with Hardened Runtime and a secure
 timestamp. **Notarization is still a separate step** — submit the signed bundle
 with `xcrun notarytool submit` and staple the ticket.
 
-On Windows, sign the produced `.exe` externally for now, e.g.
-`signtool sign /f cert.pfx /tr <timestamp> MyApp.exe`.
+On Windows, sign the produced executables (the backend `.exe` and `denort.dll`
+in the output directory) externally for now, e.g.
+`signtool sign /f cert.pfx /tr <timestamp> <file>`.
 
 ## Distributing updates after release
 

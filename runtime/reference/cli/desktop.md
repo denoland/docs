@@ -1,17 +1,21 @@
 ---
-last_modified: 2026-04-24
+last_modified: 2026-06-10
 title: "deno desktop"
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno desktop"
 description: "Build self-contained desktop applications from a Deno project"
 ---
 
-Build a self-contained desktop application from a Deno project. The compiled
-binary bundles your code, the Deno runtime, and a rendering backend (Chromium,
-the OS webview, or a raw windowing system) into one redistributable executable.
+:::info Experimental
 
-For an in-depth guide — backends, framework auto-detection, the
-[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) API, auto-update,
-DevTools, distribution, and more — see the
-[Desktop apps section](/runtime/desktop/).
+`deno desktop` is new in Deno 2.8. The command, configuration keys, and
+TypeScript APIs are still evolving and may change before the feature is stable.
+
+:::
+
+`deno desktop` compiles a Deno project into a self-contained desktop
+application. The output binary bundles your code, the Deno runtime, and a
+rendering backend into one redistributable executable per platform.
 
 ```sh
 deno desktop main.ts
@@ -19,41 +23,88 @@ deno desktop --hmr main.ts
 deno desktop --output MyApp.app main.ts
 ```
 
-## Synopsis
+The entrypoint is optional. A bare `deno desktop` (or `deno desktop .`) detects
+a supported framework — Next.js, Astro, Fresh, and others — in the current
+directory and builds it without any code changes. See
+[Frameworks](/runtime/desktop/frameworks/).
 
+This page covers the command-line flags. For the full guide — backends,
+[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow), bindings, auto-update,
+DevTools, and distribution — see the [Desktop apps section](/runtime/desktop/).
+
+## Runtime flags
+
+`deno desktop` accepts the same runtime and permission flags as
+[`deno run`](/runtime/reference/cli/run/). The permissions you grant at compile
+time are baked into the compiled binary:
+
+```sh
+deno desktop --allow-read --allow-net main.ts
 ```
-Usage: deno desktop [OPTIONS] [SCRIPT_ARG]...
+
+## Backend
+
+`--backend` selects the rendering engine. It accepts `cef` (the default) or
+`webview`. The `raw` backend is selected through the `desktop.backend` field in
+`deno.json`. See [Backends](/runtime/desktop/backends/) for the tradeoffs.
+
+```sh
+deno desktop --backend webview main.ts
 ```
 
-## Options
+## Build output
 
-| Flag                             | Description                                                                                 |
-| -------------------------------- |---------------------------------------------------------------------------------------------|
-| `--all-targets`                  | Build for all supported target platforms.                                                   |
-| `--backend <backend>`            | laufey backend: `cef` (default), `webview`, `servo`, `raw`.                                 |
-| `--exclude <path>`               | Exclude a file or directory from the compiled binary.                                       |
-| `--hmr`                          | Run the desktop app with hot module replacement.                                            |
-| `--icon <path>`                  | Application icon (`.ico` on Windows, `.icns` or `.png` on macOS).                           |
-| `--include <path>`               | Include an additional file, directory, or module in the compiled binary.                    |
-| `-o`, `--output <path>`          | Output path. Extension determines format (`.app`, `.dmg`, `.AppImage`, …).                  |
-| `--target <triple>`              | Target triple — see [Distribution](/runtime/desktop/distribution/).                         |
-| `--inspect[=host:port]`          | Listen for a DevTools session on both isolates. See [DevTools](/runtime/desktop/devtools/). |
-| `--inspect-brk[=host:port]`      | Listen and break on first line in both isolates.                                            |
-| `--inspect-wait[=host:port]`     | Listen and wait for a debugger before running.                                              |
-| `--inspect-renderer[=host:port]` | Override the CEF renderer's debugger listen address.                                        |
+`--output` (`-o`) sets the output path; its extension determines the format
+(`.app`, `.dmg`, `.AppImage`, and so on):
 
-Permission flags from `deno run` apply too — the compiled binary inherits the
-permissions you grant at compile time.
+```sh
+deno desktop --output ./dist/MyApp.dmg main.ts
+```
+
+Use `--icon` to set the application icon (`.ico` on Windows, `.icns` or `.png`
+on macOS), and `--include` / `--exclude` to add or remove files from the
+compiled binary. These can also be configured in `deno.json` — see
+[Configuration](/runtime/desktop/configuration/).
+
+## Cross-compilation
+
+`--target` builds for another platform, and `--all-targets` builds for every
+supported platform at once. No platform-specific toolchain is needed on the
+host:
+
+```sh
+deno desktop --target aarch64-apple-darwin main.ts
+deno desktop --all-targets main.ts
+```
+
+See [Distribution](/runtime/desktop/distribution/) for the supported target
+triples and output formats.
+
+## Development
+
+`--hmr` runs the app with hot module replacement during development. See
+[Hot module replacement](/runtime/desktop/hmr/).
+
+```sh
+deno desktop --hmr main.ts
+```
+
+The `--inspect`, `--inspect-wait`, and `--inspect-brk` flags attach a debugger
+to both the Deno runtime and the renderer. `--inspect-renderer` overrides the
+CEF renderer's debugger listen address. See
+[DevTools](/runtime/desktop/devtools/).
 
 ## Configuration
 
-Most settings live in the `desktop` block of `deno.json`:
+Most settings can live in the `desktop` block of `deno.json` instead of being
+passed on every build:
 
 ```jsonc title="deno.json"
 {
   "desktop": {
     "app": {
       "name": "MyApp",
+      "identifier": "com.example.myapp",
       "icons": {
         "macos": "./icons/icon.icns",
         "windows": "./icons/icon.ico",
@@ -72,4 +123,4 @@ Most settings live in the `desktop` block of `deno.json`:
 }
 ```
 
-Full schema and examples: [Configuration](/runtime/desktop/configuration/).
+For the full schema, see [Configuration](/runtime/desktop/configuration/).

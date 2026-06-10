@@ -1,6 +1,7 @@
 ---
+last_modified: 2026-06-10
 title: "Bindings"
-description: "Call Deno-side functions from webview JavaScript via win.bind() — type-safe RPC over in-process channels, no IPC, no serialization tax beyond the call boundary."
+description: "Call Deno-side functions from webview JavaScript via win.bind() — type-safe RPC over in-process channels, with no IPC and no serialization beyond the call boundary."
 ---
 
 `win.bind(name, handler)` exposes a Deno-side function to the webview. From the
@@ -29,14 +30,13 @@ await bindings.saveSettings(settings);
 Bindings are **not** IPC. The Deno runtime and the rendering backend run as
 threads / processes inside the same address space (CEF) or coordinated process
 group (WebView). Calls go through `tokio::sync::mpsc` channels and `oneshot`
-channels for responses; the laufey capi layer dispatches via a notify / poll
-pattern in `laufey::run()`.
+channels for responses; the backend dispatches them via a notify / poll pattern
+in its run loop.
 
-This avoids the serialization round-trip that socket-based IPC frameworks
-(Electron's `ipcMain` / `ipcRenderer`, Tauri's `invoke`) impose. Argument
-encoding still happens — values cross a JS realm boundary, so they go through
-the V8 serializer — but no socket, no JSON-over-pipe, no cross-process
-scheduling.
+This avoids the cross-process round-trip that socket-based IPC frameworks
+(Electron's `ipcMain` / `ipcRenderer`, Tauri's `invoke`) impose. Arguments and
+results are still encoded as they cross the realm boundary, but the transport is
+in-process tokio channels — no socket, no cross-process scheduling.
 
 In practical terms: bindings are fast enough that you do not need to worry about
 call frequency for typical app workloads.
@@ -53,22 +53,27 @@ bindings.foo("a", 1); // Promise<unknown>
 
 The proxy does not validate names — typing `bindings.readSetings` instead of
 `bindings.readSettings` does not throw at the property access; it throws when
-you call it (the call rejects with a "binding not registered" error).
+you call it (the call rejects because no such binding is registered).
 
 ## Argument and return value semantics
 
-Arguments are serialized with the V8 structured-clone algorithm, the same one
-used by `postMessage`. This means:
+Arguments and return values are encoded as JSON as they cross between the
+webview and the Deno runtime. This means:
 
-- Plain objects, arrays, strings, numbers, booleans, `null`, `undefined`: fine.
-- Typed arrays, `ArrayBuffer`, `Date`, `Map`, `Set`, `RegExp`: fine.
-- Functions, DOM nodes, prototypes: not transferable — clone them as data before
-  sending.
-- Cyclic references: fine.
-- Errors: serialized as `{ name, message, stack }`. The Deno side receives a
-  plain object, not an `Error` instance.
+- Plain objects, arrays, strings, numbers, booleans, and `null`: passed through
+  as-is.
+- `Uint8Array`: supported, for passing binary data.
+- `undefined` and optional properties: dropped during serialization.
+- `Date`, `Map`, `Set`, `RegExp`, typed arrays other than `Uint8Array`,
+  `ArrayBuffer`: **not** preserved — convert them to a JSON-compatible shape (a
+  `Date` becomes a string, a `Map` becomes `{}`) before sending.
+- Functions, DOM nodes, prototypes, and cyclic references: not transferable.
+- Errors thrown by a handler: delivered to the webview as
+  `{ name, message,
+  stack }` (see [Errors](#errors) below), not as an `Error`
+  instance.
 
-Return values follow the same rules.
+Stick to plain data and `Uint8Array` on both sides.
 
 ## Async handlers
 
@@ -105,9 +110,8 @@ try {
 }
 ```
 
-The error reaches the webview as a structured-cloned `{ name, message,
-stack }`.
-To distinguish error types, check `error.name`.
+The error reaches the webview as a plain `{ name, message, stack }` object. To
+distinguish error types, check `error.name`.
 
 ## Unbinding
 

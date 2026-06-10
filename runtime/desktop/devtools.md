@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "DevTools"
 description: "Attach Chrome DevTools to a deno desktop app — single session shows both the Deno runtime V8 and the renderer V8 as inspectable targets."
 ---
@@ -104,7 +105,6 @@ Unified DevTools is implemented for the **CEF** backend. On other backends:
 |           | a different inspector protocol.                 |
 | `raw`     | Deno-side `--inspect` only — there is no        |
 |           | renderer to inspect.                            |
-| `servo`   | Not currently supported.                        |
 
 If `--inspect` is passed with a backend that does not support unified DevTools,
 the Deno side still runs an inspector and you can attach to it the same way as a
@@ -136,7 +136,7 @@ against the renderer's `bindings.readSettings()` invocation visible under
 
 ## Known limitations
 
-- WebView and Servo backends have no DevTools integration.
+- The WebView backend has no DevTools integration.
 - The renderer Network panel does not show Deno-side `fetch` calls.
 - Cross-realm step-through (clicking a `bindings.foo()` call and stepping into
   the Deno handler) is not yet implemented — switch threads manually.

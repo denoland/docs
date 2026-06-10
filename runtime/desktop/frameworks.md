@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Frameworks"
 description: "Run Next.js, Astro, Fresh, Remix, Nuxt, SvelteKit, SolidStart, TanStack Start, and Vite SSR projects as desktop apps with no code changes."
 ---
@@ -52,10 +53,8 @@ When a framework is detected, the CLI:
    [`Deno.serve()`](/api/deno/~/Deno.serve) handler. The webview navigates to
    the bound port like any other desktop app.
 
-You should still build your project before running `deno desktop` —
-`deno
-desktop` does not run `next build`, `astro build`, etc. for you. Run the
-framework's build step first.
+Build your project before running `deno desktop`. It does not run `next build`,
+`astro build`, and the like for you, so run the framework's build step first.
 
 ## Per-framework notes
 

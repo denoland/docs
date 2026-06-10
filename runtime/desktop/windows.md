@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Windows"
 description: "Create and manage native windows with Deno.BrowserWindow — lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
@@ -124,7 +125,7 @@ Listen with `addEventListener` or assign to the matching `on<event>` property.
 
 ```ts
 win.addEventListener("resize", (e) => {
-  console.log("resized to", e.width, e.height);
+  console.log("resized to", e.detail.width, e.detail.height);
 });
 
 win.onfocus = () => console.log("focused");

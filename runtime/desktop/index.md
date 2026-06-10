@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---
@@ -10,7 +11,7 @@ rendering engine into one bundle per platform.
 
 :::info Experimental
 
-`deno desktop` is new in Deno 2.8. The command, configuration keys, and
+`deno desktop` is new in Deno 2.9. The command, configuration keys, and
 TypeScript APIs described in this section may change before the feature is
 considered stable.
 
@@ -31,12 +32,12 @@ integration.
   have the entire npm ecosystem available through Deno's Node compat layer.
 - **Framework auto-detection.** Point `deno desktop` at a Next.js, Astro, Fresh,
   Remix, Nuxt, SvelteKit, SolidStart, TanStack Start, or Vite SSR project and it
-  just works — production server in release mode, dev server with hot reload
-  under `--hmr`. No code changes required to take an existing web project to the
-  desktop.
-- **In-process bindings instead of IPC.** Backend / UI communication goes
-  through tokio channels, not socket-based IPC. No serialization tax between
-  your Deno code and the webview.
+  runs — the production server in release mode, the dev server with hot reload
+  under `--hmr`. No code changes are required to take an existing web project to
+  the desktop.
+- **In-process bindings instead of IPC.** Backend and UI communication goes
+  through tokio channels, not socket-based IPC, so there is no serialization
+  step between your Deno code and the webview.
 - **Cross-compile from one machine.** The same machine can build for macOS,
   Windows, and Linux. Backends are downloaded as needed, not built locally.
 - **Built-in binary-diff auto-update.** Ship a single `latest.json` manifest and
@@ -79,7 +80,7 @@ webview navigates to — you do not need to pass a port or hostname. See
 - [HTTP serving](/runtime/desktop/serving/) —
   [`Deno.serve()`](/api/deno/~/Deno.serve) integration and the serving model.
 - [Frameworks](/runtime/desktop/frameworks/) — Next.js, Astro, Fresh, Remix,
-  Nuxt, SvelteKit, and friends.
+  Nuxt, SvelteKit, and others.
 - [Windows](/runtime/desktop/windows/) —
   [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) lifecycle, multiple
   windows, events.

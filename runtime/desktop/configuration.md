@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Configuration"
 description: "Configure deno desktop in deno.json — app metadata, icons, backend selection, output paths, error reporting, and the auto-update server."
 ---
@@ -95,14 +96,15 @@ If no `icons` entry is set for a platform, the default Deno icon is used.
 
 ## `backend`
 
-Which web rendering engine to embed. One of `"cef"`, `"webview"`, `"servo"`, or
-`"raw"`. Default: `"cef"`.
+Which web rendering engine to embed. One of `"cef"`, `"webview"`, or `"raw"`.
+Default: `"cef"`.
 
 ```jsonc
 "backend": "webview"
 ```
 
-The CLI flag `--backend` overrides this for one build. See
+The CLI flag `--backend` overrides this for one build, but accepts only `cef`
+and `webview`; select `raw` here in `deno.json`. See
 [Backends](/runtime/desktop/backends/) for tradeoffs and supported targets.
 
 ## `output`
@@ -124,14 +126,14 @@ The path's extension determines what is produced:
 | `.app`             | macOS application bundle             |
 | `.dmg`             | DMG disk image (built via `hdiutil`) |
 
-| Extension on Windows | Output                                    |
-| -------------------- | ----------------------------------------- |
-| (none) / directory   | `<name>.exe` plus a sibling DLL directory |
+| Extension on Windows | Output                                        |
+| -------------------- | --------------------------------------------- |
+| (none) / directory   | App directory with a `.bat` launcher and DLLs |
 
-| Extension on Linux | Output                                 |
-| ------------------ | -------------------------------------- |
-| (none) / directory | App directory with launcher script     |
-| `.AppImage`        | `.AppImage` (built via `appimagetool`) |
+| Extension on Linux | Output                             |
+| ------------------ | ---------------------------------- |
+| (none) / directory | App directory with launcher script |
+| `.AppImage`        | `.AppImage` single-file bundle     |
 
 The CLI flag `--output` overrides this for one build.
 

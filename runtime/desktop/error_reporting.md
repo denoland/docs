@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Error reporting"
 description: "Capture uncaught errors, unhandled rejections, and Rust panics — show a native alert and POST a JSON report to your server."
 ---
@@ -26,9 +27,10 @@ Set `desktop.errorReporting.url` in your `deno.json`:
 }
 ```
 
-The URL can use `https://`, `http://`, or `file://` (the last is useful for
-local testing — the runtime writes the JSON to that path instead of making an
-HTTP request).
+The URL must use `https://` or `file://`. Plain `http://` is rejected, since
+reports carry stack traces and runtime context that anyone on-path could read. A
+`file://` URL is useful for local testing — the runtime appends the JSON to that
+path instead of making an HTTP request.
 
 If `errorReporting.url` is not set, the alert still appears but no report is
 sent.
@@ -64,12 +66,12 @@ high-importance reports, queue them locally and resend on next launch.
 ## What gets reported
 
 | Source                                       | Captured?                                      |
-| -------------------------------------------- |------------------------------------------------|
+| -------------------------------------------- | ---------------------------------------------- |
 | Uncaught exception in Deno-side code         | Yes.                                           |
 | Unhandled rejection in Deno-side code        | Yes.                                           |
 | Uncaught exception in renderer-side JS       | Yes — caught via the renderer's `error` event. |
 | Rust panic in the Deno runtime               | Yes.                                           |
-| Rust panic in the rendering backend (CEF, …) | Yes — the laufey capi bridges these.           |
+| Rust panic in the rendering backend (CEF, …) | Yes — the backend bridges these.               |
 | `console.error` / `console.warn`             | No — these are not errors.                     |
 | Exceptions you `try`/`catch` yourself        | No.                                            |
 
@@ -78,25 +80,36 @@ to the webview side and reject the calling promise. They are **not** reported as
 uncaught errors — the webview catches them. To report them anyway, log them
 yourself in the binding handler.
 
-## Disabling the alert
+## Suppressing the alert
 
-The alert is meant to keep the user informed when something goes wrong. There is
-no flag to disable it; if you don't want it, install your own handlers earlier:
+The alert is meant to keep the user informed when something goes wrong. It fires
+for every uncaught error, unhandled rejection, and panic, and there is currently
+no way to suppress it from user code: the runtime registers its `error` and
+`unhandledrejection` handlers before your code runs, so a `preventDefault()` in
+a listener you add later does not stop the alert or the report.
+
+To keep an error from triggering the alert, prevent it from becoming uncaught —
+handle it with `try`/`catch` (or local error handling) in your code and binding
+implementations:
 
 ```ts
-addEventListener("error", (e) => {
-  e.preventDefault(); // suppresses the default alert
-  reportToOwnTelemetry(e.error);
-});
-
-addEventListener("unhandledrejection", (e) => {
-  e.preventDefault();
-  reportToOwnTelemetry(e.reason);
+win.bind("readFile", async (path) => {
+  try {
+    return await Deno.readTextFile(path);
+  } catch (e) {
+    reportToOwnTelemetry(e);
+    return null; // handled — no alert
+  }
 });
 ```
 
-Once `preventDefault` is called, the runtime does not show an alert and does not
-send a report. You take full responsibility for surfacing the error to the user.
+You can still add your own `error` / `unhandledrejection` listeners for extra
+telemetry; they run after the built-in handler, alongside the alert and report:
+
+```ts
+addEventListener("error", (e) => reportToOwnTelemetry(e.error));
+addEventListener("unhandledrejection", (e) => reportToOwnTelemetry(e.reason));
+```
 
 ## Server-side example
 
@@ -133,5 +146,7 @@ If your app handles sensitive data, consider:
   and similar.
 - Asking the user before sending the first report (a one-time consent prompt).
 
-These are app-level decisions; the runtime sends what it has. To filter,
-implement your own `error` / `unhandledrejection` handlers as shown above.
+These are app-level decisions; the built-in reporter sends what it has and its
+payload can't be filtered from user code. For full control over what leaves the
+machine, leave `errorReporting.url` unset and send your own reports from `error`
+/ `unhandledrejection` handlers instead.

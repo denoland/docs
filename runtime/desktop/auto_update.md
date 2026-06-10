@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Auto-update"
 description: "Ship binary-diff updates to deno desktop apps with Deno.autoUpdate() — bsdiff patches, manifest polling, automatic rollback on failed launch."
 ---
@@ -10,6 +11,16 @@ rolls back to the previous version automatically.
 
 The update mechanism is inspired by Electrobun: small `bsdiff` patches instead
 of full binary downloads, and rollback baked into the launcher.
+
+:::note Platform support
+
+Applying staged updates and rolling back on a failed launch currently run on
+**macOS and Linux only**. On Windows, patches are still downloaded and staged,
+but the launcher does not yet swap them in (a loaded DLL can't be replaced in
+place), so updates do not take effect. Treat Windows auto-update as not yet
+supported.
+
+:::
 
 ## Prerequisites
 
@@ -132,54 +143,51 @@ Deno.autoUpdate({
 2. **Compare versions.** If `manifest.version === Deno.desktopVersion`, nothing
    to do.
 3. **Look up a patch.** `manifest.patches[Deno.desktopVersion]` →
-   `{ name,
-   sha256 }`.
+   `{ name, sha256 }`.
 4. **Download the patch.** `GET <url>/<name>`. The whole patch is buffered into
    memory; for typical bsdiff outputs (a few MB) this is fine.
 5. **Verify and apply.** The runtime checks the downloaded bytes against the
    manifest's `sha256` and refuses to continue on a mismatch, then applies the
-   binary diff to the current executable / dylib using the
+   binary diff to the app's runtime dylib using the
    [`qbsdiff`](https://crates.io/crates/qbsdiff) crate. The patched bytes are
    sanity-checked to look like a native binary before staging.
-6. **Stage the result.** Write the patched binary as `<binary>.update` next to
-   the original. Do not overwrite the running binary in place.
+6. **Stage the result.** Write the patched dylib as `<dylib>.update` next to the
+   original. The running dylib is left untouched.
 7. **Fire `onUpdateReady`.**
 
-The original binary is untouched until the next launch. If the user closes the
-app and reopens it, the launcher swaps `<binary>.update` into place and starts
-the new version.
+The running dylib is untouched until the next launch. When the app restarts, the
+launcher swaps the staged update into place before anything else runs.
 
 ## Rollback on failed launch
 
-When `<binary>.update` exists at startup, the launcher:
+The launcher resolves staged updates and rollback state at startup, before
+anything else runs, using three files next to the runtime dylib:
+`<dylib>.update` (a staged patch), `<dylib>.backup` (the previous dylib), and
+`<dylib>.update-ok` (a success sentinel).
 
-1. Renames the **current** binary to `<binary>.previous`.
-2. Renames `<binary>.update` to the current binary path.
-3. Runs the new binary with a `--first-launch-after-update` marker.
-
-If the new binary completes its first launch successfully (the runtime calls an
-internal "confirm update" op shortly after startup), the `<binary>.previous` is
-deleted and a sentinel file (`<binary>.update-ok`) is created.
-
-If the new binary fails to launch — crashes during startup, returns a non-zero
-exit before confirming, or never confirms — the launcher:
-
-1. Restores `<binary>.previous` as the current binary.
-2. Deletes the failed `<binary>.update`.
-3. Records the rollback so the next launch's
-   [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) call fires `onRollback`
-   with the reason.
+- If `<dylib>.update` exists, the launcher copies the current dylib aside to
+  `<dylib>.backup` (leaving the original in place), swaps the staged update into
+  the dylib path, and starts the new version. Once it boots successfully, the
+  runtime calls an internal "confirm update" op that writes `<dylib>.update-ok`.
+- On a later launch, if `<dylib>.backup` and `<dylib>.update-ok` both exist, the
+  previous update is confirmed good and both files are cleaned up.
+- If `<dylib>.backup` exists but `<dylib>.update-ok` does not, the last update
+  started but never confirmed — it crashed during startup. The launcher restores
+  `<dylib>.backup` over the dylib, rolling back. The next
+  [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) call then fires
+  `onRollback` with the reason.
 
 This makes broken updates self-healing. Users do not need to know anything
 happened beyond seeing the same version they had before.
 
 ## Generating patches
 
-The patches are produced with `bsdiff`. Any tool that produces compatible output
-works; the simplest is the `bsdiff` CLI:
+A patch is a `bsdiff` of the app's runtime dylib between two releases — the file
+the updater patches, which lives inside your built app. `qbsdiff` reads the
+`bsdiff` 4.x format, so the classic `bsdiff` CLI produces compatible output:
 
 ```sh
-bsdiff old-binary new-binary patch-1.4.0-to-1.5.0.bin
+bsdiff old-dylib new-dylib patch-1.4.0-to-1.5.0.bin
 shasum -a 256 patch-1.4.0-to-1.5.0.bin # the sha256 for the manifest entry
 ```
 
@@ -208,26 +216,6 @@ Deno.autoUpdate({
   interval: 60 * 60 * 1000,
 });
 ```
-
-## Events
-
-In addition to the callbacks, the runtime dispatches DOM-style events on the
-global `EventTarget`:
-
-```ts
-addEventListener("desktop-update-ready", (e) => {
-  const version = (e as CustomEvent<{ version: string }>).detail.version;
-  // …
-});
-
-addEventListener("desktop-update-rollback", (e) => {
-  const reason = (e as CustomEvent<{ reason: string }>).detail.reason;
-  // …
-});
-```
-
-The events fire alongside `onUpdateReady` / `onRollback`, so use whichever style
-fits your code better.
 
 ## Best practices
 

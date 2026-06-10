@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Comparison with other tools"
 description: "How deno desktop compares to Electron, Electrobun, Tauri, and Dioxus — language, engine, process model, app size, ecosystem, and what's built-in."
 ---
@@ -28,10 +29,9 @@ technologies. Here is how it compares to the alternatives.
 ## What `deno desktop` is good at
 
 **Zero-config framework support.** `deno desktop .` on a Next.js, Astro, or
-Fresh project just works. No adapter, no config, no reading docs about how to
-wire your dev server up — the production server runs in release mode, the dev
-server runs under `--hmr`. None of the other tools auto-detect frameworks at
-this level.
+Fresh project needs no adapter and no config: the production server runs in
+release mode, and the dev server runs under `--hmr`. None of the other tools
+auto-detect frameworks at this level.
 
 **Cross-compile from one machine.** Same as `deno compile --target`. Tauri and
 Dioxus need the target platform locally to build (their toolchain includes Rust,
@@ -48,8 +48,9 @@ and `bindings`.
 **In-process bindings instead of IPC.** Electron / Electrobun / Tauri all use
 socket-based IPC between the backend and the UI. Calls serialize, cross a
 process boundary, and deserialize. `deno desktop` runs the Deno runtime and the
-rendering backend inside the same process, talking over tokio channels. No
-serialization tax beyond the structured-clone boundary.
+rendering backend inside the same process, talking over tokio channels. Values
+are still encoded as JSON across the call, but there is no cross-process
+round-trip.
 
 **Built-in auto-update with binary diffs.** Electron ships full binaries.
 Tauri's update plugin downloads full builds. Electrobun and `deno desktop` both
@@ -84,6 +85,9 @@ one place:
   separate `notarytool` step. See
   [Distribution](/runtime/desktop/distribution/#code-signing).
 - **Windows MSI** and **Linux `.deb` / `.rpm`** installer outputs.
+- **Auto-update on Windows.** Binary-diff
+  [auto-update](/runtime/desktop/auto_update/) applies on macOS and Linux;
+  Windows is not yet supported.
 - **iOS / Android** targets.
 - **Native clipboard and secure-storage APIs** (use the Web `Clipboard` API from
   the webview side until they land). Native

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "HTTP serving"
 description: "How Deno.serve() works inside a desktop app — automatic port binding, the DENO_SERVE_ADDRESS env var, and serving local UI to the embedded webview."
 ---
@@ -68,7 +69,7 @@ matter for desktop apps:
   develop in a browser tab and ship the same code as a desktop binary.
 - **No special module system.** Imports, static assets, and module-level code
   all run the way they would for a web server.
-- **Frameworks "just work".** Next.js, Astro, Fresh, and the rest already ship a
+- **Frameworks run unchanged.** Next.js, Astro, Fresh, and others already ship a
   production HTTP server. `deno desktop` runs that server and points the webview
   at it. See [Frameworks](/runtime/desktop/frameworks/).
 

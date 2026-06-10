@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Hot module replacement"
 description: "deno desktop --hmr keeps the runtime and rendering backend alive across edits — framework dev servers in framework projects, V8 hot-swap in everything else."
 ---
@@ -36,9 +37,8 @@ preserves component state across edits in a browser, it preserves it in your
 desktop app too. If `astro dev` shows an in-page error overlay on a syntax
 error, you see the same overlay.
 
-You do not need to run the framework's dev script separately.
-`deno
-desktop --hmr` starts it as part of the desktop runtime.
+You do not need to run the framework's dev script separately;
+`deno desktop --hmr` starts it as part of the desktop runtime.
 
 ## Plain-app HMR
 

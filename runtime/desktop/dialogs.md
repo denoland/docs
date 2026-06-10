@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-10
 title: "Dialogs"
 description: "prompt(), alert(), and confirm() show native popup dialogs in deno desktop apps instead of terminal prompts."
 ---
@@ -61,9 +62,9 @@ win.addEventListener("menuclick", (e) => {
 ```
 
 If you call them from the webview side (via JavaScript inside the rendered
-page), the webview's own native dialogs are used instead — these are
-`window.alert()` and friends as the browser implements them. The behavior is
-similar: a native modal scoped to that webview.
+page), the webview's own native dialogs are used instead — `window.alert()`,
+`window.confirm()`, and `window.prompt()` as the browser implements them. The
+behavior is similar: a native modal scoped to that webview.
 
 ## Differences from terminal Deno
 
