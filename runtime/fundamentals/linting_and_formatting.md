@@ -126,8 +126,8 @@ provide the correct relative path to it instead.
 
 The formatter is configured with the `fmt` field in your
 [`deno.json`](/runtime/reference/deno_json/#formatting) file. See
-[all formatting options](/runtime/reference/deno_json/#available-options) for
-the full list of settings and their defaults.
+[all formatting options](/runtime/reference/deno_json/#formatting) for the full
+list of settings and their defaults.
 
 ## Deno support for other linters and formatters
 

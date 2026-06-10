@@ -245,162 +245,32 @@ This configuration will:
 - exclude files in the `src/testdata/` directory and any TypeScript files in the
   `src/fixtures/` directory.
 
-### Available options
-
-#### `bracePosition`
-
-Define brace position for blocks
-
-- **Default:** `sameLine`
-- **Possible values:** `maintain`, `sameLine`, `nextLine`,
-  `sameLineUnlessHanging`
-
-#### `jsx.bracketPosition`
-
-Define bracket position for JSX
-
-- **Default:** `nextLine`
-- **Possible values:** `maintain`, `sameLine`, `nextLine`
-
-#### `jsx.forceNewLinesSurroundingContent`
-
-Forces newlines surrounding the content of JSX elements
-
-- **Default:** `false`
-- **Possible values:** `true`, `false`
-
-#### `jsx.multiLineParens`
-
-Surrounds the top-most JSX element or fragment in parentheses when it spans
-multiple lines
-
-- **Default:** `prefer`
-- **Possible values:** `never`, `prefer`, `always`
-
-#### `indentWidth`
-
-Define indentation width
-
-- **Default:** `2`
-- **Possible values:** `number`
-
-#### `lineWidth`
-
-Define maximum line width
-
-- **Default:** `80`
-- **Possible values:** `number`
-
-#### `newLineKind`
-
-The newline character to use
-
-- **Default:** `lf`
-- **Possible values:** `auto`, `crlf`, `lf`, `system`
-
-Use `auto` to preserve the file's existing newline style when Deno can detect
-one. Use `system` to use the current operating system's default newline style,
-which is `crlf` on Windows and `lf` on Unix-like systems.
-
-#### `nextControlFlowPosition`
-
-Define position of next control flow
-
-- **Default:** `sameLine`
-- **Possible values:** `sameLine`, `nextLine`, `maintain`
-
-#### `semiColons`
-
-Whether to prefer using semicolons.
-
-- **Default:** `true`
-- **Possible values:** `true`, `false`
-
-#### `operatorPosition`
-
-Where to place the operator for expressions that span multiple lines
-
-- **Default:** `sameLine`
-- **Possible values:** `sameLine`, `nextLine`, `maintain`
-
-#### `proseWrap`
-
-Define how prose should be wrapped
-
-- **Default:** `always`
-- **Possible values:** `always`, `never`, `preserve`
-
-#### `quoteProps`
-
-Control quoting of object properties
-
-- **Default:** `asNeeded`
-- **Possible values:** `asNeeded`, `consistent`, `preserve`
-
-#### `singleBodyPosition`
-
-The position of the body in single body blocks
-
-- **Default:** `sameLineUnlessHanging`
-- **Possible values:** `sameLine`, `nextLine`, `maintain`,
-  `sameLineUnlessHanging`
-
-#### `singleQuote`
-
-Use single quotes
-
-- **Default:** `false`
-- **Possible values:** `true`, `false`
-
-#### `spaceAround`
-
-Control spacing around enclosed expressions
-
-- **Default:** `false`
-- **Possible values:** `true`, `false`
-
-#### `spaceSurroundingProperties`
-
-Control spacing surrounding single line object-like nodes
-
-- **Default:** `true`
-- **Possible values:** `true`, `false`
-
-#### `trailingCommas`
-
-Control trailing commas in multi-line arrays/objects
-
-- **Default:** `always`
-- **Possible values:** `always`, `never`
-
-#### `typeLiteral.separatorKind`
-
-Define separator kind for type literals
-
-- **Default:** `semiColon`
-- **Possible values:** `comma`, `semiColon`
-
-#### `unstable-component`
-
-Enable formatting Svelte, Vue, Astro and Angular files
-
-#### `unstable-sql`
-
-Enable formatting SQL files
-
-#### `useTabs`
-
-Use tabs instead of spaces for indentation
-
-- **Default:** `false`
-- **Possible values:** `true`, `false`
-
-#### `useBraces`
-
-Whether to use braces for if statements, for statements, and while statements
-
-- **Default:** `whenNotSingleLine`
-- **Possible values:** `maintain`, `whenNotSingleLine`, `always`, `preferNone`
+All `fmt` options for the `fmt` field:
+
+| Option                                | Description                                                                                                                       | Default                 | Possible values                                             |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ----------------------------------------------------------- |
+| `bracePosition`                       | Brace position for blocks                                                                                                         | `sameLine`              | `maintain`, `sameLine`, `nextLine`, `sameLineUnlessHanging` |
+| `indentWidth`                         | Indentation width                                                                                                                 | `2`                     | a number                                                    |
+| `lineWidth`                           | Maximum line width                                                                                                                | `80`                    | a number                                                    |
+| `newLineKind`                         | Newline character to use (`auto` keeps the file's existing style; `system` uses the OS default, CRLF on Windows and LF elsewhere) | `lf`                    | `auto`, `crlf`, `lf`, `system`                              |
+| `nextControlFlowPosition`             | Position of the next control flow keyword                                                                                         | `sameLine`              | `sameLine`, `nextLine`, `maintain`                          |
+| `operatorPosition`                    | Where to place the operator for expressions that span multiple lines                                                              | `sameLine`              | `sameLine`, `nextLine`, `maintain`                          |
+| `proseWrap`                           | How prose (e.g. Markdown) is wrapped                                                                                              | `always`                | `always`, `never`, `preserve`                               |
+| `quoteProps`                          | Quoting of object properties                                                                                                      | `asNeeded`              | `asNeeded`, `consistent`, `preserve`                        |
+| `semiColons`                          | Prefer semicolons                                                                                                                 | `true`                  | `true`, `false`                                             |
+| `singleBodyPosition`                  | Position of the body in single-body blocks                                                                                        | `sameLineUnlessHanging` | `sameLine`, `nextLine`, `maintain`, `sameLineUnlessHanging` |
+| `singleQuote`                         | Use single quotes                                                                                                                 | `false`                 | `true`, `false`                                             |
+| `spaceAround`                         | Spacing around enclosed expressions                                                                                               | `false`                 | `true`, `false`                                             |
+| `spaceSurroundingProperties`          | Spacing surrounding single-line object-like nodes                                                                                 | `true`                  | `true`, `false`                                             |
+| `trailingCommas`                      | Trailing commas in multi-line arrays and objects                                                                                  | `always`                | `always`, `never`                                           |
+| `typeLiteral.separatorKind`           | Separator kind for type literals                                                                                                  | `semiColon`             | `comma`, `semiColon`                                        |
+| `useBraces`                           | Use braces for `if` / `for` / `while` statements                                                                                  | `whenNotSingleLine`     | `maintain`, `whenNotSingleLine`, `always`, `preferNone`     |
+| `useTabs`                             | Use tabs instead of spaces for indentation                                                                                        | `false`                 | `true`, `false`                                             |
+| `jsx.bracketPosition`                 | Bracket position for JSX                                                                                                          | `nextLine`              | `maintain`, `sameLine`, `nextLine`                          |
+| `jsx.forceNewLinesSurroundingContent` | Force newlines surrounding the content of JSX elements                                                                            | `false`                 | `true`, `false`                                             |
+| `jsx.multiLineParens`                 | Wrap the top-most JSX element or fragment in parentheses when it spans multiple lines                                             | `prefer`                | `never`, `prefer`, `always`                                 |
+| `unstable-component`                  | Enable formatting Svelte, Vue, Astro, and Angular files                                                                           | `false`                 | `true`, `false`                                             |
+| `unstable-sql`                        | Enable formatting SQL files                                                                                                       | `false`                 | `true`, `false`                                             |
 
 Read more about
 [formatting your code with Deno](/runtime/fundamentals/linting_and_formatting/).
