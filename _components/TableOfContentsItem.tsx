@@ -4,7 +4,7 @@ export default function TableOfContentsItem(
   props: { item: TableOfContentsItem_ },
 ) {
   return (
-    <li class="m-2 mr-0 leading-4 text-balance">
+    <li class="my-1.5 ml-2 mr-0 leading-tight text-balance">
       <a
         href={`#${props.item.slug}`}
         className="text-smaller lg:text-foreground-secondary hover:text-primary transition-colors duration-200 ease-in-out select-none"

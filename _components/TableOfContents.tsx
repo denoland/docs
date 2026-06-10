@@ -11,13 +11,20 @@ export default function TableOfContents({ data, toc, hasSubNav }: {
   const topClasses = hasSubNav ? "top-header-plus-subnav" : "top-header";
 
   return (
-    <ul
-      className={`toc-list hidden sticky ${topClasses} h-screen-minus-header overflow-y-auto border-l border-l-foreground-tertiary p-4 pr-0 lg:flex lg:flex-col lg:w-full`}
-      id="toc"
+    <div
+      className={`hidden sticky ${topClasses} h-screen-minus-header border-l border-l-foreground-tertiary lg:flex lg:flex-col lg:w-full`}
     >
-      {toc.map((item: TableOfContentsItem_) => (
-        <data.comp.TableOfContentsItem item={item} />
-      ))}
-    </ul>
+      <p className="px-4 pt-4 pb-2 uppercase text-smaller font-bold tracking-wide text-foreground-secondary">
+        This page
+      </p>
+      <ul
+        className="toc-list overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden flex flex-col flex-1 min-h-0 px-4 pr-2 pb-4"
+        id="toc"
+      >
+        {toc.map((item: TableOfContentsItem_) => (
+          <data.comp.TableOfContentsItem item={item} />
+        ))}
+      </ul>
+    </div>
   );
 }
