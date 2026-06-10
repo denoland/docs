@@ -9,15 +9,20 @@ export default function TableOfContents({ data, toc, hasSubNav }: {
     return null;
   }
   const topClasses = hasSubNav ? "top-header-plus-subnav" : "top-header";
-  // Height must subtract whatever the sticky offset adds, otherwise the box is
-  // taller than the space below the header(+subnav). When that overflow exceeds
-  // the grid row, `position: sticky` can't hold and the TOC scrolls out of view
-  // (this is why it was invisible on /deploy/ pages, which have a SubNav).
-  const heightClass = hasSubNav ? "h-screen-minus-both" : "h-screen-minus-header";
+  // Use MAX-height, not a fixed height: a short TOC then collapses to its own
+  // content height so the (fixed-height, viewport-tall) sidebar keeps the grid
+  // row taller than the TOC, giving `position: sticky` room to hold. A fixed
+  // height made the TOC fill the whole row on short pages (e.g. /deploy/), so it
+  // had no slack and scrolled out of view. Long TOCs still cap at the viewport
+  // and scroll internally. Offset must be subtracted so the cap fits below the
+  // header (+ subnav).
+  const maxHeightClass = hasSubNav
+    ? "max-h-[calc(100dvh-var(--header-height)-var(--subnav-height))]"
+    : "max-h-[calc(100dvh-var(--header-height))]";
 
   return (
     <div
-      className={`hidden sticky ${topClasses} ${heightClass} border-l border-l-foreground-tertiary lg:flex lg:flex-col lg:w-full`}
+      className={`hidden sticky ${topClasses} ${maxHeightClass} border-l border-l-foreground-tertiary lg:flex lg:flex-col lg:w-full`}
     >
       <p className="px-4 pt-4 pb-2 uppercase text-smaller font-bold tracking-wide text-foreground-secondary">
         This page
