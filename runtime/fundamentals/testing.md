@@ -574,7 +574,7 @@ Deno.test("example.ts$4-10.ts", async () => {
 
 If a code example starts with a [hashbang](/examples/hashbang_tutorial/), it is
 validated against supported Deno cli flags, and permissions flags are forwarded
-to the generated `Deno.test`.
+to the generated [`Deno.test`](/api/deno/~/Deno.test).
 
 ````ts
 /**
