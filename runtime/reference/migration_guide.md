@@ -133,7 +133,7 @@ auto-installing behavior. The new default in Deno 2 is `manual`, which expects
 the user to keep this directory up to date manually.
 
 See
-[Node modules directory](https://docs.deno.com/runtime/fundamentals/configuration/#node-modules-directory)
+[Node modules directory](https://docs.deno.com/runtime/reference/deno_json/#node-modules-directory)
 for reference.
 
 ## CLI changes

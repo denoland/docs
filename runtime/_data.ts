@@ -81,7 +81,7 @@ export const sidebar = [
         href: "/runtime/fundamentals/modules/",
       },
       {
-        title: "Configuration",
+        title: "Config files",
         href: "/runtime/fundamentals/configuration/",
       },
       {
@@ -372,6 +372,10 @@ export const sidebar = [
             href: `/runtime/reference/std/${name}/`,
           })),
         ],
+      },
+      {
+        title: "Configuration file (deno.json)",
+        href: "/runtime/reference/deno_json/",
       },
       {
         title: "Configuring TypeScript",

@@ -79,8 +79,8 @@ Customize formatting options in your `deno.json`:
 }
 ```
 
-See the [Configuration](/runtime/fundamentals/configuration/#formatting) page
-for all available options.
+See the [Configuration](/runtime/reference/deno_json/#formatting) page for all
+available options.
 
 ## Including and excluding files
 

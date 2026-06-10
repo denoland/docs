@@ -223,7 +223,7 @@ import { pascalCase } from "cases";
 
 The remapped name can be any valid specifier. It's a very powerful feature in
 Deno that can remap anything. Learn more in the
-[configuration dependencies section](/runtime/fundamentals/configuration/#dependencies).
+[configuration dependencies section](/runtime/reference/deno_json/#dependencies).
 
 ## Differentiating between `imports` or `importMap` in `deno.json` and `--import-map` option
 

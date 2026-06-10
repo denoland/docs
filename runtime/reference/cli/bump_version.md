@@ -83,7 +83,7 @@ just the root config:
 
 - The same increment is applied to each member's `version` field.
 - `jsr:` version constraints in the workspace root config and in any
-  [import map](/runtime/fundamentals/configuration/#imports) are rewritten in
+  [import map](/runtime/reference/deno_json/#dependencies) are rewritten in
   place so cross-package references keep matching the bumped versions.
 - Members without a `version` field are left alone.
 

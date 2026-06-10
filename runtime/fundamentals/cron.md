@@ -13,7 +13,7 @@ itself, so the same code that runs locally can be deployed without changes.
 locally with `deno run`, enable the
 [`--unstable-cron`](/runtime/reference/cli/unstable_flags/#--unstable-cron) flag
 (or add `"cron"` to the
-[`unstable`](/runtime/fundamentals/configuration/#unstable-features) array in
+[`unstable`](/runtime/reference/deno_json/#unstable-features) array in
 `deno.json`).
 
 ```sh
