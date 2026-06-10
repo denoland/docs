@@ -129,81 +129,96 @@ The formatter is configured with the `fmt` field in your
 [all formatting options](/runtime/reference/deno_json/#formatting) for the full
 list of settings and their defaults.
 
-## Deno support for other linters and formatters
+## Using other linters and formatters
+
+Deno's built-in [`deno lint`](#linting) and [`deno fmt`](#formatting) cover most
+projects, but you can also run popular third-party tools without installing them
+globally. Because Deno runs npm packages directly, `deno run -A npm:<tool>` runs
+any of them with no separate `npm install` step. To save typing, add the command
+as a [task](/runtime/reference/deno_json/#tasks) in your `deno.json` and run it
+with `deno task`.
 
 ### ESLint
 
-To use the VSCode ESLint extension in your Deno projects, your project will need
-a `node_modules` directory in your project that VSCode extensions can pick up.
+[ESLint](https://eslint.org/) needs a flat config file, `eslint.config.js`.
+Reference its packages with `npm:` specifiers so Deno can resolve them:
 
-In your [`deno.json`](/runtime/fundamentals/configuration/) ensure a
-`node_modules` folder is created, so the editor can resolve packages:
-
-```jsonc
-{
-  "nodeModulesDir": "auto"
-}
-```
-
-(Optional) Run an ESLint command to download it:
-
-```sh
-deno run -A npm:eslint --version
-# or
-deno run -A npm:eslint --init
-```
-
-Create an `eslint.config.js`:
-
-```js
-// eslint.config.js
-import js from "@eslint/js";
-import importPlugin from "eslint-plugin-import"; // example plugin
+```js title="eslint.config.js"
+import js from "npm:@eslint/js";
+import globals from "npm:globals";
 
 export default [
   js.configs.recommended,
   {
     files: ["**/*.ts", "**/*.js"],
-    languageOptions: { globals: { Deno: "readonly" } },
-    plugins: { import: importPlugin },
-    rules: {
-      // e.g. "import/order": "warn"
+    languageOptions: {
+      globals: { ...globals.node, Deno: "readonly" },
     },
   },
 ];
 ```
 
-To run ESLint run:
+Then run it over your project:
 
 ```sh
 deno run -A npm:eslint .
 ```
 
-Optionally, you can add a task in your `deno.json` to run ESLint:
+Declaring the Node and `Deno` globals prevents false `no-undef` errors for
+globals such as `console`. For type-aware linting of TypeScript, add
+[typescript-eslint](https://typescript-eslint.io/) to the config.
 
-```json
-{
-  "tasks": { "eslint": "eslint . --ext .ts,.js" }
-}
-```
+:::note
 
-And run it with:
+The VS Code ESLint extension needs a real `node_modules` directory to resolve
+ESLint and its plugins. Set `"nodeModulesDir": "auto"` in your `deno.json` and
+run `deno install` so the packages are materialized on disk.
+
+:::
+
+### oxlint
+
+[oxlint](https://oxc.rs) is a fast Rust-based linter that runs with no
+configuration:
 
 ```sh
-deno task eslint
+deno run -A npm:oxlint@latest
+```
+
+It lints the current directory and prints any problems it finds:
+
+```console
+sample.ts:3:5: warning eslint(no-unused-vars): Variable 'unused' is declared but never used.
 ```
 
 ### Prettier
 
-To use Prettier in your Deno projects, your project will need a `node_modules`
-directory in your project that VSCode extensions can pick up.
+[Prettier](https://prettier.io/) formats your code with no configuration
+required:
 
-Then install the Prettier extension for VSCode and configure it to be your
-default formatter:
+```sh
+# report files that need formatting
+deno run -A npm:prettier --check .
 
-In VSCode:
+# format files in place
+deno run -A npm:prettier --write .
+```
 
-1. Open the Command Palette (with <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>)
-2. Select **Format Document With...**
-3. Select **Configure Default Formatter...**
-4. Select **Prettier - Code formatter**
+### Biome
+
+[Biome](https://biomejs.dev/) is a fast Rust-based linter and formatter in one,
+and also works with zero configuration:
+
+```sh
+# lint and check formatting
+deno run -A npm:@biomejs/biome check .
+
+# format files in place
+deno run -A npm:@biomejs/biome format --write .
+
+# lint only
+deno run -A npm:@biomejs/biome lint .
+```
+
+To customize Biome, generate a `biome.json` with
+`deno run -A npm:@biomejs/biome init`.
