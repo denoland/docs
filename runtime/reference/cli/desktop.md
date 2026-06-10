@@ -44,8 +44,8 @@ deno desktop --allow-read --allow-net main.ts
 
 ## Backend
 
-`--backend` selects the rendering engine. It accepts `cef` (the default) or
-`webview`. The `raw` backend is selected through the `desktop.backend` field in
+`--backend` selects the rendering engine. It accepts `webview` (the default) or
+`cef`. The `raw` backend is selected through the `desktop.backend` field in
 `deno.json`. See [Backends](/runtime/desktop/backends/) for the tradeoffs.
 
 ```sh

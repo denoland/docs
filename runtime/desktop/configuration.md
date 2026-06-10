@@ -97,7 +97,7 @@ If no `icons` entry is set for a platform, the default Deno icon is used.
 ## `backend`
 
 Which web rendering engine to embed. One of `"cef"`, `"webview"`, or `"raw"`.
-Default: `"cef"`.
+Default: `"webview"`.
 
 ```jsonc
 "backend": "webview"

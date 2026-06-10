@@ -39,11 +39,12 @@ which has to compile for the target). Electrobun only ships on macOS. Electron
 supports cross-platform builds via electron-builder, but needs Node and
 platform-specific signing tools per target.
 
-**Bundled engine plus full Node compatibility.** Electron has both, but is
-massive (Chromium plus Node). Tauri and Dioxus are small but have no JS
-ecosystem. `deno desktop` bundles CEF for consistent rendering and gives you the
-full Node compat layer through Deno — including `npm:` imports in your handlers
-and `bindings`.
+**Full Node compatibility, with a choice of engine.** Electron bundles both
+Chromium and Node, but is massive. Tauri and Dioxus are small but have no JS
+ecosystem. `deno desktop` defaults to the OS webview (small, like Tauri) yet
+still gives you the full Node compat layer through Deno — including `npm:`
+imports in your handlers and `bindings` — and can bundle Chromium (CEF) when you
+need consistent rendering.
 
 **In-process bindings instead of IPC.** Electron / Electrobun / Tauri all use
 socket-based IPC between the backend and the UI. Calls serialize, cross a

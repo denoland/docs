@@ -6,11 +6,12 @@ description: "Pick a rendering engine for your desktop app — bundled Chromium,
 
 `deno desktop` runs your app on top of one of several web rendering engines.
 `--backend` (or the `desktop.backend` field in `deno.json`) selects which engine
-your app embeds.
+your app embeds. If you don't choose one, `deno desktop` uses the **WebView**
+backend.
 
 ## Available backends
 
-### CEF (default)
+### CEF
 
 ```sh
 deno desktop --backend cef main.ts
@@ -29,7 +30,7 @@ under `Contents/Frameworks/`.
 Choose CEF when consistent rendering across platforms matters, or when you need
 a feature only Chromium ships (e.g. WebGPU on Linux).
 
-### WebView
+### WebView (default)
 
 ```sh
 deno desktop --backend webview main.ts
