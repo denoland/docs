@@ -1,4 +1,4 @@
-import { Sidebar, SidebarNav } from "../../types.ts";
+import type { Sidebar, SidebarNavItem } from "../../types.ts";
 
 export const sidebar = [
   {
@@ -135,4 +135,4 @@ export const SidebarNav = [
     title: "Subhosting",
     href: "/subhosting/manual/",
   },
-] satisfies SidebarNav;
+] satisfies SidebarNavItem[];
