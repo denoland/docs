@@ -39,7 +39,7 @@ export const sidebar = [
         href: "/deploy/reference/builds/",
       },
       {
-        title: "Environment Variables and Contexts",
+        title: "Env Vars and Contexts",
         href: "/deploy/reference/env_vars_and_contexts/",
       },
       {

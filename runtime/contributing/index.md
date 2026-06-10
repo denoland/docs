@@ -7,6 +7,8 @@ oldUrl:
   - /runtime/manual/contributing/contribute
   - /runtime/manual/references/contributing/
   - /runtime/contributing/contribute/
+  - /runtime/contributing/docs/
+  - /runtime/contributing/examples/
 ---
 
 We welcome and appreciate all contributions to Deno.

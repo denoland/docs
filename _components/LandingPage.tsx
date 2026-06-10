@@ -118,7 +118,7 @@ export default function LandingPage() {
         </p>
         <p>
           <a
-            href="/runtime/contributing/examples/"
+            href="/runtime/contributing/"
             class="text-primary underline mt-4 font-bold"
           >
             Commit an example and we'll send you stickers!
