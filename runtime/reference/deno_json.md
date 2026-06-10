@@ -245,49 +245,37 @@ This configuration will:
 - exclude files in the `src/testdata/` directory and any TypeScript files in the
   `src/fixtures/` directory.
 
-The `fmt` field supports these options:
+The `fmt` field accepts the following options, each shown with its default and
+allowed values:
 
-- **`bracePosition`** — brace position for blocks. Default `sameLine`; one of
-  `maintain`, `sameLine`, `nextLine`, `sameLineUnlessHanging`.
-- **`indentWidth`** — indentation width (a number). Default `2`.
-- **`lineWidth`** — maximum line width (a number). Default `80`.
-- **`newLineKind`** — newline character to use: `auto` (keep the file's existing
-  style), `crlf`, `lf`, or `system` (OS default, CRLF on Windows and LF
-  elsewhere). Default `lf`.
-- **`nextControlFlowPosition`** — position of the next control-flow keyword.
-  Default `sameLine`; one of `sameLine`, `nextLine`, `maintain`.
-- **`operatorPosition`** — where to place the operator for expressions that span
-  multiple lines. Default `sameLine`; one of `sameLine`, `nextLine`, `maintain`.
-- **`proseWrap`** — how prose (for example Markdown) is wrapped. Default
-  `always`; one of `always`, `never`, `preserve`.
-- **`quoteProps`** — quoting of object properties. Default `asNeeded`; one of
-  `asNeeded`, `consistent`, `preserve`.
-- **`semiColons`** — prefer semicolons. Default `true`.
-- **`singleBodyPosition`** — position of the body in single-body blocks. Default
-  `sameLineUnlessHanging`; one of `sameLine`, `nextLine`, `maintain`,
-  `sameLineUnlessHanging`.
-- **`singleQuote`** — use single quotes. Default `false`.
-- **`spaceAround`** — spacing around enclosed expressions. Default `false`.
-- **`spaceSurroundingProperties`** — spacing surrounding single-line object-like
-  nodes. Default `true`.
-- **`trailingCommas`** — trailing commas in multi-line arrays and objects.
-  Default `always`; one of `always`, `never`.
-- **`typeLiteral.separatorKind`** — separator for type literals. Default
-  `semiColon`; one of `comma`, `semiColon`.
-- **`useBraces`** — use braces for `if` / `for` / `while` statements. Default
-  `whenNotSingleLine`; one of `maintain`, `whenNotSingleLine`, `always`,
-  `preferNone`.
-- **`useTabs`** — use tabs instead of spaces for indentation. Default `false`.
-- **`jsx.bracketPosition`** — bracket position for JSX. Default `nextLine`; one
-  of `maintain`, `sameLine`, `nextLine`.
-- **`jsx.forceNewLinesSurroundingContent`** — force newlines surrounding the
-  content of JSX elements. Default `false`.
-- **`jsx.multiLineParens`** — wrap the top-most JSX element or fragment in
-  parentheses when it spans multiple lines. Default `prefer`; one of `never`,
-  `prefer`, `always`.
-- **`unstable-component`** — enable formatting Svelte, Vue, Astro, and Angular
-  files. Default `false`.
-- **`unstable-sql`** — enable formatting SQL files. Default `false`.
+<div class="fmt-options">
+
+| Option                                | Default                 | Possible values                                             |
+| ------------------------------------- | ----------------------- | ----------------------------------------------------------- |
+| `bracePosition`                       | `sameLine`              | `maintain`, `sameLine`, `nextLine`, `sameLineUnlessHanging` |
+| `indentWidth`                         | `2`                     | a number                                                    |
+| `lineWidth`                           | `80`                    | a number                                                    |
+| `newLineKind`                         | `lf`                    | `auto`, `crlf`, `lf`, `system`                              |
+| `nextControlFlowPosition`             | `sameLine`              | `sameLine`, `nextLine`, `maintain`                          |
+| `operatorPosition`                    | `sameLine`              | `sameLine`, `nextLine`, `maintain`                          |
+| `proseWrap`                           | `always`                | `always`, `never`, `preserve`                               |
+| `quoteProps`                          | `asNeeded`              | `asNeeded`, `consistent`, `preserve`                        |
+| `semiColons`                          | `true`                  | `true`, `false`                                             |
+| `singleBodyPosition`                  | `sameLineUnlessHanging` | `sameLine`, `nextLine`, `maintain`, `sameLineUnlessHanging` |
+| `singleQuote`                         | `false`                 | `true`, `false`                                             |
+| `spaceAround`                         | `false`                 | `true`, `false`                                             |
+| `spaceSurroundingProperties`          | `true`                  | `true`, `false`                                             |
+| `trailingCommas`                      | `always`                | `always`, `never`                                           |
+| `typeLiteral.separatorKind`           | `semiColon`             | `comma`, `semiColon`                                        |
+| `useBraces`                           | `whenNotSingleLine`     | `maintain`, `whenNotSingleLine`, `always`, `preferNone`     |
+| `useTabs`                             | `false`                 | `true`, `false`                                             |
+| `jsx.bracketPosition`                 | `nextLine`              | `maintain`, `sameLine`, `nextLine`                          |
+| `jsx.forceNewLinesSurroundingContent` | `false`                 | `true`, `false`                                             |
+| `jsx.multiLineParens`                 | `prefer`                | `never`, `prefer`, `always`                                 |
+| `unstable-component`                  | `false`                 | `true`, `false`                                             |
+| `unstable-sql`                        | `false`                 | `true`, `false`                                             |
+
+</div>
 
 Read more about
 [formatting your code with Deno](/runtime/fundamentals/linting_and_formatting/).
