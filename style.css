@@ -507,6 +507,20 @@
     .fmt-options td {
       overflow-wrap: anywhere;
     }
+    /* These tables size their columns explicitly via table-layout: fixed, so the
+       global cell max-width must not clamp them (it would stop the wide column
+       from filling its track). */
+    .cheatsheet th,
+    .cheatsheet td,
+    .fmt-options th,
+    .fmt-options td {
+      max-width: none;
+    }
+    /* Option / Default columns are narrow; "Possible values" takes the rest. */
+    .fmt-options th:nth-child(1),
+    .fmt-options td:nth-child(1) {
+      width: 12rem;
+    }
     .fmt-options th:nth-child(2),
     .fmt-options td:nth-child(2) {
       width: 6rem;
