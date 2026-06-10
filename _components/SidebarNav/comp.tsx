@@ -44,6 +44,7 @@ export default function (data: Lume.Data) {
                                 href={subItem.href}
                                 isActive={subItem.href.replace(/\/$/, "") ===
                                   currentUrl}
+                                nested
                               />
                             </li>
                           ))}
@@ -83,11 +84,19 @@ function SidebarItem(props: {
   title: string;
   href: string;
   isActive?: boolean;
+  nested?: boolean;
 }) {
-  const defaultClasses =
-    "block m-0 py-2 px-3 border-l hover:bg-header-highlight hover:border-foreground-secondary hover:text-gray-800 transition-colors duration-150";
+  // Nested items (e.g. under "Standard library") are denser and rely on the
+  // parent group's single guide line instead of carrying their own left border.
+  const defaultClasses = props.nested
+    ? "block m-0 py-1 px-3 hover:bg-header-highlight hover:text-gray-800 transition-colors duration-150"
+    : "block m-0 py-2 px-3 border-l hover:bg-header-highlight hover:border-foreground-secondary hover:text-gray-800 transition-colors duration-150";
   const activeClasses = props.isActive
-    ? "bg-header-highlight border-foreground-secondary text-gray-800"
+    ? `bg-header-highlight text-gray-800${
+      props.nested ? "" : " border-foreground-secondary"
+    }`
+    : props.nested
+    ? ""
     : "border-foreground-tertiary";
 
   const combinedClasses = `${defaultClasses} ${activeClasses}`;

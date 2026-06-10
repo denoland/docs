@@ -561,7 +561,7 @@
       color: var(--fgColor-default, var(--color-fg-default));
       background-color: var(--bgColor-muted, var(--color-canvas-subtle));
       border-radius: 6px;
-      padding: 1rem;
+      padding: 0.6rem 1rem;
       font-size: 85%;
       line-height: 1.45;
       overflow: auto;
@@ -1414,7 +1414,7 @@
       grid-template-columns: auto minmax(0, 1fr) auto;
 
       @media (min-width: 64rem) {
-        grid-template-columns: minmax(13rem, 16rem) minmax(0, 1fr) 16rem;
+        grid-template-columns: minmax(13rem, 14rem) minmax(0, 1fr) 16rem;
       }
 
       .content {
@@ -1499,6 +1499,13 @@
     li:has(> &).expanded {
       grid-template-rows: max-content 1fr;
       padding-bottom: 1rem;
+      border-left-color: var(--color-header-highlight);
+    }
+
+    /* Keep the open parent toggle highlighted */
+    li.expanded > & {
+      color: var(--color-foreground-primary);
+      font-weight: 600;
     }
 
     /* Rotate chevron when expanded - only animate on user interaction */
