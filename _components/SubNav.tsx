@@ -45,7 +45,7 @@ export default function (
 
   return (
     <nav class="flex items-center pl-4 bg-header-highlight z-10 h-[var(--subnav-height)] overflow-x-auto xlplus:pl-0">
-      <ul class="flex w-full max-w-7xl mx-auto items-center gap-6">
+      <ul class="flex w-full max-w-[var(--layout-max-width)] mx-auto items-center gap-6">
         {navData.map((nav: SidebarNavItem) => (
           <li key={nav.href}>
             <a
