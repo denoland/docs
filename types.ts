@@ -1,4 +1,8 @@
-import "lume/jsx-runtime";
+// Type-only import of Lume's JSX runtime (ssx), which declares the global
+// `JSX` namespace used by `TitleContent` below. It must stay type-only: this
+// file is also imported in contexts that build without the root import map
+// (e.g. the deployed middleware), where a value import fails to resolve.
+import type {} from "lume/jsx-runtime";
 
 export type Sidebar = SidebarSection[];
 export type Path = string;
@@ -47,9 +51,8 @@ export interface SidebarSectionProps {
 }
 
 // `JSX.Children` is the renderable-content type from Lume's JSX runtime (ssx),
-// which — unlike React — does not expose a `JSX.Element` type. The import pulls
-// in ssx's global `JSX` namespace so this resolves under `deno check`/`deno test`
-// (the site itself builds with --no-check).
+// which — unlike React — does not expose a `JSX.Element` type. The global `JSX`
+// namespace comes from the type-only import at the top of this file.
 export type TitleContent = string | JSX.Children;
 
 export interface SidebarItem {
