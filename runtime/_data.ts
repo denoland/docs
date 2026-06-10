@@ -422,7 +422,7 @@ export const sectionHref = "/runtime/";
 // Each points at a hub page that curates the relevant guides + reference.
 export const SidebarNav = [
   { title: "Get started", href: "/runtime/getting_started/" },
-  { title: "Run", href: "/runtime/run/" },
+  { title: "Run code", href: "/runtime/run/" },
   { title: "Package manager", href: "/runtime/packages/" },
   { title: "Migrate from Node.js", href: "/runtime/migrate/" },
   { title: "Test", href: "/runtime/test/" },

@@ -1,34 +1,121 @@
 ---
 title: "Run code"
-description: "Execute JavaScript and TypeScript, serve HTTP, run project tasks, and debug — with Deno's secure-by-default runtime."
+description: "Run JavaScript and TypeScript with Deno: the secure-by-default permission model, running files, URLs and stdin, watch mode, and project tasks."
 ---
 
-Deno runs JavaScript and TypeScript directly, with web-standard APIs and a
-secure-by-default permission model. Start a server, wire up tasks, and debug your
-code with no build step.
+Deno runs JavaScript and TypeScript directly — no build step, no config — behind
+a security sandbox that grants access only when you ask for it. This page covers
+how your code actually runs: permissions, the ways to launch it, watch mode, and
+tasks.
 
-## Guides
+## Run a file
 
-- **[Web development](/runtime/fundamentals/web_dev/)** — build web apps and APIs
-  with web-standard primitives.
-- **[HTTP server](/runtime/fundamentals/http_server/)** — handle requests with
-  `Deno.serve` and the `Request`/`Response` APIs.
-- **[Debugging](/runtime/fundamentals/debugging/)** — attach a debugger and
-  inspect running code.
+Point Deno at a file. TypeScript runs as-is:
 
-## Reference
+```sh
+deno run main.ts
+```
 
-- **[deno run](/runtime/reference/cli/run/)** — run a script or module.
-- **[deno serve](/runtime/reference/cli/serve/)** — serve an HTTP handler.
-- **[deno task](/runtime/reference/cli/task/)** — run project-defined tasks.
-- **[deno eval](/runtime/reference/cli/eval/)** and
-  **[deno repl](/runtime/reference/cli/repl/)** — run code inline or interactively.
+`deno run` is explicit, but you can drop `run` for a file or task and Deno will
+figure it out:
+
+```sh
+deno main.ts          # same as `deno run main.ts`
+```
+
+## Permissions: secure by default
+
+This is the part that's different from Node. Code runs in a sandbox with **no
+access to the network, filesystem, environment, or subprocesses** until you grant
+it. A script that tries to read a file without permission stops and asks — or
+fails, if prompts are disabled.
+
+Grant access with `--allow-*` flags (each has a short form):
+
+```sh
+deno run --allow-net main.ts        # network    (-N)
+deno run --allow-read main.ts       # filesystem (-R)
+deno run --allow-env main.ts        # env vars   (-E)
+```
+
+Scope them down to exactly what's needed, and combine as required:
+
+```sh
+deno run --allow-read=./data --allow-net=api.example.com main.ts
+```
+
+Use `--deny-*` to carve out exceptions, or `-A` / `--allow-all` to skip the
+sandbox entirely (handy in trusted environments, but it gives up the guarantees):
+
+```sh
+deno run -A main.ts
+```
+
+See [Permissions](/runtime/reference/permissions/) for every flag and
+[Security](/runtime/fundamentals/security/) for the model behind them.
+
+## Run from a URL or stdin
+
+Deno can run code straight from a URL — useful for one-off tools and installers —
+or piped in over stdin:
+
+```sh
+deno run https://example.com/script.ts
+echo 'console.log(1 + 1)' | deno run -
+```
+
+Remote code is sandboxed like everything else: it gets no permissions unless you
+grant them.
+
+## Reload on change with watch mode
+
+Add `--watch` and Deno reruns your program whenever a file it depends on changes
+— no `nodemon`, no extra dependency:
+
+```sh
+deno run --watch main.ts
+```
+
+`deno test`, `deno fmt`, and others accept `--watch` too.
+
+## Run project tasks
+
+Define repeatable commands in `deno.json` and run them with
+[`deno task`](/runtime/reference/cli/task/) — the equivalent of `npm run`:
+
+```json title="deno.json"
+{
+  "tasks": {
+    "dev": "deno run --watch --allow-net main.ts",
+    "start": "deno run --allow-net main.ts"
+  }
+}
+```
+
+```sh
+deno task dev
+```
+
+Tasks can run other tasks, set environment variables, and work cross-platform.
+
+## Try code quickly
+
+For experiments, evaluate an expression inline or open a REPL:
+
+```sh
+deno eval "console.log(Deno.version)"
+deno repl
+```
+
+## Going further
+
+- **[Write an HTTP server](/runtime/fundamentals/http_server/)** — handle
+  requests with the web-standard `Deno.serve`.
+- **[Web development](/runtime/fundamentals/web_dev/)** — build apps with Fresh,
+  Next.js, Astro, and web-standard APIs.
 - **[Web platform APIs](/runtime/reference/web_platform_apis/)** — `fetch`,
-  `Request`, streams, and other web globals.
-- **[Environment variables](/runtime/reference/env_variables/)** — read and
-  configure environment variables.
-
-## Related
-
-- **[Permissions](/runtime/reference/permissions/)** and
-  **[Security](/runtime/fundamentals/security/)** — control what your code can access.
+  `Request`/`Response`, streams, Web Crypto, and the other browser globals Deno
+  implements.
+- **[Debugging](/runtime/fundamentals/debugging/)** — attach Chrome DevTools or
+  your editor's debugger.
+- **[deno run reference](/runtime/reference/cli/run/)** — every flag in detail.

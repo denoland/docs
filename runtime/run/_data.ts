@@ -6,7 +6,7 @@ import type { Sidebar } from "../../types.ts";
 // reference and are linked here.
 export const sidebar = [
   {
-    title: "Run",
+    title: "Run code",
     items: [
       { title: "Overview", href: "/runtime/run/" },
       { title: "Web development", href: "/runtime/fundamentals/web_dev/" },
