@@ -766,7 +766,7 @@ Like all native FFI, pass `--allow-ffi` to grant explicit permission. Review
 
 Running a Node.js project with Deno usually requires little to no change. See
 the
-[Migrating from Node.js to Deno guide](/runtime/fundamentals/migrate_from_node/)
+[Migrating from Node.js to Deno guide](/runtime/migrate/)
 for the details, optional toolchain improvements, and a Node-to-Deno command
 cheatsheet.
 

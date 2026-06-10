@@ -12,10 +12,6 @@ export const sidebar = [
         href: "/runtime/getting_started/installation/",
       },
       {
-        title: "First project",
-        href: "/runtime/getting_started/first_project/",
-      },
-      {
         title: "Set up your environment",
         href: "/runtime/getting_started/setup_your_environment/",
       },

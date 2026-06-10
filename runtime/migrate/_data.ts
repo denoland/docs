@@ -8,10 +8,6 @@ export const sidebar = [
     title: "Migrate from Node.js",
     items: [
       { title: "Overview", href: "/runtime/migrate/" },
-      {
-        title: "Migrating from Node to Deno",
-        href: "/runtime/fundamentals/migrate_from_node/",
-      },
       { title: "Node.js compatibility", href: "/runtime/fundamentals/node/" },
     ],
   },

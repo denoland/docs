@@ -2,7 +2,7 @@
 last_modified: 2026-05-28
 title: "Welcome to Deno"
 description: "Learn the basics of Deno, a secure JavaScript, TypeScript, and WebAssembly runtime."
-pagination_next: /runtime/getting_started/first_project/
+pagination_next: /runtime/getting_started/
 oldUrl:
   - /manual/
   - /runtime/manual/introduction/
@@ -77,7 +77,7 @@ deno --version
 
 With Deno installed, dive into the rest of the Getting Started guide:
 
-- [Making a Deno project](/runtime/getting_started/first_project/)
+- [Get started: build your first project](/runtime/getting_started/)
 - [Setting up your environment](/runtime/getting_started/setup_your_environment/)
 - [Using the CLI](/runtime/getting_started/command_line_interface/)
 

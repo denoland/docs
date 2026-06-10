@@ -15,10 +15,6 @@ export const sidebar = [
         href: "/runtime/getting_started/installation/",
       },
       {
-        title: "First project",
-        href: "/runtime/getting_started/first_project/",
-      },
-      {
         title: "Setup your environment",
         href: "/runtime/getting_started/setup_your_environment/",
       },
@@ -57,7 +53,7 @@ export const sidebar = [
       },
       {
         title: "Migrating from Node",
-        href: "/runtime/fundamentals/migrate_from_node/",
+        href: "/runtime/migrate/",
       },
     ],
   },
