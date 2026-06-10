@@ -12,10 +12,6 @@ major difference from Node, where dependencies are automatically granted full
 access to all system I/O, potentially introducing hidden vulnerabilities into
 your project.
 
-To complement the runtime sandbox, Deno also ships
-[`deno audit`](/runtime/reference/cli/audit/) for scanning your dependencies
-against vulnerability databases — useful as a CI gate.
-
 Before using Deno to run completely untrusted code, read the
 [section on executing untrusted code](#executing-untrusted-code) below.
 
@@ -102,7 +98,24 @@ using all of these when executing arbitrary untrusted code:
   etc.
 - Use a sandboxed environment like a VM or MicroVM (gVisor, Firecracker, etc).
 
+## Auditing dependencies
+
+The permission sandbox controls what code can do at runtime, but it does not
+tell you whether your dependencies contain known vulnerabilities. Deno ships
+[`deno audit`](/runtime/reference/cli/audit/) to scan your dependencies against
+vulnerability databases, which is useful as a CI gate. See
+[supply chain management](/runtime/fundamentals/dependency_management/#supply-chain-management)
+for keeping dependencies safe over time.
+
 ## Permission broker
+
+:::caution Advanced use only
+
+Using a permission broker changes Deno’s decision authority: CLI flags and
+prompts no longer apply. Ensure your broker process is resilient, audited, and
+available before enabling `DENO_PERMISSION_BROKER_PATH`.
+
+:::
 
 For centralized and policy-driven permission decisions, Deno can delegate all
 permission checks to an external broker process. Enable this by setting the
@@ -153,11 +166,3 @@ Example message flow:
 -> req {"v":1,"pid":10234,"id":5,"datetime":"2025-01-01T00:00:04.000Z","permission":"env","value":null}
 <- res {"id":5,"result":"deny","reason":"Environment access is denied."}
 ```
-
-:::caution Advanced use only
-
-Using a permission broker changes Deno’s decision authority: CLI flags and
-prompts no longer apply. Ensure your broker process is resilient, audited, and
-available before enabling `DENO_PERMISSION_BROKER_PATH`.
-
-:::
