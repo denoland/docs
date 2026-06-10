@@ -28,9 +28,9 @@ Usage: deno desktop [OPTIONS] [SCRIPT_ARG]...
 ## Options
 
 | Flag                             | Description                                                                                 |
-| -------------------------------- | ------------------------------------------------------------------------------------------- |
+| -------------------------------- |---------------------------------------------------------------------------------------------|
 | `--all-targets`                  | Build for all supported target platforms.                                                   |
-| `--backend <backend>`            | WEF backend: `cef` (default), `webview`, `servo`, `raw`.                                    |
+| `--backend <backend>`            | laufey backend: `cef` (default), `webview`, `servo`, `raw`.                                 |
 | `--exclude <path>`               | Exclude a file or directory from the compiled binary.                                       |
 | `--hmr`                          | Run the desktop app with hot module replacement.                                            |
 | `--icon <path>`                  | Application icon (`.ico` on Windows, `.icns` or `.png` on macOS).                           |

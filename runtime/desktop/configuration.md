@@ -201,16 +201,6 @@ For framework projects this is handled automatically: detected build outputs
 virtual filesystem and self-extracted at runtime so framework code finds them
 relative to its own working directory.
 
-## Environment variables
-
-A few environment variables affect builds and runtime behavior. They are
-documented on the relevant pages:
-
-- `WEF_DEV_DIR` — point at a local `wef` checkout for development. See
-  [Backends](/runtime/desktop/backends/).
-- `DENO_SERVE_ADDRESS` — set automatically by the runtime; do not override. See
-  [HTTP serving](/runtime/desktop/serving/).
-
 ## Validation
 
 Configuration is validated at the start of `deno desktop`:

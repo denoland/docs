@@ -3,7 +3,7 @@ title: "Backends"
 description: "Pick a rendering engine for your desktop app — bundled Chromium, the OS webview, raw windowing, or Servo. Tradeoffs and how to switch."
 ---
 
-`deno desktop` is built on **WEF**, a Rust abstraction layer over multiple web
+`deno desktop` is built on **Laufey**, a Rust abstraction layer over multiple web
 engines. `--backend` (or the `desktop.backend` field in `deno.json`) selects
 which engine your app embeds.
 
@@ -36,7 +36,7 @@ deno desktop --backend webview main.ts
 **The operating system's own webview** — WKWebView on macOS, WebView2 on
 Windows, WebKitGTK on Linux.
 
-- Smaller app size (just your code + the WEF shim).
+- Smaller app size (just your code + the laufey shim).
 - Rendering and feature support varies per platform and OS version.
 - Some web features may be missing or behave differently (Web Audio variants,
   WebGPU availability, etc.).
@@ -101,29 +101,15 @@ The `raw` backend has no webview, so any APIs that interact with web content
 
 ## How backends are obtained
 
-You do not build WEF yourself. The Deno CLI downloads prebuilt backend binaries
+You do not build laufey yourself. The Deno CLI downloads prebuilt backend binaries
 from
-[`github.com/denoland/wef/releases`](https://github.com/denoland/wef/releases).
+[`github.com/denoland/laufey/releases`](https://github.com/denoland/laufey/releases).
 The version is pinned via `Cargo.lock` in the Deno tree, downloads are
 checksum-verified, and binaries are cached under
-`<deno_dir>/wef/<version>/<backend>/<target>/`.
+`<deno_dir>/laufey/<version>/<backend>/<target>/`.
 
-The first build for a new backend / target / WEF version downloads the archive
+The first build for a new backend / target / laufey version downloads the archive
 (a few hundred megabytes for CEF). Subsequent builds use the cache.
-
-### Working against a local `wef` checkout
-
-If you are developing WEF itself, set `WEF_DEV_DIR` to your `wef` checkout and
-the CLI uses your local build instead of downloading:
-
-```sh
-export WEF_DEV_DIR=/path/to/wef-checkout
-deno desktop main.ts
-```
-
-The CLI looks for the backend binary in well-known build subdirectories under
-`$WEF_DEV_DIR` (`result/`, `result-cef/`, `webview/build/`,
-`target/release/wef_winit`, etc.).
 
 ## Cross-compilation
 

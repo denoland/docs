@@ -30,8 +30,8 @@ Supported triples:
 | `aarch64-unknown-linux-gnu` | Linux   | arm64        |
 | `x86_64-unknown-linux-gnu`  | Linux   | x86_64       |
 
-The CLI fetches the matching prebuilt `denort` and the matching prebuilt WEF
-backend archive from `github.com/denoland/wef/releases`. No platform-specific
+The CLI fetches the matching prebuilt `denort` and the matching prebuilt Laufey
+backend archive from `github.com/denoland/laufey/releases`. No platform-specific
 toolchain is needed on the host.
 
 ## Output formats
@@ -142,8 +142,8 @@ Cross-compiling from one OS to another requires:
 
 - The right `denort` binary for the target. Downloaded automatically from
   `github.com/denoland/deno/releases`, matching your local Deno version.
-- The right WEF backend archive for the target. Downloaded automatically from
-  `github.com/denoland/wef/releases`, pinned via `Cargo.lock`.
+- The right Laufey backend archive for the target. Downloaded automatically from
+  `github.com/denoland/laufey/releases`, pinned via `Cargo.lock`.
 
 Both downloads are SHA-256 verified and cached under `<deno_dir>/`.
 

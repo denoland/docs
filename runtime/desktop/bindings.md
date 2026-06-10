@@ -29,8 +29,8 @@ await bindings.saveSettings(settings);
 Bindings are **not** IPC. The Deno runtime and the rendering backend run as
 threads / processes inside the same address space (CEF) or coordinated process
 group (WebView). Calls go through `tokio::sync::mpsc` channels and `oneshot`
-channels for responses; the WEF capi layer dispatches via a notify / poll
-pattern in `wef::run()`.
+channels for responses; the laufey capi layer dispatches via a notify / poll
+pattern in `laufey::run()`.
 
 This avoids the serialization round-trip that socket-based IPC frameworks
 (Electron's `ipcMain` / `ipcRenderer`, Tauri's `invoke`) impose. Argument
