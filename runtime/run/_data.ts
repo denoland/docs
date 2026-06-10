@@ -34,6 +34,21 @@ export const sidebar = [
     ],
   },
   {
+    title: "Concepts",
+    items: [
+      { title: "TypeScript", href: "/runtime/fundamentals/typescript/" },
+      { title: "Node", href: "/runtime/fundamentals/node/" },
+      { title: "Security", href: "/runtime/fundamentals/security/" },
+      { title: "Modules", href: "/runtime/fundamentals/modules/" },
+      { title: "Config files", href: "/runtime/fundamentals/configuration/" },
+      { title: "Workspaces", href: "/runtime/fundamentals/workspaces/" },
+      {
+        title: "Stability and releases",
+        href: "/runtime/fundamentals/stability_and_releases/",
+      },
+    ],
+  },
+  {
     title: "Commands",
     items: [
       { title: "deno run", href: "/runtime/reference/cli/run/" },
@@ -55,6 +70,15 @@ export const sidebar = [
         href: "/runtime/reference/env_variables/",
       },
       { title: "Permissions", href: "/runtime/reference/permissions/" },
+    ],
+  },
+  {
+    title: "Contributing",
+    items: [
+      { title: "Overview", href: "/runtime/contributing/" },
+      { title: "Architecture", href: "/runtime/contributing/architecture/" },
+      { title: "Style guide", href: "/runtime/contributing/style_guide/" },
+      { title: "Help", href: "/runtime/help/" },
     ],
   },
 ] satisfies Sidebar;
