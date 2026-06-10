@@ -17,7 +17,10 @@ export default function (
   const getActiveHref = (): string | null => {
     if (!Array.isArray(navData) || navData.length === 0) return null;
 
-    const urlNoQuery = currentUrl.split("?")[0].split("#")[0];
+    // A page can belong to a section other than its URL path via `navSection`
+    // frontmatter; match the active item against that when present.
+    const navSection = data.navSection ?? data.page?.data?.navSection;
+    const urlNoQuery = (navSection ?? currentUrl).split("?")[0].split("#")[0];
 
     const isSegmentPrefix = (href: string, url: string): boolean => {
       if (!url.startsWith(href)) return false;

@@ -1,4 +1,5 @@
 ---
+navSection: /runtime/run/
 last_modified: 2026-05-20
 title: "Debugging"
 description: "Complete guide to debugging Deno applications. Learn to use Chrome DevTools, VS Code debugger, and other debugging techniques for TypeScript/JavaScript code in Deno."
