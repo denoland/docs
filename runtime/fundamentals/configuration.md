@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-03-09
-title: "Configuration"
-description: "How Deno projects are configured with deno.json and package.json: file discovery, jsonc support, and an overview of what you can configure. See the deno.json reference for every field."
+title: "Config files"
+description: "How Deno projects are configured: the deno.json file, .jsonc support and discovery, how package.json is used for Node compatibility, and an overview of what you can configure. See the deno.json reference for every field."
 oldUrl:
   - /runtime/manual/getting_started/configuration_file/
 ---
@@ -19,14 +19,16 @@ flag can be used to specify a different configuration file.
 
 ## package.json support
 
-Deno also supports a `package.json` file for compatibility with Node.js
-projects. If you have a Node.js project, it is not necessary to create a
-`deno.json` file. Deno will use the `package.json` file to configure the
-project.
+For compatibility with Node.js projects, Deno also reads an existing
+`package.json`. You don't need to add a `deno.json` to run a Node project: Deno
+resolves the project's dependencies from `package.json`, and you can run its
+`scripts` with [`deno task`](/runtime/reference/cli/task/).
 
-If both a `deno.json` and `package.json` file are present in the same directory,
-Deno will understand dependencies specified in both `deno.json` and
-`package.json`; and use the `deno.json` file for Deno-specific configurations.
+A `package.json` is not, however, a way to configure Deno itself. Deno-specific
+settings such as the linter, formatter, TypeScript compiler options, and
+lockfile are read only from `deno.json`. When both files are present, Deno reads
+dependencies from each and uses `deno.json` for its own configuration.
+
 Read more about
 [Node compatibility in Deno](/runtime/fundamentals/node/#node-compatibility).
 

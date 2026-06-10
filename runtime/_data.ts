@@ -81,7 +81,7 @@ export const sidebar = [
         href: "/runtime/fundamentals/modules/",
       },
       {
-        title: "Configuration",
+        title: "Config files",
         href: "/runtime/fundamentals/configuration/",
       },
       {
