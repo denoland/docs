@@ -578,7 +578,7 @@ to the generated `Deno.test`.
 
 ````ts
 /**
- * Reads and returns the contents of a configuration file.
+ * Prints the value of an environment variable.
  *
  * ```ts
  * #!/usr/bin/env -S deno run --allow-env=MY_ENV_VAR
@@ -587,7 +587,7 @@ to the generated `Deno.test`.
  */
 ````
 
-Below is how each permission flag is interpreted
+Below is how each permission flag is interpreted:
 
 | Flag                | Generated permissions                                |
 | ------------------- | ---------------------------------------------------- |
@@ -602,7 +602,7 @@ Below is how each permission flag is interpreted
 
 :::note
 
-An example never runs with broader permissions than what `deno test` was
+A code example never runs with broader permissions than what `deno test` was
 granted, even if the hashbang itself specify broader ones.
 
 :::
