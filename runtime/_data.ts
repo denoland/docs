@@ -427,8 +427,8 @@ export const sectionHref = "/runtime/";
 export const SidebarNav = [
   { title: "Get started", href: "/runtime/getting_started/" },
   { title: "Run", href: "/runtime/run/" },
-  { title: "Packages", href: "/runtime/packages/" },
-  { title: "Migrate", href: "/runtime/migrate/" },
+  { title: "Package manager", href: "/runtime/packages/" },
+  { title: "Migrate from Node.js", href: "/runtime/migrate/" },
   { title: "Test", href: "/runtime/test/" },
   { title: "Lint & format", href: "/runtime/lint_and_format/" },
   { title: "CLI apps", href: "/runtime/cli_apps/" },
