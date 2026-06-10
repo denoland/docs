@@ -6,7 +6,7 @@ export const sidebar = [
   {
     title: "Get started",
     items: [
-      { title: "Overview", href: "/runtime/getting_started/" },
+      { title: "Overview", href: "/runtime/" },
       {
         title: "Installation",
         href: "/runtime/getting_started/installation/",

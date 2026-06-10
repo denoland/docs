@@ -20,7 +20,8 @@ export default function (
     // A page can belong to a section other than its URL path via `navSection`
     // frontmatter; match the active item against that when present.
     const navSection = data.navSection ?? data.page?.data?.navSection;
-    const urlNoQuery = (navSection ?? currentUrl).split("?")[0].split("#")[0];
+    const sectionUrl = (navSection ?? currentUrl).split("?")[0].split("#")[0];
+    const pageUrl = currentUrl.split("?")[0].split("#")[0];
 
     const isSegmentPrefix = (href: string, url: string): boolean => {
       if (!url.startsWith(href)) return false;
@@ -35,10 +36,15 @@ export default function (
     };
 
     const matches = navData
-      .map((n: SidebarNavItem) => n.href)
-      .filter((href: string) =>
-        typeof href === "string" && isSegmentPrefix(href, urlNoQuery)
+      .filter((n: SidebarNavItem) =>
+        typeof n.href === "string" &&
+        // `exact` items (e.g. the section-root "/runtime/") match only an exact
+        // URL, never as a prefix, so they don't light up on every page.
+        (n.exact
+          ? (pageUrl === n.href || sectionUrl === n.href)
+          : isSegmentPrefix(n.href, sectionUrl))
       )
+      .map((n: SidebarNavItem) => n.href)
       .sort((a, b) => b.length - a.length); // longest prefix wins
 
     return matches[0] ?? null;

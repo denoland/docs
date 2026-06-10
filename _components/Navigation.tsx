@@ -81,6 +81,13 @@ function getSectionData(data: Lume.Data, currentUrl: string) {
     }
   }
 
+  // Use the page's own cascaded sidebar (from the nearest _data.ts) — this is
+  // the section sidebar even when that section has no index page (e.g. the
+  // getting_started sub-pages, whose landing now lives at /runtime/).
+  if (data.sidebar) {
+    return data.sidebar;
+  }
+
   // Fall back to the default behavior using just the first segment
   const dataPath = urlSegments[0];
   return data.search.data(`/${dataPath}/`)?.sidebar;
