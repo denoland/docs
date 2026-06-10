@@ -22,7 +22,7 @@ building amazing applications.
 
 Linting is the process of analyzing your code for potential errors, bugs, and
 stylistic issues. Deno's built-in linter,
-[`deno lint`](/runtime/reference/cli/linter/), supports recommended set of rules
+[`deno lint`](/runtime/reference/cli/lint/), supports recommended set of rules
 from [ESLint](https://eslint.org/) to provide comprehensive feedback on your
 code. This includes identifying syntax errors, enforcing coding conventions, and
 highlighting potential issues that could lead to bugs.
@@ -122,244 +122,103 @@ in the root of your project with the following configuration:
 If your `deno.json(c)` file is located in a subdirectory of your project,
 provide the correct relative path to it instead.
 
-### Available options
-
-#### `bracePosition`
-
-Define brace position for blocks
-
-- **Default:** `sameLine`
-- **Possible values:** `maintain`, `sameLine`, `nextLine`,
-  `sameLineUnlessHanging`
-
-#### `jsx.bracketPosition`
-
-Define bracket position for JSX
-
-- **Default:** `nextLine`
-- **Possible values:** `maintain`, `sameLine`, `nextLine`
-
-#### `jsx.forceNewLinesSurroundingContent`
-
-Forces newlines surrounding the content of JSX elements
-
-- **Default:** `false`
-- **Possible values:** `true`, `false`
-
-#### `jsx.multiLineParens`
-
-Surrounds the top-most JSX element or fragment in parentheses when it spans
-multiple lines
-
-- **Default:** `prefer`
-- **Possible values:** `never`, `prefer`, `always`
-
-#### `indentWidth`
-
-Define indentation width
-
-- **Default:** `2`
-- **Possible values:** `number`
-
-#### `lineWidth`
-
-Define maximum line width
-
-- **Default:** `80`
-- **Possible values:** `number`
-
-#### `newLineKind`
-
-The newline character to use
-
-- **Default:** `lf`
-- **Possible values:** `auto`, `crlf`, `lf`, `system`
-
-Use `auto` to preserve the file's existing newline style when Deno can detect
-one. Use `system` to use the current operating system's default newline style,
-which is `crlf` on Windows and `lf` on Unix-like systems.
-
-#### `nextControlFlowPosition`
-
-Define position of next control flow
-
-- **Default:** `sameLine`
-- **Possible values:** `sameLine`, `nextLine`, `maintain`
-
-#### `semiColons`
-
-Whether to prefer using semicolons.
-
-- **Default:** `true`
-- **Possible values:** `true`, `false`
-
-#### `operatorPosition`
-
-Where to place the operator for expressions that span multiple lines
-
-- **Default:** `sameLine`
-- **Possible values:** `sameLine`, `nextLine`, `maintain`
-
-#### `proseWrap`
-
-Define how prose should be wrapped
-
-- **Default:** `always`
-- **Possible values:** `always`, `never`, `preserve`
-
-#### `quoteProps`
-
-Control quoting of object properties
-
-- **Default:** `asNeeded`
-- **Possible values:** `asNeeded`, `consistent`, `preserve`
-
-#### `singleBodyPosition`
-
-The position of the body in single body blocks
-
-- **Default:** `sameLineUnlessHanging`
-- **Possible values:** `sameLine`, `nextLine`, `maintain`,
-  `sameLineUnlessHanging`
-
-#### `singleQuote`
-
-Use single quotes
-
-- **Default:** `false`
-- **Possible values:** `true`, `false`
-
-#### `spaceAround`
-
-Control spacing around enclosed expressions
-
-- **Default:** `false`
-- **Possible values:** `true`, `false`
-
-#### `spaceSurroundingProperties`
-
-Control spacing surrounding single line object-like nodes
-
-- **Default:** `true`
-- **Possible values:** `true`, `false`
-
-#### `trailingCommas`
-
-Control trailing commas in multi-line arrays/objects
-
-- **Default:** `always`
-- **Possible values:** `always`, `never`
-
-#### `typeLiteral.separatorKind`
-
-Define separator kind for type literals
-
-- **Default:** `semiColon`
-- **Possible values:** `comma`, `semiColon`
-
-#### `unstable-component`
-
-Enable formatting Svelte, Vue, Astro and Angular files
-
-#### `unstable-sql`
-
-Enable formatting SQL files
-
-#### `useTabs`
-
-Use tabs instead of spaces for indentation
-
-- **Default:** `false`
-- **Possible values:** `true`, `false`
-
-#### `useBraces`
-
-Whether to use braces for if statements, for statements, and while statements
-
-- **Default:** `whenNotSingleLine`
-- **Possible values:** `maintain`, `whenNotSingleLine`, `always`, `preferNone`
-
 ### Configuration
 
-The formatter can be configured in a
-[`deno.json`](/runtime/reference/deno_json/#formatting) file. You can specify
-custom settings to tailor the formatting process to your needs.
+The formatter is configured with the `fmt` field in your
+[`deno.json`](/runtime/reference/deno_json/#formatting) file. See
+[all formatting options](/runtime/reference/deno_json/#formatting) for the full
+list of settings and their defaults.
 
-## Deno support for other linters and formatters
+## Using other linters and formatters
+
+Deno's built-in [`deno lint`](#linting) and [`deno fmt`](#formatting) cover most
+projects, but you can also run popular third-party tools without installing them
+globally. Because Deno runs npm packages directly, `deno run -A npm:<tool>` runs
+any of them with no separate `npm install` step. To save typing, add the command
+as a [task](/runtime/reference/deno_json/#tasks) in your `deno.json` and run it
+with `deno task`.
 
 ### ESLint
 
-To use the VSCode ESLint extension in your Deno projects, your project will need
-a `node_modules` directory in your project that VSCode extensions can pick up.
+[ESLint](https://eslint.org/) needs a flat config file, `eslint.config.js`.
+Reference its packages with `npm:` specifiers so Deno can resolve them:
 
-In your [`deno.json`](/runtime/fundamentals/configuration/) ensure a
-`node_modules` folder is created, so the editor can resolve packages:
-
-```jsonc
-{
-  "nodeModulesDir": "auto"
-}
-```
-
-(Optional) Run an ESLint command to download it:
-
-```sh
-deno run -A npm:eslint --version
-# or
-deno run -A npm:eslint --init
-```
-
-Create an `eslint.config.js`:
-
-```js
-// eslint.config.js
-import js from "@eslint/js";
-import importPlugin from "eslint-plugin-import"; // example plugin
+```js title="eslint.config.js"
+import js from "npm:@eslint/js";
+import globals from "npm:globals";
 
 export default [
   js.configs.recommended,
   {
     files: ["**/*.ts", "**/*.js"],
-    languageOptions: { globals: { Deno: "readonly" } },
-    plugins: { import: importPlugin },
-    rules: {
-      // e.g. "import/order": "warn"
+    languageOptions: {
+      globals: { ...globals.node, Deno: "readonly" },
     },
   },
 ];
 ```
 
-To run ESLint run:
+Then run it over your project:
 
 ```sh
 deno run -A npm:eslint .
 ```
 
-Optionally, you can add a task in your `deno.json` to run ESLint:
+Declaring the Node and `Deno` globals prevents false `no-undef` errors for
+globals such as `console`. For type-aware linting of TypeScript, add
+[typescript-eslint](https://typescript-eslint.io/) to the config.
 
-```json
-{
-  "tasks": { "eslint": "eslint . --ext .ts,.js" }
-}
-```
+:::note
 
-And run it with:
+The VS Code ESLint extension needs a real `node_modules` directory to resolve
+ESLint and its plugins. Set `"nodeModulesDir": "auto"` in your `deno.json` and
+run `deno install` so the packages are materialized on disk.
+
+:::
+
+### oxlint
+
+[oxlint](https://oxc.rs) is a fast Rust-based linter that runs with no
+configuration:
 
 ```sh
-deno task eslint
+deno run -A npm:oxlint@latest
+```
+
+It lints the current directory and prints any problems it finds:
+
+```console
+sample.ts:3:5: warning eslint(no-unused-vars): Variable 'unused' is declared but never used.
 ```
 
 ### Prettier
 
-To use Prettier in your Deno projects, your project will need a `node_modules`
-directory in your project that VSCode extensions can pick up.
+[Prettier](https://prettier.io/) formats your code with no configuration
+required:
 
-Then install the Prettier extension for VSCode and configure it to be your
-default formatter:
+```sh
+# report files that need formatting
+deno run -A npm:prettier --check .
 
-In VSCode:
+# format files in place
+deno run -A npm:prettier --write .
+```
 
-1. Open the Command Palette (with <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>)
-2. Select **Format Document With...**
-3. Select **Configure Default Formatter...**
-4. Select **Prettier - Code formatter**
+### Biome
+
+[Biome](https://biomejs.dev/) is a fast Rust-based linter and formatter in one,
+and also works with zero configuration:
+
+```sh
+# lint and check formatting
+deno run -A npm:@biomejs/biome check .
+
+# format files in place
+deno run -A npm:@biomejs/biome format --write .
+
+# lint only
+deno run -A npm:@biomejs/biome lint .
+```
+
+To customize Biome, generate a `biome.json` with
+`deno run -A npm:@biomejs/biome init`.

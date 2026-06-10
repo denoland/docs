@@ -245,6 +245,38 @@ This configuration will:
 - exclude files in the `src/testdata/` directory and any TypeScript files in the
   `src/fixtures/` directory.
 
+The `fmt` field accepts the following options, each shown with its default and
+allowed values:
+
+<div class="fmt-options">
+
+| Option                                | Default                 | Possible values                                             |
+| ------------------------------------- | ----------------------- | ----------------------------------------------------------- |
+| `bracePosition`                       | `sameLine`              | `maintain`, `sameLine`, `nextLine`, `sameLineUnlessHanging` |
+| `indentWidth`                         | `2`                     | a number                                                    |
+| `lineWidth`                           | `80`                    | a number                                                    |
+| `newLineKind`                         | `lf`                    | `auto`, `crlf`, `lf`, `system`                              |
+| `nextControlFlowPosition`             | `sameLine`              | `sameLine`, `nextLine`, `maintain`                          |
+| `operatorPosition`                    | `sameLine`              | `sameLine`, `nextLine`, `maintain`                          |
+| `proseWrap`                           | `always`                | `always`, `never`, `preserve`                               |
+| `quoteProps`                          | `asNeeded`              | `asNeeded`, `consistent`, `preserve`                        |
+| `semiColons`                          | `true`                  | `true`, `false`                                             |
+| `singleBodyPosition`                  | `sameLineUnlessHanging` | `sameLine`, `nextLine`, `maintain`, `sameLineUnlessHanging` |
+| `singleQuote`                         | `false`                 | `true`, `false`                                             |
+| `spaceAround`                         | `false`                 | `true`, `false`                                             |
+| `spaceSurroundingProperties`          | `true`                  | `true`, `false`                                             |
+| `trailingCommas`                      | `always`                | `always`, `never`                                           |
+| `typeLiteral.separatorKind`           | `semiColon`             | `comma`, `semiColon`                                        |
+| `useBraces`                           | `whenNotSingleLine`     | `maintain`, `whenNotSingleLine`, `always`, `preferNone`     |
+| `useTabs`                             | `false`                 | `true`, `false`                                             |
+| `jsx.bracketPosition`                 | `nextLine`              | `maintain`, `sameLine`, `nextLine`                          |
+| `jsx.forceNewLinesSurroundingContent` | `false`                 | `true`, `false`                                             |
+| `jsx.multiLineParens`                 | `prefer`                | `never`, `prefer`, `always`                                 |
+| `unstable-component`                  | `false`                 | `true`, `false`                                             |
+| `unstable-sql`                        | `false`                 | `true`, `false`                                             |
+
+</div>
+
 Read more about
 [formatting your code with Deno](/runtime/fundamentals/linting_and_formatting/).
 

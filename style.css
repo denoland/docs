@@ -491,6 +491,18 @@
       display: table;
       table-layout: fixed;
     }
+    .fmt-options table {
+      width: 100%;
+      display: table;
+      table-layout: fixed;
+    }
+    .fmt-options td {
+      overflow-wrap: anywhere;
+    }
+    .fmt-options th:nth-child(2),
+    .fmt-options td:nth-child(2) {
+      width: 6rem;
+    }
     img {
       box-sizing: content-box;
       background-color: var(--bgColor-default, var(--color-canvas-default));
