@@ -310,8 +310,8 @@ OTEL_DENO=true DENO_AUDIT_PERMISSIONS=otel deno run -A main.ts
 This is useful when you already collect OpenTelemetry data: the audit lands in
 the same backend as your request traces, so you can correlate which request
 triggered which permission access. See
-[permission audit](/runtime/fundamentals/security/#permission-flags) for the
-full attribute set and the JSONL file-path mode.
+[permission audit](/runtime/reference/permissions/) for the full attribute set
+and the JSONL file-path mode.
 
 ## User metrics
 

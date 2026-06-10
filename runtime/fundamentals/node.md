@@ -759,7 +759,7 @@ As of Deno 2.0, npm packages using Node-API addons are supported when a local
 `--node-modules-dir=auto|manual`.
 
 Like all native FFI, pass `--allow-ffi` to grant explicit permission. Review
-[Security and permissions](/runtime/fundamentals/security/#ffi-(foreign-function-interface)).
+[Security and permissions](/runtime/reference/permissions/#ffi-(foreign-function-interface)).
 
 ## Migrating from Node to Deno
 

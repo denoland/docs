@@ -26,7 +26,7 @@ By default, Deno runs programs in a sandbox without access to disk, network or
 ability to spawn subprocesses. This is because the Deno runtime is
 [secure by default](/runtime/fundamentals/security/). You can grant or deny
 required permissions using the
-[`--allow-*` and `--deny-*` flags](/runtime/fundamentals/security/#permissions-list).
+[`--allow-*` and `--deny-*` flags](/runtime/reference/permissions/).
 
 ### Permissions examples
 
