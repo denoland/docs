@@ -93,8 +93,8 @@ my_project
 ```
 
 [`deno.json`](/runtime/reference/deno_json/) is where your tasks, dependencies,
-and tooling config live: the equivalent of `package.json` plus your tool
-configs, in one file.
+and tooling config live. Think `package.json` plus your tool configs, in one
+file.
 
 ## Run it
 
@@ -116,7 +116,7 @@ also built on the web-standard [`Deno.serve`](/api/deno/~/Deno.serve) with
 ## Test it
 
 The project ships with tests. Run them with [`deno test`](/runtime/test/). The
-test runner is built in, with no dependencies to add:
+test runner is built in, so there's nothing to install:
 
 ```sh
 $ deno test

@@ -3,8 +3,8 @@ title: "Build CLI apps"
 description: "Build command-line tools with Deno: read arguments, compile to a single self-contained executable, cross-compile for other platforms, and distribute your tool."
 ---
 
-Deno is a great way to ship command-line tools. Your tool is just TypeScript,
-with no build step to run it, and when you're ready to distribute it,
+Deno is a great way to ship command-line tools. Your tool is just TypeScript, so
+there's no build step to run it. When you're ready to distribute it,
 `deno compile` turns it into a single self-contained executable that runs
 without Deno installed.
 
@@ -41,7 +41,7 @@ deno compile greet.ts
 ```
 
 Name the binary with `--output`. If your tool needs permissions, bake them in
-(for example, `--allow-net`) so it runs without prompting:
+with the usual `--allow-*` flags so it runs without prompting:
 
 ```sh
 deno compile --output greet greet.ts

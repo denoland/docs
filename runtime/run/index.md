@@ -57,8 +57,8 @@ See [Permissions](/runtime/reference/permissions/) for every flag and
 
 ## Run from a URL or stdin
 
-Deno can run code straight from a URL (useful for one-off tools and installers)
-or piped in over stdin:
+Deno can run code straight from a URL (handy for one-off tools and installers)
+or from stdin:
 
 ```sh
 deno run https://example.com/script.ts
