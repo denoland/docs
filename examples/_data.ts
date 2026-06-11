@@ -936,6 +936,91 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "HTTP server: CORS",
+        href: "/examples/http_server_cors/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Cookies",
+        href: "/examples/http_server_cookies/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Sessions",
+        href: "/examples/http_server_sessions/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Basic authentication",
+        href: "/examples/http_server_basic_auth/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Rate limiting",
+        href: "/examples/http_server_rate_limit/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Graceful shutdown",
+        href: "/examples/http_server_graceful_shutdown/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Caching headers",
+        href: "/examples/http_server_static_caching/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Request timeouts",
+        href: "/examples/http_server_request_timeouts/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Health checks",
+        href: "/examples/http_server_health_checks/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Paginating results",
+        href: "/examples/http_server_pagination/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Verifying webhook signatures",
+        href: "/examples/http_server_webhooks/",
+        type: "example",
+      },
+      {
+        title: "Generate an RSS feed",
+        href: "/examples/http_server_rss/",
+        type: "example",
+      },
+      {
+        title: "Generate sitemap.xml and robots.txt",
+        href: "/examples/http_server_sitemap/",
+        type: "example",
+      },
+      {
+        title: "Download a file with progress",
+        href: "/examples/download_progress/",
+        type: "example",
+      },
+      {
+        title: "Route fetch through an HTTP proxy",
+        href: "/examples/fetch_http_proxy/",
+        type: "example",
+      },
+      {
+        title: "Find a free port",
+        href: "/examples/find_free_port/",
+        type: "example",
+      },
+      {
+        title: "Creating and verifying JWT",
+        href: "/examples/creating_and_verifying_jwt/",
+        type: "example",
+      },
+      {
         title: "Running DNS queries",
         href: "/examples/dns_queries/",
         type: "example",
