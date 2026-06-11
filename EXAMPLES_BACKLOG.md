@@ -281,6 +281,148 @@ Prisma, Drizzle, Supabase, PlanetScale, DuckDB, Neon?).
       catalog — it is our best deploy doc and is invisible from /examples/
 - [ ] Add the debugging reference similarly if no new example is written
 
+## Road to 300 (catalog expansion candidates)
+
+Mined June 2026 by cross-referencing the @std library, web platform APIs, Deno
+and node: API surfaces, and common server patterns against the existing catalog
+(~238 items once open PRs land). Curated to exclude topics already covered.
+Items marked (verify) need a support check before writing. Quick win first:
+
+- [ ] Add the existing creating_and_verifying_jwt.ts example to the sidebar; it
+      is published but absent from the catalog
+
+### Server patterns (Network, highest search demand)
+
+- [ ] Handle CORS in an HTTP server (preflight, origins, credentials)
+- [ ] Set, read, and sign cookies (@std/http, HttpOnly/Secure)
+- [ ] Gracefully shut down an HTTP server (signals + server.shutdown)
+- [ ] Serve static files with caching headers (ETag, Cache-Control, 304s)
+- [ ] Rate limit HTTP requests (token bucket per IP)
+- [ ] HTTP server: Basic authentication (timing-safe comparison)
+- [ ] Manage user sessions (cookie storage, expiry)
+- [ ] Add OAuth login with GitHub (authorization code flow)
+- [ ] Verify webhook signatures (HMAC validation)
+- [ ] Health check and readiness endpoints
+- [ ] Time out long-running requests on the server
+- [ ] Paginate API results (offset and cursor)
+- [ ] Generate an RSS feed
+- [ ] Generate sitemap.xml and robots.txt
+- [ ] Download a file to disk with progress
+- [ ] Find a free port (@std/net getAvailablePort)
+- [ ] Route fetch through an HTTP proxy (verify)
+
+### Standard library (new category or spread across existing ones)
+
+- [ ] Debounce a function (@std/async)
+- [ ] Run async tasks with a concurrency limit (pooledMap)
+- [ ] Add a timeout to any promise (deadline, abortable)
+- [ ] Memoize an expensive function (@std/cache)
+- [ ] Parse and compare semver versions
+- [ ] Convert string case (@std/text)
+- [ ] Escape special characters in regular expressions
+- [ ] Parse and format dates (@std/datetime)
+- [ ] Structured logging (@std/log, rotating files)
+- [ ] Extract front matter from markdown files
+- [ ] Format bytes and durations for humans (@std/fmt)
+- [ ] Generate seeded random numbers (@std/random)
+
+### Web standard APIs
+
+- [ ] Match and route URLs with URLPattern
+- [ ] Cancel fetch requests with AbortController
+- [ ] Set a timeout on fetch with AbortSignal.timeout
+- [ ] Deep clone objects with structuredClone
+- [ ] Build and send forms with FormData
+- [ ] Format numbers and currencies with Intl.NumberFormat
+- [ ] Format dates for any locale with Intl.DateTimeFormat
+- [ ] Format relative time with Intl.RelativeTimeFormat
+- [ ] Pluralize and format lists with Intl.PluralRules and ListFormat
+- [ ] Split text into words and sentences with Intl.Segmenter
+- [ ] Measure code performance with performance marks and measures
+- [ ] Create and dispatch custom events with EventTarget
+- [ ] Communicate between workers with BroadcastChannel
+- [ ] Cache HTTP responses with the Web Cache API
+- [ ] Transform data with TransformStream
+
+### Encoding
+
+- [ ] Parsing and serializing INI files (@std/ini)
+- [ ] Parsing JSONC (@std/jsonc)
+- [ ] Parse large CSV files as streams (CsvParseStream)
+- [ ] Stream JSON Lines data (NDJSON)
+- [ ] Encode and decode MessagePack (@std/msgpack)
+- [ ] Encode and decode CBOR (@std/cbor)
+- [ ] Parse and generate XML (verify: likely third-party, not @std)
+- [ ] Compress data with node:zlib
+
+### System and FileSystem
+
+- [ ] Pipe data into a subprocess (stdin with Deno.Command)
+- [ ] Run a subprocess with custom env and working directory
+- [ ] Detect a TTY and get terminal size
+- [ ] Get OS information (Deno APIs and node:os)
+- [ ] List network interfaces
+- [ ] Set and read process exit codes
+- [ ] Use EventEmitter from node:events
+- [ ] Read input line by line with node:readline
+- [ ] Use worker_threads in Deno
+- [ ] Read and modify file metadata (stat, chmod, utime)
+- [ ] Create and extract tar archives (@std/tar)
+- [ ] Find files with glob patterns (expandGlob)
+- [ ] Lock a file across processes (FsFile.lock)
+- [ ] Truncate a file
+- [ ] Create hard links
+
+### Cryptography
+
+- [ ] Sign and verify data with ECDSA (WebCrypto)
+- [ ] Derive keys from passwords with PBKDF2 (AES key derivation)
+- [ ] Generate cryptographically secure random values
+- [ ] Compare secrets in constant time (timingSafeEqual)
+- [ ] Hash large files with streams
+- [ ] Hash and encrypt with node:crypto
+
+### CLI and tooling
+
+- [ ] Compile a script into a standalone executable (deno compile)
+- [ ] Cross compile executables for other platforms
+- [ ] Write and run benchmarks with Deno.bench (only a video exists)
+- [ ] Publish a package to JSR step by step (only a video exists)
+- [ ] Find and update outdated dependencies (deno outdated)
+- [ ] Display progress bars and spinners (@std/cli)
+- [ ] Control the terminal with ANSI escape codes
+- [ ] Build a CLI with subcommands (parseArgs dispatch)
+
+### Frameworks, deploys, and bigger tutorials
+
+- [ ] Build a static site with Lume
+- [ ] Use Vite with Deno
+- [ ] Render markdown to HTML with syntax highlighting
+- [ ] Server-side HTML templating (JSX precompile or Eta)
+- [ ] Run Deno as a systemd service on a VPS
+- [ ] Deploy Deno to Fly.io
+- [ ] Vector similarity search with Postgres and pgvector
+- [ ] Connection pooling for Postgres
+- [ ] Build an MCP server with Deno
+- [ ] Call native libraries with Deno FFI (task-shaped walkthrough)
+- [ ] Build a Discord bot
+- [ ] Send email over SMTP (nodemailer)
+- [ ] Resize and convert images (verify library choice)
+- [ ] Generate PDFs (pdf-lib)
+- [ ] Generate QR codes
+- [ ] Distribute work across a pool of web workers
+- [ ] Automate a browser (Astral)
+- [ ] Create custom OpenTelemetry spans
+- [ ] Record custom OpenTelemetry metrics
+- [ ] Atomic transactions in Deno KV
+- [ ] Two-way streaming with WebSocketStream
+- [ ] Run a compute shader with WebGPU
+
+Excluded as already covered: FakeTime and fetch mocking (mocking tutorial),
+@std/expect (testing tutorial), watch mode (hot reload example), recursive
+directory copy (copy file example), debugging with DevTools (pointer card in
+#3222), Angular (support unverified, low demand).
+
 ## Content consolidation candidates
 
 - [ ] Databases: Redis, Prisma, and Mongoose each have a tutorial, a quick
