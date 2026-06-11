@@ -1,9 +1,9 @@
-export function TutorialIcon() {
+export function TutorialIcon({ size = "1rem" }: { size?: string } = {}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 502 384"
-      width="1rem"
+      width={size}
     >
       <path
         d="M59 45H15v304h200s10 20 36 20 36-20 36-20h200V45h-40"

@@ -1,5 +1,6 @@
 ---
 title: "Deploying Deno with Docker"
+description: "Learn how to containerize a Deno application with Docker and deploy it to a compatible cloud environment."
 url: /examples/deploying_deno_with_docker/
 videoUrl: https://www.youtube.com/watch?v=VRryNeYm6yw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=16
 layout: video.tsx
