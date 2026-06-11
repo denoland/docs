@@ -89,8 +89,9 @@ under test.
 ## Keep npm packages where it helps
 
 Test helpers from npm keep working through `npm:` specifiers, for example
-`npm:@testing-library/dom` for DOM assertions. The test runner itself is the
-part you migrate.
+`npm:@testing-library/dom` for DOM assertions (see
+[Use Testing Library with Deno](/examples/testing_library_tutorial/)). The test
+runner itself is the part you migrate.
 
 For runner flags, reporters, and coverage, see the
 [`deno test` reference](/runtime/reference/cli/test/).

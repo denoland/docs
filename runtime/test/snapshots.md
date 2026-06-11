@@ -83,8 +83,9 @@ snapshot[`isSnapshotMatch 1`] = `
 Each entry is keyed by the test name plus a counter, so a test that calls
 `assertSnapshot` multiple times produces `isSnapshotMatch 1`,
 `isSnapshotMatch 2`, and so on. The value is the result of serializing your data
-with `Deno.inspect`, with object keys sorted alphabetically. Snapshot files are
-plain TypeScript, so they are easy to read in code review.
+with [`Deno.inspect`](/api/deno/~/Deno.inspect), with object keys sorted
+alphabetically. Snapshot files are plain TypeScript, so they are easy to read in
+code review.
 
 Commit snapshot files to version control. That way, snapshot changes are
 reviewed alongside the code changes that caused them, and anyone who pulls your
@@ -172,7 +173,7 @@ The most useful options:
 
 Classes can also customize their own serialization by implementing
 `Symbol.for("Deno.customInspect")`, since the default serializer is built on
-`Deno.inspect`. See the
+[`Deno.inspect`](/api/deno/~/Deno.inspect). See the
 [`@std/testing/snapshot` API documentation](https://jsr.io/@std/testing/doc/snapshot)
 for the full options reference and the `createAssertSnapshot` factory.
 

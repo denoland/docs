@@ -391,10 +391,11 @@ typed, and skipped.
 ## Sanitizers
 
 The test runner can catch misbehavior that assertions don't see: leaked async
-operations, unclosed resources, and unexpected `Deno.exit()` calls. The exit
-sanitizer is on by default; the op and resource sanitizers are opt-in since Deno
-2.8. See [Test sanitizers](/runtime/test/sanitizers/) for each sanitizer and the
-global enablement options.
+operations, unclosed resources, and unexpected
+[`Deno.exit()`](/api/deno/~/Deno.exit) calls. The exit sanitizer is on by
+default; the op and resource sanitizers are opt-in since Deno 2.8. See
+[Test sanitizers](/runtime/test/sanitizers/) for each sanitizer and the global
+enablement options.
 
 ## Snapshot testing
 
