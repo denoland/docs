@@ -18,7 +18,7 @@ deno init my_project
 ```
 
 Where `my_project` is the name of your project. You can
-[read more about the project structure](/runtime/getting_started/first_project/).
+[read more about the project structure](/runtime/).
 
 ### Run your project
 
@@ -57,7 +57,7 @@ deno test
 ```
 
 This will execute all the tests in the project. You can read more about
-[testing in Deno](/runtime/fundamentals/testing/) and we'll cover tests in a
+[testing in Deno](/runtime/test/) and we'll cover tests in a
 little more depth in a later tutorial. At the moment you have one test file,
 `main_test.ts`, which tests the `add` function in `main.ts`.
 

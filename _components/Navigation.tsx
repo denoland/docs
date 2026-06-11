@@ -58,16 +58,6 @@ function getSectionData(data: Lume.Data, currentUrl: string) {
     return sectionData;
   }
 
-  // A page can opt into another section's sidebar via `navSection` frontmatter
-  // (e.g. a guide that lives under /runtime/fundamentals/ but belongs to the Run
-  // section). This lets us group pages by task without moving files yet — URLs
-  // get aligned to sections later as a separate step.
-  const navSection = data.navSection ?? data.page?.data?.navSection;
-  if (navSection) {
-    const sidebar = data.search.data(navSection)?.sidebar;
-    if (sidebar) return sidebar;
-  }
-
   // Extract path segments from the URL
   const urlSegments = currentUrl.split("/").filter(Boolean);
 
@@ -79,13 +69,6 @@ function getSectionData(data: Lume.Data, currentUrl: string) {
     if (specificSidebar) {
       return specificSidebar;
     }
-  }
-
-  // Use the page's own cascaded sidebar (from the nearest _data.ts) — this is
-  // the section sidebar even when that section has no index page (e.g. the
-  // getting_started sub-pages, whose landing now lives at /runtime/).
-  if (data.sidebar) {
-    return data.sidebar;
   }
 
   // Fall back to the default behavior using just the first segment

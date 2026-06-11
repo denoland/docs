@@ -15,10 +15,6 @@ export interface SidebarNavItem {
   title: string;
   href: string;
   items?: NavData[];
-  // When true, this item is only highlighted on an exact URL match, not as a
-  // path prefix. Used for section-root targets like "/runtime/" that would
-  // otherwise match every page in the section.
-  exact?: boolean;
 }
 
 export interface SidebarSection {

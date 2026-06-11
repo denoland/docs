@@ -1,6 +1,6 @@
 import { walk } from "jsr:@std/fs";
 import { parse as yamlParse } from "jsr:@std/yaml";
-import type { Sidebar, SidebarNavItem } from "../types.ts";
+import { Sidebar } from "../types.ts";
 
 export const sidebar = [
   {
@@ -28,6 +28,10 @@ export const sidebar = [
     title: "Guides",
     items: [
       {
+        title: "Running code",
+        href: "/runtime/run/",
+      },
+      {
         title: "Dependency management",
         href: "/runtime/packages/",
       },
@@ -54,6 +58,10 @@ export const sidebar = [
       {
         title: "Migrating from Node",
         href: "/runtime/migrate/",
+      },
+      {
+        title: "Building CLI apps",
+        href: "/runtime/cli_apps/",
       },
     ],
   },
@@ -142,6 +150,10 @@ export const sidebar = [
   {
     title: "Reference",
     items: [
+      {
+        title: "Overview",
+        href: "/runtime/reference/",
+      },
       {
         title: "CLI",
         href: "/runtime/reference/cli/",
@@ -416,21 +428,6 @@ export const sidebar = [
 
 export const sectionTitle = "Runtime";
 export const sectionHref = "/runtime/";
-
-// Second-level navbar: task/tooling categories for discovery. Order is
-// analytics-driven (GA4 90d intent volume — see NAVIGATION_REDESIGN.md §8).
-// Each points at a hub page that curates the relevant guides + reference.
-export const SidebarNav = [
-  { title: "Run code", href: "/runtime/", exact: true },
-  { title: "Package manager", href: "/runtime/packages/" },
-  { title: "Migrate from Node.js", href: "/runtime/migrate/" },
-  { title: "Test", href: "/runtime/test/" },
-  { title: "Lint & format", href: "/runtime/lint_and_format/" },
-  { title: "CLI apps", href: "/runtime/cli_apps/" },
-  // Desktop apps hidden until its dedicated content lands (page kept at
-  // /runtime/desktop_apps/).
-  { title: "Reference", href: "/runtime/reference/" },
-] satisfies SidebarNavItem[];
 
 export interface Description {
   kind: "note" | "tip" | "info" | "caution";

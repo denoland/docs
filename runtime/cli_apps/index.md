@@ -79,4 +79,3 @@ greet --name=Deno
   dependencies.
 - **[Permissions](/runtime/reference/permissions/)** — choose exactly what your
   compiled tool may access.
-- **[Desktop apps](/runtime/desktop_apps/)** — building graphical applications.

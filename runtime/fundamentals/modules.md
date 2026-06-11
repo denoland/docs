@@ -1,5 +1,4 @@
 ---
-navSection: /runtime/packages/
 last_modified: 2026-05-20
 title: "Modules"
 description: "Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."

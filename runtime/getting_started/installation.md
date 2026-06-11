@@ -1,5 +1,4 @@
 ---
-navSection: /runtime/run/
 last_modified: 2026-06-01
 title: Installation
 description: "A Guide to installing Deno on different operating systems. Includes instructions for Windows, macOS, and Linux using various package managers, manual installation methods, and Docker containers."
