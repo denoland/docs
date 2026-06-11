@@ -121,10 +121,10 @@ dependencies to add:
 ```sh
 $ deno test
 running 2 tests from ./main_test.ts
-handler returns hello ... ok (1ms)
-handler returns 404 for unknown route ... ok (1ms)
+returns html on / ... ok (12ms)
+returns json on /api ... ok (0ms)
 
-ok | 2 passed | 0 failed (3ms)
+ok | 2 passed | 0 failed (15ms)
 ```
 
 ## Add a dependency
