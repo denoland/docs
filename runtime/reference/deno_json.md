@@ -33,7 +33,7 @@ your project, you could use this import map:
 }
 ```
 
-Then your script can use the bare specifier `std/assert`:
+Then your script can use the bare specifier `@std/assert`:
 
 ```js title="script.ts"
 import { assertEquals } from "@std/assert";
