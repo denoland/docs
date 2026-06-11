@@ -836,6 +836,41 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "HTTP server: Server-sent events",
+        href: "/examples/http_server_sse/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: TLS",
+        href: "/examples/http_server_tls/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Hot reload",
+        href: "/examples/http_server_hot_reload/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Scaling across CPU cores",
+        href: "/examples/http_server_parallel/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Node.js streams",
+        href: "/examples/http_server_node_streams/",
+        type: "example",
+      },
+      {
+        title: "Proxy HTTP requests",
+        href: "/examples/http_proxy/",
+        type: "example",
+      },
+      {
+        title: "Fetch over a Unix socket",
+        href: "/examples/fetch_unix_socket/",
+        type: "example",
+      },
+      {
         title: "HTTP server: CRUD with SQLite3",
         href: "/examples/http_server_oak_crud_middleware_with_sqlite3_db/",
         type: "example",
