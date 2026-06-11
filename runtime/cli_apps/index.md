@@ -40,11 +40,11 @@ deno compile greet.ts
 ./greet --name=Deno
 ```
 
-Name the output and bake in the permissions your tool needs, so it runs without
-prompting:
+Name the binary with `--output`. If your tool needs permissions, bake them in
+(for example, `--allow-net`) so it runs without prompting:
 
 ```sh
-deno compile --allow-net --output greet greet.ts
+deno compile --output greet greet.ts
 ```
 
 ## Cross-compile for other platforms
@@ -66,7 +66,7 @@ To make a script available as a command on your own machine (without compiling),
 install it globally with [`deno install`](/runtime/reference/cli/install/):
 
 ```sh
-deno install --global --allow-net --name greet greet.ts
+deno install --global --name greet greet.ts
 greet --name=Deno
 ```
 

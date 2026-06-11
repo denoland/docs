@@ -43,14 +43,14 @@ few minutes.
 Install the runtime with one command:
 
 <deno-tabs group-id="operating-systems">
-<deno-tab value="linux" label="Linux" default>
+<deno-tab value="linux" label="Linux">
 
 ```sh
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
 </deno-tab>
-<deno-tab value="mac" label="macOS">
+<deno-tab value="mac" label="macOS" default>
 
 ```sh
 curl -fsSL https://deno.land/install.sh | sh
@@ -66,12 +66,14 @@ irm https://deno.land/install.ps1 | iex
 </deno-tab>
 </deno-tabs>
 
-Verify it, and see [Installation](/runtime/getting_started/installation/) for
-package managers, Docker, and other options:
+Verify the install:
 
 ```sh
 deno --version
 ```
+
+See [Installation](/runtime/getting_started/installation/) for package managers,
+Docker, and other options.
 
 ## Create a project
 
