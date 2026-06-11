@@ -124,21 +124,21 @@ task pages. Deno-flavored equivalents:
 Existing: Hello world, routing, serving files, streaming, file upload, CRUD with
 SQLite, fetch ("HTTP requests").
 
-- [ ] Configure TLS/HTTPS on an HTTP server
+- [x] Configure TLS/HTTPS on an HTTP server
       ([Bun](https://bun.com/docs/guides/http/tls)) — we only have a raw
       `tls_listener` example
-- [ ] Server-Sent Events (SSE) ([Bun](https://bun.com/docs/guides/http/sse))
-- [ ] Proxy HTTP requests using fetch
+- [x] Server-Sent Events (SSE) ([Bun](https://bun.com/docs/guides/http/sse))
+- [x] Proxy HTTP requests using fetch
       ([Bun](https://bun.com/docs/guides/http/proxy))
-- [ ] Hot reload an HTTP server with `deno serve`/`--watch`
+- [x] Hot reload an HTTP server with `deno serve`/`--watch`
       ([Bun](https://bun.com/docs/guides/http/hot))
-- [ ] Scale an HTTP server across cores (`deno serve --parallel` / `reusePort`)
+- [x] Scale an HTTP server across cores (`deno serve --parallel` / `reusePort`)
       ([Bun](https://bun.com/docs/guides/http/cluster))
-- [ ] fetch over a Unix domain socket (`Deno.createHttpClient`)
+- [x] fetch over a Unix domain socket (`Deno.createHttpClient`)
       ([Bun](https://bun.com/docs/guides/http/fetch-unix))
-- [ ] Streaming HTTP responses from an async iterator
+- [x] Streaming HTTP responses from an async iterator
       ([Bun](https://bun.com/docs/guides/http/stream-iterator))
-- [ ] Use Node.js streams in HTTP responses (`node:http` compat)
+- [x] Use Node.js streams in HTTP responses (`node:http` compat)
       ([Bun](https://bun.com/docs/guides/http/stream-node-streams-in-bun))
 
 ## WebSockets (we cover 2 of 5 task shapes)
@@ -187,22 +187,22 @@ here is granularity — each discrete task is a findable page.
 
 - [ ] Migrate from Jest to `deno test`
       ([Bun](https://bun.com/docs/guides/test/migrate-from-jest))
-- [ ] Run tests in watch mode
+- [x] Run tests in watch mode
       ([Bun](https://bun.com/docs/guides/test/watch-mode))
-- [ ] Skip tests / mark tests as todo (`ignore`, `only`)
+- [x] Skip tests / mark tests as todo (`ignore`, `only`)
       ([Bun](https://bun.com/docs/guides/test/skip-tests))
-- [ ] Bail early on first failure (`--fail-fast`)
+- [x] Bail early on first failure (`--fail-fast`)
       ([Bun](https://bun.com/docs/guides/test/bail))
-- [ ] Set a per-test timeout ([Bun](https://bun.com/docs/guides/test/timeout))
-- [ ] Set the system time in tests (`@std/testing/time` FakeTime)
+- [x] Set a per-test timeout ([Bun](https://bun.com/docs/guides/test/timeout))
+- [x] Set the system time in tests (`@std/testing/time` FakeTime)
       ([Bun](https://bun.com/docs/guides/test/mock-clock))
-- [ ] Update snapshots (`--update`)
+- [x] Update snapshots (`--update`)
       ([Bun](https://bun.com/docs/guides/test/update-snapshots))
-- [ ] Filter and parallelize test runs
+- [x] Filter and parallelize test runs
       ([Bun](https://bun.com/docs/guides/test/concurrent-test-glob))
-- [ ] Use Testing Library with Deno
+- [x] Use Testing Library with Deno
       ([Bun](https://bun.com/docs/guides/test/testing-library))
-- [ ] Write browser DOM tests (deno-dom / happy-dom / linkedom)
+- [x] Write browser DOM tests (deno-dom / happy-dom / linkedom)
       ([Bun](https://bun.com/docs/guides/test/happy-dom)) — partial: "Testing
       web applications"
 
