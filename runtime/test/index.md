@@ -17,7 +17,9 @@ or tools. The `deno test` runner allows you fine-grained control over
 permissions for each test, ensuring that code does not do anything unexpected.
 
 In addition to the built-in test runner, you can also use other test runners
-from the JS ecosystem, such as Jest, Mocha, or AVA, with Deno.
+from the JS ecosystem, such as Jest, Mocha, or AVA, with Deno. Moving an
+existing Jest suite over? See
+[Migrating from Jest](/runtime/test/migrate_from_jest/).
 
 ## Writing Tests
 
@@ -475,4 +477,5 @@ For more hands-on testing guides, check out:
 - [Basic testing tutorial](/examples/testing_tutorial/)
 - [Mocking and test doubles](/runtime/test/mocking/)
 - [Snapshot testing](/runtime/test/snapshots/)
+- [Migrating from Jest](/runtime/test/migrate_from_jest/)
 - [Testing web applications tutorial](/examples/web_testing_tutorial/)

@@ -67,6 +67,10 @@ export const sidebar = [
             title: "Sanitizers",
             href: "/runtime/test/sanitizers/",
           },
+          {
+            title: "Migrating from Jest",
+            href: "/runtime/test/migrate_from_jest/",
+          },
         ],
       },
       {
