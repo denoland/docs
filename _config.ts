@@ -442,6 +442,7 @@ site.copy("reference_gen/gen/node/script.js", "/api/node/script.js");
 site.ignore(
   "old",
   "README.md",
+  "EXAMPLES_BACKLOG.md",
   (path) => path.match(/\/reference_gen.*.ts/) !== null,
   (path) => path.includes("/reference_gen/node_modules"),
   (path) => path.includes("/reference_gen/node_descriptions"),
