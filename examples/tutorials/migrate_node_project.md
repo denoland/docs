@@ -70,13 +70,21 @@ environment variables, grant the access explicitly, e.g.
 
 Two compatibility rules cover almost everything else:
 
-- **Node built-ins need the `node:` prefix**: write `import os from "node:os"`
-  instead of `import os from "os"`. Node itself supports this prefix, so the
+- **Node built-ins use the `node:` prefix**: write `import os from "node:os"`
+  rather than `import os from "os"`. Node itself supports this prefix, so the
   change is backwards-compatible.
-- **CommonJS and ES modules both work**, using the same rules as Node: `.cjs`
-  and `.mjs` are unambiguous, and `.js` follows the `"type"` field of the
-  nearest `package.json`. A `require()`-based project with `"type": "commonjs"`
-  runs as-is.
+- **CommonJS and ES modules both work**: `.cjs` and `.mjs` are unambiguous, and
+  `.js` follows the `"type"` field of the nearest `package.json`. A
+  `require()`-based project with `"type": "commonjs"` runs as-is.
+
+:::note
+
+Deno assumes ES modules by default. A `.js` file is only treated as CommonJS
+when the nearest `package.json` declares `"type": "commonjs"` — unlike Node,
+which assumes CommonJS when the field is missing. Add that one line to older
+projects that rely on the implicit default.
+
+:::
 
 ## Replace tooling incrementally
 

@@ -42,13 +42,11 @@ jobs:
 
 ## Installing with a frozen lockfile
 
-`deno ci` (Deno 2.8+) mirrors `npm ci`: it is roughly equivalent to deleting
-`node_modules` and running `deno install --frozen`, but it errors out if
-`deno.lock` is missing, and fails if `deno.json` or `package.json` changed
-without the lockfile being refreshed. That catches "bumped a version but forgot
-to commit the lockfile" mistakes before they reach production.
-
-On older Deno versions, use `deno install --frozen` instead.
+`deno ci` mirrors `npm ci`: it is roughly equivalent to deleting `node_modules`
+and running `deno install --frozen`, but it errors out if `deno.lock` is
+missing, and fails if `deno.json` or `package.json` changed without the lockfile
+being refreshed. That catches "bumped a version but forgot to commit the
+lockfile" mistakes before they reach production.
 
 :::note
 

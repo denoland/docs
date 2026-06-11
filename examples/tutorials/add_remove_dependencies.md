@@ -6,7 +6,8 @@ url: /examples/add_remove_dependencies_tutorial/
 
 Deno manages dependencies through your project's `deno.json` import map, or
 through `package.json` when you have one. The `deno add` and `deno remove`
-commands edit those files for you.
+commands edit those files for you, and `deno install` with a package argument
+does the same.
 
 ## Adding packages
 
@@ -18,6 +19,9 @@ $ deno add express jsr:@std/path
 Add npm:express@5.2.1
 Add jsr:@std/path@1.1.5
 ```
+
+`deno install express` is equivalent: it records the dependency the same way and
+installs everything in one step.
 
 Both end up in the `imports` map of `deno.json`, with a semver-compatible caret
 range:
@@ -88,6 +92,26 @@ Aliases are also the way to use two versions of one package side by side:
   }
 }
 ```
+
+## Overriding transitive dependencies
+
+The import map only names your direct dependencies. To force a specific version
+of a package somewhere deeper in the tree, use the `overrides` field in
+`package.json`, the same way npm does:
+
+```json title="package.json"
+{
+  "dependencies": {
+    "debug": "4.4.3"
+  },
+  "overrides": {
+    "ms": "2.1.2"
+  }
+}
+```
+
+`deno install` resolves `ms` to 2.1.2 everywhere it appears, and records that in
+the lockfile.
 
 ## Removing packages
 

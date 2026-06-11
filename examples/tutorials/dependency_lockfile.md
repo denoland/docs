@@ -33,7 +33,8 @@ alongside your config:
 
 Each semver range from your config is mapped to one exact version, and each
 package gets a hash that Deno verifies on every install. Commit `deno.lock` to
-git.
+git — on other machines and in CI, [`deno ci`](/runtime/reference/cli/ci/) then
+installs exactly what the lockfile says.
 
 ## Reviewing lockfile diffs
 
@@ -91,10 +92,9 @@ changes:
  5 | +    "npm:ms@^2.1.3": "2.1.3"
 ```
 
-In Deno 2.8+, [`deno ci`](/runtime/reference/cli/ci/) wraps the recommended CI
-flow: it requires `deno.lock`, removes any existing `node_modules`, installs
-strictly from the lockfile, and errors if the lockfile is missing or out of
-date.
+[`deno ci`](/runtime/reference/cli/ci/) wraps the recommended CI flow: it
+requires `deno.lock`, removes any existing `node_modules`, installs strictly
+from the lockfile, and errors if the lockfile is missing or out of date.
 
 ## Updating and regenerating
 

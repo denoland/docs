@@ -1,6 +1,6 @@
 ---
 title: "Run npm lifecycle scripts"
-description: "Allow npm postinstall and other lifecycle scripts in Deno: the --allow-scripts flag, the interactive deno approve-scripts command, and persisting approvals with the allowScripts field in deno.json."
+description: "Allow npm postinstall and other lifecycle scripts in Deno with deno approve-scripts, and persist approvals with the allowScripts field in deno.json."
 url: /examples/npm_lifecycle_scripts_tutorial/
 ---
 
@@ -12,14 +12,8 @@ need their build scripts to work, so this tutorial walks through approving them.
 
 ## Install a package that needs build scripts
 
-With a `node_modules` directory enabled, install a package that declares
-lifecycle scripts:
-
-```json title="deno.json"
-{
-  "nodeModulesDir": "auto"
-}
-```
+In a project with a `package.json`, install a package that declares lifecycle
+scripts:
 
 ```sh
 $ deno install npm:better-sqlite3
@@ -36,30 +30,11 @@ $ deno install npm:better-sqlite3
 The package is installed, but its `install` script was skipped, so the native
 binding is missing and the package will fail at runtime.
 
-:::note
+## Approve the scripts
 
-Lifecycle scripts only execute when packages are set up in a local
-`node_modules` directory. Use the `--node-modules-dir` flag or set
-`"nodeModulesDir": "auto"` in `deno.json`.
-
-:::
-
-## Allow scripts at install time
-
-Pass `--allow-scripts` with the packages you trust:
-
-```sh
-deno install --allow-scripts=npm:better-sqlite3
-```
-
-This installs all dependencies and runs lifecycle scripts only for
-`better-sqlite3` — other packages' scripts stay blocked.
-
-## Approve scripts after the fact
-
-`deno approve-scripts` reviews pending scripts in an already-installed
-dependency tree. Run it with no arguments for an interactive prompt listing
-every package with unapproved scripts, or name packages directly:
+`deno approve-scripts` is the way to review and run pending scripts. Run it with
+no arguments for an interactive prompt listing every package with unapproved
+scripts, or name packages directly:
 
 ```sh
 $ deno approve-scripts npm:better-sqlite3
@@ -74,13 +49,21 @@ run gets the same behavior, list the packages in the `allowScripts` field:
 
 ```json title="deno.json"
 {
-  "nodeModulesDir": "auto",
   "allowScripts": ["npm:better-sqlite3"]
 }
 ```
 
 Now a plain `deno install` runs the build scripts for the listed packages
-without any extra flags.
+without any extra flags. A one-off alternative is passing
+`--allow-scripts=npm:better-sqlite3` to `deno install` directly.
+
+:::note
+
+Lifecycle scripts only execute when packages are set up in a local
+`node_modules` directory. Projects with a `package.json` get one automatically;
+in `deno.json`-only projects, set `"nodeModulesDir": "auto"`.
+
+:::
 
 :::caution
 

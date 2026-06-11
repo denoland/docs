@@ -61,6 +61,29 @@ DENO_AUTH_TOKENS=a1b2c3d4e5f6@deno.land;username:password@example.com:8080
 Deno sends the matching `Authorization` header when fetching modules from those
 hosts.
 
+## GitHub Packages
+
+The GitHub npm registry authenticates with a personal access token (or
+`GITHUB_TOKEN` in Actions) using the `_authToken` field:
+
+```ini title=".npmrc"
+@mycompany:registry=https://npm.pkg.github.com/
+//npm.pkg.github.com/:_authToken=ghp_yourTokenHere
+```
+
+Deno sends it as a bearer token, the same as npm does.
+
+## Verdaccio
+
+For a self-hosted [Verdaccio](https://verdaccio.org/) instance the setup is
+identical — point the scope (or `NPM_CONFIG_REGISTRY` for everything) at your
+instance and supply its token:
+
+```ini title=".npmrc"
+@mycompany:registry=https://verdaccio.mycompany.com/
+//verdaccio.mycompany.com/:_authToken=secretToken
+```
+
 ## Azure Artifacts
 
 Azure Artifacts feeds use this registry URL shape (a typical Azure feed URL;

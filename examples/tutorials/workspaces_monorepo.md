@@ -20,7 +20,8 @@ The root `deno.json` lists the member directories:
 ```
 
 Each member gets its own `deno.json` with a `name`, a `version`, and an
-`exports` field pointing at its entry point:
+`exports` field pointing at its entry point — or a `package.json`, if the member
+is an npm-style package:
 
 ```json title="utils/deno.json"
 {
@@ -102,9 +103,40 @@ once:
 A member can declare its own `imports` too; within that member's folder, its
 entries override the root's.
 
-Workspace members can also be plain npm packages with only a `package.json` —
-see [the workspaces guide](/runtime/fundamentals/workspaces/) for migrating
-existing npm workspaces.
+## Using existing npm, yarn, and pnpm workspaces
+
+Deno understands the `workspaces` field of `package.json` directly, so a
+monorepo set up for npm or yarn needs no conversion:
+
+```json title="package.json"
+{
+  "workspaces": ["pkg-a", "pkg-b"]
+}
+```
+
+Members declare each other in their `dependencies` and import by name, just like
+under npm:
+
+```json title="pkg-b/package.json"
+{
+  "name": "@acme/b",
+  "dependencies": { "@acme/a": "*" }
+}
+```
+
+```sh
+$ deno install
+$ deno run pkg-b/main.ts
+from workspace member
+```
+
+:::note
+
+pnpm workspaces are the exception: Deno does not read `pnpm-workspace.yaml`, so
+move its package list into the `workspace` field of a root `deno.json` (or a
+`workspaces` field in `package.json`).
+
+:::
 
 ## Centralized versions with `catalog:`
 
