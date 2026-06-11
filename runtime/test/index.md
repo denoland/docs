@@ -35,13 +35,12 @@ function. Here are some examples:
 
 ```ts title="my_test.ts"
 import { assertEquals } from "jsr:@std/assert";
+import { delay } from "jsr:@std/async";
 
 Deno.test("simple test", () => {
   const x = 1 + 2;
   assertEquals(x, 3);
 });
-
-import { delay } from "jsr:@std/async";
 
 Deno.test("async test", async () => {
   const x = 1 + 2;
@@ -677,7 +676,7 @@ Deno.test({
 ### Enabling sanitizers globally
 
 If you want the pre-2.8 behavior — resource and op sanitizers on for every test
-— you can re-enable them at any of four scopes. Higher-precedence settings
+— you can re-enable them at any of five scopes. Higher-precedence settings
 override lower ones.
 
 1. **Per-test** (highest precedence):

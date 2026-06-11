@@ -61,6 +61,16 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "Sleep and delay execution",
+        href: "/examples/sleep_delay/",
+        type: "example",
+      },
+      {
+        title: "Check if two values are deeply equal",
+        href: "/examples/deep_equal/",
+        type: "example",
+      },
+      {
         title: "Update from CommonJS to ESM",
         href: "/examples/cjs_to_esm_tutorial/",
         type: "tutorial",
@@ -179,6 +189,11 @@ export const sidebar = [
       {
         title: "Manipulating & parsing URLs",
         href: "/examples/url_parsing/",
+        type: "example",
+      },
+      {
+        title: "Escape an HTML string",
+        href: "/examples/escape_html/",
         type: "example",
       },
       {
@@ -748,6 +763,16 @@ export const sidebar = [
         href: "/examples/convert_string/",
         type: "example",
       },
+      {
+        title: "Convert a Node.js Readable",
+        href: "/examples/convert_node_readable/",
+        type: "example",
+      },
+      {
+        title: "Compress and decompress data",
+        href: "/examples/compress_decompress/",
+        type: "example",
+      },
     ],
   },
   {
@@ -946,6 +971,11 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "Convert between file URLs and paths",
+        href: "/examples/file_url_path/",
+        type: "example",
+      },
+      {
         title: "Get the MIME type of a file",
         href: "/examples/mime_type/",
         type: "example",
@@ -1020,11 +1050,6 @@ export const sidebar = [
         href: "/examples/streaming_files/",
         type: "example",
       },
-      {
-        title: "Unzip gzipped file",
-        href: "/examples/unzip_gzipped_file/",
-        type: "example",
-      },
     ],
   },
   {
@@ -1043,6 +1068,11 @@ export const sidebar = [
       {
         title: "Hashing",
         href: "/examples/hashing/",
+        type: "example",
+      },
+      {
+        title: "Hashing and verifying passwords",
+        href: "/examples/hash_password/",
         type: "example",
       },
       {
