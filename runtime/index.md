@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-05-28
 title: "Get started with Deno"
-description: "Install Deno and build your first project: why Deno, install, create, run, test, add a dependency, and use the built-in toolchain — no build step, no config."
+description: "Install Deno and build your first project: why Deno, install, create, run, test, add a dependency, and use the built-in toolchain. No build step, no config."
 pagination_next: /runtime/getting_started/installation/
 oldUrl:
   - /manual/
@@ -34,8 +34,7 @@ few minutes.
 - **[Secure by default](/runtime/fundamentals/security/).** Code runs in a
   sandbox with no file, network, or environment access until you grant it.
 - **A full toolchain, no plumbing.** Built-in
-  [formatter](/runtime/lint_and_format/),
-  [linter](/runtime/lint_and_format/),
+  [formatter](/runtime/lint_and_format/), [linter](/runtime/lint_and_format/),
   [test runner](/runtime/test/), benchmarking, and
   [a lot more](/runtime/reference/cli/). No `devDependencies` to wire up.
 
@@ -60,12 +59,14 @@ irm https://deno.land/install.ps1 | iex
 </deno-tab>
 </deno-tabs>
 
-Verify it, and see [Installation](/runtime/getting_started/installation/) for
-package managers, Docker, and other options:
+Verify the install:
 
 ```sh
 deno --version
 ```
+
+See [Installation](/runtime/getting_started/installation/) for package managers,
+Docker, and other options.
 
 ## Create a project
 
@@ -85,8 +86,8 @@ my_project
 ```
 
 [`deno.json`](/runtime/reference/deno_json/) is where your tasks, dependencies,
-and tooling config live — the equivalent of `package.json` plus your tool
-configs, in one file.
+and tooling config live. Think `package.json` plus your tool configs, in one
+file.
 
 ## Run it
 
@@ -101,15 +102,14 @@ Notice the `-N` (short for `--allow-net`). Deno is
 network, filesystem, or environment until you grant it. Open the URL to see the
 response.
 
-`main.ts` is TypeScript and it ran directly — **no `tsc`, no build step**. It's
+`main.ts` is TypeScript and it ran directly: **no `tsc`, no build step**. It's
 also built on the web-standard [`Deno.serve`](/api/deno/~/Deno.serve) with
 `Request`/`Response`, so what you learn here is the platform, not a framework.
 
 ## Test it
 
-The project ships with tests. Run them with
-[`deno test`](/runtime/test/) — the test runner is built in, no
-dependencies to add:
+The project ships with tests. Run them with [`deno test`](/runtime/test/). The
+test runner is built in, so there's nothing to install:
 
 ```sh
 $ deno test
@@ -123,7 +123,7 @@ ok | 2 passed | 0 failed (15ms)
 ## Add a dependency
 
 Pull in packages from [JSR](https://jsr.io) or npm with
-[`deno add`](/runtime/reference/cli/add/) — it records them in `deno.json`:
+[`deno add`](/runtime/reference/cli/add/), which records them in `deno.json`:
 
 ```sh
 deno add jsr:@std/assert    # the Deno standard library, on JSR
@@ -140,7 +140,7 @@ assertEquals(1 + 1, 2);
 
 ## Use the built-in toolchain
 
-Formatting, linting, and more come with the runtime — no setup:
+Formatting, linting, and more come with the runtime, no setup needed:
 
 ```sh
 deno fmt     # format your code
@@ -150,9 +150,11 @@ deno task    # run scripts defined in deno.json
 
 ## Next steps
 
-- **[Set up your editor](/runtime/getting_started/setup_your_environment/)** —
-  autocomplete, inline errors, and formatting on save.
-- **[Run code](/runtime/run/)** — servers, tasks, web APIs, and debugging.
-- **[Manage packages](/runtime/packages/)** — dependencies, workspaces, publishing.
-- **[Migrate from Node.js](/runtime/migrate/)** — bring an existing project across.
-- **[Examples and tutorials](/examples/)** — ideas for what to build next.
+- **[Set up your editor](/runtime/getting_started/setup_your_environment/).**
+  Autocomplete, inline errors, and formatting on save.
+- **[Run code](/runtime/run/).** Servers, tasks, web APIs, and debugging.
+- **[Manage packages](/runtime/packages/).** Dependencies, workspaces,
+  publishing.
+- **[Migrate from Node.js](/runtime/migrate/).** Bring an existing project
+  across.
+- **[Examples and tutorials](/examples/).** Ideas for what to build next.

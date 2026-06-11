@@ -277,8 +277,7 @@ allowed values:
 
 </div>
 
-Read more about
-[formatting your code with Deno](/runtime/lint_and_format/).
+Read more about [formatting your code with Deno](/runtime/lint_and_format/).
 
 ## Lockfile
 

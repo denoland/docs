@@ -57,9 +57,9 @@ deno test
 ```
 
 This will execute all the tests in the project. You can read more about
-[testing in Deno](/runtime/test/) and we'll cover tests in a
-little more depth in a later tutorial. At the moment you have one test file,
-`main_test.ts`, which tests the `add` function in `main.ts`.
+[testing in Deno](/runtime/test/) and we'll cover tests in a little more depth
+in a later tutorial. At the moment you have one test file, `main_test.ts`, which
+tests the `add` function in `main.ts`.
 
 ### Adding to your project
 
