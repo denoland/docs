@@ -122,12 +122,12 @@ ok | 2 passed | 0 failed (15ms)
 
 ## Add a dependency
 
-Pull in packages from [JSR](https://jsr.io) or npm with
-[`deno add`](/runtime/reference/cli/add/), which records them in `deno.json`:
+Pull in packages from npm or [JSR](https://jsr.io) with
+[`deno install`](/runtime/reference/cli/install/):
 
 ```sh
-deno add jsr:@std/assert    # the Deno standard library, on JSR
-deno add npm:express        # any npm package
+deno install express            # any npm package, like npm install
+deno install jsr:@std/assert    # the Deno standard library, on JSR
 ```
 
 Then import and use them:
