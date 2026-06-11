@@ -444,18 +444,13 @@ export const sidebar = [
         type: "tutorial",
       },
       {
-        title: "Mocking data in tests",
-        href: "/examples/mocking_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Stubbing",
-        href: "/examples/stubbing_tutorial/",
+        title: "Mocking and test doubles",
+        href: "/runtime/test/mocking/",
         type: "tutorial",
       },
       {
         title: "Snapshot testing",
-        href: "/examples/snapshot_test_tutorial/",
+        href: "/runtime/test/snapshots/",
         type: "tutorial",
       },
       {
