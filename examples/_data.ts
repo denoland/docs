@@ -163,6 +163,11 @@ export const sidebar = [
           "https://www.youtube.com/watch?v=7uiL4WYvZVs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=8",
         type: "video",
       },
+      {
+        title: "Module Metadata",
+        href: "/examples/module_metadata_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
 
@@ -219,6 +224,22 @@ export const sidebar = [
       {
         title: "Web assembly",
         href: "/examples/webassembly/",
+        type: "example",
+      },
+    ],
+  },
+
+  {
+    title: "Standard library",
+    items: [
+      {
+        title: "User Data Processing with Deno Collections",
+        href: "/examples/data_processing/",
+        type: "example",
+      },
+      {
+        title: "Exponential backoff",
+        href: "/examples/exponential_backoff/",
         type: "example",
       },
     ],
@@ -322,6 +343,11 @@ export const sidebar = [
         title: "HTTP server file upload",
         href: "/examples/http_server_file_upload/",
         type: "example",
+      },
+      {
+        title: "Build a word finder app",
+        href: "/examples/word_finder_tutorial/",
+        type: "tutorial",
       },
     ],
   },
@@ -698,6 +724,48 @@ export const sidebar = [
       },
     ],
   },
+
+  {
+    title: "Deno KV and scheduling",
+    items: [
+      {
+        title: "Deno KV: Key/Value database",
+        href: "/examples/kv/",
+        type: "example",
+      },
+      {
+        title: "Deno KV watch",
+        href: "/examples/kv_watch/",
+        type: "example",
+      },
+      {
+        title: "Deno queues",
+        href: "/examples/queues/",
+        type: "example",
+      },
+      {
+        title: "Deno Cron",
+        href: "/examples/cron/",
+        type: "example",
+      },
+    ],
+  },
+
+  {
+    title: "AI",
+    items: [
+      {
+        title: "LLM Chat app",
+        href: "/examples/llm_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Connect to OpenAI - Chat completion",
+        href: "/examples/openai_chat_completion/",
+        type: "example",
+      },
+    ],
+  },
   {
     title: "Encoding",
     items: [
@@ -786,6 +854,16 @@ export const sidebar = [
       {
         title: "Compress and decompress data",
         href: "/examples/compress_decompress/",
+        type: "example",
+      },
+      {
+        title: "Importing text",
+        href: "/examples/importing_text/",
+        type: "example",
+      },
+      {
+        title: "Importing bytes",
+        href: "/examples/importing_bytes/",
         type: "example",
       },
     ],
@@ -940,6 +1018,33 @@ export const sidebar = [
         href: "/examples/dns_queries/",
         type: "example",
       },
+      {
+        title: "File Based Routing",
+        href: "/examples/file_based_routing_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a chat app with WebSockets",
+        href: "/examples/chat_app_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a Realtime WebSocket Application",
+        href: "/examples/realtime_websocket_app/",
+        externalURL:
+          "https://www.youtube.com/watch?v=FC4IrkHEg4A&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=15",
+        type: "video",
+      },
+      {
+        title: "UDP listener: Ping",
+        href: "/examples/udp_listener/",
+        type: "example",
+      },
+      {
+        title: "UDP connector: Ping",
+        href: "/examples/udp_connector/",
+        type: "example",
+      },
     ],
   },
   {
@@ -1013,7 +1118,7 @@ export const sidebar = [
     ],
   },
   {
-    title: "FileSystem",
+    title: "File system",
     items: [
       {
         title: "Path operations",
@@ -1100,6 +1205,11 @@ export const sidebar = [
         href: "/examples/streaming_files/",
         type: "example",
       },
+      {
+        title: "File system events",
+        href: "/examples/file_system_events_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
@@ -1138,108 +1248,6 @@ export const sidebar = [
       {
         title: "AES Encryption and Decryption",
         href: "/examples/aes_encryption/",
-        type: "example",
-      },
-    ],
-  },
-  {
-    title: "Advanced",
-    items: [
-      {
-        title: "File system events",
-        href: "/examples/file_system_events_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Module Metadata",
-        href: "/examples/module_metadata_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "File Based Routing",
-        href: "/examples/file_based_routing_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build a chat app with WebSockets",
-        href: "/examples/chat_app_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "LLM Chat app",
-        href: "/examples/llm_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build a Realtime WebSocket Application",
-        href: "/examples/realtime_websocket_app/",
-        externalURL:
-          "https://www.youtube.com/watch?v=FC4IrkHEg4A&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=15",
-        type: "video",
-      },
-      {
-        title: "Build a word finder app",
-        href: "/examples/word_finder_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Connect to OpenAI - Chat completion",
-        href: "/examples/openai_chat_completion/",
-        type: "example",
-      },
-      {
-        title: "User Data Processing with Deno Collections",
-        href: "/examples/data_processing/",
-        type: "example",
-      },
-      {
-        title: "Exponential backoff",
-        href: "/examples/exponential_backoff/",
-        type: "example",
-      },
-    ],
-  },
-  {
-    title: "Unstable APIs",
-    items: [
-      {
-        title: "Deno KV watch",
-        href: "/examples/kv_watch/",
-        type: "example",
-      },
-      {
-        title: "Deno Cron",
-        href: "/examples/cron/",
-        type: "example",
-      },
-      {
-        title: "Deno queues",
-        href: "/examples/queues/",
-        type: "example",
-      },
-      {
-        title: "Deno KV: Key/Value database",
-        href: "/examples/kv/",
-        type: "example",
-      },
-      {
-        title: "UDP listener: Ping",
-        href: "/examples/udp_listener/",
-        type: "example",
-      },
-      {
-        title: "UDP connector: Ping",
-        href: "/examples/udp_connector/",
-        type: "example",
-      },
-      {
-        title: "Importing text",
-        href: "/examples/importing_text/",
-        type: "example",
-      },
-      {
-        title: "Importing bytes",
-        href: "/examples/importing_bytes/",
         type: "example",
       },
     ],
