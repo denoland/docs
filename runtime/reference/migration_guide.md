@@ -7,6 +7,14 @@ oldUrl:
   - /runtime/reference/migrate_deprecations/
 ---
 
+:::note Historical document
+
+This guide covers the one-time migration from Deno 1.x to Deno 2.x and is no
+longer actively updated. If you're coming to Deno from Node.js, see
+[Migrate from Node.js](/runtime/migrate/) instead.
+
+:::
+
 While we’ve accomplished a ton in Deno 1.x, the next major version is focused on
 using Deno **at scale**. This means seamless interoperability with Node.js and
 npm JavaScript infrastructure and supporting a wider range of projects and
@@ -60,15 +68,9 @@ mind. These teams work on complex codebases, sharing internal code, often using
 private registries.
 
 With Deno 2 your team can leverage private npm registries the same way you'd do
-with Node.js and npm, using an `.npmrc` file:
-
-```js title=".npmrc"
-@mycompany:registry=http://mycompany.com:8111/
-mycompany.com:8111/:_authToken=token
-```
-
-Learn more about private registry configuration
-[on `npm packages` page](/runtime/fundamentals/node/#private-registries).
+with Node.js and npm, using an `.npmrc` file. See
+[private registries](/runtime/fundamentals/node/#private-registries) for the
+configuration details.
 
 Deno 2 has workspace support, allowing you to mix Deno-first and Node-first
 packages in the same monorepo, making incremental adoption fast and

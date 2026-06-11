@@ -34,18 +34,31 @@ Run tests matching a glob pattern:
 deno test src/*.test.ts
 ```
 
-Run tests whose name matches a string or pattern:
-
-```sh
-deno test --filter "database"
-deno test --filter "/^connect.*/"
-```
-
 Skip type-checking:
 
 ```sh
 deno test --no-check
 ```
+
+## Filtering
+
+Run only the tests whose name matches a string or a pattern with `--filter`:
+
+```sh
+# Run tests whose name contains "database"
+deno test --filter "database"
+
+# Run tests whose name matches a regular expression
+deno test --filter "/^connect.*/"
+```
+
+Wrap the filter value in forward slashes (`/`) to treat it as a regular
+expression, like JavaScript's regex literal syntax. Filtering does not affect
+test steps: when a test's name matches the filter, all of its steps run.
+
+To control which test files are collected in the first place, set `test.include`
+and `test.exclude` in your config file. See
+[include and exclude](/runtime/reference/deno_json/#include-and-exclude).
 
 ## Permissions
 
@@ -103,14 +116,20 @@ deno coverage --lcov coverage/ > coverage.lcov
 
 ## Reporters
 
-Choose an output format with `--reporter`:
+Choose an output format with `--reporter`. Four reporters are built in:
+
+- `pretty` (default): detailed, human-readable output
+- `dot`: one character per test, for a concise overview
+- `junit`: JUnit XML format, for CI systems
+- `tap`: [Test Anything Protocol](https://testanything.org/) output
 
 ```sh
 deno test --reporter=dot
 deno test --reporter=tap
 ```
 
-Write a JUnit XML report for CI systems:
+Write a JUnit XML report to a file while keeping the human-readable `pretty`
+output in the terminal:
 
 ```sh
 deno test --junit-path=report.xml

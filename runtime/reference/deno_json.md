@@ -358,9 +358,9 @@ sharing code.
 :::
 
 If you’re migrating from Node.js, your existing `tsconfig.json` files work out
-of the box with Deno. See
-[Using tsconfig.json with Deno](/runtime/fundamentals/typescript/#using-tsconfigjson-with-deno)
-for details.
+of the box with Deno. See the
+[tsconfig.json compatibility reference](/runtime/reference/ts_config_migration/)
+for the supported fields and precedence rules.
 
 For the full list of supported compiler options, library configuration, and
 advanced settings, see
