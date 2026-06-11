@@ -35,6 +35,28 @@ feedbackForm?.addEventListener("submit", (event) => {
   }
 });
 
+// "Request a new guide" box on the Examples landing page; reuses the
+// feedback endpoint, which files a GitHub issue when a comment is present.
+const guideRequestForm = document.getElementById("guide-request-form");
+const guideRequestBox = document.getElementById("guide-request-box");
+
+guideRequestForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(guideRequestForm as HTMLFormElement);
+  const form = Object.fromEntries(formData.entries());
+  const comment = (form["guide-request-comment"] as string)?.trim();
+  if (!comment) return;
+  sendFeedback({
+    sentiment: "no",
+    comment: `[Guide request] ${comment}`,
+    contact: form["guide-request-contact"] as string,
+  });
+  if (guideRequestBox) {
+    guideRequestBox.innerHTML =
+      "<p>Thanks! Your request has been filed — we'll take a look.</p>";
+  }
+});
+
 async function sendFeedback(feedback: Partial<FeedbackSubmission>) {
   feedback.path = feedback.path || new URL(window.location.href).pathname;
   feedback.id = lastFeedbackItemId ? lastFeedbackItemId : null;

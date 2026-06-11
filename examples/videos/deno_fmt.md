@@ -1,5 +1,6 @@
 ---
 title: "Formatting with Deno fmt"
+description: "Learn tips and tricks for using deno fmt, Deno's fast, customizable built-in code formatter, in any workflow."
 url: /examples/deno_fmt/
 videoUrl: https://www.youtube.com/watch?v=Ouzso9gQqnc
 layout: video.tsx

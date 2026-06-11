@@ -1106,5 +1106,44 @@ export const sidebar = [
   },
 ];
 
+export const featuredItems = [
+  {
+    title: "HTTP Server: Hello world",
+    href: "/examples/http_server/",
+    type: "example",
+    description: "Spin up a web server with Deno.serve in a few lines.",
+  },
+  {
+    title: "Writing tests",
+    href: "/examples/writing_tests/",
+    type: "example",
+    description: "Use the built-in test runner, no dependencies needed.",
+  },
+  {
+    title: "Build a Next.js app",
+    href: "/examples/next_tutorial/",
+    type: "tutorial",
+    description: "Run a full-stack React framework on Deno.",
+  },
+  {
+    title: "Connecting to databases",
+    href: "/examples/connecting_to_databases_tutorial/",
+    type: "tutorial",
+    description: "Postgres, MySQL, MongoDB, SQLite and more.",
+  },
+  {
+    title: "Deploy with Deno Deploy",
+    href: "/examples/deno_deploy_tutorial/",
+    type: "tutorial",
+    description: "Ship your app to the edge in minutes.",
+  },
+  {
+    title: "Built in TypeScript support",
+    href: "/examples/typescript_support/",
+    type: "video",
+    description: "Run TypeScript directly, with zero configuration.",
+  },
+];
+
 export const sectionTitle = "Examples";
 export const sectionHref = "/examples/";
