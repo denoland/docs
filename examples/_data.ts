@@ -496,11 +496,6 @@ export const sidebar = [
         type: "example",
       },
       {
-        title: "Migrating from Jest",
-        href: "/runtime/test/migrate_from_jest/",
-        type: "tutorial",
-      },
-      {
         title: "Use Testing Library with Deno",
         href: "/examples/testing_library_tutorial/",
         type: "tutorial",
