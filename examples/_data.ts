@@ -718,6 +718,36 @@ export const sidebar = [
         href: "/examples/byte_manipulation/",
         type: "example",
       },
+      {
+        title: "Convert an ArrayBuffer",
+        href: "/examples/convert_arraybuffer/",
+        type: "example",
+      },
+      {
+        title: "Convert a Uint8Array",
+        href: "/examples/convert_uint8array/",
+        type: "example",
+      },
+      {
+        title: "Convert a Blob",
+        href: "/examples/convert_blob/",
+        type: "example",
+      },
+      {
+        title: "Convert a Buffer (node:buffer)",
+        href: "/examples/convert_buffer/",
+        type: "example",
+      },
+      {
+        title: "Convert a ReadableStream",
+        href: "/examples/convert_readablestream/",
+        type: "example",
+      },
+      {
+        title: "Convert a string to bytes and back",
+        href: "/examples/convert_string/",
+        type: "example",
+      },
     ],
   },
   {
