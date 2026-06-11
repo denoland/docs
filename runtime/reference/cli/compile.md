@@ -88,6 +88,23 @@ Deno supports cross compiling to all targets regardless of the host platform.
 | Linux   | x86_64       | `x86_64-unknown-linux-gnu`  |
 | Linux   | ARM64        | `aarch64-unknown-linux-gnu` |
 
+## The denort binary
+
+`deno compile` embeds your program into `denort` ("Deno runtime"): a stripped
+build of Deno that contains only what's needed to run a compiled program, with
+none of the tooling subcommands. Using `denort` as the base instead of the full
+`deno` binary is what keeps compiled executables smaller.
+
+The first time you compile for a given Deno version and target, Deno downloads
+the matching `denort-<target>.zip` from `dl.deno.land` and caches it in
+`DENO_DIR`. This is also how cross-compilation works: compiling with `--target`
+fetches that platform's `denort`. Subsequent compiles reuse the cached binary
+and work offline.
+
+To use a custom or locally built runtime as the base, set the `DENORT_BIN`
+environment variable to its path. Deno also picks up a `denort` binary placed
+next to the `deno` executable.
+
 ## Icons
 
 It is possible to add an icon to the executable by using the `--icon` flag when

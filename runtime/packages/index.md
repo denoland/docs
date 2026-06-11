@@ -578,7 +578,10 @@ project:
 `deno.json` and `--minimum-dependency-age` accept an
 [ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) such as
 `P3D` (3 days) or `PT72H` (72 hours), an integer (interpreted as minutes), an
-absolute cutoff date (`2025-09-16`) or RFC3339 timestamp, or `0` to disable. See
+absolute cutoff date (`2025-09-16`) or RFC3339 timestamp, or `0` to disable. The
+field also supports an object form that exempts specific packages; see the
+[`minimumDependencyAge` reference](/runtime/reference/deno_json/#minimum-dependency-age)
+for the full shape, and
 [`.npmrc` configuration](/runtime/fundamentals/node/#npmrc-configuration) for
 the other npm-registry options Deno reads.
 
