@@ -13,86 +13,75 @@ way people search. This list closes that findability gap. Conventions worth
 copying while writing these: show expected terminal output after commands, keep
 each page answerable in one screen, and title pages as tasks.
 
-## Binary data (we cover 2 of ~24 task shapes)
+Consolidation policy: where Bun atomizes one topic into many two-line pages
+(binary/stream conversions), we write one page per source type with an anchored
+section per variant, then surface every variant as its own entry in the examples
+index and search, linking to the anchor — the same many-entries-few-pages model
+as the API reference. Long-tail search is served by passage ranking on the
+anchored headings; these SERPs are MDN-dominated either way, so maintainability
+wins.
 
-Existing: "Manipulating byte arrays", "Hex and base64 encoding". Bun has a
-micro-guide for every pairwise conversion. `Buffer` items double as
-`node:buffer` compat guides.
+## Binary data (we cover 2 task shapes; 4 consolidated pages close ~22 gaps)
 
-- [ ] Convert an ArrayBuffer to a string
-      ([Bun](https://bun.com/docs/guides/binary/arraybuffer-to-string))
-- [ ] Convert an ArrayBuffer to a Uint8Array
-      ([Bun](https://bun.com/docs/guides/binary/arraybuffer-to-typedarray))
-- [ ] Convert an ArrayBuffer to a Blob
-      ([Bun](https://bun.com/docs/guides/binary/arraybuffer-to-blob))
-- [ ] Convert an ArrayBuffer to an array of numbers
-      ([Bun](https://bun.com/docs/guides/binary/arraybuffer-to-array))
-- [ ] Convert an ArrayBuffer to a Buffer (`node:buffer`)
-      ([Bun](https://bun.com/docs/guides/binary/arraybuffer-to-buffer))
-- [ ] Convert a Uint8Array to a string
-      ([Bun](https://bun.com/docs/guides/binary/typedarray-to-string))
-- [ ] Convert a Uint8Array to an ArrayBuffer
-      ([Bun](https://bun.com/docs/guides/binary/typedarray-to-arraybuffer))
-- [ ] Convert a Uint8Array to a Blob
-      ([Bun](https://bun.com/docs/guides/binary/typedarray-to-blob))
-- [ ] Convert a Uint8Array to a ReadableStream
-      ([Bun](https://bun.com/docs/guides/binary/typedarray-to-readablestream))
-- [ ] Convert a Uint8Array to a DataView
-      ([Bun](https://bun.com/docs/guides/binary/typedarray-to-dataview))
-- [ ] Convert a Uint8Array to a Buffer (`node:buffer`)
-      ([Bun](https://bun.com/docs/guides/binary/typedarray-to-buffer))
-- [ ] Convert a Blob to a string
-      ([Bun](https://bun.com/docs/guides/binary/blob-to-string))
-- [ ] Convert a Blob to an ArrayBuffer
-      ([Bun](https://bun.com/docs/guides/binary/blob-to-arraybuffer))
-- [ ] Convert a Blob to a Uint8Array
-      ([Bun](https://bun.com/docs/guides/binary/blob-to-typedarray))
-- [ ] Convert a Blob to a ReadableStream
-      ([Bun](https://bun.com/docs/guides/binary/blob-to-stream))
-- [ ] Convert a Blob to a DataView
-      ([Bun](https://bun.com/docs/guides/binary/blob-to-dataview))
-- [ ] Convert a DataView to a string
-      ([Bun](https://bun.com/docs/guides/binary/dataview-to-string))
-- [ ] Convert a Buffer to a string (`node:buffer`)
-      ([Bun](https://bun.com/docs/guides/binary/buffer-to-string))
-- [ ] Convert a Buffer to a Uint8Array (`node:buffer`)
-      ([Bun](https://bun.com/docs/guides/binary/buffer-to-typedarray))
-- [ ] Convert a Buffer to an ArrayBuffer (`node:buffer`)
-      ([Bun](https://bun.com/docs/guides/binary/buffer-to-arraybuffer))
-- [ ] Convert a Buffer to a Blob (`node:buffer`)
-      ([Bun](https://bun.com/docs/guides/binary/buffer-to-blob))
-- [ ] Convert a Buffer to a ReadableStream (`node:buffer`)
-      ([Bun](https://bun.com/docs/guides/binary/buffer-to-readablestream))
+Existing: "Manipulating byte arrays", "Hex and base64 encoding". Bun ships a
+micro-guide per pairwise conversion; we consolidate by source type instead — one
+page per "from" type with an anchored section per target, and each conversion
+listed as its own entry in the examples index/search pointing at the anchor
+(same many-entries-few-pages model as the API reference).
 
-## Streams (we cover 2 of ~15 task shapes)
+- [ ] Convert an ArrayBuffer — sections: to string, Uint8Array, Blob, DataView,
+      array of numbers, `node:buffer` Buffer (Bun splits these:
+      [to-string](https://bun.com/docs/guides/binary/arraybuffer-to-string),
+      [to-typedarray](https://bun.com/docs/guides/binary/arraybuffer-to-typedarray),
+      [to-blob](https://bun.com/docs/guides/binary/arraybuffer-to-blob),
+      [to-array](https://bun.com/docs/guides/binary/arraybuffer-to-array),
+      [to-buffer](https://bun.com/docs/guides/binary/arraybuffer-to-buffer))
+- [ ] Convert a Uint8Array — sections: to string, ArrayBuffer, Blob, DataView,
+      ReadableStream, Buffer (Bun:
+      [to-string](https://bun.com/docs/guides/binary/typedarray-to-string),
+      [to-arraybuffer](https://bun.com/docs/guides/binary/typedarray-to-arraybuffer),
+      [to-blob](https://bun.com/docs/guides/binary/typedarray-to-blob),
+      [to-dataview](https://bun.com/docs/guides/binary/typedarray-to-dataview),
+      [to-readablestream](https://bun.com/docs/guides/binary/typedarray-to-readablestream),
+      [to-buffer](https://bun.com/docs/guides/binary/typedarray-to-buffer))
+- [ ] Convert a Blob — sections: to string, ArrayBuffer, Uint8Array,
+      ReadableStream, DataView (Bun:
+      [to-string](https://bun.com/docs/guides/binary/blob-to-string),
+      [to-arraybuffer](https://bun.com/docs/guides/binary/blob-to-arraybuffer),
+      [to-typedarray](https://bun.com/docs/guides/binary/blob-to-typedarray),
+      [to-stream](https://bun.com/docs/guides/binary/blob-to-stream),
+      [to-dataview](https://bun.com/docs/guides/binary/blob-to-dataview))
+- [ ] Convert a Buffer (`node:buffer` interop) — sections: to string,
+      Uint8Array, ArrayBuffer, Blob, ReadableStream; include DataView-to-string
+      here too (Bun:
+      [to-string](https://bun.com/docs/guides/binary/buffer-to-string),
+      [to-typedarray](https://bun.com/docs/guides/binary/buffer-to-typedarray),
+      [to-arraybuffer](https://bun.com/docs/guides/binary/buffer-to-arraybuffer),
+      [to-blob](https://bun.com/docs/guides/binary/buffer-to-blob),
+      [to-readablestream](https://bun.com/docs/guides/binary/buffer-to-readablestream),
+      [dataview-to-string](https://bun.com/docs/guides/binary/dataview-to-string))
 
-Existing: "Piping streams", "Fetch and stream data". No "convert a stream to X"
-content at all. Node `Readable` items double as `node:stream` compat guides.
+## Streams (we cover 2 task shapes; 2 consolidated pages close ~12 gaps)
 
-- [ ] Convert a ReadableStream to a string
-      ([Bun](https://bun.com/docs/guides/streams/to-string))
-- [ ] Convert a ReadableStream to JSON
-      ([Bun](https://bun.com/docs/guides/streams/to-json))
-- [ ] Convert a ReadableStream to a Blob
-      ([Bun](https://bun.com/docs/guides/streams/to-blob))
-- [ ] Convert a ReadableStream to a Uint8Array
-      ([Bun](https://bun.com/docs/guides/streams/to-typedarray))
-- [ ] Convert a ReadableStream to an ArrayBuffer
-      ([Bun](https://bun.com/docs/guides/streams/to-arraybuffer))
-- [ ] Convert a ReadableStream to an array of chunks
-      ([Bun](https://bun.com/docs/guides/streams/to-array))
-- [ ] Convert a ReadableStream to a Buffer (`node:buffer`)
-      ([Bun](https://bun.com/docs/guides/streams/to-buffer))
-- [ ] Convert a Node.js Readable to a string
-      ([Bun](https://bun.com/docs/guides/streams/node-readable-to-string))
-- [ ] Convert a Node.js Readable to JSON
-      ([Bun](https://bun.com/docs/guides/streams/node-readable-to-json))
-- [ ] Convert a Node.js Readable to a Blob
-      ([Bun](https://bun.com/docs/guides/streams/node-readable-to-blob))
-- [ ] Convert a Node.js Readable to a Uint8Array
-      ([Bun](https://bun.com/docs/guides/streams/node-readable-to-uint8array))
-- [ ] Convert a Node.js Readable to an ArrayBuffer
-      ([Bun](https://bun.com/docs/guides/streams/node-readable-to-arraybuffer))
+Existing: "Piping streams", "Fetch and stream data". Same consolidation model as
+Binary data.
+
+- [ ] Convert a ReadableStream — sections: to string, JSON, Blob, Uint8Array,
+      ArrayBuffer, array of chunks, `node:buffer` Buffer (Bun:
+      [to-string](https://bun.com/docs/guides/streams/to-string),
+      [to-json](https://bun.com/docs/guides/streams/to-json),
+      [to-blob](https://bun.com/docs/guides/streams/to-blob),
+      [to-typedarray](https://bun.com/docs/guides/streams/to-typedarray),
+      [to-arraybuffer](https://bun.com/docs/guides/streams/to-arraybuffer),
+      [to-array](https://bun.com/docs/guides/streams/to-array),
+      [to-buffer](https://bun.com/docs/guides/streams/to-buffer))
+- [ ] Convert a Node.js Readable — sections: to string, JSON, Blob, Uint8Array,
+      ArrayBuffer (Bun:
+      [to-string](https://bun.com/docs/guides/streams/node-readable-to-string),
+      [to-json](https://bun.com/docs/guides/streams/node-readable-to-json),
+      [to-blob](https://bun.com/docs/guides/streams/node-readable-to-blob),
+      [to-uint8array](https://bun.com/docs/guides/streams/node-readable-to-uint8array),
+      [to-arraybuffer](https://bun.com/docs/guides/streams/node-readable-to-arraybuffer))
 
 ## Package management (we cover ~2 of ~15 task shapes)
 
@@ -225,19 +214,17 @@ gzip *de*compression.
 - [ ] Hash and verify passwords (`@std`/bcrypt/argon2)
       ([Bun](https://bun.com/docs/guides/util/hash-a-password)) — we only show
       digests, never password hashing
-- [ ] Compress and decompress with gzip (CompressionStream)
-      ([Bun](https://bun.com/docs/guides/util/gzip))
-- [ ] Compress and decompress with DEFLATE
-      ([Bun](https://bun.com/docs/guides/util/deflate))
+- [ ] Compress and decompress data — one page covering gzip and DEFLATE via
+      CompressionStream (Bun: [gzip](https://bun.com/docs/guides/util/gzip),
+      [deflate](https://bun.com/docs/guides/util/deflate))
 - [ ] Check if two objects are deeply equal
       ([Bun](https://bun.com/docs/guides/util/deep-equals))
 - [ ] Escape an HTML string
       ([Bun](https://bun.com/docs/guides/util/escape-html))
 - [ ] Sleep / delay execution ([Bun](https://bun.com/docs/guides/util/sleep))
-- [ ] Convert a file URL to an absolute path
-      ([Bun](https://bun.com/docs/guides/util/file-url-to-path))
-- [ ] Convert an absolute path to a file URL
-      ([Bun](https://bun.com/docs/guides/util/path-to-file-url))
+- [ ] Convert between file URLs and paths — one page, both directions (Bun:
+      [file-url-to-path](https://bun.com/docs/guides/util/file-url-to-path),
+      [path-to-file-url](https://bun.com/docs/guides/util/path-to-file-url))
 - [ ] Find the path to an executable (`which`)
       ([Bun](https://bun.com/docs/guides/util/which-path-to-executable-bin))
 
