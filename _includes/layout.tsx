@@ -12,8 +12,12 @@ export default function Layout(data: Lume.Data) {
   const canonicalUrl = `https://docs.deno.com${data.url}`;
   const pageTitle = deleteBackticks(data.title);
 
-  // BreadcrumbList structured data: Deno Docs → section → page. The section
-  // name comes from the section's own _data.ts (sectionTitle) when defined.
+  // BreadcrumbList structured data (schema.org JSON-LD): Deno Docs → section
+  // → page. Search engines read this to show a breadcrumb trail in results
+  // instead of the raw URL, and to understand the site hierarchy; see
+  // https://developers.google.com/search/docs/appearance/structured-data/breadcrumb
+  // We emit only the data (no visible breadcrumb UI yet). The section name
+  // comes from the section's own _data.ts (sectionTitle) when defined.
   const sectionRoot = section ? `/${section}/` : null;
   const sectionTitle = sectionRoot
     ? (data.search.data(sectionRoot)?.sectionTitle ??
