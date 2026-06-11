@@ -76,7 +76,7 @@ Deno sends it as a bearer token, the same as npm does.
 ## Verdaccio
 
 For a self-hosted [Verdaccio](https://verdaccio.org/) instance the setup is
-identical — point the scope (or `NPM_CONFIG_REGISTRY` for everything) at your
+identical: point the scope (or `NPM_CONFIG_REGISTRY` for everything) at your
 instance and supply its token:
 
 ```ini title=".npmrc"
@@ -121,6 +121,6 @@ with the `certfile` and `keyfile` fields (Deno 2.8+):
 ```
 
 Deno also reads the `email` field for legacy registries that require it, and
-`min-release-age` as a supply-chain guard — see
+`min-release-age` as a supply-chain guard; see
 [the `.npmrc` configuration reference](/runtime/fundamentals/node/#private-registries)
 for all supported fields.

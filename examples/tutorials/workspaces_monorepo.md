@@ -20,7 +20,7 @@ The root `deno.json` lists the member directories:
 ```
 
 Each member gets its own `deno.json` with a `name`, a `version`, and an
-`exports` field pointing at its entry point — or a `package.json`, if the member
+`exports` field pointing at its entry point, or a `package.json`, if the member
 is an npm-style package:
 
 ```json title="utils/deno.json"
@@ -45,7 +45,7 @@ export function greet(name: string): string {
 }
 ```
 
-Other members import `@acme/utils` by its bare name — no relative paths and no
+Other members import `@acme/utils` by its bare name: no relative paths and no
 import map entry needed. Deno finds the member through the root `workspace` list
 and resolves the import through its `exports`:
 

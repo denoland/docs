@@ -53,8 +53,8 @@ deno add npm:typescript@next
 ## Where dependencies are written
 
 If the project contains a `package.json`, npm packages are added to its
-`dependencies` instead of `deno.json` — handy in projects shared with Node.js
-tooling. You can force this with `--package-json`.
+`dependencies` instead of `deno.json`, which is handy in projects shared with
+Node.js tooling. You can force this with `--package-json`.
 
 Dev dependencies only exist in the `package.json` world:
 

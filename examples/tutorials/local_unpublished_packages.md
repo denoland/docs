@@ -51,7 +51,7 @@ $ deno run main.ts
 Hello, local package!
 ```
 
-The linked directory is used instead of the registry — the package doesn't even
+The linked directory is used instead of the registry; the package doesn't even
 have to be published. Edits in `greeter/` are picked up directly.
 
 :::note
@@ -84,7 +84,7 @@ change underneath you.
 
 For private repositories, set `DENO_AUTH_TOKENS` to a personal access token
 scoped to the host, e.g.
-`DENO_AUTH_TOKENS=a1b2c3d4e5f6@raw.githubusercontent.com` — see
+`DENO_AUTH_TOKENS=a1b2c3d4e5f6@raw.githubusercontent.com`; see
 [Private repositories](/runtime/packages/#private-repositories) for details.
 
 :::caution
@@ -100,7 +100,7 @@ anything beyond small projects. HTTPS imports are not supported by
 Deno does not support git dependency specifiers (`git+https:`/`git+ssh:`) or
 tarball URL dependencies in `package.json`. Additionally, since Deno 2.8,
 `file:` and `link:` entries in `package.json` dependencies are silently skipped
-during npm resolution — they neither work nor error.
+during npm resolution: they neither work nor error.
 
 The supported alternatives are:
 

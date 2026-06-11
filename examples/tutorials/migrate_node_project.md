@@ -23,7 +23,7 @@ Dependencies:
 + npm:ms 2.1.3
 ```
 
-No `deno.json` is required — `package.json` alone is enough. A `deno.lock` file
+No `deno.json` is required; `package.json` alone is enough. A `deno.lock` file
 is created to pin exact versions.
 
 ## Run your npm scripts
@@ -80,7 +80,7 @@ Two compatibility rules cover almost everything else:
 :::note
 
 Deno assumes ES modules by default. A `.js` file is only treated as CommonJS
-when the nearest `package.json` declares `"type": "commonjs"` — unlike Node,
+when the nearest `package.json` declares `"type": "commonjs"`, unlike Node,
 which assumes CommonJS when the field is missing. Add that one line to older
 projects that rely on the implicit default.
 
@@ -88,7 +88,7 @@ projects that rely on the implicit default.
 
 ## Replace tooling incrementally
 
-You don't have to switch everything at once — Deno works fine as just a package
+You don't have to switch everything at once: Deno works fine as just a package
 manager or just a task runner. When you're ready, the built-in toolchain
 replaces several dev dependencies with zero configuration:
 

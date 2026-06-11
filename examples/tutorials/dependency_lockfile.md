@@ -5,7 +5,7 @@ url: /examples/dependency_lockfile_tutorial/
 ---
 
 `deno.lock` pins every dependency to an exact resolved version with an integrity
-hash, so every machine — and your CI — runs identical code. Deno creates and
+hash, so every machine (and your CI) runs identical code. Deno creates and
 updates it automatically whenever a `deno.json` (or `package.json`) is present;
 your job is just to commit it and decide when it may change.
 
@@ -33,7 +33,7 @@ alongside your config:
 
 Each semver range from your config is mapped to one exact version, and each
 package gets a hash that Deno verifies on every install. Commit `deno.lock` to
-git — on other machines and in CI, [`deno ci`](/runtime/reference/cli/ci/) then
+git; on other machines and in CI, [`deno ci`](/runtime/reference/cli/ci/) then
 installs exactly what the lockfile says.
 
 ## Reviewing lockfile diffs
@@ -52,7 +52,7 @@ A version bump shows up as a changed resolution plus a changed hash:
 +      "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU..."
 ```
 
-A new dependency adds entries instead — including its transitive dependencies,
+A new dependency adds entries instead, including its transitive dependencies,
 listed under `dependencies`:
 
 ```diff
@@ -68,7 +68,7 @@ Unexpected new packages in a lockfile diff are worth a closer look in review.
 ## Freeze the lockfile for CI
 
 By default the lockfile is additive: new dependencies are recorded without
-complaint. In CI you usually want the opposite — fail if anything is not already
+complaint. In CI you usually want the opposite: fail if anything is not already
 locked:
 
 ```json title="deno.json"

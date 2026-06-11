@@ -5,7 +5,7 @@ url: /examples/npm_lifecycle_scripts_tutorial/
 ---
 
 npm packages can declare lifecycle scripts such as `preinstall` and
-`postinstall` that run arbitrary code during installation — a well-known supply
+`postinstall` that run arbitrary code during installation, a well-known supply
 chain attack vector. Unlike npm, Deno does not run these scripts unless you
 explicitly approve them. Packages with native addons (like `npm:better-sqlite3`)
 need their build scripts to work, so this tutorial walks through approving them.
