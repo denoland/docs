@@ -21,6 +21,11 @@ console.log("waiting...");
 await sleep(100);
 console.log("done"); // prints 100ms later
 
+// The same helper ships with the Node.js compatibility APIs as a promised
+// setTimeout, with an optional resolution value.
+import { setTimeout as nodeSleep } from "node:timers/promises";
+console.log(await nodeSleep(100, "woke up")); // woke up
+
 // The standard library provides the same thing as delay, with extras.
 import { delay } from "jsr:@std/async/delay";
 await delay(100);

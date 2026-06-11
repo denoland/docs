@@ -21,6 +21,12 @@ console.log(fromFileUrl("file:///tmp/data.txt")); // /tmp/data.txt
 // absolute.
 console.log(toFileUrl("/tmp/data.txt").href); // file:///tmp/data.txt
 
+// The Node.js API provides the same pair in node:url, which code ported
+// from Node.js will already be using.
+import { fileURLToPath, pathToFileURL } from "node:url";
+console.log(fileURLToPath("file:///tmp/data.txt")); // /tmp/data.txt
+console.log(pathToFileURL("/tmp/data.txt").href); // file:///tmp/data.txt
+
 // The most common source of file URLs is import.meta.url, the URL of the
 // current module.
 console.log(import.meta.url.startsWith("file://") || true); // true

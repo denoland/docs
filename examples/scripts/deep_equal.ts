@@ -32,9 +32,15 @@ console.log(isDeepStrictEqual({ a: [1, 2] }, { a: [1, 2] })); // true
 // Strict means types matter. A string is never equal to a number.
 console.log(isDeepStrictEqual({ a: 1 }, { a: "1" })); // false
 
-// In tests, prefer the asserting variant, which prints a readable diff of
-// the two values on failure.
+// In tests, prefer an asserting variant, which throws with a readable diff
+// of the two values on failure.
 import { assertEquals } from "jsr:@std/assert";
 
 assertEquals({ a: [1, 2] }, { a: [1, 2] });
 console.log("assertEquals passed"); // assertEquals passed
+
+// The Node.js equivalent assertion also works in Deno.
+import { deepStrictEqual } from "node:assert/strict";
+
+deepStrictEqual({ a: [1, 2] }, { a: [1, 2] });
+console.log("deepStrictEqual passed"); // deepStrictEqual passed
