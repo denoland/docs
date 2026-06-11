@@ -820,6 +820,36 @@ export const sidebar = [
         href: "/examples/deno_version/",
         type: "example",
       },
+      {
+        title: "Compile a script into an executable",
+        href: "/examples/deno_compile/",
+        type: "example",
+      },
+      {
+        title: "Write benchmarks with Deno.bench",
+        href: "/examples/deno_bench/",
+        type: "example",
+      },
+      {
+        title: "Find and update outdated dependencies",
+        href: "/examples/deno_outdated/",
+        type: "example",
+      },
+      {
+        title: "Show progress bars and spinners",
+        href: "/examples/progress_spinners/",
+        type: "example",
+      },
+      {
+        title: "Control the terminal with ANSI escape codes",
+        href: "/examples/ansi_terminal/",
+        type: "example",
+      },
+      {
+        title: "Build a CLI with subcommands",
+        href: "/examples/cli_subcommands/",
+        type: "example",
+      },
     ],
   },
   {
@@ -1010,6 +1040,51 @@ export const sidebar = [
         href: "/examples/os_signals_tutorial/",
         type: "tutorial",
       },
+      {
+        title: "Pipe data into a subprocess",
+        href: "/examples/subprocess_stdin/",
+        type: "example",
+      },
+      {
+        title: "Run a subprocess with custom env and cwd",
+        href: "/examples/subprocess_env_cwd/",
+        type: "example",
+      },
+      {
+        title: "Detect a TTY and get terminal size",
+        href: "/examples/terminal_detection/",
+        type: "example",
+      },
+      {
+        title: "Get operating system information",
+        href: "/examples/os_info/",
+        type: "example",
+      },
+      {
+        title: "List network interfaces",
+        href: "/examples/network_interfaces/",
+        type: "example",
+      },
+      {
+        title: "Set and read process exit codes",
+        href: "/examples/exit_codes/",
+        type: "example",
+      },
+      {
+        title: "Use worker_threads in Deno",
+        href: "/examples/worker_threads/",
+        type: "example",
+      },
+      {
+        title: "Use EventEmitter from node:events",
+        href: "/examples/event_emitter/",
+        type: "example",
+      },
+      {
+        title: "Read input line by line with node:readline",
+        href: "/examples/node_readline/",
+        type: "example",
+      },
     ],
   },
   {
@@ -1098,6 +1173,31 @@ export const sidebar = [
       {
         title: "Streaming file operations",
         href: "/examples/streaming_files/",
+        type: "example",
+      },
+      {
+        title: "Read and change file metadata",
+        href: "/examples/file_metadata/",
+        type: "example",
+      },
+      {
+        title: "Find files with glob patterns",
+        href: "/examples/glob_patterns/",
+        type: "example",
+      },
+      {
+        title: "Lock files across processes",
+        href: "/examples/file_locking/",
+        type: "example",
+      },
+      {
+        title: "Truncate a file",
+        href: "/examples/truncate_file/",
+        type: "example",
+      },
+      {
+        title: "Create hard links",
+        href: "/examples/hard_links/",
         type: "example",
       },
     ],
