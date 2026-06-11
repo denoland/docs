@@ -15,40 +15,41 @@
 // We start with a Uint8Array containing the bytes of the string "Hello".
 const bytes = new TextEncoder().encode("Hello");
 
-// To a string: decode the bytes with TextDecoder.
+// To convert to a string, decode the bytes with TextDecoder.
 const text = new TextDecoder().decode(bytes);
 console.log(text); // Hello
 
-// To an ArrayBuffer: a Uint8Array is a view, so `.buffer` returns the
-// underlying buffer — but beware: the view may cover only PART of that
-// buffer (for example, a subarray). Respect byteOffset and byteLength.
+// A Uint8Array is a view over an underlying ArrayBuffer. The view may
+// cover only part of that buffer, so to get an exact ArrayBuffer, slice
+// the range described by byteOffset and byteLength.
 const exact = bytes.buffer.slice(
   bytes.byteOffset,
   bytes.byteOffset + bytes.byteLength,
 );
 console.log(exact.byteLength); // 5
 
-// If you know the view spans the whole buffer, `.buffer` alone is fine and
-// does not copy.
+// If the view is known to span its whole buffer, the buffer property can
+// be used directly. This does not copy the bytes.
 console.log(bytes.buffer.byteLength); // 5
 
-// To a Blob: pass the array in the Blob constructor's parts array.
+// To convert to a Blob, pass the array in the parts list of the Blob
+// constructor.
 const blob = new Blob([bytes]);
 console.log(blob.size); // 5
 
-// To a DataView: pass the buffer along with the view's offset and length so
-// the DataView covers exactly the same bytes.
+// To create a DataView over the same bytes, pass the buffer together with
+// the offset and length of the view.
 const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
 console.log(view.getUint8(4)); // 111
 
-// To a ReadableStream: ReadableStream.from() wraps any iterable. This is
-// useful for APIs that consume streams, like the Response constructor.
+// ReadableStream.from wraps any iterable into a stream. This is useful for
+// APIs that consume streams, like the Response constructor.
 const stream = ReadableStream.from([bytes]);
 console.log(stream instanceof ReadableStream); // true
 
-// To a Buffer (when working with Node.js APIs): Buffer.from(typedArray)
-// copies the bytes. To share memory instead, pass the underlying buffer:
-// Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength).
+// When working with Node.js APIs, convert to a Buffer with Buffer.from.
+// This copies the bytes. To share memory instead, pass the underlying
+// buffer together with the offset and length.
 import { Buffer } from "node:buffer";
 const nodeBuffer = Buffer.from(bytes);
 console.log(nodeBuffer.toString("utf8")); // Hello
