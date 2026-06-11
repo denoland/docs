@@ -103,7 +103,7 @@ export default function Layout(data: Lume.Data) {
         />
         <div
           class={`layout ${
-            data.toc?.length || isReference
+            (data.toc?.length || isReference) && !data.fullWidth
               ? "layout--three-column"
               : "layout--two-column"
           }`}

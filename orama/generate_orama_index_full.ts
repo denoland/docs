@@ -16,6 +16,7 @@
 
 import { walk } from "@std/fs";
 import { fromFileUrl, join, relative } from "@std/path";
+import { buildReference } from "../reference/_lib/group.ts";
 import { MarkdownIndexer } from "./indexing/MarkdownIndexer.ts";
 import { FileSelector } from "./identification/FileSelector.ts";
 import { IndexCollection } from "./indexing/IndexCollection.ts";
@@ -316,6 +317,8 @@ function processApiSymbol(
 async function processApiReference(): Promise<OramaFullDocument[]> {
   console.log("\n🔧 Processing API reference documentation...");
   const apiDocs: OramaFullDocument[] = [];
+  // deno-lint-ignore no-explicit-any
+  const referenceJsons: Record<string, any> = {};
 
   for (const refFile of REFERENCE_FILES) {
     const fullPath = join(ROOT_DIR, refFile.path);
@@ -326,6 +329,7 @@ async function processApiReference(): Promise<OramaFullDocument[]> {
 
       const content = await Deno.readTextFile(fullPath);
       const data = JSON.parse(content);
+      referenceJsons[refFile.apiType] = data;
 
       let processedCount = 0;
       let skippedCount = 0;
@@ -359,6 +363,26 @@ async function processApiReference(): Promise<OramaFullDocument[]> {
     } catch (error) {
       console.warn(`Reference file not found or invalid: ${fullPath}`);
       console.warn(`Error: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+
+  // Symbols now live as anchors on grouped reference pages; remap the old
+  // per-symbol URLs so search results land directly on the right anchor.
+  if (referenceJsons.deno && referenceJsons.web && referenceJsons.node) {
+    try {
+      const { redirects } = buildReference(referenceJsons);
+      let remapped = 0;
+      for (const doc of apiDocs) {
+        const target = redirects[doc.path];
+        if (target) {
+          doc.path = target;
+          doc.url = `${BASE_URL}${target}`;
+          remapped++;
+        }
+      }
+      console.log(`  Remapped ${remapped} API doc URLs to grouped pages.`);
+    } catch (error) {
+      console.warn(`Could not remap API URLs to grouped pages: ${error}`);
     }
   }
 
