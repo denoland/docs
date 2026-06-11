@@ -41,8 +41,7 @@ deno outdated             # see what has newer versions
 
 Deno understands dependencies declared in both `package.json` and `deno.json`,
 and individual npm packages can also be imported inline with `npm:` specifiers.
-See [Dependency management](/runtime/packages/) for
-the full picture.
+See [Dependency management](/runtime/packages/) for the full picture.
 
 ## Run your project with Deno
 
@@ -164,9 +163,9 @@ without emitting, and the compiler is built into the `deno` binary.
 
 ## Keep going
 
-- **[Node.js and npm compatibility](/runtime/fundamentals/node/)** — what's
+- **[Node.js and npm compatibility](/runtime/fundamentals/node/).** What's
   supported (`node:` built-ins, npm packages, globals) and the known gaps.
-- **[Migrating your tsconfig.json](/runtime/reference/ts_config_migration/)** —
-  map `tsconfig.json` options onto `deno.json`.
+- **[Migrating your tsconfig.json](/runtime/reference/ts_config_migration/).**
+  Map `tsconfig.json` options onto `deno.json`.
 - Already on Deno and upgrading a major version? See the
   **[Deno 1.x to 2.x migration guide](/runtime/reference/migration_guide/)**.

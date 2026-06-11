@@ -3,10 +3,10 @@ title: "Build CLI apps"
 description: "Build command-line tools with Deno: read arguments, compile to a single self-contained executable, cross-compile for other platforms, and distribute your tool."
 ---
 
-Deno is a great way to ship command-line tools. Your tool is just TypeScript —
-no build step to run it — and when you're ready to distribute it, `deno compile`
-turns it into a single self-contained executable that runs without Deno
-installed.
+Deno is a great way to ship command-line tools. Your tool is just TypeScript,
+with no build step to run it, and when you're ready to distribute it,
+`deno compile` turns it into a single self-contained executable that runs
+without Deno installed.
 
 ## Read command-line arguments
 
@@ -33,8 +33,7 @@ Hello, Deno!
 ## Compile to a single executable
 
 [`deno compile`](/runtime/reference/cli/compile/) bundles your program and the
-Deno runtime into one binary — no `node_modules`, no install step for your
-users:
+Deno runtime into one binary: no `node_modules`, no install step for your users.
 
 ```sh
 deno compile greet.ts
@@ -73,9 +72,9 @@ greet --name=Deno
 
 ## Going further
 
-- **[deno compile](/runtime/reference/cli/compile/)** — all targets, flags, and
+- **[deno compile](/runtime/reference/cli/compile/).** All targets, flags, and
   asset embedding.
-- **[deno install](/runtime/reference/cli/install/)** — install tools and
+- **[deno install](/runtime/reference/cli/install/).** Install tools and
   dependencies.
-- **[Permissions](/runtime/reference/permissions/)** — choose exactly what your
+- **[Permissions](/runtime/reference/permissions/).** Choose exactly what your
   compiled tool may access.

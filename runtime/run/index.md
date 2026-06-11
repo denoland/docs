@@ -3,8 +3,8 @@ title: "Run code"
 description: "Run JavaScript and TypeScript with Deno: the secure-by-default permission model, running files, URLs and stdin, watch mode, and project tasks."
 ---
 
-Deno runs JavaScript and TypeScript directly — no build step, no config — behind
-a security sandbox that grants access only when you ask for it. This page covers
+Deno runs JavaScript and TypeScript directly (no build step, no config) behind a
+security sandbox that grants access only when you ask for it. This page covers
 how your code actually runs: permissions, the ways to launch it, watch mode, and
 tasks.
 
@@ -26,9 +26,9 @@ deno main.ts          # same as `deno run main.ts`
 ## Permissions: secure by default
 
 This is the part that's different from Node. Code runs in a sandbox with **no
-access to the network, filesystem, environment, or subprocesses** until you grant
-it. A script that tries to read a file without permission stops and asks — or
-fails, if prompts are disabled.
+access to the network, filesystem, environment, or subprocesses** until you
+grant it. A script that tries to read a file without permission stops and asks,
+or fails if prompts are disabled.
 
 Grant access with `--allow-*` flags (each has a short form):
 
@@ -45,7 +45,8 @@ deno run --allow-read=./data --allow-net=api.example.com main.ts
 ```
 
 Use `--deny-*` to carve out exceptions, or `-A` / `--allow-all` to skip the
-sandbox entirely (handy in trusted environments, but it gives up the guarantees):
+sandbox entirely (handy in trusted environments, but it gives up the
+guarantees):
 
 ```sh
 deno run -A main.ts
@@ -56,7 +57,7 @@ See [Permissions](/runtime/reference/permissions/) for every flag and
 
 ## Run from a URL or stdin
 
-Deno can run code straight from a URL — useful for one-off tools and installers —
+Deno can run code straight from a URL (useful for one-off tools and installers)
 or piped in over stdin:
 
 ```sh
@@ -69,8 +70,8 @@ grant them.
 
 ## Reload on change with watch mode
 
-Add `--watch` and Deno reruns your program whenever a file it depends on changes
-— no `nodemon`, no extra dependency:
+Add `--watch` and Deno reruns your program whenever a file it depends on
+changes. No `nodemon`, no extra dependency:
 
 ```sh
 deno run --watch main.ts
@@ -81,7 +82,7 @@ deno run --watch main.ts
 ## Run project tasks
 
 Define repeatable commands in `deno.json` and run them with
-[`deno task`](/runtime/reference/cli/task/) — the equivalent of `npm run`:
+[`deno task`](/runtime/reference/cli/task/), the equivalent of `npm run`:
 
 ```json title="deno.json"
 {
@@ -109,13 +110,13 @@ deno repl
 
 ## Going further
 
-- **[Write an HTTP server](/runtime/fundamentals/http_server/)** — handle
+- **[Write an HTTP server](/runtime/fundamentals/http_server/).** Handle
   requests with the web-standard `Deno.serve`.
-- **[Web development](/runtime/fundamentals/web_dev/)** — build apps with Fresh,
+- **[Web development](/runtime/fundamentals/web_dev/).** Build apps with Fresh,
   Next.js, Astro, and web-standard APIs.
-- **[Web platform APIs](/runtime/reference/web_platform_apis/)** — `fetch`,
+- **[Web platform APIs](/runtime/reference/web_platform_apis/).** `fetch`,
   `Request`/`Response`, streams, Web Crypto, and the other browser globals Deno
   implements.
-- **[Debugging](/runtime/fundamentals/debugging/)** — attach Chrome DevTools or
+- **[Debugging](/runtime/fundamentals/debugging/).** Attach Chrome DevTools or
   your editor's debugger.
-- **[deno run reference](/runtime/reference/cli/run/)** — every flag in detail.
+- **[deno run reference](/runtime/reference/cli/run/).** Every flag in detail.
