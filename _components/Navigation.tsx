@@ -37,7 +37,7 @@ export default function (
   );
 }
 
-function getSectionData(data: Lume.Data, currentUrl: string) {
+export function getSectionData(data: Lume.Data, currentUrl: string) {
   // Maps section data from reference_gen pages
   if (data.page?.data?.data?.categories_panel) {
     const categoryPanel = data.page.data.data.categories_panel;
