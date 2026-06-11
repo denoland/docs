@@ -33,9 +33,8 @@ stdout/stderr are not a TTY, or when the `--no-prompt` flag is passed to the
 Users can also explicitly disallow access to specific resources by using the
 `--deny-read`, `--deny-write`, `--deny-net`, `--deny-env`, `--deny-run`,
 `--deny-sys`, `--deny-ffi`, and `--deny-import` flags. These flags take
-precedence over the allow flags. For example, if you
-allow network access but deny access to a specific domain, the deny flag will
-take precedence.
+precedence over the allow flags. For example, if you allow network access but
+deny access to a specific domain, the deny flag will take precedence.
 
 Deno also provides a `--allow-all` flag that grants all permissions to the
 script. This **disables** the security sandbox entirely, and should be used with
@@ -521,8 +520,8 @@ $ deno run --allow-import main.ts
 Note that specifying an allow list for `--allow-import` will override the list
 of default hosts.
 
-Use `--deny-import` to block importing from specific hosts, even when they
-would otherwise be allowed. Deny flags take precedence over allow flags:
+Use `--deny-import` to block importing from specific hosts, even when they would
+otherwise be allowed. Deny flags take precedence over allow flags:
 
 ```sh
 # allow the default import hosts, except esm.sh

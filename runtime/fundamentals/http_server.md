@@ -343,10 +343,10 @@ add `satisfies Deno.ServeDefaultExport` to the `export default { ... }`.
 
 ## Building on these examples
 
-You will likely want to expand on these examples to create more complex
-servers. Everything here is built on web-standard `Request`/`Response`, so it
-composes with routing libraries and frameworks from the ecosystem — for
-example [Oak](https://jsr.io/@oak/oak) or [Hono](https://hono.dev) for
-middleware and routing, or a full framework. See
+You will likely want to expand on these examples to create more complex servers.
+Everything here is built on web-standard `Request`/`Response`, so it composes
+with routing libraries and frameworks from the ecosystem — for example
+[Oak](https://jsr.io/@oak/oak) or [Hono](https://hono.dev) for middleware and
+routing, or a full framework. See
 [Web development](/runtime/fundamentals/web_dev/) for an overview of building
 web apps with Deno.
