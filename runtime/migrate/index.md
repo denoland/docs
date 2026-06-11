@@ -172,5 +172,3 @@ installed side by side.
   supported (`node:` built-ins, npm packages, globals) and the known gaps.
 - **[Migrating your tsconfig.json](/runtime/reference/ts_config_migration/).**
   Map `tsconfig.json` options onto `deno.json`.
-- Already on Deno and upgrading a major version? See the
-  **[Deno 1.x to 2.x migration guide](/runtime/reference/migration_guide/)**.

@@ -7,6 +7,14 @@ oldUrl:
   - /runtime/reference/migrate_deprecations/
 ---
 
+:::note Historical document
+
+This guide covers the one-time migration from Deno 1.x to Deno 2.x and is no
+longer actively updated. If you're coming to Deno from Node.js, see
+[Migrate from Node.js](/runtime/migrate/) instead.
+
+:::
+
 While we’ve accomplished a ton in Deno 1.x, the next major version is focused on
 using Deno **at scale**. This means seamless interoperability with Node.js and
 npm JavaScript infrastructure and supporting a wider range of projects and
