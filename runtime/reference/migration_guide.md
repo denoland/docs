@@ -192,7 +192,7 @@ Use the `--permit-no-files` CLI flag instead.
 - `--jobs`
 
 Use the
-[`DENO_JOBS`](https://docs.deno.com/runtime/manual/basics/env_variables/#special-environment-variables)
+[`DENO_JOBS`](/runtime/reference/env_variables/#special-environment-variables)
 environment variable instead.
 
 ```diff
@@ -304,8 +304,6 @@ See [deno#9795][deno#9795] for details.
 - `Deno.close()`
 
 Use the `.close()` method on the resource instead.
-
-<a href="#" id="rid">test</a>
 
 ```diff
   const conn = await Deno.connect({ port: 80 });
@@ -604,7 +602,7 @@ instead.
 ```diff
   using file = Deno.openSync("/foo/bar.txt", { read: true, write: true });
 
-  file.writeSync("new TextEncoder().encode("Hello, world!"));
+  file.writeSync(new TextEncoder().encode("Hello, world!"));
   file.truncateSync(1);
 - Deno.fsyncSync(file.rid);
 + file.syncSync();
