@@ -86,7 +86,7 @@ import bytes from "./image.png" with { type: "bytes" };
 console.log(bytes instanceof Uint8Array);
 // true
 console.log(bytes);
-Uint8Array(12) [
+// Uint8Array(12) [
 //    72, 101, 108, 108, 111,
 //    44,  32,  68, 101, 110,
 //   111,  33
