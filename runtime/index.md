@@ -44,14 +44,7 @@ few minutes.
 Install the runtime with one command:
 
 <deno-tabs group-id="operating-systems">
-<deno-tab value="linux" label="Linux" default>
-
-```sh
-curl -fsSL https://deno.land/install.sh | sh
-```
-
-</deno-tab>
-<deno-tab value="mac" label="macOS">
+<deno-tab value="mac" label="macOS / Linux" default>
 
 ```sh
 curl -fsSL https://deno.land/install.sh | sh
