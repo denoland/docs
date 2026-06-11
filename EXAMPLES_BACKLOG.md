@@ -75,7 +75,7 @@ Binary data.
       [to-arraybuffer](https://bun.com/docs/guides/streams/to-arraybuffer),
       [to-array](https://bun.com/docs/guides/streams/to-array),
       [to-buffer](https://bun.com/docs/guides/streams/to-buffer))
-- [ ] Convert a Node.js Readable — sections: to string, JSON, Blob, Uint8Array,
+- [x] Convert a Node.js Readable — sections: to string, JSON, Blob, Uint8Array,
       ArrayBuffer (Bun:
       [to-string](https://bun.com/docs/guides/streams/node-readable-to-string),
       [to-json](https://bun.com/docs/guides/streams/node-readable-to-json),
@@ -158,9 +158,9 @@ Existing: "HTTP server: WebSockets", "Build a Realtime WebSocket Application"
 Existing: spawn, collecting output, command line arguments, OS signals, process
 information, command cancellation.
 
-- [ ] Read from stdin ([Bun](https://bun.com/docs/guides/process/stdin)) —
+- [x] Read from stdin ([Bun](https://bun.com/docs/guides/process/stdin)) —
       `Deno.stdin` appears nowhere in examples
-- [ ] Communicate with a child process over IPC
+- [x] Communicate with a child process over IPC
       ([Bun](https://bun.com/docs/guides/process/ipc))
 
 ## Reading & writing files (we cover most; 4 gaps)
@@ -169,14 +169,14 @@ Existing: reading, writing, deleting, moving/renaming, existence checks,
 watching, walking, temp files, symlinks, streaming file ops, "Stream output to a
 local file", unix cat.
 
-- [ ] Get the MIME type of a file
+- [x] Get the MIME type of a file
       ([Bun](https://bun.com/docs/guides/read-file/mime))
-- [ ] Copy a file (`Deno.copyFile`)
+- [x] Copy a file (`Deno.copyFile`)
       ([Bun](https://bun.com/docs/guides/write-file/file-cp)) — unused in any
       example today
-- [ ] Write a file incrementally with a writer
+- [x] Write a file incrementally with a writer
       ([Bun](https://bun.com/docs/guides/write-file/filesink))
-- [ ] Write to stdout (`Deno.stdout`)
+- [x] Write to stdout (`Deno.stdout`)
       ([Bun](https://bun.com/docs/guides/write-file/stdout))
 
 ## Testing (we cover the core; ~10 task-shaped gaps)
@@ -211,18 +211,18 @@ here is granularity — each discrete task is a findable page.
 Existing: UUIDs, ULID, hex/base64, hashing (digests), version, module metadata,
 gzip *de*compression.
 
-- [ ] Hash and verify passwords (`@std`/bcrypt/argon2)
+- [x] Hash and verify passwords (`@std`/bcrypt/argon2)
       ([Bun](https://bun.com/docs/guides/util/hash-a-password)) — we only show
       digests, never password hashing
-- [ ] Compress and decompress data — one page covering gzip and DEFLATE via
+- [x] Compress and decompress data — one page covering gzip and DEFLATE via
       CompressionStream (Bun: [gzip](https://bun.com/docs/guides/util/gzip),
       [deflate](https://bun.com/docs/guides/util/deflate))
-- [ ] Check if two objects are deeply equal
+- [x] Check if two objects are deeply equal
       ([Bun](https://bun.com/docs/guides/util/deep-equals))
-- [ ] Escape an HTML string
+- [x] Escape an HTML string
       ([Bun](https://bun.com/docs/guides/util/escape-html))
-- [ ] Sleep / delay execution ([Bun](https://bun.com/docs/guides/util/sleep))
-- [ ] Convert between file URLs and paths — one page, both directions (Bun:
+- [x] Sleep / delay execution ([Bun](https://bun.com/docs/guides/util/sleep))
+- [x] Convert between file URLs and paths — one page, both directions (Bun:
       [file-url-to-path](https://bun.com/docs/guides/util/file-url-to-path),
       [path-to-file-url](https://bun.com/docs/guides/util/path-to-file-url))
 - [ ] Find the path to an executable (`which`)
@@ -280,6 +280,15 @@ Prisma, Drizzle, Supabase, PlanetScale, DuckDB, Neon?).
 - [ ] Add the Docker guide (`/runtime/reference/docker/`) to the Examples
       catalog — it is our best deploy doc and is invisible from /examples/
 - [ ] Add the debugging reference similarly if no new example is written
+
+## Content consolidation candidates
+
+- [ ] Databases: Redis, Prisma, and Mongoose each have a tutorial, a quick
+      example, and/or a video covering overlapping material (now labeled "Redis"
+      / "Redis quick start" / "(video)" after the relabel in #3218). Consolidate
+      each product to one canonical page with the video embedded and redirect
+      the retired URLs, the same way unzip_gzipped_file was folded into
+      compress_decompress (#3210).
 
 ## Style follow-ups from the audit (apply when writing the above)
 
