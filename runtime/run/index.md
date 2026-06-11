@@ -111,7 +111,7 @@ deno repl
 ## Going further
 
 - **[Write an HTTP server](/runtime/fundamentals/http_server/).** Handle
-  requests with the web-standard `Deno.serve`.
+  requests with the web-standard [`Deno.serve`](/api/deno/~/Deno.serve).
 - **[Web development](/runtime/fundamentals/web_dev/).** Build apps with Fresh,
   Next.js, Astro, and web-standard APIs.
 - **[Web platform APIs](/runtime/reference/web_platform_apis/).** `fetch`,
