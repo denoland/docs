@@ -163,6 +163,11 @@ export const sidebar = [
           "https://www.youtube.com/watch?v=7uiL4WYvZVs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=8",
         type: "video",
       },
+      {
+        title: "Re-map import paths",
+        href: "/examples/import_maps_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
 
@@ -1196,6 +1201,11 @@ export const sidebar = [
         title: "Exponential backoff",
         href: "/examples/exponential_backoff/",
         type: "example",
+      },
+      {
+        title: "Debugging with Chrome DevTools",
+        href: "/runtime/fundamentals/debugging/",
+        type: "tutorial",
       },
     ],
   },
