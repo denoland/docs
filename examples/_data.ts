@@ -242,6 +242,56 @@ export const sidebar = [
         href: "/examples/exponential_backoff/",
         type: "example",
       },
+      {
+        title: "Debounce a function",
+        href: "/examples/debounce_function/",
+        type: "example",
+      },
+      {
+        title: "Run async tasks with a concurrency limit",
+        href: "/examples/concurrency_limit/",
+        type: "example",
+      },
+      {
+        title: "Add a timeout to any promise",
+        href: "/examples/promise_timeout/",
+        type: "example",
+      },
+      {
+        title: "Memoize an expensive function",
+        href: "/examples/memoize_function/",
+        type: "example",
+      },
+      {
+        title: "Parse and compare semver versions",
+        href: "/examples/semver_versions/",
+        type: "example",
+      },
+      {
+        title: "Convert string case",
+        href: "/examples/string_case/",
+        type: "example",
+      },
+      {
+        title: "Escape text for regular expressions",
+        href: "/examples/regexp_escape/",
+        type: "example",
+      },
+      {
+        title: "Parse and format dates",
+        href: "/examples/date_format_parse/",
+        type: "example",
+      },
+      {
+        title: "Structured logging",
+        href: "/examples/structured_logging/",
+        type: "example",
+      },
+      {
+        title: "Format bytes and durations for humans",
+        href: "/examples/format_bytes_duration/",
+        type: "example",
+      },
     ],
   },
 
@@ -866,6 +916,41 @@ export const sidebar = [
         href: "/examples/importing_bytes/",
         type: "example",
       },
+      {
+        title: "Parsing and serializing INI",
+        href: "/examples/parsing_serializing_ini/",
+        type: "example",
+      },
+      {
+        title: "Parsing JSONC",
+        href: "/examples/parsing_jsonc/",
+        type: "example",
+      },
+      {
+        title: "Parse large CSV files as streams",
+        href: "/examples/csv_streaming/",
+        type: "example",
+      },
+      {
+        title: "Stream JSON Lines data",
+        href: "/examples/json_lines/",
+        type: "example",
+      },
+      {
+        title: "Encode and decode MessagePack",
+        href: "/examples/msgpack_encoding/",
+        type: "example",
+      },
+      {
+        title: "Encode and decode CBOR",
+        href: "/examples/cbor_encoding/",
+        type: "example",
+      },
+      {
+        title: "Compress data with node:zlib",
+        href: "/examples/zlib_compression/",
+        type: "example",
+      },
     ],
   },
   {
@@ -1209,6 +1294,11 @@ export const sidebar = [
         title: "File system events",
         href: "/examples/file_system_events_tutorial/",
         type: "tutorial",
+      },
+      {
+        title: "Create and extract tar archives",
+        href: "/examples/tar_archives/",
+        type: "example",
       },
     ],
   },
