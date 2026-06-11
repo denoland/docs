@@ -66,9 +66,9 @@ export default function ApiLanding(
               <a
                 key={tile.href}
                 href={tile.href}
-                className="flex flex-col gap-1 p-4 rounded-lg border border-foreground-tertiary !no-underline hover:bg-header-highlight hover:border-foreground-secondary transition-colors duration-150"
+                className="group flex flex-col gap-1 p-4 rounded-lg border border-foreground-tertiary !no-underline hover:border-primary transition-colors duration-150"
               >
-                <span className="font-semibold !text-foreground-primary">
+                <span className="font-semibold !text-foreground-primary group-hover:underline underline-offset-4 decoration-primary">
                   {tile.title}
                 </span>
                 {tile.description && (
