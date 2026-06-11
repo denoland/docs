@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-05-28
 title: Command line interface
-description: "A comprehensive guide to using Deno's command-line interface (CLI). Learn about running scripts, managing permissions, using watch mode, and configuring Deno's runtime behavior through command-line flags and options."
+description: "Practical patterns for Deno's command-line interface: passing script arguments, runtime flag ordering, watch mode and its exclusions, and hot module replacement."
 oldUrl:
   - /manual/getting_started/command_line_interface
   - /runtime/manual/getting_started/command_line_interface/
@@ -16,31 +16,10 @@ standalone binaries, and a lot more. Each subcommand (`run`, `test`, `fmt`,
 `deno <subcommand> --help` to see them.
 
 For the complete list of subcommands and flags, see the
-[CLI reference](/runtime/reference/cli/). This page covers the patterns you'll
-hit early on: how to run code, how to pass arguments, and how to use watch mode.
-
-## Running scripts
-
-You can run a local TypeScript or JavaScript file by specifying its path
-relative to the current working directory:
-
-```shell
-deno run main.ts
-```
-
-Deno supports running scripts directly from URLs. This is particularly useful
-for quickly testing or running code without downloading it first:
-
-```shell
-deno run https://docs.deno.com/examples/scripts/hello_world.ts
-```
-
-You can also run a script by piping it through standard input. This is useful
-for integrating with other command-line tools or dynamically generating scripts:
-
-```shell
-cat main.ts | deno run -
-```
+[CLI reference](/runtime/reference/cli/). For the basics of running code (files,
+URLs, stdin, tasks, the permission flags), see the
+[Running code guide](/runtime/run/). This page covers the patterns that trip
+people up early: passing arguments, flag ordering, and watch mode's details.
 
 ## Passing script arguments
 

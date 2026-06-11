@@ -77,7 +77,9 @@ changes. No `nodemon`, no extra dependency:
 deno run --watch main.ts
 ```
 
-`deno test`, `deno fmt`, and others accept `--watch` too.
+`deno test`, `deno fmt`, and others accept `--watch` too. For what gets watched,
+excluding paths, and hot module replacement, see the
+[CLI patterns page](/runtime/getting_started/command_line_interface/#watch-mode).
 
 ## Run project tasks
 
