@@ -43,14 +43,7 @@ few minutes.
 Install the runtime with one command:
 
 <deno-tabs group-id="operating-systems">
-<deno-tab value="linux" label="Linux">
-
-```sh
-curl -fsSL https://deno.land/install.sh | sh
-```
-
-</deno-tab>
-<deno-tab value="mac" label="macOS" default>
+<deno-tab value="mac" label="macOS / Linux" default>
 
 ```sh
 curl -fsSL https://deno.land/install.sh | sh
@@ -121,10 +114,10 @@ test runner is built in, so there's nothing to install:
 ```sh
 $ deno test
 running 2 tests from ./main_test.ts
-handler returns hello ... ok (1ms)
-handler returns 404 for unknown route ... ok (1ms)
+returns html on / ... ok (12ms)
+returns json on /api ... ok (0ms)
 
-ok | 2 passed | 0 failed (3ms)
+ok | 2 passed | 0 failed (15ms)
 ```
 
 ## Add a dependency

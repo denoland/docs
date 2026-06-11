@@ -401,7 +401,13 @@ site.addEventListener("afterBuild", async () => {
         try {
           const copies: Promise<void>[] = [];
           for await (
-            const entry of walk(dir, { exts: [".md"], includeDirs: false })
+            // Skip underscore-prefixed dirs (e.g. std/_overrides) — build
+            // inputs, not published content.
+            const entry of walk(dir, {
+              exts: [".md"],
+              includeDirs: false,
+              skip: [/[/\\]_/],
+            })
           ) {
             const destPath = site.dest(entry.path);
             copies.push(

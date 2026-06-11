@@ -689,10 +689,14 @@ build fully hermetic if the remote source disappears; vendoring closes that gap.
 Commit `deno.json`, `deno.lock`, and (if using vendor) the entire `vendor/`
 directory.
 
-:::tip Automate a weekly dependency refresh: a scheduled CI job that unfreezes,
-runs `deno add --latest` (or manually bumps key packages), executes tests, and
-opens a pull request with the updated `deno.lock` (and `vendor/`). This keeps
-security patches flowing while keeping day-to-day builds deterministic. :::
+:::tip Automate a weekly dependency refresh
+
+A scheduled CI job that unfreezes, runs `deno add --latest` (or manually bumps
+key packages), executes tests, and opens a pull request with the updated
+`deno.lock` (and `vendor/`) keeps security patches flowing while keeping
+day-to-day builds deterministic.
+
+:::
 
 ## Private repositories
 
