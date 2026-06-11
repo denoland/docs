@@ -1,5 +1,6 @@
 ---
 title: "Introduction to Deno APIs"
+description: "Explore Deno's built-in APIs for file system operations, command line arguments, environment variables, and serving HTTP requests."
 url: /examples/intro_to_deno_apis/
 videoUrl: https://www.youtube.com/watch?v=p28ujFMrdA0&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=7
 layout: video.tsx

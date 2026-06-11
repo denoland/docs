@@ -1,5 +1,6 @@
 ---
 title: "Interoperability with Node.js"
+description: "Learn how to use Node.js built-in APIs, npm modules, and JSR packages in your Deno projects."
 url: /examples/interoperability_with_nodejs/
 videoUrl: https://www.youtube.com/watch?v=mgX1ymfqPSQ&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=2
 layout: video.tsx

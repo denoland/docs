@@ -1,5 +1,6 @@
 ---
 title: "What is Deno?"
+description: "A short introduction to Deno, the secure JavaScript, TypeScript, and WebAssembly runtime built on web standards, and its history."
 url: /examples/what_is_deno/
 videoUrl: https://www.youtube.com/watch?v=KPTOo4k8-GE&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe
 layout: video.tsx
