@@ -60,15 +60,9 @@ mind. These teams work on complex codebases, sharing internal code, often using
 private registries.
 
 With Deno 2 your team can leverage private npm registries the same way you'd do
-with Node.js and npm, using an `.npmrc` file:
-
-```js title=".npmrc"
-@mycompany:registry=http://mycompany.com:8111/
-mycompany.com:8111/:_authToken=token
-```
-
-Learn more about private registry configuration
-[on `npm packages` page](/runtime/fundamentals/node/#private-registries).
+with Node.js and npm, using an `.npmrc` file. See
+[private registries](/runtime/fundamentals/node/#private-registries) for the
+configuration details.
 
 Deno 2 has workspace support, allowing you to mix Deno-first and Node-first
 packages in the same monorepo, making incremental adoption fast and

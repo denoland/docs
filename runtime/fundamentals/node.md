@@ -797,11 +797,13 @@ to your private registry. The `.npmrc` file must be in the project root or
 
 ```sh
 @mycompany:registry=http://mycompany.com:8111/
-//mycompany.com:8111/:_auth=secretToken
+//mycompany.com:8111/:_authToken=secretToken
 ```
 
 Replace `http://mycompany.com:8111/` with the actual URL of your private
-registry and `secretToken` with your authentication token.
+registry and `secretToken` with your authentication token. `_authToken` is the
+standard bearer-token form; registries that use legacy `_auth` credentials are
+also supported (see the `.npmrc` features list below).
 
 Then update Your `deno.json` or `package.json` to specify the import path for
 your private package. For example:
