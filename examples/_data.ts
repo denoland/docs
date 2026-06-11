@@ -1020,11 +1020,6 @@ export const sidebar = [
         href: "/examples/streaming_files/",
         type: "example",
       },
-      {
-        title: "Unzip gzipped file",
-        href: "/examples/unzip_gzipped_file/",
-        type: "example",
-      },
     ],
   },
   {

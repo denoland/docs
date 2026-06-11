@@ -1,10 +1,10 @@
 /**
  * @title Compress and decompress data
  * @difficulty beginner
- * @tags cli, deploy, web
- * @run <url>
+ * @tags cli, deploy
+ * @run -R -W <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/CompressionStream} MDN: CompressionStream
- * @resource {https://docs.deno.com/examples/unzip_gzipped_file/} Example: Unzip gzipped file
+ * @resource {https://docs.deno.com/examples/streaming_files/} Example: Streaming file operations
  * @group Encoding
  *
  * Compressing data before storing or sending it saves space and bandwidth.
@@ -36,5 +36,29 @@ const deflated = await new Response(
 ).bytes();
 console.log(deflated.length); // 41
 
-// Because these are streams, large files can be compressed on the fly
-// without loading them into memory, straight from file to file.
+// Because these are streams, files of any size can be processed without
+// loading them into memory, straight from file to file. We gzip a file on
+// disk and unpack it again.
+const dir = await Deno.makeTempDir();
+await Deno.writeTextFile(`${dir}/large.json`, input);
+
+// To compress a file, pipe its readable stream through a CompressionStream
+// into the output file. The pipe closes both files when it finishes.
+const source = await Deno.open(`${dir}/large.json`);
+const gzFile = await Deno.create(`${dir}/large.json.gz`);
+await source.readable
+  .pipeThrough(new CompressionStream("gzip"))
+  .pipeTo(gzFile.writable);
+
+// To decompress a gzipped file, pipe it through a DecompressionStream the
+// same way.
+const gzipped = await Deno.open(`${dir}/large.json.gz`);
+const restored = await Deno.create(`${dir}/restored.json`);
+await gzipped.readable
+  .pipeThrough(new DecompressionStream("gzip"))
+  .pipeTo(restored.writable);
+
+console.log((await Deno.readTextFile(`${dir}/restored.json`)) === input); // true
+
+// Reading and writing files requires the -R and -W permissions.
+await Deno.remove(dir, { recursive: true });
