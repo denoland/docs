@@ -5,7 +5,7 @@ url: /examples/testing_library_tutorial/
 ---
 
 [Testing Library](https://testing-library.com/) encourages asserting on what the
-user sees — roles, labels, text — instead of implementation details. It runs in
+user sees (roles, labels, text) instead of implementation details. It runs in
 `deno test` with a simulated DOM from
 [happy-dom](https://github.com/capricorn86/happy-dom).
 
@@ -41,8 +41,8 @@ Deno.test("renders and clicks a button", () => {
 });
 ```
 
-Run it with environment and read access — happy-dom's dependencies check a few
-environment variables on startup:
+Run it with environment and read access, since happy-dom's dependencies check a
+few environment variables on startup:
 
 ```sh
 $ deno test --allow-env --allow-read
@@ -60,14 +60,14 @@ implementation. The queries work fine at runtime.
 ## Why queries instead of selectors
 
 `getByRole("button")` fails the test if the element stops being a button, and
-`getByText` fails if the visible text changes — the assertions track what a user
+`getByText` fails if the visible text changes: the assertions track what a user
 experiences rather than class names or DOM structure. The full query catalog
 (`findBy`, `queryAll`, label and placeholder queries) is in the
 [Testing Library documentation](https://testing-library.com/docs/queries/about).
 
 ## Where this fits
 
-For testing DOM code without Testing Library — using `deno-dom` or parsing HTML
-directly — see [Testing web applications](/examples/web_testing_tutorial/).
+For testing DOM code without Testing Library, using `deno-dom` or parsing HTML
+directly, see [Testing web applications](/examples/web_testing_tutorial/).
 Framework wrappers like `@testing-library/react` layer on the same setup with a
 framework renderer in between.

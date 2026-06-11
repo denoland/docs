@@ -42,7 +42,7 @@ $ deno test cart.test.ts
 ok | 1 passed (2 steps) | 0 failed (12ms)
 ```
 
-Unlike Jest, nothing is injected as a global — `describe`, `it`, `expect`, and
+Unlike Jest, nothing is injected as a global: `describe`, `it`, `expect`, and
 hooks are explicit imports, so each file states what it uses.
 
 ## What maps to what
@@ -76,8 +76,8 @@ equivalent to migrate. File selection moves into `deno.json`:
 
 ## Module mocks
 
-There is no equivalent of `jest.mock("./module")` — module records are immutable
-in Deno. Tests that rely on it migrate to one of:
+There is no equivalent of `jest.mock("./module")`, because module records are
+immutable in Deno. Tests that rely on it migrate to one of:
 
 - dependency injection: pass the collaborator in, and hand the test a
   [spy or stub](/examples/mocking_tutorial/),
@@ -88,7 +88,7 @@ under test.
 
 ## Keep npm packages where it helps
 
-Test helpers from npm keep working through `npm:` specifiers — for example
+Test helpers from npm keep working through `npm:` specifiers, for example
 `npm:@testing-library/dom` for DOM assertions (see
 [Use Testing Library with Deno](/examples/testing_library_tutorial/)). The test
 runner itself is the part you migrate.
