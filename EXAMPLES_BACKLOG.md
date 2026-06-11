@@ -287,3 +287,11 @@ Prisma, Drizzle, Supabase, PlanetScale, DuckDB, Neon?).
       everywhere; doubles as reader self-verification)
 - [ ] Strengthen the Postgres/database quick examples: env vars and error
       handling instead of hardcoded credentials
+- [ ] Reconsider the example page layout: the two-column rendering (italic,
+      right-aligned prose in a narrow left strip, code on the right) reads like
+      a gimmick and makes it harder to follow what's going on than a plain
+      vertical prose/code/prose/code flow. Likely fix is in
+      `examples/_components/SnippetComponent.tsx` (stack prose above code, full
+      width); while in there, render snippet prose backticks as `<code>` — today
+      comments render as plain text, so backticks in existing examples (e.g.
+      reading_files.ts) show up literally on the page.
