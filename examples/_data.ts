@@ -485,6 +485,21 @@ export const sidebar = [
         href: "/examples/bdd_tutorial/",
         type: "tutorial",
       },
+      {
+        title: "Skipping and focusing tests",
+        href: "/examples/tests_skip_focus/",
+        type: "example",
+      },
+      {
+        title: "Filtering and controlling test runs",
+        href: "/examples/tests_run_control/",
+        type: "example",
+      },
+      {
+        title: "Use Testing Library with Deno",
+        href: "/examples/testing_library_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
