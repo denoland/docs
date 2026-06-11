@@ -532,10 +532,11 @@ You can also define multiple entry points:
 
 This configuration will:
 
-- expose `module1` and `module2` as entry points for your package,
-- allow importing any file from the `utils` directory using a wildcard. This
-  means users can import these modules using the specified paths, while other
-  files in your package remain private.
+- expose `module1` and `module2` as entry points for your package, and
+- make `./src/mod.ts` the default entry point (`.`).
+
+Users can import these modules using the specified paths, while other files in
+your package remain private.
 
 To use the exports in your code, you can import them like this:
 
