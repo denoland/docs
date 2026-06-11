@@ -29,14 +29,14 @@ page per "from" type with an anchored section per target, and each conversion
 listed as its own entry in the examples index/search pointing at the anchor
 (same many-entries-few-pages model as the API reference).
 
-- [ ] Convert an ArrayBuffer — sections: to string, Uint8Array, Blob, DataView,
+- [x] Convert an ArrayBuffer — sections: to string, Uint8Array, Blob, DataView,
       array of numbers, `node:buffer` Buffer (Bun splits these:
       [to-string](https://bun.com/docs/guides/binary/arraybuffer-to-string),
       [to-typedarray](https://bun.com/docs/guides/binary/arraybuffer-to-typedarray),
       [to-blob](https://bun.com/docs/guides/binary/arraybuffer-to-blob),
       [to-array](https://bun.com/docs/guides/binary/arraybuffer-to-array),
       [to-buffer](https://bun.com/docs/guides/binary/arraybuffer-to-buffer))
-- [ ] Convert a Uint8Array — sections: to string, ArrayBuffer, Blob, DataView,
+- [x] Convert a Uint8Array — sections: to string, ArrayBuffer, Blob, DataView,
       ReadableStream, Buffer (Bun:
       [to-string](https://bun.com/docs/guides/binary/typedarray-to-string),
       [to-arraybuffer](https://bun.com/docs/guides/binary/typedarray-to-arraybuffer),
@@ -44,14 +44,14 @@ listed as its own entry in the examples index/search pointing at the anchor
       [to-dataview](https://bun.com/docs/guides/binary/typedarray-to-dataview),
       [to-readablestream](https://bun.com/docs/guides/binary/typedarray-to-readablestream),
       [to-buffer](https://bun.com/docs/guides/binary/typedarray-to-buffer))
-- [ ] Convert a Blob — sections: to string, ArrayBuffer, Uint8Array,
+- [x] Convert a Blob — sections: to string, ArrayBuffer, Uint8Array,
       ReadableStream, DataView (Bun:
       [to-string](https://bun.com/docs/guides/binary/blob-to-string),
       [to-arraybuffer](https://bun.com/docs/guides/binary/blob-to-arraybuffer),
       [to-typedarray](https://bun.com/docs/guides/binary/blob-to-typedarray),
       [to-stream](https://bun.com/docs/guides/binary/blob-to-stream),
       [to-dataview](https://bun.com/docs/guides/binary/blob-to-dataview))
-- [ ] Convert a Buffer (`node:buffer` interop) — sections: to string,
+- [x] Convert a Buffer (`node:buffer` interop) — sections: to string,
       Uint8Array, ArrayBuffer, Blob, ReadableStream; include DataView-to-string
       here too (Bun:
       [to-string](https://bun.com/docs/guides/binary/buffer-to-string),
@@ -66,7 +66,7 @@ listed as its own entry in the examples index/search pointing at the anchor
 Existing: "Piping streams", "Fetch and stream data". Same consolidation model as
 Binary data.
 
-- [ ] Convert a ReadableStream — sections: to string, JSON, Blob, Uint8Array,
+- [x] Convert a ReadableStream — sections: to string, JSON, Blob, Uint8Array,
       ArrayBuffer, array of chunks, `node:buffer` Buffer (Bun:
       [to-string](https://bun.com/docs/guides/streams/to-string),
       [to-json](https://bun.com/docs/guides/streams/to-json),
