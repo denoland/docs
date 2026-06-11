@@ -2,6 +2,8 @@
 last_modified: 2026-05-17
 title: "Linting and formatting"
 description: "A guide to Deno's built-in code quality tools. Learn how to use deno lint and deno fmt commands, configure rules, integrate with CI/CD pipelines, and maintain consistent code style across your projects."
+oldUrl:
+  - /runtime/fundamentals/linting_and_formatting/
 ---
 
 In an ideal world, your code is always clean, consistent, and free of pesky

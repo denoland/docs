@@ -850,7 +850,7 @@
   :host {
     --header-height: 6rem;
     --subnav-height: 2.5rem;
-    --layout-max-width: 90rem;
+    --layout-max-width: 96rem;
     /* Advertise support to the UA and extensions; enables form controls/scrollbar theming */
     color-scheme: light dark;
 

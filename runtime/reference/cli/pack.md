@@ -229,5 +229,5 @@ push a tarball to npm with `deno pack` for users who haven't adopted JSR yet.
   `deno pack` uses internally
 - [`deno bump-version`](/runtime/reference/cli/bump_version/) — bump `version`
   in `deno.json` / `package.json` before packing
-- [Publishing modules](/runtime/fundamentals/dependency_management/#publishing-modules)
-  — overview of where Deno-authored libraries can be published
+- [Publishing modules](/runtime/packages/#publishing-modules) — overview of
+  where Deno-authored libraries can be published

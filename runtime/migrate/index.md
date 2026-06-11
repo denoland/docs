@@ -1,8 +1,9 @@
 ---
 last_modified: 2026-06-08
-title: "Migrating from Node.js to Deno"
+title: "Migrate from Node.js"
 description: "How to move a Node.js project to Deno: use Deno as a drop-in package manager, run your existing project and package.json scripts, understand how CommonJS and ES modules are resolved, and map your Node commands to Deno."
 oldUrl:
+  - /runtime/fundamentals/migrate_from_node/
   - /runtime/manual/node/migrate/
   - /runtime/manual/references/cheatsheet/
   - /runtime/manual/node/cheatsheet/
@@ -41,8 +42,7 @@ deno outdated             # see what has newer versions
 
 Deno understands dependencies declared in both `package.json` and `deno.json`,
 and individual npm packages can also be imported inline with `npm:` specifiers.
-See [Dependency management](/runtime/fundamentals/dependency_management/) for
-the full picture.
+See [Dependency management](/runtime/packages/) for the full picture.
 
 ## Run your project with Deno
 
@@ -161,3 +161,12 @@ without emitting, and the compiler is built into the `deno` binary.
 | `nvm` / `n` / `fnm` | `deno upgrade` |
 
 </div>
+
+## Keep going
+
+- **[Node.js and npm compatibility](/runtime/fundamentals/node/).** What's
+  supported (`node:` built-ins, npm packages, globals) and the known gaps.
+- **[Migrating your tsconfig.json](/runtime/reference/ts_config_migration/).**
+  Map `tsconfig.json` options onto `deno.json`.
+- Already on Deno and upgrading a major version? See the
+  **[Deno 1.x to 2.x migration guide](/runtime/reference/migration_guide/)**.

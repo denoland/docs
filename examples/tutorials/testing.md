@@ -17,9 +17,8 @@ reach production, saving time and resources. Tests are also useful to help plan
 out the logic of your application, they can serve as a human readable
 description of how your code is meant to be used.
 
-Deno provides [built-in testing capabilities](/runtime/fundamentals/testing/),
-making it straightforward to implement robust testing practices in your
-projects.
+Deno provides [built-in testing capabilities](/runtime/test/), making it
+straightforward to implement robust testing practices in your projects.
 
 ## Writing tests with `Deno.test`
 
@@ -552,7 +551,7 @@ Deno.test("second test", () => {
 
 For complete information on all available hooks (`beforeAll`, `beforeEach`,
 `afterEach`, `afterAll`), see the
-[Testing documentation](/runtime/fundamentals/testing/#test-hooks).
+[Testing documentation](/runtime/test/#test-hooks).
 
 ## Coverage
 
@@ -713,6 +712,6 @@ applications are well-tested and reliable.
 
 For more information about testing in Deno, check out:
 
-- [Testing documentation](/runtime/fundamentals/testing)
+- [Testing documentation](/runtime/test/)
 - [Mocking data for tests](/examples/mocking_tutorial/)
 - [Writing benchmark tests](/examples/benchmarking/)

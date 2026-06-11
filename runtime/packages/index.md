@@ -3,6 +3,7 @@ last_modified: 2026-05-20
 title: "Dependency management"
 description: "A practical guide to managing dependencies in Deno: adding and removing packages, pinning versions, overriding and vendoring dependencies, lockfiles and integrity checking, supply chain management, publishing, and private registries."
 oldUrl:
+  - /runtime/fundamentals/dependency_management/
   - /runtime/manual/basics/modules/integrity_checking/
   - /runtime/manual/basics/modules/publishing_modules/
   - /runtime/manual/basics/modules/reloading_modules/

@@ -764,17 +764,15 @@ Like all native FFI, pass `--allow-ffi` to grant explicit permission. Review
 ## Migrating from Node to Deno
 
 Running a Node.js project with Deno usually requires little to no change. See
-the
-[Migrating from Node.js to Deno guide](/runtime/fundamentals/migrate_from_node/)
-for the details, optional toolchain improvements, and a Node-to-Deno command
-cheatsheet.
+the [Migrating from Node.js to Deno guide](/runtime/migrate/) for the details,
+optional toolchain improvements, and a Node-to-Deno command cheatsheet.
 
 ## Private registries
 
 :::caution
 
 Not to be confused with
-[private repositories and modules](/runtime/fundamentals/dependency_management/#private-repositories).
+[private repositories and modules](/runtime/packages/#private-repositories).
 
 :::
 
@@ -866,8 +864,8 @@ fields. The ones most likely to matter:
   installs. The same control is also available as the CLI flag
   `--minimum-dependency-age` and the `minimumDependencyAge` field in
   `deno.json`. See
-  [Minimum dependency age](/runtime/fundamentals/dependency_management/#minimum-dependency-age)
-  for the full picture.
+  [Minimum dependency age](/runtime/packages/#minimum-dependency-age) for the
+  full picture.
 
   ```ini title=".npmrc"
   min-release-age=3

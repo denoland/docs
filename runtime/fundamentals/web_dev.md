@@ -199,4 +199,4 @@ deno run --allow-net server.ts
 ## Node projects
 
 Deno will run your Node.js projects out the box. Check out our guide on
-[migrating your Node.js project to Deno](/runtime/fundamentals/migrate_from_node/).
+[migrating your Node.js project to Deno](/runtime/migrate/).

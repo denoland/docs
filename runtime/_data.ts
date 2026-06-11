@@ -15,10 +15,6 @@ export const sidebar = [
         href: "/runtime/getting_started/installation/",
       },
       {
-        title: "First project",
-        href: "/runtime/getting_started/first_project/",
-      },
-      {
         title: "Setup your environment",
         href: "/runtime/getting_started/setup_your_environment/",
       },
@@ -32,8 +28,12 @@ export const sidebar = [
     title: "Guides",
     items: [
       {
+        title: "Running code",
+        href: "/runtime/run/",
+      },
+      {
         title: "Dependency management",
-        href: "/runtime/fundamentals/dependency_management/",
+        href: "/runtime/packages/",
       },
       {
         title: "Web development",
@@ -45,11 +45,11 @@ export const sidebar = [
       },
       {
         title: "Testing",
-        href: "/runtime/fundamentals/testing/",
+        href: "/runtime/test/",
       },
       {
         title: "Linting and formatting",
-        href: "/runtime/fundamentals/linting_and_formatting/",
+        href: "/runtime/lint_and_format/",
       },
       {
         title: "Debugging",
@@ -57,7 +57,11 @@ export const sidebar = [
       },
       {
         title: "Migrating from Node",
-        href: "/runtime/fundamentals/migrate_from_node/",
+        href: "/runtime/migrate/",
+      },
+      {
+        title: "Building CLI apps",
+        href: "/runtime/cli_apps/",
       },
     ],
   },
@@ -146,6 +150,10 @@ export const sidebar = [
   {
     title: "Reference",
     items: [
+      {
+        title: "Overview",
+        href: "/runtime/reference/",
+      },
       {
         title: "CLI",
         href: "/runtime/reference/cli/",
