@@ -61,6 +61,16 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "Sleep and delay execution",
+        href: "/examples/sleep_delay/",
+        type: "example",
+      },
+      {
+        title: "Check if two values are deeply equal",
+        href: "/examples/deep_equal/",
+        type: "example",
+      },
+      {
         title: "Update from CommonJS to ESM",
         href: "/examples/cjs_to_esm_tutorial/",
         type: "tutorial",
@@ -219,6 +229,11 @@ export const sidebar = [
       {
         title: "Manipulating & parsing URLs",
         href: "/examples/url_parsing/",
+        type: "example",
+      },
+      {
+        title: "Escape an HTML string",
+        href: "/examples/escape_html/",
         type: "example",
       },
       {
@@ -510,6 +525,21 @@ export const sidebar = [
         href: "/examples/bdd_tutorial/",
         type: "tutorial",
       },
+      {
+        title: "Skipping and focusing tests",
+        href: "/examples/tests_skip_focus/",
+        type: "example",
+      },
+      {
+        title: "Filtering and controlling test runs",
+        href: "/examples/tests_run_control/",
+        type: "example",
+      },
+      {
+        title: "Use Testing Library with Deno",
+        href: "/examples/testing_library_tutorial/",
+        type: "tutorial",
+      },
     ],
   },
   {
@@ -627,82 +657,82 @@ export const sidebar = [
     ],
   },
   {
-    title: "Connecting to Databases",
+    title: "Databases",
     items: [
       {
-        title: "Connecting to databases",
+        title: "Overview",
         href: "/examples/connecting_to_databases_tutorial/",
         type: "tutorial",
       },
       {
-        title: "Use MySQL2 with Deno",
+        title: "MySQL",
         href: "/examples/mysql2_tutorial/",
         type: "tutorial",
       },
       {
-        title: "Use PlanetScale with Deno",
+        title: "PlanetScale",
         href: "/examples/planetscale_tutorial/",
         type: "tutorial",
       },
       {
-        title: "Use Redis with Deno",
+        title: "Redis",
         href: "/examples/redis_tutorial/",
         type: "tutorial",
       },
       {
-        title: "Use Prisma with Deno",
+        title: "Prisma",
         href: "/examples/prisma_tutorial/",
         type: "tutorial",
       },
       {
-        title: "Use Drizzle with Deno",
+        title: "Drizzle",
         href: "/examples/drizzle_tutorial/",
         type: "tutorial",
       },
       {
-        title: "Mongoose and MongoDB",
+        title: "Mongoose",
         href: "/examples/mongoose_tutorial/",
         type: "tutorial",
       },
       {
-        title: "Connect to Redis",
+        title: "Redis quick start",
         href: "/examples/redis/",
         type: "example",
       },
       {
-        title: "Connect to Postgres",
+        title: "Postgres",
         href: "/examples/postgres/",
         type: "example",
       },
       {
-        title: "Connect to Supabase",
+        title: "Supabase",
         href: "/examples/supabase/",
         type: "example",
       },
       {
-        title: "Connect to MongoDB",
+        title: "MongoDB",
         href: "/examples/mongo/",
         type: "example",
       },
       {
-        title: "Connect to SQLite",
+        title: "SQLite",
         href: "/examples/sqlite/",
         type: "example",
       },
       {
-        title: "Connect to Mongoose and MongoDB",
+        title: "Mongoose (video)",
         href: "/examples/mongoose/",
         externalURL: "https://www.youtube.com/watch?v=dmZ9Ih0CR9g",
         type: "video",
       },
       {
-        title: "Connect to Prisma",
+        title: "Prisma (video)",
         href: "/examples/prisma/",
         externalURL: "https://www.youtube.com/watch?v=P8VzA_XSF8w",
         type: "video",
       },
       {
-        title: "Connect to DuckDB",
+        title: "DuckDB",
         href: "/examples/duckdb/",
         type: "example",
       },
@@ -788,6 +818,16 @@ export const sidebar = [
         href: "/examples/convert_string/",
         type: "example",
       },
+      {
+        title: "Convert a Node.js Readable",
+        href: "/examples/convert_node_readable/",
+        type: "example",
+      },
+      {
+        title: "Compress and decompress data",
+        href: "/examples/compress_decompress/",
+        type: "example",
+      },
     ],
   },
   {
@@ -848,6 +888,41 @@ export const sidebar = [
       {
         title: "HTTP server: Streaming",
         href: "/examples/http_server_streaming/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Server-sent events",
+        href: "/examples/http_server_sse/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: TLS",
+        href: "/examples/http_server_tls/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Hot reload",
+        href: "/examples/http_server_hot_reload/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Scaling across CPU cores",
+        href: "/examples/http_server_parallel/",
+        type: "example",
+      },
+      {
+        title: "HTTP server: Node.js streams",
+        href: "/examples/http_server_node_streams/",
+        type: "example",
+      },
+      {
+        title: "Proxy HTTP requests",
+        href: "/examples/http_proxy/",
+        type: "example",
+      },
+      {
+        title: "Fetch over a Unix socket",
+        href: "/examples/fetch_unix_socket/",
         type: "example",
       },
       {
@@ -946,6 +1021,21 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "Read from stdin",
+        href: "/examples/reading_stdin/",
+        type: "example",
+      },
+      {
+        title: "Write to stdout",
+        href: "/examples/write_stdout/",
+        type: "example",
+      },
+      {
+        title: "Communicate with a child process over IPC",
+        href: "/examples/child_process_ipc/",
+        type: "example",
+      },
+      {
         title: "Environment variables",
         href: "/examples/environment_variables/",
         type: "example",
@@ -968,6 +1058,26 @@ export const sidebar = [
       {
         title: "Path operations",
         href: "/examples/path_operations/",
+        type: "example",
+      },
+      {
+        title: "Convert between file URLs and paths",
+        href: "/examples/file_url_path/",
+        type: "example",
+      },
+      {
+        title: "Get the MIME type of a file",
+        href: "/examples/mime_type/",
+        type: "example",
+      },
+      {
+        title: "Copy a file",
+        href: "/examples/copy_file/",
+        type: "example",
+      },
+      {
+        title: "Write a file incrementally",
+        href: "/examples/write_file_incremental/",
         type: "example",
       },
       {
@@ -1030,11 +1140,6 @@ export const sidebar = [
         href: "/examples/streaming_files/",
         type: "example",
       },
-      {
-        title: "Unzip gzipped file",
-        href: "/examples/unzip_gzipped_file/",
-        type: "example",
-      },
     ],
   },
   {
@@ -1053,6 +1158,11 @@ export const sidebar = [
       {
         title: "Hashing",
         href: "/examples/hashing/",
+        type: "example",
+      },
+      {
+        title: "Hashing and verifying passwords",
+        href: "/examples/hash_password/",
         type: "example",
       },
       {

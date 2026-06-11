@@ -240,7 +240,7 @@ compressed if the following conditions are true:
   which is considered compressible. (The list is derived from
   [`jshttp/mime-db`](https://github.com/jshttp/mime-db/blob/master/db.json) with
   the actual list
-  [in the code](https://github.com/denoland/deno/blob/v1.21.0/ext/http/compressible.rs).)
+  [in the code](https://github.com/denoland/deno/blob/main/ext/http/compressible.rs).)
 - The response body is greater than 64 bytes.
 
 When the response body is compressed, Deno will set the `Content-Encoding`
@@ -344,8 +344,9 @@ add `satisfies Deno.ServeDefaultExport` to the `export default { ... }`.
 ## Building on these examples
 
 You will likely want to expand on these examples to create more complex servers.
-Deno recommends using [Oak](https://jsr.io/@oak/oak) for building web servers.
-Oak is a middleware framework for Deno's HTTP server, designed to be expressive
-and easy to use. It provides a simple way to create web servers with middleware
-support. Check out the [Oak documentation](https://oakserver.github.io/oak/) for
-examples of how to define routes.
+Everything here is built on web-standard `Request`/`Response`, so it composes
+with routing libraries and frameworks from the ecosystem — for example
+[Oak](https://jsr.io/@oak/oak) or [Hono](https://hono.dev) for middleware and
+routing, or a full framework. See
+[Web development](/runtime/fundamentals/web_dev/) for an overview of building
+web apps with Deno.

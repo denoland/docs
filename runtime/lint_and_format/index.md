@@ -111,13 +111,16 @@ before being merged.
 
 ### Integration in VS Code
 
-To enable Deno as your formatter in VS Code, you have to set it up as your
-default formatter in the settings, and then add a `.vscode/settings.json` file
-in the root of your project with the following configuration:
+To enable Deno as your formatter in VS Code, install the
+[Deno extension](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
+and add a `.vscode/settings.json` file in the root of your project that sets it
+as the default formatter and enables the extension for your project:
 
 ```json
 {
-  "deno.enablePaths": ["./deno.json"]
+  "deno.enablePaths": ["./deno.json"],
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "editor.formatOnSave": true
 }
 ```
 

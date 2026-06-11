@@ -155,10 +155,14 @@ without emitting, and the compiler is built into the `deno` binary.
 
 ### Toolchain
 
-| Node.js             | Deno           |
-| ------------------- | -------------- |
-| `tsserver`          | `deno lsp`     |
-| `nvm` / `n` / `fnm` | `deno upgrade` |
+| Node.js             | Deno             |
+| ------------------- | ---------------- |
+| `tsserver`          | `deno lsp`       |
+| `nvm` / `n` / `fnm` | `deno upgrade` ² |
+
+² `deno upgrade` updates the single installed binary and can pin any release
+(`deno upgrade 2.1.0`); unlike `nvm`, it doesn't keep multiple versions
+installed side by side.
 
 </div>
 
@@ -168,5 +172,3 @@ without emitting, and the compiler is built into the `deno` binary.
   supported (`node:` built-ins, npm packages, globals) and the known gaps.
 - **[Migrating your tsconfig.json](/runtime/reference/ts_config_migration/).**
   Map `tsconfig.json` options onto `deno.json`.
-- Already on Deno and upgrading a major version? See the
-  **[Deno 1.x to 2.x migration guide](/runtime/reference/migration_guide/)**.

@@ -43,14 +43,7 @@ few minutes.
 Install the runtime with one command:
 
 <deno-tabs group-id="operating-systems">
-<deno-tab value="linux" label="Linux">
-
-```sh
-curl -fsSL https://deno.land/install.sh | sh
-```
-
-</deno-tab>
-<deno-tab value="mac" label="macOS" default>
+<deno-tab value="mac" label="macOS / Linux" default>
 
 ```sh
 curl -fsSL https://deno.land/install.sh | sh
@@ -121,20 +114,20 @@ test runner is built in, so there's nothing to install:
 ```sh
 $ deno test
 running 2 tests from ./main_test.ts
-handler returns hello ... ok (1ms)
-handler returns 404 for unknown route ... ok (1ms)
+returns html on / ... ok (12ms)
+returns json on /api ... ok (0ms)
 
-ok | 2 passed | 0 failed (3ms)
+ok | 2 passed | 0 failed (15ms)
 ```
 
 ## Add a dependency
 
-Pull in packages from [JSR](https://jsr.io) or npm with
-[`deno add`](/runtime/reference/cli/add/), which records them in `deno.json`:
+Pull in packages from npm or [JSR](https://jsr.io) with
+[`deno install`](/runtime/reference/cli/install/):
 
 ```sh
-deno add jsr:@std/assert    # the Deno standard library, on JSR
-deno add npm:express        # any npm package
+deno install express            # any npm package, like npm install
+deno install jsr:@std/assert    # the Deno standard library, on JSR
 ```
 
 Then import and use them:
