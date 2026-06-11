@@ -906,6 +906,21 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "Read from stdin",
+        href: "/examples/reading_stdin/",
+        type: "example",
+      },
+      {
+        title: "Write to stdout",
+        href: "/examples/write_stdout/",
+        type: "example",
+      },
+      {
+        title: "Communicate with a child process over IPC",
+        href: "/examples/child_process_ipc/",
+        type: "example",
+      },
+      {
         title: "Environment variables",
         href: "/examples/environment_variables/",
         type: "example",
@@ -928,6 +943,21 @@ export const sidebar = [
       {
         title: "Path operations",
         href: "/examples/path_operations/",
+        type: "example",
+      },
+      {
+        title: "Get the MIME type of a file",
+        href: "/examples/mime_type/",
+        type: "example",
+      },
+      {
+        title: "Copy a file",
+        href: "/examples/copy_file/",
+        type: "example",
+      },
+      {
+        title: "Write a file incrementally",
+        href: "/examples/write_file_incremental/",
         type: "example",
       },
       {
