@@ -30,30 +30,19 @@ access to the network, filesystem, environment, or subprocesses** until you
 grant it. A script that tries to read a file without permission stops and asks,
 or fails if prompts are disabled.
 
-Grant access with `--allow-*` flags (each has a short form):
+Grant access with `--allow-*` flags (each has a short form), and scope them down
+to exactly what's needed:
 
 ```sh
-deno run --allow-net main.ts        # network    (-N)
-deno run --allow-read main.ts       # filesystem (-R)
-deno run --allow-env main.ts        # env vars   (-E)
-```
-
-Scope them down to exactly what's needed, and combine as required:
-
-```sh
-deno run --allow-read=./data --allow-net=api.example.com main.ts
+deno run --allow-net main.ts                     # network    (-N)
+deno run --allow-read=./data main.ts             # filesystem (-R), scoped
+deno run -N=api.example.com -E main.ts           # combined, short forms
 ```
 
 Use `--deny-*` to carve out exceptions, or `-A` / `--allow-all` to skip the
-sandbox entirely (handy in trusted environments, but it gives up the
-guarantees):
-
-```sh
-deno run -A main.ts
-```
-
-See [Permissions](/runtime/reference/permissions/) for every flag and
-[Security](/runtime/fundamentals/security/) for the model behind them.
+sandbox entirely. That is handy in trusted environments, but it gives up the
+guarantees. See [Permissions](/runtime/reference/permissions/) for every flag
+and [Security](/runtime/fundamentals/security/) for the model behind them.
 
 ## Run from a URL or stdin
 
