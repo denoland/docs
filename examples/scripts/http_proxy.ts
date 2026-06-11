@@ -46,3 +46,20 @@ Deno.serve(handler);
 // A real deployment usually adds forwarding headers so the upstream knows
 // the original client, e.g. headers.set("x-forwarded-for", clientIp) using
 // the info argument of the handler.
+
+// The same proxy works on a node:http server; fetch bridges to the web
+// Response, whose body is then streamed out through the Node response.
+import { createServer } from "node:http";
+
+createServer(async (req, res) => {
+  const target = new URL(req.url ?? "/", UPSTREAM);
+  const response = await fetch(target);
+  res.writeHead(
+    response.status,
+    Object.fromEntries(response.headers.entries()),
+  );
+  for await (const chunk of response.body ?? []) {
+    res.write(chunk);
+  }
+  res.end();
+}).listen(8001);

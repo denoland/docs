@@ -50,13 +50,13 @@ async function* ticks(): AsyncGenerator<Uint8Array> {
   }
 }
 
-// deno-lint-ignore no-unused-vars
 function iteratorHandler(_req: Request): Response {
   return new Response(ReadableStream.from(ticks()), {
     headers: { "content-type": "text/plain" },
   });
 }
 
-// To start the server on the default port, call Deno.serve with one of the
-// handlers.
-Deno.serve(handler);
+// Serve the interval stream on / and the generator stream on /ticks.
+Deno.serve((req) =>
+  new URL(req.url).pathname === "/ticks" ? iteratorHandler(req) : handler(req)
+);

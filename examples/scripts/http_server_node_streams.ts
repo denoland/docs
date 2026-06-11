@@ -25,7 +25,7 @@ nodeServer.listen(8001);
 
 // With Deno.serve, convert the Node stream to a web ReadableStream and use
 // it as the Response body. Web streams carry bytes, so the chunks must be
-// Uint8Arrays — a stream of strings will stall.
+// Uint8Arrays: a stream of strings will stall.
 const encoder = new TextEncoder();
 Deno.serve({ port: 8000 }, () => {
   const stream = Readable.from(

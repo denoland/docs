@@ -31,6 +31,24 @@ console.log(await response.text()); // Hello over a Unix socket
 client.close();
 await server.shutdown();
 
+// The Node.js API supports Unix sockets too: a node:http server listens on
+// a path, and the client passes socketPath in the request options.
+import { createServer, request } from "node:http";
+
+const nodeServer = createServer((_req, res) => {
+  res.end("Hello from node:http");
+});
+nodeServer.listen("/tmp/example-node.sock", () => {
+  const req = request(
+    { socketPath: "/tmp/example-node.sock", path: "/" },
+    (res) => {
+      res.on("data", (chunk) => console.log(String(chunk))); // Hello from node:http
+      res.on("end", () => nodeServer.close());
+    },
+  );
+  req.end();
+});
+
 // The same client works for talking to existing services. For example,
 // with -R -W -N permissions and Docker running, this lists containers:
 //

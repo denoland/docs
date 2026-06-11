@@ -13,7 +13,11 @@
  */
 
 // Nothing in the code needs to change; this is a plain HTTP server.
-Deno.serve(() => new Response("Hello, World!"));
+function handler(_req: Request): Response {
+  return new Response("Hello, World!");
+}
+
+Deno.serve(handler);
 
 // Run it with the --watch-hmr flag:
 //

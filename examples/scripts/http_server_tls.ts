@@ -34,7 +34,19 @@ Deno.serve(
 //
 //   curl --cacert localhost-cert.pem https://localhost:8443/
 //   Hello over TLS
-//
+
+// Code written against the Node.js API works as well: node:https takes the
+// same certificate material in its options.
+import { createServer } from "node:https";
+
+createServer(
+  {
+    cert: Deno.readTextFileSync("localhost-cert.pem"),
+    key: Deno.readTextFileSync("localhost-key.pem"),
+  },
+  (_req, res) => res.end("Hello from node:https"),
+).listen(8444);
+
 // Browsers will warn about self-signed certificates. A tool like mkcert
 // installs a locally trusted authority and removes the warning during
 // development.
